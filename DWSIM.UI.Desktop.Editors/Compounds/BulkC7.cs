@@ -264,7 +264,10 @@ namespace DWSIM.UI.Desktop.Editors
                                                     File.WriteAllText(savedialog.FileName, "");
                                                     Thermodynamics.Databases.UserDB.CreateNew(savedialog.FileName, "compounds");
                                                 }
-                                                Thermodynamics.Databases.UserDB.AddCompounds(compstoexport, savedialog.FileName, true);
+                                                using (var stream = new FileStream(savedialog.FileName, FileMode.OpenOrCreate))
+                                                {
+                                                    Thermodynamics.Databases.UserDB.AddCompounds(compstoexport, stream, true);
+                                                }
                                                 flowsheet.ShowMessage("Compounds successfully saved to XML file.", IFlowsheet.MessageType.Information);
                                             }
                                             catch (Exception ex)

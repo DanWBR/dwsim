@@ -935,228 +935,240 @@ Namespace Databases
 
         End Sub
 
-        Public Shared Sub AddCompounds(ByVal comps() As Interfaces.ICompoundConstantProperties, ByVal xmlpath As String, ByVal replace As Boolean)
+        Public Shared Sub AddCompounds(ByVal comps() As Interfaces.ICompoundConstantProperties, xmlstream As Stream, ByVal replace As Boolean)
+
+            Using reader = XmlReader.Create(xmlstream)
+                If xmlstream.Length = 0 Then
+                    Dim stream2 As New MemoryStream
+                    Using writer As New XmlTextWriter(stream2, Text.Encoding.UTF8)
+                        With writer
+                            .Formatting = Formatting.Indented
+                            .WriteStartDocument()
+                            .WriteStartElement("compounds")
+                            .WriteEndElement()
+                            .WriteEndDocument()
+                            .Flush()
+                        End With
+                        stream2.Position = 0
+                        stream2.CopyTo(xmlstream)
+                    End Using
+                End If
+            End Using
+
+            xmlstream.Position = 0
 
             Dim xmldoc As XmlDocument
-            Dim reader As XmlReader = XmlReader.Create(xmlpath)
-            Try
-                reader.Read()
-            Catch ex As Exception
-                reader.Close()
-                CreateNew(xmlpath, "compounds")
-                reader = XmlReader.Create(xmlpath)
-                reader.Read()
-            End Try
 
-            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+            Using reader = XmlReader.Create(xmlstream)
 
-            xmldoc = New XmlDocument
-            xmldoc.Load(reader)
+                Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+                Dim p As Double
 
-            For Each comp As Thermodynamics.BaseClasses.ConstantProperties In comps
-                Dim index As Integer = -1
-                Dim i As Integer = 0
-                If xmldoc.ChildNodes.Count > 0 Then
-                    For Each node As XmlNode In xmldoc.ChildNodes(1)
-                        For Each node2 As XmlNode In node.ChildNodes
-                            If node2.Name = "ID" Then
-                                If node2.InnerText = comp.ID Then
-                                    index = i
-                                    Exit For
+                xmldoc = New XmlDocument()
+                xmldoc.Load(reader)
+
+                For Each comp As Thermodynamics.BaseClasses.ConstantProperties In comps
+                    Dim index As Integer = -1
+                    Dim i As Integer = 0
+                    If xmldoc.ChildNodes.Count > 0 Then
+                        For Each node As XmlNode In xmldoc.ChildNodes(1)
+                            For Each node2 As XmlNode In node.ChildNodes
+                                If node2.Name = "ID" Then
+                                    If node2.InnerText = comp.ID Then
+                                        index = i
+                                        Exit For
+                                    End If
                                 End If
-                            End If
+                            Next
+                            i += 1
                         Next
-                        i += 1
-                    Next
-                End If
-                If replace Then
-                    If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
-                End If
-                Dim newnode As XmlNode = xmldoc.CreateNode("element", "compound", "")
-                With newnode
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Name", "")).InnerText = comp.Name
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CAS_Number", "")).InnerText = comp.CAS_Number
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "ID", "")).InnerText = comp.ID
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "OriginalDB", "")).InnerText = comp.OriginalDB
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CurrentDB", "")).InnerText = comp.CurrentDB
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comments", "")).InnerText = comp.Comments
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CompCreatorStudyFile", "")).InnerText = comp.CompCreatorStudyFile
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Formula", "")).InnerText = comp.Formula
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "SMILES", "")).InnerText = comp.SMILES
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Molar_Weight", "")).InnerText = comp.Molar_Weight.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Temperature", "")).InnerText = comp.Critical_Temperature.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Pressure", "")).InnerText = comp.Critical_Pressure.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Volume", "")).InnerText = comp.Critical_Volume.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Compressibility", "")).InnerText = comp.Critical_Compressibility.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Acentric_Factor", "")).InnerText = comp.Acentric_Factor.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Z_Rackett", "")).InnerText = comp.Z_Rackett.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PR_Volume_Translation_Coefficient", "")).InnerText = comp.PR_Volume_Translation_Coefficient.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "SRK_Volume_Translation_Coefficient", "")).InnerText = comp.SRK_Volume_Translation_Coefficient.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CS_Acentric_Factor", "")).InnerText = comp.Chao_Seader_Acentricity.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CS_Solubility_Parameter", "")).InnerText = comp.Chao_Seader_Solubility_Parameter.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CS_Liquid_Molar_Volume", "")).InnerText = comp.Chao_Seader_Liquid_Molar_Volume.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "IG_Enthalpy_of_Formation_25C", "")).InnerText = comp.IG_Enthalpy_of_Formation_25C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "IG_Gibbs_Energy_of_Formation_25C", "")).InnerText = comp.IG_Gibbs_Energy_of_Formation_25C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_EqNo", "")).InnerText = comp.VaporPressureEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_A", "")).InnerText = comp.Vapor_Pressure_Constant_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_B", "")).InnerText = comp.Vapor_Pressure_Constant_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_C", "")).InnerText = comp.Vapor_Pressure_Constant_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_D", "")).InnerText = comp.Vapor_Pressure_Constant_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_E", "")).InnerText = comp.Vapor_Pressure_Constant_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_EqNo", "")).InnerText = comp.IdealgasCpEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_A", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_B", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_C", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_D", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_E", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_EqNo", "")).InnerText = comp.LiquidHeatCapacityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_A", "")).InnerText = comp.Liquid_Heat_Capacity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_B", "")).InnerText = comp.Liquid_Heat_Capacity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_C", "")).InnerText = comp.Liquid_Heat_Capacity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_D", "")).InnerText = comp.Liquid_Heat_Capacity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_E", "")).InnerText = comp.Liquid_Heat_Capacity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_TMin", "")).InnerText = comp.Liquid_Heat_Capacity_Tmin.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_TMax", "")).InnerText = comp.Liquid_Heat_Capacity_Tmax.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_EqNo", "")).InnerText = comp.LiquidThermalConductivityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_A", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_B", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_C", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_D", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_E", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_Tmin", "")).InnerText = comp.Liquid_Thermal_Conductivity_Tmin.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_Tmax", "")).InnerText = comp.Liquid_Thermal_Conductivity_Tmax.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_EqNo", "")).InnerText = comp.LiquidViscosityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_A", "")).InnerText = comp.Liquid_Viscosity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_B", "")).InnerText = comp.Liquid_Viscosity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_C", "")).InnerText = comp.Liquid_Viscosity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_D", "")).InnerText = comp.Liquid_Viscosity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_E", "")).InnerText = comp.Liquid_Viscosity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_EqNo", "")).InnerText = comp.LiquidDensityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_A", "")).InnerText = comp.Liquid_Density_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_B", "")).InnerText = comp.Liquid_Density_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_C", "")).InnerText = comp.Liquid_Density_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_D", "")).InnerText = comp.Liquid_Density_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_E", "")).InnerText = comp.Liquid_Density_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_EqNo", "")).InnerText = comp.VaporViscosityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_A", "")).InnerText = comp.Vapor_Viscosity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_B", "")).InnerText = comp.Vapor_Viscosity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_C", "")).InnerText = comp.Vapor_Viscosity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_D", "")).InnerText = comp.Vapor_Viscosity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_E", "")).InnerText = comp.Vapor_Viscosity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_EqNo", "")).InnerText = comp.VaporThermalConductivityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_A", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_B", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_C", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_D", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_E", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_Tmin", "")).InnerText = comp.Vapor_Thermal_Conductivity_Tmin.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_Tmax", "")).InnerText = comp.Vapor_Thermal_Conductivity_Tmax.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_EqNo", "")).InnerText = comp.SolidHeatCapacityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_A", "")).InnerText = comp.Solid_Heat_Capacity_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_B", "")).InnerText = comp.Solid_Heat_Capacity_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_C", "")).InnerText = comp.Solid_Heat_Capacity_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_D", "")).InnerText = comp.Solid_Heat_Capacity_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_E", "")).InnerText = comp.Solid_Heat_Capacity_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_TMin", "")).InnerText = comp.Solid_Heat_Capacity_Tmin.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_TMax", "")).InnerText = comp.Solid_Heat_Capacity_Tmax.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_EqNo", "")).InnerText = comp.SolidDensityEquation
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_A", "")).InnerText = comp.Solid_Density_Const_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_B", "")).InnerText = comp.Solid_Density_Const_B.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_C", "")).InnerText = comp.Solid_Density_Const_C.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_D", "")).InnerText = comp.Solid_Density_Const_D.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_E", "")).InnerText = comp.Solid_Density_Const_E.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_TMin", "")).InnerText = comp.Solid_Density_Tmin.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_TMax", "")).InnerText = comp.Solid_Density_Tmax.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Normal_Boiling_Point", "")).InnerText = comp.Normal_Boiling_Point.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIQUAC_q", "")).InnerText = comp.UNIQUAC_R.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIQUAC_r", "")).InnerText = comp.UNIQUAC_Q.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Temperature_of_fusion", "")).InnerText = comp.TemperatureOfFusion.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Enthalpy_of_fusion", "")).InnerText = comp.EnthalpyOfFusionAtTf.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PC_SAFT_sigma", "")).InnerText = comp.PC_SAFT_sigma.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PC_SAFT_m", "")).InnerText = comp.PC_SAFT_m.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PC_SAFT_epsilon_k", "")).InnerText = comp.PC_SAFT_epsilon_k.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "IsBlackOil", "")).InnerText = comp.IsBlackOil
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_GOR", "")).InnerText = comp.BO_GOR.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_BSW", "")).InnerText = comp.BO_BSW.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_SGG", "")).InnerText = comp.BO_SGG.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_SGO", "")).InnerText = comp.BO_SGO.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilVisc1", "")).InnerText = comp.BO_OilVisc1.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilVisc2", "")).InnerText = comp.BO_OilVisc2.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilViscTemp1", "")).InnerText = comp.BO_OilViscTemp1.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilViscTemp2", "")).InnerText = comp.BO_OilViscTemp2.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_A", "")).InnerText = comp.BO_PNA_A.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_N", "")).InnerText = comp.BO_PNA_N.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_P", "")).InnerText = comp.BO_PNA_P.ToString(cult)
+                    End If
+                    If replace Then
+                        If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
+                    End If
+                    Dim newnode As XmlNode = xmldoc.CreateNode("element", "compound", "")
+                    With newnode
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Name", "")).InnerText = comp.Name
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CAS_Number", "")).InnerText = comp.CAS_Number
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "ID", "")).InnerText = comp.ID
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "OriginalDB", "")).InnerText = comp.OriginalDB
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CurrentDB", "")).InnerText = comp.CurrentDB
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comments", "")).InnerText = comp.Comments
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CompCreatorStudyFile", "")).InnerText = comp.CompCreatorStudyFile
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Formula", "")).InnerText = comp.Formula
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "SMILES", "")).InnerText = comp.SMILES
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Molar_Weight", "")).InnerText = comp.Molar_Weight.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Temperature", "")).InnerText = comp.Critical_Temperature.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Pressure", "")).InnerText = comp.Critical_Pressure.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Volume", "")).InnerText = comp.Critical_Volume.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Critical_Compressibility", "")).InnerText = comp.Critical_Compressibility.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Acentric_Factor", "")).InnerText = comp.Acentric_Factor.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Z_Rackett", "")).InnerText = comp.Z_Rackett.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PR_Volume_Translation_Coefficient", "")).InnerText = comp.PR_Volume_Translation_Coefficient.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "SRK_Volume_Translation_Coefficient", "")).InnerText = comp.SRK_Volume_Translation_Coefficient.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CS_Acentric_Factor", "")).InnerText = comp.Chao_Seader_Acentricity.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CS_Solubility_Parameter", "")).InnerText = comp.Chao_Seader_Solubility_Parameter.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CS_Liquid_Molar_Volume", "")).InnerText = comp.Chao_Seader_Liquid_Molar_Volume.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "IG_Enthalpy_of_Formation_25C", "")).InnerText = comp.IG_Enthalpy_of_Formation_25C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "IG_Gibbs_Energy_of_Formation_25C", "")).InnerText = comp.IG_Gibbs_Energy_of_Formation_25C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_EqNo", "")).InnerText = comp.VaporPressureEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_A", "")).InnerText = comp.Vapor_Pressure_Constant_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_B", "")).InnerText = comp.Vapor_Pressure_Constant_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_C", "")).InnerText = comp.Vapor_Pressure_Constant_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_D", "")).InnerText = comp.Vapor_Pressure_Constant_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Pressure_Constant_E", "")).InnerText = comp.Vapor_Pressure_Constant_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_EqNo", "")).InnerText = comp.IdealgasCpEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_A", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_B", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_C", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_D", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ideal_Gas_Heat_Capacity_Const_E", "")).InnerText = comp.Ideal_Gas_Heat_Capacity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_EqNo", "")).InnerText = comp.LiquidHeatCapacityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_A", "")).InnerText = comp.Liquid_Heat_Capacity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_B", "")).InnerText = comp.Liquid_Heat_Capacity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_C", "")).InnerText = comp.Liquid_Heat_Capacity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_D", "")).InnerText = comp.Liquid_Heat_Capacity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_E", "")).InnerText = comp.Liquid_Heat_Capacity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_TMin", "")).InnerText = comp.Liquid_Heat_Capacity_Tmin.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_TMax", "")).InnerText = comp.Liquid_Heat_Capacity_Tmax.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_EqNo", "")).InnerText = comp.LiquidThermalConductivityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_A", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_B", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_C", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_D", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_E", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_Tmin", "")).InnerText = comp.Liquid_Thermal_Conductivity_Tmin.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_Tmax", "")).InnerText = comp.Liquid_Thermal_Conductivity_Tmax.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_EqNo", "")).InnerText = comp.LiquidViscosityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_A", "")).InnerText = comp.Liquid_Viscosity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_B", "")).InnerText = comp.Liquid_Viscosity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_C", "")).InnerText = comp.Liquid_Viscosity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_D", "")).InnerText = comp.Liquid_Viscosity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_E", "")).InnerText = comp.Liquid_Viscosity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_EqNo", "")).InnerText = comp.LiquidDensityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_A", "")).InnerText = comp.Liquid_Density_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_B", "")).InnerText = comp.Liquid_Density_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_C", "")).InnerText = comp.Liquid_Density_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_D", "")).InnerText = comp.Liquid_Density_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_E", "")).InnerText = comp.Liquid_Density_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_EqNo", "")).InnerText = comp.VaporViscosityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_A", "")).InnerText = comp.Vapor_Viscosity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_B", "")).InnerText = comp.Vapor_Viscosity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_C", "")).InnerText = comp.Vapor_Viscosity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_D", "")).InnerText = comp.Vapor_Viscosity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_E", "")).InnerText = comp.Vapor_Viscosity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_EqNo", "")).InnerText = comp.VaporThermalConductivityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_A", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_B", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_C", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_D", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_E", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_Tmin", "")).InnerText = comp.Vapor_Thermal_Conductivity_Tmin.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_Tmax", "")).InnerText = comp.Vapor_Thermal_Conductivity_Tmax.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_EqNo", "")).InnerText = comp.SolidHeatCapacityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_A", "")).InnerText = comp.Solid_Heat_Capacity_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_B", "")).InnerText = comp.Solid_Heat_Capacity_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_C", "")).InnerText = comp.Solid_Heat_Capacity_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_D", "")).InnerText = comp.Solid_Heat_Capacity_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_E", "")).InnerText = comp.Solid_Heat_Capacity_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_TMin", "")).InnerText = comp.Solid_Heat_Capacity_Tmin.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_TMax", "")).InnerText = comp.Solid_Heat_Capacity_Tmax.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_EqNo", "")).InnerText = comp.SolidDensityEquation
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_A", "")).InnerText = comp.Solid_Density_Const_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_B", "")).InnerText = comp.Solid_Density_Const_B.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_C", "")).InnerText = comp.Solid_Density_Const_C.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_D", "")).InnerText = comp.Solid_Density_Const_D.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_Constant_E", "")).InnerText = comp.Solid_Density_Const_E.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_TMin", "")).InnerText = comp.Solid_Density_Tmin.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Density_TMax", "")).InnerText = comp.Solid_Density_Tmax.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Normal_Boiling_Point", "")).InnerText = comp.Normal_Boiling_Point.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIQUAC_q", "")).InnerText = comp.UNIQUAC_R.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIQUAC_r", "")).InnerText = comp.UNIQUAC_Q.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Temperature_of_fusion", "")).InnerText = comp.TemperatureOfFusion.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Enthalpy_of_fusion", "")).InnerText = comp.EnthalpyOfFusionAtTf.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PC_SAFT_sigma", "")).InnerText = comp.PC_SAFT_sigma.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PC_SAFT_m", "")).InnerText = comp.PC_SAFT_m.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PC_SAFT_epsilon_k", "")).InnerText = comp.PC_SAFT_epsilon_k.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "IsBlackOil", "")).InnerText = comp.IsBlackOil
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_GOR", "")).InnerText = comp.BO_GOR.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_BSW", "")).InnerText = comp.BO_BSW.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_SGG", "")).InnerText = comp.BO_SGG.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_SGO", "")).InnerText = comp.BO_SGO.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilVisc1", "")).InnerText = comp.BO_OilVisc1.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilVisc2", "")).InnerText = comp.BO_OilVisc2.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilViscTemp1", "")).InnerText = comp.BO_OilViscTemp1.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_OilViscTemp2", "")).InnerText = comp.BO_OilViscTemp2.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_A", "")).InnerText = comp.BO_PNA_A.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_N", "")).InnerText = comp.BO_PNA_N.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_P", "")).InnerText = comp.BO_PNA_P.ToString(cult)
 
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ion", "")).InnerText = comp.IsIon
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Salt", "")).InnerText = comp.IsSalt
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "HydratedSalt", "")).InnerText = comp.IsHydratedSalt
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ion", "")).InnerText = comp.IsIon
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Salt", "")).InnerText = comp.IsSalt
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "HydratedSalt", "")).InnerText = comp.IsHydratedSalt
 
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "HydrationNumber", "")).InnerText = comp.HydrationNumber.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Charge", "")).InnerText = comp.Charge.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "HydrationNumber", "")).InnerText = comp.HydrationNumber.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Charge", "")).InnerText = comp.Charge.ToString(cult)
 
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PositiveIon", "")).InnerText = comp.PositiveIon
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NegativeIon", "")).InnerText = comp.NegativeIon
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PositiveIon", "")).InnerText = comp.PositiveIon
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NegativeIon", "")).InnerText = comp.NegativeIon
 
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PositiveIonStoichCoeff", "")).InnerText = comp.PositiveIonStoichCoeff.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NegativeIonStoichCoeff", "")).InnerText = comp.NegativeIonStoichCoeff.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "StoichSum", "")).InnerText = comp.StoichSum.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PositiveIonStoichCoeff", "")).InnerText = comp.PositiveIonStoichCoeff.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NegativeIonStoichCoeff", "")).InnerText = comp.NegativeIonStoichCoeff.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "StoichSum", "")).InnerText = comp.StoichSum.ToString(cult)
 
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DelGF_kJ_mol", "")).InnerText = comp.Electrolyte_DelGF.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DelHf_kJ_mol", "")).InnerText = comp.Electrolyte_DelHF.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Cp_J_mol_K", "")).InnerText = comp.Electrolyte_Cp0.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DelGF_kJ_mol", "")).InnerText = comp.Electrolyte_DelGF.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DelHf_kJ_mol", "")).InnerText = comp.Electrolyte_DelHF.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Cp_J_mol_K", "")).InnerText = comp.Electrolyte_Cp0.ToString(cult)
 
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Tf_C", "")).InnerText = comp.TemperatureOfFusion.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Hfus_at_Tf_kJ_mol", "")).InnerText = comp.EnthalpyOfFusionAtTf.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DenS_T_C", "")).InnerText = comp.SolidTs.ToString(cult)
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DenS_g_mL", "")).InnerText = comp.SolidDensityAtTs.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Tf_C", "")).InnerText = comp.TemperatureOfFusion.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Hfus_at_Tf_kJ_mol", "")).InnerText = comp.EnthalpyOfFusionAtTf.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DenS_T_C", "")).InnerText = comp.SolidTs.ToString(cult)
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DenS_g_mL", "")).InnerText = comp.SolidDensityAtTs.ToString(cult)
 
-                    If comp.UNIFACGroups.Count > 0 Then
-                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIFAC", ""))
-                            For Each kvp As DictionaryEntry In comp.UNIFACGroups
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "UNIFACGroup", "")).InnerText = kvp.Value
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
+                        If comp.UNIFACGroups.Count > 0 Then
+                            With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIFAC", ""))
+                                For Each kvp As DictionaryEntry In comp.UNIFACGroups
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "UNIFACGroup", "")).InnerText = kvp.Value
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
+                                Next
+                            End With
+                        End If
+
+                        If comp.MODFACGroups.Count > 0 Then
+                            With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "MODFAC", ""))
+                                For Each kvp As DictionaryEntry In comp.MODFACGroups
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "MODFACGroup", "")).InnerText = kvp.Value
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
+                                Next
+                            End With
+                        End If
+
+                        If comp.NISTMODFACGroups.Count > 0 Then
+                            With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NISTMODFAC", ""))
+                                For Each kvp As DictionaryEntry In comp.NISTMODFACGroups
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "NISTMODFACGroup", "")).InnerText = kvp.Value
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
+                                Next
+                            End With
+                        End If
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "elements", ""))
+                            For Each el As DictionaryEntry In comp.Elements
+                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "element", "")).InnerText = el.Value
+                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
+                                .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = el.Key
                             Next
                         End With
-                    End If
-
-                    If comp.MODFACGroups.Count > 0 Then
-                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "MODFAC", ""))
-                            For Each kvp As DictionaryEntry In comp.MODFACGroups
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "MODFACGroup", "")).InnerText = kvp.Value
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
-                            Next
-                        End With
-                    End If
-
-                    If comp.NISTMODFACGroups.Count > 0 Then
-                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NISTMODFAC", ""))
-                            For Each kvp As DictionaryEntry In comp.NISTMODFACGroups
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "NISTMODFACGroup", "")).InnerText = kvp.Value
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
-                            Next
-                        End With
-                    End If
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "elements", ""))
-                        For Each el As DictionaryEntry In comp.Elements
-                            .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "element", "")).InnerText = el.Value
-                            .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
-                            .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = el.Key
-                        Next
                     End With
-                End With
-                xmldoc.ChildNodes(1).AppendChild(newnode)
-            Next
+                    xmldoc.ChildNodes(1).AppendChild(newnode)
+                Next
 
-            reader.Close()
-            reader = Nothing
+                xmldoc.Save(xmlstream)
+                xmldoc = Nothing
 
-            xmldoc.Save(xmlpath)
-            xmldoc = Nothing
-
+            End Using
 
         End Sub
 
@@ -1184,7 +1196,6 @@ Namespace Databases
             Next
 
             If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
-
 
             reader.Close()
             reader = Nothing
@@ -1557,95 +1568,90 @@ Namespace Databases
     ''' <remarks></remarks>
     <System.Serializable()> Public Class UserIPDB
 
-        Public Shared Sub CreateNew(ByVal path As String, ByVal TopNode As String)
+        Public Shared Sub AddInteractionParameters(ByVal IPDS() As Thermodynamics.BaseClasses.InteractionParameter, xmlstream As MemoryStream, ByVal replace As Boolean)
 
-            Dim writer As New XmlTextWriter(path, Nothing)
-
-            With writer
-                .Formatting = Formatting.Indented
-                .WriteStartDocument()
-                .WriteStartElement(TopNode)
-                .WriteEndElement()
-                .WriteEndDocument()
-                .Flush()
-                .Close()
-            End With
-
-        End Sub
-
-        Public Shared Sub AddInteractionParameters(ByVal IPDS() As Thermodynamics.BaseClasses.InteractionParameter, ByVal xmlpath As String, ByVal replace As Boolean)
-            Dim xmldoc As XmlDocument
-            Dim reader As XmlReader = XmlReader.Create(xmlpath)
-            Try
-                reader.Read()
-            Catch ex As Exception
-                reader.Close()
-                CreateNew(xmlpath, "Interactions")
-                reader = XmlReader.Create(xmlpath)
-                reader.Read()
-            End Try
-
-            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
-            Dim p As Double
-
-            xmldoc = New XmlDocument
-            xmldoc.Load(reader)
-
-            For Each IP As Thermodynamics.BaseClasses.InteractionParameter In IPDS
-                Dim index As Integer = -1
-                Dim i As Integer = 0
-                Dim C1, C2, M, S1, S2 As String
-
-                If xmldoc.ChildNodes.Count > 0 Then
-                    For Each node As XmlNode In xmldoc.ChildNodes(1)
-                        C1 = ""
-                        C2 = ""
-                        M = ""
-                        For Each node2 As XmlNode In node.ChildNodes
-                            If node2.Name = "Comp1" Then C1 = node2.InnerText
-                            If node2.Name = "Comp2" Then C2 = node2.InnerText
-                            If node2.Name = "Model" Then M = node2.InnerText
-                            S1 = C1 & C2 & M
-                            S2 = C2 & C1 & M
-                            If (S1 = IP.Comp1 & IP.Comp2 & IP.Model) Or (S2 = IP.Comp1 & IP.Comp2 & IP.Model) Then
-                                index = i
-                                Exit For
-                            End If
-                        Next
-                        If index <> -1 Then Exit For
-                        i += 1
-                    Next
-                End If
-                If replace Then
-                    If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
-                End If
-
-                Dim newnode As XmlNode = xmldoc.CreateNode("element", "Interaction", "")
-                With newnode
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp1", "")).InnerText = IP.Comp1
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp2", "")).InnerText = IP.Comp2
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Model", "")).InnerText = IP.Model
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DataType", "")).InnerText = IP.DataType
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Description", "")).InnerText = IP.Description
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "RegressionFile", "")).InnerText = IP.RegressionFile
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Parameters", ""))
-                        For Each par As KeyValuePair(Of String, Object) In IP.Parameters
-                            p = par.Value
-                            .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Parameter", "")).InnerText = p.ToString(cult)
-                            .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
-                            .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = par.Key
-                        Next
+            If xmlstream.Length = 0 Then
+                Dim stream2 As New MemoryStream
+                Using writer As New XmlTextWriter(stream2, Text.Encoding.UTF8)
+                    With writer
+                        .Formatting = Formatting.Indented
+                        .WriteStartDocument()
+                        .WriteStartElement("Interactions")
+                        .WriteEndElement()
+                        .WriteEndDocument()
+                        .Flush()
                     End With
+                    stream2.Position = 0
+                    stream2.CopyTo(xmlstream)
+                End Using
+            End If
 
-                End With
-                xmldoc.ChildNodes(1).AppendChild(newnode)
-            Next
+            xmlstream.Position = 0
 
-            reader.Close()
-            reader = Nothing
+            Dim xmldoc As XmlDocument
 
-            xmldoc.Save(xmlpath)
-            xmldoc = Nothing
+            Using reader = XmlReader.Create(xmlstream)
+
+                Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+                Dim p As Double
+
+                xmldoc = New XmlDocument()
+                xmldoc.Load(reader)
+
+                For Each IP As Thermodynamics.BaseClasses.InteractionParameter In IPDS
+                    Dim index As Integer = -1
+                    Dim i As Integer = 0
+                    Dim C1, C2, M, S1, S2 As String
+
+                    If xmldoc.ChildNodes.Count > 0 Then
+                        For Each node As XmlNode In xmldoc.ChildNodes(1)
+                            C1 = ""
+                            C2 = ""
+                            M = ""
+                            For Each node2 As XmlNode In node.ChildNodes
+                                If node2.Name = "Comp1" Then C1 = node2.InnerText
+                                If node2.Name = "Comp2" Then C2 = node2.InnerText
+                                If node2.Name = "Model" Then M = node2.InnerText
+                                S1 = C1 & C2 & M
+                                S2 = C2 & C1 & M
+                                If (S1 = IP.Comp1 & IP.Comp2 & IP.Model) Or (S2 = IP.Comp1 & IP.Comp2 & IP.Model) Then
+                                    index = i
+                                    Exit For
+                                End If
+                            Next
+                            If index <> -1 Then Exit For
+                            i += 1
+                        Next
+                    End If
+                    If replace Then
+                        If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
+                    End If
+
+                    Dim newnode As XmlNode = xmldoc.CreateNode("element", "Interaction", "")
+                    With newnode
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp1", "")).InnerText = IP.Comp1
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp2", "")).InnerText = IP.Comp2
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Model", "")).InnerText = IP.Model
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DataType", "")).InnerText = IP.DataType
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Description", "")).InnerText = IP.Description
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "RegressionFile", "")).InnerText = IP.RegressionFile
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Parameters", ""))
+                            For Each par As KeyValuePair(Of String, Object) In IP.Parameters
+                                p = par.Value
+                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Parameter", "")).InnerText = p.ToString(cult)
+                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
+                                .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = par.Key
+                            Next
+                        End With
+
+                    End With
+                    xmldoc.ChildNodes(1).AppendChild(newnode)
+                Next
+
+                xmldoc.Save(xmlstream)
+
+            End Using
+
         End Sub
 
         Public Shared Function ReadInteractions(ByVal xmlpath As String, ByVal Model As String) As Thermodynamics.BaseClasses.InteractionParameter()

@@ -20,12 +20,10 @@ Partial Class FormFlowsheet
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFlowsheet))
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -71,6 +69,10 @@ Partial Class FormFlowsheet
         Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UtilitiesTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.TSMIAddUtility = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultivariateSensitivityStudyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesignOfExperimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptimumTesterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptimizationTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnaliseDeSensibilidadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultivariateOptimizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -85,18 +87,11 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLayoutTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiCloseOpenedEditors = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MultivariateSensitivityStudyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesignOfExperimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OptimumTesterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BGLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.bgCalc = New System.ComponentModel.BackgroundWorker()
-        Me.dckPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.OpenFileName = New System.Windows.Forms.OpenFileDialog()
         Me.TimerScripts1 = New System.Windows.Forms.Timer(Me.components)
         Me.TimerScripts5 = New System.Windows.Forms.Timer(Me.components)
         Me.TimerScripts15 = New System.Windows.Forms.Timer(Me.components)
@@ -124,49 +119,14 @@ Partial Class FormFlowsheet
         Me.tsbStoreSolution = New System.Windows.Forms.ToolStripButton()
         Me.tsbLoadSolution = New System.Windows.Forms.ToolStripButton()
         Me.tsbDeleteSolution = New System.Windows.Forms.ToolStripButton()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TSTable.SuspendLayout()
+        Me.dckPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TSTable.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'DataGridView1
-        '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle14
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
-        Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
-        '
-        'TSTable
-        '
-        Me.TSTable.CanClose = False
-        Me.TSTable.Controls.Add(Me.DataGridView1)
-        Me.TSTable.IsDrawn = True
-        Me.TSTable.Name = "TSTable"
-        resources.ApplyResources(Me.TSTable, "TSTable")
         '
         'MenuStrip1
         '
@@ -188,7 +148,7 @@ Partial Class FormFlowsheet
         '
         Me.CloseToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.CloseToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.CloseToolStripMenuItem.MergeIndex = 11
+        Me.CloseToolStripMenuItem.MergeIndex = 12
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
         Me.CloseToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         resources.ApplyResources(Me.CloseToolStripMenuItem, "CloseToolStripMenuItem")
@@ -491,6 +451,32 @@ Partial Class FormFlowsheet
         Me.TSMIAddUtility.Name = "TSMIAddUtility"
         resources.ApplyResources(Me.TSMIAddUtility, "TSMIAddUtility")
         '
+        'DashboardToolStripMenuItem
+        '
+        Me.DashboardToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MultivariateSensitivityStudyToolStripMenuItem, Me.DesignOfExperimentsToolStripMenuItem, Me.OptimumTesterToolStripMenuItem})
+        Me.DashboardToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.DashboardToolStripMenuItem.MergeIndex = 6
+        Me.DashboardToolStripMenuItem.Name = "DashboardToolStripMenuItem"
+        resources.ApplyResources(Me.DashboardToolStripMenuItem, "DashboardToolStripMenuItem")
+        '
+        'MultivariateSensitivityStudyToolStripMenuItem
+        '
+        Me.MultivariateSensitivityStudyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.MultivariateSensitivityStudyToolStripMenuItem.Name = "MultivariateSensitivityStudyToolStripMenuItem"
+        resources.ApplyResources(Me.MultivariateSensitivityStudyToolStripMenuItem, "MultivariateSensitivityStudyToolStripMenuItem")
+        '
+        'DesignOfExperimentsToolStripMenuItem
+        '
+        Me.DesignOfExperimentsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.DesignOfExperimentsToolStripMenuItem.Name = "DesignOfExperimentsToolStripMenuItem"
+        resources.ApplyResources(Me.DesignOfExperimentsToolStripMenuItem, "DesignOfExperimentsToolStripMenuItem")
+        '
+        'OptimumTesterToolStripMenuItem
+        '
+        Me.OptimumTesterToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.OptimumTesterToolStripMenuItem.Name = "OptimumTesterToolStripMenuItem"
+        resources.ApplyResources(Me.OptimumTesterToolStripMenuItem, "OptimumTesterToolStripMenuItem")
+        '
         'OptimizationTSMI
         '
         Me.OptimizationTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnaliseDeSensibilidadeToolStripMenuItem, Me.MultivariateOptimizerToolStripMenuItem})
@@ -579,32 +565,6 @@ Partial Class FormFlowsheet
         Me.tsmiCloseOpenedEditors.Name = "tsmiCloseOpenedEditors"
         resources.ApplyResources(Me.tsmiCloseOpenedEditors, "tsmiCloseOpenedEditors")
         '
-        'DashboardToolStripMenuItem
-        '
-        Me.DashboardToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MultivariateSensitivityStudyToolStripMenuItem, Me.DesignOfExperimentsToolStripMenuItem, Me.OptimumTesterToolStripMenuItem})
-        Me.DashboardToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.DashboardToolStripMenuItem.MergeIndex = 6
-        Me.DashboardToolStripMenuItem.Name = "DashboardToolStripMenuItem"
-        resources.ApplyResources(Me.DashboardToolStripMenuItem, "DashboardToolStripMenuItem")
-        '
-        'MultivariateSensitivityStudyToolStripMenuItem
-        '
-        Me.MultivariateSensitivityStudyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
-        Me.MultivariateSensitivityStudyToolStripMenuItem.Name = "MultivariateSensitivityStudyToolStripMenuItem"
-        resources.ApplyResources(Me.MultivariateSensitivityStudyToolStripMenuItem, "MultivariateSensitivityStudyToolStripMenuItem")
-        '
-        'DesignOfExperimentsToolStripMenuItem
-        '
-        Me.DesignOfExperimentsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
-        Me.DesignOfExperimentsToolStripMenuItem.Name = "DesignOfExperimentsToolStripMenuItem"
-        resources.ApplyResources(Me.DesignOfExperimentsToolStripMenuItem, "DesignOfExperimentsToolStripMenuItem")
-        '
-        'OptimumTesterToolStripMenuItem
-        '
-        Me.OptimumTesterToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
-        Me.OptimumTesterToolStripMenuItem.Name = "OptimumTesterToolStripMenuItem"
-        resources.ApplyResources(Me.OptimumTesterToolStripMenuItem, "OptimumTesterToolStripMenuItem")
-        '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
@@ -628,19 +588,6 @@ Partial Class FormFlowsheet
         '
         Me.bgCalc.WorkerReportsProgress = True
         Me.bgCalc.WorkerSupportsCancellation = True
-        '
-        'dckPanel
-        '
-        Me.dckPanel.DefaultFloatWindowSize = New System.Drawing.Size(900, 600)
-        resources.ApplyResources(Me.dckPanel, "dckPanel")
-        Me.dckPanel.DockBackColor = System.Drawing.SystemColors.Control
-        Me.dckPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
-        Me.dckPanel.Name = "dckPanel"
-        '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "png"
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
         '
         'TimerScripts1
         '
@@ -807,6 +754,52 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.tsbDeleteSolution, "tsbDeleteSolution")
         Me.tsbDeleteSolution.Name = "tsbDeleteSolution"
         '
+        'dckPanel
+        '
+        Me.dckPanel.DefaultFloatWindowSize = New System.Drawing.Size(900, 600)
+        resources.ApplyResources(Me.dckPanel, "dckPanel")
+        Me.dckPanel.DockBackColor = System.Drawing.SystemColors.Control
+        Me.dckPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
+        Me.dckPanel.Name = "dckPanel"
+        '
+        'DataGridView1
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
+        Me.DataGridView1.Name = "DataGridView1"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        '
+        'TSTable
+        '
+        Me.TSTable.CanClose = False
+        Me.TSTable.Controls.Add(Me.DataGridView1)
+        Me.TSTable.IsDrawn = True
+        Me.TSTable.Name = "TSTable"
+        resources.ApplyResources(Me.TSTable, "TSTable")
+        '
         'FormFlowsheet
         '
         resources.ApplyResources(Me, "$this")
@@ -818,12 +811,12 @@ Partial Class FormFlowsheet
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormFlowsheet"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TSTable.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TSTable.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -852,9 +845,7 @@ Partial Class FormFlowsheet
     Friend WithEvents COObjTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ShowTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents varpaneltsmi As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents GerenciadorDeAmostrasDePetroleoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents OpenFileName As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TimerScripts1 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts5 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts15 As System.Windows.Forms.Timer

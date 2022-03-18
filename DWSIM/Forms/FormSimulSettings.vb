@@ -927,21 +927,22 @@ Public Class FormSimulSettings
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado2SC") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado3CNTP") Then
 
-            Dim myStream As System.IO.FileStream
+            Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-            If Me.SaveFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                myStream = Me.SaveFileDialog1.OpenFile()
-                If Not (myStream Is Nothing) Then
+            Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("DWSIM System of Units File", "*.dwund")})
+
+            If handler IsNot Nothing Then
+                Using stream As New IO.MemoryStream()
                     Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
                     Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                     Try
-                        mySerializer.Serialize(myStream, su)
+                        mySerializer.Serialize(stream, su)
+                        handler.Write(stream)
                     Catch ex As System.Runtime.Serialization.SerializationException
                         MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Finally
-                        myStream.Close()
                     End Try
-                End If
+                End Using
             End If
 
         Else
@@ -952,18 +953,21 @@ Public Class FormSimulSettings
 
     Private Sub KryptonButton22_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton22.Click
 
-        Dim myStream As System.IO.FileStream
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-        If Me.OpenFileDialog2.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            myStream = Me.OpenFileDialog2.OpenFile()
-            If Not (myStream Is Nothing) Then
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("DWSIM System of Units File", "*.dwund")})
+
+        If openedFile IsNot Nothing Then
+
+            Using str = openedFile.OpenRead()
                 Dim su As New SystemsOfUnits.Units
                 Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                 Try
-                    su = DirectCast(mySerializer.Deserialize(myStream), SystemsOfUnits.Units)
-                    If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
+                    su = DirectCast(mySerializer.Deserialize(str), SystemsOfUnits.Units)
+                    While FormMain.AvailableUnitSystems.ContainsKey(su.Name)
                         su.Name += "_1"
-                    End If
+                    End While
                     FormMain.AvailableUnitSystems.Add(su.Name, su)
                     Me.ComboBox2.Items.Add(su.Name)
                     Me.CurrentFlowsheet.Options.SelectedUnitSystem.Name = su.Name
@@ -972,10 +976,9 @@ Public Class FormSimulSettings
                     ComboBox2.SelectedItem = Me.CurrentFlowsheet.Options.SelectedUnitSystem.Name
                 Catch ex As System.Runtime.Serialization.SerializationException
                     MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Finally
-                    myStream.Close()
                 End Try
-            End If
+            End Using
+
         End If
 
     End Sub

@@ -1267,7 +1267,6 @@
     ''' <summary>
     ''' exports compound data to a XLSX file.
     ''' </summary>
-    ''' <returns></returns>
     Sub ExportToXLSX(filepath As String)
 
     Function GetLiquidSurfaceTension(T As Double, ByRef Optional message As String = "") As Double

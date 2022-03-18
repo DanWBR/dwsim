@@ -8,7 +8,8 @@ import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/f
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
-import {  withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
+import { withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
+import { msGraphClient } from "../shared/ms-graph/ms-graph-factory";
 
 interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps> {
     baseFolder: ISelectedFolder;
@@ -154,7 +155,7 @@ const classNames = mergeStyleSets({
 });
 
 class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps, IOpenDashboardFilePageState>{
-    private _navigationBarRef: React.RefObject<NavigationBar> | undefined;
+
     private _selection: Selection;
 
 
@@ -171,7 +172,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
             filterFileTypes: ["dwxml", "dwxmz", "xml", "dwcsd", "dwcsd2", "dwrsd", "dwrsd2", "dwruf"],
             showCreateFolderModal: false
         };
-        this._navigationBarRef = React.createRef<NavigationBar>();
+
         this._selection = new Selection({ onSelectionChanged: this.selectedRowChanged.bind(this) } as ISelectionOptions);
 
     }
@@ -179,17 +180,40 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         this.changeFileTypeFilter();
     }
 
-    changeFileTypeFilter() {
-
-        if (this.props.match?.params?.extension) {
-            const fileTypeExtensions = this.props.match.params.extension.split('_');
-
-            this.setState({ selectedFileType: fileTypeExtensions[0], filterFileTypes: fileTypeExtensions },
-                () => { this.getFilesAndFolders() });
-            console.log("Query params", this.props.match?.params?.extension);
-        } else {
-            this.getFilesAndFolders()
+    async changeFileTypeFilter() {
+        console.log("props", this.props);
+        let params: { [key: string]: string } = {};
+        const paramsString = this.props.location.search?.toString().replace("?", "");
+        if (paramsString) {
+            for (let param of paramsString.split("&")) {
+                if (param) {
+                    const paramSplit = param.split("=");
+                    if (paramSplit.length == 2) {
+                        params[paramSplit[0]] = paramSplit[1];
+                    }
+                }
+            }
         }
+        console.log("params", params);
+        let { selectedFolder, filterFileTypes } = this.state;
+        if (params.directory) {
+            if (this.state.selectedFolder?.webUrl !== params.directory) {
+                const path = decodeURIComponent(params.directory);
+                console.log("Decoded path", params.directory, path);
+                selectedFolder = await this.getSelectedFolder(path);
+            }
+        }
+        let fileTypeExtensions: string[] = filterFileTypes;
+        if (params.extensions) {
+            fileTypeExtensions = params.extensions.split('_');
+        }
+        let filename = "";
+        if (params.filename) {
+            filename = decodeURIComponent(params.filename);
+        }
+
+        this.setState({ selectedFileType: fileTypeExtensions[0], filterFileTypes: fileTypeExtensions, selectedFolder: selectedFolder, filename: filename },
+            () => { this.getFilesAndFolders() });
     }
 
     async getFilesAndFolders() {
@@ -197,8 +221,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         const { siteId, flowsheetsListId, isSaveDialog } = this.props;
         try {
             this.setState({ isDataLoaded: false });
-            const fileTypes = !isSaveDialog && (selectedFileType == "dwxml" || selectedFileType == "dwxmz") ? filterFileTypes : [selectedFileType!];
-            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, fileTypes);
+
+            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, filterFileTypes);
             console.log("Files and folders", filesAndFolders);
             this.setState({ files: filesAndFolders!.files ?? [], folders: filesAndFolders!.folders ?? [] });
         } catch (error) {
@@ -206,6 +230,35 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         }
         finally {
             this.setState({ isDataLoaded: true });
+        }
+    }
+
+    async getSelectedFolder(selectedFolderPath: string) {
+
+        if (selectedFolderPath === this.props.baseFolder.webUrl) {
+            return { ...this.props.baseFolder };
+        }
+
+        console.log("CurrentFolder path:", selectedFolderPath);
+        const folderPath = selectedFolderPath.split('/').slice(1).reduce((prev, curr) => prev + "/" + curr, "");
+        console.log("getSelectedFolder path:", folderPath);
+
+        let apiPath = `/sites/${this.props.siteId}/lists/${this.props.flowsheetsListId}/drive`;
+        if (folderPath && folderPath !== "" && folderPath !== "/") {
+            apiPath = `/sites/${this.props.siteId}/lists/${this.props.flowsheetsListId}/drive/root:${folderPath}`;
+        }
+
+        try {
+            var folderInfo = await msGraphClient.api(apiPath).get();
+            let selectedFolder = {
+                driveId: folderInfo.id,
+                displayName: folderInfo.name,
+                webUrl: selectedFolderPath
+            } as ISelectedFolder;
+            return selectedFolder;
+        } catch (error) {
+            console.log("An error occurred while loading selected Folder with path", selectedFolderPath);
+            return this.props.baseFolder;
         }
     }
 
@@ -228,7 +281,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                     parentDriveItemId: selectedFolder.driveId
                 } as ISelectedFolder;
                 console.log("Setting selected folder", newSelectedFolder);
-                //   this._navigationBarRef?.current?.addSelectedFolder(newSelectedFolder);
+
 
                 this.setState({ selectedFolder: newSelectedFolder }, () => {
                     this.getFilesAndFolders();
@@ -378,12 +431,12 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 
             <Sticky stickyPosition={StickyPositionType.Header} key="header_sticky" stickyBackgroundColor={"white"} >
                 <NavigationBar
-                    ref={this._navigationBarRef}
                     siteId={siteId}
                     flowsheetsListId={flowsheetsListId}
                     baseFolder={baseFolder}
                     selectedFolder={this.state.selectedFolder}
                     onSelectedFolderChanged={(selectedFolder) => {
+
                         this.setState({ selectedFolder: selectedFolder }, () => {
                             this.getFilesAndFolders();
                         });
@@ -400,26 +453,26 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         const { filename, selectedFileType, selectedFolder } = this.state;
         const { flowsheetsDriveId } = this.props;
 
-        
+
 
         if (filename && selectedFileType) {
 
-            let fileNameWithExtension=filename;
-            if(fileNameWithExtension.toUpperCase().indexOf(selectedFileType.toUpperCase())==-1){
-                fileNameWithExtension=`${filename}.${selectedFileType}`
+            let fileNameWithExtension = filename;
+            if (fileNameWithExtension.toUpperCase().indexOf(selectedFileType.toUpperCase()) == -1) {
+                fileNameWithExtension = `${filename}.${selectedFileType}`
             }
 
             const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
             const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${fileNameWithExtension}`
                 : `Simulate 365 Dashboard/${fileNameWithExtension}`;
-            SaveDwsimFile(fileNameWithExtension,flowsheetsDriveId, selectedFolder.driveId, filePath);
+            SaveDwsimFile(fileNameWithExtension, flowsheetsDriveId, selectedFolder.driveId, filePath);
         }
     }
 
     render() {
         const { folders, files, isDataLoaded, selectedFolder, filename, selectedFileType, filterFileTypes, showCreateFolderModal } = this.state;
         const { isSaveDialog } = this.props;
-        const { siteId, flowsheetsListId, baseFolder, } = this.props;
+        const { siteId, flowsheetsListId, baseFolder } = this.props;
         const columns = [...this.getColumns()];
         const items = [...folders, ...files];
         console.log("isDataLoaded", isDataLoaded);
@@ -515,24 +568,38 @@ function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefi
 
     switch (extension) {
         //dwsim default
-        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
-        case 'dwxml': return { key: 'dwxml', text: 'Simulation File (XML) (*.dwxml)' };
-        case 'xml': return { key: 'xml', text: 'Simulation File (Android/iOS) (*.xml)' };
+        case 'dwxmz': return { key: 'dwxmz', text: 'Compressed XML Simulation File (*.dwxmz)' };
+        case 'dwxml': return { key: 'dwxml', text: 'XML Simulation File (*.dwxml)' };
+        case 'xml': return { key: 'xml', text: 'Mobile XML Simulation File (*.xml)' };
         case 'dwcsd': return { key: 'dwcsd', text: 'Compound Creator Study (*.dwcsd)' };
         case 'dwcsd2': return { key: 'dwcsd2', text: 'Compound Creator Study (*.dwcsd2)' };
         case 'dwrsd': return { key: 'dwrsd', text: 'Data Regression Study (*.dwrsd)' };
         case 'dwrsd2': return { key: 'dwrsd2', text: 'Data Regression Study (*.dwrsd2)' };
-        case 'dwruf': return { key: 'dwruf', text: 'UNIFAC IPs Regression Study (*.dwruf)' };
+        case 'dwruf': return { key: 'dwruf', text: 'UNIFAC Regression Study File (*.dwruf)' };
+        case 'dwund': return { key: 'dwund', text: '"DWSIM System of Units File (*.dwund)' };
+        case 'dwrxm': return { key: 'dwrxm', text: '"DWSIM Reactions File (*.dwrxm)' };
+        case 'dwrxs': return { key: 'dwrxs', text: '"DWSIM Reactions File (*.dwrxs)' };
         //end of dwsim default
         case 'xlsx': return { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' };
         case 'odt': return { key: 'odt', text: 'OpenOffice Writer Document (*.odt)' };
         case 'pdf': return { key: 'pdf', text: 'PDF Files (*.pdf)' };
         case 'ods': return { key: 'ods', text: 'OpenOffice Calc SpreadSheet (*.ods)' };
-
+        case 'json': return { key: 'json', text: 'JSON file (*.json)' };
+        case 'bmp': return { key: 'bmp', text: 'BMP file (*.bmp)' };
+        case 'jpg': return { key: 'jpg', text: 'JPG file (*.jpg)' };
+        case 'png': return { key: 'json', text: 'PNG file (*.png)' };
+        case 'gif': return { key: 'gif', text: 'GIF file (*.gif)' };
+        case 'mov': return { key: 'mov', text: 'MOV file (*.mov)' };
+        case 'mp4': return { key: 'mp4', text: 'MP4 file (*.mp4)' };
+        case 'mp3': return { key: 'mp3', text: 'MP3 file (*.mp3)' };
+        case 'txt': return { key: 'txt', text: 'Text file (*.txt)' };
+        case 'py': return { key: 'py', text: 'Python file (*.py)' };
+        case 'html': return { key: 'html', text: 'HTML file (*.html)' };
         default:
             return undefined;
     }
 
 }
+
 
 export default withInitializeDashboard(OpenDashboardFilePage);

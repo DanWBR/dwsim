@@ -88,6 +88,9 @@ Namespace UnitOperations
         Public Property RedirectOutput As Boolean = False
         Public Property CompoundMappings As Dictionary(Of String, String)
 
+        Public Property FileIsEmbedded As Boolean = False
+        Public Property EmbeddedFileName As String = ""
+
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()

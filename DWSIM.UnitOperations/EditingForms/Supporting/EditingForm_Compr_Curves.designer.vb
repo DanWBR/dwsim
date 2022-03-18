@@ -30,8 +30,6 @@ Partial Class EditingForm_CompressorExpander_Curves
         Me.tsbImport = New System.Windows.Forms.ToolStripButton()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
@@ -82,16 +80,6 @@ Partial Class EditingForm_CompressorExpander_Curves
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'OpenFileDialog1
-        '
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
-        Me.OpenFileDialog1.Multiselect = True
-        '
-        'SaveFileDialog1
-        '
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        Me.SaveFileDialog1.RestoreDirectory = True
-        '
         'EditingForm_CompressorExpander_Curves
         '
         resources.ApplyResources(Me, "$this")
@@ -115,6 +103,4 @@ Partial Class EditingForm_CompressorExpander_Curves
     Friend WithEvents tsbImport As ToolStripButton
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents OpenFileDialog1 As OpenFileDialog
-    Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class

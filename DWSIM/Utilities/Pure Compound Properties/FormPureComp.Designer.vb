@@ -143,7 +143,6 @@ Partial Class FormPureComp
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.TextBoxComments = New System.Windows.Forms.TextBox()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.sfdxml1 = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
@@ -1129,11 +1128,6 @@ Partial Class FormPureComp
         Me.TextBoxComments.Name = "TextBoxComments"
         Me.TextBoxComments.ReadOnly = True
         '
-        'SaveFileDialog1
-        '
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        Me.SaveFileDialog1.RestoreDirectory = True
-        '
         'sfdxml1
         '
         Me.sfdxml1.DefaultExt = "xml"
@@ -1290,7 +1284,6 @@ Partial Class FormPureComp
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents TextBoxComments As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Public WithEvents sfdxml1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents tbElements As TextBox

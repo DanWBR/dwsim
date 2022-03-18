@@ -5,6 +5,8 @@ Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
 Imports CapeOpen
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.CapeOpen
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports System.Drawing
 
 Public Class EditingForm_CAPEOPENUO
 
@@ -529,28 +531,27 @@ Public Class EditingForm_CAPEOPENUO
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        With Me.OpenFileName
-            .CheckFileExists = True
-            .CheckPathExists = True
-            .Title = SimObject.FlowSheet.GetTranslatedString("Import")
-            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
-            .AddExtension = True
-            .Multiselect = False
-            .RestoreDirectory = True
-            Dim res As DialogResult = .ShowDialog
-            If res = Windows.Forms.DialogResult.OK Then
-                Try
-                    Using bmp = CType(System.Drawing.Bitmap.FromFile(OpenFileName.FileName), System.Drawing.Bitmap)
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Image files", New String() {"*.bmp", "*.jpg", "*.png", "*.gif"})})
+
+        If handler IsNot Nothing Then
+            Using str = handler.OpenRead()
+                Using bmp = Bitmap.FromStream(str)
+                    Try
                         Using img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
                             SimObject.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png)
                             MessageBox.Show("Image data read successfully.", "DWSIM", MessageBoxButtons.OK)
                         End Using
-                    End Using
-                Catch ex As Exception
-                    MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
-                End Try
-            End If
-        End With
+                    Catch ex As Exception
+                        MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
+                    End Try
+                End Using
+            End Using
+        End If
+
     End Sub
 
 End Class

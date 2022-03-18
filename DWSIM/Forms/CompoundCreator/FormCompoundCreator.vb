@@ -27,6 +27,8 @@ Imports System.Math
 Imports Microsoft.VisualBasic.FileIO
 Imports System.Globalization
 Imports DWSIM.Simulate365.Models
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormCompoundCreator
 
@@ -3210,16 +3212,17 @@ Public Class FormCompoundCreator
 
     Private Sub SalvarNoBancoDeDadosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalvarNoBancoDeDadosToolStripMenuItem.Click
 
-        SaveFileDialog2.FileName = mycase.database
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-        If SaveFileDialog2.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("XML File", "*.xml")})
+
+        If handler IsNot Nothing Then
             Try
 
                 StoreData()
 
-                mycase.database = SaveFileDialog2.FileName
-
-                If Not File.Exists(SaveFileDialog2.FileName) Then File.WriteAllText(SaveFileDialog2.FileName, "")
+                mycase.database = handler.FullPath
 
                 'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
                 'Delete UNIFAC groups to prevent wrong calculations.
@@ -3231,15 +3234,22 @@ Public Class FormCompoundCreator
 
                 mycase.cp.OriginalDB = "User"
                 mycase.cp.CurrentDB = "User"
-
-                Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, SaveFileDialog2.FileName, True)
+                Using stream As New MemoryStream
+                    If handler.Exists() Then
+                        Using str = handler.OpenRead()
+                            str.CopyTo(stream)
+                            stream.Position = 0
+                        End Using
+                    End If
+                    Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, stream, True)
+                    handler.Write(stream)
+                End Using
 
             Catch ex As Exception
 
                 MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
 
             End Try
-
         End If
 
     End Sub
@@ -3250,7 +3260,7 @@ Public Class FormCompoundCreator
         StoreData()
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxName.Text
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If f.ShowDialog(Me) = DialogResult.OK Then
 
             mycase.CalcMW = False
             mycase.CalcNBP = False
@@ -3271,7 +3281,7 @@ Public Class FormCompoundCreator
 
     End Sub
 
-    Private Sub DBOpenDlg_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles DBOpenDlg.FileOk
+    Private Sub DBOpenDlg_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs)
 
     End Sub
 
@@ -3301,7 +3311,7 @@ Public Class FormCompoundCreator
         StoreData()
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxName.Text
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If f.ShowDialog(Me) = DialogResult.OK Then
 
             mycase.CalcMW = False
             mycase.CalcNBP = False
@@ -3332,23 +3342,44 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub ExportarDadosParaArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarDadosParaArquivoJSONToolStripMenuItem.Click
-        Me.SaveFileDialog1.FileName = TextBoxName.Text
-        If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
             Try
                 mycase.cp.OriginalDB = "User"
                 mycase.cp.CurrentDB = "User"
-                File.WriteAllText(Me.SaveFileDialog1.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(mycase.cp, Newtonsoft.Json.Formatting.Indented))
+                Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(mycase.cp, Newtonsoft.Json.Formatting.Indented)
+                Using stream As New IO.MemoryStream()
+                    Using writer As New StreamWriter(stream)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                    End Using
+                End Using
                 MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+
         End If
+
     End Sub
 
     Private Sub ImportarDeArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportarDeArquivoJSONToolStripMenuItem.Click
-        If Me.OpenFileDialog3.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Dim jsondata = handler.ReadAllText()
             Try
-                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(OpenFileDialog3.FileName))
+                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(jsondata)
                 StoreData()
                 mycase.cp = comp
                 mycase.CalcMW = False
@@ -3368,6 +3399,7 @@ Public Class FormCompoundCreator
                 MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
+
     End Sub
 
     Private Sub EstruturaUNIFACMODFACDDBToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EstruturaUNIFACMODFACDDBToolStripMenuItem.Click
@@ -3375,7 +3407,7 @@ Public Class FormCompoundCreator
         StoreData()
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxCAS.Text
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If f.ShowDialog(Me) = DialogResult.OK Then
             loaded = False
             WriteData()
             loaded = True

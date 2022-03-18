@@ -32,8 +32,8 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.Editors.PropertyPackages
 Imports System.Threading.Tasks
-Imports DWSIM.Simulate365.Models
-Imports DWSIM.Simulate365.Services
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -134,8 +134,6 @@ Public Class FormFlowsheet
     Private MessagePumpTimer As Timer
 
     Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
-
-    Public simulate365File As S365File = Nothing
 
     Public Shared DoNotOpenSimulationWizard As Boolean = False
 
@@ -579,10 +577,10 @@ Public Class FormFlowsheet
 
         If DWSIM.App.IsRunningOnMono Then
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveFileS365.Enabled = True
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
             My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
@@ -646,32 +644,30 @@ Public Class FormFlowsheet
         If cnt = 0 Then
 
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
-            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveFileS365.Enabled = False
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = False
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
-            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
-            My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
 
         Else
 
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveFileS365.Enabled = True
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
-            End If
+        End If
 
-            'garbage collection (frees unused memory)
-            System.GC.Collect()
-            System.GC.WaitForPendingFinalizers()
-            System.GC.Collect()
-            System.GC.WaitForPendingFinalizers()
+        'garbage collection (frees unused memory)
+        System.GC.Collect()
+        System.GC.WaitForPendingFinalizers()
+        System.GC.Collect()
+        System.GC.WaitForPendingFinalizers()
 
     End Sub
 
@@ -714,9 +710,9 @@ Public Class FormFlowsheet
     End Sub
 
     Sub UpdateFormText()
-        If (Me.simulate365File IsNot Nothing) Then
-            Me.Text = Me.simulate365File.Filename & " (" & Me.simulate365File.FullPath & ")"
-        ElseIf File.Exists(Me.Options.FilePath) Then
+        If File.Exists(Options.FilePath) Then
+            Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
+        ElseIf Options.FilePath.StartsWith("Simulate 365 Dashboard") Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
         Else
             Me.Text = Me.Options.SimulationName
@@ -1011,30 +1007,34 @@ Public Class FormFlowsheet
 
     Public Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
 
-        With Me.OpenFileName
-            .CheckFileExists = True
-            .CheckPathExists = True
-            .Title = DWSIM.App.GetLocalString("Adicionarfigura")
-            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
-            .AddExtension = True
-            .Multiselect = False
-            .RestoreDirectory = True
-            Dim res As DialogResult = .ShowDialog
-            If res = Windows.Forms.DialogResult.OK Then
-                Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(Bitmap.FromFile(.FileName))
-                Dim gObj As GraphicObject = Nothing
-                If Not img Is Nothing Then
-                    Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
-                    gObj = myEmbeddedImage
-                    gObj.Width = img.Width
-                    gObj.Height = img.Height
-                    gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
-                    gObj.AutoSize = True
-                End If
-                Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
-                Me.FormSurface.Invalidate()
-            End If
-        End With
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("BMP file", "*.bmp"),
+            New FilePickerAllowedType("JPG file", "*.jpg"),
+            New FilePickerAllowedType("PNG file", "*.png"),
+            New FilePickerAllowedType("GIF file", "*.gif")})
+
+        If openedFile IsNot Nothing Then
+
+            Using str = openedFile.OpenRead()
+                Using bmp = Bitmap.FromStream(str)
+                    Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
+                    Dim gObj As GraphicObject = Nothing
+                    If Not img Is Nothing Then
+                        Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
+                        gObj = myEmbeddedImage
+                        gObj.Width = img.Width
+                        gObj.Height = img.Height
+                        gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
+                        gObj.AutoSize = True
+                    End If
+                    Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+                    Me.FormSurface.Invalidate()
+                End Using
+            End Using
+
+        End If
 
         FormSurface.TSBtabela.Checked = False
 
@@ -1288,7 +1288,7 @@ Public Class FormFlowsheet
     Public Sub tsmiRemoveSelected_Click(sender As Object, e As EventArgs) Handles tsmiRemoveSelected.Click
         Dim n As Integer = Me.FormSurface.FlowsheetSurface.SelectedObjects.Count
         If n > 1 Then
-            If MessageBox.Show("Delete " & n & " objects?", "Mass delete", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+            If MessageBox.Show("Delete " & n & " objects?", "Mass delete", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 Dim indexes As New ArrayList
                 For Each gobj As GraphicObject In Me.FormSurface.FlowsheetSurface.SelectedObjects.Values
                     indexes.Add(gobj.Tag)
@@ -3070,22 +3070,8 @@ Public Class FormFlowsheet
     End Property
 
     Public Sub SaveToXML(file As String) Implements IFlowsheetBag.SaveToXML
-        My.Application.MainWindowForm.SaveXML(file, Me)
+        My.Application.MainWindowForm.SaveXML(New WindowsFile(file), Me)
     End Sub
-
-    Public Function SaveToFile() As String
-        If Path.GetExtension(Options.FilePath).ToLower = ".dwxml" Then
-            FormMain.SaveXML(Options.FilePath, Me)
-            Return "simulation saved to '" + Options.FilePath + "'."
-        ElseIf Path.GetExtension(Options.FilePath).ToLower = ".xml" Then
-            Return "saving to mobile xml is not supported"
-        ElseIf Path.GetExtension(Options.FilePath).ToLower = ".dwxmz" Then
-            FormMain.SaveXMLZIP(Options.FilePath, Me)
-            Return "simulation saved to '" + Options.FilePath + "'."
-        Else
-            Return "simulation must be saved manually before trying it through here."
-        End If
-    End Function
 
     Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
 

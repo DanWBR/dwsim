@@ -51,7 +51,7 @@ Public Class FormRecoverFiles
             Try
                 If row.Cells(0).Value = 1 Then
                     Application.DoEvents()
-                    FormMain.LoadAndExtractXMLZIP(row.Cells(1).Value, Nothing)
+                    FormMain.LoadAndExtractXMLZIP(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(row.Cells(1).Value), Nothing)
                 End If
             Catch ex As Exception
                 MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrircpiadeseg"), MessageBoxButtons.OK, MessageBoxIcon.Error)

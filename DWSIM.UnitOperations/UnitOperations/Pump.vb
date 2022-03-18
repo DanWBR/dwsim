@@ -196,7 +196,6 @@ Namespace UnitOperations
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
         Property PumpType As String = ""
-        Property PumpDB As String = ""
         Property ImpellerDiameter As Double = 200
         Property ImpellerSpeed As Double = 1450
         Property DiameterUnit As String = "mm"

@@ -117,21 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Configure Curves</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>801, 352</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Graph</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>System Head</value>
-  </data>
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dgv5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 213</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>System H.</value>
@@ -148,8 +139,11 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Required NPSH</value>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 342</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>System Head</value>
   </data>
   <data name="ch4.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -160,14 +154,20 @@
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
+  <data name="dgv4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 213</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Efficiency</value>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 342</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Required NPSH</value>
   </data>
   <data name="ch3.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -177,6 +177,9 @@
   </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
+  </data>
+  <data name="dgv3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 213</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -190,8 +193,11 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Power</value>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 342</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Efficiency</value>
   </data>
   <data name="ch2.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -205,6 +211,9 @@
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Power</value>
   </data>
+  <data name="dgv2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 213</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
@@ -217,8 +226,17 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Power</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 342</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Power</value>
+  </data>
   <data name="vap.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
+  </data>
+  <data name="dgv1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 212</value>
   </data>
   <data name="ch1.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -232,11 +250,14 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 342</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>801, 352</value>
   </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Graph</value>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Configure Curves</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -263,6 +284,18 @@
   <data name="chart1.Size" type="System.Drawing.Size, System.Drawing">
     <value>795, 302</value>
   </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 352</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 352</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Graph</value>
+  </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 22</value>
   </data>
@@ -271,6 +304,10 @@
   </data>
   <data name="TSBtnSaveToDB.Text" xml:space="preserve">
     <value>Save to database</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TSBtnDeletePump.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="TSBtnDeletePump.ToolTipText" xml:space="preserve">
     <value>Delete from database</value>

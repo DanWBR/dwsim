@@ -11,6 +11,8 @@ Imports Python.Runtime
 Imports System.Threading.Tasks
 Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports IronPython.Hosting
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 <System.Serializable()> Public Class FormScript
 
@@ -562,7 +564,7 @@ Imports IronPython.Hosting
 
                 AddHandler scontrol.btnDelete.Click,
                     Sub()
-                        If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                        If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                             TabStripScripts.RemoveTab(stab)
                             fc.ScriptCollection.Remove(scriptdata.ID)
                         End If
@@ -798,7 +800,7 @@ Imports IronPython.Hosting
     End Sub
 
     Private Sub TabStripScripts_TabStripItemClosing(e As TabStripItemClosingEventArgs) Handles TabStripScripts.TabStripItemClosing
-        If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+        If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
             e.Cancel = True
         Else
             fc.ScriptCollection.Remove(e.Item.Tag)
@@ -1579,30 +1581,47 @@ Imports IronPython.Hosting
     End Sub
 
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Me.sfd1.FileName = TabStripScripts.SelectedItem.Title
-        If Me.sfd1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
-                My.Computer.FileSystem.WriteAllText(Me.sfd1.FileName, scontrol.txtScript.Text, False)
-            Else
-                Dim scontrol As ScriptEditorControlMono = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono)
-                My.Computer.FileSystem.WriteAllText(Me.sfd1.FileName, scontrol.txtScript.Text, False)
-            End If
+
+        Dim filename = TabStripScripts.SelectedItem.Title
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        filePickerForm.SuggestedFilename = filename
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+                New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Python Script File", "*.py")})
+
+        If handler IsNot Nothing Then
+            Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
+            Dim text = scontrol.txtScript.Text
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream)
+                    writer.Write(text)
+                    handler.Write(stream)
+                End Using
+            End Using
         End If
+
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
-        If Me.ofd2.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Dim scripttext = File.ReadAllText(ofd2.FileName)
-            Dim scr As New Script() With
-                                                {.ID = Guid.NewGuid().ToString,
-                                                 .Title = Path.GetFileNameWithoutExtension(ofd2.FileName),
-                                                 .Linked = False,
-                                                 .ScriptText = scripttext,
-                                                 .PythonInterpreter = Scripts.Interpreter.IronPython}
 
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Python Script File", "*.py")})
+
+        If handler IsNot Nothing Then
+            Dim scripttext = handler.ReadAllText()
+            Dim scr As New Script() With
+                {.ID = Guid.NewGuid().ToString,
+                .Title = Path.GetFileNameWithoutExtension(handler.Filename),
+                .Linked = False,
+                .ScriptText = scripttext,
+                .PythonInterpreter = Scripts.Interpreter.IronPython}
             InsertScriptTab(scr)
         End If
+
     End Sub
 End Class
 

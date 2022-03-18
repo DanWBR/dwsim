@@ -33,8 +33,6 @@ Partial Class FormFileExplorer
         Me.btnDelete = New System.Windows.Forms.ToolStripButton()
         Me.Viewer = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
-        Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -136,22 +134,10 @@ Partial Class FormFileExplorer
         Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Name = "Label1"
         '
-        'sfd1
-        '
-        resources.ApplyResources(Me.sfd1, "sfd1")
-        Me.sfd1.SupportMultiDottedExtensions = True
-        '
-        'ofd1
-        '
-        resources.ApplyResources(Me.ofd1, "ofd1")
-        Me.ofd1.Multiselect = True
-        Me.ofd1.SupportMultiDottedExtensions = True
-        '
         'FormFileExplorer
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButton = False
         Me.Controls.Add(Me.SplitContainer1)
         Me.HideOnClose = True
@@ -177,8 +163,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents btnExport As ToolStripButton
     Friend WithEvents btnDelete As ToolStripButton
     Friend WithEvents Viewer As Microsoft.Web.WebView2.WinForms.WebView2
-    Public WithEvents sfd1 As SaveFileDialog
-    Public WithEvents ofd1 As OpenFileDialog
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblSize As ToolStripStatusLabel
     Friend WithEvents ListView1 As ListView

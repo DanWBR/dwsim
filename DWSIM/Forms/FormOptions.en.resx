@@ -146,7 +146,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Enable Inspector Reports</value>
   </data>
   <data name="GroupBox18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 461</value>
+    <value>8, 504</value>
   </data>
   <data name="GroupBox18.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 197</value>
@@ -266,13 +266,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tbGPUCaps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 85</value>
+    <value>363, 128</value>
   </data>
   <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 120</value>
   </data>
   <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 105</value>
+    <value>369, 148</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>OpenCL/CUDA device info</value>
@@ -296,13 +296,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Enable CPU Parallel Processing</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 231</value>
+    <value>381, 274</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Local Calculation Engine Settings</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 669</value>
+    <value>397, 712</value>
   </data>
   <data name="chkAA.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 17</value>
@@ -515,13 +515,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>374, 231</value>
   </data>
   <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 283</value>
+    <value>383, 290</value>
   </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>User-Defined Interaction Parameter Datasets</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 669</value>
+    <value>397, 712</value>
   </data>
   <data name="FaTabStripItem3.Text" xml:space="preserve">
     <value>User-Defined Datasets</value>
@@ -674,14 +674,14 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Other</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 695</value>
+    <value>405, 738</value>
   </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAASwBCgEsAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAATQBCgE0AQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
@@ -867,12 +867,6 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   </data>
   <data name="FolderBrowserDialog1.Description" xml:space="preserve">
     <value>Select a folder...</value>
-  </data>
-  <data name="ofdcs.Filter" xml:space="preserve">
-    <value>XML File|*.xml</value>
-  </data>
-  <data name="ofdcs.Title" xml:space="preserve">
-    <value>Add ChemSep Database (XML)</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>XML File|*.xml</value>

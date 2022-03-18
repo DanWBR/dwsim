@@ -8,6 +8,8 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp
 Imports SkiaSharp
 Imports DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports DWSIM.Interfaces
 
 Public Class FlowsheetSurface_SkiaSharp
 
@@ -3121,18 +3123,6 @@ Public Class FlowsheetSurface_SkiaSharp
         If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
         SplitContainerHorizontal.Panel1.Refresh()
-    End Sub
-
-    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        If Flowsheet.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Dim rect As Rectangle = New Rectangle(0, 0, SplitContainerHorizontal.Panel1.Width - 14, SplitContainerHorizontal.Panel1.Height - 14)
-            Dim img As Image = New Bitmap(rect.Width, rect.Height)
-            SplitContainerHorizontal.Panel1.DrawToBitmap(img, SplitContainerHorizontal.Panel1.Bounds)
-            img.Save(Flowsheet.SaveFileDialog1.FileName, Imaging.ImageFormat.Png)
-            img.Dispose()
-        End If
-
     End Sub
 
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click

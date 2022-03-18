@@ -19,6 +19,8 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormSimulWizard
 
@@ -856,60 +858,6 @@ Public Class FormSimulWizard
         Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-        If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            For Each fn In Me.OpenFileDialog1.FileNames
-                Try
-                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-                        Dim ms As Streams.MaterialStream
-                        Dim proplist As New ArrayList
-                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
-                            For Each phase As BaseClasses.Phase In ms.Phases.Values
-                                phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                                phase.Compounds(comp.Name).ConstantProperties = comp
-                            Next
-                        Next
-                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                    Else
-                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Catch ex As Exception
-                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            Next
-        End If
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
-
-        Dim f As New FormImportCompoundOnline
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Try
-                Dim comp = f.BaseCompound
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-                    Dim ms As Streams.MaterialStream
-                    Dim proplist As New ArrayList
-                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
-                        For Each phase As BaseClasses.Phase In ms.Phases.Values
-                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                            phase.Compounds(comp.Name).ConstantProperties = comp
-                        Next
-                    Next
-                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                Else
-                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            Catch ex As Exception
-                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End If
-
-    End Sub
-
     Private Sub btnCloneUnits_Click(sender As Object, e As EventArgs) Handles btnCloneUnits.Click
 
         Dim newsu = New SystemsOfUnits.Units
@@ -971,7 +919,7 @@ Public Class FormSimulWizard
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
         Dim f As New FormImportCompoundOnline
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If f.ShowDialog(Me) = DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
                 If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
@@ -999,33 +947,39 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-        If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            For Each fn In Me.OpenFileDialog1.FileNames
-                Try
-                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                            Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                        End If
-                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-                        Dim ms As Streams.MaterialStream
-                        Dim proplist As New ArrayList
-                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
-                            For Each phase As BaseClasses.Phase In ms.Phases.Values
-                                phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                                phase.Compounds(comp.Name).ConstantProperties = comp
-                            Next
-                        Next
-                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                        ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-                    Else
-                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Dim jsondata = handler.ReadAllText()
+            Try
+                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(jsondata)
+                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     End If
-                Catch ex As Exception
-                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            Next
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Dim ms As Streams.MaterialStream
+                    Dim proplist As New ArrayList
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                            phase.Compounds(comp.Name).ConstantProperties = comp
+                        Next
+                    Next
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
+
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click

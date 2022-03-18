@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DWSIM.UI.Desktop.Editors</RootNamespace>
     <AssemblyName>DWSIM.UI.Desktop.Editors</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

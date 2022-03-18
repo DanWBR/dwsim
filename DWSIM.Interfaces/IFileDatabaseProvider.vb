@@ -4,6 +4,8 @@
 
     Sub PutFile(filepath As String)
 
+    Sub PutFile(stream As IO.Stream, filename As String)
+
     Function GetFileStream(filename As String) As IO.MemoryStream
 
     Function GetFileAsImage(filename As String) As Drawing.Image
@@ -11,6 +13,8 @@
     Function GetFileAsText(filename As String) As String
 
     Sub ExportFile(filename As String, exportpath As String)
+
+    Sub ExportFile(filename As String, stream As IO.MemoryStream)
 
     Sub DeleteFile(filename As String)
 

@@ -265,6 +265,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property AddObjectsWithStreams As Integer = 2 Implements IFlowsheetOptions.AddObjectsWithStreams
 
+        Public Property Simulate365FileID As String = "" Implements IFlowsheetOptions.Simulate365FileID
+
     End Class
 
 End Namespace

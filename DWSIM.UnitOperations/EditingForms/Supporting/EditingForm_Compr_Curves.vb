@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.IO
+Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.UnitOperations.UnitOperations
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.PumpOps
 
@@ -183,10 +184,15 @@ Public Class EditingForm_CompressorExpander_Curves
 
     Private Sub tsbImport_Click(sender As Object, e As EventArgs) Handles tsbImport.Click
 
-        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Dim text = handler.ReadAllText()
             Try
-                Dim data = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Integer, Dictionary(Of String, Curve)))(File.ReadAllText(OpenFileDialog1.FileName))
+                Dim data = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Integer, Dictionary(Of String, Curve)))(text)
                 If TypeOf simobj Is Compressor Then
                     Dim uo = DirectCast(simobj, Compressor)
                     uo.Curves = data
@@ -201,24 +207,38 @@ Public Class EditingForm_CompressorExpander_Curves
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error)
             End Try
-
         End If
 
     End Sub
 
     Private Sub tsbExport_Click(sender As Object, e As EventArgs) Handles tsbExport.Click
 
-        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
 
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
             Try
                 If TypeOf simobj Is Compressor Then
                     Dim uo = DirectCast(simobj, Compressor)
-                    Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(uo.Curves, Newtonsoft.Json.Formatting.Indented)
-                    File.WriteAllText(SaveFileDialog1.FileName, data)
+                    Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(simobj.Curves, Newtonsoft.Json.Formatting.Indented)
+                    Using stream As New IO.MemoryStream()
+                        Using writer As New StreamWriter(stream)
+                            writer.Write(jsondata)
+                            handler.Write(stream)
+                        End Using
+                    End Using
                 Else
                     Dim uo = DirectCast(simobj, Expander)
-                    Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(uo.Curves, Newtonsoft.Json.Formatting.Indented)
-                    File.WriteAllText(SaveFileDialog1.FileName, data)
+                    Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(simobj.Curves, Newtonsoft.Json.Formatting.Indented)
+                    Using stream As New IO.MemoryStream()
+                        Using writer As New StreamWriter(stream)
+                            writer.Write(jsondata)
+                            handler.Write(stream)
+                        End Using
+                    End Using
                 End If
             Catch ex As Exception
                 MessageBox.Show(simobj.GetFlowsheet.GetTranslatedString("Erroaosalvararquivo") & " " & ex.Message,
@@ -226,7 +246,6 @@ Public Class EditingForm_CompressorExpander_Curves
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error)
             End Try
-
         End If
 
     End Sub

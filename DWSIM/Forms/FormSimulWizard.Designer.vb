@@ -89,7 +89,6 @@ Partial Class FormSimulWizard
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage1.SuspendLayout()
         Me.WizardPage2.SuspendLayout()
@@ -608,11 +607,6 @@ Partial Class FormSimulWizard
         resources.ApplyResources(Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem, "CriarAPartirDeEstruturaUNIFACToolStripMenuItem")
         Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem.Name = "CriarAPartirDeEstruturaUNIFACToolStripMenuItem"
         '
-        'OpenFileDialog1
-        '
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
-        Me.OpenFileDialog1.Multiselect = True
-        '
         'FormSimulWizard
         '
         resources.ApplyResources(Me, "$this")
@@ -673,7 +667,6 @@ Partial Class FormSimulWizard
     Public WithEvents btnInfoLeft As System.Windows.Forms.Button
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewComboBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn

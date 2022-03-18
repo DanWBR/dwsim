@@ -21,6 +21,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 Imports System.Drawing
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class EditingForm_Column_InitialEstimates
 
@@ -181,24 +182,41 @@ Public Class EditingForm_Column_InitialEstimates
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        If Me.ofd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Initial Estimates File", "*.dwcdi")})
+
+        If handler IsNot Nothing Then
             Try
-                Dim jsondata = File.ReadAllText(ofd1.FileName)
+                Dim jsondata = handler.ReadAllText()
                 _ies = Newtonsoft.Json.JsonConvert.DeserializeObject(Of InitialEstimates)(jsondata)
-                Me.TextBox1.Text = Me.ofd1.FileName.ToString
+                Me.TextBox1.Text = handler.FullPath
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
         End If
+
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
 
-        If Me.sfd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Initial Estimates File", "*.dwcdi")})
+
+        If handler IsNot Nothing Then
             Try
                 Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(dc.InitialEstimates, Newtonsoft.Json.Formatting.Indented)
-                File.WriteAllText(sfd1.FileName, data)
-                Me.TextBox1.Text = Me.sfd1.FileName.ToString
+                Using stream As New IO.MemoryStream()
+                    Using writer As New StreamWriter(stream)
+                        writer.Write(data)
+                        handler.Write(stream)
+                    End Using
+                End Using
+                Me.TextBox1.Text = handler.FullPath
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try

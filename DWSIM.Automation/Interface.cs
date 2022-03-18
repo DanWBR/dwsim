@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DWSIM.Interfaces;
-using DWSIM.FlowsheetSolver;
 using System.Runtime.InteropServices;
 using DWSIM.UI.Desktop.Shared;
 using System.Xml.Linq;
-using DWSIM.UnitOperations.UnitOperations.Auxiliary;
 using System.IO;
 using System.Reflection;
+using DWSIM.SharedClassesCSharp.FilePicker.Windows;
 
 namespace DWSIM.Automation
 {
@@ -48,11 +44,11 @@ namespace DWSIM.Automation
             Console.WriteLine("Loading Flowsheet data, please wait...");
             if (System.IO.Path.GetExtension(filepath).ToLower().Contains("dwxmz"))
             {
-                return fm.LoadAndExtractXMLZIP(filepath, null, true);
+                return fm.LoadAndExtractXMLZIP(new WindowsFile(filepath), null, true);
             }
             else
             {
-                return fm.LoadXML(filepath, null, "", true);
+                return fm.LoadXML(new WindowsFile(filepath), null, "", true);
             }
         }
 
@@ -61,11 +57,11 @@ namespace DWSIM.Automation
             Console.WriteLine("Saving the Flowsheet, please wait...");
             if (compressed)
             {
-                fm.SaveXMLZIP(filepath, (FormFlowsheet)flowsheet);
+                fm.SaveXMLZIP(new WindowsFile(filepath), (FormFlowsheet)flowsheet);
             }
             else
             {
-                fm.SaveXML(filepath, (FormFlowsheet)flowsheet);
+                fm.SaveXML(new WindowsFile(filepath), (FormFlowsheet)flowsheet);
             }
         }
 

@@ -88,7 +88,6 @@ Partial Class FormUNIFACRegression
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TSChart = New FarsiLibrary.Win.FATabStripItem()
         Me.graph = New ZedGraph.ZedGraphControl()
-        Me.DBOpenDlg = New System.Windows.Forms.OpenFileDialog()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.TSInformation.SuspendLayout()
@@ -502,25 +501,20 @@ Partial Class FormUNIFACRegression
         'graph
         '
         resources.ApplyResources(Me.graph, "graph")
+        Me.graph.IsShowCopyMessage = False
         Me.graph.Name = "graph"
-        Me.graph.ScrollGrace = 0.0R
-        Me.graph.ScrollMaxX = 0.0R
-        Me.graph.ScrollMaxY = 0.0R
-        Me.graph.ScrollMaxY2 = 0.0R
-        Me.graph.ScrollMinX = 0.0R
-        Me.graph.ScrollMinY = 0.0R
-        Me.graph.ScrollMinY2 = 0.0R
-        '
-        'DBOpenDlg
-        '
-        Me.DBOpenDlg.CheckFileExists = False
-        resources.ApplyResources(Me.DBOpenDlg, "DBOpenDlg")
+        Me.graph.ScrollGrace = 0R
+        Me.graph.ScrollMaxX = 0R
+        Me.graph.ScrollMaxY = 0R
+        Me.graph.ScrollMaxY2 = 0R
+        Me.graph.ScrollMinX = 0R
+        Me.graph.ScrollMinY = 0R
+        Me.graph.ScrollMinY2 = 0R
         '
         'FormUNIFACRegression
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.FaTabStrip1)
         Me.Name = "FormUNIFACRegression"
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -598,7 +592,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents BtnSelectIPDB As System.Windows.Forms.Button
     Friend WithEvents BtnSaveIPDB As System.Windows.Forms.Button
     Friend WithEvents BtnNewIPDB As System.Windows.Forms.Button
-    Friend WithEvents DBOpenDlg As System.Windows.Forms.OpenFileDialog
     Friend WithEvents LblTUnit As System.Windows.Forms.Label
     Friend WithEvents TbUnifacTemp As System.Windows.Forms.TextBox
     Friend WithEvents BtnNewTemp As System.Windows.Forms.Button

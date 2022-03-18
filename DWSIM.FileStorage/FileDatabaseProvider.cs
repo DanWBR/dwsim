@@ -198,6 +198,17 @@ namespace DWSIM.FileStorage
         }
 
         /// <summary>
+        /// Stores a file in the database.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="filename"></param>
+        public void PutFile(Stream stream, string filename)
+        {
+            DB.FileStorage.Upload(filename, filename, stream);
+            DB.Checkpoint();
+        }
+
+        /// <summary>
         /// For internal use only.
         /// </summary>
         public void ReleaseDatabase()
@@ -244,6 +255,25 @@ namespace DWSIM.FileStorage
         public int GetSizeinKB()
         {
             return (int)DBMem.Length / 1024;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="stream"></param>
+        public void ExportFile(string filename, MemoryStream stream)
+        {
+            var file = DB.FileStorage.FindById(Path.GetFileName(filename));
+            if (file != null)
+            {
+                file.CopyTo(stream);
+                stream.Position = 0;
+            }
+            else
+            {
+                throw new Exception("File not found");
+            }
         }
     }
 }

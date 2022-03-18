@@ -123,4 +123,6 @@
 
     Property AddObjectsWithStreams As Integer
 
+    Property Simulate365FileID As String
+
 End Interface

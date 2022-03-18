@@ -209,10 +209,10 @@
     <value>Value</value>
   </data>
   <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>452, 267</value>
+    <value>465, 238</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 273</value>
+    <value>471, 244</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Output</value>
@@ -263,10 +263,10 @@
     <value>Disconnect</value>
   </data>
   <data name="dgoutlets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 144</value>
+    <value>465, 144</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 150</value>
+    <value>471, 150</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Outlet</value>
@@ -284,10 +284,10 @@
     <value>Disconnect</value>
   </data>
   <data name="dgenergy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 144</value>
+    <value>465, 144</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 150</value>
+    <value>471, 150</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Energy</value>
@@ -369,6 +369,9 @@
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Flowsheet Object Icon</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>501, 881</value>

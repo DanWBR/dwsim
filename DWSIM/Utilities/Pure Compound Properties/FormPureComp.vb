@@ -4,6 +4,8 @@ Imports System.IO
 Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
 Imports System.Linq
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
 '              2013-2014 Gregor Reichert
@@ -46,7 +48,7 @@ Public Class FormPureComp
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         SaveFileDialog2.FileName = MyCompound.Name
-        If Me.SaveFileDialog2.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If Me.SaveFileDialog2.ShowDialog(Me) = DialogResult.OK Then
             Try
                 MyCompound.ExportToXLSX(SaveFileDialog2.FileName)
                 MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -61,6 +63,11 @@ Public Class FormPureComp
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
+
+        If FormMain.IsPro Then
+            Button2.Enabled = False
+            Button3.Enabled = False
+        End If
 
         If Not MyCompound Is Nothing Then Me.Text = Me.Text & " - " & MyCompound.Name
 
@@ -1024,7 +1031,7 @@ Public Class FormPureComp
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
-        If loaded Then
+        If Loaded Then
             Dim name As String = ComboBox1.SelectedItem.ToString
             MyCompound = Me.Flowsheet.Options.SelectedComponents(name)
             constprop = MyCompound
@@ -1045,7 +1052,7 @@ Public Class FormPureComp
                 Next
             End With
             Me.ComboBox1.Enabled = True
-            loaded = True
+            Loaded = True
             Me.ComboBox1.SelectedIndex = 0
         Else
 
@@ -1066,13 +1073,25 @@ Public Class FormPureComp
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Try
-                File.WriteAllText(Me.SaveFileDialog1.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(constprop, Newtonsoft.Json.Formatting.Indented))
-                MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream)
+                    Try
+                        Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(constprop, Newtonsoft.Json.Formatting.Indented)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
         End If
     End Sub
 
@@ -1090,10 +1109,12 @@ Public Class FormPureComp
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim comps As New List(Of ConstantProperties)
-        If Me.sfdxml1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If Me.sfdxml1.ShowDialog() = DialogResult.OK Then
             Try
                 If Not File.Exists(sfdxml1.FileName) Then File.Create(sfdxml1.FileName).Close()
-                Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {constprop}, sfdxml1.FileName, True)
+                Using stream = New FileStream(sfdxml1.FileName, FileMode.OpenOrCreate)
+                    Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {constprop}, stream, True)
+                End Using
                 MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)

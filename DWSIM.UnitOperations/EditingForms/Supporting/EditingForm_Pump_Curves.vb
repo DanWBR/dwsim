@@ -2,6 +2,7 @@
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports System.Drawing
 Imports System.IO
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class EditingForm_Pump_Curves
 
@@ -86,38 +87,6 @@ Public Class EditingForm_Pump_Curves
                     .Add(New Object() {curve.x(i), curve.y(i)})
                 Next
             End With
-        End If
-
-        If selectedpump.PumpDB <> "" Then
-            Dim FileInfo As New FileInfo(selectedpump.PumpDB)
-
-            If FileInfo.Exists Then
-                TsTBDatabase.Text = FileInfo.Name
-                DatabaseFileName = selectedpump.PumpDB
-                TsTBDatabase.ToolTipText = DatabaseFileName
-                TsTBDatabase.BackColor = System.Drawing.SystemColors.Control
-                TSBtnSaveToDB.Enabled = True
-                TSBtnDeletePump.Enabled = True
-                TSBtnDisconnectDB.Enabled = True
-
-                Dim PT As String() = Databases.PumpDB.ReadPumpTypes(DatabaseFileName)
-                TSCBTypes.Items.Clear()
-                TSCBTypes.Items.AddRange(PT)
-                TSCBTypes.Text = selectedpump.PumpType
-            Else
-
-                TsTBDatabase.Text = ResMan.GetLocalString("PUMP_Err3")
-                DatabaseFileName = ""
-                TsTBDatabase.ToolTipText = selectedpump.PumpDB
-                TsTBDatabase.BackColor = Color.Orange
-                TSBtnSaveToDB.Enabled = False
-                TSBtnDeletePump.Enabled = False
-                TSBtnDisconnectDB.Enabled = False
-
-                TSCBTypes.Items.Clear()
-                TSCBTypes.Text = selectedpump.PumpType
-            End If
-
         End If
 
         If selectedpump.ImpellerDiameter > 0 Then
@@ -211,102 +180,82 @@ Public Class EditingForm_Pump_Curves
 
     Private Sub ch1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch1.CheckedChanged
         If Me.loaded Then Me.selectedpump.Curves("HEAD").Enabled = Me.ch1.Checked
-        SetStatusModified()
     End Sub
 
     Private Sub ch2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch2.CheckedChanged
         If Me.loaded Then Me.selectedpump.Curves("POWER").Enabled = Me.ch2.Checked
-        SetStatusModified()
     End Sub
 
     Private Sub ch3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch3.CheckedChanged
         If Me.loaded Then Me.selectedpump.Curves("EFF").Enabled = Me.ch3.Checked
-        SetStatusModified()
     End Sub
 
     Private Sub ch4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch4.CheckedChanged
         If Me.loaded Then Me.selectedpump.Curves("NPSH").Enabled = Me.ch4.Checked
-        SetStatusModified()
     End Sub
 
     Private Sub ch5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch5.CheckedChanged
         If Me.loaded Then Me.selectedpump.Curves("SYSTEM").Enabled = Me.ch5.Checked
-        SetStatusModified()
     End Sub
 
     Private Sub tb1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb1.TextChanged
         If Me.loaded Then Me.selectedpump.Curves("HEAD").Name = Me.tb1.Text
-        SetStatusModified()
     End Sub
 
     Private Sub tb2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb2.TextChanged
         If Me.loaded Then Me.selectedpump.Curves("POWER").Name = Me.tb2.Text
-        SetStatusModified()
     End Sub
 
     Private Sub tb3_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb3.TextChanged
         If Me.loaded Then Me.selectedpump.Curves("EFF").Name = Me.tb3.Text
-        SetStatusModified()
     End Sub
 
     Private Sub tb4_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb4.TextChanged
         If Me.loaded Then Me.selectedpump.Curves("NPSH").Name = Me.tb4.Text
-        SetStatusModified()
     End Sub
 
     Private Sub tb5_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb5.TextChanged
         If Me.loaded Then Me.selectedpump.Curves("SYSTEM").Name = Me.tb5.Text
-        SetStatusModified()
     End Sub
 
     Private Sub cb1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb1.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("HEAD").xunit = Me.cb1.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb2.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("POWER").xunit = Me.cb2.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb3.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("EFF").xunit = Me.cb3.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb4.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("NPSH").xunit = Me.cb4.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb5.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("SYSTEM").xunit = Me.cb5.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb6.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("HEAD").yunit = Me.cb6.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb7_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb7.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("POWER").yunit = Me.cb7.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb8_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb8.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("EFF").yunit = Me.cb8.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb9_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb9.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("NPSH").yunit = Me.cb9.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub cb10_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb10.SelectedIndexChanged
         If Me.loaded Then Me.selectedpump.Curves("SYSTEM").yunit = Me.cb10.SelectedItem.ToString
-        SetStatusModified()
     End Sub
 
     Private Sub dgv_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgv1.CellValueChanged, dgv5.CellValueChanged, dgv4.CellValueChanged, dgv3.CellValueChanged, dgv2.CellValueChanged
@@ -346,10 +295,6 @@ Public Class EditingForm_Pump_Curves
                         Me.selectedpump.Curves("SYSTEM").x = x
                         Me.selectedpump.Curves("SYSTEM").y = y
                 End Select
-
-                TSTBStatus.Text = ResMan.GetLocalString("PUMP_Modified")
-                TSTBStatus.BackColor = Color.Crimson
-                TSTBStatus.ForeColor = Color.White
 
             End If
 
@@ -623,142 +568,73 @@ Public Class EditingForm_Pump_Curves
 
     End Sub
 
-    Private Sub TSBtnNewDB_Click(sender As Object, e As EventArgs) Handles TSBtnNewDB.Click
-        Dim response As MsgBoxResult
-
-        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            If My.Computer.FileSystem.FileExists(OpenFileDialog1.FileName) Then
-                response = MsgBox(ResMan.GetLocalString("PUMP_Msg2"), MsgBoxStyle.YesNo Or MsgBoxStyle.Question, ResMan.GetLocalString("PUMP_Err2"))
-                If response = MsgBoxResult.No Then Exit Sub
-            End If
-
-            Databases.PumpDB.CreateNew(OpenFileDialog1.FileName, "Pumptypes")
-
-
-            Dim FileInfo As New FileInfo(OpenFileDialog1.FileName)
-            MsgBox("Pump-Database " & FileInfo.Name & ResMan.GetLocalString("PUMP_Msg1"))
-
-
-        End If
-    End Sub
-
-    Private Sub TSBtnConnectDB_Click(sender As Object, e As EventArgs) Handles TSBtnConnectDB.Click
-        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            Dim FileInfo As New FileInfo(OpenFileDialog1.FileName)
-            TsTBDatabase.Text = FileInfo.Name
-            DatabaseFileName = OpenFileDialog1.FileName
-            TsTBDatabase.ToolTipText = DatabaseFileName
-            TsTBDatabase.BackColor = System.Drawing.SystemColors.Control
-            TSBtnDisconnectDB.Enabled = True
-
-            selectedpump.PumpDB = DatabaseFileName
-
-            Dim PT As String() = Databases.PumpDB.ReadPumpTypes(DatabaseFileName)
-            TSCBTypes.Items.Clear()
-            TSCBTypes.Items.AddRange(PT)
-        End If
-    End Sub
-    Private Sub TSBtnDisconnectDB_Click(sender As Object, e As EventArgs) Handles TSBtnDisconnectDB.Click
-        TsTBDatabase.Text = ""
-        DatabaseFileName = ""
-        TSCBTypes.Items.Clear()
-        TSCBTypes.Text = ""
-        selectedpump.PumpDB = ""
-        selectedpump.PumpType = ""
-
-        TsTBDatabase.BackColor = System.Drawing.SystemColors.Control
-        TSBtnSaveToDB.Enabled = False
-        TSBtnDeletePump.Enabled = False
-        TSBtnDisconnectDB.Enabled = False
-    End Sub
-    Private Sub TSBtnSaveToDB_Click(sender As Object, e As EventArgs) Handles TSBtnSaveToDB.Click
-        If selectedpump.PumpType = "" Then
-            MsgBox(ResMan.GetLocalString("PUMP_Err1"), MsgBoxStyle.Information Or MsgBoxStyle.OkOnly)
-            Exit Sub
-        End If
-
-        Databases.PumpDB.AddPump(selectedpump, DatabaseFileName, True)
-
-        Dim PT As String() = Databases.PumpDB.ReadPumpTypes(DatabaseFileName)
-        TSCBTypes.Items.Clear()
-        TSCBTypes.Items.AddRange(PT)
-
-        TSBtnDeletePump.Enabled = True
-
-        SetStatusSaved()
-
-    End Sub
-
-    Private Sub ToolStripComboBox1_TextChanged(sender As Object, e As EventArgs) Handles TSCBTypes.TextChanged
-        selectedpump.PumpType = TSCBTypes.Text
-
-        If selectedpump.PumpDB <> "" Then TSBtnSaveToDB.Enabled = True
-    End Sub
-
-    Private Sub TSCBTypes_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TSCBTypes.KeyPress
-        If e.KeyChar = " " Then e.KeyChar = "_"
-
-        TSTBStatus.Text = ResMan.GetLocalString("PUMP_Modified")
-        TSTBStatus.BackColor = Color.Crimson
-        TSTBStatus.ForeColor = Color.White
-    End Sub
-
-    Private Sub TSCBTypes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TSCBTypes.SelectedIndexChanged
-        If loaded Then
-            selectedpump.PumpType = TSCBTypes.Text
-            Databases.PumpDB.ReadPumpData(DatabaseFileName, selectedpump.PumpType, selectedpump)
-            loaded = False
-            PumpCurvesEditorForm_Load(sender, e)
-            SetStatusSaved()
-        End If
-    End Sub
-
-    Private Sub TSBtnDeletePump_Click(sender As Object, e As EventArgs) Handles TSBtnDeletePump.Click
-        Dim FileInfo As New FileInfo(selectedpump.PumpDB)
-
-        Databases.PumpDB.RemovePump(selectedpump.PumpDB, selectedpump.PumpType)
-        TSCBTypes.Text = ""
-
-        Dim PT As String() = Databases.PumpDB.ReadPumpTypes(DatabaseFileName)
-        TSCBTypes.Items.Clear()
-        TSCBTypes.Items.AddRange(PT)
-
-        TSBtnSaveToDB.Enabled = False
-        TSBtnDeletePump.Enabled = False
-    End Sub
     Private Sub TBImpellerDiam_TextChanged(sender As Object, e As EventArgs) Handles TBImpellerDiam.TextChanged
         If loaded Then
             selectedpump.ImpellerDiameter = TBImpellerDiam.Text
-            SetStatusModified()
         End If
     End Sub
 
     Private Sub TB_RPM_TextChanged(sender As Object, e As EventArgs) Handles TBImpellerSpeed.TextChanged
         If loaded Then
             selectedpump.ImpellerSpeed = TBImpellerSpeed.Text
-            SetStatusModified()
         End If
+    End Sub
+
+    Private Sub EditingForm_Pump_Curves_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub tsbImport_Click(sender As Object, e As EventArgs) Handles tsbImport.Click
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Dim text = handler.ReadAllText()
+            Try
+                Dim data = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, UnitOperations.Auxiliary.PumpOps.Curve))(text)
+                selectedpump.Curves = data
+                PumpCurvesEditorForm_Load(sender, e)
+            Catch ex As Exception
+                MessageBox.Show(selectedpump.GetFlowsheet.GetTranslatedString("ErrorAddingComponent") & " " & ex.Message,
+                                selectedpump.GetFlowsheet.GetTranslatedString("Erro"),
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub tsbExport_Click(sender As Object, e As EventArgs) Handles tsbExport.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Try
+                Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(selectedpump.Curves, Newtonsoft.Json.Formatting.Indented)
+                Using stream As New IO.MemoryStream()
+                    Using writer As New StreamWriter(stream)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show(selectedpump.GetFlowsheet.GetTranslatedString("Erroaosalvararquivo") & " " & ex.Message,
+                                selectedpump.GetFlowsheet.GetTranslatedString("Erro"),
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error)
+            End Try
+        End If
+
     End Sub
 
     Private Sub CBDiameterUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBDiameterUnit.SelectedIndexChanged
         If loaded Then
             selectedpump.DiameterUnit = CBDiameterUnit.Text
-            SetStatusModified()
         End If
     End Sub
 
-    Private Sub SetStatusModified()
-        If loaded Then
-            TSTBStatus.Text = ResMan.GetLocalString("PUMP_Modified")
-            TSTBStatus.BackColor = Color.Crimson
-            TSTBStatus.ForeColor = Color.White
-        End If
-    End Sub
-    Private Sub SetStatusSaved()
-        If loaded Then
-            TSTBStatus.Text = ResMan.GetLocalString("PUMP_Saved")
-            TSTBStatus.BackColor = Color.Lime
-            TSTBStatus.ForeColor = Color.Black
-        End If
-    End Sub
 End Class

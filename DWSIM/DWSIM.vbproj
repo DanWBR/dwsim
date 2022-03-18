@@ -2948,6 +2948,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\save file s365.png" />
     <None Include="Resources\s365 logo.jpg" />
     <None Include="Resources\s365_logo_login.png" />
     <None Include="Resources\s365_logo_login.bmp" />
@@ -3243,6 +3244,8 @@
     <None Include="Resources\icons8-coins.png" />
     <None Include="Resources\icons8-scatter_plot.png" />
     <None Include="Resources\icons8-volunteering.png" />
+    <None Include="Resources\icons8-opened_folder3.png" />
+    <None Include="Resources\open file s365.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

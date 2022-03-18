@@ -4,6 +4,7 @@ Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class EditingForm_SpreadsheetUO
 
@@ -126,6 +127,20 @@ Public Class EditingForm_SpreadsheetUO
 
             'parameters
             .ReadExcelParams()
+
+            If .FileIsEmbedded Then
+                rbFileEmbedded.Checked = True
+            Else
+                rbFileExternal.Checked = True
+            End If
+
+            Dim files = .FlowSheet.FileDatabaseProvider.GetFiles()
+            cbEmbeddedFiles.Items.Clear()
+            cbEmbeddedFiles.Items.AddRange(files.ToArray())
+            Try
+                cbEmbeddedFiles.SelectedItem = .EmbeddedFileName
+            Catch ex As Exception
+            End Try
 
             dgvinputvars.Rows.Clear()
             For Each par In .InputParams
@@ -430,6 +445,14 @@ Public Class EditingForm_SpreadsheetUO
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        If Not TypeOf filePickerForm Is DWSIM.SharedClassesCSharp.FilePicker.Windows.WindowsFilePicker Then
+            MessageBox.Show("Sorry, this feature is not available. Try using an embedded file instead.")
+            Exit Sub
+        End If
+
         OpenFileDialog1.FileName = TbFileName.Text
         OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xlsm; *.xls; *.ods"
 
@@ -460,6 +483,13 @@ Public Class EditingForm_SpreadsheetUO
     End Sub
 
     Private Sub BtnNew_Click(sender As Object, e As EventArgs) Handles BtnNew.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        If Not TypeOf filePickerForm Is DWSIM.SharedClassesCSharp.FilePicker.Windows.WindowsFilePicker Then
+            MessageBox.Show("Sorry, this feature is not available. Try using an embedded file instead.")
+            Exit Sub
+        End If
 
         Dim FileName As String = SimObject.GraphicObject.Name
 
@@ -509,4 +539,22 @@ Public Class EditingForm_SpreadsheetUO
 
     End Sub
 
+    Private Sub rbFileEmbedded_CheckedChanged(sender As Object, e As EventArgs) Handles rbFileEmbedded.CheckedChanged, rbFileExternal.CheckedChanged
+        If rbFileEmbedded.Checked Then
+            Panel1.Enabled = False
+            cbEmbeddedFiles.Enabled = True
+            SimObject.FileIsEmbedded = True
+        End If
+        If rbFileExternal.Checked Then
+            Panel1.Enabled = True
+            cbEmbeddedFiles.Enabled = False
+            SimObject.FileIsEmbedded = False
+        End If
+    End Sub
+
+    Private Sub cbEmbeddedFiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEmbeddedFiles.SelectedIndexChanged
+        If Loaded Then
+            SimObject.EmbeddedFileName = cbEmbeddedFiles.SelectedItem.ToString()
+        End If
+    End Sub
 End Class

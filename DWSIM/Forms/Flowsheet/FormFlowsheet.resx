@@ -117,207 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="DataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 100</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DataGridView1.Name" xml:space="preserve">
-    <value>DataGridView1</value>
-  </data>
-  <data name="&gt;&gt;DataGridView1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
-    <value>TSTable</value>
-  </data>
-  <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TSTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 100</value>
-  </data>
-  <data name="TSTable.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="TSTable.Title" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;TSTable.Name" xml:space="preserve">
-    <value>TSTable</value>
-  </data>
-  <data name="&gt;&gt;TSTable.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 24</value>
-  </data>
-  <data name="FileTSMI.Text" xml:space="preserve">
-    <value>&amp;Arquivo</value>
-  </data>
-  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 24</value>
-  </data>
-  <data name="EditTSMI.Text" xml:space="preserve">
-    <value>E&amp;ditar</value>
-  </data>
-  <data name="InsertTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 24</value>
-  </data>
-  <data name="InsertTSMI.Text" xml:space="preserve">
-    <value>Inserir</value>
-  </data>
-  <data name="ToolsTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 24</value>
-  </data>
-  <data name="ToolsTSMI.Text" xml:space="preserve">
-    <value>&amp;Ferramentas</value>
-  </data>
-  <data name="CapitalCostEstimatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="CapitalCostEstimatorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Capital Cost Estimator</value>
-  </data>
-  <data name="CapitalCostEstimatorToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Upgrade to DWSIM Pro</value>
-  </data>
-  <data name="ExcelReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="ExcelReportsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Excel Reports</value>
-  </data>
-  <data name="ExcelReportsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Upgrade to DWSIM Pro</value>
-  </data>
-  <data name="ProToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 24</value>
-  </data>
-  <data name="ProToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Pro Tools</value>
-  </data>
-  <data name="DynamicsTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 24</value>
-  </data>
-  <data name="DynamicsTSMI.Text" xml:space="preserve">
-    <value>&amp;Modo Dinâmico</value>
-  </data>
-  <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 24</value>
-  </data>
-  <data name="UtilitiesTSMI.Text" xml:space="preserve">
-    <value>&amp;Utilitários</value>
-  </data>
-  <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
-    <value>Mostra uma lista de utilitários associados a objetos no fluxograma.</value>
-  </data>
-  <data name="MultivariateSensitivityStudyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="MultivariateSensitivityStudyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Multivariate Sensitivity Study</value>
-  </data>
-  <data name="MultivariateSensitivityStudyToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Upgrade to DWSIM Pro</value>
-  </data>
-  <data name="DesignOfExperimentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="DesignOfExperimentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Design of Experiments</value>
-  </data>
-  <data name="DesignOfExperimentsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Upgrade to DWSIM Pro</value>
-  </data>
-  <data name="OptimumTesterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="OptimumTesterToolStripMenuItem.Text" xml:space="preserve">
-    <value>Optimum Tester</value>
-  </data>
-  <data name="OptimumTesterToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Upgrade to DWSIM Pro</value>
-  </data>
-  <data name="DashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 24</value>
-  </data>
-  <data name="DashboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Dashboard</value>
-  </data>
-  <data name="OptimizationTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 24</value>
-  </data>
-  <data name="OptimizationTSMI.Text" xml:space="preserve">
-    <value>&amp;Otimização</value>
-  </data>
-  <data name="ResultsTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 24</value>
-  </data>
-  <data name="ResultsTSMI.Text" xml:space="preserve">
-    <value>&amp;Resultados</value>
-  </data>
-  <data name="PluginsTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 24</value>
-  </data>
-  <data name="PluginsTSMI.Text" xml:space="preserve">
-    <value>&amp;Plugins</value>
-  </data>
-  <data name="ShowTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 24</value>
-  </data>
-  <data name="ShowTSMI.Text" xml:space="preserve">
-    <value>&amp;Exibir</value>
-  </data>
-  <data name="MenuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="MenuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1444, 24</value>
-  </data>
-  <data name="MenuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="MenuStrip1.Text" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.Name" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CloseToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F4</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 22</value>
   </data>
   <data name="CloseToolStripMenuItem.Text" xml:space="preserve">
     <value>Fechar Simulação Atual</value>
   </data>
+  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 24</value>
+  </data>
+  <data name="FileTSMI.Text" xml:space="preserve">
+    <value>&amp;Arquivo</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tsmiUndo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -405,6 +225,12 @@
   <data name="tsmiConfigSimulation.Text" xml:space="preserve">
     <value>Configurações da Simulação</value>
   </data>
+  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 24</value>
+  </data>
+  <data name="EditTSMI.Text" xml:space="preserve">
+    <value>E&amp;ditar</value>
+  </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+A</value>
   </data>
@@ -468,6 +294,12 @@
   <data name="BotãoToolStripMenuItem.Text" xml:space="preserve">
     <value>Botão</value>
   </data>
+  <data name="InsertTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 24</value>
+  </data>
+  <data name="InsertTSMI.Text" xml:space="preserve">
+    <value>Inserir</value>
+  </data>
   <data name="CompoundCreatorWizardTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 22</value>
   </data>
@@ -506,6 +338,36 @@
   </data>
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 6</value>
+  </data>
+  <data name="ToolsTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 24</value>
+  </data>
+  <data name="ToolsTSMI.Text" xml:space="preserve">
+    <value>&amp;Ferramentas</value>
+  </data>
+  <data name="CapitalCostEstimatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="CapitalCostEstimatorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Capital Cost Estimator</value>
+  </data>
+  <data name="CapitalCostEstimatorToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Upgrade to DWSIM Pro</value>
+  </data>
+  <data name="ExcelReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="ExcelReportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Excel Reports</value>
+  </data>
+  <data name="ExcelReportsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Upgrade to DWSIM Pro</value>
+  </data>
+  <data name="ProToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 24</value>
+  </data>
+  <data name="ProToolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Pro Tools</value>
   </data>
   <data name="ModoDinamicoAtivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 22</value>
@@ -585,6 +447,12 @@
   <data name="FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Text" xml:space="preserve">
     <value>Sintonia de Controladores PID</value>
   </data>
+  <data name="DynamicsTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 24</value>
+  </data>
+  <data name="DynamicsTSMI.Text" xml:space="preserve">
+    <value>&amp;Modo Dinâmico</value>
+  </data>
   <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -593,6 +461,48 @@
   </data>
   <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
     <value>Adicionar Utilidade</value>
+  </data>
+  <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 24</value>
+  </data>
+  <data name="UtilitiesTSMI.Text" xml:space="preserve">
+    <value>&amp;Utilitários</value>
+  </data>
+  <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
+    <value>Mostra uma lista de utilitários associados a objetos no fluxograma.</value>
+  </data>
+  <data name="MultivariateSensitivityStudyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="MultivariateSensitivityStudyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Multivariate Sensitivity Study</value>
+  </data>
+  <data name="MultivariateSensitivityStudyToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Upgrade to DWSIM Pro</value>
+  </data>
+  <data name="DesignOfExperimentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="DesignOfExperimentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Design of Experiments</value>
+  </data>
+  <data name="DesignOfExperimentsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Upgrade to DWSIM Pro</value>
+  </data>
+  <data name="OptimumTesterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 22</value>
+  </data>
+  <data name="OptimumTesterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Optimum Tester</value>
+  </data>
+  <data name="OptimumTesterToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Upgrade to DWSIM Pro</value>
+  </data>
+  <data name="DashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 24</value>
+  </data>
+  <data name="DashboardToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Dashboard</value>
   </data>
   <data name="AnaliseDeSensibilidadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 22</value>
@@ -606,17 +516,35 @@
   <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
     <value>Otimização Multivariável</value>
   </data>
+  <data name="OptimizationTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 24</value>
+  </data>
+  <data name="OptimizationTSMI.Text" xml:space="preserve">
+    <value>&amp;Otimização</value>
+  </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Relatórios</value>
   </data>
+  <data name="ResultsTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 24</value>
+  </data>
+  <data name="ResultsTSMI.Text" xml:space="preserve">
+    <value>&amp;Resultados</value>
+  </data>
   <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
   </data>
   <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Text" xml:space="preserve">
     <value>Plugins CAPE-OPEN</value>
+  </data>
+  <data name="PluginsTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 24</value>
+  </data>
+  <data name="PluginsTSMI.Text" xml:space="preserve">
+    <value>&amp;Plugins</value>
   </data>
   <data name="varpaneltsmi.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 22</value>
@@ -651,6 +579,39 @@
   <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
     <value>Fechar Editores Abertos</value>
   </data>
+  <data name="ShowTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 24</value>
+  </data>
+  <data name="ShowTSMI.Text" xml:space="preserve">
+    <value>&amp;Exibir</value>
+  </data>
+  <data name="MenuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="MenuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1444, 24</value>
+  </data>
+  <data name="MenuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="MenuStrip1.Text" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.Name" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
   </data>
@@ -675,45 +636,6 @@
   <metadata name="bgCalc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>258, 17</value>
   </metadata>
-  <data name="dckPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dckPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="dckPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>48, 22, 48, 22</value>
-  </data>
-  <data name="dckPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1444, 857</value>
-  </data>
-  <data name="dckPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;dckPanel.Name" xml:space="preserve">
-    <value>dckPanel</value>
-  </data>
-  <data name="&gt;&gt;dckPanel.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockPanel, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dckPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dckPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>480, 17</value>
-  </metadata>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>PNG Image|*.png</value>
-  </data>
-  <data name="SaveFileDialog1.Title" xml:space="preserve">
-    <value>Save Flowsheet as Image</value>
-  </data>
-  <metadata name="OpenFileName.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>347, 17</value>
-  </metadata>
   <metadata name="TimerScripts1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>617, 17</value>
   </metadata>
@@ -732,33 +654,6 @@
   <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>413, 56</value>
   </metadata>
-  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="ToolStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 16, 0</value>
-  </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1444, 25</value>
-  </data>
-  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="ToolStrip1.Text" xml:space="preserve">
-    <value>ToolStrip1</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
-    <value>ToolStrip1</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ToolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -861,27 +756,27 @@
   <data name="tsbDynManager.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="tsbDynManager.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -896,29 +791,29 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        roSEfwAXh/xXEyoaeQAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUTSURBVFhHxVdbU1NXFOal7+1j+zPa5z45007pgw/ttE/W
+        SwGFUrVeEKhcpIgDihUQQblKwVKDchlrEgEDJLAht3MSSEIukNDBC1Icdfrc1f0t3KeQxFYZ1DPzzd77
+        2+tkfWfttVbOyVBX2c8d7xZXt39YeK7lo9eJ49WtHzx3+e9VXtd14nR972qLybLac8P2tFWOG9HWN/wY
+        SObT2bbfHF27OjT+JJkHh72z7TceVTR09T53nZFReObSe3Aef/SUllaf0V09yuNG6AsPGMl8Otv55TUS
+        waUUHhz2ML9oGlwrqr7yMQtA2Jv6rI+U4ZsQ0NU//HdRTWs2C8C5IJT4McDsCvG4EcOeMCOZT2c7okXI
+        6p5P4cFhD3Oz8JP0m2MIwBkppTBQc4WNEYgvLht8OtuXiYB5Utu6gLBl1ODfioC5i80G/+YFyErxHvrB
+        4LdNAGpcOUGyqbnCVGCJoelhmv7qa4NPZ+sKL9OYvpDCg8Me5uYpfWsCvDZB4pNPSY/eS7HVpjQetyTg
+        ZY8gbB4hsWMHLUYSKbbBX02UeLC2PTkQjy4xFKcEBHt+o+nPMikqPIatspmtvUALenB7BERsDopKKE4J
+        mK1vJG/+QQr/bjVslY12/ASX6LYICHb3MhSnBOjlFTR7oYGCXdcMW2Xj2vUNBTq7tyYguRXbSyoYikOy
+        AZM5uTT+y3WaqKw2bNlGC5PIzJT3nNqeVuw5eJihOBUB97dZtOCfJ/1kmWGLcTEYY3vv4SNpI4B7XukI
+        4AhQHAuI3Sd3dg4l7v1Jnrx8wxZjZGSC88OdlZ0iABUz19zyCgJkjXpktwPi8fvMQYDmi5D3yFFeK3FK
+        AKojdP0meXLzKJR4uEkAEhb3vbSAsQEL+WpqGdFJJ3MQ4B2bJl/lGV4jEmjLSgBKMDIhSC87RQGnf5OA
+        2fN1NLNzJ4lA4sUC8KqETWCsqYP0zmvk6+ghX4+JOafsYDOmIdIamnntPnKcgnMxGvFG1tdHCygUkN1P
+        /lF5+81kn40zD7j25/K+w2on3+IKc7eTOyHe16AaGC+vIjFglbCQqKphbswXo4nGVhJt3bwWZZUkzDay
+        utaTS+zZx08orvbSZMMVGpXCmJcREvuySVzuoHF5v0MKA28WvhcfgSP/kNEJvccKmMMRuM7KMMtkw3ru
+        ShufLY4gsfKEPPsPMB+dcpP3dDU74bV9mvzV5yjm9pEoKuGnB/+fOTC1azePALIaIwQ4i0toQQvwOtQ3
+        yM0IAlCCmtwDH1+8Ry6ZvEpAoLWT5vtvsUhE6X8FoMQms/azEeDJ/Y4Sy6ssYAbzP1aYR6v2y44IAaoE
+        1T1OWSFKgHaiiAViLvK+5zzB/IUCYk6dHMWlxo/5fqqimEtfF7Bnr8FzMyopZwFo2SFTv7GHpBN+6UhW
+        iVs+teLFuTryD1p4niKg79Klv0RpBQl5/mO1jesJBMiEAuc4Wc5HY/A+mVxffEnjRaUkdu8lMXTH2Jsq
+        +JEcxwr5zIWsFsXbegdkQsroSD+jTe2bBbS19T0O2F0EjDp0o4RC4SXmnMN2mplwGTwQcLjp7tAw74fi
+        Dw1e9wTJcdvGfNC/XqaAXYuSJl9owFvkviGg+Hzz+/hcUqFSzWUjcARAMp/OFs7wxMk8OOxh3n3rzrOC
+        s62fswBc+FbD5xK+WPBPhTPaBNk4GMl8Gls0GdR5Mg8Oe3B+qr5Ly7l8+Z3n7tcvfKvhcwmheZ3Ak6c4
+        f3tXRsY/ivz8RULLJsIAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsbDynIntegrator.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -969,11 +864,104 @@
   <data name="tsbDeleteSolution.Text" xml:space="preserve">
     <value>Remover Selecionado</value>
   </data>
+  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="ToolStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 16, 0</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1444, 25</value>
+  </data>
+  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="ToolStrip1.Text" xml:space="preserve">
+    <value>ToolStrip1</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
+    <value>ToolStrip1</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dckPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dckPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="dckPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
+  <data name="dckPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1444, 857</value>
+  </data>
+  <data name="dckPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;dckPanel.Name" xml:space="preserve">
+    <value>dckPanel</value>
+  </data>
+  <data name="&gt;&gt;dckPanel.Type" xml:space="preserve">
+    <value>WeifenLuo.WinFormsUI.Docking.DockPanel, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dckPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dckPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="DataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="DataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 100</value>
+  </data>
+  <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;DataGridView1.Name" xml:space="preserve">
+    <value>DataGridView1</value>
+  </data>
+  <data name="&gt;&gt;DataGridView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
+    <value>TSTable</value>
+  </data>
+  <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TSTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 100</value>
+  </data>
+  <data name="TSTable.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TSTable.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;TSTable.Name" xml:space="preserve">
+    <value>TSTable</value>
+  </data>
+  <data name="&gt;&gt;TSTable.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>58</value>
+    <value>88</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
@@ -1273,6 +1261,30 @@
   <data name="&gt;&gt;TSMIAddUtility.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;DashboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>DashboardToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;DashboardToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MultivariateSensitivityStudyToolStripMenuItem.Name" xml:space="preserve">
+    <value>MultivariateSensitivityStudyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;MultivariateSensitivityStudyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DesignOfExperimentsToolStripMenuItem.Name" xml:space="preserve">
+    <value>DesignOfExperimentsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;DesignOfExperimentsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OptimumTesterToolStripMenuItem.Name" xml:space="preserve">
+    <value>OptimumTesterToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OptimumTesterToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;OptimizationTSMI.Name" xml:space="preserve">
     <value>OptimizationTSMI</value>
   </data>
@@ -1357,30 +1369,6 @@
   <data name="&gt;&gt;tsmiCloseOpenedEditors.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DashboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>DashboardToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;DashboardToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MultivariateSensitivityStudyToolStripMenuItem.Name" xml:space="preserve">
-    <value>MultivariateSensitivityStudyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;MultivariateSensitivityStudyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DesignOfExperimentsToolStripMenuItem.Name" xml:space="preserve">
-    <value>DesignOfExperimentsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;DesignOfExperimentsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OptimumTesterToolStripMenuItem.Name" xml:space="preserve">
-    <value>OptimumTesterToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;OptimumTesterToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
     <value>ToolStripMenuItem1</value>
   </data>
@@ -1410,18 +1398,6 @@
   </data>
   <data name="&gt;&gt;bgCalc.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SaveFileDialog1.Name" xml:space="preserve">
-    <value>SaveFileDialog1</value>
-  </data>
-  <data name="&gt;&gt;SaveFileDialog1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OpenFileName.Name" xml:space="preserve">
-    <value>OpenFileName</value>
-  </data>
-  <data name="&gt;&gt;OpenFileName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TimerScripts1.Name" xml:space="preserve">
     <value>TimerScripts1</value>

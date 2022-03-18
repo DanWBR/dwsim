@@ -30,6 +30,8 @@ Imports System.Linq
 Imports System.IO
 Imports DWSIM.Thermodynamics.Databases.KDBLink
 Imports DWSIM.Simulate365.Models
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormDataRegression
 
@@ -3844,8 +3846,12 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     Private Sub SalvarEmBancoDeDadosXMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalvarEmBancoDeDadosXMLToolStripMenuItem.Click
 
-        Me.SaveFileDialog1.FileName = currcase.databasepath
-        If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("XML File", "*.xml")})
+
+        If handler IsNot Nothing Then
             'Save Regression results to database
             If IP.Parameters.Count > 0 Then
                 With currcase
@@ -3856,16 +3862,22 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                     IP.Description = .description
                     IP.RegressionFile = .filename
                 End With
-                If Me.SaveFileDialog1.FileName <> "" Then
-                    currcase.databasepath = Me.SaveFileDialog1.FileName
-                    If Not File.Exists(SaveFileDialog1.FileName) Then File.WriteAllText(SaveFileDialog1.FileName, "")
-                    Try
-                        Global.DWSIM.Thermodynamics.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, Me.SaveFileDialog1.FileName, True)
-                        MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
-                    Catch ex As Exception
-                        MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End Try
-                End If
+                currcase.databasepath = handler.FullPath
+                Try
+                    Using stream As New MemoryStream
+                        If handler.Exists() Then
+                            Using str = handler.OpenRead()
+                                str.CopyTo(stream)
+                                stream.Position = 0
+                            End Using
+                        End If
+                        Global.DWSIM.Thermodynamics.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, stream, True)
+                        handler.Write(stream)
+                    End Using
+                    MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
+                Catch ex As Exception
+                    MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
             Else
                 MessageBox.Show(DWSIM.App.GetLocalString("NoRegParmsAvail"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If

@@ -24,11 +24,11 @@ Partial Class FormSimulSettings
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulSettings))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -112,10 +112,6 @@ Partial Class FormSimulSettings
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.PanelUnits = New System.Windows.Forms.Panel()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
-        Me.ofdcs = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -164,7 +160,6 @@ Partial Class FormSimulSettings
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -372,8 +367,8 @@ Partial Class FormSimulSettings
         '
         'Column1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle21
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -386,8 +381,8 @@ Partial Class FormSimulSettings
         '
         'Column3
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle22
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -516,8 +511,8 @@ Partial Class FormSimulSettings
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle23
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.colAdd, Me.Column6, Me.colTag, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
         Me.ogc1.Name = "ogc1"
@@ -826,9 +821,9 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle24
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -837,9 +832,9 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle25
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
@@ -857,26 +852,6 @@ Partial Class FormSimulSettings
         Me.PanelUnits.Controls.Add(Me.GroupBox5)
         Me.PanelUnits.Name = "PanelUnits"
         Me.ToolTip1.SetToolTip(Me.PanelUnits, resources.GetString("PanelUnits.ToolTip"))
-        '
-        'OpenFileDialog1
-        '
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
-        Me.OpenFileDialog1.SupportMultiDottedExtensions = True
-        '
-        'SaveFileDialog1
-        '
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        '
-        'OpenFileDialog2
-        '
-        resources.ApplyResources(Me.OpenFileDialog2, "OpenFileDialog2")
-        '
-        'ofdcs
-        '
-        Me.ofdcs.AddExtension = False
-        resources.ApplyResources(Me.ofdcs, "ofdcs")
-        Me.ofdcs.RestoreDirectory = True
-        Me.ofdcs.SupportMultiDottedExtensions = True
         '
         'TabControl1
         '
@@ -1275,11 +1250,6 @@ Partial Class FormSimulSettings
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Help"
         '
-        'OpenFileDialog3
-        '
-        resources.ApplyResources(Me.OpenFileDialog3, "OpenFileDialog3")
-        Me.OpenFileDialog3.Multiselect = True
-        '
         'FontDialog1
         '
         Me.FontDialog1.ShowColor = True
@@ -1294,6 +1264,7 @@ Partial Class FormSimulSettings
         Me.HideOnClose = True
         Me.Name = "FormSimulSettings"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        Me.ShowInTaskbar = False
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -1368,17 +1339,13 @@ Partial Class FormSimulSettings
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents PanelPP As System.Windows.Forms.Panel
     Public WithEvents PanelUnits As System.Windows.Forms.Panel
-    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents GroupBox18 As System.Windows.Forms.GroupBox
     Public WithEvents KryptonButton23 As System.Windows.Forms.Button
     Public WithEvents KryptonButton22 As System.Windows.Forms.Button
     Public WithEvents KryptonButton18 As System.Windows.Forms.Button
     Public WithEvents KryptonButton15 As System.Windows.Forms.Button
-    Public WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-    Public WithEvents OpenFileDialog2 As System.Windows.Forms.OpenFileDialog
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents ogc1 As System.Windows.Forms.DataGridView
-    Public WithEvents ofdcs As System.Windows.Forms.OpenFileDialog
     Public WithEvents TextBox1 As System.Windows.Forms.TextBox
     Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents GroupBox12 As System.Windows.Forms.GroupBox
@@ -1420,7 +1387,6 @@ Partial Class FormSimulSettings
     Friend WithEvents Column16 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents OpenFileDialog3 As System.Windows.Forms.OpenFileDialog
     Public WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox16 As System.Windows.Forms.GroupBox

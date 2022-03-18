@@ -33,6 +33,13 @@ Public Class FormOptions
 
         Dim i As Integer = 0
 
+        If FormMain.IsPro Then
+            KryptonButton1.Enabled = False
+            btnSelectPythonPath.Enabled = False
+            Button4.Enabled = False
+            Button7.Enabled = False
+        End If
+
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
         Me.chkEnableGPUProcessing.Checked = My.Settings.EnableGPUProcessing
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
