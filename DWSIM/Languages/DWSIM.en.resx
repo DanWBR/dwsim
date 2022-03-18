@@ -5939,4 +5939,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="HXLMTDF" xml:space="preserve">
     <value>LMTD Correction Factor (Shell and Tube)</value>
   </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
 </root>

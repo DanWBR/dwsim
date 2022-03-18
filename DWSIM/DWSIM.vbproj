@@ -1482,6 +1482,9 @@
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLoadingSimulation.en.resx">
+      <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadingSimulation.resx">
       <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
     </EmbeddedResource>

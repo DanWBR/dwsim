@@ -1070,13 +1070,13 @@ Public Class FormMain
                                        If MessageBox.Show(sb.ToString, "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
                                            Dim floading As New FormLoadingSimulation
                                            Dim fdlding As New FormLoadingSimulation
-                                           fdlding.Label1.Text = "Downloading file..." & " (" & item.Title & ")"
+                                           fdlding.Text = "Downloading file..." & " (" & item.Title & ")"
                                            fdlding.Show()
                                            Application.DoEvents()
                                            Task.Factory.StartNew(Function()
                                                                      Return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(item.DownloadLink, Sub(px)
                                                                                                                                                     Me.UIThread(Sub()
-                                                                                                                                                                    fdlding.Label1.Text = "Downloading file... (" & px & "%) (" & item.Title & ")"
+                                                                                                                                                                    fdlding.Text = "Downloading file... (" & px & "%) (" & item.Title & ")"
                                                                                                                                                                     fdlding.ProgressBar1.Value = px
                                                                                                                                                                     fdlding.Refresh()
                                                                                                                                                                 End Sub)
@@ -1088,7 +1088,7 @@ Public Class FormMain
                                                                                                 Else
                                                                                                     Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
                                                                                                     Me.UIThread(Sub()
-                                                                                                                    floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & " (" & item.Title & ")"
+                                                                                                                    floading.Text = DWSIM.App.GetLocalString("Loading") + " " + item.Title
                                                                                                                     floading.Show()
                                                                                                                     Application.DoEvents()
                                                                                                                     Try
@@ -3513,7 +3513,7 @@ Label_00CC:
 
         Dim floading As New FormLoadingSimulation
 
-        floading.Label1.Text = Path.GetFileNameWithoutExtension(handler.FullPath)
+        floading.Text = DWSIM.App.GetLocalString("Loading") + " " + Path.GetFileNameWithoutExtension(handler.FullPath)
         floading.Show()
 
         Application.DoEvents()
@@ -3821,7 +3821,7 @@ Label_00CC:
 
                 Dim floading As New FormLoadingSimulation
 
-                floading.Label1.Text = Path.GetFileName(myLink.Tag.ToString())
+                floading.Text = DWSIM.App.GetLocalString("Loading") + " " + Path.GetFileNameWithoutExtension(myLink.Tag.ToString())
                 floading.Show()
 
                 Application.DoEvents()

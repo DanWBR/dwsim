@@ -8938,6 +8938,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Carregando.
+        '''</summary>
+        Friend Shared ReadOnly Property Loading() As String
+            Get
+                Return ResourceManager.GetString("Loading", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Carregando arquivo....
         '''</summary>
         Friend Shared ReadOnly Property LoadingFile() As String

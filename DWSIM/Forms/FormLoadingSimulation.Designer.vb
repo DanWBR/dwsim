@@ -22,45 +22,32 @@ Partial Class FormLoadingSimulation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormLoadingSimulation))
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(16, 11)
+        resources.ApplyResources(Me.ProgressBar1, "ProgressBar1")
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(665, 23)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.ProgressBar1.TabIndex = 0
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(16, 43)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(665, 20)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Label1"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FormLoadingSimulation
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(697, 73)
-        Me.Controls.Add(Me.Label1)
+        Me.ControlBox = False
         Me.Controls.Add(Me.ProgressBar1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormLoadingSimulation"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "DWSIM"
         Me.TopMost = True
         Me.ResumeLayout(False)
 
     End Sub
 
     Public WithEvents ProgressBar1 As ProgressBar
-    Public WithEvents Label1 As Label
 End Class
