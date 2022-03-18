@@ -1,10 +1,10 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_CAPEOPENUO
 
     Inherits SharedClasses.ObjectEditorForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -21,7 +21,7 @@ Partial Class EditingForm_CAPEOPENUO
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_CAPEOPENUO))
@@ -89,7 +89,6 @@ Partial Class EditingForm_CAPEOPENUO
         Me.Button2 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.OpenFileName = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -715,10 +714,6 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'OpenFileName
-        '
-        resources.ApplyResources(Me.OpenFileName, "OpenFileName")
-        '
         'EditingForm_CAPEOPENUO
         '
         resources.ApplyResources(Me, "$this")
@@ -816,5 +811,4 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents GroupBox4 As GroupBox
     Public WithEvents Button2 As Button
     Public WithEvents chkUseEmbeddedImage As CheckBox
-    Public WithEvents OpenFileName As OpenFileDialog
 End Class

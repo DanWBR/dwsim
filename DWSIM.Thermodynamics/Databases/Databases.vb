@@ -1570,23 +1570,21 @@ Namespace Databases
 
         Public Shared Sub AddInteractionParameters(ByVal IPDS() As Thermodynamics.BaseClasses.InteractionParameter, xmlstream As MemoryStream, ByVal replace As Boolean)
 
-            Using reader = XmlReader.Create(xmlstream)
-                If xmlstream.Length = 0 Then
-                    Dim stream2 As New MemoryStream
-                    Using writer As New XmlTextWriter(stream2, Text.Encoding.UTF8)
-                        With writer
-                            .Formatting = Formatting.Indented
-                            .WriteStartDocument()
-                            .WriteStartElement("Interactions")
-                            .WriteEndElement()
-                            .WriteEndDocument()
-                            .Flush()
-                        End With
-                        stream2.Position = 0
-                        stream2.CopyTo(xmlstream)
-                    End Using
-                End If
-            End Using
+            If xmlstream.Length = 0 Then
+                Dim stream2 As New MemoryStream
+                Using writer As New XmlTextWriter(stream2, Text.Encoding.UTF8)
+                    With writer
+                        .Formatting = Formatting.Indented
+                        .WriteStartDocument()
+                        .WriteStartElement("Interactions")
+                        .WriteEndElement()
+                        .WriteEndDocument()
+                        .Flush()
+                    End With
+                    stream2.Position = 0
+                    stream2.CopyTo(xmlstream)
+                End Using
+            End If
 
             xmlstream.Position = 0
 

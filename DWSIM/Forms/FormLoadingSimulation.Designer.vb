@@ -36,9 +36,9 @@ Partial Class FormLoadingSimulation
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(13, 43)
+        Me.Label1.Location = New System.Drawing.Point(16, 43)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(668, 47)
+        Me.Label1.Size = New System.Drawing.Size(665, 20)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Label1"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -47,7 +47,7 @@ Partial Class FormLoadingSimulation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(697, 100)
+        Me.ClientSize = New System.Drawing.Size(697, 73)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ProgressBar1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None

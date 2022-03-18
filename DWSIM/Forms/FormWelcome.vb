@@ -146,7 +146,7 @@ Public Class FormWelcome
 
             Dim floading As New FormLoadingSimulation
 
-            floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & lview.SelectedItems(0).Tag.ToString & ")"
+            floading.Label1.Text = Path.GetFileNameWithoutExtension(lview.SelectedItems(0).Tag.ToString)
             floading.Show()
 
             Application.DoEvents()
@@ -323,7 +323,7 @@ Public Class FormWelcome
                 If MessageBox.Show(sb.ToString, "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
                     Dim floading As New FormLoadingSimulation
                     Dim fdlding As New FormLoadingSimulation
-                    fdlding.Label1.Text = "Downloading file..." & vbCrLf & "(" & item.Title & ")"
+                    fdlding.Label1.Text = "Downloading file..." & " (" & item.Title & ")"
                     fdlding.Show()
                     Application.DoEvents()
                     Task.Factory.StartNew(Function()
@@ -343,7 +343,7 @@ Public Class FormWelcome
                                                                              Me.UIThread(Sub()
                                                                                              Me.Parent.Visible = False
                                                                                              My.Application.MainWindowForm.PainelDeBoasvindasToolStripMenuItem.Checked = False
-                                                                                             floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
+                                                                                             floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & item.Title
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
                                                                                              Try

@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_Column_InitialEstimates
     Inherits System.Windows.Forms.UserControl
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class EditingForm_Column_InitialEstimates
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column_InitialEstimates))
@@ -101,8 +101,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton20 = New System.Windows.Forms.ToolStripButton()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
-        Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -702,18 +700,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
         '
-        'sfd1
-        '
-        Me.sfd1.DefaultExt = "dwcdi"
-        resources.ApplyResources(Me.sfd1, "sfd1")
-        Me.sfd1.RestoreDirectory = True
-        '
-        'ofd1
-        '
-        Me.ofd1.DefaultExt = "dwcdi"
-        resources.ApplyResources(Me.ofd1, "ofd1")
-        Me.ofd1.RestoreDirectory = True
-        '
         'EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me, "$this")
@@ -781,8 +767,6 @@ Partial Class EditingForm_Column_InitialEstimates
     Public WithEvents ToolStripButton9 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton10 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Public WithEvents sfd1 As System.Windows.Forms.SaveFileDialog
-    Public WithEvents ofd1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents FaTabStrip2 As FarsiLibrary.Win.FATabStrip
     Public WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem

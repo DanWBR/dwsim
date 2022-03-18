@@ -24,6 +24,7 @@ Imports System.Xml.Linq
 Imports System.Linq
 Imports System.Windows.Forms
 Imports System.Drawing
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 <System.Serializable()> Public Class EditingForm_CustomUO_ScriptEditor
 
@@ -84,13 +85,6 @@ Imports System.Drawing
         Me.txtScript.Tag = 0
 
         If Not CAPEOPEN Then Me.txtScript.Text = ScriptUO.ScriptText
-
-        Me.ListBox1.Items.Clear()
-        If Not includes Is Nothing Then
-            For Each i As String In includes
-                Me.ListBox1.Items.Add(i)
-            Next
-        End If
 
         ' Get the installed fonts collection.
         Dim installed_fonts As New InstalledFontCollection
@@ -158,27 +152,45 @@ Imports System.Drawing
     Private Sub OpenToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripButton.Click
         If Me.txtScript.Text <> "" Then
             If Not CAPEOPEN Then
-                If MessageBox.Show(ScriptUO.FlowSheet.GetTranslatedString("DesejaSalvaroScriptAtual"), ScriptUO.FlowSheet.GetTranslatedString("Ateno"), MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+                If MessageBox.Show(ScriptUO.FlowSheet.GetTranslatedString("DesejaSalvaroScriptAtual"), ScriptUO.FlowSheet.GetTranslatedString("Ateno"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     SaveToolStripButton_Click(sender, e)
                 End If
             Else
-                If MessageBox.Show("Save current script?", "Save changes", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+                If MessageBox.Show("Save current script?", "Save changes", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     SaveToolStripButton_Click(sender, e)
                 End If
             End If
         End If
-        If Me.ofd2.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Python Script File", "*.py")})
+
+        If handler IsNot Nothing Then
+            Dim scripttext = handler.ReadAllText()
             Me.txtScript.Text = ""
-            For Each fname As String In Me.ofd2.FileNames
-                Me.txtScript.Text += File.ReadAllText(fname) & vbCrLf
-            Next
+            Me.txtScript.Text += scripttext & vbCrLf
         End If
+
     End Sub
 
     Private Sub SaveToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveToolStripButton.Click
-        If Me.sfd1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            My.Computer.FileSystem.WriteAllText(Me.sfd1.FileName, Me.txtScript.Text, False)
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Python Script File", "*.py")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream)
+                    writer.Write(Me.txtScript.Text)
+                    handler.Write(stream)
+                End Using
+            End Using
         End If
+
     End Sub
 
     Private Sub CutToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CutToolStripButton.Click
@@ -215,39 +227,6 @@ Imports System.Drawing
             FontSize = tscb2.SelectedItem.ToString
         End If
         If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
-    End Sub
-
-    Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        If Me.ofd1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            For Each fname As String In Me.ofd1.FileNames
-                Me.ListBox1.Items.Add(fname)
-            Next
-            ReDim includes(Me.ListBox1.Items.Count - 1)
-            Dim i As Integer = 0
-            For Each item As Object In Me.ListBox1.Items
-                includes(i) = item.ToString
-                i += 1
-            Next
-        End If
-    End Sub
-
-    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
-        If Me.ListBox1.SelectedItems.Count > 0 Then
-            Dim names As New ArrayList
-            For Each fname As Object In Me.ListBox1.SelectedItems
-                names.Add(fname)
-            Next
-            For Each fname As String In names
-                Me.ListBox1.Items.Remove(fname)
-            Next
-            names = Nothing
-            ReDim includes(Me.ListBox1.Items.Count - 1)
-            Dim i As Integer = 0
-            For Each item As Object In Me.ListBox1.Items
-                includes(i) = item.ToString
-                i += 1
-            Next
-        End If
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
