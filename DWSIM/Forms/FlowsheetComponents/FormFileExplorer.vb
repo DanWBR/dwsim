@@ -109,6 +109,7 @@ Public Class FormFileExplorer
             End If
             ListFiles()
             UpdateSize()
+            Flowsheet.UpdateOpenEditForms()
         End If
 
     End Sub
