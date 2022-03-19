@@ -191,7 +191,9 @@ Imports DWSIM.Interfaces.Enums
     Sub PerformPostCalcValidation()
 
     Property PropertyPackage As IPropertyPackage
+
     ReadOnly Property IsFunctional As Boolean
+
     Function GetDynamicPropertyUnitType(id As String) As UnitOfMeasure
 
     Sub SetFlowsheet(fobj As Object)
@@ -223,5 +225,11 @@ Imports DWSIM.Interfaces.Enums
     Function GetChartModelNames() As List(Of String)
 
     Function IsDynamicProperty(pname As String) As Boolean
+
+    Function GetEnergyBalanceResidual() As Double
+
+    Function GetMassBalanceResidual() As Double
+
+    Function GetPowerGeneratedOrConsumed() As Double
 
 End Interface

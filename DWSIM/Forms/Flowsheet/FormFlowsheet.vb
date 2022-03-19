@@ -3641,6 +3641,11 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem.Click
+        Dim f As New FormMEBSummary() With {.Flowsheet = Me}
+        f.ShowDialog(Me)
+    End Sub
+
     Public Sub RequestSaveWithPath(filepath As String) Implements IFlowsheet.RequestSaveWithPath
 
         Options.FilePath = filepath
