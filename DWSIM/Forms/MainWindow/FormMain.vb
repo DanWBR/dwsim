@@ -3415,7 +3415,7 @@ Label_00CC:
 
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
 
-        Me.SaveXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(xmlfile), form, handler.Filename)
+        Me.SaveXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(xmlfile), form, handler.FullPath)
 
         Dim i_Files As ArrayList = New ArrayList()
         If File.Exists(xmlfile) Then i_Files.Add(xmlfile)

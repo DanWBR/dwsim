@@ -1240,6 +1240,11 @@ Namespace UnitOperations
 
                 For Each ims In imsc
                     If ims.GraphicObject.Active Then
+                        If DirectCast(ims, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(ims.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                        End If
                         hi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_7"))
                         eb -= mi * hi 'kg/s * kJ/kg = kJ/s = kW
                         'heats of formation
@@ -1250,6 +1255,11 @@ Namespace UnitOperations
 
                 For Each oms In omsc
                     If oms.GraphicObject.Active Then
+                        If DirectCast(oms, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(oms.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                        End If
                         hi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_7"))
                         eb += mi * hi 'kg/s * kJ/kg = kJ/s = kW
                         'heats of formation

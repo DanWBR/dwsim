@@ -5,11 +5,33 @@ Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormMEBSummary
 
+    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+
     Public Flowsheet As IFlowsheet
+
+    Private Loaded As Boolean = False
 
     Private Sub FormMEBSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ChangeDefaultFont()
+
+    End Sub
+
+    Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
+
+        If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
+
+            ' set the bounds of this form's FloatWindow to our desired position and size
+
+            If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
+                Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
+                If Not floatWin Is Nothing Then
+                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y,
+                                       925 * GlobalSettings.Settings.DpiScale, 485 * GlobalSettings.Settings.DpiScale)
+                End If
+            End If
+
+        End If
 
     End Sub
 
@@ -95,9 +117,47 @@ Public Class FormMEBSummary
 
         tbresidualM.Text = totalM.ToString(nf)
 
+        Loaded = True
+
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Close()
     End Sub
+
+    Private Sub dgv1_SelectionChanged(sender As Object, e As EventArgs) Handles dgv1.SelectionChanged
+        If Not Loaded Then Exit Sub
+        If dgv1.SelectedRows.Count > 0 Then
+            Dim objname = dgv1.SelectedRows(0).Cells(0).Value
+            SelectAndCenter(objname)
+        End If
+    End Sub
+
+    Private Sub dgv2_SelectionChanged(sender As Object, e As EventArgs) Handles dgv2.SelectionChanged
+        If Not Loaded Then Exit Sub
+        If dgv2.SelectedRows.Count > 0 Then
+            Dim objname = dgv2.SelectedRows(0).Cells(0).Value
+            SelectAndCenter(objname)
+        End If
+    End Sub
+
+    Sub SelectAndCenter(objname As String)
+
+        Dim obj = Flowsheet.GetFlowsheetGraphicObject(objname)
+        If Not obj Is Nothing Then
+            Try
+                Flowsheet.GetSurface().Zoom = 2.0
+                Flowsheet.UpdateInterface()
+                Flowsheet.UpdateInterface()
+                Dim center As Point = New Point(Flowsheet.GetFlowsheetSurfaceWidth() / 2, Flowsheet.GetFlowsheetSurfaceHeight() / 2)
+                Flowsheet.GetSurface().OffsetAll(center.X / Flowsheet.GetSurface().Zoom - obj.X, center.Y / Flowsheet.GetSurface().Zoom - obj.Y)
+                Flowsheet.GetSurface().SelectedObject = obj
+                Flowsheet.UpdateInterface()
+                Flowsheet.UpdateInterface()
+            Catch ex As Exception
+            End Try
+        End If
+
+    End Sub
+
 End Class

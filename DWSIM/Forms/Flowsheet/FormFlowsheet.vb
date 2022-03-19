@@ -3641,9 +3641,14 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem.Click
+    Private Sub SumarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SumarioToolStripMenuItem.Click
+        For Each obj In Me.SimulationObjects.Values
+            obj.CloseEditForm()
+        Next
         Dim f As New FormMEBSummary() With {.Flowsheet = Me}
-        f.ShowDialog(Me)
+        f.ShowHint = DockState.DockLeft
+        dckPanel.DockLeftPortion = 830
+        f.Show(dckPanel)
     End Sub
 
     Public Sub RequestSaveWithPath(filepath As String) Implements IFlowsheet.RequestSaveWithPath

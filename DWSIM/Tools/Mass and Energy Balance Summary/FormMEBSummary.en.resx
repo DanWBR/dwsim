@@ -131,7 +131,7 @@
     <value>Type</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Energy Consumption/Generation</value>
+    <value>Energy Consumption (-) / Generation (+)</value>
   </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Efficiency (%)</value>
@@ -143,10 +143,10 @@
     <value>Energy Balance Residue</value>
   </data>
   <data name="dgv1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>871, 343</value>
+    <value>779, 385</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>877, 349</value>
+    <value>785, 391</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Equipments</value>
@@ -174,10 +174,10 @@
     <value>Fill</value>
   </data>
   <data name="dgv2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>871, 343</value>
+    <value>779, 385</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>877, 349</value>
+    <value>785, 391</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Material Streams</value>
@@ -186,13 +186,10 @@
     <value>12, 30</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>885, 375</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 413</value>
+    <value>793, 417</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 419</value>
+    <value>16, 461</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -201,7 +198,7 @@
     <value>Residual Mass Balance</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 419</value>
+    <value>325, 461</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 13</value>
@@ -210,22 +207,31 @@
     <value>Total Energy Consumption/Generation</value>
   </data>
   <data name="tbresidualE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>535, 415</value>
+    <value>535, 457</value>
   </data>
   <data name="tbresidualE.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 20</value>
   </data>
   <data name="tbresidualM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 415</value>
+    <value>148, 457</value>
   </data>
   <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
     <value>58, 10</value>
   </data>
   <data name="lblMassFlowUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 419</value>
+    <value>273, 461</value>
   </data>
   <data name="lblPowerUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 419</value>
+    <value>654, 461</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>817, 488</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -245,6 +251,9 @@
         9/f6+vr7+/v7+/v7+/v7+/v7+/v7+/v28+329O/7+/v6+vr7+/v6+vr6+vr6+vr5+fkAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Mass and Energy Balance Summary</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Mass and Energy Balance Summary</value>

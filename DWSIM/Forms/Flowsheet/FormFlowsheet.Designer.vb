@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormFlowsheet
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormFlowsheet
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFlowsheet))
@@ -76,9 +76,9 @@ Partial Class FormFlowsheet
         Me.OptimizationTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnaliseDeSensibilidadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultivariateOptimizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SumarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResultsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerarRelatorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PluginsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowTSMI = New System.Windows.Forms.ToolStripMenuItem()
@@ -481,7 +481,7 @@ Partial Class FormFlowsheet
         'OptimizationTSMI
         '
         resources.ApplyResources(Me.OptimizationTSMI, "OptimizationTSMI")
-        Me.OptimizationTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnaliseDeSensibilidadeToolStripMenuItem, Me.MultivariateOptimizerToolStripMenuItem})
+        Me.OptimizationTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnaliseDeSensibilidadeToolStripMenuItem, Me.MultivariateOptimizerToolStripMenuItem, Me.SumarioToolStripMenuItem})
         Me.OptimizationTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.OptimizationTSMI.MergeIndex = 6
         Me.OptimizationTSMI.Name = "OptimizationTSMI"
@@ -498,10 +498,16 @@ Partial Class FormFlowsheet
         Me.MultivariateOptimizerToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_switch
         Me.MultivariateOptimizerToolStripMenuItem.Name = "MultivariateOptimizerToolStripMenuItem"
         '
+        'SumarioToolStripMenuItem
+        '
+        resources.ApplyResources(Me.SumarioToolStripMenuItem, "SumarioToolStripMenuItem")
+        Me.SumarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.app_48
+        Me.SumarioToolStripMenuItem.Name = "SumarioToolStripMenuItem"
+        '
         'ResultsTSMI
         '
         resources.ApplyResources(Me.ResultsTSMI, "ResultsTSMI")
-        Me.ResultsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerarRelatorioToolStripMenuItem, Me.SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem})
+        Me.ResultsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerarRelatorioToolStripMenuItem})
         Me.ResultsTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ResultsTSMI.MergeIndex = 7
         Me.ResultsTSMI.Name = "ResultsTSMI"
@@ -511,12 +517,6 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.GerarRelatorioToolStripMenuItem, "GerarRelatorioToolStripMenuItem")
         Me.GerarRelatorioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.report
         Me.GerarRelatorioToolStripMenuItem.Name = "GerarRelatorioToolStripMenuItem"
-        '
-        'SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem
-        '
-        resources.ApplyResources(Me.SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem, "SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem")
-        Me.SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.app_48
-        Me.SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem.Name = "SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem"
         '
         'PluginsTSMI
         '
@@ -926,5 +926,5 @@ Partial Class FormFlowsheet
     Friend WithEvents MultivariateSensitivityStudyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DesignOfExperimentsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OptimumTesterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SumárioDoBalançoDeMassaEEnergiaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SumarioToolStripMenuItem As ToolStripMenuItem
 End Class

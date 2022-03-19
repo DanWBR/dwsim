@@ -793,7 +793,7 @@ Namespace Reactors
             Dim ipo As New Optimization.IPOPTSolver
             ipo.MaxIterations = MaximumInternalIterations
             ipo.Tolerance = InternalTolerance
-            ipo.ReturnLowestObjFuncValue = False
+            ipo.ReturnLowestObjFuncValue = True
 
             Dim esolv As IExternalNonLinearMinimizationSolver = Nothing
             If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
