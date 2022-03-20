@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.4.0
+Version 7.5.0
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.5.0
+
+- Energy Streams are now optional
+- New Mass and Energy Balance Summary tool (Classic UI)
+- Better Simulate365 Dashboard integration
+- Use Embedded Files in Flowsheet and Spreadsheet Unit Operations (Classic UI)
+- Workaround for PH Flash temperature interpolation
+- Other fixes and enhancements
 
 Version 7.4.0
 

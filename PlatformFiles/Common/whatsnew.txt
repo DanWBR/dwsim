@@ -1,7 +1,8 @@
-Version 7.4.0
+Version 7.5.0
 
-- Auto-Connect Added Objects
-- Fixed issue with Gibbs Reactor
-- Fixed Conversion Reactor heat balance
-- Fixed issue with temperature calculation in PH Flash
+- Energy Streams are now optional
+- New Mass and Energy Balance Summary tool (Classic UI)
+- Better Simulate365 Dashboard integration
+- Use Embedded Files in Flowsheet and Spreadsheet Unit Operations (Classic UI)
+- Workaround for PH Flash temperature interpolation
 - Other fixes and enhancements
