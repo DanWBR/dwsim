@@ -705,6 +705,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 out:
 
+            If (L1 = 0.0 And L2 > 0.0) Or (L1 > 0.0 And L2 = 0.0) Then
+                'do VLE flash
+                Dim vle = _nl.Flash_PT(Vz, P, T, PP, False, Nothing)
+                L1 = vle(0)
+                V = vle(1)
+                L2 = 0.0
+                Vx1 = vle(2)
+                Vy = vle(3)
+                prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+                Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
+            End If
+
             'order liquid phases by gibbs energy
 
             Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
