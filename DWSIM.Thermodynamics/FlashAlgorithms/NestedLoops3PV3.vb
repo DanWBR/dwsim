@@ -1272,7 +1272,7 @@ out:
                 Vx2 = tmp(6)
                 T = X
             Else
-                tmp = Me.Flash_PV(Vz, P, X, T, proppack)
+                tmp = Me.Flash_PV(Vz, P, X, 0.0, proppack)
                 L2 = tmp(7)
                 Vx2 = tmp(8)
                 T = tmp(4)

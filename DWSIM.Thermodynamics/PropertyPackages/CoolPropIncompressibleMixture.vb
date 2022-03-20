@@ -173,7 +173,7 @@ Namespace PropertyPackages
 
         Public Function AUX_TSAT(P As Double, x As Double) As Double
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Dim Tmin = GetTmin(x)
             Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
             Dim xmax = SolutionDataList(SoluteName).xmax
             Dim xmin = SolutionDataList(SoluteName).xmin
@@ -356,7 +356,7 @@ Namespace PropertyPackages
             Dim Vxw = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Dim Tmin = GetTmin(x)
             Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
             Dim xmax = SolutionDataList(SoluteName).xmax
             Dim xmin = SolutionDataList(SoluteName).xmin
@@ -430,7 +430,7 @@ Namespace PropertyPackages
             Dim Vxw = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Dim Tmin = GetTmin(x)
             Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
 
             If st = State.Liquid Then
@@ -853,6 +853,18 @@ Namespace PropertyPackages
         Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
 
             Return 0.0
+
+        End Function
+
+        Private Function GetTmin(x As Double) As Double
+
+            Dim t = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Try
+                Dim psat = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x))
+                Return t
+            Catch ex As Exception
+                Return CoolProp.Props1SI(GetCoolPropName(x), "TMIN")
+            End Try
 
         End Function
 
