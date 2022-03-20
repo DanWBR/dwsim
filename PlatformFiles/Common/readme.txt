@@ -69,6 +69,8 @@ Version 7.5.0
 - Better Simulate365 Dashboard integration
 - Use Embedded Files in Flowsheet and Spreadsheet Unit Operations (Classic UI)
 - Workaround for PH Flash temperature interpolation
+- Enhanced Nested Loops PT Flash reliability
+- Fixed issue with CoolProp Incompressible Mixtures PP
 - Other fixes and enhancements
 
 Version 7.4.0
