@@ -3668,9 +3668,9 @@ Label_00CC:
 
             Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", ".dwxmz"),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", ".dwxml"),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", ".xml")})
+            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", "*.dwxmz"),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", "*.dwxml"),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
 
             If handler IsNot Nothing Then
                 If SavingSimulation IsNot Nothing Then
