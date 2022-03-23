@@ -212,7 +212,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         }
         let filename = "";
         if (params.filename) {
-            filename = decodeURIComponent(params.filename);
+            filename = decodeURIComponent(params.filename.replace('+', ' '));
         }
 
         this.setState({ selectedFileType: fileTypeExtensions[0], filterFileTypes: fileTypeExtensions, selectedFolder: selectedFolder, filename: filename },
