@@ -712,7 +712,7 @@ Public Class FormFlowsheet
     Sub UpdateFormText()
         If File.Exists(Options.FilePath) Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
-        ElseIf Options.FilePath.StartsWith("Simulate 365 Dashboard") Then
+        ElseIf Options.FilePath.StartsWith("//Simulate 365 Dashboard") Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
         Else
             Me.Text = Me.Options.SimulationName
