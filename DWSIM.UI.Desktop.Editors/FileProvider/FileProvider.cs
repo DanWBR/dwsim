@@ -35,7 +35,8 @@ namespace DWSIM.UI.Desktop.Editors
             TempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Directory.CreateDirectory(TempDir);
 
-            UnLoad += (s, e) => {
+            UnLoad += (s, e) =>
+            {
                 try
                 {
                     Directory.Delete(TempDir, true);
@@ -122,7 +123,8 @@ namespace DWSIM.UI.Desktop.Editors
                 });
             };
 
-            btnExport.Click += (s, e) => {
+            btnExport.Click += (s, e) =>
+            {
                 if (ListBox1.SelectedIndex >= 0)
                 {
                     var sfd1 = new SaveFileDialog();
@@ -145,11 +147,12 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            btnImport.Click += (s, e) => {
+            btnImport.Click += (s, e) =>
+            {
                 var ofd1 = new OpenFileDialog();
                 ofd1.Title = "Import Files";
-                ofd1.Filters.Add(new FileFilter("All Supported Files", new[] { "*.pdf", "*.jpg", "*.png", "*.txt", "*.py", "*.html", 
-                    "*.dwxmz", "*.dwxml", "*.xml", "*.json","*.dwcsd2","*.dwrsd2" }));
+                ofd1.Filters.Add(new FileFilter("All Supported Files", new[] { "*.pdf", "*.jpg", "*.png", "*.txt", "*.py", "*.html",
+                    "*.dwxmz", "*.dwxml", "*.xml", "*.json","*.dwcsd2","*.dwrsd2","*.xlsx","*.xls","*.pxml" }));
                 if (ofd1.ShowDialog(this) == DialogResult.Ok)
                 {
                     var provider = Flowsheet.FileDatabaseProvider;
@@ -173,7 +176,8 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            btnDelete.Click += (s, e) => {
+            btnDelete.Click += (s, e) =>
+            {
                 if (ListBox1.SelectedIndex >= 0)
                 {
                     if ((MessageBox.Show("Confirm Operation?", "Remove File", MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes))

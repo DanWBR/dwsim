@@ -2504,7 +2504,21 @@ namespace DWSIM.UI.Desktop.Editors
                     var exceluo = (ExcelUO)SimObject;
                     s.CreateAndAddLabelRow(container, "Spreadsheet File");
                     TextBox tbox = null;
-                    tbox = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Path", exceluo.Filename, "Search", null, (sender, e) => exceluo.Filename = sender.Text, (sender, e) =>
+
+                    s.CreateAndAddDropDownRow(container, "File Source", new List<string>(new []{ "Embedded", "External" }), exceluo.FileIsEmbedded ? 0 : 1, (dd, e) => {
+                        exceluo.FileIsEmbedded = dd.SelectedIndex == 0 ? true : false;
+                    });
+
+                    var files = exceluo.GetFlowsheet().FileDatabaseProvider.GetFiles();
+                    files.Insert(0, "");
+                    var selected = exceluo.EmbeddedFileName;
+                    if (!files.Contains(selected)) selected = "";
+
+                    s.CreateAndAddDropDownRow(container, "Embedded File", files, files.IndexOf(selected), (dd, e) => {
+                        exceluo.EmbeddedFileName = files[dd.SelectedIndex];
+                    });
+
+                    tbox = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "External File Path", exceluo.Filename, "Search", null, (sender, e) => exceluo.Filename = sender.Text, (sender, e) =>
                     {
                         var searchdialog = new OpenFileDialog() { Title = "Search", FileName = exceluo.Filename, MultiSelect = false };
                         if (searchdialog.ShowDialog(container) == DialogResult.Ok)
@@ -2570,6 +2584,21 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.FlowsheetUO:
                     var fsuo = (Flowsheet)SimObject;
+
+
+                    s.CreateAndAddDropDownRow(container, "File Source", new List<string>(new[] { "Embedded", "External" }), fsuo.FileIsEmbedded ? 0 : 1, (dd, e) => {
+                        fsuo.FileIsEmbedded = dd.SelectedIndex == 0 ? true : false;
+                    });
+
+                    var files2 = fsuo.GetFlowsheet().FileDatabaseProvider.GetFiles();
+                    files2.Insert(0, "");
+                    var selected2 = fsuo.EmbeddedFileName;
+                    if (!files2.Contains(selected2)) selected2 = "";
+
+                    s.CreateAndAddDropDownRow(container, "Embedded File", files2, files2.IndexOf(selected2), (dd, e) => {
+                        fsuo.EmbeddedFileName = files2[dd.SelectedIndex];
+                    });
+
                     TextBox tbox2 = null;
                     tbox2 = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Flowsheet Path", fsuo.SimulationFile, "Search", null, (sender, e) => fsuo.SimulationFile = sender.Text, (sender, e) =>
                     {

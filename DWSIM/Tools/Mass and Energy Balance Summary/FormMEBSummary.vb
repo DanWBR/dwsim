@@ -75,6 +75,8 @@ Public Class FormMEBSummary
             Dim props = eq.GetType().GetProperties()
             If props.Where(Function(p) p.Name = "Eficiencia").Count > 0 Then
                 eff = Convert.ToDouble(eq.GetType().GetProperty("Eficiencia").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "ThermalEfficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("ThermalEfficiency").GetValue(eq))
             ElseIf props.Where(Function(p) p.Name = "Efficiency").Count > 0 Then
                 eff = Convert.ToDouble(eq.GetType().GetProperty("Efficiency").GetValue(eq))
             ElseIf props.Where(Function(p) p.Name = "AdiabaticEfficiency").Count > 0 Then
