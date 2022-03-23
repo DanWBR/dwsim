@@ -63,6 +63,10 @@ namespace DWSIM.Simulate365.FormFactories
             }
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
             {
+                if (!SuggestedDirectory.StartsWith("/"))
+                {
+                    SuggestedDirectory = "/" + SuggestedDirectory;
+                }
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
             }
 
@@ -115,6 +119,11 @@ namespace DWSIM.Simulate365.FormFactories
             }
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
             {
+                if (!SuggestedDirectory.StartsWith("/"))
+                {
+                    SuggestedDirectory = "/" + SuggestedDirectory;
+                }
+
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
             }
 

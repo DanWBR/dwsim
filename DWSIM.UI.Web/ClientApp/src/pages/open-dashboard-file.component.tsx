@@ -198,8 +198,11 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         let { selectedFolder, filterFileTypes } = this.state;
         if (params.directory) {
             if (this.state.selectedFolder?.webUrl !== params.directory) {
-                const path = decodeURIComponent(params.directory);
+                let path = decodeURIComponent(params.directory.replace('+', ' '));
                 console.log("Decoded path", params.directory, path);
+                if (path[0] != "/") {
+                    path = `/${path}`;
+                }
                 selectedFolder = await this.getSelectedFolder(path);
             }
         }
