@@ -1284,7 +1284,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("The maximum theoretical heat exchange is calculated as the smallest value from")
 
             IObj?.Paragraphs.Add("<m>Q_{max,hot}=W_{hot}(H_{hot,in}-H_{hot,c})</m>")
-            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,in}-H_{cold,h})</m>")
+            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,h}-H_{cold,in})</m>")
 
             IObj?.Paragraphs.Add("where")
             IObj?.Paragraphs.Add("<mi>H_{hot,in}</mi> is the hot stream inlet enthalpy")
