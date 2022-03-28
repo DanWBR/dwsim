@@ -656,9 +656,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim df As Double
 
-                    df = (ecount + 1) * 0.2
+                    df = (ecount + 1) * 0.01
                     If df > 1.0 Then df = 1.0
-                    If -F / df * df + Vant > 1.0 Or -F / df * df + Vant < 0.0 Then
+                    If -dL1 * df + L1 > 1.0 Or -dL1 * df + L1 < 0.0 Then
+                        df /= 10
+                    End If
+                    If -dL2 * df + L2 > 1.0 Or -dL2 * df + L2 < 0.0 Then
                         df /= 10
                     End If
 

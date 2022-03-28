@@ -1202,7 +1202,17 @@ will converge to this solution.")
                     For j As Integer = 0 To Vz.Length - 1
                         Vx(j) = stresult(1)(i, j)
                     Next
-                    results.Add(Vx)
+                    Dim fcv = pp.DW_CalcFugCoeff(Vx, T, P, State.Vapor)
+                    Dim fcl = pp.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                    Dim gv = 0.0#
+                    Dim gl = 0.0#
+                    For j = 0 To Vz.Length - 1
+                        If Vz(j) <> 0.0# Then gv += Vx(j) * Log(fcv(j) * Vx(j))
+                        If Vz(j) <> 0.0# Then gl += Vx(j) * Log(fcl(j) * Vx(j))
+                    Next
+                    If gl <= gv Then
+                        results.Add(Vx)
+                    End If
                 Next
 
             End If

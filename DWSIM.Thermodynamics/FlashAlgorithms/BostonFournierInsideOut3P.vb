@@ -91,26 +91,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If L = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
 
-                If stresult(0) = False Then
+                If stresult.Count > 0 Then
 
                     Dim ioflash As New BostonBrittInsideOut With {.FlashSettings = FlashSettings}
 
-                    Dim m As Double = UBound(stresult(1), 1)
-
-                    Dim trialcomps As New List(Of Double())
                     Dim results As New List(Of Object)
 
-                    For j = 0 To m
-                        Dim vxtrial(n) As Double
-                        For i = 0 To n
-                            vxtrial(i) = stresult(1)(j, i)
-                        Next
-                        trialcomps.Add(vxtrial)
-                    Next
-
-                    For Each tcomp In trialcomps
+                    For Each tcomp In stresult
                         Try
                             Dim r2 = ioflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
                             results.Add(r2)
@@ -172,41 +161,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ' do a stability test in the liquid phase
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
 
-                If stresult(0) = False Then
+                If stresult.Count > 0 Then
 
                     ' liquid phase NOT stable. proceed to three-phase flash.
 
                     Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Double = LBound(stresult(1), 1)
-                    Dim gl, gli As Double
 
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
-                    Else
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-                    End If
-
+                    vx2est = stresult(0)
 
                     Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
 
@@ -264,7 +227,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Overrides Function Flash_PH(ByVal Vz() As Double, ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, k As Integer
 
             d1 = Date.Now
 
@@ -274,104 +236,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If result(0) > 0 Then
 
-                Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = Vz.Length - 1
+                Dim lps = GetPhaseSplitEstimates(T, P, L, result(2), PP)
 
-                If nt = -1 Then nt = nc
-
-                Dim Vtrials(nt, nc) As Double
-                Dim idx(nt) As Integer
-
-                For i = 0 To nt
-                    If Me.StabSearchCompIDs.Length = 0 Then
-                        idx(i) = i
-                    Else
-                        j = 0
-                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                            If subst.Name = Me.StabSearchCompIDs(i) Then
-                                idx(i) = j
-                                Exit For
-                            End If
-                            j += 1
-                        Next
-                    End If
-                Next
-
-                For i = 0 To nt
-                    For j = 0 To nc
-                        Vtrials(i, j) = 0.00001
-                    Next
-                Next
-                For j = 0 To nt
-                    Vtrials(j, idx(j)) = 1
-                Next
-
-                Dim stresult As Object = StabTest(result(4), P, result(2), PP.RET_VTC, PP)
-
-                If stresult(0) = False Then
-
-                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
-
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To nc
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            fcl = PP.DW_CalcFugCoeff(vx2est, result(4), P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To nc
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
-                    Else
-                        For i = 0 To nc
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-                    End If
-
-
-                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
-
-                    Dim maxl As Double = MathEx.Common.Max(vx2est)
-                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                    F = 1
-                    V = result(1)
-                    L1 = (F * Vz(imaxl) - result(3)(imaxl) - F * vx2est(imaxl) + V * vx2est(imaxl)) / (result(2)(imaxl) - vx2est(imaxl))
-                    L1 = L1 * (1 - result(2)(imaxl))
-                    L2 = F - L1 - V
-
-                    If L2 < 0.0# Then
-                        L2 = Abs(L2)
-                        L1 = F - L2 - V
-                    End If
-
-                    For i = 0 To nc
-                        vx1e(i) = (result(2)(i) * L1 - vx2est(i) * L2) / (L1 - L2)
-                    Next
-
-                    Dim sumvx2 = 0.0#
-                    For i = 0 To nc
-                        sumvx2 += Abs(vx1e(i))
-                    Next
-
-                    For i = 0 To nc
-                        vx1e(i) = Abs(vx1e(i)) / sumvx2
-                    Next
-
-                    result = Flash_PH_3P(Vz, result(1), L1, L2, result(3), vx1e, vx2est, P, H, result(4), PP)
-
-                End If
+                result = Flash_PH_3P(Vz, result(1), lps(0), lps(2), result(3), lps(1), lps(3), P, H, result(4), PP)
 
             End If
 
@@ -398,46 +265,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If result(0) > 0 Then
 
-                Dim stresult As Object = StabTest(result(4), P, result(2), PP.RET_VTC, PP)
+                If result(0) > 0 Then
 
-                If stresult(0) = False Then
+                    Dim lps = GetPhaseSplitEstimates(T, P, L, result(2), PP)
 
-                    Dim vx2est(n) As Double
-
-                    For i = 0 To n
-                        vx2est(i) = stresult(1)(0, i)
-                    Next
-
-                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
-
-                    Dim maxl As Double = MathEx.Common.Max(vx2est)
-                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                    F = 1
-                    V = result(1)
-                    L1 = (F * Vz(imaxl) - result(3)(imaxl) - F * vx2est(imaxl) + V * vx2est(imaxl)) / (result(2)(imaxl) - vx2est(imaxl))
-                    L1 = L1 * (1 - result(2)(imaxl))
-                    L2 = F - L1 - V
-
-                    If L2 < 0 Then
-                        L2 = Abs(L2)
-                        L1 = F - L2 - V
-                    End If
-
-                    For i = 0 To n
-                        vx1e(i) = (result(2)(i) * L1 - vx2est(i) * L2) / (L1 - L2)
-                    Next
-
-                    Dim sumvx2 = 0.0#
-                    For i = 0 To n
-                        sumvx2 += Abs(vx1e(i))
-                    Next
-
-                    For i = 0 To n
-                        vx1e(i) = Abs(vx1e(i)) / sumvx2
-                    Next
-
-                    result = Flash_PS_3P(Vz, result(1), L1, L2, result(3), vx1e, vx2est, P, S, result(4), PP)
+                    result = Flash_PS_3P(Vz, result(1), lps(0), lps(2), result(3), lps(1), lps(3), P, S, result(4), PP)
 
                 End If
 
@@ -500,18 +332,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vtrials(j, idx(j)) = 1
                 Next
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
 
-                If stresult(0) = False Then
-
-                    Dim vx2est(nc) As Double
-
-                    For i = 0 To nc
-                        vx2est(i) = stresult(1)(0, i)
-                    Next
+                If stresult.Count > 0 Then
 
                     'do a simple LLE calculation to get initial estimates.
-                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = stresult(0), .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
                     Dim resultL As Object = slle.Flash_PT(Vz, P, T * 0.9, PP)
 
                     L1 = resultL(0)
@@ -582,17 +408,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vtrials(j, idx(j)) = 1
                 Next
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
 
-                If stresult(0) = False Then
-
-                    Dim vx2est(nc) As Double
-                    For i = 0 To n
-                        vx2est(i) = stresult(1)(0, i)
-                    Next
+                If stresult.Count > 0 Then
 
                     'do a simple LLE calculation to get initial estimates.
-                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = stresult(0), .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
                     Dim resultL As Object = slle.Flash_PT(Vz, P, T * 0.9, PP)
 
                     L1 = resultL(0)

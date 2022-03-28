@@ -1284,7 +1284,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("The maximum theoretical heat exchange is calculated as the smallest value from")
 
             IObj?.Paragraphs.Add("<m>Q_{max,hot}=W_{hot}(H_{hot,in}-H_{hot,c})</m>")
-            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,in}-H_{cold,h})</m>")
+            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,h}-H_{cold,in})</m>")
 
             IObj?.Paragraphs.Add("where")
             IObj?.Paragraphs.Add("<mi>H_{hot,in}</mi> is the hot stream inlet enthalpy")
@@ -1314,7 +1314,7 @@ Namespace UnitOperations
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHh = Wh * (Hh1 - HHx) 'kW
 
-            IObj?.Paragraphs.Add("<mi>Q_{hot}</mi> = " & DeltaHh & " kW")
+            IObj?.Paragraphs.Add("<mi>Q_{max,hot}</mi> = " & DeltaHh & " kW")
 
             If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate cold stream outlet enthalpy... P = {0} Pa, T = {1} K", Pc2, Th1))
             tmpstr = StInCold.Clone
@@ -1330,7 +1330,7 @@ Namespace UnitOperations
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHc = Wc * (HHx - Hc1) 'kW
 
-            IObj?.Paragraphs.Add("<mi>Q_{cold}</mi> = " & DeltaHc & " kW")
+            IObj?.Paragraphs.Add("<mi>Q_{max,cold}</mi> = " & DeltaHc & " kW")
 
             MaxHeatExchange = Min(DeltaHc, DeltaHh) 'kW
 
