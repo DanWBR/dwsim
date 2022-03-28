@@ -305,14 +305,14 @@ Namespace PropertyPackages
                 IObj?.SetCurrent
                 result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
+                result = P * (Me.AUX_MMM(Phase) / 1000.0 / result) / (8.314 * T)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
                 IObj?.SetCurrent
                 result = DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                 IObj?.SetCurrent
                 result = DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
-                result = 0
-                Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
                 IObj?.SetCurrent
                 resultObj = Me.m_id.CpCv("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VMAS(dwpl), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = Me.AUX_LIQCPm(T, phaseID)
