@@ -2283,10 +2283,61 @@ namespace DWSIM.UI.Forms
                 ActZoomFit.Invoke();
             };
 
-            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item7, item8 });
+            var item9 = new ButtonMenuItem { Text = "Export to PDF File", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pdf.png")) };
+            var item10 = new ButtonMenuItem { Text = "Export to SVG File", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-vector.png")) };
+
+            item9.Click += (sender, e) => ExportToPDF();
+            item10.Click += (sender, e) => ExportToSVG();
+
+            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item9, item10 , new SeparatorMenuItem(), item7, item8 });
 
             return;
 
+        }
+
+        void ExportToPDF()
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Export Flowsheet to PDF File";
+            dialog.Filters.Add(new FileFilter("PDF Files", new[] { ".pdf" }));
+            dialog.CurrentFilterIndex = 0;
+            if (dialog.ShowDialog(this) == DialogResult.Ok)
+            {
+                // create the document
+                using (var stream = SKFileWStream.OpenStream(dialog.FileName))
+                {
+                    using (var document = SKDocument.CreatePdf(stream))
+                    {
+                        var canvas = document.BeginPage(FlowsheetControl.Width, FlowsheetControl.Height);
+                        FlowsheetControl.FlowsheetSurface.UpdateCanvas(canvas);
+                        // end the page and document
+                        document.EndPage();
+                        document.Close();
+                    }
+                }
+                FlowsheetObject.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", dialog.FileName), Interfaces.IFlowsheet.MessageType.Information);
+            }
+        }
+
+        void ExportToSVG()
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Export Flowsheet to SVG File";
+            dialog.Filters.Add(new FileFilter("SVG Files", new[] { ".svg" }));
+            dialog.CurrentFilterIndex = 0;
+            if (dialog.ShowDialog(this) == DialogResult.Ok)
+            {
+                // create the document
+                using (var stream = SKFileWStream.OpenStream(dialog.FileName))
+                {
+                    var writer = new SKXmlStreamWriter(stream);
+                    using (var canvas = SKSvgCanvas.Create(SKRect.Create(FlowsheetControl.Width, FlowsheetControl.Height), writer))
+                    {
+                        FlowsheetControl.FlowsheetSurface.UpdateCanvas(canvas);
+                    }
+                }
+                FlowsheetObject.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", dialog.FileName), Interfaces.IFlowsheet.MessageType.Information);
+            }
         }
 
         void CopyAsImage(int Zoom)

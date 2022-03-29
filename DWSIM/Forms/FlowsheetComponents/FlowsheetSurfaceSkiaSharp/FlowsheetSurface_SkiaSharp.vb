@@ -3741,6 +3741,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 End Using
                 handler.Write(stream)
             End Using
+            Flowsheet.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
         End If
 
     End Sub
@@ -3761,6 +3762,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 End Using
                 handler.Write(stream)
             End Using
+            Flowsheet.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
         End If
 
     End Sub
