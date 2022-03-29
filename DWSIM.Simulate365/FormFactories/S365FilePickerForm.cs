@@ -62,7 +62,7 @@ namespace DWSIM.Simulate365.FormFactories
                 queryParams.Add("extensions", string.Join("_", fileFormats));
             }
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
-            {
+            {   
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
             }
 
@@ -114,7 +114,7 @@ namespace DWSIM.Simulate365.FormFactories
                 queryParams.Add("extensions", string.Join("_", fileFormats));
             }
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
-            {
+            {               
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
             }
 

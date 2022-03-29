@@ -198,8 +198,11 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         let { selectedFolder, filterFileTypes } = this.state;
         if (params.directory) {
             if (this.state.selectedFolder?.webUrl !== params.directory) {
-                const path = decodeURIComponent(params.directory);
+                let path = decodeURIComponent(params.directory.replaceAll('+', ' '));
                 console.log("Decoded path", params.directory, path);
+                if (path[0] != "/") {
+                    path = `/${path}`;
+                }
                 selectedFolder = await this.getSelectedFolder(path);
             }
         }
@@ -209,7 +212,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         }
         let filename = "";
         if (params.filename) {
-            filename = decodeURIComponent(params.filename);
+            filename = decodeURIComponent(params.filename.replaceAll('+', ' '));
         }
 
         this.setState({ selectedFileType: fileTypeExtensions[0], filterFileTypes: fileTypeExtensions, selectedFolder: selectedFolder, filename: filename },
@@ -289,8 +292,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
             } else {
                 if (!isSaveDialog) {
                     const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
-                    const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${item.name}`
-                        : `Simulate 365 Dashboard/${item.name}`;
+                    const filePath = url && url.length > 0 ? `//Simulate 365 Dashboard${url}/${item.name}`
+                        : `//Simulate 365 Dashboard/${item.name}`;
 
                     OpenDwsimFile(item.driveItemId, this.props.flowsheetsDriveId, filePath).then(() => { }, (error) => { alert(error); });
                 } else {
@@ -463,8 +466,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
             }
 
             const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
-            const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${fileNameWithExtension}`
-                : `Simulate 365 Dashboard/${fileNameWithExtension}`;
+            const filePath = url && url.length > 0 ? `//Simulate 365 Dashboard${url}/${fileNameWithExtension}`
+                : `//Simulate 365 Dashboard/${fileNameWithExtension}`;
             SaveDwsimFile(fileNameWithExtension, flowsheetsDriveId, selectedFolder.driveId, filePath);
         }
     }

@@ -49,7 +49,7 @@ export async function getFlowsheetListItemsAsync(selectedFolder: ISelectedFolder
 export async function OpenDwsimFile(driveItemId: string, driveId: string, filePath: string) {
     console.log("filePath", filePath);
     if (chrome?.webview?.hostObjects?.filePickerService) {
-
+        
         const filePickerService = chrome.webview.hostObjects.filePickerService;
         await filePickerService.openFile(driveItemId, driveId, filePath);
     } else {
