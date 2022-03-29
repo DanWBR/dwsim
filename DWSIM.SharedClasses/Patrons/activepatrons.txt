@@ -22,6 +22,7 @@ David Miller
 David Whitlock
 Deryck Coetzer
 Diego A. Acosta
+Domenico Marchese
 Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
