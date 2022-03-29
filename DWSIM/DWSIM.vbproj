@@ -3261,6 +3261,8 @@
     <None Include="Resources\icons8-volunteering.png" />
     <None Include="Resources\icons8-opened_folder3.png" />
     <None Include="Resources\open file s365.png" />
+    <None Include="Resources\icons8-pdf.png" />
+    <None Include="Resources\icons8-vector.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

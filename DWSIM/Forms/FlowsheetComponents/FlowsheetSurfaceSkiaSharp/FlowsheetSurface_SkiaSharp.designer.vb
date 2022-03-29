@@ -95,6 +95,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.CopyAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiarComoImagem200ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiarComoImagem300ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportarParaPDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportarParaSVGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.LayoutAutomaticoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestaurarLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -634,7 +636,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'CMS_NoSel
         '
         resources.ApplyResources(Me.CMS_NoSel, "CMS_NoSel")
-        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem, Me.CopyAsImageToolStripMenuItem, Me.CopiarComoImagem200ToolStripMenuItem, Me.CopiarComoImagem300ToolStripMenuItem, Me.ToolStripSeparator18, Me.LayoutAutomaticoToolStripMenuItem, Me.RestaurarLayoutToolStripMenuItem, Me.tssepPro2, Me.FindTearStreamsAutomaticallyToolStripMenuItem})
+        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem, Me.CopyAsImageToolStripMenuItem, Me.CopiarComoImagem200ToolStripMenuItem, Me.CopiarComoImagem300ToolStripMenuItem, Me.ExportarParaPDFToolStripMenuItem, Me.ExportarParaSVGToolStripMenuItem, Me.ToolStripSeparator18, Me.LayoutAutomaticoToolStripMenuItem, Me.RestaurarLayoutToolStripMenuItem, Me.tssepPro2, Me.FindTearStreamsAutomaticallyToolStripMenuItem})
         Me.CMS_NoSel.Name = "ContextMenuStrip1"
         '
         'ToolStripMenuItem3
@@ -682,6 +684,18 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.CopiarComoImagem300ToolStripMenuItem, "CopiarComoImagem300ToolStripMenuItem")
         Me.CopiarComoImagem300ToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
         Me.CopiarComoImagem300ToolStripMenuItem.Name = "CopiarComoImagem300ToolStripMenuItem"
+        '
+        'ExportarParaPDFToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ExportarParaPDFToolStripMenuItem, "ExportarParaPDFToolStripMenuItem")
+        Me.ExportarParaPDFToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_pdf
+        Me.ExportarParaPDFToolStripMenuItem.Name = "ExportarParaPDFToolStripMenuItem"
+        '
+        'ExportarParaSVGToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ExportarParaSVGToolStripMenuItem, "ExportarParaSVGToolStripMenuItem")
+        Me.ExportarParaSVGToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_vector
+        Me.ExportarParaSVGToolStripMenuItem.Name = "ExportarParaSVGToolStripMenuItem"
         '
         'ToolStripSeparator18
         '
@@ -1195,4 +1209,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents ToolStripSeparator21 As ToolStripSeparator
     Friend WithEvents ToolStripLabel4 As ToolStripLabel
     Friend WithEvents tscbAddObjectsWithStreams As ToolStripComboBox
+    Friend WithEvents ExportarParaPDFToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExportarParaSVGToolStripMenuItem As ToolStripMenuItem
 End Class

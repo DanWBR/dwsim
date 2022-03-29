@@ -3723,6 +3723,48 @@ Public Class FlowsheetSurface_SkiaSharp
         Flowsheet.FlowsheetOptions.AddObjectsWithStreams = tscbAddObjectsWithStreams.SelectedIndex
     End Sub
 
+    Private Sub ExportarParaPDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarParaPDFToolStripMenuItem.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("PDF File", "*.pdf")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Dim skstream = New SKManagedWStream(stream)
+                Using document = SKDocument.CreatePdf(stream)
+                    Dim canvas = document.BeginPage(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+                    FlowsheetSurface.UpdateCanvas(canvas)
+                    document.EndPage()
+                    document.Close()
+                End Using
+                handler.Write(stream)
+            End Using
+        End If
+
+    End Sub
+
+    Private Sub ExportarParaSVGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarParaSVGToolStripMenuItem.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("SVG File", "*.svg")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Dim skstream = New SKManagedWStream(stream)
+                Dim writer = New SKXmlStreamWriter(skstream)
+                Using canvas = SKSvgCanvas.Create(SKRect.Create(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height), writer)
+                    FlowsheetSurface.UpdateCanvas(canvas)
+                End Using
+                handler.Write(stream)
+            End Using
+        End If
+
+    End Sub
+
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
 
         If tsbControlPanelMode.Checked Then
