@@ -140,8 +140,8 @@ Namespace Reactors
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
             AddDynamicProperty("Height", "Available Height for Liquid", 1, UnitOfMeasure.distance)
             AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Reactor.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank contents with information from the inlet stream.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Contents", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the CSTR contents with information from the inlet stream.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Reset Contents", "Empties the CSTR's content on the next run.", 0, UnitOfMeasure.none)
 
         End Sub
 
