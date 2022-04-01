@@ -34,9 +34,10 @@ Partial Class FormSimulWizard
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.WizardPage2 = New AeroWizard.WizardPage()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.txtAdded = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnInfoLeft = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -141,9 +142,10 @@ Partial Class FormSimulWizard
         'WizardPage2
         '
         resources.ApplyResources(Me.WizardPage2, "WizardPage2")
-        Me.WizardPage2.Controls.Add(Me.Button5)
+        Me.WizardPage2.Controls.Add(Me.txtAdded)
+        Me.WizardPage2.Controls.Add(Me.Label6)
         Me.WizardPage2.Controls.Add(Me.Button4)
-        Me.WizardPage2.Controls.Add(Me.TextBox1)
+        Me.WizardPage2.Controls.Add(Me.txtSearch)
         Me.WizardPage2.Controls.Add(Me.btnInfoLeft)
         Me.WizardPage2.Controls.Add(Me.Label2)
         Me.WizardPage2.Controls.Add(Me.Label3)
@@ -152,13 +154,20 @@ Partial Class FormSimulWizard
         Me.WizardPage2.NextPage = Me.WizardPage3
         Me.ToolTip1.SetToolTip(Me.WizardPage2, resources.GetString("WizardPage2.ToolTip"))
         '
-        'Button5
+        'txtAdded
         '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Image = Global.DWSIM.My.Resources.Resources.cross
-        Me.Button5.Name = "Button5"
-        Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
-        Me.Button5.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.txtAdded, "txtAdded")
+        Me.txtAdded.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtAdded.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtAdded.Name = "txtAdded"
+        Me.txtAdded.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.txtAdded, resources.GetString("txtAdded.ToolTip"))
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'Button4
         '
@@ -167,13 +176,13 @@ Partial Class FormSimulWizard
         Me.ToolTip1.SetToolTip(Me.Button4, resources.GetString("Button4.ToolTip"))
         Me.Button4.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'txtSearch
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
-        Me.TextBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.TextBox1.Name = "TextBox1"
-        Me.ToolTip1.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip"))
+        resources.ApplyResources(Me.txtSearch, "txtSearch")
+        Me.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSearch.Name = "txtSearch"
+        Me.ToolTip1.SetToolTip(Me.txtSearch, resources.GetString("txtSearch.ToolTip"))
         '
         'btnInfoLeft
         '
@@ -215,7 +224,7 @@ Partial Class FormSimulWizard
         '
         'Column11
         '
-        Me.Column11.FillWeight = 5.0!
+        Me.Column11.FillWeight = 10.0!
         resources.ApplyResources(Me.Column11, "Column11")
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
@@ -223,7 +232,7 @@ Partial Class FormSimulWizard
         'colAdd
         '
         Me.colAdd.FalseValue = ""
-        Me.colAdd.FillWeight = 15.0!
+        Me.colAdd.FillWeight = 10.0!
         resources.ApplyResources(Me.colAdd, "colAdd")
         Me.colAdd.IndeterminateValue = ""
         Me.colAdd.Name = "colAdd"
@@ -232,14 +241,14 @@ Partial Class FormSimulWizard
         '
         'Column6
         '
-        Me.Column6.FillWeight = 40.0!
+        Me.Column6.FillWeight = 40.43147!
         resources.ApplyResources(Me.Column6, "Column6")
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'casno
         '
-        Me.casno.FillWeight = 25.0!
+        Me.casno.FillWeight = 25.26967!
         resources.ApplyResources(Me.casno, "casno")
         Me.casno.Name = "casno"
         Me.casno.ReadOnly = True
@@ -253,14 +262,14 @@ Partial Class FormSimulWizard
         '
         'Column9
         '
-        Me.Column9.FillWeight = 20.0!
+        Me.Column9.FillWeight = 20.21574!
         resources.ApplyResources(Me.Column9, "Column9")
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
         '
         'Column7
         '
-        Me.Column7.FillWeight = 25.0!
+        Me.Column7.FillWeight = 25.26967!
         resources.ApplyResources(Me.Column7, "Column7")
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
@@ -268,7 +277,7 @@ Partial Class FormSimulWizard
         'Column5
         '
         Me.Column5.FalseValue = "False"
-        Me.Column5.FillWeight = 10.0!
+        Me.Column5.FillWeight = 10.10787!
         resources.ApplyResources(Me.Column5, "Column5")
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -648,7 +657,7 @@ Partial Class FormSimulWizard
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents ogc1 As System.Windows.Forms.DataGridView
-    Public WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Public WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents LinkLabelPropertyMethods As System.Windows.Forms.LinkLabel
     Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
@@ -673,14 +682,6 @@ Partial Class FormSimulWizard
     Friend WithEvents Column4 As DataGridViewComboBoxColumn
     Friend WithEvents btnCreateNewUnits As Button
     Friend WithEvents btnCloneUnits As Button
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents casno As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Friend WithEvents Button4 As Button
     Friend WithEvents cmsAddComps As ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
@@ -688,7 +689,6 @@ Partial Class FormSimulWizard
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
     Friend WithEvents CriarAPartirDeEstruturaUNIFACToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Button5 As Button
     Friend WithEvents PanelSolids As Panel
     Friend WithEvents rbSDN As RadioButton
     Friend WithEvents rbSNo As RadioButton
@@ -699,4 +699,14 @@ Partial Class FormSimulWizard
     Friend WithEvents Column10 As DataGridViewImageColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents casno As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewCheckBoxColumn
+    Public WithEvents txtAdded As TextBox
+    Public WithEvents Label6 As Label
 End Class

@@ -44,6 +44,8 @@ Public Class FormSimulSettings
     Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
     Private prevcol As Integer = 1
 
+    Private CompoundList As List(Of String)
+
     Dim vdPP, vdSR As MessageBox()
 
     Dim SetHeights As Boolean = False
@@ -138,13 +140,18 @@ Public Class FormSimulSettings
             colAdd.TrueValue = True
             colAdd.IndeterminateValue = False
 
+            txtSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
+            CompoundList = New List(Of String)()
             ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+                CompoundList.Add(comp.Name)
             Next
             For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+                CompoundList.Add(comp.Name)
             Next
+            txtSearch.AutoCompleteCustomSource.AddRange(CompoundList.ToArray())
 
             Dim addobj As Boolean = True
 
@@ -1023,62 +1030,28 @@ Public Class FormSimulSettings
 
     End Function
 
-
-
-    Private WithEvents TypingTimer As Timer
-
-    Private Sub TypingTimer_Tick(sender As Object, e As EventArgs) Handles TypingTimer.Tick
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
         ogc1.ClearSelection()
 
-        Dim needselecting As Boolean = True
+        Dim lowered = CompoundList.Select(Function(c) c.ToLower).ToList()
 
-        For Each r As DataGridViewRow In ogc1.Rows
-            If Not r.Cells(2).Value Is Nothing Then
-                If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(4).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(7).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
-                    r.Visible = True
-                    If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(4).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(6).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
-                        r.Selected = True
-                        needselecting = False
-                    End If
-                Else
-                    r.Visible = False
-                End If
-            End If
-        Next
-        If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
-            ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
-        End If
-        If TextBox1.Text = "" Then
-            For Each r As DataGridViewRow In ogc1.Rows
-                r.Selected = False
-                r.Visible = True
-            Next
-            ogc1.FirstDisplayedScrollingRowIndex = 0
-            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-        Else
+        If lowered.Contains(txtSearch.Text.ToLower()) Then
+
+            Dim index = lowered.IndexOf(txtSearch.Text.ToLower())
+
+            ogc1.Rows.Item(index).Selected = True
+
             If ogc1.SelectedRows.Count > 0 Then
                 ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
             End If
+
+        Else
+
+            ogc1.FirstDisplayedScrollingRowIndex = 0
+            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
         End If
-
-        TypingTimer?.Stop()
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
-
-        If TypingTimer Is Nothing Then
-            TypingTimer = New Timer()
-        End If
-        TypingTimer.Interval = 500
-        TypingTimer.Stop()
-        TypingTimer.Start()
 
     End Sub
 
@@ -1316,7 +1289,7 @@ Public Class FormSimulSettings
         CurrentFlowsheet.UpdateOpenEditForms()
     End Sub
 
-    Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
+    Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             If DWSIM.App.IsRunningOnMono Then
                 If Me.ogc1.SelectedCells.Count > 0 Then
@@ -1367,7 +1340,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs)
-        TextBox1.Text = ""
+        txtSearch.Text = ""
     End Sub
 
     Private Sub cbObjectType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbObjectType.SelectedIndexChanged
@@ -1750,7 +1723,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
-        TextBox1.Text = ""
+        txtSearch.Text = ""
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
