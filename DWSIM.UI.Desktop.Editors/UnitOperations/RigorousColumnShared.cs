@@ -22,7 +22,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public static DynamicLayout GetInitialEstimatesEditor(Column column)
         {
-            
+
             var su = column.FlowSheet.FlowsheetOptions.SelectedUnitSystem;
             var nf = column.FlowSheet.FlowsheetOptions.NumberFormat;
             var nff = column.FlowSheet.FlowsheetOptions.FractionNumberFormat;
@@ -97,7 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
                 catch (Exception ex)
                 {
-                    tstatus1.Text = String.Format("Error in current input, line {0}: " + ex.Message, i+1);
+                    tstatus1.Text = String.Format("Error in current input, line {0}: " + ex.Message, i + 1);
                 }
             };
 
@@ -140,7 +140,7 @@ namespace DWSIM.UI.Desktop.Editors
                             for (j = 0; j < m; j++)
                             {
                                 ie.LiqCompositions[i - 1][comps[j]].Value = Convert.ToDouble(val[j + 1]);
-                                j += 1; 
+                                j += 1;
                             }
                         }
                         i += 1;
@@ -149,7 +149,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
                 catch (Exception ex)
                 {
-                    tstatus2.Text = String.Format("Error in current input, line {0}, column {1}: " + ex.Message, i+1, j+2);
+                    tstatus2.Text = String.Format("Error in current input, line {0}, column {1}: " + ex.Message, i + 1, j + 2);
                 }
             };
 
@@ -199,71 +199,78 @@ namespace DWSIM.UI.Desktop.Editors
                 }
                 catch (Exception ex)
                 {
-                    tstatus3.Text = String.Format("Error in current input, line {0}, column {1}: " + ex.Message, i+1, j+2);
+                    tstatus3.Text = String.Format("Error in current input, line {0}, column {1}: " + ex.Message, i + 1, j + 2);
                 }
             };
 
-            dl.CreateAndAddButtonRow("Update Estimates from Current Solution", null, (sender, e) => {
-                column.RebuildEstimates();
-                for (i = 0; i < n; i++)
+            dl.CreateAndAddButtonRow("Update Estimates from Current Solution", null, (sender, e) =>
+            {
+                try
                 {
-                    ie.StageTemps[i].Value = column.Tf[i];
-                    ie.VapMolarFlows[i].Value = column.Vf[i];
-                    ie.LiqMolarFlows[i].Value = column.Lf[i];
-                    for (j = 0; j < m; j++)
+                    column.RebuildEstimates();
+                    for (i = 0; i < n; i++)
                     {
-                        ie.LiqCompositions[i][comps[j]].Value = ((double[])column.xf.ToArray()[i])[j];
-                        ie.VapCompositions[i][comps[j]].Value = ((double[])column.yf.ToArray()[i])[j];
+                        ie.StageTemps[i].Value = column.Tf[i];
+                        ie.VapMolarFlows[i].Value = column.Vf[i];
+                        ie.LiqMolarFlows[i].Value = column.Lf[i];
+                        for (j = 0; j < m; j++)
+                        {
+                            ie.LiqCompositions[i][comps[j]].Value = ((double[])column.xf.ToArray()[i])[j];
+                            ie.VapCompositions[i][comps[j]].Value = ((double[])column.yf.ToArray()[i])[j];
+                        }
                     }
-                }
-                // temperature and flows
-                sb.Clear();
-                sb.AppendLine("stage\ttemp\tliqflow\tvapliq2flow");
-                for (i = 0; i < n; i++)
-                {
-                    sb.AppendLine(string.Format("{0}\t{1}\t{2}\t{3}", (i + 1), ie.StageTemps[i].Value.ConvertFromSI(su.temperature).ToString(nf),
-                        ie.LiqMolarFlows[i].Value.ConvertFromSI(su.molarflow).ToString(nf),
-                        ie.VapMolarFlows[i].Value.ConvertFromSI(su.molarflow).ToString(nf)));
-                }
-                ta1.Text = sb.ToString();
-                // liquid compositions
-                sb.Clear();
-                sb.Append("stage");
-                foreach (var key in ie.LiqCompositions[0].Keys)
-                {
-                    sb.Append("\t" + key);
-                }
-                sb.Append("\n");
-                i = 0;
-                for (i = 0; i < n; i++)
-                {
-                    sb.Append((i + 1).ToString());
-                    foreach (var value in ie.LiqCompositions[i].Values)
+                    // temperature and flows
+                    sb.Clear();
+                    sb.AppendLine("stage\ttemp\tliqflow\tvapliq2flow");
+                    for (i = 0; i < n; i++)
                     {
-                        sb.Append("\t" + value.Value.ToString(nff));
+                        sb.AppendLine(string.Format("{0}\t{1}\t{2}\t{3}", (i + 1), ie.StageTemps[i].Value.ConvertFromSI(su.temperature).ToString(nf),
+                            ie.LiqMolarFlows[i].Value.ConvertFromSI(su.molarflow).ToString(nf),
+                            ie.VapMolarFlows[i].Value.ConvertFromSI(su.molarflow).ToString(nf)));
+                    }
+                    ta1.Text = sb.ToString();
+                    // liquid compositions
+                    sb.Clear();
+                    sb.Append("stage");
+                    foreach (var key in ie.LiqCompositions[0].Keys)
+                    {
+                        sb.Append("\t" + key);
                     }
                     sb.Append("\n");
-                }
-                ta2.Text = sb.ToString();
-                // vapor/liquid 2 compositions
-                sb.Clear();
-                sb.Append("stage");
-                foreach (var key in ie.VapCompositions[0].Keys)
-                {
-                    sb.Append("\t" + key);
-                }
-                sb.Append("\n");
-                i = 0;
-                for (i = 0; i < n; i++)
-                {
-                    sb.Append((i + 1).ToString());
-                    foreach (var value in ie.VapCompositions[i].Values)
+                    i = 0;
+                    for (i = 0; i < n; i++)
                     {
-                        sb.Append("\t" + value.Value.ToString(nff));
+                        sb.Append((i + 1).ToString());
+                        foreach (var value in ie.LiqCompositions[i].Values)
+                        {
+                            sb.Append("\t" + value.Value.ToString(nff));
+                        }
+                        sb.Append("\n");
+                    }
+                    ta2.Text = sb.ToString();
+                    // vapor/liquid 2 compositions
+                    sb.Clear();
+                    sb.Append("stage");
+                    foreach (var key in ie.VapCompositions[0].Keys)
+                    {
+                        sb.Append("\t" + key);
                     }
                     sb.Append("\n");
+                    i = 0;
+                    for (i = 0; i < n; i++)
+                    {
+                        sb.Append((i + 1).ToString());
+                        foreach (var value in ie.VapCompositions[i].Values)
+                        {
+                            sb.Append("\t" + value.Value.ToString(nff));
+                        }
+                        sb.Append("\n");
+                    }
+                    ta3.Text = sb.ToString();
                 }
-                ta3.Text = sb.ToString();
+                catch (Exception ex) {
+                    MessageBox.Show("Error reading current solution (is the column solved already?): " + ex.Message, "Error", MessageBoxType.Error);
+                }
             });
 
             var tv = new TabControl();
