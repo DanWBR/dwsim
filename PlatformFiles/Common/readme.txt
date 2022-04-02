@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.5.0
+Version 7.5.1
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.5.1
+
+- Export Flowsheet drawing to PDF/SVG
+- Redesigned search compound experience in Classic UI
+- Fixed an issue with liquid phase stability test
+- Fixed an issue with the Adjust Control Panel (Classic UI)
+- Fixed Dynamic Separator sample
+- Fixed crash when trying to load initial estimates for column when there's none (CPUI)
+- Updated CPUI editors for Spreadsheet/Flowsheet UO
+- Fixed Excel File loading in Files Manager
 
 Version 7.5.0
 
