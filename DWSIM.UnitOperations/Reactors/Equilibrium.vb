@@ -291,13 +291,13 @@ Namespace Reactors
                     i += 1
                 Loop Until i = Me.Reactions.Count
 
-                Dim Hspec = (Hr0 + Qin) / tms.GetMassFlow()
+                Dim Hspec = (Hr0 + Qin)
 
                 tms.Calculate()
 
-                Dim H = tms.GetMassEnthalpy() - DHr / tms.GetMassFlow()
+                Dim H = tms.GetMassEnthalpy() * tms.GetMassFlow() - DHr
 
-                f(x.Length - 1) = (H - Hspec) / Hspec
+                f(x.Length - 1) = (H - Hspec)
 
             End If
 

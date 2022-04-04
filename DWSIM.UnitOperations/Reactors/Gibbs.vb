@@ -77,6 +77,8 @@ Namespace Reactors
         Dim r, c, els, comps, cnt As Integer
         Dim ims As MaterialStream
 
+        Dim Tab As Double?, Hr0, Qin As Double
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -331,6 +333,7 @@ Namespace Reactors
             Next
 
             tms.Phases(0).Properties.massflow = sumw
+
             pp.CurrentMaterialStream = tms
 
             Dim multiphase As Boolean = False
@@ -581,13 +584,24 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Calculate_GibbsMin()
+            Calculate_GibbsMin(args)
 
         End Sub
 
-        Public Sub Calculate_GibbsMin()
+        Public Sub Calculate_GibbsMin(Optional ByVal args As Object = Nothing)
 
             Me.Validate()
+
+            Dim dynamics As Boolean = False
+
+            If args IsNot Nothing Then dynamics = args
+
+            Qin = 0.0
+
+            'energy stream
+            If GetInletEnergyStream(1) IsNot Nothing Then
+                Qin = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault()
+            End If
 
             Dim IObj As InspectorItem = Host.GetNewInspectorItem()
 
@@ -693,12 +707,22 @@ Namespace Reactors
 
             T0 = ims.Phases(0).Properties.temperature.GetValueOrDefault
 
-            Select Case Me.ReactorOperationMode
-                Case OperationMode.Adiabatic, OperationMode.Isothermic
-                    T = T0
-                Case OperationMode.OutletTemperature
-                    T = OutletTemperature
-            End Select
+            If dynamics Then
+                T = ims.GetTemperature()
+            Else
+                Select Case Me.ReactorOperationMode
+                    Case OperationMode.Adiabatic
+                        If Tab.HasValue Then
+                            T = Tab.Value
+                        Else
+                            T = OutletTemperature
+                        End If
+                    Case OperationMode.Isothermic
+                        T = T0
+                    Case OperationMode.OutletTemperature
+                        T = OutletTemperature
+                End Select
+            End If
 
             Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
@@ -943,7 +967,7 @@ Namespace Reactors
 
                             For Each sb As Compound In ims.Phases(0).Compounds.Values
                                 If N0.ContainsKey(sb.Name) Then
-                                    DHr += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * DN(sb.Name) / 1000
+                                    DHr += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * DN(sb.Name) / 1000.0
                                 End If
                             Next
 
@@ -975,13 +999,18 @@ Namespace Reactors
                                     Me.DeltaQ = 0.0#
 
                                     ims.SetTemperature(T)
-                                    ims.SpecType = StreamSpec.Temperature_and_Pressure
-                                    ims.Calculate(True, True)
+                                    ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
                                     'Products Enthalpy (kJ/kg * kg/s = kW)
                                     Dim Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                                    Qerror = Hp - Hr0 + DHr
+                                    ims.SetMassEnthalpy((Hr0 + Qin - DHr) / W0)
+
+                                    ims.Calculate(True, True)
+
+                                    Qerror = T - ims.GetTemperature()
+
+                                    T = T / 2 + ims.GetTemperature()/2
 
                                     Me.DeltaT = T - T0
 
@@ -1031,20 +1060,10 @@ Namespace Reactors
                         End Function
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
-                Dim brent As New BrentOpt.BrentMinimize
-                Dim tryagain As Boolean = True
-                Try
-                    brent.brentoptimize2(200, T * 3 - 200, 0.01, Function(Tx)
-                                                                     Return gfunc.Invoke(Tx)
-                                                                 End Function)
-                    tryagain = False
-                Catch ex As Exception
-                End Try
-                If tryagain Then
-                    brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
-                                                                     Return gfunc.Invoke(Tx)
-                                                                 End Function)
-                End If
+                Dim adberror As Double
+                Do
+                    adberror = gfunc.Invoke(T)
+                Loop Until adberror <= 0.1
             Else
                 gfunc.Invoke(T)
             End If
@@ -1146,7 +1165,7 @@ Namespace Reactors
                 End With
             End If
 
-            If GetInletEnergyStream(1) IsNot Nothing Then
+            If ReactorOperationMode <> OperationMode.Adiabatic Then
                 'energy stream - update energy flow value (kW)
                 With GetInletEnergyStream(1)
                     .EnergyFlow = Me.DeltaQ.GetValueOrDefault
