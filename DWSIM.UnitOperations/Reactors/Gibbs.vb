@@ -496,8 +496,7 @@ Namespace Reactors
 
             i = 0
             For Each s As String In DN.Keys
-                Dim unscaled = scaler.UnScale(Math.Exp(x(i)), 0.0, N0tot * 10.0, 0.0, 1.0)
-                N(s) = unscaled
+                N(s) = x(i)
                 i += 1
             Next
 
@@ -576,7 +575,7 @@ Namespace Reactors
 
             Dim sumel(els), sumeli(comps), totalsum As Double
 
-            totalsum = 0
+            totalsum = 0.0
             For i = 0 To els
                 sumel(i) = 0
                 For j = 0 To comps
@@ -588,18 +587,46 @@ Namespace Reactors
             For j = 0 To comps
                 sumeli(j) = 0
                 For i = 0 To els
-                    Dim lagrm = scaler.UnScale(Math.Exp(x(comps + i + 1)), -1000.0, 1000.0, 0.0, 1.0)
+                    Dim lagrm = x(comps + i + 1)
                     sumeli(j) += Me.ElementMatrix(i, j) * lagrm
                 Next
             Next
 
-            For i = 0 To x.Length - 1
+            Dim maxi = x.Length - 1
+
+            If ReactorOperationMode = OperationMode.Adiabatic Then maxi = x.Length - 2
+
+            For i = 0 To maxi
                 If i <= comps Then
                     f(i) = CP(i) - sumeli(i) + pen_val
                 Else
                     f(i) = -sumel(i - comps - 1) + Me.TotalElements(i - comps - 1)
                 End If
             Next
+
+            If ReactorOperationMode = OperationMode.Adiabatic Then
+
+                'reaction heat
+
+                Dim DHr As Double = 0.0
+
+                For Each sb As Compound In tms.Phases(0).Compounds.Values
+                    If N0.ContainsKey(sb.Name) Then
+                        DHr += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * DN(sb.Name) / 1000.0
+                    End If
+                Next
+
+                Dim Hspec = (Hr0 + Qin)
+
+                tms.Calculate()
+
+                Dim Hp = tms.GetMassEnthalpy() * tms.GetMassFlow()
+
+                Dim H = Hp + DHr
+
+                f(x.Length - 1) = (H - Hspec)
+
+            End If
 
             Return f
 
@@ -766,7 +793,8 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Calculate_Lagrange(args)
+            Calculate_GibbsMin(args)
+            'Calculate_Lagrange(args)
 
         End Sub
 
@@ -877,7 +905,7 @@ Namespace Reactors
             If compremoved Then Me.CreateElementMatrix()
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
-            Dim Hr0, Hr0i As Double
+
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim tmp As IFlashCalculationResult
@@ -906,7 +934,7 @@ Namespace Reactors
                 End Select
             End If
 
-            Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
+            'Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             ims.Phases(0).Properties.temperature = T
 
@@ -1513,7 +1541,7 @@ Namespace Reactors
             Next
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
-            Dim Hr0, Hr0i As Double
+
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim tmp As IFlashCalculationResult
@@ -1543,7 +1571,7 @@ Namespace Reactors
             End If
 
             IObj?.SetCurrent
-            Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
+            'Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             ims.Phases(0).Properties.temperature = T
 
@@ -1629,8 +1657,18 @@ Namespace Reactors
 
             Dim resc(c), resc2(c), inval(c), topvals(e) As Double
 
-            For i = 0 To c
-                inval(i) = N0(Me.ComponentIDs(i)) / N0.Values.Sum
+            For i = 0 To N.Count - 1
+                If InitializeFromPreviousSolution Then
+                    Try
+                        inval(i) = InitialEstimates(i)
+                    Catch ex As Exception
+                        InitializeFromPreviousSolution = False
+                        Throw New Exception("invalid initial estimates.")
+                    End Try
+                Else
+                    inval(i) = N0(Me.ComponentIDs(i))
+                End If
+                If inval(i) < 0.000000001 Then inval(i) = 0.000000001
             Next
 
             Dim ovars As New List(Of DotNumerics.Optimization.OptSimplexBoundVariable)
@@ -1719,17 +1757,14 @@ Namespace Reactors
 
             Dim keys = N.Keys.ToArray()
 
-            Dim vars0 = N.Values.ToArray()
+            Dim vars0 = inval
 
             Dim variables As New List(Of Double)
             For i = 0 To N.Count - 1
-                If vars0(i) = 0.0 Then vars0(i) = 1.0E-20
-                xs = scaler.Scale(vars0(i), 0.0, N0tot * 10.0, 0.0, 1.0)
-                variables.Add(Math.Log(xs))
+                variables.Add(vars0(i))
             Next
             For i = 0 To lagrm.Count - 1
-                xs = scaler.Scale(lagrm(i), -1000.0, 1000.0, 0.0, 1.0)
-                variables.Add(Math.Log(xs))
+                variables.Add(lagrm(i))
             Next
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
@@ -1739,20 +1774,37 @@ Namespace Reactors
             Dim solver3 As New Optimization.NewtonSolver
             solver3.MaxIterations = MaximumInternalIterations
             solver3.Tolerance = 0.00000001
-            solver3.EnableDamping = False
+            solver3.EnableDamping = True
             solver3.UseBroydenApproximation = True
 
-            Dim fval As Double()
+            Dim esolv As IExternalNonLinearSystemSolver = Nothing
+            If FlowSheet.ExternalSolvers.ContainsKey("ExtremeOptimizationNonLinearPDSystemSolver") Then
+                esolv = FlowSheet.ExternalSolvers("ExtremeOptimizationNonLinearPDSystemSolver")
+            End If
 
-            Dim newx = solver3.Solve(Function(x1)
+            Dim errval As Double()
+
+            Dim fval, newx As Double()
+
+            If esolv IsNot Nothing Then
+                Dim iit As Integer = 0
+                newx = esolv.Solve(Function(x1)
+                                       FlowSheet.CheckStatus()
+                                       fval = FunctionValue2N(x1)
+                                       errval = fval
+                                       Return fval
+                                   End Function, Nothing, Nothing, variables.ToArray(),
+                                                MaximumInternalIterations, 0.00000001)
+            Else
+                newx = solver3.Solve(Function(x1)
                                          FlowSheet.CheckStatus()
                                          fval = FunctionValue2N(x1)
+                                         errval = fval
                                          Return fval
                                      End Function, variables.ToArray())
+            End If
 
-            Dim errval = FunctionValue2N(newx).AbsSqrSumY()
-
-            newx = newx.Select(Function(xi) scaler.UnScale(Math.Exp(xi), 0.0, N0tot * 10.0, 0.0, 1.0)).ToArray
+            'Dim errval = FunctionValue2N(newx).AbsSqrSumY()
 
             For i = 0 To N.Count - 1
                 N(keys(i)) = newx(i)
@@ -1816,27 +1868,23 @@ Namespace Reactors
 
                 Case OperationMode.Adiabatic
 
-                    Me.DeltaQ = 0.0#
+                    ims.SpecType = StreamSpec.Temperature_and_Pressure
 
                     'Products Enthalpy (kJ/kg * kg/s = kW)
 
-                    Dim Hp = Hr0 - DHr
+                    'Hp = (Hr0 + DHr) / ims.GetMassFlow()
 
-                    Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                    'ims.SetMassEnthalpy(Hp + Qin / W0tot)
 
-                    ims.Phases(0).Properties.enthalpy = Hp
+                    ims.Calculate()
 
-                    pp.CurrentMaterialStream = ims
+                    'Heat (kW)
 
-                    ims.SpecType = StreamSpec.Pressure_and_Enthalpy
-                    ims.Calculate(True, True)
+                    Me.DeltaQ = 0
 
-                    T = ims.Phases(0).Properties.temperature
+                    OutletTemperature = T
 
                     Me.DeltaT = T - T0
-
-                    ims.Phases(0).Properties.temperature = T
-                    tms.Phases(0).Properties.temperature = T
 
                 Case OperationMode.Isothermic
 
@@ -1957,11 +2005,13 @@ Namespace Reactors
                 End With
             End If
 
-            'energy stream - update energy flow value (kW)
-            With GetInletEnergyStream(1)
-                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                .GraphicObject.Calculated = True
-            End With
+            If ReactorOperationMode <> OperationMode.Adiabatic Then
+                'energy stream - update energy flow value (kW)
+                With GetInletEnergyStream(1)
+                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
             IObj?.Close()
 

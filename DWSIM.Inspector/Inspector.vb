@@ -32,7 +32,7 @@ Public Class Host
     Public Shared Function GetNewInspectorItem(<CallerMemberName> Optional memberName As String = "", <CallerFilePath> Optional fileName As String = "", <CallerLineNumber> Optional lineNumber As Integer = 0) As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled And Not GlobalSettings.Settings.ExcelMode And Not GlobalSettings.Settings.CAPEOPENMode Then
-            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.LastIndexOf("\dwsim6\") + 7), "https://github.com/DanWBR/dwsim6/blob/windows").Replace("\", "/")}
+            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.LastIndexOf("\dwsim\") + 7), "https://github.com/DanWBR/dwsim/blob/windows").Replace("\", "/")}
         Else
             Return Nothing
         End If
@@ -154,7 +154,7 @@ Public Class InspectorItem
         stb.AppendLine("<div class='post'>")
         stb.AppendLine(String.Format("<h1>{0}</h1><h2>{1}</h2>", Name, Description))
         stb.AppendLine("<hr>")
-        stb.AppendLine(String.Format("<div><div style='float:right;height:40px;line-height:40px;vertical-align:middle;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{2}' alt='View on GitHub' width='200'></a></div><div style='float:left;height:40px;line-height:40px;vertical-align:middle;'><b>Source Code (Visual Basic)</b>: {1}</div></div>", CodePath, CodePath.Replace("https://github.com/DanWBR/dwsim6/blob/windows/", ""), GetImagePath("viewongithub.png")))
+        stb.AppendLine(String.Format("<div><div style='float:right;height:40px;line-height:40px;vertical-align:middle;'><a target='_blank' style='border:0;' href='{0}'><img style='border:0;' src='{2}' alt='View on GitHub' width='200'></a></div><div style='float:left;height:40px;line-height:40px;vertical-align:middle;'><b>Source Code (Visual Basic)</b>: {1}</div></div>", CodePath, CodePath.Replace("https://github.com/DanWBR/dwsim/blob/windows/", ""), GetImagePath("viewongithub.png")))
         stb.AppendLine("<hr style='clear:both;'>")
         For Each p In Paragraphs
             stb.AppendLine(String.Format("<p>{0}</p>", p).Replace("<math>", "$$").Replace("</math>", "$$").Replace("<math_inline>", "\(").Replace("</math_inline>", "\)").Replace("<m>", "$$").Replace("</m>", "$$").Replace("<mi>", "\(").Replace("</mi>", "\)"))
@@ -167,13 +167,13 @@ Public Class InspectorItem
 
     Private Function GetImagePath(filename As String) As String
 
-        Return "http://dwsim.inforside.com.br/inspector/images/" & filename
+        Return "https://dwsim.org/inspector/images/" & filename
 
     End Function
 
     Public Shared Function GetImageHTML(filename As String) As String
 
-        Dim ipath = "http://dwsim.inforside.com.br/inspector/images/" & filename
+        Dim ipath = "https://dwsim.org/inspector/images/" & filename
         Return String.Format("<img style='border:0;' src='{0}' alt=''>", ipath)
 
     End Function
