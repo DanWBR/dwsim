@@ -2146,6 +2146,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     PP.Flowsheet?.ShowMessage(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}. Trying to calculate using ideal K-values...",
                                     PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")), Interfaces.IFlowsheet.MessageType.Warning)
                     result = Flash_PV_1(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
+                    If result.Count = 1 And V = 0.0 Then
+                        result = Flash_PV_4(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
+                    End If
                 End Using
             End If
             If result.Count = 1 Then
@@ -2285,6 +2288,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim K1(n), K2(n), dKdT(n) As Double
 
+            Dim xvals, fvals As New List(Of Double)
+
             If V = 1.0# Or V = 0.0# Then
 
                 If V = 1.0 Then
@@ -2399,6 +2404,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     fval_ant = fval
                     fval = stmp4 - 1
 
+                    xvals.Add(T)
+                    fvals.Add(fval)
+
                     If Math.Abs(fval) < etol Then Exit Do
 
                     ecount += 1
@@ -2419,7 +2427,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     deltaT = -df * fval / dFdT
 
                     If Math.Abs(deltaT) > maxdT Then
-                        deltaT = Math.Sign(deltaT) * maxdT
+                        If ecount < 10 Then
+                            deltaT = Math.Sign(deltaT) * maxdT
+                        Else
+                            deltaT = Math.Sign(deltaT)
+                        End If
                     End If
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
@@ -2446,10 +2458,33 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             Return New Object() {-1}
                         End If
 
-                        If Math.Sign(fval * fval_ant) = -1 Then
-                            T = T + deltaT / 2
+                        If ecount > 30 And Math.Sign(fval) <> Math.Sign(fval_ant) Then
+
+                            'oscillating around the solution.
+
+                            Dim bmin As New Brent
+
+                            Dim interp = MathNet.Numerics.Interpolate.Linear(xvals.ToArray(), fvals.ToArray())
+
+                            T = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
+                                            Function(tval)
+                                                Return interp.Interpolate(tval)
+                                            End Function)
+
+                            Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                            If V = 0.0 Then
+                                Vy = Ki.MultiplyY(Vx).NormalizeY()
+                            Else
+                                Vx = Vy.DivideY(Ki).NormalizeY()
+                            End If
+
+                            Exit Do
+
                         Else
+
                             T = T + deltaT
+
                         End If
 
                     End If
@@ -3019,6 +3054,143 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Return Taz
 
         End Function
+
+        Public Function Flash_PV_4(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PV", Name & " (PV Flash)", "Pressure/Vapor Fraction Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add("This routine calculates the temperature at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified P.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Vapor Mole Fraction: {0} ", V))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
+            Dim i, n, ecount As Integer
+            Dim d1, d2 As Date, dt As TimeSpan
+            Dim L, Lf, Vf, T, epsilon, df, maxdT As Double
+
+            d1 = Date.Now
+
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
+
+            epsilon = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon).ToDoubleFromInvariant
+            df = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor).ToDoubleFromInvariant
+            maxdT = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange).ToDoubleFromInvariant
+
+            n = Vz.Length - 1
+
+            PP = PP
+            Vf = V
+            L = 1 - V
+            Lf = 1 - Vf
+
+            Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
+            Dim Vt(n), VTc(n), Tsat(n) As Double
+
+            VTc = PP.RET_VTC()
+            fi = Vz.Clone
+
+            i = 0
+                Tref = 0.0#
+            Do
+                Tref += Vz(i) * PP.AUX_TSATi(P, i)
+                i += 1
+            Loop Until i = n + 1
+
+            T = Tref
+
+            'Calculate Ki`s
+
+            If Not ReuseKI Then
+                i = 0
+                Do
+                    IObj?.SetCurrent
+                    Vp(i) = PP.AUX_PVAPi(i, T)
+                    Ki(i) = Vp(i) / P
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                    i += 1
+                Loop Until i = n + 1
+            Else
+                If Not PP.AUX_CheckTrivial(PrevKi) And Not Double.IsNaN(PrevKi(0)) Then
+                    For i = 0 To n
+                        IObj?.SetCurrent
+                        Ki(i) = PrevKi(i)
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                    Next
+                Else
+                    i = 0
+                    Do
+                        IObj?.SetCurrent
+                        Vp(i) = PP.AUX_PVAPi(i, T)
+                        Ki(i) = Vp(i) / P
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                        i += 1
+                    Loop Until i = n + 1
+                End If
+            End If
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for T: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
+
+            i = 0
+            Do
+                If Vz(i) <> 0 Then
+                    Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
+                    If Double.IsInfinity(Vy(i)) Then Vy(i) = 0.0#
+                    Vx(i) = Vy(i) / Ki(i)
+                Else
+                    Vy(i) = 0
+                    Vx(i) = 0
+                End If
+                i += 1
+            Loop Until i = n + 1
+
+            Vx = Vx.NormalizeY()
+            Vy = Vy.NormalizeY()
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
+
+            If PP.AUX_IS_SINGLECOMP(Vz) Then
+                WriteDebugInfo("PV Flash [NL]: Converged in 1 iteration.")
+                T = 0
+                For i = 0 To n
+                    IObj?.SetCurrent
+                    T += Vz(i) * PP.AUX_TSATi(P, i)
+                Next
+                IObj?.Close()
+                If Vz.Count = 1 Then
+                    Vx = New Double() {1.0}
+                    Vy = New Double() {1.0}
+                    Ki = New Double() {1.0}
+                End If
+                Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            End If
+
+            d2 = Date.Now
+
+            dt = d2 - d1
+
+            WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged value for T: {0}", T))
+
+            IObj?.Close()
+
+            Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+        End Function
+
 
         Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
 

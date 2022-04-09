@@ -3355,7 +3355,7 @@ Public Class FormCompoundCreator
                 mycase.cp.CurrentDB = "User"
                 Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(mycase.cp, Newtonsoft.Json.Formatting.Indented)
                 Using stream As New IO.MemoryStream()
-                    Using writer As New StreamWriter(stream)
+                    Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                         writer.Write(jsondata)
                         handler.Write(stream)
                     End Using

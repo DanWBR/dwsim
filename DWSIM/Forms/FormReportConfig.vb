@@ -425,7 +425,7 @@ Public Class FormReportConfig
                             End Using
                         End Using
                     End Using
-                    Using writer As New StreamWriter(stream)
+                    Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                         writer.Write(output)
                         handler.Write(stream)
                     End Using
@@ -708,7 +708,7 @@ Public Class FormReportConfig
             Loop Until actualmat <> prevmat Or i >= DT.Rows.Count
             csvtext.AppendLine()
         Loop Until i >= DT.Rows.Count
-        Using writer As New StreamWriter(stream)
+        Using writer As New StreamWriter(stream) With {.AutoFlush = True}
             writer.Write(csvtext.ToString())
             handler.Write(stream)
         End Using
