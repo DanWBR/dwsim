@@ -133,21 +133,18 @@
   <data name="Mensagem.HeaderText" xml:space="preserve">
     <value>Message</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 26</value>
-  </data>
-  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 142</value>
-  </data>
-  <data name="LimparListaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 22</value>
+  <data name="CopiarInformaçõesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Information</value>
   </data>
   <data name="LimparListaToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear List</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 70</value>
+  </data>
+  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>582, 142</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>582, 142</value>
