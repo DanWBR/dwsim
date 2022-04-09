@@ -16,7 +16,7 @@ Public Class DynamicsPropertyEditor
     Private Sub DynamicsPropertyEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Shown
 
         Me.AutoScaleMode = AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
 
         For Each control As Control In Me.Controls
             control.Font = Drawing.SystemFonts.MessageBoxFont
@@ -38,6 +38,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Dim col1 = DirectCast(SimObject.ExtraProperties, IDictionary(Of String, Object))
         Dim col2 = DirectCast(SimObject.ExtraPropertiesDescriptions, IDictionary(Of String, Object))
         Dim col3 = DirectCast(SimObject.ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+        Dim col4 = DirectCast(SimObject.ExtraPropertiesTypes, IDictionary(Of String, Object))
 
         PropertiesLayout.Controls.Clear()
 
@@ -57,38 +58,57 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
                     value = p.Value.ToString
                 End If
 
-                Dim l As New Label With {.Text = p.Key, .Font = New Drawing.Font(.Font, Drawing.FontStyle.Bold), .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
-                Dim tb As New TextBox With {.Text = value, .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
-                Dim l2 As New Label With {.Text = unitsstring, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
-                Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False, .Height = 46 * GlobalSettings.Settings.DpiScale, .TextAlign = Drawing.ContentAlignment.TopLeft}
-
-                AddHandler tb.TextChanged, Sub(s, e)
-                                               If Double.TryParse(tb.Text, New Double) Then
-                                                   tb.ForeColor = System.Drawing.Color.Blue
-                                               Else
-                                                   tb.ForeColor = System.Drawing.Color.Red
-                                               End If
-                                           End Sub
-
-                AddHandler tb.KeyUp, Sub(s, e)
-                                         If e.KeyData = Keys.Enter Then
-                                             If tb.ForeColor = System.Drawing.Color.Blue Then
-                                                 col1(p.Key) = cv.ConvertToSI(units.GetCurrentUnits(utype), Double.Parse(tb.Text))
-                                                 tb.SelectAll()
-                                             End If
-                                         End If
-                                     End Sub
-
                 Dim tl As New TableLayoutPanel With {.Height = 24 * GlobalSettings.Settings.DpiScale}
                 tl.RowStyles.Clear()
                 tl.RowStyles.Add(New RowStyle(SizeType.Percent, 1.0))
                 tl.ColumnStyles.Clear()
-                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.4))
+                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.6))
                 tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.3))
-                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.3))
+                tl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 0.1))
+
+                Dim l As New Label With {.Text = p.Key, .Font = New Drawing.Font(Drawing.SystemFonts.MessageBoxFont, Drawing.FontStyle.Bold), .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
+                Dim l2 As New Label With {.Text = unitsstring, .Font = Drawing.SystemFonts.MessageBoxFont, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
+                Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Font = Drawing.SystemFonts.MessageBoxFont, .Dock = DockStyle.Fill, .AutoSize = False, .Height = 46 * GlobalSettings.Settings.DpiScale, .TextAlign = Drawing.ContentAlignment.TopLeft}
+
                 tl.Controls.Add(l, 0, 0)
-                tl.Controls.Add(tb, 1, 0)
                 tl.Controls.Add(l2, 2, 0)
+
+                Select Case DirectCast(col4(p.Key), System.Type)
+                    Case 1.0.GetType()
+                        Dim tb As New TextBox With {.Text = value, .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
+                        AddHandler tb.TextChanged, Sub(s, e)
+                                                       If Double.TryParse(tb.Text, New Double) Then
+                                                           tb.ForeColor = System.Drawing.Color.Blue
+                                                       Else
+                                                           tb.ForeColor = System.Drawing.Color.Red
+                                                       End If
+                                                   End Sub
+                        AddHandler tb.KeyUp, Sub(s, e)
+                                                 If e.KeyData = Keys.Enter Then
+                                                     If tb.ForeColor = System.Drawing.Color.Blue Then
+                                                         col1(p.Key) = cv.ConvertToSI(units.GetCurrentUnits(utype), Double.Parse(tb.Text))
+                                                         tb.SelectAll()
+                                                     End If
+                                                 End If
+                                             End Sub
+                        tl.Controls.Add(tb, 1, 0)
+                    Case 1.GetType()
+                        Dim control As New NumericUpDown With {.Value = value, .Minimum = Integer.MinValue, .Maximum = Integer.MaxValue,
+                            .DecimalPlaces = 0, .Increment = 1,
+                            .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
+                        AddHandler control.ValueChanged, Sub(s, e)
+                                                             col1(p.Key) = control.Value
+                                                         End Sub
+                        tl.Controls.Add(control, 1, 0)
+                    Case True.GetType()
+                        Dim control As New CheckBox With {.Checked = value, .CheckAlign = Drawing.ContentAlignment.MiddleRight,
+                            .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
+                        AddHandler control.CheckedChanged, Sub(s, e)
+                                                               col1(p.Key) = control.Checked
+                                                           End Sub
+                        tl.Controls.Add(control, 1, 0)
+                End Select
+
 
                 Dim tl2 As New TableLayoutPanel With {.Height = 30 * GlobalSettings.Settings.DpiScale}
                 tl2.RowStyles.Clear()
@@ -114,6 +134,10 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         PropertiesLayout.PerformLayout()
 
         Loaded = True
+
+    End Sub
+
+    Private Sub DynamicsPropertyEditor_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 

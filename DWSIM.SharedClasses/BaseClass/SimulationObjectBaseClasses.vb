@@ -45,6 +45,8 @@ Namespace UnitOperations
 
         Public Property ExtraPropertiesDescriptions As New ExpandoObject Implements ISimulationObject.ExtraPropertiesDescriptions
 
+        Public Property ExtraPropertiesTypes As New ExpandoObject Implements ISimulationObject.ExtraPropertiesTypes
+
         Public Overridable Property Visible As Boolean = True
 
         <NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
@@ -183,18 +185,22 @@ Namespace UnitOperations
         End Sub
 
         Public Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double,
-                               punittype As Enums.UnitOfMeasure) Implements ISimulationObject.AddDynamicProperty
+                               punittype As Enums.UnitOfMeasure, ptype As System.Type) Implements ISimulationObject.AddDynamicProperty
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
             If Not col1.ContainsKey(pname) Then
                 col1.Add(pname, pvalue)
                 col2.Add(pname, pdesc)
                 col3.Add(pname, punittype)
+                col4.Add(pname, ptype)
             Else
-                'Throw New Exception("Property already exists.")
+                If Not col4.ContainsKey(pname) Then
+                    col4.Add(pname, ptype)
+                End If
             End If
 
         End Sub

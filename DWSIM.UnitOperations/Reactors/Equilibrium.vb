@@ -507,13 +507,13 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Operating Pressure (Dynamics)", "Current Operating Pressure", 0, UnitOfMeasure.pressure)
-            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Volume", "Reactor Volume", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the Reactor's available space with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Content", "Empties the Reactor's space on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Operating Pressure (Dynamics)", "Current Operating Pressure", 0, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Volume", "Reactor Volume", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the Reactor's available space with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Content", "Empties the Reactor's space on the next run.", 0, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -601,26 +601,26 @@ Namespace Reactors
 
             If es IsNot Nothing Then Qval = es.EnergyFlow.GetValueOrDefault
 
-            If Qval <> 0.0 Then
+            'If Qval <> 0.0 Then
 
-                If Wa > 0 Then
+            '    If Wa > 0 Then
 
-                    AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
+            '        AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
 
-                    AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
+            '        AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
 
-                    AccumulationStream.PropertyPackage = PropertyPackage
-                    AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+            '        AccumulationStream.PropertyPackage = PropertyPackage
+            '        AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
 
-                    If integrator.ShouldCalculateEquilibrium Then
+            '        If integrator.ShouldCalculateEquilibrium Then
 
-                        AccumulationStream.Calculate(True, True)
+            '            AccumulationStream.Calculate(True, True)
 
-                    End If
+            '        End If
 
-                End If
+            '    End If
 
-            End If
+            'End If
 
             'calculate pressure
 

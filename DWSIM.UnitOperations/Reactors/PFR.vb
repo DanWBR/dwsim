@@ -463,8 +463,8 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Max Sections", "Maximum number of sections to divide the PFR length in during dynamic calculations.", 20, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Contents", "Empties the PFR's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Max Sections", "Maximum number of sections to divide the PFR length in during dynamic calculations.", 20, UnitOfMeasure.none, 1.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the PFR's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 

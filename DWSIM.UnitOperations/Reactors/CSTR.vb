@@ -136,12 +136,12 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Operating Pressure", "Current Operating Pressure", 0, UnitOfMeasure.pressure)
-            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Height", "Available Height for Liquid", 1, UnitOfMeasure.distance)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Reactor.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the CSTR contents with information from the inlet stream.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Contents", "Empties the CSTR's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Operating Pressure", "Current Operating Pressure", 0, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Height for Liquid", 1, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Reactor.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the CSTR contents with information from the inlet stream.", False, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the CSTR's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
