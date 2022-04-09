@@ -506,17 +506,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Dim deltat As Double()
                 Dim maxdt As Double = xth.Select(Function(tp) Abs(tp)).Max
 
+                Dim af = 5.0 / maxdt
+
+                If af > 1.0 Then af = 1.0
+
                 deltat = xth
 
                 t_error = 0.0#
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    If Math.Abs(deltat(i)) > 3 Then
-                        Tj(i) = Tj(i) + Math.Sign(deltat(i)) * 3
-                    Else
-                        Tj(i) = Tj(i) + deltat(i)
-                    End If
+                    Tj(i) = Tj(i) + af * deltat(i)
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     If IdealK Then
                         IObj2?.SetCurrent()
