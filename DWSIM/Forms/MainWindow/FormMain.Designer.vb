@@ -102,7 +102,6 @@ Partial Class FormMain
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.LoginButton = New System.Windows.Forms.ToolStripButton()
         Me.LogoutDropdown = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.LoggedInDwsimProBtn = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoggedInS365Button = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
@@ -581,13 +580,8 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
         Me.LogoutDropdown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoggedInDwsimProBtn, Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
+        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
         Me.LogoutDropdown.Name = "LogoutDropdown"
-        '
-        'LoggedInDwsimProBtn
-        '
-        resources.ApplyResources(Me.LoggedInDwsimProBtn, "LoggedInDwsimProBtn")
-        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
         '
         'LoggedInS365Button
         '
@@ -918,7 +912,6 @@ Partial Class FormMain
     Friend WithEvents LoginButton As ToolStripButton
     Friend WithEvents LogoutDropdown As ToolStripDropDownButton
     Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LoggedInDwsimProBtn As ToolStripMenuItem
     Friend WithEvents LoggedInS365Button As ToolStripMenuItem
     Public WithEvents DocumentacaoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiFreeProTrial As ToolStripMenuItem

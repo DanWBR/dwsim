@@ -4317,7 +4317,7 @@ Label_00CC:
         UserService.Logout()
     End Sub
 
-    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click
+    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs)
         Process.Start("https://simulate365.com/downloads/dwsim-pro/")
     End Sub
 
