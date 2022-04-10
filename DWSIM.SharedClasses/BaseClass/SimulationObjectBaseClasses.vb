@@ -168,13 +168,12 @@ Namespace UnitOperations
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
             Dim toremove As New List(Of String)
             For Each p In col1
                 If Not col2.ContainsKey(p.Key) And Not col3.ContainsKey(p.Key) Then
                     toremove.Add(p.Key)
-                Else
-                    'Throw New Exception("Property already exists.")
                 End If
             Next
 
@@ -192,16 +191,10 @@ Namespace UnitOperations
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
             Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
-            If Not col1.ContainsKey(pname) Then
-                col1.Add(pname, pvalue)
-                col2.Add(pname, pdesc)
-                col3.Add(pname, punittype)
-                col4.Add(pname, ptype)
-            Else
-                If Not col4.ContainsKey(pname) Then
-                    col4.Add(pname, ptype)
-                End If
-            End If
+            If Not col1.ContainsKey(pname) Then col1.Add(pname, pvalue)
+            If Not col2.ContainsKey(pname) Then col2.Add(pname, pdesc)
+            If Not col3.ContainsKey(pname) Then col3.Add(pname, punittype)
+            If Not col4.ContainsKey(pname) Then col4.Add(pname, ptype)
 
         End Sub
 
@@ -236,14 +229,12 @@ Namespace UnitOperations
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
-            If col1.ContainsKey(pname) Then
-                col1.Remove(pname)
-                col2.Remove(pname)
-                col3.Remove(pname)
-            Else
-                Throw New Exception("Property doesn't exist.")
-            End If
+            If col1.ContainsKey(pname) Then col1.Remove(pname)
+            If col2.ContainsKey(pname) Then col2.Remove(pname)
+            If col1.ContainsKey(pname) Then col3.Remove(pname)
+            If col4.ContainsKey(pname) Then col4.Remove(pname)
 
         End Sub
 

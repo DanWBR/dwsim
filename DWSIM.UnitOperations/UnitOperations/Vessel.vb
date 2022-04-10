@@ -403,7 +403,6 @@ Namespace UnitOperations
 
             oms2.AssignFromPhase(PhaseLabel.Liquid1, AccumulationStream, False)
 
-
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)

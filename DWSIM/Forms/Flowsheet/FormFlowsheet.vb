@@ -129,7 +129,7 @@ Public Class FormFlowsheet
 
     Friend _translatefunction As Func(Of String, String)
 
-    Public Property SupressMessages As Boolean = False
+    Public Property SupressMessages As Boolean = False Implements Interfaces.IFlowsheet.SupressMessages
 
     Private MessagePumpTimer As Timer
 

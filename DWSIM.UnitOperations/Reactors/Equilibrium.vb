@@ -513,21 +513,14 @@ Namespace Reactors
             AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance, 1.0.GetType())
             AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the Reactor's available space with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none, True.GetType())
-            AddDynamicProperty("Reset Content", "Empties the Reactor's space on the next run.", 0, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the Reactor's space on the next run.", 0, UnitOfMeasure.none, True.GetType())
+            RemoveDynamicProperty("Reset Content")
 
         End Sub
 
         Private prevM, currentM As Double
 
         Public Overrides Sub RunDynamicModel()
-
-            Select Case Me.ReactorOperationMode
-
-                Case OperationMode.OutletTemperature, OperationMode.Isothermic
-
-                    Throw New Exception("This calculation mode is not supported in Dynamic Mode.")
-
-            End Select
 
             Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
             Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
@@ -927,22 +920,18 @@ Namespace Reactors
             P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             P0 = 101325
 
-            If dynamics Then
-                T = ims.GetTemperature()
-            Else
-                Select Case Me.ReactorOperationMode
-                    Case OperationMode.Adiabatic
-                        If Tab.HasValue Then
-                            T = Tab.Value
-                        Else
-                            T = OutletTemperature
-                        End If
-                    Case OperationMode.Isothermic
-                        T = T0
-                    Case OperationMode.OutletTemperature
+            Select Case Me.ReactorOperationMode
+                Case OperationMode.Adiabatic
+                    If Tab.HasValue Then
+                        T = Tab.Value
+                    Else
                         T = OutletTemperature
-                End Select
-            End If
+                    End If
+                Case OperationMode.Isothermic
+                    T = T0
+                Case OperationMode.OutletTemperature
+                    T = OutletTemperature
+            End Select
 
             'check active reactions (equilibrium only) in the reaction set
 
@@ -1392,6 +1381,11 @@ Namespace Reactors
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             pp.CurrentMaterialStream = ims
+
+            If dynamics Then
+                AccumulationStream.Assign(ims)
+                AccumulationStream.AssignProps(ims)
+            End If
 
             IObj?.SetCurrent
 

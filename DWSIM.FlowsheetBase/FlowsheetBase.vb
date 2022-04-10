@@ -2483,6 +2483,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
         FileDatabaseProvider.CreateDatabase()
 
+        DynamicsManager.ToggleDynamicMode = Function()
+                                                DynamicMode = Not DynamicMode
+                                                Return DynamicMode
+                                            End Function
+
         FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
         FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
 
@@ -3342,6 +3347,8 @@ Label_00CC:
 
 
     End Sub
+
+    Public MustOverride Property SupressMessages As Boolean Implements IFlowsheet.SupressMessages
 
     Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
         Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()

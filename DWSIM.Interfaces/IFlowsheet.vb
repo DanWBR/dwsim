@@ -204,6 +204,8 @@
 
     Property PythonPreprocessor() As Action(Of String)
 
+    Property SupressMessages As Boolean
+
     Sub RequestSave()
 
     Sub RequestSaveWithDirectory(directory As String)
