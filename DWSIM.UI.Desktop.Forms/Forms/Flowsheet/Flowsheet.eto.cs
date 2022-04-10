@@ -289,7 +289,7 @@ namespace DWSIM.UI.Forms
 
             FileExplControl = new FileExplorerControl(FlowsheetObject);
 
-            // if automation then stop loadning UI controls
+            // if automation then stop loading UI controls
 
             if (GlobalSettings.Settings.AutomationMode) return;
 
