@@ -680,6 +680,17 @@ Namespace Enums.GraphicObjects
         BoldItalic = 3
     End Enum
 
+    Public Enum PixelValueType
+
+        Temperature = 0
+        Pressure = 1
+        Flow = 2
+        Concentration = 3
+        EnergyFlow = 4
+
+    End Enum
+
+
 End Namespace
 
 

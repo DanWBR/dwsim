@@ -462,6 +462,12 @@ Namespace GraphicObjects
 
         End Function
 
+        Public Overridable Function GetPixelValue(type As Enums.GraphicObjects.PixelValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double Implements IGraphicObject.GetPixelValue
+
+            Return Double.NaN
+
+        End Function
+
     End Class
 
 End Namespace
