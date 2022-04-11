@@ -1433,6 +1433,18 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overridable Function GetDynamicResidenceTime() As Double Implements ISimulationObject.GetDynamicResidenceTime
+            Return Double.NaN
+        End Function
+
+        Public Overridable Function GetDynamicVolume() As Double Implements ISimulationObject.GetDynamicVolume
+            Return Double.NaN
+        End Function
+
+        Public Overridable Function GetDynamicContents() As Double Implements ISimulationObject.GetDynamicContents
+            Return Double.NaN
+        End Function
+
 #End Region
 
 #Region "    IProductInformation"

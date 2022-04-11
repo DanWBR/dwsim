@@ -448,6 +448,17 @@
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Fonts.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\clock2.png" />
+    <EmbeddedResource Include="Bitmaps\lightning_bolt.png" />
+    <EmbeddedResource Include="Bitmaps\volume.png" />
+    <EmbeddedResource Include="Bitmaps\weight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\temperature.png" />
+    <EmbeddedResource Include="Bitmaps\pressure.png" />
+    <EmbeddedResource Include="Bitmaps\flow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

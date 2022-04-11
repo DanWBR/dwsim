@@ -267,6 +267,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property Simulate365FileID As String = "" Implements IFlowsheetOptions.Simulate365FileID
 
+        Public Property DisplayDynamicPropertyValues As Boolean = True Implements IFlowsheetOptions.DisplayDynamicPropertyValues
+
     End Class
 
 End Namespace

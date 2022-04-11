@@ -294,6 +294,8 @@ Public Class FormSimulSettings
         chkMSShowE.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamEnergyFlowValue
         chkESShowE.Checked = CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue
 
+        chkShowDynProps.Checked = CurrentFlowsheet.Options.DisplayDynamicPropertyValues
+
         Me.loaded = True
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -1775,6 +1777,10 @@ Public Class FormSimulSettings
 
     Private Sub chkESShowE_CheckedChanged(sender As Object, e As EventArgs) Handles chkESShowE.CheckedChanged
         CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue = chkESShowE.Checked
+    End Sub
+
+    Private Sub chkShowDynProps_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowDynProps.CheckedChanged
+        CurrentFlowsheet.Options.DisplayDynamicPropertyValues = chkShowDynProps.Checked
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

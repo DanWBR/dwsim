@@ -234,4 +234,10 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetPowerGeneratedOrConsumed() As Double
 
+    Function GetDynamicResidenceTime() As Double
+
+    Function GetDynamicVolume() As Double
+
+    Function GetDynamicContents() As Double
+
 End Interface

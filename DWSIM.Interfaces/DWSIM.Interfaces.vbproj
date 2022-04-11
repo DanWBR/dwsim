@@ -139,6 +139,7 @@
     <Compile Include="ISplashScreen.vb" />
     <Compile Include="ISwitch.vb" />
     <Compile Include="IUndoRedoAction.vb" />
+    <Compile Include="IUnitOperation.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />
     <Compile Include="IWatchItem.vb" />
