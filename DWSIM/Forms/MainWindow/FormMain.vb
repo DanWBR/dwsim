@@ -4317,12 +4317,12 @@ Label_00CC:
         UserService.Logout()
     End Sub
 
-    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click
+    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs)
         Process.Start("https://simulate365.com/downloads/dwsim-pro/")
     End Sub
 
     Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
-        Process.Start("https://simulate365.com/shops/simulate-365-suite/")
+        Process.Start("https://simulate365.com")
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
