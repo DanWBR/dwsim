@@ -2,7 +2,6 @@
 Adam Spencer
 Alberto Baumeister
 Alex Platon
-Alexander Semenyak
 Alfred Gongaware
 Andras Nady
 Anders Andreasen
@@ -22,7 +21,6 @@ David Whitlock
 Deryck Coetzer
 Diego A. Acosta
 Domenico Marchese
-Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
@@ -47,10 +45,8 @@ Joe Rhodes
 John Gorke
 John Kossik
 Jonathan
-Joon Song
 Joseph Mendoza
 Joseph Attia
-Joshua Wortis
 Karen Elrington
 Laércio Antonio Piva
 Lauterbach Verfahrenstechnik GmbH

@@ -1,6 +1,7 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces
 
 Namespace GraphicObjects.Shapes
 
@@ -162,6 +163,7 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
 
             End Select
+
         End Sub
 
     End Class

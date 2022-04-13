@@ -2,6 +2,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports s = DWSIM.GlobalSettings.Settings
 Imports DWSIM.ExtensionMethods
+Imports DWSIM.DrawingTools.Point
 
 Namespace GraphicObjects
 
@@ -68,7 +69,8 @@ Namespace GraphicObjects
 
                 DrawNotDynamicsCompatible(g)
 
-            ElseIf Owner?.GetFlowsheet?.DynamicMode Then
+            ElseIf Owner?.GetFlowsheet?.DynamicMode And
+                Owner?.GetFlowsheet()?.FlowsheetOptions.DisplayDynamicPropertyValues Then
 
                 DrawDynamicProperties(g)
 
@@ -663,6 +665,42 @@ Namespace GraphicObjects
             FontStyle = FontStyle.Bold
 
         End Sub
+
+        Public Overrides Function GetPointValue(type As PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double
+
+            If X >= 0 And X <= Width And Y >= 0 And Y <= Height Then
+                Dim value As Double
+                Dim icl = InputConnectors.Where(Function(c) c.Type <> ConType.ConEn And c.IsAttached).ToList()
+                Dim ocl = OutputConnectors.Where(Function(c) c.Type <> ConType.ConEn And c.IsAttached).ToList()
+                If icl.Count = 0 And ocl.Count = 0 Then Return Double.NaN
+                icl.AddRange(ocl)
+                Dim points As New List(Of Tuple(Of Point, Double))
+                For Each ic In icl
+                    Dim im = TryCast(ic.AttachedConnector.AttachedFrom.Owner, IMaterialStream)
+                    If im IsNot Nothing Then
+                        Dim v As Double
+                        Select Case type
+                            Case PointValueType.Temperature
+                                v = im.GetTemperature()
+                            Case PointValueType.Pressure
+                                v = im.GetPressure()
+                            Case PointValueType.Flow
+                                v = im.GetMassFlow()
+                            Case PointValueType.EnergyFlow
+                                v = im.GetEnergyFlow()
+                            Case PointValueType.Concentration
+                                v = im.GetCompoundMassConcentration(args(0))
+                        End Select
+                        points.Add(New Tuple(Of Point, Double)(New Point(ic.Position.X - X, ic.Position.Y - Y), v))
+                    End If
+                Next
+                value = MathOps.BilinearInterpolation.Interpolate(New Point(X, Y), points)
+                Return value
+            Else
+                Return Double.NaN
+            End If
+
+        End Function
 
     End Class
 

@@ -103,7 +103,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property Flowsheet As IFlowsheet
 
-    Function GetPixelValue(type As PixelValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double
+    Function GetPointValue(type As PointValueType, Xref As Integer, Yref As Integer, args As List(Of Object)) As Double
 
 End Interface
 

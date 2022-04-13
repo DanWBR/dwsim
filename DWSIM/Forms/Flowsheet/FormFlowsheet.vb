@@ -143,6 +143,10 @@ Public Class FormFlowsheet
 
     Public Event ToolOpened(sender As Object, e As EventArgs)
 
+    Public Event StartedSolving(sender As Object, e As EventArgs)
+
+    Public Event FinishedSolving(sender As Object, e As EventArgs)
+
     Public Sub New()
 
         ' This call is required by the Windows Form Designer.
@@ -1096,6 +1100,7 @@ Public Class FormFlowsheet
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
             Dim t As New Task(Of List(Of Exception))(Function()
+                                                         RaiseEvent StartedSolving(Me, New EventArgs())
                                                          Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
@@ -1107,6 +1112,7 @@ Public Class FormFlowsheet
                                                         End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
                                                      End Function)
             t.ContinueWith(Sub(tres)
+                               RaiseEvent FinishedSolving(Me, New EventArgs())
                                For Each item In tres.Result
                                    ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
                                Next

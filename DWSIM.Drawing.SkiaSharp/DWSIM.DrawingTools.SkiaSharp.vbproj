@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.Drawing.SkiaSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -415,6 +415,10 @@
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1E12C010-2661-4896-9C00-90F8B41ED10A}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>

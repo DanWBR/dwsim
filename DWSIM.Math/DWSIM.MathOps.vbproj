@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.MathOps</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="AP.vb" />
     <Compile Include="BFGSBMinimizer.vb" />
+    <Compile Include="BilinearInterpolation.vb" />
     <Compile Include="Brent.vb" />
     <Compile Include="BrentMinimize.vb" />
     <Compile Include="Broyden.vb" />

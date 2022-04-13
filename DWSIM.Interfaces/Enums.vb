@@ -680,13 +680,17 @@ Namespace Enums.GraphicObjects
         BoldItalic = 3
     End Enum
 
-    Public Enum PixelValueType
+    Public Enum PointValueType
 
         Temperature = 0
         Pressure = 1
         Flow = 2
-        Concentration = 3
-        EnergyFlow = 4
+        EnergyFlow = 3
+        Concentration = 4
+        CompoundMassFlow = 5
+        CompoundMolarFlow = 6
+        CompoundMassFraction = 7
+        CompoundMolarFraction = 8
 
     End Enum
 

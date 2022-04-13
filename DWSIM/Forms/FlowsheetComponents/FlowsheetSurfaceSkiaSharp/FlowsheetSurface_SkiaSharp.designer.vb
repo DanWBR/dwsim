@@ -1190,7 +1190,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents SplitContainerVertical As SplitContainer
     Friend WithEvents CMS_Palette As ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripSeparator19 As ToolStripSeparator
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents tbFontSize As ToolStripTextBox
@@ -1211,4 +1210,5 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tscbAddObjectsWithStreams As ToolStripComboBox
     Friend WithEvents ExportarParaPDFToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportarParaSVGToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents ToolStrip1 As ToolStrip
 End Class

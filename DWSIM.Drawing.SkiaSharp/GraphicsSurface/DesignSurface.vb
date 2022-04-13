@@ -79,6 +79,18 @@ Public Class GraphicsSurface
     Public Shared Property ItalicFonts As List(Of String)
     Public Shared Property BoldItalicFonts As List(Of String)
 
+    Public OverlayImage As SKBitmap
+    Public OverlayImage2 As SKBitmap
+    Public OverlayImage3 As SKBitmap
+    Public OverlayImage4 As SKBitmap
+    Public OverlayImage5 As SKBitmap
+
+    Public MinV, MaxV As Double
+
+    Public Origin As SKPoint
+
+    Public DrawOverlaysAction As Action(Of SKCanvas)
+
     Public Sub New()
 
         Dim assm = Me.GetType.Assembly
@@ -463,14 +475,58 @@ Public Class GraphicsSurface
             DrawSelectionRectangle(DrawingCanvas, selectionRect)
         End If
 
-    End Sub
+        DrawOverlaysAction?.Invoke(DrawingCanvas)
 
+    End Sub
 
     Public Sub UpdateSurface(surface As SKSurface)
 
         UpdateCanvas(surface.Canvas)
 
     End Sub
+
+    Public Function GetCanvasTopLeftCorner() As SKPoint
+
+        Dim minx As Integer = Integer.MaxValue
+        Dim miny As Integer = Integer.MaxValue
+        Dim maxx As Integer = 0
+        Dim maxy As Integer = 0
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If gobj.ObjectType <> ObjectType.Nenhum Then
+                If gobj.X <= minx Then minx = gobj.X - 30
+                If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 30
+                If gobj.Y <= miny Then miny = gobj.Y
+                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 60
+            End If
+        Next
+
+        Return New SKPoint(minx, miny)
+
+    End Function
+
+    Public Function GetCanvasSize() As SKSize
+
+        Dim minx As Integer = Integer.MaxValue
+        Dim miny As Integer = Integer.MaxValue
+        Dim maxx As Integer = 0
+        Dim maxy As Integer = 0
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If gobj.ObjectType <> ObjectType.Nenhum Then
+                If gobj.X <= minx Then minx = gobj.X - 30
+                If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 30
+                If gobj.Y <= miny Then miny = gobj.Y
+                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 60
+            End If
+        Next
+
+        Dim width = maxx - minx + 100
+        Dim height = maxy - miny + 100
+
+        Return New SKSize(width, height)
+
+    End Function
 
     Private Sub DrawInstructions(canvas As SKCanvas)
 
@@ -610,6 +666,8 @@ Public Class GraphicsSurface
             End If
         Next
 
+        Origin.Offset(deltax, deltay)
+
     End Sub
 
     Public Sub ZoomAll(viewwidth As Integer, viewheight As Integer)
@@ -660,6 +718,8 @@ Public Class GraphicsSurface
             Dim deltax, deltay As Integer
             deltax = mindevx - minx
             deltay = mindevy - miny
+
+            Origin.Offset(deltax, deltay)
 
             For Each gobj As IGraphicObject In Me.DrawingObjects
                 If Not gobj.IsConnector Then
@@ -719,6 +779,8 @@ Public Class GraphicsSurface
                 Next
 
                 dragStart = New SKPoint(x, y)
+
+                Origin.Offset(New SKPoint(-dx / Zoom, -dy / Zoom))
 
             Else
 
@@ -1371,6 +1433,34 @@ Public Class GraphicsSurface
             For i = Me.DrawingObjects.Count - 1 To 0 Step -1
                 drawObj = CType(Me.DrawingObjects(i), GraphicObject)
                 If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(pt.X / Zoom, pt.Y / Zoom)) Then
+                    objlist.Add(drawObj)
+                End If
+            Next
+        End If
+
+        If objlist.Count > 1 Then
+            For Each obj In objlist
+                If obj.ObjectType <> ObjectType.GO_Rectangle Then Return obj
+            Next
+        ElseIf objlist.Count = 1 Then
+            Return objlist(0)
+        Else
+            Return Nothing
+        End If
+        Return Nothing
+
+    End Function
+
+    Public Function FindObjectAtPointAbsolute(ByVal pt As SKPoint) As GraphicObject
+
+        Dim objlist As New List(Of GraphicObject)
+
+        Dim drawObj As GraphicObject
+        Dim i As Integer
+        If Me.DrawingObjects.Count > 0 Then
+            For i = Me.DrawingObjects.Count - 1 To 0 Step -1
+                drawObj = CType(Me.DrawingObjects(i), GraphicObject)
+                If drawObj.HitTest(New SKPoint(pt.X, pt.Y)) Then
                     objlist.Add(drawObj)
                 End If
             Next

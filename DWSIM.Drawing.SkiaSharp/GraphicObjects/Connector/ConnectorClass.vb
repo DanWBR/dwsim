@@ -57,6 +57,9 @@ Namespace GraphicObjects
 
         Public Property Straight As Boolean = False Implements IConnectorGraphicObject.Straight
 
+        Public Property ConnectorPath As SKPath
+
+        Public Shared Property ExpandFactor As Integer = 20
 
 #Region "Constructors"
 
@@ -756,6 +759,8 @@ Namespace GraphicObjects
                 path.LineTo(points(i).X, points(i).Y)
             Next
 
+            ConnectorPath = path
+
             Select Case DrawMode
                 Case 0
 
@@ -846,6 +851,14 @@ Namespace GraphicObjects
                     'Temperature/Pressure Gradients
             End Select
 
+            Dim bounds As New SKRect
+
+            ConnectorPath.GetBounds(bounds)
+
+            X = bounds.Left
+            Y = bounds.Top
+            Width = bounds.Width
+            Height = bounds.Height
 
         End Sub
 
@@ -864,6 +877,60 @@ Namespace GraphicObjects
         Public Property AttachedToOutput As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedToOutput
 
         Public Property AttachedFromInput As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedFromInput
+
+        Public Overrides Function HitTest(pt As SKPoint) As Boolean
+
+            Dim pen As New SKPaint
+            Dim expath As SKPath
+            With pen
+                .IsStroke = True
+                .StrokeWidth = LineWidth + ExpandFactor
+                .IsAntialias = False
+                expath = .GetFillPath(ConnectorPath)
+            End With
+
+            Return expath.Contains(pt.X, pt.Y)
+
+        End Function
+
+        Public Overrides Function GetPointValue(type As PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double
+
+            If X >= 0 And X <= Width + 5 And Y >= 0 And Y <= Height + 5 Then
+                If HitTest(New SKPoint(Me.X + X, Me.Y + Y)) Then
+                    Dim im = TryCast(AttachedFrom?.Owner, IMaterialStream)
+                    Dim om = TryCast(AttachedTo?.Owner, IMaterialStream)
+                    If im Is Nothing And om Is Nothing Then Return Double.NaN
+                    Dim ms As IMaterialStream = IIf(im Is Nothing, om, im)
+                    Dim v1 As Double
+                    Select Case type
+                        Case PointValueType.Temperature
+                            v1 = ms.GetTemperature()
+                        Case PointValueType.Pressure
+                            v1 = ms.GetPressure()
+                        Case PointValueType.Flow
+                            v1 = ms.GetMassFlow()
+                        Case PointValueType.EnergyFlow
+                            v1 = ms.GetEnergyFlow()
+                        Case PointValueType.Concentration
+                            v1 = ms.GetCompoundMassConcentration(args(0))
+                        Case PointValueType.CompoundMassFlow
+                            v1 = ms.Phases(0).Compounds(args(0)).MassFlow.GetValueOrDefault()
+                        Case PointValueType.CompoundMolarFlow
+                            v1 = ms.Phases(0).Compounds(args(0)).MolarFlow.GetValueOrDefault()
+                        Case PointValueType.CompoundMassFraction
+                            v1 = ms.Phases(0).Compounds(args(0)).MassFraction.GetValueOrDefault()
+                        Case PointValueType.CompoundMolarFraction
+                            v1 = ms.Phases(0).Compounds(args(0)).MoleFraction.GetValueOrDefault()
+                    End Select
+                    Return v1
+                Else
+                    Return Double.NaN
+                End If
+            Else
+                Return Double.NaN
+            End If
+
+        End Function
 
     End Class
 
