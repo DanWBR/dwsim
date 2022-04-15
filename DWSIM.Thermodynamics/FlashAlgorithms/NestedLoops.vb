@@ -760,13 +760,21 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                 Return interp.Interpolate(tval)
                                             End Function)
 
-                        If interpolate Then
+                        If Math.Abs(fx / H) > 0.01 Then
 
-                            Exit Do
+                            If interpolate Then
+
+                                Exit Do
+
+                            Else
+
+                                Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
+
+                            End If
 
                         Else
 
-                            Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
+                            Exit Do
 
                         End If
 
