@@ -180,7 +180,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Loaded = True
 
         AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
-                                               FControl.Invalidate()
+                                               If My.Settings.FlowsheetRenderer = 0 Then FControl.Invalidate()
                                            End Sub
         AnimationTimer.Start()
 
