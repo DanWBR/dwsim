@@ -64,6 +64,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
+
         End Sub
 
         Public Sub New(ByVal startPosition As Point)
@@ -859,6 +860,15 @@ Namespace GraphicObjects
             Y = bounds.Top
             Width = bounds.Width
             Height = bounds.Height
+
+            Dim pen As New SKPaint
+            Dim expath As SKPath
+            With pen
+                .IsStroke = True
+                .StrokeWidth = LineWidth + ExpandFactor
+                .IsAntialias = False
+                expath = .GetFillPath(ConnectorPath)
+            End With
 
         End Sub
 

@@ -3376,5 +3376,8 @@ Label_00CC:
 
     End Function
 
+    Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
+        Throw New NotImplementedException()
+    End Sub
 End Class
 

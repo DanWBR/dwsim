@@ -212,6 +212,8 @@
 
     Sub RequestSaveWithPath(filepath As String)
 
+    Sub ToggleFlowsheetAnimation()
+
 End Interface
 
 ''' <summary>

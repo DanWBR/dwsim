@@ -31,6 +31,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Loaded As Boolean = False
 
+    Public AnimationTimer As New System.Timers.Timer(16) '60 fps
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -65,26 +67,28 @@ Public Class FlowsheetSurface_SkiaSharp
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        Me.ToolStrip1.AutoSize = False
-        Me.ToolStrip1.Size = New Size(ToolStrip1.Width + 40, 28 * Settings.DpiScale)
-        Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
-        For Each item In Me.ToolStrip1.Items
-            If TryCast(item, ToolStripButton) IsNot Nothing Then
-                DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
-            End If
-        Next
-        Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
-        Me.ToolStrip1.Invalidate()
+        If Settings.DpiScale > 1.0 Then
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width + 40, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
+            Me.ToolStrip1.Invalidate()
 
-        Me.ToolStripFlowsheet.AutoSize = False
-        Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + 30, 28 * Settings.DpiScale)
-        Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
-        For Each item In Me.ToolStripFlowsheet.Items
-            If TryCast(item, ToolStripButton) IsNot Nothing Then
-                DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
-            End If
-        Next
-        Me.ToolStripFlowsheet.Invalidate()
+            Me.ToolStripFlowsheet.AutoSize = False
+            Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + 30, 28 * Settings.DpiScale)
+            Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStripFlowsheet.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStripFlowsheet.Invalidate()
+        End If
 
         If TypeOf Me.ParentForm Is FormFlowsheet Then
             Flowsheet = Me.ParentForm
@@ -174,6 +178,11 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
 
         Loaded = True
+
+        AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
+                                               FControl.Invalidate()
+                                           End Sub
+        AnimationTimer.Start()
 
     End Sub
 

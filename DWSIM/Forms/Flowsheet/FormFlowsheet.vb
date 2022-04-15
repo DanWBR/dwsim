@@ -3664,6 +3664,12 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
+
+        FormSurface.AnimationTimer.Enabled = Not FormSurface.AnimationTimer.Enabled
+
+    End Sub
+
 #End Region
 
 End Class

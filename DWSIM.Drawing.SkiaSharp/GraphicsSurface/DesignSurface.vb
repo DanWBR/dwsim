@@ -10,6 +10,7 @@ Imports Microsoft.Msagl.Core.Geometry.Curves
 Imports Microsoft.Msagl.Core.Layout
 Imports Microsoft.Msagl.Layout.Initial
 Imports Microsoft.Msagl.Layout.Incremental
+Imports System.Threading.Tasks
 
 Public Class GraphicsSurface
 
