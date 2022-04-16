@@ -118,23 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 251</value>
-  </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>1023, 24</value>
-  </data>
-  <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 290</value>
   </data>
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>1023, 24</value>
   </data>
   <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>1062, 33</value>
-  </data>
-  <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 251</value>
   </data>
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>1029, 257</value>
@@ -144,10 +135,6 @@
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 419</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>317</value>
   </data>
   <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 419</value>
@@ -296,17 +283,35 @@
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>925, 25</value>
   </data>
+  <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 22</value>
+  </data>
+  <data name="tss1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="tsmiLiveFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 22</value>
+  </data>
+  <data name="tss2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>
   </data>
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Set Global Font Size</value>
   </data>
+  <data name="tbFontSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 25</value>
+  </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 22</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Set Font Styles...</value>
+  </data>
+  <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 22</value>
@@ -319,6 +324,12 @@
   </data>
   <data name="tsbColorTheme.Items1" xml:space="preserve">
     <value>Black-and-White</value>
+  </data>
+  <data name="tsbColorTheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 25</value>
+  </data>
+  <data name="ToolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
@@ -335,8 +346,11 @@
   <data name="tscbAddObjectsWithStreams.Items2" xml:space="preserve">
     <value>Smart</value>
   </data>
+  <data name="tscbAddObjectsWithStreams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 25</value>
+  </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 25</value>
+    <value>1033, 25</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>

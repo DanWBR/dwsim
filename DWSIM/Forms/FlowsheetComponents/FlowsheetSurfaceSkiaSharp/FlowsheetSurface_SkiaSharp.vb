@@ -175,6 +175,10 @@ Public Class FlowsheetSurface_SkiaSharp
         If FormMain.IsPro Then
             FindTearStreamsAutomaticallyToolStripMenuItem.Visible = False
             UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
+            tsmiHeatMap.Visible = False
+            tsmiLiveFlow.Visible = False
+            tss1.Visible = False
+            tss2.Visible = False
         End If
 
         Loaded = True
@@ -3774,6 +3778,16 @@ Public Class FlowsheetSurface_SkiaSharp
             Flowsheet.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
         End If
 
+    End Sub
+
+    Private Sub tsmiHeatMap_Click(sender As Object, e As EventArgs) Handles tsmiHeatMap.Click
+        Dim fhm As New FormHeatMaps()
+        fhm.ShowDialog(Me)
+    End Sub
+
+    Private Sub tsmiLiveFlow_Click(sender As Object, e As EventArgs) Handles tsmiLiveFlow.Click
+        Dim flf As New FormLiveFlows()
+        flf.ShowDialog(Me)
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged

@@ -711,6 +711,12 @@
     <Compile Include="Forms\FormEventDescription.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormHeatMaps.Designer.vb">
+      <DependentUpon>FormHeatMaps.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHeatMaps.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormHTMLEditor.Designer.vb">
       <DependentUpon>FormHTMLEditor.vb</DependentUpon>
     </Compile>
@@ -721,6 +727,12 @@
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormImportCompoundOnline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLiveFlows.Designer.vb">
+      <DependentUpon>FormLiveFlows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLiveFlows.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormLoadingSimulation.Designer.vb">
@@ -1479,6 +1491,9 @@
     <EmbeddedResource Include="Forms\FormEventDescription.resx">
       <DependentUpon>FormEventDescription.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHeatMaps.resx">
+      <DependentUpon>FormHeatMaps.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormHTMLEditor.resx">
       <DependentUpon>FormHTMLEditor.vb</DependentUpon>
     </EmbeddedResource>
@@ -1487,6 +1502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLiveFlows.resx">
+      <DependentUpon>FormLiveFlows.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadingSimulation.en.resx">
       <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
