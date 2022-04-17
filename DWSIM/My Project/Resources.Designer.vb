@@ -2185,7 +2185,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property icons8_layers() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("icons8-layers", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("icons8_layers", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -2355,7 +2355,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property icons8_sankey() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("icons8-sankey", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("icons8_sankey", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

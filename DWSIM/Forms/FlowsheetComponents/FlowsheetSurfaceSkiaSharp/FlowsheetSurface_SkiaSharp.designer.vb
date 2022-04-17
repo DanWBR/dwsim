@@ -585,7 +585,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.tsmiHeatMap, "tsmiHeatMap")
         Me.tsmiHeatMap.CheckOnClick = True
-        Me.tsmiHeatMap.Image = Global.DWSIM.My.Resources.Resources.icons8_layers
         Me.tsmiHeatMap.Name = "tsmiHeatMap"
         '
         'tss1
@@ -596,7 +595,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         'tsmiLiveFlow
         '
         resources.ApplyResources(Me.tsmiLiveFlow, "tsmiLiveFlow")
-        Me.tsmiLiveFlow.Image = Global.DWSIM.My.Resources.Resources.icons8_sankey
         Me.tsmiLiveFlow.Name = "tsmiLiveFlow"
         '
         'tss2
