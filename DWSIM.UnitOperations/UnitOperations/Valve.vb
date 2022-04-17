@@ -64,6 +64,13 @@ Namespace UnitOperations
 
         Public Property EnableOpeningKvRelationship As Boolean = False
 
+        Public Property FlowCoefficient As FlowCoefficientType = FlowCoefficientType.Kv
+
+        Public Enum FlowCoefficientType
+            Kv = 0
+            Cv = 1
+        End Enum
+
         Public Enum CalculationMode
             DeltaP = 0
             OutletPressure = 1
@@ -680,6 +687,11 @@ Namespace UnitOperations
                 End Try
             End If
 
+            If FlowCoefficient = FlowCoefficientType.Cv Then
+                'Cv = 1.16 Kv
+                Kv = 1.16 * Kv
+            End If
+
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
@@ -743,8 +755,19 @@ Namespace UnitOperations
             If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, W = {3} kg/s", Ti, Pi, Hi, Wi))
 
+            Dim FC As Double 'flow coefficient
+
+            If FlowCoefficient = FlowCoefficientType.Cv Then
+                'Cv = 1.16 Kv
+                'Kv = Cv / 1.16
+                FC = Kv / 1.16
+            Else
+                FC = Kv
+            End If
+
+
             If EnableOpeningKvRelationship Then
-                IObj?.Paragraphs.Add("<h2>Opening/Kv relationship</h2>")
+                IObj?.Paragraphs.Add("<h2>Opening/Kv[Cv] relationship</h2>")
                 IObj?.Paragraphs.Add("When this feature is enabled, you can enter an expression that relates the valve stem opening with the maximum flow value (Kvmax).")
                 IObj?.Paragraphs.Add("The relationship between control valve capacity and valve stem travel is known as the Flow Characteristic of the 
                                     Control Valve. Trim design of the valve affects how the control valve capacity changes as the valve moves through 
@@ -759,16 +782,16 @@ Namespace UnitOperations
                     ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                     ExpContext.Variables.Add("OP", OpeningPct)
                     IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
-                    IObj?.Paragraphs.Add("Opening/Kvmax relationship expression: " & PercentOpeningVersusPercentKvExpression)
+                    IObj?.Paragraphs.Add("Opening/Kv[Cv]max relationship expression: " & PercentOpeningVersusPercentKvExpression)
                     Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
-                    Kvc = Kv * Expr.Evaluate() / 100
-                    IObj?.Paragraphs.Add("Calculated Kv/Kvmax (%): " & Kvc / Kv * 100)
+                    Kvc = FC * Expr.Evaluate() / 100
+                    IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
                     IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
                 Catch ex As Exception
-                    Throw New Exception("Invalid expression for Kv/Opening relationship.")
+                    Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
                 End Try
             Else
-                Kvc = Kv
+                Kvc = FC
             End If
 
             'reference: https://www.samson.de/document/t00050en.pdf

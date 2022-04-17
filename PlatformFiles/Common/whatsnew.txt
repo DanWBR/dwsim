@@ -1,10 +1,2 @@
-Version 7.5.1
+Version 7.5.5
 
-- Export Flowsheet drawing to PDF/SVG
-- Redesigned search compound experience in Classic UI
-- Fixed an issue with liquid phase stability test
-- Fixed an issue with the Adjust Control Panel (Classic UI)
-- Fixed Dynamic Separator sample
-- Fixed crash when trying to load initial estimates for column when there's none (CPUI)
-- Updated CPUI editors for Spreadsheet/Flowsheet UO
-- Fixed Excel File loading in Files Manager

@@ -1150,6 +1150,8 @@ namespace DWSIM.UI.Forms
             var tbFontSize = new TextBox { Width = 40, Text = FlowsheetObject.Options.LabelFontSize.ToString("G2") };
             var btnSetFont = new Button { Width = 40, Text = "Set" };
 
+            if (Application.Instance.Platform.IsGtk) btnSetFont.Size = new Size(40, 30);
+
             btnSetFont.Click += (s, e) =>
             {
                 FlowsheetObject.Options.LabelFontSize = Double.Parse(tbFontSize.Text);

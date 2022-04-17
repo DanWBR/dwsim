@@ -132,7 +132,6 @@ Public Class EditingForm_Valve
                     cbCalcMode.SelectedIndex = 4
                 Case UnitOperations.Valve.CalculationMode.Kv_General
                     cbCalcMode.SelectedIndex = 5
-
             End Select
 
             tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
@@ -143,6 +142,8 @@ Public Class EditingForm_Valve
             tbKvOpRel.Text = uobj.PercentOpeningVersusPercentKvExpression
 
             chkEnableKvOpRel.Checked = uobj.EnableOpeningKvRelationship
+
+            If .FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Kv Then rbKv.Checked = True Else rbCv.Checked = True
 
         End With
 
@@ -188,6 +189,8 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
                 btnCalcKv.Enabled = True
+                rbCv.Enabled = False
+                rbKv.Enabled = False
             Case 1
                 tbPressureDrop.Enabled = True
                 tbOutletPressure.Enabled = False
@@ -197,6 +200,8 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.DeltaP
                 btnCalcKv.Enabled = True
+                rbCv.Enabled = False
+                rbKv.Enabled = False
             Case 2
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -206,6 +211,8 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Liquid
                 btnCalcKv.Enabled = True
+                rbCv.Enabled = True
+                rbKv.Enabled = True
             Case 3
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -215,6 +222,8 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Gas
                 btnCalcKv.Enabled = True
+                rbCv.Enabled = True
+                rbKv.Enabled = True
             Case 4
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -224,6 +233,8 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
                 btnCalcKv.Enabled = True
+                rbCv.Enabled = True
+                rbKv.Enabled = True
             Case 5
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -233,7 +244,8 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
                 btnCalcKv.Enabled = True
-
+                rbCv.Enabled = True
+                rbKv.Enabled = True
         End Select
 
     End Sub
@@ -520,4 +532,10 @@ Public Class EditingForm_Valve
         UpdateInfo()
 
     End Sub
+
+    Private Sub rbKv_CheckedChanged(sender As Object, e As EventArgs) Handles rbKv.CheckedChanged, rbCv.CheckedChanged
+        If rbCv.Checked Then SimObject.FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Cv
+        If rbKv.Checked Then SimObject.FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Kv
+    End Sub
+
 End Class

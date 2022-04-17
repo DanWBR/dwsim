@@ -377,6 +377,16 @@ Public Class FormDynamicsIntegratorControl
                                         integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
                                         If integrator.ShouldCalculateControl Then
+                                            For i = 0 To Controllers.Count
+                                                For Each controller As PIDController In Controllers
+                                                    If controller.Active Then
+                                                        Try
+                                                            controller.Solve()
+                                                        Catch ex As Exception
+                                                        End Try
+                                                    End If
+                                                Next
+                                            Next
                                             For Each controller As PIDController In Controllers
                                                 If controller.Active Then
                                                     Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name)

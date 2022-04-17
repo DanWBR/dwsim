@@ -459,8 +459,6 @@ Namespace SpecialOps
                         Return CurrentError
                     Case "CumulativeError"
                         Return CumulativeError
-                    Case "SetPoint"
-                        Return 1.0
                     Case "SetPointAbs"
                         Return AdjustValue
                     Case "Kp"
@@ -493,7 +491,6 @@ Namespace SpecialOps
             proplist.Add("LastError")
             proplist.Add("CurrentError")
             proplist.Add("CumulativeError")
-            proplist.Add("SetPoint")
             proplist.Add("SetPointAbs")
             proplist.Add("Kp")
             proplist.Add("Ki")

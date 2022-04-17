@@ -421,6 +421,22 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                     if (integrator.ShouldCalculateControl)
                     {
+                        for (int c = 0; c <= Controllers.Count;  c++)
+                        {
+                            foreach (PIDController controller in Controllers)
+                            {
+                                if (controller.Active)
+                                {
+                                    try
+                                    {
+                                        controller.Solve();
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                            }
+                        }
                         foreach (PIDController controller in Controllers)
                         {
                             if (controller.Active)

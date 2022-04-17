@@ -1000,7 +1000,11 @@ namespace DWSIM.UI.Desktop.Editors
                                }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Kv(max)", valve.Kv,
+                    s.CreateAndAddDropDownRow(container, "Flow Coefficient Type", new List<string>(new[] { "Kv", "Cv" }), (int)valve.FlowCoefficient,
+                        (sender, e) => {
+                            valve.FlowCoefficient = sender.SelectedIndex.ToEnum<Valve.FlowCoefficientType>();
+                        });
+                    s.CreateAndAddTextBoxRow(container, nf, "Kv[Cv](max)", valve.Kv,
                                (TextBox arg3, EventArgs ev) =>
                                {
                                    if (arg3.Text.IsValidDoubleExpression())
@@ -1013,8 +1017,8 @@ namespace DWSIM.UI.Desktop.Editors
                                        arg3.TextColor = (Colors.Red);
                                    }
                                }, () => CallSolverIfNeeded());
-                    s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv/Kvmax (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
-                    s.CreateAndAddStringEditorRow(container, "Kv/Kvmax (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv[Cv]/Kv[Cv]max (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
+                    s.CreateAndAddStringEditorRow(container, "Kv[Cv]/Kv[Cv]max (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Opening (%)", valve.OpeningPct,
                                (TextBox arg3, EventArgs ev) =>
                                {

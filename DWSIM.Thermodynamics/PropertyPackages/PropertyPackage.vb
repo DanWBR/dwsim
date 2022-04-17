@@ -10264,7 +10264,7 @@ Final3:
         ''' <param name="constantId">Identifier of Universal Constant. The list of constants supported should be 
         ''' obtained by using the GetUniversalConstantList method.</param>
         ''' <returns>Value of Universal Constant. This could be a numeric or a string value. For numeric values 
-        ''' the units of measurement are specified in section 7.5.1.</returns>
+        ''' the units of measurement are specified in section 7.5.5.</returns>
         ''' <remarks>Universal Constants (often called fundamental constants) are quantities like the gas constant,
         ''' or the Avogadro constant.</remarks>
         Public Overridable Function GetUniversalConstant1(ByVal constantId As String) As Object Implements ICapeThermoUniversalConstant.GetUniversalConstant
@@ -10287,9 +10287,9 @@ Final3:
         ''' <summary>
         ''' Returns the identifiers of the supported Universal Constants.
         ''' </summary>
-        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.1.</returns>
+        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.5.</returns>
         ''' <remarks>A component may return Universal Constant identifiers that do not belong to the list defined
-        ''' in section 7.5.1. However, these proprietary identifiers may not be understood by most of the
+        ''' in section 7.5.5. However, these proprietary identifiers may not be understood by most of the
         ''' clients of this component.</remarks>
         Public Overridable Function GetUniversalConstantList() As Object Implements ICapeThermoUniversalConstant.GetUniversalConstantList
             Return New String() {"standardAccelerationOfGravity", "avogadroConstant", "boltzmannConstant", "molarGasConstant"}
