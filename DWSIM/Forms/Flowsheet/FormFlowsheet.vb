@@ -3031,7 +3031,7 @@ Public Class FormFlowsheet
             ElseIf cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
                 dckPanel.DockRightPortion = 450 * Settings.DpiScale
             ElseIf cnt.ShowHint = DockState.DockTop Or cnt.ShowHint = DockState.DockTopAutoHide Then
-                dckPanel.DockTopPortion = 160 * Settings.DpiScale
+                dckPanel.DockTopPortion = 86 * Settings.DpiScale
             ElseIf cnt.ShowHint = DockState.Float Then
                 dckPanel.DefaultFloatWindowSize = New Size(500 * Settings.DpiScale, 500 * Settings.DpiScale)
             End If

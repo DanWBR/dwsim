@@ -190,6 +190,17 @@ Namespace UnitOperations
 
                     H2 = Hi
 
+
+                    Dim FC As Double 'flow coefficient
+
+                    If FlowCoefficient = FlowCoefficientType.Cv Then
+                        'Cv = 1.16 Kv
+                        'Kv = Cv / 1.16
+                        FC = Kv / 1.16
+                    Else
+                        FC = Kv
+                    End If
+
                     If EnableOpeningKvRelationship Then
                         Try
                             Dim ExpContext As New Ciloci.Flee.ExpressionContext
@@ -198,12 +209,12 @@ Namespace UnitOperations
                             ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                             ExpContext.Variables.Add("OP", OpeningPct)
                             Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
-                            Kvc = Kv * Expr.Evaluate() / 100
+                            Kvc = FC * Expr.Evaluate() / 100
                         Catch ex As Exception
-                            Throw New Exception("Invalid expression for Kv/Opening relationship.")
+                            Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
                         End Try
                     Else
-                        Kvc = Kv
+                        Kvc = FC
                     End If
 
                     If ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
@@ -266,7 +277,7 @@ Namespace UnitOperations
                             End If
                         End If
 
-                        If Double.IsNaN(Wi) Then Wi = 0.0
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
 
                         ims.SetMassFlow(Wi)
                         oms.SetMassFlow(Wi)
@@ -276,7 +287,7 @@ Namespace UnitOperations
 
                         'valid! calculate P1
 
-                        If Double.IsNaN(Wi) Then Wi = 0.0
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
 
                         oms.SetMassFlow(Wi)
 
@@ -309,10 +320,9 @@ Namespace UnitOperations
 
                         Wi = oms.GetMassFlow
 
-                        If Double.IsNaN(Wi) Then Wi = 0.0
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
 
                         ims.SetMassFlow(Wi)
-
 
                         'valid! Calculate P2
 

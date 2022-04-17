@@ -8246,6 +8246,10 @@ Namespace Streams
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
 
+            If Double.IsNaN(stream.GetMassFlow()) Or Double.IsInfinity(stream.GetMassFlow()) Then
+                Return newstream
+            End If
+
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
 
@@ -8326,6 +8330,10 @@ Namespace Streams
         Public Function Subtract(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
+
+            If Double.IsNaN(stream.GetMassFlow()) Or Double.IsInfinity(stream.GetMassFlow()) Then
+                Return newstream
+            End If
 
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
