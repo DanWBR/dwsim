@@ -142,9 +142,6 @@
   <data name="greyscale_34" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greyscale_34.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heatmaps" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\..\CGC\dwsim-pro\src\ProExtensions.Flowsheet\Resources\heatmaps.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Services" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Services.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1429,7 +1426,10 @@
   <data name="page_white_star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_white_star.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="heatmaps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\heatmaps.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="liveflows" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\..\CGC\dwsim-pro\src\ProExtensions.Flowsheet\Resources\liveflows.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\liveflows.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
