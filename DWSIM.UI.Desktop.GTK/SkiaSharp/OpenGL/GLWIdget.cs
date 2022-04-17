@@ -351,18 +351,18 @@ namespace OpenTK
 
             GraphicsMode graphicsMode = new GraphicsMode();
 
-            if (Configuration.RunningOnWindows)
-            {
-                Console.WriteLine("OpenTK running on windows");
-            }
-            else if (Configuration.RunningOnMacOS)
-            {
-                Console.WriteLine("OpenTK running on OSX");
-            }
-            else
-            {
-                Console.WriteLine("OpenTK running on X11");
-            }
+            //if (Configuration.RunningOnWindows)
+            //{
+            //    Console.WriteLine("OpenTK running on windows");
+            //}
+            //else if (Configuration.RunningOnMacOS)
+            //{
+            //    Console.WriteLine("OpenTK running on OSX");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("OpenTK running on X11");
+            //}
 
 #if GTK3
             IntPtr widgetWindowHandle = this.Window.Handle;
