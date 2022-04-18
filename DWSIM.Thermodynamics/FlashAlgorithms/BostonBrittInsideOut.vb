@@ -558,6 +558,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
             Else
                 DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
                 DHv2 = PP.DW_CalcEnthalpyDeparture(Vy, Tref, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
+                C = DHv2
+                D = (DHv1 - C) / (T - Tref)
                 If T < MathEx.Common.Max(VTc, Vz) Then
                     DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
                     DHl2 = PP.DW_CalcEnthalpyDeparture(Vx, Tref, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
