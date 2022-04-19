@@ -510,12 +510,12 @@ Public Class GraphicsSurface
                 If gobj.X <= minx Then minx = gobj.X - 30
                 If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 30
                 If gobj.Y <= miny Then miny = gobj.Y
-                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 60
+                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 30
             End If
         Next
 
-        Dim width = maxx - minx + 100
-        Dim height = maxy - miny + 100
+        Dim width = maxx - minx
+        Dim height = maxy - miny
 
         Return New SKSize(width, height)
 
