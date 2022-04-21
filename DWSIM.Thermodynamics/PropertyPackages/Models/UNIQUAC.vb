@@ -37,6 +37,8 @@ Namespace PropertyPackages.Auxiliary
         <FieldHidden()> Public B21 As Double = 0
         <FieldHidden()> Public C12 As Double = 0
         <FieldHidden()> Public C21 As Double = 0
+        <FieldHidden()> Public Name1 As String = ""
+        <FieldHidden()> Public Name2 As String = ""
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
 
@@ -50,6 +52,8 @@ Namespace PropertyPackages.Auxiliary
                 .B21 = Me.B21
                 .C12 = Me.C12
                 .C21 = Me.C21
+                .Name1 = Name1
+                .Name2 = Name2
                 .comment = Me.comment
             End With
             Return newclass
@@ -218,6 +222,17 @@ Namespace PropertyPackages.Auxiliary
             uniquacipc = Nothing
             uniquacipc2 = Nothing
             fh1 = Nothing
+
+            Dim pars = New ChemSepIPDReader().ReadUNIQUACIPD()
+
+            For Each IP In pars
+                If Not Me.InteractionParameters.ContainsKey(IP.Name1) Then
+                    Me.InteractionParameters.Add(IP.Name1, New Dictionary(Of String, UNIQUAC_IPData))
+                    Me.InteractionParameters(IP.Name1).Add(IP.Name2, IP)
+                ElseIf Not Me.InteractionParameters(IP.Name1).ContainsKey(IP.Name2) Then
+                    Me.InteractionParameters(IP.Name1).Add(IP.Name2, IP)
+                End If
+            Next
 
         End Sub
 
