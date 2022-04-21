@@ -59,6 +59,8 @@ Namespace GraphicObjects
 
         Public Property ConnectorPath As SKPath
 
+        Public Property ConnectorPathExpanded As SKPath
+
         Public Shared Property ExpandFactor As Integer = 20
 
 #Region "Constructors"
@@ -862,12 +864,11 @@ Namespace GraphicObjects
             Height = bounds.Height
 
             Dim pen As New SKPaint
-            Dim expath As SKPath
             With pen
                 .IsStroke = True
                 .StrokeWidth = LineWidth + ExpandFactor
                 .IsAntialias = False
-                expath = .GetFillPath(ConnectorPath)
+                ConnectorPathExpanded = .GetFillPath(ConnectorPath)
             End With
 
         End Sub
@@ -890,16 +891,7 @@ Namespace GraphicObjects
 
         Public Overrides Function HitTest(pt As SKPoint) As Boolean
 
-            Dim pen As New SKPaint
-            Dim expath As SKPath
-            With pen
-                .IsStroke = True
-                .StrokeWidth = LineWidth + ExpandFactor
-                .IsAntialias = False
-                expath = .GetFillPath(ConnectorPath)
-            End With
-
-            Return expath.Contains(pt.X, pt.Y)
+            Return ConnectorPathExpanded.Contains(pt.X, pt.Y)
 
         End Function
 
