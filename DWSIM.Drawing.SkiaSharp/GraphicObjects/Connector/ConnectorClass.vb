@@ -863,14 +863,6 @@ Namespace GraphicObjects
             Width = bounds.Width
             Height = bounds.Height
 
-            Dim pen As New SKPaint
-            With pen
-                .IsStroke = True
-                .StrokeWidth = LineWidth + ExpandFactor
-                .IsAntialias = False
-                ConnectorPathExpanded = .GetFillPath(ConnectorPath)
-            End With
-
         End Sub
 
         Public Property AttachedFrom As Interfaces.IGraphicObject = Nothing Implements Interfaces.IConnectorGraphicObject.AttachedFrom
@@ -891,7 +883,11 @@ Namespace GraphicObjects
 
         Public Overrides Function HitTest(pt As SKPoint) As Boolean
 
-            Return ConnectorPathExpanded.Contains(pt.X, pt.Y)
+            If ConnectorPathExpanded IsNot Nothing Then
+                Return ConnectorPathExpanded.Contains(pt.X, pt.Y)
+            Else
+                Return False
+            End If
 
         End Function
 
