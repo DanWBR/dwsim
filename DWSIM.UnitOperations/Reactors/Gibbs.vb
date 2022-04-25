@@ -783,6 +783,31 @@ Namespace Reactors
 
         End Sub
 
+        Public Overrides Sub DisplayDynamicsEditForm()
+
+            If fd Is Nothing Then
+                fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                fd.Tag = "ObjectEditor"
+                fd.UpdateCallBack = Sub(table)
+                                        AddButtonsToDynEditor(table)
+                                    End Sub
+                Me.FlowSheet.DisplayForm(fd)
+            Else
+                If fd.IsDisposed Then
+                    fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                    fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                    fd.Tag = "ObjectEditor"
+                    fd.UpdateCallBack = Sub(table)
+                                            AddButtonsToDynEditor(table)
+                                        End Sub
+                    Me.FlowSheet.DisplayForm(fd)
+                Else
+                    fd.Activate()
+                End If
+            End If
+
+        End Sub
 
         Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
 
@@ -1097,7 +1122,7 @@ Namespace Reactors
             Me.DeltaT = 0
 
             If dynamics Then
-                ims = AccumulationStream
+                ims = AccumulationStream.Clone()
             Else
                 ims = GetInletMaterialStream(0).Clone()
             End If

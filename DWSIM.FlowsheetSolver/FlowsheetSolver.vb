@@ -1374,12 +1374,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Try
                         While Not (Date.Now - d1).TotalMilliseconds >= Settings.SolverTimeoutSeconds * 1000
                             maintask.Wait(500)
-                            fgui.UpdateInterface()
                             If Settings.TaskCancellationTokenSource.IsCancellationRequested Then
                                 Throw New OperationCanceledException()
                             End If
                             If maintask.Status = TaskStatus.RanToCompletion Then Exit While
                         End While
+                        fgui.UpdateInterface()
                         If maintask.Status = TaskStatus.Running Then Throw New TimeoutException(fgui.GetTranslatedString("SolverTimeout"))
                         If maintask.IsFaulted Then Throw maintask.Exception
                         If exlist.Count > 0 Then Throw New AggregateException(exlist)

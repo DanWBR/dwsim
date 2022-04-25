@@ -872,7 +872,7 @@ Namespace Reactors
             Dim ims As MaterialStream
 
             If dynamics Then
-                ims = AccumulationStream
+                ims = AccumulationStream.Clone()
             Else
                 ims = GetInletMaterialStream(0).Clone()
             End If
