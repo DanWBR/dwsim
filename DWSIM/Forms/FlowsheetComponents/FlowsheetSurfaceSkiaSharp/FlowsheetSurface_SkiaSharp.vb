@@ -31,7 +31,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Loaded As Boolean = False
 
-    Public AnimationTimer As New System.Timers.Timer(16) '60 fps
+    Public AnimationTimer As New System.Timers.Timer(42) '24 fps
 
     Public Sub New()
 
@@ -186,7 +186,7 @@ Public Class FlowsheetSurface_SkiaSharp
         AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
                                                If My.Settings.FlowsheetRenderer = 0 Then FControl.Invalidate()
                                            End Sub
-        AnimationTimer.Start()
+        'AnimationTimer.Start()
 
     End Sub
 
