@@ -719,12 +719,11 @@ Namespace GraphicObjects
 
             SetupPositioning()
 
-            Dim points() As SKPoint = PointList.Select(Function(x) New SKPoint(x.X, x.Y)).ToArray
             Dim path As New SKPath()
 
-            path.MoveTo(points(0).X, points(0).Y)
-            For i As Integer = 1 To points.Length - 1
-                path.LineTo(points(i).X, points(i).Y)
+            path.MoveTo(PointList(0).X, PointList(0).Y)
+            For i As Integer = 1 To PointList.Count - 1
+                path.LineTo(PointList(i).X, PointList(i).Y)
             Next
 
             ConnectorPath = path
@@ -775,7 +774,8 @@ Namespace GraphicObjects
 
                     Else
 
-                        canvas.DrawLine(points.First, points.Last, myPen)
+                        canvas.DrawLine(New SKPoint(PointList.First.X, PointList.First.Y),
+                                        New SKPoint(PointList.Last.X, PointList.Last.Y), myPen)
 
                     End If
 
@@ -805,7 +805,8 @@ Namespace GraphicObjects
 
                     Else
 
-                        canvas.DrawLine(points.First, points.Last, myPen)
+                        canvas.DrawLine(New SKPoint(PointList.First.X, PointList.First.Y),
+                                        New SKPoint(PointList.Last.X, PointList.Last.Y), myPen)
 
                     End If
 

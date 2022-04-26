@@ -323,7 +323,7 @@ Namespace GraphicObjects
             tpaint.GetTextPath(Me.Tag, 0, 0).GetBounds(trect)
             Dim tsize As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)
 
-            Dim strx As Single = (Me.Width - tpaint.MeasureText(Me.Tag)) / 2
+            Dim strx As Single = (Me.Width - tsize.Width) / 2
 
             Dim bpaint As SKPaint = Nothing
 
@@ -360,173 +360,181 @@ Namespace GraphicObjects
 
             If Flowsheet IsNot Nothing Then
                 Dim fo = Flowsheet.FlowsheetOptions
-                If Flowsheet.SimulationObjects.ContainsKey(Name) Then
-                    Dim eformat = "N2"
-                    If ObjectType = ObjectType.MaterialStream Then
-                        Dim deltay = tsize.Height
-                        Dim mstr = Flowsheet.SimulationObjects(Name)
-                        If fo.DisplayMaterialStreamTemperatureValue Then
-                            If TemperatureImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.temperature.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        TemperatureImage = SKImage.FromBitmap(bitmap)
+                If fo.DisplayMaterialStreamTemperatureValue Or
+                    fo.DisplayMaterialStreamEnergyFlowValue Or
+                    fo.DisplayMaterialStreamMassFlowValue Or
+                    fo.DisplayMaterialStreamMolarFlowValue Or
+                    fo.DisplayMaterialStreamPressureValue Or
+                    fo.DisplayMaterialStreamVolFlowValue Or
+                    fo.DisplayEnergyStreamPowerValue Then
+                    If Flowsheet.SimulationObjects.ContainsKey(Name) Then
+                        Dim eformat = "N2"
+                        If ObjectType = ObjectType.MaterialStream Then
+                            Dim deltay = tsize.Height
+                            Dim mstr = Flowsheet.SimulationObjects(Name)
+                            If fo.DisplayMaterialStreamTemperatureValue Then
+                                If TemperatureImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.temperature.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            TemperatureImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
+                                End If
+                                Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_0"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(TemperatureImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
                                 End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
+                                deltay += tsize.Height - 4
                             End If
-                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_0"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(TemperatureImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
-                            End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
-                            deltay += tsize.Height - 4
-                        End If
-                        If fo.DisplayMaterialStreamPressureValue Then
-                            If PressureImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.pressure.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        PressureImage = SKImage.FromBitmap(bitmap)
+                            If fo.DisplayMaterialStreamPressureValue Then
+                                If PressureImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.pressure.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            PressureImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
+                                End If
+                                Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_1"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(PressureImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
                                 End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
+                                deltay += tsize.Height - 4
                             End If
-                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_1"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(PressureImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
-                            End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
-                            deltay += tsize.Height - 4
-                        End If
-                        If fo.DisplayMaterialStreamMassFlowValue Then
-                            If FlowImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.flow.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        FlowImage = SKImage.FromBitmap(bitmap)
+                            If fo.DisplayMaterialStreamMassFlowValue Then
+                                If FlowImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.flow.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            FlowImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
+                                End If
+                                Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_2"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.massflow
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(FlowImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
                                 End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
+                                deltay += tsize.Height - 4
                             End If
-                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_2"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.massflow
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(FlowImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
-                            End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
-                            deltay += tsize.Height - 4
-                        End If
-                        If fo.DisplayMaterialStreamMolarFlowValue Then
-                            If FlowImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.flow.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        FlowImage = SKImage.FromBitmap(bitmap)
+                            If fo.DisplayMaterialStreamMolarFlowValue Then
+                                If FlowImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.flow.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            FlowImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
+                                End If
+                                Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_3"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.molarflow
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(FlowImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
                                 End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
+                                deltay += tsize.Height - 4
                             End If
-                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_3"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.molarflow
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(FlowImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
-                            End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
-                            deltay += tsize.Height - 4
-                        End If
-                        If fo.DisplayMaterialStreamVolFlowValue Then
-                            If FlowImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.flow.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        FlowImage = SKImage.FromBitmap(bitmap)
+                            If fo.DisplayMaterialStreamVolFlowValue Then
+                                If FlowImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.flow.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            FlowImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
+                                End If
+                                Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_4"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.volumetricFlow
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(FlowImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
                                 End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
+                                deltay += tsize.Height - 4
                             End If
-                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_4"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.volumetricFlow
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(FlowImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
-                            End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
-                            deltay += tsize.Height - 4
-                        End If
-                        If fo.DisplayMaterialStreamEnergyFlowValue Then
-                            If LightningImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.lightning_bolt.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        LightningImage = SKImage.FromBitmap(bitmap)
+                            If fo.DisplayMaterialStreamEnergyFlowValue Then
+                                If LightningImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.lightning_bolt.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            LightningImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
+                                End If
+                                Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_154"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(LightningImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
                                 End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
+                                deltay += tsize.Height - 4
                             End If
-                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_154"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(LightningImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 - deltay + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, bpaint)
-                            End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - deltay - tsize.Height + 4, tpaint)
-                            deltay += tsize.Height - 4
-                        End If
-                    ElseIf ObjectType = ObjectType.EnergyStream Then
-                        If fo.DisplayEnergyStreamPowerValue Then
-                            If LightningImage Is Nothing Then
-                                Dim assm = Me.GetType.Assembly
-                                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.lightning_bolt.png")
-                                    Using bitmap = SKBitmap.Decode(filestr)
-                                        LightningImage = SKImage.FromBitmap(bitmap)
+                        ElseIf ObjectType = ObjectType.EnergyStream Then
+                            If fo.DisplayEnergyStreamPowerValue Then
+                                If LightningImage Is Nothing Then
+                                    Dim assm = Me.GetType.Assembly
+                                    Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.lightning_bolt.png")
+                                        Using bitmap = SKBitmap.Decode(filestr)
+                                            LightningImage = SKImage.FromBitmap(bitmap)
+                                        End Using
                                     End Using
-                                End Using
-                            End If
-                            Dim estr = Flowsheet.SimulationObjects(Name)
-                            Dim eval = Convert.ToDouble(estr.GetPropertyValue("PROP_ES_0"))
-                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
-                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
-                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                                End If
+                                Dim estr = Flowsheet.SimulationObjects(Name)
+                                Dim eval = Convert.ToDouble(estr.GetPropertyValue("PROP_ES_0"))
+                                Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
+                                Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                                strx = (Me.Width - tpaint.MeasureText(estring)) / 2
 
-                            Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
-                            Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                                g.DrawImage(LightningImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 + 2), imgsize), p)
-                            End Using
-                            If bpaint IsNot Nothing Then
-                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - tsize.Height + 4, bpaint)
+                                Dim imgsize = New SKSize(Math.Abs(tsize.Height) + 4, Math.Abs(tsize.Height) + 4)
+                                Using p As New SKPaint With {.IsAntialias = s.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                                    g.DrawImage(LightningImage, SKRect.Create(New SKPoint(X + strx - 0.6 * imgsize.Width, Y + Height + 14 + 2), imgsize), p)
+                                End Using
+                                If bpaint IsNot Nothing Then
+                                    g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - tsize.Height + 4, bpaint)
+                                End If
+                                g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - tsize.Height + 4, tpaint)
                             End If
-                            g.DrawText(estring, X + strx + 0.6 * imgsize.Width, Y + Height + 14 - tsize.Height + 4, tpaint)
                         End If
                     End If
                 End If
