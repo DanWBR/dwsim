@@ -34,7 +34,7 @@ Namespace DWSIM.Flowsheet
 
         Public GraphicObjectCollection As Dictionary(Of String, IGraphicObject)
 
-        Public FlowsheetObjectCollection As Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
+        Public FlowsheetObjectCollection As Dictionary(Of String, ISimulationObject)
 
         Public OPT_SensAnalysisCollection As List(Of Optimization.SensitivityAnalysisCase)
 
@@ -46,7 +46,7 @@ Namespace DWSIM.Flowsheet
 
             GraphicObjectCollection = New Dictionary(Of String, IGraphicObject)
 
-            FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
+            FlowsheetObjectCollection = New Dictionary(Of String, ISimulationObject)
 
             OPT_SensAnalysisCollection = New List(Of Optimization.SensitivityAnalysisCase)
 

@@ -80,6 +80,8 @@ Public Class GraphicsSurface
     Public Shared Property ItalicFonts As List(Of String)
     Public Shared Property BoldItalicFonts As List(Of String)
 
+    Public DrawAdditionalItems As Boolean = False
+
     Public OverlayImage As SKBitmap
     Public OverlayImage2 As SKBitmap
     Public OverlayImage3 As SKBitmap
@@ -293,9 +295,9 @@ Public Class GraphicsSurface
 
         DrawingCanvas.Scale(Me.Zoom, Me.Zoom)
 
-        Dim objects = DrawingObjects.ToArray
+        'Dim objects = DrawingObjects.ToArray
 
-        If objects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
+        If DrawingObjects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
             If Not NetworkMode Then DrawInstructions(DrawingCanvas)
         End If
 
@@ -313,13 +315,13 @@ Public Class GraphicsSurface
             DrawingCanvas.DrawRoundRect(New SKRect(AddedObject.X - 250 * tstep / Tfactor, AddedObject.Y - 250 * tstep / Tfactor, AddedObject.X + AddedObject.Width + 250 * tstep / Tfactor, AddedObject.Y + AddedObject.Height + 250 * tstep / Tfactor), 10, 10, spa)
         End If
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
             If TypeOf dobj Is Shapes.RectangleGraphic Then
                 dobj.Draw(DrawingCanvas)
             End If
         Next
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
             If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
                Not TypeOf dobj Is Tables.FloatingTableGraphic Then
                 If TypeOf dobj Is ShapeGraphic Then
@@ -328,7 +330,7 @@ Public Class GraphicsSurface
             End If
         Next
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
             If TypeOf dobj Is ConnectorGraphic Then
                 dobj.Draw(DrawingCanvas)
             End If
@@ -365,7 +367,7 @@ Public Class GraphicsSurface
             If Not Me.SelectedObjects.ContainsKey(gr.Name) Then gr.Selected = False
         Next
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
 
             DirectCast(dobj, GraphicObject).RegularTypeFace = RegularTypeFace
             DirectCast(dobj, GraphicObject).BoldTypeFace = BoldTypeFace
@@ -451,7 +453,7 @@ Public Class GraphicsSurface
         Next
 
         If DrawPropertyList Then
-            For Each dobj In objects
+            For Each dobj In DrawingObjects
                 If dobj.Calculated Then DrawPropertyListBlock(DrawingCanvas, dobj)
             Next
         End If
@@ -462,7 +464,9 @@ Public Class GraphicsSurface
             DrawSelectionRectangle(DrawingCanvas, selectionRect)
         End If
 
-        DrawOverlaysAction?.Invoke(DrawingCanvas)
+        If DrawAdditionalItems Then
+            DrawOverlaysAction.Invoke(DrawingCanvas)
+        End If
 
         For Each dobj As GraphicObject In Me.DrawingObjects
             If TypeOf dobj Is Tables.FloatingTableGraphic Then

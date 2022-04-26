@@ -934,7 +934,7 @@ Public Class FormFlowsheet
 
         If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, IGraphicObject)
 
-        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
+        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, ISimulationObject)
 
         If Collections.OPT_SensAnalysisCollection Is Nothing Then Collections.OPT_SensAnalysisCollection = New List(Of SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase)
 
@@ -2869,7 +2869,7 @@ Public Class FormFlowsheet
 
     Public Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
-            Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
+            Return Collections.GraphicObjectCollection
         End Get
         Set(value As Dictionary(Of String, Interfaces.IGraphicObject))
 
@@ -2878,7 +2878,7 @@ Public Class FormFlowsheet
 
     Public Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects, IFlowsheetBag.SimulationObjects
         Get
-            Return Collections.FlowsheetObjectCollection.ToDictionary(Of String, ISimulationObject)(Function(k) k.Key, Function(k) k.Value)
+            Return Collections.FlowsheetObjectCollection
         End Get
         Set(value As Dictionary(Of String, Interfaces.ISimulationObject))
 
@@ -2982,25 +2982,25 @@ Public Class FormFlowsheet
         Get
             Select Case Options.CompoundOrderingMode
                 Case CompoundOrdering.CAS_ASC
-                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.CAS_Number).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.CAS_Number)
                 Case CompoundOrdering.CAS_DESC
-                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.CAS_Number).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.CAS_Number)
                 Case CompoundOrdering.MW_ASC
-                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.Molar_Weight).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.Molar_Weight)
                 Case CompoundOrdering.MW_DESC
-                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.Molar_Weight).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.Molar_Weight)
                 Case CompoundOrdering.Name_ASC
-                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.Name).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.Name)
                 Case CompoundOrdering.Name_DESC
-                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.Name).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.Name)
                 Case CompoundOrdering.NBP_ASC
-                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.NBP.GetValueOrDefault).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.NBP.GetValueOrDefault)
                 Case CompoundOrdering.NBP_DESC
-                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.NBP.GetValueOrDefault).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.NBP.GetValueOrDefault)
                 Case CompoundOrdering.TAG_ASC
-                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.Tag).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderBy(Function(c) c.Value.Tag)
                 Case CompoundOrdering.TAG_DESC
-                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.Tag).ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+                    Return Options.SelectedComponents.OrderByDescending(Function(c) c.Value.Tag)
                 Case Else
                     Return Options.SelectedComponents
             End Select
