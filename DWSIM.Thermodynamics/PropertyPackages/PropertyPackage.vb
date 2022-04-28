@@ -477,9 +477,11 @@ Namespace PropertyPackages
 
         Public Property ExceptionLog As String = ""
 
-        Public ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
+        Public Overridable ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
 
-        Public ReadOnly Property IsFunctional As Boolean = True Implements IPropertyPackage.IsFunctional
+        Public Overridable ReadOnly Property IsFunctional As Boolean = True Implements IPropertyPackage.IsFunctional
+
+        Public Overridable ReadOnly Property ShouldUseKvalueMethod2 As Boolean = False Implements IPropertyPackage.ShouldUseKvalueMethod2
 
         'forced solids list
         Public Property ForcedSolids As New List(Of String)

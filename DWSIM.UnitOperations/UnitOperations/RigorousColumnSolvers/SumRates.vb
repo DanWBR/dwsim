@@ -523,14 +523,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If llextr Then
                             tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
-                            tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            If ppr.ShouldUseKvalueMethod2 Then
+                                tmp = ppr.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                            Else
+                                tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         End If
                     Else
                         IObj2?.SetCurrent()
                         If llextr Then
                             tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
-                            tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            If pp.ShouldUseKvalueMethod2 Then
+                                tmp = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                            Else
+                                tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         End If
                     End If
                     sumy(i) = 0
