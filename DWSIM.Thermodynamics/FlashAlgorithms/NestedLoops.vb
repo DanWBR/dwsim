@@ -2338,7 +2338,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         IObj3?.Paragraphs.Add(String.Format("Tentative value for K: {0}", Ki.ToMathArrayString))
 
-                        Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        If PP.ShouldUseKvalueMethod2 Then
+                            Ki = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T, P)
+                        Else
+                            Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        End If
 
                         marcador = 0
                         If stmp4_ant <> 0 Then
@@ -2390,17 +2394,33 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Else
                         If Settings.EnableParallelProcessing Then
                             Dim task1 = TaskHelper.Run(Sub()
-                                                           K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                           If PP.ShouldUseKvalueMethod2 Then
+                                                               K1 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T - epsilon, P)
+                                                           Else
+                                                               K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                           End If
                                                        End Sub, Settings.TaskCancellationTokenSource.Token)
                             Dim task2 = TaskHelper.Run(Sub()
-                                                           K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                           If PP.ShouldUseKvalueMethod2 Then
+                                                               K2 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T + epsilon, P)
+                                                           Else
+                                                               K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                           End If
                                                        End Sub, Settings.TaskCancellationTokenSource.Token)
                             Task.WaitAll(task1, task2)
                         Else
                             IObj?.SetCurrent
-                            K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                            If PP.ShouldUseKvalueMethod2 Then
+                                K1 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T - epsilon, P)
+                            Else
+                                K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                            End If
                             IObj?.SetCurrent
-                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                            If PP.ShouldUseKvalueMethod2 Then
+                                K2 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T + epsilon, P)
+                            Else
+                                K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                            End If
                         End If
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / (2 * epsilon))
                     End If
@@ -2850,7 +2870,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     T = PP.AUX_TSATi(PsatKey, cdata(key), T)
                 End If
 
-                Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                If PP.ShouldUseKvalueMethod2 Then
+                    Ki = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T, P)
+                Else
+                    Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                End If
 
                 WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
@@ -2983,7 +3007,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                                              T = Tx(0)
 
-                                             Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                                             If PP.ShouldUseKvalueMethod2 Then
+                                                 Ki = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T, P)
+                                             Else
+                                                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                                             End If
 
                                              If V = 0 Then
                                                  Vy = Ki.MultiplyY(Vx).NormalizeY()
