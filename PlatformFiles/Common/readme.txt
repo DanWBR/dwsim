@@ -64,7 +64,15 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 7.5.5
 
--
+- Dynamic models for Conversion, Equilibrium and Gibbs Reactors (beta)
+- New API to run flowsheets in Dynamic Mode
+- New calculation routine for Adiabatic Mode in Gibbs Reactor
+- Added an option to choose the flow coefficient type in valves (Kv or Cv)
+- PFD drawing optimizations
+- Phase equilibria calculation enhancements
+- Fixed issue with file saving
+- Fixed issue with Distillation Column
+- Fixed issues with Inspector Reports
 
 Version 7.5.1
 
