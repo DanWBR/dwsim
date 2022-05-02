@@ -871,9 +871,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Try
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
-                                                   If Not nsolv.BuildingJacobian Then
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                                                   End If
+                                                   'If Not nsolv.BuildingJacobian Then
+                                                   '    pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   'End If
                                                    Return fval
                                                End Function, xvar)
                             haderror = False
@@ -886,9 +886,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             nsolv.UseBroydenApproximation = False
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
-                                                   If Not nsolv.BuildingJacobian Then
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                                                   End If
+                                                   'If Not nsolv.BuildingJacobian Then
+                                                   '    pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   'End If
                                                    Return fval
                                                End Function, xvar)
                         End If
