@@ -133,11 +133,11 @@
   <data name="Mensagem.HeaderText" xml:space="preserve">
     <value>Message</value>
   </data>
-  <data name="CopiarInformaçõesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy Information</value>
-  </data>
   <data name="LimparListaToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear List</value>
+  </data>
+  <data name="CopiarInformaçõesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Information</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">

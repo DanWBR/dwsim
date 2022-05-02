@@ -140,7 +140,7 @@ Partial Class LogPanel
         'ContextMenuStrip1
         '
         resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarInformaçõesToolStripMenuItem, Me.LimparListaToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LimparListaToolStripMenuItem, Me.CopiarInformaçõesToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         '
         'CopiarInformaçõesToolStripMenuItem
