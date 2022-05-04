@@ -164,7 +164,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
 
                     <div className="text-danger" style={{textAlign:"center"}}>
                        To open, save or upload files to the program, log in with <b>Simulate 365 account</b>.<br/>
-                       The login connects the program to <b>DASHBOARD</b>, your personal file management system.<br/>
+                       The login connects the program to <b>dashboard.simulate365.com</b>, your personal file management system.<br/>
                         You will be able to access and manage DASHBOARD files directly in your simulator.<br/>
                        To benefit from this feature, first <b>sync files and flowsheets</b> on your local machine with DASHBOARD.  </div>
 
