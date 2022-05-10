@@ -24,7 +24,6 @@ Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
-Евгений Иванчиков
 Filippo Borroni
 Frank Mittricker
 Gokhan Candan 
@@ -38,7 +37,6 @@ H-Tec Systems GmbH
 Hugo Burbach
 Hurudza 
 Jan Boshoff
-Javier Fontalvo
 Jens Greimeier
 Jeremiah McAfoose
 Joe Rhodes
@@ -64,7 +62,6 @@ Masahiro Sakai
 Matt Hogg
 Michael Papantoniou
 Nikita Petrosyan
-OzMeister
 Pedro Sabóia
 Petroconsulting LLC
 Philippe Wesel

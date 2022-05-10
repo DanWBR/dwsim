@@ -2499,7 +2499,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                 Return interp.Interpolate(tval)
                                             End Function)
 
-                            Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                            If PP.ShouldUseKvalueMethod2 Then
+                                Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                            Else
+                                K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                            End If
 
                             If V = 0.0 Then
                                 Vy = Ki.MultiplyY(Vx).NormalizeY()

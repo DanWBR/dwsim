@@ -229,10 +229,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                              If llextr Then
                                                                  tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
                                                              Else
-                                                                 If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
-                                                                     tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingDeltaT, P(ipar))
+                                                                 If Not _pp.ShouldUseKvalueMethod2 Then
+                                                                     If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                                                         tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingDeltaT, P(ipar))
+                                                                     Else
+                                                                         tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                     End If
                                                                  Else
-                                                                     tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                     Dim zk = xc(ipar).MultiplyConstY(Lj(ipar)).AddY(yc(ipar).MultiplyConstY(Vj(ipar))).MultiplyConstY(1 / (Lj(ipar) + Vj(ipar)))
+                                                                     If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                                                         tmp0 = _pp.DW_CalcKvalue(zk, Tj(ipar) - _subcoolingDeltaT, P(ipar))
+                                                                     Else
+                                                                         tmp0 = _pp.DW_CalcKvalue(zk, Tj(ipar), P(ipar))
+                                                                     End If
                                                                  End If
                                                              End If
                                                              Dim jj As Integer
@@ -251,11 +260,21 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If llextr Then
                         tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                     Else
-                        If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
-                            tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingDeltaT, P(i))
+                        If Not _pp.ShouldUseKvalueMethod2 Then
+                            If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingDeltaT, P(i))
+                            Else
+                                tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         Else
-                            tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            Dim zk = xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i)))
+                            If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                tmp0 = _pp.DW_CalcKvalue(zk, Tj(i) - _subcoolingDeltaT, P(i))
+                            Else
+                                tmp0 = _pp.DW_CalcKvalue(zk, Tj(i), P(i))
+                            End If
                         End If
+
                     End If
                     For j = 0 To nc - 1
                         Kval(i)(j) = tmp0(j)
