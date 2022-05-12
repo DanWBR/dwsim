@@ -1372,6 +1372,9 @@
   <data name="PROP_PF_1" xml:space="preserve">
     <value>Residence time</value>
   </data>
+  <data name="PROP_PF_10" xml:space="preserve">
+    <value>Number of Tubes</value>
+  </data>
   <data name="PROP_PF_2" xml:space="preserve">
     <value>Volume</value>
   </data>
