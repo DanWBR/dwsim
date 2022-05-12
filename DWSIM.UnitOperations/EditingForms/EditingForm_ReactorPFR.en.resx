@@ -227,16 +227,16 @@
     <value>137, 20</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
+    <value>77, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
-    <value>Reactor Diameter</value>
+    <value>Tube Diameter</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
+    <value>88, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Reactor Volume</value>
+    <value>Reactive Volume</value>
   </data>
   <data name="cbLength.Location" type="System.Drawing.Point, System.Drawing">
     <value>297, 72</value>
@@ -251,10 +251,10 @@
     <value>297, 17</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
+    <value>68, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Reactor Length</value>
+    <value>Tube Length</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 210</value>
