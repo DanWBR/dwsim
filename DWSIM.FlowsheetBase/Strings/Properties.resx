@@ -1379,7 +1379,7 @@
     <value>Volume</value>
   </data>
   <data name="PROP_PF_3" xml:space="preserve">
-    <value>Length</value>
+    <value>Tube Length</value>
   </data>
   <data name="PROP_PF_4" xml:space="preserve">
     <value>Catalyst loading</value>
@@ -1397,7 +1397,7 @@
     <value>Heat load</value>
   </data>
   <data name="PROP_PF_9" xml:space="preserve">
-    <value>Diameter</value>
+    <value>Tube Diameter</value>
   </data>
   <data name="PROP_PS_0" xml:space="preserve">
     <value>Pressure Drop</value>
