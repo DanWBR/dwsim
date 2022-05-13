@@ -28,18 +28,8 @@ Public Class FormUnhandledException
     Dim githublink As String = ""
     Public ex As Exception
 
-    Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton2.Click
-        Me.Close()
-    End Sub
-
     Private Sub FormUnhandledException_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         Me.Loaded = True
-    End Sub
-
-    Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton4.Click
-
-        Process.GetCurrentProcess.Kill()
-
     End Sub
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -81,12 +71,6 @@ Public Class FormUnhandledException
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
         If githublink <> "" Then Process.Start(githublink)
-
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        Application.Restart()
 
     End Sub
 

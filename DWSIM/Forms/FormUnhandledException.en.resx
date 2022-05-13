@@ -124,53 +124,33 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>DWSIM generated an unhandled error/exception.</value>
   </data>
-  <data name="KryptonButton2.Text" xml:space="preserve">
-    <value>Continue</value>
-  </data>
-  <data name="KryptonButton4.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Send email</value>
   </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Details</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TextBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="LabelWithDivider2.Text" xml:space="preserve">
-    <value>Actions</value>
+  <data name="TextBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Restart</value>
+  <data name="TextBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 81</value>
+  </data>
+  <data name="TextBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>673, 321</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>View code @ GitHub</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Close this window.</value>
   </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Search Forums</value>
   </data>
   <data name="LabelWithDivider3.Text" xml:space="preserve">
-    <value>Additional Support</value>
+    <value>Support Options</value>
   </data>
   <data name="Button6.Text" xml:space="preserve">
     <value>Search Wiki</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Kill current DWSIM process. Unsaved changes will be lost.</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Restart DWSIM.</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 13</value>
@@ -195,6 +175,16 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>View the code line where this error was raised/generated on DWSIM's GitHub repository.</value>
+  </data>
+  <data name="LabelWithDivider2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 56</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="LabelWithDivider2.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="LabelWithDivider2.Text" xml:space="preserve">
+    <value>Details</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
