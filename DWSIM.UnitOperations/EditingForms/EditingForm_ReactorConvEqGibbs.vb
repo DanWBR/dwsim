@@ -137,6 +137,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
 
+                chkGibbsUseAlternSolver.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod
+
                 cbReacSet.Enabled = False
 
                 'chkEnableDamping.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping
@@ -740,6 +742,12 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub chkGibbsUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseIPOPT.CheckedChanged
         If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver = chkGibbsUseIPOPT.Checked
+        End If
+    End Sub
+
+    Private Sub chkGibbsUseAlternSolver_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseAlternSolver.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod = chkGibbsUseAlternSolver.Checked
         End If
     End Sub
 End Class

@@ -1755,7 +1755,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddCheckBoxRow(container, "Initialize from Previous Solution", reactor2g.InitializeFromPreviousSolution, (sender, e) => reactor2g.InitializeFromPreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Error Tolerance", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    //s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2g.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use IPOPT Solver", reactor2g.UseIPOPTSolver, (sender, e) => reactor2g.UseIPOPTSolver = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use Alternate Solving Method", reactor2g.AlternateSolvingMethod, (sender, e) => reactor2g.AlternateSolvingMethod = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;

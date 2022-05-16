@@ -1374,6 +1374,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Try
                         While Not (Date.Now - d1).TotalMilliseconds >= Settings.SolverTimeoutSeconds * 1000
                             maintask.Wait(500)
+                            fgui.UpdateInterface()
                             If Settings.TaskCancellationTokenSource.IsCancellationRequested Then
                                 Throw New OperationCanceledException()
                             End If
