@@ -66,7 +66,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] heatercalcmode()
         {
-            return new String[] { "Heat Added/Removed", "Outlet Temperature", "Outlet Quality", "Energy Stream" };
+            return new String[] { "Heat Added/Removed", "Outlet Temperature", "Outlet Vapor Fraction", "Energy Stream" };
         }
         public static String[] comprcalcmode()
         {
