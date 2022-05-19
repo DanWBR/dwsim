@@ -1445,6 +1445,10 @@ Namespace UnitOperations
             Return Double.NaN
         End Function
 
+        Public Function GetAsObject() As Object Implements ISimulationObject.GetAsObject
+            Return Me
+        End Function
+
 #End Region
 
 #Region "    IProductInformation"
