@@ -125,6 +125,6 @@
 
     Property AddObjectsWithStreams As Integer
 
-    Property Simulate365FileID As String
+    Property VirtualFile As IVirtualFile
 
 End Interface
