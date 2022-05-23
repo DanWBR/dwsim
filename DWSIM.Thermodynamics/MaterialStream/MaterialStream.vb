@@ -5638,7 +5638,7 @@ Namespace Streams
         ''' <param name="constantId">Identifier of Universal Constant. The list of constants supported should be 
         ''' obtained by using the GetUniversalConstantList method.</param>
         ''' <returns>Value of Universal Constant. This could be a numeric or a string value. For numeric values 
-        ''' the units of measurement are specified in section 7.5.1.</returns>
+        ''' the units of measurement are specified in section 7.5.5.</returns>
         ''' <remarks>Universal Constants (often called fundamental constants) are quantities like the gas constant,
         ''' or the Avogadro constant.</remarks>
         Public Function GetUniversalConstant(ByVal constantId As String) As Object Implements ICapeThermoUniversalConstant.GetUniversalConstant
@@ -5649,9 +5649,9 @@ Namespace Streams
         ''' <summary>
         ''' Returns the identifiers of the supported Universal Constants.
         ''' </summary>
-        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.1.</returns>
+        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.5.</returns>
         ''' <remarks>A component may return Universal Constant identifiers that do not belong to the list defined
-        ''' in section 7.5.1. However, these proprietary identifiers may not be understood by most of the
+        ''' in section 7.5.5. However, these proprietary identifiers may not be understood by most of the
         ''' clients of this component.</remarks>
         Public Function GetUniversalConstantList() As Object Implements ICapeThermoUniversalConstant.GetUniversalConstantList
             Me.PropertyPackage.CurrentMaterialStream = Me
@@ -7711,7 +7711,7 @@ Namespace Streams
         ''' Sets stream temperature.
         ''' </summary>
         ''' <param name="value">Temperature in K</param>
-        Public Function SetTemperature(value As Double) As String
+        Public Function SetTemperature(value As Double) As String Implements IMaterialStream.SetTemperature
             Phases(0).Properties.temperature = value
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -7742,7 +7742,7 @@ Namespace Streams
         ''' Sets stream pressure
         ''' </summary>
         ''' <param name="value">Pressure in Pa</param>
-        Public Function SetPressure(value As Double) As String
+        Public Function SetPressure(value As Double) As String Implements IMaterialStream.SetPressure
             Phases(0).Properties.pressure = value
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -7773,7 +7773,7 @@ Namespace Streams
         ''' Sets stream enthalpy.
         ''' </summary>
         ''' <param name="value">Enthalpy in kJ/kg</param>
-        Public Function SetMassEnthalpy(value As Double) As String
+        Public Function SetMassEnthalpy(value As Double) As String Implements IMaterialStream.SetMassEnthalpy
             Phases(0).Properties.enthalpy = value
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -7831,7 +7831,7 @@ Namespace Streams
         ''' Sets stream mass flow.
         ''' </summary>
         ''' <param name="value">Flow in kg/s</param>
-        Public Function SetMassFlow(value As Double) As String
+        Public Function SetMassFlow(value As Double) As String Implements IMaterialStream.SetMassFlow
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
@@ -8010,7 +8010,7 @@ Namespace Streams
         ''' Returns the overall mass enthalpy.
         ''' </summary>
         ''' <returns>Mass enthalpy in kJ/kg.</returns>
-        Public Function GetMassEnthalpy() As Double
+        Public Function GetMassEnthalpy() As Double Implements IMaterialStream.GetMassEnthalpy
             Return Phases(0).Properties.enthalpy.GetValueOrDefault
         End Function
 
@@ -8026,7 +8026,7 @@ Namespace Streams
         ''' Returns the stream temperature.
         ''' </summary>
         ''' <returns>Temperature in K.</returns>
-        Public Function GetTemperature() As Double
+        Public Function GetTemperature() As Double Implements IMaterialStream.GetTemperature
             Return Phases(0).Properties.temperature.GetValueOrDefault
         End Function
 
@@ -8034,7 +8034,7 @@ Namespace Streams
         ''' Returns the stream pressure.
         ''' </summary>
         ''' <returns>Pressure in Pa.</returns>
-        Public Function GetPressure() As Double
+        Public Function GetPressure() As Double Implements IMaterialStream.GetPressure
             Return Phases(0).Properties.pressure.GetValueOrDefault
         End Function
 
@@ -8042,7 +8042,7 @@ Namespace Streams
         ''' Returns the stream mass flow.
         ''' </summary>
         ''' <returns>Mass flow in kg/s.</returns>
-        Public Function GetMassFlow() As Double
+        Public Function GetMassFlow() As Double Implements IMaterialStream.GetMassFlow
             Return Phases(0).Properties.massflow.GetValueOrDefault
         End Function
 
@@ -8050,7 +8050,7 @@ Namespace Streams
         ''' Returns the stream molar flow.
         ''' </summary>
         ''' <returns>Molar flow in mol/s.</returns>
-        Public Function GetMolarFlow() As Double
+        Public Function GetMolarFlow() As Double Implements IMaterialStream.GetMolarFlow
             Return Phases(0).Properties.molarflow.GetValueOrDefault
         End Function
 
@@ -8058,7 +8058,7 @@ Namespace Streams
         ''' Returns the stream volumetric flow.
         ''' </summary>
         ''' <returns>Volumetric flow in m3/s.</returns>
-        Public Function GetVolumetricFlow() As Double
+        Public Function GetVolumetricFlow() As Double Implements IMaterialStream.GetVolumetricFlow
             Return Phases(0).Properties.volumetric_flow.GetValueOrDefault
         End Function
 
@@ -8074,7 +8074,7 @@ Namespace Streams
         ''' Sets stream molar flow.
         ''' </summary>
         ''' <param name="value">Flow in mol/s</param>
-        Public Function SetMolarFlow(value As Double) As String
+        Public Function SetMolarFlow(value As Double) As String Implements IMaterialStream.SetMolarFlow
             Phases(0).Properties.massflow = value * Phases(0).Properties.molecularWeight / 1000
             Phases(0).Properties.molarflow = value
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
@@ -8111,7 +8111,7 @@ Namespace Streams
         ''' Sets stream volumetric flow.
         ''' </summary>
         ''' <param name="value">Flow in m3/s</param>
-        Public Function SetVolumetricFlow(value As Double) As String
+        Public Function SetVolumetricFlow(value As Double) As String Implements IMaterialStream.SetVolumetricFlow
             Phases(0).Properties.massflow = Nothing
             Phases(0).Properties.molarflow = Nothing
             Phases(0).Properties.volumetric_flow = value
@@ -8246,6 +8246,10 @@ Namespace Streams
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
 
+            If Double.IsNaN(stream.GetMassFlow()) Or Double.IsInfinity(stream.GetMassFlow()) Then
+                Return newstream
+            End If
+
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
 
@@ -8326,6 +8330,10 @@ Namespace Streams
         Public Function Subtract(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
+
+            If Double.IsNaN(stream.GetMassFlow()) Or Double.IsInfinity(stream.GetMassFlow()) Then
+                Return newstream
+            End If
 
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
@@ -8623,6 +8631,17 @@ Namespace Streams
 
         End Function
 
+        Public Function GetEnergyFlow() As Double Implements IMaterialStream.GetEnergyFlow
+            Return TotalEnergyFlow
+        End Function
+
+        Public Function GetCompoundMassFlow(name As String) As Double Implements IMaterialStream.GetCompoundMassFlow
+            Return Phases(0).Compounds(name).MassFlow.GetValueOrDefault()
+        End Function
+
+        Public Function GetCompoundMassConcentration(name As String) As Double Implements IMaterialStream.GetCompoundMassConcentration
+            Return Phases(0).Compounds(name).MassFlow.GetValueOrDefault() / Phases(0).Properties.volumetric_flow.GetValueOrDefault()
+        End Function
     End Class
 
     Public Class CalculationResults

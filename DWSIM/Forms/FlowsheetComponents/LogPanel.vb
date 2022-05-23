@@ -100,4 +100,31 @@ Public Class LogPanel
 
     End Sub
 
+    Private Sub CopiarInformaçõesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarInformaçõesToolStripMenuItem.Click
+
+        If Grid1.SelectedRows.Count > 0 Then
+
+            Dim selectedrow = Grid1.SelectedRows(0)
+
+            Dim eid As String = Grid1.Rows(selectedrow.Index).Cells(5).Tag
+
+            If eid Is Nothing Then eid = ""
+
+            If SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.ContainsKey(eid) Then
+
+                Dim ex As Exception = SharedClasses.ExceptionProcessing.ExceptionList.Exceptions(eid)
+
+                Clipboard.SetText(ex.ToString())
+
+            Else
+
+                Clipboard.SetDataObject(Grid1.GetClipboardContent())
+
+            End If
+
+        End If
+
+
+    End Sub
+
 End Class

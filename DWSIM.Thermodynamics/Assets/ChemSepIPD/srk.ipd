@@ -1,0 +1,310 @@
+
+ ---------------------------------------------
+             ===  ChemSep ===
+ Copyright 2009 Harry Kooijman and Ross Taylor
+      Interaction Parameters Data (IPD)
+ ---------------------------------------------
+       DECHEMA Soave-Redlich-Kwong Parameters
+
+ This library created by Jennifer A. Clark Spring 2014
+
+ ---------------------------------------------
+ Data: ID1  ID2  k12  comments
+ ---------------------------------------------
+
+[IPD]
+Comment=DECHEMA Soave-Redlich-Kwong EOS data
+#
+# ID/CASN       ID/CASN    k12      Name/Name Comments
+7440-59-7       630-08-0   .6507    Helium-4/Carbon Monoxide p203
+1333-74-0       7727-37-9  .563e-1  Hydrogen/Nitrogen T=90-113K p210
+1333-74-0       7727-37-9  .1141    Hydrogen/Nitrogen T=90-94.99K p212
+1333-74-0       7727-37-9  .1133    Hydrogen/Nitrogen T=77.35K p213
+1333-74-0       630-08-0   .919e-1  Hydrogen/Carbon Monoxide T=68.2-88.2K p215
+1333-74-0       630-08-0   .1000    Hydrogen/Carbon Monoxide T=83.3-122.2K p217
+1333-74-0       74-82-8    -.133e-1 Hydrogen/Methane T=90.3-127K p219
+1333-74-0       74-82-8    -.260e-1 Hydrogen/Methane  T=116.48-172.04K p221
+1333-74-0       74-82-8    .274e-1  Hydrogen/Methane T=90.65K p223
+1333-74-0       74-82-8    -.459e-1 Hydrogen/Methane T=103.15-173.65K p225
+1333-74-0       74-82-8    -.593e-1 Hydrogen/Methane T=103.15-163.15K p227
+1333-74-0       74-85-1    .33e-2   Hydrogen/Ethylene T=123.15-248.15K p229
+1333-74-0       74-85-1    -.681e-1 Hydrogen/Ethylene T=158.15-255.35K p231
+1333-74-0       74-84-0    -.1822   Hydrogen/Ethane T=149.61-189.57K p233
+1333-74-0       74-84-0    -.1867   Hydrogen/Ethane T=144.25-283.15K p235
+1333-74-0       74-84-0    .1574    Hydrogen/Ethane T=158.15-188.15K p237
+1333-74-0       74-84-0    -.2244   Hydrogen/Ethane T=144.21-199.65K p239
+1333-74-0       74-84-0    -.911e-1 Hydrogen/Ethane T=148.15-223.15K p240
+1333-74-0       124-38-9   -.3426   Hydrogen/Carbon Dioxide p242
+1333-74-0       115-07-1   -.3233   Hydrogen/Propylene p244
+1333-74-0       74-98-6    -.2904   Hydrogen/Propane T=173.15-348.15K p245
+1333-74-0       74-98-6    -.2204   Hydrogen/Propane T=172.05-297.05K p246
+1333-74-0       106-97-8   -.5100   Hydrogen/n-Butane T=327.65-394.25K p247
+1333-74-0       106-97-8   -.5100   Hydrogen/n-Butane T=355.37,388.71K p249
+1333-74-0       110-54-3   -.800e-1 Hydrogen/n-Hexane p250
+1333-74-0       142-82-5   -.2200   Hydrogen/n-Heptane p253
+1333-74-0       108-88-3   .3900    Hydrogen/Toluene p255
+1333-74-0       91-22-5    -.5100   Hydrogen/Quinoline p259
+1333-74-0       92-51-3    .11585e+1 Hydrogen/Bicyclohexyl p261
+1333-74-0       90-12-0    .4400    Hydrogen/1-Methylnaphthalene p263
+7727-37-9       630-08-0   .430e-1  Nitrogen/Carbon Monoxide T=83.82K p265
+7727-37-9       630-08-0   .367e-1  Nitrogen/Carbon Monoxide T=70.00-122.00K p267
+7727-37-9       7440-37-1  .56e-2   Nitrogen/Argon T=83.82K p268
+7727-37-9       7440-37-1  .11e-2   Nitrogen/Argon T=80.92-115.21K p271
+7727-37-9       7440-37-1  -.44e-2  Nitrogen/Argon T=90.50-120.00K p272
+7727-37-9       7440-37-1  .67e-2   Nitrogen/Argon T=84.50K p273
+7727-37-9       7440-37-1  .67e-2   Nitrogen/Argon T=89.89-113.00K p274
+7727-37-9       7440-37-1  -.137e-1 Nitrogen/Argon T=112.00K p275
+7727-37-9       7782-44-7  -.156e-1 Nitrogen/Oxygen T=90.53-124.96K P=1.189-29.72bar p277
+7727-37-9       7782-44-7  -.56e-2  Nitrogen/Oxygen T=81.07-91.00K P=1.218-1.350bar p278
+7727-37-9       7782-44-7  -.137e-1 Nitrogen/Oxygen T=79-116K P=1.141-8.967bar p279
+7727-37-9       7782-44-7  -.104e-1 Nitrogen/Oxygen T=75-125K p281
+7727-37-9       7782-44-7  .7e-3    Nitrogen/Oxygen T=64.83-77.94K P=0.029-0.966bar p284
+7727-37-9       74-82-8    .267e-1  Nitrogen/Methane T=88.71-188.71K p285
+7727-37-9       74-82-8    .293e-1  Nitrogen/Methane T=95-120K p287
+7727-37-9       74-82-8    .267e-1  Nitrogen/Methane T=112-180K p289
+7727-37-9       74-82-8    .346e-1  Nitrogen/Methane T=90.68K p292
+7727-37-9       74-82-8    .244e-1  Nitrogen/Methane T=113.71-183.15K p294
+7727-37-9       74-82-8    .281e-1  Nitrogen/Methane T=112K p296
+7727-37-9       74-85-1    .798e-1  Nitrogen/Ethylene p298
+7727-37-9       74-84-0    .174e-1  Nitrogen/Ethane T=200-290K p300
+7727-37-9       74-84-0    .433e-1  Nitrogen/Ethane T=138.71-194.26K p302
+7727-37-9       10024-97-2 -.110e-1 Nitrogen/Nitrous Oxide p304
+7727-37-9       124-38-9   -.344e-1 Nitrogen/Carbon Dioxide T=223.15-273.15K p306
+7727-37-9       124-38-9   -.193e-1 Nitrogen/Carbon Dioxide T=273.15K p308
+7727-37-9       124-38-9   -.200e-1 Nitrogen/Carbon Dioxide T=273.15K p309
+7727-37-9       124-38-9   -.326e-1 Nitrogen/Carbon Dioxide T=218.15-273.15K p310
+7727-37-9       124-38-9   -.322e-1 Nitrogen/Carbon Dioxide T=233.15-293.15K p312
+7727-37-9       124-38-9   -.178e-1 Nitrogen/Carbon Dioxide T=270K p314
+7727-37-9       7783-06-4  .1696    Nitrogen/Hydrogen Sulfide T=227.98,200.15K p316
+7727-37-9       7783-06-4  .1652    Nitrogen/Hydrogen Sulfide T=256.43-344.26K p318
+7727-37-9       115-07-1   .900e-1  Nitrogen/Propylene p320
+7727-37-9       74-98-6    .793e-1  Nitrogen/Propane T=143.15-353.15K p322
+7727-37-9       74-98-6    .578e-1  Nitrogen/Propane T=230-290K p324
+7727-37-9       7664-41-7  .2222    Nitrogen/Ammonia p326
+7727-37-9       75-71-8    -.93e-2  Nitrogen/Dichlorodiflouromethane p328
+7727-37-9       75-28-5    .944e-1  Nitrogen/Isobutane p330
+7727-37-9       7446-09-5  .578e-1  Nitrogen/Sulfur Dioxide p332
+7727-37-9       106-97-8   .900e-1  Nitrogen/n-Butane T=310.93-422.04K p333
+7727-37-9       106-97-8   .700e-1  Nitrogen/n-Butane T=310.93-410.93K p334
+7727-37-9       78-78-4    .867e-1  Nitrogen/Iso-C5 p336
+7727-37-9       109-66-0   .878e-1  Nitrogen/n-Pentane p338
+7727-37-9       67-56-1    -.2881   Nitrogen/Methanol p340
+7727-37-9       110-54-3   .1496    Nitrogen/n-Hexane p341
+7727-37-9       71-43-2    .1530    Nitrogen/Benzene p343
+7727-37-9       142-82-5   .1422    Nitrogen/n-Heptane p344
+7727-37-9       111-65-9   -.4000   Nitrogen/n-Octane p347
+7727-37-9       124-18-5   .1033    Nitrogen/n-Decane T=310.93-410.93K p349
+630-08-0        74-82-8    .322e-1  Carbon Monoxide/Methane p353
+630-08-0        74-84-0    -.278e-1 Carbon Monoxide/Ethane p354
+630-08-0        7783-06-4  .367e-1  Carbon Monoxide/Hydrogen Sulfide p356
+630-08-0        74-98-6    .156e-1  Carbon Monoxide/Propane p358
+7440-37-1       7782-44-7  .181e-1  Argon/Oxygen T=89.95-109.95K P=1.045-6.618bar p360
+7440-37-1       7782-44-7  .167e-1  Argon/Oxygen T=90.5-120K P=1.043-12.092bar p362
+7440-37-1       74-82-8    .367e-1  Argon/Methane T=91.6-123.9K p363
+7440-37-1       74-82-8    .138e-1  Argon/Methane T=123.4-164K P=10.132-35.434bar p364
+7440-37-1       74-82-8    .48e-2   Argon/Methane T=150.72-178K p365
+7440-37-1       74-82-8    .256e-1  Argon/Methane T=115.77K p367
+7440-37-1       74-82-8    .315e-1  Argon/Methane T=112.55-132.97K p369
+7440-37-1       7664-41-7  -.2200   Argon/Ammonia p371
+7782-44-7       7439-90-9  .344e-1  Oxygen/Krypton T=90.15-100.15K P=0.688-2.486bar p373
+7782-44-7       7439-90-9  .196e-1  Oxygen/Krypton T=94.15-150.9K P=1.504-6.893bar p375
+7782-44-7       10024-97-2 .433e-1  Oxygen/NitrousOxide p376
+74-82-8         74-85-1    .344e-1  Methane/Ethylene T=198.15-248.15K p378
+74-82-8         74-85-1    .174e-1  Methane/Ethylene T=148-169K p380
+74-82-8         74-85-1    .211e-1  Methane/Ethylene T=150-190K p383
+74-82-8         74-84-0    -.89e-2  Methane/Ethane T=130.37-199.93K p385
+74-82-8         74-84-0    -.93e-2  Methane/Ethane T=158.15-213.7K p388
+74-82-8         74-84-0    -.100e-1 Methane/Ethane T=144.26-283.15 p390
+74-82-8         74-84-0    -.44e-2  Methane/Ethane T=160-180K p392
+74-82-8         74-84-0    .41e-2   Methane/Ethane T=250K p394
+74-82-8         10024-97-2 .211e-1  Methane/NitrousOxide p396
+74-82-8         124-38-9   .789e-1  Methane/Carbon Dioxide T=173-220K P=26-66bar p398
+74-82-8         124-38-9   .1000    Methane/Carbon Dioxide T=199.82-271.48K p399
+74-82-8         124-38-9   .904e-1  Methane/Carbon Dioxide T=230-270K p401
+74-82-8         124-38-9   .1107    Methane/Carbon Dioxide T=270K p403
+74-82-8         124-38-9   .881e-1  Methane/Carbon Dioxide T=153-219K p405
+74-82-8         124-38-9   .885e-1  Methane/Carbon Dioxide T=153-219 p406
+74-82-8         7783-06-4  .7955e-1 Methane/Hydrogen Sulfide T=40,100,160 F, Reamer et al data, fit by R.Taylor
+74-82-8         463-58-1   .252e-1  Methane/Carbonyl Sulfide p410
+74-82-8         115-07-1   .289e-1  Methane/Propylene p412
+74-82-8         74-98-6    .50e-2   Methane/Propane T=130.37-213.71K p413
+74-82-8         74-98-6    .180e-1  Methane/Propane T=277.59-360.93K p416
+74-82-8         75-28-5    .241e-1  Methane/Isobutane p419
+74-82-8         7446-09-5  .1279    Methane/Sulfur Dioxide p421
+74-82-8         106-97-8   .215e-1  Methane/n-Butane T=294-394K p422
+74-82-8         106-97-8   .100e-1  Methane/n-Butane T=178-411K p425
+74-82-8         106-97-8   .74e-2   Methane/n-Butane T=166-283K p428
+74-82-8         106-97-8   .11e-2   Methane/n-Butane T=144-278K p430
+74-82-8         78-78-4    -.78e-2  Methane/Iso-C5 p436
+74-82-8         109-66-0   .180e-1  Methane/n-Pentane T=278-461K p438
+74-82-8         109-66-0   .200e-1  Methane/n-Pentane T=311-444K p445
+74-82-8         109-66-0   .191e-1  Methane/n-Pentane T=176-273K p447
+74-82-8         109-66-0   .211e-1  Methane/n-Pentane T=178-283K p449
+74-82-8         110-54-3   .367e-1  Methane/n-Hexane T=183-423K p453
+74-82-8         110-54-3   .189e-1  Methane/n-Hexane T=310-410K p456
+74-82-8         110-54-3   .378e-1  Methane/n-Hexane T=182-273K p458
+74-82-8         71-43-2    .800e-1  Methane/Benzene T=421-501K p463
+74-82-8         71-43-2    .185e-1  Methane/Benzene T=338.71K p465
+74-82-8         110-82-7   .333e-1  Methane/Cyclohexane p466
+74-82-8         142-82-5   .367e-1  Methane/n-Heptane T=200-255K p469
+74-82-8         142-82-5   .274e-1  Methane/n-Heptane T=277-511K p471
+74-82-8         108-88-3   .978e-1  Methane/Toluene p474
+74-82-8         111-65-9   .448e-1  Methane/n-Octane p477
+74-82-8         108-38-3   .900e-1  Methane/m-Xylene p479
+74-82-8         111-84-2   .448e-1  Methane/n-Nonane p481
+74-82-8         124-18-5   .433e-1  Methane/n-Decane T=244-277K p485
+74-82-8         124-18-5   .400e-1  Methane/n-Decane T=311-511K p486
+74-82-8         124-18-5   .1000    Methane/n-Decane T=423-583K p489
+74-82-8         108-39-4   .1222    Methane/M-Cresol p492
+74-82-8         119-64-2   .1533    Methane/Tetralin p494
+74-82-8         90-12-0    .1230    Methane/1-Methylnaphthalene p497
+74-82-8         101-81-5   .826e-1  Methane/Diphenylmethane p499
+74-85-1         74-84-0    .81e-2   Ethylene/Ethane T=200-255K P=2.2-26.7bar p503
+74-85-1         74-84-0    .270e-1  Ethylene/Ethane T=277-288K P=32-49bar p505
+74-85-1         74-84-0    .100e-1  Ethylene/Ethane T=169-273K P=0.4-41.1bar p507
+74-85-1         74-84-0    .26e-2   Ethylene/Ethane T=263-293K P=18.5-48.5bar p510
+74-85-1         74-86-2    .596e-1  Ethylene/Acetylene p512
+74-85-1         124-38-9   .556e-1  Ethylene/Carbon Dioxide T=232-252K P=9.5-26.2bar p514
+74-85-1         124-38-9   .530e-1  Ethylene/Carbon Dioxide T=223-293K P=6.8-64.9bar p516
+74-85-1         106-97-8   .1000    Ethylene/n-Butane p518
+74-85-1         71-43-2    .241e-1  Ethylene/Benzene p520
+74-85-1         142-82-5   .144e-1  Ethylene/n-Heptane p522
+74-85-1         124-18-5   .248e-1  Ethylene/n-Decane p524
+124-38-9        74-84-0    .1359    Carbon Dioxide/Ethane T=250K p525
+124-38-9        74-84-0    .1333    Carbon Dioxide/Ethane T=223-292K P=5.5-63bar p527
+124-38-9        74-84-0    .1385    Carbon Dioxide/Ethane T=222-289K P=7-57bar p528
+124-38-9        74-84-0    -.89e-2  Carbon Dioxide/Ethane T=283-298K P=30.4-66.3bar p529
+124-38-9        74-84-0    .1307    Carbon Dioxide/Ethane T=252.95K p530
+124-38-9        74-84-0    .1315    Carbon Dioxide/Ethane T=241-283K P=10-49.5bar p532
+74-84-0         7783-06-4  .852e-1  Ethane/Hydrogen Sulfide T=200-283 P=0.65-30.5bar p533
+74-84-0         7783-06-4  .896e-1  Ethane/Hydrogen Sulfide T=251.5-368.5K p535
+74-84-0         7783-06-4  .874e-1  Ethane/Hydrogen Sulfide T=283.15K p536
+74-84-0         115-07-1   .26e-2   Ethane/Propylene p537
+74-84-0         74-98-6    -.22e-2  Ethane/Propane p539
+74-84-0         75-28-5    -.100e-1 Ethane/Isobutane p542
+74-84-0         106-97-8   .52e-2   Ethane/n-Butane T=229-361K P=6.9-57.9bar p544
+74-84-0         106-97-8   .374e-1  Ethane/n-Butane T=338.7-394.3K p546
+74-84-0         60-29-7    .141e-1  Ethane/EthylEther p548
+74-84-0         109-66-0   .56e-2   Ethane/n-Pentane p550
+74-84-0         67-64-1    .1301    Ethane/Acetone p552
+74-84-0         79-20-9    .1156    Ethane/MethylAcetate p554
+74-84-0         67-56-1    .275e-1  Ethane/Methanol p555
+74-84-0         110-54-3  -.433e-1  Ethane/n-Hexane T=338.7-449.8K p557
+74-84-0         110-54-3  .7e-3     Ethane/n-Hexane T=298.15K p559
+74-84-0         71-43-2   .278e-1   Ethane/Benzene T=273-553K p561
+74-84-0         71-43-2   .438e-1   Ethane/Benzene T=298.15K p563
+74-84-0         110-82-7  .122e-1   Ethane/CycloHexane p565
+74-84-0         142-82-5  .41e-2    Ethane/n-Heptane P=6.89-86.186bar p567
+74-84-0         142-82-5  .67e-2    Ethane/n-Heptane T=338.71-449.82K p568
+74-84-0         111-65-9  .170e-1   Ethane/n-Octane p570
+74-84-0         124-18-5  .152e-1   Ethane/n-Decane p572
+124-38-9        10024-97-2  .22e-2  Carbon Dioxide/NitrousOxide p575
+74-86-2         115-07-1  -.4200    Acetylene/Propylene p576
+75-46-7         75-72-9   .1030     Trifluoromethane/Triflourochloromethane p577
+75-72-9         75-71-8   .311e-1   Trifluorochloromethane/Dichlorodifluoromethane p579
+124-38-9        7783-06-4 .989e-1   Carbon Dioxide/Hydrogen Sulfide T=225-363K p581
+124-38-9        7783-06-4 .989e-1   Carbon Dioxide/Hydrogen Sulfide T=254-366K p583
+124-38-9        75-10-5   .144e-1   Carbon Dioxide/Difluoromethane p585
+124-38-9        115-07-1  .944e-1   Carbon Dioxide/Propylene p587
+124-38-9        74-98-6   .1389     Carbon Dioxide/Propane T=277.59-344.26K p589
+124-38-9        74-98-6   .744e-1   Carbon Dioxide/Propane T=233.15-273.15K p591
+124-38-9        74-98-6   .1044     Carbon Dioxide/Propane T=272-366K P=33.3-53.3bar p593
+124-38-9        74-98-6   .1330     Carbon Dioxide/Propane T=244.26-266.48K p594
+124-38-9        74-98-6   .1289     Carbon Dioxide/Propane T=252.95-273.15K p596
+124-38-9        74-98-6   .493e-1   Carbon Dioxide/Propane p598
+124-38-9        75-28-5   .1430     Carbon Dioxide/Isobutane T=310.93-394.26K p601
+124-38-9        75-28-5   .1241     Carbon Dioxide/Isobutane P=273.15K p603
+124-38-9        106-98-9  .596e-1   Carbon Dioxide/1-Butene p605
+124-38-9        106-97-8  .1444     Carbon Dioxide/n-Butane T=310.93-410.93K p607
+124-38-9        106-97-8  .1478     Carbon Dioxide/n-Butane T=227.98-283.15K p609
+124-38-9        106-97-8  .1156     Carbon Dioxide/n-Butane T=273.15K p610
+124-38-9        78-78-4   .1307     Carbon Dioxide/Iso-C5 p612
+124-38-9        60-29-7   .498e-1   Carbon Dioxide/Ethyl Ether p614
+124-38-9        109-66-0  -.78e-2   Carbon Dioxide/n-Pentane P=41.33-82.79bar p616
+124-38-9        109-66-0  .1367     Carbon Dioxide/n-Pentane T=277.65-377.59K p617
+124-38-9        79-20-9   -.567e-1  Carbon Dioxide/Methyl Acetate p619
+124-38-9        67-56-1   .141e-1   Carbon Dioxide/Methanol T=213-247K p621
+124-38-9        67-56-1   .496e-1   Carbon Dioxide/Methanol T=298-313K p623
+124-38-9        110-54-3  .1178     Carbon Dioxide/n-Hexane p625
+124-38-9        71-43-2   .767e-1   Carbon Dioxide/Benzene p627
+124-38-9        110-82-7  .1289     Carbon Dioxide/Cyclohexane p629
+124-38-9        142-82-5  .1100     Carbon Dioxide/n-Heptane p631
+124-38-9        7732-18-5 .578e-1   Carbon Dioxide/Water T=523-623K p633
+124-38-9        7732-18-5 .1000     Carbon Dioxide/Water T=383-623K p635
+124-38-9        108-88-3  .1130     Carbon Dioxide/Toluene p636
+124-38-9        124-18-5  .1304     Carbon Dioxide/n-Decane p638
+124-38-9        104-51-8  .1189     Carbon Dioxide/n-Butyl Benzene p641
+7783-06-4       74-98-6   .319e-1   Hydrogen Sulfide/Propane P=27.58-41.44bar p643
+7783-06-4       74-98-6   .885e-1   Hydrogen Sulfide/Propane T=217-344K p644
+7783-06-4       75-28-5   .511e-1   Hydrogen Sulfide/Isobutane p645
+7783-06-4       109-66-0  .689e-1   Hydrogen Sulfide/n-Pentane p647
+7783-06-4       7732-18-5 .74e-2    Hydrogen Sulfide/Water T=303-443K p648
+7783-06-4       7732-18-5 0.        Hydrogen Sulfide/Water T=311-444K p650
+7783-06-4       124-18-5  .452e-1   Hydrogen Sulfide/n-Decane p652
+7783-06-4       74-98-6   -.267e-1  Hydrogen Sulfide/Propane p653
+115-07-1        74-98-6   .144e-1   Propylene/Propane T=223.75-239.35K P=0.724-1.833bar p654
+115-07-1        74-98-6   .11e-2    Propylene/Propane T=269.54-333.93K P=4.385-23.594bar p656
+115-07-1        74-98-6   .37e-2    Propylene/Propane T=260.93-360.93K P=3.416-41.613bar p657
+115-07-1        74-98-6   0.        Propylene/Propane T=310.93-344.26K P=13-31.356bar p658
+115-07-1        75-28-5   -.144e-1  Propylene/Isobutane p660
+115-07-1        106-98-9  -.37e-2   Propylene/1-C4 p661
+74-98-6         75-28-5   -.100e-1  Propane/Isobutane p663
+74-98-6         106-97-8  0.        Propane/n-Butane p666
+74-98-6         78-78-4   .78e-2    Propane/Isopentane p668
+74-98-6         109-66-0  .233e-1   Propane/n-Pentane p671
+74-98-6         110-54-3  -.22e-2   Propane/n-Hexane p674
+74-98-6         64-17-5   .256e-1   Propane/Ethanol p676
+74-98-6         71-43-2   .200e-1   Propane/Benzene p679
+74-98-6         142-82-5  .44e-2    Propane/n-Heptane p681
+74-98-6         111-65-9  .74e-2    Propane/n-Octane p683
+74-98-6         124-18-5  0.        Propane/n-Decane p686
+76-15-3         75-45-6   .885e-1   Pentaflourohloroethane/Difluorochloromethane p688
+75-45-6         75-71-8   .544e-1   Difluorochloromethane/Dichlorodifluoromethane p689
+7664-41-7       7732-18-5 -.2700    Ammonia/Water T=333.15-420.15K p690
+7664-41-7       7732-18-5 -.2800    Ammonia/WaterT=273.15K p692
+7664-41-7       7732-18-5 -.2319    Ammonia/Water P=1.015bar p693
+75-28-5         106-97-8  .11e-2    Isobutane/n-Butane p694
+7446-09-5       71-43-2   .93e-2    Sulfur Dioxide/Benzene p696
+106-98-9        106-99-0  -.44e-2   1-Butene/1,3-Butadiene p697
+106-98-9        106-97-8  -.56e-2   1-Butene/n-Butane T=311-411K P=3.55-34.89bar p699
+106-98-9        106-97-8  -.22e-2   1-Butene/n-Butane T=311-339K P=3.55-8.69bar p700
+106-99-0        106-97-8  .81e-2    1,3-Butadiene/n-Butane p702
+106-97-8        109-66-0  .204e-1   n-Butane/n-Pentane p704
+106-97-8        110-54-3  -.111e-1  n-Butane/n-Hexane p706
+106-97-8        142-82-5  -.4e-3    n-Butane/n-Heptane p707
+106-97-8        111-65-9  .44e-2    n-Butane/n-Octane p708
+106-97-8        124-18-5  .67e-2    n-Butane/n-Decane p710
+109-66-0        71-43-2   .244e-1   n-Pentane/Benzene T=255-289K P=0.069-0.469bar p716
+109-66-0        71-43-2   .178e-1   n-Pentane/Benzene P=1.014bar p718
+109-66-0        110-82-7  .41e-2    n-Pentane/Cyclohexane p719
+109-66-0        142-82-5  .19e-2    n-Pentane/n-Heptane p720
+109-66-0        111-65-9  -.22e-2   n-Pentane/n-Octane p721
+75-83-2         71-41-0   .446e-1   2,2-Dimethylbutane/1-Pentanol p722
+79-29-8         71-41-0   .470e-1   2,3-Dimethylbutane/1-Pentanol p724
+107-83-5        71-41-0   .463e-1   2-Methylpentane/1-Pentanol p726
+71-41-0         96-14-0   .489e-1   1-Pentanol/3-Methylpentane p728
+67-56-1         7732-18-5 -.789e-1  Methanol/Water p730
+110-54-3        71-43-2   .189e-1   n-Hexane/Benzene T=298.15K p732
+110-54-3        71-43-2   .160e-1   n-Hexane/Benzene T=333.15K p734
+110-54-3        71-43-2   .178e-1   n-Hexane/Benzene P=980bar p737
+110-54-3        71-43-2   .133e-1   n-Hexane/Benzene T=341.75-351.05K P=1.014bar p738
+110-54-3        71-43-2   .115e-1   n-Hexane/Benzene T=341.50-353.30K P=1.014bar p739
+110-54-3        71-43-2   .156e-1   n-Hexane/Benzene T=278-298K P=0.053-0.205bar p740
+110-54-3        110-82-7  -.11e-2   n-Hexane/CycloHexane P=1.014bar p742
+110-54-3        110-82-7  .78e-2    n-Hexane/CycloHexane T=273-298K P=0.041-0.203bar p743
+110-54-3        67-63-0   .911e-1   n-Hexane/2-Propanol p744
+110-54-3        142-82-5  -.11e-2   n-Hexane/n-Heptane p745
+110-54-3        123-51-3  .496e-1   n-Hexane/Isopentanol p747
+110-54-3        71-41-0   .470e-1   n-Hexane/1-Pentanol p749
+110-82-7        71-43-2   .322e-1   CycloHexane/Benzene p752
+71-43-2         142-82-5  .89e-2    Benzene/n-Heptane T=333.15K P=0.316-0.518bar p753
+71-43-2         142-82-5  .59e-2    Benzene/n-Heptane T=353-371K P=1.014bar p755
+71-43-2         142-82-5  .48e-2    Benzene/n-Heptane T=353.3-371.6K P=1.014bar p756
+71-43-2         540-84-1  .48e-2    Benzene/Isooctane p757
+71-43-2         111-65-9  .70e-2    Benzene/n-Octane p758
+110-83-8        110-82-7  .44e-2    Cyclohexene/Cyclohexane p761
+110-82-7        107-06-2  .793e-1   Cyclohexane/1,2-Dichloroethane p762
+110-82-7        108-94-1  .700e-1   Cyclohexane/Cyclohexanone p763
+107-06-2        110-83-8  .478e-1   1,2-DiChloroethane/Cyclohexene p765
+142-82-5        540-84-1  .7e-3     n-Heptane/Isooctane p766
+142-82-5        107-87-9  .740e-1   n-Heptane/2-Pentanone p767

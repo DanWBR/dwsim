@@ -116,13 +116,261 @@ Namespace Reactors
 
         End Sub
 
+        Public Overrides Sub DisplayDynamicsEditForm()
+
+            If fd Is Nothing Then
+                fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                fd.Tag = "ObjectEditor"
+                fd.UpdateCallBack = Sub(table)
+                                        AddButtonsToDynEditor(table)
+                                    End Sub
+                Me.FlowSheet.DisplayForm(fd)
+            Else
+                If fd.IsDisposed Then
+                    fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                    fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                    fd.Tag = "ObjectEditor"
+                    fd.UpdateCallBack = Sub(table)
+                                            AddButtonsToDynEditor(table)
+                                        End Sub
+                    Me.FlowSheet.DisplayForm(fd)
+                Else
+                    fd.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
+
+            Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button1.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New MaterialStreamEditor With {
+                                          .MatStream = AccumulationStream,
+                                          .IsAccumulationStream = True,
+                                          .Text = Me.GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("AccumulationStream")}
+                                          FlowSheet.DisplayForm(fms)
+                                      End Sub
+
+            Dim button2 As New Button With {.Text = FlowSheet.GetTranslatedString("FillWithStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button2.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New EditingForm_SeparatorFiller With {.Separator = Me}
+                                          fms.ShowDialog()
+                                      End Sub
+
+            table.Controls.Add(button1)
+            table.Controls.Add(button2)
+            table.Controls.Add(New Panel())
+
+        End Sub
+        Public Overrides Sub CreateDynamicProperties()
+
+            AddDynamicProperty("Operating Pressure (Dynamics)", "Current Operating Pressure", 0, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Volume", "Reactor Volume", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the Reactor's available space with information from the inlet stream, if the vessel content is null.", False, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the Reactor's space on the next run.", False, UnitOfMeasure.none, True.GetType())
+            RemoveDynamicProperty("Reset Content")
+
+        End Sub
+
+        Private prevM, currentM As Double
+
         Public Overrides Sub RunDynamicModel()
 
-            Calculate()
+            Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
+            Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
+
+            Dim timestep = integrator.IntegrationStep.TotalSeconds
+
+            If integrator.RealTime Then timestep = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
+
+            Dim ims1 As MaterialStream = GetInletMaterialStream(0)
+
+            Dim oms1 As MaterialStream = GetOutletMaterialStream(0)
+            Dim oms2 As MaterialStream = GetOutletMaterialStream(1)
+
+            Dim es = GetInletEnergyStream(1)
+
+            Dim Height As Double = GetDynamicProperty("Height")
+            Dim Pressure As Double
+            Dim Pmin = GetDynamicProperty("Minimum Pressure")
+            Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
+
+            Dim Reset As Boolean = GetDynamicProperty("Reset Contents")
+
+            Dim Volume As Double = GetDynamicProperty("Volume")
+
+            If Reset Then
+                AccumulationStream = Nothing
+                SetDynamicProperty("Reset Contents", 0)
+            End If
+
+            If AccumulationStream Is Nothing Then
+
+                If InitializeFromInlet Then
+
+                    AccumulationStream = ims1.CloneXML
+
+                Else
+
+                    AccumulationStream = ims1.Subtract(oms1, timestep)
+                    If oms2 IsNot Nothing Then AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
+
+                End If
+
+                Dim density = AccumulationStream.Phases(0).Properties.density.GetValueOrDefault
+
+                AccumulationStream.SetMassFlow(density * Volume)
+                AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
+                AccumulationStream.PropertyPackage = PropertyPackage
+                AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+                AccumulationStream.Calculate()
+
+            Else
+
+                AccumulationStream.SetFlowsheet(FlowSheet)
+                AccumulationStream = AccumulationStream.Add(ims1, timestep)
+                AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+                AccumulationStream.Calculate()
+                AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
+                If oms2 IsNot Nothing Then AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
+                If AccumulationStream.GetMassFlow <= 0.0 Then AccumulationStream.SetMassFlow(0.0)
+
+            End If
+
+            AccumulationStream.SetFlowsheet(FlowSheet)
+
+            ' Calculate Temperature
+
+            Dim Qval, Ha, Wa As Double
+
+            Ha = AccumulationStream.GetMassEnthalpy
+            Wa = AccumulationStream.GetMassFlow
+
+            If es IsNot Nothing Then Qval = es.EnergyFlow.GetValueOrDefault
+
+            'If Qval <> 0.0 Then
+
+            '    If Wa > 0 Then
+
+            '        AccumulationStream.SetMassEnthalpy(Ha + Qval * timestep / Wa)
+
+            '        AccumulationStream.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+            '        AccumulationStream.PropertyPackage = PropertyPackage
+            '        AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+
+            '        If integrator.ShouldCalculateEquilibrium Then
+
+            '            AccumulationStream.Calculate(True, True)
+
+            '        End If
+
+            '    End If
+
+            'End If
+
+            'calculate pressure
+
+            Dim M = AccumulationStream.GetMolarFlow()
+
+            Dim Temperature = AccumulationStream.GetTemperature()
+
+            Pressure = AccumulationStream.GetPressure()
+
+            'm3/mol
+
+            prevM = currentM
+
+            currentM = Volume / M
+
+            PropertyPackage.CurrentMaterialStream = AccumulationStream
+
+            Dim LiquidVolume, RelativeLevel As Double
+
+            If AccumulationStream.GetPressure > Pmin Then
+
+                If prevM = 0.0 Or integrator.ShouldCalculateEquilibrium Then
+
+                    Dim result As IFlashCalculationResult
+
+                    result = PropertyPackage.CalculateEquilibrium2(FlashCalculationType.VolumeTemperature, currentM, Temperature, Pressure)
+
+                    Pressure = result.CalculatedPressure
+
+                    LiquidVolume = AccumulationStream.Phases(3).Properties.volumetric_flow.GetValueOrDefault
+
+                    RelativeLevel = LiquidVolume / Volume
+
+                    SetDynamicProperty("Liquid Level", RelativeLevel * Height)
+
+                Else
+
+                    Pressure = currentM / prevM * Pressure
+
+                End If
+
+            Else
+
+                Pressure = Pmin
+
+                LiquidVolume = 0.0
+
+                RelativeLevel = LiquidVolume / Volume
+
+                SetDynamicProperty("Liquid Level", RelativeLevel * Height)
+
+            End If
+
+            AccumulationStream.SetPressure(Pressure)
+            AccumulationStream.SpecType = StreamSpec.Temperature_and_Pressure
+
+            AccumulationStream.PropertyPackage = PropertyPackage
+            AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
+
+            If integrator.ShouldCalculateEquilibrium And Pressure > 0.0 Then
+
+                AccumulationStream.Calculate(True, True)
+
+            End If
+
+            SetDynamicProperty("Operating Pressure", Pressure)
+
+            Calculate(True)
+
+            OutletTemperature = AccumulationStream.GetTemperature()
+
+            DeltaT = OutletTemperature - ims1.GetTemperature()
+
+            DeltaP = AccumulationStream.GetPressure() - ims1.GetPressure()
+
+            DeltaQ = (AccumulationStream.GetMassEnthalpy() - ims1.GetMassEnthalpy()) * ims1.GetMassFlow()
+
+            ' comp. conversions
+
+            For Each sb As Compound In ims1.Phases(0).Compounds.Values
+                If ComponentConversions.ContainsKey(sb.Name) > 0 Then
+                    Dim n0 = ims1.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
+                    Dim nf = AccumulationStream.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
+                    ComponentConversions(sb.Name) = Math.Abs(n0 - nf) / nf
+                End If
+            Next
 
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim dynamics As Boolean = False
+
+            If args IsNot Nothing Then dynamics = args
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -150,7 +398,21 @@ Namespace Reactors
 
             InitVars()
 
-            Dim ims As MaterialStream = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
+            Dim ims As MaterialStream
+
+            If dynamics Then
+                ims = AccumulationStream.Clone()
+            Else
+                ims = GetInletMaterialStream(0).Clone()
+            End If
+
+            Dim Qin = 0.0
+
+            'energy stream
+            If GetInletEnergyStream(1) IsNot Nothing Then
+                Qin = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault()
+            End If
+
             Dim pp = Me.PropertyPackage
 
             ims.SetFlowsheet(Me.FlowSheet)
@@ -459,18 +721,14 @@ Namespace Reactors
 
                     Case OperationMode.Adiabatic
 
-                        Me.DeltaQ = 0.0#
-
-                        'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = Hr - DHr
-                        Hp = Hp / W
-
-                        IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
-
-                        ims.Phases(0).Properties.enthalpy = Hp
                         ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
-                        IObj?.SetCurrent()
+                        'Products Enthalpy (kJ/kg * kg/s = kW)
+
+                        Hp = (Hr - DHr) / ims.GetMassFlow()
+
+                        ims.SetMassEnthalpy(Hp + Qin / W)
+
                         ims.Calculate(True, True)
 
                         Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
@@ -541,6 +799,11 @@ Namespace Reactors
             'Compound conversions
 
             pp.CurrentMaterialStream = ims
+
+            If dynamics Then
+                AccumulationStream.Assign(ims)
+                AccumulationStream.AssignProps(ims)
+            End If
 
             nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).MultiplyConstY(ims.Phases(0).Properties.molarflow.GetValueOrDefault)
 
@@ -655,20 +918,22 @@ Namespace Reactors
                 End With
             End If
 
-            If GetInletEnergyStream(1) IsNot Nothing Then
+            If ReactorOperationMode <> OperationMode.Adiabatic Then
                 'energy stream - update energy flow value (kW)
-                With GetInletEnergyStream(1)
-                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
-            ElseIf GetOutletEnergyStream(2) IsNot Nothing Then
-                'energy stream - update energy flow value (kW)
-                With GetOutletEnergyStream(2)
-                    .EnergyFlow = -Me.DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
+                If GetInletEnergyStream(1) IsNot Nothing Then
+                    'energy stream - update energy flow value (kW)
+                    With GetInletEnergyStream(1)
+                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+                ElseIf GetOutletEnergyStream(2) IsNot Nothing Then
+                    'energy stream - update energy flow value (kW)
+                    With GetOutletEnergyStream(2)
+                        .EnergyFlow = -Me.DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
             End If
-
 
             IObj?.Close()
 

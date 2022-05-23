@@ -71,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             txtResults = new TextArea { ReadOnly = true, Wrap = true };
 
-            Rows.Add(new TableRow(leftcontainer, new Scrollable {Content = txtResults }));
+            Rows.Add(new TableRow(leftcontainer, new Scrollable { Content = txtResults }));
 
             btnRun.Click += (s, e) =>
             {
@@ -130,7 +130,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                         {
                             txtResults.Text += (string.Format("Beginning Iteration #{0}...\n", counter));
                         });
-                        intc.RestoreState(schedule.InitialFlowsheetStateID);
+                        DynamicsIntegratorControl.RestoreState(Flowsheet, schedule.InitialFlowsheetStateID);
                         var i = 0;
                         foreach (var controller in controllers)
                         {
@@ -143,7 +143,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                             });
                             i += 3;
                         }
-                        intc.RunIntegrator(false, true);
+                        DynamicsIntegratorControl.RunIntegrator(false, true, Flowsheet, intc);
                         var totalerror = controllers.Select(c => c.CumulativeError).ToArray().AbsSumY();
                         Flowsheet.RunCodeOnUIThread(() =>
                         {

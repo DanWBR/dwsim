@@ -145,6 +145,8 @@ Public Class EditingForm_ReactorPFR
             tbCatVoidFrac.Text = .CatalystVoidFraction.ToString(nf)
             tbDiam.Text = su.Converter.ConvertFromSI(units.diameter, .Diameter).ToString(nf)
 
+            nupNT.Value = SimObject.NumberOfTubes
+
             Select Case .ReactorSizingType
                 Case Reactors.Reactor_PFR.SizingType.Diameter
                     rbDiameter.Checked = True
@@ -745,4 +747,9 @@ Public Class EditingForm_ReactorPFR
 
     End Sub
 
+    Private Sub nupNT_ValueChanged(sender As Object, e As EventArgs) Handles nupNT.ValueChanged
+        If Loaded Then
+            SimObject.NumberOfTubes = nupNT.Value
+        End If
+    End Sub
 End Class

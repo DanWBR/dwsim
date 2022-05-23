@@ -25,6 +25,16 @@ Public Class FormDynamicsIntegratorControl
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        Flowsheet.DynamicsManager.ToggleDynamicMode = Function()
+                                                          Flowsheet.DynamicMode = Not Flowsheet.DynamicMode
+                                                          Return Flowsheet.DynamicMode
+                                                      End Function
+
+        Flowsheet.DynamicsManager.RunSchedule = Function(schname)
+                                                    Flowsheet.DynamicsManager.CurrentSchedule = Flowsheet.DynamicsManager.GetSchedule(schname).ID
+                                                    Return RunIntegrator(False, False, False, True)
+                                                End Function
+
     End Sub
 
     Private Sub FormDynamicsIntegratorControl_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -70,10 +80,10 @@ Public Class FormDynamicsIntegratorControl
         If Flowsheet.DynamicMode Then
             If Not Running Then
                 ChartIsSetup = False
-                RunIntegrator(False, False, False)
+                RunIntegrator(False, False, False, False)
             Else
                 If Not Paused Then
-                    RunIntegrator(False, False, True)
+                    RunIntegrator(False, False, True, False)
                 End If
             End If
         Else
@@ -164,7 +174,7 @@ Public Class FormDynamicsIntegratorControl
     Private Sub btnRealtime_Click(sender As Object, e As EventArgs) Handles btnRealtime.Click
 
         If Flowsheet.DynamicMode Then
-            RunIntegrator(True, False, False)
+            RunIntegrator(True, False, False, False)
         Else
             Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
         End If
@@ -189,13 +199,9 @@ Public Class FormDynamicsIntegratorControl
 
     End Sub
 
-    Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean, restarting As Boolean) As Task
+    Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean, restarting As Boolean, guiless As Boolean) As Task
 
         ChartIsSetup = False
-
-        btnRealtime.Enabled = False
-
-        btnViewResults.Enabled = False
 
         Abort = False
 
@@ -216,31 +222,41 @@ Public Class FormDynamicsIntegratorControl
             End If
         End If
 
-        If Not restarting Then ProgressBar1.Value = 0
+        Dim final As Integer
 
-        ProgressBar1.Minimum = 0
+        If Not guiless Then
 
-        If Not restarting Then integrator.MonitoredVariableValues.Clear()
+            btnRealtime.Enabled = False
 
-        lblFinish.Text = integrator.Duration.ToString("c")
+            btnViewResults.Enabled = False
 
-        If realtime Then
+            If Not restarting Then ProgressBar1.Value = 0
 
-            ProgressBar1.Maximum = Integer.MaxValue
-            ProgressBar1.Style = ProgressBarStyle.Marquee
+            ProgressBar1.Minimum = 0
 
-        Else
+            lblFinish.Text = integrator.Duration.ToString("c")
 
-            ProgressBar1.Maximum = integrator.Duration.TotalSeconds
-            ProgressBar1.Style = ProgressBarStyle.Continuous
+            final = ProgressBar1.Maximum
+
+            If realtime Then
+
+                ProgressBar1.Maximum = Integer.MaxValue
+                ProgressBar1.Style = ProgressBarStyle.Marquee
+
+            Else
+
+                ProgressBar1.Maximum = integrator.Duration.TotalSeconds
+                ProgressBar1.Style = ProgressBarStyle.Continuous
+
+            End If
 
         End If
+
+        If Not restarting Then integrator.MonitoredVariableValues.Clear()
 
         Dim interval = integrator.IntegrationStep.TotalSeconds
 
         If realtime Then interval = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
-
-        Dim final = ProgressBar1.Maximum
 
         If Not restarting Then
             For Each controller As PIDController In Controllers
@@ -293,7 +309,7 @@ Public Class FormDynamicsIntegratorControl
 
                                     Dim i As Double = 0
 
-                                    If restarting Then
+                                    If restarting And Not guiless Then
                                         Flowsheet.RunCodeOnUIThread(Sub()
                                                                         i = ProgressBar1.Value
                                                                     End Sub)
@@ -307,10 +323,12 @@ Public Class FormDynamicsIntegratorControl
 
                                         Dim i0 As Integer = i
 
-                                        Flowsheet.RunCodeOnUIThread(Sub()
-                                                                        ProgressBar1.Value = i0
-                                                                        lblCurrent.Text = New TimeSpan(0, 0, i0).ToString("c")
-                                                                    End Sub)
+                                        If Not guiless Then
+                                            Flowsheet.RunCodeOnUIThread(Sub()
+                                                                            ProgressBar1.Value = i0
+                                                                            lblCurrent.Text = New TimeSpan(0, 0, i0).ToString("c")
+                                                                        End Sub)
+                                        End If
 
                                         controllers_check += interval
                                         streams_check += interval
@@ -347,16 +365,28 @@ Public Class FormDynamicsIntegratorControl
 
                                         StoreVariableValues(integrator, i, integrator.CurrentTime)
 
-                                        Flowsheet.RunCodeOnUIThread(Sub()
-                                                                        Flowsheet.FormDynamics.UpdateControllerList()
-                                                                        Flowsheet.FormDynamics.UpdateIndicatorList()
-                                                                        Flowsheet.FormSurface.FControl.Invalidate()
-                                                                        Application.DoEvents()
-                                                                    End Sub)
+                                        If Not guiless Then
+                                            Flowsheet.RunCodeOnUIThread(Sub()
+                                                                            Flowsheet.FormDynamics.UpdateControllerList()
+                                                                            Flowsheet.FormDynamics.UpdateIndicatorList()
+                                                                            Flowsheet.FormSurface.FControl.Invalidate()
+                                                                            Application.DoEvents()
+                                                                        End Sub)
+                                        End If
 
                                         integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
                                         If integrator.ShouldCalculateControl Then
+                                            For ck = 0 To Controllers.Count
+                                                For Each controller As PIDController In Controllers
+                                                    If controller.Active Then
+                                                        Try
+                                                            controller.Solve()
+                                                        Catch ex As Exception
+                                                        End Try
+                                                    End If
+                                                Next
+                                            Next
                                             For Each controller As PIDController In Controllers
                                                 If controller.Active Then
                                                     Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name)
@@ -392,10 +422,12 @@ Public Class FormDynamicsIntegratorControl
 
                                         i += interval
 
-                                        Flowsheet.RunCodeOnUIThread(Sub()
-                                                                        If Not ChartIsSetup Then SetupChart(integrator)
-                                                                        UpdateChart(integrator)
-                                                                    End Sub)
+                                        If Not guiless Then
+                                            Flowsheet.RunCodeOnUIThread(Sub()
+                                                                            If Not ChartIsSetup Then SetupChart(integrator)
+                                                                            UpdateChart(integrator)
+                                                                        End Sub)
+                                        End If
 
                                     End While
 
@@ -405,48 +437,52 @@ Public Class FormDynamicsIntegratorControl
 
         maintask.ContinueWith(Sub(t)
                                   If Not Paused Then Running = False
-                                  Flowsheet.RunCodeOnUIThread(Sub()
-                                                                  btnViewResults.Enabled = True
-                                                                  btnRealtime.Enabled = True
-                                                                  If Not Paused Then
-                                                                      ProgressBar1.Value = 0
-                                                                      ProgressBar1.Style = ProgressBarStyle.Continuous
-                                                                  End If
-                                                                  Flowsheet.SupressMessages = False
-                                                                  Flowsheet.UpdateOpenEditForms()
-                                                                  Dim baseexception As Exception
-                                                                  If t.Exception IsNot Nothing Then
-                                                                      btnRun.BackgroundImage = My.Resources.icons8_play
-                                                                      Paused = False
-                                                                      Running = False
-                                                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
-                                                                      For Each ex In t.Exception.Flatten().InnerExceptions
-                                                                          Dim euid As String = Guid.NewGuid().ToString()
-                                                                          SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
-                                                                          If TypeOf ex Is AggregateException Then
-                                                                              baseexception = ex.InnerException
-                                                                              For Each iex In DirectCast(ex, AggregateException).Flatten().InnerExceptions
-                                                                                  While iex.InnerException IsNot Nothing
-                                                                                      baseexception = iex.InnerException
-                                                                                  End While
+                                  If t.Exception IsNot Nothing Then
+                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
+                                  Else
+                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "")
+                                  End If
+                                  If Not guiless Then
+                                      Flowsheet.RunCodeOnUIThread(Sub()
+                                                                      btnViewResults.Enabled = True
+                                                                      btnRealtime.Enabled = True
+                                                                      If Not Paused Then
+                                                                          ProgressBar1.Value = 0
+                                                                          ProgressBar1.Style = ProgressBarStyle.Continuous
+                                                                      End If
+                                                                      Flowsheet.SupressMessages = False
+                                                                      Flowsheet.UpdateOpenEditForms()
+                                                                      Dim baseexception As Exception
+                                                                      If t.Exception IsNot Nothing Then
+                                                                          btnRun.BackgroundImage = My.Resources.icons8_play
+                                                                          Paused = False
+                                                                          Running = False
+                                                                          For Each ex In t.Exception.Flatten().InnerExceptions
+                                                                              Dim euid As String = Guid.NewGuid().ToString()
+                                                                              SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
+                                                                              If TypeOf ex Is AggregateException Then
+                                                                                  baseexception = ex.InnerException
+                                                                                  For Each iex In DirectCast(ex, AggregateException).Flatten().InnerExceptions
+                                                                                      While iex.InnerException IsNot Nothing
+                                                                                          baseexception = iex.InnerException
+                                                                                      End While
+                                                                                      Flowsheet.ShowMessage(baseexception.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
+                                                                                  Next
+                                                                              Else
+                                                                                  baseexception = ex
+                                                                                  If baseexception.InnerException IsNot Nothing Then
+                                                                                      While baseexception.InnerException.InnerException IsNot Nothing
+                                                                                          baseexception = baseexception.InnerException
+                                                                                          If baseexception Is Nothing Then Exit While
+                                                                                          If baseexception.InnerException Is Nothing Then Exit While
+                                                                                      End While
+                                                                                  End If
                                                                                   Flowsheet.ShowMessage(baseexception.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
-                                                                              Next
-                                                                          Else
-                                                                              baseexception = ex
-                                                                              If baseexception.InnerException IsNot Nothing Then
-                                                                                  While baseexception.InnerException.InnerException IsNot Nothing
-                                                                                      baseexception = baseexception.InnerException
-                                                                                      If baseexception Is Nothing Then Exit While
-                                                                                      If baseexception.InnerException Is Nothing Then Exit While
-                                                                                  End While
                                                                               End If
-                                                                              Flowsheet.ShowMessage(baseexception.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
-                                                                          End If
-                                                                      Next
-                                                                  Else
-                                                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "")
-                                                                  End If
-                                                              End Sub)
+                                                                          Next
+                                                                      End If
+                                                                  End Sub)
+                                  End If
                               End Sub)
 
         If waittofinish Then

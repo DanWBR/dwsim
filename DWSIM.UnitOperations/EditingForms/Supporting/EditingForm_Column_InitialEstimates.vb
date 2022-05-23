@@ -211,7 +211,7 @@ Public Class EditingForm_Column_InitialEstimates
             Try
                 Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(dc.InitialEstimates, Newtonsoft.Json.Formatting.Indented)
                 Using stream As New IO.MemoryStream()
-                    Using writer As New StreamWriter(stream)
+                    Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                         writer.Write(data)
                         handler.Write(stream)
                     End Using

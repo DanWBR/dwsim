@@ -35,11 +35,16 @@ Partial Class FormDynamicsIntegratorControl
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.btnLiveChart = New System.Windows.Forms.Button()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStart
         '
         resources.ApplyResources(Me.lblStart, "lblStart")
+        Me.lblStart.BackColor = System.Drawing.Color.Transparent
         Me.lblStart.Name = "lblStart"
         Me.ToolTip1.SetToolTip(Me.lblStart, resources.GetString("lblStart.ToolTip"))
         '
@@ -66,6 +71,7 @@ Partial Class FormDynamicsIntegratorControl
         'lblCurrent
         '
         resources.ApplyResources(Me.lblCurrent, "lblCurrent")
+        Me.lblCurrent.BackColor = System.Drawing.Color.Transparent
         Me.lblCurrent.Name = "lblCurrent"
         Me.ToolTip1.SetToolTip(Me.lblCurrent, resources.GetString("lblCurrent.ToolTip"))
         '
@@ -114,21 +120,42 @@ Partial Class FormDynamicsIntegratorControl
         Me.ToolTip1.SetToolTip(Me.btnLiveChart, resources.GetString("btnLiveChart.ToolTip"))
         Me.btnLiveChart.UseVisualStyleBackColor = True
         '
+        'FlowLayoutPanel1
+        '
+        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblStart)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblCurrent)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label2)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblFinish)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.ToolTip1.SetToolTip(Me.FlowLayoutPanel1, resources.GetString("FlowLayoutPanel1.ToolTip"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        '
         'FormDynamicsIntegratorControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.btnLiveChart)
-        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnRealtime)
         Me.Controls.Add(Me.btnViewResults)
-        Me.Controls.Add(Me.lblCurrent)
-        Me.Controls.Add(Me.lblFinish)
-        Me.Controls.Add(Me.lblStart)
         Me.Controls.Add(Me.btnStop)
         Me.Controls.Add(Me.cbScenario)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnRun)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.DockAreas = CType(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) _
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) _
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) _
@@ -141,6 +168,8 @@ Partial Class FormDynamicsIntegratorControl
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -158,4 +187,7 @@ Partial Class FormDynamicsIntegratorControl
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents btnLiveChart As Button
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class

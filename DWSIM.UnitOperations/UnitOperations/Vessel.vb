@@ -146,14 +146,14 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Vessel Orientation", "Vertical or Horizontal (V = 0, H = 1)", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Operating Pressure", "Current Vessel Operating Pressure", 0, UnitOfMeasure.pressure)
-            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the vessel content with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Content", "Empties the vessel's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Vessel Orientation", "Vertical or Horizontal (V = 0, H = 1)", 0, UnitOfMeasure.none, 1.0.GetType())
+            AddDynamicProperty("Operating Pressure", "Current Vessel Operating Pressure", 0, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the vessel content with information from the inlet stream, if the vessel content is null.", True, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Content", "Empties the vessel's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -402,7 +402,6 @@ Namespace UnitOperations
             oms1.AssignFromPhase(PhaseLabel.Vapor, AccumulationStream, False)
 
             oms2.AssignFromPhase(PhaseLabel.Liquid1, AccumulationStream, False)
-
 
         End Sub
 

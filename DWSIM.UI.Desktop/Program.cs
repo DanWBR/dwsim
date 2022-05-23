@@ -121,7 +121,9 @@ namespace DWSIM.UI.Desktop
                 }
                 else if (Settings.RunningPlatform() == Settings.Platform.Linux)
                 {
-                    switch (GlobalSettings.Settings.LinuxRenderer)
+                    var renderer = GlobalSettings.Settings.LinuxRenderer;
+                    if (GlobalSettings.Settings.AutomationMode) renderer = Settings.LinuxPlatformRenderer.WinForms;
+                    switch (renderer)
                     {
                         case Settings.LinuxPlatformRenderer.Gtk2:
                             DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();

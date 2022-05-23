@@ -123,9 +123,6 @@
   <data name="cbLiqDens.Items2" xml:space="preserve">
     <value>Equation of State</value>
   </data>
-  <data name="cbLiqDens.Items3" xml:space="preserve">
-    <value>COSTALD</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cbLiqDens.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 43</value>
@@ -222,6 +219,9 @@
   </data>
   <data name="chkLiqDensPeneloux.Text" xml:space="preserve">
     <value>Use Peneloux Volume Translation Coefficient (PR/SRK EOS only)</value>
+  </data>
+  <data name="cbLiqVisc.Items" xml:space="preserve">
+    <value>Letsou-Stiel</value>
   </data>
   <data name="cbLiqVisc.Items1" xml:space="preserve">
     <value>Letsou-Stiel + Experimental Data (if available)</value>

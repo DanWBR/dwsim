@@ -28,6 +28,8 @@ Namespace ChemSepHelper
 
         Private _ids As System.Collections.Generic.Dictionary(Of Integer, ChemSepNameIDPair)
 
+        Private CS_IDs As New Dictionary(Of String, String)
+
         Public ReadOnly Property IDs() As System.Collections.Generic.Dictionary(Of Integer, ChemSepNameIDPair)
             Get
                 Return _ids
@@ -57,11 +59,22 @@ Namespace ChemSepHelper
             csidc = Nothing
             fh1 = Nothing
 
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.ChemSep_IDs.txt")
+                Using t As New IO.StreamReader(filestr)
+                    While Not t.EndOfStream
+                        Dim line = t.ReadLine().Split(vbTab)
+                        CS_IDs.Add(line(0), line(1))
+                    End While
+                End Using
+            End Using
+
         End Sub
 
         Public Function GetCSName(ByVal id As String)
 
-            If Me.IDs.ContainsKey(id) Then
+            If Me.CS_IDs.ContainsKey(id) Then
+                Return Me.CS_IDs(id)
+            ElseIf Me.IDs.ContainsKey(id) Then
                 Return Me.IDs(id).ChemSepName
             Else
                 Return id

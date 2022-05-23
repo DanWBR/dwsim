@@ -462,6 +462,12 @@ Namespace GraphicObjects
 
         End Function
 
+        Public Overridable Function GetPointValue(type As Enums.GraphicObjects.PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double Implements IGraphicObject.GetPointValue
+
+            Return Double.NaN
+
+        End Function
+
     End Class
 
 End Namespace

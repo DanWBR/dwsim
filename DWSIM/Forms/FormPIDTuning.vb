@@ -95,7 +95,7 @@ Public Class FormPIDTuning
                                                                             End Sub)
                                                 i += 3
                                             Next
-                                            Flowsheet.FormIntegratorControls.RunIntegrator(False, True, False)
+                                            Flowsheet.FormIntegratorControls.RunIntegrator(False, True, False, False)
                                             Dim totalerror = controllers.Select(Function(c) c.CumulativeError).ToArray.AbsSumY
                                             Flowsheet.RunCodeOnUIThread(Sub()
                                                                             tbResults.AppendText(String.Format("Total Error: {0}" + vbCrLf, totalerror))

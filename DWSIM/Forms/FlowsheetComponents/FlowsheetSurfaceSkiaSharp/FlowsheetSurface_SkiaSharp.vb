@@ -31,6 +31,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Loaded As Boolean = False
 
+    Public AnimationTimer As New System.Timers.Timer(42) '24 fps
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -65,26 +67,28 @@ Public Class FlowsheetSurface_SkiaSharp
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        Me.ToolStrip1.AutoSize = False
-        Me.ToolStrip1.Size = New Size(ToolStrip1.Width + 40, 28 * Settings.DpiScale)
-        Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
-        For Each item In Me.ToolStrip1.Items
-            If TryCast(item, ToolStripButton) IsNot Nothing Then
-                DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
-            End If
-        Next
-        Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
-        Me.ToolStrip1.Invalidate()
+        If Settings.DpiScale > 1.0 Then
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width + 40, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
+            Me.ToolStrip1.Invalidate()
 
-        Me.ToolStripFlowsheet.AutoSize = False
-        Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + 30, 28 * Settings.DpiScale)
-        Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
-        For Each item In Me.ToolStripFlowsheet.Items
-            If TryCast(item, ToolStripButton) IsNot Nothing Then
-                DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
-            End If
-        Next
-        Me.ToolStripFlowsheet.Invalidate()
+            Me.ToolStripFlowsheet.AutoSize = False
+            Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + 30, 28 * Settings.DpiScale)
+            Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStripFlowsheet.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStripFlowsheet.Invalidate()
+        End If
 
         If TypeOf Me.ParentForm Is FormFlowsheet Then
             Flowsheet = Me.ParentForm
@@ -171,9 +175,18 @@ Public Class FlowsheetSurface_SkiaSharp
         If FormMain.IsPro Then
             FindTearStreamsAutomaticallyToolStripMenuItem.Visible = False
             UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
+            tsmiHeatMap.Visible = False
+            tsmiLiveFlow.Visible = False
+            tss1.Visible = False
+            tss2.Visible = False
         End If
 
         Loaded = True
+
+        AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
+                                               If My.Settings.FlowsheetRenderer = 0 Then FControl.Invalidate()
+                                           End Sub
+        'AnimationTimer.Start()
 
     End Sub
 
@@ -3721,6 +3734,60 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub tscbAddObjectsWithStreams_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tscbAddObjectsWithStreams.SelectedIndexChanged
         Flowsheet.FlowsheetOptions.AddObjectsWithStreams = tscbAddObjectsWithStreams.SelectedIndex
+    End Sub
+
+    Private Sub ExportarParaPDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarParaPDFToolStripMenuItem.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("PDF File", "*.pdf")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Dim skstream = New SKManagedWStream(stream)
+                Using document = SKDocument.CreatePdf(stream)
+                    Dim canvas = document.BeginPage(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+                    FlowsheetSurface.UpdateCanvas(canvas)
+                    document.EndPage()
+                    document.Close()
+                End Using
+                handler.Write(stream)
+            End Using
+            Flowsheet.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
+        End If
+
+    End Sub
+
+    Private Sub ExportarParaSVGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarParaSVGToolStripMenuItem.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("SVG File", "*.svg")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Dim skstream = New SKManagedWStream(stream)
+                Dim writer = New SKXmlStreamWriter(skstream)
+                Using canvas = SKSvgCanvas.Create(SKRect.Create(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height), writer)
+                    FlowsheetSurface.UpdateCanvas(canvas)
+                End Using
+                handler.Write(stream)
+            End Using
+            Flowsheet.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
+        End If
+
+    End Sub
+
+    Private Sub tsmiHeatMap_Click(sender As Object, e As EventArgs) Handles tsmiHeatMap.Click
+        Dim fhm As New FormHeatMaps()
+        fhm.ShowDialog(Me)
+    End Sub
+
+    Private Sub tsmiLiveFlow_Click(sender As Object, e As EventArgs) Handles tsmiLiveFlow.Click
+        Dim flf As New FormLiveFlows()
+        flf.ShowDialog(Me)
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged

@@ -40,6 +40,9 @@ Partial Class EditingForm_Valve
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.rbCv = New System.Windows.Forms.RadioButton()
+        Me.rbKv = New System.Windows.Forms.RadioButton()
         Me.btnCalcKv = New System.Windows.Forms.Button()
         Me.tbOp = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -178,7 +181,7 @@ Partial Class EditingForm_Valve
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -229,6 +232,9 @@ Partial Class EditingForm_Valve
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.rbCv)
+        Me.GroupBox2.Controls.Add(Me.rbKv)
         Me.GroupBox2.Controls.Add(Me.btnCalcKv)
         Me.GroupBox2.Controls.Add(Me.tbOp)
         Me.GroupBox2.Controls.Add(Me.Label5)
@@ -250,6 +256,34 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
+        '
+        'rbCv
+        '
+        resources.ApplyResources(Me.rbCv, "rbCv")
+        Me.rbCv.Name = "rbCv"
+        Me.rbCv.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbCv, resources.GetString("rbCv.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbCv, resources.GetString("rbCv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbCv, resources.GetString("rbCv.ToolTip2"))
+        Me.rbCv.UseVisualStyleBackColor = True
+        '
+        'rbKv
+        '
+        resources.ApplyResources(Me.rbKv, "rbKv")
+        Me.rbKv.Name = "rbKv"
+        Me.rbKv.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbKv, resources.GetString("rbKv.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbKv, resources.GetString("rbKv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbKv, resources.GetString("rbKv.ToolTip2"))
+        Me.rbKv.UseVisualStyleBackColor = True
         '
         'btnCalcKv
         '
@@ -513,7 +547,7 @@ Partial Class EditingForm_Valve
         'EditingForm_Valve
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -582,4 +616,7 @@ Partial Class EditingForm_Valve
     Public WithEvents Label5 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
     Friend WithEvents btnCalcKv As Button
+    Public WithEvents Label6 As Label
+    Friend WithEvents rbCv As RadioButton
+    Friend WithEvents rbKv As RadioButton
 End Class

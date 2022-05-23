@@ -184,7 +184,7 @@ Imports DWSIM.SharedClassesCSharp.FilePicker
 
         If handler IsNot Nothing Then
             Using stream As New IO.MemoryStream()
-                Using writer As New StreamWriter(stream)
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                     writer.Write(Me.txtScript.Text)
                     handler.Write(stream)
                 End Using

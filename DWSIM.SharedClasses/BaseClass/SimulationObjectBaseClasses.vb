@@ -45,6 +45,8 @@ Namespace UnitOperations
 
         Public Property ExtraPropertiesDescriptions As New ExpandoObject Implements ISimulationObject.ExtraPropertiesDescriptions
 
+        Public Property ExtraPropertiesTypes As New ExpandoObject Implements ISimulationObject.ExtraPropertiesTypes
+
         Public Overridable Property Visible As Boolean = True
 
         <NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
@@ -166,13 +168,12 @@ Namespace UnitOperations
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
             Dim toremove As New List(Of String)
             For Each p In col1
                 If Not col2.ContainsKey(p.Key) And Not col3.ContainsKey(p.Key) Then
                     toremove.Add(p.Key)
-                Else
-                    'Throw New Exception("Property already exists.")
                 End If
             Next
 
@@ -183,19 +184,17 @@ Namespace UnitOperations
         End Sub
 
         Public Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double,
-                               punittype As Enums.UnitOfMeasure) Implements ISimulationObject.AddDynamicProperty
+                               punittype As Enums.UnitOfMeasure, ptype As System.Type) Implements ISimulationObject.AddDynamicProperty
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
-            If Not col1.ContainsKey(pname) Then
-                col1.Add(pname, pvalue)
-                col2.Add(pname, pdesc)
-                col3.Add(pname, punittype)
-            Else
-                'Throw New Exception("Property already exists.")
-            End If
+            If Not col1.ContainsKey(pname) Then col1.Add(pname, pvalue)
+            If Not col2.ContainsKey(pname) Then col2.Add(pname, pdesc)
+            If Not col3.ContainsKey(pname) Then col3.Add(pname, punittype)
+            If Not col4.ContainsKey(pname) Then col4.Add(pname, ptype)
 
         End Sub
 
@@ -230,14 +229,12 @@ Namespace UnitOperations
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
-            If col1.ContainsKey(pname) Then
-                col1.Remove(pname)
-                col2.Remove(pname)
-                col3.Remove(pname)
-            Else
-                Throw New Exception("Property doesn't exist.")
-            End If
+            If col1.ContainsKey(pname) Then col1.Remove(pname)
+            If col2.ContainsKey(pname) Then col2.Remove(pname)
+            If col1.ContainsKey(pname) Then col3.Remove(pname)
+            If col4.ContainsKey(pname) Then col4.Remove(pname)
 
         End Sub
 
@@ -1434,6 +1431,22 @@ Namespace UnitOperations
 
             Return 0
 
+        End Function
+
+        Public Overridable Function GetDynamicResidenceTime() As Double Implements ISimulationObject.GetDynamicResidenceTime
+            Return Double.NaN
+        End Function
+
+        Public Overridable Function GetDynamicVolume() As Double Implements ISimulationObject.GetDynamicVolume
+            Return Double.NaN
+        End Function
+
+        Public Overridable Function GetDynamicContents() As Double Implements ISimulationObject.GetDynamicContents
+            Return Double.NaN
+        End Function
+
+        Public Function GetAsObject() As Object Implements ISimulationObject.GetAsObject
+            Return Me
         End Function
 
 #End Region

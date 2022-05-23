@@ -10,6 +10,7 @@ Imports Microsoft.Msagl.Core.Geometry.Curves
 Imports Microsoft.Msagl.Core.Layout
 Imports Microsoft.Msagl.Layout.Initial
 Imports Microsoft.Msagl.Layout.Incremental
+Imports System.Threading.Tasks
 
 Public Class GraphicsSurface
 
@@ -78,6 +79,20 @@ Public Class GraphicsSurface
     Public Shared Property BoldFonts As List(Of String)
     Public Shared Property ItalicFonts As List(Of String)
     Public Shared Property BoldItalicFonts As List(Of String)
+
+    Public DrawAdditionalItems As Boolean = False
+
+    Public OverlayImage As SKBitmap
+    Public OverlayImage2 As SKBitmap
+    Public OverlayImage3 As SKBitmap
+    Public OverlayImage4 As SKBitmap
+    Public OverlayImage5 As SKBitmap
+
+    Public MinV, MaxV As Double
+
+    Public Origin As SKPoint
+
+    Public DrawOverlaysAction As Action(Of SKCanvas)
 
     Public Sub New()
 
@@ -280,9 +295,9 @@ Public Class GraphicsSurface
 
         DrawingCanvas.Scale(Me.Zoom, Me.Zoom)
 
-        Dim objects = DrawingObjects.ToArray
+        'Dim objects = DrawingObjects.ToArray
 
-        If objects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
+        If DrawingObjects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
             If Not NetworkMode Then DrawInstructions(DrawingCanvas)
         End If
 
@@ -300,13 +315,13 @@ Public Class GraphicsSurface
             DrawingCanvas.DrawRoundRect(New SKRect(AddedObject.X - 250 * tstep / Tfactor, AddedObject.Y - 250 * tstep / Tfactor, AddedObject.X + AddedObject.Width + 250 * tstep / Tfactor, AddedObject.Y + AddedObject.Height + 250 * tstep / Tfactor), 10, 10, spa)
         End If
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
             If TypeOf dobj Is Shapes.RectangleGraphic Then
                 dobj.Draw(DrawingCanvas)
             End If
         Next
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
             If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
                Not TypeOf dobj Is Tables.FloatingTableGraphic Then
                 If TypeOf dobj Is ShapeGraphic Then
@@ -315,7 +330,7 @@ Public Class GraphicsSurface
             End If
         Next
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
             If TypeOf dobj Is ConnectorGraphic Then
                 dobj.Draw(DrawingCanvas)
             End If
@@ -352,7 +367,7 @@ Public Class GraphicsSurface
             If Not Me.SelectedObjects.ContainsKey(gr.Name) Then gr.Selected = False
         Next
 
-        For Each dobj In objects
+        For Each dobj In DrawingObjects
 
             DirectCast(dobj, GraphicObject).RegularTypeFace = RegularTypeFace
             DirectCast(dobj, GraphicObject).BoldTypeFace = BoldTypeFace
@@ -438,24 +453,10 @@ Public Class GraphicsSurface
         Next
 
         If DrawPropertyList Then
-            For Each dobj In objects
+            For Each dobj In DrawingObjects
                 If dobj.Calculated Then DrawPropertyListBlock(DrawingCanvas, dobj)
             Next
         End If
-
-        For Each dobj As GraphicObject In Me.DrawingObjects
-            If TypeOf dobj Is Tables.FloatingTableGraphic Then
-                'Dim deltaX, deltaY As Integer
-                'If (dobj.X + dobj.Width) * Zoom > Me.Size.Width Then
-                '    deltaX = -10 / Zoom - dobj.Width / Zoom
-                'End If
-                'If (dobj.Y + dobj.Height) * Zoom > Me.Size.Height Then
-                '    deltaY = -10 / Zoom - dobj.Height / Zoom
-                'End If
-                'dobj.SetPosition(dobj.X + deltaX, dobj.Y + deltaY)
-                dobj.Draw(DrawingCanvas)
-            End If
-        Next
 
         'draw selection rectangle (click and drag to select interface)
         'on top of everything else, but transparent
@@ -463,14 +464,66 @@ Public Class GraphicsSurface
             DrawSelectionRectangle(DrawingCanvas, selectionRect)
         End If
 
-    End Sub
+        If DrawAdditionalItems Then
+            DrawOverlaysAction.Invoke(DrawingCanvas)
+        End If
 
+        For Each dobj As GraphicObject In Me.DrawingObjects
+            If TypeOf dobj Is Tables.FloatingTableGraphic Then
+                dobj.Draw(DrawingCanvas)
+            End If
+        Next
+
+    End Sub
 
     Public Sub UpdateSurface(surface As SKSurface)
 
         UpdateCanvas(surface.Canvas)
 
     End Sub
+
+    Public Function GetCanvasTopLeftCorner() As SKPoint
+
+        Dim minx As Integer = Integer.MaxValue
+        Dim miny As Integer = Integer.MaxValue
+        Dim maxx As Integer = 0
+        Dim maxy As Integer = 0
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If gobj.ObjectType <> ObjectType.Nenhum Then
+                If gobj.X <= minx Then minx = gobj.X - 30
+                If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 30
+                If gobj.Y <= miny Then miny = gobj.Y
+                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 60
+            End If
+        Next
+
+        Return New SKPoint(minx, miny)
+
+    End Function
+
+    Public Function GetCanvasSize() As SKSize
+
+        Dim minx As Integer = Integer.MaxValue
+        Dim miny As Integer = Integer.MaxValue
+        Dim maxx As Integer = 0
+        Dim maxy As Integer = 0
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If gobj.ObjectType <> ObjectType.Nenhum Then
+                If gobj.X <= minx Then minx = gobj.X - 30
+                If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 30
+                If gobj.Y <= miny Then miny = gobj.Y
+                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 30
+            End If
+        Next
+
+        Dim width = maxx - minx
+        Dim height = maxy - miny
+
+        Return New SKSize(width, height)
+
+    End Function
 
     Private Sub DrawInstructions(canvas As SKCanvas)
 
@@ -610,6 +663,8 @@ Public Class GraphicsSurface
             End If
         Next
 
+        Origin.Offset(deltax, deltay)
+
     End Sub
 
     Public Sub ZoomAll(viewwidth As Integer, viewheight As Integer)
@@ -660,6 +715,8 @@ Public Class GraphicsSurface
             Dim deltax, deltay As Integer
             deltax = mindevx - minx
             deltay = mindevy - miny
+
+            Origin.Offset(deltax, deltay)
 
             For Each gobj As IGraphicObject In Me.DrawingObjects
                 If Not gobj.IsConnector Then
@@ -719,6 +776,8 @@ Public Class GraphicsSurface
                 Next
 
                 dragStart = New SKPoint(x, y)
+
+                Origin.Offset(New SKPoint(-dx / Zoom, -dy / Zoom))
 
             Else
 
@@ -1371,6 +1430,34 @@ Public Class GraphicsSurface
             For i = Me.DrawingObjects.Count - 1 To 0 Step -1
                 drawObj = CType(Me.DrawingObjects(i), GraphicObject)
                 If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(pt.X / Zoom, pt.Y / Zoom)) Then
+                    objlist.Add(drawObj)
+                End If
+            Next
+        End If
+
+        If objlist.Count > 1 Then
+            For Each obj In objlist
+                If obj.ObjectType <> ObjectType.GO_Rectangle Then Return obj
+            Next
+        ElseIf objlist.Count = 1 Then
+            Return objlist(0)
+        Else
+            Return Nothing
+        End If
+        Return Nothing
+
+    End Function
+
+    Public Function FindObjectAtPointAbsolute(ByVal pt As SKPoint) As GraphicObject
+
+        Dim objlist As New List(Of GraphicObject)
+
+        Dim drawObj As GraphicObject
+        Dim i As Integer
+        If Me.DrawingObjects.Count > 0 Then
+            For i = Me.DrawingObjects.Count - 1 To 0 Step -1
+                drawObj = CType(Me.DrawingObjects(i), GraphicObject)
+                If drawObj.HitTest(New SKPoint(pt.X, pt.Y)) Then
                     objlist.Add(drawObj)
                 End If
             Next

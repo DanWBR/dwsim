@@ -1189,6 +1189,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
+                Mode = 1
+
                 If Mode = 0 Or ic = 0 Then
 
                     If doparallel Then
@@ -1214,10 +1216,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         For i = 0 To ns
                             IObj2?.SetCurrent
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                            tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
+                            If pp.ShouldUseKvalueMethod2 Then
+                                tmp = pp.FlashBase.Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
+                            Else
+                                tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
+                            End If
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
-                            K(i) = tmp(6)
+                            If pp.ShouldUseKvalueMethod2 Then
+                                K(i) = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                            Else
+                                K(i) = tmp(6)
+                            End If
                             If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
                                 Tj(i) = Tj_ant(i)
                                 K(i) = Kant(i)
@@ -1307,9 +1317,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                             Parallel.For(0, ns + 1,
                                                                      Sub(ipar)
                                                                          If ipar = 0 Then
-                                                                             K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingdeltat, P(ipar))
+                                                                             If pp.ShouldUseKvalueMethod2 Then
+                                                                                 K(ipar) = pp.DW_CalcKvalue(xc(ipar).MultiplyConstY(Lj(ipar)).AddY(yc(ipar).MultiplyConstY(Vj(ipar))).MultiplyConstY(1 / (Lj(ipar) + Vj(ipar))), Tj(ipar) - _subcoolingdeltat, P(ipar))
+                                                                             Else
+                                                                                 K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingdeltat, P(ipar))
+                                                                             End If
                                                                          Else
-                                                                             K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                             If pp.ShouldUseKvalueMethod2 Then
+                                                                                 K(ipar) = pp.DW_CalcKvalue(xc(ipar).MultiplyConstY(Lj(ipar)).AddY(yc(ipar).MultiplyConstY(Vj(ipar))).MultiplyConstY(1 / (Lj(ipar) + Vj(ipar))), Tj(ipar), P(ipar))
+                                                                             Else
+                                                                                 K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                             End If
                                                                          End If
                                                                      End Sub)
                                                         End Sub,
@@ -1321,9 +1339,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         For i = 0 To ns
                             Kant(i) = K(i)
                             If i = 0 Then
-                                K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingdeltat, P(i))
+                                If pp.ShouldUseKvalueMethod2 Then
+                                    K(i) = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i) - _subcoolingdeltat, P(i))
+                                Else
+                                    K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingdeltat, P(i))
+                                End If
                             Else
-                                K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                                If pp.ShouldUseKvalueMethod2 Then
+                                    K(i) = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                                Else
+                                    K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                                End If
                             End If
                         Next
                     End If

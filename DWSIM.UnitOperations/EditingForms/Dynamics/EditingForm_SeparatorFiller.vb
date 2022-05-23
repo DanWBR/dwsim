@@ -5,7 +5,7 @@ Imports DWSIM.Thermodynamics.Streams
 
 Public Class EditingForm_SeparatorFiller
 
-    Public Separator As UnitOperations.Vessel
+    Public Separator As UnitOperations.UnitOpBaseClass
 
     Private Sub EditingForm_SeparatorFiller_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

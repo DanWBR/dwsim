@@ -1,10 +1,11 @@
-Version 7.5.0
+Version 7.5.5
 
-- Energy Streams are now optional
-- New Mass and Energy Balance Summary tool (Classic UI)
-- Better Simulate365 Dashboard integration
-- Use Embedded Files in Flowsheet and Spreadsheet Unit Operations (Classic UI)
-- Workaround for PH Flash temperature interpolation
-- Enhanced Nested Loops VLE/VLLE Flash reliability
-- Fixed issue with CoolProp Incompressible Mixtures PP
-- Other fixes and enhancements
+- Dynamic models for Conversion, Equilibrium and Gibbs Reactors (beta)
+- New API to run flowsheets in Dynamic Mode
+- New calculation routine for Adiabatic Mode in Gibbs Reactor
+- Added an option to choose the flow coefficient type in valves (Kv or Cv)
+- PFD drawing optimizations
+- Phase equilibria calculation enhancements
+- Fixed issue with file saving
+- Fixed issue with Distillation Column
+- Fixed issues with Inspector Reports

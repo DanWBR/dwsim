@@ -1081,7 +1081,7 @@ Public Class FormPureComp
 
         If handler IsNot Nothing Then
             Using stream As New IO.MemoryStream()
-                Using writer As New StreamWriter(stream)
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                     Try
                         Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(constprop, Newtonsoft.Json.Formatting.Indented)
                         writer.Write(jsondata)

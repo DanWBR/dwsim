@@ -37,6 +37,8 @@ Imports DWSIM.Interfaces.Enums
 
     Property ExtraPropertiesUnitTypes As ExpandoObject
 
+    Property ExtraPropertiesTypes As ExpandoObject
+
     Property AttachedUtilities As List(Of IAttachedUtility)
 
     Sub CreateDynamicProperties()
@@ -98,7 +100,7 @@ Imports DWSIM.Interfaces.Enums
     Function GetPropertyValue(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As Object
     Sub RemoveExtraProperty(pname As String)
     Sub ClearExtraProperties()
-    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure)
+    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure, ptype As System.Type)
 
     ''' <summary>
     ''' Gets the units of a property.
@@ -231,5 +233,13 @@ Imports DWSIM.Interfaces.Enums
     Function GetMassBalanceResidual() As Double
 
     Function GetPowerGeneratedOrConsumed() As Double
+
+    Function GetDynamicResidenceTime() As Double
+
+    Function GetDynamicVolume() As Double
+
+    Function GetDynamicContents() As Double
+
+    Function GetAsObject() As Object
 
 End Interface

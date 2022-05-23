@@ -1,6 +1,7 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces
 
 Namespace GraphicObjects.Shapes
 
@@ -168,6 +169,38 @@ Namespace GraphicObjects.Shapes
             End If
 
         End Sub
+
+        Public Overrides Function GetPointValue(type As PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double
+
+            If X >= 0 And X <= Width And Y >= 0 And Y <= Height Then
+                Dim ms = DirectCast(Owner, IMaterialStream)
+                Select Case type
+                    Case PointValueType.Temperature
+                        Return ms.GetTemperature()
+                    Case PointValueType.Pressure
+                        Return ms.GetPressure()
+                    Case PointValueType.Flow
+                        Return ms.GetMassFlow()
+                    Case PointValueType.EnergyFlow
+                        Return ms.GetEnergyFlow()
+                    Case PointValueType.Concentration
+                        Return ms.GetCompoundMassConcentration(args(0))
+                    Case PointValueType.CompoundMassFlow
+                        Return ms.Phases(0).Compounds(args(0)).MassFlow.GetValueOrDefault()
+                    Case PointValueType.CompoundMolarFlow
+                        Return ms.Phases(0).Compounds(args(0)).MolarFlow.GetValueOrDefault()
+                    Case PointValueType.CompoundMassFraction
+                        Return ms.Phases(0).Compounds(args(0)).MassFraction.GetValueOrDefault()
+                    Case PointValueType.CompoundMolarFraction
+                        Return ms.Phases(0).Compounds(args(0)).MoleFraction.GetValueOrDefault()
+                    Case Else
+                        Return Double.NaN
+                End Select
+            Else
+                Return Double.NaN
+            End If
+
+        End Function
 
     End Class
 

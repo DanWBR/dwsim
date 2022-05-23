@@ -121,6 +121,8 @@
 
     Property DisplayMaterialStreamEnergyFlowValue As Boolean
 
+    Property DisplayDynamicPropertyValues As Boolean
+
     Property AddObjectsWithStreams As Integer
 
     Property Simulate365FileID As String

@@ -24,31 +24,21 @@ Partial Class FormUnhandledException
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUnhandledException))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.KryptonButton2 = New System.Windows.Forms.Button()
         Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.KryptonButton4 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.LabelWithDivider3 = New System.Windows.Forms.LabelWithDivider()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -56,11 +46,6 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.Name = "Label1"
-        '
-        'KryptonButton2
-        '
-        resources.ApplyResources(Me.KryptonButton2, "KryptonButton2")
-        Me.KryptonButton2.Name = "KryptonButton2"
         '
         'LabelWithDivider1
         '
@@ -73,11 +58,6 @@ Partial Class FormUnhandledException
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.ForeColor = System.Drawing.Color.White
         Me.Panel1.Name = "Panel1"
-        '
-        'KryptonButton4
-        '
-        resources.ApplyResources(Me.KryptonButton4, "KryptonButton4")
-        Me.KryptonButton4.Name = "KryptonButton4"
         '
         'PictureBox1
         '
@@ -93,20 +73,6 @@ Partial Class FormUnhandledException
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'TabControl1
-        '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        '
-        'TabPage2
-        '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Controls.Add(Me.TextBox2)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
         'TextBox2
         '
         resources.ApplyResources(Me.TextBox2, "TextBox2")
@@ -114,26 +80,10 @@ Partial Class FormUnhandledException
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
         '
-        'LabelWithDivider2
-        '
-        resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
-        Me.LabelWithDivider2.Gap = 4
-        Me.LabelWithDivider2.Name = "LabelWithDivider2"
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        '
         'Button4
         '
         resources.ApplyResources(Me.Button4, "Button4")
         Me.Button4.Name = "Button4"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
         '
         'Button5
         '
@@ -152,16 +102,6 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Button6, "Button6")
         Me.Button6.Name = "Button6"
         Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
         '
         'Label6
         '
@@ -183,27 +123,27 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
+        'LabelWithDivider2
+        '
+        resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
+        Me.LabelWithDivider2.Gap = 4
+        Me.LabelWithDivider2.Name = "LabelWithDivider2"
+        '
         'FormUnhandledException
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.LabelWithDivider2)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.LabelWithDivider3)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.LabelWithDivider2)
-        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.KryptonButton4)
-        Me.Controls.Add(Me.KryptonButton2)
         Me.Controls.Add(Me.LabelWithDivider1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label1)
@@ -212,37 +152,27 @@ Partial Class FormUnhandledException
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormUnhandledException"
+        Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.TopMost = True
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Public WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents KryptonButton2 As System.Windows.Forms.Button
     Public WithEvents LabelWithDivider1 As System.Windows.Forms.LabelWithDivider
     Public WithEvents Panel1 As System.Windows.Forms.Panel
-    Public WithEvents KryptonButton4 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Public WithEvents LabelWithDivider2 As System.Windows.Forms.LabelWithDivider
-    Public WithEvents Button1 As System.Windows.Forms.Button
     Public WithEvents Button4 As System.Windows.Forms.Button
-    Public WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Public WithEvents LabelWithDivider3 As System.Windows.Forms.LabelWithDivider
     Friend WithEvents Button6 As System.Windows.Forms.Button
-    Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents Label4 As System.Windows.Forms.Label
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents Label9 As System.Windows.Forms.Label
+    Public WithEvents LabelWithDivider2 As LabelWithDivider
 End Class

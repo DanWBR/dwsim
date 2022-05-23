@@ -273,7 +273,11 @@ Public Class EditingForm_Adjust_ControlPanel
             Task.Factory.StartNew(Sub()
                                       mvVal = MathNet.Numerics.RootFinding.Secant.FindRoot(
                                         Function(xval)
-                                            Return funcproc.Invoke(xval)
+                                            If Double.IsNaN(xval) Or Double.IsInfinity(xval) Then
+                                                Return 1.0E+20
+                                            Else
+                                                Return funcproc.Invoke(xval)
+                                            End If
                                         End Function, mvVal, mvVal * 1.01, min, max, tol, maxit)
                                   End Sub).ContinueWith(Sub(t)
                                                             UIThread(Sub() formC.UpdateOpenEditForms())
@@ -310,7 +314,7 @@ Public Class EditingForm_Adjust_ControlPanel
             Dim nsolv As New DWSIM.MathOps.MathEx.Optimization.NewtonSolver()
             nsolv.EnableDamping = False
             nsolv.MaxIterations = maxit
-            nsolv.Tolerance = tol
+            nsolv.Tolerance = tol ^ 2
 
             Task.Factory.StartNew(Sub()
                                       mvVal = nsolv.Solve(Function(xvars)

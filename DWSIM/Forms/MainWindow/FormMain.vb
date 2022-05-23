@@ -3979,7 +3979,7 @@ Label_00CC:
                         {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compound Creator Study File", "*.dwcsd2")})
                 If handler IsNot Nothing Then
                     Using stream As New IO.MemoryStream()
-                        Using writer As New IO.StreamWriter(stream)
+                        Using writer As New IO.StreamWriter(stream) With {.AutoFlush = True}
                             SaveBackup(handler)
                             CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename = handler.FullPath
                             CType(Me.ActiveMdiChild, FormCompoundCreator).StoreData()
@@ -4003,7 +4003,7 @@ Label_00CC:
                         {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Regression Study File", "*.dwrsd2")})
                 If handler IsNot Nothing Then
                     Using stream As New IO.MemoryStream()
-                        Using writer As New IO.StreamWriter(stream)
+                        Using writer As New IO.StreamWriter(stream) With {.AutoFlush = True}
                             SaveBackup(handler)
                             Dim text = Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormDataRegression).StoreCase(), Newtonsoft.Json.Formatting.Indented)
                             writer.Write(text)
