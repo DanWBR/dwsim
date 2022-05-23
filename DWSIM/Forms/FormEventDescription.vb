@@ -18,7 +18,7 @@
 
             tbEventType.Text = "Error (Exception)"
 
-            tbEventDescription.Text = PEx.DetailedDescription
+            tbEventDescription.Text = PEx.DetailedDescription + vbCrLf + vbCrLf + PEx.ExceptionObject.ToString()
 
             tbEventLocation.Text = "Code Location: " + PEx.CodeLocation + vbCrLf + vbCrLf + "Calling Method: " + PEx.CallingMethod + vbCrLf + vbCrLf + PEx.CodeLocationDetails
 

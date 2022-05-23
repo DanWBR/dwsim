@@ -144,11 +144,11 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Flow Conductance", "Flow Conductance (inverse of Resistance) of this Unit Operation.", 1, UnitOfMeasure.conductance)
-            AddDynamicProperty("Volume", "Cooler Volume", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the volume content with information from the inlet stream, if the content is null.", 1, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Content", "Empties the volume content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Flow Conductance", "Flow Conductance (inverse of Resistance) of this Unit Operation.", 1, UnitOfMeasure.conductance, 1.0.GetType())
+            AddDynamicProperty("Volume", "Cooler Volume", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the volume content with information from the inlet stream, if the content is null.", True, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Content", "Empties the volume content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 

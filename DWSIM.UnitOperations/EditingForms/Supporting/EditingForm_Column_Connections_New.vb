@@ -220,9 +220,15 @@ Public Class EditingForm_Column_Connections_New
                 stage = si.AssociatedStage
             Else
                 If Integer.TryParse(si.AssociatedStage, New Integer) Then
-                    stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Try
+                        stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Catch ex As Exception
+                    End Try
                 Else
-                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Try
+                        stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Catch ex As Exception
+                    End Try
                 End If
             End If
             If (si.StreamBehavior = StreamInformation.Behavior.Feed) Then
@@ -249,9 +255,15 @@ Public Class EditingForm_Column_Connections_New
                 stage = si.AssociatedStage
             Else
                 If Integer.TryParse(si.AssociatedStage, New Integer) Then
-                    stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Try
+                        stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Catch ex As Exception
+                    End Try
                 Else
-                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Try
+                        stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Catch ex As Exception
+                    End Try
                 End If
             End If
             If (si.StreamBehavior = StreamInformation.Behavior.Distillate) Then

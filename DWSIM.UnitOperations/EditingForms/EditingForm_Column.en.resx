@@ -146,7 +146,7 @@
     <value>General Info</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 202</value>
+    <value>370, 227</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
@@ -155,13 +155,13 @@
     <value />
   </data>
   <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 203</value>
+    <value>169, 228</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 207</value>
+    <value>8, 232</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -192,10 +192,10 @@
     <value>No Condenser (Reboiled Absorber)</value>
   </data>
   <data name="PanelCondenser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 64</value>
+    <value>9, 38</value>
   </data>
   <data name="PanelCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 615</value>
+    <value>376, 641</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 204</value>
@@ -363,7 +363,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 38</value>
+    <value>300, 69</value>
   </data>
   <data name="cbCondPressureUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 21</value>
@@ -372,13 +372,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 38</value>
+    <value>169, 70</value>
   </data>
   <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 42</value>
+    <value>8, 75</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Condenser/Top Pressure</value>
@@ -468,7 +468,7 @@
     <value>No Reboiler (Refluxed Absorber)</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 159</value>
+    <value>8, 184</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -477,13 +477,13 @@
     <value>Convergence Tolerance</value>
   </data>
   <data name="tbConvTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 157</value>
+    <value>208, 182</value>
   </data>
   <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 20</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 133</value>
+    <value>8, 158</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 13</value>
@@ -504,7 +504,7 @@
     <value>222, 21</value>
   </data>
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 130</value>
+    <value>208, 155</value>
   </data>
   <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 20</value>
@@ -600,7 +600,7 @@
     <value />
   </data>
   <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 257</value>
+    <value>370, 282</value>
   </data>
   <data name="btnResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -629,23 +629,38 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="TabContainerAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 106</value>
+  </data>
+  <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 823</value>
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="tbColPDrop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="tbColPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 69</value>
+    <value>169, 97</value>
   </data>
   <data name="tbColPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="cbColPDrop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="cbColPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 68</value>
+    <value>300, 96</value>
+  </data>
+  <data name="cbColPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 21</value>
   </data>
   <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 72</value>
+    <value>8, 101</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 13</value>
@@ -654,7 +669,7 @@
     <value>Column Pressure Drop</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 257</value>
+    <value>169, 282</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 21</value>
@@ -663,7 +678,7 @@
     <value>NoControl</value>
   </data>
   <data name="LabelES.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 261</value>
+    <value>8, 286</value>
   </data>
   <data name="LabelES.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -672,7 +687,7 @@
     <value>External Solver</value>
   </data>
   <data name="cbSolvingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 230</value>
+    <value>169, 255</value>
   </data>
   <data name="cbSolvingMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 21</value>
@@ -681,19 +696,13 @@
     <value>NoControl</value>
   </data>
   <data name="LabelSM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 234</value>
+    <value>8, 259</value>
   </data>
   <data name="LabelSM.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
   <data name="LabelSM.Text" xml:space="preserve">
     <value>Solving Method</value>
-  </data>
-  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>General</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>405, 797</value>
@@ -719,6 +728,12 @@
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Estimates</value>
   </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 29</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Check the boxes for the data sets that you want to use as initial estimates to solve the column.</value>
+  </data>
   <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
@@ -727,18 +742,6 @@
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Results</value>
-  </data>
-  <data name="TabContainerAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 106</value>
-  </data>
-  <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 823</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 29</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Check the boxes for the data sets that you want to use as initial estimates to solve the column.</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>425, 941</value>

@@ -204,11 +204,15 @@
 
     Property PythonPreprocessor() As Action(Of String)
 
+    Property SupressMessages As Boolean
+
     Sub RequestSave()
 
     Sub RequestSaveWithDirectory(directory As String)
 
     Sub RequestSaveWithPath(filepath As String)
+
+    Sub ToggleFlowsheetAnimation()
 
 End Interface
 

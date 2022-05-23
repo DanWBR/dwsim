@@ -1,0 +1,431 @@
+132259-10-0	Air
+7440-37-1	Argon
+7726-95-6	Bromine
+56-23-5	Carbon tetrachloride
+630-08-0	Carbon monoxide
+124-38-9	Carbon dioxide
+75-15-0	Carbon disulfide
+75-44-5	Phosgene
+76-02-8	Trichloroacetyl chloride
+7647-01-0	Hydrogen chloride
+7782-50-5	Chlorine
+10034-85-2	Hydrogen iodide
+1333-74-0	Hydrogen
+7732-18-5	Water
+7783-06-4	Hydrogen sulfide
+7664-41-7	Ammonia
+7440-01-9	Neon
+7697-37-2	Nitric acid
+10102-43-9	Nitric oxide
+10102-44-0	Nitrogen dioxide
+7727-37-9	Nitrogen
+10024-97-2	Nitrous oxide
+7782-44-7	Oxygen
+7446-09-5	Sulfur dioxide
+7446-11-9	Sulfur trioxide
+67-66-3	Chloroform
+74-90-8	Hydrogen cyanide
+50-00-0	Formaldehyde
+74-87-3	Methyl chloride
+74-88-4	Methyl iodide
+74-82-8	Methane
+67-56-1	Methanol
+74-89-5	Methylamine
+79-01-6	Trichloroethylene
+79-36-7	Dichloroacetyl chloride
+75-87-6	Trichloroacetaldehyde
+74-86-2	Acetylene
+79-02-7	Dichloroacetaldehyde
+75-01-4	Vinyl chloride
+75-36-5	Acetyl chloride
+79-00-5	1,1,2-trichloroethane
+75-05-8	Acetonitrile
+74-85-1	Ethylene
+75-34-3	1,1-dichloroethane
+107-06-2	1,2-dichloroethane
+75-07-0	Acetaldehyde
+75-21-8	Ethylene oxide
+64-19-7	Acetic acid
+107-31-3	Methyl formate
+75-00-3	Ethyl chloride
+74-84-0	Ethane
+64-17-5	Ethanol
+115-10-6	Dimethyl ether
+107-21-1	Ethylene glycol
+75-18-3	Dimethyl sulfide
+75-08-1	Ethyl mercaptan
+75-04-7	Ethylamine
+107-13-1	Acrylonitrile
+74-99-7	Methylacetylene
+463-49-0	Propadiene
+115-07-1	Propylene
+67-64-1	Acetone
+109-94-4	Ethyl formate
+79-20-9	Methyl acetate
+79-09-4	Propionic acid
+68-12-2	N,n-dimethylformamide
+74-98-6	Propane
+67-63-0	Isopropanol
+71-23-8	1-propanol
+75-50-3	Trimethylamine
+689-97-4	Vinylacetylene
+110-02-1	Thiophene
+126-98-7	Methacrylonitrile
+503-17-3	Dimethylacetylene
+107-00-6	Ethylacetylene
+590-19-2	1,2-butadiene
+106-99-0	1,3-butadiene
+106-98-9	1-butene
+590-18-1	Cis-2-butene
+624-64-6	Trans-2-butene
+115-11-7	Isobutene
+78-84-2	2-methylpropanal
+78-93-3	Methyl ethyl ketone
+109-99-9	Tetrahydrofuran
+123-91-1	1,4-dioxane
+107-92-6	N-butyric acid
+141-78-6	Ethyl acetate
+554-12-1	Methyl propionate
+110-74-7	N-propyl formate
+126-33-0	Sulfolane
+127-19-5	N,n-dimethylacetamide
+106-97-8	N-butane
+75-28-5	Isobutane
+71-36-3	1-butanol
+78-83-1	2-methyl-1-propanol
+78-92-2	2-butanol
+75-65-0	2-methyl-2-propanol
+60-29-7	Diethyl ether
+111-46-6	Diethylene glycol
+109-89-7	Diethylamine
+98-01-1	Furfural
+110-86-1	Pyridine
+78-79-5	Isoprene
+287-92-3	Cyclopentane
+563-46-2	2-methyl-1-butene
+563-45-1	3-methyl-1-butene
+513-35-9	2-methyl-2-butene
+109-67-1	1-pentene
+627-20-3	Cis-2-pentene
+646-04-8	Trans-2-pentene
+96-22-0	3-pentanone
+563-80-4	Methyl isopropyl ketone
+109-60-4	N-propyl acetate
+78-78-4	Isopentane
+109-66-0	N-pentane
+463-82-1	Neopentane
+120-82-1	1,2,4-trichlorobenzene
+541-73-1	M-dichlorobenzene
+95-50-1	O-dichlorobenzene
+106-46-7	P-dichlorobenzene
+108-86-1	Bromobenzene
+108-90-7	Monochlorobenzene
+591-50-4	Iodobenzene
+98-95-3	Nitrobenzene
+71-43-2	Benzene
+108-95-2	Phenol
+62-53-3	Aniline
+108-94-1	Cyclohexanone
+110-82-7	Cyclohexane
+592-41-6	1-hexene
+96-37-7	Methylcyclopentane
+108-93-0	Cyclohexanol
+75-83-2	2,2-dimethylbutane
+79-29-8	2,3-dimethylbutane
+110-54-3	N-hexane
+107-83-5	2-methylpentane
+96-14-0	3-methylpentane
+112-27-6	Triethylene glycol
+121-44-8	Triethylamine
+108-88-3	Toluene
+108-39-4	M-cresol
+95-48-7	O-cresol
+106-44-5	P-cresol
+108-87-2	Methylcyclohexane
+1640-89-7	Ethylcyclopentane
+592-76-7	1-heptene
+142-82-5	N-heptane
+100-42-5	Styrene
+100-41-4	Ethylbenzene
+108-38-3	M-xylene
+95-47-6	O-xylene
+106-42-3	P-xylene
+1678-91-7	Ethylcyclohexane
+2040-96-2	N-propylcyclopentane
+111-65-9	N-octane
+564-02-3	2,2,3-trimethylpentane
+540-84-1	2,2,4-trimethylpentane
+560-21-4	2,3,3-trimethylpentane
+565-75-3	2,3,4-trimethylpentane
+112-60-7	Tetraethylene glycol
+95-13-6	Indene
+496-11-7	Indane
+98-82-8	Cumene
+103-65-1	N-propylbenzene
+1678-92-8	N-propylcyclohexane
+111-84-2	N-nonane
+91-20-3	Naphthalene
+767-59-9	1-methylindene
+2177-47-1	2-methylindene
+77-73-6	Dicyclopentadiene
+104-51-8	N-butylbenzene
+1678-93-9	N-butylcyclohexane
+124-18-5	N-decane
+90-12-0	1-methylnaphthalene
+91-57-6	2-methylnaphthalene
+1120-21-4	N-undecane
+83-32-9	Acenaphthene
+92-52-4	Biphenyl
+112-40-3	N-dodecane
+86-73-7	Fluorene
+629-50-5	N-tridecane
+85-01-8	Phenanthrene
+629-59-4	N-tetradecane
+629-62-9	N-pentadecane
+206-44-0	Fluoranthene
+129-00-0	Pyrene
+605-02-7	1-phenylnaphthalene
+544-76-3	N-hexadecane
+218-01-9	Chrysene
+493-01-6	Cis-decahydronaphthalene
+493-02-7	Trans-decahydronaphthalene
+1634-04-4	Methyl tert-butyl ether
+994-05-8	Methyl tert-pentyl ether
+75-85-4	2-methyl-2-butanol
+10544-73-7	Nitrogen trioxide
+10544-72-6	Nitrogen tetroxide
+7440-59-7	Helium-4
+7782-41-4	Fluorine
+7439-90-9	Krypton
+7440-63-3	Xenon
+10028-15-6	Ozone
+463-58-1	Carbonyl sulfide
+2551-62-4	Sulfur hexafluoride
+67-68-5	Dimethyl sulfoxide
+629-78-7	N-heptadecane
+593-45-3	N-octadecane
+629-92-5	N-nonadecane
+629-94-7	N-heneicosane
+629-97-0	N-docosane
+638-67-5	N-tricosane
+646-31-1	N-tetracosane
+629-99-2	N-pentacosane
+630-01-3	N-hexacosane
+593-49-7	N-heptacosane
+630-02-4	N-octacosane
+630-03-5	N-nonacosane
+111-01-3	Squalane
+591-76-4	2-methylhexane
+589-34-4	3-methylhexane
+617-78-7	3-ethylpentane
+590-35-2	2,2-dimethylpentane
+565-59-3	2,3-dimethylpentane
+108-08-7	2,4-dimethylpentane
+562-49-2	3,3-dimethylpentane
+464-06-2	2,2,3-trimethylbutane
+592-27-8	2-methylheptane
+589-81-1	3-methylheptane
+589-53-7	4-methylheptane
+619-99-8	3-ethylhexane
+590-73-8	2,2-dimethylhexane
+584-94-1	2,3-dimethylhexane
+589-43-5	2,4-dimethylhexane
+592-13-2	2,5-dimethylhexane
+563-16-6	3,3-dimethylhexane
+583-48-2	3,4-dimethylhexane
+609-26-7	2-methyl-3-ethylpentane
+1067-08-9	3-methyl-3-ethylpentane
+594-82-1	2,2,3,3-tetramethylbutane
+3522-94-9	2,2,5-trimethylhexane
+16747-30-1	2,4,4-trimethylhexane
+1067-20-5	3,3-diethylpentane
+7154-79-2	2,2,3,3-tetramethylpentane
+1186-53-4	2,2,3,4-tetramethylpentane
+1070-87-7	2,2,4,4-tetramethylpentane
+16747-38-9	2,3,3,4-tetramethylpentane
+3221-61-2	2-methyloctane
+2216-33-3	3-methyloctane
+2216-34-4	4-methyloctane
+15869-80-4	3-ethylheptane
+1071-26-7	2,2-dimethylheptane
+7154-80-5	3,3,5-trimethylheptane
+15869-87-1	2,2-dimethyloctane
+5911-04-6	3-methylnonane
+871-83-0	2-methylnonane
+17301-94-9	4-methylnonane
+15869-85-9	5-methylnonane
+7688-21-3	Cis-2-hexene
+4050-45-7	Trans-2-hexene
+111-66-0	1-octene
+124-11-8	1-nonene
+821-95-4	1-undecene
+763-29-1	2-methyl-1-pentene
+691-38-3	4-methyl-cis-2-pentene
+674-76-0	4-methyl-trans-2-pentene
+110-83-8	Cyclohexene
+1638-26-2	1,1-dimethylcyclopentane
+1192-18-3	Cis-1,2-dimethylcyclopentane
+822-50-4	Trans-1,2-dimethylcyclopentane
+2532-58-3	Cis-1,3-dimethylcyclopentane
+1759-58-6	Trans-1,3-dimethylcyclopentane
+3875-51-2	Isopropylcyclopentane
+16747-50-5	1-methyl-1-ethylcyclopentane
+2040-95-1	N-butylcyclopentane
+590-66-9	1,1-dimethylcyclohexane
+2207-01-4	Cis-1,2-dimethylcyclohexane
+6876-23-9	Trans-1,2-dimethylcyclohexane
+638-04-0	Cis-1,3-dimethylcyclohexane
+2207-03-6	Trans-1,3-dimethylcyclohexane
+624-29-3	Cis-1,4-dimethylcyclohexane
+2207-04-7	Trans-1,4-dimethylcyclohexane
+3178-22-1	Tert-butylcyclohexane
+611-14-3	O-ethyltoluene
+620-14-4	M-ethyltoluene
+622-96-8	P-ethyltoluene
+526-73-8	1,2,3-trimethylbenzene
+95-63-6	1,2,4-trimethylbenzene
+108-67-8	Mesitylene
+538-93-2	Isobutylbenzene
+135-98-8	Sec-butylbenzene
+98-06-6	Tert-butylbenzene
+527-84-4	O-cymene
+535-77-3	M-cymene
+99-87-6	P-cymene
+135-01-3	O-diethylbenzene
+141-93-5	M-diethylbenzene
+105-05-5	P-diethylbenzene
+488-23-3	1,2,3,4-tetramethylbenzene
+527-53-7	1,2,3,5-tetramethylbenzene
+95-93-2	1,2,4,5-tetramethylbenzene
+2870-04-4	2-ethyl-m-xylene
+1758-88-9	2-ethyl-p-xylene
+874-41-9	4-ethyl-m-xylene
+934-80-5	4-ethyl-o-xylene
+1074-43-7	1-methyl-3-n-propylbenzene
+1074-55-1	1-methyl-4-n-propylbenzene
+100-18-5	P-diisopropylbenzene
+108-10-1	Methyl isobutyl ketone
+106-35-4	3-heptanone
+123-19-3	4-heptanone
+589-38-8	3-hexanone
+107-87-9	2-pentanone
+591-78-6	2-hexanone
+110-43-0	2-heptanone
+110-12-3	5-methyl-2-hexanone
+75-97-8	3,3-dimethyl-2-butanone
+108-83-8	Diisobutyl ketone
+565-80-0	Diisopropyl ketone
+123-38-6	Propanal
+123-72-8	Butanal
+110-62-3	Pentanal
+66-25-1	Hexanal
+111-71-7	Heptanal
+108-20-3	Diisopropyl ether
+142-96-1	Di-n-butyl ether
+6863-58-7	Di-sec-butyl ether
+540-67-0	Methyl ethyl ether
+557-17-5	Methyl n-propyl ether
+1860-27-1	Isopropyl butyl ether
+625-44-5	Methyl isobutyl ether
+598-53-8	Methyl isopropyl ether
+637-92-3	Tert-butyl ethyl ether
+919-94-8	Ethyl tert-pentyl ether
+111-34-2	Butyl vinyl ether
+100-66-3	Anisole
+108-21-4	Isopropyl acetate
+123-86-4	N-butyl acetate
+110-19-0	Isobutyl acetate
+628-63-7	N-pentyl acetate
+108-05-4	Vinyl acetate
+142-92-7	N-hexyl acetate
+71-41-0	1-pentanol
+6032-29-7	2-pentanol
+137-32-6	2-methyl-1-butanol
+75-84-3	2,2-dimethyl-1-propanol
+111-27-3	1-hexanol
+111-70-6	1-heptanol
+110-63-4	1,4-butanediol
+74-93-1	Methyl mercaptan
+107-03-9	N-propyl mercaptan
+75-66-1	Tert-butyl mercaptan
+513-44-0	Isobutyl mercaptan
+513-53-1	Sec-butyl mercaptan
+111-31-9	N-hexyl mercaptan
+624-89-5	Methyl ethyl sulfide
+3877-15-4	Methyl n-propyl sulfide
+6163-64-0	Methyl t-butyl sulfide
+13286-92-5	Methyl t-pentyl sulfide
+111-47-7	Di-n-propyl sulfide
+352-93-2	Diethyl sulfide
+110-81-6	Diethyl disulfide
+624-92-0	Dimethyl disulfide
+629-19-6	Di-n-propyl disulfide
+110-06-5	Di-tert-butyl disulfide
+20333-39-5	Ethyl methyl disulfide
+30453-31-7	Ethyl propyl disulfide
+882-33-7	Diphenyl disulfide
+141-43-5	Monoethanolamine
+111-42-2	Diethanolamine
+102-71-6	Triethanolamine
+107-15-3	Ethylenediamine
+108-18-9	Diisopropylamine
+140-31-8	N-aminoethyl piperazine
+111-40-0	Diethylenetriamine
+111-41-1	N-aminoethyl ethanolamine
+106-50-3	P-phenylenediamine
+110-85-0	Piperazine
+109-83-1	Methylethanolamine
+108-01-0	Dimethylethanolamine
+75-52-5	Nitromethane
+79-24-3	Nitroethane
+108-03-2	1-nitropropane
+79-46-9	2-nitropropane
+627-05-4	1-nitrobutane
+88-72-2	O-nitrotoluene
+99-99-0	P-nitrotoluene
+99-08-1	M-nitrotoluene
+121-14-2	2,4-dinitrotoluene
+606-20-2	2,6-dinitrotoluene
+610-39-9	3,4-dinitrotoluene
+619-15-8	2,5-dinitrotoluene
+618-85-9	3,5-dinitrotoluene
+118-96-7	2,4,6-trinitrotoluene
+144-62-7	Oxalic acid
+79-10-7	Acrylic acid
+79-41-4	Methacrylic acid
+65-85-0	Benzoic acid
+118-90-1	O-toluic acid
+99-94-5	P-toluic acid
+69-72-7	Salicylic acid
+124-04-9	Adipic acid
+88-99-3	Phthalic acid
+110-16-7	Maleic acid
+100-21-0	Terephthalic acid
+108-24-7	Acetic anhydride
+108-31-6	Maleic anhydride
+463-51-4	Ketene
+80-62-6	Methyl methacrylate
+120-61-6	Dimethyl terephthalate
+75-56-9	1,2-propylene oxide
+80-15-9	Cumene hydroperoxide
+107-12-0	Propionitrile
+616-38-6	Dimethyl carbonate
+105-58-8	DiEthyl Carbonate
+623-53-0	Methyl Ethyl Carbonate
+13509-27-8	Methyl Phenyl Carbonate
+3878-46-4	Ethyl Phenyl Carbonate
+102-09-0	DiPhenyl Carbonate
+96-49-1	Ethylene carbonate
+108-32-7	Propylene carbonate
+15870-10-7	2-methyl-1-heptene
+76589-16-7	2-Methoxy-2-Methyl-Heptane
+625-25-2	2-Methyl-2-Heptanol
+109-87-5	Methylal
+105-59-9	Methyl DiEthanolAmine
+100-37-8	Diethylethanolamine
+110-97-4	Diisopropanolamine
+287-23-0	Cyclobutane
+75-33-2	Isopropyl mercaptan
+56-81-5	Glycerol
+112-95-8	N-eicosane
+542-52-9	DiButyl Carbonate

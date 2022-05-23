@@ -115,10 +115,10 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Height", "Available Liquid Height", 2, UnitOfMeasure.distance)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank's content with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Content", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Liquid Height", 2, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank's content with information from the inlet stream, if the vessel content is null.", False, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Content", "Empties the tank's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 

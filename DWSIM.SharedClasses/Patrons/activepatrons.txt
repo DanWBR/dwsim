@@ -1,11 +1,8 @@
 ﻿Adam Kovalovszki
 Adam Spencer
 Alberto Baumeister
-Alberto Marzi
 Alex Platon
-Alexander Semenyak
-Alfred Ong'iro
-Amir Mehrkesh
+Alfred Gongaware
 Andras Nady
 Anders Andreasen
 Andrew Dickson
@@ -16,59 +13,53 @@ Casey Houston
 Christian Hornhofer
 Christian Jordan
 Christian Pedersen
-Csaba Darok
-Daniel Athayde
+CollectiveObjective
+Daniel Dornellas Athayde
 David Miller
 David Whitlock
 Deryck Coetzer
 Diego A. Acosta
 Domenico Marchese
-Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
-Emanuel Santos
-Евгений Иванчиков
-Fábio Shiotsuki
-Frank Mittricker
+Emanuel Cardoso
 Filippo Borroni
-Gokhan Candan
-George C Brindle
+Frank Mittricker
+Gokhan Candan 
+George Brindle
 Gerry Agnew
 Guenther Holzer
-H-Tec Systems GmbH
-Harry L Levinson
 Henar Portero
 Henk Fikkert
 Hep Ingham
+H-Tec Systems GmbH
 Hugo Burbach
-Hurudza
+Hurudza 
 Jan Boshoff
-Javier Fontalvo
 Jens Greimeier
 Jeremiah McAfoose
 Joe Rhodes
 John Gorke
-John Herring
 John Kossik
-Jonathan Reichelt
-Joon Song
+Jonathan
 Joseph Mendoza
 Joseph Attia
 Karen Elrington
-Laércio Piva
+Laércio Antonio Piva
 Lauterbach Verfahrenstechnik GmbH
 Leandro Favaretto
 Leonard Seed
 Les Waymont
 Lewis Estall
 Luca Finardi
-Marcelo Miranda
-Marcos Silva
+Marcelo Accorsi Miranda
+Marcos AF Silva
 Marko Likon
 Martin Heiser
 Martin Skjøth-Rasmussen
 Masahiro Sakai
 Matt Hogg
+Michael Papantoniou
 Nicolas Spogis
 Nikita Petrosyan
 Pedro Sabóia
@@ -76,7 +67,6 @@ Petroconsulting LLC
 Philippe Wesel
 Protherm Systems
 Rafael Melo-González
-Rajesh S Kempegowda
 Richard Huntington
 Roland Berger
 Rupert Easter
@@ -84,6 +74,7 @@ Ryszard Sadowski
 Shijin Roh
 Steven Sandoval
 Tibor Lányi
+Tino Josef Ritter
 Tony Diocee
 Will Flores
 Yoshihide Watabe

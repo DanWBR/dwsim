@@ -1653,4 +1653,7 @@
   <data name="PROP_DC_8" xml:space="preserve">
     <value>Perda de Carga na Coluna</value>
   </data>
+  <data name="PROP_PF_10" xml:space="preserve">
+    <value>Número de Tubos</value>
+  </data>
 </root>

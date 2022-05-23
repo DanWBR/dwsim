@@ -36,7 +36,7 @@ Namespace Streams
 
         Inherits BaseClass
 
-        Implements ICapeIdentification, ICapeCollection
+        Implements ICapeIdentification, ICapeCollection, IEnergyStream
 
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
@@ -333,6 +333,14 @@ Namespace Streams
 
             Throw New CapeComputationException(ex.Message.ToString, ex)
 
+        End Sub
+
+        Public Function GetEnergyFlow() As Double Implements IEnergyStream.GetEnergyFlow
+            Return EnergyFlow.GetValueOrDefault()
+        End Function
+
+        Public Sub SetEnergyFlow(value As Double) Implements IEnergyStream.SetEnergyFlow
+            EnergyFlow = value
         End Sub
 
         Private _description, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer

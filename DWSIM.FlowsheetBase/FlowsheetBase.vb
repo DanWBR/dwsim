@@ -2050,12 +2050,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GeneralInfo"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo")
 
-        xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
-        xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
-        If GlobalSettings.Settings.RunningPlatform() = GlobalSettings.Settings.Platform.Mac Then
-            xel.Add(New XElement("OSInfo", "macOS " + Environment.OSVersion.ToString()))
-        Else
-            xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+        If Not DWSIM.GlobalSettings.Settings.AutomationMode Then
+            xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
+            xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
+            If GlobalSettings.Settings.RunningPlatform() = GlobalSettings.Settings.Platform.Mac Then
+                xel.Add(New XElement("OSInfo", "macOS " + Environment.OSVersion.ToString()))
+            Else
+                xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+            End If
         End If
         xel.Add(New XElement("SavedOn", Date.Now))
         xel.Add(New XElement("SavedFromClassicUI", False))
@@ -2480,6 +2482,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         AddHandler AppDomain.CurrentDomain.AssemblyResolve, New ResolveEventHandler(AddressOf LoadFromExtensionsFolder)
 
         FileDatabaseProvider.CreateDatabase()
+
+        DynamicsManager.ToggleDynamicMode = Function()
+                                                DynamicMode = Not DynamicMode
+                                                Return DynamicMode
+                                            End Function
 
         FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
         FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
@@ -3341,6 +3348,8 @@ Label_00CC:
 
     End Sub
 
+    Public MustOverride Property SupressMessages As Boolean Implements IFlowsheet.SupressMessages
+
     Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
         Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
         RunScript(script.Key)
@@ -3367,5 +3376,8 @@ Label_00CC:
 
     End Function
 
+    Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
+        Throw New NotImplementedException()
+    End Sub
 End Class
 

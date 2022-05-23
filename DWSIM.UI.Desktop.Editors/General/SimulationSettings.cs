@@ -125,7 +125,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "Select the formatting scheme for compound amounts in Material Stream reports.");
 
-            s.CreateAndAddLabelRow(container, "Display Stream Properties");
+            s.CreateAndAddLabelRow(container, "Display Real-Time Properties");
 
             s.CreateAndAddLabelRow2(container, "Material Streams");
 
@@ -169,6 +169,13 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddCheckBoxRow(container, "Power/Heat/Energy Flow", flowsheet.FlowsheetOptions.DisplayEnergyStreamPowerValue, (sender, e) =>
             {
                 flowsheet.FlowsheetOptions.DisplayEnergyStreamPowerValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddLabelRow2(container, "Unit Operations");
+
+            s.CreateAndAddCheckBoxRow(container, "Dynamic Mode Properties", flowsheet.FlowsheetOptions.DisplayDynamicPropertyValues, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayDynamicPropertyValues = sender.Checked.GetValueOrDefault();
             });
 
             s.CreateAndAddLabelRow(container, "Floating Tables and Anchored Property Lists");

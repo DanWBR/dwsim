@@ -71,4 +71,35 @@
 
     Function GetOverallHeatOfFormation() As Double
 
+    Function GetTemperature() As Double
+
+    Function GetPressure() As Double
+
+    Function GetMassFlow() As Double
+
+    Function GetMolarFlow() As Double
+
+    Function GetVolumetricFlow() As Double
+
+    Function GetMassEnthalpy() As Double
+
+    Function GetEnergyFlow() As Double
+
+    Function GetCompoundMassFlow(name As String) As Double
+
+    Function GetCompoundMassConcentration(name As String) As Double
+
+    Function SetTemperature(value As Double) As String
+
+    Function SetPressure(value As Double) As String
+
+    Function SetMassFlow(value As Double) As String
+
+    Function SetMolarFlow(value As Double) As String
+
+    Function SetVolumetricFlow(value As Double) As String
+
+    Function SetMassEnthalpy(value As Double) As String
+
+
 End Interface

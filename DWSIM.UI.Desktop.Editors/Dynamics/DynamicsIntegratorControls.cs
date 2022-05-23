@@ -124,12 +124,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnPlay.Click += (s, e) =>
             {
-                if (Flowsheet.DynamicMode) { RunIntegrator(false, false); } else { Flowsheet.ShowMessage("Dynamic Mode is inactive.", Interfaces.IFlowsheet.MessageType.Warning); }
+                if (Flowsheet.DynamicMode) { RunIntegrator(false, false, Flowsheet, this); } else { Flowsheet.ShowMessage("Dynamic Mode is inactive.", Interfaces.IFlowsheet.MessageType.Warning); }
             };
 
             btnRT.Click += (s, e) =>
             {
-                if (Flowsheet.DynamicMode) { RunIntegrator(true, false); } else { Flowsheet.ShowMessage("Dynamic Mode is inactive.", Interfaces.IFlowsheet.MessageType.Warning); }
+                if (Flowsheet.DynamicMode) { RunIntegrator(true, false, Flowsheet, this); } else { Flowsheet.ShowMessage("Dynamic Mode is inactive.", Interfaces.IFlowsheet.MessageType.Warning); }
             };
 
             btnViewResults.Click += btnViewResults_Click;
@@ -152,7 +152,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             }
         }
 
-        public void StoreVariableValues(DynamicsManager.Integrator integrator, int tstep, DateTime tstamp)
+        public static void StoreVariableValues(Interfaces.IFlowsheet Flowsheet, DynamicsManager.Integrator integrator, int tstep, DateTime tstamp)
         {
             List<Interfaces.IDynamicsMonitoredVariable> list = new List<Interfaces.IDynamicsMonitoredVariable>();
 
@@ -168,7 +168,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             integrator.MonitoredVariableValues.Add(tstep, list);
         }
 
-        public void ProcessEvents(string eventsetID, DateTime currentposition, TimeSpan interval)
+        public static void ProcessEvents(Interfaces.IFlowsheet Flowsheet, string eventsetID, DateTime currentposition, TimeSpan interval)
         {
             var eventset = Flowsheet.DynamicsManager.EventSetList[eventsetID];
 
@@ -196,7 +196,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             }
         }
 
-        public void ProcessCEMatrix(string cematrixID)
+        public static void ProcessCEMatrix(Interfaces.IFlowsheet Flowsheet, string cematrixID)
         {
             var matrix = Flowsheet.DynamicsManager.CauseAndEffectMatrixList[cematrixID];
 
@@ -209,26 +209,26 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     {
                         case Interfaces.Enums.Dynamics.DynamicsAlarmType.LL:
                             if (indicator.VeryLowAlarmActive)
-                                DoAlarmEffect(item);
+                                DoAlarmEffect(Flowsheet, item);
                             break;
                         case Interfaces.Enums.Dynamics.DynamicsAlarmType.L:
                             if (indicator.LowAlarmActive)
-                                DoAlarmEffect(item);
+                                DoAlarmEffect(Flowsheet, item);
                             break;
                         case Interfaces.Enums.Dynamics.DynamicsAlarmType.H:
                             if (indicator.HighAlarmActive)
-                                DoAlarmEffect(item);
+                                DoAlarmEffect(Flowsheet, item);
                             break;
                         case Interfaces.Enums.Dynamics.DynamicsAlarmType.HH:
                             if (indicator.VeryHighAlarmActive)
-                                DoAlarmEffect(item);
+                                DoAlarmEffect(Flowsheet, item);
                             break;
                     }
                 }
             }
         }
 
-        public void DoAlarmEffect(Interfaces.IDynamicsCauseAndEffectItem ceitem)
+        public static void DoAlarmEffect(Interfaces.IFlowsheet Flowsheet, Interfaces.IDynamicsCauseAndEffectItem ceitem)
         {
             var obj = Flowsheet.SimulationObjects[ceitem.SimulationObjectID];
             var value = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ceitem.SimulationObjectPropertyUnits, ceitem.SimulationObjectPropertyValue.ToDoubleFromInvariant());
@@ -238,10 +238,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
         private void btnRealtime_Click(object sender, EventArgs e)
         {
             if (Flowsheet.DynamicMode)
-                RunIntegrator(true, false);
+                RunIntegrator(true, false, Flowsheet, this);
         }
 
-        public void RestoreState(string stateID)
+        public static void RestoreState(Interfaces.IFlowsheet Flowsheet, string stateID)
         {
             try
             {
@@ -255,15 +255,19 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             }
         }
 
-        public Task RunIntegrator(bool realtime, bool waittofinish)
+        public static Task RunIntegrator(bool realtime, bool waittofinish, Interfaces.IFlowsheet Flowsheet, DynamicsIntegratorControl control)
         {
-            btnPlay.Enabled = false;
 
-            btnRT.Enabled = false;
+            if (control != null)
+            {
+                control.btnPlay.Enabled = false;
 
-            btnViewResults.Enabled = false;
+                control.btnRT.Enabled = false;
 
-            Abort = false;
+                control.btnViewResults.Enabled = false;
+
+                control.Abort = false;
+            }
 
             var schedule = Flowsheet.DynamicsManager.ScheduleList[Flowsheet.DynamicsManager.CurrentSchedule];
 
@@ -274,39 +278,34 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var Controllers = Flowsheet.SimulationObjects.Values.Where(x => x.ObjectClass == SimulationObjectClass.Controllers).ToList();
 
             if (!waittofinish)
-            {
                 if (!realtime)
-                {
                     if (!schedule.UseCurrentStateAsInitial)
-                        RestoreState(schedule.InitialFlowsheetStateID);
-                }
+                        RestoreState(Flowsheet, schedule.InitialFlowsheetStateID);
+
+
+            if (control != null)
+            {
+                control.pbProgress.Value = 0;
+                control.pbProgress.MinValue = 0;
+                control.lbStatus.Text = "00:00:00/" + integrator.Duration.ToString("c");
             }
-
-            pbProgress.Value = 0;
-
-            pbProgress.MinValue = 0;
 
             integrator.MonitoredVariableValues.Clear();
 
-            lbStatus.Text = "00:00:00/" + integrator.Duration.ToString("c");
-
-            if (realtime)
+            if (control != null)
             {
-                pbProgress.MaxValue = int.MaxValue;
-            }
-            else
-            {
-                pbProgress.MaxValue = (int)integrator.Duration.TotalSeconds;
+                if (realtime)
+                    control.pbProgress.MaxValue = int.MaxValue;
+                else
+                    control.pbProgress.MaxValue = (int)integrator.Duration.TotalSeconds;
             }
 
             var interval = integrator.IntegrationStep.TotalSeconds;
 
             if (realtime)
-            {
                 interval = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0;
-            }
 
-            var final = pbProgress.MaxValue;
+            var final = control.pbProgress.MaxValue;
 
             foreach (PIDController controller in Controllers)
                 controller.Reset();
@@ -361,11 +360,14 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                     sw.Start();
 
-                    Flowsheet.RunCodeOnUIThread(() =>
+                    if (control != null)
                     {
-                        pbProgress.Value = i0;
-                        lbStatus.Text = new TimeSpan(0, 0, i0).ToString("c") + "/" + integrator.Duration.ToString("c"); ;
-                    });
+                        Flowsheet.RunCodeOnUIThread(() =>
+                        {
+                            control.pbProgress.Value = i0;
+                            control.lbStatus.Text = new TimeSpan(0, 0, i0).ToString("c") + "/" + integrator.Duration.ToString("c"); ;
+                        });
+                    }
 
                     controllers_check += interval;
                     streams_check += interval;
@@ -405,18 +407,36 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                     if (exceptions.Count > 0) break;
 
-                    StoreVariableValues((DynamicsManager.Integrator)integrator, j, integrator.CurrentTime);
+                    StoreVariableValues(Flowsheet, (DynamicsManager.Integrator)integrator, j, integrator.CurrentTime);
 
-                    Flowsheet.RunCodeOnUIThread(() =>
+                    if (control != null)
                     {
-                        Flowsheet.UpdateInterface();
-                        Flowsheet.FlowsheetControl.Invalidate();
-                    });
+                        Flowsheet.RunCodeOnUIThread(() =>
+                        {
+                            Flowsheet.UpdateInterface();
+                        });
+                    }
 
                     integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval);
 
                     if (integrator.ShouldCalculateControl)
                     {
+                        for (int c = 0; c <= Controllers.Count;  c++)
+                        {
+                            foreach (PIDController controller in Controllers)
+                            {
+                                if (controller.Active)
+                                {
+                                    try
+                                    {
+                                        controller.Solve();
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                            }
+                        }
                         foreach (PIDController controller in Controllers)
                         {
                             if (controller.Active)
@@ -439,22 +459,23 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     var waittime = integrator.RealTimeStepMs - sw.ElapsedMilliseconds;
 
                     if (waittime > 0 && realtime)
-                    {
                         Task.Delay((int)waittime).Wait();
-                    }
 
                     sw.Stop();
 
-                    if (Abort)
-                        break;
+                    if (control != null)
+                    {
+                        if (control.Abort)
+                            break;
+                    }
 
                     if (!realtime)
                     {
                         if (schedule.UsesEventList)
-                            ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep);
+                            ProcessEvents(Flowsheet, schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep);
 
                         if (schedule.UsesCauseAndEffectMatrix)
-                            ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix);
+                            ProcessCEMatrix(Flowsheet, schedule.CurrentCauseAndEffectMatrix);
                     }
 
                     j += 1;
@@ -469,60 +490,57 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             maintask.ContinueWith(t =>
             {
-                Flowsheet.RunCodeOnUIThread(() =>
+                if (t.Exception != null)
+                    Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "");
+                else
+                    Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "");
+                if (control != null)
                 {
-                    btnPlay.Enabled = true;
-                    btnViewResults.Enabled = true;
-                    btnRT.Enabled = true;
-                    pbProgress.Value = 0;
-                    Flowsheet.SupressMessages = false;
-                    Flowsheet.UpdateEditorPanels.Invoke();
-                    if (t.Exception != null)
+                    Flowsheet.RunCodeOnUIThread(() =>
                     {
-                        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "");
-                        Exception baseexception;
-                        foreach (var ex in t.Exception.Flatten().InnerExceptions)
+                        control.btnPlay.Enabled = true;
+                        control.btnViewResults.Enabled = true;
+                        control.btnRT.Enabled = true;
+                        control.pbProgress.Value = 0;
+                        Flowsheet.SupressMessages = false;
+                        Flowsheet.UpdateOpenEditForms();
+                        if (t.Exception != null)
                         {
-                            string euid = Guid.NewGuid().ToString();
-                            SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex);
-                            if (ex is AggregateException)
+                            Exception baseexception;
+                            foreach (var ex in t.Exception.Flatten().InnerExceptions)
                             {
-                                baseexception = ex.InnerException;
-                                foreach (var iex in ((AggregateException)ex).Flatten().InnerExceptions)
+                                string euid = Guid.NewGuid().ToString();
+                                SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex);
+                                if (ex is AggregateException)
                                 {
-                                    while (iex.InnerException != null)
+                                    baseexception = ex.InnerException;
+                                    foreach (var iex in ((AggregateException)ex).Flatten().InnerExceptions)
                                     {
-                                        baseexception = iex.InnerException;
+                                        while (iex.InnerException != null)
+                                            baseexception = iex.InnerException;
+                                        Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                                     }
-                                    Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                                 }
-                            }
-                            else
-                            {
-                                baseexception = ex;
-                                if (baseexception.InnerException != null)
+                                else
                                 {
-                                    while (baseexception.InnerException.InnerException != null)
+                                    baseexception = ex;
+                                    if (baseexception.InnerException != null)
                                     {
-                                        baseexception = baseexception.InnerException;
-                                        if ((baseexception == null))
+                                        while (baseexception.InnerException.InnerException != null)
                                         {
-                                            break;
+                                            baseexception = baseexception.InnerException;
+                                            if ((baseexception == null))
+                                                break;
+                                            if ((baseexception.InnerException == null))
+                                                break;
                                         }
-                                        if ((baseexception.InnerException == null))
-                                        {
-                                            break;
-                                        }
+                                        Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                                     }
-                                    Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                                 }
                             }
                         }
-                    }
-                    else {
-                        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "");
-                    }
-                });
+                    });
+                }
             });
 
             if (waittofinish)

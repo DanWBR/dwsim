@@ -25,7 +25,9 @@ namespace DWSIM.UI.Desktop.Shared
         public Action ActClearLog;
 
         public bool optimizing = false;
-        public bool SupressMessages = false;
+
+        public override bool SupressMessages { get; set; } = false;
+
         private bool eventattached = false;
 
         public Eto.Forms.Form FlowsheetForm;

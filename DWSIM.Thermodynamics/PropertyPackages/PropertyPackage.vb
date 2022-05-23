@@ -477,9 +477,11 @@ Namespace PropertyPackages
 
         Public Property ExceptionLog As String = ""
 
-        Public ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
+        Public Overridable ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
 
-        Public ReadOnly Property IsFunctional As Boolean = True Implements IPropertyPackage.IsFunctional
+        Public Overridable ReadOnly Property IsFunctional As Boolean = True Implements IPropertyPackage.IsFunctional
+
+        Public Overridable ReadOnly Property ShouldUseKvalueMethod2 As Boolean = False Implements IPropertyPackage.ShouldUseKvalueMethod2
 
         'forced solids list
         Public Property ForcedSolids As New List(Of String)
@@ -5197,20 +5199,7 @@ redirect2:                  IObj?.SetCurrent()
                     Else
                         result = ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
-                    If result = 0.0 Then
-                        'try estimating from LK method
-                        With CompoundPropCache(ID)
-                            Dim sg60 = AUX_LIQDENSi(CompoundPropCache(ID), 288.7) / 1000.0
-                            result = Auxiliary.PROPS.Cpig_lk(.Normal_Boiling_Point ^ 0.33 / sg60, .Acentric_Factor, T)
-                        End With
-                        If Double.IsNaN(result) Or Double.IsInfinity(result) Then
-                            Return 3.5 * 8.314 / mw
-                        Else
-                            Return result
-                        End If
-                    Else
-                        Return result
-                    End If
+                    If result = 0.0 Then Return 3.5 * 8.314 / mw Else Return result
                 ElseIf db = "ChEDL Thermo" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = CompoundPropCache(ID).IdealgasCpEquation
@@ -10264,7 +10253,7 @@ Final3:
         ''' <param name="constantId">Identifier of Universal Constant. The list of constants supported should be 
         ''' obtained by using the GetUniversalConstantList method.</param>
         ''' <returns>Value of Universal Constant. This could be a numeric or a string value. For numeric values 
-        ''' the units of measurement are specified in section 7.5.1.</returns>
+        ''' the units of measurement are specified in section 7.5.5.</returns>
         ''' <remarks>Universal Constants (often called fundamental constants) are quantities like the gas constant,
         ''' or the Avogadro constant.</remarks>
         Public Overridable Function GetUniversalConstant1(ByVal constantId As String) As Object Implements ICapeThermoUniversalConstant.GetUniversalConstant
@@ -10287,9 +10276,9 @@ Final3:
         ''' <summary>
         ''' Returns the identifiers of the supported Universal Constants.
         ''' </summary>
-        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.1.</returns>
+        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.5.</returns>
         ''' <remarks>A component may return Universal Constant identifiers that do not belong to the list defined
-        ''' in section 7.5.1. However, these proprietary identifiers may not be understood by most of the
+        ''' in section 7.5.5. However, these proprietary identifiers may not be understood by most of the
         ''' clients of this component.</remarks>
         Public Overridable Function GetUniversalConstantList() As Object Implements ICapeThermoUniversalConstant.GetUniversalConstantList
             Return New String() {"standardAccelerationOfGravity", "avogadroConstant", "boltzmannConstant", "molarGasConstant"}

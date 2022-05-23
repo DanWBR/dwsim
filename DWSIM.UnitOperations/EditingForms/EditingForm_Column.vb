@@ -364,7 +364,7 @@ Public Class EditingForm_Column
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        'SimObject.FlowSheet.RequestCalculation(SimObject)
 
     End Sub
 

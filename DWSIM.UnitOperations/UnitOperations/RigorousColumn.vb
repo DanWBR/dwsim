@@ -3812,6 +3812,7 @@ Namespace UnitOperations
                         With msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                            .DefinedFlow = FlowSpec.Mass
                             .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
@@ -3836,6 +3837,7 @@ Namespace UnitOperations
                         With msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                            .DefinedFlow = FlowSpec.Mass
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
@@ -3863,6 +3865,7 @@ Namespace UnitOperations
                         With msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                            .DefinedFlow = FlowSpec.Mass
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
@@ -3888,6 +3891,7 @@ Namespace UnitOperations
                             With msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
@@ -3910,6 +3914,7 @@ Namespace UnitOperations
                             With msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)

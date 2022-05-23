@@ -1595,7 +1595,7 @@ Imports DWSIM.SharedClassesCSharp.FilePicker
             Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
             Dim text = scontrol.txtScript.Text
             Using stream As New IO.MemoryStream()
-                Using writer As New StreamWriter(stream)
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                     writer.Write(text)
                     handler.Write(stream)
                 End Using

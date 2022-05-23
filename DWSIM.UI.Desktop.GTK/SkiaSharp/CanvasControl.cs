@@ -28,21 +28,21 @@ namespace DWSIM.UI.Desktop.GTK
             base.OnLoadComplete(e);
             nativecontrol.fbase = this.Widget.FlowsheetObject;
             nativecontrol.fsurface = this.Widget.FlowsheetSurface;
-            nativecontrol.DragDataGet += (sender, e2) => {
-                Console.WriteLine(e2.SelectionData.Type.Name);
-            };
-            nativecontrol.DragEnd += (sender, e2) => {
-                foreach (var item in e2.Args)
-                {
-                    Console.WriteLine(item.ToString());
-                }
-            };
-            nativecontrol.DragFailed += (sender, e2) => {
-                foreach (var item in e2.Args)
-                {
-                    Console.WriteLine(item.ToString());
-                }
-            };
+            //nativecontrol.DragDataGet += (sender, e2) => {
+            //    Console.WriteLine(e2.SelectionData.Type.Name);
+            //};
+            //nativecontrol.DragEnd += (sender, e2) => {
+            //    foreach (var item in e2.Args)
+            //    {
+            //        Console.WriteLine(item.ToString());
+            //    }
+            //};
+            //nativecontrol.DragFailed += (sender, e2) => {
+            //    foreach (var item in e2.Args)
+            //    {
+            //        Console.WriteLine(item.ToString());
+            //    }
+            //};
         }
 
         public override Eto.Drawing.Color BackgroundColor

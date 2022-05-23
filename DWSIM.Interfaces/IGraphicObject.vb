@@ -103,6 +103,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property Flowsheet As IFlowsheet
 
+    Function GetPointValue(type As PointValueType, Xref As Integer, Yref As Integer, args As List(Of Object)) As Double
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

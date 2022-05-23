@@ -132,26 +132,53 @@
 
 Click "Next" to continue.</value>
   </data>
+  <data name="txtAdded.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 369</value>
+  </data>
+  <data name="txtAdded.Size" type="System.Drawing.Size, System.Drawing">
+    <value>578, 23</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 373</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 15</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Added Compounds</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>433, 339</value>
+  </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 23</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add from Other Sources &gt;</value>
   </data>
+  <data name="txtSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 339</value>
+  </data>
+  <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>364, 23</value>
+  </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 372</value>
+    <value>600, 338</value>
   </data>
   <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 25</value>
+    <value>105, 25</value>
   </data>
   <data name="btnInfoLeft.Text" xml:space="preserve">
-    <value>View Selected Compound</value>
+    <value>View Selected</value>
   </data>
   <data name="btnInfoLeft.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the left-hand list.</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Select the compounds that you want to add to the simulation. Use the textbox to search and select a compound in the list. Click "Next" to continue.</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 343</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 15</value>
@@ -161,6 +188,10 @@ Click "Next" to continue.</value>
   </data>
   <data name="colAdd.HeaderText" xml:space="preserve">
     <value>Added</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="colAdd.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -176,6 +207,9 @@ Click "Next" to continue.</value>
   </data>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Source Database</value>
+  </data>
+  <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>698, 286</value>
   </data>
   <data name="rbSDN.Location" type="System.Drawing.Point, System.Drawing">
     <value>319, 3</value>
@@ -225,7 +259,6 @@ Click "Next" to continue.</value>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
     <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -464,6 +497,6 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
     <value>Create From UNIFAC Molecular Structure</value>
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 136</value>
+    <value>331, 114</value>
   </data>
 </root>

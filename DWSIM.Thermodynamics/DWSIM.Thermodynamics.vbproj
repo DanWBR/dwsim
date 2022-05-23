@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.Thermodynamics</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -228,6 +228,7 @@
     </Compile>
     <Compile Include="FlashAlgorithms\ForcedPhaseFlash.vb" />
     <Compile Include="FlashAlgorithms\SingleCompFlash.vb" />
+    <Compile Include="HelperClasses\ChemSepIPDReader.vb" />
     <Compile Include="HelperClasses\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="BaseClasses\ThermodynamicsBase.vb" />
@@ -413,6 +414,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -705,6 +707,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\wilson_bips.csv" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\nrtl.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\pr.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\srk.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\uniquac.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\wilson.ipd" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
@@ -908,6 +915,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DWSIM_ico_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\ChemSep_IDs.txt" />
+    <EmbeddedResource Include="Assets\CAS_IDs.txt" />
+    <Content Include="Assets\Databases\Artistic_license_2_0.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

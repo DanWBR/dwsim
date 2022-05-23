@@ -184,7 +184,12 @@ Namespace GraphicObjects.Tables
                     Dim fs = Owner.GetFlowsheet
                     Dim props As New List(Of String)
                     Try
-                        props = New List(Of String)(fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name))
+                        If Owner.GetFlowsheet().DynamicMode Then
+                            props = New List(Of String)(fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name))
+                        Else
+                            props = New List(Of String)(fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name))
+                            props = props.Where(Function(p) Not Owner.IsDynamicProperty(p)).ToList()
+                        End If
                     Catch ex As Exception
 
                     End Try

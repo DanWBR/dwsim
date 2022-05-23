@@ -1000,7 +1000,11 @@ namespace DWSIM.UI.Desktop.Editors
                                }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Kv(max)", valve.Kv,
+                    s.CreateAndAddDropDownRow(container, "Flow Coefficient Type", new List<string>(new[] { "Kv", "Cv" }), (int)valve.FlowCoefficient,
+                        (sender, e) => {
+                            valve.FlowCoefficient = sender.SelectedIndex.ToEnum<Valve.FlowCoefficientType>();
+                        });
+                    s.CreateAndAddTextBoxRow(container, nf, "Kv[Cv](max)", valve.Kv,
                                (TextBox arg3, EventArgs ev) =>
                                {
                                    if (arg3.Text.IsValidDoubleExpression())
@@ -1013,8 +1017,8 @@ namespace DWSIM.UI.Desktop.Editors
                                        arg3.TextColor = (Colors.Red);
                                    }
                                }, () => CallSolverIfNeeded());
-                    s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv/Kvmax (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
-                    s.CreateAndAddStringEditorRow(container, "Kv/Kvmax (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv[Cv]/Kv[Cv]max (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
+                    s.CreateAndAddStringEditorRow(container, "Kv[Cv]/Kv[Cv]max (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Opening (%)", valve.OpeningPct,
                                (TextBox arg3, EventArgs ev) =>
                                {
@@ -1751,7 +1755,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddCheckBoxRow(container, "Initialize from Previous Solution", reactor2g.InitializeFromPreviousSolution, (sender, e) => reactor2g.InitializeFromPreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Error Tolerance", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    //s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2g.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use IPOPT Solver", reactor2g.UseIPOPTSolver, (sender, e) => reactor2g.UseIPOPTSolver = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Use Alternate Solving Method", reactor2g.AlternateSolvingMethod, (sender, e) => reactor2g.AlternateSolvingMethod = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;
@@ -1917,7 +1922,11 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddLabelRow(container, "Sizing Information");
-                    s.CreateAndAddTextBoxRow(container, nf, "Reactor Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor4.Volume),
+                    s.CreateAndAddNumericEditorRow(container, "Number of Tubes", reactor4.NumberOfTubes, 1, 10000, 0, (ns, e) =>
+                    {
+                        reactor4.NumberOfTubes = (int)ns.Value;
+                    });
+                    s.CreateAndAddTextBoxRow(container, nf, "Reactive Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor4.Volume),
                                (TextBox arg3, EventArgs ev) =>
                                {
                                    if (arg3.Text.IsValidDoubleExpression())
@@ -1935,7 +1944,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDropDownRow(container, "Sizing Information", new List<string> { "Length", "Diameter" },
                         reactor4.ReactorSizingType == Reactor_PFR.SizingType.Length ? 0 : 1,
                          (dd, e) => reactor4.ReactorSizingType = dd.SelectedIndex.ToEnum<Reactor_PFR.SizingType>());
-                    s.CreateAndAddTextBoxRow(container, nf, "Reactor Length (" + su.distance + ")", cv.ConvertFromSI(su.distance, reactor4.Length),
+                    s.CreateAndAddTextBoxRow(container, nf, "Tube Length (" + su.distance + ")", cv.ConvertFromSI(su.distance, reactor4.Length),
                                (TextBox arg3, EventArgs ev) =>
                                {
                                    if (arg3.Text.IsValidDoubleExpression())
@@ -1948,7 +1957,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        arg3.TextColor = (Colors.Red);
                                    }
                                }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Reactor Diameter (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, reactor4.Diameter),
+                    s.CreateAndAddTextBoxRow(container, nf, "Tube Diameter (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, reactor4.Diameter),
                                (TextBox arg3, EventArgs ev) =>
                                {
                                    if (arg3.Text.IsValidDoubleExpression())

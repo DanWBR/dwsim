@@ -24,9 +24,9 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkIgnoreVapFracLim.Enabled = TypeOf PropPack Is SourWaterPropertyPackage
 
-        cbHSCpCalcMode.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage
+        cbHSCpCalcMode.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
-        chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage
+        chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
         cbLiqDens.SelectedIndex = PropPack.LiquidDensityCalculationMode_Subcritical
 

@@ -118,15 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1023, 24</value>
+  </data>
+  <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1023, 24</value>
+  </data>
+  <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1062, 33</value>
+  </data>
+  <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1029, 257</value>
+  </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 317</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 419</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>317</value>
   </data>
   <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 419</value>
@@ -136,33 +144,6 @@
   </data>
   <data name="ToolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 469</value>
-  </data>
-  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>925, 25</value>
-  </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>833, 25</value>
-  </data>
-  <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 251</value>
-  </data>
-  <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1023, 24</value>
-  </data>
-  <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 290</value>
-  </data>
-  <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1023, 24</value>
-  </data>
-  <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1062, 33</value>
-  </data>
-  <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 251</value>
-  </data>
-  <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 257</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -299,17 +280,84 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
+  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>925, 25</value>
+  </data>
+  <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIMSURBVEhL7ZHPi9NAFMd7EO9eXFlY7Q9P+gc00YAiguDF
+        U6/uSUQRerJFUQTx4MGDP5p48CJlvXhQUEHWIrGltMu2SZaQpPkxARf2qKtt9lIsPN8siZV0srW63vYL
+        H2Zg8j5vMi+1l11L188LXY+vKYTzFY97pPrcWcM4tj88/vuMxTzE6bj5TVxfqh53UV8XDoQlf5adxEzc
+        /Ehx+Sbuy5p38niomczM4jjYhD5fqBvnv4mjrDpCtkv4Im3SIfyQKWExTcwKHRg2KnQJV23oZwKW+O7b
+        m3C0JI/mS7qZlrYWD0vfZxtytjIQDt2ynYOXG5Ar1eGCtATP6pfgzpvbkLvegLlrbVi49xky4gAyUgCZ
+        Sn+UFoNmWhyUc5UgechUfKTSr20XUcQ+LNzfgPkbBsxdbf0Sp6VQHIM2wXXyySbELETKjOIo+IZZ/KhI
+        myDDuCCJqWJW6MCwqIC3reaeDoLfhRHnlr7Cw/fWjw8tzexYZFHX12cb8prtC/Kq6ryW2/B42YQrrzbg
+        xPNvcP7FF3iybMC7+go0VQO0ngeaTUCz3JFiuU3clzXTSx4yFWNRbbsIUVHQWjPh44qK0vZYHJ7HoU1U
+        x598srg4kejGMRLFUXTHyao9UqRNFJsMWRIWU8Ws0IFptlfQeqSq2O7mrolZkWV5H/7VaZQ+wGYOrp9U
+        yz0VHu/lX5NK/QRgXepoiS7BpgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 22</value>
+  </data>
+  <data name="tss1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="tsmiLiveFlow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="tsmiLiveFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 22</value>
+  </data>
+  <data name="tss2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>
   </data>
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Set Global Font Size</value>
   </data>
+  <data name="tbFontSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 25</value>
+  </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 22</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Set Font Styles...</value>
+  </data>
+  <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 22</value>
@@ -322,6 +370,12 @@
   </data>
   <data name="tsbColorTheme.Items1" xml:space="preserve">
     <value>Black-and-White</value>
+  </data>
+  <data name="tsbColorTheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 25</value>
+  </data>
+  <data name="ToolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
@@ -338,8 +392,11 @@
   <data name="tscbAddObjectsWithStreams.Items2" xml:space="preserve">
     <value>Smart</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 242</value>
+  <data name="tscbAddObjectsWithStreams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 25</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1066, 25</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
@@ -386,6 +443,18 @@
   <data name="CopiarComoImagem300ToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy as Image (300%)</value>
   </data>
+  <data name="ExportarParaPDFToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="ExportarParaPDFToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export to PDF</value>
+  </data>
+  <data name="ExportarParaSVGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
+  </data>
+  <data name="ExportarParaSVGToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export to SVG</value>
+  </data>
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 6</value>
   </data>
@@ -413,8 +482,8 @@
   <data name="FindTearStreamsAutomaticallyToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
   </data>
-  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 470</value>
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 286</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 22</value>
@@ -463,12 +532,6 @@
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 6</value>
-  </data>
-  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Rotate</value>
   </data>
   <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -560,6 +623,12 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
   <data name="tsmiInvertVertically.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 22</value>
   </data>
@@ -647,6 +716,9 @@
   <data name="UpgradeDistillationColumnToProToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
   </data>
+  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 470</value>
+  </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
@@ -669,14 +741,14 @@
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
   </data>
-  <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
-  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 22</value>
   </data>
   <data name="ToolStripMenuItem1.Text" xml:space="preserve">
     <value>Switch Object Palette Location</value>
+  </data>
+  <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 26</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1089, 469</value>

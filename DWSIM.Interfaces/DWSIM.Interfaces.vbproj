@@ -100,6 +100,7 @@
     <Compile Include="IAnalyticsProvider.vb" />
     <Compile Include="IAttachedUtility.vb" />
     <Compile Include="IChart.vb" />
+    <Compile Include="IEnergyStream.vb" />
     <Compile Include="IProductInformation.vb" />
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
@@ -139,6 +140,7 @@
     <Compile Include="ISplashScreen.vb" />
     <Compile Include="ISwitch.vb" />
     <Compile Include="IUndoRedoAction.vb" />
+    <Compile Include="IUnitOperation.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />
     <Compile Include="IWatchItem.vb" />

@@ -29,7 +29,7 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.BaseClass
 
-        Implements ICapeIdentification
+        Implements ICapeIdentification, IUnitOperation
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public _pp As Interfaces.IPropertyPackage
 
@@ -95,6 +95,41 @@ Namespace UnitOperations
 
             Return elements
 
+        End Function
+
+        Public Overrides Function GetDynamicResidenceTime() As Double
+            If GetDynamicProperty("Volume") IsNot Nothing Then
+                Try
+                    Dim q As Double = 0.0
+                    For Each inlet In GraphicObject.InputConnectors
+                        If inlet.IsAttached And inlet.Type = GraphicObjects.ConType.ConIn Then
+                            q += Convert.ToDouble(inlet.AttachedConnector.AttachedFrom.Owner.GetPropertyValue("PROP_MS_4"))
+                        End If
+                    Next
+                    Dim v = Convert.ToDouble(GetDynamicProperty("Volume"))
+                    Return v / q
+                Catch ex As Exception
+                    Return Double.NaN
+                End Try
+            Else
+                Return Double.NaN
+            End If
+        End Function
+
+        Public Overrides Function GetDynamicVolume() As Double
+            If GetDynamicProperty("Volume") IsNot Nothing Then
+                Return Convert.ToDouble(GetDynamicProperty("Volume"))
+            Else
+                Return Double.NaN
+            End If
+        End Function
+
+        Public Overrides Function GetDynamicContents() As Double
+            If AccumulationStream IsNot Nothing Then
+                Return AccumulationStream.GetMassFlow()
+            Else
+                Return Double.NaN
+            End If
         End Function
 
 #Region "   DWSIM Specific"

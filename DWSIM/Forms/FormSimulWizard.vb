@@ -34,6 +34,8 @@ Public Class FormSimulWizard
 
     Dim ACSC1 As AutoCompleteStringCollection
 
+    Private CompoundList As List(Of String)
+
     Private StillTyping As Boolean = False
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
@@ -63,16 +65,18 @@ Public Class FormSimulWizard
             colAdd.TrueValue = True
             colAdd.IndeterminateValue = False
 
-            ACSC1 = New AutoCompleteStringCollection
-
+            txtSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
+            CompoundList = New List(Of String)()
+            ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+                CompoundList.Add(comp.Name)
             Next
             For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+                CompoundList.Add(comp.Name)
             Next
-
-            'Me.TextBox1.AutoCompleteCustomSource = ACSC1
+            txtSearch.AutoCompleteCustomSource.AddRange(CompoundList.ToArray())
 
             'property packages
             Me.DataGridViewPP.Rows.Clear()
@@ -124,74 +128,35 @@ Public Class FormSimulWizard
         Process.Start("https://dwsim.org/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
-    Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
+    Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
-            If DWSIM.App.IsRunningOnMono Then
-                If Me.ogc1.SelectedCells.Count > 0 Then
-                    Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(1).Value = Not Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(1).Value
-                End If
-            Else
-                If Me.ogc1.SelectedRows.Count > 0 Then
-                    Me.ogc1.SelectedRows(0).Cells(1).Value = Not Me.ogc1.SelectedRows(0).Cells(1).Value
-                End If
+            If Me.ogc1.SelectedRows.Count > 0 Then
+                Me.ogc1.SelectedRows(0).Cells(1).Value = Not Me.ogc1.SelectedRows(0).Cells(1).Value
             End If
         End If
     End Sub
 
-    Private WithEvents TypingTimer As Timer
-
-    Private Sub TypingTimer_Tick(sender As Object, e As EventArgs) Handles TypingTimer.Tick
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
         ogc1.ClearSelection()
 
-        Dim needselecting As Boolean = True
+        Dim lowered = CompoundList.Select(Function(c) c.ToLower).ToList()
 
-        For Each r As DataGridViewRow In ogc1.Rows
-            If Not r.Cells(2).Value Is Nothing Then
-                If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(3).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
-                    r.Visible = True
-                    If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(3).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(5).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
-                        r.Selected = True
-                        needselecting = False
-                    End If
-                Else
-                    r.Visible = False
-                End If
-            End If
-        Next
-        If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
-            ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
-        End If
-        If TextBox1.Text = "" Then
-            For Each r As DataGridViewRow In ogc1.Rows
-                r.Selected = False
-                r.Visible = True
-            Next
-            ogc1.FirstDisplayedScrollingRowIndex = 0
-            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-        Else
+        If lowered.Contains(txtSearch.Text.ToLower()) Then
+
+            Dim index = lowered.IndexOf(txtSearch.Text.ToLower())
+
+            ogc1.Rows.Item(index).Selected = True
+
             If ogc1.SelectedRows.Count > 0 Then
                 ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
             End If
+
+        Else
+
+            ogc1.FirstDisplayedScrollingRowIndex = 0
+
         End If
-
-        TypingTimer?.Stop()
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
-
-        If TypingTimer Is Nothing Then
-            TypingTimer = New Timer()
-        End If
-        TypingTimer.Interval = 500
-        TypingTimer.Stop()
-        TypingTimer.Start()
 
     End Sub
 
@@ -899,6 +864,14 @@ Public Class FormSimulWizard
 
             End If
 
+            Dim added As String = ""
+            For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
+                added += c.Name + ", "
+            Next
+            added = added.TrimEnd()
+            added = added.TrimEnd(",")
+            txtAdded.Text = added
+
         End If
 
     End Sub
@@ -1069,8 +1042,8 @@ Public Class FormSimulWizard
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        TextBox1.Text = ""
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
+        txtSearch.Text = ""
     End Sub
 
     Private Sub rbSYes_CheckedChanged(sender As Object, e As EventArgs) Handles rbSYes.CheckedChanged, rbSNo.CheckedChanged, rbSDN.CheckedChanged
