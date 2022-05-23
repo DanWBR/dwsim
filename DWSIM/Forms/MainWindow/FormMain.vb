@@ -4345,6 +4345,10 @@ Label_00CC:
         SaveFileDialog(True)
     End Sub
 
+    Private Sub DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DashboardToolStripMenuItem.Click
+        Process.Start("https://dashboard.simulate365.com")
+    End Sub
+
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked
