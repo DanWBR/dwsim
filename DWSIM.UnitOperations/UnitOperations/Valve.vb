@@ -822,35 +822,30 @@ Namespace UnitOperations
                 IObj?.Paragraphs.Add(String.Format("Kv = {0}", Kvc))
             End If
 
-
-
-            If CalcMode <> CalculationMode.DeltaP And CalcMode <> CalculationMode.OutletPressure Then
-                If ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
-                    ims.PropertyPackage.CurrentMaterialStream = ims
-                    rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
-                    Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
-                    k = Cp_ig / (Cp_ig - 8.314)
-                    P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
-                    IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
-                ElseIf ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
-                    Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
-                    Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                    rhol = ims.Phases(1).Properties.density.GetValueOrDefault
-                    P2 = 100000.0 * P2Liquid(Wi * 3600, Kvc, Pi / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
-                    IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
-                Else
-                    ims.PropertyPackage.CurrentMaterialStream = ims
-                    rhog = ims.Phases(2).Properties.density.GetValueOrDefault
-                    Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
-                    k = Cp_ig / (Cp_ig - 8.314)
-                    rhol = ims.Phases(1).Properties.density.GetValueOrDefault
-                    Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                    Pv = Pi 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
-
-                    massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
-                    massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
-                    P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
-                End If
+            If CalcMode = CalculationMode.Kv_Gas Then
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
+                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                k = Cp_ig / (Cp_ig - 8.314)
+                P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
+            ElseIf CalcMode = CalculationMode.Kv_Liquid Then
+                Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
+                Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                P2 = 100000.0 * P2Liquid(Wi * 3600, Kvc, Pi / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
+            ElseIf CalcMode = CalculationMode.Kv_General Then
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                rhog = ims.Phases(2).Properties.density.GetValueOrDefault
+                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                k = Cp_ig / (Cp_ig - 8.314)
+                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                Pv = Pi 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
+                massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
                 P2 = Pi * 0.7 / 100000.0
                 icount = 0
