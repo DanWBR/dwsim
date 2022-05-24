@@ -1227,7 +1227,7 @@ Namespace UnitOperations
             Select Case CalcMode
                 Case CalculationMode.DeltaP
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
-                            New String() {"Pressure Increase",
+                            New String() {"Pressure Drop",
                             Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
                             su.deltaP}))
                 Case CalculationMode.OutletPressure
