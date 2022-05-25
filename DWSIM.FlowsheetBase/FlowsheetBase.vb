@@ -2014,10 +2014,15 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End If
 
         If excs.Count > 0 Then
-            ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
-            For Each ex As Exception In excs
-                ShowMessage(ex.Message.ToString & ": " & ex.InnerException.ToString, IFlowsheet.MessageType.GeneralError)
-            Next
+            If Settings.AutomationMode Then
+                'throw errors
+                Throw New AggregateException(excs)
+            Else
+                ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
+                For Each ex As Exception In excs
+                    ShowMessage(ex.Message.ToString & ": " & ex.InnerException.ToString, IFlowsheet.MessageType.GeneralError)
+                Next
+            End If
         Else
             ShowMessage("Data loaded successfully.", IFlowsheet.MessageType.Information)
         End If
