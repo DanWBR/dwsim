@@ -114,6 +114,7 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
+        Me.DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -580,7 +581,7 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
         Me.LogoutDropdown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
+        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DashboardToolStripMenuItem, Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
         Me.LogoutDropdown.Name = "LogoutDropdown"
         '
         'LoggedInS365Button
@@ -633,6 +634,11 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
+        '
+        'DashboardToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DashboardToolStripMenuItem, "DashboardToolStripMenuItem")
+        Me.DashboardToolStripMenuItem.Name = "DashboardToolStripMenuItem"
         '
         'FormMain
         '
@@ -919,4 +925,5 @@ Partial Class FormMain
     Public WithEvents SaveToDashboardTSMI As ToolStripMenuItem
     Public WithEvents OpenFileS365 As ToolStripButton
     Public WithEvents SaveFileS365 As ToolStripButton
+    Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
 End Class
