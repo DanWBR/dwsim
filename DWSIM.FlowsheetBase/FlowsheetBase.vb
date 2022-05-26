@@ -1838,11 +1838,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then
-                        RunCodeOnUIThread(Sub()
-                                              obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
-                                          End Sub)
+                        obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
                     Else
-                        obj = CType(UnitOperations.ReturnInstance(xel.Element("Type").Value), ISimulationObject)
+                        obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                     End If
                 End If
                 Dim gobj As IGraphicObject = (From go As IGraphicObject In
