@@ -3382,5 +3382,10 @@ Label_00CC:
     Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
         Throw New NotImplementedException()
     End Sub
+
+    Public Function RunCodeOnUIThread2(act As Action) As Task Implements IFlowsheet.RunCodeOnUIThread2
+        Throw New NotImplementedException()
+    End Function
+
 End Class
 

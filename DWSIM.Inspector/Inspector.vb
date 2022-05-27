@@ -16,7 +16,6 @@ Public Class Host
             _currentsid = value
             If GlobalSettings.Settings.ClearInspectorHistoryOnNewCalculationRequest Then
                 Items.Clear()
-                GC.Collect()
             End If
         End Set
     End Property
