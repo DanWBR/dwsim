@@ -47,6 +47,7 @@ namespace DWSIM.Simulate365.Services
                 { 
                     Filename = item.Name, 
                     DriveId = flowsheetsDriveId, 
+                    ParentDriveId=item.ParentReference.Id,
                     FileId = driveItemId, 
                     FullPath = fullPath 
                 };

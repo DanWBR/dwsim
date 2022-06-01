@@ -214,6 +214,8 @@
 
     Sub ToggleFlowsheetAnimation()
 
+    Function RunCodeOnUIThread2(act As Action) As Task
+
 End Interface
 
 ''' <summary>

@@ -583,24 +583,24 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             End If
 
             'If CalcMode = 0 And esolv Is Nothing Then
-            '    Try
-            '        'run 4 iterations of the bubble point method to enhance the initial estimates.
-            '        'if it doesn't suceeed, go on with the original estimates.
+            Try
+                'run 4 iterations of the bubble point method to enhance the initial estimates.
+                'if it doesn't suceeed, go on with the original estimates.
 
-            '        Dim result = WangHenkeMethod.Solve(dc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
-            '                                   x, y, z, fc, HF, T, P, condt, 4, eff,
-            '                                   coltype, pp, specs, False, False)
-            '        T = result(0)
-            '        V = result(1)
-            '        L = result(2)
-            '        VSS = result(3)
-            '        LSS = result(4)
-            '        y = result(5)
-            '        x = result(6)
-            '        Kval = result(7)
-            '        Q = result(8)
-            '    Catch ex As Exception
-            '    End Try
+                Dim result = New WangHenkeMethod().Solve(dc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, 1, eff,
+                                           coltype, pp, specs, False, False)
+                T = result(0)
+                V = result(1)
+                L = result(2)
+                VSS = result(3)
+                LSS = result(4)
+                y = result(5)
+                x = result(6)
+                Kval = result(7)
+                Q = result(8)
+            Catch ex As Exception
+            End Try
             'End If
 
             _Tj_ant = T.Clone

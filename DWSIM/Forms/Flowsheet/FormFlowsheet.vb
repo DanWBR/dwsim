@@ -3346,6 +3346,17 @@ Public Class FormFlowsheet
         UIThreadInvoke(act)
     End Sub
 
+    Public Function RunCodeOnUIThread2(act As Action) As Task Implements IFlowsheet.RunCodeOnUIThread2
+        Return Task.Factory.StartNew(Function()
+                                         If InvokeRequired Then
+                                             Return Invoke(act)
+                                         Else
+                                             act.Invoke()
+                                             Return Nothing
+                                         End If
+                                     End Function, TaskCreationOptions.AttachedToParent)
+    End Function
+
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
         Get
             Return My.Application.MainWindowForm.AvailableComponents

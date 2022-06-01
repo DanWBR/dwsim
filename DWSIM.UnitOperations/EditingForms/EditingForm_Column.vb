@@ -161,7 +161,7 @@ Public Class EditingForm_Column
             tbConvTol.Text = .ExternalLoopTolerance.ToString("R")
 
             cbCondType.SelectedIndex = .CondenserType
-            tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .CondenserPressure).ToString(nf)
+            tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .Stages.First.P).ToString(nf)
             tbCondPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .CondenserDeltaP).ToString(nf)
             cbCondSpec.SelectedIndex = .Specs("C").SType
             Dim cunits As String() = {}
@@ -577,8 +577,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.CondenserPressure = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
-            SimObject.Stages(0).P = SimObject.CondenserPressure
+            SimObject.Stages(0).P = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
 
             UpdateInfo()
             RequestCalc()

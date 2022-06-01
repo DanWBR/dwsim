@@ -44,6 +44,7 @@ John Kossik
 Jonathan
 Joseph Mendoza
 Joseph Attia
+Kiran Pashikanti
 Karen Elrington
 Laércio Antonio Piva
 Lauterbach Verfahrenstechnik GmbH
@@ -62,6 +63,7 @@ Matt Hogg
 Michael Papantoniou
 Nicolas Spogis
 Nikita Petrosyan
+Odnei Macalossi
 Pedro Sabóia
 Petroconsulting LLC
 Philippe Wesel

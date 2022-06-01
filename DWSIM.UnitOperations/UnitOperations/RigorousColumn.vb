@@ -873,7 +873,7 @@ Namespace UnitOperations
                         proplist.Add("Stage_Temperature_" + CStr(i))
                     Next
                 Case PropertyType.RW, PropertyType.ALL
-                    For i = 0 To 2
+                    For i = 2 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 5 To 8
@@ -910,7 +910,7 @@ Namespace UnitOperations
                         End If
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 2
+                    For i = 2 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     proplist.Add("PROP_DC_7")
@@ -1227,8 +1227,6 @@ Namespace UnitOperations
             str.AppendLine("Calculation parameters")
             str.AppendLine()
             str.AppendLine("    Condenser type: " & Me.CondenserType.ToString)
-            str.AppendLine("    Condenser Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure).ToString(numberformat, ci) & " " & su.pressure)
-            str.AppendLine("    Reboiler Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure).ToString(numberformat, ci) & " " & su.pressure)
             str.AppendLine("    Number of Stages: " & Me.Stages.Count)
             str.AppendLine()
             str.AppendLine("Results")
@@ -1396,24 +1394,12 @@ Namespace UnitOperations
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
-
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-
-            Dim cv As New SystemsOfUnits.Converter
-
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-
+                Case 2
+                    SetNumberOfStages(propval)
             End Select
-
             Return 1
 
         End Function
@@ -1541,10 +1527,10 @@ Namespace UnitOperations
 
                 Case 0
                     'PROP_DC_0	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages(0).P)
                 Case 1
                     'PROP_DC_1	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.Last.P)
                 Case 3
                     'PROP_DC_6	Reboiler Duty
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ReboilerDuty)
@@ -1593,10 +1579,10 @@ Namespace UnitOperations
 
                 Case 0
                     'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Me.Stages.First.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                 Case 1
                     'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Me.Stages.Last.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
 
             End Select
             Return 1
@@ -1689,10 +1675,10 @@ Namespace UnitOperations
 
                 Case 0
                     'PROP_DC_0	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.First.P)
                 Case 1
                     'PROP_DC_1	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.Last.P)
                 Case 2
                     'PROP_DC_2	Condenser Pressure Drop
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
@@ -1757,10 +1743,10 @@ Namespace UnitOperations
 
                 Case 0
                     'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Me.Stages.First.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                 Case 1
                     'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Me.Stages.Last.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                 Case 2
                     'PROP_DC_2	Condenser Pressure Drop
                     Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
@@ -1841,8 +1827,6 @@ Namespace UnitOperations
 
         Private _nst As Integer = 12
         Private _rr As Double = 5.0#
-        Private _condp As Double = 101325
-        Private _rebp As Double = 101325
         Private _conddp, _drate, _vrate, _condd, _rebd As Double
         Private _st As New List(Of Auxiliary.SepOps.Stage)
         Public Property CondenserType As condtype = condtype.Total_Condenser
@@ -2340,24 +2324,6 @@ Namespace UnitOperations
             End Get
             Set(ByVal value As Double)
                 _drate = value
-            End Set
-        End Property
-
-        Public Property ReboilerPressure() As Double
-            Get
-                Return _rebp
-            End Get
-            Set(ByVal value As Double)
-                _rebp = value
-            End Set
-        End Property
-
-        Public Property CondenserPressure() As Double
-            Get
-                Return _condp
-            End Get
-            Set(ByVal value As Double)
-                _condp = value
             End Set
         End Property
 
@@ -3076,9 +3042,6 @@ Namespace UnitOperations
                 Case ColType.RefluxedAbsorber
                     LSS(0) = distrate
             End Select
-
-            P(ns) = Me.ReboilerPressure
-            P(0) = Me.CondenserPressure
 
             Select Case Me.ColumnType
                 Case ColType.AbsorptionColumn
