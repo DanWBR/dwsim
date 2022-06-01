@@ -128,8 +128,8 @@ Namespace My
 
         Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
 
-            Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")
-            Dim assemblyPath2 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders", New AssemblyName(args.Name).Name + ".dll")
+            Dim assemblyPath1 As String = Path.Combine(Utility.GetDwsimRootDirectory(), New AssemblyName(args.Name).Name + ".dll")
+            Dim assemblyPath2 As String = Path.Combine(Utility.GetExtendersRootDirectory(), New AssemblyName(args.Name).Name + ".dll")
 
             If Not File.Exists(assemblyPath1) Then
                 If Not File.Exists(assemblyPath2) Then
@@ -196,7 +196,7 @@ Namespace My
 
         Private Function GetSplashScreen() As Form
 
-            Dim splfile = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "extenders", "SplashScreen.dll")
+            Dim splfile = Path.Combine(Utility.GetExtendersRootDirectory(), "SplashScreen.dll")
 
             If File.Exists(splfile) Then
 

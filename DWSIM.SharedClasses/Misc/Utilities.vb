@@ -525,7 +525,7 @@ Public Class Utility
             Next
         End If
 
-        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        ppath = GetExtendersRootDirectory()
         If Directory.Exists(ppath) Then
             Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
             For Each fpath In otheruos
@@ -572,31 +572,20 @@ Public Class Utility
             End Try
         End If
 
-        Dim directories = New List(Of String)
-
-        Dim d1 = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "extenders")
-        Dim d2 = Path.Combine(Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName, "extenders")
-        Dim d3 = Path.Combine(Directory.GetCurrentDirectory(), "extenders")
-
-        directories.Add(d1)
-        If Not directories.Contains(d2) Then directories.Add(d2)
-        If Not directories.Contains(d3) Then directories.Add(d3)
-
-        For Each ppath In directories
-            If Directory.Exists(ppath) Then
-                Try
-                    Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
-                    For Each fpath In otherpps
-                        Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
-                        For Each pp In pplist
-                            ppacks.Add(pp)
-                        Next
+        Dim ppath1 As String = GetExtendersRootDirectory()
+        If Directory.Exists(ppath1) Then
+            Try
+                Dim otherpps As String() = Directory.GetFiles(ppath1, "*.dll", SearchOption.TopDirectoryOnly)
+                For Each fpath In otherpps
+                    Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        ppacks.Add(pp)
                     Next
-                Catch ex As Exception
-                    Logging.Logger.LogError("Loading Additional Property Packages (Extenders)", ex)
-                End Try
-            End If
-        Next
+                Next
+            Catch ex As Exception
+                Logging.Logger.LogError("Loading Additional Property Packages (Extenders)", ex)
+            End Try
+        End If
 
         Return ppacks
 
@@ -700,6 +689,19 @@ Public Class Utility
 
         Return Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".tmp")
 
+    End Function
+
+    Public Shared Property DwsimRootDirectoryProvider As Func(Of String) = Function() As String
+                                                                               Return Path.GetDirectoryName(GetType(Utility).Assembly.Location)
+                                                                           End Function
+
+    Public Shared Function GetDwsimRootDirectory() As String
+        Dim a = DwsimRootDirectoryProvider()()
+        Return a
+    End Function
+
+    Public Shared Function GetExtendersRootDirectory() As String
+        Return Path.Combine(GetDwsimRootDirectory(), "extenders")
     End Function
 
 End Class
