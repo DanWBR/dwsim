@@ -85,7 +85,7 @@ Partial Class FormWhatsNew
         '
         'PictureBox4
         '
-        Me.PictureBox4.Image = Global.DWSIM.My.Resources.Resources.githubsponsors
+        Me.PictureBox4.Image = Global.DWSIM.My.Resources.Resources.githubsponsors1
         Me.PictureBox4.Location = New System.Drawing.Point(533, 259)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(179, 36)
