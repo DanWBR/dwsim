@@ -353,19 +353,23 @@ Public Class FormFlowsheet
 
         AddHandler MessagePumpTimer.Tick, Sub(obj, ev)
 
-                                              SyncLock MessagePump
+                                              If Not SupressMessages Then
 
-                                                  If MessagePump.Count > 0 Then
+                                                  SyncLock MessagePump
 
-                                                      For Each item In MessagePump
-                                                          ShowMessageInternal(item.Item1, item.Item2, item.Item3)
-                                                      Next
+                                                      If MessagePump.Count > 0 Then
 
-                                                      MessagePump.Clear()
+                                                          For Each item In MessagePump
+                                                              ShowMessageInternal(item.Item1, item.Item2, item.Item3)
+                                                          Next
 
-                                                  End If
+                                                          MessagePump.Clear()
 
-                                              End SyncLock
+                                                      End If
+
+                                                  End SyncLock
+
+                                              End If
 
                                           End Sub
 
@@ -707,12 +711,6 @@ Public Class FormFlowsheet
 
 #Region "    Functions "
 
-    Public Sub SolveFlowsheet2()
-
-        tsbCalcF_Click(Me, New EventArgs)
-
-    End Sub
-
     Sub UpdateFormText()
         If File.Exists(Options.FilePath) Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
@@ -978,6 +976,13 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
+
+        SolveFlowsheet2()
+
+    End Sub
+
+    Public Sub SolveFlowsheet2()
+
         If Not DynamicMode Then
             RaiseEvent ToolOpened("Force Solve Flowsheet", New EventArgs())
             GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
@@ -995,6 +1000,7 @@ Public Class FormFlowsheet
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
+
     End Sub
 
     Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
@@ -2904,9 +2910,11 @@ Public Class FormFlowsheet
     End Property
 
     Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
-        SyncLock MessagePump
-            MessagePump.Enqueue(New Tuple(Of String, WarningType, String)(text, mtype, exceptionID))
-        End SyncLock
+        If Not SupressMessages Then
+            SyncLock MessagePump
+                MessagePump.Enqueue(New Tuple(Of String, WarningType, String)(text, mtype, exceptionID))
+            End SyncLock
+        End If
     End Sub
 
     Private Sub ShowMessageInternal(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "")

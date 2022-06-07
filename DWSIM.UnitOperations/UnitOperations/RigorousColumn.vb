@@ -2847,18 +2847,23 @@ Namespace UnitOperations
                     Next
                     rebVx = rebVx.NormalizeY()
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                    If Me.CondenserType = condtype.Full_Reflux Then
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                         vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
                         distrate = 0.0
-                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
-                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
-                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
-                        Else
-                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_ - vaprate
-                        End If
                     Else
-                        distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
-                        vaprate = 0.0
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                            Else
+                                distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                            vaprate = 0.0
+                        End If
                     End If
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
