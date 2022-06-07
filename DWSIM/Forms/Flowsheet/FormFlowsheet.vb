@@ -612,6 +612,15 @@ Public Class FormFlowsheet
             ws.Recalculate()
         Next
 
+        If Not FormMain.IsPro And My.Settings.ShowWhatsNew Then
+            Task.Delay(5000).ContinueWith(Sub(t)
+                                              UIThread(Sub()
+                                                           Dim fwn As New FormWhatsNew()
+                                                           fwn.ShowDialog(Me)
+                                                       End Sub)
+                                          End Sub)
+        End If
+
     End Sub
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed

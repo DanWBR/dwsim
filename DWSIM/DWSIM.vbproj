@@ -843,6 +843,12 @@
     <Compile Include="Forms\FormUpgradeWarning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormWhatsNew.Designer.vb">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWhatsNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\LegacyEditors\Extensions.vb" />
     <Compile Include="Forms\LegacyEditors\frmProps.Designer.vb">
       <DependentUpon>frmProps.vb</DependentUpon>
@@ -1600,6 +1606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWhatsNew.resx">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.de.resx">
       <DependentUpon>frmProps.vb</DependentUpon>

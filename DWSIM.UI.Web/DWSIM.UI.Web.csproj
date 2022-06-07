@@ -86,7 +86,6 @@
   <ItemGroup>
     <None Include="ClientApp\.env.development" />
     <None Include="ClientApp\.env.production" />
-    <None Include="ClientApp\.env.production.bckp" />
     <None Include="ClientApp\.env.staging" />
     <None Include="ClientApp\.gitignore" />
     <None Include="ClientApp\package-lock.json" />

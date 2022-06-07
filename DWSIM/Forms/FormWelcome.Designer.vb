@@ -65,9 +65,11 @@ Partial Class FormWelcome
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -454,11 +456,38 @@ Partial Class FormWelcome
         'Panel4
         '
         resources.ApplyResources(Me.Panel4, "Panel4")
+        Me.Panel4.Controls.Add(Me.Button3)
+        Me.Panel4.Controls.Add(Me.Button2)
+        Me.Panel4.Controls.Add(Me.Button1)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label11)
-        Me.Panel4.Controls.Add(Me.LinkLabel9)
         Me.Panel4.Controls.Add(Me.PictureBox6)
         Me.Panel4.Name = "Panel4"
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.BackgroundImage = Global.DWSIM.My.Resources.Resources.bmc_button
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.BackgroundImage = Global.DWSIM.My.Resources.Resources.become_a_patron_button
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.BackgroundImage = Global.DWSIM.My.Resources.Resources.githubsponsors1
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -474,19 +503,10 @@ Partial Class FormWelcome
         Me.Label11.ForeColor = System.Drawing.Color.Black
         Me.Label11.Name = "Label11"
         '
-        'LinkLabel9
-        '
-        resources.ApplyResources(Me.LinkLabel9, "LinkLabel9")
-        Me.LinkLabel9.BackColor = System.Drawing.Color.DodgerBlue
-        Me.LinkLabel9.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel9.LinkColor = System.Drawing.Color.White
-        Me.LinkLabel9.Name = "LinkLabel9"
-        Me.LinkLabel9.TabStop = True
-        '
         'PictureBox6
         '
         resources.ApplyResources(Me.PictureBox6, "PictureBox6")
-        Me.PictureBox6.BackgroundImage = Global.DWSIM.My.Resources.Resources.Patreon_Navy
+        Me.PictureBox6.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_heart
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.TabStop = False
         '
@@ -715,7 +735,6 @@ Partial Class FormWelcome
     Friend WithEvents Label10 As Label
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents LinkLabel9 As LinkLabel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
@@ -744,4 +763,7 @@ Partial Class FormWelcome
     Friend WithEvents LinkLabel15 As LinkLabel
     Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents LinkLabel3 As LinkLabel
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
 End Class
