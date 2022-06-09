@@ -4250,7 +4250,7 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub PatronToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatronToolStripMenuItem.Click
+    Private Sub PatronToolStripMenuItem_Click(sender As Object, e As EventArgs)
         System.Diagnostics.Process.Start("https://patreon.com/dwsim")
     End Sub
 
@@ -4336,6 +4336,10 @@ Label_00CC:
 
     Private Sub DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DashboardToolStripMenuItem.Click
         Process.Start("https://dashboard.simulate365.com")
+    End Sub
+
+    Private Sub DIscordChannelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DIscordChannelToolStripMenuItem.Click
+        Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.5.5
+Version 7.5.6
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,18 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.5.6
+
+- Implemented #274: Number of Tubes in Tubular Reactors for Correct Pressure Drop Calculation
+- Alternate calculation method for Gibbs Reactor
+- Fixed #318: Error opening old file in 7.5.5
+- Fixed #319: Error loading Compound Creator study
+- Fixed #322: Suspicious branch in Valve.vb
+- Throw errors (if any) when loading simulations in automation mode
+- Fixed issue with Rigorous Column editor
+- Fixed ideal gas Cp estimation
+- Python Automation fixes
 
 Version 7.5.5
 

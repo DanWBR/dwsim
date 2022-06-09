@@ -843,6 +843,12 @@
     <Compile Include="Forms\FormUpgradeWarning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormWhatsNew.Designer.vb">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWhatsNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\LegacyEditors\Extensions.vb" />
     <Compile Include="Forms\LegacyEditors\frmProps.Designer.vb">
       <DependentUpon>frmProps.vb</DependentUpon>
@@ -946,11 +952,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tips.resx</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Forms\AboutBox.Designer.vb">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </Compile>
@@ -1004,6 +1005,11 @@
     </Compile>
     <Compile Include="Forms\FormScript.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Objects\Classes\AssemblyResolver\AssemblyResolver1.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
@@ -1600,6 +1606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWhatsNew.resx">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LegacyEditors\frmProps.de.resx">
       <DependentUpon>frmProps.vb</DependentUpon>

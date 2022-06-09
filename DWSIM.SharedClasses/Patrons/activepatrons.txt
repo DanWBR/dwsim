@@ -7,7 +7,6 @@ Andras Nady
 Anders Andreasen
 Andrew Dickson
 Bruce Rising
-Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
 Christian Hornhofer
@@ -17,8 +16,6 @@ CollectiveObjective
 Daniel Dornellas Athayde
 David Miller
 David Whitlock
-Deryck Coetzer
-Diego A. Acosta
 Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
@@ -62,7 +59,6 @@ Masahiro Sakai
 Matt Hogg
 Michael Papantoniou
 Nicolas Spogis
-Nikita Petrosyan
 Odnei Macalossi
 Pedro Sabóia
 Petroconsulting LLC
@@ -77,6 +73,5 @@ Shijin Roh
 Steven Sandoval
 Tibor Lányi
 Tino Josef Ritter
-Tony Diocee
 Will Flores
 Yoshihide Watabe

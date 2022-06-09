@@ -1202,6 +1202,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                   While Not converged
 
+                                                      fgui.ClearLog()
+
                                                       'add the objects to the calculation queue.
 
                                                       For Each o As String In objstack

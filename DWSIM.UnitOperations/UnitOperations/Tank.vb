@@ -412,7 +412,7 @@ Namespace UnitOperations
                     Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 Case 1
                     'PROP_TK_1	Volume
-                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
+                    Me.Volume = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
             End Select
             Return 1
         End Function

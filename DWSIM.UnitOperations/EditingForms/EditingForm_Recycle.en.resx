@@ -122,7 +122,10 @@
     <value>111, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 20</value>
+    <value>220, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 43</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -145,8 +148,17 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 98</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
+  </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 183</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 202</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
@@ -157,8 +169,15 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Maximum Iterations</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbMaxIts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="tbMaxIts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 53</value>
+    <value>176, 53</value>
+  </data>
+  <data name="tbMaxIts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
   </data>
   <data name="chkGlobalBroyden.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 17</value>
@@ -166,8 +185,20 @@
   <data name="chkGlobalBroyden.Text" xml:space="preserve">
     <value>Global Convergence (Broyden)</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 84</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
+  </data>
+  <data name="cbP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 77</value>
+  </data>
+  <data name="tbPT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbPT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 78</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -175,14 +206,35 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Pressure</value>
   </data>
+  <data name="cbT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 51</value>
+  </data>
+  <data name="tbTT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbTT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 52</value>
+  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Temperature</value>
+  </data>
+  <data name="cbW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 25</value>
+  </data>
+  <data name="tbWT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbWT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 26</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Mass Flow</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 50</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -193,6 +245,9 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 23</value>
+  </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
@@ -202,6 +257,9 @@
   <data name="btnCreateAndConnectInlet1.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 50</value>
+  </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
@@ -210,6 +268,9 @@
   </data>
   <data name="btnDisconnectOutlet1.ToolTip2" xml:space="preserve">
     <value />
+  </data>
+  <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 23</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -230,13 +291,13 @@
     <value>111, 50</value>
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 21</value>
+    <value>166, 21</value>
   </data>
   <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>111, 23</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 21</value>
+    <value>166, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -244,10 +305,49 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 83</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
+  <data name="tbWE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbWE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 26</value>
+  </data>
+  <data name="tbWE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="tbPE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbPE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 78</value>
+  </data>
+  <data name="tbPE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="tbTE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbTE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 52</value>
+  </data>
+  <data name="tbTE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 111</value>
+  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Convergence Tolerances and Current Errors</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>355, 998</value>
   </data>
 </root>

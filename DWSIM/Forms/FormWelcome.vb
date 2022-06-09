@@ -437,10 +437,6 @@ Public Class FormWelcome
         Call My.Application.MainWindowForm.LoadFileDialog()
     End Sub
 
-    Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
-        Process.Start("https://www.patreon.com/join/dwsim?")
-    End Sub
-
     Private Sub LinkLabel8_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel8.LinkClicked
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
@@ -502,5 +498,17 @@ Public Class FormWelcome
         Application.DoEvents()
         Me.Parent.Visible = False
         Call My.Application.MainWindowForm.LoadFileDialog(True)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Process.Start("https://github.com/sponsors/DanWBR")
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Process.Start("https://www.patreon.com/join/dwsim?")
+    End Sub
+
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
+        Process.Start("https://www.buymeacoffee.com/dwsim")
     End Sub
 End Class
