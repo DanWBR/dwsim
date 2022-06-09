@@ -1876,7 +1876,7 @@ Namespace UnitOperations
                 Dim i As Integer
                 For i = 1 To dif
                     Stages.Insert(Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
-                    Stages(Stages.Count - 2).Name = "Stage_" & Stages.Count - 2
+                    Stages(Stages.Count - 2).Name = "Stage" & Stages.Count - 2
                     With InitialEstimates
                         Dim d As New Dictionary(Of String, Parameter)
                         For Each cp In FlowSheet.SelectedCompounds.Values
