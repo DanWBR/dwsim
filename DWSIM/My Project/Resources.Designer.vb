@@ -1555,7 +1555,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property DWSIM_Icon_Vector_Transp() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("DWSIM Icon Vector Transp", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("DWSIM_Icon_Vector_Transp", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
