@@ -469,7 +469,7 @@ Public Class FormMain
 
     Private Sub SetupWelcomeScreen()
 
-        Dim splfile = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "extenders", "WelcomeScreen.dll")
+        Dim splfile = Path.Combine(Utility.GetExtendersRootDirectory(), "WelcomeScreen.dll")
 
         If File.Exists(splfile) Then
 
@@ -562,9 +562,9 @@ Public Class FormMain
 
         Dim extenderdlls As List(Of Assembly) = New List(Of Assembly)
 
-        If Directory.Exists(Path.Combine(Environment.CurrentDirectory, "extenders")) Then
+        If Directory.Exists(Utility.GetExtendersRootDirectory()) Then
 
-            Dim dinfo As New DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "extenders"))
+            Dim dinfo As New DirectoryInfo(Utility.GetExtendersRootDirectory())
 
             Dim files() As FileInfo = dinfo.GetFiles("*.dll")
 

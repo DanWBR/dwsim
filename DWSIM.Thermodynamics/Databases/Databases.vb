@@ -26,6 +26,7 @@ Imports DWSIM.Thermodynamics
 Imports System.Reflection
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.SharedClasses
 
 Namespace Databases
 
@@ -906,7 +907,7 @@ Namespace Databases
 
             Dim comps As New List(Of ICompoundConstantProperties)
             Try
-                Dim cfiles = Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "addcomps"))
+                Dim cfiles = Directory.GetFiles(Path.Combine(Utility.GetDwsimRootDirectory(), "addcomps"))
                 For Each cpath In cfiles
                     Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(cpath))
                     comp.CurrentDB = "User"
@@ -1754,7 +1755,7 @@ Namespace Databases
                     End Try
                 Next
             End If
-                    Return results
+            Return results
         End Function
 
     End Class
