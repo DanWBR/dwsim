@@ -76,6 +76,8 @@ Public Class FlashAlgorithmConfig
                 cbFlashType.SelectedIndex = 3
             Case "SVLLE"
                 cbFlashType.SelectedIndex = 4
+            Case "NoFlash"
+                cbFlashType.SelectedIndex = 5
         End Select
 
         cbFlashApproach.SelectedIndex = PropPack.FlashCalculationApproach
@@ -167,6 +169,8 @@ Public Class FlashAlgorithmConfig
                     Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLE"
                 Case 4
                     Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLLE"
+                Case 5
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "NoFlash"
             End Select
 
             Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = chkImmiscible.Checked
