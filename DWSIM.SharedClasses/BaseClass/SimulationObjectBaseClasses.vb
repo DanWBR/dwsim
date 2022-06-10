@@ -1495,6 +1495,10 @@ Namespace UnitOperations
             End Get
         End Property
 
+        Public Overridable ReadOnly Property IsSource As Boolean = False Implements ISimulationObject.IsSource
+
+        Public Overridable ReadOnly Property IsSink As Boolean = False Implements ISimulationObject.IsSink
+
 #End Region
 
     End Class

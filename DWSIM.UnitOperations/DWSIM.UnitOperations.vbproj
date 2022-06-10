@@ -96,6 +96,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=9084b9221296229e, processorArchitecture=MSIL">
       <HintPath>..\packages\NetOfficeFw.Excel.1.8.1\lib\net40\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -226,6 +230,12 @@
       <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_AirCooler.designer.vb">
+      <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_AirCooler.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
@@ -632,7 +642,10 @@
     <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
     <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
+    <Compile Include="UnitOperations\AirCooler.vb" />
+    <Compile Include="UnitOperations\CleanEnergy\CleanEnergyUnitOpBase.vb" />
     <Compile Include="UnitOperations\DummyUO.vb" />
+    <Compile Include="UnitOperations\Electrolyzers\PEMElectrolyzerBase.vb" />
     <Compile Include="UnitOperations\PythonScriptUO.vb" />
     <Compile Include="UnitOperations\FlowsheetUO.vb" />
     <Compile Include="UnitOperations\OrificePlate.vb" />
@@ -674,6 +687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_AirCooler.resx">
+      <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.en.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
@@ -1258,6 +1274,11 @@
       <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
+      <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
+      <Name>DWSIM.ExtensionMethods.Eto</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
       <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
       <Name>DWSIM.Inspector</Name>
@@ -1703,6 +1724,7 @@
   <ItemGroup>
     <None Include="Resources\lightning.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

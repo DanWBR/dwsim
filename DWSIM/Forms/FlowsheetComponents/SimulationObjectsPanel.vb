@@ -88,7 +88,7 @@ Public Class SimulationObjectsPanel
         For Each item In litems
             Select Case DirectCast(item.Tag, Interfaces.Enums.SimulationObjectClass)
                 Case SimulationObjectClass.CAPEOPEN
-                    Me.PanelCO.Controls.Add(item)
+                    Me.PanelUser.Controls.Add(item)
                 Case SimulationObjectClass.Columns
                     Me.PanelColumns.Controls.Add(item)
                 Case SimulationObjectClass.Exchangers
@@ -115,6 +115,10 @@ Public Class SimulationObjectsPanel
                     Me.PanelIndicators.Controls.Add(item)
                 Case SimulationObjectClass.Controllers
                     Me.PanelControllers.Controls.Add(item)
+                Case SimulationObjectClass.CleanPowerSources
+                    Me.PanelCE.Controls.Add(item)
+                Case SimulationObjectClass.Electrolyzers
+                    Me.PanelELEC.Controls.Add(item)
             End Select
         Next
 

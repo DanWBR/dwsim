@@ -242,4 +242,8 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetAsObject() As Object
 
+    ReadOnly Property IsSource As Boolean
+
+    ReadOnly Property IsSink As Boolean
+
 End Interface

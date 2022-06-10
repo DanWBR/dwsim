@@ -455,6 +455,8 @@ Namespace Enums
         Switches = 14
         Inputs = 15
         None = 16
+        CleanPowerSources = 17
+        Electrolyzers = 18
 
     End Enum
 
