@@ -864,15 +864,21 @@ Public Class FormSimulWizard
 
             End If
 
-            Dim added As String = ""
-            For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
-                added += c.Name + ", "
-            Next
-            added = added.TrimEnd()
-            added = added.TrimEnd(",")
-            txtAdded.Text = added
+            UpdateAddedList()
 
         End If
+
+    End Sub
+
+    Private Sub UpdateAddedList()
+
+        Dim added As String = ""
+        For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
+            added += c.Name + ", "
+        Next
+        added = added.TrimEnd()
+        added = added.TrimEnd(",")
+        txtAdded.Text = added
 
     End Sub
 
@@ -910,6 +916,9 @@ Public Class FormSimulWizard
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+                    UpdateAddedList()
+
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -945,6 +954,7 @@ Public Class FormSimulWizard
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+                    UpdateAddedList()
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If

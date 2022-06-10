@@ -22,9 +22,9 @@ Public Class FormCreateNewSolid
         cmp.Critical_Pressure = 10000000000.0
         cmp.Acentric_Factor = 0.5
 
-        cmp.VaporPressureEquation = 1.0E-20
-        cmp.Vapor_Pressure_Constant_A = 0.0
-        cmp.VaporPressureEquation = "1"
+        cmp.VaporPressureEquation = "2"
+        cmp.Vapor_Pressure_Constant_A = 0.0001
+        cmp.Vapor_Pressure_Constant_B = 0.0000001
 
         cmp.SolidHeatCapacityEquation = "1"
 
@@ -32,7 +32,7 @@ Public Class FormCreateNewSolid
         cmp.Formula = TextBoxFormula.Text
         cmp.Molar_Weight = Convert.ToDouble(TextBoxMW.Text)
         cmp.SolidDensityAtTs = Convert.ToDouble(TextBoxDensity.Text)
-        cmp.Solid_Heat_Capacity_Const_A = Convert.ToDouble(TextBoxCp.Text)
+        cmp.Solid_Heat_Capacity_Const_A = Convert.ToDouble(TextBoxCp.Text) * 1000.0 * cmp.Molar_Weight
         cmp.IG_Enthalpy_of_Formation_25C = Convert.ToDouble(TextBoxDHF.Text)
         cmp.IG_Gibbs_Energy_of_Formation_25C = Convert.ToDouble(TextBoxDGF.Text)
 

@@ -1449,6 +1449,13 @@ will converge to this solution.")
                 End If
             Next
 
+            For i = 0 To n - 1
+                If props(i).IsSolid Then
+                    hres.SolidPhase = True
+                    hres.SolidFraction += Vz(i)
+                End If
+            Next
+
             If pp.ForcedSolids.Count > 0 Then
                 'has solids
                 For Each solid In pp.ForcedSolids

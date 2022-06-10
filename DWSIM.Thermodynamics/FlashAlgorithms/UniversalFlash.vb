@@ -518,7 +518,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If Vsolid(i) Then
                     Vs(i) = Vz(i)
                 Else
-                    If Vp(i) > P Then
+                    If Vp(i) < P Then
                         Vx(i) = Vz(i)
                     Else
                         Vy(i) = Vz(i)
@@ -530,7 +530,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             L = Vx.Sum
             V = Vy.Sum
 
-            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP, S, Vs, Ki}
+            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, S, Vs, Ki}
 
         End Function
 
@@ -576,7 +576,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If Vsolid(i) Then
                     Vs(i) = Vz(i)
                 Else
-                    If Vp(i) > P Then
+                    If Vp(i) < P Then
                         Vx(i) = Vz(i)
                     Else
                         Vy(i) = Vz(i)
@@ -634,7 +634,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If Vsolid(i) Then
                     Vs(i) = Vz(i)
                 Else
-                    If Vp(i) > P Then
+                    If Vp(i) < P Then
                         Vx(i) = Vz(i)
                     Else
                         Vy(i) = Vz(i)

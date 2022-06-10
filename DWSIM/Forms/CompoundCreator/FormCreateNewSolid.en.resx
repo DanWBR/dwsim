@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TextBoxMW.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
@@ -127,11 +131,17 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="TextBoxName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="Label50.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 13</value>
   </data>
   <data name="Label50.Text" xml:space="preserve">
     <value>Ideal Gas Enthalpy of Formation (298 K)</value>
+  </data>
+  <data name="TextBoxDHF.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="Label53.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 13</value>
@@ -139,8 +149,14 @@
   <data name="Label53.Text" xml:space="preserve">
     <value>Ideal Gas Gibbs Energy of Formation (298 K)</value>
   </data>
+  <data name="TextBoxDGF.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="TextBoxCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 20</value>
+  </data>
+  <data name="TextBoxCp.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="TextBoxCp.Text" xml:space="preserve">
     <value>0</value>
@@ -164,6 +180,9 @@
   <data name="TextBoxDensity.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 20</value>
   </data>
+  <data name="TextBoxDensity.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="TextBoxDensity.Text" xml:space="preserve">
     <value>0</value>
   </data>
@@ -179,14 +198,23 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Ideal Gas Formation Data is optional and must be entered only if the compound is reactive.</value>
   </data>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Export to JSON File</value>
+  </data>
+  <data name="Button2.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Formula</value>
+  </data>
+  <data name="TextBoxFormula.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Quick Create New Solid Compound</value>
