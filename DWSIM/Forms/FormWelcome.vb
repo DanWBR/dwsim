@@ -511,4 +511,9 @@ Public Class FormWelcome
     Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
         Process.Start("https://www.buymeacoffee.com/dwsim")
     End Sub
+
+    Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
+        Dim fqc As New FormCreateNewSolid()
+        fqc.ShowDialog(Me)
+    End Sub
 End Class

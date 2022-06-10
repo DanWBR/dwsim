@@ -542,6 +542,12 @@
     <Compile Include="Controls\ScriptEditorControlMono.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCreateNewSolid.Designer.vb">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCreateNewSolid.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\CompoundCreator\FormImportCompoundDataDDB.Designer.vb">
       <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
     </Compile>
@@ -1279,6 +1285,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCreateNewSolid.en.resx">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCreateNewSolid.resx">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.de.resx">
       <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>

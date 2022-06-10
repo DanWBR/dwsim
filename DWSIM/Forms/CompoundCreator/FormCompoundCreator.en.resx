@@ -130,24 +130,51 @@
   <data name="LinkPubChem.Location" type="System.Drawing.Point, System.Drawing">
     <value>629, 100</value>
   </data>
+  <data name="TextBoxSMILES.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 97</value>
+  </data>
+  <data name="TextBoxSMILES.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 20</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBoxSMILES.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="TextBoxCAS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 13</value>
+  </data>
   <data name="TextBoxCAS.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="Label51.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 99</value>
   </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Formula</value>
   </data>
+  <data name="TextBoxFormula.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 67</value>
+  </data>
   <data name="TextBoxFormula.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
   <data name="Label22.Text" xml:space="preserve">
-    <value>Mole Weight</value>
+    <value>Molecular Weight</value>
+  </data>
+  <data name="TextBoxMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 40</value>
   </data>
   <data name="TextBoxMW.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="lblMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 43</value>
+  </data>
+  <data name="CheckBoxMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 43</value>
   </data>
   <data name="Label60.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 13</value>
