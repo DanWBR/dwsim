@@ -232,12 +232,12 @@
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_AirCooler.designer.vb">
+    <None Include="EditingForms\EditingForm_AirCooler.designer.vb">
       <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_AirCooler.vb">
+    </None>
+    <None Include="EditingForms\EditingForm_AirCooler.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </Compile>
@@ -642,10 +642,10 @@
     <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
     <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
-    <Compile Include="UnitOperations\AirCooler.vb" />
+    <None Include="UnitOperations\AirCooler.vb" />
     <Compile Include="UnitOperations\CleanEnergy\CleanEnergyUnitOpBase.vb" />
     <Compile Include="UnitOperations\DummyUO.vb" />
-    <Compile Include="UnitOperations\Electrolyzers\PEMElectrolyzerBase.vb" />
+    <Compile Include="UnitOperations\CleanEnergy\PEMFuelCells.vb" />
     <Compile Include="UnitOperations\PythonScriptUO.vb" />
     <Compile Include="UnitOperations\FlowsheetUO.vb" />
     <Compile Include="UnitOperations\OrificePlate.vb" />
@@ -688,9 +688,9 @@
     <EmbeddedResource Include="EditingForms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_AirCooler.resx">
+    <None Include="EditingForms\EditingForm_AirCooler.resx">
       <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.en.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>

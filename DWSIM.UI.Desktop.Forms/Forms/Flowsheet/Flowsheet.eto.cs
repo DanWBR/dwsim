@@ -1845,7 +1845,7 @@ namespace DWSIM.UI.Forms
             List<Type> availableTypes = new List<Type>();
 
             availableTypes.AddRange(calculatorassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
-            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
+            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null && !x.IsAbstract ? true : false));
 
             List<ListItem> litems = new List<ListItem>();
 

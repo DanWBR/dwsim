@@ -1,3 +1,9 @@
+Version 7.5.7
+
+- Fixed a bug in PFR
+- Fixed a bug in Rigorous Column
+- Fixed an issue with LLE Diagram
+
 Version 7.5.6
 
 - Implemented #274: Number of Tubes in Tubular Reactors for Correct Pressure Drop Calculation

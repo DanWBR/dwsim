@@ -276,51 +276,6 @@
   <data name="TabPage8.Text" xml:space="preserve">
     <value>Solids</value>
   </data>
-  <data name="PanelCE.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelCE.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelCE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="PanelCE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1966, 250</value>
-  </data>
-  <data name="TabPage9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1966, 250</value>
-  </data>
-  <data name="TabPage9.Text" xml:space="preserve">
-    <value>Clean Energy</value>
-  </data>
-  <data name="PanelELEC.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelELEC.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelELEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PanelELEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="PanelELEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1966, 250</value>
-  </data>
-  <data name="PanelELEC.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="TabPage15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1966, 250</value>
-  </data>
-  <data name="TabPage15.Text" xml:space="preserve">
-    <value>Electrolyzers</value>
-  </data>
   <data name="PanelUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>

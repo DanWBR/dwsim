@@ -3,7 +3,7 @@ Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations
 
-    Public MustInherit Class PEMElectrolyzerUnitOpBase
+    Public MustInherit Class PEMFuelCellUnitOpBase
 
         Inherits DWSIM.UnitOperations.UnitOperations.UnitOpBaseClass
 

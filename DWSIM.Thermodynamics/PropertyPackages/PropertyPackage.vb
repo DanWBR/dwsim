@@ -10051,7 +10051,7 @@ Final3:
         ''' </summary>
         ''' <param name="props">The list of identifiers for properties to be calculated. This must be one or more 
         ''' of the supported two-phase properties and derivatives (as given by the GetTwoPhasePropList method). 
-        ''' The standard identifiers for two-phase properties are given in section 7.5.6 and 7.6.</param>
+        ''' The standard identifiers for two-phase properties are given in section 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the phases for which the properties are to be calculated. 
         ''' The phase labels must be two of the strings returned by the GetPhaseList method on the ICapeThermoPhases 
         ''' interface and the phases must also be present in the Material Object.</param>
@@ -10230,7 +10230,7 @@ Final3:
         ''' Returns the list of supported non-constant two-phase properties.
         ''' </summary>
         ''' <returns>List of all supported non-constant two-phase property identifiers. The standard two-phase 
-        ''' property identifiers are listed in section 7.5.6.</returns>
+        ''' property identifiers are listed in section 7.5.7.</returns>
         ''' <remarks>A non-constant property depends on the state of the Material Object. Two-phase properties
         ''' are those that depend on more than one co-existing phase, e.g. K-values.
         ''' GetTwoPhasePropList must return all the properties that can be calculated by
@@ -10239,7 +10239,7 @@ Final3:
         ''' To check whether a property can be evaluated for a particular set of phase labels use the
         ''' CheckTwoPhasePropSpec method.
         ''' A component that implements this method may return non-constant two-phase property
-        ''' identifiers which do not belong to the list defined in section 7.5.6. However, these
+        ''' identifiers which do not belong to the list defined in section 7.5.7. However, these
         ''' proprietary identifiers may not be understood by most of the clients of this component.
         ''' To get the list of supported single-phase properties, use GetSinglePhasePropList.</remarks>
         Public Overridable Function GetTwoPhasePropList() As Object Implements ICapeThermoPropertyRoutine.GetTwoPhasePropList
