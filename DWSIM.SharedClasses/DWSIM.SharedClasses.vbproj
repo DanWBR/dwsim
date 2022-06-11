@@ -196,6 +196,7 @@
     <Compile Include="TaskHelper\TaskHelper.vb" />
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
     <Compile Include="UpdateCheck\UpdateCheck.vb" />
+    <Compile Include="Weather\WeatherData.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editor\DynamicsPropertyEditor.en.resx">

@@ -3,12 +3,13 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Inspector
 Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.UnitOperations.UnitOperations
 
 Public Class EditingForm_AirCooler
 
     Inherits SharedClasses.ObjectEditorForm
 
-    Public Property SimObject As AirCooler
+    Public Property SimObject As AirCooler2
 
     Public Loaded As Boolean = False
 

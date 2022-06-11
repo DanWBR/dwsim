@@ -27,11 +27,30 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.SplitContainerVertical = New System.Windows.Forms.SplitContainer()
         Me.SplitContainerHorizontal = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.PanelFlowsheetControl = New System.Windows.Forms.Panel()
         Me.btnLeft = New System.Windows.Forms.Button()
         Me.btnUp = New System.Windows.Forms.Button()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnRight = New System.Windows.Forms.Button()
-        Me.PanelFlowsheetControl = New System.Windows.Forms.Panel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.tbAmbientTemperature = New System.Windows.Forms.TextBox()
+        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+        Me.btnGetLocation = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.tbCurrentLocation = New System.Windows.Forms.TextBox()
+        Me.btnGetWeather = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.tbSolarIrradiation = New System.Windows.Forms.TextBox()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.tbHumidity = New System.Windows.Forms.TextBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.tbWindSpeed = New System.Windows.Forms.TextBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.cbWeather = New System.Windows.Forms.ComboBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolStripFlowsheet = New System.Windows.Forms.ToolStrip()
         Me.tsbControlPanelMode = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
@@ -163,6 +182,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.CMS_Palette = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -173,6 +193,12 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.SplitContainerHorizontal.Panel1.SuspendLayout()
         Me.SplitContainerHorizontal.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStripFlowsheet.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.CMS_NoSel.SuspendLayout()
@@ -188,26 +214,32 @@ Partial Class FlowsheetSurface_SkiaSharp
         'ToolStripContainer1.BottomToolStripPanel
         '
         resources.ApplyResources(Me.ToolStripContainer1.BottomToolStripPanel, "ToolStripContainer1.BottomToolStripPanel")
+        Me.ToolTip1.SetToolTip(Me.ToolStripContainer1.BottomToolStripPanel, resources.GetString("ToolStripContainer1.BottomToolStripPanel.ToolTip"))
         '
         'ToolStripContainer1.ContentPanel
         '
         resources.ApplyResources(Me.ToolStripContainer1.ContentPanel, "ToolStripContainer1.ContentPanel")
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.SplitContainerVertical)
+        Me.ToolTip1.SetToolTip(Me.ToolStripContainer1.ContentPanel, resources.GetString("ToolStripContainer1.ContentPanel.ToolTip"))
         '
         'ToolStripContainer1.LeftToolStripPanel
         '
         resources.ApplyResources(Me.ToolStripContainer1.LeftToolStripPanel, "ToolStripContainer1.LeftToolStripPanel")
+        Me.ToolTip1.SetToolTip(Me.ToolStripContainer1.LeftToolStripPanel, resources.GetString("ToolStripContainer1.LeftToolStripPanel.ToolTip"))
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
         '
         'ToolStripContainer1.RightToolStripPanel
         '
         resources.ApplyResources(Me.ToolStripContainer1.RightToolStripPanel, "ToolStripContainer1.RightToolStripPanel")
+        Me.ToolTip1.SetToolTip(Me.ToolStripContainer1.RightToolStripPanel, resources.GetString("ToolStripContainer1.RightToolStripPanel.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.ToolStripContainer1, resources.GetString("ToolStripContainer1.ToolTip"))
         '
         'ToolStripContainer1.TopToolStripPanel
         '
         resources.ApplyResources(Me.ToolStripContainer1.TopToolStripPanel, "ToolStripContainer1.TopToolStripPanel")
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStripFlowsheet)
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
+        Me.ToolTip1.SetToolTip(Me.ToolStripContainer1.TopToolStripPanel, resources.GetString("ToolStripContainer1.TopToolStripPanel.ToolTip"))
         '
         'SplitContainerVertical
         '
@@ -218,11 +250,14 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.SplitContainerVertical.Panel1, "SplitContainerVertical.Panel1")
         Me.SplitContainerVertical.Panel1.Controls.Add(Me.SplitContainerHorizontal)
+        Me.ToolTip1.SetToolTip(Me.SplitContainerVertical.Panel1, resources.GetString("SplitContainerVertical.Panel1.ToolTip"))
         '
         'SplitContainerVertical.Panel2
         '
         resources.ApplyResources(Me.SplitContainerVertical.Panel2, "SplitContainerVertical.Panel2")
+        Me.ToolTip1.SetToolTip(Me.SplitContainerVertical.Panel2, resources.GetString("SplitContainerVertical.Panel2.ToolTip"))
         Me.SplitContainerVertical.Panel2Collapsed = True
+        Me.ToolTip1.SetToolTip(Me.SplitContainerVertical, resources.GetString("SplitContainerVertical.ToolTip"))
         '
         'SplitContainerHorizontal
         '
@@ -234,56 +269,217 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.SplitContainerHorizontal.Panel1, "SplitContainerHorizontal.Panel1")
         Me.SplitContainerHorizontal.Panel1.Controls.Add(Me.TableLayoutPanel1)
+        Me.SplitContainerHorizontal.Panel1.Controls.Add(Me.Panel1)
+        Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal.Panel1, resources.GetString("SplitContainerHorizontal.Panel1.ToolTip"))
         '
         'SplitContainerHorizontal.Panel2
         '
         resources.ApplyResources(Me.SplitContainerHorizontal.Panel2, "SplitContainerHorizontal.Panel2")
+        Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal.Panel2, resources.GetString("SplitContainerHorizontal.Panel2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal, resources.GetString("SplitContainerHorizontal.ToolTip"))
         '
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.White
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelFlowsheetControl, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.btnLeft, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.btnUp, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnDown, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.btnRight, 2, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelFlowsheetControl, 1, 1)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.ToolTip1.SetToolTip(Me.TableLayoutPanel1, resources.GetString("TableLayoutPanel1.ToolTip"))
+        '
+        'PanelFlowsheetControl
+        '
+        resources.ApplyResources(Me.PanelFlowsheetControl, "PanelFlowsheetControl")
+        Me.PanelFlowsheetControl.Name = "PanelFlowsheetControl"
+        Me.ToolTip1.SetToolTip(Me.PanelFlowsheetControl, resources.GetString("PanelFlowsheetControl.ToolTip"))
         '
         'btnLeft
         '
         resources.ApplyResources(Me.btnLeft, "btnLeft")
         Me.btnLeft.Name = "btnLeft"
+        Me.ToolTip1.SetToolTip(Me.btnLeft, resources.GetString("btnLeft.ToolTip"))
         Me.btnLeft.UseVisualStyleBackColor = True
         '
         'btnUp
         '
         resources.ApplyResources(Me.btnUp, "btnUp")
         Me.btnUp.Name = "btnUp"
+        Me.ToolTip1.SetToolTip(Me.btnUp, resources.GetString("btnUp.ToolTip"))
         Me.btnUp.UseVisualStyleBackColor = True
         '
         'btnDown
         '
         resources.ApplyResources(Me.btnDown, "btnDown")
         Me.btnDown.Name = "btnDown"
+        Me.ToolTip1.SetToolTip(Me.btnDown, resources.GetString("btnDown.ToolTip"))
         Me.btnDown.UseVisualStyleBackColor = True
         '
         'btnRight
         '
         resources.ApplyResources(Me.btnRight, "btnRight")
         Me.btnRight.Name = "btnRight"
+        Me.ToolTip1.SetToolTip(Me.btnRight, resources.GetString("btnRight.ToolTip"))
         Me.btnRight.UseVisualStyleBackColor = True
         '
-        'PanelFlowsheetControl
+        'Panel1
         '
-        resources.ApplyResources(Me.PanelFlowsheetControl, "PanelFlowsheetControl")
-        Me.PanelFlowsheetControl.Name = "PanelFlowsheetControl"
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.tbAmbientTemperature)
+        Me.Panel1.Controls.Add(Me.PictureBox5)
+        Me.Panel1.Controls.Add(Me.btnGetLocation)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.tbCurrentLocation)
+        Me.Panel1.Controls.Add(Me.btnGetWeather)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.tbSolarIrradiation)
+        Me.Panel1.Controls.Add(Me.PictureBox4)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.tbHumidity)
+        Me.Panel1.Controls.Add(Me.PictureBox3)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.tbWindSpeed)
+        Me.Panel1.Controls.Add(Me.PictureBox2)
+        Me.Panel1.Controls.Add(Me.cbWeather)
+        Me.Panel1.Controls.Add(Me.PictureBox1)
+        Me.Panel1.Name = "Panel1"
+        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        '
+        'tbAmbientTemperature
+        '
+        resources.ApplyResources(Me.tbAmbientTemperature, "tbAmbientTemperature")
+        Me.tbAmbientTemperature.Name = "tbAmbientTemperature"
+        Me.ToolTip1.SetToolTip(Me.tbAmbientTemperature, resources.GetString("tbAmbientTemperature.ToolTip"))
+        '
+        'PictureBox5
+        '
+        resources.ApplyResources(Me.PictureBox5, "PictureBox5")
+        Me.PictureBox5.Image = Global.DWSIM.My.Resources.Resources.icons8_temperature
+        Me.PictureBox5.Name = "PictureBox5"
+        Me.PictureBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox5, resources.GetString("PictureBox5.ToolTip"))
+        '
+        'btnGetLocation
+        '
+        resources.ApplyResources(Me.btnGetLocation, "btnGetLocation")
+        Me.btnGetLocation.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_location
+        Me.btnGetLocation.Name = "btnGetLocation"
+        Me.ToolTip1.SetToolTip(Me.btnGetLocation, resources.GetString("btnGetLocation.ToolTip"))
+        Me.btnGetLocation.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        '
+        'tbCurrentLocation
+        '
+        resources.ApplyResources(Me.tbCurrentLocation, "tbCurrentLocation")
+        Me.tbCurrentLocation.Name = "tbCurrentLocation"
+        Me.ToolTip1.SetToolTip(Me.tbCurrentLocation, resources.GetString("tbCurrentLocation.ToolTip"))
+        '
+        'btnGetWeather
+        '
+        resources.ApplyResources(Me.btnGetWeather, "btnGetWeather")
+        Me.btnGetWeather.Name = "btnGetWeather"
+        Me.ToolTip1.SetToolTip(Me.btnGetWeather, resources.GetString("btnGetWeather.ToolTip"))
+        Me.btnGetWeather.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        '
+        'tbSolarIrradiation
+        '
+        resources.ApplyResources(Me.tbSolarIrradiation, "tbSolarIrradiation")
+        Me.tbSolarIrradiation.Name = "tbSolarIrradiation"
+        Me.ToolTip1.SetToolTip(Me.tbSolarIrradiation, resources.GetString("tbSolarIrradiation.ToolTip"))
+        '
+        'PictureBox4
+        '
+        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
+        Me.PictureBox4.Image = Global.DWSIM.My.Resources.Resources.icons8_solar_irradiation
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox4, resources.GetString("PictureBox4.ToolTip"))
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        '
+        'tbHumidity
+        '
+        resources.ApplyResources(Me.tbHumidity, "tbHumidity")
+        Me.tbHumidity.Name = "tbHumidity"
+        Me.ToolTip1.SetToolTip(Me.tbHumidity, resources.GetString("tbHumidity.ToolTip"))
+        '
+        'PictureBox3
+        '
+        resources.ApplyResources(Me.PictureBox3, "PictureBox3")
+        Me.PictureBox3.Image = Global.DWSIM.My.Resources.Resources.icons8_humidity
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox3, resources.GetString("PictureBox3.ToolTip"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        '
+        'tbWindSpeed
+        '
+        resources.ApplyResources(Me.tbWindSpeed, "tbWindSpeed")
+        Me.tbWindSpeed.Name = "tbWindSpeed"
+        Me.ToolTip1.SetToolTip(Me.tbWindSpeed, resources.GetString("tbWindSpeed.ToolTip"))
+        '
+        'PictureBox2
+        '
+        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
+        Me.PictureBox2.Image = Global.DWSIM.My.Resources.Resources.icons8_wind
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
+        '
+        'cbWeather
+        '
+        resources.ApplyResources(Me.cbWeather, "cbWeather")
+        Me.cbWeather.BackColor = System.Drawing.Color.White
+        Me.cbWeather.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbWeather.FormattingEnabled = True
+        Me.cbWeather.Items.AddRange(New Object() {resources.GetString("cbWeather.Items"), resources.GetString("cbWeather.Items1"), resources.GetString("cbWeather.Items2"), resources.GetString("cbWeather.Items3")})
+        Me.cbWeather.Name = "cbWeather"
+        Me.ToolTip1.SetToolTip(Me.cbWeather, resources.GetString("cbWeather.ToolTip"))
+        '
+        'PictureBox1
+        '
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_weather
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
         '
         'ToolStripFlowsheet
         '
         resources.ApplyResources(Me.ToolStripFlowsheet, "ToolStripFlowsheet")
         Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbControlPanelMode, Me.ToolStripSeparator17, Me.ToolStripLabel1, Me.tstbSearch, Me.ToolStripSeparator15, Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator10, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator9, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator13, Me.tsbDisplayGrid, Me.tsbSnapObjectsToGrid, Me.ToolStripButton17, Me.ToolStripSeparator14, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator19, Me.tsbMultiSelectMode, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator16, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
         Me.ToolStripFlowsheet.Name = "ToolStripFlowsheet"
+        Me.ToolTip1.SetToolTip(Me.ToolStripFlowsheet, resources.GetString("ToolStripFlowsheet.ToolTip"))
         '
         'tsbControlPanelMode
         '
@@ -580,6 +776,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiHeatMap, Me.tss1, Me.tsmiLiveFlow, Me.tss2, Me.ToolStripLabel2, Me.tbFontSize, Me.ToolStripButton5, Me.ToolStripSeparator20, Me.ToolStripLabel3, Me.tsbColorTheme, Me.ToolStripSeparator21, Me.ToolStripLabel4, Me.tscbAddObjectsWithStreams})
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolTip1.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
         '
         'tsmiHeatMap
         '
@@ -663,6 +860,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.CMS_NoSel, "CMS_NoSel")
         Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem, Me.CopyAsImageToolStripMenuItem, Me.CopiarComoImagem200ToolStripMenuItem, Me.CopiarComoImagem300ToolStripMenuItem, Me.ExportarParaPDFToolStripMenuItem, Me.ExportarParaSVGToolStripMenuItem, Me.ToolStripSeparator18, Me.LayoutAutomaticoToolStripMenuItem, Me.RestaurarLayoutToolStripMenuItem, Me.tssepPro2, Me.FindTearStreamsAutomaticallyToolStripMenuItem})
         Me.CMS_NoSel.Name = "ContextMenuStrip1"
+        Me.ToolTip1.SetToolTip(Me.CMS_NoSel, resources.GetString("CMS_NoSel.ToolTip"))
         '
         'ToolStripMenuItem3
         '
@@ -755,6 +953,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.CMS_Sel, "CMS_Sel")
         Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.AtivadoToolStripMenuItem, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.CopyFromTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.tsmiInvertVertically, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem, Me.ToolStripSeparator7, Me.EditAppearanceToolStripMenuItem, Me.ToolStripSeparator8, Me.SplitToolStripMenuItem, Me.SplitAndInsertValveTSMI, Me.SplitAndInsertRecycleMenuItem, Me.MergeStreamsToolStripMenuItem, Me.tssepPro, Me.UpgradeDistillationColumnToProToolStripMenuItem})
         Me.CMS_Sel.Name = "CMS_Sel"
+        Me.ToolTip1.SetToolTip(Me.CMS_Sel, resources.GetString("CMS_Sel.ToolTip"))
         '
         'TSMI_Label
         '
@@ -954,6 +1153,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.PreviewDialog, "PreviewDialog")
         Me.PreviewDialog.Document = Me.designSurfacePrintDocument
         Me.PreviewDialog.Name = "PrintPreviewDialog1"
+        Me.ToolTip1.SetToolTip(Me.PreviewDialog, resources.GetString("PreviewDialog.ToolTip"))
         Me.PreviewDialog.UseAntiAlias = True
         '
         'designSurfacePrintDocument
@@ -964,11 +1164,13 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.CMS_ItemsToConnect, "CMS_ItemsToConnect")
         Me.CMS_ItemsToConnect.Name = "CMS_ItemsToConnect"
+        Me.ToolTip1.SetToolTip(Me.CMS_ItemsToConnect, resources.GetString("CMS_ItemsToConnect.ToolTip"))
         '
         'CMS_ItemsToDisconnect
         '
         resources.ApplyResources(Me.CMS_ItemsToDisconnect, "CMS_ItemsToDisconnect")
         Me.CMS_ItemsToDisconnect.Name = "CMS_ItemsToConnect"
+        Me.ToolTip1.SetToolTip(Me.CMS_ItemsToDisconnect, resources.GetString("CMS_ItemsToDisconnect.ToolTip"))
         '
         'pageSetup
         '
@@ -996,6 +1198,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        Me.ToolTip1.SetToolTip(Me.dckMenu, resources.GetString("dckMenu.ToolTip"))
         '
         'FloatToolStripMenuItem
         '
@@ -1057,6 +1260,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.CMS_Palette, "CMS_Palette")
         Me.CMS_Palette.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
         Me.CMS_Palette.Name = "ContextMenuStrip1"
+        Me.ToolTip1.SetToolTip(Me.CMS_Palette, resources.GetString("CMS_Palette.ToolTip"))
         '
         'ToolStripMenuItem1
         '
@@ -1077,6 +1281,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.TabPageContextMenuStrip = Me.dckMenu
         Me.TabText = Me.Text
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
         Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
         Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
@@ -1089,6 +1294,13 @@ Partial Class FlowsheetSurface_SkiaSharp
         CType(Me.SplitContainerHorizontal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerHorizontal.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStripFlowsheet.ResumeLayout(False)
         Me.ToolStripFlowsheet.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -1240,4 +1452,24 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tss2 As ToolStripSeparator
     Friend WithEvents tsmiLiveFlow As ToolStripButton
     Friend WithEvents tss1 As ToolStripSeparator
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents tbHumidity As TextBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents tbWindSpeed As TextBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents cbWeather As ComboBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents tbSolarIrradiation As TextBox
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents btnGetWeather As Button
+    Friend WithEvents btnGetLocation As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents tbCurrentLocation As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents tbAmbientTemperature As TextBox
+    Friend WithEvents PictureBox5 As PictureBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

@@ -1447,4 +1447,25 @@
   <data name="DWSIM_Icon_Vector_Transp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DWSIM Icon Vector Transp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_humidity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-humidity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_location" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-location.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_solar_irradiation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-solar_irradiation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_sun_with_face" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-sun_with_face.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_weather" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-weather.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_wind" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-wind.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_temperature" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-temperature.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

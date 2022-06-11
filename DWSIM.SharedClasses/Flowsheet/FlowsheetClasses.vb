@@ -270,6 +270,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property DisplayDynamicPropertyValues As Boolean = True Implements IFlowsheetOptions.DisplayDynamicPropertyValues
 
+        Public Property CurrentWeather As IWeatherData = New WeatherData Implements IFlowsheetOptions.CurrentWeather
+
     End Class
 
 End Namespace

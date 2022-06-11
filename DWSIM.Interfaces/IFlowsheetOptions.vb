@@ -127,4 +127,6 @@
 
     Property VirtualFile As IVirtualFile
 
+    Property CurrentWeather As IWeatherData
+
 End Interface

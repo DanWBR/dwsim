@@ -10,6 +10,7 @@ Imports SkiaSharp
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.Interfaces
+Imports System.Device.Location
 
 Public Class FlowsheetSurface_SkiaSharp
 
@@ -181,12 +182,32 @@ Public Class FlowsheetSurface_SkiaSharp
             tss2.Visible = False
         End If
 
-        Loaded = True
-
         AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
                                                If My.Settings.FlowsheetRenderer = 0 Then FControl.Invalidate()
                                            End Sub
         'AnimationTimer.Start()
+
+        'weather
+
+        ReadWeather(Flowsheet.Options.CurrentWeather)
+
+        Loaded = True
+
+    End Sub
+
+    Private Sub ReadWeather(currentWeather As IWeatherData)
+
+        cbWeather.SelectedIndex = currentWeather.CurrentConditon
+
+        tbAmbientTemperature.Text = currentWeather.Temperature_C
+
+        tbWindSpeed.Text = currentWeather.WindSpeed_km_h
+
+        tbHumidity.Text = currentWeather.RelativeHumidity_pct
+
+        tbSolarIrradiation.Text = currentWeather.SolarIrradiation_kWh_m2
+
+        tbCurrentLocation.Text = currentWeather.Latitude.ToString() + ", " + currentWeather.Longitude.ToString()
 
     End Sub
 
@@ -3788,6 +3809,91 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub tsmiLiveFlow_Click(sender As Object, e As EventArgs) Handles tsmiLiveFlow.Click
         Dim flf As New FormLiveFlows()
         flf.ShowDialog(Me)
+    End Sub
+
+    Private Sub btnGetLocation_Click(sender As Object, e As EventArgs) Handles btnGetLocation.Click
+
+        Dim watcher As New GeoCoordinateWatcher()
+
+        AddHandler watcher.PositionChanged, Sub(s2, e2)
+
+                                                UIThread(Sub()
+
+                                                             Dim coord = watcher.Position.Location
+
+                                                             If Not coord.IsUnknown Then
+
+                                                                 tbCurrentLocation.Text = coord.Latitude.ToString() + ", " + coord.Longitude.ToString()
+
+                                                             Else
+
+                                                                 tbCurrentLocation.Text = "N/A"
+
+                                                             End If
+
+                                                         End Sub)
+
+                                            End Sub
+
+        watcher.TryStart(False, TimeSpan.FromSeconds(10))
+
+    End Sub
+
+    Private Sub tbAmbientTemperature_TextChanged(sender As Object, e As EventArgs) Handles tbAmbientTemperature.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub cbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbWeather.SelectedIndexChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub UpdateCurrentWeather()
+        If Loaded Then
+            Flowsheet.Options.CurrentWeather.CurrentConditon = cbWeather.SelectedIndex
+            Try
+                Flowsheet.Options.CurrentWeather.Temperature_C = tbAmbientTemperature.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.WindSpeed_km_h = tbWindSpeed.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.RelativeHumidity_pct = tbHumidity.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.SolarIrradiation_kWh_m2 = tbSolarIrradiation.Text
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub tbWindSpeed_TextChanged(sender As Object, e As EventArgs) Handles tbWindSpeed.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub tbHumidity_TextChanged(sender As Object, e As EventArgs) Handles tbHumidity.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub tbSolarIrradiation_TextChanged(sender As Object, e As EventArgs) Handles tbSolarIrradiation.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub btnGetWeather_Click(sender As Object, e As EventArgs) Handles btnGetWeather.Click
+
+        If Flowsheet.WeatherProvider IsNot Nothing Then
+
+            Dim data = Flowsheet.WeatherProvider.GetCurrentWeather(tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant(),
+                                                                   tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant())
+
+            Flowsheet.Options.CurrentWeather = data
+
+            ReadWeather(data)
+
+        End If
+
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
