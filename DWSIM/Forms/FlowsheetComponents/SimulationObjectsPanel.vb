@@ -115,9 +115,9 @@ Public Class SimulationObjectsPanel
                     Me.PanelIndicators.Controls.Add(item)
                 Case SimulationObjectClass.Controllers
                     Me.PanelControllers.Controls.Add(item)
-                    'Case SimulationObjectClass.CleanPowerSources
-                    'Case SimulationObjectClass.Electrolyzers
-                    '    Me.PanelCE.Controls.Add(item)
+                Case SimulationObjectClass.CleanPowerSources
+                Case SimulationObjectClass.Electrolyzers
+                    Me.PanelCE.Controls.Add(item)
             End Select
         Next
 

@@ -41,6 +41,8 @@ Partial Class SimulationObjectsPanel
         Me.PanelColumns = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.PanelSolids = New System.Windows.Forms.FlowLayoutPanel()
+        Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.PanelCE = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.PanelUser = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage11 = New System.Windows.Forms.TabPage()
@@ -60,6 +62,7 @@ Partial Class SimulationObjectsPanel
         Me.TabPage6.SuspendLayout()
         Me.TabPage7.SuspendLayout()
         Me.TabPage8.SuspendLayout()
+        Me.TabPage9.SuspendLayout()
         Me.TabPage10.SuspendLayout()
         Me.TabPage11.SuspendLayout()
         Me.TabPage13.SuspendLayout()
@@ -83,6 +86,7 @@ Partial Class SimulationObjectsPanel
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
+        Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Controls.Add(Me.TabPage11)
         Me.TabControl1.Controls.Add(Me.TabPage13)
@@ -182,6 +186,18 @@ Partial Class SimulationObjectsPanel
         resources.ApplyResources(Me.PanelSolids, "PanelSolids")
         Me.PanelSolids.Name = "PanelSolids"
         '
+        'TabPage9
+        '
+        resources.ApplyResources(Me.TabPage9, "TabPage9")
+        Me.TabPage9.Controls.Add(Me.PanelCE)
+        Me.TabPage9.Name = "TabPage9"
+        Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'PanelCE
+        '
+        resources.ApplyResources(Me.PanelCE, "PanelCE")
+        Me.PanelCE.Name = "PanelCE"
+        '
         'TabPage10
         '
         resources.ApplyResources(Me.TabPage10, "TabPage10")
@@ -258,6 +274,7 @@ Partial Class SimulationObjectsPanel
         Me.TabPage6.ResumeLayout(False)
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage8.ResumeLayout(False)
+        Me.TabPage9.ResumeLayout(False)
         Me.TabPage10.ResumeLayout(False)
         Me.TabPage11.ResumeLayout(False)
         Me.TabPage13.ResumeLayout(False)
@@ -293,4 +310,6 @@ Partial Class SimulationObjectsPanel
     Friend WithEvents PanelIndicators As FlowLayoutPanel
     Friend WithEvents TabPage14 As TabPage
     Friend WithEvents PanelControllers As FlowLayoutPanel
+    Friend WithEvents TabPage9 As TabPage
+    Friend WithEvents PanelCE As FlowLayoutPanel
 End Class

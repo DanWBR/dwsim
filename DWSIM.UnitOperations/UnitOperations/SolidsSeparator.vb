@@ -35,6 +35,10 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SolidsSep
 
+        Public Property EmbeddedImageData As String = ""
+
+        Public Property UseEmbeddedImage As Boolean = False
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
             Return MyBase.LoadData(data)
         End Function

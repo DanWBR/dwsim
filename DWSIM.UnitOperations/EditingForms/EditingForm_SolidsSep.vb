@@ -1,6 +1,8 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
+Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
+Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
 Public Class EditingForm_SolidsSep
@@ -16,7 +18,7 @@ Public Class EditingForm_SolidsSep
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-       UpdateInfo()
+        UpdateInfo()
 
     End Sub
 
@@ -26,6 +28,8 @@ Public Class EditingForm_SolidsSep
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Loaded = False
+
+        chkUseEmbeddedImage.Checked = SimObject.UseEmbeddedImage
 
         If Host.Items.Where(Function(x) x.Name.Contains(SimObject.GraphicObject.Tag)).Count > 0 Then
             If InspReportBar Is Nothing Then
@@ -94,7 +98,7 @@ Public Class EditingForm_SolidsSep
             If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(1).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-       
+
             'annotation
 
             Try
@@ -330,4 +334,29 @@ Public Class EditingForm_SolidsSep
 
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Image files", New String() {"*.bmp", "*.jpg", "*.png", "*.gif"})})
+
+        If handler IsNot Nothing Then
+            Using str = handler.OpenRead()
+                Using bmp = Bitmap.FromStream(str)
+                    Try
+                        Using img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
+                            SimObject.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png)
+                            MessageBox.Show("Image data read successfully.", "DWSIM", MessageBoxButtons.OK)
+                        End Using
+                    Catch ex As Exception
+                        MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
+                    End Try
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub chkUseEmbeddedImage_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseEmbeddedImage.CheckedChanged
+        SimObject.UseEmbeddedImage = chkUseEmbeddedImage.Checked
+    End Sub
 End Class

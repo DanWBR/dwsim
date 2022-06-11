@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAVgBBgFYAQYBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAWABBgFgAQYBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -313,17 +313,13 @@
     <value>764, 94</value>
   </data>
   <data name="LinkLabel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>456, 41</value>
+    <value>254, 41</value>
   </data>
   <data name="LinkLabel9.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 16</value>
   </data>
   <data name="LinkLabel9.Text" xml:space="preserve">
     <value>Quick Create New Solid</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LinkLabel9.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="LinkLabel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 67</value>
@@ -353,7 +349,7 @@
     <value>Create New Data Regression Study</value>
   </data>
   <data name="LinkLabel11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 41</value>
+    <value>428, 41</value>
   </data>
   <data name="LinkLabel11.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 16</value>
@@ -388,6 +384,7 @@
   <data name="LinkLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 24</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="LinkLabel7.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>

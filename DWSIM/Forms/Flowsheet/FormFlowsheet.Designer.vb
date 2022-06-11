@@ -53,6 +53,7 @@ Partial Class FormFlowsheet
         Me.BotãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompoundCreatorWizardTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CriadorDeComponentesSólidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriedadesDasSubstanciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -328,7 +329,7 @@ Partial Class FormFlowsheet
         'ToolsTSMI
         '
         resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
-        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
+        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.CriadorDeComponentesSólidosToolStripMenuItem, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
         Me.ToolsTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ToolsTSMI.MergeIndex = 3
         Me.ToolsTSMI.Name = "ToolsTSMI"
@@ -340,6 +341,12 @@ Partial Class FormFlowsheet
         Me.CompoundCreatorWizardTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.CompoundCreatorWizardTSMI.MergeIndex = 6
         Me.CompoundCreatorWizardTSMI.Name = "CompoundCreatorWizardTSMI"
+        '
+        'CriadorDeComponentesSólidosToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CriadorDeComponentesSólidosToolStripMenuItem, "CriadorDeComponentesSólidosToolStripMenuItem")
+        Me.CriadorDeComponentesSólidosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.labicon
+        Me.CriadorDeComponentesSólidosToolStripMenuItem.Name = "CriadorDeComponentesSólidosToolStripMenuItem"
         '
         'PropriedadesDasSubstanciasToolStripMenuItem
         '
@@ -927,4 +934,5 @@ Partial Class FormFlowsheet
     Friend WithEvents DesignOfExperimentsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OptimumTesterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SumarioToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CriadorDeComponentesSólidosToolStripMenuItem As ToolStripMenuItem
 End Class

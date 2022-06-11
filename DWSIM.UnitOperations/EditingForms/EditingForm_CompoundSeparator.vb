@@ -3,6 +3,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports System.Drawing
 
 Public Class EditingForm_CompoundSeparator
 
@@ -48,6 +50,8 @@ Public Class EditingForm_CompoundSeparator
                 InspReportBar = Nothing
             End If
         End If
+
+        chkUseEmbeddedImage.Checked = SimObject.UseEmbeddedImage
 
         With SimObject
 
@@ -426,4 +430,29 @@ Public Class EditingForm_CompoundSeparator
         End If
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Image files", New String() {"*.bmp", "*.jpg", "*.png", "*.gif"})})
+
+        If handler IsNot Nothing Then
+            Using str = handler.OpenRead()
+                Using bmp = Bitmap.FromStream(str)
+                    Try
+                        Using img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
+                            SimObject.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png)
+                            MessageBox.Show("Image data read successfully.", "DWSIM", MessageBoxButtons.OK)
+                        End Using
+                    Catch ex As Exception
+                        MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
+                    End Try
+                End Using
+            End Using
+        End If
+    End Sub
+
+    Private Sub chkUseEmbeddedImage_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseEmbeddedImage.CheckedChanged
+        SimObject.UseEmbeddedImage = chkUseEmbeddedImage.Checked
+    End Sub
 End Class

@@ -3692,6 +3692,11 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub CriadorDeComponentesSólidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriadorDeComponentesSólidosToolStripMenuItem.Click
+        Dim fqc As New FormCreateNewSolid()
+        fqc.ShowDialog(Me)
+    End Sub
+
     Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
 
         FormSurface.AnimationTimer.Enabled = Not FormSurface.AnimationTimer.Enabled
