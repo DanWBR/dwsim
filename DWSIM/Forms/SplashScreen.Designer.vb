@@ -71,7 +71,7 @@ Partial Class SplashScreen
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_splash_v7
+        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_splash_v8
         Me.ControlBox = False
         Me.Controls.Add(Me.lblPatrons)
         Me.Controls.Add(Me.Label2)
