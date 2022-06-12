@@ -107,6 +107,8 @@ Public Class EditingForm_WaterElectrolyzer
 
         End With
 
+        Loaded = True
+
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged

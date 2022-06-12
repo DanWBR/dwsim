@@ -90,7 +90,7 @@ Public Class WaterElectrolyzer
         Dim myOC1 As New ConnectionPoint
         myOC1.Position = New Point(x + w, y / 2)
         myOC1.Type = ConType.ConOut
-        myOC1.Direction = ConDir.Left
+        myOC1.Direction = ConDir.Right
 
         With GraphicObject.InputConnectors
             If .Count = 2 Then
@@ -105,7 +105,7 @@ Public Class WaterElectrolyzer
         End With
 
         With GraphicObject.OutputConnectors
-            If .Count = 2 Then
+            If .Count = 1 Then
                 .Item(0).Position = New Point(x + w, y / 2)
             Else
                 .Add(myOC1)
@@ -214,6 +214,12 @@ Public Class WaterElectrolyzer
 
         Dim esin = GetInletEnergyStream(1)
 
+        Dim names = msin.Phases(0).Compounds.Keys.ToList()
+
+        If Not names.Contains("Water") Then Throw New Exception("Needs Water compound")
+        If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound")
+        If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound")
+
         Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
 
         ElectronTransfer = 96485.3365 * Current / NumberOfCells 'mol/s
@@ -231,8 +237,6 @@ Public Class WaterElectrolyzer
         Dim overV = cellV - spO2
 
         WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
-
-        Dim names = msin.Phases(0).Compounds.Keys.ToList()
 
         Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow).ToList()
 

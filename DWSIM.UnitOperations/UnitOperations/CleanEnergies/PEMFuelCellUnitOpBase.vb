@@ -150,12 +150,12 @@ Namespace UnitOperations
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(x + w, y)
             myOC1.Type = ConType.ConOut
-            myOC1.Direction = ConDir.Left
+            myOC1.Direction = ConDir.Right
 
             Dim myOC2 As New ConnectionPoint
             myOC2.Position = New Point(x + w, y + h)
             myOC2.Type = ConType.ConOut
-            myOC2.Direction = ConDir.Left
+            myOC2.Direction = ConDir.Right
             myOC2.Type = ConType.ConEn
 
             With GraphicObject.InputConnectors
