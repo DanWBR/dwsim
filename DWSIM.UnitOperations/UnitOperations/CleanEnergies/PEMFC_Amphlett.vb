@@ -81,14 +81,34 @@ Public Class PEMFC_Amphlett
 
         DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(OPEMPath)
 
+        Dim msin = GetInletMaterialStream(0)
+        Dim msout = GetOutletMaterialStream(0)
+
+        Dim esout = GetOutletEnergyStream(1)
+
+        Dim names = msin.Phases(0).Compounds.Keys.ToList()
+
+        If Not names.Contains("Water") Then Throw New Exception("Needs Water compound")
+        If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound")
+        If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound")
+
+        Dim Pin = msin.GetPressure()
+
+        Dim T = msin.GetTemperature()
+
+        Dim PH2 = msin.Phases(2).Compounds("Hydrogen").MoleFraction.GetValueOrDefault() * Pin / 101325.0
+        Dim PO2 = msin.Phases(2).Compounds("Oxygen").MoleFraction.GetValueOrDefault() * Pin / 101325.0
+
+        Dim results As Object = Nothing
+
         Using Py.GIL
 
             Dim opem As Object = Py.Import("opem.Static.Amphlett")
 
             Dim parameters As New PyDict()
-            parameters("T") = 343.15.ToPython()
-            parameters("PH2") = 1.0.ToPython()
-            parameters("PO2") = 1.0.ToPython()
+            parameters("T") = T.ToPython()
+            parameters("PH2") = PH2.ToPython()
+            parameters("PO2") = PO2.ToPython()
             parameters("i-start") = InputParameters("i-start").Value.ToPython()
             parameters("i-step") = InputParameters("i-step").Value.ToPython()
             parameters("i-stop") = InputParameters("i-stop").Value.ToPython()
@@ -100,27 +120,111 @@ Public Class PEMFC_Amphlett
             parameters("JMax") = InputParameters("JMax").Value.ToPython()
             parameters("Name") = "Amphlett_Test".ToPython()
 
-            'Test_Vector = {"T":  343.15,"PH2": 1,"PO2": 1,"i-start": 0,
-            '"i-stop": 75,"i-step": 0.1,"A": 50.6,"l": 0.0178,
-            '"lambda": 23,"N": 1,"R": 0,"JMax": 1.5,"Name": "Amphlett_Test"}
+            results = opem.Static_Analysis(InputMethod:=parameters.ToPython(), TestMode:=True.ToPython(), PrintMode:=False.ToPython(), ReportMode:=False.ToPython())
 
-            Dim results = opem.Static_Analysis(InputMethod:=parameters.ToPython(), TestMode:=True.ToPython(), PrintMode:=False.ToPython(), ReportMode:=False.ToPython())
-
-            Dim P = ToList(results("P"))
-            Dim I = ToList(results("I"))
-            Dim V = ToList(results("V"))
-            Dim EFF = ToList(results("EFF"))
-            Dim Ph = ToList(results("Ph"))
-            Dim V0 = ToList(results("V0"))
-            Dim K = ToList(results("K"))
-            Dim VE = ToList(results("VE"))
-            Dim Eta_Active = ToList(results("Eta_Active"))
-            Dim Eta_Ohmic = ToList(results("Eta_Ohmic"))
-            Dim Eta_Conc = ToList(results("Eta_Conc"))
-
-            Console.WriteLine(results)
+            If results Is Nothing OrElse results("Status").ToString() = "False" Then
+                Throw New Exception("Calculation error")
+            End If
 
         End Using
+
+        Dim P = ToList(results("P"))
+        Dim I = ToList(results("I"))
+        Dim V = ToList(results("V"))
+        Dim EFF = ToList(results("EFF"))
+        Dim Ph = ToList(results("Ph"))
+        Dim V0 = ToList(results("V0"))
+        Dim K = ToList(results("K"))
+        Dim VE = ToList(results("VE"))
+        Dim Eta_Active = ToList(results("Eta_Active"))
+        Dim Eta_Ohmic = ToList(results("Eta_Ohmic"))
+        Dim Eta_Conc = ToList(results("Eta_Conc"))
+
+        'I: 74.9
+        'Enernst: 1.19075 V
+        'Eta Activation :  0.5564162618842647 V
+        'Eta Concentration :  0.06401178884389878 V
+        'Eta Ohmic :  0.20564684562177526 V
+        'Loss: 0.8260748963499388 V
+        'PEM Efficiency :  0.23376609208337254 
+        'Power: 27.314165263389583 W
+        'Power-Stack :  27.314165263389583 W
+        'Power-Thermal :  64.81283473661043 W
+        'VStack: 0.36467510365006117 V
+        'Vcell: 0.36467510365006117 V
+
+        OutputParameters.Clear()
+        OutputParameters.Add("I", New Auxiliary.PEMFuelCellModelParameter("I", "Cell Operating Current", I.Last(), "A"))
+        OutputParameters.Add("P", New Auxiliary.PEMFuelCellModelParameter("P", "Power", P.Last(), "W"))
+        OutputParameters.Last.Value.ValuesX = I
+        OutputParameters.Last.Value.ValuesY = P
+        OutputParameters.Last.Value.TitleX = "Current"
+        OutputParameters.Last.Value.TitleY = "Power"
+        OutputParameters.Last.Value.UnitsX = "A"
+        OutputParameters.Last.Value.UnitsY = "W"
+        OutputParameters.Add("Ph", New Auxiliary.PEMFuelCellModelParameter("Ph", "Thermal Power", Ph.Last(), "W"))
+        OutputParameters.Last.Value.ValuesX = I
+        OutputParameters.Last.Value.ValuesY = Ph
+        OutputParameters.Last.Value.TitleX = "Current"
+        OutputParameters.Last.Value.TitleY = "Thermal Power"
+        OutputParameters.Last.Value.UnitsX = "A"
+        OutputParameters.Last.Value.UnitsY = "W"
+        OutputParameters.Add("EFF", New Auxiliary.PEMFuelCellModelParameter("EFF", "Efficiency", EFF.Last(), ""))
+        OutputParameters.Last.Value.ValuesX = I
+        OutputParameters.Last.Value.ValuesY = EFF
+        OutputParameters.Last.Value.TitleX = "Current"
+        OutputParameters.Last.Value.TitleY = "Efficiency"
+        OutputParameters.Last.Value.UnitsX = "A"
+        OutputParameters.Last.Value.UnitsY = ""
+        OutputParameters.Add("V", New Auxiliary.PEMFuelCellModelParameter("V", "FC Voltage", V.Last(), "V"))
+        OutputParameters.Last.Value.ValuesX = I
+        OutputParameters.Last.Value.ValuesY = V
+        OutputParameters.Last.Value.TitleX = "Current"
+        OutputParameters.Last.Value.TitleY = "FC Voltage"
+        OutputParameters.Last.Value.UnitsX = "A"
+        OutputParameters.Last.Value.UnitsY = "V"
+        OutputParameters.Add("VE", New Auxiliary.PEMFuelCellModelParameter("VE", "Estimated FC Voltage", VE.Last(), "V"))
+        OutputParameters.Last.Value.ValuesX = I
+        OutputParameters.Last.Value.ValuesY = VE
+        OutputParameters.Last.Value.TitleX = "Current"
+        OutputParameters.Last.Value.TitleY = "Estimated FC Voltage"
+        OutputParameters.Last.Value.UnitsX = "A"
+        OutputParameters.Last.Value.UnitsY = "V"
+
+        Dim Current = I.Last()
+
+        Dim WasteHeat = Ph.Last() / 1000.0 'kW
+
+        Dim ElectronTransfer = Current / 96485.3365 * InputParameters("N").Value 'mol/s
+
+        Dim waterr = ElectronTransfer / 4 * 2 'mol/s
+        Dim h2r = ElectronTransfer / 4 * 2 'mol/s
+        Dim o2r = ElectronTransfer / 4 'mol/s
+
+        Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
+
+        Dim Nf = New List(Of Double)(N0)
+
+        For j As Integer = 0 To N0.Count - 1
+            If names(j) = "Water" Then
+                Nf(j) = N0(j) + waterr
+            ElseIf names(j) = "Hydrogen" Then
+                Nf(j) = N0(j) - h2r
+            ElseIf names(j) = "Oxygen" Then
+                Nf(j) = N0(j) - o2r
+            End If
+        Next
+
+        msout.Clear()
+        msout.ClearAllProps()
+
+        msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
+        msout.SetMolarFlow(Nf.Sum)
+        msout.SetPressure(msin.GetPressure)
+        msout.SetMassEnthalpy(msin.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
+        msout.SetFlashSpec("PH")
+
+        msout.AtEquilibrium = False
 
     End Sub
 

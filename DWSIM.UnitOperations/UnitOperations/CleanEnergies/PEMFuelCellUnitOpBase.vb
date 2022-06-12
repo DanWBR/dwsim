@@ -32,8 +32,6 @@ Namespace UnitOperations.Auxiliary
 
         Public Property UnitsY As String = ""
 
-        Public Property IsSingleValue As Boolean = True
-
         Public Sub New()
 
         End Sub
@@ -226,7 +224,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Function ToList(pythonlist As Object)
+        Public Function ToList(pythonlist As Object) As List(Of Double)
 
             Dim list As New List(Of Double)
 
