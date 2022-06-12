@@ -9,14 +9,17 @@ Namespace UnitOperations
 
         Implements DWSIM.Interfaces.IExternalUnitOperation
 
-        Public Overrides ReadOnly Property IsSource As Boolean
-            Get
-                Return True
-            End Get
-        End Property
+        Public Enum WeatherDataSource
+            UserDefined = 0
+            Flowsheet = 1
+        End Enum
 
-        Private _name = ""
-        Private _desc = ""
+        Public Property UserDefinedWeatherConditions As IWeatherData = New SharedClasses.WeatherData()
+
+        Public Overrides ReadOnly Property IsSource As Boolean = True
+
+        Protected _name = ""
+        Protected _desc = ""
 
         Public Overrides Function GetDisplayName() As String
             Return _name

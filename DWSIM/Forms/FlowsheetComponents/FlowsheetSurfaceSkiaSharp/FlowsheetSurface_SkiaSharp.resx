@@ -120,6 +120,12 @@
   <data name="&gt;&gt;ToolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelFlowsheetControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -129,9 +135,6 @@
   </data>
   <data name="ConectarAToolStripMenuItem.Text" xml:space="preserve">
     <value>Conectar a...</value>
-  </data>
-  <data name="&gt;&gt;SplitContainerHorizontal.Panel1.Parent" xml:space="preserve">
-    <value>SplitContainerHorizontal</value>
   </data>
   <data name="&gt;&gt;SplitContainerHorizontal.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -152,9 +155,6 @@
   <data name="&gt;&gt;DockRightToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SplitContainerHorizontal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="tsbConfigPrinter.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
@@ -173,9 +173,6 @@
   <data name="&gt;&gt;CopyAsImageToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsmiHeatMap.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
   <data name="&gt;&gt;tbFontSize.Name" xml:space="preserve">
     <value>tbFontSize</value>
   </data>
@@ -191,9 +188,8 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Equalizar espaçamento horizontal</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>18, 39, 18, 39</value>
+  <data name="&gt;&gt;PictureBox5.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;ExportarParaPDFToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -201,6 +197,7 @@
   <data name="&gt;&gt;ToolStripContainer1.RightToolStripPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PictureBox5.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -216,8 +213,8 @@
   <data name="PictureBox4.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="PictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;cbWeather.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -258,9 +255,6 @@
   <data name="TSTBZoom.Text" xml:space="preserve">
     <value>100%</value>
   </data>
-  <data name="&gt;&gt;CopiarComoImagem300ToolStripMenuItem.Name" xml:space="preserve">
-    <value>CopiarComoImagem300ToolStripMenuItem</value>
-  </data>
   <data name="&gt;&gt;tbSolarIrradiation.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
@@ -281,9 +275,6 @@
   </data>
   <data name="ToolStripSeparator16.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;ToolStripButton12.Name" xml:space="preserve">
-    <value>ToolStripButton12</value>
   </data>
   <data name="&gt;&gt;ToolStripFlowsheet.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -309,9 +300,6 @@
   <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ToolStripButton19.Text" xml:space="preserve">
-    <value>Tabela Mestra</value>
-  </data>
   <data name="&gt;&gt;ToolStripButton3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -336,14 +324,8 @@
   <data name="ToolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tsbAlignLefts.Text" xml:space="preserve">
-    <value>Alinhar esquerdas</value>
   </data>
   <data name="&gt;&gt;CMS_NoSel.Name" xml:space="preserve">
     <value>CMS_NoSel</value>
@@ -354,17 +336,8 @@
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
   </data>
-  <data name="btnLeft.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbMultiSelectMode.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
   <data name="&gt;&gt;ToolStripSeparator18.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ToolStripButton19.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="CMS_ItemsToDisconnect.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
@@ -373,6 +346,12 @@
     <value>57, 20</value>
   </data>
   <data name="&gt;&gt;SplitAndInsertValveTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbConfigPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ZoomPadrao100ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbSolarIrradiation.ZOrder" xml:space="preserve">
@@ -398,9 +377,6 @@
   </data>
   <data name="&gt;&gt;SplitContainerVertical.Panel1.Parent" xml:space="preserve">
     <value>SplitContainerVertical</value>
-  </data>
-  <data name="ToolStripButton20.Text" xml:space="preserve">
-    <value>Mostrar Tudo</value>
   </data>
   <data name="TSBtabela.Text" xml:space="preserve">
     <value>Inserir Figura</value>
@@ -437,9 +413,6 @@
   </data>
   <data name="FindTearStreamsAutomaticallyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 22</value>
-  </data>
-  <data name="&gt;&gt;SplitContainerVertical.Name" xml:space="preserve">
-    <value>SplitContainerVertical</value>
   </data>
   <data name="SplitContainerVertical.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -486,9 +459,6 @@
   <data name="&gt;&gt;ToolStripContainer1.ContentPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripContentPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tstbSearch.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="TSBTexto.ToolTipText" xml:space="preserve">
     <value>Inserir Caixa de Texto</value>
   </data>
@@ -511,9 +481,6 @@
     <value>0, 0</value>
   </data>
   <data name="&gt;&gt;DesconectarDeToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ClonarToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbWeather.TabIndex" type="System.Int32, mscorlib">
@@ -579,6 +546,9 @@
   <data name="&gt;&gt;ToolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockTopAutoHideToolStripMenuItem</value>
+  </data>
   <data name="tsbAlignTops.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -597,17 +567,14 @@
   <data name="&gt;&gt;tsbResizeMode.Name" xml:space="preserve">
     <value>tsbResizeMode</value>
   </data>
-  <data name="&gt;&gt;CopiarComoImagem300ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="cbWeather.Items3" xml:space="preserve">
     <value>Night</value>
   </data>
   <data name="PreviewDialog.Enabled" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;dckMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripLabel4.Text" xml:space="preserve">
+    <value>Adicionar Objetos com Correntes</value>
   </data>
   <data name="ToolStripMenuItem7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -623,12 +590,6 @@
         iao/E1UHFhRoeFMXF+cpc/79kGJwn99Eh+c+WlxClI0Wo0RdiKtD+UcFj3PPf8pJOLqStEn/D9ZgDDJp
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="tsbResizeModeKeepAR.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tbHumidity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
   </data>
   <data name="CMS_ItemsToConnect.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
@@ -651,9 +612,6 @@
   <data name="ToolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="tsbAlignBottoms.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -666,20 +624,20 @@
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Name" xml:space="preserve">
     <value>DockBottomToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;tsbAlignHorizontal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Cria uma cópia exata do objeto selecionado.</value>
   </data>
-  <data name="tsbPrint.Text" xml:space="preserve">
-    <value>Visualizar e Imprimir Fluxograma</value>
+  <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsbResizeMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="&gt;&gt;ToolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>ToolStripContainer1</value>
   </data>
   <data name="&gt;&gt;HorizontalmenteToolStripMenuItem.Name" xml:space="preserve">
     <value>HorizontalmenteToolStripMenuItem</value>
@@ -729,6 +687,9 @@
   <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripSeparator6.Name" xml:space="preserve">
+    <value>ToolStripSeparator6</value>
+  </data>
   <data name="&gt;&gt;tbSolarIrradiation.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -758,9 +719,6 @@
   </data>
   <data name="&gt;&gt;tsbControlPanelMode.Name" xml:space="preserve">
     <value>tsbControlPanelMode</value>
-  </data>
-  <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>96</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator5.Name" xml:space="preserve">
     <value>ToolStripSeparator5</value>
@@ -828,8 +786,11 @@
   <data name="&gt;&gt;ToolStripSeparator21.Name" xml:space="preserve">
     <value>ToolStripSeparator21</value>
   </data>
-  <data name="tsbMultiSelectMode.Text" xml:space="preserve">
-    <value>Ativar Modo de Multiseleção</value>
+  <data name="tsbResizeModeKeepAR.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;SplitToolStripMenuItem.Name" xml:space="preserve">
+    <value>SplitToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;UpgradeDistillationColumnToProToolStripMenuItem.Name" xml:space="preserve">
     <value>UpgradeDistillationColumnToProToolStripMenuItem</value>
@@ -861,8 +822,8 @@
   <data name="ToolStripSeparator13.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;Timer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;ToolStripLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -873,11 +834,17 @@
   <data name="&gt;&gt;tssepPro2.Name" xml:space="preserve">
     <value>tssepPro2</value>
   </data>
-  <data name="&gt;&gt;SplitContainerHorizontal.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsmiLiveFlow.Text" xml:space="preserve">
+    <value>Live Flow</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Girar</value>
   </data>
   <data name="CMS_NoSel.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;ToolStripButton3.Name" xml:space="preserve">
+    <value>ToolStripButton3</value>
   </data>
   <data name="&gt;&gt;tbSolarIrradiation.Name" xml:space="preserve">
     <value>tbSolarIrradiation</value>
@@ -894,11 +861,8 @@
   <data name="BToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
   </data>
-  <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
-    <value>ToolStripLabel1</value>
-  </data>
-  <data name="&gt;&gt;PictureBox5.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="tbCurrentLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1013, 9</value>
   </data>
   <data name="ToolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -927,11 +891,11 @@
   <data name="&gt;&gt;tsbCutObj.Name" xml:space="preserve">
     <value>tsbCutObj</value>
   </data>
-  <data name="btnGetWeather.Text" xml:space="preserve">
-    <value>Obter Condições</value>
+  <data name="tsbResizeModeKeepAR.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
-  <data name="RecalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 22</value>
+  <data name="ToolStripMenuItem14.Text" xml:space="preserve">
+    <value>-&gt; 270 °</value>
   </data>
   <data name="&gt;&gt;tsmiInvertVertically.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -966,11 +930,8 @@
   <data name="ToolStripContainer1.Text" xml:space="preserve">
     <value>ToolStripContainer1</value>
   </data>
-  <data name="ToolStripMenuItem14.Text" xml:space="preserve">
-    <value>-&gt; 270 °</value>
-  </data>
-  <data name="&gt;&gt;PreviewDialog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PrintPreviewDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CopiarComoImagem200ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copiar como Imagem (200%)</value>
   </data>
   <data name="&gt;&gt;tsbCutObj.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1002,11 +963,17 @@
   <data name="&gt;&gt;ConectarAToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tss2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="&gt;&gt;Timer2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
+  </data>
+  <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Centralizar</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
@@ -1020,11 +987,17 @@
   <data name="&gt;&gt;tsmiInvertVertically.Name" xml:space="preserve">
     <value>tsmiInvertVertically</value>
   </data>
+  <data name="&gt;&gt;PictureBox5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="TableLayoutPanel1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="ClonarToolStripMenuItem.Text" xml:space="preserve">
     <value>Clonar</value>
+  </data>
+  <data name="PanelFlowsheetControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tsbDisplayGrid.ToolTipText" xml:space="preserve">
     <value>Mostrar Grid de Encaixe</value>
@@ -1050,6 +1023,9 @@
   <data name="btnDown.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="ToolStripFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
   <data name="PictureBox3.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -1065,6 +1041,9 @@
   <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
     <value>ToolStripSeparator1</value>
   </data>
+  <data name="tsbAlignMiddles.Text" xml:space="preserve">
+    <value>Alinhar centros</value>
+  </data>
   <data name="&gt;&gt;ToolStripButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1074,14 +1053,14 @@
   <data name="&gt;&gt;ToolStripButton2.Name" xml:space="preserve">
     <value>ToolStripButton2</value>
   </data>
-  <data name="PictureBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator17.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockTopToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1128,14 +1107,11 @@
   <data name="DockBottomToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;SplitContainerHorizontal.Panel2.Parent" xml:space="preserve">
-    <value>SplitContainerHorizontal</value>
+  <data name="&gt;&gt;btnGetWeather.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;SplitContainerHorizontal.Name" xml:space="preserve">
     <value>SplitContainerHorizontal</value>
-  </data>
-  <data name="cbWeather.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStripMenuItem11.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1155,6 +1131,9 @@
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1020, 25</value>
   </data>
+  <data name="&gt;&gt;tstbSearch.Name" xml:space="preserve">
+    <value>tstbSearch</value>
+  </data>
   <data name="tsbCutObj.Text" xml:space="preserve">
     <value>Cortar objetos selecionados</value>
   </data>
@@ -1167,17 +1146,14 @@
   <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
     <value>Document</value>
   </data>
-  <data name="dckMenu.ToolTip" xml:space="preserve">
-    <value />
+  <data name="ToolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem14.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnRight.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1188,9 +1164,6 @@
   <data name="btnGetLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="MergeStreamsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 22</value>
-  </data>
   <data name="tsbAlignCenters.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
@@ -1199,9 +1172,6 @@
   </data>
   <data name="&gt;&gt;ToolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
     <value>ToolStripContainer1</value>
-  </data>
-  <data name="CopiarComoImagem200ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copiar como Imagem (200%)</value>
   </data>
   <data name="&gt;&gt;ConectarAToolStripMenuItem.Name" xml:space="preserve">
     <value>ConectarAToolStripMenuItem</value>
@@ -1233,11 +1203,17 @@
   <data name="&gt;&gt;ToolStripContainer1.BottomToolStripPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItem13.Name" xml:space="preserve">
+    <value>ToolStripMenuItem13</value>
+  </data>
   <data name="tbFontSize.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="&gt;&gt;ToolStripLabel4.Name" xml:space="preserve">
     <value>ToolStripLabel4</value>
+  </data>
+  <data name="PictureBox1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1290,6 +1266,9 @@
   <data name="SplitContainerHorizontal.Panel1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Right Auto-Hide</value>
+  </data>
   <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Bottom</value>
   </data>
@@ -1304,9 +1283,6 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="cbWeather.Items1" xml:space="preserve">
     <value>Day - Cloudy</value>
@@ -1331,6 +1307,12 @@
   </data>
   <data name="&gt;&gt;tsbMultiSelectMode.Name" xml:space="preserve">
     <value>tsbMultiSelectMode</value>
+  </data>
+  <data name="tss1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsbAlignLefts.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -1422,11 +1404,14 @@
   <data name="RestaurarLayoutToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;btnDown.Name" xml:space="preserve">
-    <value>btnDown</value>
+  <data name="&gt;&gt;TSBTexto.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStripContainer1.BottomToolStripPanel.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Misturar Correntes</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 213</value>
@@ -1440,14 +1425,11 @@
   <data name="PictureBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
   </data>
-  <data name="&gt;&gt;tsbAlignRights.Name" xml:space="preserve">
-    <value>tsbAlignRights</value>
+  <data name="&gt;&gt;SplitContainerHorizontal.Panel2.Parent" xml:space="preserve">
+    <value>SplitContainerHorizontal</value>
   </data>
   <data name="&gt;&gt;PictureBox2.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator20.Name" xml:space="preserve">
-    <value>ToolStripSeparator20</value>
   </data>
   <data name="btnLeft.ToolTip" xml:space="preserve">
     <value />
@@ -1479,14 +1461,14 @@
   <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Left Auto-Hide</value>
   </data>
-  <data name="&gt;&gt;LayoutAutomaticoToolStripMenuItem.Name" xml:space="preserve">
-    <value>LayoutAutomaticoToolStripMenuItem</value>
-  </data>
   <data name="&gt;&gt;tsbAlignBottoms.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
     <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;tsmiLiveFlow.Name" xml:space="preserve">
+    <value>tsmiLiveFlow</value>
   </data>
   <data name="ToolStrip1.Text" xml:space="preserve">
     <value>ToolStrip1</value>
@@ -1656,11 +1638,8 @@
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>Fluxograma</value>
   </data>
-  <data name="&gt;&gt;PictureBox5.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="ToolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+  <data name="&gt;&gt;btnDown.Name" xml:space="preserve">
+    <value>btnDown</value>
   </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1710,6 +1689,9 @@
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tsbPrint.Text" xml:space="preserve">
+    <value>Visualizar e Imprimir Fluxograma</value>
+  </data>
   <data name="&gt;&gt;ToolStripButton5.Name" xml:space="preserve">
     <value>ToolStripButton5</value>
   </data>
@@ -1719,8 +1701,8 @@
   <data name="CopyFromTSMI.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;CopiarComoImagem200ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsbMultiSelectMode.Text" xml:space="preserve">
+    <value>Ativar Modo de Multiseleção</value>
   </data>
   <data name="&gt;&gt;CMS_Palette.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1739,6 +1721,9 @@
   </data>
   <data name="SplitContainerHorizontal.Panel2.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="tsbPasteObj.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;btnUp.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -1788,17 +1773,11 @@
   <data name="EditAppearanceToolStripMenuItem.Text" xml:space="preserve">
     <value>Editar Aparência</value>
   </data>
-  <data name="PreviewDialog.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="PanelFlowsheetControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="&gt;&gt;CopiarComoImagem200ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1808,6 +1787,9 @@
   </data>
   <data name="&gt;&gt;CMS_Palette.Name" xml:space="preserve">
     <value>CMS_Palette</value>
+  </data>
+  <data name="ConectarAToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 22</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 25</value>
@@ -1824,14 +1806,17 @@
   <data name="tsmiLiveFlow.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 22</value>
   </data>
+  <data name="&gt;&gt;tss2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ToolStripLabel3.Text" xml:space="preserve">
     <value>Tema de Cores</value>
   </data>
   <data name="tsbAlignCenters.Text" xml:space="preserve">
     <value>Alinhar centros</value>
   </data>
-  <data name="&gt;&gt;SplitToolStripMenuItem.Name" xml:space="preserve">
-    <value>SplitToolStripMenuItem</value>
+  <data name="&gt;&gt;PreviewDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PrintPreviewDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PictureBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1854,9 +1839,6 @@
   <data name="ToolStripFlowsheet.Text" xml:space="preserve">
     <value>Fluxograma</value>
   </data>
-  <data name="SplitContainerVertical.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;ToolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1869,14 +1851,14 @@
   <data name="tsbAlignRights.Text" xml:space="preserve">
     <value>Alinhar direitas</value>
   </data>
-  <data name="btnDown.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="&gt;&gt;ToolStripButton20.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsbControlPanelMode.Text" xml:space="preserve">
     <value>Modo Painel de Controle</value>
+  </data>
+  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="PreviewDialog.ToolTip" xml:space="preserve">
     <value />
@@ -1920,9 +1902,6 @@
   <data name="tsbCopyObj.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="SplitAndInsertRecycleMenuItem.Text" xml:space="preserve">
-    <value>Dividir Corrente e Inserir Reciclo</value>
-  </data>
   <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 22</value>
   </data>
@@ -1941,17 +1920,14 @@
   <data name="PictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;SplitContainerVertical.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="ToolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="ClonarToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>White</value>
   </data>
-  <data name="ToolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+  <data name="&gt;&gt;PictureBox3.Name" xml:space="preserve">
+    <value>PictureBox3</value>
   </data>
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
@@ -1974,11 +1950,11 @@
   <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 26</value>
   </data>
+  <data name="ToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
   <data name="ToolStripFlowsheet.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="ExportarParaSVGToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exportar para SVG</value>
   </data>
   <data name="TableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2004,14 +1980,17 @@
   <data name="tsbAlignTops.Text" xml:space="preserve">
     <value>Alinhar topos</value>
   </data>
-  <data name="&gt;&gt;tsbConfigPage.Name" xml:space="preserve">
-    <value>tsbConfigPage</value>
+  <data name="&gt;&gt;ToolStripButton12.Name" xml:space="preserve">
+    <value>ToolStripButton12</value>
   </data>
   <data name="&gt;&gt;btnDown.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
   <data name="tscbAddObjectsWithStreams.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator8.Name" xml:space="preserve">
+    <value>ToolStripSeparator8</value>
   </data>
   <data name="&gt;&gt;PictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2033,6 +2012,9 @@
   </data>
   <data name="&gt;&gt;tsbSnapObjectsToGrid.Name" xml:space="preserve">
     <value>tsbSnapObjectsToGrid</value>
+  </data>
+  <data name="btnGetWeather.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;tsbAlignVertical.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2064,17 +2046,14 @@
   <data name="&gt;&gt;AtivadoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tbCurrentLocation.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
   <data name="&gt;&gt;HorizontalmenteToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbHumidity.Parent" xml:space="preserve">
     <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;TSBTexto.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TSTBZoom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 22</value>
@@ -2085,8 +2064,8 @@
   <data name="CentralizarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 22</value>
   </data>
-  <data name="ToolStripLabel4.Text" xml:space="preserve">
-    <value>Adicionar Objetos com Correntes</value>
+  <data name="&gt;&gt;tsbAlignHorizontal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbWeather.Items" xml:space="preserve">
     <value>Day - Sunny</value>
@@ -2099,9 +2078,6 @@
   </data>
   <data name="&gt;&gt;tbAmbientTemperature.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tbCurrentLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1013, 9</value>
   </data>
   <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 6</value>
@@ -2148,14 +2124,14 @@
   <data name="&gt;&gt;SplitAndInsertRecycleMenuItem.Name" xml:space="preserve">
     <value>SplitAndInsertRecycleMenuItem</value>
   </data>
-  <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1291, 279</value>
   </data>
   <data name="ZoomPadrao100ToolStripMenuItem.Text" xml:space="preserve">
     <value>Zoom Padrão</value>
+  </data>
+  <data name="dckMenu.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;tsbAlignCenters.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2184,8 +2160,8 @@
   <data name="ToolStripButton12.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ConectarAToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 22</value>
+  <data name="Panel1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnGetWeather.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -2205,8 +2181,14 @@
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 6</value>
   </data>
+  <data name="&gt;&gt;DockTopToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockTopToolStripMenuItem</value>
+  </data>
   <data name="btnUp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>18, 39, 18, 39</value>
   </data>
   <data name="CMS_Sel.ToolTip" xml:space="preserve">
     <value />
@@ -2222,6 +2204,9 @@
   </data>
   <data name="PictureBox3.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;CMS_ItemsToConnect.Name" xml:space="preserve">
+    <value>CMS_ItemsToConnect</value>
   </data>
   <data name="SplitAndInsertRecycleMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 22</value>
@@ -2259,11 +2244,17 @@
   <data name="&gt;&gt;ToolStripSeparator18.Name" xml:space="preserve">
     <value>ToolStripSeparator18</value>
   </data>
-  <data name="CopiarComoImagem300ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copiar como Imagem (300%)</value>
+  <data name="&gt;&gt;ToolStripButton20.Name" xml:space="preserve">
+    <value>ToolStripButton20</value>
+  </data>
+  <data name="&gt;&gt;tstbSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiInvertVertically.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 22</value>
+  </data>
+  <data name="&gt;&gt;ToolStripFlowsheet.Name" xml:space="preserve">
+    <value>ToolStripFlowsheet</value>
   </data>
   <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockLeftAutoHideToolStripMenuItem</value>
@@ -2271,8 +2262,8 @@
   <data name="&gt;&gt;ExibirTudoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbWeather.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="MergeStreamsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 22</value>
   </data>
   <data name="&gt;&gt;SplitAndInsertValveTSMI.Name" xml:space="preserve">
     <value>SplitAndInsertValveTSMI</value>
@@ -2289,6 +2280,12 @@
   <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
     <value>ToolStripMenuItem1</value>
   </data>
+  <data name="tsbControlPanelMode.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;designSurfacePrintDocument.Name" xml:space="preserve">
+    <value>designSurfacePrintDocument</value>
+  </data>
   <data name="&gt;&gt;ToolStripContainer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -2298,8 +2295,8 @@
   <data name="&gt;&gt;ToolStripMenuItem12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripMenuItem3.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="SplitContainerVertical.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;DockLeftToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2307,13 +2304,13 @@
   <data name="&gt;&gt;SplitAndInsertRecycleMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbCurrentLocation.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Right Auto-Hide</value>
+  <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
+    <value>ToolStripLabel1</value>
   </data>
   <data name="tsbConfigPrinter.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsmiLiveFlow.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
@@ -2346,23 +2343,26 @@
   <data name="&gt;&gt;ToolStripSeparator15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbResizeModeKeepAR.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="tstbSearch.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="ToolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
   </data>
+  <data name="&gt;&gt;btnGetLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tbWindSpeed.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator6.Name" xml:space="preserve">
-    <value>ToolStripSeparator6</value>
+  <data name="PictureBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tsbConfigPage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="btnGetWeather.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;tsbAlignRights.Name" xml:space="preserve">
+    <value>tsbAlignRights</value>
   </data>
   <data name="tsbAlignHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -2373,11 +2373,11 @@
   <data name="PictureBox3.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="tsmiLiveFlow.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;TSTBZoom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbPasteObj.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;CopiarComoImagem300ToolStripMenuItem.Name" xml:space="preserve">
+    <value>CopiarComoImagem300ToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tsbPasteObj.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2388,14 +2388,17 @@
   <data name="SplitContainerVertical.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
   <data name="cbWeather.Items2" xml:space="preserve">
     <value>Day - Rainy</value>
   </data>
-  <data name="ToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+  <data name="&gt;&gt;CopiarComoImagem300ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tstbSearch.Name" xml:space="preserve">
-    <value>tstbSearch</value>
+  <data name="&gt;&gt;SplitContainerVertical.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 7</value>
@@ -2409,8 +2412,8 @@
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="tss1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+  <data name="&gt;&gt;tsbConfigPage.Name" xml:space="preserve">
+    <value>tsbConfigPage</value>
   </data>
   <data name="ToolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
@@ -2466,11 +2469,11 @@
   <data name="ToolStripButton19.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="PictureBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="ToolStripButton20.Text" xml:space="preserve">
+    <value>Mostrar Tudo</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ExportarParaSVGToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exportar para SVG</value>
   </data>
   <data name="&gt;&gt;tscbAddObjectsWithStreams.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2496,17 +2499,17 @@
   <data name="tbAmbientTemperature.Text" xml:space="preserve">
     <value>30</value>
   </data>
-  <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Centralizar</value>
+  <data name="cbWeather.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="tsbControlPanelMode.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="tbHumidity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DepurarObjetoToolStripMenuItem.Name" xml:space="preserve">
-    <value>DepurarObjetoToolStripMenuItem</value>
+  <data name="PictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2517,8 +2520,8 @@
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Diminuir Zoom</value>
   </data>
-  <data name="&gt;&gt;tsbConfigPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnDown.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;tsbAlignCenters.Name" xml:space="preserve">
     <value>tsbAlignCenters</value>
@@ -2559,12 +2562,6 @@
   <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
   </data>
-  <data name="&gt;&gt;tss1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
-    <value>ToolStripContainer1</value>
-  </data>
   <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -2592,11 +2589,11 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="&gt;&gt;SplitContainerVertical.Name" xml:space="preserve">
+    <value>SplitContainerVertical</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton3.Name" xml:space="preserve">
-    <value>ToolStripButton3</value>
+  <data name="&gt;&gt;ToolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
+    <value>ToolStripContainer1</value>
   </data>
   <data name="&gt;&gt;tsbResizeModeKeepAR.Name" xml:space="preserve">
     <value>tsbResizeModeKeepAR</value>
@@ -2610,8 +2607,8 @@
   <data name="&gt;&gt;ToolStripButton4.Name" xml:space="preserve">
     <value>ToolStripButton4</value>
   </data>
-  <data name="tsmiLiveFlow.Text" xml:space="preserve">
-    <value>Live Flow</value>
+  <data name="&gt;&gt;SplitContainerHorizontal.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnGetLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -2637,11 +2634,11 @@
   <data name="&gt;&gt;ToolStripSeparator13.Name" xml:space="preserve">
     <value>ToolStripSeparator13</value>
   </data>
+  <data name="RecalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 22</value>
+  </data>
   <data name="btnRight.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="ToolStripFlowsheet.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2661,8 +2658,8 @@
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1291, 40</value>
   </data>
-  <data name="&gt;&gt;ToolStripFlowsheet.Name" xml:space="preserve">
-    <value>ToolStripFlowsheet</value>
+  <data name="tsmiHeatMap.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
     <value>100</value>
@@ -2713,11 +2710,11 @@
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
   </data>
-  <data name="&gt;&gt;PictureBox3.Name" xml:space="preserve">
-    <value>PictureBox3</value>
+  <data name="&gt;&gt;ToolStripSeparator20.Name" xml:space="preserve">
+    <value>ToolStripSeparator20</value>
   </data>
-  <data name="&gt;&gt;tss2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripButton19.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>1291, 419</value>
@@ -2725,11 +2722,14 @@
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItem12.Name" xml:space="preserve">
+    <value>ToolStripMenuItem12</value>
+  </data>
   <data name="&gt;&gt;ToolStripLabel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DockTopToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockTopToolStripMenuItem</value>
+  <data name="&gt;&gt;ClonarToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TSBtabela.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2743,8 +2743,8 @@
   <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnGetWeather.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="tsbMultiSelectMode.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="RecalcularToolStripMenuItem.Text" xml:space="preserve">
     <value>Recalcular</value>
@@ -2776,11 +2776,11 @@
   <data name="SplitContainerVertical.Panel2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Girar</value>
+  <data name="SplitAndInsertRecycleMenuItem.Text" xml:space="preserve">
+    <value>Dividir Corrente e Inserir Reciclo</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator8.Name" xml:space="preserve">
-    <value>ToolStripSeparator8</value>
+  <data name="ToolStripFlowsheet.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
     <value>ToolStripSeparator2</value>
@@ -2803,8 +2803,8 @@
   <data name="&gt;&gt;ToolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
     <value>ToolStripContainer1.TopToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;tbCurrentLocation.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="tsbAlignLefts.Text" xml:space="preserve">
+    <value>Alinhar esquerdas</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -2824,14 +2824,14 @@
   <data name="&gt;&gt;ToolStripButton19.Name" xml:space="preserve">
     <value>ToolStripButton19</value>
   </data>
-  <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockTopAutoHideToolStripMenuItem</value>
+  <data name="&gt;&gt;tbCurrentLocation.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+  <data name="&gt;&gt;LayoutAutomaticoToolStripMenuItem.Name" xml:space="preserve">
+    <value>LayoutAutomaticoToolStripMenuItem</value>
   </data>
-  <data name="PanelFlowsheetControl.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;dckMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -2845,23 +2845,23 @@
   <data name="tsbAlignRights.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnGetWeather.Text" xml:space="preserve">
+    <value>Obter Condições</value>
   </data>
   <data name="btnUp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="&gt;&gt;tstbSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;ToolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>ToolStripContainer1</value>
+  <data name="&gt;&gt;SplitContainerHorizontal.Panel1.Parent" xml:space="preserve">
+    <value>SplitContainerHorizontal</value>
   </data>
   <data name="SplitContainerVertical.Panel1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;designSurfacePrintDocument.Name" xml:space="preserve">
-    <value>designSurfacePrintDocument</value>
+  <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>96</value>
   </data>
   <data name="&gt;&gt;SplitContainerHorizontal.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2878,11 +2878,11 @@
   <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 6</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem12.Name" xml:space="preserve">
-    <value>ToolStripMenuItem12</value>
+  <data name="&gt;&gt;tss1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton20.Name" xml:space="preserve">
-    <value>ToolStripButton20</value>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2917,8 +2917,8 @@
   <data name="&gt;&gt;tbAmbientTemperature.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tsbAlignMiddles.Text" xml:space="preserve">
-    <value>Alinhar centros</value>
+  <data name="ToolStripMenuItem3.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="tbSolarIrradiation.Location" type="System.Drawing.Point, System.Drawing">
     <value>586, 9</value>
@@ -2926,8 +2926,8 @@
   <data name="&gt;&gt;tsbAlignLefts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tss2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+  <data name="TableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="ToolStripContainer1.LeftToolStripPanel.ToolTip" xml:space="preserve">
     <value />
@@ -2935,8 +2935,8 @@
   <data name="tsbAlignRights.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="&gt;&gt;tsmiLiveFlow.Name" xml:space="preserve">
-    <value>tsmiLiveFlow</value>
+  <data name="&gt;&gt;SplitContainerHorizontal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TSMI_Label.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2965,8 +2965,8 @@
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 6</value>
   </data>
-  <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Misturar Correntes</value>
+  <data name="CopiarComoImagem300ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copiar como Imagem (300%)</value>
   </data>
   <data name="DesconectarDeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 22</value>
@@ -2977,11 +2977,11 @@
   <data name="ToolStripButton17.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem13.Name" xml:space="preserve">
-    <value>ToolStripMenuItem13</value>
+  <data name="ToolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
-  <data name="&gt;&gt;CMS_ItemsToConnect.Name" xml:space="preserve">
-    <value>CMS_ItemsToConnect</value>
+  <data name="PreviewDialog.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 224</value>
@@ -3007,8 +3007,8 @@
   <data name="&gt;&gt;PictureBox3.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;ZoomPadrao100ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;DepurarObjetoToolStripMenuItem.Name" xml:space="preserve">
+    <value>DepurarObjetoToolStripMenuItem</value>
   </data>
   <data name="tsbSnapObjectsToGrid.ToolTipText" xml:space="preserve">
     <value>Encaixar na Grade</value>
@@ -3022,8 +3022,8 @@
   <data name="&gt;&gt;tsbAlignTops.Name" xml:space="preserve">
     <value>tsbAlignTops</value>
   </data>
-  <data name="&gt;&gt;btnGetLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripButton19.Text" xml:space="preserve">
+    <value>Tabela Mestra</value>
   </data>
   <data name="tbSolarIrradiation.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3031,8 +3031,8 @@
   <data name="&gt;&gt;ToolStripMenuItem11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+  <data name="btnLeft.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ToolStripContainer1.TopToolStripPanel.ToolTip" xml:space="preserve">
     <value />

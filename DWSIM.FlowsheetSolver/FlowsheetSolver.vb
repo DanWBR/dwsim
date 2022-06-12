@@ -884,6 +884,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     lists(0).Add(baseobj.Name)
                 ElseIf baseobj.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle Then
                     lists(0).Add(baseobj.Name)
+                ElseIf baseobj.IsSource Then
+                    lists(0).Add(baseobj.Name)
                 End If
             Next
 
