@@ -7,12 +7,17 @@ Public Class PEMFC_LarminieDicks
 
     Public Overrides Property Prefix As String = "FCA-"
 
+    Public Overrides Function GetDisplayName() As String
+        Return "PEM Fuel Cell (Larminie-Dicks)"
+    End Function
+
+    Public Overrides Function GetDisplayDescription() As String
+        Return "PEM Fuel Cell (OPEM Larminie-Dicks Static Model)"
+    End Function
+
     Public Sub New()
 
         MyBase.New()
-
-        _name = "PEM Fuel Cell (Larminie-Dicks)"
-        _desc = "PEM Fuel Cell (OPEM Larminie-Dicks Static Model)"
 
     End Sub
 

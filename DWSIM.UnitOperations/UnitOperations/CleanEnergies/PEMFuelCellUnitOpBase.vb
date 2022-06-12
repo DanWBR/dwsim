@@ -81,23 +81,16 @@ Namespace UnitOperations
             End Get
         End Property
 
-        Public Overrides Function GetDisplayName() As String
-            Return _name
-        End Function
 
-        Public Overrides Function GetDisplayDescription() As String
-            Return _desc
-        End Function
+        Public Overrides Property ComponentName As String = GetDisplayName()
 
-        Public Overrides Property ComponentName As String = _name
+        Public Overrides Property ComponentDescription As String = GetDisplayDescription()
 
-        Public Overrides Property ComponentDescription As String = _desc
-
-        Private ReadOnly Property IExternalUnitOperation_Name As String = _name Implements IExternalUnitOperation.Name
+        Private ReadOnly Property IExternalUnitOperation_Name As String = GetDisplayName() Implements IExternalUnitOperation.Name
 
         Public MustOverride Property Prefix As String Implements IExternalUnitOperation.Prefix
 
-        Public ReadOnly Property Description As String = _desc Implements IExternalUnitOperation.Description
+        Public ReadOnly Property Description As String = GetDisplayDescription() Implements IExternalUnitOperation.Description
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.CleanPowerSources
 

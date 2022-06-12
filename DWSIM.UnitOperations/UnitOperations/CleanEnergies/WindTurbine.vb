@@ -15,12 +15,17 @@ Public Class WindTurbine
 
     Public Overrides Property Prefix As String = "WT-"
 
+    Public Overrides Function GetDisplayName() As String
+        Return "Wind Turbine"
+    End Function
+
+    Public Overrides Function GetDisplayDescription() As String
+        Return "Wind Turbine"
+    End Function
+
     Public Sub New()
 
         MyBase.New()
-
-        _name = "Wind Turbine"
-        _desc = "Wind Turbine"
 
     End Sub
 

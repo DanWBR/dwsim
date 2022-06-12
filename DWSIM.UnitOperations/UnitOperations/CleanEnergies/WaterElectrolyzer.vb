@@ -15,6 +15,14 @@ Public Class WaterElectrolyzer
 
     <Xml.Serialization.XmlIgnore> Public f As EditingForm_WaterElectrolyzer
 
+    Public Overrides Function GetDisplayName() As String
+        Return "Water Electrolyzer"
+    End Function
+
+    Public Overrides Function GetDisplayDescription() As String
+        Return "Water Electrolyzer"
+    End Function
+
     Public Overrides Property Prefix As String = "WE-"
 
     Public Property Voltage As Double
@@ -32,9 +40,6 @@ Public Class WaterElectrolyzer
     Public Sub New()
 
         MyBase.New()
-
-        _name = "Water Electrolyzer"
-        _desc = "Water Electrolyzer"
 
     End Sub
 
@@ -76,7 +81,7 @@ Public Class WaterElectrolyzer
 
         Dim myIC1 As New ConnectionPoint
 
-        myIC1.Position = New Point(x, y / 2)
+        myIC1.Position = New Point(x, y + h / 2)
         myIC1.Type = ConType.ConIn
         myIC1.Direction = ConDir.Right
 
@@ -94,7 +99,7 @@ Public Class WaterElectrolyzer
 
         With GraphicObject.InputConnectors
             If .Count = 2 Then
-                .Item(0).Position = New Point(x, y / 2)
+                .Item(0).Position = New Point(x, y + h / 2)
                 .Item(1).Position = New Point(x + 0.5 * w, y + h)
             Else
                 .Add(myIC1)
@@ -106,7 +111,7 @@ Public Class WaterElectrolyzer
 
         With GraphicObject.OutputConnectors
             If .Count = 1 Then
-                .Item(0).Position = New Point(x + w, y / 2)
+                .Item(0).Position = New Point(x + w, y + h / 2)
             Else
                 .Add(myOC1)
             End If
@@ -222,7 +227,7 @@ Public Class WaterElectrolyzer
 
         Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
 
-        ElectronTransfer = 96485.3365 * Current / NumberOfCells 'mol/s
+        ElectronTransfer = Current / 96485.3365 * NumberOfCells 'mol/s
 
         Dim waterr = ElectronTransfer / 4 * 2 'mol/s
         Dim h2r = ElectronTransfer / 4 * 2 'mol/s
@@ -238,7 +243,7 @@ Public Class WaterElectrolyzer
 
         WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
 
-        Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow).ToList()
+        Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
 
         Dim Nf = New List(Of Double)(N0)
 

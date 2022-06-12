@@ -2306,6 +2306,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                             obj.CreateConnectors(0, 0)
                             obj.Owner = Nothing
                             DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
+                        Else
+                            Try
+                                obj.CreateConnectors(0, 0)
+                            Catch ex As Exception
+                            End Try
                         End If
                     Else
                         If obj.Name = "" Then obj.Name = obj.Tag
@@ -2984,6 +2989,12 @@ Label_00CC:
 
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
 
+        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+        Dim euolist As List(Of Interfaces.IExternalUnitOperation) = SharedClasses.Utility.GetUnitOperations(unitopassembly)
+
+        otheruos.AddRange(euolist)
+
         For Each uo In otheruos
             If Not ExternalUnitOperations.ContainsKey(uo.Description) Then
                 ExternalUnitOperations.Add(uo.Description, uo)
@@ -3056,7 +3067,8 @@ Label_00CC:
 
             Dim aTypeList As New List(Of Type)
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing And
+                                                                   Not x.IsAbstract And x.GetInterface("DWSIM.Interfaces.IExternalUnitOperation") Is Nothing, True, False)))
 
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then

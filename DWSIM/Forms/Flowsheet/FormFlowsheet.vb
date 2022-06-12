@@ -617,8 +617,11 @@ Public Class FormFlowsheet
         If Not FormMain.IsPro And My.Settings.ShowWhatsNew Then
             Task.Delay(5000).ContinueWith(Sub(t)
                                               UIThread(Sub()
-                                                           Dim fwn As New FormWhatsNew()
-                                                           fwn.ShowDialog(Me)
+                                                           Try
+                                                               Dim fwn As New FormWhatsNew()
+                                                               fwn.ShowDialog(Me)
+                                                           Catch ex As Exception
+                                                           End Try
                                                        End Sub)
                                           End Sub)
         End If

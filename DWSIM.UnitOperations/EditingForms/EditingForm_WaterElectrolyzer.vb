@@ -91,6 +91,7 @@ Public Class EditingForm_WaterElectrolyzer
 
             'input parameters
 
+            gridInput.Rows.Clear()
             gridInput.Rows.Add(New Object() {"Total Voltage", .Voltage.ToString(nf), "V"})
             gridInput.Rows.Add(New Object() {"Number of Cells", .NumberOfCells, ""})
 
@@ -98,6 +99,7 @@ Public Class EditingForm_WaterElectrolyzer
 
             If .Calculated Then
 
+                gridOutput.Rows.Clear()
                 gridOutput.Rows.Add(New Object() {"Cell Voltage", .CellVoltage.ToString(nf), "V"})
                 gridOutput.Rows.Add(New Object() {"Current", .Current.ToString(nf), "A"})
                 gridOutput.Rows.Add(New Object() {"Electron Transfer", .ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow})

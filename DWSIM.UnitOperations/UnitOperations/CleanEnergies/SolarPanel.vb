@@ -15,12 +15,17 @@ Public Class SolarPanel
 
     Public Overrides Property Prefix As String = "SP-"
 
+    Public Overrides Function GetDisplayName() As String
+        Return "Solar Panel"
+    End Function
+
+    Public Overrides Function GetDisplayDescription() As String
+        Return "Solar Panel"
+    End Function
+
     Public Sub New()
 
         MyBase.New()
-
-        _name = "Solar Panel"
-        _desc = "Solar Panel"
 
     End Sub
 

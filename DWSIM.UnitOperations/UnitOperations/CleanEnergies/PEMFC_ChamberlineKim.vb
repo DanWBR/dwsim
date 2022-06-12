@@ -7,12 +7,17 @@ Public Class PEMFC_ChamberLineKim
 
     Public Overrides Property Prefix As String = "FCA-"
 
+    Public Overrides Function GetDisplayName() As String
+        Return "PEM Fuel Cell (Chamberline-Kim)"
+    End Function
+
+    Public Overrides Function GetDisplayDescription() As String
+        Return "PEM Fuel Cell (OPEM Chamberline-Kim Static Model)"
+    End Function
+
     Public Sub New()
 
         MyBase.New()
-
-        _name = "PEM Fuel Cell (Chamberline-Kim)"
-        _desc = "PEM Fuel Cell (OPEM Chamberline-Kim Static Model)"
 
     End Sub
 
