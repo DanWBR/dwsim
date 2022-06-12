@@ -14,6 +14,8 @@ Namespace UnitOperations.Auxiliary
 
         Public Property Name As String = ""
 
+        Public Property Description As String = ""
+
         Public Property Value As Double
 
         Public Property Units As String = ""
@@ -36,11 +38,12 @@ Namespace UnitOperations.Auxiliary
 
         End Sub
 
-        Public Sub New(_name As String, _value As Double, _units As String)
+        Public Sub New(_name As String, _description As String, _value As Double, _units As String)
 
             Name = _name
             Value = _value
             Units = _units
+            Description = _description
 
         End Sub
 
@@ -70,6 +73,8 @@ Namespace UnitOperations
 
         Protected _name = ""
         Protected _desc = ""
+
+        Public Property OPEMPath As String = "C:\python_opem\python-3.9.4.amd64"
 
         Public Property InputParameters As Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter) = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
 
@@ -218,6 +223,18 @@ Namespace UnitOperations
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             Return elements
+
+        End Function
+
+        Public Function ToList(pythonlist As Object)
+
+            Dim list As New List(Of Double)
+
+            For i As Integer = 0 To pythonlist.Length - 1
+                list.Add(pythonlist(i))
+            Next
+
+            Return list
 
         End Function
 

@@ -118,6 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1231, 210</value>
+  </data>
+  <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 204</value>
+  </data>
+  <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 243</value>
+  </data>
+  <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 204</value>
+  </data>
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1291, 270</value>
+  </data>
   <data name="tbAtmPress.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
   </data>
@@ -154,6 +169,13 @@
   </data>
   <data name="PictureBox2.ToolTip" xml:space="preserve">
     <value>Wind Speed</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 270</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
+    <value>310</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -296,16 +318,16 @@
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAISSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x8nbxVMNKCIILg4
-        db2bRBShky2KIojDDQ7+aeLgIuVcFE5Ql1IkttTrWdPkLEmb17yAB+cg6Ok1LsXCz987Eivpi7V6bveB
-        L+/By+/ze3m/2A7bhuYeljRHLDep4DYd4Y7uCidN8+Bu//jvGYpFCKdBDm3g+lh3hLnWmrTHL/kzfifm
-        xpwdNLtiDfd5wzk662tGmVgcDjZhz+frhvw3cUCDSCmNilnWRKVinyvhZZyYBxsYNspoVChW35zweOIb
-        z6/AgZw6mMq9sxLKt/n9ytfJhpwq9KT4VZvsO1eFdK4CZ5RFeFA5C9efXYP0pSrEL9Zh+uZ7SMo9SCoe
-        JBc+DBKyV0vIvXy64EUPmYlnCpvlrSIWeROmF9Zh6rIJ8QvLP8UJxReHwprgOvpkI2JeZJYJxQH4hin8
-        KMua7C187IcFURkr5sEGhkUZvG1x5n7P+1UY5NTiZ7j9pP299Nqw3rbpfKu1NtmQV21XUhsaearW4W7J
-        gvNL63Dk4Rc4/egT3CuZ8KKyAjXdBKPjgGFTMExz0LS6NdznDcuJHjITY1F5qwijo2B51YKXKzpK60Ox
-        fx4Oa6ITd/TJwuLIBDcOJVIc0CIkpXdoljWp2LTPk/AyVsyDDcywnYzRocWGTTa2TcxDVdVd+FfHUXpL
-        s7sE11d6u3vMP97hX4nFfgDqr+nexgrDLgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
+        dfUmEUXoZIuiCCLo4OCfJg4uUs7lBgV1KUVyLfV61jQ5S9LmNS/gQRdBT69xKRZ+/t6RWElfrNVzuw98
+        eQ9efp/fy/vFdtg2NPewpDliuUkFt+kI93VXOGma87v9479nJBYhnAY5tIHrku4IZ1vr0h6/5M/4nZgb
+        c37Y7Io13OcN5+hBXzPO1OJwsAl7Pl834r+JAxpESmlUzLImKhUHXAkvk8Q82MCwUUajQrH69oTHE998
+        eRUO5NThTO69lVC+LexXvk435FShL8Wv2WTf+SqkcxU4oyzC48o5uPHiOqQvVyF+qQ6ztz5AUu5DUvEg
+        ebs3TMheLSH38+mCFz1kJp4rbJa3iljkTZi904OZKybEL678FCcUXxwKa4Lr+JONiXmRWaYUB+AbpvCj
+        LGuyt/BxEBZEZaKYBxsYFmXwtsW5R33vV2GQU4uf4d5S+3vpjWG9a9OFVmt9uiGv2a6kNjTyXK3Dg5IF
+        F5714MiTL3D66Sd4WDLhVWUVaroJRscBw6ZgmOawaXVruM8blhM9ZCbGovJWEUZHwcqaBa9XdZTWR2L/
+        PBzWRCfu+JOFxZEJbhxKpDigRUhK79Asa7Js0wFPwstEMQ82MMN2MkaHFhs22dg2MQ9VVXfhXx1H6V3N
+        7hJcl/V295h/vMO/Eov9ANQD6dmTUOucAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">
