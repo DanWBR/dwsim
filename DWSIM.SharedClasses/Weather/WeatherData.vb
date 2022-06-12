@@ -2,7 +2,7 @@
 
     Implements Interfaces.IWeatherData
 
-    Public Property CurrentConditon As Interfaces.WeatherCondition = WeatherCondition.Sunny Implements IWeatherData.CurrentConditon
+    Public Property CurrentCondition As Interfaces.WeatherCondition = WeatherCondition.Sunny Implements IWeatherData.CurrentCondition
 
     Public Property WindSpeed_km_h As Double = 5 Implements IWeatherData.WindSpeed_km_h
 
@@ -15,5 +15,7 @@
     Public Property Latitude As Double Implements IWeatherData.Latitude
 
     Public Property Longitude As Double Implements IWeatherData.Longitude
+
+    Public Property AtmosphericPressure_Pa As Double = 101325 Implements IWeatherData.AtmosphericPressure_Pa
 
 End Class

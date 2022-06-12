@@ -7,7 +7,7 @@ End Interface
 
 Public Interface IWeatherData
 
-    Property CurrentConditon As WeatherCondition
+    Property CurrentCondition As WeatherCondition
 
     Property WindSpeed_km_h As Double
 
@@ -16,6 +16,8 @@ Public Interface IWeatherData
     Property Temperature_C As Double
 
     Property SolarIrradiation_kWh_m2 As Double
+
+    Property AtmosphericPressure_Pa As Double
 
     Property Latitude As Double
 

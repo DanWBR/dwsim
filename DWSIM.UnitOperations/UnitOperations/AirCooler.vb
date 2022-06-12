@@ -32,6 +32,8 @@ Namespace UnitOperations
         Private _name = "Air Cooler 2"
         Private _desc = "Air Cooler 2 Model"
 
+        Public Property UseGlobalWeather As Boolean = False
+
         Public Enum CalcMode
             SpecifyOutletTemperature = 0
             SpecifyGeometry = 1
@@ -363,8 +365,18 @@ Namespace UnitOperations
             End If
 
             StIn1 = calc.CreateMaterialStream({"Air"}, {1.0})
-            StIn1.Phases(0).Properties.temperature = AirInletTemperature
-            StIn1.Phases(0).Properties.pressure = AirPressure
+
+            If UseGlobalWeather Then
+
+                StIn1.Phases(0).Properties.temperature = FlowSheet.FlowsheetOptions.CurrentWeather.Temperature_C + 273.15
+                StIn1.Phases(0).Properties.pressure = FlowSheet.FlowsheetOptions.CurrentWeather.AtmosphericPressure_Pa
+
+            Else
+
+                StIn1.Phases(0).Properties.temperature = AirInletTemperature
+                StIn1.Phases(0).Properties.pressure = AirPressure
+
+            End If
 
             ActualAirFlow = ReferenceAirFlow / ReferenceFanSpeed * ActualFanSpeed
 

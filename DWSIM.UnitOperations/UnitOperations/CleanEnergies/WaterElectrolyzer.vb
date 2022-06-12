@@ -13,7 +13,21 @@ Public Class WaterElectrolyzer
 
     Private Image As SKImage
 
+    <Xml.Serialization.XmlIgnore> Public f As EditingForm_WaterElectrolyzer
+
     Public Overrides Property Prefix As String = "WE-"
+
+    Public Property Voltage As Double
+
+    Public Property NumberOfCells As Integer
+
+    Public Property CellVoltage As Double
+
+    Public Property WasteHeat As Double
+
+    Public Property Current As Double
+
+    Public Property ElectronTransfer As Double
 
     Public Sub New()
 
@@ -109,13 +123,42 @@ Public Class WaterElectrolyzer
 
     Public Overrides Sub DisplayEditForm()
 
+        If f Is Nothing Then
+            f = New EditingForm_WaterElectrolyzer With {.SimObject = Me}
+            f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+            f.Tag = "ObjectEditor"
+            Me.FlowSheet.DisplayForm(f)
+        Else
+            If f.IsDisposed Then
+                f = New EditingForm_WaterElectrolyzer With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                f.Activate()
+            End If
+        End If
+
     End Sub
 
     Public Overrides Sub UpdateEditForm()
 
+        If f IsNot Nothing Then
+            If Not f.IsDisposed Then
+                If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+            End If
+        End If
+
     End Sub
 
     Public Overrides Sub CloseEditForm()
+
+        If f IsNot Nothing Then
+            If Not f.IsDisposed Then
+                f.Close()
+                f = Nothing
+            End If
+        End If
 
     End Sub
 
@@ -163,5 +206,60 @@ Public Class WaterElectrolyzer
         Return elements
 
     End Function
+
+    Public Overrides Sub Calculate(Optional args As Object = Nothing)
+
+        Dim msin = GetInletMaterialStream(0)
+        Dim msout = GetOutletMaterialStream(0)
+
+        Dim esin = GetInletEnergyStream(1)
+
+        Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
+
+        ElectronTransfer = 96485.3365 * Current / NumberOfCells 'mol/s
+
+        Dim waterr = ElectronTransfer / 4 * 2 'mol/s
+        Dim h2r = ElectronTransfer / 4 * 2 'mol/s
+        Dim o2r = ElectronTransfer / 4 'mol/s
+
+        Dim spO2 = 1.23 'V
+
+        Dim cellV = Voltage / NumberOfCells
+
+        If cellV < spO2 Then Throw New Exception("Not enough power")
+
+        Dim overV = cellV - spO2
+
+        WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
+
+        Dim names = msin.Phases(0).Compounds.Keys.ToList()
+
+        Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow).ToList()
+
+        Dim Nf = New List(Of Double)(N0)
+
+        For i As Integer = 0 To N0.Count - 1
+            If names(i) = "Water" Then
+                Nf(i) = N0(i) - waterr
+                If (Nf(i) < 0.0) Then Throw New Exception("Negative Water molar flow calculated")
+            ElseIf names(i) = "Hydrogen" Then
+                Nf(i) = N0(i) + h2r
+            ElseIf names(i) = "Oxygen" Then
+                Nf(i) = N0(i) + o2r
+            End If
+        Next
+
+        msout.Clear()
+        msout.ClearAllProps()
+
+        msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
+        msout.SetMolarFlow(Nf.Sum)
+        msout.SetPressure(msin.GetPressure)
+        msout.SetMassEnthalpy(msin.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
+        msout.SetFlashSpec("PH")
+
+        msout.AtEquilibrium = False
+
+    End Sub
 
 End Class

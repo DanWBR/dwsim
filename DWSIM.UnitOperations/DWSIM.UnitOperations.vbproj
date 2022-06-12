@@ -448,6 +448,12 @@
     <Compile Include="EditingForms\EditingForm_ComprExpndr.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.Designer.vb">
+      <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
@@ -994,6 +1000,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_ComprExpndr.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_WaterElectrolyzer.resx">
+      <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.de.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>

@@ -6,6 +6,56 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
 
+Namespace UnitOperations.Auxiliary
+
+    Public Class PEMFuelCellModelParameter
+
+        Implements ICustomXMLSerialization
+
+        Public Property Name As String = ""
+
+        Public Property Value As Double
+
+        Public Property Units As String = ""
+
+        Public Property TitleX As String = ""
+
+        Public Property TitleY As String = ""
+
+        Public Property ValuesX As List(Of Double)
+
+        Public Property ValuesY As List(Of Double)
+
+        Public Property UnitsX As String = ""
+
+        Public Property UnitsY As String = ""
+
+        Public Property IsSingleValue As Boolean = True
+
+        Public Sub New()
+
+        End Sub
+
+        Public Sub New(_name As String, _value As Double, _units As String)
+
+            Name = _name
+            Value = _value
+            Units = _units
+
+        End Sub
+
+        Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+            Return XMLSerializer.XMLSerializer.Serialize(Me)
+        End Function
+
+        Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        End Function
+
+    End Class
+
+End Namespace
+
 Namespace UnitOperations
 
     Public MustInherit Class PEMFuelCellUnitOpBase
@@ -18,14 +68,18 @@ Namespace UnitOperations
 
         Private Image As SKImage
 
+        Protected _name = ""
+        Protected _desc = ""
+
+        Public Property InputParameters As Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter) = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
+
+        Public Property OutputParameters As Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter) = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
+
         Public Overrides ReadOnly Property IsSource As Boolean
             Get
                 Return True
             End Get
         End Property
-
-        Protected _name = ""
-        Protected _desc = ""
 
         Public Overrides Function GetDisplayName() As String
             Return _name
@@ -50,7 +104,6 @@ Namespace UnitOperations
         Public Overrides ReadOnly Property MobileCompatible As Boolean = False
 
         Public MustOverride Function ReturnInstance(typename As String) As Object Implements IExternalUnitOperation.ReturnInstance
-
 
         Public Sub Draw(g As Object) Implements IExternalUnitOperation.Draw
 

@@ -197,7 +197,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub ReadWeather(currentWeather As IWeatherData)
 
-        cbWeather.SelectedIndex = currentWeather.CurrentConditon
+        cbWeather.SelectedIndex = currentWeather.CurrentCondition
 
         tbAmbientTemperature.Text = currentWeather.Temperature_C
 
@@ -206,6 +206,8 @@ Public Class FlowsheetSurface_SkiaSharp
         tbHumidity.Text = currentWeather.RelativeHumidity_pct
 
         tbSolarIrradiation.Text = currentWeather.SolarIrradiation_kWh_m2
+
+        tbAtmPress.Text = (currentWeather.AtmosphericPressure_Pa / 100.0).ToString("N0")
 
         tbCurrentLocation.Text = currentWeather.Latitude.ToString() + ", " + currentWeather.Longitude.ToString()
 
@@ -3849,7 +3851,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub UpdateCurrentWeather()
         If Loaded Then
-            Flowsheet.Options.CurrentWeather.CurrentConditon = cbWeather.SelectedIndex
+            Flowsheet.Options.CurrentWeather.CurrentCondition = cbWeather.SelectedIndex
             Try
                 Flowsheet.Options.CurrentWeather.Temperature_C = tbAmbientTemperature.Text
             Catch ex As Exception
@@ -3864,6 +3866,10 @@ Public Class FlowsheetSurface_SkiaSharp
             End Try
             Try
                 Flowsheet.Options.CurrentWeather.SolarIrradiation_kWh_m2 = tbSolarIrradiation.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.AtmosphericPressure_Pa = tbAtmPress.Text
             Catch ex As Exception
             End Try
         End If

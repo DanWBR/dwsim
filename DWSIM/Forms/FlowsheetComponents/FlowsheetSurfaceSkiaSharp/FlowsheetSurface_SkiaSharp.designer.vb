@@ -33,6 +33,9 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnRight = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.tbAtmPress = New System.Windows.Forms.TextBox()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.tbAmbientTemperature = New System.Windows.Forms.TextBox()
         Me.PictureBox5 = New System.Windows.Forms.PictureBox()
@@ -194,6 +197,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.SplitContainerHorizontal.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -328,6 +332,9 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.tbAtmPress)
+        Me.Panel1.Controls.Add(Me.PictureBox6)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.tbAmbientTemperature)
         Me.Panel1.Controls.Add(Me.PictureBox5)
@@ -348,6 +355,26 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Name = "Panel1"
         Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        '
+        'tbAtmPress
+        '
+        resources.ApplyResources(Me.tbAtmPress, "tbAtmPress")
+        Me.tbAtmPress.Name = "tbAtmPress"
+        Me.ToolTip1.SetToolTip(Me.tbAtmPress, resources.GetString("tbAtmPress.ToolTip"))
+        '
+        'PictureBox6
+        '
+        resources.ApplyResources(Me.PictureBox6, "PictureBox6")
+        Me.PictureBox6.Image = Global.DWSIM.My.Resources.Resources.icons8_pressure_gauge
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox6, resources.GetString("PictureBox6.ToolTip"))
         '
         'Label5
         '
@@ -1296,6 +1323,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1472,4 +1500,7 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tbAmbientTemperature As TextBox
     Friend WithEvents PictureBox5 As PictureBox
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Label6 As Label
+    Friend WithEvents tbAtmPress As TextBox
+    Friend WithEvents PictureBox6 As PictureBox
 End Class

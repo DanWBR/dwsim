@@ -183,6 +183,11 @@ Public Class EditingForm_AirCooler
             tbTubeRoughness.Text = cv.ConvertFromSI(su.diameter, .Tube_Roughness)
             tbTubeThermalCond.Text = cv.ConvertFromSI(su.thermalConductivity, .Tube_ThermalConductivity)
 
+            rbUseGlobal.Checked = SimObject.UseGlobalWeather
+
+            tbInletAirPre.Enabled = Not SimObject.UseGlobalWeather
+            tbInletAirTemp.Enabled = Not SimObject.UseGlobalWeather
+
         End With
 
         Loaded = True
@@ -451,6 +456,12 @@ Public Class EditingForm_AirCooler
 
         End If
 
+    End Sub
+
+    Private Sub rbUserDef_CheckedChanged(sender As Object, e As EventArgs) Handles rbUserDef.CheckedChanged, rbUseGlobal.CheckedChanged
+        If Loaded Then SimObject.UseGlobalWeather = rbUseGlobal.Checked
+        tbInletAirPre.Enabled = Not SimObject.UseGlobalWeather
+        tbInletAirTemp.Enabled = Not SimObject.UseGlobalWeather
     End Sub
 
 End Class
