@@ -135,19 +135,6 @@ Namespace UnitOperations
                 Dim Eta_Ohmic = ToList(results("Eta_Ohmic"))
                 Dim Eta_Conc = ToList(results("Eta_Conc"))
 
-                'I: 74.9
-                'Enernst: 1.19075 V
-                'Eta Activation :  0.5564162618842647 V
-                'Eta Concentration :  0.06401178884389878 V
-                'Eta Ohmic :  0.20564684562177526 V
-                'Loss: 0.8260748963499388 V
-                'PEM Efficiency :  0.23376609208337254 
-                'Power: 27.314165263389583 W
-                'Power-Stack :  27.314165263389583 W
-                'Power-Thermal :  64.81283473661043 W
-                'VStack: 0.36467510365006117 V
-                'Vcell: 0.36467510365006117 V
-
                 OutputParameters.Clear()
                 OutputParameters.Add("I", New Auxiliary.PEMFuelCellModelParameter("I", "Cell Operating Current", I.Last(), "A"))
                 OutputParameters.Add("P", New Auxiliary.PEMFuelCellModelParameter("P", "Power", P.Last(), "W"))

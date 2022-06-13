@@ -750,4 +750,5 @@ Public Class EditingForm_ReactorConvEqGibbs
             DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod = chkGibbsUseAlternSolver.Checked
         End If
     End Sub
+
 End Class

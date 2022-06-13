@@ -814,9 +814,6 @@
   <data name="black_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-pressure_gauge" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>\\Mac\Home\Desktop\icons8-pressure_gauge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bullet_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1473,5 +1470,8 @@
   </data>
   <data name="DWSIM_splash_v8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Y:\Library\CloudStorage\OneDrive-Pessoal\Arquivos DWSIM\DWSIM 6.x+ Release\DWSIM_splash_v8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_pressure_gauge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-pressure_gauge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

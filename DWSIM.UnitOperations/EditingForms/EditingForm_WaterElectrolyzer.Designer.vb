@@ -361,7 +361,7 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         Me.gridOutput.AllowUserToAddRows = False
         Me.gridOutput.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.gridOutput.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.gridOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.gridOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridOutput.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
         Me.gridOutput.Dock = System.Windows.Forms.DockStyle.Fill
@@ -416,7 +416,7 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         Me.gridInput.AllowUserToAddRows = False
         Me.gridInput.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.gridInput.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.gridInput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.gridInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridInput.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.gridInput.Dock = System.Windows.Forms.DockStyle.Fill

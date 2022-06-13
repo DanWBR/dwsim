@@ -307,11 +307,11 @@ Namespace UnitOperations
 
             Dim spO2 = 1.23 'V
 
-            Dim cellV = Voltage / NumberOfCells
+            CellVoltage = Voltage / NumberOfCells
 
-            If cellV < spO2 Then Throw New Exception("Not enough power")
+            If CellVoltage < spO2 Then Throw New Exception("Not enough power")
 
-            Dim overV = cellV - spO2
+            Dim overV = CellVoltage - spO2
 
             WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
 
