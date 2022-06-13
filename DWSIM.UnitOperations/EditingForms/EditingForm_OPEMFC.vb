@@ -248,7 +248,7 @@ Public Class EditingForm_OPEMFC
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.OutputConnectors(1).Position.X + 30, sgobj.InputConnectors(1).Position.Y + 30, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.OutputConnectors(1).Position.X + 30, sgobj.OutputConnectors(1).Position.Y + 30, "")
 
             If sgobj.OutputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(1).AttachedConnector.AttachedTo)
             fs.ConnectObjects(sgobj, obj.GraphicObject, 1, 0)

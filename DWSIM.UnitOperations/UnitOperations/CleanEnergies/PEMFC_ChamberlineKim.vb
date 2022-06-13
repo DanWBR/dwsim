@@ -23,22 +23,6 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Overrides Sub PopulateEditorPanel(ctner As Object)
-
-        End Sub
-
-        Public Overrides Sub DisplayEditForm()
-
-        End Sub
-
-        Public Overrides Sub UpdateEditForm()
-
-        End Sub
-
-        Public Overrides Sub CloseEditForm()
-
-        End Sub
-
         Public Overrides Function ReturnInstance(typename As String) As Object
 
             Return New PEMFC_ChamberLineKim

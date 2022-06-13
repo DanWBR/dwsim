@@ -4,6 +4,7 @@ Imports DWSIM.DrawingTools.Point
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
+Imports Python.Runtime
 Imports SkiaSharp
 
 Namespace UnitOperations.Auxiliary
@@ -100,6 +101,8 @@ Namespace UnitOperations
 
         Public MustOverride Function ReturnInstance(typename As String) As Object Implements IExternalUnitOperation.ReturnInstance
 
+        Public MustOverride Sub AddDefaultInputParameters()
+
         Public Sub Draw(g As Object) Implements IExternalUnitOperation.Draw
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
@@ -138,24 +141,24 @@ Namespace UnitOperations
 
             Dim myIC1 As New ConnectionPoint
 
-            myIC1.Position = New Point(x, y / 2)
+            myIC1.Position = New Point(x, y + h / 2)
             myIC1.Type = ConType.ConIn
             myIC1.Direction = ConDir.Right
 
             Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(x + w, y)
+            myOC1.Position = New Point(x + w, y + h / 2)
             myOC1.Type = ConType.ConOut
             myOC1.Direction = ConDir.Right
 
             Dim myOC2 As New ConnectionPoint
-            myOC2.Position = New Point(x + w, y + h)
+            myOC2.Position = New Point(x + w / 2, y + h)
             myOC2.Type = ConType.ConOut
-            myOC2.Direction = ConDir.Right
+            myOC2.Direction = ConDir.Down
             myOC2.Type = ConType.ConEn
 
             With GraphicObject.InputConnectors
                 If .Count = 1 Then
-                    .Item(0).Position = New Point(x, y / 2)
+                    .Item(0).Position = New Point(x, y + h / 2)
                 Else
                     .Add(myIC1)
                 End If
@@ -164,8 +167,8 @@ Namespace UnitOperations
 
             With GraphicObject.OutputConnectors
                 If .Count = 2 Then
-                    .Item(0).Position = New Point(x + w, y)
-                    .Item(1).Position = New Point(x + w, y + h)
+                    .Item(0).Position = New Point(x + w, y + h / 2)
+                    .Item(1).Position = New Point(x + w / 2, y + h)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
@@ -196,8 +199,6 @@ Namespace UnitOperations
 
         End Sub
 
-        Public MustOverride Sub PopulateEditorPanel(ctner As Object) Implements IExternalUnitOperation.PopulateEditorPanel
-
         Private Sub CallSolverIfNeeded()
             If GlobalSettings.Settings.CallSolverOnEditorPropertyChanged Then
                 FlowSheet.RequestCalculation()
@@ -210,6 +211,30 @@ Namespace UnitOperations
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
+            Try
+
+                InputParameters = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
+
+                For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InputParameters").SingleOrDefault.Elements.ToList
+                    Dim par As New Auxiliary.PEMFuelCellModelParameter()
+                    par.LoadData(xel.Elements.ToList())
+                    InputParameters.Add(par.Name, par)
+                Next
+
+                OutputParameters = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
+
+                For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "OutputParameters").SingleOrDefault.Elements.ToList
+                    Dim par As New Auxiliary.PEMFuelCellModelParameter()
+                    par.LoadData(xel.Elements.ToList())
+                    OutputParameters.Add(par.Name, par)
+                Next
+
+            Catch ex As Exception
+
+                AddDefaultInputParameters()
+
+            End Try
+
             Return True
 
         End Function
@@ -218,6 +243,20 @@ Namespace UnitOperations
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+
+            With elements
+                .Add(New XElement("InputParameters"))
+                For Each kvp In InputParameters
+                    .Item(.Count - 1).Add(New XElement("InputParameter", kvp.Value.SaveData()))
+                Next
+            End With
+
+            With elements
+                .Add(New XElement("OutputParameters"))
+                For Each kvp In OutputParameters
+                    .Item(.Count - 1).Add(New XElement("OutputParameter", kvp.Value.SaveData()))
+                Next
+            End With
 
             Return elements
 
@@ -266,13 +305,69 @@ Namespace UnitOperations
 
         Public Function ToList(pythonlist As Object) As List(Of Double)
 
-            Dim list As New List(Of Double)
+            Using Py.GIL
 
-            For i As Integer = 0 To pythonlist.Length - 1
-                list.Add(pythonlist(i))
-            Next
+                Dim list As New List(Of Double)
 
-            Return list
+                For i As Integer = 0 To pythonlist.Length - 1
+                    list.Add(pythonlist(i).ToString().ToDoubleFromInvariant())
+                Next
+
+                Return list
+
+            End Using
+
+        End Function
+
+        Public Sub PopulateEditorPanel(container As Object) Implements IExternalUnitOperation.PopulateEditorPanel
+
+        End Sub
+
+        Public Overrides Function GetProperties(proptype As PropertyType) As String()
+
+            Select Case proptype
+                Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
+                    Dim arr = InputParameters.Select(Function(p) p.Value.Name).ToList()
+                    arr.AddRange(OutputParameters.Select(Function(p) p.Value.Name))
+                    Return arr.ToArray()
+                Case Else
+                    Return InputParameters.Select(Function(p) p.Value.Name).ToArray()
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            If InputParameters.ContainsKey(prop) Then
+                Return InputParameters(prop).Value
+            ElseIf OutputParameters.ContainsKey(prop) Then
+                Return OutputParameters(prop).Value
+            Else
+                Return 0.0
+            End If
+
+        End Function
+
+        Public Overrides Function GetPropertyUnit(prop As String, Optional su As IUnitsOfMeasure = Nothing) As String
+
+            If InputParameters.ContainsKey(prop) Then
+                Return InputParameters(prop).Units
+            ElseIf OutputParameters.ContainsKey(prop) Then
+                Return OutputParameters(prop).Units
+            Else
+                Return ""
+            End If
+
+        End Function
+
+        Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
+
+            If InputParameters.ContainsKey(prop) Then
+                Return InputParameters(prop).Value = propval
+                Return True
+            Else
+                Return False
+            End If
 
         End Function
 

@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
@@ -38,6 +39,75 @@ Namespace UnitOperations
         Public Property Current As Double
 
         Public Property ElectronTransfer As Double
+
+        Public Overrides Function GetProperties(proptype As PropertyType) As String()
+
+            Return New String() {"Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer"}
+
+        End Function
+
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI()
+
+            Select Case prop
+                Case "Voltage"
+                    Return Voltage
+                Case "Number of Cells"
+                    Return NumberOfCells
+                Case "Cell Voltage"
+                    Return CellVoltage
+                Case "Waste Heat"
+                    Return WasteHeat.ConvertFromSI(su.heatflow)
+                Case "Current"
+                    Return Current
+                Case "Electron Transfer"
+                    Return ElectronTransfer.ConvertFromSI(su.molarflow)
+                Case Else
+                    Return 0.0
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyUnit(prop As String, Optional su As IUnitsOfMeasure = Nothing) As String
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI()
+
+            Select Case prop
+                Case "Voltage"
+                    Return "V"
+                Case "Number of Cells"
+                    Return ""
+                Case "Cell Voltage"
+                    Return "V"
+                Case "Waste Heat"
+                    Return su.heatflow
+                Case "Current"
+                    Return "A"
+                Case "Electron Transfer"
+                    Return su.molarflow
+                Case Else
+                    Return 0.0
+            End Select
+
+        End Function
+
+        Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI()
+
+            Select Case prop
+                Case "Voltage"
+                    Voltage = propval
+                    Return True
+                Case "Number of Cells"
+                    NumberOfCells = propval
+                    Return True
+                Case Else
+                    Return False
+            End Select
+
+        End Function
 
         Public Sub New()
 
@@ -272,6 +342,7 @@ Namespace UnitOperations
             msout.AtEquilibrium = False
 
         End Sub
+
 
     End Class
 
