@@ -23,11 +23,8 @@ Partial Class EditingForm_ReaktoroGibbs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_ReaktoroGibbs))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
@@ -53,11 +50,6 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.gridResults = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.gridConversions = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -82,18 +74,18 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageElements = New System.Windows.Forms.TabPage()
         Me.lvElements = New System.Windows.Forms.ListView()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.gridSpeciesMappings = New System.Windows.Forms.DataGridView()
         Me.c1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.c2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cbDatabase = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         CType(Me.gridConversions, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -358,9 +350,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 621)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 682)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(364, 248)
+        Me.GroupBox4.Size = New System.Drawing.Size(364, 187)
         Me.GroupBox4.TabIndex = 18
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Notes"
@@ -375,7 +367,7 @@ Partial Class EditingForm_ReaktoroGibbs
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.rtbAnnotations.Size = New System.Drawing.Size(358, 229)
+        Me.rtbAnnotations.Size = New System.Drawing.Size(358, 168)
         Me.rtbAnnotations.TabIndex = 0
         '
         'GroupBox6
@@ -383,7 +375,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.tabstrip1)
-        Me.GroupBox6.Location = New System.Drawing.Point(12, 435)
+        Me.GroupBox6.Location = New System.Drawing.Point(12, 496)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(364, 180)
         Me.GroupBox6.TabIndex = 19
@@ -392,7 +384,6 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'tabstrip1
         '
-        Me.tabstrip1.Controls.Add(Me.TabPage1)
         Me.tabstrip1.Controls.Add(Me.TabPage3)
         Me.tabstrip1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabstrip1.Location = New System.Drawing.Point(3, 16)
@@ -400,58 +391,6 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.tabstrip1.SelectedIndex = 0
         Me.tabstrip1.Size = New System.Drawing.Size(358, 161)
         Me.tabstrip1.TabIndex = 0
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.gridResults)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(350, 135)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "General"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'gridResults
-        '
-        Me.gridResults.AllowUserToAddRows = False
-        Me.gridResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.gridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
-        Me.gridResults.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gridResults.Location = New System.Drawing.Point(3, 3)
-        Me.gridResults.Name = "gridResults"
-        Me.gridResults.ReadOnly = True
-        Me.gridResults.RowHeadersVisible = False
-        Me.gridResults.Size = New System.Drawing.Size(344, 129)
-        Me.gridResults.TabIndex = 19
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Property"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Value"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'Column1
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Column1.FillWeight = 30.0!
-        Me.Column1.HeaderText = "Units"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
         '
         'TabPage3
         '
@@ -479,8 +418,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn6.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn6.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -488,8 +427,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn7.HeaderText = "Conversion (%)"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -502,7 +441,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox2.Controls.Add(Me.TabControlParameters)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 231)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(364, 201)
+        Me.GroupBox2.Size = New System.Drawing.Size(364, 259)
         Me.GroupBox2.TabIndex = 17
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Calculation Parameters"
@@ -517,11 +456,13 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabControlParameters.Location = New System.Drawing.Point(3, 16)
         Me.TabControlParameters.Name = "TabControlParameters"
         Me.TabControlParameters.SelectedIndex = 0
-        Me.TabControlParameters.Size = New System.Drawing.Size(358, 182)
+        Me.TabControlParameters.Size = New System.Drawing.Size(358, 240)
         Me.TabControlParameters.TabIndex = 11
         '
         'TabPageParams
         '
+        Me.TabPageParams.Controls.Add(Me.cbDatabase)
+        Me.TabPageParams.Controls.Add(Me.Label2)
         Me.TabPageParams.Controls.Add(Me.Label1)
         Me.TabPageParams.Controls.Add(Me.CheckBox4)
         Me.TabPageParams.Controls.Add(Me.CheckBox3)
@@ -536,7 +477,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageParams.Location = New System.Drawing.Point(4, 22)
         Me.TabPageParams.Name = "TabPageParams"
         Me.TabPageParams.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageParams.Size = New System.Drawing.Size(350, 156)
+        Me.TabPageParams.Size = New System.Drawing.Size(350, 214)
         Me.TabPageParams.TabIndex = 0
         Me.TabPageParams.Text = "Parameters"
         Me.TabPageParams.UseVisualStyleBackColor = True
@@ -545,7 +486,7 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(14, 25)
+        Me.Label1.Location = New System.Drawing.Point(14, 20)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(42, 13)
         Me.Label1.TabIndex = 44
@@ -554,17 +495,17 @@ Partial Class EditingForm_ReaktoroGibbs
         'CheckBox4
         '
         Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(273, 24)
+        Me.CheckBox4.Location = New System.Drawing.Point(273, 19)
         Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(60, 17)
+        Me.CheckBox4.Size = New System.Drawing.Size(49, 17)
         Me.CheckBox4.TabIndex = 43
-        Me.CheckBox4.Text = "Mineral"
+        Me.CheckBox4.Text = "Solid"
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(212, 24)
+        Me.CheckBox3.Location = New System.Drawing.Point(212, 19)
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.Size = New System.Drawing.Size(54, 17)
         Me.CheckBox3.TabIndex = 42
@@ -574,7 +515,7 @@ Partial Class EditingForm_ReaktoroGibbs
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(138, 24)
+        Me.CheckBox2.Location = New System.Drawing.Point(138, 19)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(68, 17)
         Me.CheckBox2.TabIndex = 41
@@ -584,7 +525,7 @@ Partial Class EditingForm_ReaktoroGibbs
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(67, 24)
+        Me.CheckBox1.Location = New System.Drawing.Point(67, 19)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(68, 17)
         Me.CheckBox1.TabIndex = 40
@@ -597,7 +538,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfigurePP.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnConfigurePP.Location = New System.Drawing.Point(313, 98)
+        Me.btnConfigurePP.Location = New System.Drawing.Point(313, 117)
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.btnConfigurePP.Size = New System.Drawing.Size(21, 21)
         Me.btnConfigurePP.TabIndex = 20
@@ -610,7 +551,7 @@ Partial Class EditingForm_ReaktoroGibbs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
-        Me.cbPropPack.Location = New System.Drawing.Point(152, 98)
+        Me.cbPropPack.Location = New System.Drawing.Point(152, 117)
         Me.cbPropPack.Name = "cbPropPack"
         Me.cbPropPack.Size = New System.Drawing.Size(155, 21)
         Me.cbPropPack.TabIndex = 15
@@ -619,7 +560,7 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         Me.Label9.AutoSize = True
         Me.Label9.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label9.Location = New System.Drawing.Point(14, 102)
+        Me.Label9.Location = New System.Drawing.Point(14, 121)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(92, 13)
         Me.Label9.TabIndex = 14
@@ -632,18 +573,18 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbPDrop.Enabled = False
         Me.cbPDrop.FormattingEnabled = True
         Me.cbPDrop.Items.AddRange(New Object() {"Mínima das Entradas", "Média das Entradas", "Máxima das Entradas"})
-        Me.cbPDrop.Location = New System.Drawing.Point(241, 59)
+        Me.cbPDrop.Location = New System.Drawing.Point(241, 50)
         Me.cbPDrop.Name = "cbPDrop"
-        Me.cbPDrop.Size = New System.Drawing.Size(92, 21)
+        Me.cbPDrop.Size = New System.Drawing.Size(66, 21)
         Me.cbPDrop.TabIndex = 39
         '
         'tbPDrop
         '
         Me.tbPDrop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbPDrop.Location = New System.Drawing.Point(150, 59)
+        Me.tbPDrop.Location = New System.Drawing.Point(152, 51)
         Me.tbPDrop.Name = "tbPDrop"
-        Me.tbPDrop.Size = New System.Drawing.Size(85, 20)
+        Me.tbPDrop.Size = New System.Drawing.Size(83, 20)
         Me.tbPDrop.TabIndex = 38
         Me.tbPDrop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -651,7 +592,7 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         Me.Label5.AutoSize = True
         Me.Label5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label5.Location = New System.Drawing.Point(14, 63)
+        Me.Label5.Location = New System.Drawing.Point(14, 54)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(74, 13)
         Me.Label5.TabIndex = 37
@@ -725,18 +666,13 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button2.Text = "Get/Reset List"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'ToolTipChangeTag
-        '
-        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTipChangeTag.ToolTipTitle = "Info"
-        '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.gridSpeciesMappings)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(350, 156)
+        Me.TabPage2.Size = New System.Drawing.Size(350, 214)
         Me.TabPage2.TabIndex = 4
         Me.TabPage2.Text = "Species Mappings"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -752,7 +688,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.gridSpeciesMappings.Location = New System.Drawing.Point(3, 3)
         Me.gridSpeciesMappings.Name = "gridSpeciesMappings"
         Me.gridSpeciesMappings.RowHeadersVisible = False
-        Me.gridSpeciesMappings.Size = New System.Drawing.Size(344, 150)
+        Me.gridSpeciesMappings.Size = New System.Drawing.Size(344, 208)
         Me.gridSpeciesMappings.TabIndex = 1
         '
         'c1
@@ -766,10 +702,38 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.c2.HeaderText = "Map To"
         Me.c2.Name = "c2"
         '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
+        'cbDatabase
+        '
+        Me.cbDatabase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDatabase.FormattingEnabled = True
+        Me.cbDatabase.Items.AddRange(New Object() {"supcrt98.xml", "supcrt98-organics.xml", "supcrt07.xml", "supcrt07-organics.xml", "Amm.dat", "frezchem.dat", "iso.dat", "llnl.dat", "minteq.dat", "minteq.v4.dat", "phreeqc.dat", "pitzer.dat", "sit.dat", "waterq4f.dat"})
+        Me.cbDatabase.Location = New System.Drawing.Point(152, 84)
+        Me.cbDatabase.Name = "cbDatabase"
+        Me.cbDatabase.Size = New System.Drawing.Size(155, 21)
+        Me.cbDatabase.TabIndex = 46
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label2.Location = New System.Drawing.Point(14, 88)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(110, 13)
+        Me.Label2.TabIndex = 45
+        Me.Label2.Text = "Component Database"
+        '
         'EditingForm_ReaktoroGibbs
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(388, 881)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox6)
@@ -786,8 +750,6 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.tabstrip1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         CType(Me.gridConversions, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
@@ -827,11 +789,6 @@ Partial Class EditingForm_ReaktoroGibbs
     Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
     Public WithEvents GroupBox6 As GroupBox
     Public WithEvents tabstrip1 As TabControl
-    Public WithEvents TabPage1 As TabPage
-    Public WithEvents gridResults As DataGridView
-    Public WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Public WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Public WithEvents Column1 As DataGridViewTextBoxColumn
     Public WithEvents TabPage3 As TabPage
     Public WithEvents gridConversions As DataGridView
     Public WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
@@ -861,4 +818,6 @@ Partial Class EditingForm_ReaktoroGibbs
     Friend WithEvents gridSpeciesMappings As DataGridView
     Friend WithEvents c1 As DataGridViewTextBoxColumn
     Friend WithEvents c2 As DataGridViewComboBoxColumn
+    Public WithEvents cbDatabase As ComboBox
+    Public WithEvents Label2 As Label
 End Class

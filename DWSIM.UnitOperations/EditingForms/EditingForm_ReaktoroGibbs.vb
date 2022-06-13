@@ -100,6 +100,8 @@ Public Class EditingForm_ReaktoroGibbs
 
             'properties
 
+            cbDatabase.SelectedItem = .DatabaseName
+
             cbPDrop.Items.Clear()
             cbPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbPDrop.SelectedItem = units.deltaP
@@ -118,6 +120,37 @@ Public Class EditingForm_ReaktoroGibbs
 
             DirectCast(gridSpeciesMappings.Columns(1), DataGridViewComboBoxColumn).CellTemplate = cbComps
 
+            gridSpeciesMappings.Rows.Clear()
+            For Each item In .SpeciesMaps
+                gridSpeciesMappings.Rows.Add(New Object() {item.Key, item.Value})
+            Next
+
+            Dim comps = SimObject.FlowSheet.SelectedCompounds.Keys.ToList()
+
+            lvComps.Clear()
+            For Each c In comps
+                lvComps.Items.Add(c)
+                If .CompoundsList.Contains(c) Then lvComps.Items(lvComps.Items.Count - 1).Checked = True
+            Next
+
+            Dim elements As New List(Of String)
+            For Each c In comps
+                For Each el In SimObject.FlowSheet.SelectedCompounds(c).Elements.Keys
+                    If Not elements.Contains(el) Then elements.Add(el)
+                Next
+            Next
+
+            lvElements.Clear()
+            For Each el In elements
+                lvElements.Items.Add(el)
+                If .ElementsList.Contains(el) Then lvElements.Items(lvElements.Items.Count - 1).Checked = True
+            Next
+
+            gridConversions.Rows.Clear()
+            For Each conv In .ComponentConversions
+                gridConversions.Rows.Add(New Object() {conv.Key, (conv.Value * 100).ToString(nf)})
+            Next
+
         End With
 
         Loaded = True
@@ -134,6 +167,7 @@ Public Class EditingForm_ReaktoroGibbs
         If cbInlet1.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
             cbInlet1.SelectedItem = Nothing
+            SimObject.FlowSheet.UpdateInterface()
         End If
     End Sub
 
@@ -141,6 +175,7 @@ Public Class EditingForm_ReaktoroGibbs
         If cbOutlet1.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo)
             cbOutlet1.SelectedItem = Nothing
+            SimObject.FlowSheet.UpdateInterface()
         End If
     End Sub
 
@@ -148,6 +183,7 @@ Public Class EditingForm_ReaktoroGibbs
         If cbEnergy.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo)
             cbEnergy.SelectedItem = Nothing
+            SimObject.FlowSheet.UpdateInterface()
         End If
     End Sub
 
@@ -170,6 +206,8 @@ Public Class EditingForm_ReaktoroGibbs
                 End If
                 If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
                 flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
+
+                flowsheet.UpdateInterface()
 
             End If
 
@@ -196,6 +234,7 @@ Public Class EditingForm_ReaktoroGibbs
                 End If
                 If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                 flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+                SimObject.FlowSheet.UpdateInterface()
 
             End If
 
@@ -222,6 +261,7 @@ Public Class EditingForm_ReaktoroGibbs
                 End If
                 If gobj.OutputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(index).AttachedConnector.AttachedTo)
                 flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
+                SimObject.FlowSheet.UpdateInterface()
 
             End If
 
@@ -264,6 +304,7 @@ Public Class EditingForm_ReaktoroGibbs
             fs.ConnectObjects(sgobj, obj.GraphicObject, 1, 0)
 
         End If
+        SimObject.FlowSheet.UpdateInterface()
 
         UpdateInfo()
 
@@ -408,4 +449,7 @@ Public Class EditingForm_ReaktoroGibbs
 
     End Sub
 
+    Private Sub cbDatabase_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDatabase.SelectedIndexChanged
+        If Loaded Then SimObject.DatabaseName = cbDatabase.SelectedItem.ToString()
+    End Sub
 End Class

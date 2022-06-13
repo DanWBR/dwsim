@@ -253,31 +253,23 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            If m_pr.BIPChanged Or ip Is Nothing Then
+            Dim vn As String() = RET_VNAMES()
+            Dim n As Integer = vn.Length - 1
 
-                Dim vn As String() = RET_VNAMES()
-                Dim n As Integer = vn.Length - 1
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+            Dim i As Integer = 0
+            Dim l As Integer = 0
 
-                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                Dim i As Integer = 0
-                Dim l As Integer = 0
-
-                For i = 0 To n
-                    For l = 0 To n
-                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
-                    Next
+            For i = 0 To n
+                For l = 0 To n
+                    val(i, l) = Me.RET_KIJ(vn(i), vn(l))
                 Next
+            Next
 
-                ip = val
-                m_pr.BIPChanged = False
+            ip = val
+            m_pr.BIPChanged = False
 
-                Return val
-
-            Else
-
-                Return ip
-
-            End If
+            Return val
 
         End Function
 
@@ -354,13 +346,13 @@ Namespace PropertyPackages
 
             Select Case phase
                 Case Phase.Vapor
-                    pstate = state.Vapor
+                    pstate = State.Vapor
                     sstate = "V"
                 Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
-                    pstate = state.Liquid
+                    pstate = State.Liquid
                     sstate = "L"
                 Case Phase.Solid
-                    pstate = state.Solid
+                    pstate = State.Solid
                     sstate = "S"
             End Select
 

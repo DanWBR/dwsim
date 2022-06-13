@@ -124,6 +124,7 @@ Public Class EditingForm_WaterElectrolyzer
         If cbInlet1.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
             cbInlet1.SelectedItem = Nothing
+            SimObject.FlowSheet.UpdateInterface()
         End If
     End Sub
 
@@ -131,6 +132,7 @@ Public Class EditingForm_WaterElectrolyzer
         If cbOutlet1.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo)
             cbOutlet1.SelectedItem = Nothing
+            SimObject.FlowSheet.UpdateInterface()
         End If
     End Sub
 
@@ -138,6 +140,7 @@ Public Class EditingForm_WaterElectrolyzer
         If cbEnergy.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
             cbEnergy.SelectedItem = Nothing
+            SimObject.FlowSheet.UpdateInterface()
         End If
     End Sub
 
@@ -160,6 +163,7 @@ Public Class EditingForm_WaterElectrolyzer
                 End If
                 If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
                 flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
+                SimObject.FlowSheet.UpdateInterface()
 
             End If
 
@@ -186,6 +190,7 @@ Public Class EditingForm_WaterElectrolyzer
                 End If
                 If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                 flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+                SimObject.FlowSheet.UpdateInterface()
 
             End If
 
@@ -212,6 +217,7 @@ Public Class EditingForm_WaterElectrolyzer
                 End If
                 If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
                 flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
+                SimObject.FlowSheet.UpdateInterface()
 
             End If
 

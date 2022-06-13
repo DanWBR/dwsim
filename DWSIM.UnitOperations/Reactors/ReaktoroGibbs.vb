@@ -34,6 +34,8 @@ Namespace Reactors
 
         Public Property ReaktoroPath As String = "C:\python_reaktoro"
 
+        Public Property DatabaseName As String = "supcrt07.xml"
+
         Public Property Prefix As String = "RK-" Implements IExternalUnitOperation.Prefix
 
         Public Overrides Property ComponentName As String = GetDisplayName()
@@ -63,6 +65,8 @@ Namespace Reactors
         Public Property MineralPhase As Boolean = False
 
         Public Property SpeciesMaps As New Dictionary(Of String, String)
+
+        Public Property CompoundConversions As New Dictionary(Of String, Double)
 
         Public Sub New()
 
@@ -118,6 +122,10 @@ Namespace Reactors
 
         End Sub
 
+        Public Overrides Sub PerformPostCalcValidation()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
 
@@ -135,22 +143,29 @@ Namespace Reactors
                 Dim reaktoro As Object = Py.Import("reaktoro")
 
                 'Initialize a thermodynamic database
-                Dim db = reaktoro.Database("supcrt07.xml")
+                Dim db = reaktoro.Database(DatabaseName)
 
                 'Define the chemical system
                 Dim editor = reaktoro.ChemicalEditor(db)
 
-                If GaseousPhase Then editor.addGaseousPhaseWithElements(ElementsList.ToArray())
+                Dim elstring As String = ""
+
+                For Each el In ElementsList
+                    elstring += el + " "
+                Next
+                elstring = elstring.Trim()
+
+                If GaseousPhase Then editor.addGaseousPhaseWithElements(elstring)
 
                 If AqueousPhase Then
-                    Dim aqueousPhase = editor.addAqueousPhaseWithElements(ElementsList.ToArray())
+                    Dim aqueousPhase = editor.addAqueousPhaseWithElements(elstring)
                     aqueousPhase.setChemicalModelHKF()
                     aqueousPhase.setActivityModelDrummondCO2()
                 End If
 
-                If LiquidPhase Then editor.addLiquidPhaseWithElements(ElementsList.ToArray())
+                If LiquidPhase Then editor.addLiquidPhaseWithElements(elstring)
 
-                If MineralPhase Then editor.addMineralPhaseWithElements(ElementsList.ToArray())
+                If MineralPhase Then editor.addMineralPhaseWithElements(elstring)
 
                 'Construct the chemical system
 
@@ -165,7 +180,8 @@ Namespace Reactors
 
                 For Each item In CompoundsList
                     If FlowSheet.SelectedCompounds.ContainsKey(item) Then
-                        problem.add(item, msin.Phases(0).Compounds(item).MolarFlow.GetValueOrDefault(), "mol")
+                        Dim compound = FlowSheet.SelectedCompounds(item)
+                        problem.add(compound.Formula, msin.Phases(0).Compounds(item).MolarFlow.GetValueOrDefault(), "mol")
                     End If
                 Next
 
@@ -194,7 +210,6 @@ Namespace Reactors
                         End If
                         compoundAmountsFinal(SpeciesMaps(name)) += amounts(i).ToString().ToDoubleFromInvariant()
                     End If
-                    i += 1
                 Next
 
                 Dim names = msin.Phases(0).Compounds.Keys.ToList()
@@ -211,12 +226,34 @@ Namespace Reactors
                     End If
                 Next
 
+                'conversions
+
+                ComponentConversions.Clear()
+                For i = 0 To N0.Count - 1
+                    Dim conv = (N0(i) - Nf(i)) / N0(i)
+                    If conv > 0 Then
+                        ComponentConversions.Add(names(i), conv)
+                    End If
+                Next
+
+                'reaction heat
+
+                Dim DHr As Double = 0
+
+                For Each sb As Compound In msin.Phases(0).Compounds.Values
+                    If compoundAmountsFinal.ContainsKey(sb.Name) Then
+                        DHr += -sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * (Nf(names.IndexOf(sb.Name)) - N0(names.IndexOf(sb.Name))) / 1000.0
+                    End If
+                Next
+
+                esout.EnergyFlow = DHr
+
                 msout.Clear()
                 msout.ClearAllProps()
 
                 msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
                 msout.SetMolarFlow(Nf.Sum)
-                msout.SetPressure(msin.GetPressure)
+                msout.SetPressure(msin.GetPressure - DeltaP.GetValueOrDefault())
                 msout.SetTemperature(msin.GetTemperature)
                 msout.SetFlashSpec("PT")
 
