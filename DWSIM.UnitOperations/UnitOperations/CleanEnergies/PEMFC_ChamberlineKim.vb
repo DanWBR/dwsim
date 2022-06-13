@@ -1,66 +1,70 @@
 ﻿Imports System.IO
 Imports DWSIM.UnitOperations.UnitOperations
 
-Public Class PEMFC_ChamberLineKim
+Namespace UnitOperations
 
-    Inherits PEMFuelCellUnitOpBase
+    Public Class PEMFC_ChamberLineKim
 
-    Public Overrides Property Prefix As String = "FCA-"
+        Inherits PEMFuelCellUnitOpBase
 
-    Public Overrides Function GetDisplayName() As String
-        Return "PEM Fuel Cell (Chamberline-Kim)"
-    End Function
+        Public Overrides Property Prefix As String = "FCA-"
 
-    Public Overrides Function GetDisplayDescription() As String
-        Return "PEM Fuel Cell (OPEM Chamberline-Kim Static Model)"
-    End Function
+        Public Overrides Function GetDisplayName() As String
+            Return "PEM Fuel Cell (Chamberline-Kim)"
+        End Function
 
-    Public Sub New()
+        Public Overrides Function GetDisplayDescription() As String
+            Return "PEM Fuel Cell (OPEM Chamberline-Kim Static Model)"
+        End Function
 
-        MyBase.New()
+        Public Sub New()
 
-    End Sub
+            MyBase.New()
 
-    Public Overrides Sub PopulateEditorPanel(ctner As Object)
+        End Sub
 
-    End Sub
+        Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
-    Public Overrides Sub DisplayEditForm()
+        End Sub
 
-    End Sub
+        Public Overrides Sub DisplayEditForm()
 
-    Public Overrides Sub UpdateEditForm()
+        End Sub
 
-    End Sub
+        Public Overrides Sub UpdateEditForm()
 
-    Public Overrides Sub CloseEditForm()
+        End Sub
 
-    End Sub
+        Public Overrides Sub CloseEditForm()
 
-    Public Overrides Function ReturnInstance(typename As String) As Object
+        End Sub
 
-        Return New PEMFC_ChamberLineKim
+        Public Overrides Function ReturnInstance(typename As String) As Object
 
-    End Function
+            Return New PEMFC_ChamberLineKim
 
-    Public Overrides Function GetIconBitmap() As Object
+        End Function
 
-        Return My.Resources.fuel_cell
+        Public Overrides Function GetIconBitmap() As Object
 
-    End Function
+            Return My.Resources.fuel_cell
 
-    Public Overrides Function CloneXML() As Object
+        End Function
 
-        Dim obj As ICustomXMLSerialization = New PEMFC_ChamberLineKim()
-        obj.LoadData(Me.SaveData)
-        Return obj
+        Public Overrides Function CloneXML() As Object
 
-    End Function
+            Dim obj As ICustomXMLSerialization = New PEMFC_ChamberLineKim()
+            obj.LoadData(Me.SaveData)
+            Return obj
 
-    Public Overrides Function CloneJSON() As Object
+        End Function
 
-        Throw New NotImplementedException()
+        Public Overrides Function CloneJSON() As Object
 
-    End Function
+            Throw New NotImplementedException()
 
-End Class
+        End Function
+
+    End Class
+
+End Namespace

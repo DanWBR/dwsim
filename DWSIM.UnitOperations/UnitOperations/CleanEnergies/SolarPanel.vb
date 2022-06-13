@@ -5,144 +5,148 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
 
-Public Class SolarPanel
+Namespace UnitOperations
 
-    Inherits CleanEnergyUnitOpBase
+    Public Class SolarPanel
 
-    Private ImagePath As String = ""
+        Inherits CleanEnergyUnitOpBase
 
-    Private Image As SKImage
+        Private ImagePath As String = ""
 
-    Public Overrides Property Prefix As String = "SP-"
+        Private Image As SKImage
 
-    Public Overrides Function GetDisplayName() As String
-        Return "Solar Panel"
-    End Function
+        Public Overrides Property Prefix As String = "SP-"
 
-    Public Overrides Function GetDisplayDescription() As String
-        Return "Solar Panel"
-    End Function
+        Public Overrides Function GetDisplayName() As String
+            Return "Solar Panel"
+        End Function
 
-    Public Sub New()
+        Public Overrides Function GetDisplayDescription() As String
+            Return "Solar Panel"
+        End Function
 
-        MyBase.New()
+        Public Sub New()
 
-    End Sub
+            MyBase.New()
 
-    Public Overrides Sub Draw(g As Object)
+        End Sub
 
-        Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
+        Public Overrides Sub Draw(g As Object)
 
-        If Image Is Nothing Then
+            Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            ImagePath = SharedClasses.Utility.GetTempFileName()
-            My.Resources.icons8_solar_panel.Save(ImagePath)
+            If Image Is Nothing Then
 
-            Using streamBG = New FileStream(ImagePath, FileMode.Open)
-                Using bitmap = SKBitmap.Decode(streamBG)
-                    Image = SKImage.FromBitmap(bitmap)
+                ImagePath = SharedClasses.Utility.GetTempFileName()
+                My.Resources.icons8_solar_panel.Save(ImagePath)
+
+                Using streamBG = New FileStream(ImagePath, FileMode.Open)
+                    Using bitmap = SKBitmap.Decode(streamBG)
+                        Image = SKImage.FromBitmap(bitmap)
+                    End Using
                 End Using
+
+                Try
+                    File.Delete(ImagePath)
+                Catch ex As Exception
+                End Try
+
+            End If
+
+            Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                canvas.DrawImage(Image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
             End Using
 
-            Try
-                File.Delete(ImagePath)
-            Catch ex As Exception
-            End Try
+        End Sub
 
-        End If
+        Public Overrides Sub CreateConnectors()
 
-        Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-            canvas.DrawImage(Image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
-        End Using
+            Dim w, h, x, y As Double
+            w = GraphicObject.Width
+            h = GraphicObject.Height
+            x = GraphicObject.X
+            y = GraphicObject.Y
 
-    End Sub
+            Dim myOC1 As New ConnectionPoint
+            myOC1.Position = New Point(x + w, y / 2.0)
+            myOC1.Type = ConType.ConOut
+            myOC1.Direction = ConDir.Right
+            myOC1.Type = ConType.ConEn
 
-    Public Overrides Sub CreateConnectors()
+            With GraphicObject.OutputConnectors
+                If .Count = 1 Then
+                    .Item(0).Position = New Point(x + w, y / 2.0)
+                Else
+                    .Add(myOC1)
+                End If
+                .Item(0).ConnectorName = "Power Outlet"
+            End With
 
-        Dim w, h, x, y As Double
-        w = GraphicObject.Width
-        h = GraphicObject.Height
-        x = GraphicObject.X
-        y = GraphicObject.Y
+            Me.GraphicObject.EnergyConnector.Active = False
 
-        Dim myOC1 As New ConnectionPoint
-        myOC1.Position = New Point(x + w, y / 2.0)
-        myOC1.Type = ConType.ConOut
-        myOC1.Direction = ConDir.Right
-        myOC1.Type = ConType.ConEn
+        End Sub
 
-        With GraphicObject.OutputConnectors
-            If .Count = 1 Then
-                .Item(0).Position = New Point(x + w, y / 2.0)
-            Else
-                .Add(myOC1)
-            End If
-            .Item(0).ConnectorName = "Power Outlet"
-        End With
+        Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
-        Me.GraphicObject.EnergyConnector.Active = False
+        End Sub
 
-    End Sub
+        Public Overrides Sub DisplayEditForm()
 
-    Public Overrides Sub PopulateEditorPanel(ctner As Object)
+        End Sub
 
-    End Sub
+        Public Overrides Sub UpdateEditForm()
 
-    Public Overrides Sub DisplayEditForm()
+        End Sub
 
-    End Sub
+        Public Overrides Sub CloseEditForm()
 
-    Public Overrides Sub UpdateEditForm()
+        End Sub
 
-    End Sub
+        Public Overrides Function ReturnInstance(typename As String) As Object
 
-    Public Overrides Sub CloseEditForm()
+            Return New SolarPanel
 
-    End Sub
+        End Function
 
-    Public Overrides Function ReturnInstance(typename As String) As Object
+        Public Overrides Function GetIconBitmap() As Object
 
-        Return New SolarPanel
+            Return My.Resources.icons8_solar_panel
 
-    End Function
+        End Function
 
-    Public Overrides Function GetIconBitmap() As Object
+        Public Overrides Function CloneXML() As Object
 
-        Return My.Resources.icons8_solar_panel
+            Dim obj As ICustomXMLSerialization = New SolarPanel()
+            obj.LoadData(Me.SaveData)
+            Return obj
 
-    End Function
+        End Function
 
-    Public Overrides Function CloneXML() As Object
+        Public Overrides Function CloneJSON() As Object
 
-        Dim obj As ICustomXMLSerialization = New SolarPanel()
-        obj.LoadData(Me.SaveData)
-        Return obj
+            Throw New NotImplementedException()
 
-    End Function
+        End Function
 
-    Public Overrides Function CloneJSON() As Object
+        Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
-        Throw New NotImplementedException()
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-    End Function
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-    Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
+            Return True
 
-        Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+        End Function
 
-        XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
 
-        Return True
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-    End Function
+            Return elements
 
-    Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
+        End Function
 
-        Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
-        Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+    End Class
 
-        Return elements
-
-    End Function
-
-End Class
+End Namespace

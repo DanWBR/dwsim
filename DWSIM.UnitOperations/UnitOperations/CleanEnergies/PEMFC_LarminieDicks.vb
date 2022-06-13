@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 Imports DWSIM.UnitOperations.UnitOperations
 
-Public Class PEMFC_LarminieDicks
+Namespace UnitOperations
+
+    Public Class PEMFC_LarminieDicks
 
     Inherits PEMFuelCellUnitOpBase
 
@@ -64,3 +66,5 @@ Public Class PEMFC_LarminieDicks
     End Function
 
 End Class
+
+End Namespace

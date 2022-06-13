@@ -256,6 +256,12 @@
     <Compile Include="EditingForms\EditingForm_Emixer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\EditingForm_OPEMFC.Designer.vb">
+      <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_OPEMFC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\EditingForm_Switch.Designer.vb">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
     </Compile>
@@ -739,6 +745,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Emixer.resx">
       <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_OPEMFC.resx">
+      <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Switch.en.resx">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>

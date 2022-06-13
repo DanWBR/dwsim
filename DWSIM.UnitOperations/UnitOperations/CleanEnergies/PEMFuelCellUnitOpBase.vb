@@ -69,8 +69,7 @@ Namespace UnitOperations
 
         Private Image As SKImage
 
-        Protected _name = ""
-        Protected _desc = ""
+        <Xml.Serialization.XmlIgnore> Public f As EditingForm_OPEMFC
 
         Public Property OPEMPath As String = "C:\python_opem\python-3.9.4.amd64"
 
@@ -223,6 +222,47 @@ Namespace UnitOperations
             Return elements
 
         End Function
+
+        Public Overrides Sub DisplayEditForm()
+
+            If f Is Nothing Then
+                f = New EditingForm_OPEMFC With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_OPEMFC With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Public Overrides Sub UpdateEditForm()
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+                End If
+            End If
+
+        End Sub
+
+        Public Overrides Sub CloseEditForm()
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
+
+        End Sub
 
         Public Function ToList(pythonlist As Object) As List(Of Double)
 

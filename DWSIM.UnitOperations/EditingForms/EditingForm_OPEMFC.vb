@@ -1,11 +1,11 @@
 ﻿Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 
-Public Class EditingForm_WaterElectrolyzer
+Public Class EditingForm_OPEMFC
 
     Inherits SharedClasses.ObjectEditorForm
 
-    Public Property SimObject As WaterElectrolyzer
+    Public Property SimObject As PEMFuelCellUnitOpBase
 
     Public Loaded As Boolean = False
 
@@ -80,7 +80,7 @@ Public Class EditingForm_WaterElectrolyzer
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
 
-            If .GraphicObject.InputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            If .GraphicObject.OutputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
 
             'annotation
 
@@ -93,18 +93,18 @@ Public Class EditingForm_WaterElectrolyzer
             'input parameters
 
             gridInput.Rows.Clear()
-            gridInput.Rows.Add(New Object() {"Total Voltage", .Voltage.ToString(nf), "V"})
-            gridInput.Rows.Add(New Object() {"Number of Cells", .NumberOfCells, ""})
+            For Each item In .InputParameters.Values
+                gridInput.Rows.Add(New Object() {item.Name, item.Description, item.Value.ToString(nf), item.Units})
+            Next
 
             'output parameters
 
             If .Calculated Then
 
                 gridOutput.Rows.Clear()
-                gridOutput.Rows.Add(New Object() {"Cell Voltage", .CellVoltage.ToString(nf), "V"})
-                gridOutput.Rows.Add(New Object() {"Current", .Current.ToString(nf), "A"})
-                gridOutput.Rows.Add(New Object() {"Electron Transfer", .ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow})
-                gridOutput.Rows.Add(New Object() {"Waste Heat", .WasteHeat.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow})
+                For Each item In .OutputParameters.Values
+                    gridOutput.Rows.Add(New Object() {item.Name, item.Description, item.Value.ToString(nf), item.Units})
+                Next
 
             End If
 
@@ -136,7 +136,7 @@ Public Class EditingForm_WaterElectrolyzer
 
     Private Sub btnDisconnectEnergy_Click(sender As Object, e As EventArgs) Handles btnDisconnectEnergy.Click
         If cbEnergy.SelectedItem IsNot Nothing Then
-            SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
+            SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo)
             cbEnergy.SelectedItem = Nothing
         End If
     End Sub
@@ -206,12 +206,12 @@ Public Class EditingForm_WaterElectrolyzer
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(0).IsAttached Then
+                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
-                If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
-                flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
+                If gobj.OutputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(index).AttachedConnector.AttachedTo)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
             End If
 
@@ -248,10 +248,10 @@ Public Class EditingForm_WaterElectrolyzer
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 30, sgobj.InputConnectors(1).Position.Y + 30, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.OutputConnectors(1).Position.X + 30, sgobj.InputConnectors(1).Position.Y + 30, "")
 
-            If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
-            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
+            If sgobj.OutputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(1).AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, 1, 0)
 
         End If
 
@@ -278,14 +278,10 @@ Public Class EditingForm_WaterElectrolyzer
 
             Try
 
-                Dim value = gridInput.Rows(e.RowIndex).Cells(1).Value
+                Dim prop = gridInput.Rows(e.RowIndex).Cells(0).Value
+                Dim value = gridInput.Rows(e.RowIndex).Cells(2).Value
 
-                Select Case gridInput.Rows(e.RowIndex).Cells(0).Value
-                    Case "Total Voltage"
-                        SimObject.Voltage = value
-                    Case "Number of Cells"
-                        SimObject.NumberOfCells = value
-                End Select
+                SimObject.InputParameters(prop).Value = value
 
             Catch ex As Exception
 

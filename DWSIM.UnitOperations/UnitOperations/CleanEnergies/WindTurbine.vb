@@ -5,7 +5,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
 
-Public Class WindTurbine
+Namespace UnitOperations
+
+    Public Class WindTurbine
 
     Inherits CleanEnergyUnitOpBase
 
@@ -147,3 +149,5 @@ Public Class WindTurbine
     End Function
 
 End Class
+
+End Namespace

@@ -5,270 +5,274 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
 
-Public Class WaterElectrolyzer
+Namespace UnitOperations
 
-    Inherits CleanEnergyUnitOpBase
+    Public Class WaterElectrolyzer
 
-    Private ImagePath As String = ""
+        Inherits CleanEnergyUnitOpBase
 
-    Private Image As SKImage
+        Private ImagePath As String = ""
 
-    <Xml.Serialization.XmlIgnore> Public f As EditingForm_WaterElectrolyzer
+        Private Image As SKImage
 
-    Public Overrides Function GetDisplayName() As String
-        Return "Water Electrolyzer"
-    End Function
+        <Xml.Serialization.XmlIgnore> Public f As EditingForm_WaterElectrolyzer
 
-    Public Overrides Function GetDisplayDescription() As String
-        Return "Water Electrolyzer"
-    End Function
+        Public Overrides Function GetDisplayName() As String
+            Return "Water Electrolyzer"
+        End Function
 
-    Public Overrides Property Prefix As String = "WE-"
+        Public Overrides Function GetDisplayDescription() As String
+            Return "Water Electrolyzer"
+        End Function
 
-    Public Property Voltage As Double
+        Public Overrides Property Prefix As String = "WE-"
 
-    Public Property NumberOfCells As Integer
+        Public Property Voltage As Double
 
-    Public Property CellVoltage As Double
+        Public Property NumberOfCells As Integer
 
-    Public Property WasteHeat As Double
+        Public Property CellVoltage As Double
 
-    Public Property Current As Double
+        Public Property WasteHeat As Double
 
-    Public Property ElectronTransfer As Double
+        Public Property Current As Double
 
-    Public Sub New()
+        Public Property ElectronTransfer As Double
 
-        MyBase.New()
+        Public Sub New()
 
-    End Sub
+            MyBase.New()
 
-    Public Overrides Sub Draw(g As Object)
+        End Sub
 
-        Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
+        Public Overrides Sub Draw(g As Object)
 
-        If Image Is Nothing Then
+            Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            ImagePath = SharedClasses.Utility.GetTempFileName()
-            My.Resources.electrolysis.Save(ImagePath)
+            If Image Is Nothing Then
 
-            Using streamBG = New FileStream(ImagePath, FileMode.Open)
-                Using bitmap = SKBitmap.Decode(streamBG)
-                    Image = SKImage.FromBitmap(bitmap)
+                ImagePath = SharedClasses.Utility.GetTempFileName()
+                My.Resources.electrolysis.Save(ImagePath)
+
+                Using streamBG = New FileStream(ImagePath, FileMode.Open)
+                    Using bitmap = SKBitmap.Decode(streamBG)
+                        Image = SKImage.FromBitmap(bitmap)
+                    End Using
                 End Using
+
+                Try
+                    File.Delete(ImagePath)
+                Catch ex As Exception
+                End Try
+
+            End If
+
+            Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                canvas.DrawImage(Image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
             End Using
 
-            Try
-                File.Delete(ImagePath)
-            Catch ex As Exception
-            End Try
+        End Sub
 
-        End If
+        Public Overrides Sub CreateConnectors()
 
-        Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-            canvas.DrawImage(Image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
-        End Using
+            Dim w, h, x, y As Double
+            w = GraphicObject.Width
+            h = GraphicObject.Height
+            x = GraphicObject.X
+            y = GraphicObject.Y
 
-    End Sub
+            Dim myIC1 As New ConnectionPoint
 
-    Public Overrides Sub CreateConnectors()
+            myIC1.Position = New Point(x, y + h / 2)
+            myIC1.Type = ConType.ConIn
+            myIC1.Direction = ConDir.Right
 
-        Dim w, h, x, y As Double
-        w = GraphicObject.Width
-        h = GraphicObject.Height
-        x = GraphicObject.X
-        y = GraphicObject.Y
+            Dim myIC2 As New ConnectionPoint
 
-        Dim myIC1 As New ConnectionPoint
+            myIC2.Position = New Point(x + 0.5 * w, y + h)
+            myIC2.Type = ConType.ConEn
+            myIC2.Direction = ConDir.Up
+            myIC2.Type = ConType.ConEn
 
-        myIC1.Position = New Point(x, y + h / 2)
-        myIC1.Type = ConType.ConIn
-        myIC1.Direction = ConDir.Right
+            Dim myOC1 As New ConnectionPoint
+            myOC1.Position = New Point(x + w, y / 2)
+            myOC1.Type = ConType.ConOut
+            myOC1.Direction = ConDir.Right
 
-        Dim myIC2 As New ConnectionPoint
+            With GraphicObject.InputConnectors
+                If .Count = 2 Then
+                    .Item(0).Position = New Point(x, y + h / 2)
+                    .Item(1).Position = New Point(x + 0.5 * w, y + h)
+                Else
+                    .Add(myIC1)
+                    .Add(myIC2)
+                End If
+                .Item(0).ConnectorName = "Fluid Inlet"
+                .Item(1).ConnectorName = "Power Inlet"
+            End With
 
-        myIC2.Position = New Point(x + 0.5 * w, y + h)
-        myIC2.Type = ConType.ConEn
-        myIC2.Direction = ConDir.Up
-        myIC2.Type = ConType.ConEn
+            With GraphicObject.OutputConnectors
+                If .Count = 1 Then
+                    .Item(0).Position = New Point(x + w, y + h / 2)
+                Else
+                    .Add(myOC1)
+                End If
+                .Item(0).ConnectorName = "Products Outlet"
+            End With
 
-        Dim myOC1 As New ConnectionPoint
-        myOC1.Position = New Point(x + w, y / 2)
-        myOC1.Type = ConType.ConOut
-        myOC1.Direction = ConDir.Right
+            Me.GraphicObject.EnergyConnector.Active = False
 
-        With GraphicObject.InputConnectors
-            If .Count = 2 Then
-                .Item(0).Position = New Point(x, y + h / 2)
-                .Item(1).Position = New Point(x + 0.5 * w, y + h)
-            Else
-                .Add(myIC1)
-                .Add(myIC2)
-            End If
-            .Item(0).ConnectorName = "Fluid Inlet"
-            .Item(1).ConnectorName = "Power Inlet"
-        End With
+        End Sub
 
-        With GraphicObject.OutputConnectors
-            If .Count = 1 Then
-                .Item(0).Position = New Point(x + w, y + h / 2)
-            Else
-                .Add(myOC1)
-            End If
-            .Item(0).ConnectorName = "Products Outlet"
-        End With
+        Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
-        Me.GraphicObject.EnergyConnector.Active = False
+        End Sub
 
-    End Sub
+        Public Overrides Sub DisplayEditForm()
 
-    Public Overrides Sub PopulateEditorPanel(ctner As Object)
-
-    End Sub
-
-    Public Overrides Sub DisplayEditForm()
-
-        If f Is Nothing Then
-            f = New EditingForm_WaterElectrolyzer With {.SimObject = Me}
-            f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
-            f.Tag = "ObjectEditor"
-            Me.FlowSheet.DisplayForm(f)
-        Else
-            If f.IsDisposed Then
+            If f Is Nothing Then
                 f = New EditingForm_WaterElectrolyzer With {.SimObject = Me}
                 f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                 f.Tag = "ObjectEditor"
                 Me.FlowSheet.DisplayForm(f)
             Else
-                f.Activate()
+                If f.IsDisposed Then
+                    f = New EditingForm_WaterElectrolyzer With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
             End If
-        End If
 
-    End Sub
+        End Sub
 
-    Public Overrides Sub UpdateEditForm()
+        Public Overrides Sub UpdateEditForm()
 
-        If f IsNot Nothing Then
-            If Not f.IsDisposed Then
-                If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+                End If
             End If
-        End If
 
-    End Sub
+        End Sub
 
-    Public Overrides Sub CloseEditForm()
+        Public Overrides Sub CloseEditForm()
 
-        If f IsNot Nothing Then
-            If Not f.IsDisposed Then
-                f.Close()
-                f = Nothing
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
             End If
-        End If
 
-    End Sub
+        End Sub
 
-    Public Overrides Function ReturnInstance(typename As String) As Object
+        Public Overrides Function ReturnInstance(typename As String) As Object
 
-        Return New WaterElectrolyzer
+            Return New WaterElectrolyzer
 
-    End Function
+        End Function
 
-    Public Overrides Function GetIconBitmap() As Object
+        Public Overrides Function GetIconBitmap() As Object
 
-        Return My.Resources.electrolysis
+            Return My.Resources.electrolysis
 
-    End Function
+        End Function
 
-    Public Overrides Function CloneXML() As Object
+        Public Overrides Function CloneXML() As Object
 
-        Dim obj As ICustomXMLSerialization = New WaterElectrolyzer()
-        obj.LoadData(Me.SaveData)
-        Return obj
+            Dim obj As ICustomXMLSerialization = New WaterElectrolyzer()
+            obj.LoadData(Me.SaveData)
+            Return obj
 
-    End Function
+        End Function
 
-    Public Overrides Function CloneJSON() As Object
+        Public Overrides Function CloneJSON() As Object
 
-        Throw New NotImplementedException()
+            Throw New NotImplementedException()
 
-    End Function
+        End Function
 
-    Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
+        Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
-        Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-        XMLSerializer.XMLSerializer.Deserialize(Me, data)
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-        Return True
+            Return True
 
-    End Function
+        End Function
 
-    Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
+        Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
 
-        Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
-        Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-        Return elements
+            Return elements
 
-    End Function
+        End Function
 
-    Public Overrides Sub Calculate(Optional args As Object = Nothing)
+        Public Overrides Sub Calculate(Optional args As Object = Nothing)
 
-        Dim msin = GetInletMaterialStream(0)
-        Dim msout = GetOutletMaterialStream(0)
+            Dim msin = GetInletMaterialStream(0)
+            Dim msout = GetOutletMaterialStream(0)
 
-        Dim esin = GetInletEnergyStream(1)
+            Dim esin = GetInletEnergyStream(1)
 
-        Dim names = msin.Phases(0).Compounds.Keys.ToList()
+            Dim names = msin.Phases(0).Compounds.Keys.ToList()
 
-        If Not names.Contains("Water") Then Throw New Exception("Needs Water compound")
-        If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound")
-        If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound")
+            If Not names.Contains("Water") Then Throw New Exception("Needs Water compound")
+            If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound")
+            If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound")
 
-        Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
+            Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
 
-        ElectronTransfer = Current / 96485.3365 * NumberOfCells 'mol/s
+            ElectronTransfer = Current / 96485.3365 * NumberOfCells 'mol/s
 
-        Dim waterr = ElectronTransfer / 4 * 2 'mol/s
-        Dim h2r = ElectronTransfer / 4 * 2 'mol/s
-        Dim o2r = ElectronTransfer / 4 'mol/s
+            Dim waterr = ElectronTransfer / 4 * 2 'mol/s
+            Dim h2r = ElectronTransfer / 4 * 2 'mol/s
+            Dim o2r = ElectronTransfer / 4 'mol/s
 
-        Dim spO2 = 1.23 'V
+            Dim spO2 = 1.23 'V
 
-        Dim cellV = Voltage / NumberOfCells
+            Dim cellV = Voltage / NumberOfCells
 
-        If cellV < spO2 Then Throw New Exception("Not enough power")
+            If cellV < spO2 Then Throw New Exception("Not enough power")
 
-        Dim overV = cellV - spO2
+            Dim overV = cellV - spO2
 
-        WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
+            WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
 
-        Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
+            Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
 
-        Dim Nf = New List(Of Double)(N0)
+            Dim Nf = New List(Of Double)(N0)
 
-        For i As Integer = 0 To N0.Count - 1
-            If names(i) = "Water" Then
-                Nf(i) = N0(i) - waterr
-                If (Nf(i) < 0.0) Then Throw New Exception("Negative Water molar flow calculated")
-            ElseIf names(i) = "Hydrogen" Then
-                Nf(i) = N0(i) + h2r
-            ElseIf names(i) = "Oxygen" Then
-                Nf(i) = N0(i) + o2r
-            End If
-        Next
+            For i As Integer = 0 To N0.Count - 1
+                If names(i) = "Water" Then
+                    Nf(i) = N0(i) - waterr
+                    If (Nf(i) < 0.0) Then Throw New Exception("Negative Water molar flow calculated")
+                ElseIf names(i) = "Hydrogen" Then
+                    Nf(i) = N0(i) + h2r
+                ElseIf names(i) = "Oxygen" Then
+                    Nf(i) = N0(i) + o2r
+                End If
+            Next
 
-        msout.Clear()
-        msout.ClearAllProps()
+            msout.Clear()
+            msout.ClearAllProps()
 
-        msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
-        msout.SetMolarFlow(Nf.Sum)
-        msout.SetPressure(msin.GetPressure)
-        msout.SetMassEnthalpy(msin.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
-        msout.SetFlashSpec("PH")
+            msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
+            msout.SetMolarFlow(Nf.Sum)
+            msout.SetPressure(msin.GetPressure)
+            msout.SetMassEnthalpy(msin.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
+            msout.SetFlashSpec("PH")
 
-        msout.AtEquilibrium = False
+            msout.AtEquilibrium = False
 
-    End Sub
+        End Sub
 
-End Class
+    End Class
+
+End Namespace
