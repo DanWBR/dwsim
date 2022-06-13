@@ -459,9 +459,11 @@ Public Class EditingForm_AirCooler
     End Sub
 
     Private Sub rbUserDef_CheckedChanged(sender As Object, e As EventArgs) Handles rbUserDef.CheckedChanged, rbUseGlobal.CheckedChanged
-        If Loaded Then SimObject.UseGlobalWeather = rbUseGlobal.Checked
-        tbInletAirPre.Enabled = Not SimObject.UseGlobalWeather
-        tbInletAirTemp.Enabled = Not SimObject.UseGlobalWeather
+        If Loaded Then
+            SimObject.UseGlobalWeather = rbUseGlobal.Checked
+            tbInletAirPre.Enabled = Not SimObject.UseGlobalWeather
+            tbInletAirTemp.Enabled = Not SimObject.UseGlobalWeather
+        End If
     End Sub
 
 End Class

@@ -195,21 +195,25 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    Private Sub ReadWeather(currentWeather As IWeatherData)
+    Private Sub ReadWeather(cw As IWeatherData)
 
-        cbWeather.SelectedIndex = currentWeather.CurrentCondition
+        Loaded = False
 
-        tbAmbientTemperature.Text = currentWeather.Temperature_C
+        cbWeather.SelectedIndex = cw.CurrentCondition
 
-        tbWindSpeed.Text = currentWeather.WindSpeed_km_h
+        tbAmbientTemperature.Text = cw.Temperature_C
 
-        tbHumidity.Text = currentWeather.RelativeHumidity_pct
+        tbWindSpeed.Text = cw.WindSpeed_km_h
 
-        tbSolarIrradiation.Text = currentWeather.SolarIrradiation_kWh_m2
+        tbHumidity.Text = cw.RelativeHumidity_pct
 
-        tbAtmPress.Text = (currentWeather.AtmosphericPressure_Pa / 100.0).ToString("N0")
+        tbSolarIrradiation.Text = cw.SolarIrradiation_kWh_m2
 
-        tbCurrentLocation.Text = currentWeather.Latitude.ToString() + ", " + currentWeather.Longitude.ToString()
+        tbAtmPress.Text = (cw.AtmosphericPressure_Pa / 100.0).ToString("N0")
+
+        tbCurrentLocation.Text = cw.Latitude.ToString() + ", " + cw.Longitude.ToString()
+
+        Loaded = True
 
     End Sub
 
@@ -3869,7 +3873,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Catch ex As Exception
             End Try
             Try
-                Flowsheet.Options.CurrentWeather.AtmosphericPressure_Pa = tbAtmPress.Text
+                Flowsheet.Options.CurrentWeather.AtmosphericPressure_Pa = tbAtmPress.Text * 1000.0
             Catch ex As Exception
             End Try
         End If
@@ -3892,7 +3896,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If Flowsheet.WeatherProvider IsNot Nothing Then
 
             Dim data = Flowsheet.WeatherProvider.GetCurrentWeather(tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant(),
-                                                                   tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant())
+                                                                   tbCurrentLocation.Text.Split(",")(1).Trim().ToDoubleFromInvariant())
 
             Flowsheet.Options.CurrentWeather = data
 

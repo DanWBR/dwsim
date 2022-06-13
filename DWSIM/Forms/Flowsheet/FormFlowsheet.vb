@@ -55,7 +55,7 @@ Public Class FormFlowsheet
 
 #Region "    Variable Declarations "
 
-    Public Property WeatherProvider As IWeatherProvider Implements IFlowsheet.WeatherProvider
+    Public Property WeatherProvider As IWeatherProvider = New WeatherProvider() Implements IFlowsheet.WeatherProvider
 
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
 
