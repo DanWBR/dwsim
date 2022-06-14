@@ -14,7 +14,7 @@ Namespace UnitOperations
             Flowsheet = 1
         End Enum
 
-        Public Property UserDefinedWeatherConditions As IWeatherData = New SharedClasses.WeatherData()
+        Public Property UseUserDefinedWeather As Boolean = False
 
         Public Overrides ReadOnly Property IsSource As Boolean = True
 

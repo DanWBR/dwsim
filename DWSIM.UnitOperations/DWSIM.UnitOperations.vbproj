@@ -274,6 +274,12 @@
     <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\EditingForm_SolarPanel.Designer.vb">
+      <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_SolarPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\EditingForm_Switch.Designer.vb">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
     </Compile>
@@ -768,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_ReaktoroGibbs.resx">
       <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_SolarPanel.resx">
+      <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Switch.en.resx">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>

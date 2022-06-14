@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
@@ -255,6 +256,82 @@ Namespace UnitOperations
             msout.AtEquilibrium = False
 
         End Sub
+
+        Public Overrides Function GetProperties(proptype As PropertyType) As String()
+
+            Select Case proptype
+                Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
+                    Return New String() {"Efficiency", "Static Head", "Velocity Head", "Total Head", "Inlet Velocity", "Outlet Velocity", "Generated Power"}
+                Case PropertyType.WR
+                    Return New String() {"Efficiency", "Static Head", "Inlet Velocity", "Outlet Velocity"}
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Return Efficiency
+                Case "Static Head"
+                    Return StaticHead.ConvertFromSI(su.distance)
+                Case "Velocity Head"
+                    Return VelocityHead.ConvertFromSI(su.distance)
+                Case "Total Head"
+                    Return TotalHead.ConvertFromSI(su.distance)
+                Case "Inlet Velocity"
+                    Return InletVelocity.ConvertFromSI(su.velocity)
+                Case "Outlet Velocity"
+                    Return OutletVelocity.ConvertFromSI(su.velocity)
+                Case "Generated Power"
+                    Return GeneratedPower.ConvertFromSI(su.heatflow)
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyUnit(prop As String, Optional su As IUnitsOfMeasure = Nothing) As String
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Return ""
+                Case "Static Head"
+                    Return (su.distance)
+                Case "Velocity Head"
+                    Return (su.distance)
+                Case "Total Head"
+                    Return (su.distance)
+                Case "Inlet Velocity"
+                    Return (su.velocity)
+                Case "Outlet Velocity"
+                    Return (su.velocity)
+                Case "Generated Power"
+                    Return (su.heatflow)
+            End Select
+
+        End Function
+
+        Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Efficiency = propval
+                Case "Static Head"
+                    StaticHead = Convert.ToDouble(propval).ConvertToSI(su.distance)
+                Case "Inlet Velocity"
+                    InletVelocity = Convert.ToDouble(propval).ConvertToSI(su.velocity)
+                Case "Outlet Velocity"
+                    OutletVelocity = Convert.ToDouble(propval).ConvertToSI(su.velocity)
+            End Select
+
+            Return True
+
+        End Function
 
     End Class
 

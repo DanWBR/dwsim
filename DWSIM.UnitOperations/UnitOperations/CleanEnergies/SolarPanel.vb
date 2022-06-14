@@ -17,6 +17,16 @@ Namespace UnitOperations
 
         Public Overrides Property Prefix As String = "SP-"
 
+        Public Property PanelArea As Double = 1
+
+        Public Property PanelEfficiency As Double = 15
+
+        Public Property NumberOfPanels As Integer = 1
+
+        Public Property GeneratedPower As Double = 0.0
+
+        Public Property SolarIrradiation_kW_m2 As Double = 1.0
+
         Public Overrides Function GetDisplayName() As String
             Return "Solar Panel"
         End Function
@@ -146,6 +156,26 @@ Namespace UnitOperations
             Return elements
 
         End Function
+
+        Public Overrides Sub Calculate(Optional args As Object = Nothing)
+
+            Dim esout = GetOutletEnergyStream(0)
+
+            Dim si As Double = 0.0
+
+            If UseUserDefinedWeather Then
+
+                si = SolarIrradiation_kW_m2
+
+            Else
+
+                si = FlowSheet.FlowsheetOptions.CurrentWeather.SolarIrradiation_kWh_m2
+
+            End If
+
+            GeneratedPower = si * PanelArea * NumberOfPanels * PanelEfficiency / 100.0
+
+        End Sub
 
     End Class
 
