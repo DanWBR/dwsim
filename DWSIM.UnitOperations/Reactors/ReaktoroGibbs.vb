@@ -32,7 +32,7 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReaktoroGibbs
 
-        Public Property ReaktoroPath As String = "C:\python_reaktoro"
+        Public Property ReaktoroPath As String = "python_reaktoro"
 
         Public Property DatabaseName As String = "supcrt07.xml"
 
@@ -63,6 +63,8 @@ Namespace Reactors
         Public Property LiquidPhase As Boolean = False
 
         Public Property MineralPhase As Boolean = False
+
+        Public Property CompoundNames As New Dictionary(Of String, String)
 
         Public Property SpeciesMaps As New Dictionary(Of String, String)
 
@@ -128,8 +130,13 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-
             DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
+
+            ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "python_reaktoro")
+
+            If Not Directory.Exists(ReaktoroPath) Then
+                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+            End If
 
             DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
 
@@ -181,7 +188,7 @@ Namespace Reactors
                 For Each item In CompoundsList
                     If FlowSheet.SelectedCompounds.ContainsKey(item) Then
                         Dim compound = FlowSheet.SelectedCompounds(item)
-                        problem.add(compound.Formula, msin.Phases(0).Compounds(item).MolarFlow.GetValueOrDefault(), "mol")
+                        problem.add(CompoundNames(item), msin.Phases(0).Compounds(item).MolarFlow.GetValueOrDefault(), "mol")
                     End If
                 Next
 

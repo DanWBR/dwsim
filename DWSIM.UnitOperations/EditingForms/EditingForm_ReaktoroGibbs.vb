@@ -125,6 +125,11 @@ Public Class EditingForm_ReaktoroGibbs
                 gridSpeciesMappings.Rows.Add(New Object() {item.Key, item.Value})
             Next
 
+            gridCompNames.Rows.Clear()
+            For Each item In .CompoundNames
+                gridCompNames.Rows.Add(New Object() {item.Key, item.Value})
+            Next
+
             Dim comps = SimObject.FlowSheet.SelectedCompounds.Keys.ToList()
 
             lvComps.Clear()
@@ -452,4 +457,43 @@ Public Class EditingForm_ReaktoroGibbs
     Private Sub cbDatabase_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDatabase.SelectedIndexChanged
         If Loaded Then SimObject.DatabaseName = cbDatabase.SelectedItem.ToString()
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Loaded = False
+
+        Dim comps = SimObject.FlowSheet.SelectedCompounds.Values.ToList()
+        gridCompNames.Rows.Clear()
+        SimObject.CompoundNames.Clear()
+        For Each c In comps
+            SimObject.CompoundNames.Add(c.Name, c.Formula)
+            gridCompNames.Rows.Add(New Object() {c.Name, c.Formula})
+        Next
+
+        Loaded = True
+
+    End Sub
+
+    Private Sub gridCompNames_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridCompNames.CellValueChanged
+
+        If Loaded Then
+
+            Try
+
+                Dim value = gridCompNames.Rows(e.RowIndex).Cells(1).Value
+
+                Dim comp = gridCompNames.Rows(e.RowIndex).Cells(0).Value
+
+                SimObject.CompoundNames(comp) = value
+
+            Catch ex As Exception
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
+        End If
+
+    End Sub
+
 End Class
