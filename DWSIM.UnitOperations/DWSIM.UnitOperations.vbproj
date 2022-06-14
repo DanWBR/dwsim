@@ -256,6 +256,12 @@
     <Compile Include="EditingForms\EditingForm_Emixer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.Designer.vb">
+      <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\EditingForm_OPEMFC.Designer.vb">
       <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
     </Compile>
@@ -670,6 +676,7 @@
     <Compile Include="UnitOperations\AirCooler.vb" />
     <Compile Include="UnitOperations\CleanEnergies\CleanEnergyUnitOpBase.vb" />
     <Compile Include="UnitOperations\CleanEnergies\EnergyMixer.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\HydroelectricTurbine.vb" />
     <Compile Include="UnitOperations\CleanEnergies\PEMFC_Amphlett.vb" />
     <None Include="UnitOperations\CleanEnergies\PEMFC_ChamberlineKim.vb" />
     <None Include="UnitOperations\CleanEnergies\PEMFC_LarminieDicks.vb" />
@@ -752,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Emixer.resx">
       <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_HydroelectricTurbine.resx">
+      <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_OPEMFC.resx">
       <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
