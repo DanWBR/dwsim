@@ -207,7 +207,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         tbHumidity.Text = cw.RelativeHumidity_pct
 
-        tbSolarIrradiation.Text = cw.SolarIrradiation_kWh_m2
+        tbSolarIrradiation.Text = cw.SolarIrradiation_kWh_m2.ToString("N2")
 
         tbAtmPress.Text = (cw.AtmosphericPressure_Pa / 100.0).ToString("N0")
 
@@ -3895,12 +3895,20 @@ Public Class FlowsheetSurface_SkiaSharp
 
         If Flowsheet.WeatherProvider IsNot Nothing Then
 
-            Dim data = Flowsheet.WeatherProvider.GetCurrentWeather(tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant(),
+            Try
+
+                Dim data = Flowsheet.WeatherProvider.GetCurrentWeather(tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant(),
                                                                    tbCurrentLocation.Text.Split(",")(1).Trim().ToDoubleFromInvariant())
 
-            Flowsheet.Options.CurrentWeather = data
+                Flowsheet.Options.CurrentWeather = data
 
-            ReadWeather(data)
+                ReadWeather(data)
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error getting current weather: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
 
         End If
 

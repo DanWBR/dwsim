@@ -79,7 +79,9 @@ Imports SkiaSharp
     End Sub
 
     Public Overrides Function GetIconBitmap() As Object
-        Return My.Resources.uo_mixer_32
+
+        Return My.Resources.uo_enmixer_32
+
     End Function
 
     Public Overrides Sub CloseEditForm()

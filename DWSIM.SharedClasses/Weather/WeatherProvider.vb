@@ -21,7 +21,7 @@ Public Class WeatherProvider
         With formattedresult
             .AtmosphericPressure_Pa = result.pressure.value / 1000.0 * 101325
             Select Case result.phrase.ToLower()
-                Case "cloudy"
+                Case "cloudy", "partly sunny"
                     .CurrentCondition = WeatherCondition.Cloudy
                 Case "clear", "sunny"
                     .CurrentCondition = WeatherCondition.Sunny
@@ -34,6 +34,49 @@ Public Class WeatherProvider
             .Temperature_C = result.temperature.value
             .WindSpeed_km_h = result.wind.speed.value
         End With
+
+        'calculate solar irradiation
+        'references:
+        'https://www.pveducation.org/pvcdrom/properties-of-sunlight/calculation-of-solar-insolation
+        'https://www.pveducation.org/pvcdrom/properties-of-sunlight/the-suns-position
+        'https://www.pveducation.org/pvcdrom/properties-of-sunlight/air-mass
+
+        Dim currdata = DateTime.Now
+
+        Dim DT = currdata.ToLocalTime() - currdata.ToUniversalTime()
+        Dim LSTM = 15 * DT.TotalHours
+
+        Dim d = currdata.DayOfYear
+
+        Dim B = 360.0 / 365.0 * (d - 81)
+
+        Dim EOT = 9.87 * Math.Sin(2 * B) - 7.53 * Math.Cos(B) - 1.5 * Math.Sin(B)
+
+        Dim TC = 4 * (longitude - LSTM) + EOT
+
+        Dim LST = currdata.Hour + TC / 60.0
+
+        Dim HRA = 15 * (LST - 12)
+
+        Dim decl = 23.45 * Math.Sin(360.0 / 365.0 * (d - 81))
+
+        Dim elev = Math.Asin(Math.Sin(decl) * Math.Sin(latitude) + Math.Cos(decl) * Math.Cos(latitude) * Math.Cos(HRA)) * 180 / Math.PI
+
+        Dim sunrise = 12 - 1.0 / 15.0 * Math.Acos(-Math.Sin(latitude) * Math.Sin(decl) / Math.Cos(latitude) / Math.Cos(decl)) * 180 / Math.PI
+        Dim sunset = 12 + 1.0 / 15.0 * Math.Acos(-Math.Sin(latitude) * Math.Sin(decl) / Math.Cos(latitude) / Math.Cos(decl)) * 180 / Math.PI
+
+        Dim AM = 1 / Math.Cos(elev)
+
+        Dim ID = 1.353 * 0.7 ^ (AM * 0.678)
+
+        formattedresult.SolarIrradiation_kWh_m2 = ID
+
+        If currdata.Hour > sunset Or currdata.Hour < sunrise Then
+
+            formattedresult.CurrentCondition = WeatherCondition.Night
+            formattedresult.SolarIrradiation_kWh_m2 = 0.0
+
+        End If
 
         Return formattedresult
 
