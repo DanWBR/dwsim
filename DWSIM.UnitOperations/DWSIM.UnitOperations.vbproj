@@ -478,6 +478,12 @@
     <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\EditingForm_WindTurbine.Designer.vb">
+      <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_WindTurbine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
@@ -1041,6 +1047,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_WaterElectrolyzer.resx">
       <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_WindTurbine.resx">
+      <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.de.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>

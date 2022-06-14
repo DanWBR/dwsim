@@ -306,18 +306,18 @@ Partial Class EditingForm_SolarPanel
         'chkUseGlobalIrr
         '
         Me.chkUseGlobalIrr.AutoSize = True
-        Me.chkUseGlobalIrr.Location = New System.Drawing.Point(12, 57)
+        Me.chkUseGlobalIrr.Location = New System.Drawing.Point(11, 26)
         Me.chkUseGlobalIrr.Name = "chkUseGlobalIrr"
-        Me.chkUseGlobalIrr.Size = New System.Drawing.Size(108, 17)
+        Me.chkUseGlobalIrr.Size = New System.Drawing.Size(174, 17)
         Me.chkUseGlobalIrr.TabIndex = 29
-        Me.chkUseGlobalIrr.Text = "Use Global Value"
+        Me.chkUseGlobalIrr.Text = "Use Global Weather Conditions"
         Me.chkUseGlobalIrr.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(298, 34)
+        Me.Label1.Location = New System.Drawing.Point(298, 53)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(43, 13)
         Me.Label1.TabIndex = 28
@@ -326,7 +326,7 @@ Partial Class EditingForm_SolarPanel
         'tbSolarIrr
         '
         Me.tbSolarIrr.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbSolarIrr.Location = New System.Drawing.Point(201, 30)
+        Me.tbSolarIrr.Location = New System.Drawing.Point(201, 49)
         Me.tbSolarIrr.Name = "tbSolarIrr"
         Me.tbSolarIrr.Size = New System.Drawing.Size(91, 20)
         Me.tbSolarIrr.TabIndex = 27
@@ -336,7 +336,7 @@ Partial Class EditingForm_SolarPanel
         '
         Me.Label3.AutoSize = True
         Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(8, 33)
+        Me.Label3.Location = New System.Drawing.Point(8, 52)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(80, 13)
         Me.Label3.TabIndex = 26

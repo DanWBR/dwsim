@@ -30,6 +30,8 @@ Namespace UnitOperations
 
         Public Property SolarIrradiation_kW_m2 As Double = 1.0
 
+        Public Property ActualSolarIrradiation_kW_m2 As Double = 1.0
+
         Public Overrides Function GetDisplayName() As String
             Return "Solar Panel"
         End Function
@@ -164,6 +166,8 @@ Namespace UnitOperations
 
             End If
 
+            ActualSolarIrradiation_kW_m2 = si
+
             GeneratedPower = si * PanelArea * NumberOfPanels * PanelEfficiency / 100.0
 
             esout.EnergyFlow = GeneratedPower
@@ -215,7 +219,7 @@ Namespace UnitOperations
 
             Select Case proptype
                 Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
-                    Return New String() {"Efficiency", "User-Defined Solar Irradiation", "Panel Area", "Number of Panels", "Generated Power"}
+                    Return New String() {"Efficiency", "User-Defined Solar Irradiation", "Actual Solar Irradiation", "Panel Area", "Number of Panels", "Generated Power"}
                 Case PropertyType.WR
                     Return New String() {"Efficiency", "User-Defined Solar Irradiation", "Panel Area", "Number of Panels"}
             End Select
@@ -231,6 +235,8 @@ Namespace UnitOperations
                     Return PanelEfficiency
                 Case "User-Defined Solar Irradiation"
                     Return SolarIrradiation_kW_m2
+                Case "Actual Solar Irradiation"
+                    Return ActualSolarIrradiation_kW_m2
                 Case "Panel Area"
                     Return PanelArea.ConvertFromSI(su.area)
                 Case "Number of Panels"
@@ -248,7 +254,7 @@ Namespace UnitOperations
             Select Case prop
                 Case "Efficiency"
                     Return "%"
-                Case "User-Defined Solar Irradiation"
+                Case "User-Defined Solar Irradiation", "Actual Solar Irradiation"
                     Return "kW/m2"
                 Case "Panel Area"
                     Return (su.area)

@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
@@ -10,6 +11,8 @@ Namespace UnitOperations
     Public Class WindTurbine
 
         Inherits CleanEnergyUnitOpBase
+
+        <Xml.Serialization.XmlIgnore> Public f As EditingForm_WindTurbine
 
         Private ImagePath As String = ""
 
@@ -29,9 +32,13 @@ Namespace UnitOperations
 
         Public UserDefinedRelativeHumidity As Double = 30.0
 
-        Public Property MinimumWindSpeed As Double = 3.0
+        Public ActualWindSpeed As Double = 10.0
 
-        Public Property MaximumWindSpeed As Double = 25.0
+        Public ActualAirTemperature As Double = 298.15
+
+        Public ActualAirPressure As Double = 101325.0
+
+        Public ActualRelativeHumidity As Double = 30.0
 
         Public Property DiskArea As Double = 10.0
 
@@ -58,7 +65,6 @@ Namespace UnitOperations
             MyBase.New()
 
         End Sub
-
 
         Public Overrides Sub Draw(g As Object)
 
@@ -121,13 +127,42 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_WindTurbine With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_WindTurbine With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
 
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub CloseEditForm()
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
 
         End Sub
 
@@ -198,6 +233,11 @@ Namespace UnitOperations
 
             End If
 
+            ActualAirPressure = ap
+            ActualAirTemperature = at
+            ActualRelativeHumidity = rh
+            ActualWindSpeed = ws
+
             'calculate air density
 
             If calc Is Nothing Then
@@ -241,6 +281,119 @@ Namespace UnitOperations
             esout.EnergyFlow = GeneratedPower
 
         End Sub
+
+        Public Overrides Function GetProperties(proptype As PropertyType) As String()
+
+            Select Case proptype
+                Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
+                    Return New String() {"Efficiency", "User-Defined Wind Speed", "Actual Wind Speed", "User-Defined Air Temperature", "Actual Air Temperature",
+                        "User-Defined Air Pressure", "Actual Air Pressure", "User-Defined Relative Humidity", "Actual Relative Humidity",
+                        "Disk Area", "Number of Panels", "Generated Power", "Maximum Theoretical Power", "Calculated Air Density"}
+                Case PropertyType.WR
+                    Return New String() {"Efficiency", "User-Defined Wind Speed", "User-Defined Air Temperature",
+                        "User-Defined Air Pressure", "User-Defined Relative Humidity", "Disk Area", "Number of Panels"}
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Return Efficiency
+                Case "User-Defined Wind Speed"
+                    Return UserDefinedWindSpeed.ConvertFromSI(su.velocity)
+                Case "Actual Wind Speed"
+                    Return ActualWindSpeed.ConvertFromSI(su.velocity)
+                Case "User-Defined Air Temperature"
+                    Return UserDefinedAirTemperature.ConvertFromSI(su.temperature)
+                Case "Actual Air Temperature"
+                    Return ActualAirTemperature.ConvertFromSI(su.temperature)
+                Case "User-Defined Air Pressure"
+                    Return UserDefinedAirPressure.ConvertFromSI(su.pressure)
+                Case "Actual Air Pressure"
+                    Return ActualAirPressure.ConvertFromSI(su.pressure)
+                Case "User-Defined Relative Humidity"
+                    Return UserDefinedRelativeHumidity
+                Case "Actual Relative Humidity"
+                    Return ActualRelativeHumidity
+                Case "Disk Area"
+                    Return DiskArea.ConvertFromSI(su.area)
+                Case "Number of Panels"
+                    Return NumberOfTurbines
+                Case "Generated Power"
+                    Return GeneratedPower.ConvertFromSI(su.heatflow)
+                Case "Maximum Theoretical Power"
+                    Return MaximumTheoreticalPower.ConvertFromSI(su.heatflow)
+                Case "Calculated Air Density"
+                    Return AirDensity.ConvertFromSI(su.density)
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyUnit(prop As String, Optional su As IUnitsOfMeasure = Nothing) As String
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Return "%"
+                Case "User-Defined Wind Speed"
+                    Return (su.velocity)
+                Case "Actual Wind Speed"
+                    Return (su.velocity)
+                Case "User-Defined Air Temperature"
+                    Return (su.temperature)
+                Case "Actual Air Temperature"
+                    Return (su.temperature)
+                Case "User-Defined Air Pressure"
+                    Return (su.pressure)
+                Case "Actual Air Pressure"
+                    Return (su.pressure)
+                Case "User-Defined Relative Humidity"
+                    Return ""
+                Case "Actual Relative Humidity"
+                    Return "%"
+                Case "Disk Area"
+                    Return (su.area)
+                Case "Number of Panels"
+                    Return ""
+                Case "Generated Power"
+                    Return (su.heatflow)
+                Case "Maximum Theoretical Power"
+                    Return (su.heatflow)
+                Case "Calculated Air Density"
+                    Return (su.density)
+            End Select
+
+        End Function
+
+        Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+            Select Case prop
+                Case "Efficiency"
+                    Efficiency = Convert.ToDouble(propval)
+                Case "User-Defined Wind Speed"
+                    UserDefinedWindSpeed = Convert.ToDouble(propval).ConvertFromSI(su.velocity)
+                Case "User-Defined Air Temperature"
+                    UserDefinedAirTemperature = Convert.ToDouble(propval).ConvertFromSI(su.temperature)
+                Case "User-Defined Air Pressure"
+                    UserDefinedAirPressure = Convert.ToDouble(propval).ConvertFromSI(su.pressure)
+                Case "User-Defined Relative Humidity"
+                    UserDefinedRelativeHumidity = Convert.ToDouble(propval)
+                Case "Disk Area"
+                    DiskArea = Convert.ToDouble(propval).ConvertFromSI(su.area)
+                Case "Number of Panels"
+                    NumberOfTurbines = Convert.ToDouble(propval)
+            End Select
+
+            Return True
+
+        End Function
+
     End Class
 
 End Namespace
