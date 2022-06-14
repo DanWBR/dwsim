@@ -70,7 +70,7 @@ Public Class EditingForm_SolarPanel
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
 
-            If .GraphicObject.OutputConnectors(0).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedFrom.Tag
+            If .GraphicObject.OutputConnectors(0).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
 
             'annotation
 
@@ -100,6 +100,8 @@ Public Class EditingForm_SolarPanel
             tbGenPower.Text = .GeneratedPower.ConvertFromSI(units.heatflow).ToString(nf)
 
         End With
+
+        Loaded = True
 
     End Sub
 

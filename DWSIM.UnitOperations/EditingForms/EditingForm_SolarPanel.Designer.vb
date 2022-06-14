@@ -270,9 +270,9 @@ Partial Class EditingForm_SolarPanel
         Me.Label5.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Label5.Location = New System.Drawing.Point(8, 118)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(119, 13)
+        Me.Label5.Size = New System.Drawing.Size(127, 13)
         Me.Label5.TabIndex = 33
-        Me.Label5.Text = "Panel Efficiency (0-100)"
+        Me.Label5.Text = "Panel Efficiency (0-100%)"
         '
         'lblAreaUnits
         '

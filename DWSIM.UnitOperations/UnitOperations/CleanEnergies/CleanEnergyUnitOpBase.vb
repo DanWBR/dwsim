@@ -9,11 +9,6 @@ Namespace UnitOperations
 
         Implements DWSIM.Interfaces.IExternalUnitOperation
 
-        Public Enum WeatherDataSource
-            UserDefined = 0
-            Flowsheet = 1
-        End Enum
-
         Public Property UseUserDefinedWeather As Boolean = False
 
         Public Overrides ReadOnly Property IsSource As Boolean = True

@@ -679,7 +679,7 @@
     <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
     <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
-    <Compile Include="UnitOperations\AirCooler.vb" />
+    <Compile Include="UnitOperations\AirCooler2.vb" />
     <Compile Include="UnitOperations\CleanEnergies\CleanEnergyUnitOpBase.vb" />
     <Compile Include="UnitOperations\CleanEnergies\EnergyMixer.vb" />
     <Compile Include="UnitOperations\CleanEnergies\HydroelectricTurbine.vb" />

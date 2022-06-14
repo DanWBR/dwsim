@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
@@ -14,6 +15,8 @@ Namespace UnitOperations
         Private ImagePath As String = ""
 
         Private Image As SKImage
+
+        <Xml.Serialization.XmlIgnore> Public f As EditingForm_SolarPanel
 
         Public Overrides Property Prefix As String = "SP-"
 
@@ -78,14 +81,14 @@ Namespace UnitOperations
             y = GraphicObject.Y
 
             Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(x + w, y / 2.0)
+            myOC1.Position = New Point(x + w, y + w / 2.0)
             myOC1.Type = ConType.ConOut
             myOC1.Direction = ConDir.Right
             myOC1.Type = ConType.ConEn
 
             With GraphicObject.OutputConnectors
                 If .Count = 1 Then
-                    .Item(0).Position = New Point(x + w, y / 2.0)
+                    .Item(0).Position = New Point(x + w, y + w / 2.0)
                 Else
                     .Add(myOC1)
                 End If
@@ -97,18 +100,6 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Sub PopulateEditorPanel(ctner As Object)
-
-        End Sub
-
-        Public Overrides Sub DisplayEditForm()
-
-        End Sub
-
-        Public Overrides Sub UpdateEditForm()
-
-        End Sub
-
-        Public Overrides Sub CloseEditForm()
 
         End Sub
 
@@ -175,7 +166,118 @@ Namespace UnitOperations
 
             GeneratedPower = si * PanelArea * NumberOfPanels * PanelEfficiency / 100.0
 
+            esout.EnergyFlow = GeneratedPower
+
         End Sub
+
+        Public Overrides Sub DisplayEditForm()
+
+            If f Is Nothing Then
+                f = New EditingForm_SolarPanel With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_SolarPanel With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Public Overrides Sub UpdateEditForm()
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+                End If
+            End If
+
+        End Sub
+
+        Public Overrides Sub CloseEditForm()
+
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
+
+        End Sub
+
+        Public Overrides Function GetProperties(proptype As PropertyType) As String()
+
+            Select Case proptype
+                Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
+                    Return New String() {"Efficiency", "User-Defined Solar Irradiation", "Panel Area", "Number of Panels", "Generated Power"}
+                Case PropertyType.WR
+                    Return New String() {"Efficiency", "User-Defined Solar Irradiation", "Panel Area", "Number of Panels"}
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Return PanelEfficiency
+                Case "User-Defined Solar Irradiation"
+                    Return SolarIrradiation_kW_m2
+                Case "Panel Area"
+                    Return PanelArea.ConvertFromSI(su.area)
+                Case "Number of Panels"
+                    Return NumberOfPanels
+                Case "Generated Power"
+                    Return GeneratedPower.ConvertFromSI(su.heatflow)
+            End Select
+
+        End Function
+
+        Public Overrides Function GetPropertyUnit(prop As String, Optional su As IUnitsOfMeasure = Nothing) As String
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    Return "%"
+                Case "User-Defined Solar Irradiation"
+                    Return "kW/m2"
+                Case "Panel Area"
+                    Return (su.area)
+                Case "Number of Panels"
+                    Return ""
+                Case "Generated Power"
+                    Return (su.heatflow)
+            End Select
+
+        End Function
+
+        Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
+
+            If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI
+
+            Select Case prop
+                Case "Efficiency"
+                    PanelEfficiency = propval
+                Case "User-Defined Solar Irradiation"
+                    SolarIrradiation_kW_m2 = propval
+                Case "Panel Area"
+                    PanelArea = Convert.ToDouble(propval).ConvertToSI(su.area)
+                Case "Number of Panels"
+                    NumberOfPanels = propval
+            End Select
+
+            Return True
+
+        End Function
 
     End Class
 
