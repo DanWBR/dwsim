@@ -244,112 +244,107 @@ Public Class FormReacEq
 
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton4.Click
 
-        If Me.tbStoich.Text <> "OK" Then
-            MessageBox.Show(DWSIM.App.GetLocalString("VerifiqueEstequiometria"), DWSIM.App.GetLocalString("ErroAoAdicionarReacao"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Else
-            If Me.rbKeqfT.Checked Then
-                'proceed with expression evaluation
-                rc.ExpContext = New Ciloci.Flee.ExpressionContext
-                With rc.ExpContext
-                    .Imports.AddType(GetType(System.Math))
-                End With
-                With rc
-                    .ExpContext.Variables.Add("T", Convert.ToDouble(300))
-                    Try
-                        .ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                        .Expr = .ExpContext.CompileGeneric(Of Double)(Me.tbExp.Text)
-                        .Expression = Me.tbExp.Text
-                    Catch ex As ExpressionCompileException
-                        Select Case ex.Reason
-                            Case CompileExceptionReason.SyntaxError
-                                MessageBox.Show(DWSIM.App.GetLocalString("Erronasintaxedaexpre"))
-                            Case CompileExceptionReason.UndefinedName
-                                MessageBox.Show(DWSIM.App.GetLocalString("ErronaexpressoVerifi"))
-                            Case Else
-                                MessageBox.Show(ex.ToString)
-                        End Select
-                        Exit Sub
-                    End Try
-                End With
-            End If
-
-            'Components and stoichiometry
-            rc._Components.Clear()
-            For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(3).Value = True Then
-                    rc._Components.Add(row.Cells(6).Value, New ReactionStoichBase(row.Cells(6).Value, row.Cells(5).Value, row.Cells(4).Value, 0, 0))
-                End If
-            Next
-
-            'Keq option
-            If Me.rbKeqConstant.Checked Then rc.KExprType = KOpt.Constant
-            If Me.rbKeqfT.Checked Then rc.KExprType = KOpt.Expression
-            If Me.rbKeqGibbs.Checked Then rc.KExprType = KOpt.Gibbs
-
-            'phase and other settings
-            Select Case Me.tbPhase.SelectedIndex
-                Case 0
-                    rc.ReactionPhase = PhaseName.Vapor
-                Case 1
-                    rc.ReactionPhase = PhaseName.Liquid
-            End Select
-
-            Select Case Me.cbBase.SelectedIndex
-                Case 0
-                    rc.ReactionBasis = ReactionBasis.Activity
-                Case 1
-                    rc.ReactionBasis = ReactionBasis.Fugacity
-                Case 2
-                    rc.ReactionBasis = ReactionBasis.MolarConc
-                Case 3
-                    rc.ReactionBasis = ReactionBasis.MassConc
-                Case 4
-                    rc.ReactionBasis = ReactionBasis.MolarFrac
-                Case 5
-                    rc.ReactionBasis = ReactionBasis.MolarConc
-                Case 6
-                    rc.ReactionBasis = ReactionBasis.PartialPress
-            End Select
-
-            If cbUnits.Enabled Then
-                rc.EquilibriumReactionBasisUnits = cbUnits.SelectedItem.ToString()
-            End If
-
-            'rc.ReactionHeat = Me.tbReacHeat.Text
-            rc.Description = Me.tbDesc.Text
-            rc.Name = Me.tbName.Text
-            rc.Equation = Me.tbEquation.Text
-            rc.StoichBalance = 0
-            rc.Approach = Me.tbApproach.Text
-            rc.Tmin = Me.tbTmin.Text
-            rc.Tmax = Me.tbTmax.Text
-            rc.ConstantKeqValue = Me.tbKeqConstant.Text
-
-            For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-                If row.Cells(4).Value = True Then
-                    rc.BaseReactant = row.Cells(6).Value
-                    If rc.Components(rc.BaseReactant).StoichCoeff >= 0 Then
-                        MessageBox.Show(fc.GetTranslatedString1("ReactantAsBaseComp"), fc.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Exit Sub
-                    End If
-                    Exit For
-                End If
-            Next
-
-            'add or edit reaction
-            Select Case mode
-                Case "Add"
-                    rc.ID = Guid.NewGuid.ToString
-                    rc.ReactionType = ReactionType.Equilibrium
-                    fc.Options.Reactions.Add(rc.ID, rc)
-                    fc.Options.ReactionSets("DefaultSet").Reactions.Add(rc.ID, New ReactionSetBase(rc.ID, 0, True))
-                Case "Edit"
-                    fc.Options.Reactions(rc.ID) = rc
-            End Select
-
-            Me.Close()
-
+        If Me.rbKeqfT.Checked Then
+            'proceed with expression evaluation
+            rc.ExpContext = New Ciloci.Flee.ExpressionContext
+            With rc.ExpContext
+                .Imports.AddType(GetType(System.Math))
+            End With
+            With rc
+                .ExpContext.Variables.Add("T", Convert.ToDouble(300))
+                Try
+                    .ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                    .Expr = .ExpContext.CompileGeneric(Of Double)(Me.tbExp.Text)
+                    .Expression = Me.tbExp.Text
+                Catch ex As ExpressionCompileException
+                    Select Case ex.Reason
+                        Case CompileExceptionReason.SyntaxError
+                            MessageBox.Show(DWSIM.App.GetLocalString("Erronasintaxedaexpre"))
+                        Case CompileExceptionReason.UndefinedName
+                            MessageBox.Show(DWSIM.App.GetLocalString("ErronaexpressoVerifi"))
+                        Case Else
+                            MessageBox.Show(ex.ToString)
+                    End Select
+                    Exit Sub
+                End Try
+            End With
         End If
+
+        'Components and stoichiometry
+        rc._Components.Clear()
+        For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+            If row.Cells(3).Value = True Then
+                rc._Components.Add(row.Cells(6).Value, New ReactionStoichBase(row.Cells(6).Value, row.Cells(5).Value, row.Cells(4).Value, 0, 0))
+            End If
+        Next
+
+        'Keq option
+        If Me.rbKeqConstant.Checked Then rc.KExprType = KOpt.Constant
+        If Me.rbKeqfT.Checked Then rc.KExprType = KOpt.Expression
+        If Me.rbKeqGibbs.Checked Then rc.KExprType = KOpt.Gibbs
+
+        'phase and other settings
+        Select Case Me.tbPhase.SelectedIndex
+            Case 0
+                rc.ReactionPhase = PhaseName.Vapor
+            Case 1
+                rc.ReactionPhase = PhaseName.Liquid
+        End Select
+
+        Select Case Me.cbBase.SelectedIndex
+            Case 0
+                rc.ReactionBasis = ReactionBasis.Activity
+            Case 1
+                rc.ReactionBasis = ReactionBasis.Fugacity
+            Case 2
+                rc.ReactionBasis = ReactionBasis.MolarConc
+            Case 3
+                rc.ReactionBasis = ReactionBasis.MassConc
+            Case 4
+                rc.ReactionBasis = ReactionBasis.MolarFrac
+            Case 5
+                rc.ReactionBasis = ReactionBasis.MolarConc
+            Case 6
+                rc.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+
+        If cbUnits.Enabled Then
+            rc.EquilibriumReactionBasisUnits = cbUnits.SelectedItem.ToString()
+        End If
+
+        'rc.ReactionHeat = Me.tbReacHeat.Text
+        rc.Description = Me.tbDesc.Text
+        rc.Name = Me.tbName.Text
+        rc.Equation = Me.tbEquation.Text
+        rc.StoichBalance = 0
+        rc.Approach = Me.tbApproach.Text
+        rc.Tmin = Me.tbTmin.Text
+        rc.Tmax = Me.tbTmax.Text
+        rc.ConstantKeqValue = Me.tbKeqConstant.Text
+
+        For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+            If row.Cells(4).Value = True Then
+                rc.BaseReactant = row.Cells(6).Value
+                If rc.Components(rc.BaseReactant).StoichCoeff >= 0 Then
+                    MessageBox.Show(fc.GetTranslatedString1("ReactantAsBaseComp"), fc.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+                Exit For
+            End If
+        Next
+
+        'add or edit reaction
+        Select Case mode
+            Case "Add"
+                rc.ID = Guid.NewGuid.ToString
+                rc.ReactionType = ReactionType.Equilibrium
+                fc.Options.Reactions.Add(rc.ID, rc)
+                fc.Options.ReactionSets("DefaultSet").Reactions.Add(rc.ID, New ReactionSetBase(rc.ID, 0, True))
+            Case "Edit"
+                fc.Options.Reactions(rc.ID) = rc
+        End Select
+
+        Me.Close()
 
     End Sub
 
