@@ -207,15 +207,31 @@ Namespace Reactors
 
                 Dim i As Integer
 
+                Dim newspecies As New List(Of String)
+
                 For i = 0 To species.Length - 1
                     Dim name = species(i).name.ToString()
-                    If Not SpeciesMaps.ContainsKey(name) Then SpeciesMaps.Add(name, "")
+                    newspecies.Add(name)
+                    If Not SpeciesMaps.ContainsKey(name) Then
+                        SpeciesMaps.Add(name, "")
+                    End If
                     If SpeciesMaps(name) <> "" Then
                         speciesAmountsFinal.Add(name, amounts(i).ToString().ToDoubleFromInvariant())
                         If Not compoundAmountsFinal.ContainsKey(SpeciesMaps(name)) Then
                             compoundAmountsFinal.Add(SpeciesMaps(name), 0.0)
                         End If
                         compoundAmountsFinal(SpeciesMaps(name)) += amounts(i).ToString().ToDoubleFromInvariant()
+                    End If
+                Next
+
+                Dim oldspecies = SpeciesMaps.Keys.ToList()
+
+                For Each sp In oldspecies
+                    If Not newspecies.Contains(sp) Then
+                        Try
+                            SpeciesMaps.Remove(sp)
+                        Catch ex As Exception
+                        End Try
                     End If
                 Next
 
@@ -453,6 +469,44 @@ Namespace Reactors
 
         End Function
 
+        Public Overrides Function GetProperties(proptype As PropertyType) As String()
+
+            Dim i As Integer = 0
+            Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
+            Select Case proptype
+                Case PropertyType.ALL
+                    For Each item In ComponentConversions
+                        proplist.Add(item.Key + ": Conversion")
+                    Next
+            End Select
+
+            Return proplist.ToArray(GetType(System.String))
+            proplist = Nothing
+
+        End Function
+
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
+
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                Dim value As Double
+                If prop.Contains("Conversion") Then
+                    Dim comp = prop.Split(": ")(0)
+                    If ComponentConversions.ContainsKey(comp) Then
+                        value = ComponentConversions(comp) * 100
+                    Else
+                        value = 0.0
+                    End If
+                End If
+                Return value
+            End If
+
+        End Function
 
     End Class
 
