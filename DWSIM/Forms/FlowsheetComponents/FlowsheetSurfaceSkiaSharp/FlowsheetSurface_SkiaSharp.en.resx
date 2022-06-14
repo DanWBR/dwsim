@@ -161,6 +161,9 @@
   <data name="btnGetWeather.Text" xml:space="preserve">
     <value>Get Weather Data</value>
   </data>
+  <data name="btnGetWeather.ToolTip" xml:space="preserve">
+    <value>Get Current Weather Conditions at Specified Location</value>
+  </data>
   <data name="PictureBox4.ToolTip" xml:space="preserve">
     <value>Solar Irradiation</value>
   </data>
@@ -318,16 +321,16 @@
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
-        dfUmEUXoZIuiCCLo4OCfJg4uUs7lBgV1KUVyLfV61jQ5S9LmNS/gQRdBT69xKRZ+/t6RWElfrNVzuw98
-        eQ9efp/fy/vFdtg2NPewpDliuUkFt+kI93VXOGma87v9479nJBYhnAY5tIHrku4IZ1vr0h6/5M/4nZgb
-        c37Y7Io13OcN5+hBXzPO1OJwsAl7Pl834r+JAxpESmlUzLImKhUHXAkvk8Q82MCwUUajQrH69oTHE998
-        eRUO5NThTO69lVC+LexXvk435FShL8Wv2WTf+SqkcxU4oyzC48o5uPHiOqQvVyF+qQ6ztz5AUu5DUvEg
-        ebs3TMheLSH38+mCFz1kJp4rbJa3iljkTZi904OZKybEL678FCcUXxwKa4Lr+JONiXmRWaYUB+AbpvCj
-        LGuyt/BxEBZEZaKYBxsYFmXwtsW5R33vV2GQU4uf4d5S+3vpjWG9a9OFVmt9uiGv2a6kNjTyXK3Dg5IF
-        F5714MiTL3D66Sd4WDLhVWUVaroJRscBw6ZgmOawaXVruM8blhM9ZCbGovJWEUZHwcqaBa9XdZTWR2L/
-        PBzWRCfu+JOFxZEJbhxKpDigRUhK79Asa7Js0wFPwstEMQ82MMN2MkaHFhs22dg2MQ9VVXfhXx1H6V3N
-        7hJcl/V295h/vMO/Eov9ANQD6dmTUOucAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAISSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
+        dfUmEUXoZIuiCCLi4OCfJg4uUs7hblBQl1IkttTrWdPkLEmb17yAh7cIenqNS7Hw8/eOxEr6Yq2e233g
+        y3vw8vv8Xt4vts2WobkHJc0Ry00quE1HuKu7wnHTnN3pH/89Q7EI4TTIgXVcF3VHON1alXb5JX/G78Tc
+        mLODZles4T5vOIf3+5pRJhaHg03Y8/m6If9NHNAgUkqjYpY1UanY50p4GSfmwQaGjTIaFYrVN8c8nvj6
+        88uwL6cOpnLvrITybW6v8nWyIacKPSl+xSZ7zlYhnavAKWUeHlbOwLVnVyF9sQrxC3WYvvEeknIPkooH
+        yZsfBgnZqyXkXj5d8KKHzMQzhY3yZhGLvAHTt9Zg6pIJ8fNLP8UJxReHwprgOvpkI2JeZJYJxQH4hin8
+        KMua7C587IcFURkr5sEGhkUZvG1x5kHP+1UY5MT8Z7iz0P5eem1Yb9t0rtVanWzIK7YrqQ2NPFXrcK9k
+        wbkna3Do0Rc4+fgT3C+Z8KKyDDXdBKPjgGFTMExz0LS6NdznDcuJHjITY1F5swijo2BpxYKXyzpK60Ox
+        fx4Oa6ITd/TJwuLIBDcOJVIc0CIkpXdoljVRbdrnSXgZK+bBBmbYTsbo0GLDJutbJuahquoO/KujKL2t
+        2V2C6yu93T3iH2/zr8RiPwDEP+nVFWB9WgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">

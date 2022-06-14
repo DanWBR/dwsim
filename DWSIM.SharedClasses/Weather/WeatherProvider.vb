@@ -58,7 +58,7 @@ Public Class WeatherProvider
 
         Dim HRA = 15 * (LST - 12)
 
-        Dim decl = 23.45 * Math.Sin(360.0 / 365.0 * (d - 81))
+        Dim decl = 23.45 * Math.Sin(360.0 / 365.0 * (d - 81)) * Math.PI / 180.0
 
         Dim elev = Math.Asin(Math.Sin(decl) * Math.Sin(latitude) + Math.Cos(decl) * Math.Cos(latitude) * Math.Cos(HRA)) * 180 / Math.PI
 

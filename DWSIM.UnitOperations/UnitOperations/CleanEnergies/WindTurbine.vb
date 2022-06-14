@@ -103,14 +103,14 @@ Namespace UnitOperations
             y = GraphicObject.Y
 
             Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(x + w, y / 2.0)
+            myOC1.Position = New Point(x + w, y + h / 2.0)
             myOC1.Type = ConType.ConOut
             myOC1.Direction = ConDir.Right
             myOC1.Type = ConType.ConEn
 
             With GraphicObject.OutputConnectors
                 If .Count = 1 Then
-                    .Item(0).Position = New Point(x + w, y / 2.0)
+                    .Item(0).Position = New Point(x + w, y + h / 2.0)
                 Else
                     .Add(myOC1)
                 End If
@@ -274,7 +274,7 @@ Namespace UnitOperations
             airstr.Dispose()
             airstr = Nothing
 
-            MaximumTheoreticalPower = 8.0 / 27.0 * AirDensity * ws ^ 3 * DiskArea / 1000.0 ' kW
+            MaximumTheoreticalPower = NumberOfTurbines * 8.0 / 27.0 * AirDensity * ws ^ 3 * DiskArea / 1000.0 ' kW
 
             GeneratedPower = MaximumTheoreticalPower * Efficiency / 100.0
 
@@ -353,7 +353,7 @@ Namespace UnitOperations
                 Case "Actual Air Pressure"
                     Return (su.pressure)
                 Case "User-Defined Relative Humidity"
-                    Return ""
+                    Return "%"
                 Case "Actual Relative Humidity"
                     Return "%"
                 Case "Disk Area"

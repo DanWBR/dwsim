@@ -125,6 +125,7 @@ Public Class EditingForm_WindTurbine
 
     Private Sub chkUseGlobalIrr_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseGlobalIrr.CheckedChanged
         If Loaded Then
+            SimObject.UseUserDefinedWeather = Not chkUseGlobalIrr.Checked
             tbWindSpeed.Enabled = Not chkUseGlobalIrr.Checked
             tbRelHum.Enabled = Not chkUseGlobalIrr.Checked
             tbAtmPres.Enabled = Not chkUseGlobalIrr.Checked
