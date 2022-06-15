@@ -1853,7 +1853,7 @@ Journal of Open Source Software, 3(27), 676, https://doi.org/10.21105/joss.00676
 
 Reaktoro Gibbs Reactor is based on Reaktoro v1. https://reaktoro.org/v1/ © Copyright 2021, Allan Leal and Reaktoro contributors
  
-Waether conditions are provided by Azure Maps Weather Service.
+Weather conditions are provided by Azure Maps Weather Service.
 
 </value>
   </data>

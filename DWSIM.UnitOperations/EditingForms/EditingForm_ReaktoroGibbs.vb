@@ -525,4 +525,8 @@ Public Class EditingForm_ReaktoroGibbs
     Private Sub chkUseEmbeddedImage_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseEmbeddedImage.CheckedChanged
         SimObject.UseEmbeddedImage = chkUseEmbeddedImage.Checked
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Process.Start("https://reaktoro.org/v1/thermodynamic-databases.html")
+    End Sub
 End Class

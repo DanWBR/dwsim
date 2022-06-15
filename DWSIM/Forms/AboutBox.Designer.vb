@@ -401,6 +401,7 @@ Partial Class AboutBox
         '
         'FaTabStripItem7
         '
+        Me.FaTabStripItem7.CanClose = False
         Me.FaTabStripItem7.Controls.Add(Me.TextBox2)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"

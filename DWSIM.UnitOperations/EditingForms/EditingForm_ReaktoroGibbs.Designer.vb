@@ -90,6 +90,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -474,6 +475,7 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'TabPageParams
         '
+        Me.TabPageParams.Controls.Add(Me.Button5)
         Me.TabPageParams.Controls.Add(Me.cbDatabase)
         Me.TabPageParams.Controls.Add(Me.Label2)
         Me.TabPageParams.Controls.Add(Me.Label1)
@@ -570,10 +572,11 @@ Partial Class EditingForm_ReaktoroGibbs
         'btnConfigurePP
         '
         Me.btnConfigurePP.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnConfigurePP.AutoSize = True
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfigurePP.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnConfigurePP.Location = New System.Drawing.Point(367, 117)
+        Me.btnConfigurePP.Location = New System.Drawing.Point(368, 117)
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.btnConfigurePP.Size = New System.Drawing.Size(21, 21)
         Me.btnConfigurePP.TabIndex = 20
@@ -640,7 +643,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageCompounds.Location = New System.Drawing.Point(4, 22)
         Me.TabPageCompounds.Name = "TabPageCompounds"
         Me.TabPageCompounds.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageCompounds.Size = New System.Drawing.Size(404, 214)
+        Me.TabPageCompounds.Size = New System.Drawing.Size(404, 190)
         Me.TabPageCompounds.TabIndex = 3
         Me.TabPageCompounds.Text = "Compounds"
         Me.TabPageCompounds.UseVisualStyleBackColor = True
@@ -652,7 +655,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.lvComps.HideSelection = False
         Me.lvComps.Location = New System.Drawing.Point(3, 26)
         Me.lvComps.Name = "lvComps"
-        Me.lvComps.Size = New System.Drawing.Size(398, 185)
+        Me.lvComps.Size = New System.Drawing.Size(398, 161)
         Me.lvComps.TabIndex = 0
         Me.lvComps.UseCompatibleStateImageBehavior = False
         Me.lvComps.View = System.Windows.Forms.View.List
@@ -674,7 +677,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageElements.Location = New System.Drawing.Point(4, 22)
         Me.TabPageElements.Name = "TabPageElements"
         Me.TabPageElements.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageElements.Size = New System.Drawing.Size(404, 214)
+        Me.TabPageElements.Size = New System.Drawing.Size(404, 190)
         Me.TabPageElements.TabIndex = 1
         Me.TabPageElements.Text = "Elements"
         Me.TabPageElements.UseVisualStyleBackColor = True
@@ -686,7 +689,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.lvElements.HideSelection = False
         Me.lvElements.Location = New System.Drawing.Point(3, 26)
         Me.lvElements.Name = "lvElements"
-        Me.lvElements.Size = New System.Drawing.Size(398, 185)
+        Me.lvElements.Size = New System.Drawing.Size(398, 161)
         Me.lvElements.TabIndex = 2
         Me.lvElements.UseCompatibleStateImageBehavior = False
         Me.lvElements.View = System.Windows.Forms.View.List
@@ -708,7 +711,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(404, 214)
+        Me.TabPage1.Size = New System.Drawing.Size(404, 190)
         Me.TabPage1.TabIndex = 5
         Me.TabPage1.Text = "Comp. Names"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -724,7 +727,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.gridCompNames.Location = New System.Drawing.Point(3, 26)
         Me.gridCompNames.Name = "gridCompNames"
         Me.gridCompNames.RowHeadersVisible = False
-        Me.gridCompNames.Size = New System.Drawing.Size(398, 185)
+        Me.gridCompNames.Size = New System.Drawing.Size(398, 161)
         Me.gridCompNames.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
@@ -756,7 +759,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(404, 214)
+        Me.TabPage2.Size = New System.Drawing.Size(404, 190)
         Me.TabPage2.TabIndex = 4
         Me.TabPage2.Text = "Species Mappings"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -772,7 +775,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.gridSpeciesMappings.Location = New System.Drawing.Point(3, 3)
         Me.gridSpeciesMappings.Name = "gridSpeciesMappings"
         Me.gridSpeciesMappings.RowHeadersVisible = False
-        Me.gridSpeciesMappings.Size = New System.Drawing.Size(398, 208)
+        Me.gridSpeciesMappings.Size = New System.Drawing.Size(398, 184)
         Me.gridSpeciesMappings.TabIndex = 1
         '
         'c1
@@ -827,6 +830,19 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.chkUseEmbeddedImage.TabIndex = 37
         Me.chkUseEmbeddedImage.Text = "Use Embedded Image Icon"
         Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button5.AutoSize = True
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.information
+        Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button5.Location = New System.Drawing.Point(368, 84)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(22, 22)
+        Me.Button5.TabIndex = 47
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'EditingForm_ReaktoroGibbs
         '
@@ -932,4 +948,5 @@ Partial Class EditingForm_ReaktoroGibbs
     Public WithEvents GroupBox3 As GroupBox
     Public WithEvents Button4 As Button
     Public WithEvents chkUseEmbeddedImage As CheckBox
+    Public WithEvents Button5 As Button
 End Class
