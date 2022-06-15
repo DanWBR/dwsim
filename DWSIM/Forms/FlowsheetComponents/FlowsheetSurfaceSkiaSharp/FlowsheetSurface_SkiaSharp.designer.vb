@@ -52,8 +52,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbWindSpeed = New System.Windows.Forms.TextBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.cbWeather = New System.Windows.Forms.ComboBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolStripFlowsheet = New System.Windows.Forms.ToolStrip()
         Me.tsbControlPanelMode = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
@@ -202,7 +200,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStripFlowsheet.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.CMS_NoSel.SuspendLayout()
@@ -351,8 +348,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.tbWindSpeed)
         Me.Panel1.Controls.Add(Me.PictureBox2)
-        Me.Panel1.Controls.Add(Me.cbWeather)
-        Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Name = "Panel1"
         Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
         '
@@ -482,24 +477,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
-        '
-        'cbWeather
-        '
-        resources.ApplyResources(Me.cbWeather, "cbWeather")
-        Me.cbWeather.BackColor = System.Drawing.Color.White
-        Me.cbWeather.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbWeather.FormattingEnabled = True
-        Me.cbWeather.Items.AddRange(New Object() {resources.GetString("cbWeather.Items"), resources.GetString("cbWeather.Items1"), resources.GetString("cbWeather.Items2"), resources.GetString("cbWeather.Items3")})
-        Me.cbWeather.Name = "cbWeather"
-        Me.ToolTip1.SetToolTip(Me.cbWeather, resources.GetString("cbWeather.ToolTip"))
-        '
-        'PictureBox1
-        '
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_weather
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
         '
         'ToolStripFlowsheet
         '
@@ -1328,7 +1305,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStripFlowsheet.ResumeLayout(False)
         Me.ToolStripFlowsheet.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -1487,8 +1463,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents Label1 As Label
     Friend WithEvents tbWindSpeed As TextBox
     Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents cbWeather As ComboBox
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
     Friend WithEvents tbSolarIrradiation As TextBox
     Friend WithEvents PictureBox4 As PictureBox

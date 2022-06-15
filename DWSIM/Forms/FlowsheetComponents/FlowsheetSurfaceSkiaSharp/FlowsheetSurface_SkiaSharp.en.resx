@@ -133,6 +133,12 @@
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1291, 270</value>
   </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 13</value>
+  </data>
+  <data name="tbAtmPress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 10</value>
+  </data>
   <data name="tbAtmPress.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
   </data>
@@ -143,8 +149,20 @@
   <data name="tbAtmPress.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>109, 7</value>
+  </data>
   <data name="PictureBox6.ToolTip" xml:space="preserve">
     <value>Atmospheric Pressure</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="tbAmbientTemperature.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 7</value>
   </data>
   <data name="PictureBox5.ToolTip" xml:space="preserve">
     <value>Ambient Temperature</value>
@@ -164,11 +182,38 @@
   <data name="btnGetWeather.ToolTip" xml:space="preserve">
     <value>Get Current Weather Conditions at Specified Location</value>
   </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>533, 13</value>
+  </data>
+  <data name="tbSolarIrradiation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>479, 10</value>
+  </data>
+  <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 7</value>
+  </data>
   <data name="PictureBox4.ToolTip" xml:space="preserve">
     <value>Solar Irradiation</value>
   </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>423, 13</value>
+  </data>
+  <data name="tbHumidity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>381, 10</value>
+  </data>
+  <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>351, 7</value>
+  </data>
   <data name="PictureBox3.ToolTip" xml:space="preserve">
     <value>Relative Humidity</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 13</value>
+  </data>
+  <data name="tbWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 10</value>
+  </data>
+  <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 7</value>
   </data>
   <data name="PictureBox2.ToolTip" xml:space="preserve">
     <value>Wind Speed</value>
@@ -321,16 +366,16 @@
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAISSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
-        dfUmEUXoZIuiCCLi4OCfJg4uUs7hblBQl1IkttTrWdPkLEmb17yAh7cIenqNS7Hw8/eOxEr6Yq2e233g
-        y3vw8vv8Xt4vts2WobkHJc0Ry00quE1HuKu7wnHTnN3pH/89Q7EI4TTIgXVcF3VHON1alXb5JX/G78Tc
-        mLODZles4T5vOIf3+5pRJhaHg03Y8/m6If9NHNAgUkqjYpY1UanY50p4GSfmwQaGjTIaFYrVN8c8nvj6
-        88uwL6cOpnLvrITybW6v8nWyIacKPSl+xSZ7zlYhnavAKWUeHlbOwLVnVyF9sQrxC3WYvvEeknIPkooH
-        yZsfBgnZqyXkXj5d8KKHzMQzhY3yZhGLvAHTt9Zg6pIJ8fNLP8UJxReHwprgOvpkI2JeZJYJxQH4hin8
-        KMua7C587IcFURkr5sEGhkUZvG1x5kHP+1UY5MT8Z7iz0P5eem1Yb9t0rtVanWzIK7YrqQ2NPFXrcK9k
-        wbkna3Do0Rc4+fgT3C+Z8KKyDDXdBKPjgGFTMExz0LS6NdznDcuJHjITY1F5swijo2BpxYKXyzpK60Ox
-        fx4Oa6ITd/TJwuLIBDcOJVIc0CIkpXdoljVRbdrnSXgZK+bBBmbYTsbo0GLDJutbJuahquoO/KujKL2t
-        2V2C6yu93T3iH2/zr8RiPwDEP+nVFWB9WgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZFNiNNAFMd7EO8etLCwbj88rVfBRAOKCIIX
+        T726JxFF6MkWRRFEwYMHP5p48CJlhWUPCuqlFIktdbvWNFlL0maaCbiyF0FXt/FSLDzfLImVdGKtrrf9
+        wZ8ZmLzfm8yLbbNlaO5BSXPEcpMKbtMR7uqucNw0Z3f6x3/PUCxCOA1yYB3XRd0RTrdWpV1+yZ/xOzE3
+        5uyg2RVruM8bzuH9vmaUicXhYBP2fL5uyH8TBzSIlNKomGVNVCr2uRJexol5sIFho4xGhWL1zTGPJ77+
+        /DLsy6mDqdw7K6F8m9urfJ1syKlCT4pfscmes1VI5ypwSpmHh5UzcO3ZVUhfrEL8Qh2mb7yHpNyDpOJB
+        8uaHQUL2agm5l08XvOghM/FMYaO8WcQib8D0rTWYumRC/PzST3FC8cWhsCa4jj7ZiJgXmWVCcQC+YQo/
+        yrImuwsf+2FBVMaKebCBYVEGb1ucedDzfhUGOTH/Ge4stL+XXhvW2zada7VWJxvyiu1KakMjT9U63CtZ
+        cO7JGhx69AVOPv4E90smvKgsQ003weg4YNgUDNMcNK1uDfd5w3Kih8zEWFTeLMLoKFhaseDlso7S+lDs
+        n4fDmujEHX2ysDgywY1DiRQHtAhJ6R2aZU1Um/Z5El7GinmwgRm2kzE6tNiwyfqWiXmoqroD/+ooSm9r
+        dpfg+kpvd4/4x9v8K7HYD7as6dLNZbN0AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">

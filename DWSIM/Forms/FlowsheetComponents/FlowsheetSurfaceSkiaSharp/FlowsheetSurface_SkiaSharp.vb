@@ -199,8 +199,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Loaded = False
 
-        cbWeather.SelectedIndex = cw.CurrentCondition
-
         tbAmbientTemperature.Text = cw.Temperature_C
 
         tbWindSpeed.Text = cw.WindSpeed_km_h
@@ -3849,13 +3847,12 @@ Public Class FlowsheetSurface_SkiaSharp
         UpdateCurrentWeather()
     End Sub
 
-    Private Sub cbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbWeather.SelectedIndexChanged
+    Private Sub cbWeather_SelectedIndexChanged(sender As Object, e As EventArgs)
         UpdateCurrentWeather()
     End Sub
 
     Private Sub UpdateCurrentWeather()
         If Loaded Then
-            Flowsheet.Options.CurrentWeather.CurrentCondition = cbWeather.SelectedIndex
             Try
                 Flowsheet.Options.CurrentWeather.Temperature_C = tbAmbientTemperature.Text
             Catch ex As Exception
