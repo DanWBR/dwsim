@@ -17,6 +17,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.DrawingTools.Point
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports Python.Runtime
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 
 Namespace Reactors
 
@@ -29,6 +30,10 @@ Namespace Reactors
         Private ImagePath As String = ""
 
         Private Image As SKImage
+
+        Public Property EmbeddedImageData As String = ""
+
+        Public Property UseEmbeddedImage As Boolean = False
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReaktoroGibbs
 
@@ -385,27 +390,43 @@ Namespace Reactors
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            If Image Is Nothing Then
+            If UseEmbeddedImage = True AndAlso EmbeddedImageData <> "" Then
 
-                ImagePath = SharedClasses.Utility.GetTempFileName()
-                My.Resources.icons8_alembic.Save(ImagePath)
+                Dim p As New SKPaint
+                With p
+                    p.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    p.FilterQuality = SKFilterQuality.High
+                End With
 
-                Using streamBG = New FileStream(ImagePath, FileMode.Open)
-                    Using bitmap = SKBitmap.Decode(streamBG)
-                        Image = SKImage.FromBitmap(bitmap)
-                    End Using
+                Using image As SKImage = EmbeddedImageGraphic.Base64ToImage(EmbeddedImageData)
+                    canvas.DrawImage(image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
                 End Using
 
-                Try
-                    File.Delete(ImagePath)
-                Catch ex As Exception
-                End Try
+            Else
+
+                If Image Is Nothing Then
+
+                    ImagePath = SharedClasses.Utility.GetTempFileName()
+                    My.Resources.icons8_alembic.Save(ImagePath)
+
+                    Using streamBG = New FileStream(ImagePath, FileMode.Open)
+                        Using bitmap = SKBitmap.Decode(streamBG)
+                            Image = SKImage.FromBitmap(bitmap)
+                        End Using
+                    End Using
+
+                    Try
+                        File.Delete(ImagePath)
+                    Catch ex As Exception
+                    End Try
+
+                End If
+
+                Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                    canvas.DrawImage(Image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
+                End Using
 
             End If
-
-            Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
-                canvas.DrawImage(Image, New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.Y + GraphicObject.Height), p)
-            End Using
 
         End Sub
 
