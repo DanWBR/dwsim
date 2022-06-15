@@ -252,87 +252,92 @@ Public Class FormReacHeterog
 
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton4.Click
 
-        'Components, stoichiometry and reaction orders
-        rc._Components.Clear()
-        For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-            If row.Cells(3).Value = True Then
-                rc._Components.Add(row.Cells(6).Value, New ReactionStoichBase(row.Cells(6).Value, row.Cells(5).Value, row.Cells(4).Value, 0, 0))
-            End If
-        Next
-
-        'phase and other settings
-        Select Case Me.tbPhase.SelectedIndex
-            Case 0
-                rc.ReactionPhase = PhaseName.Vapor
-            Case 1
-                rc.ReactionPhase = PhaseName.Liquid
-            Case 2
-                rc.ReactionPhase = PhaseName.Solid
-            Case 3
-                rc.ReactionPhase = PhaseName.Mixture
-        End Select
-
-        Select Case Me.cbBase.SelectedIndex
-            Case 0
-                rc.ReactionBasis = ReactionBasis.Activity
-            Case 1
-                rc.ReactionBasis = ReactionBasis.Fugacity
-            Case 2
-                rc.ReactionBasis = ReactionBasis.MolarConc
-            Case 3
-                rc.ReactionBasis = ReactionBasis.MassConc
-            Case 4
-                rc.ReactionBasis = ReactionBasis.MolarFrac
-            Case 5
-                rc.ReactionBasis = ReactionBasis.MolarConc
-            Case 6
-                rc.ReactionBasis = ReactionBasis.PartialPress
-        End Select
-
-        'rc.ReactionHeat = Me.tbReacHeat.Text
-        rc.Description = Me.tbDesc.Text
-        rc.Name = Me.tbName.Text
-        rc.Equation = Me.tbEquation.Text
-        rc.StoichBalance = 0
-        rc.Tmin = Me.tbTmin.Text
-        rc.Tmax = Me.tbTmax.Text
-        rc.RateEquationNumerator = Me.tbNumerator.Text
-        rc.RateEquationDenominator = Me.tbDenominator.Text
-
-        rc.ConcUnit = Me.cbConcUnit.SelectedItem.ToString
-        rc.VelUnit = Me.cbVelUnit.SelectedItem
-
-        For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
-            If row.Cells(4).Value = True Then
-                rc.BaseReactant = row.Cells(6).Value
-                If rc.Components(rc.BaseReactant).StoichCoeff >= 0 Then
-                    MessageBox.Show(fc.GetTranslatedString1("ReactantAsBaseComp"), fc.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Exit Sub
-                End If
-                Exit For
-            End If
-        Next
-
-        If rbAdvKin.Checked Then
-            rc.ReactionKinetics = ReactionKinetics.PythonScript
+        If Me.tbStoich.Text <> "OK" Then
+            MessageBox.Show(DWSIM.App.GetLocalString("VerifiqueEstequiometria"), DWSIM.App.GetLocalString("ErroAoAdicionarReacao"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
-            rc.ReactionKinetics = ReactionKinetics.Expression
+            'Components, stoichiometry and reaction orders
+            rc._Components.Clear()
+            For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+                If row.Cells(3).Value = True Then
+                    rc._Components.Add(row.Cells(6).Value, New ReactionStoichBase(row.Cells(6).Value, row.Cells(5).Value, row.Cells(4).Value, 0, 0))
+                End If
+            Next
+
+            'phase and other settings
+            Select Case Me.tbPhase.SelectedIndex
+                Case 0
+                    rc.ReactionPhase = PhaseName.Vapor
+                Case 1
+                    rc.ReactionPhase = PhaseName.Liquid
+                Case 2
+                    rc.ReactionPhase = PhaseName.Solid
+                Case 3
+                    rc.ReactionPhase = PhaseName.Mixture
+            End Select
+
+            Select Case Me.cbBase.SelectedIndex
+                Case 0
+                    rc.ReactionBasis = ReactionBasis.Activity
+                Case 1
+                    rc.ReactionBasis = ReactionBasis.Fugacity
+                Case 2
+                    rc.ReactionBasis = ReactionBasis.MolarConc
+                Case 3
+                    rc.ReactionBasis = ReactionBasis.MassConc
+                Case 4
+                    rc.ReactionBasis = ReactionBasis.MolarFrac
+                Case 5
+                    rc.ReactionBasis = ReactionBasis.MolarConc
+                Case 6
+                    rc.ReactionBasis = ReactionBasis.PartialPress
+            End Select
+
+            'rc.ReactionHeat = Me.tbReacHeat.Text
+            rc.Description = Me.tbDesc.Text
+            rc.Name = Me.tbName.Text
+            rc.Equation = Me.tbEquation.Text
+            rc.StoichBalance = 0
+            rc.Tmin = Me.tbTmin.Text
+            rc.Tmax = Me.tbTmax.Text
+            rc.RateEquationNumerator = Me.tbNumerator.Text
+            rc.RateEquationDenominator = Me.tbDenominator.Text
+
+            rc.ConcUnit = Me.cbConcUnit.SelectedItem.ToString
+            rc.VelUnit = Me.cbVelUnit.SelectedItem
+
+            For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
+                If row.Cells(4).Value = True Then
+                    rc.BaseReactant = row.Cells(6).Value
+                    If rc.Components(rc.BaseReactant).StoichCoeff >= 0 Then
+                        MessageBox.Show(fc.GetTranslatedString1("ReactantAsBaseComp"), fc.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+                    Exit For
+                End If
+            Next
+
+            If rbAdvKin.Checked Then
+                rc.ReactionKinetics = ReactionKinetics.PythonScript
+            Else
+                rc.ReactionKinetics = ReactionKinetics.Expression
+            End If
+
+            rc.ScriptTitle = cbScripts.SelectedItem.ToString()
+
+            'add or edit reaction
+            Select Case mode
+                Case "Add"
+                    rc.ID = Guid.NewGuid.ToString
+                    rc.ReactionType = ReactionType.Heterogeneous_Catalytic
+                    fc.Options.Reactions.Add(rc.ID, rc)
+                    fc.Options.ReactionSets("DefaultSet").Reactions.Add(rc.ID, New ReactionSetBase(rc.ID, 0, True))
+                Case "Edit"
+                    fc.Options.Reactions(rc.ID) = rc
+            End Select
+
+            Me.Close()
+
         End If
-
-        rc.ScriptTitle = cbScripts.SelectedItem.ToString()
-
-        'add or edit reaction
-        Select Case mode
-            Case "Add"
-                rc.ID = Guid.NewGuid.ToString
-                rc.ReactionType = ReactionType.Heterogeneous_Catalytic
-                fc.Options.Reactions.Add(rc.ID, rc)
-                fc.Options.ReactionSets("DefaultSet").Reactions.Add(rc.ID, New ReactionSetBase(rc.ID, 0, True))
-            Case "Edit"
-                fc.Options.Reactions(rc.ID) = rc
-        End Select
-
-        Me.Close()
 
     End Sub
 
