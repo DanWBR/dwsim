@@ -1137,7 +1137,7 @@ Public Class FormMain
         LoadCPDB()
 
         'load ChEDL database
-        LoadCheDLDB()
+        'LoadCheDLDB()
 
         'load Electrolyte XML database
         LoadEDB()
