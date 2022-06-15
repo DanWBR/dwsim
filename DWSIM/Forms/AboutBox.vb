@@ -27,8 +27,6 @@ Public Class AboutBox
         Version.Text += "-" + IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString()
 #End If
 
-        lblCurrentVersion.Text = Version.Text + " (Classic UI)"
-
         Copyright.Text = My.Application.Info.Copyright
 
         LblOSInfo.Text = My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"
@@ -120,10 +118,6 @@ Public Class AboutBox
 
         With Me.DataGridView2.Rows
             .Clear()
-            .Add(New Object() {"cef.redist.x64", "75.1.14", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"})
-            .Add(New Object() {"cef.redist.x86", "75.1.14", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"})
-            .Add(New Object() {"CefSharp.Common", "75.1.14", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"})
-            .Add(New Object() {"CefSharp.WinForms", "75.1.14", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"})
             .Add(New Object() {"DynamicLanguageRuntime", "1.2.3", "https://github.com/IronLanguages/dlr/blob/master/LICENSE"})
             .Add(New Object() {"IronPython", "2.7.10", "https://github.com/IronLanguages/ironpython2/blob/master/LICENSE"})
             .Add(New Object() {"IronPython.StdLib", "2.7.10", "http://docs.python.org/license.html"})
@@ -145,23 +139,6 @@ Public Class AboutBox
             .Add(New Object() {"System.Runtime.Serialization.Primitives", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"})
         End With
 
-        'get DWSIM components' versions
-
-        Dim assnames = New String() {"DWSIM.exe", "DWSIM.Drawing.SkiaSharp.dll", "DWSIM.DynamicsManager.dll",
-            "DWSIM.ExtensionMethods.dll", "DWSIM.FileStorage.dll", "DWSIM.FlowsheetSolver.dll", "DWSIM.GlobalSettings.dll",
-            "DWSIM.Interfaces.dll", "DWSIM.MathOps.dll", "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll",
-            "DWSIM.UnitOperations.dll", "DWSIM.XMLSerializer.dll"}
-
-        dgvDWSIMComponents.Rows.Clear()
-        For Each assn In assnames
-            Dim assemb = Assembly.LoadFile(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & assn)
-            If Not assemb Is Nothing Then
-                Dim assdesc = assemb.GetCustomAttributes(Type.GetType("System.Reflection.AssemblyDescriptionAttribute"), False).FirstOrDefault().Description
-                dgvDWSIMComponents.Rows.Add(New Object() {assn, assemb.GetName.Version.ToString, AssemblyBuildDate(assemb).ToShortDateString, assdesc})
-                assemb = Nothing
-            End If
-        Next
-
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -180,282 +157,7 @@ Public Class AboutBox
         lvw.Items.Add(lvi)
     End Sub
 
-    ''' <summary>
-    ''' populate Assembly Information listview with ALL assemblies
-    ''' </summary>
-    Private Sub PopulateAssemblies()
-        For Each a As [Assembly] In AppDomain.CurrentDomain.GetAssemblies
-            Try
-                PopulateAssemblySummary(a)
-            Catch ex As Exception
-            End Try
-        Next
-        AssemblyNamesComboBox.SelectedIndex = AssemblyNamesComboBox.FindStringExact(_EntryAssemblyName)
-    End Sub
-
-    ''' <summary>
-    ''' populate Assembly Information listview with summary view for a specific assembly
-    ''' </summary>
-    Private Sub PopulateAssemblySummary(ByVal a As [Assembly])
-        Dim nvc As Specialized.NameValueCollection = AssemblyAttribs(a)
-
-        Dim strAssemblyName As String = a.GetName.Name
-
-        Dim lvi As New ListViewItem
-        With lvi
-            .Text = strAssemblyName
-            .Tag = strAssemblyName
-            If strAssemblyName = _CallingAssemblyName Then
-                .Text &= " (calling)"
-            End If
-            If strAssemblyName = _ExecutingAssemblyName Then
-                .Text &= " (executing)"
-            End If
-            If strAssemblyName = _EntryAssemblyName Then
-                .Text &= " (entry)"
-            End If
-            .SubItems.Add(nvc.Item("version"))
-            .SubItems.Add(nvc.Item("builddate"))
-            .SubItems.Add(nvc.Item("codebase"))
-            '.SubItems.Add(AssemblyVersion(a))
-            '.SubItems.Add(AssemblyBuildDateString(a, True))
-            '.SubItems.Add(AssemblyCodeBase(a))
-        End With
-        AssemblyInfoListView.Items.Add(lvi)
-        AssemblyNamesComboBox.Items.Add(strAssemblyName)
-    End Sub
-
-    ''' <summary>
-    ''' retrieves a cached value from the entry assembly attribute lookup collection
-    ''' </summary>
-    Private Function EntryAssemblyAttrib(ByVal strName As String) As String
-        If _EntryAssemblyAttribCollection(strName) = "" Then
-            Return "<Assembly: Assembly" & strName & "("""")>"
-        Else
-            Return _EntryAssemblyAttribCollection(strName).ToString
-        End If
-    End Function
-
-    ''' <summary>
-    ''' perform assemblyinfo to string replacements on labels
-    ''' </summary>
-    Private Function ReplaceTokens(ByVal s As String) As String
-        s = s.Replace("%title%", EntryAssemblyAttrib("title"))
-        s = s.Replace("%copyright%", EntryAssemblyAttrib("copyright"))
-        s = s.Replace("%description%", EntryAssemblyAttrib("description"))
-        s = s.Replace("%company%", EntryAssemblyAttrib("company"))
-        s = s.Replace("%product%", EntryAssemblyAttrib("product"))
-        s = s.Replace("%trademark%", EntryAssemblyAttrib("trademark"))
-        s = s.Replace("%year%", DateTime.Now.Year.ToString)
-        s = s.Replace("%version%", EntryAssemblyAttrib("version"))
-        s = s.Replace("%builddate%", EntryAssemblyAttrib("builddate"))
-        Return s
-    End Function
-
-    ''' <summary>
-    ''' populate details for a single assembly
-    ''' </summary>
-    Private Sub PopulateAssemblyDetails(ByVal a As System.Reflection.Assembly, ByVal lvw As ListView)
-        lvw.Items.Clear()
-
-        '-- this assembly property is only available in framework versions 1.1+
-        Populate(lvw, "Image Runtime Version", a.ImageRuntimeVersion)
-        Populate(lvw, "Loaded from GAC", a.GlobalAssemblyCache.ToString)
-
-        Dim nvc As Specialized.NameValueCollection = AssemblyAttribs(a)
-        For Each strKey As String In nvc
-            Populate(lvw, strKey, nvc.Item(strKey))
-        Next
-    End Sub
-
-    ''' <summary>
-    ''' matches assembly by Assembly.GetName.Name; returns nothing if no match
-    ''' </summary>
-    Private Function MatchAssemblyByName(ByVal AssemblyName As String) As [Assembly]
-        For Each a As [Assembly] In AppDomain.CurrentDomain.GetAssemblies
-            If a.GetName.Name = AssemblyName Then
-                Return a
-            End If
-        Next
-        Return Nothing
-    End Function
-
-    ''' <summary>
-    ''' returns string name / string value pair of all attribs
-    ''' for specified assembly
-    ''' </summary>
-    ''' <remarks>
-    ''' note that Assembly* values are pulled from AssemblyInfo file in project folder
-    '''
-    ''' Trademark       = AssemblyTrademark string
-    ''' Debuggable      = True
-    ''' GUID            = 7FDF68D5-8C6F-44C9-B391-117B5AFB5467
-    ''' CLSCompliant    = True
-    ''' Product         = AssemblyProduct string
-    ''' Copyright       = AssemblyCopyright string
-    ''' Company         = AssemblyCompany string
-    ''' Description     = AssemblyDescription string
-    ''' Title           = AssemblyTitle string
-    ''' </remarks>
-    Private Function AssemblyAttribs(ByVal a As System.Reflection.Assembly) As Specialized.NameValueCollection
-        Dim TypeName As String
-        Dim Name As String
-        Dim Value As String
-        Dim nvc As New Specialized.NameValueCollection
-        Dim r As New Regex("(\.Assembly|\.)(?<Name>[^.]*)Attribute$", RegexOptions.IgnoreCase)
-
-        For Each attrib As Object In a.GetCustomAttributes(False)
-            TypeName = attrib.GetType().ToString
-            Name = r.Match(TypeName).Groups("Name").ToString
-            Value = ""
-            Select Case TypeName
-                Case "System.CLSCompliantAttribute"
-                    Value = CType(attrib, CLSCompliantAttribute).IsCompliant
-                Case "System.Diagnostics.DebuggableAttribute"
-                    Value = CType(attrib, Diagnostics.DebuggableAttribute).IsJITTrackingEnabled
-                Case "System.Reflection.AssemblyCompanyAttribute"
-                    Value = CType(attrib, AssemblyCompanyAttribute).Company
-                Case "System.Reflection.AssemblyConfigurationAttribute"
-                    Value = CType(attrib, AssemblyConfigurationAttribute).Configuration
-                Case "System.Reflection.AssemblyCopyrightAttribute"
-                    Value = CType(attrib, AssemblyCopyrightAttribute).Copyright
-                Case "System.Reflection.AssemblyDefaultAliasAttribute"
-                    Value = CType(attrib, AssemblyDefaultAliasAttribute).DefaultAlias
-                Case "System.Reflection.AssemblyDelaySignAttribute"
-                    Value = CType(attrib, AssemblyDelaySignAttribute).DelaySign
-                Case "System.Reflection.AssemblyDescriptionAttribute"
-                    Value = CType(attrib, AssemblyDescriptionAttribute).Description
-                Case "System.Reflection.AssemblyInformationalVersionAttribute"
-                    Value = CType(attrib, AssemblyInformationalVersionAttribute).InformationalVersion
-                Case "System.Reflection.AssemblyKeyFileAttribute"
-                    Value = CType(attrib, AssemblyKeyFileAttribute).KeyFile
-                Case "System.Reflection.AssemblyProductAttribute"
-                    Value = CType(attrib, AssemblyProductAttribute).Product
-                Case "System.Reflection.AssemblyTrademarkAttribute"
-                    Value = CType(attrib, AssemblyTrademarkAttribute).Trademark
-                Case "System.Reflection.AssemblyTitleAttribute"
-                    Value = CType(attrib, AssemblyTitleAttribute).Title
-                Case "System.Resources.NeutralResourcesLanguageAttribute"
-                    Value = CType(attrib, Resources.NeutralResourcesLanguageAttribute).CultureName
-                Case "System.Resources.SatelliteContractVersionAttribute"
-                    Value = CType(attrib, Resources.SatelliteContractVersionAttribute).Version
-                Case "System.Runtime.InteropServices.ComCompatibleVersionAttribute"
-                    Dim x As Runtime.InteropServices.ComCompatibleVersionAttribute
-                    x = CType(attrib, Runtime.InteropServices.ComCompatibleVersionAttribute)
-                    Value = x.MajorVersion & "." & x.MinorVersion & "." & x.RevisionNumber & "." & x.BuildNumber
-                Case "System.Runtime.InteropServices.ComVisibleAttribute"
-                    Value = CType(attrib, Runtime.InteropServices.ComVisibleAttribute).Value
-                Case "System.Runtime.InteropServices.GuidAttribute"
-                    Value = CType(attrib, Runtime.InteropServices.GuidAttribute).Value
-                Case "System.Runtime.InteropServices.TypeLibVersionAttribute"
-                    Dim x As Runtime.InteropServices.TypeLibVersionAttribute
-                    x = CType(attrib, Runtime.InteropServices.TypeLibVersionAttribute)
-                    Value = x.MajorVersion & "." & x.MinorVersion
-                Case "System.Security.AllowPartiallyTrustedCallersAttribute"
-                    Value = "(Present)"
-                Case Else
-                    '-- debug.writeline("** unknown assembly attribute '" & TypeName & "'")
-                    Value = TypeName
-            End Select
-
-            If nvc.Item(Name) = "" Then
-                nvc.Add(Name, Value)
-            End If
-        Next
-
-        '-- add some extra values that are not in the AssemblyInfo, but nice to have
-        With nvc
-            '-- codebase
-            Try
-                .Add("CodeBase", a.CodeBase.Replace("file:///", ""))
-            Catch ex As System.NotSupportedException
-                .Add("CodeBase", "(not supported)")
-            End Try
-            '-- build date
-            Dim dt As DateTime = AssemblyBuildDate(a)
-            If dt = DateTime.MaxValue Then
-                .Add("BuildDate", "(unknown)")
-            Else
-                .Add("BuildDate", dt.ToString("yyyy-MM-dd hh:mm tt"))
-            End If
-            '-- location
-            Try
-                .Add("Location", a.Location)
-            Catch ex As System.NotSupportedException
-                .Add("Location", "(not supported)")
-            End Try
-            '-- version
-            Try
-                If a.GetName.Version.Major = 0 And a.GetName.Version.Minor = 0 Then
-                    .Add("Version", "(unknown)")
-                Else
-                    .Add("Version", a.GetName.Version.ToString)
-                End If
-            Catch ex As Exception
-                .Add("Version", "(unknown)")
-            End Try
-
-            .Add("FullName", a.FullName)
-        End With
-
-        Return nvc
-    End Function
-
-    ''' <summary>
-    ''' exception-safe retrieval of LastWriteTime for this assembly.
-    ''' </summary>
-    ''' <returns>File.GetLastWriteTime, or DateTime.MaxValue if exception was encountered.</returns>
-    Private Shared Function AssemblyLastWriteTime(ByVal a As System.Reflection.Assembly) As DateTime
-        Try
-            Return File.GetLastWriteTime(a.Location)
-        Catch ex As Exception
-            Return DateTime.MaxValue
-        End Try
-    End Function
-
-    ''' <summary>
-    ''' Returns DateTime this Assembly was last built. Will attempt to calculate from build number, if possible. 
-    ''' If not, the actual LastWriteTime on the assembly file will be returned.
-    ''' </summary>
-    ''' <param name="a">Assembly to get build date for</param>
-    ''' <param name="ForceFileDate">Don't attempt to use the build number to calculate the date</param>
-    ''' <returns>DateTime this assembly was last built</returns>
-    Private Shared Function AssemblyBuildDate(ByVal a As System.Reflection.Assembly,
-        Optional ByVal ForceFileDate As Boolean = False) As DateTime
-
-        Dim AssemblyVersion As System.Version = a.GetName.Version
-        Dim dt As DateTime
-
-        If ForceFileDate Then
-            dt = AssemblyLastWriteTime(a)
-        Else
-            dt = CType("01/01/2000", DateTime).
-                AddDays(AssemblyVersion.Build).
-                AddSeconds(AssemblyVersion.Revision * 2)
-            If TimeZone.IsDaylightSavingTime(dt, TimeZone.CurrentTimeZone.GetDaylightChanges(dt.Year)) Then
-                dt = dt.AddHours(1)
-            End If
-            If dt > DateTime.Now Or AssemblyVersion.Build < 730 Or AssemblyVersion.Revision = 0 Then
-                dt = AssemblyLastWriteTime(a)
-            End If
-        End If
-
-        Return dt
-    End Function
-
-    ''' <summary>
-    ''' if a new assembly is selected from the combo box, show details for that assembly
-    ''' </summary>
-    Private Sub AssemblyNamesComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AssemblyNamesComboBox.SelectedIndexChanged
-        Dim strAssemblyName As String = Convert.ToString(AssemblyNamesComboBox.SelectedItem)
-        PopulateAssemblyDetails(MatchAssemblyByName(strAssemblyName), AssemblyDetailsListView)
-    End Sub
-
-    Private Sub AboutBoxNET_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        PopulateAssemblies()
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p
@@ -468,4 +170,5 @@ Public Class AboutBox
             Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt")
         End If
     End Sub
+
 End Class
