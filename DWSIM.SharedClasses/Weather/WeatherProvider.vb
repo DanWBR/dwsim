@@ -21,7 +21,7 @@ Public Class WeatherProvider
         With formattedresult
             .AtmosphericPressure_Pa = result.pressure.value / 1000.0 * 101325
             Select Case result.phrase.ToLower()
-                Case "cloudy", "partly sunny"
+                Case "cloudy", "partly sunny", "clouds and sun"
                     .CurrentCondition = WeatherCondition.Cloudy
                 Case "clear", "sunny"
                     .CurrentCondition = WeatherCondition.Sunny
@@ -68,6 +68,10 @@ Public Class WeatherProvider
         Dim AM = 1 / Math.Cos(elev)
 
         Dim ID = 1.353 * 0.7 ^ (AM * 0.678)
+
+        If formattedresult.CurrentCondition = WeatherCondition.Cloudy Then
+            ID *= 0.5
+        End If
 
         formattedresult.SolarIrradiation_kWh_m2 = ID
 
