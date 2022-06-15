@@ -567,6 +567,12 @@
     <Compile Include="Forms\CompoundCreator\FormImportCompoundDataKDB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.Designer.vb">
+      <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Data Regression\FormSearchKDBVLE.Designer.vb">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </Compile>
@@ -730,10 +736,10 @@
     <Compile Include="Forms\FormHTMLEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormImportCompoundOnline.Designer.vb">
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.Designer.vb">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormImportCompoundOnline.vb">
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormLiveFlows.Designer.vb">
@@ -1320,6 +1326,9 @@
     <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataKDB.resx">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundFromThermo.resx">
+      <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.de.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </EmbeddedResource>
@@ -1516,10 +1525,10 @@
     <EmbeddedResource Include="Forms\FormHTMLEditor.resx">
       <DependentUpon>FormHTMLEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.en.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormImportCompoundOnline.resx">
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLiveFlows.resx">
@@ -2472,6 +2481,10 @@
     <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.vbproj">
       <Project>{46fd1720-09ce-4edb-b2c5-378be32859fb}</Project>
       <Name>DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj">
+      <Project>{77a58441-0cf0-4dea-b1f7-7723368f693f}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>

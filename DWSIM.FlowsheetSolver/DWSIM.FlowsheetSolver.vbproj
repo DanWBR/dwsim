@@ -72,18 +72,10 @@
     <Reference Include="Cudafy.NET">
       <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ServiceBus, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DWSIM.Apps.AzureServer\References\Microsoft.ServiceBus.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TcpComm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DWSIM.Apps.TCPServer\References\TcpComm.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.MathOps" />
@@ -98,8 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlowsheetSolver.vb" />
-    <Compile Include="Remote Solvers\AzureSolverClient.vb" />
-    <Compile Include="Remote Solvers\TCPSolverClient.vb" />
     <Compile Include="Task Schedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

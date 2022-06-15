@@ -34,7 +34,7 @@ Public Class LMFit
     Private sum As Double
     Private its As Integer = 0
 
-    Public Function GetCoeffs(ByVal x As Double(), ByVal y As Double(), ByVal inest As Double(), ByVal fittype As FitType, _
+    Public Function GetCoeffs(ByVal x As Double(), ByVal y As Double(), ByVal inest As Double(), ByVal fittype As FitType,
                             ByVal epsg As Double, ByVal epsf As Double, ByVal epsx As Double, ByVal maxits As Integer) As Object
 
         Dim lmsolve As New MathEx.LM.levenbergmarquardt

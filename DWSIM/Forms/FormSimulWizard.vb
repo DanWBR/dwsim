@@ -901,11 +901,10 @@ Public Class FormSimulWizard
         If f.ShowDialog(Me) = DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    End If
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
                     For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
@@ -939,11 +938,10 @@ Public Class FormSimulWizard
             Dim jsondata = handler.ReadAllText()
             Try
                 Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(jsondata)
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    End If
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
                     For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
@@ -1067,6 +1065,37 @@ Public Class FormSimulWizard
                     DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
                 Next
             End If
+        End If
+    End Sub
+
+    Private Sub ImportFromThermoChemicalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromThermoChemicalsToolStripMenuItem.Click
+        Dim f As New FormImportCompoundFromThermo
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Try
+                Dim comp = f.compdata
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
+                    Dim ms As Streams.MaterialStream
+                    Dim proplist As New ArrayList
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                            phase.Compounds(comp.Name).ConstantProperties = comp
+                        Next
+                    Next
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+                    UpdateAddedList()
+
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
 End Class

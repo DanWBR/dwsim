@@ -72,7 +72,7 @@ Namespace UnitOperations
 
         <Xml.Serialization.XmlIgnore> Public f As EditingForm_OPEMFC
 
-        Public Property OPEMPath As String = "python_opem\python-3.9.4.amd64"
+        Public Property OPEMPath As String = "main\python-3.9.4.amd64"
 
         Public Property InputParameters As Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter) = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
 

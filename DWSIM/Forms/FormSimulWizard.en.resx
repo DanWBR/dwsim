@@ -211,91 +211,6 @@ Click "Next" to continue.</value>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>698, 286</value>
   </data>
-  <data name="rbSDN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 3</value>
-  </data>
-  <data name="rbSDN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 19</value>
-  </data>
-  <data name="rbSDN.Text" xml:space="preserve">
-    <value>Don't know</value>
-  </data>
-  <data name="rbSNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 3</value>
-  </data>
-  <data name="rbSNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 19</value>
-  </data>
-  <data name="rbSNo.Text" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="rbSYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 3</value>
-  </data>
-  <data name="rbSYes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 19</value>
-  </data>
-  <data name="rbSYes.Text" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 15</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Does this simulation deal with solids?</value>
-  </data>
-  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 324</value>
-  </data>
-  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 15</value>
-  </data>
-  <data name="LinkLabel2.Text" xml:space="preserve">
-    <value>Click here to get help on selecting the best Thermodynamic Model/Property Package for your system.</value>
-  </data>
-  <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 15</value>
-  </data>
-  <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
-    <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="Column10.Width" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DataGridViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 231</value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Available Property Packages</value>
-  </data>
-  <data name="Column16.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Column17.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Added Property Packages</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 33</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
-  </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Property Packages</value>
   </data>
@@ -304,34 +219,6 @@ Click "Next" to continue.</value>
   </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introduction</value>
-  </data>
-  <data name="btnCreateNewUnits.Text" xml:space="preserve">
-    <value>Create New</value>
-  </data>
-  <data name="btnCloneUnits.Text" xml:space="preserve">
-    <value>Clone</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 15</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Select the desired System of Units for your simulation. You can change individual units by selecting a custom system (other than SI, CGS or ENG). 
-Click "Finish" to exit the wizard and start designing the simulation model.</value>
   </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
@@ -466,6 +353,122 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
+  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 324</value>
+  </data>
+  <data name="rbSDN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 3</value>
+  </data>
+  <data name="rbSDN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 19</value>
+  </data>
+  <data name="rbSDN.Text" xml:space="preserve">
+    <value>Don't know</value>
+  </data>
+  <data name="rbSNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 3</value>
+  </data>
+  <data name="rbSNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 19</value>
+  </data>
+  <data name="rbSNo.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="rbSYes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 3</value>
+  </data>
+  <data name="rbSYes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 19</value>
+  </data>
+  <data name="rbSYes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 15</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Does this simulation deal with solids?</value>
+  </data>
+  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>543, 15</value>
+  </data>
+  <data name="LinkLabel2.Text" xml:space="preserve">
+    <value>Click here to get help on selecting the best Thermodynamic Model/Property Package for your system.</value>
+  </data>
+  <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>593, 15</value>
+  </data>
+  <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
+    <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Available Property Packages</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DataGridViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 231</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Column10.Width" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Added Property Packages</value>
+  </data>
+  <data name="Column16.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column17.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>703, 33</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
+  </data>
+  <data name="btnCreateNewUnits.Text" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="btnCloneUnits.Text" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 15</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>System of Units</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Select the desired System of Units for your simulation. You can change individual units by selecting a custom system (other than SI, CGS or ENG). 
+Click "Finish" to exit the wizard and start designing the simulation model.</value>
+  </data>
+  <data name="ImportFromThermoChemicalsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import from Thermo/Chemicals</value>
+  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 22</value>
   </data>
@@ -497,6 +500,6 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
     <value>Create From UNIFAC Molecular Structure</value>
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 136</value>
+    <value>331, 158</value>
   </data>
 </root>

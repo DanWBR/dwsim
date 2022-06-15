@@ -75,7 +75,7 @@ Namespace UnitOperations
 
             DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
-            OPEMPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "python_opem\python-3.9.4.amd64")
+            OPEMPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "main", "python-3.9.4.amd64")
 
             If Not Directory.Exists(OPEMPath) Then
                 Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")

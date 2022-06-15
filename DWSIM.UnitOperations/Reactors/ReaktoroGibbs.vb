@@ -37,7 +37,7 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReaktoroGibbs
 
-        Public Property ReaktoroPath As String = "python_reaktoro"
+        Public Property ReaktoroPath As String = "reaktoro"
 
         Public Property DatabaseName As String = "supcrt07.xml"
 
@@ -137,7 +137,7 @@ Namespace Reactors
 
             DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
-            ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "python_reaktoro")
+            ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
 
             If Not Directory.Exists(ReaktoroPath) Then
                 Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")

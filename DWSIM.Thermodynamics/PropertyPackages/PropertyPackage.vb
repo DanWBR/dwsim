@@ -5185,7 +5185,7 @@ redirect2:                  IObj?.SetCurrent()
                     'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / CompoundPropCache(ID).Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                ElseIf db = "ChemSep" Or db = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = CompoundPropCache(ID).IdealgasCpEquation
                     Dim mw As Double = CompoundPropCache(ID).Molar_Weight
