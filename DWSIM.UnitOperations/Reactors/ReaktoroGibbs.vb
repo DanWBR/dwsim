@@ -498,6 +498,8 @@ Namespace Reactors
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
+                Case PropertyType.WR
+                    proplist.Add("Pressure Drop")
                 Case PropertyType.ALL
                     For Each item In ComponentConversions
                         proplist.Add(item.Key + ": Conversion")
@@ -509,8 +511,20 @@ Namespace Reactors
 
         End Function
 
+        Public Overrides Function GetPropertyUnit(prop As String, Optional su As IUnitsOfMeasure = Nothing) As String
+
+            If su Is Nothing Then su = New SystemsOfUnits.SI()
+            If prop.Contains("Conversion") Then
+                Return "%"
+            ElseIf prop.Equals("Pressure Drop") Then
+                Return su.deltaP
+            End If
+
+        End Function
+
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
+            If su Is Nothing Then su = New SystemsOfUnits.SI()
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
             If Not val0 Is Nothing Then
@@ -524,9 +538,21 @@ Namespace Reactors
                     Else
                         value = 0.0
                     End If
+                ElseIf prop.Equals("Pressure Drop") Then
+                    Return DeltaP.GetValueOrDefault().ConvertFromSI(su.deltaP)
                 End If
                 Return value
             End If
+
+        End Function
+
+        Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
+
+            If su Is Nothing Then su = New SystemsOfUnits.SI()
+            If prop.Equals("Pressure Drop") Then
+                DeltaP = Convert.ToDouble(propval).ConvertToSI(su.deltaP)
+            End If
+            Return True
 
         End Function
 

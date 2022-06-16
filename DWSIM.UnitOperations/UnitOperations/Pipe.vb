@@ -80,6 +80,8 @@ Namespace UnitOperations
             OutletTemperature = 2
         End Enum
 
+        Public Property UseGlobalWeather As Boolean = False
+
         Public Property Specification As Specmode = Specmode.Length
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
@@ -681,7 +683,16 @@ Namespace UnitOperations
 
                                 With segmento
 
-                                    results.External_Temperature = Text + dText_dL * currL
+                                    If UseGlobalWeather Then
+
+                                        results.External_Temperature = FlowSheet.FlowsheetOptions.CurrentWeather.Temperature_C + 273.15
+
+                                    Else
+
+                                        results.External_Temperature = Text + dText_dL * currL
+
+                                    End If
+
 
                                     Cp_m = holdup * Cp_l + (1 - holdup) * Cp_v
 
@@ -1428,8 +1439,21 @@ Namespace UnitOperations
                 ElseIf Me.m_thermalprofile.Meio = "0" Then 'Air
 
                     'Average air properties
-                    vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
-                    Dim props = PropsAR(Text, 101325)
+
+                    Dim Pext As Double = 101325.0
+
+                    If UseGlobalWeather Then
+
+                        Pext = FlowSheet.FlowsheetOptions.CurrentWeather.AtmosphericPressure_Pa
+                        vel = FlowSheet.FlowsheetOptions.CurrentWeather.WindSpeed_km_h / 3.6
+
+                    Else
+
+                        vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
+
+                    End If
+
+                    Dim props = PropsAR(Text, Pext)
                     mu2 = props(1)
                     rho2 = props(0)
                     cp2 = props(2) * 1000

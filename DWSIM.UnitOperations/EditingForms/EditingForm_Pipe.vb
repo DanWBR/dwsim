@@ -168,6 +168,8 @@ Public Class EditingForm_Pipe
             cbPropPack.Items.AddRange(proppacks)
             cbPropPack.SelectedItem = .PropertyPackage?.Tag
 
+            CheckBox1.Checked = .UseGlobalWeather
+
         End With
 
         Loaded = True
@@ -465,4 +467,7 @@ Public Class EditingForm_Pipe
 
     End Sub
 
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        SimObject.UseGlobalWeather = CheckBox1.Checked
+    End Sub
 End Class
