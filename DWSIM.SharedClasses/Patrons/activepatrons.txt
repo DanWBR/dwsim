@@ -33,6 +33,7 @@ H-Tec Systems GmbH
 Hugo Burbach
 Hurudza 
 Jan Boshoff
+Javier Alzate
 Jens Greimeier
 Jeremiah McAfoose
 Joe Rhodes
@@ -69,6 +70,7 @@ Richard Huntington
 Roland Berger
 Rupert Easter
 Ryszard Sadowski
+Shankar Ananth
 Shijin Roh
 Steven Sandoval
 Tibor Lányi
