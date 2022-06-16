@@ -25,6 +25,7 @@ Partial Class FormImportCompoundFromThermo
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundFromThermo))
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.WizardPage2 = New AeroWizard.WizardPage()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
@@ -46,7 +47,6 @@ Partial Class FormImportCompoundFromThermo
         Me.Column2 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,6 +81,17 @@ Partial Class FormImportCompoundFromThermo
         Me.WizardPage2.Size = New System.Drawing.Size(701, 354)
         Me.WizardPage2.TabIndex = 1
         Me.WizardPage2.Text = "Welcome"
+        '
+        'Label10
+        '
+        Me.Label10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label10.Location = New System.Drawing.Point(21, 282)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(663, 53)
+        Me.Label10.TabIndex = 11
+        Me.Label10.Text = "'thermo' and 'chemicals' Python libraries are Copyright (c) Caleb Bell and Contri" &
+    "butors (2016-2021). Thermo: Chemical properties component of Chemical Engineerin" &
+    "g Design Library (ChEDL)."
         '
         'Label7
         '
@@ -303,17 +314,6 @@ Partial Class FormImportCompoundFromThermo
         Me.Label6.Size = New System.Drawing.Size(677, 74)
         Me.Label6.TabIndex = 4
         Me.Label6.Text = resources.GetString("Label6.Text")
-        '
-        'Label10
-        '
-        Me.Label10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label10.Location = New System.Drawing.Point(21, 282)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(663, 53)
-        Me.Label10.TabIndex = 11
-        Me.Label10.Text = "'thermo' and 'chemicals' Python libraries are Copyright (c) Caleb Bell and Contri" &
-    "butors (2016-2021). Thermo: Chemical properties component of Chemical Engineerin" &
-    "g Design Library (ChEDL)."
         '
         'FormImportCompoundFromThermo
         '

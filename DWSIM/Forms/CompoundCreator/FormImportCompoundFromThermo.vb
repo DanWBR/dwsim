@@ -23,9 +23,20 @@ Public Class FormImportCompoundFromThermo
 
         Dim searchtext = tbSearchString.Text
 
-        Dim result = searcher.SearchCompound(searchtext)
+        Try
 
-        tbQueryMatch.Text = result(0)
+            Dim result = searcher.SearchCompound(searchtext)
+
+            tbQueryMatch.Text = result(0)
+
+        Catch ex As Exception
+
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            e.Cancel = True
+
+        End Try
+
 
     End Sub
 
@@ -157,6 +168,10 @@ Public Class FormImportCompoundFromThermo
 
         End If
 
+
+    End Sub
+
+    Private Sub FormImportCompoundFromThermo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
