@@ -3403,5 +3403,218 @@ Label_00CC:
         Throw New NotImplementedException()
     End Function
 
+    Public Function CreateConversionReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                             basecompound As String, reactionphase As String, conversionExpression As String) As IReaction Implements IFlowsheet.CreateConversionReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Conversion
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        r.Expression = conversionExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateEquilibriumReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                              basecompound As String, reactionphase As String, basis As String, units As String, Tapproach As Double,
+                                              lnKeq_fT As String) As IReaction Implements IFlowsheet.CreateEquilibriumReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Equilibrium
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.EquilibriumReactionBasisUnits = units
+        r.Approach = Tapproach
+        If lnKeq_fT <> "" Then r.KExprType = KOpt.Expression Else r.KExprType = KOpt.Gibbs
+        r.Expression = lnKeq_fT
+
+        Return r
+
+    End Function
+
+    Public Function CreateKineticReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                          directorders As Dictionary(Of String, Double), reverseorders As Dictionary(Of String, Double),
+                                          basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                          rateunits As String, Aforward As Double, Eforward As Double, Areverse As Double, Ereverse As Double,
+                                          Expr_forward As String, Expr_reverse As String) As IReaction Implements IFlowsheet.CreateKineticReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Kinetic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, directorders(kvp.Key), reverseorders(kvp.Key)))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.A_Forward = Aforward
+        r.E_Forward = Eforward
+        r.A_Reverse = Areverse
+        r.E_Reverse = Ereverse
+        If Expr_forward <> "" Then
+            r.ReactionKinFwdType = ReactionKineticType.UserDefined
+            r.ReactionKinFwdExpression = Expr_forward
+        Else
+            r.ReactionKinFwdType = ReactionKineticType.Arrhenius
+        End If
+        If Expr_reverse <> "" Then
+            r.ReactionKinRevType = ReactionKineticType.UserDefined
+            r.ReactionKinRevExpression = Expr_reverse
+        Else
+            r.ReactionKinRevType = ReactionKineticType.Arrhenius
+        End If
+
+        Return r
+
+    End Function
+
+    Public Function CreateHetCatReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                         basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                         rateunits As String, numeratorExpression As String, denominatorExpression As String) As IReaction Implements IFlowsheet.CreateHetCatReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Heterogeneous_Catalytic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.RateEquationNumerator = numeratorExpression
+        r.RateEquationDenominator = denominatorExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateReactionSet(name As String, description As String) As IReactionSet Implements IFlowsheet.CreateReactionSet
+
+        Dim rs As New ReactionSet(name, name, description)
+        Return rs
+
+    End Function
+
+    Public Sub AddReaction(reaction As IReaction) Implements IFlowsheet.AddReaction
+
+        Reactions.Add(reaction.ID, reaction)
+
+    End Sub
+
+    Public Sub AddReactionSet(reactionSet As IReactionSet) Implements IFlowsheet.AddReactionSet
+
+        ReactionSets.Add(reactionSet.ID, reactionSet)
+
+    End Sub
+
+    Public Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer) Implements IFlowsheet.AddReactionToSet
+
+        ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
+
+    End Sub
+
 End Class
 

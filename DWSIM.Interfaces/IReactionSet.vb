@@ -26,4 +26,10 @@
 
     ReadOnly Property Reactions() As Dictionary(Of String, IReactionSetBase)
 
+    Sub SetReactionRank(reactionID As String, rank As Integer)
+
+    Sub EnableReaction(reactionID As String)
+
+    Sub DisableReaction(reactionID As String)
+
 End Interface

@@ -1185,6 +1185,18 @@ Namespace BaseClasses
 
         End Function
 
+        Public Sub SetReactionRank(reactionID As String, rank As Integer) Implements IReactionSet.SetReactionRank
+            Reactions(reactionID).Rank = rank
+        End Sub
+
+        Public Sub EnableReaction(reactionID As String) Implements IReactionSet.EnableReaction
+            Reactions(reactionID).IsActive = True
+        End Sub
+
+        Public Sub DisableReaction(reactionID As String) Implements IReactionSet.DisableReaction
+            Reactions(reactionID).IsActive = False
+        End Sub
+
     End Class
 
     <System.Serializable()> Public Class ReactionSetBase

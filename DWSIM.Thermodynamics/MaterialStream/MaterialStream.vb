@@ -933,6 +933,26 @@ Namespace Streams
 
         End Sub
 
+        Public Sub SetOverallMassComposition(ByVal Vx As Double()) Implements Interfaces.IMaterialStream.SetOverallMassComposition
+
+            Dim mass_div_mm As Double
+            Dim Vxm As New List(Of Double)
+            Dim i As Integer = 0
+            Dim MW = Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.Molar_Weight).ToArray()
+            For i = 0 To Vx.Length - 1
+                mass_div_mm += Vx(i) / MW(i)
+            Next
+            For i = 0 To Vx.Length - 1
+                Vxm.Add(Vx(i) / MW(i) / mass_div_mm)
+            Next
+
+            For Each c As Compound In Me.Phases(0).Compounds.Values
+                c.MoleFraction = Vxm(i)
+                i += 1
+            Next
+
+        End Sub
+
         Public Sub EqualizeOverallComposition()
 
             For Each c As Compound In Me.Phases(0).Compounds.Values
@@ -1053,6 +1073,12 @@ Namespace Streams
         Public Function GetOverallComposition() As Double() Implements IMaterialStream.GetOverallComposition
 
             Return Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
+
+        End Function
+
+        Public Function GetOverallMassComposition() As Double() Implements IMaterialStream.GetOverallMassComposition
+
+            Return Phases(0).Compounds.Values.Select(Function(x) x.MassFraction.GetValueOrDefault).ToArray
 
         End Function
 

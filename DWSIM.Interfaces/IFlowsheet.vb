@@ -218,6 +218,39 @@
 
     Property WeatherProvider As IWeatherProvider
 
+    Function CreateConversionReaction(name As String, description As String,
+                                      compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                      basecompound As String, reactionphase As String,
+                                      conversionExpression As String) As IReaction
+
+    Function CreateEquilibriumReaction(name As String, description As String,
+                                      compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                      basecompound As String, reactionphase As String,
+                                      basis As String, units As String, Tapproach As Double, lnKeq_fT As String) As IReaction
+
+    Function CreateKineticReaction(name As String, description As String,
+                                    compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                    directorders As Dictionary(Of String, Double),
+                                    reverseorders As Dictionary(Of String, Double),
+                                    basecompound As String, reactionphase As String,
+                                    basis As String, amountunits As String, rateunits As String,
+                                    Aforward As Double, Eforward As Double, Areverse As Double, Ereverse As Double,
+                                    Expr_forward As String, Expr_reverse As String) As IReaction
+
+    Function CreateHetCatReaction(name As String, description As String,
+                                    compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                    basecompound As String, reactionphase As String,
+                                    basis As String, amountunits As String, rateunits As String,
+                                    numeratorExpression As String, denominatorExpression As String) As IReaction
+
+    Function CreateReactionSet(name As String, description As String) As IReactionSet
+
+    Sub AddReaction(reaction As IReaction)
+
+    Sub AddReactionSet(reactionSet As IReactionSet)
+
+    Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer)
+
 End Interface
 
 ''' <summary>

@@ -383,7 +383,7 @@ Namespace Reactors
 
         Public Overrides Function GetIconBitmap() As Object
 
-            Return My.Resources.icons8_alembic
+            Return My.Resources.reactor_reaktoro
 
         End Function
 
@@ -408,7 +408,7 @@ Namespace Reactors
                 If Image Is Nothing Then
 
                     ImagePath = SharedClasses.Utility.GetTempFileName()
-                    My.Resources.icons8_alembic.Save(ImagePath)
+                    My.Resources.reactor_reaktoro.Save(ImagePath)
 
                     Using streamBG = New FileStream(ImagePath, FileMode.Open)
                         Using bitmap = SKBitmap.Decode(streamBG)
