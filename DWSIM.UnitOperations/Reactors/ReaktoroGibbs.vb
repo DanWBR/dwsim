@@ -18,6 +18,7 @@ Imports DWSIM.DrawingTools.Point
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports Python.Runtime
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
+Imports System.Text
 
 Namespace Reactors
 
@@ -526,6 +527,64 @@ Namespace Reactors
                 End If
                 Return value
             End If
+
+        End Function
+
+        Public Function GetListOfCompounds() As String
+
+
+            DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
+
+            ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
+
+            If Not Directory.Exists(ReaktoroPath) Then
+                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+            End If
+
+            DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
+
+            Using Py.GIL
+
+                Dim reaktoro As Object = Py.Import("reaktoro")
+
+                'Initialize a thermodynamic database
+                Dim db As Object = reaktoro.Database(DatabaseName)
+
+                Dim aql As Object = db.aqueousSpecies()
+                Dim gql As Object = db.gaseousSpecies()
+                Dim lql As Object = db.liquidSpecies()
+                Dim mql As Object = db.mineralSpecies()
+
+                Dim sb As New StringBuilder
+                Dim i As Integer = 0
+
+                sb.AppendLine("Aqueous Species:")
+                sb.AppendLine()
+                For i = 0 To aql.Length - 1
+                    sb.AppendLine(aql(i).name.ToString() + " (" + aql(i).formula.ToString() + ")")
+                Next
+                sb.AppendLine()
+                sb.AppendLine("Gaseous Species:")
+                sb.AppendLine()
+                For i = 0 To gql.Length - 1
+                    sb.AppendLine(gql(i).name.ToString() + " (" + gql(i).formula.ToString() + ")")
+                Next
+                sb.AppendLine()
+                sb.AppendLine("Liquid (Non-Aqueous) Species:")
+                sb.AppendLine()
+                For i = 0 To lql.Length - 1
+                    sb.AppendLine(lql(i).name.ToString() + " (" + lql(i).formula.ToString() + ")")
+                Next
+                sb.AppendLine()
+                sb.AppendLine("Mineral Species:")
+                sb.AppendLine()
+                For i = 0 To mql.Length - 1
+                    sb.AppendLine(mql(i).name.ToString() + " (" + mql(i).formula.ToString() + ")")
+                Next
+
+                Return sb.ToString()
+
+            End Using
 
         End Function
 

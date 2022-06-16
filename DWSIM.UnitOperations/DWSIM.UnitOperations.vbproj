@@ -619,6 +619,12 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="EditingForms\Supporting\FormViewMultilineText.Designer.vb">
+      <DependentUpon>FormViewMultilineText.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\FormViewMultilineText.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EnergyStream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -1293,6 +1299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.resx">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\Supporting\FormViewMultilineText.resx">
+      <DependentUpon>FormViewMultilineText.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Strings.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -529,4 +529,16 @@ Public Class EditingForm_ReaktoroGibbs
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Process.Start("https://reaktoro.org/v1/thermodynamic-databases.html")
     End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        Dim comps = SimObject.GetListOfCompounds()
+
+        Dim ft = New FormViewMultilineText()
+        ft.Text = String.Format("Reaktoro '{0}' Database Compounds List", SimObject.DatabaseName)
+        ft.TextBox1.Text = comps
+        ft.ShowDialog()
+
+    End Sub
+
 End Class

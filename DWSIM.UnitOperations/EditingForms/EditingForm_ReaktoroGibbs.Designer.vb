@@ -23,9 +23,9 @@ Partial Class EditingForm_ReaktoroGibbs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_ReaktoroGibbs))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
@@ -58,6 +58,8 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControlParameters = New System.Windows.Forms.TabControl()
         Me.TabPageParams = New System.Windows.Forms.TabPage()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.cbDatabase = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -90,7 +92,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -431,8 +433,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn6.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn6.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -440,8 +442,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn7.HeaderText = "Conversion (%)"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -475,6 +477,7 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'TabPageParams
         '
+        Me.TabPageParams.Controls.Add(Me.Button6)
         Me.TabPageParams.Controls.Add(Me.Button5)
         Me.TabPageParams.Controls.Add(Me.cbDatabase)
         Me.TabPageParams.Controls.Add(Me.Label2)
@@ -497,16 +500,44 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageParams.Text = "Parameters"
         Me.TabPageParams.UseVisualStyleBackColor = True
         '
+        'Button6
+        '
+        Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button6.AutoSize = True
+        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources._new
+        Me.Button6.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button6.Location = New System.Drawing.Point(340, 84)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(22, 22)
+        Me.Button6.TabIndex = 48
+        Me.ToolTip1.SetToolTip(Me.Button6, "View Database Compound List")
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button5.AutoSize = True
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.information
+        Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button5.Location = New System.Drawing.Point(368, 84)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(22, 22)
+        Me.Button5.TabIndex = 47
+        Me.ToolTip1.SetToolTip(Me.Button5, "Help")
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'cbDatabase
         '
         Me.cbDatabase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDatabase.FormattingEnabled = True
-        Me.cbDatabase.Items.AddRange(New Object() {"supcrt98.xml", "supcrt98-organics.xml", "supcrt07.xml", "supcrt07-organics.xml", "Amm.dat", "frezchem.dat", "iso.dat", "llnl.dat", "minteq.dat", "minteq.v4.dat", "phreeqc.dat", "pitzer.dat", "sit.dat", "waterq4f.dat"})
+        Me.cbDatabase.Items.AddRange(New Object() {"supcrt98.xml", "supcrt98-organics.xml", "supcrt07.xml", "supcrt07-organics.xml"})
         Me.cbDatabase.Location = New System.Drawing.Point(152, 84)
         Me.cbDatabase.Name = "cbDatabase"
-        Me.cbDatabase.Size = New System.Drawing.Size(209, 21)
+        Me.cbDatabase.Size = New System.Drawing.Size(183, 21)
         Me.cbDatabase.TabIndex = 46
         '
         'Label2
@@ -534,9 +565,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.CheckBox4.AutoSize = True
         Me.CheckBox4.Location = New System.Drawing.Point(273, 19)
         Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(49, 17)
+        Me.CheckBox4.Size = New System.Drawing.Size(92, 17)
         Me.CheckBox4.TabIndex = 43
-        Me.CheckBox4.Text = "Solid"
+        Me.CheckBox4.Text = "Solid (Mineral)"
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'CheckBox3
@@ -732,8 +763,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn1.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -830,19 +861,6 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.chkUseEmbeddedImage.TabIndex = 37
         Me.chkUseEmbeddedImage.Text = "Use Embedded Image Icon"
         Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button5.AutoSize = True
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.information
-        Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button5.Location = New System.Drawing.Point(368, 84)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(22, 22)
-        Me.Button5.TabIndex = 47
-        Me.Button5.UseVisualStyleBackColor = True
         '
         'EditingForm_ReaktoroGibbs
         '
@@ -949,4 +967,6 @@ Partial Class EditingForm_ReaktoroGibbs
     Public WithEvents Button4 As Button
     Public WithEvents chkUseEmbeddedImage As CheckBox
     Public WithEvents Button5 As Button
+    Public WithEvents Button6 As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
