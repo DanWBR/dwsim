@@ -2817,7 +2817,7 @@ Public Class FormFlowsheet
 
     Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
         Get
-            Throw New NotImplementedException()
+            Return My.Application.MainWindowForm.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
         End Get
         Set(value As Dictionary(Of String, IPropertyPackage))
             Throw New NotImplementedException()
@@ -3921,6 +3921,35 @@ Public Class FormFlowsheet
         ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
 
     End Sub
+
+    Public Function GetAvailablePropertyPackages() As List(Of String) Implements IFlowsheet.GetAvailablePropertyPackages
+
+        Return AvailablePropertyPackages.Keys.ToList()
+
+    End Function
+
+    Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
+
+        Return AvailablePropertyPackages(name).Clone()
+
+    End Function
+
+    Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        AddPropertyPackage(pp)
+        Return pp
+
+    End Function
+
+    Public Function AddCompound(compname As String) As ICompoundConstantProperties Implements IFlowsheet.AddCompound
+
+        Dim c = GetCompound(compname)
+        Options.SelectedComponents.Add(c.Name, c)
+        If Options.NotSelectedComponents.ContainsKey(c.Name) Then Options.NotSelectedComponents.Remove(c.Name)
+        Return c
+
+    End Function
 
 #End Region
 

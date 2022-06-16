@@ -49,6 +49,56 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Sub ConnectFeedMaterialStream(stream As Thermodynamics.Streams.MaterialStream, portnumber As Integer)
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectProductMaterialStream(stream As Thermodynamics.Streams.MaterialStream, portnumber As Integer)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, portnumber, 0)
+
+        End Sub
+
+        Public Sub ConnectFeedEnergyStream(stream As Streams.EnergyStream, portnumber As Integer)
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectProductEnergyStream(stream As Streams.EnergyStream, portnumber As Integer)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectEnergyStream(stream As Streams.EnergyStream)
+
+            If GraphicObject.EnergyConnector.Active Then
+                FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Else
+                Dim i As Integer = 0
+                For Each con In GraphicObject.InputConnectors
+                    If con.IsEnergyConnector Or con.Type = GraphicObjects.ConType.ConEn Then
+                        FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, i)
+                    End If
+                    i += 1
+                Next
+                i = 0
+                For Each con In GraphicObject.InputConnectors
+                    If con.IsEnergyConnector Or con.Type = GraphicObjects.ConType.ConEn Then
+                        FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, i, 0)
+                    End If
+                    i += 1
+                Next
+
+            End If
+
+        End Sub
+
+
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)

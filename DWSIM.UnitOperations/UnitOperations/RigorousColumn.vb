@@ -37,6 +37,7 @@ Imports DWSIM.MathOps.MathEx.Optimization
 Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.UnitOperations.UnitOperations.Column
+Imports DWSIM.UnitOperations.Streams
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -836,6 +837,82 @@ Namespace UnitOperations
 
         Public Property RefluxedAbsorber As Boolean = False
 
+        Public Sub ConnectFeed(feed As MaterialStream, stagenumber As Integer)
+
+            Dim i As Integer = 0
+            Dim success As Boolean = False
+            For Each con In GraphicObject.InputConnectors
+                If Not con.IsAttached Then
+                    FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
+                    Dim msi As New StreamInformation With {.ID = feed.Name,
+                        .AssociatedStage = Stages(i).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Feed,
+                        .StreamType = StreamInformation.Type.Material}
+                    MaterialStreams.Add(msi.ID, msi)
+                    success = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not success Then Throw New Exception("No feed port available")
+
+        End Sub
+
+        Public Sub ConnectVaporProduct(stream As MaterialStream)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 9, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.OverheadVapor,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectDistillate(stream As MaterialStream)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectBottoms(stream As MaterialStream)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages.Last.Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectCondenserDuty(stream As EnergyStream)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 10, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Energy}
+            EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectReboilerDuty(stream As EnergyStream)
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, 10)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Energy}
+            EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -1267,6 +1344,49 @@ Namespace UnitOperations
         Inherits Column
 
         Public _opmode As OpMode = OpMode.Absorber
+
+        Public Sub ConnectFeed(feed As MaterialStream, stagenumber As Integer)
+
+            Dim i As Integer = 0
+            Dim success As Boolean = False
+            For Each con In GraphicObject.InputConnectors
+                If Not con.IsAttached Then
+                    FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
+                    Dim msi As New StreamInformation With {.ID = feed.Name,
+                        .AssociatedStage = Stages(i).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Feed,
+                        .StreamType = StreamInformation.Type.Material}
+                    MaterialStreams.Add(msi.ID, msi)
+                    success = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not success Then Throw New Exception("No feed port available")
+
+        End Sub
+
+        Public Sub ConnectTopProduct(stream As MaterialStream)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectBottoms(stream As MaterialStream)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name,
+                        .AssociatedStage = Stages.Last.Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
 
         Public Sub New()
             MyBase.New()

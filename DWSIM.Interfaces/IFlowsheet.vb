@@ -251,6 +251,14 @@
 
     Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer)
 
+    Function GetAvailablePropertyPackages() As List(Of String)
+
+    Function CreatePropertyPackage(name As String) As IPropertyPackage
+
+    Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage
+
+    Function AddCompound(compname As String) As ICompoundConstantProperties
+
 End Interface
 
 ''' <summary>

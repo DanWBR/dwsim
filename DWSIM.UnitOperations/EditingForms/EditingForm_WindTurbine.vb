@@ -13,7 +13,7 @@ Public Class EditingForm_WindTurbine
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
-    Private Sub EditingForm_WindTurbine_Load(sender As Object, e As EventArgs)
+    Private Sub EditingForm_WindTurbine_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 

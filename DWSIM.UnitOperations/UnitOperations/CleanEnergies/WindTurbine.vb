@@ -288,10 +288,10 @@ Namespace UnitOperations
                 Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
                     Return New String() {"Efficiency", "User-Defined Wind Speed", "Actual Wind Speed", "User-Defined Air Temperature", "Actual Air Temperature",
                         "User-Defined Air Pressure", "Actual Air Pressure", "User-Defined Relative Humidity", "Actual Relative Humidity",
-                        "Disk Area", "Number of Panels", "Generated Power", "Maximum Theoretical Power", "Calculated Air Density"}
+                        "Disk Area", "Number of Units", "Generated Power", "Maximum Theoretical Power", "Calculated Air Density"}
                 Case PropertyType.WR
                     Return New String() {"Efficiency", "User-Defined Wind Speed", "User-Defined Air Temperature",
-                        "User-Defined Air Pressure", "User-Defined Relative Humidity", "Disk Area", "Number of Panels"}
+                        "User-Defined Air Pressure", "User-Defined Relative Humidity", "Disk Area", "Number of Units"}
             End Select
 
         End Function
@@ -321,7 +321,7 @@ Namespace UnitOperations
                     Return ActualRelativeHumidity
                 Case "Disk Area"
                     Return DiskArea.ConvertFromSI(su.area)
-                Case "Number of Panels"
+                Case "Number of Units"
                     Return NumberOfTurbines
                 Case "Generated Power"
                     Return GeneratedPower.ConvertFromSI(su.heatflow)
@@ -358,7 +358,7 @@ Namespace UnitOperations
                     Return "%"
                 Case "Disk Area"
                     Return (su.area)
-                Case "Number of Panels"
+                Case "Number of Units"
                     Return ""
                 Case "Generated Power"
                     Return (su.heatflow)
@@ -386,7 +386,7 @@ Namespace UnitOperations
                     UserDefinedRelativeHumidity = Convert.ToDouble(propval)
                 Case "Disk Area"
                     DiskArea = Convert.ToDouble(propval).ConvertFromSI(su.area)
-                Case "Number of Panels"
+                Case "Number of Units"
                     NumberOfTurbines = Convert.ToDouble(propval)
             End Select
 
