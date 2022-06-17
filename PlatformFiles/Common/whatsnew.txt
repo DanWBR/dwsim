@@ -1,17 +1,12 @@
-Version 7.5.7
+Version 8.0.0
 
-- Fixed a bug in PFR
-- Fixed a bug in Rigorous Column
-- Fixed an issue with LLE Diagram
-
-Version 7.5.6
-
-- Implemented #274: Number of Tubes in Tubular Reactors for Correct Pressure Drop Calculation
-- Alternate calculation method for Gibbs Reactor
-- Fixed #318: Error opening old file in 7.5.5
-- Fixed #319: Error loading Compound Creator study
-- Fixed #322: Suspicious branch in Valve.vb
-- Throw errors (if any) when loading simulations in automation mode
-- Fixed issue with Rigorous Column editor
-- Fixed ideal gas Cp estimation
-- Python Automation fixes
+- New Unit Operations:  PEM Fuel Cell, Water Electrolyzer, Wind Turbine, Hydroelectric Turbine,
+  Solar Panel, Gibbs Reactor (Reaktoro), Air Cooler, Energy Stream Mixer
+- New "Don't Calculate" Phase Equilibria Option
+- Import Compounds from thermo/chemicals python packages
+- New Quick Create Solid Compound tool
+- New Flowsheet Weather component can provide ambient temperature, pressure, wind speed, 
+  humidity and solar insulation data for Unit Operations
+- Allow user to override flowsheet icons for Component/Compound and Solids Separator
+- Pipe Segment UO can now use Flowsheet-provided weather information
+- Bug fixes
