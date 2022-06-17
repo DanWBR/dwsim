@@ -74,6 +74,11 @@ Namespace UnitOperations
 
         Public Property OPEMPath As String = "main\python-3.9.4.amd64"
 
+        Public Property HTMLreport As String = ""
+        Public Property CSVreport As String = ""
+        Public Property OPEMreport As String = ""
+
+
         Public Property InputParameters As Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter) = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()
 
         Public Property OutputParameters As Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter) = New Dictionary(Of String, Auxiliary.PEMFuelCellModelParameter)()

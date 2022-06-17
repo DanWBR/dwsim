@@ -302,4 +302,29 @@ Public Class EditingForm_OPEMFC
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Process.Start("https://www.ecsim.ir/opem/doc/Static/Amphlett.html")
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        SimObject.FlowSheet.DisplayHTML(SimObject.GraphicObject.Tag + ": HTML Report", SimObject.HTMLreport)
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Clipboard.SetText(SimObject.CSVreport)
+        SimObject.FlowSheet.ShowMessage("Data copied to clipboard.", IFlowsheet.MessageType.Information)
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim fv As New FormViewMultilineText()
+        fv.Text = SimObject.GraphicObject.Tag + ": OPEM Simulation Output"
+        fv.TextBox1.WordWrap = False
+        fv.TextBox1.Text = SimObject.OPEMreport.Replace(vbLf, vbCrLf)
+        fv.TextBox1.SelectionLength = 0
+        fv.Show()
+
+    End Sub
+
 End Class

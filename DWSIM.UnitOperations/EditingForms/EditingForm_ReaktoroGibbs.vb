@@ -537,6 +537,7 @@ Public Class EditingForm_ReaktoroGibbs
         Dim ft = New FormViewMultilineText()
         ft.Text = String.Format("Reaktoro '{0}' Database Compounds List", SimObject.DatabaseName)
         ft.TextBox1.Text = comps
+        ft.TextBox1.SelectedText = ""
         ft.ShowDialog()
 
     End Sub

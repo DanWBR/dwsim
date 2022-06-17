@@ -742,6 +742,12 @@
     <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormHTMLView.Designer.vb">
+      <DependentUpon>FormHTMLView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHTMLView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormLiveFlows.Designer.vb">
       <DependentUpon>FormLiveFlows.vb</DependentUpon>
     </Compile>
@@ -1530,6 +1536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHTMLView.resx">
+      <DependentUpon>FormHTMLView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLiveFlows.resx">
       <DependentUpon>FormLiveFlows.vb</DependentUpon>

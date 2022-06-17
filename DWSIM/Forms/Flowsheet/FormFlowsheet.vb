@@ -3951,6 +3951,17 @@ Public Class FormFlowsheet
 
     End Function
 
+    Public Async Sub DisplayHTML(title As String, htmlcontent As String)
+
+        Dim fh As New FormHTMLView()
+        fh.Text = title
+        fh.TabText = title
+        Await fh.Viewer.EnsureCoreWebView2Async()
+        fh.Viewer.NavigateToString(htmlcontent)
+        fh.Show(dckPanel)
+
+    End Sub
+
 #End Region
 
 

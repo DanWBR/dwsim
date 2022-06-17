@@ -122,12 +122,28 @@ Namespace UnitOperations
                 parameters("JMax") = InputParameters("JMax").Value.ToPython()
                 parameters("Name") = "Amphlett_Test".ToPython()
 
-                results = opem.Static_Analysis(InputMethod:=parameters.ToPython(), TestMode:=True.ToPython(), PrintMode:=False.ToPython(), ReportMode:=False.ToPython())
+                Dim htmlpath = SharedClasses.Utility.GetTempFileName()
+                Dim csvpath = SharedClasses.Utility.GetTempFileName()
+                Dim opempath = SharedClasses.Utility.GetTempFileName()
+
+                File.WriteAllText(htmlpath, "")
+                File.WriteAllText(csvpath, "")
+                File.WriteAllText(opempath, "")
+
+                results = opem.Static_Analysis(InputMethod:=parameters.ToPython(), TestMode:=True.ToPython(),
+                                               PrintMode:=False.ToPython(), ReportMode:=True.ToPython(),
+                                               HTMLfilepath:=htmlpath, CSVfilepath:=csvpath, OPEMfilepath:=opempath)
 
                 If results Is Nothing OrElse results("Status").ToString() = "False" Then
                     Throw New Exception("Calculation error")
                 End If
 
+                Try
+                    File.Delete(htmlpath)
+                    File.Delete(csvpath)
+                    File.Delete(opempath)
+                Catch ex As Exception
+                End Try
 
                 Dim P = ToList(results("P"))
                 Dim I = ToList(results("I"))
@@ -140,6 +156,10 @@ Namespace UnitOperations
                 Dim Eta_Active = ToList(results("Eta_Active"))
                 Dim Eta_Ohmic = ToList(results("Eta_Ohmic"))
                 Dim Eta_Conc = ToList(results("Eta_Conc"))
+
+                HTMLreport = results("HTML").ToString()
+                CSVreport = results("CSV").ToString()
+                OPEMreport = results("OPEM").ToString()
 
                 OutputParameters.Clear()
                 OutputParameters.Add("I", New Auxiliary.PEMFuelCellModelParameter("I", "Cell Operating Current", I.Last(), "A"))
