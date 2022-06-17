@@ -230,7 +230,7 @@ Namespace UnitOperations
 
             With GraphicObject.InputConnectors
                 If .Count = 2 Then
-                    .Item(0).Position = New Point(x, y)
+                    .Item(0).Position = New Point(x, y + h / 2)
                     .Item(1).Position = New Point(x + 0.5 * w, y + h)
                 Else
                     .Add(myIC1)
@@ -242,7 +242,7 @@ Namespace UnitOperations
 
             With GraphicObject.OutputConnectors
                 If .Count = 1 Then
-                    .Item(0).Position = New Point(x + w, y)
+                    .Item(0).Position = New Point(x + w, y + h / 2)
                 Else
                     .Add(myOC1)
                 End If
@@ -382,7 +382,7 @@ Namespace UnitOperations
 
             StIn1.Phases(0).Properties.massflow = Nothing
             StIn1.Phases(0).Properties.molarflow = Nothing
-            StIn1.Phases(0).Properties.volumetric_flow = ActualAirFlow
+            StIn1.SetVolumetricFlow(ActualAirFlow)
 
             StOut1 = StIn1.Clone()
 
