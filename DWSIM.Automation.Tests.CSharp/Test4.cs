@@ -31,9 +31,16 @@ namespace DWSIM.Automation.Tests.CSharp
             var e1 = (EnergyStream)sim.AddObject(ObjectType.EnergyStream, 100, 50, "power");
             var h1 = (Heater)sim.AddObject(ObjectType.Heater, 100, 50, "heater");
 
+            //var connections = h1.GetConnectionPortsList();
+
+            //foreach (var item in connections)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
             h1.ConnectFeedMaterialStream(m1, 0);
             h1.ConnectProductMaterialStream(m2, 0);
-            h1.ConnectEnergyStream(e1);
+            h1.ConnectFeedEnergyStream(e1, 1);
 
             sim.AutoLayout();
 

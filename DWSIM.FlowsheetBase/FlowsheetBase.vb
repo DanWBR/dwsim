@@ -3415,6 +3415,8 @@ Label_00CC:
             r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
         Next
         r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
         Select Case reactionphase.ToLower()
             Case "mixture"
                 r.ReactionPhase = PhaseName.Mixture
@@ -3444,6 +3446,8 @@ Label_00CC:
             r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
         Next
         r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
         Select Case reactionphase.ToLower()
             Case "mixture"
                 r.ReactionPhase = PhaseName.Mixture
@@ -3494,6 +3498,8 @@ Label_00CC:
             r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, directorders(kvp.Key), reverseorders(kvp.Key)))
         Next
         r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
         Select Case reactionphase.ToLower()
             Case "mixture"
                 r.ReactionPhase = PhaseName.Mixture
@@ -3556,6 +3562,8 @@ Label_00CC:
             r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
         Next
         r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
         Select Case reactionphase.ToLower()
             Case "mixture"
                 r.ReactionPhase = PhaseName.Mixture
@@ -3647,6 +3655,54 @@ Label_00CC:
         Return c
 
     End Function
+
+    Private Sub CalcReactionStoichiometry(rc As IReaction)
+
+        Dim hp, hr, bp, br, brsc, gp, gr As Double
+
+        Dim eq As String = ""
+        'build reaction equation
+        'scan for reactants
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff < 0 Then
+                If c.Value.StoichCoeff = -1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                br += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
+        eq += "<--> "
+        'scan for products
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff > 0 Then
+                If c.Value.StoichCoeff = 1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                bp += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        eq = eq.Remove(eq.Length - 2, 2)
+
+        brsc = Math.Abs(rc.Components.Where(Function(c) c.Value.IsBaseReactant).FirstOrDefault().Value.StoichCoeff)
+
+        rc.ReactionHeat = (hp - hr) / brsc
+        rc.ReactionGibbsEnergy = (gp - gr) / brsc
+
+        rc.StoichBalance = bp - br
+        rc.Equation = eq
+
+    End Sub
 
 End Class
 
