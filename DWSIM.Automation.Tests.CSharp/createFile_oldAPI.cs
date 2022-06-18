@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AddObjectsToDWSIM
 {
-    class Program
+    class createFile_oldAPI
     {
         static void Main()
         {

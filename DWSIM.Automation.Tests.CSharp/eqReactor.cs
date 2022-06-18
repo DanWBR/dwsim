@@ -10,7 +10,7 @@ using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.Automation.Tests.CSharp
 {
-    class Test5
+    class eqReactor
     {
         [STAThread]
         static void Main()

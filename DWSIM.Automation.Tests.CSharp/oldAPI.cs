@@ -7,7 +7,7 @@ using DWSIM.Thermodynamics.Streams;
 using DWSIM.UnitOperations.UnitOperations;
 using System.Diagnostics;
 
-class Test2
+class oldAPI
 {
     [STAThread]
     static void Main()

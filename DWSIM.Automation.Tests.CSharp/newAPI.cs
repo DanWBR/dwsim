@@ -9,7 +9,7 @@ using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.Automation.Tests.CSharp
 {
-     class Test4
+     class newAPI
     {
         [STAThread]
         static void Main()

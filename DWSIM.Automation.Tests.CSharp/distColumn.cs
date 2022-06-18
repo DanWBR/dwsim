@@ -10,7 +10,7 @@ using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.Automation.Tests.CSharp
 {
-    class Test7
+    class distColumn
     {
         [STAThread]
         static void Main()

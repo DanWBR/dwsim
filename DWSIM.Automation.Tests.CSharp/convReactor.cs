@@ -10,7 +10,7 @@ using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.Automation.Tests.CSharp
 {
-    class Test6
+    class convReactor
     {
         [STAThread]
         static void Main()
