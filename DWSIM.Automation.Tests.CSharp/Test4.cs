@@ -68,11 +68,6 @@ namespace DWSIM.Automation.Tests.CSharp
 
             Console.WriteLine(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ.GetValueOrDefault()));
 
-            // save file
-
-            string fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "heatersample.dwxml");
-            interf.SaveFlowsheet(sim, fileNameToSave, false); //use true for dwxmz
-
             Console.WriteLine("Done! press any key to close.");
             Console.ReadKey();
 

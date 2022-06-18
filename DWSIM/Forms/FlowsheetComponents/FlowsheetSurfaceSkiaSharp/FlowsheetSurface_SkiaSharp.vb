@@ -517,7 +517,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Select Case gobj.ObjectType
 
-            Case ObjectType.External
+            Case ObjectType.External, ObjectType.AirCooler2, ObjectType.WindTurbine, ObjectType.HydroelectricTurbine,
+                 ObjectType.WaterElectrolyzer, ObjectType.PEMFuelCell, ObjectType.RCT_GibbsReaktoro
 
                 Dim myDWOBJ As Interfaces.IExternalUnitOperation = newobj
                 With myDWOBJ.GraphicObject
@@ -1891,7 +1892,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
 
-            Case ObjectType.NodeIn
+            Case ObjectType.NodeIn, ObjectType.Mixer
 
                 Dim myNode As New MixerGraphic(mpx, mpy, 20, 20)
                 myNode.LineWidth = 2
@@ -1909,7 +1910,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCOMIX.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myCOMIX)
 
-            Case ObjectType.NodeOut
+            Case ObjectType.NodeOut, ObjectType.Splitter
 
                 Dim myNodeo As New SplitterGraphic(mpx, mpy, 20, 20)
                 myNodeo.LineWidth = 2
@@ -2483,6 +2484,134 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCUO.Name, myCOCUO)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CAPE001"), Color.Black, MessageType.Tip)
+
+            Case ObjectType.AirCooler2
+
+                Dim fsobj = New AirCooler2()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.EnergyMixer
+
+                Dim fsobj = New EnergyMixer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.RCT_GibbsReaktoro
+
+                Dim fsobj = New Reactor_ReaktoroGibbs()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WindTurbine
+
+                Dim fsobj = New WindTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.HydroelectricTurbine
+
+                Dim fsobj = New HydroelectricTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.PEMFuelCell
+
+                Dim fsobj = New PEMFC_Amphlett()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.SolarPanel
+
+                Dim fsobj = New SolarPanel()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WaterElectrolyzer
+
+                Dim fsobj = New WaterElectrolyzer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
 
         End Select
 

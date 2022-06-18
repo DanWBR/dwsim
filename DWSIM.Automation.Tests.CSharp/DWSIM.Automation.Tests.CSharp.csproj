@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DWSIM.Automation.Tests.CSharp.Test5</StartupObject>
+    <StartupObject>DWSIM.Automation.Tests.CSharp.Test7</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +81,8 @@
     <Compile Include="Test3.cs" />
     <Compile Include="Test4.cs" />
     <Compile Include="Test5.cs" />
+    <Compile Include="Test6.cs" />
+    <Compile Include="Test7.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

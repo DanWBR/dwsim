@@ -837,15 +837,15 @@ Namespace UnitOperations
 
         Public Property RefluxedAbsorber As Boolean = False
 
-        Public Sub ConnectFeed(feed As MaterialStream, stagenumber As Integer)
+        Public Sub ConnectFeed(feed As ISimulationObject, stagenumber As Integer)
 
             Dim i As Integer = 0
             Dim success As Boolean = False
             For Each con In GraphicObject.InputConnectors
                 If Not con.IsAttached Then
                     FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
-                    Dim msi As New StreamInformation With {.ID = feed.Name,
-                        .AssociatedStage = Stages(i).Name,
+                    Dim msi As New StreamInformation With {.ID = feed.Name, .StreamID = feed.Name,
+                        .AssociatedStage = Stages(stagenumber).Name,
                         .StreamBehavior = StreamInformation.Behavior.Feed,
                         .StreamType = StreamInformation.Type.Material}
                     MaterialStreams.Add(msi.ID, msi)
@@ -858,10 +858,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectVaporProduct(stream As MaterialStream)
+        Public Sub ConnectVaporProduct(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 9, 0)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages(0).Name,
                         .StreamBehavior = StreamInformation.Behavior.OverheadVapor,
                         .StreamType = StreamInformation.Type.Material}
@@ -869,10 +869,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectDistillate(stream As MaterialStream)
+        Public Sub ConnectDistillate(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages(0).Name,
                         .StreamBehavior = StreamInformation.Behavior.Distillate,
                         .StreamType = StreamInformation.Type.Material}
@@ -880,10 +880,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectBottoms(stream As MaterialStream)
+        Public Sub ConnectBottoms(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages.Last.Name,
                         .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
                         .StreamType = StreamInformation.Type.Material}
@@ -891,10 +891,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectCondenserDuty(stream As EnergyStream)
+        Public Sub ConnectCondenserDuty(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 10, 0)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages(0).Name,
                         .StreamBehavior = StreamInformation.Behavior.Distillate,
                         .StreamType = StreamInformation.Type.Energy}
@@ -902,14 +902,44 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectReboilerDuty(stream As EnergyStream)
+        Public Sub ConnectReboilerDuty(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, 10)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages(0).Name,
                         .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
                         .StreamType = StreamInformation.Type.Energy}
             EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub SetCondenserSpec(spectype As String, value As Double, units As String, Optional compound As String = "")
+
+            spectype = spectype.Replace(" ", "_")
+            If spectype = "Reflux_Ratio" Then spectype = "Stream_Ratio"
+
+            Dim sp As New ColumnSpec()
+            [Enum].TryParse(Of ColumnSpec.SpecType)(spectype, sp.SType)
+            sp.SpecValue = value
+            sp.SpecUnit = units
+            sp.ComponentID = compound
+
+            Specs("C") = sp
+
+        End Sub
+
+        Public Sub SetReboilerSpec(spectype As String, value As Double, units As String, Optional compound As String = "")
+
+            spectype = spectype.Replace(" ", "_")
+            If spectype = "Boilup_Ratio" Or spectype = "BoilUp_Ratio" Then spectype = "Stream_Ratio"
+
+            Dim sp As New ColumnSpec()
+            [Enum].TryParse(Of ColumnSpec.SpecType)(spectype, sp.SType)
+            sp.SpecValue = value
+            sp.SpecUnit = units
+            sp.ComponentID = compound
+
+            Specs("R") = sp
 
         End Sub
 
@@ -1345,15 +1375,15 @@ Namespace UnitOperations
 
         Public _opmode As OpMode = OpMode.Absorber
 
-        Public Sub ConnectFeed(feed As MaterialStream, stagenumber As Integer)
+        Public Sub ConnectFeed(feed As ISimulationObject, stagenumber As Integer)
 
             Dim i As Integer = 0
             Dim success As Boolean = False
             For Each con In GraphicObject.InputConnectors
                 If Not con.IsAttached Then
                     FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
-                    Dim msi As New StreamInformation With {.ID = feed.Name,
-                        .AssociatedStage = Stages(i).Name,
+                    Dim msi As New StreamInformation With {.ID = feed.Name, .StreamID = feed.Name,
+                        .AssociatedStage = Stages(stagenumber).Name,
                         .StreamBehavior = StreamInformation.Behavior.Feed,
                         .StreamType = StreamInformation.Type.Material}
                     MaterialStreams.Add(msi.ID, msi)
@@ -1366,10 +1396,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectTopProduct(stream As MaterialStream)
+        Public Sub ConnectTopProduct(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages(0).Name,
                         .StreamBehavior = StreamInformation.Behavior.Distillate,
                         .StreamType = StreamInformation.Type.Material}
@@ -1377,10 +1407,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Sub ConnectBottoms(stream As MaterialStream)
+        Public Sub ConnectBottoms(stream As ISimulationObject)
 
             FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
-            Dim msi As New StreamInformation With {.ID = stream.Name,
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
                         .AssociatedStage = Stages.Last.Name,
                         .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
                         .StreamType = StreamInformation.Type.Material}
@@ -2058,6 +2088,12 @@ Namespace UnitOperations
 
             Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
             si.Value.AssociatedStage = stageID
+
+        End Sub
+
+        Public Sub SetTopPressure(p_Pa As Double)
+
+            Stages.First.P = p_Pa
 
         End Sub
 

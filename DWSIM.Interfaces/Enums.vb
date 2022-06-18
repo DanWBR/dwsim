@@ -636,6 +636,18 @@ Namespace Enums.GraphicObjects
         GO_HTMLText
         GO_Button
 
+        AirCooler2
+        WindTurbine
+        HydroelectricTurbine
+        SolarPanel
+        PEMFuelCell
+        WaterElectrolyzer
+        RCT_GibbsReaktoro
+
+        EnergyMixer
+        Mixer
+        Splitter
+
     End Enum
 
     Public Enum ShapeIcon

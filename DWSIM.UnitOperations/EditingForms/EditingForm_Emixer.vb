@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.UnitOperations.UnitOperations
 
 Public Class EditingForm_Emixer
 

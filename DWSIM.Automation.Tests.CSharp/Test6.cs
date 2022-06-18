@@ -10,7 +10,7 @@ using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.Automation.Tests.CSharp
 {
-    class Test5
+    class Test6
     {
         [STAThread]
         static void Main()
@@ -31,22 +31,22 @@ namespace DWSIM.Automation.Tests.CSharp
             sim.AddCompound("Hydrogen");
             sim.AddCompound("Methane");
 
-            // add equilibrium reaction
+            // add conversion reactions
 
             var comps1 = new System.Collections.Generic.Dictionary<string, double>() {
                     { "Methane", -1 }, {"Water", -2 }, { "Carbon dioxide", 1}, {  "Hydrogen", 4  } };
 
-            var er1 = sim.CreateEquilibriumReaction("R1", "", comps1, "Methane", "Vapor", "Fugacity", "", 0, "");
+            var r1 = sim.CreateConversionReaction("R1", "", comps1, "Methane", "Vapor", "50");
 
             var comps2 = new System.Collections.Generic.Dictionary<string, double>() {
                     { "Methane", -1 }, {"Water", -1 }, { "Carbon monoxide", 1}, {  "Hydrogen", 3  } };
 
-            var er2 = sim.CreateEquilibriumReaction("R2", "", comps2, "Water", "Vapor", "Fugacity", "", 0, "");
+            var r2 = sim.CreateConversionReaction("R2", "", comps2, "Water", "Vapor", "50");
 
-            sim.AddReaction(er1);
-            sim.AddReaction(er2);
-            sim.AddReactionToSet(er1.ID, "DefaultSet", true, 0);
-            sim.AddReactionToSet(er2.ID, "DefaultSet", true, 0);
+            sim.AddReaction(r1);
+            sim.AddReaction(r2);
+            sim.AddReactionToSet(r1.ID, "DefaultSet", true, 0);
+            sim.AddReactionToSet(r2.ID, "DefaultSet", true, 0);
 
             // add objects
 
@@ -54,15 +54,15 @@ namespace DWSIM.Automation.Tests.CSharp
             var m2 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 150, 50, "gas outlet");
             var m3 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 150, 50, "liquid outlet");
             var e1 = sim.AddObject(ObjectType.EnergyStream, 100, 50, "heat");
-            var eq1 = (Reactor_Equilibrium)sim.AddObject(ObjectType.RCT_Equilibrium, 100, 50, "reactor");
+            var cr1 = (Reactor_Conversion)sim.AddObject(ObjectType.RCT_Conversion, 100, 50, "reactor");
 
-            eq1.ConnectFeedMaterialStream(m1, 0);
-            eq1.ConnectProductMaterialStream(m2, 0);
-            eq1.ConnectProductMaterialStream(m3, 1);
-            eq1.ConnectFeedEnergyStream(e1, 1);
+            cr1.ConnectFeedMaterialStream(m1, 0);
+            cr1.ConnectProductMaterialStream(m2, 0);
+            cr1.ConnectProductMaterialStream(m3, 1);
+            cr1.ConnectFeedEnergyStream(e1, 1);
 
-            eq1.ReactorOperationMode = OperationMode.Isothermic;
-            eq1.DeltaP = 0.0;
+            cr1.ReactorOperationMode = OperationMode.Isothermic;
+            cr1.DeltaP = 0.0;
 
             sim.AutoLayout();
 
@@ -83,17 +83,16 @@ namespace DWSIM.Automation.Tests.CSharp
 
             interf.CalculateFlowsheet2(sim);
 
-            Console.WriteLine(String.Format("Reactor Heat Load: {0} kW", eq1.DeltaQ.GetValueOrDefault()));
-            Console.WriteLine(String.Format("R1 Reaction Extent: {0} mol/s", eq1.ReactionExtents["R1"]));
-            Console.WriteLine(String.Format("R2 Reaction Extent: {0} mol/s", eq1.ReactionExtents["R2"]));
-            foreach (var c in eq1.ComponentConversions)
-                {
-                if (c.Value > 0) Console.WriteLine(String.Format("{0} conversion: {1}", c.Key, c.Value));
+            Console.WriteLine(String.Format("Reactor Heat Load: {0} kW", cr1.DeltaQ.GetValueOrDefault()));
+            foreach (var c in cr1.ComponentConversions)
+            {
+                if (c.Value > 0) Console.WriteLine(String.Format("{0} overall conversion: {1}", c.Key, c.Value));
             }
-           
+
             Console.WriteLine("Done! press any key to close.");
             Console.ReadKey();
 
         }
     }
 }
+
