@@ -3624,13 +3624,16 @@ Label_00CC:
 
     Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
 
-        Return AvailablePropertyPackages(name).Clone()
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        Return pp
 
     End Function
 
     Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
 
         Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
         AddPropertyPackage(pp)
         Return pp
 

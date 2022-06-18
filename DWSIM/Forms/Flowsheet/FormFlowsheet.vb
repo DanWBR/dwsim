@@ -3937,6 +3937,7 @@ Public Class FormFlowsheet
     Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
 
         Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
         AddPropertyPackage(pp)
         Return pp
 
