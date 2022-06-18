@@ -16,7 +16,7 @@ class Test2
 
         //create automation manager
 
-        var interf = new DWSIM.Automation.Automation2();
+        var interf = new DWSIM.Automation.Automation3();
 
         var sim = interf.CreateFlowsheet();
 
