@@ -20,6 +20,7 @@ Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
+Евгений Иванчиков
 Filippo Borroni
 Frank Mittricker
 Gokhan Candan 
@@ -76,4 +77,5 @@ Steven Sandoval
 Tibor Lányi
 Tino Josef Ritter
 Will Flores
+Yosafat Eden
 Yoshihide Watabe
