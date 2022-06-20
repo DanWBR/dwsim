@@ -889,6 +889,7 @@ namespace DWSIM.UI.Forms
             var panelindicators = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelinputs = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelother = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelrenew = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
 
             var objcontainer = new DocumentControl { AllowReordering = true };
@@ -900,6 +901,7 @@ namespace DWSIM.UI.Forms
             objcontainer.Pages.Add(new DocumentPage(panelexchangers) { Closable = false, Text = "Exchangers" });
             objcontainer.Pages.Add(new DocumentPage(panelcolumns) { Closable = false, Text = "Columns" });
             objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
+            objcontainer.Pages.Add(new DocumentPage(panelrenew) { Closable = false, Text = "Renewable Energies" });
             objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
             objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
             objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Blocks" });
@@ -976,6 +978,10 @@ namespace DWSIM.UI.Forms
                             break;
                         case Interfaces.Enums.SimulationObjectClass.Indicators:
                             panelindicators.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.CleanPowerSources:
+                        case Interfaces.Enums.SimulationObjectClass.Electrolyzers:
+                            panelrenew.Items.Add(pitem);
                             break;
                     }
                 }
@@ -1854,13 +1860,13 @@ namespace DWSIM.UI.Forms
                 if (!item.IsAbstract)
                 {
                     var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
-                    ObjectList.Add(obj.GetDisplayName(), obj);
+                   if (!ObjectList.ContainsKey(obj.GetDisplayName())) ObjectList.Add(obj.GetDisplayName(), obj);
                 }
             }
 
             foreach (var item in FlowsheetObject.ExternalUnitOperations.Values.OrderBy(x => x.Name))
             {
-                ObjectList.Add(item.Name, (Interfaces.ISimulationObject)item);
+                if (!ObjectList.ContainsKey(item.Name)) ObjectList.Add(item.Name, (Interfaces.ISimulationObject)item);
             }
 
             string netprops = "";

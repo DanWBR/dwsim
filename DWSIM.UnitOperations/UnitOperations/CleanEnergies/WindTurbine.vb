@@ -5,6 +5,9 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
+Imports Eto.Forms
+Imports DWSIM.UI.Shared.Common
+Imports System.Globalization
 
 Namespace UnitOperations
 
@@ -123,7 +126,93 @@ Namespace UnitOperations
 
         Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
+
+            Dim container As DynamicLayout = ctner
+
+            Dim su = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            container.CreateAndAddCheckBoxRow("Use Global Weather Conditions", Not UseUserDefinedWeather,
+                                        Sub(chk, e)
+                                            UseUserDefinedWeather = Not chk.Checked
+                                        End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Wind Speed ({0})", su.velocity), UserDefinedWindSpeed,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     UserDefinedWindSpeed = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.velocity)
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Air Temperature ({0})", su.temperature), UserDefinedAirTemperature,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     UserDefinedAirTemperature = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.temperature)
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Air Pressure ({0})", su.pressure), UserDefinedAirPressure,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     UserDefinedAirPressure = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.pressure)
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Relative Humidity ({0})", "%"), UserDefinedRelativeHumidity,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     UserDefinedRelativeHumidity = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddEmptySpace()
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Disk Area ({0})", su.area), DiskArea,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     DiskArea = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.area)
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Efficiency ({0})", "%"), Efficiency,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     Efficiency = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, "Number of Units", NumberOfTurbines,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     NumberOfTurbines = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
         End Sub
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As CultureInfo, nf As String) As String
+
+            Dim sb As New Text.StringBuilder()
+
+            sb.AppendLine(String.Format("Number of Units: {0}", NumberOfTurbines))
+
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Using Global Weather: {0}", Not UseUserDefinedWeather))
+            sb.AppendLine(String.Format("Air Temperature: {0} {1}", ActualAirTemperature.ConvertFromSI(su.temperature).ToString(nf), su.temperature))
+            sb.AppendLine(String.Format("Air Pressure: {0} {1}", ActualAirPressure.ConvertFromSI(su.pressure).ToString(nf), su.pressure))
+            sb.AppendLine(String.Format("Relative Humidity (%): {0}", ActualRelativeHumidity.ToString(nf)))
+
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Disk Area: {0} {1}", DiskArea.ConvertFromSI(su.area).ToString(nf), su.area))
+            sb.AppendLine(String.Format("Efficiency: {0}", Efficiency.ToString(nf)))
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Calculated Air Density: {0} {1}", AirDensity.ConvertFromSI(su.density).ToString(nf), su.density))
+            sb.AppendLine(String.Format("Maximum Theoretical Power: {0} {1}", MaximumTheoreticalPower.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow))
+            sb.AppendLine(String.Format("Generated Power: {0} {1}", GeneratedPower.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow))
+
+            Return sb.ToString()
+
+        End Function
 
         Public Overrides Sub DisplayEditForm()
 

@@ -4,7 +4,10 @@ Imports DWSIM.DrawingTools.Point
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
+Imports Eto.Forms
+Imports DWSIM.UI.Shared.Common
 Imports SkiaSharp
+Imports System.Globalization
 
 Namespace UnitOperations
 
@@ -129,7 +132,80 @@ Namespace UnitOperations
 
         Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
+
+            Dim container As DynamicLayout = ctner
+
+            Dim su = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Static Head ({0})", su.distance),
+                                             StaticHead, Sub(tb, e)
+                                                             If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                                 StaticHead = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.distance)
+                                                             End If
+                                                         End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Inlet Velocity ({0})", su.velocity),
+                                             InletVelocity, Sub(tb, e)
+                                                                If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                                    InletVelocity = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.velocity)
+                                                                End If
+                                                            End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Outlet Velocity ({0})", su.velocity),
+                                             OutletVelocity, Sub(tb, e)
+                                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                                     OutletVelocity = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.velocity)
+                                                                 End If
+                                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Efficiency ({0})", "%"),
+                                             Efficiency, Sub(tb, e)
+                                                             If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                                 Efficiency = tb.Text.ToDoubleFromInvariant()
+                                                             End If
+                                                         End Sub)
+
         End Sub
+
+        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+
+            Dim su As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            Dim list As New List(Of Tuple(Of ReportItemType, String()))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Velocity Head",
+                           Me.VelocityHead.ConvertFromSI(su.velocity).ToString(nf),
+                           su.velocity}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Total Head",
+                           Me.TotalHead.ConvertFromSI(su.velocity).ToString(nf),
+                           su.velocity}))
+
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Generated Power",
+                           Me.GeneratedPower.ConvertFromSI(su.heatflow).ToString(nf),
+                           su.heatflow}))
+
+            Return list
+
+        End Function
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As CultureInfo, numberformat As String) As String
+
+            Dim sb As New Text.StringBuilder()
+
+            sb.AppendLine(String.Format("Velocity Head: {0} {1}", VelocityHead.ConvertFromSI(su.velocity).ToString(numberformat), su.velocity))
+            sb.AppendLine(String.Format("Total Head: {0} {1}", TotalHead.ConvertFromSI(su.velocity).ToString(numberformat), su.velocity))
+            sb.AppendLine(String.Format("Generated Power: {0} {1}", GeneratedPower.ConvertFromSI(su.heatflow).ToString(numberformat), su.heatflow))
+
+            Return sb.ToString()
+
+        End Function
+
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then

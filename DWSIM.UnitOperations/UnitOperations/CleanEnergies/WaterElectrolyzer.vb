@@ -5,6 +5,9 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
+Imports Eto.Forms
+Imports DWSIM.UI.Shared.Common
+Imports System.Globalization
 
 Namespace UnitOperations
 
@@ -196,7 +199,44 @@ Namespace UnitOperations
 
         Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
+
+            Dim container As DynamicLayout = ctner
+
+            Dim su = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Total Voltage ({0})", "V"), Voltage,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     Voltage = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, "Number of Cells", NumberOfCells,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     NumberOfCells = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
         End Sub
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As CultureInfo, nf As String) As String
+
+            Dim sb As New Text.StringBuilder()
+
+            sb.AppendLine(String.Format("Number of Cells: {0}", NumberOfCells))
+
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Cell Voltage: {0} V", CellVoltage.ToString(nf)))
+            sb.AppendLine(String.Format("Current: {0} A", Current.ToString(nf)))
+            sb.AppendLine(String.Format("Electron Transfer: {0} {1}", ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow))
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Waste Heat: {0} {1}", WasteHeat.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow))
+
+            Return sb.ToString()
+
+        End Function
 
         Public Overrides Sub DisplayEditForm()
 

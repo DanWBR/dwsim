@@ -3147,6 +3147,10 @@ Label_00CC:
 
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
+        If unitopassembly Is Nothing Then
+            unitopassembly = Assembly.Load("DWSIM.UnitOperations")
+        End If
+
         Dim euolist As List(Of Interfaces.IExternalUnitOperation) = SharedClasses.Utility.GetUnitOperations(unitopassembly)
 
         otheruos.AddRange(euolist)

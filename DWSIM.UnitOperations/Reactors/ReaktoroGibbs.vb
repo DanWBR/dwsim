@@ -95,13 +95,13 @@ Namespace Reactors
         End Function
 
         Public Overrides Function CloneXML() As Object
-            Dim obj As ICustomXMLSerialization = New Reactor_Gibbs()
+            Dim obj As ICustomXMLSerialization = New Reactor_ReaktoroGibbs()
             obj.LoadData(Me.SaveData)
             Return obj
         End Function
 
         Public Overrides Function CloneJSON() As Object
-            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Reactor_Gibbs)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Reactor_ReaktoroGibbs)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -138,13 +138,22 @@ Namespace Reactors
 
             DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
-            ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
+            If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
-            If Not Directory.Exists(ReaktoroPath) Then
-                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+                ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
+
+                If Not Directory.Exists(ReaktoroPath) Then
+                    Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+                End If
+
+                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
+
+            Else
+
+                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+
             End If
 
-            DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
 
             Dim msin = GetInletMaterialStream(0)
             Dim msout = GetOutletMaterialStream(0)

@@ -324,9 +324,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Sub PopulateEditorPanel(container As Object) Implements IExternalUnitOperation.PopulateEditorPanel
-
-        End Sub
+        Public MustOverride Sub PopulateEditorPanel(container As Object) Implements IExternalUnitOperation.PopulateEditorPanel
 
         Public Overrides Function GetProperties(proptype As PropertyType) As String()
 

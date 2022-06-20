@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 Imports DWSIM.UnitOperations.UnitOperations
 Imports Python.Runtime
+Imports Eto.Forms
+Imports DWSIM.UI.Shared.Common
+Imports System.Globalization
 
 Namespace UnitOperations
 
@@ -75,13 +78,21 @@ Namespace UnitOperations
 
             DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
-            OPEMPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "main", "python-3.9.4.amd64")
+            If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
-            If Not Directory.Exists(OPEMPath) Then
-                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+                OPEMPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "main", "python-3.9.4.amd64")
+
+                If Not Directory.Exists(OPEMPath) Then
+                    Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+                End If
+
+                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(OPEMPath)
+
+            Else
+
+                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+
             End If
-
-            DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(OPEMPath)
 
             Dim msin = GetInletMaterialStream(0)
             Dim msout = GetOutletMaterialStream(0)
@@ -239,6 +250,39 @@ Namespace UnitOperations
             End Using
 
         End Sub
+
+
+        Public Overrides Sub PopulateEditorPanel(ctner As Object)
+
+
+            Dim container As DynamicLayout = ctner
+
+            Dim su = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            For Each param In InputParameters.Values
+                container.CreateAndAddTextBoxRow(nf, param.Name + "(" + param.Units + ")", param.Value,
+                                                Sub(tb, e)
+                                                    If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                        param.Value = tb.Text.ToDoubleFromInvariant()
+                                                    End If
+                                                End Sub)
+                container.CreateAndAddDescriptionRow(param.Description)
+            Next
+
+        End Sub
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As CultureInfo, nf As String) As String
+
+            Dim sb As New Text.StringBuilder()
+
+            For Each param In OutputParameters.Values
+                sb.AppendLine(String.Format("{0}: {1} {2}", param.Name, param.Value.ToString(nf), param.Units))
+            Next
+
+            Return sb.ToString()
+
+        End Function
 
     End Class
 

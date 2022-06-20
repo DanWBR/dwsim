@@ -5,6 +5,9 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations.UnitOperations
 Imports SkiaSharp
+Imports Eto.Forms
+Imports DWSIM.UI.Shared.Common
+Imports System.Globalization
 
 Namespace UnitOperations
 
@@ -101,9 +104,71 @@ Namespace UnitOperations
 
         End Sub
 
+
         Public Overrides Sub PopulateEditorPanel(ctner As Object)
 
+
+            Dim container As DynamicLayout = ctner
+
+            Dim su = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+            Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
+
+            container.CreateAndAddCheckBoxRow("Use Global Weather Conditions", Not UseUserDefinedWeather,
+                                        Sub(chk, e)
+                                            UseUserDefinedWeather = Not chk.Checked
+                                        End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Solar Irradiation ({0})", "kW/m2"), SolarIrradiation_kW_m2,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     SolarIrradiation_kW_m2 = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddEmptySpace()
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Panel Area ({0})", su.area), PanelArea,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     PanelArea = tb.Text.ToDoubleFromInvariant().ConvertToSI(su.area)
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, String.Format("Efficiency ({0})", "%"), PanelEfficiency,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     PanelEfficiency = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
+            container.CreateAndAddTextBoxRow(nf, "Number of Units", NumberOfPanels,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     NumberOfPanels = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
+
         End Sub
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As CultureInfo, nf As String) As String
+
+            Dim sb As New Text.StringBuilder()
+
+            sb.AppendLine(String.Format("Number of Units: {0}", NumberOfPanels))
+
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Using Global Weather: {0}", Not UseUserDefinedWeather))
+            sb.AppendLine(String.Format("Solar Irradiation: {0} kW/m2", SolarIrradiation_kW_m2.ToString(nf)))
+
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Panel Area: {0} {1}", PanelArea.ConvertFromSI(su.area).ToString(nf), su.area))
+            sb.AppendLine(String.Format("Efficiency: {0}", PanelEfficiency.ToString(nf)))
+            sb.AppendLine()
+            sb.AppendLine(String.Format("Generated Power: {0} {1}", GeneratedPower.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow))
+
+            Return sb.ToString()
+
+        End Function
 
         Public Overrides Function ReturnInstance(typename As String) As Object
 
