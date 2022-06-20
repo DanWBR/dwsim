@@ -76,9 +76,9 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional args As Object = Nothing)
 
-            DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
-
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
+
+                DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
                 OPEMPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "main", "python-3.9.4.amd64")
 
@@ -87,8 +87,6 @@ Namespace UnitOperations
                 End If
 
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(OPEMPath)
-
-            Else
 
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
 
@@ -261,7 +259,7 @@ Namespace UnitOperations
             Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
 
             For Each param In InputParameters.Values
-                container.CreateAndAddTextBoxRow(nf, param.Name + "(" + param.Units + ")", param.Value,
+                container.CreateAndAddTextBoxRow(nf, param.Name + " (" + param.Units + ")", param.Value,
                                                 Sub(tb, e)
                                                     If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
                                                         param.Value = tb.Text.ToDoubleFromInvariant()

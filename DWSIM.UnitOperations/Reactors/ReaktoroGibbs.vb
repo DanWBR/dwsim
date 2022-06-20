@@ -136,9 +136,9 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
-
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
+
+                DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
                 ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
 
@@ -148,9 +148,11 @@ Namespace Reactors
 
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
 
+                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+
             Else
 
-                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
+                Throw New Exception("This Unit Operation is not available on Linux/macOS.")
 
             End If
 
