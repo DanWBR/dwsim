@@ -3708,15 +3708,6 @@ Public Class FormFlowsheet
 
     End Sub
 
-    ''' <summary>
-    ''' Creates an Equilibrium reaction object.
-    ''' </summary>
-    ''' <param name="name">Name/ID of the reaction</param>
-    ''' <param name="description">Description of the reaction</param>
-    ''' <param name="compounds_and_stoichcoeffs">Compound names and stoichiometric coefficients</param>
-    ''' <param name="basecompound">Name of the base reaction compound</param>
-    ''' <param name="reactionphase">Reaction phase ('Mixture', 'Vapor', 'Liquid' or 'Solid')</param>
-    ''' <param name="conversionExpression">Expression for evaluating conversion of the base compound as a function of temperature in K.</param>
     Public Function CreateConversionReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
                                              basecompound As String, reactionphase As String, conversionExpression As String) As IReaction Implements IFlowsheet.CreateConversionReaction
 
@@ -3747,18 +3738,6 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Creates an Equilibrium reaction object.
-    ''' </summary>
-    ''' <param name="name">Name/ID of the reaction</param>
-    ''' <param name="description">Description of the reaction</param>
-    ''' <param name="compounds_and_stoichcoeffs">Compound names and stoichiometric coefficients</param>
-    ''' <param name="basecompound">Name of the base reaction compound</param>
-    ''' <param name="reactionphase">Reaction phase ('Mixture', 'Vapor', 'Liquid' or 'Solid')</param>
-    ''' <param name="basis">Reaction basis ('Activity', 'Fugacity', 'Molar Concentration', 'Molar Fraction', 'Mass Concentration', 'Mass Fraction' or 'Partial Pressure')</param>
-    ''' <param name="lnKeq_fT">Expression for evaulating the equilibrium constant as a function of temperature in K. Will use gibbs energy of formation if empty.</param>
-    ''' <param name="Tapproach">Temperature value that will be added or removed to the system temperature in order to evaluate the equilibrium constant</param>
-    ''' <param name="units">Basis units. See the list of <see cref="SharedClasses.SystemsOfUnits.Units.GetUnitSet()">supported units</></param>
     Public Function CreateEquilibriumReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
                                               basecompound As String, reactionphase As String, basis As String, units As String, Tapproach As Double,
                                               lnKeq_fT As String) As IReaction Implements IFlowsheet.CreateEquilibriumReaction
@@ -3809,26 +3788,6 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Creates a Kinetic reaction object.
-    ''' </summary>
-    ''' <param name="name">Name/ID of the reaction</param>
-    ''' <param name="description">Description of the reaction</param>
-    ''' <param name="compounds_and_stoichcoeffs">Compound names and stoichiometric coefficients</param>
-    ''' <param name="directorders">Compound names and direct order coefficients</param>
-    ''' <param name="reverseorders">Compound names and reverse order coefficients</param>
-    ''' <param name="basecompound">Name of the base reaction compound</param>
-    ''' <param name="reactionphase">Reaction phase ('Mixture', 'Vapor', 'Liquid' or 'Solid')</param>
-    ''' <param name="basis">Reaction basis ('Activity', 'Fugacity', 'Molar Concentration', 'Molar Fraction', 'Mass Concentration', 'Mass Fraction' or 'Partial Pressure')</param>
-    ''' <param name="amountunits">Amount units. See the list of <see cref="SharedClasses.SystemsOfUnits.Units.GetUnitSet()">supported units</></param>
-    ''' <param name="rateunits">Rate units. See the list of <see cref="SharedClasses.SystemsOfUnits.Units.GetUnitSet()">supported units</></param>
-    ''' <param name="Aforward">Arrhenius forward reaction's A parameter. Ignored if Expr_forward is not empty.</param>
-    ''' <param name="Eforward">Arrhenius forward reaction's E parameter. Ignored if Expr_forward is not empty.</param>
-    ''' <param name="Areverse">Arrhenius reverse reaction's A parameter. Ignored if Expr_reverse is not empty.</param>
-    ''' <param name="Ereverse">Arrhenius reverse reaction's E parameter. Ignored if Expr_reverse is not empty.</param>
-    ''' <param name="Expr_forward">User-defined expression for forward reaction kinetics as a function of temperature in K. Will use Arrhenius if empty.</param>
-    ''' <param name="Expr_reverse">User-defined expression for reverse reaction kinetics as a function of temperature in K. Will use Arrhenius if empty.</param>
-    ''' <returns></returns>
     Public Function CreateKineticReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
                                           directorders As Dictionary(Of String, Double), reverseorders As Dictionary(Of String, Double),
                                           basecompound As String, reactionphase As String, basis As String, amountunits As String,
@@ -3895,20 +3854,6 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Creates a Heterogeneous Catalytic reaction object.
-    ''' </summary>
-    ''' <param name="name">Name/ID of the reaction</param>
-    ''' <param name="description">Description of the reaction</param>
-    ''' <param name="compounds_and_stoichcoeffs">Compound names and stoichiometric coefficients</param>
-    ''' <param name="basecompound">Name of the base reaction compound</param>
-    ''' <param name="reactionphase">Reaction phase ('Mixture', 'Vapor', 'Liquid' or 'Solid')</param>
-    ''' <param name="basis">Reaction basis ('Activity', 'Fugacity', 'Molar Concentration', 'Molar Fraction', 'Mass Concentration', 'Mass Fraction' or 'Partial Pressure')</param>
-    ''' <param name="amountunits">Amount units. See the list of <see cref="SharedClasses.SystemsOfUnits.Units.GetUnitSet()">supported units</></param>
-    ''' <param name="rateunits">Rate units. See the list of <see cref="SharedClasses.SystemsOfUnits.Units.GetUnitSet()">supported units</></param>
-    ''' <param name="numeratorExpression">Numerator expression</param>
-    ''' <param name="denominatorExpression">Denominator expression</param>
-    ''' <returns>Reaction object</returns>
     Public Function CreateHetCatReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
                                          basecompound As String, reactionphase As String, basis As String, amountunits As String,
                                          rateunits As String, numeratorExpression As String, denominatorExpression As String) As IReaction Implements IFlowsheet.CreateHetCatReaction
@@ -3959,11 +3904,6 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Creates a Reaction Set object.
-    ''' </summary>
-    ''' <param name="name">Name/ID of the reaction set</param>
-    ''' <param name="description">Description</param>
     ''' <returns></returns>
     Public Function CreateReactionSet(name As String, description As String) As IReactionSet Implements IFlowsheet.CreateReactionSet
 
@@ -3972,54 +3912,30 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Add a reaction to the flowsheet.
-    ''' </summary>
-    ''' <param name="reaction">reaction object</param>
     Public Sub AddReaction(reaction As IReaction) Implements IFlowsheet.AddReaction
 
         Reactions.Add(reaction.ID, reaction)
 
     End Sub
 
-    ''' <summary>
-    ''' Add a reaction set to the flowsheet.
-    ''' </summary>
-    ''' <param name="reactionSet">reaction set object</param>
     Public Sub AddReactionSet(reactionSet As IReactionSet) Implements IFlowsheet.AddReactionSet
 
         ReactionSets.Add(reactionSet.ID, reactionSet)
 
     End Sub
 
-    ''' <summary>
-    ''' Adds a reaction to a reaction set.
-    ''' </summary>
-    ''' <param name="reactionID">reaction ID</param>
-    ''' <param name="reactionSetID">reaction set ID</param>
-    ''' <param name="enabled">True if the reaction is to be active in the reaction set</param>
-    ''' <param name="rank">Rank  (0, 1, 2, 3...) of the reaction in the reaction set</param>
     Public Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer) Implements IFlowsheet.AddReactionToSet
 
         ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
 
     End Sub
 
-    ''' <summary>
-    ''' Gets a list of all available Property Packages.
-    ''' </summary>
-    ''' <returns>A list containing the names of the available property packages.</returns>
     Public Function GetAvailablePropertyPackages() As List(Of String) Implements IFlowsheet.GetAvailablePropertyPackages
 
         Return AvailablePropertyPackages.Keys.ToList()
 
     End Function
 
-    ''' <summary>
-    ''' Creates and returns a new Property Package.
-    ''' </summary>
-    ''' <param name="name">Name of the Property Package as returned by <see cref="GetAvailablePropertyPackages">GetAvailablePropertyPackages</></param>
-    ''' <returns></returns>
     Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
 
         Dim pp = AvailablePropertyPackages(name).Clone()
@@ -4028,11 +3944,6 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Creates and adds a Property Package to the flowsheet.
-    ''' </summary>
-    ''' <param name="name">Name of the Property Package as returned by <see cref="GetAvailablePropertyPackages">GetAvailablePropertyPackages</>.</param>
-    ''' <returns></returns>
     Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
 
         Dim pp = AvailablePropertyPackages(name).Clone()
@@ -4042,11 +3953,6 @@ Public Class FormFlowsheet
 
     End Function
 
-    ''' <summary>
-    ''' Adds a compound to the flowsheet.
-    ''' </summary>
-    ''' <param name="compname">Compound name exactly as in the database.</param>
-    ''' <returns></returns>
     Public Function AddCompound(compname As String) As ICompoundConstantProperties Implements IFlowsheet.AddCompound
 
         Dim c = GetCompound(compname)
