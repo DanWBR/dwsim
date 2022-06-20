@@ -219,7 +219,7 @@
     Property WeatherProvider As IWeatherProvider
 
     ''' <summary>
-    ''' Creates an Equilibrium reaction object.
+    ''' Creates a Conversion reaction object.
     ''' </summary>
     ''' <param name="name">Name/ID of the reaction</param>
     ''' <param name="description">Description of the reaction</param>
