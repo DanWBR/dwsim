@@ -31,7 +31,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
 
-    Public Property WeatherProvider As IWeatherProvider Implements IFlowsheet.WeatherProvider
+    Public Property WeatherProvider As IWeatherProvider = New SharedClasses.WeatherProvider() Implements IFlowsheet.WeatherProvider
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
 

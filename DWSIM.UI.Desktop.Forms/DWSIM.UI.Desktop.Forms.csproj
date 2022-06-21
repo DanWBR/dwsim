@@ -107,6 +107,7 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -395,6 +396,27 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\DWSIM_splash_v8.png" />
     <EmbeddedResource Include="Resources\Icons\DWSIM_splash_v8_gtk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-activity_grid_2.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-align_top.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-bring_to_front.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-eye_shadows.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-fit_to_width.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-humidity.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-location.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-paint_palette.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-pressure_gauge.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-solar_irradiation.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-split.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-sun_with_face.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-temperature.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-test_tube_filled.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-weather.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-wind.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-zoom_in.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-zoom_out.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-zoom_to_actual_size.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -366,16 +366,16 @@
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZFNiNNAFMd7EO8etLCwbj88rVfBRAOKCIIX
-        T726JxFF6MkWRRFEwYMHP5p48CJlhWUPCuqlFIktdbvWNFlL0maaCbiyF0FXt/FSLDzfLImVdGKtrrf9
-        wZ8ZmLzfm8yLbbNlaO5BSXPEcpMKbtMR7uqucNw0Z3f6x3/PUCxCOA1yYB3XRd0RTrdWpV1+yZ/xOzE3
-        5uyg2RVruM8bzuH9vmaUicXhYBP2fL5uyH8TBzSIlNKomGVNVCr2uRJexol5sIFho4xGhWL1zTGPJ77+
-        /DLsy6mDqdw7K6F8m9urfJ1syKlCT4pfscmes1VI5ypwSpmHh5UzcO3ZVUhfrEL8Qh2mb7yHpNyDpOJB
-        8uaHQUL2agm5l08XvOghM/FMYaO8WcQib8D0rTWYumRC/PzST3FC8cWhsCa4jj7ZiJgXmWVCcQC+YQo/
-        yrImuwsf+2FBVMaKebCBYVEGb1ucedDzfhUGOTH/Ge4stL+XXhvW2zada7VWJxvyiu1KakMjT9U63CtZ
-        cO7JGhx69AVOPv4E90smvKgsQ003weg4YNgUDNMcNK1uDfd5w3Kih8zEWFTeLMLoKFhaseDlso7S+lDs
-        n4fDmujEHX2ysDgywY1DiRQHtAhJ6R2aZU1Um/Z5El7GinmwgRm2kzE6tNiwyfqWiXmoqroD/+ooSm9r
-        dpfg+kpvd4/4x9v8K7HYD7as6dLNZbN0AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
+        dfUmEUXoZIuiCHKDg4N/mji4SDkRHBTUpRSJLfV61jQ5S9LmNS9g4RZBT69xKRZ+/t6RXCV9sVbP7T7w
+        5T14+X1+L+8X22Hb0NzDkuaI5SYV3KYj3NVd4aRpzu/2j/+ekViEcBrk0DquT3VHONvqSXv8kj/jd2Ju
+        zPlhsyvWcJ83nKMHfc04U4vDwSbs+XzdiP8mDmgQKaVRMcuaqFQccCW8TBLzYAPDRhmNCsXquxMeT3zz
+        5VU4kFOHM7kPVkL5vrBf+TbdkFOFvhS/ZpN956uQzlXgjLIEDyvn4MaL65C+XIX4pTrMLn6EpNyHpOJB
+        crE3TMheLSH38+mCFz1kJp4rbJQ3i1jkDZi9tQYzV0yIX1zeEicUXxwKa4Lr+JONiXmRWaYUB+AbpvCj
+        LGuyt/BpEBZEZaKYBxsYFmXwtsW5B33vV2GQU0tf4M6T9o/SW8N636YLrVZvuiGv2q6kNjTyXK3DvZIF
+        F56twZFHX+H0489wv2TCq8oK1HQTjI4Dhk3BMM1h0+rWcJ83LCd6yEyMReXNIoyOguVVC16v6Citj8T+
+        eTisiU7c8ScLiyMT3DiUSHFAi5CU3qFZ1kS16YAn4WWimAcbmGE7GaNDiw2brG+bmIeqqrvwr46j9LZm
+        dwmub/R295h/vMO/Eov9BKkZ6c+sdqV0AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">

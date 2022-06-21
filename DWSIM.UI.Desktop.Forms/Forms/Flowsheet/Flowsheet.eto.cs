@@ -22,6 +22,7 @@ using DWSIM.UI.Desktop.Editors.Dynamics;
 using SkiaSharp;
 using DWSIM.UI.Controls;
 using DWSIM.ExtensionMethods;
+using System.Device.Location;
 
 namespace DWSIM.UI.Forms
 {
@@ -1336,6 +1337,96 @@ namespace DWSIM.UI.Forms
 
             flowsheetcontrolcontainer.Rows.Add(new TableRow(btnDown));
 
+            // weather bar
+
+            var imgsun = new ImageView { ToolTip = "Solar Irradiation", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sun_with_face.png")) };
+            var imgtemp = new ImageView { ToolTip = "Ambient Temperature", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-temperature.png")) };
+            var imgpgauge = new ImageView { ToolTip = "Atmospheric Pressure", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pressure_gauge.png")) };
+            var imghum = new ImageView { ToolTip = "Relative Humidity", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-humidity.png")) };
+            var imgwind = new ImageView { ToolTip = "Wind Speed", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-wind.png")) };
+
+            var wobj = FlowsheetObject.FlowsheetOptions.CurrentWeather;
+            var nf = FlowsheetObject.FlowsheetOptions.NumberFormat;
+
+            var tbirr = new TextBox { ToolTip = "Solar Irradiation", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.SolarIrradiation_kWh_m2.ToString(nf) };
+            var tbtemp = new TextBox { ToolTip = "Ambient Temperature", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.Temperature_C.ToString(nf) };
+            var tbhum = new TextBox { ToolTip = "Relative Humidity", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.RelativeHumidity_pct.ToString(nf) };
+            var tbwind = new TextBox { ToolTip = "Wind Speed", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.WindSpeed_km_h.ToString(nf) };
+            var tbpgauge = new TextBox { ToolTip = "Atmospheric Pressure", Width = 75, TextAlignment = TextAlignment.Right, Text = (wobj.AtmosphericPressure_Pa / 100.0).ToString(nf) };
+
+            tbirr.TextChanged += (tb, e) => { if (tbirr.Text.IsValidDouble()) wobj.SolarIrradiation_kWh_m2 = tbirr.Text.ToDoubleFromInvariant(); };
+            tbtemp.TextChanged += (tb, e) => { if (tbtemp.Text.IsValidDouble()) wobj.Temperature_C = tbtemp.Text.ToDoubleFromInvariant(); };
+            tbhum.TextChanged += (tb, e) => { if (tbhum.Text.IsValidDouble()) wobj.RelativeHumidity_pct = tbhum.Text.ToDoubleFromInvariant(); };
+            tbwind.TextChanged += (tb, e) => { if (tbwind.Text.IsValidDouble()) wobj.WindSpeed_km_h = tbwind.Text.ToDoubleFromInvariant(); };
+            tbpgauge.TextChanged += (tb, e) => { if (tbpgauge.Text.IsValidDouble()) wobj.AtmosphericPressure_Pa = tbpgauge.Text.ToDoubleFromInvariant() * 100.0; };
+
+            var lblirr = new Label { Text = "kW/m2" };
+            var lbltemp = new Label { Text = "C" };
+            var lblwind = new Label { Text = "km/h" };
+            var lblhum = new Label { Text = "%" };
+            var lblpgauge = new Label { Text = "hPa" };
+
+            var lblweather = new Label { Text = "Current Weather Conditions", Enabled = false };
+
+            var btngetweather = new Button { Text = "Get" };
+
+            btngetweather.Click += (btn, e) =>
+            {
+                try
+                {
+                    var watcher = new GeoCoordinateWatcher();
+                    var done = false;
+                    watcher.PositionChanged += (w2, e2) =>
+                    {
+                        var coord = watcher.Position.Location;
+                        if (!coord.IsUnknown && !done)
+                        {
+                            Application.Instance.Invoke(() =>
+                            {
+                                try
+                                {
+                                    var data = FlowsheetObject.WeatherProvider.GetCurrentWeather(coord.Latitude, coord.Longitude);
+
+                                    FlowsheetObject.FlowsheetOptions.CurrentWeather = data;
+
+                                    tbirr.Text = data.SolarIrradiation_kWh_m2.ToString(nf);
+                                    tbtemp.Text = data.Temperature_C.ToString(nf);
+                                    tbhum.Text = data.RelativeHumidity_pct.ToString(nf);
+                                    tbwind.Text = data.WindSpeed_km_h.ToString(nf);
+                                    tbpgauge.Text = (data.AtmosphericPressure_Pa / 1000.0).ToString(nf);
+
+                                    done = true;
+                                }
+                                catch (Exception ex)
+                                {
+                                    FlowsheetObject.ShowMessage("Error retrieving current weather: " + ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError);
+                                }
+                            });
+                        }
+                        else
+                        {
+                            FlowsheetObject.ShowMessage("Error retrieving your device location.", Interfaces.IFlowsheet.MessageType.GeneralError);
+                        }
+                    };
+                    watcher.TryStart(false, TimeSpan.FromSeconds(10));
+                }
+                catch (Exception ex)
+                {
+                    FlowsheetObject.ShowMessage("Error retrieving location and/or weather: " + ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError);
+                }
+            };
+
+            var weatherpanel = new StackLayout
+            {
+                Orientation = Orientation.Horizontal,
+                Items = { lblweather, btngetweather, imgtemp, tbtemp, lbltemp, imgpgauge, tbpgauge, lblpgauge, imgwind, tbwind, lblwind,
+                    imghum, tbhum, lblhum, imgsun, tbirr, lblirr },
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Spacing = 4
+            };
+
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(weatherpanel));
+
             Split2.Panel1 = flowsheetcontrolcontainer;
 
             SplitterFlowsheet = Split2;
@@ -1860,7 +1951,7 @@ namespace DWSIM.UI.Forms
                 if (!item.IsAbstract)
                 {
                     var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
-                   if (!ObjectList.ContainsKey(obj.GetDisplayName())) ObjectList.Add(obj.GetDisplayName(), obj);
+                    if (!ObjectList.ContainsKey(obj.GetDisplayName())) ObjectList.Add(obj.GetDisplayName(), obj);
                 }
             }
 
