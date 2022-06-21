@@ -1004,8 +1004,10 @@ Public Class FormMain
 
     Sub CheckForUpdates()
 
-        ' check for updates
-        Task.Factory.StartNew(Function()
+        If Not IsPro Then
+
+            ' check for updates
+            Task.Factory.StartNew(Function()
                                   GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
                                   Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
                                   Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
@@ -1020,6 +1022,8 @@ Public Class FormMain
                                                                                    End Sub)
                                                              End If
                                                          End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
+        End If
 
     End Sub
 
