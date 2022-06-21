@@ -21,6 +21,7 @@ Partial Class EditingForm_AirCooler
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_AirCooler))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
@@ -125,7 +126,7 @@ Partial Class EditingForm_AirCooler
         Me.Label15 = New System.Windows.Forms.Label()
         Me.tbRefR = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -154,7 +155,7 @@ Partial Class EditingForm_AirCooler
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Location = New System.Drawing.Point(7, 105)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(403, 113)
+        Me.GroupBox1.Size = New System.Drawing.Size(344, 113)
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Connections"
@@ -165,7 +166,7 @@ Partial Class EditingForm_AirCooler
         Me.btnCreateAndConnectEnergy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectEnergy.Image = CType(resources.GetObject("btnCreateAndConnectEnergy.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(347, 77)
+        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(288, 77)
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.btnCreateAndConnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectEnergy.TabIndex = 42
@@ -177,7 +178,7 @@ Partial Class EditingForm_AirCooler
         Me.btnDisconnectEnergy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectEnergy.Image = CType(resources.GetObject("btnDisconnectEnergy.Image"), System.Drawing.Image)
         Me.btnDisconnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(374, 77)
+        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(315, 77)
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
         Me.btnDisconnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectEnergy.TabIndex = 23
@@ -190,7 +191,7 @@ Partial Class EditingForm_AirCooler
         Me.btnCreateAndConnectOutlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectOutlet1.Image = CType(resources.GetObject("btnCreateAndConnectOutlet1.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(347, 50)
+        Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(288, 50)
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.btnCreateAndConnectOutlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectOutlet1.TabIndex = 41
@@ -213,7 +214,7 @@ Partial Class EditingForm_AirCooler
         Me.btnCreateAndConnectInlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectInlet1.Image = CType(resources.GetObject("btnCreateAndConnectInlet1.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectInlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectInlet1.Location = New System.Drawing.Point(347, 23)
+        Me.btnCreateAndConnectInlet1.Location = New System.Drawing.Point(288, 23)
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.btnCreateAndConnectInlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectInlet1.TabIndex = 40
@@ -228,7 +229,7 @@ Partial Class EditingForm_AirCooler
         Me.cbEnergy.FormattingEnabled = True
         Me.cbEnergy.Location = New System.Drawing.Point(147, 77)
         Me.cbEnergy.Name = "cbEnergy"
-        Me.cbEnergy.Size = New System.Drawing.Size(194, 21)
+        Me.cbEnergy.Size = New System.Drawing.Size(135, 21)
         Me.cbEnergy.TabIndex = 21
         '
         'btnDisconnectOutlet1
@@ -236,7 +237,7 @@ Partial Class EditingForm_AirCooler
         Me.btnDisconnectOutlet1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectOutlet1.Image = CType(resources.GetObject("btnDisconnectOutlet1.Image"), System.Drawing.Image)
         Me.btnDisconnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(374, 50)
+        Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(315, 50)
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.btnDisconnectOutlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectOutlet1.TabIndex = 20
@@ -248,7 +249,7 @@ Partial Class EditingForm_AirCooler
         Me.btnDisconnect1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnect1.Image = CType(resources.GetObject("btnDisconnect1.Image"), System.Drawing.Image)
         Me.btnDisconnect1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnect1.Location = New System.Drawing.Point(374, 23)
+        Me.btnDisconnect1.Location = New System.Drawing.Point(315, 23)
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.btnDisconnect1.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnect1.TabIndex = 14
@@ -273,7 +274,7 @@ Partial Class EditingForm_AirCooler
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Location = New System.Drawing.Point(147, 50)
         Me.cbOutlet1.Name = "cbOutlet1"
-        Me.cbOutlet1.Size = New System.Drawing.Size(194, 21)
+        Me.cbOutlet1.Size = New System.Drawing.Size(135, 21)
         Me.cbOutlet1.TabIndex = 8
         '
         'cbInlet1
@@ -284,7 +285,7 @@ Partial Class EditingForm_AirCooler
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Location = New System.Drawing.Point(147, 23)
         Me.cbInlet1.Name = "cbInlet1"
-        Me.cbInlet1.Size = New System.Drawing.Size(194, 21)
+        Me.cbInlet1.Size = New System.Drawing.Size(135, 21)
         Me.cbInlet1.TabIndex = 1
         '
         'Label19
@@ -310,7 +311,7 @@ Partial Class EditingForm_AirCooler
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Location = New System.Drawing.Point(7, 5)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(403, 98)
+        Me.GroupBox5.Size = New System.Drawing.Size(344, 98)
         Me.GroupBox5.TabIndex = 11
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "General Info"
@@ -321,7 +322,7 @@ Partial Class EditingForm_AirCooler
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTag.Location = New System.Drawing.Point(133, 19)
         Me.lblTag.Name = "lblTag"
-        Me.lblTag.Size = New System.Drawing.Size(262, 20)
+        Me.lblTag.Size = New System.Drawing.Size(203, 20)
         Me.lblTag.TabIndex = 24
         '
         'chkActive
@@ -330,7 +331,7 @@ Partial Class EditingForm_AirCooler
         Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkActive.Location = New System.Drawing.Point(374, 43)
+        Me.chkActive.Location = New System.Drawing.Point(315, 43)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(21, 21)
         Me.chkActive.TabIndex = 21
@@ -398,7 +399,7 @@ Partial Class EditingForm_AirCooler
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Location = New System.Drawing.Point(6, 705)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(403, 223)
+        Me.GroupBox4.Size = New System.Drawing.Size(344, 223)
         Me.GroupBox4.TabIndex = 10
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Notes"
@@ -413,7 +414,7 @@ Partial Class EditingForm_AirCooler
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.rtbAnnotations.Size = New System.Drawing.Size(397, 204)
+        Me.rtbAnnotations.Size = New System.Drawing.Size(338, 204)
         Me.rtbAnnotations.TabIndex = 0
         '
         'GroupBox2
@@ -423,7 +424,7 @@ Partial Class EditingForm_AirCooler
         Me.GroupBox2.Controls.Add(Me.TabControl1)
         Me.GroupBox2.Location = New System.Drawing.Point(7, 221)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(403, 482)
+        Me.GroupBox2.Size = New System.Drawing.Size(344, 482)
         Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Calculation Parameters"
@@ -437,7 +438,7 @@ Partial Class EditingForm_AirCooler
         Me.TabControl1.Location = New System.Drawing.Point(3, 16)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(397, 463)
+        Me.TabControl1.Size = New System.Drawing.Size(338, 463)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -477,7 +478,7 @@ Partial Class EditingForm_AirCooler
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(389, 437)
+        Me.TabPage1.Size = New System.Drawing.Size(330, 437)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Main"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -494,8 +495,9 @@ Partial Class EditingForm_AirCooler
         '
         'rbUseGlobal
         '
+        Me.rbUseGlobal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rbUseGlobal.AutoSize = True
-        Me.rbUseGlobal.Location = New System.Drawing.Point(244, 121)
+        Me.rbUseGlobal.Location = New System.Drawing.Point(246, 121)
         Me.rbUseGlobal.Name = "rbUseGlobal"
         Me.rbUseGlobal.Size = New System.Drawing.Size(77, 17)
         Me.rbUseGlobal.TabIndex = 72
@@ -504,9 +506,10 @@ Partial Class EditingForm_AirCooler
         '
         'rbUserDef
         '
+        Me.rbUserDef.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rbUserDef.AutoSize = True
         Me.rbUserDef.Checked = True
-        Me.rbUserDef.Location = New System.Drawing.Point(151, 121)
+        Me.rbUserDef.Location = New System.Drawing.Point(153, 121)
         Me.rbUserDef.Name = "rbUserDef"
         Me.rbUserDef.Size = New System.Drawing.Size(87, 17)
         Me.rbUserDef.TabIndex = 71
@@ -518,7 +521,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(324, 346)
+        Me.Label1.Location = New System.Drawing.Point(265, 346)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(15, 13)
         Me.Label1.TabIndex = 70
@@ -526,12 +529,11 @@ Partial Class EditingForm_AirCooler
         '
         'tbEff
         '
-        Me.tbEff.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbEff.Location = New System.Drawing.Point(151, 343)
+        Me.tbEff.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbEff.Location = New System.Drawing.Point(153, 343)
         Me.tbEff.Name = "tbEff"
         Me.tbEff.ReadOnly = True
-        Me.tbEff.Size = New System.Drawing.Size(167, 20)
+        Me.tbEff.Size = New System.Drawing.Size(106, 20)
         Me.tbEff.TabIndex = 69
         Me.tbEff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -549,7 +551,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.Label43.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(324, 268)
+        Me.Label43.Location = New System.Drawing.Point(265, 268)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(30, 13)
         Me.Label43.TabIndex = 67
@@ -557,11 +559,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbOverallUA
         '
-        Me.tbOverallUA.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbOverallUA.Location = New System.Drawing.Point(151, 265)
+        Me.tbOverallUA.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbOverallUA.Location = New System.Drawing.Point(153, 265)
         Me.tbOverallUA.Name = "tbOverallUA"
-        Me.tbOverallUA.Size = New System.Drawing.Size(167, 20)
+        Me.tbOverallUA.Size = New System.Drawing.Size(106, 20)
         Me.tbOverallUA.TabIndex = 66
         Me.tbOverallUA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -579,7 +580,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblMaximumHeatExchange.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblMaximumHeatExchange.AutoSize = True
-        Me.lblMaximumHeatExchange.Location = New System.Drawing.Point(324, 320)
+        Me.lblMaximumHeatExchange.Location = New System.Drawing.Point(265, 320)
         Me.lblMaximumHeatExchange.Name = "lblMaximumHeatExchange"
         Me.lblMaximumHeatExchange.Size = New System.Drawing.Size(45, 13)
         Me.lblMaximumHeatExchange.TabIndex = 64
@@ -587,12 +588,11 @@ Partial Class EditingForm_AirCooler
         '
         'tbMaxHeatEx
         '
-        Me.tbMaxHeatEx.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbMaxHeatEx.Location = New System.Drawing.Point(151, 317)
+        Me.tbMaxHeatEx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbMaxHeatEx.Location = New System.Drawing.Point(153, 317)
         Me.tbMaxHeatEx.Name = "tbMaxHeatEx"
         Me.tbMaxHeatEx.ReadOnly = True
-        Me.tbMaxHeatEx.Size = New System.Drawing.Size(167, 20)
+        Me.tbMaxHeatEx.Size = New System.Drawing.Size(106, 20)
         Me.tbMaxHeatEx.TabIndex = 63
         Me.tbMaxHeatEx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -610,7 +610,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblHeatExchanged.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblHeatExchanged.AutoSize = True
-        Me.lblHeatExchanged.Location = New System.Drawing.Point(324, 294)
+        Me.lblHeatExchanged.Location = New System.Drawing.Point(265, 294)
         Me.lblHeatExchanged.Name = "lblHeatExchanged"
         Me.lblHeatExchanged.Size = New System.Drawing.Size(45, 13)
         Me.lblHeatExchanged.TabIndex = 61
@@ -618,12 +618,11 @@ Partial Class EditingForm_AirCooler
         '
         'tbHeatingChange
         '
-        Me.tbHeatingChange.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbHeatingChange.Location = New System.Drawing.Point(151, 291)
+        Me.tbHeatingChange.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbHeatingChange.Location = New System.Drawing.Point(153, 291)
         Me.tbHeatingChange.Name = "tbHeatingChange"
         Me.tbHeatingChange.ReadOnly = True
-        Me.tbHeatingChange.Size = New System.Drawing.Size(167, 20)
+        Me.tbHeatingChange.Size = New System.Drawing.Size(106, 20)
         Me.tbHeatingChange.TabIndex = 60
         Me.tbHeatingChange.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -641,7 +640,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblOutletAirTemperature.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblOutletAirTemperature.AutoSize = True
-        Me.lblOutletAirTemperature.Location = New System.Drawing.Point(324, 221)
+        Me.lblOutletAirTemperature.Location = New System.Drawing.Point(265, 221)
         Me.lblOutletAirTemperature.Name = "lblOutletAirTemperature"
         Me.lblOutletAirTemperature.Size = New System.Drawing.Size(45, 13)
         Me.lblOutletAirTemperature.TabIndex = 58
@@ -649,12 +648,11 @@ Partial Class EditingForm_AirCooler
         '
         'tbOutletAirTemp
         '
-        Me.tbOutletAirTemp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbOutletAirTemp.Location = New System.Drawing.Point(151, 218)
+        Me.tbOutletAirTemp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbOutletAirTemp.Location = New System.Drawing.Point(153, 218)
         Me.tbOutletAirTemp.Name = "tbOutletAirTemp"
         Me.tbOutletAirTemp.ReadOnly = True
-        Me.tbOutletAirTemp.Size = New System.Drawing.Size(167, 20)
+        Me.tbOutletAirTemp.Size = New System.Drawing.Size(106, 20)
         Me.tbOutletAirTemp.TabIndex = 57
         Me.tbOutletAirTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -672,7 +670,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblInletAirPressure.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblInletAirPressure.AutoSize = True
-        Me.lblInletAirPressure.Location = New System.Drawing.Point(324, 175)
+        Me.lblInletAirPressure.Location = New System.Drawing.Point(265, 175)
         Me.lblInletAirPressure.Name = "lblInletAirPressure"
         Me.lblInletAirPressure.Size = New System.Drawing.Size(45, 13)
         Me.lblInletAirPressure.TabIndex = 55
@@ -680,11 +678,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbInletAirPre
         '
-        Me.tbInletAirPre.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbInletAirPre.Location = New System.Drawing.Point(151, 172)
+        Me.tbInletAirPre.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbInletAirPre.Location = New System.Drawing.Point(153, 172)
         Me.tbInletAirPre.Name = "tbInletAirPre"
-        Me.tbInletAirPre.Size = New System.Drawing.Size(167, 20)
+        Me.tbInletAirPre.Size = New System.Drawing.Size(106, 20)
         Me.tbInletAirPre.TabIndex = 54
         Me.tbInletAirPre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -702,7 +699,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblInletAirTemperature.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblInletAirTemperature.AutoSize = True
-        Me.lblInletAirTemperature.Location = New System.Drawing.Point(324, 149)
+        Me.lblInletAirTemperature.Location = New System.Drawing.Point(265, 149)
         Me.lblInletAirTemperature.Name = "lblInletAirTemperature"
         Me.lblInletAirTemperature.Size = New System.Drawing.Size(45, 13)
         Me.lblInletAirTemperature.TabIndex = 52
@@ -710,11 +707,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbInletAirTemp
         '
-        Me.tbInletAirTemp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbInletAirTemp.Location = New System.Drawing.Point(151, 146)
+        Me.tbInletAirTemp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbInletAirTemp.Location = New System.Drawing.Point(153, 146)
         Me.tbInletAirTemp.Name = "tbInletAirTemp"
-        Me.tbInletAirTemp.Size = New System.Drawing.Size(167, 20)
+        Me.tbInletAirTemp.Size = New System.Drawing.Size(106, 20)
         Me.tbInletAirTemp.TabIndex = 51
         Me.tbInletAirTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -732,7 +728,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblOutletTemperature.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblOutletTemperature.AutoSize = True
-        Me.lblOutletTemperature.Location = New System.Drawing.Point(324, 79)
+        Me.lblOutletTemperature.Location = New System.Drawing.Point(265, 79)
         Me.lblOutletTemperature.Name = "lblOutletTemperature"
         Me.lblOutletTemperature.Size = New System.Drawing.Size(39, 13)
         Me.lblOutletTemperature.TabIndex = 48
@@ -742,7 +738,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblPressureDrop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPressureDrop.AutoSize = True
-        Me.lblPressureDrop.Location = New System.Drawing.Point(324, 53)
+        Me.lblPressureDrop.Location = New System.Drawing.Point(265, 53)
         Me.lblPressureDrop.Name = "lblPressureDrop"
         Me.lblPressureDrop.Size = New System.Drawing.Size(39, 13)
         Me.lblPressureDrop.TabIndex = 47
@@ -750,11 +746,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbOutletTemperature
         '
-        Me.tbOutletTemperature.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbOutletTemperature.Location = New System.Drawing.Point(151, 76)
+        Me.tbOutletTemperature.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbOutletTemperature.Location = New System.Drawing.Point(153, 76)
         Me.tbOutletTemperature.Name = "tbOutletTemperature"
-        Me.tbOutletTemperature.Size = New System.Drawing.Size(167, 20)
+        Me.tbOutletTemperature.Size = New System.Drawing.Size(106, 20)
         Me.tbOutletTemperature.TabIndex = 44
         Me.tbOutletTemperature.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -770,11 +765,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbPressureDrop
         '
-        Me.tbPressureDrop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbPressureDrop.Location = New System.Drawing.Point(151, 50)
+        Me.tbPressureDrop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbPressureDrop.Location = New System.Drawing.Point(153, 50)
         Me.tbPressureDrop.Name = "tbPressureDrop"
-        Me.tbPressureDrop.Size = New System.Drawing.Size(167, 20)
+        Me.tbPressureDrop.Size = New System.Drawing.Size(106, 20)
         Me.tbPressureDrop.TabIndex = 42
         Me.tbPressureDrop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -790,14 +784,13 @@ Partial Class EditingForm_AirCooler
         '
         'cbCalcMode
         '
-        Me.cbCalcMode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbCalcMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCalcMode.FormattingEnabled = True
         Me.cbCalcMode.Items.AddRange(New Object() {"Specify Outlet Temperature", "Specify Tube Geometry", "Specify Overall UA"})
-        Me.cbCalcMode.Location = New System.Drawing.Point(151, 15)
+        Me.cbCalcMode.Location = New System.Drawing.Point(153, 15)
         Me.cbCalcMode.Name = "cbCalcMode"
-        Me.cbCalcMode.Size = New System.Drawing.Size(218, 21)
+        Me.cbCalcMode.Size = New System.Drawing.Size(157, 21)
         Me.cbCalcMode.TabIndex = 40
         '
         'Label8
@@ -840,7 +833,7 @@ Partial Class EditingForm_AirCooler
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(389, 437)
+        Me.TabPage2.Size = New System.Drawing.Size(344, 437)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Tubes"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -850,7 +843,7 @@ Partial Class EditingForm_AirCooler
         Me.lbuTubeThermalCond.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbuTubeThermalCond.AutoSize = True
         Me.lbuTubeThermalCond.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbuTubeThermalCond.Location = New System.Drawing.Point(311, 146)
+        Me.lbuTubeThermalCond.Location = New System.Drawing.Point(266, 146)
         Me.lbuTubeThermalCond.Name = "lbuTubeThermalCond"
         Me.lbuTubeThermalCond.Size = New System.Drawing.Size(45, 13)
         Me.lbuTubeThermalCond.TabIndex = 60
@@ -858,21 +851,19 @@ Partial Class EditingForm_AirCooler
         '
         'tbTubeThermalCond
         '
-        Me.tbTubeThermalCond.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubeThermalCond.Location = New System.Drawing.Point(161, 143)
+        Me.tbTubeThermalCond.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubeThermalCond.Location = New System.Drawing.Point(177, 143)
         Me.tbTubeThermalCond.Name = "tbTubeThermalCond"
-        Me.tbTubeThermalCond.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubeThermalCond.Size = New System.Drawing.Size(83, 20)
         Me.tbTubeThermalCond.TabIndex = 59
         Me.tbTubeThermalCond.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbTubeDi
         '
-        Me.tbTubeDi.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubeDi.Location = New System.Drawing.Point(161, 13)
+        Me.tbTubeDi.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubeDi.Location = New System.Drawing.Point(177, 13)
         Me.tbTubeDi.Name = "tbTubeDi"
-        Me.tbTubeDi.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubeDi.Size = New System.Drawing.Size(83, 20)
         Me.tbTubeDi.TabIndex = 26
         Me.tbTubeDi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -901,7 +892,7 @@ Partial Class EditingForm_AirCooler
         Me.lbTubeRoughness.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbTubeRoughness.AutoSize = True
         Me.lbTubeRoughness.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbTubeRoughness.Location = New System.Drawing.Point(312, 120)
+        Me.lbTubeRoughness.Location = New System.Drawing.Point(267, 120)
         Me.lbTubeRoughness.Name = "lbTubeRoughness"
         Me.lbTubeRoughness.Size = New System.Drawing.Size(45, 13)
         Me.lbTubeRoughness.TabIndex = 54
@@ -912,7 +903,7 @@ Partial Class EditingForm_AirCooler
         Me.lbuTubeDi.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbuTubeDi.AutoSize = True
         Me.lbuTubeDi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbuTubeDi.Location = New System.Drawing.Point(311, 16)
+        Me.lbuTubeDi.Location = New System.Drawing.Point(266, 16)
         Me.lbuTubeDi.Name = "lbuTubeDi"
         Me.lbuTubeDi.Size = New System.Drawing.Size(45, 13)
         Me.lbuTubeDi.TabIndex = 28
@@ -920,11 +911,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbTubeRoughness
         '
-        Me.tbTubeRoughness.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubeRoughness.Location = New System.Drawing.Point(161, 117)
+        Me.tbTubeRoughness.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubeRoughness.Location = New System.Drawing.Point(177, 117)
         Me.tbTubeRoughness.Name = "tbTubeRoughness"
-        Me.tbTubeRoughness.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubeRoughness.Size = New System.Drawing.Size(83, 20)
         Me.tbTubeRoughness.TabIndex = 53
         Me.tbTubeRoughness.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -950,11 +940,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbTubeDe
         '
-        Me.tbTubeDe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubeDe.Location = New System.Drawing.Point(161, 39)
+        Me.tbTubeDe.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubeDe.Location = New System.Drawing.Point(177, 39)
         Me.tbTubeDe.Name = "tbTubeDe"
-        Me.tbTubeDe.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubeDe.Size = New System.Drawing.Size(83, 20)
         Me.tbTubeDe.TabIndex = 30
         Me.tbTubeDe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -963,7 +952,7 @@ Partial Class EditingForm_AirCooler
         Me.lbuTubePitch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbuTubePitch.AutoSize = True
         Me.lbuTubePitch.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbuTubePitch.Location = New System.Drawing.Point(311, 224)
+        Me.lbuTubePitch.Location = New System.Drawing.Point(266, 224)
         Me.lbuTubePitch.Name = "lbuTubePitch"
         Me.lbuTubePitch.Size = New System.Drawing.Size(45, 13)
         Me.lbuTubePitch.TabIndex = 51
@@ -974,7 +963,7 @@ Partial Class EditingForm_AirCooler
         Me.lbTubeDe.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbTubeDe.AutoSize = True
         Me.lbTubeDe.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbTubeDe.Location = New System.Drawing.Point(311, 42)
+        Me.lbTubeDe.Location = New System.Drawing.Point(266, 42)
         Me.lbTubeDe.Name = "lbTubeDe"
         Me.lbTubeDe.Size = New System.Drawing.Size(45, 13)
         Me.lbTubeDe.TabIndex = 31
@@ -982,11 +971,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbTubePitch
         '
-        Me.tbTubePitch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubePitch.Location = New System.Drawing.Point(161, 221)
+        Me.tbTubePitch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubePitch.Location = New System.Drawing.Point(177, 221)
         Me.tbTubePitch.Name = "tbTubePitch"
-        Me.tbTubePitch.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubePitch.Size = New System.Drawing.Size(83, 20)
         Me.tbTubePitch.TabIndex = 50
         Me.tbTubePitch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1012,21 +1000,19 @@ Partial Class EditingForm_AirCooler
         '
         'tbTubeLength
         '
-        Me.tbTubeLength.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubeLength.Location = New System.Drawing.Point(161, 65)
+        Me.tbTubeLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubeLength.Location = New System.Drawing.Point(177, 65)
         Me.tbTubeLength.Name = "tbTubeLength"
-        Me.tbTubeLength.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubeLength.Size = New System.Drawing.Size(83, 20)
         Me.tbTubeLength.TabIndex = 33
         Me.tbTubeLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbNumberOfTubesPerShell
         '
-        Me.tbNumberOfTubesPerShell.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbNumberOfTubesPerShell.Location = New System.Drawing.Point(161, 195)
+        Me.tbNumberOfTubesPerShell.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbNumberOfTubesPerShell.Location = New System.Drawing.Point(177, 195)
         Me.tbNumberOfTubesPerShell.Name = "tbNumberOfTubesPerShell"
-        Me.tbNumberOfTubesPerShell.Size = New System.Drawing.Size(144, 20)
+        Me.tbNumberOfTubesPerShell.Size = New System.Drawing.Size(83, 20)
         Me.tbNumberOfTubesPerShell.TabIndex = 42
         Me.tbNumberOfTubesPerShell.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1035,7 +1021,7 @@ Partial Class EditingForm_AirCooler
         Me.lbuTubeLength.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbuTubeLength.AutoSize = True
         Me.lbuTubeLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbuTubeLength.Location = New System.Drawing.Point(311, 68)
+        Me.lbuTubeLength.Location = New System.Drawing.Point(266, 68)
         Me.lbuTubeLength.Name = "lbuTubeLength"
         Me.lbuTubeLength.Size = New System.Drawing.Size(45, 13)
         Me.lbuTubeLength.TabIndex = 34
@@ -1063,21 +1049,19 @@ Partial Class EditingForm_AirCooler
         '
         'tbTubePassesPerShell
         '
-        Me.tbTubePassesPerShell.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubePassesPerShell.Location = New System.Drawing.Point(161, 169)
+        Me.tbTubePassesPerShell.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubePassesPerShell.Location = New System.Drawing.Point(177, 169)
         Me.tbTubePassesPerShell.Name = "tbTubePassesPerShell"
-        Me.tbTubePassesPerShell.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubePassesPerShell.Size = New System.Drawing.Size(83, 20)
         Me.tbTubePassesPerShell.TabIndex = 39
         Me.tbTubePassesPerShell.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbTubeFoulingFactor
         '
-        Me.tbTubeFoulingFactor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTubeFoulingFactor.Location = New System.Drawing.Point(161, 91)
+        Me.tbTubeFoulingFactor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbTubeFoulingFactor.Location = New System.Drawing.Point(177, 91)
         Me.tbTubeFoulingFactor.Name = "tbTubeFoulingFactor"
-        Me.tbTubeFoulingFactor.Size = New System.Drawing.Size(144, 20)
+        Me.tbTubeFoulingFactor.Size = New System.Drawing.Size(83, 20)
         Me.tbTubeFoulingFactor.TabIndex = 36
         Me.tbTubeFoulingFactor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1096,7 +1080,7 @@ Partial Class EditingForm_AirCooler
         Me.lbuTubeFoulingFactor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbuTubeFoulingFactor.AutoSize = True
         Me.lbuTubeFoulingFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lbuTubeFoulingFactor.Location = New System.Drawing.Point(311, 94)
+        Me.lbuTubeFoulingFactor.Location = New System.Drawing.Point(266, 94)
         Me.lbuTubeFoulingFactor.Name = "lbuTubeFoulingFactor"
         Me.lbuTubeFoulingFactor.Size = New System.Drawing.Size(45, 13)
         Me.lbuTubeFoulingFactor.TabIndex = 37
@@ -1124,7 +1108,7 @@ Partial Class EditingForm_AirCooler
         Me.TabPage3.Controls.Add(Me.Label16)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(389, 437)
+        Me.TabPage3.Size = New System.Drawing.Size(344, 437)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Fan"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -1133,7 +1117,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblElectricalLoad.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblElectricalLoad.AutoSize = True
-        Me.lblElectricalLoad.Location = New System.Drawing.Point(326, 146)
+        Me.lblElectricalLoad.Location = New System.Drawing.Point(281, 146)
         Me.lblElectricalLoad.Name = "lblElectricalLoad"
         Me.lblElectricalLoad.Size = New System.Drawing.Size(45, 13)
         Me.lblElectricalLoad.TabIndex = 67
@@ -1141,12 +1125,11 @@ Partial Class EditingForm_AirCooler
         '
         'tbElecLoad
         '
-        Me.tbElecLoad.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbElecLoad.Location = New System.Drawing.Point(151, 143)
+        Me.tbElecLoad.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbElecLoad.Location = New System.Drawing.Point(168, 143)
         Me.tbElecLoad.Name = "tbElecLoad"
         Me.tbElecLoad.ReadOnly = True
-        Me.tbElecLoad.Size = New System.Drawing.Size(167, 20)
+        Me.tbElecLoad.Size = New System.Drawing.Size(105, 20)
         Me.tbElecLoad.TabIndex = 66
         Me.tbElecLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1164,7 +1147,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.Label29.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(326, 120)
+        Me.Label29.Location = New System.Drawing.Point(281, 120)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(46, 13)
         Me.Label29.TabIndex = 64
@@ -1172,11 +1155,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbElecConv
         '
-        Me.tbElecConv.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbElecConv.Location = New System.Drawing.Point(190, 117)
+        Me.tbElecConv.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbElecConv.Location = New System.Drawing.Point(213, 117)
         Me.tbElecConv.Name = "tbElecConv"
-        Me.tbElecConv.Size = New System.Drawing.Size(128, 20)
+        Me.tbElecConv.Size = New System.Drawing.Size(60, 20)
         Me.tbElecConv.TabIndex = 63
         Me.tbElecConv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1194,7 +1176,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblActualAirFlow.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblActualAirFlow.AutoSize = True
-        Me.lblActualAirFlow.Location = New System.Drawing.Point(326, 94)
+        Me.lblActualAirFlow.Location = New System.Drawing.Point(281, 94)
         Me.lblActualAirFlow.Name = "lblActualAirFlow"
         Me.lblActualAirFlow.Size = New System.Drawing.Size(45, 13)
         Me.lblActualAirFlow.TabIndex = 61
@@ -1202,12 +1184,11 @@ Partial Class EditingForm_AirCooler
         '
         'tbActualAF
         '
-        Me.tbActualAF.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbActualAF.Location = New System.Drawing.Point(151, 91)
+        Me.tbActualAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbActualAF.Location = New System.Drawing.Point(168, 91)
         Me.tbActualAF.Name = "tbActualAF"
         Me.tbActualAF.ReadOnly = True
-        Me.tbActualAF.Size = New System.Drawing.Size(167, 20)
+        Me.tbActualAF.Size = New System.Drawing.Size(105, 20)
         Me.tbActualAF.TabIndex = 60
         Me.tbActualAF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1225,7 +1206,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.Label21.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(326, 68)
+        Me.Label21.Location = New System.Drawing.Point(281, 68)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(24, 13)
         Me.Label21.TabIndex = 58
@@ -1233,11 +1214,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbActualR
         '
-        Me.tbActualR.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbActualR.Location = New System.Drawing.Point(151, 65)
+        Me.tbActualR.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbActualR.Location = New System.Drawing.Point(168, 65)
         Me.tbActualR.Name = "tbActualR"
-        Me.tbActualR.Size = New System.Drawing.Size(167, 20)
+        Me.tbActualR.Size = New System.Drawing.Size(105, 20)
         Me.tbActualR.TabIndex = 57
         Me.tbActualR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1255,7 +1235,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.lblRefAirFlow.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblRefAirFlow.AutoSize = True
-        Me.lblRefAirFlow.Location = New System.Drawing.Point(326, 42)
+        Me.lblRefAirFlow.Location = New System.Drawing.Point(281, 42)
         Me.lblRefAirFlow.Name = "lblRefAirFlow"
         Me.lblRefAirFlow.Size = New System.Drawing.Size(45, 13)
         Me.lblRefAirFlow.TabIndex = 55
@@ -1263,11 +1243,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbRefAF
         '
-        Me.tbRefAF.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbRefAF.Location = New System.Drawing.Point(151, 39)
+        Me.tbRefAF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbRefAF.Location = New System.Drawing.Point(168, 39)
         Me.tbRefAF.Name = "tbRefAF"
-        Me.tbRefAF.Size = New System.Drawing.Size(167, 20)
+        Me.tbRefAF.Size = New System.Drawing.Size(105, 20)
         Me.tbRefAF.TabIndex = 54
         Me.tbRefAF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1285,7 +1264,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(326, 18)
+        Me.Label15.Location = New System.Drawing.Point(281, 18)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(24, 13)
         Me.Label15.TabIndex = 52
@@ -1293,11 +1272,10 @@ Partial Class EditingForm_AirCooler
         '
         'tbRefR
         '
-        Me.tbRefR.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbRefR.Location = New System.Drawing.Point(151, 13)
+        Me.tbRefR.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbRefR.Location = New System.Drawing.Point(168, 13)
         Me.tbRefR.Name = "tbRefR"
-        Me.tbRefR.Size = New System.Drawing.Size(167, 20)
+        Me.tbRefR.Size = New System.Drawing.Size(105, 20)
         Me.tbRefR.TabIndex = 51
         Me.tbRefR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1320,7 +1298,7 @@ Partial Class EditingForm_AirCooler
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(418, 940)
+        Me.ClientSize = New System.Drawing.Size(359, 940)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
