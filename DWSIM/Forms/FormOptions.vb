@@ -126,6 +126,8 @@ Public Class FormOptions
                 Me.ComboBoxUILanguage.SelectedIndex = 1
         End Select
 
+        chkUpdates.Checked = Settings.CheckForUpdates
+
         loaded = True
 
     End Sub
@@ -683,5 +685,10 @@ Public Class FormOptions
                 End Try
             End If
         End If
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkUpdates.CheckedChanged
+        My.Settings.CheckForUpdates = chkUpdates.Checked
+        Settings.CheckForUpdates = chkUpdates.Checked
     End Sub
 End Class

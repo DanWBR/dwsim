@@ -107,6 +107,8 @@ Partial Class FormOptions
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
         Me.tbPythonTimeout = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -150,6 +152,7 @@ Partial Class FormOptions
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
+        Me.GroupBox16.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
@@ -759,12 +762,25 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        '
+        'GroupBox16
+        '
+        resources.ApplyResources(Me.GroupBox16, "GroupBox16")
+        Me.GroupBox16.Controls.Add(Me.chkUpdates)
+        Me.GroupBox16.Name = "GroupBox16"
+        Me.GroupBox16.TabStop = False
+        '
+        'chkUpdates
+        '
+        resources.ApplyResources(Me.chkUpdates, "chkUpdates")
+        Me.chkUpdates.Name = "chkUpdates"
         '
         'GroupBox17
         '
@@ -942,6 +958,8 @@ Partial Class FormOptions
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox16.ResumeLayout(False)
+        Me.GroupBox16.PerformLayout()
         Me.GroupBox17.ResumeLayout(False)
         Me.GroupBox17.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
@@ -1053,4 +1071,6 @@ Partial Class FormOptions
     Public WithEvents btnClearDir As Button
     Public WithEvents tbConfigDir As TextBox
     Public WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents GroupBox16 As GroupBox
+    Public WithEvents chkUpdates As CheckBox
 End Class

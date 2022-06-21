@@ -163,7 +163,7 @@ namespace DWSIM.UI.Forms
                     var wntext = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "whatsnew.txt"));
                     MessageBox.Show(wntext, "What's New", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
                 }
-                CheckForUpdates();
+                if (GlobalSettings.Settings.CheckForUpdates) CheckForUpdates();
             }));
         }
 

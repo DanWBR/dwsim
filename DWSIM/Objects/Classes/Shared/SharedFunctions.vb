@@ -109,6 +109,8 @@ Namespace DWSIM
 
             GlobalSettings.Settings.EditOnSelect = Not My.Settings.DoubleClickToEdit
 
+            Settings.CheckForUpdates = My.Settings.CheckForUpdates
+
         End Sub
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)
