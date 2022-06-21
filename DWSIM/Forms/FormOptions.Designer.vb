@@ -110,8 +110,6 @@ Partial Class FormOptions
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
-        Me.tbPythonTimeout = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
         Me.btnSelectPythonPath = New System.Windows.Forms.Button()
         Me.tbPythonPath = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -785,23 +783,11 @@ Partial Class FormOptions
         'GroupBox17
         '
         resources.ApplyResources(Me.GroupBox17, "GroupBox17")
-        Me.GroupBox17.Controls.Add(Me.tbPythonTimeout)
-        Me.GroupBox17.Controls.Add(Me.Label17)
         Me.GroupBox17.Controls.Add(Me.btnSelectPythonPath)
         Me.GroupBox17.Controls.Add(Me.tbPythonPath)
         Me.GroupBox17.Controls.Add(Me.Label18)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.TabStop = False
-        '
-        'tbPythonTimeout
-        '
-        resources.ApplyResources(Me.tbPythonTimeout, "tbPythonTimeout")
-        Me.tbPythonTimeout.Name = "tbPythonTimeout"
-        '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Name = "Label17"
         '
         'btnSelectPythonPath
         '
@@ -1051,8 +1037,6 @@ Partial Class FormOptions
     Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
     Public WithEvents chkIgnoreCompConstData As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox17 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbPythonTimeout As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
     Public WithEvents btnSelectPythonPath As System.Windows.Forms.Button
     Public WithEvents tbPythonPath As System.Windows.Forms.TextBox
     Public WithEvents Label18 As System.Windows.Forms.Label

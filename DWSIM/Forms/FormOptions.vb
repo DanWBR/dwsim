@@ -113,7 +113,6 @@ Public Class FormOptions
         CheckBoxUndoRedoRecalc.Checked = My.Settings.UndoRedo_RecalculateFlowsheet
 
         tbPythonPath.Text = My.Settings.PythonPath
-        tbPythonTimeout.Text = My.Settings.PythonProcessTimeout
 
         Dim configdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DWSIM_Project")
 
@@ -581,14 +580,6 @@ Public Class FormOptions
             My.Settings.PythonPath = tbPythonPath.Text
             GlobalSettings.Settings.PythonPath = tbPythonPath.Text
         End If
-    End Sub
-
-    Private Sub tbPythonTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbPythonTimeout.TextChanged
-        Try
-            GlobalSettings.Settings.PythonTimeoutInMinutes = tbPythonTimeout.Text
-            My.Settings.PythonProcessTimeout = tbPythonTimeout.Text
-        Catch ex As Exception
-        End Try
     End Sub
 
     Private Sub chkEnableInspector_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableInspector.CheckedChanged
