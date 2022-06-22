@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.0.1
+Version 8.0.2
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.0.2
+
+- Added Weather Conditions panel to Cross-Platform UI
+- Fixed an issue with PFR
+- Fixed an issue with single-compound flash and forced solids
+- Disable/Enable automatic update checks
 
 Version 8.0.1/8.0.0
 
