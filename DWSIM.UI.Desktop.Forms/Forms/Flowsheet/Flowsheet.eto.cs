@@ -1354,19 +1354,11 @@ namespace DWSIM.UI.Forms
             var tbwind = new TextBox { ToolTip = "Wind Speed", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.WindSpeed_km_h.ToString(nf) };
             var tbpgauge = new TextBox { ToolTip = "Atmospheric Pressure", Width = 75, TextAlignment = TextAlignment.Right, Text = (wobj.AtmosphericPressure_Pa / 100.0).ToString(nf) };
 
-            var tblat = new TextBox { ToolTip = "Latitude", Width = 50, TextAlignment = TextAlignment.Right, Text = wobj.Latitude.ToString(nf) };
-            var tblong = new TextBox { ToolTip = "Longitude", Width = 50, TextAlignment = TextAlignment.Right, Text = wobj.Longitude.ToString(nf) };
-            tblat.TextChanged += (tb, e) => { if (tblat.Text.IsValidDouble()) wobj.Latitude = tblat.Text.ToDoubleFromInvariant(); };
-            tblong.TextChanged += (tb, e) => { if (tblong.Text.IsValidDouble()) wobj.Longitude = tblong.Text.ToDoubleFromInvariant(); };
-
             tbirr.TextChanged += (tb, e) => { if (tbirr.Text.IsValidDouble()) wobj.SolarIrradiation_kWh_m2 = tbirr.Text.ToDoubleFromInvariant(); };
             tbtemp.TextChanged += (tb, e) => { if (tbtemp.Text.IsValidDouble()) wobj.Temperature_C = tbtemp.Text.ToDoubleFromInvariant(); };
             tbhum.TextChanged += (tb, e) => { if (tbhum.Text.IsValidDouble()) wobj.RelativeHumidity_pct = tbhum.Text.ToDoubleFromInvariant(); };
             tbwind.TextChanged += (tb, e) => { if (tbwind.Text.IsValidDouble()) wobj.WindSpeed_km_h = tbwind.Text.ToDoubleFromInvariant(); };
             tbpgauge.TextChanged += (tb, e) => { if (tbpgauge.Text.IsValidDouble()) wobj.AtmosphericPressure_Pa = tbpgauge.Text.ToDoubleFromInvariant() * 100.0; };
-
-            var lbllat = new Label { Text = "Lat" };
-            var lbllong = new Label { Text = "Long" };
 
             var lblirr = new Label { Text = "kW/m2" };
             var lbltemp = new Label { Text = "C" };
@@ -1376,42 +1368,16 @@ namespace DWSIM.UI.Forms
 
             var lblweather = new Label { Text = "Current Weather Conditions", Enabled = false };
 
-            var btngetweather = new Button { Text = "Get" };
-
-            btngetweather.Click += (btn, e) =>
-            {
-                Application.Instance.Invoke(() =>
-                {
-                    try
-                    {
-                        var data = FlowsheetObject.WeatherProvider.GetCurrentWeather(wobj.Latitude, wobj.Longitude);
-
-                        FlowsheetObject.FlowsheetOptions.CurrentWeather = data;
-
-                        tbirr.Text = data.SolarIrradiation_kWh_m2.ToString(nf);
-                        tbtemp.Text = data.Temperature_C.ToString(nf);
-                        tbhum.Text = data.RelativeHumidity_pct.ToString(nf);
-                        tbwind.Text = data.WindSpeed_km_h.ToString(nf);
-                        tbpgauge.Text = (data.AtmosphericPressure_Pa / 1000.0).ToString(nf);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        FlowsheetObject.ShowMessage("Error retrieving current weather: " + ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError);
-                    }
-                });
-            };
-
             var weatherpanel = new StackLayout
             {
                 Orientation = Orientation.Horizontal,
-                Items = { lblweather, lbllat, tblat, lbllong, tblong, btngetweather, imgtemp, tbtemp, lbltemp, imgpgauge, tbpgauge, lblpgauge, imgwind, tbwind, lblwind,
+                Items = { lblweather, imgtemp, tbtemp, lbltemp, imgpgauge, tbpgauge, lblpgauge, imgwind, tbwind, lblwind,
                     imghum, tbhum, lblhum, imgsun, tbirr, lblirr },
                 VerticalContentAlignment = VerticalAlignment.Center,
                 Spacing = 4
             };
 
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(weatherpanel));
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = weatherpanel }));
 
             Split2.Panel1 = flowsheetcontrolcontainer;
 
