@@ -14,6 +14,10 @@ Public Class WeatherProvider
         Dim getdata = GetWeather(latitude, longitude)
         getdata.Wait()
 
+        If getdata.Result.results Is Nothing Then
+            Throw New Exception("Unable to get current weather conditions for the specified location.")
+        End If
+
         Dim result = getdata.Result.results(0)
 
         Dim formattedresult As New WeatherData
