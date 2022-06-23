@@ -119,10 +119,8 @@
       <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FileHelpers, Version=3.4.1.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
-      <HintPath>..\packages\FileHelpers.3.4.1\lib\net45\FileHelpers.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+    <Reference Include="FileHelpers, Version=3.5.1.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.3.5.1\lib\net45\FileHelpers.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.68.2.1\lib\net45\SkiaSharp.dll</HintPath>
