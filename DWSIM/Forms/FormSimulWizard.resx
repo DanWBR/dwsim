@@ -153,8 +153,8 @@
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>Sistema de Unidades</value>
   </data>
-  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DataGridViewPP.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
     <value>LinkLabel2</value>
@@ -171,8 +171,8 @@
   <data name="&gt;&gt;Column6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;casno.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
+    <value>ToolStripMenuItem3</value>
   </data>
   <data name="&gt;&gt;txtSearch.Name" xml:space="preserve">
     <value>txtSearch</value>
@@ -201,9 +201,6 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Procurar</value>
   </data>
-  <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 23</value>
-  </data>
   <data name="ComboBox2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -219,8 +216,11 @@
   <data name="&gt;&gt;GroupBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="StepWizardControl1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ComboBox2.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="btnInfoLeft.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -230,9 +230,6 @@
   </data>
   <data name="rbSDN.Text" xml:space="preserve">
     <value>Não sei</value>
-  </data>
-  <data name="LinkLabelPropertyMethods.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Nome</value>
@@ -282,9 +279,6 @@
   <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 278</value>
   </data>
-  <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 343</value>
-  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn2</value>
   </data>
@@ -298,6 +292,9 @@ Clique em "Próximo" para continuar.</value>
   </data>
   <data name="Column11.HeaderText" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 376</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
     <value>WizardPage5</value>
@@ -322,9 +319,6 @@ Clique em "Próximo" para continuar.</value>
   </data>
   <data name="&gt;&gt;cmsAddComps.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbSDN.Name" xml:space="preserve">
-    <value>rbSDN</value>
   </data>
   <data name="DataGridView1.ToolTip" xml:space="preserve">
     <value />
@@ -398,8 +392,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 22</value>
+  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
+    <value>Column9</value>
   </data>
   <data name="&gt;&gt;Column4.Name" xml:space="preserve">
     <value>Column4</value>
@@ -423,8 +417,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;btnCloneUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnCreateNewUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="WizardPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 404</value>
   </data>
   <data name="Column11.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -453,14 +447,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Origem</value>
   </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Unidade</value>
-  </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>WizardPage5</value>
-  </data>
-  <data name="ogc1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
   </data>
   <data name="Label1.ToolTip" xml:space="preserve">
     <value />
@@ -468,11 +456,11 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;txtAdded.Parent" xml:space="preserve">
     <value>WizardPage2</value>
   </data>
-  <data name="WizardPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>715, 404</value>
+  <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
+    <value>Clique aqui para conhecer os métodos e equações utilizadas pelos pacotes para calcular as propriedades dos fluidos.</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;GroupBox12.Parent" xml:space="preserve">
+    <value>WizardPage3</value>
   </data>
   <data name="&gt;&gt;StepWizardControl1.Type" xml:space="preserve">
     <value>AeroWizard.StepWizardControl, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
@@ -482,9 +470,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </data>
   <data name="&gt;&gt;rbSDN.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Column12.MinimumWidth" type="System.Int32, mscorlib">
-    <value>20</value>
   </data>
   <data name="&gt;&gt;StepWizardControl1.Name" xml:space="preserve">
     <value>StepWizardControl1</value>
@@ -501,8 +486,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="PanelSolids.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
-  <data name="&gt;&gt;btnCreateNewUnits.Name" xml:space="preserve">
-    <value>btnCreateNewUnits</value>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
   </data>
   <data name="StepWizardControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -516,8 +501,14 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="ToolStripMenuItem4.Text" xml:space="preserve">
     <value>Criar a Partir de Curvas de Destilação de Petróleo</value>
   </data>
+  <data name="StepWizardControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;StepWizardControl1.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 326</value>
   </data>
   <data name="btnInfoLeft.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -541,9 +532,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
     <value>0</value>
   </data>
   <data name="btnCloneUnits.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Column8.Visible" type="System.Boolean, mscorlib">
@@ -572,9 +560,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </data>
   <data name="Column12.ToolTipText" xml:space="preserve">
     <value>Configure</value>
-  </data>
-  <data name="StepWizardControl1.NextButtonText" xml:space="preserve">
-    <value>&amp;Próximo &gt;</value>
   </data>
   <data name="ComboBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 23</value>
@@ -645,9 +630,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Button8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="&gt;&gt;rbSDN.Parent" xml:space="preserve">
-    <value>PanelSolids</value>
-  </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
@@ -677,9 +659,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </data>
   <data name="&gt;&gt;DataGridViewPP.Parent" xml:space="preserve">
     <value>GroupBox6</value>
-  </data>
-  <data name="dgvpp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
     <value>619, 15</value>
@@ -714,9 +693,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="btnCreateNewUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>427, 58</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 15</value>
-  </data>
   <data name="&gt;&gt;Column18.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -741,11 +717,17 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="WizardPage1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormSimulWizard</value>
+  </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>WizardPage3</value>
   </data>
   <data name="&gt;&gt;colAdd.Name" xml:space="preserve">
     <value>colAdd</value>
+  </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;txtAdded.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -771,6 +753,12 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>540, 15</value>
   </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;GroupBox12.Name" xml:space="preserve">
+    <value>GroupBox12</value>
+  </data>
   <data name="&gt;&gt;dgvpp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -789,11 +777,11 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 376</value>
+  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
-    <value>Column9</value>
+  <data name="&gt;&gt;ToolStripMenuItem4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox12.Location" type="System.Drawing.Point, System.Drawing">
     <value>354, 42</value>
@@ -831,6 +819,12 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;rbSYes.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FormConfigWizard</value>
+  </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Column12.HeaderText" xml:space="preserve">
     <value />
   </data>
@@ -842,6 +836,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </data>
   <data name="txtAdded.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
+  </data>
+  <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 25</value>
   </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introdução</value>
@@ -855,8 +852,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Column10.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;GroupBox12.Parent" xml:space="preserve">
-    <value>WizardPage3</value>
+  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -867,11 +864,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Column6.Name" xml:space="preserve">
     <value>Column6</value>
   </data>
-  <data name="&gt;&gt;rbSNo.Name" xml:space="preserve">
-    <value>rbSNo</value>
-  </data>
-  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
-    <value>ToolTip1</value>
+  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ComboBox2.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -891,17 +885,20 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 348</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
-    <value>ToolStripMenuItem3</value>
+  <data name="rbSYes.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnCreateNewUnits.Parent" xml:space="preserve">
+    <value>WizardPage5</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="&gt;&gt;Column12.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -924,9 +921,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>WizardPage2</value>
   </data>
-  <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
-    <value>Clique aqui para conhecer os métodos e equações utilizadas pelos pacotes para calcular as propriedades dos fluidos.</value>
-  </data>
   <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 356</value>
   </data>
@@ -939,9 +933,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Column18.Name" xml:space="preserve">
     <value>Column18</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -951,17 +942,14 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>WizardPage2</value>
   </data>
+  <data name="&gt;&gt;casno.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="rbSNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormSimulWizard</value>
-  </data>
-  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Column12.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Description</value>
@@ -975,6 +963,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;DataGridViewPP.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ImportFromThermoChemicalsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -983,6 +974,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </data>
   <data name="rbSNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>234, 3</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1005,9 +999,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;DataGridViewPP.Name" xml:space="preserve">
     <value>DataGridViewPP</value>
   </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Fechar e ir para a Janela de Configuração da Simulação</value>
-  </data>
   <data name="&gt;&gt;GroupBox12.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1023,8 +1014,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 250</value>
   </data>
-  <data name="&gt;&gt;PanelSolids.Parent" xml:space="preserve">
-    <value>WizardPage3</value>
+  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 22</value>
   </data>
   <data name="txtAdded.Location" type="System.Drawing.Point, System.Drawing">
     <value>161, 372</value>
@@ -1044,11 +1035,11 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="btnInfoLeft.Text" xml:space="preserve">
     <value>Ver Componente Selecionado</value>
   </data>
-  <data name="StepWizardControl1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnCreateNewUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1059,17 +1050,20 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Button4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 25</value>
+  <data name="&gt;&gt;rbSDN.Parent" xml:space="preserve">
+    <value>PanelSolids</value>
   </data>
   <data name="&gt;&gt;btnInfoLeft.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Fechar e ir para a Janela de Configuração da Simulação</value>
   </data>
-  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 326</value>
+  <data name="colAdd.HeaderText" xml:space="preserve">
+    <value>Adicionado</value>
+  </data>
+  <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>516, 343</value>
   </data>
   <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1092,8 +1086,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="DataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
     <value>92</value>
   </data>
-  <data name="StepWizardControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;btnCreateNewUnits.Name" xml:space="preserve">
+    <value>btnCreateNewUnits</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Selecione os componentes que deseja adicionar à simulação. Utilize a caixa de texto para procurar e selecionar um componente na lista. Clique em "Próximo" para continuar.</value>
@@ -1134,8 +1128,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="colAdd.HeaderText" xml:space="preserve">
-    <value>Adicionado</value>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Pacote de Propriedades</value>
@@ -1146,14 +1140,11 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;GroupBox12.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btnCloneUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>346, 58</value>
+  <data name="&gt;&gt;rbSDN.Name" xml:space="preserve">
+    <value>rbSDN</value>
   </data>
-  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
-    <value>Label4</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>FormConfigWizard</value>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Unidade</value>
   </data>
   <data name="&gt;&gt;Column11.Name" xml:space="preserve">
     <value>Column11</value>
@@ -1191,8 +1182,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;rbSNo.Name" xml:space="preserve">
+    <value>rbSNo</value>
   </data>
   <data name="Column18.HeaderText" xml:space="preserve">
     <value>ID</value>
@@ -1218,11 +1209,14 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
     <value>ToolStripMenuItem2</value>
   </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="btnCreateNewUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>679, 50</value>
@@ -1254,8 +1248,14 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;StepWizardControl1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;LinkLabelPropertyMethods.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1278,8 +1278,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;LinkLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ComboBox2.ItemHeight" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 15</value>
   </data>
   <data name="Label8.ToolTip" xml:space="preserve">
     <value />
@@ -1293,20 +1293,20 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="Label7.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column8.HeaderText" xml:space="preserve">
     <value>Tipo</value>
   </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Name</value>
+  <data name="btnCloneUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>346, 58</value>
   </data>
   <data name="GroupBox12.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="DataGridViewPP.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="LinkLabelPropertyMethods.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1314,8 +1314,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rbSYes.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 23</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
@@ -1326,8 +1326,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox12.Name" xml:space="preserve">
-    <value>GroupBox12</value>
+  <data name="StepWizardControl1.NextButtonText" xml:space="preserve">
+    <value>&amp;Próximo &gt;</value>
   </data>
   <data name="rbSNo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1335,14 +1335,14 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>305, 22</value>
   </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ogc1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
   <data name="dgvpp.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;PanelSolids.Parent" xml:space="preserve">
+    <value>WizardPage3</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1353,8 +1353,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;LinkLabelPropertyMethods.Parent" xml:space="preserve">
     <value>WizardPage3</value>
   </data>
-  <data name="&gt;&gt;btnCreateNewUnits.Parent" xml:space="preserve">
-    <value>WizardPage5</value>
+  <data name="dgvpp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1380,8 +1380,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
   </data>
   <data name="&gt;&gt;btnCloneUnits.Parent" xml:space="preserve">
     <value>WizardPage5</value>
@@ -1389,8 +1389,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="LinkLabelPropertyMethods.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;rbSYes.Name" xml:space="preserve">
     <value>rbSYes</value>
@@ -1404,8 +1404,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;rbSYes.Parent" xml:space="preserve">
     <value>PanelSolids</value>
   </data>
-  <data name="&gt;&gt;LinkLabelPropertyMethods.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
+    <value>ToolTip1</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1546,6 +1546,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1557,12 +1560,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>58</value>
-  </metadata>
-  <metadata name="Column18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
   </metadata>
   <metadata name="Column11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1585,6 +1582,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <metadata name="colAdd.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="Column10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1603,7 +1603,7 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1615,7 +1615,7 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>
