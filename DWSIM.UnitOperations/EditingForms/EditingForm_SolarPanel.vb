@@ -107,7 +107,7 @@ Public Class EditingForm_SolarPanel
 
     Private Sub chkUseGlobalIrr_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseGlobalIrr.CheckedChanged
         If Loaded Then
-            tbSolarIrr.Enabled = Not chkUseGlobalIrr.Checked
+            SimObject.UseUserDefinedWeather = Not chkUseGlobalIrr.Checked
         End If
     End Sub
 
