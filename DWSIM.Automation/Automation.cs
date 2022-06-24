@@ -329,6 +329,17 @@ namespace DWSIM.Automation
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
+        public List<Exception> CalculateFlowsheet4(IFlowsheet flowsheet)
+        {
+            Settings.CalculatorActivated = true;
+            Settings.SolverBreakOnException = true;
+            Settings.SolverMode = 1;
+            Settings.SolverTimeoutSeconds = 3600;
+            Settings.EnableGPUProcessing = false;
+            Settings.EnableParallelProcessing = false;
+            return ((Flowsheet2)flowsheet).SolveFlowsheet2();
+        }
+
         public void SaveFlowsheet2(IFlowsheet flowsheet, string filepath)
         {
             SaveFlowsheet(flowsheet, filepath, true);
