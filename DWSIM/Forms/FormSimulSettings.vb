@@ -45,6 +45,7 @@ Public Class FormSimulSettings
     Private prevcol As Integer = 1
 
     Private CompoundList As List(Of String)
+    Private Indexes As Dictionary(Of String, Integer)
 
     Dim vdPP, vdSR As MessageBox()
 
@@ -142,14 +143,25 @@ Public Class FormSimulSettings
 
             txtSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
             CompoundList = New List(Of String)()
+            Indexes = New Dictionary(Of String, Integer)
             ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
                 CompoundList.Add(comp.Name)
+                CompoundList.Add(comp.CAS_Number)
+                CompoundList.Add(comp.Formula)
+                If Not Indexes.ContainsKey(comp.Name) Then Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.CAS_Number) Then Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
             For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
                 CompoundList.Add(comp.Name)
+                CompoundList.Add(comp.CAS_Number)
+                CompoundList.Add(comp.Formula)
+                If Not Indexes.ContainsKey(comp.Name) Then Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.CAS_Number) Then Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
             txtSearch.AutoCompleteCustomSource.AddRange(CompoundList.ToArray())
 
@@ -1034,26 +1046,37 @@ Public Class FormSimulSettings
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
-        ogc1.ClearSelection()
+        Try
 
-        Dim lowered = CompoundList.Select(Function(c) c.ToLower).ToList()
+            ogc1.ClearSelection()
 
-        If lowered.Contains(txtSearch.Text.ToLower()) Then
+            Dim lowered = CompoundList.Select(Function(c) c.ToLower).ToList()
 
-            Dim index = lowered.IndexOf(txtSearch.Text.ToLower())
+            If lowered.Contains(txtSearch.Text.ToLower()) Then
 
-            ogc1.Rows.Item(index).Selected = True
+                Dim index = lowered.IndexOf(txtSearch.Text.ToLower())
+                Dim index2 = Indexes(CompoundList(index))
 
-            If ogc1.SelectedRows.Count > 0 Then
-                ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+                ogc1.Rows.Item(index2).Selected = True
+
+                If ogc1.SelectedRows.Count > 0 Then
+                    ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+                End If
+
+            Else
+
+                ogc1.FirstDisplayedScrollingRowIndex = 0
+                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
             End If
 
-        Else
+        Catch ex As Exception
 
             ogc1.FirstDisplayedScrollingRowIndex = 0
             ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
 
-        End If
+        End Try
+
 
     End Sub
 
