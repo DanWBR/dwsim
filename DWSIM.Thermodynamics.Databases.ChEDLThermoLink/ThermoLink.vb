@@ -8,14 +8,28 @@ Public Class ChEDLThermoParser
 
         GlobalSettings.Settings.ShutdownPythonEnvironment()
 
-        Dim ppath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "main", "python-3.9.4.amd64")
+        If GlobalSettings.Settings.GetEnvironment() = 64 Then
 
-        If Not Directory.Exists(ppath) Then
-            Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+            Dim ppath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "main", "python-3.9.4.amd64")
+
+            If Not Directory.Exists(ppath) Then
+                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+            End If
+
+            GlobalSettings.Settings.InitializePythonEnvironment(ppath)
+
+        Else
+
+            Dim ppath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs32", "main", "python-3.8.5")
+
+            If Not Directory.Exists(ppath) Then
+                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
+            End If
+
+
+            GlobalSettings.Settings.InitializePythonEnvironment(ppath)
+
         End If
-
-
-        GlobalSettings.Settings.InitializePythonEnvironment(ppath)
 
         Dim sList As New List(Of String)
 

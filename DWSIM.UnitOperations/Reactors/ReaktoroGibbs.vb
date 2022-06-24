@@ -140,6 +140,10 @@ Namespace Reactors
 
                 DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
 
+                If Settings.GetEnvironment() = 32 Then
+                    Throw New Exception("Reaktoro is not supported on 32-bit environments.")
+                End If
+
                 ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
 
                 If Not Directory.Exists(ReaktoroPath) Then

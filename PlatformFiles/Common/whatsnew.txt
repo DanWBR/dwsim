@@ -1,12 +1,7 @@
-Version 8.0.2/8.0.0
+Version 8.0.3
 
-- New Unit Operations:  PEM Fuel Cell, Water Electrolyzer, Wind Turbine, Hydroelectric Turbine,
-  Solar Panel, Gibbs Reactor (Reaktoro), Air Cooler, Energy Stream Mixer
-- New "Don't Calculate" Phase Equilibria Option
-- Import Compounds from thermo/chemicals python packages
-- New Quick Create Solid Compound tool
-- New Flowsheet Weather component can provide ambient temperature, pressure, wind speed, 
-  humidity and solar insulation data for Unit Operations
-- Allow user to override flowsheet icons for Component/Compound and Solids Separator
-- Pipe Segment UO can now use Flowsheet-provided weather information
-- Bug fixes
+- Fixed an issue with FOSSEE flowsheets loading
+- Fixed an issue with PV Flash (#333)
+- Fixed an issue with compound search on Classic UI (#328)
+- Fixed an issue with Master Property Table (#337)
+- Fixed an issue with single-compound flash and forced solids

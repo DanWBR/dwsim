@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.0.2
+Version 8.0.3
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.0.3
+
+- Fixed an issue with FOSSEE flowsheets loading
+- Fixed an issue with PV Flash (#333)
+- Fixed an issue with compound search on Classic UI (#328)
+- Fixed an issue with Master Property Table (#337)
+- Fixed an issue with single-compound flash and forced solids
 
 Version 8.0.2
 

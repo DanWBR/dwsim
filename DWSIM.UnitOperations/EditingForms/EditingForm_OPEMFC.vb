@@ -99,14 +99,18 @@ Public Class EditingForm_OPEMFC
 
             'output parameters
 
-            If .Calculated Then
+            gridOutput.Rows.Clear()
 
-                gridOutput.Rows.Clear()
+            If .Calculated Then
                 For Each item In .OutputParameters.Values
                     gridOutput.Rows.Add(New Object() {item.Name, item.Description, item.Value.ToString(nf), item.Units})
                 Next
 
             End If
+
+            Button2.Enabled = .Calculated
+            Button3.Enabled = .Calculated
+            Button4.Enabled = .Calculated
 
         End With
 
