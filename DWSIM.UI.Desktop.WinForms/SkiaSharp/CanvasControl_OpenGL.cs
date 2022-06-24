@@ -80,6 +80,9 @@ namespace DWSIM.UI.Desktop.WinForms
 
             //base.OnPaint(e);
 
+            if (Width == 0) return;
+            if (Height == 0) return;
+
             // create the contexts if not done already
             if (grContext == null)
             {
