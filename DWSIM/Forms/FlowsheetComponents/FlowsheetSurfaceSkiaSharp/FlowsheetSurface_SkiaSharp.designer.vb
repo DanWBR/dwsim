@@ -32,7 +32,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.btnUp = New System.Windows.Forms.Button()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnRight = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PanelWeather = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.tbAtmPress = New System.Windows.Forms.TextBox()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
@@ -194,7 +194,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.SplitContainerHorizontal.Panel1.SuspendLayout()
         Me.SplitContainerHorizontal.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        Me.PanelWeather.SuspendLayout()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -270,7 +270,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.SplitContainerHorizontal.Panel1, "SplitContainerHorizontal.Panel1")
         Me.SplitContainerHorizontal.Panel1.Controls.Add(Me.TableLayoutPanel1)
-        Me.SplitContainerHorizontal.Panel1.Controls.Add(Me.Panel1)
+        Me.SplitContainerHorizontal.Panel1.Controls.Add(Me.PanelWeather)
         Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal.Panel1, resources.GetString("SplitContainerHorizontal.Panel1.ToolTip"))
         '
         'SplitContainerHorizontal.Panel2
@@ -325,31 +325,31 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolTip1.SetToolTip(Me.btnRight, resources.GetString("btnRight.ToolTip"))
         Me.btnRight.UseVisualStyleBackColor = True
         '
-        'Panel1
+        'PanelWeather
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.Label6)
-        Me.Panel1.Controls.Add(Me.tbAtmPress)
-        Me.Panel1.Controls.Add(Me.PictureBox6)
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.tbAmbientTemperature)
-        Me.Panel1.Controls.Add(Me.PictureBox5)
-        Me.Panel1.Controls.Add(Me.btnGetLocation)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.tbCurrentLocation)
-        Me.Panel1.Controls.Add(Me.btnGetWeather)
-        Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.tbSolarIrradiation)
-        Me.Panel1.Controls.Add(Me.PictureBox4)
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.tbHumidity)
-        Me.Panel1.Controls.Add(Me.PictureBox3)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.tbWindSpeed)
-        Me.Panel1.Controls.Add(Me.PictureBox2)
-        Me.Panel1.Name = "Panel1"
-        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        resources.ApplyResources(Me.PanelWeather, "PanelWeather")
+        Me.PanelWeather.BackColor = System.Drawing.Color.White
+        Me.PanelWeather.Controls.Add(Me.Label6)
+        Me.PanelWeather.Controls.Add(Me.tbAtmPress)
+        Me.PanelWeather.Controls.Add(Me.PictureBox6)
+        Me.PanelWeather.Controls.Add(Me.Label5)
+        Me.PanelWeather.Controls.Add(Me.tbAmbientTemperature)
+        Me.PanelWeather.Controls.Add(Me.PictureBox5)
+        Me.PanelWeather.Controls.Add(Me.btnGetLocation)
+        Me.PanelWeather.Controls.Add(Me.Label4)
+        Me.PanelWeather.Controls.Add(Me.tbCurrentLocation)
+        Me.PanelWeather.Controls.Add(Me.btnGetWeather)
+        Me.PanelWeather.Controls.Add(Me.Label3)
+        Me.PanelWeather.Controls.Add(Me.tbSolarIrradiation)
+        Me.PanelWeather.Controls.Add(Me.PictureBox4)
+        Me.PanelWeather.Controls.Add(Me.Label2)
+        Me.PanelWeather.Controls.Add(Me.tbHumidity)
+        Me.PanelWeather.Controls.Add(Me.PictureBox3)
+        Me.PanelWeather.Controls.Add(Me.Label1)
+        Me.PanelWeather.Controls.Add(Me.tbWindSpeed)
+        Me.PanelWeather.Controls.Add(Me.PictureBox2)
+        Me.PanelWeather.Name = "PanelWeather"
+        Me.ToolTip1.SetToolTip(Me.PanelWeather, resources.GetString("PanelWeather.ToolTip"))
         '
         'Label6
         '
@@ -1298,8 +1298,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         CType(Me.SplitContainerHorizontal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerHorizontal.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        Me.PanelWeather.ResumeLayout(False)
+        Me.PanelWeather.PerformLayout()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1456,7 +1456,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tss2 As ToolStripSeparator
     Friend WithEvents tsmiLiveFlow As ToolStripButton
     Friend WithEvents tss1 As ToolStripSeparator
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents tbHumidity As TextBox
     Friend WithEvents PictureBox3 As PictureBox
@@ -1477,4 +1476,5 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents Label6 As Label
     Friend WithEvents tbAtmPress As TextBox
     Friend WithEvents PictureBox6 As PictureBox
+    Public WithEvents PanelWeather As Panel
 End Class

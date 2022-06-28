@@ -191,6 +191,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         ReadWeather(Flowsheet.Options.CurrentWeather)
 
+        PanelWeather.Visible = My.Settings.WeatherPanelVisible
+
         Loaded = True
 
     End Sub

@@ -4010,6 +4010,11 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub ToggleWeatherPanelVisibilityToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToggleWeatherPanelVisibilityToolStripMenuItem.Click
+        FormSurface.PanelWeather.Visible = Not FormSurface.PanelWeather.Visible
+        My.Settings.WeatherPanelVisible = FormSurface.PanelWeather.Visible
+    End Sub
+
     Public Async Sub DisplayHTML(title As String, htmlcontent As String)
 
         Dim fh As New FormHTMLView()

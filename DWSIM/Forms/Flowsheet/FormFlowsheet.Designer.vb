@@ -124,6 +124,7 @@ Partial Class FormFlowsheet
         Me.dckPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
+        Me.ToggleWeatherPanelVisibilityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -542,7 +543,7 @@ Partial Class FormFlowsheet
         'ShowTSMI
         '
         resources.ApplyResources(Me.ShowTSMI, "ShowTSMI")
-        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
+        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToggleWeatherPanelVisibilityToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ShowTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ShowTSMI.MergeIndex = 9
         Me.ShowTSMI.Name = "ShowTSMI"
@@ -814,6 +815,11 @@ Partial Class FormFlowsheet
         Me.TSTable.IsDrawn = True
         Me.TSTable.Name = "TSTable"
         '
+        'ToggleWeatherPanelVisibilityToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ToggleWeatherPanelVisibilityToolStripMenuItem, "ToggleWeatherPanelVisibilityToolStripMenuItem")
+        Me.ToggleWeatherPanelVisibilityToolStripMenuItem.Name = "ToggleWeatherPanelVisibilityToolStripMenuItem"
+        '
         'FormFlowsheet
         '
         resources.ApplyResources(Me, "$this")
@@ -935,4 +941,5 @@ Partial Class FormFlowsheet
     Friend WithEvents OptimumTesterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SumarioToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CriadorDeComponentesSólidosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToggleWeatherPanelVisibilityToolStripMenuItem As ToolStripMenuItem
 End Class
