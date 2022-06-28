@@ -2602,6 +2602,7 @@ Namespace UnitOperations
         Public Property UseBroydenAcceleration As Boolean = True
 
         Public Sub CheckConnPos()
+
             Dim idx As Integer
             For Each strinfo As StreamInformation In Me.MaterialStreams.Values
                 Try
@@ -2643,6 +2644,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Catch ex As Exception
+                    strinfo.StreamID = ""
                 End Try
             Next
 
@@ -2672,6 +2674,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Catch ex As Exception
+                    strinfo.StreamID = ""
                 End Try
             Next
 
@@ -4234,8 +4237,6 @@ Namespace UnitOperations
             Dim rmok As Boolean = False
             Dim cmok As Boolean = False
             Dim cmvok As Boolean = False
-            Dim reok As Boolean = False
-            Dim ceok As Boolean = False
 
             'check existence/status of all specified material streams
 
@@ -4245,11 +4246,11 @@ Namespace UnitOperations
                 Else
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Feed
-                            'If Not FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Calculated Then
-                            '    Throw New Exception(FlowSheet.GetTranslatedString("DCStreamNotCalculatedException"))
-                            'Else
+                            If sinf.AssociatedStage = "" Then
+                                Dim fs = FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Tag
+                                Throw New Exception(String.Format("Please set the Column Stage for Feed Stream '{0}'.", fs))
+                            End If
                             feedok = True
-                            'End If
                         Case StreamInformation.Behavior.Distillate
                             cmok = True
                         Case StreamInformation.Behavior.OverheadVapor
@@ -4260,25 +4261,14 @@ Namespace UnitOperations
                 End If
             Next
 
-            'For Each sinf In Me.EnergyStreams.Values
-            '    If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
-            '        Throw New Exception(FlowSheet.GetTranslatedString("DCStreamMissingException"))
-            '    Else
-            '        Select Case sinf.StreamBehavior
-            '            Case StreamInformation.Behavior.InterExchanger
-
-            '            Case StreamInformation.Behavior.Distillate
-            '                ceok = True
-            '            Case StreamInformation.Behavior.BottomsLiquid
-            '                reok = True
-            '        End Select
-            '    End If
-            'Next
-
             'check if all connections were done correctly
 
             Select Case Me.ColumnType
                 Case ColType.DistillationColumn
+                    Dim dcol = DirectCast(Me, DistillationColumn)
+                    If dcol.ReboiledAbsorber Then
+                        cmok = True
+                    End If
                     Select Case Me.CondenserType
                         Case condtype.Total_Condenser
                             If Not feedok Or Not cmok Or Not rmok Then
