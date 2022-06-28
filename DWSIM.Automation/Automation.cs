@@ -268,6 +268,24 @@ namespace DWSIM.Automation
             Settings.AutomationMode = true;
             Settings.InspectorEnabled = false;
             Settings.CultureInfo = "en";
+            GlobalSettings.Settings.AutomationMode = true;
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.AssemblyResolve += new ResolveEventHandler(LoadAssembly);
+            FlowsheetBase.FlowsheetBase.AddPropPacks();
+        }
+
+        static Assembly LoadAssembly(object sender, ResolveEventArgs args)
+        {
+            string assemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), new AssemblyName(args.Name).Name + ".dll");
+            if (!File.Exists(assemblyPath))
+            {
+                return null;
+            }
+            else
+            {
+                Assembly assembly = Assembly.LoadFrom(assemblyPath);
+                return assembly;
+            }
         }
 
         public IFlowsheet LoadFlowsheet(string filepath, Action UIUpdHandler = null)
