@@ -231,8 +231,10 @@ Namespace UnitOperations
                         Nf(j) = N0(j) + waterr
                     ElseIf names(j) = "Hydrogen" Then
                         Nf(j) = N0(j) - h2r
+                        If (Nf(j) < 0.0) Then Throw New Exception("Negative Hydrogen molar flow calculated. Please check inputs.")
                     ElseIf names(j) = "Oxygen" Then
                         Nf(j) = N0(j) - o2r
+                        If (Nf(j) < 0.0) Then Throw New Exception("Negative Oxygen molar flow calculated. Please check inputs.")
                     End If
                 Next
 
