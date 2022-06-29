@@ -3316,7 +3316,7 @@ redirect2:                  IObj?.SetCurrent()
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n) As Double
+            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n), VKij3(n, n) As Double
             Dim Vm2(Vz.Length - 1 - j), VPc2(Vz.Length - 1 - j), VTc2(Vz.Length - 1 - j), VVc2(Vz.Length - 1 - j), Vw2(Vz.Length - 1 - j), VKij2(Vz.Length - 1 - j, Vz.Length - 1 - j)
 
             VTc = Me.RET_VTC()
@@ -3352,22 +3352,22 @@ redirect2:                  IObj?.SetCurrent()
 
             With options
                 If Not .BubbleUseCustomParameters Then
-                    .BubbleCurveDeltaP = 101325
-                    .BubbleCurveDeltaT = 5
+                    .BubbleCurveDeltaP = 50000
+                    .BubbleCurveDeltaT = 2.5
                     .BubbleCurveInitialPressure = 0.0#
                     .BubbleCurveInitialTemperature = RET_VTF.Min
                     .BubbleCurveInitialFlash = "TVF"
-                    .BubbleCurveMaximumPoints = 100
+                    .BubbleCurveMaximumPoints = 300
                     .BubbleCurveMaximumTemperature = RET_VTC.Max * 1.2
                     .CheckLiquidInstability = False
                 End If
                 If Not .DewUseCustomParameters Then
-                    .DewCurveDeltaP = 2 * 101325
-                    .DewCurveDeltaT = 5
+                    .DewCurveDeltaP = 50000
+                    .DewCurveDeltaT = 2.5
                     .DewCurveInitialPressure = 101325
                     .DewCurveInitialTemperature = 0.0#
                     .DewCurveInitialFlash = "PVF"
-                    .DewCurveMaximumPoints = 100
+                    .DewCurveMaximumPoints = 300
                     .DewCurveMaximumTemperature = RET_VTC.Max * 1.5
                 End If
             End With
@@ -3385,6 +3385,7 @@ redirect2:                  IObj?.SetCurrent()
             If TypeOf Me Is PengRobinsonPropertyPackage Then
                 If n > 0 Then
                     CP = New Utilities.TCP.Methods().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                    If CP.Count = 0 Then CP = New Utilities.TCP.Methods().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij3)
                     If CP.Count > 0 Then
                         Dim cp0 = CP(0)
                         TCR = cp0(0)
@@ -3406,6 +3407,7 @@ redirect2:                  IObj?.SetCurrent()
             ElseIf TypeOf Me Is SRKPropertyPackage Then
                 If n > 0 Then
                     CP = New Utilities.TCP.Methods_SRK().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                    If CP.Count = 0 Then CP = New Utilities.TCP.Methods_SRK().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij3)
                     If CP.Count > 0 Then
                         Dim cp0 = CP(0)
                         TCR = cp0(0)
@@ -3582,7 +3584,7 @@ redirect2:                  IObj?.SetCurrent()
 
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.04 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
 
                     If beta < 20 Then
                         If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
@@ -3682,27 +3684,50 @@ redirect2:                  IObj?.SetCurrent()
                         End Try
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
-
-                    If Abs(beta) < 2 Then
-                        If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
-                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T - options.DewCurveDeltaT * 0.1
-                            Else
-                                T = T - options.DewCurveDeltaT
-                            End If
-                        Else
-                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T + options.DewCurveDeltaT * 0.1
-                            Else
-                                T = T + options.DewCurveDeltaT
-                            End If
+                    If PO.Count > 50 Then
+                        Dim p1 As Double = PO(PO.Count - 1)
+                        Dim p2 As Double = PO(PO.Count - 2)
+                        Dim p3 As Double = PO(PO.Count - 3)
+                        Dim t1 As Double = TVD(TVD.Count - 1)
+                        Dim t2 As Double = TVD(TVD.Count - 2)
+                        Dim t3 As Double = TVD(TVD.Count - 3)
+                        Dim d1 = ((p2 - p1) ^ 2 + (t2 - t1) ^ 2) ^ 0.5
+                        Dim d2 = ((p3 - p2) ^ 2 + (t3 - t2) ^ 2) ^ 0.5
+                        If d2 > d1 * 20 And d1 > 0.0 Then
+                            PO.RemoveAt(PO.Count - 1)
+                            TVD.RemoveAt(TVD.Count - 1)
+                            HO.RemoveAt(HO.Count - 1)
+                            SO.RemoveAt(SO.Count - 1)
+                            VO.RemoveAt(VO.Count - 1)
+                            Exit Do
                         End If
+                    End If
+
+                    If stopAtCP Then If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 50000 Then Exit Do
+
+                    If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                        T = T - options.DewCurveDeltaT * 0.1
                     Else
-                        If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
-                            P = P + options.DewCurveDeltaP * 0.25
+                        If Abs(beta) < 2 Then
+                            If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                    T = T - options.DewCurveDeltaT * 0.1
+                                Else
+                                    T = T - options.DewCurveDeltaT
+                                End If
+                            Else
+                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                    T = T + options.DewCurveDeltaT * 0.1
+                                Else
+                                    T = T + options.DewCurveDeltaT
+                                End If
+                            End If
                         Else
-                            P = P + options.DewCurveDeltaP
+                            If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
+                                P = P + options.DewCurveDeltaP * 0.25
+                            Else
+                                P = P + options.DewCurveDeltaP
+                            End If
                         End If
                     End If
 

@@ -112,12 +112,12 @@ Public Class FrmCritpt
 
             Dim pc As New ArrayList, tmp As Object
 
-            If Frm.Options.SelectedPropertyPackage.ComponentName.Contains("Peng-Robinson (PR)") Then
+            If mat.PropertyPackage.ComponentName.Contains("Peng-Robinson (PR)") Then
 
                 Me.cp = New Utilities.TCP.Methods
                 pc = Me.cp.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
 
-            ElseIf Frm.Options.SelectedPropertyPackage.ComponentName.Contains("SRK") Then
+            ElseIf mat.PropertyPackage.ComponentName.Contains("SRK") Then
 
                 Me.cps = New Utilities.TCP.Methods_SRK
                 pc = Me.cps.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)

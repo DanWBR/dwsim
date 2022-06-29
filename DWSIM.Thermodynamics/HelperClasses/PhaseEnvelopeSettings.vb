@@ -3,9 +3,9 @@
 
         Implements Interfaces.IPhaseEnvelopeOptions, ICloneable
 
-        Public Property BubbleCurveDeltaP As Double = 101325.0 Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveDeltaP
+        Public Property BubbleCurveDeltaP As Double = 50000.0 Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveDeltaP
 
-        Public Property BubbleCurveDeltaT As Double = 5.0 Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveDeltaT
+        Public Property BubbleCurveDeltaT As Double = 2.5 Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveDeltaT
 
         Public Property BubbleCurveInitialFlash As String = "PVF" Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveInitialFlash
 
@@ -17,9 +17,9 @@
 
         Public Property CheckLiquidInstability As Boolean Implements Interfaces.IPhaseEnvelopeOptions.CheckLiquidInstability
 
-        Public Property DewCurveDeltaP As Double = 101325.0 Implements Interfaces.IPhaseEnvelopeOptions.DewCurveDeltaP
+        Public Property DewCurveDeltaP As Double = 50000.0 Implements Interfaces.IPhaseEnvelopeOptions.DewCurveDeltaP
 
-        Public Property DewCurveDeltaT As Double = 5.0 Implements Interfaces.IPhaseEnvelopeOptions.DewCurveDeltaT
+        Public Property DewCurveDeltaT As Double = 2.5 Implements Interfaces.IPhaseEnvelopeOptions.DewCurveDeltaT
 
         Public Property DewCurveInitialFlash As String = "PVF" Implements Interfaces.IPhaseEnvelopeOptions.DewCurveInitialFlash
 

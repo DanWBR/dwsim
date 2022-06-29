@@ -208,8 +208,8 @@ Final2:
 
             n = Vz.Length - 1
 
-            Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n)
-            Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n)
+            Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n) As Double
+            Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n) As Double
 
             'estimar temperatura e pressao criticas iniciais
 
@@ -390,15 +390,15 @@ Final2:
 
             Dim Dn(n)
 
-            Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n)
-            Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n)
+            Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n) As Double
+            Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n) As Double
 
             Tc_inf = MathEx.Common.Min(VTc) * 0.5
             Tc_sup = MathEx.Common.Max(VTc) * 1.5
 
             Dim fT, fT_inf, nsub, delta_Tc As Double
 
-            nsub = 10
+            nsub = 20
 
             delta_Tc = (Tc_sup - Tc_inf) / nsub
 
