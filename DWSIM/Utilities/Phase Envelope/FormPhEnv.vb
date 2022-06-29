@@ -982,7 +982,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             End Select
 
             With Me.GraphControl.GraphPane.Title
-                .Text = Me.ComboBox1.SelectedItem & " (PP: " & Me.Frm.Options.SelectedPropertyPackage.ComponentName & ")"
+                .Text = Me.ComboBox1.SelectedItem & " (" + mat.PropertyPackage.ComponentName & ")"
                 .FontSpec.Size = 14
             End With
 
