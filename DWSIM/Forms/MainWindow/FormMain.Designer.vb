@@ -55,7 +55,6 @@ Partial Class FormMain
         Me.DatabaseManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroCAPEOPENToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DownloadSupplementarySoftwareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReaktoroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NNUOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PNUOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CapitalCostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -274,14 +273,9 @@ Partial Class FormMain
         'DownloadSupplementarySoftwareToolStripMenuItem
         '
         Me.DownloadSupplementarySoftwareToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReaktoroToolStripMenuItem, Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem, Me.PsycrometrySimulationTemplateToolStripMenuItem})
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem, Me.PsycrometrySimulationTemplateToolStripMenuItem})
         Me.DownloadSupplementarySoftwareToolStripMenuItem.Name = "DownloadSupplementarySoftwareToolStripMenuItem"
         resources.ApplyResources(Me.DownloadSupplementarySoftwareToolStripMenuItem, "DownloadSupplementarySoftwareToolStripMenuItem")
-        '
-        'ReaktoroToolStripMenuItem
-        '
-        Me.ReaktoroToolStripMenuItem.Name = "ReaktoroToolStripMenuItem"
-        resources.ApplyResources(Me.ReaktoroToolStripMenuItem, "ReaktoroToolStripMenuItem")
         '
         'NNUOToolStripMenuItem
         '
@@ -905,7 +899,6 @@ Partial Class FormMain
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
     Friend WithEvents tsFolderSeparator As ToolStripSeparator
-    Friend WithEvents ReaktoroToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NNUOToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PNUOToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CapitalCostToolStripMenuItem As ToolStripMenuItem

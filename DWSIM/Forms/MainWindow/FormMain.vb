@@ -4261,10 +4261,6 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub PatronToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        System.Diagnostics.Process.Start("https://patreon.com/dwsim")
-    End Sub
-
     Private Sub PainelDeBoasvindasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PainelDeBoasvindasToolStripMenuItem.Click
         If Me.PainelDeBoasvindasToolStripMenuItem.Checked Then
             Me.WelcomePanel.Visible = True
@@ -4278,10 +4274,6 @@ Label_00CC:
             ' There was an error during the operation.
             Console.WriteLine("Error saving backup file: " & e.Error.Message)
         End If
-    End Sub
-
-    Private Sub ReaktoroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReaktoroToolStripMenuItem.Click
-        Process.Start("https://dwsim.org/wiki/index.php?title=Aqueous_Electrolytes_Property_Package")
     End Sub
 
     Private Sub NNUOToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NNUOToolStripMenuItem.Click
