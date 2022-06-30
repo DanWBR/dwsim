@@ -56,7 +56,7 @@ Public Class FrmCritpt
             Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
             Dim pr As PropertyPackages.PropertyPackage
 
-            pr = Frm.Options.SelectedPropertyPackage
+            pr = mat.PropertyPackage
             pr.CurrentMaterialStream = mat
 
             Dim n As Integer = mat.Phases(0).Compounds.Count - 1
@@ -65,7 +65,7 @@ Public Class FrmCritpt
             Dim comp As BaseClasses.Compound
             Dim i As Integer = 0
             For Each comp In mat.Phases(0).Compounds.Values
-                Vz(i) += comp.MoleFraction.GetValueOrDefault
+                Vz(i) = comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
 
@@ -116,6 +116,23 @@ Public Class FrmCritpt
 
                 Me.cp = New Utilities.TCP.Methods
                 pc = Me.cp.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+
+                'Dim gm As New Utilities.TCP.GenericMethod
+                'Dim pr2 As New PropertyPackages.ThermoPlugs.PR
+
+                'gm.CalcP = Function(T, V, Vzi)
+                '               Return pr2.CalcP(V, T, Vzi, VKij, VTc, Vpc, Vw)
+                '           End Function
+
+                'gm.FugacityTV = Function(T, V, Vzi)
+                '                    Return pr2.CalcLnFugTV(T, V, Vzi, VKij, VTc, Vpc, Vw)
+                '                End Function
+
+                'Dim V0 = 1.3 * 0.08664 * 8.314 * VTc.DivideY(Vpc).MultiplyY(Vz).SumY
+                'Dim T0 = (VTc.MinY() + VTc.MaxY()) / 2
+
+                'Dim pc2 = gm.CriticalPoints(Vz, V0, T0)
+                'Console.WriteLine(pc2)
 
             ElseIf mat.PropertyPackage.ComponentName.Contains("SRK") Then
 

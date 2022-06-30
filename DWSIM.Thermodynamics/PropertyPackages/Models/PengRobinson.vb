@@ -2496,6 +2496,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             P = R * T / (V - bml) - aml / (V * (V + bml))
 
+            P = R * T / (V - bml) - aml / (V ^ 2 + 2 * bml * V - bml ^ 2)
+
             Return P
 
         End Function
