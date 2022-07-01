@@ -22,14 +22,14 @@ Partial Class EditingForm_OPEMFC
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_OPEMFC))
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.gridInput = New System.Windows.Forms.DataGridView()
@@ -38,11 +38,14 @@ Partial Class EditingForm_OPEMFC
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.gridOutput = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -68,9 +71,6 @@ Partial Class EditingForm_OPEMFC
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox3.SuspendLayout()
         CType(Me.gridInput, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -109,8 +109,8 @@ Partial Class EditingForm_OPEMFC
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn3.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn3.HeaderText = "Parameter"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
@@ -118,24 +118,24 @@ Partial Class EditingForm_OPEMFC
         '
         'Column2
         '
-        DataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle42
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column2.HeaderText = "Description"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle43
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn4.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn4.HeaderText = "Value"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle44.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle44
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn5.FillWeight = 30.0!
         Me.DataGridViewTextBoxColumn5.HeaderText = "Units"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
@@ -156,6 +156,26 @@ Partial Class EditingForm_OPEMFC
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Results"
         '
+        'Button4
+        '
+        Me.Button4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button4.Location = New System.Drawing.Point(3, 215)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(473, 23)
+        Me.Button4.TabIndex = 26
+        Me.Button4.Text = "View HTML Report"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button2.Location = New System.Drawing.Point(3, 238)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(473, 23)
+        Me.Button2.TabIndex = 24
+        Me.Button2.Text = "View OPEM Output File"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'gridOutput
         '
         Me.gridOutput.AllowUserToAddRows = False
@@ -174,8 +194,8 @@ Partial Class EditingForm_OPEMFC
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle45
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Parameter"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -183,16 +203,16 @@ Partial Class EditingForm_OPEMFC
         '
         'Column3
         '
-        DataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Control
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle46
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column3.HeaderText = "Description"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle47
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn2.HeaderText = "Value"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -200,12 +220,22 @@ Partial Class EditingForm_OPEMFC
         '
         'Column1
         '
-        DataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle48
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column1.FillWeight = 30.0!
         Me.Column1.HeaderText = "Units"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
+        '
+        'Button3
+        '
+        Me.Button3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button3.Location = New System.Drawing.Point(3, 261)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(473, 23)
+        Me.Button3.TabIndex = 25
+        Me.Button3.Text = "Copy Results to Clipboard (CSV)"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -496,39 +526,10 @@ Partial Class EditingForm_OPEMFC
         Me.Button1.Text = "OPEM Amphlett Model Information"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Button2
-        '
-        Me.Button2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button2.Location = New System.Drawing.Point(3, 238)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(473, 23)
-        Me.Button2.TabIndex = 24
-        Me.Button2.Text = "View OPEM Output File"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button3.Location = New System.Drawing.Point(3, 261)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(473, 23)
-        Me.Button3.TabIndex = 25
-        Me.Button3.Text = "Copy Results to Clipboard (CSV)"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button4.Location = New System.Drawing.Point(3, 215)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(473, 23)
-        Me.Button4.TabIndex = 26
-        Me.Button4.Text = "View HTML Report"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'EditingForm_OPEMFC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(503, 998)
         Me.Controls.Add(Me.Button1)
