@@ -92,8 +92,6 @@ Namespace UnitOperations
 
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(OPEMPath)
 
-                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
-
             End If
 
             Dim msin = GetInletMaterialStream(0)

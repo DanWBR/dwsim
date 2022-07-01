@@ -211,6 +211,7 @@ Public Class Settings
             Try
                 PythonEngine.Shutdown()
             Catch ex As Exception
+                DWSIM.Logging.Logger.LogError("Python Shutdown Error", ex)
             End Try
             PythonInitialized = False
         End If
