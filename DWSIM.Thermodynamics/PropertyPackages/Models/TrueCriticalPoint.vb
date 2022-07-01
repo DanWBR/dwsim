@@ -2035,12 +2035,12 @@ Final2:
     Public Class GenericMethod
 
         ''' <summary>
-        ''' Argument order: T (K), V (mol/m3), molar composition
+        ''' Argument order: T (K), V (m3/mol), molar composition
         ''' </summary>
         Public FugacityTV As Func(Of Double, Double, Double(), Double())
 
         ''' <summary>
-        ''' T (K), V (mol/m3)
+        ''' T (K), V (m3/mol)
         ''' </summary>
         Public CalcP As Func(Of Double, Double, Double(), Double)
 
