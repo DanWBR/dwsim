@@ -1579,6 +1579,32 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public MustOverride Function DW_CalcFugCoeff(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
+        ''' <summary>
+        ''' Calculates fugacity coefficients for the specified composition at the specified conditions.
+        ''' </summary>
+        ''' <param name="Vz">Vector of doubles containing the molar composition of the mixture.</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="V">Volume in m3/mol</param>
+        ''' <returns></returns>
+        Public Overridable Function DW_CalcFugCoeff(Vz As Double(), T As Double, V As Double) As Double()
+
+            Throw New NotImplementedException("Fugacity coefficient calculation with T and V is not implemented by this Property Package.")
+
+        End Function
+
+        ''' <summary>
+        ''' Calculates system pressure for the specified temperature, volume and composition.
+        ''' </summary>
+        ''' <param name="Vz">Vector of doubles containing the molar composition of the mixture.</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="V">Volume in m3/mol</param>
+        ''' <returns></returns>
+        Public Overridable Function DW_CalcP(Vz As Double(), T As Double, V As Double) As Double
+
+            Throw New NotImplementedException("Pressure calculation with T and V is not implemented by this Property Package.")
+
+        End Function
+
         Public MustOverride Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
         Public MustOverride Sub DW_CalcPhaseProps(ByVal Phase As Phase)
