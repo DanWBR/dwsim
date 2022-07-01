@@ -77,7 +77,7 @@ Public Class FrmCritpt
             Loop Until i = n + 1
 
             Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n) As Double
-            Dim Vm2(UBound(Vz) - j), VPc2(UBound(Vz) - j), VTc2(UBound(Vz) - j), VVc2(UBound(Vz) - j), Vw2(UBound(Vz) - j), VKij2(UBound(Vz) - j, UBound(Vz) - j)
+            Dim Vm2(UBound(Vz) - j), VPc2(UBound(Vz) - j), VTc2(UBound(Vz) - j), VVc2(UBound(Vz) - j), Vw2(UBound(Vz) - j), VKij2(UBound(Vz) - j, UBound(Vz) - j) As Double
 
             VTc = pr.RET_VTC()
             Vpc = pr.RET_VPC()
@@ -121,17 +121,24 @@ Public Class FrmCritpt
                 'Dim pr2 As New PropertyPackages.ThermoPlugs.PR
 
                 'gm.CalcP = Function(T, V, Vzi)
-                '               Return pr2.CalcP(V, T, Vzi, VKij, VTc, Vpc, Vw)
+                '               Return pr2.CalcP(V, T, Vzi, VKij2, VTc2, VPc2, Vw2)
                 '           End Function
 
                 'gm.FugacityTV = Function(T, V, Vzi)
-                '                    Return pr2.CalcLnFugTV(T, V, Vzi, VKij, VTc, Vpc, Vw)
+                '                    Return pr2.CalcLnFugTV(T, V, Vzi, VKij2, VTc2, VPc2, Vw2)
                 '                End Function
 
-                'Dim V0 = 1.3 * 0.08664 * 8.314 * VTc.DivideY(Vpc).MultiplyY(Vz).SumY
+                'Dim V0 = 1.5 * 0.08664 * 8.314 * VTc.DivideY(Vpc).MultiplyY(Vz).SumY
                 'Dim T0 = (VTc.MinY() + VTc.MaxY()) / 2
 
-                'Dim pc2 = gm.CriticalPoints(Vz, V0, T0)
+                'Dim Qij1 = cp.QIJ_HES_MAT(230, 0.0000844, Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+
+                'Dim Qij2 = gm.Qij(230, 0.0000844, Vm2)
+
+                'Dim s1 = Qij1.ToString()
+                'Dim s2 = Qij2.ToString()
+
+                'Dim pc2 = gm.CriticalPoints(Vm2, V0, T0)
                 'Console.WriteLine(pc2)
 
             ElseIf mat.PropertyPackage.ComponentName.Contains("SRK") Then

@@ -71,7 +71,7 @@ Namespace Utilities.TCP
 
             Dim fV, fV_inf, nsub, delta_Vc As Double
 
-            nsub = 25
+            nsub = 50
 
             delta_Vc = (Vc_sup - Vc_inf) / nsub
 
@@ -115,7 +115,7 @@ restart:        fV = TRIPLESUM(Vc_inf, Vz, VTc, VPc, VVc, Vw, VKIj)
                     fbb = fcc
                     fcc = faa
                 End If
-                tol11 = 1.0E-17
+                tol11 = 0.000001
                 xmm = 0.5 * (ccc - bbb)
                 If (Math.Abs(xmm) <= tol11) Or (fbb = 0) Then GoTo Final3
                 If Math.Abs(fbb) < tol11 Then GoTo Final3
@@ -168,7 +168,6 @@ Final3:
             T = TCRIT2(V, Vz, VTc, VPc, VVc, Vw, VKIj)
 
             P = PCRIT(T, V, Vz, VTc, VPc, Vw, VKIj)
-            'P = 0.307 * 8.314 * T / V
 
             If P < 0 Then
                 Vc_inf += 2 * delta_Vc
@@ -179,13 +178,7 @@ Final3:
             stmp(1) = P
             stmp(2) = V
 
-            If Math.Abs(fbb) < 0.01 And fbb <> 0.0# Then
-                If res.Count > 0 Then
-                    If Math.Abs(T - res(0)(0)) > 5 And P < 100000000 Then res.Add(stmp.Clone)
-                Else
-                    res.Add(stmp.Clone)
-                End If
-            End If
+            res.Add(stmp.Clone)
 
             If Vc_inf <= b Then
                 GoTo Final2
@@ -503,12 +496,8 @@ Final:
                 MB_(i) = Double.Epsilon
             Next
 
-            'Dim solved As Boolean = False
-            'solved = MathEx.SysLin.rsolve.rmatrixsolve(MA_, MB_, n, Dn0)
-
             Try
                 Dim trg As Mapack.ILuDecomposition = MA.GetLuDecomposition
-                'Console.WriteLine(trg.UpperTriangularFactor.ToString)
                 i = 0
                 Do
                     m2(i, 0) = 0
@@ -1076,7 +1065,7 @@ Final2:
 
             'estimar temperatura e pressao criticas iniciais
 
-            Vc_inf = 4 * b
+            Vc_inf = 3.85 * b
             If Vinf <> 0 Then Vc_inf = Vinf
             Vc_sup = b
 
@@ -1126,9 +1115,9 @@ restart:        fV = TRIPLESUM(Vc_inf, Vz, VTc, VPc, VVc, Vw, VKIj)
                     fbb = fcc
                     fcc = faa
                 End If
-                tol11 = 1.0E-17
+                tol11 = 0.000001
                 xmm = 0.5 * (ccc - bbb)
-                If (Math.Abs(xmm) <= tol11) Or (fbb = 0) Then GoTo Final3
+                'If (Math.Abs(xmm) <= tol11) Or (fbb = 0) Then GoTo Final3
                 If Math.Abs(fbb) < tol11 Then GoTo Final3
                 If (Math.Abs(eee) >= tol11) And (Math.Abs(faa) > Math.Abs(fbb)) Then
                     sss = fbb / faa
@@ -1191,13 +1180,7 @@ Final3:
             stmp(1) = P
             stmp(2) = V
 
-            If Math.Abs(fbb) < 0.01 And fbb <> 0.0# Then
-                If res.Count > 0 Then
-                    If Math.Abs(T - res(0)(0)) > 5 And P < 100000000 Then res.Add(stmp.Clone)
-                Else
-                    res.Add(stmp.Clone)
-                End If
-            End If
+            res.Add(stmp.Clone)
 
             If Vc_inf <= b Then
                 GoTo Final2
@@ -1412,7 +1395,7 @@ Final2:
 
             Dim fT, fT_inf, nsub, delta_Tc As Double
 
-            nsub = 10
+            nsub = 50
 
             delta_Tc = (Tc_sup - Tc_inf) / nsub
 
@@ -1454,9 +1437,9 @@ Final2:
                     fb = fc
                     fc = fa
                 End If
-                tol1 = 0.000000000001
+                tol1 = 0.001
                 xm = 0.5 * (cc - bb)
-                'If (Math.Abs(xm) <= tol1) Or (fb = 0) Then GoTo Final
+                If (Math.Abs(xm) <= tol1) Or (fb = 0) Then GoTo Final
                 If Math.Abs(fb) < tol1 Then GoTo Final
                 If (Math.Abs(ee) >= tol1) And (Math.Abs(fa) > Math.Abs(fb)) Then
                     ss = fb / fa
@@ -2070,33 +2053,41 @@ Final2:
 
             Dim n As Integer = Vz.Length - 1
 
+            Dim Vz0 As Double() = Vz.Clone()
+
             Dim i As Integer
 
             Dim mres(n) As Double
 
-            Dim points1(n), points2(n) As Double
+            Dim d1(n), d2(n), d3(n), d4(n) As Double
 
-            For i = 0 To n
-                If Vz(i) = 0.0 Then Vz(i) = 1.0E-20
-            Next
+            Dim h As Double = 0.00001
 
-            Dim h As Double = 0.01
+            Dim n1 = 1 - 2 * h * Vz0(jidx)
+            Dim n2 = 1 - 1 * h * Vz0(jidx)
+            Dim n3 = 1 + 1 * h * Vz0(jidx)
+            Dim n4 = 1 + 2 * h * Vz0(jidx)
 
-            Dim Vz1 = perturb_n(jidx, -h, Vz)
-            Dim P1 = Math.Abs(CalcP.Invoke(T, V, Vz1))
+            Dim Vz1 = perturb_n(jidx, -2 * h, Vz0)
+            Dim P1 = Math.Abs(CalcP.Invoke(T, V / n1, Vz1))
 
-            Dim Vz2 = perturb_n(jidx, h, Vz)
-            Dim P2 = Math.Abs(CalcP.Invoke(T, V, Vz2))
+            Dim Vz2 = perturb_n(jidx, -h, Vz0)
+            Dim P2 = Math.Abs(CalcP.Invoke(T, V / n2, Vz2))
 
-            points1 = FugacityTV.Invoke(T, V, Vz1).AddConstY(Math.Log(P1)).AddY(Vz1.LogY())
-            points2 = FugacityTV.Invoke(T, V, Vz2).AddConstY(Math.Log(P2)).AddY(Vz2.LogY())
+            Dim Vz3 = perturb_n(jidx, h, Vz0)
+            Dim P3 = Math.Abs(CalcP.Invoke(T, V / n3, Vz3))
 
-            Dim fugs1 = points1.ExpY()
-            Dim fugs2 = points2.ExpY()
+            Dim Vz4 = perturb_n(jidx, 2 * h, Vz0)
+            Dim P4 = Math.Abs(CalcP.Invoke(T, V / n4, Vz4))
+
+            d1 = FugacityTV.Invoke(T, V / n1, Vz1).AddConstY(Math.Log(P1)).AddY(Vz1.LogY())
+            d2 = FugacityTV.Invoke(T, V / n2, Vz2).AddConstY(Math.Log(P2)).AddY(Vz2.LogY())
+            d3 = FugacityTV.Invoke(T, V / n3, Vz3).AddConstY(Math.Log(P3)).AddY(Vz3.LogY())
+            d4 = FugacityTV.Invoke(T, V / n4, Vz4).AddConstY(Math.Log(P4)).AddY(Vz4.LogY())
 
             i = 0
             Do
-                mres(i) = (points2(i) * (1 + h * Vz(jidx)) - points1(i) * (1 - h * Vz(jidx))) / (2 * h * Vz(jidx))
+                mres(i) = (d1(i) - 8 * d2(i) + 8 * d3(i) - d4(i)) / (12 * h * Vz(jidx))
                 If Double.IsNaN(mres(i)) Then mres(i) = 0.0
                 i = i + 1
             Loop Until i = n + 1
@@ -2113,16 +2104,22 @@ Final2:
 
             Dim mres(n) As Double
 
+            Dim Vz0 As Double() = Vz.Clone()
+
+            For i = 0 To n
+                If Vz0(i) = 0.0 Then Vz0(i) = 0.0000001
+            Next
+
             Dim points1(n), points2(n) As Double
 
-            Dim h As Double = 0.01
+            Dim h As Double = 0.001
 
-            points1 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, -h, Vz))
-            points2 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, h, Vz))
+            points1 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, -h, Vz0))
+            points2 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, h, Vz0))
 
             i = 0
             Do
-                mres(i) = (points2(i) * (1 + h * Vz(kidx)) - points1(i) * (1 - h * Vz(kidx))) / (2 * h * Vz(kidx))
+                mres(i) = (points2(i) - points1(i)) / (2 * h * Vz(kidx))
                 i = i + 1
             Loop Until i = n + 1
 
@@ -2147,19 +2144,11 @@ Final2:
 
             Vn(i) = Vn(i) * (1 + h)
 
-            'j = 0
-            'Do
-            '    If Vn(j) < 0.0 Then Vn(j) = 1.0E-20
-            '    j = j + 1
-            'Loop Until j = n + 1
-
-            Vn2 = Vn.NormalizeY()
-
-            Return Vn2
+            Return Vn.NormalizeY()
 
         End Function
 
-        Private Function Qij(ByVal T As Double, ByVal V As Double, ByVal Vz As Double()) As Mapack.Matrix
+        Public Function Qij(ByVal T As Double, ByVal V As Double, ByVal Vz As Double()) As Mapack.Matrix
 
             Dim n As Integer = Vz.Length - 1
 
@@ -2246,17 +2235,12 @@ Final2:
 
             Dim Dn(n) As Double
 
-            Dim T0 = Tit
-
             Dim brent As New BrentOpt.Brent
 
-            Try
-                T = brent.BrentOpt2(Tmin, Tmax, 25, 0.001, 100,
-                                    Function(Tx)
-                                        Return QijDetBrent(Tx, V, Vz)
-                                    End Function)
-            Catch ex As Exception
-            End Try
+            T = brent.BrentOpt2(Tmin, Tmax, 20, 0.0000001, 100,
+                                Function(Tx)
+                                    Return QijDetBrent(Tx, V, Vz)
+                                End Function)
 
             Dim MA As Mapack.Matrix, Dn0(n) As Double
 
@@ -2264,30 +2248,15 @@ Final2:
 
             Dim m2 As Mapack.Matrix = New Mapack.Matrix(MA.Rows, 1)
 
-            'Try
-            '    Dim trg As Mapack.ILuDecomposition = MA.GetLuDecomposition
-            '    i = 0
-            '    Do
-            '        m2(i, 0) = 0
-            '        i = i + 1
-            '    Loop Until i = n + 1
-            '    m2(n, 0) = trg.UpperTriangularFactor(n, n)
-            '    Dim m3 As Mapack.Matrix = trg.UpperTriangularFactor.Solve(m2)
-            '    i = 0
-            '    Do
-            '        Dn0(i) = m3(i, 0)
-            '        i = i + 1
-            '    Loop Until i = n + 1
-            'Catch ex As Exception
-            '    i = 0
-            '    Do
-            '        Dn0(i) = 0
-            '        i = i + 1
-            '    Loop Until i = n + 1
-            'End Try
-
             Try
-                Dim m3 As Mapack.Matrix = MA.Solve(m2)
+                Dim trg As Mapack.ILuDecomposition = MA.GetLuDecomposition
+                i = 0
+                Do
+                    m2(i, 0) = 0
+                    i = i + 1
+                Loop Until i = n + 1
+                m2(n, 0) = trg.UpperTriangularFactor(n, n)
+                Dim m3 As Mapack.Matrix = trg.UpperTriangularFactor.Solve(m2)
                 i = 0
                 Do
                     Dn0(i) = m3(i, 0)
@@ -2310,7 +2279,7 @@ Final2:
 
             i = 0
             Do
-                Dn(i) = Dn0(i) / soma_Dn
+                Dn(i) = Dn0(i) '/ soma_Dn
                 i = i + 1
             Loop Until i = n + 1
 
@@ -2326,44 +2295,38 @@ Final2:
 
             Dim V As Double
 
-            Dim stmp(2)
-            Dim n As Integer
-
-            n = Vz.Length - 1
-
             Tmin = T0 * 0.5
             Tmax = T0 * 2
             Vmin = V0
-            Vmax = 4 * V0
+            Vmax = 4.0 / 1.3 * V0
 
             Tit = T0
 
             Dim brent As New BrentOpt.Brent
 
-            Try
+            Dim fV, fV2, delta_Vc, Viter As Double
 
-                Dim fV, fV2, delta_Vc, Viter As Double
+            delta_Vc = (Vmax - Vmin) / 15
 
-                delta_Vc = (Vmax - Vmin) / 25
+            Viter = Vmax
 
-                Viter = Vmax
+            Do
+                fV = TripleSum2(Viter, Vz)
+                Viter -= delta_Vc
+                fV2 = TripleSum2(Viter, Vz)
+            Loop Until fV * fV2 < 0 Or Viter <= Vmin
 
-                Do
-                    fV = TripleSum2(Viter, Vz)
-                    Viter -= delta_Vc
-                    fV2 = TripleSum2(Viter, Vz)
-                Loop Until fV * fV2 < 0 Or Viter <= Vmin
-
-                V = brent.BrentOpt2(Viter, Viter + delta_Vc, 10, 0.001, 100,
-                                    Function(Vi)
-                                        Return TripleSum2(Vi, Vz)
-                                    End Function)
-            Catch ex As Exception
-            End Try
+            V = brent.BrentOpt2(Viter, Viter + delta_Vc, 25, 0.0000000001, 100,
+                                Function(Vi)
+                                    Return TripleSum2(Vi, Vz)
+                                End Function)
 
             Dim T, P As Double
 
-            T = Tit
+            T = brent.BrentOpt2(Tmin, Tmax, 20, 0.0000001, 100,
+                                Function(Tx)
+                                    Return QijDetBrent(Tx, V, Vz)
+                                End Function)
 
             P = CalcP.Invoke(T, V, Vz)
 
