@@ -366,7 +366,7 @@ Namespace UnitOperations
         Public Overrides Function SetPropertyValue(prop As String, propval As Object, Optional su As IUnitsOfMeasure = Nothing) As Boolean
 
             If InputParameters.ContainsKey(prop) Then
-                Return InputParameters(prop).Value = propval
+                InputParameters(prop).Value = propval
                 Return True
             Else
                 Return False
