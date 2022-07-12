@@ -342,9 +342,9 @@ Namespace UnitOperations
         Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
 
             If InputParameters.ContainsKey(prop) Then
-                Return InputParameters(prop).Value
+                Return InputParameters(prop).Value.ConvertToSI(InputParameters(prop).Units)
             ElseIf OutputParameters.ContainsKey(prop) Then
-                Return OutputParameters(prop).Value
+                Return OutputParameters(prop).Value.ConvertToSI(OutputParameters(prop).Units)
             Else
                 Return 0.0
             End If
