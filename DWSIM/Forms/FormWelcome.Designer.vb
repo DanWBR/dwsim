@@ -139,11 +139,10 @@ Partial Class FormWelcome
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "DWSIM_BIN.png")
-        Me.ImageList1.Images.SetKeyName(1, "DWSIM_CSD.png")
-        Me.ImageList1.Images.SetKeyName(2, "DWSIM_RSD.png")
-        Me.ImageList1.Images.SetKeyName(3, "DWSIM_XML.png")
-        Me.ImageList1.Images.SetKeyName(4, "folder.png")
+        Me.ImageList1.Images.SetKeyName(0, "simulationfile.png")
+        Me.ImageList1.Images.SetKeyName(1, "compound.png")
+        Me.ImageList1.Images.SetKeyName(2, "dataregression.png")
+        Me.ImageList1.Images.SetKeyName(3, "folder.png")
         '
         'lvlatestfolders
         '

@@ -117,21 +117,92 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>941, 271</value>
+  </data>
+  <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 271</value>
+  </data>
+  <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>929, 0</value>
+  </data>
+  <data name="PanelWeather.Size" type="System.Drawing.Size, System.Drawing">
+    <value>941, 39</value>
+  </data>
+  <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>941, 417</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
+    <value>310</value>
+  </data>
+  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>941, 417</value>
+  </data>
+  <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>941, 417</value>
+  </data>
+  <data name="ToolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>941, 469</value>
+  </data>
+  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>925, 25</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>938, 27</value>
+  </data>
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1231, 211</value>
+    <value>881, 211</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 205</value>
   </data>
+  <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>875, 24</value>
+  </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>33, 244</value>
+  </data>
+  <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>875, 24</value>
+  </data>
+  <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>914, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 205</value>
   </data>
-  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1291, 271</value>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 0</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 39</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 13</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="btnGetWeather.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 7</value>
+  </data>
+  <data name="btnGetWeather.Text" xml:space="preserve">
+    <value>Get Weather Data</value>
+  </data>
+  <data name="tbCurrentLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 9</value>
+  </data>
+  <data name="btnGetLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 7</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 13</value>
@@ -139,21 +210,14 @@
   <data name="tbAtmPress.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 10</value>
   </data>
-  <data name="tbAtmPress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
   <data name="tbAtmPress.Text" xml:space="preserve">
     <value>5</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbAtmPress.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 7</value>
-  </data>
-  <data name="PictureBox6.ToolTip" xml:space="preserve">
-    <value>Atmospheric Pressure</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 13</value>
@@ -164,24 +228,6 @@
   <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 7</value>
   </data>
-  <data name="PictureBox5.ToolTip" xml:space="preserve">
-    <value>Ambient Temperature</value>
-  </data>
-  <data name="btnGetLocation.ToolTip" xml:space="preserve">
-    <value>Get Location from Device GPS</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Location</value>
-  </data>
-  <data name="btnGetWeather.Text" xml:space="preserve">
-    <value>Get Weather Data</value>
-  </data>
-  <data name="btnGetWeather.ToolTip" xml:space="preserve">
-    <value>Get Current Weather Conditions at Specified Location</value>
-  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>533, 13</value>
   </data>
@@ -190,9 +236,6 @@
   </data>
   <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>449, 7</value>
-  </data>
-  <data name="PictureBox4.ToolTip" xml:space="preserve">
-    <value>Solar Irradiation</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>423, 13</value>
@@ -203,9 +246,6 @@
   <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>351, 7</value>
   </data>
-  <data name="PictureBox3.ToolTip" xml:space="preserve">
-    <value>Relative Humidity</value>
-  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>310, 13</value>
   </data>
@@ -214,19 +254,6 @@
   </data>
   <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 7</value>
-  </data>
-  <data name="PictureBox2.ToolTip" xml:space="preserve">
-    <value>Wind Speed</value>
-  </data>
-  <data name="PanelWeather.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="PanelWeather.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1291, 39</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>310</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -363,26 +390,23 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
-  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>925, 25</value>
-  </data>
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAISSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
-        dfUmEUXoZIuiCOrg4OCfJg4uUs4bblBQl1IkttTrWdPkLEmb17zAHdwi6Ok1LsXCz987Eivpi7V6bveB
-        L+/By+/ze3m/2A7bhuYeljRHLDep4DYd4b7uCidNc3a3f/z3DMUihNMghzZwXdQd4WxrTdrjl/wZvxNz
-        Y84Oml2xhvu84Rw96GtGmVgcDjZhz+frhvw3cUCDSCmNilnWRKVinyvhZZyYBxsYNspoVChW353weOKb
-        L6/CgZw6mMp9sBLKt7n9ytfJhpwq9KT4NZvsO1+FdK4CZ5R5eFw5BzdeXIf05SrEL9Vh+vYqJOUeJBUP
-        krdWBwnZqyXkXj5d8KKHzMQzhc3yVhGLvAnTd9Zh6ooJ8YtLP8UJxReHwprgOvpkI2JeZJYJxQH4hin8
-        KMua7C187IcFURkr5sEGhkUZvG1x5lHP+1UY5NT8Z7i30P5eemtY79t0rtVam2zIK7YrqQ2NPFfr8KBk
-        wYVn63DkyRc4/fQTPCyZ8KqyDDXdBKPjgGFTMExz0LS6NdznDcuJHjITY1F5qwijo2BpxYLXyzpK60Ox
-        fx4Oa6ITd/TJwuLIBDcOJVIc0CIkpXdoljVRbdrnSXgZK+bBBmbYTsbo0GLDJhvbJuahquou/KvjKL2r
-        2V2C6xu93T3mH+/wr8RiPwCbhunMV585mAAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
+        db2bRBShky2KciAODg7+aeLg4pVzcVBQl1IkttTrWdPkLEmb17yAB7cIenqNS7Hw8/eOxEr6Yq13bveB
+        L+/By+/ze3m/2C47huYelTRHLDep4DYd4Z7uCqdNc3avf/zvDMUihNMgRzZwfao7wlxrTdrnl/wdfxJz
+        Y84Oml2xhvu84Rw/7GtGmVgcDjZhz+frhvw3cUCDSCmNilnWRKVinyvhZZyYBxsYNspoVChW353yeOKb
+        L6/BoZw6mMp9sBLK9/mDyrfJhpwq9KT4dZscuFCFdK4C55QleFQ5DwsvbkD6ShXil+swfesjJOUeJBUP
+        kgvOICF7tYTcy6cLXvSQmXimsFneKmKRN2H69jpMXTUhfmn5lzih+OJQWBNcR59sRMyLzDKhOADfMIUf
+        ZVmT/YVP/bAgKmPFPNjAsCiDty3OPOx5vwuDnFn6AncX2z9Kbw3rfZvOt1prkw151XYltaGR52od7pcs
+        uPhsHY49/gpnn3yGByUTXlVWoKabYHQcMGwKhmkOmla3hvu8YTnRQ2ZiLCpvFWF0FCyvWvB6RUdpfSj2
+        z8NhTXTijj5ZWByZ4MahRIoDWoSk9A7NsiaqTfs8CS9jxTzYwAzbyRgdWmzYZGPHxDxUVd2Df3USpXc0
+        u0twfaO3uyf84122Syz2E1yr6b7BehWuAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 22</value>
+    <value>112, 24</value>
   </data>
   <data name="tsmiLiveFlow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -416,22 +440,22 @@
 </value>
   </data>
   <data name="tsmiLiveFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 22</value>
+    <value>76, 24</value>
   </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 22</value>
+    <value>126, 24</value>
   </data>
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Set Global Font Size</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 22</value>
+    <value>112, 24</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Set Font Styles...</value>
   </data>
   <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 22</value>
+    <value>91, 24</value>
   </data>
   <data name="ToolStripLabel3.Text" xml:space="preserve">
     <value>Color Theme</value>
@@ -443,7 +467,7 @@
     <value>Black-and-White</value>
   </data>
   <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
+    <value>164, 24</value>
   </data>
   <data name="ToolStripLabel4.Text" xml:space="preserve">
     <value>Auto-Connect Added Objects</value>
@@ -457,8 +481,8 @@
   <data name="tscbAddObjectsWithStreams.Items2" xml:space="preserve">
     <value>Smart</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1033, 25</value>
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 286</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
@@ -544,8 +568,8 @@
   <data name="FindTearStreamsAutomaticallyToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 286</value>
+  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 470</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 22</value>
@@ -594,6 +618,12 @@
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 6</value>
+  </data>
+  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Rotate</value>
   </data>
   <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -685,12 +715,6 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Rotate</value>
-  </data>
   <data name="tsmiInvertVertically.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 22</value>
   </data>
@@ -778,9 +802,6 @@
   <data name="UpgradeDistillationColumnToProToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
   </data>
-  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 470</value>
-  </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
@@ -803,14 +824,17 @@
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
   </data>
+  <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 26</value>
+  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 22</value>
   </data>
   <data name="ToolStripMenuItem1.Text" xml:space="preserve">
     <value>Switch Object Palette Location</value>
   </data>
-  <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>941, 469</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

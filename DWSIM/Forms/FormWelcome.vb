@@ -55,14 +55,14 @@ Public Class FormWelcome
                     Case ".dwsim"
                         lvi.ImageIndex = 0
                     Case ".dwxml", ".dwxmz"
-                        lvi.ImageIndex = 1
+                        lvi.ImageIndex = 0
                     Case ".dwcsd", ".dwcsd2"
-                        lvi.ImageIndex = 2
+                        lvi.ImageIndex = 1
                     Case ".dwrsd", ".dwrsd2"
-                        lvi.ImageIndex = 3
+                        lvi.ImageIndex = 2
                 End Select
                 If Not Me.lvlatestfolders.Items.ContainsKey(Path.GetDirectoryName(f)) Then
-                    Me.lvlatestfolders.Items.Add(Path.GetDirectoryName(f), Path.GetDirectoryName(f), 4).Tag = Path.GetDirectoryName(f)
+                    Me.lvlatestfolders.Items.Add(Path.GetDirectoryName(f), Path.GetDirectoryName(f), 3).Tag = Path.GetDirectoryName(f)
                     Me.lvlatestfolders.Items(Me.lvlatestfolders.Items.Count - 1).ToolTipText = Path.GetDirectoryName(f)
                 End If
             End If
@@ -79,11 +79,11 @@ Public Class FormWelcome
                 Case ".dwsim"
                     lvi.ImageIndex = 0
                 Case ".dwxml", ".dwxmz"
-                    lvi.ImageIndex = 1
+                    lvi.ImageIndex = 0
                 Case ".dwcsd", ".dwcsd2"
-                    lvi.ImageIndex = 2
+                    lvi.ImageIndex = 1
                 Case ".dwrsd", ".dwrsd2"
-                    lvi.ImageIndex = 3
+                    lvi.ImageIndex = 2
             End Select
         Next
 
@@ -99,7 +99,7 @@ Public Class FormWelcome
                                                                                    Else
                                                                                        For Each item As FOSSEEFlowsheet In t.Result
                                                                                            fslist.Add(item.DownloadLink, item)
-                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 1) With {.Tag = item.DownloadLink})
+                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 0) With {.Tag = item.DownloadLink})
                                                                                            My.Application.MainWindowForm.FOSSEEList.Add(item)
                                                                                        Next
                                                                                        'Owner.UpdateFOSSEEList()

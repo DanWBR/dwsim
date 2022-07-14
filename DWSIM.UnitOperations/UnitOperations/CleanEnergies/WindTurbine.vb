@@ -45,6 +45,8 @@ Namespace UnitOperations
 
         Public Property DiskArea As Double = 10.0
 
+        Public Property RotorDiameter As Double = 0.0
+
         Public Property Efficiency As Double = 80.0
 
         Public Property NumberOfTurbines As Integer = 1
@@ -363,6 +365,12 @@ Namespace UnitOperations
             airstr.Dispose()
             airstr = Nothing
 
+            If RotorDiameter <> 0.0 Then
+                DiskArea = Math.PI * RotorDiameter ^ 2 / 4
+            Else
+                RotorDiameter = (DiskArea * 4 / Math.PI) ^ 0.5
+            End If
+
             MaximumTheoreticalPower = NumberOfTurbines * 8.0 / 27.0 * AirDensity * ws ^ 3 * DiskArea / 1000.0 ' kW
 
             GeneratedPower = MaximumTheoreticalPower * Efficiency / 100.0
@@ -377,10 +385,10 @@ Namespace UnitOperations
                 Case PropertyType.ALL, PropertyType.RW, PropertyType.RO
                     Return New String() {"Efficiency", "User-Defined Wind Speed", "Actual Wind Speed", "User-Defined Air Temperature", "Actual Air Temperature",
                         "User-Defined Air Pressure", "Actual Air Pressure", "User-Defined Relative Humidity", "Actual Relative Humidity",
-                        "Disk Area", "Number of Units", "Generated Power", "Maximum Theoretical Power", "Calculated Air Density"}
+                        "Disk Area", "Rotor Diameter", "Number of Units", "Generated Power", "Maximum Theoretical Power", "Calculated Air Density"}
                 Case PropertyType.WR
                     Return New String() {"Efficiency", "User-Defined Wind Speed", "User-Defined Air Temperature",
-                        "User-Defined Air Pressure", "User-Defined Relative Humidity", "Disk Area", "Number of Units"}
+                        "User-Defined Air Pressure", "User-Defined Relative Humidity", "Rotor Diameter", "Number of Units"}
             End Select
 
         End Function
@@ -410,6 +418,8 @@ Namespace UnitOperations
                     Return ActualRelativeHumidity
                 Case "Disk Area"
                     Return DiskArea.ConvertFromSI(su.area)
+                Case "Rotor Diameter"
+                    Return RotorDiameter.ConvertFromSI(su.distance)
                 Case "Number of Units"
                     Return NumberOfTurbines
                 Case "Generated Power"
@@ -447,6 +457,8 @@ Namespace UnitOperations
                     Return "%"
                 Case "Disk Area"
                     Return (su.area)
+                Case "Rotor Diameter"
+                    Return (su.distance)
                 Case "Number of Units"
                     Return ""
                 Case "Generated Power"
@@ -475,6 +487,10 @@ Namespace UnitOperations
                     UserDefinedRelativeHumidity = Convert.ToDouble(propval)
                 Case "Disk Area"
                     DiskArea = Convert.ToDouble(propval).ConvertFromSI(su.area)
+                    RotorDiameter = (DiskArea * 4 / Math.PI) ^ 0.5
+                Case "Rotor Diameter"
+                    RotorDiameter = Convert.ToDouble(propval).ConvertFromSI(su.distance)
+                    DiskArea = Math.PI * RotorDiameter ^ 2 / 4
                 Case "Number of Units"
                     NumberOfTurbines = Convert.ToDouble(propval)
             End Select
