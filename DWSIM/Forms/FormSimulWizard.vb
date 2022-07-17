@@ -32,8 +32,6 @@ Public Class FormSimulWizard
 
     Public switch As Boolean = False
 
-    Dim ACSC1 As AutoCompleteStringCollection
-
     Private CompoundList As List(Of String)
     Private Indexes As Dictionary(Of String, Integer)
 
@@ -154,30 +152,46 @@ Public Class FormSimulWizard
 
             ogc1.ClearSelection()
 
-            Dim lowered = CompoundList.Select(Function(c) c.ToLower).ToList()
+            Dim needselecting As Boolean = True
 
-            If lowered.Contains(txtSearch.Text.ToLower()) Then
+            For Each r As DataGridViewRow In ogc1.Rows
+                If Not r.Cells(2).Value Is Nothing Then
+                    If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                        r.Visible = True
+                        If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                            r.Selected = True
+                        End If
+                    Else
+                        r.Visible = False
+                    End If
+                End If
+            Next
 
-                Dim index = lowered.IndexOf(txtSearch.Text.ToLower())
-                Dim index2 = Indexes(CompoundList(index))
+            If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
+                ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
+            End If
 
-                ogc1.Rows.Item(index2).Selected = True
-
+            If txtSearch.Text = "" Then
+                For Each r As DataGridViewRow In ogc1.Rows
+                    r.Selected = False
+                    r.Visible = True
+                Next
+                ogc1.FirstDisplayedScrollingRowIndex = 0
+                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+            Else
                 If ogc1.SelectedRows.Count > 0 Then
                     ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
                 End If
-
-            Else
-
-                ogc1.FirstDisplayedScrollingRowIndex = 0
-                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-
             End If
 
         Catch ex As Exception
 
-            ogc1.FirstDisplayedScrollingRowIndex = 0
-            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+            'ogc1.FirstDisplayedScrollingRowIndex = 0
+            'ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
 
         End Try
 
