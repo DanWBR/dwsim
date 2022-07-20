@@ -218,9 +218,9 @@ Partial Class FormImportCompoundOnline
         Me.Controls.Add(Me.btnPrev)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormImportCompoundOnline"
         Me.ShowIcon = False
