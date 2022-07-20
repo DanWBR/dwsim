@@ -1455,6 +1455,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
         FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from JSON Files", "", Nothing)
 
 #Region "Load Json from FilePickerService"
@@ -1482,12 +1483,13 @@ Public Class FormSimulSettings
                 Else
                     'compound exists.
                     If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                        Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name) = comp
+                        Dim c0 = Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name)
+                        DirectCast(c0, ICustomXMLSerialization).LoadData(DirectCast(comp, ICustomXMLSerialization).SaveData())
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList
                         For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                             For Each phase As BaseClasses.Phase In ms.Phases.Values
-                                phase.Compounds(comp.Name).ConstantProperties = comp
+                                phase.Compounds(comp.Name).ConstantProperties = c0
                             Next
                         Next
                         MessageBox.Show(DWSIM.App.GetLocalString("CompoundUpdated"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
