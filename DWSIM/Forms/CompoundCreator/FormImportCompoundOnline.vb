@@ -160,6 +160,7 @@ Public Class FormImportCompoundOnline
                                                                              End If
                                                                              AddPropertiesToGrid()
                                                                              btnNext.Enabled = compoundk IsNot Nothing
+                                                                             If dgResults.Rows.Count = 0 Then btnNext.Enabled = False
                                                                              If Not compoundk Is Nothing Then
                                                                                  If compoundk.Molar_Weight > 0.0# And
                                                                                      compoundk.Critical_Temperature > 0.0# And
