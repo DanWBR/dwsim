@@ -882,7 +882,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(Vz() As Double, T As Double, V As Double) As Double()
 
-            Return prn.CalcLnFugTV(T, V, Vz, RET_VKij, RET_VTC, RET_VPC, RET_VW)
+            Return prn.CalcLnFugTV(T, V, Vz, RET_VKij, RET_VTC, RET_VPC, RET_VW).ExpY
 
         End Function
 
@@ -891,6 +891,7 @@ Namespace PropertyPackages
             Return prn.CalcP(V, T, Vz, RET_VKij, RET_VTC, RET_VPC, RET_VW)
 
         End Function
+
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get
                 Return True

@@ -1605,6 +1605,37 @@ Namespace PropertyPackages
 
         End Function
 
+        ''' <summary>
+        ''' Calculate the critical points of the current Material Stream
+        ''' </summary>
+        ''' <returns>List of critical points in the following order: T in K, P in Pa and V in m3/mol</returns>
+        Public Overridable Function DW_CalculateCriticalPoints() As List(Of Double())
+
+            'use generic method
+
+            Dim gm As New Utilities.TCP.GenericMethod
+
+            gm.CalcP = Function(T, V, Vzi)
+                           Return DW_CalcP(Vzi, T, V)
+                       End Function
+
+            gm.FugacityTV = Function(T, V, Vzi)
+                                Return DW_CalcFugCoeff(Vzi, T, V)
+                            End Function
+
+            Dim Vz = RET_VMOL(Phase.Mixture)
+
+            Dim VTc = RET_VTC()
+            Dim VPc = RET_VPC()
+            Dim VZc = RET_VZC()
+
+            Dim V0 = 1.5 * 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+            Dim T0 = (VTc.MinY() + VTc.MaxY()) / 2
+
+            Return gm.CriticalPoint(Vz, V0, T0)
+
+        End Function
+
         Public MustOverride Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
         Public MustOverride Sub DW_CalcPhaseProps(ByVal Phase As Phase)
@@ -3453,10 +3484,26 @@ redirect2:                  IObj?.SetCurrent()
                     CP.Add(New Object() {TCR, PCR, VCR})
                 End If
             Else
-                TCR = Me.AUX_TCM(Phase.Mixture)
-                PCR = Me.AUX_PCM(Phase.Mixture)
-                VCR = Me.AUX_VCM(Phase.Mixture)
-                CP.Add(New Object() {TCR, PCR, VCR})
+                If n > 0 Then
+                    CP = New ArrayList(DW_CalculateCriticalPoints())
+                    If CP.Count > 0 Then
+                        Dim cp0 = CP(0)
+                        TCR = cp0(0)
+                        PCR = cp0(1)
+                        VCR = cp0(2)
+                        stopAtCP = True
+                    Else
+                        TCR = Me.AUX_TCM(Phase.Mixture)
+                        PCR = Me.AUX_PCM(Phase.Mixture)
+                        VCR = Me.AUX_VCM(Phase.Mixture)
+                        recalcCP = True
+                    End If
+                Else
+                    TCR = Me.AUX_TCM(Phase.Mixture)
+                    PCR = Me.AUX_PCM(Phase.Mixture)
+                    VCR = Me.AUX_VCM(Phase.Mixture)
+                    CP.Add(New Object() {TCR, PCR, VCR})
+                End If
             End If
 
             Dim beta As Double = 10.0#

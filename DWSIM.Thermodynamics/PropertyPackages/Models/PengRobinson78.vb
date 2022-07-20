@@ -2395,7 +2395,7 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-            P = R * T / (V - bml) - aml / (V * (V + bml))
+            P = R * T / (V - bml) - aml / (V ^ 2 + 2 * bml * V - bml ^ 2)
 
             Return P
 
@@ -2479,18 +2479,18 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             Dim Z = P * V / (R * T)
 
             i = 0
             Do
-                t1 = bi(i) * (Z - 1) / bml
+                t1 = bi(i) * (Z - 1.0) / bml
                 t2 = -Math.Log(Z - BG)
-                t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
-                t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                t5 = 2 * 2 ^ 0.5 * BG
+                t3 = AG * (2.0 * aml2(i) / aml - bi(i) / bml)
+                t4 = Math.Log((Z + (1.0 + 1.414213) * BG) / (Z + (1.0 - 1.414213) * BG))
+                t5 = 2.0 * 1.414213 * BG
                 LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
                 i = i + 1
             Loop Until i = n + 1

@@ -124,30 +124,7 @@ Public Class FrmCritpt
 
             Else
 
-                'use generic method
-
-                Dim gm As New Utilities.TCP.GenericMethod
-
-                gm.CalcP = Function(T, V, Vzi)
-                               Return pr.DW_CalcP(Vzi, T, V)
-                           End Function
-
-                gm.FugacityTV = Function(T, V, Vzi)
-                                    Return pr.DW_CalcFugCoeff(Vzi, T, V)
-                                End Function
-
-                Dim V0 = 1.5 * 0.08664 * 8.314 * VTc.DivideY(Vpc).MultiplyY(Vz).SumY
-                Dim T0 = (VTc.MinY() + VTc.MaxY()) / 2
-
-                ''Dim Qij1 = cp.QIJ_HES_MAT(230, 0.0000844, Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
-
-                'Dim Qij2 = gm.Qij(230, 0.0000844, Vz)
-
-                ''Dim s1 = Qij1.ToString()
-                'Dim s2 = Qij2.ToString()
-
-                pc = New ArrayList(gm.CriticalPoint(Vz, V0, T0))
-                Console.WriteLine(pc)
+                pc = New ArrayList(mat.PropertyPackage.DW_CalculateCriticalPoints())
 
             End If
 
