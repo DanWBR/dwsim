@@ -1625,10 +1625,12 @@ Namespace PropertyPackages
 
             Dim Vz = RET_VMOL(Phase.Mixture)
 
-            Dim V0 = RET_VVC().MultiplyY(Vz).SumY() / 1000.0
-            Dim T0 = RET_VTC().MultiplyY(Vz).SumY()
+            Dim VTc = RET_VTC()
+            Dim VPc = RET_VPC()
 
-            Return gm.CriticalPoint(Vz, V0, T0)
+            Dim V0 = 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+
+            Return gm.CriticalPoint(Vz, VTc.Min, VTc.Max, V0, 3.85 * V0)
 
         End Function
 
