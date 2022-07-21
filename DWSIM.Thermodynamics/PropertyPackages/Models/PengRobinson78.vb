@@ -2405,7 +2405,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim P As Double = Me.CalcP(V, T, Vx, VKij, VTc, VPc, Vw, otherargs)
 
-            If P < 0 Then P = -P
+            'If P < 0 Then P = -P
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
