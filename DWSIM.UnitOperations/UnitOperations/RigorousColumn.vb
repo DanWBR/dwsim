@@ -2091,6 +2091,20 @@ Namespace UnitOperations
 
         End Sub
 
+        ''' <summary>
+        ''' Gets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="stream"></param>
+        Public Function GetStreamFeedStageIndex(stream As MaterialStream) As Integer
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
+
+            Dim stage = Stages.Where(Function(s) s.ID = si.Value.AssociatedStage).FirstOrDefault()
+
+            Return Stages.IndexOf(stage)
+
+        End Function
+
         Public Sub SetTopPressure(p_Pa As Double)
 
             Stages.First.P = p_Pa
