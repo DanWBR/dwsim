@@ -1957,9 +1957,6 @@ Namespace UnitOperations
         'condenser (when applicable) is the 0th stage.
         'reboiler (when applicable) is the nth stage. 
 
-        Private _cond As New Stage(Guid.NewGuid().ToString)
-        Private _reb As New Stage(Guid.NewGuid().ToString)
-
         'stream collections (for the *entire* column, including side operations)
 
         Private _conn_ms As New System.Collections.Generic.Dictionary(Of String, StreamInformation)
@@ -2288,9 +2285,6 @@ Namespace UnitOperations
 
             _ie = New InitialEstimates
 
-            _cond = New Stage(Guid.NewGuid().ToString)
-            _reb = New Stage(Guid.NewGuid().ToString)
-
         End Sub
 
         Public Function StreamExists(ByVal st As StreamInformation.Behavior)
@@ -2317,21 +2311,15 @@ Namespace UnitOperations
                         ElseIf i = Me.NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
                         Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
                         End If
                     Case ColType.AbsorptionColumn
-                        _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
-                    Case ColType.ReboiledAbsorber
-                        If i = Me.NumberOfStages - 1 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
-                        Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
-                        End If
-                    Case ColType.RefluxedAbsorber
                         If i = 0 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
+                            _st(_st.Count - 1).Name = "TopStage"
+                        ElseIf i = NumberOfStages - 1 Then
+                            _st(_st.Count - 1).Name = "BottomStage"
                         Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
                         End If
                 End Select
             Next
