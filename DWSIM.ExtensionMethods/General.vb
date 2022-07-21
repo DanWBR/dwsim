@@ -608,22 +608,24 @@ Public Module General
 
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
-    Public Sub PasteData(dgv As DataGridView)
+    <System.Runtime.CompilerServices.Extension()>
+    Public Sub PasteData(dgv As DataGridView, Optional ByVal addnewline As Boolean = True)
 
-        PasteData2(dgv, Clipboard.GetText())
+        PasteData2(dgv, Clipboard.GetText(), addnewline)
 
     End Sub
 
-    <System.Runtime.CompilerServices.Extension()> _
-    Public Sub PasteData2(dgv As DataGridView, data As String)
+    <System.Runtime.CompilerServices.Extension()>
+    Public Sub PasteData2(dgv As DataGridView, data As String, Optional ByVal addnewline As Boolean = True)
 
         Dim tArr() As String
         Dim arT() As String
         Dim i, ii As Integer
         Dim c, cc, r As Integer
 
-        tArr = Clipboard.GetText().Split(Environment.NewLine)
+        Dim sep = New String() {Environment.NewLine}
+
+        tArr = Clipboard.GetText().Split(sep, StringSplitOptions.RemoveEmptyEntries)
 
         If dgv.SelectedCells.Count > 0 Then
             r = dgv.SelectedCells(0).RowIndex
@@ -637,7 +639,7 @@ Public Module General
                 arT = tArr(i).Split(vbTab)
                 For ii = 0 To arT.Length - 1
                     If r > dgv.Rows.Count - 1 Then
-                        dgv.Rows.Add()
+                        If addnewline Then dgv.Rows.Add()
                         dgv.Rows(0).Cells(0).Selected = True
                     End If
                 Next
@@ -653,13 +655,16 @@ Public Module General
         End If
         For i = 0 To tArr.Length - 1
             If tArr(i) <> "" Then
-                arT = tArr(i).Split(vbTab)
+                arT = tArr(i).Split(New Char() {vbTab, ";"})
                 cc = c
                 For ii = 0 To arT.Length - 1
-                    cc = GetNextVisibleCol(dgv, cc)
-                    If cc > dgv.ColumnCount - 1 Then Exit For
-                    dgv.Item(cc, r).Value = arT(ii).TrimStart
-                    cc = cc + 1
+                    Try
+                        cc = GetNextVisibleCol(dgv, cc)
+                        If cc > dgv.ColumnCount - 1 Then Exit For
+                        dgv.Item(cc, r).Value = arT(ii).TrimStart
+                        cc = cc + 1
+                    Catch ex As Exception
+                    End Try
                 Next
                 r = r + 1
             End If

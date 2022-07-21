@@ -1630,7 +1630,7 @@ Namespace PropertyPackages
             Dim VZc = RET_VZC()
 
             Dim V0 = 1.5 * 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
-            Dim T0 = (VTc.MinY() + VTc.MaxY()) / 2
+            Dim T0 = VTc.MultiplyY(Vz).SumY()
 
             Return gm.CriticalPoint(Vz, V0, T0)
 
