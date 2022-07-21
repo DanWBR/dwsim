@@ -2064,7 +2064,7 @@ Final2:
 
             Dim d1(n), d2(n), d3(n), d4(n) As Double
 
-            Dim h As Double = 0.000001
+            Dim h As Double = 0.01
 
             Dim n1 = 1 - 2 * h * Vz0(jidx)
             Dim n2 = 1 - 1 * h * Vz0(jidx)
@@ -2123,7 +2123,7 @@ Final2:
 
             Dim points1(n), points2(n) As Double
 
-            Dim h As Double = 0.001
+            Dim h As Double = 0.01
 
             Dim t1 = Task.Run(Sub()
                                   points1 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, -h, Vz0))
@@ -2184,7 +2184,7 @@ Final2:
             Do
                 j = 0
                 Do
-                    mat(i, j) = el(i)(j) * T / 100.0
+                    mat(i, j) = el(i)(j) * 8.314 * T
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -2229,7 +2229,7 @@ Final2:
                 Do
                     k = 0
                     Do
-                        ts += mat(j, k)(i) * Dn(i) * Dn(j) * Dn(k) * T / 100.0
+                        ts += mat(j, k)(i) * Dn(i) * Dn(j) * Dn(k) * 8.314 * T
                         k = k + 1
                     Loop Until k = n + 1
                     j = j + 1
@@ -2254,7 +2254,18 @@ Final2:
 
             Dim brent As New BrentOpt.Brent
 
-            T = brent.BrentOpt2(Tmin, Tmax, 5, 0.0001, 100,
+            Dim Pmi, Tmin2 As Double
+            Dim cnt As Integer = 0
+
+            Tmin2 = Tmin
+
+            Do
+                Pmi = CalcP.Invoke(Tmin2, V, Vz)
+                Tmin2 *= 1.05
+                cnt += 1
+            Loop Until Pmi > 101325 Or cnt > 50
+
+            T = brent.BrentOpt2(Tmin2, Tmax, 10, 0.0001, 100,
                                 Function(Tx)
                                     Return QijDetBrent(Tx, V, Vz)
                                 End Function)
@@ -2323,7 +2334,7 @@ Final2:
 
             Dim fV, fV2, delta_Vc, Viter As Double
 
-            delta_Vc = (Vmax - Vmin) / 5
+            delta_Vc = (Vmax - Vmin) / 10
 
             Viter = Vmax
 
@@ -2333,14 +2344,21 @@ Final2:
                 fV2 = TripleSum2(Viter, Vz)
             Loop Until fV * fV2 < 0 Or Viter <= Vmin
 
-            V = brent.BrentOpt2(Viter, Viter + delta_Vc, 5, 0.0000000001, 100,
+            V = brent.BrentOpt2(Viter, Viter + delta_Vc, 10, 0.0000000001, 100,
                                 Function(Vi)
                                     Return TripleSum2(Vi, Vz)
                                 End Function)
 
-            Dim T, P As Double
+            Dim T, P, Pmi, Tmin2 As Double
+            Dim cnt As Integer = 0
+            Tmin2 = Tmin
+            Do
+                Pmi = CalcP.Invoke(Tmin2, V, Vz)
+                Tmin2 *= 1.05
+                cnt += 1
+            Loop Until Pmi > 101325 Or cnt > 50
 
-            T = brent.BrentOpt2(Tmin, Tmax, 20, 0.0000001, 100,
+            T = brent.BrentOpt2(Tmin2, Tmax, 10, 0.0000001, 100,
                                 Function(Tx)
                                     Return QijDetBrent(Tx, V, Vz)
                                 End Function)
@@ -2354,7 +2372,6 @@ Final2:
         End Function
 
 #End Region
-
 
     End Class
 
