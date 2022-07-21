@@ -2064,7 +2064,7 @@ Final2:
 
             Dim d1(n), d2(n), d3(n), d4(n) As Double
 
-            Dim h As Double = 0.001
+            Dim h As Double = 0.000001
 
             Dim n1 = 1 - 2 * h * Vz0(jidx)
             Dim n2 = 1 - 1 * h * Vz0(jidx)
@@ -2184,7 +2184,7 @@ Final2:
             Do
                 j = 0
                 Do
-                    mat(i, j) = el(i)(j) * 8.314 * T / 100.0
+                    mat(i, j) = el(i)(j) * T / 100.0
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -2229,7 +2229,7 @@ Final2:
                 Do
                     k = 0
                     Do
-                        ts += mat(j, k)(i) * Dn(i) * Dn(j) * Dn(k) * 8.314 * T / 100.0
+                        ts += mat(j, k)(i) * Dn(i) * Dn(j) * Dn(k) * T / 100.0
                         k = k + 1
                     Loop Until k = n + 1
                     j = j + 1
@@ -2254,7 +2254,7 @@ Final2:
 
             Dim brent As New BrentOpt.Brent
 
-            T = brent.BrentOpt2(Tmin, Tmax, 20, 0.0000001, 100,
+            T = brent.BrentOpt2(Tmin, Tmax, 5, 0.0001, 100,
                                 Function(Tx)
                                     Return QijDetBrent(Tx, V, Vz)
                                 End Function)
@@ -2312,10 +2312,10 @@ Final2:
 
             Dim V As Double
 
-            Tmin = T0 * 0.5
+            Tmin = T0 / 2
             Tmax = T0 * 2
-            Vmin = V0 * 0.95
-            Vmax = 4.0 / 1.3 * V0
+            Vmin = V0 / 2
+            Vmax = V0 * 2
 
             Tit = T0
 

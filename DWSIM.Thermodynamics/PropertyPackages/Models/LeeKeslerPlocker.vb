@@ -392,7 +392,7 @@ Namespace PropertyPackages.Auxiliary
         Function H_LK(ByVal Vr As Double, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double)
 
             Dim zs, zh, wh, z, DHresS, DHresH, DHres As Double
-            Dim E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
+            Dim B, C, D, E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
 
             b1 = 0.1181193
             b2 = 0.265728
@@ -408,6 +408,14 @@ Namespace PropertyPackages.Auxiliary
             gamma = 0.060167
 
             wh = 0.3978
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr1 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zs = Vr * Pr1 / Tr
 
             E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
 
@@ -427,6 +435,10 @@ Namespace PropertyPackages.Auxiliary
             gamma = 0.03754
 
             wh = 0.3978
+
+            Dim Pr2 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zh = Vr * Pr2 / Tr
 
             E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
 
@@ -860,6 +872,77 @@ Final3:
 
         End Function
 
+        Function LnFugM(ByVal Vr As Double, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double) As Double()
+
+            Dim zs, zh, wh, z, LnFugMS, LnFugMH, LnFugMr As Double
+            Dim B, C, D, E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
+
+            b1 = 0.1181193
+            b2 = 0.265728
+            b3 = 0.15479
+            b4 = 0.030323
+            c1 = 0.0236744
+            c2 = 0.0186984
+            c3 = 0
+            c4 = 0.042724
+            d1 = 0.0000155488
+            d2 = 0.0000623689
+            beta = 0.65392
+            gamma = 0.060167
+
+            wh = 0.3978
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr1 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zs = Vr * Pr1 / Tr
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+            E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+            LnFugMS = zs - 1 - Math.Log(zs) + B / Vr + C / (2 * Vr ^ 2) + D / (5 * Vr ^ 5) + E
+
+            b1 = 0.2026579
+            b2 = 0.331511
+            b3 = 0.027655
+            b4 = 0.203488
+            c1 = 0.0313385
+            c2 = 0.0503618
+            c3 = 0.016901
+            c4 = 0.041577
+            d1 = 0.000048736
+            d2 = 0.00000740336
+            beta = 1.226
+            gamma = 0.03754
+
+            wh = 0.3978
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr2 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zh = Vr * Pr2 / Tr
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+            E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+            LnFugMH = zh - 1 - Math.Log(zh) + B / Vr + C / (2 * Vr ^ 2) + D / (5 * Vr ^ 5) + E
+
+            LnFugMr = LnFugMS + w / wh * (LnFugMH - LnFugMS)
+
+            Return New Double() {LnFugMr, LnFugMS, LnFugMH}
+
+        End Function
+
         Function CalcLnFug(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal VVc As Object, ByVal Hid As Double) As Object
 
             If Settings.EnableGPUProcessing Then
@@ -996,7 +1079,7 @@ Final3:
             Dim dlnfidwm, dTcmdx(n, n), dVcmdx(n, n), dPcmdx(n, n), dZcmdx(n, n), lnfi(n) As Double
             Dim lnfugm, lnfugs, lnfugh As Double, res As Double()
 
-            res = Me.LnFugM(V, Tr, Pr, wm)
+            res = Me.LnFugM(Vr, Tr, Pr, wm)
             lnfugm = res(0)
             lnfugs = res(1)
             lnfugh = res(2)
