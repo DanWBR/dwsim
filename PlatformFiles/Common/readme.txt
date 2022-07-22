@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.0.3
+Version 8.0.4
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,22 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.0.4
+
+- Toggle Weather Panel visibility (Classic UI)
+- Fixed issues with Rigorous Column
+- Fixed an issue with Automation3 interface
+- Fixed issue #346 (PEM Fuel Cell)
+- Phase Envelope fixes (Classic UI)
+- Fixed PEM Fuel Cell editor
+- Wind Turbine now uses rotor diameter instead of disk area
+- Rolled back compound search behavior (#351)
+- Fixed issue #352 (import compound)
+- Fix for updating compound data from JSON (#354)
+- Fixed pasting data in material stream composition table (#329)
+- Fixed simplex penalty value for smoother minimization in conversion reactor (#356)
+- Fixed Absorption Column stage naming
 
 Version 8.0.3
 

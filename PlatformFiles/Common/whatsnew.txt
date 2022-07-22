@@ -1,7 +1,15 @@
-Version 8.0.3
+Version 8.0.4
 
-- Fixed an issue with FOSSEE flowsheets loading
-- Fixed an issue with PV Flash (#333)
-- Fixed an issue with compound search on Classic UI (#328)
-- Fixed an issue with Master Property Table (#337)
-- Fixed an issue with single-compound flash and forced solids
+- Toggle Weather Panel visibility (Classic UI)
+- Fixed issues with Rigorous Column
+- Fixed an issue with Automation3 interface
+- Fixed issue #346 (PEM Fuel Cell)
+- Phase Envelope fixes (Classic UI)
+- Fixed PEM Fuel Cell editor
+- Wind Turbine now uses rotor diameter instead of disk area
+- Rolled back compound search behavior (#351)
+- Fixed issue #352 (import compound)
+- Fix for updating compound data from JSON (#354)
+- Fixed pasting data in material stream composition table (#329)
+- Fixed simplex penalty value for smoother minimization in conversion reactor (#356)
+- Fixed Absorption Column stage naming
