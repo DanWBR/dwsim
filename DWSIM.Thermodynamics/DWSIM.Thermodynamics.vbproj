@@ -916,12 +916,10 @@
     <None Include="Resources\cog1.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Databases\FoodProp\FoodProp.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\DWSIM_ico_64.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\FoodProp.xml" />
     <EmbeddedResource Include="Assets\ChemSep_IDs.txt" />
     <EmbeddedResource Include="Assets\CAS_IDs.txt" />
     <Content Include="Assets\Databases\Artistic_license_2_0.txt" />
