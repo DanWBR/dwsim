@@ -1,6 +1,3 @@
 [submodule "Eto.Forms"]
 	path = Eto.Forms
 	url = https://github.com/DanWBR/Eto
-[submodule "DWSIM.Thermodynamics/Assets/Databases/FoodProp"]
-	path = DWSIM.Thermodynamics/Assets/Databases/FoodProp
-	url = https://github.com/Spogis/DWSIMFoodProp
