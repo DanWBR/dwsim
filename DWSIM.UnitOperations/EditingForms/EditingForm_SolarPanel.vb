@@ -65,7 +65,7 @@ Public Class EditingForm_SolarPanel
 
             'connections
 
-            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).OrderBy(Function(m) m).ToArray()
 
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)

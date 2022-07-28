@@ -174,9 +174,9 @@ Public Class EditingForm_Column_Connections_New
         Dim cbST As New DataGridViewComboBoxCell
 
         cbMS.Items.Add("")
-        cbMS.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream).Select(Function(x2) x2.GraphicObject.Tag).ToArray)
+        cbMS.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream).Select(Function(x2) x2.GraphicObject.Tag).OrderBy(Function(x) x).ToArray)
         cbES.Items.Add("")
-        cbES.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream).Select(Function(x2) x2.GraphicObject.Tag).ToArray)
+        cbES.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream).Select(Function(x2) x2.GraphicObject.Tag).OrderBy(Function(x) x).ToArray)
         cbST.Items.AddRange(stageNames.ToArray)
 
         DirectCast(gridFeeds.Columns(2), DataGridViewComboBoxColumn).CellTemplate = cbMS

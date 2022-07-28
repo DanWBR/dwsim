@@ -87,7 +87,7 @@ Public Class EditingForm_CustomUO
 
             'connections
 
-            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).ToArray
+            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).OrderBy(Function(m) m).ToArray
 
             cbInlet1.Items.Clear()
             cbInlet1.Items.AddRange(mslist)
@@ -128,7 +128,7 @@ Public Class EditingForm_CustomUO
             If .GraphicObject.OutputConnectors(5).IsAttached Then cbOutlet5.SelectedItem = .GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(6).IsAttached Then cbOutlet6.SelectedItem = .GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Tag
 
-            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).OrderBy(Function(m) m).ToArray
 
             cbEnergyE.Items.Clear()
             cbEnergyE.Items.AddRange(eslist)
