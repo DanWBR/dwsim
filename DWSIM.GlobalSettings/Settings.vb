@@ -231,18 +231,18 @@ Public Class Settings
 
             Dim append As String = ppath + ";" + Path.Combine(ppath, "Library", "bin") + ";"
 
-            'Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
+            Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
             ' Set Path
-            'Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
+            Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
             ' Set PythonHome
-            'Environment.SetEnvironmentVariable("PYTHONHOME", ppath, EnvironmentVariableTarget.Process)
+            Environment.SetEnvironmentVariable("PYTHONHOME", ppath, EnvironmentVariableTarget.Process)
             ' Set PythonPath
-            'Environment.SetEnvironmentVariable("PYTHONPATH", Path.Combine(p1, "Lib"), EnvironmentVariableTarget.Process)
+            Environment.SetEnvironmentVariable("PYTHONPATH", Path.Combine(p1, "Lib"), EnvironmentVariableTarget.Process)
 
             'set PYDLL
             Dim pydll = Directory.GetFiles(ppath, "python3*.dll")
             If pydll.Count > 0 Then
-                'Environment.SetEnvironmentVariable("PYTHONNET_PYDLL", pydll(1), EnvironmentVariableTarget.Process)
+                Environment.SetEnvironmentVariable("PYTHONNET_PYDLL", pydll(1), EnvironmentVariableTarget.Process)
                 Runtime.PythonDLL = pydll(1)
                 DWSIM.Logging.Logger.LogInfo("Python Runtime DLL path set to " + pydll(1))
             Else
