@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 19</value>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 39</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
     <value>PictureBox1</value>
@@ -130,31 +130,31 @@
   <data name="LinkLabel14.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LinkLabel9.TabIndex" type="System.Int32, mscorlib">
-    <value>103</value>
+  <data name="&gt;&gt;ImageList1.Name" xml:space="preserve">
+    <value>ImageList1</value>
   </data>
   <data name="&gt;&gt;LinkLabel5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PictureBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+  <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PictureBox4.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
+  <data name="PictureBox8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 96</value>
   </data>
-  <data name="Panel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 504</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 12pt, style=Bold</value>
@@ -162,8 +162,8 @@
   <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 120</value>
   </data>
-  <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 53</value>
   </data>
   <data name="TabPage5.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -180,8 +180,8 @@
   <data name="&gt;&gt;FOSSEEList.Parent" xml:space="preserve">
     <value>TabPage5</value>
   </data>
-  <data name="FOSSEEList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 156</value>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Atalhos</value>
   </data>
   <data name="FOSSEEList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -192,14 +192,20 @@
   <data name="Label13.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <data name="Label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="PictureBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="&gt;&gt;LinkLabel3.Name" xml:space="preserve">
     <value>LinkLabel3</value>
   </data>
   <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Acesso Rápido</value>
+  <data name="&gt;&gt;ColumnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LinkLabel5.Parent" xml:space="preserve">
     <value>Panel2</value>
@@ -210,29 +216,29 @@
   <data name="&gt;&gt;LinkLabel7.Parent" xml:space="preserve">
     <value>Panel3</value>
   </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Torne-se um Patrocinador</value>
-  </data>
-  <data name="Label13.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
+  <data name="&gt;&gt;TabPage6.Parent" xml:space="preserve">
+    <value>TabControl2</value>
   </data>
   <data name="LinkLabel2.Text" xml:space="preserve">
     <value>Carregar Existente</value>
   </data>
+  <data name="&gt;&gt;LinkLabel10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="LinkLabel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 16</value>
+  </data>
+  <data name="&gt;&gt;TabControl2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lvsamples.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
-  </data>
-  <data name="Label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="&gt;&gt;lvlatest.Parent" xml:space="preserve">
-    <value>TabPage1</value>
   </data>
   <data name="Label9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
@@ -249,14 +255,23 @@
   <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
+  <data name="PictureBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 0</value>
+  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Descubra o DWSIM Pro</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TabControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
   <data name="&gt;&gt;LinkLabel7.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel14.Name" xml:space="preserve">
+    <value>LinkLabel14</value>
   </data>
   <data name="Button3.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -264,11 +279,17 @@
   <data name="PictureBox3.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
+  </data>
   <data name="&gt;&gt;LinkLabel7.Name" xml:space="preserve">
     <value>LinkLabel7</value>
   </data>
   <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="PictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button4.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -276,8 +297,8 @@
   <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
   </data>
-  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>737, 731</value>
   </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>Panel2</value>
@@ -285,11 +306,11 @@
   <data name="&gt;&gt;PictureBox7.Name" xml:space="preserve">
     <value>PictureBox7</value>
   </data>
+  <data name="&gt;&gt;Label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 15</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;LinkLabel11.Parent" xml:space="preserve">
     <value>Panel2</value>
@@ -297,8 +318,8 @@
   <data name="&gt;&gt;PictureBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LinkLabel14.Name" xml:space="preserve">
-    <value>LinkLabel14</value>
+  <data name="PictureBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 99</value>
   </data>
   <data name="&gt;&gt;LinkLabel4.Parent" xml:space="preserve">
     <value>Panel2</value>
@@ -309,23 +330,23 @@
   <data name="LinkLabel13.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>708, 120</value>
+  </data>
+  <data name="&gt;&gt;ColumnHeader4.Name" xml:space="preserve">
+    <value>ColumnHeader4</value>
   </data>
   <data name="Label17.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
   </data>
-  <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 34</value>
   </data>
   <data name="&gt;&gt;Button4.Name" xml:space="preserve">
     <value>Button4</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel3</value>
-  </data>
-  <data name="&gt;&gt;lvlatestfolders.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -339,17 +360,14 @@
   <data name="&gt;&gt;LinkLabel9.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lvlatestfolders.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
   <data name="lvsamples.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 37</value>
   </data>
-  <data name="LinkLabel15.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="Button6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;LinkLabel12.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -369,8 +387,8 @@
   <data name="LinkLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 93</value>
+  <data name="&gt;&gt;TabControl2.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 39</value>
@@ -378,29 +396,44 @@
   <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
     <value>TabPage1</value>
   </data>
+  <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 64</value>
+  </data>
+  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>TabPage5</value>
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>594, 33</value>
   </data>
+  <data name="&gt;&gt;TabPage6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="LinkLabel3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
-  <data name="LinkLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="FOSSEEList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>477, 563</value>
   </data>
-  <data name="Button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>93</value>
   </data>
   <data name="&gt;&gt;lvlatest.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
+    <value>TabControl2</value>
+  </data>
   <data name="&gt;&gt;LinkLabel13.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -408,20 +441,23 @@
   <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
+  <data name="&gt;&gt;TabControl2.Name" xml:space="preserve">
+    <value>TabControl2</value>
+  </data>
+  <data name="&gt;&gt;PictureBox4.Name" xml:space="preserve">
+    <value>PictureBox4</value>
+  </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 36</value>
   </data>
   <data name="&gt;&gt;LinkLabel12.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>770, 49</value>
-  </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
   </data>
-  <data name="&gt;&gt;Panel7.Name" xml:space="preserve">
-    <value>Panel7</value>
+  <data name="&gt;&gt;TabPage5.Name" xml:space="preserve">
+    <value>TabPage5</value>
   </data>
   <data name="&gt;&gt;LinkLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -438,11 +474,11 @@
   <data name="&gt;&gt;Button6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 35</value>
+  </data>
   <data name="LinkLabel13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Documentação</value>
   </data>
   <data name="&gt;&gt;LinkLabel1.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -456,6 +492,9 @@
   <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;Panel7.Name" xml:space="preserve">
+    <value>Panel7</value>
+  </data>
   <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -465,8 +504,8 @@
   <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 16</value>
   </data>
-  <data name="Label12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 12pt, style=Bold</value>
+  <data name="LinkLabel15.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="LinkLabel15.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
@@ -474,14 +513,17 @@
   <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="LinkLabel14.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="LinkLabel7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
+  </data>
+  <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
   </data>
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -495,8 +537,8 @@
   <data name="LinkLabel6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="PictureBox8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+  <data name="LinkLabel14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
   <data name="PictureBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 119</value>
@@ -513,35 +555,38 @@
   <data name="LinkLabel6.Text" xml:space="preserve">
     <value>Criar Novo Estudo</value>
   </data>
-  <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
+  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 68</value>
+  <data name="&gt;&gt;LinkLabel7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PictureBox4.Parent" xml:space="preserve">
+    <value>Panel6</value>
+  </data>
+  <data name="&gt;&gt;PictureBox3.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="LinkLabel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 43</value>
+    <value>TabPage4</value>
   </data>
   <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
+    <value>613, 0</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 16</value>
   </data>
-  <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Criador de Substâncias / Regressão de Dados</value>
+  </data>
+  <data name="&gt;&gt;NewsViewer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Panel5.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="Button2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="&gt;&gt;PictureBox3.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Submit a Flowsheet</value>
@@ -549,17 +594,20 @@
   <data name="PictureBox7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="LinkLabel4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="PictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
   </data>
   <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 73</value>
+    <value>708, 73</value>
   </data>
   <data name="&gt;&gt;Panel6.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage4</value>
   </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -570,17 +618,23 @@
   <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="LinkLabel8.Text" xml:space="preserve">
-    <value>Guia do Usuário</value>
+  <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>TabPage5</value>
   </data>
-  <data name="&gt;&gt;Panel7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="PictureBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 116</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
+  </data>
+  <data name="&gt;&gt;TabControl2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -588,14 +642,20 @@
   <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
     <value>TabPage3</value>
   </data>
-  <data name="ColumnHeader2.Width" type="System.Int32, mscorlib">
-    <value>800</value>
+  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
+    <value>Panel3</value>
   </data>
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 583</value>
   </data>
   <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -606,11 +666,17 @@
   <data name="LinkLabel6.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
   </data>
-  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="LinkLabel13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>392, 40</value>
   </data>
-  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Notícias</value>
+  </data>
+  <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
+    <value>TabPage5</value>
   </data>
   <data name="LinkLabel9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -618,8 +684,8 @@
   <data name="&gt;&gt;LinkLabel8.Name" xml:space="preserve">
     <value>LinkLabel8</value>
   </data>
-  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 34</value>
+  <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="LinkLabel10.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 40</value>
@@ -630,8 +696,8 @@
   <data name="ColumnHeader4.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="&gt;&gt;LinkLabel4.Name" xml:space="preserve">
-    <value>LinkLabel4</value>
+  <data name="&gt;&gt;ColumnHeader2.Name" xml:space="preserve">
+    <value>ColumnHeader2</value>
   </data>
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
@@ -645,11 +711,14 @@
   <data name="LinkLabel9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
+  <data name="NewsViewer.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="LinkLabel15.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 78</value>
   </data>
-  <data name="&gt;&gt;PictureBox5.Parent" xml:space="preserve">
-    <value>Panel5</value>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 34</value>
   </data>
   <data name="LinkLabel15.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
@@ -663,32 +732,23 @@
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="PictureBox8.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
   </data>
   <data name="TabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
-  </data>
-  <data name="Label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="ColumnHeader3.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
-    <value>Panel2</value>
+  <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LinkLabel10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 626</value>
+  <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 66</value>
   </data>
   <data name="PictureBox6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -699,23 +759,32 @@
   <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Panel6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LinkLabel15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 24</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 68</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>558, 39</value>
+  <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LinkLabel14.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 86</value>
   </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="LinkLabel8.Text" xml:space="preserve">
+    <value>Guia do Usuário</value>
+  </data>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 24</value>
+  </data>
+  <data name="&gt;&gt;Panel5.Name" xml:space="preserve">
+    <value>Panel5</value>
   </data>
   <data name="&gt;&gt;LinkLabel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -723,11 +792,14 @@
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 19</value>
   </data>
-  <data name="LinkLabel3.Text" xml:space="preserve">
-    <value>Carregar do Simulate 365 Dashboard</value>
+  <data name="LinkLabel9.TabIndex" type="System.Int32, mscorlib">
+    <value>103</value>
   </data>
-  <data name="FOSSEEList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 563</value>
+  <data name="LinkLabel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 16</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
+    <value>TabPage4</value>
   </data>
   <data name="LinkLabel10.Text" xml:space="preserve">
     <value>Recursos de Aprendizagem</value>
@@ -735,44 +807,41 @@
   <data name="Button6.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="LinkLabel14.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;PictureBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LinkLabel8.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 40</value>
   </data>
-  <data name="LinkLabel5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
+  <data name="LinkLabel12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 40</value>
   </data>
-  <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;lvlatestfolders.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="LinkLabel15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 24</value>
   </data>
   <data name="lvlatest.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 19</value>
   </data>
-  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;LinkLabel11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnHeader3.Name" xml:space="preserve">
     <value>ColumnHeader3</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 102</value>
+    <value>708, 102</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
@@ -780,11 +849,14 @@
   <data name="&gt;&gt;LinkLabel6.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;LinkLabel15.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="NewsViewer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
-    <value>103</value>
+  <data name="PictureBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>708, 119</value>
   </data>
   <data name="&gt;&gt;lvsamples.Name" xml:space="preserve">
     <value>lvsamples</value>
@@ -795,14 +867,17 @@
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
   </data>
+  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;LinkLabel12.Name" xml:space="preserve">
     <value>LinkLabel12</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="lvlatest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;Label16.Name" xml:space="preserve">
     <value>Label16</value>
@@ -813,8 +888,8 @@
   <data name="LinkLabel11.Text" xml:space="preserve">
     <value>Criar Nova Substância com Assistente</value>
   </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
   </data>
   <data name="&gt;&gt;Button2.Name" xml:space="preserve">
     <value>Button2</value>
@@ -822,8 +897,14 @@
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 34</value>
   </data>
+  <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;FOSSEEList.Name" xml:space="preserve">
     <value>FOSSEEList</value>
+  </data>
+  <data name="NewsViewer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Exemplos</value>
@@ -848,7 +929,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD2
-        DwAAAk1TRnQBSQFMAgEBBQEAAeABBgHwAQYBEAEAARABAAT/AREBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAQQBBwEIAQcBEAEAARABAAT/AREBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -922,14 +1003,20 @@
   <data name="PictureBox7.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
-    <value>LinkLabel2</value>
+  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
+    <value>Panel6</value>
   </data>
   <data name="&gt;&gt;LinkLabel8.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="PictureBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 116</value>
+  <data name="NewsViewer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>731, 725</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel6.Parent" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="Label15.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
   </data>
   <data name="Button4.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -937,11 +1024,20 @@
   <data name="Panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;LinkLabel15.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;NewsViewer.Type" xml:space="preserve">
+    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
+  </data>
   <data name="LinkLabel13.Text" xml:space="preserve">
     <value>Documentação da API</value>
   </data>
   <data name="&gt;&gt;Panel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -953,10 +1049,10 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
-  <data name="&gt;&gt;Panel5.Name" xml:space="preserve">
-    <value>Panel5</value>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>507, 760</value>
   </data>
   <data name="Label4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
@@ -973,23 +1069,26 @@
   <data name="lvlatest.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>93</value>
+  <data name="PictureBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 119</value>
+  <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;NewsViewer.Name" xml:space="preserve">
+    <value>NewsViewer</value>
   </data>
   <data name="Panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Documentação</value>
   </data>
   <data name="Panel6.TabIndex" type="System.Int32, mscorlib">
     <value>103</value>
   </data>
   <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage4</value>
   </data>
   <data name="Label13.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1003,14 +1102,14 @@
   <data name="PictureBox4.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
-    <value>TabPage5</value>
+  <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
+    <value>Panel7</value>
   </data>
   <data name="LinkLabel9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
+    <value>613, 0</value>
   </data>
   <data name="Panel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1018,23 +1117,17 @@
   <data name="PictureBox7.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="Label15.TabIndex" type="System.Int32, mscorlib">
-    <value>97</value>
-  </data>
   <data name="PictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;LinkLabel6.Parent" xml:space="preserve">
-    <value>Panel2</value>
+  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LinkLabel4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
+  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
+    <value>TabPage4</value>
   </data>
   <data name="&gt;&gt;Panel6.Name" xml:space="preserve">
     <value>Panel6</value>
@@ -1042,20 +1135,20 @@
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormWelcome</value>
+  </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 93</value>
   </data>
-  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
-    <value>97</value>
+  <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 16</value>
   </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>773, 15</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel10.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;NewsViewer.Parent" xml:space="preserve">
+    <value>TabPage6</value>
   </data>
   <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1063,23 +1156,41 @@
   <data name="LinkLabel7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>737, 731</value>
+  </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 16</value>
+  </data>
+  <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 0</value>
   </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
   </data>
-  <data name="&gt;&gt;PictureBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel7.TabIndex" type="System.Int32, mscorlib">
+    <value>104</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;PictureBox3.Name" xml:space="preserve">
+    <value>PictureBox3</value>
   </data>
   <data name="LinkLabel12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage4</value>
   </data>
   <data name="&gt;&gt;PictureBox7.Parent" xml:space="preserve">
     <value>Panel2</value>
+  </data>
+  <data name="Panel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 461</value>
+  </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 54</value>
   </data>
   <data name="Label6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
@@ -1089,6 +1200,9 @@
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="TabControl2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="LinkLabel5.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -1102,35 +1216,41 @@
   <data name="LinkLabel5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="PictureBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
-  </data>
   <data name="&gt;&gt;LinkLabel10.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="TabPage4.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Simulate 365 DASHBOARD Grátis para o DWSIM</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Crie ou carregue modelos de processos químicos em estado estacionário ou dinâmicos.</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
   </data>
-  <data name="LinkLabel6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 19</value>
+  </data>
+  <data name="TabControl2.TabIndex" type="System.Int32, mscorlib">
+    <value>105</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 34</value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>594, 41</value>
+  </data>
+  <data name="PictureBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1138,11 +1258,11 @@
   <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;LinkLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 19</value>
@@ -1153,26 +1273,23 @@
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>525, 16</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 54</value>
   </data>
   <data name="&gt;&gt;lvsamples.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 736</value>
+    <value>6, 693</value>
   </data>
   <data name="PictureBox1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 120</value>
+  <data name="&gt;&gt;PictureBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lvlatestfolders.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1186,8 +1303,8 @@
   <data name="&gt;&gt;LinkLabel10.Name" xml:space="preserve">
     <value>LinkLabel10</value>
   </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1196,13 +1313,13 @@
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 49</value>
+    <value>6, 6</value>
   </data>
   <data name="&gt;&gt;LinkLabel8.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1216,8 +1333,8 @@
   <data name="&gt;&gt;PictureBox5.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Criador de Substâncias / Regressão de Dados</value>
+  <data name="&gt;&gt;Label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
     <value>493, 725</value>
@@ -1240,17 +1357,26 @@
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
   </data>
-  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LinkLabel11.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 16</value>
   </data>
-  <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="LinkLabel6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="Label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;LinkLabel6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabControl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 49</value>
+  </data>
+  <data name="&gt;&gt;TabPage6.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;PictureBox4.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1260,9 +1386,6 @@
   </data>
   <data name="&gt;&gt;Button3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="LinkLabel9.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 66</value>
@@ -1279,11 +1402,11 @@
   <data name="&gt;&gt;LinkLabel3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>Panel6</value>
+  <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
+    <value>TabPage4</value>
   </data>
   <data name="LinkLabel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 43</value>
@@ -1291,8 +1414,8 @@
   <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
     <value>984</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lvlatest.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -1309,14 +1432,14 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="PictureBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 64</value>
   </data>
-  <data name="&gt;&gt;PictureBox3.Name" xml:space="preserve">
-    <value>PictureBox3</value>
+  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>770, 49</value>
   </data>
   <data name="PictureBox6.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1327,59 +1450,53 @@
   <data name="Button4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="lvlatestfolders.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LinkLabel4.Text" xml:space="preserve">
+    <value>Criar Nova Substância</value>
   </data>
   <data name="LinkLabel8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="LinkLabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
-  </data>
-  <data name="&gt;&gt;ColumnHeader2.Name" xml:space="preserve">
-    <value>ColumnHeader2</value>
+  <data name="LinkLabel5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="LinkLabel8.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
   </data>
-  <data name="&gt;&gt;ImageList1.Name" xml:space="preserve">
-    <value>ImageList1</value>
+  <data name="Button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="ColumnHeader1.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="&gt;&gt;PictureBox6.Name" xml:space="preserve">
     <value>PictureBox6</value>
   </data>
-  <data name="LinkLabel11.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="Label13.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;PictureBox7.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormWelcome</value>
+  <data name="LinkLabel11.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="LinkLabel12.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 16</value>
   </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
+  <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="Button6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 35</value>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>708, 93</value>
   </data>
-  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 54</value>
+  <data name="LinkLabel11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
@@ -1387,14 +1504,14 @@
   <data name="Label16.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 12pt, style=Bold</value>
   </data>
-  <data name="ColumnHeader1.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>89</value>
   </data>
   <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 16</value>
+  </data>
+  <data name="Panel6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
@@ -1402,17 +1519,11 @@
   <data name="&gt;&gt;PictureBox8.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 16</value>
   </data>
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
@@ -1420,20 +1531,20 @@
   <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="LinkLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
   </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;FOSSEEList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel6.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="LinkLabel8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
@@ -1444,41 +1555,41 @@
   <data name="Button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 24</value>
+  <data name="Panel7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;PictureBox7.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;LinkLabel15.Parent" xml:space="preserve">
     <value>Panel7</value>
   </data>
   <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 148</value>
+    <value>6, 105</value>
   </data>
-  <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
   </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 54</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Bem-vindo ao DWSIM!</value>
   </data>
   <data name="PictureBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="LinkLabel10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 64</value>
+  <data name="TabControl2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
   </data>
-  <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
-    <value>Panel7</value>
-  </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
+  <data name="&gt;&gt;LinkLabel4.Name" xml:space="preserve">
+    <value>LinkLabel4</value>
   </data>
   <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1498,14 +1609,17 @@
   <data name="&gt;&gt;LinkLabel5.Name" xml:space="preserve">
     <value>LinkLabel5</value>
   </data>
-  <data name="&gt;&gt;LinkLabel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;ColumnHeader4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
     <value>TabPage2</value>
   </data>
   <data name="&gt;&gt;Panel4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
@@ -1519,23 +1633,20 @@
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
   </data>
-  <data name="&gt;&gt;TabPage5.Name" xml:space="preserve">
-    <value>TabPage5</value>
+  <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
+    <value>LinkLabel2</value>
+  </data>
+  <data name="LinkLabel15.Text" xml:space="preserve">
+    <value>Faça Parte</value>
   </data>
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 34</value>
-  </data>
-  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader4.Name" xml:space="preserve">
-    <value>ColumnHeader4</value>
+  <data name="LinkLabel12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="PictureBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 73</value>
@@ -1543,8 +1654,11 @@
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Pastas</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="PictureBox8.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
+    <value>Label15</value>
   </data>
   <data name="Button6.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -1552,20 +1666,8 @@
   <data name="&gt;&gt;LinkLabel13.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="&gt;&gt;FOSSEEList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 12</value>
-  </data>
-  <data name="Label16.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
-  </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LinkLabel11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;lvlatestfolders.Parent" xml:space="preserve">
     <value>TabPage3</value>
@@ -1573,11 +1675,8 @@
   <data name="&gt;&gt;PictureBox6.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Panel7.TabIndex" type="System.Int32, mscorlib">
-    <value>104</value>
-  </data>
-  <data name="lvlatest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;LinkLabel14.Parent" xml:space="preserve">
     <value>Panel6</value>
@@ -1586,7 +1685,7 @@
     <value>1</value>
   </data>
   <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 378</value>
+    <value>6, 335</value>
   </data>
   <data name="LinkLabel1.Text" xml:space="preserve">
     <value>Criar Novo</value>
@@ -1594,8 +1693,8 @@
   <data name="LinkLabel15.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;Panel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage6.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;LinkLabel15.Name" xml:space="preserve">
     <value>LinkLabel15</value>
@@ -1606,11 +1705,11 @@
   <data name="LinkLabel13.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 16</value>
   </data>
-  <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 16</value>
+  <data name="&gt;&gt;Panel7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LinkLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ColumnHeader2.Width" type="System.Int32, mscorlib">
+    <value>800</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>About the Project</value>
@@ -1618,8 +1717,8 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Abra e salve seus arquivos de simulação do DWSIM para o DASHBOARD. Obtenha maior transparência em seus fluxogramas com controle de versão integrado e tags personalizadas.</value>
   </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>627, 41</value>
+  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;lvlatest.Name" xml:space="preserve">
     <value>lvlatest</value>
@@ -1633,23 +1732,14 @@
   <data name="Label8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
-  </data>
-  <data name="LinkLabel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 16</value>
-  </data>
-  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
-  </data>
-  <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 725</value>
+  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
+    <value>103</value>
   </data>
   <data name="&gt;&gt;LinkLabel11.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="Panel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 116</value>
+    <value>708, 116</value>
   </data>
   <data name="LinkLabel14.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
@@ -1657,29 +1747,29 @@
   <data name="&gt;&gt;PictureBox3.Parent" xml:space="preserve">
     <value>Panel3</value>
   </data>
+  <data name="LinkLabel14.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="Label11.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
+  </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 19</value>
   </data>
   <data name="LinkLabel5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="PictureBox8.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Recentes</value>
   </data>
-  <data name="&gt;&gt;LinkLabel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 12pt, style=Bold</value>
-  </data>
-  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="LinkLabel14.Text" xml:space="preserve">
     <value>Iniciar</value>
   </data>
-  <data name="&gt;&gt;PictureBox4.Parent" xml:space="preserve">
-    <value>Panel6</value>
+  <data name="Label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -1688,7 +1778,7 @@
     <value>Label9</value>
   </data>
   <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
+    <value>613, 0</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Flowsheets FOSSEE</value>
@@ -1696,17 +1786,17 @@
   <data name="Button6.Text" xml:space="preserve">
     <value>About FOSSEE</value>
   </data>
-  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 26</value>
-  </data>
-  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>89</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Crie ou carregue modelos de processos químicos em estado estacionário ou dinâmicos.</value>
   </data>
   <data name="LinkLabel4.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 53</value>
+  <data name="&gt;&gt;TabPage6.Name" xml:space="preserve">
+    <value>TabPage6</value>
+  </data>
+  <data name="Button2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
   </data>
   <data name="LinkLabel7.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
@@ -1714,23 +1804,26 @@
   <data name="LinkLabel13.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;PictureBox4.Name" xml:space="preserve">
-    <value>PictureBox4</value>
+  <data name="&gt;&gt;LinkLabel10.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;PictureBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>507, 760</value>
+  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>708, 99</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="Button2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Programa de Responsabilidade Social do DWSIM</value>
   </data>
   <data name="Label14.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 12pt, style=Bold</value>
@@ -1744,11 +1837,11 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Apoie o desenvolvimento do DWSIM e ajude a mantê-lo sempre grátis e de código aberto.</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="LinkLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
   </data>
-  <data name="PictureBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
+  <data name="Button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1759,11 +1852,8 @@
   <data name="PictureBox3.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
-  <data name="LinkLabel15.Text" xml:space="preserve">
-    <value>Faça Parte</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Recentes</value>
+  <data name="lvlatestfolders.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
   </data>
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1771,11 +1861,8 @@
   <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="&gt;&gt;Label12.Name" xml:space="preserve">
-    <value>Label12</value>
-  </data>
-  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -1789,6 +1876,9 @@
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
+  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1798,56 +1888,56 @@
   <data name="ColumnHeader4.Width" type="System.Int32, mscorlib">
     <value>800</value>
   </data>
-  <data name="PictureBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 99</value>
+  <data name="&gt;&gt;LinkLabel14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="FOSSEEList.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
-  <data name="LinkLabel14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="LinkLabel12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 0</value>
   </data>
-  <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
-    <value>99</value>
-  </data>
-  <data name="&gt;&gt;Label16.Type" xml:space="preserve">
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
+  </data>
+  <data name="LinkLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="LinkLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
-  </data>
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;LinkLabel7.Type" xml:space="preserve">
+  <data name="&gt;&gt;LinkLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LinkLabel11.Name" xml:space="preserve">
     <value>LinkLabel11</value>
   </data>
-  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
+    <value>493, 725</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
     <value>215, 96</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 19</value>
+  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
+    <value>Panel2</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 19</value>
@@ -1855,35 +1945,32 @@
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 19</value>
   </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Programa de Responsabilidade Social do DWSIM</value>
+  <data name="&gt;&gt;ColumnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
+    <value>Label6</value>
+  </data>
+  <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
-    <value>Label15</value>
-  </data>
   <data name="&gt;&gt;LinkLabel8.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 12pt, style=Bold</value>
+  <data name="FOSSEEList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 156</value>
   </data>
-  <data name="LinkLabel4.Text" xml:space="preserve">
-    <value>Criar Nova Substância</value>
-  </data>
-  <data name="LinkLabel11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="LinkLabel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 43</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Bem-vindo ao DWSIM!</value>
+  <data name="Label16.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Completed Flowsheets</value>
@@ -1897,16 +1984,10 @@
   <data name="&gt;&gt;LinkLabel15.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="LinkLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;LinkLabel9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PictureBox7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel14.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
@@ -1915,11 +1996,11 @@
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 64</value>
+  <data name="&gt;&gt;FOSSEEList.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
   </data>
   <data name="&gt;&gt;PictureBox8.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1927,16 +2008,13 @@
   <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
     <value>Panel7</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
   </data>
   <data name="LinkLabel5.Text" xml:space="preserve">
     <value>Carregar Existente</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button6.Name" xml:space="preserve">
@@ -1945,20 +2023,23 @@
   <data name="&gt;&gt;LinkLabel13.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>745, 760</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
+  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
-  <data name="LinkLabel13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 40</value>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Descubra como o irmão comercial do simulador de processos de código aberto DWSIM abre novas oportunidades para você e seus projetos.</value>
   </data>
-  <data name="TabControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt</value>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>517, 16</value>
+  </data>
+  <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1966,11 +2047,8 @@
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Descubra como o irmão comercial do simulador de processos de código aberto DWSIM abre novas oportunidades para você e seus projetos.</value>
-  </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="LinkLabel12.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
@@ -1978,8 +2056,11 @@
   <data name="LinkLabel8.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 16</value>
   </data>
-  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Panel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 210</value>
+  </data>
+  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
   </data>
   <data name="Panel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1991,28 +2072,31 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PictureBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 0</value>
+    <value>613, 0</value>
   </data>
   <data name="ColumnHeader1.Width" type="System.Int32, mscorlib">
     <value>800</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 26</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>TabPage4</value>
   </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="PictureBox5.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="&gt;&gt;FOSSEEList.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;PictureBox5.Parent" xml:space="preserve">
+    <value>Panel5</value>
   </data>
   <data name="LinkLabel6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2023,11 +2107,8 @@
   <data name="Label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 66</value>
-  </data>
-  <data name="LinkLabel12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 40</value>
+  <data name="LinkLabel7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="Panel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2038,58 +2119,55 @@
   <data name="LinkLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 24</value>
   </data>
-  <data name="&gt;&gt;LinkLabel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LinkLabel4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="PictureBox5.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
+  <data name="LinkLabel11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 12pt, style=Bold</value>
   </data>
-  <data name="Panel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 253</value>
+  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Button3.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
   <data name="&gt;&gt;Panel7.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lvlatestfolders.Name" xml:space="preserve">
     <value>lvlatestfolders</value>
   </data>
-  <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 99</value>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Torne-se um Patrocinador</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>383, 19</value>
   </data>
-  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
+  <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;Label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LinkLabel3.Text" xml:space="preserve">
+    <value>Carregar do Simulate 365 Dashboard</value>
   </data>
-  <data name="PictureBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>100</value>
+  <data name="lvlatestfolders.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>139</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>139</value>
   </metadata>
   <metadata name="ImageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
 </root>

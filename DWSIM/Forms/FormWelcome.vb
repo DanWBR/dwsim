@@ -115,6 +115,8 @@ Public Class FormWelcome
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        NewsViewer.Source = New Uri("https://www.patreon.com/dwsim/posts")
+
     End Sub
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

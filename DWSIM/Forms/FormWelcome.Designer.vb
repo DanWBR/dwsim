@@ -72,7 +72,6 @@ Partial Class FormWelcome
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.LinkLabel13 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel12 = New System.Windows.Forms.LinkLabel()
@@ -90,6 +89,10 @@ Partial Class FormWelcome
         Me.Label17 = New System.Windows.Forms.Label()
         Me.LinkLabel15 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
+        Me.TabControl2 = New System.Windows.Forms.TabControl()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.NewsViewer = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -109,6 +112,10 @@ Partial Class FormWelcome
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl2.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.TabPage6.SuspendLayout()
+        CType(Me.NewsViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lvlatest
@@ -519,13 +526,6 @@ Partial Class FormWelcome
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.TabStop = False
         '
-        'Label12
-        '
-        resources.ApplyResources(Me.Label12, "Label12")
-        Me.Label12.BackColor = System.Drawing.Color.Transparent
-        Me.Label12.ForeColor = System.Drawing.Color.Black
-        Me.Label12.Name = "Label12"
-        '
         'Panel5
         '
         resources.ApplyResources(Me.Panel5, "Panel5")
@@ -662,20 +662,49 @@ Partial Class FormWelcome
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.TabStop = False
         '
+        'TabControl2
+        '
+        resources.ApplyResources(Me.TabControl2, "TabControl2")
+        Me.TabControl2.Controls.Add(Me.TabPage4)
+        Me.TabControl2.Controls.Add(Me.TabPage6)
+        Me.TabControl2.Name = "TabControl2"
+        Me.TabControl2.SelectedIndex = 0
+        '
+        'TabPage4
+        '
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.Panel1)
+        Me.TabPage4.Controls.Add(Me.Panel7)
+        Me.TabPage4.Controls.Add(Me.Panel2)
+        Me.TabPage4.Controls.Add(Me.Panel6)
+        Me.TabPage4.Controls.Add(Me.Panel3)
+        Me.TabPage4.Controls.Add(Me.Panel5)
+        Me.TabPage4.Controls.Add(Me.Panel4)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.NewsViewer)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'NewsViewer
+        '
+        resources.ApplyResources(Me.NewsViewer, "NewsViewer")
+        Me.NewsViewer.CreationProperties = Nothing
+        Me.NewsViewer.DefaultBackgroundColor = System.Drawing.Color.White
+        Me.NewsViewer.Name = "NewsViewer"
+        Me.NewsViewer.ZoomFactor = 1.0R
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.background_welcome
-        Me.Controls.Add(Me.Panel7)
-        Me.Controls.Add(Me.Panel6)
-        Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.TabControl2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TabControl1)
         Me.DoubleBuffered = True
@@ -707,6 +736,10 @@ Partial Class FormWelcome
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl2.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage6.ResumeLayout(False)
+        CType(Me.NewsViewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -746,7 +779,6 @@ Partial Class FormWelcome
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents Label12 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents LinkLabel10 As LinkLabel
     Friend WithEvents LinkLabel8 As LinkLabel
@@ -776,4 +808,8 @@ Partial Class FormWelcome
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents LinkLabel9 As LinkLabel
+    Friend WithEvents TabControl2 As TabControl
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents NewsViewer As Microsoft.Web.WebView2.WinForms.WebView2
 End Class
