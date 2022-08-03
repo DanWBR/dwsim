@@ -3844,7 +3844,37 @@ Namespace UnitOperations
                     Next
                     If ex0 IsNot Nothing Then Throw ex0
                 Else
-                    so = Solver.SolveColumn(inputdata)
+                    Dim solvererror = True
+                    If SolvingMethodName.Contains("Rates") Then
+                        Try
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxTemperatureUpdates = False
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxCompositionUpdates = False
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxTemperatureUpdates = True
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxCompositionUpdates = True
+                            so = Solver.SolveColumn(inputdata)
+                        End If
+                    Else
+                        Try
+                            inputdata.CalculationMode = 0
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch oex As OperationCanceledException
+                            Throw oex
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": the column did not converge. DWSIM will try again with a different solver configuration...", IFlowsheet.MessageType.Warning)
+                            'try to solve with auto-generated initial estimates.
+                            inputdata.CalculationMode = 0
+                            so = Solver.SolveColumn(GetSolverInputData(True))
+                        End If
+                    End If
                 End If
             End If
 
