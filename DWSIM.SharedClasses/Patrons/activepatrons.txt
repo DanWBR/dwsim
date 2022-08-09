@@ -9,6 +9,7 @@ Andrew Dickson
 Bruce Rising
 Carlos G. C. Reetz
 Casey Houston
+Chris Verbert
 Christian Hornhofer
 Christian Jordan
 Christian Pedersen
