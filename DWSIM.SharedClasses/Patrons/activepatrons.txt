@@ -1,5 +1,4 @@
 ﻿Adam Kovalovszki
-Adam Spencer
 Alberto Baumeister
 Alex Platon
 Alfred Gongaware
@@ -21,7 +20,6 @@ Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
-Евгений Иванчиков
 Filippo Borroni
 Frank Mittricker
 Gokhan Candan 
@@ -32,7 +30,6 @@ Henar Portero
 Henk Fikkert
 Hep Ingham
 H-Tec Systems GmbH
-Hugo Burbach
 Hurudza 
 Jan Boshoff
 Javier Fontalvo
@@ -44,8 +41,6 @@ Jonathan
 Joseph Mendoza
 Joseph Attia
 Kiran Pashikanti
-Karen Elrington
-Laércio Antonio Piva
 Lauterbach Verfahrenstechnik GmbH
 Leandro Favaretto
 Leonard Seed
