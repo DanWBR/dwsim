@@ -109,7 +109,7 @@ Partial Class EditingForm_Gibbs_InitialEstimatesEditor
         'EditingForm_Gibbs_InitialEstimatesEditor
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "EditingForm_Gibbs_InitialEstimatesEditor"

@@ -345,7 +345,7 @@ Partial Class ComprExprCurveSet
         'ComprExprCurveSet
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "ComprExprCurveSet"
         Me.TabControl1.ResumeLayout(False)

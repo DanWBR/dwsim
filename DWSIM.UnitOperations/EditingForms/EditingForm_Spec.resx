@@ -132,7 +132,7 @@
     <value>113, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 20</value>
+    <value>180, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
@@ -160,7 +160,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 18</value>
+    <value>299, 18</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -223,7 +223,7 @@
     <value>6, 4</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>343, 50</value>
+    <value>326, 50</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -253,7 +253,7 @@
     <value>3, 16</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 178</value>
+    <value>320, 178</value>
   </data>
   <data name="rtbAnnotations.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -274,7 +274,7 @@
     <value>6, 382</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>343, 197</value>
+    <value>326, 197</value>
   </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -394,7 +394,7 @@
     <value>66, 25</value>
   </data>
   <data name="tbExpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>254, 20</value>
   </data>
   <data name="tbExpression.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -415,7 +415,7 @@
     <value>6, 263</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>343, 117</value>
+    <value>326, 117</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -595,7 +595,7 @@
     <value>113, 139</value>
   </data>
   <data name="cbTargetProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 21</value>
+    <value>207, 21</value>
   </data>
   <data name="cbTargetProp.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -619,7 +619,7 @@
     <value>113, 112</value>
   </data>
   <data name="cbTargetObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 21</value>
+    <value>207, 21</value>
   </data>
   <data name="cbTargetObj.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -703,7 +703,7 @@
     <value>113, 50</value>
   </data>
   <data name="cbSourceProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 21</value>
+    <value>207, 21</value>
   </data>
   <data name="cbSourceProp.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -727,7 +727,7 @@
     <value>113, 23</value>
   </data>
   <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 21</value>
+    <value>207, 21</value>
   </data>
   <data name="cbSourceObj.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -778,7 +778,7 @@
     <value>6, 57</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>343, 200</value>
+    <value>326, 200</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -808,16 +808,19 @@
     <value>73</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>355, 579</value>
+    <value>344, 998</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_ComprExpndr</value>
@@ -844,6 +847,6 @@
     <value>EditingForm_Spec</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.0.7375.20029, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.0.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

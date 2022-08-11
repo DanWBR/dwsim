@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 43</value>
+  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
   </data>
@@ -130,23 +136,32 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 98</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 202</value>
+    <value>400, 202</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 499</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 221</value>
+    <value>406, 221</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 26</value>
+  </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
+  </data>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -155,19 +170,19 @@
     <value>Property Package</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 61</value>
+    <value>406, 61</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
   <data name="cbIntPipeDiam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 76</value>
+    <value>310, 76</value>
   </data>
   <data name="tbIntPipeDiameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 76</value>
   </data>
   <data name="tbIntPipeDiameter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+    <value>157, 20</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
@@ -175,11 +190,14 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>Internal Pipe Diameter</value>
   </data>
+  <data name="cbOrificePdrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 127</value>
+  </data>
   <data name="tbOrificePDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 128</value>
   </data>
   <data name="tbOrificePDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
@@ -187,11 +205,14 @@
   <data name="Label6.Text" xml:space="preserve">
     <value>Orifice Pressure Drop</value>
   </data>
+  <data name="cbOverallPdrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 153</value>
+  </data>
   <data name="tbOverallPDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 154</value>
   </data>
   <data name="tbOverallPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 13</value>
@@ -208,11 +229,14 @@
   <data name="rbCorner.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 24</value>
   </data>
+  <data name="cbDeltaT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 179</value>
+  </data>
   <data name="tbDeltaT.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 180</value>
   </data>
   <data name="tbDeltaT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
@@ -224,7 +248,7 @@
     <value>147, 102</value>
   </data>
   <data name="tbCorrF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -236,7 +260,7 @@
     <value>147, 206</value>
   </data>
   <data name="tbBeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
@@ -244,11 +268,14 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Orifice Beta (d/D)</value>
   </data>
+  <data name="cbOrifDiam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 49</value>
+  </data>
   <data name="tbOrificeDiameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 50</value>
   </data>
   <data name="tbOrificeDiameter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 13</value>
@@ -262,8 +289,14 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Pressure Tappings</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 237</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 50</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -271,14 +304,23 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 23</value>
+  </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 50</value>
+  </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 23</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -289,13 +331,32 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Outlet Stream</value>
   </data>
+  <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 21</value>
+  </data>
+  <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 21</value>
+  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 83</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>424, 998</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
 </root>
