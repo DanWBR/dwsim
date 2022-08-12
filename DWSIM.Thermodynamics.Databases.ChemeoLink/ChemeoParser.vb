@@ -10,6 +10,7 @@ Imports System.Globalization
 Public Class ChemeoParser
 
     Shared Async Function GetCompoundIDs(searchstring As String, exact As Boolean) As Task(Of List(Of String()))
+
         Dim url As String = "https://chemeo.com/api/v1/search?q=" & HttpUtility.UrlEncode(searchstring)
 
         Dim response As HttpResponseMessage = Await GetResponse(url)
@@ -25,6 +26,7 @@ Public Class ChemeoParser
             'do we want to report a failure?
             Return New List(Of String())
         End If
+
     End Function
 
     Private Shared Async Function GetResponse(url As String) As Task(Of HttpResponseMessage)
@@ -34,9 +36,9 @@ Public Class ChemeoParser
 
         Dim handler As New HttpClientHandler()
 
-        'handler.AllowAutoRedirect = True
-        'handler.AutomaticDecompression = DecompressionMethods.GZip
-        'handler.ClientCertificateOptions = ClientCertificateOption.Automatic
+        handler.AllowAutoRedirect = True
+        handler.AutomaticDecompression = DecompressionMethods.GZip
+        handler.ClientCertificateOptions = ClientCertificateOption.Automatic
 
         If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
             Dim proxyObj As New WebProxy(proxyUri) With {
@@ -56,12 +58,16 @@ Public Class ChemeoParser
 
         Dim ci As CultureInfo = New CultureInfo("en-US")
 
-        Dim website As String = "https://www.chemeo.com/cid/" + ID
+        Dim website As String = "https://www.chemeo.com/cid/" + HttpUtility.UrlEncode(ID)
 
         Dim siteUri As Uri = New Uri(website)
         Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
+
+        handler.AllowAutoRedirect = True
+        handler.AutomaticDecompression = DecompressionMethods.GZip
+        handler.ClientCertificateOptions = ClientCertificateOption.Automatic
 
         If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
             Dim proxyObj As New WebProxy(proxyUri)

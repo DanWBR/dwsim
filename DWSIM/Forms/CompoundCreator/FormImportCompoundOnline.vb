@@ -30,6 +30,7 @@ Public Class FormImportCompoundOnline
                 Panel1.BringToFront()
                 CurrentPanel = "Panel1"
                 btnPrev.Enabled = False
+                btnNext.Enabled = True
             Case "Panel3"
                 Panel2.BringToFront()
                 CurrentPanel = "Panel2"
@@ -45,6 +46,7 @@ Public Class FormImportCompoundOnline
             Case "Panel1"
 
                 btnPrev.Enabled = True
+                btnNext.Enabled = True
                 Panel2.BringToFront()
                 CurrentPanel = "Panel2"
 
@@ -59,7 +61,11 @@ Public Class FormImportCompoundOnline
                 fsearch.Show()
 
                 Dim t As New Task(Of List(Of String()))(Function()
-                                                            Return ChemeoParser.GetCompoundIDs(searchtext, False).GetAwaiter().GetResult()
+                                                            Try
+                                                                Return ChemeoParser.GetCompoundIDs(searchtext, False).GetAwaiter().GetResult()
+                                                            Catch ex As Exception
+                                                                Throw New Exception(String.Format("Error getting data from Cheméo: {0}", ex.Message, ex))
+                                                            End Try
                                                         End Function, tcs.Token)
 
                 t.Start()
@@ -82,8 +88,15 @@ Public Class FormImportCompoundOnline
                                                     If t.Result.Count = 0 Then
                                                         btnNext.Enabled = False
                                                     End If
+                                                    btnNext.Enabled = True
                                                 Else
-                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                    btnNext.Enabled = False
+                                                    Dim msg = t.Exception.InnerException.Message
+                                                    If msg.Length > 1000 Then
+                                                        MessageBox.Show(msg.Substring(0, 1000), DWSIM.App.GetLocalString("Erro"))
+                                                    Else
+                                                        MessageBox.Show(msg, DWSIM.App.GetLocalString("Erro"))
+                                                    End If
                                                 End If
                                             End Sub)
                                End Sub)
@@ -116,7 +129,11 @@ Public Class FormImportCompoundOnline
                 fsearch.Show()
 
                 Dim t0 As New Task(Of String)(Function()
-                                                  Return ChemeoParser.GetCompoundData(cstring).CAS_Number
+                                                  Try
+                                                      Return ChemeoParser.GetCompoundData(cstring).CAS_Number
+                                                  Catch ex As Exception
+                                                      Throw New Exception(String.Format("Error getting data from Cheméo: {0}", ex.Message, ex))
+                                                  End Try
                                               End Function, tcs.Token)
 
                 Dim t1 As New Task(Of Global.DWSIM.Thermodynamics.BaseClasses.ConstantProperties)(Function()
@@ -133,46 +150,63 @@ Public Class FormImportCompoundOnline
                 Task.Factory.StartNew(Sub()
                                           t0.Start()
                                           t0.Wait()
-                                          If t0.Exception Is Nothing Then
-                                              casid = t0.Result
-                                              t1.Start()
-                                              t2.Start()
-                                              t3.Start()
-                                              Task.WaitAll(t1, t2, t3)
-                                          End If
-                                      End Sub).ContinueWith(Sub()
-                                                                UIThread(Sub()
-                                                                             fsearch.Close()
-                                                                             If DWSIM.App.IsRunningOnMono Then
-                                                                                 fsearch.Hide()
+                                          casid = t0.Result
+                                          t1.Start()
+                                          t2.Start()
+                                          t3.Start()
+                                          Task.WaitAll(t1, t2, t3)
+                                      End Sub).ContinueWith(Sub(tsk)
+                                                                If tsk.Exception IsNot Nothing Then
+                                                                    UIThread(Sub()
                                                                                  fsearch.Close()
-                                                                             End If
-                                                                             Me.Enabled = True
-                                                                             Focus()
-                                                                             If Not t1.Status = TaskStatus.WaitingToRun AndAlso t1.Exception Is Nothing Then
-                                                                                 compoundk = t1.Result
-                                                                             End If
-                                                                             If Not t2.Status = TaskStatus.WaitingToRun AndAlso t2.Exception Is Nothing Then
-                                                                                 compoundc = t2.Result
-                                                                             End If
-                                                                             If Not t3.Status = TaskStatus.WaitingToRun AndAlso t3.Exception Is Nothing Then
-                                                                                 structuredata = t3.Result
-                                                                             End If
-                                                                             AddPropertiesToGrid()
-                                                                             btnNext.Enabled = compoundk IsNot Nothing
-                                                                             If dgResults.Rows.Count = 0 Then btnNext.Enabled = False
-                                                                             If Not compoundk Is Nothing Then
-                                                                                 If compoundk.Molar_Weight > 0.0# And
-                                                                                     compoundk.Critical_Temperature > 0.0# And
-                                                                                     compoundk.Critical_Pressure > 0.0# And
-                                                                                     compoundk.Acentric_Factor > 0.0# And
-                                                                                     compoundk.IdealgasCpEquation <> "" Then
-                                                                                     btnNext.Enabled = True
-                                                                                 Else
-                                                                                     btnNext.Enabled = False
+                                                                                 If DWSIM.App.IsRunningOnMono Then
+                                                                                     fsearch.Hide()
+                                                                                     fsearch.Close()
                                                                                  End If
-                                                                             End If
-                                                                         End Sub)
+                                                                                 Me.Enabled = True
+                                                                                 btnNext.Enabled = False
+
+                                                                                 Dim msg = tsk.Exception.InnerException.Message
+                                                                                 If msg.Length > 1000 Then
+                                                                                     MessageBox.Show(msg.Substring(0, 1000), DWSIM.App.GetLocalString("Erro"))
+                                                                                 Else
+                                                                                     MessageBox.Show(msg, DWSIM.App.GetLocalString("Erro"))
+                                                                                 End If
+                                                                             End Sub)
+                                                                Else
+                                                                    UIThread(Sub()
+                                                                                 fsearch.Close()
+                                                                                 If DWSIM.App.IsRunningOnMono Then
+                                                                                     fsearch.Hide()
+                                                                                     fsearch.Close()
+                                                                                 End If
+                                                                                 Me.Enabled = True
+                                                                                 Focus()
+                                                                                 If Not t1.Status = TaskStatus.WaitingToRun AndAlso t1.Exception Is Nothing Then
+                                                                                     compoundk = t1.Result
+                                                                                 End If
+                                                                                 If Not t2.Status = TaskStatus.WaitingToRun AndAlso t2.Exception Is Nothing Then
+                                                                                     compoundc = t2.Result
+                                                                                 End If
+                                                                                 If Not t3.Status = TaskStatus.WaitingToRun AndAlso t3.Exception Is Nothing Then
+                                                                                     structuredata = t3.Result
+                                                                                 End If
+                                                                                 AddPropertiesToGrid()
+                                                                                 btnNext.Enabled = compoundk IsNot Nothing
+                                                                                 If dgResults.Rows.Count = 0 Then btnNext.Enabled = False
+                                                                                 If Not compoundk Is Nothing Then
+                                                                                     If compoundk.Molar_Weight > 0.0# And
+                                                                                         compoundk.Critical_Temperature > 0.0# And
+                                                                                         compoundk.Critical_Pressure > 0.0# And
+                                                                                         compoundk.Acentric_Factor > 0.0# And
+                                                                                         compoundk.IdealgasCpEquation <> "" Then
+                                                                                         btnNext.Enabled = True
+                                                                                     Else
+                                                                                         btnNext.Enabled = False
+                                                                                     End If
+                                                                                 End If
+                                                                             End Sub)
+                                                                End If
                                                             End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
