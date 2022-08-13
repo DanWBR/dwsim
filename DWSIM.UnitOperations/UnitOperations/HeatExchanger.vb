@@ -1821,8 +1821,22 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
+                    If Q > MaxHeatExchange Then
+
+                        Q = MaxHeatExchange
+
+                        H11 = H10 - (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
+
+                        StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                        IObj?.SetCurrent()
+                        tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
+                        T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+                        OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+
+                    End If
+
                     H20 = StIn1.GetMassEnthalpy()
-                    H21 = H20 + (Q1 - HeatLoss) / StIn1.GetMassFlow()
+                    H21 = H20 + (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
 
                     StIn1.PropertyPackage.CurrentMaterialStream = StIn1
                     IObj?.SetCurrent()
@@ -1887,9 +1901,23 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
+                    If Q > MaxHeatExchange Then
+
+                        Q = MaxHeatExchange
+
+                        H11 = H10 - (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
+
+                        StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                        IObj?.SetCurrent()
+                        tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
+                        T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+                        OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+
+                    End If
+
                     T20 = StIn0.GetTemperature()
                     H20 = StIn0.GetMassEnthalpy()
-                    H21 = H20 + (Q1 - HeatLoss) / StIn0.GetMassFlow()
+                    H21 = H20 + (Math.Sign(Q1) * Q - HeatLoss) / StIn0.GetMassFlow()
 
                     StIn0.PropertyPackage.CurrentMaterialStream = StIn0
                     IObj?.SetCurrent()
