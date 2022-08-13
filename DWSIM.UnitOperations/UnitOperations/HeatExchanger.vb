@@ -1864,7 +1864,14 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    LMTD = Math.Abs(Th2 - Tc2)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    LMTD *= CorrectionFactorLMTD
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -1945,7 +1952,14 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    LMTD = Math.Abs(Th2 - Tc2)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    LMTD *= CorrectionFactorLMTD
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
