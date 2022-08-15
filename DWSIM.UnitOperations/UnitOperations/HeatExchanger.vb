@@ -1831,7 +1831,6 @@ Namespace UnitOperations
                         IObj?.SetCurrent()
                         tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
                         T11 = tmp.CalculatedTemperature.GetValueOrDefault()
-                        OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
                     End If
 
@@ -1842,7 +1841,7 @@ Namespace UnitOperations
                     IObj?.SetCurrent()
                     tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+                    'OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20
@@ -1918,7 +1917,6 @@ Namespace UnitOperations
                         IObj?.SetCurrent()
                         tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
                         T11 = tmp.CalculatedTemperature.GetValueOrDefault()
-                        OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
                     End If
 
@@ -1930,7 +1928,7 @@ Namespace UnitOperations
                     IObj?.SetCurrent()
                     tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
+                    'OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20
