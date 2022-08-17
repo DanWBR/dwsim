@@ -624,7 +624,7 @@ Partial Class EditingForm_Column_Results
         'EditingForm_Column_Results
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.Content)
         Me.Controls.Add(Me.ToolStrip1)
         Me.DoubleBuffered = True

@@ -163,6 +163,8 @@ Partial Class FormSimulSettings
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -433,6 +435,8 @@ Partial Class FormSimulSettings
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Button6)
+        Me.GroupBox2.Controls.Add(Me.Label19)
         Me.GroupBox2.Controls.Add(Me.Button5)
         Me.GroupBox2.Controls.Add(Me.cbOrderCompoundsBy)
         Me.GroupBox2.Controls.Add(Me.Label12)
@@ -480,7 +484,6 @@ Partial Class FormSimulSettings
         'Button13
         '
         resources.ApplyResources(Me.Button13, "Button13")
-        Me.Button13.Image = Global.DWSIM.My.Resources.Resources.world_go
         Me.Button13.Name = "Button13"
         Me.ToolTip1.SetToolTip(Me.Button13, resources.GetString("Button13.ToolTip"))
         Me.Button13.UseVisualStyleBackColor = True
@@ -488,7 +491,6 @@ Partial Class FormSimulSettings
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Image = Global.DWSIM.My.Resources.Resources.page_white
         Me.Button1.Name = "Button1"
         Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.Button1.UseVisualStyleBackColor = True
@@ -1271,6 +1273,19 @@ Partial Class FormSimulSettings
         '
         Me.FontDialog1.ShowColor = True
         '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Name = "Button6"
+        Me.ToolTip1.SetToolTip(Me.Button6, resources.GetString("Button6.ToolTip"))
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'FormSimulSettings
         '
         resources.ApplyResources(Me, "$this")
@@ -1459,4 +1474,6 @@ Partial Class FormSimulSettings
     Friend WithEvents chkESShowE As CheckBox
     Public WithEvents Label18 As Label
     Friend WithEvents chkShowDynProps As CheckBox
+    Public WithEvents Button6 As Button
+    Friend WithEvents Label19 As Label
 End Class

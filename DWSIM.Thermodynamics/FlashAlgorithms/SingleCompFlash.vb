@@ -61,12 +61,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim idx = GetIndex(Vz)
             Dim Pvap = PP.AUX_PVAPi(idx, T)
 
-            If Pvap > P Then
-                Return New Object() {0.0, 1.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz} 'vapor
-            ElseIf T < PP.RET_VTF(idx) Then
+            Dim isSolid = PP.DW_GetConstantProperties()(idx).IsSolid Or PP.ForcedSolids.Contains(PP.RET_VNAMES()(idx))
+
+            If isSolid Then
                 Return New Object() {0.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 1.0, Vz, Vz} 'solid
             Else
-                Return New Object() {1.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz} 'liquid
+                If Pvap > P Then
+                    Return New Object() {0.0, 1.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz} 'vapor
+                ElseIf T < PP.RET_VTF(idx) Then
+                    Return New Object() {0.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 1.0, Vz, Vz} 'solid
+                Else
+                    Return New Object() {1.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz} 'liquid
+                End If
             End If
 
         End Function
@@ -87,9 +93,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim HfusL = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
             Dim HfusS = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
 
-            Dim Hfus = PP.RET_HFUSM(Vz, T)
+            Dim Hfus = PP.RET_HFUSM(Vz, Tfus)
 
-            If H >= HsatV Then
+            Dim isSolid = PP.DW_GetConstantProperties()(idx).IsSolid Or PP.ForcedSolids.Contains(PP.RET_VNAMES()(idx))
+
+            If isSolid Then
+                'pure solid
+                V = 0.0
+                S = 1.0
+                T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            ElseIf H >= HsatV Then
                 'pure vapor
                 V = 1.0
                 S = 0.0
@@ -158,7 +174,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim SfusL = PP.DW_CalcEntropy(Vz, Tfus, P, State.Liquid)
             Dim SfusS = PP.DW_CalcEntropy(Vz, Tfus, P, State.Solid)
 
-            If S >= SsatV Then
+            Dim Sfus = PP.RET_HFUSM(Vz, Tfus) / Tfus
+
+            Dim isSolid = PP.DW_GetConstantProperties()(idx).IsSolid Or PP.ForcedSolids.Contains(PP.RET_VNAMES()(idx))
+
+            If isSolid Then
+                'pure solid
+                V = 0.0
+                Sx = 1.0
+                T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            ElseIf S >= SsatV Then
                 'pure vapor
                 V = 1.0
                 Sx = 0.0
@@ -171,7 +199,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 V = (S - SsatL) / (SsatV - SsatL)
                 Sx = 0.0
                 T = Tsat
-            ElseIf s > SsatS And P <= Pfus Then
+            ElseIf S > SsatS And P <= Pfus Then
                 'partial sublimation from solid
                 V = (S - SsatS) / (SsatV - SsatS)
                 Sx = 1 - V
@@ -189,7 +217,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 V = 0.0
                 Sx = 1 - (S - SfusS) / (SfusL - SfusS)
                 T = Tfus
-            ElseIf Tfus > 0 Then
+            ElseIf Tfus > 0 And Abs(Sfus) > 0.0001 Then
                 'pure solid
                 V = 0.0
                 Sx = 1.0

@@ -1189,8 +1189,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
-                Mode = 1
-
                 If Mode = 0 Or ic = 0 Then
 
                     If doparallel Then

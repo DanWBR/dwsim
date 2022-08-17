@@ -118,21 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 17</value>
-  </data>
-  <data name="chkAutoUpdate.Text" xml:space="preserve">
-    <value>Update automatically</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Attached to</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 25</value>
   </data>
@@ -169,11 +154,22 @@
   <data name="tsbClose.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PanelUtility.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 17</value>
   </data>
-  <data name="PanelUtility.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 370</value>
+  <data name="chkAutoUpdate.Text" xml:space="preserve">
+    <value>Update automatically</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Attached to</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
 </root>

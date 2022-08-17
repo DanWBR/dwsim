@@ -1,11 +1,15 @@
-Version 7.5.6
+Version 8.0.4
 
-- Implemented #274: Number of Tubes in Tubular Reactors for Correct Pressure Drop Calculation
-- Alternate calculation method for Gibbs Reactor
-- Fixed #318: Error opening old file in 7.5.5
-- Fixed #319: Error loading Compound Creator study
-- Fixed #322: Suspicious branch in Valve.vb
-- Throw errors (if any) when loading simulations in automation mode
-- Fixed issue with Rigorous Column editor
-- Fixed ideal gas Cp estimation
-- Python Automation fixes
+- Toggle Weather Panel visibility (Classic UI)
+- Fixed issues with Rigorous Column
+- Fixed an issue with Automation3 interface
+- Fixed issue #346 (PEM Fuel Cell)
+- Phase Envelope fixes (Classic UI)
+- Fixed PEM Fuel Cell editor
+- Wind Turbine now uses rotor diameter instead of disk area
+- Rolled back compound search behavior (#351)
+- Fixed issue #352 (import compound)
+- Fix for updating compound data from JSON (#354)
+- Fixed pasting data in material stream composition table (#329)
+- Fixed simplex penalty value for smoother minimization in conversion reactor (#356)
+- Fixed Absorption Column stage naming

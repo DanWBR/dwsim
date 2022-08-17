@@ -312,7 +312,7 @@ Partial Class PipeThermalProfileEditor
         'PipeThermalProfileEditor
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.RadioButton7)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.RadioButton9)

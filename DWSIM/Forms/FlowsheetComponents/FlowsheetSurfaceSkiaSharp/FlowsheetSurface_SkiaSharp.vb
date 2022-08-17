@@ -10,6 +10,7 @@ Imports SkiaSharp
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.Interfaces
+Imports System.Device.Location
 
 Public Class FlowsheetSurface_SkiaSharp
 
@@ -181,12 +182,38 @@ Public Class FlowsheetSurface_SkiaSharp
             tss2.Visible = False
         End If
 
-        Loaded = True
-
         AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
                                                If My.Settings.FlowsheetRenderer = 0 Then FControl.Invalidate()
                                            End Sub
         'AnimationTimer.Start()
+
+        'weather
+
+        ReadWeather(Flowsheet.Options.CurrentWeather)
+
+        PanelWeather.Visible = My.Settings.WeatherPanelVisible
+
+        Loaded = True
+
+    End Sub
+
+    Private Sub ReadWeather(cw As IWeatherData)
+
+        Loaded = False
+
+        tbAmbientTemperature.Text = cw.Temperature_C
+
+        tbWindSpeed.Text = cw.WindSpeed_km_h
+
+        tbHumidity.Text = cw.RelativeHumidity_pct
+
+        tbSolarIrradiation.Text = cw.SolarIrradiation_kWh_m2.ToString("N2")
+
+        tbAtmPress.Text = (cw.AtmosphericPressure_Pa / 100.0).ToString("N0")
+
+        tbCurrentLocation.Text = cw.Latitude.ToString() + ", " + cw.Longitude.ToString()
+
+        Loaded = True
 
     End Sub
 
@@ -492,7 +519,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Select Case gobj.ObjectType
 
-            Case ObjectType.External
+            Case ObjectType.External, ObjectType.AirCooler2, ObjectType.WindTurbine, ObjectType.HydroelectricTurbine,
+                 ObjectType.WaterElectrolyzer, ObjectType.PEMFuelCell, ObjectType.RCT_GibbsReaktoro
 
                 Dim myDWOBJ As Interfaces.IExternalUnitOperation = newobj
                 With myDWOBJ.GraphicObject
@@ -1866,7 +1894,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
 
-            Case ObjectType.NodeIn
+            Case ObjectType.NodeIn, ObjectType.Mixer
 
                 Dim myNode As New MixerGraphic(mpx, mpy, 20, 20)
                 myNode.LineWidth = 2
@@ -1884,7 +1912,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCOMIX.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myCOMIX)
 
-            Case ObjectType.NodeOut
+            Case ObjectType.NodeOut, ObjectType.Splitter
 
                 Dim myNodeo As New SplitterGraphic(mpx, mpy, 20, 20)
                 myNodeo.LineWidth = 2
@@ -2458,6 +2486,134 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCUO.Name, myCOCUO)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CAPE001"), Color.Black, MessageType.Tip)
+
+            Case ObjectType.AirCooler2
+
+                Dim fsobj = New AirCooler2()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.EnergyMixer
+
+                Dim fsobj = New EnergyMixer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.RCT_GibbsReaktoro
+
+                Dim fsobj = New Reactor_ReaktoroGibbs()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WindTurbine
+
+                Dim fsobj = New WindTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.HydroelectricTurbine
+
+                Dim fsobj = New HydroelectricTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.PEMFuelCell
+
+                Dim fsobj = New PEMFC_Amphlett()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.SolarPanel
+
+                Dim fsobj = New SolarPanel()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WaterElectrolyzer
+
+                Dim fsobj = New WaterElectrolyzer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(grobj.Name, fsobj)
 
         End Select
 
@@ -3788,6 +3944,102 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub tsmiLiveFlow_Click(sender As Object, e As EventArgs) Handles tsmiLiveFlow.Click
         Dim flf As New FormLiveFlows()
         flf.ShowDialog(Me)
+    End Sub
+
+    Private Sub btnGetLocation_Click(sender As Object, e As EventArgs) Handles btnGetLocation.Click
+
+        Dim watcher As New GeoCoordinateWatcher()
+
+        AddHandler watcher.PositionChanged, Sub(s2, e2)
+
+                                                UIThread(Sub()
+
+                                                             Dim coord = watcher.Position.Location
+
+                                                             If Not coord.IsUnknown Then
+
+                                                                 tbCurrentLocation.Text = coord.Latitude.ToString() + ", " + coord.Longitude.ToString()
+
+                                                             Else
+
+                                                                 tbCurrentLocation.Text = "N/A"
+
+                                                             End If
+
+                                                         End Sub)
+
+                                            End Sub
+
+        watcher.TryStart(False, TimeSpan.FromSeconds(10))
+
+    End Sub
+
+    Private Sub tbAmbientTemperature_TextChanged(sender As Object, e As EventArgs) Handles tbAmbientTemperature.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub cbWeather_SelectedIndexChanged(sender As Object, e As EventArgs)
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub UpdateCurrentWeather()
+        If Loaded Then
+            Try
+                Flowsheet.Options.CurrentWeather.Temperature_C = tbAmbientTemperature.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.WindSpeed_km_h = tbWindSpeed.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.RelativeHumidity_pct = tbHumidity.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.SolarIrradiation_kWh_m2 = tbSolarIrradiation.Text
+            Catch ex As Exception
+            End Try
+            Try
+                Flowsheet.Options.CurrentWeather.AtmosphericPressure_Pa = tbAtmPress.Text * 1000.0
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub tbWindSpeed_TextChanged(sender As Object, e As EventArgs) Handles tbWindSpeed.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub tbHumidity_TextChanged(sender As Object, e As EventArgs) Handles tbHumidity.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub tbSolarIrradiation_TextChanged(sender As Object, e As EventArgs) Handles tbSolarIrradiation.TextChanged
+        UpdateCurrentWeather()
+    End Sub
+
+    Private Sub btnGetWeather_Click(sender As Object, e As EventArgs) Handles btnGetWeather.Click
+
+        If Flowsheet.WeatherProvider IsNot Nothing Then
+
+            Try
+
+                Dim data = Flowsheet.WeatherProvider.GetCurrentWeather(tbCurrentLocation.Text.Split(",")(0).Trim().ToDoubleFromInvariant(),
+                                                                   tbCurrentLocation.Text.Split(",")(1).Trim().ToDoubleFromInvariant())
+
+                Flowsheet.Options.CurrentWeather = data
+
+                ReadWeather(data)
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error getting current weather: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
+        End If
+
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged

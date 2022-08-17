@@ -37,6 +37,7 @@ Imports DWSIM.MathOps.MathEx.Optimization
 Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.UnitOperations.UnitOperations.Column
+Imports DWSIM.UnitOperations.Streams
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -836,6 +837,112 @@ Namespace UnitOperations
 
         Public Property RefluxedAbsorber As Boolean = False
 
+        Public Sub ConnectFeed(feed As ISimulationObject, stagenumber As Integer)
+
+            Dim i As Integer = 0
+            Dim success As Boolean = False
+            For Each con In GraphicObject.InputConnectors
+                If Not con.IsAttached Then
+                    FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
+                    Dim msi As New StreamInformation With {.ID = feed.Name, .StreamID = feed.Name,
+                        .AssociatedStage = Stages(stagenumber).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Feed,
+                        .StreamType = StreamInformation.Type.Material}
+                    MaterialStreams.Add(msi.ID, msi)
+                    success = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not success Then Throw New Exception("No feed port available")
+
+        End Sub
+
+        Public Sub ConnectVaporProduct(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 9, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.OverheadVapor,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectDistillate(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectBottoms(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages.Last.Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectCondenserDuty(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 10, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Energy}
+            EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectReboilerDuty(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, 10)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Energy}
+            EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub SetCondenserSpec(spectype As String, value As Double, units As String, Optional compound As String = "")
+
+            spectype = spectype.Replace(" ", "_")
+            If spectype = "Reflux_Ratio" Then spectype = "Stream_Ratio"
+
+            Dim sp As New ColumnSpec()
+            [Enum].TryParse(Of ColumnSpec.SpecType)(spectype, sp.SType)
+            sp.SpecValue = value
+            sp.SpecUnit = units
+            sp.ComponentID = compound
+
+            Specs("C") = sp
+
+        End Sub
+
+        Public Sub SetReboilerSpec(spectype As String, value As Double, units As String, Optional compound As String = "")
+
+            spectype = spectype.Replace(" ", "_")
+            If spectype = "Boilup_Ratio" Or spectype = "BoilUp_Ratio" Then spectype = "Stream_Ratio"
+
+            Dim sp As New ColumnSpec()
+            [Enum].TryParse(Of ColumnSpec.SpecType)(spectype, sp.SType)
+            sp.SpecValue = value
+            sp.SpecUnit = units
+            sp.ComponentID = compound
+
+            Specs("R") = sp
+
+        End Sub
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -1267,6 +1374,49 @@ Namespace UnitOperations
         Inherits Column
 
         Public _opmode As OpMode = OpMode.Absorber
+
+        Public Sub ConnectFeed(feed As ISimulationObject, stagenumber As Integer)
+
+            Dim i As Integer = 0
+            Dim success As Boolean = False
+            For Each con In GraphicObject.InputConnectors
+                If Not con.IsAttached Then
+                    FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
+                    Dim msi As New StreamInformation With {.ID = feed.Name, .StreamID = feed.Name,
+                        .AssociatedStage = Stages(stagenumber).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Feed,
+                        .StreamType = StreamInformation.Type.Material}
+                    MaterialStreams.Add(msi.ID, msi)
+                    success = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not success Then Throw New Exception("No feed port available")
+
+        End Sub
+
+        Public Sub ConnectTopProduct(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectBottoms(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages.Last.Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
 
         Public Sub New()
             MyBase.New()
@@ -1807,9 +1957,6 @@ Namespace UnitOperations
         'condenser (when applicable) is the 0th stage.
         'reboiler (when applicable) is the nth stage. 
 
-        Private _cond As New Stage(Guid.NewGuid().ToString)
-        Private _reb As New Stage(Guid.NewGuid().ToString)
-
         'stream collections (for the *entire* column, including side operations)
 
         Private _conn_ms As New System.Collections.Generic.Dictionary(Of String, StreamInformation)
@@ -1876,7 +2023,7 @@ Namespace UnitOperations
                 Dim i As Integer
                 For i = 1 To dif
                     Stages.Insert(Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
-                    Stages(Stages.Count - 2).Name = "Stage_" & Stages.Count - 2
+                    Stages(Stages.Count - 2).Name = "Stage" & Stages.Count - 2
                     With InitialEstimates
                         Dim d As New Dictionary(Of String, Parameter)
                         For Each cp In FlowSheet.SelectedCompounds.Values
@@ -1938,6 +2085,26 @@ Namespace UnitOperations
 
             Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
             si.Value.AssociatedStage = stageID
+
+        End Sub
+
+        ''' <summary>
+        ''' Gets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="stream"></param>
+        Public Function GetStreamFeedStageIndex(stream As MaterialStream) As Integer
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
+
+            Dim stage = Stages.Where(Function(s) s.ID = si.Value.AssociatedStage).FirstOrDefault()
+
+            Return Stages.IndexOf(stage)
+
+        End Function
+
+        Public Sub SetTopPressure(p_Pa As Double)
+
+            Stages.First.P = p_Pa
 
         End Sub
 
@@ -2118,9 +2285,6 @@ Namespace UnitOperations
 
             _ie = New InitialEstimates
 
-            _cond = New Stage(Guid.NewGuid().ToString)
-            _reb = New Stage(Guid.NewGuid().ToString)
-
         End Sub
 
         Public Function StreamExists(ByVal st As StreamInformation.Behavior)
@@ -2147,21 +2311,15 @@ Namespace UnitOperations
                         ElseIf i = Me.NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
                         Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
                         End If
                     Case ColType.AbsorptionColumn
-                        _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
-                    Case ColType.ReboiledAbsorber
-                        If i = Me.NumberOfStages - 1 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
-                        Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
-                        End If
-                    Case ColType.RefluxedAbsorber
                         If i = 0 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
+                            _st(_st.Count - 1).Name = "TopStage"
+                        ElseIf i = NumberOfStages - 1 Then
+                            _st(_st.Count - 1).Name = "BottomStage"
                         Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
                         End If
                 End Select
             Next
@@ -2446,6 +2604,7 @@ Namespace UnitOperations
         Public Property UseBroydenAcceleration As Boolean = True
 
         Public Sub CheckConnPos()
+
             Dim idx As Integer
             For Each strinfo As StreamInformation In Me.MaterialStreams.Values
                 Try
@@ -2487,6 +2646,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Catch ex As Exception
+                    strinfo.StreamID = ""
                 End Try
             Next
 
@@ -2516,6 +2676,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Catch ex As Exception
+                    strinfo.StreamID = ""
                 End Try
             Next
 
@@ -2671,6 +2832,12 @@ Namespace UnitOperations
                     Stages(i).P = Stages(0).P + Convert.ToDouble(i) / Convert.ToDouble(ns) * ColumnPressureDrop
                 Next
             End If
+
+            i = 0
+            For Each st As Stage In Me.Stages
+                P(i) = st.P
+                i += 1
+            Next
 
             Dim sumcf(nc - 1), sumF, zm(nc - 1), alpha(nc - 1), distVx(nc - 1), rebVx(nc - 1), distVy(nc - 1), rebVy(nc - 1) As Double
 
@@ -3126,7 +3293,6 @@ Namespace UnitOperations
 
             i = 0
             For Each st As Stage In Me.Stages
-                P(i) = st.P
                 eff(i) = st.Efficiency
                 If Me.UseTemperatureEstimates And InitialEstimates.ValidateTemperatures() And Not ignoreuserestimates Then
                     T(i) = Me.InitialEstimates.StageTemps(i).Value
@@ -3678,7 +3844,37 @@ Namespace UnitOperations
                     Next
                     If ex0 IsNot Nothing Then Throw ex0
                 Else
-                    so = Solver.SolveColumn(inputdata)
+                    Dim solvererror = True
+                    If SolvingMethodName.Contains("Rates") Then
+                        Try
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxTemperatureUpdates = False
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxCompositionUpdates = False
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxTemperatureUpdates = True
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxCompositionUpdates = True
+                            so = Solver.SolveColumn(inputdata)
+                        End If
+                    Else
+                        Try
+                            inputdata.CalculationMode = 0
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch oex As OperationCanceledException
+                            Throw oex
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": the column did not converge. DWSIM will try again with a different solver configuration...", IFlowsheet.MessageType.Warning)
+                            'try to solve with auto-generated initial estimates.
+                            inputdata.CalculationMode = 0
+                            so = Solver.SolveColumn(GetSolverInputData(True))
+                        End If
+                    End If
                 End If
             End If
 
@@ -4073,8 +4269,6 @@ Namespace UnitOperations
             Dim rmok As Boolean = False
             Dim cmok As Boolean = False
             Dim cmvok As Boolean = False
-            Dim reok As Boolean = False
-            Dim ceok As Boolean = False
 
             'check existence/status of all specified material streams
 
@@ -4084,11 +4278,11 @@ Namespace UnitOperations
                 Else
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Feed
-                            'If Not FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Calculated Then
-                            '    Throw New Exception(FlowSheet.GetTranslatedString("DCStreamNotCalculatedException"))
-                            'Else
+                            If sinf.AssociatedStage = "" Then
+                                Dim fs = FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Tag
+                                Throw New Exception(String.Format("Please set the Column Stage for Feed Stream '{0}'.", fs))
+                            End If
                             feedok = True
-                            'End If
                         Case StreamInformation.Behavior.Distillate
                             cmok = True
                         Case StreamInformation.Behavior.OverheadVapor
@@ -4099,25 +4293,14 @@ Namespace UnitOperations
                 End If
             Next
 
-            'For Each sinf In Me.EnergyStreams.Values
-            '    If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
-            '        Throw New Exception(FlowSheet.GetTranslatedString("DCStreamMissingException"))
-            '    Else
-            '        Select Case sinf.StreamBehavior
-            '            Case StreamInformation.Behavior.InterExchanger
-
-            '            Case StreamInformation.Behavior.Distillate
-            '                ceok = True
-            '            Case StreamInformation.Behavior.BottomsLiquid
-            '                reok = True
-            '        End Select
-            '    End If
-            'Next
-
             'check if all connections were done correctly
 
             Select Case Me.ColumnType
                 Case ColType.DistillationColumn
+                    Dim dcol = DirectCast(Me, DistillationColumn)
+                    If dcol.ReboiledAbsorber Then
+                        cmok = True
+                    End If
                     Select Case Me.CondenserType
                         Case condtype.Total_Condenser
                             If Not feedok Or Not cmok Or Not rmok Then

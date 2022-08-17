@@ -394,6 +394,18 @@ Namespace PropertyPackages
             Return S
         End Function
 
+        Public Overrides Function DW_CalcFugCoeff(Vz() As Double, T As Double, V As Double) As Double()
+
+            Return prn.CalcLnFugTV(T, V, Vz, RET_VKij, RET_VTC, RET_VPC, RET_VW)
+
+        End Function
+
+        Public Overrides Function DW_CalcP(Vz() As Double, T As Double, V As Double) As Double
+
+            Return prn.CalcP(V, T, Vz, RET_VKij, RET_VTC, RET_VPC, RET_VW)
+
+        End Function
+
     End Class
 
 End Namespace

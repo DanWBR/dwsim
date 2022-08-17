@@ -113,7 +113,6 @@ Public Class FormOptions
         CheckBoxUndoRedoRecalc.Checked = My.Settings.UndoRedo_RecalculateFlowsheet
 
         tbPythonPath.Text = My.Settings.PythonPath
-        tbPythonTimeout.Text = My.Settings.PythonProcessTimeout
 
         Dim configdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DWSIM_Project")
 
@@ -125,6 +124,8 @@ Public Class FormOptions
             Case "en"
                 Me.ComboBoxUILanguage.SelectedIndex = 1
         End Select
+
+        chkUpdates.Checked = Settings.CheckForUpdates
 
         loaded = True
 
@@ -581,14 +582,6 @@ Public Class FormOptions
         End If
     End Sub
 
-    Private Sub tbPythonTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbPythonTimeout.TextChanged
-        Try
-            GlobalSettings.Settings.PythonTimeoutInMinutes = tbPythonTimeout.Text
-            My.Settings.PythonProcessTimeout = tbPythonTimeout.Text
-        Catch ex As Exception
-        End Try
-    End Sub
-
     Private Sub chkEnableInspector_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableInspector.CheckedChanged
         My.Settings.InspectorEnabled = chkEnableInspector.Checked
         Settings.InspectorEnabled = My.Settings.InspectorEnabled
@@ -683,5 +676,10 @@ Public Class FormOptions
                 End Try
             End If
         End If
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkUpdates.CheckedChanged
+        My.Settings.CheckForUpdates = chkUpdates.Checked
+        Settings.CheckForUpdates = chkUpdates.Checked
     End Sub
 End Class

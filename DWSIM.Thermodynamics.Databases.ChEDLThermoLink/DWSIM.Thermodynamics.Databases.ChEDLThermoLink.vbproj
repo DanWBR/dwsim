@@ -5,12 +5,12 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{77A58441-0CF0-4DEA-B1F7-7723368F693F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</RootNamespace>
     <AssemblyName>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Console</MyType>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
@@ -48,7 +48,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DWSIM.Thermodynamics.Databases.ChEDLThermoLink.Export</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -72,8 +73,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Python.Runtime">
+      <HintPath>..\DWSIM\References\Python.Runtime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -95,7 +100,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Export.vb" />
+    <None Include="Export.vb" />
     <Compile Include="LM.vb" />
     <Compile Include="ThermoLink.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -114,6 +119,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -134,32 +140,47 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Libraries.PythonLink\DWSIM.Libraries.PythonLink.csproj">
       <Project>{3a73164c-c190-4d33-ae6c-a3bc69873e73}</Project>
       <Name>DWSIM.Libraries.PythonLink</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
       <Name>DWSIM.MathOps</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.DDBStructureLink\DWSIM.Thermodynamics.Databases.DDBStructureLink.vbproj">
       <Project>{fff180f2-ba11-4028-bf82-a737b56999de}</Project>
       <Name>DWSIM.Thermodynamics.Databases.DDBStructureLink</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

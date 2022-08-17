@@ -80,12 +80,19 @@ namespace DWSIM.UI.Forms
 
             var bgcolor = new Color(0.867f, 0.917f, 0.945f, 1.0f);
 
-            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to the following Patrons: " + Patrons.GetList() };
+            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to the following Patrons/Sponsors: " + Patrons.GetList() };
 
             lblpatrons.TextColor = new Color(0.051f, 0.447f, 0.651f);
             lblpatrons.Width = (int)(sf * 650);
             lblpatrons.Height = (int)(sf * 227);
-            lblpatrons.Font = SystemFonts.Label(10.0f);
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                lblpatrons.Font = SystemFonts.Label(10.0f);
+            }
+            else
+            {
+                lblpatrons.Font = SystemFonts.Label(9.0f);
+            }
 
             var layout = new PixelLayout();
 
@@ -93,7 +100,7 @@ namespace DWSIM.UI.Forms
 
             if (Application.Instance.Platform.IsGtk)
             {
-                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v7_gtk.png").WithSize(w, h) };
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v8_gtk.png").WithSize(w, h) };
                 layout.Add(img, 0, 0);
                 lbl1a.BackgroundColor = bgcolor;
                 lbl1a.BackgroundColor = bgcolor;
@@ -103,7 +110,7 @@ namespace DWSIM.UI.Forms
             }
             else
             {
-                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v7.png").WithSize(w, h) };
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v8.png").WithSize(w, h) };
                 layout.Add(img, (int)(sf * (0 - dx)), (int)(sf * (0 - dy)));
             }
 
@@ -156,7 +163,7 @@ namespace DWSIM.UI.Forms
                     var wntext = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "whatsnew.txt"));
                     MessageBox.Show(wntext, "What's New", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
                 }
-                CheckForUpdates();
+                if (GlobalSettings.Settings.CheckForUpdates) CheckForUpdates();
             }));
         }
 

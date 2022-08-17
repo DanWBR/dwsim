@@ -933,6 +933,26 @@ Namespace Streams
 
         End Sub
 
+        Public Sub SetOverallMassComposition(ByVal Vx As Double()) Implements Interfaces.IMaterialStream.SetOverallMassComposition
+
+            Dim mass_div_mm As Double
+            Dim Vxm As New List(Of Double)
+            Dim i As Integer = 0
+            Dim MW = Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.Molar_Weight).ToArray()
+            For i = 0 To Vx.Length - 1
+                mass_div_mm += Vx(i) / MW(i)
+            Next
+            For i = 0 To Vx.Length - 1
+                Vxm.Add(Vx(i) / MW(i) / mass_div_mm)
+            Next
+
+            For Each c As Compound In Me.Phases(0).Compounds.Values
+                c.MoleFraction = Vxm(i)
+                i += 1
+            Next
+
+        End Sub
+
         Public Sub EqualizeOverallComposition()
 
             For Each c As Compound In Me.Phases(0).Compounds.Values
@@ -1053,6 +1073,12 @@ Namespace Streams
         Public Function GetOverallComposition() As Double() Implements IMaterialStream.GetOverallComposition
 
             Return Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
+
+        End Function
+
+        Public Function GetOverallMassComposition() As Double() Implements IMaterialStream.GetOverallMassComposition
+
+            Return Phases(0).Compounds.Values.Select(Function(x) x.MassFraction.GetValueOrDefault).ToArray
 
         End Function
 
@@ -4985,7 +5011,7 @@ Namespace Streams
         ''' </summary>
         ''' <param name="property">The identifier of the property for which values are requested. This must 
         ''' be one of the two-phase Physical Properties or Physical Property derivatives listed in sections 
-        ''' 7.5.6 and 7.6.</param>
+        ''' 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">List of Phase labels of the Phases for which the property is required. 
         ''' The Phase labels must be two of the identifiers returned by the GetPhaseList method of the Material 
         ''' Object.</param>
@@ -5451,7 +5477,7 @@ Namespace Streams
         ''' Sets two-phase non-constant property values for a mixture.
         ''' </summary>
         ''' <param name="property">The property for which values are set in the Material Object. This 
-        ''' must be one of the two-phase properties or derivatives included in sections 7.5.6 and 7.6.</param>
+        ''' must be one of the two-phase properties or derivatives included in sections 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the Phases for which the property is set. The Phase
         ''' labels must be two of the identifiers returned by the GetPhaseList method of the ICapeThermoPhases
         ''' interface.</param>
@@ -5807,7 +5833,7 @@ Namespace Streams
         ''' </summary>
         ''' <param name="props">The list of identifiers for properties to be calculated. This must be one or more 
         ''' of the supported two-phase properties and derivatives (as given by the GetTwoPhasePropList method). 
-        ''' The standard identifiers for two-phase properties are given in section 7.5.6 and 7.6.</param>
+        ''' The standard identifiers for two-phase properties are given in section 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the phases for which the properties are to be calculated. 
         ''' The phase labels must be two of the strings returned by the GetPhaseList method on the ICapeThermoPhases 
         ''' interface and the phases must also be present in the Material Object.</param>
@@ -5916,7 +5942,7 @@ Namespace Streams
         ''' Returns the list of supported non-constant two-phase properties.
         ''' </summary>
         ''' <returns>List of all supported non-constant two-phase property identifiers. The standard two-phase 
-        ''' property identifiers are listed in section 7.5.6.</returns>
+        ''' property identifiers are listed in section 7.5.7.</returns>
         ''' <remarks>A non-constant property depends on the state of the Material Object. Two-phase properties
         ''' are those that depend on more than one co-existing phase, e.g. K-values.
         ''' GetTwoPhasePropList must return all the properties that can be calculated by
@@ -5925,7 +5951,7 @@ Namespace Streams
         ''' To check whether a property can be evaluated for a particular set of phase labels use the
         ''' CheckTwoPhasePropSpec method.
         ''' A component that implements this method may return non-constant two-phase property
-        ''' identifiers which do not belong to the list defined in section 7.5.6. However, these
+        ''' identifiers which do not belong to the list defined in section 7.5.7. However, these
         ''' proprietary identifiers may not be understood by most of the clients of this component.
         ''' To get the list of supported single-phase properties, use GetSinglePhasePropList.</remarks>
         Public Function GetTwoPhasePropList() As Object Implements ICapeThermoPropertyRoutine.GetTwoPhasePropList

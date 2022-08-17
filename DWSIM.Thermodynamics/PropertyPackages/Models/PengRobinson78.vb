@@ -713,7 +713,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function Calc_SUM1(n As Integer, ai As Double(), vkij As Double(,))
+        Shared Function Calc_SUM1(n As Integer, ai As Double(), vkij As Double(,)) As Double(,)
 
             Dim a(n, n) As Double
 
@@ -2362,8 +2362,8 @@ Namespace PropertyPackages.ThermoPlugs
                     ci(i) = 0.379642 + 1.48503 * W(i) - 0.164423 * W(i) ^ 2 + 0.016666 * W(i) ^ 3
                 End If
                 alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                bi(i) = 0.08664 * R * Tc(i) / Pc(i)
+                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -2395,7 +2395,7 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-            P = R * T / (V - bml) - aml / (V * (V + bml))
+            P = R * T / (V - bml) - aml / (V ^ 2 + 2 * bml * V - bml ^ 2)
 
             Return P
 
@@ -2405,98 +2405,68 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim P As Double = Me.CalcP(V, T, Vx, VKij, VTc, VPc, Vw, otherargs)
 
-            If P < 0 Then P = -P
+            'If P < 0 Then P = -P
 
-            Dim n, R, coeff(3) As Double
+            Dim n As Integer, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
             Dim criterioOK As Boolean = False
             Dim AG, BG, aml, bml As Double
-            Dim t1, t2, t3, t4, t5 As Double
 
             n = Vx.Length - 1
 
-            Dim ai(n), bi(n), ci(n), tmp(n + 1), a(n, n), b(n, n)
+            Dim ai(n), bi(n), ci(n), tmp(n + 1), a(n, n), b(n, n) As Double
             Dim aml2(n), amv2(n), LN_CF(n), PHI(n) As Double
-            Dim Tc(n), Pc(n), W(n), alpha(n), m(n), Tr(n)
+            Dim alpha(n), m(n), Tr(n) As Double
 
             R = 8.314
 
-            Dim i, j As Integer
-            i = 0
-            Do
-                Tc(i) = VTc(i)
-                Tr(i) = T / Tc(i)
-                Pc(i) = VPc(i)
-                W(i) = Vw(i)
-                i = i + 1
-            Loop Until i = n + 1
+            Dim i As Integer
 
             i = 0
             Do
-                If W(i) <= 0.491 Then
-                    ci(i) = 0.37464 + 1.5422 * W(i) - 0.26992 * W(i) ^ 2
+                If Vw(i) <= 0.491 Then
+                    ci(i) = 0.37464 + 1.5422 * Vw(i) - 0.26992 * Vw(i) ^ 2
                 Else
-                    ci(i) = 0.379642 + 1.48503 * W(i) - 0.164423 * W(i) ^ 2 + 0.016666 * W(i) ^ 3
+                    ci(i) = 0.379642 + 1.48503 * Vw(i) - 0.164423 * Vw(i) ^ 2 + 0.016666 * Vw(i) ^ 3
                 End If
-                alpha(i) = (1 + ci(n) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                alpha(i) = (1 + ci(i) * (1 - (T / VTc(i)) ^ 0.5)) ^ 2
+                ai(i) = 0.45724 * alpha(i) * Math.Pow(R * VTc(i), 2) / VPc(i)
+                bi(i) = 0.0778 * R * VTc(i) / VPc(i)
                 i = i + 1
             Loop Until i = n + 1
+
+            a = Calc_SUM1(n, ai, VKij)
+
+            Dim tmpa As Object = Calc_SUM2(n, Vx, a)
+
+            aml2 = tmpa(0)
+            aml = tmpa(1)
 
             i = 0
+            bml = 0.0#
             Do
-                j = 0
-                Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - VKij(i, j))
-                    j = j + 1
-                Loop Until j = n + 1
+                bml += Vx(i) * bi(i)
                 i = i + 1
             Loop Until i = n + 1
 
-            i = 0
-            Do
-                aml2(i) = 0
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            aml = 0
-            Do
-                j = 0
-                Do
-                    aml = aml + Vx(i) * Vx(j) * a(i, j)
-                    aml2(i) = aml2(i) + Vx(j) * a(j, i)
-                    j = j + 1
-                Loop Until j = n + 1
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            bml = 0
-            Do
-                bml = bml + Vx(i) * bi(i)
-                i = i + 1
-            Loop Until i = n + 1
-
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             Dim Z = P * V / (R * T)
 
+            Dim t1, t2, t3, t4, t5 As Double
             i = 0
             Do
-                t1 = bi(i) * (Z - 1) / bml
+                t1 = bi(i) * (Z - 1.0) / bml
                 t2 = -Math.Log(Z - BG)
-                t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
-                t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                t5 = 2 * 2 ^ 0.5 * BG
+                t3 = AG * (2.0 * aml2(i) / aml - bi(i) / bml)
+                t4 = Math.Log((Z + (1.0 + 1.414213) * BG) / (Z + (1.0 - 1.414213) * BG))
+                t5 = 2.0 * 1.414213 * BG
                 LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
                 i = i + 1
             Loop Until i = n + 1
 
             Return LN_CF
-
 
         End Function
 

@@ -32,9 +32,8 @@ Public Class FormSimulWizard
 
     Public switch As Boolean = False
 
-    Dim ACSC1 As AutoCompleteStringCollection
-
     Private CompoundList As List(Of String)
+    Private Indexes As Dictionary(Of String, Integer)
 
     Private StillTyping As Boolean = False
 
@@ -67,14 +66,25 @@ Public Class FormSimulWizard
 
             txtSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
             CompoundList = New List(Of String)()
+            Indexes = New Dictionary(Of String, Integer)
             ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
                 CompoundList.Add(comp.Name)
+                CompoundList.Add(comp.CAS_Number)
+                CompoundList.Add(comp.Formula)
+                Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
+                Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
             For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
                 CompoundList.Add(comp.Name)
+                CompoundList.Add(comp.CAS_Number)
+                CompoundList.Add(comp.Formula)
+                If Not Indexes.ContainsKey(comp.Name) Then Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.CAS_Number) Then Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
             txtSearch.AutoCompleteCustomSource.AddRange(CompoundList.ToArray())
 
@@ -138,25 +148,52 @@ Public Class FormSimulWizard
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
-        ogc1.ClearSelection()
+        Try
 
-        Dim lowered = CompoundList.Select(Function(c) c.ToLower).ToList()
+            ogc1.ClearSelection()
 
-        If lowered.Contains(txtSearch.Text.ToLower()) Then
+            Dim needselecting As Boolean = True
 
-            Dim index = lowered.IndexOf(txtSearch.Text.ToLower())
+            For Each r As DataGridViewRow In ogc1.Rows
+                If Not r.Cells(2).Value Is Nothing Then
+                    If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                        r.Visible = True
+                        If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                            r.Selected = True
+                        End If
+                    Else
+                        r.Visible = False
+                    End If
+                End If
+            Next
 
-            ogc1.Rows.Item(index).Selected = True
-
-            If ogc1.SelectedRows.Count > 0 Then
-                ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+            If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
+                ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
             End If
 
-        Else
+            If txtSearch.Text = "" Then
+                For Each r As DataGridViewRow In ogc1.Rows
+                    r.Selected = False
+                    r.Visible = True
+                Next
+                ogc1.FirstDisplayedScrollingRowIndex = 0
+                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+            Else
+                If ogc1.SelectedRows.Count > 0 Then
+                    ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+                End If
+            End If
 
-            ogc1.FirstDisplayedScrollingRowIndex = 0
+        Catch ex As Exception
 
-        End If
+            'ogc1.FirstDisplayedScrollingRowIndex = 0
+            'ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+        End Try
 
     End Sub
 
@@ -864,15 +901,21 @@ Public Class FormSimulWizard
 
             End If
 
-            Dim added As String = ""
-            For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
-                added += c.Name + ", "
-            Next
-            added = added.TrimEnd()
-            added = added.TrimEnd(",")
-            txtAdded.Text = added
+            UpdateAddedList()
 
         End If
+
+    End Sub
+
+    Private Sub UpdateAddedList()
+
+        Dim added As String = ""
+        For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
+            added += c.Name + ", "
+        Next
+        added = added.TrimEnd()
+        added = added.TrimEnd(",")
+        txtAdded.Text = added
 
     End Sub
 
@@ -895,11 +938,10 @@ Public Class FormSimulWizard
         If f.ShowDialog(Me) = DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    End If
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
                     For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
@@ -910,6 +952,9 @@ Public Class FormSimulWizard
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+                    UpdateAddedList()
+
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -930,11 +975,10 @@ Public Class FormSimulWizard
             Dim jsondata = handler.ReadAllText()
             Try
                 Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(jsondata)
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    End If
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
                     For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
@@ -945,6 +989,7 @@ Public Class FormSimulWizard
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+                    UpdateAddedList()
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -1057,6 +1102,37 @@ Public Class FormSimulWizard
                     DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
                 Next
             End If
+        End If
+    End Sub
+
+    Private Sub ImportFromThermoChemicalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromThermoChemicalsToolStripMenuItem.Click
+        Dim f As New FormImportCompoundFromThermo
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Try
+                Dim comp = f.compdata
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
+                    Dim ms As Streams.MaterialStream
+                    Dim proplist As New ArrayList
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                            phase.Compounds(comp.Name).ConstantProperties = comp
+                        Next
+                    Next
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+                    UpdateAddedList()
+
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
 End Class

@@ -85,6 +85,7 @@ Partial Class FormSimulWizard
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.cmsAddComps = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ImportFromThermoChemicalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
@@ -586,10 +587,15 @@ Partial Class FormSimulWizard
         'cmsAddComps
         '
         resources.ApplyResources(Me.cmsAddComps, "cmsAddComps")
-        Me.cmsAddComps.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem})
+        Me.cmsAddComps.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFromThermoChemicalsToolStripMenuItem, Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.CriarAPartirDeEstruturaUNIFACToolStripMenuItem})
         Me.cmsAddComps.Name = "cmsAddComps"
         Me.cmsAddComps.ShowImageMargin = False
         Me.ToolTip1.SetToolTip(Me.cmsAddComps, resources.GetString("cmsAddComps.ToolTip"))
+        '
+        'ImportFromThermoChemicalsToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ImportFromThermoChemicalsToolStripMenuItem, "ImportFromThermoChemicalsToolStripMenuItem")
+        Me.ImportFromThermoChemicalsToolStripMenuItem.Name = "ImportFromThermoChemicalsToolStripMenuItem"
         '
         'ToolStripMenuItem1
         '
@@ -709,4 +715,5 @@ Partial Class FormSimulWizard
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Public WithEvents txtAdded As TextBox
     Public WithEvents Label6 As Label
+    Friend WithEvents ImportFromThermoChemicalsToolStripMenuItem As ToolStripMenuItem
 End Class

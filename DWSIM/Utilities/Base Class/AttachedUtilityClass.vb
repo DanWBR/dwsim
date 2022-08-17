@@ -120,6 +120,7 @@
         '
         'PanelHeader
         '
+        resources.ApplyResources(Me.PanelHeader, "PanelHeader")
         Me.PanelHeader.BackColor = System.Drawing.Color.SteelBlue
         Me.PanelHeader.Controls.Add(Me.ToolStrip1)
         Me.PanelHeader.Controls.Add(Me.chkAutoUpdate)
@@ -127,7 +128,6 @@
         Me.PanelHeader.Controls.Add(Me.Label2)
         Me.PanelHeader.Controls.Add(Me.tbName)
         Me.PanelHeader.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.PanelHeader, "PanelHeader")
         Me.PanelHeader.Name = "PanelHeader"
         '
         'ToolStrip1
@@ -141,72 +141,72 @@
         '
         'ToolStripLabel1
         '
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         Me.ToolStripLabel1.ForeColor = System.Drawing.Color.White
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         '
         'tsbDockingLeft
         '
+        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
         Me.tsbDockingLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingLeft.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
-        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
         Me.tsbDockingLeft.Name = "tsbDockingLeft"
         '
         'tsbDockingLeftAutoHide
         '
+        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
         Me.tsbDockingLeftAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingLeftAutoHide.Image = Global.DWSIM.My.Resources.Resources.rewind
-        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
         Me.tsbDockingLeftAutoHide.Name = "tsbDockingLeftAutoHide"
         '
         'tsbDockingRightAutoHide
         '
+        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
         Me.tsbDockingRightAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingRightAutoHide.Image = Global.DWSIM.My.Resources.Resources.fast_forward
-        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
         Me.tsbDockingRightAutoHide.Name = "tsbDockingRightAutoHide"
         '
         'tsbDockingRight
         '
+        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
         Me.tsbDockingRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingRight.Image = Global.DWSIM.My.Resources.Resources.arrow_right
-        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
         Me.tsbDockingRight.Name = "tsbDockingRight"
         '
         'tsbDockingTop
         '
+        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
         Me.tsbDockingTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingTop.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
-        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
         Me.tsbDockingTop.Name = "tsbDockingTop"
         '
         'tsbDockingBottom
         '
+        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
         Me.tsbDockingBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingBottom.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
-        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
         Me.tsbDockingBottom.Name = "tsbDockingBottom"
         '
         'tsbDockingDocument
         '
+        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
         Me.tsbDockingDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingDocument.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
-        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
         Me.tsbDockingDocument.Name = "tsbDockingDocument"
         '
         'tsbDockingFloat
         '
+        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
         Me.tsbDockingFloat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingFloat.Image = Global.DWSIM.My.Resources.Resources._new
-        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
         Me.tsbDockingFloat.Name = "tsbDockingFloat"
         '
         'tsbClose
         '
+        resources.ApplyResources(Me.tsbClose, "tsbClose")
         Me.tsbClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.tsbClose.ForeColor = System.Drawing.Color.White
         Me.tsbClose.Image = Global.DWSIM.My.Resources.Resources.no
-        resources.ApplyResources(Me.tsbClose, "tsbClose")
         Me.tsbClose.Name = "tsbClose"
         '
         'chkAutoUpdate
@@ -247,6 +247,7 @@
         'AttachedUtilityClass
         '
         resources.ApplyResources(Me, "$this")
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.PanelUtility)
         Me.Controls.Add(Me.PanelHeader)
         Me.Name = "AttachedUtilityClass"

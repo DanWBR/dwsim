@@ -301,11 +301,11 @@
     <Reference Include="GenericDictionaryEditor">
       <HintPath>References\GenericDictionaryEditor.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.43.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.43\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.2.30, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
-      <HintPath>..\packages\AvalonEdit.6.1.2.30\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.3.50, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.1.3.50\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -328,17 +328,17 @@
       <HintPath>References\Interop.CAPEOPEN110.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="IronPython, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.dll</HintPath>
+    <Reference Include="IronPython, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.Modules, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.Modules.dll</HintPath>
+    <Reference Include="IronPython.Modules, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Modules.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.SQLite, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.SQLite.dll</HintPath>
+    <Reference Include="IronPython.SQLite, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.Wpf, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.Wpf.dll</HintPath>
+    <Reference Include="IronPython.Wpf, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Jolt">
       <HintPath>References\Jolt.dll</HintPath>
@@ -350,14 +350,18 @@
     <Reference Include="LiveSwitch.TextControl">
       <HintPath>References\LiveSwitch.TextControl.exe</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamic, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Dynamic.dll</HintPath>
+    <Reference Include="Mapack, Version=1.0.9.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Mapack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Dynamic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.Scripting, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
@@ -376,8 +380,8 @@
       <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\NetOffice.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -443,6 +447,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -542,6 +547,12 @@
     <Compile Include="Controls\ScriptEditorControlMono.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCreateNewSolid.Designer.vb">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCreateNewSolid.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\CompoundCreator\FormImportCompoundDataDDB.Designer.vb">
       <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
     </Compile>
@@ -558,6 +569,12 @@
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\CompoundCreator\FormImportCompoundDataKDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.Designer.vb">
+      <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Data Regression\FormSearchKDBVLE.Designer.vb">
@@ -723,10 +740,16 @@
     <Compile Include="Forms\FormHTMLEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormImportCompoundOnline.Designer.vb">
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.Designer.vb">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormImportCompoundOnline.vb">
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHTMLView.Designer.vb">
+      <DependentUpon>FormHTMLView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHTMLView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormLiveFlows.Designer.vb">
@@ -1280,6 +1303,12 @@
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCreateNewSolid.en.resx">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCreateNewSolid.resx">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.de.resx">
       <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
     </EmbeddedResource>
@@ -1306,6 +1335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataKDB.resx">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundFromThermo.resx">
+      <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.de.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
@@ -1503,11 +1535,14 @@
     <EmbeddedResource Include="Forms\FormHTMLEditor.resx">
       <DependentUpon>FormHTMLEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.en.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormImportCompoundOnline.resx">
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHTMLView.resx">
+      <DependentUpon>FormHTMLView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLiveFlows.resx">
       <DependentUpon>FormLiveFlows.vb</DependentUpon>
@@ -1775,524 +1810,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Lib\abc.py" />
-    <None Include="Lib\aifc.py" />
-    <None Include="Lib\antigravity.py" />
-    <None Include="Lib\anydbm.py" />
-    <None Include="Lib\argparse.py" />
-    <None Include="Lib\ast.py" />
-    <None Include="Lib\asynchat.py" />
-    <None Include="Lib\asyncore.py" />
-    <None Include="Lib\atexit.py" />
-    <None Include="Lib\audiodev.py" />
-    <None Include="Lib\base64.py" />
-    <None Include="Lib\BaseHTTPServer.py" />
-    <None Include="Lib\Bastion.py" />
-    <None Include="Lib\bdb.py" />
-    <None Include="Lib\binhex.py" />
-    <None Include="Lib\bisect.py" />
-    <None Include="Lib\calendar.py" />
-    <None Include="Lib\cgi.py" />
-    <None Include="Lib\CGIHTTPServer.py" />
-    <None Include="Lib\cgitb.py" />
-    <None Include="Lib\chunk.py" />
-    <None Include="Lib\clrtype.py" />
-    <None Include="Lib\cmd.py" />
-    <None Include="Lib\code.py" />
-    <None Include="Lib\codecs.py" />
-    <None Include="Lib\codeop.py" />
-    <None Include="Lib\collections.py" />
-    <None Include="Lib\colorsys.py" />
-    <None Include="Lib\commands.py" />
-    <None Include="Lib\compileall.py" />
-    <None Include="Lib\ConfigParser.py" />
-    <None Include="Lib\contextlib.py" />
-    <None Include="Lib\Cookie.py" />
-    <None Include="Lib\cookielib.py" />
-    <None Include="Lib\copy.py" />
-    <None Include="Lib\csv.py" />
-    <None Include="Lib\ctypes\macholib\dyld.py" />
-    <None Include="Lib\ctypes\macholib\dylib.py" />
-    <None Include="Lib\ctypes\macholib\framework.py" />
-    <None Include="Lib\ctypes\macholib\__init__.py" />
-    <None Include="Lib\ctypes\util.py" />
-    <None Include="Lib\ctypes\wintypes.py" />
-    <None Include="Lib\ctypes\_endian.py" />
-    <None Include="Lib\ctypes\__init__.py" />
-    <None Include="Lib\decimal.py" />
-    <None Include="Lib\difflib.py" />
-    <None Include="Lib\dircache.py" />
-    <None Include="Lib\dis.py" />
-    <None Include="Lib\distutils\archive_util.py" />
-    <None Include="Lib\distutils\bcppcompiler.py" />
-    <None Include="Lib\distutils\ccompiler.py" />
-    <None Include="Lib\distutils\cmd.py" />
-    <None Include="Lib\distutils\command\bdist.py" />
-    <None Include="Lib\distutils\command\bdist_dumb.py" />
-    <None Include="Lib\distutils\command\bdist_rpm.py" />
-    <None Include="Lib\distutils\command\bdist_wininst.py" />
-    <None Include="Lib\distutils\command\build.py" />
-    <None Include="Lib\distutils\command\build_clib.py" />
-    <None Include="Lib\distutils\command\build_ext.py" />
-    <None Include="Lib\distutils\command\build_py.py" />
-    <None Include="Lib\distutils\command\build_scripts.py" />
-    <None Include="Lib\distutils\command\check.py" />
-    <None Include="Lib\distutils\command\clean.py" />
-    <None Include="Lib\distutils\command\config.py" />
-    <None Include="Lib\distutils\command\install.py" />
-    <None Include="Lib\distutils\command\install_data.py" />
-    <None Include="Lib\distutils\command\install_egg_info.py" />
-    <None Include="Lib\distutils\command\install_headers.py" />
-    <None Include="Lib\distutils\command\install_lib.py" />
-    <None Include="Lib\distutils\command\install_scripts.py" />
-    <None Include="Lib\distutils\command\register.py" />
-    <None Include="Lib\distutils\command\sdist.py" />
-    <None Include="Lib\distutils\command\upload.py" />
-    <None Include="Lib\distutils\command\__init__.py" />
-    <None Include="Lib\distutils\config.py" />
-    <None Include="Lib\distutils\core.py" />
-    <None Include="Lib\distutils\cygwinccompiler.py" />
-    <None Include="Lib\distutils\debug.py" />
-    <None Include="Lib\distutils\dep_util.py" />
-    <None Include="Lib\distutils\dir_util.py" />
-    <None Include="Lib\distutils\dist.py" />
-    <None Include="Lib\distutils\emxccompiler.py" />
-    <None Include="Lib\distutils\errors.py" />
-    <None Include="Lib\distutils\extension.py" />
-    <None Include="Lib\distutils\fancy_getopt.py" />
-    <None Include="Lib\distutils\filelist.py" />
-    <None Include="Lib\distutils\file_util.py" />
-    <None Include="Lib\distutils\log.py" />
-    <None Include="Lib\distutils\msvccompiler.py" />
-    <None Include="Lib\distutils\spawn.py" />
-    <None Include="Lib\distutils\sysconfig.py" />
-    <None Include="Lib\distutils\text_file.py" />
-    <None Include="Lib\distutils\unixccompiler.py" />
-    <None Include="Lib\distutils\util.py" />
-    <None Include="Lib\distutils\version.py" />
-    <None Include="Lib\distutils\versionpredicate.py" />
-    <None Include="Lib\distutils\__init__.py" />
-    <None Include="Lib\doctest.py" />
-    <None Include="Lib\DocXMLRPCServer.py" />
-    <None Include="Lib\dumbdbm.py" />
-    <None Include="Lib\dummy_thread.py" />
-    <None Include="Lib\dummy_threading.py" />
-    <None Include="Lib\email\base64mime.py" />
-    <None Include="Lib\email\charset.py" />
-    <None Include="Lib\email\encoders.py" />
-    <None Include="Lib\email\errors.py" />
-    <None Include="Lib\email\feedparser.py" />
-    <None Include="Lib\email\generator.py" />
-    <None Include="Lib\email\header.py" />
-    <None Include="Lib\email\iterators.py" />
-    <None Include="Lib\email\message.py" />
-    <None Include="Lib\email\mime\application.py" />
-    <None Include="Lib\email\mime\audio.py" />
-    <None Include="Lib\email\mime\base.py" />
-    <None Include="Lib\email\mime\image.py" />
-    <None Include="Lib\email\mime\message.py" />
-    <None Include="Lib\email\mime\multipart.py" />
-    <None Include="Lib\email\mime\nonmultipart.py" />
-    <None Include="Lib\email\mime\text.py" />
-    <None Include="Lib\email\mime\__init__.py" />
-    <None Include="Lib\email\parser.py" />
-    <None Include="Lib\email\quoprimime.py" />
-    <None Include="Lib\email\utils.py" />
-    <None Include="Lib\email\_parseaddr.py" />
-    <None Include="Lib\email\__init__.py" />
-    <None Include="Lib\encodings\aliases.py" />
-    <None Include="Lib\encodings\ascii.py" />
-    <None Include="Lib\encodings\base64_codec.py" />
-    <None Include="Lib\encodings\bz2_codec.py" />
-    <None Include="Lib\encodings\charmap.py" />
-    <None Include="Lib\encodings\cp037.py" />
-    <None Include="Lib\encodings\cp1006.py" />
-    <None Include="Lib\encodings\cp1026.py" />
-    <None Include="Lib\encodings\cp1140.py" />
-    <None Include="Lib\encodings\cp1250.py" />
-    <None Include="Lib\encodings\cp1251.py" />
-    <None Include="Lib\encodings\cp1252.py" />
-    <None Include="Lib\encodings\cp1253.py" />
-    <None Include="Lib\encodings\cp1254.py" />
-    <None Include="Lib\encodings\cp1255.py" />
-    <None Include="Lib\encodings\cp1256.py" />
-    <None Include="Lib\encodings\cp1257.py" />
-    <None Include="Lib\encodings\cp1258.py" />
-    <None Include="Lib\encodings\cp424.py" />
-    <None Include="Lib\encodings\cp437.py" />
-    <None Include="Lib\encodings\cp500.py" />
-    <None Include="Lib\encodings\cp720.py" />
-    <None Include="Lib\encodings\cp737.py" />
-    <None Include="Lib\encodings\cp775.py" />
-    <None Include="Lib\encodings\cp850.py" />
-    <None Include="Lib\encodings\cp852.py" />
-    <None Include="Lib\encodings\cp855.py" />
-    <None Include="Lib\encodings\cp856.py" />
-    <None Include="Lib\encodings\cp857.py" />
-    <None Include="Lib\encodings\cp858.py" />
-    <None Include="Lib\encodings\cp860.py" />
-    <None Include="Lib\encodings\cp861.py" />
-    <None Include="Lib\encodings\cp862.py" />
-    <None Include="Lib\encodings\cp863.py" />
-    <None Include="Lib\encodings\cp864.py" />
-    <None Include="Lib\encodings\cp865.py" />
-    <None Include="Lib\encodings\cp866.py" />
-    <None Include="Lib\encodings\cp869.py" />
-    <None Include="Lib\encodings\cp874.py" />
-    <None Include="Lib\encodings\cp875.py" />
-    <None Include="Lib\encodings\hex_codec.py" />
-    <None Include="Lib\encodings\hp_roman8.py" />
-    <None Include="Lib\encodings\idna.py" />
-    <None Include="Lib\encodings\iso8859_1.py" />
-    <None Include="Lib\encodings\iso8859_10.py" />
-    <None Include="Lib\encodings\iso8859_11.py" />
-    <None Include="Lib\encodings\iso8859_13.py" />
-    <None Include="Lib\encodings\iso8859_14.py" />
-    <None Include="Lib\encodings\iso8859_15.py" />
-    <None Include="Lib\encodings\iso8859_16.py" />
-    <None Include="Lib\encodings\iso8859_2.py" />
-    <None Include="Lib\encodings\iso8859_3.py" />
-    <None Include="Lib\encodings\iso8859_4.py" />
-    <None Include="Lib\encodings\iso8859_5.py" />
-    <None Include="Lib\encodings\iso8859_6.py" />
-    <None Include="Lib\encodings\iso8859_7.py" />
-    <None Include="Lib\encodings\iso8859_8.py" />
-    <None Include="Lib\encodings\iso8859_9.py" />
-    <None Include="Lib\encodings\koi8_r.py" />
-    <None Include="Lib\encodings\koi8_u.py" />
-    <None Include="Lib\encodings\latin_1.py" />
-    <None Include="Lib\encodings\mac_arabic.py" />
-    <None Include="Lib\encodings\mac_centeuro.py" />
-    <None Include="Lib\encodings\mac_croatian.py" />
-    <None Include="Lib\encodings\mac_cyrillic.py" />
-    <None Include="Lib\encodings\mac_farsi.py" />
-    <None Include="Lib\encodings\mac_greek.py" />
-    <None Include="Lib\encodings\mac_iceland.py" />
-    <None Include="Lib\encodings\mac_latin2.py" />
-    <None Include="Lib\encodings\mac_roman.py" />
-    <None Include="Lib\encodings\mac_romanian.py" />
-    <None Include="Lib\encodings\mac_turkish.py" />
-    <None Include="Lib\encodings\mbcs.py" />
-    <None Include="Lib\encodings\palmos.py" />
-    <None Include="Lib\encodings\ptcp154.py" />
-    <None Include="Lib\encodings\punycode.py" />
-    <None Include="Lib\encodings\quopri_codec.py" />
-    <None Include="Lib\encodings\raw_unicode_escape.py" />
-    <None Include="Lib\encodings\rot_13.py" />
-    <None Include="Lib\encodings\string_escape.py" />
-    <None Include="Lib\encodings\tis_620.py" />
-    <None Include="Lib\encodings\undefined.py" />
-    <None Include="Lib\encodings\unicode_escape.py" />
-    <None Include="Lib\encodings\unicode_internal.py" />
-    <None Include="Lib\encodings\utf_16.py" />
-    <None Include="Lib\encodings\utf_16_be.py" />
-    <None Include="Lib\encodings\utf_16_le.py" />
-    <None Include="Lib\encodings\utf_32.py" />
-    <None Include="Lib\encodings\utf_32_be.py" />
-    <None Include="Lib\encodings\utf_32_le.py" />
-    <None Include="Lib\encodings\utf_7.py" />
-    <None Include="Lib\encodings\utf_8.py" />
-    <None Include="Lib\encodings\utf_8_sig.py" />
-    <None Include="Lib\encodings\uu_codec.py" />
-    <None Include="Lib\encodings\zlib_codec.py" />
-    <None Include="Lib\encodings\__init__.py" />
     <None Include="Lib\ensurepip\_bundled\pip-19.2.3-py2.py3-none-any.whl" />
     <None Include="Lib\ensurepip\_bundled\setuptools-41.2.0-py2.py3-none-any.whl" />
-    <None Include="Lib\ensurepip\_uninstall.py" />
-    <None Include="Lib\ensurepip\__init__.py" />
-    <None Include="Lib\ensurepip\__main__.py" />
-    <None Include="Lib\filecmp.py" />
-    <None Include="Lib\fileinput.py" />
-    <None Include="Lib\fnmatch.py" />
-    <None Include="Lib\formatter.py" />
-    <None Include="Lib\fpformat.py" />
-    <None Include="Lib\fractions.py" />
-    <None Include="Lib\ftplib.py" />
-    <None Include="Lib\functools.py" />
-    <None Include="Lib\genericpath.py" />
-    <None Include="Lib\getopt.py" />
-    <None Include="Lib\getpass.py" />
-    <None Include="Lib\gettext.py" />
-    <None Include="Lib\glob.py" />
-    <None Include="Lib\gzip.py" />
-    <None Include="Lib\hashlib.py" />
-    <None Include="Lib\heapq.py" />
-    <None Include="Lib\hmac.py" />
-    <None Include="Lib\htmlentitydefs.py" />
-    <None Include="Lib\htmllib.py" />
-    <None Include="Lib\HTMLParser.py" />
-    <None Include="Lib\httplib.py" />
-    <None Include="Lib\ihooks.py" />
-    <None Include="Lib\imaplib.py" />
-    <None Include="Lib\imghdr.py" />
-    <None Include="Lib\importlib\__init__.py" />
-    <None Include="Lib\imputil.py" />
-    <None Include="Lib\inspect.py" />
-    <None Include="Lib\io.py" />
-    <None Include="Lib\json\decoder.py" />
-    <None Include="Lib\json\encoder.py" />
-    <None Include="Lib\json\scanner.py" />
-    <None Include="Lib\json\tool.py" />
-    <None Include="Lib\json\__init__.py" />
-    <None Include="Lib\keyword.py" />
-    <None Include="Lib\lib2to3\btm_matcher.py" />
-    <None Include="Lib\lib2to3\btm_utils.py" />
-    <None Include="Lib\lib2to3\fixer_base.py" />
-    <None Include="Lib\lib2to3\fixer_util.py" />
-    <None Include="Lib\lib2to3\fixes\fix_apply.py" />
-    <None Include="Lib\lib2to3\fixes\fix_asserts.py" />
-    <None Include="Lib\lib2to3\fixes\fix_basestring.py" />
-    <None Include="Lib\lib2to3\fixes\fix_buffer.py" />
-    <None Include="Lib\lib2to3\fixes\fix_dict.py" />
-    <None Include="Lib\lib2to3\fixes\fix_except.py" />
-    <None Include="Lib\lib2to3\fixes\fix_exec.py" />
-    <None Include="Lib\lib2to3\fixes\fix_execfile.py" />
-    <None Include="Lib\lib2to3\fixes\fix_exitfunc.py" />
-    <None Include="Lib\lib2to3\fixes\fix_filter.py" />
-    <None Include="Lib\lib2to3\fixes\fix_funcattrs.py" />
-    <None Include="Lib\lib2to3\fixes\fix_future.py" />
-    <None Include="Lib\lib2to3\fixes\fix_getcwdu.py" />
-    <None Include="Lib\lib2to3\fixes\fix_has_key.py" />
-    <None Include="Lib\lib2to3\fixes\fix_idioms.py" />
-    <None Include="Lib\lib2to3\fixes\fix_import.py" />
-    <None Include="Lib\lib2to3\fixes\fix_imports.py" />
-    <None Include="Lib\lib2to3\fixes\fix_imports2.py" />
-    <None Include="Lib\lib2to3\fixes\fix_input.py" />
-    <None Include="Lib\lib2to3\fixes\fix_intern.py" />
-    <None Include="Lib\lib2to3\fixes\fix_isinstance.py" />
-    <None Include="Lib\lib2to3\fixes\fix_itertools.py" />
-    <None Include="Lib\lib2to3\fixes\fix_itertools_imports.py" />
-    <None Include="Lib\lib2to3\fixes\fix_long.py" />
-    <None Include="Lib\lib2to3\fixes\fix_map.py" />
-    <None Include="Lib\lib2to3\fixes\fix_metaclass.py" />
-    <None Include="Lib\lib2to3\fixes\fix_methodattrs.py" />
-    <None Include="Lib\lib2to3\fixes\fix_ne.py" />
-    <None Include="Lib\lib2to3\fixes\fix_next.py" />
-    <None Include="Lib\lib2to3\fixes\fix_nonzero.py" />
-    <None Include="Lib\lib2to3\fixes\fix_numliterals.py" />
-    <None Include="Lib\lib2to3\fixes\fix_operator.py" />
-    <None Include="Lib\lib2to3\fixes\fix_paren.py" />
-    <None Include="Lib\lib2to3\fixes\fix_print.py" />
-    <None Include="Lib\lib2to3\fixes\fix_raise.py" />
-    <None Include="Lib\lib2to3\fixes\fix_raw_input.py" />
-    <None Include="Lib\lib2to3\fixes\fix_reduce.py" />
-    <None Include="Lib\lib2to3\fixes\fix_renames.py" />
-    <None Include="Lib\lib2to3\fixes\fix_repr.py" />
-    <None Include="Lib\lib2to3\fixes\fix_set_literal.py" />
-    <None Include="Lib\lib2to3\fixes\fix_standarderror.py" />
-    <None Include="Lib\lib2to3\fixes\fix_sys_exc.py" />
-    <None Include="Lib\lib2to3\fixes\fix_throw.py" />
-    <None Include="Lib\lib2to3\fixes\fix_tuple_params.py" />
-    <None Include="Lib\lib2to3\fixes\fix_types.py" />
-    <None Include="Lib\lib2to3\fixes\fix_unicode.py" />
-    <None Include="Lib\lib2to3\fixes\fix_urllib.py" />
-    <None Include="Lib\lib2to3\fixes\fix_ws_comma.py" />
-    <None Include="Lib\lib2to3\fixes\fix_xrange.py" />
-    <None Include="Lib\lib2to3\fixes\fix_xreadlines.py" />
-    <None Include="Lib\lib2to3\fixes\fix_zip.py" />
-    <None Include="Lib\lib2to3\fixes\__init__.py" />
-    <None Include="Lib\lib2to3\main.py" />
-    <None Include="Lib\lib2to3\patcomp.py" />
-    <None Include="Lib\lib2to3\pgen2\conv.py" />
-    <None Include="Lib\lib2to3\pgen2\driver.py" />
-    <None Include="Lib\lib2to3\pgen2\grammar.py" />
-    <None Include="Lib\lib2to3\pgen2\literals.py" />
-    <None Include="Lib\lib2to3\pgen2\parse.py" />
-    <None Include="Lib\lib2to3\pgen2\pgen.py" />
-    <None Include="Lib\lib2to3\pgen2\token.py" />
-    <None Include="Lib\lib2to3\pgen2\tokenize.py" />
-    <None Include="Lib\lib2to3\pgen2\__init__.py" />
-    <None Include="Lib\lib2to3\pygram.py" />
-    <None Include="Lib\lib2to3\pytree.py" />
-    <None Include="Lib\lib2to3\refactor.py" />
-    <None Include="Lib\lib2to3\__init__.py" />
-    <None Include="Lib\lib2to3\__main__.py" />
-    <None Include="Lib\linecache.py" />
-    <None Include="Lib\locale.py" />
-    <None Include="Lib\logging\config.py" />
-    <None Include="Lib\logging\handlers.py" />
-    <None Include="Lib\logging\__init__.py" />
-    <None Include="Lib\macpath.py" />
-    <None Include="Lib\macurl2path.py" />
-    <None Include="Lib\mailbox.py" />
-    <None Include="Lib\mailcap.py" />
-    <None Include="Lib\markupbase.py" />
-    <None Include="Lib\md5.py" />
-    <None Include="Lib\mhlib.py" />
-    <None Include="Lib\mimetools.py" />
-    <None Include="Lib\mimetypes.py" />
-    <None Include="Lib\MimeWriter.py" />
-    <None Include="Lib\mimify.py" />
-    <None Include="Lib\modulefinder.py" />
-    <None Include="Lib\multifile.py" />
-    <None Include="Lib\multiprocessing\connection.py" />
-    <None Include="Lib\multiprocessing\dummy\connection.py" />
-    <None Include="Lib\multiprocessing\dummy\__init__.py" />
-    <None Include="Lib\multiprocessing\forking.py" />
-    <None Include="Lib\multiprocessing\heap.py" />
-    <None Include="Lib\multiprocessing\managers.py" />
-    <None Include="Lib\multiprocessing\pool.py" />
-    <None Include="Lib\multiprocessing\process.py" />
-    <None Include="Lib\multiprocessing\queues.py" />
-    <None Include="Lib\multiprocessing\reduction.py" />
-    <None Include="Lib\multiprocessing\sharedctypes.py" />
-    <None Include="Lib\multiprocessing\synchronize.py" />
-    <None Include="Lib\multiprocessing\util.py" />
-    <None Include="Lib\multiprocessing\__init__.py" />
-    <None Include="Lib\mutex.py" />
-    <None Include="Lib\netrc.py" />
-    <None Include="Lib\new.py" />
-    <None Include="Lib\nntplib.py" />
-    <None Include="Lib\ntpath.py" />
-    <None Include="Lib\nturl2path.py" />
-    <None Include="Lib\numbers.py" />
-    <None Include="Lib\opcode.py" />
-    <None Include="Lib\optparse.py" />
-    <None Include="Lib\os.py" />
-    <None Include="Lib\os2emxpath.py" />
-    <None Include="Lib\pdb.py" />
-    <None Include="Lib\pickle.py" />
-    <None Include="Lib\pickletools.py" />
-    <None Include="Lib\pipes.py" />
-    <None Include="Lib\pkgutil.py" />
-    <None Include="Lib\platform.py" />
-    <None Include="Lib\plistlib.py" />
-    <None Include="Lib\popen2.py" />
-    <None Include="Lib\poplib.py" />
-    <None Include="Lib\posixfile.py" />
-    <None Include="Lib\posixpath.py" />
-    <None Include="Lib\pprint.py" />
-    <None Include="Lib\profile.py" />
-    <None Include="Lib\pstats.py" />
-    <None Include="Lib\pyclbr.py" />
-    <None Include="Lib\pydoc.py" />
-    <None Include="Lib\pydoc_data\topics.py" />
-    <None Include="Lib\pydoc_data\__init__.py" />
-    <None Include="Lib\py_compile.py" />
-    <None Include="Lib\Queue.py" />
-    <None Include="Lib\quopri.py" />
-    <None Include="Lib\random.py" />
-    <None Include="Lib\repr.py" />
-    <None Include="Lib\rexec.py" />
-    <None Include="Lib\rfc822.py" />
-    <None Include="Lib\rlcompleter.py" />
-    <None Include="Lib\robotparser.py" />
-    <None Include="Lib\runpy.py" />
-    <None Include="Lib\sched.py" />
-    <None Include="Lib\sets.py" />
-    <None Include="Lib\sgmllib.py" />
-    <None Include="Lib\sha.py" />
-    <None Include="Lib\shelve.py" />
-    <None Include="Lib\shlex.py" />
-    <None Include="Lib\shutil.py" />
-    <None Include="Lib\SimpleHTTPServer.py" />
-    <None Include="Lib\SimpleXMLRPCServer.py" />
-    <None Include="Lib\site.py" />
-    <None Include="Lib\smtpd.py" />
-    <None Include="Lib\smtplib.py" />
-    <None Include="Lib\sndhdr.py" />
-    <None Include="Lib\socket.py" />
-    <None Include="Lib\SocketServer.py" />
-    <None Include="Lib\sqlite3\dbapi2.py" />
-    <None Include="Lib\sqlite3\dump.py" />
-    <None Include="Lib\sqlite3\__init__.py" />
-    <None Include="Lib\sre_constants.py" />
-    <None Include="Lib\sre_parse.py" />
-    <None Include="Lib\ssl.py" />
-    <None Include="Lib\stat.py" />
-    <None Include="Lib\statvfs.py" />
-    <None Include="Lib\string.py" />
-    <None Include="Lib\StringIO.py" />
-    <None Include="Lib\stringold.py" />
-    <None Include="Lib\stringprep.py" />
-    <None Include="Lib\struct.py" />
-    <None Include="Lib\subprocess.py" />
-    <None Include="Lib\sunau.py" />
-    <None Include="Lib\sunaudio.py" />
-    <None Include="Lib\symbol.py" />
-    <None Include="Lib\sysconfig.py" />
-    <None Include="Lib\tabnanny.py" />
-    <None Include="Lib\tarfile.py" />
-    <None Include="Lib\telnetlib.py" />
-    <None Include="Lib\tempfile.py" />
-    <None Include="Lib\textwrap.py" />
-    <None Include="Lib\this.py" />
-    <None Include="Lib\threading.py" />
-    <None Include="Lib\timeit.py" />
-    <None Include="Lib\toaiff.py" />
-    <None Include="Lib\token.py" />
-    <None Include="Lib\tokenize.py" />
-    <None Include="Lib\trace.py" />
-    <None Include="Lib\traceback.py" />
-    <None Include="Lib\types.py" />
-    <None Include="Lib\unittest\case.py" />
-    <None Include="Lib\unittest\loader.py" />
-    <None Include="Lib\unittest\main.py" />
-    <None Include="Lib\unittest\result.py" />
-    <None Include="Lib\unittest\runner.py" />
-    <None Include="Lib\unittest\signals.py" />
-    <None Include="Lib\unittest\suite.py" />
-    <None Include="Lib\unittest\util.py" />
-    <None Include="Lib\unittest\__init__.py" />
-    <None Include="Lib\unittest\__main__.py" />
-    <None Include="Lib\urllib.py" />
-    <None Include="Lib\urllib2.py" />
-    <None Include="Lib\urlparse.py" />
-    <None Include="Lib\user.py" />
-    <None Include="Lib\UserDict.py" />
-    <None Include="Lib\UserList.py" />
-    <None Include="Lib\UserString.py" />
-    <None Include="Lib\uu.py" />
-    <None Include="Lib\uuid.py" />
-    <None Include="Lib\warnings.py" />
-    <None Include="Lib\wave.py" />
-    <None Include="Lib\weakref.py" />
-    <None Include="Lib\webbrowser.py" />
-    <None Include="Lib\whichdb.py" />
-    <None Include="Lib\wpf.py" />
-    <None Include="Lib\wsgiref\handlers.py" />
-    <None Include="Lib\wsgiref\headers.py" />
-    <None Include="Lib\wsgiref\simple_server.py" />
-    <None Include="Lib\wsgiref\util.py" />
-    <None Include="Lib\wsgiref\validate.py" />
-    <None Include="Lib\wsgiref\__init__.py" />
-    <None Include="Lib\xdrlib.py" />
-    <None Include="Lib\xmllib.py" />
-    <None Include="Lib\xmlrpclib.py" />
-    <None Include="Lib\xml\dom\domreg.py" />
-    <None Include="Lib\xml\dom\expatbuilder.py" />
-    <None Include="Lib\xml\dom\minicompat.py" />
-    <None Include="Lib\xml\dom\minidom.py" />
-    <None Include="Lib\xml\dom\NodeFilter.py" />
-    <None Include="Lib\xml\dom\pulldom.py" />
-    <None Include="Lib\xml\dom\xmlbuilder.py" />
-    <None Include="Lib\xml\dom\__init__.py" />
-    <None Include="Lib\xml\etree\cElementTree.py" />
-    <None Include="Lib\xml\etree\ElementInclude.py" />
-    <None Include="Lib\xml\etree\ElementPath.py" />
-    <None Include="Lib\xml\etree\ElementTree.py" />
-    <None Include="Lib\xml\etree\SimpleXMLTreeBuilder.py" />
-    <None Include="Lib\xml\etree\__init__.py" />
-    <None Include="Lib\xml\parsers\expat.py" />
-    <None Include="Lib\xml\parsers\__init__.py" />
-    <None Include="Lib\xml\sax\expatreader.py" />
-    <None Include="Lib\xml\sax\handler.py" />
-    <None Include="Lib\xml\sax\saxutils.py" />
-    <None Include="Lib\xml\sax\xmlreader.py" />
-    <None Include="Lib\xml\sax\_exceptions.py" />
-    <None Include="Lib\xml\sax\__init__.py" />
-    <None Include="Lib\xml\__init__.py" />
-    <None Include="Lib\zipfile.py" />
-    <None Include="Lib\_abcoll.py" />
-    <None Include="Lib\_LWPCookieJar.py" />
-    <None Include="Lib\_MozillaCookieJar.py" />
-    <None Include="Lib\_osx_support.py" />
-    <None Include="Lib\_pyio.py" />
-    <None Include="Lib\_strptime.py" />
-    <None Include="Lib\_threading_local.py" />
-    <None Include="Lib\_weakrefset.py" />
-    <None Include="Lib\__future__.py" />
-    <None Include="Lib\__phello__.foo.py" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -2459,6 +1978,10 @@
     <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.vbproj">
       <Project>{46fd1720-09ce-4edb-b2c5-378be32859fb}</Project>
       <Name>DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj">
+      <Project>{77a58441-0cf0-4dea-b1f7-7723368f693f}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
@@ -3108,9 +2631,525 @@
     <None Include="Resources\app_48.png" />
     <None Include="Resources\become_a_patron_button.png" />
     <None Include="Resources\background_welcome.png" />
-    <Content Include="Lib\site-packages\README.txt" />
     <None Include="Resources\bold.png" />
     <None Include="Resources\bolditalic.png" />
+    <Content Include="Lib\abc.py" />
+    <Content Include="Lib\aifc.py" />
+    <Content Include="Lib\antigravity.py" />
+    <Content Include="Lib\anydbm.py" />
+    <Content Include="Lib\argparse.py" />
+    <Content Include="Lib\ast.py" />
+    <Content Include="Lib\asynchat.py" />
+    <Content Include="Lib\asyncore.py" />
+    <Content Include="Lib\atexit.py" />
+    <Content Include="Lib\audiodev.py" />
+    <Content Include="Lib\base64.py" />
+    <Content Include="Lib\BaseHTTPServer.py" />
+    <Content Include="Lib\Bastion.py" />
+    <Content Include="Lib\bdb.py" />
+    <Content Include="Lib\binhex.py" />
+    <Content Include="Lib\bisect.py" />
+    <Content Include="Lib\calendar.py" />
+    <Content Include="Lib\cgi.py" />
+    <Content Include="Lib\CGIHTTPServer.py" />
+    <Content Include="Lib\cgitb.py" />
+    <Content Include="Lib\chunk.py" />
+    <Content Include="Lib\clrtype.py" />
+    <Content Include="Lib\cmd.py" />
+    <Content Include="Lib\code.py" />
+    <Content Include="Lib\codecs.py" />
+    <Content Include="Lib\codeop.py" />
+    <Content Include="Lib\collections.py" />
+    <Content Include="Lib\colorsys.py" />
+    <Content Include="Lib\commands.py" />
+    <Content Include="Lib\compileall.py" />
+    <Content Include="Lib\ConfigParser.py" />
+    <Content Include="Lib\contextlib.py" />
+    <Content Include="Lib\Cookie.py" />
+    <Content Include="Lib\cookielib.py" />
+    <Content Include="Lib\copy.py" />
+    <Content Include="Lib\csv.py" />
+    <Content Include="Lib\ctypes\macholib\dyld.py" />
+    <Content Include="Lib\ctypes\macholib\dylib.py" />
+    <Content Include="Lib\ctypes\macholib\framework.py" />
+    <Content Include="Lib\ctypes\macholib\__init__.py" />
+    <Content Include="Lib\ctypes\util.py" />
+    <Content Include="Lib\ctypes\wintypes.py" />
+    <Content Include="Lib\ctypes\_endian.py" />
+    <Content Include="Lib\ctypes\__init__.py" />
+    <Content Include="Lib\decimal.py" />
+    <Content Include="Lib\difflib.py" />
+    <Content Include="Lib\dircache.py" />
+    <Content Include="Lib\dis.py" />
+    <Content Include="Lib\distutils\archive_util.py" />
+    <Content Include="Lib\distutils\bcppcompiler.py" />
+    <Content Include="Lib\distutils\ccompiler.py" />
+    <Content Include="Lib\distutils\cmd.py" />
+    <Content Include="Lib\distutils\command\bdist.py" />
+    <Content Include="Lib\distutils\command\bdist_dumb.py" />
+    <Content Include="Lib\distutils\command\bdist_rpm.py" />
+    <Content Include="Lib\distutils\command\bdist_wininst.py" />
+    <Content Include="Lib\distutils\command\build.py" />
+    <Content Include="Lib\distutils\command\build_clib.py" />
+    <Content Include="Lib\distutils\command\build_ext.py" />
+    <Content Include="Lib\distutils\command\build_py.py" />
+    <Content Include="Lib\distutils\command\build_scripts.py" />
+    <Content Include="Lib\distutils\command\check.py" />
+    <Content Include="Lib\distutils\command\clean.py" />
+    <Content Include="Lib\distutils\command\config.py" />
+    <Content Include="Lib\distutils\command\install.py" />
+    <Content Include="Lib\distutils\command\install_data.py" />
+    <Content Include="Lib\distutils\command\install_egg_info.py" />
+    <Content Include="Lib\distutils\command\install_headers.py" />
+    <Content Include="Lib\distutils\command\install_lib.py" />
+    <Content Include="Lib\distutils\command\install_scripts.py" />
+    <Content Include="Lib\distutils\command\register.py" />
+    <Content Include="Lib\distutils\command\sdist.py" />
+    <Content Include="Lib\distutils\command\upload.py" />
+    <Content Include="Lib\distutils\command\__init__.py" />
+    <Content Include="Lib\distutils\config.py" />
+    <Content Include="Lib\distutils\core.py" />
+    <Content Include="Lib\distutils\cygwinccompiler.py" />
+    <Content Include="Lib\distutils\debug.py" />
+    <Content Include="Lib\distutils\dep_util.py" />
+    <Content Include="Lib\distutils\dir_util.py" />
+    <Content Include="Lib\distutils\dist.py" />
+    <Content Include="Lib\distutils\emxccompiler.py" />
+    <Content Include="Lib\distutils\errors.py" />
+    <Content Include="Lib\distutils\extension.py" />
+    <Content Include="Lib\distutils\fancy_getopt.py" />
+    <Content Include="Lib\distutils\filelist.py" />
+    <Content Include="Lib\distutils\file_util.py" />
+    <Content Include="Lib\distutils\log.py" />
+    <Content Include="Lib\distutils\msvccompiler.py" />
+    <Content Include="Lib\distutils\spawn.py" />
+    <Content Include="Lib\distutils\sysconfig.py" />
+    <Content Include="Lib\distutils\text_file.py" />
+    <Content Include="Lib\distutils\unixccompiler.py" />
+    <Content Include="Lib\distutils\util.py" />
+    <Content Include="Lib\distutils\version.py" />
+    <Content Include="Lib\distutils\versionpredicate.py" />
+    <Content Include="Lib\distutils\__init__.py" />
+    <Content Include="Lib\doctest.py" />
+    <Content Include="Lib\DocXMLRPCServer.py" />
+    <Content Include="Lib\dumbdbm.py" />
+    <Content Include="Lib\dummy_thread.py" />
+    <Content Include="Lib\dummy_threading.py" />
+    <Content Include="Lib\email\base64mime.py" />
+    <Content Include="Lib\email\charset.py" />
+    <Content Include="Lib\email\encoders.py" />
+    <Content Include="Lib\email\errors.py" />
+    <Content Include="Lib\email\feedparser.py" />
+    <Content Include="Lib\email\generator.py" />
+    <Content Include="Lib\email\header.py" />
+    <Content Include="Lib\email\iterators.py" />
+    <Content Include="Lib\email\message.py" />
+    <Content Include="Lib\email\mime\application.py" />
+    <Content Include="Lib\email\mime\audio.py" />
+    <Content Include="Lib\email\mime\base.py" />
+    <Content Include="Lib\email\mime\image.py" />
+    <Content Include="Lib\email\mime\message.py" />
+    <Content Include="Lib\email\mime\multipart.py" />
+    <Content Include="Lib\email\mime\nonmultipart.py" />
+    <Content Include="Lib\email\mime\text.py" />
+    <Content Include="Lib\email\mime\__init__.py" />
+    <Content Include="Lib\email\parser.py" />
+    <Content Include="Lib\email\quoprimime.py" />
+    <Content Include="Lib\email\utils.py" />
+    <Content Include="Lib\email\_parseaddr.py" />
+    <Content Include="Lib\email\__init__.py" />
+    <Content Include="Lib\encodings\aliases.py" />
+    <Content Include="Lib\encodings\ascii.py" />
+    <Content Include="Lib\encodings\base64_codec.py" />
+    <Content Include="Lib\encodings\bz2_codec.py" />
+    <Content Include="Lib\encodings\charmap.py" />
+    <Content Include="Lib\encodings\cp037.py" />
+    <Content Include="Lib\encodings\cp1006.py" />
+    <Content Include="Lib\encodings\cp1026.py" />
+    <Content Include="Lib\encodings\cp1140.py" />
+    <Content Include="Lib\encodings\cp1250.py" />
+    <Content Include="Lib\encodings\cp1251.py" />
+    <Content Include="Lib\encodings\cp1252.py" />
+    <Content Include="Lib\encodings\cp1253.py" />
+    <Content Include="Lib\encodings\cp1254.py" />
+    <Content Include="Lib\encodings\cp1255.py" />
+    <Content Include="Lib\encodings\cp1256.py" />
+    <Content Include="Lib\encodings\cp1257.py" />
+    <Content Include="Lib\encodings\cp1258.py" />
+    <Content Include="Lib\encodings\cp424.py" />
+    <Content Include="Lib\encodings\cp437.py" />
+    <Content Include="Lib\encodings\cp500.py" />
+    <Content Include="Lib\encodings\cp720.py" />
+    <Content Include="Lib\encodings\cp737.py" />
+    <Content Include="Lib\encodings\cp775.py" />
+    <Content Include="Lib\encodings\cp850.py" />
+    <Content Include="Lib\encodings\cp852.py" />
+    <Content Include="Lib\encodings\cp855.py" />
+    <Content Include="Lib\encodings\cp856.py" />
+    <Content Include="Lib\encodings\cp857.py" />
+    <Content Include="Lib\encodings\cp858.py" />
+    <Content Include="Lib\encodings\cp860.py" />
+    <Content Include="Lib\encodings\cp861.py" />
+    <Content Include="Lib\encodings\cp862.py" />
+    <Content Include="Lib\encodings\cp863.py" />
+    <Content Include="Lib\encodings\cp864.py" />
+    <Content Include="Lib\encodings\cp865.py" />
+    <Content Include="Lib\encodings\cp866.py" />
+    <Content Include="Lib\encodings\cp869.py" />
+    <Content Include="Lib\encodings\cp874.py" />
+    <Content Include="Lib\encodings\cp875.py" />
+    <Content Include="Lib\encodings\hex_codec.py" />
+    <Content Include="Lib\encodings\hp_roman8.py" />
+    <Content Include="Lib\encodings\idna.py" />
+    <Content Include="Lib\encodings\iso8859_1.py" />
+    <Content Include="Lib\encodings\iso8859_10.py" />
+    <Content Include="Lib\encodings\iso8859_11.py" />
+    <Content Include="Lib\encodings\iso8859_13.py" />
+    <Content Include="Lib\encodings\iso8859_14.py" />
+    <Content Include="Lib\encodings\iso8859_15.py" />
+    <Content Include="Lib\encodings\iso8859_16.py" />
+    <Content Include="Lib\encodings\iso8859_2.py" />
+    <Content Include="Lib\encodings\iso8859_3.py" />
+    <Content Include="Lib\encodings\iso8859_4.py" />
+    <Content Include="Lib\encodings\iso8859_5.py" />
+    <Content Include="Lib\encodings\iso8859_6.py" />
+    <Content Include="Lib\encodings\iso8859_7.py" />
+    <Content Include="Lib\encodings\iso8859_8.py" />
+    <Content Include="Lib\encodings\iso8859_9.py" />
+    <Content Include="Lib\encodings\koi8_r.py" />
+    <Content Include="Lib\encodings\koi8_u.py" />
+    <Content Include="Lib\encodings\latin_1.py" />
+    <Content Include="Lib\encodings\mac_arabic.py" />
+    <Content Include="Lib\encodings\mac_centeuro.py" />
+    <Content Include="Lib\encodings\mac_croatian.py" />
+    <Content Include="Lib\encodings\mac_cyrillic.py" />
+    <Content Include="Lib\encodings\mac_farsi.py" />
+    <Content Include="Lib\encodings\mac_greek.py" />
+    <Content Include="Lib\encodings\mac_iceland.py" />
+    <Content Include="Lib\encodings\mac_latin2.py" />
+    <Content Include="Lib\encodings\mac_roman.py" />
+    <Content Include="Lib\encodings\mac_romanian.py" />
+    <Content Include="Lib\encodings\mac_turkish.py" />
+    <Content Include="Lib\encodings\mbcs.py" />
+    <Content Include="Lib\encodings\palmos.py" />
+    <Content Include="Lib\encodings\ptcp154.py" />
+    <Content Include="Lib\encodings\punycode.py" />
+    <Content Include="Lib\encodings\quopri_codec.py" />
+    <Content Include="Lib\encodings\raw_unicode_escape.py" />
+    <Content Include="Lib\encodings\rot_13.py" />
+    <Content Include="Lib\encodings\string_escape.py" />
+    <Content Include="Lib\encodings\tis_620.py" />
+    <Content Include="Lib\encodings\undefined.py" />
+    <Content Include="Lib\encodings\unicode_escape.py" />
+    <Content Include="Lib\encodings\unicode_internal.py" />
+    <Content Include="Lib\encodings\utf_16.py" />
+    <Content Include="Lib\encodings\utf_16_be.py" />
+    <Content Include="Lib\encodings\utf_16_le.py" />
+    <Content Include="Lib\encodings\utf_32.py" />
+    <Content Include="Lib\encodings\utf_32_be.py" />
+    <Content Include="Lib\encodings\utf_32_le.py" />
+    <Content Include="Lib\encodings\utf_7.py" />
+    <Content Include="Lib\encodings\utf_8.py" />
+    <Content Include="Lib\encodings\utf_8_sig.py" />
+    <Content Include="Lib\encodings\uu_codec.py" />
+    <Content Include="Lib\encodings\zlib_codec.py" />
+    <Content Include="Lib\encodings\__init__.py" />
+    <Content Include="Lib\ensurepip\_uninstall.py" />
+    <Content Include="Lib\ensurepip\__init__.py" />
+    <Content Include="Lib\ensurepip\__main__.py" />
+    <Content Include="Lib\filecmp.py" />
+    <Content Include="Lib\fileinput.py" />
+    <Content Include="Lib\fnmatch.py" />
+    <Content Include="Lib\formatter.py" />
+    <Content Include="Lib\fpformat.py" />
+    <Content Include="Lib\fractions.py" />
+    <Content Include="Lib\ftplib.py" />
+    <Content Include="Lib\functools.py" />
+    <Content Include="Lib\genericpath.py" />
+    <Content Include="Lib\getopt.py" />
+    <Content Include="Lib\getpass.py" />
+    <Content Include="Lib\gettext.py" />
+    <Content Include="Lib\glob.py" />
+    <Content Include="Lib\gzip.py" />
+    <Content Include="Lib\hashlib.py" />
+    <Content Include="Lib\heapq.py" />
+    <Content Include="Lib\hmac.py" />
+    <Content Include="Lib\htmlentitydefs.py" />
+    <Content Include="Lib\htmllib.py" />
+    <Content Include="Lib\HTMLParser.py" />
+    <Content Include="Lib\httplib.py" />
+    <Content Include="Lib\ihooks.py" />
+    <Content Include="Lib\imaplib.py" />
+    <Content Include="Lib\imghdr.py" />
+    <Content Include="Lib\importlib\__init__.py" />
+    <Content Include="Lib\imputil.py" />
+    <Content Include="Lib\inspect.py" />
+    <Content Include="Lib\io.py" />
+    <Content Include="Lib\json\decoder.py" />
+    <Content Include="Lib\json\encoder.py" />
+    <Content Include="Lib\json\scanner.py" />
+    <Content Include="Lib\json\tool.py" />
+    <Content Include="Lib\json\__init__.py" />
+    <Content Include="Lib\keyword.py" />
+    <Content Include="Lib\lib2to3\btm_matcher.py" />
+    <Content Include="Lib\lib2to3\btm_utils.py" />
+    <Content Include="Lib\lib2to3\fixer_base.py" />
+    <Content Include="Lib\lib2to3\fixer_util.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_apply.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_asserts.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_basestring.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_buffer.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_dict.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_except.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_exec.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_execfile.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_exitfunc.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_filter.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_funcattrs.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_future.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_getcwdu.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_has_key.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_idioms.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_import.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_imports.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_imports2.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_input.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_intern.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_isinstance.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_itertools.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_itertools_imports.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_long.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_map.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_metaclass.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_methodattrs.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_ne.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_next.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_nonzero.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_numliterals.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_operator.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_paren.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_print.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_raise.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_raw_input.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_reduce.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_renames.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_repr.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_set_literal.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_standarderror.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_sys_exc.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_throw.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_tuple_params.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_types.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_unicode.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_urllib.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_ws_comma.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_xrange.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_xreadlines.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_zip.py" />
+    <Content Include="Lib\lib2to3\fixes\__init__.py" />
+    <Content Include="Lib\lib2to3\main.py" />
+    <Content Include="Lib\lib2to3\patcomp.py" />
+    <Content Include="Lib\lib2to3\pgen2\conv.py" />
+    <Content Include="Lib\lib2to3\pgen2\driver.py" />
+    <Content Include="Lib\lib2to3\pgen2\grammar.py" />
+    <Content Include="Lib\lib2to3\pgen2\literals.py" />
+    <Content Include="Lib\lib2to3\pgen2\parse.py" />
+    <Content Include="Lib\lib2to3\pgen2\pgen.py" />
+    <Content Include="Lib\lib2to3\pgen2\token.py" />
+    <Content Include="Lib\lib2to3\pgen2\tokenize.py" />
+    <Content Include="Lib\lib2to3\pgen2\__init__.py" />
+    <Content Include="Lib\lib2to3\pygram.py" />
+    <Content Include="Lib\lib2to3\pytree.py" />
+    <Content Include="Lib\lib2to3\refactor.py" />
+    <Content Include="Lib\lib2to3\__init__.py" />
+    <Content Include="Lib\lib2to3\__main__.py" />
+    <Content Include="Lib\linecache.py" />
+    <Content Include="Lib\locale.py" />
+    <Content Include="Lib\logging\config.py" />
+    <Content Include="Lib\logging\handlers.py" />
+    <Content Include="Lib\logging\__init__.py" />
+    <Content Include="Lib\macpath.py" />
+    <Content Include="Lib\macurl2path.py" />
+    <Content Include="Lib\mailbox.py" />
+    <Content Include="Lib\mailcap.py" />
+    <Content Include="Lib\markupbase.py" />
+    <Content Include="Lib\md5.py" />
+    <Content Include="Lib\mhlib.py" />
+    <Content Include="Lib\mimetools.py" />
+    <Content Include="Lib\mimetypes.py" />
+    <Content Include="Lib\MimeWriter.py" />
+    <Content Include="Lib\mimify.py" />
+    <Content Include="Lib\modulefinder.py" />
+    <Content Include="Lib\multifile.py" />
+    <Content Include="Lib\multiprocessing\connection.py" />
+    <Content Include="Lib\multiprocessing\dummy\connection.py" />
+    <Content Include="Lib\multiprocessing\dummy\__init__.py" />
+    <Content Include="Lib\multiprocessing\forking.py" />
+    <Content Include="Lib\multiprocessing\heap.py" />
+    <Content Include="Lib\multiprocessing\managers.py" />
+    <Content Include="Lib\multiprocessing\pool.py" />
+    <Content Include="Lib\multiprocessing\process.py" />
+    <Content Include="Lib\multiprocessing\queues.py" />
+    <Content Include="Lib\multiprocessing\reduction.py" />
+    <Content Include="Lib\multiprocessing\sharedctypes.py" />
+    <Content Include="Lib\multiprocessing\synchronize.py" />
+    <Content Include="Lib\multiprocessing\util.py" />
+    <Content Include="Lib\multiprocessing\__init__.py" />
+    <Content Include="Lib\mutex.py" />
+    <Content Include="Lib\netrc.py" />
+    <Content Include="Lib\new.py" />
+    <Content Include="Lib\nntplib.py" />
+    <Content Include="Lib\ntpath.py" />
+    <Content Include="Lib\nturl2path.py" />
+    <Content Include="Lib\numbers.py" />
+    <Content Include="Lib\opcode.py" />
+    <Content Include="Lib\optparse.py" />
+    <Content Include="Lib\os.py" />
+    <Content Include="Lib\os2emxpath.py" />
+    <Content Include="Lib\pdb.py" />
+    <Content Include="Lib\pickle.py" />
+    <Content Include="Lib\pickletools.py" />
+    <Content Include="Lib\pipes.py" />
+    <Content Include="Lib\pkgutil.py" />
+    <Content Include="Lib\platform.py" />
+    <Content Include="Lib\plistlib.py" />
+    <Content Include="Lib\popen2.py" />
+    <Content Include="Lib\poplib.py" />
+    <Content Include="Lib\posixfile.py" />
+    <Content Include="Lib\posixpath.py" />
+    <Content Include="Lib\pprint.py" />
+    <Content Include="Lib\profile.py" />
+    <Content Include="Lib\pstats.py" />
+    <Content Include="Lib\pyclbr.py" />
+    <Content Include="Lib\pydoc.py" />
+    <Content Include="Lib\pydoc_data\topics.py" />
+    <Content Include="Lib\pydoc_data\__init__.py" />
+    <Content Include="Lib\py_compile.py" />
+    <Content Include="Lib\Queue.py" />
+    <Content Include="Lib\quopri.py" />
+    <Content Include="Lib\random.py" />
+    <Content Include="Lib\repr.py" />
+    <Content Include="Lib\rexec.py" />
+    <Content Include="Lib\rfc822.py" />
+    <Content Include="Lib\rlcompleter.py" />
+    <Content Include="Lib\robotparser.py" />
+    <Content Include="Lib\runpy.py" />
+    <Content Include="Lib\sched.py" />
+    <Content Include="Lib\sets.py" />
+    <Content Include="Lib\sgmllib.py" />
+    <Content Include="Lib\sha.py" />
+    <Content Include="Lib\shelve.py" />
+    <Content Include="Lib\shlex.py" />
+    <Content Include="Lib\shutil.py" />
+    <Content Include="Lib\SimpleHTTPServer.py" />
+    <Content Include="Lib\SimpleXMLRPCServer.py" />
+    <Content Include="Lib\site-packages\README.txt" />
+    <Content Include="Lib\site.py" />
+    <Content Include="Lib\smtpd.py" />
+    <Content Include="Lib\smtplib.py" />
+    <Content Include="Lib\sndhdr.py" />
+    <Content Include="Lib\socket.py" />
+    <Content Include="Lib\SocketServer.py" />
+    <Content Include="Lib\sqlite3\dbapi2.py" />
+    <Content Include="Lib\sqlite3\dump.py" />
+    <Content Include="Lib\sqlite3\__init__.py" />
+    <Content Include="Lib\sre_constants.py" />
+    <Content Include="Lib\sre_parse.py" />
+    <Content Include="Lib\ssl.py" />
+    <Content Include="Lib\stat.py" />
+    <Content Include="Lib\statvfs.py" />
+    <Content Include="Lib\string.py" />
+    <Content Include="Lib\StringIO.py" />
+    <Content Include="Lib\stringold.py" />
+    <Content Include="Lib\stringprep.py" />
+    <Content Include="Lib\struct.py" />
+    <Content Include="Lib\subprocess.py" />
+    <Content Include="Lib\sunau.py" />
+    <Content Include="Lib\sunaudio.py" />
+    <Content Include="Lib\symbol.py" />
+    <Content Include="Lib\sysconfig.py" />
+    <Content Include="Lib\tabnanny.py" />
+    <Content Include="Lib\tarfile.py" />
+    <Content Include="Lib\telnetlib.py" />
+    <Content Include="Lib\tempfile.py" />
+    <Content Include="Lib\textwrap.py" />
+    <Content Include="Lib\this.py" />
+    <Content Include="Lib\threading.py" />
+    <Content Include="Lib\timeit.py" />
+    <Content Include="Lib\toaiff.py" />
+    <Content Include="Lib\token.py" />
+    <Content Include="Lib\tokenize.py" />
+    <Content Include="Lib\trace.py" />
+    <Content Include="Lib\traceback.py" />
+    <Content Include="Lib\types.py" />
+    <Content Include="Lib\unittest\case.py" />
+    <Content Include="Lib\unittest\loader.py" />
+    <Content Include="Lib\unittest\main.py" />
+    <Content Include="Lib\unittest\result.py" />
+    <Content Include="Lib\unittest\runner.py" />
+    <Content Include="Lib\unittest\signals.py" />
+    <Content Include="Lib\unittest\suite.py" />
+    <Content Include="Lib\unittest\util.py" />
+    <Content Include="Lib\unittest\__init__.py" />
+    <Content Include="Lib\unittest\__main__.py" />
+    <Content Include="Lib\urllib.py" />
+    <Content Include="Lib\urllib2.py" />
+    <Content Include="Lib\urlparse.py" />
+    <Content Include="Lib\user.py" />
+    <Content Include="Lib\UserDict.py" />
+    <Content Include="Lib\UserList.py" />
+    <Content Include="Lib\UserString.py" />
+    <Content Include="Lib\uu.py" />
+    <Content Include="Lib\uuid.py" />
+    <Content Include="Lib\warnings.py" />
+    <Content Include="Lib\wave.py" />
+    <Content Include="Lib\weakref.py" />
+    <Content Include="Lib\webbrowser.py" />
+    <Content Include="Lib\whichdb.py" />
+    <Content Include="Lib\wpf.py" />
+    <Content Include="Lib\wsgiref\handlers.py" />
+    <Content Include="Lib\wsgiref\headers.py" />
+    <Content Include="Lib\wsgiref\simple_server.py" />
+    <Content Include="Lib\wsgiref\util.py" />
+    <Content Include="Lib\wsgiref\validate.py" />
+    <Content Include="Lib\wsgiref\__init__.py" />
+    <Content Include="Lib\xdrlib.py" />
+    <Content Include="Lib\xmllib.py" />
+    <Content Include="Lib\xmlrpclib.py" />
+    <Content Include="Lib\xml\dom\domreg.py" />
+    <Content Include="Lib\xml\dom\expatbuilder.py" />
+    <Content Include="Lib\xml\dom\minicompat.py" />
+    <Content Include="Lib\xml\dom\minidom.py" />
+    <Content Include="Lib\xml\dom\NodeFilter.py" />
+    <Content Include="Lib\xml\dom\pulldom.py" />
+    <Content Include="Lib\xml\dom\xmlbuilder.py" />
+    <Content Include="Lib\xml\dom\__init__.py" />
+    <Content Include="Lib\xml\etree\cElementTree.py" />
+    <Content Include="Lib\xml\etree\ElementInclude.py" />
+    <Content Include="Lib\xml\etree\ElementPath.py" />
+    <Content Include="Lib\xml\etree\ElementTree.py" />
+    <Content Include="Lib\xml\etree\SimpleXMLTreeBuilder.py" />
+    <Content Include="Lib\xml\etree\__init__.py" />
+    <Content Include="Lib\xml\parsers\expat.py" />
+    <Content Include="Lib\xml\parsers\__init__.py" />
+    <Content Include="Lib\xml\sax\expatreader.py" />
+    <Content Include="Lib\xml\sax\handler.py" />
+    <Content Include="Lib\xml\sax\saxutils.py" />
+    <Content Include="Lib\xml\sax\xmlreader.py" />
+    <Content Include="Lib\xml\sax\_exceptions.py" />
+    <Content Include="Lib\xml\sax\__init__.py" />
+    <Content Include="Lib\xml\__init__.py" />
+    <Content Include="Lib\zipfile.py" />
+    <Content Include="Lib\_abcoll.py" />
+    <Content Include="Lib\_LWPCookieJar.py" />
+    <Content Include="Lib\_MozillaCookieJar.py" />
+    <Content Include="Lib\_osx_support.py" />
+    <Content Include="Lib\_pyio.py" />
+    <Content Include="Lib\_strptime.py" />
+    <Content Include="Lib\_threading_local.py" />
+    <Content Include="Lib\_weakrefset.py" />
+    <Content Include="Lib\__future__.py" />
+    <Content Include="Lib\__phello__.foo.py" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

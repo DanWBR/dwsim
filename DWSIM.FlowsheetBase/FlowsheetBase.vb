@@ -31,6 +31,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
 
+    Public Property WeatherProvider As IWeatherProvider = New SharedClasses.WeatherProvider() Implements IFlowsheet.WeatherProvider
+
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
 
     Public Property DynamicsManager As IDynamicsManager = New DynamicsManager.Manager Implements IFlowsheet.DynamicsManager
@@ -106,7 +108,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Sub AddPropertyPackage(obj As IPropertyPackage) Implements IFlowsheet.AddPropertyPackage
         If obj.UniqueID = "" Then obj.UniqueID = Guid.NewGuid().ToString()
-        If obj.Tag = "" Then obj.Tag = obj.Tag = obj.GetType().Name
+        If obj.Tag = "" Then obj.Tag = obj.GetType().Name
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub
 
@@ -589,6 +591,34 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Switch, x, y, tag,,, CreateConnected))
 
+            Case "Air Cooler 2"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AirCooler2, x, y, tag,,, CreateConnected))
+
+            Case "Gibbs Reactor (Reaktoro)"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_GibbsReaktoro, x, y, tag,,, CreateConnected))
+
+            Case "Wind Turbine"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.WindTurbine, x, y, tag,,, CreateConnected))
+
+            Case "Hydroelectric Turbine"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HydroelectricTurbine, x, y, tag,,, CreateConnected))
+
+            Case "Solar Panel"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolarPanel, x, y, tag,,, CreateConnected))
+
+            Case "Water Electrolyzer"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.WaterElectrolyzer, x, y, tag,,, CreateConnected))
+
+            Case "PEM Fuel Cell (Amphlett)"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.PEMFuelCell, x, y, tag,,, CreateConnected))
+
             Case Else
 
                 Return Nothing
@@ -775,7 +805,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myADJ.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myADJ)
 
-            Case ObjectType.NodeIn
+            Case ObjectType.NodeIn, ObjectType.Mixer
 
                 Dim myNode As New MixerGraphic(mpx, mpy, 40, 40)
                 myNode.Tag = objname
@@ -789,7 +819,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCOMIX.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myCOMIX)
 
-            Case ObjectType.NodeOut
+            Case ObjectType.NodeOut, ObjectType.Splitter
 
                 Dim myNodeo As New SplitterGraphic(mpx, mpy, 40, 40)
                 myNodeo.Tag = objname
@@ -1254,6 +1284,134 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
                 myCOCUO.GraphicObject = myCUO
                 SimulationObjects.Add(myCUO.Name, myCOCUO)
+
+            Case ObjectType.AirCooler2
+
+                Dim fsobj = New AirCooler2()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.EnergyMixer
+
+                Dim fsobj = New EnergyMixer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.RCT_GibbsReaktoro
+
+                Dim fsobj = New Reactor_ReaktoroGibbs()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WindTurbine
+
+                Dim fsobj = New WindTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.HydroelectricTurbine
+
+                Dim fsobj = New HydroelectricTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.PEMFuelCell
+
+                Dim fsobj = New PEMFC_Amphlett()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.SolarPanel
+
+                Dim fsobj = New SolarPanel()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WaterElectrolyzer
+
+                Dim fsobj = New WaterElectrolyzer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = objname
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
 
         End Select
 
@@ -2304,6 +2462,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                             obj.CreateConnectors(0, 0)
                             obj.Owner = Nothing
                             DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
+                        Else
+                            Try
+                                obj.CreateConnectors(0, 0)
+                            Catch ex As Exception
+                            End Try
                         End If
                     Else
                         If obj.Name = "" Then obj.Name = obj.Tag
@@ -2903,21 +3066,21 @@ Label_00CC:
         Dim t11 = TaskHelper.Run(Sub()
 
 
-                                     Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-                                     EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-                                     plist.Add(EUQPP)
+                                     'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+                                     'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+                                     'plist.Add(EUQPP)
 
-                                     Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-                                     ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-                                     plist.Add(ENQPP)
+                                     'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+                                     'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+                                     'plist.Add(ENQPP)
 
-                                     Dim LIQPP As New LIQUAC2PropertyPackage()
-                                     LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
-                                     plist.Add(LIQPP)
+                                     'Dim LIQPP As New LIQUAC2PropertyPackage()
+                                     'LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+                                     'plist.Add(LIQPP)
 
-                                     Dim DHPP As New DebyeHuckelPropertyPackage()
-                                     DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-                                     plist.Add(DHPP)
+                                     'Dim DHPP As New DebyeHuckelPropertyPackage()
+                                     'DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+                                     'plist.Add(DHPP)
 
                                      Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                      BOPP.ComponentName = "Black Oil"
@@ -2981,6 +3144,16 @@ Label_00CC:
     Sub AddExternalUOs()
 
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
+
+        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+        If unitopassembly Is Nothing Then
+            unitopassembly = Assembly.Load("DWSIM.UnitOperations")
+        End If
+
+        Dim euolist As List(Of Interfaces.IExternalUnitOperation) = SharedClasses.Utility.GetUnitOperations(unitopassembly)
+
+        otheruos.AddRange(euolist)
 
         For Each uo In otheruos
             If Not ExternalUnitOperations.ContainsKey(uo.Description) Then
@@ -3054,7 +3227,8 @@ Label_00CC:
 
             Dim aTypeList As New List(Of Type)
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing And
+                                                                   Not x.IsAbstract And x.GetInterface("DWSIM.Interfaces.IExternalUnitOperation") Is Nothing, True, False)))
 
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
@@ -3388,6 +3562,307 @@ Label_00CC:
     Public Function RunCodeOnUIThread2(act As Action) As Task Implements IFlowsheet.RunCodeOnUIThread2
         Throw New NotImplementedException()
     End Function
+
+    Public Function CreateConversionReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                             basecompound As String, reactionphase As String, conversionExpression As String) As IReaction Implements IFlowsheet.CreateConversionReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Conversion
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        r.Expression = conversionExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateEquilibriumReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                              basecompound As String, reactionphase As String, basis As String, units As String, Tapproach As Double,
+                                              lnKeq_fT As String) As IReaction Implements IFlowsheet.CreateEquilibriumReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Equilibrium
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.EquilibriumReactionBasisUnits = units
+        r.Approach = Tapproach
+        If lnKeq_fT <> "" Then r.KExprType = KOpt.Expression Else r.KExprType = KOpt.Gibbs
+        r.Expression = lnKeq_fT
+
+        Return r
+
+    End Function
+
+    Public Function CreateKineticReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                          directorders As Dictionary(Of String, Double), reverseorders As Dictionary(Of String, Double),
+                                          basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                          rateunits As String, Aforward As Double, Eforward As Double, Areverse As Double, Ereverse As Double,
+                                          Expr_forward As String, Expr_reverse As String) As IReaction Implements IFlowsheet.CreateKineticReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Kinetic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, directorders(kvp.Key), reverseorders(kvp.Key)))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.A_Forward = Aforward
+        r.E_Forward = Eforward
+        r.A_Reverse = Areverse
+        r.E_Reverse = Ereverse
+        If Expr_forward <> "" Then
+            r.ReactionKinFwdType = ReactionKineticType.UserDefined
+            r.ReactionKinFwdExpression = Expr_forward
+        Else
+            r.ReactionKinFwdType = ReactionKineticType.Arrhenius
+        End If
+        If Expr_reverse <> "" Then
+            r.ReactionKinRevType = ReactionKineticType.UserDefined
+            r.ReactionKinRevExpression = Expr_reverse
+        Else
+            r.ReactionKinRevType = ReactionKineticType.Arrhenius
+        End If
+
+        Return r
+
+    End Function
+
+    Public Function CreateHetCatReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                         basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                         rateunits As String, numeratorExpression As String, denominatorExpression As String) As IReaction Implements IFlowsheet.CreateHetCatReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Heterogeneous_Catalytic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.RateEquationNumerator = numeratorExpression
+        r.RateEquationDenominator = denominatorExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateReactionSet(name As String, description As String) As IReactionSet Implements IFlowsheet.CreateReactionSet
+
+        Dim rs As New ReactionSet(name, name, description)
+        Return rs
+
+    End Function
+
+    Public Sub AddReaction(reaction As IReaction) Implements IFlowsheet.AddReaction
+
+        Reactions.Add(reaction.ID, reaction)
+
+    End Sub
+
+    Public Sub AddReactionSet(reactionSet As IReactionSet) Implements IFlowsheet.AddReactionSet
+
+        ReactionSets.Add(reactionSet.ID, reactionSet)
+
+    End Sub
+
+    Public Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer) Implements IFlowsheet.AddReactionToSet
+
+        ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
+
+    End Sub
+
+    Public Function GetAvailablePropertyPackages() As List(Of String) Implements IFlowsheet.GetAvailablePropertyPackages
+
+        Return AvailablePropertyPackages.Keys.ToList()
+
+    End Function
+
+    Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        Return pp
+
+    End Function
+
+    Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        AddPropertyPackage(pp)
+        Return pp
+
+    End Function
+
+    Public Function AddCompound(compname As String) As ICompoundConstantProperties Implements IFlowsheet.AddCompound
+
+        Dim c = GetCompound(compname)
+        Options.SelectedComponents.Add(c.Name, c)
+        If Options.NotSelectedComponents.ContainsKey(c.Name) Then Options.NotSelectedComponents.Remove(c.Name)
+        Return c
+
+    End Function
+
+    Private Sub CalcReactionStoichiometry(rc As IReaction)
+
+        Dim hp, hr, bp, br, brsc, gp, gr As Double
+
+        Dim eq As String = ""
+        'build reaction equation
+        'scan for reactants
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff < 0 Then
+                If c.Value.StoichCoeff = -1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                br += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
+        eq += "<--> "
+        'scan for products
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff > 0 Then
+                If c.Value.StoichCoeff = 1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                bp += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        eq = eq.Remove(eq.Length - 2, 2)
+
+        brsc = Math.Abs(rc.Components.Where(Function(c) c.Value.IsBaseReactant).FirstOrDefault().Value.StoichCoeff)
+
+        rc.ReactionHeat = (hp - hr) / brsc
+        rc.ReactionGibbsEnergy = (gp - gr) / brsc
+
+        rc.StoichBalance = bp - br
+        rc.Equation = eq
+
+    End Sub
 
 End Class
 

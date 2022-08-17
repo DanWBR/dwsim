@@ -455,6 +455,8 @@ Namespace Enums
         Switches = 14
         Inputs = 15
         None = 16
+        CleanPowerSources = 17
+        Electrolyzers = 18
 
     End Enum
 
@@ -633,6 +635,18 @@ Namespace Enums.GraphicObjects
 
         GO_HTMLText
         GO_Button
+
+        AirCooler2
+        WindTurbine
+        HydroelectricTurbine
+        SolarPanel
+        PEMFuelCell
+        WaterElectrolyzer
+        RCT_GibbsReaktoro
+
+        EnergyMixer
+        Mixer
+        Splitter
 
     End Enum
 

@@ -614,7 +614,7 @@ Namespace Reactors
 
                                           pen_val = 0.0
                                           For Each d In nif
-                                              If d < 0.0 Then pen_val += -d * 1.0E+150
+                                              If d < 0.0 Then pen_val += d ^ 2 * 100.0
                                           Next
 
                                           fval = xref.SubtractY(xi).AbsSqrSumY

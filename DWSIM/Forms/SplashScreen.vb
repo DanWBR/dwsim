@@ -51,7 +51,7 @@ Public NotInheritable Class SplashScreen
 
     Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
 
-        pevent.Graphics.DrawImage(My.Resources.DWSIM_splash_v7, New Rectangle(0, 0, Me.Width, Me.Height))
+        pevent.Graphics.DrawImage(My.Resources.DWSIM_splash_v8, New Rectangle(0, 0, Me.Width, Me.Height))
 
     End Sub
 

@@ -242,4 +242,20 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetAsObject() As Object
 
+    ReadOnly Property IsSource As Boolean
+
+    ReadOnly Property IsSink As Boolean
+
+    Sub ConnectEnergyStream(stream As ISimulationObject)
+
+    Sub ConnectProductEnergyStream(stream As ISimulationObject, portnumber As Integer)
+
+    Sub ConnectFeedEnergyStream(stream As ISimulationObject, portnumber As Integer)
+
+    Sub ConnectProductMaterialStream(stream As ISimulationObject, portnumber As Integer)
+
+    Sub ConnectFeedMaterialStream(stream As ISimulationObject, portnumber As Integer)
+
+    Function GetConnectionPortsList() As List(Of String)
+
 End Interface

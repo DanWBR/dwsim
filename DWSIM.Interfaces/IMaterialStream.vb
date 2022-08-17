@@ -47,9 +47,13 @@
 
     Sub SetOverallComposition(Vx As Array)
 
+    Sub SetOverallMassComposition(Vx As Double())
+
     Function GetPhaseComposition(phs As Integer) As Double()
 
     Function GetOverallComposition() As Double()
+
+    Function GetOverallMassComposition() As Double()
 
     Function Clone() As IMaterialStream
 

@@ -677,6 +677,78 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function DW_CalcFugCoeff(Vz() As Double, T As Double, V As Double) As Double()
+
+            Dim P = DW_CalcP(Vz, T, V)
+
+            Return m_lk.CalcLnFugTV(T, P, V, Vz, RET_VKij, RET_VTC, RET_VPC, RET_VW, RET_VMM, RET_VVC, RET_Hid(298.15, T, Vz)).ExpY()
+
+        End Function
+
+        Public Overrides Function DW_CalcP(Vz() As Double, T As Double, V As Double) As Double
+
+            'mixture critical properties
+            Dim Tcm, Pcm, Vcm, wm As Double
+            Dim obj = m_lk.MixCritProp_LK(Vz, RET_VTC, RET_VPC, RET_VW, RET_VVC, RET_VKij)
+            Tcm = obj(0)
+            Pcm = obj(1)
+            Vcm = obj(2)
+            wm = obj(3)
+
+            Dim wh, Vr As Double
+            Dim B, C, D, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
+
+            b1 = 0.1181193
+            b2 = 0.265728
+            b3 = 0.15479
+            b4 = 0.030323
+            c1 = 0.0236744
+            c2 = 0.0186984
+            c3 = 0
+            c4 = 0.042724
+            d1 = 0.0000155488
+            d2 = 0.0000623689
+            beta = 0.65392
+            gamma = 0.060167
+
+            Dim Tr = T / Tcm
+            Vr = V / Vcm
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr1 = m_lk.CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            b1 = 0.2026579
+            b2 = 0.331511
+            b3 = 0.027655
+            b4 = 0.203488
+            c1 = 0.0313385
+            c2 = 0.0503618
+            c3 = 0.016901
+            c4 = 0.041577
+            d1 = 0.000048736
+            d2 = 0.00000740336
+            beta = 1.226
+            gamma = 0.03754
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr2 = m_lk.CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            wh = 0.3978
+
+            Dim Pr = Pr1 + wm / wh * (Pr2 - Pr1)
+
+            Dim P = Pr * Pcm
+
+            Return P
+
+        End Function
+
     End Class
 
 End Namespace

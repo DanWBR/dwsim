@@ -97,7 +97,7 @@ Partial Class EditingForm_Pipe_ResultsChart
         'EditingForm_Pipe_ResultsChart
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "EditingForm_Pipe_ResultsChart"

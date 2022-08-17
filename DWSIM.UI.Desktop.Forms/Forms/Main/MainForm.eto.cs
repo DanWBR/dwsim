@@ -347,6 +347,13 @@ namespace DWSIM.UI
                     if (t.Exception != null)
                     {
                         FOSSEEList.Items.Add(new ListItem { Text = "Error loading flowsheet list. Check your internet connection.", Key = "" });
+                        DWSIM.Logging.Logger.LogError("FOSSEE Flowsheets loading error", t.Exception);
+                        Console.WriteLine(t.Exception.ToString());
+                        foreach (var iex in t.Exception.InnerExceptions)
+                        {
+                            DWSIM.Logging.Logger.LogError("FOSSEE Flowsheets loading inner exception", iex);
+                            if (iex.InnerException != null) DWSIM.Logging.Logger.LogError("FOSSEE Flowsheets loading inner exception", iex.InnerException);
+                        }
                     }
                     else
                     {
@@ -383,8 +390,8 @@ namespace DWSIM.UI
                     var si = (TreeGridItem)MostRecentList.SelectedItem;
                     var data = (Dictionary<string, string>)si.Tag;
                     LoadSimulation(data["Path"]);
-                    //MostRecentList.UnselectAll();
-                };
+        //MostRecentList.UnselectAll();
+    };
             };
 
             SampleList.SelectedIndexChanged += (sender, e) =>
@@ -392,8 +399,8 @@ namespace DWSIM.UI
                 if (SampleList.SelectedIndex >= 0)
                 {
                     LoadSimulation(SampleList.SelectedKey);
-                   // SampleList.SelectedValue = null;
-                };
+        // SampleList.SelectedValue = null;
+    };
             };
 
             FOSSEEList.SelectedIndexChanged += (sender, e) =>
@@ -566,13 +573,13 @@ namespace DWSIM.UI
         {
             Application.Instance.Invoke(() =>
             {
-                //switch (GlobalSettings.Settings.RunningPlatform())
-                //{
-                //    case GlobalSettings.Settings.Platform.Windows:
-                //        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
-                //        break;
-                //}
-                var splash = new SplashScreen { MainFrm = this };
+        //switch (GlobalSettings.Settings.RunningPlatform())
+        //{
+        //    case GlobalSettings.Settings.Platform.Windows:
+        //        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
+        //        break;
+        //}
+        var splash = new SplashScreen { MainFrm = this };
                 splash.Show();
             });
 
@@ -686,7 +693,7 @@ namespace DWSIM.UI
 
                 });
 
-                
+
 
 
 

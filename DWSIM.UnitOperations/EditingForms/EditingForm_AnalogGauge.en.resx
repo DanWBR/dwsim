@@ -130,17 +130,29 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Property Units</value>
   </data>
+  <data name="cbSourceUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 21</value>
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Property Type</value>
   </data>
+  <data name="cbSourceUnitType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 21</value>
+  </data>
+  <data name="tbMaxVal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Maximum Value</value>
+  </data>
+  <data name="tbMinVal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -160,11 +172,20 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Property</value>
   </data>
+  <data name="cbSourceProp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 21</value>
+  </data>
+  <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 21</value>
+  </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Object</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 81</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 294</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Monitored Property</value>
@@ -172,8 +193,11 @@
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 29</value>
   </data>
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
+  </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 28</value>
+    <value>335, 28</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -188,10 +212,14 @@
     <value>Name</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 67</value>
+    <value>362, 67</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Object ID</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="chkShowAlarms.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 17</value>
@@ -199,11 +227,17 @@
   <data name="chkShowAlarms.Text" xml:space="preserve">
     <value>Show Alarm Indicators</value>
   </data>
+  <data name="tbVeryHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
+  </data>
   <data name="chkVeryHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
   </data>
   <data name="chkVeryHigh.Text" xml:space="preserve">
     <value>Very High</value>
+  </data>
+  <data name="tbHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
   </data>
   <data name="chkHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 17</value>
@@ -211,11 +245,17 @@
   <data name="chkHigh.Text" xml:space="preserve">
     <value>High</value>
   </data>
+  <data name="tbLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
+  </data>
   <data name="chkLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 17</value>
   </data>
   <data name="chkLow.Text" xml:space="preserve">
     <value>Low</value>
+  </data>
+  <data name="tbVeryLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 20</value>
   </data>
   <data name="chkVeryLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 17</value>
@@ -227,12 +267,15 @@
     <value>7, 381</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 175</value>
+    <value>362, 175</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Alarms</value>
   </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>345, 568</value>
+    <value>381, 941</value>
   </data>
 </root>

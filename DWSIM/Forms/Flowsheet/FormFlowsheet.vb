@@ -55,6 +55,8 @@ Public Class FormFlowsheet
 
 #Region "    Variable Declarations "
 
+    Public Property WeatherProvider As IWeatherProvider = New WeatherProvider() Implements IFlowsheet.WeatherProvider
+
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
@@ -615,8 +617,11 @@ Public Class FormFlowsheet
         If Not FormMain.IsPro And My.Settings.ShowWhatsNew Then
             Task.Delay(5000).ContinueWith(Sub(t)
                                               UIThread(Sub()
-                                                           Dim fwn As New FormWhatsNew()
-                                                           fwn.ShowDialog(Me)
+                                                           Try
+                                                               Dim fwn As New FormWhatsNew()
+                                                               fwn.ShowDialog(Me)
+                                                           Catch ex As Exception
+                                                           End Try
                                                        End Sub)
                                           End Sub)
         End If
@@ -2812,7 +2817,7 @@ Public Class FormFlowsheet
 
     Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
         Get
-            Throw New NotImplementedException()
+            Return My.Application.MainWindowForm.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
         End Get
         Set(value As Dictionary(Of String, IPropertyPackage))
             Throw New NotImplementedException()
@@ -2887,7 +2892,7 @@ Public Class FormFlowsheet
             Return Collections.GraphicObjectCollection
         End Get
         Set(value As Dictionary(Of String, Interfaces.IGraphicObject))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
@@ -2896,7 +2901,7 @@ Public Class FormFlowsheet
             Return Collections.FlowsheetObjectCollection
         End Get
         Set(value As Dictionary(Of String, Interfaces.ISimulationObject))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
@@ -2905,7 +2910,7 @@ Public Class FormFlowsheet
             Return Options.Reactions
         End Get
         Set(value As Dictionary(Of String, Interfaces.IReaction))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
@@ -2914,7 +2919,7 @@ Public Class FormFlowsheet
             Return Options.ReactionSets
         End Get
         Set(value As Dictionary(Of String, Interfaces.IReactionSet))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
@@ -3692,12 +3697,336 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub CriadorDeComponentesSólidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriadorDeComponentesSólidosToolStripMenuItem.Click
+        Dim fqc As New FormCreateNewSolid()
+        fqc.ShowDialog(Me)
+    End Sub
+
     Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
 
         FormSurface.AnimationTimer.Enabled = Not FormSurface.AnimationTimer.Enabled
 
     End Sub
 
+    Public Function CreateConversionReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                             basecompound As String, reactionphase As String, conversionExpression As String) As IReaction Implements IFlowsheet.CreateConversionReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Conversion
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        r.Expression = conversionExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateEquilibriumReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                              basecompound As String, reactionphase As String, basis As String, units As String, Tapproach As Double,
+                                              lnKeq_fT As String) As IReaction Implements IFlowsheet.CreateEquilibriumReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Equilibrium
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.EquilibriumReactionBasisUnits = units
+        r.Approach = Tapproach
+        If lnKeq_fT <> "" Then r.KExprType = KOpt.Expression Else r.KExprType = KOpt.Gibbs
+        r.Expression = lnKeq_fT
+
+        Return r
+
+    End Function
+
+    Public Function CreateKineticReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                          directorders As Dictionary(Of String, Double), reverseorders As Dictionary(Of String, Double),
+                                          basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                          rateunits As String, Aforward As Double, Eforward As Double, Areverse As Double, Ereverse As Double,
+                                          Expr_forward As String, Expr_reverse As String) As IReaction Implements IFlowsheet.CreateKineticReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Kinetic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, directorders(kvp.Key), reverseorders(kvp.Key)))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.A_Forward = Aforward
+        r.E_Forward = Eforward
+        r.A_Reverse = Areverse
+        r.E_Reverse = Ereverse
+        If Expr_forward <> "" Then
+            r.ReactionKinFwdType = ReactionKineticType.UserDefined
+            r.ReactionKinFwdExpression = Expr_forward
+        Else
+            r.ReactionKinFwdType = ReactionKineticType.Arrhenius
+        End If
+        If Expr_reverse <> "" Then
+            r.ReactionKinRevType = ReactionKineticType.UserDefined
+            r.ReactionKinRevExpression = Expr_reverse
+        Else
+            r.ReactionKinRevType = ReactionKineticType.Arrhenius
+        End If
+
+        Return r
+
+    End Function
+
+    Public Function CreateHetCatReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                         basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                         rateunits As String, numeratorExpression As String, denominatorExpression As String) As IReaction Implements IFlowsheet.CreateHetCatReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Heterogeneous_Catalytic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.RateEquationNumerator = numeratorExpression
+        r.RateEquationDenominator = denominatorExpression
+
+        Return r
+
+    End Function
+
+    ''' <returns></returns>
+    Public Function CreateReactionSet(name As String, description As String) As IReactionSet Implements IFlowsheet.CreateReactionSet
+
+        Dim rs As New ReactionSet(name, name, description)
+        Return rs
+
+    End Function
+
+    Public Sub AddReaction(reaction As IReaction) Implements IFlowsheet.AddReaction
+
+        Reactions.Add(reaction.ID, reaction)
+
+    End Sub
+
+    Public Sub AddReactionSet(reactionSet As IReactionSet) Implements IFlowsheet.AddReactionSet
+
+        ReactionSets.Add(reactionSet.ID, reactionSet)
+
+    End Sub
+
+    Public Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer) Implements IFlowsheet.AddReactionToSet
+
+        ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
+
+    End Sub
+
+    Public Function GetAvailablePropertyPackages() As List(Of String) Implements IFlowsheet.GetAvailablePropertyPackages
+
+        Return AvailablePropertyPackages.Keys.ToList()
+
+    End Function
+
+    Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        Return pp
+
+    End Function
+
+    Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        AddPropertyPackage(pp)
+        Return pp
+
+    End Function
+
+    Public Function AddCompound(compname As String) As ICompoundConstantProperties Implements IFlowsheet.AddCompound
+
+        Dim c = GetCompound(compname)
+        Options.SelectedComponents.Add(c.Name, c)
+        If Options.NotSelectedComponents.ContainsKey(c.Name) Then Options.NotSelectedComponents.Remove(c.Name)
+        Return c
+
+    End Function
+
+    Private Sub CalcReactionStoichiometry(rc As IReaction)
+
+        Dim hp, hr, bp, br, brsc, gp, gr As Double
+
+        Dim eq As String = ""
+        'build reaction equation
+        'scan for reactants
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff < 0 Then
+                If c.Value.StoichCoeff = -1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                br += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
+        eq += "<--> "
+        'scan for products
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff > 0 Then
+                If c.Value.StoichCoeff = 1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                bp += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        eq = eq.Remove(eq.Length - 2, 2)
+
+        brsc = Math.Abs(rc.Components.Where(Function(c) c.Value.IsBaseReactant).FirstOrDefault().Value.StoichCoeff)
+
+        rc.ReactionHeat = (hp - hr) / brsc
+        rc.ReactionGibbsEnergy = (gp - gr) / brsc
+
+        rc.StoichBalance = bp - br
+        rc.Equation = eq
+
+    End Sub
+
+    Private Sub ToggleWeatherPanelVisibilityToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToggleWeatherPanelVisibilityToolStripMenuItem.Click
+        FormSurface.PanelWeather.Visible = Not FormSurface.PanelWeather.Visible
+        My.Settings.WeatherPanelVisible = FormSurface.PanelWeather.Visible
+    End Sub
+
+    Public Async Sub DisplayHTML(title As String, htmlcontent As String)
+
+        Dim fh As New FormHTMLView()
+        fh.Text = title
+        fh.TabText = title
+        Await fh.Viewer.EnsureCoreWebView2Async()
+        fh.Viewer.NavigateToString(htmlcontent)
+        fh.Show(dckPanel)
+
+    End Sub
+
 #End Region
+
 
 End Class

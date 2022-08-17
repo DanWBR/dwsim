@@ -1185,6 +1185,18 @@ Namespace BaseClasses
 
         End Function
 
+        Public Sub SetReactionRank(reactionID As String, rank As Integer) Implements IReactionSet.SetReactionRank
+            Reactions(reactionID).Rank = rank
+        End Sub
+
+        Public Sub EnableReaction(reactionID As String) Implements IReactionSet.EnableReaction
+            Reactions(reactionID).IsActive = True
+        End Sub
+
+        Public Sub DisableReaction(reactionID As String) Implements IReactionSet.DisableReaction
+            Reactions(reactionID).IsActive = False
+        End Sub
+
     End Class
 
     <System.Serializable()> Public Class ReactionSetBase
@@ -2580,6 +2592,8 @@ Namespace BaseClasses
         Public Property COSTALD_SRK_Acentric_Factor As Double = 0.0 Implements ICompoundConstantProperties.COSTALD_SRK_Acentric_Factor
 
         Public Property COSTALD_Characteristic_Volume As Double = 0.0 Implements ICompoundConstantProperties.COSTALD_Characteristic_Volume
+
+        Public Property IsSolid As Boolean = False Implements ICompoundConstantProperties.IsSolid
 
         Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
 

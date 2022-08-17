@@ -1495,7 +1495,84 @@ Namespace UnitOperations
             End Get
         End Property
 
+        Public Overridable ReadOnly Property IsSource As Boolean = False Implements ISimulationObject.IsSource
+
+        Public Overridable ReadOnly Property IsSink As Boolean = False Implements ISimulationObject.IsSink
+
 #End Region
+
+
+        Public Sub ConnectFeedMaterialStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectFeedMaterialStream
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectProductMaterialStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectProductMaterialStream
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, portnumber, 0)
+
+        End Sub
+
+        Public Sub ConnectFeedEnergyStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectFeedEnergyStream
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectProductEnergyStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectProductEnergyStream
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectEnergyStream(stream As ISimulationObject) Implements ISimulationObject.ConnectEnergyStream
+
+            If GraphicObject.EnergyConnector.Active Then
+                FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Else
+                Dim i As Integer = 0
+                For Each con In GraphicObject.InputConnectors
+                    If con.IsEnergyConnector Or con.Type = GraphicObjects.ConType.ConEn Then
+                        FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, i)
+                    End If
+                    i += 1
+                Next
+                i = 0
+                For Each con In GraphicObject.InputConnectors
+                    If con.IsEnergyConnector Or con.Type = GraphicObjects.ConType.ConEn Then
+                        FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, i, 0)
+                    End If
+                    i += 1
+                Next
+
+            End If
+
+        End Sub
+
+        Public Function GetConnectionPortsList() As List(Of String) Implements ISimulationObject.GetConnectionPortsList
+
+            Dim l As New List(Of String)
+
+            Dim i As Integer = 0
+            For Each con In GraphicObject.InputConnectors
+                l.Add(String.Format("Inlet Port #{0}, Name: {1}, Type: {2}, Connected: {3}", i, con.ConnectorName, con.Type.ToString(), con.IsAttached))
+                i += 1
+            Next
+            i = 0
+            For Each con In GraphicObject.OutputConnectors
+                l.Add(String.Format("Outlet Port #{0}, Name: {1}, Type: {2}, Connected: {3}", i, con.ConnectorName, con.Type.ToString(), con.IsAttached))
+                i += 1
+            Next
+
+            If GraphicObject.EnergyConnector.Active Then
+                Dim con = GraphicObject.EnergyConnector
+                l.Add(String.Format("Energy Stream Port, Name: {1}, Type: {2}, Connected: {3}", i, con.ConnectorName, con.Type.ToString(), con.IsAttached))
+            End If
+
+            Return l
+
+        End Function
 
     End Class
 

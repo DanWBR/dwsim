@@ -1821,14 +1821,27 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
+                    If Q > MaxHeatExchange Then
+
+                        Q = MaxHeatExchange
+
+                        H11 = H10 - (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
+
+                        StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                        IObj?.SetCurrent()
+                        tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
+                        T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+
+                    End If
+
                     H20 = StIn1.GetMassEnthalpy()
-                    H21 = H20 + (Q1 - HeatLoss) / StIn1.GetMassFlow()
+                    H21 = H20 + (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
 
                     StIn1.PropertyPackage.CurrentMaterialStream = StIn1
                     IObj?.SetCurrent()
                     tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+                    'OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20
@@ -1850,7 +1863,14 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    LMTD = Math.Abs(Th2 - Tc2)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    LMTD *= CorrectionFactorLMTD
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -1887,15 +1907,28 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
+                    If Q > MaxHeatExchange Then
+
+                        Q = MaxHeatExchange
+
+                        H11 = H10 - (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
+
+                        StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                        IObj?.SetCurrent()
+                        tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
+                        T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+
+                    End If
+
                     T20 = StIn0.GetTemperature()
                     H20 = StIn0.GetMassEnthalpy()
-                    H21 = H20 + (Q1 - HeatLoss) / StIn0.GetMassFlow()
+                    H21 = H20 + (Math.Sign(Q1) * Q - HeatLoss) / StIn0.GetMassFlow()
 
                     StIn0.PropertyPackage.CurrentMaterialStream = StIn0
                     IObj?.SetCurrent()
                     tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
+                    'OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20
@@ -1917,7 +1950,14 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    LMTD = Math.Abs(Th2 - Tc2)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    LMTD *= CorrectionFactorLMTD
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 

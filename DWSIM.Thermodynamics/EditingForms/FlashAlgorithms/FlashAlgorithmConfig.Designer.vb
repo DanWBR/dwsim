@@ -206,7 +206,7 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.cbFlashType, "cbFlashType")
         Me.cbFlashType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashType.FormattingEnabled = True
-        Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4")})
+        Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4"), resources.GetString("cbFlashType.Items5")})
         Me.cbFlashType.Name = "cbFlashType"
         '
         'Label9

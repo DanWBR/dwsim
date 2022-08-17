@@ -635,7 +635,7 @@ Partial Class EditingForm_Filter
         'EditingForm_Filter
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox4)

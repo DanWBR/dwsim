@@ -348,25 +348,10 @@ namespace DWSIM.UI.Forms.Forms
             tab4.CreateAndAddEmptySpace();
 
             var tab5 = DWSIM.UI.Shared.Common.GetDefaultContainer();
-            tab5.Tag = "Misc".Localize(prefix);
 
-            tab5.CreateAndAddLabelRow("Octave Settings");
-            tab5.CreateAndAddDescriptionRow("Setup the path for Octave binaries to enable integration with DWSIM.");
-            TextBox tbox = null;
-            tbox = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.OctavePath, "Search", null,
-                (sender, e) => GlobalSettings.Settings.OctavePath = sender.Text,
-                (sender, e) =>
-                {
-                    var searchdialog = new SelectFolderDialog() { Title = "Search" };
-                    if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
-                    {
-                        tbox.Text = searchdialog.Directory;
-                    }
-                });
-            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.OctaveTimeoutInMinutes, (sender, e) =>
-            {
-                if (sender.Text.IsValidDouble()) GlobalSettings.Settings.OctaveTimeoutInMinutes = sender.Text.ToDouble();
-            });
+            tab5.Tag = "Misc".Localize(prefix);
+            tab5.CreateAndAddLabelRow("Updates");
+            tab5.CreateAndAddCheckBoxRow("Check for Updates", Settings.CheckForUpdates, (chk, e) => Settings.CheckForUpdates = chk.Checked.GetValueOrDefault());
 
             tab5.CreateAndAddLabelRow("Python Settings");
             tab5.CreateAndAddDescriptionRow("Setup the path for Python binaries to enable integration with DWSIM.");

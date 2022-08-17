@@ -248,6 +248,9 @@
   <data name="cbFlashType.Items4" xml:space="preserve">
     <value>SVLLE</value>
   </data>
+  <data name="cbFlashType.Items5" xml:space="preserve">
+    <value>Don't Calculate</value>
+  </data>
   <data name="cbFlashType.Location" type="System.Drawing.Point, System.Drawing">
     <value>204, 19</value>
   </data>

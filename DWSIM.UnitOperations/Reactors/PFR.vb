@@ -81,9 +81,9 @@ Namespace Reactors
 
         Public Property Diameter As Double = 0.1
 
-        Public Property Volume() As Double
+        Public Property Volume As Double = 1.0
 
-        Public Property dV() As Double
+        Public Property dV As Double = 0.01
 
         Public Property CatalystLoading As Double = 0.0#
 
@@ -656,6 +656,8 @@ Namespace Reactors
         End Sub
 
         Public Function Calculate_Internal(dVF As Double, Optional ByVal args As Object = Nothing) As Boolean
+
+            If dV = 0.0 Then dV = 0.01
 
             Dim negative As Boolean = False
 

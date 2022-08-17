@@ -1,5 +1,4 @@
 ﻿Adam Kovalovszki
-Adam Spencer
 Alberto Baumeister
 Alex Platon
 Alfred Gongaware
@@ -9,6 +8,7 @@ Andrew Dickson
 Bruce Rising
 Carlos G. C. Reetz
 Casey Houston
+Chris Verbert
 Christian Hornhofer
 Christian Jordan
 Christian Pedersen
@@ -30,22 +30,18 @@ Henar Portero
 Henk Fikkert
 Hep Ingham
 H-Tec Systems GmbH
-Hugo Burbach
 Hurudza 
 Jan Boshoff
+Javier Fontalvo
 Jens Greimeier
 Jeremiah McAfoose
 Joe Rhodes
-John Gorke
 John Kossik
 Jonathan
 Joseph Mendoza
 Joseph Attia
 Kiran Pashikanti
-Karen Elrington
-Laércio Antonio Piva
 Lauterbach Verfahrenstechnik GmbH
-Leandro Favaretto
 Leonard Seed
 Les Waymont
 Lewis Estall
@@ -62,13 +58,13 @@ Nicolas Spogis
 Odnei Macalossi
 Pedro Sabóia
 Petroconsulting LLC
-Philippe Wesel
 Protherm Systems
 Rafael Melo-González
 Richard Huntington
 Roland Berger
 Rupert Easter
 Ryszard Sadowski
+Shankar Ananth
 Shijin Roh
 Steven Sandoval
 Tibor Lányi

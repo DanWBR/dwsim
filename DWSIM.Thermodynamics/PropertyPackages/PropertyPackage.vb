@@ -1579,6 +1579,61 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public MustOverride Function DW_CalcFugCoeff(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
+        ''' <summary>
+        ''' Calculates fugacity coefficients for the specified composition at the specified conditions.
+        ''' </summary>
+        ''' <param name="Vz">Vector of doubles containing the molar composition of the mixture.</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="V">Volume in m3/mol</param>
+        ''' <returns></returns>
+        Public Overridable Function DW_CalcFugCoeff(Vz As Double(), T As Double, V As Double) As Double()
+
+            Throw New NotImplementedException("Fugacity coefficient calculation with T and V is not implemented by this Property Package.")
+
+        End Function
+
+        ''' <summary>
+        ''' Calculates system pressure for the specified temperature, volume and composition.
+        ''' </summary>
+        ''' <param name="Vz">Vector of doubles containing the molar composition of the mixture.</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="V">Volume in m3/mol</param>
+        ''' <returns></returns>
+        Public Overridable Function DW_CalcP(Vz As Double(), T As Double, V As Double) As Double
+
+            Throw New NotImplementedException("Pressure calculation with T and V is not implemented by this Property Package.")
+
+        End Function
+
+        ''' <summary>
+        ''' Calculate the critical points of the current Material Stream
+        ''' </summary>
+        ''' <returns>List of critical points in the following order: T in K, P in Pa and V in m3/mol</returns>
+        Public Overridable Function DW_CalculateCriticalPoints() As List(Of Double())
+
+            'use generic method
+
+            Dim gm As New Utilities.TCP.GenericMethod
+
+            gm.CalcP = Function(T, V, Vzi)
+                           Return DW_CalcP(Vzi, T, V)
+                       End Function
+
+            gm.FugacityTV = Function(T, V, Vzi)
+                                Return DW_CalcFugCoeff(Vzi, T, V)
+                            End Function
+
+            Dim Vz = RET_VMOL(Phase.Mixture)
+
+            Dim VTc = RET_VTC()
+            Dim VPc = RET_VPC()
+
+            Dim V0 = 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+
+            Return gm.CriticalPoint(Vz, VTc.Min, VTc.Max, V0, 3.85 * V0)
+
+        End Function
+
         Public MustOverride Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
         Public MustOverride Sub DW_CalcPhaseProps(ByVal Phase As Phase)
@@ -3316,7 +3371,7 @@ redirect2:                  IObj?.SetCurrent()
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n) As Double
+            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n), VKij3(n, n) As Double
             Dim Vm2(Vz.Length - 1 - j), VPc2(Vz.Length - 1 - j), VTc2(Vz.Length - 1 - j), VVc2(Vz.Length - 1 - j), Vw2(Vz.Length - 1 - j), VKij2(Vz.Length - 1 - j, Vz.Length - 1 - j)
 
             VTc = Me.RET_VTC()
@@ -3352,22 +3407,22 @@ redirect2:                  IObj?.SetCurrent()
 
             With options
                 If Not .BubbleUseCustomParameters Then
-                    .BubbleCurveDeltaP = 101325
-                    .BubbleCurveDeltaT = 5
+                    .BubbleCurveDeltaP = 50000
+                    .BubbleCurveDeltaT = 2.5
                     .BubbleCurveInitialPressure = 0.0#
                     .BubbleCurveInitialTemperature = RET_VTF.Min
                     .BubbleCurveInitialFlash = "TVF"
-                    .BubbleCurveMaximumPoints = 100
+                    .BubbleCurveMaximumPoints = 300
                     .BubbleCurveMaximumTemperature = RET_VTC.Max * 1.2
                     .CheckLiquidInstability = False
                 End If
                 If Not .DewUseCustomParameters Then
-                    .DewCurveDeltaP = 2 * 101325
-                    .DewCurveDeltaT = 5
+                    .DewCurveDeltaP = 50000
+                    .DewCurveDeltaT = 2.5
                     .DewCurveInitialPressure = 101325
                     .DewCurveInitialTemperature = 0.0#
                     .DewCurveInitialFlash = "PVF"
-                    .DewCurveMaximumPoints = 100
+                    .DewCurveMaximumPoints = 300
                     .DewCurveMaximumTemperature = RET_VTC.Max * 1.5
                 End If
             End With
@@ -3385,6 +3440,7 @@ redirect2:                  IObj?.SetCurrent()
             If TypeOf Me Is PengRobinsonPropertyPackage Then
                 If n > 0 Then
                     CP = New Utilities.TCP.Methods().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                    If CP.Count = 0 Then CP = New Utilities.TCP.Methods().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij3)
                     If CP.Count > 0 Then
                         Dim cp0 = CP(0)
                         TCR = cp0(0)
@@ -3406,6 +3462,7 @@ redirect2:                  IObj?.SetCurrent()
             ElseIf TypeOf Me Is SRKPropertyPackage Then
                 If n > 0 Then
                     CP = New Utilities.TCP.Methods_SRK().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                    If CP.Count = 0 Then CP = New Utilities.TCP.Methods_SRK().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij3)
                     If CP.Count > 0 Then
                         Dim cp0 = CP(0)
                         TCR = cp0(0)
@@ -3425,10 +3482,26 @@ redirect2:                  IObj?.SetCurrent()
                     CP.Add(New Object() {TCR, PCR, VCR})
                 End If
             Else
-                TCR = Me.AUX_TCM(Phase.Mixture)
-                PCR = Me.AUX_PCM(Phase.Mixture)
-                VCR = Me.AUX_VCM(Phase.Mixture)
-                CP.Add(New Object() {TCR, PCR, VCR})
+                If n > 0 Then
+                    CP = New ArrayList(DW_CalculateCriticalPoints())
+                    If CP.Count > 0 Then
+                        Dim cp0 = CP(0)
+                        TCR = cp0(0)
+                        PCR = cp0(1)
+                        VCR = cp0(2)
+                        stopAtCP = True
+                    Else
+                        TCR = Me.AUX_TCM(Phase.Mixture)
+                        PCR = Me.AUX_PCM(Phase.Mixture)
+                        VCR = Me.AUX_VCM(Phase.Mixture)
+                        recalcCP = True
+                    End If
+                Else
+                    TCR = Me.AUX_TCM(Phase.Mixture)
+                    PCR = Me.AUX_PCM(Phase.Mixture)
+                    VCR = Me.AUX_VCM(Phase.Mixture)
+                    CP.Add(New Object() {TCR, PCR, VCR})
+                End If
             End If
 
             Dim beta As Double = 10.0#
@@ -3582,7 +3655,7 @@ redirect2:                  IObj?.SetCurrent()
 
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.04 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
 
                     If beta < 20 Then
                         If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
@@ -3682,27 +3755,50 @@ redirect2:                  IObj?.SetCurrent()
                         End Try
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
-
-                    If Abs(beta) < 2 Then
-                        If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
-                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T - options.DewCurveDeltaT * 0.1
-                            Else
-                                T = T - options.DewCurveDeltaT
-                            End If
-                        Else
-                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T + options.DewCurveDeltaT * 0.1
-                            Else
-                                T = T + options.DewCurveDeltaT
-                            End If
+                    If PO.Count > 50 Then
+                        Dim p1 As Double = PO(PO.Count - 1)
+                        Dim p2 As Double = PO(PO.Count - 2)
+                        Dim p3 As Double = PO(PO.Count - 3)
+                        Dim t1 As Double = TVD(TVD.Count - 1)
+                        Dim t2 As Double = TVD(TVD.Count - 2)
+                        Dim t3 As Double = TVD(TVD.Count - 3)
+                        Dim d1 = ((p2 - p1) ^ 2 + (t2 - t1) ^ 2) ^ 0.5
+                        Dim d2 = ((p3 - p2) ^ 2 + (t3 - t2) ^ 2) ^ 0.5
+                        If d2 > d1 * 20 And d1 > 0.0 Then
+                            PO.RemoveAt(PO.Count - 1)
+                            TVD.RemoveAt(TVD.Count - 1)
+                            HO.RemoveAt(HO.Count - 1)
+                            SO.RemoveAt(SO.Count - 1)
+                            VO.RemoveAt(VO.Count - 1)
+                            Exit Do
                         End If
+                    End If
+
+                    If stopAtCP Then If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 50000 Then Exit Do
+
+                    If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                        T = T - options.DewCurveDeltaT * 0.1
                     Else
-                        If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
-                            P = P + options.DewCurveDeltaP * 0.25
+                        If Abs(beta) < 2 Then
+                            If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                    T = T - options.DewCurveDeltaT * 0.1
+                                Else
+                                    T = T - options.DewCurveDeltaT
+                                End If
+                            Else
+                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                    T = T + options.DewCurveDeltaT * 0.1
+                                Else
+                                    T = T + options.DewCurveDeltaT
+                                End If
+                            End If
                         Else
-                            P = P + options.DewCurveDeltaP
+                            If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
+                                P = P + options.DewCurveDeltaP * 0.25
+                            Else
+                                P = P + options.DewCurveDeltaP
+                            End If
                         End If
                     End If
 
@@ -5185,7 +5281,7 @@ redirect2:                  IObj?.SetCurrent()
                     'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / CompoundPropCache(ID).Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                ElseIf db = "ChemSep" Or db = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = CompoundPropCache(ID).IdealgasCpEquation
                     Dim mw As Double = CompoundPropCache(ID).Molar_Weight
@@ -7465,7 +7561,6 @@ Final3:
                         E = cprops(i).Solid_Heat_Capacity_Const_E
                         '<SolidHeatCapacityCp name="Solid heat capacity"  units="J/kmol/K" >
                         Cpi = CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
-
                         If cprops(i).TemperatureOfFusion < 298.15 Then
                             HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
                             HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
@@ -10052,7 +10147,7 @@ Final3:
         ''' </summary>
         ''' <param name="props">The list of identifiers for properties to be calculated. This must be one or more 
         ''' of the supported two-phase properties and derivatives (as given by the GetTwoPhasePropList method). 
-        ''' The standard identifiers for two-phase properties are given in section 7.5.6 and 7.6.</param>
+        ''' The standard identifiers for two-phase properties are given in section 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the phases for which the properties are to be calculated. 
         ''' The phase labels must be two of the strings returned by the GetPhaseList method on the ICapeThermoPhases 
         ''' interface and the phases must also be present in the Material Object.</param>
@@ -10231,7 +10326,7 @@ Final3:
         ''' Returns the list of supported non-constant two-phase properties.
         ''' </summary>
         ''' <returns>List of all supported non-constant two-phase property identifiers. The standard two-phase 
-        ''' property identifiers are listed in section 7.5.6.</returns>
+        ''' property identifiers are listed in section 7.5.7.</returns>
         ''' <remarks>A non-constant property depends on the state of the Material Object. Two-phase properties
         ''' are those that depend on more than one co-existing phase, e.g. K-values.
         ''' GetTwoPhasePropList must return all the properties that can be calculated by
@@ -10240,7 +10335,7 @@ Final3:
         ''' To check whether a property can be evaluated for a particular set of phase labels use the
         ''' CheckTwoPhasePropSpec method.
         ''' A component that implements this method may return non-constant two-phase property
-        ''' identifiers which do not belong to the list defined in section 7.5.6. However, these
+        ''' identifiers which do not belong to the list defined in section 7.5.7. However, these
         ''' proprietary identifiers may not be understood by most of the clients of this component.
         ''' To get the list of supported single-phase properties, use GetSinglePhasePropList.</remarks>
         Public Overridable Function GetTwoPhasePropList() As Object Implements ICapeThermoPropertyRoutine.GetTwoPhasePropList

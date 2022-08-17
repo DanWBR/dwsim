@@ -1537,7 +1537,7 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub gridInputComposition_KeyDown(sender As Object, e As KeyEventArgs) Handles gridInputComposition.KeyDown
-        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition)
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition, False)
     End Sub
 
     Private Sub rbSpecVapor_CheckedChanged(sender As Object, e As EventArgs)

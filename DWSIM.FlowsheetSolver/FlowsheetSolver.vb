@@ -884,6 +884,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     lists(0).Add(baseobj.Name)
                 ElseIf baseobj.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle Then
                     lists(0).Add(baseobj.Name)
+                ElseIf baseobj.IsSource Then
+                    lists(0).Add(baseobj.Name)
                 End If
             Next
 
@@ -1409,44 +1411,44 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     lists.Clear()
                     recycles.Clear()
 
-                Case 3
+                    'Case 3
 
-                    'Azure Service Bus
+                    '    'Azure Service Bus
 
-                    Dim azureclient As New AzureSolverClient()
+                    '    Dim azureclient As New AzureSolverClient()
 
-                    Try
-                        azureclient.SolveFlowsheet(fobj)
-                        For Each baseobj In fbag.SimulationObjects.Values
-                            If baseobj.Calculated Then baseobj.LastUpdated = Date.Now
-                        Next
-                    Catch ex As Exception
-                        age = New AggregateException(ex.Message.ToString, ex)
-                    Finally
-                        If Not azureclient.qcc.IsClosed Then azureclient.qcc.Close()
-                        If Not azureclient.qcs.IsClosed Then azureclient.qcs.Close()
-                    End Try
+                    '    Try
+                    '        azureclient.SolveFlowsheet(fobj)
+                    '        For Each baseobj In fbag.SimulationObjects.Values
+                    '            If baseobj.Calculated Then baseobj.LastUpdated = Date.Now
+                    '        Next
+                    '    Catch ex As Exception
+                    '        age = New AggregateException(ex.Message.ToString, ex)
+                    '    Finally
+                    '        If Not azureclient.qcc.IsClosed Then azureclient.qcc.Close()
+                    '        If Not azureclient.qcs.IsClosed Then azureclient.qcs.Close()
+                    '    End Try
 
-                    azureclient = Nothing
+                    '    azureclient = Nothing
 
-                Case 4
+                    'Case 4
 
-                    'TCP/IP Solver
+                    '    'TCP/IP Solver
 
-                    Dim tcpclient As New TCPSolverClient()
+                    '    Dim tcpclient As New TCPSolverClient()
 
-                    Try
-                        tcpclient.SolveFlowsheet(fobj)
-                        For Each baseobj In fbag.SimulationObjects.Values
-                            If baseobj.Calculated Then baseobj.LastUpdated = Date.Now
-                        Next
-                    Catch ex As Exception
-                        age = New AggregateException(ex.Message.ToString, ex)
-                    Finally
-                        tcpclient.client.Close()
-                    End Try
+                    '    Try
+                    '        tcpclient.SolveFlowsheet(fobj)
+                    '        For Each baseobj In fbag.SimulationObjects.Values
+                    '            If baseobj.Calculated Then baseobj.LastUpdated = Date.Now
+                    '        Next
+                    '    Catch ex As Exception
+                    '        age = New AggregateException(ex.Message.ToString, ex)
+                    '    Finally
+                    '        tcpclient.client.Close()
+                    '    End Try
 
-                    tcpclient = Nothing
+                    '    tcpclient = Nothing
 
             End Select
 

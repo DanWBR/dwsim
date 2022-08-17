@@ -283,7 +283,7 @@
     <value>12</value>
   </data>
   <data name="lblPatrons.Text" xml:space="preserve">
-    <value>Special thanks to the following Patrons: </value>
+    <value>Special thanks to the following Patrons/Sponsors: </value>
   </data>
   <data name="&gt;&gt;lblPatrons.Name" xml:space="preserve">
     <value>lblPatrons</value>

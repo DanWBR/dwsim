@@ -114,6 +114,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim result As Object() = Nothing
 
             Select Case Flashtype
+                Case "NoFlash"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
+                    result = NoFlash_PT(Vz, P, T, PP, False, Nothing)
                 Case "VLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     If Not UseIO Then
@@ -211,6 +214,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
 
             Select Case Flashtype
+                Case "NoFlash"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
+                    Dim nl = New NestedLoops
+                    nl.FlashSettings = FlashSettings
+                    nl.PTFlashFunction = AddressOf NoFlash_PT
+                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
                 Case "VLE", "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
@@ -290,6 +299,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
 
             Select Case Flashtype
+                Case "NoFlash"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
+                    Dim nl = New NestedLoops
+                    nl.FlashSettings = FlashSettings
+                    nl.PTFlashFunction = AddressOf NoFlash_PT
+                    result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
                 Case "VLE", "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
@@ -367,6 +382,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim result As Object = Nothing
 
             Select Case Flashtype
+                Case "NoFlash"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
+                    result = NoFlash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "VLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
@@ -440,6 +458,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim result As Object = Nothing
 
             Select Case Flashtype
+                Case "NoFlash"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
+                    result = NoFlash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "VLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl As New NestedLoops
@@ -465,6 +486,167 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Close()
 
             Return result
+
+        End Function
+
+        Public Function NoFlash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim i, n, ecount As Integer
+            Dim L, V, S As Double
+
+            n = Vz.Length - 1
+
+            Dim Vn(n) As String, Vx(n), Vy(n), Vp(n), Vtf(n), Ki(n), Vs(n) As Double
+            Dim Vsolid(n) As Boolean
+
+            Vp = PP.RET_VPVAP(T)
+            Vtf = PP.RET_VTF()
+            Vn = PP.RET_VNAMES()
+
+            Ki = Vp.MultiplyConstY(1 / P)
+
+            Dim Vprops = PP.DW_GetConstantProperties()
+
+            For i = 0 To n
+                If Vtf(i) > T Or Vprops(i).IsSolid Or PP.ForcedSolids.Contains(Vn(i)) Then
+                    Vsolid(i) = True
+                    Ki(i) = 0.0
+                End If
+            Next
+
+            For i = 0 To n
+                If Vsolid(i) Then
+                    Vs(i) = Vz(i)
+                Else
+                    If Vp(i) < P Then
+                        Vx(i) = Vz(i)
+                    Else
+                        Vy(i) = Vz(i)
+                    End If
+                End If
+            Next
+
+            S = Vs.Sum
+            L = Vx.Sum
+            V = Vy.Sum
+
+            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, S, Vs, Ki}
+
+        End Function
+
+        Public Function NoFlash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim i, n, ecount As Integer
+            Dim L, S, T As Double
+
+            n = Vz.Length - 1
+
+            Dim Vn(n) As String, Vx(n), Vy(n), Vp(n), Vts(n), Vtf(n), Ki(n), Vs(n) As Double
+            Dim Vsolid(n) As Boolean
+
+            Dim Vprops = PP.DW_GetConstantProperties()
+
+            Vtf = PP.RET_VTF()
+            Vn = PP.RET_VNAMES()
+
+            For i = 0 To n
+                If Vtf(i) > T Or Vprops(i).IsSolid Or PP.ForcedSolids.Contains(Vn(i)) Then
+                    Vsolid(i) = True
+                    Ki(i) = 0.0
+                End If
+            Next
+
+            If Tref = 0.0# Then
+                i = 0
+                Do
+                    If Not Vsolid(i) Then
+                        Tref += Vz(i) * PP.AUX_TSATi(P, i)
+                    End If
+                    i += 1
+                Loop Until i = n + 1
+            End If
+
+            T = Tref
+
+            Vp = PP.RET_VPVAP(T)
+
+            Ki = Vp.MultiplyConstY(1 / P)
+
+            For i = 0 To n
+                If Vsolid(i) Then
+                    Vs(i) = Vz(i)
+                Else
+                    If Vp(i) < P Then
+                        Vx(i) = Vz(i)
+                    Else
+                        Vy(i) = Vz(i)
+                    End If
+                End If
+            Next
+
+            S = Vs.Sum
+            L = Vx.Sum
+            V = Vy.Sum
+
+            Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, S, Vs}
+
+        End Function
+
+        Public Function NoFlash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim i, n, ecount As Integer
+            Dim L, S, P As Double
+
+            n = Vz.Length - 1
+
+            Dim Vn(n) As String, Vx(n), Vy(n), Vp(n), Vts(n), Vtf(n), Ki(n), Vs(n) As Double
+            Dim Vsolid(n) As Boolean
+
+            Dim Vprops = PP.DW_GetConstantProperties()
+
+            Vtf = PP.RET_VTF()
+            Vn = PP.RET_VNAMES()
+
+            For i = 0 To n
+                If Vtf(i) > T Or Vprops(i).IsSolid Or PP.ForcedSolids.Contains(Vn(i)) Then
+                    Vsolid(i) = True
+                    Ki(i) = 0.0
+                End If
+            Next
+
+            If Pref = 0.0# Then
+                i = 0
+                Do
+                    If Not Vsolid(i) Then
+                        Pref += Vz(i) * PP.AUX_PVAPi(i, T)
+                    End If
+                    i += 1
+                Loop Until i = n + 1
+            End If
+
+            P = Pref
+
+            Vp = PP.RET_VPVAP(T)
+
+            Ki = Vp.MultiplyConstY(1 / P)
+
+            For i = 0 To n
+                If Vsolid(i) Then
+                    Vs(i) = Vz(i)
+                Else
+                    If Vp(i) < P Then
+                        Vx(i) = Vz(i)
+                    Else
+                        Vy(i) = Vz(i)
+                    End If
+                End If
+            Next
+
+            S = Vs.Sum
+            L = Vx.Sum
+            V = Vy.Sum
+
+            Return New Object() {L, V, Vx, Vy, P, ecount, Ki, 0.0#, PP.RET_NullVector, S, Vs}
 
         End Function
 

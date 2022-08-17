@@ -428,7 +428,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Undo/Redo</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 669</value>
+    <value>397, 712</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Flowsheet</value>
@@ -569,22 +569,22 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Backup Copies</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 669</value>
+    <value>397, 712</value>
   </data>
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
   </data>
-  <data name="tbPythonTimeout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
   </data>
-  <data name="tbPythonTimeout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 80</value>
+  <data name="chkUpdates.Text" xml:space="preserve">
+    <value>Check for Updates</value>
   </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 13</value>
+  <data name="GroupBox16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 61</value>
   </data>
-  <data name="Label17.Text" xml:space="preserve">
-    <value>Python process timeout (minutes)</value>
+  <data name="GroupBox16.Text" xml:space="preserve">
+    <value>Updates</value>
   </data>
   <data name="btnSelectPythonPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 25</value>
@@ -599,7 +599,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Python 3.x DLL Directory (Windows only):</value>
   </data>
   <data name="GroupBox17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 115</value>
+    <value>372, 95</value>
   </data>
   <data name="GroupBox17.Text" xml:space="preserve">
     <value>Python.NET Interpreter Settings</value>
@@ -624,6 +624,15 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   </data>
   <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 70</value>
+  </data>
+  <data name="ComboBoxUILanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 51</value>
+  </data>
+  <data name="ComboBoxUILanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 21</value>
   </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
@@ -655,6 +664,9 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="cbDebugLevel.Items3" xml:space="preserve">
     <value>High</value>
   </data>
+  <data name="cbDebugLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 23</value>
+  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
@@ -668,7 +680,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Debug Mode</value>
   </data>
   <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 669</value>
+    <value>397, 712</value>
   </data>
   <data name="FaTabStripItem7.Text" xml:space="preserve">
     <value>Other</value>
@@ -681,7 +693,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAATQBCgE0AQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAUwBCgFMAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

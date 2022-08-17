@@ -86,6 +86,9 @@ Partial Class EditingForm_ReactorPFR
         Me.Label15 = New System.Windows.Forms.Label()
         Me.tbCatDiam = New System.Windows.Forms.TextBox()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
@@ -129,6 +132,7 @@ Partial Class EditingForm_ReactorPFR
         CType(Me.nupNT, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage7.SuspendLayout()
         Me.TabPage8.SuspendLayout()
+        Me.TabPage9.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
@@ -317,6 +321,7 @@ Partial Class EditingForm_ReactorPFR
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage8)
+        Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.ToolTipChangeTag.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
@@ -660,6 +665,33 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipValues.SetToolTip(Me.TabPage8, resources.GetString("TabPage8.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage8, resources.GetString("TabPage8.ToolTip2"))
         Me.TabPage8.UseVisualStyleBackColor = True
+        '
+        'TabPage9
+        '
+        resources.ApplyResources(Me.TabPage9, "TabPage9")
+        Me.TabPage9.Controls.Add(Me.TextBox1)
+        Me.TabPage9.Controls.Add(Me.Label20)
+        Me.TabPage9.Name = "TabPage9"
+        Me.ToolTip1.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip2"))
+        Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
+        Me.TextBox1.Name = "TextBox1"
+        Me.ToolTipValues.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip2"))
+        '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
         '
         'GroupBox1
         '
@@ -1035,6 +1067,8 @@ Partial Class EditingForm_ReactorPFR
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage7.PerformLayout()
         Me.TabPage8.ResumeLayout(False)
+        Me.TabPage9.ResumeLayout(False)
+        Me.TabPage9.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -1135,4 +1169,7 @@ Partial Class EditingForm_ReactorPFR
     Friend WithEvents TabPage8 As TabPage
     Friend WithEvents nupNT As NumericUpDown
     Public WithEvents Label18 As Label
+    Friend WithEvents TabPage9 As TabPage
+    Public WithEvents TextBox1 As TextBox
+    Public WithEvents Label20 As Label
 End Class

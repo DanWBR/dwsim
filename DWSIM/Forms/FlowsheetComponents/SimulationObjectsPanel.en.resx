@@ -126,14 +126,11 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelStreams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1944, 216</value>
+    <value>1017, 77</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PanelStreams.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -142,7 +139,7 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 228</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Streams</value>
@@ -154,13 +151,10 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1944, 176</value>
+    <value>1017, 77</value>
   </data>
   <data name="PanelPressure.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -169,7 +163,7 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Pressure Changers</value>
@@ -178,19 +172,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelSeparators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelSeparators.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Separators/Tanks</value>
@@ -199,19 +190,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelMixers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelMixers.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Mixers/Splitters</value>
@@ -220,19 +208,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelExchangers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelExchangers.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Exchangers</value>
@@ -241,19 +226,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelReactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelReactors.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Reactors</value>
@@ -262,19 +244,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelColumns.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage7.Text" xml:space="preserve">
     <value>Columns</value>
@@ -283,58 +262,43 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelSolids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelSolids.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage8.Text" xml:space="preserve">
     <value>Solids</value>
   </data>
-  <data name="PanelCO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="PanelCO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
-  </data>
-  <data name="PanelCO.WrapContents" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TabPage9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="TabPage9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+  <data name="PanelCE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1025, 83</value>
   </data>
   <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
+  </data>
+  <data name="TabPage9.Text" xml:space="preserve">
+    <value>Renewable Energies</value>
   </data>
   <data name="PanelUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelUser.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage10.Text" xml:space="preserve">
     <value>User Models</value>
@@ -343,19 +307,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelLogical.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage11.Text" xml:space="preserve">
     <value>Logical Blocks</value>
@@ -364,19 +325,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelIndicators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelIndicators.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage13.Text" xml:space="preserve">
     <value>Indicators</value>
@@ -385,19 +343,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelControllers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelControllers.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage14.Text" xml:space="preserve">
     <value>Controllers</value>
@@ -406,19 +361,16 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="PanelOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="PanelOther.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="TabPage12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
   </data>
   <data name="TabPage12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabPage12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1958, 188</value>
+    <value>1031, 89</value>
   </data>
   <data name="TabPage12.Text" xml:space="preserve">
     <value>Other</value>
@@ -427,15 +379,12 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1974, 276</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>13, 26</value>
+    <value>1039, 115</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1974, 276</value>
+    <value>1039, 115</value>
   </data>
 </root>

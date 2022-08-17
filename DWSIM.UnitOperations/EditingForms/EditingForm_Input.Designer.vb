@@ -58,11 +58,15 @@ Partial Class EditingForm_Input
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
         '
         'cbSourceUnits
         '
@@ -70,11 +74,15 @@ Partial Class EditingForm_Input
         Me.cbSourceUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceUnits.FormattingEnabled = True
         Me.cbSourceUnits.Name = "cbSourceUnits"
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSourceUnits, resources.GetString("cbSourceUnits.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSourceUnits, resources.GetString("cbSourceUnits.ToolTip1"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
         '
         'cbSourceUnitType
         '
@@ -82,21 +90,29 @@ Partial Class EditingForm_Input
         Me.cbSourceUnitType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceUnitType.FormattingEnabled = True
         Me.cbSourceUnitType.Name = "cbSourceUnitType"
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSourceUnitType, resources.GetString("cbSourceUnitType.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSourceUnitType, resources.GetString("cbSourceUnitType.ToolTip1"))
         '
         'lblSourceVal
         '
         resources.ApplyResources(Me.lblSourceVal, "lblSourceVal")
         Me.lblSourceVal.Name = "lblSourceVal"
+        Me.ToolTipValues.SetToolTip(Me.lblSourceVal, resources.GetString("lblSourceVal.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblSourceVal, resources.GetString("lblSourceVal.ToolTip1"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTipValues.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip1"))
         '
         'cbSourceProp
         '
@@ -104,6 +120,8 @@ Partial Class EditingForm_Input
         Me.cbSourceProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceProp.FormattingEnabled = True
         Me.cbSourceProp.Name = "cbSourceProp"
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip1"))
         '
         'cbSourceObj
         '
@@ -111,11 +129,15 @@ Partial Class EditingForm_Input
         Me.cbSourceObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceObj.FormattingEnabled = True
         Me.cbSourceObj.Name = "cbSourceObj"
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip1"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
         '
         'GroupBox5
         '
@@ -125,11 +147,15 @@ Partial Class EditingForm_Input
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip1"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTipChangeTag.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip1"))
         '
         'chkActive
         '
@@ -137,12 +163,15 @@ Partial Class EditingForm_Input
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTipValues.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         '
         'ToolTipChangeTag
         '
@@ -152,10 +181,12 @@ Partial Class EditingForm_Input
         'EditingForm_Input
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Name = "EditingForm_Input"
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)

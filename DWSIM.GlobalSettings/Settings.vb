@@ -171,6 +171,8 @@ Public Class Settings
 
     Public Shared Property EnableCustomTouchBar As Boolean = True
 
+    Public Shared Property CheckForUpdates As Boolean = True
+
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function
@@ -209,6 +211,7 @@ Public Class Settings
             Try
                 PythonEngine.Shutdown()
             Catch ex As Exception
+                DWSIM.Logging.Logger.LogError("Python Shutdown Error", ex)
             End Try
             PythonInitialized = False
         End If
@@ -521,6 +524,8 @@ Public Class Settings
 
         EnableCustomTouchBar = source.Configs("Misc").GetBoolean("EnableCustomTouchBar", True)
 
+        CheckForUpdates = source.Configs("Misc").GetBoolean("CheckForUpdates", True)
+
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
         'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
@@ -641,6 +646,8 @@ Public Class Settings
         source.Configs("Misc").Set("ObjectEditor", ObjectEditor)
 
         source.Configs("Misc").Set("EnableCustomTouchBar", EnableCustomTouchBar)
+
+        source.Configs("Misc").Set("CheckForUpdates", CheckForUpdates)
 
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)

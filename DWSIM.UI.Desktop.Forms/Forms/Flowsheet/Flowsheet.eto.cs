@@ -22,6 +22,7 @@ using DWSIM.UI.Desktop.Editors.Dynamics;
 using SkiaSharp;
 using DWSIM.UI.Controls;
 using DWSIM.ExtensionMethods;
+using System.Device.Location;
 
 namespace DWSIM.UI.Forms
 {
@@ -889,6 +890,7 @@ namespace DWSIM.UI.Forms
             var panelindicators = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelinputs = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelother = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelrenew = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
 
             var objcontainer = new DocumentControl { AllowReordering = true };
@@ -900,6 +902,7 @@ namespace DWSIM.UI.Forms
             objcontainer.Pages.Add(new DocumentPage(panelexchangers) { Closable = false, Text = "Exchangers" });
             objcontainer.Pages.Add(new DocumentPage(panelcolumns) { Closable = false, Text = "Columns" });
             objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
+            objcontainer.Pages.Add(new DocumentPage(panelrenew) { Closable = false, Text = "Renewable Energies" });
             objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
             objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
             objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Blocks" });
@@ -976,6 +979,10 @@ namespace DWSIM.UI.Forms
                             break;
                         case Interfaces.Enums.SimulationObjectClass.Indicators:
                             panelindicators.Items.Add(pitem);
+                            break;
+                        case Interfaces.Enums.SimulationObjectClass.CleanPowerSources:
+                        case Interfaces.Enums.SimulationObjectClass.Electrolyzers:
+                            panelrenew.Items.Add(pitem);
                             break;
                     }
                 }
@@ -1330,6 +1337,48 @@ namespace DWSIM.UI.Forms
 
             flowsheetcontrolcontainer.Rows.Add(new TableRow(btnDown));
 
+            // weather bar
+
+            var imgsun = new ImageView { ToolTip = "Solar Irradiation", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sun_with_face.png")) };
+            var imgtemp = new ImageView { ToolTip = "Ambient Temperature", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-temperature.png")) };
+            var imgpgauge = new ImageView { ToolTip = "Atmospheric Pressure", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pressure_gauge.png")) };
+            var imghum = new ImageView { ToolTip = "Relative Humidity", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-humidity.png")) };
+            var imgwind = new ImageView { ToolTip = "Wind Speed", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-wind.png")) };
+
+            var wobj = FlowsheetObject.FlowsheetOptions.CurrentWeather;
+            var nf = FlowsheetObject.FlowsheetOptions.NumberFormat;
+
+            var tbirr = new TextBox { ToolTip = "Solar Irradiation", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.SolarIrradiation_kWh_m2.ToString(nf) };
+            var tbtemp = new TextBox { ToolTip = "Ambient Temperature", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.Temperature_C.ToString(nf) };
+            var tbhum = new TextBox { ToolTip = "Relative Humidity", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.RelativeHumidity_pct.ToString(nf) };
+            var tbwind = new TextBox { ToolTip = "Wind Speed", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.WindSpeed_km_h.ToString(nf) };
+            var tbpgauge = new TextBox { ToolTip = "Atmospheric Pressure", Width = 75, TextAlignment = TextAlignment.Right, Text = (wobj.AtmosphericPressure_Pa / 100.0).ToString(nf) };
+
+            tbirr.TextChanged += (tb, e) => { if (tbirr.Text.IsValidDouble()) wobj.SolarIrradiation_kWh_m2 = tbirr.Text.ToDoubleFromInvariant(); };
+            tbtemp.TextChanged += (tb, e) => { if (tbtemp.Text.IsValidDouble()) wobj.Temperature_C = tbtemp.Text.ToDoubleFromInvariant(); };
+            tbhum.TextChanged += (tb, e) => { if (tbhum.Text.IsValidDouble()) wobj.RelativeHumidity_pct = tbhum.Text.ToDoubleFromInvariant(); };
+            tbwind.TextChanged += (tb, e) => { if (tbwind.Text.IsValidDouble()) wobj.WindSpeed_km_h = tbwind.Text.ToDoubleFromInvariant(); };
+            tbpgauge.TextChanged += (tb, e) => { if (tbpgauge.Text.IsValidDouble()) wobj.AtmosphericPressure_Pa = tbpgauge.Text.ToDoubleFromInvariant() * 100.0; };
+
+            var lblirr = new Label { Text = "kW/m2" };
+            var lbltemp = new Label { Text = "C" };
+            var lblwind = new Label { Text = "km/h" };
+            var lblhum = new Label { Text = "%" };
+            var lblpgauge = new Label { Text = "hPa" };
+
+            var lblweather = new Label { Text = "Current Weather Conditions", Enabled = false };
+
+            var weatherpanel = new StackLayout
+            {
+                Orientation = Orientation.Horizontal,
+                Items = { lblweather, imgtemp, tbtemp, lbltemp, imgpgauge, tbpgauge, lblpgauge, imgwind, tbwind, lblwind,
+                    imghum, tbhum, lblhum, imgsun, tbirr, lblirr },
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Spacing = 4
+            };
+
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = weatherpanel }));
+
             Split2.Panel1 = flowsheetcontrolcontainer;
 
             SplitterFlowsheet = Split2;
@@ -1344,59 +1393,59 @@ namespace DWSIM.UI.Forms
             };
 
             btnRight.Click += (s, e) =>
-            {
-                Size sz = SplitterFlowsheet.Panel1.Size;
-                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
-                var offs = -(double)sz.Width / (double)z * sf;
-                this.FlowsheetControl.FlowsheetSurface.OffsetAll((int)offs, 0);
-                this.FlowsheetControl.Invalidate();
-            };
+        {
+            Size sz = SplitterFlowsheet.Panel1.Size;
+            var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+            var offs = -(double)sz.Width / (double)z * sf;
+            this.FlowsheetControl.FlowsheetSurface.OffsetAll((int)offs, 0);
+            this.FlowsheetControl.Invalidate();
+        };
 
             btnUp.Click += (s, e) =>
-            {
-                Size sz = SplitterFlowsheet.Panel1.Size;
-                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
-                var offs = (double)sz.Height / (double)z * sf;
-                this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, (int)offs);
-                this.FlowsheetControl.Invalidate();
-            };
+        {
+            Size sz = SplitterFlowsheet.Panel1.Size;
+            var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+            var offs = (double)sz.Height / (double)z * sf;
+            this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, (int)offs);
+            this.FlowsheetControl.Invalidate();
+        };
 
             btnDown.Click += (s, e) =>
-            {
-                Size sz = SplitterFlowsheet.Panel1.Size;
-                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
-                var offs = (double)sz.Height / (double)z * sf;
-                this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, -(int)offs);
-                this.FlowsheetControl.Invalidate();
-            };
+        {
+            Size sz = SplitterFlowsheet.Panel1.Size;
+            var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+            var offs = (double)sz.Height / (double)z * sf;
+            this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, -(int)offs);
+            this.FlowsheetControl.Invalidate();
+        };
 
             chkControlPanelMode.CheckedChanged += (s, e) =>
+        {
+            if (chkControlPanelMode.Checked.GetValueOrDefault())
             {
-                if (chkControlPanelMode.Checked.GetValueOrDefault())
-                {
-                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = true;
-                    GlobalSettings.Settings.DarkMode = true;
-                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray;
-                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke;
-                    btnLeft.Visible = true;
-                    btnUp.Visible = true;
-                    btnDown.Visible = true;
-                    btnRight.Visible = true;
-                }
-                else
-                {
-                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = false;
-                    GlobalSettings.Settings.DarkMode = false;
-                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White;
-                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black;
-                    btnLeft.Visible = false;
-                    btnUp.Visible = false;
-                    btnDown.Visible = false;
-                    btnRight.Visible = false;
-                }
-                FlowsheetControl.Invalidate();
-                Split2.Invalidate();
-            };
+                FlowsheetControl.FlowsheetSurface.ControlPanelMode = true;
+                GlobalSettings.Settings.DarkMode = true;
+                Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray;
+                Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke;
+                btnLeft.Visible = true;
+                btnUp.Visible = true;
+                btnDown.Visible = true;
+                btnRight.Visible = true;
+            }
+            else
+            {
+                FlowsheetControl.FlowsheetSurface.ControlPanelMode = false;
+                GlobalSettings.Settings.DarkMode = false;
+                Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White;
+                Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black;
+                btnLeft.Visible = false;
+                btnUp.Visible = false;
+                btnDown.Visible = false;
+                btnRight.Visible = false;
+            }
+            FlowsheetControl.Invalidate();
+            Split2.Invalidate();
+        };
 
             Split3.Panel2 = SetupLogWindow();
             Split3.Panel2.Height = (int)(sf * 120);
@@ -1627,8 +1676,8 @@ namespace DWSIM.UI.Forms
                     Application.Instance.AsyncInvoke(() =>
                     {
                         ResultsControl.UpdateList();
-                        //MaterialStreamListControl.UpdateList();
-                        UpdateEditorPanels();
+                            //MaterialStreamListControl.UpdateList();
+                            UpdateEditorPanels();
                     });
                 });
                 FlowsheetObject.SolveFlowsheet(false, null, changecalcorder);
@@ -1845,7 +1894,7 @@ namespace DWSIM.UI.Forms
             List<Type> availableTypes = new List<Type>();
 
             availableTypes.AddRange(calculatorassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
-            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
+            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null && !x.IsAbstract ? true : false));
 
             List<ListItem> litems = new List<ListItem>();
 
@@ -1854,13 +1903,13 @@ namespace DWSIM.UI.Forms
                 if (!item.IsAbstract)
                 {
                     var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
-                    ObjectList.Add(obj.GetDisplayName(), obj);
+                    if (!ObjectList.ContainsKey(obj.GetDisplayName())) ObjectList.Add(obj.GetDisplayName(), obj);
                 }
             }
 
             foreach (var item in FlowsheetObject.ExternalUnitOperations.Values.OrderBy(x => x.Name))
             {
-                ObjectList.Add(item.Name, (Interfaces.ISimulationObject)item);
+                if (!ObjectList.ContainsKey(item.Name)) ObjectList.Add(item.Name, (Interfaces.ISimulationObject)item);
             }
 
             string netprops = "";
@@ -2117,8 +2166,8 @@ namespace DWSIM.UI.Forms
 
             item7.Click += (sender, e) =>
             {
-                //copy all simulation properties from the selected object to clipboard
-                try
+                    //copy all simulation properties from the selected object to clipboard
+                    try
                 {
                     var sobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
                     ((SharedClasses.UnitOperations.BaseClass)FlowsheetObject.SimulationObjects[sobj.Name]).CopyDataToClipboard((DWSIM.SharedClasses.SystemsOfUnits.Units)FlowsheetObject.FlowsheetOptions.SelectedUnitSystem, FlowsheetObject.FlowsheetOptions.NumberFormat);
