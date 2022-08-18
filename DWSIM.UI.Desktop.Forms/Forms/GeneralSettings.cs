@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cudafy;
 using Cudafy.Host;
+using DWSIM.ExtensionMethods;
 using DWSIM.UI.Shared;
 using Eto.Forms;
 using Settings = DWSIM.GlobalSettings.Settings;
@@ -80,7 +81,7 @@ namespace DWSIM.UI.Forms.Forms
             //    check1.Enabled = false;
             //}
             
-            tab1.CreateAndAddNumericEditorRow("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Value);
+            tab1.CreateAndAddNumericEditorRow2("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Text.ToDoubleFromCurrent());
             tab1.CreateAndAddDescriptionRow("Sets the Scaling Factor for controls (windows, panels, buttons, lists, etc). Useful on Linux when used in conjunction with Font Scaling on High DPI displays.");
 
             tab1.CreateAndAddLabelRow("Flowsheet Designer");

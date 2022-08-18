@@ -1035,16 +1035,16 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                    spec.SelectedPropertyUnits = tb.Text;
                });
 
-            s.CreateAndAddNumericEditorRow(container, "Integer Digits",
+            s.CreateAndAddNumericEditorRow2(container, "Integer Digits",
                 spec.IntegralDigits, 1, 10, 0, (ns, e) =>
                 {
-                    spec.IntegralDigits = (int)ns.Value;
+                    spec.IntegralDigits = (int)ns.Text.ToDoubleFromCurrent();
                 });
 
-            s.CreateAndAddNumericEditorRow(container, "Decimal Digits",
+            s.CreateAndAddNumericEditorRow2(container, "Decimal Digits",
                 spec.DecimalDigits, 1, 10, 0, (ns, e) =>
                 {
-                    spec.DecimalDigits = (int)ns.Value;
+                    spec.DecimalDigits = (int)ns.Text.ToDoubleFromCurrent();
                 });
 
             s.CreateAndAddCheckBoxRow(container, "Display in Percentage", spec.DisplayInPercent, (chk, e) =>

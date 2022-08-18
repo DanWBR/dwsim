@@ -45,13 +45,13 @@ namespace DWSIM.UI.Desktop.Editors
             this.CreateAndAddTextBoxRow("N0", "Height", gobj.Height,
                 (sender, e) => { if (sender.Text.IsValidDouble()) gobj.Height = (int)sender.Text.ToDoubleFromCurrent(); });
             this.CreateAndAddLabelRow("Transform");
-            this.CreateAndAddNumericEditorRow("Rotation", gobj.Rotation, 0, 360, 0,
-                (sender, e) => { gobj.Rotation = (int)sender.Value; });
+            this.CreateAndAddNumericEditorRow2("Rotation", gobj.Rotation, 0, 360, 0,
+                (sender, e) => { gobj.Rotation = (int)sender.Text.ToDoubleFromCurrent(); });
             this.CreateAndAddCheckBoxRow("Flip Horizontally", gobj.FlippedH, (sender, e) => gobj.FlippedH = sender.Checked.GetValueOrDefault());
             this.CreateAndAddCheckBoxRow("Flip Vertically", gobj.FlippedV, (sender, e) => gobj.FlippedV = sender.Checked.GetValueOrDefault());
             this.CreateAndAddLabelRow("Border/Fill");
-            this.CreateAndAddNumericEditorRow("Border Width", gobj.LineWidth, 1, 10, 0,
-                (sender, e) => { gobj.LineWidth = (int)sender.Value; });
+            this.CreateAndAddNumericEditorRow2("Border Width", gobj.LineWidth, 1, 10, 0,
+                (sender, e) => { gobj.LineWidth = (int)sender.Text.ToDoubleFromCurrent(); });
             this.CreateAndAddCheckBoxRow("Override Color", gobj.OverrideColors, (sender, e) => gobj.OverrideColors = sender.Checked.GetValueOrDefault());
             this.CreateAndAddColorPickerRow("Color", Color.Parse(gobj.LineColor.ToString()),
                 (sender, e) => {

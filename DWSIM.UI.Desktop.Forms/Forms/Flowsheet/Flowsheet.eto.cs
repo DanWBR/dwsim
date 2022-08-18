@@ -1540,7 +1540,15 @@ namespace DWSIM.UI.Forms
                     var sobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject("");
                     if (sobj != null)
                     {
-                        EditObject_New(sobj);
+                        try
+                        {
+                            EditObject_New(sobj);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Logger.LogError("Object Editor Error", ex);
+                            Console.WriteLine(ex.ToString());
+                        }
                     }
                 }
             };

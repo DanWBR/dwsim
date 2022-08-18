@@ -1922,9 +1922,9 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddLabelRow(container, "Sizing Information");
-                    s.CreateAndAddNumericEditorRow(container, "Number of Tubes", reactor4.NumberOfTubes, 1, 10000, 0, (ns, e) =>
+                    s.CreateAndAddNumericEditorRow2(container, "Number of Tubes", reactor4.NumberOfTubes, 1, 10000, 0, (ns, e) =>
                     {
-                        reactor4.NumberOfTubes = (int)ns.Value;
+                        reactor4.NumberOfTubes = (int)ns.Text.ToDoubleFromCurrent();
                     });
                     s.CreateAndAddTextBoxRow(container, nf, "Reactive Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor4.Volume),
                                (TextBox arg3, EventArgs ev) =>

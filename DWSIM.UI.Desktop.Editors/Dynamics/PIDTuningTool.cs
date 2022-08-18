@@ -59,10 +59,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             leftcontainer.CreateAndAddControlRow(listb);
 
-            leftcontainer.CreateAndAddNumericEditorRow("Maximum Iterations", iterations, 5, 100, 0,
+            leftcontainer.CreateAndAddNumericEditorRow2("Maximum Iterations", iterations, 5, 100, 0,
                 (ns, e) =>
                 {
-                    iterations = (int)ns.Value;
+                    iterations = (int)ns.Text.ToDoubleFromCurrent();
                 });
 
             var btnRun = leftcontainer.CreateAndAddButtonRow("Begin Tuning", null, null);
