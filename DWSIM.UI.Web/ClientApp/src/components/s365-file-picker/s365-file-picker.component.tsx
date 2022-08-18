@@ -37,7 +37,6 @@ interface IS365FilePickerState {
     selectedFolder: ISelectedFolder;
     isDataLoaded: boolean;
     selectedFileType?: string;
-    filterFileTypes: string[];
     showCreateFolderModal: boolean;
 }
 
@@ -174,7 +173,6 @@ class S365FilePicker extends React.Component<IS365FilePickerProps, IS365FilePick
             selectedFolder: props.baseFolder,
             isDataLoaded: false,
             selectedFileType: props.defaultFileType,
-            filterFileTypes: props.filterFileTypes ?? [],
             showCreateFolderModal: false
         };
 
@@ -188,12 +186,13 @@ class S365FilePicker extends React.Component<IS365FilePickerProps, IS365FilePick
 
 
     async getFilesAndFolders() {
-        const { selectedFolder, filterFileTypes, selectedFileType } = this.state;
+        const { selectedFolder, selectedFileType } = this.state;
+        const { filterFileTypes } = this.props;
         const { siteId, flowsheetsListId } = this.props;
         try {
             this.setState({ isDataLoaded: false });
 
-            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, filterFileTypes);
+            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, filterFileTypes ?? []);
             console.log("Files and folders", filesAndFolders);
             this.setState({ files: filesAndFolders!.files ?? [], folders: filesAndFolders!.folders ?? [] });
         } catch (error) {
