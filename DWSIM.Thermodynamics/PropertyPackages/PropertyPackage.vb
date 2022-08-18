@@ -11924,6 +11924,54 @@ Final3:
 
                     End Try
 
+                Case "Wilson"
+
+                    Try
+
+                        Dim pp As WilsonPropertyPackage = Me
+
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_PR").FirstOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
+                            End If
+                        Next
+
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_Wilson").FirstOrDefault.Elements.ToList
+                            Dim ip = New Double() {Double.Parse(xel.@A12, ci), Double.Parse(xel.@A21, ci)}
+                            Dim dic As New Dictionary(Of String, Double())
+                            dic.Add(xel.@CAS2, ip)
+                            If Not pp.WilsonM.BIPs.ContainsKey(xel.@CAS1) Then
+                                pp.WilsonM.BIPs.Add(xel.@CAS1, dic)
+                            Else
+                                If Not pp.WilsonM.BIPs(xel.@CAS1).ContainsKey(xel.@CAS2) Then
+                                    pp.WilsonM.BIPs(xel.@CAS1).Add(xel.@CAS2, ip)
+                                Else
+                                    pp.WilsonM.BIPs(xel.@CAS1)(xel.@CAS2) = ip
+                                End If
+                            End If
+                        Next
+
+                    Catch ex As Exception
+
+                    End Try
+
                 Case "Modified UNIFAC (Dortmund)"
 
                     Dim pp As MODFACPropertyPackage = Me
@@ -12331,6 +12379,44 @@ Final3:
                                                                       New XAttribute("B21", kvp2.Value.B21.ToString(ci)),
                                                                       New XAttribute("C12", kvp2.Value.C12.ToString(ci)),
                                                                       New XAttribute("C21", kvp2.Value.C21.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                    Case "Wilson"
+
+                        Dim pp As WilsonPropertyPackage = Me
+
+
+                        .Add(New XElement("InteractionParameters_PR"))
+
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PR_IPData)) In pp.m_pr.InteractionParameters
+                            For Each kvp2 As KeyValuePair(Of String, Auxiliary.PR_IPData) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp.Key) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp2.Key) Then
+                                        .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("Compound1", kvp.Key),
+                                                                        New XAttribute("Compound2", kvp2.Key),
+                                                                        New XAttribute("Value", kvp2.Value.kij.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                        .Add(New XElement("InteractionParameters_Wilson"))
+
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Double())) In pp.WilsonM.BIPs
+                            For Each kvp2 As KeyValuePair(Of String, Double()) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    Dim c1 = CurrentMaterialStream.Phases(0).Compounds.Values.Where(Function(c) c.ConstantProperties.CAS_Number = kvp.Key).FirstOrDefault()
+                                    Dim c2 = CurrentMaterialStream.Phases(0).Compounds.Values.Where(Function(c) c.ConstantProperties.CAS_Number = kvp2.Key).FirstOrDefault()
+                                    If c1 IsNot Nothing And c2 IsNot Nothing Then
+                                        If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(c1.Name) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(c2.Name) Then
+                                            .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("CAS1", kvp.Key),
+                                                                      New XAttribute("CAS2", kvp2.Key),
+                                                                      New XAttribute("A12", kvp2.Value(0).ToString(ci)),
+                                                                      New XAttribute("A21", kvp2.Value(1).ToString(ci))))
+                                        End If
                                     End If
                                 End If
                             Next

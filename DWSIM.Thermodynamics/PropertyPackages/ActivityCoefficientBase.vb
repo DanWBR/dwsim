@@ -1019,9 +1019,9 @@ Namespace PropertyPackages
 
             Dim val As Double
             If state = PhaseName.Liquid Then
-                val = m_lk.Z_LK("L", T / TCM, P / PCM, WM)(0)
+                val = P / (Me.AUX_LIQDENS(T, Vx, P) * 8.314 * T) / 1000 * AUX_MMM(Vx)
             Else
-                val = m_lk.Z_LK("V", T / TCM, P / PCM, WM)(0)
+                val = P / (Me.AUX_VAPDENS(T, P) * 8.314 * T) / 1000 * AUX_MMM(Vx)
             End If
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
