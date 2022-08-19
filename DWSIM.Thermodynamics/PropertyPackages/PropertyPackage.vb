@@ -7621,7 +7621,11 @@ Final3:
 
             For i = 0 To n
                 If ForcedSolids.Contains(names(i)) Then
-                    phis(i) = 0.000000000000001
+                    If Pvaps(i) > 0 Then
+                        phis(i) = Pvaps(i) / P
+                    Else
+                        phis(i) = 0.000000000000001
+                    End If
                 Else
                     If T > Tf(i) Then
                         phis(i) = 10000000000.0 * Pvaps(i) / P

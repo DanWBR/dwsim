@@ -618,12 +618,6 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.designer.vb">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="EditingForms\Supporting\FormViewMultilineText.Designer.vb">
       <DependentUpon>FormViewMultilineText.vb</DependentUpon>
     </Compile>
@@ -1116,9 +1110,6 @@
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.de.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.de.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.de.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
@@ -1295,15 +1286,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.en.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.es.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\FormViewMultilineText.resx">
       <DependentUpon>FormViewMultilineText.vb</DependentUpon>

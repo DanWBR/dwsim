@@ -530,6 +530,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             L = Vx.Sum
             V = Vy.Sum
 
+            If S > 0 Then Vs = Vs.NormalizeY()
+            If V > 0 Then Vy = Vy.NormalizeY()
+            If L > 0 Then Vx = Vx.NormalizeY()
+
             Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, S, Vs, Ki}
 
         End Function
@@ -588,6 +592,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             L = Vx.Sum
             V = Vy.Sum
 
+            If S > 0 Then Vs = Vs.NormalizeY()
+            If V > 0 Then Vy = Vy.NormalizeY()
+            If L > 0 Then Vx = Vx.NormalizeY()
+
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, S, Vs}
 
         End Function
@@ -645,6 +653,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             S = Vs.Sum
             L = Vx.Sum
             V = Vy.Sum
+
+            If S > 0 Then Vs = Vs.NormalizeY()
+            If V > 0 Then Vy = Vy.NormalizeY()
+            If L > 0 Then Vx = Vx.NormalizeY()
 
             Return New Object() {L, V, Vx, Vy, P, ecount, Ki, 0.0#, PP.RET_NullVector, S, Vs}
 

@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 17</value>
+    <value>716, 17</value>
   </data>
   <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 23</value>
@@ -128,40 +128,40 @@
     <value>Estimate (MODFAC-NIST)</value>
   </data>
   <data name="chkTdep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 21</value>
+    <value>246, 21</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 17</value>
+    <value>306, 17</value>
   </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Estimate (UNIFAC-LL)</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>468, 17</value>
+    <value>574, 17</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Estimate (MODFAC-Do)</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 17</value>
+    <value>440, 17</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Estimate (UNIFAC)</value>
   </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 265</value>
+    <value>861, 322</value>
   </data>
   <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>757, 10</value>
+    <value>863, 10</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 326</value>
+    <value>876, 383</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 334</value>
+    <value>888, 391</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
     <value>933, 17</value>
@@ -197,14 +197,10 @@
     <value>1046, 430</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>784, 360</value>
+    <value>890, 417</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>784, 360</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>890, 417</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure NRTL Property Package</value>

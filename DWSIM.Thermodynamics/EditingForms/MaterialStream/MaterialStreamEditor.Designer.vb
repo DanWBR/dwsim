@@ -77,10 +77,12 @@ Partial Class MaterialStreamEditor
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPageInputComposition = New System.Windows.Forms.TabPage()
         Me.btnCompAcceptChanges = New System.Windows.Forms.Button()
+        Me.cbSolvent = New System.Windows.Forms.ComboBox()
         Me.btnEraseInput = New System.Windows.Forms.Button()
         Me.lblInputAmount = New System.Windows.Forms.Label()
         Me.btnEqualizeInput = New System.Windows.Forms.Button()
         Me.btnNormalizeInput = New System.Windows.Forms.Button()
+        Me.lblSolvent = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbCompBasis = New System.Windows.Forms.ComboBox()
         Me.gridInputComposition = New System.Windows.Forms.DataGridView()
@@ -213,8 +215,6 @@ Partial Class MaterialStreamEditor
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.cbSolvent = New System.Windows.Forms.ComboBox()
-        Me.lblSolvent = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -617,6 +617,16 @@ Partial Class MaterialStreamEditor
         Me.ToolTipChangeTag.SetToolTip(Me.btnCompAcceptChanges, resources.GetString("btnCompAcceptChanges.ToolTip1"))
         Me.btnCompAcceptChanges.UseVisualStyleBackColor = False
         '
+        'cbSolvent
+        '
+        resources.ApplyResources(Me.cbSolvent, "cbSolvent")
+        Me.cbSolvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSolvent.FormattingEnabled = True
+        Me.cbSolvent.Items.AddRange(New Object() {resources.GetString("cbSolvent.Items"), resources.GetString("cbSolvent.Items1"), resources.GetString("cbSolvent.Items2"), resources.GetString("cbSolvent.Items3"), resources.GetString("cbSolvent.Items4"), resources.GetString("cbSolvent.Items5"), resources.GetString("cbSolvent.Items6")})
+        Me.cbSolvent.Name = "cbSolvent"
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvent, resources.GetString("cbSolvent.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSolvent, resources.GetString("cbSolvent.ToolTip1"))
+        '
         'btnEraseInput
         '
         resources.ApplyResources(Me.btnEraseInput, "btnEraseInput")
@@ -647,6 +657,13 @@ Partial Class MaterialStreamEditor
         Me.ToolTipValues.SetToolTip(Me.btnNormalizeInput, resources.GetString("btnNormalizeInput.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.btnNormalizeInput, resources.GetString("btnNormalizeInput.ToolTip1"))
         Me.btnNormalizeInput.UseVisualStyleBackColor = True
+        '
+        'lblSolvent
+        '
+        resources.ApplyResources(Me.lblSolvent, "lblSolvent")
+        Me.lblSolvent.Name = "lblSolvent"
+        Me.ToolTipValues.SetToolTip(Me.lblSolvent, resources.GetString("lblSolvent.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblSolvent, resources.GetString("lblSolvent.ToolTip1"))
         '
         'Label16
         '
@@ -1790,23 +1807,6 @@ Partial Class MaterialStreamEditor
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
         Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'cbSolvent
-        '
-        resources.ApplyResources(Me.cbSolvent, "cbSolvent")
-        Me.cbSolvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbSolvent.FormattingEnabled = True
-        Me.cbSolvent.Items.AddRange(New Object() {resources.GetString("cbSolvent.Items"), resources.GetString("cbSolvent.Items1"), resources.GetString("cbSolvent.Items2"), resources.GetString("cbSolvent.Items3"), resources.GetString("cbSolvent.Items4"), resources.GetString("cbSolvent.Items5"), resources.GetString("cbSolvent.Items6")})
-        Me.cbSolvent.Name = "cbSolvent"
-        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvent, resources.GetString("cbSolvent.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbSolvent, resources.GetString("cbSolvent.ToolTip1"))
-        '
-        'lblSolvent
-        '
-        resources.ApplyResources(Me.lblSolvent, "lblSolvent")
-        Me.lblSolvent.Name = "lblSolvent"
-        Me.ToolTipValues.SetToolTip(Me.lblSolvent, resources.GetString("lblSolvent.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.lblSolvent, resources.GetString("lblSolvent.ToolTip1"))
         '
         'MaterialStreamEditor
         '

@@ -242,6 +242,9 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>Specific Enthalpy</value>
   </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 224</value>
+  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 13</value>
   </data>
@@ -298,6 +301,9 @@
   </data>
   <data name="cbUnitsT.Location" type="System.Drawing.Point, System.Drawing">
     <value>227, 37</value>
+  </data>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 198</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -438,10 +444,10 @@
     <value>Amount</value>
   </data>
   <data name="gridCompMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 287</value>
+    <value>323, 287</value>
   </data>
   <data name="tabCompMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 287</value>
+    <value>323, 287</value>
   </data>
   <data name="tabCompMix.Text" xml:space="preserve">
     <value>Mixture</value>
@@ -522,7 +528,7 @@
     <value>Solid</value>
   </data>
   <data name="TabPhaseComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 313</value>
+    <value>331, 313</value>
   </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
@@ -546,13 +552,13 @@
     <value>Molalities</value>
   </data>
   <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 21</value>
+    <value>208, 21</value>
   </data>
   <data name="lblAmountTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>340, 15</value>
+    <value>257, 15</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 360</value>
+    <value>333, 360</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Amounts</value>
@@ -666,10 +672,10 @@
     <value>Properties</value>
   </data>
   <data name="TabControlCompound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 386</value>
+    <value>341, 386</value>
   </data>
   <data name="TabPageResultsComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 392</value>
+    <value>347, 392</value>
   </data>
   <data name="TabPageResultsComp.Text" xml:space="preserve">
     <value>Compounds</value>
@@ -792,19 +798,19 @@
     <value>Phase Properties</value>
   </data>
   <data name="TabControlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 418</value>
+    <value>355, 418</value>
   </data>
   <data name="TabPageResultsPane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 424</value>
+    <value>361, 424</value>
   </data>
   <data name="TabPageResultsPane.Text" xml:space="preserve">
     <value>Results</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 418</value>
+    <value>355, 418</value>
   </data>
   <data name="TabPageAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 424</value>
+    <value>361, 424</value>
   </data>
   <data name="TabPageAnnotations.Text" xml:space="preserve">
     <value>Annotations</value>
@@ -819,10 +825,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cbDynSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="TabPageDynamics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 424</value>
+    <value>361, 424</value>
   </data>
   <data name="TabPageDynamics.Text" xml:space="preserve">
     <value>Dynamics</value>
@@ -855,16 +861,16 @@
     <value>Simulation Default</value>
   </data>
   <data name="cbFloatingTableCompoundAmountBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 21</value>
+    <value>291, 21</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 69</value>
+    <value>345, 69</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Compound Amounts</value>
   </data>
   <data name="TabPageFloatingTables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 424</value>
+    <value>361, 424</value>
   </data>
   <data name="TabPageFloatingTables.Text" xml:space="preserve">
     <value>Floating Tables</value>
@@ -931,7 +937,7 @@
 </value>
   </data>
   <data name="btnDisconnectO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>408, 49</value>
+    <value>325, 49</value>
   </data>
   <data name="btnDisconnectI.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -952,10 +958,10 @@
 </value>
   </data>
   <data name="btnDisconnectI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>408, 23</value>
+    <value>325, 23</value>
   </data>
   <data name="cbOutlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 21</value>
+    <value>201, 21</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
@@ -964,7 +970,7 @@
     <value>Downstream</value>
   </data>
   <data name="cbInlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 21</value>
+    <value>201, 21</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -973,7 +979,7 @@
     <value>Upstream</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 100</value>
+    <value>359, 100</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
@@ -1054,7 +1060,7 @@
     <value>Information</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 106</value>
+    <value>365, 106</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Connections</value>

@@ -361,7 +361,7 @@ Namespace Reactors
                 Dim xv = tms.GetPhaseComposition(2)
                 Dim fugc = pp.DW_CalcFugCoeff(xv, T, P, PropertyPackages.State.Vapor)
                 i = 0
-                For Each s As Compound In tms.Phases(0).Compounds.Values
+                For Each s As Compound In tms.Phases(2).Compounds.Values
                     t1 = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     If s.MoleFraction.GetValueOrDefault > 0 Then
                         t2 = Log(s.MoleFraction.GetValueOrDefault())
@@ -369,7 +369,7 @@ Namespace Reactors
                         t2 = Log(1.0E-20)
                     End If
                     t3 = Log(fugc(i) * P / P0)
-                    gf += s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
+                    gf += vfrac * s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
                     i += 1
                 Next
             End If
@@ -377,7 +377,7 @@ Namespace Reactors
                 Dim xv = tms.GetPhaseComposition(3)
                 Dim fugc = pp.DW_CalcFugCoeff(xv, T, P, PropertyPackages.State.Liquid)
                 i = 0
-                For Each s As Compound In tms.Phases(0).Compounds.Values
+                For Each s As Compound In tms.Phases(3).Compounds.Values
                     t1 = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     If s.MoleFraction.GetValueOrDefault > 0 Then
                         t2 = Log(s.MoleFraction.GetValueOrDefault())
@@ -385,7 +385,7 @@ Namespace Reactors
                         t2 = Log(1.0E-20)
                     End If
                     t3 = Log(fugc(i) * P / P0)
-                    gf += s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
+                    gf += l1frac * s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
                     i += 1
                 Next
             End If
@@ -393,7 +393,7 @@ Namespace Reactors
                 Dim xv = tms.GetPhaseComposition(4)
                 Dim fugc = pp.DW_CalcFugCoeff(xv, T, P, PropertyPackages.State.Liquid)
                 i = 0
-                For Each s As Compound In tms.Phases(0).Compounds.Values
+                For Each s As Compound In tms.Phases(4).Compounds.Values
                     t1 = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     If s.MoleFraction.GetValueOrDefault > 0 Then
                         t2 = Log(s.MoleFraction.GetValueOrDefault())
@@ -401,14 +401,14 @@ Namespace Reactors
                         t2 = Log(1.0E-20)
                     End If
                     t3 = Log(fugc(i) * P / P0)
-                    gf += s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
+                    gf += l2frac * s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
                     i += 1
                 Next
             End If
             If sfrac > 0 Then
                 Dim fugc = pp.DW_CalcSolidFugCoeff(T, P)
                 i = 0
-                For Each s As Compound In tms.Phases(0).Compounds.Values
+                For Each s As Compound In tms.Phases(7).Compounds.Values
                     t1 = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     If s.MoleFraction.GetValueOrDefault > 0 Then
                         t2 = Log(s.MoleFraction.GetValueOrDefault())
@@ -416,7 +416,8 @@ Namespace Reactors
                         t2 = Log(1.0E-20)
                     End If
                     t3 = Log(fugc(i) * P / P0)
-                    gf += s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
+                    If Double.IsNaN(t3) Or Double.IsInfinity(t3) Then t3 = 0.0
+                    gf += sfrac * s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
                     i += 1
                 Next
             End If

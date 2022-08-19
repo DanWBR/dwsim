@@ -119,46 +119,46 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 21</value>
+    <value>697, 21</value>
   </data>
   <data name="Button6.Text" xml:space="preserve">
     <value>Estimate (MODFAC-NIST)</value>
   </data>
   <data name="chkTdep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 25</value>
+    <value>234, 25</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 21</value>
+    <value>296, 21</value>
   </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Estimate (UNIFAC-LL)</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>519, 21</value>
+    <value>564, 21</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Estimate (MODFAC-Do)</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 21</value>
+    <value>430, 21</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Estimate (UNIFAC)</value>
   </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>781, 291</value>
+    <value>826, 295</value>
   </data>
   <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>783, 10</value>
+    <value>828, 10</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>796, 352</value>
+    <value>841, 356</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>808, 360</value>
+    <value>853, 364</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Estimate</value>
@@ -191,13 +191,13 @@
     <value>Action in deployment.</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>810, 386</value>
+    <value>855, 390</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>General Options</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>810, 386</value>
+    <value>855, 390</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure UNIQUAC Property Package</value>
