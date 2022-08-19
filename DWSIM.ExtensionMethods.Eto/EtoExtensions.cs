@@ -649,20 +649,25 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
-            var editor = new TextBox { Text = currval.ToString() };
+            var editor = new TextBox { Text = currval.ToString(), TextAlignment = TextAlignment.Right };
             editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * GlobalSettings.Settings.EditorTextBoxFixedSizeWidth);
 
             if (command != null) editor.TextChanged += (sender, e) =>
             {
-                try
+                if (editor.Text.IsValidDouble())
                 {
-                    command.Invoke((TextBox)sender, e);
-                    editor.TextColor = Colors.Blue;
+                    var value = editor.Text.ToDoubleFromCurrent();
+                    if (value >= minval && value <= maxval)
+                    {
+                        command.Invoke((TextBox)sender, e);
+                        editor.TextColor = Colors.Blue;
+                    }
+                    else
+                        editor.TextColor = Colors.Red;
                 }
-                catch {
+                else
                     editor.TextColor = Colors.Red;
-                }
             };
 
             var tr = new TableRow(txt, null, editor);
