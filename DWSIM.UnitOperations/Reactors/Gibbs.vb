@@ -1115,16 +1115,16 @@ Namespace Reactors
             For Each comp In ims.Phases(0).Compounds.Values
                 If comp.ConstantProperties.IG_Enthalpy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then
                     If Me.ComponentIDs.Contains(comp.Name) Then
-                        FlowSheet.ShowMessage(String.Format("Enthalpy of Formation data for compound '{0}' is missing or equal to 0. It will be removed from the reactive compounds list.", comp.Name), IFlowsheet.MessageType.Warning)
-                        Me.ComponentIDs.Remove(comp.Name)
-                        compremoved = True
+                        FlowSheet.ShowMessage(String.Format("Enthalpy of Formation data for compound '{0}' is missing or equal to 0.", comp.Name), IFlowsheet.MessageType.Warning)
+                        'Me.ComponentIDs.Remove(comp.Name)
+                        'compremoved = True
                     End If
                 End If
                 If comp.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then
                     If Me.ComponentIDs.Contains(comp.Name) Then
-                        FlowSheet.ShowMessage(String.Format("Gibbs Energy of Formation data for compound '{0}' is missing or equal to 0. It will be removed from the reactive compounds list.", comp.Name), IFlowsheet.MessageType.Warning)
-                        Me.ComponentIDs.Remove(comp.Name)
-                        compremoved = True
+                        FlowSheet.ShowMessage(String.Format("Gibbs Energy of Formation data for compound '{0}' is missing or equal to 0.", comp.Name), IFlowsheet.MessageType.Warning)
+                        'Me.ComponentIDs.Remove(comp.Name)
+                        'compremoved = True
                     End If
                 End If
             Next

@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -132,11 +132,14 @@
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 23</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>452, 13</value>
+    <value>456, 13</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -195,11 +198,14 @@
   <data name="Column8.HeaderText" xml:space="preserve">
     <value>B21</value>
   </data>
+  <data name="dgvu1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="dgvu1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 48</value>
   </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 291</value>
+    <value>617, 286</value>
   </data>
   <data name="dgvu1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -218,6 +224,9 @@
   </data>
   <data name="LabelWithDivider3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="LabelWithDivider3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="LabelWithDivider3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -243,11 +252,14 @@
   <data name="&gt;&gt;LabelWithDivider3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="GroupBox3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 4</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 345</value>
+    <value>632, 340</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -268,7 +280,7 @@
     <value>0</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 353</value>
+    <value>644, 348</value>
   </data>
   <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -291,6 +303,9 @@
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -298,7 +313,7 @@
     <value>13, 90</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 13</value>
+    <value>156, 13</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -318,11 +333,14 @@
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tbTol.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 87</value>
   </data>
   <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 21</value>
+    <value>102, 22</value>
   </data>
   <data name="tbTol.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -345,6 +363,9 @@
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -352,7 +373,7 @@
     <value>13, 61</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 13</value>
+    <value>155, 13</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -372,11 +393,14 @@
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="tbMaxIts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="tbMaxIts.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 58</value>
   </data>
   <data name="tbMaxIts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 21</value>
+    <value>102, 22</value>
   </data>
   <data name="tbMaxIts.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -395,6 +419,9 @@
   </data>
   <data name="&gt;&gt;tbMaxIts.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="cbReacSets.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="cbReacSets.Location" type="System.Drawing.Point, System.Drawing">
     <value>182, 29</value>
@@ -420,11 +447,14 @@
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 32</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
+    <value>102, 13</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -443,6 +473,9 @@
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="GroupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 6</value>
@@ -517,7 +550,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>646, 374</value>
@@ -568,6 +601,6 @@
     <value>FormConfigENRTL</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=7.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=8.0.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
