@@ -51,11 +51,13 @@ Partial Class FormSimulWizard
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.WizardPage3 = New AeroWizard.WizardPage()
-        Me.PanelSolids = New System.Windows.Forms.Panel()
-        Me.rbSDN = New System.Windows.Forms.RadioButton()
-        Me.rbSNo = New System.Windows.Forms.RadioButton()
-        Me.rbSYes = New System.Windows.Forms.RadioButton()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.rbSVLLE = New System.Windows.Forms.RadioButton()
+        Me.rbVLE = New System.Windows.Forms.RadioButton()
+        Me.rbVLLE = New System.Windows.Forms.RadioButton()
+        Me.rbNoFlash = New System.Windows.Forms.RadioButton()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
@@ -64,7 +66,6 @@ Partial Class FormSimulWizard
         Me.Column10 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.dgvpp = New System.Windows.Forms.DataGridView()
         Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -96,7 +97,7 @@ Partial Class FormSimulWizard
         Me.WizardPage2.SuspendLayout()
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage3.SuspendLayout()
-        Me.PanelSolids.SuspendLayout()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox12.SuspendLayout()
@@ -289,7 +290,8 @@ Partial Class FormSimulWizard
         'WizardPage3
         '
         resources.ApplyResources(Me.WizardPage3, "WizardPage3")
-        Me.WizardPage3.Controls.Add(Me.PanelSolids)
+        Me.WizardPage3.Controls.Add(Me.FlowLayoutPanel1)
+        Me.WizardPage3.Controls.Add(Me.Button8)
         Me.WizardPage3.Controls.Add(Me.LinkLabel2)
         Me.WizardPage3.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.WizardPage3.Controls.Add(Me.GroupBox6)
@@ -298,44 +300,60 @@ Partial Class FormSimulWizard
         Me.WizardPage3.Name = "WizardPage3"
         Me.ToolTip1.SetToolTip(Me.WizardPage3, resources.GetString("WizardPage3.ToolTip"))
         '
-        'PanelSolids
+        'FlowLayoutPanel1
         '
-        resources.ApplyResources(Me.PanelSolids, "PanelSolids")
-        Me.PanelSolids.Controls.Add(Me.rbSDN)
-        Me.PanelSolids.Controls.Add(Me.rbSNo)
-        Me.PanelSolids.Controls.Add(Me.rbSYes)
-        Me.PanelSolids.Controls.Add(Me.Label5)
-        Me.PanelSolids.Name = "PanelSolids"
-        Me.ToolTip1.SetToolTip(Me.PanelSolids, resources.GetString("PanelSolids.ToolTip"))
-        '
-        'rbSDN
-        '
-        resources.ApplyResources(Me.rbSDN, "rbSDN")
-        Me.rbSDN.Checked = True
-        Me.rbSDN.Name = "rbSDN"
-        Me.rbSDN.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbSDN, resources.GetString("rbSDN.ToolTip"))
-        Me.rbSDN.UseVisualStyleBackColor = True
-        '
-        'rbSNo
-        '
-        resources.ApplyResources(Me.rbSNo, "rbSNo")
-        Me.rbSNo.Name = "rbSNo"
-        Me.ToolTip1.SetToolTip(Me.rbSNo, resources.GetString("rbSNo.ToolTip"))
-        Me.rbSNo.UseVisualStyleBackColor = True
-        '
-        'rbSYes
-        '
-        resources.ApplyResources(Me.rbSYes, "rbSYes")
-        Me.rbSYes.Name = "rbSYes"
-        Me.ToolTip1.SetToolTip(Me.rbSYes, resources.GetString("rbSYes.ToolTip"))
-        Me.rbSYes.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
+        Me.FlowLayoutPanel1.Controls.Add(Me.Label5)
+        Me.FlowLayoutPanel1.Controls.Add(Me.rbSVLLE)
+        Me.FlowLayoutPanel1.Controls.Add(Me.rbVLE)
+        Me.FlowLayoutPanel1.Controls.Add(Me.rbVLLE)
+        Me.FlowLayoutPanel1.Controls.Add(Me.rbNoFlash)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.ToolTip1.SetToolTip(Me.FlowLayoutPanel1, resources.GetString("FlowLayoutPanel1.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
         Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        '
+        'rbSVLLE
+        '
+        resources.ApplyResources(Me.rbSVLLE, "rbSVLLE")
+        Me.rbSVLLE.Checked = True
+        Me.rbSVLLE.Name = "rbSVLLE"
+        Me.rbSVLLE.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbSVLLE, resources.GetString("rbSVLLE.ToolTip"))
+        Me.rbSVLLE.UseVisualStyleBackColor = True
+        '
+        'rbVLE
+        '
+        resources.ApplyResources(Me.rbVLE, "rbVLE")
+        Me.rbVLE.Name = "rbVLE"
+        Me.ToolTip1.SetToolTip(Me.rbVLE, resources.GetString("rbVLE.ToolTip"))
+        Me.rbVLE.UseVisualStyleBackColor = True
+        '
+        'rbVLLE
+        '
+        resources.ApplyResources(Me.rbVLLE, "rbVLLE")
+        Me.rbVLLE.Name = "rbVLLE"
+        Me.ToolTip1.SetToolTip(Me.rbVLLE, resources.GetString("rbVLLE.ToolTip"))
+        Me.rbVLLE.UseVisualStyleBackColor = True
+        '
+        'rbNoFlash
+        '
+        resources.ApplyResources(Me.rbNoFlash, "rbNoFlash")
+        Me.rbNoFlash.Name = "rbNoFlash"
+        Me.ToolTip1.SetToolTip(Me.rbNoFlash, resources.GetString("rbNoFlash.ToolTip"))
+        Me.rbNoFlash.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.Image = Global.DWSIM.My.Resources.Resources.arrow_right
+        Me.Button8.Name = "Button8"
+        Me.ToolTip1.SetToolTip(Me.Button8, resources.GetString("Button8.ToolTip"))
+        Me.Button8.UseVisualStyleBackColor = True
         '
         'LinkLabel2
         '
@@ -357,7 +375,6 @@ Partial Class FormSimulWizard
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Controls.Add(Me.DataGridViewPP)
-        Me.GroupBox6.Controls.Add(Me.Button8)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
@@ -413,13 +430,6 @@ Partial Class FormSimulWizard
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        '
-        'Button8
-        '
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Name = "Button8"
-        Me.ToolTip1.SetToolTip(Me.Button8, resources.GetString("Button8.ToolTip"))
-        Me.Button8.UseVisualStyleBackColor = True
         '
         'GroupBox12
         '
@@ -640,10 +650,9 @@ Partial Class FormSimulWizard
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage3.ResumeLayout(False)
         Me.WizardPage3.PerformLayout()
-        Me.PanelSolids.ResumeLayout(False)
-        Me.PanelSolids.PerformLayout()
+        Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.FlowLayoutPanel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
@@ -695,10 +704,8 @@ Partial Class FormSimulWizard
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
     Friend WithEvents CriarAPartirDeEstruturaUNIFACToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PanelSolids As Panel
-    Friend WithEvents rbSDN As RadioButton
-    Friend WithEvents rbSNo As RadioButton
-    Friend WithEvents rbSYes As RadioButton
+    Friend WithEvents rbVLE As RadioButton
+    Friend WithEvents rbSVLLE As RadioButton
     Friend WithEvents Label5 As Label
     Public WithEvents DataGridViewPP As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
@@ -716,4 +723,7 @@ Partial Class FormSimulWizard
     Public WithEvents txtAdded As TextBox
     Public WithEvents Label6 As Label
     Friend WithEvents ImportFromThermoChemicalsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents rbNoFlash As RadioButton
+    Friend WithEvents rbVLLE As RadioButton
 End Class

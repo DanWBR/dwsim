@@ -247,7 +247,6 @@ Public Class FormSimulWizard
             MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
-        PanelSolids.Enabled = True
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
         With pp
@@ -1091,20 +1090,6 @@ Public Class FormSimulWizard
         txtSearch.Text = ""
     End Sub
 
-    Private Sub rbSYes_CheckedChanged(sender As Object, e As EventArgs) Handles rbSYes.CheckedChanged, rbSNo.CheckedChanged, rbSDN.CheckedChanged
-        If loaded Then
-            If rbSYes.Checked Then
-                For Each pp In CurrentFlowsheet.PropertyPackages.Values
-                    DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = True
-                Next
-            Else
-                For Each pp In CurrentFlowsheet.PropertyPackages.Values
-                    DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
-                Next
-            End If
-        End If
-    End Sub
-
     Private Sub ImportFromThermoChemicalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromThermoChemicalsToolStripMenuItem.Click
         Dim f As New FormImportCompoundFromThermo
         If f.ShowDialog(Me) = DialogResult.OK Then
@@ -1135,4 +1120,23 @@ Public Class FormSimulWizard
             End Try
         End If
     End Sub
+
+    Private Sub rbVLE_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLE.CheckedChanged, rbVLLE.CheckedChanged, rbNoFlash.CheckedChanged, rbSVLLE.CheckedChanged
+
+        If loaded Then
+            For Each pp In CurrentFlowsheet.Options.PropertyPackages.Values
+                If rbVLE.Checked Then
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "VLE"
+                ElseIf rbVLLE.Checked Then
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "VLLE"
+                ElseIf rbSVLLE.Checked Then
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "Default"
+                Else
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "NoFlash"
+                End If
+            Next
+        End If
+
+    End Sub
+
 End Class

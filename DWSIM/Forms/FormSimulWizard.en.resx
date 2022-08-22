@@ -211,41 +211,44 @@ Click "Next" to continue.</value>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>698, 286</value>
   </data>
-  <data name="rbSDN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 3</value>
-  </data>
-  <data name="rbSDN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 19</value>
-  </data>
-  <data name="rbSDN.Text" xml:space="preserve">
-    <value>Don't know</value>
-  </data>
-  <data name="rbSNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 3</value>
-  </data>
-  <data name="rbSNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 19</value>
-  </data>
-  <data name="rbSNo.Text" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="rbSYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 3</value>
-  </data>
-  <data name="rbSYes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 19</value>
-  </data>
-  <data name="rbSYes.Text" xml:space="preserve">
-    <value>Yes</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 15</value>
+    <value>248, 20</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Does this simulation deal with solids?</value>
+    <value>Override Phase Equilibria calculation settings?</value>
   </data>
-  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 324</value>
+  <data name="rbSVLLE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 3</value>
+  </data>
+  <data name="rbSVLLE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 19</value>
+  </data>
+  <data name="rbSVLLE.Text" xml:space="preserve">
+    <value>Leave as default (SVLLE)</value>
+  </data>
+  <data name="rbVLE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 3</value>
+  </data>
+  <data name="rbVLE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 19</value>
+  </data>
+  <data name="rbVLE.Text" xml:space="preserve">
+    <value>VLE (faster)</value>
+  </data>
+  <data name="rbVLLE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>504, 3</value>
+  </data>
+  <data name="rbNoFlash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>583, 3</value>
+  </data>
+  <data name="rbNoFlash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 19</value>
+  </data>
+  <data name="rbNoFlash.Text" xml:space="preserve">
+    <value>Do not calculate</value>
+  </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Add</value>
   </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>543, 15</value>
@@ -267,16 +270,6 @@ Click "Next" to continue.</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Type</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DataGridViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 231</value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Add</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
@@ -466,6 +459,9 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
+  <data name="ImportFromThermoChemicalsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 22</value>
+  </data>
   <data name="ImportFromThermoChemicalsToolStripMenuItem.Text" xml:space="preserve">
     <value>Import from Thermo/Chemicals</value>
   </data>
@@ -500,6 +496,6 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
     <value>Create From UNIFAC Molecular Structure</value>
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 158</value>
+    <value>331, 136</value>
   </data>
 </root>
