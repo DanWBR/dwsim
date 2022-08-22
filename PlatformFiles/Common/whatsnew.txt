@@ -1,3 +1,17 @@
 Version 8.1.0
 
-- Tog
+- Fixed Classic UI crashing on Linux (any)
+- Fixed Cross-Platform UI crashing on Ubuntu 18 and newer
+- Fixed issues with Gibbs Reactor
+- Fixed issues with CoolProp Property Package
+- Fixed #359: Latent heat not fully transferred in heat exchanger
+- Fixed #362: Mixer not respecting 1st law
+- Classic UI layout fixes (Windows)
+- Set Flash Calculation type on Simulation Wizard (Classic UI, Windows)
+- Fixed PDF/SVG export on High-DPI displays (Cross-Platform UI)
+- Fixed issues with Wilson Property Package
+- Fixed issues with importing data from online sources (Classic UI)
+- Sort material and energy streams list on editors (#358)
+- Fixed an issue with Python initialization
+- Rigorous Absorber solver improvements
+- Fixed a bug with Bubble Point Rigorous Column solver
