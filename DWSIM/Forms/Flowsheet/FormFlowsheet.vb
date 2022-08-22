@@ -172,9 +172,15 @@ Public Class FormFlowsheet
                                       End Sub
         End If
 
-        'file database
+        ' file database
 
         FileDatabaseProvider.CreateDatabase()
+
+        ' icon
+
+#If LINUX = False Then
+        If Not FormMain.IsPro Then Icon = My.Resources.DWSIM_Icon_v8
+#End If
 
     End Sub
 

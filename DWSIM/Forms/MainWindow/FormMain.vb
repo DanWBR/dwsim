@@ -128,6 +128,10 @@ Public Class FormMain
 
         If GlobalSettings.Settings.OldUI Then
 
+#If LINUX = False Then
+            If Not IsPro Then Icon = My.Resources.DWSIM_Icon_v8
+#End If
+
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 

@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAo
-        KQAAAk1TRnQBSQFMAgEBBAEAASABAAEgAQABIAEAASABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAGA
+        KQAAAk1TRnQBSQFMAgEBBAEAASgBAAEoAQABIAEAASABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAGA
         AwABQAMAAQEBAAEQBgABQP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A
         /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AQAABPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/
         ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcWAAE/ATcBPwE3
@@ -366,7 +366,7 @@
     <value>Welcome to DWSIM!</value>
   </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 0</value>
+    <value>426, 0</value>
   </data>
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 94</value>
@@ -417,7 +417,7 @@
     <value>11, 6</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 94</value>
+    <value>538, 94</value>
   </data>
   <data name="LinkLabel9.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 41</value>
@@ -441,7 +441,7 @@
     <value>NoControl</value>
   </data>
   <data name="PictureBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 0</value>
+    <value>426, 0</value>
   </data>
   <data name="PictureBox7.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 100</value>
@@ -483,7 +483,7 @@
     <value>11, 347</value>
   </data>
   <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 100</value>
+    <value>538, 100</value>
   </data>
   <data name="LinkLabel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 82</value>
@@ -502,7 +502,7 @@
     <value>13, 37</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 40</value>
+    <value>407, 40</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
@@ -520,7 +520,7 @@
     <value>Discover DWSIM Pro</value>
   </data>
   <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 0</value>
+    <value>426, 0</value>
   </data>
   <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 118</value>
@@ -529,7 +529,7 @@
     <value>11, 106</value>
   </data>
   <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 118</value>
+    <value>538, 118</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 60</value>
@@ -565,7 +565,7 @@
     <value>NoControl</value>
   </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 0</value>
+    <value>426, 0</value>
   </data>
   <data name="PictureBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 110</value>
@@ -574,7 +574,7 @@
     <value>11, 573</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 110</value>
+    <value>538, 110</value>
   </data>
   <data name="LinkLabel13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -637,7 +637,7 @@
     <value>Documentation</value>
   </data>
   <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 0</value>
+    <value>426, 0</value>
   </data>
   <data name="PictureBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 72</value>
@@ -646,7 +646,7 @@
     <value>11, 689</value>
   </data>
   <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 72</value>
+    <value>538, 72</value>
   </data>
   <data name="LinkLabel14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -667,7 +667,7 @@
     <value>13, 34</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 40</value>
+    <value>407, 40</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
@@ -698,7 +698,7 @@
     <value>None</value>
   </data>
   <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 6</value>
+    <value>426, 6</value>
   </data>
   <data name="PictureBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 98</value>
@@ -710,7 +710,7 @@
     <value>11, 231</value>
   </data>
   <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 110</value>
+    <value>538, 110</value>
   </data>
   <data name="Label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -728,7 +728,7 @@
     <value>13, 36</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 38</value>
+    <value>375, 38</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Learn more on how to help with the development of e-accessibility technologies around DWSIM while also helping people in need.</value>
@@ -767,7 +767,7 @@
     <value>NoControl</value>
   </data>
   <data name="PictureBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 0</value>
+    <value>426, 0</value>
   </data>
   <data name="PictureBox8.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 112</value>
@@ -779,7 +779,7 @@
     <value>11, 454</value>
   </data>
   <data name="Panel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 112</value>
+    <value>538, 112</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
     <value>589, 731</value>
@@ -794,7 +794,7 @@
     <value>589, 731</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
-    <value>Latest Patreon Posts</value>
+    <value>Latest News</value>
   </data>
   <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
     <value>597, 760</value>
