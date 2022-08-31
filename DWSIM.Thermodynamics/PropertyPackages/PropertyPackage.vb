@@ -1500,6 +1500,25 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Function DW_CheckKvaluesConsistency(Vz As Double(), Ki As Double(), T As Double, P As Double) As Double()
+
+            Dim Ki_id = DW_CalcKvalue_Ideal_Wilson(T, P)
+            Dim Ki2 = RET_NullVector()
+
+            Dim ratio = Ki.DivideY(Ki_id)
+
+            For i = 0 To Vz.Length - 1
+                If ratio(i) > 1000 Or ratio(i) < 0.001 And Vz(i) < 0.0001 Then
+                    Ki2(i) = Ki_id(i)
+                Else
+                    Ki2(i) = Ki(i)
+                End If
+            Next
+
+            Return Ki2
+
+        End Function
+
         ''' <summary>
         ''' Does a Bubble Pressure calculation for the specified liquid composition at the specified temperature.
         ''' </summary>
@@ -7017,7 +7036,7 @@ Final3:
             Dim val As Double
 
 
-            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Or T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
+            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                 If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
                     IObj?.Paragraphs.Add("Temperature is supercritical.")
                 End If

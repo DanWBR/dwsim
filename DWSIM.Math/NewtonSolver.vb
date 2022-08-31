@@ -47,6 +47,14 @@ Namespace MathEx.Optimization
 
         Private _error As Double
 
+        Private _jac As Double(,)
+
+        Public ReadOnly Property Jacobian As Double(,)
+            Get
+                Return _jac
+            End Get
+        End Property
+
         Public ReadOnly Property BuildingJacobian As Boolean
             Get
                 Return _jacobian
@@ -272,6 +280,10 @@ Namespace MathEx.Optimization
             If _Iterations > MaxIterations Then
                 Throw New ArgumentException("not converged")
             End If
+
+            If dfdx Is Nothing Then dfdx = gradient(epsilon, x, fx)
+
+            _jac = dfdx
 
             Return x
 
