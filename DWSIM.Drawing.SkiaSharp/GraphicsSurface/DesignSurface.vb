@@ -1806,7 +1806,6 @@ Public Class GraphicsSurface
         settings.Reporting = False
 
         Dim layout = New InitialLayout(graph, settings)
-
         layout.Run()
 
         graph.UpdateBoundingBox()

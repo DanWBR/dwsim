@@ -114,6 +114,28 @@ Namespace PropertyPackages
 
         Public Sub EstimateMissingInteractionParameters(verbose As Boolean)
 
+            For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
+                If Not m_uni.InteractionParameters.ContainsKey(cp.Name) Then
+                    m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.NRTL_IPData))
+                End If
+            Next
+
+            For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
+                If m_uni.InteractionParameters.ContainsKey(cp.Name) Then
+                    For Each cp2 As ConstantProperties In Flowsheet.SelectedCompounds.Values
+                        If cp.Name <> cp2.Name Then
+                            If Not m_uni.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
+                                If m_uni.InteractionParameters.ContainsKey(cp2.Name) Then
+                                    If Not m_uni.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
+                                        m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.NRTL_IPData)
+                                    End If
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+            Next
+
             Dim x(1) As Double
 
             For Each item1 In m_uni.InteractionParameters
@@ -151,21 +173,16 @@ Namespace PropertyPackages
 
                             Dim a1(1), a2(1), a3(1) As Double
 
-                            If GlobalSettings.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
-                            Try
-                                Dim task1 As Task = TaskHelper.Run(Sub()
-                                                                       a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                                   End Sub)
-                                Dim task2 As Task = TaskHelper.Run(Sub()
-                                                                       a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                                   End Sub)
-                                Dim task3 As Task = TaskHelper.Run(Sub()
-                                                                       a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                                   End Sub)
-                                Task.WaitAll(task1, task2, task3)
-                            Catch ae As AggregateException
-                                Throw ae.Flatten().InnerException
-                            End Try
+                            Dim task1 As Task = TaskHelper.Run(Sub()
+                                                                   a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                               End Sub)
+                            Dim task2 As Task = TaskHelper.Run(Sub()
+                                                                   a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                               End Sub)
+                            Dim task3 As Task = TaskHelper.Run(Sub()
+                                                                   a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                               End Sub)
+                            Task.WaitAll(task1, task2, task3)
 
                             actu(0) = a1(0)
                             actu(1) = a2(0)
