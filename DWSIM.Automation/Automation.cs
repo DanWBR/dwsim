@@ -274,6 +274,16 @@ namespace DWSIM.Automation
             FlowsheetBase.FlowsheetBase.AddPropPacks();
         }
 
+        public string GetVersion()
+        {
+
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var date = File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString();
+
+            return String.Format("DWSIM version {0} ({1})", version, date);
+
+        }
+
         static Assembly LoadAssembly(object sender, ResolveEventArgs args)
         {
             string assemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), new AssemblyName(args.Name).Name + ".dll");

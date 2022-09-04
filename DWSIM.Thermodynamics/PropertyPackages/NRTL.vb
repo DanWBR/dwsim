@@ -110,7 +110,7 @@ Namespace PropertyPackages
         Dim ppn As NRTLPropertyPackage
         Dim nrtl As Auxiliary.NRTL
         Dim ms As Streams.MaterialStream
-        Dim ppu, unifac As Object
+        Dim ppu As MODFACPropertyPackage, unifac As Auxiliary.NISTMFAC
 
         Public Sub EstimateMissingInteractionParameters(verbose As Boolean)
 
@@ -142,6 +142,10 @@ Namespace PropertyPackages
                 For Each ipset In item1.Value
                     If ipset.Value.A12 = 0 And ipset.Value.A21 = 0 And ipset.Value.alpha12 = 0 Then
 
+                        Dim comp1, comp2 As ConstantProperties
+                        comp1 = Flowsheet.SelectedCompounds(item1.Key)
+                        comp2 = Flowsheet.SelectedCompounds(ipset.Key)
+
                         Try
 
                             ppn = New PropertyPackages.NRTLPropertyPackage
@@ -150,10 +154,6 @@ Namespace PropertyPackages
                             ms = New Streams.MaterialStream("", "")
                             nrtl = New PropertyPackages.Auxiliary.NRTL
                             unifac = New PropertyPackages.Auxiliary.NISTMFAC
-
-                            Dim comp1, comp2 As ConstantProperties
-                            comp1 = Flowsheet.SelectedCompounds(item1.Key)
-                            comp2 = Flowsheet.SelectedCompounds(ipset.Key)
 
                             With ms
                                 For Each phase In ms.Phases.Values
@@ -218,12 +218,18 @@ Namespace PropertyPackages
 
                             If verbose Then
 
-                                Console.WriteLine(String.Format("Estimated NRTL IP set for {0}/{1}: {2}/{3}/{4}",
+                                Console.WriteLine(String.Format("Estimated NRTL IP set for {0}/{1}: {2:N2}/{3:N2}/{4}",
                                                          comp1.Name, comp2.Name, finalval2(0), finalval2(1), 0.2))
 
                             End If
 
                         Catch ex As Exception
+
+                            If verbose Then
+                                Console.WriteLine(String.Format("Error estimating NRTL IP set for {0}/{1}: {2}",
+                                                         comp1.Name, comp2.Name, ex.ToString()))
+
+                            End If
 
                         End Try
 
