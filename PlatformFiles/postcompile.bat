@@ -43,8 +43,6 @@ rmdir /s /q ..\DistPackages\Linux\plugins\x64
 rmdir /s /q ..\DistPackages\Linux\x86
 rmdir /s /q ..\DistPackages\Linux\x64
 
-pause
-
 xcopy "..\DWSIM\Lib\*" "..\DistPackages\Windows\Lib\*" /E /Y /F /D
 xcopy "..\DWSIM\Lib\*" "..\DistPackages\Windows_32\Lib\*" /E /Y /F /D
 xcopy "..\DWSIM\Lib\*" "..\DistPackages\macOS\Lib\*" /E /Y /F /D
@@ -58,5 +56,3 @@ rmdir /s /q ..\DistPackages\Windows_Plus\x64
 
 rmdir /s /q ..\DistPackages\Windows_32\x86
 rmdir /s /q ..\DistPackages\Windows_32\x64
-
-pause

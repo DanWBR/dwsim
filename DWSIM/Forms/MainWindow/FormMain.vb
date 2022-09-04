@@ -2278,7 +2278,9 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
+#If LINUX = False Then
             form.FormIPyConsole.Flowsheet = form
+#End If
 
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
@@ -2296,7 +2298,9 @@ Public Class FormMain
             form.FormProps.DockPanel = Nothing
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
+#If LINUX = False Then
             form.FormIPyConsole.DockPanel = Nothing
+#End If
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -2319,18 +2323,20 @@ Public Class FormMain
 
             Try
                 form.FormLog.DockPanel = form.dckPanel
-                form.FormSpreadsheet.Show(form.dckPanel)
-                form.FormCharts.Show(form.dckPanel)
-                form.FormMatList.Show(form.dckPanel)
-                form.FormSurface.Show(form.dckPanel)
-                form.FormDynamics.Show(form.dckPanel)
-                form.FormFilesExplorer.Show(form.dckPanel)
-                form.FormProps.Show(form.dckPanel)
-                form.FormIPyConsole.Show(form.dckPanel)
+                form.FormSpreadsheet?.Show(form.dckPanel)
+                form.FormCharts?.Show(form.dckPanel)
+                form.FormMatList?.Show(form.dckPanel)
+                form.FormSurface?.Show(form.dckPanel)
+                form.FormDynamics?.Show(form.dckPanel)
+                form.FormFilesExplorer?.Show(form.dckPanel)
+                form.FormProps?.Show(form.dckPanel)
+#If LINUX = False Then
+                form.FormIPyConsole?.Show(form.dckPanel)
+#End If
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
-                excs.Add(New Exception("Error Restoring Window Layout", ex))
+                'excs.Add(New Exception("Error Restoring Window Layout", ex))
             End Try
 
             If form.FormProps.Width > form.Width / 3 Then
@@ -3427,8 +3433,6 @@ Label_00CC:
 
     Sub SaveXMLZIP(handler As IVirtualFile, ByVal form As FormFlowsheet)
 
-
-
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
 
         Me.SaveXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(xmlfile), form, handler.FullPath)
@@ -3483,9 +3487,8 @@ Label_00CC:
 
         End Using
 
-
-
         File.Delete(xmlfile)
+
         File.Delete(dbfile)
 
     End Sub
@@ -3684,14 +3687,13 @@ Label_00CC:
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", "*.dwxml"),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
 
-
-
             If handler IsNot Nothing Then
                 If SavingSimulation IsNot Nothing Then
                     If SavingSimulation.Invoke(form2) = False Then Exit Sub
                 End If
                 SaveBackup(handler)
-                Application.DoEvents()
+                'Application.DoEvents()
+                Console.WriteLine(handler.GetExtension().ToLower())
                 If handler.GetExtension().ToLower() = ".dwxml" Then
                     TaskHelper.Run(Sub() SaveXML(handler, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                'Me.ToolStripStatusLabel1.Text = ""
@@ -3940,7 +3942,7 @@ Label_00CC:
                 If File.Exists(form2.Options.FilePath) And dashboardpicker = False Then
                     Dim handler = New SharedClassesCSharp.FilePicker.Windows.WindowsFile(form2.Options.FilePath)
                     ' If file exists, save to same location
-                    Application.DoEvents()
+                    'Application.DoEvents()
                     filename = form2.Options.FilePath
                     SaveBackup(handler)
                     If Path.GetExtension(filename).ToLower = ".dwxml" Then
@@ -3949,7 +3951,10 @@ Label_00CC:
                         If saveasync Then
                             TaskHelper.Run(Sub() SaveMobileXML(handler, form2)).ContinueWith(Sub(t)
                                                                                                  'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                 If Not t.Exception Is Nothing Then
+                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                     Console.WriteLine(t.Exception.ToString())
+                                                                                                 End If
                                                                                              End Sub, TaskContinuationOptions.ExecuteSynchronously)
                         Else
                             SaveMobileXML(handler, form2)
@@ -3978,10 +3983,10 @@ Label_00CC:
                     End If
                     If handler IsNot Nothing Then
                         SaveBackup(handler)
-                        Application.DoEvents()
+                        'Application.DoEvents()
+                        Console.WriteLine(handler.GetExtension().ToLower())
                         If handler.GetExtension().ToLower() = ".dwxml" Then
                             SaveXML(handler, Me.ActiveMdiChild)
-
                         ElseIf handler.GetExtension().ToLower() = ".xml" Then
                             SaveMobileXML(handler, Me.ActiveMdiChild)
                         ElseIf handler.GetExtension().ToLower() = ".dwxmz" Then
