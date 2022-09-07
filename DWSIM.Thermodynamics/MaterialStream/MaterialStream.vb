@@ -6268,6 +6268,7 @@ Namespace Streams
             ms.Assign(Me)
             ms.AssignProps(Me)
             ms.TotalEnergyFlow = TotalEnergyFlow
+            ms.AtEquilibrium = False
 
             Return ms
 
@@ -6420,13 +6421,16 @@ Namespace Streams
             FlowSheet.AddCompoundsToMaterialStream(ms)
             ms.Assign(Me)
             ms.AssignProps(Me)
+            ms.AtEquilibrium = False
             Return ms
         End Function
 
         Public Overrides Function CloneJSON() As Object
             Dim settings As New Newtonsoft.Json.JsonSerializerSettings
             settings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of MaterialStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me), settings)
+            Dim ms = Newtonsoft.Json.JsonConvert.DeserializeObject(Of MaterialStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me), settings)
+            ms.AtEquilibrium = False
+            Return ms
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean

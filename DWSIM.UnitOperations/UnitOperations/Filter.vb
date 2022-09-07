@@ -165,6 +165,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 With outstr1
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlout
                     Dim comp As BaseClasses.Compound
@@ -188,6 +189,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
                 With outstr2
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
                     Dim comp As BaseClasses.Compound

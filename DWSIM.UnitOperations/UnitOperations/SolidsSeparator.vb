@@ -133,6 +133,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 With outstr1
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlvout
                     .DefinedFlow = FlowSpec.Mass
@@ -158,6 +159,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
                 With outstr2
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
                     .DefinedFlow = FlowSpec.Mass

@@ -2572,6 +2572,9 @@ Namespace UnitOperations
                 StOutHot.SetFlashSpec("PH")
                 StOutCold.SetFlashSpec("PH")
 
+                StOutCold.AtEquilibrium = False
+                StOutHot.AtEquilibrium = False
+
                 If CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction1 And CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction2 Then
                     If Th2 < Tc1 Or Tc2 > Th1 Then
                         FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Temperature Cross", IFlowsheet.MessageType.Warning)

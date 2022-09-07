@@ -340,7 +340,8 @@ Namespace UnitOperations
                 outstr1.PropertyPackage.CurrentMaterialStream = outstr1
                 outstr1.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                 IObj?.SetCurrent()
-                outstr1.Calculate(False, True)
+                outstr1.AtEquilibrium = False
+                outstr1.Calculate(True, True)
                 Ho1 = outstr1.Phases(0).Properties.enthalpy.GetValueOrDefault
             End If
 
@@ -348,7 +349,8 @@ Namespace UnitOperations
                 outstr2.PropertyPackage.CurrentMaterialStream = outstr2
                 outstr2.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                 IObj?.SetCurrent()
-                outstr2.Calculate(False, True)
+                outstr2.AtEquilibrium = False
+                outstr2.Calculate(True, True)
                 Ho2 = outstr2.Phases(0).Properties.enthalpy.GetValueOrDefault
             End If
 

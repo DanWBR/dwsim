@@ -974,6 +974,7 @@ Namespace UnitOperations
                 msout = args(1)
             End If
             With msout
+                .AtEquilibrium = False
                 .Phases(0).Properties.temperature = Tout
                 .Phases(0).Properties.pressure = Pout
                 .Phases(0).Properties.enthalpy = Hout

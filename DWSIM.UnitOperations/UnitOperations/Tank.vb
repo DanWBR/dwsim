@@ -296,6 +296,7 @@ Namespace UnitOperations
 
             'Atribuir valores a corrente de materia conectada a jusante
             With oms
+                .AtEquilibrium = False
                 .Phases(0).Properties.temperature = Ti
                 .Phases(0).Properties.pressure = P2
                 .Phases(0).Properties.enthalpy = Hi

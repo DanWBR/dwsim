@@ -301,6 +301,7 @@ Namespace UnitOperations
                 End If
                 If Not DebugMode Then
                     With msout
+                        .AtEquilibrium = False
                         .DefinedFlow = FlowSpec.Mass
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                         .Phases(0).Properties.massflow = msin.GetMassFlow()
