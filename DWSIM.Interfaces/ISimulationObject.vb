@@ -258,4 +258,6 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetConnectionPortsList() As List(Of String)
 
+    Function GetConnectionPortsInfo() As List(Of IConnectionPortInfo)
+
 End Interface

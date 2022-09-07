@@ -121,6 +121,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass\ConnectionPortInfo.vb" />
     <Compile Include="BaseClass\FlowsheetBag.vb" />
     <Compile Include="BaseClass\SimulationObjectBaseClasses.vb" />
     <Compile Include="Editor\DynamicsPropertyEditor.Designer.vb">

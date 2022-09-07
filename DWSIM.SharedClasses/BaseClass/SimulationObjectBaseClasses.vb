@@ -1574,6 +1574,61 @@ Namespace UnitOperations
 
         End Function
 
+        Public Function GetConnectionPortsInfo() As List(Of IConnectionPortInfo) Implements ISimulationObject.GetConnectionPortsInfo
+
+            Dim list As New List(Of IConnectionPortInfo)
+
+            Dim i As Integer
+
+            If GraphicObject IsNot Nothing Then
+
+                i = 0
+                For Each con In GraphicObject.InputConnectors
+                    Dim ci As New ConnectionPortInfo()
+                    ci.Name = con.ConnectorName
+                    ci.Index = i
+                    ci.IsInput = True
+                    ci.IsConnected = con.IsAttached
+                    If con.IsAttached Then
+                        ci.ConnectedObject = con.AttachedConnector.AttachedFrom.Owner
+                    End If
+                    list.Add(ci)
+                    i += 1
+                Next
+
+                i = 0
+                For Each con In GraphicObject.OutputConnectors
+                    Dim ci As New ConnectionPortInfo()
+                    ci.Name = con.ConnectorName
+                    ci.Index = i
+                    ci.IsOutput = True
+                    ci.IsConnected = con.IsAttached
+                    If con.IsAttached Then
+                        ci.ConnectedObject = con.AttachedConnector.AttachedTo.Owner
+                    End If
+                    list.Add(ci)
+                    i += 1
+                Next
+
+                If GraphicObject.EnergyConnector.Active Then
+                    Dim econ = GraphicObject.EnergyConnector
+                    Dim ci As New ConnectionPortInfo()
+                    ci.Name = econ.ConnectorName
+                    ci.Index = 0
+                    ci.IsEnergyPort = True
+                    ci.IsConnected = econ.IsAttached
+                    If econ.IsAttached Then
+                        ci.ConnectedObject = econ.AttachedConnector.AttachedTo.Owner
+                    End If
+                    list.Add(ci)
+                End If
+
+            End If
+
+            Return list
+
+        End Function
+
     End Class
 
 End Namespace
