@@ -67,6 +67,13 @@ Public Class FlowsheetSurfaceControl
 
     Private Sub FlowsheetSurfaceControl_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Me.MouseDoubleClick
 
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
+            If FlowsheetObject.BidirectionalSolver.Activated Then
+                FlowsheetObject.BidirectionalSolver.ObjectDoubleClickAction(sender, e)
+                Exit Sub
+            End If
+        End If
+
         Dim obj = FlowsheetSurface.SelectedObject
 
         If (obj Is Nothing) Then
@@ -182,6 +189,13 @@ Public Class FlowsheetSurfaceControl
 #Region "Events"
 
     Public Sub FlowsheetDesignSurface_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
+
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
+            If FlowsheetObject.BidirectionalSolver.Activated Then
+                FlowsheetObject.BidirectionalSolver.ObjectClickAction(sender, e)
+                Exit Sub
+            End If
+        End If
 
         If e.Button = Windows.Forms.MouseButtons.Left Then
 

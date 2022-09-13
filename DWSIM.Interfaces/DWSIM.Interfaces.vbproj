@@ -99,6 +99,7 @@
     <Compile Include="FilePicker\IFilePickerAllowedType.vb" />
     <Compile Include="IAnalyticsProvider.vb" />
     <Compile Include="IAttachedUtility.vb" />
+    <Compile Include="IBidirectionalSolver.vb" />
     <Compile Include="IChart.vb" />
     <Compile Include="IConnectionPortInfo.vb" />
     <Compile Include="IEnergyStream.vb" />

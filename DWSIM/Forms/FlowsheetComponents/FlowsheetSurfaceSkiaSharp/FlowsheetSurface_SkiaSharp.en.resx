@@ -372,16 +372,16 @@
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAISSURBVEhL7ZFPaNNQHMd7EO8etDDY1j+etqtgogFFBoIX
-        T7260xiK0JMtG5OBePDgwT9NPHgZZV48KLhdShmxpa6zS5OtJG1e8gIOdhF0usZLWeHneyNZJX2xVudt
-        H/jyHrz8Pr+X94uccGwozkVBsfliHXNO3eaeqg43pesTp73jv6cn5iGYGrqwR9bXqs3dauwIZ7ySP+N3
-        Ymb0iW7d4itkn9Xsy5Oepp+hxcGQJvT5PF2P/yb2qSEhoWA+TZvImO8wJawMErOgAyONUgrm8uWP11yW
-        +MHKPJzPyN2RzLYRk35Mj0nfhxtyItcWogsmOjdbhmSmBDelZXhZmoHFd/chea8M0btVGH34CeJiG+KS
-        C/FFqxsT3UpMbGeTOTd8yFQ8ntsvHhbRiPsw+mgXRuZ0iN5ZPxLHJE8cCG1C1v4n6xOzItIMKfYhb5gg
-        H6Vpk7O5z52gICwDxSzowEhRitw2P/6i7f4q9HN9+Ss8WWoeFD5oxmYTTzcaO8MNect0BLmmoLdyFZ4V
-        DLj9ZhcuLX2DG6++wPOCDqulDaioOmgtGzQTg6br3bphVcg+qxl2+JCpmBQVD4tIVCJY3zJgbUMl0mpP
-        7J0HQ5uoyOl/sqA4NP6NAwkV+zQQSqgtnKZNZBN3WBJWBopZ0IFppp3SWjhfM9HesYlZyLJ8ivzVVSJ9
-        rJgWIut7tWld8Y5P+FcikZ9UHOm8zkEKogAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIRSURBVEhL7ZE/iNNQHMc7iLuDFg7O6x+ncxVMNKCIILg4
+        db2bRBShky2KciAODg7+aeLg4FHOxUFBXUqR2FKvZ02TsyRtXvMCHtwi6Ok1LsXCz987Eivpi7Xeud0H
+        vrwHL7/P7+X9YrvsGJp7VNIcsdykgtt0hHu6K5w2zdm9/vG/MxSLEE6DHNnA9anuCHOtNWmfX/J3/EnM
+        jTk7aHbFGu7zhnP8sK8ZZWJxONiEPZ+vG/LfxAENIqU0KmZZE5WKfa6El3FiHmxg2CijUaFYfXfK44lv
+        vrwGh3LqYCr3wUoo3+cPKt8mG3Kq0JPi121y4EIV0rkKnFOW4FHlPCy8uAHpK1WIX67D9K2PkJR7kFQ8
+        SC6QQUL2agm5l08XvOghM/FMYbO8VcQib8L07XWYumpC/NLyL3FC8cWhsCa4jj7ZiJgXmWVCcQC+YQo/
+        yrIm+wuf+mFBVMaKebCBYVEGb1ucedjzfhcGObP0Be4+bv8ovTWs920632qtTTbkVduV1IZGnqt1uF+y
+        4OKzdTi2+BXOPvkMD0omvKqsQE03weg4YNgUDNMcNK1uDfd5w3Kih8zEWFTeKsLoKFheteD1io7S+lDs
+        n4fDmujEHX2ysDgywY1DiRQHtAhJ6R2aZU1Um/Z5El7GinmwgRm2kzE6tNiwycaOiXmoqroH/+okSu9o
+        dpfg+kZvd0/4x7tsl1jsJ0uN6bqLruPAAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">
