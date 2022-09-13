@@ -1187,6 +1187,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.de.resx">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>

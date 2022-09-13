@@ -4042,6 +4042,13 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        PanelWeather.Visible = False
+        My.Settings.WeatherPanelVisible = False
+
+    End Sub
+
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
 
         If tsbControlPanelMode.Checked Then
