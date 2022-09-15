@@ -742,6 +742,8 @@ namespace DWSIM.UI.Forms
 
             var btnCloseAllEditors = new ButtonMenuItem { Text = "Close All Opened Object Editors" };
 
+            var btnToggleWeatherPanel = new ButtonMenuItem { Text = "Toggle Weather Panel Visibility" };
+
             //process plugin list
 
             var pluginbuttons = new List<ButtonMenuItem>();
@@ -792,7 +794,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Insert(8, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Insert(9, pluginsmenu);
-                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
+                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors, btnToggleWeatherPanel } });
                     }
                     else
                     {
@@ -803,7 +805,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Add(pluginsmenu);
-                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors, btnToggleWeatherPanel } });
                     }
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
@@ -815,7 +817,7 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     Menu.Items.Add(pluginsmenu);
-                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors, btnToggleWeatherPanel } });
                     break;
             }
 
@@ -1297,17 +1299,9 @@ namespace DWSIM.UI.Forms
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
-                btnmEqHoriz, btnmEqVert },
-                Orientation = Orientation.Horizontal,
-                Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Padding = new Padding(5)
-            };
-            var menu2 = new StackLayout
-            {
-                Items = { lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme,
-                lblRegularFont, cbRegularFont, lblBoldFont, cbBoldFont, lblItalicFont, cbItalicFont, lblBoldItalicFont, cbBoldItalicFont},
+                btnmEqHoriz, btnmEqVert,  new Label {Text =" " }, lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme,
+                lblRegularFont, cbRegularFont, lblBoldFont, cbBoldFont, lblItalicFont, cbItalicFont, lblBoldItalicFont, cbBoldItalicFont
+                },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
@@ -1315,7 +1309,6 @@ namespace DWSIM.UI.Forms
                 Padding = new Padding(5)
             };
             flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = menu1 }));
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = menu2 }));
 
             Button btnUp, btnLeft, btnRight, btnDown;
 
@@ -1374,7 +1367,13 @@ namespace DWSIM.UI.Forms
                 Items = { lblweather, imgtemp, tbtemp, lbltemp, imgpgauge, tbpgauge, lblpgauge, imgwind, tbwind, lblwind,
                     imghum, tbhum, lblhum, imgsun, tbirr, lblirr },
                 VerticalContentAlignment = VerticalAlignment.Center,
-                Spacing = 4
+                Spacing = 4,
+                Visible = false
+            };
+
+            btnToggleWeatherPanel.Click += (s, e) =>
+            {
+                weatherpanel.Visible = !weatherpanel.Visible;
             };
 
             flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = weatherpanel }));
@@ -1684,8 +1683,8 @@ namespace DWSIM.UI.Forms
                     Application.Instance.AsyncInvoke(() =>
                     {
                         ResultsControl.UpdateList();
-                            //MaterialStreamListControl.UpdateList();
-                            UpdateEditorPanels();
+                        //MaterialStreamListControl.UpdateList();
+                        UpdateEditorPanels();
                     });
                 });
                 FlowsheetObject.SolveFlowsheet(false, null, changecalcorder);
@@ -2174,8 +2173,8 @@ namespace DWSIM.UI.Forms
 
             item7.Click += (sender, e) =>
             {
-                    //copy all simulation properties from the selected object to clipboard
-                    try
+                //copy all simulation properties from the selected object to clipboard
+                try
                 {
                     var sobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
                     ((SharedClasses.UnitOperations.BaseClass)FlowsheetObject.SimulationObjects[sobj.Name]).CopyDataToClipboard((DWSIM.SharedClasses.SystemsOfUnits.Units)FlowsheetObject.FlowsheetOptions.SelectedUnitSystem, FlowsheetObject.FlowsheetOptions.NumberFormat);

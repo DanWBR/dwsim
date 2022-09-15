@@ -228,6 +228,9 @@
     <value>941, 39</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PanelWeather.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
     <value>310</value>
   </data>
@@ -377,11 +380,11 @@
         vrwHL7/P7+X9YrvsGJp7VNIcsdykgtt0hHu6K5w2zdm9/vG/MxSLEE6DHNnA9anuCHOtNWmfX/J3/EnM
         jTk7aHbFGu7zhnP8sK8ZZWJxONiEPZ+vG/LfxAENIqU0KmZZE5WKfa6El3FiHmxg2CijUaFYfXfK44lv
         vrwGh3LqYCr3wUoo3+cPKt8mG3Kq0JPi121y4EIV0rkKnFOW4FHlPCy8uAHpK1WIX67D9K2PkJR7kFQ8
-        SC6QQUL2agm5l08XvOghM/FMYbO8VcQib8L07XWYumpC/NLyL3FC8cWhsCa4jj7ZiJgXmWVCcQC+YQo/
-        yrIm+wuf+mFBVMaKebCBYVEGb1ucedjzfhcGObP0Be4+bv8ovTWs920632qtTTbkVduV1IZGnqt1uF+y
-        4OKzdTi2+BXOPvkMD0omvKqsQE03weg4YNgUDNMcNK1uDfd5w3Kih8zEWFTeKsLoKFheteD1io7S+lDs
-        n4fDmujEHX2ysDgywY1DiRQHtAhJ6R2aZU1Um/Z5El7GinmwgRm2kzE6tNiwycaOiXmoqroH/+okSu9o
-        dpfg+kZvd0/4x7tsl1jsJ0uN6bqLruPAAAAAAElFTkSuQmCC
+        SC7Yg4Ts1RJyL58ueNFDZuKZwmZ5q4hF3oTp2+swddWE+KXlX+KE4otDYU1wHX2yETEvMsuE4gB8wxR+
+        lGVN9hc+9cOCqIwV82ADw6IM3rY487Dn/S4McmbpC9x93P5RemtY79t0vtVam2zIq7YrqQ2NPFfrcL9k
+        wcVn63Bs8SucffIZHpRMeFVZgZpugtFxwLApGKY5aFrdGu7zhuVED5mJsai8VYTRUbC8asHrFR2l9aHY
+        Pw+HNdGJO/pkYXFkghuHEikOaBGS0js0y5qoNu3zJLyMFfNgAzNsJ2N0aLFhk40dE/NQVXUP/tVJlN7R
+        7C7B9Y3e7p7wj3fZLrHYT0aK6bm9yViXAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">

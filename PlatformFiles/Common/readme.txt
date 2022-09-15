@@ -64,7 +64,12 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.1.1
 
--
+- Fixed crashes when using certain Property Packages
+- Fixed some editors not appearing correctly in High-DPI displays
+- Fixed an issue with Air Cooler 2
+- Fixed Classic UI not saving simulations on Linux
+- Weather Panel is now hidden by default 
+- Minor fixes
 
 Version 8.1.0
 
