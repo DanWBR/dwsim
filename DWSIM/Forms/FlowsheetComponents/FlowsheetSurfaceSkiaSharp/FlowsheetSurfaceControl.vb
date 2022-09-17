@@ -74,6 +74,12 @@ Public Class FlowsheetSurfaceControl
             End If
         End If
 
+        DoubleClickHandler(sender, e)
+
+    End Sub
+
+    Public Sub DoubleClickHandler(sender As Object, e As MouseEventArgs)
+
         Dim obj = FlowsheetSurface.SelectedObject
 
         If (obj Is Nothing) Then
@@ -176,6 +182,7 @@ Public Class FlowsheetSurfaceControl
 
         End If
 
+
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
@@ -196,6 +203,13 @@ Public Class FlowsheetSurfaceControl
                 Exit Sub
             End If
         End If
+
+        SingleClickHandler(sender, e)
+
+    End Sub
+
+    Public Sub SingleClickHandler(sender As Object, e As MouseEventArgs)
+
 
         If e.Button = Windows.Forms.MouseButtons.Left Then
 
@@ -256,6 +270,7 @@ Public Class FlowsheetSurfaceControl
         End If
 
         RaiseEvent ObjectSelected(FlowsheetObject)
+
 
     End Sub
 

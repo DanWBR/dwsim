@@ -519,7 +519,6 @@ Public Class MaterialStreamEditor
 
     End Sub
 
-
     Sub PopulatePropGrid(grid As DataGridView, p As Interfaces.IPhase)
 
         grid.ReadOnly = True

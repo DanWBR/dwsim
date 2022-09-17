@@ -64,14 +64,122 @@ Public Class FlowsheetSurfaceGLControl
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Me.MouseDoubleClick
+
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
+            If FlowsheetObject.BidirectionalSolver.Activated Then
+                FlowsheetObject.BidirectionalSolver.ObjectDoubleClickAction(sender, e)
+                Exit Sub
+            End If
+        End If
+
+        DoubleClickHandler(sender, e)
+
+    End Sub
+
+    Public Sub DoubleClickHandler(sender As Object, e As MouseEventArgs)
+
         Dim obj = FlowsheetSurface.SelectedObject
+
         If (obj Is Nothing) Then
+
             FlowsheetSurface.ZoomAll(Width, Height)
             FlowsheetSurface.ZoomAll(Width, Height)
             FlowsheetObject.FormSurface.TSTBZoom.Text = FlowsheetSurface.Zoom.ToString("###%")
             Invalidate()
             Invalidate()
+
+        Else
+
+            Select Case Me.FlowsheetSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_Button
+                    Dim btn = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Shapes.ButtonGraphic)
+                    Dim f As New FormEditFlowsheetButton() With {.Flowsheet = FlowsheetObject, .ButtonObject = btn}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_HTMLText
+                    Dim rtg = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.HTMLTextGraphic)
+                    Dim f As New FormHTMLEditor()
+                    f.Editor1.Html = rtg.Text
+                    f.ShowDialog(Me)
+                    rtg.Text = f.Editor1.Html
+                Case ObjectType.GO_Table
+                    Dim f As New FormConfigurePropertyTable() With {.Table = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_SpreadsheetTable
+                    Dim f As New FormConfigureSpreadsheetTable() With {.Table = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_MasterTable
+                    Dim f As New FormConfigureMasterTable() With {.Table = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_Chart
+                    Dim f As New FormConfigureChartObject() With {.Chart = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.FlowsheetUO
+                    Dim myobj As UnitOperations.UnitOperations.Flowsheet = FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+                    If My.Computer.Keyboard.ShiftKeyDown Then
+                        Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
+                        With viewform
+                            .Text = FlowsheetSurface.SelectedObject.Tag
+                            .fsuo = myobj
+                            .ShowDialog()
+                            .Dispose()
+                        End With
+                        viewform = Nothing
+                    Else
+                        If myobj.Initialized Then
+                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
+                            With viewform
+                                .Text = FlowsheetSurface.SelectedObject.Tag
+                                .fsuo = myobj
+                                .Show(FlowsheetObject.dckPanel)
+                            End With
+                        Else
+                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Editor
+                            With viewform
+                                .Text = FlowsheetSurface.SelectedObject.Tag
+                                .fsuo = myobj
+                                .ShowDialog()
+                                .Dispose()
+                            End With
+                            viewform = Nothing
+                        End If
+                    End If
+                Case ObjectType.CapeOpenUO
+                    Dim myobj As CapeOpenUO = FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+                    myobj.Edit()
+                Case ObjectType.CustomUO
+                    Dim myobj As CustomUO = FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+                    If Not DWSIM.App.IsRunningOnMono Then
+                        Dim f As New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = myobj}
+                        myobj.FlowSheet.DisplayForm(f)
+                    Else
+                        Dim f As New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = myobj}
+                        myobj.FlowSheet.DisplayForm(f)
+                    End If
+            End Select
+
+            If My.Settings.DoubleClickToEdit Then
+                If FlowsheetObject.SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then
+                    If Not My.Settings.EnableMultipleObjectEditors Then
+                        For Each sobj In FlowsheetObject.SimulationObjects.Values
+                            sobj.CloseEditForm()
+                            If FlowsheetObject.DynamicMode Then sobj.CloseDynamicsEditForm()
+                        Next
+                    End If
+                    FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
+                    If FlowsheetObject.DynamicMode And FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).HasPropertiesForDynamicMode Then
+                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
+                    End If
+                    EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
+                    If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
+                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                    End If
+                End If
+            End If
+
+            obj.DoubleClickAction?.Invoke(obj)
+
         End If
+
 
     End Sub
 
@@ -86,6 +194,20 @@ Public Class FlowsheetSurfaceGLControl
 #Region "Events"
 
     Public Sub FlowsheetDesignSurface_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
+
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
+            If FlowsheetObject.BidirectionalSolver.Activated Then
+                FlowsheetObject.BidirectionalSolver.ObjectClickAction(sender, e)
+                Exit Sub
+            End If
+        End If
+
+        SingleClickHandler(sender, e)
+
+    End Sub
+
+    Public Sub SingleClickHandler(sender As Object, e As MouseEventArgs)
+
 
         If e.Button = Windows.Forms.MouseButtons.Left Then
 
@@ -102,19 +224,23 @@ Public Class FlowsheetSurfaceGLControl
 
                 If FlowsheetObject.SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then
 
-                    If Not My.Settings.EnableMultipleObjectEditors Then
-                        For Each obj In FlowsheetObject.SimulationObjects.Values
-                            obj.CloseEditForm()
-                            If FlowsheetObject.DynamicMode Then obj.CloseDynamicsEditForm()
-                        Next
-                    End If
-                    FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
-                    If FlowsheetObject.DynamicMode And FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).HasPropertiesForDynamicMode Then
-                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
-                    End If
-                    EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
-                    If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
-                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                    If Not FlowsheetSurface.ControlPanelMode Then
+                        If Not My.Settings.EnableMultipleObjectEditors Then
+                            For Each obj In FlowsheetObject.SimulationObjects.Values
+                                obj.CloseEditForm()
+                                If FlowsheetObject.DynamicMode Then obj.CloseDynamicsEditForm()
+                            Next
+                        End If
+                        If Not My.Settings.DoubleClickToEdit Then
+                            FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
+                            If FlowsheetObject.DynamicMode And FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).HasPropertiesForDynamicMode Then
+                                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
+                            End If
+                            EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
+                            If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
+                                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                            End If
+                        End If
                     End If
 
                     Focus()
@@ -142,6 +268,7 @@ Public Class FlowsheetSurfaceGLControl
         End If
 
         RaiseEvent ObjectSelected(FlowsheetObject)
+
 
     End Sub
 
