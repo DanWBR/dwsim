@@ -44,13 +44,16 @@ Partial Class FormSimulWizard
         Me.ogc1 = New System.Windows.Forms.DataGridView()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.casno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCAS = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.WizardPage3 = New AeroWizard.WizardPage()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.rbSVLLE = New System.Windows.Forms.RadioButton()
@@ -63,6 +66,8 @@ Partial Class FormSimulWizard
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.DataGridViewPP = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Index = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column10 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,6 +78,7 @@ Partial Class FormSimulWizard
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.WizardPage5 = New AeroWizard.WizardPage()
         Me.btnCreateNewUnits = New System.Windows.Forms.Button()
         Me.btnCloneUnits = New System.Windows.Forms.Button()
@@ -97,11 +103,13 @@ Partial Class FormSimulWizard
         Me.WizardPage2.SuspendLayout()
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage3.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox12.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage5.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsAddComps.SuspendLayout()
@@ -215,7 +223,7 @@ Partial Class FormSimulWizard
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
         Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.colAdd, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
+        Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.colAdd, Me.colName, Me.colCAS, Me.Column8, Me.colFormula, Me.Column7, Me.Column5})
         Me.ogc1.Name = "ogc1"
         Me.ogc1.RowHeadersVisible = False
         Me.ogc1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -241,19 +249,19 @@ Partial Class FormSimulWizard
         Me.colAdd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.colAdd.TrueValue = ""
         '
-        'Column6
+        'colName
         '
-        Me.Column6.FillWeight = 40.43147!
-        resources.ApplyResources(Me.Column6, "Column6")
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
+        Me.colName.FillWeight = 40.43147!
+        resources.ApplyResources(Me.colName, "colName")
+        Me.colName.Name = "colName"
+        Me.colName.ReadOnly = True
         '
-        'casno
+        'colCAS
         '
-        Me.casno.FillWeight = 25.26967!
-        resources.ApplyResources(Me.casno, "casno")
-        Me.casno.Name = "casno"
-        Me.casno.ReadOnly = True
+        Me.colCAS.FillWeight = 25.26967!
+        resources.ApplyResources(Me.colCAS, "colCAS")
+        Me.colCAS.Name = "colCAS"
+        Me.colCAS.ReadOnly = True
         '
         'Column8
         '
@@ -262,12 +270,12 @@ Partial Class FormSimulWizard
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
         '
-        'Column9
+        'colFormula
         '
-        Me.Column9.FillWeight = 20.21574!
-        resources.ApplyResources(Me.Column9, "Column9")
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
+        Me.colFormula.FillWeight = 20.21574!
+        resources.ApplyResources(Me.colFormula, "colFormula")
+        Me.colFormula.Name = "colFormula"
+        Me.colFormula.ReadOnly = True
         '
         'Column7
         '
@@ -290,6 +298,9 @@ Partial Class FormSimulWizard
         'WizardPage3
         '
         resources.ApplyResources(Me.WizardPage3, "WizardPage3")
+        Me.WizardPage3.Controls.Add(Me.PictureBox1)
+        Me.WizardPage3.Controls.Add(Me.Label10)
+        Me.WizardPage3.Controls.Add(Me.Label9)
         Me.WizardPage3.Controls.Add(Me.FlowLayoutPanel1)
         Me.WizardPage3.Controls.Add(Me.Button8)
         Me.WizardPage3.Controls.Add(Me.LinkLabel2)
@@ -297,8 +308,29 @@ Partial Class FormSimulWizard
         Me.WizardPage3.Controls.Add(Me.GroupBox6)
         Me.WizardPage3.Controls.Add(Me.GroupBox12)
         Me.WizardPage3.Controls.Add(Me.Label4)
+        Me.WizardPage3.Controls.Add(Me.PictureBox2)
         Me.WizardPage3.Name = "WizardPage3"
         Me.ToolTip1.SetToolTip(Me.WizardPage3, resources.GetString("WizardPage3.ToolTip"))
+        '
+        'PictureBox1
+        '
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'FlowLayoutPanel1
         '
@@ -387,7 +419,7 @@ Partial Class FormSimulWizard
         Me.DataGridViewPP.AllowUserToResizeRows = False
         Me.DataGridViewPP.BackgroundColor = System.Drawing.Color.White
         Me.DataGridViewPP.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.DataGridViewPP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Column10, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3})
+        Me.DataGridViewPP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Index, Me.Column6, Me.Column10, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3})
         Me.DataGridViewPP.MultiSelect = False
         Me.DataGridViewPP.Name = "DataGridViewPP"
         Me.DataGridViewPP.ReadOnly = True
@@ -403,12 +435,26 @@ Partial Class FormSimulWizard
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
         '
+        'Index
+        '
+        resources.ApplyResources(Me.Index, "Index")
+        Me.Index.Name = "Index"
+        Me.Index.ReadOnly = True
+        '
+        'Column6
+        '
+        resources.ApplyResources(Me.Column6, "Column6")
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
         'Column10
         '
         resources.ApplyResources(Me.Column10, "Column10")
         Me.Column10.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
+        Me.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'DataGridViewTextBoxColumn2
         '
@@ -490,6 +536,14 @@ Partial Class FormSimulWizard
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
         Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        '
+        'PictureBox2
+        '
+        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
+        Me.PictureBox2.Image = Global.DWSIM.My.Resources.Resources.icons8_beta_button
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
         '
         'WizardPage5
         '
@@ -650,12 +704,14 @@ Partial Class FormSimulWizard
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage3.ResumeLayout(False)
         Me.WizardPage3.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.FlowLayoutPanel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage5.ResumeLayout(False)
         Me.WizardPage5.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -708,22 +764,28 @@ Partial Class FormSimulWizard
     Friend WithEvents rbSVLLE As RadioButton
     Friend WithEvents Label5 As Label
     Public WithEvents DataGridViewPP As DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewImageColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents casno As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Public WithEvents txtAdded As TextBox
     Public WithEvents Label6 As Label
     Friend WithEvents ImportFromThermoChemicalsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents rbNoFlash As RadioButton
     Friend WithEvents rbVLLE As RadioButton
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
+    Friend WithEvents colName As DataGridViewTextBoxColumn
+    Friend WithEvents colCAS As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents colFormula As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewCheckBoxColumn
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents Index As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewImageColumn
+    Friend WithEvents Column10 As DataGridViewImageColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
 End Class

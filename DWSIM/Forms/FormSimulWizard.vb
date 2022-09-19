@@ -35,8 +35,6 @@ Public Class FormSimulWizard
     Private CompoundList As List(Of String)
     Private Indexes As Dictionary(Of String, Integer)
 
-    Private StillTyping As Boolean = False
-
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -91,14 +89,14 @@ Public Class FormSimulWizard
             'property packages
             Me.DataGridViewPP.Rows.Clear()
             For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
-                Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
+                Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, 0, Nothing, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
 
             If Not FormMain.IsPro Then
                 ProFeatures.Functions.AddProPPs(DataGridViewPP)
             End If
 
-            DataGridViewPP.Sort(DataGridViewPP.Columns(2), System.ComponentModel.ListSortDirection.Ascending)
+            DataGridViewPP.Sort(DataGridViewPP.Columns(3), System.ComponentModel.ListSortDirection.Ascending)
 
         Else
 
@@ -152,29 +150,6 @@ Public Class FormSimulWizard
 
             ogc1.ClearSelection()
 
-            Dim needselecting As Boolean = True
-
-            For Each r As DataGridViewRow In ogc1.Rows
-                If Not r.Cells(2).Value Is Nothing Then
-                    If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                       r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                       r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
-                        r.Visible = True
-                        If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                           r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                           r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
-                            r.Selected = True
-                        End If
-                    Else
-                        r.Visible = False
-                    End If
-                End If
-            Next
-
-            If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
-                ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
-            End If
-
             If txtSearch.Text = "" Then
                 For Each r As DataGridViewRow In ogc1.Rows
                     r.Selected = False
@@ -183,15 +158,29 @@ Public Class FormSimulWizard
                 ogc1.FirstDisplayedScrollingRowIndex = 0
                 ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
             Else
+                For Each r As DataGridViewRow In ogc1.Rows
+                    If Not r.Cells(2).Value Is Nothing Then
+                        If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                            r.Visible = True
+                            If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                                r.Selected = True
+                            End If
+                        Else
+                            r.Visible = False
+                        End If
+                    End If
+                Next
+                ogc1.Sort(colName, System.ComponentModel.ListSortDirection.Ascending)
                 If ogc1.SelectedRows.Count > 0 Then
                     ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
                 End If
             End If
 
         Catch ex As Exception
-
-            'ogc1.FirstDisplayedScrollingRowIndex = 0
-            'ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
 
         End Try
 
@@ -1136,6 +1125,190 @@ Public Class FormSimulWizard
                 End If
             Next
         End If
+
+    End Sub
+
+    Public Sub SetupPPRecommendations()
+
+        Dim names = CurrentFlowsheet.SelectedCompounds.Keys.ToList()
+
+        If names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Water + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.EOS, PackageType.CorrespondingStates
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 And names.Where(Function(x) x.Contains("ane") Or x.Contains("ene") Or x.Contains("ine")).Count > 0 Then
+            'Aldehydes + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Alcohols + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
+            'Water + C4+ Alcohols
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Hydrocarbons
+            rbVLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.EOS, PackageType.CorrespondingStates, PackageType.VaporPressure
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
+            'Alcohols 
+            rbVLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 Then
+            'Aldehydes
+            rbVLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                Select Case pp.PackageType
+                    Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    Case Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                End Select
+            Next
+        Else
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                row.Cells(1).Value = 1
+                row.Cells(2).Value = My.Resources.icons8_check_mark
+                ChangeRowForeColor(row, Color.Blue)
+            Next
+        End If
+
+        If names.Contains("Hydrogen") Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                End If
+            Next
+        End If
+
+        If names.Contains("Water") And names.Count = 1 Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("Steam") Or
+                    row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                    row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                Else
+                    row.Cells(1).Value = 0
+                    row.Cells(2).Value = My.Resources.icons8_cross_mark
+                    ChangeRowForeColor(row, Color.LightGray)
+                End If
+            Next
+        ElseIf names.Count = 1 Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                    row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                Else
+                    row.Cells(1).Value = 0
+                    row.Cells(2).Value = My.Resources.icons8_cross_mark
+                    ChangeRowForeColor(row, Color.LightGray)
+                End If
+            Next
+        End If
+
+        DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+
+    End Sub
+
+    Private Sub ChangeRowForeColor(row As DataGridViewRow, color As Color)
+
+        For Each cell As DataGridViewCell In row.Cells
+            cell.Style.ForeColor = color
+        Next
+
+    End Sub
+
+    Private Sub WizardPage2_Commit(sender As Object, e As AeroWizard.WizardPageConfirmEventArgs) Handles WizardPage2.Commit
+
+        SetupPPRecommendations()
 
     End Sub
 

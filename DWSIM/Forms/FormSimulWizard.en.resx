@@ -193,23 +193,32 @@ Click "Next" to continue.</value>
   <data name="colAdd.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="Column6.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="casno.HeaderText" xml:space="preserve">
-    <value>CAS Number</value>
-  </data>
   <data name="Column8.HeaderText" xml:space="preserve">
     <value>Type</value>
-  </data>
-  <data name="Column9.HeaderText" xml:space="preserve">
-    <value>Formula</value>
   </data>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Source Database</value>
   </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>698, 286</value>
+  </data>
+  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 299</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 303</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 15</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>,  but you can use all available packages without restrictions.</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 15</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Recommended packages are marked with a</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 20</value>
@@ -218,7 +227,7 @@ Click "Next" to continue.</value>
     <value>Override Phase Equilibria calculation settings?</value>
   </data>
   <data name="rbSVLLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 3</value>
+    <value>254, 3</value>
   </data>
   <data name="rbSVLLE.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 19</value>
@@ -227,7 +236,7 @@ Click "Next" to continue.</value>
     <value>Leave as default (SVLLE)</value>
   </data>
   <data name="rbVLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 3</value>
+    <value>411, 3</value>
   </data>
   <data name="rbVLE.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 19</value>
@@ -236,10 +245,10 @@ Click "Next" to continue.</value>
     <value>VLE (faster)</value>
   </data>
   <data name="rbVLLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>504, 3</value>
+    <value>501, 3</value>
   </data>
   <data name="rbNoFlash.Location" type="System.Drawing.Point, System.Drawing">
-    <value>583, 3</value>
+    <value>580, 3</value>
   </data>
   <data name="rbNoFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 19</value>
@@ -262,11 +271,8 @@ Click "Next" to continue.</value>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
     <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
   </data>
-  <data name="DataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="Column10.Width" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="Column6.ToolTipText" xml:space="preserve">
+    <value>Recommended</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Type</value>

@@ -1137,7 +1137,7 @@ Public Class FormFlowsheet
                                                                                 Me.FormSurface.UpdateSelectedObject()
                                                                             End Sub)
                                                             End If
-                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown)
                                                      End Function)
             t.ContinueWith(Sub(tres)
                                RaiseEvent FinishedSolving(Me, New EventArgs())

@@ -26,6 +26,10 @@ Public Class GraphicsSurface
 
     Public Event StatusUpdate(ByVal sender As Object, ByVal e As StatusUpdateEventArgs)
 
+    Public Event ObjectsConnected(sender As Object, e As ObjectConnectionChangedArgs)
+
+    Public Event ObjectsDisconnected(sender As Object, e As ObjectConnectionChangedArgs)
+
 #End Region
 
     Private Const MinimumGridSize As Single = 10
@@ -1349,6 +1353,7 @@ Public Class GraphicsSurface
                         DrawingObjects.Add(myCon)
                     End If
                 End With
+                RaiseEvent ObjectsConnected(Me, New ObjectConnectionChangedArgs(gObjFrom, gObjTo))
             Else
                 Throw New Exception("The requested connection between the given objects cannot be done.")
             End If
@@ -1416,6 +1421,7 @@ Public Class GraphicsSurface
                     DeleteSelectedObject(SelObj.EnergyConnector.AttachedConnector)
                 End If
             End If
+            RaiseEvent ObjectsDisconnected(Me, New ObjectConnectionChangedArgs(gObjFrom, gObjTo))
         End If
 
     End Sub

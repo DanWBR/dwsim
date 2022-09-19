@@ -1050,29 +1050,6 @@ Public Class FormSimulSettings
 
             ogc1.ClearSelection()
 
-            Dim needselecting As Boolean = True
-
-            For Each r As DataGridViewRow In ogc1.Rows
-                If Not r.Cells(2).Value Is Nothing Then
-                    If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                       r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                       r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
-                        r.Visible = True
-                        If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                           r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                           r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
-                            r.Selected = True
-                        End If
-                    Else
-                        r.Visible = False
-                    End If
-                End If
-            Next
-
-            If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
-                ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
-            End If
-
             If txtSearch.Text = "" Then
                 For Each r As DataGridViewRow In ogc1.Rows
                     r.Selected = False
@@ -1081,6 +1058,23 @@ Public Class FormSimulSettings
                 ogc1.FirstDisplayedScrollingRowIndex = 0
                 ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
             Else
+                For Each r As DataGridViewRow In ogc1.Rows
+                    If Not r.Cells(2).Value Is Nothing Then
+                        If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                           r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                           r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                            r.Visible = True
+                            If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                               r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                               r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                                r.Selected = True
+                            End If
+                        Else
+                            r.Visible = False
+                        End If
+                    End If
+                Next
+                ogc1.Sort(colName, System.ComponentModel.ListSortDirection.Ascending)
                 If ogc1.SelectedRows.Count > 0 Then
                     ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
                 End If
