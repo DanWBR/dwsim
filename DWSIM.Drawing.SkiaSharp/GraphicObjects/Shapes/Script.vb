@@ -295,7 +295,7 @@ Namespace GraphicObjects.Shapes
 
                     Case 2
 
-                    'Gas/Liquid Flows
+                        DrawIcon(canvas)
 
                     Case 3
 

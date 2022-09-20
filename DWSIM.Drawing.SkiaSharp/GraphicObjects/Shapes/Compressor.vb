@@ -42,28 +42,54 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            Dim myIC1 As New ConnectionPoint
-            myIC1.Position = New Point(X, Y + 0.5 * Height)
-            myIC1.Type = ConType.ConIn
-
-            Dim myIC2 As New ConnectionPoint
-            myIC2.Position = New Point(X + 0.5 * Width, Y + Height)
-            myIC2.Type = ConType.ConEn
-
-            Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(X + Width, Y + 0.5 * Height)
-            myOC1.Type = ConType.ConOut
-
-            Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
-            Me.EnergyConnector.Type = ConType.ConEn
-            Me.EnergyConnector.Direction = ConDir.Up
             Me.EnergyConnector.Active = False
+
+            Dim myIC1, myIC2, myOC1 As New ConnectionPoint
+
+            If DrawMode = 2 Then
+
+                myIC1.Position = New Point(X + 0.386 * Width, Y + 0.28 * Height)
+                myIC1.Type = ConType.ConIn
+                myIC1.Direction = ConDir.Down
+
+                myIC2.Position = New Point(X, Y + 0.5 * Height)
+                myIC2.Type = ConType.ConEn
+                myIC2.Direction = ConDir.Right
+
+                myOC1.Position = New Point(X + 0.906 * Width, Y + 0.374 * Height)
+                myOC1.Type = ConType.ConOut
+                myOC1.Direction = ConDir.Up
+
+            Else
+
+                myIC1.Position = New Point(X, Y)
+                myIC1.Type = ConType.ConIn
+                myIC1.Direction = ConDir.Down
+
+                myIC2.Position = New Point(X, Y + 0.5 * Height)
+                myIC2.Type = ConType.ConEn
+                myIC2.Direction = ConDir.Right
+
+                myOC1.Position = New Point(X + Width, Y + 0.3 * Height)
+                myOC1.Type = ConType.ConOut
+                myOC1.Direction = ConDir.Up
+
+            End If
 
             With InputConnectors
 
                 If .Count = 2 Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.386 * Width, Y + 0.28 * Height)
+                        .Item(1).Position = New Point(X, Y + 0.5 * Height)
+                        .Item(0).Direction = ConDir.Down
+                        .Item(1).Direction = ConDir.Right
+                    Else
+                        .Item(0).Position = New Point(X, Y)
+                        .Item(1).Position = New Point(X, Y + 0.5 * Height)
+                        .Item(0).Direction = ConDir.Down
+                        .Item(1).Direction = ConDir.Right
+                    End If
                 Else
                     .Add(myIC1)
                     .Add(myIC2)
@@ -71,14 +97,19 @@ Namespace GraphicObjects.Shapes
 
                 .Item(0).ConnectorName = "Inlet"
                 .Item(1).ConnectorName = "Energy Stream"
-                .Item(1).Direction = ConDir.Up
 
             End With
 
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.906 * Width, Y + 0.374 * Height)
+                        .Item(0).Direction = ConDir.Up
+                    Else
+                        .Item(0).Position = New Point(X + Width, Y + 0.3 * Height)
+                        .Item(0).Direction = ConDir.Up
+                    End If
                 Else
                     .Add(myOC1)
                 End If
@@ -98,9 +129,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-
             Dim myPen As New SKPaint()
-
 
             Dim rect As New SKRect(X, Y, X + Width, X + Height)
 
@@ -136,6 +165,8 @@ Namespace GraphicObjects.Shapes
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
+                    canvas.DrawPath(gp, myPen)
+
                 Case 1
 
                     'b/w
@@ -149,9 +180,11 @@ Namespace GraphicObjects.Shapes
 
                     End With
 
+                    canvas.DrawPath(gp, myPen)
+
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 
@@ -166,7 +199,6 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
 
             End Select
-            canvas.DrawPath(gp, myPen)
 
         End Sub
 

@@ -729,7 +729,8 @@ Namespace GraphicObjects
             ConnectorPath = path
 
             Select Case DrawMode
-                Case 0
+
+                Case 0, 2
 
                     'default
 

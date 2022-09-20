@@ -64,7 +64,11 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X, Y + 0.7 * Height)
+                    Else
+                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    End If
                 Else
                     .Add(myIC1)
                 End If
@@ -76,7 +80,11 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + Width, Y + 0.7 * Height)
+                    Else
+                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
+                    End If
                 Else
                     .Add(myOC1)
                 End If
@@ -149,7 +157,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

@@ -857,7 +857,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.tsbColorTheme, "tsbColorTheme")
         Me.tsbColorTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tsbColorTheme.Items.AddRange(New Object() {resources.GetString("tsbColorTheme.Items"), resources.GetString("tsbColorTheme.Items1")})
+        Me.tsbColorTheme.Items.AddRange(New Object() {resources.GetString("tsbColorTheme.Items"), resources.GetString("tsbColorTheme.Items1"), resources.GetString("tsbColorTheme.Items2")})
         Me.tsbColorTheme.Name = "tsbColorTheme"
         '
         'ToolStripSeparator21

@@ -1934,6 +1934,9 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Pump
 
                 Dim myPump As New PumpGraphic(mpx, mpy, 25, 25)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myPump.SetSize(New SKSize(40, 40))
+                End If
                 myPump.LineWidth = 2
                 myPump.Fill = True
                 myPump.FillColor = fillclr
@@ -1972,6 +1975,9 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Vessel
 
                 Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myVessel.SetSize(New SKSize(70, 60))
+                End If
                 myVessel.LineWidth = 2
                 myVessel.Fill = True
                 myVessel.FillColor = fillclr
@@ -2031,6 +2037,9 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Compressor
 
                 Dim myComp As New CompressorGraphic(mpx, mpy, 25, 25)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myComp.SetSize(New SKSize(50, 50))
+                End If
                 myComp.LineWidth = 2
                 myComp.Fill = True
                 myComp.FillColor = fillclr
@@ -2050,6 +2059,9 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Expander
 
                 Dim myComp As New TurbineGraphic(mpx, mpy, 25, 25)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myComp.SetSize(New SKSize(50, 50))
+                End If
                 myComp.LineWidth = 2
                 myComp.Fill = True
                 myComp.FillColor = fillclr
@@ -2106,6 +2118,9 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Pipe
 
                 Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 50, 10)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myPipe.SetSize(New SKSize(50, 20))
+                End If
                 myPipe.LineWidth = 2
                 myPipe.Fill = True
                 myPipe.FillColor = fillclr
@@ -2125,6 +2140,10 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Valve
 
                 Dim myValve As New ValveGraphic(mpx, mpy, 20, 20)
+                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 50, 10)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myValve.SetSize(New SKSize(30, 30))
+                End If
                 myValve.LineWidth = 2
                 myValve.Fill = True
                 myValve.FillColor = fillclr
@@ -2247,6 +2266,9 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.HeatExchanger
 
                 Dim myHeatExchanger As New HeatExchangerGraphic(mpx, mpy, 30, 30)
+                If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myHeatExchanger.SetSize(New SKSize(60, 60))
+                End If
                 myHeatExchanger.LineWidth = 2
                 myHeatExchanger.Fill = True
                 myHeatExchanger.FillColor = fillclr

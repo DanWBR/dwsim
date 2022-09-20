@@ -14,7 +14,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Vessel
             Me.Description = "Vapor-Liquid Separator"
-            EmbeddedResourceIconName = "vessel.png"
+            EmbeddedResourceIconName = "separator.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -105,13 +105,29 @@ Namespace GraphicObjects.Shapes
                     If .Count = 6 Then
                         .Add(myIC7)
                     End If
-                    .Item(0).Position = New Point(X + 0.25 * Width, Y + 1 / 7 * Height)
-                    .Item(1).Position = New Point(X + 0.25 * Width, Y + 2 / 7 * Height)
-                    .Item(2).Position = New Point(X + 0.25 * Width, Y + 3 / 7 * Height)
-                    .Item(3).Position = New Point(X + 0.25 * Width, Y + 4 / 7 * Height)
-                    .Item(4).Position = New Point(X + 0.25 * Width, Y + 5 / 7 * Height)
-                    .Item(5).Position = New Point(X + 0.25 * Width, Y + 6 / 7 * Height)
-                    .Item(6).Position = New Point(X + 0.25 * Width, Y + 1 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        .Item(1).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        .Item(2).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        .Item(3).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        .Item(4).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        .Item(5).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        .Item(6).Position = New Point(X + 0.453 * Width, Y + 0.2979 * Height)
+                        For i = 0 To 6
+                            .Item(i).Direction = ConDir.Down
+                        Next
+                    Else
+                        .Item(0).Position = New Point(X + 0.25 * Width, Y + 1 / 7 * Height)
+                        .Item(1).Position = New Point(X + 0.25 * Width, Y + 2 / 7 * Height)
+                        .Item(2).Position = New Point(X + 0.25 * Width, Y + 3 / 7 * Height)
+                        .Item(3).Position = New Point(X + 0.25 * Width, Y + 4 / 7 * Height)
+                        .Item(4).Position = New Point(X + 0.25 * Width, Y + 5 / 7 * Height)
+                        .Item(5).Position = New Point(X + 0.25 * Width, Y + 6 / 7 * Height)
+                        .Item(6).Position = New Point(X + 0.25 * Width, Y + 1 * Height)
+                        For i = 0 To 6
+                            .Item(i).Direction = ConDir.Right
+                        Next
+                    End If
                 Else
                     .Add(myIC1)
                     .Add(myIC2)
@@ -134,9 +150,21 @@ Namespace GraphicObjects.Shapes
                 If .Count = 2 Then .Add(myOC3)
 
                 If .Count <> 0 Then
-                    .Item(0).Position = New Point(X + 0.827 * Width, Y + 1 / 7 * Height)
-                    .Item(1).Position = New Point(X + 0.827 * Width, Y + 6 / 7 * Height)
-                    .Item(2).Position = New Point(X + 0.5 * Width, Y + Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.84 * Width, Y + 0.32 * Height)
+                        .Item(1).Position = New Point(X + Width, Y + 0.58 * Height)
+                        .Item(2).Position = New Point(X + Width, Y + 0.7 * Height)
+                        .Item(0).Direction = ConDir.Up
+                        .Item(1).Direction = ConDir.Right
+                        .Item(2).Direction = ConDir.Right
+                    Else
+                        .Item(0).Position = New Point(X + 0.827 * Width, Y + 1 / 7 * Height)
+                        .Item(1).Position = New Point(X + 0.827 * Width, Y + 6 / 7 * Height)
+                        .Item(2).Position = New Point(X + 0.5 * Width, Y + Height)
+                        .Item(0).Direction = ConDir.Right
+                        .Item(1).Direction = ConDir.Right
+                        .Item(2).Direction = ConDir.Down
+                    End If
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
@@ -216,7 +244,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

@@ -158,7 +158,9 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp, myPen2)
 
                 Case 2
-                    'Gas/Liquid Flows
+
+                    DrawIcon(canvas)
+
                 Case 3
                     'Temperature Gradients
                 Case 4

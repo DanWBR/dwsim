@@ -78,6 +78,24 @@ Namespace GraphicObjects
 
         End Sub
 
+        Friend Sub DrawIcon(canvas As SKCanvas)
+
+            If Image Is Nothing Then
+
+                Using streamBG = GetIconAsStream()
+                    Using bitmap = SKBitmap.Decode(streamBG)
+                        Image = SKImage.FromBitmap(bitmap)
+                    End Using
+                End Using
+
+            End If
+
+            Using p As New SKPaint With {.IsAntialias = False, .FilterQuality = SKFilterQuality.None}
+                canvas.DrawImage(Image, New SKRect(X, Y, X + Width, Y + Height), p)
+            End Using
+
+        End Sub
+
         Public Sub DrawCalculatingMode(ByVal canvas As SKCanvas)
 
             If CalculatingImage Is Nothing Then
@@ -597,7 +615,7 @@ Namespace GraphicObjects
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(g)
 
                 Case 3
 
@@ -613,56 +631,60 @@ Namespace GraphicObjects
 
             End Select
 
-            Dim rect2 As New SKRect(X + (0.25 - 0.14) * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.25 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)
-            Dim rect3 As New SKRect(X + 0.75 * Width, Y + 0.1 * Height, X + 0.75 * Width + 0.14 * Width, Y + 0.1 * Height + 0.14 * Height)
-            Dim rect4 As New SKRect(X + 0.75 * Width, Y + (0.9 - 0.14) * Height, X + 0.75 * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
+            If DrawMode <> 2 Then
 
-            If DrawMode = 0 Then
+                Dim rect2 As New SKRect(X + (0.25 - 0.14) * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.25 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)
+                Dim rect3 As New SKRect(X + 0.75 * Width, Y + 0.1 * Height, X + 0.75 * Width + 0.14 * Width, Y + 0.1 * Height + 0.14 * Height)
+                Dim rect4 As New SKRect(X + 0.75 * Width, Y + (0.9 - 0.14) * Height, X + 0.75 * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor.WithAlpha(50)
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                End With
+                If DrawMode = 0 Then
 
-                g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, gradPen)
-                g.DrawRect(rect2, gradPen)
-                g.DrawRect(rect3, gradPen)
-                g.DrawRect(rect4, gradPen)
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, gradPen)
+                    g.DrawRect(rect2, gradPen)
+                    g.DrawRect(rect3, gradPen)
+                    g.DrawRect(rect4, gradPen)
+
+                End If
+
+                g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, myPen)
+                g.DrawRect(rect2, myPen)
+                g.DrawRect(rect3, myPen)
+                g.DrawRect(rect4, myPen)
+
+                Dim trect As New SKRect(0, 0, 2, 2)
+                tPen.GetTextPath(TypeName, 0, 0).GetBounds(trect)
+                Dim size As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)
+
+                Dim ax, ay As Integer
+                If Me.FlippedH Then
+                    ax = Me.X + (Me.Width - size.Width) / 2 - 1.0
+                    ay = Me.Y + Me.Height * 0.8 - size.Height
+                Else
+                    ax = Me.X + (Me.Width - size.Width) / 2 - 1.0
+                    ay = Me.Y + Me.Height * 0.8 - size.Height
+                End If
+
+                Using New SKAutoCanvasRestore(g)
+                    StraightCanvas(g)
+                    g.DrawText(TypeName, ax, ay, tPen)
+                End Using
+
+                'Draw interior packing
+
+                g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.3 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.3 * Height)}, myPen)
+                g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.7 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.7 * Height)}, myPen)
+                g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.3 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.7 * Height)}, myPen)
+                g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.7 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.3 * Height)}, myPen)
 
             End If
-
-            g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, myPen)
-            g.DrawRect(rect2, myPen)
-            g.DrawRect(rect3, myPen)
-            g.DrawRect(rect4, myPen)
-
-            Dim trect As New SKRect(0, 0, 2, 2)
-            tPen.GetTextPath(TypeName, 0, 0).GetBounds(trect)
-            Dim size As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)
-
-            Dim ax, ay As Integer
-            If Me.FlippedH Then
-                ax = Me.X + (Me.Width - size.Width) / 2 - 1.0
-                ay = Me.Y + Me.Height * 0.8 - size.Height
-            Else
-                ax = Me.X + (Me.Width - size.Width) / 2 - 1.0
-                ay = Me.Y + Me.Height * 0.8 - size.Height
-            End If
-
-            Using New SKAutoCanvasRestore(g)
-                StraightCanvas(g)
-                g.DrawText(TypeName, ax, ay, tPen)
-            End Using
-
-            'Draw interior packing
-
-            g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.3 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.3 * Height)}, myPen)
-            g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.7 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.7 * Height)}, myPen)
-            g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.3 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.7 * Height)}, myPen)
-            g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.7 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.3 * Height)}, myPen)
 
         End Sub
 

@@ -20,6 +20,8 @@ Namespace GraphicObjects
 
         Friend EmbeddedResourceIconName As String = ""
 
+        Friend Image As SKImage
+
         Public Function GetFont() As SKTypeface
 
             Select Case FontStyle
@@ -490,7 +492,14 @@ Namespace GraphicObjects
 
             If EmbeddedResourceIconName <> "" Then
 
-                Return Me.GetType().Assembly.GetManifestResourceStream(String.Format("DWSIM.Drawing.SkiaSharp.{0}", EmbeddedResourceIconName))
+                Using us = Me.GetType().Assembly.GetManifestResourceStream(String.Format("DWSIM.Drawing.SkiaSharp.{0}", EmbeddedResourceIconName))
+
+                    Dim ms As New MemoryStream()
+                    us.CopyTo(ms)
+                    ms.Position = 0
+                    Return ms
+
+                End Using
 
             Else
 
