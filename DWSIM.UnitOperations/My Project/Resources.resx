@@ -517,4 +517,79 @@
   <data name="reactor_reaktoro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reactor_reaktoro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="compressor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\compressor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cooler" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cooler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="energy_stream" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\energy_stream.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="expander" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\expander.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flowsheet_block" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flowsheet_block.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heater" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\heater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heat_exchanger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\heat_exchanger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="linked_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\linked_table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="master_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\master_table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="material_stream" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\material_stream.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mixer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mixer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pfr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pfr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pipe_segment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pipe_segment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="property_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\property_table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pump" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pump.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="python_script" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\python_script.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reactor_conversion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reactor_conversion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reactor_equilibrium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reactor_equilibrium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reactor_gibbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reactor_gibbs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="separator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\separator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="splitter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\splitter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tank" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="valve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_cstr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cstr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

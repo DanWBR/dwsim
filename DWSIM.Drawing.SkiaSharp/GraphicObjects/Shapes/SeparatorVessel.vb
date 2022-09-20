@@ -14,6 +14,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Vessel
             Me.Description = "Vapor-Liquid Separator"
+            EmbeddedResourceIconName = "vessel.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

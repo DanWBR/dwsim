@@ -6316,7 +6316,7 @@ Namespace Streams
         Public Property EditorState As String = "{}"
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.stream_mat_32
+            Return My.Resources.material_stream
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

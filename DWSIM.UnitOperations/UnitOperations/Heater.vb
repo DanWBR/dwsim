@@ -849,7 +849,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_heater_32
+            Return My.Resources.heater
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

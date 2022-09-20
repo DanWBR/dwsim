@@ -480,7 +480,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_tank_32
+            Return My.Resources.tank
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

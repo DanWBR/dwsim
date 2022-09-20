@@ -14,6 +14,7 @@ Namespace GraphicObjects.Shapes
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger
             Me.Description = "Heat Exchanger"
             CreateConnectors(2, 2)
+            EmbeddedResourceIconName = "heat_exchanger.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

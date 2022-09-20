@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Compressor
             Me.Description = "Adiabatic Compressor"
+            EmbeddedResourceIconName = "compressor.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

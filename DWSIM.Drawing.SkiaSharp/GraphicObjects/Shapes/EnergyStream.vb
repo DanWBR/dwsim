@@ -15,6 +15,7 @@ Namespace GraphicObjects.Shapes
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream
             Me.Description = "Energy Stream"
             Me.IsEnergyStream = True
+            EmbeddedResourceIconName = "energy_stream.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

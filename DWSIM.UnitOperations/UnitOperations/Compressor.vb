@@ -656,7 +656,7 @@ Namespace UnitOperations
 
                         End Function
 
-                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, Pi, P2i, 0.00001, 100)
+                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i * 0.7, P2i * 1.3, 0.00001, 100)
 
                     AdiabaticCoefficient = n_isent
 
@@ -1231,7 +1231,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_compr_32
+            Return My.Resources.compressor
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

@@ -2295,7 +2295,7 @@ Final3:     T = bbb
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_pipe_32
+            Return My.Resources.pipe_segment
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

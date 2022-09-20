@@ -259,7 +259,7 @@ Namespace Streams
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.stream_en_32
+            Return My.Resources.energy_stream
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

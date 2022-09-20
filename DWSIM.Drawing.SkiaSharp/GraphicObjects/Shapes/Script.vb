@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.CustomUO
             Me.Description = "Python Script Block"
+            EmbeddedResourceIconName = "python_script.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

@@ -14,6 +14,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream
             Me.Description = "Material Stream"
+            EmbeddedResourceIconName = "material_stream.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

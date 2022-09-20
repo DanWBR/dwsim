@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.RCT_PFR
             Me.Description = "PFR"
+            EmbeddedResourceIconName = "pfr.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

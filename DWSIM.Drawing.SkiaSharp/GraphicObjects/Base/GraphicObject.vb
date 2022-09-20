@@ -1,4 +1,5 @@
 Imports System.Collections.Generic
+Imports System.IO
 Imports System.Linq
 Imports System.Xml.Linq
 Imports DWSIM.Interfaces
@@ -16,6 +17,8 @@ Namespace GraphicObjects
         Public Property BoldItalicTypeFace As SKTypeface
 
         Public Property FontStyle As Enums.GraphicObjects.FontStyle = Enums.GraphicObjects.FontStyle.Regular Implements IGraphicObject.FontStyle
+
+        Friend EmbeddedResourceIconName As String = ""
 
         Public Function GetFont() As SKTypeface
 
@@ -140,10 +143,10 @@ Namespace GraphicObjects
 
                 For Each cp As ConnectionPoint In OutputConnectors
                     If cp.IsAttached And Not cp.AttachedConnector Is Nothing Then
-                        elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached), _
+                        elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached),
                                                                                         New XAttribute("ConnType", cp.Type.ToString),
-                                                                                        New XAttribute("AttachedToObjID", cp.AttachedConnector.AttachedTo.Name.ToString), _
-                                                                                        New XAttribute("AttachedToConnIndex", cp.AttachedConnector.AttachedToConnectorIndex), _
+                                                                                        New XAttribute("AttachedToObjID", cp.AttachedConnector.AttachedTo.Name.ToString),
+                                                                                        New XAttribute("AttachedToConnIndex", cp.AttachedConnector.AttachedToConnectorIndex),
                                                                                         New XAttribute("AttachedToEnergyConn", cp.AttachedConnector.AttachedToEnergy.ToString)))
                     Else
                         elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached)))
@@ -154,11 +157,11 @@ Namespace GraphicObjects
 
                 If EnergyConnector.IsAttached Then
                     elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", EnergyConnector.IsAttached),
-                                                                                    New XAttribute("AttachedToObjID", EnergyConnector.AttachedConnector.AttachedTo.Name.ToString), _
-                                                                                        New XAttribute("AttachedToConnIndex", EnergyConnector.AttachedConnector.AttachedToConnectorIndex), _
-                                                                                        New XAttribute("AttachedToEnergyConn", EnergyConnector.AttachedConnector.AttachedToEnergy.ToString)), _
-                                                                                        New XAttribute("AttachedFromObjID", EnergyConnector.AttachedConnector.AttachedFrom.Name.ToString), _
-                                                                                        New XAttribute("AttachedFromConnIndex", EnergyConnector.AttachedConnector.AttachedFromConnectorIndex), _
+                                                                                    New XAttribute("AttachedToObjID", EnergyConnector.AttachedConnector.AttachedTo.Name.ToString),
+                                                                                        New XAttribute("AttachedToConnIndex", EnergyConnector.AttachedConnector.AttachedToConnectorIndex),
+                                                                                        New XAttribute("AttachedToEnergyConn", EnergyConnector.AttachedConnector.AttachedToEnergy.ToString)),
+                                                                                        New XAttribute("AttachedFromObjID", EnergyConnector.AttachedConnector.AttachedFrom.Name.ToString),
+                                                                                        New XAttribute("AttachedFromConnIndex", EnergyConnector.AttachedConnector.AttachedFromConnectorIndex),
                                                                                         New XAttribute("AttachedFromEnergyConn", EnergyConnector.AttachedConnector.AttachedFromEnergy.ToString))
                 Else
                     elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", EnergyConnector.IsAttached)))
@@ -169,11 +172,11 @@ Namespace GraphicObjects
                 For Each cp As ConnectionPoint In SpecialConnectors
                     If cp.IsAttached Then
                         elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached),
-                                                                                        New XAttribute("AttachedToObjID", cp.AttachedConnector.AttachedTo.Name.ToString), _
-                                                                                        New XAttribute("AttachedToConnIndex", cp.AttachedConnector.AttachedToConnectorIndex), _
-                                                                                        New XAttribute("AttachedToEnergyConn", cp.AttachedConnector.AttachedToEnergy.ToString)), _
-                                                                                        New XAttribute("AttachedFromObjID", cp.AttachedConnector.AttachedFrom.Name.ToString), _
-                                                                                        New XAttribute("AttachedFromConnIndex", cp.AttachedConnector.AttachedFromConnectorIndex), _
+                                                                                        New XAttribute("AttachedToObjID", cp.AttachedConnector.AttachedTo.Name.ToString),
+                                                                                        New XAttribute("AttachedToConnIndex", cp.AttachedConnector.AttachedToConnectorIndex),
+                                                                                        New XAttribute("AttachedToEnergyConn", cp.AttachedConnector.AttachedToEnergy.ToString)),
+                                                                                        New XAttribute("AttachedFromObjID", cp.AttachedConnector.AttachedFrom.Name.ToString),
+                                                                                        New XAttribute("AttachedFromConnIndex", cp.AttachedConnector.AttachedFromConnectorIndex),
                                                                                         New XAttribute("AttachedFromEnergyConn", cp.AttachedConnector.AttachedFromEnergy.ToString))
                     Else
                         elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached)))
@@ -250,7 +253,7 @@ Namespace GraphicObjects
             Me.New(New SKPoint(posX, posY), graphicSize)
         End Sub
 
-        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, _
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer,
                 ByVal width As Integer, ByVal height As Integer)
             Me.New(New SKPoint(posX, posY), New SKSize(width, height))
         End Sub
@@ -270,12 +273,12 @@ Namespace GraphicObjects
             Me.AutoSize = False
         End Sub
 
-        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, _
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer,
             ByVal graphicSize As SKSize, ByVal Rotation As Single)
             Me.New(New SKPoint(posX, posY), graphicSize, Rotation)
         End Sub
 
-        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal width As Integer, _
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal width As Integer,
                                ByVal height As Integer, ByVal Rotation As Single)
             Me.New(New SKPoint(posX, posY), New SKSize(width, height), Rotation)
         End Sub
@@ -465,6 +468,35 @@ Namespace GraphicObjects
         Public Overridable Function GetPointValue(type As Enums.GraphicObjects.PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double Implements IGraphicObject.GetPointValue
 
             Return Double.NaN
+
+        End Function
+
+        Public Overridable Function GetIconAsBitmap() As System.Drawing.Bitmap Implements IGraphicObject.GetIconAsBitmap
+
+            If EmbeddedResourceIconName <> "" Then
+
+                Dim bmp As New System.Drawing.Bitmap(Me.GetType().Assembly.GetManifestResourceStream(String.Format("DWSIM.Drawing.SkiaSharp.{0}", EmbeddedResourceIconName)))
+                Return bmp
+
+            Else
+
+                Return Nothing
+
+            End If
+
+        End Function
+
+        Public Overridable Function GetIconAsStream() As MemoryStream Implements IGraphicObject.GetIconAsStream
+
+            If EmbeddedResourceIconName <> "" Then
+
+                Return Me.GetType().Assembly.GetManifestResourceStream(String.Format("DWSIM.Drawing.SkiaSharp.{0}", EmbeddedResourceIconName))
+
+            Else
+
+                Return Nothing
+
+            End If
 
         End Function
 

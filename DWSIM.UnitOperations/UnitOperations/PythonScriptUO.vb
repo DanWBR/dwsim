@@ -549,7 +549,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_custom_32
+            Return My.Resources.python_script
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

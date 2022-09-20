@@ -1180,7 +1180,7 @@ Namespace Reactors
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.re_conv_32
+            Return My.Resources.reactor_conversion
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

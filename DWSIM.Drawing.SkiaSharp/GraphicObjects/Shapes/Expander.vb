@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Expander
             Me.Description = "Adiabatic Expander"
+            EmbeddedResourceIconName = "expander.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

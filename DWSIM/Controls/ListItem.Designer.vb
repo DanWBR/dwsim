@@ -35,7 +35,7 @@ Partial Class ListItem
         Me.Image.Margin = New System.Windows.Forms.Padding(0)
         Me.Image.Name = "Image"
         Me.Image.Size = New System.Drawing.Size(32, 32)
-        Me.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Image.TabIndex = 0
         Me.Image.TabStop = False
         '

@@ -1061,7 +1061,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_excel_32
+            Return My.Resources.table
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

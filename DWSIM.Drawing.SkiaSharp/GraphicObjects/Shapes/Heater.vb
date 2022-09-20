@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Heater
             Me.Description = "Material Stream Heater"
+            EmbeddedResourceIconName = "heater.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

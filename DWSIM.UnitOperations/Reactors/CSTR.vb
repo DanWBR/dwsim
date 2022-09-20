@@ -1351,7 +1351,7 @@ out:        Dim ms1, ms2 As MaterialStream
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.re_cstr_32
+            Return My.Resources._cstr
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

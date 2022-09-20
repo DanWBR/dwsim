@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.FlowsheetUO
             Me.Description = "Sub-Flowsheet Block"
+            EmbeddedResourceIconName = "flowsheet_block.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

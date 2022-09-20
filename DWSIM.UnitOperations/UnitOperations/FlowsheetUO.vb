@@ -1130,7 +1130,7 @@ Label_00CC:
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_fs_32
+            Return My.Resources.flowsheet_block
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

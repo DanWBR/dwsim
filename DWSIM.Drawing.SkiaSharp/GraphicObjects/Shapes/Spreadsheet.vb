@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.ExcelUO
             Me.Description = "Spreadsheet Block"
+            EmbeddedResourceIconName = "table.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

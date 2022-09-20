@@ -470,6 +470,37 @@
     <EmbeddedResource Include="Bitmaps\pressure.png" />
     <EmbeddedResource Include="Bitmaps\flow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\separator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\compressor.png" />
+    <EmbeddedResource Include="Icons\cooler.png" />
+    <EmbeddedResource Include="Icons\cstr.png" />
+    <EmbeddedResource Include="Icons\energy_stream.png" />
+    <EmbeddedResource Include="Icons\expander.png" />
+    <EmbeddedResource Include="Icons\flowsheet_block.png" />
+    <EmbeddedResource Include="Icons\heater.png" />
+    <EmbeddedResource Include="Icons\heat_exchanger.png" />
+    <EmbeddedResource Include="Icons\linked_table.png" />
+    <EmbeddedResource Include="Icons\master_table.png" />
+    <EmbeddedResource Include="Icons\material_stream.png" />
+    <EmbeddedResource Include="Icons\mixer.png" />
+    <EmbeddedResource Include="Icons\pfr.png" />
+    <EmbeddedResource Include="Icons\pipe_segment.png" />
+    <EmbeddedResource Include="Icons\property_table.png" />
+    <EmbeddedResource Include="Icons\pump.png" />
+    <EmbeddedResource Include="Icons\python_script.png" />
+    <EmbeddedResource Include="Icons\reactor_conversion.png" />
+    <EmbeddedResource Include="Icons\reactor_equilibrium.png" />
+    <EmbeddedResource Include="Icons\reactor_gibbs.png" />
+    <EmbeddedResource Include="Icons\splitter.png" />
+    <EmbeddedResource Include="Icons\tank.png" />
+    <EmbeddedResource Include="Icons\valve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\table.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

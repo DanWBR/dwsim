@@ -2727,7 +2727,7 @@ Namespace Reactors
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.re_gibbs_32
+            Return My.Resources.reactor_gibbs
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

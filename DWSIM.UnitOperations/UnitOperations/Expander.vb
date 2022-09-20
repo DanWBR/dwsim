@@ -778,7 +778,7 @@ Namespace UnitOperations
 
                         End Function
 
-                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i, Pi, 0.00001, 100)
+                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i * 0.7, P2i * 1.3, 0.00001, 100)
 
                     POut = P2
                     DeltaP = Pi - P2
@@ -1152,7 +1152,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_expan_32
+            Return My.Resources.expander
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

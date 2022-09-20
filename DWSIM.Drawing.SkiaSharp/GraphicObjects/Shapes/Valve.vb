@@ -14,6 +14,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Valve
             Me.Description = "Adiabatic Valve"
+            EmbeddedResourceIconName = "valve.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

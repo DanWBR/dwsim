@@ -1689,7 +1689,7 @@ Namespace Reactors
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.re_pfr_32
+            Return My.Resources.pfr
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
