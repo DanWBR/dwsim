@@ -10,13 +10,11 @@ Public Class Functions
                 Case "PanelPressure"
                     AddUnitOp("Pipe Network", My.Resources.pipe_network_icon, panel)
                 Case "PanelMixers"
-                    AddUnitOp("Energy Stream Mixer", My.Resources.uo_mixer_32, panel)
                     AddUnitOp("Energy Stream Splitter", My.Resources.uo_split_32, panel)
                 Case "PanelExchangers"
                     AddUnitOp("Falling Film Evaporator", My.Resources.fallingfilm_icon, panel)
-                    AddUnitOp("Air Cooler", My.Resources.ventilation_icon, panel)
                 Case "PanelColumns"
-                    AddUnitOp("Distillation Column (Pro)", My.Resources.col_dc_32, panel)
+                    AddUnitOp("Three-Phase/Reactive Column (Pro)", My.Resources.col_dc_32, panel)
                     AddUnitOp("PPBDesigner Column", My.Resources.ppbdesigner, panel)
                 Case "PanelUser"
                     AddUnitOp("Neural Network (Pro)", My.Resources.icons8_artificial_intelligence, panel)

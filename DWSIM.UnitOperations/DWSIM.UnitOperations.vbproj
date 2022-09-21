@@ -1243,9 +1243,6 @@
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.de.resx">
-      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.en.resx">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </EmbeddedResource>

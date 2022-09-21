@@ -138,14 +138,11 @@
   <data name="&gt;&gt;FaTabStripItem5.Name" xml:space="preserve">
     <value>FaTabStripItem5</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
   </data>
@@ -1266,16 +1263,16 @@
   <data name="&gt;&gt;FaTabStripItem21.Name" xml:space="preserve">
     <value>FaTabStripItem21</value>
   </data>
-  <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>24, 8</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="PrintDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="PrintDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>137, 4</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>32</value>
-  </metadata>
+  </data>
 </root>

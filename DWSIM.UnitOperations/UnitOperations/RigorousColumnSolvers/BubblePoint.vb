@@ -1196,7 +1196,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim t1 As Task = TaskHelper.Run(Sub()
                                                             Parallel.For(0, ns + 1,
                                                                      Sub(ipar)
-                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, False, Nothing)
+                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, True, K(ipar))
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
