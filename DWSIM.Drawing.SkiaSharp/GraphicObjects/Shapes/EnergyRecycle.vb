@@ -98,7 +98,7 @@ Namespace GraphicObjects.Shapes
 
             Select Case DrawMode
 
-                Case 0
+                Case 0, 2
 
                     'default
                     Dim myPen As New SKPaint()
@@ -179,10 +179,6 @@ Namespace GraphicObjects.Shapes
                         StraightCanvas(canvas)
                         canvas.DrawText("R", ax, ay, tpaint)
                     End Using
-
-                Case 2
-
-                    'Gas/Liquid Flows
 
                 Case 3
 
