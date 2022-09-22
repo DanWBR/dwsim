@@ -365,7 +365,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_solidsep_32
+            Return My.Resources.solids_separator
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

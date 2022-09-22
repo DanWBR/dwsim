@@ -170,14 +170,6 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'default
-
-                    Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
-
-                    Dim radius2 = 0.9F * Math.Min(Width, Height)
-                    Dim center = New SKPoint(r0.MidX, r0.MidY)
-                    Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
-
                     Dim Gradient2Colors = New SKColor() {New SKColor(255, 255, 255, 255), New SKColor(32, 33, 32, 255)}
                     Dim Gradient2Weights = New Single() {0, 0.95}
                     Dim Gradient2 = SKShader.CreateRadialGradient(New SKPoint(X + 0.8 * Width, Y + 0.5 * Height), 2 * Width, Gradient2Colors, Gradient2Weights, SKShaderTileMode.Clamp)

@@ -137,6 +137,10 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
 
+                If tabstrip1.TabPages.Contains(TabPage2) Then
+                    tabstrip1.TabPages.Remove(TabPage2)
+                End If
+
                 chkGibbsUseAlternSolver.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod
 
                 cbReacSet.Enabled = False
@@ -310,7 +314,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             gridConversions.Rows.Clear()
             For Each dbl As KeyValuePair(Of String, Double) In .ComponentConversions
-                If dbl.Value > 0.0# And dbl.Value <= 1.0 Then
+                If dbl.Value > 0.0# And Not Double.IsInfinity(dbl.Value) Then
                     gridConversions.Rows.Add(New Object() {dbl.Key, Format(dbl.Value * 100, nf)})
                 End If
             Next

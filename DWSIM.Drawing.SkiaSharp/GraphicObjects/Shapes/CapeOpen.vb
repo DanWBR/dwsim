@@ -116,7 +116,7 @@ Namespace GraphicObjects.Shapes
 
                 Select Case DrawMode
 
-                    Case 0
+                    Case 0, 2
 
                         'default
 
@@ -338,10 +338,6 @@ Namespace GraphicObjects.Shapes
                             End Using
 
                         End If
-
-                    Case 2
-
-                    'Gas/Liquid Flows
 
                     Case 3
 

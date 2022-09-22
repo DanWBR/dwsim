@@ -501,6 +501,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\table.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\component_separator.png" />
+    <EmbeddedResource Include="Icons\filter.png" />
+    <EmbeddedResource Include="Icons\solids_separator.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

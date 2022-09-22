@@ -323,6 +323,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property component_separator() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("component_separator", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property compressor() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("compressor", resourceCulture)
@@ -486,6 +496,16 @@ Namespace My.Resources
         Friend ReadOnly Property fast_forward() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("fast_forward", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property filter() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("filter", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -1096,6 +1116,16 @@ Namespace My.Resources
         Friend ReadOnly Property shape_square_delete() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("shape_square_delete", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property solids_separator() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("solids_separator", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

@@ -90,9 +90,17 @@ Namespace GraphicObjects
 
             End If
 
-            Using p As New SKPaint With {.IsAntialias = False, .FilterQuality = SKFilterQuality.None}
+            Using p As New SKPaint With {.IsAntialias = False, .FilterQuality = SKFilterQuality.High}
                 canvas.DrawImage(Image, New SKRect(X, Y, X + Width, Y + Height), p)
             End Using
+
+            If Not Calculated Then
+                Using p As New SKPaint With {.IsAntialias = False, .FilterQuality = SKFilterQuality.None}
+                    p.BlendMode = SKBlendMode.Color
+                    p.ColorFilter = SKColorFilter.CreateBlendMode(LineColor, SKBlendMode.SrcIn)
+                    canvas.DrawImage(Image, New SKRect(X, Y, X + Width, Y + Height), p)
+                End Using
+            End If
 
         End Sub
 

@@ -417,6 +417,9 @@ Namespace Reactors
                     End If
                     t3 = Log(fugc(i) * P / P0)
                     If Double.IsNaN(t3) Or Double.IsInfinity(t3) Then t3 = 0.0
+                    '???
+                    t3 = 0.0
+                    '???
                     gf += sfrac * s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
                     i += 1
                 Next

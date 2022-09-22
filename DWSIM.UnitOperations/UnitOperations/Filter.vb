@@ -481,7 +481,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_filter_32
+            Return My.Resources.filter
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
