@@ -1705,9 +1705,6 @@ Public Class FlowsheetSurface_SkiaSharp
         Dim mpx = x '- SplitContainer1.SplitterDistance
         Dim mpy = y '- ToolStripContainer1.TopToolStripPanel.Height
 
-        'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH004"), Color.Black, MessageType.Tip)
-        'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH006"), Color.Black, MessageType.Tip)
-
         Dim objindex = (Flowsheet.SimulationObjects.Values.Where(Function(o) o.GraphicObject.ObjectType = type).Count + 1).ToString()
 
         Select Case type

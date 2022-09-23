@@ -112,15 +112,26 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            If DrawMode = 0 Then
+            If DrawMode = 0 Or DrawMode = 2 Then
 
                 Dim gradPen As New SKPaint()
+
                 With gradPen
                     .Color = LineColor.WithAlpha(50)
                     .StrokeWidth = LineWidth
                     .IsStroke = False
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 End With
+
+                If DrawMode = 2 Then
+
+                    Dim Gradient2Colors = New SKColor() {New SKColor(255, 255, 255, 255), New SKColor(32, 33, 32, 255)}
+                    Dim Gradient2Weights = New Single() {0, 0.95}
+                    Dim Gradient2 = SKShader.CreateRadialGradient(New SKPoint(X + 0.8 * Width, Y + 0.5 * Height), 2 * Width, Gradient2Colors, Gradient2Weights, SKShaderTileMode.Clamp)
+
+                    gradPen.Shader = Gradient2
+
+                End If
 
                 canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, gradPen)
 
@@ -167,9 +178,11 @@ Namespace GraphicObjects.Shapes
             With myPen
                 .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .StrokeWidth = LineWidth
-                .IsStroke = IIf(DrawMode = 0, True, True)
+                .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
+
+            If DrawMode = 2 Then myPen.Color = SKColors.Black
 
             canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
 
