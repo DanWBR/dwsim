@@ -825,7 +825,7 @@ Namespace UnitOperations
             If CalcMode = CalculationMode.Kv_Gas Then
                 ims.PropertyPackage.CurrentMaterialStream = ims
                 rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
-                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight.GetValueOrDefault()
                 k = Cp_ig / (Cp_ig - 8.314)
                 P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
                 IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
@@ -838,7 +838,7 @@ Namespace UnitOperations
             ElseIf CalcMode = CalculationMode.Kv_General Then
                 ims.PropertyPackage.CurrentMaterialStream = ims
                 rhog = ims.Phases(2).Properties.density.GetValueOrDefault
-                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight.GetValueOrDefault()
                 k = Cp_ig / (Cp_ig - 8.314)
                 rhol = ims.Phases(1).Properties.density.GetValueOrDefault
                 Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)

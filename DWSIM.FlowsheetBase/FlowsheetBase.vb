@@ -26,6 +26,8 @@ Imports System.Dynamic
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.GlobalSettings
 Imports DWSIM.Thermodynamics.AdvancedEOS
+Imports SkiaSharp
+Imports System.Text.RegularExpressions
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -628,44 +630,39 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     End Function
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer,
-                                       Optional ByVal tag As String = "", Optional ByVal id As String = "",
-                                       Optional ByVal uoobj As IExternalUnitOperation = Nothing,
+    Public Function AddObjectToSurface(type As ObjectType, x As Integer, y As Integer,
+                                       Optional tag As String = "",
+                                       Optional id As String = "",
+                                       Optional uoobj As Interfaces.IExternalUnitOperation = Nothing,
                                        Optional CreateConnected As Boolean = False) As String
 
-        Dim gObj As IGraphicObject = Nothing
+        Dim gObj As GraphicObject = Nothing
         Dim mpx = x '- SplitContainer1.SplitterDistance
         Dim mpy = y '- ToolStripContainer1.TopToolStripPanel.Height
 
-        Dim objname = (SimulationObjects.Count + 1).ToString()
-        Dim exists = True
-        While exists
-            exists = SimulationObjects.Values.Where(Function(o) o.GraphicObject.Tag = objname).Count > 0
-            If Not exists Then Exit While
-            objname = Convert.ToInt32(objname) + 1
-        End While
+        Dim objindex = (SimulationObjects.Values.Where(Function(o) o.GraphicObject.ObjectType = type).Count + 1).ToString()
 
         Select Case type
 
             Case ObjectType.External
 
                 Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = objname
+                myNode.Tag = uoobj.Prefix + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                DirectCast(uoobj, ISimulationObject).Name = gObj.Name
+                DirectCast(uoobj, Interfaces.ISimulationObject).Name = gObj.Name
                 GraphicObjects.Add(gObj.Name, myNode)
-                DirectCast(uoobj, ISimulationObject).GraphicObject = myNode
+                DirectCast(uoobj, Interfaces.ISimulationObject).GraphicObject = myNode
                 myNode.CreateConnectors(0, 0)
                 SimulationObjects.Add(myNode.Name, uoobj)
 
             Case ObjectType.Switch
 
                 Dim myGobj As New SwitchGraphic(mpx, mpy, 50, 40)
-                myGobj.Tag = objname
+                myGobj.Tag = "SW-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -679,7 +676,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Input
 
                 Dim myGobj As New InputGraphic(mpx, mpy, 50, 25)
-                myGobj.Tag = objname
+                myGobj.Tag = "IN-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -695,7 +692,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Controller_PID
 
                 Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = objname
+                myGobj.Tag = "PID-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -711,7 +708,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.LevelGauge
 
                 Dim myGobj As New LevelGaugeGraphic(mpx, mpy, 40, 70)
-                myGobj.Tag = objname
+                myGobj.Tag = "LG-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -725,7 +722,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.DigitalGauge
 
                 Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 40, 20)
-                myGobj.Tag = objname
+                myGobj.Tag = "DG-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -739,7 +736,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.AnalogGauge
 
                 Dim myGobj As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = objname
+                myGobj.Tag = "AG-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -752,12 +749,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.OT_Adjust
 
-                Dim myNode As New AdjustGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = objname
+                Dim myNode As New AdjustGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "C-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
-                gObj.Name = Guid.NewGuid.ToString
+                gObj.Name = "AJ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
                 Dim myADJ As Adjust = New Adjust(myNode.Name, "Ajuste")
@@ -766,12 +765,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.OT_Spec
 
-                Dim myNode As New SpecGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = objname
+                Dim myNode As New SpecGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "SP-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
-                gObj.Name = "SPEC-" & Guid.NewGuid.ToString
+                gObj.Name = "ES-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
                 Dim myADJ As Spec = New Spec(myNode.Name, "Especificao")
@@ -780,22 +781,26 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.OT_Recycle
 
-                Dim myNode As New RecycleGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = objname
+                Dim myNode As New RecycleGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "R-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
                 gObj.Name = "REC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
-                Dim myADJ As Recycle = New Recycle(myNode.Name, "")
+                Dim myADJ As Recycle = New Recycle(myNode.Name, "Reciclo")
                 myADJ.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myADJ)
 
             Case ObjectType.OT_EnergyRecycle
 
-                Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = objname
+                Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "ER-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -808,22 +813,26 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.NodeIn, ObjectType.Mixer
 
-                Dim myNode As New MixerGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = objname
+                Dim myNode As New MixerGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "MIX-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
-                gObj.Name = "MIX-" & Guid.NewGuid.ToString
+                gObj.Name = "MIST-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
-                Dim myCOMIX As Mixer = New Mixer(myNode.Name, "")
+                Dim myCOMIX As Mixer = New Mixer(myNode.Name, "Misturador")
                 myCOMIX.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myCOMIX)
 
             Case ObjectType.NodeOut, ObjectType.Splitter
 
-                Dim myNodeo As New SplitterGraphic(mpx, mpy, 40, 40)
-                myNodeo.Tag = objname
+                Dim myNodeo As New SplitterGraphic(mpx, mpy, 20, 20)
+                myNodeo.LineWidth = 2
+                myNodeo.Fill = True
+                myNodeo.Tag = "SPL-" + objindex
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
                 CheckTag(gObj)
@@ -831,33 +840,40 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNodeo)
                 'OBJETO DWSIM
-                Dim myCOSP As Splitter = New Splitter(myNodeo.Name, "")
+                Dim myCOSP As UnitOperations.UnitOperations.Splitter = New UnitOperations.UnitOperations.Splitter(myNodeo.Name, "Divisor")
                 myCOSP.GraphicObject = myNodeo
                 SimulationObjects.Add(myNodeo.Name, myCOSP)
 
             Case ObjectType.Pump
 
-                Dim myPump As New PumpGraphic(mpx, mpy, 40, 40)
-                myPump.Tag = objname
+                Dim myPump As New PumpGraphic(mpx, mpy, 25, 25)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myPump.SetSize(New SKSize(40, 40))
+                End If
+                myPump.LineWidth = 2
+                myPump.Fill = True
+                myPump.Tag = "PUMP-" + objindex
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
                 CheckTag(gObj)
-                gObj.Name = "PUMP-" & Guid.NewGuid.ToString
+                gObj.Name = "BB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myPump)
                 'OBJETO DWSIM
-                Dim myCOSP As Pump = New Pump(myPump.Name, "")
+                Dim myCOSP As Pump = New Pump(myPump.Name, "Bomba")
                 myCOSP.GraphicObject = myPump
                 SimulationObjects.Add(myPump.Name, myCOSP)
 
             Case ObjectType.Tank
 
                 Dim myTank As New TankGraphic(mpx, mpy, 50, 50)
-                myTank.Tag = objname
+                myTank.LineWidth = 2
+                myTank.Fill = True
+                myTank.Tag = "TANK-" + objindex
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
                 CheckTag(gObj)
-                gObj.Name = "TANK-" & Guid.NewGuid.ToString
+                gObj.Name = "TQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myTank)
                 'OBJETO DWSIM
@@ -868,147 +884,143 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Vessel
 
                 Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
-                myVessel.Tag = objname
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myVessel.SetSize(New SKSize(70, 60))
+                End If
+                myVessel.LineWidth = 2
+                myVessel.Fill = True
+                myVessel.Tag = "V-" + objindex
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
                 CheckTag(gObj)
-                gObj.Name = "V-" & Guid.NewGuid.ToString
+                gObj.Name = "SEP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myVessel)
                 'OBJETO DWSIM
-                Dim myCOVESSEL As Vessel = New Vessel(myVessel.Name, "")
+                Dim myCOVESSEL As Vessel = New Vessel(myVessel.Name, "VasoSeparadorGL")
                 myCOVESSEL.GraphicObject = myVessel
                 SimulationObjects.Add(myVessel.Name, myCOVESSEL)
 
             Case ObjectType.MaterialStream
 
                 Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 20, 20)
-                myMStr.Tag = objname
+                myMStr.LineWidth = 2
+                myMStr.Fill = True
+                myMStr.Tag = objindex
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 CheckTag(gObj)
-                gObj.Name = "MSTR-" & Guid.NewGuid.ToString
+                gObj.Name = "MAT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
-                Dim myCOMS As MaterialStream = New MaterialStream(myMStr.Name, "CorrentedeMatria", Me, Nothing)
+                Dim myCOMS As Thermodynamics.Streams.MaterialStream = New Thermodynamics.Streams.MaterialStream(myMStr.Name, "CorrentedeMatria", Me, Nothing)
                 myCOMS.GraphicObject = myMStr
-                AddCompoundsToMaterialStream(myCOMS)
                 SimulationObjects.Add(myCOMS.Name, myCOMS)
 
             Case ObjectType.EnergyStream
 
                 Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 20, 20)
-                myMStr.Tag = objname
+                myMStr.LineWidth = 2
+                myMStr.Fill = True
+                myMStr.Tag = "E" + objindex
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 CheckTag(gObj)
-                gObj.Name = "ESTR-" & Guid.NewGuid.ToString
+                gObj.Name = "EN-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
-                Dim myCOES As EnergyStream = New EnergyStream(myMStr.Name, "")
+                Dim myCOES As EnergyStream = New EnergyStream(myMStr.Name, "CorrentedeEnergia")
                 myCOES.GraphicObject = myMStr
                 SimulationObjects.Add(myCOES.Name, myCOES)
 
-            Case ObjectType.CompressorExpander
-
-                Dim myComp As New CompressorExpanderGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = objname
-                If tag <> "" Then myComp.Tag = tag
-                gObj = myComp
-                CheckTag(gObj)
-                gObj.Name = "CX-" & Guid.NewGuid.ToString
-                If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myComp)
-                'OBJETO DWSIM
-                Dim myCOCP As Compressor = New Compressor(myComp.Name, "")
-                myCOCP.GraphicObject = myComp
-                SimulationObjects.Add(myComp.Name, myCOCP)
-
             Case ObjectType.Compressor
 
-                Dim myComp As New CompressorGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = objname
+                Dim myComp As New CompressorGraphic(mpx, mpy, 25, 25)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myComp.SetSize(New SKSize(50, 50))
+                End If
+                myComp.LineWidth = 2
+                myComp.Fill = True
+                myComp.Tag = "C-" + objindex
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 CheckTag(gObj)
-                gObj.Name = "C-" & Guid.NewGuid.ToString
+                gObj.Name = "COMP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
                 'OBJETO DWSIM
-                Dim myCOCP As Compressor = New Compressor(myComp.Name, "")
+                Dim myCOCP As Compressor = New Compressor(myComp.Name, "CompressorAdiabtico")
                 myCOCP.GraphicObject = myComp
                 SimulationObjects.Add(myComp.Name, myCOCP)
 
             Case ObjectType.Expander
 
-                Dim myComp As New TurbineGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = objname
+                Dim myComp As New TurbineGraphic(mpx, mpy, 25, 25)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myComp.SetSize(New SKSize(50, 50))
+                End If
+                myComp.LineWidth = 2
+                myComp.Fill = True
+                myComp.Tag = "X-" + objindex
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
-                CheckTag(gObj)
-                gObj.Name = "X-" & Guid.NewGuid.ToString
+                gObj.Name = "TURB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
                 'OBJETO DWSIM
-                Dim myCOCP As Expander = New Expander(myComp.Name, "")
+                Dim myCOCP As Expander = New Expander(myComp.Name, "TurbinaAdiabtica")
                 myCOCP.GraphicObject = myComp
                 SimulationObjects.Add(myComp.Name, myCOCP)
 
-            Case ObjectType.HeaterCooler
+            Case ObjectType.Cooler
 
-                Dim myCool As New HeaterCoolerGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = objname
+                Dim myCool As New CoolerGraphic(mpx, mpy, 25, 25)
+                myCool.LineWidth = 2
+                myCool.Fill = True
+                myCool.Tag = "CL-" + objindex
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 CheckTag(gObj)
-                gObj.Name = "HC-" & Guid.NewGuid.ToString
+                gObj.Name = "RESF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCool)
                 'OBJETO DWSIM
-                Dim myCOCL As Heater = New Heater(myCool.Name, "")
+                Dim myCOCL As Cooler = New Cooler(myCool.Name, "Resfriador")
                 myCOCL.GraphicObject = myCool
                 SimulationObjects.Add(myCool.Name, myCOCL)
 
             Case ObjectType.Heater
 
-                Dim myCool As New HeaterGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = objname
-                If tag <> "" Then myCool.Tag = tag
-                gObj = myCool
+                Dim myHeat As New HeaterGraphic(mpx, mpy, 25, 25)
+                myHeat.LineWidth = 2
+                myHeat.Fill = True
+                myHeat.Tag = "HT-" + objindex
+                If tag <> "" Then myHeat.Tag = tag
+                gObj = myHeat
                 CheckTag(gObj)
-                gObj.Name = "HT-" & Guid.NewGuid.ToString
+                gObj.Name = "AQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myCool)
+                GraphicObjects.Add(gObj.Name, myHeat)
                 'OBJETO DWSIM
-                Dim myCOCL As Heater = New Heater(myCool.Name, "")
-                myCOCL.GraphicObject = myCool
-                SimulationObjects.Add(myCool.Name, myCOCL)
-
-            Case ObjectType.Cooler
-
-                Dim myCool As New CoolerGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = objname
-                If tag <> "" Then myCool.Tag = tag
-                gObj = myCool
-                CheckTag(gObj)
-                gObj.Name = "CL-" & Guid.NewGuid.ToString
-                If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myCool)
-                'OBJETO DWSIM
-                Dim myCOCL As Cooler = New Cooler(myCool.Name, "")
-                myCOCL.GraphicObject = myCool
-                SimulationObjects.Add(myCool.Name, myCOCL)
+                Dim myCOCL As Heater = New Heater(myHeat.Name, "Aquecedor")
+                myCOCL.GraphicObject = myHeat
+                SimulationObjects.Add(myHeat.Name, myCOCL)
 
             Case ObjectType.Pipe
 
-                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 80, 20)
-                myPipe.Tag = objname
+                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 50, 10)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myPipe.SetSize(New SKSize(50, 20))
+                End If
+                myPipe.LineWidth = 2
+                myPipe.Fill = True
+                myPipe.Tag = "PIPE-" + objindex
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
                 CheckTag(gObj)
-                gObj.Name = "PIPE-" & Guid.NewGuid.ToString
+                gObj.Name = "TUB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myPipe)
                 'OBJETO DWSIM
@@ -1018,27 +1030,34 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.Valve
 
-                Dim myValve As New ValveGraphic(mpx, mpy, 40, 40)
-                myValve.Tag = objname
+                Dim myValve As New ValveGraphic(mpx, mpy, 20, 20)
+                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 50, 10)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myValve.SetSize(New SKSize(30, 30))
+                End If
+                myValve.LineWidth = 2
+                myValve.Fill = True
+                myValve.Tag = "VALVE-" + objindex
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
                 CheckTag(gObj)
-                gObj.Name = "VALVE-" & Guid.NewGuid.ToString
+                gObj.Name = "VALV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myValve)
                 'OBJETO DWSIM
-                Dim myCOVALVE As Valve = New Valve(myValve.Name, "")
+                Dim myCOVALVE As Valve = New Valve(myValve.Name, "Vlvula")
                 myCOVALVE.GraphicObject = myValve
                 SimulationObjects.Add(myValve.Name, myCOVALVE)
 
             Case ObjectType.RCT_Conversion
 
                 Dim myRconv As New ConversionReactorGraphic(mpx, mpy, 50, 50)
-                myRconv.Tag = objname
+                myRconv.LineWidth = 2
+                myRconv.Fill = True
+                myRconv.Tag = "RCONV-" + objindex
                 If tag <> "" Then myRconv.Tag = tag
                 gObj = myRconv
-                CheckTag(gObj)
-                gObj.Name = "CR-" & Guid.NewGuid.ToString
+                gObj.Name = "RC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRconv)
                 'OBJETO DWSIM
@@ -1049,11 +1068,13 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_Equilibrium
 
                 Dim myReq As New EquilibriumReactorGraphic(mpx, mpy, 50, 50)
-                myReq.Tag = objname
+                myReq.LineWidth = 2
+                myReq.Fill = True
+                myReq.Tag = "REQ-" + objindex
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
                 CheckTag(gObj)
-                gObj.Name = "ER-" & Guid.NewGuid.ToString
+                gObj.Name = "RE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myReq)
                 'OBJETO DWSIM
@@ -1064,11 +1085,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_Gibbs
 
                 Dim myRgibbs As New GibbsReactorGraphic(mpx, mpy, 50, 50)
-                myRgibbs.Tag = objname
+                myRgibbs.LineWidth = 2
+                myRgibbs.Fill = True
+                myRgibbs.Tag = "RGIBBS-" + objindex
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
-                CheckTag(gObj)
-                gObj.Name = "GR-" & Guid.NewGuid.ToString
+                gObj.Name = "RG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRgibbs)
                 'OBJETO DWSIM
@@ -1079,7 +1101,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_CSTR
 
                 Dim myRcstr As New CSTRGraphic(mpx, mpy, 50, 50)
-                myRcstr.Tag = objname
+                myRcstr.LineWidth = 2
+                myRcstr.Fill = True
+                myRcstr.Tag = "CSTR-" + objindex
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
                 CheckTag(gObj)
@@ -1094,7 +1118,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_PFR
 
                 Dim myRpfr As New PFRGraphic(mpx, mpy, 70, 20)
-                myRpfr.Tag = objname
+                myRpfr.LineWidth = 2
+                myRpfr.Fill = True
+                myRpfr.Tag = "PFR-" + objindex
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
                 CheckTag(gObj)
@@ -1108,68 +1134,79 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.HeatExchanger
 
-                Dim myHeatExchanger As New HeatExchangerGraphic(mpx, mpy, 50, 50)
-                myHeatExchanger.Tag = objname
+                Dim myHeatExchanger As New HeatExchangerGraphic(mpx, mpy, 30, 30)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myHeatExchanger.SetSize(New SKSize(60, 60))
+                End If
+                myHeatExchanger.LineWidth = 2
+                myHeatExchanger.Fill = True
+                myHeatExchanger.Tag = "HX-" + objindex
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
                 CheckTag(gObj)
-                gObj.Name = "HX-" & Guid.NewGuid.ToString
+                gObj.Name = "HE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myHeatExchanger)
                 'OBJETO DWSIM
-                Dim myCOHE As HeatExchanger = New HeatExchanger(myHeatExchanger.Name, "")
+                Dim myCOHE As HeatExchanger = New HeatExchanger(myHeatExchanger.Name, "HeatExchanger")
                 myCOHE.GraphicObject = myHeatExchanger
                 SimulationObjects.Add(myHeatExchanger.Name, myCOHE)
 
             Case ObjectType.ShortcutColumn
 
                 Dim mySC As New ShortcutColumnGraphic(mpx, mpy, 144, 180)
-                mySC.Tag = objname
+                mySC.LineWidth = 2
+                mySC.Fill = True
+                mySC.Tag = "SCOL-" + objindex
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
-                CheckTag(gObj)
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As ShortcutColumn = New ShortcutColumn(mySC.Name, "")
+                Dim myCOSC As ShortcutColumn = New ShortcutColumn(mySC.Name, "ShortcutColumn")
                 myCOSC.GraphicObject = mySC
                 SimulationObjects.Add(mySC.Name, myCOSC)
 
             Case ObjectType.DistillationColumn
 
-                Dim myDC As New RigorousColumnGraphic(mpx, mpy, 144, 180)
-                myDC.Tag = objname
-                If tag <> "" Then myDC.Tag = tag
-                gObj = myDC
+                Dim mySC As New RigorousColumnGraphic(mpx, mpy, 144, 180)
+                mySC.LineWidth = 2
+                mySC.Fill = True
+                mySC.Tag = "DCOL-" + objindex
+                If tag <> "" Then mySC.Tag = tag
+                gObj = mySC
                 CheckTag(gObj)
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myDC)
+                GraphicObjects.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As DistillationColumn = New DistillationColumn(myDC.Name, "DistillationColumn", Me)
-                myCOSC.GraphicObject = myDC
-                SimulationObjects.Add(myDC.Name, myCOSC)
+                Dim myCOSC As DistillationColumn = New DistillationColumn(mySC.Name, "DistillationColumn", Me)
+                myCOSC.GraphicObject = mySC
+                SimulationObjects.Add(mySC.Name, myCOSC)
 
             Case ObjectType.AbsorptionColumn
 
-                Dim myAC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
-                myAC.Tag = objname
-                If tag <> "" Then myAC.Tag = tag
-                gObj = myAC
-                CheckTag(gObj)
+                Dim mySC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
+                mySC.LineWidth = 2
+                mySC.Fill = True
+                mySC.Tag = "ABS-" + objindex
+                If tag <> "" Then mySC.Tag = tag
+                gObj = mySC
                 gObj.Name = "ABS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myAC)
+                GraphicObjects.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(myAC.Name, "AbsorptionColumn", Me)
-                myCOSC.GraphicObject = myAC
-                SimulationObjects.Add(myAC.Name, myCOSC)
+                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn", Me)
+                myCOSC.GraphicObject = mySC
+                SimulationObjects.Add(mySC.Name, myCOSC)
 
             Case ObjectType.ComponentSeparator
 
                 Dim myCSep As New ComponentSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = objname
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "CS-" + objindex
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 CheckTag(gObj)
@@ -1184,10 +1221,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.SolidSeparator
 
                 Dim myCSep As New SolidsSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = objname
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "SS-" + objindex
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
-                CheckTag(gObj)
                 gObj.Name = "SS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCSep)
@@ -1199,7 +1237,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Filter
 
                 Dim myCSep As New FilterGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = objname
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "FLT-" + objindex
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 CheckTag(gObj)
@@ -1214,7 +1254,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.OrificePlate
 
                 Dim myOPL As New OrificePlateGraphic(mpx, mpy, 25, 25)
-                myOPL.Tag = objname
+                myOPL.LineWidth = 2
+                myOPL.Fill = True
+                myOPL.Tag = "OP-" + objindex
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
                 CheckTag(gObj)
@@ -1229,7 +1271,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.CustomUO
 
                 Dim myCUO As New ScriptGraphic(mpx, mpy, 25, 25)
-                myCUO.Tag = objname
+                myCUO.LineWidth = 2
+                myCUO.Fill = True
+                myCUO.Tag = "CUSTOM-" + objindex
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 CheckTag(gObj)
@@ -1244,7 +1288,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.ExcelUO
 
                 Dim myEUO As New SpreadsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.Tag = objname
+                myEUO.LineWidth = 2
+                myEUO.Fill = True
+                myEUO.Tag = "SHEET-" + objindex
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 CheckTag(gObj)
@@ -1259,7 +1305,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.FlowsheetUO
 
                 Dim myEUO As New FlowsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.Tag = objname
+                myEUO.LineWidth = 2
+                myEUO.Fill = True
+                myEUO.Tag = "FS-" + objindex
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 CheckTag(gObj)
@@ -1267,22 +1315,23 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myEUO)
                 'OBJETO DWSIM
-                Dim myCOEUO As Flowsheet = New Flowsheet(myEUO.Name, "FlowsheetUnitOp")
+                Dim myCOEUO As UnitOperations.UnitOperations.Flowsheet = New UnitOperations.UnitOperations.Flowsheet(myEUO.Name, "FlowsheetUnitOp")
                 myCOEUO.GraphicObject = myEUO
                 SimulationObjects.Add(myEUO.Name, myCOEUO)
 
             Case ObjectType.CapeOpenUO
 
                 Dim myCUO As New CAPEOPENGraphic(mpx, mpy, 40, 40)
-                myCUO.Tag = objname
+                myCUO.LineWidth = 2
+                myCUO.Fill = True
+                myCUO.Tag = "CO-" + objindex
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 CheckTag(gObj)
                 gObj.Name = "COUO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCUO)
-                'OBJETO DWSIM
-                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
+                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj, False)
                 myCOCUO.GraphicObject = myCUO
                 SimulationObjects.Add(myCUO.Name, myCOCUO)
 
@@ -1290,7 +1339,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New AirCooler2()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "AC-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1306,7 +1355,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New EnergyMixer()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "EMIX-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1322,7 +1371,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New Reactor_ReaktoroGibbs()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "RGIBBSR-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1338,7 +1387,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New WindTurbine()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "WT-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1354,7 +1403,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New HydroelectricTurbine()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "HYT-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1370,7 +1419,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New PEMFC_Amphlett()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "PEMFC-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1386,7 +1435,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New SolarPanel()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "SP-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1402,7 +1451,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Dim fsobj = New WaterElectrolyzer()
                 Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = objname
+                grobj.Tag = "WELEC-" + objindex
                 If tag <> "" Then grobj.Tag = tag
                 gObj = grobj
                 CheckTag(gObj)
@@ -1821,7 +1870,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
     Public Sub CheckTag(obj As IGraphicObject)
 
         While GetFlowsheetSimulationObject(obj.Tag) IsNot Nothing
-            obj.Tag += "-2"
+            obj.Tag = Regex.Replace(obj.Tag, "\d+", Function(m) (Integer.Parse(m.Value) + 1).ToString(New String("0", m.Value.Length)))
         End While
 
     End Sub

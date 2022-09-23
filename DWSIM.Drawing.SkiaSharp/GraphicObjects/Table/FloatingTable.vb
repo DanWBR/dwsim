@@ -120,7 +120,7 @@ Namespace GraphicObjects.Tables
                     .IsStroke = False
                 End With
 
-            Else
+            ElseIf DrawMode = 1 Then
 
                 With tpaint
                     .TextSize = FontSize / zoom
@@ -148,6 +148,48 @@ Namespace GraphicObjects.Tables
                 With bpaint2
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = SKColors.Black
+                    .IsStroke = True
+                    .StrokeWidth = LineWidth / zoom
+                End With
+
+                With spaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.LightGray.WithAlpha(100)
+                    .IsStroke = False
+                End With
+
+            Else
+
+                With tpaint
+                    .TextSize = FontSize / zoom
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = New SKColor(35, 109, 149, 255)
+                    .IsStroke = False
+                    .Typeface = RegularTypeFace
+                End With
+
+                With tbpaint
+                    .TextSize = FontSize / zoom
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = New SKColor(35, 109, 149, 255)
+                    .IsStroke = False
+                    .Typeface = BoldTypeFace
+                End With
+
+                Dim GradientColors = {New SKColor(220, 240, 255, 230), New SKColor(140, 255, 190, 255), New SKColor(255, 92, 119, 255), New SKColor(0, 0, 0, 255)}
+                Dim GradientWeights = {0.0F, 0.2044351F * Width, 0.5359721F * Width, 0.9662447F * Width}
+                Dim Gradient = SKShader.CreateSweepGradient(New SKPoint(X, Y), GradientColors, GradientWeights)
+
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Shader = Gradient
+                    .IsStroke = False
+                    .StrokeWidth = LineWidth / zoom
+                End With
+
+                With bpaint2
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = New SKColor(35, 109, 149, 230)
                     .IsStroke = True
                     .StrokeWidth = LineWidth / zoom
                 End With
@@ -516,6 +558,12 @@ Namespace GraphicObjects.Tables
                             If Height2 > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
 
                             'draw shadow
+
+                            Dim GradientColors = {New SKColor(220, 240, 255, 230), New SKColor(140, 255, 190, 255), New SKColor(255, 92, 119, 255), New SKColor(0, 0, 0, 255)}
+                            Dim GradientWeights = {0.0F, 0.2044351F * Width, 0.5359721F * Width, 0.9662447F * Width}
+                            Dim Gradient = SKShader.CreateSweepGradient(New SKPoint(X, Y + DeltaY - size.Height), GradientColors, GradientWeights)
+
+                            bpaint.Shader = Gradient
 
                             DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 2 / zoom, spaint)
                             DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint)

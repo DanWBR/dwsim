@@ -1175,7 +1175,7 @@ namespace DWSIM.UI.Forms
             };
 
             var lblColorTheme = new Label { Text = "Flowsheet Color Theme" };
-            var cbColorTheme = new DropDown { Width = 140, Items = { "Default", "Black-and-White PFD" }, SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
+            var cbColorTheme = new DropDown { Width = 140, Items = { "Default", "Black-and-White PFD", "Color Icons" }, SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
             cbColorTheme.SelectedIndexChanged += (s, e) =>
             {
                 FlowsheetObject.Options.FlowsheetColorTheme = cbColorTheme.SelectedIndex;
