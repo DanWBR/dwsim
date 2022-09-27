@@ -2285,8 +2285,8 @@ Imports System.Text.RegularExpressions
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Settings"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("Settings")
-
         xel.Add(Options.SaveData().ToArray())
+
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicProperties"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties")
 

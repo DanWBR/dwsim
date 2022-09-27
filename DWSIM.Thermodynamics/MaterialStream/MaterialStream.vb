@@ -894,6 +894,8 @@ Namespace Streams
 
             If GraphicObject IsNot Nothing Then GraphicObject.Calculated = False
 
+            Calculated = False
+
         End Sub
 
         ''' <summary>

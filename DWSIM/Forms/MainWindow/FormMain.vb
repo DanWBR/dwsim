@@ -99,6 +99,14 @@ Public Class FormMain
 
     Public Event ToolOpened(sender As Object, e As EventArgs)
 
+    Public Event FlowsheetSavingToXML(sender As Object, e As EventArgs)
+
+    Public Event FlowsheetSavedToXML(sender As Object, e As EventArgs)
+
+    Public Event FlowsheetLoadingFromXML(sender As Object, e As EventArgs)
+
+    Public Event FlowsheetLoadedFromXML(sender As Object, e As EventArgs)
+
     Public SavingSimulation As Func(Of IFlowsheet, Boolean)
 
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -1808,6 +1816,8 @@ Public Class FormMain
 
     Public Function LoadXML(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
+        RaiseEvent FlowsheetLoadingFromXML(Me, New EventArgs())
+
         My.Application.PushUndoRedoAction = False
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
@@ -2390,6 +2400,8 @@ Public Class FormMain
         Application.DoEvents()
 
         form.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
+
+        RaiseEvent FlowsheetLoadedFromXML(form, New EventArgs())
 
         Return form
 
@@ -3132,9 +3144,9 @@ Public Class FormMain
 
     Sub SaveXML(handler As IVirtualFile, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
 
+        RaiseEvent FlowsheetSavingToXML(form, New EventArgs())
+
         If simulationfilename = "" Then simulationfilename = handler.FullPath
-
-
 
         Dim xdoc As New XDocument()
         Dim xel As XElement
@@ -3339,6 +3351,8 @@ Public Class FormMain
         If Not IO.Path.GetExtension(handler.FullPath).ToLower.Contains("dwbcs") Then
             form.ProcessScripts(Scripts.EventType.SimulationSaved, Scripts.ObjectType.Simulation, "")
         End If
+
+        RaiseEvent FlowsheetSavedToXML(form, New EventArgs())
 
         Application.DoEvents()
 
