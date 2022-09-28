@@ -630,7 +630,17 @@ Public Class Utility
 
         Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
 
-        Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
+        Dim instances As New List(Of Interfaces.IPropertyPackage)
+        For Each item In ppList
+            Try
+                Dim instance = TryCast(Activator.CreateInstance(item), Interfaces.IPropertyPackage)
+                If Not instance Is Nothing Then instances.Add(instance)
+            Catch ex As Exception
+                Console.WriteLine("Error instantiating '" + item.ToString() + "': " + ex.ToString)
+                Logging.Logger.LogError("Error instantiating '" + item.ToString() + "'.", ex)
+            End Try
+        Next
+        Return instances
 
     End Function
 

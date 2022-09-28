@@ -1940,9 +1940,18 @@ Public Class FormMain
                         Try
                             Dim propname = xel.Element("Name").Value
                             Dim proptype = xel.Element("PropertyType").Value
-                            Dim ptype As Type = Type.GetType(proptype)
-                            Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
-                            DirectCast(form.ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                            Dim assembly1 As Assembly = Nothing
+                            For Each assembly In My.Application.Info.LoadedAssemblies
+                                If proptype.Contains(assembly.GetName().Name) Then
+                                    assembly1 = assembly
+                                    Exit For
+                                End If
+                            Next
+                            If assembly1 IsNot Nothing Then
+                                Dim ptype As Type = assembly1.GetType(proptype)
+                                Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                                DirectCast(form.ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                            End If
                         Catch ex As Exception
                         End Try
                     Next
