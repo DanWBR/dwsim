@@ -1886,6 +1886,11 @@ Public Class FormMain
 
         Try
             form.Options.LoadData(data)
+
+            If Not AvailableUnitSystems.ContainsKey(form.Options.SelectedUnitSystem1.Name) Then
+                AvailableUnitSystems.Add(form.Options.SelectedUnitSystem1.Name, form.Options.SelectedUnitSystem1)
+            End If
+
             If sver < New Version("6.3.0.0") Then
                 form.Options.SkipEquilibriumCalculationOnDefinedStreams = False
             End If

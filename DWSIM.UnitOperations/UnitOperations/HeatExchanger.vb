@@ -2469,7 +2469,10 @@ Namespace UnitOperations
                             STProperties.OverallFoulingFactor = f2 + f4
                             U = 1 / U
                             Q = U * A * F * LMTD / 1000
-                            If Q > MaxHeatExchange Then Q = MaxHeatExchange
+                            If Q > MaxHeatExchange Then
+                                Q = MaxHeatExchange
+                                F = Q * 1000 / (U * A * LMTD)
+                            End If
                             If STProperties.Shell_Fluid = 0 Then
                                 'cold
                                 DeltaHc = (Q - HeatLoss) / Wc
@@ -2526,7 +2529,20 @@ Namespace UnitOperations
 
                         FlowSheet.CheckStatus()
                         icnt += 1
-                    Loop Until fx < 0.01 Or icnt > 100
+                        If icnt > 100 Then
+                            Throw New Exception("Calculation did not converge in 100 iteratons.")
+                        End If
+                    Loop Until fx < 0.001
+
+                    StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                    IObj?.SetCurrent()
+                    Dim tmp2 = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, 0.0)
+                    Tc2 = tmp2.CalculatedTemperature
+                    StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                    IObj?.SetCurrent()
+                    tmp2 = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, 0.0)
+                    Th2 = tmp2.CalculatedTemperature
+
             End Select
 
             CheckSpec(Tc2, True, "cold stream outlet temperature")
