@@ -16,7 +16,7 @@ Public Class FormBulkAddPseudos
 
         ChangeDefaultFont()
 
-        grid1.Worksheets(0).SetCols(5)
+        grid1.Worksheets(0).SetCols(7)
         grid1.Worksheets(0).SetRows(1000)
 
         With grid1.Worksheets(0).ColumnHeaders
@@ -34,6 +34,14 @@ Public Class FormBulkAddPseudos
                                            .Flag = unvell.ReoGrid.PlainStyleFlag.FontSize + unvell.ReoGrid.PlainStyleFlag.FontName,
                                            .FontName = SystemFonts.MessageBoxFont.Name, .FontSize = SystemFonts.MessageBoxFont.Size})
 
+        grid1.Worksheets(0).SetRangeDataFormat(0, 1, 1000, 18, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number,
+                                               New unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs() With
+                                                {
+                                                .DecimalPlaces = 4,
+                                                .NegativeStyle = unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberNegativeStyle.Minus,
+                                                .UseSeparator = False
+                                                })
+
         cbNBPUnits.SelectedItem = "C"
         cbTCUnits.SelectedItem = "C"
         cbPCUnits.SelectedItem = "Pa"
@@ -45,10 +53,6 @@ Public Class FormBulkAddPseudos
         ComboBoxPC.SelectedIndex = 0
 
         btnAdd.Visible = Flowsheet IsNot Nothing
-
-        If FormMain.IsPro Then
-            btnExport.Visible = False
-        End If
 
     End Sub
 
@@ -62,6 +66,10 @@ Public Class FormBulkAddPseudos
             For Each comp In compounds
                 cbViewComp.Items.Add(comp.Name)
             Next
+
+            btnExport.Enabled = True
+            btnExporttoXML.Enabled = True
+            btnAdd.Enabled = True
 
         Catch ex As Exception
 
@@ -87,33 +95,31 @@ Public Class FormBulkAddPseudos
             Dim mwflag, sgflag, tbflag, tcflag, pcflag, afflag As Boolean
 
             data = sheet.Cells(i, 0).Data
-            If data Is Nothing Then Throw New Exception(String.Format("Error in row {0}: name is not defined.", i + 1))
+            If data Is Nothing Then
+                Exit For
+            End If
             mw = sheet.Cells(i, 1).Data
-            If mw IsNot Nothing AndAlso Double.TryParse(mw.ToString(), New Double) Then
+            If mw IsNot Nothing AndAlso Not Double.TryParse(mw.ToString(), New Double) Then
                 Throw New Exception(String.Format("Error in row {0}: MW is not a valid number.", i + 1))
             End If
             tb = sheet.Cells(i, 2).Data
-            If tb IsNot Nothing AndAlso Double.TryParse(tb.ToString(), New Double) Then
+            If tb IsNot Nothing AndAlso Not Double.TryParse(tb.ToString(), New Double) Then
                 Throw New Exception(String.Format("Error in row {0}: NBP is not a valid number.", i + 1))
             End If
             sg = sheet.Cells(i, 3).Data
-            If sg IsNot Nothing AndAlso Double.TryParse(sg.ToString(), New Double) Then
+            If sg IsNot Nothing AndAlso Not Double.TryParse(sg.ToString(), New Double) Then
                 Throw New Exception(String.Format("Error in row {0}: SG is not a valid number.", i + 1))
             End If
             tc = sheet.Cells(i, 4).Data
-            If tc IsNot Nothing AndAlso Double.TryParse(tc.ToString(), New Double) Then
+            If tc IsNot Nothing AndAlso Not Double.TryParse(tc.ToString(), New Double) Then
                 Throw New Exception(String.Format("Error in row {0}: TC is not a valid number.", i + 1))
             End If
             pc = sheet.Cells(i, 5).Data
-            If pc IsNot Nothing AndAlso Double.TryParse(pc.ToString(), New Double) Then
+            If pc IsNot Nothing AndAlso Not Double.TryParse(pc.ToString(), New Double) Then
                 Throw New Exception(String.Format("Error in row {0}: PC is not a valid number.", i + 1))
             End If
             af = sheet.Cells(i, 6).Data
-            If af IsNot Nothing AndAlso Double.TryParse(af.ToString(), New Double) Then
-                Throw New Exception(String.Format("Error in row {0}: AF is not a valid number.", i + 1))
-            End If
-            af = sheet.Cells(i, 6).Data
-            If af IsNot Nothing AndAlso Double.TryParse(af.ToString(), New Double) Then
+            If af IsNot Nothing AndAlso Not Double.TryParse(af.ToString(), New Double) Then
                 Throw New Exception(String.Format("Error in row {0}: AF is not a valid number.", i + 1))
             End If
 
@@ -172,7 +178,7 @@ Public Class FormBulkAddPseudos
                 End If
                 mw = PropertyMethods.MW_Winn(tb, sg)
             ElseIf tb IsNot Nothing Then
-                tb = tb
+                tb = Convert.ToDouble(tb).ConvertToSI(cbNBPUnits.SelectedItem)
                 If mw IsNot Nothing And sg IsNot Nothing Then
                     mw = mw
                     sg = sg
@@ -311,7 +317,7 @@ Public Class FormBulkAddPseudos
                 sheet.SetRangeStyles(i, 1, 1, 1, cstyle)
             End If
             If tbflag Then
-                sheet.Cells(i, 2).Data = tb
+                sheet.Cells(i, 2).Data = Convert.ToDouble(tb).ConvertFromSI(cbNBPUnits.SelectedItem)
                 sheet.SetRangeStyles(i, 2, 1, 1, cstyle)
             End If
             If sgflag Then
@@ -319,11 +325,11 @@ Public Class FormBulkAddPseudos
                 sheet.SetRangeStyles(i, 3, 1, 1, cstyle)
             End If
             If tcflag Then
-                sheet.Cells(i, 4).Data = tc
+                sheet.Cells(i, 4).Data = Convert.ToDouble(tc).ConvertFromSI(cbTCUnits.SelectedItem)
                 sheet.SetRangeStyles(i, 4, 1, 1, cstyle)
             End If
             If pcflag Then
-                sheet.Cells(i, 5).Data = pc
+                sheet.Cells(i, 5).Data = Convert.ToDouble(pc).ConvertFromSI(cbPCUnits.SelectedItem)
                 sheet.SetRangeStyles(i, 5, 1, 1, cstyle)
             End If
             If afflag Then
@@ -376,6 +382,8 @@ Public Class FormBulkAddPseudos
             For Each comp In compounds
 
                 Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+                filePickerForm.SuggestedFilename = comp.Name
 
                 Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
                 New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
@@ -434,8 +442,16 @@ Public Class FormBulkAddPseudos
 
     Private Sub btnViewComp_Click(sender As Object, e As EventArgs) Handles btnViewComp.Click
 
-        Dim f As New FormPureComp() With {.Flowsheet = Flowsheet, .Added = False, .MyCompound = compounds(cbViewComp.SelectedIndex)}
-        f.ShowDialog()
+        If cbViewComp.SelectedIndex >= 0 Then
+            Dim f As New FormPureComp() With {.Flowsheet = Flowsheet, .Added = False, .MyCompound = compounds(cbViewComp.SelectedIndex)}
+            f.ShowDialog()
+        End If
+
+    End Sub
+
+    Private Sub cbViewComp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbViewComp.SelectedIndexChanged
+
+        If cbViewComp.SelectedIndex >= 0 Then btnViewComp.Enabled = True Else btnViewComp.Enabled = False
 
     End Sub
 

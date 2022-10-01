@@ -4011,6 +4011,11 @@ Public Class FormFlowsheet
         My.Settings.WeatherPanelVisible = FormSurface.PanelWeather.Visible
     End Sub
 
+    Private Sub CriarPseudocomponentesEmBateladaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarPseudocomponentesEmBateladaToolStripMenuItem.Click
+        Dim fba As New FormBulkAddPseudos With {.Flowsheet = Me}
+        fba.Show()
+    End Sub
+
     Public Async Sub DisplayHTML(title As String, htmlcontent As String)
 
         Dim fh As New FormHTMLView()

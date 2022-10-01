@@ -71,7 +71,7 @@ Partial Class FormBulkAddPseudos
         Me.GroupBox2.Controls.Add(Me.grid1)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 41)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(673, 561)
+        Me.GroupBox2.Size = New System.Drawing.Size(626, 495)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Data"
@@ -91,7 +91,7 @@ Partial Class FormBulkAddPseudos
         Me.grid1.SheetTabVisible = False
         Me.grid1.SheetTabWidth = 60
         Me.grid1.ShowScrollEndSpacing = True
-        Me.grid1.Size = New System.Drawing.Size(667, 542)
+        Me.grid1.Size = New System.Drawing.Size(620, 476)
         Me.grid1.TabIndex = 0
         Me.grid1.Text = "ReoGridControl1"
         '
@@ -100,9 +100,9 @@ Partial Class FormBulkAddPseudos
         Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.TabControl1)
-        Me.GroupBox3.Location = New System.Drawing.Point(684, 136)
+        Me.GroupBox3.Location = New System.Drawing.Point(637, 136)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(273, 466)
+        Me.GroupBox3.Size = New System.Drawing.Size(273, 400)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Settings"
@@ -115,7 +115,7 @@ Partial Class FormBulkAddPseudos
         Me.TabControl1.Location = New System.Drawing.Point(3, 16)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(267, 447)
+        Me.TabControl1.Size = New System.Drawing.Size(267, 381)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -129,7 +129,7 @@ Partial Class FormBulkAddPseudos
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(259, 421)
+        Me.TabPage1.Size = New System.Drawing.Size(259, 355)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Units"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -317,7 +317,7 @@ Partial Class FormBulkAddPseudos
         'btnEstimate
         '
         Me.btnEstimate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnEstimate.Location = New System.Drawing.Point(6, 610)
+        Me.btnEstimate.Location = New System.Drawing.Point(6, 544)
         Me.btnEstimate.Name = "btnEstimate"
         Me.btnEstimate.Size = New System.Drawing.Size(231, 23)
         Me.btnEstimate.TabIndex = 3
@@ -328,7 +328,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.btnExport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnExport.Enabled = False
-        Me.btnExport.Location = New System.Drawing.Point(245, 610)
+        Me.btnExport.Location = New System.Drawing.Point(245, 544)
         Me.btnExport.Name = "btnExport"
         Me.btnExport.Size = New System.Drawing.Size(160, 23)
         Me.btnExport.TabIndex = 4
@@ -338,7 +338,7 @@ Partial Class FormBulkAddPseudos
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Location = New System.Drawing.Point(857, 610)
+        Me.btnClose.Location = New System.Drawing.Point(810, 544)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(100, 23)
         Me.btnClose.TabIndex = 5
@@ -351,7 +351,7 @@ Partial Class FormBulkAddPseudos
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.Location = New System.Drawing.Point(11, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(946, 29)
+        Me.Label1.Size = New System.Drawing.Size(899, 29)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Enter one compound per line. Missing data will be estimated depending on the avai" &
     "lable data for the corresponding compound. Please click on 'Commit Data' after y" &
@@ -361,7 +361,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.Enabled = False
-        Me.btnAdd.Location = New System.Drawing.Point(577, 610)
+        Me.btnAdd.Location = New System.Drawing.Point(577, 544)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(160, 23)
         Me.btnAdd.TabIndex = 7
@@ -372,7 +372,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.btnExporttoXML.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnExporttoXML.Enabled = False
-        Me.btnExporttoXML.Location = New System.Drawing.Point(411, 610)
+        Me.btnExporttoXML.Location = New System.Drawing.Point(411, 544)
         Me.btnExporttoXML.Name = "btnExporttoXML"
         Me.btnExporttoXML.Size = New System.Drawing.Size(160, 23)
         Me.btnExporttoXML.TabIndex = 8
@@ -385,7 +385,7 @@ Partial Class FormBulkAddPseudos
         Me.GroupBox1.Controls.Add(Me.btnViewComp)
         Me.GroupBox1.Controls.Add(Me.cbViewComp)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Location = New System.Drawing.Point(684, 41)
+        Me.GroupBox1.Location = New System.Drawing.Point(637, 41)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(273, 89)
         Me.GroupBox1.TabIndex = 9
@@ -427,7 +427,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(967, 643)
+        Me.ClientSize = New System.Drawing.Size(920, 577)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnExporttoXML)
         Me.Controls.Add(Me.btnAdd)
@@ -439,7 +439,7 @@ Partial Class FormBulkAddPseudos
         Me.Controls.Add(Me.GroupBox2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormBulkAddPseudos"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Bulk Create Pseudocompounds"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)

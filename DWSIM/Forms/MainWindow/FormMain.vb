@@ -4382,11 +4382,6 @@ Label_00CC:
         Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
     End Sub
 
-    Private Sub BulkAddCompoundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BulkAddCompoundToolStripMenuItem.Click
-        Dim fba As New FormBulkAddPseudos()
-        fba.Show()
-    End Sub
-
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked

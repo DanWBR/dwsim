@@ -132,6 +132,7 @@ Namespace GraphicObjects.Shapes
                     End If
 
                     .Item(0).ConnectorName = "Outlet"
+                    .Item(0).Direction = ConDir.Right
 
                 End With
 
@@ -195,6 +196,8 @@ Namespace GraphicObjects.Shapes
 
             Dim rect As New SKRect(X, Y, X + Width, Y + Height)
 
+            Dim rectin As New SKRect(X - 0.05 * Width, Y + 0.35 * Height, X + 0.5 * Width, Y + 0.65 * Height)
+
             Select Case DrawMode
 
                 Case 0
@@ -226,10 +229,14 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp, gradPen)
                     canvas.DrawPath(gp2, gradPen)
                     canvas.DrawOval(rect, gradPen)
+                    canvas.DrawRect(rectin, gradPen)
 
                     canvas.DrawOval(rect, myPen)
                     canvas.DrawPath(gp, myPen)
                     canvas.DrawPath(gp2, myPen)
+                    canvas.DrawRect(rectin, myPen2)
+                    canvas.DrawRect(rectin, gradPen)
+                    canvas.DrawRect(rectin, myPen)
 
                 Case 1
 
@@ -252,6 +259,7 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp2, myPen)
                     canvas.DrawOval(rect, myPen2)
                     canvas.DrawOval(rect, myPen)
+                    canvas.DrawRect(rectin, myPen)
 
                 Case 2
 
