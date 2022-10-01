@@ -113,6 +113,8 @@ Public Class FormMain
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        If IsPro Then StatusStrip1.Visible = False
+
         Using g1 = Me.CreateGraphics()
 
             Settings.DpiScale = g1.DpiX / 96.0
@@ -4380,6 +4382,14 @@ Label_00CC:
 
     Private Sub DIscordChannelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DIscordChannelToolStripMenuItem.Click
         Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
+    End Sub
+
+    Private Sub ToolStripDropDownButton2_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton2.Click
+        Process.Start("https://www.buymeacoffee.com/dwsim")
+    End Sub
+
+    Private Sub ToolStripDropDownButton1_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton1.Click
+        Process.Start("https://www.patreon.com/dwsim")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

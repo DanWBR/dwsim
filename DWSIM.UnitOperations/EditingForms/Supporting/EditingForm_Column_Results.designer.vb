@@ -131,6 +131,7 @@ Partial Class EditingForm_Column_Results
         Me.Content.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem3, Me.FaTabStripItem20})
         Me.Content.Name = "Content"
         Me.Content.SelectedItem = Me.FaTabStripItem1
+        Me.ToolTipValues.SetToolTip(Me.Content, resources.GetString("Content.ToolTip"))
         '
         'FaTabStripItem1
         '
@@ -140,6 +141,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'FaTabStrip2
         '
@@ -149,6 +151,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem4, Me.FaTabStripItem5})
         Me.FaTabStrip2.Name = "FaTabStrip2"
         Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem4
+        Me.ToolTipValues.SetToolTip(Me.FaTabStrip2, resources.GetString("FaTabStrip2.ToolTip"))
         '
         'FaTabStripItem4
         '
@@ -159,6 +162,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem4.IsDrawn = True
         Me.FaTabStripItem4.Name = "FaTabStripItem4"
         Me.FaTabStripItem4.Selected = True
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem4, resources.GetString("FaTabStripItem4.ToolTip"))
         '
         'GroupBox2
         '
@@ -166,11 +170,13 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox2.Controls.Add(Me.CheckBox1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'CheckBox1
         '
         resources.ApplyResources(Me.CheckBox1, "CheckBox1")
         Me.CheckBox1.Name = "CheckBox1"
+        Me.ToolTipValues.SetToolTip(Me.CheckBox1, resources.GetString("CheckBox1.ToolTip"))
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -179,6 +185,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox1.Controls.Add(Me.GraphTP)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'GraphTP
         '
@@ -188,13 +195,14 @@ Partial Class EditingForm_Column_Results
         Me.GraphTP.IsShowCopyMessage = False
         Me.GraphTP.IsShowPointValues = True
         Me.GraphTP.Name = "GraphTP"
-        Me.GraphTP.ScrollGrace = 0.0R
-        Me.GraphTP.ScrollMaxX = 0.0R
-        Me.GraphTP.ScrollMaxY = 0.0R
-        Me.GraphTP.ScrollMaxY2 = 0.0R
-        Me.GraphTP.ScrollMinX = 0.0R
-        Me.GraphTP.ScrollMinY = 0.0R
-        Me.GraphTP.ScrollMinY2 = 0.0R
+        Me.GraphTP.ScrollGrace = 0R
+        Me.GraphTP.ScrollMaxX = 0R
+        Me.GraphTP.ScrollMaxY = 0R
+        Me.GraphTP.ScrollMaxY2 = 0R
+        Me.GraphTP.ScrollMinX = 0R
+        Me.GraphTP.ScrollMinY = 0R
+        Me.GraphTP.ScrollMinY2 = 0R
+        Me.ToolTipValues.SetToolTip(Me.GraphTP, resources.GetString("GraphTP.ToolTip"))
         '
         'FaTabStripItem5
         '
@@ -203,6 +211,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem5.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
         '
         'GroupBox3
         '
@@ -210,6 +219,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox3.Controls.Add(Me.TableTP)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'TableTP
         '
@@ -242,6 +252,7 @@ Partial Class EditingForm_Column_Results
         Me.TableTP.ReadOnly = True
         Me.TableTP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.TableTP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTipValues.SetToolTip(Me.TableTP, resources.GetString("TableTP.ToolTip"))
         '
         'FaTabStripItem2
         '
@@ -250,6 +261,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem2.Controls.Add(Me.FaTabStrip3)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem2, resources.GetString("FaTabStripItem2.ToolTip"))
         '
         'FaTabStrip3
         '
@@ -259,6 +271,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStrip3.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem6, Me.FaTabStripItem7})
         Me.FaTabStrip3.Name = "FaTabStrip3"
         Me.FaTabStrip3.SelectedItem = Me.FaTabStripItem6
+        Me.ToolTipValues.SetToolTip(Me.FaTabStrip3, resources.GetString("FaTabStrip3.ToolTip"))
         '
         'FaTabStripItem6
         '
@@ -269,6 +282,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
         Me.FaTabStripItem6.Selected = True
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem6, resources.GetString("FaTabStripItem6.ToolTip"))
         '
         'GroupBox4
         '
@@ -276,11 +290,13 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox4.Controls.Add(Me.CheckBox2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'CheckBox2
         '
         resources.ApplyResources(Me.CheckBox2, "CheckBox2")
         Me.CheckBox2.Name = "CheckBox2"
+        Me.ToolTipValues.SetToolTip(Me.CheckBox2, resources.GetString("CheckBox2.ToolTip"))
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'GroupBox5
@@ -289,6 +305,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox5.Controls.Add(Me.GraphVL)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'GraphVL
         '
@@ -298,13 +315,14 @@ Partial Class EditingForm_Column_Results
         Me.GraphVL.IsShowCopyMessage = False
         Me.GraphVL.IsShowPointValues = True
         Me.GraphVL.Name = "GraphVL"
-        Me.GraphVL.ScrollGrace = 0.0R
-        Me.GraphVL.ScrollMaxX = 0.0R
-        Me.GraphVL.ScrollMaxY = 0.0R
-        Me.GraphVL.ScrollMaxY2 = 0.0R
-        Me.GraphVL.ScrollMinX = 0.0R
-        Me.GraphVL.ScrollMinY = 0.0R
-        Me.GraphVL.ScrollMinY2 = 0.0R
+        Me.GraphVL.ScrollGrace = 0R
+        Me.GraphVL.ScrollMaxX = 0R
+        Me.GraphVL.ScrollMaxY = 0R
+        Me.GraphVL.ScrollMaxY2 = 0R
+        Me.GraphVL.ScrollMinX = 0R
+        Me.GraphVL.ScrollMinY = 0R
+        Me.GraphVL.ScrollMinY2 = 0R
+        Me.ToolTipValues.SetToolTip(Me.GraphVL, resources.GetString("GraphVL.ToolTip"))
         '
         'FaTabStripItem7
         '
@@ -313,6 +331,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem7, resources.GetString("FaTabStripItem7.ToolTip"))
         '
         'GroupBox6
         '
@@ -320,6 +339,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox6.Controls.Add(Me.TableVL)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'TableVL
         '
@@ -352,6 +372,7 @@ Partial Class EditingForm_Column_Results
         Me.TableVL.ReadOnly = True
         Me.TableVL.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.TableVL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTipValues.SetToolTip(Me.TableVL, resources.GetString("TableVL.ToolTip"))
         '
         'FaTabStripItem3
         '
@@ -360,6 +381,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem3.Controls.Add(Me.FaTabStrip4)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem3, resources.GetString("FaTabStripItem3.ToolTip"))
         '
         'FaTabStrip4
         '
@@ -369,6 +391,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStrip4.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem8, Me.FaTabStripItem9})
         Me.FaTabStrip4.Name = "FaTabStrip4"
         Me.FaTabStrip4.SelectedItem = Me.FaTabStripItem8
+        Me.ToolTipValues.SetToolTip(Me.FaTabStrip4, resources.GetString("FaTabStrip4.ToolTip"))
         '
         'FaTabStripItem8
         '
@@ -379,6 +402,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem8.IsDrawn = True
         Me.FaTabStripItem8.Name = "FaTabStripItem8"
         Me.FaTabStripItem8.Selected = True
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem8, resources.GetString("FaTabStripItem8.ToolTip"))
         '
         'GroupBox7
         '
@@ -387,11 +411,13 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox7.Controls.Add(Me.CheckBox3)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip"))
         '
         'CheckBox4
         '
         resources.ApplyResources(Me.CheckBox4, "CheckBox4")
         Me.CheckBox4.Name = "CheckBox4"
+        Me.ToolTipValues.SetToolTip(Me.CheckBox4, resources.GetString("CheckBox4.ToolTip"))
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'CheckBox3
@@ -400,6 +426,7 @@ Partial Class EditingForm_Column_Results
         Me.CheckBox3.Checked = True
         Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox3.Name = "CheckBox3"
+        Me.ToolTipValues.SetToolTip(Me.CheckBox3, resources.GetString("CheckBox3.ToolTip"))
         Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'GroupBox8
@@ -408,6 +435,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox8.Controls.Add(Me.GraphCP)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox8, resources.GetString("GroupBox8.ToolTip"))
         '
         'GraphCP
         '
@@ -417,13 +445,14 @@ Partial Class EditingForm_Column_Results
         Me.GraphCP.IsShowCopyMessage = False
         Me.GraphCP.IsShowPointValues = True
         Me.GraphCP.Name = "GraphCP"
-        Me.GraphCP.ScrollGrace = 0.0R
-        Me.GraphCP.ScrollMaxX = 0.0R
-        Me.GraphCP.ScrollMaxY = 0.0R
-        Me.GraphCP.ScrollMaxY2 = 0.0R
-        Me.GraphCP.ScrollMinX = 0.0R
-        Me.GraphCP.ScrollMinY = 0.0R
-        Me.GraphCP.ScrollMinY2 = 0.0R
+        Me.GraphCP.ScrollGrace = 0R
+        Me.GraphCP.ScrollMaxX = 0R
+        Me.GraphCP.ScrollMaxY = 0R
+        Me.GraphCP.ScrollMaxY2 = 0R
+        Me.GraphCP.ScrollMinX = 0R
+        Me.GraphCP.ScrollMinY = 0R
+        Me.GraphCP.ScrollMinY2 = 0R
+        Me.ToolTipValues.SetToolTip(Me.GraphCP, resources.GetString("GraphCP.ToolTip"))
         '
         'FaTabStripItem9
         '
@@ -432,6 +461,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem9.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem9.IsDrawn = True
         Me.FaTabStripItem9.Name = "FaTabStripItem9"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem9, resources.GetString("FaTabStripItem9.ToolTip"))
         '
         'GroupBox9
         '
@@ -439,6 +469,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox9.Controls.Add(Me.TableCP)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox9, resources.GetString("GroupBox9.ToolTip"))
         '
         'TableCP
         '
@@ -471,6 +502,7 @@ Partial Class EditingForm_Column_Results
         Me.TableCP.ReadOnly = True
         Me.TableCP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.TableCP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTipValues.SetToolTip(Me.TableCP, resources.GetString("TableCP.ToolTip"))
         '
         'FaTabStripItem20
         '
@@ -479,6 +511,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem20.Controls.Add(Me.FaTabStrip9)
         Me.FaTabStripItem20.IsDrawn = True
         Me.FaTabStripItem20.Name = "FaTabStripItem20"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem20, resources.GetString("FaTabStripItem20.ToolTip"))
         '
         'FaTabStrip9
         '
@@ -488,6 +521,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStrip9.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem21, Me.FaTabStripItem22})
         Me.FaTabStrip9.Name = "FaTabStrip9"
         Me.FaTabStrip9.SelectedItem = Me.FaTabStripItem21
+        Me.ToolTipValues.SetToolTip(Me.FaTabStrip9, resources.GetString("FaTabStrip9.ToolTip"))
         '
         'FaTabStripItem21
         '
@@ -498,12 +532,14 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem21.IsDrawn = True
         Me.FaTabStripItem21.Name = "FaTabStripItem21"
         Me.FaTabStripItem21.Selected = True
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem21, resources.GetString("FaTabStripItem21.ToolTip"))
         '
         'GroupBox21
         '
         resources.ApplyResources(Me.GroupBox21, "GroupBox21")
         Me.GroupBox21.Name = "GroupBox21"
         Me.GroupBox21.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox21, resources.GetString("GroupBox21.ToolTip"))
         '
         'GroupBox22
         '
@@ -511,6 +547,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox22.Controls.Add(Me.GraphConc)
         Me.GroupBox22.Name = "GroupBox22"
         Me.GroupBox22.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox22, resources.GetString("GroupBox22.ToolTip"))
         '
         'GraphConc
         '
@@ -520,13 +557,14 @@ Partial Class EditingForm_Column_Results
         Me.GraphConc.IsShowCopyMessage = False
         Me.GraphConc.IsShowPointValues = True
         Me.GraphConc.Name = "GraphConc"
-        Me.GraphConc.ScrollGrace = 0.0R
-        Me.GraphConc.ScrollMaxX = 0.0R
-        Me.GraphConc.ScrollMaxY = 0.0R
-        Me.GraphConc.ScrollMaxY2 = 0.0R
-        Me.GraphConc.ScrollMinX = 0.0R
-        Me.GraphConc.ScrollMinY = 0.0R
-        Me.GraphConc.ScrollMinY2 = 0.0R
+        Me.GraphConc.ScrollGrace = 0R
+        Me.GraphConc.ScrollMaxX = 0R
+        Me.GraphConc.ScrollMaxY = 0R
+        Me.GraphConc.ScrollMaxY2 = 0R
+        Me.GraphConc.ScrollMinX = 0R
+        Me.GraphConc.ScrollMinY = 0R
+        Me.GraphConc.ScrollMinY2 = 0R
+        Me.ToolTipValues.SetToolTip(Me.GraphConc, resources.GetString("GraphConc.ToolTip"))
         '
         'FaTabStripItem22
         '
@@ -535,6 +573,7 @@ Partial Class EditingForm_Column_Results
         Me.FaTabStripItem22.Controls.Add(Me.GroupBox23)
         Me.FaTabStripItem22.IsDrawn = True
         Me.FaTabStripItem22.Name = "FaTabStripItem22"
+        Me.ToolTipValues.SetToolTip(Me.FaTabStripItem22, resources.GetString("FaTabStripItem22.ToolTip"))
         '
         'GroupBox23
         '
@@ -542,6 +581,7 @@ Partial Class EditingForm_Column_Results
         Me.GroupBox23.Controls.Add(Me.DataGridView4)
         Me.GroupBox23.Name = "GroupBox23"
         Me.GroupBox23.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBox23, resources.GetString("GroupBox23.ToolTip"))
         '
         'DataGridView4
         '
@@ -574,6 +614,7 @@ Partial Class EditingForm_Column_Results
         Me.DataGridView4.ReadOnly = True
         Me.DataGridView4.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTipValues.SetToolTip(Me.DataGridView4, resources.GetString("DataGridView4.ToolTip"))
         '
         'ToolStrip1
         '
@@ -581,6 +622,7 @@ Partial Class EditingForm_Column_Results
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSB_Print, Me.TSB_PrinterSetup, Me.TSB_PageSetup, Me.TSB_Preview, Me.TSB_Copy})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolTipValues.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
         '
         'TSB_Print
         '
@@ -629,6 +671,7 @@ Partial Class EditingForm_Column_Results
         Me.Controls.Add(Me.ToolStrip1)
         Me.DoubleBuffered = True
         Me.Name = "EditingForm_Column_Results"
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         CType(Me.Content, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Content.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
