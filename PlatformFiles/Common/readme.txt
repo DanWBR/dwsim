@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.1.1
+Version 8.2.0
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,19 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.2.0
+
+- Updated ChemSep database to v8.32 - new compounds are available
+- New Bulk Add Petroleum Fractions Tool (Classic UI)
+- Property Package recommendations (beta feature - Classic UI)
+- New Flowsheet Theme: Color Icons
+- Adjustments to default Flowsheet Theme
+- Fixed issue with XML Database loading
+- Fixed an issue with Bubble Point Column Solver
+- Fixed user-defined Unit Set not being added to list (Classic UI)
+- Fixed issues with Heat Exchanger
+- Other minor fixes
 
 Version 8.1.1
 

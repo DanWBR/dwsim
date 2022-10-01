@@ -1,8 +1,12 @@
-Version 8.1.1
+Version 8.2.0
 
-- Fixed crashes when using certain Property Packages
-- Fixed some editors not appearing correctly in High-DPI displays
-- Fixed an issue with Air Cooler 2
-- Fixed Classic UI not saving simulations on Linux
-- Weather Panel is now hidden by default 
-- Minor fixes
+- Updated ChemSep database to v8.32 - new compounds are available
+- New Bulk Add Petroleum Fractions Tool (Classic UI)
+- Property Package recommendations (beta feature - Classic UI)
+- New Flowsheet Theme: Color Icons
+- Adjustments to default Flowsheet Theme
+- Fixed issue with XML Database loading
+- Fixed an issue with Bubble Point Column Solver
+- Fixed user-defined Unit Set not being added to list (Classic UI)
+- Fixed issues with Heat Exchanger
+- Other minor fixes

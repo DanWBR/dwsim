@@ -52,9 +52,9 @@ Partial Class FormBulkAddPseudos
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnExporttoXML = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cbViewComp = New System.Windows.Forms.ComboBox()
         Me.btnViewComp = New System.Windows.Forms.Button()
+        Me.cbViewComp = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -71,7 +71,7 @@ Partial Class FormBulkAddPseudos
         Me.GroupBox2.Controls.Add(Me.grid1)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 41)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(626, 495)
+        Me.GroupBox2.Size = New System.Drawing.Size(610, 495)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Data"
@@ -91,7 +91,7 @@ Partial Class FormBulkAddPseudos
         Me.grid1.SheetTabVisible = False
         Me.grid1.SheetTabWidth = 60
         Me.grid1.ShowScrollEndSpacing = True
-        Me.grid1.Size = New System.Drawing.Size(620, 476)
+        Me.grid1.Size = New System.Drawing.Size(604, 476)
         Me.grid1.TabIndex = 0
         Me.grid1.Text = "ReoGridControl1"
         '
@@ -100,9 +100,9 @@ Partial Class FormBulkAddPseudos
         Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.TabControl1)
-        Me.GroupBox3.Location = New System.Drawing.Point(637, 136)
+        Me.GroupBox3.Location = New System.Drawing.Point(622, 136)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(273, 400)
+        Me.GroupBox3.Size = New System.Drawing.Size(288, 400)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Settings"
@@ -115,7 +115,7 @@ Partial Class FormBulkAddPseudos
         Me.TabControl1.Location = New System.Drawing.Point(3, 16)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(267, 381)
+        Me.TabControl1.Size = New System.Drawing.Size(282, 381)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -129,7 +129,7 @@ Partial Class FormBulkAddPseudos
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(259, 355)
+        Me.TabPage1.Size = New System.Drawing.Size(274, 355)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Units"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -141,7 +141,7 @@ Partial Class FormBulkAddPseudos
         Me.cbNBPUnits.Items.AddRange(New Object() {"K", "C", "F", "R"})
         Me.cbNBPUnits.Location = New System.Drawing.Point(166, 16)
         Me.cbNBPUnits.Name = "cbNBPUnits"
-        Me.cbNBPUnits.Size = New System.Drawing.Size(83, 21)
+        Me.cbNBPUnits.Size = New System.Drawing.Size(92, 21)
         Me.cbNBPUnits.TabIndex = 37
         '
         'Label4
@@ -161,7 +161,7 @@ Partial Class FormBulkAddPseudos
         Me.cbPCUnits.Items.AddRange(New Object() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
         Me.cbPCUnits.Location = New System.Drawing.Point(166, 76)
         Me.cbPCUnits.Name = "cbPCUnits"
-        Me.cbPCUnits.Size = New System.Drawing.Size(83, 21)
+        Me.cbPCUnits.Size = New System.Drawing.Size(92, 21)
         Me.cbPCUnits.TabIndex = 35
         '
         'Label2
@@ -181,7 +181,7 @@ Partial Class FormBulkAddPseudos
         Me.cbTCUnits.Items.AddRange(New Object() {"K", "C", "F", "R"})
         Me.cbTCUnits.Location = New System.Drawing.Point(166, 46)
         Me.cbTCUnits.Name = "cbTCUnits"
-        Me.cbTCUnits.Size = New System.Drawing.Size(83, 21)
+        Me.cbTCUnits.Size = New System.Drawing.Size(92, 21)
         Me.cbTCUnits.TabIndex = 33
         '
         'Label3
@@ -209,7 +209,7 @@ Partial Class FormBulkAddPseudos
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(259, 410)
+        Me.TabPage2.Size = New System.Drawing.Size(274, 355)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Estimation Methods"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -221,7 +221,7 @@ Partial Class FormBulkAddPseudos
         Me.ComboBoxMW.Items.AddRange(New Object() {"Winn (1956)", "Riazi (1986)", "Lee-Kesler (1974)"})
         Me.ComboBoxMW.Location = New System.Drawing.Point(125, 145)
         Me.ComboBoxMW.Name = "ComboBoxMW"
-        Me.ComboBoxMW.Size = New System.Drawing.Size(125, 21)
+        Me.ComboBoxMW.Size = New System.Drawing.Size(138, 21)
         Me.ComboBoxMW.TabIndex = 34
         '
         'ComboBoxSG
@@ -231,7 +231,7 @@ Partial Class FormBulkAddPseudos
         Me.ComboBoxSG.Items.AddRange(New Object() {"Riazi-Al-Sahhaf (1996)"})
         Me.ComboBoxSG.Location = New System.Drawing.Point(125, 113)
         Me.ComboBoxSG.Name = "ComboBoxSG"
-        Me.ComboBoxSG.Size = New System.Drawing.Size(125, 21)
+        Me.ComboBoxSG.Size = New System.Drawing.Size(138, 21)
         Me.ComboBoxSG.TabIndex = 33
         '
         'ComboBoxAF
@@ -241,7 +241,7 @@ Partial Class FormBulkAddPseudos
         Me.ComboBoxAF.Items.AddRange(New Object() {"Lee-Kesler (1976)", "Korsten (2000)"})
         Me.ComboBoxAF.Location = New System.Drawing.Point(125, 82)
         Me.ComboBoxAF.Name = "ComboBoxAF"
-        Me.ComboBoxAF.Size = New System.Drawing.Size(125, 21)
+        Me.ComboBoxAF.Size = New System.Drawing.Size(138, 21)
         Me.ComboBoxAF.TabIndex = 32
         '
         'ComboBoxPC
@@ -251,14 +251,14 @@ Partial Class FormBulkAddPseudos
         Me.ComboBoxPC.Items.AddRange(New Object() {"Riazi-Daubert (1985)", "Riazi (2005)", "Lee-Kesler (1976)", "Farah (2006)"})
         Me.ComboBoxPC.Location = New System.Drawing.Point(125, 51)
         Me.ComboBoxPC.Name = "ComboBoxPC"
-        Me.ComboBoxPC.Size = New System.Drawing.Size(125, 21)
+        Me.ComboBoxPC.Size = New System.Drawing.Size(138, 21)
         Me.ComboBoxPC.TabIndex = 31
         '
         'Label33
         '
         Me.Label33.AutoSize = True
         Me.Label33.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label33.Location = New System.Drawing.Point(9, 116)
+        Me.Label33.Location = New System.Drawing.Point(9, 117)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(81, 13)
         Me.Label33.TabIndex = 30
@@ -268,7 +268,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.Label31.AutoSize = True
         Me.Label31.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label31.Location = New System.Drawing.Point(9, 148)
+        Me.Label31.Location = New System.Drawing.Point(9, 149)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(90, 13)
         Me.Label31.TabIndex = 29
@@ -278,7 +278,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.Label30.AutoSize = True
         Me.Label30.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label30.Location = New System.Drawing.Point(9, 85)
+        Me.Label30.Location = New System.Drawing.Point(9, 86)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(79, 13)
         Me.Label30.TabIndex = 28
@@ -288,7 +288,7 @@ Partial Class FormBulkAddPseudos
         '
         Me.Label29.AutoSize = True
         Me.Label29.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label29.Location = New System.Drawing.Point(9, 54)
+        Me.Label29.Location = New System.Drawing.Point(9, 55)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(82, 13)
         Me.Label29.TabIndex = 27
@@ -301,14 +301,14 @@ Partial Class FormBulkAddPseudos
         Me.ComboBoxTC.Items.AddRange(New Object() {"Riazi-Daubert (1985)", "Riazi (2005)", "Lee-Kesler (1976)", "Farah (2006)"})
         Me.ComboBoxTC.Location = New System.Drawing.Point(125, 21)
         Me.ComboBoxTC.Name = "ComboBoxTC"
-        Me.ComboBoxTC.Size = New System.Drawing.Size(125, 21)
+        Me.ComboBoxTC.Size = New System.Drawing.Size(138, 21)
         Me.ComboBoxTC.TabIndex = 26
         '
         'Label28
         '
         Me.Label28.AutoSize = True
         Me.Label28.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label28.Location = New System.Drawing.Point(9, 24)
+        Me.Label28.Location = New System.Drawing.Point(9, 25)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(101, 13)
         Me.Label28.TabIndex = 25
@@ -385,12 +385,33 @@ Partial Class FormBulkAddPseudos
         Me.GroupBox1.Controls.Add(Me.btnViewComp)
         Me.GroupBox1.Controls.Add(Me.cbViewComp)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Location = New System.Drawing.Point(637, 41)
+        Me.GroupBox1.Location = New System.Drawing.Point(622, 41)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(273, 89)
+        Me.GroupBox1.Size = New System.Drawing.Size(288, 89)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Tools"
+        '
+        'btnViewComp
+        '
+        Me.btnViewComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnViewComp.Enabled = False
+        Me.btnViewComp.Location = New System.Drawing.Point(114, 51)
+        Me.btnViewComp.Name = "btnViewComp"
+        Me.btnViewComp.Size = New System.Drawing.Size(151, 23)
+        Me.btnViewComp.TabIndex = 39
+        Me.btnViewComp.Text = "View"
+        Me.btnViewComp.UseVisualStyleBackColor = True
+        '
+        'cbViewComp
+        '
+        Me.cbViewComp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbViewComp.FormattingEnabled = True
+        Me.cbViewComp.Items.AddRange(New Object() {"K", "C", "F", "R"})
+        Me.cbViewComp.Location = New System.Drawing.Point(114, 24)
+        Me.cbViewComp.Name = "cbViewComp"
+        Me.cbViewComp.Size = New System.Drawing.Size(151, 21)
+        Me.cbViewComp.TabIndex = 38
         '
         'Label5
         '
@@ -401,27 +422,6 @@ Partial Class FormBulkAddPseudos
         Me.Label5.Size = New System.Drawing.Size(84, 13)
         Me.Label5.TabIndex = 37
         Me.Label5.Text = "View Compound"
-        '
-        'cbViewComp
-        '
-        Me.cbViewComp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbViewComp.FormattingEnabled = True
-        Me.cbViewComp.Items.AddRange(New Object() {"K", "C", "F", "R"})
-        Me.cbViewComp.Location = New System.Drawing.Point(114, 24)
-        Me.cbViewComp.Name = "cbViewComp"
-        Me.cbViewComp.Size = New System.Drawing.Size(142, 21)
-        Me.cbViewComp.TabIndex = 38
-        '
-        'btnViewComp
-        '
-        Me.btnViewComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnViewComp.Enabled = False
-        Me.btnViewComp.Location = New System.Drawing.Point(114, 51)
-        Me.btnViewComp.Name = "btnViewComp"
-        Me.btnViewComp.Size = New System.Drawing.Size(142, 23)
-        Me.btnViewComp.TabIndex = 39
-        Me.btnViewComp.Text = "View"
-        Me.btnViewComp.UseVisualStyleBackColor = True
         '
         'FormBulkAddPseudos
         '
