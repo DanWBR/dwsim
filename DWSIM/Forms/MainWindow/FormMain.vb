@@ -137,7 +137,7 @@ Public Class FormMain
         If GlobalSettings.Settings.OldUI Then
 
 #If LINUX = False Then
-            If Not IsPro Then Icon = My.Resources.DWSIM_Icon_v8
+            If Not IsPro Then Icon = My.Resources.DWSIM_icon_64
 #End If
 
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
@@ -4380,6 +4380,11 @@ Label_00CC:
 
     Private Sub DIscordChannelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DIscordChannelToolStripMenuItem.Click
         Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
+    End Sub
+
+    Private Sub BulkAddCompoundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BulkAddCompoundToolStripMenuItem.Click
+        Dim fba As New FormBulkAddPseudos()
+        fba.Show()
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

@@ -18,7 +18,7 @@
     </ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>DWSIM Icon.ico</ApplicationIcon>
+    <ApplicationIcon>DWSIM_icon_64.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -1108,6 +1108,12 @@
     <Compile Include="Tools\Assay Manager\FormAssayManager.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tools\Bulk Add Pseudocompounds\FormBulkAddPseudos.Designer.vb">
+      <DependentUpon>FormBulkAddPseudos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Bulk Add Pseudocompounds\FormBulkAddPseudos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\Mass and Energy Balance Summary\FormMEBSummary.Designer.vb">
       <DependentUpon>FormMEBSummary.vb</DependentUpon>
     </Compile>
@@ -2151,6 +2157,9 @@
     <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.es.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Bulk Add Pseudocompounds\FormBulkAddPseudos.resx">
+      <DependentUpon>FormBulkAddPseudos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\Mass and Energy Balance Summary\FormMEBSummary.en.resx">
       <DependentUpon>FormMEBSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2624,6 +2633,7 @@
     <None Include="Resources\background_welcome.png" />
     <None Include="Resources\bold.png" />
     <None Include="Resources\bolditalic.png" />
+    <Content Include="DWSIM_icon_64.ico" />
     <Content Include="Lib\abc.py" />
     <Content Include="Lib\aifc.py" />
     <Content Include="Lib\antigravity.py" />

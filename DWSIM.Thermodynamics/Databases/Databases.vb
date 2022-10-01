@@ -946,7 +946,6 @@ Namespace Databases
                             .Formatting = Formatting.Indented
                             .WriteStartDocument()
                             .WriteStartElement("compounds")
-                            .WriteEndElement()
                             .WriteEndDocument()
                             .Flush()
                         End With
@@ -1166,6 +1165,7 @@ Namespace Databases
                     xmldoc.ChildNodes(1).AppendChild(newnode)
                 Next
 
+                xmlstream.Position = 0
                 xmldoc.Save(xmlstream)
                 xmldoc = Nothing
 
@@ -1226,7 +1226,7 @@ Namespace Databases
 
         Public Shared Function ReadComps(reader As XmlReader) As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim xmldoc = New XmlDocument
+            Dim xmldoc = New XmlDocument()
             xmldoc.Load(reader)
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties

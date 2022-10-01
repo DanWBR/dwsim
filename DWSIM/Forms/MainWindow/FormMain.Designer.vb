@@ -114,6 +114,7 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
+        Me.BulkAddCompoundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -254,7 +255,7 @@ Partial Class FormMain
         '
         'ToolsTSMI
         '
-        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.RegistroCAPEOPENToolStripMenuItem, Me.DownloadSupplementarySoftwareToolStripMenuItem})
+        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.RegistroCAPEOPENToolStripMenuItem, Me.DownloadSupplementarySoftwareToolStripMenuItem, Me.BulkAddCompoundToolStripMenuItem})
         Me.ToolsTSMI.Name = "ToolsTSMI"
         resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
         '
@@ -634,6 +635,11 @@ Partial Class FormMain
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
         '
+        'BulkAddCompoundToolStripMenuItem
+        '
+        Me.BulkAddCompoundToolStripMenuItem.Name = "BulkAddCompoundToolStripMenuItem"
+        resources.ApplyResources(Me.BulkAddCompoundToolStripMenuItem, "BulkAddCompoundToolStripMenuItem")
+        '
         'FormMain
         '
         Me.AllowDrop = True
@@ -919,4 +925,5 @@ Partial Class FormMain
     Public WithEvents SaveFileS365 As ToolStripButton
     Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DIscordChannelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BulkAddCompoundToolStripMenuItem As ToolStripMenuItem
 End Class
