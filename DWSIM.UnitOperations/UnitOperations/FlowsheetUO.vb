@@ -694,6 +694,19 @@ Label_00CC:
 
             IObj?.SetCurrent()
 
+            If Not Initialized Then
+                If FileIsEmbedded Then
+                    Dim tmpfile As String = ""
+                    tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
+                    FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
+                    Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(tmpfile, FlowSheet.GetNewInstance)
+                    File.Delete(tmpfile)
+                Else
+                    Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(SimulationFile, FlowSheet.GetNewInstance)
+                End If
+                Initialized = True
+            End If
+
             If Initialized Then InitializeMappings()
 
             Me.Fsheet.MasterUnitOp = Me
@@ -1018,10 +1031,12 @@ Label_00CC:
             ParseFilePath()
 
             If InitializeOnLoad Then
-                If IO.File.Exists(SimulationFile) Then
-                    Me.Fsheet = Me.FlowSheet.GetNewInstance
-                    InitializeFlowsheet(SimulationFile, Me.Fsheet)
-                    Me.Initialized = True
+                If Not FileIsEmbedded Then
+                    If IO.File.Exists(SimulationFile) Then
+                        Me.Fsheet = Me.FlowSheet.GetNewInstance
+                        InitializeFlowsheet(SimulationFile, Me.Fsheet)
+                        Me.Initialized = True
+                    End If
                 End If
             End If
 

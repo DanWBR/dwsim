@@ -1508,7 +1508,7 @@ Namespace PropertyPackages
             Dim ratio = Ki.DivideY(Ki_id)
 
             For i = 0 To Vz.Length - 1
-                If ratio(i) > 1000 Or ratio(i) < 0.001 And Vz(i) < 0.0001 Then
+                If ratio(i) > 100000 Or ratio(i) < 0.001 And Vz(i) < 0.0001 Then
                     Ki2(i) = Ki_id(i)
                 Else
                     Ki2(i) = Ki(i)
