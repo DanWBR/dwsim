@@ -1529,6 +1529,13 @@ namespace DWSIM.UI.Forms
             var btnSingleDonation = new Button {Text = "One-Time Donation",  ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
             var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png", this.GetType().Assembly)).WithSize(16, 16) };
 
+            if (s.RunningPlatform() == s.Platform.Linux)
+            {
+                lbldonate.Text = "Support DWSIM development and maintenance.";
+                btnSingleDonation.Width = (int)(140 * sf);
+                btnMonthlyDonation.Width = (int)(140 * sf);
+            }
+
             btnSingleDonation.Click += (s, e) => {
                 "https://www.buymeacoffee.com/dwsim".OpenURL();
             };
