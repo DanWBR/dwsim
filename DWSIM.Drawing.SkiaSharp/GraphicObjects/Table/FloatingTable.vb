@@ -559,11 +559,15 @@ Namespace GraphicObjects.Tables
 
                             'draw shadow
 
-                            Dim GradientColors = {New SKColor(220, 240, 255, 230), New SKColor(140, 255, 190, 255), New SKColor(255, 92, 119, 255), New SKColor(0, 0, 0, 255)}
-                            Dim GradientWeights = {0.0F, 0.2044351F * Width, 0.5359721F * Width, 0.9662447F * Width}
-                            Dim Gradient = SKShader.CreateSweepGradient(New SKPoint(X, Y + DeltaY - size.Height), GradientColors, GradientWeights)
+                            If DrawMode = 2 Then
 
-                            bpaint.Shader = Gradient
+                                Dim GradientColors = {New SKColor(220, 240, 255, 230), New SKColor(140, 255, 190, 255), New SKColor(255, 92, 119, 255), New SKColor(0, 0, 0, 255)}
+                                Dim GradientWeights = {0.0F, 0.2044351F * Width, 0.5359721F * Width, 0.9662447F * Width}
+                                Dim Gradient = SKShader.CreateSweepGradient(New SKPoint(X, Y + DeltaY - size.Height), GradientColors, GradientWeights)
+
+                                bpaint.Shader = Gradient
+
+                            End If
 
                             DrawRoundRect(g, X + 4 / zoom, Y + DeltaY + 4 / zoom - size.Height, Width2, Height2, 2 / zoom, spaint)
                             DrawRoundRect(g, X, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint)
