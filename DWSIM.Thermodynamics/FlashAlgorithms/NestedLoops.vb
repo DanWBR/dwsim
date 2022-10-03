@@ -423,7 +423,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Vant = V
 
-                    Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
+                    'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
 
                     F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
                     dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
@@ -2364,7 +2364,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
                         End If
 
-                        Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
+                        'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
 
                         marcador = 0
                         If stmp4_ant <> 0 Then
@@ -2444,8 +2444,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                 K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
                             End If
                         End If
-                        K1 = PP.DW_CheckKvaluesConsistency(Vz, K1, T - epsilon, P)
-                        K2 = PP.DW_CheckKvaluesConsistency(Vz, K2, T + epsilon, P)
+                        'K1 = PP.DW_CheckKvaluesConsistency(Vz, K1, T - epsilon, P)
+                        'K2 = PP.DW_CheckKvaluesConsistency(Vz, K2, T + epsilon, P)
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / (2 * epsilon))
                     End If
 

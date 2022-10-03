@@ -56,3 +56,15 @@ rmdir /s /q ..\DistPackages\Windows_Plus\x64
 
 rmdir /s /q ..\DistPackages\Windows_32\x86
 rmdir /s /q ..\DistPackages\Windows_32\x64
+
+rmdir /s /q ..\DistPackages\macOS\samples
+rmdir /s /q ..\DistPackages\Linux\samples
+rmdir /s /q ..\DistPackages\Windows\samples
+rmdir /s /q ..\DistPackages\Windows_32\samples
+rmdir /s /q ..\DistPackages\Windows_Plus\samples
+
+xcopy "Common\samples\*" "..\DistPackages\macOS\samples\*" /E /Y /F /D
+xcopy "Common\samples\*" "..\DistPackages\Windows\samples\*" /E /Y /F /D
+xcopy "Common\samples\*" "..\DistPackages\Windows_32\samples\*" /E /Y /F /D
+xcopy "Common\samples\*" "..\DistPackages\Windows_Plus\samples\*" /E /Y /F /D
+xcopy "Common\samples\*" "..\DistPackages\Linux\samples\*" /E /Y /F /D

@@ -518,7 +518,7 @@ namespace DWSIM.UI
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem3.Click += (sender, e) =>
             {
-                "https://github.com/DanWBR/dwsim6/issues".OpenURL();
+                "https://github.com/DanWBR/dwsim/issues".OpenURL();
             };
 
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };

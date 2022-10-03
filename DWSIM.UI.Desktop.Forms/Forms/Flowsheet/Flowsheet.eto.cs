@@ -824,7 +824,7 @@ namespace DWSIM.UI.Forms
             var hitem1 = new ButtonMenuItem { Text = "Online Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem1.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br/docs/crossplatform/help/".OpenURL();
+                "https://dwsim.org/docs/crossplatform/help/".OpenURL();
             };
 
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
@@ -836,13 +836,13 @@ namespace DWSIM.UI.Forms
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem3.Click += (sender, e) =>
             {
-                "https://sourceforge.net/p/dwsim/tickets/".OpenURL();
+                "https://github.com/DanWBR/dwsim/issues".OpenURL();
             };
 
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem4.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br".OpenURL();
+                "https://dwsim.org".OpenURL();
             };
 
             Menu.HelpItems.Add(hitem1);
@@ -1392,59 +1392,59 @@ namespace DWSIM.UI.Forms
             };
 
             btnRight.Click += (s, e) =>
-        {
-            Size sz = SplitterFlowsheet.Panel1.Size;
-            var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
-            var offs = -(double)sz.Width / (double)z * sf;
-            this.FlowsheetControl.FlowsheetSurface.OffsetAll((int)offs, 0);
-            this.FlowsheetControl.Invalidate();
-        };
+            {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = -(double)sz.Width / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll((int)offs, 0);
+                this.FlowsheetControl.Invalidate();
+            };
 
             btnUp.Click += (s, e) =>
-        {
-            Size sz = SplitterFlowsheet.Panel1.Size;
-            var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
-            var offs = (double)sz.Height / (double)z * sf;
-            this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, (int)offs);
-            this.FlowsheetControl.Invalidate();
-        };
+            {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = (double)sz.Height / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, (int)offs);
+                this.FlowsheetControl.Invalidate();
+            };
 
             btnDown.Click += (s, e) =>
-        {
-            Size sz = SplitterFlowsheet.Panel1.Size;
-            var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
-            var offs = (double)sz.Height / (double)z * sf;
-            this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, -(int)offs);
-            this.FlowsheetControl.Invalidate();
-        };
+            {
+                Size sz = SplitterFlowsheet.Panel1.Size;
+                var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
+                var offs = (double)sz.Height / (double)z * sf;
+                this.FlowsheetControl.FlowsheetSurface.OffsetAll(0, -(int)offs);
+                this.FlowsheetControl.Invalidate();
+            };
 
             chkControlPanelMode.CheckedChanged += (s, e) =>
-        {
-            if (chkControlPanelMode.Checked.GetValueOrDefault())
             {
-                FlowsheetControl.FlowsheetSurface.ControlPanelMode = true;
-                GlobalSettings.Settings.DarkMode = true;
-                Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray;
-                Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke;
-                btnLeft.Visible = true;
-                btnUp.Visible = true;
-                btnDown.Visible = true;
-                btnRight.Visible = true;
-            }
-            else
-            {
-                FlowsheetControl.FlowsheetSurface.ControlPanelMode = false;
-                GlobalSettings.Settings.DarkMode = false;
-                Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White;
-                Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black;
-                btnLeft.Visible = false;
-                btnUp.Visible = false;
-                btnDown.Visible = false;
-                btnRight.Visible = false;
-            }
-            FlowsheetControl.Invalidate();
-            Split2.Invalidate();
-        };
+                if (chkControlPanelMode.Checked.GetValueOrDefault())
+                {
+                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = true;
+                    GlobalSettings.Settings.DarkMode = true;
+                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray;
+                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke;
+                    btnLeft.Visible = true;
+                    btnUp.Visible = true;
+                    btnDown.Visible = true;
+                    btnRight.Visible = true;
+                }
+                else
+                {
+                    FlowsheetControl.FlowsheetSurface.ControlPanelMode = false;
+                    GlobalSettings.Settings.DarkMode = false;
+                    Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White;
+                    Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black;
+                    btnLeft.Visible = false;
+                    btnUp.Visible = false;
+                    btnDown.Visible = false;
+                    btnRight.Visible = false;
+                }
+                FlowsheetControl.Invalidate();
+                Split2.Invalidate();
+            };
 
             Split3.Panel2 = SetupLogWindow();
             Split3.Panel2.Height = (int)(sf * 120);
@@ -1521,9 +1521,40 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.UpdateInterface();
             };
 
+            // status bar
+
+            var imgheart = new ImageView { Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "heart.png")) };
+            var lbldonate = new Label { Text = "Support continuous development and maintenance of DWSIM for as low as 3 USD/month or with a one-time donation." };
+
+            var btnSingleDonation = new Button {Text = "One-Time Donation",  ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png", this.GetType().Assembly)).WithSize(16, 16) };
+
+            btnSingleDonation.Click += (s, e) => {
+                "https://www.buymeacoffee.com/dwsim".OpenURL();
+            };
+
+            btnMonthlyDonation.Click += (s, e) => {
+                "https://www.patreon.com/dwsim".OpenURL();
+            };
+
+            var statuspanel = new StackLayout
+            {
+                Orientation = Orientation.Horizontal,
+                Items = { imgheart, lbldonate, btnSingleDonation, btnMonthlyDonation   },
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Spacing = 4,
+                Visible = true
+            };
+
+            var Split0 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
+            Split0.Panel1 = Split1;
+
+            Split0.Panel2 = statuspanel;
+            Split0.Panel2.Height = (int)(sf * 32);
+
             // main container
 
-            Content = Split1;
+            Content = Split0;
 
             // context menus
 

@@ -116,8 +116,9 @@ Partial Class FormMain
         Me.WelcomePanel = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -641,7 +642,7 @@ Partial Class FormMain
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripDropDownButton2, Me.ToolStripDropDownButton1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripDropDownButton2, Me.ToolStripDropDownButton1, Me.ToolStripStatusLabel2})
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -652,7 +653,13 @@ Partial Class FormMain
         Me.ToolStripStatusLabel1.Image = Global.DWSIM.My.Resources.Resources.heart
         resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Spring = True
+        '
+        'ToolStripDropDownButton2
+        '
+        Me.ToolStripDropDownButton2.Image = Global.DWSIM.My.Resources.Resources.coffee
+        resources.ApplyResources(Me.ToolStripDropDownButton2, "ToolStripDropDownButton2")
+        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
+        Me.ToolStripDropDownButton2.ShowDropDownArrow = False
         '
         'ToolStripDropDownButton1
         '
@@ -661,12 +668,11 @@ Partial Class FormMain
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
         Me.ToolStripDropDownButton1.ShowDropDownArrow = False
         '
-        'ToolStripDropDownButton2
+        'ToolStripStatusLabel2
         '
-        Me.ToolStripDropDownButton2.Image = Global.DWSIM.My.Resources.Resources.coffee
-        resources.ApplyResources(Me.ToolStripDropDownButton2, "ToolStripDropDownButton2")
-        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
-        Me.ToolStripDropDownButton2.ShowDropDownArrow = False
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        resources.ApplyResources(Me.ToolStripStatusLabel2, "ToolStripStatusLabel2")
+        Me.ToolStripStatusLabel2.Spring = True
         '
         'FormMain
         '
@@ -960,4 +966,5 @@ Partial Class FormMain
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripDropDownButton2 As ToolStripDropDownButton
     Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
+    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
 End Class

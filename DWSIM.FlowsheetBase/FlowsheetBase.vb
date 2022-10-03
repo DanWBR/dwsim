@@ -2230,6 +2230,8 @@ Imports System.Text.RegularExpressions
             If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
         End If
 
+        ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
+
         If excs.Count > 0 Then
             If Settings.AutomationMode Then
                 'throw errors
@@ -2414,7 +2416,6 @@ Imports System.Text.RegularExpressions
         If Not GlobalSettings.Settings.AutomationMode Then
             If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
         End If
-
 
         Return xdoc
 

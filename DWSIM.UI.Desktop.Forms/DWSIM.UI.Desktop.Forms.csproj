@@ -421,6 +421,10 @@
     <EmbeddedResource Include="Resources\Icons\icons8-zoom_out.png" />
     <EmbeddedResource Include="Resources\Icons\icons8-zoom_to_actual_size.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\coffee.png" />
+    <EmbeddedResource Include="Resources\Icons\heart.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
