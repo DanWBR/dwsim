@@ -390,7 +390,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns), dHl2(ns), dHv2(ns) As Double
 
-                Dim epsilon As Double = 0.01
+                Dim epsilon As Double = 0.00001
 
                 If doparallel Then
 
@@ -537,7 +537,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    Tj(i) = Tj(i) + af * deltat(i)
+                    Tj(i) = Tj(i) + dft * deltat(i)
                     If RelaxTemperatureUpdates Then
                         Tj(i) = dft * Tj(i) + (1 - dft) * Tj_ant(i)
                     End If
