@@ -132,7 +132,7 @@
     <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=8.2.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>kij</value>

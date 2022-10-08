@@ -1,3 +1,10 @@
+Version 8.2.1
+
+- Fixed Material Stream issues on Cross-Platform UI
+- Fixed Python.NET interpreter on macOS/Linux (set Python library path on General Settings panel)
+- Fixed CAPE-OPEN UO selection panel layout (Classic UI)
+- Minor fixes
+
 Version 8.2.0
 
 - Updated ChemSep database to v8.32 - new compounds are available

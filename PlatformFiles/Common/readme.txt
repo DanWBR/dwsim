@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.2.0
+Version 8.2.1
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.2.1
+
+- Fixed Material Stream issues on Cross-Platform UI
+- Fixed Python.NET interpreter on macOS/Linux (set Python library path on General Settings panel)
+- Fixed CAPE-OPEN UO selection panel layout (Classic UI)
+- Minor fixes
 
 Version 8.2.0
 

@@ -6,6 +6,7 @@ Andras Nady
 Anders Andreasen
 Andrew Dickson
 Bruce Rising
+Bryan Evans
 Carlos G. C. Reetz
 Casey Houston
 Chris Verbert

@@ -31,8 +31,8 @@ Partial Class Form_CapeOpenSelector
         '
         'ListBox1
         '
-        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.FormattingEnabled = True
+        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.Name = "ListBox1"
         '
         'Label1

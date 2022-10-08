@@ -916,6 +916,7 @@ Imports System.Text.RegularExpressions
                 'OBJETO DWSIM
                 Dim myCOMS As Thermodynamics.Streams.MaterialStream = New Thermodynamics.Streams.MaterialStream(myMStr.Name, "CorrentedeMatria", Me, Nothing)
                 myCOMS.GraphicObject = myMStr
+                AddCompoundsToMaterialStream(myCOMS)
                 SimulationObjects.Add(myCOMS.Name, myCOMS)
 
             Case ObjectType.EnergyStream
@@ -3386,6 +3387,7 @@ Label_00CC:
 
             If Not GlobalSettings.Settings.PythonInitialized Then
 
+                Runtime.PythonDLL = GlobalSettings.Settings.PythonPath
                 PythonEngine.Initialize()
                 GlobalSettings.Settings.PythonInitialized = True
                 PythonEngine.BeginAllowThreads()

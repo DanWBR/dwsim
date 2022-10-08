@@ -181,25 +181,51 @@ Public Class Settings
 
         If Not Settings.PythonInitialized Then
 
-            If pythonpath = "" Then
-                pythonpath = Settings.PythonPath
+            If Settings.RunningPlatform() = Platform.Windows Then
+
+                If pythonpath = "" Then
+                    pythonpath = Settings.PythonPath
+                End If
+
+                If Not Directory.Exists(pythonpath) Then
+                    Throw New Exception("Python binaries Path is not defined correctly.")
+                End If
+
+                Try
+                    SetPythonPath(pythonpath)
+                    PythonEngine.PythonHome = pythonpath
+                    PythonEngine.Initialize()
+                    PythonEngine.BeginAllowThreads()
+                    PythonInitialized = True
+                    DWSIM.Logging.Logger.LogInfo("Python Path set to " + pythonpath)
+                Catch ex As Exception
+                    DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
+                    Throw ex
+                End Try
+
+            Else
+
+                If pythonpath = "" Then
+                    pythonpath = Settings.PythonPath
+                End If
+
+                If Not File.Exists(pythonpath) Then
+                    Throw New Exception("Python Library File is not defined correctly.")
+                End If
+
+                Try
+                    Runtime.PythonDLL = pythonpath
+                    PythonEngine.Initialize()
+                    PythonEngine.BeginAllowThreads()
+                    PythonInitialized = True
+                    DWSIM.Logging.Logger.LogInfo("Python Library Path set to " + pythonpath)
+                Catch ex As Exception
+                    DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
+                    Throw ex
+                End Try
+
             End If
 
-            If Not Directory.Exists(pythonpath) Then
-                Throw New Exception("Python binaries Path is not defined correctly.")
-            End If
-
-            Try
-                SetPythonPath(pythonpath)
-                PythonEngine.PythonHome = pythonpath
-                PythonEngine.Initialize()
-                PythonEngine.BeginAllowThreads()
-                PythonInitialized = True
-                DWSIM.Logging.Logger.LogInfo("Python Path set to " + pythonpath)
-            Catch ex As Exception
-                DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
-                Throw ex
-            End Try
 
         End If
 

@@ -78,6 +78,7 @@ Public Class FlowsheetSurface_SkiaSharp
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
                 End If
             Next
+            tsbColorTheme.Size = New Size(Me.tsbColorTheme.Width * Settings.DpiScale, tsbColorTheme.Height)
             Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
             Me.ToolStrip1.Invalidate()
 
