@@ -380,11 +380,11 @@
         vrwHL7/P7+X9YrvsGJp7VNIcsdykgtt0hHu6K5w2zdm9/vG/MxSLEE6DHNnA9anuCHOtNWmfX/J3/EnM
         jTk7aHbFGu7zhnP8sK8ZZWJxONiEPZ+vG/LfxAENIqU0KmZZE5WKfa6El3FiHmxg2CijUaFYfXfK44lv
         vrwGh3LqYCr3wUoo3+cPKt8mG3Kq0JPi121y4EIV0rkKnFOW4FHlPCy8uAHpK1WIX67D9K2PkJR7kFQ8
-        SC50BgnZqyXkXj5d8KKHzMQzhc3yVhGLvAnTt9dh6qoJ8UvLv8QJxReHwprgOvpkI2JeZJYJxQH4hin8
+        SC60BwnZqyXkXj5d8KKHzMQzhc3yVhGLvAnTt9dh6qoJ8UvLv8QJxReHwprgOvpkI2JeZJYJxQH4hin8
         KMua7C986ocFURkr5sEGhkUZvG1x5mHP+10Y5MzSF7j7uP2j9Naw3rfpfKu1NtmQV21XUhsaea7W4X7J
         govP1uHY4lc4++QzPCiZ8KqyAjXdBKPjgGFTMExz0LS6NdznDcuJHjITY1F5qwijo2B51YLXKzpK60Ox
         fx4Oa6ITd/TJwuLIBDcOJVIc0CIkpXdoljVRbdrnSXgZK+bBBmbYTsbo0GLDJhs7Juahquoe/KuTKL2j
-        2V2C6xu93T3hH++yXWKxn0GH6bhtUJpZAAAAAElFTkSuQmCC
+        2V2C6xu93T3hH++yXWKxnzyE6bf0wrUfAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsmiHeatMap.Size" type="System.Drawing.Size, System.Drawing">
@@ -447,9 +447,6 @@
   </data>
   <data name="tsbColorTheme.Items1" xml:space="preserve">
     <value>Black-and-White</value>
-  </data>
-  <data name="tsbColorTheme.Items2" xml:space="preserve">
-    <value>Color Icons </value>
   </data>
   <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 24</value>

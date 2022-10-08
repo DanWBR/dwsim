@@ -71,19 +71,19 @@ Public Class FlowsheetSurface_SkiaSharp
 
         If Settings.DpiScale > 1.0 Then
             Me.ToolStrip1.AutoSize = False
-            Me.ToolStrip1.Size = New Size(ToolStrip1.Width + 40, 28 * Settings.DpiScale)
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width + (tsbColorTheme.Width) * (Settings.DpiScale - 1) + 60, 28 * Settings.DpiScale)
+            tsbColorTheme.Size = New Size(Me.tsbColorTheme.Width * Settings.DpiScale, tsbColorTheme.Height)
             Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             For Each item In Me.ToolStrip1.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
                 End If
             Next
-            tsbColorTheme.Size = New Size(Me.tsbColorTheme.Width * Settings.DpiScale, tsbColorTheme.Height)
-            Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
             Me.ToolStrip1.Invalidate()
 
             Me.ToolStripFlowsheet.AutoSize = False
-            Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + 30, 28 * Settings.DpiScale)
+            Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
+            Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + (tstbSearch.Width) * (Settings.DpiScale - 1) + 60, 28 * Settings.DpiScale)
             Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             For Each item In Me.ToolStripFlowsheet.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
