@@ -1123,15 +1123,19 @@ Public Class FormFlowsheet
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
             Dim t As New Task(Of List(Of Exception))(Function()
                                                          RaiseEvent StartedSolving(Me, New EventArgs())
-                                                         Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
-                                                        Sub()
-                                                            If My.Settings.ObjectEditor = 1 Then
-                                                                Me.UIThread(Sub()
-                                                                                Me.FormSurface.Flowsheet = Me
-                                                                                Me.FormSurface.UpdateSelectedObject()
-                                                                            End Sub)
-                                                            End If
-                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown)
+                                                         If ExternalFlowsheetSolver IsNot Nothing Then
+                                                             Return ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                                         Else
+                                                             Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
+                                                                Sub()
+                                                                    If My.Settings.ObjectEditor = 1 Then
+                                                                        Me.UIThread(Sub()
+                                                                                        Me.FormSurface.Flowsheet = Me
+                                                                                        Me.FormSurface.UpdateSelectedObject()
+                                                                                    End Sub)
+                                                                    End If
+                                                                End Sub, My.Computer.Keyboard.CtrlKeyDown)
+                                                         End If
                                                      End Function)
             t.ContinueWith(Sub(tres)
                                RaiseEvent FinishedSolving(Me, New EventArgs())
