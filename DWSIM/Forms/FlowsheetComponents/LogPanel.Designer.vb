@@ -32,8 +32,8 @@ Partial Class LogPanel
         Me.Mensagem = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Info = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CopiarInformaçõesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LimparListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarInformaçõesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockLeftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,7 +56,6 @@ Partial Class LogPanel
         Me.Grid1.AllowUserToAddRows = False
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.Grid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.Grid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.Grid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Imagem, Me.Indice, Me.Data, Me.Tipo, Me.Mensagem, Me.Info})
         Me.Grid1.ContextMenuStrip = Me.ContextMenuStrip1
@@ -143,17 +142,17 @@ Partial Class LogPanel
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LimparListaToolStripMenuItem, Me.CopiarInformaçõesToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         '
-        'CopiarInformaçõesToolStripMenuItem
-        '
-        resources.ApplyResources(Me.CopiarInformaçõesToolStripMenuItem, "CopiarInformaçõesToolStripMenuItem")
-        Me.CopiarInformaçõesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.copy
-        Me.CopiarInformaçõesToolStripMenuItem.Name = "CopiarInformaçõesToolStripMenuItem"
-        '
         'LimparListaToolStripMenuItem
         '
         resources.ApplyResources(Me.LimparListaToolStripMenuItem, "LimparListaToolStripMenuItem")
         Me.LimparListaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.LimparListaToolStripMenuItem.Name = "LimparListaToolStripMenuItem"
+        '
+        'CopiarInformaçõesToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CopiarInformaçõesToolStripMenuItem, "CopiarInformaçõesToolStripMenuItem")
+        Me.CopiarInformaçõesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.copy
+        Me.CopiarInformaçõesToolStripMenuItem.Name = "CopiarInformaçõesToolStripMenuItem"
         '
         'dckMenu
         '

@@ -260,4 +260,12 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetConnectionPortsInfo() As List(Of IConnectionPortInfo)
 
+    ReadOnly Property IsDirty As Boolean
+
+    ReadOnly Property CanUsePreviousResults As Boolean
+
+    Sub SetDirtyStatus(value As Boolean)
+
+    Sub SetCanUsePreviousResults(value As Boolean)
+
 End Interface

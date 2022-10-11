@@ -87,7 +87,6 @@ Partial Class WatchPanel
         Me.dgv.AllowUserToAddRows = False
         Me.dgv.AllowUserToDeleteRows = False
         Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colid, Me.col0, Me.col1, Me.col2, Me.col3, Me.col4, Me.col5})
         resources.ApplyResources(Me.dgv, "dgv")
         Me.dgv.Name = "dgv"
@@ -103,7 +102,7 @@ Partial Class WatchPanel
         Me.dgv.RowHeadersVisible = False
         DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(3)
         Me.dgv.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.dgv.RowTemplate.Height = 20
+        Me.dgv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         '
         'colid
@@ -211,7 +210,6 @@ Partial Class WatchPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButton = False
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.dgv)

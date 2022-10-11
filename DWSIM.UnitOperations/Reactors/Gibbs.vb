@@ -194,9 +194,9 @@ Namespace Reactors
 
         Public Property DerivativePerturbation As Double = 0.0001
 
-        Public MaximumInternalIterations As Integer = 1000
+        Public Property MaximumInternalIterations As Integer = 1000
 
-        Public InternalTolerance As Double = 1.0E-20
+        Public Property InternalTolerance As Double = 1.0E-20
 
         Public Property LagrangeCoeffsEstimationTemperature As Double = 1000.0
 

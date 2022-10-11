@@ -57,6 +57,8 @@ Public Class FormFlowsheet
 
     Public Property BidirectionalSolver As IBidirectionalSolver
 
+    Public Property ExternalFlowsheetSolver As IFlowsheetSolver
+
     Public Property WeatherProvider As IWeatherProvider = New WeatherProvider() Implements IFlowsheet.WeatherProvider
 
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
@@ -998,7 +1000,10 @@ Public Class FormFlowsheet
             GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
             GlobalSettings.Settings.CalculatorBusy = False
             My.Application.ActiveSimulation = Me
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+            If ExternalFlowsheetSolver IsNot Nothing Then
+                ExternalFlowsheetSolver.SolveFlowsheet(Me)
+            Else
+                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -1007,6 +1012,7 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.AltKeyDown)
+            End If
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
@@ -3127,14 +3133,22 @@ Public Class FormFlowsheet
                                End Sub
             If Not sender Is Nothing Then
                 Task.Factory.StartNew(Sub()
-                                          FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+                                          If ExternalFlowsheetSolver IsNot Nothing Then
+                                              ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                          Else
+                                              FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+                                          End If
                                           UpdateOpenEditForms()
                                       End Sub)
             Else
                 Task.Factory.StartNew(Sub()
-                                          FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
+                                          If ExternalFlowsheetSolver IsNot Nothing Then
+                                              ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                          Else
+                                              FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
                                                                                          Nothing, False, False,
                                                                                          Nothing, Nothing, finishaction)
+                                          End If
                                       End Sub)
             End If
             UpdateInterface()

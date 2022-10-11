@@ -35,6 +35,20 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
+        Protected Friend _IsDirty As Boolean = True
+        ReadOnly Property IsDirty As Boolean Implements ISimulationObject.IsDirty
+            Get
+                Return _IsDirty
+            End Get
+        End Property
+
+        Protected Friend _CanUsePreviousResults As Boolean = False
+        ReadOnly Property CanUsePreviousResults As Boolean Implements ISimulationObject.CanUsePreviousResults
+            Get
+                Return _CanUsePreviousResults
+            End Get
+        End Property
+
         Public Property DynamicsSpec As Enums.Dynamics.DynamicsSpecType = Dynamics.DynamicsSpecType.Pressure Implements ISimulationObject.DynamicsSpec
 
         Public Property DynamicsOnly As Boolean = False Implements ISimulationObject.DynamicsOnly
@@ -1628,6 +1642,14 @@ Namespace UnitOperations
             Return list
 
         End Function
+
+        Public Sub SetDirtyStatus(value As Boolean) Implements ISimulationObject.SetDirtyStatus
+            _IsDirty = value
+        End Sub
+
+        Public Sub SetCanUsePreviousResults(value As Boolean) Implements ISimulationObject.SetCanUsePreviousResults
+            _CanUsePreviousResults = value
+        End Sub
 
     End Class
 

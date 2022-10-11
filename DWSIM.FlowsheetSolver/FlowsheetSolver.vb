@@ -795,7 +795,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
         Dim lists As New Dictionary(Of Integer, List(Of String))
         Dim filteredlist As New Dictionary(Of Integer, List(Of String))
         Dim objstack As New List(Of String)
-        Dim recycleloops As New List(Of List(Of String))
 
         Dim onqueue As CalculationArgs = Nothing
 
@@ -974,64 +973,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Return New Object() {newstack, lists, newfilteredlist}
         End If
 
-        Dim recycles = objstack.Where(Function(o) fbag.SimulationObjects(o).GraphicObject.ObjectType = ObjectType.OT_Recycle).ToList()
-
-        'find recycle loops
-
-        Dim tmplists As New List(Of List(Of String))
-
-        For Each r In recycles
-
-            listidx = 0
-
-            tmplists.Clear()
-
-            tmplists.Add(New List(Of String))
-
-            Dim nextobj = fbag.SimulationObjects(r).GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name
-
-            tmplists(0).Add(nextobj)
-
-            'now start walking through the flowsheet until it reaches its end starting from this particular object.
-
-            Do
-                listidx += 1
-                If tmplists(listidx - 1).Count > 0 Then
-                    tmplists.Add(New List(Of String))
-                    maxidx = listidx
-                    For Each o As String In tmplists(listidx - 1)
-                        obj = fbag.SimulationObjects(o)
-                        If obj.GraphicObject.Active Then
-                            For Each c As IConnectionPoint In obj.GraphicObject.OutputConnectors
-                                If c.IsAttached Then
-                                    If obj.GraphicObject.ObjectType = ObjectType.OT_Recycle Or obj.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle Then
-                                        Exit For
-                                    End If
-                                    tmplists(listidx).Add(c.AttachedConnector.AttachedTo.Name)
-                                End If
-                            Next
-                            If obj.GraphicObject.EnergyConnector.IsAttached AndAlso obj.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo IsNot obj Then
-                                tmplists(listidx).Add(obj.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
-                            End If
-                        End If
-                    Next
-                Else
-                    Exit Do
-                End If
-            Loop
-
-            Dim rloop As New List(Of String)
-            For Each l In tmplists
-                For Each item In l
-                    rloop.Add(item)
-                Next
-            Next
-
-            recycleloops.Add(rloop)
-
-        Next
-
-        Return New Object() {objstack, lists, filteredlist, recycleloops}
+        Return New Object() {objstack, lists, filteredlist}
 
     End Function
 

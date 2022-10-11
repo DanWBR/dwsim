@@ -103,6 +103,7 @@
     <Compile Include="IChart.vb" />
     <Compile Include="IConnectionPortInfo.vb" />
     <Compile Include="IEnergyStream.vb" />
+    <Compile Include="IFlowsheetSolver.vb" />
     <Compile Include="IProductInformation.vb" />
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
