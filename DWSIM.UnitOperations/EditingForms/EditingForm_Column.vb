@@ -333,6 +333,8 @@ Public Class EditingForm_Column
 
             btnResults.Enabled = .x0.Count > 0
 
+            btnViewPropertiesReport.Enabled = .Calculated
+
             'property package
 
             Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
@@ -856,6 +858,17 @@ Public Class EditingForm_Column
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkCreateConvReport.CheckedChanged
         SimObject.CreateSolverConvergengeReport = chkCreateConvReport.Checked
+    End Sub
+
+    Private Sub btnViewPropertiesReport_Click(sender As Object, e As EventArgs) Handles btnViewPropertiesReport.Click
+
+        Dim fr As New ReportViewer()
+        fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
+        fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
+        fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
+        fr.TextBox1.DeselectAll()
+        SimObject.FlowSheet.DisplayForm(fr)
+
     End Sub
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp

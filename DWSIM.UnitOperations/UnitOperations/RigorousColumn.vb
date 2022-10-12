@@ -1950,6 +1950,8 @@ Namespace UnitOperations
 
         Public Property ColumnSolverConvergenceReport As String = ""
 
+        Public Property ColumnPropertiesProfile As String = ""
+
         Public Property ColumnPressureDrop As Double = Double.NaN
 
         Public Property SolvingMethodName As String = "Wang-Henke (Bubble Point)"
@@ -3733,6 +3735,8 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            ColumnPropertiesProfile = ""
+
             Dim inputdata = GetSolverInputData()
 
             Dim nc = inputdata.NumberOfCompounds
@@ -3906,6 +3910,10 @@ Namespace UnitOperations
             LSSf = so.LiquidSideDraws.ToArray()
             Q = so.StageHeats.ToArray()
 
+            'generate properties profile
+
+            GeneratePropertiesProfileReport()
+
             'if enabled, auto update initial estimates
 
             If Me.AutoUpdateInitialEstimates Then
@@ -3978,6 +3986,7 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.Distillate
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            pp.CurrentMaterialStream = msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .DefinedFlow = FlowSpec.Mass
@@ -4003,6 +4012,7 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.OverheadVapor
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            pp.CurrentMaterialStream = msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .DefinedFlow = FlowSpec.Mass
@@ -4031,6 +4041,7 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.BottomsLiquid
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            pp.CurrentMaterialStream = msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .DefinedFlow = FlowSpec.Mass
@@ -4057,6 +4068,7 @@ Namespace UnitOperations
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
                             With msm
+                                pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .DefinedFlow = FlowSpec.Mass
@@ -4080,6 +4092,7 @@ Namespace UnitOperations
                             End With
                         ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
                             With msm
+                                pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .DefinedFlow = FlowSpec.Mass
@@ -4133,36 +4146,123 @@ Namespace UnitOperations
 
         End Sub
 
-        Function CalcIdealVapFrac(ByVal Vz As Object, ByVal PVAP As Object, ByVal P As Double) As Double
+        Private Sub GeneratePropertiesProfileReport()
 
-            Dim Pmin, Pmax, Px, vfrac As Double
-            Dim n As Integer = UBound(Vz)
-            Dim i As Integer
+            Dim units = FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
-            i = 0
-            Px = 0
-            Do
-                Px = Px + (Vz(i) / PVAP(i))
-                i = i + 1
-            Loop Until i = n + 1
-            Px = 1 / Px
+            Dim reporter = New Text.StringBuilder()
 
-            Pmin = Px
+            reporter.AppendLine("========================================================")
+            reporter.AppendLine(String.Format("Column Properties Profile"))
+            reporter.AppendLine("========================================================")
+            reporter.AppendLine()
 
-            i = 0
-            Px = 0
-            Do
-                Px = Px + Vz(i) * PVAP(i)
-                i = i + 1
-            Loop Until i = n + 1
+            If TypeOf Me Is DistillationColumn Then
+                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "Stage", "P", "T",
+                                              "mV", "wV", "rhoV", "etaV", "kV",
+                                              "mL", "wL", "rhoL", "etaL", "kL", "sigma"))
+                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "", units.pressure, units.temperature,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity, units.surfaceTension))
+            Else
+                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "Stage", "P", "T",
+                                              "mL1", "wL1", "rhoL1", "etaL1", "kL1",
+                                              "mL2", "wL2", "rhoL2", "etaL2", "kL2"))
+                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}",
+                                              "", units.pressure, units.temperature,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity))
+            End If
 
-            Pmax = Px
+            reporter.AppendLine()
 
-            vfrac = (P - Pmin) / (Pmax - Pmin)
+            Dim pp = DirectCast(PropertyPackage, Thermodynamics.PropertyPackages.PropertyPackage)
 
-            Return 1 - vfrac
+            For i = 0 To Me.Stages.Count - 1
 
-        End Function
+                Dim ms As New MaterialStream("", "", FlowSheet, pp)
+                FlowSheet.AddCompoundsToMaterialStream(ms)
+                pp.CurrentMaterialStream = ms
+
+                Dim compx As Double() = xf(i)
+                Dim compy As Double() = yf(i)
+
+                Dim mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma, Ti, Pi As Double
+
+                Ti = Tf(i)
+                Pi = Stages(i).P
+
+                If TypeOf Me Is DistillationColumn Then
+
+                    ms.SetOverallComposition(compy)
+                    ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
+
+                    mV = Vf(i).ConvertFromSI(units.molarflow)
+                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                    rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
+                    etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                    If Double.IsNaN(etaV) Then etaV = 0.0
+                    kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
+
+                Else
+
+                    ms.SetOverallComposition(compy)
+                    ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid1)
+                    ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid)
+
+                    mV = Vf(i).ConvertFromSI(units.molarflow)
+                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                    rhoV = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
+                    etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                    If Double.IsNaN(etaV) Then etaV = 0.0
+                    kV = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
+
+                End If
+
+                ms.SetOverallComposition(compx)
+                ms.SetPhaseComposition(compx, PropertyPackages.Phase.Liquid1)
+                ms.SetPhaseComposition(compx, PropertyPackages.Phase.Liquid)
+
+                mL = Lf(i).ConvertFromSI(units.molarflow)
+                wL = (Lf(i) / 1000.0 * pp.AUX_MMM(Lf(i))).ConvertFromSI(units.massflow)
+                rhoL = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
+                etaL = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Lf(i))).ConvertFromSI(units.viscosity)
+                kL = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
+
+                sigma = pp.AUX_SURFTM(Ti).ConvertFromSI(units.surfaceTension)
+
+                If TypeOf Me Is DistillationColumn Then
+
+                    reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                                                   "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}{13,16:G6}",
+                                                   i + 1, Pi, Ti, mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
+
+                Else
+
+                    reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                                                   "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}",
+                                                   i + 1, Pi, Ti, mL, wL, rhoL, etaL, kL, mV, wV, rhoV, etaV, kV))
+
+                End If
+
+                ms = Nothing
+                pp.CurrentMaterialStream = Nothing
+
+            Next
+
+            reporter.AppendLine()
+
+            ColumnPropertiesProfile = reporter.ToString()
+
+        End Sub
+
 
         Public Overrides Sub DeCalculate()
 
