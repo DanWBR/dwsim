@@ -359,30 +359,6 @@
   <data name="tbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
   </data>
-  <data name="cbCondPressureUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 69</value>
-  </data>
-  <data name="cbCondPressureUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 21</value>
-  </data>
-  <data name="tbCondPressure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 70</value>
-  </data>
-  <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 75</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Condenser/Top Pressure</value>
-  </data>
   <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 765</value>
   </data>
@@ -466,6 +442,33 @@
   </data>
   <data name="chkNoReboiler.Text" xml:space="preserve">
     <value>No Reboiler (Refluxed Absorber)</value>
+  </data>
+  <data name="cbCondPressureUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 69</value>
+  </data>
+  <data name="cbCondPressureUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 21</value>
+  </data>
+  <data name="tbCondPressure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 70</value>
+  </data>
+  <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 75</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Condenser/Top Pressure</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 184</value>
@@ -602,8 +605,14 @@
   <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 282</value>
   </data>
-  <data name="btnResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="chkCreateConvReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 326</value>
+  </data>
+  <data name="chkCreateConvReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 17</value>
+  </data>
+  <data name="chkCreateConvReport.Text" xml:space="preserve">
+    <value>Generate Convergence Report</value>
   </data>
   <data name="btnResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 5</value>
@@ -615,10 +624,10 @@
     <value>View Temperature, Pressure and Composition Profiles</value>
   </data>
   <data name="gridResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 35</value>
+    <value>5, 65</value>
   </data>
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 757</value>
+    <value>395, 727</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -629,17 +638,62 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="TabContainerAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 106</value>
-  </data>
-  <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 823</value>
-  </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
     <value>405, 797</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Specifications</value>
+  </data>
+  <data name="TabStages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabStages.Text" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="TabConnections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabConnections.Text" xml:space="preserve">
+    <value>Connections</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>Estimates</value>
+  </data>
+  <data name="btnViewReport.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="btnViewReport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnViewReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 30</value>
+  </data>
+  <data name="btnViewReport.Text" xml:space="preserve">
+    <value>View Convergence Report</value>
+  </data>
+  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="TabContainerAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 106</value>
+  </data>
+  <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 823</value>
   </data>
   <data name="tbColPDrop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -704,44 +758,11 @@
   <data name="LabelSM.Text" xml:space="preserve">
     <value>Solving Method</value>
   </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Specifications</value>
-  </data>
-  <data name="TabStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabStages.Text" xml:space="preserve">
-    <value>Stages</value>
-  </data>
-  <data name="TabConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabConnections.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>Estimates</value>
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 29</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Check the boxes for the data sets that you want to use as initial estimates to solve the column.</value>
-  </data>
-  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Results</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>425, 941</value>

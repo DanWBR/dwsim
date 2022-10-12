@@ -60,6 +60,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Private ik, ih As Boolean
 
+        Private _reporter As Text.StringBuilder
+
+        Private _counter As Integer
+
+        Private _names As String()
+
         Public Overrides ReadOnly Property Name As String
             Get
                 Return "Napthali-Sandholm"
@@ -544,21 +550,137 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("E Equation Deviations: {0}", E.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("H Equation Deviations: {0}", H.ToMathArrayString))
 
+            Dim ersum = errors.AbsSqrSumY
+
             If Not grad Then
+
+
+                _reporter?.AppendLine("==================================================================")
+                _reporter?.AppendLine(String.Format("Internal Iteration {0} - Variables", _counter))
+                _reporter?.AppendLine("==================================================================")
+                _reporter?.AppendLine()
+
+                _reporter?.AppendLine("Stage Conditions & Flows")
+                _reporter?.AppendLine(String.Format("{0,-20}{1,20}{2,20}{3,20}{4,20}{5,20}",
+                                                       "Stage", "P (Pa)", "T (K)", "V (mol/s)",
+                                                       "L (mol/s)", "LSS (mol/s)"))
+                For i = 0 To ns
+                    _reporter?.AppendLine(String.Format("{0,-20}{1,20:G6}{2,20:G6}{3,20:G6}{4,20:G6}{5,20:G6}",
+                                                       i + 1, P(i), Tj(i), Vj(i), Lj(i), LSSj(i)))
+                Next
+
+                _reporter?.AppendLine()
+                _reporter?.AppendLine("Stage Molar Fractions - Vapor")
+                _reporter?.Append("Stage".PadRight(20))
+                For j = 0 To nc - 1
+                    _reporter?.Append(_names(j).PadLeft(20))
+                Next
+                _reporter?.Append(vbCrLf)
+                For i = 0 To ns
+                    _reporter?.Append((i + 1).ToString().PadRight(20))
+                    For j = 0 To nc - 1
+                        _reporter?.Append(yc(i)(j).ToString("G6").PadLeft(20))
+                    Next
+                    _reporter?.Append(vbCrLf)
+                Next
+
+                _reporter?.AppendLine()
+                _reporter?.AppendLine("Stage Molar Fractions - Liquid 1")
+                _reporter?.Append("Stage".PadRight(20))
+                For j = 0 To nc - 1
+                    _reporter?.Append(_names(j).PadLeft(20))
+                Next
+                _reporter?.Append(vbCrLf)
+                For i = 0 To ns
+                    _reporter?.Append((i + 1).ToString().PadRight(20))
+                    For j = 0 To nc - 1
+                        _reporter?.Append(xc(i)(j).ToString("G6").PadLeft(20))
+                    Next
+                    _reporter?.Append(vbCrLf)
+                Next
+
+                _reporter?.AppendLine()
+                _reporter?.AppendLine()
+
+                _reporter?.AppendLine("==================================================================")
+                _reporter?.AppendLine(String.Format("Internal Iteration {0} - MEH Equation Discrepancies", _counter))
+                _reporter?.AppendLine("==================================================================")
+                _reporter?.AppendLine()
+
+                _reporter?.AppendLine("Stage Mass/Equilibrium/Enthalpy Balance Errors")
+                _reporter?.AppendLine(String.Format("{0,-20}{1,20}{2,20}{3,20}",
+                                                       "Stage", "M", "E", "H"))
+
+                For i = 0 To ns
+                    errors(i * (2 * nc + 1)) = H(i)
+                    Dim e_error As Double = 0.0
+                    Dim m_error As Double = 0.0
+                    For j = 0 To nc - 1
+                        m_error += M(i, j)
+                        e_error += E(i, j)
+                    Next
+                    _reporter?.AppendLine(String.Format("{0,-20}{1,20:G6}{2,20:G6}{3,20:G6}", i + 1, m_error, e_error, H(i)))
+                Next
+
+                _reporter?.AppendLine()
+                _reporter?.AppendLine()
+
+                _reporter?.AppendLine(String.Format("Internal Iteration {0} - Absolute Sum of Square Errors: {1}", _counter, ersum))
+
+                _reporter?.AppendLine()
+                _reporter?.AppendLine()
+
                 _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
             End If
 
             IObj?.Paragraphs.Add(String.Format("Total Error: {0}", errors.AbsSqrSumY))
 
             IObj?.Close()
 
-            Dim ersum = errors.AbsSqrSumY
-
             If Double.IsNaN(ersum) Or Double.IsInfinity(ersum) Then
                 Throw New Exception("Error evaluating error functions.")
             End If
 
             Return errors
+
+        End Function
+
+        Private Function FunctionGradient(epsilon As Double, ByVal x() As Double) As Double(,)
+
+            grad = True
+
+            Dim f1(), f2() As Double
+            Dim g(x.Length - 1, x.Length - 1), x1(x.Length - 1), x2(x.Length - 1), dx(x.Length - 1), xbr(x.Length - 1), fbr(x.Length - 1) As Double
+            Dim i, j, k, n As Integer
+
+            n = x.Length - 1
+
+            For i = 0 To x.Length - 1
+                For j = 0 To x.Length - 1
+                    If i <> j Then
+                        x1(j) = x(j)
+                        x2(j) = x(j)
+                    Else
+                        If x(j) = 0.0# Then
+                            x1(j) = epsilon
+                            x2(j) = 2 * epsilon
+                        Else
+                            x1(j) = x(j) * (1 - epsilon)
+                            x2(j) = x(j) * (1 + epsilon)
+                        End If
+                    End If
+                Next
+                f1 = FunctionValue(x1)
+                f2 = FunctionValue(x2)
+                For k = 0 To x.Length - 1
+                    g(k, i) = (f2(k) - f1(k)) / (x2(i) - x1(i))
+                Next
+            Next
+
+            grad = False
+
+            Return g
 
         End Function
 
@@ -576,6 +698,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                               ByVal CalcMode As Integer,
                               Optional ByVal LLEX As Boolean = False) As Object
+
+            _names = pp.RET_VNAMES()
+
+            Dim reporter As Text.StringBuilder = Nothing
+
+            dc.ColumnSolverConvergenceReport = ""
+
+            If dc.CreateSolverConvergengeReport Then reporter = New Text.StringBuilder()
+
+            _reporter = reporter
 
             Dim esolv As IExternalNonLinearSystemSolver = Nothing
             If dc.FlowSheet.ExternalSolvers.ContainsKey(dc.ExternalSolverID) Then
@@ -855,7 +987,58 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             _IObj = IObj
 
+
+            Dim names = pp.RET_VNAMES().ToList()
+
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine(String.Format("Initial Estimates"))
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine()
+
+            reporter?.AppendLine("Stage Conditions & Flows")
+            reporter?.AppendLine(String.Format("{0,-20}{1,20}{2,20}{3,20}{4,20}{5,20}",
+                                                   "Stage", "P (Pa)", "T (K)", "V (mol/s)",
+                                                   "L (mol/s)", "LSS (mol/s)"))
+            For i = 0 To ns
+                reporter?.AppendLine(String.Format("{0,-20}{1,20:G6}{2,20:G6}{3,20:G6}{4,20:G6}{5,20:G6}",
+                                                   i + 1, P(i), T(i), V(i), L(i), LSS(i)))
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Stage Molar Fractions - Vapor")
+            reporter?.Append("Stage".PadRight(20))
+            For j = 0 To nc - 1
+                reporter?.Append(names(j).PadLeft(20))
+            Next
+            reporter?.Append(vbCrLf)
+            For i = 0 To ns
+                reporter?.Append((i + 1).ToString().PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(yc(i)(j).ToString("G6").PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Stage Molar Fractions - Liquid 1")
+            reporter?.Append("Stage".PadRight(20))
+            For j = 0 To nc - 1
+                reporter?.Append(names(j).PadLeft(20))
+            Next
+            reporter?.Append(vbCrLf)
+            For i = 0 To ns
+                reporter?.Append((i + 1).ToString().PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(xc(i)(j).ToString("G6").PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+            Next
+
             grad = False
+
+            _counter = 0
+
+            Dim fx_error_hist As New List(Of Double)
 
             Dim obj As Double = 0.0#
 
@@ -866,13 +1049,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             If Abs(il_err_ant.AbsSqrSumY) > tol.MinY_NonZero() Then
                 If esolv IsNot Nothing Then
                     xvar = esolv.Solve(Function(xvars)
-                                           Return FunctionValue(xvars)
-                                       End Function, Nothing, Nothing, xvar, maxits, tol.MinY_NonZero())
+                                           _counter += 1
+                                           Dim fval = FunctionValue(xvars)
+                                           fx_error_hist.Add(fval.AbsSqrSumY())
+                                           Return fval
+                                       End Function,
+                                       Function(xvars)
+                                           Return FunctionGradient(0.001, xvars)
+                                       End Function, Nothing, xvar, maxits, tol.MinY_NonZero())
                 Else
                     Dim haderror As Boolean = True
                     Try
                         xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
-                                                                                 Return FunctionValue(xvars)
+                                                                                 _counter += 1
+                                                                                 Dim fval = FunctionValue(xvars)
+                                                                                 fx_error_hist.Add(fval.AbsSqrSumY())
+                                                                                 Return fval
                                                                              End Function, xvar, tol.MinY_NonZero(), maxits)
                         haderror = False
                     Catch oex As OperationCanceledException
@@ -890,10 +1082,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Try
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
-                                                   'If Not nsolv.BuildingJacobian Then
-                                                   '    pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                                                   'End If
+                                                   fx_error_hist.Add(fval.AbsSqrSumY())
+                                                   pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   _counter += 1
                                                    Return fval
+                                               End Function,
+                                               Function(xvars)
+                                                   Return FunctionGradient(0.001, xvars)
                                                End Function, xvar)
                             haderror = False
                         Catch oex As OperationCanceledException
@@ -903,13 +1098,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If haderror Then
                             nsolv.Reset()
                             nsolv.UseBroydenApproximation = False
-                            xvar = nsolv.Solve(Function(xvars)
-                                                   Dim fval = FunctionValue(xvars)
-                                                   'If Not nsolv.BuildingJacobian Then
-                                                   '    pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                                                   'End If
-                                                   Return fval
+                            Try
+                                xvar = nsolv.Solve(Function(xvars)
+                                                       Dim fval = FunctionValue(xvars)
+                                                       fx_error_hist.Add(fval.AbsSqrSumY())
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       _counter += 1
+                                                       Return fval
+                                                   End Function,
+                                               Function(xvars)
+                                                   Return FunctionGradient(0.001, xvars)
                                                End Function, xvar)
+                            Catch ex As Exception
+                                Throw ex
+                            End Try
                         End If
                     End If
                 End If
@@ -1040,6 +1242,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
 
             IObj?.Close()
+
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine("Error Function Progression")
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine()
+
+            reporter?.AppendLine(String.Format("{0,-16}{1,20}", "Iteration", "Error Funtion"))
+            For i = 0 To fx_error_hist.Count - 1
+                reporter?.AppendLine(String.Format("{0,-16}{1,20:G6}", i + 1, fx_error_hist(i)))
+            Next
+
+            Dim report As String = ""
+
+            If dc.CreateSolverConvergengeReport Then dc.ColumnSolverConvergenceReport = reporter.ToString()
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err}
 

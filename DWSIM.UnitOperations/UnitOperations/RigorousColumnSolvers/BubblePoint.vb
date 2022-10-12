@@ -771,6 +771,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                  IdealK As Boolean, IdealH As Boolean, Mode As Integer,
                                  flashalgs As List(Of FlashAlgorithm)) As Object
 
+            rc.ColumnSolverConvergenceReport = ""
+
+            Dim reporter As Text.StringBuilder = Nothing
+
+            If rc.CreateSolverConvergengeReport Then reporter = New Text.StringBuilder()
+
             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -1017,6 +1023,55 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Lj(ns) = B
             End If
 
+            Dim names = pp.RET_VNAMES().ToList()
+
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine(String.Format("Initial Estimates"))
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine()
+
+            reporter?.AppendLine("Stage Conditions & Flows")
+            reporter?.AppendLine(String.Format("{0,-16}{1,16}{2,16}{3,16}{4,16}{5,16}",
+                                                   "Stage", "P (Pa)", "T (K)", "V (mol/s)",
+                                                   "L (mol/s)", "LSS (mol/s)"))
+            For i = 0 To ns
+                reporter?.AppendLine(String.Format("{0,-16}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}",
+                                                   i + 1, P(i), T(i), V(i), L(i), LSS(i)))
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Stage Molar Fractions - Vapor")
+            reporter?.Append("Stage".PadRight(20))
+            For j = 0 To nc - 1
+                reporter?.Append(names(j).PadLeft(20))
+            Next
+            reporter?.Append(vbCrLf)
+            For i = 0 To ns
+                reporter?.Append((i + 1).ToString().PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(y(i)(j).ToString("G6").PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Stage Molar Fractions - Liquid 1")
+            reporter?.Append("Stage".PadRight(20))
+            For j = 0 To nc - 1
+                reporter?.Append(names(j).PadLeft(20))
+            Next
+            reporter?.Append(vbCrLf)
+            For i = 0 To ns
+                reporter?.Append((i + 1).ToString().PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(x(i)(j).ToString("G6").PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine()
+
             'step3
 
             Dim af As Double = 1.0
@@ -1025,6 +1080,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim Kfac(ns) As Double
 
             Dim fx(ns), xtj(ns), dfdx(ns, ns), fxb(ns), xtjb(ns), dxtj(ns) As Double
+
+            Dim t_error_hist As New List(Of Double)
+            Dim dt_error_hist As New List(Of Double)
 
             'internal loop
 
@@ -1368,6 +1426,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 t_error_ant = t_error
                 t_error = Tj.SubtractY(Tj_ant).AbsSqrSumY
 
+                t_error_hist.Add(t_error)
+                dt_error_hist.Add(t_error - t_error_ant)
+
                 IObj2?.Paragraphs.Add(String.Format("Temperature error: {0}", t_error))
 
                 For i = ns To 0 Step -1
@@ -1602,12 +1663,55 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 If Not IdealH And Not IdealK Then
                     If ic >= maxits Then
+
+                        reporter?.AppendLine("========================================================")
+                        reporter?.AppendLine("Error Function Progression")
+                        reporter?.AppendLine("========================================================")
+                        reporter?.AppendLine()
+
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}{3,26}", "Iteration", "Temperature Error"))
+                        For i = 0 To t_error_hist.Count - 1
+                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}{3,26:G6}", i + 1, t_error_hist(i)))
+                        Next
+
+                        reporter?.AppendLine("========================================================")
+                        reporter?.AppendLine("Convergence Error!")
+                        reporter?.AppendLine("========================================================")
+                        reporter?.AppendLine()
+
+                        reporter?.AppendLine(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+
+                        If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
+
                         Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+
                     End If
                 End If
                 If Not Tj.IsValid Or Not Vj.IsValid Or Not Lj.IsValid Then
+
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Error Function Progression")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}{3,26}", "Iteration", "Temperature Error"))
+                    For i = 0 To t_error_hist.Count - 1
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}{3,26:G6}", i + 1, t_error_hist(i)))
+                    Next
+
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Convergence Error!")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+
+                    reporter?.AppendLine(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+
+                    If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
+
                     Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+
                 End If
+
                 If ic = stopatitnumber - 1 Then Exit Do
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
@@ -1615,6 +1719,56 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Calculator.WriteToConsole("Bubble Point solver T error = " & t_error, 1)
 
                 IObj2?.Close()
+
+                reporter?.AppendLine("========================================================")
+                reporter?.AppendLine(String.Format("Updated variables after iteration {0}", ic))
+                reporter?.AppendLine("========================================================")
+                reporter?.AppendLine()
+
+                reporter?.AppendLine("Stage Conditions & Flows")
+                reporter?.AppendLine(String.Format("{0,-16}{1,16}{2,16}{3,16}{4,16}{5,16}",
+                                                   "Stage", "P (Pa)", "T (K)", "V (mol/s)",
+                                                   "L (mol/s)", "LSS (mol/s)"))
+                For i = 0 To ns
+                    reporter?.AppendLine(String.Format("{0,-16}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}",
+                                                   i + 1, P(i), Tj(i), Vj(i), Lj(i), LSSj(i)))
+                Next
+
+                reporter?.AppendLine()
+                reporter?.AppendLine("Stage Molar Fractions - Vapor")
+                reporter?.Append("Stage".PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(names(j).PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+                For i = 0 To ns
+                    reporter?.Append((i + 1).ToString().PadRight(20))
+                    For j = 0 To nc - 1
+                        reporter?.Append(yc(i)(j).ToString("G6").PadLeft(20))
+                    Next
+                    reporter?.Append(vbCrLf)
+                Next
+
+                reporter?.AppendLine()
+                reporter?.AppendLine("Stage Molar Fractions - Liquid 1")
+                reporter?.Append("Stage".PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(names(j).PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+                For i = 0 To ns
+                    reporter?.Append((i + 1).ToString().PadRight(20))
+                    For j = 0 To nc - 1
+                        reporter?.Append(xc(i)(j).ToString("G6").PadLeft(20))
+                    Next
+                    reporter?.Append(vbCrLf)
+                Next
+
+                reporter?.AppendLine()
+                reporter?.AppendLine()
+                reporter?.AppendLine(String.Format("Temperature Error: {0} [tol: {1}]", t_error, tolerance * ns / 100))
+                reporter?.AppendLine()
+                reporter?.AppendLine()
 
             Loop Until t_error < tolerance * ns / 100 And ic > 1
 
@@ -1633,6 +1787,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
 
             IObj?.Close()
+
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine("Error Function Progression")
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine()
+
+            reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+            For i = 0 To t_error_hist.Count - 1
+                reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+            Next
+
+            If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
 
             'finished, return arrays
 

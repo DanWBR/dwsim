@@ -1946,6 +1946,10 @@ Namespace UnitOperations
             Direct = 3
         End Enum
 
+        Public Property CreateSolverConvergengeReport As Boolean = False
+
+        Public Property ColumnSolverConvergenceReport As String = ""
+
         Public Property ColumnPressureDrop As Double = Double.NaN
 
         Public Property SolvingMethodName As String = "Wang-Henke (Bubble Point)"

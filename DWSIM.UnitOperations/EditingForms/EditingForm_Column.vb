@@ -58,6 +58,10 @@ Public Class EditingForm_Column
 
             'first block
 
+            chkCreateConvReport.Checked = .CreateSolverConvergengeReport
+
+            btnViewReport.Enabled = (.ColumnSolverConvergenceReport <> "")
+
             chkActive.Checked = .GraphicObject.Active
 
             ToolTip1.SetToolTip(chkActive, .FlowSheet.GetTranslatedString("AtivoInativo"))
@@ -837,6 +841,21 @@ Public Class EditingForm_Column
 
         End If
 
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnViewReport.Click
+
+        Dim fr As New ReportViewer()
+        fr.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+        fr.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr.TextBox1.DeselectAll()
+        SimObject.FlowSheet.DisplayForm(fr)
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkCreateConvReport.CheckedChanged
+        SimObject.CreateSolverConvergengeReport = chkCreateConvReport.Checked
     End Sub
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp

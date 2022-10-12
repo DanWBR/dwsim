@@ -624,6 +624,12 @@
     <Compile Include="EditingForms\Supporting\FormViewMultilineText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\Supporting\ReportViewer.Designer.vb">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\ReportViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EnergyStream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -1287,6 +1293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\FormViewMultilineText.resx">
       <DependentUpon>FormViewMultilineText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\Supporting\ReportViewer.resx">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Strings.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -43,7 +43,12 @@ Namespace PropertyPackages.Auxiliary
             End Get
             Set(value As Double)
                 _kij = value
-                If Owner IsNot Nothing Then Owner.BIPChanged = True
+                If Owner IsNot Nothing Then
+                    Try
+                        Owner.BIPChanged = True
+                    Catch ex As Exception
+                    End Try
+                End If
             End Set
         End Property
 
