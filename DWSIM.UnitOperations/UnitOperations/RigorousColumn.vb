@@ -4169,16 +4169,29 @@ Namespace UnitOperations
                                               units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
                                               units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity, units.surfaceTension))
             Else
-                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
-                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                If DirectCast(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Extractor Then
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}",
                                               "Stage", "P", "T",
                                               "mL1", "wL1", "rhoL1", "etaL1", "kL1",
                                               "mL2", "wL2", "rhoL2", "etaL2", "kL2"))
-                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
                                               "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}",
                                               "", units.pressure, units.temperature,
                                               units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
                                               units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity))
+                Else
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "Stage", "P", "T",
+                                              "mV", "wV", "rhoV", "etaV", "kV",
+                                              "mL", "wL", "rhoL", "etaL", "kL", "sigma"))
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "", units.pressure, units.temperature,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity, units.surfaceTension))
+                End If
             End If
 
             reporter.AppendLine()
@@ -4213,16 +4226,32 @@ Namespace UnitOperations
 
                 Else
 
-                    ms.SetOverallComposition(compy)
-                    ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid1)
-                    ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid)
+                    If DirectCast(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Extractor Then
 
-                    mV = Vf(i).ConvertFromSI(units.molarflow)
-                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
-                    rhoV = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
-                    etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
-                    If Double.IsNaN(etaV) Then etaV = 0.0
-                    kV = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
+                        ms.SetOverallComposition(compy)
+                        ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid1)
+                        ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid)
+
+                        mV = Vf(i).ConvertFromSI(units.molarflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        rhoV = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
+                        etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        If Double.IsNaN(etaV) Then etaV = 0.0
+                        kV = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
+
+                    Else
+
+                        ms.SetOverallComposition(compy)
+                        ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
+
+                        mV = Vf(i).ConvertFromSI(units.molarflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
+                        etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        If Double.IsNaN(etaV) Then etaV = 0.0
+                        kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
+
+                    End If
 
                 End If
 
@@ -4246,9 +4275,19 @@ Namespace UnitOperations
 
                 Else
 
-                    reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                    If DirectCast(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Extractor Then
+
+                        reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
                                                    "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}",
                                                    i + 1, Pi, Ti, mL, wL, rhoL, etaL, kL, mV, wV, rhoV, etaV, kV))
+
+                    Else
+
+                        reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                                                   "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}{13,16:G6}",
+                                                   i + 1, Pi, Ti, mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
+
+                    End If
 
                 End If
 
