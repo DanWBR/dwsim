@@ -1656,4 +1656,7 @@
   <data name="PROP_PF_10" xml:space="preserve">
     <value>Número de Tubos</value>
   </data>
+  <data name="PROP_PU_6" xml:space="preserve">
+    <value>Head</value>
+  </data>
 </root>

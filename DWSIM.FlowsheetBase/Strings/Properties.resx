@@ -1433,7 +1433,7 @@
     <value>Total Elevation (Straight Tubes)</value>
   </data>
   <data name="PROP_PU_0" xml:space="preserve">
-    <value>Pressure Increase (Head)</value>
+    <value>Pressure Increase</value>
     <comment>1</comment>
   </data>
   <data name="PROP_PU_1" xml:space="preserve">
@@ -1453,6 +1453,9 @@
   </data>
   <data name="PROP_PU_5" xml:space="preserve">
     <value>Outlet Pressure</value>
+  </data>
+  <data name="PROP_PU_6" xml:space="preserve">
+    <value>Head</value>
   </data>
   <data name="PROP_RA_0" xml:space="preserve">
     <value>Top Stage Pressure</value>

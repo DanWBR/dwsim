@@ -122,6 +122,7 @@ Public Class FormMain
             Me.ToolStrip1.AutoSize = False
             Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
             Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            Me.MenuStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             For Each item In Me.ToolStrip1.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
@@ -3558,7 +3559,7 @@ Label_00CC:
 
         Dim floading As New FormLoadingSimulation
 
-        floading.Text = DWSIM.App.GetLocalString("Loading") + " " + Path.GetFileNameWithoutExtension(handler.FullPath)
+        floading.Text = DWSIM.App.GetLocalString("Loading") + " '" + Path.GetFileNameWithoutExtension(handler.FullPath) + "'..."
         floading.Show()
 
         Application.DoEvents()
@@ -3867,7 +3868,7 @@ Label_00CC:
 
                 Dim floading As New FormLoadingSimulation
 
-                floading.Text = DWSIM.App.GetLocalString("Loading") + " " + Path.GetFileNameWithoutExtension(myLink.Tag.ToString())
+                floading.Text = DWSIM.App.GetLocalString("Loading") + " '" + Path.GetFileNameWithoutExtension(myLink.Tag.ToString()) + "'..."
                 floading.Show()
 
                 Application.DoEvents()

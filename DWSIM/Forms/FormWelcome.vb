@@ -148,7 +148,7 @@ Public Class FormWelcome
 
             Dim floading As New FormLoadingSimulation
 
-            floading.Text = DWSIM.App.GetLocalString("Loading") + " " + Path.GetFileNameWithoutExtension(lview.SelectedItems(0).Tag.ToString)
+            floading.Text = DWSIM.App.GetLocalString("Loading") + " '" + Path.GetFileNameWithoutExtension(lview.SelectedItems(0).Tag.ToString) + "'..."
             floading.Show()
 
             Application.DoEvents()

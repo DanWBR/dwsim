@@ -1454,6 +1454,9 @@
   <data name="PROP_PU_5" xml:space="preserve">
     <value>Outlet Pressure</value>
   </data>
+  <data name="PROP_PU_6" xml:space="preserve">
+    <value>Head</value>
+  </data>
   <data name="PROP_RA_0" xml:space="preserve">
     <value>Top Stage Pressure</value>
     <comment>1</comment>
