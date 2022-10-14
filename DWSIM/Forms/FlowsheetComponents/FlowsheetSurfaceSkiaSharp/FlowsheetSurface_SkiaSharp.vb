@@ -1967,7 +1967,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Case ObjectType.Vessel
 
-                Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
+                Dim myVessel As New VesselGraphic(mpx, mpy, 50, 50)
                 If Flowsheet.FlowsheetOptions.FlowsheetColorTheme = 2 Then
                     myVessel.SetSize(New SKSize(70, 60))
                 End If

@@ -883,7 +883,7 @@ Imports System.Text.RegularExpressions
 
             Case ObjectType.Vessel
 
-                Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
+                Dim myVessel As New VesselGraphic(mpx, mpy, 50, 50)
                 If FlowsheetOptions.FlowsheetColorTheme = 2 Then
                     myVessel.SetSize(New SKSize(70, 60))
                 End If
