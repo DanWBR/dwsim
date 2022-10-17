@@ -1308,64 +1308,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
                 FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
-            Case ObjectType.ReboiledAbsorber
-                Dim myDWOBJ As ReboiledAbsorber = CType(newobj, ReboiledAbsorber)
-                With myDWOBJ.GraphicObject
-                    .Calculated = False
-                    .Name = "RBA-" & Guid.NewGuid.ToString
-                    .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
-                    .X = mpx
-                    .Y = mpy
-                    For Each con As ConnectionPoint In .InputConnectors
-                        con.AttachedConnector = Nothing
-                        con.IsAttached = False
-                    Next
-                    For Each con As ConnectionPoint In .OutputConnectors
-                        con.AttachedConnector = Nothing
-                        con.IsAttached = False
-                    Next
-                    If Not .SpecialConnectors Is Nothing Then
-                        For Each con As ConnectionPoint In .SpecialConnectors
-                            con.AttachedConnector = Nothing
-                            con.IsAttached = False
-                        Next
-                    End If
-                    .EnergyConnector.AttachedConnector = Nothing
-                    .EnergyConnector.IsAttached = False
-                End With
-                myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
-                Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
-            Case ObjectType.RefluxedAbsorber
-                Dim myDWOBJ As RefluxedAbsorber = CType(newobj, RefluxedAbsorber)
-                With myDWOBJ.GraphicObject
-                    .Calculated = False
-                    .Name = "RFA-" & Guid.NewGuid.ToString
-                    .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
-                    .X = mpx
-                    .Y = mpy
-                    For Each con As ConnectionPoint In .InputConnectors
-                        con.AttachedConnector = Nothing
-                        con.IsAttached = False
-                    Next
-                    For Each con As ConnectionPoint In .OutputConnectors
-                        con.AttachedConnector = Nothing
-                        con.IsAttached = False
-                    Next
-                    If Not .SpecialConnectors Is Nothing Then
-                        For Each con As ConnectionPoint In .SpecialConnectors
-                            con.AttachedConnector = Nothing
-                            con.IsAttached = False
-                        Next
-                    End If
-                    .EnergyConnector.AttachedConnector = Nothing
-                    .EnergyConnector.IsAttached = False
-                End With
-                myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
-                Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ComponentSeparator
                 Dim myDWOBJ As ComponentSeparator = CType(newobj, ComponentSeparator)
                 With myDWOBJ.GraphicObject

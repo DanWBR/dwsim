@@ -373,6 +373,10 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
+            s.CreateAndAddCheckBoxRow(container, "Generate Convergence Report", column.CreateSolverConvergengeReport, (chk, e) => {
+                column.CreateSolverConvergengeReport = chk.Checked.GetValueOrDefault();
+            });
+
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);

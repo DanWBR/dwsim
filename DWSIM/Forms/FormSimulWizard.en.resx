@@ -162,6 +162,10 @@ Click "Next" to continue.</value>
   <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>364, 23</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnInfoLeft.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>600, 338</value>
   </data>
@@ -189,7 +193,6 @@ Click "Next" to continue.</value>
   <data name="colAdd.HeaderText" xml:space="preserve">
     <value>Added</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="colAdd.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
   </data>

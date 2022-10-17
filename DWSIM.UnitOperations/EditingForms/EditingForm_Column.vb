@@ -131,10 +131,6 @@ Public Class EditingForm_Column
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
                 TabContainerSpecification.TabPages.Remove(TabCondenser)
                 TabContainerSpecification.TabPages.Remove(TabReboiler)
-            ElseIf TypeOf SimObject Is RefluxedAbsorber Then
-                TabContainerSpecification.TabPages.Remove(TabReboiler)
-            ElseIf TypeOf SimObject Is ReboiledAbsorber Then
-                TabContainerSpecification.TabPages.Remove(TabCondenser)
             End If
 
             'parameters
