@@ -79,6 +79,7 @@ Public Class FlowsheetSurface_SkiaSharp
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
                 End If
             Next
+            Me.ToolStrip1.AutoSize = True
             Me.ToolStrip1.Invalidate()
 
             Me.ToolStripFlowsheet.AutoSize = False
@@ -90,6 +91,7 @@ Public Class FlowsheetSurface_SkiaSharp
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
                 End If
             Next
+            Me.ToolStripFlowsheet.AutoSize = True
             Me.ToolStripFlowsheet.Invalidate()
         End If
 
