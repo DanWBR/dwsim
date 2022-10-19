@@ -117,22 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Flowsheet</value>
   </data>
-  <data name="GroupBox18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+  <data name="FaTabStripItem3.Text" xml:space="preserve">
+    <value>User-Defined Datasets</value>
   </data>
-  <data name="Label21.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="FaTabStripItem2.Text" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="FaTabStripItem7.Text" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="GroupBox18.Text" xml:space="preserve">
+    <value>Solution Inspector</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 48</value>
+    <value>9, 50</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 138</value>
+    <value>354, 74</value>
   </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Enabling Inspector Reports will create model description and performance reports on-the-fly as the calculations are requested by the Flowsheet Solver. Use the Solution Inspector Tool to view these reports.
@@ -145,14 +150,17 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkEnableInspector.Text" xml:space="preserve">
     <value>Enable Inspector Reports</value>
   </data>
-  <data name="GroupBox18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 504</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Solver Options</value>
   </data>
-  <data name="GroupBox18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 197</value>
+  <data name="chkBackgroundParallel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 17</value>
   </data>
-  <data name="GroupBox18.Text" xml:space="preserve">
-    <value>Solution Inspector</value>
+  <data name="chkBackgroundParallel.Text" xml:space="preserve">
+    <value>Enable Parallel Modular Mode</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Query</value>
   </data>
   <data name="chkStorePreviousSolutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 17</value>
@@ -160,101 +168,17 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkStorePreviousSolutions.Text" xml:space="preserve">
     <value>Store previous solutions</value>
   </data>
-  <data name="chkSolverBreak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 17</value>
-  </data>
-  <data name="chkSolverBreak.Text" xml:space="preserve">
-    <value>Break calculation when an exception is thrown</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>seconds</value>
-  </data>
-  <data name="tbSolverTimeout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 49</value>
-  </data>
-  <data name="tbSolverTimeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
-  </data>
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Solver timeout</value>
-  </data>
-  <data name="cbSolverMode.Items" xml:space="preserve">
-    <value>Background Thread</value>
-  </data>
-  <data name="cbSolverMode.Items1" xml:space="preserve">
-    <value>Background Parallel Threads</value>
-  </data>
-  <data name="cbSolverMode.Items3" xml:space="preserve">
-    <value>Network Computer</value>
-  </data>
-  <data name="cbSolverMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 20</value>
-  </data>
-  <data name="cbSolverMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 21</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Calculation Mode</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Connection String</value>
-  </data>
-  <data name="GroupBoxAzureConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 84</value>
-  </data>
-  <data name="GroupBoxAzureConfig.Text" xml:space="preserve">
-    <value>Azure Service Bus Settings</value>
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
-  </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>TCP Port Number</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>IP Address</value>
-  </data>
-  <data name="GroupBoxNetworkComputerConfig.Text" xml:space="preserve">
-    <value>Network Computer connection settings</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 217</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Solver Options</value>
-  </data>
-  <data name="GroupBox7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 91</value>
-  </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Query</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 97</value>
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Device</value>
+  </data>
+  <data name="chkSolverBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 17</value>
+  </data>
+  <data name="chkSolverBreak.Text" xml:space="preserve">
+    <value>Break calculation when an exception is thrown</value>
   </data>
   <data name="chkEnableSIMD.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 17</value>
@@ -262,26 +186,26 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkEnableSIMD.Text" xml:space="preserve">
     <value>Enable CPU SIMD Acceleration</value>
   </data>
-  <data name="GroupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 30</value>
   </data>
-  <data name="tbGPUCaps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 128</value>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
   </data>
-  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 120</value>
-  </data>
-  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 148</value>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>seconds</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>OpenCL/CUDA device info</value>
   </data>
-  <data name="cbGPU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 93</value>
+  <data name="tbSolverTimeout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 27</value>
   </data>
-  <data name="cbGPU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 21</value>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Solver timeout</value>
   </data>
   <data name="chkEnableGPUProcessing.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 17</value>
@@ -295,14 +219,8 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkEnableParallelCalcs.Text" xml:space="preserve">
     <value>Enable CPU Parallel Processing</value>
   </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 274</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Local Calculation Engine Settings</value>
-  </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 712</value>
+  <data name="GroupBox13.Text" xml:space="preserve">
+    <value>Renderer</value>
   </data>
   <data name="chkAA.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 17</value>
@@ -310,29 +228,20 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkAA.Text" xml:space="preserve">
     <value>Edge Smoothing (Anti-Aliasing)</value>
   </data>
-  <data name="cbRenderer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 21</value>
-  </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
   </data>
   <data name="Label23.Text" xml:space="preserve">
     <value>Rendering Engine</value>
   </data>
-  <data name="GroupBox13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 86</value>
-  </data>
-  <data name="GroupBox13.Text" xml:space="preserve">
-    <value>Renderer</value>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Cut/Copy/Paste Flowsheet Objects</value>
   </data>
   <data name="ComboBoxPropPackCopyMode.Items" xml:space="preserve">
     <value>Do not copy, use default</value>
   </data>
   <data name="ComboBoxPropPackCopyMode.Items1" xml:space="preserve">
     <value>Copy and associate</value>
-  </data>
-  <data name="ComboBoxPropPackCopyMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 21</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -346,26 +255,14 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="ComboBoxCompoundCopyMode.Items1" xml:space="preserve">
     <value>Copy and associate non-existent</value>
   </data>
-  <data name="ComboBoxCompoundCopyMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 21</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 86</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Cut/Copy/Paste Flowsheet Objects</value>
-  </data>
-  <data name="chkEditorDoubleClick.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="chkEditorDoubleClick.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Flowsheet Object Editors</value>
   </data>
   <data name="chkEditorDoubleClick.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 17</value>
@@ -373,20 +270,11 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkEditorDoubleClick.Text" xml:space="preserve">
     <value>Double-click to open</value>
   </data>
-  <data name="chkEditorDoubleClick.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="chkEnableMultipleEditors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 59</value>
-  </data>
   <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 17</value>
   </data>
   <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
     <value>Enable multiple editors</value>
-  </data>
-  <data name="chkCloseFormsOnDeselect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 89</value>
   </data>
   <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 17</value>
@@ -394,26 +282,14 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
     <value>Close editors on deselecting</value>
   </data>
-  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 119</value>
-  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Default initial placement</value>
   </data>
-  <data name="cbDefaultLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 115</value>
-  </data>
-  <data name="cbDefaultLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 21</value>
-  </data>
-  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 153</value>
-  </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Flowsheet Object Editors</value>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Undo/Redo</value>
   </data>
   <data name="CheckBoxUndoRedoRecalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 17</value>
@@ -421,17 +297,8 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
     <value>Recalculate flowsheet when undoing/redoing actions</value>
   </data>
-  <data name="GroupBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 54</value>
-  </data>
-  <data name="GroupBox11.Text" xml:space="preserve">
-    <value>Undo/Redo</value>
-  </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 712</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Flowsheet</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>User Compound Datasets</value>
   </data>
   <data name="cbudb.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 17</value>
@@ -439,7 +306,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="cbudb.Text" xml:space="preserve">
     <value>Replace compounds with equal names</value>
   </data>
-  <data name="DataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -456,7 +323,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="DataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DataGridViewCellStyle5.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -472,29 +339,17 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
-  </data>
-  <data name="dgvdb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 326</value>
-  </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 23</value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Add User Dataset</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 410</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>User Compound Datasets</value>
-  </data>
-  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 23</value>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>User-Defined Interaction Parameter Datasets</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add User IP Dataset</value>
   </data>
-  <data name="DataGridViewCellStyle3.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -511,29 +366,14 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="dgvIPDB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 231</value>
-  </data>
-  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 290</value>
-  </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>User-Defined Interaction Parameter Datasets</value>
-  </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 712</value>
-  </data>
-  <data name="FaTabStripItem3.Text" xml:space="preserve">
-    <value>User-Defined Datasets</value>
-  </data>
-  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Configuration Directory</value>
   </data>
   <data name="btnClearDir.Text" xml:space="preserve">
     <value>Clean Directory</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Configuration Directory</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Backup Copies</value>
   </data>
   <data name="chkSaveBackupFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 17</value>
@@ -565,14 +405,8 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="KryptonCheckBox6.Text" xml:space="preserve">
     <value>Enable backup copies</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Backup Copies</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 712</value>
-  </data>
-  <data name="FaTabStripItem2.Text" xml:space="preserve">
-    <value>Backups</value>
+  <data name="GroupBox16.Text" xml:space="preserve">
+    <value>Updates</value>
   </data>
   <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 17</value>
@@ -580,14 +414,8 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="chkUpdates.Text" xml:space="preserve">
     <value>Check for Updates</value>
   </data>
-  <data name="GroupBox16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 61</value>
-  </data>
-  <data name="GroupBox16.Text" xml:space="preserve">
-    <value>Updates</value>
-  </data>
-  <data name="btnSelectPythonPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 25</value>
+  <data name="GroupBox17.Text" xml:space="preserve">
+    <value>Python.NET Interpreter Settings</value>
   </data>
   <data name="btnSelectPythonPath.Text" xml:space="preserve">
     <value>Select</value>
@@ -598,41 +426,17 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="Label18.Text" xml:space="preserve">
     <value>Python 3.x DLL Directory (Windows only):</value>
   </data>
-  <data name="GroupBox17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 95</value>
-  </data>
-  <data name="GroupBox17.Text" xml:space="preserve">
-    <value>Python.NET Interpreter Settings</value>
-  </data>
-  <data name="GroupBox15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="chkIgnoreCompConstData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>348, 37</value>
+  <data name="GroupBox15.Text" xml:space="preserve">
+    <value>Compound Constant Properties</value>
   </data>
   <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
     <value>Ignore compound constant properties stored in the simulation file during loading</value>
   </data>
-  <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 70</value>
-  </data>
-  <data name="GroupBox15.Text" xml:space="preserve">
-    <value>Compound Constant Properties</value>
-  </data>
   <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
     <value>Remove Solid Phase from the list of present phases for external components (requires restart)</value>
   </data>
-  <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 70</value>
-  </data>
-  <data name="ComboBoxUILanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 51</value>
-  </data>
-  <data name="ComboBoxUILanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Messages</value>
   </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
@@ -646,11 +450,8 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="KryptonCheckBox1.Text" xml:space="preserve">
     <value>Show Tips</value>
   </data>
-  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 85</value>
-  </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Messages</value>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Debug Mode</value>
   </data>
   <data name="cbDebugLevel.Items" xml:space="preserve">
     <value>None</value>
@@ -664,36 +465,18 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="cbDebugLevel.Items3" xml:space="preserve">
     <value>High</value>
   </data>
-  <data name="cbDebugLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 23</value>
-  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Debug Level</value>
   </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 60</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Debug Mode</value>
-  </data>
-  <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 712</value>
-  </data>
-  <data name="FaTabStripItem7.Text" xml:space="preserve">
-    <value>Other</value>
-  </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 738</value>
-  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAUwBCgFMAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAeQBCgHkAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
@@ -887,6 +670,6 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Add User Database</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 741</value>
+    <value>405, 746</value>
   </data>
 </root>

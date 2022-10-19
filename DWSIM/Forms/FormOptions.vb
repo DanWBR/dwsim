@@ -80,18 +80,14 @@ Public Class FormOptions
 
         If My.Settings.SolverMode = 0 Then My.Settings.SolverMode = 1
 
-        Select Case My.Settings.SolverMode
-            Case 0, 1
-                cbSolverMode.SelectedIndex = 0
-            Case Else
-                cbSolverMode.SelectedIndex = My.Settings.SolverMode - 1
-        End Select
+        If My.Settings.SolverMode = 2 Then
+            chkBackgroundParallel.Checked = True
+        Else
+            chkBackgroundParallel.Checked = False
+        End If
 
-        tbServiceBusNamespace.Text = My.Settings.ServiceBusConnectionString
         tbSolverTimeout.Text = My.Settings.SolverTimeoutSeconds
         cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
-        tbServerIP.Text = My.Settings.ServerIPAddress
-        tbServerPort.Text = My.Settings.ServerPort
         chkSolverBreak.Checked = My.Settings.SolverBreakOnException
         chkStorePreviousSolutions.Checked = My.Settings.StorePreviousSolutions
 
@@ -454,32 +450,6 @@ Public Class FormOptions
         If loaded And chkEnableGPUProcessing.Checked Then cbGPU_SelectedIndexChanged(sender, e)
     End Sub
 
-    Private Sub cbSolverMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolverMode.SelectedIndexChanged
-        Select Case cbSolverMode.SelectedIndex
-            Case 0, 1
-                My.Settings.SolverMode = 1
-                GroupBoxAzureConfig.Visible = False
-                GroupBoxNetworkComputerConfig.Visible = False
-                tbSolverTimeout.Enabled = True
-            Case 2
-                My.Settings.SolverMode = 3
-                GroupBoxAzureConfig.Visible = True
-                GroupBoxNetworkComputerConfig.Visible = False
-                tbSolverTimeout.Enabled = True
-            Case 3
-                My.Settings.SolverMode = 4
-                GroupBoxAzureConfig.Visible = False
-                GroupBoxNetworkComputerConfig.Visible = True
-                tbSolverTimeout.Enabled = True
-        End Select
-        Settings.SolverMode = My.Settings.SolverMode
-    End Sub
-
-    Private Sub tbServiceBusNamespace_TextChanged(sender As Object, e As EventArgs) Handles tbServiceBusNamespace.TextChanged
-        My.Settings.ServiceBusConnectionString = tbServiceBusNamespace.Text
-        GlobalSettings.Settings.ServiceBusConnectionString = My.Settings.ServiceBusConnectionString
-    End Sub
-
     Private Sub cbDebugLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDebugLevel.SelectedIndexChanged
         My.Settings.DebugLevel = cbDebugLevel.SelectedIndex
         Settings.DebugLevel = My.Settings.DebugLevel
@@ -490,16 +460,6 @@ Public Class FormOptions
             My.Settings.SolverTimeoutSeconds = Integer.Parse(tbSolverTimeout.Text)
             GlobalSettings.Settings.SolverTimeoutSeconds = My.Settings.SolverTimeoutSeconds
         End If
-    End Sub
-
-    Private Sub tbServerIP_TextChanged(sender As Object, e As EventArgs) Handles tbServerIP.TextChanged
-        My.Settings.ServerIPAddress = tbServerIP.Text
-        GlobalSettings.Settings.ServerIPAddress = My.Settings.ServerIPAddress
-    End Sub
-
-    Private Sub tbServerPort_TextChanged(sender As Object, e As EventArgs) Handles tbServerPort.TextChanged
-        My.Settings.ServerPort = tbServerPort.Text
-        GlobalSettings.Settings.ServerPort = My.Settings.ServerPort
     End Sub
 
     Private Sub FormOptions_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
@@ -681,5 +641,13 @@ Public Class FormOptions
     Private Sub CheckBox1_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkUpdates.CheckedChanged
         My.Settings.CheckForUpdates = chkUpdates.Checked
         Settings.CheckForUpdates = chkUpdates.Checked
+    End Sub
+
+    Private Sub chkBackgroundParallel_CheckedChanged(sender As Object, e As EventArgs) Handles chkBackgroundParallel.CheckedChanged
+        If chkBackgroundParallel.Checked Then
+            My.Settings.SolverMode = 2
+        Else
+            My.Settings.SolverMode = 1
+        End If
     End Sub
 End Class
