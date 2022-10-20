@@ -472,7 +472,7 @@ Namespace SpecialOps
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.lo_adjust_32
+            Return My.Resources.adjust
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

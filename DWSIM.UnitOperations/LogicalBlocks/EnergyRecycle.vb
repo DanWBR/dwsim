@@ -449,7 +449,7 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.lo_enrecy_32
+            Return My.Resources.erecycle
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

@@ -29,13 +29,11 @@ Partial Class EditingForm_Adjust
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
+        Me.gbControlPanel = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.tbTolerance = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblSPUnits = New System.Windows.Forms.Label()
-        Me.btnOpenControlPanel = New System.Windows.Forms.Button()
         Me.tbSetPoint = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.chkSolveGlobal = New System.Windows.Forms.CheckBox()
@@ -61,7 +59,6 @@ Partial Class EditingForm_Adjust
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -104,28 +101,14 @@ Partial Class EditingForm_Adjust
         Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
-        'GroupBox4
+        'gbControlPanel
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip2"))
-        '
-        'rtbAnnotations
-        '
-        resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
-        Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
-    "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.rtbAnnotations.ShowRedo = False
-        Me.rtbAnnotations.ShowUndo = False
-        Me.ToolTipValues.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip2"))
+        resources.ApplyResources(Me.gbControlPanel, "gbControlPanel")
+        Me.gbControlPanel.Name = "gbControlPanel"
+        Me.gbControlPanel.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.gbControlPanel, resources.GetString("gbControlPanel.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.gbControlPanel, resources.GetString("gbControlPanel.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.gbControlPanel, resources.GetString("gbControlPanel.ToolTip2"))
         '
         'GroupBox2
         '
@@ -133,7 +116,6 @@ Partial Class EditingForm_Adjust
         Me.GroupBox2.Controls.Add(Me.tbTolerance)
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.lblSPUnits)
-        Me.GroupBox2.Controls.Add(Me.btnOpenControlPanel)
         Me.GroupBox2.Controls.Add(Me.tbSetPoint)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.chkSolveGlobal)
@@ -166,15 +148,6 @@ Partial Class EditingForm_Adjust
         Me.ToolTip1.SetToolTip(Me.lblSPUnits, resources.GetString("lblSPUnits.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.lblSPUnits, resources.GetString("lblSPUnits.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.lblSPUnits, resources.GetString("lblSPUnits.ToolTip2"))
-        '
-        'btnOpenControlPanel
-        '
-        resources.ApplyResources(Me.btnOpenControlPanel, "btnOpenControlPanel")
-        Me.btnOpenControlPanel.Name = "btnOpenControlPanel"
-        Me.ToolTip1.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip2"))
-        Me.btnOpenControlPanel.UseVisualStyleBackColor = True
         '
         'tbSetPoint
         '
@@ -396,7 +369,7 @@ Partial Class EditingForm_Adjust
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.gbControlPanel)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Adjust"
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
@@ -404,7 +377,6 @@ Partial Class EditingForm_Adjust
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -415,8 +387,7 @@ Partial Class EditingForm_Adjust
     Public WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Public WithEvents chkActive As System.Windows.Forms.CheckBox
     Public WithEvents Label11 As System.Windows.Forms.Label
-    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
+    Public WithEvents gbControlPanel As System.Windows.Forms.GroupBox
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Public WithEvents Label7 As System.Windows.Forms.Label
@@ -434,7 +405,6 @@ Partial Class EditingForm_Adjust
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label5 As System.Windows.Forms.Label
     Public WithEvents chkSolveGlobal As System.Windows.Forms.CheckBox
-    Public WithEvents btnOpenControlPanel As System.Windows.Forms.Button
     Public WithEvents tbSetPoint As System.Windows.Forms.TextBox
     Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents lblSPUnits As System.Windows.Forms.Label

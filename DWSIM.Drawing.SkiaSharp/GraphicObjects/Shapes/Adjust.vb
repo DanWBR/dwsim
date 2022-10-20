@@ -168,7 +168,7 @@ Namespace GraphicObjects.Shapes
 
                     Using New SKAutoCanvasRestore(canvas)
                         StraightCanvas(canvas)
-                        canvas.DrawText("A", ax, ay, tpaint)
+                        canvas.DrawText("C", ax, ay, tpaint)
                     End Using
 
                 Case 1
@@ -234,7 +234,7 @@ Namespace GraphicObjects.Shapes
 
                     Using New SKAutoCanvasRestore(canvas)
                         StraightCanvas(canvas)
-                        canvas.DrawText("A", ax, ay, tpaint)
+                        canvas.DrawText("C", ax, ay, tpaint)
                     End Using
 
                 Case 3

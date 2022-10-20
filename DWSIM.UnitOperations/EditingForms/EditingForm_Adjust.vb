@@ -11,7 +11,13 @@ Public Class EditingForm_Adjust
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
+    Dim cp As EditingForm_Adjust_ControlPanel
+
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        cp = New EditingForm_Adjust_ControlPanel With {.myADJ = SimObject}
+        cp.Dock = DockStyle.Fill
+        gbControlPanel.Controls.Add(cp)
 
         UpdateInfo()
 
@@ -108,15 +114,6 @@ Public Class EditingForm_Adjust
 
             tbTolerance.Text = .Tolerance.ToString(nf)
 
-            'annotation
-
-            Try
-                rtbAnnotations.Rtf = .Annotation
-            Catch ex As Exception
-
-            End Try
-
-          
         End With
 
         Loaded = True
@@ -187,10 +184,6 @@ Public Class EditingForm_Adjust
 
     End Sub
 
-    Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
-        If Loaded Then SimObject.Annotation = rtbAnnotations.Rtf
-    End Sub
-
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
         If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
     End Sub
@@ -252,6 +245,8 @@ Public Class EditingForm_Adjust
 
         End If
 
+        cp.UpdateInfo()
+
     End Sub
 
     Private Sub cbTargetProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetProp.SelectedIndexChanged
@@ -273,32 +268,13 @@ Public Class EditingForm_Adjust
 
         End If
 
+        cp.UpdateInfo()
+
     End Sub
 
     Private Sub chkSolveGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkSolveGlobal.CheckedChanged
         SimObject.SimultaneousAdjust = chkSolveGlobal.Checked
-        btnOpenControlPanel.Enabled = Not chkSolveGlobal.Checked
-    End Sub
-
-    Private Sub btnOpenControlPanel_Click(sender As Object, e As EventArgs) Handles btnOpenControlPanel.Click
-
-        If SimObject.ControlledObject Is Nothing Then
-            MessageBox.Show(SimObject.FlowSheet.GetTranslatedString("NoControlledObject"),
-                            SimObject.FlowSheet.GetTranslatedString("Erro"),
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-
-        If SimObject.ManipulatedObject Is Nothing Then
-            MessageBox.Show(SimObject.FlowSheet.GetTranslatedString("NoManipulatedObject"),
-                            SimObject.FlowSheet.GetTranslatedString("Erro"),
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-
-        Dim f As New EditingForm_Adjust_ControlPanel() With {.myADJ = SimObject}
-        SimObject.FlowSheet.DisplayForm(f)
-
+        gbControlPanel.Enabled = Not chkSolveGlobal.Checked
     End Sub
 
     Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown, tbTolerance.KeyDown
@@ -334,6 +310,8 @@ Public Class EditingForm_Adjust
             DirectCast(sender, TextBox).SelectAll()
 
         End If
+
+        cp.UpdateInfo()
 
     End Sub
 
@@ -422,6 +400,8 @@ Public Class EditingForm_Adjust
             Next
 
         End If
+
+        cp.UpdateInfo()
 
     End Sub
 

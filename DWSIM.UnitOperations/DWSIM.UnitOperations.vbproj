@@ -562,7 +562,7 @@
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.designer.vb">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>

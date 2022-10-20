@@ -142,20 +142,11 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 199</value>
+  <data name="gbControlPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 473</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 180</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 142</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parameters</value>
+  <data name="gbControlPanel.Text" xml:space="preserve">
+    <value>Control Panel</value>
   </data>
   <data name="tbTolerance.Location" type="System.Drawing.Point, System.Drawing">
     <value>221, 71</value>
@@ -171,12 +162,6 @@
   </data>
   <data name="lblSPUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>365, 48</value>
-  </data>
-  <data name="btnOpenControlPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 23</value>
-  </data>
-  <data name="btnOpenControlPanel.Text" xml:space="preserve">
-    <value>Open Control Panel</value>
   </data>
   <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
     <value>221, 45</value>
@@ -198,6 +183,12 @@
   </data>
   <data name="chkSolveGlobal.Text" xml:space="preserve">
     <value>Converge/Solve with Flowsheet Solver</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 107</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Parameters</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>367, 288</value>
@@ -316,11 +307,8 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Manipulated Object</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>385, 998</value>
+    <value>385, 941</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">

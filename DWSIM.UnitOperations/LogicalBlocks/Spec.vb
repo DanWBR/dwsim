@@ -569,7 +569,7 @@ Namespace SpecialOps
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.lo_spec_32
+            Return My.Resources.spec
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
