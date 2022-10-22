@@ -1668,4 +1668,7 @@
   <data name="PROP_VA_5" xml:space="preserve">
     <value>Opening</value>
   </data>
+  <data name="PROP_VA_6" xml:space="preserve">
+    <value>Characteristic Parameter</value>
+  </data>
 </root>

@@ -56,6 +56,10 @@ namespace DWSIM.UI.Desktop.Shared
         {
             return new String[] { "Outlet Pressure", "Pressure Drop", "Liquid Service Kv (Deprecated)", "Gas Service Kv (Deprecated)", "Steam Service Kv (IEC 60534)", "General Service Kv (IEC 60534)" };
         }
+        public static String[] valveopkvrelmode()
+        {
+            return new String[] { "Linear","Equal Percentage","Quick Opening","User-Defined Expression","Data Table" };
+        }
         public static String[] pumpcalcmode()
         {
             return new String[] { "Outlet Pressure", "Pressure Increase", "Power", "Energy Stream", "Defined Curves" };

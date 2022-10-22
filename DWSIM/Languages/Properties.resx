@@ -1659,4 +1659,7 @@
   <data name="PROP_PU_6" xml:space="preserve">
     <value>Head</value>
   </data>
+  <data name="PROP_VA_6" xml:space="preserve">
+    <value>Parâmetro Característico</value>
+  </data>
 </root>

@@ -1018,7 +1018,6 @@ namespace DWSIM.UI.Desktop.Editors
                                    }
                                }, () => CallSolverIfNeeded());
                     s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv[Cv]/Kv[Cv]max (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
-                    s.CreateAndAddStringEditorRow(container, "Kv[Cv]/Kv[Cv]max (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Opening (%)", valve.OpeningPct,
                                (TextBox arg3, EventArgs ev) =>
                                {
@@ -1032,6 +1031,37 @@ namespace DWSIM.UI.Desktop.Editors
                                        arg3.TextColor = (Colors.Red);
                                    }
                                }, () => CallSolverIfNeeded());
+                    s.CreateAndAddDropDownRow(container, "Opening/Kv[Cv] Relationship Type", StringResources.valveopkvrelmode().ToList(),
+                        (int)valve.DefinedOpeningKvRelationShipType, (DropDown arg3, EventArgs ev) =>
+                        {
+                            valve.DefinedOpeningKvRelationShipType = arg3.SelectedIndex.ToEnum<Valve.OpeningKvRelationshipType>();
+                        });
+                    s.CreateAndAddTextBoxRow(container, nf, "Characteristic Parameter", valve.CharacteristicParameter,
+                      (TextBox arg3, EventArgs ev) =>
+                      {
+                          if (arg3.Text.IsValidDoubleExpression())
+                          {
+                              arg3.TextColor = (SystemColors.ControlText);
+                              valve.CharacteristicParameter = arg3.Text.ToString().ParseExpressionToDouble();
+                          }
+                          else
+                          {
+                              arg3.TextColor = (Colors.Red);
+                          }
+                      }, () => CallSolverIfNeeded());
+                    s.CreateAndAddStringEditorRow(container, "Kv[Cv]/Kv[Cv]max (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
+                    s.CreateAndAddButtonRow(container, "Opening/Kv User Data Table", null, (btn, e) =>
+                    {
+                        var editor = new Editors.UnitOperations.ValveDataEditor(valve);
+                        var form = s.GetDefaultEditorForm("Valve Data Editor", 300, 250, editor, false);
+                        form.Closing += (s, e2) => {
+                            Application.Instance.Invoke(() => {
+                                editor.Save();
+                            });
+                        };
+                        form.Center();
+                        form.Show();
+                    });
                     break;
                 case ObjectType.ShortcutColumn:
                     var sc = (ShortcutColumn)SimObject;

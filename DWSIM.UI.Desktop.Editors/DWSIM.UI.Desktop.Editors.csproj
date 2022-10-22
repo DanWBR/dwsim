@@ -165,6 +165,7 @@
     <Compile Include="General\SimulationSettings.cs" />
     <Compile Include="UnitOperations\RigorousColumnShared.cs" />
     <Compile Include="UnitOperations\ShellAndTubeProperties.cs" />
+    <Compile Include="UnitOperations\ValveDataEditor.cs" />
     <Compile Include="Utilities\BinaryEnvelope.cs" />
     <Compile Include="Utilities\PhaseEnvelope.cs" />
     <Compile Include="Utilities\TrueCriticalPoint.cs" />

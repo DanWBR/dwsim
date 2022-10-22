@@ -11,13 +11,47 @@ Public Class EditingForm_Valve
     Public Property SimObject As UnitOperations.Valve
 
     Public Loaded As Boolean = False
+    Public Filling As Boolean = False
 
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        SetupGrid()
+
         UpdateInfo()
+
+    End Sub
+
+    Private Sub SetupGrid()
+
+        With grid1.Worksheets(0)
+            .SetRows(100)
+            .SetCols(2)
+            .SetColumnsWidth(0, 2, 100)
+            .ColumnHeaders(0).Text = "Opening (%)"
+            .ColumnHeaders(1).Text = "Kv/Kvmax (%)"
+            AddHandler .CellDataChanged,
+                Sub(sender, e)
+                    If Loaded And Not Filling Then
+                        SimObject.OpeningKvRelDataTableX.Clear()
+                        SimObject.OpeningKvRelDataTableY.Clear()
+                        For i = 0 To 99
+                            Dim datax = .GetCellData(i, 0)
+                            Dim datay = .GetCellData(i, 1)
+                            If datax IsNot Nothing And datay IsNot Nothing Then
+                                Try
+                                    SimObject.OpeningKvRelDataTableX.Add(datax.ToString().ToDoubleFromCurrent())
+                                    SimObject.OpeningKvRelDataTableY.Add(datay.ToString().ToDoubleFromCurrent())
+                                Catch ex As Exception
+                                    MessageBox.Show(String.Format("Error on data table: {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End Try
+                            End If
+                        Next
+                    End If
+                End Sub
+        End With
 
     End Sub
 
@@ -99,14 +133,6 @@ Public Class EditingForm_Valve
             cbPropPack.Items.AddRange(proppacks)
             cbPropPack.SelectedItem = .PropertyPackage?.Tag
 
-            'annotation
-
-            Try
-                rtbAnnotations.Rtf = .Annotation
-            Catch ex As Exception
-
-            End Try
-
             'parameters
 
             cbPress.Items.Clear()
@@ -141,9 +167,22 @@ Public Class EditingForm_Valve
             tbKv.Text = uobj.Kv.ToString(nf)
             tbKvOpRel.Text = uobj.PercentOpeningVersusPercentKvExpression
 
-            chkEnableKvOpRel.Checked = uobj.EnableOpeningKvRelationship
-
             If .FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Kv Then rbKv.Checked = True Else rbCv.Checked = True
+
+            tbCharParam.Text = .CharacteristicParameter.ToString(nf)
+
+            Panel1.Enabled = False
+
+            For i = 0 To .OpeningKvRelDataTableX.Count - 1
+                grid1.Worksheets(0).SetCellData(i, 0, .OpeningKvRelDataTableX(i))
+            Next
+            For i = 0 To .OpeningKvRelDataTableY.Count - 1
+                grid1.Worksheets(0).SetCellData(i, 1, .OpeningKvRelDataTableY(i))
+            Next
+
+            cbOpeningKvRelType.SelectedIndex = .DefinedOpeningKvRelationShipType
+
+            chkEnableKvOpRel.Checked = uobj.EnableOpeningKvRelationship
 
         End With
 
@@ -401,10 +440,6 @@ Public Class EditingForm_Valve
 
     End Sub
 
-    Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
-        If Loaded Then SimObject.Annotation = rtbAnnotations.Rtf
-    End Sub
-
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
         If Loaded Then
             SimObject.GraphicObject.Active = chkActive.Checked
@@ -501,8 +536,7 @@ Public Class EditingForm_Valve
 
     Private Sub chkEnableKvOpRel_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableKvOpRel.CheckedChanged
         SimObject.EnableOpeningKvRelationship = chkEnableKvOpRel.Checked
-        tbKvOpRel.Enabled = chkEnableKvOpRel.Checked
-        tbOp.Enabled = chkEnableKvOpRel.Checked
+        Panel1.Enabled = chkEnableKvOpRel.Checked
     End Sub
 
     Private Sub tbKvOpRel_TextChanged(sender As Object, e As EventArgs) Handles tbKvOpRel.KeyDown
@@ -536,6 +570,33 @@ Public Class EditingForm_Valve
     Private Sub rbKv_CheckedChanged(sender As Object, e As EventArgs) Handles rbKv.CheckedChanged, rbCv.CheckedChanged
         If rbCv.Checked Then SimObject.FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Cv
         If rbKv.Checked Then SimObject.FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Kv
+    End Sub
+
+    Private Sub tbCharParam_TextChanged(sender As Object, e As EventArgs) Handles tbCharParam.TextChanged
+        Try
+            SimObject.CharacteristicParameter = tbCharParam.Text.ToDoubleFromCurrent()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub cbOpeningKvRelType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOpeningKvRelType.SelectedIndexChanged
+        SimObject.DefinedOpeningKvRelationShipType = cbOpeningKvRelType.SelectedIndex
+
+        gbTable.Enabled = False
+        tbKvOpRel.Enabled = False
+        tbOp.Enabled = False
+        tbCharParam.Enabled = False
+
+        Select Case SimObject.DefinedOpeningKvRelationShipType
+            Case UnitOperations.Valve.OpeningKvRelationshipType.DataTable
+                gbTable.Enabled = True
+            Case UnitOperations.Valve.OpeningKvRelationshipType.UserDefined
+                tbKvOpRel.Enabled = True
+                tbOp.Enabled = True
+            Case UnitOperations.Valve.OpeningKvRelationshipType.QuickOpening
+                tbCharParam.Enabled = True
+            Case Else
+        End Select
     End Sub
 
 End Class

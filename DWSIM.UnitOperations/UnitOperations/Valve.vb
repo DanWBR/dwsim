@@ -30,6 +30,14 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.PressureChangers
 
+        Public Enum OpeningKvRelationshipType
+            Linear = 0
+            EqualPercentage = 1
+            QuickOpening = 2
+            UserDefined = 3
+            DataTable = 4
+        End Enum
+
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
@@ -63,6 +71,14 @@ Namespace UnitOperations
         Public Property PercentOpeningVersusPercentKvExpression As String = "1.0*OP"
 
         Public Property EnableOpeningKvRelationship As Boolean = False
+
+        Public Property CharacteristicParameter As Double = 50
+
+        Public Property DefinedOpeningKvRelationShipType As OpeningKvRelationshipType = OpeningKvRelationshipType.UserDefined
+
+        Public Property OpeningKvRelDataTableX As New List(Of Double)
+
+        Public Property OpeningKvRelDataTableY As New List(Of Double)
 
         Public Property FlowCoefficient As FlowCoefficientType = FlowCoefficientType.Kv
 
@@ -202,17 +218,33 @@ Namespace UnitOperations
                     End If
 
                     If EnableOpeningKvRelationship Then
-                        Try
-                            Dim ExpContext As New Ciloci.Flee.ExpressionContext
-                            ExpContext.Imports.AddType(GetType(System.Math))
-                            ExpContext.Variables.Clear()
-                            ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                            ExpContext.Variables.Add("OP", OpeningPct)
-                            Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
-                            Kvc = FC * Expr.Evaluate() / 100
-                        Catch ex As Exception
-                            Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
-                        End Try
+                        Select Case DefinedOpeningKvRelationShipType
+                            Case OpeningKvRelationshipType.UserDefined
+                                Try
+                                    Dim ExpContext As New Ciloci.Flee.ExpressionContext
+                                    ExpContext.Imports.AddType(GetType(System.Math))
+                                    ExpContext.Variables.Clear()
+                                    ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                                    ExpContext.Variables.Add("OP", OpeningPct)
+                                    Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
+                                    Kvc = FC * Expr.Evaluate() / 100
+                                Catch ex As Exception
+                                    Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
+                                End Try
+                            Case OpeningKvRelationshipType.QuickOpening
+                                Kvc = (OpeningPct / 100.0) ^ 0.5 * FC
+                            Case OpeningKvRelationshipType.Linear
+                                Kvc = OpeningPct / 100.0 * FC
+                            Case OpeningKvRelationshipType.EqualPercentage
+                                Kvc = CharacteristicParameter ^ (OpeningPct / 100.0 - 1.0) * FC
+                            Case OpeningKvRelationshipType.DataTable
+                                Try
+                                    Dim factor = MathNet.Numerics.Interpolate.RationalWithoutPoles(OpeningKvRelDataTableX, OpeningKvRelDataTableX).Interpolate(OpeningPct) / 100.0
+                                    Kvc = factor * FC
+                                Catch ex As Exception
+                                    Throw New Exception("Error calculating Kv from tabulated data: " + ex.Message)
+                                End Try
+                        End Select
                     Else
                         Kvc = FC
                     End If
@@ -775,7 +807,6 @@ Namespace UnitOperations
                 FC = Kv
             End If
 
-
             If EnableOpeningKvRelationship Then
                 IObj?.Paragraphs.Add("<h2>Opening/Kv[Cv] relationship</h2>")
                 IObj?.Paragraphs.Add("When this feature is enabled, you can enter an expression that relates the valve stem opening with the maximum flow value (Kvmax).")
@@ -785,21 +816,49 @@ Namespace UnitOperations
                                     are instead designed, or characterized, in order to meet the large variety of control application needs. Many 
                                     control loops have inherent non linearity's, which may be possible to compensate selecting the control valve trim.")
                 IObj?.Paragraphs.Add("<img src='https://www.engineeringtoolbox.com/docs/documents/485/Control_Valve_Flow_Characteristics.gif'></img>")
-                Try
-                    Dim ExpContext As New Ciloci.Flee.ExpressionContext
-                    ExpContext.Imports.AddType(GetType(System.Math))
-                    ExpContext.Variables.Clear()
-                    ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                    ExpContext.Variables.Add("OP", OpeningPct)
-                    IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
-                    IObj?.Paragraphs.Add("Opening/Kv[Cv]max relationship expression: " & PercentOpeningVersusPercentKvExpression)
-                    Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
-                    Kvc = FC * Expr.Evaluate() / 100
-                    IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
-                    IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
-                Catch ex As Exception
-                    Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
-                End Try
+                Select Case DefinedOpeningKvRelationShipType
+                    Case OpeningKvRelationshipType.UserDefined
+                        Try
+                            Dim ExpContext As New Ciloci.Flee.ExpressionContext()
+                            ExpContext.Imports.AddType(GetType(System.Math))
+                            ExpContext.Variables.Clear()
+                            ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                            ExpContext.Variables.Add("OP", OpeningPct)
+                            IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                            IObj?.Paragraphs.Add("Opening/Kv[Cv]max relationship expression: " & PercentOpeningVersusPercentKvExpression)
+                            Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
+                            Kvc = FC * Expr.Evaluate() / 100
+                            IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                            IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                        Catch ex As Exception
+                            Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
+                        End Try
+                    Case OpeningKvRelationshipType.QuickOpening
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Kvc = (OpeningPct / 100.0) ^ 0.5 * FC
+                        IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                        IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                    Case OpeningKvRelationshipType.Linear
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Kvc = OpeningPct / 100.0 * FC
+                        IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                        IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                    Case OpeningKvRelationshipType.EqualPercentage
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Kvc = CharacteristicParameter ^ (OpeningPct / 100.0 - 1.0) * FC
+                        IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                        IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                    Case OpeningKvRelationshipType.DataTable
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Try
+                            Dim factor = MathNet.Numerics.Interpolate.RationalWithoutPoles(OpeningKvRelDataTableX, OpeningKvRelDataTableX).Interpolate(OpeningPct) / 100.0
+                            Kvc = factor * FC
+                            IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                            IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                        Catch ex As Exception
+                            Throw New Exception("Error calculating Kv from tabulated data: " + ex.Message)
+                        End Try
+                End Select
             Else
                 Kvc = FC
             End If
@@ -993,6 +1052,8 @@ Namespace UnitOperations
                         value = Kv
                     Case 5
                         value = OpeningPct
+                    Case 6
+                        value = CharacteristicParameter
                 End Select
 
                 Return value
@@ -1012,15 +1073,15 @@ Namespace UnitOperations
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
             End Select
@@ -1056,6 +1117,8 @@ Namespace UnitOperations
                     Else
                         OpeningPct = 100
                     End If
+                Case 6
+                    CharacteristicParameter = propval
             End Select
 
             Return 1

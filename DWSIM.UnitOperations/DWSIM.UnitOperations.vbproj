@@ -205,10 +205,17 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoGridEditor">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoGridEditor.dll</HintPath>
+    </Reference>
     <Reference Include="VBIDEApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=931cec8882205047, processorArchitecture=MSIL">
       <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\VBIDEApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.ExtensionMethods" />
@@ -977,9 +984,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Tank.de.resx">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_Valve.de.resx">
-      <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Vessel.de.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
