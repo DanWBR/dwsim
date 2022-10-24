@@ -210,7 +210,9 @@ Public Class FormDynamicsIntegratorControl
 
         integrator.RealTime = realtime
 
-        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
+        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is PIDController).ToList
+
+        Dim Controllers2 = Flowsheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is PythonController).ToList
 
         If Not restarting Then
             If Not waittofinish Then
@@ -261,6 +263,9 @@ Public Class FormDynamicsIntegratorControl
         If Not restarting Then
             For Each controller As PIDController In Controllers
                 controller.Reset()
+            Next
+            For Each controller As PythonController In Controllers2
+                controller.ResetRequested = True
             Next
         End If
 
@@ -377,17 +382,19 @@ Public Class FormDynamicsIntegratorControl
                                         integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
 
                                         If integrator.ShouldCalculateControl Then
-                                            For ck = 0 To Controllers.Count
-                                                For Each controller As PIDController In Controllers
-                                                    If controller.Active Then
-                                                        Try
-                                                            controller.Solve()
-                                                        Catch ex As Exception
-                                                        End Try
-                                                    End If
-                                                Next
-                                            Next
                                             For Each controller As PIDController In Controllers
+                                                If controller.Active Then
+                                                    Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name)
+                                                    Try
+                                                        controller.Solve()
+                                                        Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, controller.Name)
+                                                    Catch ex As Exception
+                                                        Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, controller.Name)
+                                                        Throw ex
+                                                    End Try
+                                                End If
+                                            Next
+                                            For Each controller As PythonController In Controllers2
                                                 If controller.Active Then
                                                     Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name)
                                                     Try

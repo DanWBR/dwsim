@@ -275,7 +275,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             integrator.RealTime = realtime;
 
-            var Controllers = Flowsheet.SimulationObjects.Values.Where(x => x.ObjectClass == SimulationObjectClass.Controllers).ToList();
+            var Controllers = Flowsheet.SimulationObjects.Values.Where(x => x is PIDController).ToList();
+            var Controllers2 = Flowsheet.SimulationObjects.Values.Where(x => x is PythonController).ToList();
 
             if (!waittofinish)
                 if (!realtime)
@@ -309,6 +310,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             foreach (PIDController controller in Controllers)
                 controller.Reset();
+
+            foreach (PythonController controller in Controllers2)
+                controller.ResetRequested = true;
 
             if (schedule.ResetContentsOfAllObjects)
             {
@@ -421,23 +425,24 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                     if (integrator.ShouldCalculateControl)
                     {
-                        for (int c = 0; c <= Controllers.Count;  c++)
+                        foreach (PIDController controller in Controllers)
                         {
-                            foreach (PIDController controller in Controllers)
+                            if (controller.Active)
                             {
-                                if (controller.Active)
+                                Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name);
+                                try
                                 {
-                                    try
-                                    {
-                                        controller.Solve();
-                                    }
-                                    catch (Exception)
-                                    {
-                                    }
+                                    controller.Solve();
+                                    Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, controller.Name);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, controller.Name);
+                                    throw ex;
                                 }
                             }
                         }
-                        foreach (PIDController controller in Controllers)
+                        foreach (PythonController controller in Controllers2)
                         {
                             if (controller.Active)
                             {

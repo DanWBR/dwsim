@@ -136,7 +136,7 @@ Public Class FormDynamicsManager
 
         dgvControllers.Rows.Clear()
 
-        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
+        Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is PIDController).ToList
 
         For Each controller In Controllers
             With DirectCast(controller, PIDController)

@@ -42,6 +42,8 @@ Namespace SpecialOps
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Private scope As ScriptScope
 
+        Public Property ResetRequested As Boolean = False
+
         Public Property PythonScript As String = ""
 
         Public Property Output As Double = 0.0
