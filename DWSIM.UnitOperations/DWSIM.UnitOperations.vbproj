@@ -237,6 +237,7 @@
     <Compile Include="BaseClasses\CapeOpen.vb" />
     <Compile Include="BaseClasses\UnitOperations.vb" />
     <Compile Include="Controllers\PIDController.vb" />
+    <Compile Include="Controllers\PythonController.vb" />
     <Compile Include="Databases\PumpDatabase.vb" />
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.Designer.vb">
       <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
@@ -278,6 +279,12 @@
       <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\EditingForm_OPEMFC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_PythonController.Designer.vb">
+      <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_PythonController.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.Designer.vb">
@@ -795,6 +802,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_OPEMFC.resx">
       <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_PythonController.en.resx">
+      <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_PythonController.resx">
+      <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_ReaktoroGibbs.resx">
       <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>

@@ -833,6 +833,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property matrix() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("matrix", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property mixer() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("mixer", resourceCulture)
@@ -1286,6 +1296,16 @@ Namespace My.Resources
         Friend ReadOnly Property turn_right() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("turn_right", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property typewriter() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("typewriter", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

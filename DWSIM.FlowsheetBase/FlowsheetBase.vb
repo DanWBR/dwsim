@@ -586,6 +586,10 @@ Imports System.Text.RegularExpressions
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_PID, x, y, tag,,, CreateConnected))
 
+            Case "Python Controller"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_Python, x, y, tag,,, CreateConnected))
+
             Case "Input Box"
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Input, x, y, tag,,, CreateConnected))
@@ -704,6 +708,20 @@ Imports System.Text.RegularExpressions
                 SimulationObjects.Add(myGobj.Name, myObj)
 
                 GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
+
+            Case ObjectType.Controller_Python
+
+                Dim myGobj As New PythonControllerGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "PC-" + objindex
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                CheckTag(gObj)
+                gObj.Name = "PC-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As PythonController = New PythonController(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
 
             Case ObjectType.LevelGauge
 

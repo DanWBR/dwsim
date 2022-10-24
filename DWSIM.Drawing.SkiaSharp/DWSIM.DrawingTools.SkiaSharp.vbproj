@@ -180,6 +180,7 @@
     <Compile Include="GraphicObjects\Base\ShapeGraphic.vb" />
     <Compile Include="GraphicObjects\Connector\ConnectorClass.vb" />
     <Compile Include="GraphicObjects\Controllers\PIDControllerGraphic.vb" />
+    <Compile Include="GraphicObjects\Controllers\PythonControllerGraphic.vb" />
     <Compile Include="GraphicObjects\ExtensionBase\GraphicObjectExtension.vb" />
     <Compile Include="GraphicObjects\Indicators\AnalogGauge.vb" />
     <Compile Include="GraphicObjects\Indicators\DigitalGauge.vb" />
@@ -505,6 +506,12 @@
     <EmbeddedResource Include="Icons\component_separator.png" />
     <EmbeddedResource Include="Icons\filter.png" />
     <EmbeddedResource Include="Icons\solids_separator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\matrix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\typewriter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

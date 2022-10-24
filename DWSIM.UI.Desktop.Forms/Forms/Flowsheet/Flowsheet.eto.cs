@@ -360,6 +360,14 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.UpdateEditorPanels = () => UpdateEditorPanels();
 
+            FlowsheetObject.UpdateSurface = (() =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    FlowsheetControl.Invalidate();
+                });
+            });
+
             ActComps = () =>
             {
                 var cont = new TableLayout();

@@ -125,16 +125,16 @@
     <value>Units</value>
   </data>
   <data name="cbTargetUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 241</value>
+    <value>139, 241</value>
   </data>
   <data name="cbTargetUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="cbTargetType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 214</value>
+    <value>139, 214</value>
   </data>
   <data name="cbTargetType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -149,16 +149,16 @@
     <value>Units</value>
   </data>
   <data name="cbSourceUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 104</value>
+    <value>139, 104</value>
   </data>
   <data name="cbSourceUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="cbSourceType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 77</value>
+    <value>139, 77</value>
   </data>
   <data name="cbSourceType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -191,16 +191,16 @@
     <value>Controlled Property</value>
   </data>
   <data name="cbTargetProp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 187</value>
+    <value>139, 187</value>
   </data>
   <data name="cbTargetProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="cbTargetObj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 160</value>
+    <value>139, 160</value>
   </data>
   <data name="cbTargetObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -215,16 +215,16 @@
     <value>Manipulated Property</value>
   </data>
   <data name="cbSourceProp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 50</value>
+    <value>139, 50</value>
   </data>
   <data name="cbSourceProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="cbSourceObj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 23</value>
+    <value>139, 23</value>
   </data>
   <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
@@ -236,10 +236,13 @@
     <value>Linked Objects</value>
   </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 19</value>
+    <value>139, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 20</value>
+    <value>161, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>306, 18</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -253,56 +256,27 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Notes</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 83</value>
   </data>
-  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>- Process Variable value is available on 'PV'
+- Write the Set-Point value to 'SP' and the Controller Output to 'MV'
+- Use the 'Flowsheet' object to access other objects and their properties.
+
+IronPython Script:</value>
   </data>
-  <data name="Label18.Text" xml:space="preserve">
-    <value>Wind-Up Guard</value>
+  <data name="txtScript.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 138</value>
   </data>
-  <data name="chkReverse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 17</value>
-  </data>
-  <data name="chkReverse.Text" xml:space="preserve">
-    <value>Reverse Acting</value>
-  </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 13</value>
-  </data>
-  <data name="Label17.Text" xml:space="preserve">
-    <value>Max Output (Absolute)</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 13</value>
-  </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Min. Ouput (Absolute)</value>
+  <data name="txtScript.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 469</value>
   </data>
   <data name="chkControllerActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 17</value>
   </data>
   <data name="chkControllerActive.Text" xml:space="preserve">
     <value>Controller Active</value>
-  </data>
-  <data name="tbOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 115</value>
-  </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 118</value>
-  </data>
-  <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 89</value>
-  </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 92</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Set-Point</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>

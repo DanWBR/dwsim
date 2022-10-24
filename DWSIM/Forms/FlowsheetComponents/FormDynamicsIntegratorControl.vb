@@ -236,8 +236,6 @@ Public Class FormDynamicsIntegratorControl
 
             lblFinish.Text = integrator.Duration.ToString("c")
 
-            final = ProgressBar1.Maximum
-
             If realtime Then
 
                 ProgressBar1.Maximum = Integer.MaxValue
@@ -249,6 +247,8 @@ Public Class FormDynamicsIntegratorControl
                 ProgressBar1.Style = ProgressBarStyle.Continuous
 
             End If
+
+            final = ProgressBar1.Maximum
 
         End If
 
@@ -446,6 +446,7 @@ Public Class FormDynamicsIntegratorControl
                                       Flowsheet.RunCodeOnUIThread(Sub()
                                                                       btnViewResults.Enabled = True
                                                                       btnRealtime.Enabled = True
+                                                                      btnRun.BackgroundImage = My.Resources.icons8_play
                                                                       If Not Paused Then
                                                                           ProgressBar1.Value = 0
                                                                           ProgressBar1.Style = ProgressBarStyle.Continuous
@@ -454,7 +455,6 @@ Public Class FormDynamicsIntegratorControl
                                                                       Flowsheet.UpdateOpenEditForms()
                                                                       Dim baseexception As Exception
                                                                       If t.Exception IsNot Nothing Then
-                                                                          btnRun.BackgroundImage = My.Resources.icons8_play
                                                                           Paused = False
                                                                           Running = False
                                                                           For Each ex In t.Exception.Flatten().InnerExceptions

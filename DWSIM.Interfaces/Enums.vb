@@ -648,6 +648,8 @@ Namespace Enums.GraphicObjects
         Mixer
         Splitter
 
+        Controller_Python
+
     End Enum
 
     Public Enum ShapeIcon

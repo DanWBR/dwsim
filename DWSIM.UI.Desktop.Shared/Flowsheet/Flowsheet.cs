@@ -22,6 +22,8 @@ namespace DWSIM.UI.Desktop.Shared
 
         public Action UpdateEditorPanels;
 
+        public Action UpdateSurface;
+
         public Action ActClearLog;
 
         public bool optimizing = false;
@@ -59,16 +61,10 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void UpdateInterface()
         {
-            if (!SupressMessages)
+            Application.Instance.Invoke(() =>
             {
-                Application.Instance.AsyncInvoke(() =>
-                {
-                    if (FlowsheetForm != null)
-                    {
-                        FlowsheetForm.Invalidate();                        
-                    }
-                });
-            }
+                if (FlowsheetForm != null) FlowsheetForm.Invalidate();
+            });
         }
 
         public override void ClearLog()

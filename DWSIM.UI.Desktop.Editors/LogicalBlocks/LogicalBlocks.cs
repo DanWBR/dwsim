@@ -803,6 +803,191 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
     }
 
+    public static class PythonControllerEditor
+    {
+
+        public static void Populate(ISimulationObject simobj, DynamicLayout container)
+        {
+
+            var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
+            var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
+
+            var dc = new DocumentControl { Height = 300, DisplayArrows = true };
+            var dp1 = new DocumentPage { Closable = false, Text = "General" };
+            var dp2 = new DocumentPage { Closable = false, Text = "Python Script" };
+
+            dc.Pages.Add(dp1);
+            dc.Pages.Add(dp2);
+
+            var lay1 = DWSIM.UI.Shared.Common.GetDefaultContainer();
+
+            container.CreateAndAddControlRow(dc);
+
+            var pid = (PythonController)simobj;
+
+            s.CreateAndAddLabelRow(lay1, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(lay1, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(lay1, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
+
+            var objlist = pid.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            objlist.Insert(0, "");
+            List<string> proplist = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Manipulated Object");
+
+            DropDown spin1 = null, spin2 = null;
+
+            spin1 = s.CreateAndAddDropDownRow(lay1, "Manipulated Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ManipulatedObjectData.ID))
+                    {
+                        var prevobj = pid.GetFlowsheet().SimulationObjects[pid.ManipulatedObjectData.ID];
+                        prevobj.IsAdjustAttached = false;
+                        prevobj.AttachedAdjustId = "";
+                        prevobj.AdjustVarType = AdjustVarType.None;
+                    }
+
+                    var obj = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    pid.ManipulatedObjectData.ID = obj.Name;
+
+                    obj.IsAdjustAttached = true;
+                    obj.AttachedAdjustId = pid.Name;
+                    obj.AdjustVarType = AdjustVarType.Manipulated;
+
+                    pid.ManipulatedObject = (DWSIM.SharedClasses.UnitOperations.BaseClass)obj;
+                    ((PIDControllerGraphic)pid.GraphicObject).ConnectedToMv = (GraphicObject)obj.GraphicObject;
+
+                    proplist = obj.GetProperties(PropertyType.WR).ToList();
+                    proplist.Insert(0, "");
+
+                    spin2.Items.Clear();
+                    spin2.Items.AddRange(proplist.Select(x => new ListItem() { Text = pid.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (pid.ManipulatedObjectData.PropertyName != "" && proplist.Contains(pid.ManipulatedObjectData.PropertyName))
+                    {
+                        spin2.SelectedIndex = (proplist.IndexOf(pid.ManipulatedObjectData.PropertyName));
+                    }
+
+                }
+                else
+                {
+                    spin2.Items.Clear();
+                }
+            });
+
+            spin2 = s.CreateAndAddDropDownRow(lay1, "Manipulated Property", proplist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    pid.ManipulatedObjectData.PropertyName = proplist[sender.SelectedIndex];
+                }
+            });
+
+            s.CreateAndAddStringEditorRow(lay1, "Manipulated Property Units",
+                pid.ManipulatedObjectData.Units, (tb, e) =>
+                {
+                    pid.ManipulatedObjectData.Units = tb.Text;
+                });
+
+            List<string> proplist2 = new List<string>();
+
+            s.CreateAndAddLabelRow(container, "Controlled Object");
+
+            DropDown spin3 = null, spin4 = null;
+
+            spin3 = s.CreateAndAddDropDownRow(lay1, "Controlled Object", objlist, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    if (pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ControlledObjectData.ID))
+                    {
+                        var prevobj = pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
+                        prevobj.IsAdjustAttached = false;
+                        prevobj.AttachedAdjustId = "";
+                        prevobj.AdjustVarType = AdjustVarType.None;
+                    }
+
+                    var obj = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]);
+                    pid.ControlledObjectData.ID = obj.Name;
+
+                    obj.IsAdjustAttached = true;
+                    obj.AttachedAdjustId = pid.Name;
+                    obj.AdjustVarType = AdjustVarType.Controlled;
+
+                    pid.ControlledObject = (DWSIM.SharedClasses.UnitOperations.BaseClass)pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
+                    ((PIDControllerGraphic)pid.GraphicObject).ConnectedToCv = (GraphicObject)pid.ControlledObject.GraphicObject;
+
+                    proplist2 = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]).GetProperties(PropertyType.ALL).ToList();
+                    proplist2.Insert(0, "");
+
+                    spin4.Items.Clear();
+                    spin4.Items.AddRange(proplist2.Select(x => new ListItem() { Text = pid.GetFlowsheet().GetTranslatedString(x) }).ToList());
+
+                    if (pid.ControlledObjectData.PropertyName != "" && proplist2.Contains(pid.ControlledObjectData.PropertyName))
+                    {
+                        spin4.SelectedIndex = (proplist2.IndexOf(pid.ControlledObjectData.PropertyName));
+                    }
+                }
+                else
+                {
+                    spin4.Items.Clear();
+                }
+            });
+
+            spin4 = s.CreateAndAddDropDownRow(lay1, "Controlled Property", proplist2, 0, (sender, e) =>
+            {
+                if (sender.SelectedIndex > 0)
+                {
+                    pid.ControlledObjectData.PropertyName = proplist2[sender.SelectedIndex];
+                    var obj = pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
+                }
+            });
+
+            s.CreateAndAddStringEditorRow(container, "Controlled Property Units",
+                pid.ControlledObjectData.Units, (tb, e) =>
+                {
+                    pid.ControlledObjectData.Units = tb.Text;
+                });
+
+            s.CreateAndAddLabelRow(lay1, "Controller Parameters");
+
+            s.CreateAndAddCheckBoxRow(lay1, "Controller Active", pid.Active, (chk, e) =>
+            {
+                pid.Active = chk.Checked.GetValueOrDefault();
+            });
+
+            if (pid.ManipulatedObjectData.ID != "" && pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ManipulatedObjectData.ID))
+            {
+                spin1.SelectedIndex = (objlist.IndexOf(pid.GetFlowsheet().SimulationObjects[pid.ManipulatedObjectData.ID].GraphicObject.Tag));
+            }
+
+            if (pid.ControlledObjectData.ID != "" && pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ControlledObjectData.ID))
+            {
+                spin3.SelectedIndex = (objlist.IndexOf(pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID].GraphicObject.Tag));
+            }
+
+            dp1.Content = lay1;
+
+            var lay2 = new TableLayout() { Spacing = new Size(10, 10), Padding = new Padding(5) };
+            var btn1 = new Button { Text = "Update" };
+            var sed = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
+            sed.ScriptText = pid.PythonScript;
+            btn1.Click += (s, e) => pid.PythonScript = sed.ScriptText;
+            lay2.Rows.Add(btn1);
+            lay2.Rows.Add(sed);
+
+            dp2.Content = lay2;
+        }
+
+    }
+
     public static class LevelGaugeEditor
     {
 

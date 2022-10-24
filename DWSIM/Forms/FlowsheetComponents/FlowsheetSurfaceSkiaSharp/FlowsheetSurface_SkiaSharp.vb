@@ -1457,6 +1457,35 @@ Public Class FlowsheetSurface_SkiaSharp
                 FlowsheetSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CapeOpenUO, ObjectType.FlowsheetUO
                 MessageBox.Show("Cloning is not supported by CAPE-OPEN/Flowsheet Unit Operations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Case Else
+                Dim myUO = newobj.Clone()
+                With myUO.GraphicObject
+                    .Calculated = False
+                    .Name = Guid.NewGuid.ToString
+                    .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
+                    .X = mpx
+                    .Y = mpy
+                    For Each con As ConnectionPoint In .InputConnectors
+                        con.AttachedConnector = Nothing
+                        con.IsAttached = False
+                    Next
+                    For Each con As ConnectionPoint In .OutputConnectors
+                        con.AttachedConnector = Nothing
+                        con.IsAttached = False
+                    Next
+                    If Not .SpecialConnectors Is Nothing Then
+                        For Each con As ConnectionPoint In .SpecialConnectors
+                            con.AttachedConnector = Nothing
+                            con.IsAttached = False
+                        Next
+                    End If
+                    .EnergyConnector.AttachedConnector = Nothing
+                    .EnergyConnector.IsAttached = False
+                End With
+                myUO.Name = myUO.GraphicObject.Name
+                Flowsheet.Collections.GraphicObjectCollection.Add(myUO.GraphicObject.Name, myUO.GraphicObject)
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myUO.Name, myUO)
+                FlowsheetSurface.DrawingObjects.Add(myUO.GraphicObject)
         End Select
 
         SplitContainerHorizontal.Panel1.Invalidate()
@@ -1714,6 +1743,20 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
 
                 GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
+
+            Case ObjectType.Controller_Python
+
+                Dim myGobj As New PythonControllerGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "PC-" + objindex
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                CheckTag(gObj)
+                gObj.Name = "PC-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
+                Dim myObj As PythonController = New PythonController(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                Flowsheet.Collections.FlowsheetObjectCollection.Add(myGobj.Name, myObj)
 
             Case ObjectType.LevelGauge
 
@@ -3072,6 +3115,8 @@ Public Class FlowsheetSurface_SkiaSharp
                 tobj = ObjectType.LevelGauge
             Case "PIDController"
                 tobj = ObjectType.Controller_PID
+            Case "PythonController"
+                tobj = ObjectType.Controller_Python
             Case "Input"
                 tobj = ObjectType.Input
             Case "Switch"
