@@ -812,7 +812,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
             var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
-            var dc = new DocumentControl { Height = 300, DisplayArrows = true };
+            var dc = new DocumentControl { DisplayArrows = true };
             var dp1 = new DocumentPage { Closable = false, Text = "General" };
             var dp2 = new DocumentPage { Closable = false, Text = "Python Script" };
 
@@ -838,7 +838,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             objlist.Insert(0, "");
             List<string> proplist = new List<string>();
 
-            s.CreateAndAddLabelRow(container, "Manipulated Object");
+            s.CreateAndAddLabelRow(lay1, "Manipulated Object");
 
             DropDown spin1 = null, spin2 = null;
 
@@ -898,7 +898,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             List<string> proplist2 = new List<string>();
 
-            s.CreateAndAddLabelRow(container, "Controlled Object");
+            s.CreateAndAddLabelRow(lay1, "Controlled Object");
 
             DropDown spin3 = null, spin4 = null;
 
@@ -950,7 +950,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 }
             });
 
-            s.CreateAndAddStringEditorRow(container, "Controlled Property Units",
+            s.CreateAndAddStringEditorRow(lay1, "Controlled Property Units",
                 pid.ControlledObjectData.Units, (tb, e) =>
                 {
                     pid.ControlledObjectData.Units = tb.Text;
@@ -976,12 +976,16 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             dp1.Content = lay1;
 
             var lay2 = new TableLayout() { Spacing = new Size(10, 10), Padding = new Padding(5) };
-            var btn1 = new Button { Text = "Update" };
+            var btn1 = new Button { Text = "Update" };           
             var sed = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
             sed.ScriptText = pid.PythonScript;
+            sed.Height = 500;
             btn1.Click += (s, e) => pid.PythonScript = sed.ScriptText;
-            lay2.Rows.Add(btn1);
+            s.CreateAndAddDescriptionRow(lay2, "- Process Variable value is available on 'PV';\n" + 
+                "- Write the Set-Point value to 'SP' and the Controller Output to 'MV';\n"+ 
+                "- Use the 'Flowsheet' object to access other objects and their properties.");
             lay2.Rows.Add(sed);
+            lay2.Rows.Add(btn1);
 
             dp2.Content = lay2;
         }
