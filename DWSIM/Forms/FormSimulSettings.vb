@@ -179,7 +179,7 @@ Public Class FormSimulSettings
             Next
 
             If Not FormMain.IsPro Then
-                ProFeatures.Functions.AddProPPs(DataGridViewPP)
+                ProFeatures.Functions.AddProPPs2(DataGridViewPP)
             End If
 
             DataGridViewPP.Sort(DataGridViewPP.Columns(2), System.ComponentModel.ListSortDirection.Ascending)

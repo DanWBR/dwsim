@@ -217,6 +217,9 @@ Click "Next" to continue.</value>
   <data name="Label10.Text" xml:space="preserve">
     <value>,  but you can use all available packages without restrictions.</value>
   </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 303</value>
+  </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 15</value>
   </data>
@@ -297,6 +300,12 @@ Click "Next" to continue.</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
+  </data>
+  <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 295</value>
+  </data>
+  <data name="PictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 32</value>
   </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Property Packages</value>
