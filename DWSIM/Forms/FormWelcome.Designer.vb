@@ -93,6 +93,7 @@ Partial Class FormWelcome
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.NewsViewer = New Microsoft.Web.WebView2.WinForms.WebView2()
+        Me.ImageList2 = New System.Windows.Forms.ImageList(Me.components)
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -698,6 +699,15 @@ Partial Class FormWelcome
         Me.NewsViewer.Name = "NewsViewer"
         Me.NewsViewer.ZoomFactor = 1.0R
         '
+        'ImageList2
+        '
+        Me.ImageList2.ImageStream = CType(resources.GetObject("ImageList2.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList2.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList2.Images.SetKeyName(0, "simulationfile.png")
+        Me.ImageList2.Images.SetKeyName(1, "compound.png")
+        Me.ImageList2.Images.SetKeyName(2, "dataregression.png")
+        Me.ImageList2.Images.SetKeyName(3, "folder.png")
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
@@ -812,4 +822,5 @@ Partial Class FormWelcome
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents NewsViewer As Microsoft.Web.WebView2.WinForms.WebView2
+    Friend WithEvents ImageList2 As ImageList
 End Class

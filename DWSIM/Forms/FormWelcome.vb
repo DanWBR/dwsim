@@ -44,6 +44,19 @@ Public Class FormWelcome
             Next
         End If
 
+        If Settings.DpiScale > 1.0 Then
+            lvlatest.SmallImageList = ImageList2
+            lvlatest.LargeImageList = ImageList2
+            lvsamples.SmallImageList = ImageList2
+            lvsamples.LargeImageList = ImageList2
+            lvlatestfolders.SmallImageList = ImageList2
+            lvlatestfolders.LargeImageList = ImageList2
+            FOSSEEList.SmallImageList = ImageList2
+            FOSSEEList.LargeImageList = ImageList2
+            Button4.Image = New Bitmap(Button4.Image, New Size(16 * Settings.DpiScale, 16 * Settings.DpiScale))
+            Button6.Image = New Bitmap(Button6.Image, New Size(16 * Settings.DpiScale, 16 * Settings.DpiScale))
+        End If
+
         existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderByDescending(Function(x) File.GetLastWriteTime(x)).ToList
 
         For Each f As String In existingfiles
