@@ -357,6 +357,9 @@
   <data name="&gt;&gt;ShowTSMI.Name" xml:space="preserve">
     <value>ShowTSMI</value>
   </data>
+  <data name="tsbCalc.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
   </data>
@@ -396,11 +399,14 @@
   <data name="&gt;&gt;tsbDynManager.Name" xml:space="preserve">
     <value>tsbDynManager</value>
   </data>
+  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
   <data name="DesignOfExperimentsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
   </data>
-  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+  <data name="tsmiConfigSimulation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 22</value>
   </data>
   <data name="DataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -689,9 +695,6 @@
   <data name="tsmiRecalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 22</value>
   </data>
-  <data name="&gt;&gt;TimerScripts1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;CompoundCreatorWizardTSMI.Name" xml:space="preserve">
     <value>CompoundCreatorWizardTSMI</value>
   </data>
@@ -749,6 +752,9 @@
   <data name="&gt;&gt;TimerScripts60.Name" xml:space="preserve">
     <value>TimerScripts60</value>
   </data>
+  <data name="&gt;&gt;bgCalc.Name" xml:space="preserve">
+    <value>bgCalc</value>
+  </data>
   <data name="&gt;&gt;tsbLoadSolution.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -761,9 +767,6 @@
   <data name="&gt;&gt;FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Name" xml:space="preserve">
     <value>FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;GraficoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="tsmiPaste.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 22</value>
   </data>
@@ -773,7 +776,7 @@
   <data name="tsbDynManager.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAABKBJREFUWEftl8tPG0ccx5H6UHvoqVVVqYf+B60q9d5Te+upSqRWTakUlaRgA7ax
+        vAAADrwBlbxySQAABKBJREFUWEftl8tPG0ccx5H6UHvoqVVVqYf+B60q9d5Te+upSqRWTakUlaRgA7ax
         SQiwDcHY2GsbY7B5eHd2/X5gCJQGSGjaBDWCUBoFkkCDohRImkNehQAlBPh2dlmDIeYlQg8VX+kry7uz
         v+9nZ2ZndjP2lU6W74T32TzCW3XiNYuWCKxa/FA5tXdiGOZlWw753KoVBiwF5AkTSMyX/9IOhm1eYLXi
         jKVAHLSpyAGpnXLJi1Gl3vsGvdsTRhW5bz4ZmDT+2Iqy4bMoGzm3avpfOm4pI0/YfO4Rmy+WSNcpJXan
@@ -811,8 +814,8 @@
   <data name="&gt;&gt;BGLoadComp.Name" xml:space="preserve">
     <value>BGLoadComp</value>
   </data>
-  <data name="tsmiConfigSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+  <data name="CapitalCostEstimatorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Capital Cost Estimator</value>
   </data>
   <data name="&gt;&gt;TimerScripts30.Name" xml:space="preserve">
     <value>TimerScripts30</value>
@@ -829,7 +832,7 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAABRJJREFUWEfFV0lTVFcUZpN9skx+RrLOyqqkQhYukkpWxiGAQogalDEyBrFQMAIy
+        vAAADrwBlbxySQAABRJJREFUWEfFV0lTVFcUZpN9skx+RrLOyqqkQhYukkpWxiGAQogalDEyBrFQMAIy
         KKMEDLFRlDI2CMjQDRd6eq8bupseoJsUOBEstbLOyf0O3BfobhKkUF/VV/fe757X53vnnnP6vSR1Ff/c
         /m5BZduHeVXNH71OZFe2fLDh8t+rpKYz92xtz2qzaWC1++boixY5bkZr79AzIJZPZNt2a2TtWv/481ge
         HPYutN18WlbX2bPhOikp71zDe3AeefqCllZf0gM9xONm6AuPGLF8Itv55TUSvqU4Hhz2ML9surOWX3n1
@@ -1016,9 +1019,6 @@
   </data>
   <data name="tsmiExportData.Text" xml:space="preserve">
     <value>Exportar dados para a Área de Transferência</value>
-  </data>
-  <data name="CapitalCostEstimatorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Capital Cost Estimator</value>
   </data>
   <data name="tsmiUndo.Text" xml:space="preserve">
     <value>Desfazer</value>
@@ -1431,8 +1431,8 @@
   <data name="TSTable.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;bgCalc.Name" xml:space="preserve">
-    <value>bgCalc</value>
+  <data name="&gt;&gt;GraficoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1494,8 +1494,8 @@
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1444, 25</value>
   </data>
-  <data name="tsbCalc.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;TimerScripts1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TSMIAddUtility.Name" xml:space="preserve">
     <value>TSMIAddUtility</value>

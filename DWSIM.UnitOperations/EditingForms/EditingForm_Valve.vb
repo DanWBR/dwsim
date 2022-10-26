@@ -27,6 +27,7 @@ Public Class EditingForm_Valve
     Private Sub SetupGrid()
 
         With grid1.Worksheets(0)
+            .SetScale(Settings.DpiScale)
             .SetRows(100)
             .SetCols(2)
             .SetColumnsWidth(0, 2, 100)

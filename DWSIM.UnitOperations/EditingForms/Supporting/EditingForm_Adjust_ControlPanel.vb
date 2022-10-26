@@ -101,7 +101,6 @@ Public Class EditingForm_Adjust_ControlPanel
         With Me.GraphControl.GraphPane.Legend
             .Position = ZedGraph.LegendPos.TopCenter
             .Border.IsVisible = False
-            .FontSpec.Size = 10
             .FontSpec.IsDropShadow = False
         End With
 

@@ -332,7 +332,7 @@ Partial Class FormFlowsheet
         'ToolsTSMI
         '
         resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
-        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.CriadorDeComponentesSólidosToolStripMenuItem, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.CriarPseudocomponentesEmBateladaToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
+        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.CriadorDeComponentesSólidosToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.CriarPseudocomponentesEmBateladaToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
         Me.ToolsTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ToolsTSMI.MergeIndex = 3
         Me.ToolsTSMI.Name = "ToolsTSMI"
@@ -342,13 +342,15 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.CompoundCreatorWizardTSMI, "CompoundCreatorWizardTSMI")
         Me.CompoundCreatorWizardTSMI.Image = Global.DWSIM.My.Resources.Resources.wand
         Me.CompoundCreatorWizardTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.CompoundCreatorWizardTSMI.MergeIndex = 6
+        Me.CompoundCreatorWizardTSMI.MergeIndex = 0
         Me.CompoundCreatorWizardTSMI.Name = "CompoundCreatorWizardTSMI"
         '
         'CriadorDeComponentesSólidosToolStripMenuItem
         '
         resources.ApplyResources(Me.CriadorDeComponentesSólidosToolStripMenuItem, "CriadorDeComponentesSólidosToolStripMenuItem")
         Me.CriadorDeComponentesSólidosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.labicon
+        Me.CriadorDeComponentesSólidosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.CriadorDeComponentesSólidosToolStripMenuItem.MergeIndex = 0
         Me.CriadorDeComponentesSólidosToolStripMenuItem.Name = "CriadorDeComponentesSólidosToolStripMenuItem"
         '
         'PropriedadesDasSubstanciasToolStripMenuItem
@@ -356,7 +358,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.PropriedadesDasSubstanciasToolStripMenuItem, "PropriedadesDasSubstanciasToolStripMenuItem")
         Me.PropriedadesDasSubstanciasToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
         Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeIndex = 5
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeIndex = 0
         Me.PropriedadesDasSubstanciasToolStripMenuItem.Name = "PropriedadesDasSubstanciasToolStripMenuItem"
         '
         'CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem
@@ -403,7 +405,7 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.ToolStripSeparator15, "ToolStripSeparator15")
         Me.ToolStripSeparator15.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.ToolStripSeparator15.MergeIndex = 7
+        Me.ToolStripSeparator15.MergeIndex = 8
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         '
         'ProToolsToolStripMenuItem

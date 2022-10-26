@@ -16,6 +16,8 @@ Public Class FormBulkAddPseudos
 
         ChangeDefaultFont()
 
+        grid1.Worksheets(0).SetScale(Settings.DpiScale)
+
         grid1.Worksheets(0).SetCols(7)
         grid1.Worksheets(0).SetRows(1000)
 
