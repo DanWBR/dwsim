@@ -637,13 +637,7 @@
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigNRTL.resx">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.de.resx">
-      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.en.resx">
-      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.es.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.resx">

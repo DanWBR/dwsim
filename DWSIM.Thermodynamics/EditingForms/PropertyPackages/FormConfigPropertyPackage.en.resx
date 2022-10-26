@@ -119,28 +119,22 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="gridKij.Size" type="System.Drawing.Size, System.Drawing">
-    <value>647, 331</value>
+    <value>706, 429</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>510, 17</value>
+    <value>569, 16</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Estimate</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>660, 385</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Interaction Parameters</value>
   </data>
   <data name="IPGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="IPGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>736, 443</value>
+    <value>687, 434</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>666, 391</value>
+    <value>725, 489</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Binary Interaction Parameters</value>
@@ -150,13 +144,13 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>742, 449</value>
+    <value>693, 440</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>674, 417</value>
+    <value>733, 515</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>674, 417</value>
+    <value>733, 515</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Property Package</value>

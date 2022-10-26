@@ -24,7 +24,6 @@ Partial Class FormConfigPropertyPackage
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigPropertyPackage))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.gridKij = New unvell.ReoGrid.ReoGridControl()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.IPGrid = New System.Windows.Forms.DataGridView()
@@ -32,20 +31,11 @@ Partial Class FormConfigPropertyPackage
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPageU = New System.Windows.Forms.TabPage()
-        Me.GroupBox2.SuspendLayout()
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPageU.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'GroupBox2
-        '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.gridKij)
-        Me.GroupBox2.Controls.Add(Me.Button3)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
         '
         'gridKij
         '
@@ -101,7 +91,8 @@ Partial Class FormConfigPropertyPackage
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.GroupBox2)
+        Me.TabPage1.Controls.Add(Me.gridKij)
+        Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -121,7 +112,6 @@ Partial Class FormConfigPropertyPackage
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormConfigPropertyPackage"
         Me.TopMost = True
-        Me.GroupBox2.ResumeLayout(False)
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
@@ -129,7 +119,6 @@ Partial Class FormConfigPropertyPackage
         Me.ResumeLayout(False)
 
     End Sub
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents IPGrid As System.Windows.Forms.DataGridView
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn

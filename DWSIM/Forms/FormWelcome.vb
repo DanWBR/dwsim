@@ -53,8 +53,6 @@ Public Class FormWelcome
             lvlatestfolders.LargeImageList = ImageList2
             FOSSEEList.SmallImageList = ImageList2
             FOSSEEList.LargeImageList = ImageList2
-            Button4.Image = New Bitmap(Button4.Image, New Size(16 * Settings.DpiScale, 16 * Settings.DpiScale))
-            Button6.Image = New Bitmap(Button6.Image, New Size(16 * Settings.DpiScale, 16 * Settings.DpiScale))
         End If
 
         existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderByDescending(Function(x) File.GetLastWriteTime(x)).ToList
