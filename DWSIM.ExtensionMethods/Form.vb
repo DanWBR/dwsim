@@ -29,8 +29,8 @@ Public Module FormExtensions
                     Dim button = DirectCast(control, Button)
                     If button.Image IsNot Nothing Then
                         button.Image = New Bitmap(button.Image,
-                                                  New Size(button.Image.Width * GlobalSettings.Settings.DpiScale,
-                                                           button.Image.Height * GlobalSettings.Settings.DpiScale))
+                                                  New Size(16 * GlobalSettings.Settings.DpiScale,
+                                                           16 * GlobalSettings.Settings.DpiScale))
                     End If
 
                 End If
@@ -58,8 +58,8 @@ Public Module FormExtensions
                     Dim button = DirectCast(control, Button)
                     If button.Image IsNot Nothing Then
                         button.Image = New Bitmap(button.Image,
-                                                  New Size(button.Image.Width * GlobalSettings.Settings.DpiScale,
-                                                           button.Image.Height * GlobalSettings.Settings.DpiScale))
+                                                  New Size(16 * GlobalSettings.Settings.DpiScale,
+                                                           16 * GlobalSettings.Settings.DpiScale))
                     End If
 
                 End If

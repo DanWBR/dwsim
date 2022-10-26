@@ -582,20 +582,24 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
         For i = selected.Row To selected.EndRow
             For j = selected.Col To selected.EndCol
 
-                Dim id1 As String = gridKij.Worksheets(0).RowHeaders(i).Text
-                Dim id2 As String = gridKij.Worksheets(0).ColumnHeaders(i).Text
+                If i <> j Then
 
-                Dim comp1, comp2 As ConstantProperties
-                comp1 = _comps(id1)
-                comp2 = _comps(id2)
+                    Dim id1 As String = gridKij.Worksheets(0).RowHeaders(i).Text
+                    Dim id2 As String = gridKij.Worksheets(0).ColumnHeaders(i).Text
 
-                Dim Vc1 As Double = comp1.Critical_Volume
-                Dim Vc2 As Double = comp2.Critical_Volume
+                    Dim comp1, comp2 As ConstantProperties
+                    comp1 = _comps(id1)
+                    comp2 = _comps(id2)
 
-                Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
+                    Dim Vc1 As Double = comp1.Critical_Volume
+                    Dim Vc2 As Double = comp2.Critical_Volume
 
-                gridKij.Worksheets(0).Cells(i, j).Data = tmp
-                gridKij.Worksheets(0).Cells(j, i).Data = tmp
+                    Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
+
+                    gridKij.Worksheets(0).Cells(i, j).Data = tmp
+                    gridKij.Worksheets(0).Cells(j, i).Data = tmp
+
+                End If
 
             Next
         Next
