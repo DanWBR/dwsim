@@ -153,7 +153,7 @@ Public Class EditingForm_PythonController
             Next
 
             SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
-            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.PIDControllerGraphic).ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.PythonControllerGraphic).ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
 
         End If
 
@@ -196,7 +196,7 @@ Public Class EditingForm_PythonController
             Next
 
             SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
-            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.PIDControllerGraphic).ConnectedToCv = SimObject.ControlledObject.GraphicObject
+            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.PythonControllerGraphic).ConnectedToCv = SimObject.ControlledObject.GraphicObject
 
         End If
 

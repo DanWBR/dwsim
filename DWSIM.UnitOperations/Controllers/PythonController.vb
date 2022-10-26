@@ -48,8 +48,6 @@ Namespace SpecialOps
 
         Public Property Output As Double = 0.0
 
-        Public Property OutputAbs As Double = 0.0
-
         Public Property PVHistory As New List(Of Double)
 
         Public Property MVHistory As New List(Of Double)
@@ -89,18 +87,6 @@ Namespace SpecialOps
 
         Public Property SimultaneousAdjust As Boolean Implements Interfaces.IAdjust.SimultaneousAdjust
 
-        Public Property InitialEstimate As Nullable(Of Double)
-
-        Public Property MaxVal As Nullable(Of Double)
-
-        Public Property MinVal As Nullable(Of Double)
-
-        Public Property RvOk As Boolean
-
-        Public Property MvOk As Boolean
-
-        Public Property CvOk As Boolean
-
         Public Property ManipulatedObjectData As Interfaces.ISpecialOpObjectInfo Implements Interfaces.IAdjust.ManipulatedObjectData
 
         Public Property ControlledObjectData As Interfaces.ISpecialOpObjectInfo Implements Interfaces.IAdjust.ControlledObjectData
@@ -113,19 +99,9 @@ Namespace SpecialOps
 
         <Xml.Serialization.XmlIgnore()> Public Property ReferenceObject As SharedClasses.UnitOperations.BaseClass
 
-        Public Property ManipulatedVariable As String
-
-        Public Property ControlledVariable As String
-
-        Public Property ReferenceVariable As String
-
-        Public Property Status As String
-
         Public Property AdjustValue As Double Implements Interfaces.IAdjust.AdjustValue
 
         Public Property Referenced As Boolean Implements Interfaces.IAdjust.Referenced
-
-        Public Property StepSize As Double
 
         Public Property Tolerance As Double Implements IAdjust.Tolerance
 
@@ -226,6 +202,9 @@ Namespace SpecialOps
 
         Public Sub New()
             MyBase.New()
+            ManipulatedObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
+            ControlledObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
+            ReferencedObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -248,12 +227,10 @@ Namespace SpecialOps
                 Select Case prop
                     Case "Active"
                         Return Active
-                    Case "SetPointAbs"
+                    Case "SetPoint"
                         Return AdjustValue
                     Case "Output"
                         Return Output
-                    Case "OutputAbs"
-                        Return OutputAbs
                     Case Else
                         Return Nothing
                 End Select
@@ -266,9 +243,8 @@ Namespace SpecialOps
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             proplist.Add("Active")
-            proplist.Add("SetPointAbs")
+            proplist.Add("SetPoint")
             proplist.Add("Output")
-            proplist.Add("OutputAbs")
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
@@ -280,7 +256,7 @@ Namespace SpecialOps
             Select Case prop
                 Case "Active"
                     Active = propval
-                Case "SetPointAbs"
+                Case "SetPoint"
                     AdjustValue = propval
                 Case Else
                     Return False
@@ -400,6 +376,8 @@ Namespace SpecialOps
 
             PVValue = CurrentValue
 
+            MVValue = SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, Output)
+
             If BaseSP Is Nothing Then BaseSP = Math.Abs(SetPoint)
 
             SPHistory.Add(AdjustValue / BaseSP)
@@ -409,6 +387,14 @@ Namespace SpecialOps
             MVHistory.Add(Output)
 
             ManipulatedObject.SetPropertyValue(ManipulatedObjectData.PropertyName, MVValue)
+
+        End Sub
+
+        Public Sub ClearHistory()
+
+            SPHistory.Clear()
+            PVHistory.Clear()
+            MVHistory.Clear()
 
         End Sub
 

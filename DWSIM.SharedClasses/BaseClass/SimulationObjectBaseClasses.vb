@@ -314,7 +314,7 @@ Namespace UnitOperations
         End Sub
 
         Public Sub DeCalculate(Optional args As Object = Nothing) Implements ISimulationObject.DeCalculate
-            Throw New NotImplementedException
+            'Throw New NotImplementedException
         End Sub
 
         Public Overridable Sub RunDynamicModel() Implements ISimulationObject.RunDynamicModel

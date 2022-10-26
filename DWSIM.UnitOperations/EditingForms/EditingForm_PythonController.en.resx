@@ -128,13 +128,13 @@
     <value>139, 241</value>
   </data>
   <data name="cbTargetUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="cbTargetType.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 214</value>
   </data>
   <data name="cbTargetType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -152,13 +152,13 @@
     <value>139, 104</value>
   </data>
   <data name="cbSourceUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="cbSourceType.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 77</value>
   </data>
   <data name="cbSourceType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -194,13 +194,13 @@
     <value>139, 187</value>
   </data>
   <data name="cbTargetProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="cbTargetObj.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 160</value>
   </data>
   <data name="cbTargetObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -218,19 +218,22 @@
     <value>139, 50</value>
   </data>
   <data name="cbSourceProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="cbSourceObj.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 23</value>
   </data>
   <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Manipulated Object</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 304</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Linked Objects</value>
@@ -239,10 +242,10 @@
     <value>139, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 20</value>
+    <value>169, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 18</value>
+    <value>314, 18</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -253,11 +256,14 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 50</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 83</value>
+    <value>336, 83</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>- Process Variable value is available on 'PV'
@@ -270,7 +276,7 @@ IronPython Script:</value>
     <value>6, 138</value>
   </data>
   <data name="txtScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 469</value>
+    <value>339, 415</value>
   </data>
   <data name="chkControllerActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 17</value>
@@ -278,12 +284,18 @@ IronPython Script:</value>
   <data name="chkControllerActive.Text" xml:space="preserve">
     <value>Controller Active</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 559</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>363, 941</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_PIDController2</value>
