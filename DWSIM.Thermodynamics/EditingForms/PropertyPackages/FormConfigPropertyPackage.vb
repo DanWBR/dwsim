@@ -19,16 +19,14 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.IO
 Imports System.Drawing
+Imports unvell.ReoGrid.DataFormat
+Imports unvell.ReoGrid
 
 Public Class FormConfigPropertyPackage
 
     Inherits FormConfigPropertyPackageBase
 
-    Public Loaded = False
-
-    Private Sub FormConfigPR_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        Me.KryptonDataGridView2.DataSource = Nothing
-    End Sub
+    Public Loaded As Boolean = False
 
     Private Sub FillUNIFACParamTable(ByVal type As String)
 
@@ -197,13 +195,71 @@ Public Class FormConfigPropertyPackage
         Next
     End Sub
 
+    Private Sub SetupGrid()
+
+        Dim comps = _pp.Flowsheet.SelectedCompounds.Keys
+
+        With gridKij.Worksheets(0)
+            .SelectionForwardDirection = SelectionForwardDirection.Down
+            .SetScale(Settings.DpiScale)
+            .SetRows(comps.Count)
+            .SetCols(comps.Count)
+            .SetColumnsWidth(0, comps.Count, 100)
+            .RowHeaderWidth = 100
+            For i = 0 To comps.Count - 1
+                .ColumnHeaders(i).Text = comps(i)
+                .RowHeaders(i).Text = comps(i)
+            Next
+            .SetRangeDataFormat(0, 0, comps.Count, comps.Count, CellDataFormatFlag.Number,
+            New NumberDataFormatter.NumberFormatArgs With {
+                .DecimalPlaces = 4,
+                .UseSeparator = True,
+                .NegativeStyle = NumberDataFormatter.NumberNegativeStyle.Minus
+            })
+            .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.HorizontalAlign,
+                .HAlign = ReoGridHorAlign.Right
+            })
+            .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.Padding,
+                .HAlign = 3
+            })
+            .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.FontAll,
+                .FontName = SystemFonts.MessageBoxFont.Name,
+                .FontSize = SystemFonts.MessageBoxFont.Size
+            })
+            AddHandler .CellDataChanged,
+                Sub(sender, e)
+                    If Loaded Then
+                        Try
+                            SetKijVal(.RowHeaders(e.Cell.Row).Text, .ColumnHeaders(e.Cell.Column).Text, e.Cell.Data)
+                            .Cells(e.Cell.Column, e.Cell.Row).Data = e.Cell.Data
+                        Catch ex As Exception
+                        End Try
+                    End If
+                End Sub
+            For i = 0 To comps.Count - 1
+                For j = 0 To comps.Count - 1
+                    If i = j Then
+                        .Cells(i, j).IsReadOnly = True
+                        .Cells(i, j).Style.BackColor = unvell.ReoGrid.Graphics.SolidColor.LightSteelBlue
+                    End If
+                Next
+            Next
+        End With
+
+    End Sub
+
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
+        SetupGrid()
 
-        Me.KryptonDataGridView2.DataSource = Nothing
+        Dim sheet = gridKij.Worksheets(0)
+
+        Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         If _pp.ComponentName.ToString.Contains("Raoult") Or
            _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or
@@ -229,16 +285,16 @@ Public Class FormConfigPropertyPackage
         Else
             TabControl1.TabPages.Remove(TabPageU)
         End If
-        Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim nf As String = "N6"
+        Dim i, j As Integer
 
         If TypeOf _pp Is SRKPropertyPackage Then
 
             Dim ppu As SRKPropertyPackage = _pp
-
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gt1:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -247,27 +303,23 @@ gt1:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gt1
                 End If
+                i += 1
             Next
 
         ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
@@ -276,8 +328,10 @@ gt1:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
             FillUNIFACParamTable("UNIFAC")
 
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gtu:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -286,27 +340,23 @@ gtu:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtu
                 End If
+                i += 1
             Next
 
         ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
@@ -314,9 +364,10 @@ gtu:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             Dim ppu As UNIFACLLPropertyPackage = _pp
 
             FillUNIFACParamTable("UNIFACLL")
-
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gtul:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -325,27 +376,23 @@ gtul:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtul
                 End If
+                i += 1
             Next
 
         ElseIf TypeOf _pp Is MODFACPropertyPackage Then
@@ -354,8 +401,10 @@ gtul:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
             FillUNIFACParamTable("MODFAC")
 
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gtmu:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -364,27 +413,23 @@ gtmu:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtmu
                 End If
+                i += 1
             Next
         ElseIf TypeOf _pp Is NISTMFACPropertyPackage Then
 
@@ -392,8 +437,10 @@ gtmu:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
             FillUNIFACParamTable("NIST-MODFAC")
 
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gtmun:          If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -402,35 +449,33 @@ gtmun:          If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtmun
                 End If
+                i += 1
             Next
 
         ElseIf TypeOf _pp Is PengRobinson1978PropertyPackage Then
 
             Dim ppu As PengRobinson1978PropertyPackage = _pp
 
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -439,35 +484,33 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gt2
                 End If
+                i += 1
             Next
 
         ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
 
             Dim ppu As PengRobinsonPropertyPackage = _pp
 
+            i = 0
             For Each cp As ConstantProperties In _comps.Values
 gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    j = 0
                     For Each cp2 As ConstantProperties In _comps.Values
                         If cp.Name <> cp2.Name Then
                             If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
@@ -476,27 +519,23 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
                                         ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                            .Cells(0).Tag = cp.Name
-                                            .Cells(1).Tag = cp2.Name
-                                        End With
+                                        sheet.SetCellData(i, j, a12)
+                                        sheet.SetCellData(j, i, a12)
                                     End If
                                 End If
                             Else
                                 Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
-                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
-                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
-                                    .Cells(0).Tag = cp.Name
-                                    .Cells(1).Tag = cp2.Name
-                                End With
+                                sheet.SetCellData(i, j, a12)
+                                sheet.SetCellData(j, i, a12)
                             End If
                         End If
+                        j += 1
                     Next
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gt3
                 End If
+                i += 1
             Next
 
         End If
@@ -511,98 +550,26 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
     End Sub
 
-    Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If Not Me.KryptonDataGridView2.SelectedCells(0) Is Nothing Then
-            If Me.KryptonDataGridView2.SelectedCells(0).RowIndex <> Me.KryptonDataGridView2.SelectedCells(0).ColumnIndex Then
-                Dim Vc1 As Double = _comps(Me.KryptonDataGridView2.Rows(Me.KryptonDataGridView2.SelectedCells(0).RowIndex).Tag).Critical_Volume
-                Dim Vc2 As Double = _comps(Me.KryptonDataGridView2.Columns(Me.KryptonDataGridView2.SelectedCells(0).ColumnIndex).Tag).Critical_Volume
-
-                Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
-
-                Me.KryptonDataGridView2.SelectedCells(0).Value = tmp
-
-            End If
-        End If
-    End Sub
-
-    Private Sub KryptonDataGridView2_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView2.CellValueChanged
+    Private Sub SetKijVal(id1 As String, id2 As String, newvalue As Double)
         If Loaded Then
-            Dim oldvalue As Double = 0.0#
-            Dim newvalue As Double = 0.0#
-            Dim id1 As String = ""
-            Dim id2 As String = ""
             If TypeOf _pp Is SRKPropertyPackage Then
                 Dim ppu As PropertyPackages.SRKPropertyPackage = _pp
-                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
-                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
-                Select Case e.ColumnIndex
-                    Case 2
-                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
-                        newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
-                End Select
+                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
             ElseIf TypeOf _pp Is PengRobinson1978PropertyPackage Then
                 Dim ppu As PropertyPackages.PengRobinson1978PropertyPackage = _pp
-                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
-                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
-                Select Case e.ColumnIndex
-                    Case 2
-                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
-                        newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
-                End Select
+                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
             ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
                 Dim ppu As PropertyPackages.PengRobinsonPropertyPackage = _pp
-                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
-                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
-                Select Case e.ColumnIndex
-                    Case 2
-                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
-                        newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
-                End Select
+                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
             ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
                 Dim ppu As PropertyPackages.UNIFACPropertyPackage = _pp
-                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
-                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
-                Select Case e.ColumnIndex
-                    Case 2
-                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
-                        newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
-                End Select
+                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
             ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
                 Dim ppu As PropertyPackages.UNIFACLLPropertyPackage = _pp
-                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
-                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
-                Select Case e.ColumnIndex
-                    Case 2
-                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
-                        newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
-                End Select
+                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
             ElseIf TypeOf _pp Is MODFACPropertyPackage Then
                 Dim ppu As PropertyPackages.MODFACPropertyPackage = _pp
-                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
-                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
-                Select Case e.ColumnIndex
-                    Case 2
-                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
-                        newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
-                End Select
-            End If
-            If Not _form Is Nothing Then
-                _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
-                                                                   .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, "PR_IP", oldvalue, newvalue),
-                                                                   .OldValue = oldvalue, .NewValue = newvalue, .ObjID = id1, .ObjID2 = id2,
-                                                                   .Tag = _pp, .PropertyName = "PR_IP"})
+                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
             End If
         End If
 
@@ -610,24 +577,27 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
 
-        For Each r2 As DataGridViewCell In Me.KryptonDataGridView2.SelectedCells
+        Dim selected = gridKij.Worksheets(0).SelectionRange
 
-            Dim r = Me.KryptonDataGridView2.Rows(r2.RowIndex)
+        For i = selected.Row To selected.EndRow
+            For j = selected.Col To selected.EndCol
 
-            Dim id1 As String = r.Cells(0).Tag.ToString
-            Dim id2 As String = r.Cells(1).Tag.ToString
+                Dim id1 As String = gridKij.Worksheets(0).RowHeaders(i).Text
+                Dim id2 As String = gridKij.Worksheets(0).ColumnHeaders(i).Text
 
-            Dim comp1, comp2 As ConstantProperties
-            comp1 = _comps(id1)
-            comp2 = _comps(id2)
+                Dim comp1, comp2 As ConstantProperties
+                comp1 = _comps(id1)
+                comp2 = _comps(id2)
 
-            Dim Vc1 As Double = comp1.Critical_Volume
-            Dim Vc2 As Double = comp2.Critical_Volume
+                Dim Vc1 As Double = comp1.Critical_Volume
+                Dim Vc2 As Double = comp2.Critical_Volume
 
-            Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
+                Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
 
-            r.Cells(2).Value = tmp
+                gridKij.Worksheets(0).Cells(i, j).Data = tmp
+                gridKij.Worksheets(0).Cells(j, i).Data = tmp
 
+            Next
         Next
 
     End Sub
@@ -639,31 +609,6 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
         Else
             Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "pr_ip.dat")
         End If
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        For Each r As DataGridViewRow In Me.KryptonDataGridView2.Rows
-
-            If r.Cells(2).Value = "" Then
-
-                Dim id1 As String = r.Cells(0).Tag.ToString
-                Dim id2 As String = r.Cells(1).Tag.ToString
-
-                Dim comp1, comp2 As ConstantProperties
-                comp1 = _comps(id1)
-                comp2 = _comps(id2)
-
-                Dim Vc1 As Double = comp1.Critical_Volume
-                Dim Vc2 As Double = comp2.Critical_Volume
-
-                Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
-
-                r.Cells(2).Value = tmp
-
-            End If
-
-        Next
-
     End Sub
 
 End Class
