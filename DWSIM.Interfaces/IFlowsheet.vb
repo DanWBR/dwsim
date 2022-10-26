@@ -146,6 +146,8 @@
 
     Function GetSpreadsheetData(range As String) As List(Of String())
 
+    Function GetSpreadsheetFormat(range As String) As List(Of String())
+
     Property MobileCompatibilityMode As Boolean
 
     Property Message As String

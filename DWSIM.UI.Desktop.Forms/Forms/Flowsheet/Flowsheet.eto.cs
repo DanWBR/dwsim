@@ -266,6 +266,11 @@ namespace DWSIM.UI.Forms
                 return Spreadsheet.GetDataFromRange(range);
             });
 
+            FlowsheetObject.RetrieveSpreadsheetFormat = new Func<string, List<string[]>>((range) =>
+            {
+                return Spreadsheet.GetFormatFromRange(range);
+            });
+
             SpreadsheetControl = Spreadsheet.GetSpreadsheet(FlowsheetObject);
 
             ChartsControl = new ChartManager(FlowsheetObject);

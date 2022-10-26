@@ -90,6 +90,10 @@ Namespace GraphicObjects
 
             Dim valtext = (currentvalue * multiplier).ToString(formatstring)
 
+            If owneri.SelectedPropertyUnits <> "" Then
+                valtext += " " + owneri.SelectedPropertyUnits
+            End If
+
             Dim displaycolor As SKColor = SKColors.DarkGreen
 
             If Drawing.SkiaSharp.GraphicsSurface.BackgroundColor <> SKColors.White Then
@@ -98,30 +102,27 @@ Namespace GraphicObjects
 
             If Font Is Nothing Then
                 Dim assm = Me.GetType.Assembly
-                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.digital7_mono.ttf")
+                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.UbuntuCondensed-Regular.ttf")
                     Font = SKTypeface.FromStream(filestr)
                 End Using
             End If
 
             Dim strx, stry As Single
 
-            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = GetForeColor(), .IsAntialias = False}
+            Using paint As New SKPaint With {.TextSize = 30.0 * f, .Color = GetForeColor(), .IsAntialias = False}
                 paint.Typeface = Font
                 Dim trect As New SKRect(0, 0, 2, 2)
                 paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
                 strx = (w - trect.Width) / 2
-                stry = h - trect.Height / 2
+                stry = (h + trect.Height) / 2
                 w = trect.Width + 30 * f
                 strx = (w - trect.Width) / 2
                 Width = w
             End Using
 
-            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = displaycolor, .IsAntialias = True}
+            Using paint As New SKPaint With {.TextSize = 30.0 * f, .Color = displaycolor, .IsAntialias = True}
                 paint.Typeface = Font
                 Using paint2 As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                    canvas.DrawRect(X - 5 * f, Y - 5 * f, w + 10 * f, h + 10 * f, paint2)
-                End Using
-                Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
                     canvas.DrawRect(X - 2 * f, Y - 2 * f, w + 4 * f, h + 4 * f, paint2)
                 End Using
                 Using paint2 As New SKPaint With {.Color = GetBackColor(), .IsStroke = False, .IsAntialias = True}

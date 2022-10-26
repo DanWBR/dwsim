@@ -399,6 +399,14 @@
     <EmbeddedResource Include="Fonts\BarlowSemiCondensed-SemiBoldItalic.ttf" />
     <EmbeddedResource Include="Fonts\BarlowSemiCondensed-Thin.ttf" />
     <EmbeddedResource Include="Fonts\BarlowSemiCondensed-ThinItalic.ttf" />
+    <EmbeddedResource Include="Fonts\OxygenMono-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\NanumGothicCoding-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\NanumGothicCoding-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuCondensed-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-BoldItalic.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-Italic.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-Regular.ttf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -512,6 +520,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\typewriter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\OFL.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

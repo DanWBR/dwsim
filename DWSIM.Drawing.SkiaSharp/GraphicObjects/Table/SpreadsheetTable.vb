@@ -139,6 +139,8 @@ Namespace GraphicObjects.Tables
 
                     SpreadsheetData = Flowsheet.GetSpreadsheetData(SpreadsheetCellRange)
 
+                    Dim formats = Flowsheet.GetSpreadsheetFormat(SpreadsheetCellRange)
+
                     'determinar comprimento das colunas e altura das linhas
 
                     Dim i, j, k, itemheight, n, m, leftmargin As Integer
@@ -148,7 +150,19 @@ Namespace GraphicObjects.Tables
                     For j = 0 To SpreadsheetData(0).Count - 1
                         maxW.Add(1)
                         For i = 0 To SpreadsheetData.Count - 1
-                            size = MeasureString(SpreadsheetData(i)(j), tpaint)
+                            If formats IsNot Nothing Then
+                                If formats(i)(j) <> "" Then
+                                    If Double.TryParse(SpreadsheetData(i)(j), New Double) Then
+                                        size = MeasureString(Convert.ToDouble(SpreadsheetData(i)(j)).ToString(formats(i)(j)), tpaint)
+                                    Else
+                                        size = MeasureString(SpreadsheetData(i)(j), tpaint)
+                                    End If
+                                Else
+                                    size = MeasureString(SpreadsheetData(i)(j), tpaint)
+                                End If
+                            Else
+                                size = MeasureString(SpreadsheetData(i)(j), tpaint)
+                            End If
                             If size.Width > maxW(k) Then maxW(k) = size.Width
                         Next
                         maxW(k) += 4 * Padding
@@ -172,7 +186,19 @@ Namespace GraphicObjects.Tables
                     For j = 0 To SpreadsheetData(0).Count - 1
                         m = 0
                         For i = 0 To SpreadsheetData.Count - 1
-                            canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                            If formats IsNot Nothing Then
+                                If formats(i)(j) <> "" Then
+                                    If Double.TryParse(SpreadsheetData(i)(j), New Double) Then
+                                        canvas.DrawText(Convert.ToDouble(SpreadsheetData(i)(j)).ToString(formats(i)(j)), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                                    Else
+                                        canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                                    End If
+                                Else
+                                    canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                                End If
+                            Else
+                                canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                            End If
                             ClipboardData += SpreadsheetData(i)(j) + vbTab
                             If i < SpreadsheetData.Count - 1 Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
                             m += 1

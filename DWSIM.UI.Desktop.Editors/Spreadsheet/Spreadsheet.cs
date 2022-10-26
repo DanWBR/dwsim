@@ -23,6 +23,7 @@ using DWSIM.CrossPlatform.UI.Controls.ReoGrid.EtoRenderer;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.Formula;
 using DWSIM.UI.Desktop.Shared;
 using DWSIM.SharedClasses.Charts;
+using DWSIM.CrossPlatform.UI.Controls.ReoGrid.DataFormat;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -253,6 +254,35 @@ namespace DWSIM.UI.Desktop.Editors
                 for (var j = 0; j < rdata.GetLength(1); j++)
                 {
                     slist.Add(rdata[i, j] != null ? rdata[i, j].ToString() : "");
+                }
+                list.Add(slist.ToArray());
+            }
+
+            return list;
+        }
+
+        public List<string[]> GetFormatFromRange(string range)
+        {
+
+            var list = new List<string[]>();
+            var slist = new List<string>();
+
+            var rdata = Sheet.Worksheets[0].GetRangeData(new RangePosition(range));
+
+            for (var i = 0; i < rdata.GetLength(0); i++)
+            {
+                slist = new List<string>();
+                for (var j = 0; j < rdata.GetLength(1); j++)
+                {
+                    var format = Sheet.Worksheets[0].Cells[i, j].DataFormat;
+                    if (format == CellDataFormatFlag.Number)
+                    {
+                        var args = (NumberDataFormatter.NumberFormatArgs)(Sheet.Worksheets[0].Cells[i, j].DataFormatArgs);
+                        slist.Add("N" + args.DecimalPlaces);
+                    }
+                    else {
+                        slist.Add("");
+                    }
                 }
                 list.Add(slist.ToArray());
             }
@@ -537,15 +567,15 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             FormulaExtension.CustomFunctions["GETNAME"] = (cell, args) =>
-            { 
-                    try
-                    {
-                        return flowsheet.SimulationObjects[args[0].ToString()].GraphicObject.Tag;
-                    }
-                    catch (Exception ex)
-                    {
-                        return "ERROR: " + ex.Message;
-                    }
+            {
+                try
+                {
+                    return flowsheet.SimulationObjects[args[0].ToString()].GraphicObject.Tag;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR: " + ex.Message;
+                }
             };
 
             FormulaExtension.CustomFunctions["GETPROPVAL"] = (cell, args) =>

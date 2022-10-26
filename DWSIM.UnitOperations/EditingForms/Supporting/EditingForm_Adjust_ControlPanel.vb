@@ -493,19 +493,25 @@ Public Class EditingForm_Adjust_ControlPanel
 
     Private Sub tbMin_TextChanged(sender As Object, e As EventArgs) Handles tbMin.TextChanged
         If loaded Then
-            Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
-            If Double.TryParse(tbMin.Text, New Double) Then
-                myADJ.MinVal = Double.Parse(tbMin.Text)
-            End If
+            Try
+                Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)
+                If Double.TryParse(tbMin.Text, New Double) Then
+                    myADJ.MinVal = Double.Parse(tbMin.Text)
+                End If
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
     Private Sub tbMax_TextChanged(sender As Object, e As EventArgs) Handles tbMax.TextChanged
         If loaded Then
-            Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
-            If Double.TryParse(tbMax.Text, New Double) Then
-                myADJ.MaxVal = Double.Parse(tbMax.Text)
-            End If
+            Try
+                Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)
+                If Double.TryParse(tbMax.Text, New Double) Then
+                    myADJ.MaxVal = Double.Parse(tbMax.Text)
+                End If
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 

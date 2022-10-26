@@ -2902,6 +2902,45 @@ Public Class FormFlowsheet
 
     End Function
 
+    Public Function GetSpreadsheetFormat(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetFormat
+
+        Dim firstcolumn, firstrow, lastcolumn, lastrow As Integer
+        Dim firstcell, lastcell As String
+
+        firstcell = range.Split(":")(0)
+        lastcell = range.Split(":")(1)
+
+        firstrow = FormSpreadsheet.GetCellValue(firstcell).Row
+        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).Column
+
+        lastrow = FormSpreadsheet.GetCellValue(lastcell).Row
+        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).Column
+
+        Dim data As New List(Of String())
+
+        Dim i, j As Integer
+
+        Dim grid = FormSpreadsheet.Spreadsheet.Worksheets(0)
+
+        For i = firstrow To lastrow
+            Dim sublist = New List(Of String)
+            For j = firstcolumn To lastcolumn
+                Dim val = grid.Cells(i, j).DataFormat
+                If val = unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number Then
+                    Dim args As unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs = grid.Cells(i, j).DataFormatArgs
+                    sublist.Add("N" + args.DecimalPlaces.ToString())
+                Else
+                    sublist.Add("")
+                End If
+            Next
+            data.Add(sublist.ToArray)
+        Next
+
+        Return data
+
+    End Function
+
+
     Public Function GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
         Return FormSpreadsheet.Spreadsheet
     End Function

@@ -32,6 +32,12 @@ namespace DWSIM.Automation
                 //return Spreadsheet.GetDataFromRange(range);
             });
 
+            RetrieveSpreadsheetFormat = new Func<string, List<string[]>>((range) =>
+            {
+                return null;
+                //return Spreadsheet.GetDataFromRange(range);
+            });
+
             DynamicsManager.RunSchedule = (schname) =>
             {
                 DynamicsManager.CurrentSchedule = DynamicsManager.GetSchedule(schname).ID;

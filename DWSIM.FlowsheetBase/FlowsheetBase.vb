@@ -74,6 +74,8 @@ Imports System.Text.RegularExpressions
 
     Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
 
+    Public RetrieveSpreadsheetFormat As Func(Of String, List(Of String()))
+
     Public Property ScriptKeywordsF As String = ""
 
     Public Property ScriptKeywordsU As String = ""
@@ -3330,6 +3332,12 @@ Label_00CC:
     Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
 
         Return RetrieveSpreadsheetData.Invoke(range)
+
+    End Function
+
+    Public Function GetSpreadsheetFormat(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetFormat
+
+        Return RetrieveSpreadsheetFormat.Invoke(range)
 
     End Function
 
