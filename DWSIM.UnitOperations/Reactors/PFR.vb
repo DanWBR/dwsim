@@ -1184,7 +1184,7 @@ Namespace Reactors
                         ims.PropertyPackage.CurrentMaterialStream = ims
                         ims.Calculate(True, True)
 
-                    Loop Until Abs(T - Tant) < 0.01
+                    Loop Until Abs(T - Tant) < 0.5
 
                     DHRT.Add(DHr)
 
