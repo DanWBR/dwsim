@@ -1098,7 +1098,24 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             If ChangeCalcOrder Then
                 If mode = 0 Or mode = 1 Then
                     fgui.RunCodeOnUIThread(Sub()
-                                               objstack = fgui.ChangeCalculationOrder(objstack)
+                                               Dim customlist = fgui.FlowsheetOptions.CustomCalculationOrder
+                                               Dim reflist = New List(Of String)(customlist)
+                                               If customlist.Count > 0 Then
+                                                   For Each item In reflist
+                                                       If Not objstack.Contains(item) Then
+                                                           customlist.Remove(item)
+                                                       End If
+                                                   Next
+                                                   For Each item In objstack
+                                                       If Not customlist.Contains(item) Then
+                                                           customlist.Add(item)
+                                                       End If
+                                                   Next
+                                                   objstack = fgui.ChangeCalculationOrder(customlist)
+                                               Else
+                                                   objstack = fgui.ChangeCalculationOrder(objstack)
+                                               End If
+                                               fgui.FlowsheetOptions.CustomCalculationOrder = New List(Of String)(objstack)
                                            End Sub)
                 End If
             End If

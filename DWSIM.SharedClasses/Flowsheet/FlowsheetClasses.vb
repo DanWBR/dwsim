@@ -272,6 +272,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property CurrentWeather As IWeatherData = New WeatherData Implements IFlowsheetOptions.CurrentWeather
 
+        Public Property CustomCalculationOrder As List(Of String) = New List(Of String) Implements IFlowsheetOptions.CustomCalculationOrder
+
     End Class
 
 End Namespace

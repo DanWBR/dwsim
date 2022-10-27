@@ -129,4 +129,6 @@
 
     Property CurrentWeather As IWeatherData
 
+    Property CustomCalculationOrder As List(Of String)
+
 End Interface
