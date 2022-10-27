@@ -87,6 +87,9 @@ Partial Class EditingForm_ReactorPFR
         Me.tbCatDiam = New System.Windows.Forms.TextBox()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.lblPDrop = New System.Windows.Forms.Label()
+        Me.tbUserDefDP = New System.Windows.Forms.TextBox()
+        Me.chkUseUserDefDP = New System.Windows.Forms.CheckBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -376,7 +379,7 @@ Partial Class EditingForm_ReactorPFR
         resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
         Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2")})
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3")})
         Me.cbCalcMode.Name = "cbCalcMode"
         Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip1"))
@@ -669,6 +672,9 @@ Partial Class EditingForm_ReactorPFR
         'TabPage9
         '
         resources.ApplyResources(Me.TabPage9, "TabPage9")
+        Me.TabPage9.Controls.Add(Me.lblPDrop)
+        Me.TabPage9.Controls.Add(Me.tbUserDefDP)
+        Me.TabPage9.Controls.Add(Me.chkUseUserDefDP)
         Me.TabPage9.Controls.Add(Me.TextBox1)
         Me.TabPage9.Controls.Add(Me.Label20)
         Me.TabPage9.Name = "TabPage9"
@@ -676,6 +682,31 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipValues.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip2"))
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'lblPDrop
+        '
+        resources.ApplyResources(Me.lblPDrop, "lblPDrop")
+        Me.lblPDrop.Name = "lblPDrop"
+        Me.ToolTip1.SetToolTip(Me.lblPDrop, resources.GetString("lblPDrop.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblPDrop, resources.GetString("lblPDrop.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblPDrop, resources.GetString("lblPDrop.ToolTip2"))
+        '
+        'tbUserDefDP
+        '
+        resources.ApplyResources(Me.tbUserDefDP, "tbUserDefDP")
+        Me.tbUserDefDP.Name = "tbUserDefDP"
+        Me.ToolTipValues.SetToolTip(Me.tbUserDefDP, resources.GetString("tbUserDefDP.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbUserDefDP, resources.GetString("tbUserDefDP.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbUserDefDP, resources.GetString("tbUserDefDP.ToolTip2"))
+        '
+        'chkUseUserDefDP
+        '
+        resources.ApplyResources(Me.chkUseUserDefDP, "chkUseUserDefDP")
+        Me.chkUseUserDefDP.Name = "chkUseUserDefDP"
+        Me.ToolTip1.SetToolTip(Me.chkUseUserDefDP, resources.GetString("chkUseUserDefDP.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkUseUserDefDP, resources.GetString("chkUseUserDefDP.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkUseUserDefDP, resources.GetString("chkUseUserDefDP.ToolTip2"))
+        Me.chkUseUserDefDP.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
@@ -1172,4 +1203,7 @@ Partial Class EditingForm_ReactorPFR
     Friend WithEvents TabPage9 As TabPage
     Public WithEvents TextBox1 As TextBox
     Public WithEvents Label20 As Label
+    Public WithEvents lblPDrop As Label
+    Public WithEvents tbUserDefDP As TextBox
+    Friend WithEvents chkUseUserDefDP As CheckBox
 End Class

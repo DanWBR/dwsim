@@ -30,6 +30,7 @@ Namespace Reactors
         Isothermic = 0
         Adiabatic = 1
         OutletTemperature = 2
+        NonIsothermalNonAdiabatic = 3
     End Enum
 
     <System.Serializable()> Public MustInherit Class Reactor

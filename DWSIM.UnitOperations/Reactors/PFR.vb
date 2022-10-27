@@ -93,6 +93,11 @@ Namespace Reactors
 
         Public Property ResidenceTime As Double = 0.0#
 
+        Public Property UseUserDefinedPressureDrop As Boolean = False
+
+        Public Property UserDefinedPressureDrop As Double = 0.0
+
+
         Public Sub New()
 
             MyBase.New()
@@ -1115,6 +1120,27 @@ Namespace Reactors
 
                         Select Case Me.ReactorOperationMode
 
+                            Case OperationMode.NonIsothermalNonAdiabatic
+
+                                Dim esval = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault()
+
+                                'Products Enthalpy (kJ/kg * kg/s = kW)
+
+                                Hp = Hr - DHr + esval * deltaV
+
+                                IObj2?.SetCurrent()
+
+                                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
+                                Dim Tout As Double = tmp.CalculatedTemperature.GetValueOrDefault
+
+                                ims.Phases(0).Properties.temperature = Tout
+                                ims.Phases(0).Properties.enthalpy = Hp / W
+
+                                T = Tout
+
+                                ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+
                             Case OperationMode.Adiabatic
 
                                 Me.DeltaQ = 0.0#
@@ -1208,35 +1234,43 @@ Namespace Reactors
 
                 Dim L As Double = deltaV * Length
 
-                If Me.CatalystLoading > 0.0 And hasHetCatReaction Then
+                If UseUserDefinedPressureDrop Then
 
-                    'has catalyst, use Ergun equation for pressure drop in reactor beds
-
-                    Dim vel As Double = (Qlin + Qvin) / (PI * Diameter ^ 2 / 4)
-                    Dim dp As Double = Me.CatalystParticleDiameter
-                    Dim ev As Double = Me.CatalystVoidFraction
-
-                    Dim pdrop As Double = 150 * eta * L / dp ^ 2 * (1 - ev) ^ 2 / ev ^ 3 * vel + 1.75 * L * rho / dp * (1 - ev) / ev ^ 3 * vel ^ 2
-
-                    P -= pdrop
+                    P -= UserDefinedPressureDrop * deltaV
 
                 Else
 
-                    'calculate pressure drop using Beggs and Brill correlation
+                    If Me.CatalystLoading > 0.0 And hasHetCatReaction Then
 
-                    Dim resv As Object()
-                    Dim fpp As New FlowPackages.BeggsBrill
-                    Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
+                        'has catalyst, use Ergun equation for pressure drop in reactor beds
 
-                    resv = fpp.CalculateDeltaP(diameter * 0.0254, L, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                        Dim vel As Double = (Qlin + Qvin) / (PI * Diameter ^ 2 / 4)
+                        Dim dp As Double = Me.CatalystParticleDiameter
+                        Dim ev As Double = Me.CatalystVoidFraction
 
-                    tipofluxo = resv(0)
-                    holdup = resv(1)
-                    dpf = resv(2)
-                    dph = resv(3)
-                    dpt = resv(4)
+                        Dim pdrop As Double = 150 * eta * L / dp ^ 2 * (1 - ev) ^ 2 / ev ^ 3 * vel + 1.75 * L * rho / dp * (1 - ev) / ev ^ 3 * vel ^ 2
 
-                    P -= dpf
+                        P -= pdrop
+
+                    Else
+
+                        'calculate pressure drop using Beggs and Brill correlation
+
+                        Dim resv As Object()
+                        Dim fpp As New FlowPackages.BeggsBrill
+                        Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
+
+                        resv = fpp.CalculateDeltaP(Diameter * 0.0254, L, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+
+                        tipofluxo = resv(0)
+                        holdup = resv(1)
+                        dpf = resv(2)
+                        dph = resv(3)
+                        dpt = resv(4)
+
+                        P -= dpf
+
+                    End If
 
                 End If
 
@@ -1324,6 +1358,14 @@ Namespace Reactors
 
                     OutletTemperature = T0
 
+                ElseIf Me.ReactorOperationMode = OperationMode.NonIsothermalNonAdiabatic Then
+
+                    Me.DeltaQ = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault()
+
+                    OutletTemperature = ims.GetTemperature()
+
+                    Me.DeltaT = OutletTemperature - T0
+
                 ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
 
                     'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -1379,13 +1421,15 @@ Namespace Reactors
                     End With
                 End If
 
-                'energy stream - update energy flow value (kW)
-                Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                If estr IsNot Nothing Then
-                    With estr
-                        .EnergyFlow = DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                If ReactorOperationMode <> OperationMode.NonIsothermalNonAdiabatic Then
+                    'energy stream - update energy flow value (kW)
+                    Dim estr = GetInletEnergyStream(1)
+                    If estr IsNot Nothing Then
+                        With estr
+                            .EnergyFlow = DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
                 End If
 
             End If

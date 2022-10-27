@@ -135,6 +135,8 @@ Public Class EditingForm_ReactorPFR
                     cbCalcMode.SelectedIndex = 1
                 Case Reactors.OperationMode.OutletTemperature
                     cbCalcMode.SelectedIndex = 2
+                Case Reactors.OperationMode.NonIsothermalNonAdiabatic
+                    cbCalcMode.SelectedIndex = 3
             End Select
 
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
@@ -260,6 +262,12 @@ Public Class EditingForm_ReactorPFR
             Else
                 cbExternalSolver.SelectedIndex = 0
             End If
+
+            chkUseUserDefDP.Checked = .UseUserDefinedPressureDrop
+
+            tbUserDefDP.Text = .UserDefinedPressureDrop.ConvertFromSI(units.deltaP).ToString(nf)
+
+            lblPDrop.Text = units.deltaP
 
         End With
 
@@ -506,6 +514,10 @@ Public Class EditingForm_ReactorPFR
                 tbOutletTemperature.Enabled = True
                 cbTemp.Enabled = True
                 SimObject.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
+            Case 3
+                tbOutletTemperature.Enabled = False
+                cbTemp.Enabled = False
+                SimObject.ReactorOperationMode = Reactors.OperationMode.NonIsothermalNonAdiabatic
         End Select
         If Loaded Then RequestCalc()
 
@@ -758,6 +770,21 @@ Public Class EditingForm_ReactorPFR
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         If TextBox1.Text.IsValidDouble Then
             SimObject.dV = TextBox1.Text.ToDoubleFromCurrent()
+        End If
+    End Sub
+
+    Private Sub chkUseUserDefDP_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseUserDefDP.CheckedChanged
+        SimObject.UseUserDefinedPressureDrop = chkUseUserDefDP.Checked
+    End Sub
+
+    Private Sub tbUserDefDP_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefDP.TextChanged
+        If Loaded Then
+            Try
+                SimObject.UserDefinedPressureDrop = tbUserDefDP.Text.ToDoubleFromCurrent().ConvertToSI(units.deltaP)
+                tbUserDefDP.ForeColor = Color.Blue
+            Catch ex As Exception
+                tbUserDefDP.ForeColor = Color.Red
+            End Try
         End If
     End Sub
 End Class

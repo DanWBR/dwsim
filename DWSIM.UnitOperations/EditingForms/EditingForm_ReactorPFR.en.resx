@@ -208,11 +208,14 @@
   <data name="TabPage8.Text" xml:space="preserve">
     <value>Annotations</value>
   </data>
-  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 24</value>
+  <data name="chkUseUserDefDP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 17</value>
   </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 20</value>
+  <data name="chkUseUserDefDP.Text" xml:space="preserve">
+    <value>Constant Linear Pressure Drop</value>
+  </data>
+  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 25</value>
   </data>
   <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 28</value>
@@ -271,6 +274,9 @@
   </data>
   <data name="cbCalcMode.Items2" xml:space="preserve">
     <value>Define Outlet Temperature</value>
+  </data>
+  <data name="cbCalcMode.Items3" xml:space="preserve">
+    <value>Non-Adiabatic Non-Isothermal</value>
   </data>
   <data name="cbCalcMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>163, 48</value>

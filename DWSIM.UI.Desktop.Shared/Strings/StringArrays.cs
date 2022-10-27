@@ -114,6 +114,10 @@ namespace DWSIM.UI.Desktop.Shared
         {
             return new String[] { "Adiabatic", "Isothermic", "Outlet Temperature" };
         }
+        public static String[] rctcalcmode2()
+        {
+            return new String[] { "Adiabatic", "Isothermic", "Outlet Temperature", "Non-Isothermal Non-Adiabatic" };
+        }
         public static String[] csepspecstream()
         {
             return new String[] { "Stream 1", "Stream 2" };

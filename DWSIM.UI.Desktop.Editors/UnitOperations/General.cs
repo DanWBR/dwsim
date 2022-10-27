@@ -101,7 +101,7 @@ namespace DWSIM.UI.Desktop.Editors
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
                     if (proppacks.Count > 0) SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
-                }, () => CallSolverIfNeeded());
+                });
             }
 
             s.CreateAndAddLabelRow(container, "Object Properties");
@@ -128,7 +128,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        {
                                            arg3.TextColor = (Colors.Red);
                                        }
-                                   }, () => CallSolverIfNeeded());
+                                   });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Solids Separation Efficiency"));
                     s.CreateAndAddTextBoxRow(container, nf, "Liquids Separation Efficiency", ss.LiquidSeparationEfficiency,
@@ -143,7 +143,7 @@ namespace DWSIM.UI.Desktop.Editors
                                             {
                                                 arg3.TextColor = (Colors.Red);
                                             }
-                                        }, () => CallSolverIfNeeded());
+                                        });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Liquids Separation Efficiency"));
                     break;
@@ -161,7 +161,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        {
                                            arg3.TextColor = (Colors.Red);
                                        }
-                                   }, () => CallSolverIfNeeded());
+                                   });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heat Flow"));
                     break;
@@ -212,7 +212,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 ce.CalcMode = Compressor.CalculationMode.Curves;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddDropDownRow(container, "Thermodynamic Path", new List<string>(new[] { "Adiabatic", "Polytropic" }), (int)ce.ProcessPath, (DropDown arg3, EventArgs ev) =>
@@ -226,7 +226,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  ce.ProcessPath = Compressor.ProcessPathType.Polytropic;
                                  break;
                          }
-                     }, () => CallSolverIfNeeded());
+                     });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
                     s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) =>
@@ -246,7 +246,7 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 arg3.TextColor = (Colors.Red);
                             }
-                        }, () => CallSolverIfNeeded());
+                        });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Rotation Speed"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Increase (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, ce.DeltaP),
@@ -261,7 +261,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        {
                                            arg3.TextColor = (Colors.Red);
                                        }
-                                   }, () => CallSolverIfNeeded());
+                                   });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Pressure Increase"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ce.POut),
@@ -276,7 +276,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Power Required (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, ce.DeltaQ),
@@ -291,7 +291,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Power Required"));
                     s.CreateAndAddTextBoxRow(container, nf, "Adiabatic Efficiency (%)", ce.AdiabaticEfficiency,
@@ -306,7 +306,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Adiabatic Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Polytropic Efficiency (%)", ce.PolytropicEfficiency,
@@ -321,7 +321,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Polytropic Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Adiabatic Head (" + su.distance + ")", cv.ConvertFromSI(su.distance, ce.AdiabaticHead),
@@ -336,7 +336,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Adiabatic Head"));
                     s.CreateAndAddTextBoxRow(container, nf, "Polytropic Head (" + su.distance + ")", cv.ConvertFromSI(su.distance, ce.PolytropicHead),
@@ -351,7 +351,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Polytropic Head"));
                     break;
@@ -396,7 +396,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Curves;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) =>
@@ -415,7 +415,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 xe.ProcessPath = DWSIM.UnitOperations.UnitOperations.Expander.ProcessPathType.Polytropic;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
                     s.CreateAndAddTextBoxRow(container, nf, "Rotation Speed", xe.Speed,
@@ -430,7 +430,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Rotation Speed"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Decrease (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, xe.DeltaP),
@@ -445,7 +445,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        {
                                            arg3.TextColor = (Colors.Red);
                                        }
-                                   }, () => CallSolverIfNeeded());
+                                   });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Pressure Decrease"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, xe.POut),
@@ -460,7 +460,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Power Generated (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, xe.DeltaQ),
@@ -475,7 +475,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Power Generated"));
                     s.CreateAndAddTextBoxRow(container, nf, "Adiabatic Efficiency (%)", xe.AdiabaticEfficiency,
@@ -490,7 +490,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Adiabatic Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Polytropic Efficiency (%)", xe.PolytropicEfficiency,
@@ -505,7 +505,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Polytropic Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Adiabatic Head (" + su.distance + ")", cv.ConvertFromSI(su.distance, xe.AdiabaticHead),
@@ -520,7 +520,7 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 arg3.TextColor = (Colors.Red);
                             }
-                        }, () => CallSolverIfNeeded());
+                        });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Adiabatic Head"));
                     s.CreateAndAddTextBoxRow(container, nf, "Polytropic Head (" + su.distance + ")", cv.ConvertFromSI(su.distance, xe.PolytropicHead),
@@ -535,7 +535,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Polytropic Head"));
                     break;
@@ -574,7 +574,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 hc.CalcMode = Heater.CalculationMode.EnergyStream;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, hc.DeltaP.GetValueOrDefault()),
@@ -589,7 +589,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        {
                                            arg3.TextColor = (Colors.Red);
                                        }
-                                   }, () => CallSolverIfNeeded());
+                                   });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, hc.OutletTemperature.GetValueOrDefault()),
@@ -604,7 +604,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Added (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, hc.DeltaQ.GetValueOrDefault()),
@@ -619,7 +619,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Heat Added"));
                     s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", hc.Eficiencia.GetValueOrDefault(),
@@ -634,7 +634,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction", hc.OutletVaporFraction.GetValueOrDefault(),
@@ -649,7 +649,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Vapor Fraction"));
                     break;
@@ -688,7 +688,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 cc.CalcMode = Cooler.CalculationMode.EnergyStream;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, cc.DeltaP.GetValueOrDefault()),
@@ -718,7 +718,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Removed (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, cc.DeltaQ.GetValueOrDefault()),
@@ -733,7 +733,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Heat Removed"));
                     s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", cc.Eficiencia.GetValueOrDefault(),
@@ -748,7 +748,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction", cc.OutletVaporFraction.GetValueOrDefault(),
@@ -763,7 +763,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Vapor Fraction"));
                     break;
@@ -812,7 +812,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 btn1.Enabled = true;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
 
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
@@ -838,7 +838,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        {
                                            arg3.TextColor = (Colors.Red);
                                        }
-                                   }, () => CallSolverIfNeeded());
+                                   });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Increase"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, pump.Pout),
@@ -853,7 +853,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", pump.Eficiencia.GetValueOrDefault(),
@@ -868,7 +868,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Efficiency (%)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Power (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, pump.DeltaQ.GetValueOrDefault()),
@@ -883,7 +883,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Power"));
                     break;
@@ -916,7 +916,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 mix.PressureCalculation = Mixer.PressureBehavior.Maximum;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Calculation Mode"));
                     break;
@@ -967,7 +967,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 valve.CalcMode = Valve.CalculationMode.Kv_General;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, valve.OutletPressure.GetValueOrDefault()),
@@ -982,7 +982,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, valve.DeltaP.GetValueOrDefault()),
@@ -997,7 +997,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddDropDownRow(container, "Flow Coefficient Type", new List<string>(new[] { "Kv", "Cv" }), (int)valve.FlowCoefficient,
@@ -1016,7 +1016,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddCheckBoxRow(container, "Use Opening (%) versus Kv[Cv]/Kv[Cv]max (%) relationship", valve.EnableOpeningKvRelationship, (sender, e) => { valve.EnableOpeningKvRelationship = sender.Checked.GetValueOrDefault(); });
                     s.CreateAndAddTextBoxRow(container, nf, "Opening (%)", valve.OpeningPct,
                                (TextBox arg3, EventArgs ev) =>
@@ -1030,7 +1030,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDropDownRow(container, "Opening/Kv[Cv] Relationship Type", StringResources.valveopkvrelmode().ToList(),
                         (int)valve.DefinedOpeningKvRelationShipType, (DropDown arg3, EventArgs ev) =>
                         {
@@ -1048,8 +1048,8 @@ namespace DWSIM.UI.Desktop.Editors
                           {
                               arg3.TextColor = (Colors.Red);
                           }
-                      }, () => CallSolverIfNeeded());
-                    s.CreateAndAddStringEditorRow(container, "Kv[Cv]/Kv[Cv]max (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; }, () => CallSolverIfNeeded());
+                      });
+                    s.CreateAndAddStringEditorRow(container, "Kv[Cv]/Kv[Cv]max (%) = f(OP(%))", valve.PercentOpeningVersusPercentKvExpression, (sender, e) => { valve.PercentOpeningVersusPercentKvExpression = sender.Text; });
                     s.CreateAndAddButtonRow(container, "Opening/Kv User Data Table", null, (btn, e) =>
                     {
                         var editor = new Editors.UnitOperations.ValveDataEditor(valve);
@@ -1073,13 +1073,13 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDropDownRow(container, "Light Key Compound", comps, poslk, (DropDown arg3, EventArgs ev) =>
                     {
                         sc.m_lightkey = comps.ToList()[arg3.SelectedIndex];
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Light Key Compound"));
                     s.CreateAndAddDropDownRow(container, "Heavy Key Compound", comps, poshk, (DropDown arg3, EventArgs ev) =>
                     {
                         sc.m_heavykey = comps.ToList()[arg3.SelectedIndex];
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heavy Key Compound"));
                     s.CreateAndAddTextBoxRow(container, nf, "LK Mole Fraction in Bottoms", sc.m_lightkeymolarfrac,
@@ -1094,7 +1094,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("LK Mole Fraction in Bottoms"));
                     s.CreateAndAddTextBoxRow(container, nf, "HK Mole Fraction in Distillate", sc.m_heavykeymolarfrac,
@@ -1109,7 +1109,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("HK Mole Fraction in Distillate"));
                     s.CreateAndAddTextBoxRow(container, nf, "Reflux Ratio", sc.m_refluxratio,
@@ -1124,7 +1124,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reflux Ratio"));
                     s.CreateAndAddTextBoxRow(container, nf, "Condenser Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, sc.m_condenserpressure),
@@ -1139,7 +1139,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Condenser Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Reboiler Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, sc.m_boilerpressure),
@@ -1154,7 +1154,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reboiler Pressure"));
                     int pos6 = 0;
@@ -1178,7 +1178,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 sc.condtype = ShortcutColumn.CondenserType.PartialCond;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Condenser Type"));
                     break;
@@ -1261,7 +1261,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 hx.CalculationMode = HeatExchangerCalcMode.OutletVaporFraction2;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     var strdescr = new StringBuilder();
@@ -1302,7 +1302,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 hx.FlowDir = FlowDirection.CounterCurrent;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Flow Direction"));
                     int pos8 = 0;
@@ -1326,7 +1326,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 hx.DefinedTemperature = SpecifiedTemperature.Hot_Fluid;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Defined Temperature (for Calc Area Mode)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (Hot Fluid) (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, hx.HotSidePressureDrop),
@@ -1356,7 +1356,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop (Cold Fluid)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (Cold Fluid) (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, hx.ColdSideOutletTemperature),
@@ -1371,7 +1371,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature (Cold Fluid)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (Hot Fluid) (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, hx.HotSideOutletTemperature),
@@ -1386,7 +1386,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature (Hot Fluid)"));
                     s.CreateAndAddTextBoxRow(container, nf, "Overall HTC (" + su.heat_transf_coeff + ")", cv.ConvertFromSI(su.heat_transf_coeff, hx.OverallCoefficient.GetValueOrDefault()),
@@ -1401,7 +1401,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Overall HTC"));
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Exchange Area (" + su.area + ")", cv.ConvertFromSI(su.heat_transf_coeff, hx.Area.GetValueOrDefault()),
@@ -1416,7 +1416,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heat Exchange Area"));
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Exchanged (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, hx.Q.GetValueOrDefault()),
@@ -1431,7 +1431,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heat Exchanged"));
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Loss (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, hx.HeatLoss),
@@ -1446,7 +1446,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum Temperature Difference (" + su.deltaT + ")", cv.ConvertFromSI(su.deltaT, hx.MITA),
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -1459,7 +1459,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("MITA"));
                     s.CreateAndAddCheckBoxRow(container, "Force Pinch Point Location to Outlets", hx.PinchPointAtOutlets,
@@ -1479,7 +1479,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction (Stream 1)", hx.OutletVaporFraction1,
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -1492,7 +1492,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction (Stream 2)", hx.OutletVaporFraction2,
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -1505,7 +1505,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddCheckBoxRow(container, "Ignore LMTD Error", hx.IgnoreLMTDError,
                           (chk, e) =>
                           {
@@ -1545,7 +1545,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 reactor.ReactorOperationMode = OperationMode.OutletTemperature;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, reactor.OutletTemperature),
@@ -1560,7 +1560,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, reactor.DeltaP.GetValueOrDefault()),
@@ -1575,7 +1575,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     break;
@@ -1612,7 +1612,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 reactor2.ReactorOperationMode = OperationMode.OutletTemperature;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, reactor2.OutletTemperature),
@@ -1627,7 +1627,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, reactor2.DeltaP.GetValueOrDefault()),
@@ -1642,15 +1642,15 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
-                    s.CreateAndAddCheckBoxRow(container, "Initialize from a Previous Solution", reactor2.UsePreviousSolution, (sender, e) => reactor2.UsePreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2.InternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Minimum External Error", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Initialize from a Previous Solution", reactor2.UsePreviousSolution, (sender, e) => reactor2.UsePreviousSolution = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2.InternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopMaximumIterations = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum External Error", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopTolerance = sender.Text.ParseExpressionToDouble(); });
                     break;
                 case ObjectType.RCT_Gibbs:
                     var reactor2g = (Reactor_Gibbs)SimObject;
@@ -1681,7 +1681,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 reactor2g.ReactorOperationMode = OperationMode.OutletTemperature;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, reactor2g.OutletTemperature),
@@ -1696,7 +1696,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, reactor2g.DeltaP.GetValueOrDefault()),
@@ -1711,7 +1711,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     int i, j;
@@ -1782,11 +1782,11 @@ namespace DWSIM.UI.Desktop.Editors
                         form.Show();
                     });
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
-                    s.CreateAndAddCheckBoxRow(container, "Initialize from Previous Solution", reactor2g.InitializeFromPreviousSolution, (sender, e) => reactor2g.InitializeFromPreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Error Tolerance", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddCheckBoxRow(container, "Use IPOPT Solver", reactor2g.UseIPOPTSolver, (sender, e) => reactor2g.UseIPOPTSolver = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
-                    s.CreateAndAddCheckBoxRow(container, "Use Alternate Solving Method", reactor2g.AlternateSolvingMethod, (sender, e) => reactor2g.AlternateSolvingMethod = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
+                    s.CreateAndAddCheckBoxRow(container, "Initialize from Previous Solution", reactor2g.InitializeFromPreviousSolution, (sender, e) => reactor2g.InitializeFromPreviousSolution = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Error Tolerance", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); });
+                    s.CreateAndAddCheckBoxRow(container, "Use IPOPT Solver", reactor2g.UseIPOPTSolver, (sender, e) => reactor2g.UseIPOPTSolver = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddCheckBoxRow(container, "Use Alternate Solving Method", reactor2g.AlternateSolvingMethod, (sender, e) => reactor2g.AlternateSolvingMethod = sender.Checked.GetValueOrDefault());
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;
@@ -1821,7 +1821,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 reactor3.ReactorOperationMode = OperationMode.OutletTemperature;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, reactor3.OutletTemperature),
@@ -1836,7 +1836,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, reactor3.DeltaP.GetValueOrDefault()),
@@ -1851,7 +1851,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddTextBoxRow(container, nf, "Reactor Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor3.Volume),
@@ -1866,7 +1866,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Volume"));
                     s.CreateAndAddTextBoxRow(container, nf, "Reactor Headspace (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor3.Headspace),
@@ -1881,7 +1881,7 @@ namespace DWSIM.UI.Desktop.Editors
                                   {
                                       arg3.TextColor = (Colors.Red);
                                   }
-                              }, () => CallSolverIfNeeded());
+                              });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Headspace"));
                     s.CreateAndAddTextBoxRow(container, nf, "Catalyst Amount (" + su.mass + ")", cv.ConvertFromSI(su.mass, reactor3.CatalystAmount),
@@ -1896,7 +1896,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Catalyst Amount"));
                     break;
@@ -1918,8 +1918,11 @@ namespace DWSIM.UI.Desktop.Editors
                         case OperationMode.OutletTemperature:
                             pos13 = 2;
                             break;
+                        case OperationMode.NonIsothermalNonAdiabatic:
+                            pos13 = 3;
+                            break;
                     }
-                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.rctcalcmode().ToList(), pos13, (DropDown arg3, EventArgs ev) =>
+                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.rctcalcmode2().ToList(), pos13, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
                         {
@@ -1932,8 +1935,11 @@ namespace DWSIM.UI.Desktop.Editors
                             case 2:
                                 reactor4.ReactorOperationMode = OperationMode.OutletTemperature;
                                 break;
+                            case 3:
+                                reactor4.ReactorOperationMode = OperationMode.NonIsothermalNonAdiabatic;
+                                break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, reactor4.OutletTemperature),
@@ -1948,7 +1954,7 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (Colors.Red);
                            }
-                       }, () => CallSolverIfNeeded());
+                       });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddLabelRow(container, "Sizing Information");
@@ -1968,7 +1974,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Volume"));
                     s.CreateAndAddDropDownRow(container, "Sizing Information", new List<string> { "Length", "Diameter" },
@@ -1986,7 +1992,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddTextBoxRow(container, nf, "Tube Diameter (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, reactor4.Diameter),
                                (TextBox arg3, EventArgs ev) =>
                                {
@@ -1999,7 +2005,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Length"));
                     s.CreateAndAddLabelRow(container, "Catalyst Loading");
@@ -2016,7 +2022,7 @@ namespace DWSIM.UI.Desktop.Editors
                                    {
                                        arg3.TextColor = (Colors.Red);
                                    }
-                               }, () => CallSolverIfNeeded());
+                               });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Catalyst Loading"));
                     s.CreateAndAddTextBoxRow(container, nf, "Catalyst Diameter (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, reactor4.CatalystParticleDiameter),
@@ -2031,7 +2037,7 @@ namespace DWSIM.UI.Desktop.Editors
                                   {
                                       arg3.TextColor = (Colors.Red);
                                   }
-                              }, () => CallSolverIfNeeded());
+                              });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Catalyst Diameter"));
                     s.CreateAndAddTextBoxRow(container, nf, "Catalyst Void Fraction", reactor4.CatalystVoidFraction,
@@ -2046,16 +2052,33 @@ namespace DWSIM.UI.Desktop.Editors
                                  {
                                      arg3.TextColor = (Colors.Red);
                                  }
-                             }, () => CallSolverIfNeeded());
+                             });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Catalyst Void Fraction"));
+                    s.CreateAndAddCheckBoxRow(container, "Use Constant Linear Pressure Drop", reactor4.UseUserDefinedPressureDrop, 
+                        (chk, e) => {
+                            reactor4.UseUserDefinedPressureDrop = chk.Checked.GetValueOrDefault();
+                        });
+                    s.CreateAndAddTextBoxRow(container, nf, "Constant Linear Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, reactor4.UserDefinedPressureDrop),
+                              (TextBox arg3, EventArgs ev) =>
+                              {
+                                  if (arg3.Text.IsValidDoubleExpression())
+                                  {
+                                      arg3.TextColor = (SystemColors.ControlText);
+                                      reactor4.UserDefinedPressureDrop = cv.ConvertToSI(su.deltaP, arg3.Text.ToString().ParseExpressionToDouble());
+                                  }
+                                  else
+                                  {
+                                      arg3.TextColor = (Colors.Red);
+                                  }
+                              });
                     break;
                 case ObjectType.ComponentSeparator:
                     var csep = (ComponentSeparator)SimObject;
                     s.CreateAndAddDropDownRow(container, "Specified Stream", StringResources.csepspecstream().ToList(), csep.SpecifiedStreamIndex, (DropDown arg3, EventArgs ev) =>
                     {
                         csep.SpecifiedStreamIndex = (byte)arg3.SelectedIndex;
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Specified Stream"));
                     s.CreateAndAddLabelRow(container, "COMPOUND SEPARATION SPECS");
@@ -2102,7 +2125,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     cs.SepSpec = DWSIM.UnitOperations.UnitOperations.Auxiliary.SeparationSpec.MolarFlow;
                                     break;
                             }
-                        }, () => CallSolverIfNeeded());
+                        });
                         s.CreateAndAddTextBoxRow(container, nf, cs.ComponentID + " Separation Spec Value", cs.SpecValue,
                                 (TextBox arg3, EventArgs ev) =>
                                 {
@@ -2115,7 +2138,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                         var units = StringResources.cspecunit().ToList();
                         s.CreateAndAddDropDownRow(container, cs.ComponentID + " Separation Spec Units", units.ToList(), units.IndexOf(cs.SpecUnit), (DropDown arg3, EventArgs ev) =>
                         {
@@ -2152,7 +2175,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 splitter.OperationMode = DWSIM.UnitOperations.UnitOperations.Splitter.OpMode.StreamMoleFlowSpec;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Specification"));
                     s.CreateAndAddTextBoxRow(container, nf, "Split Ratio Stream 1", (double)splitter.Ratios[0],
@@ -2167,7 +2190,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Split Ratio Stream 1"));
                     s.CreateAndAddTextBoxRow(container, nf, "Split Ratio Stream 2", (double)splitter.Ratios[1],
@@ -2182,7 +2205,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Split Ratio Stream 2"));
                     s.CreateAndAddTextBoxRow(container, nf, "Split Ratio Stream 3", (double)splitter.Ratios[2],
@@ -2197,7 +2220,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Split Ratio Stream 3"));
                     double sm1 = 0.0f;
@@ -2228,7 +2251,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Stream 1 Mass/Mole Flow Spec"));
                     double sm2 = 0.0f;
@@ -2259,7 +2282,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Stream 2 Mass/Mole Flow Spec"));
                     break;
@@ -2292,9 +2315,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 pipe.Specification = Pipe.Specmode.OutletTemperature;
                                 break;
                         }
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container, SimObject.GetPropertyDescription("Calculation Mode"));
-                    s.CreateAndAddDropDownRow(container, "Pressure Drop Calculation Model", new List<string>() { "Beggs & Brill", "Lockhart & Martinelli", "Petalas & Aziz" }, (int)pipe.SelectedFlowPackage, (sender, e) => pipe.SelectedFlowPackage = (FlowPackage)sender.SelectedIndex, () => CallSolverIfNeeded());
+                    s.CreateAndAddDropDownRow(container, "Pressure Drop Calculation Model", new List<string>() { "Beggs & Brill", "Lockhart & Martinelli", "Petalas & Aziz" }, (int)pipe.SelectedFlowPackage, (sender, e) => pipe.SelectedFlowPackage = (FlowPackage)sender.SelectedIndex);
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, pipe.OutletPressure),
                                 (TextBox arg3, EventArgs ev) =>
                                 {
@@ -2307,7 +2330,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, pipe.OutletTemperature),
@@ -2322,7 +2345,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Convergence Tolerance (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, pipe.TolP),
@@ -2337,7 +2360,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Convergence Tolerance"));
                     s.CreateAndAddTextBoxRow(container, nf, "Temperature Convergence Tolerance (" + su.deltaT + ")", cv.ConvertFromSI(su.deltaT, pipe.TolT),
@@ -2352,13 +2375,13 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Temperature Convergence Tolerance"));
                     s.CreateAndAddCheckBoxRow(container, "Include Joule-Thomson Effect", pipe.IncludeEmulsion, (CheckBox arg2, EventArgs ev) =>
                     {
                         pipe.IncludeEmulsion = arg2.Checked.GetValueOrDefault();
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Include Joule-Thomson Effect"));
                     break;
@@ -2367,7 +2390,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddCheckBoxRow(container, "Override Separation Pressure", vessel.OverrideP, (CheckBox arg2, EventArgs ev) =>
                     {
                         vessel.OverrideP = arg2.Checked.GetValueOrDefault();
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Override Separation Pressure"));
                     s.CreateAndAddTextBoxRow(container, nf, "Separation Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, vessel.FlashPressure),
@@ -2382,13 +2405,13 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Separation Pressure"));
                     s.CreateAndAddCheckBoxRow(container, "Override Separation Temperature", vessel.OverrideT, (CheckBox arg2, EventArgs ev) =>
                     {
                         vessel.OverrideT = arg2.Checked.GetValueOrDefault();
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Override Separation Temperature"));
                     s.CreateAndAddTextBoxRow(container, nf, "Separation Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, vessel.FlashTemperature),
@@ -2403,13 +2426,13 @@ namespace DWSIM.UI.Desktop.Editors
                                     {
                                         arg3.TextColor = (Colors.Red);
                                     }
-                                }, () => CallSolverIfNeeded());
+                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Separation Temperature"));
                     s.CreateAndAddLabelRow(container, "Sizing Parameters");
-                    s.CreateAndAddTextBoxRow(container, nf, "Length/Height over Diameter Ratio", vessel.DimensionRatio, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) vessel.DimensionRatio = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Surge Factor", vessel.SurgeFactor, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) vessel.SurgeFactor = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Liquid Residence Time (" + su.time + ")", cv.ConvertFromSI(su.time, vessel.ResidenceTime), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) vessel.DimensionRatio = cv.ConvertToSI(su.time, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Length/Height over Diameter Ratio", vessel.DimensionRatio, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) vessel.DimensionRatio = sender.Text.ParseExpressionToDouble(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Surge Factor", vessel.SurgeFactor, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) vessel.SurgeFactor = sender.Text.ParseExpressionToDouble(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Liquid Residence Time (" + su.time + ")", cv.ConvertFromSI(su.time, vessel.ResidenceTime), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) vessel.DimensionRatio = cv.ConvertToSI(su.time, sender.Text.ParseExpressionToDouble()); });
                     break;
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
@@ -2607,19 +2630,19 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddLabelRow(container, "Input Parameters");
                     foreach (var par in exceluo.InputParams.Values)
                     {
-                        s.CreateAndAddTextBoxRow(container, nf, par.Name + " (" + par.Unit + ")", par.Value, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) par.Value = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                        s.CreateAndAddTextBoxRow(container, nf, par.Name + " (" + par.Unit + ")", par.Value, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) par.Value = sender.Text.ParseExpressionToDouble(); });
                     }
                     break;
                 case ObjectType.Filter:
                     var filter = (Filter)SimObject;
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", new List<string> { "Sizing", "Evaluation" }, (int)filter.CalcMode, (sender, e) => filter.CalcMode = (Filter.CalculationMode)sender.SelectedIndex);
-                    s.CreateAndAddTextBoxRow(container, nf, "Medium Resistance (" + su.mediumresistance + ")", cv.ConvertFromSI(su.mediumresistance, filter.FilterMediumResistance), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.FilterMediumResistance = cv.ConvertToSI(su.mediumresistance, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Cake Resistance (" + su.cakeresistance + ")", cv.ConvertFromSI(su.cakeresistance, filter.SpecificCakeResistance), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.SpecificCakeResistance = cv.ConvertToSI(su.cakeresistance, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Cycle Time (" + su.time + ")", cv.ConvertFromSI(su.time, filter.FilterCycleTime), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.FilterCycleTime = cv.ConvertToSI(su.time, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Total Filtering Area (" + su.area + ")", cv.ConvertFromSI(su.area, filter.TotalFilterArea), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.TotalFilterArea = cv.ConvertToSI(su.area, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, filter.PressureDrop), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.PressureDrop = cv.ConvertToSI(su.deltaP, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Cake Humidity (%)", filter.CakeRelativeHumidity, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.CakeRelativeHumidity = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Submerged Fraction", filter.SubmergedAreaFraction, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.SubmergedAreaFraction = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Medium Resistance (" + su.mediumresistance + ")", cv.ConvertFromSI(su.mediumresistance, filter.FilterMediumResistance), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.FilterMediumResistance = cv.ConvertToSI(su.mediumresistance, sender.Text.ParseExpressionToDouble()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Cake Resistance (" + su.cakeresistance + ")", cv.ConvertFromSI(su.cakeresistance, filter.SpecificCakeResistance), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.SpecificCakeResistance = cv.ConvertToSI(su.cakeresistance, sender.Text.ParseExpressionToDouble()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Cycle Time (" + su.time + ")", cv.ConvertFromSI(su.time, filter.FilterCycleTime), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.FilterCycleTime = cv.ConvertToSI(su.time, sender.Text.ParseExpressionToDouble()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Total Filtering Area (" + su.area + ")", cv.ConvertFromSI(su.area, filter.TotalFilterArea), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.TotalFilterArea = cv.ConvertToSI(su.area, sender.Text.ParseExpressionToDouble()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, filter.PressureDrop), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.PressureDrop = cv.ConvertToSI(su.deltaP, sender.Text.ParseExpressionToDouble()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Cake Humidity (%)", filter.CakeRelativeHumidity, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.CakeRelativeHumidity = sender.Text.ParseExpressionToDouble(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Submerged Fraction", filter.SubmergedAreaFraction, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) filter.SubmergedAreaFraction = sender.Text.ParseExpressionToDouble(); });
                     break;
                 case ObjectType.FlowsheetUO:
                     var fsuo = (Flowsheet)SimObject;
@@ -2678,32 +2701,32 @@ namespace DWSIM.UI.Desktop.Editors
                                 {
                                     fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].SetPropertyValue(item.Value.ObjectProperty, sender.Text.ParseExpressionToDouble(), su);
                                 };
-                            }, () => CallSolverIfNeeded());
+                            });
                         }
                     }
                     break;
                 case ObjectType.Tank:
                     var tank = (Tank)SimObject;
-                    s.CreateAndAddTextBoxRow(container, nf, "Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, tank.Volume), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) tank.Volume = cv.ConvertToSI(su.volume, sender.Text.ParseExpressionToDouble()); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, tank.Volume), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) tank.Volume = cv.ConvertToSI(su.volume, sender.Text.ParseExpressionToDouble()); });
                     break;
                 case ObjectType.OrificePlate:
                     var op = (OrificePlate)SimObject;
                     s.CreateAndAddDropDownRow(container, "Pressure Tappings", new List<string>() { "Corner", "Flange", "Radius" }, (int)op.OrifType, (sender, e) =>
                     {
                         op.OrifType = (DWSIM.UnitOperations.UnitOperations.OrificePlate.OrificeType)sender.SelectedIndex;
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddTextBoxRow(container, nf, "Orifice Diameter (" + su.diameter + ")", op.OrificeDiameter, (sender, e) =>
                     {
                         if (sender.Text.IsValidDoubleExpression()) op.OrificeDiameter = sender.Text.ParseExpressionToDouble();
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddTextBoxRow(container, nf, "Internal Pipe Diameter (" + su.diameter + ")", op.InternalPipeDiameter, (sender, e) =>
                     {
                         if (sender.Text.IsValidDoubleExpression()) op.InternalPipeDiameter = sender.Text.ParseExpressionToDouble();
-                    }, () => CallSolverIfNeeded());
+                    });
                     s.CreateAndAddTextBoxRow(container, nf, "Correction Factor", op.CorrectionFactor, (sender, e) =>
                     {
                         if (sender.Text.IsValidDoubleExpression()) op.CorrectionFactor = sender.Text.ParseExpressionToDouble();
-                    }, () => CallSolverIfNeeded());
+                    });
                     break;
             }
             s.CreateAndAddEmptySpace(container);
