@@ -13,6 +13,9 @@ using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 
 using DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe;
 using DWSIM.UnitOperations.UnitOperations;
+using DWSIM.ExtensionMethods;
+using DWSIM.CrossPlatform.UI.Controls.ReoGrid.DataFormat;
+using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -108,6 +111,83 @@ namespace DWSIM.UI.Desktop.Editors
                              }
                          }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
+            s.CreateAndAddCheckBoxRow(container, "Use Tabulated Data", profile.UseUserDefinedU, (chk, e) => profile.UseUserDefinedU = chk.Checked.GetValueOrDefault());
+
+            var gridcontrol = GridControl.GetGridControl();
+
+            var grid = gridcontrol.GridControl;
+
+            var sheet = grid.Worksheets[0];
+
+            sheet.SetRows(100);
+            sheet.SetCols(3);
+            sheet.SetColumnsWidth(0, 3, 120);
+
+            sheet.ColumnHeaders[0].Text = String.Format("Length/Depth ({0})", su.distance);
+            sheet.ColumnHeaders[1].Text = String.Format("Ambient Temp. ({0})", su.temperature);
+            sheet.ColumnHeaders[2].Text = String.Format("Overall HTC ({0})", su.heat_transf_coeff);
+
+            sheet.SetRangeDataFormat(0, 0, 100, 3, CellDataFormatFlag.Number,
+            new NumberDataFormatter.NumberFormatArgs
+            {
+                DecimalPlaces = 4,
+                UseSeparator = true,
+                NegativeStyle = NumberDataFormatter.NumberNegativeStyle.Minus
+            });
+            sheet.SetRangeStyles(0, 0, 100, 3, new WorksheetRangeStyle
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Right
+            });
+            sheet.SetRangeStyles(0, 0, 100, 3, new WorksheetRangeStyle
+            {
+                Flag = PlainStyleFlag.Padding,
+                HAlign = ReoGridHorAlign.Right
+            });
+
+            grid.Height = 300;
+
+            s.CreateAndAddControlRow(container, gridcontrol);
+
+            for (int i = 0; i < profile.UserDefinedU_Length.Count; i++)
+            {
+                sheet.SetCellData(i, 0, profile.UserDefinedU_Length[i].ConvertFromSI(su.distance));
+            }
+            for (int i = 0; i < profile.UserDefinedU_Temp.Count; i++)
+            {
+                sheet.SetCellData(i, 1, profile.UserDefinedU_Temp[i].ConvertFromSI(su.temperature));
+            }
+            for (int i = 0; i < profile.UserDefinedU_U.Count; i++)
+            {
+                sheet.SetCellData(i, 2, profile.UserDefinedU_U[i].ConvertFromSI(su.heat_transf_coeff));
+            }
+
+            sheet.CellDataChanged += (s, e) =>
+            {
+                profile.UserDefinedU_Length.Clear();
+                profile.UserDefinedU_Temp.Clear();
+                profile.UserDefinedU_U.Clear();
+                for (int i = 0; i < 100; i++)
+                {
+                    var data1 = sheet.GetCellData(i, 0);
+                    var data2 = sheet.GetCellData(i, 1);
+                    var data3 = sheet.GetCellData(i, 2);
+                    if (data1 != null && data2 != null && data3 != null)
+                    {
+                        try
+                        {
+                            profile.UserDefinedU_Length.Add(data1.ToString().ToDoubleFromCurrent().ConvertToSI(su.distance));
+                            profile.UserDefinedU_Temp.Add(data2.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature));
+                            profile.UserDefinedU_U.Add(data3.ToString().ToDoubleFromCurrent().ConvertToSI(su.heat_transf_coeff));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(String.Format("Error on data table: {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxType.Error);
+                        }
+                    }
+                }
+            };
+
             s.CreateAndAddLabelRow(container, "Defined Heat Exchange Parameters");
 
             s.CreateAndAddTextBoxRow(container, nf, "Heat Exchanged (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, profile.Calor_trocado),
@@ -154,7 +234,7 @@ namespace DWSIM.UI.Desktop.Editors
                 profile.Incluir_isolamento = sender.Checked.GetValueOrDefault();
             });
 
-            s.CreateAndAddDropDownRow(container, "Insulation Material",  Shared.StringArrays.insulationmaterial().ToList(),
+            s.CreateAndAddDropDownRow(container, "Insulation Material", Shared.StringArrays.insulationmaterial().ToList(),
                                     profile.Material, (sender, e) =>
                                      {
                                          profile.Material = sender.SelectedIndex;
@@ -225,7 +305,7 @@ namespace DWSIM.UI.Desktop.Editors
              }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)SimObject.GetFlowsheet()).HighLevelSolve.Invoke(); });
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);
-        
+
         }
     }
 }

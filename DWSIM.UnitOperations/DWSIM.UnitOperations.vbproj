@@ -542,6 +542,12 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.Designer.vb">
+      <DependentUpon>EditingForm_Pipe_UserDefinedU.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Pump_Curves.designer.vb">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </Compile>
@@ -1153,6 +1159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.resx">
+      <DependentUpon>EditingForm_Pipe_UserDefinedU.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pump_Curves.de.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>

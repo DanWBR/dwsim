@@ -15,18 +15,21 @@ Public Class PipeThermalProfileEditor
     Dim loaded As Boolean = False
 
     Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
+
         If RadioButton9.Checked = True Then
 
             Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC
             TextBoxCGTC.Enabled = True
             TextBoxTA.Enabled = True
             TextBoxTAG.Enabled = True
+            chkUserDefU.Enabled = True
 
         Else
 
             TextBoxCGTC.Enabled = False
             TextBoxTA.Enabled = False
             TextBoxTAG.Enabled = False
+            chkUserDefU.Enabled = False
 
         End If
     End Sub
@@ -174,6 +177,7 @@ Public Class PipeThermalProfileEditor
                 Me.CheckBoxIPT.Checked = .Incluir_paredes
                 Me.TextBoxTAG.Text = (cv.ConvertFromSI(su.deltaT, .AmbientTemperatureGradient) / cv.ConvertFromSI(su.distance, 1)).ToString(form.FlowsheetOptions.NumberFormat)
                 Me.TextBoxTAG2.Text = (cv.ConvertFromSI(su.deltaT, .AmbientTemperatureGradient_EstimateHTC) / cv.ConvertFromSI(su.distance, 1)).ToString(form.FlowsheetOptions.NumberFormat)
+                chkUserDefU.Checked = .UseUserDefinedU
             End With
         End If
         loaded = True
@@ -331,5 +335,15 @@ Public Class PipeThermalProfileEditor
         End If
     End Sub
 
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkUserDefU.CheckedChanged
+        Profile.UseUserDefinedU = chkUserDefU.Checked
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim fu As New EditingForm_Pipe_UserDefinedU
+        fu.Profile = Profile
+        fu.Flowsheet = form
+        fu.ShowDialog()
+    End Sub
 End Class
 

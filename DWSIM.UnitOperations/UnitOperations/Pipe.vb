@@ -397,14 +397,6 @@ Namespace UnitOperations
                 Me.ThermalProfile.Calor_trocado = 0.0#
             End If
 
-            If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
-                Text = Me.ThermalProfile.Temp_amb_definir
-                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient
-            Else
-                Text = Me.ThermalProfile.Temp_amb_estimar
-                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC
-            End If
-
             'Calcular DP
             Dim Tpe, Ppe, Tspec, Pspec As Double
             Dim resv, resf As Object
@@ -528,6 +520,20 @@ Namespace UnitOperations
                         End With
 
                         Do
+
+                            If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
+                                If ThermalProfile.UseUserDefinedU Then
+                                    Text = MathNet.Numerics.Interpolate.Linear(ThermalProfile.UserDefinedU_Length,
+                                                                                        ThermalProfile.UserDefinedU_Temp).Interpolate(currL)
+                                    dText_dL = 0.0
+                                Else
+                                    Text = Me.ThermalProfile.Temp_amb_definir
+                                    dText_dL = Me.ThermalProfile.AmbientTemperatureGradient
+                                End If
+                            Else
+                                Text = Me.ThermalProfile.Temp_amb_estimar
+                                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC
+                            End If
 
                             IObj3?.SetCurrent
 
@@ -698,7 +704,12 @@ Namespace UnitOperations
 
                                     If Not Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
                                         If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
-                                            U = Me.ThermalProfile.CGTC_Definido
+                                            If ThermalProfile.UseUserDefinedU Then
+                                                U = MathNet.Numerics.Interpolate.Linear(ThermalProfile.UserDefinedU_Length,
+                                                                                        ThermalProfile.UserDefinedU_U).Interpolate(currL)
+                                            Else
+                                                U = Me.ThermalProfile.CGTC_Definido
+                                            End If
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                         ElseIf Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos

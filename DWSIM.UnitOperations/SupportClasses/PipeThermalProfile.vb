@@ -11,6 +11,11 @@
         Protected m_meio As Integer = 0
         Protected m_incluir_paredes, m_incluir_cti, m_incluir_cte, m_incluir_isolamento As Boolean
 
+        Public Property UseUserDefinedU As Boolean = False
+        Public Property UserDefinedU_Length As New List(Of Double)
+        Public Property UserDefinedU_Temp As New List(Of Double)
+        Public Property UserDefinedU_U As New List(Of Double)
+
         Public Sub New()
             With Me
                 .m_temp_amb_definir = 298.15
