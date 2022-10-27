@@ -943,7 +943,11 @@ Public Class FormMain
                 End If
             End If
 
+#If Not LINUX Then
+
             ToolStripManager.RevertMerge(ToolStrip1)
+
+#End If
 
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
                 ToolStripManager.Merge(DirectCast(ActiveMdiChild, FormFlowsheet).ToolStrip1, ToolStrip1)
