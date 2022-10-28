@@ -690,7 +690,7 @@ Public Class MaterialStreamEditor
 
                 End If
 
-                If MatStream.PropertyPackage.IsElectrolytePP Then
+                If MatStream.PropertyPackage IsNot Nothing AndAlso MatStream.PropertyPackage.IsElectrolytePP Then
 
                     refval = MatStream.Phases(3).Properties.pH.GetValueOrDefault
                     .Add(New Object() {"pH", refval, ""})
