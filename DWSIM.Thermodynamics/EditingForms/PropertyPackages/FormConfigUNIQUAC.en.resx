@@ -166,6 +166,9 @@
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>853, 364</value>
   </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>740, 17</value>
+  </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Estimate</value>
   </data>
@@ -173,10 +176,10 @@
     <value>8, 54</value>
   </data>
   <data name="KryptonDataGridView2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>885, 311</value>
+    <value>826, 298</value>
   </data>
   <data name="LabelWithDivider2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 10</value>
+    <value>864, 10</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>336, 13</value>
@@ -185,7 +188,7 @@
     <value>Activate cell editing by clicking on it with the left mouse button.</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 371</value>
+    <value>874, 358</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
@@ -195,6 +198,9 @@
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Action in deployment.</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>853, 364</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>855, 390</value>

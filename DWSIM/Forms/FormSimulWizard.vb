@@ -65,9 +65,13 @@ Public Class FormSimulWizard
             txtSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
             CompoundList = New List(Of String)()
             Indexes = New Dictionary(Of String, Integer)
+            Dim rowlist As New List(Of DataGridViewRow)
             ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+                Dim r As New DataGridViewRow()
+                Dim data = New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
+                r.CreateCells(ogc1, data)
+                rowlist.Add(r)
                 CompoundList.Add(comp.Name)
                 CompoundList.Add(comp.CAS_Number)
                 CompoundList.Add(comp.Formula)
@@ -76,14 +80,17 @@ Public Class FormSimulWizard
                 If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
             For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
-                CompoundList.Add(comp.Name)
+                Dim r As New DataGridViewRow()
+                Dim data = New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
+                r.CreateCells(ogc1, data)
+                rowlist.Add(r)
                 CompoundList.Add(comp.CAS_Number)
                 CompoundList.Add(comp.Formula)
                 If Not Indexes.ContainsKey(comp.Name) Then Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
                 If Not Indexes.ContainsKey(comp.CAS_Number) Then Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
                 If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
+            ogc1.Rows.AddRange(rowlist.ToArray())
             txtSearch.AutoCompleteCustomSource.AddRange(CompoundList.ToArray())
 
             'property packages
@@ -146,6 +153,8 @@ Public Class FormSimulWizard
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
+        ogc1.SuspendLayout()
+
         Try
 
             ogc1.ClearSelection()
@@ -174,7 +183,7 @@ Public Class FormSimulWizard
                         End If
                     End If
                 Next
-                ogc1.Sort(colName, System.ComponentModel.ListSortDirection.Ascending)
+                'ogc1.Sort(colName, System.ComponentModel.ListSortDirection.Ascending)
                 If ogc1.SelectedRows.Count > 0 Then
                     ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
                 End If
@@ -183,6 +192,8 @@ Public Class FormSimulWizard
         Catch ex As Exception
 
         End Try
+
+        ogc1.ResumeLayout()
 
     End Sub
 
@@ -1351,6 +1362,12 @@ Public Class FormSimulWizard
     Private Sub WizardPage2_Commit(sender As Object, e As AeroWizard.WizardPageConfirmEventArgs) Handles WizardPage2.Commit
 
         SetupPPRecommendations()
+
+    End Sub
+
+    Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
+
+        txtSearch.Text = ""
 
     End Sub
 

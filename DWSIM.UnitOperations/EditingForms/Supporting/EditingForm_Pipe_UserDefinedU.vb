@@ -46,15 +46,6 @@ Public Class EditingForm_Pipe_UserDefinedU
                 .Flag = PlainStyleFlag.HorizontalAlign,
                 .HAlign = ReoGridHorAlign.Right
             })
-            .SetRangeStyles(0, 0, 100, 3, New WorksheetRangeStyle With {
-                .Flag = PlainStyleFlag.Padding,
-                .HAlign = ReoGridHorAlign.Right
-            })
-            .SetRangeStyles(0, 0, 100, 3, New WorksheetRangeStyle With {
-                .Flag = PlainStyleFlag.FontAll,
-                .FontName = SystemFonts.MessageBoxFont.Name,
-                .FontSize = SystemFonts.MessageBoxFont.Size
-            })
             For i = 0 To profile.UserDefinedU_Length.Count - 1
                 .SetCellData(i, 0, profile.UserDefinedU_Length(i).ConvertFromSI(units.distance))
                 .SetCellData(i, 1, profile.UserDefinedU_Temp(i).ConvertFromSI(units.temperature))

@@ -591,6 +591,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.resx">
       <DependentUpon>FormConfigDH.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.en.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>

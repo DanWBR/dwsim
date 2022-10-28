@@ -1670,7 +1670,7 @@ Temperature of Fusion is actually the Triple Point Temperature as provided by Co
 Normal Boiling Point is calculated at 1 atm or at the minimum CoolProp pressure for the compound if higher.</Comments>
     <CompCreatorStudyFile>
     </CompCreatorStudyFile>
-    <Formula>H2</Formula>
+    <Formula>D2</Formula>
     <SMILES>
     </SMILES>
     <Molar_Weight>4.0282</Molar_Weight>
@@ -2570,7 +2570,7 @@ Temperature of Fusion is actually the Triple Point Temperature as provided by Co
 Normal Boiling Point is calculated at 1 atm or at the minimum CoolProp pressure for the compound if higher.</Comments>
     <CompCreatorStudyFile>
     </CompCreatorStudyFile>
-    <Formula>D2O1</Formula>
+    <Formula>D2O</Formula>
     <SMILES>
     </SMILES>
     <Molar_Weight>20.027508</Molar_Weight>

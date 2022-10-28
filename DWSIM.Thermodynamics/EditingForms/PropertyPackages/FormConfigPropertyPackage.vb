@@ -222,12 +222,12 @@ Public Class FormConfigPropertyPackage
             })
             .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
                 .Flag = PlainStyleFlag.Padding,
-                .HAlign = 3
+                .Padding = New PaddingValue(3)
             })
             .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
                 .Flag = PlainStyleFlag.FontAll,
                 .FontName = SystemFonts.MessageBoxFont.Name,
-                .FontSize = SystemFonts.MessageBoxFont.Size
+                .FontSize = SystemFonts.MessageBoxFont.SizeInPoints
             })
             AddHandler .CellDataChanged,
                 Sub(sender, e)

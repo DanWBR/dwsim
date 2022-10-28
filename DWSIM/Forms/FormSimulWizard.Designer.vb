@@ -34,6 +34,7 @@ Partial Class FormSimulWizard
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.WizardPage2 = New AeroWizard.WizardPage()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.txtAdded = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -152,6 +153,7 @@ Partial Class FormSimulWizard
         'WizardPage2
         '
         resources.ApplyResources(Me.WizardPage2, "WizardPage2")
+        Me.WizardPage2.Controls.Add(Me.Button5)
         Me.WizardPage2.Controls.Add(Me.txtAdded)
         Me.WizardPage2.Controls.Add(Me.Label6)
         Me.WizardPage2.Controls.Add(Me.Button4)
@@ -163,6 +165,14 @@ Partial Class FormSimulWizard
         Me.WizardPage2.Name = "WizardPage2"
         Me.WizardPage2.NextPage = Me.WizardPage3
         Me.ToolTip1.SetToolTip(Me.WizardPage2, resources.GetString("WizardPage2.ToolTip"))
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Image = Global.DWSIM.My.Resources.Resources.cross
+        Me.Button5.Name = "Button5"
+        Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'txtAdded
         '
@@ -788,4 +798,5 @@ Partial Class FormSimulWizard
     Friend WithEvents Column10 As DataGridViewImageColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents Button5 As Button
 End Class
