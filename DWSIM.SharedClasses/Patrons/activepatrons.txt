@@ -7,6 +7,7 @@ Anders Andreasen
 Andrew Dickson
 Bruce Rising
 Bryan Evans
+Camilo Gantiva
 Carlos G. C. Reetz
 Casey Houston
 Chris Verbert
@@ -21,8 +22,6 @@ Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
-Filippo Borroni
-Frank Mittricker
 Gokhan Candan 
 George Brindle
 Gerry Agnew
@@ -32,7 +31,6 @@ Henk Fikkert
 Hep Ingham
 H-Tec Systems GmbH
 Hurudza 
-Jan Boshoff
 Javier Fontalvo
 Jens Greimeier
 Jeremiah McAfoose
@@ -50,7 +48,6 @@ Marcos AF Silva
 Marko Likon
 Martin Heiser
 Masahiro Sakai
-Matt Hogg
 Michael Papantoniou
 Nicolas Spogis
 Odnei Macalossi
@@ -62,7 +59,6 @@ Rafael Melo-González
 Richard Huntington
 Roland Berger
 Ronald J. Dunbar
-Ruberd Barry
 Rupert Easter
 Ryszard Sadowski
 Shankar Ananth
