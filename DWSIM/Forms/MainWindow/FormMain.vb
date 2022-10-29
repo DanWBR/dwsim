@@ -2362,7 +2362,7 @@ Public Class FormMain
                 form.FormFilesExplorer?.Show(form.dckPanel)
                 form.FormProps?.Show(form.dckPanel)
 #If LINUX = False Then
-                form.FormIPyConsole?.Show(form.dckPanel)
+                'form.FormIPyConsole?.Show(form.dckPanel)
 #End If
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
@@ -2915,7 +2915,7 @@ Public Class FormMain
                 form.FormSurface.Show(form.dckPanel)
                 form.FormDynamics.Show(form.dckPanel)
                 form.FormFilesExplorer.Show(form.dckPanel)
-                form.FormIPyConsole.Show(form.dckPanel)
+                'form.FormIPyConsole.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception

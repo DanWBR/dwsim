@@ -40,7 +40,7 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
-        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Valve
 
@@ -54,7 +54,29 @@ Namespace UnitOperations
 
         Public Property Kv As Double = 100.0#
 
-        Public Property OpeningPct As Double = 50.0
+        Private _opening As Double = 50.0
+
+        Public Property OpeningPct As Double
+            Get
+                Return _opening
+            End Get
+            Set(value As Double)
+                If FlowSheet IsNot Nothing Then
+                    If FlowSheet.DynamicMode AndAlso DelayedOpenings IsNot Nothing Then
+                        Dim AD As Double = GetDynamicProperty("Actuator Delay")
+                        If AD > 0.0 Then
+                            DelayedOpenings.Enqueue(value)
+                        Else
+                            _opening = value
+                        End If
+                    Else
+                        _opening = value
+                    End If
+                Else
+                    _opening = value
+                End If
+            End Set
+        End Property
 
         Public Property xT As Double = 0.75
 
@@ -81,6 +103,10 @@ Namespace UnitOperations
         Public Property OpeningKvRelDataTableY As New List(Of Double)
 
         Public Property FlowCoefficient As FlowCoefficientType = FlowCoefficientType.Kv
+
+        Private ActuatorTimeToNext As New DateTime
+
+        Private DelayedOpenings As New Queue(Of Double)
 
         Public Enum FlowCoefficientType
             Kv = 0
@@ -167,7 +193,7 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            'AddDynamicProperty("Actuator Delay", "Actuator Delay Description", 0, UnitOfMeasure.time)
+            AddDynamicProperty("Actuator Delay", "Valve Actuator Delay", 0, UnitOfMeasure.time, 1.0.GetType())
 
         End Sub
 
@@ -177,6 +203,28 @@ Namespace UnitOperations
             Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
 
             If Not integrator.ShouldCalculatePressureFlow Then Exit Sub
+
+            Dim AD As Double = GetDynamicProperty("Actuator Delay")
+
+            If AD > 0.0 Then
+
+                Dim DT0 = (integrator.CurrentTime - New Date).TotalSeconds
+
+                If DT0 = 0.0 Then
+                    ActuatorTimeToNext = New Date()
+                    DelayedOpenings = New Queue(Of Double)
+                Else
+                    ActuatorTimeToNext = ActuatorTimeToNext.Add(integrator.IntegrationStep)
+                End If
+
+                Dim DT = (ActuatorTimeToNext - New Date).TotalSeconds
+
+                If DT >= AD AndAlso DelayedOpenings.Count > 0 Then
+                    ActuatorTimeToNext = New Date()
+                    OpeningPct = DelayedOpenings.Dequeue()
+                End If
+
+            End If
 
             Select Case CalcMode
 

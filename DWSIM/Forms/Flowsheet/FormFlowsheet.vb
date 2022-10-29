@@ -342,7 +342,7 @@ Public Class FormFlowsheet
             'FormIntegratorControls.Show(dckPanel)
             FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
-            FormIPyConsole.Show(dckPanel)
+            'FormIPyConsole.Show(dckPanel)
 
             FormSurface.Activate()
 
@@ -4088,6 +4088,12 @@ Public Class FormFlowsheet
     Private Sub CriarPseudocomponentesEmBateladaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarPseudocomponentesEmBateladaToolStripMenuItem.Click
         Dim fba As New FormBulkAddPseudos With {.Flowsheet = Me}
         fba.Show()
+    End Sub
+
+    Private Sub ConsoleInterativoIronPtyhonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsoleInterativoIronPtyhonToolStripMenuItem.Click
+
+        DisplayForm(Me.FormIPyConsole)
+
     End Sub
 
     Public Async Sub DisplayHTML(title As String, htmlcontent As String)

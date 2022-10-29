@@ -273,6 +273,8 @@ Public Class FlowsheetSurface_SkiaSharp
         Me.MergeStreamsToolStripMenuItem.Visible = False
         Me.SplitAndInsertRecycleMenuItem.Visible = False
 
+        UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
+
         Me.SplitAndInsertValveTSMI.Visible = False
 
         Me.AtivadoToolStripMenuItem.Checked = FlowsheetSurface.SelectedObject.Active
@@ -462,6 +464,8 @@ Public Class FlowsheetSurface_SkiaSharp
             Else
                 Me.HorizontalmenteToolStripMenuItem.Checked = False
             End If
+
+            UpgradeDistillationColumnToProToolStripMenuItem.Visible = True
 
         Else
 

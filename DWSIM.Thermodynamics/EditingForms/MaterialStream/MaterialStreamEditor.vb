@@ -1239,13 +1239,16 @@ Public Class MaterialStreamEditor
             propname = "PROP_MS_27"
         End If
 
-        MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
-                                                                .ObjID = MatStream.Name,
-                                                                .OldValue = oldvalue,
-                                                                .NewValue = newvalue,
-                                                                .PropertyName = propname,
-                                                                .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
-                                                                .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
+        Try
+            MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
+                                                            .ObjID = MatStream.Name,
+                                                            .OldValue = oldvalue,
+                                                            .NewValue = newvalue,
+                                                            .PropertyName = propname,
+                                                            .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
+                                                            .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
+        Catch ex As Exception
+        End Try
 
         RequestCalc()
 

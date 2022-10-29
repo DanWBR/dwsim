@@ -54,11 +54,11 @@ Partial Class FormFlowsheet
         Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompoundCreatorWizardTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CriadorDeComponentesSólidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PropriedadesDasSubstanciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CriarPseudocomponentesEmBateladaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PropriedadesDasSubstanciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InspectorTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.ProToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,6 +87,7 @@ Partial Class FormFlowsheet
         Me.varpaneltsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.COObjTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleOutputTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsoleInterativoIronPtyhonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToggleWeatherPanelVisibilityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLayoutTSMI = New System.Windows.Forms.ToolStripMenuItem()
@@ -353,14 +354,6 @@ Partial Class FormFlowsheet
         Me.CriadorDeComponentesSólidosToolStripMenuItem.MergeIndex = 0
         Me.CriadorDeComponentesSólidosToolStripMenuItem.Name = "CriadorDeComponentesSólidosToolStripMenuItem"
         '
-        'PropriedadesDasSubstanciasToolStripMenuItem
-        '
-        resources.ApplyResources(Me.PropriedadesDasSubstanciasToolStripMenuItem, "PropriedadesDasSubstanciasToolStripMenuItem")
-        Me.PropriedadesDasSubstanciasToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
-        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeIndex = 0
-        Me.PropriedadesDasSubstanciasToolStripMenuItem.Name = "PropriedadesDasSubstanciasToolStripMenuItem"
-        '
         'CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem
         '
         resources.ApplyResources(Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, "CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem")
@@ -392,6 +385,14 @@ Partial Class FormFlowsheet
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.MergeIndex = 3
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Name = "GerenciadorDeAmostrasDePetroleoToolStripMenuItem"
+        '
+        'PropriedadesDasSubstanciasToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PropriedadesDasSubstanciasToolStripMenuItem, "PropriedadesDasSubstanciasToolStripMenuItem")
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeIndex = 0
+        Me.PropriedadesDasSubstanciasToolStripMenuItem.Name = "PropriedadesDasSubstanciasToolStripMenuItem"
         '
         'InspectorTSMI
         '
@@ -555,7 +556,7 @@ Partial Class FormFlowsheet
         'ShowTSMI
         '
         resources.ApplyResources(Me.ShowTSMI, "ShowTSMI")
-        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToggleWeatherPanelVisibilityToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
+        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ConsoleInterativoIronPtyhonToolStripMenuItem, Me.ToggleWeatherPanelVisibilityToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ShowTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ShowTSMI.MergeIndex = 9
         Me.ShowTSMI.Name = "ShowTSMI"
@@ -576,6 +577,11 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.ConsoleOutputTSMI, "ConsoleOutputTSMI")
         Me.ConsoleOutputTSMI.Name = "ConsoleOutputTSMI"
+        '
+        'ConsoleInterativoIronPtyhonToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ConsoleInterativoIronPtyhonToolStripMenuItem, "ConsoleInterativoIronPtyhonToolStripMenuItem")
+        Me.ConsoleInterativoIronPtyhonToolStripMenuItem.Name = "ConsoleInterativoIronPtyhonToolStripMenuItem"
         '
         'ToggleWeatherPanelVisibilityToolStripMenuItem
         '
@@ -955,4 +961,5 @@ Partial Class FormFlowsheet
     Friend WithEvents CriadorDeComponentesSólidosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToggleWeatherPanelVisibilityToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CriarPseudocomponentesEmBateladaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ConsoleInterativoIronPtyhonToolStripMenuItem As ToolStripMenuItem
 End Class

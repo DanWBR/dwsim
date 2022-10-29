@@ -172,8 +172,6 @@ Public Class EditingForm_Valve
 
             tbCharParam.Text = .CharacteristicParameter.ToString(nf)
 
-            Panel1.Enabled = False
-
             For i = 0 To .OpeningKvRelDataTableX.Count - 1
                 grid1.Worksheets(0).SetCellData(i, 0, .OpeningKvRelDataTableX(i))
             Next
@@ -181,9 +179,11 @@ Public Class EditingForm_Valve
                 grid1.Worksheets(0).SetCellData(i, 1, .OpeningKvRelDataTableY(i))
             Next
 
-            cbOpeningKvRelType.SelectedIndex = .DefinedOpeningKvRelationShipType
-
             chkEnableKvOpRel.Checked = uobj.EnableOpeningKvRelationship
+
+            Panel1.Enabled = uobj.EnableOpeningKvRelationship
+
+            cbOpeningKvRelType.SelectedIndex = .DefinedOpeningKvRelationShipType
 
         End With
 
