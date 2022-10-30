@@ -71,6 +71,7 @@ Public Class FormSimulWizard
                 Dim r As New DataGridViewRow()
                 Dim data = New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
                 r.CreateCells(ogc1, data)
+                r.Height = 23 * Settings.DpiScale
                 rowlist.Add(r)
                 CompoundList.Add(comp.Name)
                 CompoundList.Add(comp.CAS_Number)
@@ -83,6 +84,7 @@ Public Class FormSimulWizard
                 Dim r As New DataGridViewRow()
                 Dim data = New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
                 r.CreateCells(ogc1, data)
+                r.Height = 23 * Settings.DpiScale
                 rowlist.Add(r)
                 CompoundList.Add(comp.CAS_Number)
                 CompoundList.Add(comp.Formula)
