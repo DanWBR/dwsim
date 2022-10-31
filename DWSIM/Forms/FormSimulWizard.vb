@@ -245,7 +245,8 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-        If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
+
+        If Integer.TryParse(DataGridViewPP.SelectedRows(0).Cells(0).Value, New Integer) Then
             MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -1149,7 +1150,7 @@ Public Class FormSimulWizard
             'Water + Hydrocarbons
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.EOS, PackageType.CorrespondingStates
@@ -1162,16 +1163,24 @@ Public Class FormSimulWizard
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.EOS, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.exclamation
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 And names.Where(Function(x) x.Contains("ane") Or x.Contains("ene") Or x.Contains("ine")).Count > 0 Then
             'Aldehydes + Hydrocarbons
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
@@ -1184,16 +1193,24 @@ Public Class FormSimulWizard
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
             'Alcohols + Hydrocarbons
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
@@ -1206,16 +1223,24 @@ Public Class FormSimulWizard
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
             'Water + C4+ Alcohols
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
@@ -1228,16 +1253,24 @@ Public Class FormSimulWizard
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         ElseIf names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
             'Hydrocarbons
             rbVLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.EOS, PackageType.CorrespondingStates, PackageType.VaporPressure
@@ -1250,38 +1283,54 @@ Public Class FormSimulWizard
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.EOS, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
             'Alcohols 
             rbVLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            ChangeRowForeColor(row, Color.DarkGreen)
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 Then
             'Aldehydes
             rbVLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(0).Value <> "" Then
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
                     Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                     Select Case pp.PackageType
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
@@ -1294,9 +1343,17 @@ Public Class FormSimulWizard
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.exclamation
-                    ChangeRowForeColor(row, Color.DarkGreen)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         Else
@@ -1349,6 +1406,7 @@ Public Class FormSimulWizard
             Next
         End If
 
+        DataGridViewPP.Sort(DataGridViewPP.Columns(4), System.ComponentModel.ListSortDirection.Ascending)
         DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
 
     End Sub
