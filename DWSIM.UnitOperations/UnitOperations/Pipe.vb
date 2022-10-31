@@ -705,7 +705,7 @@ Namespace UnitOperations
                                     If Not Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
                                         If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
                                             If ThermalProfile.UseUserDefinedU Then
-                                                U = MathNet.Numerics.Interpolate.Linear(ThermalProfile.UserDefinedU_Length,
+                                                U = MathNet.Numerics.Interpolate.Step(ThermalProfile.UserDefinedU_Length,
                                                                                         ThermalProfile.UserDefinedU_U).Interpolate(currL)
                                             Else
                                                 U = Me.ThermalProfile.CGTC_Definido

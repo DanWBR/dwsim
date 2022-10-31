@@ -64,8 +64,8 @@ Public Class EditingForm_Pipe_UserDefinedU
                             If data1 IsNot Nothing And data2 IsNot Nothing And data3 IsNot Nothing Then
                                 Try
                                     profile.UserDefinedU_Length.Add(data1.ToString().ToDoubleFromCurrent().ConvertToSI(units.distance))
-                                    profile.UserDefinedU_Temp.Add(data1.ToString().ToDoubleFromCurrent().ConvertToSI(units.temperature))
-                                    profile.UserDefinedU_U.Add(data1.ToString().ToDoubleFromCurrent().ConvertToSI(units.heat_transf_coeff))
+                                    Profile.UserDefinedU_Temp.Add(data2.ToString().ToDoubleFromCurrent().ConvertToSI(units.temperature))
+                                    Profile.UserDefinedU_U.Add(data3.ToString().ToDoubleFromCurrent().ConvertToSI(units.heat_transf_coeff))
                                 Catch ex As Exception
                                     MessageBox.Show(String.Format("Error on data table: {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End Try
