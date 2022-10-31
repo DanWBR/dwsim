@@ -316,7 +316,10 @@ Public Class FormDynamicsIntegratorControl
 
                                     If restarting And Not guiless Then
                                         Flowsheet.RunCodeOnUIThread(Sub()
-                                                                        i = ProgressBar1.Value
+                                                                        Try
+                                                                            i = ProgressBar1.Value
+                                                                        Catch ex As Exception
+                                                                        End Try
                                                                     End Sub)
                                         Application.DoEvents()
                                     End If
