@@ -600,7 +600,11 @@ Public Class FormDynamicsIntegratorControl
 
         i = 0
         For Each var In pointset.Value
-            y = var.PropertyValue
+            If Double.TryParse(var.PropertyValue, New Double) Then
+                y = var.PropertyValue.ToDoubleFromInvariant()
+            Else
+                y = Double.NaN
+            End If
             Dim series = DirectCast(model.Series(i), LineSeries)
             series.Points.Add(New DataPoint(x, y))
             If series.Points.Count > 100 Then series.Points.RemoveAt(0)
