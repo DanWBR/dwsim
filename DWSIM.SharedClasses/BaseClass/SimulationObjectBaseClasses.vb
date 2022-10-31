@@ -261,7 +261,11 @@ Namespace UnitOperations
         End Function
 
         Public Overridable Function GetChartModel(name As String) As Object Implements ISimulationObject.GetChartModel
-            Return Nothing
+            If CreateChartAction IsNot Nothing Then
+                Return CreateChartAction.Invoke(name)
+            Else
+                Return Nothing
+            End If
         End Function
 
         Public Overridable Function GetPropertyDescription(prop As String) As String Implements ISimulationObject.GetPropertyDescription
@@ -775,8 +779,16 @@ Namespace UnitOperations
 
         Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements ISimulationObject.MobileCompatible
 
+        Public Property UserDefinedChartNames As New List(Of String)
+
+        Public Property CreateChartAction As Func(Of String, Object)
+
         Public Overridable Function GetChartModelNames() As List(Of String) Implements ISimulationObject.GetChartModelNames
-            Return New List(Of String)
+            If UserDefinedChartNames.Count > 0 Then
+                Return UserDefinedChartNames
+            Else
+                Return New List(Of String)
+            End If
         End Function
 
 #End Region
