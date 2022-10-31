@@ -1306,7 +1306,7 @@ Public Class FormSimulWizard
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.DarkGreen)
+                            ChangeRowForeColor(row, Color.Blue)
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1359,9 +1359,15 @@ Public Class FormSimulWizard
         Else
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
-                row.Cells(1).Value = 1
-                row.Cells(2).Value = My.Resources.icons8_check_mark
-                ChangeRowForeColor(row, Color.Blue)
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                Else
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.DarkGreen)
+                End If
             Next
         End If
 
