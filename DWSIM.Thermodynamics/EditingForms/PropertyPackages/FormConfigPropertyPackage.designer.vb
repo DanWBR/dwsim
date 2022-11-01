@@ -23,13 +23,14 @@ Partial Class FormConfigPropertyPackage
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigPropertyPackage))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridKij = New unvell.ReoGrid.ReoGridControl()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.IPGrid = New System.Windows.Forms.DataGridView()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.lblModel = New System.Windows.Forms.Label()
         Me.TabPageU = New System.Windows.Forms.TabPage()
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
@@ -65,10 +66,10 @@ Partial Class FormConfigPropertyPackage
         Me.IPGrid.AllowUserToDeleteRows = False
         Me.IPGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.IPGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!)
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IPGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IPGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.IPGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column6})
         Me.IPGrid.MultiSelect = False
         Me.IPGrid.Name = "IPGrid"
@@ -91,10 +92,16 @@ Partial Class FormConfigPropertyPackage
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.lblModel)
         Me.TabPage1.Controls.Add(Me.gridKij)
         Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'lblModel
+        '
+        resources.ApplyResources(Me.lblModel, "lblModel")
+        Me.lblModel.Name = "lblModel"
         '
         'TabPageU
         '
@@ -115,6 +122,7 @@ Partial Class FormConfigPropertyPackage
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.TabPageU.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -126,4 +134,5 @@ Partial Class FormConfigPropertyPackage
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPageU As TabPage
     Friend WithEvents gridKij As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents lblModel As Label
 End Class

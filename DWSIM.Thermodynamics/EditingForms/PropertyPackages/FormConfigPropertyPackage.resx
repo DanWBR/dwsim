@@ -144,6 +144,9 @@
   <data name="gridKij.Text" xml:space="preserve">
     <value>ReoGridControl1</value>
   </data>
+  <data name="lblModel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 19</value>
+  </data>
   <data name="&gt;&gt;Button3.Name" xml:space="preserve">
     <value>Button3</value>
   </data>
@@ -151,7 +154,10 @@
     <value>801, 487</value>
   </data>
   <data name="&gt;&gt;gridKij.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 461</value>
   </data>
   <data name="&gt;&gt;TabPageU.Name" xml:space="preserve">
     <value>TabPageU</value>
@@ -162,23 +168,20 @@
   <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="gridKij.Size" type="System.Drawing.Size, System.Drawing">
     <value>777, 409</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="TabPageU.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="TabPageU.Text" xml:space="preserve">
+    <value>UNIFAC</value>
   </data>
   <data name="IPGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>793, 461</value>
+  <data name="TabControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="Button3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
@@ -186,11 +189,17 @@
   <data name="gridKij.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Configurar Pacote de Propriedades</value>
+  </data>
   <data name="&gt;&gt;IPGrid.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
+  </data>
+  <data name="TabPageU.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -201,8 +210,14 @@
   <data name="IPGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="lblModel.Text" xml:space="preserve">
+    <value>Model:</value>
+  </data>
   <data name="&gt;&gt;gridKij.Name" xml:space="preserve">
     <value>gridKij</value>
+  </data>
+  <data name="&gt;&gt;lblModel.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="gridKij.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -213,8 +228,11 @@
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Configurar Pacote de Propriedades</value>
+  <data name="lblModel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblModel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;IPGrid.Name" xml:space="preserve">
     <value>IPGrid</value>
@@ -228,8 +246,17 @@
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="lblModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="&gt;&gt;lblModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblModel.Name" xml:space="preserve">
+    <value>lblModel</value>
+  </data>
   <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="TabPageU.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -249,9 +276,6 @@
   <data name="Button3.Text" xml:space="preserve">
     <value>Estimar Selecionados</value>
   </data>
-  <data name="&gt;&gt;gridKij.Parent" xml:space="preserve">
-    <value>TabPage1</value>
-  </data>
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -261,29 +285,32 @@
   <data name="&gt;&gt;gridKij.Type" xml:space="preserve">
     <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
   <data name="IPGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>649, 362</value>
+    <value>793, 461</value>
   </data>
   <data name="&gt;&gt;Button3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
+  <data name="&gt;&gt;gridKij.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="TabPageU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>649, 362</value>
+    <value>793, 461</value>
   </data>
   <data name="IPGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="TabPageU.Text" xml:space="preserve">
-    <value>UNIFAC</value>
   </data>
   <data name="&gt;&gt;TabPageU.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormConfigPropertyPackage</value>
+  </data>
+  <data name="lblModel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 23</value>

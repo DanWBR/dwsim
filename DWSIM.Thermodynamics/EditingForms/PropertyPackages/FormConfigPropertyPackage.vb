@@ -290,6 +290,8 @@ Public Class FormConfigPropertyPackage
 
         If TypeOf _pp Is SRKPropertyPackage Then
 
+            lblModel.Text = "Model Parameters: SRK EOS kij"
+
             Dim ppu As SRKPropertyPackage = _pp
             i = 0
             For Each cp As ConstantProperties In _comps.Values
@@ -323,6 +325,8 @@ gt1:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             Next
 
         ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
+
+            lblModel.Text = "Model Parameters: PR EOS kij"
 
             Dim ppu As UNIFACPropertyPackage = _pp
 
@@ -361,6 +365,8 @@ gtu:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
         ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
 
+            lblModel.Text = "Model Parameters: PR EOS kij"
+
             Dim ppu As UNIFACLLPropertyPackage = _pp
 
             FillUNIFACParamTable("UNIFACLL")
@@ -397,6 +403,8 @@ gtul:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
         ElseIf TypeOf _pp Is MODFACPropertyPackage Then
 
+            lblModel.Text = "Model Parameters: PR EOS kij"
+
             Dim ppu As MODFACPropertyPackage = _pp
 
             FillUNIFACParamTable("MODFAC")
@@ -432,6 +440,8 @@ gtmu:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                 i += 1
             Next
         ElseIf TypeOf _pp Is NISTMFACPropertyPackage Then
+
+            lblModel.Text = "Model Parameters: PR EOS kij"
 
             Dim ppu As NISTMFACPropertyPackage = _pp
 
@@ -470,6 +480,8 @@ gtmun:          If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
         ElseIf TypeOf _pp Is PengRobinson1978PropertyPackage Then
 
+            lblModel.Text = "Model Parameters: PR78 EOS kij"
+
             Dim ppu As PengRobinson1978PropertyPackage = _pp
 
             i = 0
@@ -504,6 +516,8 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             Next
 
         ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
+
+            lblModel.Text = "Model Parameters: PR EOS kij"
 
             Dim ppu As PengRobinsonPropertyPackage = _pp
 
@@ -585,7 +599,7 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                 If i <> j Then
 
                     Dim id1 As String = gridKij.Worksheets(0).RowHeaders(i).Text
-                    Dim id2 As String = gridKij.Worksheets(0).ColumnHeaders(i).Text
+                    Dim id2 As String = gridKij.Worksheets(0).ColumnHeaders(j).Text
 
                     Dim comp1, comp2 As ConstantProperties
                     comp1 = _comps(id1)
@@ -594,7 +608,7 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Dim Vc1 As Double = comp1.Critical_Volume
                     Dim Vc2 As Double = comp2.Critical_Volume
 
-                    Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
+                    Dim tmp As Double = 1.0 - 8.0 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ 0.3333 + Vc2 ^ 0.3333) ^ 3.0)
 
                     gridKij.Worksheets(0).Cells(i, j).Data = tmp
                     gridKij.Worksheets(0).Cells(j, i).Data = tmp
