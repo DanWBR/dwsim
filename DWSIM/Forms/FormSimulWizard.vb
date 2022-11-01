@@ -46,6 +46,9 @@ Public Class FormSimulWizard
         ogc1.RowTemplate.Height = 23 * Settings.DpiScale
         ogc1.ColumnHeadersHeight *= Settings.DpiScale
 
+        DataGridViewPP.Columns(2).Width = 24 * Settings.DpiScale
+        DataGridViewPP.Columns(3).Width = 24 * Settings.DpiScale
+
         Init()
 
     End Sub

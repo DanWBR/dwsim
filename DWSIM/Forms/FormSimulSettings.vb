@@ -90,6 +90,8 @@ Public Class FormSimulSettings
         rm.Dock = DockStyle.Fill
         TabPageReactions.Controls.Add(rm)
 
+        DataGridViewPP.Columns(1).Width = 24 * Settings.DpiScale
+
         Init()
 
     End Sub
