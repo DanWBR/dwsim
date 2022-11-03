@@ -600,7 +600,7 @@ Public Class FormDynamicsIntegratorControl
 
         i = 0
         For Each var In pointset.Value
-            If Double.TryParse(var.PropertyValue, New Double) Then
+            If Double.TryParse(var.PropertyValue, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, New Double) Then
                 y = var.PropertyValue.ToDoubleFromInvariant()
             Else
                 y = Double.NaN
