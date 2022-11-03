@@ -862,7 +862,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                     obj.AdjustVarType = AdjustVarType.Manipulated;
 
                     pid.ManipulatedObject = (DWSIM.SharedClasses.UnitOperations.BaseClass)obj;
-                    ((PIDControllerGraphic)pid.GraphicObject).ConnectedToMv = (GraphicObject)obj.GraphicObject;
+                    ((PythonControllerGraphic)pid.GraphicObject).ConnectedToMv = (GraphicObject)obj.GraphicObject;
 
                     proplist = obj.GetProperties(PropertyType.WR).ToList();
                     proplist.Insert(0, "");
@@ -922,7 +922,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                     obj.AdjustVarType = AdjustVarType.Controlled;
 
                     pid.ControlledObject = (DWSIM.SharedClasses.UnitOperations.BaseClass)pid.GetFlowsheet().SimulationObjects[pid.ControlledObjectData.ID];
-                    ((PIDControllerGraphic)pid.GraphicObject).ConnectedToCv = (GraphicObject)pid.ControlledObject.GraphicObject;
+                    ((PythonControllerGraphic)pid.GraphicObject).ConnectedToCv = (GraphicObject)pid.ControlledObject.GraphicObject;
 
                     proplist2 = pid.GetFlowsheet().GetFlowsheetSimulationObject(objlist[sender.SelectedIndex]).GetProperties(PropertyType.ALL).ToList();
                     proplist2.Insert(0, "");
