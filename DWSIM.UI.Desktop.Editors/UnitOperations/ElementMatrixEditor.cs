@@ -2,6 +2,7 @@
 using Eto.Forms;
 using System;
 using DWSIM.ExtensionMethods.Eto;
+using System.Collections.Generic;
 
 namespace DWSIM.UI.Desktop.Editors.UnitOperations
 {
@@ -25,18 +26,57 @@ namespace DWSIM.UI.Desktop.Editors.UnitOperations
 
             gridcontrol = GridControl.GetGridControl();
 
-            Extensions2.AddButtonWithLabel(this, "Reset/Rebuild Element Matrix", "Reset", (btn, e) => {
+            Extensions2.AddButtonWithLabel(this, "Reset/Rebuild Element Matrix", "Reset", (btn, e) =>
+            {
                 greactor.CreateElementMatrix();
                 Application.Instance.Invoke(() => Populate());
             });
 
-            Extensions2.AddButtonWithLabel(this, "Update/Save Matrix Changes", "Save", (btn, e) => {
+            Extensions2.AddButtonWithLabel(this, "Add Element Row", "Add", (btn, e) =>
+            {
+                Application.Instance.Invoke(() => AddElementRow());
+            });
+
+            Extensions2.AddButtonWithLabel(this, "Remove Last Row", "Remove", (btn, e) =>
+            {
+                Application.Instance.Invoke(() => RemoveElementRow());
+            });
+
+            Extensions2.AddButtonWithLabel(this, "Update/Save Matrix Changes", "Save", (btn, e) =>
+            {
                 Application.Instance.Invoke(() => Save());
             });
 
             this.Add(gridcontrol);
 
             Populate();
+
+        }
+
+        void AddElementRow()
+        {
+
+            var grid = gridcontrol.GridControl;
+
+            var sheet = grid.Worksheets[0];
+
+            sheet.RowCount += 1;
+
+        }
+
+        void RemoveElementRow()
+        {
+            try
+            {
+
+                var grid = gridcontrol.GridControl;
+
+                var sheet = grid.Worksheets[0];
+
+                sheet.RowCount -= 1;
+
+            }
+            catch { }
 
         }
 
@@ -49,7 +89,8 @@ namespace DWSIM.UI.Desktop.Editors.UnitOperations
 
             int i, j, c, e;
 
-            j = 0;
+            sheet.ColumnHeaders[0].Text = "Element";
+            j = 1;
             foreach (var comp in greactor.ComponentIDs)
             {
                 sheet.ColumnHeaders[j].Text = comp;
@@ -58,7 +99,7 @@ namespace DWSIM.UI.Desktop.Editors.UnitOperations
             i = 0;
             foreach (var el in greactor.Elements)
             {
-                sheet.RowHeaders[i].Text = el;
+                sheet.Cells[i, 0].Data = el;
                 i += 1;
             }
 
@@ -69,7 +110,7 @@ namespace DWSIM.UI.Desktop.Editors.UnitOperations
             {
                 for (j = 0; j <= c; j++)
                 {
-                    sheet.Cells[i, j].Data = greactor.ElementMatrix[i, j];
+                    sheet.Cells[i, j + 1].Data = greactor.ElementMatrix[i, j];
                 }
             }
 
@@ -89,21 +130,28 @@ namespace DWSIM.UI.Desktop.Editors.UnitOperations
 
             int i, j, c, e;
 
-            c = greactor.ComponentIDs.Count - 1;
-            e = greactor.Elements.Length - 1;
+            c = sheet.ColumnCount - 1;
+            e = sheet.RowCount - 1;
 
-            for (i = 0; i <= e; i++)
+            var elements = new List<string>();
+
+            greactor.ElementMatrix = new double[e + 1, c];
+
+            try
             {
-                for (j = 0; j <= c; j++)
+                for (i = 0; i <= e; i++)
                 {
-                    try
+                    elements.Add(sheet.Cells[i, 0].Data.ToString());
+                    for (j = 1; j <= c; j++)
                     {
-                        greactor.ElementMatrix[i, j] = (double)sheet.Cells[i, j].Data;
+                        greactor.ElementMatrix[i, j - 1] = (double)sheet.Cells[i, j].Data;
                     }
-                    catch { }
                 }
+                greactor.Elements = elements.ToArray();
             }
-
+            catch (Exception ex) {
+                MessageBox.Show("Error: " + ex.Message, MessageBoxType.Error);
+            }
         }
     }
 }
