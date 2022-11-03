@@ -582,6 +582,8 @@ Public Class EditingForm_Pump_Curves
 
     Private Sub EditingForm_Pump_Curves_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ChangeDefaultFont()
+
     End Sub
 
     Private Sub tsbImport_Click(sender As Object, e As EventArgs) Handles tsbImport.Click

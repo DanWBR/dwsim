@@ -250,4 +250,9 @@ Public Class EditingForm_CompressorExpander_Curves
 
     End Sub
 
+    Private Sub EditingForm_CompressorExpander_Curves_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ChangeDefaultFont()
+
+    End Sub
 End Class

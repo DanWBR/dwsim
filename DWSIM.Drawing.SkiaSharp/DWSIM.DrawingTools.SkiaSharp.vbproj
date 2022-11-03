@@ -523,6 +523,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\OFL.txt" />
+    <EmbeddedResource Include="Icons\orifice-plate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

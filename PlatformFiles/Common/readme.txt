@@ -64,6 +64,22 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.3.0
 
+- Python Script Controller (Dynamics)
+- Implemented Valve Opening/Kv[Cv] relationship types
+- Implemented Valve Actuator Delay (Dynamics)
+- New Distillation/Absorption Column convergence and property reports
+- New PFR Non-Adiabatic Non-Isothermal mode (#167)
+- PFR: User-defined linear pressure drop (#168)
+- Expose Pump Head as a property 
+- Implemented user-defined data table for calculation of Overall HTC in Pipe Segment (#238)
+- Persist custom calculation order (#59)
+- Changed kij editing table to matrix format (#49)
+- Changed recycle mass flow error calculation
+- Fixed D2O ideal gas enthalpy/gibbs energy of formation
+- Fixed many High-DPI issues (Classic UI)
+- Fixed Gibbs Element Matrix editor (CPUI) (#371)
+- Other bug fixes
+
 Version 8.2.1
 
 - Fixed Material Stream issues on Cross-Platform UI

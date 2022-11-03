@@ -1159,7 +1159,11 @@ Public Class FormSimulWizard
                         Case PackageType.EOS, PackageType.CorrespondingStates
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1189,7 +1193,11 @@ Public Class FormSimulWizard
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1219,7 +1227,11 @@ Public Class FormSimulWizard
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1249,7 +1261,11 @@ Public Class FormSimulWizard
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1279,7 +1295,11 @@ Public Class FormSimulWizard
                         Case PackageType.EOS, PackageType.CorrespondingStates, PackageType.VaporPressure
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1309,7 +1329,11 @@ Public Class FormSimulWizard
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1339,7 +1363,11 @@ Public Class FormSimulWizard
                         Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
                             row.Cells(1).Value = 1
                             row.Cells(2).Value = My.Resources.icons8_check_mark
-                            ChangeRowForeColor(row, Color.Blue)
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
                         Case Else
                             row.Cells(1).Value = 0
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
@@ -1407,10 +1435,34 @@ Public Class FormSimulWizard
                     row.Cells(1).Value = 1
                     row.Cells(2).Value = My.Resources.icons8_check_mark
                     ChangeRowForeColor(row, Color.Blue)
+                ElseIf Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.CorrespondingStates, PackageType.EOS
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = My.Resources.icons8_cross_mark
-                    ChangeRowForeColor(row, Color.LightGray)
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.CorrespondingStates, PackageType.EOS
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
                 End If
             Next
         End If
