@@ -18,7 +18,7 @@
 6,16,MeOH,CH3OH,1.4311,1.432,methanol: 1*CH3OH,Methanol,1:1/1:20//,
 7,17,H2O,H2O,0.92,1.4,water: 1*H2O,Water,///,
 8,18,ACOH,ACOH,0.8952,0.68,phenol: 5*ACH 1*ACOH,Phenol,1:15/1:21//,
-9,19,CH2CO,CH3CO,1.6724,1.448,butanone: 1*CH3 1*CH2 1*CH3CO,Butanone,1:1/1:24//,
+9,19,CH2CO,CH3CO,1.6724,1.488,butanone: 1*CH3 1*CH2 1*CH3CO,Butanone,1:1/1:24//,
 9,20,CH2CO,CH2CO,1.4457,1.18,pentanone-3: 2*CH3 1*CH2 1*CH2CO,3-Pentanone,1:2/1:24//,
 10,21,CHO,CHO,0.998,0.948,propionaldehyde: 1*CH3 1*CH2 1*CHO,Propanal,1:26///,
 11,22,COOC,CH3COO,1.9031,1.728,butylacetate: 1*CH3 3*CH2 1*CH3COO,butylacetate,1:1/1:22/1:24/,
