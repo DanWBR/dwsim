@@ -77,8 +77,8 @@ Public Class Settings
     Public Shared Property CudafyDeviceID As Integer = 0
     Public Shared Property DebugLevel As Integer = 0
     Public Shared Property MaxThreadMultiplier As Integer = 8
-    Public Shared Property SolverTimeoutSeconds As Integer = 15 * 60
-    Public Shared Property SolverMode As Integer = 0
+    Public Shared Property SolverTimeoutSeconds As Integer = 3600
+    Public Shared Property SolverMode As Integer = 1
     Public Shared Property ServiceBusConnectionString As String = ""
     Public Shared Property CalculatorStopRequested As Boolean
     Public Shared Property CalculatorActivated As Boolean

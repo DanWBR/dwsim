@@ -36,13 +36,11 @@ namespace DWSIM.Automation
         public Automation()
         {
             GlobalSettings.Settings.AutomationMode = true;
-            Console.WriteLine("Initializing DWSIM in Automation Mode, please wait...");
             fm = new FormMain();
         }
 
         public Interfaces.IFlowsheet LoadFlowsheet(string filepath)
         {
-            Console.WriteLine("Loading Flowsheet data, please wait...");
             if (System.IO.Path.GetExtension(filepath).ToLower().Contains("dwxmz"))
             {
                 return fm.LoadAndExtractXMLZIP(new WindowsFile(filepath), null, true);
@@ -55,7 +53,6 @@ namespace DWSIM.Automation
 
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
         {
-            Console.WriteLine("Saving the Flowsheet, please wait...");
             if (compressed)
             {
                 fm.SaveXMLZIP(new WindowsFile(filepath), (FormFlowsheet)flowsheet);
@@ -70,11 +67,6 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 0;
-            GlobalSettings.Settings.SolverTimeoutSeconds = 120;
-            GlobalSettings.Settings.EnableGPUProcessing = false;
-            GlobalSettings.Settings.EnableParallelProcessing = true;
-            Console.WriteLine("Solving Flowsheet, please wait...");
             if ((sender != null))
             {
                 FlowsheetSolver.FlowsheetSolver.CalculateObject(flowsheet, sender.Name);
@@ -89,10 +81,6 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 0;
-            GlobalSettings.Settings.SolverTimeoutSeconds = 120;
-            GlobalSettings.Settings.EnableGPUProcessing = false;
-            GlobalSettings.Settings.EnableParallelProcessing = true;
             return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(flowsheet, GlobalSettings.Settings.SolverMode);
         }
 
@@ -100,10 +88,7 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 0;
             GlobalSettings.Settings.SolverTimeoutSeconds = timeout_seconds;
-            GlobalSettings.Settings.EnableGPUProcessing = false;
-            GlobalSettings.Settings.EnableParallelProcessing = true;
             return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(flowsheet, GlobalSettings.Settings.SolverMode);
         }
 
@@ -144,11 +129,9 @@ namespace DWSIM.Automation
             GlobalSettings.Settings.AutomationMode = true;
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += new ResolveEventHandler(LoadAssembly);
-            Console.WriteLine("Initializing DWSIM Automation Interface...");
             app = UI.Desktop.Program.MainApp(null);
             app.Attach(this);
             FlowsheetBase.FlowsheetBase.AddPropPacks();
-            Console.WriteLine("DWSIM Automation Interface initialized successfully.");
         }
 
         static Assembly LoadAssembly(object sender, ResolveEventArgs args)
@@ -168,9 +151,7 @@ namespace DWSIM.Automation
         public Interfaces.IFlowsheet LoadFlowsheet(string filepath)
         {
             GlobalSettings.Settings.AutomationMode = true;
-            Console.WriteLine("Initializing the Flowsheet, please wait...");
             fm = new UI.Forms.Flowsheet();
-            Console.WriteLine("Loading Flowsheet data, please wait...");
             LoadSimulation(filepath);
             return fm.FlowsheetObject;
         }
@@ -183,7 +164,6 @@ namespace DWSIM.Automation
 
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
         {
-            Console.WriteLine("Saving the Flowsheet, please wait...");
             fm.FlowsheetObject = (Flowsheet)flowsheet;
             fm.SaveSimulation(filepath);
         }
@@ -192,10 +172,6 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 1;
-            GlobalSettings.Settings.EnableGPUProcessing = false;
-            GlobalSettings.Settings.EnableParallelProcessing = true;
-            Console.WriteLine("Solving Flowsheet, please wait...");
             fm.FlowsheetObject.SolveFlowsheet2();
         }
 
@@ -203,21 +179,13 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 1;
-            GlobalSettings.Settings.SolverTimeoutSeconds = 120;
-            GlobalSettings.Settings.EnableGPUProcessing = false;
-            GlobalSettings.Settings.EnableParallelProcessing = true;
             return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(flowsheet, GlobalSettings.Settings.SolverMode);
         }
 
         public List<Exception> CalculateFlowsheet3(IFlowsheet flowsheet, int timeout_seconds)
         {
             GlobalSettings.Settings.CalculatorActivated = true;
-            GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 1;
             GlobalSettings.Settings.SolverTimeoutSeconds = timeout_seconds;
-            GlobalSettings.Settings.EnableGPUProcessing = false;
-            GlobalSettings.Settings.EnableParallelProcessing = true;
             return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(flowsheet, GlobalSettings.Settings.SolverMode);
         }
 
@@ -248,7 +216,6 @@ namespace DWSIM.Automation
         public IFlowsheet CreateFlowsheet()
         {
             GlobalSettings.Settings.AutomationMode = true;
-            Console.WriteLine("Initializing the Flowsheet, please wait...");
             fm = new UI.Forms.Flowsheet();
             return fm.FlowsheetObject;
         }
@@ -329,9 +296,6 @@ namespace DWSIM.Automation
         {
             Settings.CalculatorActivated = true;
             Settings.SolverBreakOnException = true;
-            Settings.SolverMode = 1;
-            Settings.EnableGPUProcessing = false;
-            Settings.EnableParallelProcessing = true;
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
@@ -339,10 +303,6 @@ namespace DWSIM.Automation
         {
             Settings.CalculatorActivated = true;
             Settings.SolverBreakOnException = true;
-            Settings.SolverMode = 1;
-            Settings.SolverTimeoutSeconds = 3600;
-            Settings.EnableGPUProcessing = false;
-            Settings.EnableParallelProcessing = false;
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
@@ -350,10 +310,7 @@ namespace DWSIM.Automation
         {
             Settings.CalculatorActivated = true;
             Settings.SolverBreakOnException = true;
-            Settings.SolverMode = 1;
             Settings.SolverTimeoutSeconds = timeout_seconds;
-            Settings.EnableGPUProcessing = false;
-            Settings.EnableParallelProcessing = true;
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
@@ -361,10 +318,6 @@ namespace DWSIM.Automation
         {
             Settings.CalculatorActivated = true;
             Settings.SolverBreakOnException = true;
-            Settings.SolverMode = 1;
-            Settings.SolverTimeoutSeconds = 3600;
-            Settings.EnableGPUProcessing = false;
-            Settings.EnableParallelProcessing = false;
             return ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
