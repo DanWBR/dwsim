@@ -1126,7 +1126,7 @@
     <value>Liquid phase Activity Coefficients are calculated by the Modified UNIFAC (Dortmund) method. Enthalpies, Entropies and Heat Capacities (both phases) are calculated by the Lee-Kesler method. The remaining properties, including vapor phase Fugacity Coefficients (optionally), are calculated using the Peng-Robinson EOS.</value>
   </data>
   <data name="DescNRTLPP" xml:space="preserve">
-    <value>In this Property Package, the NRTL (Non-Random Two-Liquid) model is used to calculate liquid-phase activity coefficients. Enthalpies are calculated by the Lee-Kesler model, while vapor-phase fugacities (optionally) and other thermodynamic properties (both phases) are calculated by the Peng-Robinson EOS.</value>
+    <value>Uses NRTL (Non-Random Two-Liquid) model to calculate liquid-phase activity coefficients.</value>
   </data>
   <data name="DescPengRobinsonIWVTPP" xml:space="preserve">
     <value>This Property Package uses the Peng-Robinson EOS taking water as an immiscible component. Also takes into account the volume translation coefficient for a better prediction of liquid volume densities, when applicable. Recommended only for water-hydrocarbon systems.</value>
@@ -1159,7 +1159,7 @@
     <value>Property Package for Water using IAPWS-97 property tables.</value>
   </data>
   <data name="DescUNIQUACPP" xml:space="preserve">
-    <value>In this Property Package, the UNIQUAC model is used to calculate liquid-phase activity coefficients. Enthalpies are calculated by the Lee-Kesler model, while vapor-phase fugacities (optionally) and other thermodynamic properties (both phases) are calculated by the Peng-Robinson EOS.</value>
+    <value>Uses UNIQUAC model to calculate liquid-phase activity coefficients.</value>
   </data>
   <data name="DescUPP" xml:space="preserve">
     <value>Property Package that uses the UNIFAC Group Contribution Method for equilibrium calculations. Recommended for use with Hypotheticals.</value>

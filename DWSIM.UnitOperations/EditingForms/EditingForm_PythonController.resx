@@ -170,9 +170,6 @@
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;cbSourceObj.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;cbSourceObj.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
@@ -182,6 +179,9 @@
   </data>
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
+  </data>
+  <data name="&gt;&gt;cbTargetObj.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -291,8 +291,11 @@
   <data name="cbSourceType.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 163</value>
+  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Label19.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 21</value>
@@ -303,8 +306,8 @@
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
   </data>
-  <data name="Label19.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="chkControllerActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 25</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 107</value>
@@ -318,14 +321,14 @@
   <data name="cbTargetProp.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="GroupBox1.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;lblTargetVal.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;cbSourceProp.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;lblSourceVal.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="cbTargetObj.ToolTip1" xml:space="preserve">
     <value />
@@ -372,9 +375,6 @@
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>343, 50</value>
   </data>
-  <data name="$this.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;cbTargetType.Name" xml:space="preserve">
     <value>cbTargetType</value>
   </data>
@@ -386,9 +386,6 @@
   </data>
   <data name="cbTargetUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 21</value>
-  </data>
-  <data name="cbTargetUnits.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -429,7 +426,7 @@
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
+  <data name="cbTargetType.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="cbTargetProp.Size" type="System.Drawing.Size, System.Drawing">
@@ -455,6 +452,9 @@
   </data>
   <data name="Label6.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>$this</value>
@@ -486,8 +486,8 @@
   <data name="cbSourceType.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="cbTargetProp.ToolTip" xml:space="preserve">
-    <value />
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="Label5.ToolTip1" xml:space="preserve">
     <value />
@@ -504,8 +504,8 @@
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 135</value>
   </data>
-  <data name="&gt;&gt;chkControllerActive.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="lblSourceVal.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="Label15.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -549,8 +549,8 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>Tipo</value>
   </data>
-  <data name="&gt;&gt;cbTargetObj.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="$this.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="Label7.ToolTip1" xml:space="preserve">
     <value />
@@ -576,8 +576,8 @@
   <data name="cbTargetType.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;cbTargetObj.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -594,11 +594,17 @@
   <data name="lblSourceVal.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;chkControllerActive.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
   <data name="txtScript.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
   </data>
   <data name="Label2.ToolTip1" xml:space="preserve">
     <value />
@@ -672,9 +678,6 @@
   <data name="chkControllerActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;cbSourceUnits.Name" xml:space="preserve">
-    <value>cbSourceUnits</value>
-  </data>
   <data name="&gt;&gt;ToolTipValues.Name" xml:space="preserve">
     <value>ToolTipValues</value>
   </data>
@@ -741,6 +744,9 @@
   <data name="cbTargetProp.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 187</value>
   </data>
+  <data name="&gt;&gt;cbSourceObj.Name" xml:space="preserve">
+    <value>cbSourceObj</value>
+  </data>
   <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -805,20 +811,17 @@ Script Python:</value>
   <data name="chkControllerActive.Text" xml:space="preserve">
     <value>Controlador Ativo</value>
   </data>
-  <data name="&gt;&gt;cbTargetUnits.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="cbSourceUnits.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="lblTargetVal.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cbSourceObj.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblSourceVal.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
@@ -901,14 +904,11 @@ Script Python:</value>
   <data name="lblSourceVal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;cbTargetUnits.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Label12.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="chkControllerActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 25</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -922,17 +922,14 @@ Script Python:</value>
   <data name="&gt;&gt;lblTag.Name" xml:space="preserve">
     <value>lblTag</value>
   </data>
-  <data name="lblTargetVal.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="cbTargetUnits.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="chkControllerActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 17</value>
-  </data>
-  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 19</value>
   </data>
   <data name="&gt;&gt;cbSourceType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -946,8 +943,8 @@ Script Python:</value>
   <data name="Label11.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
@@ -1021,9 +1018,6 @@ Script Python:</value>
   <data name="&gt;&gt;chkControllerActive.Name" xml:space="preserve">
     <value>chkControllerActive</value>
   </data>
-  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1033,8 +1027,8 @@ Script Python:</value>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="Label7.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 80</value>
@@ -1054,20 +1048,26 @@ Script Python:</value>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 163</value>
+  </data>
   <data name="cbSourceProp.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cbSourceType.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Informações Gerais</value>
   </data>
-  <data name="cbTargetType.ToolTip1" xml:space="preserve">
+  <data name="GroupBox1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Valor Atual</value>
@@ -1090,8 +1090,8 @@ Script Python:</value>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="&gt;&gt;cbSourceObj.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1099,8 +1099,8 @@ Script Python:</value>
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;lblSourceVal.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 19</value>
   </data>
   <data name="Label15.ToolTip" xml:space="preserve">
     <value />
@@ -1117,11 +1117,11 @@ Script Python:</value>
   <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbSourceObj.Name" xml:space="preserve">
-    <value>cbSourceObj</value>
+  <data name="&gt;&gt;cbSourceUnits.Name" xml:space="preserve">
+    <value>cbSourceUnits</value>
   </data>
-  <data name="cbSourceType.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="cbTargetProp.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;lblTargetVal.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -1141,10 +1141,10 @@ Script Python:</value>
   <metadata name="ToolTipValues.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
   <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>145, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
 </root>

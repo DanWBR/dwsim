@@ -268,7 +268,7 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>- Process Variable value is available on 'PV'
 - Write the Set-Point value to 'SP' and the Controller Output to 'MV'
-- Use the 'Flowsheet' object to access other objects and their properties.
+- Use the 'Flowsheet' object to access other objects and their properties
 
 IronPython Script:</value>
   </data>
