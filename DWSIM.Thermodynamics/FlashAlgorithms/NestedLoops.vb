@@ -230,8 +230,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Vmax = 0.0# Then Vmax = 1.0#
             If Vmax > 1.0# Then Vmax = 1.0#
 
-            Dim brnt As New BrentOpt.Brent()
-
             V = (Vmin + Vmax) / 2
 
             g = 0.0#
@@ -242,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If g > 0 Then Vmin = V Else Vmax = V
 
 
-            V = brnt.BrentOpt2(Vmin, Vmax, 10, 0.001, 100,
+            V = Brent.BrentOpt3(Vmin, Vmax, 10, 0.001, 100,
                            Function(Vb)
                                Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
                            End Function)
@@ -294,14 +292,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
                 Try
-                    r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 1.0)
+                    r1 = ConvergeVF(IObj, V, Vz, Vx0, Vy0, Ki0, P, T, PP, 1.0)
                 Catch ex As Exception
                     failed = True
                 End Try
             End If
 
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Or failed Then
-                r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, r1(1), r1(2), r1(3), P, T, PP, 1.0)
+                r1 = ConvergeVF(IObj, V, Vz, r1(1), r1(2), r1(3), P, T, PP, 1.0)
             End If
 
             V = r1(0)

@@ -648,7 +648,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     L1ant = L1
                     Vant = V
 
-                    Dim df As Double = Math.Min(Abs(dL1), Abs(dL2)) * 0.1
+                    Dim df1 = Abs(dL1 / L1)
+                    Dim df2 = Abs(dL2 / L2)
+
+                    Dim df = Math.Max(Math.Min(df1, df2), 0.3)
 
                     If L1 > 0.0 Then L1 += -dL1 * df
                     If L2 > 0.0 Then L2 += -dL2 * df
