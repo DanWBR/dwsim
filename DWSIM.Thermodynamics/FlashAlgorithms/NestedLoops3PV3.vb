@@ -152,13 +152,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Else
 
-                    Dim idealpp = New RaoultPropertyPackage()
-                    idealpp.CurrentMaterialStream = PP.CurrentMaterialStream
-
-                    result = _nl.Flash_PT(Vz, P, T, idealpp, False, Nothing)
-
-                    idealpp.CurrentMaterialStream = Nothing
-                    idealpp = Nothing
+                    result = _nl.Flash_PT(Vz, P, T, PP, False, Nothing)
 
                     L = result(0)
                     V = result(1)
@@ -654,22 +648,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     L1ant = L1
                     Vant = V
 
-                    Dim df As Double
+                    Dim df As Double = Math.Min(Abs(dL1), Abs(dL2)) * 0.1
 
-                    df = (ecount + 1) * 0.01
-                    If df > 1.0 Then df = 1.0
-                    If -dL1 * df + L1 > 1.0 Or -dL1 * df + L1 < 0.0 Then
-                        df /= 10
-                    End If
-                    If -dL2 * df + L2 > 1.0 Or -dL2 * df + L2 < 0.0 Then
-                        df /= 10
-                    End If
+                    If L1 > 0.0 Then L1 += -dL1 * df
+                    If L2 > 0.0 Then L2 += -dL2 * df
 
-                    L1 += -dL1 * df
-                    L2 += -dL2 * df
-
-                    If L1 < 0 Then L1 = 0.0
-                    If L2 < 0 Then L2 = 0.0
+                    If L1 < 0.0 Then L1 = 0.0
+                    If L2 < 0.0 Then L2 = 0.0
 
                     V = 1 - L1 - L2
 
@@ -677,7 +662,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     IObj2?.Paragraphs.Add(String.Format("Updated Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
                     IObj2?.Paragraphs.Add(String.Format("Updated Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
 
-                    If V <= 0.0# Or Abs(L1) > 1.0# Or Abs(L2) > 1.0# Then
+                    If (L1 = 0.0 And L2 > 0.0) Or (L1 > 0.0 And L2 = 0.0) Then
+
+                        'do VLE flash
+                        Dim vle = _nl.Flash_PT(Vz, P, T, PP, False, Nothing)
+                        L1 = vle(0)
+                        V = vle(1)
+                        L2 = 0.0
+                        Vx1 = vle(2)
+                        Vy = vle(3)
+
+                        prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+
+                        Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
+
+                    ElseIf V <= 0.0# Or Abs(L1) > 1.0# Or Abs(L2) > 1.0# Then
+
                         IObj2?.Paragraphs.Add("No vapor phase in the current estimate. Switching to Simple LLE FLash Algorithm...")
                         'switch to simple LLE flash procedure.
                         Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = Vx1EST, .InitialEstimatesForPhase2 = Vx2EST, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
@@ -690,8 +690,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vy = result(3)
                         Vx2 = result(6)
                         Exit Do
+
                     ElseIf V > 1.0# Then
+
                         V = 1.0#
+
                     End If
 
                 End If
@@ -707,18 +710,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Loop
 
 out:
-
-            If (L1 = 0.0 And L2 > 0.0) Or (L1 > 0.0 And L2 = 0.0) Then
-                'do VLE flash
-                Dim vle = _nl.Flash_PT(Vz, P, T, PP, False, Nothing)
-                L1 = vle(0)
-                V = vle(1)
-                L2 = 0.0
-                Vx1 = vle(2)
-                Vy = vle(3)
-                prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
-                Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
-            End If
 
             'order liquid phases by gibbs energy
 

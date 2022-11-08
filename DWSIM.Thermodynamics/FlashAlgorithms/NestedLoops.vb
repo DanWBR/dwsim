@@ -230,6 +230,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Vmax = 0.0# Then Vmax = 1.0#
             If Vmax > 1.0# Then Vmax = 1.0#
 
+            Dim brnt As New BrentOpt.Brent()
+
             V = (Vmin + Vmax) / 2
 
             g = 0.0#
@@ -239,7 +241,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If g > 0 Then Vmin = V Else Vmax = V
 
-            V = Vmin + (Vmax - Vmin) / 2
+
+            V = brnt.BrentOpt2(Vmin, Vmax, 10, 0.001, 100,
+                           Function(Vb)
+                               Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
+                           End Function)
+
+
+            'V = Vmin + (Vmax - Vmin) / 2
 
             L = 1 - V
 
@@ -439,7 +448,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             dfac /= 10
                         End If
                     ElseIf damplevel = 2 Then
-                        dfac = (ecount + 1) * 0.1
+                        dfac = (ecount + 1) * 0.05
                         If dfac > 1.0 Then dfac = 1.0
                         If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
                             dfac /= 50

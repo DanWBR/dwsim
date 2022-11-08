@@ -1714,50 +1714,9 @@ namespace DWSIM.UI.Desktop.Editors
                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
-                    int i, j;
-                    string elmatrix, elements, ie;
-                    elements = "";
-                    for (i = 0; i < reactor2g.Elements.Count(); i++)
-                    {
-                        elements += reactor2g.Elements[i] + " ";
-                    }
-                    elements = elements.TrimEnd(' ');
-                    ie = "";
-                    for (i = 0; i < reactor2g.InitialEstimates.Count(); i++)
-                    {
-                        ie += cv.ConvertFromSI(su.molarflow, reactor2g.InitialEstimates[i]).ToString(nf) + "\n";
-                    }
-                    ie = ie.TrimEnd('\n');
-                    elmatrix = "";
-                    for (i = 0; i < reactor2g.ComponentIDs.Count; i++)
-                    {
-                        for (j = 0; j < reactor2g.Elements.Count(); j++)
-                        {
-                            try
-                            {
-                                elmatrix += reactor2g.ElementMatrix[j, i].ToString("G") + " ";
-                            }
-                            catch (Exception) { }
-                        }
-                        elmatrix = elmatrix.TrimEnd(' ');
-                        elmatrix += "\n";
-                    }
-                    elmatrix = elmatrix.TrimEnd('\n');
                     var compounds = SimObject.GetFlowsheet().SelectedCompounds.Values.Select((x) => x.Name).ToList();
                     s.CreateAndAddLabelRow(container, "Reacting Compounds");
-                    s.CreateAndAddDescriptionRow(container, "If you add or remove compounds from the reacting compounds " +
-                                                 "list, close and reopen the editor before setting the element list and element matrix.");
-                    var ids = reactor2g.ComponentIDs.ToArray();
-                    string comptext = "";
-                    foreach (string compi in ids)
-                    {
-                        comptext += compi + ", ";
-                        if (!compounds.Contains(compi))
-                        {
-                            reactor2g.ComponentIDs.Remove(compi);
-                        }
-                    }
-                    comptext = comptext.TrimEnd(' ').TrimEnd(',');
+                    var ids = reactor2g.ComponentIDs.ToArray();                    
                     foreach (string comp in compounds)
                         s.CreateAndAddCheckBoxRow(container,
                                                    comp,
@@ -1772,6 +1731,8 @@ namespace DWSIM.UI.Desktop.Editors
                                                        {
                                                            reactor2g.ComponentIDs.Add(comp);
                                                        }
+                                                       reactor2g.CreateElementMatrix();
+                                                       reactor2g.FlowSheet.ShowMessage(String.Format("{0}: element matrix was rebuilt/reset.", reactor2g.GraphicObject.Tag), IFlowsheet.MessageType.Information);
                                                    });
                     s.CreateAndAddLabelRow(container, "Element Matrix");
                     s.CreateAndAddButtonRow(container, "Setup Element Matrix", null, (btn, e) =>

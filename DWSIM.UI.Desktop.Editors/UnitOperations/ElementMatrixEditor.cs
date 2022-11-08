@@ -89,6 +89,9 @@ namespace DWSIM.UI.Desktop.Editors.UnitOperations
 
             int i, j, c, e;
 
+            sheet.SetCols(greactor.ComponentIDs.Count + 1);
+            sheet.SetRows(greactor.Elements.Length);
+
             sheet.ColumnHeaders[0].Text = "Element";
             j = 1;
             foreach (var comp in greactor.ComponentIDs)
