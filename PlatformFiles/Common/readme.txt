@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.3.0
+Version 8.3.1
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -62,6 +62,12 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
 
+Version 8.3.1
+
+- Improved reliability of VLE and VLLE flash algorithms
+- Fixed Gibbs Element Matrix editor (CPUI) (#371)
+- Automation Interface fixes
+
 Version 8.3.0
 
 - Python Script Controller (Dynamics)
@@ -77,7 +83,6 @@ Version 8.3.0
 - Changed recycle mass flow error calculation
 - Fixed D2O ideal gas enthalpy/gibbs energy of formation
 - Fixed many High-DPI issues (Classic UI)
-- Fixed Gibbs Element Matrix editor (CPUI) (#371)
 - Other bug fixes
 
 Version 8.2.1

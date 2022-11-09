@@ -1,3 +1,9 @@
+Version 8.3.1
+
+- Improved reliability of VLE and VLLE flash algorithms
+- Fixed Gibbs Element Matrix editor (CPUI) (#371)
+- Automation Interface fixes
+
 Version 8.3.0
 
 - Python Script Controller (Dynamics)
@@ -13,5 +19,4 @@ Version 8.3.0
 - Changed recycle mass flow error calculation
 - Fixed D2O ideal gas enthalpy/gibbs energy of formation
 - Fixed many High-DPI issues (Classic UI)
-- Fixed Gibbs Element Matrix editor (CPUI) (#371)
 - Other bug fixes
