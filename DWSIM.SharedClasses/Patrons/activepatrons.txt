@@ -1,6 +1,7 @@
 ﻿Adam Kovalovszki
 Alberto Baumeister
 Alex Platon
+Alexander Semenyak
 Alfred Gongaware
 Andras Nady
 Anders Andreasen
