@@ -28,6 +28,7 @@ namespace DWSIM.Automation
     }
 
     [Guid("37437090-e541-4f2c-9856-d1e27df32ecb"), ClassInterface(ClassInterfaceType.None)]
+    [ComVisible(true)]
     public class Automation : AutomationInterface
     {
 
@@ -118,6 +119,7 @@ namespace DWSIM.Automation
     }
 
     [Guid("22694b87-1ba6-4341-81dd-8d33f48643d7"), ClassInterface(ClassInterfaceType.None)]
+    [ComVisible(true)]
     public class Automation2 : AutomationInterface
     {
 
@@ -227,6 +229,7 @@ namespace DWSIM.Automation
     }
 
     [Guid("62486815-2330-4CDE-8962-41F576B0C2B8"), ClassInterface(ClassInterfaceType.None)]
+    [ComVisible(true)]
     public class Automation3
     {
 
@@ -241,6 +244,7 @@ namespace DWSIM.Automation
             FlowsheetBase.FlowsheetBase.AddPropPacks();
         }
 
+        [DispId(0)]
         public string GetVersion()
         {
 
@@ -265,6 +269,7 @@ namespace DWSIM.Automation
             }
         }
 
+        [DispId(1)]
         public IFlowsheet LoadFlowsheet(string filepath, Action UIUpdHandler = null)
         {
             Settings.AutomationMode = true;
@@ -282,16 +287,37 @@ namespace DWSIM.Automation
             return fsheet;
         }
 
+        [DispId(2)]
+        public IFlowsheet LoadFlowsheet2(string filepath)
+        {
+            Settings.AutomationMode = true;
+            Settings.CultureInfo = "en";
+            var fsheet = new Flowsheet2(null, null);
+            fsheet.Init();
+            if (System.IO.Path.GetExtension(filepath).ToLower().EndsWith("z"))
+            {
+                fsheet.LoadZippedXML(filepath);
+            }
+            else
+            {
+                fsheet.LoadFromXML(XDocument.Load(filepath));
+            }
+            return fsheet;
+        }
+
+        [DispId(3)]
         public void ReleaseResources()
         {
 
         }
 
+        [DispId(4)]
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
         {
             ((Flowsheet2)flowsheet).SaveSimulation(filepath);
         }
 
+        [DispId(5)]
         public void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender)
         {
             Settings.CalculatorActivated = true;
@@ -299,6 +325,7 @@ namespace DWSIM.Automation
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
+        [DispId(6)]
         public void CalculateFlowsheet2(IFlowsheet flowsheet)
         {
             Settings.CalculatorActivated = true;
@@ -306,6 +333,7 @@ namespace DWSIM.Automation
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
+        [DispId(7)]
         public void CalculateFlowsheet3(IFlowsheet flowsheet, int timeout_seconds)
         {
             Settings.CalculatorActivated = true;
@@ -314,6 +342,7 @@ namespace DWSIM.Automation
             ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
+        [DispId(8)]
         public List<Exception> CalculateFlowsheet4(IFlowsheet flowsheet)
         {
             Settings.CalculatorActivated = true;
@@ -321,11 +350,13 @@ namespace DWSIM.Automation
             return ((Flowsheet2)flowsheet).SolveFlowsheet2();
         }
 
+        [DispId(9)]
         public void SaveFlowsheet2(IFlowsheet flowsheet, string filepath)
         {
             SaveFlowsheet(flowsheet, filepath, true);
         }
 
+        [DispId(10)]
         public IFlowsheet CreateFlowsheet()
         {
             Settings.AutomationMode = true;
