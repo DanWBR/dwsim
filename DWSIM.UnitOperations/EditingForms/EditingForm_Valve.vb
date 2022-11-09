@@ -3,6 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports WeifenLuo.WinFormsUI.Docking
+Imports unvell.ReoGrid
 
 Public Class EditingForm_Valve
 
@@ -31,6 +32,19 @@ Public Class EditingForm_Valve
             .SetRows(100)
             .SetCols(2)
             .SetColumnsWidth(0, 2, 100)
+            .SetRangeStyles(0, 0, 100, 2, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.HorizontalAlign,
+                .HAlign = ReoGridHorAlign.Right
+            })
+            .SetRangeStyles(0, 0, 100, 2, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.VerticalAlign,
+                .VAlign = ReoGridVerAlign.Middle
+            })
+            .SetRangeStyles(0, 0, 100, 2, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.FontAll,
+                .FontName = System.Drawing.SystemFonts.MessageBoxFont.Name,
+                .FontSize = System.Drawing.SystemFonts.MessageBoxFont.SizeInPoints
+            })
             .ColumnHeaders(0).Text = "Opening (%)"
             .ColumnHeaders(1).Text = "Kv/Kvmax (%)"
             AddHandler .CellDataChanged,

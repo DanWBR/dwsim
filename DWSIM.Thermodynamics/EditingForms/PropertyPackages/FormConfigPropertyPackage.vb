@@ -28,173 +28,6 @@ Public Class FormConfigPropertyPackage
 
     Public Loaded As Boolean = False
 
-    Private Sub FillUNIFACParamTable(ByVal type As String)
-
-        'fill UNIFAC interaction parameter list
-        Dim k, l As Integer
-        Dim PrimaryGroups As New SortedList()
-        Dim uni As Object = Nothing
-        Dim g1, g2 As Integer
-        Dim ip, pg As String
-
-        Select Case type
-            Case "UNIFAC"
-                uni = New PropertyPackages.Auxiliary.Unifac
-            Case "UNIFACLL"
-                uni = New PropertyPackages.Auxiliary.UnifacLL
-            Case "MODFAC"
-                uni = New PropertyPackages.Auxiliary.Modfac
-            Case "NIST-MODFAC"
-                uni = New PropertyPackages.Auxiliary.NISTMFAC
-        End Select
-
-        'create list of all subgroups and primary groups
-        PrimaryGroups.Clear()
-        For Each cp As ConstantProperties In _comps.Values
-            If type = "UNIFAC" Or type = "UNIFACLL" Then
-                For Each ufg In cp.UNIFACGroups.Keys
-                    pg = uni.UnifGroups.Groups(Integer.Parse(ufg)).PrimGroupName
-                    If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.UnifGroups.Groups(ufg).PrimaryGroup)
-                Next
-            ElseIf type = "NIST-MODFAC" Then
-                For Each ufg In cp.NISTMODFACGroups.Keys
-                    pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
-                    If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
-                Next
-            Else
-                For Each ufg In cp.MODFACGroups.Keys
-                    pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
-                    If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
-                Next
-            End If
-        Next
-
-        IPGrid.ColumnCount = PrimaryGroups.Count + 1
-        IPGrid.RowCount = PrimaryGroups.Count + _comps.Count + 1
-        IPGrid.Columns(0).HeaderText = "Component"
-        k = 1
-        For Each gn As String In PrimaryGroups.Keys
-            IPGrid.Columns(k).HeaderText = gn
-            IPGrid.Item(k, _comps.Count).Value = gn
-            IPGrid.Item(k, _comps.Count).ToolTipText = "Main group"
-            IPGrid.Item(0, _comps.Count + k).Value = gn
-            IPGrid.Item(0, _comps.Count + k).ToolTipText = "Main group"
-            IPGrid.Item(0, _comps.Count + k).Style.Alignment = DataGridViewContentAlignment.MiddleRight
-            IPGrid.Item(0, _comps.Count + k).Style.BackColor = Color.Crimson
-            IPGrid.Item(k, _comps.Count).Style.BackColor = Color.Crimson
-            IPGrid.Item(0, _comps.Count + k).Style.ForeColor = Color.Yellow
-            IPGrid.Item(k, _comps.Count).Style.ForeColor = Color.Yellow
-            k += 1
-        Next
-        IPGrid.Item(0, _comps.Count).Style.ForeColor = Color.Yellow
-        IPGrid.Item(0, _comps.Count).Style.BackColor = Color.Crimson
-        IPGrid.Item(0, _comps.Count).Selected = True
-        IPGrid.Item(0, _comps.Count).Value = "Interaction Parameters"
-        IPGrid.Item(0, _comps.Count).Style.Alignment = DataGridViewContentAlignment.MiddleRight
-
-        For k = 1 To PrimaryGroups.Count
-            For l = 0 To _comps.Count - 1
-                IPGrid.Item(k, l).Style.BackColor = Color.LightGray
-            Next
-        Next
-
-        'List of components with their groups
-        For Each s1 As String In PrimaryGroups.Keys
-            For Each s2 As String In PrimaryGroups.Keys
-                g1 = PrimaryGroups.Item(s1)
-                g2 = PrimaryGroups.Item(s2)
-
-                If g1 = g2 Then
-                    IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Black
-                Else
-                    If type = "UNIFAC" Or type = "UNIFACLL" Then
-                        If uni.UnifGroups.InteracParam.ContainsKey(g1) Then
-                            If uni.UnifGroups.InteracParam(g1).ContainsKey(g2) Then
-                                ip = uni.UnifGroups.InteracParam(g1).Item(g2)
-                            Else
-                                ip = "X"
-                            End If
-                        Else
-                            ip = "X"
-                        End If
-                    Else
-                        If uni.ModfGroups.InteracParam_aij.ContainsKey(g1) And uni.ModfGroups.InteracParam_aij(g1).ContainsKey(g2) Then
-                            ip = "A: " & uni.ModfGroups.InteracParam_aij(g1).Item(g2) & vbCrLf & "B: " & uni.ModfGroups.InteracParam_bij(g1).Item(g2) & vbCrLf & "C: " & uni.ModfGroups.InteracParam_cij(g1).Item(g2)
-
-                            If uni.ModfGroups.InteracParam_aij(g1).Item(g2) = 0 Then IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Yellow
-                        Else
-                            If uni.ModfGroups.InteracParam_aij.ContainsKey(g2) And uni.ModfGroups.InteracParam_aij(g2).ContainsKey(g1) Then
-                                ip = "A: " & uni.ModfGroups.InteracParam_aji(g2).Item(g1) & vbCrLf & "B: " & uni.ModfGroups.InteracParam_bji(g2).Item(g1) & vbCrLf & "C: " & uni.ModfGroups.InteracParam_cji(g2).Item(g1)
-
-                                If uni.ModfGroups.InteracParam_aji(g2).Item(g1) = 0 Then IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Yellow
-                            Else
-                                ip = "X"
-                            End If
-                        End If
-                    End If
-
-                    IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.WrapMode = DataGridViewTriState.True
-                    IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Value = ip
-                    If ip = "X" Then
-                        IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Yellow
-                    End If
-                End If
-
-            Next
-        Next
-
-        'Fill table with subgoup list of components
-        k = 0
-        For Each cp As ConstantProperties In _comps.Values
-            IPGrid.Item(0, k).Value = cp.Name
-            IPGrid.Item(0, k).Style.BackColor = Color.CadetBlue
-            IPGrid.Item(0, k).Style.ForeColor = Color.White
-            IPGrid.Item(0, k).Style.Alignment = DataGridViewContentAlignment.MiddleRight
-            If type = "UNIFAC" Or type = "UNIFACLL" Then
-                If cp.UNIFACGroups.Count > 0 Then
-                    For Each ufg As String In cp.UNIFACGroups.Keys
-                        l = Integer.Parse(ufg)
-                        pg = uni.UnifGroups.Groups(l).PrimGroupName
-                        l = PrimaryGroups.IndexOfKey(pg)
-                        IPGrid.Item(l + 1, k).Value = IPGrid.Item(l + 1, k).Value + cp.UNIFACGroups.Item(ufg)
-                    Next
-                Else
-                    IPGrid.Item(0, k).Style.BackColor = Color.Yellow
-                    IPGrid.Item(0, k).Style.ForeColor = Color.Black
-                End If
-            ElseIf type = "MODFAC" Then
-                If cp.MODFACGroups.Count > 0 Then
-                    For Each ufg As String In cp.MODFACGroups.Keys
-                        l = Integer.Parse(ufg)
-                        pg = uni.ModfGroups.Groups(l).MainGroupName
-                        l = PrimaryGroups.IndexOfKey(pg)
-                        g1 = IPGrid.Item(l + 1, k).Value
-                        g2 = cp.MODFACGroups.Item(ufg)
-                        IPGrid.Item(l + 1, k).Value = g1 + g2
-                    Next
-                Else
-                    IPGrid.Item(0, k).Style.BackColor = Color.Yellow
-                    IPGrid.Item(0, k).Style.ForeColor = Color.Black
-                End If
-            Else 'NIST-MODFAC
-                If cp.NISTMODFACGroups.Count > 0 Then
-                    For Each ufg As String In cp.NISTMODFACGroups.Keys
-                        l = Integer.Parse(ufg)
-                        pg = uni.ModfGroups.Groups(l).MainGroupName
-                        l = PrimaryGroups.IndexOfKey(pg)
-                        g1 = IPGrid.Item(l + 1, k).Value
-                        g2 = cp.NISTMODFACGroups.Item(ufg)
-                        IPGrid.Item(l + 1, k).Value = g1 + g2
-                    Next
-                Else
-                    IPGrid.Item(0, k).Style.BackColor = Color.Yellow
-                    IPGrid.Item(0, k).Style.ForeColor = Color.Black
-                End If
-            End If
-            k += 1
-        Next
-    End Sub
-
     Private Sub SetupGrid()
 
         Dim comps = _pp.Flowsheet.SelectedCompounds.Keys
@@ -221,8 +54,8 @@ Public Class FormConfigPropertyPackage
                 .HAlign = ReoGridHorAlign.Right
             })
             .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
-                .Flag = PlainStyleFlag.Padding,
-                .Padding = New PaddingValue(3)
+                .Flag = PlainStyleFlag.VerticalAlign,
+                .VAlign = ReoGridVerAlign.Middle
             })
             .SetRangeStyles(0, 0, comps.Count, comps.Count, New WorksheetRangeStyle With {
                 .Flag = PlainStyleFlag.FontAll,
@@ -627,6 +460,172 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
         Else
             Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "pr_ip.dat")
         End If
+    End Sub
+    Private Sub FillUNIFACParamTable(ByVal type As String)
+
+        'fill UNIFAC interaction parameter list
+        Dim k, l As Integer
+        Dim PrimaryGroups As New SortedList()
+        Dim uni As Object = Nothing
+        Dim g1, g2 As Integer
+        Dim ip, pg As String
+
+        Select Case type
+            Case "UNIFAC"
+                uni = New PropertyPackages.Auxiliary.Unifac
+            Case "UNIFACLL"
+                uni = New PropertyPackages.Auxiliary.UnifacLL
+            Case "MODFAC"
+                uni = New PropertyPackages.Auxiliary.Modfac
+            Case "NIST-MODFAC"
+                uni = New PropertyPackages.Auxiliary.NISTMFAC
+        End Select
+
+        'create list of all subgroups and primary groups
+        PrimaryGroups.Clear()
+        For Each cp As ConstantProperties In _comps.Values
+            If type = "UNIFAC" Or type = "UNIFACLL" Then
+                For Each ufg In cp.UNIFACGroups.Keys
+                    pg = uni.UnifGroups.Groups(Integer.Parse(ufg)).PrimGroupName
+                    If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.UnifGroups.Groups(ufg).PrimaryGroup)
+                Next
+            ElseIf type = "NIST-MODFAC" Then
+                For Each ufg In cp.NISTMODFACGroups.Keys
+                    pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
+                    If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
+                Next
+            Else
+                For Each ufg In cp.MODFACGroups.Keys
+                    pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
+                    If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
+                Next
+            End If
+        Next
+
+        IPGrid.ColumnCount = PrimaryGroups.Count + 1
+        IPGrid.RowCount = PrimaryGroups.Count + _comps.Count + 1
+        IPGrid.Columns(0).HeaderText = "Component"
+        k = 1
+        For Each gn As String In PrimaryGroups.Keys
+            IPGrid.Columns(k).HeaderText = gn
+            IPGrid.Item(k, _comps.Count).Value = gn
+            IPGrid.Item(k, _comps.Count).ToolTipText = "Main group"
+            IPGrid.Item(0, _comps.Count + k).Value = gn
+            IPGrid.Item(0, _comps.Count + k).ToolTipText = "Main group"
+            IPGrid.Item(0, _comps.Count + k).Style.Alignment = DataGridViewContentAlignment.MiddleRight
+            IPGrid.Item(0, _comps.Count + k).Style.BackColor = Color.Crimson
+            IPGrid.Item(k, _comps.Count).Style.BackColor = Color.Crimson
+            IPGrid.Item(0, _comps.Count + k).Style.ForeColor = Color.Yellow
+            IPGrid.Item(k, _comps.Count).Style.ForeColor = Color.Yellow
+            k += 1
+        Next
+        IPGrid.Item(0, _comps.Count).Style.ForeColor = Color.Yellow
+        IPGrid.Item(0, _comps.Count).Style.BackColor = Color.Crimson
+        IPGrid.Item(0, _comps.Count).Selected = True
+        IPGrid.Item(0, _comps.Count).Value = "Interaction Parameters"
+        IPGrid.Item(0, _comps.Count).Style.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        For k = 1 To PrimaryGroups.Count
+            For l = 0 To _comps.Count - 1
+                IPGrid.Item(k, l).Style.BackColor = Color.LightGray
+            Next
+        Next
+
+        'List of components with their groups
+        For Each s1 As String In PrimaryGroups.Keys
+            For Each s2 As String In PrimaryGroups.Keys
+                g1 = PrimaryGroups.Item(s1)
+                g2 = PrimaryGroups.Item(s2)
+
+                If g1 = g2 Then
+                    IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Black
+                Else
+                    If type = "UNIFAC" Or type = "UNIFACLL" Then
+                        If uni.UnifGroups.InteracParam.ContainsKey(g1) Then
+                            If uni.UnifGroups.InteracParam(g1).ContainsKey(g2) Then
+                                ip = uni.UnifGroups.InteracParam(g1).Item(g2)
+                            Else
+                                ip = "X"
+                            End If
+                        Else
+                            ip = "X"
+                        End If
+                    Else
+                        If uni.ModfGroups.InteracParam_aij.ContainsKey(g1) And uni.ModfGroups.InteracParam_aij(g1).ContainsKey(g2) Then
+                            ip = "A: " & uni.ModfGroups.InteracParam_aij(g1).Item(g2) & vbCrLf & "B: " & uni.ModfGroups.InteracParam_bij(g1).Item(g2) & vbCrLf & "C: " & uni.ModfGroups.InteracParam_cij(g1).Item(g2)
+
+                            If uni.ModfGroups.InteracParam_aij(g1).Item(g2) = 0 Then IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Yellow
+                        Else
+                            If uni.ModfGroups.InteracParam_aij.ContainsKey(g2) And uni.ModfGroups.InteracParam_aij(g2).ContainsKey(g1) Then
+                                ip = "A: " & uni.ModfGroups.InteracParam_aji(g2).Item(g1) & vbCrLf & "B: " & uni.ModfGroups.InteracParam_bji(g2).Item(g1) & vbCrLf & "C: " & uni.ModfGroups.InteracParam_cji(g2).Item(g1)
+
+                                If uni.ModfGroups.InteracParam_aji(g2).Item(g1) = 0 Then IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Yellow
+                            Else
+                                ip = "X"
+                            End If
+                        End If
+                    End If
+
+                    IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.WrapMode = DataGridViewTriState.True
+                    IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Value = ip
+                    If ip = "X" Then
+                        IPGrid.Item(PrimaryGroups.IndexOfKey(s1) + 1, PrimaryGroups.IndexOfKey(s2) + 1 + _comps.Count).Style.BackColor = Color.Yellow
+                    End If
+                End If
+
+            Next
+        Next
+
+        'Fill table with subgoup list of components
+        k = 0
+        For Each cp As ConstantProperties In _comps.Values
+            IPGrid.Item(0, k).Value = cp.Name
+            IPGrid.Item(0, k).Style.BackColor = Color.CadetBlue
+            IPGrid.Item(0, k).Style.ForeColor = Color.White
+            IPGrid.Item(0, k).Style.Alignment = DataGridViewContentAlignment.MiddleRight
+            If type = "UNIFAC" Or type = "UNIFACLL" Then
+                If cp.UNIFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.UNIFACGroups.Keys
+                        l = Integer.Parse(ufg)
+                        pg = uni.UnifGroups.Groups(l).PrimGroupName
+                        l = PrimaryGroups.IndexOfKey(pg)
+                        IPGrid.Item(l + 1, k).Value = IPGrid.Item(l + 1, k).Value + cp.UNIFACGroups.Item(ufg)
+                    Next
+                Else
+                    IPGrid.Item(0, k).Style.BackColor = Color.Yellow
+                    IPGrid.Item(0, k).Style.ForeColor = Color.Black
+                End If
+            ElseIf type = "MODFAC" Then
+                If cp.MODFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.MODFACGroups.Keys
+                        l = Integer.Parse(ufg)
+                        pg = uni.ModfGroups.Groups(l).MainGroupName
+                        l = PrimaryGroups.IndexOfKey(pg)
+                        g1 = IPGrid.Item(l + 1, k).Value
+                        g2 = cp.MODFACGroups.Item(ufg)
+                        IPGrid.Item(l + 1, k).Value = g1 + g2
+                    Next
+                Else
+                    IPGrid.Item(0, k).Style.BackColor = Color.Yellow
+                    IPGrid.Item(0, k).Style.ForeColor = Color.Black
+                End If
+            Else 'NIST-MODFAC
+                If cp.NISTMODFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.NISTMODFACGroups.Keys
+                        l = Integer.Parse(ufg)
+                        pg = uni.ModfGroups.Groups(l).MainGroupName
+                        l = PrimaryGroups.IndexOfKey(pg)
+                        g1 = IPGrid.Item(l + 1, k).Value
+                        g2 = cp.NISTMODFACGroups.Item(ufg)
+                        IPGrid.Item(l + 1, k).Value = g1 + g2
+                    Next
+                Else
+                    IPGrid.Item(0, k).Style.BackColor = Color.Yellow
+                    IPGrid.Item(0, k).Style.ForeColor = Color.Black
+                End If
+            End If
+            k += 1
+        Next
     End Sub
 
 End Class
