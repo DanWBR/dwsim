@@ -118,6 +118,11 @@ namespace DWSIM.UI.Desktop.Shared
         {
             return new String[] { "Adiabatic", "Isothermic", "Outlet Temperature", "Non-Isothermal Non-Adiabatic" };
         }
+
+        public static String[] rgrpb()
+        {
+            return new String[] { "Calculate Equilibria", "Vapor Only", "Liquid Only", "Solid Only" };
+        }
         public static String[] csepspecstream()
         {
             return new String[] { "Stream 1", "Stream 2" };

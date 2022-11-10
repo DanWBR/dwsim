@@ -205,6 +205,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 chkGibbsUseIPOPT.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver
 
+                cbReactivePhaseBehavior.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).ReactivePhaseBehavior
+
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
@@ -755,4 +757,9 @@ Public Class EditingForm_ReactorConvEqGibbs
         End If
     End Sub
 
+    Private Sub cbReactivePhaseBehavior_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbReactivePhaseBehavior.SelectedIndexChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).ReactivePhaseBehavior = cbReactivePhaseBehavior.SelectedIndex
+        End If
+    End Sub
 End Class

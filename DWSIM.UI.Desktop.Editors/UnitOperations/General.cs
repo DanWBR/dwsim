@@ -1748,6 +1748,10 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddTextBoxRow(container, nf, "Error Tolerance", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); });
                     s.CreateAndAddCheckBoxRow(container, "Use IPOPT Solver", reactor2g.UseIPOPTSolver, (sender, e) => reactor2g.UseIPOPTSolver = sender.Checked.GetValueOrDefault());
                     s.CreateAndAddCheckBoxRow(container, "Use Alternate Solving Method", reactor2g.AlternateSolvingMethod, (sender, e) => reactor2g.AlternateSolvingMethod = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddDropDownRow(container, "Reactive Phase Behavior", StringResources.rgrpb().ToList(), (int)reactor2g.ReactivePhaseBehavior, (DropDown arg3, EventArgs ev) =>
+                    {
+                        reactor2g.ReactivePhaseBehavior = arg3.SelectedIndex.ToEnum<Reactor_Gibbs.ReactivePhaseType>();
+                    });
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;

@@ -103,7 +103,7 @@ Namespace MathEx.Optimization
                        0, 0, AddressOf eval_f, AddressOf eval_g,
                        AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                 problem.AddOption("tol", Tolerance)
-                problem.AddOption("print_level", 1)
+                problem.AddOption("print_level", 5)
                 problem.AddOption("max_iter", MaxIterations)
                 problem.AddOption("mu_strategy", "adaptive")
                 problem.AddOption("hessian_approximation", "limited-memory")
