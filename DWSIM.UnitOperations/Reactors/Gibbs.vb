@@ -1330,6 +1330,8 @@ Namespace Reactors
 
                             Dim icount As Integer = 0
 
+                            pp.CurrentMaterialStream = ims
+
                             Dim delgfl As New List(Of Double)
                             For Each cmp As Compound In ims.Phases(0).Compounds.Values
                                 delgfl.Add(pp.AUX_DELGF_T(298.15, T, cmp.Name) * cmp.ConstantProperties.Molar_Weight)
