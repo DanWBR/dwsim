@@ -191,7 +191,7 @@ Namespace SystemsOfUnits
                                    "MMSCFD", "SCFD", "SCFM",
                                    "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ NC"})
                 Case Enums.UnitOfMeasure.volumetricFlow
-                    units.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
+                    units.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/min", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "gal[US]/s", "L/h", "L/min", "L/s"})
                 Case Enums.UnitOfMeasure.enthalpy
                     units.AddRange(New String() {"kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"})
                 Case Enums.UnitOfMeasure.entropy
@@ -222,7 +222,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.time
                     units.AddRange(New String() {"s", "min.", "h"})
                 Case Enums.UnitOfMeasure.volume
-                    units.AddRange(New String() {"m3", "cm3", "L", "ft3"})
+                    units.AddRange(New String() {"m3", "cm3", "L", "ft3", "bbl", "gal[US]", "gal[UK]"})
                 Case Enums.UnitOfMeasure.molar_volume
                     units.AddRange(New String() {"m3/kmol", "cm3/mmol", "ft3/lbmol"})
                 Case Enums.UnitOfMeasure.area
@@ -284,7 +284,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.massflow
                 Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm"
                     Return Enums.UnitOfMeasure.molarflow
-                Case "m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s",
+                Case "m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/min", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "gal[US]/s", "L/h", "L/min", "L/s",
                      "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
                     "MMSCFD", "SCFD", "SCFM",
                     "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ SC"
@@ -318,7 +318,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.heatflow
                 Case "s", "min.", "h"
                     Return Enums.UnitOfMeasure.time
-                Case "m3", "cm3", "L", "ft3"
+                Case "m3", "cm3", "L", "ft3", "bbl", "gal[US]", "gal[UK]"
                     Return Enums.UnitOfMeasure.volume
                 Case "m3/kmol", "cm3/mmol", "ft3/lbmol"
                     Return Enums.UnitOfMeasure.molar_volume
@@ -1323,12 +1323,16 @@ Namespace SystemsOfUnits
                     Return value / 35.3147
                 Case "gal[uk]/h"
                     Return value / 791889
+                Case "gal[uk]/min"
+                    Return value / 219.969 / 60
                 Case "gal[uk]/s"
                     Return value / 219.969
                 Case "gal[us]/h"
                     Return value / 951019
                 Case "gal[us]/min"
                     Return value / 15850.3
+                Case "gal[us]/s"
+                    Return value / 15850.3 * 60.0
                 Case "l/h"
                     Return value / 3600000.0
                 Case "l/min"
@@ -1419,8 +1423,14 @@ Namespace SystemsOfUnits
                     Return value
                 Case "cm3"
                     Return value / 1000000.0
-                Case "l"
+                Case "L"
                     Return value / 1000.0
+                Case "gal[US]"
+                    Return value * 0.00378541
+                Case "gal[UK]"
+                    Return value * 0.00454609
+                Case "bbl"
+                    Return value * 0.158987
 
                 Case "cm3/mol"                          'volume molar'
                     Return value / 1000.0
@@ -1788,12 +1798,16 @@ Namespace SystemsOfUnits
                     Return value * 35.3147
                 Case "gal[uk]/h"
                     Return value * 791889
+                Case "gal[uk]/min"
+                    Return value * 219.969 * 60
                 Case "gal[uk]/s"
                     Return value * 219.969
                 Case "gal[us]/h"
                     Return value * 951019
                 Case "gal[us]/min"
                     Return value * 15850.3
+                Case "gal[us]/s"
+                    Return value * 15850.3 / 60.0
                 Case "l/h"
                     Return value * 3600000.0
                 Case "l/min"
@@ -1912,8 +1926,14 @@ Namespace SystemsOfUnits
                     Return value
                 Case "cm3"
                     Return value * 1000000.0
-                Case "l"
+                Case "L"
                     Return value * 1000.0
+                Case "gal[US]"
+                    Return value / 0.00378541
+                Case "gal[UK]"
+                    Return value / 0.00454609
+                Case "bbl"
+                    Return value / 0.158987
 
                 Case "cm3/mol"                          'volume molar'
                     Return value * 1000.0
