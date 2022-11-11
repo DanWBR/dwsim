@@ -230,7 +230,7 @@ namespace DWSIM.Automation
 
     [Guid("62486815-2330-4CDE-8962-41F576B0C2B8"), ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
-    public class Automation3
+    public class Automation3 : AutomationInterface
     {
 
         public Automation3()
@@ -257,16 +257,28 @@ namespace DWSIM.Automation
 
         static Assembly LoadAssembly(object sender, ResolveEventArgs args)
         {
-            string assemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), new AssemblyName(args.Name).Name + ".dll");
-            if (!File.Exists(assemblyPath))
+            var directories = new List<string>
             {
-                return null;
-            }
-            else
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "extenders"),
+                Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName,
+                Path.Combine(Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName, "extenders"),
+                Directory.GetCurrentDirectory(),
+                Path.Combine(Directory.GetCurrentDirectory(), "extenders")
+            };
+
+            foreach (var dir in directories)
             {
-                Assembly assembly = Assembly.LoadFrom(assemblyPath);
-                return assembly;
+                var fullPath = Path.Combine(dir, new AssemblyName(args.Name).Name + ".dll");
+                if (File.Exists(fullPath))
+                {
+                    var assembly = Assembly.LoadFrom(fullPath);
+                    return assembly;
+                }
             }
+
+            return null;
+
         }
 
         [DispId(1)]
@@ -370,6 +382,44 @@ namespace DWSIM.Automation
             throw new NotImplementedException();
         }
 
+        public IFlowsheet LoadFlowsheet(string filepath)
+        {
+            try
+            {
+                return LoadFlowsheet(filepath, null);
+            }
+            catch (Exception ex){
+                Logging.Logger.LogError("Automation Error (LoadFlowsheet)", ex);
+                throw ex;
+            }
+        }
+
+        List<Exception> AutomationInterface.CalculateFlowsheet2(IFlowsheet flowsheet)
+        {
+            try
+            {
+                return CalculateFlowsheet4(flowsheet);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError("Automation Error (CalculateFlowsheet2)", ex);
+                throw ex;
+            }
+        }
+
+        List<Exception> AutomationInterface.CalculateFlowsheet3(IFlowsheet flowsheet, int timeout_seconds)
+        {
+            try
+            {
+                GlobalSettings.Settings.SolverTimeoutSeconds = timeout_seconds;
+                return CalculateFlowsheet4(flowsheet);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.LogError("Automation Error (CalculateFlowsheet3)", ex);
+                throw ex;
+            }
+        }
     }
 
 }

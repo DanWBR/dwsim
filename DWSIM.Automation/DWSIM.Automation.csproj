@@ -97,6 +97,11 @@
       <Name>DWSIM.FlowsheetBase</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Logging\DWSIM.Logging.csproj">
+      <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
+      <Name>DWSIM.Logging</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
@@ -135,6 +140,7 @@
     <ProjectReference Include="..\DWSIM.Simulate365\DWSIM.Simulate365.csproj">
       <Project>{1cc0851c-f6c2-477c-a725-a2e1c5e96802}</Project>
       <Name>DWSIM.Simulate365</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>

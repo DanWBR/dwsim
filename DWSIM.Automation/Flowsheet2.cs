@@ -5,12 +5,15 @@ using iTextSharp.text;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static DWSIM.Interfaces.Enums.Scripts;
 
 namespace DWSIM.Automation
 {
+    [Guid("474a8e52-0b3e-48cb-a3bb-aae60f843578"), ClassInterface(ClassInterfaceType.None)]
+    [ComVisible(true)]
     public class Flowsheet2 : FlowsheetBase.FlowsheetBase
     {
         private Action<string, IFlowsheet.MessageType> listeningaction;
