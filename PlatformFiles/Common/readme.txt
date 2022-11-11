@@ -65,6 +65,7 @@ The full changelog including souce code changes can be viewed at https://github.
 Version 8.3.1
 
 - Improved reliability of VLE and VLLE flash algorithms
+- Improved calculation speed for Gibbs Reactor model
 - Fixed Gibbs Element Matrix editor (CPUI) (#371)
 - Automation Interface fixes
 
