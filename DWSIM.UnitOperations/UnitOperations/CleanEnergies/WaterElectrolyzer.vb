@@ -349,7 +349,7 @@ Namespace UnitOperations
 
             CellVoltage = Voltage / NumberOfCells
 
-            If CellVoltage < spO2 Then Throw New Exception("Not enough power")
+            If CellVoltage < spO2 Then Throw New Exception("Total Voltage too low")
 
             Dim overV = CellVoltage - spO2
 
@@ -362,7 +362,7 @@ Namespace UnitOperations
             For i As Integer = 0 To N0.Count - 1
                 If names(i) = "Water" Then
                     Nf(i) = N0(i) - waterr
-                    If (Nf(i) < 0.0) Then Throw New Exception("Negative Water molar flow calculated")
+                    If (Nf(i) < 0.0) Then Throw New Exception("Negative Water molar flow calculated. Increase water rate in inlet stream or reduce power.")
                 ElseIf names(i) = "Hydrogen" Then
                     Nf(i) = N0(i) + h2r
                 ElseIf names(i) = "Oxygen" Then
