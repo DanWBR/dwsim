@@ -351,7 +351,9 @@ Namespace UnitOperations
 
             If CellVoltage < spO2 Then Throw New Exception("Total Voltage too low.")
 
-            Dim overV = CellVoltage - spO2
+            ' https://github.com/DanWBR/dwsim/issues/382
+
+            Dim overV = CellVoltage - 1.48
 
             WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
 
