@@ -349,7 +349,7 @@ Namespace UnitOperations
 
             CellVoltage = Voltage / NumberOfCells
 
-            If CellVoltage < spO2 Then Throw New Exception("Total Voltage too low")
+            If CellVoltage < spO2 Then Throw New Exception("Total Voltage too low.")
 
             Dim overV = CellVoltage - spO2
 
