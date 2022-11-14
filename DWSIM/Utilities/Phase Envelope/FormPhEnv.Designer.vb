@@ -25,7 +25,7 @@ Partial Class FormPhEnv
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPhEnv))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -199,17 +199,17 @@ Partial Class FormPhEnv
         '
         'cbhydmodel
         '
-        resources.ApplyResources(Me.cbhydmodel, "cbhydmodel")
         Me.cbhydmodel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbhydmodel.DropDownWidth = 260
         Me.cbhydmodel.Items.AddRange(New Object() {resources.GetString("cbhydmodel.Items"), resources.GetString("cbhydmodel.Items1"), resources.GetString("cbhydmodel.Items2"), resources.GetString("cbhydmodel.Items3")})
+        resources.ApplyResources(Me.cbhydmodel, "cbhydmodel")
         Me.cbhydmodel.Name = "cbhydmodel"
         '
         'tbQuality
         '
-        resources.ApplyResources(Me.tbQuality, "tbQuality")
         Me.tbQuality.DecimalPlaces = 2
         Me.tbQuality.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        resources.ApplyResources(Me.tbQuality, "tbQuality")
         Me.tbQuality.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.tbQuality.Name = "tbQuality"
         Me.tbQuality.Value = New Decimal(New Integer() {5, 0, 0, 65536})
@@ -566,58 +566,59 @@ Partial Class FormPhEnv
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GraphControl)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GraphControl
         '
-        resources.ApplyResources(Me.GraphControl, "GraphControl")
         Me.GraphControl.Cursor = System.Windows.Forms.Cursors.Default
+        resources.ApplyResources(Me.GraphControl, "GraphControl")
         Me.GraphControl.IsAntiAlias = True
         Me.GraphControl.IsAutoScrollRange = True
         Me.GraphControl.IsShowCopyMessage = False
         Me.GraphControl.Name = "GraphControl"
-        Me.GraphControl.ScrollGrace = 0.0R
-        Me.GraphControl.ScrollMaxX = 0.0R
-        Me.GraphControl.ScrollMaxY = 0.0R
-        Me.GraphControl.ScrollMaxY2 = 0.0R
-        Me.GraphControl.ScrollMinX = 0.0R
-        Me.GraphControl.ScrollMinY = 0.0R
-        Me.GraphControl.ScrollMinY2 = 0.0R
+        Me.GraphControl.ScrollGrace = 0R
+        Me.GraphControl.ScrollMaxX = 0R
+        Me.GraphControl.ScrollMaxY = 0R
+        Me.GraphControl.ScrollMaxY2 = 0R
+        Me.GraphControl.ScrollMinX = 0R
+        Me.GraphControl.ScrollMinY = 0R
+        Me.GraphControl.ScrollMinY2 = 0R
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.Grid1)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        Me.FaTabStripItem2.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'Grid1
         '
-        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.AllowUserToAddRows = False
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AllowUserToOrderColumns = True
         Me.Grid1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.Grid1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.Name = "Grid1"
         Me.Grid1.ReadOnly = True
         Me.Grid1.RowHeadersVisible = False
@@ -630,65 +631,64 @@ Partial Class FormPhEnv
         '
         'dckMenu
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         '
         'DockLeftToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         '
         'DockRightToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         '
         'DockTopToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         '
         'DockBottomToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         '
         'DocumentToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         '
         'FormPhEnv
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox6)

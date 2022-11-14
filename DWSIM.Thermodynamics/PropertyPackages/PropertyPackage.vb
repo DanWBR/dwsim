@@ -3426,22 +3426,22 @@ redirect2:                  IObj?.SetCurrent()
 
             With options
                 If Not .BubbleUseCustomParameters Then
-                    .BubbleCurveDeltaP = 50000
-                    .BubbleCurveDeltaT = 2.5
+                    .BubbleCurveDeltaP = 101325
+                    .BubbleCurveDeltaT = 1.0
                     .BubbleCurveInitialPressure = 0.0#
                     .BubbleCurveInitialTemperature = RET_VTF.Min
                     .BubbleCurveInitialFlash = "TVF"
-                    .BubbleCurveMaximumPoints = 300
+                    .BubbleCurveMaximumPoints = 500
                     .BubbleCurveMaximumTemperature = RET_VTC.Max * 1.2
                     .CheckLiquidInstability = False
                 End If
                 If Not .DewUseCustomParameters Then
-                    .DewCurveDeltaP = 50000
-                    .DewCurveDeltaT = 2.5
+                    .DewCurveDeltaP = 25000
+                    .DewCurveDeltaT = 1.0
                     .DewCurveInitialPressure = 101325
                     .DewCurveInitialTemperature = 0.0#
                     .DewCurveInitialFlash = "PVF"
-                    .DewCurveMaximumPoints = 300
+                    .DewCurveMaximumPoints = 500
                     .DewCurveMaximumTemperature = RET_VTC.Max * 1.5
                 End If
             End With
@@ -3674,7 +3674,11 @@ redirect2:                  IObj?.SetCurrent()
 
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.04 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+                    If stopAtCP Then
+                        If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 10000 Then
+                            Exit Do
+                        End If
+                    End If
 
                     If beta < 20 Then
                         If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
@@ -3695,7 +3699,9 @@ redirect2:                  IObj?.SetCurrent()
                 If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0.0#
 
                 If TypeOf Me Is PengRobinsonPropertyPackage Or TypeOf Me Is SRKPropertyPackage Then
-                    If Math.Abs(T - TCR) / TCR < 0.002 And Math.Abs(P - PCR) / PCR < 0.002 Then Exit Do
+                    If Math.Abs(T - TCR) / TCR < 0.002 And Math.Abs(P - PCR) / PCR < 0.002 Then
+                        Exit Do
+                    End If
                 End If
 
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points... " & ((i + 1) / options.BubbleCurveMaximumPoints * 100).ToString("N1") & "%")
@@ -3746,9 +3752,9 @@ redirect2:                  IObj?.SetCurrent()
 
                 Else
 
-                    If Abs(beta) < 2 Then
+                    If beta < 2.0 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, False, KI)
                             TVD.Add(T)
                             PO.Add(tmp2(4))
                             P = PO(PO.Count - 1)
@@ -3756,7 +3762,6 @@ redirect2:                  IObj?.SetCurrent()
                             SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
-                            beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         End Try
                     Else
@@ -3769,10 +3774,11 @@ redirect2:                  IObj?.SetCurrent()
                             SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
-                            beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         End Try
                     End If
+
+                    beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
 
                     If PO.Count > 50 Then
                         Dim p1 As Double = PO(PO.Count - 1)
@@ -3783,7 +3789,7 @@ redirect2:                  IObj?.SetCurrent()
                         Dim t3 As Double = TVD(TVD.Count - 3)
                         Dim d1 = ((p2 - p1) ^ 2 + (t2 - t1) ^ 2) ^ 0.5
                         Dim d2 = ((p3 - p2) ^ 2 + (t3 - t2) ^ 2) ^ 0.5
-                        If d2 > d1 * 20 And d1 > 0.0 Then
+                        If d2 > d1 * 50 And d1 > 0.0 Then
                             PO.RemoveAt(PO.Count - 1)
                             TVD.RemoveAt(TVD.Count - 1)
                             HO.RemoveAt(HO.Count - 1)
@@ -3793,12 +3799,16 @@ redirect2:                  IObj?.SetCurrent()
                         End If
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 50000 Then Exit Do
+                    If stopAtCP Then
+                        If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 10000 Then
+                            Exit Do
+                        End If
+                    End If
 
                     If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
                         T = T - options.DewCurveDeltaT * 0.1
                     Else
-                        If Abs(beta) < 2 Then
+                        If beta < 2.0 Then
                             If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
                                 If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
                                     T = T - options.DewCurveDeltaT * 0.1
@@ -3937,6 +3947,67 @@ redirect2:                  IObj?.SetCurrent()
                 End If
 
             End If
+
+            'complete lines up to critical point
+
+            Dim POL = PO(PO.Count - 1)
+            Dim TOL = TVD(TVD.Count - 1)
+            Dim PBL = PB(PB.Count - 1)
+            Dim TBL = TVB(TVB.Count - 1)
+
+            Dim DPO = (PCR - POL) / 10
+            Dim DTO = (TCR - TOL) / 10
+            Dim DPB = (PCR - PBL) / 10
+            Dim DTB = (TCR - TBL) / 10
+
+            'If Math.Abs(DPO * 10) > 101325 Or Math.Abs(DPB * 10) * 5 Or
+            '        Math.Abs(DTO * 10) > 101325 Or Math.Abs(DTB * 10) * 5 Then
+
+            '    Dim POlast = PO.ToDoubleList()
+            '    Dim PBLast = PB.ToDoubleList()
+            '    Dim TOlast = TVD.ToDoubleList()
+            '    Dim TBlast = TVB.ToDoubleList()
+
+            '    POlast.Add(PCR)
+            '    PBLast.Add(PCR)
+            '    TOlast.Add(TCR)
+            '    TBlast.Add(TCR)
+
+            '    POlast.Reverse()
+            '    PBLast.Reverse()
+            '    TOlast.Reverse()
+            '    TBlast.Reverse()
+
+            '    Dim POLn = POL + DPO
+            '    Dim PBLn = PBL + DPB
+            '    Dim TOLn = TOL + DTO
+            '    Dim TBLn = TBL + DTB
+            '    For i = 0 To 11
+            '        If Math.Abs(DTB) > 0.2 Then
+            '            Dim PBn = MathNet.Numerics.Interpolate.RationalWithPoles(TBlast.Take(10), PBLast.Take(10)).Interpolate(TBLn)
+            '            PB.Add(PBn)
+            '            TVB.Add(TBLn)
+            '        Else
+            '            Dim TBn = MathNet.Numerics.Interpolate.RationalWithPoles(PBLast.Take(10), TOlast.Take(10)).Interpolate(PBLn)
+            '            PB.Add(PBLn)
+            '            TVB.Add(TBn)
+            '        End If
+            '        If Math.Abs(DTO) > 0.2 Then
+            '            Dim POn = MathNet.Numerics.Interpolate.RationalWithPoles(TOlast.Take(10), POlast.Take(10)).Interpolate(TOLn)
+            '            PO.Add(POn)
+            '            TVD.Add(TOLn)
+            '        Else
+            '            Dim TOn = MathNet.Numerics.Interpolate.RationalWithPoles(POlast.Take(10), TOlast.Take(10)).Interpolate(POLn)
+            '            PO.Add(POLn)
+            '            TVD.Add(TOn)
+            '        End If
+            '        POLn += DPO
+            '        PBLn += DPB
+            '        TOLn += DTO
+            '        TBLn += DTB
+            '    Next
+
+            'End If
 
             'calculate quality curve
 
@@ -8448,7 +8519,7 @@ Final3:
             n = Ki.Length - 1
 
             For i = 0 To n
-                If Abs(Ki(i) - 1) > tolerance Then isTrivial = False
+                If Abs(Ki(i) - 1.0) > tolerance Then isTrivial = False
             Next
 
             Return isTrivial

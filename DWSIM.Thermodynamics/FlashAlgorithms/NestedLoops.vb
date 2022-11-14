@@ -2158,22 +2158,46 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim result As Object()
+            Dim Kvals As Double()
+            Dim trivial As Boolean = False
 
             'result = Flash_PV_Saturated_Newton(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             'check if converged to the trivial solution.
             If result.Count > 1 Then
-                Dim Kvals As Double() = result(6)
-                Dim Tt As Double = result(4)
-                If PP.AUX_CheckTrivial(Kvals, 0.75) Then
-                    'try again with a slightly different temperature to get out of trivial region
-                    result = Flash_PV_1(Vz, P, V, Tt * 1.2, PP, ReuseKI, PrevKi)
+                Kvals = result(6)
+                If PP.AUX_CheckTrivial(Kvals, 0.975) Then trivial = True
+            End If
+            If result.Count = 1 Or trivial Then
+                result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
+                If result.Count > 1 Then
+                    Kvals = result(6)
+                    If PP.AUX_CheckTrivial(Kvals, 0.975) Then trivial = True
                 End If
             End If
-            If result.Count = 1 Then
-                result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
+            If result.Count = 1 And P > 101325 * 5 Or trivial Then
+                'Try quadratic extrapolation For initial T
+                Dim Tlist, Plist As New List(Of Double)
+                Dim Pl As Double = 101325
+                Dim deltaPl = (P / 2 - 101325) / 10
+                Dim Tl As Double = 0.0
+                For i = 0 To 10
+                    result = Flash_PV_1(Vz, Pl, V, Tl, PP, ReuseKI, PrevKi)
+                    If result.Count = 1 Then Exit For
+                    Tl = result(4)
+                    Kvals = result(6)
+                    Tlist.Add(Tl)
+                    Plist.Add(Pl)
+                    Pl += 101325
+                Next
+                If result.Count > 1 Then
+                    'extrapolate Tl
+                    Tl = MathNet.Numerics.Interpolate.RationalWithPoles(Plist, Tlist).Interpolate(P)
+                    result = Flash_PV_1(Vz, P, V, Tl, PP, True, Kvals)
+                End If
             End If
+
             Dim idealcalc As Boolean = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure)
             If result.Count = 1 And idealcalc Then
                 Using IPP As New RaoultPropertyPackage()
@@ -2466,7 +2490,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     xvals.Add(T)
                     fvals.Add(fval)
 
-                    If Math.Abs(fval) < etol Then Exit Do
+                    If Math.Abs(fval) < etol And ecount > 1 Then Exit Do
 
                     ecount += 1
 
