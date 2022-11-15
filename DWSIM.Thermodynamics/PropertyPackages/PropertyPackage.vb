@@ -3675,7 +3675,7 @@ redirect2:                  IObj?.SetCurrent()
                     End If
 
                     If stopAtCP Then
-                        If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 10000 Then
+                        If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 10000 Or T > TCR Then
                             Exit Do
                         End If
                     End If
@@ -3752,7 +3752,7 @@ redirect2:                  IObj?.SetCurrent()
 
                 Else
 
-                    If beta < 2.0 Then
+                    If beta < 0.0 Then
                         Try
                             tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, False, KI)
                             TVD.Add(T)
@@ -3808,7 +3808,7 @@ redirect2:                  IObj?.SetCurrent()
                     If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
                         T = T - options.DewCurveDeltaT * 0.1
                     Else
-                        If beta < 2.0 Then
+                        If beta < 0.0 Then
                             If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
                                 If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
                                     T = T - options.DewCurveDeltaT * 0.1
@@ -8519,7 +8519,10 @@ Final3:
             n = Ki.Length - 1
 
             For i = 0 To n
-                If Abs(Ki(i) - 1.0) > tolerance Then isTrivial = False
+                If Abs(Ki(i) - 1.0) > tolerance Then
+                    isTrivial = False
+                    Exit For
+                End If
             Next
 
             Return isTrivial
