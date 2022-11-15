@@ -43,9 +43,13 @@ Namespace UnitOperations
 
         Public Property ElectronTransfer As Double
 
+        Public Property ThermoNeutralVoltage As Double
+
+        Public Property ReversibleVoltage As Double
+
         Public Overrides Function GetProperties(proptype As PropertyType) As String()
 
-            Return New String() {"Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer"}
+            Return New String() {"Voltage", "Thermoneutral Voltage", "Reversible Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer"}
 
         End Function
 
@@ -56,6 +60,10 @@ Namespace UnitOperations
             Select Case prop
                 Case "Voltage"
                     Return Voltage
+                Case "Thermoneutral Voltage"
+                    Return ThermoNeutralVoltage
+                Case "Reversible Voltage"
+                    Return ReversibleVoltage
                 Case "Number of Cells"
                     Return NumberOfCells
                 Case "Cell Voltage"
@@ -77,7 +85,7 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI()
 
             Select Case prop
-                Case "Voltage"
+                Case "Voltage", "Thermoneutral Voltage", "Reversible Voltage"
                     Return "V"
                 Case "Number of Cells"
                     Return ""
@@ -333,9 +341,9 @@ Namespace UnitOperations
 
             Dim names = msin.Phases(0).Compounds.Keys.ToList()
 
-            If Not names.Contains("Water") Then Throw New Exception("Needs Water compound")
-            If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound")
-            If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound")
+            If Not names.Contains("Water") Then Throw New Exception("Needs Water compound.")
+            If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound.")
+            If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound.")
 
             Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
 
@@ -345,15 +353,38 @@ Namespace UnitOperations
             Dim h2r = ElectronTransfer / 4 * 2 'mol/s
             Dim o2r = ElectronTransfer / 4 'mol/s
 
-            Dim spO2 = 1.23 'V
+            Dim pp = DirectCast(PropertyPackage, Thermodynamics.PropertyPackages.PropertyPackage)
+
+            pp.CurrentMaterialStream = msin
+
+            Dim T = msin.GetTemperature()
+
+            'https://www.researchgate.net/publication/267979954_Integral_Characteristics_of_Hydrogen_Production_in_Alkaline_Electrolysers
+
+            Dim DGf = pp.AUX_DELGig_RT(298.15, T, New String() {"Water", "Hydrogen", "Oxygen"}, New Double() {-1.0, 1.0, 0.5}, 0) * 8.314 * T / 1000
+            Dim DHf = pp.AUX_DELHig_RT(298.15, T, New String() {"Water", "Hydrogen", "Oxygen"}, New Double() {-1.0, 1.0, 0.5}, 0) * 8.314 * T / 1000
+
+            Dim st As New Thermodynamics.PropertyPackages.Auxiliary.IAPWS_IF97
+
+            Dim DHvap = (st.enthalpySatVapTW(T) - st.enthalpySatLiqPW(T)) * 18.0 / 1000.0
+            Dim DSvap = (st.entropySatVapTW(T) - st.entropySatLiqTW(T)) * 18.0 / 1000.0
+            Dim DGvap = DHvap - T * DSvap
+
+            DGf += DGvap
+            DHf += DHvap
+
+            Dim Vrev = DGf * 1000 / (2 * 96485.3365)
+            Dim Vth = DHf * 1000 / (2 * 96485.3365)
+
+            ThermoNeutralVoltage = Vth
+
+            ReversibleVoltage = Vrev
 
             CellVoltage = Voltage / NumberOfCells
 
-            If CellVoltage < spO2 Then Throw New Exception("Total Voltage too low.")
+            If CellVoltage < Vrev Then Throw New Exception("Total Voltage too low.")
 
-            ' https://github.com/DanWBR/dwsim/issues/382
-
-            Dim overV = CellVoltage - 1.48
+            Dim overV = CellVoltage - Vth
 
             WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
 

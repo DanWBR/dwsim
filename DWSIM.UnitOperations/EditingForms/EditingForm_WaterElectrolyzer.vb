@@ -102,6 +102,8 @@ Public Class EditingForm_WaterElectrolyzer
 
                 gridOutput.Rows.Clear()
                 gridOutput.Rows.Add(New Object() {"Cell Voltage", .CellVoltage.ToString(nf), "V"})
+                gridOutput.Rows.Add(New Object() {"Reversible Voltage", .ReversibleVoltage.ToString(nf), "V"})
+                gridOutput.Rows.Add(New Object() {"Thermoneutral Voltage", .ThermoNeutralVoltage.ToString(nf), "V"})
                 gridOutput.Rows.Add(New Object() {"Current", .Current.ToString(nf), "A"})
                 gridOutput.Rows.Add(New Object() {"Electron Transfer", .ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow})
                 gridOutput.Rows.Add(New Object() {"Waste Heat", .WasteHeat.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow})

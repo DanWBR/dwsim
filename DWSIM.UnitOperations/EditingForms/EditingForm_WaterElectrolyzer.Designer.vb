@@ -325,9 +325,9 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 537)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 587)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(368, 169)
+        Me.GroupBox4.Size = New System.Drawing.Size(368, 218)
         Me.GroupBox4.TabIndex = 15
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Notes"
@@ -342,7 +342,7 @@ Partial Class EditingForm_WaterElectrolyzer
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.rtbAnnotations.Size = New System.Drawing.Size(362, 150)
+        Me.rtbAnnotations.Size = New System.Drawing.Size(362, 199)
         Me.rtbAnnotations.TabIndex = 0
         '
         'GroupBox2
@@ -352,7 +352,7 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.GroupBox2.Controls.Add(Me.gridOutput)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 381)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(368, 152)
+        Me.GroupBox2.Size = New System.Drawing.Size(368, 200)
         Me.GroupBox2.TabIndex = 16
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Results"
@@ -370,7 +370,7 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.gridOutput.Name = "gridOutput"
         Me.gridOutput.ReadOnly = True
         Me.gridOutput.RowHeadersVisible = False
-        Me.gridOutput.Size = New System.Drawing.Size(362, 133)
+        Me.gridOutput.Size = New System.Drawing.Size(362, 181)
         Me.gridOutput.TabIndex = 20
         '
         'DataGridViewTextBoxColumn1
@@ -463,7 +463,7 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(392, 710)
+        Me.ClientSize = New System.Drawing.Size(392, 817)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
