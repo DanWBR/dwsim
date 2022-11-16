@@ -341,8 +341,19 @@ Namespace UnitOperations
 
             Dim names = msin.Phases(0).Compounds.Keys.ToList()
 
-            If Not names.Contains("Water") Then Throw New Exception("Needs Water compound.")
-            If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound.")
+            Dim wid, hid As String
+
+            If names.Contains("HeavyWater") Then
+                If Not names.Contains("Deuterium") Then Throw New Exception("Needs Deuterium compound.")
+                wid = "HeavyWater"
+                hid = "Deuterium"
+            Else
+                If Not names.Contains("Water") Then Throw New Exception("Needs Water compound.")
+                If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound.")
+                wid = "Water"
+                hid = "Hydrogen"
+            End If
+
             If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound.")
 
             Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
@@ -361,20 +372,19 @@ Namespace UnitOperations
 
             'https://www.researchgate.net/publication/267979954_Integral_Characteristics_of_Hydrogen_Production_in_Alkaline_Electrolysers
 
-            Dim DGf = pp.AUX_DELGig_RT(298.15, T, New String() {"Water", "Hydrogen", "Oxygen"}, New Double() {-1.0, 1.0, 0.5}, 0) * 8.314 * T / 1000
-            Dim DHf = pp.AUX_DELHig_RT(298.15, T, New String() {"Water", "Hydrogen", "Oxygen"}, New Double() {-1.0, 1.0, 0.5}, 0) * 8.314 * T / 1000
+            Dim DGf = pp.AUX_DELGig_RT(298.15, T, New String() {wid, hid, "Oxygen"}, New Double() {-1.0, 1.0, 0.5}, 0) * 8.314 * T / 1000
+            Dim DHf = pp.AUX_DELHig_RT(298.15, T, New String() {wid, hid, "Oxygen"}, New Double() {-1.0, 1.0, 0.5}, 0) * 8.314 * T / 1000
 
-            Dim st As New Thermodynamics.PropertyPackages.Auxiliary.IAPWS_IF97
+            Dim mw = msin.Phases(0).Compounds(wid).ConstantProperties.Molar_Weight
 
-            Dim DHvap = (st.enthalpySatVapTW(T) - st.enthalpySatLiqPW(T)) * 18.0 / 1000.0
-            Dim DSvap = (st.entropySatVapTW(T) - st.entropySatLiqTW(T)) * 18.0 / 1000.0
-            Dim DGvap = DHvap - T * DSvap
+            Dim DHvap, DSvap As Double
 
-            DGf += DGvap
+            DHvap = pp.AUX_HVAPi(wid, T) * mw / 1000.0
+
             DHf += DHvap
 
-            Dim Vrev = DGf * 1000 / (2 * 96485.3365)
-            Dim Vth = DHf * 1000 / (2 * 96485.3365)
+            Dim Vrev = DGf * 1000.0 / (2.0 * 96485.3365)
+            Dim Vth = DHf * 1000.0 / (2.0 * 96485.3365)
 
             ThermoNeutralVoltage = Vth
 
@@ -393,10 +403,10 @@ Namespace UnitOperations
             Dim Nf = New List(Of Double)(N0)
 
             For i As Integer = 0 To N0.Count - 1
-                If names(i) = "Water" Then
+                If names(i) = wid Then
                     Nf(i) = N0(i) - waterr
-                    If (Nf(i) < 0.0) Then Throw New Exception("Negative Water molar flow calculated. Increase water rate in inlet stream or reduce power.")
-                ElseIf names(i) = "Hydrogen" Then
+                    If (Nf(i) < 0.0) Then Throw New Exception(String.Format("Negative {0} molar flow calculated. Increase water rate in inlet stream or reduce power.", wid))
+                ElseIf names(i) = hid Then
                     Nf(i) = N0(i) + h2r
                 ElseIf names(i) = "Oxygen" Then
                     Nf(i) = N0(i) + o2r

@@ -1685,8 +1685,8 @@ Normal Boiling Point is calculated at 1 atm or at the minimum CoolProp pressure 
     <CS_Acentric_Factor>0</CS_Acentric_Factor>
     <CS_Solubility_Parameter>0</CS_Solubility_Parameter>
     <CS_Liquid_Molar_Volume>0</CS_Liquid_Molar_Volume>
-    <IG_Enthalpy_of_Formation_25C>0</IG_Enthalpy_of_Formation_25C>
-    <IG_Gibbs_Energy_of_Formation_25C>0</IG_Gibbs_Energy_of_Formation_25C>
+    <IG_Enthalpy_of_Formation_25C>110089.37</IG_Enthalpy_of_Formation_25C>
+    <IG_Gibbs_Energy_of_Formation_25C>91828.797</IG_Gibbs_Energy_of_Formation_25C>
     <Vapor_Pressure_Constant_EqNo>101</Vapor_Pressure_Constant_EqNo>
     <Vapor_Pressure_Constant_A>25</Vapor_Pressure_Constant_A>
     <Vapor_Pressure_Constant_B>2000</Vapor_Pressure_Constant_B>
