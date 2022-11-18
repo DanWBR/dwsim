@@ -3522,6 +3522,10 @@ Label_00CC:
 
         End Using
 
+        form.Options.FilePath = handler.FullPath
+
+        form.UpdateFormText()
+
         File.Delete(xmlfile)
 
         File.Delete(dbfile)

@@ -1741,7 +1741,8 @@ Public Class FormCompoundCreator
         tbStatusTCLiquid.Text = GetInfo(result(3))
 
         With mycase.cp
-            .LiquidHeatCapacityEquation = 5
+
+            .LiquidThermalConductivityEquation = 5
 
             For Each it As Object In cbEqTCLiquid.Items
                 If it.ToString.Split(":")(0) = .LiquidThermalConductivityEquation Then
@@ -3094,6 +3095,7 @@ Public Class FormCompoundCreator
         tbStatusCPLiquid.Text = GetInfo(result(3))
 
         With mycase.cp
+
             .LiquidHeatCapacityEquation = 5
 
             For Each it As Object In cbEqCPLiquid.Items
