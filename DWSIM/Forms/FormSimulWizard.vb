@@ -83,7 +83,7 @@ Public Class FormSimulWizard
                 Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
                 If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
-            For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
+            For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values.OrderBy(Function(c) c.ChemSepFamily)
                 Dim r As New DataGridViewRow()
                 Dim data = New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
                 r.CreateCells(ogc1, data)

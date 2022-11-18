@@ -1285,4 +1285,6 @@
 
     Property IsSolid As Boolean
 
+    Property ChemSepFamily As Integer
+
 End Interface

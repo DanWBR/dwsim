@@ -2595,6 +2595,8 @@ Namespace BaseClasses
 
         Public Property IsSolid As Boolean = False Implements ICompoundConstantProperties.IsSolid
 
+        Public Property ChemSepFamily As Integer = 1000 Implements ICompoundConstantProperties.ChemSepFamily
+
         Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
 
             Using xcl As New OfficeOpenXml.ExcelPackage()

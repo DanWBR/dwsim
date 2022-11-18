@@ -187,6 +187,8 @@ Namespace Databases
                     Select Case node2.Name
                         Case "LibraryIndex"
                             cp.ID = node2.Attributes("value").Value
+                        Case "Family"
+                            cp.ChemSepFamily = node2.Attributes("value").Value
                         Case "CompoundID"
                             cp.Name = node2.Attributes("value").Value
                         Case "StructureFormula"
