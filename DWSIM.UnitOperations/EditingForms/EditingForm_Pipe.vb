@@ -22,6 +22,8 @@ Public Class EditingForm_Pipe
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()
