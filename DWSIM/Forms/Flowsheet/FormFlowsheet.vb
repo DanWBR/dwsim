@@ -741,13 +741,15 @@ Public Class FormFlowsheet
 #Region "    Functions "
 
     Sub UpdateFormText()
-        If File.Exists(Options.FilePath) Then
-            Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
-        ElseIf Options.FilePath.StartsWith("//Simulate 365 Dashboard") Then
-            Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
-        Else
-            Me.Text = Me.Options.SimulationName
-        End If
+        UIThread(Sub()
+                     If File.Exists(Options.FilePath) Then
+                         Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
+                     ElseIf Options.FilePath.StartsWith("//Simulate 365 Dashboard") Then
+                         Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
+                     Else
+                         Me.Text = Me.Options.SimulationName
+                     End If
+                 End Sub)
     End Sub
 
     Public Sub ProcessScripts(ByVal sourceevent As Scripts.EventType, ByVal sourceobj As Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheetGUI.ProcessScripts, IFlowsheet.ProcessScripts

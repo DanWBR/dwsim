@@ -971,7 +971,7 @@ Namespace UnitOperations
 
             End Select
 
-            Head = (P2 - Pi) * 9.81 * rho_li
+            Head = (P2 - Pi) / (9.81 * rho_li)
 
             OutletTemperature = T2
 
