@@ -47,9 +47,13 @@ Namespace UnitOperations
 
         Public Property ReversibleVoltage As Double
 
+        Public Property Efficiency As Double
+
+        Public Property InputEfficiency As Double
+
         Public Overrides Function GetProperties(proptype As PropertyType) As String()
 
-            Return New String() {"Voltage", "Thermoneutral Voltage", "Reversible Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer"}
+            Return New String() {"Voltage", "Thermoneutral Voltage", "Reversible Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer", "Efficiency", "InputEfficiency"}
 
         End Function
 
@@ -74,6 +78,10 @@ Namespace UnitOperations
                     Return Current
                 Case "Electron Transfer"
                     Return ElectronTransfer.ConvertFromSI(su.molarflow)
+                Case "Efficiency"
+                    Return Efficiency
+                Case "InputEfficiency"
+                    Return InputEfficiency
                 Case Else
                     Return 0.0
             End Select
@@ -85,18 +93,20 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SharedClasses.SystemsOfUnits.SI()
 
             Select Case prop
-                Case "Voltage", "Thermoneutral Voltage", "Reversible Voltage"
+                Case "Voltage", "Thermoneutral Voltage", "Reversible Voltage", "Cell Voltage"
                     Return "V"
                 Case "Number of Cells"
                     Return ""
-                Case "Cell Voltage"
-                    Return "V"
                 Case "Waste Heat"
                     Return su.heatflow
                 Case "Current"
                     Return "A"
                 Case "Electron Transfer"
                     Return su.molarflow
+                Case "Efficiency"
+                    Return ""
+                Case "InputEfficiency"
+                    Return ""
                 Case Else
                     Return 0.0
             End Select
@@ -113,6 +123,9 @@ Namespace UnitOperations
                     Return True
                 Case "Number of Cells"
                     NumberOfCells = propval
+                    Return True
+                Case "Efficiency"
+                    Efficiency = propval
                     Return True
                 Case Else
                     Return False
@@ -226,6 +239,12 @@ Namespace UnitOperations
                                                      NumberOfCells = tb.Text.ToDoubleFromInvariant()
                                                  End If
                                              End Sub)
+            container.CreateAndAddTextBoxRow(nf, "Efficiency", InputEfficiency,
+                                             Sub(tb, e)
+                                                 If tb.Text.ToDoubleFromInvariant().IsValidDouble() Then
+                                                     InputEfficiency = tb.Text.ToDoubleFromInvariant()
+                                                 End If
+                                             End Sub)
 
         End Sub
 
@@ -238,6 +257,7 @@ Namespace UnitOperations
             sb.AppendLine()
             sb.AppendLine(String.Format("Cell Voltage: {0} V", CellVoltage.ToString(nf)))
             sb.AppendLine(String.Format("Current: {0} A", Current.ToString(nf)))
+            sb.AppendLine(String.Format("Efficiency: {0} A", Efficiency.ToString(nf)))
             sb.AppendLine(String.Format("Electron Transfer: {0} {1}", ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow))
             sb.AppendLine()
             sb.AppendLine(String.Format("Waste Heat: {0} {1}", WasteHeat.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow))
@@ -356,14 +376,6 @@ Namespace UnitOperations
 
             If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound.")
 
-            Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
-
-            ElectronTransfer = Current / 96485.3365 * NumberOfCells 'mol/s
-
-            Dim waterr = ElectronTransfer / 4 * 2 'mol/s
-            Dim h2r = ElectronTransfer / 4 * 2 'mol/s
-            Dim o2r = ElectronTransfer / 4 'mol/s
-
             Dim pp = DirectCast(PropertyPackage, Thermodynamics.PropertyPackages.PropertyPackage)
 
             pp.CurrentMaterialStream = msin
@@ -396,13 +408,46 @@ Namespace UnitOperations
 
             ReversibleVoltage = Vrev
 
-            CellVoltage = Voltage / NumberOfCells
+            Dim waterr As Double
+            Dim h2r As Double
+            Dim o2r As Double
 
-            If CellVoltage < Vrev Then Throw New Exception("Total Voltage too low.")
+            If Voltage > 0 And NumberOfCells > 0 Then
 
-            Dim overV = CellVoltage - Vth
+                Current = esin.EnergyFlow.GetValueOrDefault() * 1000 / Voltage 'Ampere
 
-            WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
+                ElectronTransfer = Current / 96485.3365 * NumberOfCells 'mol/s
+
+                waterr = ElectronTransfer / 4 * 2 'mol/s
+                h2r = ElectronTransfer / 4 * 2 'mol/s
+                o2r = ElectronTransfer / 4 'mol/s
+                CellVoltage = Voltage / NumberOfCells
+                If CellVoltage < Vrev Then Throw New Exception("Total Voltage too low.")
+
+                Dim overV = CellVoltage - Vth
+
+                WasteHeat = overV * Current * NumberOfCells / 1000.0 'kW
+
+
+            ElseIf InputEfficiency > 0 And InputEfficiency <= 1.0 Then
+                Dim reaction_heat As Double
+
+                reaction_heat = InputEfficiency * esin.EnergyFlow.GetValueOrDefault()
+                WasteHeat = (1 - InputEfficiency) * esin.EnergyFlow.GetValueOrDefault()
+
+                waterr = reaction_heat / DHf
+                h2r = reaction_heat / DHf
+                o2r = 0.5 * reaction_heat / DHf
+
+                CellVoltage = ThermoNeutralVoltage / InputEfficiency
+                Voltage = 0
+                ElectronTransfer = 2 * waterr
+                Current = 0
+            Else
+                Throw New Exception(String.Format("Specify total voltage and number of cells or set both to zero and specify efficiency between 0 and 1"))
+            End If
+
+            Efficiency = (esin.EnergyFlow.GetValueOrDefault() - WasteHeat) / esin.EnergyFlow.GetValueOrDefault()
 
             Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
 
@@ -425,7 +470,9 @@ Namespace UnitOperations
             msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
             msout.SetMolarFlow(Nf.Sum)
             msout.SetPressure(msin.GetPressure)
-            msout.SetMassEnthalpy(msin.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
+            msout.SetTemperature(T)
+            msout.Calculate()
+            msout.SetMassEnthalpy(msout.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
             msout.SetFlashSpec("PH")
 
             msout.AtEquilibrium = False

@@ -95,6 +95,7 @@ Public Class EditingForm_WaterElectrolyzer
             gridInput.Rows.Clear()
             gridInput.Rows.Add(New Object() {"Total Voltage", .Voltage.ToString(nf), "V"})
             gridInput.Rows.Add(New Object() {"Number of Cells", .NumberOfCells, ""})
+            gridInput.Rows.Add(New Object() {"User-defined efficiency", .InputEfficiency, ""})
 
             'output parameters
 
@@ -107,6 +108,8 @@ Public Class EditingForm_WaterElectrolyzer
                 gridOutput.Rows.Add(New Object() {"Current", .Current.ToString(nf), "A"})
                 gridOutput.Rows.Add(New Object() {"Electron Transfer", .ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow})
                 gridOutput.Rows.Add(New Object() {"Waste Heat", .WasteHeat.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow})
+                gridOutput.Rows.Add(New Object() {"Calculated efficiency", .Efficiency, ""})
+
 
             End If
 
@@ -293,6 +296,8 @@ Public Class EditingForm_WaterElectrolyzer
                         SimObject.Voltage = value
                     Case "Number of Cells"
                         SimObject.NumberOfCells = value
+                    Case "User-defined efficiency"
+                        SimObject.InputEfficiency = value
                 End Select
 
             Catch ex As Exception
