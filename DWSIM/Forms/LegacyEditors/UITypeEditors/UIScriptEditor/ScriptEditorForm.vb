@@ -167,11 +167,11 @@ Imports System.Linq
     End Sub
 
     Private Sub APIHelptsbutton_Click(sender As Object, e As EventArgs) Handles APIHelptsbutton.Click
-        Process.Start("http://dwsim.inforside.com.br/api_help/index.html")
+        Process.Start("https://dwsim.org/api_help/index.html")
     End Sub
 
     Private Sub HelpToolStripButton_Click(sender As Object, e As EventArgs) Handles HelpToolStripButton.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Using_the_IronPython_Script_Manager")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Using_the_IronPython_Script_Manager")
     End Sub
 
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click

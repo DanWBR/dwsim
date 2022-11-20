@@ -84,7 +84,7 @@ Public Class EditingForm_ReactorPFR
 
             'connections
 
-            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).ToArray
+            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).OrderBy(Function(m) m).ToArray
 
             cbInlet1.Items.Clear()
             cbInlet1.Items.AddRange(mslist)
@@ -95,7 +95,7 @@ Public Class EditingForm_ReactorPFR
             If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
 
-            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).OrderBy(Function(m) m).ToArray()
 
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
@@ -135,6 +135,8 @@ Public Class EditingForm_ReactorPFR
                     cbCalcMode.SelectedIndex = 1
                 Case Reactors.OperationMode.OutletTemperature
                     cbCalcMode.SelectedIndex = 2
+                Case Reactors.OperationMode.NonIsothermalNonAdiabatic
+                    cbCalcMode.SelectedIndex = 3
             End Select
 
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
@@ -144,6 +146,10 @@ Public Class EditingForm_ReactorPFR
             tbCatDiam.Text = su.Converter.ConvertFromSI(units.diameter, .CatalystParticleDiameter).ToString(nf)
             tbCatVoidFrac.Text = .CatalystVoidFraction.ToString(nf)
             tbDiam.Text = su.Converter.ConvertFromSI(units.diameter, .Diameter).ToString(nf)
+
+            TextBox1.Text = .dV.ToString()
+
+            nupNT.Value = SimObject.NumberOfTubes
 
             Select Case .ReactorSizingType
                 Case Reactors.Reactor_PFR.SizingType.Diameter
@@ -256,6 +262,12 @@ Public Class EditingForm_ReactorPFR
             Else
                 cbExternalSolver.SelectedIndex = 0
             End If
+
+            chkUseUserDefDP.Checked = .UseUserDefinedPressureDrop
+
+            tbUserDefDP.Text = .UserDefinedPressureDrop.ConvertFromSI(units.deltaP).ToString(nf)
+
+            lblPDrop.Text = units.deltaP
 
         End With
 
@@ -502,6 +514,10 @@ Public Class EditingForm_ReactorPFR
                 tbOutletTemperature.Enabled = True
                 cbTemp.Enabled = True
                 SimObject.ReactorOperationMode = Reactors.OperationMode.OutletTemperature
+            Case 3
+                tbOutletTemperature.Enabled = False
+                cbTemp.Enabled = False
+                SimObject.ReactorOperationMode = Reactors.OperationMode.NonIsothermalNonAdiabatic
         End Select
         If Loaded Then RequestCalc()
 
@@ -745,4 +761,30 @@ Public Class EditingForm_ReactorPFR
 
     End Sub
 
+    Private Sub nupNT_ValueChanged(sender As Object, e As EventArgs) Handles nupNT.ValueChanged
+        If Loaded Then
+            SimObject.NumberOfTubes = nupNT.Value
+        End If
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        If TextBox1.Text.IsValidDouble Then
+            SimObject.dV = TextBox1.Text.ToDoubleFromCurrent()
+        End If
+    End Sub
+
+    Private Sub chkUseUserDefDP_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseUserDefDP.CheckedChanged
+        SimObject.UseUserDefinedPressureDrop = chkUseUserDefDP.Checked
+    End Sub
+
+    Private Sub tbUserDefDP_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefDP.TextChanged
+        If Loaded Then
+            Try
+                SimObject.UserDefinedPressureDrop = tbUserDefDP.Text.ToDoubleFromCurrent().ConvertToSI(units.deltaP)
+                tbUserDefDP.ForeColor = Color.Blue
+            Catch ex As Exception
+                tbUserDefDP.ForeColor = Color.Red
+            End Try
+        End If
+    End Sub
 End Class

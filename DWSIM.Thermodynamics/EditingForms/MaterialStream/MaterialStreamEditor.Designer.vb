@@ -2033,8 +2033,6 @@ Partial Class MaterialStreamEditor
     Public WithEvents gridCompPropSolid As System.Windows.Forms.DataGridView
     Public WithEvents cbCompoundPhaseProperties As System.Windows.Forms.ComboBox
     Public WithEvents lblCompPropUnits As System.Windows.Forms.Label
-    Public WithEvents cbSolvent As System.Windows.Forms.ComboBox
-    Public WithEvents lblSolvent As System.Windows.Forms.Label
     Public WithEvents DataGridViewTextBoxColumn32 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn33 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn36 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2068,4 +2066,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents cbForcePhase As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Label22 As Label
+    Public WithEvents cbSolvent As ComboBox
+    Public WithEvents lblSolvent As Label
 End Class

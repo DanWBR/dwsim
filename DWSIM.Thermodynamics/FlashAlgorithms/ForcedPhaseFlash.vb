@@ -387,13 +387,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Throw New Exception("Unsupported Flash Specification (TVF)")
+            Throw New Exception("Unsupported Flash Specification (TVF) for Material Streams with a Forced Phase/State.")
 
         End Function
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Throw New Exception("Unsupported Flash Specification (PVF)")
+            Throw New Exception("Unsupported Flash Specification (PVF) for Material Streams with a Forced Phase/State.")
 
         End Function
 

@@ -54,6 +54,8 @@ Partial Class PipeThermalProfileEditor
         Me.Label38 = New System.Windows.Forms.Label()
         Me.RadioButton9 = New System.Windows.Forms.RadioButton()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.chkUserDefU = New System.Windows.Forms.CheckBox()
         Me.lblTAGUnits = New System.Windows.Forms.Label()
         Me.TextBoxTAG = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
@@ -257,6 +259,8 @@ Partial Class PipeThermalProfileEditor
         '
         resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox9.Controls.Add(Me.Button1)
+        Me.GroupBox9.Controls.Add(Me.chkUserDefU)
         Me.GroupBox9.Controls.Add(Me.lblTAGUnits)
         Me.GroupBox9.Controls.Add(Me.TextBoxTAG)
         Me.GroupBox9.Controls.Add(Me.Label39)
@@ -268,6 +272,17 @@ Partial Class PipeThermalProfileEditor
         Me.GroupBox9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'chkUserDefU
+        '
+        resources.ApplyResources(Me.chkUserDefU, "chkUserDefU")
+        Me.chkUserDefU.Name = "chkUserDefU"
         '
         'lblTAGUnits
         '
@@ -312,7 +327,7 @@ Partial Class PipeThermalProfileEditor
         'PipeThermalProfileEditor
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.RadioButton7)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.RadioButton9)
@@ -327,6 +342,7 @@ Partial Class PipeThermalProfileEditor
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Public WithEvents RadioButton7 As System.Windows.Forms.RadioButton
@@ -368,4 +384,6 @@ Partial Class PipeThermalProfileEditor
     Public WithEvents lblTAGUnits2 As System.Windows.Forms.Label
     Public WithEvents TextBoxTAG2 As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As Button
+    Public WithEvents chkUserDefU As CheckBox
 End Class

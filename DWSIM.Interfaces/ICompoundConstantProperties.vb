@@ -1267,7 +1267,6 @@
     ''' <summary>
     ''' exports compound data to a XLSX file.
     ''' </summary>
-    ''' <returns></returns>
     Sub ExportToXLSX(filepath As String)
 
     Function GetLiquidSurfaceTension(T As Double, ByRef Optional message As String = "") As Double
@@ -1283,5 +1282,9 @@
     ''' </summary>
     ''' <returns></returns>
     Property COSTALD_Characteristic_Volume As Double
+
+    Property IsSolid As Boolean
+
+    Property ChemSepFamily As Integer
 
 End Interface

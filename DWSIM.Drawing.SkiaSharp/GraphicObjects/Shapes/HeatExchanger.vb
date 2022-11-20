@@ -14,6 +14,7 @@ Namespace GraphicObjects.Shapes
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger
             Me.Description = "Heat Exchanger"
             CreateConnectors(2, 2)
+            EmbeddedResourceIconName = "heat_exchanger.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -76,7 +77,11 @@ Namespace GraphicObjects.Shapes
 
             With InputConnectors
                 .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                .Item(1).Position = New Point(X + 0.5 * Width, Y)
+                If DrawMode = 2 Then
+                    .Item(1).Position = New Point(X + 0.257 * Width, Y + 0.234 * Height)
+                Else
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y)
+                End If
                 .Item(1).Direction = ConDir.Down
                 .Item(0).ConnectorName = "Inlet Stream 1"
                 .Item(1).ConnectorName = "Inlet Stream 2"
@@ -84,7 +89,11 @@ Namespace GraphicObjects.Shapes
 
             With OutputConnectors
                 .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
+                If DrawMode = 2 Then
+                    .Item(1).Position = New Point(X + 0.765 * Width, Y + 0.7825 * Height)
+                Else
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
+                End If
                 .Item(1).Direction = ConDir.Down
                 .Item(0).ConnectorName = "Outlet Stream 1"
                 .Item(1).ConnectorName = "Outlet Stream 2"
@@ -165,7 +174,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

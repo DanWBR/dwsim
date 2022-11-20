@@ -24,9 +24,9 @@ Partial Class EditingForm_HeatExchanger
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_HeatExchanger))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -813,8 +813,8 @@ Partial Class EditingForm_HeatExchanger
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -822,8 +822,8 @@ Partial Class EditingForm_HeatExchanger
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -831,8 +831,8 @@ Partial Class EditingForm_HeatExchanger
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -846,7 +846,7 @@ Partial Class EditingForm_HeatExchanger
         'EditingForm_HeatExchanger
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)

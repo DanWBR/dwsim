@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.RCT_Conversion
             Me.Description = "Conversion Reactor"
+            EmbeddedResourceIconName = "reactor_conversion.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

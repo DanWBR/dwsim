@@ -113,67 +113,58 @@ Public Class FormReacManager
 
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
 
-        Dim myStream As System.IO.FileStream
         col = New ReactionsCollection
         col.Collection = New BaseClasses.Reaction(CurrentFlowsheet.Options.Reactions.Count - 1) {}
         CurrentFlowsheet.Options.Reactions.Values.CopyTo(col.Collection, 0)
 
-        If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.SaveFileDialog1.OpenFile()
-            If Not (myStream Is Nothing) Then
-                Dim filename As String = myStream.Name
-                Select Case Me.SaveFileDialog1.FilterIndex
-                    Case 1
-                        Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                        Try
-                            mySerializer.Serialize(myStream, col)
-                        Catch ex As System.Runtime.Serialization.SerializationException
-                            MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Finally
-                            myStream.Close()
-                        End Try
-                    Case 2
-                        Try
-                            Dim xdoc As New XDocument()
-                            Dim xel As XElement
-                            xdoc.Add(New XElement("DWSIM_Reaction_Data"))
-                            xel = xdoc.Element("DWSIM_Reaction_Data")
-                            For Each row As DataGridViewRow In GridRxns.SelectedRows
-                                xel.Add(New XElement("Reaction", {DirectCast(CurrentFlowsheet.Options.Reactions(row.Cells(3).Value), Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
-                            Next
-                            For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In CurrentFlowsheet.Options.Reactions
-                            Next
-                            xdoc.Save(myStream)
-                        Catch ex As Exception
-                            MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Finally
-                            myStream.Close()
-                        End Try
-                End Select
-            End If
+        Dim filePickerForm As Interfaces.IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As Interfaces.IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From {
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("DWSIM Reactions File", "*.dwrxm")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Try
+                    Dim xdoc As New XDocument()
+                    Dim xel As XElement
+                    xdoc.Add(New XElement("DWSIM_Reaction_Data"))
+                    xel = xdoc.Element("DWSIM_Reaction_Data")
+                    For Each row As DataGridViewRow In GridRxns.SelectedRows
+                        xel.Add(New XElement("Reaction", {DirectCast(CurrentFlowsheet.Options.Reactions(row.Cells(3).Value), Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+                    Next
+                    For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In CurrentFlowsheet.Options.Reactions
+                    Next
+                    xdoc.Save(stream)
+                    handler.Write(stream)
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
         End If
+
     End Sub
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton9.Click
 
-        Dim myStream As System.IO.FileStream
+        Dim filePickerForm As Interfaces.IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
 
-        If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.OpenFileDialog1.OpenFile()
-            If Not (myStream Is Nothing) Then
+        Dim handler As Interfaces.IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From {
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("DWSIM Reactions File", "*.dwrxs"),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("DWSIM Reactions File", "*.dwrxm")})
+
+        If handler IsNot Nothing Then
+
+            Using myStream = handler.OpenRead()
                 Dim rxns As New ReactionsCollection
-                Select Case IO.Path.GetExtension(myStream.Name).ToLower()
+                Select Case handler.GetExtension().ToLower()
                     Case ".dwrxs"
-                        Dim nome = myStream.Name
-                        Dim myFileStream As IO.FileStream = New IO.FileStream(nome, IO.FileMode.Open)
                         Try
-                            myStream.Close()
                             Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                            rxns = DirectCast(mySerializer.Deserialize(myFileStream), ReactionsCollection)
+                            rxns = DirectCast(mySerializer.Deserialize(myStream), ReactionsCollection)
                         Catch ex As Exception
                             MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Finally
-                            myFileStream.Close()
                         End Try
                     Case ".dwrxm"
                         Try
@@ -239,7 +230,7 @@ Public Class FormReacManager
                         Me.CurrentFlowsheet.Options.ReactionSets("DefaultSet").Reactions.Add(rxn.ID, New ReactionSetBase(rxn.ID, 0, True))
                     End If
                 Next
-            End If
+            End Using
         End If
 
     End Sub

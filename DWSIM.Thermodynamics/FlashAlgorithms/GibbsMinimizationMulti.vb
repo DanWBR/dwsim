@@ -1,5 +1,5 @@
 ﻿'    Multiphase Gibbs Minimization Flash Algorithms
-'    Copyright 2012-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2012-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

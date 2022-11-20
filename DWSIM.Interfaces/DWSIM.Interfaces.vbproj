@@ -95,9 +95,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.vb" />
+    <Compile Include="FilePicker\IVirtualFile.vb" />
+    <Compile Include="FilePicker\IFilePickerAllowedType.vb" />
     <Compile Include="IAnalyticsProvider.vb" />
     <Compile Include="IAttachedUtility.vb" />
+    <Compile Include="IBidirectionalSolver.vb" />
     <Compile Include="IChart.vb" />
+    <Compile Include="IConnectionPortInfo.vb" />
+    <Compile Include="IEnergyStream.vb" />
+    <Compile Include="IFlowsheetSolver.vb" />
     <Compile Include="IProductInformation.vb" />
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
@@ -137,8 +143,11 @@
     <Compile Include="ISplashScreen.vb" />
     <Compile Include="ISwitch.vb" />
     <Compile Include="IUndoRedoAction.vb" />
+    <Compile Include="IUnitOperation.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />
+    <Compile Include="IWatchItem.vb" />
+    <Compile Include="IWeatherProvider.vb" />
     <Compile Include="IWelcomeScreen.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -176,6 +185,10 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FilePicker\IFilePicker.vb" />
+    <Compile Include="FilePicker\IFilePickerService.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

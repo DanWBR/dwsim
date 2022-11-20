@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class DWSIM
@@ -8146,6 +8146,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Fator de Correção da MLDT (Casco e Tubo) .
+        '''</summary>
+        Friend Shared ReadOnly Property HXLMTDF() As String
+            Get
+                Return ResourceManager.GetString("HXLMTDF", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Número de Reynolds de casco.
         '''</summary>
         Friend Shared ReadOnly Property HXReShell() As String
@@ -8925,6 +8934,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Load() As String
             Get
                 Return ResourceManager.GetString("Load", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Carregando.
+        '''</summary>
+        Friend Shared ReadOnly Property Loading() As String
+            Get
+                Return ResourceManager.GetString("Loading", resourceCulture)
             End Get
         End Property
         
@@ -13164,6 +13182,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Remove() As String
             Get
                 Return ResourceManager.GetString("Remove", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Remover Botão?.
+        '''</summary>
+        Friend Shared ReadOnly Property RemoveButton() As String
+            Get
+                Return ResourceManager.GetString("RemoveButton", resourceCulture)
             End Get
         End Property
         

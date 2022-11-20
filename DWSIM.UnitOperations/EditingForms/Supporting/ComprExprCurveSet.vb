@@ -9,6 +9,8 @@ Public Class ComprExprCurveSet
 
     Private Sub PumpCurvesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        ChangeDefaultFont(Me)
+
     End Sub
 
     Public Sub Populate()

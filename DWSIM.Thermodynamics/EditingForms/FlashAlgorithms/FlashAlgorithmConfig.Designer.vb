@@ -30,6 +30,8 @@ Partial Class FlashAlgorithmConfig
         Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.gpNL = New System.Windows.Forms.GroupBox()
+        Me.chkIdealPVFlash = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxInterpTempPHFlash = New System.Windows.Forms.CheckBox()
         Me.chkHandleSolids = New System.Windows.Forms.CheckBox()
         Me.chkImmiscible = New System.Windows.Forms.CheckBox()
         Me.chkFastModeNL = New System.Windows.Forms.CheckBox()
@@ -140,11 +142,25 @@ Partial Class FlashAlgorithmConfig
         'gpNL
         '
         resources.ApplyResources(Me.gpNL, "gpNL")
+        Me.gpNL.Controls.Add(Me.chkIdealPVFlash)
+        Me.gpNL.Controls.Add(Me.CheckBoxInterpTempPHFlash)
         Me.gpNL.Controls.Add(Me.chkHandleSolids)
         Me.gpNL.Controls.Add(Me.chkImmiscible)
         Me.gpNL.Controls.Add(Me.chkFastModeNL)
         Me.gpNL.Name = "gpNL"
         Me.gpNL.TabStop = False
+        '
+        'chkIdealPVFlash
+        '
+        resources.ApplyResources(Me.chkIdealPVFlash, "chkIdealPVFlash")
+        Me.chkIdealPVFlash.Name = "chkIdealPVFlash"
+        Me.chkIdealPVFlash.UseVisualStyleBackColor = True
+        '
+        'CheckBoxInterpTempPHFlash
+        '
+        resources.ApplyResources(Me.CheckBoxInterpTempPHFlash, "CheckBoxInterpTempPHFlash")
+        Me.CheckBoxInterpTempPHFlash.Name = "CheckBoxInterpTempPHFlash"
+        Me.CheckBoxInterpTempPHFlash.UseVisualStyleBackColor = True
         '
         'chkHandleSolids
         '
@@ -190,7 +206,7 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.cbFlashType, "cbFlashType")
         Me.cbFlashType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashType.FormattingEnabled = True
-        Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4")})
+        Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4"), resources.GetString("cbFlashType.Items5")})
         Me.cbFlashType.Name = "cbFlashType"
         '
         'Label9
@@ -427,4 +443,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents cbExternalSolver As ComboBox
     Friend WithEvents Label11 As Label
     Public WithEvents btnConfigExtSolver As Button
+    Friend WithEvents CheckBoxInterpTempPHFlash As CheckBox
+    Friend WithEvents chkIdealPVFlash As CheckBox
 End Class

@@ -101,6 +101,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property FontStyle As FontStyle
 
+    Property Flowsheet As IFlowsheet
+
+    Function GetPointValue(type As PointValueType, Xref As Integer, Yref As Integer, args As List(Of Object)) As Double
+
+    Function GetIconAsBitmap() As System.Drawing.Bitmap
+
+    Function GetIconAsStream() As IO.MemoryStream
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

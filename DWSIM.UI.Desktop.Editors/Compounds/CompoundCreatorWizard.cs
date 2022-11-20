@@ -900,7 +900,10 @@ namespace DWSIM.UI.Desktop.Editors
                     try
                     {
                         if (!File.Exists(dialog.FileName)) File.WriteAllText(dialog.FileName, "");
-                        DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(new[] { comp }, dialog.FileName, true);
+                        using (var stream = new FileStream(dialog.FileName, FileMode.OpenOrCreate))
+                        {
+                            DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(new[] { comp }, stream, true);
+                        }
                         if (flowsheet == null)
                         {
                             MessageBox.Show("Compound '" + comp.Name + "' successfully added to XML database.");

@@ -34,7 +34,7 @@ Namespace DWSIM.Flowsheet
 
         Public GraphicObjectCollection As Dictionary(Of String, IGraphicObject)
 
-        Public FlowsheetObjectCollection As Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
+        Public FlowsheetObjectCollection As Dictionary(Of String, ISimulationObject)
 
         Public OPT_SensAnalysisCollection As List(Of Optimization.SensitivityAnalysisCase)
 
@@ -46,7 +46,7 @@ Namespace DWSIM.Flowsheet
 
             GraphicObjectCollection = New Dictionary(Of String, IGraphicObject)
 
-            FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
+            FlowsheetObjectCollection = New Dictionary(Of String, ISimulationObject)
 
             OPT_SensAnalysisCollection = New List(Of Optimization.SensitivityAnalysisCase)
 
@@ -239,7 +239,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property LabelFontSize As Double = 10.0 Implements IFlowsheetOptions.LabelFontSize
 
-        Public Property FlowsheetColorTheme As Integer = 0 Implements IFlowsheetOptions.FlowsheetColorTheme
+        Public Property FlowsheetColorTheme As Integer = 2 Implements IFlowsheetOptions.FlowsheetColorTheme
 
         Public Property RegularFontName As String = "OpenSans_SemiCondensed-Regular" Implements IFlowsheetOptions.RegularFontName
 
@@ -248,6 +248,31 @@ Namespace DWSIM.Flowsheet
         Public Property ItalicFontName As String = "OpenSans_SemiCondensed-Italic" Implements IFlowsheetOptions.ItalicFontName
 
         Public Property BoldItalicFontName As String = "OpenSans_SemiCondensed-MediumItalic" Implements IFlowsheetOptions.BoldItalicFontName
+
+        Public Property DisplayEnergyStreamPowerValue As Boolean = True Implements IFlowsheetOptions.DisplayEnergyStreamPowerValue
+
+        Public Property DisplayMaterialStreamMassFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamMassFlowValue
+
+        Public Property DisplayMaterialStreamMolarFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamMolarFlowValue
+
+        Public Property DisplayMaterialStreamVolFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamVolFlowValue
+
+        Public Property DisplayMaterialStreamTemperatureValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamTemperatureValue
+
+        Public Property DisplayMaterialStreamPressureValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamPressureValue
+
+        Public Property DisplayMaterialStreamEnergyFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamEnergyFlowValue
+
+        Public Property AddObjectsWithStreams As Integer = 2 Implements IFlowsheetOptions.AddObjectsWithStreams
+
+        <Xml.Serialization.XmlIgnore()>
+        Public Property VirtualFile As IVirtualFile = Nothing Implements IFlowsheetOptions.VirtualFile
+
+        Public Property DisplayDynamicPropertyValues As Boolean = True Implements IFlowsheetOptions.DisplayDynamicPropertyValues
+
+        Public Property CurrentWeather As IWeatherData = New WeatherData Implements IFlowsheetOptions.CurrentWeather
+
+        Public Property CustomCalculationOrder As List(Of String) = New List(Of String) Implements IFlowsheetOptions.CustomCalculationOrder
 
     End Class
 

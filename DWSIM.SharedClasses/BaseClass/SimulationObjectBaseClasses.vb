@@ -35,6 +35,20 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
+        Protected Friend _IsDirty As Boolean = True
+        ReadOnly Property IsDirty As Boolean Implements ISimulationObject.IsDirty
+            Get
+                Return _IsDirty
+            End Get
+        End Property
+
+        Protected Friend _CanUsePreviousResults As Boolean = False
+        ReadOnly Property CanUsePreviousResults As Boolean Implements ISimulationObject.CanUsePreviousResults
+            Get
+                Return _CanUsePreviousResults
+            End Get
+        End Property
+
         Public Property DynamicsSpec As Enums.Dynamics.DynamicsSpecType = Dynamics.DynamicsSpecType.Pressure Implements ISimulationObject.DynamicsSpec
 
         Public Property DynamicsOnly As Boolean = False Implements ISimulationObject.DynamicsOnly
@@ -44,6 +58,8 @@ Namespace UnitOperations
         Public Property ExtraPropertiesUnitTypes As New ExpandoObject Implements ISimulationObject.ExtraPropertiesUnitTypes
 
         Public Property ExtraPropertiesDescriptions As New ExpandoObject Implements ISimulationObject.ExtraPropertiesDescriptions
+
+        Public Property ExtraPropertiesTypes As New ExpandoObject Implements ISimulationObject.ExtraPropertiesTypes
 
         Public Overridable Property Visible As Boolean = True
 
@@ -58,6 +74,8 @@ Namespace UnitOperations
         Public Property StoreDetailedDebugReport As Boolean = False
 
         Public Property DetailedDebugReport As String
+
+        Public ReadOnly Property IsFunctional As Boolean = True Implements ISimulationObject.IsFunctional
 
         Public Overridable Property ComponentDescription() As String = ""
 
@@ -164,13 +182,12 @@ Namespace UnitOperations
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
             Dim toremove As New List(Of String)
             For Each p In col1
                 If Not col2.ContainsKey(p.Key) And Not col3.ContainsKey(p.Key) Then
                     toremove.Add(p.Key)
-                Else
-                    'Throw New Exception("Property already exists.")
                 End If
             Next
 
@@ -181,19 +198,17 @@ Namespace UnitOperations
         End Sub
 
         Public Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double,
-                               punittype As Enums.UnitOfMeasure) Implements ISimulationObject.AddDynamicProperty
+                               punittype As Enums.UnitOfMeasure, ptype As System.Type) Implements ISimulationObject.AddDynamicProperty
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
-            If Not col1.ContainsKey(pname) Then
-                col1.Add(pname, pvalue)
-                col2.Add(pname, pdesc)
-                col3.Add(pname, punittype)
-            Else
-                'Throw New Exception("Property already exists.")
-            End If
+            If Not col1.ContainsKey(pname) Then col1.Add(pname, pvalue)
+            If Not col2.ContainsKey(pname) Then col2.Add(pname, pdesc)
+            If Not col3.ContainsKey(pname) Then col3.Add(pname, punittype)
+            If Not col4.ContainsKey(pname) Then col4.Add(pname, ptype)
 
         End Sub
 
@@ -228,14 +243,12 @@ Namespace UnitOperations
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
             Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
             Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+            Dim col4 = DirectCast(ExtraPropertiesTypes, IDictionary(Of String, Object))
 
-            If col1.ContainsKey(pname) Then
-                col1.Remove(pname)
-                col2.Remove(pname)
-                col3.Remove(pname)
-            Else
-                Throw New Exception("Property doesn't exist.")
-            End If
+            If col1.ContainsKey(pname) Then col1.Remove(pname)
+            If col2.ContainsKey(pname) Then col2.Remove(pname)
+            If col1.ContainsKey(pname) Then col3.Remove(pname)
+            If col4.ContainsKey(pname) Then col4.Remove(pname)
 
         End Sub
 
@@ -248,7 +261,11 @@ Namespace UnitOperations
         End Function
 
         Public Overridable Function GetChartModel(name As String) As Object Implements ISimulationObject.GetChartModel
-            Return Nothing
+            If CreateChartAction IsNot Nothing Then
+                Return CreateChartAction.Invoke(name)
+            Else
+                Return Nothing
+            End If
         End Function
 
         Public Overridable Function GetPropertyDescription(prop As String) As String Implements ISimulationObject.GetPropertyDescription
@@ -301,7 +318,7 @@ Namespace UnitOperations
         End Sub
 
         Public Sub DeCalculate(Optional args As Object = Nothing) Implements ISimulationObject.DeCalculate
-            Throw New NotImplementedException
+            'Throw New NotImplementedException
         End Sub
 
         Public Overridable Sub RunDynamicModel() Implements ISimulationObject.RunDynamicModel
@@ -397,6 +414,10 @@ Namespace UnitOperations
                         eb += Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0"))
                         ebt += Math.Abs(Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0")))
                     End If
+                End If
+
+                If iesc.Count + oesc.Count = 0 And Not GraphicObject.EnergyConnector.IsAttached Then
+                    eb = 0
                 End If
 
                 mbe = Math.Abs(mb / mbt)
@@ -758,8 +779,16 @@ Namespace UnitOperations
 
         Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements ISimulationObject.MobileCompatible
 
+        Public Property UserDefinedChartNames As New List(Of String)
+
+        Public Property CreateChartAction As Func(Of String, Object)
+
         Public Overridable Function GetChartModelNames() As List(Of String) Implements ISimulationObject.GetChartModelNames
-            Return New List(Of String)
+            If UserDefinedChartNames.Count > 0 Then
+                Return UserDefinedChartNames
+            Else
+                Return New List(Of String)
+            End If
         End Function
 
 #End Region
@@ -1219,6 +1248,233 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Function GetEnergyBalanceResidual() As Double Implements ISimulationObject.GetEnergyBalanceResidual
+
+            If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
+                GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec And
+                GraphicObject.ObjectType <> ObjectType.OT_Recycle And GraphicObject.ObjectType <> ObjectType.OT_EnergyRecycle Then
+
+                Dim eb As Double = 0.0#
+                Dim ebe As Double = 0.0#
+                Dim mi, hi, hf As Double
+
+                Dim imsc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                Dim omsc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                For Each ims In imsc
+                    If ims.GraphicObject.Active Then
+                        If DirectCast(ims, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(ims.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                        End If
+                        hi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_7"))
+                        eb -= mi * hi 'kg/s * kJ/kg = kJ/s = kW
+                        'heats of formation
+                        hf = DirectCast(ims, IMaterialStream).GetOverallHeatOfFormation()
+                        eb -= hf
+                    End If
+                Next
+
+                For Each oms In omsc
+                    If oms.GraphicObject.Active Then
+                        If DirectCast(oms, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(oms.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                        End If
+                        hi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_7"))
+                        eb += mi * hi 'kg/s * kJ/kg = kJ/s = kW
+                        'heats of formation
+                        hf = DirectCast(oms, IMaterialStream).GetOverallHeatOfFormation()
+                        eb += hf
+                    End If
+                Next
+
+                Dim iesc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                Dim oesc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                For Each ies In iesc
+                    If ies.GraphicObject.Active Then
+                        eb -= Convert.ToDouble(ies.GetPropertyValue("PROP_ES_0"))
+                    End If
+                Next
+
+                For Each oes In oesc
+                    If oes.GraphicObject.Active Then
+                        eb += Convert.ToDouble(oes.GetPropertyValue("PROP_ES_0"))
+                    End If
+                Next
+
+                If GraphicObject.EnergyConnector.IsAttached Then
+                    Dim inobj = FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom.Name)
+                    If inobj.GraphicObject.IsEnergyStream And inobj.GraphicObject.Active Then
+                        eb -= Convert.ToDouble(inobj.GetPropertyValue("PROP_ES_0"))
+                    End If
+                    Dim outobj = FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                    If outobj.GraphicObject.IsEnergyStream And outobj.GraphicObject.Active Then
+                        eb += Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0"))
+                    End If
+                End If
+
+                'If iesc.Count + oesc.Count = 0 And Not GraphicObject.EnergyConnector.IsAttached Then
+                '    eb = 0
+                'End If
+
+                Return eb
+
+            End If
+
+            Return 0
+
+        End Function
+
+        Public Function GetMassBalanceResidual() As Double Implements ISimulationObject.GetMassBalanceResidual
+
+            If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
+                GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec And
+                GraphicObject.ObjectType <> ObjectType.OT_Recycle And GraphicObject.ObjectType <> ObjectType.OT_EnergyRecycle Then
+
+                'calculate mass balance
+
+                Dim mb As Double = 0.0#
+                Dim mi As Double
+
+                Dim imsc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                Dim omsc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                For Each ims In imsc
+                    If ims.GraphicObject.Active Then
+                        If DirectCast(ims, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(ims.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                        End If
+                        mb += mi
+                    End If
+                Next
+
+                For Each oms In omsc
+                    If oms.GraphicObject.Active Then
+                        If DirectCast(oms, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(oms.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                        End If
+                        mb -= mi
+                    End If
+                Next
+
+                Return mb
+
+            End If
+
+            Return 0
+
+        End Function
+
+        Public Function GetPowerGeneratedOrConsumed() As Double Implements ISimulationObject.GetPowerGeneratedOrConsumed
+
+            If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
+              GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec And
+              GraphicObject.ObjectType <> ObjectType.OT_Recycle And GraphicObject.ObjectType <> ObjectType.OT_EnergyRecycle Then
+
+                Dim eb As Double = 0.0#
+                Dim ebe As Double = 0.0#
+                Dim mi, hi, hf As Double
+
+                Dim iesc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                Dim oesc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                If iesc.Count + oesc.Count = 0 Then
+
+
+                    Dim imsc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
+                    Dim omsc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
+
+                    For Each ims In imsc
+                        If ims.GraphicObject.Active Then
+                            If DirectCast(ims, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                                mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(ims.GetPropertyValue("PROP_MS_6"))
+                            Else
+                                mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                            End If
+                            hi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_7"))
+                            eb -= mi * hi 'kg/s * kJ/kg = kJ/s = kW
+                            'heats of formation
+                            hf = DirectCast(ims, IMaterialStream).GetOverallHeatOfFormation()
+                            eb -= hf
+                        End If
+                    Next
+
+                    For Each oms In omsc
+                        If oms.GraphicObject.Active Then
+                            If DirectCast(oms, IMaterialStream).DefinedFlow = FlowSpec.Mole Then
+                                mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(oms.GetPropertyValue("PROP_MS_6"))
+                            Else
+                                mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                            End If
+                            hi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_7"))
+                            eb += mi * hi 'kg/s * kJ/kg = kJ/s = kW
+                            'heats of formation
+                            hf = DirectCast(oms, IMaterialStream).GetOverallHeatOfFormation()
+                            eb += hf
+                        End If
+                    Next
+
+                    Return -eb
+
+                Else
+
+                    For Each ies In iesc
+                        If ies.GraphicObject.Active Then
+                            eb -= Convert.ToDouble(ies.GetPropertyValue("PROP_ES_0"))
+                        End If
+                    Next
+
+                    For Each oes In oesc
+                        If oes.GraphicObject.Active Then
+                            eb += Convert.ToDouble(oes.GetPropertyValue("PROP_ES_0"))
+                        End If
+                    Next
+
+                    If GraphicObject.EnergyConnector.IsAttached Then
+                        Dim inobj = FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom.Name)
+                        If inobj.GraphicObject.IsEnergyStream And inobj.GraphicObject.Active Then
+                            eb -= Convert.ToDouble(inobj.GetPropertyValue("PROP_ES_0"))
+                        End If
+                        Dim outobj = FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                        If outobj.GraphicObject.IsEnergyStream And outobj.GraphicObject.Active Then
+                            eb += Convert.ToDouble(outobj.GetPropertyValue("PROP_ES_0"))
+                        End If
+                    End If
+
+                    Return eb
+
+                End If
+
+            End If
+
+            Return 0
+
+        End Function
+
+        Public Overridable Function GetDynamicResidenceTime() As Double Implements ISimulationObject.GetDynamicResidenceTime
+            Return Double.NaN
+        End Function
+
+        Public Overridable Function GetDynamicVolume() As Double Implements ISimulationObject.GetDynamicVolume
+            Return Double.NaN
+        End Function
+
+        Public Overridable Function GetDynamicContents() As Double Implements ISimulationObject.GetDynamicContents
+            Return Double.NaN
+        End Function
+
+        Public Function GetAsObject() As Object Implements ISimulationObject.GetAsObject
+            Return Me
+        End Function
+
 #End Region
 
 #Region "    IProductInformation"
@@ -1265,7 +1521,147 @@ Namespace UnitOperations
             End Get
         End Property
 
+        Public Overridable ReadOnly Property IsSource As Boolean = False Implements ISimulationObject.IsSource
+
+        Public Overridable ReadOnly Property IsSink As Boolean = False Implements ISimulationObject.IsSink
+
 #End Region
+
+
+        Public Sub ConnectFeedMaterialStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectFeedMaterialStream
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectProductMaterialStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectProductMaterialStream
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, portnumber, 0)
+
+        End Sub
+
+        Public Sub ConnectFeedEnergyStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectFeedEnergyStream
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectProductEnergyStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectProductEnergyStream
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, portnumber)
+
+        End Sub
+
+        Public Sub ConnectEnergyStream(stream As ISimulationObject) Implements ISimulationObject.ConnectEnergyStream
+
+            If GraphicObject.EnergyConnector.Active Then
+                FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Else
+                Dim i As Integer = 0
+                For Each con In GraphicObject.InputConnectors
+                    If con.IsEnergyConnector Or con.Type = GraphicObjects.ConType.ConEn Then
+                        FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, i)
+                    End If
+                    i += 1
+                Next
+                i = 0
+                For Each con In GraphicObject.InputConnectors
+                    If con.IsEnergyConnector Or con.Type = GraphicObjects.ConType.ConEn Then
+                        FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, i, 0)
+                    End If
+                    i += 1
+                Next
+
+            End If
+
+        End Sub
+
+        Public Function GetConnectionPortsList() As List(Of String) Implements ISimulationObject.GetConnectionPortsList
+
+            Dim l As New List(Of String)
+
+            Dim i As Integer = 0
+            For Each con In GraphicObject.InputConnectors
+                l.Add(String.Format("Inlet Port #{0}, Name: {1}, Type: {2}, Connected: {3}", i, con.ConnectorName, con.Type.ToString(), con.IsAttached))
+                i += 1
+            Next
+            i = 0
+            For Each con In GraphicObject.OutputConnectors
+                l.Add(String.Format("Outlet Port #{0}, Name: {1}, Type: {2}, Connected: {3}", i, con.ConnectorName, con.Type.ToString(), con.IsAttached))
+                i += 1
+            Next
+
+            If GraphicObject.EnergyConnector.Active Then
+                Dim con = GraphicObject.EnergyConnector
+                l.Add(String.Format("Energy Stream Port, Name: {1}, Type: {2}, Connected: {3}", i, con.ConnectorName, con.Type.ToString(), con.IsAttached))
+            End If
+
+            Return l
+
+        End Function
+
+        Public Function GetConnectionPortsInfo() As List(Of IConnectionPortInfo) Implements ISimulationObject.GetConnectionPortsInfo
+
+            Dim list As New List(Of IConnectionPortInfo)
+
+            Dim i As Integer
+
+            If GraphicObject IsNot Nothing Then
+
+                i = 0
+                For Each con In GraphicObject.InputConnectors
+                    Dim ci As New ConnectionPortInfo()
+                    ci.Name = con.ConnectorName
+                    ci.Index = i
+                    ci.IsInput = True
+                    ci.IsConnected = con.IsAttached
+                    If con.IsAttached Then
+                        ci.ConnectedObject = con.AttachedConnector.AttachedFrom.Owner
+                    End If
+                    list.Add(ci)
+                    i += 1
+                Next
+
+                i = 0
+                For Each con In GraphicObject.OutputConnectors
+                    Dim ci As New ConnectionPortInfo()
+                    ci.Name = con.ConnectorName
+                    ci.Index = i
+                    ci.IsOutput = True
+                    ci.IsConnected = con.IsAttached
+                    If con.IsAttached Then
+                        ci.ConnectedObject = con.AttachedConnector.AttachedTo.Owner
+                    End If
+                    list.Add(ci)
+                    i += 1
+                Next
+
+                If GraphicObject.EnergyConnector.Active Then
+                    Dim econ = GraphicObject.EnergyConnector
+                    Dim ci As New ConnectionPortInfo()
+                    ci.Name = econ.ConnectorName
+                    ci.Index = 0
+                    ci.IsEnergyPort = True
+                    ci.IsConnected = econ.IsAttached
+                    If econ.IsAttached Then
+                        ci.ConnectedObject = econ.AttachedConnector.AttachedTo.Owner
+                    End If
+                    list.Add(ci)
+                End If
+
+            End If
+
+            Return list
+
+        End Function
+
+        Public Sub SetDirtyStatus(value As Boolean) Implements ISimulationObject.SetDirtyStatus
+            _IsDirty = value
+        End Sub
+
+        Public Sub SetCanUsePreviousResults(value As Boolean) Implements ISimulationObject.SetCanUsePreviousResults
+            _CanUsePreviousResults = value
+        End Sub
 
     End Class
 

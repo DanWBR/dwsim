@@ -55,13 +55,11 @@
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.APIHelptsbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
         Me.TabStripScripts = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.imageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.FaTabStripItem5 = New FarsiLibrary.Win.FATabStripItem()
         Me.treeViewItems = New System.Windows.Forms.TreeView()
-        Me.ofd2 = New System.Windows.Forms.OpenFileDialog()
         Me.pd1 = New System.Windows.Forms.PrintDialog()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.FaTabStripItem4 = New FarsiLibrary.Win.FATabStripItem()
@@ -281,11 +279,6 @@
         resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         '
-        'sfd1
-        '
-        resources.ApplyResources(Me.sfd1, "sfd1")
-        Me.sfd1.SupportMultiDottedExtensions = True
-        '
         'TabStripScripts
         '
         resources.ApplyResources(Me.TabStripScripts, "TabStripScripts")
@@ -324,12 +317,6 @@
         Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."
-        '
-        'ofd2
-        '
-        resources.ApplyResources(Me.ofd2, "ofd2")
-        Me.ofd2.Multiselect = True
-        Me.ofd2.SupportMultiDottedExtensions = True
         '
         'pd1
         '
@@ -411,7 +398,6 @@
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButton = False
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.TabStripScripts)
@@ -440,9 +426,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Public WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents btnRun As System.Windows.Forms.ToolStripButton
-    Public WithEvents sfd1 As System.Windows.Forms.SaveFileDialog
     Public WithEvents TabStripScripts As FarsiLibrary.Win.FATabStrip
-    Public WithEvents ofd2 As System.Windows.Forms.OpenFileDialog
     Public WithEvents pd1 As System.Windows.Forms.PrintDialog
     Public WithEvents tscb1 As System.Windows.Forms.ToolStripComboBox
     Public WithEvents tscb2 As System.Windows.Forms.ToolStripComboBox

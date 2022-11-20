@@ -1,6 +1,7 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces
 
 Namespace GraphicObjects.Shapes
 
@@ -14,6 +15,7 @@ Namespace GraphicObjects.Shapes
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream
             Me.Description = "Energy Stream"
             Me.IsEnergyStream = True
+            EmbeddedResourceIconName = "energy_stream.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -156,7 +158,9 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp, myPen2)
 
                 Case 2
-                    'Gas/Liquid Flows
+
+                    DrawIcon(canvas)
+
                 Case 3
                     'Temperature Gradients
                 Case 4
@@ -165,9 +169,21 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
             End Select
 
-
-
         End Sub
+
+        Public Overrides Function GetPointValue(type As PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double
+
+            If X >= 0 And X <= Width And Y >= 0 And Y <= Height Then
+                If type = PointValueType.EnergyFlow Then
+                    Return DirectCast(Owner, IEnergyStream).GetEnergyFlow()
+                Else
+                    Return Double.NaN
+                End If
+            Else
+                Return Double.NaN
+            End If
+
+        End Function
 
     End Class
 

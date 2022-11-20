@@ -80,6 +80,8 @@ Namespace UnitOperations
             OutletTemperature = 2
         End Enum
 
+        Public Property UseGlobalWeather As Boolean = False
+
         Public Property Specification As Specmode = Specmode.Length
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
@@ -340,9 +342,7 @@ Namespace UnitOperations
 
 
             If args Is Nothing Then
-                If Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
-                ElseIf Not Me.Profile.Status = PipeEditorStatus.OK Then
+                If Not Me.Profile.Status = PipeEditorStatus.OK Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Operfilhidrulicodatu"))
                 ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -395,14 +395,6 @@ Namespace UnitOperations
             If Me.Specification = Specmode.OutletTemperature Then
                 Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q
                 Me.ThermalProfile.Calor_trocado = 0.0#
-            End If
-
-            If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
-                Text = Me.ThermalProfile.Temp_amb_definir
-                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient
-            Else
-                Text = Me.ThermalProfile.Temp_amb_estimar
-                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC
             End If
 
             'Calcular DP
@@ -528,6 +520,20 @@ Namespace UnitOperations
                         End With
 
                         Do
+
+                            If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
+                                If ThermalProfile.UseUserDefinedU Then
+                                    Text = MathNet.Numerics.Interpolate.Linear(ThermalProfile.UserDefinedU_Length,
+                                                                                        ThermalProfile.UserDefinedU_Temp).Interpolate(currL)
+                                    dText_dL = 0.0
+                                Else
+                                    Text = Me.ThermalProfile.Temp_amb_definir
+                                    dText_dL = Me.ThermalProfile.AmbientTemperatureGradient
+                                End If
+                            Else
+                                Text = Me.ThermalProfile.Temp_amb_estimar
+                                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC
+                            End If
 
                             IObj3?.SetCurrent
 
@@ -683,13 +689,27 @@ Namespace UnitOperations
 
                                 With segmento
 
-                                    results.External_Temperature = Text + dText_dL * currL
+                                    If UseGlobalWeather Then
+
+                                        results.External_Temperature = FlowSheet.FlowsheetOptions.CurrentWeather.Temperature_C + 273.15
+
+                                    Else
+
+                                        results.External_Temperature = Text + dText_dL * currL
+
+                                    End If
+
 
                                     Cp_m = holdup * Cp_l + (1 - holdup) * Cp_v
 
                                     If Not Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
                                         If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
-                                            U = Me.ThermalProfile.CGTC_Definido
+                                            If ThermalProfile.UseUserDefinedU Then
+                                                U = MathNet.Numerics.Interpolate.Step(ThermalProfile.UserDefinedU_Length,
+                                                                                        ThermalProfile.UserDefinedU_U).Interpolate(currL)
+                                            Else
+                                                U = Me.ThermalProfile.CGTC_Definido
+                                            End If
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                         ElseIf Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
@@ -965,6 +985,7 @@ Namespace UnitOperations
                 msout = args(1)
             End If
             With msout
+                .AtEquilibrium = False
                 .Phases(0).Properties.temperature = Tout
                 .Phases(0).Properties.pressure = Pout
                 .Phases(0).Properties.enthalpy = Hout
@@ -978,10 +999,12 @@ Namespace UnitOperations
             End With
 
             'energy stream - update energy flow value (kW)
-            With es
-                .EnergyFlow = -Me.DeltaQ.Value
-                If args Is Nothing Then .GraphicObject.Calculated = True
-            End With
+            If es IsNot Nothing Then
+                With es
+                    .EnergyFlow = -Me.DeltaQ.Value
+                    If args Is Nothing Then .GraphicObject.Calculated = True
+                End With
+            End If
 
             segmento = Nothing
             results = Nothing
@@ -1428,8 +1451,21 @@ Namespace UnitOperations
                 ElseIf Me.m_thermalprofile.Meio = "0" Then 'Air
 
                     'Average air properties
-                    vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
-                    Dim props = PropsAR(Text, 101325)
+
+                    Dim Pext As Double = 101325.0
+
+                    If UseGlobalWeather Then
+
+                        Pext = FlowSheet.FlowsheetOptions.CurrentWeather.AtmosphericPressure_Pa
+                        vel = FlowSheet.FlowsheetOptions.CurrentWeather.WindSpeed_km_h / 3.6
+
+                    Else
+
+                        vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
+
+                    End If
+
+                    Dim props = PropsAR(Text, Pext)
                     mu2 = props(1)
                     rho2 = props(0)
                     cp2 = props(2) * 1000
@@ -2270,7 +2306,7 @@ Final3:     T = bbb
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_pipe_32
+            Return My.Resources.pipe_segment
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

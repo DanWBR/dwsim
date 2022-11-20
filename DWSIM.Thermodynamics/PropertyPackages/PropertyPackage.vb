@@ -1,5 +1,5 @@
 '    Property Package Base Class
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -477,7 +477,11 @@ Namespace PropertyPackages
 
         Public Property ExceptionLog As String = ""
 
-        Public ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
+        Public Overridable ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
+
+        Public Overridable ReadOnly Property IsFunctional As Boolean = True Implements IPropertyPackage.IsFunctional
+
+        Public Overridable ReadOnly Property ShouldUseKvalueMethod2 As Boolean = False Implements IPropertyPackage.ShouldUseKvalueMethod2
 
         'forced solids list
         Public Property ForcedSolids As New List(Of String)
@@ -1111,6 +1115,8 @@ Namespace PropertyPackages
 
                 xi = subst.MoleFraction.GetValueOrDefault
 
+                If xi = 0.0 Then xi = 1.0E-20
+
                 Mi = subst.ConstantProperties.Molar_Weight
                 LNEi = subst.ConstantProperties.LennardJonesEnergy
                 LNDi = subst.ConstantProperties.LennardJonesDiameter
@@ -1122,10 +1128,10 @@ Namespace PropertyPackages
                 FVni = 0.0#
                 For Each subst2 In p.Compounds.Values
                     If subst.Name <> subst2.Name Then
-                        Mni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
-                        LNEni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.LennardJonesEnergy
-                        LNDni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.LennardJonesDiameter
-                        FVni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.FullerDiffusionVolume
+                        Mni += xi * subst.ConstantProperties.Molar_Weight
+                        LNEni += xi * subst.ConstantProperties.LennardJonesEnergy
+                        LNDni += xi * subst.ConstantProperties.LennardJonesDiameter
+                        FVni += xi * subst.ConstantProperties.FullerDiffusionVolume
                     End If
                 Next
                 Mni /= xi
@@ -1494,6 +1500,25 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Function DW_CheckKvaluesConsistency(Vz As Double(), Ki As Double(), T As Double, P As Double) As Double()
+
+            Dim Ki_id = DW_CalcKvalue_Ideal_Wilson(T, P)
+            Dim Ki2 = RET_NullVector()
+
+            Dim ratio = Ki.DivideY(Ki_id)
+
+            For i = 0 To Vz.Length - 1
+                If ratio(i) > 100000 Or ratio(i) < 0.001 And Vz(i) < 0.0001 Then
+                    Ki2(i) = Ki_id(i)
+                Else
+                    Ki2(i) = Ki(i)
+                End If
+            Next
+
+            Return Ki2
+
+        End Function
+
         ''' <summary>
         ''' Does a Bubble Pressure calculation for the specified liquid composition at the specified temperature.
         ''' </summary>
@@ -1572,6 +1597,61 @@ Namespace PropertyPackages
         ''' <returns>A vector of doubles containing fugacity coefficients for the components in the mixture.</returns>
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public MustOverride Function DW_CalcFugCoeff(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+        ''' <summary>
+        ''' Calculates fugacity coefficients for the specified composition at the specified conditions.
+        ''' </summary>
+        ''' <param name="Vz">Vector of doubles containing the molar composition of the mixture.</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="V">Volume in m3/mol</param>
+        ''' <returns></returns>
+        Public Overridable Function DW_CalcFugCoeff(Vz As Double(), T As Double, V As Double) As Double()
+
+            Throw New NotImplementedException("Fugacity coefficient calculation with T and V is not implemented by this Property Package.")
+
+        End Function
+
+        ''' <summary>
+        ''' Calculates system pressure for the specified temperature, volume and composition.
+        ''' </summary>
+        ''' <param name="Vz">Vector of doubles containing the molar composition of the mixture.</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="V">Volume in m3/mol</param>
+        ''' <returns></returns>
+        Public Overridable Function DW_CalcP(Vz As Double(), T As Double, V As Double) As Double
+
+            Throw New NotImplementedException("Pressure calculation with T and V is not implemented by this Property Package.")
+
+        End Function
+
+        ''' <summary>
+        ''' Calculate the critical points of the current Material Stream
+        ''' </summary>
+        ''' <returns>List of critical points in the following order: T in K, P in Pa and V in m3/mol</returns>
+        Public Overridable Function DW_CalculateCriticalPoints() As List(Of Double())
+
+            'use generic method
+
+            Dim gm As New Utilities.TCP.GenericMethod
+
+            gm.CalcP = Function(T, V, Vzi)
+                           Return DW_CalcP(Vzi, T, V)
+                       End Function
+
+            gm.FugacityTV = Function(T, V, Vzi)
+                                Return DW_CalcFugCoeff(Vzi, T, V)
+                            End Function
+
+            Dim Vz = RET_VMOL(Phase.Mixture)
+
+            Dim VTc = RET_VTC()
+            Dim VPc = RET_VPC()
+
+            Dim V0 = 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+
+            Return gm.CriticalPoint(Vz, VTc.Min, VTc.Max, V0, 3.85 * V0)
+
+        End Function
 
         Public MustOverride Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
@@ -2990,7 +3070,8 @@ redirect2:                  IObj?.SetCurrent()
                             Dim Vx, Vx2, Vy, Vs As Double()
 
                             IObj?.SetCurrent()
-                            result = Me.FlashBase.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T, Me)
+
+                            result = Me.FlashBase.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, 0.0, Me)
 
                             T = result(4)
 
@@ -3309,7 +3390,7 @@ redirect2:                  IObj?.SetCurrent()
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n) As Double
+            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n), VKij3(n, n) As Double
             Dim Vm2(Vz.Length - 1 - j), VPc2(Vz.Length - 1 - j), VTc2(Vz.Length - 1 - j), VVc2(Vz.Length - 1 - j), Vw2(Vz.Length - 1 - j), VKij2(Vz.Length - 1 - j, Vz.Length - 1 - j)
 
             VTc = Me.RET_VTC()
@@ -3346,21 +3427,21 @@ redirect2:                  IObj?.SetCurrent()
             With options
                 If Not .BubbleUseCustomParameters Then
                     .BubbleCurveDeltaP = 101325
-                    .BubbleCurveDeltaT = 5
+                    .BubbleCurveDeltaT = 1.0
                     .BubbleCurveInitialPressure = 0.0#
                     .BubbleCurveInitialTemperature = RET_VTF.Min
                     .BubbleCurveInitialFlash = "TVF"
-                    .BubbleCurveMaximumPoints = 100
+                    .BubbleCurveMaximumPoints = 500
                     .BubbleCurveMaximumTemperature = RET_VTC.Max * 1.2
                     .CheckLiquidInstability = False
                 End If
                 If Not .DewUseCustomParameters Then
-                    .DewCurveDeltaP = 2 * 101325
-                    .DewCurveDeltaT = 5
+                    .DewCurveDeltaP = 25000
+                    .DewCurveDeltaT = 1.0
                     .DewCurveInitialPressure = 101325
                     .DewCurveInitialTemperature = 0.0#
                     .DewCurveInitialFlash = "PVF"
-                    .DewCurveMaximumPoints = 100
+                    .DewCurveMaximumPoints = 500
                     .DewCurveMaximumTemperature = RET_VTC.Max * 1.5
                 End If
             End With
@@ -3378,6 +3459,7 @@ redirect2:                  IObj?.SetCurrent()
             If TypeOf Me Is PengRobinsonPropertyPackage Then
                 If n > 0 Then
                     CP = New Utilities.TCP.Methods().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                    If CP.Count = 0 Then CP = New Utilities.TCP.Methods().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij3)
                     If CP.Count > 0 Then
                         Dim cp0 = CP(0)
                         TCR = cp0(0)
@@ -3399,6 +3481,7 @@ redirect2:                  IObj?.SetCurrent()
             ElseIf TypeOf Me Is SRKPropertyPackage Then
                 If n > 0 Then
                     CP = New Utilities.TCP.Methods_SRK().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                    If CP.Count = 0 Then CP = New Utilities.TCP.Methods_SRK().CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij3)
                     If CP.Count > 0 Then
                         Dim cp0 = CP(0)
                         TCR = cp0(0)
@@ -3418,10 +3501,26 @@ redirect2:                  IObj?.SetCurrent()
                     CP.Add(New Object() {TCR, PCR, VCR})
                 End If
             Else
-                TCR = Me.AUX_TCM(Phase.Mixture)
-                PCR = Me.AUX_PCM(Phase.Mixture)
-                VCR = Me.AUX_VCM(Phase.Mixture)
-                CP.Add(New Object() {TCR, PCR, VCR})
+                If n > 0 Then
+                    CP = New ArrayList(DW_CalculateCriticalPoints())
+                    If CP.Count > 0 Then
+                        Dim cp0 = CP(0)
+                        TCR = cp0(0)
+                        PCR = cp0(1)
+                        VCR = cp0(2)
+                        stopAtCP = True
+                    Else
+                        TCR = Me.AUX_TCM(Phase.Mixture)
+                        PCR = Me.AUX_PCM(Phase.Mixture)
+                        VCR = Me.AUX_VCM(Phase.Mixture)
+                        recalcCP = True
+                    End If
+                Else
+                    TCR = Me.AUX_TCM(Phase.Mixture)
+                    PCR = Me.AUX_PCM(Phase.Mixture)
+                    VCR = Me.AUX_VCM(Phase.Mixture)
+                    CP.Add(New Object() {TCR, PCR, VCR})
+                End If
             End If
 
             Dim beta As Double = 10.0#
@@ -3575,7 +3674,11 @@ redirect2:                  IObj?.SetCurrent()
 
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+                    If stopAtCP Then
+                        If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 10000 Or T > TCR Then
+                            Exit Do
+                        End If
+                    End If
 
                     If beta < 20 Then
                         If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
@@ -3596,7 +3699,9 @@ redirect2:                  IObj?.SetCurrent()
                 If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0.0#
 
                 If TypeOf Me Is PengRobinsonPropertyPackage Or TypeOf Me Is SRKPropertyPackage Then
-                    If Math.Abs(T - TCR) / TCR < 0.002 And Math.Abs(P - PCR) / PCR < 0.002 Then Exit Do
+                    If Math.Abs(T - TCR) / TCR < 0.002 And Math.Abs(P - PCR) / PCR < 0.002 Then
+                        Exit Do
+                    End If
                 End If
 
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points... " & ((i + 1) / options.BubbleCurveMaximumPoints * 100).ToString("N1") & "%")
@@ -3647,9 +3752,9 @@ redirect2:                  IObj?.SetCurrent()
 
                 Else
 
-                    If Abs(beta) < 2 Then
+                    If beta < 0.0 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, False, KI)
                             TVD.Add(T)
                             PO.Add(tmp2(4))
                             P = PO(PO.Count - 1)
@@ -3657,7 +3762,6 @@ redirect2:                  IObj?.SetCurrent()
                             SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
-                            beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         End Try
                     Else
@@ -3670,32 +3774,60 @@ redirect2:                  IObj?.SetCurrent()
                             SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
-                            beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         End Try
                     End If
 
-                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+                    beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
 
-                    If Abs(beta) < 2 Then
-                        If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
-                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T - options.DewCurveDeltaT * 0.1
-                            Else
-                                T = T - options.DewCurveDeltaT
-                            End If
-                        Else
-                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T + options.DewCurveDeltaT * 0.1
-                            Else
-                                T = T + options.DewCurveDeltaT
-                            End If
+                    If PO.Count > 50 Then
+                        Dim p1 As Double = PO(PO.Count - 1)
+                        Dim p2 As Double = PO(PO.Count - 2)
+                        Dim p3 As Double = PO(PO.Count - 3)
+                        Dim t1 As Double = TVD(TVD.Count - 1)
+                        Dim t2 As Double = TVD(TVD.Count - 2)
+                        Dim t3 As Double = TVD(TVD.Count - 3)
+                        Dim d1 = ((p2 - p1) ^ 2 + (t2 - t1) ^ 2) ^ 0.5
+                        Dim d2 = ((p3 - p2) ^ 2 + (t3 - t2) ^ 2) ^ 0.5
+                        If d2 > d1 * 50 And d1 > 0.0 Then
+                            PO.RemoveAt(PO.Count - 1)
+                            TVD.RemoveAt(TVD.Count - 1)
+                            HO.RemoveAt(HO.Count - 1)
+                            SO.RemoveAt(SO.Count - 1)
+                            VO.RemoveAt(VO.Count - 1)
+                            Exit Do
                         End If
+                    End If
+
+                    If stopAtCP Then
+                        If Math.Abs(T - TCR) < 2.0 And Math.Abs(P - PCR) < 10000 Then
+                            Exit Do
+                        End If
+                    End If
+
+                    If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                        T = T - options.DewCurveDeltaT * 0.1
                     Else
-                        If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
-                            P = P + options.DewCurveDeltaP * 0.25
+                        If beta < 0.0 Then
+                            If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                    T = T - options.DewCurveDeltaT * 0.1
+                                Else
+                                    T = T - options.DewCurveDeltaT
+                                End If
+                            Else
+                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                    T = T + options.DewCurveDeltaT * 0.1
+                                Else
+                                    T = T + options.DewCurveDeltaT
+                                End If
+                            End If
                         Else
-                            P = P + options.DewCurveDeltaP
+                            If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
+                                P = P + options.DewCurveDeltaP * 0.25
+                            Else
+                                P = P + options.DewCurveDeltaP
+                            End If
                         End If
                     End If
 
@@ -3815,6 +3947,67 @@ redirect2:                  IObj?.SetCurrent()
                 End If
 
             End If
+
+            'complete lines up to critical point
+
+            Dim POL = PO(PO.Count - 1)
+            Dim TOL = TVD(TVD.Count - 1)
+            Dim PBL = PB(PB.Count - 1)
+            Dim TBL = TVB(TVB.Count - 1)
+
+            Dim DPO = (PCR - POL) / 10
+            Dim DTO = (TCR - TOL) / 10
+            Dim DPB = (PCR - PBL) / 10
+            Dim DTB = (TCR - TBL) / 10
+
+            'If Math.Abs(DPO * 10) > 101325 Or Math.Abs(DPB * 10) * 5 Or
+            '        Math.Abs(DTO * 10) > 101325 Or Math.Abs(DTB * 10) * 5 Then
+
+            '    Dim POlast = PO.ToDoubleList()
+            '    Dim PBLast = PB.ToDoubleList()
+            '    Dim TOlast = TVD.ToDoubleList()
+            '    Dim TBlast = TVB.ToDoubleList()
+
+            '    POlast.Add(PCR)
+            '    PBLast.Add(PCR)
+            '    TOlast.Add(TCR)
+            '    TBlast.Add(TCR)
+
+            '    POlast.Reverse()
+            '    PBLast.Reverse()
+            '    TOlast.Reverse()
+            '    TBlast.Reverse()
+
+            '    Dim POLn = POL + DPO
+            '    Dim PBLn = PBL + DPB
+            '    Dim TOLn = TOL + DTO
+            '    Dim TBLn = TBL + DTB
+            '    For i = 0 To 11
+            '        If Math.Abs(DTB) > 0.2 Then
+            '            Dim PBn = MathNet.Numerics.Interpolate.RationalWithPoles(TBlast.Take(10), PBLast.Take(10)).Interpolate(TBLn)
+            '            PB.Add(PBn)
+            '            TVB.Add(TBLn)
+            '        Else
+            '            Dim TBn = MathNet.Numerics.Interpolate.RationalWithPoles(PBLast.Take(10), TOlast.Take(10)).Interpolate(PBLn)
+            '            PB.Add(PBLn)
+            '            TVB.Add(TBn)
+            '        End If
+            '        If Math.Abs(DTO) > 0.2 Then
+            '            Dim POn = MathNet.Numerics.Interpolate.RationalWithPoles(TOlast.Take(10), POlast.Take(10)).Interpolate(TOLn)
+            '            PO.Add(POn)
+            '            TVD.Add(TOLn)
+            '        Else
+            '            Dim TOn = MathNet.Numerics.Interpolate.RationalWithPoles(POlast.Take(10), TOlast.Take(10)).Interpolate(POLn)
+            '            PO.Add(POLn)
+            '            TVD.Add(TOn)
+            '        End If
+            '        POLn += DPO
+            '        PBLn += DPB
+            '        TOLn += DTO
+            '        TBLn += DTB
+            '    Next
+
+            'End If
 
             'calculate quality curve
 
@@ -5178,7 +5371,7 @@ redirect2:                  IObj?.SetCurrent()
                     'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / CompoundPropCache(ID).Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                ElseIf db = "ChemSep" Or db = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = CompoundPropCache(ID).IdealgasCpEquation
                     Dim mw As Double = CompoundPropCache(ID).Molar_Weight
@@ -5192,20 +5385,7 @@ redirect2:                  IObj?.SetCurrent()
                     Else
                         result = ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
-                    If result = 0.0 Then
-                        'try estimating from LK method
-                        With CompoundPropCache(ID)
-                            Dim sg60 = AUX_LIQDENSi(CompoundPropCache(ID), 288.7) / 1000.0
-                            result = Auxiliary.PROPS.Cpig_lk(.Normal_Boiling_Point ^ 0.33 / sg60, .Acentric_Factor, T)
-                        End With
-                        If Double.IsNaN(result) Or Double.IsInfinity(result) Then
-                            Return 3.5 * 8.314 / mw
-                        Else
-                            Return result
-                        End If
-                    Else
-                        Return result
-                    End If
+                    If result = 0.0 Then Return 3.5 * 8.314 / mw Else Return result
                 ElseIf db = "ChEDL Thermo" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = CompoundPropCache(ID).IdealgasCpEquation
@@ -6570,7 +6750,7 @@ Final3:
             Dim val As Double
 
             If cprop.LiquidThermalConductivityEquation <> "" And cprop.LiquidThermalConductivityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                If Integer.TryParse(cprop.VaporThermalConductivityEquation, New Integer) Then
+                If Integer.TryParse(cprop.LiquidThermalConductivityEquation, New Integer) Then
                     val = CalcCSTDepProp(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
                 Else
                     val = ParseEquation(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T)
@@ -6927,7 +7107,7 @@ Final3:
             Dim val As Double
 
 
-            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Or T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
+            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                 If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
                     IObj?.Paragraphs.Add("Temperature is supercritical.")
                 End If
@@ -7471,7 +7651,6 @@ Final3:
                         E = cprops(i).Solid_Heat_Capacity_Const_E
                         '<SolidHeatCapacityCp name="Solid heat capacity"  units="J/kmol/K" >
                         Cpi = CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
-
                         If cprops(i).TemperatureOfFusion < 298.15 Then
                             HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
                             HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
@@ -7532,7 +7711,11 @@ Final3:
 
             For i = 0 To n
                 If ForcedSolids.Contains(names(i)) Then
-                    phis(i) = 0.000000000000001
+                    If Pvaps(i) > 0 Then
+                        phis(i) = Pvaps(i) / P
+                    Else
+                        phis(i) = 0.000000000000001
+                    End If
                 Else
                     If T > Tf(i) Then
                         phis(i) = 10000000000.0 * Pvaps(i) / P
@@ -8336,7 +8519,10 @@ Final3:
             n = Ki.Length - 1
 
             For i = 0 To n
-                If Abs(Ki(i) - 1) > tolerance Then isTrivial = False
+                If Abs(Ki(i) - 1.0) > tolerance Then
+                    isTrivial = False
+                    Exit For
+                End If
             Next
 
             Return isTrivial
@@ -10058,7 +10244,7 @@ Final3:
         ''' </summary>
         ''' <param name="props">The list of identifiers for properties to be calculated. This must be one or more 
         ''' of the supported two-phase properties and derivatives (as given by the GetTwoPhasePropList method). 
-        ''' The standard identifiers for two-phase properties are given in section 7.5.6 and 7.6.</param>
+        ''' The standard identifiers for two-phase properties are given in section 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the phases for which the properties are to be calculated. 
         ''' The phase labels must be two of the strings returned by the GetPhaseList method on the ICapeThermoPhases 
         ''' interface and the phases must also be present in the Material Object.</param>
@@ -10237,7 +10423,7 @@ Final3:
         ''' Returns the list of supported non-constant two-phase properties.
         ''' </summary>
         ''' <returns>List of all supported non-constant two-phase property identifiers. The standard two-phase 
-        ''' property identifiers are listed in section 7.5.6.</returns>
+        ''' property identifiers are listed in section 7.5.7.</returns>
         ''' <remarks>A non-constant property depends on the state of the Material Object. Two-phase properties
         ''' are those that depend on more than one co-existing phase, e.g. K-values.
         ''' GetTwoPhasePropList must return all the properties that can be calculated by
@@ -10246,7 +10432,7 @@ Final3:
         ''' To check whether a property can be evaluated for a particular set of phase labels use the
         ''' CheckTwoPhasePropSpec method.
         ''' A component that implements this method may return non-constant two-phase property
-        ''' identifiers which do not belong to the list defined in section 7.5.6. However, these
+        ''' identifiers which do not belong to the list defined in section 7.5.7. However, these
         ''' proprietary identifiers may not be understood by most of the clients of this component.
         ''' To get the list of supported single-phase properties, use GetSinglePhasePropList.</remarks>
         Public Overridable Function GetTwoPhasePropList() As Object Implements ICapeThermoPropertyRoutine.GetTwoPhasePropList
@@ -10259,7 +10445,7 @@ Final3:
         ''' <param name="constantId">Identifier of Universal Constant. The list of constants supported should be 
         ''' obtained by using the GetUniversalConstantList method.</param>
         ''' <returns>Value of Universal Constant. This could be a numeric or a string value. For numeric values 
-        ''' the units of measurement are specified in section 7.5.1.</returns>
+        ''' the units of measurement are specified in section 7.5.5.</returns>
         ''' <remarks>Universal Constants (often called fundamental constants) are quantities like the gas constant,
         ''' or the Avogadro constant.</remarks>
         Public Overridable Function GetUniversalConstant1(ByVal constantId As String) As Object Implements ICapeThermoUniversalConstant.GetUniversalConstant
@@ -10282,9 +10468,9 @@ Final3:
         ''' <summary>
         ''' Returns the identifiers of the supported Universal Constants.
         ''' </summary>
-        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.1.</returns>
+        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.5.</returns>
         ''' <remarks>A component may return Universal Constant identifiers that do not belong to the list defined
-        ''' in section 7.5.1. However, these proprietary identifiers may not be understood by most of the
+        ''' in section 7.5.5. However, these proprietary identifiers may not be understood by most of the
         ''' clients of this component.</remarks>
         Public Overridable Function GetUniversalConstantList() As Object Implements ICapeThermoUniversalConstant.GetUniversalConstantList
             Return New String() {"standardAccelerationOfGravity", "avogadroConstant", "boltzmannConstant", "molarGasConstant"}
@@ -11535,6 +11721,37 @@ Final3:
                     Catch ex As Exception
                     End Try
 
+                Case "Peng-Robinson 1978 (PR78)"
+
+                    Try
+                        Dim pp As PengRobinson1978PropertyPackage = Me
+                        'pp.m_pr.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").FirstOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.Owner = Me.GetModel(), .kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
+                            End If
+                        Next
+
+                    Catch ex As Exception
+                    End Try
+
                 Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
 
                     Dim pp As PRSV2PropertyPackage = Me
@@ -11804,6 +12021,54 @@ Final3:
 
                     End Try
 
+                Case "Wilson"
+
+                    Try
+
+                        Dim pp As WilsonPropertyPackage = Me
+
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_PR").FirstOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
+                            End If
+                        Next
+
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_Wilson").FirstOrDefault.Elements.ToList
+                            Dim ip = New Double() {Double.Parse(xel.@A12, ci), Double.Parse(xel.@A21, ci)}
+                            Dim dic As New Dictionary(Of String, Double())
+                            dic.Add(xel.@CAS2, ip)
+                            If Not pp.WilsonM.BIPs.ContainsKey(xel.@CAS1) Then
+                                pp.WilsonM.BIPs.Add(xel.@CAS1, dic)
+                            Else
+                                If Not pp.WilsonM.BIPs(xel.@CAS1).ContainsKey(xel.@CAS2) Then
+                                    pp.WilsonM.BIPs(xel.@CAS1).Add(xel.@CAS2, ip)
+                                Else
+                                    pp.WilsonM.BIPs(xel.@CAS1)(xel.@CAS2) = ip
+                                End If
+                            End If
+                        Next
+
+                    Catch ex As Exception
+
+                    End Try
+
                 Case "Modified UNIFAC (Dortmund)"
 
                     Dim pp As MODFACPropertyPackage = Me
@@ -11929,6 +12194,12 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData, "")
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases, True)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure, True)
+                End If
             End If
 
         End Function
@@ -11994,6 +12265,23 @@ Final3:
                     Case "Peng-Robinson (PR)"
 
                         Dim pp As PengRobinsonPropertyPackage = Me
+
+                        .Add(New XElement("InteractionParameters"))
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PR_IPData)) In pp.m_pr.InteractionParameters
+                            For Each kvp2 As KeyValuePair(Of String, Auxiliary.PR_IPData) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp.Key) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp2.Key) Then
+                                        .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("Compound1", kvp.Key),
+                                                                        New XAttribute("Compound2", kvp2.Key),
+                                                                        New XAttribute("Value", kvp2.Value.kij.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                    Case "Peng-Robinson 1978 (PR78)"
+
+                        Dim pp As PengRobinson1978PropertyPackage = Me
 
                         .Add(New XElement("InteractionParameters"))
                         For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PR_IPData)) In pp.m_pr.InteractionParameters
@@ -12188,6 +12476,44 @@ Final3:
                                                                       New XAttribute("B21", kvp2.Value.B21.ToString(ci)),
                                                                       New XAttribute("C12", kvp2.Value.C12.ToString(ci)),
                                                                       New XAttribute("C21", kvp2.Value.C21.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                    Case "Wilson"
+
+                        Dim pp As WilsonPropertyPackage = Me
+
+
+                        .Add(New XElement("InteractionParameters_PR"))
+
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PR_IPData)) In pp.m_pr.InteractionParameters
+                            For Each kvp2 As KeyValuePair(Of String, Auxiliary.PR_IPData) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp.Key) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp2.Key) Then
+                                        .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("Compound1", kvp.Key),
+                                                                        New XAttribute("Compound2", kvp2.Key),
+                                                                        New XAttribute("Value", kvp2.Value.kij.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                        .Add(New XElement("InteractionParameters_Wilson"))
+
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Double())) In pp.WilsonM.BIPs
+                            For Each kvp2 As KeyValuePair(Of String, Double()) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    Dim c1 = CurrentMaterialStream.Phases(0).Compounds.Values.Where(Function(c) c.ConstantProperties.CAS_Number = kvp.Key).FirstOrDefault()
+                                    Dim c2 = CurrentMaterialStream.Phases(0).Compounds.Values.Where(Function(c) c.ConstantProperties.CAS_Number = kvp2.Key).FirstOrDefault()
+                                    If c1 IsNot Nothing And c2 IsNot Nothing Then
+                                        If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(c1.Name) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(c2.Name) Then
+                                            .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("CAS1", kvp.Key),
+                                                                      New XAttribute("CAS2", kvp2.Key),
+                                                                      New XAttribute("A12", kvp2.Value(0).ToString(ci)),
+                                                                      New XAttribute("A21", kvp2.Value(1).ToString(ci))))
+                                        End If
                                     End If
                                 End If
                             Next

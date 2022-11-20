@@ -164,10 +164,10 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <param name="decimalplaces">Decimal places</param>
         /// <param name="valuechangedhandler">Handler for the ValueChanged event</param>
         /// <returns></returns>
-        public static NumericStepper AddNumericStepper(DynamicLayout container, string text, double value,
-            double minvalue, double maxvalue, int decimalplaces, Action<NumericStepper, EventArgs> valuechangedhandler = null)
+        public static TextBox AddNumericStepper(DynamicLayout container, string text, double value,
+            double minvalue, double maxvalue, int decimalplaces, Action<TextBox, EventArgs> valuechangedhandler = null)
         {
-            return Common.CreateAndAddNumericEditorRow(container, text, value, minvalue, maxvalue, decimalplaces, valuechangedhandler);
+            return Common.CreateAndAddNumericEditorRow2(container, text, value, minvalue, maxvalue, decimalplaces, valuechangedhandler);
         }
 
         /// <summary>

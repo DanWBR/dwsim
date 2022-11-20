@@ -352,6 +352,7 @@ Imports System.Drawing
         'PipeHydraulicProfileEditor
         '
         resources.ApplyResources(Me, "$this")
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "PipeHydraulicProfileEditor"
         CType(Me.GridMalha, System.ComponentModel.ISupportInitialize).EndInit()

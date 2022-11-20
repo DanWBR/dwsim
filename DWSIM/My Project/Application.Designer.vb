@@ -13,7 +13,7 @@ Option Explicit On
 
 
 Namespace My
-    
+
     'NOTE: This file is auto-generated; do not modify it directly.  To make changes,
     ' or if you encounter build errors in this file, go to the Project Designer
     ' (go to Project Properties or double-click the My Project node in
@@ -21,18 +21,21 @@ Namespace My
     '
     Partial Friend Class MyApplication
 
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
-            Me.IsSingleInstance = false
-            Me.EnableVisualStyles = true
-            Me.SaveMySettingsOnExit = true
+            Me.IsSingleInstance = False
+            Me.EnableVisualStyles = True
+            Me.SaveMySettingsOnExit = True
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
         End Sub
 
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.DWSIM.FormMain
         End Sub
 
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateSplashScreen()
             Me.SplashScreen = GetSplashScreen()
         End Sub

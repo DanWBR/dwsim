@@ -165,6 +165,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 With outstr1
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlout
                     Dim comp As BaseClasses.Compound
@@ -188,6 +189,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
                 With outstr2
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
                     Dim comp As BaseClasses.Compound
@@ -239,10 +241,12 @@ Namespace UnitOperations
 
             'update energy stream power value
 
-            With Me.GetEnergyStream
-                .EnergyFlow = Me.EnergyImb
-                .GraphicObject.Calculated = True
-            End With
+            If GetEnergyStream() IsNot Nothing Then
+                With Me.GetEnergyStream
+                    .EnergyFlow = Me.EnergyImb
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
             IObj?.Close()
 
@@ -477,7 +481,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_filter_32
+            Return My.Resources.filter
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

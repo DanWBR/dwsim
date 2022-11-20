@@ -683,7 +683,7 @@ Partial Class EditingForm_ShortcutColumn
         'EditingForm_ShortcutColumn
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)

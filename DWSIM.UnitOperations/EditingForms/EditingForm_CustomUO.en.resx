@@ -157,8 +157,11 @@
   <data name="btnConfigurePP.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 19</value>
+  </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 21</value>
+    <value>255, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -568,8 +571,11 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
+  <data name="cbExecEngine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>186, 14</value>
+  </data>
   <data name="cbExecEngine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 21</value>
+    <value>244, 21</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 13</value>

@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.RCT_CSTR
             Me.Description = "CSTR"
+            EmbeddedResourceIconName = "cstr.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -72,7 +73,11 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.05 * Width, Y + 0.1 * Height)
+                    Else
+                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    End If
                     .Item(1).Position = New Point(X + 0.125 * Width, Y + 0.7 * Height)
                 Else
                     .Add(myIC1)
@@ -87,13 +92,12 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + Width, Y + 0.7825 * Height)
                     Else
                         .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y)
                     End If
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
@@ -212,7 +216,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

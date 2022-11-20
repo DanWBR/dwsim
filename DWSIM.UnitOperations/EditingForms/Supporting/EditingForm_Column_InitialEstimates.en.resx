@@ -375,18 +375,6 @@
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>Compositions</value>
   </data>
-  <data name="sfd1.Filter" xml:space="preserve">
-    <value>Distillation Column Initial Estimates File|*.dwcdi</value>
-  </data>
-  <data name="sfd1.Title" xml:space="preserve">
-    <value>Save Initial Estimates File</value>
-  </data>
-  <data name="ofd1.Filter" xml:space="preserve">
-    <value>Distillation Column Initial Estimates File|*.dwcdi</value>
-  </data>
-  <data name="ofd1.Title" xml:space="preserve">
-    <value>Load Initial Estimates File</value>
-  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>578, 415</value>
   </data>

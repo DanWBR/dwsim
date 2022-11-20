@@ -75,9 +75,9 @@ Imports conv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         Console.WriteLine()
 
         If simulationfile.Contains(IO.Path.DirectorySeparatorChar) Then
-            simulation = fp.LoadAndExtractXMLZIP(simulationfile, Nothing, True)
+            simulation = fp.LoadAndExtractXMLZIP(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(simulationfile), Nothing, True)
         Else
-            simulation = fp.LoadAndExtractXMLZIP(path1 + simulationfile, Nothing, True)
+            simulation = fp.LoadAndExtractXMLZIP(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(path1 + simulationfile), Nothing, True)
         End If
 
         My.Application.ActiveSimulation = simulation
@@ -476,9 +476,9 @@ Imports conv = DWSIM.SharedClasses.SystemsOfUnits.Converter
             simulation.WriteToLog("Saving changes to file...", Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
             Application.DoEvents()
             If simulationfile.Contains(IO.Path.DirectorySeparatorChar) Then
-                fp.SaveXMLZIP(simulationfile, simulation)
+                fp.SaveXMLZIP(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(simulationfile), simulation)
             Else
-                fp.SaveXMLZIP(path1 + simulationfile, simulation)
+                fp.SaveXMLZIP(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(path1 + simulationfile), simulation)
             End If
         End If
 

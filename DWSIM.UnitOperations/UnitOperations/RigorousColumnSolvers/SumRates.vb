@@ -1,5 +1,5 @@
 ﻿'    Rigorous Columns (Distillation and Absorption) Solvers
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -30,6 +30,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Inherits ColumnSolver
 
+        Public Shared Property RelaxCompositionUpdates As Boolean = False
+
+        Public Shared Property RelaxTemperatureUpdates As Boolean = False
+
         Public Overrides ReadOnly Property Name As String
             Get
                 Throw New NotImplementedException()
@@ -42,7 +46,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             End Get
         End Property
 
-        Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+        Public Shared Function Solve(rc As Column, ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
                                 ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
                                 ByVal Q As Double(), ByVal L As Double(),
                                 ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
@@ -55,6 +59,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal llextr As Boolean = False) As Object
+
+            rc.ColumnSolverConvergenceReport = ""
+
+            Dim reporter As Text.StringBuilder = Nothing
+
+            If rc.CreateSolverConvergengeReport Then reporter = New Text.StringBuilder()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -212,6 +222,59 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'step3
 
+
+            Dim names = pp.RET_VNAMES().ToList()
+
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine(String.Format("Initial Estimates"))
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine()
+
+            reporter?.AppendLine("Stage Conditions & Flows")
+            reporter?.AppendLine(String.Format("{0,-16}{1,16}{2,16}{3,16}{4,16}{5,16}",
+                                                   "Stage", "P (Pa)", "T (K)",
+                                                   "L1 (mol/s)", "V/L2 (mol/s)", "LSS (mol/s)"))
+            For i = 0 To ns
+                reporter?.AppendLine(String.Format("{0,-16}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}",
+                                                   i + 1, P(i), T(i), L(i), V(i), LSS(i)))
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Stage Molar Fractions - Liquid 1")
+            reporter?.Append("Stage".PadRight(20))
+            For j = 0 To nc - 1
+                reporter?.Append(names(j).PadLeft(20))
+            Next
+            reporter?.Append(vbCrLf)
+            For i = 0 To ns
+                reporter?.Append((i + 1).ToString().PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(x(i)(j).ToString("G6").PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Stage Molar Fractions - Vapor/Liquid 2")
+            reporter?.Append("Stage".PadRight(20))
+            For j = 0 To nc - 1
+                reporter?.Append(names(j).PadLeft(20))
+            Next
+            reporter?.Append(vbCrLf)
+            For i = 0 To ns
+                reporter?.Append((i + 1).ToString().PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(y(i)(j).ToString("G6").PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+            Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine()
+
+            Dim t_error_hist As New List(Of Double)
+            Dim comp_error_hist As New List(Of Double)
+
             'internal loop
             ic = 0
             Do
@@ -305,6 +368,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If lc(i)(j) < 0 Then lc(i)(j) = 0.0000001
                         sumx(i) += lc(i)(j)
                     Next
+                    If Double.IsNaN(sumx(i)) Then
+                        Throw New Exception(String.Format("Failed to update liquid phase composition on stage {0}", i))
+                    End If
                 Next
 
                 'Ljs
@@ -381,10 +447,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
-                ''''''''''''''''''''
-                Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns) As Double
+                Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns), dHl2(ns), dHv2(ns) As Double
 
-                Dim epsilon As Double = 0.1
+                Dim epsilon As Double = 0.00001
 
                 If doparallel Then
 
@@ -393,22 +458,28 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                  If IdealH Then
                                                                      Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
                                                                      dHl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl2(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
                                                                      If llextr Then
                                                                          Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                      Else
                                                                          Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv2(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                      End If
                                                                  Else
                                                                      Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                      dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl2(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                      If llextr Then
                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv2(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                      Else
                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv2(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                      End If
                                                                  End If
                                                              End Sub),
@@ -422,15 +493,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
                             IObj2?.SetCurrent()
                             dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            dHl2(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
                             IObj2?.SetCurrent()
                             If llextr Then
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
                                 IObj2?.SetCurrent()
                                 dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                                dHv2(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
                                 IObj2?.SetCurrent()
                                 dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                                dHv2(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
                             End If
                             ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
@@ -440,15 +514,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
                             IObj2?.SetCurrent()
                             dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            dHl2(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
                             IObj2?.SetCurrent()
                             If llextr Then
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
                                 IObj2?.SetCurrent()
                                 dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                                dHv2(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
                             Else
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                                 IObj2?.SetCurrent()
                                 dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                                dHv2(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                             End If
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
@@ -466,8 +543,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Else
                         H(i) = Lj(i - 1) * Hl(i - 1) + Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
                     End If
-                    dHldT(i) = (Hl(i) - dHl(i)) / epsilon
-                    dHvdT(i) = (Hv(i) - dHv(i)) / epsilon
+                    dHldT(i) = (dHl2(i) - dHl(i)) / (2 * epsilon)
+                    dHvdT(i) = (dHv2(i) - dHv(i)) / (2 * epsilon)
                 Next
 
                 IObj2?.Paragraphs.Add(("<mi>\frac{\partial h_L}{\partial T}</mi>: " & dHldT.ToMathArrayString))
@@ -506,16 +583,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Dim deltat As Double()
                 Dim maxdt As Double = xth.Select(Function(tp) Abs(tp)).Max
 
+                Dim af = 5.0 / maxdt
+
+                If af > 1.0 Then af = 1.0
+
                 deltat = xth
+
+                Dim dft = MathOps.MathEx.Interpolation.Interpolation.GetDampingFactor(ic, 50, 0.05, 1.0)
+                Dim dfc = MathOps.MathEx.Interpolation.Interpolation.GetDampingFactor(ic, 50, 0.05, 1.0)
 
                 t_error = 0.0#
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    If Math.Abs(deltat(i)) > 3 Then
-                        Tj(i) = Tj(i) + Math.Sign(deltat(i)) * 3
-                    Else
-                        Tj(i) = Tj(i) + deltat(i)
+                    Tj(i) = Tj(i) + dft * deltat(i)
+                    If RelaxTemperatureUpdates Then
+                        Tj(i) = dft * Tj(i) + (1 - dft) * Tj_ant(i)
                     End If
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     If IdealK Then
@@ -523,14 +606,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If llextr Then
                             tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
-                            tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            If ppr.ShouldUseKvalueMethod2 Then
+                                tmp = ppr.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                            Else
+                                tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         End If
                     Else
                         IObj2?.SetCurrent()
                         If llextr Then
                             tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
-                            tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            If pp.ShouldUseKvalueMethod2 Then
+                                tmp = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                            Else
+                                tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         End If
                     End If
                     sumy(i) = 0
@@ -547,12 +638,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         End If
                         yc_ant(i)(j) = yc(i)(j)
                         yc(i)(j) = K(i)(j) * xc(i)(j)
+                        If RelaxCompositionUpdates Then
+                            yc(i)(j) = dfc * yc(i)(j) + (1 - dfc) * yc_ant(i)(j)
+                        End If
                         sumy(i) += yc(i)(j)
                         comperror += Abs(yc(i)(j) - yc_ant(i)(j)) ^ 2
                     Next
                     t_error += Abs(Tj(i) - Tj_ant(i)) ^ 2
                     pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                 Next
+
+                t_error_hist.Add(t_error)
+                comp_error_hist.Add(comperror)
 
                 IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
 
@@ -574,20 +671,101 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 ic = ic + 1
 
+                Dim exc As Exception = Nothing
+
                 If Not IdealH And Not IdealK Then
-                    If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                    If ic >= maxits Then
+                        exc = New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                    End If
                 End If
 
-                If Double.IsNaN(t_error) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
-                If Double.IsNaN(comperror) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                If Double.IsNaN(t_error) Then
+                    exc = New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                End If
+                If Double.IsNaN(comperror) Then
+                    exc = New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                End If
+
+                If Not exc Is Nothing Then
+
+
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Error Function Progression")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}{3,26}{4,26}", "Iteration", "Temperature Error", "Composition Error"))
+                    For i = 0 To t_error_hist.Count - 1
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}{3,26:G6}{4,26:G6}", i + 1, t_error_hist(i), comp_error_hist(i)))
+                    Next
+
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Convergence Error!")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+
+                    reporter?.AppendLine(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+
+                    If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
+
+                    Throw exc
+
+                End If
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 IObj2?.Close()
 
-                'pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Temperature error = " & t_error.ToString, IFlowsheet.MessageType.Information)
-                'pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Composition error = " & comperror.ToString, IFlowsheet.MessageType.Information)
-                'pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", combined Temperature/Composition error = " & (t_error + comperror).ToString, IFlowsheet.MessageType.Information)
+                reporter?.AppendLine("========================================================")
+                reporter?.AppendLine(String.Format("Updated variables after iteration {0}", ic))
+                reporter?.AppendLine("========================================================")
+                reporter?.AppendLine()
+
+                reporter?.AppendLine("Stage Conditions & Flows")
+                reporter?.AppendLine(String.Format("{0,-16}{1,16}{2,16}{3,16}{4,16}{5,16}",
+                                                   "Stage", "P (Pa)", "T (K)", "L1 (mol/s)",
+                                                   "V/L2 (mol/s)", "LSS (mol/s)"))
+                For i = 0 To ns
+                    reporter?.AppendLine(String.Format("{0,-16}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}",
+                                                   i + 1, P(i), Tj(i), Lj(i), Vj(i), LSSj(i)))
+                Next
+
+                reporter?.AppendLine()
+                reporter?.AppendLine("Stage Molar Fractions - Vapor/Liquid 1")
+                reporter?.Append("Stage".PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(names(j).PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+                For i = 0 To ns
+                    reporter?.Append((i + 1).ToString().PadRight(20))
+                    For j = 0 To nc - 1
+                        reporter?.Append(xc(i)(j).ToString("G6").PadLeft(20))
+                    Next
+                    reporter?.Append(vbCrLf)
+                Next
+
+                reporter?.AppendLine()
+                reporter?.AppendLine("Stage Molar Fractions - Vapor")
+                reporter?.Append("Stage".PadRight(20))
+                For j = 0 To nc - 1
+                    reporter?.Append(names(j).PadLeft(20))
+                Next
+                reporter?.Append(vbCrLf)
+                For i = 0 To ns
+                    reporter?.Append((i + 1).ToString().PadRight(20))
+                    For j = 0 To nc - 1
+                        reporter?.Append(yc(i)(j).ToString("G6").PadLeft(20))
+                    Next
+                    reporter?.Append(vbCrLf)
+                Next
+
+                reporter?.AppendLine()
+                reporter?.AppendLine()
+                reporter?.AppendLine(String.Format("Temperature Error: {0} [tol: {1}]", t_error, tol(1)))
+                reporter?.AppendLine(String.Format("Composition Error: {0} [tol: {1}]", comperror, tol(1)))
+                reporter?.AppendLine()
+                reporter?.AppendLine()
 
             Loop Until t_error <= tol(1) And comperror <= tol(1)
 
@@ -613,6 +791,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Throw New Exception("Invalid result - converged to the trivial solution.")
                 End If
             Next
+
+
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine("Error Function Progression")
+            reporter?.AppendLine("========================================================")
+            reporter?.AppendLine()
+
+            reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}", "Iteration", "Temperature Error", "Composition Error"))
+            For i = 0 To t_error_hist.Count - 1
+                reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), comp_error_hist(i)))
+            Next
+
+            If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
 
             ' finished, return arrays
 
@@ -656,7 +847,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End If
             End If
 
-            Dim result As Object() = Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
+            Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
                                input.CondenserType, eff, col.PropertyPackage, col.Specs, False, False, llextractor)
 
             Dim output As New ColumnSolverOutputData

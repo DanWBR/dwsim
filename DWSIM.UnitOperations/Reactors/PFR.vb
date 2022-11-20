@@ -1,5 +1,5 @@
 '    PFR Calculation Routines 
-'    Copyright 2008-2016 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -46,9 +46,6 @@ Namespace Reactors
 
         Private _IObj As InspectorItem
 
-        Protected m_vol As Double = 1.0
-        Protected m_dv As Double = 0.01
-
         Dim C0 As Dictionary(Of String, Double)
         Dim C As Dictionary(Of String, Double)
 
@@ -78,27 +75,15 @@ Namespace Reactors
 
         Private VolumeFraction As Double = 1.0
 
+        Public Property NumberOfTubes As Integer = 1
+
         Public Property Length As Double = 1.0
 
         Public Property Diameter As Double = 0.1
 
-        Public Property Volume() As Double
-            Get
-                Return m_vol
-            End Get
-            Set(ByVal value As Double)
-                m_vol = value
-            End Set
-        End Property
+        Public Property Volume As Double = 1.0
 
-        Public Property dV() As Double
-            Get
-                Return m_dv
-            End Get
-            Set(ByVal value As Double)
-                m_dv = value
-            End Set
-        End Property
+        Public Property dV As Double = 0.01
 
         Public Property CatalystLoading As Double = 0.0#
 
@@ -107,6 +92,11 @@ Namespace Reactors
         Public Property CatalystParticleDiameter As Double = 0.0#
 
         Public Property ResidenceTime As Double = 0.0#
+
+        Public Property UseUserDefinedPressureDrop As Boolean = False
+
+        Public Property UserDefinedPressureDrop As Double = 0.0
+
 
         Public Sub New()
 
@@ -463,8 +453,8 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Max Sections", "Maximum number of sections to divide the PFR length in during dynamic calculations.", 20, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Contents", "Empties the PFR's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Max Sections", "Maximum number of sections to divide the PFR length in during dynamic calculations.", 20, UnitOfMeasure.none, 1.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the PFR's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -608,9 +598,9 @@ Namespace Reactors
 
             'Volume = PI * Diameter ^ 2 / 4 * Length
             If ReactorSizingType = SizingType.Length Then
-                Diameter = (4 * Volume / Length / PI) ^ 0.5
+                Diameter = (4 * Volume / NumberOfTubes / Length / PI) ^ 0.5
             Else
-                Length = 4 * Volume / PI / Diameter ^ 2
+                Length = 4 * Volume / NumberOfTubes / PI / Diameter ^ 2
             End If
 
             For Each astr In AccumulationStreams
@@ -671,6 +661,8 @@ Namespace Reactors
         End Sub
 
         Public Function Calculate_Internal(dVF As Double, Optional ByVal args As Object = Nothing) As Boolean
+
+            If dV = 0.0 Then dV = 0.01
 
             Dim negative As Boolean = False
 
@@ -975,7 +967,6 @@ Namespace Reactors
                         esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
                     End If
 
-
                     Do
 
                         deltaV = deltaV0
@@ -1129,6 +1120,27 @@ Namespace Reactors
 
                         Select Case Me.ReactorOperationMode
 
+                            Case OperationMode.NonIsothermalNonAdiabatic
+
+                                Dim esval = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault()
+
+                                'Products Enthalpy (kJ/kg * kg/s = kW)
+
+                                Hp = Hr - DHr + esval * deltaV
+
+                                IObj2?.SetCurrent()
+
+                                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
+                                Dim Tout As Double = tmp.CalculatedTemperature.GetValueOrDefault
+
+                                ims.Phases(0).Properties.temperature = Tout
+                                ims.Phases(0).Properties.enthalpy = Hp / W
+
+                                T = Tout
+
+                                ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+
                             Case OperationMode.Adiabatic
 
                                 Me.DeltaQ = 0.0#
@@ -1172,7 +1184,7 @@ Namespace Reactors
                         ims.PropertyPackage.CurrentMaterialStream = ims
                         ims.Calculate(True, True)
 
-                    Loop Until Abs(T - Tant) < 0.01
+                    Loop Until Abs(T - Tant) < 0.5
 
                     DHRT.Add(DHr)
 
@@ -1180,9 +1192,9 @@ Namespace Reactors
 
                 'Volume = PI * Diameter ^ 2 / 4 * Length
                 If ReactorSizingType = SizingType.Length Then
-                    diameter = (4 * Volume / Length / PI) ^ 0.5
+                    Diameter = (4 * Volume / NumberOfTubes / Length / PI) ^ 0.5
                 Else
-                    Length = 4 * Volume / PI / diameter ^ 2
+                    Length = 4 * Volume / NumberOfTubes / PI / Diameter ^ 2
                 End If
 
                 If Not dynamics Then
@@ -1222,35 +1234,43 @@ Namespace Reactors
 
                 Dim L As Double = deltaV * Length
 
-                If Me.CatalystLoading > 0.0 And hasHetCatReaction Then
+                If UseUserDefinedPressureDrop Then
 
-                    'has catalyst, use Ergun equation for pressure drop in reactor beds
-
-                    Dim vel As Double = (Qlin + Qvin) / (PI * Diameter ^ 2 / 4)
-                    Dim dp As Double = Me.CatalystParticleDiameter
-                    Dim ev As Double = Me.CatalystVoidFraction
-
-                    Dim pdrop As Double = 150 * eta * L / dp ^ 2 * (1 - ev) ^ 2 / ev ^ 3 * vel + 1.75 * L * rho / dp * (1 - ev) / ev ^ 3 * vel ^ 2
-
-                    P -= pdrop
+                    P -= UserDefinedPressureDrop * deltaV
 
                 Else
 
-                    'calculate pressure drop using Beggs and Brill correlation
+                    If Me.CatalystLoading > 0.0 And hasHetCatReaction Then
 
-                    Dim resv As Object()
-                    Dim fpp As New FlowPackages.BeggsBrill
-                    Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
+                        'has catalyst, use Ergun equation for pressure drop in reactor beds
 
-                    resv = fpp.CalculateDeltaP(diameter * 0.0254, L, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                        Dim vel As Double = (Qlin + Qvin) / (PI * Diameter ^ 2 / 4)
+                        Dim dp As Double = Me.CatalystParticleDiameter
+                        Dim ev As Double = Me.CatalystVoidFraction
 
-                    tipofluxo = resv(0)
-                    holdup = resv(1)
-                    dpf = resv(2)
-                    dph = resv(3)
-                    dpt = resv(4)
+                        Dim pdrop As Double = 150 * eta * L / dp ^ 2 * (1 - ev) ^ 2 / ev ^ 3 * vel + 1.75 * L * rho / dp * (1 - ev) / ev ^ 3 * vel ^ 2
 
-                    P -= dpf
+                        P -= pdrop
+
+                    Else
+
+                        'calculate pressure drop using Beggs and Brill correlation
+
+                        Dim resv As Object()
+                        Dim fpp As New FlowPackages.BeggsBrill
+                        Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
+
+                        resv = fpp.CalculateDeltaP(Diameter * 0.0254, L, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+
+                        tipofluxo = resv(0)
+                        holdup = resv(1)
+                        dpf = resv(2)
+                        dph = resv(3)
+                        dpt = resv(4)
+
+                        P -= dpf
+
+                    End If
 
                 End If
 
@@ -1338,6 +1358,14 @@ Namespace Reactors
 
                     OutletTemperature = T0
 
+                ElseIf Me.ReactorOperationMode = OperationMode.NonIsothermalNonAdiabatic Then
+
+                    Me.DeltaQ = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault()
+
+                    OutletTemperature = ims.GetTemperature()
+
+                    Me.DeltaT = OutletTemperature - T0
+
                 ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
 
                     'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -1393,12 +1421,16 @@ Namespace Reactors
                     End With
                 End If
 
-                'energy stream - update energy flow value (kW)
-                Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                With estr
-                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
+                If ReactorOperationMode <> OperationMode.NonIsothermalNonAdiabatic Then
+                    'energy stream - update energy flow value (kW)
+                    Dim estr = GetInletEnergyStream(1)
+                    If estr IsNot Nothing Then
+                        With estr
+                            .EnergyFlow = DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
+                End If
 
             End If
 
@@ -1474,6 +1506,8 @@ Namespace Reactors
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
                         Case 9
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.Diameter)
+                        Case 10
+                            value = NumberOfTubes
                     End Select
 
                 Else
@@ -1541,15 +1575,15 @@ Namespace Reactors
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RW
-                    For i = 0 To 9
+                    For i = 0 To 10
                         proplist.Add("PROP_PF_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 9
+                    For i = 0 To 10
                         proplist.Add("PROP_PF_" + CStr(i))
                     Next
                 Case PropertyType.ALL, PropertyType.RO
-                    For i = 0 To 9
+                    For i = 0 To 10
                         proplist.Add("PROP_PF_" + CStr(i))
                     Next
                     proplist.Add("Calculation Mode")
@@ -1597,6 +1631,8 @@ Namespace Reactors
                     Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
                 Case 9
                     Me.Diameter = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
+                Case 10
+                    NumberOfTubes = propval
             End Select
             Return 1
         End Function
@@ -1638,6 +1674,8 @@ Namespace Reactors
                                 value = su.heatflow
                             Case 9
                                 value = su.diameter
+                            Case 10
+                                value = ""
                         End Select
 
                     Catch ex As Exception
@@ -1695,7 +1733,7 @@ Namespace Reactors
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.re_pfr_32
+            Return My.Resources.pfr
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

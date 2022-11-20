@@ -58,6 +58,10 @@ Public Class EditingForm_Column
 
             'first block
 
+            chkCreateConvReport.Checked = .CreateSolverConvergengeReport
+
+            btnViewReport.Enabled = (.ColumnSolverConvergenceReport <> "")
+
             chkActive.Checked = .GraphicObject.Active
 
             ToolTip1.SetToolTip(chkActive, .FlowSheet.GetTranslatedString("AtivoInativo"))
@@ -127,10 +131,6 @@ Public Class EditingForm_Column
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
                 TabContainerSpecification.TabPages.Remove(TabCondenser)
                 TabContainerSpecification.TabPages.Remove(TabReboiler)
-            ElseIf TypeOf SimObject Is RefluxedAbsorber Then
-                TabContainerSpecification.TabPages.Remove(TabReboiler)
-            ElseIf TypeOf SimObject Is ReboiledAbsorber Then
-                TabContainerSpecification.TabPages.Remove(TabCondenser)
             End If
 
             'parameters
@@ -138,10 +138,6 @@ Public Class EditingForm_Column
             cbCondPressureUnits.Items.Clear()
             cbCondPressureUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
             cbCondPressureUnits.SelectedItem = units.pressure
-
-            cbRebPressure.Items.Clear()
-            cbRebPressure.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
-            cbRebPressure.SelectedItem = units.pressure
 
             cbCondPDropUnits.Items.Clear()
             cbCondPDropUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
@@ -151,6 +147,12 @@ Public Class EditingForm_Column
             cbSubcooling.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
             cbSubcooling.SelectedItem = units.deltaT
 
+            cbColPDrop.Items.Clear()
+            cbColPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
+            cbColPDrop.SelectedItem = units.deltaP
+
+            tbColPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .ColumnPressureDrop).ToString(nf)
+
             tbNStages.Text = .NumberOfStages
 
             If TypeOf SimObject Is AbsorptionColumn Then cbAbsorberMode.SelectedIndex = DirectCast(SimObject, AbsorptionColumn).OperationMode Else cbAbsorberMode.Enabled = False
@@ -159,7 +161,7 @@ Public Class EditingForm_Column
             tbConvTol.Text = .ExternalLoopTolerance.ToString("R")
 
             cbCondType.SelectedIndex = .CondenserType
-            tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .CondenserPressure).ToString(nf)
+            tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .Stages.First.P).ToString(nf)
             tbCondPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .CondenserDeltaP).ToString(nf)
             cbCondSpec.SelectedIndex = .Specs("C").SType
             Dim cunits As String() = {}
@@ -208,7 +210,6 @@ Public Class EditingForm_Column
                 tbSubcooling.Text = "0"
             End If
 
-            tbRebPressure.Text = su.Converter.ConvertFromSI(units.pressure, .ReboilerPressure).ToString(nf)
             cbRebSpec.SelectedIndex = .Specs("R").SType
             Dim runits As String() = {}
             Select Case .Specs("R").SType
@@ -328,6 +329,8 @@ Public Class EditingForm_Column
 
             btnResults.Enabled = .x0.Count > 0
 
+            btnViewPropertiesReport.Enabled = .Calculated
+
             'property package
 
             Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
@@ -363,7 +366,7 @@ Public Class EditingForm_Column
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        'SimObject.FlowSheet.RequestCalculation(SimObject)
 
     End Sub
 
@@ -568,7 +571,7 @@ Public Class EditingForm_Column
         End Select
         cbCondSpecUnits.Items.Clear()
         cbCondSpecUnits.Items.AddRange(cunits)
-        cbCondSpecUnits.SelectedItem = Nothing
+        cbCondSpecUnits.SelectedIndex = 0
 
     End Sub
 
@@ -576,8 +579,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.CondenserPressure = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
-            SimObject.Stages(0).P = SimObject.CondenserPressure
+            SimObject.Stages(0).P = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
 
             UpdateInfo()
             RequestCalc()
@@ -646,19 +648,6 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbRebPressure_TextChanged(sender As Object, e As KeyEventArgs) Handles tbRebPressure.KeyDown
-
-        If Loaded And e.KeyCode = Keys.Enter Then
-
-            SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text.ParseExpressionToDouble)
-            SimObject.Stages(SimObject.Stages.Count - 1).P = SimObject.ReboilerPressure
-
-            RequestCalc()
-
-        End If
-
-    End Sub
-
     Private Sub cbRebSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRebSpec.SelectedIndexChanged
 
         SimObject.Specs("R").SType = cbRebSpec.SelectedIndex
@@ -694,7 +683,7 @@ Public Class EditingForm_Column
         End Select
         cbRebSpecUnits.Items.Clear()
         cbRebSpecUnits.Items.AddRange(cunits)
-        cbRebSpecUnits.SelectedItem = Nothing
+        cbRebSpecUnits.SelectedIndex = 0
 
     End Sub
 
@@ -751,8 +740,8 @@ Public Class EditingForm_Column
     End Sub
 
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
-                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown,
-                                                                                tbSubcooling.TextChanged
+                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown,
+                                                                                tbSubcooling.TextChanged, tbColPDrop.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then
@@ -836,6 +825,45 @@ Public Class EditingForm_Column
                 su.Converter.ConvertToSI(units.deltaT, tbSubcooling.Text.ParseExpressionToDouble)
 
         End If
+
+    End Sub
+
+    Private Sub tbColPDrop_KeyDown(sender As Object, e As KeyEventArgs) Handles tbColPDrop.KeyDown
+
+        If Loaded And e.KeyCode = Keys.Enter Then
+
+            SimObject.ColumnPressureDrop = su.Converter.ConvertToSI(units.deltaP, tbColPDrop.Text)
+
+            UpdateInfo()
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnViewReport.Click
+
+        Dim fr As New ReportViewer()
+        fr.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+        fr.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr.TextBox1.DeselectAll()
+        SimObject.FlowSheet.DisplayForm(fr)
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkCreateConvReport.CheckedChanged
+        SimObject.CreateSolverConvergengeReport = chkCreateConvReport.Checked
+    End Sub
+
+    Private Sub btnViewPropertiesReport_Click(sender As Object, e As EventArgs) Handles btnViewPropertiesReport.Click
+
+        Dim fr As New ReportViewer()
+        fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
+        fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
+        fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
+        fr.TextBox1.DeselectAll()
+        SimObject.FlowSheet.DisplayForm(fr)
 
     End Sub
 

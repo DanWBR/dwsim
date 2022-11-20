@@ -258,52 +258,74 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {op}, New Double() {ot}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         Dim tmp As Object
                         For Each tmp In PC
                             .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, tmp(0))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         If px7.Count > 0 Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                                 .Color = Color.SteelBlue
+                                .Line.IsSmooth = True
                                 .Line.IsVisible = True
-                                .Line.IsSmooth = False
-                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Line.Width = 2
                                 .Symbol.IsVisible = False
                             End With
                             With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                                 .Color = Color.SteelBlue
+                                .Line.IsSmooth = True
                                 .Line.IsVisible = True
-                                .Line.IsSmooth = False
-                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Line.Width = 2
                                 .Symbol.IsVisible = False
                             End With
                         End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px6.ToArray(GetType(Double)), py6.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         If chkStabCurve.Checked Then
                             With .AddCurve(DWSIM.App.GetLocalString("LimitedeEstabilidade"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkOrange
-                                .Line.IsSmooth = False
+                                .Line.IsSmooth = True
+                                .Line.IsVisible = True
+                                .Line.Width = 2
+                                .Symbol.IsVisible = False
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
                         If qualitycalc Then
                             With .AddCurve("V = " & Me.tbQuality.Text, px4.ToArray(GetType(Double)), py4.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkGreen
-                                .Line.IsSmooth = False
+                                .Line.IsSmooth = True
+                                .Line.IsVisible = True
+                                .Line.Width = 2
+                                .Symbol.IsVisible = False
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
@@ -330,13 +352,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                                 .Line.IsVisible = True
                                 .Line.Width = 2
                                 .Symbol.IsVisible = False
-                            End With
-                        End If
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {op}, New Double() {ot}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
                         .Title.Text = strname
@@ -366,27 +381,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
-                        '.AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TC)}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PC)}, Color.Black, ZedGraph.SymbolType.Circle)
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.pressure
-                        .YAxis.Title.Text = "H / " & su.enthalpy
-                        .AxisChange(Me.CreateGraphics)
-                        Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {op}, New Double() {oh}, Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.Black
@@ -394,6 +388,36 @@ exec:       With Me.GraphControl.GraphPane.Legend
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
+                        '.AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TC)}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PC)}, Color.Black, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.YellowGreen
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.DarkBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        .Title.Text = strname
+                        .XAxis.Title.Text = "P / " & su.pressure
+                        .YAxis.Title.Text = "H / " & su.enthalpy
+                        .AxisChange(Me.CreateGraphics)
+                        Me.GraphControl.Invalidate()
                     End With
 
                 Case 2
@@ -414,26 +438,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Next
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.pressure
-                        .YAxis.Title.Text = "S / " & su.entropy
-                        .AxisChange(Me.CreateGraphics)
-                        Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {op}, New Double() {os}, Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.Black
@@ -441,6 +445,35 @@ exec:       With Me.GraphControl.GraphPane.Legend
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.YellowGreen
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.DarkBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        .Title.Text = strname
+                        .XAxis.Title.Text = "P / " & su.pressure
+                        .YAxis.Title.Text = "S / " & su.entropy
+                        .AxisChange(Me.CreateGraphics)
+                        Me.GraphControl.Invalidate()
                     End With
 
                 Case 3
@@ -461,30 +494,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Next
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
-                        Dim tmp As Object
-                        For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        Next
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.pressure
-                        .YAxis.Title.Text = "V / " & su.molar_volume
-                        .AxisChange(Me.CreateGraphics)
-                        Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {op}, New Double() {ov}, Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.Black
@@ -492,6 +501,39 @@ exec:       With Me.GraphControl.GraphPane.Legend
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
+                        Dim tmp As Object
+                        For Each tmp In PC
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        Next
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.YellowGreen
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.DarkBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        .Title.Text = strname
+                        .XAxis.Title.Text = "P / " & su.pressure
+                        .YAxis.Title.Text = "V / " & su.molar_volume
+                        .AxisChange(Me.CreateGraphics)
+                        Me.GraphControl.Invalidate()
                     End With
 
                 Case 4
@@ -543,52 +585,74 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {op}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         Dim tmp As Object
                         For Each tmp In PC
                             .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, tmp(0))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         If px7.Count > 0 Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                                 .Color = Color.SteelBlue
+                                .Line.IsSmooth = True
                                 .Line.IsVisible = True
-                                .Line.IsSmooth = False
-                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Line.Width = 2
                                 .Symbol.IsVisible = False
                             End With
                             With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                                 .Color = Color.SteelBlue
+                                .Line.IsSmooth = True
                                 .Line.IsVisible = True
-                                .Line.IsSmooth = False
-                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Line.Width = 2
                                 .Symbol.IsVisible = False
                             End With
                         End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px6.ToArray(GetType(Double)), py6.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         If chkStabCurve.Checked Then
                             With .AddCurve(DWSIM.App.GetLocalString("LimitedeEstabilidade"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkOrange
-                                .Line.IsSmooth = False
+                                .Line.IsSmooth = True
+                                .Line.IsVisible = True
+                                .Line.Width = 2
+                                .Symbol.IsVisible = False
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
                         If qualitycalc Then
                             With .AddCurve("V = " & Me.tbQuality.Text, px4.ToArray(GetType(Double)), py4.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkGreen
-                                .Line.IsSmooth = False
+                                .Line.IsSmooth = True
+                                .Line.IsVisible = True
+                                .Line.Width = 2
+                                .Symbol.IsVisible = False
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
@@ -622,13 +686,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         .YAxis.Title.Text = "P / " & su.pressure
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {op}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                            End With
-                        End If
                     End With
 
                 Case 5
@@ -650,19 +707,36 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {oh}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Size = 4
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
@@ -670,13 +744,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         .YAxis.Title.Text = "H / " & su.enthalpy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {oh}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                            End With
-                        End If
                     End With
 
                 Case 6
@@ -698,19 +765,36 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {os}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Size = 4
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
@@ -718,13 +802,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         .YAxis.Title.Text = "S / " & su.entropy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {os}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                            End With
-                        End If
                     End With
 
                 Case 7
@@ -746,18 +823,32 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {ov}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Size = 4
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         Dim tmp As Object
                         For Each tmp In PC
                             .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, tmp(0))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
@@ -770,13 +861,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         .YAxis.Title.Text = "V / " & su.molar_volume
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ot}, New Double() {ov}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                            End With
-                        End If
                     End With
 
                 Case 8
@@ -798,30 +882,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
-                        Dim tmp As Object
-                        For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        Next
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        .Title.Text = strname
-                        .XAxis.Title.Text = "V / " & su.molar_volume
-                        .YAxis.Title.Text = "P / " & su.pressure
-                        .AxisChange(Me.CreateGraphics)
-                        Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ov}, New Double() {op}, Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.Black
@@ -829,6 +889,39 @@ exec:       With Me.GraphControl.GraphPane.Legend
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
+                        Dim tmp As Object
+                        For Each tmp In PC
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        Next
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.YellowGreen
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.DarkBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        .Title.Text = strname
+                        .XAxis.Title.Text = "V / " & su.molar_volume
+                        .YAxis.Title.Text = "P / " & su.pressure
+                        .AxisChange(Me.CreateGraphics)
+                        Me.GraphControl.Invalidate()
                     End With
 
                 Case 9
@@ -850,18 +943,31 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ov}, New Double() {ot}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         Dim tmp As Object
                         For Each tmp In PC
                             .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, tmp(0))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
@@ -874,13 +980,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         .YAxis.Title.Text = "T / " & su.temperature
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ov}, New Double() {ot}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                            End With
-                        End If
                     End With
 
                 Case 10
@@ -902,26 +1001,6 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.DarkBlue
-                            .Line.IsSmooth = False
-                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                        End With
-                        .Title.Text = ""
-                        .XAxis.Title.Text = "V / " & su.molar_volume
-                        .YAxis.Title.Text = "H / " & su.enthalpy
-                        .AxisChange(Me.CreateGraphics)
-                        Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
                             With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ov}, New Double() {oh}, Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.Black
@@ -929,6 +1008,35 @@ exec:       With Me.GraphControl.GraphPane.Legend
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
                             End With
                         End If
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.YellowGreen
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.DarkBlue
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
+                            .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                        End With
+                        .Title.Text = ""
+                        .XAxis.Title.Text = "V / " & su.molar_volume
+                        .YAxis.Title.Text = "H / " & su.enthalpy
+                        .AxisChange(Me.CreateGraphics)
+                        Me.GraphControl.Invalidate()
                     End With
 
                 Case 11
@@ -950,14 +1058,27 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
+                        If Me.showoppoint Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ov}, New Double() {os}, Color.Red, ZedGraph.SymbolType.Circle)
+                                .Color = Color.Black
+                                .Line.IsSmooth = False
+                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            End With
+                        End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
-                            .Line.IsSmooth = False
+                            .Line.IsSmooth = True
+                            .Line.IsVisible = True
+                            .Line.Width = 2
+                            .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
@@ -970,19 +1091,12 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         .YAxis.Title.Text = "S / " & su.entropy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
-                        If Me.showoppoint Then
-                            With .AddCurve(DWSIM.App.GetLocalString("PontodeOperao"), New Double() {ov}, New Double() {os}, Color.Red, ZedGraph.SymbolType.Circle)
-                                .Color = Color.Black
-                                .Line.IsSmooth = False
-                                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                            End With
-                        End If
                     End With
 
             End Select
 
             With Me.GraphControl.GraphPane.Title
-                .Text = Me.ComboBox1.SelectedItem & " (PP: " & Me.Frm.Options.SelectedPropertyPackage.ComponentName & ")"
+                .Text = Me.ComboBox1.SelectedItem & " (" + mat.PropertyPackage.ComponentName & ")"
                 .FontSpec.Size = 14
             End With
 

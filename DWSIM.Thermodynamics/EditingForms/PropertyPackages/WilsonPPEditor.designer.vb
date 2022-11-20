@@ -22,7 +22,6 @@ Partial Class WilsonPPEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -76,8 +75,6 @@ Partial Class WilsonPPEditor
         Me.dgvu1.Name = "dgvu1"
         Me.dgvu1.RowHeadersVisible = False
         Me.dgvu1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DataGridViewCellStyle5.Format = "N5"
-        Me.dgvu1.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvu1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.dgvu1.Size = New System.Drawing.Size(683, 369)
         Me.dgvu1.TabIndex = 5

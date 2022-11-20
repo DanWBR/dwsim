@@ -5,6 +5,7 @@ Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
 Imports System.Linq
 Imports System.Drawing
+Imports System.IO
 
 Public Class EditingForm_Flowsheet_Editor
 
@@ -43,7 +44,15 @@ Public Class EditingForm_Flowsheet_Editor
     Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click
 
         Try
-            fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile, fsuo.FlowSheet.GetNewInstance)
+            If fsuo.FileIsEmbedded Then
+                Dim tmpfile As String = ""
+                tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(fsuo.EmbeddedFileName))
+                fsuo.FlowSheet.FileDatabaseProvider.ExportFile(fsuo.EmbeddedFileName, tmpfile)
+                fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(tmpfile, fsuo.FlowSheet.GetNewInstance)
+                File.Delete(tmpfile)
+            Else
+                fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile, fsuo.FlowSheet.GetNewInstance)
+            End If
             fsuo.Initialized = True
         Catch ex As AggregateException
             fsuo.FlowSheet.ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)

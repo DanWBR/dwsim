@@ -727,6 +727,111 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         End Function
 
+        Public Overrides Function DW_CalcFugCoeff(Vz() As Double, T As Double, V As Double) As Double()
+
+            If DirectCast(Vz, Double()).Sum = 0.0 Then Return RET_UnitaryVector()
+
+            Dim gerg As New GERGBase
+
+            gerg.SetupGERG()
+
+            Dim R As Double = 8.314472
+
+            Dim D As Double, herr As String = ""
+            Dim Z, Z0, dPdD, d2PdD2, d2PdTD, dPdT, U, H, S, Cv, Cp, W, G, JT, Kappa, A As Double
+
+            Dim f1, f2, Ar1, Ar2, Ar As Double
+            Dim lnfugcoeff(Vz.Length - 1), fugcoeff(Vz.Length - 1), x1(Vz.Length - 1), x2(Vz.Length - 1), a0(2) As Double
+
+            D = 1.0 / V / 1000.0
+
+            Dim V2 = 1000.0 * V
+
+            Dim P = DW_CalcP(Vz, T, V)
+
+            gerg.SetupGERG()
+
+            gerg.PropertiesGERG(T, D, GetVz(Vz), P / 1000, Z, dPdD, d2PdD2, d2PdTD, dPdT, U, H, S, Cv, Cp, W, G, JT, Kappa, A)
+
+            gerg.SetupGERG()
+
+            gerg.Alpha0GERG(T, D, GetVz(Vz), a0)
+
+            Ar = A / (R * T) - a0(0) 'dimensionless
+
+            Z0 = Z
+
+            Dim epsilon As Double = 0.00001
+
+            Dim Vn As Double() = Vz.Clone
+
+            Vn = Vn.MultiplyConstY(1.0)
+
+            For j = 0 To Vz.Length - 1
+
+                For k = 0 To Vz.Length - 1
+                    x1(k) = Vn(k)
+                    x2(k) = Vn(k)
+                Next
+
+                x1(j) = Vn(j) - epsilon
+                If x1(j) < 0 Then x1(j) = Vn(j) + 0.5 * epsilon
+                x2(j) = Vn(j) + epsilon
+
+                gerg.SetupGERG()
+
+                gerg.PropertiesGERG(T, x1.Sum / V2, GetVz(x1.NormalizeY), P / 1000, Z, dPdD, d2PdD2, d2PdTD, dPdT, U, H, S, Cv, Cp, W, G, JT, Kappa, A)
+
+                gerg.SetupGERG()
+
+                gerg.Alpha0GERG(T, x1.Sum / V2, GetVz(x1.NormalizeY), a0)
+
+                Ar1 = A / (R * T) - a0(0) 'dimensionless
+
+                f1 = Ar1 * x1.Sum
+
+                gerg.SetupGERG()
+
+                gerg.PropertiesGERG(T, x2.Sum / V2, GetVz(x2.NormalizeY), P / 1000, Z, dPdD, d2PdD2, d2PdTD, dPdT, U, H, S, Cv, Cp, W, G, JT, Kappa, A)
+
+                gerg.SetupGERG()
+
+                gerg.Alpha0GERG(T, x2.Sum / V2, GetVz(x2.NormalizeY), a0)
+
+                Ar2 = A / (R * T) - a0(0) 'dimensionless
+
+                f2 = Ar2 * x2.Sum
+
+                lnfugcoeff(j) = (f2 - f1) / (x2(j) - x1(j)) - Math.Log(Z0)
+
+                fugcoeff(j) = Math.Exp(lnfugcoeff(j))
+
+            Next
+
+            gerg = Nothing
+
+            Return fugcoeff
+
+        End Function
+
+        Public Overrides Function DW_CalcP(Vz() As Double, T As Double, V As Double) As Double
+
+            Dim gerg As New GERGBase
+
+            gerg.SetupGERG()
+
+            Dim D = 1.0 / V / 1000.0
+
+            Dim P, Z As Double
+
+            gerg.PressureGERG(T, D, GetVz(Vz), P, Z)
+
+            gerg = Nothing
+
+            Return P * 1000.0
+
+        End Function
+
         Public Overrides Function SupportsComponent(comp As ICompoundConstantProperties) As Boolean
 
             Return True

@@ -20,9 +20,9 @@ Partial Class LogPanel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LogPanel))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LogPanel))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Grid1 = New System.Windows.Forms.DataGridView()
         Me.Imagem = New System.Windows.Forms.DataGridViewImageColumn()
@@ -33,6 +33,7 @@ Partial Class LogPanel
         Me.Info = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.LimparListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarInformaçõesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockLeftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,14 +52,13 @@ Partial Class LogPanel
         '
         'Grid1
         '
+        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.AllowUserToAddRows = False
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.Grid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.Grid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.Grid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Imagem, Me.Indice, Me.Data, Me.Tipo, Me.Mensagem, Me.Info})
         Me.Grid1.ContextMenuStrip = Me.ContextMenuStrip1
-        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.Name = "Grid1"
         Me.Grid1.ReadOnly = True
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -138,77 +138,82 @@ Partial Class LogPanel
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LimparListaToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LimparListaToolStripMenuItem, Me.CopiarInformaçõesToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         '
         'LimparListaToolStripMenuItem
         '
+        resources.ApplyResources(Me.LimparListaToolStripMenuItem, "LimparListaToolStripMenuItem")
         Me.LimparListaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.LimparListaToolStripMenuItem.Name = "LimparListaToolStripMenuItem"
-        resources.ApplyResources(Me.LimparListaToolStripMenuItem, "LimparListaToolStripMenuItem")
+        '
+        'CopiarInformaçõesToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CopiarInformaçõesToolStripMenuItem, "CopiarInformaçõesToolStripMenuItem")
+        Me.CopiarInformaçõesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.copy
+        Me.CopiarInformaçõesToolStripMenuItem.Name = "CopiarInformaçõesToolStripMenuItem"
         '
         'dckMenu
         '
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
+        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         '
         'DockLeftToolStripMenuItem
         '
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
+        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         '
         'DockRightToolStripMenuItem
         '
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
+        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         '
         'DockTopToolStripMenuItem
         '
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
+        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         '
         'DockBottomToolStripMenuItem
         '
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
+        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
+        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
+        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
+        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
+        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         '
         'DocumentToolStripMenuItem
         '
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
+        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
         'LogPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.Grid1)
         Me.HideOnClose = True
@@ -241,4 +246,5 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents Tipo As DataGridViewTextBoxColumn
     Friend WithEvents Mensagem As DataGridViewTextBoxColumn
     Friend WithEvents Info As DataGridViewButtonColumn
+    Friend WithEvents CopiarInformaçõesToolStripMenuItem As ToolStripMenuItem
 End Class

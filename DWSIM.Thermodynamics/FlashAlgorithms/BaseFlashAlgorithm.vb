@@ -1,5 +1,5 @@
 '    Flash Algorithm Abstract Base Class
-'    Copyright 2010-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2010-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -135,6 +135,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) = ""
 
             settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) = ""
+
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) = False
+
+            settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) = True
 
             Return settings
 
@@ -1198,7 +1202,17 @@ will converge to this solution.")
                     For j As Integer = 0 To Vz.Length - 1
                         Vx(j) = stresult(1)(i, j)
                     Next
-                    results.Add(Vx)
+                    Dim fcv = pp.DW_CalcFugCoeff(Vx, T, P, State.Vapor)
+                    Dim fcl = pp.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                    Dim gv = 0.0#
+                    Dim gl = 0.0#
+                    For j = 0 To Vz.Length - 1
+                        If Vz(j) <> 0.0# Then gv += Vx(j) * Log(fcv(j) * Vx(j))
+                        If Vz(j) <> 0.0# Then gl += Vx(j) * Log(fcl(j) * Vx(j))
+                    Next
+                    If gl <= gv Then
+                        results.Add(Vx)
+                    End If
                 Next
 
             End If
@@ -1430,6 +1444,13 @@ will converge to this solution.")
 
             For i = 0 To n - 1
                 If Tf(i) > T And Tf(i) > 1.0 And Vz(i) > 0.000001 Then
+                    hres.SolidPhase = True
+                    hres.SolidFraction += Vz(i)
+                End If
+            Next
+
+            For i = 0 To n - 1
+                If props(i).IsSolid Then
                     hres.SolidPhase = True
                     hres.SolidFraction += Vz(i)
                 End If

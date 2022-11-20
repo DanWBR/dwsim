@@ -117,36 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnParar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 98</value>
-  </data>
   <data name="btnParar.Text" xml:space="preserve">
     <value>Stop</value>
-  </data>
-  <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 50</value>
   </data>
   <data name="btnIniciar.Text" xml:space="preserve">
     <value>Start Adjust</value>
   </data>
-  <data name="rbBrent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 24</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Parameters</value>
   </data>
-  <data name="rbSecante.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 17</value>
-  </data>
-  <data name="rbSecante.Text" xml:space="preserve">
-    <value>Secant</value>
-  </data>
-  <data name="tbMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>646, 23</value>
-  </data>
-  <data name="tbMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 23</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 26</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 21</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -161,22 +143,13 @@
     <value>Convergence method</value>
   </data>
   <data name="tbStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 76</value>
-  </data>
-  <data name="tbStep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>138, 76</value>
   </data>
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 50</value>
-  </data>
-  <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>138, 50</value>
   </data>
   <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 102</value>
-  </data>
-  <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>138, 102</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -196,36 +169,14 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Step size</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>713, 135</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 325</value>
-  </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 325</value>
-  </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Table</value>
   </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 351</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
-    <value>576, 48</value>
-  </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 51</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -233,35 +184,10 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Current error</value>
   </data>
-  <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>576, 22</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 25</value>
-  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Adjust value</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>713, 435</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Results</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Panel1.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 601</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>725, 601</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
   </data>
 </root>

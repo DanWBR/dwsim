@@ -506,12 +506,13 @@ Partial Class EditingForm_Splitter
         'EditingForm_Splitter
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Splitter"
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))

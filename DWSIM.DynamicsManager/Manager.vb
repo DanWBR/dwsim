@@ -37,6 +37,10 @@ Public Class Manager
 
     Public Property IntegratorList As Dictionary(Of String, IDynamicsIntegrator) = New Dictionary(Of String, IDynamicsIntegrator) Implements IDynamicsManager.IntegratorList
 
+    Public Property ToggleDynamicMode As Action(Of Boolean) Implements IDynamicsManager.ToggleDynamicMode
+
+    Public Property RunSchedule As Func(Of String, Task) Implements IDynamicsManager.RunSchedule
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         Dim e1 = New XElement("ScheduleList")
@@ -167,6 +171,22 @@ Public Class Manager
 
         Return model
 
+    End Function
+
+    Public Function GetSchedule(name As String) As IDynamicsSchedule Implements IDynamicsManager.GetSchedule
+        Return ScheduleList.Values.Where(Function(s) s.Description = name).FirstOrDefault()
+    End Function
+
+    Public Function GetIntegrator(name As String) As IDynamicsIntegrator Implements IDynamicsManager.GetIntegrator
+        Return IntegratorList.Values.Where(Function(s) s.Description = name).FirstOrDefault()
+    End Function
+
+    Public Function GetEventSet(name As String) As IDynamicsEventSet Implements IDynamicsManager.GetEventSet
+        Return EventSetList.Values.Where(Function(s) s.Description = name).FirstOrDefault()
+    End Function
+
+    Public Function GetCauseAndEffectMatrix(name As String) As IDynamicsCauseAndEffectMatrix Implements IDynamicsManager.GetCauseAndEffectMatrix
+        Return CauseAndEffectMatrixList.Values.Where(Function(s) s.Description = name).FirstOrDefault()
     End Function
 
 End Class

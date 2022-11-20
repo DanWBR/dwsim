@@ -37,6 +37,8 @@ Imports DWSIM.Interfaces.Enums
 
     Property ExtraPropertiesUnitTypes As ExpandoObject
 
+    Property ExtraPropertiesTypes As ExpandoObject
+
     Property AttachedUtilities As List(Of IAttachedUtility)
 
     Sub CreateDynamicProperties()
@@ -84,7 +86,7 @@ Imports DWSIM.Interfaces.Enums
     ''' </summary>
     ''' <param name="proptype">Type of the property.</param>
     ''' <returns>A list of property identifiers.</returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetProperties(ByVal proptype As Enums.PropertyType) As String()
     Sub AddExtraProperty(pname As String, pvalue As Object)
 
@@ -94,11 +96,11 @@ Imports DWSIM.Interfaces.Enums
     ''' <param name="prop">Property identifier.</param>
     ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
     ''' <returns>Property value.</returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyValue(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As Object
     Sub RemoveExtraProperty(pname As String)
     Sub ClearExtraProperties()
-    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure)
+    Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure, ptype As System.Type)
 
     ''' <summary>
     ''' Gets the units of a property.
@@ -106,7 +108,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <param name="prop">Property identifier.</param>
     ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
     ''' <returns>Property units.</returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As String
     Sub SetExtraPropertyValue(pname As String, pvalue As Object)
     Sub RemoveDynamicProperty(pname As String)
@@ -119,7 +121,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <param name="propval">Property value to set at the specified units.</param>
     ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
     ''' <returns></returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As IUnitsOfMeasure = Nothing) As Boolean
 
     Function GetDefaultProperties() As String()
@@ -192,6 +194,8 @@ Imports DWSIM.Interfaces.Enums
 
     Property PropertyPackage As IPropertyPackage
 
+    ReadOnly Property IsFunctional As Boolean
+
     Function GetDynamicPropertyUnitType(id As String) As UnitOfMeasure
 
     Sub SetFlowsheet(fobj As Object)
@@ -223,5 +227,45 @@ Imports DWSIM.Interfaces.Enums
     Function GetChartModelNames() As List(Of String)
 
     Function IsDynamicProperty(pname As String) As Boolean
+
+    Function GetEnergyBalanceResidual() As Double
+
+    Function GetMassBalanceResidual() As Double
+
+    Function GetPowerGeneratedOrConsumed() As Double
+
+    Function GetDynamicResidenceTime() As Double
+
+    Function GetDynamicVolume() As Double
+
+    Function GetDynamicContents() As Double
+
+    Function GetAsObject() As Object
+
+    ReadOnly Property IsSource As Boolean
+
+    ReadOnly Property IsSink As Boolean
+
+    Sub ConnectEnergyStream(stream As ISimulationObject)
+
+    Sub ConnectProductEnergyStream(stream As ISimulationObject, portnumber As Integer)
+
+    Sub ConnectFeedEnergyStream(stream As ISimulationObject, portnumber As Integer)
+
+    Sub ConnectProductMaterialStream(stream As ISimulationObject, portnumber As Integer)
+
+    Sub ConnectFeedMaterialStream(stream As ISimulationObject, portnumber As Integer)
+
+    Function GetConnectionPortsList() As List(Of String)
+
+    Function GetConnectionPortsInfo() As List(Of IConnectionPortInfo)
+
+    ReadOnly Property IsDirty As Boolean
+
+    ReadOnly Property CanUsePreviousResults As Boolean
+
+    Sub SetDirtyStatus(value As Boolean)
+
+    Sub SetCanUsePreviousResults(value As Boolean)
 
 End Interface

@@ -33,18 +33,26 @@ Partial Class EditingForm_Valve
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnCalcKv = New System.Windows.Forms.Button()
-        Me.tbOp = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.tbKvOpRel = New System.Windows.Forms.TextBox()
+        Me.gbTable = New System.Windows.Forms.GroupBox()
+        Me.grid1 = New unvell.ReoGrid.ReoGridControl()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.tbCharParam = New System.Windows.Forms.TextBox()
+        Me.tbKvOpRel = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.tbOp = New System.Windows.Forms.TextBox()
+        Me.cbOpeningKvRelType = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.rbCv = New System.Windows.Forms.RadioButton()
+        Me.rbKv = New System.Windows.Forms.RadioButton()
+        Me.btnCalcKv = New System.Windows.Forms.Button()
         Me.chkEnableKvOpRel = New System.Windows.Forms.CheckBox()
         Me.tbKv = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -71,9 +79,10 @@ Partial Class EditingForm_Valve
         Me.sizingtsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.gbTable.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.UtilitiesCtxMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -163,29 +172,6 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip2"))
-        '
-        'rtbAnnotations
-        '
-        resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
-        Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
-    "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.rtbAnnotations.ShowRedo = False
-        Me.rtbAnnotations.ShowUndo = False
-        Me.ToolTipValues.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip2"))
-        '
         'GroupBox3
         '
         resources.ApplyResources(Me.GroupBox3, "GroupBox3")
@@ -229,11 +215,11 @@ Partial Class EditingForm_Valve
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Panel1)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.rbCv)
+        Me.GroupBox2.Controls.Add(Me.rbKv)
         Me.GroupBox2.Controls.Add(Me.btnCalcKv)
-        Me.GroupBox2.Controls.Add(Me.tbOp)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.tbKvOpRel)
-        Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.chkEnableKvOpRel)
         Me.GroupBox2.Controls.Add(Me.tbKv)
         Me.GroupBox2.Controls.Add(Me.Label1)
@@ -251,22 +237,22 @@ Partial Class EditingForm_Valve
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
         '
-        'btnCalcKv
+        'Panel1
         '
-        resources.ApplyResources(Me.btnCalcKv, "btnCalcKv")
-        Me.btnCalcKv.Name = "btnCalcKv"
-        Me.ToolTip1.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip2"))
-        Me.btnCalcKv.UseVisualStyleBackColor = True
-        '
-        'tbOp
-        '
-        resources.ApplyResources(Me.tbOp, "tbOp")
-        Me.tbOp.Name = "tbOp"
-        Me.ToolTipValues.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip2"))
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.gbTable)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.tbCharParam)
+        Me.Panel1.Controls.Add(Me.tbKvOpRel)
+        Me.Panel1.Controls.Add(Me.Label14)
+        Me.Panel1.Controls.Add(Me.tbOp)
+        Me.Panel1.Controls.Add(Me.cbOpeningKvRelType)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Name = "Panel1"
+        Me.ToolTipValues.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip2"))
         '
         'Label5
         '
@@ -276,13 +262,33 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip2"))
         '
-        'tbKvOpRel
+        'gbTable
         '
-        resources.ApplyResources(Me.tbKvOpRel, "tbKvOpRel")
-        Me.tbKvOpRel.Name = "tbKvOpRel"
-        Me.ToolTipValues.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip2"))
+        resources.ApplyResources(Me.gbTable, "gbTable")
+        Me.gbTable.Controls.Add(Me.grid1)
+        Me.gbTable.Name = "gbTable"
+        Me.gbTable.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.gbTable, resources.GetString("gbTable.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.gbTable, resources.GetString("gbTable.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.gbTable, resources.GetString("gbTable.ToolTip2"))
+        '
+        'grid1
+        '
+        resources.ApplyResources(Me.grid1, "grid1")
+        Me.grid1.BackColor = System.Drawing.Color.White
+        Me.grid1.ColumnHeaderContextMenuStrip = Nothing
+        Me.grid1.LeadHeaderContextMenuStrip = Nothing
+        Me.grid1.Name = "grid1"
+        Me.grid1.RowHeaderContextMenuStrip = Nothing
+        Me.grid1.Script = Nothing
+        Me.grid1.SheetTabContextMenuStrip = Nothing
+        Me.grid1.SheetTabNewButtonVisible = False
+        Me.grid1.SheetTabVisible = False
+        Me.grid1.SheetTabWidth = 60
+        Me.grid1.ShowScrollEndSpacing = True
+        Me.ToolTip1.SetToolTip(Me.grid1, resources.GetString("grid1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.grid1, resources.GetString("grid1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.grid1, resources.GetString("grid1.ToolTip2"))
         '
         'Label4
         '
@@ -291,6 +297,94 @@ Partial Class EditingForm_Valve
         Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip2"))
+        '
+        'tbCharParam
+        '
+        resources.ApplyResources(Me.tbCharParam, "tbCharParam")
+        Me.tbCharParam.Name = "tbCharParam"
+        Me.ToolTipValues.SetToolTip(Me.tbCharParam, resources.GetString("tbCharParam.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbCharParam, resources.GetString("tbCharParam.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbCharParam, resources.GetString("tbCharParam.ToolTip2"))
+        '
+        'tbKvOpRel
+        '
+        resources.ApplyResources(Me.tbKvOpRel, "tbKvOpRel")
+        Me.tbKvOpRel.Name = "tbKvOpRel"
+        Me.ToolTipValues.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbKvOpRel, resources.GetString("tbKvOpRel.ToolTip2"))
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
+        '
+        'tbOp
+        '
+        resources.ApplyResources(Me.tbOp, "tbOp")
+        Me.tbOp.Name = "tbOp"
+        Me.ToolTipValues.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOp, resources.GetString("tbOp.ToolTip2"))
+        '
+        'cbOpeningKvRelType
+        '
+        resources.ApplyResources(Me.cbOpeningKvRelType, "cbOpeningKvRelType")
+        Me.cbOpeningKvRelType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOpeningKvRelType.FormattingEnabled = True
+        Me.cbOpeningKvRelType.Items.AddRange(New Object() {resources.GetString("cbOpeningKvRelType.Items"), resources.GetString("cbOpeningKvRelType.Items1"), resources.GetString("cbOpeningKvRelType.Items2"), resources.GetString("cbOpeningKvRelType.Items3"), resources.GetString("cbOpeningKvRelType.Items4")})
+        Me.cbOpeningKvRelType.Name = "cbOpeningKvRelType"
+        Me.ToolTip1.SetToolTip(Me.cbOpeningKvRelType, resources.GetString("cbOpeningKvRelType.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbOpeningKvRelType, resources.GetString("cbOpeningKvRelType.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbOpeningKvRelType, resources.GetString("cbOpeningKvRelType.ToolTip2"))
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
+        '
+        'rbCv
+        '
+        resources.ApplyResources(Me.rbCv, "rbCv")
+        Me.rbCv.Name = "rbCv"
+        Me.rbCv.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbCv, resources.GetString("rbCv.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbCv, resources.GetString("rbCv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbCv, resources.GetString("rbCv.ToolTip2"))
+        Me.rbCv.UseVisualStyleBackColor = True
+        '
+        'rbKv
+        '
+        resources.ApplyResources(Me.rbKv, "rbKv")
+        Me.rbKv.Name = "rbKv"
+        Me.rbKv.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbKv, resources.GetString("rbKv.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbKv, resources.GetString("rbKv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbKv, resources.GetString("rbKv.ToolTip2"))
+        Me.rbKv.UseVisualStyleBackColor = True
+        '
+        'btnCalcKv
+        '
+        resources.ApplyResources(Me.btnCalcKv, "btnCalcKv")
+        Me.btnCalcKv.Name = "btnCalcKv"
+        Me.ToolTip1.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnCalcKv, resources.GetString("btnCalcKv.ToolTip2"))
+        Me.btnCalcKv.UseVisualStyleBackColor = True
         '
         'chkEnableKvOpRel
         '
@@ -513,10 +607,9 @@ Partial Class EditingForm_Valve
         'EditingForm_Valve
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Valve"
@@ -525,11 +618,13 @@ Partial Class EditingForm_Valve
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.gbTable.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.UtilitiesCtxMenu.ResumeLayout(False)
@@ -543,8 +638,6 @@ Partial Class EditingForm_Valve
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
-    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
@@ -582,4 +675,14 @@ Partial Class EditingForm_Valve
     Public WithEvents Label5 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
     Friend WithEvents btnCalcKv As Button
+    Public WithEvents Label6 As Label
+    Friend WithEvents rbCv As RadioButton
+    Friend WithEvents rbKv As RadioButton
+    Public WithEvents cbOpeningKvRelType As ComboBox
+    Public WithEvents Label10 As Label
+    Friend WithEvents gbTable As GroupBox
+    Public WithEvents tbCharParam As TextBox
+    Public WithEvents Label14 As Label
+    Friend WithEvents grid1 As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents Panel1 As Panel
 End Class

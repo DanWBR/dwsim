@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.Thermodynamics</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -111,50 +111,50 @@
     <Reference Include="ExcelDna.Integration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f225e9659857edbe, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDna.Integration.1.1.0\lib\ExcelDna.Integration.dll</HintPath>
     </Reference>
-    <Reference Include="FileHelpers, Version=3.4.1.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
-      <HintPath>..\packages\FileHelpers.3.4.1\lib\net45\FileHelpers.dll</HintPath>
+    <Reference Include="FileHelpers, Version=3.5.1.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.3.5.1\lib\net45\FileHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Interop.CAPEOPEN110">
       <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="IronPython, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.dll</HintPath>
+    <Reference Include="IronPython, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.Modules, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.Modules.dll</HintPath>
+    <Reference Include="IronPython.Modules, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Modules.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.SQLite, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.SQLite.dll</HintPath>
+    <Reference Include="IronPython.SQLite, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.Wpf, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.Wpf.dll</HintPath>
+    <Reference Include="IronPython.Wpf, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Mages.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mages.2.0.0\lib\netstandard2.0\Mages.Core.dll</HintPath>
+    <Reference Include="Mages.Core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mages.2.0.1\lib\netstandard2.0\Mages.Core.dll</HintPath>
     </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Dynamic, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Dynamic.dll</HintPath>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Dynamic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.Scripting, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Posix.NETStandard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Posix.NETStandard.1.0.0\lib\net40\Mono.Posix.NETStandard.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
@@ -175,11 +175,20 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
     <Reference Include="Yeppp.CLR.Bundle, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
@@ -228,6 +237,7 @@
     </Compile>
     <Compile Include="FlashAlgorithms\ForcedPhaseFlash.vb" />
     <Compile Include="FlashAlgorithms\SingleCompFlash.vb" />
+    <Compile Include="HelperClasses\ChemSepIPDReader.vb" />
     <Compile Include="HelperClasses\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="BaseClasses\ThermodynamicsBase.vb" />
@@ -413,6 +423,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -580,6 +591,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.resx">
       <DependentUpon>FormConfigDH.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.en.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
@@ -626,13 +638,7 @@
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigNRTL.resx">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.de.resx">
-      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.en.resx">
-      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.es.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.resx">
@@ -705,6 +711,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\wilson_bips.csv" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\nrtl.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\pr.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\srk.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\uniquac.ipd" />
+    <EmbeddedResource Include="Assets\ChemSepIPD\wilson.ipd" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
@@ -904,10 +915,13 @@
     <None Include="Resources\cog1.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Databases\FoodProp\FoodProp.xml" />
+    <None Include="Resources\DWSIM_ico_64.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DWSIM_ico_64.png" />
+    <EmbeddedResource Include="Assets\Databases\FoodProp.xml" />
+    <EmbeddedResource Include="Assets\ChemSep_IDs.txt" />
+    <EmbeddedResource Include="Assets\CAS_IDs.txt" />
+    <Content Include="Assets\Databases\Artistic_license_2_0.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

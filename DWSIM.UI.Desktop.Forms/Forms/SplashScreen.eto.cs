@@ -78,33 +78,45 @@ namespace DWSIM.UI.Forms
 
             lbl5.TextColor = new Color(0.051f, 0.447f, 0.651f);
 
+            var bgcolor = new Color(0.867f, 0.917f, 0.945f, 1.0f);
+
+            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to the following Patrons/Sponsors: " + Patrons.GetList() };
+
+            lblpatrons.TextColor = new Color(0.051f, 0.447f, 0.651f);
+            lblpatrons.Width = (int)(sf * 650);
+            lblpatrons.Height = (int)(sf * 227);
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                lblpatrons.Font = SystemFonts.Label(10.0f);
+            }
+            else
+            {
+                lblpatrons.Font = SystemFonts.Label(9.0f);
+            }
+
             var layout = new PixelLayout();
 
             ImageView img;
 
             if (Application.Instance.Platform.IsGtk)
             {
-                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v7_gtk.png").WithSize(w, h) };
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v8_gtk.png").WithSize(w, h) };
                 layout.Add(img, 0, 0);
-                lbl1a.BackgroundColor = Colors.WhiteSmoke;
-                lbl5.BackgroundColor = Colors.WhiteSmoke;
-                lbl3.BackgroundColor = Colors.WhiteSmoke;
+                lbl1a.BackgroundColor = bgcolor;
+                lbl1a.BackgroundColor = bgcolor;
+                lbl5.BackgroundColor = bgcolor;
+                lbl3.BackgroundColor = bgcolor;
+                lblpatrons.BackgroundColor = bgcolor;
             }
             else
             {
-                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v7.png").WithSize(w, h) };
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v8.png").WithSize(w, h) };
                 layout.Add(img, (int)(sf * (0 - dx)), (int)(sf * (0 - dy)));
             }
 
             layout.Add(lbl1a, (int)(sf * (318 - dx)), (int)(sf * (114 - dy)));
             layout.Add(lbl5, (int)(sf * (318 - dx)), (int)(sf * (430 - dy)));
             layout.Add(lbl3, (int)(sf * (318 - dx)), (int)(sf * (139 - dy)));
-
-            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to the following Patrons: " + Patrons.GetList() };
-
-            lblpatrons.TextColor = new Color(0.051f, 0.447f, 0.651f);
-            lblpatrons.Width = (int)(sf * 650);
-            lblpatrons.Height = (int)(sf * 227);
 
             layout.Add(lblpatrons, (int)(sf * (318 - dx)), (int)(sf * (190 - dy)));
 
@@ -151,7 +163,7 @@ namespace DWSIM.UI.Forms
                     var wntext = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "whatsnew.txt"));
                     MessageBox.Show(wntext, "What's New", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
                 }
-                CheckForUpdates();
+                if (GlobalSettings.Settings.CheckForUpdates) CheckForUpdates();
             }));
         }
 
@@ -200,7 +212,7 @@ namespace DWSIM.UI.Forms
                     {
                         if (MessageBox.Show("An updated version is available to download from the official website. Update DWSIM to fix bugs, crashes and take advantage of new features.\n\n" + whatsnew, "Update Available", MessageBoxButtons.OKCancel, MessageBoxType.Information, MessageBoxDefaultButton.OK) == DialogResult.Ok)
                         {
-                            Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems");
+                            Process.Start("https://dwsim.org/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems");
                         }
                     });
                 }

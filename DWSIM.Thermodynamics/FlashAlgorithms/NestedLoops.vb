@@ -239,7 +239,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If g > 0 Then Vmin = V Else Vmax = V
 
-            V = Vmin + (Vmax - Vmin) / 2
+
+            V = Brent.BrentOpt3(Vmin, Vmax, 10, 0.001, 100,
+                           Function(Vb)
+                               Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
+                           End Function)
+
+
+            'V = Vmin + (Vmax - Vmin) / 2
 
             L = 1 - V
 
@@ -281,8 +288,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             r1 = ConvergeVF(IObj, V, Vz, Vx0, Vy0, Ki0, P, T, PP, 0)
 
+            Dim failed = False
+
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
-                r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 1)
+                Try
+                    r1 = ConvergeVF(IObj, V, Vz, Vx0, Vy0, Ki0, P, T, PP, 1.0)
+                Catch ex As Exception
+                    failed = True
+                End Try
+            End If
+
+            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Or failed Then
+                r1 = ConvergeVF(IObj, V, Vz, r1(1), r1(2), r1(3), P, T, PP, 1.0)
             End If
 
             V = r1(0)
@@ -304,6 +321,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 L = 0.0#
                 Vy = Vz
                 Vx = Vy.DivideY(Ki).NormalizeY
+            End If
+            If PP.AUX_CheckTrivial(Ki, 0.1) And L > 0.0 And V > 0.0 Then
+                Dim gl = PP.DW_CalcGibbsEnergy(Vx, T, P, "L")
+                Dim gv = PP.DW_CalcGibbsEnergy(Vy, T, P, "V")
+                If Math.Abs(gl / gv - 1.0) < 0.01 Then
+                    Dim zl = PP.AUX_Z(Vx, T, P, Interfaces.Enums.PhaseName.Liquid)
+                    Dim zv = PP.AUX_Z(Vy, T, P, Interfaces.Enums.PhaseName.Vapor)
+                    Dim zc = PP.RET_VZC().MultiplyY(Vz).Sum
+                    If zl > zc And zv > zc Then
+                        V = 1.0#
+                        L = 0.0#
+                        Vy = Vz
+                        Vx = Vy.DivideY(Ki).NormalizeY
+                    Else
+                        V = 0.0#
+                        L = 1.0#
+                        Vx = Vz
+                        Vy = Ki.MultiplyY(Vx).NormalizeY
+                    End If
+                End If
             End If
 
             d2 = Date.Now
@@ -393,6 +430,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Vant = V
 
+                    'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
+
                     F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
                     dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
 
@@ -407,7 +446,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             dfac /= 10
                         End If
                     ElseIf damplevel = 2 Then
-                        dfac = (ecount + 1) * 0.1
+                        dfac = (ecount + 1) * 0.05
                         If dfac > 1.0 Then dfac = 1.0
                         If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
                             dfac /= 50
@@ -622,6 +661,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
 
+            Dim interpolate As Boolean = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases)
+
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
             Tmax = 10000.0#
@@ -722,34 +763,36 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     x0 = x1
 
-
                     If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
 
                         'oscillating around the solution.
 
-                        If Math.Abs(fx * fx_ant) < 1.0 Then
+                        Dim bmin As New Brent
 
-                            Dim bmin As New Brent
+                        Dim interp = MathNet.Numerics.Interpolate.Linear(xvals.ToArray(), fxvals.ToArray())
 
-                            Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
+                        x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
+                                            Function(tval)
+                                                Return interp.Interpolate(tval)
+                                            End Function)
 
-                            x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
-                                                Function(tval)
-                                                    Return interp.Interpolate(tval)
-                                                End Function)
+                        If Math.Abs(fx / H) > 0.01 Then
 
-                            Exit Do
+                            If interpolate Then
+
+                                Exit Do
+
+                            Else
+
+                                Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
+
+                            End If
 
                         Else
 
-                            'switch to normal mode.
-
-                            Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                            Exit Do
 
                         End If
-
-
-
 
                     Else
 
@@ -2115,19 +2158,62 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim result As Object()
+            Dim Kvals As Double()
+            Dim trivial As Boolean = False
+
+            'result = Flash_PV_Saturated_Newton(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-            If result.Count = 1 Then
+            'check if converged to the trivial solution.
+            Kvals = result(6)
+            If PP.AUX_CheckTrivial(Kvals, 0.21) Then trivial = True
+            If result.Count = 1 Or trivial Then
                 result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
+                If result.Count > 1 Then
+                    Kvals = result(6)
+                    If PP.AUX_CheckTrivial(Kvals, 0.2) Then trivial = True
+                End If
             End If
-            If result.Count = 1 Then
-                result = Flash_PV_2(Vz, P, V, 0.0, PP, False, Nothing)
-            End If
-            If result.Count = 1 Then
-                result = Flash_PV_3(Vz, P, V, 0.0, PP, False, Nothing)
+            If result.Count = 1 And P > 101325 * 5 Or trivial Then
+                'Try quadratic extrapolation For initial T
+                Dim Tlist, Plist As New List(Of Double)
+                Dim Pl As Double = 101325
+                Dim deltaPl = (P / 2 - 101325) / 10
+                Dim Tl As Double = 0.0
+                For i = 0 To 10
+                    result = Flash_PV_1(Vz, Pl, V, Tl, PP, ReuseKI, PrevKi)
+                    If result.Count = 1 Then Exit For
+                    Tl = result(4)
+                    Kvals = result(6)
+                    Tlist.Add(Tl)
+                    Plist.Add(Pl)
+                    Pl += 101325
+                Next
+                If result.Count > 1 Then
+                    'extrapolate Tl
+                    Tl = MathNet.Numerics.Interpolate.RationalWithPoles(Plist, Tlist).Interpolate(P)
+                    result = Flash_PV_1(Vz, P, V, Tl, PP, True, Kvals)
+                End If
             End If
 
-            Return result
+            Dim idealcalc As Boolean = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure)
+            If result.Count = 1 And idealcalc Then
+                Using IPP As New RaoultPropertyPackage()
+                    IPP.CurrentMaterialStream = PP.CurrentMaterialStream
+                    PP.Flowsheet?.ShowMessage(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}. Trying to calculate using ideal K-values...",
+                                    PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")), Interfaces.IFlowsheet.MessageType.Warning)
+                    result = Flash_PV_1(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
+                    If result.Count = 1 And V = 0.0 Then
+                        result = Flash_PV_4(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
+                    End If
+                End Using
+            End If
+            If result.Count = 1 Then
+                Throw New Exception(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}",
+                                    PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")))
+            Else
+                Return result
+            End If
 
         End Function
 
@@ -2259,6 +2345,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim K1(n), K2(n), dKdT(n) As Double
 
+            Dim xvals, fvals As New List(Of Double)
+
             If V = 1.0# Or V = 0.0# Then
 
                 If V = 1.0 Then
@@ -2299,7 +2387,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         IObj3?.Paragraphs.Add(String.Format("Tentative value for K: {0}", Ki.ToMathArrayString))
 
-                        Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        If PP.ShouldUseKvalueMethod2 Then
+                            Ki = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T, P)
+                        Else
+                            Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        End If
+
+                        'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
 
                         marcador = 0
                         If stmp4_ant <> 0 Then
@@ -2351,18 +2445,36 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Else
                         If Settings.EnableParallelProcessing Then
                             Dim task1 = TaskHelper.Run(Sub()
-                                                           K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                           If PP.ShouldUseKvalueMethod2 Then
+                                                               K1 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T - epsilon, P)
+                                                           Else
+                                                               K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                           End If
                                                        End Sub, Settings.TaskCancellationTokenSource.Token)
                             Dim task2 = TaskHelper.Run(Sub()
-                                                           K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                           If PP.ShouldUseKvalueMethod2 Then
+                                                               K2 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T + epsilon, P)
+                                                           Else
+                                                               K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                           End If
                                                        End Sub, Settings.TaskCancellationTokenSource.Token)
                             Task.WaitAll(task1, task2)
                         Else
                             IObj?.SetCurrent
-                            K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                            If PP.ShouldUseKvalueMethod2 Then
+                                K1 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T - epsilon, P)
+                            Else
+                                K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                            End If
                             IObj?.SetCurrent
-                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                            If PP.ShouldUseKvalueMethod2 Then
+                                K2 = PP.DW_CalcKvalue(Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)), T + epsilon, P)
+                            Else
+                                K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                            End If
                         End If
+                        'K1 = PP.DW_CheckKvaluesConsistency(Vz, K1, T - epsilon, P)
+                        'K2 = PP.DW_CheckKvaluesConsistency(Vz, K2, T + epsilon, P)
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / (2 * epsilon))
                     End If
 
@@ -2373,7 +2485,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     fval_ant = fval
                     fval = stmp4 - 1
 
-                    If Math.Abs(fval) < etol Then Exit Do
+                    xvals.Add(T)
+                    fvals.Add(fval)
+
+                    If Math.Abs(fval) < etol And ecount > 1 Then Exit Do
 
                     ecount += 1
 
@@ -2392,9 +2507,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     deltaT_ant = deltaT
                     deltaT = -df * fval / dFdT
 
-                    'If Math.Abs(deltaT) > T * 0.1 Then
-                    '    deltaT = Math.Sign(deltaT) * 10.0
-                    'End If
+                    If Math.Abs(deltaT) > maxdT Then
+                        If ecount < 10 Then
+                            deltaT = Math.Sign(deltaT) * maxdT
+                        Else
+                            deltaT = Math.Sign(deltaT)
+                        End If
+                    End If
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
 
@@ -2420,10 +2539,37 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             Return New Object() {-1}
                         End If
 
-                        If Math.Sign(fval * fval_ant) = -1 Then
-                            T = T + deltaT / 2
+                        If ecount > 30 And Math.Sign(fval) <> Math.Sign(fval_ant) Then
+
+                            'oscillating around the solution.
+
+                            Dim bmin As New Brent
+
+                            Dim interp = MathNet.Numerics.Interpolate.Linear(xvals.ToArray(), fvals.ToArray())
+
+                            T = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
+                                            Function(tval)
+                                                Return interp.Interpolate(tval)
+                                            End Function)
+
+                            If PP.ShouldUseKvalueMethod2 Then
+                                Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                            Else
+                                K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                            End If
+
+                            If V = 0.0 Then
+                                Vy = Ki.MultiplyY(Vx).NormalizeY()
+                            Else
+                                Vx = Vy.DivideY(Ki).NormalizeY()
+                            End If
+
+                            Exit Do
+
                         Else
+
                             T = T + deltaT
+
                         End If
 
                     End If
@@ -2596,13 +2742,25 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         End Function
 
-        Public Function Flash_PV_2(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+        Public Function Flash_PV_Saturated_Newton(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim cdata = PP.DW_GetConstantProperties()
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Dim i, n, ecount, key As Integer
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PV", Name & " (PV Flash)", "Pressure/Vapor Fraction Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add("This routine calculates the temperature at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified P.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Vapor Mole Fraction: {0} ", V))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
+            Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim L, Lf, Vf, T, Tant, deltaT, epsilon, df, maxdT As Double
+            Dim L, Lf, Vf, T, deltaT, deltaT_ant, epsilon, df, maxdT As Double
+            Dim e1 As Double
 
             d1 = Date.Now
 
@@ -2622,12 +2780,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             L = 1 - V
             Lf = 1 - Vf
 
-            Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
-            Dim Vt(n), Vtb(n), Tsat(n), PsatKey, PsatKey0 As Double
+            Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n) As Double
+            Dim Vt(n), VTc(n), dFdT, Tsat(n) As Double
 
-            Vtb = PP.RET_VTB()
-
-            fi = Vz.Clone
+            VTc = PP.RET_VTC()
 
             If Tref = 0.0# Then
                 i = 0
@@ -2640,13 +2796,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             T = Tref
 
-            Vp = PP.RET_VPVAP(T)
-
             'Calculate Ki`s
 
             If Not ReuseKI Then
                 i = 0
                 Do
+                    IObj?.SetCurrent
+                    Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = Vp(i) / P
                     If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     i += 1
@@ -2654,12 +2810,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Else
                 If Not PP.AUX_CheckTrivial(PrevKi) And Not Double.IsNaN(PrevKi(0)) Then
                     For i = 0 To n
+                        IObj?.SetCurrent
                         Ki(i) = PrevKi(i)
                         If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     Next
                 Else
                     i = 0
                     Do
+                        IObj?.SetCurrent
+                        Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = Vp(i) / P
                         If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                         i += 1
@@ -2667,30 +2826,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 End If
             End If
 
-            'find key compound
-            Dim keys As New List(Of Integer)
-
-            For i = 0 To n
-                If Vz(i) > 0.01 Then
-                    keys.Add(i)
-                End If
-            Next
-
-            If keys.Count = 0 Then
-                Throw New Exception("Error calculating saturation temperature.")
-            End If
-
-            key = keys.OrderBy(Function(k) Math.Abs(Vtb(k) - 300.0)).First()
-
-            key = 0
-
-            For i = 0 To n
-                If Vz(i) > 0.001 And Vtb(i) < Vtb(key) Then
-                    key = i
-                End If
-            Next
-
-            PsatKey = Vp(key)
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for T: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
 
             i = 0
             Do
@@ -2708,12 +2845,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Vx = Vx.NormalizeY()
             Vy = Vy.NormalizeY()
 
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
+
             If PP.AUX_IS_SINGLECOMP(Vz) Then
                 WriteDebugInfo("PV Flash [NL]: Converged in 1 iteration.")
                 T = 0
                 For i = 0 To n
+                    IObj?.SetCurrent
                     T += Vz(i) * PP.AUX_TSATi(P, i)
                 Next
+                IObj?.Close()
                 If Vz.Count = 1 Then
                     Vx = New Double() {1.0}
                     Vy = New Double() {1.0}
@@ -2722,248 +2864,114 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
             End If
 
-            deltaT = 100.0
+            Dim xi0(n + 1), lbo(n + 1), ubo(n + 1), fi(n + 1), fugxi(n), fugzi(n), zi(n) As Double
+            Dim jac As Double(,)
 
-            ecount = 0
-            Do
+            If V > 0.0 And V < 1.0 Then
 
-                If V = 0 Then
-                    Vy = Ki.MultiplyY(Vx).NormalizeY()
-                ElseIf V = 1.0 Then
-                    Vx = Vy.DivideY(Ki).NormalizeY()
-                Else
-                    For i = 0 To n
-                        If Vz(i) <> 0 Then
-                            Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                            If Double.IsInfinity(Vy(i)) Then Vy(i) = 0.0#
-                            Vx(i) = Vy(i) / Ki(i)
-                        Else
-                            Vy(i) = 0
-                            Vx(i) = 0
-                        End If
-                    Next
-                End If
+                Throw New Exception("This procedure is for calculation of saturation points only (V = 0 or V = 1).")
 
-                Vx = Vx.NormalizeY()
-                Vy = Vy.NormalizeY()
+            End If
 
-                If Abs(deltaT) < etol And ecount > 5 Then Exit Do
+            zi = Vz.Clone()
+            For i = 0 To n
+                If zi(i) = 0.0 Then zi(i) = 1.0E-20
+            Next
 
+            If V = 0 Then
                 For i = 0 To n
-                    dVxy(i) = Math.Abs(Vx(i) - Vy(i))
+                    xi0(i) = Vy(i)
+                    If xi0(i) = 0.0 Then xi0(i) = 1.0E-20
+                    xi0(i) = Log(xi0(i))
+                    lbo(i) = Log(1.0E-20)
+                    ubo(i) = Log(1.0)
                 Next
+            Else
+                For i = 0 To n
+                    xi0(i) = Vx(i)
+                    If xi0(i) = 0.0 Then xi0(i) = 1.0E-20
+                    xi0(i) = Log(xi0(i))
+                    lbo(i) = Log(1.0E-20)
+                    ubo(i) = Log(1.0)
+                Next
+            End If
+            xi0(n + 1) = Log(T)
+            lbo(n + 1) = Log(T * 0.2)
+            ubo(n + 1) = Log(T * 3.0)
 
-                Tant = T
+            Dim fmin = Function(xi() As Double)
 
-                If dVxy.Sum < 0.01 * (n + 1) And ecount > 20 And Vx.Length = 2 And Not CalculatingAzeotrope Then
-                    'azeotrope
-                    T = Flash_PV_Azeotrope_Temperature(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-                    If V = 0 Then
-                        Vy = Vx.Clone
-                    Else
-                        Vx = Vy.Clone
-                    End If
-                    Exit Do
-                Else
-                    PsatKey0 = PsatKey
-                    PsatKey = 0.0
-                    If V = 0 Then
-                        For i = 0 To n
-                            PsatKey += Vx(i) * Ki(i) * P / PsatKey0
-                        Next
-                        PsatKey = P / PsatKey
-                    Else
-                        For i = 0 To n
-                            PsatKey += Vy(i) / Ki(i) / P * PsatKey0
-                        Next
-                        PsatKey = P * PsatKey
-                    End If
-                    T = PP.AUX_TSATi(PsatKey, cdata(key), T)
-                End If
+                           If Double.IsNaN(xi.Sum) Then
+                               For i = 0 To n
+                                   fi(i) = Double.NaN
+                               Next
+                               Return fi
+                           End If
 
-                Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                           T = Exp(xi.Last())
 
-                WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
+                           Dim xvar = xi.Take(n + 1).ToArray().ExpY()
 
-                ecount += 1
+                           If V = 0 Then
+                               fugxi = PP.DW_CalcFugCoeff(xvar.NormalizeY(), T, P, State.Vapor)
+                               fugzi = PP.DW_CalcFugCoeff(zi, T, P, State.Liquid)
+                           Else
+                               fugxi = PP.DW_CalcFugCoeff(xvar.NormalizeY(), T, P, State.Liquid)
+                               fugzi = PP.DW_CalcFugCoeff(zi, T, P, State.Vapor)
+                           End If
+                           For i = 0 To n
+                               fi(i) = Log(xvar(i)) + Log(fugxi(i)) - Log(zi(i)) - Log(fugzi(i))
+                           Next
+                           fi(n + 1) = Log(xvar.Sum())
 
-                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                           Return fi.AbsSqrSumY()
 
-                If T <= 1 Then
-                    Return New Object() {-1}
-                End If
+                       End Function
 
-            Loop Until Math.Abs(T - Tant) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
+            Dim ipopt As New Optimization.IPOPTSolver()
+            ipopt.Tolerance = 0.0000000001
+
+            Dim xf = ipopt.Solve(fmin, Nothing, xi0, lbo, ubo).ExpY()
+
+            ecount = ipopt.Iterations
+
+            If V = 0 Then
+                Vy = xf.Take(n + 1).ToArray()
+            Else
+                Vx = xf.Take(n + 1).ToArray()
+            End If
+            T = xf.Last
+
+            Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+            'jac = newton.Jacobian
 
             d2 = Date.Now
 
             dt = d2 - d1
 
             If ecount > maxit_e Then
+                IObj?.Close()
                 Return New Object() {-1}
             End If
 
             If PP.AUX_CheckTrivial(Ki) Then
+                IObj?.Close()
                 Return New Object() {-1}
             End If
 
             WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
-            Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged value for T: {0}", T))
+
+            IObj?.Close()
+
+            Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector, jac}
 
         End Function
 
-        Public Function Flash_PV_3(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
-
-            Dim cdata = PP.DW_GetConstantProperties()
-
-            Dim i, n, ecount As Integer
-            Dim d1, d2 As Date, dt As TimeSpan
-            Dim L, Lf, Vf, T As Double
-
-            d1 = Date.Now
-
-            n = Vz.Length - 1
-
-            PP = PP
-            Vf = V
-            L = 1 - V
-            Lf = 1 - Vf
-
-            Dim Vx(n), Vy(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
-
-            fi = Vz.Clone
-
-            If Tref = 0.0# Then
-                i = 0
-                Tref = 0.0#
-                Do
-                    Tref += Vz(i) * PP.AUX_TSATi(P, i)
-                    i += 1
-                Loop Until i = n + 1
-            End If
-
-            T = Tref
-
-            Vp = PP.RET_VPVAP(T)
-
-            'Calculate Ki`s
-
-            If Not ReuseKI Then
-                i = 0
-                Do
-                    Ki(i) = Vp(i) / P
-                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
-                    i += 1
-                Loop Until i = n + 1
-            Else
-                If Not PP.AUX_CheckTrivial(PrevKi) And Not Double.IsNaN(PrevKi(0)) Then
-                    For i = 0 To n
-                        Ki(i) = PrevKi(i)
-                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
-                    Next
-                Else
-                    i = 0
-                    Do
-                        Ki(i) = Vp(i) / P
-                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
-                        i += 1
-                    Loop Until i = n + 1
-                End If
-            End If
-
-            i = 0
-            Do
-                If Vz(i) <> 0 Then
-                    Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                    If Double.IsInfinity(Vy(i)) Then Vy(i) = 0.0#
-                    Vx(i) = Vy(i) / Ki(i)
-                Else
-                    Vy(i) = 0
-                    Vx(i) = 0
-                End If
-                i += 1
-            Loop Until i = n + 1
-
-            Vx = Vx.NormalizeY()
-            Vy = Vy.NormalizeY()
-
-            If PP.AUX_IS_SINGLECOMP(Vz) Then
-                WriteDebugInfo("PV Flash [NL]: Converged in 1 iteration.")
-                T = 0
-                For i = 0 To n
-                    T += Vz(i) * PP.AUX_TSATi(P, i)
-                Next
-                If Vz.Count = 1 Then
-                    Vx = New Double() {1.0}
-                    Vy = New Double() {1.0}
-                    Ki = New Double() {1.0}
-                End If
-                Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-            End If
-
-            Dim splx As New Simplex
-            splx.MaxFunEvaluations = 1000
-            splx.Tolerance = 0.00000001
-
-            Dim errfunc As Double = 0.0
-
-            Dim var As New OptSimplexBoundVariable(Tref, 10, 2000)
-
-            Dim result = splx.ComputeMin(Function(Tx)
-
-                                             T = Tx(0)
-
-                                             Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-
-                                             If V = 0 Then
-                                                 Vy = Ki.MultiplyY(Vx).NormalizeY()
-                                             ElseIf V = 1.0 Then
-                                                 Vx = Vy.DivideY(Ki).NormalizeY()
-                                             Else
-                                                 For i = 0 To n
-                                                     If Vz(i) <> 0 Then
-                                                         Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                                                         If Double.IsInfinity(Vy(i)) Then Vy(i) = 0.0#
-                                                         Vx(i) = Vy(i) / Ki(i)
-                                                     Else
-                                                         Vy(i) = 0
-                                                         Vx(i) = 0
-                                                     End If
-                                                 Next
-                                             End If
-
-                                             If V = 0 Then
-                                                 errfunc = Ki.MultiplyY(Vx).Sum - 1
-                                             Else
-                                                 errfunc = Vy.DivideY(Ki).Sum - 1
-                                             End If
-
-                                             Return errfunc ^ 2
-
-                                         End Function, {var})
-
-            T = result(0)
-
-            Vx = Vx.NormalizeY()
-            Vy = Vy.NormalizeY()
-
-            d2 = Date.Now
-
-            dt = d2 - d1
-
-            If PP.AUX_CheckTrivial(Ki) Then
-                Dim ex As New Exception("PVF Flash [NL]: Invalid result: converged to the trivial solution (T = " & T & " ).")
-                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                Throw ex
-            End If
-
-            WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
-
-            Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-        End Function
 
         Public Function Flash_PV_Azeotrope_Temperature(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Double
 
@@ -2993,6 +3001,143 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Return Taz
 
         End Function
+
+        Public Function Flash_PV_4(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PV", Name & " (PV Flash)", "Pressure/Vapor Fraction Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add("This routine calculates the temperature at which the specified mixture composition finds itself in vapor-liquid equilibrium with a vapor phase mole fraction equal to V at the specified P.")
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Vapor Mole Fraction: {0} ", V))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+
+            Dim i, n, ecount As Integer
+            Dim d1, d2 As Date, dt As TimeSpan
+            Dim L, Lf, Vf, T, epsilon, df, maxdT As Double
+
+            d1 = Date.Now
+
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
+
+            epsilon = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon).ToDoubleFromInvariant
+            df = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor).ToDoubleFromInvariant
+            maxdT = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange).ToDoubleFromInvariant
+
+            n = Vz.Length - 1
+
+            PP = PP
+            Vf = V
+            L = 1 - V
+            Lf = 1 - Vf
+
+            Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
+            Dim Vt(n), VTc(n), Tsat(n) As Double
+
+            VTc = PP.RET_VTC()
+            fi = Vz.Clone
+
+            i = 0
+            Tref = 0.0#
+            Do
+                Tref += Vz(i) * PP.AUX_TSATi(P, i)
+                i += 1
+            Loop Until i = n + 1
+
+            T = Tref
+
+            'Calculate Ki`s
+
+            If Not ReuseKI Then
+                i = 0
+                Do
+                    IObj?.SetCurrent
+                    Vp(i) = PP.AUX_PVAPi(i, T)
+                    Ki(i) = Vp(i) / P
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                    i += 1
+                Loop Until i = n + 1
+            Else
+                If Not PP.AUX_CheckTrivial(PrevKi) And Not Double.IsNaN(PrevKi(0)) Then
+                    For i = 0 To n
+                        IObj?.SetCurrent
+                        Ki(i) = PrevKi(i)
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                    Next
+                Else
+                    i = 0
+                    Do
+                        IObj?.SetCurrent
+                        Vp(i) = PP.AUX_PVAPi(i, T)
+                        Ki(i) = Vp(i) / P
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                        i += 1
+                    Loop Until i = n + 1
+                End If
+            End If
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for T: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
+
+            i = 0
+            Do
+                If Vz(i) <> 0 Then
+                    Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
+                    If Double.IsInfinity(Vy(i)) Then Vy(i) = 0.0#
+                    Vx(i) = Vy(i) / Ki(i)
+                Else
+                    Vy(i) = 0
+                    Vx(i) = 0
+                End If
+                i += 1
+            Loop Until i = n + 1
+
+            Vx = Vx.NormalizeY()
+            Vy = Vy.NormalizeY()
+
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
+
+            If PP.AUX_IS_SINGLECOMP(Vz) Then
+                WriteDebugInfo("PV Flash [NL]: Converged in 1 iteration.")
+                T = 0
+                For i = 0 To n
+                    IObj?.SetCurrent
+                    T += Vz(i) * PP.AUX_TSATi(P, i)
+                Next
+                IObj?.Close()
+                If Vz.Count = 1 Then
+                    Vx = New Double() {1.0}
+                    Vy = New Double() {1.0}
+                    Ki = New Double() {1.0}
+                End If
+                Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            End If
+
+            d2 = Date.Now
+
+            dt = d2 - d1
+
+            WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged value for T: {0}", T))
+
+            IObj?.Close()
+
+            Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+        End Function
+
 
         Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
 

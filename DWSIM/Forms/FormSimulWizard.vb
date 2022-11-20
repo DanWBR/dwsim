@@ -19,6 +19,8 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormSimulWizard
 
@@ -30,9 +32,8 @@ Public Class FormSimulWizard
 
     Public switch As Boolean = False
 
-    Dim ACSC1 As AutoCompleteStringCollection
-
-    Private StillTyping As Boolean = False
+    Private CompoundList As List(Of String)
+    Private Indexes As Dictionary(Of String, Integer)
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
@@ -44,6 +45,9 @@ Public Class FormSimulWizard
 
         ogc1.RowTemplate.Height = 23 * Settings.DpiScale
         ogc1.ColumnHeadersHeight *= Settings.DpiScale
+
+        DataGridViewPP.Columns(2).Width = 24 * Settings.DpiScale
+        DataGridViewPP.Columns(3).Width = 24 * Settings.DpiScale
 
         Init()
 
@@ -61,22 +65,50 @@ Public Class FormSimulWizard
             colAdd.TrueValue = True
             colAdd.IndeterminateValue = False
 
-            ACSC1 = New AutoCompleteStringCollection
-
+            txtSearch.AutoCompleteCustomSource = New AutoCompleteStringCollection()
+            CompoundList = New List(Of String)()
+            Indexes = New Dictionary(Of String, Integer)
+            Dim rowlist As New List(Of DataGridViewRow)
+            ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+                Dim r As New DataGridViewRow()
+                Dim data = New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
+                r.CreateCells(ogc1, data)
+                r.Height = 23 * Settings.DpiScale
+                rowlist.Add(r)
+                CompoundList.Add(comp.Name)
+                CompoundList.Add(comp.CAS_Number)
+                CompoundList.Add(comp.Formula)
+                Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
+                Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
-            For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
+            For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values.OrderBy(Function(c) c.ChemSepFamily)
+                Dim r As New DataGridViewRow()
+                Dim data = New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported}
+                r.CreateCells(ogc1, data)
+                r.Height = 23 * Settings.DpiScale
+                rowlist.Add(r)
+                CompoundList.Add(comp.CAS_Number)
+                CompoundList.Add(comp.Formula)
+                If Not Indexes.ContainsKey(comp.Name) Then Indexes.Add(comp.Name, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.CAS_Number) Then Indexes.Add(comp.CAS_Number, ogc1.Rows.Count - 1)
+                If Not Indexes.ContainsKey(comp.Formula) Then Indexes.Add(comp.Formula, ogc1.Rows.Count - 1)
             Next
-
-            'Me.TextBox1.AutoCompleteCustomSource = ACSC1
+            ogc1.Rows.AddRange(rowlist.ToArray())
+            txtSearch.AutoCompleteCustomSource.AddRange(CompoundList.ToArray())
 
             'property packages
             Me.DataGridViewPP.Rows.Clear()
             For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
-                Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
+                Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, 0, Nothing, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
+
+            If Not FormMain.IsPro Then
+                ProFeatures.Functions.AddProPPs(DataGridViewPP)
+            End If
+
+            DataGridViewPP.Sort(DataGridViewPP.Columns(3), System.ComponentModel.ListSortDirection.Ascending)
 
         Else
 
@@ -113,77 +145,60 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelPropertyMethods.LinkClicked
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
-    Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
+    Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
-            If DWSIM.App.IsRunningOnMono Then
-                If Me.ogc1.SelectedCells.Count > 0 Then
-                    Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(1).Value = Not Me.ogc1.Rows(Me.ogc1.SelectedCells(0).RowIndex).Cells(1).Value
-                End If
-            Else
-                If Me.ogc1.SelectedRows.Count > 0 Then
-                    Me.ogc1.SelectedRows(0).Cells(1).Value = Not Me.ogc1.SelectedRows(0).Cells(1).Value
-                End If
+            If Me.ogc1.SelectedRows.Count > 0 Then
+                Me.ogc1.SelectedRows(0).Cells(1).Value = Not Me.ogc1.SelectedRows(0).Cells(1).Value
             End If
         End If
     End Sub
 
-    Private WithEvents TypingTimer As Timer
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
-    Private Sub TypingTimer_Tick(sender As Object, e As EventArgs) Handles TypingTimer.Tick
+        ogc1.SuspendLayout()
 
-        ogc1.ClearSelection()
+        Try
 
-        Dim needselecting As Boolean = True
+            ogc1.ClearSelection()
 
-        For Each r As DataGridViewRow In ogc1.Rows
-            If Not r.Cells(2).Value Is Nothing Then
-                If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(3).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
+            If txtSearch.Text = "" Then
+                For Each r As DataGridViewRow In ogc1.Rows
+                    r.Selected = False
                     r.Visible = True
-                    If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(3).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(5).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
-                        r.Selected = True
-                        needselecting = False
+                Next
+                ogc1.FirstDisplayedScrollingRowIndex = 0
+                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+            Else
+                For Each r As DataGridViewRow In ogc1.Rows
+                    If Not r.Cells(2).Value Is Nothing Then
+                        If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                       r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                            r.Visible = True
+                            If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                           r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                                r.Selected = True
+                            End If
+                        Else
+                            r.Visible = False
+                        End If
                     End If
-                Else
-                    r.Visible = False
+                Next
+                'ogc1.Sort(colName, System.ComponentModel.ListSortDirection.Ascending)
+                If ogc1.SelectedRows.Count > 0 Then
+                    ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
                 End If
             End If
-        Next
-        If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
-            ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
-        End If
-        If TextBox1.Text = "" Then
-            For Each r As DataGridViewRow In ogc1.Rows
-                r.Selected = False
-                r.Visible = True
-            Next
-            ogc1.FirstDisplayedScrollingRowIndex = 0
-            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-        Else
-            If ogc1.SelectedRows.Count > 0 Then
-                ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
-            End If
-        End If
 
-        TypingTimer?.Stop()
+        Catch ex As Exception
 
-    End Sub
+        End Try
 
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
-
-        If TypingTimer Is Nothing Then
-            TypingTimer = New Timer()
-        End If
-        TypingTimer.Interval = 500
-        TypingTimer.Stop()
-        TypingTimer.Start()
+        ogc1.ResumeLayout()
 
     End Sub
 
@@ -233,7 +248,11 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-        PanelSolids.Enabled = True
+
+        If Integer.TryParse(DataGridViewPP.SelectedRows(0).Cells(0).Value, New Integer) Then
+            MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
         With pp
@@ -843,61 +862,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Package_Selection")
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-        If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            For Each fn In Me.OpenFileDialog1.FileNames
-                Try
-                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-                        Dim ms As Streams.MaterialStream
-                        Dim proplist As New ArrayList
-                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
-                            For Each phase As BaseClasses.Phase In ms.Phases.Values
-                                phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                                phase.Compounds(comp.Name).ConstantProperties = comp
-                            Next
-                        Next
-                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                    Else
-                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Catch ex As Exception
-                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            Next
-        End If
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
-
-        Dim f As New FormImportCompoundOnline
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Try
-                Dim comp = f.BaseCompound
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-                    Dim ms As Streams.MaterialStream
-                    Dim proplist As New ArrayList
-                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
-                        For Each phase As BaseClasses.Phase In ms.Phases.Values
-                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                            phase.Compounds(comp.Name).ConstantProperties = comp
-                        Next
-                    Next
-                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                Else
-                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            Catch ex As Exception
-                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End If
-
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
     End Sub
 
     Private Sub btnCloneUnits_Click(sender As Object, e As EventArgs) Handles btnCloneUnits.Click
@@ -941,7 +906,21 @@ Public Class FormSimulWizard
 
             End If
 
+            UpdateAddedList()
+
         End If
+
+    End Sub
+
+    Private Sub UpdateAddedList()
+
+        Dim added As String = ""
+        For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
+            added += c.Name + ", "
+        Next
+        added = added.TrimEnd()
+        added = added.TrimEnd(",")
+        txtAdded.Text = added
 
     End Sub
 
@@ -961,14 +940,13 @@ Public Class FormSimulWizard
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
         Dim f As New FormImportCompoundOnline
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If f.ShowDialog(Me) = DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
-                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                    End If
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
                     For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
@@ -979,6 +957,9 @@ Public Class FormSimulWizard
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+                    UpdateAddedList()
+
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -989,33 +970,39 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-        If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            For Each fn In Me.OpenFileDialog1.FileNames
-                Try
-                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-                            Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-                        End If
-                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-                        Dim ms As Streams.MaterialStream
-                        Dim proplist As New ArrayList
-                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
-                            For Each phase As BaseClasses.Phase In ms.Phases.Values
-                                phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                                phase.Compounds(comp.Name).ConstantProperties = comp
-                            Next
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Dim jsondata = handler.ReadAllText()
+            Try
+                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(jsondata)
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
+                    Dim ms As Streams.MaterialStream
+                    Dim proplist As New ArrayList
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                            phase.Compounds(comp.Name).ConstantProperties = comp
                         Next
-                        ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-                        ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-                    Else
-                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Catch ex As Exception
-                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            Next
+                    Next
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+                    UpdateAddedList()
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
+
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
@@ -1105,21 +1092,404 @@ Public Class FormSimulWizard
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        TextBox1.Text = ""
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
+        txtSearch.Text = ""
     End Sub
 
-    Private Sub rbSYes_CheckedChanged(sender As Object, e As EventArgs) Handles rbSYes.CheckedChanged, rbSNo.CheckedChanged, rbSDN.CheckedChanged
-        If loaded Then
-            If rbSYes.Checked Then
-                For Each pp In CurrentFlowsheet.PropertyPackages.Values
-                    DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = True
-                Next
-            Else
-                For Each pp In CurrentFlowsheet.PropertyPackages.Values
-                    DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
-                Next
-            End If
+    Private Sub ImportFromThermoChemicalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromThermoChemicalsToolStripMenuItem.Click
+        Dim f As New FormImportCompoundFromThermo
+        If f.ShowDialog(Me) = DialogResult.OK Then
+            Try
+                Dim comp = f.compdata
+                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
+                    Dim ms As Streams.MaterialStream
+                    Dim proplist As New ArrayList
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                            phase.Compounds(comp.Name).ConstantProperties = comp
+                        Next
+                    Next
+                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
+                    UpdateAddedList()
+
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
+
+    Private Sub rbVLE_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLE.CheckedChanged, rbVLLE.CheckedChanged, rbNoFlash.CheckedChanged, rbSVLLE.CheckedChanged
+
+        If loaded Then
+            For Each pp In CurrentFlowsheet.Options.PropertyPackages.Values
+                If rbVLE.Checked Then
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "VLE"
+                ElseIf rbVLLE.Checked Then
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "VLLE"
+                ElseIf rbSVLLE.Checked Then
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "Default"
+                Else
+                    pp.FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "NoFlash"
+                End If
+            Next
+        End If
+
+    End Sub
+
+    Public Sub SetupPPRecommendations()
+
+        Dim names = CurrentFlowsheet.SelectedCompounds.Keys.ToList()
+
+        If names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Water + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.EOS, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.EOS, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.exclamation
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 And names.Where(Function(x) x.Contains("ane") Or x.Contains("ene") Or x.Contains("ine")).Count > 0 Then
+            'Aldehydes + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Alcohols + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
+            'Water + C4+ Alcohols
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Hydrocarbons
+            rbVLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.EOS, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.EOS, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
+            'Alcohols 
+            rbVLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 Then
+            'Aldehydes
+            rbVLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.ActivityCoefficient, PackageType.CorrespondingStates, PackageType.VaporPressure
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        Else
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                Else
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.DarkGreen)
+                End If
+            Next
+        End If
+
+        If names.Contains("Hydrogen") Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                End If
+            Next
+        End If
+
+        If names.Contains("Water") And names.Count = 1 Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("Steam") Or
+                    row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                    row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                Else
+                    row.Cells(1).Value = 0
+                    row.Cells(2).Value = My.Resources.icons8_cross_mark
+                    ChangeRowForeColor(row, Color.LightGray)
+                End If
+            Next
+        ElseIf names.Count = 1 Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                    row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = My.Resources.icons8_check_mark
+                    ChangeRowForeColor(row, Color.Blue)
+                ElseIf Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    Select Case pp.PackageType
+                        Case PackageType.CorrespondingStates, PackageType.EOS
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            If pp.GetType().ToString().Contains("ProExtensions") Then
+                                ChangeRowForeColor(row, Color.DarkGreen)
+                            Else
+                                ChangeRowForeColor(row, Color.Blue)
+                            End If
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                Else
+                    Dim ptype = row.Cells(0).Value
+                    Select Case ptype
+                        Case PackageType.CorrespondingStates, PackageType.EOS
+                            row.Cells(1).Value = 1
+                            row.Cells(2).Value = My.Resources.icons8_check_mark
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Case Else
+                            row.Cells(1).Value = 0
+                            row.Cells(2).Value = My.Resources.icons8_cross_mark
+                            ChangeRowForeColor(row, Color.LightGray)
+                    End Select
+                End If
+            Next
+        End If
+
+        DataGridViewPP.Sort(DataGridViewPP.Columns(4), System.ComponentModel.ListSortDirection.Ascending)
+        DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+
+    End Sub
+
+    Private Sub ChangeRowForeColor(row As DataGridViewRow, color As Color)
+
+        For Each cell As DataGridViewCell In row.Cells
+            cell.Style.ForeColor = color
+        Next
+
+    End Sub
+
+    Private Sub WizardPage2_Commit(sender As Object, e As AeroWizard.WizardPageConfirmEventArgs) Handles WizardPage2.Commit
+
+        SetupPPRecommendations()
+
+    End Sub
+
+    Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
+
+        txtSearch.Text = ""
+
+    End Sub
+
 End Class

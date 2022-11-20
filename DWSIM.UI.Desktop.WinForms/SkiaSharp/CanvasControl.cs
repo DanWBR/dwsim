@@ -96,6 +96,9 @@ namespace DWSIM.UI.Desktop.WinForms
 
             base.OnPaint(e);
 
+            if (Width == 0) return;
+            if (Height == 0) return;
+
             DpiScale = e.Graphics.DpiX / 96.0;
 
             // get the bitmap

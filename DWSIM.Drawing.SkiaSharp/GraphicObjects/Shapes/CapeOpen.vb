@@ -116,7 +116,7 @@ Namespace GraphicObjects.Shapes
 
                 Select Case DrawMode
 
-                    Case 0
+                    Case 0, 2
 
                         'default
 
@@ -249,6 +249,11 @@ Namespace GraphicObjects.Shapes
                             ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                             ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
+                            Using New SKAutoCanvasRestore(canvas)
+                                StraightCanvas(canvas)
+                                canvas.DrawText("CO", ax, ay, tpaint)
+                            End Using
+
                         End If
 
                     Case 1
@@ -327,11 +332,12 @@ Namespace GraphicObjects.Shapes
                             ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                             ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
+                            Using New SKAutoCanvasRestore(canvas)
+                                StraightCanvas(canvas)
+                                canvas.DrawText("CO", ax, ay, tpaint)
+                            End Using
+
                         End If
-
-                    Case 2
-
-                    'Gas/Liquid Flows
 
                     Case 3
 

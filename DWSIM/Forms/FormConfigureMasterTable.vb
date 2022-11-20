@@ -29,7 +29,7 @@ Public Class FormConfigureMasterTable
 
         Translations = New Dictionary(Of String, String)
         For i As Integer = 0 To names.Count - 1
-            Translations.Add(translated(i), names(i))
+            If Not Translations.ContainsKey(translated(i)) Then Translations.Add(translated(i), names(i))
         Next
 
         cbObjectType.Items.AddRange(translated)

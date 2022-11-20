@@ -47,15 +47,6 @@ Partial Class AboutBox
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Lblmem = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.FaTabStripItem5 = New FarsiLibrary.Win.FATabStripItem()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.dgvDWSIMComponents = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewLinkColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblCurrentVersion = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,25 +67,20 @@ Partial Class AboutBox
         Me.colAssemblyVersion = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colAssemblyBuilt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colAssemblyCodeBase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.FaTabStripItem4 = New FarsiLibrary.Win.FATabStripItem()
-        Me.AssemblyDetailsListView = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.AssemblyNamesComboBox = New System.Windows.Forms.ComboBox()
+        Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.FaTabStripItem5.SuspendLayout()
-        CType(Me.dgvDWSIMComponents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem6.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem3.SuspendLayout()
-        Me.FaTabStripItem4.SuspendLayout()
+        Me.FaTabStripItem7.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -185,7 +171,7 @@ Partial Class AboutBox
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
-        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem5, Me.FaTabStripItem2, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4})
+        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem7})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
@@ -261,80 +247,6 @@ Partial Class AboutBox
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.BackColor = System.Drawing.Color.Transparent
         Me.Label11.Name = "Label11"
-        '
-        'FaTabStripItem5
-        '
-        Me.FaTabStripItem5.CanClose = False
-        Me.FaTabStripItem5.Controls.Add(Me.Button2)
-        Me.FaTabStripItem5.Controls.Add(Me.dgvDWSIMComponents)
-        Me.FaTabStripItem5.Controls.Add(Me.lblCurrentVersion)
-        Me.FaTabStripItem5.Controls.Add(Me.Label15)
-        Me.FaTabStripItem5.IsDrawn = True
-        Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'dgvDWSIMComponents
-        '
-        Me.dgvDWSIMComponents.AllowUserToAddRows = False
-        Me.dgvDWSIMComponents.AllowUserToDeleteRows = False
-        Me.dgvDWSIMComponents.AllowUserToResizeRows = False
-        Me.dgvDWSIMComponents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvDWSIMComponents.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.dgvDWSIMComponents.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        resources.ApplyResources(Me.dgvDWSIMComponents, "dgvDWSIMComponents")
-        Me.dgvDWSIMComponents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewLinkColumn2, Me.Column8})
-        Me.dgvDWSIMComponents.Name = "dgvDWSIMComponents"
-        Me.dgvDWSIMComponents.ReadOnly = True
-        Me.dgvDWSIMComponents.RowHeadersVisible = False
-        Me.dgvDWSIMComponents.RowTemplate.Height = 26
-        Me.dgvDWSIMComponents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.FillWeight = 30.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'DataGridViewLinkColumn2
-        '
-        Me.DataGridViewLinkColumn2.FillWeight = 10.0!
-        resources.ApplyResources(Me.DataGridViewLinkColumn2, "DataGridViewLinkColumn2")
-        Me.DataGridViewLinkColumn2.Name = "DataGridViewLinkColumn2"
-        Me.DataGridViewLinkColumn2.ReadOnly = True
-        Me.DataGridViewLinkColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'Column8
-        '
-        Me.Column8.FillWeight = 40.0!
-        resources.ApplyResources(Me.Column8, "Column8")
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        '
-        'lblCurrentVersion
-        '
-        resources.ApplyResources(Me.lblCurrentVersion, "lblCurrentVersion")
-        Me.lblCurrentVersion.BackColor = System.Drawing.Color.Transparent
-        Me.lblCurrentVersion.Name = "lblCurrentVersion"
-        '
-        'Label15
-        '
-        resources.ApplyResources(Me.Label15, "Label15")
-        Me.Label15.BackColor = System.Drawing.Color.Transparent
-        Me.Label15.Name = "Label15"
         '
         'FaTabStripItem2
         '
@@ -487,41 +399,21 @@ Partial Class AboutBox
         '
         resources.ApplyResources(Me.colAssemblyCodeBase, "colAssemblyCodeBase")
         '
-        'FaTabStripItem4
+        'FaTabStripItem7
         '
-        Me.FaTabStripItem4.CanClose = False
-        Me.FaTabStripItem4.Controls.Add(Me.AssemblyDetailsListView)
-        Me.FaTabStripItem4.Controls.Add(Me.AssemblyNamesComboBox)
-        Me.FaTabStripItem4.IsDrawn = True
-        Me.FaTabStripItem4.Name = "FaTabStripItem4"
-        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
+        Me.FaTabStripItem7.CanClose = False
+        Me.FaTabStripItem7.Controls.Add(Me.TextBox2)
+        Me.FaTabStripItem7.IsDrawn = True
+        Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        Me.FaTabStripItem7.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
-        'AssemblyDetailsListView
+        'TextBox2
         '
-        Me.AssemblyDetailsListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        resources.ApplyResources(Me.AssemblyDetailsListView, "AssemblyDetailsListView")
-        Me.AssemblyDetailsListView.FullRowSelect = True
-        Me.AssemblyDetailsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.AssemblyDetailsListView.HideSelection = False
-        Me.AssemblyDetailsListView.Name = "AssemblyDetailsListView"
-        Me.AssemblyDetailsListView.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.AssemblyDetailsListView.UseCompatibleStateImageBehavior = False
-        Me.AssemblyDetailsListView.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
-        '
-        'ColumnHeader2
-        '
-        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
-        '
-        'AssemblyNamesComboBox
-        '
-        resources.ApplyResources(Me.AssemblyNamesComboBox, "AssemblyNamesComboBox")
-        Me.AssemblyNamesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.AssemblyNamesComboBox.Name = "AssemblyNamesComboBox"
-        Me.AssemblyNamesComboBox.Sorted = True
+        Me.TextBox2.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBox2, "TextBox2")
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
         '
         'PictureBox1
         '
@@ -554,15 +446,13 @@ Partial Class AboutBox
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        Me.FaTabStripItem5.ResumeLayout(False)
-        Me.FaTabStripItem5.PerformLayout()
-        CType(Me.dgvDWSIMComponents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem2.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem6.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem3.ResumeLayout(False)
-        Me.FaTabStripItem4.ResumeLayout(False)
+        Me.FaTabStripItem7.ResumeLayout(False)
+        Me.FaTabStripItem7.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -586,16 +476,11 @@ Partial Class AboutBox
     Friend WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents FaTabStripItem4 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents AssemblyInfoListView As System.Windows.Forms.ListView
     Friend WithEvents colAssemblyName As System.Windows.Forms.ColumnHeader
     Friend WithEvents colAssemblyVersion As System.Windows.Forms.ColumnHeader
     Friend WithEvents colAssemblyBuilt As System.Windows.Forms.ColumnHeader
     Friend WithEvents colAssemblyCodeBase As System.Windows.Forms.ColumnHeader
-    Friend WithEvents AssemblyDetailsListView As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents AssemblyNamesComboBox As System.Windows.Forms.ComboBox
     Public WithEvents Lblmem As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents Lblcpusimd As System.Windows.Forms.Label
@@ -603,15 +488,6 @@ Partial Class AboutBox
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents FaTabStripItem5 As FarsiLibrary.Win.FATabStripItem
-    Friend WithEvents dgvDWSIMComponents As System.Windows.Forms.DataGridView
-    Public WithEvents lblCurrentVersion As System.Windows.Forms.Label
-    Public WithEvents Label15 As System.Windows.Forms.Label
-    Public WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewLinkColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -626,4 +502,6 @@ Partial Class AboutBox
     Friend WithEvents DataGridViewLinkColumn3 As DataGridViewLinkColumn
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents FaTabStripItem7 As FarsiLibrary.Win.FATabStripItem
+    Public WithEvents TextBox2 As TextBox
 End Class

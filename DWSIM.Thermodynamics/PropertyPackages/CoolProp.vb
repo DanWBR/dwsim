@@ -424,7 +424,7 @@ Namespace PropertyPackages
                                     p3 = CoolProp.PropsSI("L", "T", x3, "P", P, GetCoolPropName(sub1))
                                     p4 = CoolProp.PropsSI("L", "T", x4, "P", P, GetCoolPropName(sub1))
                                     p5 = CoolProp.PropsSI("L", "T", x5, "P", P, GetCoolPropName(sub1))
-                                    vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                    vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                 Catch ex As Exception
                                     WriteWarningMessage(ex.Message.ToString & ". Estimating value using Ely-Hanley [Fluid: " & subst.ConstantProperties.Name & "]")
                                     vk(i) = Auxiliary.PROPS.condtg_elyhanley(T, subst.ConstantProperties.Critical_Temperature,
@@ -505,7 +505,7 @@ Namespace PropertyPackages
                                     p3 = CoolProp.PropsSI("L", "T", x3, "P", P, GetCoolPropName(sub1))
                                     p4 = CoolProp.PropsSI("L", "T", x4, "P", P, GetCoolPropName(sub1))
                                     p5 = CoolProp.PropsSI("L", "T", x5, "P", P, GetCoolPropName(sub1))
-                                    vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                    vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                 End If
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value using Latini [Fluid: " & subst.ConstantProperties.Name & "]")
@@ -808,7 +808,7 @@ Namespace PropertyPackages
                             p3 = CoolProp.PropsSI("L", "T", x3, "P", P, GetCoolPropName(sub1)) * 1000
                             p4 = CoolProp.PropsSI("L", "T", x4, "P", P, GetCoolPropName(sub1)) * 1000
                             p5 = CoolProp.PropsSI("L", "T", x5, "P", P, GetCoolPropName(sub1)) * 1000
-                            val = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                            val = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                         Catch ex As Exception
                             WriteWarningMessage(ex.Message.ToString & ". Estimating value using Ely-Hanley [Fluid: " & cprop.Name & "]")
                             val = MyBase.AUX_VAPTHERMCONDi(cprop, T, P)
@@ -909,7 +909,7 @@ Namespace PropertyPackages
                                     p3 = CoolProp.PropsSI("V", "T", x3, "P", P, GetCoolPropName(sub1))
                                     p4 = CoolProp.PropsSI("V", "T", x4, "P", P, GetCoolPropName(sub1))
                                     p5 = CoolProp.PropsSI("V", "T", x5, "P", P, GetCoolPropName(sub1))
-                                    vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                    vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                 Catch ex As Exception
                                     WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
                                     vk(i) = MyBase.AUX_VAPVISCi(subst.ConstantProperties, T)
@@ -989,7 +989,7 @@ Namespace PropertyPackages
                                     p3 = CoolProp.PropsSI("D", "T", x3, "P", P, GetCoolPropName(sub1))
                                     p4 = CoolProp.PropsSI("D", "T", x4, "P", P, GetCoolPropName(sub1))
                                     p5 = CoolProp.PropsSI("D", "T", x5, "P", P, GetCoolPropName(sub1))
-                                    vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                    vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                 Catch ex As Exception
                                     WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
                                     vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
@@ -1092,7 +1092,7 @@ Namespace PropertyPackages
                                         p3 = CoolProp.PropsSI("C", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
                                         p4 = CoolProp.PropsSI("C", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
                                         p5 = CoolProp.PropsSI("C", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Cp for " & subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1139,7 +1139,7 @@ Namespace PropertyPackages
                                         p3 = CoolProp.PropsSI("C", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
                                         p4 = CoolProp.PropsSI("C", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
                                         p5 = CoolProp.PropsSI("C", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Cp for " & subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1222,7 +1222,7 @@ Namespace PropertyPackages
                                         p3 = CoolProp.PropsSI("O", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
                                         p4 = CoolProp.PropsSI("O", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
                                         p5 = CoolProp.PropsSI("O", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Cv for " & subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1269,7 +1269,7 @@ Namespace PropertyPackages
                                         p3 = CoolProp.PropsSI("O", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
                                         p4 = CoolProp.PropsSI("O", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
                                         p5 = CoolProp.PropsSI("O", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Cv for " & subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1343,7 +1343,7 @@ Namespace PropertyPackages
                                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1373,17 +1373,17 @@ Namespace PropertyPackages
                                         WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
                                         Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                        x1 = Tb + (Tmax - Tb) * 0.2
-                                        x2 = Tb + (Tmax - Tb) * 0.4
-                                        x3 = Tb + (Tmax - Tb) * 0.6
-                                        x4 = Tb + (Tmax - Tb) * 0.8
-                                        x5 = Tb + (Tmax - Tb) * 0.9
+                                        x1 = Tb + 1.0 + T * 0.2
+                                        x2 = Tb + 1.0 + T * 0.4
+                                        x3 = Tb + 1.0 + T * 0.6
+                                        x4 = Tb + 1.0 + T * 0.8
+                                        x5 = Tb + 1.0 + T * 0.9
                                         p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1478,7 +1478,7 @@ Namespace PropertyPackages
                                         p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Entropy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
@@ -1508,17 +1508,17 @@ Namespace PropertyPackages
                                         WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Entropy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
                                         Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                        x1 = Tb + (Tmax - Tb) * 0.2
-                                        x2 = Tb + (Tmax - Tb) * 0.4
-                                        x3 = Tb + (Tmax - Tb) * 0.6
-                                        x4 = Tb + (Tmax - Tb) * 0.8
-                                        x5 = Tb + (Tmax - Tb) * 0.9
+                                        x1 = Tb + 1.0 + T * 0.2
+                                        x2 = Tb + 1.0 + T * 0.4
+                                        x3 = Tb + 1.0 + T * 0.6
+                                        x4 = Tb + 1.0 + T * 0.8
+                                        x5 = Tb + 1.0 + T * 0.9
                                         p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
                                         p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                                        vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
                                 Else
                                     WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")

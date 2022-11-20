@@ -1,5 +1,5 @@
 '    Rigorous Columns (Distillation and Absorption) Unit Operations
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -37,6 +37,7 @@ Imports DWSIM.MathOps.MathEx.Optimization
 Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.UnitOperations.UnitOperations.Column
+Imports DWSIM.UnitOperations.Streams
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -836,6 +837,112 @@ Namespace UnitOperations
 
         Public Property RefluxedAbsorber As Boolean = False
 
+        Public Sub ConnectFeed(feed As ISimulationObject, stagenumber As Integer)
+
+            Dim i As Integer = 0
+            Dim success As Boolean = False
+            For Each con In GraphicObject.InputConnectors
+                If Not con.IsAttached Then
+                    FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
+                    Dim msi As New StreamInformation With {.ID = feed.Name, .StreamID = feed.Name,
+                        .AssociatedStage = Stages(stagenumber).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Feed,
+                        .StreamType = StreamInformation.Type.Material}
+                    MaterialStreams.Add(msi.ID, msi)
+                    success = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not success Then Throw New Exception("No feed port available")
+
+        End Sub
+
+        Public Sub ConnectVaporProduct(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 9, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.OverheadVapor,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectDistillate(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectBottoms(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages.Last.Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectCondenserDuty(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 10, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Energy}
+            EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectReboilerDuty(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(stream.GraphicObject, GraphicObject, 0, 10)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Energy}
+            EnergyStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub SetCondenserSpec(spectype As String, value As Double, units As String, Optional compound As String = "")
+
+            spectype = spectype.Replace(" ", "_")
+            If spectype = "Reflux_Ratio" Then spectype = "Stream_Ratio"
+
+            Dim sp As New ColumnSpec()
+            [Enum].TryParse(Of ColumnSpec.SpecType)(spectype, sp.SType)
+            sp.SpecValue = value
+            sp.SpecUnit = units
+            sp.ComponentID = compound
+
+            Specs("C") = sp
+
+        End Sub
+
+        Public Sub SetReboilerSpec(spectype As String, value As Double, units As String, Optional compound As String = "")
+
+            spectype = spectype.Replace(" ", "_")
+            If spectype = "Boilup_Ratio" Or spectype = "BoilUp_Ratio" Then spectype = "Stream_Ratio"
+
+            Dim sp As New ColumnSpec()
+            [Enum].TryParse(Of ColumnSpec.SpecType)(spectype, sp.SType)
+            sp.SpecValue = value
+            sp.SpecUnit = units
+            sp.ComponentID = compound
+
+            Specs("R") = sp
+
+        End Sub
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -873,7 +980,10 @@ Namespace UnitOperations
                         proplist.Add("Stage_Temperature_" + CStr(i))
                     Next
                 Case PropertyType.RW, PropertyType.ALL
-                    For i = 0 To 7
+                    For i = 2 To 2
+                        proplist.Add("PROP_DC_" + CStr(i))
+                    Next
+                    For i = 5 To 8
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 1 To Me.Stages.Count
@@ -890,10 +1000,28 @@ Namespace UnitOperations
                     proplist.Add("Global_Stage_Efficiency")
                     proplist.Add("Condenser_Calculated_Value")
                     proplist.Add("Reboiler_Calculated_Value")
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            proplist.Add(String.Format("Stream '{0}' Stage Index", streamtag))
+                        Catch ex As Exception
+                        End Try
+                    Next
+                    For Each si In MaterialStreams.Values
+                        If si.StreamBehavior = StreamInformation.Behavior.Sidedraw Then
+                            Try
+                                Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                                proplist.Add(String.Format("Stream '{0}' Side Draw Molar Flow", streamtag))
+                            Catch ex As Exception
+                            End Try
+                        End If
+                    Next
                 Case PropertyType.WR
-                    For i = 0 To 4
+                    For i = 2 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
+                    proplist.Add("PROP_DC_7")
+                    proplist.Add("PROP_DC_8")
                     For i = 1 To Me.Stages.Count
                         proplist.Add("Stage_Pressure_" + CStr(i))
                     Next
@@ -903,46 +1031,60 @@ Namespace UnitOperations
                     proplist.Add("Condenser_Specification_Value")
                     proplist.Add("Reboiler_Specification_Value")
                     proplist.Add("Global_Stage_Efficiency")
-                    proplist.Add("Condenser_Calculated_Value")
-                    proplist.Add("Reboiler_Calculated_Value")
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            proplist.Add(String.Format("Stream '{0}' Stage Index", streamtag))
+                        Catch ex As Exception
+                        End Try
+                    Next
+                    For Each si In MaterialStreams.Values
+                        If si.StreamBehavior = StreamInformation.Behavior.Sidedraw Then
+                            Try
+                                Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                                proplist.Add(String.Format("Stream '{0}' Side Draw Molar Flow", streamtag))
+                            Catch ex As Exception
+                            End Try
+                        End If
+                    Next
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
             If Not val0 Is Nothing Then
+
                 Return val0
+
             Else
+
                 If su Is Nothing Then su = New SystemsOfUnits.SI
+
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Object = Nothing
                 Dim propidx As Integer = -1
-                Integer.TryParse(prop.Split("_")(2), propidx)
+
+                Try
+                    Integer.TryParse(prop.Split("_")(2), propidx)
+                Catch ex As Exception
+
+                End Try
 
                 Select Case propidx
 
                     Case 0
                         'PROP_DC_0	Condenser Pressure
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.First.P)
                     Case 1
                         'PROP_DC_1	Reboiler Pressure
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.Last.P)
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
-                    Case 3
-                        'reflux ratio
-                        value = Me.RefluxRatio
-                    Case 4
-                        'distillate molar flow
-                        If LSSf IsNot Nothing AndAlso LSSf.Length > 0 Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
-                        Else
-                            value = 0.0
-                        End If
                     Case 5
                         'PROP_DC_5	Condenser Duty
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
@@ -952,6 +1094,8 @@ Namespace UnitOperations
                     Case 7
                         'PROP_DC_7	Number of Stages
                         value = Me.NumberOfStages
+                    Case 8
+                        value = ColumnPressureDrop.ConvertFromSI(su.deltaP)
                 End Select
 
                 Select Case prop
@@ -982,6 +1126,32 @@ Namespace UnitOperations
 
                 If prop.Contains("Global_Stage_Efficiency") Then value = "N/D"
 
+                If prop.Contains("Stage Index") Then
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            If prop = String.Format("Stream '{0}' Stage Index", streamtag) Then
+                                value = StageIndex(si.AssociatedStage)
+                                Return value
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
+                If prop.Contains("Side Draw Molar Flow") Then
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            If prop = String.Format("Stream '{0}' Side Draw Molar Flow", streamtag) Then
+                                value = si.FlowRate.Value.ConvertFromSI(su.molarflow)
+                                Return value
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
                 Return value
             End If
 
@@ -991,13 +1161,21 @@ Namespace UnitOperations
             Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
             If u0 <> "NF" Then
+
                 Return u0
+
             Else
+
                 If su Is Nothing Then su = New SystemsOfUnits.SI
+
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As String = ""
                 Dim propidx As Integer = -1
-                Integer.TryParse(prop.Split("_")(2), propidx)
+
+                Try
+                    Integer.TryParse(prop.Split("_")(2), propidx)
+                Catch ex As Exception
+                End Try
 
                 Select Case propidx
 
@@ -1021,6 +1199,8 @@ Namespace UnitOperations
                     Case 7
                         'PROP_DC_7	Number of Stages
                         value = ""
+                    Case 8
+                        value = su.deltaP
                 End Select
 
                 Select Case prop
@@ -1033,9 +1213,12 @@ Namespace UnitOperations
                 If prop.Contains("Stage_Pressure") Then value = su.pressure
                 If prop.Contains("Stage_Temperature") Then value = su.temperature
                 If prop.Contains("Stage_Efficiency") Then value = ""
+                If prop.Contains("Molar Flow") Then value = su.molarflow
 
                 Return value
+
             End If
+
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
@@ -1051,13 +1234,17 @@ Namespace UnitOperations
                 Select Case propidx
                     Case 0
                         'PROP_DC_0	Condenser Pressure
-                        Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                        Stages.First.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 1
                         'PROP_DC_1	Reboiler Pressure
-                        Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                        Stages.Last.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
-                        Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                        CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                    Case 7
+                        SetNumberOfStages(propval)
+                    Case 8
+                        ColumnPressureDrop = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 End Select
             End If
 
@@ -1086,6 +1273,32 @@ Namespace UnitOperations
             If prop = "Global_Stage_Efficiency" Then
                 For Each st As Stage In Me.Stages
                     st.Efficiency = propval
+                Next
+            End If
+
+            If prop.Contains("Stage Index") Then
+                For Each si In MaterialStreams.Values
+                    Try
+                        Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                        If prop = String.Format("Stream '{0}' Stage Index", streamtag) Then
+                            si.AssociatedStage = Stages(Convert.ToInt32(propval)).Name
+                            Exit For
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
+            If prop.Contains("Side Draw Molar Flow") Then
+                For Each si In MaterialStreams.Values
+                    Try
+                        Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                        If prop = String.Format("Stream '{0}' Side Draw Molar Flow", streamtag) Then
+                            si.FlowRate.Value = Convert.ToDouble(propval).ConvertToSI(su.molarflow)
+                            Exit For
+                        End If
+                    Catch ex As Exception
+                    End Try
                 Next
             End If
 
@@ -1121,8 +1334,6 @@ Namespace UnitOperations
             str.AppendLine("Calculation parameters")
             str.AppendLine()
             str.AppendLine("    Condenser type: " & Me.CondenserType.ToString)
-            str.AppendLine("    Condenser Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure).ToString(numberformat, ci) & " " & su.pressure)
-            str.AppendLine("    Reboiler Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure).ToString(numberformat, ci) & " " & su.pressure)
             str.AppendLine("    Number of Stages: " & Me.Stages.Count)
             str.AppendLine()
             str.AppendLine("Results")
@@ -1151,6 +1362,12 @@ Namespace UnitOperations
             For i As Integer = 0 To Lf.Count - 1
                 str.AppendLine(i.ToString.PadRight(20) & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Lf(i)).ToString(numberformat, ci).PadRight(20))
             Next
+            str.AppendLine()
+            str.AppendLine(ColumnPropertiesProfile)
+            If CreateSolverConvergengeReport Then
+                str.AppendLine()
+                str.AppendLine(ColumnSolverConvergenceReport)
+            End If
 
             Return str.ToString
 
@@ -1163,6 +1380,49 @@ Namespace UnitOperations
         Inherits Column
 
         Public _opmode As OpMode = OpMode.Absorber
+
+        Public Sub ConnectFeed(feed As ISimulationObject, stagenumber As Integer)
+
+            Dim i As Integer = 0
+            Dim success As Boolean = False
+            For Each con In GraphicObject.InputConnectors
+                If Not con.IsAttached Then
+                    FlowSheet.ConnectObjects(feed.GraphicObject, GraphicObject, 0, i)
+                    Dim msi As New StreamInformation With {.ID = feed.Name, .StreamID = feed.Name,
+                        .AssociatedStage = Stages(stagenumber).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Feed,
+                        .StreamType = StreamInformation.Type.Material}
+                    MaterialStreams.Add(msi.ID, msi)
+                    success = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not success Then Throw New Exception("No feed port available")
+
+        End Sub
+
+        Public Sub ConnectTopProduct(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 0, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages(0).Name,
+                        .StreamBehavior = StreamInformation.Behavior.Distillate,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
+
+        Public Sub ConnectBottoms(stream As ISimulationObject)
+
+            FlowSheet.ConnectObjects(GraphicObject, stream.GraphicObject, 1, 0)
+            Dim msi As New StreamInformation With {.ID = stream.Name, .StreamID = stream.Name,
+                        .AssociatedStage = Stages.Last.Name,
+                        .StreamBehavior = StreamInformation.Behavior.BottomsLiquid,
+                        .StreamType = StreamInformation.Type.Material}
+            MaterialStreams.Add(msi.ID, msi)
+
+        End Sub
 
         Public Sub New()
             MyBase.New()
@@ -1290,24 +1550,12 @@ Namespace UnitOperations
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
-
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-
-            Dim cv As New SystemsOfUnits.Converter
-
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-
+                Case 2
+                    SetNumberOfStages(propval)
             End Select
-
             Return 1
 
         End Function
@@ -1362,6 +1610,12 @@ Namespace UnitOperations
             For i As Integer = 0 To Lf.Count - 1
                 str.AppendLine(i.ToString.PadRight(20) & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Lf(i)).ToString(numberformat, ci).PadRight(20))
             Next
+            str.AppendLine()
+            str.AppendLine(ColumnPropertiesProfile)
+            If CreateSolverConvergengeReport Then
+                str.AppendLine()
+                str.AppendLine(ColumnSolverConvergenceReport)
+            End If
 
             Return str.ToString
 
@@ -1371,320 +1625,10 @@ Namespace UnitOperations
 
     End Class
 
-    <Serializable()> Public Class ReboiledAbsorber
-
-        Inherits Column
-
-        Public Overrides Property Visible As Boolean = False
-
-        Public Sub New()
-            MyBase.New()
-        End Sub
-
-        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
-            MyBase.New(name, description, fs)
-            Me.ColumnType = ColType.ReboiledAbsorber
-            MyBase.AddStages()
-            For k2 = 0 To Me.Stages.Count - 1
-                Me.Stages(k2).P = 101325
-            Next
-        End Sub
-
-        Public Overrides Function CloneXML() As Object
-            Dim obj As ICustomXMLSerialization = New ReboiledAbsorber()
-            obj.LoadData(Me.SaveData)
-            Return obj
-        End Function
-
-        Public Overrides Function CloneJSON() As Object
-            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of ReboiledAbsorber)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
-        End Function
-
-        Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
-            Dim i As Integer = 0
-            Dim proplist As New ArrayList
-            Select Case proptype
-                Case PropertyType.RO
-                    For i = 3 To 4
-                        proplist.Add("PROP_RA_" + CStr(i))
-                    Next
-                Case PropertyType.RW
-                    For i = 0 To 4
-                        proplist.Add("PROP_RA_" + CStr(i))
-                    Next
-                Case PropertyType.WR
-                    For i = 0 To 2
-                        proplist.Add("PROP_RA_" + CStr(i))
-                    Next
-                Case PropertyType.ALL
-                    For i = 0 To 4
-                        proplist.Add("PROP_RA_" + CStr(i))
-                    Next
-            End Select
-            Return proplist.ToArray(GetType(System.String))
-            proplist = Nothing
-        End Function
-
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
-                Case 3
-                    'PROP_DC_6	Reboiler Duty
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ReboilerDuty)
-                Case 4
-                    'PROP_DC_7	Number of Stages
-                    value = Me.NumberOfStages
-            End Select
-
-            Return value
-        End Function
-
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = su.pressure
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = su.pressure
-                Case 2
-                    'PROP_DC_3	Reflux Ratio
-                    value = ""
-                Case 3
-                    'PROP_DC_6	Reboiler Duty
-                    value = su.heatflow
-                Case 4
-                    'PROP_DC_7	Number of Stages
-                    value = ""
-            End Select
-
-            Return value
-        End Function
-
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-
-            End Select
-            Return 1
-        End Function
-
-        Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.col_rebabs_32
-        End Function
-
-        Public Overrides Function GetDisplayDescription() As String
-            Return ResMan.GetLocalString("CRABS_Desc")
-        End Function
-
-        Public Overrides Function GetDisplayName() As String
-            Return ResMan.GetLocalString("CRABS_Name")
-        End Function
-
-        Public Overrides ReadOnly Property MobileCompatible As Boolean
-            Get
-                Return False
-            End Get
-        End Property
-    End Class
-
-    <Serializable()> Public Class RefluxedAbsorber
-
-        Inherits Column
-
-        'solving method (default = IO)
-
-        Public Overrides Property Visible As Boolean = False
-
-        Public Sub New()
-            MyBase.New()
-        End Sub
-
-        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
-            MyBase.New(name, description, fs)
-            Me.ColumnType = ColType.RefluxedAbsorber
-            MyBase.AddStages()
-            For k2 = 0 To Me.Stages.Count - 1
-                Me.Stages(k2).P = 101325
-            Next
-        End Sub
-
-        Public Overrides Function CloneXML() As Object
-            Dim obj As ICustomXMLSerialization = New RefluxedAbsorber()
-            obj.LoadData(Me.SaveData)
-            Return obj
-        End Function
-
-        Public Overrides Function CloneJSON() As Object
-            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of RefluxedAbsorber)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
-        End Function
-
-        Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
-            Dim i As Integer = 0
-            Dim proplist As New ArrayList
-            Select Case proptype
-                Case PropertyType.RO
-                    For i = 5 To 6
-                        proplist.Add("PROP_RF_" + CStr(i))
-                    Next
-                Case PropertyType.RW
-                    For i = 0 To 6
-                        proplist.Add("PROP_RF_" + CStr(i))
-                    Next
-                Case PropertyType.WR
-                    For i = 0 To 4
-                        proplist.Add("PROP_RF_" + CStr(i))
-                    Next
-                Case PropertyType.ALL
-                    For i = 0 To 6
-                        proplist.Add("PROP_RF_" + CStr(i))
-                    Next
-            End Select
-            Return proplist.ToArray(GetType(System.String))
-            proplist = Nothing
-        End Function
-
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
-                Case 2
-                    'PROP_DC_2	Condenser Pressure Drop
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
-                Case 3
-                    'reflux ratio
-                    value = Me.RefluxRatio
-                Case 4
-                    'distillate molar flow
-                    If LSSf IsNot Nothing AndAlso LSSf.Length > 0 Then
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
-                    Else
-                        value = 0.0
-                    End If
-                Case 5
-                    'PROP_DC_5	Condenser Duty
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
-                Case 6
-                    'PROP_DC_7	Number of Stages
-                    value = Me.NumberOfStages
-            End Select
-
-            Return value
-
-        End Function
-
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = su.pressure
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = su.pressure
-                Case 2
-                    'PROP_DC_2	Condenser Pressure Drop
-                    value = su.deltaP
-                Case 4
-                    value = su.molarflow
-                Case 5
-                    'PROP_DC_5	Condenser Duty
-                    value = su.heatflow
-                Case 6
-                    'PROP_DC_7	Number of Stages
-                    value = ""
-            End Select
-
-            Return value
-        End Function
-
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 2
-                    'PROP_DC_2	Condenser Pressure Drop
-                    Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
-
-            End Select
-            Return 1
-        End Function
-
-        Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.col_rflabs_32
-        End Function
-
-        Public Overrides Function GetDisplayDescription() As String
-            Return ResMan.GetLocalString("CRFABS_Desc")
-        End Function
-
-        Public Overrides Function GetDisplayName() As String
-            Return ResMan.GetLocalString("CRFABS_Name")
-        End Function
-
-        Public Overrides ReadOnly Property MobileCompatible As Boolean
-            Get
-                Return False
-            End Get
-        End Property
-    End Class
-
     <System.Serializable()> Public MustInherit Class Column
 
         Inherits UnitOperations.UnitOpBaseClass
+
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Columns
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Column
@@ -1703,6 +1647,14 @@ Namespace UnitOperations
             Direct = 3
         End Enum
 
+        Public Property CreateSolverConvergengeReport As Boolean = False
+
+        Public Property ColumnSolverConvergenceReport As String = ""
+
+        Public Property ColumnPropertiesProfile As String = ""
+
+        Public Property ColumnPressureDrop As Double = Double.NaN
+
         Public Property SolvingMethodName As String = "Wang-Henke (Bubble Point)"
 
         'column type
@@ -1711,9 +1663,6 @@ Namespace UnitOperations
         'stage numbering is up to bottom. 
         'condenser (when applicable) is the 0th stage.
         'reboiler (when applicable) is the nth stage. 
-
-        Private _cond As New Stage(Guid.NewGuid().ToString)
-        Private _reb As New Stage(Guid.NewGuid().ToString)
 
         'stream collections (for the *entire* column, including side operations)
 
@@ -1732,8 +1681,6 @@ Namespace UnitOperations
 
         Private _nst As Integer = 12
         Private _rr As Double = 5.0#
-        Private _condp As Double = 101325
-        Private _rebp As Double = 101325
         Private _conddp, _drate, _vrate, _condd, _rebd As Double
         Private _st As New List(Of Auxiliary.SepOps.Stage)
         Public Property CondenserType As condtype = condtype.Total_Condenser
@@ -1783,7 +1730,7 @@ Namespace UnitOperations
                 Dim i As Integer
                 For i = 1 To dif
                     Stages.Insert(Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
-                    Stages(Stages.Count - 2).Name = "Stage_" & Stages.Count - 2
+                    Stages(Stages.Count - 2).Name = "Stage" & Stages.Count - 2
                     With InitialEstimates
                         Dim d As New Dictionary(Of String, Parameter)
                         For Each cp In FlowSheet.SelectedCompounds.Values
@@ -1845,6 +1792,26 @@ Namespace UnitOperations
 
             Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
             si.Value.AssociatedStage = stageID
+
+        End Sub
+
+        ''' <summary>
+        ''' Gets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="stream"></param>
+        Public Function GetStreamFeedStageIndex(stream As MaterialStream) As Integer
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
+
+            Dim stage = Stages.Where(Function(s) s.ID = si.Value.AssociatedStage).FirstOrDefault()
+
+            Return Stages.IndexOf(stage)
+
+        End Function
+
+        Public Sub SetTopPressure(p_Pa As Double)
+
+            Stages.First.P = p_Pa
 
         End Sub
 
@@ -2025,9 +1992,6 @@ Namespace UnitOperations
 
             _ie = New InitialEstimates
 
-            _cond = New Stage(Guid.NewGuid().ToString)
-            _reb = New Stage(Guid.NewGuid().ToString)
-
         End Sub
 
         Public Function StreamExists(ByVal st As StreamInformation.Behavior)
@@ -2054,21 +2018,15 @@ Namespace UnitOperations
                         ElseIf i = Me.NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
                         Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
                         End If
                     Case ColType.AbsorptionColumn
-                        _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
-                    Case ColType.ReboiledAbsorber
-                        If i = Me.NumberOfStages - 1 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
-                        Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
-                        End If
-                    Case ColType.RefluxedAbsorber
                         If i = 0 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
+                            _st(_st.Count - 1).Name = "TopStage"
+                        ElseIf i = NumberOfStages - 1 Then
+                            _st(_st.Count - 1).Name = "BottomStage"
                         Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
                         End If
                 End Select
             Next
@@ -2234,24 +2192,6 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property ReboilerPressure() As Double
-            Get
-                Return _rebp
-            End Get
-            Set(ByVal value As Double)
-                _rebp = value
-            End Set
-        End Property
-
-        Public Property CondenserPressure() As Double
-            Get
-                Return _condp
-            End Get
-            Set(ByVal value As Double)
-                _condp = value
-            End Set
-        End Property
-
         Public Property CondenserDeltaP() As Double
             Get
                 Return _conddp
@@ -2371,6 +2311,7 @@ Namespace UnitOperations
         Public Property UseBroydenAcceleration As Boolean = True
 
         Public Sub CheckConnPos()
+
             Dim idx As Integer
             For Each strinfo As StreamInformation In Me.MaterialStreams.Values
                 Try
@@ -2412,6 +2353,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Catch ex As Exception
+                    strinfo.StreamID = ""
                 End Try
             Next
 
@@ -2441,6 +2383,7 @@ Namespace UnitOperations
                             End If
                     End Select
                 Catch ex As Exception
+                    strinfo.StreamID = ""
                 End Try
             Next
 
@@ -2589,6 +2532,18 @@ Namespace UnitOperations
                 Array.Resize(idealK(i), nc)
                 Array.Resize(Kval(i), nc)
                 Array.Resize(Pvap(i), nc)
+            Next
+
+            If Not Double.IsNaN(ColumnPressureDrop) Then
+                For i = 1 To ns
+                    Stages(i).P = Stages(0).P + Convert.ToDouble(i) / Convert.ToDouble(ns) * ColumnPressureDrop
+                Next
+            End If
+
+            i = 0
+            For Each st As Stage In Me.Stages
+                P(i) = st.P
+                i += 1
             Next
 
             Dim sumcf(nc - 1), sumF, zm(nc - 1), alpha(nc - 1), distVx(nc - 1), rebVx(nc - 1), distVy(nc - 1), rebVy(nc - 1) As Double
@@ -2766,18 +2721,23 @@ Namespace UnitOperations
                     Next
                     rebVx = rebVx.NormalizeY()
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                    If Me.CondenserType = condtype.Full_Reflux Then
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                         vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
                         distrate = 0.0
-                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
-                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
-                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
-                        Else
-                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_ - vaprate
-                        End If
                     Else
-                        distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
-                        vaprate = 0.0
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                            Else
+                                distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                            vaprate = 0.0
+                        End If
                     End If
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
@@ -2962,9 +2922,6 @@ Namespace UnitOperations
                     LSS(0) = distrate
             End Select
 
-            P(ns) = Me.ReboilerPressure
-            P(0) = Me.CondenserPressure
-
             Select Case Me.ColumnType
                 Case ColType.AbsorptionColumn
                     T1 = FT.First
@@ -3043,7 +3000,6 @@ Namespace UnitOperations
 
             i = 0
             For Each st As Stage In Me.Stages
-                P(i) = st.P
                 eff(i) = st.Efficiency
                 If Me.UseTemperatureEstimates And InitialEstimates.ValidateTemperatures() And Not ignoreuserestimates Then
                     T(i) = Me.InitialEstimates.StageTemps(i).Value
@@ -3480,6 +3436,8 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            ColumnPropertiesProfile = ""
+
             Dim inputdata = GetSolverInputData()
 
             Dim nc = inputdata.NumberOfCompounds
@@ -3595,7 +3553,37 @@ Namespace UnitOperations
                     Next
                     If ex0 IsNot Nothing Then Throw ex0
                 Else
-                    so = Solver.SolveColumn(inputdata)
+                    Dim solvererror = True
+                    If SolvingMethodName.Contains("Rates") Then
+                        Try
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxTemperatureUpdates = False
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxCompositionUpdates = False
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxTemperatureUpdates = True
+                            Auxiliary.SepOps.SolvingMethods.BurninghamOttoMethod.RelaxCompositionUpdates = True
+                            so = Solver.SolveColumn(inputdata)
+                        End If
+                    Else
+                        Try
+                            inputdata.CalculationMode = 0
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch oex As OperationCanceledException
+                            Throw oex
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            FlowSheet.ShowMessage(GraphicObject.Tag + ": the column did not converge. DWSIM will try again with a different solver configuration...", IFlowsheet.MessageType.Warning)
+                            'try to solve with auto-generated initial estimates.
+                            inputdata.CalculationMode = 0
+                            so = Solver.SolveColumn(GetSolverInputData(True))
+                        End If
+                    End If
                 End If
             End If
 
@@ -3622,6 +3610,10 @@ Namespace UnitOperations
             VSSf = so.VaporSideDraws.ToArray()
             LSSf = so.LiquidSideDraws.ToArray()
             Q = so.StageHeats.ToArray()
+
+            'generate properties profile
+
+            GeneratePropertiesProfileReport()
 
             'if enabled, auto update initial estimates
 
@@ -3695,8 +3687,10 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.Distillate
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            pp.CurrentMaterialStream = msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                            .DefinedFlow = FlowSpec.Mass
                             .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
@@ -3719,8 +3713,10 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.OverheadVapor
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            pp.CurrentMaterialStream = msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                            .DefinedFlow = FlowSpec.Mass
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
@@ -3746,8 +3742,10 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.BottomsLiquid
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            pp.CurrentMaterialStream = msm
                             .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                            .DefinedFlow = FlowSpec.Mass
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
@@ -3771,8 +3769,10 @@ Namespace UnitOperations
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
                             With msm
+                                pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
@@ -3793,8 +3793,10 @@ Namespace UnitOperations
                             End With
                         ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
                             With msm
+                                pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
@@ -3824,53 +3826,183 @@ Namespace UnitOperations
             For Each sinf In Me.EnergyStreams.Values
                 If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                     'condenser
-                    esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                    esm.EnergyFlow = Q(0)
-                    esm.GraphicObject.Calculated = True
+                    If sinf.StreamID <> "" Then
+                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                        esm.EnergyFlow = Q(0)
+                        esm.GraphicObject.Calculated = True
+                    End If
                 ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
                     'reboiler
-                    esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                    If esm.GraphicObject.InputConnectors(0).IsAttached Then
-                        esm.EnergyFlow = Q(Me.NumberOfStages - 1)
-                    Else
-                        esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                    If sinf.StreamID <> "" Then
+                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                        If esm.GraphicObject.InputConnectors(0).IsAttached Then
+                            esm.EnergyFlow = Q(Me.NumberOfStages - 1)
+                        Else
+                            esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                        End If
+                        esm.GraphicObject.Calculated = True
                     End If
-                    esm.GraphicObject.Calculated = True
                 End If
             Next
 
         End Sub
 
-        Function CalcIdealVapFrac(ByVal Vz As Object, ByVal PVAP As Object, ByVal P As Double) As Double
+        Private Sub GeneratePropertiesProfileReport()
 
-            Dim Pmin, Pmax, Px, vfrac As Double
-            Dim n As Integer = UBound(Vz)
-            Dim i As Integer
+            Dim units = FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
-            i = 0
-            Px = 0
-            Do
-                Px = Px + (Vz(i) / PVAP(i))
-                i = i + 1
-            Loop Until i = n + 1
-            Px = 1 / Px
+            Dim reporter = New Text.StringBuilder()
 
-            Pmin = Px
+            reporter.AppendLine("========================================================")
+            reporter.AppendLine(String.Format("Column Properties Profile"))
+            reporter.AppendLine("========================================================")
+            reporter.AppendLine()
 
-            i = 0
-            Px = 0
-            Do
-                Px = Px + Vz(i) * PVAP(i)
-                i = i + 1
-            Loop Until i = n + 1
+            If TypeOf Me Is DistillationColumn Then
+                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "Stage", "P", "T",
+                                              "mV", "wV", "rhoV", "etaV", "kV",
+                                              "mL", "wL", "rhoL", "etaL", "kL", "sigma"))
+                reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "", units.pressure, units.temperature,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity, units.surfaceTension))
+            Else
+                If DirectCast(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Extractor Then
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}",
+                                              "Stage", "P", "T",
+                                              "mL1", "wL1", "rhoL1", "etaL1", "kL1",
+                                              "mL2", "wL2", "rhoL2", "etaL2", "kL2"))
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}",
+                                              "", units.pressure, units.temperature,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity))
+                Else
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "Stage", "P", "T",
+                                              "mV", "wV", "rhoV", "etaV", "kV",
+                                              "mL", "wL", "rhoL", "etaL", "kL", "sigma"))
+                    reporter.AppendLine(String.Format("{0,-8}{1,16}{2,16}{3,16}{4,16}{5,16}{6,16}" +
+                                              "{7,16}{8,16}{9,16}{10,16}{11,16}{12,16}{13,16}",
+                                              "", units.pressure, units.temperature,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity,
+                                              units.molarflow, units.massflow, units.density, units.viscosity, units.thermalConductivity, units.surfaceTension))
+                End If
+            End If
 
-            Pmax = Px
+            reporter.AppendLine()
 
-            vfrac = (P - Pmin) / (Pmax - Pmin)
+            Dim pp = DirectCast(PropertyPackage, Thermodynamics.PropertyPackages.PropertyPackage)
 
-            Return 1 - vfrac
+            For i = 0 To Me.Stages.Count - 1
 
-        End Function
+                Dim ms As New MaterialStream("", "", FlowSheet, pp)
+                FlowSheet.AddCompoundsToMaterialStream(ms)
+                pp.CurrentMaterialStream = ms
+
+                Dim compx As Double() = xf(i)
+                Dim compy As Double() = yf(i)
+
+                Dim mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma, Ti, Pi As Double
+
+                Ti = Tf(i)
+                Pi = Stages(i).P
+
+                If TypeOf Me Is DistillationColumn Then
+
+                    ms.SetOverallComposition(compy)
+                    ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
+
+                    mV = Vf(i).ConvertFromSI(units.molarflow)
+                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                    rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
+                    etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                    If Double.IsNaN(etaV) Then etaV = 0.0
+                    kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
+
+                Else
+
+                    If DirectCast(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Extractor Then
+
+                        ms.SetOverallComposition(compy)
+                        ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid1)
+                        ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid)
+
+                        mV = Vf(i).ConvertFromSI(units.molarflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        rhoV = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
+                        etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        If Double.IsNaN(etaV) Then etaV = 0.0
+                        kV = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
+
+                    Else
+
+                        ms.SetOverallComposition(compy)
+                        ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
+
+                        mV = Vf(i).ConvertFromSI(units.molarflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
+                        etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        If Double.IsNaN(etaV) Then etaV = 0.0
+                        kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
+
+                    End If
+
+                End If
+
+                ms.SetOverallComposition(compx)
+                ms.SetPhaseComposition(compx, PropertyPackages.Phase.Liquid1)
+                ms.SetPhaseComposition(compx, PropertyPackages.Phase.Liquid)
+
+                mL = Lf(i).ConvertFromSI(units.molarflow)
+                wL = (Lf(i) / 1000.0 * pp.AUX_MMM(Lf(i))).ConvertFromSI(units.massflow)
+                rhoL = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
+                etaL = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Lf(i))).ConvertFromSI(units.viscosity)
+                kL = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
+
+                sigma = pp.AUX_SURFTM(Ti).ConvertFromSI(units.surfaceTension)
+
+                If TypeOf Me Is DistillationColumn Then
+
+                    reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                                                   "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}{13,16:G6}",
+                                                   i + 1, Pi, Ti, mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
+
+                Else
+
+                    If DirectCast(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Extractor Then
+
+                        reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                                                   "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}",
+                                                   i + 1, Pi, Ti, mL, wL, rhoL, etaL, kL, mV, wV, rhoV, etaV, kV))
+
+                    Else
+
+                        reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
+                                                   "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}{13,16:G6}",
+                                                   i + 1, Pi, Ti, mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
+
+                    End If
+
+                End If
+
+                ms = Nothing
+                pp.CurrentMaterialStream = Nothing
+
+            Next
+
+            reporter.AppendLine()
+
+            ColumnPropertiesProfile = reporter.ToString()
+
+        End Sub
+
 
         Public Overrides Sub DeCalculate()
 
@@ -3981,8 +4113,6 @@ Namespace UnitOperations
             Dim rmok As Boolean = False
             Dim cmok As Boolean = False
             Dim cmvok As Boolean = False
-            Dim reok As Boolean = False
-            Dim ceok As Boolean = False
 
             'check existence/status of all specified material streams
 
@@ -3992,11 +4122,11 @@ Namespace UnitOperations
                 Else
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Feed
-                            'If Not FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Calculated Then
-                            '    Throw New Exception(FlowSheet.GetTranslatedString("DCStreamNotCalculatedException"))
-                            'Else
+                            If sinf.AssociatedStage = "" Then
+                                Dim fs = FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Tag
+                                Throw New Exception(String.Format("Please set the Column Stage for Feed Stream '{0}'.", fs))
+                            End If
                             feedok = True
-                            'End If
                         Case StreamInformation.Behavior.Distillate
                             cmok = True
                         Case StreamInformation.Behavior.OverheadVapor
@@ -4007,40 +4137,29 @@ Namespace UnitOperations
                 End If
             Next
 
-            For Each sinf In Me.EnergyStreams.Values
-                If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("DCStreamMissingException"))
-                Else
-                    Select Case sinf.StreamBehavior
-                        Case StreamInformation.Behavior.InterExchanger
-
-                        Case StreamInformation.Behavior.Distillate
-                            ceok = True
-                        Case StreamInformation.Behavior.BottomsLiquid
-                            reok = True
-                    End Select
-                End If
-            Next
-
             'check if all connections were done correctly
 
             Select Case Me.ColumnType
                 Case ColType.DistillationColumn
+                    Dim dcol = DirectCast(Me, DistillationColumn)
+                    If dcol.ReboiledAbsorber Then
+                        cmok = True
+                    End If
                     Select Case Me.CondenserType
                         Case condtype.Total_Condenser
-                            If Not feedok Or Not cmok Or Not rmok Or Not ceok Or Not reok Then
+                            If Not feedok Or Not cmok Or Not rmok Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             End If
                         Case condtype.Partial_Condenser
-                            If Not feedok Or Not cmok Or Not cmvok Or Not rmok Or Not ceok Or Not reok Then
+                            If Not feedok Or Not cmok Or Not cmvok Or Not rmok Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             End If
                         Case condtype.Full_Reflux
-                            If Not feedok Or Not cmvok Or Not rmok Or Not ceok Or Not reok Then
+                            If Not feedok Or Not cmvok Or Not rmok Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             End If
                     End Select
@@ -4048,33 +4167,6 @@ Namespace UnitOperations
                     If Not feedok Or Not rmok Or Not (cmvok Or cmok) Then
                         Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                     End If
-                Case ColType.ReboiledAbsorber
-                    If Not feedok Or Not cmvok Or Not rmok Or Not reok Then
-                        Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                    ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                        Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                    End If
-                Case ColType.RefluxedAbsorber
-                    Select Case Me.CondenserType
-                        Case condtype.Total_Condenser
-                            If Not feedok Or Not cmok Or Not rmok Or Not ceok Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            End If
-                        Case condtype.Partial_Condenser
-                            If Not feedok Or Not cmok Or Not cmvok Or Not rmok Or Not ceok Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            End If
-                        Case condtype.Full_Reflux
-                            If Not feedok Or Not cmvok Or Not rmok Or Not ceok Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            End If
-                    End Select
             End Select
 
             'all ok, proceed to calculations...

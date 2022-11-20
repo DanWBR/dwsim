@@ -1,5 +1,5 @@
 ﻿'    DWSIM Interface definitions
-'    Copyright 2020-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2020-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -14,7 +14,7 @@
 '    GNU General Public License for more details.
 '
 '    You should have received a copy of the GNU General Public License
-'    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+'    along with DWSIM. If not, see <http://www.gnu.org/licenses/>.
 
 Public Interface IExternalSolverIdentification
 

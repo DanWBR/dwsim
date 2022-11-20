@@ -193,6 +193,10 @@ Namespace SpecialOps
 
         End Sub
 
+        Public Overrides Sub RunDynamicModel()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
@@ -445,7 +449,7 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.lo_enrecy_32
+            Return My.Resources.erecycle
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

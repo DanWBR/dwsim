@@ -200,6 +200,17 @@ Namespace PropertyPackages.Auxiliary
             nrtlipc = Nothing
             fh1 = Nothing
 
+            Dim pars = New ChemSepIPDReader().ReadNRTLIPD()
+
+            For Each nrtlip In pars
+                If Not Me.InteractionParameters.ContainsKey(nrtlip.ID1) Then
+                    Me.InteractionParameters.Add(nrtlip.ID1, New Dictionary(Of String, NRTL_IPData))
+                    Me.InteractionParameters(nrtlip.ID1).Add(nrtlip.ID2, nrtlip)
+                ElseIf Not Me.InteractionParameters(nrtlip.ID1).ContainsKey(nrtlip.ID2) Then
+                    Me.InteractionParameters(nrtlip.ID1).Add(nrtlip.ID2, nrtlip)
+                End If
+            Next
+
         End Sub
 
         Function GAMMA(ByVal T As Double, ByVal Vx As Array, ByVal Vids As Array, ByVal index As Integer) As Double

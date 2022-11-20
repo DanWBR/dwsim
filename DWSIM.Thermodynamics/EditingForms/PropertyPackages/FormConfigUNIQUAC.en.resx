@@ -117,81 +117,99 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Estimate</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="KryptonDataGridView2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 54</value>
+  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>707, 21</value>
   </data>
-  <data name="KryptonDataGridView2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>885, 311</value>
-  </data>
-  <data name="LabelWithDivider2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>890, 10</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Activate cell editing by clicking on it with the left mouse button.</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 371</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Interaction Parameters</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Action in deployment.</value>
+  <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 23</value>
   </data>
   <data name="Button6.Text" xml:space="preserve">
     <value>Estimate (MODFAC-NIST)</value>
   </data>
+  <data name="chkTdep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 25</value>
+  </data>
+  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 21</value>
+  </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Estimate (UNIFAC-LL)</value>
   </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>560, 21</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 23</value>
+  </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Estimate (MODFAC-Do)</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>426, 21</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Estimate (UNIFAC)</value>
   </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>906, 308</value>
+    <value>847, 343</value>
   </data>
   <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>908, 10</value>
+    <value>849, 10</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>921, 369</value>
+    <value>862, 404</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>933, 377</value>
+    <value>874, 412</value>
   </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Parameter</value>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>740, 17</value>
   </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Value</value>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>Estimate</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>General Options</value>
+  <data name="KryptonDataGridView2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 54</value>
+  </data>
+  <data name="KryptonDataGridView2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>826, 298</value>
+  </data>
+  <data name="LabelWithDivider2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>864, 10</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Activate cell editing by clicking on it with the left mouse button.</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>874, 358</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Interaction Parameters</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Action in deployment.</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>853, 364</value>
+  </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>876, 438</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>General Options</value>
   </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>935, 398</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>935, 398</value>
+    <value>876, 438</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure UNIQUAC Property Package</value>

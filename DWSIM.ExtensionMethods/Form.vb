@@ -25,6 +25,17 @@ Public Module FormExtensions
                     dgv.AllowUserToResizeRows = False
                     dgv.RowTemplate.Height = 23 * GlobalSettings.Settings.DpiScale
                     dgv.ColumnHeadersHeight = 23 * GlobalSettings.Settings.DpiScale
+                    For Each r As DataGridViewRow In dgv.Rows
+                        r.Height = 23 * GlobalSettings.Settings.DpiScale
+                    Next
+                ElseIf TypeOf control Is Button Then
+                    Dim button = DirectCast(control, Button)
+                    If button.Image IsNot Nothing Then
+                        button.Image = New Bitmap(button.Image,
+                                                  New Size(16 * GlobalSettings.Settings.DpiScale,
+                                                           16 * GlobalSettings.Settings.DpiScale))
+                    End If
+
                 End If
             End If
         Next
@@ -46,6 +57,17 @@ Public Module FormExtensions
                     dgv.AllowUserToResizeRows = False
                     dgv.RowTemplate.Height = 23 * GlobalSettings.Settings.DpiScale
                     dgv.ColumnHeadersHeight *= GlobalSettings.Settings.DpiScale
+                    For Each r As DataGridViewRow In dgv.Rows
+                        r.Height = 23 * GlobalSettings.Settings.DpiScale
+                    Next
+                ElseIf TypeOf control Is Button Then
+                    Dim button = DirectCast(control, Button)
+                    If button.Image IsNot Nothing Then
+                        button.Image = New Bitmap(button.Image,
+                                                  New Size(16 * GlobalSettings.Settings.DpiScale,
+                                                           16 * GlobalSettings.Settings.DpiScale))
+                    End If
+
                 End If
             End If
         Next

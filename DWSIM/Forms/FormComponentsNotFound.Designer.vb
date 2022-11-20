@@ -55,7 +55,7 @@ Partial Class FormComponentsNotFound
         Me.dgv.AllowUserToAddRows = False
         Me.dgv.AllowUserToDeleteRows = False
         Me.dgv.AllowUserToResizeRows = False
-        Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column3, Me.DataGridViewLinkColumn2, Me.Column8, Me.Column1})
@@ -81,7 +81,7 @@ Partial Class FormComponentsNotFound
         '
         'DataGridViewTextBoxColumn2
         '
-        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
+        Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         Me.DataGridViewTextBoxColumn2.ReadOnly = True
@@ -90,13 +90,14 @@ Partial Class FormComponentsNotFound
         '
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column3.FillWeight = 15.0!
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'DataGridViewLinkColumn2
         '
-        Me.DataGridViewLinkColumn2.FillWeight = 10.0!
+        Me.DataGridViewLinkColumn2.FillWeight = 30.0!
         resources.ApplyResources(Me.DataGridViewLinkColumn2, "DataGridViewLinkColumn2")
         Me.DataGridViewLinkColumn2.Name = "DataGridViewLinkColumn2"
         Me.DataGridViewLinkColumn2.ReadOnly = True
@@ -113,6 +114,7 @@ Partial Class FormComponentsNotFound
         '
         'Column1
         '
+        Me.Column1.FillWeight = 40.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True

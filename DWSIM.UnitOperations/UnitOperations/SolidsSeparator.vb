@@ -35,6 +35,10 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SolidsSep
 
+        Public Property EmbeddedImageData As String = ""
+
+        Public Property UseEmbeddedImage As Boolean = False
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
             Return MyBase.LoadData(data)
         End Function
@@ -129,6 +133,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 With outstr1
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlvout
                     .DefinedFlow = FlowSpec.Mass
@@ -154,6 +159,7 @@ Namespace UnitOperations
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
                 With outstr2
+                    .AtEquilibrium = False
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
                     .DefinedFlow = FlowSpec.Mass
@@ -359,7 +365,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_solidsep_32
+            Return My.Resources.solids_separator
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

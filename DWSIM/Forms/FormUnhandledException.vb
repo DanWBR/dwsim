@@ -28,18 +28,8 @@ Public Class FormUnhandledException
     Dim githublink As String = ""
     Public ex As Exception
 
-    Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton2.Click
-        Me.Close()
-    End Sub
-
     Private Sub FormUnhandledException_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         Me.Loaded = True
-    End Sub
-
-    Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton4.Click
-
-        Process.GetCurrentProcess.Kill()
-
     End Sub
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -55,7 +45,7 @@ Public Class FormUnhandledException
 
         Button4.Enabled = False
         Try
-            Dim baseaddress As String = "https://github.com/DanWBR/dwsim6/blob/windows/"
+            Dim baseaddress As String = "https://github.com/DanWBR/dwsim/blob/windows/"
             Dim st As New StackTrace(ex, True)
             Dim frame As StackFrame = st.GetFrame(0)
             Dim path As String = frame.GetFileName.Replace(mystring, baseaddress)
@@ -84,12 +74,6 @@ Public Class FormUnhandledException
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        Application.Restart()
-
-    End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
 
         Dim baseaddress As String = "https://sourceforge.net/p/dwsim/search/?q="
@@ -102,7 +86,7 @@ Public Class FormUnhandledException
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
 
-        Dim baseaddress As String = "http://dwsim.inforside.com.br/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search="
+        Dim baseaddress As String = "https://dwsim.org/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search="
 
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 

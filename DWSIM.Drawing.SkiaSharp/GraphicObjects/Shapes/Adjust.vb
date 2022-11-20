@@ -91,7 +91,7 @@ Namespace GraphicObjects.Shapes
 
             Select Case DrawMode
 
-                Case 0
+                Case 0, 2
 
                     'default
                     Dim aPen As New SKPaint()
@@ -166,7 +166,10 @@ Namespace GraphicObjects.Shapes
                     ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2 - 2
                     ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2 - 1
 
-                    canvas.DrawText("A", ax, ay, tpaint)
+                    Using New SKAutoCanvasRestore(canvas)
+                        StraightCanvas(canvas)
+                        canvas.DrawText("C", ax, ay, tpaint)
+                    End Using
 
                 Case 1
 
@@ -229,11 +232,10 @@ Namespace GraphicObjects.Shapes
                     ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2 - 2
                     ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2 - 1
 
-                    canvas.DrawText("A", ax, ay, tpaint)
-
-                Case 2
-
-                    'Gas/Liquid Flows
+                    Using New SKAutoCanvasRestore(canvas)
+                        StraightCanvas(canvas)
+                        canvas.DrawText("C", ax, ay, tpaint)
+                    End Using
 
                 Case 3
 

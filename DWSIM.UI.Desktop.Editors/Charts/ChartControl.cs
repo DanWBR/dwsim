@@ -232,9 +232,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                        pl.CreateAndAddNumericEditorRow("Title Font Size", pm.TitleFontSize, 4.0, 30, 1, (ns, e) =>
+                        pl.CreateAndAddNumericEditorRow2("Title Font Size", pm.TitleFontSize, 4.0, 30, 1, (ns, e) =>
                             {
-                                pm.TitleFontSize = ns.Value;
+                                pm.TitleFontSize = ns.Text.ToDoubleFromCurrent();
                                 Application.Instance.Invoke(() =>
                                 {
                                     ChartView.Model.InvalidatePlot(true);
@@ -252,9 +252,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                 });
                             });
 
-                        pl.CreateAndAddNumericEditorRow("Subtitle Font Size", pm.SubtitleFontSize, 4.0, 30, 1, (ns, e) =>
+                        pl.CreateAndAddNumericEditorRow2("Subtitle Font Size", pm.SubtitleFontSize, 4.0, 30, 1, (ns, e) =>
                             {
-                                pm.SubtitleFontSize = ns.Value;
+                                pm.SubtitleFontSize = ns.Text.ToDoubleFromCurrent();
                                 Application.Instance.Invoke(() =>
                                 {
                                     ChartView.Model.InvalidatePlot(true);
@@ -319,9 +319,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Legend Title Font Size", pm.LegendTitleFontSize, 4.0, 30, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Legend Title Font Size", pm.LegendTitleFontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    pm.LegendTitleFontSize = ns.Value;
+                                    pm.LegendTitleFontSize = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -351,9 +351,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                         });
                                     });
 
-                            pl.CreateAndAddNumericEditorRow("Legend Item Spacing", pm.LegendItemSpacing, 0.1, 5, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Legend Item Spacing", pm.LegendItemSpacing, 0.1, 5, 1, (ns, e) =>
                                 {
-                                    pm.LegendItemSpacing = ns.Value;
+                                    pm.LegendItemSpacing = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -361,9 +361,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Legend Line Spacing", pm.LegendLineSpacing, 0.1, 5, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Legend Line Spacing", pm.LegendLineSpacing, 0.1, 5, 1, (ns, e) =>
                                 {
-                                    pm.LegendLineSpacing = ns.Value;
+                                    pm.LegendLineSpacing = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -388,9 +388,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[0].FontSize, 4.0, 30, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Font Size", pm.Axes[0].FontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    pm.Axes[0].FontSize = ns.Value;
+                                    pm.Axes[0].FontSize = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -398,9 +398,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[0].TitleFontSize, 4.0, 30, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Title Font Size", pm.Axes[0].TitleFontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    pm.Axes[0].TitleFontSize = ns.Value;
+                                    pm.Axes[0].TitleFontSize = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -408,9 +408,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[0].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Title Position", pm.Axes[0].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
                                 {
-                                    pm.Axes[0].TitlePosition = ns.Value;
+                                    pm.Axes[0].TitlePosition = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -434,9 +434,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Font Size", pm.Axes[1].FontSize, 4.0, 30, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Font Size", pm.Axes[1].FontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    pm.Axes[1].FontSize = ns.Value;
+                                    pm.Axes[1].FontSize = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -444,9 +444,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Title Font Size", pm.Axes[1].TitleFontSize, 4.0, 30, 1, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Title Font Size", pm.Axes[1].TitleFontSize, 4.0, 30, 1, (ns, e) =>
                                 {
-                                    pm.Axes[1].TitleFontSize = ns.Value;
+                                    pm.Axes[1].TitleFontSize = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -454,9 +454,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                            pl.CreateAndAddNumericEditorRow("Title Position", pm.Axes[1].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
+                            pl.CreateAndAddNumericEditorRow2("Title Position", pm.Axes[1].TitlePosition, 0.0, 1.0, 2, (ns, e) =>
                                 {
-                                    pm.Axes[1].TitlePosition = ns.Value;
+                                    pm.Axes[1].TitlePosition = ns.Text.ToDoubleFromCurrent();
                                     Application.Instance.Invoke(() =>
                                     {
                                         ChartView.Model.InvalidatePlot(true);
@@ -507,9 +507,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                     });
                                 });
 
-                        pl.CreateAndAddNumericEditorRow("Line Width", series.StrokeThickness, 0.1, 10.0, 1, (ns, e) =>
+                        pl.CreateAndAddNumericEditorRow2("Line Width", series.StrokeThickness, 0.1, 10.0, 1, (ns, e) =>
                             {
-                                series.StrokeThickness = ns.Value;
+                                series.StrokeThickness = ns.Text.ToDoubleFromCurrent();
                                 Application.Instance.Invoke(() =>
                                 {
                                     ChartView.Model.InvalidatePlot(true);
@@ -531,9 +531,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                         cchoices = new List<string>(ColorChoices);
                         cchoices.Insert(0, series.Color.ToString());
 
-                        pl.CreateAndAddNumericEditorRow("Marker Size", series.MarkerSize, 0.1, 10.0, 1, (ns, e) =>
+                        pl.CreateAndAddNumericEditorRow2("Marker Size", series.MarkerSize, 0.1, 10.0, 1, (ns, e) =>
                             {
-                                series.MarkerSize = ns.Value;
+                                series.MarkerSize = ns.Text.ToDoubleFromCurrent();
                                 Application.Instance.Invoke(() =>
                                 {
                                     ChartView.Model.InvalidatePlot(true);
@@ -551,9 +551,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                                 });
                             });
 
-                        pl.CreateAndAddNumericEditorRow("Marker Stroke Size", series.MarkerStrokeThickness, 0.1, 10.0, 1, (ns, e) =>
+                        pl.CreateAndAddNumericEditorRow2("Marker Stroke Size", series.MarkerStrokeThickness, 0.1, 10.0, 1, (ns, e) =>
                             {
-                                series.MarkerStrokeThickness = ns.Value;
+                                series.MarkerStrokeThickness = ns.Text.ToDoubleFromCurrent();
                                 Application.Instance.Invoke(() =>
                                 {
                                     ChartView.Model.InvalidatePlot(true);

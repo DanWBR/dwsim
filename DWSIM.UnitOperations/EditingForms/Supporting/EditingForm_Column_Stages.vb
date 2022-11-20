@@ -42,7 +42,7 @@ Public Class EditingForm_Column_Stages
             .Clear()
             i = 0
             Do
-                .Add(New Object() {i, dc.Stages(i).Name, cv.ConvertFromSI(form.FlowsheetOptions.SelectedUnitSystem.pressure, dc.Stages(i).P), dc.Stages(i).Efficiency})
+                .Add(New Object() {i, dc.Stages(i).Name, dc.Stages(i).Efficiency})
                 i = i + 1
             Loop Until i = dc.Stages.Count
             Select Case dc.ColumnType
@@ -75,19 +75,16 @@ Public Class EditingForm_Column_Stages
             r.Cells(0).Style.BackColor = Color.WhiteSmoke
         Next
 
-        dgv1.Columns(2).HeaderText += " (" & form.FlowsheetOptions.SelectedUnitSystem.pressure & ")"
-
-        Me.dgv1.Rows(0).Cells(3).ReadOnly = False
-        Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(3).ReadOnly = False
-        Me.dgv1.Rows(0).Cells(3).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
-        Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(3).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
+        Me.dgv1.Rows(0).Cells(2).ReadOnly = False
+        Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(2).ReadOnly = False
+        Me.dgv1.Rows(0).Cells(2).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
+        Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(2).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
 
         Dim avgeff = dc.Stages.Select(Function(s) s.Efficiency).Average
 
         tbGlobalEff.Text = avgeff.ToString("N2")
 
         loaded = True
-
 
     End Sub
 
@@ -113,8 +110,8 @@ Public Class EditingForm_Column_Stages
 
     Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
         For Each r As DataGridViewRow In dgv1.Rows
-            If Not r.Cells(3).ReadOnly Then
-                r.Cells(3).Value = 1.0#
+            If Not r.Cells(2).ReadOnly Then
+                r.Cells(2).Value = 1.0#
             End If
         Next
     End Sub
@@ -122,9 +119,6 @@ Public Class EditingForm_Column_Stages
     Private Sub dgv1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgv1.CellValueChanged
         If loaded Then
             If e.ColumnIndex = 2 Then
-                'pressure
-                dc.Stages(e.RowIndex).P = cv.ConvertToSI(form.FlowsheetOptions.SelectedUnitSystem.pressure, dgv1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
-            ElseIf e.ColumnIndex = 3 Then
                 'efficiency
                 dc.Stages(e.RowIndex).Efficiency = dgv1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             ElseIf e.ColumnIndex = 1 Then
@@ -132,14 +126,6 @@ Public Class EditingForm_Column_Stages
                 dc.Stages(e.RowIndex).Name = dgv1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             End If
         End If
-    End Sub
-
-    Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
-        For Each r As DataGridViewRow In dgv1.Rows
-            If Not r.Cells(1).ReadOnly Then
-                r.Cells(2).Value = Format((dgv1.Rows(dgv1.Rows.Count - 1).Cells(2).Value - dgv1.Rows(0).Cells(2).Value) * (r.Index - dgv1.Rows(0).Index) / (dgv1.Rows(dgv1.Rows.Count - 1).Index - dgv1.Rows(0).Index) + dgv1.Rows(0).Cells(2).Value, form.FlowsheetOptions.NumberFormat)
-            End If
-        Next
     End Sub
 
     Private Sub dgv1_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgv1.CellValidating
@@ -154,7 +140,7 @@ Public Class EditingForm_Column_Stages
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         For Each r As DataGridViewRow In dgv1.Rows
-            r.Cells(3).Value = Double.Parse(tbGlobalEff.Text)
+            r.Cells(2).Value = Double.Parse(tbGlobalEff.Text)
         Next
     End Sub
 End Class

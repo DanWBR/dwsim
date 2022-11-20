@@ -129,17 +129,11 @@
   <data name="ToolStripButton3.ToolTipText" xml:space="preserve">
     <value>Reset Efficiencies to Default</value>
   </data>
-  <data name="ToolStripButton4.ToolTipText" xml:space="preserve">
-    <value>Estimate Stage Pressures by Interpolation</value>
-  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Pressure</value>
   </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Efficiency</value>

@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Filter
             Me.Description = "Solids Filter"
+            EmbeddedResourceIconName = "filter.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

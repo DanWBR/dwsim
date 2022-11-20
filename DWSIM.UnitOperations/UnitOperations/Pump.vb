@@ -196,7 +196,6 @@ Namespace UnitOperations
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
         Property PumpType As String = ""
-        Property PumpDB As String = ""
         Property ImpellerDiameter As Double = 200
         Property ImpellerSpeed As Double = 1450
         Property DiameterUnit As String = "mm"
@@ -419,6 +418,8 @@ Namespace UnitOperations
             End Set
         End Property
 
+        Public Property Head As Double
+
         Sub CreateCurves()
 
             If Not Me.Curves.ContainsKey("NPSH") Then
@@ -441,17 +442,7 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
-            Select Case CalcMode
-
-                Case CalculationMode.Curves, CalculationMode.Delta_P, CalculationMode.OutletPressure
-
-                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
-
-                Case Else
-
-                    Calculate()
-
-            End Select
+            Calculate()
 
         End Sub
 
@@ -512,10 +503,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("• Outlet temperature: PH Flash.")
 
             If args Is Nothing Then
-                If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                    'Call function to calculate flowsheet
-                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow4"))
-                ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                     'Call function to calculate flowsheet
                     Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
                 ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
@@ -529,7 +517,7 @@ Namespace UnitOperations
             If args Is Nothing Then
                 msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
                 msout = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                esin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                esin = GetInletEnergyStream(1)
             Else
                 msin = args(0)
                 msout = args(1)
@@ -554,7 +542,7 @@ Namespace UnitOperations
             If qli = 0.0 Then
                 DeltaT = 0.0
                 DeltaQ = 0.0
-                If CalcMode <> CalculationMode.EnergyStream Then
+                If CalcMode <> CalculationMode.EnergyStream And esin IsNot Nothing Then
                     esin.EnergyFlow = 0.0
                     If args Is Nothing Then esin.GraphicObject.Calculated = True
                 End If
@@ -767,20 +755,24 @@ Namespace UnitOperations
 
                     Me.CurveFlow = qli
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.EnergyStream
 
                     Dim tmp As IFlashCalculationResult
 
                     'Corrente de EnergyFlow - pegar valor do DH
-                    With esin
-                        Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
-                    End With
+                    If esin IsNot Nothing Then
+                        With esin
+                            Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
+                        End With
+                    End If
 
                     H2 = Hi + Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi
                     CheckSpec(H2, False, "outlet enthalpy")
@@ -793,8 +785,17 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                    T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    If P2 / Pi > 10 Then
+                        Dim P2it As Double = Pi + DeltaP / 10.0
+                        While P2it <= P2
+                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2it, H2, Ti)
+                            T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                            P2it += DeltaP / 10.0
+                        End While
+                    Else
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+                        T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    End If
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
@@ -818,10 +819,12 @@ Namespace UnitOperations
 
                     Dim tmp As IFlashCalculationResult
 
-                    'Corrente de EnergyFlow - pegar valor do DH
-                    With esin
-                        .EnergyFlow = Me.DeltaQ
-                    End With
+                    If esin IsNot Nothing Then
+                        'Corrente de EnergyFlow - pegar valor do DH
+                        With esin
+                            .EnergyFlow = Me.DeltaQ
+                        End With
+                    End If
 
                     H2 = Hi + Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi
                     CheckSpec(H2, False, "outlet enthalpy")
@@ -834,8 +837,17 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                    T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    If P2 / Pi > 10 Then
+                        Dim P2it As Double = Pi + DeltaP / 10.0
+                        While P2it <= P2
+                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2it, H2, Ti)
+                            T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                            P2it += DeltaP / 10.0
+                        End While
+                    Else
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+                        T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    End If
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
@@ -867,8 +879,17 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                    T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    If P2 / Pi > 10 Then
+                        Dim P2it As Double = Pi + DeltaP / 10.0
+                        While P2it <= P2
+                            Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2it, H2, Ti)
+                            T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                            P2it += DeltaP / 10.0
+                        End While
+                    Else
+                        Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+                        T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    End If
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
@@ -887,11 +908,13 @@ Namespace UnitOperations
                         Me.NPSH = Double.PositiveInfinity
                     End Try
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            If args Is Nothing Then .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.OutletPressure
 
@@ -910,8 +933,17 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
-                    T2 = tmp.CalculatedTemperature
+                    If P2 / Pi > 10 Then
+                        Dim P2it As Double = Pi + DeltaP / 10.0
+                        While P2it <= P2
+                            Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2it, H2, Ti)
+                            T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                            P2it += DeltaP / 10.0
+                        End While
+                    Else
+                        Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+                        T2 = tmp.CalculatedTemperature.GetValueOrDefault
+                    End If
                     CheckSpec(T2, True, "outlet temperature")
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
@@ -929,13 +961,17 @@ Namespace UnitOperations
                         Me.NPSH = Double.PositiveInfinity
                     End Try
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            If args Is Nothing Then .GraphicObject.Calculated = True
+                        End With
+                    End If
 
             End Select
+
+            Head = (P2 - Pi) / (9.81 * rho_li)
 
             OutletTemperature = T2
 
@@ -949,6 +985,7 @@ Namespace UnitOperations
 
                 'Atribuir valores a corrente de materia conectada a jusante
                 With msout
+                    .AtEquilibrium = False
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
@@ -1041,6 +1078,8 @@ Namespace UnitOperations
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.NPSH.GetValueOrDefault)
                     Case 5
                         value = Pout.ConvertFromSI(su.pressure)
+                    Case 6
+                        value = Head.ConvertFromSI(su.distance)
                 End Select
 
                 Return value
@@ -1054,7 +1093,7 @@ Namespace UnitOperations
             Dim proplist As New ArrayList
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
-            For i = 0 To 5
+            For i = 0 To 6
                 proplist.Add("PROP_PU_" + CStr(i))
             Next
             Return proplist.ToArray(GetType(System.String))
@@ -1113,6 +1152,8 @@ Namespace UnitOperations
                         value = su.distance
                     Case 5
                         value = su.pressure
+                    Case 6
+                        value = su.distance
                 End Select
 
                 Return value
@@ -1148,7 +1189,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_pump_32
+            Return My.Resources.pump
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
@@ -1224,6 +1265,7 @@ Namespace UnitOperations
             End Select
             str.AppendLine("    Temperature increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
             str.AppendLine("    Available NPSH: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.NPSH).ToString(numberformat, ci) & " " & su.distance)
+            str.AppendLine("    Head: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.Head).ToString(numberformat, ci) & " " & su.distance)
 
             Return str.ToString
 
@@ -1310,6 +1352,10 @@ Namespace UnitOperations
                             NPSH.GetValueOrDefault.ConvertFromSI(su.distance).ToString(nf),
                             su.distance}))
 
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                            New String() {"Head",
+                            Me.Head.ConvertFromSI(su.distance).ToString(nf),
+                            su.distance}))
             Return list
 
         End Function

@@ -81,7 +81,7 @@ Public Class FormSensAnalysis
         Me.cbObjIndVar2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
         Me.cbObjIndVar1.Items.Add(DWSIM.App.GetLocalString("ReactionProperty"))
         Me.cbObjIndVar2.Items.Add(DWSIM.App.GetLocalString("ReactionProperty"))
-        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj In form.SimulationObjects.Values.OrderBy(Function(o) o.GraphicObject.Tag)
             Me.cbObjIndVar1.Items.Add(obj.GraphicObject.Tag)
             Me.cbObjIndVar2.Items.Add(obj.GraphicObject.Tag)
         Next

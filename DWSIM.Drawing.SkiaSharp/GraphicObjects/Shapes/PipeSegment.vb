@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Pipe
             Me.Description = "Pipe Segment"
+            EmbeddedResourceIconName = "pipe_segment.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -161,7 +162,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'Gas/ Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

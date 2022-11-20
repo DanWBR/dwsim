@@ -185,7 +185,7 @@ Public Class FormReacKinetic
 
     End Sub
 
-    Private Sub KryptonDataGridView1_CellValidated(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellValueChanged
+    Private Sub KryptonDataGridView1_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellValueChanged
 
         If e.ColumnIndex = 4 Then
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
@@ -244,7 +244,7 @@ Public Class FormReacKinetic
                         gp += Math.Abs(Convert.ToDouble(row.Cells(5).Value)) * fc.Options.SelectedComponents(row.Cells(8).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(8).Value).Molar_Weight
                     End If
                 Else
-                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(6).Value).Formula & " + "
+                    eq += "[ERROR]" & fc.Options.SelectedComponents(row.Cells(8).Value).Formula & " + "
                 End If
             Next
             eq = eq.Remove(eq.Length - 2, 2)

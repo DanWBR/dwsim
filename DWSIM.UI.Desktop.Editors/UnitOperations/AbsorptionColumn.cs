@@ -172,14 +172,6 @@ namespace DWSIM.UI.Desktop.Editors
                                                        if (s.IsValidDouble(arg11.Text))
                                                        {
                                                            stage.P = cv.ConvertToSI(su.pressure, Double.Parse(arg11.Text));
-                                                           if (column.Stages.IndexOf(stage) == 0)
-                                                           {
-                                                               column.CondenserPressure = stage.P;
-                                                           }
-                                                           else if (column.Stages.IndexOf(stage) == column.Stages.Count - 1)
-                                                           {
-                                                               column.ReboilerPressure = stage.P;
-                                                           }
                                                        }
                                                    }));
                 }
@@ -380,6 +372,10 @@ namespace DWSIM.UI.Desktop.Editors
                     column.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
                 }
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
+
+            s.CreateAndAddCheckBoxRow(container, "Generate Convergence Report", column.CreateSolverConvergengeReport, (chk, e) => {
+                column.CreateSolverConvergengeReport = chk.Checked.GetValueOrDefault();
+            });
 
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);

@@ -13,7 +13,7 @@ namespace DWSIM.Tests
         static void Main(string[] args)
         {
 
-            DWSIM.Automation.Automation interf = new DWSIM.Automation.Automation();
+            var interf = new DWSIM.Automation.Automation3();
 
             var samples = Directory.EnumerateFiles("samples", "*.dwxm*", SearchOption.TopDirectoryOnly).OrderBy(x => x).ToList();
             var fossee = Directory.EnumerateFiles("tests", "*.dwxm*", SearchOption.TopDirectoryOnly).OrderBy(x => x).ToList();
@@ -43,7 +43,7 @@ namespace DWSIM.Tests
             Console.ReadKey();
         }
 
-        static void RunTests(List<string> filelist, DWSIM.Automation.Automation interf)
+        static void RunTests(List<string> filelist, DWSIM.Automation.Automation3 interf)
         {
 
             TimeSpan totaltime;
@@ -84,7 +84,7 @@ namespace DWSIM.Tests
                     Console.WriteLine("[" + i + "/" + totaltests + "] " + "Running '" + Path.GetFileNameWithoutExtension(s) + "'...");
                     Console.WriteLine();
 
-                    errors = interf.CalculateFlowsheet2(sim);
+                    errors = interf.CalculateFlowsheet4(sim);
 
                     if (errors.Count > 0)
                     {
@@ -136,8 +136,8 @@ namespace DWSIM.Tests
                 Console.WriteLine();
             }
 
-            //Console.WriteLine("Press Any Key to Continue...");
-            //Console.ReadKey();
+            Console.WriteLine("Press Any Key to Continue...");
+            Console.ReadKey();
 
         }
 

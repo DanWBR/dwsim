@@ -31,8 +31,8 @@ Partial Class Form_CapeOpenSelector
         '
         'ListBox1
         '
-        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.FormattingEnabled = True
+        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.Name = "ListBox1"
         '
         'Label1
@@ -130,7 +130,7 @@ Partial Class Form_CapeOpenSelector
         'Form_CapeOpenSelector
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtAbout)
         Me.Controls.Add(Me.txtDesc)

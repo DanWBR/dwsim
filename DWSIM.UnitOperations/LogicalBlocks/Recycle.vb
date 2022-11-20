@@ -238,6 +238,24 @@ Namespace SpecialOps
 
         End Sub
 
+        Public Overrides Sub RunDynamicModel()
+
+            Dim msfrom, msto As MaterialStream
+            msfrom = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+
+            If Not msfrom.Calculated And Not msfrom.AtEquilibrium Then
+                Throw New Exception(FlowSheet.GetTranslatedString("RecycleStreamNotCalculated"))
+            End If
+
+            msto = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            Dim prevspec = msto.SpecType
+            msto.Assign(msfrom)
+            msto.AssignProps(msfrom)
+            msto.SpecType = prevspec
+            msto.AtEquilibrium = False
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -293,9 +311,9 @@ Namespace SpecialOps
             Dim i As Integer
             For i = 0 To v1.Length - 1
                 If v1(i) <> 0.0# Then
-                    Werr += (v1(i) - v2(i)) / v1(i) * (v2(i) / Wsum2)
+                    Werr += (v1(i) - v2(i)) '/ v1(i) * (v2(i) / Wsum2)
                 Else
-                    Werr += (v1(i) - v2(i)) * (v2(i) / Wsum2)
+                    Werr += (v1(i) - v2(i)) '* (v2(i) / Wsum2)
                 End If
             Next
 
@@ -687,7 +705,7 @@ Namespace SpecialOps
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.lo_recy_32
+            Return My.Resources.recycle
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

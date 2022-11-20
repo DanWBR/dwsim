@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.RCT_Equilibrium
             Me.Description = "Equilibrium Reactor"
+            EmbeddedResourceIconName = "reactor_equilibrium.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)

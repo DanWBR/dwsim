@@ -1,10 +1,10 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SimulationObjectsPanel
 
     Inherits UserControl
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -21,7 +21,7 @@ Partial Class SimulationObjectsPanel
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SimulationObjectsPanel))
         Me.PanelStreams = New System.Windows.Forms.FlowLayoutPanel()
@@ -42,7 +42,7 @@ Partial Class SimulationObjectsPanel
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.PanelSolids = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.PanelCO = New System.Windows.Forms.FlowLayoutPanel()
+        Me.PanelCE = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.PanelUser = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage11 = New System.Windows.Forms.TabPage()
@@ -189,14 +189,14 @@ Partial Class SimulationObjectsPanel
         'TabPage9
         '
         resources.ApplyResources(Me.TabPage9, "TabPage9")
-        Me.TabPage9.Controls.Add(Me.PanelCO)
+        Me.TabPage9.Controls.Add(Me.PanelCE)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
-        'PanelCO
+        'PanelCE
         '
-        resources.ApplyResources(Me.PanelCO, "PanelCO")
-        Me.PanelCO.Name = "PanelCO"
+        resources.ApplyResources(Me.PanelCE, "PanelCE")
+        Me.PanelCE.Name = "PanelCE"
         '
         'TabPage10
         '
@@ -262,7 +262,6 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "SimulationObjectsPanel"
@@ -294,7 +293,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents TabPage8 As TabPage
-    Friend WithEvents TabPage9 As TabPage
     Friend WithEvents TabPage10 As TabPage
     Friend WithEvents TabPage11 As TabPage
     Friend WithEvents TabPage12 As TabPage
@@ -305,7 +303,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents PanelReactors As FlowLayoutPanel
     Friend WithEvents PanelColumns As FlowLayoutPanel
     Friend WithEvents PanelSolids As FlowLayoutPanel
-    Friend WithEvents PanelCO As FlowLayoutPanel
     Friend WithEvents PanelUser As FlowLayoutPanel
     Friend WithEvents PanelLogical As FlowLayoutPanel
     Friend WithEvents PanelOther As FlowLayoutPanel
@@ -313,4 +310,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents PanelIndicators As FlowLayoutPanel
     Friend WithEvents TabPage14 As TabPage
     Friend WithEvents PanelControllers As FlowLayoutPanel
+    Friend WithEvents TabPage9 As TabPage
+    Friend WithEvents PanelCE As FlowLayoutPanel
 End Class

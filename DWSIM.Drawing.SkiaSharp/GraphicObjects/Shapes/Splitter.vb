@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.NodeOut
             Me.Description = "Material Stream Splitter"
+            EmbeddedResourceIconName = "splitter.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -159,7 +160,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

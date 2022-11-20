@@ -3,6 +3,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports System.Drawing
 
 Public Class EditingForm_CustomUO
 
@@ -85,7 +87,7 @@ Public Class EditingForm_CustomUO
 
             'connections
 
-            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).ToArray
+            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).OrderBy(Function(m) m).ToArray
 
             cbInlet1.Items.Clear()
             cbInlet1.Items.AddRange(mslist)
@@ -126,7 +128,7 @@ Public Class EditingForm_CustomUO
             If .GraphicObject.OutputConnectors(5).IsAttached Then cbOutlet5.SelectedItem = .GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(6).IsAttached Then cbOutlet6.SelectedItem = .GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Tag
 
-            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).OrderBy(Function(m) m).ToArray
 
             cbEnergyE.Items.Clear()
             cbEnergyE.Items.AddRange(eslist)
@@ -603,28 +605,25 @@ Public Class EditingForm_CustomUO
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        With Me.OpenFileName
-            .CheckFileExists = True
-            .CheckPathExists = True
-            .Title = SimObject.FlowSheet.GetTranslatedString("Import")
-            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
-            .AddExtension = True
-            .Multiselect = False
-            .RestoreDirectory = True
-            Dim res As DialogResult = .ShowDialog
-            If res = Windows.Forms.DialogResult.OK Then
-                Try
-                    Using bmp = CType(System.Drawing.Bitmap.FromFile(OpenFileName.FileName), System.Drawing.Bitmap)
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Image files", New String() {"*.bmp", "*.jpg", "*.png", "*.gif"})})
+
+        If handler IsNot Nothing Then
+            Using str = handler.OpenRead()
+                Using bmp = Bitmap.FromStream(str)
+                    Try
                         Using img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
                             SimObject.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png)
                             MessageBox.Show("Image data read successfully.", "DWSIM", MessageBoxButtons.OK)
                         End Using
-                    End Using
-                Catch ex As Exception
-                    MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
-                End Try
-            End If
-        End With
+                    Catch ex As Exception
+                        MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
+                    End Try
+                End Using
+            End Using
+        End If
     End Sub
 
     Private Sub EditingForm_CustomUO_Shown(sender As Object, e As EventArgs) Handles Me.Shown

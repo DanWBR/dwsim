@@ -178,6 +178,22 @@ Public Class FormEditGraphicObject
 
                 End With
 
+            ElseIf gobj.ObjectType = ObjectType.GO_HTMLText Then
+
+                With Me.PGEx2
+
+                    .Item.Clear()
+
+                    .Item.Add(DWSIM.App.GetLocalString("Width"), gobj, "Width", False, "", DWSIM.App.GetLocalString("Width"), True)
+                    .Item(.Item.Count - 1).Tag2 = "Width"
+                    .Item.Add(DWSIM.App.GetLocalString("Height"), gobj, "Height", False, "", DWSIM.App.GetLocalString("Height"), True)
+                    .Item(.Item.Count - 1).Tag2 = "Height"
+
+                    .PropertySort = PropertySort.Categorized
+                    .ShowCustomProperties = True
+
+                End With
+
             ElseIf gobj.ObjectType = ObjectType.GO_Image Then
 
                 With Me.PGEx2
@@ -274,6 +290,8 @@ Public Class FormEditGraphicObject
                     .Item.Add("Object Name", sobj, "Tag", False, "", DWSIM.App.GetLocalString("Nomedoobjeto"), True)
                     .Item.Add("Font Style", sobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item(.Item.Count - 1).Tag2 = "Tag"
+                    .Item.Add("Override Color", sobj, "OverrideColors", False, "", "", True)
+                    .Item(.Item.Count - 1).Tag2 = "OverrideColors"
                     .Item.Add(DWSIM.App.GetLocalString("Cor"), sobj, "LineColor", False, "", "", True)
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item(.Item.Count - 1).Tag2 = "LineColor"

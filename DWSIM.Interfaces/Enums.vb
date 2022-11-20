@@ -290,6 +290,10 @@ Namespace Enums
 
         GibbsMinimizationExternalSolverConfigData = 30
 
+        PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases = 31
+
+        PVFlash_TryIdealCalcOnFailure = 32
+
     End Enum
 
     Public Enum FlashCalculationType
@@ -450,6 +454,9 @@ Namespace Enums
         Controllers = 13
         Switches = 14
         Inputs = 15
+        None = 16
+        CleanPowerSources = 17
+        Electrolyzers = 18
 
     End Enum
 
@@ -626,6 +633,23 @@ Namespace Enums.GraphicObjects
 
         Input
 
+        GO_HTMLText
+        GO_Button
+
+        AirCooler2
+        WindTurbine
+        HydroelectricTurbine
+        SolarPanel
+        PEMFuelCell
+        WaterElectrolyzer
+        RCT_GibbsReaktoro
+
+        EnergyMixer
+        Mixer
+        Splitter
+
+        Controller_Python
+
     End Enum
 
     Public Enum ShapeIcon
@@ -671,6 +695,21 @@ Namespace Enums.GraphicObjects
         Italic = 2
         BoldItalic = 3
     End Enum
+
+    Public Enum PointValueType
+
+        Temperature = 0
+        Pressure = 1
+        Flow = 2
+        EnergyFlow = 3
+        Concentration = 4
+        CompoundMassFlow = 5
+        CompoundMolarFlow = 6
+        CompoundMassFraction = 7
+        CompoundMolarFraction = 8
+
+    End Enum
+
 
 End Namespace
 

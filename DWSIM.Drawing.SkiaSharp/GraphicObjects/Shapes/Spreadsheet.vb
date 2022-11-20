@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.ExcelUO
             Me.Description = "Spreadsheet Block"
+            EmbeddedResourceIconName = "table.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -158,9 +159,7 @@ Namespace GraphicObjects.Shapes
             Dim trect As New SKRect(0, 0, 2, 2)
             tpaint.GetTextPath("SPR", 0, 0).GetBounds(trect)
 
-
             Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
-
 
             Select Case DrawMode
 
@@ -178,16 +177,25 @@ Namespace GraphicObjects.Shapes
                     End With
 
                     Dim gradPen As New SKPaint()
-                        With gradPen
+                    With gradPen
                         .Color = LineColor.WithAlpha(50)
                         .StrokeWidth = LineWidth
-                            .IsStroke = False
+                        .IsStroke = False
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
-                        canvas.DrawRoundRect(rect1, 2, 2, gradPen)
+                    canvas.DrawRoundRect(rect1, 2, 2, gradPen)
 
                     canvas.DrawRoundRect(rect1, 2, 2, myPen2)
+
+                    Dim ax, ay As Integer
+                    ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
+                    ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+
+                    Using New SKAutoCanvasRestore(canvas)
+                        StraightCanvas(canvas)
+                        canvas.DrawText("SPR", ax, ay, tpaint)
+                    End Using
 
                 Case 1
 
@@ -211,9 +219,18 @@ Namespace GraphicObjects.Shapes
                         .Typeface = RegularTypeFace
                     End With
 
+                    Dim ax, ay As Integer
+                    ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
+                    ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+
+                    Using New SKAutoCanvasRestore(canvas)
+                        StraightCanvas(canvas)
+                        canvas.DrawText("SPR", ax, ay, tpaint)
+                    End Using
+
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 
@@ -228,10 +245,6 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
 
             End Select
-
-            Dim ax, ay As Integer
-            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
-            ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
         End Sub
 

@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release\WeifenLuo.WinFormsUI.Docking.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>

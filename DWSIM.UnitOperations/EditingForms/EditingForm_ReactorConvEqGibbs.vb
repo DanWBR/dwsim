@@ -86,7 +86,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             'connections
 
-            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).ToArray
+            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).OrderBy(Function(m) m).ToArray
 
             cbInlet1.Items.Clear()
             cbInlet1.Items.AddRange(mslist)
@@ -101,7 +101,7 @@ Public Class EditingForm_ReactorConvEqGibbs
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(1).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
 
-            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).OrderBy(Function(m) m).ToArray()
 
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
@@ -136,6 +136,12 @@ Public Class EditingForm_ReactorConvEqGibbs
             tbPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf)
 
             If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
+
+                If tabstrip1.TabPages.Contains(TabPage2) Then
+                    tabstrip1.TabPages.Remove(TabPage2)
+                End If
+
+                chkGibbsUseAlternSolver.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod
 
                 cbReacSet.Enabled = False
 
@@ -196,6 +202,10 @@ Public Class EditingForm_ReactorConvEqGibbs
                 Else
                     cbExternalSolver.SelectedIndex = 0
                 End If
+
+                chkGibbsUseIPOPT.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver
+
+                cbReactivePhaseBehavior.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).ReactivePhaseBehavior
 
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
@@ -306,7 +316,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             gridConversions.Rows.Clear()
             For Each dbl As KeyValuePair(Of String, Double) In .ComponentConversions
-                If dbl.Value > 0.0# And dbl.Value <= 1.0 Then
+                If dbl.Value > 0.0# And Not Double.IsInfinity(dbl.Value) Then
                     gridConversions.Rows.Add(New Object() {dbl.Key, Format(dbl.Value * 100, nf)})
                 End If
             Next
@@ -732,6 +742,24 @@ Public Class EditingForm_ReactorConvEqGibbs
                 Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
         If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
             SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
+        End If
+    End Sub
+
+    Private Sub chkGibbsUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseIPOPT.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver = chkGibbsUseIPOPT.Checked
+        End If
+    End Sub
+
+    Private Sub chkGibbsUseAlternSolver_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseAlternSolver.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod = chkGibbsUseAlternSolver.Checked
+        End If
+    End Sub
+
+    Private Sub cbReactivePhaseBehavior_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbReactivePhaseBehavior.SelectedIndexChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).ReactivePhaseBehavior = cbReactivePhaseBehavior.SelectedIndex
         End If
     End Sub
 End Class

@@ -37,6 +37,8 @@ Namespace PropertyPackages.Auxiliary
         <FieldHidden()> Public B21 As Double = 0
         <FieldHidden()> Public C12 As Double = 0
         <FieldHidden()> Public C21 As Double = 0
+        <FieldHidden()> Public Name1 As String = ""
+        <FieldHidden()> Public Name2 As String = ""
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
 
@@ -50,6 +52,8 @@ Namespace PropertyPackages.Auxiliary
                 .B21 = Me.B21
                 .C12 = Me.C12
                 .C21 = Me.C21
+                .Name1 = Name1
+                .Name2 = Name2
                 .comment = Me.comment
             End With
             Return newclass
@@ -219,6 +223,17 @@ Namespace PropertyPackages.Auxiliary
             uniquacipc2 = Nothing
             fh1 = Nothing
 
+            Dim pars = New ChemSepIPDReader().ReadUNIQUACIPD()
+
+            For Each IP In pars
+                If Not Me.InteractionParameters.ContainsKey(IP.Name1) Then
+                    Me.InteractionParameters.Add(IP.Name1, New Dictionary(Of String, UNIQUAC_IPData))
+                    Me.InteractionParameters(IP.Name1).Add(IP.Name2, IP)
+                ElseIf Not Me.InteractionParameters(IP.Name1).ContainsKey(IP.Name2) Then
+                    Me.InteractionParameters(IP.Name1).Add(IP.Name2, IP)
+                End If
+            Next
+
         End Sub
 
         Function GAMMA(ByVal T As Double, ByVal Vx As Double(), ByVal Vids As String(), ByVal VQ As Double(), ByVal VR As Double(), ByVal index As Integer)
@@ -353,6 +368,15 @@ Namespace PropertyPackages.Auxiliary
                                     c21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).C12
                                 End If
                             End If
+                        End If
+                    ElseIf Me.InteractionParameters.ContainsKey(Vids(j)) Then
+                        If Me.InteractionParameters(Vids(j)).ContainsKey(Vids(i)) Then
+                            a12(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).A21
+                            a21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).A12
+                            b12(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).B21
+                            b21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).B12
+                            c12(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).C21
+                            c21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).C12
                         End If
                     End If
                     j = j + 1

@@ -35,7 +35,7 @@ Partial Class ListItem
         Me.Image.Margin = New System.Windows.Forms.Padding(0)
         Me.Image.Name = "Image"
         Me.Image.Size = New System.Drawing.Size(32, 32)
-        Me.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Image.TabIndex = 0
         Me.Image.TabStop = False
         '
@@ -47,7 +47,7 @@ Partial Class ListItem
         Me.lblName.Location = New System.Drawing.Point(6, 44)
         Me.lblName.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(120, 24)
+        Me.lblName.Size = New System.Drawing.Size(120, 31)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Label1"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter

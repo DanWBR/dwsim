@@ -239,6 +239,8 @@ Namespace UnitOperations
             End If
             txtcode += Me.ScriptText
 
+            FlowSheet.PythonPreprocessor?.Invoke(txtcode)
+
             If ExecutionEngine = PythonExecutionEngine.IronPython Then
 
                 engine = IronPython.Hosting.Python.CreateEngine()
@@ -305,8 +307,7 @@ Namespace UnitOperations
 
                     Try
 
-                        Dim sys As Object = PythonEngine.ImportModule("sys")
-
+                        Dim sys As Object = Py.Import("sys")
                         Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
                         PythonEngine.RunSimpleString(codeToRedirectOutput)
 
@@ -342,9 +343,11 @@ Namespace UnitOperations
                         If Not ies1 Is Nothing Then locals.SetItem("ies1", ies1.ToPython)
                         If Not oes1 Is Nothing Then locals.SetItem("oes1", oes1.ToPython)
 
-                        PythonEngine.Exec(txtcode, Nothing, locals.Handle)
+                        PythonEngine.Exec(txtcode, Nothing, locals)
 
-                        FlowSheet.ShowMessage(sys.stdout.getvalue().ToString(), IFlowsheet.MessageType.Information)
+                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                            FlowSheet.ShowMessage(sys.stdout.getvalue().ToString(), IFlowsheet.MessageType.Information)
+                        End If
 
                         OutputVariables.Clear()
                         Dim i As Integer = 0
@@ -546,7 +549,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_custom_32
+            Return My.Resources.python_script
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

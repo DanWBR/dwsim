@@ -105,7 +105,7 @@ Namespace GraphicObjects
             If Not SelectedObject Is Nothing Then
                 Using aPen As New SKPaint()
                     With aPen
-                        .Color = SKColors.DarkGreen.WithAlpha(200)
+                        .Color = SKColors.Green.WithAlpha(100)
                         .StrokeWidth = 0.5
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias

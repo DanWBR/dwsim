@@ -67,6 +67,19 @@ Public Class FlowsheetSurfaceControl
 
     Private Sub FlowsheetSurfaceControl_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Me.MouseDoubleClick
 
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
+            If FlowsheetObject.BidirectionalSolver.Activated Then
+                FlowsheetObject.BidirectionalSolver.ObjectDoubleClickAction(sender, e)
+                Exit Sub
+            End If
+        End If
+
+        DoubleClickHandler(sender, e)
+
+    End Sub
+
+    Public Sub DoubleClickHandler(sender As Object, e As MouseEventArgs)
+
         Dim obj = FlowsheetSurface.SelectedObject
 
         If (obj Is Nothing) Then
@@ -80,6 +93,16 @@ Public Class FlowsheetSurfaceControl
         Else
 
             Select Case Me.FlowsheetSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_Button
+                    Dim btn = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Shapes.ButtonGraphic)
+                    Dim f As New FormEditFlowsheetButton() With {.Flowsheet = FlowsheetObject, .ButtonObject = btn}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_HTMLText
+                    Dim rtg = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.HTMLTextGraphic)
+                    Dim f As New FormHTMLEditor()
+                    f.Editor1.Html = rtg.Text
+                    f.ShowDialog(Me)
+                    rtg.Text = f.Editor1.Html
                 Case ObjectType.GO_Table
                     Dim f As New FormConfigurePropertyTable() With {.Table = FlowsheetSurface.SelectedObject}
                     f.ShowDialog(Me)
@@ -159,6 +182,7 @@ Public Class FlowsheetSurfaceControl
 
         End If
 
+
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
@@ -172,6 +196,20 @@ Public Class FlowsheetSurfaceControl
 #Region "Events"
 
     Public Sub FlowsheetDesignSurface_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
+
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
+            If FlowsheetObject.BidirectionalSolver.Activated Then
+                FlowsheetObject.BidirectionalSolver.ObjectClickAction(sender, e)
+                Exit Sub
+            End If
+        End If
+
+        SingleClickHandler(sender, e)
+
+    End Sub
+
+    Public Sub SingleClickHandler(sender As Object, e As MouseEventArgs)
+
 
         If e.Button = Windows.Forms.MouseButtons.Left Then
 
@@ -233,6 +271,7 @@ Public Class FlowsheetSurfaceControl
 
         RaiseEvent ObjectSelected(FlowsheetObject)
 
+
     End Sub
 
     Private Sub FlowsheetDesignSurface_DragDrop(sender As Object, e As DragEventArgs) Handles Me.DragDrop
@@ -248,13 +287,15 @@ Public Class FlowsheetSurfaceControl
             t = obj(0)
             c = obj(1)
 
+            If c = SimulationObjectClass.None Then Exit Sub
+
             Console.WriteLine(t.Name)
 
             Dim pt = PointToClient(New Point(e.X, e.Y))
 
             If t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
 
-                FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c)
+                FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c, True)
 
             Else
 

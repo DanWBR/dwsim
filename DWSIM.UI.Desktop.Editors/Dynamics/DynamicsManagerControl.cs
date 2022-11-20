@@ -994,26 +994,26 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.CreateAndAddLabelAndControlRow("Integration Step (ms)", dtp2);
 
-            layout.CreateAndAddNumericEditorRow("Real-Time Step (ms)", integ.RealTimeStepMs, 1, 10000, 0, (s, e) =>
+            layout.CreateAndAddNumericEditorRow2("Real-Time Step (ms)", integ.RealTimeStepMs, 1, 10000, 0, (s, e) =>
             {
-                integ.RealTimeStepMs = (int)s.Value;
+                integ.RealTimeStepMs = (int)s.Text.ToDoubleFromCurrent();
             });
 
             layout.CreateAndAddLabelRow("Calculation Rates");
 
-            layout.CreateAndAddNumericEditorRow("Equilibrium Flash", integ.CalculationRateEquilibrium, 1, 100, 0, (s, e) =>
+            layout.CreateAndAddNumericEditorRow2("Equilibrium Flash", integ.CalculationRateEquilibrium, 1, 100, 0, (s, e) =>
             {
-                integ.CalculationRateEquilibrium = (int)s.Value;
+                integ.CalculationRateEquilibrium = (int)s.Text.ToDoubleFromCurrent();
             });
 
-            layout.CreateAndAddNumericEditorRow("Pressure-Flow Relations", integ.CalculationRatePressureFlow, 1, 100, 0, (s, e) =>
+            layout.CreateAndAddNumericEditorRow2("Pressure-Flow Relations", integ.CalculationRatePressureFlow, 1, 100, 0, (s, e) =>
             {
-                integ.CalculationRatePressureFlow = (int)s.Value;
+                integ.CalculationRatePressureFlow = (int)s.Text.ToDoubleFromCurrent();
             });
 
-            layout.CreateAndAddNumericEditorRow("Controller Updates", integ.CalculationRateControl, 1, 100, 0, (s, e) =>
+            layout.CreateAndAddNumericEditorRow2("Controller Updates", integ.CalculationRateControl, 1, 100, 0, (s, e) =>
             {
-                integ.CalculationRateControl = (int)s.Value;
+                integ.CalculationRateControl = (int)s.Text.ToDoubleFromCurrent();
             });
 
             layout.Padding = new Padding(10, 10, page.Width / 2, 10);

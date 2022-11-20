@@ -101,6 +101,10 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CompoundSeparator
 
+        Public Property EmbeddedImageData As String = ""
+
+        Public Property UseEmbeddedImage As Boolean = False
+
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Separators
 
         Protected m_ei As Double
@@ -336,7 +340,8 @@ Namespace UnitOperations
                 outstr1.PropertyPackage.CurrentMaterialStream = outstr1
                 outstr1.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                 IObj?.SetCurrent()
-                outstr1.Calculate(False, True)
+                outstr1.AtEquilibrium = False
+                outstr1.Calculate(True, True)
                 Ho1 = outstr1.Phases(0).Properties.enthalpy.GetValueOrDefault
             End If
 
@@ -344,7 +349,8 @@ Namespace UnitOperations
                 outstr2.PropertyPackage.CurrentMaterialStream = outstr2
                 outstr2.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                 IObj?.SetCurrent()
-                outstr2.Calculate(False, True)
+                outstr2.AtEquilibrium = False
+                outstr2.Calculate(True, True)
                 Ho2 = outstr2.Phases(0).Properties.enthalpy.GetValueOrDefault
             End If
 
@@ -356,10 +362,12 @@ Namespace UnitOperations
 
             'update energy stream power value
 
-            With DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name), Streams.EnergyStream)
-                .EnergyFlow = EnergyImb
-                .GraphicObject.Calculated = True
-            End With
+            If GetEnergyStream() IsNot Nothing Then
+                With GetEnergyStream()
+                    .EnergyFlow = EnergyImb
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
             IObj?.Close()
 
@@ -587,7 +595,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_compsep_32
+            Return My.Resources.component_separator
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

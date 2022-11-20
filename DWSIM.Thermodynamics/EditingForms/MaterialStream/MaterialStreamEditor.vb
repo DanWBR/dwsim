@@ -519,7 +519,6 @@ Public Class MaterialStreamEditor
 
     End Sub
 
-
     Sub PopulatePropGrid(grid As DataGridView, p As Interfaces.IPhase)
 
         grid.ReadOnly = True
@@ -691,7 +690,7 @@ Public Class MaterialStreamEditor
 
                 End If
 
-                If MatStream.PropertyPackage.IsElectrolytePP Then
+                If MatStream.PropertyPackage IsNot Nothing AndAlso MatStream.PropertyPackage.IsElectrolytePP Then
 
                     refval = MatStream.Phases(3).Properties.pH.GetValueOrDefault
                     .Add(New Object() {"pH", refval, ""})
@@ -1240,13 +1239,16 @@ Public Class MaterialStreamEditor
             propname = "PROP_MS_27"
         End If
 
-        MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
-                                                                .ObjID = MatStream.Name,
-                                                                .OldValue = oldvalue,
-                                                                .NewValue = newvalue,
-                                                                .PropertyName = propname,
-                                                                .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
-                                                                .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
+        Try
+            MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
+                                                            .ObjID = MatStream.Name,
+                                                            .OldValue = oldvalue,
+                                                            .NewValue = newvalue,
+                                                            .PropertyName = propname,
+                                                            .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
+                                                            .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
+        Catch ex As Exception
+        End Try
 
         RequestCalc()
 
@@ -1537,7 +1539,7 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub gridInputComposition_KeyDown(sender As Object, e As KeyEventArgs) Handles gridInputComposition.KeyDown
-        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition)
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition, False)
     End Sub
 
     Private Sub rbSpecVapor_CheckedChanged(sender As Object, e As EventArgs)

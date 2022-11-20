@@ -28,198 +28,193 @@ Namespace Databases
 
     <System.Serializable()> Public Class PumpDB
 
-        Public Shared Sub CreateNew(ByVal path As String, ByVal TopNode As String)
+        Public Shared Sub AddPump(ByVal Pump As UnitOperations.Pump, xmlstream As Stream, ByVal replace As Boolean)
 
-            Dim writer As New XmlTextWriter(path, Nothing)
+            If xmlstream.Length = 0 Then
+                Dim stream2 As New MemoryStream
+                Using writer As New XmlTextWriter(stream2, Text.Encoding.UTF8)
+                    With writer
+                        .Formatting = Formatting.Indented
+                        .WriteStartDocument()
+                        .WriteStartElement("Pumps")
+                        .WriteEndElement()
+                        .WriteEndDocument()
+                        .Flush()
+                    End With
+                    stream2.Position = 0
+                    stream2.CopyTo(xmlstream)
+                End Using
+            End If
 
-            With writer
-                .Formatting = Formatting.Indented
-                .WriteStartDocument()
-                .WriteStartElement(TopNode)
-                .WriteEndElement()
-                .WriteEndDocument()
-                .Flush()
-                .Close()
-            End With
-
-        End Sub
-
-        Public Shared Sub AddPump(ByVal Pump As UnitOperations.Pump, ByVal xmlpath As String, ByVal replace As Boolean)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
             Dim x, y As ArrayList
             Dim xv, yv As Double
 
+
+            xmlstream.Position = 0
+
             Dim xmldoc As XmlDocument
-            Dim reader As XmlReader = XmlReader.Create(xmlpath)
-            Try
-                reader.Read()
-            Catch ex As Exception
-                reader.Close()
-                CreateNew(xmlpath, "Pumps")
-                reader = XmlReader.Create(xmlpath)
-                reader.Read()
-            End Try
 
-            xmldoc = New XmlDocument
-            xmldoc.Load(reader)
-            reader.Close()
-            reader = Nothing
+            Using reader = XmlReader.Create(xmlstream)
 
+                xmldoc = New XmlDocument()
+                xmldoc.Load(reader)
 
-            Dim newnode As XmlNode = xmldoc.CreateNode(XmlNodeType.Element, Pump.PumpType, "")
-            With newnode
-                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Speed", "")).InnerText = Pump.ImpellerSpeed.ToString(nf)
-                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Diameter", "")).InnerText = Pump.ImpellerDiameter.ToString(nf)
-                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DiameterUnit", "")).InnerText = Pump.DiameterUnit
+                Dim newnode As XmlNode = xmldoc.CreateNode(XmlNodeType.Element, Pump.PumpType, "")
+                With newnode
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Speed", "")).InnerText = Pump.ImpellerSpeed.ToString(nf)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Diameter", "")).InnerText = Pump.ImpellerDiameter.ToString(nf)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DiameterUnit", "")).InnerText = Pump.DiameterUnit
 
-                If Pump.Curves("HEAD").Enabled Then
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
-                        .Attributes.Append(xmldoc.CreateAttribute("Y"))
-                        .Attributes("Y").Value = Pump.Curves("HEAD").yunit
-                        .Attributes.Append(xmldoc.CreateAttribute("X"))
-                        .Attributes("X").Value = Pump.Curves("HEAD").xunit
-                        .Attributes.Append(xmldoc.CreateAttribute("Type"))
-                        .Attributes("Type").Value = "HEAD"
+                    If Pump.Curves("HEAD").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = Pump.Curves("HEAD").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = Pump.Curves("HEAD").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "HEAD"
 
-                        x = Pump.Curves("HEAD").x
-                        y = Pump.Curves("HEAD").y
+                            x = Pump.Curves("HEAD").x
+                            y = Pump.Curves("HEAD").y
 
-                        For i = 0 To x.Count - 1
-                            If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                                xv = x(i)
-                                yv = y(i)
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
-                            End If
-                        Next
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
 
-                    End With
+                        End With
+                    End If
+
+                    If Pump.Curves("POWER").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = Pump.Curves("POWER").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = Pump.Curves("POWER").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "POWER"
+
+                            x = Pump.Curves("POWER").x
+                            y = Pump.Curves("POWER").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                    If Pump.Curves("EFF").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = Pump.Curves("EFF").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = Pump.Curves("EFF").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "EFF"
+
+                            x = Pump.Curves("EFF").x
+                            y = Pump.Curves("EFF").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                    If Pump.Curves("NPSH").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = Pump.Curves("NPSH").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = Pump.Curves("NPSH").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "NPSH"
+
+                            x = Pump.Curves("NPSH").x
+                            y = Pump.Curves("NPSH").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                    If Pump.Curves("SYSTEM").Enabled Then
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
+                            .Attributes.Append(xmldoc.CreateAttribute("Y"))
+                            .Attributes("Y").Value = Pump.Curves("SYSTEM").yunit
+                            .Attributes.Append(xmldoc.CreateAttribute("X"))
+                            .Attributes("X").Value = Pump.Curves("SYSTEM").xunit
+                            .Attributes.Append(xmldoc.CreateAttribute("Type"))
+                            .Attributes("Type").Value = "SYSTEM"
+
+                            x = Pump.Curves("SYSTEM").x
+                            y = Pump.Curves("SYSTEM").y
+
+                            For i = 0 To x.Count - 1
+                                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
+                                    xv = x(i)
+                                    yv = y(i)
+                                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
+                                    .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
+                                End If
+                            Next
+
+                        End With
+                    End If
+
+                End With
+
+                Dim OldNode As XmlNode = xmldoc.GetElementsByTagName(Pump.PumpType).ItemOf(0)
+                If IsNothing(OldNode) Then
+                    xmldoc.ChildNodes(1).AppendChild(newnode)
+                Else
+                    xmldoc.ChildNodes(1).ReplaceChild(newnode, OldNode)
                 End If
 
-                If Pump.Curves("POWER").Enabled Then
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
-                        .Attributes.Append(xmldoc.CreateAttribute("Y"))
-                        .Attributes("Y").Value = Pump.Curves("POWER").yunit
-                        .Attributes.Append(xmldoc.CreateAttribute("X"))
-                        .Attributes("X").Value = Pump.Curves("POWER").xunit
-                        .Attributes.Append(xmldoc.CreateAttribute("Type"))
-                        .Attributes("Type").Value = "POWER"
+                xmldoc.Save(xmlstream)
 
-                        x = Pump.Curves("POWER").x
-                        y = Pump.Curves("POWER").y
-
-                        For i = 0 To x.Count - 1
-                            If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
-                                xv = x(i)
-                                yv = y(i)
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
-                            End If
-                        Next
-
-                    End With
-                End If
-
-                If Pump.Curves("EFF").Enabled Then
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
-                        .Attributes.Append(xmldoc.CreateAttribute("Y"))
-                        .Attributes("Y").Value = Pump.Curves("EFF").yunit
-                        .Attributes.Append(xmldoc.CreateAttribute("X"))
-                        .Attributes("X").Value = Pump.Curves("EFF").xunit
-                        .Attributes.Append(xmldoc.CreateAttribute("Type"))
-                        .Attributes("Type").Value = "EFF"
-
-                        x = Pump.Curves("EFF").x
-                        y = Pump.Curves("EFF").y
-
-                        For i = 0 To x.Count - 1
-                            If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                                xv = x(i)
-                                yv = y(i)
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
-                            End If
-                        Next
-
-                    End With
-                End If
-
-                If Pump.Curves("NPSH").Enabled Then
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
-                        .Attributes.Append(xmldoc.CreateAttribute("Y"))
-                        .Attributes("Y").Value = Pump.Curves("NPSH").yunit
-                        .Attributes.Append(xmldoc.CreateAttribute("X"))
-                        .Attributes("X").Value = Pump.Curves("NPSH").xunit
-                        .Attributes.Append(xmldoc.CreateAttribute("Type"))
-                        .Attributes("Type").Value = "NPSH"
-
-                        x = Pump.Curves("NPSH").x
-                        y = Pump.Curves("NPSH").y
-
-                        For i = 0 To x.Count - 1
-                            If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                                xv = x(i)
-                                yv = y(i)
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
-                            End If
-                        Next
-
-                    End With
-                End If
-
-                If Pump.Curves("SYSTEM").Enabled Then
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Curve", ""))
-                        .Attributes.Append(xmldoc.CreateAttribute("Y"))
-                        .Attributes("Y").Value = Pump.Curves("SYSTEM").yunit
-                        .Attributes.Append(xmldoc.CreateAttribute("X"))
-                        .Attributes("X").Value = Pump.Curves("SYSTEM").xunit
-                        .Attributes.Append(xmldoc.CreateAttribute("Type"))
-                        .Attributes("Type").Value = "SYSTEM"
-
-                        x = Pump.Curves("SYSTEM").x
-                        y = Pump.Curves("SYSTEM").y
-
-                        For i = 0 To x.Count - 1
-                            If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                                xv = x(i)
-                                yv = y(i)
-                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Point", ""))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("X"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("X").Value = xv.ToString(nf)
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("Y"))
-                                .ChildNodes(.ChildNodes.Count - 1).Attributes("Y").Value = yv.ToString(nf)
-                            End If
-                        Next
-
-                    End With
-                End If
-
-            End With
-
-            Dim OldNode As XmlNode = xmldoc.GetElementsByTagName(Pump.PumpType).ItemOf(0)
-            If IsNothing(OldNode) Then
-                xmldoc.ChildNodes(1).AppendChild(newnode)
-            Else
-                xmldoc.ChildNodes(1).ReplaceChild(newnode, OldNode)
-            End If
-
-            xmldoc.Save(xmlpath)
-            xmldoc = Nothing
+            End Using
 
         End Sub
 
@@ -241,25 +236,25 @@ Namespace Databases
 
         End Sub
 
-        Public Shared Function ReadPumpTypes(ByVal xmlpath As String) As String()
+        Public Shared Function ReadPumpTypes(ByVal xmlstream As Stream) As String()
 
             Dim xmldoc As XmlDocument
-            Dim reader As XmlReader = XmlReader.Create(xmlpath)
-            reader.Read()
 
-            xmldoc = New XmlDocument
-            xmldoc.Load(reader)
+            Using reader As XmlReader = XmlReader.Create(xmlstream)
 
-            Dim PTa As New List(Of String)
+                reader.Read()
 
-            For Each node As XmlNode In xmldoc.ChildNodes(1)
-                PTa.Add(node.Name)
-            Next
+                xmldoc = New XmlDocument
+                xmldoc.Load(reader)
 
-            reader.Close()
-            reader = Nothing
+                Dim PTa As New List(Of String)
 
-            Return PTa.ToArray()
+                For Each node As XmlNode In xmldoc.ChildNodes(1)
+                    PTa.Add(node.Name)
+                Next
+                Return PTa.ToArray()
+
+            End Using
 
         End Function
         Public Shared Sub ReadPumpData(ByVal xmlpath As String, ByVal PumpType As String, ByVal Pump As UnitOperations.Pump)

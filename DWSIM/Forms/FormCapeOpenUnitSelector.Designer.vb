@@ -31,8 +31,8 @@ Partial Class FormCapeOpenUnitSelector
         '
         'ListBox1
         '
-        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.FormattingEnabled = True
+        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.Name = "ListBox1"
         '
         'Label1
@@ -131,7 +131,6 @@ Partial Class FormCapeOpenUnitSelector
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtAbout)
         Me.Controls.Add(Me.txtDesc)

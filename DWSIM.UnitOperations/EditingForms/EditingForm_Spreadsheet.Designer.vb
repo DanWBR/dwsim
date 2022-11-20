@@ -97,8 +97,11 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbEmbeddedFiles = New System.Windows.Forms.ComboBox()
+        Me.rbFileExternal = New System.Windows.Forms.RadioButton()
+        Me.rbFileEmbedded = New System.Windows.Forms.RadioButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TbFileName = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
@@ -111,6 +114,7 @@ Partial Class EditingForm_SpreadsheetUO
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -798,16 +802,57 @@ Partial Class EditingForm_SpreadsheetUO
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.BtnEdit)
-        Me.GroupBox2.Controls.Add(Me.BtnNew)
-        Me.GroupBox2.Controls.Add(Me.BtnSearch)
-        Me.GroupBox2.Controls.Add(Me.TbFileName)
-        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.cbEmbeddedFiles)
+        Me.GroupBox2.Controls.Add(Me.rbFileExternal)
+        Me.GroupBox2.Controls.Add(Me.rbFileEmbedded)
+        Me.GroupBox2.Controls.Add(Me.Panel1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'cbEmbeddedFiles
+        '
+        resources.ApplyResources(Me.cbEmbeddedFiles, "cbEmbeddedFiles")
+        Me.cbEmbeddedFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEmbeddedFiles.FormattingEnabled = True
+        Me.cbEmbeddedFiles.Name = "cbEmbeddedFiles"
+        Me.ToolTip1.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip2"))
+        '
+        'rbFileExternal
+        '
+        resources.ApplyResources(Me.rbFileExternal, "rbFileExternal")
+        Me.rbFileExternal.Name = "rbFileExternal"
+        Me.rbFileExternal.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip2"))
+        Me.rbFileExternal.UseVisualStyleBackColor = True
+        '
+        'rbFileEmbedded
+        '
+        resources.ApplyResources(Me.rbFileEmbedded, "rbFileEmbedded")
+        Me.rbFileEmbedded.Name = "rbFileEmbedded"
+        Me.rbFileEmbedded.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip2"))
+        Me.rbFileEmbedded.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.BtnEdit)
+        Me.Panel1.Controls.Add(Me.TbFileName)
+        Me.Panel1.Controls.Add(Me.BtnNew)
+        Me.Panel1.Controls.Add(Me.BtnSearch)
+        Me.Panel1.Name = "Panel1"
+        Me.ToolTipValues.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip2"))
         '
         'TbFileName
         '
@@ -817,14 +862,6 @@ Partial Class EditingForm_SpreadsheetUO
         Me.ToolTipValues.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip2"))
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip2"))
         '
         'OpenFileDialog1
         '
@@ -841,7 +878,7 @@ Partial Class EditingForm_SpreadsheetUO
         'EditingForm_SpreadsheetUO
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox1)
@@ -865,6 +902,8 @@ Partial Class EditingForm_SpreadsheetUO
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -924,7 +963,6 @@ Partial Class EditingForm_SpreadsheetUO
     Public WithEvents BtnNew As System.Windows.Forms.Button
     Public WithEvents BtnSearch As System.Windows.Forms.Button
     Public WithEvents TbFileName As System.Windows.Forms.TextBox
-    Public WithEvents Label5 As System.Windows.Forms.Label
     Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents TabControl1 As System.Windows.Forms.TabControl
     Public WithEvents TabPage1 As System.Windows.Forms.TabPage
@@ -938,4 +976,8 @@ Partial Class EditingForm_SpreadsheetUO
     Public WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Public WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Friend WithEvents cbEmbeddedFiles As ComboBox
+    Friend WithEvents rbFileExternal As RadioButton
+    Friend WithEvents rbFileEmbedded As RadioButton
+    Friend WithEvents Panel1 As Panel
 End Class

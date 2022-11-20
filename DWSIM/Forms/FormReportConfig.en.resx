@@ -187,12 +187,6 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Options - Material Streams</value>
   </data>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>XML File (.xml)|*.xml|Text File (.txt)|*.txt|Microsoft Excel Spreadsheet (.xlsx)|*.xlsx|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
-  </data>
-  <data name="SaveFileDialog1.Title" xml:space="preserve">
-    <value>Save Report Data</value>
-  </data>
   <data name="TreeViewObj.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w

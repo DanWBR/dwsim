@@ -3,6 +3,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Linq
 Imports System.Threading.Tasks
 Imports System.Text
+Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -43,6 +44,17 @@ Public Class FormWelcome
             Next
         End If
 
+        If Settings.DpiScale > 1.0 Then
+            lvlatest.SmallImageList = ImageList2
+            lvlatest.LargeImageList = ImageList2
+            lvsamples.SmallImageList = ImageList2
+            lvsamples.LargeImageList = ImageList2
+            lvlatestfolders.SmallImageList = ImageList2
+            lvlatestfolders.LargeImageList = ImageList2
+            FOSSEEList.SmallImageList = ImageList2
+            FOSSEEList.LargeImageList = ImageList2
+        End If
+
         existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderByDescending(Function(x) File.GetLastWriteTime(x)).ToList
 
         For Each f As String In existingfiles
@@ -54,14 +66,14 @@ Public Class FormWelcome
                     Case ".dwsim"
                         lvi.ImageIndex = 0
                     Case ".dwxml", ".dwxmz"
-                        lvi.ImageIndex = 1
+                        lvi.ImageIndex = 0
                     Case ".dwcsd", ".dwcsd2"
-                        lvi.ImageIndex = 2
+                        lvi.ImageIndex = 1
                     Case ".dwrsd", ".dwrsd2"
-                        lvi.ImageIndex = 3
+                        lvi.ImageIndex = 2
                 End Select
                 If Not Me.lvlatestfolders.Items.ContainsKey(Path.GetDirectoryName(f)) Then
-                    Me.lvlatestfolders.Items.Add(Path.GetDirectoryName(f), Path.GetDirectoryName(f), 4).Tag = Path.GetDirectoryName(f)
+                    Me.lvlatestfolders.Items.Add(Path.GetDirectoryName(f), Path.GetDirectoryName(f), 3).Tag = Path.GetDirectoryName(f)
                     Me.lvlatestfolders.Items(Me.lvlatestfolders.Items.Count - 1).ToolTipText = Path.GetDirectoryName(f)
                 End If
             End If
@@ -78,11 +90,11 @@ Public Class FormWelcome
                 Case ".dwsim"
                     lvi.ImageIndex = 0
                 Case ".dwxml", ".dwxmz"
-                    lvi.ImageIndex = 1
+                    lvi.ImageIndex = 0
                 Case ".dwcsd", ".dwcsd2"
-                    lvi.ImageIndex = 2
+                    lvi.ImageIndex = 1
                 Case ".dwrsd", ".dwrsd2"
-                    lvi.ImageIndex = 3
+                    lvi.ImageIndex = 2
             End Select
         Next
 
@@ -98,7 +110,7 @@ Public Class FormWelcome
                                                                                    Else
                                                                                        For Each item As FOSSEEFlowsheet In t.Result
                                                                                            fslist.Add(item.DownloadLink, item)
-                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 1) With {.Tag = item.DownloadLink})
+                                                                                           FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 0) With {.Tag = item.DownloadLink})
                                                                                            My.Application.MainWindowForm.FOSSEEList.Add(item)
                                                                                        Next
                                                                                        'Owner.UpdateFOSSEEList()
@@ -113,6 +125,8 @@ Public Class FormWelcome
         End If
 
         ExtensionMethods.ChangeDefaultFont(Me)
+
+        NewsViewer.Source = New Uri("https://www.patreon.com/dwsim/posts")
 
     End Sub
 
@@ -132,7 +146,7 @@ Public Class FormWelcome
         Call My.Application.MainWindowForm.LoadFileDialog()
     End Sub
 
-    Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
+    Public Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
         Me.Parent.Visible = False
         My.Application.MainWindowForm.PainelDeBoasvindasToolStripMenuItem.Checked = False
@@ -141,47 +155,39 @@ Public Class FormWelcome
 
         If File.Exists(lview.SelectedItems(0).Tag) Then
 
+            Dim handler = New WindowsFile(lview.SelectedItems(0).Tag)
+
             Dim floading As New FormLoadingSimulation
 
-            floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & lview.SelectedItems(0).Tag.ToString & ")"
+            floading.Text = DWSIM.App.GetLocalString("Loading") + " '" + Path.GetFileNameWithoutExtension(lview.SelectedItems(0).Tag.ToString) + "'..."
             floading.Show()
 
             Application.DoEvents()
 
-            My.Application.MainWindowForm.filename = lview.SelectedItems(0).Tag
+            'My.Application.MainWindowForm.filename = lview.SelectedItems(0).Tag
             Select Case Path.GetExtension(lview.SelectedItems(0).Tag).ToLower
                 Case ".dwxml"
-                    'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    My.Application.MainWindowForm.LoadXML(lview.SelectedItems(0).Tag, Sub(x)
-                                                                                          Me.Invoke(Sub()
-                                                                                                        floading.ProgressBar1.Value = x
-                                                                                                        floading.Label2.Text = x.ToString("N0") + "%"
-                                                                                                        floading.Refresh()
-                                                                                                    End Sub)
-                                                                                      End Sub)
+                    My.Application.MainWindowForm.LoadXML(handler, Sub(x)
+                                                                       Me.Invoke(Sub()
+                                                                                     floading.ProgressBar1.Value = x
+                                                                                     floading.Refresh()
+                                                                                 End Sub)
+                                                                   End Sub)
                 Case ".dwxmz"
-                    'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    My.Application.MainWindowForm.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag, Sub(x)
-                                                                                                       Me.Invoke(Sub()
-                                                                                                                     floading.ProgressBar1.Value = x
-                                                                                                                     floading.Label2.Text = x.ToString("N0") + "%"
-                                                                                                                     floading.Refresh()
-                                                                                                                 End Sub)
-                                                                                                   End Sub)
-                Case ".dwsim"
-                    'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
-                    'Application.DoEvents()
-                    'Application.DoEvents()
-                    'My.Application.MainWindowForm.LoadF(lview.SelectedItems(0).Tag)
+                    My.Application.MainWindowForm.LoadAndExtractXMLZIP(handler, Sub(x)
+                                                                                    Me.Invoke(Sub()
+                                                                                                  floading.ProgressBar1.Value = x
+                                                                                                  floading.Refresh()
+                                                                                              End Sub)
+                                                                                End Sub)
                 Case ".xml"
-                    'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    My.Application.MainWindowForm.LoadMobileXML(lview.SelectedItems(0).Tag)
+                    My.Application.MainWindowForm.LoadMobileXML(handler)
                 Case ".dwcsd"
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = My.Application.MainWindowForm
@@ -250,7 +256,6 @@ Public Class FormWelcome
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        My.Application.MainWindowForm.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
         Call My.Application.MainWindowForm.LoadFileDialog()
 
     End Sub
@@ -298,7 +303,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page")
+        Process.Start("https://dwsim.org")
     End Sub
 
     Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
@@ -310,7 +315,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Category:Tutorials")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Category:Tutorials")
     End Sub
 
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
@@ -331,15 +336,14 @@ Public Class FormWelcome
                 If MessageBox.Show(sb.ToString, "Open FOSSEE Flowsheet", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
                     Dim floading As New FormLoadingSimulation
                     Dim fdlding As New FormLoadingSimulation
-                    fdlding.Label1.Text = "Downloading file..." & vbCrLf & "(" & item.Title & ")"
+                    fdlding.Text = "Downloading file..." & " (" & item.Title & ")"
                     fdlding.Show()
                     Application.DoEvents()
                     Task.Factory.StartNew(Function()
                                               Return SharedClasses.FOSSEEFlowsheets.DownloadFlowsheet(item.DownloadLink, Sub(px)
                                                                                                                              Me.UIThread(Sub()
-                                                                                                                                             fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
+                                                                                                                                             fdlding.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
                                                                                                                                              fdlding.ProgressBar1.Value = px
-                                                                                                                                             fdlding.Label2.Text = px.ToString("N0") + "%"
                                                                                                                                              fdlding.Refresh()
                                                                                                                                          End Sub)
                                                                                                                          End Sub)
@@ -352,14 +356,13 @@ Public Class FormWelcome
                                                                              Me.UIThread(Sub()
                                                                                              Me.Parent.Visible = False
                                                                                              My.Application.MainWindowForm.PainelDeBoasvindasToolStripMenuItem.Checked = False
-                                                                                             floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
+                                                                                             floading.Text = DWSIM.App.GetLocalString("Loading") + " " + item.Title
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
                                                                                              Try
                                                                                                  My.Application.MainWindowForm.LoadXML2(xdoc, Sub(x)
                                                                                                                                                   Me.Invoke(Sub()
                                                                                                                                                                 floading.ProgressBar1.Value = x
-                                                                                                                                                                fdlding.Label2.Text = x.ToString("N0") + "%"
                                                                                                                                                                 fdlding.Refresh()
                                                                                                                                                             End Sub)
                                                                                                                                               End Sub)
@@ -433,7 +436,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
     End Sub
 
-    Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+    Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
@@ -445,10 +448,6 @@ Public Class FormWelcome
         Application.DoEvents()
         Me.Parent.Visible = False
         Call My.Application.MainWindowForm.LoadFileDialog()
-    End Sub
-
-    Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
-        Process.Start("https://www.patreon.com/join/dwsim?")
     End Sub
 
     Private Sub LinkLabel8_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel8.LinkClicked
@@ -466,7 +465,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel10_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel10.LinkClicked
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Tutorials")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Tutorials")
     End Sub
 
     Private Sub FormWelcome_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -488,14 +487,46 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel7_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel7.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-pro/")
+        Process.Start("https://simulate365.com/dwsim-pro/")
     End Sub
 
     Private Sub LinkLabel12_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel12.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/wiki/index.php?title=Literature")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Literature")
     End Sub
 
     Private Sub LinkLabel13_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel13.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/api_help60/html/R_Project_DWSIM_Class_Library_Documentation.htm")
+        Process.Start("https://dwsim.org/api_help/html/R_Project_DWSIM_Class_Library_Documentation.htm")
+    End Sub
+
+    Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
+        Process.Start("https://dwsim.org/index.php/dwsim-pro/")
+    End Sub
+
+    Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
+        Process.Start("https://dwsim.org/index.php/dwsim-social-responsibility-program/")
+    End Sub
+
+    Private Sub LinkLabel3_LinkClicked_2(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Application.DoEvents()
+        Application.DoEvents()
+        Me.Parent.Visible = False
+        Call My.Application.MainWindowForm.LoadFileDialog(True)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Process.Start("https://github.com/sponsors/DanWBR")
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Process.Start("https://www.patreon.com/join/dwsim?")
+    End Sub
+
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
+        Process.Start("https://www.buymeacoffee.com/dwsim")
+    End Sub
+
+    Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
+        Dim fqc As New FormCreateNewSolid()
+        fqc.ShowDialog(Me)
     End Sub
 End Class

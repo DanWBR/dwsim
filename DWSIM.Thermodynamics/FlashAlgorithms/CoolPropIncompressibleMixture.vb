@@ -86,12 +86,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim nsi = Array.IndexOf(spp.RET_VNAMES(), spp.SolventCompound)
             Dim xmax = spp.SolutionDataList(spp.SoluteName).xmax
 
-            Tmin = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMIN")
-            Tmax = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMAX")
-            Tmaxs = CoolProp.Props1SI(spp.SolventCompound, "TMAX")
-
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
+
+            Tmin = CoolProp.Props1SI(spp.GetCoolPropName(x), "T_FREEZE")
+            Tmax = CoolProp.Props1SI(spp.GetCoolPropName(x), "TMAX")
+            Tmaxs = CoolProp.Props1SI(spp.SolventCompound, "TMAX")
 
             Dim Vx = Vz.Clone
             Dim Vy = spp.RET_NullVector
@@ -193,12 +193,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim si = Array.IndexOf(spp.RET_VNAMES(), spp.SoluteCompound)
             Dim nsi = Array.IndexOf(spp.RET_VNAMES(), spp.SolventCompound)
 
-            Tmin = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMIN")
-            Tmax = CoolProp.Props1SI(spp.GetCoolPropName(0.0), "TMAX")
-            Tmaxs = CoolProp.Props1SI(spp.SolventCompound, "TMAX")
-
             Dim Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vz)
             Dim x = Vxw(si)
+
+            Tmin = CoolProp.Props1SI(spp.GetCoolPropName(x), "T_FREEZE")
+            Tmax = CoolProp.Props1SI(spp.GetCoolPropName(x), "TMAX")
+            Tmaxs = CoolProp.Props1SI(spp.SolventCompound, "TMAX")
 
             Dim Vx = Vz.Clone
             Dim Vy = spp.RET_NullVector

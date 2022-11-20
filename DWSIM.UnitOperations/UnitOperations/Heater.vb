@@ -154,11 +154,11 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Flow Conductance", "Flow Conductance (inverse of Resistance) of this Unit Operation.", 1, UnitOfMeasure.conductance)
-            AddDynamicProperty("Volume", "Heater Volume", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the volume content with information from the inlet stream, if the content is null.", 1, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Content", "Empties the volume content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Flow Conductance", "Flow Conductance (inverse of Resistance) of this Unit Operation.", 1, UnitOfMeasure.conductance, 1.0.GetType())
+            AddDynamicProperty("Volume", "Heater Volume", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the volume content with information from the inlet stream, if the content is null.", True, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Content", "Empties the volume content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -354,9 +354,7 @@ Namespace UnitOperations
                                 were the outlet stream enthalpy is calculated by an energy balance 
                                 through the heater.")
 
-            If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow2"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -368,7 +366,7 @@ Namespace UnitOperations
 
             msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             msout = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            esin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            esin = GetInletEnergyStream(1)
 
             msin.Validate()
 
@@ -426,11 +424,13 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.OutletTemperature
 
@@ -467,11 +467,13 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.TemperatureChange
 
@@ -509,11 +511,13 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.EnergyStream
 
@@ -523,7 +527,7 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add("<m>H_2 = \frac{Q}{W}\frac{\eta}{100}+H_1</m>")
 
-                    Me.DeltaQ = esin.EnergyFlow.GetValueOrDefault
+                    Me.DeltaQ = esin?.EnergyFlow.GetValueOrDefault
                     H2 = Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi + Hi
 
                     IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
@@ -597,11 +601,13 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
             End Select
 
@@ -610,6 +616,7 @@ Namespace UnitOperations
                 'Atribuir valores a corrente de materia conectada a jusante
                 Dim omstr As MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 With omstr
+                    .Clear()
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
@@ -732,7 +739,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_HT_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 4
+                    For i = 0 To 5
                         proplist.Add("PROP_HT_" + CStr(i))
                     Next
                 Case PropertyType.ALL
@@ -769,6 +776,8 @@ Namespace UnitOperations
                 Case 4
                     'PROP_HT_3	Outlet molar vapour fraction
                     Me.OutletVaporFraction = propval
+                Case 5
+                    Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
             End Select
             Return 1
         End Function
@@ -840,7 +849,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_heater_32
+            Return My.Resources.heater
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

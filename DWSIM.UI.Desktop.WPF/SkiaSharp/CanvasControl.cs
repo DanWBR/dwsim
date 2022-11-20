@@ -113,6 +113,9 @@ namespace DWSIM.UI.Desktop.WPF
                 height = (int)(ActualHeight * dpiY);
             }
 
+            if (width == 0) return;
+            if (height == 0) return;
+
             var info = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
 
             // reset the bitmap if the size has changed

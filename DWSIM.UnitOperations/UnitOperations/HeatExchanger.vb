@@ -316,15 +316,15 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Cold Fluid Flow Conductance", "Flow Conductance (inverse of Resistance).", 1, UnitOfMeasure.conductance)
-            AddDynamicProperty("Hot Fluid Flow Conductance", "Flow Conductance (inverse of Resistance) for the Hot Fluid.", 1, UnitOfMeasure.conductance)
-            AddDynamicProperty("Volume for Cold Fluid", "Available Volume for Cold Fluid", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Volume for Hot Fluid", "Available Volume for Cold Fluid", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Cold Side Pressure", "Dynamic Pressure for the Cold Fluid side.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Hot Side Pressure", "Dynamic Pressure for the Hot Fluid side.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Streams", "Initializes the volume contents with information from the inlet streams, if the content is null.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Contents", "Empties the volume contents on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Cold Fluid Flow Conductance", "Flow Conductance (inverse of Resistance).", 1, UnitOfMeasure.conductance, 1.0.GetType())
+            AddDynamicProperty("Hot Fluid Flow Conductance", "Flow Conductance (inverse of Resistance) for the Hot Fluid.", 1, UnitOfMeasure.conductance, 1.0.GetType())
+            AddDynamicProperty("Volume for Cold Fluid", "Available Volume for Cold Fluid", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Volume for Hot Fluid", "Available Volume for Cold Fluid", 1, UnitOfMeasure.volume, 1.0.GetType())
+            AddDynamicProperty("Cold Side Pressure", "Dynamic Pressure for the Cold Fluid side.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Hot Side Pressure", "Dynamic Pressure for the Hot Fluid side.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Streams", "Initializes the volume contents with information from the inlet streams, if the content is null.", False, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the volume contents on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -1284,7 +1284,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("The maximum theoretical heat exchange is calculated as the smallest value from")
 
             IObj?.Paragraphs.Add("<m>Q_{max,hot}=W_{hot}(H_{hot,in}-H_{hot,c})</m>")
-            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,in}-H_{cold,h})</m>")
+            IObj?.Paragraphs.Add("<m>Q_{max,cold}=W_{cold}(H_{cold,h}-H_{cold,in})</m>")
 
             IObj?.Paragraphs.Add("where")
             IObj?.Paragraphs.Add("<mi>H_{hot,in}</mi> is the hot stream inlet enthalpy")
@@ -1314,7 +1314,7 @@ Namespace UnitOperations
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHh = Wh * (Hh1 - HHx) 'kW
 
-            IObj?.Paragraphs.Add("<mi>Q_{hot}</mi> = " & DeltaHh & " kW")
+            IObj?.Paragraphs.Add("<mi>Q_{max,hot}</mi> = " & DeltaHh & " kW")
 
             If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate cold stream outlet enthalpy... P = {0} Pa, T = {1} K", Pc2, Th1))
             tmpstr = StInCold.Clone
@@ -1330,7 +1330,7 @@ Namespace UnitOperations
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
             DeltaHc = Wc * (HHx - Hc1) 'kW
 
-            IObj?.Paragraphs.Add("<mi>Q_{cold}</mi> = " & DeltaHc & " kW")
+            IObj?.Paragraphs.Add("<mi>Q_{max,cold}</mi> = " & DeltaHc & " kW")
 
             MaxHeatExchange = Min(DeltaHc, DeltaHh) 'kW
 
@@ -1530,8 +1530,8 @@ Namespace UnitOperations
                     U = OverallCoefficient
                     Qi = MaxHeatExchange * 0.7
                     Q_old = 10000000000.0
-                    Tc2 = Tc1 + (Tc1 + Th1) / 2 * 0.7
-                    Th2 = Th1 - (Tc1 + Th1) / 2 * 0.7
+                    Tc2 = Tc1 + (Th1 - Tc1) / 2 * 0.7
+                    Th2 = Th1 - (Th1 - Tc1) / 2 * 0.7
 
                     If DebugMode Then AppendDebugLine(String.Format("Start with Max Heat Exchange Q = {0} KW", Qi))
 
@@ -1684,13 +1684,13 @@ Namespace UnitOperations
                     Dim tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0.0#)
                     Hh2 = tmp.CalculatedEnthalpy
                     Q = -Wh * (Hh2 - Hh1)
-
+                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
                     DeltaHc = (Q - HeatLoss) / Wc
                     Hc2 = Hc1 + DeltaHc
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
                     IObj?.SetCurrent()
-                    tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc1)
+                    tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Th2)
                     Tc2 = tmp.CalculatedTemperature
                     If DebugMode Then AppendDebugLine(String.Format("Calculated cold stream outlet temperature T2 = {0} K", Tc2))
                     Select Case Me.FlowDir
@@ -1714,6 +1714,7 @@ Namespace UnitOperations
                     Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                     Hc2 = tmp.CalculatedEnthalpy
                     Q = Wc * (Hc2 - Hc1)
+                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
                     DeltaHh = -(Q + HeatLoss) / Wh
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
@@ -1820,14 +1821,27 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
+                    If Q > MaxHeatExchange Then
+
+                        Q = MaxHeatExchange
+
+                        H11 = H10 - (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
+
+                        StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                        IObj?.SetCurrent()
+                        tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
+                        T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+
+                    End If
+
                     H20 = StIn1.GetMassEnthalpy()
-                    H21 = H20 + (Q1 - HeatLoss) / StIn1.GetMassFlow()
+                    H21 = H20 + (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
 
                     StIn1.PropertyPackage.CurrentMaterialStream = StIn1
                     IObj?.SetCurrent()
                     tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+                    'OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20
@@ -1849,7 +1863,14 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    LMTD = Math.Abs(Th2 - Tc2)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    LMTD *= CorrectionFactorLMTD
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -1886,15 +1907,28 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
+                    If Q > MaxHeatExchange Then
+
+                        Q = MaxHeatExchange
+
+                        H11 = H10 - (Math.Sign(Q1) * Q - HeatLoss) / StIn1.GetMassFlow()
+
+                        StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                        IObj?.SetCurrent()
+                        tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P1 - DP1, H11, T11)
+                        T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+
+                    End If
+
                     T20 = StIn0.GetTemperature()
                     H20 = StIn0.GetMassEnthalpy()
-                    H21 = H20 + (Q1 - HeatLoss) / StIn0.GetMassFlow()
+                    H21 = H20 + (Math.Sign(Q1) * Q - HeatLoss) / StIn0.GetMassFlow()
 
                     StIn0.PropertyPackage.CurrentMaterialStream = StIn0
                     IObj?.SetCurrent()
                     tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
+                    'OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20
@@ -1916,7 +1950,14 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    LMTD = Math.Abs(Th2 - Tc2)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    LMTD *= CorrectionFactorLMTD
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -2428,7 +2469,10 @@ Namespace UnitOperations
                             STProperties.OverallFoulingFactor = f2 + f4
                             U = 1 / U
                             Q = U * A * F * LMTD / 1000
-                            If Q > MaxHeatExchange Then Q = MaxHeatExchange
+                            If Q > MaxHeatExchange Then
+                                Q = MaxHeatExchange
+                                F = Q * 1000 / (U * A * LMTD)
+                            End If
                             If STProperties.Shell_Fluid = 0 Then
                                 'cold
                                 DeltaHc = (Q - HeatLoss) / Wc
@@ -2485,7 +2529,20 @@ Namespace UnitOperations
 
                         FlowSheet.CheckStatus()
                         icnt += 1
-                    Loop Until fx < 0.01 Or icnt > 100
+                        If icnt > 100 Then
+                            Throw New Exception("Calculation did not converge in 100 iteratons.")
+                        End If
+                    Loop Until fx < 0.001
+
+                    StInCold.PropertyPackage.CurrentMaterialStream = StInCold
+                    IObj?.SetCurrent()
+                    Dim tmp2 = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, 0.0)
+                    Tc2 = tmp2.CalculatedTemperature
+                    StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                    IObj?.SetCurrent()
+                    tmp2 = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, 0.0)
+                    Th2 = tmp2.CalculatedTemperature
+
             End Select
 
             CheckSpec(Tc2, True, "cold stream outlet temperature")
@@ -2530,6 +2587,9 @@ Namespace UnitOperations
                 StOutCold.Phases(0).Properties.enthalpy = Hc2
                 StOutHot.SetFlashSpec("PH")
                 StOutCold.SetFlashSpec("PH")
+
+                StOutCold.AtEquilibrium = False
+                StOutHot.AtEquilibrium = False
 
                 If CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction1 And CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction2 Then
                     If Th2 < Tc1 Or Tc2 > Th1 Then
@@ -2872,7 +2932,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_hx_32
+            Return My.Resources.heat_exchanger
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.NodeIn
             Me.Description = "Material Stream Mixer"
+            EmbeddedResourceIconName = "mixer.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -189,7 +190,7 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp, myPen)
 
                 Case 2
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
                 Case 3
                     'Temperature Gradients
                 Case 4

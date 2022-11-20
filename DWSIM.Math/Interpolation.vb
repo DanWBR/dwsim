@@ -36,6 +36,17 @@ Namespace MathEx.Interpolation
 
     Public Class Interpolation
 
+        Public Shared Function GetDampingFactor(current As Integer, count As Integer, min As Double, max As Double) As Double
+
+            Dim df = (max - min) / count * current
+
+            If df < min Then df = min
+            If df > max Then df = max
+
+            Return df
+
+        End Function
+
         Public Shared Function Interpolate(x() As Double, y() As Double, xint As Double) As Double
 
             If x.Count = 1 Then

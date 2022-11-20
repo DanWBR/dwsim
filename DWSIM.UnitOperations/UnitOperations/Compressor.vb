@@ -261,9 +261,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("<mi>\rho_{2i}</mi> Outlet Gas Density calculated with Inlet Gas Entropy")
 
             If args Is Nothing Then
-                If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow"))
-                ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
                 ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -289,7 +287,7 @@ Namespace UnitOperations
                 If CalcMode <> CalculationMode.PowerRequired Then
                     DeltaQ = 0.0
                 End If
-                If CalcMode <> CalculationMode.EnergyStream Then
+                If CalcMode <> CalculationMode.EnergyStream And esin IsNot Nothing Then
                     esin.EnergyFlow = 0.0
                     If args Is Nothing Then esin.GraphicObject.Calculated = True
                 End If
@@ -303,6 +301,7 @@ Namespace UnitOperations
                 End If
                 If Not DebugMode Then
                     With msout
+                        .AtEquilibrium = False
                         .DefinedFlow = FlowSpec.Mass
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                         .Phases(0).Properties.massflow = msin.GetMassFlow()
@@ -501,10 +500,12 @@ Namespace UnitOperations
 
                     'CheckSpec(Me.DeltaQ, True, "power")
 
-                    With esin
-                        .EnergyFlow = Me.DeltaQ
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        With esin
+                            .EnergyFlow = Me.DeltaQ
+                            If args Is Nothing Then .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                     Dim k As Double = cp / cv
 
@@ -655,7 +656,7 @@ Namespace UnitOperations
 
                         End Function
 
-                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, Pi, P2i, 0.00001, 100)
+                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i * 0.7, P2i * 1.3, 0.00001, 100)
 
                     AdiabaticCoefficient = n_isent
 
@@ -934,11 +935,13 @@ Namespace UnitOperations
                             .DefinedFlow = FlowSpec.Mass
                         End With
 
-                        'energy stream - update energy flow value (kW)
-                        With esin
-                            .EnergyFlow = Me.DeltaQ
-                            If args Is Nothing Then .GraphicObject.Calculated = True
-                        End With
+                        If esin IsNot Nothing Then
+                            'energy stream - update energy flow value (kW)
+                            With esin
+                                .EnergyFlow = Me.DeltaQ
+                                If args Is Nothing Then .GraphicObject.Calculated = True
+                            End With
+                        End If
 
                     End If
 
@@ -1228,7 +1231,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_compr_32
+            Return My.Resources.compressor
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

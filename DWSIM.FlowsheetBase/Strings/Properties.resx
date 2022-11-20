@@ -211,11 +211,11 @@
     <value>Vapor residence time</value>
   </data>
   <data name="PROP_DC_0" xml:space="preserve">
-    <value>Condenser Pressure</value>
+    <value>Condenser/Top Pressure</value>
     <comment>1</comment>
   </data>
   <data name="PROP_DC_1" xml:space="preserve">
-    <value>Reboiler Pressure</value>
+    <value>Reboiler/Bottoms Pressure</value>
     <comment>1</comment>
   </data>
   <data name="PROP_DC_2" xml:space="preserve">
@@ -241,6 +241,9 @@
   <data name="PROP_DC_7" xml:space="preserve">
     <value>Number of Stages</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_DC_8" xml:space="preserve">
+    <value>Column Pressure Drop</value>
   </data>
   <data name="PROP_EQ_0" xml:space="preserve">
     <value>Pressure Drop</value>
@@ -1369,11 +1372,14 @@
   <data name="PROP_PF_1" xml:space="preserve">
     <value>Residence time</value>
   </data>
+  <data name="PROP_PF_10" xml:space="preserve">
+    <value>Number of Tubes</value>
+  </data>
   <data name="PROP_PF_2" xml:space="preserve">
     <value>Volume</value>
   </data>
   <data name="PROP_PF_3" xml:space="preserve">
-    <value>Length</value>
+    <value>Tube Length</value>
   </data>
   <data name="PROP_PF_4" xml:space="preserve">
     <value>Catalyst loading</value>
@@ -1391,7 +1397,7 @@
     <value>Heat load</value>
   </data>
   <data name="PROP_PF_9" xml:space="preserve">
-    <value>Diameter</value>
+    <value>Tube Diameter</value>
   </data>
   <data name="PROP_PS_0" xml:space="preserve">
     <value>Pressure Drop</value>
@@ -1427,7 +1433,7 @@
     <value>Total Elevation (Straight Tubes)</value>
   </data>
   <data name="PROP_PU_0" xml:space="preserve">
-    <value>Pressure Increase (Head)</value>
+    <value>Pressure Increase</value>
     <comment>1</comment>
   </data>
   <data name="PROP_PU_1" xml:space="preserve">
@@ -1447,6 +1453,9 @@
   </data>
   <data name="PROP_PU_5" xml:space="preserve">
     <value>Outlet Pressure</value>
+  </data>
+  <data name="PROP_PU_6" xml:space="preserve">
+    <value>Head</value>
   </data>
   <data name="PROP_RA_0" xml:space="preserve">
     <value>Top Stage Pressure</value>
@@ -1658,5 +1667,8 @@
   </data>
   <data name="PROP_VA_5" xml:space="preserve">
     <value>Opening</value>
+  </data>
+  <data name="PROP_VA_6" xml:space="preserve">
+    <value>Characteristic Parameter</value>
   </data>
 </root>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cudafy;
 using Cudafy.Host;
+using DWSIM.ExtensionMethods;
 using DWSIM.UI.Shared;
 using Eto.Forms;
 using Settings = DWSIM.GlobalSettings.Settings;
@@ -80,7 +81,7 @@ namespace DWSIM.UI.Forms.Forms
             //    check1.Enabled = false;
             //}
             
-            tab1.CreateAndAddNumericEditorRow("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Value);
+            tab1.CreateAndAddNumericEditorRow2("Scaling Factor", Settings.UIScalingFactor, 0.2, 3.0, 2, (sender, e) => Settings.UIScalingFactor = sender.Text.ToDoubleFromCurrent());
             tab1.CreateAndAddDescriptionRow("Sets the Scaling Factor for controls (windows, panels, buttons, lists, etc). Useful on Linux when used in conjunction with Font Scaling on High DPI displays.");
 
             tab1.CreateAndAddLabelRow("Flowsheet Designer");
@@ -348,43 +349,32 @@ namespace DWSIM.UI.Forms.Forms
             tab4.CreateAndAddEmptySpace();
 
             var tab5 = DWSIM.UI.Shared.Common.GetDefaultContainer();
-            tab5.Tag = "Misc".Localize(prefix);
 
-            tab5.CreateAndAddLabelRow("Octave Settings");
-            tab5.CreateAndAddDescriptionRow("Setup the path for Octave binaries to enable integration with DWSIM.");
-            TextBox tbox = null;
-            tbox = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.OctavePath, "Search", null,
-                (sender, e) => GlobalSettings.Settings.OctavePath = sender.Text,
-                (sender, e) =>
-                {
-                    var searchdialog = new SelectFolderDialog() { Title = "Search" };
-                    if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
-                    {
-                        tbox.Text = searchdialog.Directory;
-                    }
-                });
-            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.OctaveTimeoutInMinutes, (sender, e) =>
-            {
-                if (sender.Text.IsValidDouble()) GlobalSettings.Settings.OctaveTimeoutInMinutes = sender.Text.ToDouble();
-            });
+            tab5.Tag = "Misc".Localize(prefix);
+            tab5.CreateAndAddLabelRow("Updates");
+            tab5.CreateAndAddCheckBoxRow("Check for Updates", Settings.CheckForUpdates, (chk, e) => Settings.CheckForUpdates = chk.Checked.GetValueOrDefault());
 
             tab5.CreateAndAddLabelRow("Python Settings");
-            tab5.CreateAndAddDescriptionRow("Setup the path for Python binaries to enable integration with DWSIM.");
+            tab5.CreateAndAddDescriptionRow("Setup the path for Python 3.x Dynamic Library (.dylib) on macOS or Shared Object (.so) on Linux to enable integration with DWSIM.");
             TextBox tbox2 = null;
-            tbox2 = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.PythonPath, "Search", null,
+            tbox2 = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Python Library File Path", GlobalSettings.Settings.PythonPath, "Search", null,
                 (sender, e) => GlobalSettings.Settings.PythonPath = sender.Text,
                 (sender, e) =>
                 {
-                    var searchdialog = new SelectFolderDialog() { Title = "Search" };
+                    var searchdialog = new OpenFileDialog() { Title = "Search"};
+                    if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
+                    {
+                        searchdialog.Filters.Add(new FileFilter("Python Dynamic Libraries", new[] { ".dylib" }));
+                    }
+                    else {
+                        searchdialog.Filters.Add(new FileFilter("Python Dynamic Libraries", new[] { ".so" }));
+                    }
                     if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
                     {
-                        tbox2.Text = searchdialog.Directory;
+                        tbox2.Text = searchdialog.FileName;
                     }
                 });
-            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.PythonTimeoutInMinutes, (sender, e) =>
-            {
-                if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
-            });
+            tab5.CreateAndAddDescriptionRow("Restart DWSIM for your changes to take effect.");
 
             var form =  DWSIM.UI.Shared.Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a, tab3, tab4, tab5 });
 

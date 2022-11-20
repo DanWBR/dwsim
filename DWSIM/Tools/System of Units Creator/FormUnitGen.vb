@@ -415,6 +415,8 @@ Public Class FormUnitGen
                 End If
             End If
 
+            My.Settings.Save()
+
         Else
 
             MessageBox.Show(DWSIM.App.GetLocalString("DefinaumnomeparaoSis"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Information)

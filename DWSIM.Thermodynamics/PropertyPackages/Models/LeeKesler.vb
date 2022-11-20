@@ -479,24 +479,26 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function ESTIMAR_Vr2(ByVal TIPO, ByVal Pr, ByVal Tr, ByVal B, ByVal C, ByVal D, ByVal c4, ByVal beta, ByVal gamma)
+        Function ESTIMAR_Vr2(ByVal TIPO As String, ByVal Pr As Double, ByVal Tr As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal c4 As Double, ByVal beta As Double, ByVal gamma As Double)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "ESTIMAR_Vr2", "Lee-Kesler Reduced Volume", "Lee-Kesler Reduced Volume Calculation Routine")
+            If IObj IsNot Nothing Then
+                Inspector.Host.CheckAndAdd(IObj, "", "ESTIMAR_Vr2", "Lee-Kesler Reduced Volume", "Lee-Kesler Reduced Volume Calculation Routine")
 
-            PopulateWithDefaultText(IObj)
+                PopulateWithDefaultText(IObj)
 
-            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
-            IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
-            IObj?.Paragraphs.Add(String.Format("Reduced Pressure: {0}", Pr))
-            IObj?.Paragraphs.Add(String.Format("B: {0}", B))
-            IObj?.Paragraphs.Add(String.Format("C: {0}", C))
-            IObj?.Paragraphs.Add(String.Format("D: {0}", D))
-            IObj?.Paragraphs.Add(String.Format("c4: {0}", c4))
-            IObj?.Paragraphs.Add(String.Format("beta: {0}", beta))
-            IObj?.Paragraphs.Add(String.Format("gamma: {0}", gamma))
-            IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
+                IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+                IObj?.Paragraphs.Add(String.Format("Reduced Temperature: {0}", Tr))
+                IObj?.Paragraphs.Add(String.Format("Reduced Pressure: {0}", Pr))
+                IObj?.Paragraphs.Add(String.Format("B: {0}", B))
+                IObj?.Paragraphs.Add(String.Format("C: {0}", C))
+                IObj?.Paragraphs.Add(String.Format("D: {0}", D))
+                IObj?.Paragraphs.Add(String.Format("c4: {0}", c4))
+                IObj?.Paragraphs.Add(String.Format("beta: {0}", beta))
+                IObj?.Paragraphs.Add(String.Format("gamma: {0}", gamma))
+                IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
+            End If
 
             Dim i As Integer
 
@@ -517,13 +519,16 @@ Namespace PropertyPackages.Auxiliary
             delta_T = (Tsup - Tinf) / nsub
 
             i = 0
+            Dim c4_tr_3 As Double = c4 / Tr ^ 3
             Do
                 i = i + 1
                 Vr = Tinf
-                fT = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+                Dim Vr_2 = Vr ^ 2
+                fT = Pr * Vr / Tr - (1 + B / Vr + C / Vr_2 + D / Vr ^ 5 + c4_tr_3 / Vr_2 * (beta + gamma / Vr_2) * Math.Exp(-gamma / Vr_2))
                 Tinf = Tinf + delta_T
                 Vr = Tinf
-                fT_inf = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+                Vr_2 = Vr ^ 2
+                fT_inf = Pr * Vr / Tr - (1 + B / Vr + C / Vr_2 + D / Vr ^ 5 + c4_tr_3 / Vr_2 * (beta + gamma / Vr_2) * Math.Exp(-gamma / Vr_2))
             Loop Until fT * fT_inf < 0 Or i >= 10000
             Tsup = Tinf
             Tinf = Tinf - delta_T
@@ -538,8 +543,11 @@ Namespace PropertyPackages.Auxiliary
             bbb = Tsup
             ccc = Tsup
 
-            faa = Pr * aaa / Tr - (1 + B / aaa + C / aaa ^ 2 + D / aaa ^ 5 + c4 / Tr ^ 3 / aaa ^ 2 * (beta + gamma / aaa ^ 2) * Math.Exp(-gamma / aaa ^ 2))
-            fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb ^ 2 + D / bbb ^ 5 + c4 / Tr ^ 3 / bbb ^ 2 * (beta + gamma / bbb ^ 2) * Math.Exp(-gamma / bbb ^ 2))
+            Dim aaa_2 = aaa ^ 2
+            faa = Pr * aaa / Tr - (1 + B / aaa + C / aaa_2 + D / aaa ^ 5 + c4_tr_3 / aaa_2 * (beta + gamma / aaa_2) * Math.Exp(-gamma / aaa_2))
+
+            Dim bbb_2 = bbb ^ 2
+            fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb_2 + D / bbb ^ 5 + c4_tr_3 / bbb_2 * (beta + gamma / bbb_2) * Math.Exp(-gamma / bbb_2))
             fcc = fbb
             iter2 = 0
             Do
@@ -597,7 +605,9 @@ Namespace PropertyPackages.Auxiliary
                 Else
                     bbb += Math.Sign(xmm) * tol11
                 End If
-                fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb ^ 2 + D / bbb ^ 5 + c4 / Tr ^ 3 / bbb ^ 2 * (beta + gamma / bbb ^ 2) * Math.Exp(-gamma / bbb ^ 2))
+
+                Dim bbb1_2 = bbb ^ 2
+                fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb1_2 + D / bbb ^ 5 + c4_tr_3 / bbb1_2 * (beta + gamma / bbb1_2) * Math.Exp(-gamma / bbb1_2))
                 iter2 += 1
             Loop Until iter2 = ITMAX2
 

@@ -136,12 +136,12 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Operating Pressure", "Current Operating Pressure", 0, UnitOfMeasure.pressure)
-            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Height", "Available Height for Liquid", 1, UnitOfMeasure.distance)
-            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Reactor.", 101325, UnitOfMeasure.pressure)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank contents with information from the inlet stream.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Contents", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Operating Pressure", "Current Operating Pressure", 0, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Height for Liquid", 1, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Reactor.", 101325, UnitOfMeasure.pressure, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the CSTR contents with information from the inlet stream.", False, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Contents", "Empties the CSTR's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -1066,10 +1066,12 @@ out:        Dim ms1, ms2 As MaterialStream
                 End If
 
                 Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                With estr
-                    .EnergyFlow = DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
+                If estr IsNot Nothing Then
+                    With estr
+                        .EnergyFlow = DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
 
             End If
 
@@ -1349,7 +1351,7 @@ out:        Dim ms1, ms2 As MaterialStream
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.re_cstr_32
+            Return My.Resources._cstr
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

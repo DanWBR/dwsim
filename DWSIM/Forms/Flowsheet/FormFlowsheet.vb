@@ -32,6 +32,8 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.Editors.PropertyPackages
 Imports System.Threading.Tasks
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -53,6 +55,12 @@ Public Class FormFlowsheet
 
 #Region "    Variable Declarations "
 
+    Public Property BidirectionalSolver As IBidirectionalSolver
+
+    Public Property ExternalFlowsheetSolver As IFlowsheetSolver
+
+    Public Property WeatherProvider As IWeatherProvider = New WeatherProvider() Implements IFlowsheet.WeatherProvider
+
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
@@ -68,6 +76,8 @@ Public Class FormFlowsheet
     Public Property RedirectMessages As Boolean = False Implements IFlowsheet.RedirectMessages
 
     Public Property LoaderExceptions As New List(Of Exception)
+
+    Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
 
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
@@ -125,20 +135,23 @@ Public Class FormFlowsheet
 
     Friend _translatefunction As Func(Of String, String)
 
-    Public Property SupressMessages As Boolean = False
+    Public Property SupressMessages As Boolean = False Implements Interfaces.IFlowsheet.SupressMessages
 
     Private MessagePumpTimer As Timer
 
     Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
 
-    Public S365FlowsheetsDriveId As String = Nothing
-    Public S365DriveItemId As String = Nothing
+    Public Shared DoNotOpenSimulationWizard As Boolean = False
 
 #End Region
 
 #Region "    Form Event Handlers "
 
     Public Event ToolOpened(sender As Object, e As EventArgs)
+
+    Public Event StartedSolving(sender As Object, e As EventArgs)
+
+    Public Event FinishedSolving(sender As Object, e As EventArgs)
 
     Public Sub New()
 
@@ -163,9 +176,15 @@ Public Class FormFlowsheet
                                       End Sub
         End If
 
-        'file database
+        ' file database
 
         FileDatabaseProvider.CreateDatabase()
+
+        ' icon
+
+#If LINUX = False Then
+        If Not FormMain.IsPro Then Icon = My.Resources.DWSIM_Icon_v8
+#End If
 
     End Sub
 
@@ -185,12 +204,30 @@ Public Class FormFlowsheet
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        Using g1 = Me.CreateGraphics()
+
+            Settings.DpiScale = g1.DpiX / 96.0
+
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            Me.MenuStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.Invalidate()
+
+        End Using
+
         FormCharts.Flowsheet = Me
         FormSpreadsheet.Flowsheet = Me
         FormDynamics.Flowsheet = Me
         FormIntegratorControls.Flowsheet = Me
         FormFilesExplorer.Flowsheet = Me
         FormIPyConsole.Flowsheet = Me
+        FormWatch.Flowsheet = Me
 
         Me.MdiParent = My.Application.MainWindowForm
 
@@ -305,7 +342,7 @@ Public Class FormFlowsheet
             'FormIntegratorControls.Show(dckPanel)
             FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
-            FormIPyConsole.Show(dckPanel)
+            'FormIPyConsole.Show(dckPanel)
 
             FormSurface.Activate()
 
@@ -345,19 +382,23 @@ Public Class FormFlowsheet
 
         AddHandler MessagePumpTimer.Tick, Sub(obj, ev)
 
-                                              SyncLock MessagePump
+                                              If Not SupressMessages Then
 
-                                                  If MessagePump.Count > 0 Then
+                                                  SyncLock MessagePump
 
-                                                      For Each item In MessagePump
-                                                          ShowMessageInternal(item.Item1, item.Item2, item.Item3)
-                                                      Next
+                                                      If MessagePump.Count > 0 Then
 
-                                                      MessagePump.Clear()
+                                                          For Each item In MessagePump
+                                                              ShowMessageInternal(item.Item1, item.Item2, item.Item3)
+                                                          Next
 
-                                                  End If
+                                                          MessagePump.Clear()
 
-                                              End SyncLock
+                                                      End If
+
+                                                  End SyncLock
+
+                                              End If
 
                                           End Sub
 
@@ -389,12 +430,12 @@ Public Class FormFlowsheet
                             End If
                         End If
                         For Each item In extender.Collection
+                            item.SetMainWindow(My.Application.MainWindowForm)
+                            item.SetFlowsheet(Me)
                             Dim exttsmi As New ToolStripMenuItem
                             exttsmi.Text = item.DisplayText
                             exttsmi.Image = item.DisplayImage
                             AddHandler exttsmi.Click, Sub(s2, e2)
-                                                          item.SetMainWindow(My.Application.MainWindowForm)
-                                                          item.SetFlowsheet(Me)
                                                           item.Run()
                                                       End Sub
                             If TypeOf item Is IExtender2 Then
@@ -516,6 +557,11 @@ Public Class FormFlowsheet
 
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
+        If FormMain.IsPro Then
+            DashboardToolStripMenuItem.Visible = False
+            ProToolsToolStripMenuItem.Visible = False
+        End If
+
         FrmStSim1.CurrentFlowsheet = Me
 
         Me.WindowState = FormWindowState.Maximized
@@ -529,28 +575,31 @@ Public Class FormFlowsheet
             Me.Invalidate()
             Application.DoEvents()
 
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim fw As New FormSimulWizard
-                With fw
-                    .CurrentFlowsheet = Me
-                    .StartPosition = FormStartPosition.CenterScreen
-                    .WindowState = FormWindowState.Normal
-                    .ShowDialog(Me)
-                    If .switch Then
-                        With Me.FrmStSim1
-                            .WindowState = FormWindowState.Normal
-                            .StartPosition = FormStartPosition.CenterScreen
-                            .ShowDialog(Me)
-                        End With
-                    End If
-                End With
-            Else
-                With Me.FrmStSim1
-                    .WindowState = FormWindowState.Normal
-                    .StartPosition = FormStartPosition.CenterScreen
-                    .ShowDialog(Me)
-                End With
+            If Not DoNotOpenSimulationWizard Then
+                If Not DWSIM.App.IsRunningOnMono Then
+                    Dim fw As New FormSimulWizard
+                    With fw
+                        .CurrentFlowsheet = Me
+                        .StartPosition = FormStartPosition.CenterScreen
+                        .WindowState = FormWindowState.Normal
+                        .ShowDialog(Me)
+                        If .switch Then
+                            With Me.FrmStSim1
+                                .WindowState = FormWindowState.Normal
+                                .StartPosition = FormStartPosition.CenterScreen
+                                .ShowDialog(Me)
+                            End With
+                        End If
+                    End With
+                Else
+                    With Me.FrmStSim1
+                        .WindowState = FormWindowState.Normal
+                        .StartPosition = FormStartPosition.CenterScreen
+                        .ShowDialog(Me)
+                    End With
+                End If
             End If
+
 
         Else
 
@@ -565,10 +614,10 @@ Public Class FormFlowsheet
 
         If DWSIM.App.IsRunningOnMono Then
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveFileS365.Enabled = True
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
             My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
@@ -632,23 +681,21 @@ Public Class FormFlowsheet
         If cnt = 0 Then
 
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
-            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveFileS365.Enabled = False
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = False
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
-            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
-            My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
 
         Else
 
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveFileS365.Enabled = True
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
         End If
@@ -693,18 +740,16 @@ Public Class FormFlowsheet
 
 #Region "    Functions "
 
-    Public Sub SolveFlowsheet2()
-
-        tsbCalcF_Click(Me, New EventArgs)
-
-    End Sub
-
     Sub UpdateFormText()
-        If File.Exists(Me.Options.FilePath) Then
-            Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
-        Else
-            Me.Text = Me.Options.SimulationName
-        End If
+        UIThread(Sub()
+                     If File.Exists(Options.FilePath) Then
+                         Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
+                     ElseIf Options.FilePath.StartsWith("//Simulate 365 Dashboard") Then
+                         Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
+                     Else
+                         Me.Text = Me.Options.SimulationName
+                     End If
+                 End Sub)
     End Sub
 
     Public Sub ProcessScripts(ByVal sourceevent As Scripts.EventType, ByVal sourceobj As Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheetGUI.ProcessScripts, IFlowsheet.ProcessScripts
@@ -918,7 +963,7 @@ Public Class FormFlowsheet
 
         If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, IGraphicObject)
 
-        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
+        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, ISimulationObject)
 
         If Collections.OPT_SensAnalysisCollection Is Nothing Then Collections.OPT_SensAnalysisCollection = New List(Of SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase)
 
@@ -962,12 +1007,22 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
+
+        SolveFlowsheet2()
+
+    End Sub
+
+    Public Sub SolveFlowsheet2()
+
         If Not DynamicMode Then
             RaiseEvent ToolOpened("Force Solve Flowsheet", New EventArgs())
             GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
             GlobalSettings.Settings.CalculatorBusy = False
             My.Application.ActiveSimulation = Me
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+            If ExternalFlowsheetSolver IsNot Nothing Then
+                ExternalFlowsheetSolver.SolveFlowsheet(Me)
+            Else
+                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -976,9 +1031,11 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.AltKeyDown)
+            End If
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
+
     End Sub
 
     Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
@@ -995,30 +1052,34 @@ Public Class FormFlowsheet
 
     Public Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
 
-        With Me.OpenFileName
-            .CheckFileExists = True
-            .CheckPathExists = True
-            .Title = DWSIM.App.GetLocalString("Adicionarfigura")
-            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
-            .AddExtension = True
-            .Multiselect = False
-            .RestoreDirectory = True
-            Dim res As DialogResult = .ShowDialog
-            If res = Windows.Forms.DialogResult.OK Then
-                Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(Bitmap.FromFile(.FileName))
-                Dim gObj As GraphicObject = Nothing
-                If Not img Is Nothing Then
-                    Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
-                    gObj = myEmbeddedImage
-                    gObj.Width = img.Width
-                    gObj.Height = img.Height
-                    gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
-                    gObj.AutoSize = True
-                End If
-                Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
-                Me.FormSurface.Invalidate()
-            End If
-        End With
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("BMP file", "*.bmp"),
+            New FilePickerAllowedType("JPG file", "*.jpg"),
+            New FilePickerAllowedType("PNG file", "*.png"),
+            New FilePickerAllowedType("GIF file", "*.gif")})
+
+        If openedFile IsNot Nothing Then
+
+            Using str = openedFile.OpenRead()
+                Using bmp = Bitmap.FromStream(str)
+                    Dim img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
+                    Dim gObj As GraphicObject = Nothing
+                    If Not img Is Nothing Then
+                        Dim myEmbeddedImage As New Shapes.EmbeddedImageGraphic(100, 100, img)
+                        gObj = myEmbeddedImage
+                        gObj.Width = img.Width
+                        gObj.Height = img.Height
+                        gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
+                        gObj.AutoSize = True
+                    End If
+                    Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+                    Me.FormSurface.Invalidate()
+                End Using
+            End Using
+
+        End If
 
         FormSurface.TSBtabela.Checked = False
 
@@ -1080,17 +1141,23 @@ Public Class FormFlowsheet
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
             Dim t As New Task(Of List(Of Exception))(Function()
-                                                         Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
-                                                        Sub()
-                                                            If My.Settings.ObjectEditor = 1 Then
-                                                                Me.UIThread(Sub()
-                                                                                Me.FormSurface.Flowsheet = Me
-                                                                                Me.FormSurface.UpdateSelectedObject()
-                                                                            End Sub)
-                                                            End If
-                                                        End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                                         RaiseEvent StartedSolving(Me, New EventArgs())
+                                                         If ExternalFlowsheetSolver IsNot Nothing Then
+                                                             Return ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                                         Else
+                                                             Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
+                                                                Sub()
+                                                                    If My.Settings.ObjectEditor = 1 Then
+                                                                        Me.UIThread(Sub()
+                                                                                        Me.FormSurface.Flowsheet = Me
+                                                                                        Me.FormSurface.UpdateSelectedObject()
+                                                                                    End Sub)
+                                                                    End If
+                                                                End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                                         End If
                                                      End Function)
             t.ContinueWith(Sub(tres)
+                               RaiseEvent FinishedSolving(Me, New EventArgs())
                                For Each item In tres.Result
                                    ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
                                Next
@@ -1102,7 +1169,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Mobile_Compatibility_Mode")
     End Sub
 
     Private Sub UtilitiesTSMI_Click(sender As Object, e As EventArgs) Handles UtilitiesTSMI.DropDownOpening
@@ -1202,7 +1269,7 @@ Public Class FormFlowsheet
                     DWSIM.App.HelpRequested("SO_Adjust.htm")
                 Case ObjectType.OT_Spec
                     DWSIM.App.HelpRequested("SO_Specification.htm")
-                Case ObjectType.GO_Text
+                Case ObjectType.GO_Text, ObjectType.GO_HTMLText
                     DWSIM.App.HelpRequested("GO_Textbox.htm")
                 Case ObjectType.GO_Image
                     DWSIM.App.HelpRequested("GO_Picture.htm")
@@ -1272,7 +1339,7 @@ Public Class FormFlowsheet
     Public Sub tsmiRemoveSelected_Click(sender As Object, e As EventArgs) Handles tsmiRemoveSelected.Click
         Dim n As Integer = Me.FormSurface.FlowsheetSurface.SelectedObjects.Count
         If n > 1 Then
-            If MessageBox.Show("Delete " & n & " objects?", "Mass delete", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+            If MessageBox.Show("Delete " & n & " objects?", "Mass delete", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 Dim indexes As New ArrayList
                 For Each gobj As GraphicObject In Me.FormSurface.FlowsheetSurface.SelectedObjects.Values
                     indexes.Add(gobj.Tag)
@@ -1349,6 +1416,7 @@ Public Class FormFlowsheet
         gObj.Name = "TEXT-" & Guid.NewGuid.ToString
         gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
         gObj.AutoSize = True
+        gObj.Flowsheet = Me
         gObj.ObjectType = ObjectType.GO_Text
         Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.Invalidate()
@@ -1405,7 +1473,8 @@ Public Class FormFlowsheet
 
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
         RaiseEvent ToolOpened("Bulk C7+ Characterization", New EventArgs())
-        Me.FrmPCBulk.ShowDialog(Me)
+        FrmPCBulk = New FormPCBulk()
+        FrmPCBulk.ShowDialog(Me)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
@@ -1554,6 +1623,10 @@ Public Class FormFlowsheet
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Deleterectangle"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_Button Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("RemoveButton"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & DirectCast(gobj, MasterTableGraphic).HeaderText & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
@@ -1607,6 +1680,10 @@ Public Class FormFlowsheet
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
+                            Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
+                            Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_Button Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_FloatingTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -1721,6 +1798,10 @@ Public Class FormFlowsheet
         If Not gobj Is Nothing Then
             Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
             Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        ElseIf GraphicObjects.ContainsKey(tag) Then
+            gobj = GraphicObjects(tag)
+            Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
+            Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
         End If
 
     End Sub
@@ -1798,7 +1879,7 @@ Public Class FormFlowsheet
 
     Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
 
-        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        'Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         Me.FormSurface.FlowsheetSurface.ConnectObject(gObjFrom, gObjTo, fidx, tidx)
 
@@ -2761,7 +2842,7 @@ Public Class FormFlowsheet
 
     Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
         Get
-            Throw New NotImplementedException()
+            Return My.Application.MainWindowForm.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
         End Get
         Set(value As Dictionary(Of String, IPropertyPackage))
             Throw New NotImplementedException()
@@ -2823,6 +2904,45 @@ Public Class FormFlowsheet
 
     End Function
 
+    Public Function GetSpreadsheetFormat(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetFormat
+
+        Dim firstcolumn, firstrow, lastcolumn, lastrow As Integer
+        Dim firstcell, lastcell As String
+
+        firstcell = range.Split(":")(0)
+        lastcell = range.Split(":")(1)
+
+        firstrow = FormSpreadsheet.GetCellValue(firstcell).Row
+        firstcolumn = FormSpreadsheet.GetCellValue(firstcell).Column
+
+        lastrow = FormSpreadsheet.GetCellValue(lastcell).Row
+        lastcolumn = FormSpreadsheet.GetCellValue(lastcell).Column
+
+        Dim data As New List(Of String())
+
+        Dim i, j As Integer
+
+        Dim grid = FormSpreadsheet.Spreadsheet.Worksheets(0)
+
+        For i = firstrow To lastrow
+            Dim sublist = New List(Of String)
+            For j = firstcolumn To lastcolumn
+                Dim val = grid.Cells(i, j).DataFormat
+                If val = unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number Then
+                    Dim args As unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs = grid.Cells(i, j).DataFormatArgs
+                    sublist.Add("N" + args.DecimalPlaces.ToString())
+                Else
+                    sublist.Add("")
+                End If
+            Next
+            data.Add(sublist.ToArray)
+        Next
+
+        Return data
+
+    End Function
+
+
     Public Function GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
         Return FormSpreadsheet.Spreadsheet
     End Function
@@ -2833,19 +2953,19 @@ Public Class FormFlowsheet
 
     Public Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
-            Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
+            Return Collections.GraphicObjectCollection
         End Get
         Set(value As Dictionary(Of String, Interfaces.IGraphicObject))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
     Public Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects, IFlowsheetBag.SimulationObjects
         Get
-            Return Collections.FlowsheetObjectCollection.ToDictionary(Of String, ISimulationObject)(Function(k) k.Key, Function(k) k.Value)
+            Return Collections.FlowsheetObjectCollection
         End Get
         Set(value As Dictionary(Of String, Interfaces.ISimulationObject))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
@@ -2854,7 +2974,7 @@ Public Class FormFlowsheet
             Return Options.Reactions
         End Get
         Set(value As Dictionary(Of String, Interfaces.IReaction))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
@@ -2863,14 +2983,16 @@ Public Class FormFlowsheet
             Return Options.ReactionSets
         End Get
         Set(value As Dictionary(Of String, Interfaces.IReactionSet))
-
+            Throw New NotImplementedException()
         End Set
     End Property
 
     Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
-        SyncLock MessagePump
-            MessagePump.Enqueue(New Tuple(Of String, WarningType, String)(text, mtype, exceptionID))
-        End SyncLock
+        If Not SupressMessages Then
+            SyncLock MessagePump
+                MessagePump.Enqueue(New Tuple(Of String, WarningType, String)(text, mtype, exceptionID))
+            End SyncLock
+        End If
     End Sub
 
     Private Sub ShowMessageInternal(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "")
@@ -2895,7 +3017,7 @@ Public Class FormFlowsheet
 
     Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
 
-        Return GetTranslatedString1(text)
+        Return GetTranslatedString2(text, locale)
 
     End Function
 
@@ -2918,6 +3040,14 @@ Public Class FormFlowsheet
         returntext = DWSIM.App.GetPropertyName(text)
         If returntext <> text Then Return returntext
         returntext = DWSIM.App.GetLocalTipString(text)
+        Return returntext
+    End Function
+
+    Public Function GetTranslatedString2(text As String, locale As String) As String
+        Dim returntext As String
+        returntext = DWSIM.App.GetLocalString(text, locale)
+        If returntext <> text Then Return returntext
+        returntext = DWSIM.App.GetPropertyName(text, locale)
         Return returntext
     End Function
 
@@ -2986,6 +3116,8 @@ Public Class FormFlowsheet
                 dckPanel.DockLeftPortion = 450 * Settings.DpiScale
             ElseIf cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
                 dckPanel.DockRightPortion = 450 * Settings.DpiScale
+            ElseIf cnt.ShowHint = DockState.DockTop Or cnt.ShowHint = DockState.DockTopAutoHide Then
+                dckPanel.DockTopPortion = 86 * Settings.DpiScale
             ElseIf cnt.ShowHint = DockState.Float Then
                 dckPanel.DefaultFloatWindowSize = New Size(500 * Settings.DpiScale, 500 * Settings.DpiScale)
             End If
@@ -3030,22 +3162,8 @@ Public Class FormFlowsheet
     End Property
 
     Public Sub SaveToXML(file As String) Implements IFlowsheetBag.SaveToXML
-        My.Application.MainWindowForm.SaveXML(file, Me)
+        My.Application.MainWindowForm.SaveXML(New WindowsFile(file), Me)
     End Sub
-
-    Public Function SaveToFile() As String
-        If Path.GetExtension(Options.FilePath).ToLower = ".dwxml" Then
-            FormMain.SaveXML(Options.FilePath, Me)
-            Return "simulation saved to '" + Options.FilePath + "'."
-        ElseIf Path.GetExtension(Options.FilePath).ToLower = ".xml" Then
-            Return "saving to mobile xml is not supported"
-        ElseIf Path.GetExtension(Options.FilePath).ToLower = ".dwxmz" Then
-            FormMain.SaveXMLZIP(Options.FilePath, Me)
-            Return "simulation saved to '" + Options.FilePath + "'."
-        Else
-            Return "simulation must be saved manually before trying it through here."
-        End If
-    End Function
 
     Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
 
@@ -3077,14 +3195,22 @@ Public Class FormFlowsheet
                                End Sub
             If Not sender Is Nothing Then
                 Task.Factory.StartNew(Sub()
-                                          FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+                                          If ExternalFlowsheetSolver IsNot Nothing Then
+                                              ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                          Else
+                                              FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+                                          End If
                                           UpdateOpenEditForms()
                                       End Sub)
             Else
                 Task.Factory.StartNew(Sub()
-                                          FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
+                                          If ExternalFlowsheetSolver IsNot Nothing Then
+                                              ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                          Else
+                                              FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
                                                                                          Nothing, False, False,
                                                                                          Nothing, Nothing, finishaction)
+                                          End If
                                       End Sub)
             End If
             UpdateInterface()
@@ -3314,6 +3440,17 @@ Public Class FormFlowsheet
         UIThreadInvoke(act)
     End Sub
 
+    Public Function RunCodeOnUIThread2(act As Action) As Task Implements IFlowsheet.RunCodeOnUIThread2
+        Return Task.Factory.StartNew(Function()
+                                         If InvokeRequired Then
+                                             Return Invoke(act)
+                                         Else
+                                             act.Invoke()
+                                             Return Nothing
+                                         End If
+                                     End Function, TaskCreationOptions.AttachedToParent)
+    End Function
+
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
         Get
             Return My.Application.MainWindowForm.AvailableComponents
@@ -3336,6 +3473,8 @@ Public Class FormFlowsheet
     Public Property DynamicsManager As IDynamicsManager = New DynamicsManager.Manager Implements IFlowsheet.DynamicsManager
 
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
+
+    Public Property PythonPreprocessor As Action(Of String) Implements IFlowsheet.PythonPreprocessor
 
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
         DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)
@@ -3437,7 +3576,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ControlesDoIntegradorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControlesDoIntegradorToolStripMenuItem.Click
-        FormIntegratorControls.Show(GetDockPanel)
+        DisplayForm(Me.FormIntegratorControls)
     End Sub
 
     Private Sub ModoDinamicoAtivoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.Click
@@ -3477,7 +3616,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbDynIntegrator_Click(sender As Object, e As EventArgs) Handles tsbDynIntegrator.Click
-        FormIntegratorControls.Show(GetDockPanel)
+        DisplayForm(Me.FormIntegratorControls)
     End Sub
 
     Private Sub FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Click
@@ -3556,12 +3695,421 @@ Public Class FormFlowsheet
 
     End Function
 
+    Private Sub tsmiRichText_Click(sender As Object, e As EventArgs) Handles tsmiRichText.Click
+
+        Dim myTextObject As New HTMLTextGraphic(30, 30)
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "HTMLTEXT-" & Guid.NewGuid.ToString
+        gObj.Tag = "HTMLTEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.AutoSize = True
+        gObj.Flowsheet = Me
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+
+    End Sub
+
+    Private Sub BotãoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BotãoToolStripMenuItem.Click
+        Dim myTextObject As New Shapes.ButtonGraphic()
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "BTN-" & Guid.NewGuid.ToString
+        gObj.Tag = "BTN" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.AutoSize = True
+        gObj.Flowsheet = Me
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+    End Sub
+
     Public Sub ClearLog() Implements IFlowsheet.ClearLog
 
-        FormLog.Grid1.Rows.Clear()
+        UIThread(Sub()
+                     FormLog.Grid1.Rows.Clear()
+                 End Sub)
+
+    End Sub
+
+    Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
+        Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
+        If script.Value.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+            FormScript.RunScript_IronPython(script.Value.Title, script.Value.ScriptText, Me, Nothing)
+        Else
+            FormScript.RunScript_PythonNET(script.Value.Title, script.Value.ScriptText, Me)
+        End If
+
+    End Sub
+
+    Public Sub RequestSave() Implements IFlowsheet.RequestSave
+
+        FormMain.SaveFile(True)
+
+    End Sub
+
+    Public Sub RequestSaveWithDirectory(directory As String) Implements IFlowsheet.RequestSaveWithDirectory
+
+        Options.FilePath = Path.Combine(directory, Options.SimulationName + ".dwxmz")
+        FormMain.SaveFile(True)
+
+    End Sub
+
+    Private Sub SumarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SumarioToolStripMenuItem.Click
+        For Each obj In Me.SimulationObjects.Values
+            obj.CloseEditForm()
+        Next
+        Dim f As New FormMEBSummary() With {.Flowsheet = Me}
+        f.ShowHint = DockState.DockLeft
+        dckPanel.DockLeftPortion = 830
+        f.Show(dckPanel)
+    End Sub
+
+    Public Sub RequestSaveWithPath(filepath As String) Implements IFlowsheet.RequestSaveWithPath
+
+        Options.FilePath = filepath
+        FormMain.SaveFile(True)
+
+    End Sub
+
+    Private Sub CriadorDeComponentesSólidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriadorDeComponentesSólidosToolStripMenuItem.Click
+        Dim fqc As New FormCreateNewSolid()
+        fqc.ShowDialog(Me)
+    End Sub
+
+    Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
+
+        FormSurface.AnimationTimer.Enabled = Not FormSurface.AnimationTimer.Enabled
+
+    End Sub
+
+    Public Function CreateConversionReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                             basecompound As String, reactionphase As String, conversionExpression As String) As IReaction Implements IFlowsheet.CreateConversionReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Conversion
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        r.Expression = conversionExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateEquilibriumReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                              basecompound As String, reactionphase As String, basis As String, units As String, Tapproach As Double,
+                                              lnKeq_fT As String) As IReaction Implements IFlowsheet.CreateEquilibriumReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Equilibrium
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.EquilibriumReactionBasisUnits = units
+        r.Approach = Tapproach
+        If lnKeq_fT <> "" Then r.KExprType = KOpt.Expression Else r.KExprType = KOpt.Gibbs
+        r.Expression = lnKeq_fT
+
+        Return r
+
+    End Function
+
+    Public Function CreateKineticReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                          directorders As Dictionary(Of String, Double), reverseorders As Dictionary(Of String, Double),
+                                          basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                          rateunits As String, Aforward As Double, Eforward As Double, Areverse As Double, Ereverse As Double,
+                                          Expr_forward As String, Expr_reverse As String) As IReaction Implements IFlowsheet.CreateKineticReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Kinetic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, directorders(kvp.Key), reverseorders(kvp.Key)))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.A_Forward = Aforward
+        r.E_Forward = Eforward
+        r.A_Reverse = Areverse
+        r.E_Reverse = Ereverse
+        If Expr_forward <> "" Then
+            r.ReactionKinFwdType = ReactionKineticType.UserDefined
+            r.ReactionKinFwdExpression = Expr_forward
+        Else
+            r.ReactionKinFwdType = ReactionKineticType.Arrhenius
+        End If
+        If Expr_reverse <> "" Then
+            r.ReactionKinRevType = ReactionKineticType.UserDefined
+            r.ReactionKinRevExpression = Expr_reverse
+        Else
+            r.ReactionKinRevType = ReactionKineticType.Arrhenius
+        End If
+
+        Return r
+
+    End Function
+
+    Public Function CreateHetCatReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                         basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                         rateunits As String, numeratorExpression As String, denominatorExpression As String) As IReaction Implements IFlowsheet.CreateHetCatReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Heterogeneous_Catalytic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.RateEquationNumerator = numeratorExpression
+        r.RateEquationDenominator = denominatorExpression
+
+        Return r
+
+    End Function
+
+    ''' <returns></returns>
+    Public Function CreateReactionSet(name As String, description As String) As IReactionSet Implements IFlowsheet.CreateReactionSet
+
+        Dim rs As New ReactionSet(name, name, description)
+        Return rs
+
+    End Function
+
+    Public Sub AddReaction(reaction As IReaction) Implements IFlowsheet.AddReaction
+
+        Reactions.Add(reaction.ID, reaction)
+
+    End Sub
+
+    Public Sub AddReactionSet(reactionSet As IReactionSet) Implements IFlowsheet.AddReactionSet
+
+        ReactionSets.Add(reactionSet.ID, reactionSet)
+
+    End Sub
+
+    Public Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer) Implements IFlowsheet.AddReactionToSet
+
+        ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
+
+    End Sub
+
+    Public Function GetAvailablePropertyPackages() As List(Of String) Implements IFlowsheet.GetAvailablePropertyPackages
+
+        Return AvailablePropertyPackages.Keys.ToList()
+
+    End Function
+
+    Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        Return pp
+
+    End Function
+
+    Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        AddPropertyPackage(pp)
+        Return pp
+
+    End Function
+
+    Public Function AddCompound(compname As String) As ICompoundConstantProperties Implements IFlowsheet.AddCompound
+
+        Dim c = GetCompound(compname)
+        Options.SelectedComponents.Add(c.Name, c)
+        If Options.NotSelectedComponents.ContainsKey(c.Name) Then Options.NotSelectedComponents.Remove(c.Name)
+        Return c
+
+    End Function
+
+    Private Sub CalcReactionStoichiometry(rc As IReaction)
+
+        Dim hp, hr, bp, br, brsc, gp, gr As Double
+
+        Dim eq As String = ""
+        'build reaction equation
+        'scan for reactants
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff < 0 Then
+                If c.Value.StoichCoeff = -1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                br += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
+        eq += "<--> "
+        'scan for products
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff > 0 Then
+                If c.Value.StoichCoeff = 1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                bp += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        eq = eq.Remove(eq.Length - 2, 2)
+
+        brsc = Math.Abs(rc.Components.Where(Function(c) c.Value.IsBaseReactant).FirstOrDefault().Value.StoichCoeff)
+
+        rc.ReactionHeat = (hp - hr) / brsc
+        rc.ReactionGibbsEnergy = (gp - gr) / brsc
+
+        rc.StoichBalance = bp - br
+        rc.Equation = eq
+
+    End Sub
+
+    Private Sub ToggleWeatherPanelVisibilityToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToggleWeatherPanelVisibilityToolStripMenuItem.Click
+        FormSurface.PanelWeather.Visible = Not FormSurface.PanelWeather.Visible
+        My.Settings.WeatherPanelVisible = FormSurface.PanelWeather.Visible
+    End Sub
+
+    Private Sub CriarPseudocomponentesEmBateladaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarPseudocomponentesEmBateladaToolStripMenuItem.Click
+        Dim fba As New FormBulkAddPseudos With {.Flowsheet = Me}
+        fba.Show()
+    End Sub
+
+    Private Sub ConsoleInterativoIronPtyhonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsoleInterativoIronPtyhonToolStripMenuItem.Click
+
+        DisplayForm(Me.FormIPyConsole)
+
+    End Sub
+
+    Public Async Sub DisplayHTML(title As String, htmlcontent As String)
+
+        Dim fh As New FormHTMLView()
+        fh.Text = title
+        fh.TabText = title
+        Await fh.Viewer.EnsureCoreWebView2Async()
+        fh.Viewer.NavigateToString(htmlcontent)
+        fh.Show(dckPanel)
 
     End Sub
 
 #End Region
+
 
 End Class

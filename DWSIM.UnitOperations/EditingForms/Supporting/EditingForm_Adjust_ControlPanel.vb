@@ -5,7 +5,7 @@ Imports DWSIM.ExtensionMethods
 
 Public Class EditingForm_Adjust_ControlPanel
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits UserControl
 
     Private formC As IFlowsheet
     Public status As String = ""
@@ -27,15 +27,40 @@ Public Class EditingForm_Adjust_ControlPanel
         Me.su = myADJ.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         Me.nf = myADJ.FlowSheet.FlowsheetOptions.NumberFormat
 
+        Try
+            UpdateInfo()
+        Catch ex As Exception
+        End Try
+
+        py1 = New List(Of Double)
+        py2 = New List(Of Double)
+        px = New List(Of Double)
+
+        Text = myADJ.GraphicObject.Tag & " - " & formC.GetTranslatedString("PaineldeControle")
+
+        ComboBox1.SelectedIndex = myADJ.SolvingMethodSelf
+
+        loaded = True
+
+        DWSIM.ExtensionMethods.ChangeDefaultFont(Me)
+
+    End Sub
+
+    Public Sub UpdateInfo()
+
         With myADJ
 
-            Me.tbAjuste.Text = cv.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), .AdjustValue)
+            If myADJ.ControlledObject IsNot Nothing Then
+                Me.tbAjuste.Text = cv.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), .AdjustValue)
+            End If
             Me.tbMaxIt.Text = .MaximumIterations
             Me.tbStep.Text = .StepSize
             Me.tbTol.Text = .Tolerance
 
-            If Not .MinVal.HasValue Then .MinVal = (Convert.ToDouble(GetMnpVarValue()) * 0.2).ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
-            If Not .MaxVal.HasValue Then .MaxVal = (Convert.ToDouble(GetMnpVarValue()) * 2.0).ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+            If myADJ.ManipulatedObject IsNot Nothing Then
+                If Not .MinVal.HasValue Then .MinVal = (Convert.ToDouble(GetMnpVarValue()) * 0.2).ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+                If Not .MaxVal.HasValue Then .MaxVal = (Convert.ToDouble(GetMnpVarValue()) * 2.0).ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+            End If
 
             Me.tbMin.Text = .MinVal.GetValueOrDefault().ToString(formC.FlowsheetOptions.NumberFormat)
             Me.tbMax.Text = .MaxVal.GetValueOrDefault().ToString(formC.FlowsheetOptions.NumberFormat)
@@ -46,36 +71,15 @@ Public Class EditingForm_Adjust_ControlPanel
         Me.lblItXdeY.Text = ""
         Me.tbErro.Text = ""
 
-        With Me.GraphControl.GraphPane
-            .Title.IsVisible = False
-            .XAxis.Title.Text = formC.GetTranslatedString("Iterao")
-            .YAxis.Title.Text = "SP/CV - " + formC.GetTranslatedString(myADJ.ControlledObjectData.PropertyName) & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")"
-            .Y2Axis.IsVisible = True
-            .Y2Axis.Title.Text = "MV - " + formC.GetTranslatedString(myADJ.ManipulatedObjectData.PropertyName) & " (" & myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, Me.su) & ")"
-        End With
-
-        py1 = New List(Of Double)
-        py2 = New List(Of Double)
-        px = New List(Of Double)
-
-        Text = myADJ.GraphicObject.Tag & " - " & formC.GetTranslatedString("PaineldeControle")
-
-        TabText = Text
-
-        Select Case myADJ.SolvingMethodSelf
-            Case 0
-                rbSecante.Checked = True
-            Case 1
-                rbBrent.Checked = True
-            Case 2
-                rbNewton.Checked = True
-            Case 3
-                rbIPOPT.Checked = True
-        End Select
-
-        loaded = True
-
-        Me.ChangeDefaultFont()
+        If myADJ.ControlledObject IsNot Nothing And myADJ.ManipulatedObject IsNot Nothing Then
+            With Me.GraphControl.GraphPane
+                .Title.IsVisible = False
+                .XAxis.Title.Text = formC.GetTranslatedString("Iterao")
+                .YAxis.Title.Text = "SP/CV - " + formC.GetTranslatedString(myADJ.ControlledObjectData.PropertyName) & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")"
+                .Y2Axis.IsVisible = True
+                .Y2Axis.Title.Text = "MV - " + formC.GetTranslatedString(myADJ.ManipulatedObjectData.PropertyName) & " (" & myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, Me.su) & ")"
+            End With
+        End If
 
     End Sub
 
@@ -97,7 +101,6 @@ Public Class EditingForm_Adjust_ControlPanel
         With Me.GraphControl.GraphPane.Legend
             .Position = ZedGraph.LegendPos.TopCenter
             .Border.IsVisible = False
-            .FontSpec.Size = 10
             .FontSpec.IsDropShadow = False
         End With
 
@@ -268,12 +271,16 @@ Public Class EditingForm_Adjust_ControlPanel
 
                          End Sub
 
-        If rbSecante.Checked Then
+        If ComboBox1.SelectedIndex = 0 Then
 
             Task.Factory.StartNew(Sub()
                                       mvVal = MathNet.Numerics.RootFinding.Secant.FindRoot(
                                         Function(xval)
-                                            Return funcproc.Invoke(xval)
+                                            If Double.IsNaN(xval) Or Double.IsInfinity(xval) Then
+                                                Return 1.0E+20
+                                            Else
+                                                Return funcproc.Invoke(xval)
+                                            End If
                                         End Function, mvVal, mvVal * 1.01, min, max, tol, maxit)
                                   End Sub).ContinueWith(Sub(t)
                                                             UIThread(Sub() formC.UpdateOpenEditForms())
@@ -285,7 +292,7 @@ Public Class EditingForm_Adjust_ControlPanel
                                                             End If
                                                         End Sub)
 
-        ElseIf rbBrent.Checked Then
+        ElseIf ComboBox1.SelectedIndex = 1 Then
 
             minval = myADJ.MinVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
             maxval = myADJ.MaxVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
@@ -305,12 +312,12 @@ Public Class EditingForm_Adjust_ControlPanel
                                                             End If
                                                         End Sub)
 
-        ElseIf rbNewton.Checked Then
+        ElseIf ComboBox1.SelectedIndex = 2 Then
 
             Dim nsolv As New DWSIM.MathOps.MathEx.Optimization.NewtonSolver()
             nsolv.EnableDamping = False
             nsolv.MaxIterations = maxit
-            nsolv.Tolerance = tol
+            nsolv.Tolerance = tol ^ 2
 
             Task.Factory.StartNew(Sub()
                                       mvVal = nsolv.Solve(Function(xvars)
@@ -326,7 +333,7 @@ Public Class EditingForm_Adjust_ControlPanel
                                                             End If
                                                         End Sub)
 
-        ElseIf rbIPOPT.Checked Then
+        ElseIf ComboBox1.SelectedIndex = 3 Then
 
             Dim isolv As New DWSIM.MathOps.MathEx.Optimization.IPOPTSolver()
             isolv.MaxIterations = maxit
@@ -467,39 +474,44 @@ Public Class EditingForm_Adjust_ControlPanel
         End If
     End Sub
 
-    Private Sub rbBrent_CheckedChanged(sender As Object, e As EventArgs) Handles rbBrent.CheckedChanged
-        tbStep.Enabled = Not rbBrent.Checked
-    End Sub
-
-    Private Sub tbMin_TextChanged(sender As Object, e As EventArgs) Handles tbMin.TextChanged
-        If loaded Then
-            Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
-            If Double.TryParse(tbMin.Text, New Double) Then
-                myADJ.MinVal = Double.Parse(tbMin.Text)
-            End If
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If ComboBox1.SelectedIndex = 1 Then
+            tbStep.Enabled = False
+        Else
+            tbStep.Enabled = True
         End If
-    End Sub
-
-    Private Sub tbMax_TextChanged(sender As Object, e As EventArgs) Handles tbMax.TextChanged
-        If loaded Then
-            Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)
-            If Double.TryParse(tbMax.Text, New Double) Then
-                myADJ.MaxVal = Double.Parse(tbMax.Text)
-            End If
-        End If
-    End Sub
-
-    Private Sub rbSecante_CheckedChanged(sender As Object, e As EventArgs) Handles rbSecante.CheckedChanged, rbNewton.CheckedChanged, rbBrent.CheckedChanged, rbIPOPT.CheckedChanged
         If loaded Then
             If myADJ.MaxVal.GetValueOrDefault = 0 And myADJ.MinVal.GetValueOrDefault = 0 Then
                 Me.usemaxmin = False
             Else
                 Me.usemaxmin = True
             End If
-            If rbSecante.Checked Then myADJ.SolvingMethodSelf = 0
-            If rbBrent.Checked Then myADJ.SolvingMethodSelf = 1
-            If rbNewton.Checked Then myADJ.SolvingMethodSelf = 2
-            If rbIPOPT.Checked Then myADJ.SolvingMethodSelf = 3
+            myADJ.SolvingMethodSelf = ComboBox1.SelectedIndex
         End If
     End Sub
+
+    Private Sub tbMin_TextChanged(sender As Object, e As EventArgs) Handles tbMin.TextChanged
+        If loaded Then
+            Try
+                Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)
+                If Double.TryParse(tbMin.Text, New Double) Then
+                    myADJ.MinVal = Double.Parse(tbMin.Text)
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    Private Sub tbMax_TextChanged(sender As Object, e As EventArgs) Handles tbMax.TextChanged
+        If loaded Then
+            Try
+                Dim units = myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)
+                If Double.TryParse(tbMax.Text, New Double) Then
+                    myADJ.MaxVal = Double.Parse(tbMax.Text)
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
 End Class

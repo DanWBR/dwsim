@@ -22,6 +22,7 @@ using DWSIM.UI.Desktop.Editors.Dynamics;
 using SkiaSharp;
 using DWSIM.UI.Controls;
 using DWSIM.ExtensionMethods;
+using System.Device.Location;
 
 namespace DWSIM.UI.Forms
 {
@@ -161,6 +162,12 @@ namespace DWSIM.UI.Forms
             FlowsheetObject = new Desktop.Shared.Flowsheet() { FlowsheetForm = this };
             FlowsheetObject.Initialize();
 
+            FlowsheetObject.DynamicsManager.RunSchedule = (schname) =>
+            {
+                FlowsheetObject.DynamicsManager.CurrentSchedule = FlowsheetObject.DynamicsManager.GetSchedule(schname).ID;
+                return DynamicsIntegratorControl.RunIntegrator(false, false, FlowsheetObject, null);
+            };
+
             Title = "New Flowsheet";
 
             if (s.FlowsheetRenderer == s.SkiaCanvasRenderer.CPU)
@@ -259,6 +266,11 @@ namespace DWSIM.UI.Forms
                 return Spreadsheet.GetDataFromRange(range);
             });
 
+            FlowsheetObject.RetrieveSpreadsheetFormat = new Func<string, List<string[]>>((range) =>
+            {
+                return Spreadsheet.GetFormatFromRange(range);
+            });
+
             SpreadsheetControl = Spreadsheet.GetSpreadsheet(FlowsheetObject);
 
             ChartsControl = new ChartManager(FlowsheetObject);
@@ -283,7 +295,7 @@ namespace DWSIM.UI.Forms
 
             FileExplControl = new FileExplorerControl(FlowsheetObject);
 
-            // if automation then stop loadning UI controls
+            // if automation then stop loading UI controls
 
             if (GlobalSettings.Settings.AutomationMode) return;
 
@@ -352,6 +364,14 @@ namespace DWSIM.UI.Forms
             // actions
 
             FlowsheetObject.UpdateEditorPanels = () => UpdateEditorPanels();
+
+            FlowsheetObject.UpdateSurface = (() =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    FlowsheetControl.Invalidate();
+                });
+            });
 
             ActComps = () =>
             {
@@ -735,6 +755,8 @@ namespace DWSIM.UI.Forms
 
             var btnCloseAllEditors = new ButtonMenuItem { Text = "Close All Opened Object Editors" };
 
+            var btnToggleWeatherPanel = new ButtonMenuItem { Text = "Toggle Weather Panel Visibility" };
+
             //process plugin list
 
             var pluginbuttons = new List<ButtonMenuItem>();
@@ -785,7 +807,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Insert(8, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Insert(9, pluginsmenu);
-                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
+                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors, btnToggleWeatherPanel } });
                     }
                     else
                     {
@@ -796,7 +818,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Add(pluginsmenu);
-                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors, btnToggleWeatherPanel } });
                     }
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
@@ -808,32 +830,32 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     Menu.Items.Add(pluginsmenu);
-                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors, btnToggleWeatherPanel } });
                     break;
             }
 
             var hitem1 = new ButtonMenuItem { Text = "Online Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem1.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br/docs/crossplatform/help/".OpenURL();
+                "https://dwsim.org/docs/crossplatform/help/".OpenURL();
             };
 
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem2.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br/wiki/index.php?title=Support".OpenURL();
+                "https://dwsim.org/wiki/index.php?title=Support".OpenURL();
             };
 
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem3.Click += (sender, e) =>
             {
-                "https://sourceforge.net/p/dwsim/tickets/".OpenURL();
+                "https://github.com/DanWBR/dwsim/issues".OpenURL();
             };
 
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem4.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br".OpenURL();
+                "https://dwsim.org".OpenURL();
             };
 
             Menu.HelpItems.Add(hitem1);
@@ -883,6 +905,7 @@ namespace DWSIM.UI.Forms
             var panelindicators = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelinputs = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
             var panelother = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
+            var panelrenew = new StackLayout() { Padding = new Padding(4), Orientation = Orientation.Horizontal, BackgroundColor = !s.DarkMode ? Colors.White : SystemColors.ControlBackground };
 
 
             var objcontainer = new DocumentControl { AllowReordering = true };
@@ -894,6 +917,7 @@ namespace DWSIM.UI.Forms
             objcontainer.Pages.Add(new DocumentPage(panelexchangers) { Closable = false, Text = "Exchangers" });
             objcontainer.Pages.Add(new DocumentPage(panelcolumns) { Closable = false, Text = "Columns" });
             objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
+            objcontainer.Pages.Add(new DocumentPage(panelrenew) { Closable = false, Text = "Renewable Energies" });
             objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
             objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
             objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Blocks" });
@@ -971,6 +995,10 @@ namespace DWSIM.UI.Forms
                         case Interfaces.Enums.SimulationObjectClass.Indicators:
                             panelindicators.Items.Add(pitem);
                             break;
+                        case Interfaces.Enums.SimulationObjectClass.CleanPowerSources:
+                        case Interfaces.Enums.SimulationObjectClass.Electrolyzers:
+                            panelrenew.Items.Add(pitem);
+                            break;
                     }
                 }
             }
@@ -994,7 +1022,9 @@ namespace DWSIM.UI.Forms
                     }
                     else
                     {
-                        FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom));
+                        FlowsheetObject.AddObject(e.Data.GetString("ObjectName"),
+                            (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
+                            (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), "", "", true);
                     }
                     UpdateEditorConnectionsPanel();
                     FlowsheetObject.UpdateInterface();
@@ -1142,6 +1172,8 @@ namespace DWSIM.UI.Forms
             var tbFontSize = new TextBox { Width = 40, Text = FlowsheetObject.Options.LabelFontSize.ToString("G2") };
             var btnSetFont = new Button { Width = 40, Text = "Set" };
 
+            if (Application.Instance.Platform.IsGtk) btnSetFont.Size = new Size(40, 30);
+
             btnSetFont.Click += (s, e) =>
             {
                 FlowsheetObject.Options.LabelFontSize = Double.Parse(tbFontSize.Text);
@@ -1156,7 +1188,7 @@ namespace DWSIM.UI.Forms
             };
 
             var lblColorTheme = new Label { Text = "Flowsheet Color Theme" };
-            var cbColorTheme = new DropDown { Width = 140, Items = { "Default", "Black-and-White PFD" }, SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
+            var cbColorTheme = new DropDown { Width = 140, Items = { "Default", "Black-and-White PFD", "Color Icons" }, SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
             cbColorTheme.SelectedIndexChanged += (s, e) =>
             {
                 FlowsheetObject.Options.FlowsheetColorTheme = cbColorTheme.SelectedIndex;
@@ -1265,24 +1297,24 @@ namespace DWSIM.UI.Forms
 
             };
 
+            var lblAutoConnect = new Label { Text = "Auto-Connect Added Objects" };
+            var cbAutoConnect = new DropDown { Width = 100, Items = { "No", "Yes", "Smart" }, SelectedIndex = FlowsheetObject.Options.AddObjectsWithStreams };
+            cbAutoConnect.SelectedIndexChanged += (s, e) =>
+            {
+                FlowsheetObject.Options.AddObjectsWithStreams = cbAutoConnect.SelectedIndex;
+                FlowsheetControl.Invalidate();
+            };
+
             var menu1 = new StackLayout
             {
-                Items = { lbl1, tbSearch,  new Label {Text =" " }, chkControlPanelMode,  new Label {Text =" " },
+                Items = { lbl1, tbSearch, new Label {Text =" " }, lblAutoConnect, cbAutoConnect, new Label {Text =" " }, chkControlPanelMode,  new Label {Text =" " },
                 new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
-                btnmEqHoriz, btnmEqVert },
-                Orientation = Orientation.Horizontal,
-                Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Padding = new Padding(5)
-            };
-            var menu2 = new StackLayout
-            {
-                Items = { lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme,
-                lblRegularFont, cbRegularFont, lblBoldFont, cbBoldFont, lblItalicFont, cbItalicFont, lblBoldItalicFont, cbBoldItalicFont},
+                btnmEqHoriz, btnmEqVert,  new Label {Text =" " }, lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme,
+                lblRegularFont, cbRegularFont, lblBoldFont, cbBoldFont, lblItalicFont, cbItalicFont, lblBoldItalicFont, cbBoldItalicFont
+                },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
@@ -1290,7 +1322,6 @@ namespace DWSIM.UI.Forms
                 Padding = new Padding(5)
             };
             flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = menu1 }));
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = menu2 }));
 
             Button btnUp, btnLeft, btnRight, btnDown;
 
@@ -1311,6 +1342,54 @@ namespace DWSIM.UI.Forms
             flowsheetcontrolcontainer.Rows.Add(new TableRow(tabfl1) { ScaleHeight = true });
 
             flowsheetcontrolcontainer.Rows.Add(new TableRow(btnDown));
+
+            // weather bar
+
+            var imgsun = new ImageView { ToolTip = "Solar Irradiation", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sun_with_face.png")) };
+            var imgtemp = new ImageView { ToolTip = "Ambient Temperature", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-temperature.png")) };
+            var imgpgauge = new ImageView { ToolTip = "Atmospheric Pressure", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pressure_gauge.png")) };
+            var imghum = new ImageView { ToolTip = "Relative Humidity", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-humidity.png")) };
+            var imgwind = new ImageView { ToolTip = "Wind Speed", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-wind.png")) };
+
+            var wobj = FlowsheetObject.FlowsheetOptions.CurrentWeather;
+            var nf = FlowsheetObject.FlowsheetOptions.NumberFormat;
+
+            var tbirr = new TextBox { ToolTip = "Solar Irradiation", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.SolarIrradiation_kWh_m2.ToString(nf) };
+            var tbtemp = new TextBox { ToolTip = "Ambient Temperature", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.Temperature_C.ToString(nf) };
+            var tbhum = new TextBox { ToolTip = "Relative Humidity", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.RelativeHumidity_pct.ToString(nf) };
+            var tbwind = new TextBox { ToolTip = "Wind Speed", Width = 75, TextAlignment = TextAlignment.Right, Text = wobj.WindSpeed_km_h.ToString(nf) };
+            var tbpgauge = new TextBox { ToolTip = "Atmospheric Pressure", Width = 75, TextAlignment = TextAlignment.Right, Text = (wobj.AtmosphericPressure_Pa / 100.0).ToString(nf) };
+
+            tbirr.TextChanged += (tb, e) => { if (tbirr.Text.IsValidDouble()) wobj.SolarIrradiation_kWh_m2 = tbirr.Text.ToDoubleFromInvariant(); };
+            tbtemp.TextChanged += (tb, e) => { if (tbtemp.Text.IsValidDouble()) wobj.Temperature_C = tbtemp.Text.ToDoubleFromInvariant(); };
+            tbhum.TextChanged += (tb, e) => { if (tbhum.Text.IsValidDouble()) wobj.RelativeHumidity_pct = tbhum.Text.ToDoubleFromInvariant(); };
+            tbwind.TextChanged += (tb, e) => { if (tbwind.Text.IsValidDouble()) wobj.WindSpeed_km_h = tbwind.Text.ToDoubleFromInvariant(); };
+            tbpgauge.TextChanged += (tb, e) => { if (tbpgauge.Text.IsValidDouble()) wobj.AtmosphericPressure_Pa = tbpgauge.Text.ToDoubleFromInvariant() * 100.0; };
+
+            var lblirr = new Label { Text = "kW/m2" };
+            var lbltemp = new Label { Text = "C" };
+            var lblwind = new Label { Text = "km/h" };
+            var lblhum = new Label { Text = "%" };
+            var lblpgauge = new Label { Text = "hPa" };
+
+            var lblweather = new Label { Text = "Current Weather Conditions", Enabled = false };
+
+            var weatherpanel = new StackLayout
+            {
+                Orientation = Orientation.Horizontal,
+                Items = { lblweather, imgtemp, tbtemp, lbltemp, imgpgauge, tbpgauge, lblpgauge, imgwind, tbwind, lblwind,
+                    imghum, tbhum, lblhum, imgsun, tbirr, lblirr },
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Spacing = 4,
+                Visible = false
+            };
+
+            btnToggleWeatherPanel.Click += (s, e) =>
+            {
+                weatherpanel.Visible = !weatherpanel.Visible;
+            };
+
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = weatherpanel }));
 
             Split2.Panel1 = flowsheetcontrolcontainer;
 
@@ -1455,9 +1534,47 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.UpdateInterface();
             };
 
+            // status bar
+
+            var imgheart = new ImageView { Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "heart.png")) };
+            var lbldonate = new Label { Text = "Support continuous development and maintenance of DWSIM for as low as 3 USD/month or with a one-time donation." };
+
+            var btnSingleDonation = new Button {Text = "One-Time Donation",  ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png", this.GetType().Assembly)).WithSize(16, 16) };
+
+            if (s.RunningPlatform() == s.Platform.Linux)
+            {
+                lbldonate.Text = "Support DWSIM development and maintenance.";
+                btnSingleDonation.Width = (int)(140 * sf);
+                btnMonthlyDonation.Width = (int)(140 * sf);
+            }
+
+            btnSingleDonation.Click += (s, e) => {
+                "https://www.buymeacoffee.com/dwsim".OpenURL();
+            };
+
+            btnMonthlyDonation.Click += (s, e) => {
+                "https://www.patreon.com/dwsim".OpenURL();
+            };
+
+            var statuspanel = new StackLayout
+            {
+                Orientation = Orientation.Horizontal,
+                Items = { imgheart, lbldonate, btnSingleDonation, btnMonthlyDonation   },
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Spacing = 4,
+                Visible = true
+            };
+
+            var Split0 = new Eto.Forms.Splitter { Orientation = Orientation.Vertical, FixedPanel = SplitterFixedPanel.Panel2 };
+            Split0.Panel1 = Split1;
+
+            Split0.Panel2 = statuspanel;
+            Split0.Panel2.Height = (int)(sf * 32);
+
             // main container
 
-            Content = Split1;
+            Content = Split0;
 
             // context menus
 
@@ -1473,7 +1590,15 @@ namespace DWSIM.UI.Forms
                     var sobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject("");
                     if (sobj != null)
                     {
-                        EditObject_New(sobj);
+                        try
+                        {
+                            EditObject_New(sobj);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Logger.LogError("Object Editor Error", ex);
+                            Console.WriteLine(ex.ToString());
+                        }
                     }
                 }
             };
@@ -1523,6 +1648,8 @@ namespace DWSIM.UI.Forms
                                 selctxmenu.Items.Add(delitem);
                                 break;
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_HTMLText:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Button:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart:
                                 selctxmenu.Items.Clear();
@@ -1825,7 +1952,7 @@ namespace DWSIM.UI.Forms
             List<Type> availableTypes = new List<Type>();
 
             availableTypes.AddRange(calculatorassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
-            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
+            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null && !x.IsAbstract ? true : false));
 
             List<ListItem> litems = new List<ListItem>();
 
@@ -1834,13 +1961,13 @@ namespace DWSIM.UI.Forms
                 if (!item.IsAbstract)
                 {
                     var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
-                    ObjectList.Add(obj.GetDisplayName(), obj);
+                    if (!ObjectList.ContainsKey(obj.GetDisplayName())) ObjectList.Add(obj.GetDisplayName(), obj);
                 }
             }
 
             foreach (var item in FlowsheetObject.ExternalUnitOperations.Values.OrderBy(x => x.Name))
             {
-                ObjectList.Add(item.Name, (Interfaces.ISimulationObject)item);
+                if (!ObjectList.ContainsKey(item.Name)) ObjectList.Add(item.Name, (Interfaces.ISimulationObject)item);
             }
 
             string netprops = "";
@@ -2227,7 +2354,7 @@ namespace DWSIM.UI.Forms
                     }
                     else
                     {
-                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "", "", true);
                     }
                     FlowsheetControl.Invalidate();
                     UpdateEditorConnectionsPanel();
@@ -2271,10 +2398,63 @@ namespace DWSIM.UI.Forms
                 ActZoomFit.Invoke();
             };
 
-            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item7, item8 });
+            var item9 = new ButtonMenuItem { Text = "Export to PDF File", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pdf.png")) };
+            var item10 = new ButtonMenuItem { Text = "Export to SVG File", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-vector.png")) };
+
+            item9.Click += (sender, e) => ExportToPDF();
+            item10.Click += (sender, e) => ExportToSVG();
+
+            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item9, item10, new SeparatorMenuItem(), item7, item8 });
 
             return;
 
+        }
+
+        void ExportToPDF()
+        {
+            var ds = (float)GlobalSettings.Settings.DpiScale;
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Export Flowsheet to PDF File";
+            dialog.Filters.Add(new FileFilter("PDF Files", new[] { ".pdf" }));
+            dialog.CurrentFilterIndex = 0;
+            if (dialog.ShowDialog(this) == DialogResult.Ok)
+            {
+                // create the document
+                using (var stream = SKFileWStream.OpenStream(dialog.FileName))
+                {
+                    using (var document = SKDocument.CreatePdf(stream))
+                    {
+                        var canvas = document.BeginPage(FlowsheetControl.Width * ds, FlowsheetControl.Height * ds);
+                        FlowsheetControl.FlowsheetSurface.UpdateCanvas(canvas);
+                        // end the page and document
+                        document.EndPage();
+                        document.Close();
+                    }
+                }
+                FlowsheetObject.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", dialog.FileName), Interfaces.IFlowsheet.MessageType.Information);
+            }
+        }
+
+        void ExportToSVG()
+        {
+            var ds = (float)GlobalSettings.Settings.DpiScale;
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Export Flowsheet to SVG File";
+            dialog.Filters.Add(new FileFilter("SVG Files", new[] { ".svg" }));
+            dialog.CurrentFilterIndex = 0;
+            if (dialog.ShowDialog(this) == DialogResult.Ok)
+            {
+                // create the document
+                using (var stream = SKFileWStream.OpenStream(dialog.FileName))
+                {
+                    var writer = new SKXmlStreamWriter(stream);
+                    using (var canvas = SKSvgCanvas.Create(SKRect.Create(FlowsheetControl.Width * ds, FlowsheetControl.Height * ds), writer))
+                    {
+                        FlowsheetControl.FlowsheetSurface.UpdateCanvas(canvas);
+                    }
+                }
+                FlowsheetObject.ShowMessage(String.Format("Flowsheet exported successfully to {0}.", dialog.FileName), Interfaces.IFlowsheet.MessageType.Information);
+            }
         }
 
         void CopyAsImage(int Zoom)
@@ -2357,6 +2537,25 @@ namespace DWSIM.UI.Forms
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Charts.ChartObjectEditor((OxyPlotGraphic)selobj);
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
+                    editor.Show();
+                }
+                else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_HTMLText)
+                {
+                    var txtobj = (TextGraphic)selobj;
+                    var dyn1 = new DynamicLayout();
+                    var fontsizes = new List<string>() { "6", "7", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20", "22", "24" };
+                    dyn1.CreateAndAddDropDownRow("Font size", fontsizes, fontsizes.IndexOf(txtobj.Size.ToString("N0")), (sender, e) => txtobj.Size = double.Parse(fontsizes[sender.SelectedIndex]));
+                    var container = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
+                    container.Rows.Add(new TableRow(dyn1));
+                    var txt = new TextArea { Text = txtobj.Text };
+                    txt.TextChanged += (sender2, e2) =>
+                    {
+                        txtobj.Text = txt.Text;
+                    };
+                    container.Rows.Add(new TableRow(txt));
+                    var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 500, 500, container, false);
                     editor.ShowInTaskbar = true;
                     editor.Topmost = true;
                     editor.Show();

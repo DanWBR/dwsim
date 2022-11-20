@@ -374,8 +374,7 @@ Partial Class EditingForm_Column_Connections_New
         '
         'EditingForm_Column_Connections_New
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "EditingForm_Column_Connections_New"
         Me.Size = New System.Drawing.Size(402, 393)

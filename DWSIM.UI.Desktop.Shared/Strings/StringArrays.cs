@@ -56,6 +56,10 @@ namespace DWSIM.UI.Desktop.Shared
         {
             return new String[] { "Outlet Pressure", "Pressure Drop", "Liquid Service Kv (Deprecated)", "Gas Service Kv (Deprecated)", "Steam Service Kv (IEC 60534)", "General Service Kv (IEC 60534)" };
         }
+        public static String[] valveopkvrelmode()
+        {
+            return new String[] { "Linear","Equal Percentage","Quick Opening","User-Defined Expression","Data Table" };
+        }
         public static String[] pumpcalcmode()
         {
             return new String[] { "Outlet Pressure", "Pressure Increase", "Power", "Energy Stream", "Defined Curves" };
@@ -66,7 +70,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] heatercalcmode()
         {
-            return new String[] { "Heat Added/Removed", "Outlet Temperature", "Outlet Quality", "Energy Stream" };
+            return new String[] { "Heat Added/Removed", "Outlet Temperature", "Outlet Vapor Fraction", "Energy Stream" };
         }
         public static String[] comprcalcmode()
         {
@@ -109,6 +113,15 @@ namespace DWSIM.UI.Desktop.Shared
         public static String[] rctcalcmode()
         {
             return new String[] { "Adiabatic", "Isothermic", "Outlet Temperature" };
+        }
+        public static String[] rctcalcmode2()
+        {
+            return new String[] { "Adiabatic", "Isothermic", "Outlet Temperature", "Non-Isothermal Non-Adiabatic" };
+        }
+
+        public static String[] rgrpb()
+        {
+            return new String[] { "Calculate Equilibria", "Vapor Only", "Liquid Only", "Solid Only" };
         }
         public static String[] csepspecstream()
         {

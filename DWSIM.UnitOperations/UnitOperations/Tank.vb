@@ -115,10 +115,10 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Height", "Available Liquid Height", 2, UnitOfMeasure.distance)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank's content with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none)
-            AddDynamicProperty("Reset Content", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Height", "Available Liquid Height", 2, UnitOfMeasure.distance, 1.0.GetType())
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank's content with information from the inlet stream, if the vessel content is null.", False, UnitOfMeasure.none, True.GetType())
+            AddDynamicProperty("Reset Content", "Empties the tank's content on the next run.", False, UnitOfMeasure.none, True.GetType())
 
         End Sub
 
@@ -296,6 +296,7 @@ Namespace UnitOperations
 
             'Atribuir valores a corrente de materia conectada a jusante
             With oms
+                .AtEquilibrium = False
                 .Phases(0).Properties.temperature = Ti
                 .Phases(0).Properties.pressure = P2
                 .Phases(0).Properties.enthalpy = Hi
@@ -412,7 +413,7 @@ Namespace UnitOperations
                     Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 Case 1
                     'PROP_TK_1	Volume
-                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
+                    Me.Volume = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
             End Select
             Return 1
         End Function
@@ -479,7 +480,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_tank_32
+            Return My.Resources.tank
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

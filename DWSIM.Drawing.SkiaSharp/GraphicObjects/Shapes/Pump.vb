@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Pump
             Me.Description = "Adiabatic Pump"
+            EmbeddedResourceIconName = "pump.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -47,52 +48,96 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            Dim myIC1 As New ConnectionPoint
-            myIC1.Position = New Point(X, Y + 0.5 * Height)
-            myIC1.Type = ConType.ConIn
+            Dim myIC1, myIC2, myOC1 As New ConnectionPoint
 
-            Dim myIC2 As New ConnectionPoint
-            myIC2.Position = New Point(X + 0.5 * Width, Y + Height)
-            myIC2.Type = ConType.ConEn
+            If DrawMode = 2 Then
 
-            Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(X + Width, Y + 0.1 * Height)
-            myOC1.Type = ConType.ConOut
+                myIC1.Position = New Point(X, Y + 0.625 * Height)
+                myIC1.Type = ConType.ConIn
+                myIC1.Direction = ConDir.Right
 
-            With InputConnectors
+                myIC2.Position = New Point(X + Width, Y + 0.51 * Height)
+                myIC2.Type = ConType.ConEn
+                myIC2.Direction = ConDir.Left
 
-                If .Count = 2 Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                ElseIf .Count = 1 Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    .Add(myIC2)
-                Else
-                    .Add(myIC1)
-                    .Add(myIC2)
-                End If
+                myOC1.Position = New Point(X + 0.129 * Width, Y + 0.433 * Height)
+                myOC1.Type = ConType.ConOut
 
-                .Item(0).ConnectorName = "Inlet"
-                .Item(1).ConnectorName = "Energy Stream"
+                With InputConnectors
 
-            End With
+                    If .Count = 2 Then
+                        .Item(0).Position = New Point(X, Y + 0.625 * Height)
+                        .Item(1).Position = New Point(X + Width, Y + 0.51 * Height)
+                    Else
+                        .Add(myIC1)
+                        .Add(myIC2)
+                    End If
 
-            With OutputConnectors
+                    .Item(0).ConnectorName = "Inlet"
+                    .Item(1).ConnectorName = "Energy Stream"
 
-                If .Count <> 0 Then
-                    .Item(0).Position = New Point(X + Width, Y + 0.1 * Height)
-                Else
-                    .Add(myOC1)
-                End If
+                    .Item(0).Direction = ConDir.Right
+                    .Item(1).Direction = ConDir.Left
 
-                .Item(0).ConnectorName = "Outlet"
+                End With
 
-            End With
+                With OutputConnectors
 
-            Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
-            Me.EnergyConnector.Type = ConType.ConEn
-            Me.EnergyConnector.Direction = ConDir.Up
-            Me.EnergyConnector.ConnectorName = "Energy Stream"
+                    If .Count <> 0 Then
+                        .Item(0).Position = New Point(X + 0.129 * Width, Y + 0.433 * Height)
+                    Else
+                        .Add(myOC1)
+                    End If
+
+                    .Item(0).ConnectorName = "Outlet"
+                    .Item(0).Direction = ConDir.Up
+
+                End With
+
+            Else
+
+                myIC1.Position = New Point(X, Y + 0.5 * Height)
+                myIC1.Type = ConType.ConIn
+
+                myIC2.Position = New Point(X + 0.5 * Width, Y + Height)
+                myIC2.Type = ConType.ConEn
+
+                myOC1.Position = New Point(X + Width, Y + 0.1 * Height)
+                myOC1.Type = ConType.ConOut
+
+                With InputConnectors
+
+                    If .Count = 2 Then
+                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
+                    ElseIf .Count = 1 Then
+                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                        .Add(myIC2)
+                    Else
+                        .Add(myIC1)
+                        .Add(myIC2)
+                    End If
+
+                    .Item(0).ConnectorName = "Inlet"
+                    .Item(1).ConnectorName = "Energy Stream"
+
+                End With
+
+                With OutputConnectors
+
+                    If .Count <> 0 Then
+                        .Item(0).Position = New Point(X + Width, Y + 0.1 * Height)
+                    Else
+                        .Add(myOC1)
+                    End If
+
+                    .Item(0).ConnectorName = "Outlet"
+                    .Item(0).Direction = ConDir.Right
+
+                End With
+
+            End If
+
             Me.EnergyConnector.Active = False
 
         End Sub
@@ -151,6 +196,8 @@ Namespace GraphicObjects.Shapes
 
             Dim rect As New SKRect(X, Y, X + Width, Y + Height)
 
+            Dim rectin As New SKRect(X - 0.05 * Width, Y + 0.35 * Height, X + 0.5 * Width, Y + 0.65 * Height)
+
             Select Case DrawMode
 
                 Case 0
@@ -182,10 +229,14 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp, gradPen)
                     canvas.DrawPath(gp2, gradPen)
                     canvas.DrawOval(rect, gradPen)
+                    canvas.DrawRect(rectin, gradPen)
 
                     canvas.DrawOval(rect, myPen)
                     canvas.DrawPath(gp, myPen)
                     canvas.DrawPath(gp2, myPen)
+                    canvas.DrawRect(rectin, myPen2)
+                    canvas.DrawRect(rectin, gradPen)
+                    canvas.DrawRect(rectin, myPen)
 
                 Case 1
 
@@ -208,10 +259,11 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawPath(gp2, myPen)
                     canvas.DrawOval(rect, myPen2)
                     canvas.DrawOval(rect, myPen)
+                    canvas.DrawRect(rectin, myPen)
 
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 

@@ -25,15 +25,15 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_ReactorConvEqGibbs))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -67,6 +67,10 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.ListViewCompounds = New System.Windows.Forms.ListView()
         Me.TabPageElements = New System.Windows.Forms.TabPage()
         Me.TabPageGibbsParams = New System.Windows.Forms.TabPage()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cbReactivePhaseBehavior = New System.Windows.Forms.ComboBox()
+        Me.chkGibbsUseAlternSolver = New System.Windows.Forms.CheckBox()
+        Me.chkGibbsUseIPOPT = New System.Windows.Forms.CheckBox()
         Me.chkGibbsUsePreviousSolution = New System.Windows.Forms.CheckBox()
         Me.tbIntLoopTol = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -465,6 +469,10 @@ Partial Class EditingForm_ReactorConvEqGibbs
         'TabPageGibbsParams
         '
         resources.ApplyResources(Me.TabPageGibbsParams, "TabPageGibbsParams")
+        Me.TabPageGibbsParams.Controls.Add(Me.Label6)
+        Me.TabPageGibbsParams.Controls.Add(Me.cbReactivePhaseBehavior)
+        Me.TabPageGibbsParams.Controls.Add(Me.chkGibbsUseAlternSolver)
+        Me.TabPageGibbsParams.Controls.Add(Me.chkGibbsUseIPOPT)
         Me.TabPageGibbsParams.Controls.Add(Me.chkGibbsUsePreviousSolution)
         Me.TabPageGibbsParams.Controls.Add(Me.tbIntLoopTol)
         Me.TabPageGibbsParams.Controls.Add(Me.Label18)
@@ -475,6 +483,43 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.ToolTipValues.SetToolTip(Me.TabPageGibbsParams, resources.GetString("TabPageGibbsParams.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPageGibbsParams, resources.GetString("TabPageGibbsParams.ToolTip2"))
         Me.TabPageGibbsParams.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
+        '
+        'cbReactivePhaseBehavior
+        '
+        resources.ApplyResources(Me.cbReactivePhaseBehavior, "cbReactivePhaseBehavior")
+        Me.cbReactivePhaseBehavior.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbReactivePhaseBehavior.FormattingEnabled = True
+        Me.cbReactivePhaseBehavior.Items.AddRange(New Object() {resources.GetString("cbReactivePhaseBehavior.Items"), resources.GetString("cbReactivePhaseBehavior.Items1"), resources.GetString("cbReactivePhaseBehavior.Items2"), resources.GetString("cbReactivePhaseBehavior.Items3")})
+        Me.cbReactivePhaseBehavior.Name = "cbReactivePhaseBehavior"
+        Me.ToolTip1.SetToolTip(Me.cbReactivePhaseBehavior, resources.GetString("cbReactivePhaseBehavior.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbReactivePhaseBehavior, resources.GetString("cbReactivePhaseBehavior.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbReactivePhaseBehavior, resources.GetString("cbReactivePhaseBehavior.ToolTip2"))
+        '
+        'chkGibbsUseAlternSolver
+        '
+        resources.ApplyResources(Me.chkGibbsUseAlternSolver, "chkGibbsUseAlternSolver")
+        Me.chkGibbsUseAlternSolver.Name = "chkGibbsUseAlternSolver"
+        Me.ToolTip1.SetToolTip(Me.chkGibbsUseAlternSolver, resources.GetString("chkGibbsUseAlternSolver.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkGibbsUseAlternSolver, resources.GetString("chkGibbsUseAlternSolver.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkGibbsUseAlternSolver, resources.GetString("chkGibbsUseAlternSolver.ToolTip2"))
+        Me.chkGibbsUseAlternSolver.UseVisualStyleBackColor = True
+        '
+        'chkGibbsUseIPOPT
+        '
+        resources.ApplyResources(Me.chkGibbsUseIPOPT, "chkGibbsUseIPOPT")
+        Me.chkGibbsUseIPOPT.Name = "chkGibbsUseIPOPT"
+        Me.ToolTip1.SetToolTip(Me.chkGibbsUseIPOPT, resources.GetString("chkGibbsUseIPOPT.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkGibbsUseIPOPT, resources.GetString("chkGibbsUseIPOPT.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkGibbsUseIPOPT, resources.GetString("chkGibbsUseIPOPT.ToolTip2"))
+        Me.chkGibbsUseIPOPT.UseVisualStyleBackColor = True
         '
         'chkGibbsUsePreviousSolution
         '
@@ -833,8 +878,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle19
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -842,8 +887,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle20
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -851,8 +896,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle21
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -884,8 +929,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'Column2
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle22
         Me.Column2.FillWeight = 40.0!
         resources.ApplyResources(Me.Column2, "Column2")
         Me.Column2.Name = "Column2"
@@ -893,8 +938,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle23
         Me.DataGridViewTextBoxColumn3.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
@@ -902,8 +947,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle24
         Me.DataGridViewTextBoxColumn4.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
@@ -911,8 +956,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle25
         Me.DataGridViewTextBoxColumn5.FillWeight = 30.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
@@ -944,8 +989,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle26
         Me.DataGridViewTextBoxColumn6.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -953,8 +998,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle27
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn7, "DataGridViewTextBoxColumn7")
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -1087,4 +1132,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Public WithEvents cbExternalSolver As ComboBox
     Public WithEvents LabelExternalSolver As Label
     Public WithEvents btnConfigExtSolver As Button
+    Public WithEvents chkGibbsUseIPOPT As CheckBox
+    Public WithEvents chkGibbsUseAlternSolver As CheckBox
+    Public WithEvents Label6 As Label
+    Public WithEvents cbReactivePhaseBehavior As ComboBox
 End Class

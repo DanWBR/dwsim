@@ -175,4 +175,7 @@
   <data name="DWSIM_ico_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DWSIM_ico_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="material_stream" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\material_stream.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

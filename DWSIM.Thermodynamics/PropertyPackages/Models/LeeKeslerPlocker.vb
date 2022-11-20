@@ -190,6 +190,51 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
+        Function H_LK_MIX(ByVal V As Double, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal Hid As Double, ByVal VVc As Object) As Double
+
+            Dim n, R As Double
+            Dim Tc(), Pc(), w(), Tr() As Double
+            Dim i As Integer
+
+            n = Vz.Length - 1
+
+            ReDim Tc(n), Pc(n), w(n), Tr(n)
+
+            R = 8.314
+
+            i = 0
+            Do
+                Tc(i) = VTc(i)
+                Tr(i) = T / Tc(i)
+                Pc(i) = VPc(i)
+                w(i) = Vw(i)
+                i = i + 1
+            Loop Until i = n + 1
+
+            i = 0
+            Dim MMm = 0.0#
+            Do
+                MMm += Vz(i) * VMM(i)
+                i += 1
+            Loop Until i = n + 1
+
+            'mixture critical properties
+            Dim Tcm, Pcm, Vcm, wm As Double
+            Dim obj = Me.MixCritProp_LK(Vz, VTc, VPc, Vw, VVc, VKij)
+            Tcm = obj(0)
+            Pcm = obj(1)
+            Vcm = obj(2)
+            wm = obj(3)
+
+            'Dim DHres = R * Tcm * Me.Hlk(T / Tcm, P / Pcm, wm)
+            Dim DHres = R * Tcm * Me.H_LK(V / Vcm, T / Tcm, P / Pcm, wm)
+
+            If DHres = 0 Then Throw New Exception("Erro no calculo da entalpia [LK].")
+
+            H_LK_MIX = Hid + DHres / MMm '/ 1000
+
+        End Function
+
         Function S_LK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double, ByVal VVc As Object) As Double
 
             Dim n, R As Double
@@ -344,6 +389,67 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
+        Function H_LK(ByVal Vr As Double, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double)
+
+            Dim zs, zh, wh, z, DHresS, DHresH, DHres As Double
+            Dim B, C, D, E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
+
+            b1 = 0.1181193
+            b2 = 0.265728
+            b3 = 0.15479
+            b4 = 0.030323
+            c1 = 0.0236744
+            c2 = 0.0186984
+            c3 = 0
+            c4 = 0.042724
+            d1 = 0.0000155488
+            d2 = 0.0000623689
+            beta = 0.65392
+            gamma = 0.060167
+
+            wh = 0.3978
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr1 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zs = Vr * Pr1 / Tr
+
+            E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+            DHresS = Tr * (zs - 1 - (b2 + 2 * b3 / Tr + 3 * b4 / Tr ^ 2) / (Tr * Vr) - (c2 - 3 * c3 / Tr ^ 2) / (2 * Tr * Vr ^ 2) + d2 / (5 * Tr * Vr ^ 5) + 3 * E)
+
+            b1 = 0.2026579
+            b2 = 0.331511
+            b3 = 0.027655
+            b4 = 0.203488
+            c1 = 0.0313385
+            c2 = 0.0503618
+            c3 = 0.016901
+            c4 = 0.041577
+            d1 = 0.000048736
+            d2 = 0.00000740336
+            beta = 1.226
+            gamma = 0.03754
+
+            wh = 0.3978
+
+            Dim Pr2 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zh = Vr * Pr2 / Tr
+
+            E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+            DHresH = Tr * (zh - 1 - (b2 + 2 * b3 / Tr + 3 * b4 / Tr ^ 2) / (Tr * Vr) - (c2 - 3 * c3 / Tr ^ 2) / (2 * Tr * Vr ^ 2) + d2 / (5 * Tr * Vr ^ 5) + 3 * E)
+
+            DHres = DHresS + w / wh * (DHresH - DHresS)
+
+            Return DHres
+
+        End Function
+
         Function S_LK(ByVal TIPO As String, ByVal Tr As Double, ByVal P As Double, ByVal Pc As Double, ByVal w As Double)
 
             Dim zs, zh, wh, Vr, z, DSresS, DSresH, DSres, Pr As Double
@@ -443,7 +549,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function ESTIMAR_Vr2(ByVal TIPO, ByVal Pr, ByVal Tr, ByVal B, ByVal C, ByVal D, ByVal c4, ByVal beta, ByVal gamma)
+        Function ESTIMAR_Vr2(ByVal TIPO As String, ByVal Pr As Double, ByVal Tr As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal c4 As Double, ByVal beta As Double, ByVal gamma As Double)
 
             Dim i As Integer
 
@@ -464,13 +570,17 @@ Namespace PropertyPackages.Auxiliary
             delta_T = (Tsup - Tinf) / nsub
 
             i = 0
+            Dim c4_tr_3 = c4 / Tr ^ 3
             Do
                 i = i + 1
                 Vr = Tinf
-                fT = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+                Dim Vr_2 = Vr ^ 2
+                fT = Pr * Vr / Tr - (1 + B / Vr + C / Vr_2 + D / Vr ^ 5 + c4_tr_3 / Vr_2 * (beta + gamma / Vr_2) * Math.Exp(-gamma / Vr_2))
                 Tinf = Tinf + delta_T
                 Vr = Tinf
-                fT_inf = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+                Vr_2 = Vr ^ 2
+                fT_inf = Pr * Vr / Tr - (1 + B / Vr + C / Vr_2 + D / Vr ^ 5 + c4_tr_3 / Vr_2 * (beta + gamma / Vr_2) * Math.Exp(-gamma / Vr_2))
             Loop Until fT * fT_inf < 0 Or i >= 500
             Tsup = Tinf
             Tinf = Tinf - delta_T
@@ -485,8 +595,10 @@ Namespace PropertyPackages.Auxiliary
             bbb = Tsup
             ccc = Tsup
 
-            faa = Pr * aaa / Tr - (1 + B / aaa + C / aaa ^ 2 + D / aaa ^ 5 + c4 / Tr ^ 3 / aaa ^ 2 * (beta + gamma / aaa ^ 2) * Math.Exp(-gamma / aaa ^ 2))
-            fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb ^ 2 + D / bbb ^ 5 + c4 / Tr ^ 3 / bbb ^ 2 * (beta + gamma / bbb ^ 2) * Math.Exp(-gamma / bbb ^ 2))
+            Dim aaa_2 = aaa ^ 2
+            faa = Pr * aaa / Tr - (1 + B / aaa + C / aaa_2 + D / aaa ^ 5 + c4 / Tr ^ 3 / aaa_2 * (beta + gamma / aaa_2) * Math.Exp(-gamma / aaa_2))
+            Dim bbb_2 = bbb ^ 2
+            fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb_2 + D / bbb ^ 5 + c4 / Tr ^ 3 / bbb_2 * (beta + gamma / bbb_2) * Math.Exp(-gamma / bbb_2))
             fcc = fbb
             iter2 = 0
             Do
@@ -544,13 +656,23 @@ Namespace PropertyPackages.Auxiliary
                 Else
                     bbb += Math.Sign(xmm) * tol11
                 End If
-                fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb ^ 2 + D / bbb ^ 5 + c4 / Tr ^ 3 / bbb ^ 2 * (beta + gamma / bbb ^ 2) * Math.Exp(-gamma / bbb ^ 2))
+                Dim bbb1_2 = bbb ^ 2
+                fbb = Pr * bbb / Tr - (1 + B / bbb + C / bbb1_2 + D / bbb ^ 5 + c4 / Tr ^ 3 / bbb1_2 * (beta + gamma / bbb1_2) * Math.Exp(-gamma / bbb1_2))
                 iter2 += 1
             Loop Until iter2 = ITMAX2
 
 Final3:
 
             Return bbb
+
+        End Function
+
+        Function CalcPr(Vr As Double, ByVal Tr As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal c4 As Double, ByVal beta As Double, ByVal gamma As Double) As Double
+
+            Dim c4_tr_3 = c4 / Tr ^ 3
+            Dim Pr = Tr / Vr * (1 + B / Vr + C / Vr + D / Vr ^ 5 + c4_tr_3 / Vr * (beta + gamma / Vr) * Math.Exp(-gamma / Vr))
+
+            Return Pr
 
         End Function
 
@@ -750,6 +872,77 @@ Final3:
 
         End Function
 
+        Function LnFugM(ByVal Vr As Double, ByVal Tr As Double, ByVal Pr As Double, ByVal w As Double) As Double()
+
+            Dim zs, zh, wh, z, LnFugMS, LnFugMH, LnFugMr As Double
+            Dim B, C, D, E, b1, b2, b3, b4, c1, c2, c3, c4, d1, d2, beta, gamma As Double
+
+            b1 = 0.1181193
+            b2 = 0.265728
+            b3 = 0.15479
+            b4 = 0.030323
+            c1 = 0.0236744
+            c2 = 0.0186984
+            c3 = 0
+            c4 = 0.042724
+            d1 = 0.0000155488
+            d2 = 0.0000623689
+            beta = 0.65392
+            gamma = 0.060167
+
+            wh = 0.3978
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr1 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zs = Vr * Pr1 / Tr
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+            E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+            LnFugMS = zs - 1 - Math.Log(zs) + B / Vr + C / (2 * Vr ^ 2) + D / (5 * Vr ^ 5) + E
+
+            b1 = 0.2026579
+            b2 = 0.331511
+            b3 = 0.027655
+            b4 = 0.203488
+            c1 = 0.0313385
+            c2 = 0.0503618
+            c3 = 0.016901
+            c4 = 0.041577
+            d1 = 0.000048736
+            d2 = 0.00000740336
+            beta = 1.226
+            gamma = 0.03754
+
+            wh = 0.3978
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+
+            Dim Pr2 = CalcPr(Vr, Tr, B, C, D, c4, beta, gamma)
+
+            zh = Vr * Pr2 / Tr
+
+            B = b1 - b2 / Tr - b3 / Tr ^ 2 - b4 / Tr ^ 3
+            C = c1 - c2 / Tr + c3 / Tr ^ 3
+            D = d1 + d2 / Tr
+            E = c4 / (2 * Tr ^ 3 * gamma) * (beta + 1 - (beta + 1 + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
+
+            LnFugMH = zh - 1 - Math.Log(zh) + B / Vr + C / (2 * Vr ^ 2) + D / (5 * Vr ^ 5) + E
+
+            LnFugMr = LnFugMS + w / wh * (LnFugMH - LnFugMS)
+
+            Return New Double() {LnFugMr, LnFugMS, LnFugMH}
+
+        End Function
+
         Function CalcLnFug(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal VVc As Object, ByVal Hid As Double) As Object
 
             If Settings.EnableGPUProcessing Then
@@ -809,8 +1002,6 @@ Final3:
 
             Dim sum1(n, n), sum2(n, n) As Double
 
-
-
             For i = 0 To n
                 For j = 0 To n
                     sum1(i, j) = 0
@@ -834,6 +1025,101 @@ Final3:
             Dim suma(n), sumb(n), sumc(n), zm As Double
 
             zm = Me.Z_LK(TIPO, Tr, Pr, wm)(0)
+
+            For i = 0 To n
+                suma(i) = 0
+                sumb(i) = 0
+                sumc(i) = 0
+                For j = 0 To n
+                    If j <> i Then
+                        suma(i) += Vz(j) * dTcmdx(i, j)
+                        sumb(i) += Vz(j) * dPcmdx(i, j)
+                        sumc(i) += Vz(j) * (Vw(j) - Vw(i))
+                    End If
+                Next
+            Next
+
+            For i = 0 To n
+                lnfi(i) = lnfugm - 1 / T * dHmRTcm * suma(i) + (zm - 1) / Pcm * sumb(i) - dlnfidwm * sumc(i)
+            Next
+
+            Return lnfi
+
+        End Function
+
+        Function CalcLnFugTV(T As Double, P As Double, V As Double, Vz As Double(), VKij As Double(,), VTc As Double(), VPc As Double(), Vw As Double(), VMM As Double(), VVc As Double(), Hid As Double) As Double()
+
+            'mixture critical properties
+            Dim Tcm, Pcm, Vcm, wm, Tr, Pr, Vr, zcm As Double
+            Dim obj = Me.MixCritProp_LK(Vz, VTc, VPc, Vw, VVc, VKij)
+            Tcm = obj(0)
+            Pcm = obj(1)
+            Vcm = obj(2)
+            wm = obj(3)
+            Tr = T / Tcm
+            Pr = P / Pcm
+            Vr = V / Vcm
+            zcm = Pcm * Vcm / (8.314 * Tcm)
+
+            Dim i, j, l, n As Integer
+
+            n = Vz.Length - 1
+
+            i = 0
+            Dim MMm = 0.0#
+            Do
+                MMm += Vz(i) * VMM(i)
+                i += 1
+            Loop Until i = n + 1
+
+            Dim dHmRTcm As Double
+
+            dHmRTcm = Me.H_LK_MIX(V, T, P, Vz, VKij, VTc, VPc, Vw, VMM, 0, VVc) / (8.314 * Tcm) * MMm
+
+            Dim dlnfidwm, dTcmdx(n, n), dVcmdx(n, n), dPcmdx(n, n), dZcmdx(n, n), lnfi(n) As Double
+            Dim lnfugm, lnfugs, lnfugh As Double, res As Double()
+
+            res = Me.LnFugM(Vr, Tr, Pr, wm)
+            lnfugm = res(0)
+            lnfugs = res(1)
+            lnfugh = res(2)
+
+            dlnfidwm = 1 / 0.3978 * (lnfugh - lnfugs)
+
+            Dim vcjk(n, n), tcjk(n, n) As Double
+
+            For i = 0 To n
+                For j = 0 To n
+                    vcjk(i, j) = 1 / 8 * (VVc(i) ^ (1 / 3) + VVc(j) ^ (1 / 3)) ^ 3 / 1000
+                    tcjk(i, j) = (VTc(i) * VTc(j)) ^ 0.5 * VKij(i, j)
+                Next
+            Next
+
+            Dim sum1(n, n), sum2(n, n) As Double
+
+            For i = 0 To n
+                For j = 0 To n
+                    sum1(i, j) = 0
+                    sum2(i, j) = 0
+                    For l = 0 To n
+                        sum1(i, j) += Vz(l) * (vcjk(l, j) ^ 0.25 * tcjk(l, j) - vcjk(l, i) ^ 0.25 * tcjk(l, i))
+                        sum2(i, j) += Vz(l) * (vcjk(l, j) - vcjk(l, i))
+                    Next
+                Next
+            Next
+
+            For i = 0 To n
+                For j = 0 To n
+                    dZcmdx(i, j) = -0.085 * (Vw(j) - Vw(i))
+                    dVcmdx(i, j) = 2 * sum2(i, j)
+                    dTcmdx(i, j) = (2 * sum1(i, j) - 0.25 * Vcm ^ (0.25 - 1) * dVcmdx(i, j) * Tcm) / Vcm ^ 0.25
+                    dPcmdx(i, j) = Pcm * (dZcmdx(i, j) / zcm + dTcmdx(i, j) / Tcm - dVcmdx(i, j) / Vcm)
+                Next
+            Next
+
+            Dim suma(n), sumb(n), sumc(n), zm As Double
+
+            zm = (P * V) / (8.314 * T)
 
             For i = 0 To n
                 suma(i) = 0

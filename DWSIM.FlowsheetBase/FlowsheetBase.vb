@@ -26,10 +26,14 @@ Imports System.Dynamic
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.GlobalSettings
 Imports DWSIM.Thermodynamics.AdvancedEOS
+Imports SkiaSharp
+Imports System.Text.RegularExpressions
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
+
+    Public Property WeatherProvider As IWeatherProvider = New SharedClasses.WeatherProvider() Implements IFlowsheet.WeatherProvider
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
 
@@ -70,6 +74,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
 
+    Public RetrieveSpreadsheetFormat As Func(Of String, List(Of String()))
+
     Public Property ScriptKeywordsF As String = ""
 
     Public Property ScriptKeywordsU As String = ""
@@ -105,6 +111,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
     End Function
 
     Public Sub AddPropertyPackage(obj As IPropertyPackage) Implements IFlowsheet.AddPropertyPackage
+        If obj.UniqueID = "" Then obj.UniqueID = Guid.NewGuid().ToString()
+        If obj.Tag = "" Then obj.Tag = obj.GetType().Name
+        obj.Flowsheet = Me
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub
 
@@ -154,6 +163,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         gobj.ObjectType = ObjectType.GO_MasterTable Or
                         gobj.ObjectType = ObjectType.GO_SpreadsheetTable Or
                         gobj.ObjectType = ObjectType.GO_Text Or
+                        gobj.ObjectType = ObjectType.GO_HTMLText Or
+                        gobj.ObjectType = ObjectType.GO_Button Or
                         gobj.ObjectType = ObjectType.GO_Chart Then
 
                         Me.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -420,169 +431,202 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Property CalculationQueue As New Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
-    Public Function AddObject(ByVal typename As String, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "") As ISimulationObject
+    Public Function AddObject(ByVal typename As String, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "",
+                              Optional ByVal id As String = "", Optional CreateConnected As Boolean = False) As ISimulationObject
 
         Select Case typename
 
             Case "Controller Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Adjust, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Adjust, x, y, tag,,, CreateConnected))
 
             Case "Specification Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Spec, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Spec, x, y, tag,,, CreateConnected))
 
             Case "Recycle Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Recycle, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Recycle, x, y, tag,,, CreateConnected))
 
             Case "Energy Recycle Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_EnergyRecycle, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_EnergyRecycle, x, y, tag,,, CreateConnected))
 
             Case "Stream Mixer"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeIn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeIn, x, y, tag,,, CreateConnected))
 
             Case "Stream Splitter"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeOut, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeOut, x, y, tag,,, CreateConnected))
 
             Case "Pump"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pump, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pump, x, y, tag,,, CreateConnected))
 
             Case "Tank"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Tank, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Tank, x, y, tag,,, CreateConnected))
 
             Case "Gas-Liquid Separator"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Vessel, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Vessel, x, y, tag,,, CreateConnected))
 
             Case "Material Stream"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x, y, tag,,, CreateConnected))
 
             Case "Energy Stream"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.EnergyStream, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.EnergyStream, x, y, tag,,, CreateConnected))
 
             Case "Compressor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Compressor, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Compressor, x, y, tag,,, CreateConnected))
 
             Case "Expander (Turbine)"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Expander, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Expander, x, y, tag,,, CreateConnected))
 
             Case "Heater"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Heater, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Heater, x, y, tag,,, CreateConnected))
 
             Case "Cooler"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Cooler, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Cooler, x, y, tag,,, CreateConnected))
 
-            Case "Piping Segment"
+            Case "Pipe Segment"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pipe, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pipe, x, y, tag,,, CreateConnected))
 
             Case "Valve"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Valve, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Valve, x, y, tag,,, CreateConnected))
 
             Case "Conversion Reactor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Conversion, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Conversion, x, y, tag,,, CreateConnected))
 
             Case "Equilibrium Reactor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Equilibrium, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Equilibrium, x, y, tag,,, CreateConnected))
 
             Case "Gibbs Reactor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Gibbs, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Gibbs, x, y, tag,,, CreateConnected))
 
             Case "Plug-Flow Reactor (PFR)"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_PFR, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_PFR, x, y, tag,,, CreateConnected))
 
             Case "Continuous Stirred Tank Reactor (CSTR)"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_CSTR, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_CSTR, x, y, tag,,, CreateConnected))
 
             Case "Heat Exchanger"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HeatExchanger, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HeatExchanger, x, y, tag,,, CreateConnected))
 
             Case "Shortcut Column"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ShortcutColumn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ShortcutColumn, x, y, tag,,, CreateConnected))
 
             Case "Distillation Column"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DistillationColumn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DistillationColumn, x, y, tag,,, CreateConnected))
 
             Case "Absorption Column", "Absorption/Extraction Column"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AbsorptionColumn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AbsorptionColumn, x, y, tag,,, CreateConnected))
 
             Case "Compound Separator"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ComponentSeparator, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ComponentSeparator, x, y, tag,,, CreateConnected))
 
             Case "Solids Separator"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolidSeparator, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolidSeparator, x, y, tag,,, CreateConnected))
 
             Case "Filter"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Filter, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Filter, x, y, tag,,, CreateConnected))
 
             Case "Orifice Plate"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OrificePlate, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OrificePlate, x, y, tag,,, CreateConnected))
 
             Case "Python Script"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CustomUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CustomUO, x, y, tag,,, CreateConnected))
 
             Case "Spreadsheet"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ExcelUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ExcelUO, x, y, tag,,, CreateConnected))
 
             Case "Flowsheet"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.FlowsheetUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.FlowsheetUO, x, y, tag,,, CreateConnected))
 
             Case "CAPE-OPEN Unit Operation"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CapeOpenUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CapeOpenUO, x, y, tag,,, CreateConnected))
 
             Case "Digital Gauge"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DigitalGauge, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DigitalGauge, x, y, tag,,, CreateConnected))
 
             Case "Analog Gauge"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AnalogGauge, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AnalogGauge, x, y, tag,,, CreateConnected))
 
             Case "Level Gauge"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.LevelGauge, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.LevelGauge, x, y, tag,,, CreateConnected))
 
             Case "PID Controller"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_PID, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_PID, x, y, tag,,, CreateConnected))
+
+            Case "Python Controller"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_Python, x, y, tag,,, CreateConnected))
 
             Case "Input Box"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Input, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Input, x, y, tag,,, CreateConnected))
 
             Case "Switch"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Switch, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Switch, x, y, tag,,, CreateConnected))
+
+            Case "Air Cooler 2"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AirCooler2, x, y, tag,,, CreateConnected))
+
+            Case "Gibbs Reactor (Reaktoro)"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_GibbsReaktoro, x, y, tag,,, CreateConnected))
+
+            Case "Wind Turbine"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.WindTurbine, x, y, tag,,, CreateConnected))
+
+            Case "Hydroelectric Turbine"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HydroelectricTurbine, x, y, tag,,, CreateConnected))
+
+            Case "Solar Panel"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolarPanel, x, y, tag,,, CreateConnected))
+
+            Case "Water Electrolyzer"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.WaterElectrolyzer, x, y, tag,,, CreateConnected))
+
+            Case "PEM Fuel Cell (Amphlett)"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.PEMFuelCell, x, y, tag,,, CreateConnected))
 
             Case Else
 
@@ -592,33 +636,39 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     End Function
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "", Optional ByVal uoobj As IExternalUnitOperation = Nothing) As String
+    Public Function AddObjectToSurface(type As ObjectType, x As Integer, y As Integer,
+                                       Optional tag As String = "",
+                                       Optional id As String = "",
+                                       Optional uoobj As Interfaces.IExternalUnitOperation = Nothing,
+                                       Optional CreateConnected As Boolean = False) As String
 
-        Dim gObj As IGraphicObject = Nothing
+        Dim gObj As GraphicObject = Nothing
         Dim mpx = x '- SplitContainer1.SplitterDistance
         Dim mpy = y '- ToolStripContainer1.TopToolStripPanel.Height
+
+        Dim objindex = (SimulationObjects.Values.Where(Function(o) o.GraphicObject.ObjectType = type).Count + 1).ToString()
 
         Select Case type
 
             Case ObjectType.External
 
                 Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = uoobj.Prefix & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = uoobj.Prefix + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                DirectCast(uoobj, ISimulationObject).Name = gObj.Name
+                DirectCast(uoobj, Interfaces.ISimulationObject).Name = gObj.Name
                 GraphicObjects.Add(gObj.Name, myNode)
-                DirectCast(uoobj, ISimulationObject).GraphicObject = myNode
+                DirectCast(uoobj, Interfaces.ISimulationObject).GraphicObject = myNode
                 myNode.CreateConnectors(0, 0)
                 SimulationObjects.Add(myNode.Name, uoobj)
 
             Case ObjectType.Switch
 
                 Dim myGobj As New SwitchGraphic(mpx, mpy, 50, 40)
-                myGobj.Tag = "SW-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = "SW-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -632,7 +682,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Input
 
                 Dim myGobj As New InputGraphic(mpx, mpy, 50, 25)
-                myGobj.Tag = "IN-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = "IN-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -648,7 +698,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Controller_PID
 
                 Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = "PID-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = "PID-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -661,10 +711,24 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 GraphicObjectControlPanelModeEditors.SetPIDDelegate(myGobj, myObj)
 
+            Case ObjectType.Controller_Python
+
+                Dim myGobj As New PythonControllerGraphic(mpx, mpy, 50, 50)
+                myGobj.Tag = "PC-" + objindex
+                If tag <> "" Then myGobj.Tag = tag
+                gObj = myGobj
+                CheckTag(gObj)
+                gObj.Name = "PC-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myGobj)
+                Dim myObj As PythonController = New PythonController(gObj.Name, "")
+                myObj.GraphicObject = myGobj
+                SimulationObjects.Add(myGobj.Name, myObj)
+
             Case ObjectType.LevelGauge
 
                 Dim myGobj As New LevelGaugeGraphic(mpx, mpy, 40, 70)
-                myGobj.Tag = "LG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = "LG-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -678,7 +742,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.DigitalGauge
 
                 Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 40, 20)
-                myGobj.Tag = "DG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = "DG-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -692,7 +756,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.AnalogGauge
 
                 Dim myGobj As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = "AG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = "AG-" + objindex
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -705,12 +769,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.OT_Adjust
 
-                Dim myNode As New AdjustGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "CTRL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myNode As New AdjustGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "C-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
-                gObj.Name = Guid.NewGuid.ToString
+                gObj.Name = "AJ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
                 Dim myADJ As Adjust = New Adjust(myNode.Name, "Ajuste")
@@ -719,12 +785,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.OT_Spec
 
-                Dim myNode As New SpecGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "SPEC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myNode As New SpecGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "SP-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
-                gObj.Name = "SPEC-" & Guid.NewGuid.ToString
+                gObj.Name = "ES-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
                 Dim myADJ As Spec = New Spec(myNode.Name, "Especificao")
@@ -733,22 +801,26 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.OT_Recycle
 
-                Dim myNode As New RecycleGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "REC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myNode As New RecycleGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "R-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
                 gObj.Name = "REC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
-                Dim myADJ As Recycle = New Recycle(myNode.Name, "")
+                Dim myADJ As Recycle = New Recycle(myNode.Name, "Reciclo")
                 myADJ.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myADJ)
 
             Case ObjectType.OT_EnergyRecycle
 
-                Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "EREC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "ER-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -759,24 +831,28 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myADJ.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myADJ)
 
-            Case ObjectType.NodeIn
+            Case ObjectType.NodeIn, ObjectType.Mixer
 
-                Dim myNode As New MixerGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "MIX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myNode As New MixerGraphic(mpx, mpy, 20, 20)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "MIX-" + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
-                gObj.Name = "MIX-" & Guid.NewGuid.ToString
+                gObj.Name = "MIST-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
-                Dim myCOMIX As Mixer = New Mixer(myNode.Name, "")
+                Dim myCOMIX As Mixer = New Mixer(myNode.Name, "Misturador")
                 myCOMIX.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myCOMIX)
 
-            Case ObjectType.NodeOut
+            Case ObjectType.NodeOut, ObjectType.Splitter
 
-                Dim myNodeo As New SplitterGraphic(mpx, mpy, 40, 40)
-                myNodeo.Tag = "SPLT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myNodeo As New SplitterGraphic(mpx, mpy, 20, 20)
+                myNodeo.LineWidth = 2
+                myNodeo.Fill = True
+                myNodeo.Tag = "SPL-" + objindex
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
                 CheckTag(gObj)
@@ -784,33 +860,40 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNodeo)
                 'OBJETO DWSIM
-                Dim myCOSP As Splitter = New Splitter(myNodeo.Name, "")
+                Dim myCOSP As UnitOperations.UnitOperations.Splitter = New UnitOperations.UnitOperations.Splitter(myNodeo.Name, "Divisor")
                 myCOSP.GraphicObject = myNodeo
                 SimulationObjects.Add(myNodeo.Name, myCOSP)
 
             Case ObjectType.Pump
 
-                Dim myPump As New PumpGraphic(mpx, mpy, 40, 40)
-                myPump.Tag = "PUMP-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myPump As New PumpGraphic(mpx, mpy, 25, 25)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myPump.SetSize(New SKSize(40, 40))
+                End If
+                myPump.LineWidth = 2
+                myPump.Fill = True
+                myPump.Tag = "PUMP-" + objindex
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
                 CheckTag(gObj)
-                gObj.Name = "PUMP-" & Guid.NewGuid.ToString
+                gObj.Name = "BB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myPump)
                 'OBJETO DWSIM
-                Dim myCOSP As Pump = New Pump(myPump.Name, "")
+                Dim myCOSP As Pump = New Pump(myPump.Name, "Bomba")
                 myCOSP.GraphicObject = myPump
                 SimulationObjects.Add(myPump.Name, myCOSP)
 
             Case ObjectType.Tank
 
                 Dim myTank As New TankGraphic(mpx, mpy, 50, 50)
-                myTank.Tag = "TANK-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myTank.LineWidth = 2
+                myTank.Fill = True
+                myTank.Tag = "TANK-" + objindex
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
                 CheckTag(gObj)
-                gObj.Name = "TANK-" & Guid.NewGuid.ToString
+                gObj.Name = "TQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myTank)
                 'OBJETO DWSIM
@@ -820,31 +903,38 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.Vessel
 
-                Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
-                myVessel.Tag = "V-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myVessel As New VesselGraphic(mpx, mpy, 50, 50)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myVessel.SetSize(New SKSize(70, 60))
+                End If
+                myVessel.LineWidth = 2
+                myVessel.Fill = True
+                myVessel.Tag = "V-" + objindex
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
                 CheckTag(gObj)
-                gObj.Name = "V-" & Guid.NewGuid.ToString
+                gObj.Name = "SEP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myVessel)
                 'OBJETO DWSIM
-                Dim myCOVESSEL As Vessel = New Vessel(myVessel.Name, "")
+                Dim myCOVESSEL As Vessel = New Vessel(myVessel.Name, "VasoSeparadorGL")
                 myCOVESSEL.GraphicObject = myVessel
                 SimulationObjects.Add(myVessel.Name, myCOVESSEL)
 
             Case ObjectType.MaterialStream
 
                 Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 20, 20)
-                myMStr.Tag = "MSTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myMStr.LineWidth = 2
+                myMStr.Fill = True
+                myMStr.Tag = objindex
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 CheckTag(gObj)
-                gObj.Name = "MSTR-" & Guid.NewGuid.ToString
+                gObj.Name = "MAT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
-                Dim myCOMS As MaterialStream = New MaterialStream(myMStr.Name, "CorrentedeMatria", Me, Nothing)
+                Dim myCOMS As Thermodynamics.Streams.MaterialStream = New Thermodynamics.Streams.MaterialStream(myMStr.Name, "CorrentedeMatria", Me, Nothing)
                 myCOMS.GraphicObject = myMStr
                 AddCompoundsToMaterialStream(myCOMS)
                 SimulationObjects.Add(myCOMS.Name, myCOMS)
@@ -852,116 +942,106 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.EnergyStream
 
                 Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 20, 20)
-                myMStr.Tag = "ESTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myMStr.LineWidth = 2
+                myMStr.Fill = True
+                myMStr.Tag = "E" + objindex
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 CheckTag(gObj)
-                gObj.Name = "ESTR-" & Guid.NewGuid.ToString
+                gObj.Name = "EN-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
-                Dim myCOES As EnergyStream = New EnergyStream(myMStr.Name, "")
+                Dim myCOES As EnergyStream = New EnergyStream(myMStr.Name, "CorrentedeEnergia")
                 myCOES.GraphicObject = myMStr
                 SimulationObjects.Add(myCOES.Name, myCOES)
 
-            Case ObjectType.CompressorExpander
-
-                Dim myComp As New CompressorExpanderGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = "CX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
-                If tag <> "" Then myComp.Tag = tag
-                gObj = myComp
-                CheckTag(gObj)
-                gObj.Name = "CX-" & Guid.NewGuid.ToString
-                If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myComp)
-                'OBJETO DWSIM
-                Dim myCOCP As Compressor = New Compressor(myComp.Name, "")
-                myCOCP.GraphicObject = myComp
-                SimulationObjects.Add(myComp.Name, myCOCP)
-
             Case ObjectType.Compressor
 
-                Dim myComp As New CompressorGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = "C-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myComp As New CompressorGraphic(mpx, mpy, 25, 25)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myComp.SetSize(New SKSize(50, 50))
+                End If
+                myComp.LineWidth = 2
+                myComp.Fill = True
+                myComp.Tag = "C-" + objindex
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 CheckTag(gObj)
-                gObj.Name = "C-" & Guid.NewGuid.ToString
+                gObj.Name = "COMP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
                 'OBJETO DWSIM
-                Dim myCOCP As Compressor = New Compressor(myComp.Name, "")
+                Dim myCOCP As Compressor = New Compressor(myComp.Name, "CompressorAdiabtico")
                 myCOCP.GraphicObject = myComp
                 SimulationObjects.Add(myComp.Name, myCOCP)
 
             Case ObjectType.Expander
 
-                Dim myComp As New TurbineGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = "X-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myComp As New TurbineGraphic(mpx, mpy, 25, 25)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myComp.SetSize(New SKSize(50, 50))
+                End If
+                myComp.LineWidth = 2
+                myComp.Fill = True
+                myComp.Tag = "X-" + objindex
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
-                CheckTag(gObj)
-                gObj.Name = "X-" & Guid.NewGuid.ToString
+                gObj.Name = "TURB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
                 'OBJETO DWSIM
-                Dim myCOCP As Expander = New Expander(myComp.Name, "")
+                Dim myCOCP As Expander = New Expander(myComp.Name, "TurbinaAdiabtica")
                 myCOCP.GraphicObject = myComp
                 SimulationObjects.Add(myComp.Name, myCOCP)
 
-            Case ObjectType.HeaterCooler
+            Case ObjectType.Cooler
 
-                Dim myCool As New HeaterCoolerGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = "HC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myCool As New CoolerGraphic(mpx, mpy, 25, 25)
+                myCool.LineWidth = 2
+                myCool.Fill = True
+                myCool.Tag = "CL-" + objindex
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 CheckTag(gObj)
-                gObj.Name = "HC-" & Guid.NewGuid.ToString
+                gObj.Name = "RESF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCool)
                 'OBJETO DWSIM
-                Dim myCOCL As Heater = New Heater(myCool.Name, "")
+                Dim myCOCL As Cooler = New Cooler(myCool.Name, "Resfriador")
                 myCOCL.GraphicObject = myCool
                 SimulationObjects.Add(myCool.Name, myCOCL)
 
             Case ObjectType.Heater
 
-                Dim myCool As New HeaterGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = "HT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
-                If tag <> "" Then myCool.Tag = tag
-                gObj = myCool
+                Dim myHeat As New HeaterGraphic(mpx, mpy, 25, 25)
+                myHeat.LineWidth = 2
+                myHeat.Fill = True
+                myHeat.Tag = "HT-" + objindex
+                If tag <> "" Then myHeat.Tag = tag
+                gObj = myHeat
                 CheckTag(gObj)
-                gObj.Name = "HT-" & Guid.NewGuid.ToString
+                gObj.Name = "AQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myCool)
+                GraphicObjects.Add(gObj.Name, myHeat)
                 'OBJETO DWSIM
-                Dim myCOCL As Heater = New Heater(myCool.Name, "")
-                myCOCL.GraphicObject = myCool
-                SimulationObjects.Add(myCool.Name, myCOCL)
-
-            Case ObjectType.Cooler
-
-                Dim myCool As New CoolerGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = "CL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
-                If tag <> "" Then myCool.Tag = tag
-                gObj = myCool
-                CheckTag(gObj)
-                gObj.Name = "CL-" & Guid.NewGuid.ToString
-                If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myCool)
-                'OBJETO DWSIM
-                Dim myCOCL As Cooler = New Cooler(myCool.Name, "")
-                myCOCL.GraphicObject = myCool
-                SimulationObjects.Add(myCool.Name, myCOCL)
+                Dim myCOCL As Heater = New Heater(myHeat.Name, "Aquecedor")
+                myCOCL.GraphicObject = myHeat
+                SimulationObjects.Add(myHeat.Name, myCOCL)
 
             Case ObjectType.Pipe
 
-                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 80, 20)
-                myPipe.Tag = "PIPE-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 50, 10)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myPipe.SetSize(New SKSize(50, 20))
+                End If
+                myPipe.LineWidth = 2
+                myPipe.Fill = True
+                myPipe.Tag = "PIPE-" + objindex
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
                 CheckTag(gObj)
-                gObj.Name = "PIPE-" & Guid.NewGuid.ToString
+                gObj.Name = "TUB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myPipe)
                 'OBJETO DWSIM
@@ -971,27 +1051,34 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.Valve
 
-                Dim myValve As New ValveGraphic(mpx, mpy, 40, 40)
-                myValve.Tag = "VALVE-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myValve As New ValveGraphic(mpx, mpy, 20, 20)
+                Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 50, 10)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myValve.SetSize(New SKSize(30, 30))
+                End If
+                myValve.LineWidth = 2
+                myValve.Fill = True
+                myValve.Tag = "VALVE-" + objindex
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
                 CheckTag(gObj)
-                gObj.Name = "VALVE-" & Guid.NewGuid.ToString
+                gObj.Name = "VALV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myValve)
                 'OBJETO DWSIM
-                Dim myCOVALVE As Valve = New Valve(myValve.Name, "")
+                Dim myCOVALVE As Valve = New Valve(myValve.Name, "Vlvula")
                 myCOVALVE.GraphicObject = myValve
                 SimulationObjects.Add(myValve.Name, myCOVALVE)
 
             Case ObjectType.RCT_Conversion
 
                 Dim myRconv As New ConversionReactorGraphic(mpx, mpy, 50, 50)
-                myRconv.Tag = "CR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRconv.LineWidth = 2
+                myRconv.Fill = True
+                myRconv.Tag = "RCONV-" + objindex
                 If tag <> "" Then myRconv.Tag = tag
                 gObj = myRconv
-                CheckTag(gObj)
-                gObj.Name = "CR-" & Guid.NewGuid.ToString
+                gObj.Name = "RC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRconv)
                 'OBJETO DWSIM
@@ -1002,11 +1089,13 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_Equilibrium
 
                 Dim myReq As New EquilibriumReactorGraphic(mpx, mpy, 50, 50)
-                myReq.Tag = "ER-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myReq.LineWidth = 2
+                myReq.Fill = True
+                myReq.Tag = "REQ-" + objindex
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
                 CheckTag(gObj)
-                gObj.Name = "ER-" & Guid.NewGuid.ToString
+                gObj.Name = "RE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myReq)
                 'OBJETO DWSIM
@@ -1017,11 +1106,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_Gibbs
 
                 Dim myRgibbs As New GibbsReactorGraphic(mpx, mpy, 50, 50)
-                myRgibbs.Tag = "GR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRgibbs.LineWidth = 2
+                myRgibbs.Fill = True
+                myRgibbs.Tag = "RGIBBS-" + objindex
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
-                CheckTag(gObj)
-                gObj.Name = "GR-" & Guid.NewGuid.ToString
+                gObj.Name = "RG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRgibbs)
                 'OBJETO DWSIM
@@ -1032,7 +1122,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_CSTR
 
                 Dim myRcstr As New CSTRGraphic(mpx, mpy, 50, 50)
-                myRcstr.Tag = "CSTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRcstr.LineWidth = 2
+                myRcstr.Fill = True
+                myRcstr.Tag = "CSTR-" + objindex
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
                 CheckTag(gObj)
@@ -1047,7 +1139,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.RCT_PFR
 
                 Dim myRpfr As New PFRGraphic(mpx, mpy, 70, 20)
-                myRpfr.Tag = "PFR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRpfr.LineWidth = 2
+                myRpfr.Fill = True
+                myRpfr.Tag = "PFR-" + objindex
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
                 CheckTag(gObj)
@@ -1061,68 +1155,79 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
             Case ObjectType.HeatExchanger
 
-                Dim myHeatExchanger As New HeatExchangerGraphic(mpx, mpy, 50, 50)
-                myHeatExchanger.Tag = "HX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                Dim myHeatExchanger As New HeatExchangerGraphic(mpx, mpy, 30, 30)
+                If FlowsheetOptions.FlowsheetColorTheme = 2 Then
+                    myHeatExchanger.SetSize(New SKSize(60, 60))
+                End If
+                myHeatExchanger.LineWidth = 2
+                myHeatExchanger.Fill = True
+                myHeatExchanger.Tag = "HX-" + objindex
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
                 CheckTag(gObj)
-                gObj.Name = "HX-" & Guid.NewGuid.ToString
+                gObj.Name = "HE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myHeatExchanger)
                 'OBJETO DWSIM
-                Dim myCOHE As HeatExchanger = New HeatExchanger(myHeatExchanger.Name, "")
+                Dim myCOHE As HeatExchanger = New HeatExchanger(myHeatExchanger.Name, "HeatExchanger")
                 myCOHE.GraphicObject = myHeatExchanger
                 SimulationObjects.Add(myHeatExchanger.Name, myCOHE)
 
             Case ObjectType.ShortcutColumn
 
                 Dim mySC As New ShortcutColumnGraphic(mpx, mpy, 144, 180)
-                mySC.Tag = "SC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                mySC.LineWidth = 2
+                mySC.Fill = True
+                mySC.Tag = "SCOL-" + objindex
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
-                CheckTag(gObj)
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As ShortcutColumn = New ShortcutColumn(mySC.Name, "")
+                Dim myCOSC As ShortcutColumn = New ShortcutColumn(mySC.Name, "ShortcutColumn")
                 myCOSC.GraphicObject = mySC
                 SimulationObjects.Add(mySC.Name, myCOSC)
 
             Case ObjectType.DistillationColumn
 
-                Dim myDC As New RigorousColumnGraphic(mpx, mpy, 144, 180)
-                myDC.Tag = "DC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
-                If tag <> "" Then myDC.Tag = tag
-                gObj = myDC
+                Dim mySC As New RigorousColumnGraphic(mpx, mpy, 144, 180)
+                mySC.LineWidth = 2
+                mySC.Fill = True
+                mySC.Tag = "DCOL-" + objindex
+                If tag <> "" Then mySC.Tag = tag
+                gObj = mySC
                 CheckTag(gObj)
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myDC)
+                GraphicObjects.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As DistillationColumn = New DistillationColumn(myDC.Name, "DistillationColumn", Me)
-                myCOSC.GraphicObject = myDC
-                SimulationObjects.Add(myDC.Name, myCOSC)
+                Dim myCOSC As DistillationColumn = New DistillationColumn(mySC.Name, "DistillationColumn", Me)
+                myCOSC.GraphicObject = mySC
+                SimulationObjects.Add(mySC.Name, myCOSC)
 
             Case ObjectType.AbsorptionColumn
 
-                Dim myAC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
-                myAC.Tag = "ABS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
-                If tag <> "" Then myAC.Tag = tag
-                gObj = myAC
-                CheckTag(gObj)
+                Dim mySC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
+                mySC.LineWidth = 2
+                mySC.Fill = True
+                mySC.Tag = "ABS-" + objindex
+                If tag <> "" Then mySC.Tag = tag
+                gObj = mySC
                 gObj.Name = "ABS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                GraphicObjects.Add(gObj.Name, myAC)
+                GraphicObjects.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(myAC.Name, "AbsorptionColumn", Me)
-                myCOSC.GraphicObject = myAC
-                SimulationObjects.Add(myAC.Name, myCOSC)
+                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn", Me)
+                myCOSC.GraphicObject = mySC
+                SimulationObjects.Add(mySC.Name, myCOSC)
 
             Case ObjectType.ComponentSeparator
 
                 Dim myCSep As New ComponentSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = "CS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "CS-" + objindex
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 CheckTag(gObj)
@@ -1137,10 +1242,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.SolidSeparator
 
                 Dim myCSep As New SolidsSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = "SS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "SS-" + objindex
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
-                CheckTag(gObj)
                 gObj.Name = "SS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCSep)
@@ -1152,7 +1258,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.Filter
 
                 Dim myCSep As New FilterGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = "FT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "FLT-" + objindex
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 CheckTag(gObj)
@@ -1167,7 +1275,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.OrificePlate
 
                 Dim myOPL As New OrificePlateGraphic(mpx, mpy, 25, 25)
-                myOPL.Tag = "OP-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myOPL.LineWidth = 2
+                myOPL.Fill = True
+                myOPL.Tag = "OP-" + objindex
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
                 CheckTag(gObj)
@@ -1182,7 +1292,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.CustomUO
 
                 Dim myCUO As New ScriptGraphic(mpx, mpy, 25, 25)
-                myCUO.Tag = "UO-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCUO.LineWidth = 2
+                myCUO.Fill = True
+                myCUO.Tag = "CUSTOM-" + objindex
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 CheckTag(gObj)
@@ -1197,7 +1309,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.ExcelUO
 
                 Dim myEUO As New SpreadsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.Tag = "EXL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myEUO.LineWidth = 2
+                myEUO.Fill = True
+                myEUO.Tag = "SHEET-" + objindex
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 CheckTag(gObj)
@@ -1212,7 +1326,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.FlowsheetUO
 
                 Dim myEUO As New FlowsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.Tag = "FS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myEUO.LineWidth = 2
+                myEUO.Fill = True
+                myEUO.Tag = "FS-" + objindex
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 CheckTag(gObj)
@@ -1220,42 +1336,562 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myEUO)
                 'OBJETO DWSIM
-                Dim myCOEUO As Flowsheet = New Flowsheet(myEUO.Name, "FlowsheetUnitOp")
+                Dim myCOEUO As UnitOperations.UnitOperations.Flowsheet = New UnitOperations.UnitOperations.Flowsheet(myEUO.Name, "FlowsheetUnitOp")
                 myCOEUO.GraphicObject = myEUO
                 SimulationObjects.Add(myEUO.Name, myCOEUO)
 
             Case ObjectType.CapeOpenUO
 
                 Dim myCUO As New CAPEOPENGraphic(mpx, mpy, 40, 40)
-                myCUO.Tag = "COUO-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCUO.LineWidth = 2
+                myCUO.Fill = True
+                myCUO.Tag = "CO-" + objindex
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 CheckTag(gObj)
                 gObj.Name = "COUO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCUO)
-                'OBJETO DWSIM
-                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
+                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj, False)
                 myCOCUO.GraphicObject = myCUO
                 SimulationObjects.Add(myCUO.Name, myCOCUO)
+
+            Case ObjectType.AirCooler2
+
+                Dim fsobj = New AirCooler2()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "AC-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.EnergyMixer
+
+                Dim fsobj = New EnergyMixer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "EMIX-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.RCT_GibbsReaktoro
+
+                Dim fsobj = New Reactor_ReaktoroGibbs()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "RGIBBSR-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WindTurbine
+
+                Dim fsobj = New WindTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "WT-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.HydroelectricTurbine
+
+                Dim fsobj = New HydroelectricTurbine()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "HYT-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.PEMFuelCell
+
+                Dim fsobj = New PEMFC_Amphlett()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "PEMFC-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.SolarPanel
+
+                Dim fsobj = New SolarPanel()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "SP-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
+
+            Case ObjectType.WaterElectrolyzer
+
+                Dim fsobj = New WaterElectrolyzer()
+                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                grobj.Tag = "WELEC-" + objindex
+                If tag <> "" Then grobj.Tag = tag
+                gObj = grobj
+                CheckTag(gObj)
+                gObj.Name = Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
+                GraphicObjects.Add(gObj.Name, grobj)
+                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
+                grobj.CreateConnectors(0, 0)
+                SimulationObjects.Add(grobj.Name, fsobj)
 
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.Flowsheet = Me
             gObj.PositionConnectors()
             gObj.Owner = SimulationObjects(gObj.Name)
             SimulationObjects(gObj.Name).SetFlowsheet(Me)
             FlowsheetSurface.AddObject(gObj)
         End If
 
+        If CreateConnected Then
+            Try
+                If FlowsheetOptions.AddObjectsWithStreams = 1 Then
+                    AddConnectedObjects(SimulationObjects(gObj.Name), 1)
+                    UpdateInterface()
+                End If
+                If FlowsheetOptions.AddObjectsWithStreams = 2 Then
+                    AddConnectedObjects(SimulationObjects(gObj.Name), 2)
+                    AddConnectedObjects(SimulationObjects(gObj.Name), 1)
+                    UpdateInterface()
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+
         Return gObj.Name
 
     End Function
 
+    Public Sub AddConnectedObjects(obj As Interfaces.ISimulationObject, scheme As Integer)
+
+        Dim x = obj.GraphicObject.X
+        Dim y = obj.GraphicObject.Y
+        Dim w = obj.GraphicObject.Width
+        Dim h = obj.GraphicObject.Height
+
+        Dim gobj = obj.GraphicObject
+
+        Dim mstrs = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 500, 500).Where(Function(o) o.ObjectType = ObjectType.MaterialStream).ToList()
+        Dim mstrsI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.OutputConnectors(0).IsAttached).ToList()
+        Dim mstrsO = FlowsheetSurface.FindObjectsAtBounds(x + w, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.InputConnectors(0).IsAttached).ToList()
+        Dim estrs = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 500, 500).Where(Function(o) o.ObjectType = ObjectType.EnergyStream).ToList()
+        Dim estrsI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.OutputConnectors(0).IsAttached).ToList()
+        Dim estrsO = FlowsheetSurface.FindObjectsAtBounds(x + w, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.InputConnectors(0).IsAttached).ToList()
+
+        Dim uosI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 250, 500).Where(Function(o) o.ObjectType <> ObjectType.MaterialStream And
+                                                                                             o.ObjectType <> ObjectType.EnergyStream).ToList()
+        Dim uosO = FlowsheetSurface.FindObjectsAtBounds(x + w, y - 250, 250, 500).Where(Function(o) o.ObjectType <> ObjectType.MaterialStream And
+                                                                                             o.ObjectType <> ObjectType.EnergyStream).ToList()
+
+        mstrs = mstrs.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        mstrsI = mstrsI.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        mstrsO = mstrsO.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        estrs = estrs.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        estrsI = estrsI.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        estrsO = estrsO.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        uosI = uosI.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        uosO = uosO.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+
+        Select Case obj.GraphicObject.ObjectType
+            Case ObjectType.MaterialStream
+                If scheme = 2 And uosI.Count > 0 Then
+                    Try : ConnectObject(uosI(0), gobj) : Catch : End Try
+                End If
+                If scheme = 2 And uosO.Count > 0 Then
+                    Try : ConnectObject(gobj, uosO(0)) : Catch : End Try
+                End If
+            Case ObjectType.EnergyStream
+                If scheme = 2 And uosI.Count > 0 Then
+                    Try : ConnectObject(uosI(0), gobj) : Catch : End Try
+                End If
+                If scheme = 2 And uosO.Count > 0 Then
+                    Try : ConnectObject(gobj, uosO(0)) : Catch : End Try
+                End If
+            Case ObjectType.AbsorptionColumn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    For i = 0 To mstrs.Count
+                        If i > 3 Then Exit For
+                        If i < 2 Then
+                            Try : ConnectObjects(mstrs(i), gobj, 0, i) : Catch : End Try
+                        Else
+                            Try : ConnectObjects(gobj, mstrs(i - 2), i - 2, 0) : Catch : End Try
+                        End If
+                    Next
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + h - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Dim m3 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h - 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(SimulationObjects(m1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 0, 0) : Catch : DeleteObject(m2, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m3).GraphicObject, 1, 0) : Catch : DeleteObject(m3, False) : End Try
+                End If
+            Case ObjectType.Compressor
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrsI.Count > 0 Then
+                    If estrsI.Count > 0 Then
+                        Try : ConnectObjects(estrsI(0), gobj, 0, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.DistillationColumn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 10) : Catch : End Try
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 10, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + 40, ,,, False)
+                    Dim e2 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h - 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e2).GraphicObject, gobj, 0, 10) : Catch : DeleteObject(e1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 10, 0) : Catch : DeleteObject(e2, False) : End Try
+                End If
+            Case ObjectType.Expander, ObjectType.Cooler
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then ConnectObjects(gobj, estrsO(0), 0, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.Heater
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.HeatExchanger
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                        Try : ConnectObjects(mstrsI(1), gobj, 0, 1) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y - 40, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m3 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(SimulationObjects(m1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 0, 0) : Catch : DeleteObject(m2, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m3).GraphicObject, 1, 0) : Catch : DeleteObject(m3, False) : End Try
+                End If
+            Case ObjectType.NodeIn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                        Try : ConnectObjects(mstrsI(1), gobj, 0, 1) : Catch : End Try
+                        Try : ConnectObjects(mstrsI(2), gobj, 0, 2) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(SimulationObjects(m1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 0, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+            Case ObjectType.NodeOut
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(2), 2, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+            Case ObjectType.Pipe
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.Pump
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.RCT_Conversion
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then ConnectObjects(gobj, estrsO(0), 2, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 2, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.RCT_CSTR, ObjectType.RCT_PFR
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.RCT_Equilibrium, ObjectType.RCT_Gibbs
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.ComponentSeparator
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.ShortcutColumn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + 40, ,,, False)
+                    Dim e2 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h - 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e2).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e2, False) : End Try
+                End If
+            Case ObjectType.Tank, ObjectType.Valve, ObjectType.OrificePlate, ObjectType.OT_Recycle
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+            Case ObjectType.Vessel, ObjectType.SolidSeparator, ObjectType.Filter
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+        End Select
+
+    End Sub
+
+    Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
+
+        ConnectObjects(gObjFrom, gObjTo, fidx, tidx)
+
+    End Sub
+
+    Public Sub DeleteObject(ByVal tag As String, Optional ByVal confirmation As Boolean = True)
+
+        Dim gobj As GraphicObject = GetFlowsheetGraphicObject(tag)
+
+        If Not gobj Is Nothing Then
+            FlowsheetSurface.SelectedObject = gobj
+            DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        ElseIf GraphicObjects.ContainsKey(tag) Then
+            gobj = GraphicObjects(tag)
+            FlowsheetSurface.SelectedObject = gobj
+            DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        End If
+
+    End Sub
+
     Public Sub CheckTag(obj As IGraphicObject)
 
         While GetFlowsheetSimulationObject(obj.Tag) IsNot Nothing
-            obj.Tag += "-2"
+            obj.Tag = Regex.Replace(obj.Tag, "\d+", Function(m) (Integer.Parse(m.Value) + 1).ToString(New String("0", m.Value.Length)))
         End While
 
     End Sub
@@ -1343,9 +1979,18 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         Try
                             Dim propname = xel.Element("Name").Value
                             Dim proptype = xel.Element("PropertyType").Value
-                            Dim ptype As Type = Type.GetType(proptype)
-                            Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
-                            DirectCast(ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                            Dim assembly1 As Assembly = Nothing
+                            For Each assembly In My.Application.Info.LoadedAssemblies
+                                If proptype.Contains(assembly.GetName().Name) Then
+                                    assembly1 = assembly
+                                    Exit For
+                                End If
+                            Next
+                            If assembly1 IsNot Nothing Then
+                                Dim ptype As Type = assembly1.GetType(proptype)
+                                Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                                DirectCast(ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                            End If
                         Catch ex As Exception
                         End Try
                     Next
@@ -1399,13 +2044,16 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                        End If
                         If AvailablePropertyPackages.ContainsKey(ppkey) Then
-                            obj = AvailablePropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
-                            Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
+                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
-
                 End If
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
@@ -1430,11 +2078,9 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then
-                        RunCodeOnUIThread(Sub()
-                                              obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
-                                          End Sub)
+                        obj = ExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
                     Else
-                        obj = CType(UnitOperations.ReturnInstance(xel.Element("Type").Value), ISimulationObject)
+                        obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                     End If
                 End If
                 Dim gobj As IGraphicObject = (From go As IGraphicObject In
@@ -1605,11 +2251,18 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
         End If
 
+        ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
+
         If excs.Count > 0 Then
-            ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
-            For Each ex As Exception In excs
-                ShowMessage(ex.Message.ToString & ": " & ex.InnerException.ToString, IFlowsheet.MessageType.GeneralError)
-            Next
+            If Settings.AutomationMode Then
+                'throw errors
+                Throw New AggregateException(excs)
+            Else
+                ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
+                For Each ex As Exception In excs
+                    ShowMessage(ex.Message.ToString & ": " & ex.InnerException.ToString, IFlowsheet.MessageType.GeneralError)
+                Next
+            End If
         Else
             ShowMessage("Data loaded successfully.", IFlowsheet.MessageType.Information)
         End If
@@ -1642,12 +2295,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GeneralInfo"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo")
 
-        xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
-        xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
-        If GlobalSettings.Settings.RunningPlatform() = GlobalSettings.Settings.Platform.Mac Then
-            xel.Add(New XElement("OSInfo", "macOS " + Environment.OSVersion.ToString()))
-        Else
-            xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+        If Not DWSIM.GlobalSettings.Settings.AutomationMode Then
+            xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
+            xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
+            If GlobalSettings.Settings.RunningPlatform() = GlobalSettings.Settings.Platform.Mac Then
+                xel.Add(New XElement("OSInfo", "macOS " + Environment.OSVersion.ToString()))
+            Else
+                xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+            End If
         End If
         xel.Add(New XElement("SavedOn", Date.Now))
         xel.Add(New XElement("SavedFromClassicUI", False))
@@ -1662,8 +2317,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Settings"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("Settings")
-
         xel.Add(Options.SaveData().ToArray())
+
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicProperties"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties")
 
@@ -1783,10 +2438,27 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
         End If
 
-
         Return xdoc
 
     End Function
+
+    Public Sub RequestSave() Implements IFlowsheet.RequestSave
+
+        Throw New NotImplementedException()
+
+    End Sub
+
+    Public Sub RequestSaveWithDirectory(directory As String) Implements IFlowsheet.RequestSaveWithDirectory
+
+        Throw New NotImplementedException()
+
+    End Sub
+
+    Public Sub RequestSaveWithPath(filepath As String) Implements IFlowsheet.RequestSaveWithPath
+
+        Throw New NotImplementedException()
+
+    End Sub
 
     Public Function GetProcessData() As List(Of XElement) Implements IFlowsheet.GetProcessData
 
@@ -1871,11 +2543,17 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                             obj.CreateConnectors(0, 0)
                             obj.Owner = Nothing
                             DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
+                        Else
+                            Try
+                                obj.CreateConnectors(0, 0)
+                            Catch ex As Exception
+                            End Try
                         End If
                     Else
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                     End If
+                    obj.Flowsheet = Me
                     If Not TypeOf obj Is TableGraphic Then
                         FlowsheetSurface.DrawingObjects.Add(obj)
                         GraphicObjects.Add(obj.Name, obj)
@@ -2050,7 +2728,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Sub Initialize() Implements IFlowsheet.Initialize
 
+        AddHandler AppDomain.CurrentDomain.AssemblyResolve, New ResolveEventHandler(AddressOf LoadFromExtensionsFolder)
+
         FileDatabaseProvider.CreateDatabase()
+
+        DynamicsManager.ToggleDynamicMode = Function()
+                                                DynamicMode = Not DynamicMode
+                                                Return DynamicMode
+                                            End Function
 
         FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
         FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
@@ -2209,17 +2894,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Function LoadZippedXML(pathtofile As String) As XDocument
 
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim pathtosave As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, Guid.NewGuid().ToString())
+
+        Directory.CreateDirectory(pathtosave)
+
         Dim fullname As String = ""
         Dim dbfile As String = ""
-
-        'Dim pwd As String = Nothing
-        'If IsZipFilePasswordProtected(caminho) Then
-        '    Dim fp As New FormPassword
-        '    If fp.ShowDialog() = Windows.Forms.DialogResult.OK Then
-        '        pwd = fp.tbPassword.Text
-        '    End If
-        'End If
 
         Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
             stream.Password = Nothing
@@ -2229,7 +2909,7 @@ Label_00CC:
             Do While (Not entry Is Nothing)
                 Dim fileName As String = Path.GetFileName(entry.Name)
                 If (fileName <> String.Empty) Then
-                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                    Using stream2 As FileStream = File.Create(Path.Combine(pathtosave, Path.GetFileName(entry.Name)))
                         Dim count As Integer = 2048
                         Dim buffer As Byte() = New Byte(2048) {}
                         Do While True
@@ -2237,9 +2917,9 @@ Label_00CC:
                             If (count <= 0) Then
                                 Dim extension = Path.GetExtension(entry.Name).ToLower()
                                 If extension = ".xml" Then
-                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    fullname = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                 ElseIf extension = ".db" Then
-                                    dbfile = pathtosave + Path.GetFileName(entry.Name)
+                                    dbfile = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                 End If
                                 GoTo Label_00CC
                             End If
@@ -2265,13 +2945,21 @@ Label_00CC:
         End If
         File.Delete(fullname)
 
+        Try
+            Directory.Delete(pathtosave, True)
+        Catch ex As Exception
+        End Try
+
         Return xdoc
 
     End Function
 
     Public Shared Function LoadZippedXMLDoc(pathtofile As String) As XDocument
 
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim pathtosave As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, Guid.NewGuid().ToString())
+
+        Directory.CreateDirectory(pathtosave)
+
         Dim fullname As String = ""
 
         Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
@@ -2282,7 +2970,7 @@ Label_00CC:
             Do While (Not entry Is Nothing)
                 Dim fileName As String = Path.GetFileName(entry.Name)
                 If (fileName <> String.Empty) Then
-                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                    Using stream2 As FileStream = File.Create(Path.Combine(pathtosave, Path.GetFileName(entry.Name)))
                         Dim count As Integer = 2048
                         Dim buffer As Byte() = New Byte(2048) {}
                         Do While True
@@ -2290,7 +2978,7 @@ Label_00CC:
                             If (count <= 0) Then
                                 Dim extension = Path.GetExtension(entry.Name).ToLower()
                                 If extension = ".xml" Then
-                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    fullname = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                 End If
                                 GoTo Label_00CC
                             End If
@@ -2304,6 +2992,11 @@ Label_00CC:
 
         Dim xdoc = XDocument.Load(fullname)
         File.Delete(fullname)
+
+        Try
+            Directory.Delete(pathtosave, True)
+        Catch ex As Exception
+        End Try
 
         Return xdoc
 
@@ -2454,21 +3147,21 @@ Label_00CC:
         Dim t11 = TaskHelper.Run(Sub()
 
 
-                                     Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-                                     EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-                                     plist.Add(EUQPP)
+                                     'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+                                     'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+                                     'plist.Add(EUQPP)
 
-                                     Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-                                     ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-                                     plist.Add(ENQPP)
+                                     'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+                                     'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+                                     'plist.Add(ENQPP)
 
-                                     Dim LIQPP As New LIQUAC2PropertyPackage()
-                                     LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
-                                     plist.Add(LIQPP)
+                                     'Dim LIQPP As New LIQUAC2PropertyPackage()
+                                     'LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+                                     'plist.Add(LIQPP)
 
-                                     Dim DHPP As New DebyeHuckelPropertyPackage()
-                                     DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-                                     plist.Add(DHPP)
+                                     'Dim DHPP As New DebyeHuckelPropertyPackage()
+                                     'DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+                                     'plist.Add(DHPP)
 
                                      Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                      BOPP.ComponentName = "Black Oil"
@@ -2484,7 +3177,7 @@ Label_00CC:
 
         Dim t12 = TaskHelper.Run(Sub()
 
-                                     Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                                     Dim PR78PP As PengRobinson1978PropertyPackage = New PengRobinson1978PropertyPackage()
                                      PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
                                      plist.Add(PR78PP)
 
@@ -2532,6 +3225,16 @@ Label_00CC:
     Sub AddExternalUOs()
 
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
+
+        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+        If unitopassembly Is Nothing Then
+            unitopassembly = Assembly.Load("DWSIM.UnitOperations")
+        End If
+
+        Dim euolist As List(Of Interfaces.IExternalUnitOperation) = SharedClasses.Utility.GetUnitOperations(unitopassembly)
+
+        otheruos.AddRange(euolist)
 
         For Each uo In otheruos
             If Not ExternalUnitOperations.ContainsKey(uo.Description) Then
@@ -2605,7 +3308,8 @@ Label_00CC:
 
             Dim aTypeList As New List(Of Type)
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing And
+                                                                   Not x.IsAbstract And x.GetInterface("DWSIM.Interfaces.IExternalUnitOperation") Is Nothing, True, False)))
 
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
@@ -2631,6 +3335,12 @@ Label_00CC:
 
     End Function
 
+    Public Function GetSpreadsheetFormat(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetFormat
+
+        Return RetrieveSpreadsheetFormat.Invoke(range)
+
+    End Function
+
     Public Property Scripts As New Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
 
     Public Property Charts As Dictionary(Of String, IChart) = New Dictionary(Of String, IChart) Implements IFlowsheet.Charts
@@ -2641,8 +3351,11 @@ Label_00CC:
 
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
 
+    Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
+
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
+        PythonPreprocessor?.Invoke(script.ScriptText)
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
             RunScript_IronPython(script.ScriptText)
         Else
@@ -2700,6 +3413,7 @@ Label_00CC:
 
             If Not GlobalSettings.Settings.PythonInitialized Then
 
+                Runtime.PythonDLL = GlobalSettings.Settings.PythonPath
                 PythonEngine.Initialize()
                 GlobalSettings.Settings.PythonInitialized = True
                 PythonEngine.BeginAllowThreads()
@@ -2710,7 +3424,7 @@ Label_00CC:
 
                 Try
 
-                    Dim sys As Object = PythonEngine.ImportModule("sys")
+                    Dim sys As Object = Py.Import("sys")
 
                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
                     PythonEngine.RunSimpleString(codeToRedirectOutput)
@@ -2730,9 +3444,11 @@ Label_00CC:
                         locals.SetItem("Application", GetApplicationObject.ToPython)
                     End If
 
-                    PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                    PythonEngine.Exec(scripttext, Nothing, locals)
 
-                    ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                        ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                    End If
 
                 Catch ex As Exception
 
@@ -2752,7 +3468,7 @@ Label_00CC:
 
                 Try
 
-                    Dim sys As Object = PythonEngine.ImportModule("sys")
+                    Dim sys As Object = Py.Import("sys")
 
                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
@@ -2774,11 +3490,11 @@ Label_00CC:
                         locals.SetItem("Application", GetApplicationObject.ToPython)
                     End If
 
-                    PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                    PythonEngine.Exec(scripttext, Nothing, locals)
 
-                    'If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                    ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
-                    'End If
+                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                        ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                    End If
 
                 Catch ex As Exception
 
@@ -2896,6 +3612,343 @@ Label_00CC:
 
     Public Overridable Sub ClearLog() Implements IFlowsheet.ClearLog
 
+
+    End Sub
+
+    Public MustOverride Property SupressMessages As Boolean Implements IFlowsheet.SupressMessages
+
+    Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
+        Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
+        RunScript(script.Key)
+    End Sub
+
+    Public Property PythonPreprocessor() As Action(Of String) Implements IFlowsheet.PythonPreprocessor
+
+    Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
+
+        Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")
+        Dim assemblyPath2 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders", New AssemblyName(args.Name).Name + ".dll")
+
+        If Not File.Exists(assemblyPath1) Then
+            If Not File.Exists(assemblyPath2) Then
+                Return Nothing
+            Else
+                Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath2)
+                Return assembly
+            End If
+        Else
+            Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath1)
+            Return assembly
+        End If
+
+    End Function
+
+    Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Function RunCodeOnUIThread2(act As Action) As Task Implements IFlowsheet.RunCodeOnUIThread2
+        Throw New NotImplementedException()
+    End Function
+
+    Public Function CreateConversionReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                             basecompound As String, reactionphase As String, conversionExpression As String) As IReaction Implements IFlowsheet.CreateConversionReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Conversion
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        r.Expression = conversionExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateEquilibriumReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                              basecompound As String, reactionphase As String, basis As String, units As String, Tapproach As Double,
+                                              lnKeq_fT As String) As IReaction Implements IFlowsheet.CreateEquilibriumReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Equilibrium
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.EquilibriumReactionBasisUnits = units
+        r.Approach = Tapproach
+        If lnKeq_fT <> "" Then r.KExprType = KOpt.Expression Else r.KExprType = KOpt.Gibbs
+        r.Expression = lnKeq_fT
+
+        Return r
+
+    End Function
+
+    Public Function CreateKineticReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                          directorders As Dictionary(Of String, Double), reverseorders As Dictionary(Of String, Double),
+                                          basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                          rateunits As String, Aforward As Double, Eforward As Double, Areverse As Double, Ereverse As Double,
+                                          Expr_forward As String, Expr_reverse As String) As IReaction Implements IFlowsheet.CreateKineticReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Kinetic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, directorders(kvp.Key), reverseorders(kvp.Key)))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.A_Forward = Aforward
+        r.E_Forward = Eforward
+        r.A_Reverse = Areverse
+        r.E_Reverse = Ereverse
+        If Expr_forward <> "" Then
+            r.ReactionKinFwdType = ReactionKineticType.UserDefined
+            r.ReactionKinFwdExpression = Expr_forward
+        Else
+            r.ReactionKinFwdType = ReactionKineticType.Arrhenius
+        End If
+        If Expr_reverse <> "" Then
+            r.ReactionKinRevType = ReactionKineticType.UserDefined
+            r.ReactionKinRevExpression = Expr_reverse
+        Else
+            r.ReactionKinRevType = ReactionKineticType.Arrhenius
+        End If
+
+        Return r
+
+    End Function
+
+    Public Function CreateHetCatReaction(name As String, description As String, compounds_and_stoichcoeffs As Dictionary(Of String, Double),
+                                         basecompound As String, reactionphase As String, basis As String, amountunits As String,
+                                         rateunits As String, numeratorExpression As String, denominatorExpression As String) As IReaction Implements IFlowsheet.CreateHetCatReaction
+
+        Dim r As New Reaction()
+        r.ReactionType = ReactionType.Heterogeneous_Catalytic
+        r.ID = name
+        r.Name = name
+        r.Description = description
+        For Each kvp In compounds_and_stoichcoeffs
+            r.Components.Add(kvp.Key, New ReactionStoichBase(kvp.Key, kvp.Value, False, 0, 0))
+        Next
+        r.Components(basecompound).IsBaseReactant = True
+        r.BaseReactant = basecompound
+        CalcReactionStoichiometry(r)
+        Select Case reactionphase.ToLower()
+            Case "mixture"
+                r.ReactionPhase = PhaseName.Mixture
+            Case "vapor"
+                r.ReactionPhase = PhaseName.Vapor
+            Case "liquid"
+                r.ReactionPhase = PhaseName.Liquid
+            Case "solid"
+                r.ReactionPhase = PhaseName.Solid
+        End Select
+        Select Case basis.ToLower()
+            Case "activity"
+                r.ReactionBasis = ReactionBasis.Activity
+            Case "fugacity"
+                r.ReactionBasis = ReactionBasis.Fugacity
+            Case "molar concentration"
+                r.ReactionBasis = ReactionBasis.MolarConc
+            Case "mass concentration"
+                r.ReactionBasis = ReactionBasis.MassConc
+            Case "molar fraction"
+                r.ReactionBasis = ReactionBasis.MolarFrac
+            Case "mass fraction"
+                r.ReactionBasis = ReactionBasis.MassFrac
+            Case "partial pressure"
+                r.ReactionBasis = ReactionBasis.PartialPress
+        End Select
+        r.VelUnit = rateunits
+        r.ConcUnit = amountunits
+        r.RateEquationNumerator = numeratorExpression
+        r.RateEquationDenominator = denominatorExpression
+
+        Return r
+
+    End Function
+
+    Public Function CreateReactionSet(name As String, description As String) As IReactionSet Implements IFlowsheet.CreateReactionSet
+
+        Dim rs As New ReactionSet(name, name, description)
+        Return rs
+
+    End Function
+
+    Public Sub AddReaction(reaction As IReaction) Implements IFlowsheet.AddReaction
+
+        Reactions.Add(reaction.ID, reaction)
+
+    End Sub
+
+    Public Sub AddReactionSet(reactionSet As IReactionSet) Implements IFlowsheet.AddReactionSet
+
+        ReactionSets.Add(reactionSet.ID, reactionSet)
+
+    End Sub
+
+    Public Sub AddReactionToSet(reactionID As String, reactionSetID As String, enabled As Boolean, rank As Integer) Implements IFlowsheet.AddReactionToSet
+
+        ReactionSets(reactionSetID).Reactions.Add(reactionID, New ReactionSetBase(reactionID, rank, enabled))
+
+    End Sub
+
+    Public Function GetAvailablePropertyPackages() As List(Of String) Implements IFlowsheet.GetAvailablePropertyPackages
+
+        Return AvailablePropertyPackages.Keys.ToList()
+
+    End Function
+
+    Public Function CreatePropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreatePropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        Return pp
+
+    End Function
+
+    Public Function CreateAndAddPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.CreateAndAddPropertyPackage
+
+        Dim pp = AvailablePropertyPackages(name).Clone()
+        pp.Tag = pp.ComponentName
+        AddPropertyPackage(pp)
+        Return pp
+
+    End Function
+
+    Public Function AddCompound(compname As String) As ICompoundConstantProperties Implements IFlowsheet.AddCompound
+
+        Dim c = GetCompound(compname)
+        Options.SelectedComponents.Add(c.Name, c)
+        If Options.NotSelectedComponents.ContainsKey(c.Name) Then Options.NotSelectedComponents.Remove(c.Name)
+        Return c
+
+    End Function
+
+    Private Sub CalcReactionStoichiometry(rc As IReaction)
+
+        Dim hp, hr, bp, br, brsc, gp, gr As Double
+
+        Dim eq As String = ""
+        'build reaction equation
+        'scan for reactants
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff < 0 Then
+                If c.Value.StoichCoeff = -1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                br += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gr += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
+        eq += "<--> "
+        'scan for products
+        For Each c In rc.Components
+            Dim comp = Options.SelectedComponents(c.Key)
+            If c.Value.StoichCoeff > 0 Then
+                If c.Value.StoichCoeff = 1 Then
+                    eq += comp.Formula & " + "
+                Else
+                    eq += Math.Abs(c.Value.StoichCoeff) & comp.Formula & " + "
+                End If
+                hp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Enthalpy_of_Formation_25C * comp.Molar_Weight
+                bp += Math.Abs(c.Value.StoichCoeff) * comp.Molar_Weight
+                gp += Math.Abs(c.Value.StoichCoeff) * comp.IG_Gibbs_Energy_of_Formation_25C * comp.Molar_Weight
+            End If
+        Next
+        eq = eq.Remove(eq.Length - 2, 2)
+
+        brsc = Math.Abs(rc.Components.Where(Function(c) c.Value.IsBaseReactant).FirstOrDefault().Value.StoichCoeff)
+
+        rc.ReactionHeat = (hp - hr) / brsc
+        rc.ReactionGibbsEnergy = (gp - gr) / brsc
+
+        rc.StoichBalance = bp - br
+        rc.Equation = eq
 
     End Sub
 

@@ -1,5 +1,5 @@
 ﻿'    Material Stream Implementation
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -495,14 +495,16 @@ Namespace Streams
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculating phase equilibria..."))
 
-                    If .AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
+                    If .AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) And SpecType = StreamSpec.Temperature_and_Pressure Then
 
                         If Not Me.GraphicObject Is Nothing AndAlso Me.GraphicObject.InputConnectors(0).IsAttached AndAlso
-                            Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle AndAlso
                             Not OverrideSingleCompoundFlashBehavior Then
                             If DebugMode Then AppendDebugLine(String.Format("Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced."))
                             IObj?.Paragraphs.Add("<b>WARNING: Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced.</b>")
                             IObj?.Paragraphs.Add(String.Format("<b>Current State Variables: P = {0} Pa, H = {1} kJ/kg</b>", P, H))
+                            If FlowSheet IsNot Nothing Then
+                                FlowSheet.ShowMessage(GraphicObject.Tag + ": Single-compound Stream detected. Switching to PH Flash", IFlowsheet.MessageType.Warning)
+                            End If
                             .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                         Else
                             Select Case Me.SpecType
@@ -892,6 +894,8 @@ Namespace Streams
 
             If GraphicObject IsNot Nothing Then GraphicObject.Calculated = False
 
+            Calculated = False
+
         End Sub
 
         ''' <summary>
@@ -928,6 +932,26 @@ Namespace Streams
             Dim i As Integer = 0
             For Each c As Compound In Me.Phases(0).Compounds.Values
                 c.MoleFraction = Vx(i)
+                i += 1
+            Next
+
+        End Sub
+
+        Public Sub SetOverallMassComposition(ByVal Vx As Double()) Implements Interfaces.IMaterialStream.SetOverallMassComposition
+
+            Dim mass_div_mm As Double
+            Dim Vxm As New List(Of Double)
+            Dim i As Integer = 0
+            Dim MW = Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.Molar_Weight).ToArray()
+            For i = 0 To Vx.Length - 1
+                mass_div_mm += Vx(i) / MW(i)
+            Next
+            For i = 0 To Vx.Length - 1
+                Vxm.Add(Vx(i) / MW(i) / mass_div_mm)
+            Next
+
+            For Each c As Compound In Me.Phases(0).Compounds.Values
+                c.MoleFraction = Vxm(i)
                 i += 1
             Next
 
@@ -1053,6 +1077,12 @@ Namespace Streams
         Public Function GetOverallComposition() As Double() Implements IMaterialStream.GetOverallComposition
 
             Return Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
+
+        End Function
+
+        Public Function GetOverallMassComposition() As Double() Implements IMaterialStream.GetOverallMassComposition
+
+            Return Phases(0).Compounds.Values.Select(Function(x) x.MassFraction.GetValueOrDefault).ToArray
 
         End Function
 
@@ -1707,12 +1737,30 @@ Namespace Streams
                         Case 129
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.dewTemperature.GetValueOrDefault)
                         Case 130
-                            If Me.Phases(1).Properties.molarfraction.GetValueOrDefault = 1.0# Then
-                                value = "Liquid Only"
-                            ElseIf Me.Phases(2).Properties.molarfraction.GetValueOrDefault = 1.0# Then
-                                value = "Vapor Only"
-                            Else
-                                value = "Mixed"
+                            Dim xv = Phases(2).Properties.molarfraction.GetValueOrDefault()
+                            Dim xl1 = Phases(3).Properties.molarfraction.GetValueOrDefault()
+                            Dim xl2 = Phases(4).Properties.molarfraction.GetValueOrDefault()
+                            Dim xs = Phases(7).Properties.molarfraction.GetValueOrDefault()
+                            If xv = 1.0 Then
+                                value = "V"
+                            ElseIf xl1 = 1.0 Then
+                                value = "L"
+                            ElseIf xs = 1.0 Then
+                                value = "S"
+                            ElseIf xv > 0.0 And xl1 > 0.0 And xl2 = 0.0 And xs = 0.0 Then
+                                value = "V+L"
+                            ElseIf xv > 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs = 0.0 Then
+                                value = "V+L1+L2"
+                            ElseIf xv > 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs > 0.0 Then
+                                value = "V+L1+L2+S"
+                            ElseIf xv > 0.0 And xl1 = 0.0 And xl2 = 0.0 And xs > 0.0 Then
+                                value = "V+S"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs = 0.0 Then
+                                value = "L1+L2"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs > 0.0 Then
+                                value = "L1+L2+S"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 = 0.0 And xs > 0.0 Then
+                                value = "L+S"
                             End If
                         Case 153
                             value = Me.Phases(3).Properties.pH.GetValueOrDefault
@@ -2322,11 +2370,11 @@ Namespace Streams
                             Next
                             Dim mtotal As Double = 0
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                                mtotal += comp.Massflow
                             Next
-                            Me.Phases(0).Properties.massflow = mtotal * summ / 1000
+                            Me.Phases(0).Properties.massflow = mtotal
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                comp.MassFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
+                                comp.MassFraction = comp.MassFlow.GetValueOrDefault / Me.Phases(0).Properties.massflow.GetValueOrDefault
                             Next
                         End If
                     Case 105
@@ -2343,11 +2391,11 @@ Namespace Streams
                             Next
                             Dim summ As Double = 0
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                summ += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / 1000
+                                summ += comp.MolarFlow
                             Next
-                            Me.Phases(0).Properties.molarflow = mtotal / summ
+                            Me.Phases(0).Properties.molarflow = summ
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                comp.MoleFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.molarflow.GetValueOrDefault
+                                comp.MoleFraction = comp.MolarFlow.GetValueOrDefault / Me.Phases(0).Properties.molarflow.GetValueOrDefault
                             Next
                         End If
                 End Select
@@ -4967,7 +5015,7 @@ Namespace Streams
         ''' </summary>
         ''' <param name="property">The identifier of the property for which values are requested. This must 
         ''' be one of the two-phase Physical Properties or Physical Property derivatives listed in sections 
-        ''' 7.5.6 and 7.6.</param>
+        ''' 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">List of Phase labels of the Phases for which the property is required. 
         ''' The Phase labels must be two of the identifiers returned by the GetPhaseList method of the Material 
         ''' Object.</param>
@@ -5433,7 +5481,7 @@ Namespace Streams
         ''' Sets two-phase non-constant property values for a mixture.
         ''' </summary>
         ''' <param name="property">The property for which values are set in the Material Object. This 
-        ''' must be one of the two-phase properties or derivatives included in sections 7.5.6 and 7.6.</param>
+        ''' must be one of the two-phase properties or derivatives included in sections 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the Phases for which the property is set. The Phase
         ''' labels must be two of the identifiers returned by the GetPhaseList method of the ICapeThermoPhases
         ''' interface.</param>
@@ -5620,7 +5668,7 @@ Namespace Streams
         ''' <param name="constantId">Identifier of Universal Constant. The list of constants supported should be 
         ''' obtained by using the GetUniversalConstantList method.</param>
         ''' <returns>Value of Universal Constant. This could be a numeric or a string value. For numeric values 
-        ''' the units of measurement are specified in section 7.5.1.</returns>
+        ''' the units of measurement are specified in section 7.5.5.</returns>
         ''' <remarks>Universal Constants (often called fundamental constants) are quantities like the gas constant,
         ''' or the Avogadro constant.</remarks>
         Public Function GetUniversalConstant(ByVal constantId As String) As Object Implements ICapeThermoUniversalConstant.GetUniversalConstant
@@ -5631,9 +5679,9 @@ Namespace Streams
         ''' <summary>
         ''' Returns the identifiers of the supported Universal Constants.
         ''' </summary>
-        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.1.</returns>
+        ''' <returns>List of identifiers of Universal Constants. The list of standard identifiers is given in section 7.5.5.</returns>
         ''' <remarks>A component may return Universal Constant identifiers that do not belong to the list defined
-        ''' in section 7.5.1. However, these proprietary identifiers may not be understood by most of the
+        ''' in section 7.5.5. However, these proprietary identifiers may not be understood by most of the
         ''' clients of this component.</remarks>
         Public Function GetUniversalConstantList() As Object Implements ICapeThermoUniversalConstant.GetUniversalConstantList
             Me.PropertyPackage.CurrentMaterialStream = Me
@@ -5789,7 +5837,7 @@ Namespace Streams
         ''' </summary>
         ''' <param name="props">The list of identifiers for properties to be calculated. This must be one or more 
         ''' of the supported two-phase properties and derivatives (as given by the GetTwoPhasePropList method). 
-        ''' The standard identifiers for two-phase properties are given in section 7.5.6 and 7.6.</param>
+        ''' The standard identifiers for two-phase properties are given in section 7.5.7 and 7.6.</param>
         ''' <param name="phaseLabels">Phase labels of the phases for which the properties are to be calculated. 
         ''' The phase labels must be two of the strings returned by the GetPhaseList method on the ICapeThermoPhases 
         ''' interface and the phases must also be present in the Material Object.</param>
@@ -5898,7 +5946,7 @@ Namespace Streams
         ''' Returns the list of supported non-constant two-phase properties.
         ''' </summary>
         ''' <returns>List of all supported non-constant two-phase property identifiers. The standard two-phase 
-        ''' property identifiers are listed in section 7.5.6.</returns>
+        ''' property identifiers are listed in section 7.5.7.</returns>
         ''' <remarks>A non-constant property depends on the state of the Material Object. Two-phase properties
         ''' are those that depend on more than one co-existing phase, e.g. K-values.
         ''' GetTwoPhasePropList must return all the properties that can be calculated by
@@ -5907,7 +5955,7 @@ Namespace Streams
         ''' To check whether a property can be evaluated for a particular set of phase labels use the
         ''' CheckTwoPhasePropSpec method.
         ''' A component that implements this method may return non-constant two-phase property
-        ''' identifiers which do not belong to the list defined in section 7.5.6. However, these
+        ''' identifiers which do not belong to the list defined in section 7.5.7. However, these
         ''' proprietary identifiers may not be understood by most of the clients of this component.
         ''' To get the list of supported single-phase properties, use GetSinglePhasePropList.</remarks>
         Public Function GetTwoPhasePropList() As Object Implements ICapeThermoPropertyRoutine.GetTwoPhasePropList
@@ -6222,6 +6270,7 @@ Namespace Streams
             ms.Assign(Me)
             ms.AssignProps(Me)
             ms.TotalEnergyFlow = TotalEnergyFlow
+            ms.AtEquilibrium = False
 
             Return ms
 
@@ -6269,7 +6318,7 @@ Namespace Streams
         Public Property EditorState As String = "{}"
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.stream_mat_32
+            Return My.Resources.material_stream
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
@@ -6374,13 +6423,16 @@ Namespace Streams
             FlowSheet.AddCompoundsToMaterialStream(ms)
             ms.Assign(Me)
             ms.AssignProps(Me)
+            ms.AtEquilibrium = False
             Return ms
         End Function
 
         Public Overrides Function CloneJSON() As Object
             Dim settings As New Newtonsoft.Json.JsonSerializerSettings
             settings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of MaterialStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me), settings)
+            Dim ms = Newtonsoft.Json.JsonConvert.DeserializeObject(Of MaterialStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me), settings)
+            ms.AtEquilibrium = False
+            Return ms
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -7693,7 +7745,7 @@ Namespace Streams
         ''' Sets stream temperature.
         ''' </summary>
         ''' <param name="value">Temperature in K</param>
-        Public Function SetTemperature(value As Double) As String
+        Public Function SetTemperature(value As Double) As String Implements IMaterialStream.SetTemperature
             Phases(0).Properties.temperature = value
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -7724,7 +7776,7 @@ Namespace Streams
         ''' Sets stream pressure
         ''' </summary>
         ''' <param name="value">Pressure in Pa</param>
-        Public Function SetPressure(value As Double) As String
+        Public Function SetPressure(value As Double) As String Implements IMaterialStream.SetPressure
             Phases(0).Properties.pressure = value
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -7755,7 +7807,7 @@ Namespace Streams
         ''' Sets stream enthalpy.
         ''' </summary>
         ''' <param name="value">Enthalpy in kJ/kg</param>
-        Public Function SetMassEnthalpy(value As Double) As String
+        Public Function SetMassEnthalpy(value As Double) As String Implements IMaterialStream.SetMassEnthalpy
             Phases(0).Properties.enthalpy = value
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -7813,7 +7865,7 @@ Namespace Streams
         ''' Sets stream mass flow.
         ''' </summary>
         ''' <param name="value">Flow in kg/s</param>
-        Public Function SetMassFlow(value As Double) As String
+        Public Function SetMassFlow(value As Double) As String Implements IMaterialStream.SetMassFlow
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
@@ -7992,7 +8044,7 @@ Namespace Streams
         ''' Returns the overall mass enthalpy.
         ''' </summary>
         ''' <returns>Mass enthalpy in kJ/kg.</returns>
-        Public Function GetMassEnthalpy() As Double
+        Public Function GetMassEnthalpy() As Double Implements IMaterialStream.GetMassEnthalpy
             Return Phases(0).Properties.enthalpy.GetValueOrDefault
         End Function
 
@@ -8008,7 +8060,7 @@ Namespace Streams
         ''' Returns the stream temperature.
         ''' </summary>
         ''' <returns>Temperature in K.</returns>
-        Public Function GetTemperature() As Double
+        Public Function GetTemperature() As Double Implements IMaterialStream.GetTemperature
             Return Phases(0).Properties.temperature.GetValueOrDefault
         End Function
 
@@ -8016,7 +8068,7 @@ Namespace Streams
         ''' Returns the stream pressure.
         ''' </summary>
         ''' <returns>Pressure in Pa.</returns>
-        Public Function GetPressure() As Double
+        Public Function GetPressure() As Double Implements IMaterialStream.GetPressure
             Return Phases(0).Properties.pressure.GetValueOrDefault
         End Function
 
@@ -8024,7 +8076,7 @@ Namespace Streams
         ''' Returns the stream mass flow.
         ''' </summary>
         ''' <returns>Mass flow in kg/s.</returns>
-        Public Function GetMassFlow() As Double
+        Public Function GetMassFlow() As Double Implements IMaterialStream.GetMassFlow
             Return Phases(0).Properties.massflow.GetValueOrDefault
         End Function
 
@@ -8032,7 +8084,7 @@ Namespace Streams
         ''' Returns the stream molar flow.
         ''' </summary>
         ''' <returns>Molar flow in mol/s.</returns>
-        Public Function GetMolarFlow() As Double
+        Public Function GetMolarFlow() As Double Implements IMaterialStream.GetMolarFlow
             Return Phases(0).Properties.molarflow.GetValueOrDefault
         End Function
 
@@ -8040,7 +8092,7 @@ Namespace Streams
         ''' Returns the stream volumetric flow.
         ''' </summary>
         ''' <returns>Volumetric flow in m3/s.</returns>
-        Public Function GetVolumetricFlow() As Double
+        Public Function GetVolumetricFlow() As Double Implements IMaterialStream.GetVolumetricFlow
             Return Phases(0).Properties.volumetric_flow.GetValueOrDefault
         End Function
 
@@ -8056,7 +8108,7 @@ Namespace Streams
         ''' Sets stream molar flow.
         ''' </summary>
         ''' <param name="value">Flow in mol/s</param>
-        Public Function SetMolarFlow(value As Double) As String
+        Public Function SetMolarFlow(value As Double) As String Implements IMaterialStream.SetMolarFlow
             Phases(0).Properties.massflow = value * Phases(0).Properties.molecularWeight / 1000
             Phases(0).Properties.molarflow = value
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
@@ -8093,7 +8145,7 @@ Namespace Streams
         ''' Sets stream volumetric flow.
         ''' </summary>
         ''' <param name="value">Flow in m3/s</param>
-        Public Function SetVolumetricFlow(value As Double) As String
+        Public Function SetVolumetricFlow(value As Double) As String Implements IMaterialStream.SetVolumetricFlow
             Phases(0).Properties.massflow = Nothing
             Phases(0).Properties.molarflow = Nothing
             Phases(0).Properties.volumetric_flow = value
@@ -8228,6 +8280,10 @@ Namespace Streams
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
 
+            If Double.IsNaN(stream.GetMassFlow()) Or Double.IsInfinity(stream.GetMassFlow()) Then
+                Return newstream
+            End If
+
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
 
@@ -8308,6 +8364,10 @@ Namespace Streams
         Public Function Subtract(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
+
+            If Double.IsNaN(stream.GetMassFlow()) Or Double.IsInfinity(stream.GetMassFlow()) Then
+                Return newstream
+            End If
 
             Dim W1 = stream.GetMassFlow()
             Dim M1 = stream.GetMolarFlow()
@@ -8605,6 +8665,17 @@ Namespace Streams
 
         End Function
 
+        Public Function GetEnergyFlow() As Double Implements IMaterialStream.GetEnergyFlow
+            Return TotalEnergyFlow
+        End Function
+
+        Public Function GetCompoundMassFlow(name As String) As Double Implements IMaterialStream.GetCompoundMassFlow
+            Return Phases(0).Compounds(name).MassFlow.GetValueOrDefault()
+        End Function
+
+        Public Function GetCompoundMassConcentration(name As String) As Double Implements IMaterialStream.GetCompoundMassConcentration
+            Return Phases(0).Compounds(name).MassFlow.GetValueOrDefault() / Phases(0).Properties.volumetric_flow.GetValueOrDefault()
+        End Function
     End Class
 
     Public Class CalculationResults

@@ -69,9 +69,11 @@ namespace DWSIM.UI
 
             var abslayout = new PixelLayout();
 
-            var background = new ImageView { Size = ClientSize, Image = new Bitmap(Bitmap.FromResource("DWSIM.UI.Forms.Resources.Bitmaps.background_welcome.png")) };
-
-            abslayout.Add(background, 0, 0);
+            if (!GlobalSettings.Settings.DarkMode)
+            {
+                var background = new ImageView { Size = ClientSize, Image = new Bitmap(Bitmap.FromResource("DWSIM.UI.Forms.Resources.Bitmaps.background_welcome.png")) };
+                abslayout.Add(background, 0, 0);
+            }
 
             int dx = (int)(15 * sf), dy = (int)(15 * sf), dx2 = (int)(10 * sf), dy2 = (int)(10 * sf);
 
@@ -104,7 +106,8 @@ namespace DWSIM.UI
 
             PixelLayout pfile, pccreator, pdocs, pabout, ppatreon;
 
-            pfile = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pfile = new PixelLayout { Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            if (!GlobalSettings.Settings.DarkMode) pfile.BackgroundColor = Colors.White;
             pfile.Add(new Label { Text = "Process Modeling", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
             pfile.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Create or load chemical steady-state or dynamic process models." }, dx2, dy2 * 2 + bfh);
             var img1 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-chemical_plant.png")) };
@@ -143,7 +146,8 @@ namespace DWSIM.UI
 
             abslayout.Add(pfile, dx, dy * 2 + bfh);
 
-            pccreator = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pccreator = new PixelLayout { Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            if (!GlobalSettings.Settings.DarkMode) pccreator.BackgroundColor = Colors.White;
             pccreator.Add(new Label { Text = "Compound Creator", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
             pccreator.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Use this tool to create new compounds and load them in your models." }, dx2, dy2 * 2 + bfh);
             var img2 = new ImageView { Size = psize2, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-test_tube.png")) };
@@ -159,7 +163,8 @@ namespace DWSIM.UI
 
             abslayout.Add(pccreator, dx, dy * 3 + bfh + (int)(100 * sf));
 
-            ppatreon = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            ppatreon = new PixelLayout { Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            if (!GlobalSettings.Settings.DarkMode) ppatreon.BackgroundColor = Colors.White;
             ppatreon.Add(new Label { Text = "Become a Patron", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
             ppatreon.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Become a Patron and get access to exclusive Unit Operations, Property Packages, Plugins/Add-Ins, Mugs and T-Shirts!" }, dx2, dy2 * 2 + bfh);
             var img4 = new ImageView { Size = psize3, Image = new Bitmap(Bitmap.FromResource(bmpprefix + "tshirt_mockup.jpg")) };
@@ -176,7 +181,8 @@ namespace DWSIM.UI
 
             abslayout.Add(ppatreon, dx, dy * 4 + bfh + 2 * (int)(100 * sf));
 
-            pdocs = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pdocs = new PixelLayout { Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            if (!GlobalSettings.Settings.DarkMode) pdocs.BackgroundColor = Colors.White;
             pdocs.Add(new Label { Text = "Documentation", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
             pdocs.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "View DWSIM's User Guide in PDF format." }, dx2, dy2 * 2 + bfh);
             var img5 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-books.png")) };
@@ -186,7 +192,7 @@ namespace DWSIM.UI
             var link6 = new LinkButton { Text = "Learning Resources", Width = (int)(140 * sf), Font = boldfont2 };
             pdocs.Add(link6, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
-            link6.Click += (sender, e) => "http://dwsim.inforside.com.br/wiki/index.php?title=Tutorials".OpenURL();
+            link6.Click += (sender, e) => "https://dwsim.org/wiki/index.php?title=Tutorials".OpenURL();
 
             link5.Click += (sender, e) =>
             {
@@ -203,7 +209,8 @@ namespace DWSIM.UI
 
             abslayout.Add(pdocs, dx, dy * 5 + bfh + 3 * (int)(100 * sf));
 
-            pabout = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            pabout = new PixelLayout { Width = (int)(500 * sf), Height = (int)(100 * sf) };
+            if (!GlobalSettings.Settings.DarkMode) pabout.BackgroundColor = Colors.White;
             pabout.Add(new Label { Text = "About DWSIM", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
             pabout.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Adjust Global Settings and view DWSIM licensing and version information." }, dx2, dy2 * 2 + bfh);
             var img6 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) };
@@ -340,6 +347,13 @@ namespace DWSIM.UI
                     if (t.Exception != null)
                     {
                         FOSSEEList.Items.Add(new ListItem { Text = "Error loading flowsheet list. Check your internet connection.", Key = "" });
+                        DWSIM.Logging.Logger.LogError("FOSSEE Flowsheets loading error", t.Exception);
+                        Console.WriteLine(t.Exception.ToString());
+                        foreach (var iex in t.Exception.InnerExceptions)
+                        {
+                            DWSIM.Logging.Logger.LogError("FOSSEE Flowsheets loading inner exception", iex);
+                            if (iex.InnerException != null) DWSIM.Logging.Logger.LogError("FOSSEE Flowsheets loading inner exception", iex.InnerException);
+                        }
                     }
                     else
                     {
@@ -376,8 +390,8 @@ namespace DWSIM.UI
                     var si = (TreeGridItem)MostRecentList.SelectedItem;
                     var data = (Dictionary<string, string>)si.Tag;
                     LoadSimulation(data["Path"]);
-                    //MostRecentList.UnselectAll();
-                };
+        //MostRecentList.UnselectAll();
+    };
             };
 
             SampleList.SelectedIndexChanged += (sender, e) =>
@@ -385,8 +399,8 @@ namespace DWSIM.UI
                 if (SampleList.SelectedIndex >= 0)
                 {
                     LoadSimulation(SampleList.SelectedKey);
-                   // SampleList.SelectedValue = null;
-                };
+        // SampleList.SelectedValue = null;
+    };
             };
 
             FOSSEEList.SelectedIndexChanged += (sender, e) =>
@@ -498,13 +512,13 @@ namespace DWSIM.UI
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem2.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br/wiki/index.php?title=Support".OpenURL();
+                "https://dwsim.org/wiki/index.php?title=Support".OpenURL();
             };
 
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem3.Click += (sender, e) =>
             {
-                "https://github.com/DanWBR/dwsim6/issues".OpenURL();
+                "https://github.com/DanWBR/dwsim/issues".OpenURL();
             };
 
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
@@ -559,13 +573,13 @@ namespace DWSIM.UI
         {
             Application.Instance.Invoke(() =>
             {
-                //switch (GlobalSettings.Settings.RunningPlatform())
-                //{
-                //    case GlobalSettings.Settings.Platform.Windows:
-                //        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
-                //        break;
-                //}
-                var splash = new SplashScreen { MainFrm = this };
+        //switch (GlobalSettings.Settings.RunningPlatform())
+        //{
+        //    case GlobalSettings.Settings.Platform.Windows:
+        //        ClientSize = new Size((int)(s.UIScalingFactor * 700), (int)(s.UIScalingFactor * 400));
+        //        break;
+        //}
+        var splash = new SplashScreen { MainFrm = this };
                 splash.Show();
             });
 
@@ -679,7 +693,7 @@ namespace DWSIM.UI
 
                 });
 
-                
+
 
 
 

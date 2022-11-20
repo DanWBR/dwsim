@@ -22,10 +22,14 @@ namespace DWSIM.UI.Desktop.Shared
 
         public Action UpdateEditorPanels;
 
+        public Action UpdateSurface;
+
         public Action ActClearLog;
 
         public bool optimizing = false;
-        public bool SupressMessages = false;
+
+        public override bool SupressMessages { get; set; } = false;
+
         private bool eventattached = false;
 
         public Eto.Forms.Form FlowsheetForm;
@@ -57,16 +61,10 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void UpdateInterface()
         {
-            if (!SupressMessages)
+            Application.Instance.Invoke(() =>
             {
-                Application.Instance.AsyncInvoke(() =>
-                {
-                    if (FlowsheetForm != null)
-                    {
-                        FlowsheetForm.Invalidate();                        
-                    }
-                });
-            }
+                if (FlowsheetForm != null) FlowsheetForm.Invalidate();
+            });
         }
 
         public override void ClearLog()

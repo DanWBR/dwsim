@@ -37,7 +37,6 @@ Partial Class FormReportConfig
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.TreeViewObj = New System.Windows.Forms.TreeView()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -138,13 +137,6 @@ Partial Class FormReportConfig
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox1.Name = "CheckBox1"
         '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "xml"
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        Me.SaveFileDialog1.FilterIndex = 5
-        Me.SaveFileDialog1.RestoreDirectory = True
-        '
         'TreeViewObj
         '
         resources.ApplyResources(Me.TreeViewObj, "TreeViewObj")
@@ -195,7 +187,6 @@ Partial Class FormReportConfig
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
@@ -219,7 +210,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Public WithEvents CheckBox3 As System.Windows.Forms.CheckBox
     Public WithEvents CheckBox2 As System.Windows.Forms.CheckBox
     Public WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Public WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Public WithEvents KButton7 As System.Windows.Forms.Button
     Public WithEvents KButton4 As System.Windows.Forms.Button
     Public WithEvents KButton5 As System.Windows.Forms.Button

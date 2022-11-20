@@ -118,6 +118,67 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="LabelVisc2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 61</value>
+  </data>
+  <data name="LabelVisc1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 27</value>
+  </data>
+  <data name="LabelTemp3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 61</value>
+  </data>
+  <data name="LabelTemp2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 27</value>
+  </data>
+  <data name="tb_v2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 58</value>
+  </data>
+  <data name="tb_v2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tb_v2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="tb_v1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 24</value>
+  </data>
+  <data name="tb_v1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="tb_v1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="tb_t2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 58</value>
+  </data>
+  <data name="tb_t2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="tb_t2.Text" xml:space="preserve">
+    <value>98.89</value>
+  </data>
+  <data name="tb_t2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="tb_t1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 24</value>
+  </data>
+  <data name="tb_t1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 21</value>
+  </data>
+  <data name="tb_t1.Text" xml:space="preserve">
+    <value>37.78</value>
+  </data>
+  <data name="tb_t1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 61</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 27</value>
+  </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>319, 8</value>
   </data>
@@ -127,7 +188,6 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Viscosity data (leave blank to calculate)</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tb_wk.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -173,74 +233,8 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Input Data</value>
   </data>
-  <data name="LabelVisc2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 61</value>
-  </data>
-  <data name="LabelVisc1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 27</value>
-  </data>
-  <data name="LabelTemp3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 61</value>
-  </data>
-  <data name="LabelTemp2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 27</value>
-  </data>
-  <data name="tb_v2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 58</value>
-  </data>
-  <data name="tb_v2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="tb_v2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="tb_v1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 24</value>
-  </data>
-  <data name="tb_v1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="tb_v1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="tb_t2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 58</value>
-  </data>
-  <data name="tb_t2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="tb_t2.Text" xml:space="preserve">
-    <value>98.89</value>
-  </data>
-  <data name="tb_t2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="tb_t1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 24</value>
-  </data>
-  <data name="tb_t1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="tb_t1.Text" xml:space="preserve">
-    <value>37.78</value>
-  </data>
-  <data name="tb_t1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 61</value>
-  </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 27</value>
-  </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>775, 327</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Properties</value>
-  </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 308</value>
+    <value>6, 303</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>400, 13</value>
@@ -283,7 +277,13 @@
     <value>76</value>
   </data>
   <data name="DataGridView2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 285</value>
+    <value>772, 280</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>775, 322</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Properties</value>
   </data>
   <data name="KButton1.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 119</value>
@@ -331,25 +331,10 @@
     <value>66, 21</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 473</value>
+    <value>782, 468</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>General</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 473</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>784, 494</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 395</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Methods and Correlations</value>
   </data>
   <data name="CheckBoxADJZRA.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 17</value>
@@ -414,11 +399,11 @@
   <data name="Label28.Text" xml:space="preserve">
     <value>Critical Temperature</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 71</value>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>772, 390</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Initial Values</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Methods and Correlations</value>
   </data>
   <data name="LabelTemp4.Location" type="System.Drawing.Point, System.Drawing">
     <value>552, 41</value>
@@ -473,6 +458,21 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Molecular Weight</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>772, 71</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Initial Values</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>782, 468</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>784, 494</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>638, 505</value>

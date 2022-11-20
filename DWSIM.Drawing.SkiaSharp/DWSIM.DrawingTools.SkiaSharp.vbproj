@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.Drawing.SkiaSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -105,11 +105,26 @@
     </WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Msagl, Version=3.0.0.0, Culture=neutral, PublicKeyToken=640c57aa40e7ae7d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Msagl.1.1.3\lib\net40\Microsoft.Msagl.dll</HintPath>
+    <Reference Include="AutomaticGraphLayout">
+      <HintPath>..\DWSIM\References\MSAGL\AutomaticGraphLayout.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Msagl.Drawing, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8a3d7c21d5fa1306, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Msagl.Drawing.1.1.3\lib\net40\Microsoft.Msagl.Drawing.dll</HintPath>
+    <Reference Include="AutomaticGraphLayout.Drawing">
+      <HintPath>..\DWSIM\References\MSAGL\AutomaticGraphLayout.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer.WinForms, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.WinForms.1.5.0.6\lib\net45\HtmlRenderer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.68.2.1\lib\net45\SkiaSharp.dll</HintPath>
@@ -117,18 +132,36 @@
     <Reference Include="SkiaSharp.Extended, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.Extended.1.60.0\lib\portable-net45+win8+wp8+wpa81\SkiaSharp.Extended.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp.Views.Desktop.Common, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.Desktop.Common.1.68.2.1\lib\net45\SkiaSharp.Views.Desktop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.WindowsForms, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.WindowsForms.1.68.2.1\lib\net45\SkiaSharp.Views.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Drawing">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard1.1\System.Memory.dll</HintPath>
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll</HintPath>
@@ -150,11 +183,13 @@
     <Compile Include="GraphicObjects\Base\ShapeGraphic.vb" />
     <Compile Include="GraphicObjects\Connector\ConnectorClass.vb" />
     <Compile Include="GraphicObjects\Controllers\PIDControllerGraphic.vb" />
+    <Compile Include="GraphicObjects\Controllers\PythonControllerGraphic.vb" />
     <Compile Include="GraphicObjects\ExtensionBase\GraphicObjectExtension.vb" />
     <Compile Include="GraphicObjects\Indicators\AnalogGauge.vb" />
     <Compile Include="GraphicObjects\Indicators\DigitalGauge.vb" />
     <Compile Include="GraphicObjects\Indicators\LevelGauge.vb" />
     <Compile Include="GraphicObjects\Inputs\Input.vb" />
+    <Compile Include="GraphicObjects\Other\ButtonGraphic.vb" />
     <Compile Include="GraphicObjects\Other\ImageGraphic.vb" />
     <Compile Include="GraphicObjects\Other\RectangleGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\AbsorptionColumn.vb" />
@@ -200,6 +235,7 @@
     <Compile Include="GraphicObjects\Table\MasterPropertyTable.vb" />
     <Compile Include="GraphicObjects\Table\PropertyTable.vb" />
     <Compile Include="GraphicObjects\Table\SpreadsheetTable.vb" />
+    <Compile Include="GraphicObjects\Text\HTMLTextGraphic.vb" />
     <Compile Include="GraphicObjects\Text\TextGraphic.vb" />
     <Compile Include="GraphicsSurface\DesignSurface.vb" />
     <Compile Include="GraphicsSurface\EventSupportClasses.vb" />
@@ -366,6 +402,14 @@
     <EmbeddedResource Include="Fonts\BarlowSemiCondensed-SemiBoldItalic.ttf" />
     <EmbeddedResource Include="Fonts\BarlowSemiCondensed-Thin.ttf" />
     <EmbeddedResource Include="Fonts\BarlowSemiCondensed-ThinItalic.ttf" />
+    <EmbeddedResource Include="Fonts\OxygenMono-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\NanumGothicCoding-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\NanumGothicCoding-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuCondensed-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-BoldItalic.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-Italic.ttf" />
+    <EmbeddedResource Include="Fonts\UbuntuMono-Regular.ttf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -375,6 +419,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +430,10 @@
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1E12C010-2661-4896-9C00-90F8B41ED10A}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
@@ -421,6 +470,63 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Fonts.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\clock2.png" />
+    <EmbeddedResource Include="Bitmaps\lightning_bolt.png" />
+    <EmbeddedResource Include="Bitmaps\volume.png" />
+    <EmbeddedResource Include="Bitmaps\weight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\temperature.png" />
+    <EmbeddedResource Include="Bitmaps\pressure.png" />
+    <EmbeddedResource Include="Bitmaps\flow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\separator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\compressor.png" />
+    <EmbeddedResource Include="Icons\cooler.png" />
+    <EmbeddedResource Include="Icons\cstr.png" />
+    <EmbeddedResource Include="Icons\energy_stream.png" />
+    <EmbeddedResource Include="Icons\expander.png" />
+    <EmbeddedResource Include="Icons\flowsheet_block.png" />
+    <EmbeddedResource Include="Icons\heater.png" />
+    <EmbeddedResource Include="Icons\heat_exchanger.png" />
+    <EmbeddedResource Include="Icons\linked_table.png" />
+    <EmbeddedResource Include="Icons\master_table.png" />
+    <EmbeddedResource Include="Icons\material_stream.png" />
+    <EmbeddedResource Include="Icons\mixer.png" />
+    <EmbeddedResource Include="Icons\pfr.png" />
+    <EmbeddedResource Include="Icons\pipe_segment.png" />
+    <EmbeddedResource Include="Icons\property_table.png" />
+    <EmbeddedResource Include="Icons\pump.png" />
+    <EmbeddedResource Include="Icons\python_script.png" />
+    <EmbeddedResource Include="Icons\reactor_conversion.png" />
+    <EmbeddedResource Include="Icons\reactor_equilibrium.png" />
+    <EmbeddedResource Include="Icons\reactor_gibbs.png" />
+    <EmbeddedResource Include="Icons\splitter.png" />
+    <EmbeddedResource Include="Icons\tank.png" />
+    <EmbeddedResource Include="Icons\valve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\component_separator.png" />
+    <EmbeddedResource Include="Icons\filter.png" />
+    <EmbeddedResource Include="Icons\solids_separator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\matrix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\typewriter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\OFL.txt" />
+    <EmbeddedResource Include="Icons\orifice-plate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

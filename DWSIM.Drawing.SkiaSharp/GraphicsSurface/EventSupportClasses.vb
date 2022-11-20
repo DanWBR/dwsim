@@ -1,6 +1,21 @@
 Imports System.Runtime.Serialization
 Imports DWSIM.Interfaces
 
+Public Class ObjectConnectionChangedArgs
+
+    Inherits EventArgs
+
+    Public Property FromObject As IGraphicObject
+
+    Public Property ToObject As IGraphicObject
+
+    Public Sub New(objfrom As IGraphicObject, objto As IGraphicObject)
+        FromObject = objfrom
+        ToObject = objto
+    End Sub
+
+End Class
+
 Public Class SelectionChangedEventArgs
 
     Inherits EventArgs

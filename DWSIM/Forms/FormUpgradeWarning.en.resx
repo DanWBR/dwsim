@@ -143,7 +143,7 @@
     <value>600, 103</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>DWSIM 5.x modifies the structure of the XML file to save information that is incompatible with DWSIM 3.x. As a result, if you perform changes to the simulation and replace the existing file, it will not be readable by DWSIM version 3.x anymore.
+    <value>DWSIM modifies the structure of the XML file to save information that is incompatible with DWSIM 3.x. As a result, if you perform changes to the simulation and replace the existing file, it will not be readable by DWSIM version 3.x anymore.
 
 If you do not update the simulation file, it still will be usable by both DWSIM 3.x and DWSIM 4.x/5.x.
 
@@ -153,7 +153,7 @@ DWSIM only updates the simulation file during saving. No changes are made when o
     <value>21, 243</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>IronPython scripts must be updated to reflect the API changes from DWSIM 3.x to DWSIM 5.x. Please refer to the help file or DWSIM's wiki for more information.</value>
+    <value>IronPython scripts must be updated to reflect the API changes from DWSIM 3.x to DWSIM 5+. Please refer to the help file or DWSIM's wiki for more information.</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 218</value>
@@ -167,7 +167,7 @@ DWSIM only updates the simulation file during saving. No changes are made when o
   <data name="Label5.Text" xml:space="preserve">
     <value>Some problems may arise during data conversion/upgrade, like: object property data loss, property package and flash algorithm configuration loss and corruption, and others.
 
-If your simulation has issues after loading in DWSIM 4.x/5.x, you can keep a DWSIM 3.x installation side-by-side on your computer to continue working with your older simulation files.</value>
+If your simulation has issues after loading in DWSIM 4.x or newer, you can keep a DWSIM 3.x installation side-by-side on your computer to continue working with your older simulation files.</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 116</value>

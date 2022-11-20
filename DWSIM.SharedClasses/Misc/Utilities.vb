@@ -525,7 +525,7 @@ Public Class Utility
             Next
         End If
 
-        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        ppath = GetExtendersRootDirectory()
         If Directory.Exists(ppath) Then
             Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
             For Each fpath In otheruos
@@ -548,7 +548,7 @@ Public Class Utility
 
         Dim ppacks As New List(Of IPropertyPackage)
 
-        Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
+        Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetAssembly(New SystemsOfUnits.SI().GetType()).Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
         If File.Exists(thermoceos) Then
             Dim tca = Assembly.LoadFile(thermoceos)
             Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(tca)
@@ -557,7 +557,7 @@ Public Class Utility
             Next
         End If
 
-        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "ppacks")
+        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(New SystemsOfUnits.SI().GetType()).Location), "ppacks")
         If Directory.Exists(ppath) Then
             Try
                 Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
@@ -572,10 +572,10 @@ Public Class Utility
             End Try
         End If
 
-        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
-        If Directory.Exists(ppath) Then
+        Dim ppath1 As String = GetExtendersRootDirectory()
+        If Directory.Exists(ppath1) Then
             Try
-                Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                Dim otherpps As String() = Directory.GetFiles(ppath1, "*.dll", SearchOption.TopDirectoryOnly)
                 For Each fpath In otherpps
                     Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
                     For Each pp In pplist
@@ -630,7 +630,17 @@ Public Class Utility
 
         Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
 
-        Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
+        Dim instances As New List(Of Interfaces.IPropertyPackage)
+        For Each item In ppList
+            Try
+                Dim instance = TryCast(Activator.CreateInstance(item), Interfaces.IPropertyPackage)
+                If Not instance Is Nothing Then instances.Add(instance)
+            Catch ex As Exception
+                Console.WriteLine("Error instantiating '" + item.ToString() + "': " + ex.ToString)
+                Logging.Logger.LogError("Error instantiating '" + item.ToString() + "'.", ex)
+            End Try
+        Next
+        Return instances
 
     End Function
 
@@ -689,6 +699,19 @@ Public Class Utility
 
         Return Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".tmp")
 
+    End Function
+
+    Public Shared Property DwsimRootDirectoryProvider As Func(Of String) = Function() As String
+                                                                               Return Path.GetDirectoryName(GetType(Utility).Assembly.Location)
+                                                                           End Function
+
+    Public Shared Function GetDwsimRootDirectory() As String
+        Dim a = DwsimRootDirectoryProvider()()
+        Return a
+    End Function
+
+    Public Shared Function GetExtendersRootDirectory() As String
+        Return Path.Combine(GetDwsimRootDirectory(), "extenders")
     End Function
 
 End Class

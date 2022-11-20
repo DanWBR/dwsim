@@ -85,6 +85,7 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.cbBaffleOrientation)
         Me.GroupBox1.Controls.Add(Me.Label14)
@@ -105,7 +106,6 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         Me.GroupBox1.Controls.Add(Me.cbBaffleType)
         Me.GroupBox1.Controls.Add(Me.tbShellsInSeries)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -116,8 +116,8 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         '
         'cbBaffleOrientation
         '
-        Me.cbBaffleOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbBaffleOrientation, "cbBaffleOrientation")
+        Me.cbBaffleOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBaffleOrientation.FormattingEnabled = True
         Me.cbBaffleOrientation.Items.AddRange(New Object() {resources.GetString("cbBaffleOrientation.Items"), resources.GetString("cbBaffleOrientation.Items1")})
         Me.cbBaffleOrientation.Name = "cbBaffleOrientation"
@@ -199,8 +199,8 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         '
         'cbBaffleType
         '
-        Me.cbBaffleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbBaffleType, "cbBaffleType")
+        Me.cbBaffleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBaffleType.FormattingEnabled = True
         Me.cbBaffleType.Items.AddRange(New Object() {resources.GetString("cbBaffleType.Items"), resources.GetString("cbBaffleType.Items1"), resources.GetString("cbBaffleType.Items2"), resources.GetString("cbBaffleType.Items3")})
         Me.cbBaffleType.Name = "cbBaffleType"
@@ -217,6 +217,7 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         '
         'GroupBox2
         '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.lbuTubeThermalCond)
         Me.GroupBox2.Controls.Add(Me.tbTubeThermalCond)
         Me.GroupBox2.Controls.Add(Me.Label5)
@@ -247,7 +248,6 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         Me.GroupBox2.Controls.Add(Me.lbuTubeDi)
         Me.GroupBox2.Controls.Add(Me.tbTubeDi)
         Me.GroupBox2.Controls.Add(Me.Label32)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -322,10 +322,10 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         '
         'cbTubeLayout
         '
+        resources.ApplyResources(Me.cbTubeLayout, "cbTubeLayout")
         Me.cbTubeLayout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTubeLayout.FormattingEnabled = True
         Me.cbTubeLayout.Items.AddRange(New Object() {resources.GetString("cbTubeLayout.Items"), resources.GetString("cbTubeLayout.Items1"), resources.GetString("cbTubeLayout.Items2"), resources.GetString("cbTubeLayout.Items3")})
-        resources.ApplyResources(Me.cbTubeLayout, "cbTubeLayout")
         Me.cbTubeLayout.Name = "cbTubeLayout"
         '
         'tbNumberOfTubesPerShell
@@ -410,32 +410,32 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         '
         'PictureBox2
         '
+        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
         Me.PictureBox2.BackColor = System.Drawing.Color.White
         Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.Straight_tube_heat_exchanger_1_pass
-        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.TabStop = False
         '
         'PictureBox1
         '
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.BackColor = System.Drawing.Color.White
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.Straight_tube_heat_exchanger_2_pass
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
         'EditingForm_HeatExchanger_SHProperties
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "EditingForm_HeatExchanger_SHProperties"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

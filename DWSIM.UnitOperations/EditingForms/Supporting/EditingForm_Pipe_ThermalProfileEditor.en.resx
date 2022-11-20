@@ -117,10 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="RadioButton7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="RadioButton7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 203</value>
+  </data>
+  <data name="RadioButton7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 17</value>
+  </data>
   <data name="RadioButton7.Text" xml:space="preserve">
     <value>Estimate Overall Heat Transfer Coefficient</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 13</value>
   </data>
@@ -253,18 +263,11 @@
   <data name="Label35.Text" xml:space="preserve">
     <value>Insulation Material</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CheckBoxICTE.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="CheckBoxICTE.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 17</value>
   </data>
   <data name="CheckBoxICTE.Text" xml:space="preserve">
     <value>Include External HTC</value>
-  </data>
-  <data name="CheckBoxICTI.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="CheckBoxICTI.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 17</value>
@@ -272,17 +275,11 @@
   <data name="CheckBoxICTI.Text" xml:space="preserve">
     <value>Include Internal HTC</value>
   </data>
-  <data name="CheckBoxII.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="CheckBoxII.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 17</value>
   </data>
   <data name="CheckBoxII.Text" xml:space="preserve">
     <value>Include Insulation</value>
-  </data>
-  <data name="CheckBoxIPT.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="CheckBoxIPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 17</value>
@@ -290,8 +287,20 @@
   <data name="CheckBoxIPT.Text" xml:space="preserve">
     <value>Include Pipe Walls</value>
   </data>
+  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 221</value>
+  </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 287</value>
+    <value>336, 287</value>
+  </data>
+  <data name="RadioButton8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RadioButton8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 139</value>
+  </data>
+  <data name="RadioButton8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 17</value>
   </data>
   <data name="RadioButton8.Text" xml:space="preserve">
     <value>Define the Heat Exchanged</value>
@@ -308,14 +317,42 @@
   <data name="Label38.Text" xml:space="preserve">
     <value>Heat Exchanged</value>
   </data>
+  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 158</value>
+  </data>
   <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 39</value>
+    <value>335, 39</value>
+  </data>
+  <data name="RadioButton9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RadioButton9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 17</value>
   </data>
   <data name="RadioButton9.Text" xml:space="preserve">
     <value>Define Overall Heat Transfer Coefficient</value>
   </data>
-  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 80</value>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 77</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Edit Data</value>
+  </data>
+  <data name="chkUserDefU.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkUserDefU.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkUserDefU.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkUserDefU.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 17</value>
+  </data>
+  <data name="chkUserDefU.Text" xml:space="preserve">
+    <value>Tabulated Data</value>
   </data>
   <data name="lblTAGUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>294, 51</value>
@@ -350,7 +387,10 @@
   <data name="Label53.Text" xml:space="preserve">
     <value>Overall HTC</value>
   </data>
+  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 109</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 483</value>
+    <value>347, 518</value>
   </data>
 </root>

@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.CustomUO
             Me.Description = "Python Script Block"
+            EmbeddedResourceIconName = "python_script.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -250,6 +251,11 @@ Namespace GraphicObjects.Shapes
                         ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                         ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
+                        Using New SKAutoCanvasRestore(canvas)
+                            StraightCanvas(canvas)
+                            canvas.DrawText("PS", ax, ay, tpaint)
+                        End Using
+
                     Case 1
 
                         'b/w
@@ -282,9 +288,14 @@ Namespace GraphicObjects.Shapes
                         ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                         ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
+                        Using New SKAutoCanvasRestore(canvas)
+                            StraightCanvas(canvas)
+                            canvas.DrawText("PS", ax, ay, tpaint)
+                        End Using
+
                     Case 2
 
-                    'Gas/Liquid Flows
+                        DrawIcon(canvas)
 
                     Case 3
 

@@ -30,9 +30,17 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.PressureChangers
 
+        Public Enum OpeningKvRelationshipType
+            Linear = 0
+            EqualPercentage = 1
+            QuickOpening = 2
+            UserDefined = 3
+            DataTable = 4
+        End Enum
+
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
-        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Valve
 
@@ -46,7 +54,29 @@ Namespace UnitOperations
 
         Public Property Kv As Double = 100.0#
 
-        Public Property OpeningPct As Double = 50.0
+        Private _opening As Double = 50.0
+
+        Public Property OpeningPct As Double
+            Get
+                Return _opening
+            End Get
+            Set(value As Double)
+                If FlowSheet IsNot Nothing Then
+                    If FlowSheet.DynamicMode AndAlso DelayedOpenings IsNot Nothing Then
+                        Dim AD As Double = GetDynamicProperty("Actuator Delay")
+                        If AD > 0.0 Then
+                            DelayedOpenings.Enqueue(value)
+                        Else
+                            _opening = value
+                        End If
+                    Else
+                        _opening = value
+                    End If
+                Else
+                    _opening = value
+                End If
+            End Set
+        End Property
 
         Public Property xT As Double = 0.75
 
@@ -63,6 +93,25 @@ Namespace UnitOperations
         Public Property PercentOpeningVersusPercentKvExpression As String = "1.0*OP"
 
         Public Property EnableOpeningKvRelationship As Boolean = False
+
+        Public Property CharacteristicParameter As Double = 50
+
+        Public Property DefinedOpeningKvRelationShipType As OpeningKvRelationshipType = OpeningKvRelationshipType.UserDefined
+
+        Public Property OpeningKvRelDataTableX As New List(Of Double)
+
+        Public Property OpeningKvRelDataTableY As New List(Of Double)
+
+        Public Property FlowCoefficient As FlowCoefficientType = FlowCoefficientType.Kv
+
+        Private ActuatorTimeToNext As New DateTime
+
+        Private DelayedOpenings As New Queue(Of Double)
+
+        Public Enum FlowCoefficientType
+            Kv = 0
+            Cv = 1
+        End Enum
 
         Public Enum CalculationMode
             DeltaP = 0
@@ -144,7 +193,7 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            'AddDynamicProperty("Actuator Delay", "Actuator Delay Description", 0, UnitOfMeasure.time)
+            AddDynamicProperty("Actuator Delay", "Valve Actuator Delay", 0, UnitOfMeasure.time, 1.0.GetType())
 
         End Sub
 
@@ -154,6 +203,28 @@ Namespace UnitOperations
             Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
 
             If Not integrator.ShouldCalculatePressureFlow Then Exit Sub
+
+            Dim AD As Double = GetDynamicProperty("Actuator Delay")
+
+            If AD > 0.0 Then
+
+                Dim DT0 = (integrator.CurrentTime - New Date).TotalSeconds
+
+                If DT0 = 0.0 Then
+                    ActuatorTimeToNext = New Date()
+                    DelayedOpenings = New Queue(Of Double)
+                Else
+                    ActuatorTimeToNext = ActuatorTimeToNext.Add(integrator.IntegrationStep)
+                End If
+
+                Dim DT = (ActuatorTimeToNext - New Date).TotalSeconds
+
+                If DT >= AD AndAlso DelayedOpenings.Count > 0 Then
+                    ActuatorTimeToNext = New Date()
+                    OpeningPct = DelayedOpenings.Dequeue()
+                End If
+
+            End If
 
             Select Case CalcMode
 
@@ -183,20 +254,47 @@ Namespace UnitOperations
 
                     H2 = Hi
 
-                    If EnableOpeningKvRelationship Then
-                        Try
-                            Dim ExpContext As New Ciloci.Flee.ExpressionContext
-                            ExpContext.Imports.AddType(GetType(System.Math))
-                            ExpContext.Variables.Clear()
-                            ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                            ExpContext.Variables.Add("OP", OpeningPct)
-                            Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
-                            Kvc = Kv * Expr.Evaluate() / 100
-                        Catch ex As Exception
-                            Throw New Exception("Invalid expression for Kv/Opening relationship.")
-                        End Try
+
+                    Dim FC As Double 'flow coefficient
+
+                    If FlowCoefficient = FlowCoefficientType.Cv Then
+                        'Cv = 1.16 Kv
+                        'Kv = Cv / 1.16
+                        FC = Kv / 1.16
                     Else
-                        Kvc = Kv
+                        FC = Kv
+                    End If
+
+                    If EnableOpeningKvRelationship Then
+                        Select Case DefinedOpeningKvRelationShipType
+                            Case OpeningKvRelationshipType.UserDefined
+                                Try
+                                    Dim ExpContext As New Ciloci.Flee.ExpressionContext
+                                    ExpContext.Imports.AddType(GetType(System.Math))
+                                    ExpContext.Variables.Clear()
+                                    ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                                    ExpContext.Variables.Add("OP", OpeningPct)
+                                    Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
+                                    Kvc = FC * Expr.Evaluate() / 100
+                                Catch ex As Exception
+                                    Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
+                                End Try
+                            Case OpeningKvRelationshipType.QuickOpening
+                                Kvc = (OpeningPct / 100.0) ^ 0.5 * FC
+                            Case OpeningKvRelationshipType.Linear
+                                Kvc = OpeningPct / 100.0 * FC
+                            Case OpeningKvRelationshipType.EqualPercentage
+                                Kvc = CharacteristicParameter ^ (OpeningPct / 100.0 - 1.0) * FC
+                            Case OpeningKvRelationshipType.DataTable
+                                Try
+                                    Dim factor = MathNet.Numerics.Interpolate.RationalWithoutPoles(OpeningKvRelDataTableX, OpeningKvRelDataTableX).Interpolate(OpeningPct) / 100.0
+                                    Kvc = factor * FC
+                                Catch ex As Exception
+                                    Throw New Exception("Error calculating Kv from tabulated data: " + ex.Message)
+                                End Try
+                        End Select
+                    Else
+                        Kvc = FC
                     End If
 
                     If ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
@@ -259,7 +357,7 @@ Namespace UnitOperations
                             End If
                         End If
 
-                        If Double.IsNaN(Wi) Then Wi = 0.0
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
 
                         ims.SetMassFlow(Wi)
                         oms.SetMassFlow(Wi)
@@ -269,7 +367,7 @@ Namespace UnitOperations
 
                         'valid! calculate P1
 
-                        If Double.IsNaN(Wi) Then Wi = 0.0
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
 
                         oms.SetMassFlow(Wi)
 
@@ -302,10 +400,9 @@ Namespace UnitOperations
 
                         Wi = oms.GetMassFlow
 
-                        If Double.IsNaN(Wi) Then Wi = 0.0
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
 
                         ims.SetMassFlow(Wi)
-
 
                         'valid! Calculate P2
 
@@ -680,6 +777,11 @@ Namespace UnitOperations
                 End Try
             End If
 
+            If FlowCoefficient = FlowCoefficientType.Cv Then
+                'Cv = 1.16 Kv
+                Kv = 1.16 * Kv
+            End If
+
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
@@ -743,8 +845,18 @@ Namespace UnitOperations
             If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, W = {3} kg/s", Ti, Pi, Hi, Wi))
 
+            Dim FC As Double 'flow coefficient
+
+            If FlowCoefficient = FlowCoefficientType.Cv Then
+                'Cv = 1.16 Kv
+                'Kv = Cv / 1.16
+                FC = Kv / 1.16
+            Else
+                FC = Kv
+            End If
+
             If EnableOpeningKvRelationship Then
-                IObj?.Paragraphs.Add("<h2>Opening/Kv relationship</h2>")
+                IObj?.Paragraphs.Add("<h2>Opening/Kv[Cv] relationship</h2>")
                 IObj?.Paragraphs.Add("When this feature is enabled, you can enter an expression that relates the valve stem opening with the maximum flow value (Kvmax).")
                 IObj?.Paragraphs.Add("The relationship between control valve capacity and valve stem travel is known as the Flow Characteristic of the 
                                     Control Valve. Trim design of the valve affects how the control valve capacity changes as the valve moves through 
@@ -752,23 +864,51 @@ Namespace UnitOperations
                                     are instead designed, or characterized, in order to meet the large variety of control application needs. Many 
                                     control loops have inherent non linearity's, which may be possible to compensate selecting the control valve trim.")
                 IObj?.Paragraphs.Add("<img src='https://www.engineeringtoolbox.com/docs/documents/485/Control_Valve_Flow_Characteristics.gif'></img>")
-                Try
-                    Dim ExpContext As New Ciloci.Flee.ExpressionContext
-                    ExpContext.Imports.AddType(GetType(System.Math))
-                    ExpContext.Variables.Clear()
-                    ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                    ExpContext.Variables.Add("OP", OpeningPct)
-                    IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
-                    IObj?.Paragraphs.Add("Opening/Kvmax relationship expression: " & PercentOpeningVersusPercentKvExpression)
-                    Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
-                    Kvc = Kv * Expr.Evaluate() / 100
-                    IObj?.Paragraphs.Add("Calculated Kv/Kvmax (%): " & Kvc / Kv * 100)
-                    IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
-                Catch ex As Exception
-                    Throw New Exception("Invalid expression for Kv/Opening relationship.")
-                End Try
+                Select Case DefinedOpeningKvRelationShipType
+                    Case OpeningKvRelationshipType.UserDefined
+                        Try
+                            Dim ExpContext As New Ciloci.Flee.ExpressionContext()
+                            ExpContext.Imports.AddType(GetType(System.Math))
+                            ExpContext.Variables.Clear()
+                            ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                            ExpContext.Variables.Add("OP", OpeningPct)
+                            IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                            IObj?.Paragraphs.Add("Opening/Kv[Cv]max relationship expression: " & PercentOpeningVersusPercentKvExpression)
+                            Dim Expr = ExpContext.CompileGeneric(Of Double)(PercentOpeningVersusPercentKvExpression)
+                            Kvc = FC * Expr.Evaluate() / 100
+                            IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                            IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                        Catch ex As Exception
+                            Throw New Exception("Invalid expression for Kv[Cv]/Opening relationship.")
+                        End Try
+                    Case OpeningKvRelationshipType.QuickOpening
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Kvc = (OpeningPct / 100.0) ^ 0.5 * FC
+                        IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                        IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                    Case OpeningKvRelationshipType.Linear
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Kvc = OpeningPct / 100.0 * FC
+                        IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                        IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                    Case OpeningKvRelationshipType.EqualPercentage
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Kvc = CharacteristicParameter ^ (OpeningPct / 100.0 - 1.0) * FC
+                        IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                        IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                    Case OpeningKvRelationshipType.DataTable
+                        IObj?.Paragraphs.Add("Current Opening (%): " & OpeningPct)
+                        Try
+                            Dim factor = MathNet.Numerics.Interpolate.RationalWithoutPoles(OpeningKvRelDataTableX, OpeningKvRelDataTableX).Interpolate(OpeningPct) / 100.0
+                            Kvc = factor * FC
+                            IObj?.Paragraphs.Add("Calculated Kv[Cv]/Kv[Cv]max (%): " & Kvc / FC * 100)
+                            IObj?.Paragraphs.Add("Calculated Kv: " & Kvc)
+                        Catch ex As Exception
+                            Throw New Exception("Error calculating Kv from tabulated data: " + ex.Message)
+                        End Try
+                End Select
             Else
-                Kvc = Kv
+                Kvc = FC
             End If
 
             'reference: https://www.samson.de/document/t00050en.pdf
@@ -789,35 +929,30 @@ Namespace UnitOperations
                 IObj?.Paragraphs.Add(String.Format("Kv = {0}", Kvc))
             End If
 
-
-
-            If CalcMode <> CalculationMode.DeltaP And CalcMode <> CalculationMode.OutletPressure Then
-                If ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
-                    ims.PropertyPackage.CurrentMaterialStream = ims
-                    rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
-                    Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
-                    k = Cp_ig / (Cp_ig - 8.314)
-                    P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
-                    IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
-                ElseIf ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
-                    Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
-                    Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                    rhol = ims.Phases(1).Properties.density.GetValueOrDefault
-                    P2 = 100000.0 * P2Liquid(Wi * 3600, Kvc, Pi / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
-                    IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
-                Else
-                    ims.PropertyPackage.CurrentMaterialStream = ims
-                    rhog = ims.Phases(2).Properties.density.GetValueOrDefault
-                    Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
-                    k = Cp_ig / (Cp_ig - 8.314)
-                    rhol = ims.Phases(1).Properties.density.GetValueOrDefault
-                    Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                    Pv = Pi 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
-
-                    massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
-                    massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
-                    P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
-                End If
+            If CalcMode = CalculationMode.Kv_Gas Then
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
+                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight.GetValueOrDefault()
+                k = Cp_ig / (Cp_ig - 8.314)
+                P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
+            ElseIf CalcMode = CalculationMode.Kv_Liquid Then
+                Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
+                Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                P2 = 100000.0 * P2Liquid(Wi * 3600, Kvc, Pi / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
+            ElseIf CalcMode = CalculationMode.Kv_General Then
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                rhog = ims.Phases(2).Properties.density.GetValueOrDefault
+                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight.GetValueOrDefault()
+                k = Cp_ig / (Cp_ig - 8.314)
+                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                Pv = Pi 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
+                massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
                 P2 = Pi * 0.7 / 100000.0
                 icount = 0
@@ -878,6 +1013,7 @@ Namespace UnitOperations
             If Not DebugMode Then
 
                 With oms
+                    .AtEquilibrium = False
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
@@ -964,6 +1100,8 @@ Namespace UnitOperations
                         value = Kv
                     Case 5
                         value = OpeningPct
+                    Case 6
+                        value = CharacteristicParameter
                 End Select
 
                 Return value
@@ -983,15 +1121,15 @@ Namespace UnitOperations
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
             End Select
@@ -1027,6 +1165,8 @@ Namespace UnitOperations
                     Else
                         OpeningPct = 100
                     End If
+                Case 6
+                    CharacteristicParameter = propval
             End Select
 
             Return 1
@@ -1099,7 +1239,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_valve_32
+            Return My.Resources.valve
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
@@ -1199,7 +1339,7 @@ Namespace UnitOperations
             Select Case CalcMode
                 Case CalculationMode.DeltaP
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
-                            New String() {"Pressure Increase",
+                            New String() {"Pressure Drop",
                             Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
                             su.deltaP}))
                 Case CalculationMode.OutletPressure

@@ -34,13 +34,6 @@
                         </Style.Triggers>
                     </Style>
                 </ToolBar.Resources>
-                <Button Click="openFileClick">
-                    <Image Source="Images/Open.png" Height="16"/>
-                </Button>
-                <Button Click="saveFileClick">
-                    <Image Source="Images/Save.png" Height="16"/>
-                </Button>
-                <Separator/>
                 <Button Command="Cut">
                     <Image Source="Images/Cut.png" Height="16"/>
                 </Button>

@@ -160,7 +160,7 @@ Namespace PropertyPackages
                 p3 = CoolProp.PropsSI("L", "T", x3, "P", P, SolventCompound)
                 p4 = CoolProp.PropsSI("L", "T", x4, "P", P, SolventCompound)
                 p5 = CoolProp.PropsSI("L", "T", x5, "P", P, SolventCompound)
-                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
             End If
 
         End Function
@@ -173,8 +173,8 @@ Namespace PropertyPackages
 
         Public Function AUX_TSAT(P As Double, x As Double) As Double
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
-            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+            Dim Tmin = GetTmin(x)
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
             Dim xmax = SolutionDataList(SoluteName).xmax
             Dim xmin = SolutionDataList(SoluteName).xmin
 
@@ -183,6 +183,9 @@ Namespace PropertyPackages
                                       Dim psat As Double
                                       If x < xmax Then
                                           psat = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x))
+                                          If psat = 0.0 Then
+                                              Throw New Exception(String.Format("Error calculating saturation pressure at {0} K for {1} - CoolProp returned Psat = 0 Pa", t, GetCoolPropName(x)))
+                                          End If
                                       Else
                                           Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
                                           x1 = xmin + (xmax - xmin) * 0.2
@@ -195,7 +198,7 @@ Namespace PropertyPackages
                                           p3 = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x3))
                                           p4 = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x4))
                                           p5 = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x5))
-                                          psat = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, x)
+                                          psat = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(x)
                                       End If
                                       Return (P - psat) ^ 2
                                   End Function)
@@ -267,7 +270,7 @@ Namespace PropertyPackages
                 p3 = CoolProp.PropsSI("V", "T", x3, "P", P, SolventCompound)
                 p4 = CoolProp.PropsSI("V", "T", x4, "P", P, SolventCompound)
                 p5 = CoolProp.PropsSI("V", "T", x5, "P", P, SolventCompound)
-                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
             End If
 
         End Function
@@ -307,7 +310,7 @@ Namespace PropertyPackages
                 p3 = CoolProp.PropsSI("D", "T", x3, "P", P, SolventCompound)
                 p4 = CoolProp.PropsSI("D", "T", x4, "P", P, SolventCompound)
                 p5 = CoolProp.PropsSI("D", "T", x5, "P", P, SolventCompound)
-                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
             End If
 
         End Function
@@ -353,8 +356,8 @@ Namespace PropertyPackages
             Dim Vxw = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
-            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+            Dim Tmin = GetTmin(x)
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
             Dim xmax = SolutionDataList(SoluteName).xmax
             Dim xmin = SolutionDataList(SoluteName).xmin
 
@@ -375,7 +378,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(x)) / 1000
                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(x)) / 1000
                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(x)) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                     End Try
                 Else
                     Try
@@ -390,7 +393,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x3)) / 1000
                         p4 = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x4)) / 1000
                         p5 = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x5)) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, x)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(x)
                     Catch ex As Exception
                         Dim Tsat = AUX_TSAT(P, x)
                         Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
@@ -404,7 +407,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(xmax)) / 1000
                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(xmax)) / 1000
                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(xmax)) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                     End Try
                 End If
             Else
@@ -427,8 +430,8 @@ Namespace PropertyPackages
             Dim Vxw = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
-            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+            Dim Tmin = GetTmin(x)
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
 
             If st = State.Liquid Then
                 Try
@@ -446,7 +449,7 @@ Namespace PropertyPackages
                     p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(x)) / 1000
                     p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(x)) / 1000
                     p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(x)) / 1000
-                    Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                 End Try
             Else
                 Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 1.0, SolventCompound)
@@ -850,6 +853,18 @@ Namespace PropertyPackages
         Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
 
             Return 0.0
+
+        End Function
+
+        Private Function GetTmin(x As Double) As Double
+
+            Dim t = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Try
+                Dim psat = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x))
+                Return t
+            Catch ex As Exception
+                Return CoolProp.Props1SI(GetCoolPropName(x), "TMIN")
+            End Try
 
         End Function
 

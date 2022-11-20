@@ -3263,18 +3263,6 @@ Public Class PropertyChanged
 
                     col.CondenserDeltaP = Converter.ConvertToSI(su.spmp_deltaP, e.ChangedItem.Value)
 
-                ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("DCCondenserPressure")) Or
-            e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("DCFirstStgPressure")) Then
-
-                    col.CondenserPressure = Converter.ConvertToSI(su.spmp_pressure, e.ChangedItem.Value)
-                    col.Stages(0).P = col.CondenserPressure
-
-                ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("DCReboilerPressure")) Or
-            e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("DCLastStgPressure")) Then
-
-                    col.ReboilerPressure = Converter.ConvertToSI(su.spmp_pressure, e.ChangedItem.Value)
-                    col.Stages(col.Stages.Count - 1).P = col.ReboilerPressure
-
                 ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("DCDistillateFlowRate")) Then
 
                     col.DistillateFlowRate = Converter.ConvertToSI(su.spmp_molarflow, e.ChangedItem.Value)

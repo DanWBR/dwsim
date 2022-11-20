@@ -57,10 +57,16 @@ Namespace GraphicObjects
 
         Public Property Straight As Boolean = False Implements IConnectorGraphicObject.Straight
 
+        Public Property ConnectorPath As SKPath
+
+        Public Property ConnectorPathExpanded As SKPath
+
+        Public Shared Property ExpandFactor As Integer = 20
 
 #Region "Constructors"
 
         Public Sub New()
+
         End Sub
 
         Public Sub New(ByVal startPosition As Point)
@@ -347,9 +353,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, EndPos.Y))
                 End If
                 PointList.Add(New Point(EndPos.X, EndPos.Y))
-            End If
-
-            If StartDir = ConDir.Up And EndDir = ConDir.Right Then
+            ElseIf StartDir = ConDir.Up And EndDir = ConDir.Right Then
                 If (EndPos.X - DeltaX) > StartPos.X Then
                     If EndPos.Y <= StartPos.Y - DeltaY Then
                         PointList.Add(New Point(StartPos.X, EndPos.Y))
@@ -373,9 +377,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, EndPos.Y))
                 End If
                 PointList.Add(New Point(EndPos.X, EndPos.Y))
-            End If
-
-            If StartDir = ConDir.Right And EndDir = ConDir.Right Then
+            ElseIf StartDir = ConDir.Right And EndDir = ConDir.Right Then
                 If (EndPos.X - DeltaX) >= (StartPos.X + DeltaX) Then
                     PointList.Add(New Point((StartPos.X + EndPos.X) / 2, StartPos.Y))
                     PointList.Add(New Point((StartPos.X + EndPos.X) / 2, EndPos.Y))
@@ -394,9 +396,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, EndPos.Y))
 
                 End If
-            End If
-
-            If StartDir = ConDir.Left And EndDir = ConDir.Right Then
+            ElseIf StartDir = ConDir.Left And EndDir = ConDir.Right Then
                 If (EndPos.X - DeltaX) > StartPos.X Then
                     PointList.Add(New Point(StartPos.X - DeltaX, StartPos.Y))
                     If EndPos.Y > LeftTop1.Y - DeltaY And EndPos.Y < RightBottom1.Y + DeltaY Then
@@ -431,11 +431,7 @@ Namespace GraphicObjects
                         PointList.Add(New Point(XM, EndPos.Y))
                     End If
                 End If
-            End If
-
-            '================== EndDir Down  =======================
-
-            If StartDir = ConDir.Right And EndDir = ConDir.Down Then
+            ElseIf StartDir = ConDir.Right And EndDir = ConDir.Down Then
                 If (EndPos.Y - DeltaY) > StartPos.Y Then
                     If EndPos.X >= StartPos.X + DeltaX Then
                         PointList.Add(New Point(EndPos.X, StartPos.Y))
@@ -456,9 +452,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, YM))
                     PointList.Add(New Point(EndPos.X, YM))
                 End If
-            End If
-
-            If StartDir = ConDir.Left And EndDir = ConDir.Down Then
+            ElseIf StartDir = ConDir.Left And EndDir = ConDir.Down Then
                 If (EndPos.Y - DeltaY) > StartPos.Y Then
                     If EndPos.X <= StartPos.X - DeltaX Then
                         PointList.Add(New Point(EndPos.X, StartPos.Y))
@@ -479,9 +473,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, YM))
                     PointList.Add(New Point(EndPos.X, YM))
                 End If
-            End If
-
-            If StartDir = ConDir.Up And EndDir = ConDir.Down Then
+            ElseIf StartDir = ConDir.Up And EndDir = ConDir.Down Then
                 YM = StartPos.Y - DeltaY
                 If YM < EndPos.Y - DeltaY Then
                     XM = EndPos.X
@@ -530,11 +522,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(StartPos.X, YM))
                     PointList.Add(New Point(EndPos.X, YM))
                 End If
-            End If
-
-            '================== EndDir Left =======================
-
-            If StartDir = ConDir.Right And EndDir = ConDir.Left Then
+            ElseIf StartDir = ConDir.Right And EndDir = ConDir.Left Then
                 If (EndPos.X + DeltaX) > (StartPos.X + DeltaX) Then
                     If EndPos.Y < RightBottom1.Y + DeltaY And EndPos.Y > LeftTop1.Y - DeltaY Then
                         If EndPos.Y < (LeftTop1.Y + RightBottom1.Y) / 2 Then
@@ -566,9 +554,7 @@ Namespace GraphicObjects
                     End If
 
                 End If
-            End If
-
-            If StartDir = ConDir.Left And EndDir = ConDir.Left Then
+            ElseIf StartDir = ConDir.Left And EndDir = ConDir.Left Then
                 If (EndPos.X + DeltaX) > (StartPos.X - DeltaX) Then
                     YM = (StartPos.Y + EndPos.Y) / 2
                     If YM < RightBottom1.Y + DeltaY And YM > LeftTop1.Y - DeltaY Then YM = LeftTop1.Y - DeltaY
@@ -581,9 +567,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point((StartPos.X + EndPos.X) / 2, StartPos.Y))
                     PointList.Add(New Point((StartPos.X + EndPos.X) / 2, EndPos.Y))
                 End If
-            End If
-
-            If StartDir = ConDir.Down And EndDir = ConDir.Left Then
+            ElseIf StartDir = ConDir.Down And EndDir = ConDir.Left Then
                 If (EndPos.X + DeltaX) < StartPos.X Then
                     If EndPos.Y >= StartPos.Y + DeltaY Then
                         PointList.Add(New Point(StartPos.X, EndPos.Y))
@@ -606,9 +590,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, EndPos.Y))
                 End If
                 PointList.Add(New Point(EndPos.X, EndPos.Y))
-            End If
-
-            If StartDir = ConDir.Up And EndDir = ConDir.Left Then
+            ElseIf StartDir = ConDir.Up And EndDir = ConDir.Left Then
                 If (EndPos.X + DeltaX) < StartPos.X Then
                     If EndPos.Y <= StartPos.Y - DeltaY Then
                         PointList.Add(New Point(StartPos.X, EndPos.Y))
@@ -632,11 +614,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, EndPos.Y))
                 End If
                 PointList.Add(New Point(EndPos.X, EndPos.Y))
-            End If
-
-            '================== EndDir Up =======================
-
-            If StartDir = ConDir.Left And EndDir = ConDir.Up Then
+            ElseIf StartDir = ConDir.Left And EndDir = ConDir.Up Then
                 If EndPos.X < StartPos.X - DeltaX Then
                     If StartPos.Y > EndPos.Y + DeltaY Then
                         PointList.Add(New Point(EndPos.X, StartPos.Y))
@@ -658,10 +636,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, YM))
                     PointList.Add(New Point(EndPos.X, YM))
                 End If
-
-            End If
-
-            If StartDir = ConDir.Right And EndDir = ConDir.Up Then
+            ElseIf StartDir = ConDir.Right And EndDir = ConDir.Up Then
                 If EndPos.X > StartPos.X + DeltaX Then
                     If StartPos.Y > EndPos.Y + DeltaY Then
                         PointList.Add(New Point(EndPos.X, StartPos.Y))
@@ -683,9 +658,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, YM))
                     PointList.Add(New Point(EndPos.X, YM))
                 End If
-            End If
-
-            If StartDir = ConDir.Up And EndDir = ConDir.Up Then
+            ElseIf StartDir = ConDir.Up And EndDir = ConDir.Up Then
                 If EndPos.Y + DeltaY < StartPos.Y - DeltaY Then
                     YM = (StartPos.Y + EndPos.Y) / 2
                     PointList.Add(New Point(StartPos.X, YM))
@@ -702,9 +675,7 @@ Namespace GraphicObjects
                     PointList.Add(New Point(XM, EndPos.Y + DeltaY))
                     PointList.Add(New Point(EndPos.X, EndPos.Y + DeltaY))
                 End If
-            End If
-
-            If StartDir = ConDir.Down And EndDir = ConDir.Up Then
+            ElseIf StartDir = ConDir.Down And EndDir = ConDir.Up Then
                 YM = StartPos.Y + DeltaY
                 XM = EndPos.X
                 If YM > EndPos.Y + DeltaY Then
@@ -748,16 +719,18 @@ Namespace GraphicObjects
 
             SetupPositioning()
 
-            Dim points() As SKPoint = PointList.Select(Function(x) New SKPoint(x.X, x.Y)).ToArray
             Dim path As New SKPath()
 
-            path.MoveTo(points(0).X, points(0).Y)
-            For i As Integer = 1 To points.Length - 1
-                path.LineTo(points(i).X, points(i).Y)
+            path.MoveTo(PointList(0).X, PointList(0).Y)
+            For i As Integer = 1 To PointList.Count - 1
+                path.LineTo(PointList(i).X, PointList(i).Y)
             Next
 
+            ConnectorPath = path
+
             Select Case DrawMode
-                Case 0
+
+                Case 0, 2
 
                     'default
 
@@ -777,7 +750,7 @@ Namespace GraphicObjects
                         Else
                             .Color = SKColors.Salmon
                         End If
-                        If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                        If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedFrom.ObjectType = ObjectType.OT_EnergyRecycle Then
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
@@ -802,7 +775,8 @@ Namespace GraphicObjects
 
                     Else
 
-                        canvas.DrawLine(points.First, points.Last, myPen)
+                        canvas.DrawLine(New SKPoint(PointList.First.X, PointList.First.Y),
+                                        New SKPoint(PointList.Last.X, PointList.Last.Y), myPen)
 
                     End If
 
@@ -832,7 +806,8 @@ Namespace GraphicObjects
 
                     Else
 
-                        canvas.DrawLine(points.First, points.Last, myPen)
+                        canvas.DrawLine(New SKPoint(PointList.First.X, PointList.First.Y),
+                                        New SKPoint(PointList.Last.X, PointList.Last.Y), myPen)
 
                     End If
 
@@ -846,6 +821,14 @@ Namespace GraphicObjects
                     'Temperature/Pressure Gradients
             End Select
 
+            Dim bounds As New SKRect
+
+            ConnectorPath.GetBounds(bounds)
+
+            X = bounds.Left
+            Y = bounds.Top
+            Width = bounds.Width
+            Height = bounds.Height
 
         End Sub
 
@@ -864,6 +847,55 @@ Namespace GraphicObjects
         Public Property AttachedToOutput As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedToOutput
 
         Public Property AttachedFromInput As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedFromInput
+
+        Public Overrides Function HitTest(pt As SKPoint) As Boolean
+
+            If ConnectorPathExpanded IsNot Nothing Then
+                Return ConnectorPathExpanded.Contains(pt.X, pt.Y)
+            Else
+                Return False
+            End If
+
+        End Function
+
+        Public Overrides Function GetPointValue(type As PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double
+
+            If X >= 0 And X <= Width + 5 And Y >= 0 And Y <= Height + 5 Then
+                If HitTest(New SKPoint(Me.X + X, Me.Y + Y)) Then
+                    Dim im = TryCast(AttachedFrom?.Owner, IMaterialStream)
+                    Dim om = TryCast(AttachedTo?.Owner, IMaterialStream)
+                    If im Is Nothing And om Is Nothing Then Return Double.NaN
+                    Dim ms As IMaterialStream = IIf(im Is Nothing, om, im)
+                    Dim v1 As Double
+                    Select Case type
+                        Case PointValueType.Temperature
+                            v1 = ms.GetTemperature()
+                        Case PointValueType.Pressure
+                            v1 = ms.GetPressure()
+                        Case PointValueType.Flow
+                            v1 = ms.GetMassFlow()
+                        Case PointValueType.EnergyFlow
+                            v1 = ms.GetEnergyFlow()
+                        Case PointValueType.Concentration
+                            v1 = ms.GetCompoundMassConcentration(args(0))
+                        Case PointValueType.CompoundMassFlow
+                            v1 = ms.Phases(0).Compounds(args(0)).MassFlow.GetValueOrDefault()
+                        Case PointValueType.CompoundMolarFlow
+                            v1 = ms.Phases(0).Compounds(args(0)).MolarFlow.GetValueOrDefault()
+                        Case PointValueType.CompoundMassFraction
+                            v1 = ms.Phases(0).Compounds(args(0)).MassFraction.GetValueOrDefault()
+                        Case PointValueType.CompoundMolarFraction
+                            v1 = ms.Phases(0).Compounds(args(0)).MoleFraction.GetValueOrDefault()
+                    End Select
+                    Return v1
+                Else
+                    Return Double.NaN
+                End If
+            Else
+                Return Double.NaN
+            End If
+
+        End Function
 
     End Class
 

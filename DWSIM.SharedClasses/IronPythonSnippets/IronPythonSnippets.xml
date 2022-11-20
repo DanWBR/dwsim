@@ -382,7 +382,7 @@ print str(difc) + &quot; m2/s&quot;</E>
     <B>DWSIM</B>
     <C>Model Customization</C>
     <D>Flowsheet</D>
-    <E># for more details, go to http://dwsim.inforside.com.br/wiki/index.php?title=Model_Customization
+    <E># for more details, go to https://dwsim.org/wiki/index.php?title=Model_Customization
 
 import clr
  
@@ -498,7 +498,7 @@ mixer.CalculationRoutineOverride = CalcMixer</E>
     <B>DWSIM</B>
     <C>Model Customization</C>
     <D>Flowsheet</D>
-    <E># for more details, go to http://dwsim.inforside.com.br/wiki/index.php?title=Model_Customization
+    <E># for more details, go to https://dwsim.org/wiki/index.php?title=Model_Customization
 
 import clr
 clr.AddReference(&apos;DWSIM.MathOps&apos;)
@@ -673,7 +673,7 @@ pp.KvalFugacityCoefficientOverride = fugcoeff</E>
     <B>DWSIM</B>
     <C>Model Customization</C>
     <D>Flowsheet</D>
-    <E># for more details, go to http://dwsim.inforside.com.br/wiki/index.php?title=Model_Customization
+    <E># for more details, go to https://dwsim.org/wiki/index.php?title=Model_Customization
 
 import clr
 clr.AddReference(&apos;DWSIM.MathOps&apos;)

@@ -106,6 +106,10 @@ namespace DWSIM.UI.Forms
             {
                 DWSIM.UI.Desktop.Editors.LogicalBlocks.PIDControllerEditor.Populate(obj, cont);
             }
+            else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Controller_Python)
+            {
+                DWSIM.UI.Desktop.Editors.LogicalBlocks.PythonControllerEditor.Populate(obj, cont);
+            }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
             {
                 DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
@@ -359,6 +363,10 @@ namespace DWSIM.UI.Forms
                 else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Controller_PID)
                 {
                     DWSIM.UI.Desktop.Editors.LogicalBlocks.PIDControllerEditor.Populate(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Controller_Python)
+                {
+                    DWSIM.UI.Desktop.Editors.LogicalBlocks.PythonControllerEditor.Populate(obj, cont);
                 }
                 else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust)
                 {

@@ -138,14 +138,15 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbEmbeddedFiles = New System.Windows.Forms.ComboBox()
+        Me.rbFileExternal = New System.Windows.Forms.RadioButton()
+        Me.rbFileEmbedded = New System.Windows.Forms.RadioButton()
         Me.chkUpdateProcessData = New System.Windows.Forms.CheckBox()
         Me.chkRedirect = New System.Windows.Forms.CheckBox()
         Me.chkInitialize = New System.Windows.Forms.CheckBox()
         Me.TbFileName = New System.Windows.Forms.TextBox()
-        Me.Label24 = New System.Windows.Forms.Label()
         Me.btnViewFlowsheet = New System.Windows.Forms.Button()
         Me.btnOpenControlPanel = New System.Windows.Forms.Button()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -1255,12 +1256,14 @@ Partial Class EditingForm_FlowsheetUO
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.cbEmbeddedFiles)
+        Me.GroupBox2.Controls.Add(Me.rbFileExternal)
+        Me.GroupBox2.Controls.Add(Me.rbFileEmbedded)
         Me.GroupBox2.Controls.Add(Me.chkUpdateProcessData)
         Me.GroupBox2.Controls.Add(Me.chkRedirect)
         Me.GroupBox2.Controls.Add(Me.chkInitialize)
         Me.GroupBox2.Controls.Add(Me.BtnSearch)
         Me.GroupBox2.Controls.Add(Me.TbFileName)
-        Me.GroupBox2.Controls.Add(Me.Label24)
         Me.GroupBox2.Controls.Add(Me.btnViewFlowsheet)
         Me.GroupBox2.Controls.Add(Me.btnOpenControlPanel)
         Me.GroupBox2.Name = "GroupBox2"
@@ -1268,6 +1271,36 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'cbEmbeddedFiles
+        '
+        resources.ApplyResources(Me.cbEmbeddedFiles, "cbEmbeddedFiles")
+        Me.cbEmbeddedFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEmbeddedFiles.FormattingEnabled = True
+        Me.cbEmbeddedFiles.Name = "cbEmbeddedFiles"
+        Me.ToolTip1.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip2"))
+        '
+        'rbFileExternal
+        '
+        resources.ApplyResources(Me.rbFileExternal, "rbFileExternal")
+        Me.rbFileExternal.Name = "rbFileExternal"
+        Me.rbFileExternal.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip2"))
+        Me.rbFileExternal.UseVisualStyleBackColor = True
+        '
+        'rbFileEmbedded
+        '
+        resources.ApplyResources(Me.rbFileEmbedded, "rbFileEmbedded")
+        Me.rbFileEmbedded.Name = "rbFileEmbedded"
+        Me.rbFileEmbedded.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip2"))
+        Me.rbFileEmbedded.UseVisualStyleBackColor = True
         '
         'chkUpdateProcessData
         '
@@ -1305,14 +1338,6 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTip1.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip2"))
         '
-        'Label24
-        '
-        resources.ApplyResources(Me.Label24, "Label24")
-        Me.Label24.Name = "Label24"
-        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip2"))
-        '
         'btnViewFlowsheet
         '
         resources.ApplyResources(Me.btnViewFlowsheet, "btnViewFlowsheet")
@@ -1331,13 +1356,6 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTipValues.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip2"))
         Me.btnOpenControlPanel.UseVisualStyleBackColor = True
         '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.CheckFileExists = False
-        Me.OpenFileDialog1.CheckPathExists = False
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
-        Me.OpenFileDialog1.RestoreDirectory = True
-        '
         'ToolTipChangeTag
         '
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
@@ -1346,7 +1364,7 @@ Partial Class EditingForm_FlowsheetUO
         'EditingForm_FlowsheetUO
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox1)
@@ -1471,8 +1489,6 @@ Partial Class EditingForm_FlowsheetUO
     Public WithEvents btnViewFlowsheet As System.Windows.Forms.Button
     Public WithEvents BtnSearch As System.Windows.Forms.Button
     Public WithEvents TbFileName As System.Windows.Forms.TextBox
-    Public WithEvents Label24 As System.Windows.Forms.Label
-    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents chkUpdateProcessData As System.Windows.Forms.CheckBox
     Public WithEvents chkRedirect As System.Windows.Forms.CheckBox
     Public WithEvents chkInitialize As System.Windows.Forms.CheckBox
@@ -1484,4 +1500,7 @@ Partial Class EditingForm_FlowsheetUO
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Friend WithEvents cbEmbeddedFiles As ComboBox
+    Friend WithEvents rbFileExternal As RadioButton
+    Friend WithEvents rbFileEmbedded As RadioButton
 End Class

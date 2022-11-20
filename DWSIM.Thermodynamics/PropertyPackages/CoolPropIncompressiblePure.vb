@@ -165,7 +165,15 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_CONDTL(T As Double, Optional phaseid As Integer = 3) As Double
 
-            Return CoolProp.PropsSI("L", "T", T, "P", 101325, GetCoolPropName())
+            Dim value As Double
+
+            Try
+                value = CoolProp.PropsSI("L", "T", T, "P", 101325, GetCoolPropName())
+            Catch ex As Exception
+                Dim psat = CoolProp.PropsSI("P", "T", T, "Q", 0, GetCoolPropName())
+                value = CoolProp.PropsSI("L", "T", T, "P", psat * 1.1, GetCoolPropName())
+            End Try
+            Return value
 
         End Function
 
@@ -259,7 +267,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName()) / 1000
                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName()) / 1000
                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName()) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                     Else
                         Return CoolProp.PropsSI("H", "T", T, "P", P * 1.01, GetCoolPropName()) / 1000
                     End If
@@ -298,7 +306,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName()) / 1000
                         p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName()) / 1000
                         p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName()) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                     Else
                         Return CoolProp.PropsSI("S", "T", T, "P", P * 1.01, GetCoolPropName()) / 1000
                     End If

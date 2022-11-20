@@ -64,8 +64,8 @@ Public Class FormLLEDiagram
         Dim MyPen As Pen
         Dim MyBrush As Brush
         Dim S1, S2 As String
-        Dim TitleFont As Font = New Font("Arial", 16)
-        Dim SubTitleFont As Font = New Font("Arial", 10)
+        Dim TitleFont As Font = SystemFonts.MessageBoxFont
+        Dim SubTitleFont As Font = SystemFonts.MessageBoxFont
         Dim stringSize As SizeF = New SizeF()
         Dim k As Integer
         Dim Ko1, KO2 As Konode
@@ -82,7 +82,7 @@ Public Class FormLLEDiagram
         S2 = cbComp1.Text & " / " & cbComp2.Text & " / " & cbComp3.Text
 
         stringSize = G.MeasureString(S1, TitleFont)
-        G.DrawString(S1, TitleFont, Brushes.Firebrick, Math.Round((G.VisibleClipBounds.Width - stringSize.Width) / 2), DiagMargins.Top)
+        G.DrawString(S1, TitleFont, Brushes.Black, Math.Round((G.VisibleClipBounds.Width - stringSize.Width) / 2), DiagMargins.Top)
         DiagMargins.Top += stringSize.Height
 
         stringSize = G.MeasureString(S2, SubTitleFont)
@@ -304,7 +304,9 @@ Public Class FormLLEDiagram
         End If
 
         Return Ko
+
     End Function
+
     Private Sub btnCalcDiagram_Click(sender As System.Object, e As System.EventArgs) Handles TSB_CalcDiagr.Click, btnCalcDiagram.Click
 
         Dim Ko, LastKo As New Konode

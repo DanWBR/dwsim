@@ -30,7 +30,7 @@ const CreateFolderModal: React.FC<ICreateFolderModalProps> = (props) => {
 
     
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = async (data:{foldername:string}) => {
+    const onSubmit = async (data:any) => {
         
      await   CreateFolder(data.foldername,props.flowsheetsDriveId,props.selectedFolder.driveId);
      props.onFolderCreated();

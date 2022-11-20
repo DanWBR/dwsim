@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.UnitOperations</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -96,6 +96,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=9084b9221296229e, processorArchitecture=MSIL">
       <HintPath>..\packages\NetOfficeFw.Excel.1.8.1\lib\net40\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -103,25 +107,24 @@
     <Reference Include="GemBox.Spreadsheet">
       <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1037\lib\net30\GemBox.Spreadsheet.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.1.9, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.3.1\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.CAPEOPEN110">
       <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="IronPython, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.dll</HintPath>
+    <Reference Include="IronPython, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.Modules, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.Modules.dll</HintPath>
+    <Reference Include="IronPython.Modules, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Modules.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.SQLite, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.SQLite.dll</HintPath>
+    <Reference Include="IronPython.SQLite, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="IronPython.Wpf, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.11\lib\net45\IronPython.Wpf.dll</HintPath>
+    <Reference Include="IronPython.Wpf, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Jolt">
       <HintPath>..\DWSIM\References\Jolt.dll</HintPath>
@@ -129,30 +132,30 @@
     <Reference Include="Jolt.Testing.GeneratedTypes">
       <HintPath>..\DWSIM\References\Jolt.Testing.GeneratedTypes.dll</HintPath>
     </Reference>
-    <Reference Include="Mages.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mages.2.0.0\lib\netstandard2.0\Mages.Core.dll</HintPath>
+    <Reference Include="Mages.Core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mages.2.0.1\lib\netstandard2.0\Mages.Core.dll</HintPath>
     </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
-    <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamic, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Dynamic.dll</HintPath>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Dynamic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.Scripting, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="NetOffice, Version=1.8.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
       <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\NetOffice.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OfficeApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=a39beb0835c43c8e, processorArchitecture=MSIL">
       <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\OfficeApi.dll</HintPath>
@@ -182,7 +185,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -192,15 +195,27 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoGridEditor">
+      <HintPath>..\DWSIM\References\ReoGrid.WinForms\unvell.ReoGridEditor.dll</HintPath>
+    </Reference>
     <Reference Include="VBIDEApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=931cec8882205047, processorArchitecture=MSIL">
       <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\VBIDEApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.ExtensionMethods" />
@@ -222,11 +237,18 @@
     <Compile Include="BaseClasses\CapeOpen.vb" />
     <Compile Include="BaseClasses\UnitOperations.vb" />
     <Compile Include="Controllers\PIDController.vb" />
+    <Compile Include="Controllers\PythonController.vb" />
     <Compile Include="Databases\PumpDatabase.vb" />
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.Designer.vb">
       <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_AirCooler.designer.vb">
+      <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_AirCooler.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
@@ -239,6 +261,42 @@
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\EditingForm_CAPEOPENUO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_Emixer.designer.vb">
+      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_Emixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.Designer.vb">
+      <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_OPEMFC.Designer.vb">
+      <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_OPEMFC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_PythonController.Designer.vb">
+      <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_PythonController.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.Designer.vb">
+      <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_SolarPanel.Designer.vb">
+      <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_SolarPanel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingForms\EditingForm_Switch.Designer.vb">
@@ -433,6 +491,18 @@
     <Compile Include="EditingForms\EditingForm_ComprExpndr.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.Designer.vb">
+      <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_WindTurbine.Designer.vb">
+      <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\EditingForm_WindTurbine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
@@ -472,6 +542,12 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.Designer.vb">
+      <DependentUpon>EditingForm_Pipe_UserDefinedU.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Pump_Curves.designer.vb">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </Compile>
@@ -506,7 +582,7 @@
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.designer.vb">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
@@ -562,11 +638,17 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.designer.vb">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
+    <Compile Include="EditingForms\Supporting\FormViewMultilineText.Designer.vb">
+      <DependentUpon>FormViewMultilineText.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.vb">
-      <SubType>UserControl</SubType>
+    <Compile Include="EditingForms\Supporting\FormViewMultilineText.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\ReportViewer.Designer.vb">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\ReportViewer.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="EnergyStream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
@@ -576,6 +658,7 @@
     <Compile Include="Indicators\DigitalGauge.vb" />
     <Compile Include="Inputs\Input.vb" />
     <Compile Include="Indicators\LevelGauge.vb" />
+    <Compile Include="Reactors\ReaktoroGibbs.vb" />
     <Compile Include="Switches\Switch.vb" />
     <Compile Include="Languages\Strings.de.Designer.vb">
       <DependentUpon>Strings.de.resx</DependentUpon>
@@ -610,6 +693,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -632,7 +716,18 @@
     <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
     <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
+    <Compile Include="UnitOperations\AirCooler2.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\CleanEnergyUnitOpBase.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\EnergyMixer.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\HydroelectricTurbine.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\PEMFC_Amphlett.vb" />
+    <None Include="UnitOperations\CleanEnergies\PEMFC_ChamberlineKim.vb" />
+    <None Include="UnitOperations\CleanEnergies\PEMFC_LarminieDicks.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\SolarPanel.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\WaterElectrolyzer.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\WindTurbine.vb" />
     <Compile Include="UnitOperations\DummyUO.vb" />
+    <Compile Include="UnitOperations\CleanEnergies\PEMFuelCellUnitOpBase.vb" />
     <Compile Include="UnitOperations\PythonScriptUO.vb" />
     <Compile Include="UnitOperations\FlowsheetUO.vb" />
     <Compile Include="UnitOperations\OrificePlate.vb" />
@@ -675,6 +770,9 @@
     <EmbeddedResource Include="EditingForms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_AirCooler.resx">
+      <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.en.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
@@ -698,6 +796,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_Emixer.en.resx">
+      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_Emixer.resx">
+      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_HydroelectricTurbine.resx">
+      <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_OPEMFC.resx">
+      <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_PythonController.en.resx">
+      <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_PythonController.resx">
+      <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_ReaktoroGibbs.resx">
+      <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_SolarPanel.resx">
+      <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Switch.en.resx">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
@@ -882,9 +1004,6 @@
     <EmbeddedResource Include="EditingForms\EditingForm_Tank.de.resx">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_Valve.de.resx">
-      <DependentUpon>EditingForm_Valve.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Vessel.de.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>
@@ -960,6 +1079,12 @@
     <EmbeddedResource Include="EditingForms\EditingForm_ComprExpndr.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_WaterElectrolyzer.resx">
+      <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\EditingForm_WindTurbine.resx">
+      <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.de.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -1014,9 +1139,6 @@
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.de.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.de.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.de.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
@@ -1037,6 +1159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.resx">
+      <DependentUpon>EditingForm_Pipe_UserDefinedU.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pump_Curves.de.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
@@ -1094,6 +1219,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.de.resx">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
@@ -1149,9 +1275,6 @@
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.de.resx">
-      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.en.resx">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </EmbeddedResource>
@@ -1194,14 +1317,11 @@
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.en.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
+    <EmbeddedResource Include="EditingForms\Supporting\FormViewMultilineText.resx">
+      <DependentUpon>FormViewMultilineText.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.es.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.resx">
-      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
+    <EmbeddedResource Include="EditingForms\Supporting\ReportViewer.resx">
+      <DependentUpon>ReportViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Strings.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1258,6 +1378,11 @@
       <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
+      <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
+      <Name>DWSIM.ExtensionMethods.Eto</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
       <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
       <Name>DWSIM.Inspector</Name>
@@ -1293,6 +1418,10 @@
     <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
       <Name>DWSIM.MathOps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClassesCSharp\DWSIM.SharedClassesCSharp.csproj">
+      <Project>{67f90157-b522-487c-b108-864984637e33}</Project>
+      <Name>DWSIM.SharedClassesCSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
@@ -1699,6 +1828,7 @@
   <ItemGroup>
     <None Include="Resources\lightning.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

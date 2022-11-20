@@ -77,8 +77,8 @@ Public Class Settings
     Public Shared Property CudafyDeviceID As Integer = 0
     Public Shared Property DebugLevel As Integer = 0
     Public Shared Property MaxThreadMultiplier As Integer = 8
-    Public Shared Property SolverTimeoutSeconds As Integer = 15 * 60
-    Public Shared Property SolverMode As Integer = 0
+    Public Shared Property SolverTimeoutSeconds As Integer = 3600
+    Public Shared Property SolverMode As Integer = 1
     Public Shared Property ServiceBusConnectionString As String = ""
     Public Shared Property CalculatorStopRequested As Boolean
     Public Shared Property CalculatorActivated As Boolean
@@ -171,6 +171,8 @@ Public Class Settings
 
     Public Shared Property EnableCustomTouchBar As Boolean = True
 
+    Public Shared Property CheckForUpdates As Boolean = True
+
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function
@@ -179,25 +181,51 @@ Public Class Settings
 
         If Not Settings.PythonInitialized Then
 
-            If pythonpath = "" Then
-                pythonpath = Settings.PythonPath
+            If Settings.RunningPlatform() = Platform.Windows Then
+
+                If pythonpath = "" Then
+                    pythonpath = Settings.PythonPath
+                End If
+
+                If Not Directory.Exists(pythonpath) Then
+                    Throw New Exception("Python binaries Path is not defined correctly.")
+                End If
+
+                Try
+                    SetPythonPath(pythonpath)
+                    PythonEngine.PythonHome = pythonpath
+                    PythonEngine.Initialize()
+                    PythonEngine.BeginAllowThreads()
+                    PythonInitialized = True
+                    DWSIM.Logging.Logger.LogInfo("Python Path set to " + pythonpath)
+                Catch ex As Exception
+                    DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
+                    Throw ex
+                End Try
+
+            Else
+
+                If pythonpath = "" Then
+                    pythonpath = Settings.PythonPath
+                End If
+
+                If Not File.Exists(pythonpath) Then
+                    Throw New Exception("Python Library File is not defined correctly.")
+                End If
+
+                Try
+                    Runtime.PythonDLL = pythonpath
+                    PythonEngine.Initialize()
+                    PythonEngine.BeginAllowThreads()
+                    PythonInitialized = True
+                    DWSIM.Logging.Logger.LogInfo("Python Library Path set to " + pythonpath)
+                Catch ex As Exception
+                    DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
+                    Throw ex
+                End Try
+
             End If
 
-            If Not Directory.Exists(pythonpath) Then
-                Throw New Exception("Python binaries Path is not defined correctly.")
-            End If
-
-            Try
-                SetPythonPath(pythonpath)
-                PythonEngine.PythonHome = pythonpath
-                PythonEngine.Initialize()
-                PythonEngine.BeginAllowThreads()
-                PythonInitialized = True
-                DWSIM.Logging.Logger.LogInfo("Python Path set to " + pythonpath)
-            Catch ex As Exception
-                DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
-                Throw ex
-            End Try
 
         End If
 
@@ -209,6 +237,7 @@ Public Class Settings
             Try
                 PythonEngine.Shutdown()
             Catch ex As Exception
+                DWSIM.Logging.Logger.LogError("Python Shutdown Error", ex)
             End Try
             PythonInitialized = False
         End If
@@ -521,6 +550,8 @@ Public Class Settings
 
         EnableCustomTouchBar = source.Configs("Misc").GetBoolean("EnableCustomTouchBar", True)
 
+        CheckForUpdates = source.Configs("Misc").GetBoolean("CheckForUpdates", True)
+
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
         'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
@@ -641,6 +672,8 @@ Public Class Settings
         source.Configs("Misc").Set("ObjectEditor", ObjectEditor)
 
         source.Configs("Misc").Set("EnableCustomTouchBar", EnableCustomTouchBar)
+
+        source.Configs("Misc").Set("CheckForUpdates", CheckForUpdates)
 
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)

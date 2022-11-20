@@ -4046,12 +4046,6 @@ Public Class PropertyGridEditors
 
             Select Case uo.ColumnType
                 Case ColType.DistillationColumn
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.CondenserPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCCondenserPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
-                    .Item(.Item.Count - 1).Tag2 = "PROP_DC_0"
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.ReboilerPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCReboilerPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
-                    .Item(.Item.Count - 1).Tag2 = "PROP_DC_1"
                     .Item.Add(DWSIM.App.GetLocalString("DCCondenserType"), uo, "CondenserType", False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
                     val = Format(Converter.ConvertFromSI(su.deltaP, uo.CondenserDeltaP), nf)
                     .Item.Add(FT(DWSIM.App.GetLocalString("DCCondenserDeltaP"), su.deltaP), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
@@ -4166,16 +4160,8 @@ Public Class PropertyGridEditors
                         .CustomEditor = New System.Drawing.Design.UITypeEditor
                     End With
                 Case ColType.AbsorptionColumn
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.CondenserPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCFirstStgPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.ReboilerPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCLastStgPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
                     .Item.Add(DWSIM.App.GetLocalString("DCOperationMode"), uo, "OperationMode", False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
                 Case ColType.ReboiledAbsorber
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.CondenserPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCFirstStgPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.ReboilerPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCReboilerPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
                     Dim units As String() = New String() {}
                     Dim rspec As New PropertyGridEx.CustomPropertyCollection()
                     With rspec
@@ -4223,10 +4209,6 @@ Public Class PropertyGridEditors
                         .CustomEditor = New System.Drawing.Design.UITypeEditor
                     End With
                 Case ColType.RefluxedAbsorber
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.CondenserPressure), nf)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DCCondenserPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.ReboilerPressure), nf)
-                    val = Format(Converter.ConvertFromSI(su.pressure, uo.ReboilerPressure), nf)
                     .Item.Add(FT(DWSIM.App.GetLocalString("DCLastStgPressure"), su.pressure), val, False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
                     .Item.Add(DWSIM.App.GetLocalString("DCCondenserType"), uo, "CondenserType", False, DWSIM.App.GetLocalString("DCColumnProperties"), "", True)
                     val = Format(Converter.ConvertFromSI(su.deltaP, uo.CondenserDeltaP), nf)

@@ -255,8 +255,10 @@ Namespace UnitOperations
                 If CalcMode <> CalculationMode.PowerGenerated Then
                     DeltaQ = 0.0
                 End If
-                es.EnergyFlow = 0.0
-                If args Is Nothing Then es.GraphicObject.Calculated = True
+                If es IsNot Nothing Then
+                    es.EnergyFlow = 0.0
+                    If args Is Nothing Then es.GraphicObject.Calculated = True
+                End If
                 If CalcMode <> CalculationMode.Delta_P Then
                     DeltaP = 0.0
                     If CalcMode <> CalculationMode.OutletPressure Then POut = 0.0
@@ -294,9 +296,7 @@ Namespace UnitOperations
 
             qli = ims.Phases(1).Properties.volumetric_flow.ToString
 
-            If Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow5"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -778,7 +778,7 @@ Namespace UnitOperations
 
                         End Function
 
-                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i, Pi, 0.00001, 100)
+                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i * 0.7, P2i * 1.3, 0.00001, 100)
 
                     POut = P2
                     DeltaP = Pi - P2
@@ -841,6 +841,7 @@ Namespace UnitOperations
 
                 'Atribuir valores a corrente de materia conectada a jusante
                 With oms
+                    .AtEquilibrium = False
                     .SpecType = StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
@@ -856,11 +857,13 @@ Namespace UnitOperations
                     .DefinedFlow = FlowSpec.Mass
                 End With
 
-                'energy stream - update energy flow value (kW)
-                With es
-                    .EnergyFlow = Me.DeltaQ
-                    .GraphicObject.Calculated = True
-                End With
+                If es IsNot Nothing Then
+                    'energy stream - update energy flow value (kW)
+                    With es
+                        .EnergyFlow = Me.DeltaQ
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
 
             Else
 
@@ -1149,7 +1152,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_expan_32
+            Return My.Resources.expander
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

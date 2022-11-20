@@ -1,5 +1,5 @@
 '    Basic Thermodynamic Classes for DWSIM
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -1184,6 +1184,18 @@ Namespace BaseClasses
             Return elements
 
         End Function
+
+        Public Sub SetReactionRank(reactionID As String, rank As Integer) Implements IReactionSet.SetReactionRank
+            Reactions(reactionID).Rank = rank
+        End Sub
+
+        Public Sub EnableReaction(reactionID As String) Implements IReactionSet.EnableReaction
+            Reactions(reactionID).IsActive = True
+        End Sub
+
+        Public Sub DisableReaction(reactionID As String) Implements IReactionSet.DisableReaction
+            Reactions(reactionID).IsActive = False
+        End Sub
 
     End Class
 
@@ -2580,6 +2592,10 @@ Namespace BaseClasses
         Public Property COSTALD_SRK_Acentric_Factor As Double = 0.0 Implements ICompoundConstantProperties.COSTALD_SRK_Acentric_Factor
 
         Public Property COSTALD_Characteristic_Volume As Double = 0.0 Implements ICompoundConstantProperties.COSTALD_Characteristic_Volume
+
+        Public Property IsSolid As Boolean = False Implements ICompoundConstantProperties.IsSolid
+
+        Public Property ChemSepFamily As Integer = 1000 Implements ICompoundConstantProperties.ChemSepFamily
 
         Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
 

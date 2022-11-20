@@ -5,7 +5,7 @@
 [![donate](https://img.shields.io/badge/make%20a-donation-greenblue.svg)](https://sourceforge.net/p/dwsim/donate/)
 
 ## DWSIM - Open Source Process Simulator
-Copyright 2008-2021 Daniel Medeiros and contributors
+Copyright 2008-2022 Daniel Medeiros and contributors
 
 DWSIM is a software for modeling, simulation and optimization of steady-state and dynamic chemical processes.
 
@@ -20,6 +20,13 @@ See COPYING for more information.
 - Windows (32/64-bit x86) with .NET Framework 4.6.2 or newer
 - Linux (32-bit armhf / 64-bit x86) with Mono 6.8 or newer
 - macOS (formerly OS X) 10.7 or newer
+
+### Donations
+
+- Patreon: https://patreon.com/dwsim
+- GitHub Sponsors: https://github.com/sponsors/DanWBR
+- Buy-me-a-coffee: https://www.buymeacoffee.com/dwsim
+- Bitcoin tips are welcome at 13hphJu9Eit341ZJkMgZPQGPb9bvYZP7wU
 
 ### Project Details
 
@@ -84,4 +91,10 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 - Install Node.js (64-bit) before compiling DWSIM (https://nodejs.org/en/download/).
 - DWSIM can be compiled using Visual Studio 2019 or newer on Windows.
-- To compile everything and run, select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project, change the Build target to 'Debug/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'.
+- To compile everything and run:
+	- Open Visual Studio 2019 or 2022 and clone this repository directly from GitHub
+	- Change the Build target to 'Debug/x64', 'DebugNoNPM/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'
+	- Click on the Solution object and restore NuGet packages
+	- Build the solution
+	- Select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project
+	- Run

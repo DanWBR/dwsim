@@ -117,809 +117,812 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;TabPage7.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PanelPressure.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TabPage3.Text" xml:space="preserve">
-    <value>Separadores/Tanques</value>
-  </data>
-  <data name="TabPage10.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="PanelCO.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="PanelLogical.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="TabPage9.Text" xml:space="preserve">
+    <value>Energia Limpa</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="PanelControllers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PanelControllers.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TabPage13.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;PanelMixers.Name" xml:space="preserve">
-    <value>PanelMixers</value>
+  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
   </data>
-  <data name="&gt;&gt;PanelLogical.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TabPage11.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
-  <data name="TabPage12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="TabPage13.Text" xml:space="preserve">
-    <value>Indicadores</value>
-  </data>
-  <data name="&gt;&gt;PanelReactors.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage9.Text" xml:space="preserve">
-    <value>CAPE-OPEN</value>
-  </data>
-  <data name="PanelIndicators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PanelStreams.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelPressure.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="TabPage14.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelReactors.Name" xml:space="preserve">
-    <value>PanelReactors</value>
-  </data>
-  <data name="PanelSeparators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;TabPage10.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="PanelUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;TabPage11.Name" xml:space="preserve">
-    <value>TabPage11</value>
-  </data>
-  <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="PanelExchangers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PanelMixers.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabPage13.Name" xml:space="preserve">
-    <value>TabPage13</value>
-  </data>
-  <data name="&gt;&gt;PanelStreams.Parent" xml:space="preserve">
-    <value>TabPage1</value>
-  </data>
-  <data name="&gt;&gt;PanelOther.ZOrder" xml:space="preserve">
+  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="PanelColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
+    <value>1109, 137</value>
   </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="&gt;&gt;PanelPressure.Name" xml:space="preserve">
-    <value>PanelPressure</value>
-  </data>
-  <data name="&gt;&gt;PanelMixers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TabPage12.Text" xml:space="preserve">
-    <value>Outros</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelSolids.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PanelReactors.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TabPage14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage9.Name" xml:space="preserve">
-    <value>TabPage9</value>
-  </data>
-  <data name="&gt;&gt;PanelCO.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelSolids.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PanelControllers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="PanelUser.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelColumns.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabPage8.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="&gt;&gt;PanelStreams.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage5.Name" xml:space="preserve">
-    <value>TabPage5</value>
-  </data>
-  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
-  <data name="PanelMixers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="PanelExchangers.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="PanelUser.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="PanelStreams.WrapContents" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="PanelMixers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;PanelOther.Parent" xml:space="preserve">
-    <value>TabPage12</value>
-  </data>
-  <data name="&gt;&gt;TabPage9.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="&gt;&gt;TabPage6.Name" xml:space="preserve">
-    <value>TabPage6</value>
+  <data name="&gt;&gt;PanelPressure.Name" xml:space="preserve">
+    <value>PanelPressure</value>
   </data>
   <data name="&gt;&gt;PanelReactors.Parent" xml:space="preserve">
     <value>TabPage6</value>
   </data>
-  <data name="PanelOther.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelStreams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 86</value>
-  </data>
-  <data name="PanelLogical.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TabPage12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage9.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="PanelSolids.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;TabPage11.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="&gt;&gt;TabPage12.Name" xml:space="preserve">
-    <value>TabPage12</value>
-  </data>
-  <data name="PanelOther.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TabPage11.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;PanelCO.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PanelSeparators.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
-    <value>TabPage1</value>
-  </data>
-  <data name="PanelUser.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Misturadores/Divisores</value>
-  </data>
-  <data name="&gt;&gt;PanelControllers.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;PanelControllers.Name" xml:space="preserve">
-    <value>PanelControllers</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;PanelStreams.Name" xml:space="preserve">
-    <value>PanelStreams</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage13.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="TabPage6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="PanelIndicators.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>Térmicos</value>
-  </data>
-  <data name="PanelSeparators.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelExchangers.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;TabPage14.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="PanelPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 86</value>
-  </data>
-  <data name="&gt;&gt;TabPage10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>SimulationObjectsPanel</value>
-  </data>
-  <data name="PanelColumns.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelMixers.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TabPage7.Name" xml:space="preserve">
-    <value>TabPage7</value>
   </data>
   <data name="PanelSeparators.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;TabPage12.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="&gt;&gt;PanelSolids.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PanelExchangers.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;PanelReactors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage11.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="TabPage12.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>Reatores</value>
-  </data>
-  <data name="PanelCO.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="PanelColumns.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PanelExchangers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelIndicators.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelReactors.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;PanelColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelSolids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelLogical.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;PanelPressure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage14.Name" xml:space="preserve">
-    <value>TabPage14</value>
-  </data>
-  <data name="PanelPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="TabPage10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;TabPage6.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
-    <value>TabPage3</value>
-  </data>
-  <data name="PanelMixers.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;TabPage6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;PanelPressure.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PanelSeparators.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TabPage7.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="&gt;&gt;PanelMixers.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;PanelCO.Name" xml:space="preserve">
-    <value>PanelCO</value>
-  </data>
-  <data name="&gt;&gt;PanelLogical.Name" xml:space="preserve">
-    <value>PanelLogical</value>
-  </data>
-  <data name="&gt;&gt;PanelSeparators.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PanelOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="&gt;&gt;TabPage9.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;PanelControllers.Parent" xml:space="preserve">
-    <value>TabPage14</value>
-  </data>
-  <data name="&gt;&gt;TabPage12.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;PanelLogical.Parent" xml:space="preserve">
-    <value>TabPage11</value>
-  </data>
-  <data name="PanelControllers.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;TabPage5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage14.Text" xml:space="preserve">
-    <value>Controladores</value>
-  </data>
-  <data name="&gt;&gt;TabPage10.Name" xml:space="preserve">
-    <value>TabPage10</value>
-  </data>
-  <data name="PanelLogical.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;PanelUser.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PanelReactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TabPage8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="PanelCO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;TabPage8.Name" xml:space="preserve">
+    <value>TabPage8</value>
   </data>
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PanelIndicators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="PanelExchangers.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;PanelExchangers.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPage5.Name" xml:space="preserve">
     <value>TabPage5</value>
   </data>
-  <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="&gt;&gt;PanelIndicators.Parent" xml:space="preserve">
+    <value>TabPage13</value>
   </data>
-  <data name="PanelOther.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelExchangers.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>911, 118</value>
-  </data>
-  <data name="TabPage14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="PanelLogical.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;PanelControllers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PanelOther.Name" xml:space="preserve">
-    <value>PanelOther</value>
-  </data>
-  <data name="&gt;&gt;PanelUser.Parent" xml:space="preserve">
-    <value>TabPage10</value>
-  </data>
-  <data name="TabPage11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;TabPage5.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
-  <data name="PanelCO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelOther.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PanelSeparators.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;TabPage13.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="TabPage8.Text" xml:space="preserve">
-    <value>Sólidos</value>
-  </data>
-  <data name="&gt;&gt;PanelCO.Parent" xml:space="preserve">
-    <value>TabPage9</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TabPage7.Text" xml:space="preserve">
-    <value>Colunas</value>
-  </data>
-  <data name="PanelStreams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;PanelStreams.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PanelMixers.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;PanelIndicators.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelSolids.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;PanelIndicators.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Pressão</value>
-  </data>
-  <data name="PanelSolids.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelUser.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;PanelColumns.Name" xml:space="preserve">
-    <value>PanelColumns</value>
-  </data>
-  <data name="PanelReactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelIndicators.Name" xml:space="preserve">
-    <value>PanelIndicators</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Correntes</value>
-  </data>
-  <data name="PanelMixers.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelSolids.Parent" xml:space="preserve">
-    <value>TabPage8</value>
-  </data>
-  <data name="PanelPressure.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="PanelReactors.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;PanelColumns.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;TabPage5.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
-  <data name="PanelControllers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TabPage11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelUser.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelStreams.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TabPage13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;PanelSeparators.Parent" xml:space="preserve">
-    <value>TabPage3</value>
-  </data>
-  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;TabPage8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;TabPage10.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;TabPage13.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PanelLogical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TabPage9.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;PanelSolids.Name" xml:space="preserve">
-    <value>PanelSolids</value>
-  </data>
-  <data name="&gt;&gt;PanelSeparators.Type" xml:space="preserve">
+  <data name="&gt;&gt;PanelCE.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabPage10.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="PanelExchangers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>911, 118</value>
-  </data>
-  <data name="&gt;&gt;PanelSeparators.Name" xml:space="preserve">
-    <value>PanelSeparators</value>
-  </data>
-  <data name="&gt;&gt;TabPage13.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="PanelColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PanelOther.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PanelStreams.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PanelReactors.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PanelControllers.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="PanelSeparators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="TabPage10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
-  </data>
-  <data name="&gt;&gt;PanelUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelColumns.TabIndex" type="System.Int32, mscorlib">
+  <data name="PanelMixers.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="PanelIndicators.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;TabPage10.Name" xml:space="preserve">
+    <value>TabPage10</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Pressão</value>
+  </data>
+  <data name="TabPage12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;PanelPressure.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;PanelUser.Name" xml:space="preserve">
     <value>PanelUser</value>
   </data>
-  <data name="&gt;&gt;TabPage8.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;PanelExchangers.Name" xml:space="preserve">
+    <value>PanelExchangers</value>
   </data>
-  <data name="&gt;&gt;PanelExchangers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PanelCE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1103, 131</value>
   </data>
-  <data name="PanelCO.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="&gt;&gt;PanelSeparators.Name" xml:space="preserve">
+    <value>PanelSeparators</value>
+  </data>
+  <data name="&gt;&gt;TabPage6.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="PanelPressure.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="PanelMixers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="PanelCE.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="PanelLogical.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="PanelPressure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="&gt;&gt;PanelOther.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage9.Name" xml:space="preserve">
+    <value>TabPage9</value>
+  </data>
+  <data name="TabPage9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;TabPage12.Name" xml:space="preserve">
+    <value>TabPage12</value>
+  </data>
+  <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="PanelStreams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;TabPage13.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;PanelColumns.Parent" xml:space="preserve">
+    <value>TabPage7</value>
+  </data>
+  <data name="&gt;&gt;PanelUser.Parent" xml:space="preserve">
+    <value>TabPage10</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1117, 163</value>
+  </data>
+  <data name="TabPage12.Text" xml:space="preserve">
+    <value>Outros</value>
+  </data>
+  <data name="TabPage12.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="PanelReactors.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>Térmicos</value>
+  </data>
+  <data name="PanelLogical.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TabPage6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;PanelOther.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;PanelOther.Name" xml:space="preserve">
+    <value>PanelOther</value>
+  </data>
+  <data name="&gt;&gt;PanelColumns.Name" xml:space="preserve">
+    <value>PanelColumns</value>
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="PanelSolids.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;PanelLogical.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;PanelUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage9.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="PanelStreams.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;TabPage12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="PanelControllers.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="TabPage11.Text" xml:space="preserve">
-    <value>Lógicos</value>
+  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="PanelExchangers.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
-  <data name="PanelReactors.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="PanelControllers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="TabPage8.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
+  <data name="PanelOther.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;TabPage10.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="PanelUser.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PanelSeparators.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TabPage9.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="&gt;&gt;PanelCE.Parent" xml:space="preserve">
+    <value>TabPage9</value>
+  </data>
+  <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="TabPage7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="TabPage11.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="TabPage10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;PanelIndicators.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage11.Name" xml:space="preserve">
+    <value>TabPage11</value>
+  </data>
+  <data name="&gt;&gt;TabPage11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelStreams.Name" xml:space="preserve">
+    <value>PanelStreams</value>
   </data>
   <data name="&gt;&gt;TabPage6.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="TabPage13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SimulationObjectsPanel</value>
   </data>
-  <data name="&gt;&gt;TabPage9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage10.Text" xml:space="preserve">
+    <value>Usuário/CAPE-OPEN</value>
   </data>
-  <data name="&gt;&gt;PanelPressure.Parent" xml:space="preserve">
+  <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
     <value>TabPage2</value>
   </data>
-  <data name="PanelCO.AutoScroll" type="System.Boolean, mscorlib">
+  <data name="PanelPressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1103, 131</value>
+  </data>
+  <data name="TabPage14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="PanelIndicators.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;PanelCE.Name" xml:space="preserve">
+    <value>PanelCE</value>
+  </data>
+  <data name="PanelColumns.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;TabPage13.Name" xml:space="preserve">
+    <value>TabPage13</value>
+  </data>
+  <data name="&gt;&gt;PanelSolids.Parent" xml:space="preserve">
+    <value>TabPage8</value>
+  </data>
+  <data name="TabPage9.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;PanelIndicators.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TabPage14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelControllers.Name" xml:space="preserve">
+    <value>PanelControllers</value>
+  </data>
+  <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;TabPage11.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="PanelCE.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="PanelStreams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1103, 131</value>
+  </data>
+  <data name="PanelExchangers.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="PanelIndicators.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;TabPage8.Name" xml:space="preserve">
-    <value>TabPage8</value>
+  <data name="TabPage14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
   </data>
-  <data name="&gt;&gt;PanelColumns.Parent" xml:space="preserve">
-    <value>TabPage7</value>
+  <data name="PanelStreams.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="TabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="PanelUser.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;PanelIndicators.Parent" xml:space="preserve">
-    <value>TabPage13</value>
+  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="TabPage12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
-  <data name="&gt;&gt;PanelExchangers.Name" xml:space="preserve">
-    <value>PanelExchangers</value>
+  <data name="&gt;&gt;TabPage12.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
-  <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
   </data>
-  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
+  <data name="PanelReactors.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;PanelMixers.Name" xml:space="preserve">
+    <value>PanelMixers</value>
+  </data>
+  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+  <data name="TabPage13.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="PanelColumns.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TabPage8.Text" xml:space="preserve">
+    <value>Sólidos</value>
+  </data>
+  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabPage11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Misturadores/Divisores</value>
+  </data>
+  <data name="PanelCE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="&gt;&gt;PanelSolids.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Reatores</value>
+  </data>
+  <data name="&gt;&gt;TabPage10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelControllers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelUser.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;TabPage9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;PanelOther.Parent" xml:space="preserve">
+    <value>TabPage12</value>
+  </data>
+  <data name="TabPage10.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1117, 163</value>
+  </data>
+  <data name="PanelColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PanelSolids.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;TabPage14.Parent" xml:space="preserve">
     <value>TabControl1</value>
+  </data>
+  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Separadores/Tanques</value>
+  </data>
+  <data name="&gt;&gt;PanelReactors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelLogical.Parent" xml:space="preserve">
+    <value>TabPage11</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;PanelExchangers.Parent" xml:space="preserve">
+    <value>TabPage5</value>
+  </data>
+  <data name="&gt;&gt;PanelCE.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;TabPage14.Name" xml:space="preserve">
+    <value>TabPage14</value>
+  </data>
+  <data name="PanelExchangers.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TabPage7.Text" xml:space="preserve">
+    <value>Colunas</value>
+  </data>
+  <data name="TabPage13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelMixers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PanelExchangers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PanelReactors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;PanelSeparators.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="PanelReactors.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="PanelUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelSeparators.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PanelPressure.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;TabPage6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelSolids.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="PanelPressure.WrapContents" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="PanelSeparators.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelOther.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PanelLogical.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;PanelReactors.Name" xml:space="preserve">
+    <value>PanelReactors</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelOther.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelOther.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="&gt;&gt;TabPage8.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="TabPage11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelControllers.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PanelStreams.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;TabPage7.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="PanelMixers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="TabPage10.Text" xml:space="preserve">
-    <value>Usuário</value>
+  <data name="&gt;&gt;PanelSolids.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="PanelControllers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>903, 92</value>
+  <data name="PanelPressure.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;PanelSeparators.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelIndicators.Name" xml:space="preserve">
+    <value>PanelIndicators</value>
+  </data>
+  <data name="PanelReactors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;PanelReactors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="PanelPressure.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PanelMixers.Parent" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;TabPage8.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="PanelColumns.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;TabPage5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabPage14.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;TabPage6.Name" xml:space="preserve">
+    <value>TabPage6</value>
+  </data>
+  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="PanelCE.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;PanelControllers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;PanelColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelUser.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="PanelIndicators.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage14.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;TabPage9.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;PanelExchangers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelOther.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="PanelUser.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;PanelMixers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelCE.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PanelMixers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelSeparators.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="TabPage11.Text" xml:space="preserve">
+    <value>Lógicos</value>
+  </data>
+  <data name="PanelIndicators.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;TabPage7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelPressure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelSolids.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;PanelLogical.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TabPage13.Text" xml:space="preserve">
+    <value>Indicadores</value>
+  </data>
+  <data name="PanelStreams.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;PanelStreams.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="TabPage7.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;TabPage14.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="&gt;&gt;TabPage8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelLogical.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PanelMixers.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;PanelColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelLogical.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="PanelControllers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="TabPage8.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="TabPage14.Text" xml:space="preserve">
+    <value>Controladores</value>
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;PanelExchangers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TabPage8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PanelOther.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PanelControllers.Parent" xml:space="preserve">
+    <value>TabPage14</value>
+  </data>
+  <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;TabPage7.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="PanelIndicators.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;PanelStreams.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelSolids.Name" xml:space="preserve">
+    <value>PanelSolids</value>
+  </data>
+  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="PanelIndicators.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="&gt;&gt;TabPage7.Name" xml:space="preserve">
+    <value>TabPage7</value>
+  </data>
+  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="&gt;&gt;PanelLogical.Name" xml:space="preserve">
+    <value>PanelLogical</value>
+  </data>
+  <data name="&gt;&gt;TabPage12.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="PanelExchangers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1109, 137</value>
+  </data>
+  <data name="PanelMixers.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PanelSolids.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Correntes</value>
+  </data>
+  <data name="PanelSeparators.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

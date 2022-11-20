@@ -61,6 +61,10 @@ Public Class FlashAlgorithmConfig
 
         chkCalcBubbleDew.Checked = Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints)
 
+        CheckBoxInterpTempPHFlash.Checked = Settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases)
+
+        chkIdealPVFlash.Checked = Settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure)
+
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -72,6 +76,8 @@ Public Class FlashAlgorithmConfig
                 cbFlashType.SelectedIndex = 3
             Case "SVLLE"
                 cbFlashType.SelectedIndex = 4
+            Case "NoFlash"
+                cbFlashType.SelectedIndex = 5
         End Select
 
         cbFlashApproach.SelectedIndex = PropPack.FlashCalculationApproach
@@ -163,6 +169,8 @@ Public Class FlashAlgorithmConfig
                     Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLE"
                 Case 4
                     Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLLE"
+                Case 5
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "NoFlash"
             End Select
 
             Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = chkImmiscible.Checked
@@ -172,6 +180,10 @@ Public Class FlashAlgorithmConfig
             Settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm) = chkDoPhaseId.Checked
 
             Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = chkCalcBubbleDew.Checked
+
+            Settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) = CheckBoxInterpTempPHFlash.Checked
+
+            Settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) = chkIdealPVFlash.Checked
 
             PropPack.FlashCalculationApproach = cbFlashApproach.SelectedIndex
 

@@ -98,7 +98,7 @@ namespace DWSIM.UI.Shared
                 //Resizable = true
             };
         }
-        
+
         /// <summary>
         /// returns a form whose contents are defined by the content argument (Pixel Layout)
         /// </summary>
@@ -644,24 +644,59 @@ namespace DWSIM.UI.Shared
 
         }
 
-        public static NumericStepper CreateAndAddNumericEditorRow(this TableLayout container, String text, double currval, double minval, double maxval, int decimalplaces, Action<NumericStepper, EventArgs> command)
+        public static TextBox CreateAndAddNumericEditorRow2(this DynamicLayout container, String text, double currval, double minval, double maxval, int decimalplaces, Action<TextBox, EventArgs> command)
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
-            var editor = new NumericStepper { Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
+            var editor = new TextBox { Text = currval.ToString(), TextAlignment = TextAlignment.Right };
             editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * GlobalSettings.Settings.EditorTextBoxFixedSizeWidth);
 
-            if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
+            if (command != null) editor.TextChanged += (sender, e) =>
+            {
+                if (editor.Text.IsValidDouble())
+                {
+                    var value = editor.Text.ToDoubleFromCurrent();
+                    if (value >= minval && value <= maxval)
+                    {
+                        command.Invoke((TextBox)sender, e);
+                        editor.TextColor = Colors.Blue;
+                    }
+                    else
+                        editor.TextColor = Colors.Red;
+                }
+                else
+                    editor.TextColor = Colors.Red;
+            };
 
             var tr = new TableRow(txt, null, editor);
 
-            container.Rows.Add(tr);
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
 
             return editor;
 
         }
+
+        //public static NumericStepper CreateAndAddNumericEditorRow(this TableLayout container, String text, double currval, double minval, double maxval, int decimalplaces, Action<NumericStepper, EventArgs> command)
+        //{
+
+        //    var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+        //    txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+        //    var editor = new NumericStepper { Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
+        //    editor.Font = new Font(SystemFont.Default, GetEditorFontSize());
+        //    if (GlobalSettings.Settings.EditorTextBoxFixedSize) editor.Width = (int)(sf * GlobalSettings.Settings.EditorTextBoxFixedSizeWidth);
+
+        //    if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
+
+        //    var tr = new TableRow(txt, null, editor);
+
+        //    container.Rows.Add(tr);
+
+        //    return editor;
+
+        //}
 
 
         public static TextBox CreateAndAddTextBoxRow2(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)

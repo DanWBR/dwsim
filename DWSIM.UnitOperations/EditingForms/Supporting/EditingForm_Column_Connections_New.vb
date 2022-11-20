@@ -174,9 +174,9 @@ Public Class EditingForm_Column_Connections_New
         Dim cbST As New DataGridViewComboBoxCell
 
         cbMS.Items.Add("")
-        cbMS.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream).Select(Function(x2) x2.GraphicObject.Tag).ToArray)
+        cbMS.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream).Select(Function(x2) x2.GraphicObject.Tag).OrderBy(Function(x) x).ToArray)
         cbES.Items.Add("")
-        cbES.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream).Select(Function(x2) x2.GraphicObject.Tag).ToArray)
+        cbES.Items.AddRange(rc.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream).Select(Function(x2) x2.GraphicObject.Tag).OrderBy(Function(x) x).ToArray)
         cbST.Items.AddRange(stageNames.ToArray)
 
         DirectCast(gridFeeds.Columns(2), DataGridViewComboBoxColumn).CellTemplate = cbMS
@@ -220,9 +220,15 @@ Public Class EditingForm_Column_Connections_New
                 stage = si.AssociatedStage
             Else
                 If Integer.TryParse(si.AssociatedStage, New Integer) Then
-                    stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Try
+                        stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Catch ex As Exception
+                    End Try
                 Else
-                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Try
+                        stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Catch ex As Exception
+                    End Try
                 End If
             End If
             If (si.StreamBehavior = StreamInformation.Behavior.Feed) Then
@@ -249,9 +255,15 @@ Public Class EditingForm_Column_Connections_New
                 stage = si.AssociatedStage
             Else
                 If Integer.TryParse(si.AssociatedStage, New Integer) Then
-                    stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Try
+                        stage = stageNames(CInt(si.AssociatedStage) + 1)
+                    Catch ex As Exception
+                    End Try
                 Else
-                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Try
+                        stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    Catch ex As Exception
+                    End Try
                 End If
             End If
             If (si.StreamBehavior = StreamInformation.Behavior.Distillate) Then

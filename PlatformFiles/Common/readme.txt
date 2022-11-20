@@ -1,7 +1,7 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.1.2
-Copyright (c) 2017-2021 Daniel Medeiros and contributors
+Version 8.3.1
+Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -61,6 +61,234 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.3.1
+
+- Improved reliability of VLE and VLLE flash algorithms
+- Improved calculation speed for Gibbs Reactor model
+- Fixed Gibbs Element Matrix editor (CPUI) (#371)
+- Automation Interface fixes
+
+Version 8.3.0
+
+- Python Script Controller (Dynamics)
+- Implemented Valve Opening/Kv[Cv] relationship types
+- Implemented Valve Actuator Delay (Dynamics)
+- New Distillation/Absorption Column convergence and property reports
+- New PFR Non-Adiabatic Non-Isothermal mode (#167)
+- PFR: User-defined linear pressure drop (#168)
+- Expose Pump Head as a property 
+- Implemented user-defined data table for calculation of Overall HTC in Pipe Segment (#238)
+- Persist custom calculation order (#59)
+- Changed kij editing table to matrix format (#49)
+- Changed recycle mass flow error calculation
+- Fixed D2O ideal gas enthalpy/gibbs energy of formation
+- Fixed many High-DPI issues (Classic UI)
+- Other bug fixes
+
+Version 8.2.1
+
+- Fixed Material Stream issues on Cross-Platform UI
+- Fixed Python.NET interpreter on macOS/Linux (set Python library path on General Settings panel)
+- Fixed CAPE-OPEN UO selection panel layout (Classic UI)
+- Minor fixes
+
+Version 8.2.0
+
+- Updated ChemSep database to v8.32 - new compounds are available
+- New Bulk Add Petroleum Fractions Tool (Classic UI)
+- Property Package recommendations (beta feature - Classic UI)
+- New Flowsheet Theme: Color Icons
+- Adjustments to default Flowsheet Theme
+- Fixed issue with XML Database loading
+- Fixed an issue with Bubble Point Column Solver
+- Fixed user-defined Unit Set not being added to list (Classic UI)
+- Fixed issues with Heat Exchanger
+- Other minor fixes
+
+Version 8.1.1
+
+- Fixed crashes when using certain Property Packages
+- Fixed some editors not appearing correctly in High-DPI displays
+- Fixed an issue with Air Cooler 2
+- Fixed Classic UI not saving simulations on Linux
+- Weather Panel is now hidden by default 
+- Minor fixes
+
+Version 8.1.0
+
+- Fixed Classic UI crashing on Linux (any)
+- Fixed Cross-Platform UI crashing on Ubuntu 18 and newer
+- Fixed issues with Gibbs Reactor
+- Fixed issues with CoolProp Property Package
+- Fixed #359: Latent heat not fully transferred in heat exchanger
+- Fixed #362: Mixer not respecting 1st law
+- Classic UI layout fixes (Windows)
+- Set Flash Calculation type on Simulation Wizard (Classic UI, Windows)
+- Fixed PDF/SVG export on High-DPI displays (Cross-Platform UI)
+- Fixed issues with Wilson Property Package
+- Fixed issues with importing data from online sources (Classic UI)
+- Sort material and energy streams list on editors (#358)
+- Fixed an issue with Python initialization
+- Rigorous Absorber solver improvements
+- Fixed a bug with Bubble Point Rigorous Column solver
+
+Version 8.0.4
+
+- Toggle Weather Panel visibility (Classic UI)
+- Fixed issues with Rigorous Column
+- Fixed an issue with Automation3 interface
+- Fixed issue #346 (PEM Fuel Cell)
+- Phase Envelope fixes (Classic UI)
+- Fixed PEM Fuel Cell editor
+- Wind Turbine now uses rotor diameter instead of disk area
+- Rolled back compound search behavior (#351)
+- Fixed issue #352 (import compound)
+- Fix for updating compound data from JSON (#354)
+- Fixed pasting data in material stream composition table (#329)
+- Fixed simplex penalty value for smoother minimization in conversion reactor (#356)
+- Fixed Absorption Column stage naming
+
+Version 8.0.3
+
+- Fixed an issue with FOSSEE flowsheets loading
+- Fixed an issue with PV Flash (#333)
+- Fixed an issue with compound search on Classic UI (#328)
+- Fixed an issue with Master Property Table (#337)
+- Fixed an issue with single-compound flash and forced solids
+
+Version 8.0.2
+
+- Added Weather Conditions panel to Cross-Platform UI
+- Fixed an issue with PFR
+- Fixed an issue with single-compound flash and forced solids
+- Disable/Enable automatic update checks
+
+Version 8.0.1/8.0.0
+
+- New Unit Operations:  PEM Fuel Cell, Water Electrolyzer, Wind Turbine, Hydroelectric Turbine,
+  Solar Panel, Gibbs Reactor (Reaktoro), Air Cooler, Energy Stream Mixer
+- New "Don't Calculate" Phase Equilibria Option
+- Import Compounds from thermo/chemicals python packages
+- New Quick Create Solid Compound tool
+- New Flowsheet Weather component can provide ambient temperature, pressure, wind speed, 
+  humidity and solar insulation data for Unit Operations
+- Allow user to override flowsheet icons for Component/Compound and Solids Separator
+- Pipe Segment UO can now use Flowsheet-provided weather information
+- Bug fixes
+
+Version 7.5.7
+
+- Fixed a bug in PFR
+- Fixed a bug in Rigorous Column
+- Fixed an issue with LLE Diagram
+
+Version 7.5.6
+
+- Implemented #274: Number of Tubes in Tubular Reactors for Correct Pressure Drop Calculation
+- Alternate calculation method for Gibbs Reactor
+- Fixed #318: Error opening old file in 7.5.5
+- Fixed #319: Error loading Compound Creator study
+- Fixed #322: Suspicious branch in Valve.vb
+- Throw errors (if any) when loading simulations in automation mode
+- Fixed issue with Rigorous Column editor
+- Fixed ideal gas Cp estimation
+- Python Automation fixes
+
+Version 7.5.5
+
+- Dynamic models for Conversion, Equilibrium and Gibbs Reactors (beta)
+- New API to run flowsheets in Dynamic Mode
+- New calculation routine for Adiabatic Mode in Gibbs Reactor
+- Added an option to choose the flow coefficient type in valves (Kv or Cv)
+- PFD drawing optimizations
+- Phase equilibria calculation enhancements
+- Fixed issue with file saving
+- Fixed issue with Distillation Column
+- Fixed issues with Inspector Reports
+
+Version 7.5.1
+
+- Export Flowsheet drawing to PDF/SVG
+- Redesigned search compound experience in Classic UI
+- Fixed an issue with liquid phase stability test
+- Fixed an issue with the Adjust Control Panel (Classic UI)
+- Fixed Dynamic Separator sample
+- Fixed crash when trying to load initial estimates for column when there's none (CPUI)
+- Updated CPUI editors for Spreadsheet/Flowsheet UO
+- Fixed Excel File loading in Files Manager
+
+Version 7.5.0
+
+- Energy Streams are now optional
+- New Mass and Energy Balance Summary tool (Classic UI)
+- Better Simulate365 Dashboard integration
+- Use Embedded Files in Flowsheet and Spreadsheet Unit Operations (Classic UI)
+- Workaround for PH Flash temperature interpolation
+- Enhanced Nested Loops VLE/VLLE Flash reliability
+- Fixed issue with CoolProp Incompressible Mixtures PP
+- Other fixes and enhancements
+
+Version 7.4.0
+
+- Auto-Connect Added Objects
+- Fixed issue with Gibbs Reactor
+- Fixed Conversion Reactor heat balance
+- Fixed issue with temperature calculation in PH Flash
+- Other fixes and enhancements
+
+Version 7.3.3
+
+- Fixed issue with Distillation Curves characterization (Cross-Platform UI)
+- Set Rigorous Distillation Column pressure profile with top pressure and overall pressure drop
+- Fixed issue with setting of compound flows in material streams
+- Updated flowsheet object numbering
+- Fixed Heat Exchanger calc outlet temperature mode
+- Fixed Pipe Segment not being added in Cross-Platform UI
+
+Version 7.3.2
+
+- Fixed Conversion Reactor mass balance
+- Reverted regression with overriding object color
+- Fixed displaying of some Heat Exchanger properties
+- CoolProp Incompressible Mixtures - throw error when Psat = 0
+- Fixed object description in floating tables
+
+Version 7.3.1
+
+- Fixed a regression with displaying of error messages (issue 281)
+- Fixed a regression with saving of simulations with PR78 Property Package
+
+Version 7.3.0
+
+- New Button Flowsheet Object (Classic UI)
+- Disable/Enable Inline Display of Stream Properties
+- Fixed Rigorous Column drawing
+- Fixed CPUI's Welcome Screen in Dark Mode
+- Display filename and line number in error messages
+- Fixed PR78 Property Package
+- Fixed issue #272: Input changes not passed to Subflowsheet
+- Fixed issue #273: Change in temperature not a property in cooler
+
+Version 7.2.0
+
+- HTML Text Flowsheet Object (Classic UI)
+- Display Energy Stream values in Flowsheet
+- Display variables in plain/html text blocks in the flowsheet
+- Fixed issue #265 - subflowsheet initialization
+- Fixed kinetic/hetcat reaction conversion factors
+- Fixed Python issue on Linux
+- Added support for Python 3.10 (#246)
+- Fixed issue with Conversion Reactor
+- Fixed issue with automation and loading of System.Buffers
+- Fixed issue with diffusion coefficients
+- Fixed issue #263 - PR interaction parameters
+- Fixed issues with Dynamic mode
+- Fixed issues with CoolProp Property Packages
+- Fixed XML serialization issue
+- Fixed issue with UNIQUAC model
+- Fixed issue with Single Compound Flash
+- Other fixes and enhancements
 
 Version 7.1.2
 

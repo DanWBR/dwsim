@@ -466,15 +466,19 @@ restart:    B = F - D
 
             'update exchanger duties
 
-            With cduty
-                .EnergyFlow = m_Qc
-                .GraphicObject.Calculated = True
-            End With
+            If cduty IsNot Nothing Then
+                With cduty
+                    .EnergyFlow = m_Qc
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
-            With rduty
-                .EnergyFlow = m_Qb
-                .GraphicObject.Calculated = True
-            End With
+            If rduty IsNot Nothing Then
+                With rduty
+                    .EnergyFlow = m_Qb
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
             IObj?.Close()
 

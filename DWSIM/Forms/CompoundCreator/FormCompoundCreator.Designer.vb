@@ -326,7 +326,6 @@ Partial Class FormCompoundCreator
         Me.Label55 = New System.Windows.Forms.Label()
         Me.lblMeltingTemp = New System.Windows.Forms.Label()
         Me.TextBoxID = New System.Windows.Forms.TextBox()
-        Me.DBOpenDlg = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.CheckBoxEnthOfFusion = New System.Windows.Forms.CheckBox()
         Me.CheckBoxMeltingTemp = New System.Windows.Forms.CheckBox()
@@ -435,9 +434,6 @@ Partial Class FormCompoundCreator
         Me.Label15 = New System.Windows.Forms.Label()
         Me.tbStatus = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
-        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.pbRender, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicUNIFAC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridUNIFAC, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2435,11 +2431,6 @@ Partial Class FormCompoundCreator
         Me.TextBoxID.Name = "TextBoxID"
         Me.ToolTip1.SetToolTip(Me.TextBoxID, resources.GetString("TextBoxID.ToolTip"))
         '
-        'DBOpenDlg
-        '
-        Me.DBOpenDlg.CheckFileExists = False
-        resources.ApplyResources(Me.DBOpenDlg, "DBOpenDlg")
-        '
         'CheckBoxEnthOfFusion
         '
         resources.ApplyResources(Me.CheckBoxEnthOfFusion, "CheckBoxEnthOfFusion")
@@ -3564,23 +3555,6 @@ Partial Class FormCompoundCreator
         Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'SaveFileDialog1
-        '
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        Me.SaveFileDialog1.RestoreDirectory = True
-        '
-        'SaveFileDialog2
-        '
-        Me.SaveFileDialog2.CreatePrompt = True
-        Me.SaveFileDialog2.DefaultExt = "xml"
-        resources.ApplyResources(Me.SaveFileDialog2, "SaveFileDialog2")
-        Me.SaveFileDialog2.OverwritePrompt = False
-        Me.SaveFileDialog2.RestoreDirectory = True
-        '
-        'OpenFileDialog3
-        '
-        resources.ApplyResources(Me.OpenFileDialog3, "OpenFileDialog3")
-        '
         'FormCompoundCreator
         '
         resources.ApplyResources(Me, "$this")
@@ -3655,7 +3629,6 @@ Partial Class FormCompoundCreator
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DBOpenDlg As System.Windows.Forms.OpenFileDialog
     Public WithEvents GridUNIFAC As System.Windows.Forms.DataGridView
     Public WithEvents TextBoxID As System.Windows.Forms.TextBox
     Public WithEvents Label16 As System.Windows.Forms.Label
@@ -3922,8 +3895,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents BancoDeDadosChemeoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EstruturaUNIFACMODFACDDBToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExportarDadosParaArquivoJSONToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents SaveFileDialog2 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
@@ -4032,5 +4003,4 @@ Partial Class FormCompoundCreator
     Friend WithEvents Label107 As Label
     Friend WithEvents rbRegressSolidCp As RadioButton
     Friend WithEvents ImportarDeArquivoJSONToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenFileDialog3 As OpenFileDialog
 End Class

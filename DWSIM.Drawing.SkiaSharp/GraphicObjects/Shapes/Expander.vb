@@ -13,6 +13,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Expander
             Me.Description = "Adiabatic Expander"
+            EmbeddedResourceIconName = "expander.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -47,24 +48,46 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            Dim myIC1 As New ConnectionPoint
-            myIC1.Position = New Point(X, Y + 0.5 * Height)
-            myIC1.Type = ConType.ConIn
-
-            Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(X + Width, Y + 0.5 * Height)
-            myOC1.Type = ConType.ConOut
-
-            Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
+            Me.EnergyConnector.Position = New Point(X + Width, Y + 0.5 * Height)
             Me.EnergyConnector.Type = ConType.ConEn
-            Me.EnergyConnector.Direction = ConDir.Down
+            Me.EnergyConnector.Direction = ConDir.Right
             Me.EnergyConnector.Active = True
             Me.EnergyConnector.ConnectorName = "Energy Stream"
+
+            Dim myIC1, myOC1 As New ConnectionPoint
+
+            If DrawMode = 2 Then
+
+                myIC1.Position = New Point(X + 0.094 * Width, Y + 0.374 * Height)
+                myIC1.Type = ConType.ConIn
+                myIC1.Direction = ConDir.Down
+
+                myOC1.Position = New Point(X + 0.612 * Width, Y + 0.28 * Height)
+                myOC1.Type = ConType.ConOut
+                myOC1.Direction = ConDir.Up
+
+            Else
+
+                myIC1.Position = New Point(X, Y)
+                myIC1.Type = ConType.ConIn
+                myIC1.Direction = ConDir.Down
+
+                myOC1.Position = New Point(X + Width, Y + 0.3 * Height)
+                myOC1.Type = ConType.ConOut
+                myOC1.Direction = ConDir.Up
+
+            End If
 
             With InputConnectors
 
                 If .Count = 1 Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.094 * Width, Y + 0.374 * Height)
+                        .Item(0).Direction = ConDir.Down
+                    Else
+                        .Item(0).Position = New Point(X, Y + 0.3 * Height)
+                        .Item(0).Direction = ConDir.Down
+                    End If
                 Else
                     .Add(myIC1)
                 End If
@@ -76,7 +99,13 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
+                    If DrawMode = 2 Then
+                        .Item(0).Position = New Point(X + 0.612 * Width, Y + 0.28 * Height)
+                        .Item(0).Direction = ConDir.Up
+                    Else
+                        .Item(0).Position = New Point(X + Width, Y)
+                        .Item(0).Direction = ConDir.Up
+                    End If
                 Else
                     .Add(myOC1)
                 End If
@@ -122,6 +151,18 @@ Namespace GraphicObjects.Shapes
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    canvas.DrawPath(gp2, gradPen)
+
+                    canvas.DrawPath(gp2, myPen)
+
                 Case 1
 
                     'b/w
@@ -132,9 +173,11 @@ Namespace GraphicObjects.Shapes
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
+                    canvas.DrawPath(gp2, myPen)
+
                 Case 2
 
-                    'Gas/Liquid Flows
+                    DrawIcon(canvas)
 
                 Case 3
 
@@ -149,22 +192,6 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
 
             End Select
-
-            If DrawMode = 0 Then
-
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor.WithAlpha(50)
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                End With
-
-                canvas.DrawPath(gp2, gradPen)
-
-            End If
-
-            canvas.DrawPath(gp2, myPen)
 
         End Sub
 
