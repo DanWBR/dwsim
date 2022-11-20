@@ -382,6 +382,12 @@ Namespace UnitOperations
             DHvap = pp.AUX_HVAPi(wid, T) * mw / 1000.0
 
             DHf += DHvap
+            ' DGf for liquid water, DGf = DHf + T * DSf, S(water,liq) = , S(O2) = 205.15, S(H2) = 130.68
+            ' Data from NIST Chemistry Webbook, https://webbook.nist.gov/
+            Dim S_water = -203.606 * Math.Log(T / 1000) + 1523.29 * T / 1000 - 3196.413 * (T / 1000) ^ 2 / 2 + 2474.455 * (T / 1000) ^ 3 / 3 - 3.855326 / (2 * (T / 1000) ^ 2) - 488.7163
+            Dim S_hydrogen = 33.066178 * Math.Log(T / 1000) - 11.363417 * T / 1000 + 11.432816 * (T / 1000) ^ 2 / 2 - 2.772874 * (T / 1000) ^ 3 / 3 + 0.158558 / (2 * (T / 1000) ^ 2) + 172.707974
+            Dim S_oxygen = 31.32234 * Math.Log(T / 1000) - 20.23531 * T / 1000 + 57.86644 * (T / 1000) ^ 2 / 2 - 36.50624 * (T / 1000) ^ 3 / 3 + 0.007374 / (2 * (T / 1000) ^ 2) + 246.7945
+            DGf = DHf + T * (S_water - (0.5 * S_oxygen + S_hydrogen)) / 1000
 
             Dim Vrev = DGf * 1000.0 / (2.0 * 96485.3365)
             Dim Vth = DHf * 1000.0 / (2.0 * 96485.3365)
