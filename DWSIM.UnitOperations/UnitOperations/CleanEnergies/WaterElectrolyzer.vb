@@ -471,6 +471,7 @@ Namespace UnitOperations
             msout.SetMolarFlow(Nf.Sum)
             msout.SetPressure(msin.GetPressure)
             msout.SetTemperature(T)
+            msout.SetFlashSpec("PT")
             msout.Calculate()
             msout.SetMassEnthalpy(msout.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
             msout.SetFlashSpec("PH")
