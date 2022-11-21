@@ -53,7 +53,7 @@ Namespace UnitOperations
 
         Public Overrides Function GetProperties(proptype As PropertyType) As String()
 
-            Return New String() {"Voltage", "Thermoneutral Voltage", "Reversible Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer", "Efficiency", "InputEfficiency"}
+            Return New String() {"Voltage", "Thermoneutral Voltage", "Reversible Voltage", "Number of Cells", "Cell Voltage", "Waste Heat", "Current", "Electron Transfer", "Efficiency", "Input Efficiency"}
 
         End Function
 
@@ -80,7 +80,7 @@ Namespace UnitOperations
                     Return ElectronTransfer.ConvertFromSI(su.molarflow)
                 Case "Efficiency"
                     Return Efficiency
-                Case "InputEfficiency"
+                Case "Input Efficiency"
                     Return InputEfficiency
                 Case Else
                     Return 0.0
@@ -105,7 +105,7 @@ Namespace UnitOperations
                     Return su.molarflow
                 Case "Efficiency"
                     Return ""
-                Case "InputEfficiency"
+                Case "Input Efficiency"
                     Return ""
                 Case Else
                     Return 0.0
@@ -389,7 +389,7 @@ Namespace UnitOperations
 
             Dim mw = msin.Phases(0).Compounds(wid).ConstantProperties.Molar_Weight
 
-            Dim DHvap, DSvap As Double
+            Dim DHvap As Double
 
             DHvap = pp.AUX_HVAPi(wid, T) * mw / 1000.0
 
@@ -430,6 +430,7 @@ Namespace UnitOperations
 
 
             ElseIf InputEfficiency > 0 And InputEfficiency <= 1.0 Then
+
                 Dim reaction_heat As Double
 
                 reaction_heat = InputEfficiency * esin.EnergyFlow.GetValueOrDefault()
@@ -443,8 +444,11 @@ Namespace UnitOperations
                 Voltage = 0
                 ElectronTransfer = 2 * waterr
                 Current = 0
+
             Else
+
                 Throw New Exception(String.Format("Specify total voltage and number of cells or set both to zero and specify efficiency between 0 and 1"))
+
             End If
 
             Efficiency = (esin.EnergyFlow.GetValueOrDefault() - WasteHeat) / esin.EnergyFlow.GetValueOrDefault()
