@@ -1846,7 +1846,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TabControlParameters.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

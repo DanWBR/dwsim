@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.3.1
+Version 8.3.2
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,19 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.3.2
+
+- Several Electrolyzer Model enhancements: 
+	- Supports Heavy Water + Deuterium
+	- Supports User-defined Efficiency
+	- Calculation of Thermoneutral and reversible voltages
+	- Fixed calculation of outlet temperature/enthalpy
+- Enhanced reliability of VLE PV Flash
+- Enhanced reliability of Phase Envelope Utility
+- Fixed Pump Head calculation
+- Fixed Deuterium formation properties
+- Other minor bug fixes
 
 Version 8.3.1
 
