@@ -693,7 +693,7 @@ Namespace PropertyPackages
                                                                        Throw New Exception(String.Format("Error calculation vapor pressure."))
                                                                    End If
                                                                    Return pvapt - P
-                                                               End Function, 350, 1000)
+                                                               End Function, 273.15, 1000)
 
         End Function
 
