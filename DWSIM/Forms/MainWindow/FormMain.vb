@@ -3522,7 +3522,12 @@ Label_00CC:
 
         End Using
 
-        form.Options.FilePath = handler.FullPath
+        Try
+            If Path.GetExtension(handler.FullPath).ToLower() <> ".dwbcs" Then
+                form.Options.FilePath = handler.FullPath
+            End If
+        Catch ex As Exception
+        End Try
 
         form.UpdateFormText()
 

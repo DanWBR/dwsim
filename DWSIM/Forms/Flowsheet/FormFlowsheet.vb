@@ -743,7 +743,7 @@ Public Class FormFlowsheet
     Sub UpdateFormText()
         UIThread(Sub()
                      If File.Exists(Options.FilePath) Then
-                         If Path.GetExtension(Options.FilePath) <> ".dwbcs" Then
+                         If Path.GetExtension(Options.FilePath).ToLower() <> ".dwbcs" Then
                              Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
                          End If
                      ElseIf Options.FilePath.StartsWith("//Simulate 365 Dashboard") Then
