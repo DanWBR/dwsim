@@ -69,6 +69,8 @@ Public Class FormMain
     Public SampleList As New List(Of String)
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
 
+    Public Shared TranslateFunction As Func(Of String, String)
+
     Public Shared Property IsPro As Boolean = False
 
     'Collections
@@ -298,6 +300,7 @@ Public Class FormMain
                 Logging.Logger.LogError("Extender Initialization", ex)
             End Try
         Next
+
 #End If
 
     End Sub

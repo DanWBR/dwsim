@@ -186,6 +186,9 @@ Namespace GraphicObjects.Tables
                     For j = 0 To SpreadsheetData(0).Count - 1
                         m = 0
                         For i = 0 To SpreadsheetData.Count - 1
+
+                            SetGlobalTypeface(SpreadsheetData(i)(j))
+
                             If formats IsNot Nothing Then
                                 If formats(i)(j) <> "" Then
                                     If Double.TryParse(SpreadsheetData(i)(j), New Double) Then

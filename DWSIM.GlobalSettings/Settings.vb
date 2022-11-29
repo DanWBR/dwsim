@@ -173,6 +173,10 @@ Public Class Settings
 
     Public Shared Property CheckForUpdates As Boolean = True
 
+    Public Shared TranslatorActivated As Boolean = False
+
+    Public Shared TranslatorLanguage As String = ""
+
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function

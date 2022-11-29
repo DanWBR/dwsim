@@ -133,8 +133,6 @@ Public Class FormFlowsheet
 
     Private listeningaction As Action(Of String, Interfaces.IFlowsheet.MessageType)
 
-    Friend _translatefunction As Func(Of String, String)
-
     Public Property SupressMessages As Boolean = False Implements Interfaces.IFlowsheet.SupressMessages
 
     Private MessagePumpTimer As Timer
@@ -3676,7 +3674,7 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub SetTranslateTextExternalFunction(act As Func(Of String, String)) Implements IFlowsheet.SetTranslateTextExternalFunction
-        _translatefunction = act
+
     End Sub
 
     Public Function GetScriptText(name As String) As String Implements IFlowsheet.GetScriptText

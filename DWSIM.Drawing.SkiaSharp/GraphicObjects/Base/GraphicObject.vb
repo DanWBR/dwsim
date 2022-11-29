@@ -11,10 +11,68 @@ Namespace GraphicObjects
 
         Implements IGraphicObject, ICustomXMLSerialization
 
+        Dim _rtp, _btp, _itp, _bitp, _ttp As SKTypeface
+
+        Public Sub SetGlobalTypeface(gtext As String)
+
+            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter(gtext.Chars(0))
+
+        End Sub
+
         Public Property RegularTypeFace As SKTypeface
+            Get
+                If Not GlobalSettings.Settings.TranslatorActivated Then
+                    Return _rtp
+                Else
+                    Return _ttp
+                End If
+            End Get
+            Set(value As SKTypeface)
+                _rtp = value
+            End Set
+        End Property
+
         Public Property BoldTypeFace As SKTypeface
+            Get
+                If Not GlobalSettings.Settings.TranslatorActivated Then
+                    Return _btp
+                Else
+                    Return _ttp
+                End If
+
+            End Get
+            Set(value As SKTypeface)
+                _btp = value
+            End Set
+        End Property
+
         Public Property ItalicTypeFace As SKTypeface
+            Get
+                If Not GlobalSettings.Settings.TranslatorActivated Then
+                    Return _itp
+                Else
+                    Return _ttp
+                End If
+
+            End Get
+            Set(value As SKTypeface)
+                _itp = value
+            End Set
+        End Property
+
         Public Property BoldItalicTypeFace As SKTypeface
+            Get
+                If Not GlobalSettings.Settings.TranslatorActivated Then
+                    Return _bitp
+                Else
+                    Return _ttp
+                End If
+
+            End Get
+            Set(value As SKTypeface)
+                _bitp = value
+            End Set
+        End Property
 
         Public Property FontStyle As Enums.GraphicObjects.FontStyle = Enums.GraphicObjects.FontStyle.Regular Implements IGraphicObject.FontStyle
 
@@ -24,18 +82,22 @@ Namespace GraphicObjects
 
         Public Function GetFont() As SKTypeface
 
-            Select Case FontStyle
-                Case Enums.GraphicObjects.FontStyle.Regular
-                    Return RegularTypeFace
-                Case Enums.GraphicObjects.FontStyle.Bold
-                    Return BoldTypeFace
-                Case Enums.GraphicObjects.FontStyle.BoldItalic
-                    Return BoldItalicTypeFace
-                Case Enums.GraphicObjects.FontStyle.Italic
-                    Return ItalicTypeFace
-                Case Else
-                    Return RegularTypeFace
-            End Select
+            If Not GlobalSettings.Settings.TranslatorActivated Then
+                Select Case FontStyle
+                    Case Enums.GraphicObjects.FontStyle.Regular
+                        Return RegularTypeFace
+                    Case Enums.GraphicObjects.FontStyle.Bold
+                        Return BoldTypeFace
+                    Case Enums.GraphicObjects.FontStyle.BoldItalic
+                        Return BoldItalicTypeFace
+                    Case Enums.GraphicObjects.FontStyle.Italic
+                        Return ItalicTypeFace
+                    Case Else
+                        Return RegularTypeFace
+                End Select
+            Else
+                Return _ttp
+            End If
 
         End Function
 

@@ -963,9 +963,9 @@ Partial Class FormMain
     Public WithEvents SaveFileS365 As ToolStripButton
     Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DIscordChannelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripDropDownButton2 As ToolStripDropDownButton
     Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
+    Public WithEvents StatusStrip1 As StatusStrip
 End Class
