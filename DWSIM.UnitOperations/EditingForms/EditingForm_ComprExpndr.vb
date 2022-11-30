@@ -731,7 +731,7 @@ Public Class EditingForm_ComprExpndr
     Private Sub btnCurves_Click(sender As Object, e As EventArgs) Handles btnCurves.Click
 
         Dim f As New EditingForm_CompressorExpander_Curves() With {.simobj = SimObject}
-        f.ShowDialog(Me)
+        SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
 

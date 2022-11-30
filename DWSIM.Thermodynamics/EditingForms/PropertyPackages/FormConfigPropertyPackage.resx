@@ -132,7 +132,7 @@
     <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=8.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
@@ -156,9 +156,6 @@
   <data name="&gt;&gt;gridKij.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>793, 461</value>
-  </data>
   <data name="&gt;&gt;TabPageU.Name" xml:space="preserve">
     <value>TabPageU</value>
   </data>
@@ -174,14 +171,14 @@
   <data name="gridKij.Size" type="System.Drawing.Size, System.Drawing">
     <value>777, 409</value>
   </data>
-  <data name="TabPageU.Text" xml:space="preserve">
-    <value>UNIFAC</value>
+  <data name="TabPageU.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="IPGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="TabControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 461</value>
   </data>
   <data name="Button3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
@@ -197,9 +194,6 @@
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
-  </data>
-  <data name="TabPageU.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -276,6 +270,9 @@
   <data name="Button3.Text" xml:space="preserve">
     <value>Estimar Selecionados</value>
   </data>
+  <data name="&gt;&gt;gridKij.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -294,14 +291,17 @@
   <data name="&gt;&gt;Button3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gridKij.Parent" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="TabControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="TabPageU.Size" type="System.Drawing.Size, System.Drawing">
     <value>793, 461</value>
   </data>
   <data name="IPGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="TabPageU.Text" xml:space="preserve">
+    <value>UNIFAC</value>
   </data>
   <data name="&gt;&gt;TabPageU.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

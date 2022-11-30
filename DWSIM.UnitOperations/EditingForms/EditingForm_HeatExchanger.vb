@@ -707,7 +707,7 @@ Public Class EditingForm_HeatExchanger
     Private Sub btnEditSTProps_Click(sender As Object, e As EventArgs) Handles btnEditSTProps.Click
 
         Dim f As New EditingForm_HeatExchanger_SHProperties With {.hx = SimObject}
-        f.Show()
+        SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
 

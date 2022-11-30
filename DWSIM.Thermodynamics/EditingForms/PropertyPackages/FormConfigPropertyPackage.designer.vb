@@ -118,7 +118,6 @@ Partial Class FormConfigPropertyPackage
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormConfigPropertyPackage"
-        Me.TopMost = True
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)

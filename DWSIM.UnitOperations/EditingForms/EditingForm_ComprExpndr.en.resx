@@ -122,10 +122,10 @@
     <value>161, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 20</value>
+    <value>178, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 43</value>
+    <value>318, 43</value>
   </data>
   <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 72</value>
@@ -143,31 +143,25 @@
     <value>Object</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 98</value>
+    <value>345, 98</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
+  </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 244</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 723</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 263</value>
+    <value>345, 263</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 244</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 61</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
-  </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 26</value>
+    <value>318, 26</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
@@ -179,7 +173,7 @@
     <value>161, 26</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 21</value>
+    <value>151, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -187,20 +181,20 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 429</value>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 61</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
   </data>
   <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 107</value>
+    <value>252, 107</value>
   </data>
   <data name="tbRotSpeed.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 103</value>
   </data>
   <data name="tbRotSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -212,7 +206,7 @@
     <value>172, 75</value>
   </data>
   <data name="btnCurves.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 23</value>
+    <value>167, 23</value>
   </data>
   <data name="btnCurves.Text" xml:space="preserve">
     <value>Edit Performance Curves</value>
@@ -227,22 +221,22 @@
     <value>Performance Curves</value>
   </data>
   <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 211</value>
+    <value>251, 211</value>
   </data>
   <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 185</value>
+    <value>251, 185</value>
   </data>
   <data name="cbPolytropicHead.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 389</value>
+    <value>250, 389</value>
   </data>
   <data name="cbAdiabaticHead.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 363</value>
+    <value>250, 363</value>
   </data>
   <data name="tbPolytropicHead.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 389</value>
   </data>
   <data name="tbPolytropicHead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 393</value>
@@ -257,7 +251,7 @@
     <value>172, 363</value>
   </data>
   <data name="tbAdiabaticHead.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 367</value>
@@ -272,7 +266,7 @@
     <value>172, 337</value>
   </data>
   <data name="tbPolytropicCoeff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 341</value>
@@ -287,7 +281,7 @@
     <value>172, 311</value>
   </data>
   <data name="tbAdiabaticCoeff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 315</value>
@@ -308,7 +302,7 @@
     <value>172, 48</value>
   </data>
   <data name="cbProcessPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 21</value>
+    <value>167, 21</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 52</value>
@@ -327,7 +321,7 @@
     <value>172, 207</value>
   </data>
   <data name="tbPolytropicEfficiency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbPolytropicEfficiency.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
@@ -343,13 +337,13 @@
     <value>Polytropic Efficiency (0-100)</value>
   </data>
   <data name="cbDeltaT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 284</value>
+    <value>250, 284</value>
   </data>
   <data name="tbDeltaT.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 285</value>
   </data>
   <data name="tbDeltaT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 289</value>
@@ -361,13 +355,13 @@
     <value>Temperature Change</value>
   </data>
   <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 258</value>
+    <value>250, 258</value>
   </data>
   <data name="tbTemp.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 259</value>
   </data>
   <data name="tbTemp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 263</value>
@@ -382,13 +376,13 @@
     <value>False</value>
   </data>
   <data name="cbPower.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 232</value>
+    <value>250, 232</value>
   </data>
   <data name="tbPower.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 233</value>
   </data>
   <data name="tbPower.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="lblPower.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,13 +397,13 @@
     <value>Power Required/Generated</value>
   </data>
   <data name="cbPress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 154</value>
+    <value>250, 154</value>
   </data>
   <data name="tbOutletPressure.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 155</value>
   </data>
   <data name="tbOutletPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 159</value>
@@ -427,7 +421,7 @@
     <value>172, 181</value>
   </data>
   <data name="tbEfficiency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 185</value>
@@ -439,13 +433,13 @@
     <value>Adiabatic Efficiency (0-100)</value>
   </data>
   <data name="cbPressureDropU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 128</value>
+    <value>250, 128</value>
   </data>
   <data name="tbPressureDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 129</value>
   </data>
   <data name="tbPressureDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>72, 20</value>
   </data>
   <data name="lblDP.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -481,7 +475,7 @@
     <value>172, 21</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 21</value>
+    <value>167, 21</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 25</value>
@@ -492,14 +486,14 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Calculation Type</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 113</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 429</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 77</value>
+    <value>291, 77</value>
   </data>
   <data name="btnCreateAndConnectEnergy.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -511,7 +505,7 @@
     <value />
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 50</value>
+    <value>291, 50</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -523,7 +517,7 @@
     <value />
   </data>
   <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 23</value>
+    <value>291, 23</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -535,7 +529,7 @@
     <value />
   </data>
   <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 77</value>
+    <value>318, 77</value>
   </data>
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -556,10 +550,10 @@
     <value>161, 77</value>
   </data>
   <data name="cbEnergy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 21</value>
+    <value>124, 21</value>
   </data>
   <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 50</value>
+    <value>318, 50</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -571,7 +565,7 @@
     <value />
   </data>
   <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 23</value>
+    <value>318, 23</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -592,13 +586,13 @@
     <value>161, 50</value>
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 21</value>
+    <value>124, 21</value>
   </data>
   <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>161, 23</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 21</value>
+    <value>124, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -606,10 +600,16 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 113</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Connections</value>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>380, 998</value>
+    <value>380, 941</value>
   </data>
 </root>

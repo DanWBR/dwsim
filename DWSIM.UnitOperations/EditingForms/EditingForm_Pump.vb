@@ -435,7 +435,7 @@ Public Class EditingForm_Pump
     Private Sub btnCurves_Click(sender As Object, e As EventArgs) Handles btnCurves.Click
 
         Dim f As New EditingForm_Pump_Curves() With {.selectedpump = SimObject}
-        f.ShowDialog(Me)
+        SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
 
