@@ -124,8 +124,8 @@ Namespace UnitOperations
                 Case "Number of Cells"
                     NumberOfCells = propval
                     Return True
-                Case "Efficiency"
-                    Efficiency = propval
+                Case "Input Efficiency"
+                    InputEfficiency = propval
                     Return True
                 Case Else
                     Return False
