@@ -20,6 +20,8 @@ Imports DWSIM.SharedClasses.Extras
 
         loaded = True
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Sub PopulateList()

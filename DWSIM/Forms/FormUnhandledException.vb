@@ -30,6 +30,7 @@ Public Class FormUnhandledException
 
     Private Sub FormUnhandledException_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         Me.Loaded = True
+        FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

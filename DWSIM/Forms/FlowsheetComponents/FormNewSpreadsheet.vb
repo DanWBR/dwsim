@@ -683,6 +683,8 @@ Public Class FormNewSpreadsheet
             If sheet.ScaleFactor < Settings.DpiScale Then sheet.ScaleFactor = Settings.DpiScale
         Next
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
 #If Not LINUX Then

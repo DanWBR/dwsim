@@ -78,6 +78,8 @@ Public Class FormAssayManager
 
         loaded = True
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub gridassays_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gridassays.SelectionChanged

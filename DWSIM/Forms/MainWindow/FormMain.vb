@@ -71,6 +71,8 @@ Public Class FormMain
 
     Public Shared TranslateFunction As Func(Of String, String)
 
+    Public Shared TranslateFormFunction As Action(Of Object)
+
     Public Shared Property IsPro As Boolean = False
 
     'Collections
@@ -964,7 +966,6 @@ Public Class FormMain
 
         tsmiFreeProTrial.Visible = Not IsPro
 
-
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 
         If UBound(cmdLine) = 1 Then
@@ -1021,6 +1022,8 @@ Public Class FormMain
         End If
 
         AnalyticsProvider?.Initialize()
+
+        FormMain.TranslateFormFunction(Me)
 
     End Sub
 

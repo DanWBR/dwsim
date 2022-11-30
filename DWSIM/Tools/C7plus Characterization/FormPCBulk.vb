@@ -983,6 +983,8 @@ Public Class FormPCBulk
         Me.su = frm.Options.SelectedUnitSystem
         Me.nf = frm.Options.NumberFormat
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click

@@ -21,6 +21,8 @@ Public Class FormImportCompoundOnline
 
         ExtensionMethods.ChangeDefaultFont(Me)
         CurrentPanel = "Panel1"
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub btnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click

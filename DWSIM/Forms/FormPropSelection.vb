@@ -132,6 +132,7 @@ Public Class FormPropSelection
         ColumnHeader2.Width = lvObject.Width - 5
         ColumnHeader3.Width = lvProp.Width - 5
         ColumnHeader4.Width = lvUnits.Width - 5
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

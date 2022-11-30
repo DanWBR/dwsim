@@ -125,6 +125,8 @@ Public Class FormOptions
 
         loaded = True
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Public Sub GetCUDACaps(prop As GPGPUProperties)

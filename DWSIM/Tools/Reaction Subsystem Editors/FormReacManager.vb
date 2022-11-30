@@ -52,6 +52,8 @@ Public Class FormReacManager
             Next
         End With
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub KryptonButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click

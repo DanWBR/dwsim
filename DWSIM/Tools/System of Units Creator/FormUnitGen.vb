@@ -283,6 +283,8 @@ Public Class FormUnitGen
 
         AddHandler DataGridView1.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub myDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
@@ -322,7 +324,7 @@ Public Class FormUnitGen
                 .activity = Me.DataGridView1.Rows(1).Cells(1).Value
                 .activityCoefficient = "-"
                 .compressibility = "-"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = Me.DataGridView1.Rows(9).Cells(1).Value
                 .enthalpy = Me.DataGridView1.Rows(5).Cells(1).Value
                 .entropy = Me.DataGridView1.Rows(6).Cells(1).Value
@@ -333,7 +335,7 @@ Public Class FormUnitGen
                 .heatCapacityCp = Me.DataGridView1.Rows(10).Cells(1).Value
                 .heatCapacityCv = Me.DataGridView1.Rows(10).Cells(1).Value
                 .jouleThomsonCoefficient = "-"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = Me.DataGridView1.Rows(2).Cells(1).Value
                 .massfraction = "-"
                 .molarflow = Me.DataGridView1.Rows(3).Cells(1).Value

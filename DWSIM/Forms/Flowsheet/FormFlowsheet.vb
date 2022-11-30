@@ -639,6 +639,8 @@ Public Class FormFlowsheet
             ws.Recalculate()
         Next
 
+        FormMain.TranslateFormFunction(Me)
+
     End Sub
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -3122,6 +3124,7 @@ Public Class FormFlowsheet
                 dckPanel.DefaultFloatWindowSize = New Size(500 * Settings.DpiScale, 500 * Settings.DpiScale)
             End If
             cnt.Show(Me.dckPanel)
+            FormMain.TranslateFormFunction?.Invoke(cnt)
             Try
                 Dim editors = dckPanel.Contents.Where(Function(d) TypeOf d Is DockContent).Where(Function(d2) DirectCast(d2, DockContent).Tag = "ObjectEditor").ToList
                 If editors.Count > 4 Then
@@ -3131,6 +3134,7 @@ Public Class FormFlowsheet
             End Try
         Else
             DirectCast(form, Form).Show(Me)
+            FormMain.TranslateFormFunction?.Invoke(form)
         End If
     End Sub
 

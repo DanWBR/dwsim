@@ -93,6 +93,8 @@ Public Class DCCharacterizationWizard
 
         P0.BringToFront()
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub DataGridView2_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellValueChanged

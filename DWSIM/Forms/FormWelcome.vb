@@ -128,6 +128,8 @@ Public Class FormWelcome
 
         NewsViewer.Source = New Uri("https://www.patreon.com/dwsim/posts")
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

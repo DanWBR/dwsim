@@ -163,4 +163,8 @@ Public Class MaterialStreamPanel
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         Clipboard.SetDataObject(Me.DataGridView1.GetClipboardContent)
     End Sub
+
+    Private Sub MaterialStreamPanel_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

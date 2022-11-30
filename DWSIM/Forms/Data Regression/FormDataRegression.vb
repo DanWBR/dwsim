@@ -83,6 +83,8 @@ Public Class FormDataRegression
 
         LoadCase(New RegressionCase, True)
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub FormDataRegression_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing

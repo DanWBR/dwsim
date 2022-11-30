@@ -7,6 +7,7 @@ Public Class FormCreateNewSolid
     Private Sub FormCreateNewSolid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

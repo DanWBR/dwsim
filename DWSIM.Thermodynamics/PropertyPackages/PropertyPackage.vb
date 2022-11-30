@@ -12678,7 +12678,11 @@ Final3:
                 If Settings.IsRunningOnMono() Then
                     peditor.ShowDialog()
                 Else
-                    peditor.Show()
+                    If Flowsheet IsNot Nothing Then
+                        Flowsheet.DisplayForm(peditor)
+                    Else
+                        peditor.Show()
+                    End If
                 End If
 
             End If

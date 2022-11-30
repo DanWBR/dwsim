@@ -183,6 +183,8 @@ Public Class FormReacKinetic
                 Call Me.KryptonDataGridView1_CellValidated(sender, New DataGridViewCellEventArgs(3, 0))
         End Select
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub KryptonDataGridView1_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellValueChanged

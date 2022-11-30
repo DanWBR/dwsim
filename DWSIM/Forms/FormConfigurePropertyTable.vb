@@ -97,6 +97,7 @@ Public Class FormConfigurePropertyTable
 
         ColumnHeader1.Width = lvObjects.Width - 15
         ColumnHeader2.Width = lvProps.Width - 15
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

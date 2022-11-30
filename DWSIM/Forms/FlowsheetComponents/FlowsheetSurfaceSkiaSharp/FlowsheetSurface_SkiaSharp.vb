@@ -3382,6 +3382,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Catch ex As Exception
         End Try
         TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetSurface.Zoom, "#%")
+        FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
 
     Public Sub FlowsheetDesignSurface_SelectionChanged_New(ByVal sender As Object, ByVal e As EventArgs)

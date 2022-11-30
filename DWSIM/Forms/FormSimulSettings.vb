@@ -1868,7 +1868,7 @@ Public Class FormSimulSettings
             r.Visible = True
         Next
         ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

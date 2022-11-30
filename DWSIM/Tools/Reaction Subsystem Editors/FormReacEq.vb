@@ -133,6 +133,8 @@ Public Class FormReacEq
                 Call Me.KryptonDataGridView1_CellValidated(sender, New DataGridViewCellEventArgs(3, 0))
         End Select
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub KryptonContextMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)

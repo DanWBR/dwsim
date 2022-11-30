@@ -2790,6 +2790,7 @@ Public Class FormCompoundCreator
 
     Private Sub FormCompoundCreator_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         loaded = True
+        FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
 
     Private Sub cbUnits_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cbUnits.SelectedIndexChanged

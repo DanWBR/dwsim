@@ -15,6 +15,8 @@ Public Class FormMEBSummary
 
         ChangeDefaultFont()
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
