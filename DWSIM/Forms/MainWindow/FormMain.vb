@@ -1023,7 +1023,7 @@ Public Class FormMain
 
         AnalyticsProvider?.Initialize()
 
-        FormMain.TranslateFormFunction(Me)
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

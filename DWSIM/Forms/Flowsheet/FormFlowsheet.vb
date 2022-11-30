@@ -639,7 +639,7 @@ Public Class FormFlowsheet
             ws.Recalculate()
         Next
 
-        FormMain.TranslateFormFunction(Me)
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 
