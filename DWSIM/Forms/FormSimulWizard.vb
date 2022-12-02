@@ -297,7 +297,7 @@ Public Class FormSimulWizard
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
         End With
 
-        If ComboBox2.SelectedIndex <= 2 Then
+        If ComboBox2.SelectedIndex <= 3 Then
             Me.DataGridView1.Columns(1).ReadOnly = True
             Me.DataGridView1.Columns(3).ReadOnly = True
         Else

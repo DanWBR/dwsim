@@ -320,12 +320,10 @@ Public Class EditingForm_Column
                     gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerSpecValue"), .Specs("R").SpecValue.ToString(nf), spu2})
                     gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerCalcValue"), spval2.ToString(nf), spu2})
                 Case ColType.AbsorptionColumn
-                Case ColType.ReboiledAbsorber
-                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
-                Case ColType.RefluxedAbsorber
-                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
             End Select
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DCILIts"), .ic, ""})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Estimated Height"), .EstimatedHeight.ConvertFromSI(units.diameter).ToString(nf), units.diameter})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Estimated Diameter"), .EstimatedDiameter.ConvertFromSI(units.diameter).ToString(nf), units.diameter})
 
             btnResults.Enabled = .x0.Count > 0
 

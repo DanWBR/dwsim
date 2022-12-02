@@ -38,6 +38,7 @@ Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.UnitOperations.UnitOperations.Column
 Imports DWSIM.UnitOperations.Streams
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -1016,6 +1017,8 @@ Namespace UnitOperations
                             End Try
                         End If
                     Next
+                    proplist.Add("Estimated Height")
+                    proplist.Add("Estimated Diameter")
                 Case PropertyType.WR
                     For i = 2 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
@@ -1107,6 +1110,10 @@ Namespace UnitOperations
                         value = Me.Specs("C").CalculatedValue
                     Case "Reboiler_Calculated_Value"
                         value = Me.Specs("R").CalculatedValue
+                    Case "Estimated Height"
+                        value = EstimatedHeight
+                    Case "Estimated Diameter"
+                        value = EstimatedDiameter
                 End Select
 
                 If prop.Contains("Stage_Pressure_") Then
@@ -1208,6 +1215,10 @@ Namespace UnitOperations
                         value = Me.Specs("C").SpecUnit
                     Case "Reboiler_Specification_Value", "Reboiler_Calculated_Value"
                         value = Me.Specs("R").SpecUnit
+                    Case "Estimated Height"
+                        value = su.diameter
+                    Case "Estimated Diameter"
+                        value = su.diameter
                 End Select
 
                 If prop.Contains("Stage_Pressure") Then value = su.pressure
@@ -1471,6 +1482,8 @@ Namespace UnitOperations
                     For i = 2 To 2
                         proplist.Add("PROP_AC_" + CStr(i))
                     Next
+                    proplist.Add("Estimated Height")
+                    proplist.Add("Estimated Diameter")
                 Case PropertyType.RW
                     For i = 0 To 2
                         proplist.Add("PROP_AC_" + CStr(i))
@@ -1483,6 +1496,8 @@ Namespace UnitOperations
                     For i = 0 To 2
                         proplist.Add("PROP_AC_" + CStr(i))
                     Next
+                    proplist.Add("Estimated Height")
+                    proplist.Add("Estimated Diameter")
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -1520,6 +1535,13 @@ Namespace UnitOperations
                         value = Me.NumberOfStages
                 End Select
 
+                Select Case prop
+                    Case "Estimated Height"
+                        value = EstimatedHeight
+                    Case "Estimated Diameter"
+                        value = EstimatedDiameter
+                End Select
+
                 Return value
             End If
 
@@ -1544,7 +1566,15 @@ Namespace UnitOperations
                     value = ""
             End Select
 
+            Select Case prop
+                Case "Estimated Height"
+                    value = su.diameter
+                Case "Estimated Diameter"
+                    value = su.diameter
+            End Select
+
             Return value
+
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
@@ -1654,6 +1684,12 @@ Namespace UnitOperations
         Public Property ColumnPropertiesProfile As String = ""
 
         Public Property ColumnPressureDrop As Double = Double.NaN
+
+        Public Property TraySpacing As Double = 0.5 'm
+
+        Public Property EstimatedDiameter As Double = Double.NaN 'm
+
+        Public Property EstimatedHeight As Double = Double.NaN 'm
 
         Public Property SolvingMethodName As String = "Wang-Henke (Bubble Point)"
 
@@ -3614,6 +3650,33 @@ Namespace UnitOperations
             'generate properties profile
 
             GeneratePropertiesProfileReport()
+
+            'estimate diameter and height
+
+            Dim lt = TraySpacing
+            Dim H = (NumberOfStages + 2) * lt
+
+            Dim maxV = Vf.Max()
+            Dim maxy As Double() = yf(Vf.ToList().IndexOf(Vf.Max))
+            Dim maxL = Lf.Max()
+            Dim maxx As Double() = xf(Lf.ToList().IndexOf(Lf.Max))
+
+            Dim ms = New MaterialStream("", "", FlowSheet, pp)
+            FlowSheet().AddCompoundsToMaterialStream(ms)
+            pp.CurrentMaterialStream = ms
+
+            Dim maxVW = maxV / 1000.0 * pp.AUX_MMM(maxy)
+            Dim maxLW = maxL / 1000.0 * pp.AUX_MMM(maxx)
+
+            Dim Tx = Tf.Average()
+            Dim Px = P0.Average()
+            Dim rhov = pp.AUX_MMM(maxy) / (8.314 * Tx / Px * 1000)
+            Dim rhol = pp.AUX_LIQDENS(Tx, maxx, Px)
+            Dim uv = (-0.17 * lt ^ 2 + 0.27 * lt - 0.047) * ((rhol - rhov) / rhov) ^ 0.5
+            Dim Dc = (4 * maxVW / (Math.PI * rhov * uv)) ^ 0.5
+
+            EstimatedHeight = H
+            EstimatedDiameter = Dc
 
             'if enabled, auto update initial estimates
 

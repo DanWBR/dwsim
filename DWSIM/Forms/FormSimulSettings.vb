@@ -395,7 +395,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
         End With
 
-        If ComboBox2.SelectedIndex <= 2 Then
+        If ComboBox2.SelectedIndex <= 3 Then
             Me.DataGridView1.Columns(1).ReadOnly = True
             Me.DataGridView1.Columns(3).ReadOnly = True
         Else
@@ -921,6 +921,7 @@ Public Class FormSimulSettings
     Private Sub KryptonButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton18.Click
 
         If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And
+            Me.ComboBox2.SelectedItem <> "SI (Engineering)" And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And
@@ -952,6 +953,7 @@ Public Class FormSimulSettings
     Private Sub KryptonButton23_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton23.Click
 
         If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And
+            Me.ComboBox2.SelectedItem <> "SI (Engineering)" And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And

@@ -550,6 +550,97 @@ Namespace SystemsOfUnits
 
     End Class
 
+    <System.Serializable()> Public Class SI_ENG
+
+        Inherits Units
+
+        Public Sub New()
+
+            With Me
+
+                .Name = "SI (Enginnering)"
+                .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
+                .diffusivity = "m2/s"
+                .accel = "m2/s"
+                .area = "m2"
+                .conductance = "[kg/s]/[Pa^0.5]"
+                .diameter = "mm"
+                .distance = "m"
+                .force = "N"
+                .heat_transf_coeff = "W/[m2.K]"
+                .mass_conc = "kg/m3"
+                .molar_conc = "mol/m3"
+                .molar_volume = "m3/kmol"
+                .reac_rate = "mol/[m3.s]"
+                .reac_rate_heterog = "mol/[kg.s]"
+                .spec_vol = "m3/kg"
+                .time = "s"
+                .volume = "m3"
+                .mass = "kg"
+                .thickness = "mm"
+                .molar_enthalpy = "kJ/kmol"
+                .molar_entropy = "kJ/[kmol.K]"
+                .velocity = "m/s"
+                .foulingfactor = "K.m2/W"
+
+                .cakeresistance = "m/kg"
+                .mediumresistance = "m-1"
+
+                .pdp_boilingPointTemperature = "C"
+                .pdp_meltingTemperature = "C"
+
+                .activity = "Pa"
+                .activityCoefficient = "-"
+
+                .compressibility = "1/Pa"
+                .compressibilityfactor = "-"
+
+                .density = "kg/m3"
+                .enthalpy = "kJ/kg"
+                .entropy = "kJ/[kg.K]"
+                .excessEnthalpy = "kJ/kg"
+                .excessEntropy = "kJ/[kg.K]"
+                .fugacity = "Pa"
+                .fugacityCoefficient = "-"
+                .heatCapacityCp = "kJ/[kg.K]"
+                .heatCapacityCv = "kJ/[kg.K]"
+                .jouleThomsonCoefficient = "K/Pa"
+                .logfugacityCoefficient = "-"
+                .massflow = "kg/h"
+                .massfraction = "-"
+                .molarflow = "kmol/h"
+                .molarfraction = "-"
+                .molecularWeight = "kg/kmol"
+                .pressure = "bar"
+                .speedOfSound = "m/s"
+                .temperature = "C"
+                .thermalConductivity = "W/[m.K]"
+                .viscosity = "cP"
+                .volumetricFlow = "m3/h"
+                .cinematic_viscosity = "cSt"
+                .idealGasHeatCapacity = "kJ/[kg.K]"
+                .surfaceTension = "N/m"
+                .thermalConductivityOfLiquid = "W/[m.K]"
+                .thermalConductivityOfVapor = "W/[m.K]"
+                .vaporPressure = "bar"
+                .viscosityOfLiquid = "cP"
+                .viscosityOfVapor = "cP"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
+                .heatflow = "kW"
+                .head = "m"
+                .deltaP = "bar"
+                .deltaT = "C."
+
+            End With
+
+        End Sub
+
+    End Class
+
+
     <System.Serializable()> Public Class SIUnits_Custom1
 
         Inherits Units

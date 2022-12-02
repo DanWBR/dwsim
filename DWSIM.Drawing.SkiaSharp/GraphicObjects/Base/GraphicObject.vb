@@ -1,4 +1,4 @@
-Imports System.Collections.Generic
+﻿Imports System.Collections.Generic
 Imports System.IO
 Imports System.Linq
 Imports System.Xml.Linq
@@ -15,7 +15,7 @@ Namespace GraphicObjects
 
         Public Sub SetGlobalTypeface(gtext As String)
 
-            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter(gtext.Chars(0))
+            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter("द"c)
 
         End Sub
 

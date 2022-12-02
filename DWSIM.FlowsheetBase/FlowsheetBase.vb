@@ -3268,6 +3268,7 @@ Label_00CC:
         With Me.AvailableSystemsOfUnits
 
             .Add(New SystemsOfUnits.SI)
+            .Add(New SystemsOfUnits.SI_ENG)
             .Add(New SystemsOfUnits.CGS)
             .Add(New SystemsOfUnits.English)
             .Add(New SystemsOfUnits.SIUnits_Custom1)
@@ -3280,7 +3281,7 @@ Label_00CC:
                 Dim options = New Newtonsoft.Json.JsonSerializerSettings
                 options.StringEscapeHandling = Newtonsoft.Json.StringEscapeHandling.EscapeHtml
                 Dim userunits = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of SystemsOfUnits.Units))(GlobalSettings.Settings.UserUnits, options)
-                Dim dontadd = New String() {"SI", "CGS", "ENG", "C1", "C2", "C3", "C4", "C5"}
+                Dim dontadd = New String() {"SI", "SI (Enginnering)", "CGS", "ENG", "C1", "C2", "C3", "C4", "C5"}
                 For Each unit In userunits
                     If Not dontadd.Contains(unit.Name) Then .Add(unit)
                 Next

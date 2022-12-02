@@ -872,6 +872,7 @@ Partial Class FormMain
         With Me.AvailableUnitSystems
 
             .Add("SI", New SystemsOfUnits.SI)
+            .Add("SI (Engineering)", New SystemsOfUnits.SI_ENG)
             .Add("CGS", New SystemsOfUnits.CGS)
             .Add("ENG", New SystemsOfUnits.English)
             .Add("C1", New SystemsOfUnits.SIUnits_Custom1)
