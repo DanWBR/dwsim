@@ -479,7 +479,6 @@ Namespace GraphicObjects.Tables
                             maxL2.Add(0)
                             count = 1
                             For Each ni In m_items(s)
-                                SetGlobalTypeface(ni.Text)
                                 size = MeasureString(Flowsheet.GetTranslatedString(ni.Text), tpaint)
                                 If size.Width > maxL1 Then maxL1 = size.Width
                                 If size.Height > maxH Then maxH = size.Height

@@ -11,11 +11,11 @@ Namespace GraphicObjects
 
         Implements IGraphicObject, ICustomXMLSerialization
 
-        Dim _rtp, _btp, _itp, _bitp, _ttp As SKTypeface
+        Private Shared _rtp, _btp, _itp, _bitp, _ttp As SKTypeface
 
-        Public Sub SetGlobalTypeface(gtext As String)
+        Public Shared Sub SetGlobalTypeface(gtext As String)
 
-            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter(DWSIM.GlobalSettings.Settings.TranslatorSampleString(1))
+            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter(gtext(0))
 
         End Sub
 

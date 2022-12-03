@@ -202,8 +202,6 @@ Namespace GraphicObjects.Tables
                 For Each item In items
                     For Each value In item.Value
 
-                        SetGlobalTypeface(item.Key)
-
                         size = MeasureString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, tpaint)
 
                         If size.Width > maxL0 Then maxL0 = size.Width

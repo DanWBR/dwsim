@@ -958,6 +958,8 @@ Public Class FormMain
                 ToolStripManager.Merge(DirectCast(ActiveMdiChild, FormFlowsheet).ToolStrip1, ToolStrip1)
             End If
 
+            FormMain.TranslateFormFunction?.Invoke(Me)
+
         End If
 
     End Sub
@@ -1064,6 +1066,8 @@ Public Class FormMain
         UpdateFlowsheetLinks()
 
         If My.Settings.CheckForUpdates Then CheckForUpdates()
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

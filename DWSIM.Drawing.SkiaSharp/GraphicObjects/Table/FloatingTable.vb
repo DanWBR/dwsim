@@ -266,7 +266,6 @@ Namespace GraphicObjects.Tables
 
                     For Each prop In props
                         propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
-                        SetGlobalTypeface(propstring)
                         pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
                         If pval0 Is Nothing Then Exit For
                         If TypeOf pval0 Is Double Then
