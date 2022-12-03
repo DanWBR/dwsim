@@ -15,7 +15,7 @@ Namespace GraphicObjects
 
         Public Sub SetGlobalTypeface(gtext As String)
 
-            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter("द"c)
+            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter(DWSIM.GlobalSettings.Settings.TranslatorSampleString(1))
 
         End Sub
 

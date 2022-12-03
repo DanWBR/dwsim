@@ -177,6 +177,8 @@ Public Class Settings
 
     Public Shared TranslatorLanguage As String = ""
 
+    Public Shared TranslatorSampleString As String = ""
+
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function
