@@ -15,7 +15,7 @@ Namespace GraphicObjects
 
         Public Shared Sub SetGlobalTypeface(gtext As String)
 
-            If _ttp Is Nothing Then _ttp = SKFontManager.Default.MatchCharacter(gtext(0))
+            _ttp = SKFontManager.Default.MatchCharacter(gtext(0))
 
         End Sub
 
