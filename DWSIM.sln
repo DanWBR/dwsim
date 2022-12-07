@@ -218,6 +218,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Standa
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.StandaloneLibrary.Tests", "DWSIM.Thermodynamics.StandaloneLibrary.Tests\DWSIM.Thermodynamics.StandaloneLibrary.Tests.vbproj", "{C0261CF7-B22C-4E27-9373-B0878F3FC298}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.XFlowsheet", "DWSIM.XFlowsheet\DWSIM.XFlowsheet.vbproj", "{C3080B63-BE89-4585-B643-4FBC295C287C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2664,6 +2666,46 @@ Global
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|x64.ActiveCfg = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release|x86.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|wine32.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|wine32.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|x64.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Debug|x86.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|Any CPU.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|wine32.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|wine32.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|x64.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|x64.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|x86.ActiveCfg = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.DebugNoNPM|x86.Build.0 = Debug|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|Any CPU.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|wine32.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|wine32.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|x64.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|x64.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|x86.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release Linux|x86.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|Any CPU.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|Any CPU.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|wine32.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|wine32.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|x64.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|x64.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|x86.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release WinMac|x86.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|wine32.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|wine32.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|x64.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|x64.Build.0 = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|x86.ActiveCfg = Release|Any CPU
+		{C3080B63-BE89-4585-B643-4FBC295C287C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

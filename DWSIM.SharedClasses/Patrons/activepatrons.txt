@@ -68,6 +68,7 @@ Ryszard Sadowski
 Shankar Ananth
 Shijin Roh
 Steven Sandoval
+Tetsuo Fuchino
 Tibor Lányi
 Tino Josef Ritter
 Will Flores

@@ -8207,6 +8207,22 @@ Namespace Streams
             Return String.Format("flash spec set to {0}", SpecType.ToString())
         End Function
 
+        Public Function GetFlashSpec() As String
+            Select Case SpecType
+                Case StreamSpec.Temperature_and_Pressure
+                    Return "PT"
+                Case StreamSpec.Pressure_and_Enthalpy
+                    Return "PH"
+                Case StreamSpec.Pressure_and_Entropy
+                    Return "PS"
+                Case StreamSpec.Pressure_and_VaporFraction
+                    Return "PVF"
+                Case StreamSpec.Temperature_and_VaporFraction
+                    Return "TVF"
+            End Select
+        End Function
+
+
         ''' <summary>
         ''' Mixes this stream with another one.  
         ''' </summary>

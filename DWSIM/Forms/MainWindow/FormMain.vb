@@ -1035,20 +1035,20 @@ Public Class FormMain
 
             ' check for updates
             Task.Factory.StartNew(Function()
-                                  GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
-                                  Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
-                                  Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
-                                  Return SharedClasses.UpdateCheck.CheckForUpdates()
-                              End Function).ContinueWith(Sub(t)
-                                                             If (t.Result) Then
-                                                                 Dim whatsnew = SharedClasses.UpdateCheck.GetWhatsNew()
-                                                                 Me.UIThreadInvoke(Sub()
-                                                                                       If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable") & vbCrLf & vbCrLf & whatsnew, DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
-                                                                                           Process.Start("https://dwsim.org/downloads")
-                                                                                       End If
-                                                                                   End Sub)
-                                                             End If
-                                                         End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                                      GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
+                                      Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
+                                      Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
+                                      Return SharedClasses.UpdateCheck.CheckForUpdates()
+                                  End Function).ContinueWith(Sub(t)
+                                                                 If (t.Result) Then
+                                                                     Dim whatsnew = SharedClasses.UpdateCheck.GetWhatsNew()
+                                                                     Me.UIThreadInvoke(Sub()
+                                                                                           If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable") & vbCrLf & vbCrLf & whatsnew, DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
+                                                                                               Process.Start("https://dwsim.org/downloads")
+                                                                                           End If
+                                                                                       End Sub)
+                                                                 End If
+                                                             End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
         End If
 
@@ -1830,6 +1830,382 @@ Public Class FormMain
         Application.DoEvents()
 
     End Sub
+
+    Public Function LoadJSON(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "") As Interfaces.IFlowsheet
+
+        RaiseEvent FlowsheetLoadingFromXML(Me, New EventArgs())
+
+        My.Application.PushUndoRedoAction = False
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        Dim excs As New Concurrent.ConcurrentBag(Of Exception)
+
+        Dim soptions As New Newtonsoft.Json.JsonSerializerSettings
+        With soptions
+            .Formatting = Newtonsoft.Json.Formatting.Indented
+            .TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+        End With
+
+        Dim fsx = Newtonsoft.Json.JsonConvert.DeserializeObject(Of XFlowsheet.Implementation.DefaultImplementations.Flowsheet)(handler.ReadAllText(), soptions)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
+
+        Dim form As FormFlowsheet = New FormFlowsheet()
+
+        form.Options.VirtualFile = handler
+
+        Application.DoEvents()
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
+
+        For Each comp In fsx.Compounds
+            form.Options.SelectedComponents.Add(comp, Me.AvailableComponents(comp))
+        Next
+
+        For Each ppx In fsx.PropertyPackages
+            Dim pp As PropertyPackage = Nothing
+            Select Case ppx.Model
+                Case XFlowsheet.Interfaces.PropPackageModel.PR_EOS
+                    pp = New PengRobinsonPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.PR78_EOS
+                    pp = New PengRobinson1978PropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.SRK_EOS
+                    pp = New SRKPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.NRTL
+                    pp = New NRTLPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.UNIQUAC
+                    pp = New UNIQUACPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.UNIFAC
+                    pp = New UNIFACPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_Dortmund
+                    pp = New MODFACPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_NIST
+                    pp = New NISTMFACPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.Grayson_Streed
+                    pp = New GraysonStreedPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.Chao_Seader
+                    pp = New ChaoSeaderPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.Ideal
+                    pp = New RaoultPropertyPackage()
+                Case XFlowsheet.Interfaces.PropPackageModel.Lee_Kesler_Plocker
+                    pp = New LKPPropertyPackage()
+            End Select
+            pp.UniqueID = ppx.ID
+            pp.ComponentName = ppx.Name
+            pp.ComponentDescription = ppx.Description
+            pp.Tag = ppx.Name
+            pp.Flowsheet = form
+            form.Options.PropertyPackages.Add(pp.UniqueID, pp)
+        Next
+
+        Select Case fsx.DisplayedUnitsOfMeasure
+            Case XFlowsheet.Interfaces.UnitOfMeasureSet.SI
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.SI
+            Case XFlowsheet.Interfaces.UnitOfMeasureSet.SI_Engineering
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.SI_ENG
+            Case XFlowsheet.Interfaces.UnitOfMeasureSet.CGS
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.CGS
+            Case XFlowsheet.Interfaces.UnitOfMeasureSet.Imperial
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.English
+        End Select
+
+        For Each gobjx In fsx.PFDObjects
+            Dim obj As ShapeGraphic = Nothing
+            Select Case gobjx.ObjectType
+                Case XFlowsheet.Interfaces.ObjType.MaterialStream
+                    obj = New MaterialStreamGraphic
+                Case XFlowsheet.Interfaces.ObjType.EnergyStream
+                    obj = New EnergyStreamGraphic
+                Case XFlowsheet.Interfaces.ObjType.Pump
+                    obj = New PumpGraphic
+                Case XFlowsheet.Interfaces.ObjType.Valve
+                    obj = New ValveGraphic
+                Case XFlowsheet.Interfaces.ObjType.Heater
+                    obj = New HeaterGraphic
+                Case XFlowsheet.Interfaces.ObjType.Cooler
+                    obj = New CoolerGraphic
+                Case XFlowsheet.Interfaces.ObjType.Compressor
+                    obj = New CompressorGraphic
+                Case XFlowsheet.Interfaces.ObjType.Expander
+                    obj = New TurbineGraphic
+                Case XFlowsheet.Interfaces.ObjType.Mixer
+                    obj = New MixerGraphic
+                Case XFlowsheet.Interfaces.ObjType.Splitter
+                    obj = New SplitterGraphic
+                Case XFlowsheet.Interfaces.ObjType.HeatExchanger
+                    obj = New HeatExchangerGraphic
+                Case XFlowsheet.Interfaces.ObjType.SeparatorVessel
+                    obj = New VesselGraphic
+            End Select
+            Dim ip = gobjx.Ports.Where(Function(p) p.IsInput).FirstOrDefault()
+            Dim op = gobjx.Ports.Where(Function(p) p.IsOutput).FirstOrDefault()
+            obj.Name = gobjx.ID
+            obj.Tag = gobjx.Name
+            obj.Description = gobjx.Description
+            obj.SetPosition(gobjx.X, gobjx.Y)
+            obj.Width = gobjx.Width
+            obj.Height = gobjx.Height
+            obj.CreateConnectors(0, 0)
+            If ip.IsConnected Then
+                obj.InputConnectors(0).ConnectorName = ip.ConnectedToObjectID + "|" + ip.ConnectedToObjectPortIndex.ToString()
+            End If
+            If op.IsConnected Then
+                obj.OutputConnectors(0).ConnectorName = op.ConnectedToObjectID + "|" + ip.ConnectedToObjectPortIndex.ToString()
+            End If
+            form.FormSurface.FlowsheetSurface.DrawingObjects.Add(obj)
+            form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
+        Next
+
+        Dim gobjlist = form.Collections.GraphicObjectCollection.Values.ToList()
+
+        Dim i As Integer
+
+        For Each gobj In gobjlist
+            i = 0
+            For Each ip In gobj.InputConnectors
+                If ip.ConnectorName.Contains("|") Then
+                    Dim oname = ip.ConnectorName.Split("|")(0)
+                    Dim pindex As Integer = ip.ConnectorName.Split("|")(1)
+                    Dim fobj = form.Collections.GraphicObjectCollection(oname)
+                    form.ConnectObjects(fobj, gobj, pindex, 0)
+                End If
+                i += 1
+            Next
+            i = 0
+            For Each op In gobj.OutputConnectors
+                If op.ConnectorName.Contains("|") And op.AttachedConnector IsNot Nothing Then
+                    Dim oname = op.ConnectorName.Split("|")(0)
+                    Dim pindex As Integer = op.ConnectorName.Split("|")(1)
+                    Dim fobj = form.Collections.GraphicObjectCollection(oname)
+                    form.ConnectObjects(gobj, fobj, 0, pindex)
+                End If
+                i += 1
+            Next
+        Next
+
+        For Each sobj In fsx.SimulationObjects
+            Dim gobj = form.Collections.GraphicObjectCollection(sobj.ID)
+            Dim obj As BaseClass = Nothing
+            Select Case sobj.ObjectType
+                Case XFlowsheet.Interfaces.ObjType.MaterialStream
+                    obj = New Streams.MaterialStream()
+                    form.AddComponentsRows(obj)
+                    With DirectCast(obj, Streams.MaterialStream)
+                        .SetTemperature(sobj.Parameters.Where(Function(p) p.Name = "Temperature").First().Value)
+                        .SetPressure(sobj.Parameters.Where(Function(p) p.Name = "Pressure").First().Value)
+                        .SetMassEnthalpy(sobj.Parameters.Where(Function(p) p.Name = "MassEnthalpy").First().Value)
+                        .SetMassEntropy(sobj.Parameters.Where(Function(p) p.Name = "MassEntropy").First().Value)
+                        .SetMolarFlow(sobj.Parameters.Where(Function(p) p.Name = "OverallMolarFlow").First().Value)
+                        Dim comp As List(Of Double) = sobj.Parameters.Where(Function(p) p.Name = "OverallMolarComposition").First().Value
+                        .SetOverallComposition(comp.ToArray())
+                        .CalcOverallCompMassFractions()
+                        .SetFlashSpec(sobj.Parameters.Where(Function(p) p.Name = "FlashSpec").First().Value)
+                        .Phases(0).Properties.molarfraction = (sobj.Parameters.Where(Function(p) p.Name = "VaporFraction").First().Value)
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.EnergyStream
+                    obj = New EnergyStream()
+                    With DirectCast(obj, EnergyStream)
+                        .EnergyFlow = sobj.Parameters.Where(Function(p) p.Name = "EnergyFlow").First().Value
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.Cooler
+                    obj = New Cooler()
+                    With DirectCast(obj, Cooler)
+                        .DeltaQ = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
+                        .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalcMode = Cooler.CalculationMode.HeatRemoved
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.Heater
+                    obj = New Heater()
+                    With DirectCast(obj, Heater)
+                        .DeltaQ = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
+                        .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalcMode = Heater.CalculationMode.HeatAdded
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.HeatExchanger
+                    obj = New HeatExchanger
+                    With DirectCast(obj, HeatExchanger)
+                        .Area = sobj.Parameters.Where(Function(p) p.Name = "ExchangeArea").First().Value
+                        .OverallCoefficient = sobj.Parameters.Where(Function(p) p.Name = "OverallHTC").First().Value
+                        .Q = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
+                        .ThermalEfficiency = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalculationMode = HeatExchangerCalcMode.CalcBothTemp
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.Pump
+                    obj = New Pump()
+                    With DirectCast(obj, Pump)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureIncrease").First().Value
+                        .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalcMode = Pump.CalculationMode.Delta_P
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.Valve
+                    obj = New Valve()
+                    With DirectCast(obj, Valve)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureDecrease").First().Value
+                        .CalcMode = Valve.CalculationMode.DeltaP
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.Mixer
+                    obj = New Mixer()
+                Case XFlowsheet.Interfaces.ObjType.Splitter
+                    obj = New UnitOperations.UnitOperations.Splitter()
+                    With DirectCast(obj, UnitOperations.UnitOperations.Splitter)
+                        Dim splitfact As List(Of Double) = sobj.Parameters.Where(Function(p) p.Name = "SplitFactors").First().Value
+                        .Ratios.AddRange(splitfact)
+                        .OperationMode = UnitOperations.UnitOperations.Splitter.OpMode.SplitRatios
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.SeparatorVessel
+                    obj = New Vessel()
+                Case XFlowsheet.Interfaces.ObjType.Compressor
+                    obj = New Compressor()
+                    With DirectCast(obj, Compressor)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureIncrease").First().Value
+                        .AdiabaticEfficiency = sobj.Parameters.Where(Function(p) p.Name = "AdiabaticEfficiency").First().Value
+                        .CalcMode = Compressor.CalculationMode.Delta_P
+                    End With
+                Case XFlowsheet.Interfaces.ObjType.Expander
+                    obj = New Expander()
+                    With DirectCast(obj, Compressor)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureDecrease").First().Value
+                        .AdiabaticEfficiency = sobj.Parameters.Where(Function(p) p.Name = "AdiabaticEfficiency").First().Value
+                        .CalcMode = Compressor.CalculationMode.Delta_P
+                    End With
+            End Select
+            obj.SetFlowsheet(form)
+            If sobj.PropertyPackageID IsNot Nothing Then
+                obj.PropertyPackage = form.Options.PropertyPackages(sobj.PropertyPackageID)
+            End If
+            obj.GraphicObject = gobj
+            gobj.Owner = obj
+            obj.Name = sobj.ID
+            form.Collections.FlowsheetObjectCollection.Add(obj.Name, obj)
+        Next
+
+        Dim filename As String
+
+        If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
+
+        form.FilePath = handler.FullPath
+        form.Options.FilePath = handler.FullPath
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(25)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(65)
+
+        My.Application.ActiveSimulation = form
+
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(100)
+
+        My.Application.ActiveSimulation = form
+
+        m_childcount += 1
+
+        form.m_IsLoadedFromFile = True
+
+        form.FormCharts.Flowsheet = form
+
+        form.FormDynamics.Flowsheet = form
+
+        form.FormFilesExplorer.Flowsheet = form
+
+#If LINUX = False Then
+        form.FormIPyConsole.Flowsheet = form
+#End If
+
+        ' Set DockPanel properties
+        form.dckPanel.ActiveAutoHideContent = Nothing
+        form.dckPanel.Parent = form
+
+        Me.tmpform2 = form
+        'form.dckPanel.SuspendLayout(True)
+        form.FormLog.DockPanel = Nothing
+        form.FormMatList.DockPanel = Nothing
+        form.FormSpreadsheet.DockPanel = Nothing
+        form.FormSpreadsheet.Flowsheet = form
+        form.FormWatch.DockPanel = Nothing
+        form.FormSurface.DockPanel = Nothing
+        form.FormDynamics.DockPanel = Nothing
+        form.FormProps.DockPanel = Nothing
+        form.FormCharts.DockPanel = Nothing
+        form.FormFilesExplorer.DockPanel = Nothing
+#If LINUX = False Then
+        form.FormIPyConsole.DockPanel = Nothing
+#End If
+
+        Try
+            form.FormLog.DockPanel = form.dckPanel
+            form.FormSpreadsheet?.Show(form.dckPanel)
+            form.FormCharts?.Show(form.dckPanel)
+            form.FormMatList?.Show(form.dckPanel)
+            form.FormSurface?.Show(form.dckPanel)
+            form.FormDynamics?.Show(form.dckPanel)
+            form.FormFilesExplorer?.Show(form.dckPanel)
+            form.FormProps?.Show(form.dckPanel)
+#If LINUX = False Then
+            'form.FormIPyConsole?.Show(form.dckPanel)
+#End If
+            form.dckPanel.BringToFront()
+            form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
+        Catch ex As Exception
+            'excs.Add(New Exception("Error Restoring Window Layout", ex))
+        End Try
+
+        If form.FormProps.Width > form.Width / 3 Then
+            form.dckPanel.DockLeftPortion = form.Width / 3
+        End If
+
+        Me.Invalidate()
+        Application.DoEvents()
+
+        If TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
+            Dim mypath As String = simulationfilename
+            If mypath = "" Then mypath = handler.FullPath
+            If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
+                My.Settings.MostRecentFiles.Add(mypath)
+                Me.UpdateMRUList()
+            End If
+        End If
+
+        My.Application.ActiveSimulation = form
+
+        form.MdiParent = Me
+        form.Show()
+        form.Activate()
+
+        form.FrmStSim1.CurrentFlowsheet = form
+        form.FrmStSim1.Init(True)
+
+        form.FormSurface.Invalidate()
+
+        If excs.Count > 0 Then
+            form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
+            For Each ex As Exception In excs
+                form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
+            Next
+        Else
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+        End If
+
+        form.UpdateFormText()
+
+        'Me.ToolStripStatusLabel1.Text = ""
+
+        My.Application.PushUndoRedoAction = True
+
+        Application.DoEvents()
+
+        form.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
+
+        RaiseEvent FlowsheetLoadedFromXML(form, New EventArgs())
+
+        Return form
+
+    End Function
+
 
     Public Function LoadXML(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
@@ -3476,6 +3852,12 @@ Label_00CC:
 
     End Function
 
+    Sub SaveJSON(handler As IVirtualFile, ByVal form As FormFlowsheet)
+
+        File.WriteAllText(Path.ChangeExtension(handler.FullPath, "json"), XFlowsheet.Exporter.Export(form))
+
+    End Sub
+
     Sub SaveXMLZIP(handler As IVirtualFile, ByVal form As FormFlowsheet)
 
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
@@ -3559,8 +3941,8 @@ Label_00CC:
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("All Supported Files", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.dwcsd", "*.dwcsd2", "*.dwrsd", "*.dwrsd2", "*.dwruf"}),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml"}),
+            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("All Supported Files", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.json", "*.dwcsd", "*.dwcsd2", "*.dwrsd", "*.dwrsd2", "*.dwruf"}),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.json"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compound Creator Study", New String() {"*.dwcsd", "*.dwcsd2"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Data Regression Study", New String() {"*.dwrsd", "*.dwrsd2"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("UNIFAC Parameter Regression Study", "*.dwruf")})
@@ -3588,6 +3970,13 @@ Label_00CC:
         Application.DoEvents()
 
         Select Case handler.GetExtension().ToLower()
+            Case ".json"
+                Me.LoadJSON(handler, Sub(x)
+                                         Me.Invoke(Sub()
+                                                       floading.ProgressBar1.Value = x
+                                                       floading.Refresh()
+                                                   End Sub)
+                                     End Sub, "")
             Case ".dwxml"
                 Me.LoadXML(handler, Sub(x)
                                         Me.Invoke(Sub()
@@ -4015,8 +4404,9 @@ Label_00CC:
                         End If
                     ElseIf Path.GetExtension(filename).ToLower = ".dwxmz" Then
                         SaveXMLZIP(handler, form2)
+                    ElseIf Path.GetExtension(filename).ToLower = ".json" Then
+                        SaveJSON(handler, form2)
                     End If
-
                 Else ' If file doesn't exist, open file picker
                     Try
                         Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
@@ -4029,10 +4419,9 @@ Label_00CC:
                     If (form2.Options.VirtualFile IsNot Nothing) Then
                         handler = form2.Options.VirtualFile
                     Else
-
                         handler = filePickerForm.ShowSaveDialog(
                                   New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-                                    {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml"})
+                                    {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", ".json"})
                                   })
                     End If
                     If handler IsNot Nothing Then
@@ -4045,6 +4434,8 @@ Label_00CC:
                             SaveMobileXML(handler, Me.ActiveMdiChild)
                         ElseIf handler.GetExtension().ToLower() = ".dwxmz" Then
                             SaveXMLZIP(handler, Me.ActiveMdiChild)
+                        ElseIf handler.GetExtension().ToLower() = ".json" Then
+                            SaveJSON(handler, Me.ActiveMdiChild)
                         End If
                     End If
                 End If
@@ -4414,6 +4805,12 @@ Label_00CC:
 
     Private Sub ToolStripDropDownButton1_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton1.Click
         Process.Start("https://www.patreon.com/dwsim")
+    End Sub
+
+    Private Sub ToolStripButton9_Click(sender As Object, e As EventArgs)
+
+        LoadFileDialog()
+
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

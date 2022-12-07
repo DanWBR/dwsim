@@ -1103,6 +1103,7 @@
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\TreeModel.vb" />
+    <Compile Include="Objects\Classes\XFlowsheet\Exporter.vb" />
     <Compile Include="Tools\Assay Manager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>
@@ -2040,6 +2041,10 @@
     <ProjectReference Include="..\DWSIM.Controls.ZedGraph\DWSIM.Controls.ZedGraph.csproj">
       <Project>{2541686b-1673-43bf-af89-3163945db009}</Project>
       <Name>DWSIM.Controls.ZedGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.XFlowsheet\DWSIM.XFlowsheet.vbproj">
+      <Project>{c3080b63-be89-4585-b643-4fbc295c287c}</Project>
+      <Name>DWSIM.XFlowsheet</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -3331,6 +3336,7 @@
     <None Include="Resources\open file s365.png" />
     <None Include="Resources\icons8-pdf.png" />
     <None Include="Resources\icons8-vector.png" />
+    <None Include="Resources\icons8-downloads_folder.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
