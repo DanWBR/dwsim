@@ -197,7 +197,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Pb = Pmax
             Pd = Pmin
 
-            If Abs(Pb - Pd) / Pb < 0.0000001 Then
+            If Abs(Pb - Pd) / Pb < 0.0000001 And Vz.Max > 0.99 Then
                 'one comp only
                 Px = Vp.MultiplyY(Vz).Sum
                 If Px <= P Then
@@ -240,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If g > 0 Then Vmin = V Else Vmax = V
 
 
-            V = Brent.BrentOpt3(Vmin, Vmax, 10, 0.001, 100,
+            V = Brent.BrentOpt3(0.0, 1.0, 10, 0.001, 100,
                            Function(Vb)
                                Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
                            End Function)
