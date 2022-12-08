@@ -114,13 +114,6 @@ Public Class FormOptions
 
         If Directory.Exists(configdir) Then tbConfigDir.Text = configdir Else tbConfigDir.Text = "N/A"
 
-        Select Case My.Settings.CultureInfo
-            Case "pt-BR"
-                Me.ComboBoxUILanguage.SelectedIndex = 0
-            Case "en"
-                Me.ComboBoxUILanguage.SelectedIndex = 1
-        End Select
-
         chkUpdates.Checked = Settings.CheckForUpdates
 
         loaded = True
@@ -558,20 +551,6 @@ Public Class FormOptions
     Private Sub chkAA_CheckedChanged(sender As Object, e As EventArgs) Handles chkAA.CheckedChanged
         My.Settings.FlowsheetAntiAliasing = chkAA.Checked
         GlobalSettings.Settings.DrawingAntiAlias = chkAA.Checked
-    End Sub
-
-    Private Sub ComboBoxUILanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxUILanguage.SelectedIndexChanged
-        If loaded Then
-            Select Case Me.ComboBoxUILanguage.SelectedIndex
-                Case 0
-                    My.Settings.CultureInfo = "pt-BR"
-                Case 1
-                    My.Settings.CultureInfo = "en"
-            End Select
-            If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
-            My.Application.ChangeUICulture(My.Settings.CultureInfo)
-            MessageBox.Show(DWSIM.App.GetLocalString("NextStartupOnly"), "DWSIM")
-        End If
     End Sub
 
     Private Sub chkEditorDoubleClick_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditorDoubleClick.CheckedChanged

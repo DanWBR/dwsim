@@ -2165,8 +2165,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             'check if converged to the trivial solution.
-            Kvals = result(6)
-            If PP.AUX_CheckTrivial(Kvals, 0.21) Then trivial = True
+            If result.Count > 1 Then
+                Kvals = result(6)
+                If PP.AUX_CheckTrivial(Kvals, 0.21) Then trivial = True
+            End If
             If result.Count = 1 Or trivial Then
                 result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
                 If result.Count > 1 Then

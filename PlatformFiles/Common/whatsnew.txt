@@ -1,12 +1,9 @@
-Version 8.3.2
+Version 8.3.3
 
-- Several Electrolyzer Model enhancements: 
-	- Supports Heavy Water + Deuterium
-	- Supports User-defined Efficiency
-	- Calculation of Thermoneutral and reversible voltages
-	- Fixed calculation of outlet temperature/enthalpy
-- Enhanced reliability of VLE PV Flash
-- Enhanced reliability of Phase Envelope Utility
-- Fixed Pump Head calculation
-- Fixed Deuterium formation properties
-- Other minor bug fixes
+- Machine-generated translations for 14 languages (Classic UI)
+- Estimation of Rigorous Column diameter and height
+- Added SI Engineering units
+- Fixed issue with Water Electrolyzer model
+- Fixed issue with Compressor and Expander
+- Fixed issue with Seawater Property Package
+- Other minor fixes and enhancements

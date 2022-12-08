@@ -76,13 +76,11 @@ Namespace My
             'check if the user wants to reset settings.
             If My.Computer.Keyboard.ShiftKeyDown Then
                 My.Settings.Reset()
-                'MessageBox.Show("The settings were reset successfully.")
+                'MessageBox.Show("Application Settings successfully reset.")
             End If
 
             'loads the current language
-            If My.Settings.CultureInfo = "de" Or My.Settings.CultureInfo = "es" Or My.Settings.CultureInfo = "en-US" Then
-                My.Settings.CultureInfo = "en"
-            End If
+            My.Settings.CultureInfo = "en"
             _CultureInfo = New Globalization.CultureInfo(My.Settings.CultureInfo)
             My.Application.ChangeUICulture(My.Settings.CultureInfo)
 
@@ -99,11 +97,6 @@ Namespace My
                 If s.ToLower = "-commandline" Then
                     My.Application.CommandLineMode = True
                     e.Cancel = True
-                End If
-                If s.ToLower = "-locale" Then
-                    Dim clcult As String = My.Application.CommandLineArgs(My.Application.CommandLineArgs.IndexOf(s) + 1)
-                    _CultureInfo = New Globalization.CultureInfo(clcult)
-                    My.Application.ChangeUICulture(clcult)
                 End If
             Next
 

@@ -108,8 +108,6 @@ Partial Class FormOptions
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.ComboBoxUILanguage = New System.Windows.Forms.ComboBox()
-        Me.Label22 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.cbDebugLevel = New System.Windows.Forms.ComboBox()
@@ -753,24 +751,9 @@ Partial Class FormOptions
         'GroupBox9
         '
         resources.ApplyResources(Me.GroupBox9, "GroupBox9")
-        Me.GroupBox9.Controls.Add(Me.ComboBoxUILanguage)
-        Me.GroupBox9.Controls.Add(Me.Label22)
         Me.GroupBox9.Controls.Add(Me.KryptonCheckBox1)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
-        '
-        'ComboBoxUILanguage
-        '
-        Me.ComboBoxUILanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxUILanguage.FormattingEnabled = True
-        Me.ComboBoxUILanguage.Items.AddRange(New Object() {resources.GetString("ComboBoxUILanguage.Items"), resources.GetString("ComboBoxUILanguage.Items1")})
-        resources.ApplyResources(Me.ComboBoxUILanguage, "ComboBoxUILanguage")
-        Me.ComboBoxUILanguage.Name = "ComboBoxUILanguage"
-        '
-        'Label22
-        '
-        resources.ApplyResources(Me.Label22, "Label22")
-        Me.Label22.Name = "Label22"
         '
         'KryptonCheckBox1
         '
@@ -951,8 +934,6 @@ Partial Class FormOptions
     Public WithEvents chkAA As CheckBox
     Friend WithEvents cbRenderer As ComboBox
     Public WithEvents Label23 As Label
-    Friend WithEvents ComboBoxUILanguage As ComboBox
-    Friend WithEvents Label22 As Label
     Public WithEvents chkEditorDoubleClick As CheckBox
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox

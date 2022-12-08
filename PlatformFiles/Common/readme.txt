@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.3.2
+Version 8.3.3
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.3.3
+
+- Machine-generated translations for 14 languages (Classic UI)
+- Estimation of Rigorous Column diameter and height
+- Added SI Engineering units
+- Fixed issue with Water Electrolyzer model
+- Fixed issue with Compressor and Expander
+- Fixed issue with Seawater Property Package
+- Other minor fixes and enhancements
 
 Version 8.3.2
 

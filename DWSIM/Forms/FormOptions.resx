@@ -2074,10 +2074,10 @@
     <value>2</value>
   </data>
   <data name="GroupBox17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 373</value>
+    <value>9, 348</value>
   </data>
   <data name="GroupBox17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>370, 115</value>
+    <value>370, 84</value>
   </data>
   <data name="GroupBox17.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2131,7 +2131,7 @@
     <value>0</value>
   </data>
   <data name="GroupBox15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 300</value>
+    <value>9, 275</value>
   </data>
   <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
     <value>370, 70</value>
@@ -2188,7 +2188,7 @@
     <value>0</value>
   </data>
   <data name="GroupBox14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 226</value>
+    <value>9, 201</value>
   </data>
   <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
     <value>370, 70</value>
@@ -2213,63 +2213,6 @@
   </data>
   <data name="GroupBox9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="ComboBoxUILanguage.Items" xml:space="preserve">
-    <value>Português (Brasileiro)</value>
-  </data>
-  <data name="ComboBoxUILanguage.Items1" xml:space="preserve">
-    <value>English (USA)</value>
-  </data>
-  <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 51</value>
-  </data>
-  <data name="ComboBoxUILanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 21</value>
-  </data>
-  <data name="ComboBoxUILanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ComboBoxUILanguage.Name" xml:space="preserve">
-    <value>ComboBoxUILanguage</value>
-  </data>
-  <data name="&gt;&gt;ComboBoxUILanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBoxUILanguage.Parent" xml:space="preserve">
-    <value>GroupBox9</value>
-  </data>
-  <data name="&gt;&gt;ComboBoxUILanguage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Label22.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 54</value>
-  </data>
-  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
-  </data>
-  <data name="Label22.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="Label22.Text" xml:space="preserve">
-    <value>Idioma da Interface</value>
-  </data>
-  <data name="&gt;&gt;Label22.Name" xml:space="preserve">
-    <value>Label22</value>
-  </data>
-  <data name="&gt;&gt;Label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
-    <value>GroupBox9</value>
-  </data>
-  <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="KryptonCheckBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2296,13 +2239,13 @@
     <value>GroupBox9</value>
   </data>
   <data name="&gt;&gt;KryptonCheckBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="GroupBox9.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 74</value>
   </data>
   <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>370, 85</value>
+    <value>370, 56</value>
   </data>
   <data name="GroupBox9.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2389,7 +2332,7 @@
     <value>1</value>
   </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 163</value>
+    <value>9, 138</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>370, 60</value>
@@ -2471,7 +2414,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAegBCgHoAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAfgBCgH4AQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
@@ -2670,6 +2613,9 @@
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Importar Componentes</value>
   </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
