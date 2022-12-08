@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.props" Condition="Exists('..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -717,8 +716,6 @@
     <EmbeddedResource Include="Assets\ChemSepIPD\srk.ipd" />
     <EmbeddedResource Include="Assets\ChemSepIPD\uniquac.ipd" />
     <EmbeddedResource Include="Assets\ChemSepIPD\wilson.ipd" />
-    <None Include="DWSIM.Thermodynamics-AddIn.dna" />
-    <None Include="Properties\ExcelDna.Build.props" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
@@ -932,15 +929,6 @@
     </PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\ExcelDna.AddIn.1.1.1\build\ExcelDna.AddIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ExcelDna.AddIn.1.1.1\build\ExcelDna.AddIn.targets'))" />
-    <Error Condition="!Exists('..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.props'))" />
-    <Error Condition="!Exists('..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -960,5 +948,4 @@
     </ItemGroup>
     <Message Importance="normal" Text="Adding back DesignTimeFacades from ReferencePath now that SGen has run." />
   </Target>
-  <Import Project="..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.targets" Condition="Exists('..\packages\ExcelDna.AddIn.1.6.0\build\ExcelDna.AddIn.targets')" />
 </Project>

@@ -1,5 +1,5 @@
-﻿Imports DWSIM.XFlowsheet.Implementation
-Imports DWSIM.XFlowsheet.Interfaces
+﻿Imports XFlowsheet.Implementation
+Imports XFlowsheet.Interfaces
 Imports System.Linq
 
 Namespace XFlowsheet

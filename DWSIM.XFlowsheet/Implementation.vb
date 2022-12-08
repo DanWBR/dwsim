@@ -1,4 +1,4 @@
-﻿Imports DWSIM.XFlowsheet.Interfaces
+﻿Imports XFlowsheet.Interfaces
 
 Namespace Implementation
 
@@ -691,12 +691,12 @@ Namespace Implementation
                     .DynamicViscosity = "Pa.s"
                     .VolumetricFlow = "m3/s"
                     .KinematicViscosity = "m2/s"
-                    .surfaceTension = "N/m"
-                    .surfaceTension = "N/m"
-                    .heatflow = "kW"
-                    .head = "m"
-                    .deltaP = "Pa"
-                    .deltaT = "K."
+                    .SurfaceTension = "N/m"
+                    .SurfaceTension = "N/m"
+                    .HeatFlow = "kW"
+                    .Head = "m"
+                    .DeltaP = "Pa"
+                    .DeltaT = "K."
 
                 End With
 

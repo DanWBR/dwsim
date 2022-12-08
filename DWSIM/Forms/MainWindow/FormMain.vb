@@ -36,7 +36,6 @@ Imports ICSharpCode.SharpZipLib.Zip
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
-Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
@@ -1847,7 +1846,7 @@ Public Class FormMain
             .TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
         End With
 
-        Dim fsx = Newtonsoft.Json.JsonConvert.DeserializeObject(Of XFlowsheet.Implementation.DefaultImplementations.Flowsheet)(handler.ReadAllText(), soptions)
+        Dim fsx = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Global.XFlowsheet.Implementation.DefaultImplementations.Flowsheet)(handler.ReadAllText(), soptions)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
@@ -1866,29 +1865,29 @@ Public Class FormMain
         For Each ppx In fsx.PropertyPackages
             Dim pp As PropertyPackage = Nothing
             Select Case ppx.Model
-                Case XFlowsheet.Interfaces.PropPackageModel.PR_EOS
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.PR_EOS
                     pp = New PengRobinsonPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.PR78_EOS
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.PR78_EOS
                     pp = New PengRobinson1978PropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.SRK_EOS
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.SRK_EOS
                     pp = New SRKPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.NRTL
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.NRTL
                     pp = New NRTLPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.UNIQUAC
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.UNIQUAC
                     pp = New UNIQUACPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.UNIFAC
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.UNIFAC
                     pp = New UNIFACPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_Dortmund
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_Dortmund
                     pp = New MODFACPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_NIST
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_NIST
                     pp = New NISTMFACPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.Grayson_Streed
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Grayson_Streed
                     pp = New GraysonStreedPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.Chao_Seader
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Chao_Seader
                     pp = New ChaoSeaderPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.Ideal
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Ideal
                     pp = New RaoultPropertyPackage()
-                Case XFlowsheet.Interfaces.PropPackageModel.Lee_Kesler_Plocker
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Lee_Kesler_Plocker
                     pp = New LKPPropertyPackage()
             End Select
             pp.UniqueID = ppx.ID
@@ -1900,42 +1899,42 @@ Public Class FormMain
         Next
 
         Select Case fsx.DisplayedUnitsOfMeasure
-            Case XFlowsheet.Interfaces.UnitOfMeasureSet.SI
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.SI
                 form.Options.SelectedUnitSystem = New SystemsOfUnits.SI
-            Case XFlowsheet.Interfaces.UnitOfMeasureSet.SI_Engineering
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.SI_Engineering
                 form.Options.SelectedUnitSystem = New SystemsOfUnits.SI_ENG
-            Case XFlowsheet.Interfaces.UnitOfMeasureSet.CGS
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.CGS
                 form.Options.SelectedUnitSystem = New SystemsOfUnits.CGS
-            Case XFlowsheet.Interfaces.UnitOfMeasureSet.Imperial
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.Imperial
                 form.Options.SelectedUnitSystem = New SystemsOfUnits.English
         End Select
 
         For Each gobjx In fsx.PFDObjects
             Dim obj As ShapeGraphic = Nothing
             Select Case gobjx.ObjectType
-                Case XFlowsheet.Interfaces.ObjType.MaterialStream
+                Case Global.XFlowsheet.Interfaces.ObjType.MaterialStream
                     obj = New MaterialStreamGraphic
-                Case XFlowsheet.Interfaces.ObjType.EnergyStream
+                Case Global.XFlowsheet.Interfaces.ObjType.EnergyStream
                     obj = New EnergyStreamGraphic
-                Case XFlowsheet.Interfaces.ObjType.Pump
+                Case Global.XFlowsheet.Interfaces.ObjType.Pump
                     obj = New PumpGraphic
-                Case XFlowsheet.Interfaces.ObjType.Valve
+                Case Global.XFlowsheet.Interfaces.ObjType.Valve
                     obj = New ValveGraphic
-                Case XFlowsheet.Interfaces.ObjType.Heater
+                Case Global.XFlowsheet.Interfaces.ObjType.Heater
                     obj = New HeaterGraphic
-                Case XFlowsheet.Interfaces.ObjType.Cooler
+                Case Global.XFlowsheet.Interfaces.ObjType.Cooler
                     obj = New CoolerGraphic
-                Case XFlowsheet.Interfaces.ObjType.Compressor
+                Case Global.XFlowsheet.Interfaces.ObjType.Compressor
                     obj = New CompressorGraphic
-                Case XFlowsheet.Interfaces.ObjType.Expander
+                Case Global.XFlowsheet.Interfaces.ObjType.Expander
                     obj = New TurbineGraphic
-                Case XFlowsheet.Interfaces.ObjType.Mixer
+                Case Global.XFlowsheet.Interfaces.ObjType.Mixer
                     obj = New MixerGraphic
-                Case XFlowsheet.Interfaces.ObjType.Splitter
+                Case Global.XFlowsheet.Interfaces.ObjType.Splitter
                     obj = New SplitterGraphic
-                Case XFlowsheet.Interfaces.ObjType.HeatExchanger
+                Case Global.XFlowsheet.Interfaces.ObjType.HeatExchanger
                     obj = New HeatExchangerGraphic
-                Case XFlowsheet.Interfaces.ObjType.SeparatorVessel
+                Case Global.XFlowsheet.Interfaces.ObjType.SeparatorVessel
                     obj = New VesselGraphic
             End Select
             Dim ip = gobjx.Ports.Where(Function(p) p.IsInput).FirstOrDefault()
@@ -1988,7 +1987,7 @@ Public Class FormMain
             Dim gobj = form.Collections.GraphicObjectCollection(sobj.ID)
             Dim obj As BaseClass = Nothing
             Select Case sobj.ObjectType
-                Case XFlowsheet.Interfaces.ObjType.MaterialStream
+                Case Global.XFlowsheet.Interfaces.ObjType.MaterialStream
                     obj = New Streams.MaterialStream()
                     form.AddComponentsRows(obj)
                     With DirectCast(obj, Streams.MaterialStream)
@@ -2003,26 +2002,26 @@ Public Class FormMain
                         .SetFlashSpec(sobj.Parameters.Where(Function(p) p.Name = "FlashSpec").First().Value)
                         .Phases(0).Properties.molarfraction = (sobj.Parameters.Where(Function(p) p.Name = "VaporFraction").First().Value)
                     End With
-                Case XFlowsheet.Interfaces.ObjType.EnergyStream
+                Case Global.XFlowsheet.Interfaces.ObjType.EnergyStream
                     obj = New EnergyStream()
                     With DirectCast(obj, EnergyStream)
                         .EnergyFlow = sobj.Parameters.Where(Function(p) p.Name = "EnergyFlow").First().Value
                     End With
-                Case XFlowsheet.Interfaces.ObjType.Cooler
+                Case Global.XFlowsheet.Interfaces.ObjType.Cooler
                     obj = New Cooler()
                     With DirectCast(obj, Cooler)
                         .DeltaQ = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
                         .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
                         .CalcMode = Cooler.CalculationMode.HeatRemoved
                     End With
-                Case XFlowsheet.Interfaces.ObjType.Heater
+                Case Global.XFlowsheet.Interfaces.ObjType.Heater
                     obj = New Heater()
                     With DirectCast(obj, Heater)
                         .DeltaQ = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
                         .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
                         .CalcMode = Heater.CalculationMode.HeatAdded
                     End With
-                Case XFlowsheet.Interfaces.ObjType.HeatExchanger
+                Case Global.XFlowsheet.Interfaces.ObjType.HeatExchanger
                     obj = New HeatExchanger
                     With DirectCast(obj, HeatExchanger)
                         .Area = sobj.Parameters.Where(Function(p) p.Name = "ExchangeArea").First().Value
@@ -2031,38 +2030,38 @@ Public Class FormMain
                         .ThermalEfficiency = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
                         .CalculationMode = HeatExchangerCalcMode.CalcBothTemp
                     End With
-                Case XFlowsheet.Interfaces.ObjType.Pump
+                Case Global.XFlowsheet.Interfaces.ObjType.Pump
                     obj = New Pump()
                     With DirectCast(obj, Pump)
                         .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureIncrease").First().Value
                         .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
                         .CalcMode = Pump.CalculationMode.Delta_P
                     End With
-                Case XFlowsheet.Interfaces.ObjType.Valve
+                Case Global.XFlowsheet.Interfaces.ObjType.Valve
                     obj = New Valve()
                     With DirectCast(obj, Valve)
                         .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureDecrease").First().Value
                         .CalcMode = Valve.CalculationMode.DeltaP
                     End With
-                Case XFlowsheet.Interfaces.ObjType.Mixer
+                Case Global.XFlowsheet.Interfaces.ObjType.Mixer
                     obj = New Mixer()
-                Case XFlowsheet.Interfaces.ObjType.Splitter
+                Case Global.XFlowsheet.Interfaces.ObjType.Splitter
                     obj = New UnitOperations.UnitOperations.Splitter()
                     With DirectCast(obj, UnitOperations.UnitOperations.Splitter)
                         Dim splitfact As List(Of Double) = sobj.Parameters.Where(Function(p) p.Name = "SplitFactors").First().Value
                         .Ratios.AddRange(splitfact)
                         .OperationMode = UnitOperations.UnitOperations.Splitter.OpMode.SplitRatios
                     End With
-                Case XFlowsheet.Interfaces.ObjType.SeparatorVessel
+                Case Global.XFlowsheet.Interfaces.ObjType.SeparatorVessel
                     obj = New Vessel()
-                Case XFlowsheet.Interfaces.ObjType.Compressor
+                Case Global.XFlowsheet.Interfaces.ObjType.Compressor
                     obj = New Compressor()
                     With DirectCast(obj, Compressor)
                         .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureIncrease").First().Value
                         .AdiabaticEfficiency = sobj.Parameters.Where(Function(p) p.Name = "AdiabaticEfficiency").First().Value
                         .CalcMode = Compressor.CalculationMode.Delta_P
                     End With
-                Case XFlowsheet.Interfaces.ObjType.Expander
+                Case Global.XFlowsheet.Interfaces.ObjType.Expander
                     obj = New Expander()
                     With DirectCast(obj, Compressor)
                         .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureDecrease").First().Value
@@ -4128,6 +4127,7 @@ Label_00CC:
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
             {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", "*.dwxmz"),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", "*.dwxml"),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Interchangeable PFD Simulation File", "*.pfdx"),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
 
             If handler IsNot Nothing Then
@@ -4154,6 +4154,8 @@ Label_00CC:
                                                                                                   If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
+                ElseIf handler.GetExtension().ToLower() = ".pfdx" Then
+                    SaveJSON(handler, Me.ActiveMdiChild)
                 Else
                     Me.bgSaveFile.RunWorkerAsync()
                 End If

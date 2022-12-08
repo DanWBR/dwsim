@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM.XFlowsheet")>
+<Assembly: AssemblyTitle("XFlowsheet")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("DWSIM.XFlowsheet")>
+<Assembly: AssemblyProduct("XFlowsheet")>
 <Assembly: AssemblyCopyright("Copyright © 2022 Daniel Wagner O. de Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
