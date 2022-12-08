@@ -2,6 +2,9 @@
 
 Namespace Implementation
 
+    ''' <summary>
+    ''' List of parameters that must be set as a minimum for exchangeability between different process simulators
+    ''' </summary>
     Public Class DefaultParameterDefinitions
 
         Public Shared Function GetDefaultParameterNames(otype As ObjType) As List(Of String)
@@ -20,7 +23,6 @@ Namespace Implementation
                     plist.AddRange({"PressureDecrease"})
                 Case ObjType.Pump
                     plist.AddRange({"PressureIncrease", "Efficiency"})
-                Case ObjType.SeparatorVessel
                 Case ObjType.HeatExchanger
                     plist.AddRange({"ExchangeArea", "OverallHTC", "HeatDuty", "Efficiency"})
                 Case ObjType.Heater
@@ -250,101 +252,101 @@ Namespace Implementation
 
             Implements IUnitsOfMeasure
 
-            Public Property accel As String = "" Implements IUnitsOfMeasure.Accel
-
-            Public Property area As String = "" Implements IUnitsOfMeasure.Area
-
-            Public Property cakeresistance As String = "" Implements IUnitsOfMeasure.Cakeresistance
-
-            Public Property kinematic_viscosity As String = "" Implements IUnitsOfMeasure.Kinematic_viscosity
-
-            Public Property compressibility As String = "" Implements IUnitsOfMeasure.Compressibility
-
-            Public Property deltaP As String = "" Implements IUnitsOfMeasure.DeltaP
-
-            Public Property deltaT As String = "" Implements IUnitsOfMeasure.DeltaT
-
-            Public Property density As String = "" Implements IUnitsOfMeasure.Density
-
-            Public Property diameter As String = "" Implements IUnitsOfMeasure.Diameter
-
-            Public Property distance As String = "" Implements IUnitsOfMeasure.Distance
-
-            Public Property massenthalpy As String = "" Implements IUnitsOfMeasure.MassEnthalpy
-
-            Public Property massentropy As String = "" Implements IUnitsOfMeasure.MassEntropy
-
-            Public Property force As String = "" Implements IUnitsOfMeasure.Force
-
-            Public Property foulingfactor As String = "" Implements IUnitsOfMeasure.Foulingfactor
-
-            Public Property head As String = "" Implements IUnitsOfMeasure.Head
-
-            Public Property heat_transf_coeff As String = "" Implements IUnitsOfMeasure.Heat_transf_coeff
-
-            Public Property heatCapacity As String = "" Implements IUnitsOfMeasure.HeatCapacity
-
-            Public Property heatflow As String = "" Implements IUnitsOfMeasure.Heatflow
-
-            Public Property jouleThomsonCoefficient As String = "" Implements IUnitsOfMeasure.JouleThomsonCoefficient
-
-            Public Property mass As String = "" Implements IUnitsOfMeasure.Mass
-
-            Public Property mass_conc As String = "" Implements IUnitsOfMeasure.Mass_conc
-
-            Public Property massflow As String = "" Implements IUnitsOfMeasure.MassFlow
-
-            Public Property mediumresistance As String = "" Implements IUnitsOfMeasure.Mediumresistance
-
-            Public Property molar_conc As String = "" Implements IUnitsOfMeasure.Molar_conc
-
-            Public Property molar_enthalpy As String = "" Implements IUnitsOfMeasure.Molar_enthalpy
-
-            Public Property molar_entropy As String = "" Implements IUnitsOfMeasure.Molar_entropy
-
-            Public Property molar_volume As String = "" Implements IUnitsOfMeasure.Molar_volume
-
-            Public Property molarflow As String = "" Implements IUnitsOfMeasure.Molarflow
-
-            Public Property molecularWeight As String = "" Implements IUnitsOfMeasure.MolecularWeight
-
-            Public Property Name As String = "" Implements IUnitsOfMeasure.Name
-
-            Public Property pressure As String = "" Implements IUnitsOfMeasure.Pressure
-
-            Public Property reac_rate As String = "" Implements IUnitsOfMeasure.Reac_rate
-
-            Public Property reac_rate_heterog As String = "" Implements IUnitsOfMeasure.Reac_rate_heterog
-
-            Public Property spec_vol As String = "" Implements IUnitsOfMeasure.Spec_vol
-
-            Public Property speedOfSound As String = "" Implements IUnitsOfMeasure.SpeedOfSound
-
-            Public Property surfaceTension As String = "" Implements IUnitsOfMeasure.SurfaceTension
-
-            Public Property temperature As String = "" Implements IUnitsOfMeasure.Temperature
-
-            Public Property thermalConductivity As String = "" Implements IUnitsOfMeasure.ThermalConductivity
-
-            Public Property thickness As String = "" Implements IUnitsOfMeasure.Thickness
-
-            Public Property time As String = "" Implements IUnitsOfMeasure.Time
-
-            Public Property velocity As String = "" Implements IUnitsOfMeasure.Velocity
-
-            Public Property dynamicviscosity As String = "" Implements IUnitsOfMeasure.Dynamic_Viscosity
-
-            Public Property volume As String = "" Implements IUnitsOfMeasure.Volume
-
-            Public Property volumetricFlow As String = "" Implements IUnitsOfMeasure.VolumetricFlow
-
-            Public Property diffusivity As String = "" Implements IUnitsOfMeasure.Diffusivity
-
-            Public Property conductance As String = "[kg/s]/[Pa^0.5]" Implements IUnitsOfMeasure.Conductance
-
             Public Property ID As String = "" Implements IUnitsOfMeasure.ID
 
             Public Property Description As String = "" Implements IUnitsOfMeasure.Description
+
+            Public Property Name As String = "" Implements IUnitsOfMeasure.Name
+
+            Public Property Accel As String = "" Implements IUnitsOfMeasure.Accel
+
+            Public Property Area As String = "" Implements IUnitsOfMeasure.Area
+
+            Public Property Cakeresistance As String = "" Implements IUnitsOfMeasure.Cakeresistance
+
+            Public Property KinematicViscosity As String = "" Implements IUnitsOfMeasure.Kinematicviscosity
+
+            Public Property Compressibility As String = "" Implements IUnitsOfMeasure.Compressibility
+
+            Public Property DeltaP As String = "" Implements IUnitsOfMeasure.DeltaP
+
+            Public Property DeltaT As String = "" Implements IUnitsOfMeasure.DeltaT
+
+            Public Property Density As String = "" Implements IUnitsOfMeasure.Density
+
+            Public Property Diameter As String = "" Implements IUnitsOfMeasure.Diameter
+
+            Public Property Distance As String = "" Implements IUnitsOfMeasure.Distance
+
+            Public Property MassEnthalpy As String = "" Implements IUnitsOfMeasure.MassEnthalpy
+
+            Public Property MassEntropy As String = "" Implements IUnitsOfMeasure.MassEntropy
+
+            Public Property Force As String = "" Implements IUnitsOfMeasure.Force
+
+            Public Property Foulingfactor As String = "" Implements IUnitsOfMeasure.Foulingfactor
+
+            Public Property Head As String = "" Implements IUnitsOfMeasure.Head
+
+            Public Property HeatTransfCoeff As String = "" Implements IUnitsOfMeasure.Heattransfcoeff
+
+            Public Property HeatCapacity As String = "" Implements IUnitsOfMeasure.HeatCapacity
+
+            Public Property HeatFlow As String = "" Implements IUnitsOfMeasure.Heatflow
+
+            Public Property JouleThomsonCoefficient As String = "" Implements IUnitsOfMeasure.JouleThomsonCoefficient
+
+            Public Property Mass As String = "" Implements IUnitsOfMeasure.Mass
+
+            Public Property MassConc As String = "" Implements IUnitsOfMeasure.Massconc
+
+            Public Property MassFlow As String = "" Implements IUnitsOfMeasure.MassFlow
+
+            Public Property MediumResistance As String = "" Implements IUnitsOfMeasure.Mediumresistance
+
+            Public Property MolarConc As String = "" Implements IUnitsOfMeasure.Molarconc
+
+            Public Property MolarEnthalpy As String = "" Implements IUnitsOfMeasure.Molarenthalpy
+
+            Public Property MolarEntropy As String = "" Implements IUnitsOfMeasure.Molarentropy
+
+            Public Property MolarVolume As String = "" Implements IUnitsOfMeasure.Molarvolume
+
+            Public Property MolarFlow As String = "" Implements IUnitsOfMeasure.Molarflow
+
+            Public Property MolecularWeight As String = "" Implements IUnitsOfMeasure.MolecularWeight
+
+            Public Property Pressure As String = "" Implements IUnitsOfMeasure.Pressure
+
+            Public Property ReacRate As String = "" Implements IUnitsOfMeasure.Reacrate
+
+            Public Property ReacRateHeterog As String = "" Implements IUnitsOfMeasure.Reacrateheterog
+
+            Public Property SpecificVolume As String = "" Implements IUnitsOfMeasure.Specvol
+
+            Public Property SpeedOfSound As String = "" Implements IUnitsOfMeasure.SpeedOfSound
+
+            Public Property SurfaceTension As String = "" Implements IUnitsOfMeasure.SurfaceTension
+
+            Public Property Temperature As String = "" Implements IUnitsOfMeasure.Temperature
+
+            Public Property ThermalConductivity As String = "" Implements IUnitsOfMeasure.ThermalConductivity
+
+            Public Property Thickness As String = "" Implements IUnitsOfMeasure.Thickness
+
+            Public Property Time As String = "" Implements IUnitsOfMeasure.Time
+
+            Public Property Velocity As String = "" Implements IUnitsOfMeasure.Velocity
+
+            Public Property DynamicViscosity As String = "" Implements IUnitsOfMeasure.DynamicViscosity
+
+            Public Property Volume As String = "" Implements IUnitsOfMeasure.Volume
+
+            Public Property VolumetricFlow As String = "" Implements IUnitsOfMeasure.VolumetricFlow
+
+            Public Property Diffusivity As String = "" Implements IUnitsOfMeasure.Diffusivity
+
+            Public Property Conductance As String = "[kg/s]/[Pa^0.5]" Implements IUnitsOfMeasure.Conductance
 
             Public Function GetUnitSet(measureID As UnitOfMeasure) As List(Of String) Implements IUnitsOfMeasure.GetUnitSet
 
@@ -384,7 +386,7 @@ Namespace Implementation
                     Case UnitOfMeasure.DynamicViscosity
                         units.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
                     Case UnitOfMeasure.DeltaP
-                        units.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kgf/cm2_g", "kPa", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
+                        units.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kgf/cm2g", "kPa", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
                     Case UnitOfMeasure.DeltaT
                         units.AddRange(New String() {"C.", "K.", "F.", "R."})
                     Case UnitOfMeasure.Distance
@@ -547,87 +549,87 @@ Namespace Implementation
 
                 Select Case measureID
                     Case UnitOfMeasure.Temperature
-                        Return temperature
+                        Return Temperature
                     Case UnitOfMeasure.Pressure
-                        Return pressure
+                        Return Pressure
                     Case UnitOfMeasure.MassFlow
-                        Return massflow
+                        Return MassFlow
                     Case UnitOfMeasure.MolarFlow
-                        Return molarflow
+                        Return MolarFlow
                     Case UnitOfMeasure.VolumetricFlow
-                        Return volumetricFlow
+                        Return VolumetricFlow
                     Case UnitOfMeasure.MassEnthalpy
-                        Return massenthalpy
+                        Return MassEnthalpy
                     Case UnitOfMeasure.MassEntropy
-                        Return massentropy
+                        Return MassEntropy
                     Case UnitOfMeasure.MolecularWeight
-                        Return molecularWeight
+                        Return MolecularWeight
                     Case UnitOfMeasure.SurfaceTension
-                        Return surfaceTension
+                        Return SurfaceTension
                     Case UnitOfMeasure.Density
-                        Return density
+                        Return Density
                     Case UnitOfMeasure.HeatCapacity
-                        Return heatCapacity
+                        Return HeatCapacity
                     Case UnitOfMeasure.ThermalConductivity
-                        Return thermalConductivity
+                        Return ThermalConductivity
                     Case UnitOfMeasure.KinematicViscosity, UnitOfMeasure.Diffusivity
-                        Return kinematic_viscosity
+                        Return KinematicViscosity
                     Case UnitOfMeasure.DynamicViscosity
-                        Return dynamicviscosity
+                        Return DynamicViscosity
                     Case UnitOfMeasure.DeltaP
-                        Return deltaP
+                        Return DeltaP
                     Case UnitOfMeasure.DeltaT
-                        Return deltaT
+                        Return DeltaT
                     Case UnitOfMeasure.Distance
-                        Return distance
+                        Return Distance
                     Case UnitOfMeasure.HeatFlow
-                        Return heatflow
+                        Return HeatFlow
                     Case UnitOfMeasure.Time
-                        Return time
+                        Return Time
                     Case UnitOfMeasure.Volume
-                        Return volume
+                        Return Volume
                     Case UnitOfMeasure.MolarVolume
-                        Return molar_volume
+                        Return MolarVolume
                     Case UnitOfMeasure.Area
-                        Return area
+                        Return Area
                     Case UnitOfMeasure.Diameter
-                        Return diameter
+                        Return Diameter
                     Case UnitOfMeasure.Force
-                        Return force
+                        Return Force
                     Case UnitOfMeasure.HeatTransfCoeff
-                        Return heat_transf_coeff
+                        Return HeatTransfCoeff
                     Case UnitOfMeasure.Accel
-                        Return accel
+                        Return Accel
                     Case UnitOfMeasure.SpecificVol
-                        Return spec_vol
+                        Return SpecificVolume
                     Case UnitOfMeasure.MolarConc
-                        Return molar_conc
+                        Return MolarConc
                     Case UnitOfMeasure.MassConc
-                        Return mass_conc
+                        Return MassConc
                     Case UnitOfMeasure.ReacRate
-                        Return reac_rate
+                        Return ReacRate
                     Case UnitOfMeasure.MolarEnthalpy
-                        Return molar_enthalpy
+                        Return MolarEnthalpy
                     Case UnitOfMeasure.MolarEntropy
-                        Return molar_entropy
+                        Return MolarEntropy
                     Case UnitOfMeasure.Velocity, UnitOfMeasure.SpeedOfSound
-                        Return velocity
+                        Return Velocity
                     Case UnitOfMeasure.Foulingfactor
-                        Return foulingfactor
+                        Return Foulingfactor
                     Case UnitOfMeasure.CakeResistance
-                        Return cakeresistance
+                        Return Cakeresistance
                     Case UnitOfMeasure.Mediumresistance
-                        Return mediumresistance
+                        Return MediumResistance
                     Case UnitOfMeasure.Mass
-                        Return mass
+                        Return Mass
                     Case UnitOfMeasure.JouleThomsonCoefficient
-                        Return jouleThomsonCoefficient
+                        Return JouleThomsonCoefficient
                     Case UnitOfMeasure.Compressibility
-                        Return compressibility
+                        Return Compressibility
                     Case UnitOfMeasure.ReacRateHeterog
-                        Return reac_rate_heterog
+                        Return ReacRateHeterog
                     Case UnitOfMeasure.Conductance
-                        Return conductance
+                        Return Conductance
                     Case Else
                         Return ""
                 End Select
@@ -646,49 +648,49 @@ Namespace Implementation
 
                     .ID = "SI"
                     .Name = "SI"
-                    .jouleThomsonCoefficient = "K/Pa"
-                    .diffusivity = "m2/s"
-                    .accel = "m2/s"
-                    .area = "m2"
-                    .conductance = "[kg/s]/[Pa^0.5]"
-                    .diameter = "mm"
-                    .distance = "m"
-                    .force = "N"
-                    .heat_transf_coeff = "W/[m2.K]"
-                    .mass_conc = "kg/m3"
-                    .molar_conc = "mol/m3"
-                    .molar_volume = "m3/kmol"
-                    .reac_rate = "mol/[m3.s]"
-                    .reac_rate_heterog = "mol/[kg.s]"
-                    .spec_vol = "m3/kg"
-                    .time = "s"
-                    .volume = "m3"
-                    .mass = "kg"
-                    .thickness = "mm"
-                    .molar_enthalpy = "kJ/kmol"
-                    .molar_entropy = "kJ/[kmol.K]"
-                    .velocity = "m/s"
-                    .foulingfactor = "K.m2/W"
+                    .JouleThomsonCoefficient = "K/Pa"
+                    .Diffusivity = "m2/s"
+                    .Accel = "m2/s"
+                    .Area = "m2"
+                    .Conductance = "[kg/s]/[Pa^0.5]"
+                    .Diameter = "mm"
+                    .Distance = "m"
+                    .Force = "N"
+                    .HeatTransfCoeff = "W/[m2.K]"
+                    .MassConc = "kg/m3"
+                    .MolarConc = "mol/m3"
+                    .MolarVolume = "m3/kmol"
+                    .ReacRate = "mol/[m3.s]"
+                    .ReacRateHeterog = "mol/[kg.s]"
+                    .SpecificVolume = "m3/kg"
+                    .Time = "s"
+                    .Volume = "m3"
+                    .Mass = "kg"
+                    .Thickness = "mm"
+                    .MolarEnthalpy = "kJ/kmol"
+                    .MolarEntropy = "kJ/[kmol.K]"
+                    .Velocity = "m/s"
+                    .Foulingfactor = "K.m2/W"
 
-                    .cakeresistance = "m/kg"
-                    .mediumresistance = "m-1"
+                    .Cakeresistance = "m/kg"
+                    .MediumResistance = "m-1"
 
-                    .compressibility = "1/Pa"
-                    .density = "kg/m3"
-                    .massenthalpy = "kJ/kg"
-                    .massentropy = "kJ/[kg.K]"
-                    .heatCapacity = "kJ/[kg.K]"
-                    .jouleThomsonCoefficient = "K/Pa"
-                    .massflow = "kg/s"
-                    .molarflow = "mol/s"
-                    .molecularWeight = "kg/kmol"
-                    .pressure = "Pa"
-                    .speedOfSound = "m/s"
-                    .temperature = "K"
-                    .thermalConductivity = "W/[m.K]"
-                    .dynamicviscosity = "Pa.s"
-                    .volumetricFlow = "m3/s"
-                    .kinematic_viscosity = "m2/s"
+                    .Compressibility = "1/Pa"
+                    .Density = "kg/m3"
+                    .MassEnthalpy = "kJ/kg"
+                    .MassEntropy = "kJ/[kg.K]"
+                    .HeatCapacity = "kJ/[kg.K]"
+                    .JouleThomsonCoefficient = "K/Pa"
+                    .MassFlow = "kg/s"
+                    .MolarFlow = "mol/s"
+                    .MolecularWeight = "kg/kmol"
+                    .Pressure = "Pa"
+                    .SpeedOfSound = "m/s"
+                    .Temperature = "K"
+                    .ThermalConductivity = "W/[m.K]"
+                    .DynamicViscosity = "Pa.s"
+                    .VolumetricFlow = "m3/s"
+                    .KinematicViscosity = "m2/s"
                     .surfaceTension = "N/m"
                     .surfaceTension = "N/m"
                     .heatflow = "kW"

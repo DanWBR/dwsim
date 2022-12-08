@@ -140,7 +140,7 @@
 
         Property Mass As String
 
-        Property Reac_rate_heterog As String
+        Property Reacrateheterog As String
 
         Property Area As String
 
@@ -152,25 +152,25 @@
 
         Property Volume As String
 
-        Property Molar_volume As String
+        Property Molarvolume As String
 
         Property Diameter As String
 
         Property Thickness As String
 
-        Property Molar_conc As String
+        Property Molarconc As String
 
-        Property Mass_conc As String
+        Property Massconc As String
 
-        Property Heat_transf_coeff As String
+        Property Heattransfcoeff As String
 
         Property Force As String
 
         Property Accel As String
 
-        Property Spec_vol As String
+        Property Specvol As String
 
-        Property Reac_rate As String
+        Property Reacrate As String
 
         Property Velocity As String
 
@@ -180,9 +180,9 @@
 
         Property Mediumresistance As String
 
-        Property Molar_enthalpy As String
+        Property Molarenthalpy As String
 
-        Property Molar_entropy As String
+        Property Molarentropy As String
 
         Property Compressibility As String
 
@@ -210,9 +210,9 @@
 
         Property ThermalConductivity As String
 
-        Property Dynamic_Viscosity As String
+        Property DynamicViscosity As String
 
-        Property Kinematic_viscosity As String
+        Property Kinematicviscosity As String
 
         Property VolumetricFlow As String
 

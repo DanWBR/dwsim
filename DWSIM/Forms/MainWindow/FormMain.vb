@@ -3854,7 +3854,7 @@ Label_00CC:
 
     Sub SaveJSON(handler As IVirtualFile, ByVal form As FormFlowsheet)
 
-        File.WriteAllText(Path.ChangeExtension(handler.FullPath, "json"), XFlowsheet.Exporter.Export(form))
+        File.WriteAllText(handler.FullPath, XFlowsheet.Exporter.Export(form))
 
     End Sub
 
@@ -3941,8 +3941,8 @@ Label_00CC:
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("All Supported Files", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.json", "*.dwcsd", "*.dwcsd2", "*.dwrsd", "*.dwrsd2", "*.dwruf"}),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.json"}),
+            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("All Supported Files", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.pfdx", "*.dwcsd", "*.dwcsd2", "*.dwrsd", "*.dwrsd2", "*.dwruf"}),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.pfdx"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compound Creator Study", New String() {"*.dwcsd", "*.dwcsd2"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Data Regression Study", New String() {"*.dwrsd", "*.dwrsd2"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("UNIFAC Parameter Regression Study", "*.dwruf")})
@@ -3970,7 +3970,7 @@ Label_00CC:
         Application.DoEvents()
 
         Select Case handler.GetExtension().ToLower()
-            Case ".json"
+            Case ".pfdx"
                 Me.LoadJSON(handler, Sub(x)
                                          Me.Invoke(Sub()
                                                        floading.ProgressBar1.Value = x
@@ -4404,7 +4404,7 @@ Label_00CC:
                         End If
                     ElseIf Path.GetExtension(filename).ToLower = ".dwxmz" Then
                         SaveXMLZIP(handler, form2)
-                    ElseIf Path.GetExtension(filename).ToLower = ".json" Then
+                    ElseIf Path.GetExtension(filename).ToLower = ".pfdx" Then
                         SaveJSON(handler, form2)
                     End If
                 Else ' If file doesn't exist, open file picker
@@ -4421,7 +4421,7 @@ Label_00CC:
                     Else
                         handler = filePickerForm.ShowSaveDialog(
                                   New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-                                    {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", ".json"})
+                                    {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", ".pfdx"})
                                   })
                     End If
                     If handler IsNot Nothing Then
@@ -4434,7 +4434,7 @@ Label_00CC:
                             SaveMobileXML(handler, Me.ActiveMdiChild)
                         ElseIf handler.GetExtension().ToLower() = ".dwxmz" Then
                             SaveXMLZIP(handler, Me.ActiveMdiChild)
-                        ElseIf handler.GetExtension().ToLower() = ".json" Then
+                        ElseIf handler.GetExtension().ToLower() = ".pfdx" Then
                             SaveJSON(handler, Me.ActiveMdiChild)
                         End If
                     End If
