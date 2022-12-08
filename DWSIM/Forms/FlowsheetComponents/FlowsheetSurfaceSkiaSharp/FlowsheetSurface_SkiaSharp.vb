@@ -63,6 +63,16 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Public Sub HandleKeyDown(e As KeyEventArgs)
+
+        If My.Settings.FlowsheetRenderer = 0 Then
+            DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetDesignSurface_KeyDown(Me, e)
+        Else
+            DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetDesignSurface_KeyDown(Me, e)
+        End If
+
+    End Sub
+
     Private Sub frmSurface_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Loaded = False
@@ -4084,6 +4094,12 @@ Public Class FlowsheetSurface_SkiaSharp
             SplitContainerHorizontal.Panel2Collapsed = False
         End If
         FControl.Invalidate()
+
+    End Sub
+
+    Private Sub FlowsheetSurface_SkiaSharp_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+
+        HandleKeyDown(e)
 
     End Sub
 
