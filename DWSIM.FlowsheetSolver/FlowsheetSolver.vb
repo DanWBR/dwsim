@@ -120,6 +120,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             myUnitOp.GraphicObject.Calculated = False
                             myUnitOp.Calculated = True
 
+                            If myUnitOp.IsSpecAttached = True Then
+                                If myUnitOp.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                                    fbag.SimulationObjects(myUnitOp.AttachedSpecId).Solve()
+                                End If
+                            End If
+
                             If fbag.DynamicMode Then
                                 myUnitOp.RunDynamicModel()
                             Else
@@ -133,7 +139,13 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             myUnitOp.Calculated = False
                             fgui.ShowMessage(gobj.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                             myUnitOp.GraphicObject.Calculated = True
-                            If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myUnitOp.AttachedSpecId).Solve()
+
+                            If myUnitOp.IsSpecAttached = True Then
+                                If myUnitOp.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                                    fbag.SimulationObjects(myUnitOp.AttachedSpecId).Solve()
+                                End If
+                            End If
+
                             gobj = myUnitOp.GraphicObject
                             gobj.Calculated = True
                         Else
@@ -150,6 +162,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     myObj.GraphicObject.Calculated = False
                     myObj.Calculated = False
 
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
+
                     If fbag.DynamicMode Then
                         myObj.RunDynamicModel()
                     Else
@@ -163,10 +181,23 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     myObj.Calculated = True
                     fgui.ShowMessage(objArgs.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                     myObj.GraphicObject.Calculated = True
-                    If myObj.IsSpecAttached = True And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
+
                 Else
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     Dim gobj As IGraphicObject = myObj.GraphicObject
+
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
+
                     If Not OnlyMe Then
                         For Each cp As IConnectionPoint In gobj.OutputConnectors
                             If cp.IsAttached And cp.Type = ConType.ConOut Then
@@ -185,7 +216,13 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             End If
                         Next
                     End If
-                    If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
+
                 End If
         End Select
 
@@ -216,11 +253,19 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Dim myObj = fbag.SimulationObjects(objArgs.Name)
                     RaiseEvent MaterialStreamCalculationStarted(fobj, New System.EventArgs(), myObj)
                     CalculateMaterialStreamAsync(fobj, myObj, ct)
-                    If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
                     RaiseEvent MaterialStreamCalculationFinished(fobj, New System.EventArgs(), myObj)
                 Case ObjectType.EnergyStream
                     Dim myObj = fbag.SimulationObjects(objArgs.Name)
-                    If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
                     myObj.Calculated = True
                 Case Else
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
