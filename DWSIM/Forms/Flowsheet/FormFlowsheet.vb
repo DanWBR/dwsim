@@ -1504,13 +1504,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click
-        RaiseEvent ToolOpened("Simulation Settings", New EventArgs())
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
+        ToolStripButton1_Click(sender, e)
     End Sub
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
