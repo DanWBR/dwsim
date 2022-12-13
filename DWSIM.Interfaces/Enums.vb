@@ -546,6 +546,15 @@ Namespace Enums
 
     End Enum
 
+    Public Enum SpecCalcMode
+
+        AfterSourceObject = 0
+        BeforeTargetObject = 1
+        BeforeFlowsheet = 2
+        AfterFlowsheet = 3
+
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects
@@ -709,7 +718,6 @@ Namespace Enums.GraphicObjects
         CompoundMolarFraction = 8
 
     End Enum
-
 
 End Namespace
 

@@ -274,6 +274,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property CustomCalculationOrder As List(Of String) = New List(Of String) Implements IFlowsheetOptions.CustomCalculationOrder
 
+        Public Property SpecCalculationMode As SpecCalcMode = SpecCalcMode.AfterSourceObject Implements IFlowsheetOptions.SpecCalculationMode
+
     End Class
 
 End Namespace

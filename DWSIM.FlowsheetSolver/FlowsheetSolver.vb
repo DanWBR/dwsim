@@ -1,5 +1,5 @@
 '    DWSIM Flowsheet Solver & Auxiliary Functions
-'    Copyright 2008-2015 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -16,12 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Collections.Generic
-Imports System.ComponentModel
 Imports System.IO
 Imports System.Threading
-Imports System.Threading.Tasks
-Imports System.Linq
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
@@ -77,6 +73,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 gobj.Calculated = False
                                 myUnitOp.Calculated = False
 
+                                If myUnitOp.IsSpecAttached = True Then
+                                    If myUnitOp.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                                        fbag.SimulationObjects(myUnitOp.AttachedSpecId).Solve()
+                                    End If
+                                End If
+
                                 If fbag.DynamicMode Then
                                     myUnitOp.RunDynamicModel()
                                 Else
@@ -89,7 +91,13 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                 myUnitOp.Calculated = True
                                 gobj.Status = Status.Calculated
-                                If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myUnitOp.AttachedSpecId).Solve()
+
+                                If myUnitOp.IsSpecAttached = True Then
+                                    If myUnitOp.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                                        fbag.SimulationObjects(myUnitOp.AttachedSpecId).Solve()
+                                    End If
+                                End If
+
                                 fgui.ShowMessage(gobj.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                             Else
                                 myUnitOp.DeCalculate()
@@ -217,6 +225,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Case Else
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     RaiseEvent UnitOpCalculationStarted(fobj, New System.EventArgs(), objArgs)
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
                     If fbag.DynamicMode Then
                         myObj.RunDynamicModel()
                     Else
@@ -226,7 +239,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         If utility.AutoUpdate Then utility.Update()
                     Next
                     myObj.Calculated = True
-                    If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                    If myObj.IsSpecAttached = True Then
+                        If myObj.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                            fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
+                        End If
+                    End If
                     RaiseEvent UnitOpCalculationFinished(fobj, New System.EventArgs(), objArgs)
             End Select
             fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, objArgs.Name)
@@ -254,10 +271,22 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         ms.GraphicObject.Calculated = False
 
+        If ms.IsSpecAttached = True Then
+            If ms.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                fbag.SimulationObjects(ms.AttachedSpecId).Solve()
+            End If
+        End If
+
         If fbag.DynamicMode Then
             ms.RunDynamicModel()
         Else
             ms.Solve()
+        End If
+
+        If ms.IsSpecAttached = True Then
+            If ms.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                fbag.SimulationObjects(ms.AttachedSpecId).Solve()
+            End If
         End If
 
         fgui.ShowMessage(ms.GraphicObject.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
@@ -301,6 +330,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
+        If ms.IsSpecAttached = True Then
+            If ms.SpecVarType = SpecVarType.Target And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeTargetObject Then
+                fbag.SimulationObjects(ms.AttachedSpecId).Solve()
+            End If
+        End If
+
         If fbag.DynamicMode Then
             ms.RunDynamicModel()
         Else
@@ -311,7 +346,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         RaiseEvent MaterialStreamCalculationFinished(fobj, New System.EventArgs(), ms)
 
-        If ms.IsSpecAttached = True And ms.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(ms.AttachedSpecId).Solve()
+        If ms.IsSpecAttached = True Then
+            If ms.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
+                fbag.SimulationObjects(ms.AttachedSpecId).Solve()
+            End If
+        End If
 
         ms.LastUpdated = Date.Now
         ms.Calculated = True
@@ -947,31 +986,31 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         Dim speclist = (From s In fbag.SimulationObjects.Values Select s Where s.GraphicObject.ObjectType = ObjectType.OT_Spec).ToArray
 
-        If speclist.Count > 0 And Not fbag.DynamicMode Then
-            Dim newstack As New List(Of String)
-            For Each o In objstack
-                newstack.Add(o)
-                obj = fbag.SimulationObjects(o)
-                'if the object has a spec attached to it, set the destination object to be calculated after it.
-                If obj.IsSpecAttached And obj.SpecVarType = SpecVarType.Source Then
-                    'newstack.Add(fbag.SimulationObjects(obj.AttachedSpecId).TargetObjectData.m_ID)
-                End If
-            Next
-            Dim newfilteredlist As New Dictionary(Of Integer, List(Of String))
-            For Each kvp In filteredlist
-                Dim newlist As New List(Of String)
-                For Each o In kvp.Value
-                    newlist.Add(o)
-                    obj = fbag.SimulationObjects(o)
-                    'if the object has a spec attached to it, set the destination object to be calculated after it.
-                    If obj.IsSpecAttached And obj.SpecVarType = SpecVarType.Source Then
-                        'newlist.Add(fbag.SimulationObjects(obj.AttachedSpecId).TargetO.m_ID)
-                    End If
-                Next
-                newfilteredlist.Add(kvp.Key, newlist)
-            Next
-            Return New Object() {newstack, lists, newfilteredlist}
-        End If
+        'If speclist.Count > 0 And Not fbag.DynamicMode Then
+        '    Dim newstack As New List(Of String)
+        '    For Each o In objstack
+        '        newstack.Add(o)
+        '        obj = fbag.SimulationObjects(o)
+        '        'if the object has a spec attached to it, set the destination object to be calculated after it.
+        '        If obj.IsSpecAttached And obj.SpecVarType = SpecVarType.Source Then
+        '            'newstack.Add(fbag.SimulationObjects(obj.AttachedSpecId).TargetObjectData.m_ID)
+        '        End If
+        '    Next
+        '    Dim newfilteredlist As New Dictionary(Of Integer, List(Of String))
+        '    For Each kvp In filteredlist
+        '        Dim newlist As New List(Of String)
+        '        For Each o In kvp.Value
+        '            newlist.Add(o)
+        '            obj = fbag.SimulationObjects(o)
+        '            'if the object has a spec attached to it, set the destination object to be calculated after it.
+        '            If obj.IsSpecAttached And obj.SpecVarType = SpecVarType.Source Then
+        '                'newlist.Add(fbag.SimulationObjects(obj.AttachedSpecId).TargetO.m_ID)
+        '            End If
+        '        Next
+        '        newfilteredlist.Add(kvp.Key, newlist)
+        '    Next
+        '    Return New Object() {newstack, lists, newfilteredlist}
+        'End If
 
         Return New Object() {objstack, lists, filteredlist}
 
@@ -1223,6 +1262,16 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                       fgui.ClearLog()
 
+                                                      'calc specs
+
+                                                      If fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.BeforeFlowsheet Then
+                                                          For Each obj In fbag.SimulationObjects.Values
+                                                              If obj.GraphicObject.ObjectType = ObjectType.OT_Spec Then
+                                                                  obj.Solve()
+                                                              End If
+                                                          Next
+                                                      End If
+
                                                       'add the objects to the calculation queue.
 
                                                       For Each o As String In objstack
@@ -1267,7 +1316,31 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                           End With
                                                       Next
 
-                                                      If mode <= 2 Then
+                                                      filteredlist2.Clear()
+
+                                                      For Each li In filteredlist
+                                                          Dim objcalclist As New List(Of CalculationArgs)
+                                                          For Each o In li.Value
+                                                              obj = fbag.SimulationObjects(o)
+                                                              objcalclist.Add(New CalculationArgs() With {.Sender = "FlowsheetSolver", .Name = obj.Name, .ObjectType = obj.GraphicObject.ObjectType, .Tag = obj.GraphicObject.Tag})
+                                                          Next
+                                                          filteredlist2.Add(li.Key, objcalclist)
+                                                      Next
+
+                                                      exlist = ProcessCalculationQueue(fobj, True, True, mode, filteredlist2,
+                                                                             Settings.TaskCancellationTokenSource.Token, Adjusting)
+
+                                                      'calc specs
+
+                                                      If fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterFlowsheet Then
+
+                                                          For Each obj In fbag.SimulationObjects.Values
+                                                              If obj.GraphicObject.ObjectType = ObjectType.OT_Spec Then
+                                                                  obj.Solve()
+                                                              End If
+                                                          Next
+
+                                                          'calc again
 
                                                           filteredlist2.Clear()
 

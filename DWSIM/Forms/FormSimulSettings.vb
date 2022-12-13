@@ -297,6 +297,8 @@ Public Class FormSimulSettings
 
         chkShowExtraPropertiesEditor.Checked = CurrentFlowsheet.Options.DisplayUserDefinedPropertiesEditor
 
+        cbSpecCalcMode.SelectedIndex = CurrentFlowsheet.Options.SpecCalculationMode
+
         Select Case CurrentFlowsheet.Options.ForceStreamPhase
             Case ForcedPhase.None
                 cbForcePhase.SelectedIndex = 0
@@ -1861,6 +1863,10 @@ Public Class FormSimulSettings
                 MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
+    End Sub
+
+    Private Sub cbSpecCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpecCalcMode.SelectedIndexChanged
+        CurrentFlowsheet.Options.SpecCalculationMode = cbSpecCalcMode.SelectedIndex
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

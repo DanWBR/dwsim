@@ -39,6 +39,13 @@ namespace DWSIM.UI.Desktop.Editors
 
             var avunits = flowsheet.AvailableSystemsOfUnits.Select((x) => x.Name).ToList();
 
+            s.CreateAndAddLabelRow(container, "Specification Blocks");
+
+            s.CreateAndAddDropDownRow(container, "Calculation Mode", new List<string> { "After Source Object", "Before Target Object", "Before Flowsheet", "After Flowsheet" },
+                (int)flowsheet.FlowsheetOptions.SpecCalculationMode, (dd, e) => {
+                    flowsheet.FlowsheetOptions.SpecCalculationMode = (DWSIM.Interfaces.Enums.SpecCalcMode)dd.SelectedIndex;
+                });
+
             s.CreateAndAddLabelRow(container, "System of Units");
 
             Button btnEdit = null;
