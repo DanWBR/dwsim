@@ -63,6 +63,12 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Function GetEditingForm() As System.Windows.Forms.Form
+
+            Return New FormConfigPRSV2() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+
+        End Function
+
         Public Overrides Sub ConfigParameters()
 
         End Sub

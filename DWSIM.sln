@@ -2620,7 +2620,6 @@ Global
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|Any CPU.ActiveCfg = Release|Any CPU
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|Any CPU.Build.0 = Release|Any CPU
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|wine32.ActiveCfg = Release|Any CPU
-		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|wine32.Build.0 = Release|Any CPU
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|x64.ActiveCfg = Release|Any CPU
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|x86.ActiveCfg = Release|Any CPU
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696}.Release WinMac|x86.Build.0 = Release|Any CPU
@@ -2655,7 +2654,6 @@ Global
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|Any CPU.ActiveCfg = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|Any CPU.Build.0 = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|wine32.ActiveCfg = Release|Any CPU
-		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|wine32.Build.0 = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|x64.ActiveCfg = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|x86.ActiveCfg = Release|Any CPU
 		{C0261CF7-B22C-4E27-9373-B0878F3FC298}.Release WinMac|x86.Build.0 = Release|Any CPU
