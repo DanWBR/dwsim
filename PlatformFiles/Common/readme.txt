@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.3.3
+Version 8.3.4
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.3.4
+
+- Implemented Feature Request #395: Specification block not updated/solved
+- Fixed bug #377: Simulation settings exception
+- Fixed bug #407: Binary interaction parameters input not working
+- Fixed bug #410: Incompressible fluid PH flash with any PR EOS does not work
 
 Version 8.3.3
 
