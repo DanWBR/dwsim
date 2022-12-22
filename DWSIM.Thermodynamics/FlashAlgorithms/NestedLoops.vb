@@ -240,13 +240,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If g > 0 Then Vmin = V Else Vmax = V
 
 
-            V = Brent.BrentOpt3(0.0, 1.0, 10, 0.001, 100,
+            V = Brent.BrentOpt3(Vmin, Vmax, 10, 0.001, 100,
                            Function(Vb)
                                Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
                            End Function)
 
-
-            'V = Vmin + (Vmax - Vmin) / 2
+            If V > 1.0 Or V < 0.0 Then V = Vmin + (Vmax - Vmin) / 2
 
             L = 1 - V
 
