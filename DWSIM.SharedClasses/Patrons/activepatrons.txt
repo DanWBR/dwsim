@@ -7,6 +7,7 @@ Andras Nady
 Anders Andreasen
 Andrew Dickson
 Bednarz Marc
+Bernhard Seyfang
 Bruce Rising
 Bryan Evans
 Camilo Gantiva
@@ -65,6 +66,7 @@ Ronald J. Dunbar
 Ronald Visness
 Rupert Easter
 Ryszard Sadowski
+Shailesh Paranjpe
 Shankar Ananth
 Shijin Roh
 Steven Sandoval
