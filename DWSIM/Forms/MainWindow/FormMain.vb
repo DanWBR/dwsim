@@ -1022,6 +1022,8 @@ Public Class FormMain
 
         End If
 
+        AnalyticsProvider?.SetMainForm(Me)
+
         AnalyticsProvider?.Initialize()
 
         FormMain.TranslateFormFunction?.Invoke(Me)
