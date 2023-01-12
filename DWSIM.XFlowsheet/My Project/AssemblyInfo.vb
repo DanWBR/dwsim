@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("XFlowsheet")>
-<Assembly: AssemblyCopyright("Copyright © 2022 Daniel Wagner O. de Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2023 Daniel Wagner O. de Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

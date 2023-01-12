@@ -1,5 +1,5 @@
 '    DWSIM Nested Loops Flash Algorithms for Simplified (Immiscible) VLLE
-'    Copyright 2013-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2013-2023 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -15,15 +15,6 @@
 '
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
-
-Imports System.Math
-
-Imports DWSIM.MathOps.MathEx
-Imports DWSIM.MathOps.MathEx.Common
-
-Imports System.Threading.Tasks
-
-Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -174,6 +165,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vx1 = Vx.Clone
             Vx2 = PP.RET_NullVector
             Vx2(wid) = 1.0#
+
+            Vy(wid) = PP.AUX_PVAPi(wid, T) / P
+
+            V += Vy(wid)
+            xl2 -= Vy(wid)
+
+            Vy = Vy.MultiplyConstY(1.0 + Vy(wid))
 
             d2 = Date.Now
 

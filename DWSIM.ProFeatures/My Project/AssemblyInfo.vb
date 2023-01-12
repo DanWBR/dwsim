@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.ProFeatures")>
-<Assembly: AssemblyCopyright("Copyright © 2022 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2023 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
