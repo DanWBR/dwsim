@@ -13,7 +13,6 @@ Bryan Evans
 Camilo Gantiva
 Carlos G. C. Reetz
 Casey Houston
-Chris Verbert
 Christian Hornhofer
 Christian Jordan
 Christian Pedersen

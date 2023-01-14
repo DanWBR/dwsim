@@ -143,7 +143,7 @@ Public Class FormMain
         If GlobalSettings.Settings.OldUI Then
 
 #If LINUX = False Then
-            If Not IsPro Then Icon = My.Resources.DWSIM_icon_64
+            If Not IsPro Then Icon = My.Resources.DWSIM_Icon_41
 #End If
 
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
