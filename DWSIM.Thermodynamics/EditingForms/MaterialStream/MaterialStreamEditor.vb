@@ -401,7 +401,8 @@ Public Class MaterialStreamEditor
 
             End If
 
-            If Not .FlowSheet.DynamicMode Then
+            If Not .FlowSheet.DynamicMode And Not IsAccumulationStream Then
+
                 If .GraphicObject.InputConnectors(0).IsAttached Then
                     If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
                         UpdateEditableStatus()
@@ -423,7 +424,9 @@ Public Class MaterialStreamEditor
                     tbVolFlow.Enabled = True
                     TabPageInputComposition.Enabled = True
                 End If
+
             Else
+
                 tbTemp.Enabled = True
                 tbPressure.Enabled = True
                 tbEnth.Enabled = True
