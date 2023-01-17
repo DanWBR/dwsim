@@ -1138,6 +1138,15 @@ Public Class FormFlowsheet
                                Me.FormLog.Grid1.Rows.Clear()
                            End Sub)
 
+
+            Dim data As New Dictionary(Of String, String)
+            data.Add("Compounds", Me.SelectedCompounds.Count)
+            data.Add("Objects", Me.SimulationObjects.Count)
+            data.Add("Reactions", Me.Reactions.Count)
+            data.Add("Property Packages", Me.PropertyPackages.Count)
+
+            FormMain.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
+
             RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
             Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
