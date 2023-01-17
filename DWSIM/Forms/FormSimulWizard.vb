@@ -21,6 +21,7 @@ Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports System.ComponentModel
 
 Public Class FormSimulWizard
 
@@ -215,6 +216,10 @@ Public Class FormSimulWizard
                 Dim tmpcomp As New BaseClasses.ConstantProperties
                 tmpcomp = Me.CurrentFlowsheet.Options.NotSelectedComponents(compid)
 
+                If tmpcomp.OriginalDB = "ChemSep" Then
+                    FormMain.AnalyticsProvider?.RegisterEvent("Compound Added", tmpcomp.Name, Nothing)
+                End If
+
                 Me.CurrentFlowsheet.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(tmpcomp.Name)
                 Dim ms As Streams.MaterialStream
@@ -235,6 +240,11 @@ Public Class FormSimulWizard
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.CurrentFlowsheet.Options.SelectedComponents(nm)
+
+        If tmpcomp.OriginalDB = "ChemSep" Then
+            FormMain.AnalyticsProvider?.RegisterEvent("Compound Removed", tmpcomp.Name, Nothing)
+        End If
+
         Me.CurrentFlowsheet.Options.SelectedComponents.Remove(tmpcomp.Name)
         Me.CurrentFlowsheet.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Dim ms As Streams.MaterialStream
@@ -260,6 +270,9 @@ Public Class FormSimulWizard
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
             pp.Flowsheet = CurrentFlowsheet
         End With
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
         CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
         Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
@@ -272,6 +285,8 @@ Public Class FormSimulWizard
 
         CurrentFlowsheet.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
         Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
+
+        FormMain.AnalyticsProvider?.RegisterEvent("System of Units Selected", su.Name, Nothing)
 
         With Me.DataGridView1.Rows
             .Clear()
@@ -1495,4 +1510,13 @@ Public Class FormSimulWizard
     Private Sub FormSimulWizard_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
+
+    Private Sub FormSimulWizard_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Number of Compounds", CurrentFlowsheet.SelectedCompounds.Count, Nothing)
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Number of Property Packages", CurrentFlowsheet.PropertyPackages.Count, Nothing)
+
+    End Sub
+
 End Class

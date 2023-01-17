@@ -98,6 +98,8 @@ Public Class FormSimulSettings
 
     Private Sub FormStSim_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
+        FormMain.AnalyticsProvider?.RegisterEvent("Number of Reactions", CurrentFlowsheet.Reactions.Count, Nothing)
+
         If Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 And Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
