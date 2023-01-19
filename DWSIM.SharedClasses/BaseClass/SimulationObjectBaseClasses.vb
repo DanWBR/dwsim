@@ -22,6 +22,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Dynamic
 Imports System.Reflection
+Imports DWSIM.ExtensionMethods
 
 Namespace UnitOperations
 
@@ -719,9 +720,15 @@ Namespace UnitOperations
         Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
 
             Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            Dim epucol = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
 
             If epcol.ContainsKey(prop) Then
-                Return epcol(prop)
+                If epucol.ContainsKey(prop) Then
+                    Dim utype = epucol(prop)
+                    Return Convert.ToDouble(epcol(prop)).ConvertFromSI(su.GetCurrentUnits(utype))
+                Else
+                    Return epcol(prop)
+                End If
             End If
 
             For Each item In AttachedUtilities

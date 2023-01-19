@@ -157,7 +157,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
-            Dim xl1, xl2, Vx1(n), Vx2(n) As Double
+            Dim xl1, xl2, Vx1(n), Vx2(n), nHCy, nWy, nWx As Double
 
             V = V * (1 - nwm)
             xl1 = L * (1 - nwm)
@@ -168,10 +168,27 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Vy(wid) = PP.AUX_PVAPi(wid, T) / P
 
-            V += Vy(wid)
-            xl2 -= Vy(wid)
+            nHCy = V
 
-            Vy = Vy.MultiplyConstY(1.0 + Vy(wid))
+            nWy = nHCy * Vy(wid) / (1 - Vy(wid))
+
+            nWx = nwm - nWy
+
+            If nWx < 0.0 Then
+                nWy = nwm
+                nWx = 0.0
+            End If
+
+            xl2 -= nWy
+
+            V = nHCy + nWy
+            xl2 = nWx
+
+            For i = 0 To n
+                If i <> wid Then
+                    Vy(i) = Vy(i) * nHCy / V
+                End If
+            Next
 
             d2 = Date.Now
 
