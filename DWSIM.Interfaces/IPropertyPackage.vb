@@ -106,5 +106,7 @@ End Interface
     Property BubbleUseCustomParameters As Boolean
     Property DewUseCustomParameters As Boolean
 
+    Property ImmiscibleWater As Boolean
+
 
 End Interface

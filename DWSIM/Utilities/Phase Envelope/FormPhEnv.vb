@@ -192,7 +192,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 Settings.gpu.EnableMultithreading()
             End If
 
-            Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.tbQuality.Value, Me.chkQualityLine.Checked, Me.chkStabCurve.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.chkHydVapOnly.Checked})
+            Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.tbQuality.Value, Me.chkQualityLine.Checked, Me.chkStabCurve.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.chkHydVapOnly.Checked, chkImmiscibleWater.Checked})
 
             Me.bw = Me.BackgroundWorker1
 
@@ -1104,6 +1104,10 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     End Sub
 
+    Private Sub chkImmiscibleWater_CheckedChanged(sender As Object, e As EventArgs) Handles chkImmiscibleWater.CheckedChanged
+        EnvelopeSettings.ImmiscibleWater = chkImmiscibleWater.Checked
+    End Sub
+
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
         Me.mat = AttachedTo
@@ -1381,6 +1385,34 @@ exec:       With Me.GraphControl.GraphPane.Legend
             data(19, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PHsII(j))
             j = j + 1
         Next
+
+        j = 0
+        For Each d As Double In TOWF
+            data(20, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In POWF
+            data(21, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In HOWF
+            data(22, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In SOWF
+            data(23, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In VOWF
+            data(24, j) = d
+            j = j + 1
+        Next
+
+
         j = 0
         For Each d As Double In TVB1
             data(25, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)

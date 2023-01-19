@@ -3446,11 +3446,18 @@ redirect2:                  IObj?.SetCurrent()
             Dim Vz(n) As Double
             Dim comp As Interfaces.ICompound
 
+            Dim Vn = RET_VNAMES().ToList()
+
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                Vz(i) += comp.MoleFraction.GetValueOrDefault
+                Vz(i) = comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
+
+            If peoptions.ImmiscibleWater And Vn.Contains("Water") Then
+                Vz(Vn.IndexOf("Water")) = 0.0
+                Vz = Vz.NormalizeY()
+            End If
 
             Dim j, k, l As Integer
             i = 0
@@ -3498,7 +3505,7 @@ redirect2:                  IObj?.SetCurrent()
                     .BubbleCurveDeltaP = 101325
                     .BubbleCurveDeltaT = 1.0
                     .BubbleCurveInitialPressure = 0.0#
-                    .BubbleCurveInitialTemperature = RET_VTF.Min
+                    .BubbleCurveInitialTemperature = RET_VTB.Min * 0.3
                     .BubbleCurveInitialFlash = "TVF"
                     .BubbleCurveMaximumPoints = 500
                     .BubbleCurveMaximumTemperature = RET_VTC.Max * 1.2
@@ -3607,6 +3614,29 @@ redirect2:                  IObj?.SetCurrent()
                 j = j + 1
             Loop Until j = n + 1
 
+            If peoptions.ImmiscibleWater And Vn.Contains("Water") Then
+
+                Dim Twx As Double = 273.15
+                Dim Pwx As Double = 0.0
+                Dim st As New Auxiliary.IAPWS_IF97
+
+                For i = 0 To 10000
+
+                    TOWF.Add(Twx)
+                    Pwx = AUX_PVAPi("Water", Twx)
+                    POWF.Add(Pwx)
+                    HOWF.Add(st.enthalpySatVapTW(Twx))
+                    SOWF.Add(st.entropySatVapTW(Twx))
+                    VOWF.Add(1 / st.densSatVapTW(Twx) * Me.AUX_MMM(Phase.Mixture))
+
+                    Twx += 5.0
+
+                    If Pwx > 217.7 * 101325 Then Exit For
+
+                Next
+
+            End If
+
             i = 0
             P = options.BubbleCurveInitialPressure
             T = options.BubbleCurveInitialTemperature
@@ -3615,22 +3645,22 @@ redirect2:                  IObj?.SetCurrent()
                 If i < 2 Then
 
                     If options.BubbleCurveInitialFlash = "TVF" Then
-                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, options.BubbleCurveInitialPressure, Me)
+                        tmp2 = Me.FlashBase.Flash_TV(Vz, T, 0, options.BubbleCurveInitialPressure, Me)
                         TVB.Add(T)
                         PB.Add(tmp2(4))
                         P = PB(PB.Count - 1)
-                        HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                        SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                        VB.Add(1 / Me.AUX_LIQDENS(T, Me.RET_VMOL(Phase.Mixture), P, P) * Me.AUX_MMM(Phase.Mixture))
+                        HB.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Liquid))
+                        SB.Add(Me.DW_CalcEntropy(Vz, T, P, State.Liquid))
+                        VB.Add(1 / Me.AUX_LIQDENS(T, Vz, P, P) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
                     Else
-                        tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, options.BubbleCurveInitialTemperature, Me)
+                        tmp2 = Me.FlashBase.Flash_PV(Vz, P, 0, options.BubbleCurveInitialTemperature, Me)
                         TVB.Add(tmp2(4))
                         PB.Add(P)
                         T = TVB(TVB.Count - 1)
-                        HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                        SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                        VB.Add(1 / Me.AUX_LIQDENS(T, Me.RET_VMOL(Phase.Mixture), P, P) * Me.AUX_MMM(Phase.Mixture))
+                        HB.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Liquid))
+                        SB.Add(Me.DW_CalcEntropy(Vz, T, P, State.Liquid))
+                        VB.Add(1 / Me.AUX_LIQDENS(T, Vz, P, P) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
                     End If
 
@@ -3680,26 +3710,26 @@ redirect2:                  IObj?.SetCurrent()
 
                     If beta < 20 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, PB(PB.Count - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_TV(Vz, T, 0, PB(PB.Count - 1), Me, True, KI)
                             TVB.Add(T)
                             PB.Add(tmp2(4))
                             P = PB(PB.Count - 1)
-                            HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                            SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                            VB.Add(1 / Me.AUX_LIQDENS(T, Me.RET_VMOL(Phase.Mixture), P, P) * Me.AUX_MMM(Phase.Mixture))
+                            HB.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Liquid))
+                            SB.Add(Me.DW_CalcEntropy(Vz, T, P, State.Liquid))
+                            VB.Add(1 / Me.AUX_LIQDENS(T, Vz, P, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
                             beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
                         End Try
                     Else
                         Try
-                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, TVB(TVB.Count - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_PV(Vz, P, 0, TVB(TVB.Count - 1), Me, True, KI)
                             TVB.Add(tmp2(4))
                             PB.Add(P)
                             T = TVB(TVB.Count - 1)
-                            HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                            SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
-                            VB.Add(1 / Me.AUX_LIQDENS(T, Me.RET_VMOL(Phase.Mixture), P, P) * Me.AUX_MMM(Phase.Mixture))
+                            HB.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Liquid))
+                            SB.Add(Me.DW_CalcEntropy(Vz, T, P, State.Liquid))
+                            VB.Add(1 / Me.AUX_LIQDENS(T, Vz, P, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
                             beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
@@ -3798,22 +3828,22 @@ redirect2:                  IObj?.SetCurrent()
                 If i < 2 Then
 
                     If options.DewCurveInitialFlash = "TVF" Then
-                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, options.DewCurveInitialPressure, Me)
+                        tmp2 = Me.FlashBase.Flash_TV(Vz, T, 1, options.DewCurveInitialPressure, Me)
                         TVD.Add(T)
                         PO.Add(tmp2(4))
                         P = PO(PO.Count - 1)
-                        HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
-                        SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
+                        HO.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Vapor))
+                        SO.Add(Me.DW_CalcEntropy(Vz, T, P, State.Vapor))
                         VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
                         T = T + options.DewCurveDeltaT
                     Else
-                        tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, options.DewCurveInitialTemperature, Me)
+                        tmp2 = Me.FlashBase.Flash_PV(Vz, P, 1, options.DewCurveInitialTemperature, Me)
                         TVD.Add(tmp2(4))
                         PO.Add(P)
                         T = TVD(TVD.Count - 1)
-                        HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
-                        SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
+                        HO.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Vapor))
+                        SO.Add(Me.DW_CalcEntropy(Vz, T, P, State.Vapor))
                         VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
                         P = P + options.DewCurveDeltaP
@@ -3823,24 +3853,24 @@ redirect2:                  IObj?.SetCurrent()
 
                     If beta < 0.0 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, False, KI)
+                            tmp2 = Me.FlashBase.Flash_TV(Vz, T, 1, PO(PO.Count - 1), Me, False, KI)
                             TVD.Add(T)
                             PO.Add(tmp2(4))
                             P = PO(PO.Count - 1)
-                            HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
-                            SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
+                            HO.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Vapor))
+                            SO.Add(Me.DW_CalcEntropy(Vz, T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
                         Catch ex As Exception
                         End Try
                     Else
                         Try
-                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, TVD(TVD.Count - 1), Me, False, KI)
+                            tmp2 = Me.FlashBase.Flash_PV(Vz, P, 1, TVD(TVD.Count - 1), Me, False, KI)
                             TVD.Add(tmp2(4))
                             PO.Add(P)
                             T = TVD(TVD.Count - 1)
-                            HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
-                            SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
+                            HO.Add(Me.DW_CalcEnthalpy(Vz, T, P, State.Vapor))
+                            SO.Add(Me.DW_CalcEntropy(Vz, T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
                         Catch ex As Exception
@@ -3974,8 +4004,8 @@ redirect2:                  IObj?.SetCurrent()
                     TVB.Add(Tc)
                     PB.Add(Pc)
                     VB.Add(Vc)
-                    HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
-                    SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
+                    HB.Add(Me.DW_CalcEnthalpy(Vz, Tc, Pc, State.Vapor))
+                    SB.Add(Me.DW_CalcEntropy(Vz, Tc, Pc, State.Vapor))
 
                     TVB.Add(0.0#)
                     PB.Add(0.0#)
@@ -3998,8 +4028,8 @@ redirect2:                  IObj?.SetCurrent()
                     TVD.Add(Tc)
                     PO.Add(Pc)
                     VO.Add(Vc)
-                    HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
-                    SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
+                    HO.Add(Me.DW_CalcEnthalpy(Vz, Tc, Pc, State.Vapor))
+                    SO.Add(Me.DW_CalcEntropy(Vz, Tc, Pc, State.Vapor))
 
                     TVD.Add(0.0#)
                     PO.Add(0.0#)
@@ -4108,7 +4138,7 @@ redirect2:                  IObj?.SetCurrent()
                 Do
                     If i < 2 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, options.QualityValue, 0, Me, False, KI)
+                            tmp2 = Me.FlashBase.Flash_PV(Vz, P, options.QualityValue, 0, Me, False, KI)
                             TQ.Add(tmp2(4))
                             PQ.Add(P)
                             T = TQ(TQ.Count - 1)
@@ -4124,7 +4154,7 @@ redirect2:                  IObj?.SetCurrent()
                     Else
                         If beta < 2 Then
                             Try
-                                tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, options.QualityValue, PQ(PQ.Count - 1), Me, True, KI)
+                                tmp2 = Me.FlashBase.Flash_TV(Vz, T, options.QualityValue, PQ(PQ.Count - 1), Me, True, KI)
                                 TQ.Add(T)
                                 PQ.Add(tmp2(4))
                                 P = PQ(PQ.Count - 1)
@@ -4148,7 +4178,7 @@ redirect2:                  IObj?.SetCurrent()
                             End Try
                         Else
                             Try
-                                tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, options.QualityValue, TQ(TQ.Count - 1), Me, True, KI)
+                                tmp2 = Me.FlashBase.Flash_PV(Vz, P, options.QualityValue, TQ(TQ.Count - 1), Me, True, KI)
                                 TQ.Add(tmp2(4))
                                 PQ.Add(P)
                                 T = TQ(TQ.Count - 1)
