@@ -301,7 +301,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px6.ToArray(GetType(Double)), py6.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px6.ToArray(GetType(Double)), py6.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -405,7 +405,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -461,7 +461,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -521,7 +521,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -628,7 +628,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px6.ToArray(GetType(Double)), py6.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px6.ToArray(GetType(Double)), py6.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -731,7 +731,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -789,7 +789,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -851,7 +851,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
@@ -909,7 +909,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -970,7 +970,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
@@ -1024,7 +1024,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = True
                             .Line.IsVisible = True
@@ -1081,7 +1081,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.IsVisible = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalhoWF"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("Free Water Dew Curve"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.DarkBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.DarkBlue
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
@@ -1274,11 +1274,11 @@ exec:       With Me.GraphControl.GraphPane.Legend
             .Add("c18", "PHsI (" & su.pressure & ")")
             .Add("c19", "THsII (" & su.temperature & ")")
             .Add("c20", "PHsII (" & su.pressure & ")")
-            .Add("c21", "TDWF (" & su.temperature & ")")
-            .Add("c22", "PDWF (" & su.pressure & ")")
-            .Add("c23", "HDWF (" & su.enthalpy & ")")
-            .Add("c24", "SDWF (" & su.entropy & ")")
-            .Add("c25", "VDWF (m3/mol)")
+            .Add("c21", "TDFW (" & su.temperature & ")")
+            .Add("c22", "PDFW (" & su.pressure & ")")
+            .Add("c23", "HDFW (" & su.enthalpy & ")")
+            .Add("c24", "SDFW (" & su.entropy & ")")
+            .Add("c25", "VDFW (m3/mol)")
             .Add("c26", "Tb1 (" & su.temperature & ")")
             .Add("c27", "Pb1 (" & su.pressure & ")")
             .Add("c28", "Hb1 (" & su.enthalpy & ")")
