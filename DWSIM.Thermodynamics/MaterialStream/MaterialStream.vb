@@ -8730,6 +8730,7 @@ Namespace Streams.Editors
         Public Property CompoundsPropertySelectedTab As Integer = 0
         Public Property PhasePropsSelectedTab As Integer = 0
         Public Property MainSelectedTab0 As Integer = 0
+        Public Property ShowAsPercentage As Integer = 0
 
     End Class
 

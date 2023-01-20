@@ -121,11 +121,8 @@
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>419, 69</value>
   </data>
-  <data name="tbFracSpec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 220</value>
-  </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
+    <value>Label15</value>
   </data>
   <data name="&gt;&gt;tbFracSpec.Name" xml:space="preserve">
     <value>tbFracSpec</value>
@@ -172,7 +169,7 @@
     <value>TabCompPropLiq2</value>
   </data>
   <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -186,14 +183,14 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn17.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn17</value>
   </data>
-  <data name="TabPageInputPane.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="&gt;&gt;TabCompPropLiq1.Parent" xml:space="preserve">
     <value>TabCompoundPhaseProps</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label11.ToolTip" xml:space="preserve">
     <value />
@@ -213,6 +210,9 @@
   <data name="chkActive.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tbMassFlow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -221,9 +221,6 @@
   </data>
   <data name="TabControlMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
-  </data>
-  <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="gridPropertiesLiq2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -246,8 +243,8 @@
   <data name="cbUnitsP.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
   </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 459</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
     <value>Valor</value>
@@ -261,8 +258,8 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>Entropia Específica</value>
   </data>
-  <data name="UtilitiesCtxMenu.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;lblCompPropUnits.Parent" xml:space="preserve">
+    <value>TabPage2</value>
   </data>
   <data name="tbMoleFlow.ToolTip1" xml:space="preserve">
     <value />
@@ -312,8 +309,8 @@
   <data name="&gt;&gt;btnEqualizeInput.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblAmountTotal.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>TabPage4</value>
   </data>
   <data name="Label13.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -321,8 +318,8 @@
   <data name="&gt;&gt;btnNormalizeInput.Parent" xml:space="preserve">
     <value>TabPageInputComposition</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 13</value>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 223</value>
   </data>
   <data name="&gt;&gt;tabCompVapor.Parent" xml:space="preserve">
     <value>TabPhaseComps</value>
@@ -332,9 +329,6 @@
   </data>
   <data name="TabPageResultsPane.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 465</value>
-  </data>
-  <data name="btnNormalizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;cbSpec.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
@@ -351,9 +345,6 @@
   <data name="tabCompMix.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tbVolFlow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -363,8 +354,8 @@
   <data name="TabCompPropLiq1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPage2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbSpec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 11</value>
   </data>
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -375,11 +366,14 @@
   <data name="tbMoleFlow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="cbSpec.Items4" xml:space="preserve">
-    <value>Temperatura e Fração de Vapor (TVF)</value>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>17</value>
   </data>
-  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 21</value>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Propriedades</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 52</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 171</value>
@@ -390,8 +384,8 @@
   <data name="gridPropertiesLiq1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="lblStatus.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="cbUnitsQ.Items" xml:space="preserve">
+    <value>Mínima das Entradas</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -399,14 +393,11 @@
   <data name="TabPageAnnotations.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;tabCompLiqMix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;gridPropertiesVapor.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;TabPageInputComposition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn7.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn7</value>
   </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -450,9 +441,6 @@
   <data name="&gt;&gt;gridPropertiesVapor.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblSolvent.Name" xml:space="preserve">
-    <value>lblSolvent</value>
-  </data>
   <data name="lblCompPropUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -474,6 +462,9 @@
   <data name="TCPTSMI.Text" xml:space="preserve">
     <value>Ponto Crítico Verdadeiro</value>
   </data>
+  <data name="&gt;&gt;gridCompLiq1.Parent" xml:space="preserve">
+    <value>tabCompLiq1</value>
+  </data>
   <data name="Label8.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -492,8 +483,8 @@
   <data name="lblInputAmount.Text" xml:space="preserve">
     <value>Total:</value>
   </data>
-  <data name="cbUnitsP.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnEqualizeInput.Parent" xml:space="preserve">
+    <value>TabPageInputComposition</value>
   </data>
   <data name="gridCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 255</value>
@@ -555,9 +546,6 @@
   <data name="tabCompLiqMix.Text" xml:space="preserve">
     <value>Fase Líquida (Mistura)</value>
   </data>
-  <data name="cbUnitsH.Items" xml:space="preserve">
-    <value>Mínima das Entradas</value>
-  </data>
   <data name="TabControlMain0.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -576,8 +564,8 @@
   <data name="&gt;&gt;cbUnitsW.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;cbUnitsT.Parent" xml:space="preserve">
-    <value>TabPageInputConditions</value>
+  <data name="tabPropsLiqMix.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;gridCompPropSolid.Parent" xml:space="preserve">
     <value>TabCompPropSolid</value>
@@ -597,9 +585,6 @@
   <data name="cbCompBasis.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPageResultsComp.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
   <data name="&gt;&gt;Label22.Name" xml:space="preserve">
     <value>Label22</value>
   </data>
@@ -612,6 +597,9 @@
   <data name="btnEqualizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="&gt;&gt;cbUnitsT.Parent" xml:space="preserve">
+    <value>TabPageInputConditions</value>
+  </data>
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>Valor</value>
   </data>
@@ -621,8 +609,8 @@
   <data name="tabPropsLiq2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 223</value>
+  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="tabCompLiq1.ToolTip1" xml:space="preserve">
     <value />
@@ -651,17 +639,23 @@
   <data name="lblConnectedTo.Text" xml:space="preserve">
     <value>Objeto</value>
   </data>
-  <data name="&gt;&gt;TCPTSMI.Name" xml:space="preserve">
-    <value>TCPTSMI</value>
+  <data name="cbUnitsH.Items" xml:space="preserve">
+    <value>Mínima das Entradas</value>
   </data>
   <data name="&gt;&gt;gridCompLiq2.Name" xml:space="preserve">
     <value>gridCompLiq2</value>
+  </data>
+  <data name="gridCompSolid.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="gridCompPropLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="&gt;&gt;TabCompPropVapor.Name" xml:space="preserve">
     <value>TabCompPropVapor</value>
+  </data>
+  <data name="cbCompBasis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 21</value>
   </data>
   <data name="&gt;&gt;gridPropertiesSolid.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -702,9 +696,6 @@
   <data name="tabPropsLiqMix.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 407</value>
   </data>
-  <data name="&gt;&gt;btnNormalizeInput.Name" xml:space="preserve">
-    <value>btnNormalizeInput</value>
-  </data>
   <data name="lblCompPropUnits.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -719,9 +710,6 @@
   </data>
   <data name="cbUnitsS.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>459, 701</value>
   </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -753,6 +741,9 @@
   <data name="&gt;&gt;TabPageInputConditions.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Label21.Name" xml:space="preserve">
+    <value>Label21</value>
+  </data>
   <data name="&gt;&gt;gridCompPropLiq1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -777,11 +768,11 @@
   <data name="TabControlMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;gridCompLiq1.Parent" xml:space="preserve">
-    <value>tabCompLiq1</value>
+  <data name="TabPageResultsComp.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="&gt;&gt;btnEqualizeInput.Parent" xml:space="preserve">
-    <value>TabPageInputComposition</value>
+  <data name="lblSolvent.Text" xml:space="preserve">
+    <value>Solvente</value>
   </data>
   <data name="gridPropertiesLiqMix.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -840,8 +831,8 @@
   <data name="&gt;&gt;gridCompVapor.Name" xml:space="preserve">
     <value>gridCompVapor</value>
   </data>
-  <data name="tabPropsVapor.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnDisconnectI.Name" xml:space="preserve">
+    <value>btnDisconnectI</value>
   </data>
   <data name="&gt;&gt;btnDisconnectI.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -879,8 +870,8 @@
   <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cbForcePhase.Items2" xml:space="preserve">
-    <value>Forçar Fase Líquida</value>
+  <data name="gridCompLiq2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbForcePhase.Items3" xml:space="preserve">
     <value>Forçar Fase Sólida</value>
@@ -906,9 +897,6 @@
   <data name="Label14.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>448, 132</value>
   </data>
@@ -923,9 +911,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn7.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnDisconnectO.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPageInputConditions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -949,16 +934,13 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 30</value>
+    <value>176, 26</value>
   </data>
   <data name="&gt;&gt;BinaryTSMI.Name" xml:space="preserve">
     <value>BinaryTSMI</value>
   </data>
   <data name="&gt;&gt;cbUnitsQ.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="TabCompoundPhaseProps.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="lblCompPropUnits.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -969,8 +951,11 @@
   <data name="btnEraseInput.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;TabPageAnnotations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BinaryTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbMassFlow.Name" xml:space="preserve">
     <value>tbMassFlow</value>
@@ -979,7 +964,7 @@
     <value>5</value>
   </data>
   <data name="gridCompMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 328</value>
+    <value>402, 307</value>
   </data>
   <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
     <value>251, 21</value>
@@ -1008,8 +993,8 @@
   <data name="cbCalculatedAmountsBasis.Items3" xml:space="preserve">
     <value>Vazões Mássicas</value>
   </data>
-  <data name="cbCalculatedAmountsBasis.Items2" xml:space="preserve">
-    <value>Vazões Molares</value>
+  <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
+    <value>Unidade</value>
   </data>
   <data name="gridCompPropSolid.ToolTip" xml:space="preserve">
     <value />
@@ -1040,6 +1025,9 @@
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="cbOutlet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 21</value>
   </data>
   <data name="&gt;&gt;tabCompLiqMix.Parent" xml:space="preserve">
     <value>TabPhaseComps</value>
@@ -1089,14 +1077,14 @@
   <data name="gridInputComposition.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;TabPhaseProps.Name" xml:space="preserve">
+    <value>TabPhaseProps</value>
   </data>
   <data name="gridPropertiesLiq2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 328</value>
+  <data name="&gt;&gt;btnDisconnectO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbSpec.Items1" xml:space="preserve">
     <value>Pressão e Entalpia (PH)</value>
@@ -1104,11 +1092,11 @@
   <data name="cbSpec.Items2" xml:space="preserve">
     <value>Pressão e Entropia (PS)</value>
   </data>
-  <data name="cbSpec.Items3" xml:space="preserve">
-    <value>Pressão e Fração de Vapor (PVF)</value>
+  <data name="&gt;&gt;chkShowAsPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblStatus.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbSpec.Items4" xml:space="preserve">
+    <value>Temperatura e Fração de Vapor (TVF)</value>
   </data>
   <data name="tabPropsLiqMix.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1121,9 +1109,6 @@
   </data>
   <data name="&gt;&gt;gridCompMixture.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="TabPageResultsProps.Text" xml:space="preserve">
-    <value>Propriedades das Fases</value>
   </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1203,14 +1188,17 @@
   <data name="btnNormalizeInput.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbFloatingTableCompoundAmountBasis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 26</value>
+  <data name="TabPhaseComps.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cbDynSpec.Items" xml:space="preserve">
+    <value>Pressure</value>
   </data>
   <data name="&gt;&gt;cbSolvent.Parent" xml:space="preserve">
     <value>TabPageInputComposition</value>
   </data>
-  <data name="&gt;&gt;cbCalculatedAmountsBasis.Parent" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="&gt;&gt;TabCompPropSolid.Name" xml:space="preserve">
+    <value>TabCompPropSolid</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Vazão Molar</value>
@@ -1218,8 +1206,8 @@
   <data name="TabPageInputComposition.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn22.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn22</value>
+  <data name="TabCompPropSolid.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 296</value>
@@ -1232,6 +1220,9 @@
   </data>
   <data name="Label9.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;TabPageAnnotations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPageInputPane.ToolTip1" xml:space="preserve">
     <value />
@@ -1263,17 +1254,17 @@
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
-  <data name="&gt;&gt;tbEnth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label20.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="rtbAnnotations.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="btnDisconnectI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>400, 23</value>
-  </data>
   <data name="TabPageFloatingTables.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="gridCompMixture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;TabPageResultsProps.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1310,6 +1301,9 @@
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.Parent" xml:space="preserve">
     <value>SplitContainer1</value>
+  </data>
+  <data name="Label3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn23.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1386,11 +1380,14 @@
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
     <value>414, 26</value>
   </data>
-  <data name="&gt;&gt;tabCompLiqMix.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn22.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn22</value>
   </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="cbUnitsW.Items1" xml:space="preserve">
+    <value>Média das Entradas</value>
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
@@ -1413,8 +1410,8 @@
   <data name="cbUnitsT.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="gridCompLiq2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn12.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn12</value>
@@ -1440,6 +1437,9 @@
   <data name="lblInputAmount.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
+  <data name="btnEraseInput.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;cbUnitsM.Name" xml:space="preserve">
     <value>cbUnitsM</value>
   </data>
@@ -1452,20 +1452,20 @@
   <data name="TabPageResultsProps.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbOutlet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 49</value>
-  </data>
   <data name="HydratesTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 22</value>
   </data>
-  <data name="cbUnitsW.Items1" xml:space="preserve">
-    <value>Média das Entradas</value>
+  <data name="&gt;&gt;rtbAnnotations.Type" xml:space="preserve">
+    <value>Extended.Windows.Forms.RichTextBoxExtended, RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cbUnitsM.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbUnitsW.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
+  </data>
+  <data name="SplitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="Label10.ToolTip1" xml:space="preserve">
     <value />
@@ -1478,6 +1478,9 @@
   </data>
   <data name="TabCompPropVapor.Text" xml:space="preserve">
     <value>Fase Vapor</value>
+  </data>
+  <data name="cbForcePhase.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
   <data name="lblAmountTotal.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -1524,8 +1527,8 @@
   <data name="DataGridViewTextBoxColumn33.HeaderText" xml:space="preserve">
     <value>Quantidade</value>
   </data>
-  <data name="&gt;&gt;btnUtils.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;cbCompoundPhaseProperties.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label12.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1630,7 +1633,7 @@
     <value>Frações Molares</value>
   </data>
   <data name="AddUtilityTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 26</value>
+    <value>175, 22</value>
   </data>
   <data name="cbUnitsT.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1704,6 +1707,9 @@
   <data name="TabControlMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 459</value>
   </data>
+  <data name="cbCalculatedAmountsBasis.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="TabPhaseProps.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -1731,6 +1737,9 @@
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="&gt;&gt;gridPropertiesVapor.Name" xml:space="preserve">
+    <value>gridPropertiesVapor</value>
+  </data>
   <data name="Label17.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1740,8 +1749,8 @@
   <data name="tbMoleFlow.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Unidade</value>
   </data>
   <data name="cbSolvent.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -1761,8 +1770,8 @@
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
   </data>
-  <data name="&gt;&gt;Label21.Name" xml:space="preserve">
-    <value>Label21</value>
+  <data name="gridPropertiesMixture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;gridCompPropLiq1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1790,6 +1799,9 @@
   </data>
   <data name="TabPageInputConditions.Text" xml:space="preserve">
     <value>Condições de Operação</value>
+  </data>
+  <data name="&gt;&gt;gridPropertiesLiq1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1854,17 +1866,20 @@
   <data name="Label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label18.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;gridCompMixture.Parent" xml:space="preserve">
+    <value>tabCompMix</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Conexão a jusante</value>
+  <data name="cbUnitsP.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="tbTemp.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 38</value>
   </data>
   <data name="gridCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 255</value>
+  </data>
+  <data name="&gt;&gt;TabCompPropLiq2.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="TabCompoundPhaseProps.ToolTip1" xml:space="preserve">
     <value />
@@ -1956,8 +1971,8 @@
   <data name="cbUnitsH.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
   </data>
-  <data name="&gt;&gt;cbOutlet.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
   </data>
   <data name="&gt;&gt;cbDynSpec.Name" xml:space="preserve">
     <value>cbDynSpec</value>
@@ -2004,6 +2019,9 @@
   <data name="Label1.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="chkShowAsPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 17</value>
+  </data>
   <data name="SplitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
@@ -2028,11 +2046,8 @@
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
   </data>
-  <data name="cbUnitsQ.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 141</value>
-  </data>
-  <data name="lblAmountTotal.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="cbDynSpec.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="tbPressure.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -2079,9 +2094,6 @@
   <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="gridCompLiq2.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="TabPageInputComposition.Text" xml:space="preserve">
     <value>Quantidades dos Componentes</value>
   </data>
@@ -2106,8 +2118,11 @@
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 52</value>
+  <data name="&gt;&gt;TabCompPropLiq1.Name" xml:space="preserve">
+    <value>TabCompPropLiq1</value>
+  </data>
+  <data name="gridCompPropLiq1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 272</value>
@@ -2147,6 +2162,9 @@
   </data>
   <data name="tabCompSolid.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;tabCompVapor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="gridPropertiesSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 407</value>
@@ -2202,14 +2220,11 @@
   <data name="&gt;&gt;btnUtils.Name" xml:space="preserve">
     <value>btnUtils</value>
   </data>
-  <data name="cbUnitsQ.Items" xml:space="preserve">
-    <value>Mínima das Entradas</value>
-  </data>
   <data name="&gt;&gt;btnConfigurePP.Name" xml:space="preserve">
     <value>btnConfigurePP</value>
   </data>
   <data name="&gt;&gt;cbCalculatedAmountsBasis.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2244,8 +2259,8 @@
   <data name="TabControlCompound.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="DataGridViewTextBoxColumn36.HeaderText" xml:space="preserve">
-    <value>Substância</value>
+  <data name="&gt;&gt;btnNormalizeInput.Name" xml:space="preserve">
+    <value>btnNormalizeInput</value>
   </data>
   <data name="&gt;&gt;gridCompVapor.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2258,6 +2273,9 @@
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 26</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
   </data>
   <data name="cbUnitsH.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -2274,13 +2292,16 @@
   <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;chkShowAsPercentage.Name" xml:space="preserve">
+    <value>chkShowAsPercentage</value>
+  </data>
   <data name="cbUnitsM.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;rtbAnnotations.Type" xml:space="preserve">
-    <value>Extended.Windows.Forms.RichTextBoxExtended, RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;TabPageResultsProps.Parent" xml:space="preserve">
+    <value>TabControlMain</value>
   </data>
-  <data name="tabCompVapor.ToolTip1" xml:space="preserve">
+  <data name="UtilitiesCtxMenu.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;cbForcePhase.Name" xml:space="preserve">
@@ -2297,12 +2318,6 @@
   </data>
   <data name="&gt;&gt;TabCompPropSolid.Parent" xml:space="preserve">
     <value>TabCompoundPhaseProps</value>
-  </data>
-  <data name="&gt;&gt;tabPropsSolid.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="TabPhaseComps.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="cbDynSpec.Items1" xml:space="preserve">
     <value>Flow</value>
@@ -2328,6 +2343,9 @@
   <data name="tbEnth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;btnUtils.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;TabPhaseProps.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -2336,9 +2354,6 @@
   </data>
   <data name="&gt;&gt;Label18.Name" xml:space="preserve">
     <value>Label18</value>
-  </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
   </data>
   <data name="tabPropsSolid.ToolTip" xml:space="preserve">
     <value />
@@ -2394,14 +2409,8 @@
   <data name="&gt;&gt;tbFracSpec.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblConnectedTo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbEnth.ZOrder" xml:space="preserve">
-    <value>18</value>
   </data>
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -2415,17 +2424,14 @@
   <data name="gridCompMixture.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label20.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnCompAcceptChanges.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;lblAmountTotal.Parent" xml:space="preserve">
     <value>TabPage1</value>
   </data>
-  <data name="&gt;&gt;TCPTSMI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TabControlMain.Name" xml:space="preserve">
+    <value>TabControlMain</value>
   </data>
   <data name="cbUnitsP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2539,7 +2545,7 @@
     <value />
   </data>
   <data name="&gt;&gt;TabPhaseComps.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="DataGridViewTextBoxColumn22.HeaderText" xml:space="preserve">
     <value>Substância</value>
@@ -2583,6 +2589,9 @@
   <data name="tbEnth.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
+  <data name="cbDynSpec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
   <data name="&gt;&gt;cbUnitsM.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
@@ -2624,6 +2633,9 @@
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 5</value>
+  </data>
+  <data name="&gt;&gt;cbCalculatedAmountsBasis.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="Label18.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -2670,9 +2682,6 @@
   <data name="Label10.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
-    <value>Unidade</value>
-  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Quantidades</value>
   </data>
@@ -2705,6 +2714,9 @@
   </data>
   <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Conexão a jusante</value>
   </data>
   <data name="tabCompSolid.ToolTip" xml:space="preserve">
     <value />
@@ -2757,8 +2769,8 @@
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;cbSpec.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn25.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn25</value>
@@ -2778,8 +2790,11 @@
   <data name="&gt;&gt;gridInputComposition.Parent" xml:space="preserve">
     <value>TabPageInputComposition</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkShowAsPercentage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPhaseComps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 65</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2826,8 +2841,8 @@
   <data name="&gt;&gt;TabPhaseComps.Name" xml:space="preserve">
     <value>TabPhaseComps</value>
   </data>
-  <data name="gridCompSolid.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 459</value>
   </data>
   <data name="&gt;&gt;TabPhaseComps.Parent" xml:space="preserve">
     <value>TabPage1</value>
@@ -2835,17 +2850,11 @@
   <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="SplitContainer1.Panel2.ToolTip" xml:space="preserve">
+  <data name="TabPage2.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="TCPTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 22</value>
-  </data>
-  <data name="tabCompLiq2.Text" xml:space="preserve">
-    <value>Fase Líquida 2</value>
-  </data>
-  <data name="TabCompPropSolid.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;TabPageFloatingTables.Name" xml:space="preserve">
     <value>TabPageFloatingTables</value>
@@ -2985,6 +2994,9 @@
   <data name="&gt;&gt;TabPageResultsPane.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tabCompSolid.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;tbMassFlow.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
@@ -3000,9 +3012,6 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn26.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPageInputPane.Text" xml:space="preserve">
-    <value>Dados de Entrada</value>
-  </data>
   <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -3014,9 +3023,6 @@
   </data>
   <data name="&gt;&gt;cbInlet.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;cbFloatingTableCompoundAmountBasis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BinaryTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 22</value>
@@ -3045,8 +3051,8 @@
   <data name="cbInlet.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 21</value>
   </data>
-  <data name="lblSolvent.Text" xml:space="preserve">
-    <value>Solvente</value>
+  <data name="&gt;&gt;cbFloatingTableCompoundAmountBasis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3075,23 +3081,20 @@
   <data name="TabPageResultsProps.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="Label18.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="gridCompPropVapor.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPhaseProps.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="TabControlCompound.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
   <data name="TabPageResultsProps.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;TabControlMain.Name" xml:space="preserve">
-    <value>TabControlMain</value>
   </data>
   <data name="&gt;&gt;cbUnitsQ.Name" xml:space="preserve">
     <value>cbUnitsQ</value>
@@ -3123,6 +3126,9 @@
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="TabPageInputComposition.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -3147,14 +3153,17 @@
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
   </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TCPTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tabCompLiq2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkShowAsPercentage.Text" xml:space="preserve">
+    <value>Mostrar em %</value>
   </data>
   <data name="TabControlMain0.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -3178,7 +3187,7 @@
     <value>320, 117</value>
   </data>
   <data name="&gt;&gt;lblAmountTotal.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="gridCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 255</value>
@@ -3195,14 +3204,14 @@
   <data name="&gt;&gt;tabPropsLiq1.Parent" xml:space="preserve">
     <value>TabPhaseProps</value>
   </data>
+  <data name="cbFloatingTableCompoundAmountBasis.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 15</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
   </data>
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -3223,6 +3232,9 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="gridPropertiesLiq2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblAmountTotal.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="tbFracSpec.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
@@ -3294,8 +3306,8 @@
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>412, 401</value>
   </data>
-  <data name="cbDynSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+  <data name="&gt;&gt;cbUnitsP.Parent" xml:space="preserve">
+    <value>TabPageInputConditions</value>
   </data>
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -3309,11 +3321,8 @@
   <data name="cbUnitsM.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
-  <data name="gridCompMixture.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="TabPage4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tabPropsLiq2.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="Label16.ToolTip1" xml:space="preserve">
     <value />
@@ -3327,11 +3336,17 @@
   <data name="&gt;&gt;gridCompLiq1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkShowAsPercentage.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label6.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;tbEntr.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
   </data>
   <data name="TabControlMain.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -3369,14 +3384,14 @@
   <data name="cbUnitsP.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 63</value>
   </data>
-  <data name="gridPropertiesMixture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="&gt;&gt;cbUnitsS.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
   <data name="gridCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 255</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tabCompLiq2.ToolTip" xml:space="preserve">
     <value />
@@ -3414,6 +3429,9 @@
   <data name="TabPageDynamics.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="tabCompVapor.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="TabCompPropVapor.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -3441,6 +3459,9 @@
   <data name="lblTag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="gridCompLiq1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="cbInlet.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -3467,9 +3488,6 @@
   </data>
   <data name="cbSolvent.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
-    <value>Unidade</value>
   </data>
   <data name="&gt;&gt;cbDynSpec.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -3516,9 +3534,6 @@
   <data name="TabControl1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;TabCompPropVapor.Parent" xml:space="preserve">
-    <value>TabCompoundPhaseProps</value>
-  </data>
   <data name="cbInlet.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -3532,7 +3547,7 @@
     <value>15</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.3.4.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tabCompSolid.Parent" xml:space="preserve">
     <value>TabPhaseComps</value>
@@ -3648,6 +3663,9 @@
   <data name="tbMassFlow.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
+  <data name="&gt;&gt;TabPageInputPane.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="TabPageInputConditions.Size" type="System.Drawing.Size, System.Drawing">
     <value>426, 433</value>
   </data>
@@ -3747,7 +3765,7 @@
   <data name="gridInputComposition.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="btnNormalizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="tabCompLiqMix.ToolTip" xml:space="preserve">
@@ -3771,6 +3789,9 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn36.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn36</value>
   </data>
+  <data name="SplitContainer1.Panel2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="TabPageResultsPane.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -3789,8 +3810,8 @@
   <data name="&gt;&gt;tabPropsLiq1.Name" xml:space="preserve">
     <value>tabPropsLiq1</value>
   </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
+  <data name="&gt;&gt;ToolTipChangeTag.Name" xml:space="preserve">
+    <value>ToolTipChangeTag</value>
   </data>
   <data name="cbForcePhase.ToolTip" xml:space="preserve">
     <value />
@@ -3798,8 +3819,8 @@
   <data name="gridPropertiesLiq1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="chkShowAsPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;tbEnth.Name" xml:space="preserve">
     <value>tbEnth</value>
@@ -3807,8 +3828,8 @@
   <data name="tbTemp.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>17</value>
+  <data name="TabPageInputPane.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;gridPropertiesLiq1.Name" xml:space="preserve">
     <value>gridPropertiesLiq1</value>
@@ -3822,9 +3843,6 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
-  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="AddUtilityTSMI.Text" xml:space="preserve">
     <value>Adicionar Utilidade</value>
   </data>
@@ -3834,14 +3852,8 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn12.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabCompPropSolid.Name" xml:space="preserve">
-    <value>TabCompPropSolid</value>
-  </data>
   <data name="&gt;&gt;gridCompLiq1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;ToolTipChangeTag.Name" xml:space="preserve">
-    <value>ToolTipChangeTag</value>
   </data>
   <data name="TabPageInputConditions.ToolTip1" xml:space="preserve">
     <value />
@@ -3885,6 +3897,9 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn16.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tbPressure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="SplitContainer1.Panel1.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -3894,8 +3909,8 @@
   <data name="&gt;&gt;compamount.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn7.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn7</value>
+  <data name="&gt;&gt;cbOutlet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbFracSpec.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
@@ -3939,8 +3954,8 @@
   <data name="HydratesTSMI.Text" xml:space="preserve">
     <value>Hidratos de Gás Natural</value>
   </data>
-  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbOutlet.ToolTip" xml:space="preserve">
     <value />
@@ -3950,6 +3965,9 @@
   </data>
   <data name="gridPropertiesMixture.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 407</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn36.HeaderText" xml:space="preserve">
+    <value>Substância</value>
   </data>
   <data name="btnDisconnectO.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -3961,7 +3979,7 @@
     <value />
   </data>
   <data name="tabCompMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 328</value>
+    <value>402, 307</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
@@ -3981,14 +3999,20 @@
   <data name="cbUnitsQ.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
   </data>
+  <data name="chkShowAsPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.Name" xml:space="preserve">
     <value>SplitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;tabCompVapor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="gridCompLiq2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label14.Name" xml:space="preserve">
     <value>Label14</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="DataGridViewTextBoxColumn26.HeaderText" xml:space="preserve">
     <value>Substância</value>
@@ -4008,11 +4032,14 @@
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="tbEnth.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnUtils.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
   </data>
-  <data name="gridCompLiq1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;tabPropsLiqMix.Name" xml:space="preserve">
+    <value>tabPropsLiqMix</value>
   </data>
   <data name="&gt;&gt;TabPageAnnotations.Name" xml:space="preserve">
     <value>TabPageAnnotations</value>
@@ -4071,9 +4098,6 @@
   <data name="&gt;&gt;ToolTipValues.Name" xml:space="preserve">
     <value>ToolTipValues</value>
   </data>
-  <data name="&gt;&gt;TabPageResultsProps.Parent" xml:space="preserve">
-    <value>TabControlMain</value>
-  </data>
   <data name="tabPropsLiqMix.Text" xml:space="preserve">
     <value>Fase Líquida (Mistura)</value>
   </data>
@@ -4089,26 +4113,20 @@
   <data name="lblTag.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnDisconnectI.Name" xml:space="preserve">
-    <value>btnDisconnectI</value>
-  </data>
-  <data name="cbDynSpec.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
   <data name="&gt;&gt;cbUnitsS.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 328</value>
+  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn21.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblSolvent.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
-  </data>
-  <data name="&gt;&gt;tabPropsLiqMix.Name" xml:space="preserve">
-    <value>tabPropsLiqMix</value>
   </data>
   <data name="cbUnitsQ.Items1" xml:space="preserve">
     <value>Média das Entradas</value>
@@ -4128,20 +4146,17 @@
   <data name="TabPageInputConditions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPropsLiqMix.ToolTip1" xml:space="preserve">
+  <data name="TabPage4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbCompBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 21</value>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>273, 21</value>
   </data>
-  <data name="&gt;&gt;lblCompPropUnits.Parent" xml:space="preserve">
-    <value>TabPage2</value>
+  <data name="gridCompMixture.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
-  </data>
-  <data name="cbUnitsP.Items1" xml:space="preserve">
-    <value>Média das Entradas</value>
   </data>
   <data name="tbFracSpec.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 20</value>
@@ -4161,6 +4176,9 @@
   <data name="&gt;&gt;btnEraseInput.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn25.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -4173,8 +4191,8 @@
   <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;TabPhaseProps.Name" xml:space="preserve">
-    <value>TabPhaseProps</value>
+  <data name="tabPropsVapor.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="cbSolvent.Items" xml:space="preserve">
     <value>Frações Molares</value>
@@ -4185,14 +4203,11 @@
   <data name="tbEntr.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;cbCompoundPhaseProperties.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="cbFloatingTableCompoundAmountBasis.Size" type="System.Drawing.Size, System.Drawing">
     <value>365, 21</value>
   </data>
-  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="gridCompPropLiq1.ToolTip1" xml:space="preserve">
     <value />
@@ -4221,8 +4236,8 @@
   <data name="&gt;&gt;TabPageResultsComp.Parent" xml:space="preserve">
     <value>TabControlMain</value>
   </data>
-  <data name="cbUnitsP.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbSpec.Items3" xml:space="preserve">
+    <value>Pressão e Fração de Vapor (PVF)</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4272,6 +4287,9 @@
   <data name="tbFracSpec.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
   </data>
+  <data name="&gt;&gt;chkShowAsPercentage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cbCompoundPhaseProperties.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -4289,6 +4307,9 @@
   </data>
   <data name="gridCompLiqMix.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -4311,6 +4332,9 @@
   <data name="&gt;&gt;Label21.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Label21.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;cbCompoundPhaseProperties.Name" xml:space="preserve">
     <value>cbCompoundPhaseProperties</value>
   </data>
@@ -4328,6 +4352,9 @@
   </data>
   <data name="DataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
     <value>Unidade</value>
+  </data>
+  <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;gridCompSolid.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -4383,8 +4410,8 @@
   <data name="&gt;&gt;tabCompLiq2.Parent" xml:space="preserve">
     <value>TabPhaseComps</value>
   </data>
-  <data name="cbSpec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 11</value>
+  <data name="lblStatus.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbForcePhase.Items" xml:space="preserve">
     <value>Definição Global</value>
@@ -4410,8 +4437,8 @@
   <data name="&gt;&gt;cbSolvent.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cbDynSpec.Items" xml:space="preserve">
-    <value>Pressure</value>
+  <data name="TabPhaseProps.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="tabCompMix.ToolTip1" xml:space="preserve">
     <value />
@@ -4425,11 +4452,8 @@
   <data name="tbVolFlow.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="tabCompLiq2.Text" xml:space="preserve">
+    <value>Fase Líquida 2</value>
   </data>
   <data name="&gt;&gt;gridPropertiesMixture.Parent" xml:space="preserve">
     <value>tabPropsMix</value>
@@ -4449,8 +4473,8 @@
   <data name="tbMoleFlow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;gridPropertiesLiq1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tabCompLiqMix.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbUnitsS.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
@@ -4467,14 +4491,20 @@
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;TCPTSMI.Name" xml:space="preserve">
+    <value>TCPTSMI</value>
+  </data>
   <data name="cbSpec.Items" xml:space="preserve">
     <value>Temperatura e Pressão (TP)</value>
   </data>
-  <data name="&gt;&gt;TabCompPropLiq2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="cbUnitsQ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 141</value>
   </data>
   <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
     <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;TabPageInputComposition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -4494,17 +4524,20 @@
   <data name="&gt;&gt;cbPropPack.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cbFloatingTableCompoundAmountBasis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 26</value>
+  </data>
   <data name="cbUnitsQ.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnEraseInput.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="TabPageInputPane.Text" xml:space="preserve">
+    <value>Dados de Entrada</value>
   </data>
   <data name="gridPropertiesVapor.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="tabCompSolid.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="cbForcePhase.Items2" xml:space="preserve">
+    <value>Forçar Fase Líquida</value>
   </data>
   <data name="cbFloatingTableCompoundAmountBasis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -4521,8 +4554,8 @@
   <data name="GroupBox2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;gridPropertiesVapor.Name" xml:space="preserve">
-    <value>gridPropertiesVapor</value>
+  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbOutlet.Name" xml:space="preserve">
     <value>cbOutlet</value>
@@ -4530,17 +4563,14 @@
   <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
   </data>
-  <data name="cbForcePhase.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+  <data name="&gt;&gt;lblSolvent.Name" xml:space="preserve">
+    <value>lblSolvent</value>
   </data>
   <data name="&gt;&gt;Label22.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbUnitsP.Parent" xml:space="preserve">
-    <value>TabPageInputConditions</value>
-  </data>
   <data name="TabPhaseComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 354</value>
+    <value>410, 333</value>
   </data>
   <data name="cbUnitsM.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -4578,20 +4608,14 @@
   <data name="Label20.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;gridCompMixture.Parent" xml:space="preserve">
-    <value>tabCompMix</value>
-  </data>
   <data name="&gt;&gt;TabPhaseProps.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;BinaryTSMI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;lblConnectedTo.Name" xml:space="preserve">
-    <value>lblConnectedTo</value>
+  <data name="&gt;&gt;TabCompPropVapor.Parent" xml:space="preserve">
+    <value>TabCompoundPhaseProps</value>
   </data>
   <data name="tbPressure.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 64</value>
@@ -4599,8 +4623,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
   </data>
-  <data name="&gt;&gt;tbPressure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>459, 701</value>
   </data>
   <data name="&gt;&gt;tabCompSolid.Name" xml:space="preserve">
     <value>tabCompSolid</value>
@@ -4635,6 +4659,9 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn28.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cbUnitsP.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;tabPropsMix.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -4656,14 +4683,17 @@
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;cbSpec.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="TabPageResultsProps.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tabPropsSolid.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
@@ -4674,8 +4704,8 @@
   <data name="btnNormalizeInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 24</value>
   </data>
-  <data name="gridCompMixture.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="btnDisconnectI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 23</value>
   </data>
   <data name="btnDisconnectI.ToolTip" xml:space="preserve">
     <value />
@@ -4692,8 +4722,8 @@
   <data name="&gt;&gt;gridPropertiesLiq2.Parent" xml:space="preserve">
     <value>tabPropsLiq2</value>
   </data>
-  <data name="cbCalculatedAmountsBasis.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TabPageResultsProps.Text" xml:space="preserve">
+    <value>Propriedades das Fases</value>
   </data>
   <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4704,9 +4734,6 @@
   <data name="lblSolvent.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Propriedades</value>
-  </data>
   <data name="cbCompoundPhaseProperties.Items1" xml:space="preserve">
     <value>Log dos Coeficientes de Fugacidade</value>
   </data>
@@ -4715,6 +4742,9 @@
   </data>
   <data name="DataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
     <value>Quantidade</value>
+  </data>
+  <data name="chkShowAsPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 42</value>
   </data>
   <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
     <value>GroupBox5</value>
@@ -4731,11 +4761,11 @@
   <data name="&gt;&gt;PetroleumPropsTSMI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPhaseComps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 44</value>
+  <data name="cbCalculatedAmountsBasis.Items2" xml:space="preserve">
+    <value>Vazões Molares</value>
   </data>
-  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
-    <value>Label15</value>
+  <data name="&gt;&gt;tabCompLiqMix.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;cbPropPack.Name" xml:space="preserve">
     <value>cbPropPack</value>
@@ -4767,8 +4797,8 @@
   <data name="TabPageInputPane.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;lblConnectedTo.Name" xml:space="preserve">
+    <value>lblConnectedTo</value>
   </data>
   <data name="cbUnitsS.ToolTip" xml:space="preserve">
     <value />
@@ -4779,11 +4809,11 @@
   <data name="GroupBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;TabCompPropLiq1.Name" xml:space="preserve">
-    <value>TabCompPropLiq1</value>
-  </data>
   <data name="&gt;&gt;TabCompPropVapor.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkShowAsPercentage.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
@@ -4806,8 +4836,8 @@
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <data name="cbFloatingTableCompoundAmountBasis.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="lblConnectedTo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="gridCompPropVapor.ToolTip" xml:space="preserve">
     <value />
@@ -4824,6 +4854,9 @@
   <data name="GroupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="lblAmountTotal.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="TabCompPropLiq2.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -4836,8 +4869,8 @@
   <data name="cbUnitsW.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblStatus.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;tabCompSolid.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4857,17 +4890,14 @@
   <data name="cbSpec.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="cbOutlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 21</value>
+  <data name="&gt;&gt;tbEnth.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
-  <data name="&gt;&gt;TabPageInputPane.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="tbFracSpec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>154, 220</value>
   </data>
   <data name="&gt;&gt;gridCompPropLiq2.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="tabPropsLiq2.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
   </data>
   <data name="btnNormalizeInput.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -4875,8 +4905,8 @@
   <data name="Label7.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbEnth.ToolTip" xml:space="preserve">
-    <value />
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="btnEraseInput.Text" xml:space="preserve">
     <value>Apagar (Zerar)</value>
@@ -4886,6 +4916,9 @@
   </data>
   <data name="&gt;&gt;TabPageInputPane.Parent" xml:space="preserve">
     <value>TabControlMain0</value>
+  </data>
+  <data name="&gt;&gt;tbEnth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabControlMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4902,8 +4935,8 @@
   <data name="&gt;&gt;cbCompBasis.Parent" xml:space="preserve">
     <value>TabPageInputComposition</value>
   </data>
-  <data name="SplitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="cbOutlet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 49</value>
   </data>
   <data name="&gt;&gt;TabControlCompound.Parent" xml:space="preserve">
     <value>TabPageResultsComp</value>
@@ -4932,8 +4965,8 @@
   <data name="lblInputAmount.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
   </data>
-  <data name="Label21.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="cbUnitsP.Items1" xml:space="preserve">
+    <value>Média das Entradas</value>
   </data>
   <data name="lblInputAmount.Location" type="System.Drawing.Point, System.Drawing">
     <value>320, 68</value>
@@ -4947,13 +4980,13 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Conexões</value>
   </data>
-  <data name="gridCompPropLiq1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="TabCompoundPhaseProps.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>TabPageInputConditions</value>
   </data>
-  <metadata name="DataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn39.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn38.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -4986,6 +5019,9 @@
   <metadata name="DataGridViewTextBoxColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="DataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="DataGridViewTextBoxColumn37.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -5007,9 +5043,6 @@
   <metadata name="DataGridViewTextBoxColumn12.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn32.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="DataGridViewTextBoxColumn20.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -5019,16 +5052,19 @@
   <metadata name="DataGridViewTextBoxColumn40.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn36.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn36.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn27.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DataGridViewTextBoxColumn29.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn9.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -5049,25 +5085,22 @@
   <metadata name="DataGridViewTextBoxColumn41.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn39.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn29.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DataGridViewTextBoxColumn27.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn32.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn33.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn26.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn17.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -5088,7 +5121,7 @@
   <metadata name="DataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn26.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>

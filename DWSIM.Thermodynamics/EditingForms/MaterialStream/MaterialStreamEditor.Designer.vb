@@ -93,6 +93,7 @@ Partial Class MaterialStreamEditor
         Me.TabPageResultsComp = New System.Windows.Forms.TabPage()
         Me.TabControlCompound = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.chkShowAsPercentage = New System.Windows.Forms.CheckBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.TabPhaseComps = New System.Windows.Forms.TabControl()
         Me.tabCompMix = New System.Windows.Forms.TabPage()
@@ -750,6 +751,7 @@ Partial Class MaterialStreamEditor
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.chkShowAsPercentage)
         Me.TabPage1.Controls.Add(Me.Label19)
         Me.TabPage1.Controls.Add(Me.TabPhaseComps)
         Me.TabPage1.Controls.Add(Me.cbCalculatedAmountsBasis)
@@ -758,6 +760,14 @@ Partial Class MaterialStreamEditor
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'chkShowAsPercentage
+        '
+        resources.ApplyResources(Me.chkShowAsPercentage, "chkShowAsPercentage")
+        Me.chkShowAsPercentage.Name = "chkShowAsPercentage"
+        Me.ToolTipValues.SetToolTip(Me.chkShowAsPercentage, resources.GetString("chkShowAsPercentage.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkShowAsPercentage, resources.GetString("chkShowAsPercentage.ToolTip1"))
+        Me.chkShowAsPercentage.UseVisualStyleBackColor = True
         '
         'Label19
         '
@@ -2068,4 +2078,5 @@ Partial Class MaterialStreamEditor
     Friend WithEvents Label22 As Label
     Public WithEvents cbSolvent As ComboBox
     Public WithEvents lblSolvent As Label
+    Friend WithEvents chkShowAsPercentage As CheckBox
 End Class

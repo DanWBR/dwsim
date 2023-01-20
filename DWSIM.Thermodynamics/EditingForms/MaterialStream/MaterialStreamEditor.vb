@@ -32,6 +32,7 @@ Public Class MaterialStreamEditor
         vs = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Streams.Editors.MaterialStreamEditorState)(MatStream.EditorState)
 
         With vs
+            chkShowAsPercentage.Checked = .ShowAsPercentage
             TabControlMain.SelectedIndex = .MainSelectedTab
             cbCompBasis.SelectedIndex = .InputCompositionBasis
             TabControlCompound.SelectedIndex = .CompoundsSelectedTab
@@ -1081,11 +1082,19 @@ Public Class MaterialStreamEditor
         Select Case cb.SelectedIndex
             Case 0
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault
+                    If chkShowAsPercentage.Checked Then
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * 100.0
+                    Else
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault
+                    End If
                 Next
             Case 1
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault
+                    If chkShowAsPercentage.Checked Then
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * 100.0
+                    Else
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault
+                    End If
                 Next
             Case 2
                 For Each row As DataGridViewRow In grid.Rows
@@ -1295,6 +1304,12 @@ Public Class MaterialStreamEditor
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq1, MatStream.Phases(3))
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq2, MatStream.Phases(4))
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompSolid, MatStream.Phases(7))
+
+        If cbCalculatedAmountsBasis.SelectedIndex <= 1 Then
+            chkShowAsPercentage.Enabled = True
+        Else
+            chkShowAsPercentage.Enabled = False
+        End If
 
     End Sub
 
@@ -1661,6 +1676,7 @@ Public Class MaterialStreamEditor
             .CompoundsAmountSelectedTab = TabPhaseComps.SelectedIndex
             .CompoundsPropertySelectedTab = TabCompoundPhaseProps.SelectedIndex
             .PhasePropsSelectedTab = TabPhaseProps.SelectedIndex
+            .ShowAsPercentage = chkShowAsPercentage.Checked
         End With
 
         MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
@@ -1687,6 +1703,16 @@ Public Class MaterialStreamEditor
                     MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Solid
             End Select
         End If
+    End Sub
+
+    Private Sub chkShowAsPercentage_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowAsPercentage.CheckedChanged
+
+        If Loaded Then
+
+            cbCalculatedAmountsBasis_SelectedIndexChanged(sender, e)
+
+        End If
+
     End Sub
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
