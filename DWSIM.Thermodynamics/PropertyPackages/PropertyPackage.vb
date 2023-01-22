@@ -6714,7 +6714,11 @@ Final3:
             If T / constprop.Critical_Temperature < 1 Then
                 With constprop
                     If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
-                        val = CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
+                        If Integer.TryParse(.SurfaceTensionEquation, New Integer) Then
+                            val = CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
+                        Else
+                            val = ParseEquation(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T)
+                        End If
                     ElseIf .IsIon Or .IsSalt Then
                         val = 0.0#
                     Else
