@@ -90,21 +90,6 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             End If
         Next
 
-        Me.cbReacSets.Items.Clear()
-        For Each rset As ReactionSet In Me._form.ReactionSets.Values
-            cbReacSets.Items.Add(rset.Name)
-        Next
-
-        Me.tbMaxIts.Text = ppu.MaxIterations
-        Me.tbTol.Text = ppu.Tolerance
-
-        Try
-            Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ReactionSet).FirstOrDefault.Name
-            Me.cbReacSets.SelectedItem = reacsetname
-        Catch ex As Exception
-
-        End Try
-
         Loaded = True
 
     End Sub
@@ -138,38 +123,6 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "ExUNIQUAC_uij.txt")
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbMaxIts.TextChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            If Integer.TryParse(tbMaxIts.Text, New Integer) Then
-                tbMaxIts.ForeColor = Color.Blue
-                ppu.MaxIterations = tbMaxIts.Text
-            Else
-                tbMaxIts.ForeColor = Color.Red
-            End If
-        End If
-    End Sub
-
-    Private Sub tbTol_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbTol.TextChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            If Double.TryParse(tbTol.Text, New Double) Then
-                tbTol.ForeColor = Color.Blue
-                ppu.Tolerance = tbTol.Text
-            Else
-                tbTol.ForeColor = Color.Red
-            End If
-        End If
-    End Sub
-
-    Private Sub cbReacSets_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbReacSets.SelectedIndexChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            Dim reacsetID As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.Name = cbReacSets.SelectedItem.ToString).FirstOrDefault.ID
-            ppu.ReactionSet = reacsetID
-        End If
     End Sub
 
 End Class
