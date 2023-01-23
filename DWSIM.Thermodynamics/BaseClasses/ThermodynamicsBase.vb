@@ -1448,7 +1448,7 @@ Namespace BaseClasses
 
             Dim _molecule = Formula
 
-            Dim useParenthesis As Boolean = Regex.IsMatch(_molecule, "[A-Z][a-z]?\d*\((([A-Z][a-z]?\d*){1,2})\)\d*")
+            Dim useParenthesis As Boolean = _molecule.Contains("(") And _molecule.Contains(")")
             Dim findMatches = Regex.Matches(_molecule, "\(?[A-Z][a-z]?\d*\)?")
 
             ' Get all elements
