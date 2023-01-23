@@ -78,9 +78,6 @@
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
-    <Reference Include="DWSIM.ExtensionMethods">
-      <HintPath>..\DistPackages\Windows\DWSIM.ExtensionMethods.dll</HintPath>
-    </Reference>
     <Reference Include="Eto">
       <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
     </Reference>

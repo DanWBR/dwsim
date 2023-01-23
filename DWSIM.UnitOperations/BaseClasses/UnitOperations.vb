@@ -132,6 +132,34 @@ Namespace UnitOperations
             End If
         End Function
 
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            Dim value = MyBase.GetPropertyValue(prop, su)
+
+            If value Is Nothing Then
+
+                Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+                Dim epucol = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+
+                If epcol.ContainsKey(prop) Then
+                    If epucol.ContainsKey(prop) Then
+                        Dim utype = epucol(prop)
+                        Return Convert.ToDouble(epcol(prop)).ConvertFromSI(su.GetCurrentUnits(utype))
+                    Else
+                        Return epcol(prop)
+                    End If
+                Else
+                    Return Nothing
+                End If
+
+            Else
+
+                Return value
+
+            End If
+
+        End Function
+
 #Region "   DWSIM Specific"
 
         Public Overrides Function GetDebugReport() As String
