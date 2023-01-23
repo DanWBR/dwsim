@@ -1164,7 +1164,34 @@ Public Class FormSimulWizard
 
         Dim names = CurrentFlowsheet.SelectedCompounds.Keys.ToList()
 
-        If names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+        Dim elecs = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsSalt Or c.IsIon Or c.IsHydratedSalt).Count()
+
+        If elecs > 0 Then
+            'contains electrolytes
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    If pp.IsElectrolytePP Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        If pp.GetType().ToString().Contains("ProExtensions") Then
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Else
+                            ChangeRowForeColor(row, Color.Blue)
+                        End If
+                    Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                    End If
+                Else
+                    row.Cells(1).Value = 0
+                    row.Cells(2).Value = My.Resources.icons8_cross_mark
+                    ChangeRowForeColor(row, Color.LightGray)
+                End If
+            Next
+        ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
             'Water + Hydrocarbons
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
