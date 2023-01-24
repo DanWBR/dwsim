@@ -173,7 +173,9 @@ namespace DWSIM.UI.Desktop.Mac
         public override void UpdateTrackingAreas()
         {
             if (trackarea != null) { RemoveTrackingArea(trackarea); }
-            trackarea = new NSTrackingArea(Frame, NSTrackingAreaOptions.ActiveWhenFirstResponder | NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.InVisibleRect, this, null);
+            NSTrackingAreaOptions options = NSTrackingAreaOptions.ActiveAlways |  NSTrackingAreaOptions.InVisibleRect |
+                         NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.MouseMoved;
+            trackarea = new NSTrackingArea(Frame, options, this, null);
             AddTrackingArea(trackarea);
         }
 
@@ -211,7 +213,9 @@ namespace DWSIM.UI.Desktop.Mac
                 fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
                 this.NeedsDisplay = true;
             }
-            catch {}
+            catch (Exception ex){
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         public override void MouseDragged(NSEvent theEvent)
