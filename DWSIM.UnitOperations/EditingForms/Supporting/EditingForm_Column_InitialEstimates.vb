@@ -204,7 +204,7 @@ Public Class EditingForm_Column_InitialEstimates
 
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
             New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Initial Estimates File", "*.dwcdi")})
 
         If handler IsNot Nothing Then
