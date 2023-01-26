@@ -423,6 +423,7 @@ Namespace Reactors
 
             Dim DN As New Dictionary(Of String, Double)
             Dim N00 As New Dictionary(Of String, Double)
+            Dim N0 As New Dictionary(Of String, Double)
 
             Dim X, scBC, nBC, DHr, Hid_r, Hid_p, Hr, Hp, Tin, Pin, Pout, W As Double
             Dim i As Integer
@@ -452,7 +453,11 @@ Namespace Reactors
 
             For Each ar In Me.ReactionsSequence
 
+                pp.CurrentMaterialStream = ims
+                ims.PropertyPackage = pp
+
                 DN.Clear()
+                N0.Clear()
 
                 IObj?.SetCurrent
 
@@ -491,6 +496,10 @@ Namespace Reactors
 
                         If Not N00.ContainsKey(sb.CompName) Then
                             N00.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault())
+                        End If
+
+                        If Not N0.ContainsKey(sb.CompName) Then
+                            N0.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault())
                         End If
 
                     Next
@@ -551,7 +560,7 @@ Namespace Reactors
 
                     'create simplex vars
 
-                    vars.Add(New OptSimplexBoundVariable(0.0#, 0.0#, xref(i)))
+                    vars.Add(New OptSimplexBoundVariable(xref(i), 0.0000000001, xref(i)))
 
                     i += 1
 
@@ -569,30 +578,30 @@ Namespace Reactors
 
                                           n2 = xi.Length - 1
 
-                                          Select Case rxn.ReactionPhase
-                                              Case PhaseName.Liquid
-                                                  m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault
-                                                  nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0)
-                                                  nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                                              Case PhaseName.Vapor
-                                                  m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault
-                                                  nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Vapor).MultiplyConstY(m0)
-                                                  nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                                              Case PhaseName.Mixture
-                                                  m0 = ims.Phases(0).Properties.molarflow.GetValueOrDefault
-                                                  nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).MultiplyConstY(m0)
-                                                  nBC = ims.Phases(0).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                                          End Select
+                                          dni = ims.PropertyPackage.RET_NullVector()
 
                                           For i2 = 0 To n2
-
-                                              dni = ims.PropertyPackage.RET_NullVector()
 
                                               'process reaction i2
 
                                               rxn = FlowSheet.Reactions(ar(i2))
                                               BC = rxn.BaseReactant
                                               scBC = rxn.Components(BC).StoichCoeff
+
+                                              Select Case rxn.ReactionPhase
+                                                  Case PhaseName.Liquid
+                                                      m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault
+                                                      nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0)
+                                                      nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                                                  Case PhaseName.Vapor
+                                                      m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault
+                                                      nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Vapor).MultiplyConstY(m0)
+                                                      nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                                                  Case PhaseName.Mixture
+                                                      m0 = ims.Phases(0).Properties.molarflow.GetValueOrDefault
+                                                      nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).MultiplyConstY(m0)
+                                                      nBC = ims.Phases(0).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                                              End Select
 
                                               'delta mole flows
 
@@ -614,7 +623,9 @@ Namespace Reactors
 
                                           pen_val = 0.0
                                           For Each d In nif
-                                              If d < 0.0 Then pen_val += d ^ 2 * 100.0
+                                              If d < 0.0 Then
+                                                  pen_val += Math.Abs(d) * 10000000000.0
+                                              End If
                                           Next
 
                                           fval = xref.SubtractY(xi).AbsSqrSumY
@@ -665,7 +676,7 @@ Namespace Reactors
                     Dim DNbr = -xf(i) * nBC
 
                     'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    DHr += rxn.ReactionHeat * Abs(DNbr) / 1000
+                    If Abs(DNbr) > 0.0 Then DHr += rxn.ReactionHeat * Abs(DNbr) / 1000
 
                     i += 1
 
@@ -675,8 +686,10 @@ Namespace Reactors
 
                 For Each s1 As Compound In ims.Phases(0).Compounds.Values
                     If DN.ContainsKey(s1.Name) Then
-                        N00(s1.Name) += DN(s1.Name)
-                        If N00(s1.Name) < 0.0 Then N00(s1.Name) = 0.0
+                        N0(s1.Name) += DN(s1.Name)
+                        If N0(s1.Name) < 0.0 Then
+                            N0(s1.Name) = 0.0
+                        End If
                     End If
                 Next
 
@@ -686,18 +699,18 @@ Namespace Reactors
 
                 Dim Nsum As Double = 0
                 For Each s2 As Compound In ims.Phases(0).Compounds.Values
-                    If N00.ContainsKey(s2.Name) Then
-                        Nsum += N00(s2.Name)
+                    If N0.ContainsKey(s2.Name) Then
+                        Nsum += N0(s2.Name)
                     Else
-                        Nsum += s2.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
+                        Nsum += s2.MolarFlow.GetValueOrDefault()
                     End If
                 Next
 
                 For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                    If N00.ContainsKey(s3.Name) Then
-                        s3.MoleFraction = N00(s3.Name) / Nsum
+                    If N0.ContainsKey(s3.Name) Then
+                        s3.MoleFraction = N0(s3.Name) / Nsum
                     Else
-                        s3.MoleFraction = s3.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
+                        s3.MoleFraction = s3.MolarFlow.GetValueOrDefault() / Nsum
                     End If
                 Next
 
