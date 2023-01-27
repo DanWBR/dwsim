@@ -489,6 +489,12 @@ Namespace Streams
 
                 If equilibrium And comp > 0.0# Then
 
+                    If ForcePhase <> ForcedPhase.GlobalDef And
+                        FlowSheet IsNot Nothing And
+                        GraphicObject IsNot Nothing Then
+                        FlowSheet.ShowMessage(String.Format("{0}: stream phase is defined/overriden to '{1}'", GraphicObject.Tag, ForcePhase), IFlowsheet.MessageType.Warning)
+                    End If
+
                     IObj?.Paragraphs.Add("Phase Equilibria will be calculated using the currently selected Property Package and Flash Algorithm.")
 
                     IObj?.Paragraphs.Add("To calculate the Phase Equilibria, DWSIM will call the 'DW_CalcEquilibrium' routine from the Property Package instance.")

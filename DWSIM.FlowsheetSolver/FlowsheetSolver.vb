@@ -1225,6 +1225,11 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             fgui.ShowMessage(fgui.GetTranslatedString("FSstartedsolving"), IFlowsheet.MessageType.Information)
 
+            If fgui.FlowsheetOptions.ForceStreamPhase <> ForcedPhase.GlobalDef Then
+                fgui.ShowMessage(fgui.GetTranslatedString(String.Format("Global Phase Override is defined to '{0}'",
+                                                          fgui.FlowsheetOptions.ForceStreamPhase)), IFlowsheet.MessageType.Warning)
+            End If
+
             'process scripts associated with the solverstarted event
 
             fgui.ProcessScripts(Scripts.EventType.SolverStarted, Scripts.ObjectType.Solver, "")
