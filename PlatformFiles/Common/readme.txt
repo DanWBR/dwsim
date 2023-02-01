@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.3.4
+Version 8.3.5
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.3.5
+
+- Phase Diagram now supports immiscible water (Classic UI)
+- Display fractions as percentages in Material Stream editor (Classic UI)
+- Updated CoolProp library version to 6.4.3
+- Fixed some spreadsheet issues (Classic UI)
+- Fixed an issue with Heater and Cooler UOs
+- Fixed issue #418: Inert compound that reacts
+- Fixed DWSIM requesting unnecessary permission to monitor keyboard input on macOS
+- Fixed floating tables not working on macOS
+- Fixed issue with saving initial estimates for Rigorous Column
+- Fixed compound element parsing from formula
+- Fixed water mass balance in immiscible flash
+- Other minor bug fixes
 
 Version 8.3.4
 
