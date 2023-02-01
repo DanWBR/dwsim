@@ -96,6 +96,19 @@ Public Class FormNewSpreadsheet
 
         Columns.AddRange({"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"})
 
+        Spreadsheet.CurrentWorksheet.SelectionForwardDirection = SelectionForwardDirection.Down
+        Spreadsheet.CurrentWorksheet.SetSettings(WorksheetSettings.Formula_AutoUpdateReferenceCell, True)
+        Spreadsheet.CurrentWorksheet.SetSettings(WorksheetSettings.Formula_AutoPickingCellAddress, True)
+        Spreadsheet.CurrentWorksheet.SetSettings(WorksheetSettings.Formula_AutoFormat, True)
+
+        AddHandler Spreadsheet.WorksheetCreated,
+            Sub(sender, e)
+                e.Worksheet.SelectionForwardDirection = SelectionForwardDirection.Down
+                e.Worksheet.SetSettings(WorksheetSettings.Formula_AutoUpdateReferenceCell, True)
+                e.Worksheet.SetSettings(WorksheetSettings.Formula_AutoPickingCellAddress, True)
+                e.Worksheet.SetSettings(WorksheetSettings.Formula_AutoFormat, True)
+            End Sub
+
         Loaded = True
 
         ExtensionMethods.ChangeDefaultFont(Me)

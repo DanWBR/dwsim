@@ -1325,8 +1325,8 @@ Namespace PropertyPackages
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
-                                If P > Pmin And P < Pmax Then
-                                    Tb = Me.AUX_TSATi(P, i)
+                                'If P > Pmin And P < Pmax Then
+                                Tb = Me.AUX_TSATi(P, i)
                                     If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                         vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                     Else
@@ -1345,10 +1345,10 @@ Namespace PropertyPackages
                                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                         vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
-                                Else
-                                    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
-                                    vk(i) = 0.0#
-                                End If
+                                'Else
+                                '    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
+                                '    vk(i) = 0.0#
+                                'End If
                             Else
                                 WriteWarningMessage("CoolProp Warning: compound " & vn(i) & " not supported.")
                                 vk(i) = 0.0#
@@ -1365,8 +1365,8 @@ Namespace PropertyPackages
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
-                                If P > Pmin And P < Pmax Then
-                                    Tb = Me.AUX_TSATi(P, i)
+                                'If P > Pmin And P < Pmax Then
+                                Tb = Me.AUX_TSATi(P, i)
                                     If T > Tb And Abs(T - Tb) > 0.01 Then
                                         vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                     Else
@@ -1385,10 +1385,10 @@ Namespace PropertyPackages
                                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                         vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
-                                Else
-                                    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
-                                    vk(i) = 0.0#
-                                End If
+                                'Else
+                                '    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
+                                '    vk(i) = 0.0#
+                                'End If
                             Else
                                 WriteWarningMessage("CoolProp Warning: compound " & vn(i) & " not supported.")
                                 vk(i) = 0.0#
@@ -1460,8 +1460,8 @@ Namespace PropertyPackages
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
-                                If P > Pmin And P < Pmax Then
-                                    Tb = Me.AUX_TSATi(P, i)
+                                'If P > Pmin And P < Pmax Then
+                                Tb = Me.AUX_TSATi(P, i)
                                     If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                         vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                     Else
@@ -1480,10 +1480,10 @@ Namespace PropertyPackages
                                         p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                         vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
-                                Else
-                                    WriteWarningMessage("CoolProp Warning: unable to calculate Entropy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
-                                    vk(i) = 0.0#
-                                End If
+                                'Else
+                                '    WriteWarningMessage("CoolProp Warning: unable to calculate Entropy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
+                                '    vk(i) = 0.0#
+                                'End If
                             Else
                                 WriteWarningMessage("CoolProp Warning: compound " & vn(i) & " not supported.")
                                 vk(i) = 0.0#
@@ -1500,8 +1500,8 @@ Namespace PropertyPackages
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
-                                If P > Pmin And P < Pmax Then
-                                    Tb = Me.AUX_TSATi(P, i)
+                                'If P > Pmin And P < Pmax Then
+                                Tb = Me.AUX_TSATi(P, i)
                                     If T > Tb And Abs(T - Tb) > 0.01 Then
                                         vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                     Else
@@ -1520,10 +1520,10 @@ Namespace PropertyPackages
                                         p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                         vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                                     End If
-                                Else
-                                    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
-                                    vk(i) = 0.0#
-                                End If
+                                'Else
+                                '    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
+                                '    vk(i) = 0.0#
+                                'End If
                             Else
                                 WriteWarningMessage("CoolProp Warning: compound " & vn(i) & " not supported.")
                                 vk(i) = 0.0#
