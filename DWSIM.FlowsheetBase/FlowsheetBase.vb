@@ -3376,6 +3376,14 @@ Label_00CC:
         Dim opts As New Dictionary(Of String, Object)()
         opts("Frames") = Microsoft.Scripting.Runtime.ScriptingRuntimeHelpers.True
         engine = IronPython.Hosting.Python.CreateEngine(opts)
+
+        Dim paths0 = engine.GetSearchPaths().ToList()
+        paths0.Add(Path.Combine(My.Application.Info.DirectoryPath, "Lib"))
+        Try
+            engine.SetSearchPaths(paths0)
+        Catch ex As Exception
+        End Try
+
         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
         engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
         engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicsSurface).Assembly)

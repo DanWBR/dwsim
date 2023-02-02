@@ -13,6 +13,8 @@ Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports IronPython.Hosting
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports Microsoft.Scripting.Utils
+Imports PythonConsoleControl
 
 <System.Serializable()> Public Class FormScript
 
@@ -183,9 +185,15 @@ Imports DWSIM.SharedClassesCSharp.FilePicker
 
         Dim paths(My.Settings.ScriptPaths.Count - 1) As String
 
+        Dim paths0 = engine.GetSearchPaths().ToList()
+
         My.Settings.ScriptPaths.CopyTo(paths, 0)
+
+        paths0.AddRange(paths)
+        paths0.Add(Path.Combine(My.Application.Info.DirectoryPath, "Lib"))
+
         Try
-            engine.SetSearchPaths(paths)
+            engine.SetSearchPaths(paths0)
         Catch ex As Exception
         End Try
 
