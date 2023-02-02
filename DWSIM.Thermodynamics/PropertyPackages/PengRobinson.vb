@@ -33,12 +33,11 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "2A322AB7-2256-495d-86C7-797AD19FDE22"
 
-        Public MAT_KIJ(38, 38) As Object
+        Private KijMatrix As Double(,)
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
-        Public ip(,) As Double
 
         Public Sub New(ByVal comode As Boolean)
 
@@ -499,6 +498,33 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
+            If KijMatrix.Length = 0 Then
+
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
+
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
+
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
+                Next
+
+                Return val
+
+            Else
+
+                Return KijMatrix
+
+            End If
+
+        End Function
+
+        Private Sub SetKijMatrix()
+
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
 
@@ -512,12 +538,15 @@ Namespace PropertyPackages
                 Next
             Next
 
-            ip = val
-            m_pr.BIPChanged = False
+            KijMatrix = val
 
-            Return val
+        End Sub
 
-        End Function
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+
+            SetKijMatrix()
+
+        End Sub
 
         Public Function AUX_CM(ByVal Vx As Object) As Double
 

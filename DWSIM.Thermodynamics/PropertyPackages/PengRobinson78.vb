@@ -29,12 +29,12 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "A1107D77-3764-46C1-B00B-D6F9D65E1C87"
 
-        Public MAT_KIJ(38, 38) As Object
+        Private KijMatrix As Double(,)
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson78
         Public prn As New PropertyPackages.ThermoPlugs.PR78
-        Public ip(,) As Double
+
         <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = True
 
         Public Sub New(ByVal comode As Boolean)
@@ -489,12 +489,35 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            Dim hash As Integer = m_pr.InteractionParameters.GetHashCode()
+            If KijMatrix.Length = 0 Then
+
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
+
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
+
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
+                Next
+
+                Return val
+
+            Else
+
+                Return KijMatrix
+
+            End If
+
+        End Function
+
+        Private Sub SetKijMatrix()
 
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
-
-            'If ip_changed Then
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
@@ -506,18 +529,15 @@ Namespace PropertyPackages
                 Next
             Next
 
-            ip = val
-            ip_changed = False
+            KijMatrix = val
 
-            Return val
+        End Sub
 
-            'Else
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
 
-            '    Return ip
+            SetKijMatrix()
 
-            'End If
-
-        End Function
+        End Sub
 
         Public Function AUX_CM(ByVal Vx As Object) As Double
 
