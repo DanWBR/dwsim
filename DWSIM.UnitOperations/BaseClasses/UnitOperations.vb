@@ -144,7 +144,11 @@ Namespace UnitOperations
                 If epcol.ContainsKey(prop) Then
                     If epucol.ContainsKey(prop) Then
                         Dim utype = epucol(prop)
-                        Return Convert.ToDouble(epcol(prop)).ConvertFromSI(su.GetCurrentUnits(utype))
+                        If su Is Nothing Then
+                            Return Convert.ToDouble(epcol(prop)).ConvertFromSI(SharedClasses.SystemsOfUnits.Converter.SharedSI.GetCurrentUnits(utype))
+                        Else
+                            Return Convert.ToDouble(epcol(prop)).ConvertFromSI(su.GetCurrentUnits(utype))
+                        End If
                     Else
                         Return epcol(prop)
                     End If

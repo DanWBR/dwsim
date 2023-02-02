@@ -1254,6 +1254,8 @@ Namespace SystemsOfUnits
 
     <System.Serializable()> Public Class Converter
 
+        Public Shared Property SharedSI As New SI()
+
         Public Shared Function ConvertArrayToSI(ByVal units As String, ByVal values As Double()) As Double()
             Dim newarr As New List(Of Double)
             For Each d In values
