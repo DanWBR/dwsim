@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormUnhandledException
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormUnhandledException
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUnhandledException))
         Me.Label1 = New System.Windows.Forms.Label()
@@ -37,7 +37,6 @@ Partial Class FormUnhandledException
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -63,7 +62,7 @@ Partial Class FormUnhandledException
         '
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.BackColor = System.Drawing.Color.White
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.emblem_important
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_sun_with_face
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
@@ -123,18 +122,11 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
-        'LabelWithDivider2
-        '
-        resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
-        Me.LabelWithDivider2.Gap = 4
-        Me.LabelWithDivider2.Name = "LabelWithDivider2"
-        '
         'FormUnhandledException
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.LabelWithDivider2)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
@@ -174,5 +166,4 @@ Partial Class FormUnhandledException
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents LabelWithDivider2 As LabelWithDivider
 End Class

@@ -131,14 +131,11 @@
   <data name="TextBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="TextBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="TextBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 81</value>
+    <value>10, 59</value>
   </data>
   <data name="TextBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>673, 321</value>
+    <value>715, 343</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>View code @ GitHub</value>
@@ -150,7 +147,7 @@
     <value>Support Options</value>
   </data>
   <data name="Button6.Text" xml:space="preserve">
-    <value>Search Wiki</value>
+    <value>Search GitHub Issues</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 13</value>
@@ -159,10 +156,10 @@
     <value>Search DWSIM Forums for information about the current error.</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 13</value>
+    <value>290, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
-    <value>Search DWSIM Wiki for information about the current error.</value>
+    <value>Search GitHub Issues for information about the current error.</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>507, 13</value>
@@ -175,16 +172,6 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>View the code line where this error was raised/generated on DWSIM's GitHub repository.</value>
-  </data>
-  <data name="LabelWithDivider2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 56</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LabelWithDivider2.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="LabelWithDivider2.Text" xml:space="preserve">
-    <value>Details</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -204,6 +191,9 @@
         59H847L95LX95LX95LX95Lf75Ljx15jguEPjv1f04rz15cv05c705c/05c/05c3y4cQAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>An unhandled error was raised</value>
