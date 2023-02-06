@@ -1648,8 +1648,9 @@ Namespace PropertyPackages
             Dim VPc = RET_VPC()
 
             Dim V0 = 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+            Dim T0 = VTc.MultiplyY(Vz).SumY
 
-            Return gm.CriticalPoint(Vz, VTc.Min, VTc.Max, V0, 3.85 * V0)
+            Return gm.CriticalPoint(Vz, V0, T0)
 
         End Function
 

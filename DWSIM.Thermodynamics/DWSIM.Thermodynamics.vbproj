@@ -133,10 +133,6 @@
     <Reference Include="Mages.Core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mages.2.0.1\lib\netstandard2.0\Mages.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Mapack">
-      <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Numerics.5.0.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
@@ -767,6 +763,10 @@
     <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
       <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
       <Name>DWSIM.Inspector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.MathOps.Mapack\DWSIM.MathOps.Mapack.csproj">
+      <Project>{f8bf3f17-f408-4dd0-9dea-da6f66a20a42}</Project>
+      <Name>DWSIM.MathOps.Mapack</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.MathOps.SimpsonIntegrator\DWSIM.MathOps.SimpsonIntegrator.csproj">
       <Project>{86af29bb-4cb1-4818-98a3-031d0711625d}</Project>

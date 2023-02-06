@@ -640,7 +640,7 @@ restart:        i = 0
 
                 Dim dV As Mapack.Matrix
                 Try
-                    dV = dfV_dV.Solve(fV.Multiply(-1))
+                    dV = dfV_dV.Solve(Mapack.Matrix.Multiply(fV, -1))
                 Catch ex As Exception
                     dV = New Mapack.Matrix(m, 1)
                     i = 0

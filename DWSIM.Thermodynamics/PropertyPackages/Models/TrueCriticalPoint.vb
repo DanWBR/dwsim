@@ -19,6 +19,7 @@
 Imports DWSIM.MathOps.MathEx.Common
 Imports DWSIM.MathOps.MathEx
 Imports MathNet.Numerics
+Imports Community.CsharpSqlite.Sqlite3
 
 Namespace Utilities.TCP
 
@@ -32,7 +33,7 @@ Namespace Utilities.TCP
 
             Dim res As New ArrayList
 
-            Dim V, Vc_sup, Vc_inf As Double
+            Dim V, Vc_sup, Vc_inf, Tcm, Pcm As Double
 
             Dim stmp(2)
             Dim n, R As Double
@@ -52,6 +53,8 @@ Namespace Utilities.TCP
                 If Vz(i) <> 0 Then
                     Tc(i) = VTc(i)
                     Pc(i) = VPc(i)
+                    Tcm += Vz(i) * VTc(i)
+                    Pcm += Vz(i) * VPc(i)
                 End If
                 i = i + 1
             Loop Until i = n + 1
@@ -71,7 +74,7 @@ Namespace Utilities.TCP
 
             Dim fV, fV_inf, nsub, delta_Vc As Double
 
-            nsub = 50
+            nsub = 100
 
             delta_Vc = (Vc_sup - Vc_inf) / nsub
 
@@ -178,7 +181,9 @@ Final3:
             stmp(1) = P
             stmp(2) = V
 
-            res.Add(stmp.Clone)
+            If T > 0.5 * Tcm And T < 2 * Tcm And P > 0.3 * Pcm And P < 2 * Pcm Then
+                res.Add(stmp.Clone)
+            End If
 
             If Vc_inf <= b Then
                 GoTo Final2
@@ -497,7 +502,7 @@ Final:
             Next
 
             Try
-                Dim trg As Mapack.ILuDecomposition = MA.GetLuDecomposition
+                Dim trg As New Mapack.LuDecomposition(MA)
                 i = 0
                 Do
                     m2(i, 0) = 0
@@ -1032,7 +1037,7 @@ Final2:
 
             Dim res As New ArrayList
 
-            Dim V, Vc_sup, Vc_inf As Double
+            Dim V, Vc_sup, Vc_inf, Tcm, Pcm As Double
 
             Dim stmp(2)
             Dim n, R As Double
@@ -1052,6 +1057,8 @@ Final2:
                 If Vz(i) <> 0 Then
                     Tc(i) = VTc(i)
                     Pc(i) = VPc(i)
+                    Tcm += Vz(i) * VTc(i)
+                    Pcm += Vz(i) * VPc(i)
                 End If
                 i = i + 1
             Loop Until i = n + 1
@@ -1180,7 +1187,9 @@ Final3:
             stmp(1) = P
             stmp(2) = V
 
-            res.Add(stmp.Clone)
+            If T > 0.5 * Tcm And T < 2 * Tcm And P > 0.3 * Pcm And P < 2 * Pcm Then
+                res.Add(stmp.Clone)
+            End If
 
             If Vc_inf <= b Then
                 GoTo Final2
@@ -1503,7 +1512,7 @@ Final:
             'solved = MathEx.SysLin.rsolve.rmatrixsolve(MA_, MB_, n, Dn0)
 
             Try
-                Dim trg As Mapack.ILuDecomposition = MA.GetLuDecomposition
+                Dim trg As New Mapack.LuDecomposition(MA)
                 'Console.WriteLine(trg.UpperTriangularFactor.ToString)
                 i = 0
                 Do
@@ -2054,11 +2063,8 @@ Final2:
             Dim n As Integer = Vz.Length - 1
 
             Dim Vz0 As Double() = Vz.Clone()
-            Dim i As Integer
 
-            For i = 0 To n
-                If Vz0(i) = 0.0 Then Vz0(i) = Vz.MinY_NonZero() * 0.01
-            Next
+            Dim i As Integer
 
             Dim mres(n) As Double
 
@@ -2066,38 +2072,20 @@ Final2:
 
             Dim h As Double = 0.0001
 
-            Dim n1 = 1 - 2 * h * Vz0(jidx)
-            Dim n2 = 1 - 1 * h * Vz0(jidx)
-            Dim n3 = 1 + 1 * h * Vz0(jidx)
-            Dim n4 = 1 + 2 * h * Vz0(jidx)
+            Dim n2 = 1.0 - h * Vz0(jidx)
+            Dim n3 = 1.0 + h * Vz0(jidx)
 
-            'Dim Vz1 = perturb_n(jidx, -2 * h, Vz0)
-            'Dim P1 = Math.Abs(CalcP.Invoke(T, V / n1, Vz1))
+            Dim Vz2 = perturb_n(jidx, -h * Vz0(jidx), Vz0)
+            Dim P2 = CalcP.Invoke(T, V / n2, Vz2)
 
-            Dim Vz2 = perturb_n(jidx, -h, Vz0)
-            Dim P2 = Math.Abs(CalcP.Invoke(T, V / n2, Vz2))
+            Dim Vz3 = perturb_n(jidx, h * Vz0(jidx), Vz0)
+            Dim P3 = CalcP.Invoke(T, V / n3, Vz3)
 
-            Dim Vz3 = perturb_n(jidx, h, Vz0)
-            Dim P3 = Math.Abs(CalcP.Invoke(T, V / n3, Vz3))
-
-            'Dim Vz4 = perturb_n(jidx, 2 * h, Vz0)
-            'Dim P4 = Math.Abs(CalcP.Invoke(T, V / n4, Vz4))
-
-            'd1 = FugacityTV.Invoke(T, V / n1, Vz1).AddConstY(Math.Log(P1)).AddY(Vz1.LogY())
-            'd4 = FugacityTV.Invoke(T, V / n4, Vz4).AddConstY(Math.Log(P4)).AddY(Vz4.LogY())
-
-            Dim t2 = Task.Run(Sub()
-                                  d2 = FugacityTV.Invoke(T, V / n2, Vz2).AddConstY(Math.Log(P2)).AddY(Vz2.LogY())
-                              End Sub)
-            Dim t3 = Task.Run(Sub()
-                                  d3 = FugacityTV.Invoke(T, V / n3, Vz3).AddConstY(Math.Log(P3)).AddY(Vz3.LogY())
-                              End Sub)
-
-            Task.WaitAll(t2, t3)
+            d2 = FugacityTV.Invoke(T, V / n2, Vz2).MultiplyConstY(P2).MultiplyY(Vz2).LogY()
+            d3 = FugacityTV.Invoke(T, V / n3, Vz3).MultiplyConstY(P3).MultiplyY(Vz3).LogY()
 
             i = 0
             Do
-                'mres(i) = (d1(i) - 8 * d2(i) + 8 * d3(i) - d4(i)) / (12 * h * Vz(jidx))
                 mres(i) = (d3(i) - d2(i)) / (2 * h * Vz0(jidx))
                 If Double.IsNaN(mres(i)) Then mres(i) = 0.0
                 i = i + 1
@@ -2118,21 +2106,18 @@ Final2:
             Dim Vz0 As Double() = Vz.Clone()
 
             For i = 0 To n
-                If Vz0(i) = 0.0 Then Vz0(i) = 1.0E-20
+                If Vz0(i) = 0.0 Then Vz0(i) = 0.0000001
             Next
 
             Dim points1(n), points2(n) As Double
 
-            Dim h As Double = 0.001
+            Dim h As Double = 0.0001
 
-            Dim t1 = Task.Run(Sub()
-                                  points1 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, -h, Vz0))
-                              End Sub)
-            Dim t2 = Task.Run(Sub()
-                                  points2 = dlnfug_i_dn_j(jidx, T, V, perturb_n(kidx, h, Vz0))
-                              End Sub)
+            Dim n1 = 1.0 - h * Vz0(kidx)
+            Dim n2 = 1.0 + h * Vz0(kidx)
 
-            Task.WaitAll(t1, t2)
+            points1 = dlnfug_i_dn_j(jidx, T, V / n1, perturb_n(kidx, -h * Vz0(kidx), Vz0))
+            points2 = dlnfug_i_dn_j(jidx, T, V / n2, perturb_n(kidx, h * Vz0(kidx), Vz0))
 
             i = 0
             Do
@@ -2144,7 +2129,7 @@ Final2:
 
         End Function
 
-        Private Function perturb_n(ByVal i As Integer, ByVal h As Double, ByVal Vx As Double()) As Double()
+        Private Function perturb_n(ByVal i As Integer, ByVal dn As Double, ByVal Vx As Double()) As Double()
 
             Dim n As Integer = Vx.Length - 1
             Dim j As Integer = 0
@@ -2159,7 +2144,7 @@ Final2:
                 j = j + 1
             Loop Until j = n + 1
 
-            Vn(i) = Vn(i) * (1 + h)
+            Vn(i) = Vn(i) * (1.0 + dn)
 
             Return Vn.NormalizeY()
 
@@ -2254,18 +2239,7 @@ Final2:
 
             Dim brent As New BrentOpt.Brent
 
-            Dim Pmi, Tmin2 As Double
-            Dim cnt As Integer = 0
-
-            Tmin2 = Tmin
-
-            Do
-                Pmi = CalcP.Invoke(Tmin2, V, Vz)
-                Tmin2 *= 1.05
-                cnt += 1
-            Loop Until Pmi > 0 Or cnt > 50
-
-            T = brent.BrentOpt2(Tmin, Tmax, 10, 0.0001, 100,
+            T = brent.BrentOpt2(Tmin, Tmax, 20, 0.0000001, 100,
                                 Function(Tx)
                                     Return QijDetBrent(Tx, V, Vz)
                                 End Function)
@@ -2277,7 +2251,7 @@ Final2:
             Dim m2 As Mapack.Matrix = New Mapack.Matrix(MA.Rows, 1)
 
             Try
-                Dim trg As Mapack.ILuDecomposition = MA.GetLuDecomposition
+                Dim trg As New Mapack.LuDecomposition(MA)
                 i = 0
                 Do
                     m2(i, 0) = 0
@@ -2301,13 +2275,13 @@ Final2:
             Dim soma_Dn As Double = 0
             i = 0
             Do
-                soma_Dn += Math.Abs(Dn0(i))
+                soma_Dn += Dn0(i) ^ 2
                 i = i + 1
             Loop Until i = n + 1
 
             i = 0
             Do
-                Dn(i) = Dn0(i) / soma_Dn
+                Dn(i) = Dn0(i) / soma_Dn ^ 0.5
                 i = i + 1
             Loop Until i = n + 1
 
@@ -2317,24 +2291,24 @@ Final2:
 
         End Function
 
-        Function CriticalPoint(ByVal Vz As Double(), Tmin_ As Double, Tmax_ As Double, Vmin_ As Double, Vmax_ As Double) As List(Of Double())
+        Function CriticalPoint(ByVal Vz As Double(), V0 As Double, T0 As Double) As List(Of Double())
 
             Dim res As New List(Of Double())
 
             Dim V As Double
 
-            Tmin = Tmin_
-            Tmax = Tmax_
-            Vmin = Vmin_
-            Vmax = Vmax_
+            Tmin = T0 * 0.5
+            Tmax = T0 * 2
+            Vmin = 0.5 * V0
+            Vmax = 4.0 * V0
 
-            Tit = Tmin
+            Tit = T0
 
             Dim brent As New BrentOpt.Brent
 
             Dim fV, fV2, delta_Vc, Viter As Double
 
-            delta_Vc = (Vmax - Vmin) / 5
+            delta_Vc = (Vmax - Vmin) / 15
 
             Viter = Vmax
 
@@ -2342,30 +2316,23 @@ Final2:
                 fV = TripleSum2(Viter, Vz)
                 Viter -= delta_Vc
                 fV2 = TripleSum2(Viter, Vz)
-            Loop Until fV * fV2 < 0 Or Viter <= Vmin
+            Loop Until fV * fV2 < 0.0 Or Viter <= Vmin
 
             V = brent.BrentOpt2(Viter, Viter + delta_Vc, 2, 0.0000000001, 100,
                                 Function(Vi)
                                     Return TripleSum2(Vi, Vz)
                                 End Function)
 
-            Dim T, P, Pmi, Tmin2 As Double
-            Dim cnt As Integer = 0
-            Tmin2 = Tmin
-            Do
-                Pmi = CalcP.Invoke(Tmin2, V, Vz)
-                Tmin2 *= 1.05
-                cnt += 1
-            Loop Until Pmi > 0 Or cnt > 50
+            Dim T, P As Double
 
-            T = brent.BrentOpt2(Tmin, Tmax, 5, 0.0000001, 100,
+            T = brent.BrentOpt2(Tmin, Tmax, 50, 0.001, 1000,
                                 Function(Tx)
                                     Return QijDetBrent(Tx, V, Vz)
                                 End Function)
 
             P = CalcP.Invoke(T, V, Vz)
 
-            res.Add(New Double() {T, P, V})
+            res.Add({T, P, V})
 
             Return res
 
