@@ -75,6 +75,29 @@ Namespace PropertyPackages
 
 #Region "    DWSIM Functions"
 
+        Public Overrides Function DW_CalculateCriticalPoints() As List(Of Double())
+
+            Dim Vz = RET_VMOL(Phase.Mixture)
+
+            Dim VTc = RET_VTC()
+            Dim VPc = RET_VPC()
+
+            Dim V0 = 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+            Dim T0 = VTc.MultiplyY(Vz).SumY
+
+            Dim cproutine = New Utilities.TCP.Methods_PR78()
+
+            Dim cps = cproutine.CRITPT_PR(Vz, VTc, VPc, RET_VVC, RET_VW, RET_VKij)
+
+            Dim cplist As New List(Of Double())
+            For Each item In cps
+                cplist.Add(New Double() {item(0), item(1), item(2)})
+            Next
+
+            Return cplist
+
+        End Function
+
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
             Select Case Phase1
                 Case Phase.Liquid
