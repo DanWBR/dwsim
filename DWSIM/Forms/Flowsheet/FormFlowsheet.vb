@@ -3009,7 +3009,7 @@ Public Class FormFlowsheet
             Case Interfaces.IFlowsheet.MessageType.Warning
                 WriteToLog(text, Color.OrangeRed, SharedClasses.DWSIM.Flowsheet.MessageType.Warning)
             Case Interfaces.IFlowsheet.MessageType.Tip
-                WriteToLog(text, Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+                'WriteToLog(text, Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
             Case Interfaces.IFlowsheet.MessageType.Other
                 WriteToLog(text, Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
         End Select

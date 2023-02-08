@@ -121,8 +121,8 @@
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
-  <data name="cbFSMethod.Items3" xml:space="preserve">
-    <value>None (Throw Error/Exception)</value>
+  <data name="cbFSMethod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cbFSMethod.Location" type="System.Drawing.Point, System.Drawing">
