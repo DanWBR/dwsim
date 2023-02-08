@@ -28,6 +28,8 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
+        chkAutoEstimateNU.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage
+
         cbLiqDens.SelectedIndex = PropPack.LiquidDensityCalculationMode_Subcritical
 
         cbLiqVisc.SelectedIndex = PropPack.LiquidViscosityCalculationMode_Subcritical
@@ -57,6 +59,10 @@ Public Class PropertyPackageSettingsEditingControl
         chkCalcAdditionalProps.Checked = PropPack.CalculateAdditionalMaterialStreamProperties
 
         tbSPCheckThres.Text = PropPack.SingleCompoundCheckThreshold
+
+        chkAutoEstimateNU.Checked = PropPack.AutoEstimateMissingNRTLUNIQUACParameters
+
+        chkUseHenry.Checked = PropPack.UseHenryConstants
 
         AddHandler tbSPCheckThres.TextChanged, Sub()
                                                    Try
@@ -125,6 +131,17 @@ Public Class PropertyPackageSettingsEditingControl
                                                               PropPack.CalculateAdditionalMaterialStreamProperties = chkCalcAdditionalProps.Checked
                                                           End Sub
 
+        AddHandler chkUseHenry.CheckedChanged, Sub()
+                                                   PropPack.UseHenryConstants = chkUseHenry.Checked
+                                               End Sub
+
+        AddHandler chkAutoEstimateNU.CheckedChanged, Sub()
+                                                         PropPack.AutoEstimateMissingNRTLUNIQUACParameters = chkAutoEstimateNU.Checked
+                                                     End Sub
+
     End Sub
 
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Process.Start("https://github.com/DanWBR/dwsim/blob/windows/DWSIM.Thermodynamics/Assets/henry.txt")
+    End Sub
 End Class

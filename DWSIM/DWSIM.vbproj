@@ -784,6 +784,12 @@
     <Compile Include="Forms\FormPIDTuning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormPropertyPackageInfo.Designer.vb">
+      <DependentUpon>FormPropertyPackageInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPropertyPackageInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </Compile>
@@ -1573,6 +1579,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPIDTuning.resx">
       <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropertyPackageInfo.resx">
+      <DependentUpon>FormPropertyPackageInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.de.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>

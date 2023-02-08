@@ -31,6 +31,11 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "5265F953-8825-4a80-9112-A3B68C329E4C"
 
+        Public Overrides ReadOnly Property DisplayName As String = "UNIQUAC"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Uses the UNIQUAC Model to calculate liquid phase activity coefficients."
+
         Public Property m_uni As Auxiliary.UNIQUAC
             Get
                 Return m_act
@@ -138,7 +143,15 @@ Namespace PropertyPackages
         Dim ms As Streams.MaterialStream
         Dim ppuf As MODFACPropertyPackage, unifac As Auxiliary.NISTMFAC
 
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+            If AutoEstimateMissingNRTLUNIQUACParameters Then
+                EstimateMissingInteractionParameters(True)
+            End If
+        End Sub
+
         Public Sub EstimateMissingInteractionParameters(verbose As Boolean)
+
+            If Flowsheet Is Nothing Then Exit Sub
 
             For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
                 If Not m_uni.InteractionParameters.ContainsKey(cp.Name) Then
@@ -246,6 +259,12 @@ Namespace PropertyPackages
                                 Console.WriteLine(String.Format("Estimated UNIQUAC IP set for {0}/{1}: {2:N2}/{3:N2}/{4}",
                                                          comp1.Name, comp2.Name, finalval2(0), finalval2(1)))
 
+                                If Flowsheet IsNot Nothing Then
+                                    Flowsheet.ShowMessage(String.Format("Estimated UNIQUAC IP set for {0}/{1}: {2:N2}/{3:N2}/{4}",
+                                                         comp1.Name, comp2.Name, finalval2(0), finalval2(1)),
+                                                         Interfaces.IFlowsheet.MessageType.Information)
+                                End If
+
                             End If
 
                         Catch ex As Exception
@@ -253,6 +272,12 @@ Namespace PropertyPackages
                             If verbose Then
                                 Console.WriteLine(String.Format("Error estimating UNIQUAC IP set for {0}/{1}: {2}",
                                                          comp1.Name, comp2.Name, ex.ToString()))
+
+                                If Flowsheet IsNot Nothing Then
+                                    Flowsheet.ShowMessage(String.Format("Error estimating UNIQUAC IP set for {0}/{1}: {2}",
+                                                         comp1.Name, comp2.Name, ex.ToString()),
+                                                         Interfaces.IFlowsheet.MessageType.Information)
+                                End If
 
                             End If
 

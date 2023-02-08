@@ -497,9 +497,6 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;ogc1.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="Button2.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>

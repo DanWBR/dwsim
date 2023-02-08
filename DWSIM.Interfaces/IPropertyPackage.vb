@@ -70,6 +70,10 @@
 
     Sub DisplayGroupedEditingForm()
 
+    ReadOnly Property DisplayName As String
+
+    ReadOnly Property DisplayDescription As String
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseEnvelopeOptions

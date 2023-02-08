@@ -39,6 +39,11 @@ Namespace PropertyPackages
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
 
+        Public Overrides ReadOnly Property DisplayName As String = "Peng-Robinson"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses the Peng-Robinson Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables at high pressures."
+
         Public Sub New(ByVal comode As Boolean)
 
             MyBase.New(comode)

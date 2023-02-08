@@ -31,6 +31,12 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "519EB917-0B2E-4ac1-9AF2-2D1A2A55011F"
 
+        Public Overrides ReadOnly Property DisplayName As String = "Modified UNIFAC (Dortmund)"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Uses the Uses the Dortmund modification of the UNIFAC Model to calculate liquid phase activity coefficients."
+
+
         Public Property m_uni As Auxiliary.Modfac
             Get
                 Return m_act

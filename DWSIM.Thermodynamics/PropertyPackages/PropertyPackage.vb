@@ -249,6 +249,10 @@ Namespace PropertyPackages
 
         Public Property SingleCompoundCheckThreshold As Double = 0.99999
 
+        Public Property UseHenryConstants As Boolean = True
+
+        Public Property AutoEstimateMissingNRTLUNIQUACParameters = True
+
         ''' <summary>
         ''' ' For mobile compatibility only.
         ''' </summary>
@@ -463,7 +467,9 @@ Namespace PropertyPackages
 
         Public Property PropertyMethodsInfo As New PropertyPackageMethods
 
-        Public Property UseHenryConstants As Boolean = True
+        Public Overridable ReadOnly Property DisplayName As String = "" Implements IPropertyPackage.DisplayName
+
+        Public Overridable ReadOnly Property DisplayDescription As String = "A Property Package consists in a set of property methods and procedures used to calculate chemical phase equilibria and physical properties." Implements IPropertyPackage.DisplayDescription
 
         Public Property OverrideKvalFugCoeff As Boolean = False
 
@@ -11724,6 +11730,12 @@ Final3:
             Dim e1 = (From el As XElement In data Select el Where el.Name = "Parameters").FirstOrDefault
             If e1 IsNot Nothing Then Me.ParametersXMLString = e1.ToString()
 
+            e1 = (From el As XElement In data Select el Where el.Name = "UseHenryConstants").FirstOrDefault
+            If e1 IsNot Nothing Then UseHenryConstants = e1.Value.ToDoubleFromInvariant()
+
+            e1 = (From el As XElement In data Select el Where el.Name = "AutoEstimateMissingNRTLUNIQUACParameters").FirstOrDefault
+            If e1 IsNot Nothing Then AutoEstimateMissingNRTLUNIQUACParameters = e1.Value.ToDoubleFromInvariant()
+
             e1 = (From el As XElement In data Select el Where el.Name = "SingleCompoundCheckThreshold").FirstOrDefault
             If e1 IsNot Nothing Then SingleCompoundCheckThreshold = e1.Value.ToDoubleFromInvariant()
 
@@ -12340,6 +12352,9 @@ Final3:
                     Catch ex As Exception
                     End Try
                 End If
+
+                .Add(New XElement("UseHenryConstants", UseHenryConstants))
+                .Add(New XElement("AutoEstimateMissingNRTLUNIQUACParameters", AutoEstimateMissingNRTLUNIQUACParameters))
 
                 .Add(New XElement("SingleCompoundCheckThreshold", SingleCompoundCheckThreshold.ToString(ci)))
 

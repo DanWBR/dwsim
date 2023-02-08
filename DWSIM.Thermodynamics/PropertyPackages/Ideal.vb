@@ -36,6 +36,11 @@ Namespace PropertyPackages
         Private m_uni As New PropertyPackages.Auxiliary.Unifac
         Private m_id As New PropertyPackages.Auxiliary.Ideal
 
+        Public Overrides ReadOnly Property DisplayName As String = "Ideal (Raoult's Law)"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses Raoult's Law to calculate K-values. Recommended for gases and hydrocarbons at low pressures."
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
         End Sub

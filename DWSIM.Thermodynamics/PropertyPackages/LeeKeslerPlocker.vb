@@ -29,6 +29,13 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "DF7C2420-1FBB-4b35-9D87-6ECF530FED7A"
 
+        Public Overrides ReadOnly Property DisplayName As String = "Lee-Kesler-Plöcker"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses the Lee-Kesler-Plöcker Equation of State. Recommended for use with hydrocarbons and non-condensables at high pressures. Slower than PR and SRK."
+
+        <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = True
+
         Public MAT_KIJ(38, 38)
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS

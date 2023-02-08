@@ -1546,4 +1546,14 @@ Public Class FormSimulWizard
 
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        If DataGridViewPP.SelectedRows.Count > 0 Then
+            Dim pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value)
+            Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
+            fppi.ShowDialog()
+        End If
+
+    End Sub
+
 End Class

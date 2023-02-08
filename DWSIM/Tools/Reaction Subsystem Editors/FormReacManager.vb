@@ -279,7 +279,7 @@ Public Class FormReacManager
                                                        row.Cells(2).Value = rxn1.Equation
                                                    Next
                                                End Sub
-                    frc.Show()
+                    frc.ShowDialog()
                 Case ReactionType.Equilibrium
                     Dim fre As New FormReacEq
                     With fre
@@ -294,7 +294,7 @@ Public Class FormReacManager
                                                        row.Cells(2).Value = rxn1.Equation
                                                    Next
                                                End Sub
-                    fre.Show()
+                    fre.ShowDialog()
                 Case ReactionType.Kinetic
                     Dim frk As New FormReacKinetic
                     With frk
@@ -309,7 +309,7 @@ Public Class FormReacManager
                                                        row.Cells(2).Value = rxn1.Equation
                                                    Next
                                                End Sub
-                    frk.Show()
+                    frk.ShowDialog()
                 Case ReactionType.Heterogeneous_Catalytic
                     Dim frk As New FormReacHeterog
                     With frk
@@ -324,7 +324,7 @@ Public Class FormReacManager
                                                        row.Cells(2).Value = rxn1.Equation
                                                    Next
                                                End Sub
-                    frk.Show()
+                    frk.ShowDialog()
             End Select
         End If
     End Sub

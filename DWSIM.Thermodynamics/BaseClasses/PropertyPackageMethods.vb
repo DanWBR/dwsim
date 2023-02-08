@@ -24,4 +24,10 @@ Public Class PropertyPackageMethods
 
     Public Property Liquid_Density As String = "Experimental / Rackett / COSTALD" Implements IPropertyPackageMethods.Liquid_Density
 
+    Public Property SurfaceTension As String = "Experimental / Brock-Bird" Implements IPropertyPackageMethods.SurfaceTension
+
+    Public Property Solid_Density As String = "Experimental Data / User-Defined" Implements IPropertyPackageMethods.Solid_Density
+
+    Public Property Solid_Enthalpy_Entropy_CpCv As String = "Experimental Solid Cp / From Liquid Phase Enthalpy + Enthalpy of Fusion" Implements IPropertyPackageMethods.Solid_Enthalpy_Entropy_CpCv
+
 End Class

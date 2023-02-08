@@ -3,6 +3,12 @@
     Inherits DWSIM.Thermodynamics.PropertyPackages.ActivityCoefficientPropertyPackage
 
     Public Property WilsonM As WilsonModel
+
+    Public Overrides ReadOnly Property DisplayName As String = "Wilson"
+
+    Public Overrides ReadOnly Property DisplayDescription As String =
+            "Uses the Wilson Model to calculate liquid phase activity coefficients."
+
     Sub New()
 
         MyBase.New(False)

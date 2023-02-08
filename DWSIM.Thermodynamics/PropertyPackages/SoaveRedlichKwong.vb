@@ -36,6 +36,10 @@ Namespace PropertyPackages
         Private KijMatrix As Double(,)
 
         Public m_pr As New PropertyPackages.Auxiliary.SRK
+        Public Overrides ReadOnly Property DisplayName As String = "Soave-Redlich-Kwong"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses the Soave-Redlich-Kwong Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables at high pressures."
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)

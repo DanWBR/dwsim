@@ -10,5 +10,9 @@
     Property Liquid_ThermalConductivity As String
     Property Liquid_Viscosity As String
     Property Liquid_Density As String
+    Property SurfaceTension As String
+
+    Property Solid_Density As String
+    Property Solid_Enthalpy_Entropy_CpCv As String
 
 End Interface

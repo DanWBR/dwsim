@@ -281,7 +281,7 @@
     <value>Liquid Phase: Use Poynting Correction Factor</value>
   </data>
   <data name="chkVapFugIdeal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 326</value>
+    <value>18, 352</value>
   </data>
   <data name="chkVapFugIdeal.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 17</value>
@@ -290,7 +290,7 @@
     <value>Ideal Vapor Phase</value>
   </data>
   <data name="chkIgnoreSalLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 78</value>
+    <value>20, 146</value>
   </data>
   <data name="chkIgnoreSalLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 17</value>
@@ -299,7 +299,7 @@
     <value>Ignore Maximum Salinity Limit (Seawater Model only)</value>
   </data>
   <data name="chkIgnoreVapFracLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 111</value>
+    <value>20, 111</value>
   </data>
   <data name="chkIgnoreVapFracLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 17</value>
@@ -308,7 +308,7 @@
     <value>Ignore Vapor Fraction Bounds (Sour Water Model only)</value>
   </data>
   <data name="chkIgnoreIPs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 45</value>
+    <value>20, 45</value>
   </data>
   <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 17</value>
@@ -344,6 +344,37 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Material Streams</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPage3.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Density/Viscosity/Fugacity</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Enthalpy/Entropy/Cp</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Model-Specific</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Material Streams</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>676, 428</value>
+  </data>
   <data name="tbSPCheckThres.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 78</value>
   </data>
@@ -359,27 +390,26 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Single Compound Check Molar Fraction Threshold</value>
   </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 402</value>
+  <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 323</value>
   </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Material Streams</value>
+  <data name="chkUseHenry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 322</value>
   </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 402</value>
+  <data name="chkUseHenry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 17</value>
   </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Caloric Properties</value>
+  <data name="chkUseHenry.Text" xml:space="preserve">
+    <value>Liquid Phase: Use Henry's Constants (if available)</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TabPage3.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="chkAutoEstimateNU.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 78</value>
   </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 402</value>
+  <data name="chkAutoEstimateNU.Size" type="System.Drawing.Size, System.Drawing">
+    <value>334, 17</value>
   </data>
-  <data name="TabPage3.Text" xml:space="preserve">
-    <value>Other Properties</value>
+  <data name="chkAutoEstimateNU.Text" xml:space="preserve">
+    <value>Try Automatic Estimation of Missing NRTL/UNIQUAC Parameters</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 16</value>
@@ -389,15 +419,6 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Other</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 402</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Misc Settings</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 428</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>676, 428</value>

@@ -52,7 +52,10 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.chkUseHenry = New System.Windows.Forms.CheckBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.chkAutoEstimateNU = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -201,10 +204,10 @@ Partial Class PropertyPackageSettingsEditingControl
         'TabControl1
         '
         resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
@@ -241,6 +244,8 @@ Partial Class PropertyPackageSettingsEditingControl
         'TabPage3
         '
         resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.LinkLabel1)
+        Me.TabPage3.Controls.Add(Me.chkUseHenry)
         Me.TabPage3.Controls.Add(Me.Label2)
         Me.TabPage3.Controls.Add(Me.cbLiqDens)
         Me.TabPage3.Controls.Add(Me.chkLiqDensPCorr)
@@ -258,15 +263,34 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'LinkLabel1
+        '
+        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.TabStop = True
+        '
+        'chkUseHenry
+        '
+        resources.ApplyResources(Me.chkUseHenry, "chkUseHenry")
+        Me.chkUseHenry.Name = "chkUseHenry"
+        Me.chkUseHenry.UseVisualStyleBackColor = True
+        '
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.chkAutoEstimateNU)
         Me.TabPage4.Controls.Add(Me.Label9)
         Me.TabPage4.Controls.Add(Me.chkIgnoreSalLim)
         Me.TabPage4.Controls.Add(Me.chkIgnoreIPs)
         Me.TabPage4.Controls.Add(Me.chkIgnoreVapFracLim)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'chkAutoEstimateNU
+        '
+        resources.ApplyResources(Me.chkAutoEstimateNU, "chkAutoEstimateNU")
+        Me.chkAutoEstimateNU.Name = "chkAutoEstimateNU"
+        Me.chkAutoEstimateNU.UseVisualStyleBackColor = True
         '
         'Label9
         '
@@ -323,4 +347,7 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents Label9 As Label
     Friend WithEvents tbSPCheckThres As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents chkUseHenry As CheckBox
+    Friend WithEvents chkAutoEstimateNU As CheckBox
+    Friend WithEvents LinkLabel1 As LinkLabel
 End Class
