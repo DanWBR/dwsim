@@ -56,6 +56,19 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
             ReadData()
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal"
+                .Vapor_Thermal_Conductivity = "CoolProp"
+                .Vapor_Viscosity = "CoolProp"
+                .Vapor_Enthalpy_Entropy_CpCv = "CoolProp"
+                .Vapor_Density = "CoolProp"
+                .Liquid_Fugacity = "Vapor Pressure"
+                .Liquid_Enthalpy_Entropy_CpCv = "CoolProp"
+                .Liquid_ThermalConductivity = "CoolProp"
+                .Liquid_Viscosity = "CoolProp"
+            End With
+
         End Sub
 
         Public Overrides Sub DisplayEditingForm()

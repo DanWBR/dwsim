@@ -51,6 +51,14 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.ChaoSeader
 
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Grayson-Streed EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Lee-Kesler"
+                .Vapor_Density = "Grayson-Streed EOS"
+                .Liquid_Fugacity = "Grayson-Streed EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Lee-Kesler"
+            End With
+
         End Sub
 
         Public Overrides Sub ConfigParameters()

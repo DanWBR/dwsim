@@ -207,6 +207,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\PropertyPackageMethods.vb" />
     <Compile Include="EditingForms\PropertyPackages\FormConfigDH.designer.vb">
       <DependentUpon>FormConfigDH.vb</DependentUpon>
     </Compile>

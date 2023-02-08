@@ -33,9 +33,21 @@ Namespace PropertyPackages
 #Region "Initialization"
 
         Public Sub New(ByVal comode As Boolean)
+
             MyBase.New(comode)
+
             EnthalpyEntropyCpCvCalculationMode = EnthalpyEntropyCpCvCalcMode.Excess
+
             LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.COSTALD
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal / PR EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Ideal / Lee-Kesler / Excess / Experimental"
+                .Vapor_Density = "Ideal / PR EOS"
+                .Liquid_Fugacity = "Activity Coefficient + Poynting + Vapor Pressure / Henry's Constant"
+                .Liquid_Enthalpy_Entropy_CpCv = "Ideal / Lee-Kesler / Excess / Experimental"
+            End With
+
         End Sub
 
         Public Overrides Sub ConfigParameters()
@@ -610,7 +622,13 @@ Namespace PropertyPackages
                         IObj?.Paragraphs.Add(String.Format("Activity Coefficient: {0}", ativ(i)))
                         IObj?.Paragraphs.Add(String.Format("Vapor Pressure (Psat) @ {0} K: {1} Pa", T, Me.AUX_PVAPi(i, T)))
                         IObj?.Paragraphs.Add(String.Format("Poynting Correction Factor: {0}", poy(i)))
-                        lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
+                        If UseHenryConstants And HasHenryConstants(constprop(i).Name) Then
+                            Dim hc = AUX_KHenry(constprop(i).Name, T)
+                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
+                            lnfug(i) = Log(ativ(i) * hc / P) + Log(poy(i))
+                        Else
+                            lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
+                        End If
                         IObj?.Paragraphs.Add(String.Format("Fugacity Coefficient: {0}", Exp(lnfug(i))))
                     Else 'do interpolation at proximity of critical point
                         IObj?.SetCurrent()

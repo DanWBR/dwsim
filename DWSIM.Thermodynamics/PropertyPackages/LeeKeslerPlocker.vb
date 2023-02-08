@@ -46,6 +46,14 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.CorrespondingStates
 
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Lee-Kesler-Plöcker EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Lee-Kesler-Plöcker EOS"
+                .Vapor_Density = "Lee-Kesler-Plöcker EOS"
+                .Liquid_Fugacity = "Lee-Kesler-Plöcker EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Lee-Kesler-Plöcker EOS"
+            End With
+
         End Sub
         Public Overrides Function GetModel() As Object
             Return m_lk

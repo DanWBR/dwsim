@@ -47,6 +47,14 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.VaporPressure
 
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal"
+                .Vapor_Enthalpy_Entropy_CpCv = "Ideal Gas Cp"
+                .Vapor_Density = "Peng-Robinson EOS"
+                .Liquid_Fugacity = "Vapor Pressure / Henry's Constant"
+                .Liquid_Enthalpy_Entropy_CpCv = "Ideal Gas Cp + Enthalpy of Vaporization"
+            End With
+
         End Sub
 
         Public Overrides Sub DisplayEditingForm()
@@ -762,7 +770,13 @@ Namespace PropertyPackages
                         fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
                     Else
                         IObj?.SetCurrent()
-                        fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                        If UseHenryConstants And HasHenryConstants(RET_VNAMES(i)) Then
+                            Dim hc = AUX_KHenry(RET_VNAMES(i), T)
+                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
+                            fugcoeff(i) = hc / P
+                        Else
+                            fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                        End If
                     End If
                 Next
             Else

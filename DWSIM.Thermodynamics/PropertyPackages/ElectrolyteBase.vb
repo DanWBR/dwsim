@@ -45,7 +45,7 @@ Namespace PropertyPackages
             MyBase.New(comode)
 
             Me.IsConfigurable = True
-            Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
+            Me._packagetype = PropertyPackages.PackageType.Electrolytes
             Me.IsElectrolytePP = True
 
         End Sub

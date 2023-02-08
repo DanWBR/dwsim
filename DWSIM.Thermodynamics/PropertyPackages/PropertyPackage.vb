@@ -105,6 +105,8 @@ Namespace PropertyPackages
         Miscelaneous = 4
         CorrespondingStates = 5
         CAPEOPEN = 6
+        Electrolytes = 7
+        Specialized = 8
     End Enum
 
     Public Enum FlashMethod
@@ -458,6 +460,10 @@ Namespace PropertyPackages
 #End Region
 
 #Region "   Properties"
+
+        Public Property PropertyMethodsInfo As New PropertyPackageMethods
+
+        Public Property UseHenryConstants As Boolean = True
 
         Public Property OverrideKvalFugCoeff As Boolean = False
 
@@ -5273,6 +5279,14 @@ redirect2:                  IObj?.SetCurrent()
             Next
 
             Return val
+
+        End Function
+
+        Public Function HasHenryConstants(compname As String) As Boolean
+
+            Dim CAS = Me.CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number
+
+            Return m_Henry.ContainsKey(CAS)
 
         End Function
 

@@ -45,6 +45,14 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.EOS
 
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson-Strÿjek-Vera EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson-Strÿjek-Vera EOS"
+                .Vapor_Density = "Peng-Robinson-Strÿjek-Vera EOS"
+                .Liquid_Fugacity = "Peng-Robinson-Strÿjek-Vera EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson-Strÿjek-Vera EOS"
+            End With
+
         End Sub
 
         Public Overrides Function GetModel() As Object

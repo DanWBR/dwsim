@@ -46,6 +46,18 @@ Namespace PropertyPackages
 
             IsConfigurable = False
 
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal"
+                .Vapor_Thermal_Conductivity = "IAPWS-IF97 Steam Tables"
+                .Vapor_Viscosity = "IAPWS-IF97 Steam Tables"
+                .Vapor_Enthalpy_Entropy_CpCv = "IAPWS-IF97 Steam Tables"
+                .Vapor_Density = "IAPWS-IF97 Steam Tables"
+                .Liquid_Fugacity = "Vapor Pressure / Henry's Constant"
+                .Liquid_Enthalpy_Entropy_CpCv = "IAPWS-IF97 Steam Tables"
+                .Liquid_ThermalConductivity = "IAPWS-IF97 Steam Tables"
+                .Liquid_Viscosity = "IAPWS-IF97 Steam Tables"
+            End With
+
         End Sub
         Public Overrides Function GetModel() As Object
             Return m_iapws97

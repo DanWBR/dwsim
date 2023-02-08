@@ -43,6 +43,14 @@ Namespace PropertyPackages
 
             MyBase.New(comode)
 
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Vapor_Density = "Peng-Robinson EOS"
+                .Liquid_Fugacity = "Peng-Robinson EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+            End With
+
         End Sub
 
         Public Sub New()
@@ -51,6 +59,14 @@ Namespace PropertyPackages
 
             IsConfigurable = True
             _packagetype = PropertyPackages.PackageType.EOS
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Vapor_Density = "Peng-Robinson EOS"
+                .Liquid_Fugacity = "Peng-Robinson EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+            End With
 
         End Sub
 
