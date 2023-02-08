@@ -141,11 +141,13 @@ Public Class FormSimulWizard
 
         ComboBox2.SelectedIndex = 0
 
+        cbPPFilter.SelectedIndex = 0
+
         Me.loaded = True
 
     End Sub
 
-    Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelPropertyMethods.LinkClicked
+    Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
         Process.Start("https://dwsim.org/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
@@ -876,10 +878,6 @@ Public Class FormSimulWizard
 
     End Sub
 
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
-        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
-    End Sub
-
     Private Sub btnCloneUnits_Click(sender As Object, e As EventArgs) Handles btnCloneUnits.Click
 
         Dim newsu = New SystemsOfUnits.Units
@@ -1553,6 +1551,97 @@ Public Class FormSimulWizard
             Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
             fppi.ShowDialog()
         End If
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
+
+    End Sub
+
+    Private Sub cbPPFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPPFilter.SelectedIndexChanged
+
+        Select Case cbPPFilter.SelectedIndex
+            Case 0 'Most Popular
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = pp.Popular
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 1 'All Types
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    row.Visible = True
+                Next
+            Case 2 'Equations of State
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.EOS, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 3 'Activity Coefficient
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.ActivityCoefficient, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 4 'Vapor Pressure
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.VaporPressure, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 5 'Corresponding States
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.CorrespondingStates, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 6 'Specialized Models
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.Specialized, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 7 'Miscelaneous
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.Miscelaneous Or
+                            pp.PackageType = PackageType.CAPEOPEN Or
+                            pp.PackageType = PackageType.ChaoSeader, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 8 'Electrolytes
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.Electrolytes, True, False)
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+        End Select
 
     End Sub
 

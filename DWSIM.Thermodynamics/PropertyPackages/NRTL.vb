@@ -29,6 +29,8 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "D42F0157-5750-4c89-A94E-634A04701568"
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Overrides ReadOnly Property DisplayName As String = "NRTL"
 
         Public Overrides ReadOnly Property DisplayDescription As String =

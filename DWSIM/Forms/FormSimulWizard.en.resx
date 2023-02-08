@@ -127,10 +127,16 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Close Wizard and go to the Simulation Configuration Window</value>
   </data>
+  <data name="Button1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Welcome to the simulation configuration wizard.
 
 Click "Next" to continue.</value>
+  </data>
+  <data name="Label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -139,11 +145,17 @@ Click "Next" to continue.</value>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 340</value>
   </data>
+  <data name="Button5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txtAdded.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 369</value>
   </data>
   <data name="txtAdded.Size" type="System.Drawing.Size, System.Drawing">
     <value>578, 23</value>
+  </data>
+  <data name="txtAdded.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 373</value>
@@ -154,6 +166,9 @@ Click "Next" to continue.</value>
   <data name="Label6.Text" xml:space="preserve">
     <value>Added Compounds</value>
   </data>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>433, 339</value>
   </data>
@@ -163,11 +178,17 @@ Click "Next" to continue.</value>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add from Other Sources &gt;</value>
   </data>
+  <data name="Button4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="txtSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 339</value>
   </data>
   <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>336, 23</value>
+  </data>
+  <data name="txtSearch.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnInfoLeft.AutoSize" type="System.Boolean, mscorlib">
@@ -188,6 +209,9 @@ Click "Next" to continue.</value>
   <data name="Label2.Text" xml:space="preserve">
     <value>Select the compounds that you want to add to the simulation. Use the textbox to search and select a compound in the list. Click "Next" to continue.</value>
   </data>
+  <data name="Label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 343</value>
   </data>
@@ -196,6 +220,9 @@ Click "Next" to continue.</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Label3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="colAdd.HeaderText" xml:space="preserve">
     <value>Added</value>
@@ -212,11 +239,23 @@ Click "Next" to continue.</value>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>698, 286</value>
   </data>
+  <data name="ogc1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Button3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Button2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 299</value>
+    <value>253, 346</value>
+  </data>
+  <data name="PictureBox1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 303</value>
+    <value>272, 350</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>324, 15</value>
@@ -224,8 +263,11 @@ Click "Next" to continue.</value>
   <data name="Label10.Text" xml:space="preserve">
     <value>,  but you can use all available packages without restrictions.</value>
   </data>
+  <data name="Label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 303</value>
+    <value>11, 350</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 15</value>
@@ -233,11 +275,17 @@ Click "Next" to continue.</value>
   <data name="Label9.Text" xml:space="preserve">
     <value>Recommended packages are marked with a</value>
   </data>
+  <data name="Label9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 20</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Override Phase Equilibria calculation settings?</value>
+  </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="rbSVLLE.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 3</value>
@@ -248,6 +296,9 @@ Click "Next" to continue.</value>
   <data name="rbSVLLE.Text" xml:space="preserve">
     <value>Leave as default (SVLLE)</value>
   </data>
+  <data name="rbSVLLE.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="rbVLE.Location" type="System.Drawing.Point, System.Drawing">
     <value>411, 3</value>
   </data>
@@ -257,8 +308,14 @@ Click "Next" to continue.</value>
   <data name="rbVLE.Text" xml:space="preserve">
     <value>VLE (faster)</value>
   </data>
+  <data name="rbVLE.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="rbVLLE.Location" type="System.Drawing.Point, System.Drawing">
     <value>501, 3</value>
+  </data>
+  <data name="rbVLLE.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="rbNoFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>580, 3</value>
@@ -269,20 +326,35 @@ Click "Next" to continue.</value>
   <data name="rbNoFlash.Text" xml:space="preserve">
     <value>Do not calculate</value>
   </data>
+  <data name="rbNoFlash.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FlowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 371</value>
+  </data>
+  <data name="FlowLayoutPanel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 15</value>
+  <data name="Button8.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="LinkLabel2.Text" xml:space="preserve">
-    <value>Click here to get help on selecting the best Thermodynamic Model/Property Package for your system.</value>
+  <data name="cbPPFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 19</value>
   </data>
-  <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 15</value>
+  <data name="cbPPFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 23</value>
   </data>
-  <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
-    <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
+  <data name="cbPPFilter.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 24</value>
+  </data>
+  <data name="Label11.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column6.ToolTipText" xml:space="preserve">
     <value>Recommended</value>
@@ -290,8 +362,20 @@ Click "Next" to continue.</value>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="DataGridViewPP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 48</value>
+  </data>
+  <data name="DataGridViewPP.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 298</value>
+  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
+  </data>
+  <data name="GroupBox6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -299,8 +383,20 @@ Click "Next" to continue.</value>
   <data name="Column17.HeaderText" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="dgvpp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 276</value>
+  </data>
+  <data name="dgvpp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 298</value>
+  </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Added Property Packages</value>
+  </data>
+  <data name="GroupBox12.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>703, 33</value>
@@ -308,26 +404,38 @@ Click "Next" to continue.</value>
   <data name="Label4.Text" xml:space="preserve">
     <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
   </data>
-  <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 295</value>
-  </data>
-  <data name="PictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
+  <data name="Label4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Property Packages</value>
   </data>
+  <data name="WizardPage3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="WizardPage2.Text" xml:space="preserve">
     <value>Compounds</value>
+  </data>
+  <data name="WizardPage2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introduction</value>
   </data>
+  <data name="WizardPage1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCreateNewUnits.Text" xml:space="preserve">
     <value>Create New</value>
   </data>
+  <data name="btnCreateNewUnits.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCloneUnits.Text" xml:space="preserve">
     <value>Clone</value>
+  </data>
+  <data name="btnCloneUnits.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -341,18 +449,33 @@ Click "Next" to continue.</value>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
+  <data name="DataGridView1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ComboBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 15</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
+  <data name="Label8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Select the desired System of Units for your simulation. You can change individual units by selecting a custom system (other than SI, CGS or ENG). 
 Click "Finish" to exit the wizard and start designing the simulation model.</value>
   </data>
+  <data name="Label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
+  </data>
+  <data name="WizardPage5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Simulation Configuration Wizard</value>
@@ -484,6 +607,9 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
+  <data name="StepWizardControl1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="ImportFromThermoChemicalsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 22</value>
   </data>
@@ -522,5 +648,11 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 136</value>
+  </data>
+  <data name="cmsAddComps.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

@@ -31,6 +31,8 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "5265F953-8825-4a80-9112-A3B68C329E4C"
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Overrides ReadOnly Property DisplayName As String = "UNIQUAC"
 
         Public Overrides ReadOnly Property DisplayDescription As String =

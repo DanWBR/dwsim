@@ -465,6 +465,8 @@ Namespace PropertyPackages
 
 #Region "   Properties"
 
+        Public Overridable ReadOnly Property Popular As Boolean = False
+
         Public Property PropertyMethodsInfo As New PropertyPackageMethods
 
         Public Overridable ReadOnly Property DisplayName As String = "" Implements IPropertyPackage.DisplayName

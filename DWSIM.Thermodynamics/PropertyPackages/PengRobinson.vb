@@ -39,6 +39,8 @@ Namespace PropertyPackages
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Overrides ReadOnly Property DisplayName As String = "Peng-Robinson"
 
         Public Overrides ReadOnly Property DisplayDescription As String =

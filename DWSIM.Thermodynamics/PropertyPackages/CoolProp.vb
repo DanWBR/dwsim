@@ -38,6 +38,8 @@ Namespace PropertyPackages
 
         <NonSerialized> Private _IObj As InspectorItem
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
             GetListOfSupportedCompounds()

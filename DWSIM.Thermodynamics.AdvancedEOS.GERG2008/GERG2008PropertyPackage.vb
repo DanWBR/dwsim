@@ -39,12 +39,28 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             End Get
         End Property
 
+        Public Overrides ReadOnly Property DisplayDescription As String
+            Get
+                Return ComponentDescription
+            End Get
+        End Property
+
         Public Sub New()
 
             ComponentName = "GERG-2008"
             ComponentDescription = "The Groupe Européen de Recherches Gazières (GERG) 2008 multi-parameter equation of state (EOS) is considered the reference model for the prediction of natural gas mixture properties."
 
             IsConfigurable = True
+
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "GERG-2008 EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "GERG-2008 EOS"
+                .Vapor_Density = "GERG-2008 EOS"
+                .Liquid_Fugacity = "GERG-2008 EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "GERG-2008 EOS"
+            End With
+
         End Sub
 
         Public Overrides Sub RunPostMaterialStreamSetRoutine()

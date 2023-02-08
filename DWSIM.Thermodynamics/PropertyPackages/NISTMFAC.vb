@@ -33,6 +33,8 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "519EB917-0B2E-4ac1-9AF2-2D1A2A55067F"
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Overrides ReadOnly Property DisplayName As String = "Modified UNIFAC (NIST)"
 
         Public Overrides ReadOnly Property DisplayDescription As String =

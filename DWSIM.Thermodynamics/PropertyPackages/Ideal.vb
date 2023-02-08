@@ -36,6 +36,8 @@ Namespace PropertyPackages
         Private m_uni As New PropertyPackages.Auxiliary.Unifac
         Private m_id As New PropertyPackages.Auxiliary.Ideal
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Overrides ReadOnly Property DisplayName As String = "Ideal (Raoult's Law)"
 
         Public Overrides ReadOnly Property DisplayDescription As String =

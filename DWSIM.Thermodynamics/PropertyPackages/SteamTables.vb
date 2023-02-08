@@ -35,6 +35,8 @@ Namespace PropertyPackages
         Friend m_iapws97 As New IAPWS_IF97
         'Protected m_steam67 As New STEAM67
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
         End Sub

@@ -63,6 +63,12 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         Public Property UseLeeKeslerCpCv As Boolean = True
 
+        Public Overrides ReadOnly Property DisplayDescription As String
+            Get
+                Return ComponentDescription
+            End Get
+        End Property
+
         Public Sub New()
 
             ComponentName = "PC-SAFT (with Association Support) (.NET Code)"
@@ -71,6 +77,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             IsConfigurable = True
 
             ReadParameters()
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "PC-SAFT EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "PC-SAFT EOS"
+                .Vapor_Density = "PC-SAFT EOS"
+                .Liquid_Fugacity = "PC-SAFT EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "PC-SAFT EOS"
+            End With
 
         End Sub
 

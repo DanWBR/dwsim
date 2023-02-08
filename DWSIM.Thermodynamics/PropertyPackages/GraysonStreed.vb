@@ -41,7 +41,12 @@ Namespace PropertyPackages
         '<System.NonSerialized()> Private m_xn As DLLXnumbers.Xnumbers
 
         Public Sub New(ByVal comode As Boolean)
+
             MyBase.New(comode)
+
+            Me.IsConfigurable = True
+            Me._packagetype = PropertyPackages.PackageType.ChaoSeader
+
         End Sub
 
         Public Sub New()

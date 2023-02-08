@@ -770,21 +770,21 @@ Public Class FormMain
         PRSV2PP.ComponentDescription = DWSIM.App.GetLocalString("DescPRSV2PP")
         PropertyPackages.Add(PRSV2PP.ComponentName.ToString, PRSV2PP)
 
-        Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
-        PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
-        PRSV2PPVL.ComponentDescription = DWSIM.App.GetLocalString("DescPRSV2VLPP")
-        PropertyPackages.Add(PRSV2PPVL.ComponentName.ToString, PRSV2PPVL)
+        'Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
+        'PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
+        'PRSV2PPVL.ComponentDescription = DWSIM.App.GetLocalString("DescPRSV2VLPP")
+        'PropertyPackages.Add(PRSV2PPVL.ComponentName.ToString, PRSV2PPVL)
 
         Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
         SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
         SRKPP.ComponentDescription = DWSIM.App.GetLocalString("DescSoaveRedlichKwongSRK")
         PropertyPackages.Add(SRKPP.ComponentName.ToString, SRKPP)
 
-        Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
-        PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
-        PRLKPP.ComponentDescription = DWSIM.App.GetLocalString("DescPRLK")
+        'Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
+        'PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
+        'PRLKPP.ComponentDescription = DWSIM.App.GetLocalString("DescPRLK")
 
-        PropertyPackages.Add(PRLKPP.ComponentName.ToString, PRLKPP)
+        'PropertyPackages.Add(PRLKPP.ComponentName.ToString, PRLKPP)
 
         Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
         UPP.ComponentName = "UNIFAC"
@@ -876,11 +876,11 @@ Public Class FormMain
 
         'PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
 
-        Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
-        BOPP.ComponentName = "Black Oil"
-        BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
+        'Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
+        'BOPP.ComponentName = "Black Oil"
+        'BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
-        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+        'PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
         Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
 
@@ -896,13 +896,13 @@ Public Class FormMain
 
         PropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
 
-        Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
+        'Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
 
-        PropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
+        'PropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
 
-        Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
+        'Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
 
-        PropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
+        'PropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
 
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 

@@ -36,6 +36,9 @@ Namespace PropertyPackages
         Private KijMatrix As Double(,)
 
         Public m_pr As New PropertyPackages.Auxiliary.SRK
+
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Overrides ReadOnly Property DisplayName As String = "Soave-Redlich-Kwong"
 
         Public Overrides ReadOnly Property DisplayDescription As String =
