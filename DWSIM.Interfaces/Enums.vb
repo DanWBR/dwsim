@@ -294,6 +294,9 @@ Namespace Enums
 
         PVFlash_TryIdealCalcOnFailure = 32
 
+        '0 = Rigorous VLE, 1 = Ideal VLE, 2 = NoFlash 
+        FailSafeCalculationMode = 33
+
     End Enum
 
     Public Enum FlashCalculationType

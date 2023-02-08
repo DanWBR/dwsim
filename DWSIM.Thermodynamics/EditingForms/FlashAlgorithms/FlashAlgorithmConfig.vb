@@ -80,8 +80,9 @@ Public Class FlashAlgorithmConfig
                 cbFlashType.SelectedIndex = 5
         End Select
 
-        cbFlashApproach.SelectedIndex = PropPack.FlashCalculationApproach
+        cbFSMethod.SelectedIndex = Settings(Interfaces.Enums.FlashSetting.FailSafeCalculationMode)
 
+        cbFlashApproach.SelectedIndex = PropPack.FlashCalculationApproach
 
         'external solvers
 
@@ -172,6 +173,8 @@ Public Class FlashAlgorithmConfig
                 Case 5
                     Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "NoFlash"
             End Select
+
+            Settings(Interfaces.Enums.FlashSetting.FailSafeCalculationMode) = cbFSMethod.SelectedIndex
 
             Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = chkImmiscible.Checked
 

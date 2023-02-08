@@ -140,6 +140,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) = True
 
+            settings(Interfaces.Enums.FlashSetting.FailSafeCalculationMode) = 0
+
             Return settings
 
         End Function
@@ -1595,6 +1597,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.UseIOFlash) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.UseIOFlash, False)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.FailSafeCalculationMode) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.FailSafeCalculationMode, 0)
                 End If
             End If
 
