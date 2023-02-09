@@ -51,6 +51,7 @@ Namespace PropertyPackages
                 .Vapor_Density = "Peng-Robinson-Strÿjek-Vera EOS"
                 .Liquid_Fugacity = "Peng-Robinson-Strÿjek-Vera EOS"
                 .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson-Strÿjek-Vera EOS"
+                .Liquid_Density = "Peng-Robinson-Strÿjek-Vera EOS / Experimental / Rackett / COSTALD"
             End With
 
         End Sub

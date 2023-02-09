@@ -50,10 +50,10 @@ Partial Class FormFlowsheet
         Me.TextoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RectangleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraficoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BotãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BotaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompoundCreatorWizardTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CriadorDeComponentesSólidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CriadorDeComponentesSolidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CriarPseudocomponentesEmBateladaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -265,7 +265,7 @@ Partial Class FormFlowsheet
         'InsertTSMI
         '
         resources.ApplyResources(Me.InsertTSMI, "InsertTSMI")
-        Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.tsmiRichText, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem, Me.BotãoToolStripMenuItem})
+        Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.tsmiRichText, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem, Me.BotaoToolStripMenuItem})
         Me.InsertTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.InsertTSMI.MergeIndex = 2
         Me.InsertTSMI.Name = "InsertTSMI"
@@ -324,16 +324,16 @@ Partial Class FormFlowsheet
         Me.GraficoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_curve
         Me.GraficoToolStripMenuItem.Name = "GraficoToolStripMenuItem"
         '
-        'BotãoToolStripMenuItem
+        'BotaoToolStripMenuItem
         '
-        resources.ApplyResources(Me.BotãoToolStripMenuItem, "BotãoToolStripMenuItem")
-        Me.BotãoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_button
-        Me.BotãoToolStripMenuItem.Name = "BotãoToolStripMenuItem"
+        resources.ApplyResources(Me.BotaoToolStripMenuItem, "BotaoToolStripMenuItem")
+        Me.BotaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_button
+        Me.BotaoToolStripMenuItem.Name = "BotaoToolStripMenuItem"
         '
         'ToolsTSMI
         '
         resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
-        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.CriadorDeComponentesSólidosToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.CriarPseudocomponentesEmBateladaToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
+        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.CriadorDeComponentesSolidosToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.CriarPseudocomponentesEmBateladaToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
         Me.ToolsTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ToolsTSMI.MergeIndex = 3
         Me.ToolsTSMI.Name = "ToolsTSMI"
@@ -346,13 +346,13 @@ Partial Class FormFlowsheet
         Me.CompoundCreatorWizardTSMI.MergeIndex = 0
         Me.CompoundCreatorWizardTSMI.Name = "CompoundCreatorWizardTSMI"
         '
-        'CriadorDeComponentesSólidosToolStripMenuItem
+        'CriadorDeComponentesSolidosToolStripMenuItem
         '
-        resources.ApplyResources(Me.CriadorDeComponentesSólidosToolStripMenuItem, "CriadorDeComponentesSólidosToolStripMenuItem")
-        Me.CriadorDeComponentesSólidosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.labicon
-        Me.CriadorDeComponentesSólidosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.CriadorDeComponentesSólidosToolStripMenuItem.MergeIndex = 0
-        Me.CriadorDeComponentesSólidosToolStripMenuItem.Name = "CriadorDeComponentesSólidosToolStripMenuItem"
+        resources.ApplyResources(Me.CriadorDeComponentesSolidosToolStripMenuItem, "CriadorDeComponentesSolidosToolStripMenuItem")
+        Me.CriadorDeComponentesSolidosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.labicon
+        Me.CriadorDeComponentesSolidosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.CriadorDeComponentesSolidosToolStripMenuItem.MergeIndex = 0
+        Me.CriadorDeComponentesSolidosToolStripMenuItem.Name = "CriadorDeComponentesSolidosToolStripMenuItem"
         '
         'CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem
         '
@@ -949,7 +949,7 @@ Partial Class FormFlowsheet
     Friend WithEvents FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem As ToolStripMenuItem
     Public WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents tsmiRichText As ToolStripMenuItem
-    Friend WithEvents BotãoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BotaoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CapitalCostEstimatorToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExcelReportsToolStripMenuItem As ToolStripMenuItem
@@ -958,7 +958,7 @@ Partial Class FormFlowsheet
     Friend WithEvents DesignOfExperimentsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OptimumTesterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SumarioToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CriadorDeComponentesSólidosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CriadorDeComponentesSolidosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToggleWeatherPanelVisibilityToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CriarPseudocomponentesEmBateladaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ConsoleInterativoIronPtyhonToolStripMenuItem As ToolStripMenuItem

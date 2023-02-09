@@ -2796,7 +2796,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            'form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -3338,7 +3338,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            'form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()

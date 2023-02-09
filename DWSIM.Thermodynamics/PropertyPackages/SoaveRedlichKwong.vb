@@ -70,6 +70,7 @@ Namespace PropertyPackages
                 .Vapor_Density = "Soave-Redlich-Kwong EOS"
                 .Liquid_Fugacity = "Soave-Redlich-Kwong EOS"
                 .Liquid_Enthalpy_Entropy_CpCv = "Soave-Redlich-Kwong EOS"
+                .Liquid_Density = "Soave-Redlich-Kwong EOS (+VT) / Experimental / Rackett / COSTALD"
             End With
 
         End Sub

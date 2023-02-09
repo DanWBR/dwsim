@@ -11733,10 +11733,10 @@ Final3:
             If e1 IsNot Nothing Then Me.ParametersXMLString = e1.ToString()
 
             e1 = (From el As XElement In data Select el Where el.Name = "UseHenryConstants").FirstOrDefault
-            If e1 IsNot Nothing Then UseHenryConstants = e1.Value.ToDoubleFromInvariant()
+            If e1 IsNot Nothing Then UseHenryConstants = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "AutoEstimateMissingNRTLUNIQUACParameters").FirstOrDefault
-            If e1 IsNot Nothing Then AutoEstimateMissingNRTLUNIQUACParameters = e1.Value.ToDoubleFromInvariant()
+            If e1 IsNot Nothing Then AutoEstimateMissingNRTLUNIQUACParameters = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "SingleCompoundCheckThreshold").FirstOrDefault
             If e1 IsNot Nothing Then SingleCompoundCheckThreshold = e1.Value.ToDoubleFromInvariant()

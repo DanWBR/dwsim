@@ -53,9 +53,10 @@ Namespace PropertyPackages
             With PropertyMethodsInfo
                 .Vapor_Fugacity = "Peng-Robinson EOS"
                 .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
-                .Vapor_Density = "Peng-Robinson EOS"
                 .Liquid_Fugacity = "Peng-Robinson EOS"
                 .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Vapor_Density = "Peng-Robinson EOS (+VT)"
+                .Liquid_Density = "Peng-Robinson EOS (+VT) / Experimental / Rackett / COSTALD"
             End With
 
         End Sub
@@ -70,9 +71,10 @@ Namespace PropertyPackages
             With PropertyMethodsInfo
                 .Vapor_Fugacity = "Peng-Robinson EOS"
                 .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
-                .Vapor_Density = "Peng-Robinson EOS"
                 .Liquid_Fugacity = "Peng-Robinson EOS"
                 .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Vapor_Density = "Peng-Robinson EOS (+VT)"
+                .Liquid_Density = "Peng-Robinson EOS (+VT) / Experimental / Rackett / COSTALD"
             End With
 
         End Sub
