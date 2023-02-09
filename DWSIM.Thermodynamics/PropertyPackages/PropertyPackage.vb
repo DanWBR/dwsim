@@ -12332,6 +12332,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure, True)
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.FailSafeCalculationMode) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.FailSafeCalculationMode, 1)
+                End If
             End If
 
         End Function
