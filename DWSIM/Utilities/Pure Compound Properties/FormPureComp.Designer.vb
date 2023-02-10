@@ -276,6 +276,7 @@ Partial Class FormPureComp
         Me.GridProps.AllowUserToResizeColumns = False
         Me.GridProps.AllowUserToResizeRows = False
         Me.GridProps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.GridProps.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.GridProps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridProps.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
         Me.GridProps.Name = "GridProps"

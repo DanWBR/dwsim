@@ -121,8 +121,8 @@
   <data name="tbMODFACNIST.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="FaTabStripItem17.Title" xml:space="preserve">
+    <value>Propriedades da Phase Vapor</value>
   </data>
   <data name="&gt;&gt;tbElements.Name" xml:space="preserve">
     <value>tbElements</value>
@@ -177,8 +177,8 @@
   <data name="GraphLiqCp.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;GraphVapThermCond.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="DataGridViewTextBoxColumn24.Width" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="FaTabStripItemTabela.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -195,17 +195,20 @@
   <data name="&gt;&gt;FaTabStripItemLIQVISC.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="DataGridViewTextBoxColumn31.HeaderText" xml:space="preserve">
-    <value>T2</value>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;tbFormula.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Visualização 2D</value>
+  </data>
+  <data name="&gt;&gt;GraphVapThermCond.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemSURFT.Parent" xml:space="preserve">
     <value>FaTabStripLiq</value>
@@ -225,9 +228,6 @@
   <data name="&gt;&gt;GraphDHVAP.Type" xml:space="preserve">
     <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;BtnRestaurar.Name" xml:space="preserve">
-    <value>BtnRestaurar</value>
-  </data>
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
     <value>FaTabStripItem6</value>
   </data>
@@ -239,9 +239,6 @@
   </data>
   <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem17.Name" xml:space="preserve">
-    <value>FaTabStripItem17</value>
   </data>
   <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 16</value>
@@ -257,6 +254,9 @@
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 13</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn27.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemDataTab.Type" xml:space="preserve">
     <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
@@ -276,11 +276,17 @@
   <data name="&gt;&gt;FaTabStripItemDataTab.Parent" xml:space="preserve">
     <value>FaTabStripVap</value>
   </data>
+  <data name="&gt;&gt;FaTabStripItemCPSOLID.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;FaTabStripItemLIQTCOND.Name" xml:space="preserve">
     <value>FaTabStripItemLIQTCOND</value>
   </data>
   <data name="&gt;&gt;tbMODFAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DataTableLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 529</value>
   </data>
   <data name="GraphSurfT.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -294,9 +300,6 @@
   <data name="&gt;&gt;FaTabStripItemCPIG.Parent" xml:space="preserve">
     <value>FaTabStripVap</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
-  </data>
   <data name="FaTabStripVap.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn28.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn28</value>
   </data>
   <data name="FaTabStripItemLIQTCOND.Size" type="System.Drawing.Size, System.Drawing">
     <value>910, 529</value>
@@ -384,14 +390,11 @@
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="FaTabStripItemSURFT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>910, 529</value>
-  </data>
   <data name="&gt;&gt;LblModified.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="GraphSolidDens.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;tbSMILES.Name" xml:space="preserve">
     <value>tbSMILES</value>
@@ -399,8 +402,8 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn28.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tbUNIFAC.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
   </data>
   <data name="tbSMILES.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 158</value>
@@ -426,11 +429,11 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn21.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tbMODFACNIST.Name" xml:space="preserve">
+    <value>tbMODFACNIST</value>
+  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Componente</value>
-  </data>
-  <data name="&gt;&gt;GraphCpSolid.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;GraphLiqCp.Type" xml:space="preserve">
     <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
@@ -525,8 +528,8 @@
   <data name="&gt;&gt;GraphDHVAP.Name" xml:space="preserve">
     <value>GraphDHVAP</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItemCPSOLID.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="FaTabStripItemCPSOLID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>932, 529</value>
   </data>
   <data name="&gt;&gt;GraphSurfT.Parent" xml:space="preserve">
     <value>FaTabStripItemSURFT</value>
@@ -579,8 +582,8 @@
   <data name="GraphCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
   </data>
-  <data name="&gt;&gt;tbMODFAC.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="GraphVisc.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
@@ -651,14 +654,11 @@
   <data name="LblModified.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 21</value>
   </data>
-  <data name="FaTabStripItemCPIG.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;BtnRestaurar.Name" xml:space="preserve">
+    <value>BtnRestaurar</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>906, 410</value>
   </data>
   <data name="tbSMILES.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -681,8 +681,8 @@
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constantes</value>
   </data>
-  <data name="DataTableLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 529</value>
+  <data name="LblModified.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="FaTabStripItemTabela.Title" xml:space="preserve">
     <value>Tabela de Dados</value>
@@ -692,6 +692,9 @@
   </data>
   <data name="DataGridViewTextBoxColumn9.Width" type="System.Int32, mscorlib">
     <value>70</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn11.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn11</value>
   </data>
   <data name="DataGridViewTextBoxColumn31.Width" type="System.Int32, mscorlib">
     <value>70</value>
@@ -711,11 +714,8 @@
   <data name="&gt;&gt;Column3.Name" xml:space="preserve">
     <value>Column3</value>
   </data>
-  <data name="FaTabStripItem18.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="tbSMILES.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemVAPVISC.Parent" xml:space="preserve">
     <value>FaTabStripVap</value>
@@ -726,14 +726,14 @@
   <data name="&gt;&gt;FaTabStripItemTabLiq.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="FaTabStripItemPVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>910, 529</value>
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 5</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn24.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn24</value>
   </data>
-  <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
-    <value>FaTabStrip1</value>
+  <data name="DataTableVapour.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>82</value>
   </data>
   <data name="&gt;&gt;GraphVapThermCond.Parent" xml:space="preserve">
     <value>FaTabStripItemVAPTCOND</value>
@@ -744,14 +744,14 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn22.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn22</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
+    <value>ComboBox1</value>
   </data>
   <data name="GraphCpSolid.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="GraphVisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 529</value>
+  <data name="&gt;&gt;GraphPvap.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;GraphSurfT.Name" xml:space="preserve">
     <value>GraphSurfT</value>
@@ -764,9 +764,6 @@
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 53</value>
-  </data>
-  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 5</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn10.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn10</value>
@@ -786,8 +783,8 @@
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
-  <data name="LblModified.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="&gt;&gt;TextBoxComments.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -797,6 +794,9 @@
   </data>
   <data name="&gt;&gt;DataTableLiquid.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="GridProps.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>82</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -819,17 +819,17 @@
   <data name="FaTabStripItemLIQTCOND.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="GraphSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FaTabStripItemSURFT.Size" type="System.Drawing.Size, System.Drawing">
     <value>910, 529</value>
   </data>
   <data name="GraphCpSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
   </data>
+  <data name="&gt;&gt;GraphLiqThermCond.Name" xml:space="preserve">
+    <value>GraphLiqThermCond</value>
+  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn25.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn21.Width" type="System.Int32, mscorlib">
-    <value>70</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemCPIG.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -867,17 +867,14 @@
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GraphLiqThermCond.Name" xml:space="preserve">
-    <value>GraphLiqThermCond</value>
+  <data name="tbMODFACNIST.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 131</value>
   </data>
   <data name="GraphPvap.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="&gt;&gt;LblModified.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="GraphDHVAP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="DataGridViewTextBoxColumn22.HeaderText" xml:space="preserve">
     <value>SolidCp</value>
@@ -888,8 +885,8 @@
   <data name="&gt;&gt;tbInChI.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="&gt;&gt;DataTableLiquid.Parent" xml:space="preserve">
+    <value>FaTabStripItemTabLiq</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -905,6 +902,9 @@
   </data>
   <data name="FaTabStripItem17.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
+  </data>
+  <data name="FaTabStripItemCPIG.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -951,9 +951,6 @@
   <data name="GraphDHVAP.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;SaveFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -990,6 +987,9 @@
   <data name="ComboBox1.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
+    <value>FaTabStripItem1</value>
+  </data>
   <data name="&gt;&gt;tbInChI.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
@@ -1011,11 +1011,8 @@
   <data name="FaTabStripVap.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn11.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn11</value>
-  </data>
-  <data name="GraphVapVisc.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="GraphLiqDens.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8.25pt</value>
   </data>
   <data name="FaTabStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 43</value>
@@ -1026,8 +1023,8 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn14.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn14</value>
   </data>
-  <data name="GraphLiqThermCond.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
+  <data name="&gt;&gt;FaTabStripItemVAPTCOND.Parent" xml:space="preserve">
+    <value>FaTabStripVap</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemLIQDENS.Parent" xml:space="preserve">
     <value>FaTabStripLiq</value>
@@ -1038,8 +1035,8 @@
   <data name="FaTabStripItem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>934, 550</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Comentários</value>
+  <data name="&gt;&gt;LblModified.Name" xml:space="preserve">
+    <value>LblModified</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1080,8 +1077,8 @@
   <data name="FaTabStripItemCPSOLID.Title" xml:space="preserve">
     <value>Cp (Sólido)</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItemVAPTCOND.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
+    <value>Label6</value>
   </data>
   <data name="BtnRestaurar.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1095,6 +1092,9 @@
   <data name="GroupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="BtnRestaurar.Text" xml:space="preserve">
+    <value>Restaurar Padrões</value>
+  </data>
   <data name="&gt;&gt;GraphLiqCp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -1103,9 +1103,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn32.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GraphPvap.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="DataTableSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
@@ -1122,8 +1119,8 @@
   <data name="&gt;&gt;GraphCp.Name" xml:space="preserve">
     <value>GraphCp</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GraphDHVAP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -1137,8 +1134,8 @@
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>833, 388</value>
   </data>
-  <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="DataTableSolid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="LblModified.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1152,14 +1149,14 @@
   <data name="GraphPvap.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn9.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn9</value>
+  </data>
+  <data name="BtnRestaurar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -1218,8 +1215,14 @@
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="FaTabStripItem6.Title" xml:space="preserve">
+    <value>Molécula</value>
+  </data>
   <data name="&gt;&gt;FaTabStripSolid.Name" xml:space="preserve">
     <value>FaTabStripSolid</value>
+  </data>
+  <data name="&gt;&gt;DataTableSolid.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="FaTabStripItemVAPVISC.Title" xml:space="preserve">
     <value>Viscosidade (Vapor)</value>
@@ -1251,8 +1254,8 @@
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItemVAPTCOND.Parent" xml:space="preserve">
-    <value>FaTabStripVap</value>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
@@ -1260,11 +1263,8 @@
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>833, 388</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItemCPLIQ.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DataTableSolid.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="tbSMILES.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Estrutura SMILES</value>
@@ -1281,6 +1281,9 @@
   <data name="FaTabStripItemSURFT.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Comentários</value>
+  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn17.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1293,8 +1296,8 @@
   <data name="DataGridViewTextBoxColumn27.Width" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
-  <data name="GraphLiqDens.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn16.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn16</value>
   </data>
   <data name="&gt;&gt;GroupBox5.Name" xml:space="preserve">
     <value>GroupBox5</value>
@@ -1344,11 +1347,17 @@
   <data name="Button3.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
+  <data name="FaTabStripItemPVAP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>910, 529</value>
+  </data>
   <data name="&gt;&gt;GraphLiqCp.Parent" xml:space="preserve">
     <value>FaTabStripItemCPLIQ</value>
   </data>
-  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;FaTabStripItemSOLIDDENS.Name" xml:space="preserve">
+    <value>FaTabStripItemSOLIDDENS</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripVap.Parent" xml:space="preserve">
+    <value>FaTabStripItem17</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemCPLIQ.Parent" xml:space="preserve">
     <value>FaTabStripLiq</value>
@@ -1359,8 +1368,8 @@
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
-    <value>FaTabStripItem1</value>
+  <data name="&gt;&gt;GraphCpSolid.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemLIQVISC.Name" xml:space="preserve">
     <value>FaTabStripItemLIQVISC</value>
@@ -1380,11 +1389,17 @@
   <data name="DataGridViewTextBoxColumn16.Width" type="System.Int32, mscorlib">
     <value>59</value>
   </data>
+  <data name="FaTabStripItem18.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
   <data name="&gt;&gt;GraphCp.Type" xml:space="preserve">
     <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataTableLiquid.Name" xml:space="preserve">
     <value>DataTableLiquid</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItemVAPTCOND.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1397,9 +1412,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn32.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn32</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem18.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1494,8 +1506,8 @@
   <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="BtnRestaurar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="GraphVapVisc.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;tbInChI.Name" xml:space="preserve">
     <value>tbInChI</value>
@@ -1530,15 +1542,6 @@
   <data name="DataGridViewTextBoxColumn12.Width" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="DataGridViewTextBoxColumn24.Width" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn16.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn16</value>
-  </data>
-  <data name="&gt;&gt;DataTableVapour.Name" xml:space="preserve">
-    <value>DataTableVapour</value>
-  </data>
   <data name="GraphVapVisc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1569,8 +1572,8 @@
   <data name="&gt;&gt;FaTabStripItemTabela.Type" xml:space="preserve">
     <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;chkEnableEdit.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;FaTabStripItemCPLIQ.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="FaTabStripItemCPIG.Title" xml:space="preserve">
     <value>Cp Gás Ideal (Vapor)</value>
@@ -1602,6 +1605,12 @@
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="GraphSolidDens.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;tbMODFAC.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
+  </data>
   <data name="FaTabStripItemDataTab.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
   </data>
@@ -1617,6 +1626,9 @@
   <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;FaTabStripItemCPLIQ.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="tbElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>667, 21</value>
   </data>
@@ -1626,8 +1638,8 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn29.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FaTabStripVap.Parent" xml:space="preserve">
-    <value>FaTabStripItem17</value>
+  <data name="DataGridViewTextBoxColumn24.HeaderText" xml:space="preserve">
+    <value>Dens</value>
   </data>
   <data name="FaTabStripItemLIQTCOND.Title" xml:space="preserve">
     <value>Cond. Térmica</value>
@@ -1640,6 +1652,9 @@
   </data>
   <data name="DataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
     <value>T2</value>
+  </data>
+  <data name="GraphLiqThermCond.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;chkEnableEdit.Name" xml:space="preserve">
     <value>chkEnableEdit</value>
@@ -1674,8 +1689,8 @@
   <data name="&gt;&gt;GraphCp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>744, 477</value>
+  <data name="tbUNIFAC.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
     <value>833, 410</value>
@@ -1689,14 +1704,11 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Visualizar</value>
   </data>
-  <data name="&gt;&gt;chkEnableEdit.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="SaveFileDialog2.Filter" xml:space="preserve">
     <value>Arquivos XLSX|*.xlsx</value>
   </data>
-  <data name="DataGridViewTextBoxColumn24.HeaderText" xml:space="preserve">
-    <value>Dens</value>
+  <data name="&gt;&gt;chkEnableEdit.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="FaTabStripSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>934, 550</value>
@@ -1706,6 +1718,9 @@
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Estrutura InChI</value>
+  </data>
+  <data name="GraphVisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>899, 529</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -1764,9 +1779,6 @@
   <data name="GridProps.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;GraphSurfT.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
@@ -1791,6 +1803,9 @@
   <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
     <value>827, 368</value>
   </data>
+  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;GraphLiqThermCond.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -1808,9 +1823,6 @@
   </data>
   <data name="&gt;&gt;FaTabStripItemDataTab.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItemSOLIDDENS.Name" xml:space="preserve">
-    <value>FaTabStripItemSOLIDDENS</value>
   </data>
   <data name="tbMODFAC.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 104</value>
@@ -1839,6 +1851,9 @@
   <data name="sfdxml1.Filter" xml:space="preserve">
     <value>Arquivos XML|*.xml</value>
   </data>
+  <data name="FaTabStripSolid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="tbUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>667, 21</value>
   </data>
@@ -1866,14 +1881,17 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Propriedades</value>
   </data>
+  <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;GraphLiqDens.Parent" xml:space="preserve">
     <value>FaTabStripItemLIQDENS</value>
   </data>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BtnRestaurar.Text" xml:space="preserve">
-    <value>Restaurar Padrões</value>
+  <data name="&gt;&gt;pbRender.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn26.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1883,9 +1901,6 @@
   </data>
   <data name="FaTabStripItemPVAP.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn14.Width" type="System.Int32, mscorlib">
-    <value>40</value>
   </data>
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1899,17 +1914,17 @@
   <data name="sfdxml1.Title" xml:space="preserve">
     <value>Salvar Arquivo XML</value>
   </data>
-  <data name="tbMODFACNIST.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 131</value>
+  <data name="DataTableSolid.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>82</value>
   </data>
   <data name="DataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>PVap</value>
   </data>
+  <data name="FaTabStripItemLIQVISC.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="TextBoxComments.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
   </data>
   <data name="TextBoxComments.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
@@ -1944,14 +1959,11 @@
   <data name="DataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
     <value>T0</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItemCPLIQ.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;DataTableVapour.Name" xml:space="preserve">
+    <value>DataTableVapour</value>
   </data>
-  <data name="&gt;&gt;pbRender.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="FaTabStripSolid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;tbInChI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GraphVapVisc.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
@@ -1959,8 +1971,8 @@
   <data name="GroupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="FaTabStripItemLIQVISC.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="DataGridViewTextBoxColumn21.Width" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn17.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn17</value>
@@ -1971,11 +1983,14 @@
   <data name="GraphSolidDens.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
   </data>
+  <data name="Button2.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
   <data name="&gt;&gt;SaveFileDialog2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="FaTabStripItem6.Title" xml:space="preserve">
-    <value>Molécula</value>
+  <data name="DataGridViewTextBoxColumn14.Width" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="tbMODFACNIST.Size" type="System.Drawing.Size, System.Drawing">
     <value>667, 21</value>
@@ -1983,17 +1998,11 @@
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TextBoxComments.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="FaTabStripItem16.Size" type="System.Drawing.Size, System.Drawing">
     <value>934, 550</value>
-  </data>
-  <data name="FaTabStripItemCPSOLID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 529</value>
   </data>
   <data name="&gt;&gt;GraphSolidDens.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2007,38 +2016,29 @@
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;DataTableLiquid.Parent" xml:space="preserve">
-    <value>FaTabStripItemTabLiq</value>
-  </data>
   <data name="FaTabStripItemTabLiq.Title" xml:space="preserve">
     <value>Tabela de Dados</value>
-  </data>
-  <data name="DataTableSolid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn23.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="FaTabStripItem17.Title" xml:space="preserve">
-    <value>Propriedades da Phase Vapor</value>
+  <data name="&gt;&gt;FaTabStripItem17.Name" xml:space="preserve">
+    <value>FaTabStripItem17</value>
   </data>
-  <data name="&gt;&gt;LblModified.Name" xml:space="preserve">
-    <value>LblModified</value>
+  <data name="&gt;&gt;FaTabStripItem18.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;TextBoxComments.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="GraphLiqThermCond.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="&gt;&gt;GraphSurfT.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;GraphVapVisc.Parent" xml:space="preserve">
     <value>FaTabStripItemVAPVISC</value>
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
   </data>
   <data name="LblModified.Location" type="System.Drawing.Point, System.Drawing">
     <value>399, 16</value>
@@ -2067,14 +2067,14 @@
   <data name="chkEnableEdit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
-  </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn28.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn28</value>
+  <data name="DataGridViewTextBoxColumn31.HeaderText" xml:space="preserve">
+    <value>T2</value>
+  </data>
+  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>906, 410</value>
   </data>
   <data name="&gt;&gt;DataTableVapour.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2084,6 +2084,9 @@
   </data>
   <data name="Button3.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="GraphSolidDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>910, 529</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>820, 216</value>
@@ -2109,11 +2112,17 @@
   <data name="GraphCp.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <data name="DataTableLiquid.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
   <data name="GraphVisc.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox5</value>
+  </data>
+  <data name="GraphLiqThermCond.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8.25pt</value>
   </data>
   <data name="&gt;&gt;tbUNIFAC.Name" xml:space="preserve">
     <value>tbUNIFAC</value>
@@ -2130,14 +2139,17 @@
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>744, 477</value>
+  </data>
   <data name="GraphLiqThermCond.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="BtnRestaurar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbInChI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BtnRestaurar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="FaTabStripItem18.Title" xml:space="preserve">
     <value>Propriedades da Phase Sólida</value>
@@ -2172,6 +2184,9 @@
   <data name="&gt;&gt;GridProps.Name" xml:space="preserve">
     <value>GridProps</value>
   </data>
+  <data name="&gt;&gt;tbFormula.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
   <data name="GraphPvap.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -2180,9 +2195,6 @@
   </data>
   <data name="FaTabStripSolid.Text" xml:space="preserve">
     <value>FaTabStrip2</value>
-  </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
   </data>
   <data name="LblModified.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2217,6 +2229,9 @@
   <data name="&gt;&gt;FaTabStripItemLIQVISC.Parent" xml:space="preserve">
     <value>FaTabStripLiq</value>
   </data>
+  <data name="&gt;&gt;chkEnableEdit.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="FaTabStripItemVAPVISC.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -2235,8 +2250,8 @@
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
     <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;tbMODFACNIST.Name" xml:space="preserve">
-    <value>tbMODFACNIST</value>
+  <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
+    <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -2253,8 +2268,8 @@
   <data name="FaTabStripItemHVAP.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="Button2.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
+  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="pbRender.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2280,9 +2295,6 @@
   <metadata name="SaveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>261, 16</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn23.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="DataGridViewTextBoxColumn16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2307,6 +2319,9 @@
   <metadata name="DataGridViewTextBoxColumn22.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="DataGridViewTextBoxColumn23.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2323,9 +2338,6 @@
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DataGridViewTextBoxColumn27.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn12.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2355,7 +2367,7 @@
   <metadata name="DataGridViewTextBoxColumn11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn26.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn27.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn25.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2366,6 +2378,9 @@
   </metadata>
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="DataGridViewTextBoxColumn26.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn24.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

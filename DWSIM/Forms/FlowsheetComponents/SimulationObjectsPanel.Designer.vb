@@ -98,16 +98,16 @@ Partial Class SimulationObjectsPanel
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.BackColor = System.Drawing.Color.White
         Me.TabPage1.Controls.Add(Me.PanelStreams)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.BackColor = System.Drawing.Color.White
         Me.TabPage2.Controls.Add(Me.PanelPressure)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'PanelPressure
         '
@@ -124,6 +124,7 @@ Partial Class SimulationObjectsPanel
         'PanelSeparators
         '
         resources.ApplyResources(Me.PanelSeparators, "PanelSeparators")
+        Me.PanelSeparators.BackColor = System.Drawing.Color.White
         Me.PanelSeparators.Name = "PanelSeparators"
         '
         'TabPage4
@@ -136,6 +137,7 @@ Partial Class SimulationObjectsPanel
         'PanelMixers
         '
         resources.ApplyResources(Me.PanelMixers, "PanelMixers")
+        Me.PanelMixers.BackColor = System.Drawing.Color.White
         Me.PanelMixers.Name = "PanelMixers"
         '
         'TabPage5
@@ -148,6 +150,7 @@ Partial Class SimulationObjectsPanel
         'PanelExchangers
         '
         resources.ApplyResources(Me.PanelExchangers, "PanelExchangers")
+        Me.PanelExchangers.BackColor = System.Drawing.Color.White
         Me.PanelExchangers.Name = "PanelExchangers"
         '
         'TabPage6
@@ -160,6 +163,7 @@ Partial Class SimulationObjectsPanel
         'PanelReactors
         '
         resources.ApplyResources(Me.PanelReactors, "PanelReactors")
+        Me.PanelReactors.BackColor = System.Drawing.Color.White
         Me.PanelReactors.Name = "PanelReactors"
         '
         'TabPage7
@@ -172,6 +176,7 @@ Partial Class SimulationObjectsPanel
         'PanelColumns
         '
         resources.ApplyResources(Me.PanelColumns, "PanelColumns")
+        Me.PanelColumns.BackColor = System.Drawing.Color.White
         Me.PanelColumns.Name = "PanelColumns"
         '
         'TabPage8
@@ -184,6 +189,7 @@ Partial Class SimulationObjectsPanel
         'PanelSolids
         '
         resources.ApplyResources(Me.PanelSolids, "PanelSolids")
+        Me.PanelSolids.BackColor = System.Drawing.Color.White
         Me.PanelSolids.Name = "PanelSolids"
         '
         'TabPage9
@@ -196,6 +202,7 @@ Partial Class SimulationObjectsPanel
         'PanelCE
         '
         resources.ApplyResources(Me.PanelCE, "PanelCE")
+        Me.PanelCE.BackColor = System.Drawing.Color.White
         Me.PanelCE.Name = "PanelCE"
         '
         'TabPage10
@@ -208,6 +215,7 @@ Partial Class SimulationObjectsPanel
         'PanelUser
         '
         resources.ApplyResources(Me.PanelUser, "PanelUser")
+        Me.PanelUser.BackColor = System.Drawing.Color.White
         Me.PanelUser.Name = "PanelUser"
         '
         'TabPage11
@@ -220,6 +228,7 @@ Partial Class SimulationObjectsPanel
         'PanelLogical
         '
         resources.ApplyResources(Me.PanelLogical, "PanelLogical")
+        Me.PanelLogical.BackColor = System.Drawing.Color.White
         Me.PanelLogical.Name = "PanelLogical"
         '
         'TabPage13
@@ -232,6 +241,7 @@ Partial Class SimulationObjectsPanel
         'PanelIndicators
         '
         resources.ApplyResources(Me.PanelIndicators, "PanelIndicators")
+        Me.PanelIndicators.BackColor = System.Drawing.Color.White
         Me.PanelIndicators.Name = "PanelIndicators"
         '
         'TabPage14
@@ -244,6 +254,7 @@ Partial Class SimulationObjectsPanel
         'PanelControllers
         '
         resources.ApplyResources(Me.PanelControllers, "PanelControllers")
+        Me.PanelControllers.BackColor = System.Drawing.Color.White
         Me.PanelControllers.Name = "PanelControllers"
         '
         'TabPage12
@@ -256,6 +267,7 @@ Partial Class SimulationObjectsPanel
         'PanelOther
         '
         resources.ApplyResources(Me.PanelOther, "PanelOther")
+        Me.PanelOther.BackColor = System.Drawing.Color.White
         Me.PanelOther.Name = "PanelOther"
         '
         'SimulationObjectsPanel
