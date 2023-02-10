@@ -123,6 +123,12 @@ Namespace Streams
 
         End Sub
 
+        Public Overrides Sub Calculate(Optional args As Object = Nothing)
+
+            SetDirtyStatus(False)
+
+        End Sub
+
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             If su Is Nothing Then su = New SystemsOfUnits.SI

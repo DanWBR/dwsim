@@ -465,16 +465,16 @@ Namespace UnitOperations
             End If
             Calculated = True
             PerformPostCalcValidation()
-            If TypeOf Me Is IEnergyStream Then
-                SetDirtyStatus(False)
-            Else
-                Dim xdoc = New XDocument()
-                xdoc.Add(New XElement("Data"))
-                xdoc.Element("Data").Add(SaveData())
-                xdoc.Element("Data").Element("Calculated").Remove()
-                xdoc.Element("Data").Element("LastUpdated").Remove()
-                LastSolutionInputSnapshot = xdoc.ToString()
-                xdoc = Nothing
+            If GraphicObject IsNot Nothing Then
+                If GraphicObject.ObjectType <> ObjectType.EnergyStream And GraphicObject.ObjectType <> ObjectType.MaterialStream Then
+                    Dim xdoc = New XDocument()
+                    xdoc.Add(New XElement("Data"))
+                    xdoc.Element("Data").Add(SaveData())
+                    xdoc.Element("Data").Element("Calculated").Remove()
+                    xdoc.Element("Data").Element("LastUpdated").Remove()
+                    LastSolutionInputSnapshot = xdoc.ToString()
+                    xdoc = Nothing
+                End If
             End If
         End Sub
 

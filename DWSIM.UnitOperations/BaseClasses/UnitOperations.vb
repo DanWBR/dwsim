@@ -54,38 +54,46 @@ Namespace UnitOperations
 
         Public Overrides Sub CheckDirtyStatus()
 
-            Dim inputdirty As Boolean = False
+            If LastSolutionInputSnapshot <> "" Then
 
-            For Each ic In GraphicObject.InputConnectors
-                If ic.IsAttached Then
-                    Dim obj = FlowSheet.SimulationObjects(ic.AttachedConnector.AttachedFrom.Name)
-                    If obj.IsDirty Then
-                        inputdirty = True
-                        Exit For
+                Dim inputdirty As Boolean = False
+
+                For Each ic In GraphicObject.InputConnectors
+                    If ic.IsAttached Then
+                        Dim obj = FlowSheet.SimulationObjects(ic.AttachedConnector.AttachedFrom.Name)
+                        If obj.IsDirty Then
+                            inputdirty = True
+                            Exit For
+                        End If
                     End If
-                End If
-            Next
+                Next
 
-            If Not inputdirty Then
+                If Not inputdirty Then
 
-                Dim xdoc = New XDocument()
-                xdoc.Add(New XElement("Data"))
-                xdoc.Element("Data").Add(SaveData())
-                xdoc.Element("Data").Element("Calculated").Remove()
-                xdoc.Element("Data").Element("LastUpdated").Remove()
-                Dim currentdata = xdoc.ToString()
+                    Dim xdoc = New XDocument()
+                    xdoc.Add(New XElement("Data"))
+                    xdoc.Element("Data").Add(SaveData())
+                    xdoc.Element("Data").Element("Calculated").Remove()
+                    xdoc.Element("Data").Element("LastUpdated").Remove()
+                    Dim currentdata = xdoc.ToString()
 
-                Dim myDiff = DiffBuilder.Compare(Org.XmlUnit.Builder.Input.FromString(currentdata))
-                myDiff.WithTest(Org.XmlUnit.Builder.Input.FromString(LastSolutionInputSnapshot))
-                Dim result = myDiff.Build()
+                    Dim myDiff = DiffBuilder.Compare(Org.XmlUnit.Builder.Input.FromString(currentdata))
+                    myDiff.WithTest(Org.XmlUnit.Builder.Input.FromString(LastSolutionInputSnapshot))
+                    Dim result = myDiff.Build()
 
-                If result.HasDifferences() Then
-                    SetDirtyStatus(True)
+                    If result.HasDifferences() Then
+                        SetDirtyStatus(True)
+                    Else
+                        SetDirtyStatus(False)
+                    End If
+
+                    xdoc = Nothing
+
                 Else
-                    SetDirtyStatus(False)
-                End If
 
-                xdoc = Nothing
+                    SetDirtyStatus(True)
+
+                End If
 
             Else
 

@@ -261,6 +261,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
                         End If
                     End If
+                    myObj.Solve()
                     If myObj.IsSpecAttached = True Then
                         If myObj.SpecVarType = SpecVarType.Source And fbag.FlowsheetOptions.SpecCalculationMode = SpecCalcMode.AfterSourceObject Then
                             fbag.SimulationObjects(myObj.AttachedSpecId).Solve()
