@@ -82,6 +82,21 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+            If Flowsheet IsNot Nothing Then
+                Dim comps = RET_VNAMES()
+                For Each comp In comps
+                    If Not m_pr._data.ContainsKey(comp) Then
+                        Throw New Exception(String.Format("Missing PRSV2 parameters for {0}. Calculation results will be unreliable", comp))
+                    Else
+                        If m_pr._data(comp).kappa1 = 0.0 And m_pr._data(comp).kappa2 = 0.0 And m_pr._data(comp).kappa3 = 0.0 Then
+                            Throw New Exception(String.Format("Missing PRSV2 parameters for {0}. Calculation results will be ureliable", comp))
+                        End If
+                    End If
+                Next
+            End If
+        End Sub
+
 #Region "    DWSIM Functions"
 
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double

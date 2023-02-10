@@ -24,22 +24,22 @@ Partial Class FormSimulSettings
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulSettings))
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.cbSpecCalcMode = New System.Windows.Forms.ComboBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.chkShowExtraPropertiesEditor = New System.Windows.Forms.CheckBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbSpecCalcMode = New System.Windows.Forms.ComboBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.chkShowExtraPropertiesEditor = New System.Windows.Forms.CheckBox()
         Me.TBdesc = New System.Windows.Forms.TextBox()
         Me.TBaut = New System.Windows.Forms.TextBox()
         Me.TBtit = New System.Windows.Forms.TextBox()
@@ -120,10 +120,6 @@ Partial Class FormSimulSettings
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.cbForcePhase = New System.Windows.Forms.ComboBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.chkSkipEqCalcs = New System.Windows.Forms.CheckBox()
         Me.TabPageReactions = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
@@ -137,6 +133,12 @@ Partial Class FormSimulSettings
         Me.cbMassBalanceCheck = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkForceObjectCalculation = New System.Windows.Forms.CheckBox()
+        Me.cbForcePhase = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.chkSkipEqCalcs = New System.Windows.Forms.CheckBox()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -186,11 +188,12 @@ Partial Class FormSimulSettings
         Me.TabPage1.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.TabPage7.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
@@ -213,9 +216,6 @@ Partial Class FormSimulSettings
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.cbSpecCalcMode)
-        Me.GroupBox1.Controls.Add(Me.Label20)
-        Me.GroupBox1.Controls.Add(Me.chkShowExtraPropertiesEditor)
         Me.GroupBox1.Controls.Add(Me.LinkLabel1)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.ComboBox3)
@@ -224,28 +224,6 @@ Partial Class FormSimulSettings
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        '
-        'cbSpecCalcMode
-        '
-        resources.ApplyResources(Me.cbSpecCalcMode, "cbSpecCalcMode")
-        Me.cbSpecCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbSpecCalcMode.DropDownWidth = 226
-        Me.cbSpecCalcMode.Items.AddRange(New Object() {resources.GetString("cbSpecCalcMode.Items"), resources.GetString("cbSpecCalcMode.Items1"), resources.GetString("cbSpecCalcMode.Items2"), resources.GetString("cbSpecCalcMode.Items3")})
-        Me.cbSpecCalcMode.Name = "cbSpecCalcMode"
-        Me.ToolTip1.SetToolTip(Me.cbSpecCalcMode, resources.GetString("cbSpecCalcMode.ToolTip"))
-        '
-        'Label20
-        '
-        resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Name = "Label20"
-        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
-        '
-        'chkShowExtraPropertiesEditor
-        '
-        resources.ApplyResources(Me.chkShowExtraPropertiesEditor, "chkShowExtraPropertiesEditor")
-        Me.chkShowExtraPropertiesEditor.Name = "chkShowExtraPropertiesEditor"
-        Me.ToolTip1.SetToolTip(Me.chkShowExtraPropertiesEditor, resources.GetString("chkShowExtraPropertiesEditor.ToolTip"))
-        Me.chkShowExtraPropertiesEditor.UseVisualStyleBackColor = True
         '
         'LinkLabel1
         '
@@ -283,6 +261,28 @@ Partial Class FormSimulSettings
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
         Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        '
+        'cbSpecCalcMode
+        '
+        resources.ApplyResources(Me.cbSpecCalcMode, "cbSpecCalcMode")
+        Me.cbSpecCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSpecCalcMode.DropDownWidth = 226
+        Me.cbSpecCalcMode.Items.AddRange(New Object() {resources.GetString("cbSpecCalcMode.Items"), resources.GetString("cbSpecCalcMode.Items1"), resources.GetString("cbSpecCalcMode.Items2"), resources.GetString("cbSpecCalcMode.Items3")})
+        Me.cbSpecCalcMode.Name = "cbSpecCalcMode"
+        Me.ToolTip1.SetToolTip(Me.cbSpecCalcMode, resources.GetString("cbSpecCalcMode.ToolTip"))
+        '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        '
+        'chkShowExtraPropertiesEditor
+        '
+        resources.ApplyResources(Me.chkShowExtraPropertiesEditor, "chkShowExtraPropertiesEditor")
+        Me.chkShowExtraPropertiesEditor.Name = "chkShowExtraPropertiesEditor"
+        Me.ToolTip1.SetToolTip(Me.chkShowExtraPropertiesEditor, resources.GetString("chkShowExtraPropertiesEditor.ToolTip"))
+        Me.chkShowExtraPropertiesEditor.UseVisualStyleBackColor = True
         '
         'TBdesc
         '
@@ -390,8 +390,8 @@ Partial Class FormSimulSettings
         '
         'Column1
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -404,8 +404,8 @@ Partial Class FormSimulSettings
         '
         'Column3
         '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -547,8 +547,8 @@ Partial Class FormSimulSettings
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.colAdd, Me.colName, Me.colTag, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
         Me.ogc1.Name = "ogc1"
@@ -857,9 +857,9 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -868,9 +868,9 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
@@ -897,6 +897,7 @@ Partial Class FormSimulSettings
         Me.TabControl1.Controls.Add(Me.TabPageReactions)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Name = "TabControl1"
@@ -925,43 +926,10 @@ Partial Class FormSimulSettings
         'TabPage2
         '
         resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Controls.Add(Me.GroupBox4)
         Me.TabPage2.Controls.Add(Me.PanelPP)
         Me.TabPage2.Name = "TabPage2"
         Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
         Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.cbForcePhase)
-        Me.GroupBox4.Controls.Add(Me.Label13)
-        Me.GroupBox4.Controls.Add(Me.chkSkipEqCalcs)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
-        '
-        'cbForcePhase
-        '
-        resources.ApplyResources(Me.cbForcePhase, "cbForcePhase")
-        Me.cbForcePhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbForcePhase.FormattingEnabled = True
-        Me.cbForcePhase.Items.AddRange(New Object() {resources.GetString("cbForcePhase.Items"), resources.GetString("cbForcePhase.Items1"), resources.GetString("cbForcePhase.Items2"), resources.GetString("cbForcePhase.Items3")})
-        Me.cbForcePhase.Name = "cbForcePhase"
-        Me.ToolTip1.SetToolTip(Me.cbForcePhase, resources.GetString("cbForcePhase.ToolTip"))
-        '
-        'Label13
-        '
-        resources.ApplyResources(Me.Label13, "Label13")
-        Me.Label13.Name = "Label13"
-        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
-        '
-        'chkSkipEqCalcs
-        '
-        resources.ApplyResources(Me.chkSkipEqCalcs, "chkSkipEqCalcs")
-        Me.chkSkipEqCalcs.Name = "chkSkipEqCalcs"
-        Me.ToolTip1.SetToolTip(Me.chkSkipEqCalcs, resources.GetString("chkSkipEqCalcs.ToolTip"))
-        Me.chkSkipEqCalcs.UseVisualStyleBackColor = True
         '
         'TabPageReactions
         '
@@ -1062,6 +1030,57 @@ Partial Class FormSimulSettings
         Me.TabPage4.Name = "TabPage4"
         Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TabPage7
+        '
+        resources.ApplyResources(Me.TabPage7, "TabPage7")
+        Me.TabPage7.Controls.Add(Me.GroupBox4)
+        Me.TabPage7.Controls.Add(Me.GroupBox1)
+        Me.TabPage7.Name = "TabPage7"
+        Me.ToolTip1.SetToolTip(Me.TabPage7, resources.GetString("TabPage7.ToolTip"))
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.cbSpecCalcMode)
+        Me.GroupBox4.Controls.Add(Me.Label20)
+        Me.GroupBox4.Controls.Add(Me.chkForceObjectCalculation)
+        Me.GroupBox4.Controls.Add(Me.cbForcePhase)
+        Me.GroupBox4.Controls.Add(Me.Label13)
+        Me.GroupBox4.Controls.Add(Me.chkSkipEqCalcs)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
+        '
+        'chkForceObjectCalculation
+        '
+        resources.ApplyResources(Me.chkForceObjectCalculation, "chkForceObjectCalculation")
+        Me.chkForceObjectCalculation.Name = "chkForceObjectCalculation"
+        Me.ToolTip1.SetToolTip(Me.chkForceObjectCalculation, resources.GetString("chkForceObjectCalculation.ToolTip"))
+        Me.chkForceObjectCalculation.UseVisualStyleBackColor = True
+        '
+        'cbForcePhase
+        '
+        resources.ApplyResources(Me.cbForcePhase, "cbForcePhase")
+        Me.cbForcePhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbForcePhase.FormattingEnabled = True
+        Me.cbForcePhase.Items.AddRange(New Object() {resources.GetString("cbForcePhase.Items"), resources.GetString("cbForcePhase.Items1"), resources.GetString("cbForcePhase.Items2"), resources.GetString("cbForcePhase.Items3")})
+        Me.cbForcePhase.Name = "cbForcePhase"
+        Me.ToolTip1.SetToolTip(Me.cbForcePhase, resources.GetString("cbForcePhase.ToolTip"))
+        '
+        'Label13
+        '
+        resources.ApplyResources(Me.Label13, "Label13")
+        Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
+        '
+        'chkSkipEqCalcs
+        '
+        resources.ApplyResources(Me.chkSkipEqCalcs, "chkSkipEqCalcs")
+        Me.chkSkipEqCalcs.Name = "chkSkipEqCalcs"
+        Me.ToolTip1.SetToolTip(Me.chkSkipEqCalcs, resources.GetString("chkSkipEqCalcs.ToolTip"))
+        Me.chkSkipEqCalcs.UseVisualStyleBackColor = True
         '
         'TabPage6
         '
@@ -1167,6 +1186,7 @@ Partial Class FormSimulSettings
         'GroupBox14
         '
         resources.ApplyResources(Me.GroupBox14, "GroupBox14")
+        Me.GroupBox14.Controls.Add(Me.chkShowExtraPropertiesEditor)
         Me.GroupBox14.Controls.Add(Me.lblsla)
         Me.GroupBox14.Controls.Add(Me.cbDefaultFloatingTableCompoundAmountBasis)
         Me.GroupBox14.Controls.Add(Me.chkDisplayFloatingTableCompoundAmounts)
@@ -1275,7 +1295,6 @@ Partial Class FormSimulSettings
         '
         resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Controls.Add(Me.GroupBox3)
-        Me.TabPage5.Controls.Add(Me.GroupBox1)
         Me.TabPage5.Name = "TabPage5"
         Me.ToolTip1.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip"))
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -1340,14 +1359,15 @@ Partial Class FormSimulSettings
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox15.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
+        Me.TabPage7.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.TabPage6.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
@@ -1497,4 +1517,6 @@ Partial Class FormSimulSettings
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Public WithEvents cbSpecCalcMode As ComboBox
     Public WithEvents Label20 As Label
+    Friend WithEvents TabPage7 As TabPage
+    Friend WithEvents chkForceObjectCalculation As CheckBox
 End Class

@@ -143,6 +143,8 @@ Public Class FormSimulWizard
 
         cbPPFilter.SelectedIndex = 0
 
+        chkDoubleClickToOpenEditors.Checked = My.Settings.DoubleClickToEdit
+
         Me.loaded = True
 
     End Sub
@@ -1642,6 +1644,39 @@ Public Class FormSimulWizard
                     End If
                 Next
         End Select
+
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles chkActivateSmartObjectSolving.CheckedChanged
+
+        If loaded Then CurrentFlowsheet.Options.ForceObjectSolving = Not chkActivateSmartObjectSolving.Checked
+
+    End Sub
+
+    Private Sub chkEnableFailSafeFlash_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableFailSafeFlash.CheckedChanged
+
+        If loaded Then
+            For Each pp As PropertyPackage In CurrentFlowsheet.PropertyPackages.Values
+                Dim fs = pp.FlashSettings
+                If chkEnableFailSafeFlash.Checked Then
+                    fs(FlashSetting.FailSafeCalculationMode) = 1
+                Else
+                    fs(FlashSetting.FailSafeCalculationMode) = 3
+                End If
+            Next
+        End If
+
+    End Sub
+
+    Private Sub chkDoubleClickToOpenEditors_CheckedChanged(sender As Object, e As EventArgs) Handles chkDoubleClickToOpenEditors.CheckedChanged
+
+        If loaded Then
+
+            My.Settings.DoubleClickToEdit = chkDoubleClickToOpenEditors.Checked
+
+            GlobalSettings.Settings.EditOnSelect = Not My.Settings.DoubleClickToEdit
+
+        End If
 
     End Sub
 

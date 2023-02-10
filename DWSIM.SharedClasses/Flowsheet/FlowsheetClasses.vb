@@ -276,6 +276,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property SpecCalculationMode As SpecCalcMode = SpecCalcMode.AfterSourceObject Implements IFlowsheetOptions.SpecCalculationMode
 
+        Public Property ForceObjectSolving As Boolean = False Implements IFlowsheetOptions.ForceObjectSolving
+
     End Class
 
 End Namespace

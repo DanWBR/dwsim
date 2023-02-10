@@ -1341,24 +1341,26 @@ Namespace PropertyPackages
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                    If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
-                                        vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
-                                    Else
-                                        WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Enthalpy, compound " &
-                                                         vn(i) & ". Extrapolating curve to obtain a value...")
-                                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                        x1 = Tmin + (Tb - Tmin) * 0.9
-                                        x2 = Tmin + (Tb - Tmin) * 0.8
-                                        x3 = Tmin + (Tb - Tmin) * 0.7
-                                        x4 = Tmin + (Tb - Tmin) * 0.6
-                                        x5 = Tmin + (Tb - Tmin) * 0.5
-                                        p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
-                                    End If
+                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
+                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
+                                ElseIf (T - Tb) < 0.01 Then
+                                    vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
+                                Else
+                                    WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Enthalpy, compound " &
+                                                     vn(i) & ". Extrapolating curve to obtain a value...")
+                                    Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                                    x1 = Tmin + (Tb - Tmin) * 0.9
+                                    x2 = Tmin + (Tb - Tmin) * 0.8
+                                    x3 = Tmin + (Tb - Tmin) * 0.7
+                                    x4 = Tmin + (Tb - Tmin) * 0.6
+                                    x5 = Tmin + (Tb - Tmin) * 0.5
+                                    p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
+                                End If
                                 'Else
                                 '    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
                                 '    vk(i) = 0.0#
@@ -1381,24 +1383,26 @@ Namespace PropertyPackages
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                    If T > Tb And Abs(T - Tb) > 0.01 Then
-                                        vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
-                                    Else
-                                        WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
+                                If T > Tb And Abs(T - Tb) > 0.01 Then
+                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
+                                ElseIf (T - Tb) < 0.01 Then
+                                    vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
+                                Else
+                                    WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
-                                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                        x1 = Tb + 1.0 + T * 0.2
-                                        x2 = Tb + 1.0 + T * 0.4
-                                        x3 = Tb + 1.0 + T * 0.6
-                                        x4 = Tb + 1.0 + T * 0.8
-                                        x5 = Tb + 1.0 + T * 0.9
-                                        p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
-                                    End If
+                                    Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                                    x1 = Tb + 1.0 + T * 0.2
+                                    x2 = Tb + 1.0 + T * 0.4
+                                    x3 = Tb + 1.0 + T * 0.6
+                                    x4 = Tb + 1.0 + T * 0.8
+                                    x5 = Tb + 1.0 + T * 0.9
+                                    p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
+                                End If
                                 'Else
                                 '    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
                                 '    vk(i) = 0.0#
@@ -1476,24 +1480,26 @@ Namespace PropertyPackages
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                    If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
-                                        vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
-                                    Else
-                                        WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Entropy, compound " &
-                                                         vn(i) & ". Extrapolating curve to obtain a value...")
-                                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                        x1 = Tmin + (Tb - Tmin) * 0.9
-                                        x2 = Tmin + (Tb - Tmin) * 0.8
-                                        x3 = Tmin + (Tb - Tmin) * 0.7
-                                        x4 = Tmin + (Tb - Tmin) * 0.6
-                                        x5 = Tmin + (Tb - Tmin) * 0.5
-                                        p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
-                                    End If
+                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
+                                    vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
+                                ElseIf (T - Tb) < 0.01 Then
+                                    vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
+                                Else
+                                    WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Entropy, compound " &
+                                                     vn(i) & ". Extrapolating curve to obtain a value...")
+                                    Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                                    x1 = Tmin + (Tb - Tmin) * 0.9
+                                    x2 = Tmin + (Tb - Tmin) * 0.8
+                                    x3 = Tmin + (Tb - Tmin) * 0.7
+                                    x4 = Tmin + (Tb - Tmin) * 0.6
+                                    x5 = Tmin + (Tb - Tmin) * 0.5
+                                    p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    vk(i) = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
+                                End If
                                 'Else
                                 '    WriteWarningMessage("CoolProp Warning: unable to calculate Entropy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
                                 '    vk(i) = 0.0#
@@ -1516,24 +1522,26 @@ Namespace PropertyPackages
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                    If T > Tb And Abs(T - Tb) > 0.01 Then
-                                        vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
-                                    Else
-                                        WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Entropy, compound " &
-                                                         vn(i) & ". Extrapolating curve to obtain a value...")
-                                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                        x1 = Tb + 1.0 + T * 0.2
-                                        x2 = Tb + 1.0 + T * 0.4
-                                        x3 = Tb + 1.0 + T * 0.6
-                                        x4 = Tb + 1.0 + T * 0.8
-                                        x5 = Tb + 1.0 + T * 0.9
-                                        p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
-                                        vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
-                                    End If
+                                If T > Tb And Abs(T - Tb) > 0.01 Then
+                                    vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
+                                ElseIf (T - Tb) < 0.01 Then
+                                    vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
+                                Else
+                                    WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Entropy, compound " &
+                                                     vn(i) & ". Extrapolating curve to obtain a value...")
+                                    Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                                    x1 = Tb + 1.0 + T * 0.2
+                                    x2 = Tb + 1.0 + T * 0.4
+                                    x3 = Tb + 1.0 + T * 0.6
+                                    x4 = Tb + 1.0 + T * 0.8
+                                    x5 = Tb + 1.0 + T * 0.9
+                                    p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    vk(i) = MathNet.Numerics.Interpolate.RationalWithPoles(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
+                                End If
                                 'Else
                                 '    WriteWarningMessage("CoolProp Warning: unable to calculate Enthalpy for " & vn(i) & " at T = " & T & " K and P = " & P & " Pa.")
                                 '    vk(i) = 0.0#

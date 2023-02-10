@@ -301,6 +301,8 @@ Public Class FormSimulSettings
 
         cbSpecCalcMode.SelectedIndex = CurrentFlowsheet.Options.SpecCalculationMode
 
+        chkForceObjectCalculation.Checked = CurrentFlowsheet.Options.ForceObjectSolving
+
         Select Case CurrentFlowsheet.Options.ForceStreamPhase
             Case ForcedPhase.None
                 cbForcePhase.SelectedIndex = 0
@@ -1868,7 +1870,15 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub cbSpecCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpecCalcMode.SelectedIndexChanged
+
         CurrentFlowsheet.Options.SpecCalculationMode = cbSpecCalcMode.SelectedIndex
+
+    End Sub
+
+    Private Sub chkForceObjectCalculation_CheckedChanged(sender As Object, e As EventArgs) Handles chkForceObjectCalculation.CheckedChanged
+
+        CurrentFlowsheet.Options.ForceObjectSolving = chkForceObjectCalculation.Checked
+
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

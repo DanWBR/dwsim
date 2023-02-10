@@ -461,7 +461,7 @@ Namespace UnitOperations
             If OverrideCalculationRoutine Then
                 CalculationRoutineOverride.Invoke()
             Else
-                If Not CanUsePreviousResults Then Calculate()
+                If Not CanUsePreviousResults Or FlowSheet.FlowsheetOptions.ForceObjectSolving Then Calculate()
             End If
             Calculated = True
             PerformPostCalcValidation()

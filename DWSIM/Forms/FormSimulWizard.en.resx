@@ -212,114 +212,6 @@ Click "Next" to continue.</value>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>698, 286</value>
   </data>
-  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 346</value>
-  </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 350</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 15</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>,  but you can use all available packages without restrictions.</value>
-  </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 350</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 15</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Recommended packages are marked with a</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 20</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Override Phase Equilibria calculation settings?</value>
-  </data>
-  <data name="rbSVLLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 3</value>
-  </data>
-  <data name="rbSVLLE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 19</value>
-  </data>
-  <data name="rbSVLLE.Text" xml:space="preserve">
-    <value>Leave as default (SVLLE)</value>
-  </data>
-  <data name="rbVLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 3</value>
-  </data>
-  <data name="rbVLE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 19</value>
-  </data>
-  <data name="rbVLE.Text" xml:space="preserve">
-    <value>VLE (faster)</value>
-  </data>
-  <data name="rbVLLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>501, 3</value>
-  </data>
-  <data name="rbNoFlash.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 3</value>
-  </data>
-  <data name="rbNoFlash.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 19</value>
-  </data>
-  <data name="rbNoFlash.Text" xml:space="preserve">
-    <value>Do not calculate</value>
-  </data>
-  <data name="FlowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 371</value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="cbPPFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 19</value>
-  </data>
-  <data name="cbPPFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
-  </data>
-  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 24</value>
-  </data>
-  <data name="Column6.ToolTipText" xml:space="preserve">
-    <value>Recommended</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="DataGridViewPP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 48</value>
-  </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 298</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Available Property Packages</value>
-  </data>
-  <data name="Column16.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Column17.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="dgvpp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 276</value>
-  </data>
-  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 298</value>
-  </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Added Property Packages</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>703, 33</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
-  </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Property Packages</value>
   </data>
@@ -329,36 +221,14 @@ Click "Next" to continue.</value>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introduction</value>
   </data>
-  <data name="btnCreateNewUnits.Text" xml:space="preserve">
-    <value>Create New</value>
-  </data>
-  <data name="btnCloneUnits.Text" xml:space="preserve">
-    <value>Clone</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 15</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Select the desired System of Units for your simulation. You can change individual units by selecting a custom system (other than SI, CGS or ENG). 
-Click "Finish" to exit the wizard and start designing the simulation model.</value>
-  </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
+  </data>
+  <data name="WizardPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 404</value>
+  </data>
+  <data name="WizardPage4.Text" xml:space="preserve">
+    <value>Behavior</value>
   </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Simulation Configuration Wizard</value>
@@ -490,6 +360,145 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
+  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 346</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 350</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 15</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>,  but you can use all available packages without restrictions.</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 350</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 15</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Recommended packages are marked with a</value>
+  </data>
+  <data name="FlowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 371</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 20</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Override Phase Equilibria calculation settings?</value>
+  </data>
+  <data name="rbSVLLE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 3</value>
+  </data>
+  <data name="rbSVLLE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 19</value>
+  </data>
+  <data name="rbSVLLE.Text" xml:space="preserve">
+    <value>Leave as default (SVLLE)</value>
+  </data>
+  <data name="rbVLE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 3</value>
+  </data>
+  <data name="rbVLE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 19</value>
+  </data>
+  <data name="rbVLE.Text" xml:space="preserve">
+    <value>VLE (faster)</value>
+  </data>
+  <data name="rbVLLE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>501, 3</value>
+  </data>
+  <data name="rbNoFlash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>580, 3</value>
+  </data>
+  <data name="rbNoFlash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 19</value>
+  </data>
+  <data name="rbNoFlash.Text" xml:space="preserve">
+    <value>Do not calculate</value>
+  </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 298</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Available Property Packages</value>
+  </data>
+  <data name="cbPPFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 19</value>
+  </data>
+  <data name="cbPPFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 23</value>
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 24</value>
+  </data>
+  <data name="DataGridViewPP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 48</value>
+  </data>
+  <data name="Column6.ToolTipText" xml:space="preserve">
+    <value>Recommended</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 298</value>
+  </data>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Added Property Packages</value>
+  </data>
+  <data name="dgvpp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 276</value>
+  </data>
+  <data name="Column16.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column17.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>703, 33</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
+  </data>
+  <data name="btnCreateNewUnits.Text" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="btnCloneUnits.Text" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 15</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>System of Units</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Select the desired System of Units for your simulation. You can change individual units by selecting a custom system (other than SI, CGS or ENG). 
+Click "Finish" to exit the wizard and start designing the simulation model.</value>
+  </data>
+  <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 136</value>
+  </data>
   <data name="ImportFromThermoChemicalsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 22</value>
   </data>
@@ -525,8 +534,5 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
   </data>
   <data name="CriarAPartirDeEstruturaUNIFACToolStripMenuItem.Text" xml:space="preserve">
     <value>Create From UNIFAC Molecular Structure</value>
-  </data>
-  <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 136</value>
   </data>
 </root>
