@@ -80,6 +80,8 @@ Namespace Streams
 
         Public Property TotalEnergyFlow As Double = 0.0
 
+        Public Property LastSolutionInputData As MaterialStreamInputData
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -160,6 +162,38 @@ Namespace Streams
             Return DebugText
 
         End Function
+
+        Public Overrides Sub CheckDirtyStatus()
+
+            Dim dirty As Boolean = False
+            Dim epsilon As Double = 0.000001
+
+            If LastSolutionInputData IsNot Nothing Then
+
+                If Math.Abs(GetTemperature() - LastSolutionInputData.Temperature) > epsilon Then dirty = True
+                If Math.Abs(GetPressure() - LastSolutionInputData.Pressure) > epsilon Then dirty = True
+                If Math.Abs(GetMassFlow() - LastSolutionInputData.MassFlow) > epsilon Then dirty = True
+                If Math.Abs(GetMolarFlow() - LastSolutionInputData.MolarFlow) > epsilon Then dirty = True
+                If Math.Abs(GetVolumetricFlow() - LastSolutionInputData.VolumetricFlow) > epsilon Then dirty = True
+                If Math.Abs(GetMassEnthalpy() - LastSolutionInputData.Enthalpy) > epsilon Then dirty = True
+                If Math.Abs(GetMassEntropy() - LastSolutionInputData.Entropy) > epsilon Then dirty = True
+                If Math.Abs(Phases(2).Properties.molarfraction.GetValueOrDefault() - LastSolutionInputData.VaporFraction) > epsilon Then dirty = True
+
+                If Phases(0).Compounds.Count <> LastSolutionInputData.MolarComposition.Count Then dirty = True
+
+                Dim comp = GetOverallComposition()
+
+                For i = 0 To LastSolutionInputData.MolarComposition.Count - 1
+
+                    If Math.Abs(comp(i) - LastSolutionInputData.MolarComposition(i)) > epsilon Then dirty = True
+
+                Next
+
+                SetDirtyStatus(dirty)
+
+            End If
+
+        End Sub
 
         Public Overrides Sub Validate()
 
@@ -390,6 +424,8 @@ Namespace Streams
         ''' <param name="properties"></param>
         ''' <remarks></remarks>
         Public Overloads Sub Calculate(equilibrium As Boolean, properties As Boolean)
+
+            LastSolutionInputData = Nothing
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -780,6 +816,18 @@ Namespace Streams
                 .CurrentMaterialStream = Nothing
 
             End With
+
+            LastSolutionInputData = New MaterialStreamInputData()
+
+            LastSolutionInputData.Temperature = GetTemperature()
+            LastSolutionInputData.Pressure = GetPressure()
+            LastSolutionInputData.MassFlow = GetMassFlow()
+            LastSolutionInputData.MolarFlow = GetMolarFlow()
+            LastSolutionInputData.VolumetricFlow = GetVolumetricFlow()
+            LastSolutionInputData.Enthalpy = GetMassEnthalpy()
+            LastSolutionInputData.Entropy = GetMassEntropy()
+            LastSolutionInputData.VaporFraction = Phases(2).Properties.molarfraction.GetValueOrDefault()
+            LastSolutionInputData.MolarComposition = GetOverallComposition().ToList()
 
             IObj?.Close()
 
@@ -8720,6 +8768,13 @@ Namespace Streams
 
     End Class
 
+    Public Class MaterialStreamInputData
+
+        Public Temperature, Pressure, MassFlow, MolarFlow, VolumetricFlow, Enthalpy, Entropy, VaporFraction As Double
+
+        Public MolarComposition As New List(Of Double)
+
+    End Class
 
 End Namespace
 

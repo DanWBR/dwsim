@@ -223,6 +223,9 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="xmlunit-core, Version=2.9.1.209, Culture=neutral, PublicKeyToken=e7d7e3088fd452f6, processorArchitecture=MSIL">
+      <HintPath>..\packages\XMLUnit.Core.2.9.1\lib\net35\xmlunit-core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.ExtensionMethods" />

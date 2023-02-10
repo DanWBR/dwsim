@@ -36,6 +36,8 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
+        <Newtonsoft.Json.JsonIgnore> <Xml.Serialization.XmlIgnore> Public Property LastSolutionInputSnapshot As String = ""
+
         Protected Friend _IsDirty As Boolean = True
         ReadOnly Property IsDirty As Boolean Implements ISimulationObject.IsDirty
             Get
@@ -454,14 +456,26 @@ Namespace UnitOperations
         End Sub
 
         Public Sub Solve() Implements ISimulationObject.Solve
+            CheckDirtyStatus()
             Calculated = False
             If OverrideCalculationRoutine Then
                 CalculationRoutineOverride.Invoke()
             Else
-                Calculate()
+                If Not CanUsePreviousResults Then Calculate()
             End If
             Calculated = True
             PerformPostCalcValidation()
+            If TypeOf Me Is IEnergyStream Then
+                SetDirtyStatus(False)
+            Else
+                Dim xdoc = New XDocument()
+                xdoc.Add(New XElement("Data"))
+                xdoc.Element("Data").Add(SaveData())
+                xdoc.Element("Data").Element("Calculated").Remove()
+                xdoc.Element("Data").Element("LastUpdated").Remove()
+                LastSolutionInputSnapshot = xdoc.ToString()
+                xdoc = Nothing
+            End If
         End Sub
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
@@ -1652,10 +1666,18 @@ Namespace UnitOperations
 
         Public Sub SetDirtyStatus(value As Boolean) Implements ISimulationObject.SetDirtyStatus
             _IsDirty = value
+            SetCanUsePreviousResults(Not _IsDirty)
         End Sub
 
         Public Sub SetCanUsePreviousResults(value As Boolean) Implements ISimulationObject.SetCanUsePreviousResults
             _CanUsePreviousResults = value
+        End Sub
+
+        Public Overridable Sub CheckDirtyStatus() Implements ISimulationObject.CheckDirtyStatus
+
+            SetDirtyStatus(True)
+            SetCanUsePreviousResults(False)
+
         End Sub
 
     End Class

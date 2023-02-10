@@ -268,4 +268,6 @@ Imports DWSIM.Interfaces.Enums
 
     Sub SetCanUsePreviousResults(value As Boolean)
 
+    Sub CheckDirtyStatus()
+
 End Interface

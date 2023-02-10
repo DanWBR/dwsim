@@ -93,6 +93,8 @@ Namespace Streams
 
         End Sub
 
+        Private _eflow As Double?
+
         ''' <summary>
         ''' Power (energy) associated with this stream.
         ''' </summary>
@@ -100,6 +102,14 @@ Namespace Streams
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Overrides Property EnergyFlow() As Double?
+            Get
+                Return _eflow
+            End Get
+            Set(value As Double?)
+                _eflow = value
+                SetDirtyStatus(True)
+            End Set
+        End Property
 
         Public Sub SetValue(ByVal energyflow_kW As Double)
             EnergyFlow = energyflow_kW
