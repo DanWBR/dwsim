@@ -196,6 +196,7 @@ Partial Class FormImportCompoundKDB
         Me.Panel3.PerformLayout()
         CType(Me.dgResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
