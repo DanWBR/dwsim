@@ -2854,7 +2854,7 @@ Public Class FormCompoundCreator
         'definition available, render molecule
         Try
             Dim ind As New Indigo()
-            Dim mol As IndigoObject = ind.loadMolecule(TextBoxSMILES.Text)
+            Dim mol As IndigoObject = ind.loadMolecule(TextBoxSMILES.Text.Trim().TrimStart(vbCrLf).TrimEnd(vbCrLf).Trim())
             Dim renderer As New IndigoRenderer(ind)
             With renderer
                 ind.setOption("render-image-size", pbRender.Size.Width, pbRender.Size.Height)

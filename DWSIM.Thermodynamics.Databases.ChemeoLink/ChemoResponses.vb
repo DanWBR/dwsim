@@ -1,6 +1,6 @@
 ﻿' based on https://www.chemeo.com/api/v1/
 Class SearchResponse
-    Public Property Compounds() As IEnumerable(Of Compound)
+    Public Property Comps() As IEnumerable(Of Compound)
 End Class
 
 

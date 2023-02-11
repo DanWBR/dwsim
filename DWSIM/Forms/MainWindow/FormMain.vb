@@ -4610,6 +4610,10 @@ Label_00CC:
     End Sub
 
     Private Sub NovoEstudoDoCriadorDeComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Click
+
+        Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         Dim NewMDIChild As New FormCompoundCreator()
 
         RaiseEvent ToolOpened("New Compound Creator", New EventArgs())
@@ -4621,9 +4625,14 @@ Label_00CC:
         Me.ActivateMdiChild(NewMDIChild)
         NewMDIChild.Show()
         m_childcount += 1
+
     End Sub
 
     Private Sub NovoEstudoDeRegressaoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Click
+
+        Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         Dim NewMDIChild As New FormDataRegression()
 
         RaiseEvent ToolOpened("New Regression Study", New EventArgs())
@@ -4638,6 +4647,10 @@ Label_00CC:
     End Sub
 
     Private Sub NovoRegressaoUNIFACIPs_Click(sender As Object, e As EventArgs) Handles NovoRegressaoUNIFACIPs.Click
+
+        Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         Dim NewMDIChild As New FormUNIFACRegression()
 
         RaiseEvent ToolOpened("New UNIFAC IP Regression", New EventArgs())

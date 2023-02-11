@@ -1549,9 +1549,13 @@ Public Class FormSimulWizard
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         If DataGridViewPP.SelectedRows.Count > 0 Then
-            Dim pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value)
-            Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
-            fppi.ShowDialog()
+            If Integer.TryParse(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value, New Integer) Then
+                MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Dim pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value)
+                Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
+                fppi.ShowDialog()
+            End If
         End If
 
     End Sub
@@ -1584,7 +1588,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = If(pp.PackageType = PackageType.EOS, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.EOS, True, False)
                     End If
                 Next
             Case 3 'Activity Coefficient
@@ -1593,7 +1597,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = If(pp.PackageType = PackageType.ActivityCoefficient, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.ActivityCoefficient, True, False)
                     End If
                 Next
             Case 4 'Vapor Pressure
@@ -1602,7 +1606,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = If(pp.PackageType = PackageType.VaporPressure, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.VaporPressure, True, False)
                     End If
                 Next
             Case 5 'Corresponding States
@@ -1611,7 +1615,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = If(pp.PackageType = PackageType.CorrespondingStates, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.CorrespondingStates, True, False)
                     End If
                 Next
             Case 6 'Specialized Models
@@ -1620,7 +1624,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = If(pp.PackageType = PackageType.Specialized, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.Specialized, True, False)
                     End If
                 Next
             Case 7 'Miscelaneous
@@ -1631,7 +1635,7 @@ Public Class FormSimulWizard
                             pp.PackageType = PackageType.CAPEOPEN Or
                             pp.PackageType = PackageType.ChaoSeader, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.Miscelaneous, True, False)
                     End If
                 Next
             Case 8 'Electrolytes
@@ -1640,7 +1644,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = If(pp.PackageType = PackageType.Electrolytes, True, False)
                     Else
-                        row.Visible = False
+                        row.Visible = If(row.Cells(0).Value = PackageType.Electrolytes, True, False)
                     End If
                 Next
         End Select

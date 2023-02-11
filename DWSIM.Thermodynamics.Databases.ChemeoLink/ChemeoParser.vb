@@ -11,17 +11,18 @@ Public Class ChemeoParser
 
     Shared Async Function GetCompoundIDs(searchstring As String, exact As Boolean) As Task(Of List(Of String()))
 
-        Dim url As String = "https://chemeo.com/api/v1/search?q=" & HttpUtility.UrlEncode(searchstring)
+        Dim url As String = "https://www.chemeo.com/api/v1/search?q=" & HttpUtility.UrlEncode(searchstring)
 
         Dim response As HttpResponseMessage = Await GetResponse(url)
         If response.IsSuccessStatusCode Then
             Dim jss As New JavaScriptSerializer()
+            jss.MaxJsonLength = 10 * 1024 * 1024
             Dim json As String = Await response.Content.ReadAsStringAsync()
             Dim result = jss.Deserialize(Of SearchResponse)(json)
             Dim resultFilter = If(exact,
                 Function(x As Compound) String.Equals(x.Compound, searchstring, StringComparison.OrdinalIgnoreCase),
                 Function(x As Compound) True)
-            Return result.Compounds.Where(resultFilter).Select(Function(x) New String() {x.Id, x.Compound}).ToList()
+            Return result.Comps.Where(resultFilter).Select(Function(x) New String() {x.Id, x.Compound}).ToList()
         Else
             'do we want to report a failure?
             Return New List(Of String())
@@ -48,6 +49,8 @@ Public Class ChemeoParser
         End If
 
         Dim http As New HttpClient(handler)
+
+        http.DefaultRequestHeaders.Add("Authorization", "Bearer ef3e3742_798e_4285_8657_6254f7922167")
 
         Dim response = Await http.GetAsync(url)
         Return response
@@ -76,6 +79,8 @@ Public Class ChemeoParser
         End If
 
         Dim http As New HttpClient(handler)
+
+        http.DefaultRequestHeaders.Add("Authorization", "Bearer ef3e3742_798e_4285_8657_6254f7922167")
 
         Dim response = http.GetByteArrayAsync(website)
         response.Wait()
