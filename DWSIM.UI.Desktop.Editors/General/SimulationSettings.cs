@@ -39,6 +39,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             var avunits = flowsheet.AvailableSystemsOfUnits.Select((x) => x.Name).ToList();
 
+            s.CreateAndAddLabelRow(container, "Flowsheet Objects");
+
+            s.CreateAndAddCheckBoxRow(container, "Force calculation of flowsheet objects even when input data doesn`t change",
+                flowsheet.FlowsheetOptions.ForceObjectSolving, 
+                (chk, e) => flowsheet.FlowsheetOptions.ForceObjectSolving = chk.Checked.GetValueOrDefault());
+
             s.CreateAndAddLabelRow(container, "Specification Blocks");
 
             s.CreateAndAddDropDownRow(container, "Calculation Mode", new List<string> { "After Source Object", "Before Target Object", "Before Flowsheet", "After Flowsheet" },
