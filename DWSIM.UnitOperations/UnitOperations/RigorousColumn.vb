@@ -1507,12 +1507,22 @@ Namespace UnitOperations
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
             If Not val0 Is Nothing Then
+
                 Return val0
+
             Else
+
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Dim propidx As Integer = -1
+
+                Try
+                    Integer.TryParse(prop.Split("_")(2), propidx)
+                Catch ex As Exception
+
+                End Try
 
                 Select Case propidx
 
@@ -1551,7 +1561,14 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+            Dim propidx As Integer = -1
+
+            Try
+                Integer.TryParse(prop.Split("_")(2), propidx)
+            Catch ex As Exception
+
+            End Try
 
             Select Case propidx
 
@@ -1580,7 +1597,14 @@ Namespace UnitOperations
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+            Dim propidx As Integer = -1
+
+            Try
+                Integer.TryParse(prop.Split("_")(2), propidx)
+            Catch ex As Exception
+
+            End Try
 
             Select Case propidx
                 Case 2

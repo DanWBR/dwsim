@@ -20,6 +20,7 @@
 Imports System.Math
 Imports System.Xml.Serialization
 Imports DWSIM.Interfaces.Enums
+Imports OfficeOpenXml.FormulaParsing.Excel.Functions.Text
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -261,37 +262,87 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
 
-            Select Case Flashtype
-                Case "NoFlash"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
-                    Dim nl = New NestedLoops
-                    nl.FlashSettings = FlashSettings
-                    nl.PTFlashFunction = AddressOf NoFlash_PT
-                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
-                Case "VLE", "SVLE", "SVLLE"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
-                    Dim nl = New NestedLoops
-                    nl.FlashSettings = FlashSettings
-                    nl.PTFlashFunction = AddressOf Flash_PT
-                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
-                Case "VLLE"
-                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
-                        If Not UseIO Then
-                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
-                            Dim nl = New NestedLoops3PV3
-                            nl.FlashSettings = FlashSettings
-                            result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+            Dim ex1 As Exception = Nothing
+            Dim haderror As Boolean = False
+
+            Try
+                Select Case Flashtype
+                    Case "NoFlash"
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: NoFlash")
+                        Dim nl = New NestedLoops
+                        nl.FlashSettings = FlashSettings
+                        nl.PTFlashFunction = AddressOf NoFlash_PT
+                        result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                    Case "VLE", "SVLE", "SVLLE"
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
+                        Dim nl = New NestedLoops
+                        nl.FlashSettings = FlashSettings
+                        nl.PTFlashFunction = AddressOf Flash_PT
+                        result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                    Case "VLLE"
+                        If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                            If Not UseIO Then
+                                IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
+                                Dim nl = New NestedLoops3PV3
+                                nl.FlashSettings = FlashSettings
+                                result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                            Else
+                                Dim io = New BostonFournierInsideOut3P
+                                io.FlashSettings = FlashSettings
+                                result = io.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                            End If
                         Else
-                            Dim io = New BostonFournierInsideOut3P
-                            io.FlashSettings = FlashSettings
-                            result = io.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
+                            Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
+                            result = imm.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
                         End If
-                    Else
-                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
-                        Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
-                        result = imm.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
-                    End If
-            End Select
+                End Select
+            Catch ex As Exception
+                ex1 = ex
+                haderror = True
+            End Try
+
+            If haderror Then
+
+                Dim FSMethod As Integer = FlashSettings(FlashSetting.FailSafeCalculationMode)
+
+                Select Case FSMethod
+
+                    Case 0 'Rigorous VLE
+
+                        IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Rigorous VLE")
+
+                        Dim nl = New NestedLoops
+                        nl.FlashSettings = FlashSettings
+                        result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+
+                    Case 1 'Ideal VLE
+
+                        IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Ideal VLE")
+
+                        Using IPP As New RaoultPropertyPackage()
+
+                            IPP.CurrentMaterialStream = PP.CurrentMaterialStream
+                            Dim nl = New NestedLoops
+                            nl.FlashSettings = FlashSettings
+                            result = nl.Flash_PH(Vz, P, H, Tref, IPP, False, Nothing)
+
+                        End Using
+
+                    Case 2 'NoFlash
+
+                        IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: NoFlash")
+                        Dim nl = New NestedLoops
+                        nl.FlashSettings = FlashSettings
+                        result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+
+                    Case 3 'None
+
+                        Throw ex1
+
+                End Select
+
+            End If
 
             IObj?.Close()
 
