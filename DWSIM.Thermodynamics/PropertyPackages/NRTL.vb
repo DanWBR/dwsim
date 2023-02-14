@@ -119,15 +119,20 @@ Namespace PropertyPackages
         Dim ms As Streams.MaterialStream
         Dim ppu As MODFACPropertyPackage, unifac As Auxiliary.NISTMFAC
 
+        Private Shared skip As Boolean = False
+
         Public Overrides Sub RunPostMaterialStreamSetRoutine()
-            If AutoEstimateMissingNRTLUNIQUACParameters Then
+            If AutoEstimateMissingNRTLUNIQUACParameters And Not skip Then
                 EstimateMissingInteractionParameters(True)
             End If
         End Sub
 
         Public Sub EstimateMissingInteractionParameters(verbose As Boolean)
 
-            If Flowsheet Is Nothing Then Exit Sub
+            If Flowsheet Is Nothing Then
+                Flowsheet = CurrentMaterialStream.Flowsheet
+                If Flowsheet Is Nothing Then Exit Sub
+            End If
 
             For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
                 If Not m_uni.InteractionParameters.ContainsKey(cp.Name) Then
@@ -155,7 +160,9 @@ Namespace PropertyPackages
 
             For Each item1 In m_uni.InteractionParameters
                 For Each ipset In item1.Value
-                    If ipset.Value.A12 = 0 And ipset.Value.A21 = 0 And ipset.Value.alpha12 = 0 Then
+                    If ipset.Value.A12 = 0 And ipset.Value.A21 = 0 And ipset.Value.alpha12 = 0 And
+                        Flowsheet.SelectedCompounds.ContainsKey(item1.Key) And
+                        Flowsheet.SelectedCompounds.ContainsKey(ipset.Key) Then
 
                         Dim comp1, comp2 As ConstantProperties
                         comp1 = Flowsheet.SelectedCompounds(item1.Key)
@@ -181,8 +188,12 @@ Namespace PropertyPackages
                                 Next
                             End With
 
+                            skip = True
+
                             ppn.CurrentMaterialStream = ms
                             ppu.CurrentMaterialStream = ms
+
+                            skip = False
 
                             Dim T1 = 298.15
 

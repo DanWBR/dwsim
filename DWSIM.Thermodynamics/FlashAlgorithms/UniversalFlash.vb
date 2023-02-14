@@ -174,6 +174,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 0 'Rigorous VLE
 
+                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with the same property package.", Interfaces.IFlowsheet.MessageType.Warning)
+
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Rigorous VLE")
 
                         Dim nl = New NestedLoops
@@ -181,6 +183,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
 
                     Case 1 'Ideal VLE
+
+                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with ideal model.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Ideal VLE")
 
@@ -194,6 +198,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End Using
 
                     Case 2 'NoFlash
+
+                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. No equilibrium will be calculated.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: NoFlash")
                         result = NoFlash_PT(Vz, P, T, PP, False, Nothing)
@@ -310,6 +316,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 0 'Rigorous VLE
 
+                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with the same property package.", Interfaces.IFlowsheet.MessageType.Warning)
+
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Rigorous VLE")
 
                         Dim nl = New NestedLoops
@@ -317,6 +325,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
 
                     Case 1 'Ideal VLE
+
+                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with ideal model.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Ideal VLE")
 
@@ -330,6 +340,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End Using
 
                     Case 2 'NoFlash
+
+                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. No equilibrium will be calculated.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: NoFlash")
                         Dim nl = New NestedLoops
