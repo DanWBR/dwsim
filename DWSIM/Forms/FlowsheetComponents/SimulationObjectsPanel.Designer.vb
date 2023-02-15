@@ -242,6 +242,7 @@ Partial Class SimulationObjectsPanel
         Me.Button1.BackColor = System.Drawing.Color.White
         Me.Button1.BackgroundImage = Global.DWSIM.My.Resources.Resources.fossee
         resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = False
         '

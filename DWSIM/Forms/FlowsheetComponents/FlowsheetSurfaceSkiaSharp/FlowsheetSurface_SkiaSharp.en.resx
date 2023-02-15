@@ -119,19 +119,19 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 211</value>
+    <value>881, 186</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 205</value>
+    <value>24, 180</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 244</value>
+    <value>33, 219</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 205</value>
+    <value>24, 180</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 271</value>
+    <value>941, 246</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
@@ -219,7 +219,7 @@
     <value>232, 7</value>
   </data>
   <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 271</value>
+    <value>0, 246</value>
   </data>
   <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>929, 0</value>
@@ -231,8 +231,11 @@
   <data name="PanelWeather.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
   <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>310</value>
+    <value>285</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -782,7 +785,7 @@
     <value>Upgrade to DWSIM Pro</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 492</value>
+    <value>260, 470</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

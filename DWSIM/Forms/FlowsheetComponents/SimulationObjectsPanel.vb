@@ -138,9 +138,16 @@ Public Class SimulationObjectsPanel
             li.Image.Image = My.Resources.icons8_python
             li.ToolTip1.SetToolTip(li.Image, name)
             li.ObjectTypeInfo = obj.GetType
-            li.Tag = obj.ObjectClass
+
+            Dim txtfile = Directory.GetFiles(folder, "*.txt", SearchOption.TopDirectoryOnly)
+            Dim pdffile = Directory.GetFiles(folder, "*.pdf", SearchOption.TopDirectoryOnly)
+
+            li.Tag = New Object() {obj.ObjectClass, txtfile(0), pdffile(0)}
+
             PanelCustomModelsFOSSEE.Controls.Add(li)
+
             obj = Nothing
+
         Next
 
     End Sub

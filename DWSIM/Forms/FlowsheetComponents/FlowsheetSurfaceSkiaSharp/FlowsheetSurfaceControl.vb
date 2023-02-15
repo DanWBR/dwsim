@@ -285,7 +285,18 @@ Public Class FlowsheetSurfaceControl
             Dim c As Interfaces.Enums.SimulationObjectClass
 
             t = obj(0)
-            c = obj(1)
+
+            Dim pdfpath, scriptpath As String
+            pdfpath = ""
+            scriptpath = ""
+
+            If TypeOf obj(1) Is Interfaces.Enums.SimulationObjectClass Then
+                c = obj(1)
+            Else
+                c = obj(1)(0)
+                scriptpath = obj(1)(1)
+                pdfpath = obj(1)(2)
+            End If
 
             If c = SimulationObjectClass.None Then Exit Sub
 
@@ -293,7 +304,16 @@ Public Class FlowsheetSurfaceControl
 
             Dim pt = PointToClient(New Point(e.X, e.Y))
 
-            If t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
+
+            If scriptpath <> "" Then
+
+                Dim uobjid = FlowsheetObject.FormSurface.AddObjectToSurface(ObjectType.CustomUO, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, False, "", "")
+                Dim suo = DirectCast(FlowsheetObject.SimulationObjects(uobjid), CustomUO)
+                suo.ScriptText = IO.File.ReadAllText(scriptpath)
+
+                Process.Start(pdfpath)
+
+            ElseIf t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
 
                 FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c, True)
 
