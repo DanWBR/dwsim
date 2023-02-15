@@ -1,0 +1,1343 @@
+[
+  {
+    "OriginalText": "System of Units added: {0}",
+    "Translated": "Добавлена система единиц: {0}",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2831959+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "ToolStripButton2",
+    "Translated": "ИнструментПанельКнопка2",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2831959+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Stage",
+    "Translated": "Ступень",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2831959+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Specific Cake Resistance",
+    "Translated": "Сопротивление кека",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2831959+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": ".. .. .rpm",
+    "Translated": "об/мин",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2831959+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "LiqFlows",
+    "Translated": "ЖидкПотоки",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2831959+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Flash PT/PV - external loop convergence tolerance (absolute)",
+    "Translated": "Разделение PT/PV - точность сходимости внешнего цикла (абсолютный)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "No Database defined!",
+    "Translated": "База данных не задана!",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "FPROPS is Copyright (C) 2011 - Carnegie Mellon University",
+    "Translated": "FPROPS защищен авторским правом (C) 2011 - Университет Карнеги-Меллона",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Vapor Phase Mass Fraction",
+    "Translated": "Массовая доля пара",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Integration Step (ms)",
+    "Translated": "Шаг интегрирования (мс)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "System of Units removed: {0}",
+    "Translated": "Система единиц удалена: {0}",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "couldn't find a solution within the specified tolerance.",
+    "Translated": "Не удалось найти решение в пределах указанной точности",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "[Electrolyte] Charge",
+    "Translated": "[Электролит] Заряд",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Cv",
+    "Translated": "Удельная теплоемкость",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Connections",
+    "Translated": "Подключения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Simulation",
+    "Translated": "Расчет",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Real-Time Integration Step (ms)",
+    "Translated": "Шаг интегрирования в реальном времени (мс)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "mols",
+    "Translated": "Молей",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Flash PH/PS - internal loop convergence tolerance (absolute)",
+    "Translated": "Испарение PH/PS - точность сходимости внутреннего цикла (абсолютный)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PH Flash - Interpolate Temperature in Oscillating Cases",
+    "Translated": "PH Flash - Интерполировать температуру в случаях колебаний",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Post-Calc Script",
+    "Translated": "Скрипт после вычислений",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Side Rectifiers",
+    "Translated": "Боковые очистители",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Side Draws",
+    "Translated": "Боковые отводы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Script",
+    "Translated": "Скрипт",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "You can't make that kind of connection.",
+    "Translated": "Вы не можете создать такое присоединение",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "View Convergence Report",
+    "Translated": "Просмотреть отчет о сходимости",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Mass Flow (Solid)",
+    "Translated": "Массовый расход (твердая фаза)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Conversion [%, f(T)] =",
+    "Translated": "Конверсия [%, f(T)] =",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heating/Cooling",
+    "Translated": "Нагрев/Охлаждение",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Solids",
+    "Translated": "Твердые компоненты",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Light Liquid Stream",
+    "Translated": "Поток легкой жидкости",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "CondenserTop Pressure",
+    "Translated": "Давление КонденсаторTop",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Step for numerical derivative calculation",
+    "Translated": "Шаг для вычисления численной производной",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Level Gauge",
+    "Translated": "Индикатор Уровня",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Peng-Robinson (Multiphase Flash)",
+    "Translated": "Пэн-Робинсон (Многофазное испарение)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Select the compounds that must always be in the solid phase.",
+    "Translated": "Выберите вещества, которые всегда должны находиться в твердой фазе.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "No simulations to be saved.",
+    "Translated": "Расчеты не будут сохранены.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Light Key",
+    "Translated": "легколетучий компонент",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Reynolds number shell side",
+    "Translated": "Число Рейнольдса на стороне корпуса",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Cut",
+    "Translated": "остаток",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Handle Solids",
+    "Translated": "Управление Твердые частицы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Shortcut Column",
+    "Translated": "Упрощенная модель колонны",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Solve Flowsheet (F5)",
+    "Translated": "Начать решение (F5)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PressureDrop",
+    "Translated": "Перепад давления",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Reaction Set used by the current reactor.",
+    "Translated": "Набор реакций, используемый в реакторе",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Constant Properties",
+    "Translated": "Постоянные свойства",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Convergence Tolerance",
+    "Translated": "Точность сходимости расчета",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Nested Loops",
+    "Translated": "Вложенные циклы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Vbol (m3/mol)",
+    "Translated": "Vbol (м3/моль)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Save",
+    "Translated": "Сохранить",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Color 2 of the gradient, if applicable",
+    "Translated": "2й цвет градиента, если применимо",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Custom Unit Operation",
+    "Translated": "Технологический блок пользователя",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "TranslationPluginWindow",
+    "Translated": "Окно Плагина Перевода",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heat exchanged",
+    "Translated": "Переданное тепло",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Adiabatic Head",
+    "Translated": "Адиабатический напор",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Steam Tables (IAPWS-IF97)",
+    "Translated": "Паровые таблицы (IAPWS-IF97)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Use Ideal Liquid Fugacity for Solid Fugacity Calculation",
+    "Translated": "Используйте летучесть идеальной жидкости для расчета летучести твердого",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Phases",
+    "Translated": "Фазы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Property Packages",
+    "Translated": "Пакеты термодинамических свойств",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heat Capacity Solid",
+    "Translated": "Теплоемкость твердой фазы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "CAPE-OPEN Unit Operation",
+    "Translated": "Технологический блок CAPE-OPEN",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Align tops",
+    "Translated": "Выравнивание верхних",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Residence Time",
+    "Translated": "Время пребывания",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Stages",
+    "Translated": "Сепарационные ступени",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Stream Connections",
+    "Translated": "Подключения потоков",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Force Phase in Material Streams",
+    "Translated": "Принудительно учитывать фазу в материальных потоках",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Molar Entropy (Solid)",
+    "Translated": "Молярная энтропия (твердая фаза)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Curr. Value",
+    "Translated": "Текущее значение",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Number of Stages",
+    "Translated": "Количество ступеней разделения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "MixersSplitters",
+    "Translated": "СмесителиРасщепители",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Fugacities",
+    "Translated": "Летучести",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Description",
+    "Translated": "Описание:__________",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Falling Film Evaporator",
+    "Translated": "Испаритель с падающей пленкой",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Flash Spec",
+    "Translated": "Спецификация расчета испарителя",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Border thickness",
+    "Translated": "Толщина границы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Reboiler Duty",
+    "Translated": "Нагрузка ребойлера",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PH Flash - External Loop Tolerance",
+    "Translated": "Расчет испарения PH - Точность внешнего цикла",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "ToolStripButton6",
+    "Translated": "ПанельИнстрКнопка6",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PropertyGridToolBar",
+    "Translated": "ТулБарСеткаСвойств",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "DWSIM could not retrieve the compound data from the online source. Either the compound is not present in the source or an unknown error occurred.",
+    "Translated": "DWSIM не удалось извлечь данные о компоненте из онлайн источника. Либо соединение отсутствует в источнике, либо произошла неизвестная ошибка.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PSF Flash is not supported.",
+    "Translated": "Расчет испарения PSF не поддерживается.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Reactors",
+    "Translated": "Реакторы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Break Calculation",
+    "Translated": "Прервать Расчет",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "All Endpoint Material Streams are connected to Control Valves",
+    "Translated": "Все  конечные точки материальных потоков подключены к регулирующим клапанам",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Base Comp",
+    "Translated": "Базовый Компонент",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Flowsheet Calculator Active (F6)",
+    "Translated": "Калькулятор технологической схемы  активен(F6)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heat",
+    "Translated": "Тепло",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Actual Number of Stages",
+    "Translated": "Фактическое количество ступеней разделения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Rectify Liquid",
+    "Translated": "Очистить жидкость",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PT/PV Flash - External Loop Tolerance",
+    "Translated": "PT/PV Flash - Точность внешнего цикла",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PT/PV Flash - Internal Loop Tolerance",
+    "Translated": "PT /PV испарение - Точность внутреннегог цикла",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Bubble Points",
+    "Translated": "Точка начала кипения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Use Rigorous Bubble and Dew Points for TP Flash Vapor Fraction Initialization (0 = Disabled, 1 = Enabled)",
+    "Translated": "Используйте строгие методы расчета температуры начала кипения и конденсации  для инициализации фракции паров TP Flash (0 = отключено, 1 = включено)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heavy Key",
+    "Translated": "Низколетучий ключевой компонент",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Side Draw Specs",
+    "Translated": "Характеристики отводного потока",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Vapor Phase Properties",
+    "Translated": "Свойства паровой фазы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Minimum Stages",
+    "Translated": "Минимальное число ступеней разделения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Solid",
+    "Translated": "Твердая фаза",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Fugacity Calculation",
+    "Translated": "Расчет летучести",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Molality (Mixture)",
+    "Translated": "Моляльность (смесь)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Pumps",
+    "Translated": "Насосы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Flash PH/PS - external loop convergence tolerance (absolute)",
+    "Translated": "Испарение PH/PS - точность сходимости внешнего цикла (абсолютная)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PH/PS Flash - Maximum Temperature Update Delta (K) (1.0 - 50.0)",
+    "Translated": "Испарение PH/PS - максимальная температура обновления Delta (K) (1,0 - 50,0)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Replace compounds with equal names",
+    "Translated": "Замените компоненты с одинаковыми именами",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Unit operation to model heating processes.",
+    "Translated": "Работа технологического блока для моделирования нагрева",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "PS Flash - Internal Loop Tolerance",
+    "Translated": "PS Flash - Допуск внутреннего цикла",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "A negative pressure was calculated inside the pipe segment.",
+    "Translated": "Внутри отрезка трубы было получен отрицательное давление.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Raw Steel",
+    "Translated": "Необработанная сталь",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "CSTR",
+    "Translated": "Реактор идеального смешения (РИС)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Translator",
+    "Translated": "Переводчик",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "LIQ Phase Molar Fraction",
+    "Translated": "Молярная  Фракция фазы LIQ",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Compound Separator",
+    "Translated": "Разделитель компонентов",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Solver",
+    "Translated": "Решатель",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "No Condenser (Reboiled Absorber)",
+    "Translated": "Без конденсатора (абсорбер с ребойлером)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Composition basis",
+    "Translated": "Базис для состава",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Orifice Pressure Drop",
+    "Translated": "Перепад давления на Диафрагме",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Generate Convergence Report",
+    "Translated": "Создание отчета о сходимости",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Stripping Vapor",
+    "Translated": "Разделительный пар",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Figure",
+    "Translated": "Рисунок",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Iterations",
+    "Translated": "Итерации",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Soave-Redlich-Kwong Property Package with support for more than one liquid phase.",
+    "Translated": "Пакет расчета свойств Soave-Redlich-Kwong с поддержкой более одной жидкой фазы.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "DWSIM -  Reaction Set Editor",
+    "Translated": "DWSIM - Редактор набора реакций",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Bottoms",
+    "Translated": "Кубовый остаток",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Table",
+    "Translated": "Таблица",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Compounds",
+    "Translated": "Соединения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Stoich. Coeff.",
+    "Translated": "Стохиометрический Коэфф.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Script Language",
+    "Translated": "Язык написания скриптов",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Light Key Molar Fraction",
+    "Translated": "Молярная фракция легколетучего компонента",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Model for industrial adiabatic expanders.",
+    "Translated": "Модель для промышленных адиабатических расширителей",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Fugacity",
+    "Translated": "Летучесть",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Vapor Phase Mole Fraction",
+    "Translated": "Парофазная молярная фракция",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Solver reached the maximum number of iterations without converging.",
+    "Translated": "Решатель достиг максимального количества итераций без достижения сходимости",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Equilibrium Flash",
+    "Translated": "Равновесное испарение",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Problems in convergence ...",
+    "Translated": "Проблемы сходимости",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "System of Units changed: {0}, {1} from {2} to {3}",
+    "Translated": "Изменена система единиц измерения: {0}, {1} с {2} на {3}",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Three-PhaseReactive Column (Pro)",
+    "Translated": "Трехфазный колонна с химической реакцией (Pro)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heater",
+    "Translated": "Нагреватель",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Import Reactions",
+    "Translated": "Импортированные Реакции",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "FIGURE -",
+    "Translated": "РИСУНОК-",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Format compositions (fractions) using this scheme:",
+    "Translated": "Форматируйте составы (фракции) по такой схеме:",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Display Mass Flow",
+    "Translated": "Покажите Массовый расход",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Load",
+    "Translated": "Нагрузка",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Use Ideal Solid Fugacity",
+    "Translated": "Используйте летучесть идеального твердого",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "।.rpm",
+    "Translated": "об/мин",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "2. Stages",
+    "Translated": "2. Ступени разделения",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Reboiled Side Strippers",
+    "Translated": " стрипперы на стороне ребойлера",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Binary Interaction Parameters",
+    "Translated": "параметры парного взаимодействия",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Unzoom flowsheet",
+    "Translated": "Уберите увеличениетехнологической схемы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "avk",
+    "ReviewedBy_Contact": "avkolesnikov@yahoo.com",
+    "ReviewedBy_Date": "2023-02-15T10:23:26.2841957+02:00",
+    "Language": "ru"
+  }
+]
