@@ -1,0 +1,138 @@
+#Import statement
+from DWSIM.Thermodynamics import *
+
+import clr
+clr.AddReference('DWSIM.MathOps')
+ 
+from DWSIM import *
+from DWSIM.MathOps.MathEx import *
+from DWSIM.Thermodynamics.PropertyPackages import *
+from System import *
+
+#Get attributes of input streams
+waterIn=Flowsheet.GetFlowsheetSimulationObject('WaterIn')
+dryAir=Flowsheet.GetFlowsheetSimulationObject('DryAir')
+
+moleflow_waterIn=waterIn.GetProp("totalFlow","Overall",None,"","mole")
+moleflow_dryAir=dryAir.GetProp("totalFlow","Overall",None,"","mole")
+
+massflow_waterIn=waterIn.GetProp("totalFlow","Overall",None,"","mass")
+massflow_dryAir=dryAir.GetProp("totalFlow","Overall",None,"","mass")
+
+molefrac_dryAir=dryAir.GetProp("fraction","Overall",None,"","mole")
+
+enthalpy_w=waterIn.GetProp("enthalpy","Overall",None,"Mixture","mass")
+enthalpy_dryair=dryAir.GetProp("enthalpy","Overall",None,"Mixture","mass")
+
+entropy_w=waterIn.GetProp("entropy","Overall",None,"Mixture","mass")
+entropy_da=dryAir.GetProp("entropy","Overall",None,"Mixture","mass")
+
+
+
+#Calculation of mole fraction of water in wet air using input parameters
+ph20=(RHwetair*VPh20)/100
+molefractionwater=ph20/Punit
+
+#Initializing output stream attributes
+moleflow_waterOut=[0]
+moleflow_wetAir=[0]
+massflow_waterOut=[0]
+massflow_wetAir=[0]
+To=[0]
+Po=[0]
+To[0]=Tunit
+Po[0]=Punit
+molemasswhenzero=[0]
+molemasswhenzero[0]=massflow_waterIn[0]
+enthalpy_wetair=[0]
+enthalpy_waterout=[0]
+entropy_wetair=[0]
+entropy_waterout=[0]
+
+
+#Calculation of output stream attributes
+moleflow_wetAir[0]=moleflow_dryAir[0]/(1-molefractionwater)
+moleflow_waterOut[0]=moleflow_waterIn[0]-((molefractionwater)*moleflow_wetAir[0])
+
+massflow_waterOut[0]=moleflow_waterOut[0]*18E-3
+massflow_wetAir[0]=moleflow_wetAir[0]*(molefractionwater*18E-3 + (1-molefractionwater)*29E-3)
+
+molefractWetAir=[1-molefractionwater,molefractionwater]
+molefractWaterOut=[0/moleflow_waterOut[0],moleflow_waterOut[0]/moleflow_waterOut[0]]
+
+h_ratio=(massflow_waterIn[0])/(massflow_dryAir[0])
+
+e_waterout=massflow_dryAir[0]*enthalpy_dryair[0]+massflow_waterIn[0]*enthalpy_w[0]-massflow_wetAir[0]*(enthalpy_dryair[0]+h_ratio*enthalpy_w[0])
+enthalpy_waterout[0]=e_waterout/massflow_waterOut[0]
+e_wetair=enthalpy_dryair[0]+h_ratio*enthalpy_w[0]
+enthalpy_wetair[0]=e_wetair/massflow_wetAir[0]
+
+entropy_waterout[0]=(massflow_dryAir[0]*entropy_da[0]+massflow_waterIn[0]*entropy_w[0]-massflow_wetAir[0]*(entropy_da[0]+h_ratio*entropy_w[0]))/(massflow_waterOut[0])
+entropy_wetair[0]=entropy_da[0]+(h_ratio*entropy_w[0])
+
+#Condition for edge case of when there is no water
+if massflow_waterIn[0]==0:
+    out_wetAir=Flowsheet.GetFlowsheetSimulationObject('WetAir')
+    out_waterOut=Flowsheet.GetFlowsheetSimulationObject('WaterOut')
+    out_wetAir.Clear()
+    out_waterOut.Clear()
+    out_wetAir.SetProp("totalFlow","Overall",None,"","mass",massflow_dryAir)
+    out_waterOut.SetProp("totalFlow","Overall",None,"","mass",massflow_waterIn)
+
+    out_wetAir.SetProp("totalFlow","Overall",None,"","mole",moleflow_dryAir)
+    out_waterOut.SetProp("totalFlow","Overall",None,"","mole",molemasswhenzero)
+
+    out_wetAir.SetProp("temperature","Overall",None,"","",To)
+    out_waterOut.SetProp("temperature","Overall",None,"","",To)
+
+    out_wetAir.SetProp("pressure","Overall",None,"","",Po)
+    out_waterOut.SetProp("pressure","Overall",None,"","",Po)
+
+    out_wetAir.SetProp("fraction","Overall",None,"","mole",molefrac_dryAir)
+    out_waterOut.SetProp("fraction","Overall",None,"","mole",molefractWaterOut)
+    
+    out_wetAir.SetProp("enthalpy","Overall",None,"Mixture","mass",enthalpy_dryair)
+    out_waterOut.SetProp("enthalpy","Overall",None,"Mixture","mass",enthalpy_w)
+    
+    out_wetAir.SetProp("entropy","Overall",None,"Mixture","mass",entropy_da)
+    out_waterOut.SetProp("entropy","Overall",None,"Mixture","mass",entropy_w)
+
+    
+   
+    out_wetAir.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
+    out_waterOut.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
+
+
+
+#Setting attributes for the output in normal conditions
+else:
+    out_wetAir=Flowsheet.GetFlowsheetSimulationObject('WetAir')
+    out_waterOut=Flowsheet.GetFlowsheetSimulationObject('WaterOut')
+    out_wetAir.Clear()
+    out_waterOut.Clear()
+    out_wetAir.ClearAllProps()
+    out_waterOut.ClearAllProps()
+    out_wetAir.SetProp("totalFlow","Overall",None,"","mass",massflow_wetAir)
+    out_waterOut.SetProp("totalFlow","Overall",None,"","mass",massflow_waterOut)
+
+    out_wetAir.SetProp("totalFlow","Overall",None,"","mole",moleflow_wetAir)
+    out_waterOut.SetProp("totalFlow","Overall",None,"","mole",moleflow_waterOut)
+
+    out_wetAir.SetProp("temperature","Overall",None,"","",To)
+    out_waterOut.SetProp("temperature","Overall",None,"","",To)
+
+    out_wetAir.SetProp("pressure","Overall",None,"","",Po)
+    out_waterOut.SetProp("pressure","Overall",None,"","",Po)
+
+    out_wetAir.SetProp("fraction","Overall",None,"","mole",molefractWetAir)
+    out_waterOut.SetProp("fraction","Overall",None,"","mole",molefractWaterOut)
+    
+    out_wetAir.SetProp("enthalpy","Overall",None,"Mixture","mass",enthalpy_wetair)
+    out_waterOut.SetProp("enthalpy","Overall",None,"Mixture","mass",enthalpy_waterout)
+    
+    out_wetAir.SetProp("entropy","Overall",None,"Mixture","mass",entropy_wetair)
+    out_waterOut.SetProp("entropy","Overall",None,"Mixture","mass",entropy_waterout)
+
+
+    out_wetAir.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
+    out_waterOut.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)

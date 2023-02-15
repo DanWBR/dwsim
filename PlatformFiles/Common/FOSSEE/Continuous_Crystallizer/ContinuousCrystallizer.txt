@@ -1,0 +1,173 @@
+#Reference: https://repositorio.ucp.pt/bitstream/10400.14/6707/1/Mathematical%20design%20of%20continuous%2C%20isothermal.pdf
+#All units in SI system unless mentioned otherwise
+#Import statement
+from DWSIM.Thermodynamics import *
+import math
+from System import Array
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')
+from DotNumerics.ODE import *
+#Initializing values in input streams (Only one input stream for batch reactor)
+feed1=[0] #the array containing the properties of feed stream
+P1=[0] #array for Pressure of feed stream
+massflow1=[0] #array for total mass flow of feed stream
+molfrac1=[0] #array for molar fraction of feed stream
+molflow1=[0] #array for total molar flow of feed stream
+enthalpy1=[0]  #array for the total enthalpy of feed stream
+T1=[0] #array for Temperature of feed stream
+#Extracting input from streams
+feed1[0] = ims1
+P1 = feed1[0].GetProp("pressure", "Overall", None, "", "")
+massflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+volflow1=feed1[0].GetProp("totalflow","Overall",None,"","volume")
+enthalpy1 = feed1[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mole")
+T1 = feed1[0].GetProp("temperature", "Overall", None, "", "")
+massfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mass")
+comp=len(molfrac1) #total number of compounds/elements involved
+#Defining Volume Flow rate
+OverProp = feed1[0].GetPhase('Overall').Properties #The array which stores phase property of input stream
+Q=massflow1[0]/OverProp.density #Volumetric flow of feed stream
+ind = []
+ind = eval(CrystalIndex)
+#--------------------------------------------------
+#Defining constants:
+L=[]
+L=eval(InitialSizeCrystal) #The Initial size of crystal
+phi=[]
+phi=eval(AreaFactor) #The area factor of crystal
+rho=[]
+rho=eval(CrystalDensity) #The crystal density
+rhom=DenMotherLiquor #Density of mother liquor
+Csat=[]
+Csat=eval(SaturationConcofSolution) #The saturation concentration of solution
+K=[]
+K=eval(GrowthRateConstant) #Growth rate constant of crystal
+V=VolumeReactor #Volume of crystallizer
+a=[]
+a=eval(VolumeFactor) #Volume factor of crystal
+#---------------------------------------------------
+#main code starts for continous crystallizer
+Cin=[0]*comp #The input concentration of solution (in mol/m3)
+MolarWeightCrystal=[0]*comp #Defining molecular weight of crystals
+chan1=[0]*comp
+chan2=[0]*comp
+chan3=[0]*comp
+Ln=[0]*len(ind)
+tmassflow1=[0]
+tmassflow2=[0]
+tmassflow1[0]=massflow1[0]
+tmolflow1=[0]
+tmolflow2=[0]
+massflowp1=[0]*comp
+massflowp2=[0]*comp
+massfracp1=[0]*comp
+molflowp1=[0]*comp
+molflowp2=[0]*comp
+massfracp2=[0]*comp
+molfracp1=[0]*comp
+molfracp2=[0]*comp
+nin=[0]*len(ind)
+for (j,i) in (range(0,len(ind)),ind):
+ Cin[i]= molflow1[0]*molfrac1[i]/Q
+ nin[j]= Cin[i]/L[j]
+i=0
+for sub1 in feed1[0].GetPhase('Overall').Compounds.Values:
+        MolarWeightCrystal[i] = sub1.ConstantProperties.Molar_Weight/1000
+        i=i+1
+co=0
+for (y,x) in (range(0, len(ind)),ind):
+ if Csat[y] < Cin[x]:
+    co=co+1
+if co==0:
+    tmolflow1=molflow1
+    massfracp1=massfrac1
+    molfracp1=molfrac1
+    out1=[0]
+    out1[0]=oms1
+    out1[0].Clear()
+    out1[0].ClearAllProps()
+    out1[0].SetProp("totalFlow" ,"Overall", None, "", "mole",tmolflow1)
+    out1[0].SetProp("fraction" ,"Overall", None, "", "mass",massfracp1)
+    out1[0].SetProp("fraction" ,"Overall", None, "", "mole",molfracp1)
+    out1[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmassflow1)
+    out1[0].SetProp("temperature" ,"Overall", None, "", "",T1)
+    out1[0].SetProp("pressure", "Overall", None, "", "",P1)  
+    out2=[0]
+    out2[0]=oms2
+    out2[0].Clear()
+    out2[0].ClearAllProps()
+    out2[0].SetProp("temperature" ,"Overall", None, "", "",T1)
+    out2[0].SetProp("pressure", "Overall", None, "", "",P1)
+else:
+    #This is done for a simplified version of MSMPR model for homogenous nucleation and birth and death function are assumed 0
+    for (j,k) in (range(0, len(ind)),ind):
+         Si=phi[j]*rho[j]*nin[j]/(Cin[k]-Csat[j])
+         Op=K[j]*V*(Cin[k]-Csat[j])/(Q)
+         Cs1i=1.0  #Initial value for solving biquadratic equation using Newton Raphson method
+         Cs1n=0.0
+         C1n=0.0
+         l=0 #The number of iterations taken place
+         #Using Newton Raphson method to solve biquadratic equation
+         while l<maxit:
+            Cs1n=Cs1i-(-1+Cs1i+2*Si*Op**4*Cs1i**4)/(8*Si*Op**4*Cs1i**3+1) #Dummy variable
+            if abs(-1+Cs1i+2*Si*Op**4*Cs1i**4)<=merror:
+             break;
+            else:
+              Cs1i=Cs1n
+              C1n=Csat[j]+Cs1n*(Cin[k]-Csat[j])
+            l=l+1
+         if l==maxit:
+            Flowsheet.WriteMessage("Maximum number of iterations reached, concentration of crystal in solution not found")
+         else:
+           Flowsheet.WriteMessage("The steady state concentration of solute in solution is: "+str(C1n))
+           chan1[k]=(Cin[k]-C1n)*Q #Change in moles of solute in solution due to crystallization
+           chan2[k]=chan1[k]*MolarWeightCrystal[k] #Change in mass of solute in solution due to crystallization
+           chan3[k]=chan2[k]/rho[j] #Change in the total volume of crystals
+           Ln[j]=(chan3[k]/a[j]+L[j]**3)**(1.0/3.0) #The final size of crystal
+           Flowsheet.WriteMessage("The final size of crystal number " + str(j)+" is: "+str(Ln[j])) 
+    Flowsheet.WriteMessage(str(chan2[1]))
+    #For flows in product streams:
+    for i in ind:
+        tmassflow1[0]=tmassflow1[0]-chan2[i]
+        tmassflow2[0]=tmassflow2[0]+chan2[i]
+    for i in ind:
+        tmolflow2[0]=tmolflow2[0]+chan2[i]/MolarWeightCrystal[i]
+    for i in range(0,comp):
+        if i in ind:
+            massflowp1[i]=massflow1[0]*massfrac1[i]-chan2[i]
+            molflowp1[i]=massflowp1[i]/MolarWeightCrystal[i]
+            massflowp2[i]=chan2[i]
+            molflowp2[i]=massflowp2[i]/MolarWeightCrystal[i]
+        else:
+            massflowp1[i]=massflow1[0]*massfrac1[i]
+            molflowp1[i]=massflowp1[i]/(massflow1[0]*massfrac1[i]/(molflow1[0]*molfrac1[i]))
+        massfracp1[i]=massflowp1[i]/tmassflow1[0]
+        massfracp2[i]=massflowp2[i]/tmassflow2[0]
+        tmolflow1[0]=tmolflow1[0]+molflowp1[i]
+    for i in range(0,comp):
+        molfracp1[i]=molflowp1[i]/tmolflow1[0]
+        molfracp2[i]=molflowp2[i]/tmolflow2[0]
+    out1=[0]
+    out1[0]=oms1
+    out1[0].Clear()
+    out1[0].ClearAllProps()
+    out1[0].SetProp("totalFlow" ,"Overall", None, "", "mole",tmolflow1)
+    out1[0].SetProp("fraction" ,"Overall", None, "", "mass",massfracp1)
+    out1[0].SetProp("fraction" ,"Overall", None, "", "mole",molfracp1)
+    out1[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmassflow1)
+    out1[0].SetProp("temperature" ,"Overall", None, "", "",T1)
+    out1[0].SetProp("pressure", "Overall", None, "", "",P1)  
+    out2=[0]
+    out2[0]=oms2
+    out2[0].Clear()
+    out2[0].ClearAllProps()
+    out2[0].SetProp("totalFlow" ,"Overall", None, "", "mole",tmolflow2)
+    out2[0].SetProp("fraction" ,"Overall", None, "", "mole",molfracp2)
+    out2[0].SetProp("fraction" ,"Overall", None, "", "mass",massfracp2)
+    out2[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmassflow2)
+    out2[0].SetProp("temperature" ,"Overall", None, "", "",T1)
+    out2[0].SetProp("pressure", "Overall", None, "", "",P1) 
+   
+

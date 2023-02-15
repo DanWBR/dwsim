@@ -3233,6 +3233,7 @@
     <None Include="Resources\fast_forward.png" />
     <None Include="Resources\folder_add_48.png" />
     <None Include="Resources\fontsize.png" />
+    <None Include="Resources\fossee.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -3356,6 +3357,7 @@
     <None Include="Resources\icons8-pdf.png" />
     <None Include="Resources\icons8-vector.png" />
     <None Include="Resources\icons8-downloads_folder.png" />
+    <None Include="Resources\icons8-python.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

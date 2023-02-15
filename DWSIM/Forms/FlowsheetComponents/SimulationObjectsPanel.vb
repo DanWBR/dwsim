@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports System.Linq
+Imports System.IO
 
 Public Class SimulationObjectsPanel
 
@@ -125,6 +126,26 @@ Public Class SimulationObjectsPanel
             ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelMixers, PanelColumns, PanelExchangers, PanelLogical, PanelPressure, PanelUser})
         End If
 
+        'fossee models
+        Dim folders = Directory.GetDirectories(Path.Combine(My.Application.Info.DirectoryPath, "FOSSEE"))
+        For Each folder In folders
+            Dim name = Path.GetFilename(folder.Replace("_", " "))
+            Dim obj = New CustomUO
+            Dim li As New ListItem
+            li.lblName.Text = name
+            li.lblName.Font = New Font(SystemFonts.MessageBoxFont.FontFamily, 7.0, System.Drawing.FontStyle.Bold)
+            li.ToolTip1.SetToolTip(li.lblName, name)
+            li.Image.Image = My.Resources.icons8_python
+            li.ToolTip1.SetToolTip(li.Image, name)
+            li.ObjectTypeInfo = obj.GetType
+            li.Tag = obj.ObjectClass
+            PanelCustomModelsFOSSEE.Controls.Add(li)
+            obj = Nothing
+        Next
+
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Process.Start("https://dwsim.fossee.in/custom-model")
+    End Sub
 End Class

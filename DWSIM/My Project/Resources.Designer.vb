@@ -1833,6 +1833,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property fossee() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fossee", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property gb() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("gb", resourceCulture)
@@ -2556,6 +2566,16 @@ Namespace My.Resources
         Friend ReadOnly Property icons8_pressure_gauge() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("icons8_pressure_gauge", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property icons8_python() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icons8-python", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
