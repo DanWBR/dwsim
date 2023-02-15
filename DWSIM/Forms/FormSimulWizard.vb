@@ -52,6 +52,8 @@ Public Class FormSimulWizard
 
         Init()
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Sub Init(Optional ByVal reset As Boolean = False)
@@ -1553,7 +1555,7 @@ Public Class FormSimulWizard
                 MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 Dim pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value)
-                Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
+                Dim fppi As New FormPropertyPackageInfo With {.pp = pp}
                 fppi.ShowDialog()
             End If
         End If
@@ -1681,6 +1683,12 @@ Public Class FormSimulWizard
             GlobalSettings.Settings.EditOnSelect = Not My.Settings.DoubleClickToEdit
 
         End If
+
+    End Sub
+
+    Private Sub StepWizardControl1_SelectedPageChanged(sender As Object, e As EventArgs) Handles StepWizardControl1.SelectedPageChanged
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 
