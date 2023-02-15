@@ -248,7 +248,7 @@ Namespace PropertyPackages
                                                          comp1.Name, comp2.Name, finalval2(0), finalval2(1), 0.2))
 
                                 If Flowsheet IsNot Nothing Then
-                                    Flowsheet.ShowMessage(String.Format("Estimated NRTL IP set for {0}/{1}: {2:N2}/{3:N2}/{4}",
+                                    Flowsheet.ShowMessage(String.Format(Flowsheet.GetTranslatedString("Estimated NRTL IP set for {0}/{1}: {2:N2}/{3:N2}/{4}"),
                                                          comp1.Name, comp2.Name, finalval2(0), finalval2(1), 0.2),
                                                          Interfaces.IFlowsheet.MessageType.Information)
                                 End If
@@ -262,7 +262,7 @@ Namespace PropertyPackages
                                                          comp1.Name, comp2.Name, ex.ToString()))
 
                                 If Flowsheet IsNot Nothing Then
-                                    Flowsheet.ShowMessage(String.Format("Error estimating NRTL IP set for {0}/{1}: {2}",
+                                    Flowsheet.ShowMessage(String.Format(Flowsheet.GetTranslatedString("Error estimating NRTL IP set for {0}/{1}: {2}"),
                                                          comp1.Name, comp2.Name, ex.ToString()),
                                                          Interfaces.IFlowsheet.MessageType.Information)
                                 End If
