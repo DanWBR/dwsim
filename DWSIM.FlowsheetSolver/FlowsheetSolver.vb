@@ -1078,6 +1078,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                           Optional ByVal FinishAny As Action = Nothing,
                                           Optional ByVal ChangeCalcOrder As Boolean = False) As List(Of Exception)
 
+        GlobalSettings.Settings.LockModelParameters = True
+
         If GlobalSettings.Settings.CalculatorActivated Then
 
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
@@ -1689,6 +1691,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             IObj?.Close()
 
+            GlobalSettings.Settings.LockModelParameters = False
+
             FinishAny?.Invoke()
 
             If age Is Nothing Then
@@ -1702,6 +1706,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             End If
 
         Else
+
+            GlobalSettings.Settings.LockModelParameters = False
 
             FinishAny?.Invoke()
 

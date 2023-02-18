@@ -33,7 +33,6 @@ Namespace PropertyPackages
         Public Shadows Const ClassId As String = "407A13EC-1C55-462a-AEA4-9709B11367B0"
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
-        Private m_uni As New PropertyPackages.Auxiliary.Unifac
         Private m_id As New PropertyPackages.Auxiliary.Ideal
 
         Public Overrides ReadOnly Property Popular As Boolean = True
