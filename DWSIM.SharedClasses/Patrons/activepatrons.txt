@@ -17,6 +17,7 @@ Christian Hornhofer
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
+Daniel Bajolet
 Daniel Dornellas Athayde
 David Miller
 David Whitlock
