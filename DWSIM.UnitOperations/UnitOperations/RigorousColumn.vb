@@ -1504,6 +1504,7 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
             If Not val0 Is Nothing Then
