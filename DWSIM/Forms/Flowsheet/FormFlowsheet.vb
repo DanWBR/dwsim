@@ -1169,9 +1169,9 @@ Public Class FormFlowsheet
                                                      End Function)
             t.ContinueWith(Sub(tres)
                                RaiseEvent FinishedSolving(Me, New EventArgs())
-                               For Each item In tres.Result
-                                   ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
-                               Next
+                               'For Each item In tres.Result
+                               '    ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
+                               'Next
                            End Sub)
             t.Start()
         Else

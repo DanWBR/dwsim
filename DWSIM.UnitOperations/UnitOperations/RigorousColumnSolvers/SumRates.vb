@@ -600,7 +600,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If RelaxTemperatureUpdates Then
                         Tj(i) = dft * Tj(i) + (1 - dft) * Tj_ant(i)
                     End If
-                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                    If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then
+                        Throw New Exception(String.Format(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("Converged to an invalid temperature at stage {0} (Tcalc = {1} K)."), i, Tj(i)))
+                    End If
                     If IdealK Then
                         IObj2?.SetCurrent()
                         If llextr Then

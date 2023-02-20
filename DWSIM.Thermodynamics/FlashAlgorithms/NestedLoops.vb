@@ -2201,8 +2201,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             If result.Count = 1 And idealcalc Then
                 Using IPP As New RaoultPropertyPackage()
                     IPP.CurrentMaterialStream = PP.CurrentMaterialStream
-                    PP.Flowsheet?.ShowMessage(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}. Trying to calculate using ideal K-values...",
-                                    PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")), Interfaces.IFlowsheet.MessageType.Warning)
                     result = Flash_PV_1(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
                     If result.Count = 1 And V = 0.0 Then
                         result = Flash_PV_4(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)

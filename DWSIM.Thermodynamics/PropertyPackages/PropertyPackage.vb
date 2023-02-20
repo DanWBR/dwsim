@@ -1306,6 +1306,22 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As Double(), ByVal Vy As Double(), ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
 
+            If Vx.HasNaN() Or Vx.HasInf() Then
+                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid liquid composition: {0}"), Vx.ToArrayString()))
+            End If
+
+            If Vy.HasNaN() Or Vy.HasInf() Then
+                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid vapor composition: {0}"), Vy.ToArrayString()))
+            End If
+
+            If Double.IsNaN(T) Or Double.IsInfinity(T) Then
+                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid temperature: {0} K"), T))
+            End If
+
+            If Double.IsNaN(P) Or Double.IsInfinity(P) Then
+                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid pressure: {0} Pa"), P))
+            End If
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcKvalue", ComponentName & " K-value calculation (Property Package)", "Property Package K-value Calculation Routine")
