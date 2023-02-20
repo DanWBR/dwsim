@@ -67,7 +67,7 @@ namespace DWSIM.Simulate365.Services
                 throw new Exception("An error occurred while opening file from S365 Dashboard.", ex);
             }
         }
-        public void SaveFile(string filename, string parentDirectoryUniqueId, string fullPath, string dashboardServiceUrl)
+        public void SaveFile(string filename, string parentDirectoryUniqueId, string fullPath)
         {
             try
             {
@@ -93,17 +93,7 @@ namespace DWSIM.Simulate365.Services
             {
                 var token = UserService.GetInstance().GetUserToken();
                 var client = GetDashboardClient(token);
-                var driveItem = new DriveItem
-                {
-                    Name = folderName,
-                    Folder = new Folder
-                    {
-                    },
-                    AdditionalData = new Dictionary<string, object>()
-                                             {
-                                                 {"@microsoft.graph.conflictBehavior", "rename"}
-                                             }
-                };
+
                 var model = new
                 {
                     ParentDirectoryUniqueId = !string.IsNullOrWhiteSpace(parentDirectoryUniqueId) ? Guid.Parse(parentDirectoryUniqueId) : (Guid?)null,
