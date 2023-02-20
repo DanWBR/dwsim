@@ -9,19 +9,16 @@ using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.Models
 {
-   public class S365File : IVirtualFile
+    public class S365File : IVirtualFile
     {
         private string _localTmpFile;
 
-        public string ParentDriveId { get; set; }
+        public string ParentUniqueIdentifier { get; set; }
 
-        // we are using Drive file Ids, there are also list Ids on sharepoint
-        public string FileId { get; set; }
-
-        public string DriveId { get; set; }
+        public string FileUniqueIdentifier { get; set; }
 
         public string Filename { get; set; }
-        
+
         /// <summary>
         /// Directory path on Simulate 365, doesn't contain file name
         /// </summary>
@@ -59,16 +56,16 @@ namespace DWSIM.Simulate365.Models
 
         public void Write(string localFilePath)
         {
-            var file = FileUploaderService.UploadFile(DriveId, ParentDriveId, localFilePath, Filename, FullPath);
-            FileId = file.FileId;
+            var file = FileUploaderService.UploadFile(FileUniqueIdentifier, ParentUniqueIdentifier, localFilePath, Filename, FullPath);
+            FileUniqueIdentifier = file.FileUniqueIdentifier;
         }
 
         public void Write(System.IO.Stream stream)
         {
-            var file = FileUploaderService.UploadFile(DriveId, ParentDriveId, stream, Filename, FullPath);
-            FileId = file.FileId;
+            var file = FileUploaderService.UploadFile(FileUniqueIdentifier, ParentUniqueIdentifier, stream, Filename, FullPath);
+            FileUniqueIdentifier = file.FileUniqueIdentifier;
         }
 
-      
+
     }
 }
