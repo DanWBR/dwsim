@@ -132,19 +132,56 @@ Namespace Streams
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-                Case 0
-                    'PROP_ES_0	Power
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault)
+            If val0 Is Nothing Then
 
-            End Select
+                Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+                Dim epucol = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
 
-            Return value
+                If epcol.ContainsKey(prop) Then
+
+                    If epucol.ContainsKey(prop) Then
+                        Dim utype = epucol(prop)
+                        If su Is Nothing Then
+                            Return Convert.ToDouble(epcol(prop)).ConvertFromSI(SharedClasses.SystemsOfUnits.Converter.SharedSI.GetCurrentUnits(utype))
+                        Else
+                            Return Convert.ToDouble(epcol(prop)).ConvertFromSI(su.GetCurrentUnits(utype))
+                        End If
+                    Else
+                        Return epcol(prop)
+                    End If
+
+                Else
+
+                    Dim cv As New SystemsOfUnits.Converter
+                    Dim value As Double = 0
+                    Dim propidx As Integer = -1
+
+                    Try
+                        propidx = Convert.ToInt32(prop.Split("_")(2))
+                    Catch ex As Exception
+
+                    End Try
+
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_ES_0	Power
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault)
+
+                    End Select
+
+                    Return value
+
+                End If
+
+            Else
+
+                Return val0
+
+            End If
 
         End Function
 
