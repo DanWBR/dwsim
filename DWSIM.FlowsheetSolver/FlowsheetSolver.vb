@@ -1620,7 +1620,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             If age Is Nothing Then
 
-                fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingok") + " [" + fgui.GetTranslatedString("Runtime") & " (s): " & (Date.Now - d1).TotalSeconds.ToString("G4") + "]", IFlowsheet.MessageType.Information)
+                fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingok") + " [" & (Date.Now - d1).TotalSeconds.ToString("G4") + "s]", IFlowsheet.MessageType.Information)
 
                 IObj?.Paragraphs.Add(String.Format("Solver finished calculation of all objects in {0} seconds.", (Date.Now - d1).TotalSeconds))
 
