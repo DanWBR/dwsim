@@ -882,15 +882,15 @@ Namespace PropertyPackages.ThermoPlugs
             aux1 = -8.314 / 2 * (0.45724 / T) ^ 0.5
 
             Dim i, j As Integer
-                aux2 = 0.0#
+            aux2 = 0.0#
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
+                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             Return aux1 * aux2
 
@@ -1058,13 +1058,13 @@ Namespace PropertyPackages.ThermoPlugs
             Loop Until i = n + 1
 
             i = 0
-                Do
-                    alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                    ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                    ci(i) = 0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2
-                    i = i + 1
-                Loop Until i = n + 1
+            Do
+                alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                ci(i) = 0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2
+                i = i + 1
+            Loop Until i = n + 1
 
             a = Calc_SUM1(n, ai, VKij)
 

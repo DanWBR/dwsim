@@ -864,9 +864,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Normal Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Normal Mode)")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Default Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Normal Mode)")
 
-            IObj?.Paragraphs.Add("The PH Flash in normal mode calculates the enthalpy at mixture bubble and dew points, in order to determine the state of the mixture. 
+            IObj?.Paragraphs.Add("The PH Flash in default mode calculates the enthalpy at mixture bubble and dew points, in order to determine the state of the mixture. 
                                   It then converges the temperature or vapor fraction depending on the estimated state.")
 
             IObj?.SetCurrent()
@@ -2396,12 +2396,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
 
                         marcador = 0
-                        If stmp4_ant <> 0 Then
-                            marcador = 1
-                        End If
+                        If Math.Abs(stmp4_ant) > 1.0E-20 Then marcador = 1
+
                         stmp4_ant = stmp4
 
-                        If V = 0 Then
+                        If V = 0.0 Then
                             stmp4 = Ki.MultiplyY(Vx).SumY
                         Else
                             stmp4 = Vy.DivideY(Ki).SumY
@@ -3201,10 +3200,30 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             _Hl2 = 0.0#
             _Hs = 0.0
 
-            If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
-            If L1 > 0 Then _Hl1 = PP.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
-            If L2 > 0 Then _Hl2 = PP.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
-            If Sx > 0 Then _Hs = PP.DW_CalcEnthalpy(Vs, T, P, State.Solid)
+            If Settings.EnableParallelProcessing Then
+                Dim t1 = New Task(Sub()
+                                      If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+                                  End Sub)
+                Dim t2 = New Task(Sub()
+                                      If L1 > 0 Then _Hl1 = PP.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
+                                  End Sub)
+                Dim t3 = New Task(Sub()
+                                      If L2 > 0 Then _Hl2 = PP.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
+                                  End Sub)
+                Dim t4 = New Task(Sub()
+                                      If Sx > 0 Then _Hs = PP.DW_CalcEnthalpy(Vs, T, P, State.Solid)
+                                  End Sub)
+                t1.Start()
+                t2.Start()
+                t3.Start()
+                t4.Start()
+                Task.WaitAll(t1, t2, t3, t4)
+            Else
+                If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+                If L1 > 0 Then _Hl1 = PP.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
+                If L2 > 0 Then _Hl2 = PP.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
+                If Sx > 0 Then _Hs = PP.DW_CalcEnthalpy(Vs, T, P, State.Solid)
+            End If
 
             Dim mmg, mml, mml2, mms As Double
             mmg = PP.AUX_MMM(Vy)
