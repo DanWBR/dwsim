@@ -733,7 +733,7 @@ Public Class FormSimulSettings
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
 
-        If loaded Then
+        If loaded And e.RowIndex >= 0 Then
 
             Dim cell As DataGridViewCell = Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex)
             Dim oldvalue As String = ""
@@ -1174,7 +1174,7 @@ Public Class FormSimulSettings
 
     Private Sub dgvpp_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvpp.CellValueChanged
         If loaded Then
-            CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(e.RowIndex).Cells(0).Value).Tag = dgvpp.Rows(e.RowIndex).Cells(1).Value
+            If e.RowIndex >= 0 Then CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(e.RowIndex).Cells(0).Value).Tag = dgvpp.Rows(e.RowIndex).Cells(1).Value
         End If
     End Sub
 

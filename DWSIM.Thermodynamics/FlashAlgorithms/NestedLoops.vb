@@ -385,13 +385,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 IObj2?.SetCurrent()
 
-                Ki_ant = Ki.Clone
+                Array.Copy(Ki, Ki_ant, n + 1)
+
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
                 IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
-                Vy_ant = Vy.Clone
-                Vx_ant = Vx.Clone
+                Array.Copy(Vy, Vy_ant, n + 1)
+                Array.Copy(Vx, Vx_ant, n + 1)
 
                 If V = 1.0# Then
                     Vy = Vz
