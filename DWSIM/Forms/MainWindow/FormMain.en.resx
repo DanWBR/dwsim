@@ -492,7 +492,7 @@
     <value>165, 22</value>
   </data>
   <data name="LoggedInS365Button.Text" xml:space="preserve">
-    <value>Simulate365.com</value>
+    <value>simulate365.com</value>
   </data>
   <data name="LogoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 22</value>
