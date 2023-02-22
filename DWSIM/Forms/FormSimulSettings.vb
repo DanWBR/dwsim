@@ -132,6 +132,8 @@ Public Class FormSimulSettings
 
         'End If
 
+        CurrentFlowsheet.SetDirtyStatus()
+
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
         Dim comp As BaseClasses.ConstantProperties

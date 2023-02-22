@@ -4116,6 +4116,14 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Sub SetDirtyStatus() Implements IFlowsheet.SetDirtyStatus
+
+        For Each obj In SimulationObjects.Values
+            obj.SetDirtyStatus(True)
+        Next
+
+    End Sub
+
 #End Region
 
 
