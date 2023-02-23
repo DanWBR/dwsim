@@ -1,43 +1,46 @@
 ﻿using DWSIM.Simulate365.Models;
+using DWSIM.Simulate365.Settings;
 using Microsoft.Graph;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.Services
 {
 
-    public static class ConflictBehaviour
-    {
-        public const string Fail = "fail";
-        public const string Replace = "replace";
-        public const string Rename = "rename";
-    }
+
 
     public class FileUploaderService
     {
-        public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename, string simulatePath)
+        public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, string filePath, string filename, string simulatePath)
         {
             using (var fileStream = System.IO.File.OpenRead(filePath))
-                return UploadFile(flowsheetsDriveId, parentDriveId, fileStream, filename, simulatePath);
+                return UploadFile(fileUniqueIdentifier, parentUniqueIdentifier, fileStream, filename, simulatePath);
         }
 
-        public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, Stream fileStream, string filename, string simulatePath)
+        public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, Stream fileStream, string filename, string simulatePath)
         {
             try
             {
                 fileStream.Seek(0, SeekOrigin.Begin);
 
                 var token = UserService.GetInstance().GetUserToken();
-                var client = GraphClientFactory.CreateClient(token);
+                var client = GetDashboardClient(token);
 
-                var driveItemRequestBuilder = client.Drives[flowsheetsDriveId].Items[parentDriveId];
-                var item = Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, fileStream, ConflictBehaviour.Replace)).Result;
+                var file = Task.Run(async () => await UploadDocumentAsync(parentUniqueIdentifier, filename, fileStream)).Result;
 
-                return new S365File(filename) { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FullPath = simulatePath };
+                return new S365File(filename)
+                {
+                    FileUniqueIdentifier = file.FileUniqueIdentifier.ToString(),
+                    ParentUniqueIdentifier = parentUniqueIdentifier,
+                    Filename = filename,
+                    FullPath = simulatePath
+                };
 
             }
             catch (Exception ex)
@@ -47,55 +50,55 @@ namespace DWSIM.Simulate365.Services
             }
         }
 
-        public static async Task<DriveItem> UploadDocumentAsync(IDriveItemRequestBuilder driveItemRequestBuilder, string filename, Stream fileStream, string conflictBehaviour = ConflictBehaviour.Rename)
+        public static async Task<UploadFileResponseModel> UploadDocumentAsync(string parentUniqueIdentifier, string filename, Stream fileStream)
         {
-            UploadSession uploadSession = null;
+
 
             try
             {
-                var uploadProps = new DriveItemUploadableProperties
+                var token = UserService.GetInstance().GetUserToken();
+                var client = GetDashboardClient(token);
+
+                using (var content = new MultipartFormDataContent())
                 {
-                    ODataType = null,
-                    AdditionalData = new Dictionary<string, object>
+                    // 0= Overwrite file if exists, 1= Keep both
+                    content.Add(new StringContent("0"), "ConflictAction");
+                    if (!string.IsNullOrWhiteSpace(parentUniqueIdentifier))
                     {
-                        ["@microsoft.graph.conflictBehavior"] = conflictBehaviour
+                        content.Add(new StringContent(parentUniqueIdentifier), "ParentDirectoryUniqueId");
                     }
-                };
 
-                uploadSession = await driveItemRequestBuilder
-                                        .ItemWithPath(filename)
-                                        .CreateUploadSession(uploadProps)
-                                        .Request()
-                                        .PostAsync();
-            }
-            catch (ServiceException ex)
-            {
-                throw new Exception("An error occured while creating upload session.", ex);
-            }
+                    content.Add(new StreamContent(fileStream), "files", filename);
 
-            if (uploadSession == null)
-                throw new Exception("Upload session is null.");
+                    // Send request
+                    var response = await client.PostAsync("/api/files/upload", content);
 
-            try
-            {
-                // Performs upload, slice by slice
-                int maxSliceSize = 5 * 1024 * 1024; //5MB
-                var fileUploadTask = new LargeFileUploadTask<DriveItem>(uploadSession, fileStream, maxSliceSize);
-                var uploadResult = await fileUploadTask.UploadAsync();
+                    // Handle response
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var responseModel = JsonConvert.DeserializeObject<List<UploadFileResponseModel>>(responseContent);
+                    if (responseModel == null || responseModel.Count == 0)
+                    {
+                        throw new Exception("An error occurred while uploading file. Response is empty.");
+                    }
 
-                if (!uploadResult.UploadSucceeded)
-                {
-                    throw new Exception("File upload failed!");
+                    return responseModel.First();
                 }
-                else
-                {
-                    return uploadResult.ItemResponse;
-                }
+
             }
             catch (Exception ex)
             {
                 throw new Exception("An error occurred while trying to upload document.", ex);
             }
+        }
+
+        private static HttpClient GetDashboardClient(string token)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(DashboardSettings.DashboardServiceUrl);
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            return client;
+
         }
 
     }

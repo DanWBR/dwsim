@@ -126,6 +126,7 @@
     <Compile Include="FormFactories\LoginForm.cs" />
     <Compile Include="FormFactories\S365FilePickerForm.cs" />
     <Compile Include="GraphClientFactory.cs" />
+    <Compile Include="Models\DashboardModels.cs" />
     <Compile Include="Models\OAuthErrorResponse.cs" />
     <Compile Include="Models\OAuthTokenResponse.cs" />
     <Compile Include="Models\S365File.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Services\FilePickerService.cs" />
     <Compile Include="Services\FileUploaderService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Settings\DashboardSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
