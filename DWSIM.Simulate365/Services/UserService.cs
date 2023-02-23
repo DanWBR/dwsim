@@ -32,9 +32,9 @@ namespace DWSIM.Simulate365.Services
         private string _refreshToken = null;
         private DateTime _accessTokenExpiresAt = DateTime.MinValue;
         private System.Timers.Timer refreshTokenTimer;
-        private static  string AccessTokenField = "AccessToken2";
-        private static string RefreshTokenField = "RefreshToken2";
-        private static string AccessTokenExpiresAtField = "AccessTokenExpiresAt2";
+        private static  string AccessTokenField = "AccessTokenV2";
+        private static string RefreshTokenField = "RefreshTokenV2";
+        private static string AccessTokenExpiresAtField = "AccessTokenExpiresAtV2";
 
         #region Public events
 
