@@ -116,8 +116,6 @@ Public Class FormMain
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        If IsPro Then StatusStrip1.Visible = False
-
         Using g1 = Me.CreateGraphics()
 
             Settings.DpiScale = g1.DpiX / 96.0
@@ -141,10 +139,6 @@ Public Class FormMain
         ' SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
 
         If GlobalSettings.Settings.OldUI Then
-
-#If LINUX = False Then
-            If Not IsPro Then Icon = My.Resources.DWSIM_Icon_41
-#End If
 
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
@@ -966,6 +960,11 @@ Public Class FormMain
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
         tsmiFreeProTrial.Visible = Not IsPro
+
+#If LINUX = False Then
+        If Not IsPro Then Icon = My.Resources.DWSIM_Icon_41
+        If IsPro Then StatusStrip1.Visible = False
+#End If
 
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 
@@ -4816,11 +4815,11 @@ Label_00CC:
         Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
     End Sub
 
-    Private Sub ToolStripDropDownButton2_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton2.Click
+    Private Sub ToolStripDropDownButton2_Click(sender As Object, e As EventArgs) Handles tsbdonate1.Click
         Process.Start("https://www.buymeacoffee.com/dwsim")
     End Sub
 
-    Private Sub ToolStripDropDownButton1_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton1.Click
+    Private Sub ToolStripDropDownButton1_Click(sender As Object, e As EventArgs) Handles tsbdonate2.Click
         Process.Start("https://www.patreon.com/dwsim")
     End Sub
 

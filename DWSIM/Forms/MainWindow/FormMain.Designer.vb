@@ -115,9 +115,9 @@ Partial Class FormMain
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsblDonate = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsbdonate1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsbdonate2 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -644,30 +644,30 @@ Partial Class FormMain
         'StatusStrip1
         '
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripDropDownButton2, Me.ToolStripDropDownButton1, Me.ToolStripStatusLabel2})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2})
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusStrip1.SizingGrip = False
         '
-        'ToolStripStatusLabel1
+        'tsblDonate
         '
-        resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
-        Me.ToolStripStatusLabel1.Image = Global.DWSIM.My.Resources.Resources.heart
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        resources.ApplyResources(Me.tsblDonate, "tsblDonate")
+        Me.tsblDonate.Image = Global.DWSIM.My.Resources.Resources.heart
+        Me.tsblDonate.Name = "tsblDonate"
         '
-        'ToolStripDropDownButton2
+        'tsbdonate1
         '
-        resources.ApplyResources(Me.ToolStripDropDownButton2, "ToolStripDropDownButton2")
-        Me.ToolStripDropDownButton2.Image = Global.DWSIM.My.Resources.Resources.coffee
-        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
-        Me.ToolStripDropDownButton2.ShowDropDownArrow = False
+        resources.ApplyResources(Me.tsbdonate1, "tsbdonate1")
+        Me.tsbdonate1.Image = Global.DWSIM.My.Resources.Resources.coffee
+        Me.tsbdonate1.Name = "tsbdonate1"
+        Me.tsbdonate1.ShowDropDownArrow = False
         '
-        'ToolStripDropDownButton1
+        'tsbdonate2
         '
-        resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
-        Me.ToolStripDropDownButton1.Image = Global.DWSIM.My.Resources.Resources.icons8_patreon
-        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.ShowDropDownArrow = False
+        resources.ApplyResources(Me.tsbdonate2, "tsbdonate2")
+        Me.tsbdonate2.Image = Global.DWSIM.My.Resources.Resources.icons8_patreon
+        Me.tsbdonate2.Name = "tsbdonate2"
+        Me.tsbdonate2.ShowDropDownArrow = False
         '
         'ToolStripStatusLabel2
         '
@@ -964,9 +964,9 @@ Partial Class FormMain
     Public WithEvents SaveFileS365 As ToolStripButton
     Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DIscordChannelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-    Friend WithEvents ToolStripDropDownButton2 As ToolStripDropDownButton
-    Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
+    Friend WithEvents tsblDonate As ToolStripStatusLabel
+    Friend WithEvents tsbdonate1 As ToolStripDropDownButton
+    Friend WithEvents tsbdonate2 As ToolStripDropDownButton
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Public WithEvents StatusStrip1 As StatusStrip
 End Class
