@@ -32,6 +32,9 @@ namespace DWSIM.Simulate365.Services
         private string _refreshToken = null;
         private DateTime _accessTokenExpiresAt = DateTime.MinValue;
         private System.Timers.Timer refreshTokenTimer;
+        private static  string AccessTokenField = "AccessToken2";
+        private static string RefreshTokenField = "RefreshToken2";
+        private static string AccessTokenExpiresAtField = "AccessTokenExpiresAt2";
 
         #region Public events
 
@@ -46,11 +49,11 @@ namespace DWSIM.Simulate365.Services
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\DWSIM");
             if (key != null)
             {
-                this._accessToken = key.GetValue("AccessToken")?.ToString();
-                this._refreshToken = key.GetValue("RefreshToken")?.ToString();
-                var expiresAtValue = key.GetValue("AccessTokenExpiresAt");
+                this._accessToken = key.GetValue(AccessTokenField)?.ToString();
+                this._refreshToken = key.GetValue(RefreshTokenField)?.ToString();
+                var expiresAtValue = key.GetValue(AccessTokenExpiresAtField);
                 if (expiresAtValue != null)
-                    DateTime.TryParse(key.GetValue("AccessTokenExpiresAt").ToString(), out this._accessTokenExpiresAt);
+                    DateTime.TryParse(key.GetValue(AccessTokenExpiresAtField).ToString(), out this._accessTokenExpiresAt);
 
                 Task.Run(() => LoadUserDetails());
             }
@@ -101,9 +104,9 @@ namespace DWSIM.Simulate365.Services
             {
                 try
                 {
-                    key.DeleteValue("AccessToken");
-                    key.DeleteValue("RefreshToken");
-                    key.DeleteValue("AccessTokenExpiresAt");
+                    key.DeleteValue(AccessTokenField);
+                    key.DeleteValue(RefreshTokenField);
+                    key.DeleteValue(AccessTokenExpiresAtField);
                 }
                 catch (Exception)
                 {
@@ -141,9 +144,9 @@ namespace DWSIM.Simulate365.Services
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\DWSIM", true);
 
             //storing the values  
-            key.SetValue("AccessToken", _accessToken);
-            key.SetValue("RefreshToken", _refreshToken);
-            key.SetValue("AccessTokenExpiresAt", _accessTokenExpiresAt.ToString());
+            key.SetValue(AccessTokenField, _accessToken);
+            key.SetValue(RefreshTokenField, _refreshToken);
+            key.SetValue(AccessTokenExpiresAtField, _accessTokenExpiresAt.ToString());
             key.Close();
 
             Task.Run(() => LoadUserDetails());
