@@ -969,6 +969,7 @@ Namespace UnitOperations
 
             If Me.CalcMode = CalculationMode.DeltaP Then
                 P2 = Pi - Me.DeltaP.GetValueOrDefault
+                OutletPressure = P2
             ElseIf CalcMode = CalculationMode.OutletPressure Then
                 P2 = Me.OutletPressure.GetValueOrDefault
                 Me.DeltaP = Pi - P2

@@ -356,6 +356,8 @@
     ''' <returns></returns>
     Function AddCompound(compname As String) As ICompoundConstantProperties
 
+    Sub SetDirtyStatus()
+
 End Interface
 
 ''' <summary>

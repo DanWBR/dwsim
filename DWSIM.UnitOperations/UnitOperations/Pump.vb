@@ -896,7 +896,6 @@ Namespace UnitOperations
 
                     Me.DeltaT = T2 - Ti
 
-
                     If DebugMode Then AppendDebugLine(String.Format("Doing a bubble point flash to calculate NPSH... P = {0} Pa, VF = 0", P2))
 
                     Try

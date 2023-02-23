@@ -1,5 +1,5 @@
 '    Heat Exchanger Calculation Routines 
-'    Copyright 2008-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2023 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -447,6 +447,7 @@ Namespace UnitOperations
                 AccumulationStreamHot.SetFlowsheet(FlowSheet)
                 If StInHot.GetMassFlow() > 0 Then AccumulationStreamHot = AccumulationStreamHot.Add(StInHot, timestep)
                 AccumulationStreamHot.PropertyPackage.CurrentMaterialStream = AccumulationStreamHot
+                AccumulationStreamHot.SpecType = StreamSpec.Temperature_and_Pressure
                 AccumulationStreamHot.Calculate()
                 If StOutHot.GetMassFlow() > 0 Then AccumulationStreamHot = AccumulationStreamHot.Subtract(StOutHot, timestep)
                 If AccumulationStreamHot.GetMassFlow <= 0.0 Then AccumulationStreamHot.SetMassFlow(0.0)
@@ -484,6 +485,7 @@ Namespace UnitOperations
                 AccumulationStreamCold.SetFlowsheet(FlowSheet)
                 If StInCold.GetMassFlow() > 0 Then AccumulationStreamCold = AccumulationStreamCold.Add(StInCold, timestep)
                 AccumulationStreamCold.PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
+                AccumulationStreamCold.SpecType = StreamSpec.Temperature_and_Pressure
                 AccumulationStreamCold.Calculate()
                 If StOutCold.GetMassFlow() > 0 Then AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutCold, timestep)
                 If AccumulationStreamCold.GetMassFlow <= 0.0 Then AccumulationStreamCold.SetMassFlow(0.0)
@@ -646,9 +648,9 @@ Namespace UnitOperations
             tmpstr.PropertyPackage = Nothing
             tmpstr.Dispose()
 
-            Th2 = StOutHot.GetTemperature()
+            Th2 = AccumulationStreamHot.GetTemperature()
 
-            Tc2 = StOutCold.GetTemperature()
+            Tc2 = AccumulationStreamCold.GetTemperature()
 
             Dim tmp As IFlashCalculationResult
 
