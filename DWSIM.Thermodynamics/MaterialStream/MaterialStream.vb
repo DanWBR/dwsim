@@ -244,23 +244,22 @@ Namespace Streams
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Public Shadows Property PropertyPackage() As PropertyPackage
             Get
-                If Not _pp Is Nothing Then Return _pp
-                If _ppid Is Nothing Then _ppid = ""
-                If Not FlowSheet Is Nothing Then
-                    If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
-                        Return FlowSheet.PropertyPackages(_ppid)
-                    Else
-                        For Each pp As PropertyPackages.PropertyPackage In FlowSheet.PropertyPackages.Values
-                            _ppid = pp.UniqueID
-                            Return pp
-                            Exit For
-                        Next
-                    End If
-                Else
-                    _ppid = _pp?.UniqueID
+                If Not _pp Is Nothing AndAlso FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
                     Return _pp
+                Else
+                    _pp = Nothing
+                    Dim firstpp = FlowSheet.PropertyPackages.Values.First()
+                    _ppid = firstpp.UniqueID
+                    Return firstpp
                 End If
-                Return Nothing
+                If _ppid Is Nothing Then _ppid = ""
+                If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
+                    Return FlowSheet.PropertyPackages(_ppid)
+                Else
+                    Dim firstpp = FlowSheet.PropertyPackages.Values.First()
+                    _ppid = firstpp.UniqueID
+                    Return firstpp
+                End If
             End Get
             Set(ByVal value As PropertyPackage)
                 If value IsNot Nothing Then

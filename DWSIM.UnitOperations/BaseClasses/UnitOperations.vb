@@ -260,20 +260,22 @@ Namespace UnitOperations
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Public Overrides Property PropertyPackage() As Interfaces.IPropertyPackage
             Get
-                If Not _pp Is Nothing And FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
+                If Not _pp Is Nothing AndAlso FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
                     Return _pp
+                Else
+                    _pp = Nothing
+                    Dim firstpp = FlowSheet.PropertyPackages.Values.First()
+                    _ppid = firstpp.UniqueID
+                    Return firstpp
                 End If
                 If _ppid Is Nothing Then _ppid = ""
                 If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
                     Return FlowSheet.PropertyPackages(_ppid)
                 Else
-                    For Each pp As Interfaces.IPropertyPackage In Me.FlowSheet.PropertyPackages.Values
-                        _ppid = pp.UniqueID
-                        Return pp
-                        Exit For
-                    Next
+                    Dim firstpp = FlowSheet.PropertyPackages.Values.First()
+                    _ppid = firstpp.UniqueID
+                    Return firstpp
                 End If
-                Return Nothing
             End Get
             Set(ByVal value As Interfaces.IPropertyPackage)
                 SetDirtyStatus(True)
