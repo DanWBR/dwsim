@@ -1169,9 +1169,9 @@ Public Class FormFlowsheet
                                                      End Function)
             t.ContinueWith(Sub(tres)
                                RaiseEvent FinishedSolving(Me, New EventArgs())
-                               For Each item In tres.Result
-                                   ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
-                               Next
+                               'For Each item In tres.Result
+                               '    ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
+                               'Next
                            End Sub)
             t.Start()
         Else
@@ -4113,6 +4113,14 @@ Public Class FormFlowsheet
         Await fh.Viewer.EnsureCoreWebView2Async()
         fh.Viewer.NavigateToString(htmlcontent)
         fh.Show(dckPanel)
+
+    End Sub
+
+    Public Sub SetDirtyStatus() Implements IFlowsheet.SetDirtyStatus
+
+        For Each obj In SimulationObjects.Values
+            obj.SetDirtyStatus(True)
+        Next
 
     End Sub
 

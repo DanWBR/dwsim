@@ -1254,14 +1254,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim t1 As Task = TaskHelper.Run(Sub()
                                                             Parallel.For(0, ns + 1,
                                                                      Sub(ipar)
-                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, True, K(ipar))
-                                                                         Tj(ipar) = tmpvar(4)
-                                                                         Kant(ipar) = K(ipar)
-                                                                         K(ipar) = tmpvar(6)
-                                                                         If Tj(ipar) < 0.0 Or Double.IsNaN(Tj(ipar)) Then
-                                                                             Tj(ipar) = Tj_ant(ipar)
-                                                                             K(ipar) = Kant(ipar)
-                                                                         End If
+                                                                         Try
+                                                                             Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, True, K(ipar))
+                                                                             Tj(ipar) = tmpvar(4)
+                                                                             Kant(ipar) = K(ipar)
+                                                                             K(ipar) = tmpvar(6)
+                                                                             If Tj(ipar) < 0.0 Or Double.IsNaN(Tj(ipar)) Then
+                                                                                 Tj(ipar) = Tj_ant(ipar)
+                                                                                 K(ipar) = Kant(ipar)
+                                                                             End If
+                                                                         Catch ex As Exception
+                                                                             Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), ipar, P(ipar), xc.ToArrayString()), ex)
+                                                                         End Try
                                                                      End Sub)
                                                         End Sub,
                                                           Settings.TaskCancellationTokenSource.Token)
@@ -1272,11 +1276,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         For i = 0 To ns
                             IObj2?.SetCurrent
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                            If pp.ShouldUseKvalueMethod2 Then
-                                tmp = pp.FlashBase.Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
-                            Else
-                                tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
-                            End If
+                            Try
+                                If pp.ShouldUseKvalueMethod2 Then
+                                    tmp = pp.FlashBase.Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
+                                Else
+                                    tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
+                                End If
+                            Catch ex As Exception
+                                Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), i, P(i), xc.ToArrayString()), ex)
+                            End Try
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
                             If pp.ShouldUseKvalueMethod2 Then

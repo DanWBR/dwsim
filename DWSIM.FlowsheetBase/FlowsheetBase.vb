@@ -3961,5 +3961,13 @@ Label_00CC:
 
     End Sub
 
+    Public Sub SetDirtyStatus() Implements IFlowsheet.SetDirtyStatus
+
+        For Each obj In SimulationObjects.Values
+            obj.SetDirtyStatus(True)
+        Next
+
+    End Sub
+
 End Class
 

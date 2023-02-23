@@ -20,7 +20,6 @@
 Imports System.Math
 Imports System.Xml.Serialization
 Imports DWSIM.Interfaces.Enums
-Imports OfficeOpenXml.FormulaParsing.Excel.Functions.Text
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -60,6 +59,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Property
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+
+            If Vz.HasNaN() Or Vz.HasInf() Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid mixture composition: {0}"), Vz.ToArrayString()))
+            End If
+
+            If Double.IsNaN(P) Or Double.IsInfinity(P) Or P < 0 Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid pressure: {0} Pa"), P))
+            End If
+
+            If Double.IsNaN(T) Or Double.IsInfinity(T) Or T < 0 Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid temperature: {0} K"), T))
+            End If
 
             If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PTFlash IsNot Nothing Then
                 Dim result_o = UserDefinedFlash.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
@@ -174,7 +185,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 0 'Rigorous VLE
 
-                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with the same property package.", Interfaces.IFlowsheet.MessageType.Warning)
+                        'PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with the same property package.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Rigorous VLE")
 
@@ -184,7 +195,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 1 'Ideal VLE
 
-                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with ideal model.", Interfaces.IFlowsheet.MessageType.Warning)
+                        'PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with ideal model.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Ideal VLE")
 
@@ -199,7 +210,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 2 'NoFlash
 
-                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. No equilibrium will be calculated.", Interfaces.IFlowsheet.MessageType.Warning)
+                        'PP.Flowsheet?.ShowMessage("Rigorous flash failed. No equilibrium will be calculated.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: NoFlash")
                         result = NoFlash_PT(Vz, P, T, PP, False, Nothing)
@@ -219,6 +230,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            If Vz.HasNaN() Or Vz.HasInf() Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid mixture composition: {0}"), Vz.ToArrayString()))
+            End If
+
+            If Double.IsNaN(P) Or Double.IsInfinity(P) Or P < 0 Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid pressure: {0} Pa"), P))
+            End If
+
+            If Double.IsNaN(H) Or Double.IsInfinity(H) Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid enthalpy: {0} kJ/kg"), H))
+            End If
 
             If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PHFlash IsNot Nothing Then
                 Dim result_o = UserDefinedFlash.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
@@ -316,7 +339,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 0 'Rigorous VLE
 
-                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with the same property package.", Interfaces.IFlowsheet.MessageType.Warning)
+                        'PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with the same property package.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Rigorous VLE")
 
@@ -326,7 +349,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 1 'Ideal VLE
 
-                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with ideal model.", Interfaces.IFlowsheet.MessageType.Warning)
+                        'PP.Flowsheet?.ShowMessage("Rigorous flash failed. Trying VLE with ideal model.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: Ideal VLE")
 
@@ -341,7 +364,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Case 2 'NoFlash
 
-                        PP.Flowsheet?.ShowMessage("Rigorous flash failed. No equilibrium will be calculated.", Interfaces.IFlowsheet.MessageType.Warning)
+                        'PP.Flowsheet?.ShowMessage("Rigorous flash failed. No equilibrium will be calculated.", Interfaces.IFlowsheet.MessageType.Warning)
 
                         IObj?.Paragraphs.Add("Selected Fail-Safe Flash Algorithm: NoFlash")
                         Dim nl = New NestedLoops
@@ -363,6 +386,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            If Vz.HasNaN() Or Vz.HasInf() Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid mixture composition: {0}"), Vz.ToArrayString()))
+            End If
+
+            If Double.IsNaN(P) Or Double.IsInfinity(P) Or P < 0 Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid pressure: {0} Pa"), P))
+            End If
+
+            If Double.IsNaN(S) Or Double.IsInfinity(S) Then
+                Throw New Exception(String.Format(PP.Flowsheet.GetTranslatedString("Tried to calculate equilibrium with invalid entropy: {0} kJ/[kg.K]"), S))
+            End If
 
             If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PSFlash IsNot Nothing Then
                 Dim result_o = UserDefinedFlash.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
