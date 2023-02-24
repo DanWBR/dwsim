@@ -326,6 +326,8 @@ Public Class FormSimulSettings
 
         chkShowDynProps.Checked = CurrentFlowsheet.Options.DisplayDynamicPropertyValues
 
+        chkIncludeFlowsheetMessagesInFile.Checked = CurrentFlowsheet.Options.SaveFlowsheetMessagesInFile
+
         Me.loaded = True
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -1880,6 +1882,12 @@ Public Class FormSimulSettings
     Private Sub chkForceObjectCalculation_CheckedChanged(sender As Object, e As EventArgs) Handles chkForceObjectCalculation.CheckedChanged
 
         CurrentFlowsheet.Options.ForceObjectSolving = chkForceObjectCalculation.Checked
+
+    End Sub
+
+    Private Sub chkIncludeFlowsheetMessagesInFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFlowsheetMessagesInFile.CheckedChanged
+
+        CurrentFlowsheet.Options.SaveFlowsheetMessagesInFile = chkIncludeFlowsheetMessagesInFile.Checked
 
     End Sub
 

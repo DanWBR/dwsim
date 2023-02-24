@@ -278,6 +278,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property ForceObjectSolving As Boolean = False Implements IFlowsheetOptions.ForceObjectSolving
 
+        Public Property SaveFlowsheetMessagesInFile As Boolean = True Implements IFlowsheetOptions.SaveFlowsheetMessagesInFile
+
     End Class
 
 End Namespace

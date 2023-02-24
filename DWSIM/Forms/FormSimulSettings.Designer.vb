@@ -134,6 +134,8 @@ Partial Class FormSimulSettings
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.chkIncludeFlowsheetMessagesInFile = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.chkForceObjectCalculation = New System.Windows.Forms.CheckBox()
         Me.cbForcePhase = New System.Windows.Forms.ComboBox()
@@ -193,6 +195,7 @@ Partial Class FormSimulSettings
         Me.GroupBox15.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage7.SuspendLayout()
+        Me.GroupBox13.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
@@ -1034,11 +1037,27 @@ Partial Class FormSimulSettings
         'TabPage7
         '
         resources.ApplyResources(Me.TabPage7, "TabPage7")
+        Me.TabPage7.Controls.Add(Me.GroupBox13)
         Me.TabPage7.Controls.Add(Me.GroupBox4)
         Me.TabPage7.Controls.Add(Me.GroupBox1)
         Me.TabPage7.Name = "TabPage7"
         Me.ToolTip1.SetToolTip(Me.TabPage7, resources.GetString("TabPage7.ToolTip"))
         Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'GroupBox13
+        '
+        resources.ApplyResources(Me.GroupBox13, "GroupBox13")
+        Me.GroupBox13.Controls.Add(Me.chkIncludeFlowsheetMessagesInFile)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox13, resources.GetString("GroupBox13.ToolTip"))
+        '
+        'chkIncludeFlowsheetMessagesInFile
+        '
+        resources.ApplyResources(Me.chkIncludeFlowsheetMessagesInFile, "chkIncludeFlowsheetMessagesInFile")
+        Me.chkIncludeFlowsheetMessagesInFile.Name = "chkIncludeFlowsheetMessagesInFile"
+        Me.ToolTip1.SetToolTip(Me.chkIncludeFlowsheetMessagesInFile, resources.GetString("chkIncludeFlowsheetMessagesInFile.ToolTip"))
+        Me.chkIncludeFlowsheetMessagesInFile.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -1366,6 +1385,8 @@ Partial Class FormSimulSettings
         Me.GroupBox15.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage7.ResumeLayout(False)
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.TabPage6.ResumeLayout(False)
@@ -1519,4 +1540,6 @@ Partial Class FormSimulSettings
     Public WithEvents Label20 As Label
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents chkForceObjectCalculation As CheckBox
+    Friend WithEvents GroupBox13 As GroupBox
+    Friend WithEvents chkIncludeFlowsheetMessagesInFile As CheckBox
 End Class
