@@ -180,6 +180,13 @@ Public Class FormMain
 
             LoadExtenders()
 
+            tsmiFreeProTrial.Visible = Not IsPro
+
+#If LINUX = False Then
+            If Not IsPro Then Icon = My.Resources.DWSIM_Icon_41
+            If IsPro Then StatusStrip1.Visible = False
+#End If
+
             'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
             'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
 
@@ -958,13 +965,6 @@ Public Class FormMain
     End Sub
 
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
-
-        tsmiFreeProTrial.Visible = Not IsPro
-
-#If LINUX = False Then
-        If Not IsPro Then Icon = My.Resources.DWSIM_Icon_41
-        If IsPro Then StatusStrip1.Visible = False
-#End If
 
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 

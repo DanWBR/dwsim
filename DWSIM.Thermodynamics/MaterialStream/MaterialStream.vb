@@ -8742,6 +8742,10 @@ Namespace Streams
             Return Phases(0).Compounds(name).MassFlow.GetValueOrDefault()
         End Function
 
+        Public Function GetCompoundMolarFlow(name As String) As Double Implements IMaterialStream.GetCompoundMolarFlow
+            Return Phases(0).Compounds(name).MolarFlow.GetValueOrDefault()
+        End Function
+
         Public Function GetCompoundMassConcentration(name As String) As Double Implements IMaterialStream.GetCompoundMassConcentration
             Return Phases(0).Compounds(name).MassFlow.GetValueOrDefault() / Phases(0).Properties.volumetric_flow.GetValueOrDefault()
         End Function
