@@ -3358,6 +3358,8 @@
     <None Include="Resources\icons8-vector.png" />
     <None Include="Resources\icons8-downloads_folder.png" />
     <None Include="Resources\icons8-python.png" />
+    <None Include="Resources\ProIcon128.png" />
+    <None Include="Resources\Icon128.ico" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

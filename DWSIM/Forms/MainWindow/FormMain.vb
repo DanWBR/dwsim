@@ -178,12 +178,9 @@ Public Class FormMain
                 My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
             Next
 
-            LoadExtenders()
-
             tsmiFreeProTrial.Visible = Not IsPro
 
 #If LINUX = False Then
-            If Not IsPro Then Icon = My.Resources.DWSIM_Icon_41
             If IsPro Then StatusStrip1.Visible = False
 #End If
 
@@ -202,6 +199,19 @@ Public Class FormMain
             SetupWelcomeScreen()
 
         End If
+
+    End Sub
+
+    Private Sub UpdateIcon()
+
+
+#If LINUX = False Then
+        If Not IsPro Then
+            Icon = My.Resources.DWSIM_Icon_41
+        Else
+            Icon = My.Resources.Icon1282
+        End If
+#End If
 
     End Sub
 
@@ -965,6 +975,8 @@ Public Class FormMain
     End Sub
 
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+
+        UpdateIcon()
 
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 

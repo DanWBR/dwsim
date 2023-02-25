@@ -181,7 +181,11 @@ Public Class FormFlowsheet
         ' icon
 
 #If LINUX = False Then
-        If Not FormMain.IsPro Then Icon = My.Resources.DWSIM_Icon_v8
+        If Not FormMain.IsPro Then
+            Icon = My.Resources.DWSIM_Icon_v8
+        Else
+            Icon = My.Resources.Icon1282
+        End If
 #End If
 
     End Sub

@@ -892,6 +892,10 @@ Partial Class FormMain
 
         End With
 
+        LoadExtenders()
+
+        UpdateIcon()
+
         'process command line arguments
         If My.Application.CommandLineMode Then
             Dim bp As New CommandLineProcessor
