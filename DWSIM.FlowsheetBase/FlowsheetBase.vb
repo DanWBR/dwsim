@@ -3072,14 +3072,6 @@ Label_00CC:
 
                                 End Sub)
 
-        Dim t5 = TaskHelper.Run(Sub()
-
-                                    Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
-                                    PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
-                                    plist.Add(PRLKPP)
-
-                                End Sub)
-
         Dim t6 = TaskHelper.Run(Sub()
 
                                     Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
@@ -3197,7 +3189,7 @@ Label_00CC:
 
                                  End Sub)
 
-        Task.WaitAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)
+        Task.WaitAll(t1, t2, t3, t4, t6, t7, t8, t9, t10, t11, t12, t13, t14)
 
         For Each pp In plist
             AvailablePropPacks.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)

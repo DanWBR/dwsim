@@ -1,5 +1,5 @@
 ﻿'    Peng-Robinson-Stryjek-Vera 2 w/ Van Laar Mixing Rules Property Package 
-'    Copyright 2012 Daniel Wagner O. de Medeiros
+'    Copyright 2012-2023 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -126,10 +126,18 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
-                alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.457235 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
+                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                    ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                Else
+                    If w(i) <= 0.491 Then
+                        ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
+                    Else
+                        ci(i) = 0.379642 + 1.48503 * w(i) - 0.164423 * w(i) ^ 2 + 0.016666 * w(i) ^ 3
+                    End If
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                End If
                 i = i + 1
             Loop Until i = n + 1
 
@@ -305,7 +313,9 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function Z_PR(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VKij2, ByVal Vk1, ByVal Vk2, ByVal Vk3, ByVal VTc, ByVal VPc, ByVal Vw, ByVal TIPO)
+        Function Z_PR(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij(,) As Double, ByVal VKij2(,) As Double,
+                          ByVal Vk1 As Double(), ByVal Vk2 As Double(), ByVal Vk3 As Double(),
+                          ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal TIPO As String)
 
             Dim ai(), bi(), ci(), aml2(), amv2() As Double
             Dim n, R, coeff(3), tmp() As Double
@@ -331,10 +341,18 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (0.7 - Tr(i))
-                alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
+                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                    ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                Else
+                    If w(i) <= 0.491 Then
+                        ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
+                    Else
+                        ci(i) = 0.379642 + 1.48503 * w(i) - 0.164423 * w(i) ^ 2 + 0.016666 * w(i) ^ 3
+                    End If
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                End If
                 i = i + 1
             Loop Until i = n + 1
 
@@ -468,7 +486,11 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function H_PR_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VKij2 As Object, ByVal Vk1 As Object, ByVal Vk2 As Object, ByVal Vk3 As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal Hid As Double) As Double
+        Function H_PR_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double,
+                          ByVal Vz As Double(), ByVal VKij(,) As Double, ByVal VKij2(,) As Double,
+                          ByVal Vk1 As Double(), ByVal Vk2 As Double(), ByVal Vk3 As Double(),
+                          ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(),
+                          ByVal VMM As Double(), ByVal Hid As Double) As Double
 
             Dim ai(), bi(), ci() As Double
             Dim n, R As Double
@@ -500,10 +522,18 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (0.7 - Tr(i))
-                alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
+                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                    ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                Else
+                    If w(i) <= 0.491 Then
+                        ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
+                    Else
+                        ci(i) = 0.379642 + 1.48503 * w(i) - 0.164423 * w(i) ^ 2 + 0.016666 * w(i) ^ 3
+                    End If
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                End If
                 i = i + 1
             Loop Until i = n + 1
 
@@ -645,7 +675,11 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function S_PR_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VKij2 As Object, ByVal Vk1 As Object, ByVal Vk2 As Object, ByVal Vk3 As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal VMM As Array, ByVal Sid As Double) As Double
+        Function S_PR_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double,
+                          ByVal Vz As Double(), ByVal VKij(,) As Double, ByVal VKij2(,) As Double,
+                          ByVal Vk1 As Double(), ByVal Vk2 As Double(), ByVal Vk3 As Double(),
+                          ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(),
+                          ByVal VMM As Array, ByVal Sid As Double) As Double
 
             Dim ai(), bi(), ci() As Double
             Dim n, R As Double
@@ -677,10 +711,18 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (0.7 - Tr(i))
-                alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
+                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                    ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                Else
+                    If w(i) <= 0.491 Then
+                        ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
+                    Else
+                        ci(i) = 0.379642 + 1.48503 * w(i) - 0.164423 * w(i) ^ 2 + 0.016666 * w(i) ^ 3
+                    End If
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                End If
                 i = i + 1
             Loop Until i = n + 1
 
@@ -1170,7 +1212,10 @@ Final3:
 
         End Function
 
-        Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VKij2, ByVal Vk1, ByVal Vk2, ByVal Vk3, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
+        Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx() As Double,
+                           ByVal VKij(,) As Double, ByVal VKij2(,) As Double,
+                          ByVal Vk1 As Double(), ByVal Vk2 As Double(), ByVal Vk3 As Double(),
+                          ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VTb As Double(), ByVal TIPO As String)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -1200,10 +1245,18 @@ Final3:
 
             i = 0
             Do
-                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                ci(i) = (0.378893 + 1.4897153 * W(i) - 0.17131848 * W(i) ^ 2 + 0.0196544 * W(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
-                alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.457235 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
+                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                    ci(i) = (0.378893 + 1.4897153 * W(i) - 0.17131848 * W(i) ^ 2 + 0.0196544 * W(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                Else
+                    If W(i) <= 0.491 Then
+                        ci(i) = 0.37464 + 1.5422 * W(i) - 0.26992 * W(i) ^ 2
+                    Else
+                        ci(i) = 0.379642 + 1.48503 * W(i) - 0.164423 * W(i) ^ 2 + 0.016666 * W(i) ^ 3
+                    End If
+                    alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                End If
                 i = i + 1
             Loop Until i = n + 1
 
