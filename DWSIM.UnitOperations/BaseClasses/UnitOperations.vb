@@ -278,10 +278,10 @@ Namespace UnitOperations
                 End If
             End Get
             Set(ByVal value As Interfaces.IPropertyPackage)
-                SetDirtyStatus(True)
                 If value IsNot Nothing Then
                     _ppid = value.UniqueID
                     _pp = value
+                    SetDirtyStatus(True)
                 Else
                     _pp = Nothing
                 End If

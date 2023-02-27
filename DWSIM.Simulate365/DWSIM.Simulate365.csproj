@@ -139,6 +139,10 @@
     <Compile Include="Settings\DashboardSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}</Project>
       <Name>DWSIM.Interfaces</Name>

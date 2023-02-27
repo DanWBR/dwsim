@@ -265,6 +265,7 @@ Namespace Streams
                 If value IsNot Nothing Then
                     _ppid = value.UniqueID
                     _pp = value
+                    SetDirtyStatus(True)
                 Else
                     _pp = Nothing
                 End If
