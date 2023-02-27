@@ -30,6 +30,12 @@ Namespace PropertyPackages
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_pr As New PropertyPackages.Auxiliary.PRSV2VL
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
+        Public Overrides ReadOnly Property DisplayName As String = "Peng-Robinson-Strÿjek-Vera 2 (Van-Laar Mixing Rule)"
+
+        Public Overrides ReadOnly Property DisplayDescription As String = "Modified version of the PR EOS that improves predictions for slightly polar mixtures."
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
         End Sub

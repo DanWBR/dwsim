@@ -1164,7 +1164,7 @@ Public Class FormSimulWizard
 
     Public Sub SetupPPRecommendations()
 
-        Dim names = CurrentFlowsheet.SelectedCompounds.Keys.ToList()
+        Dim names = CurrentFlowsheet.SelectedCompounds.Keys.Select(Function(n) n.ToLower()).ToList()
 
         Dim elecs = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsSalt Or c.IsIon Or c.IsHydratedSalt).Count()
 
@@ -1315,6 +1315,11 @@ Public Class FormSimulWizard
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
+                    If pp.DisplayName.Contains("Strÿjek-Vera") Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    End If
                 Else
                     Dim ptype = row.Cells(0).Value
                     Select Case ptype
