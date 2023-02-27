@@ -1314,7 +1314,7 @@ Public Class FormSimulSettings
         End If
 
         Dim pp As PropertyPackages.PropertyPackage
-        pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
+        pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone()
 
         If pp Is Nothing Then Exit Sub
 

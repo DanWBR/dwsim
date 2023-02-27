@@ -673,10 +673,13 @@ Namespace PropertyPackages
 
         Public Overridable Function Clone() As PropertyPackage
 
-            Dim pp As PropertyPackage = Me.MemberwiseClone()
+            Dim data = SaveData()
 
-            pp.FlashSettings = New Dictionary(Of FlashSetting, String)(FlashSettings)
-            pp.ForcedSolids = New List(Of String)(ForcedSolids)
+            Dim pp As PropertyPackage = Activator.CreateInstance(Me.GetType())
+
+            pp.LoadData(data)
+
+            pp.UniqueID = "PP-" + Guid.NewGuid().ToString()
 
             Return pp
 
@@ -11737,11 +11740,12 @@ Final3:
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            Try
-                Me.UniqueID = (From el As XElement In data Select el Where el.Name = "ID").FirstOrDefault.Value
-                Me.Tag = (From el As XElement In data Select el Where el.Name = "Tag").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
+            Dim uid_el = (From el As XElement In data Select el Where el.Name = "UniqueID").FirstOrDefault()
+            Dim tag_el = (From el As XElement In data Select el Where el.Name = "Tag").FirstOrDefault()
+
+            If uid_el IsNot Nothing Then Me.UniqueID = uid_el.Value
+            If uid_el IsNot Nothing Then Me.Tag = tag_el.Value
+
             Me.ComponentName = (From el As XElement In data Select el Where el.Name = "ComponentName").FirstOrDefault.Value
             Me.ComponentDescription = (From el As XElement In data Select el Where el.Name = "ComponentDescription").FirstOrDefault.Value
 
@@ -12366,6 +12370,7 @@ Final3:
                 .Add(New XElement("ComponentName", ComponentName))
                 .Add(New XElement("ComponentDescription", ComponentDescription))
                 .Add(New XElement("Tag", Tag))
+                .Add(New XElement("UniqueID", UniqueID))
 
                 If ParametersXMLString <> "" Then
                     Try
