@@ -225,7 +225,7 @@ Namespace Streams
         End Function
 
         Public Function GetPropertyPackageObjectCopy() As Object Implements IMaterialStream.GetPropertyPackageObjectCopy
-            Return PropertyPackage.Clone
+            Return PropertyPackage.Clone()
         End Function
 
         Sub SetPropertyPackage(pp As Object) Implements IMaterialStream.SetPropertyPackageObject

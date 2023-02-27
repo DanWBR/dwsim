@@ -417,15 +417,17 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         Dim exlist As New List(Of Exception)
 
-        If mode = 0 Or mode = 1 Then
-            'bg thread
-            exlist = ProcessQueueInternalAsync(fobj, ct)
-            If Not Adjusting Then SolveSimultaneousAdjustsAsync(fobj, ct)
-        ElseIf mode = 2 Then
-            'bg parallel threads
-            exlist = ProcessQueueInternalAsyncParallel(fobj, orderedlist, ct)
-            If Not Adjusting Then SolveSimultaneousAdjustsAsync(fobj, ct)
-        End If
+        'If mode = 0 Or mode = 1 Then
+        'bg thread
+
+        exlist = ProcessQueueInternalAsync(fobj, ct)
+        If Not Adjusting Then SolveSimultaneousAdjustsAsync(fobj, ct)
+
+        'ElseIf mode = 2 Then
+        '    'bg parallel threads
+        '    exlist = ProcessQueueInternalAsyncParallel(fobj, orderedlist, ct)
+        '    If Not Adjusting Then SolveSimultaneousAdjustsAsync(fobj, ct)
+        'End If
 
         Return exlist
 
@@ -695,10 +697,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 DirectCast(obj, IMaterialStream).SetPropertyPackageObject(DirectCast(obj, IMaterialStream).GetPropertyPackageObjectCopy)
                 DirectCast(obj, IMaterialStream).SetCurrentMaterialStream(obj)
             ElseIf TypeOf obj Is ISimulationObject Then
-                If Not obj.PropertyPackage Is Nothing Then
-                    obj.PropertyPackage = Nothing
-                    obj.PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone
-                End If
+                obj.PropertyPackage = Nothing
+                obj.PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone()
             End If
         Next
 

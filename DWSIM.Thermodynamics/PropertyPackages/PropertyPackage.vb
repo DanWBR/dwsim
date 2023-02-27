@@ -11740,11 +11740,11 @@ Final3:
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            Dim uid_el = (From el As XElement In data Select el Where el.Name = "UniqueID").FirstOrDefault()
+            Dim uid_el = (From el As XElement In data Select el Where el.Name = "ID").FirstOrDefault()
             Dim tag_el = (From el As XElement In data Select el Where el.Name = "Tag").FirstOrDefault()
 
             If uid_el IsNot Nothing Then Me.UniqueID = uid_el.Value
-            If uid_el IsNot Nothing Then Me.Tag = tag_el.Value
+            If tag_el IsNot Nothing Then Me.Tag = tag_el.Value
 
             Me.ComponentName = (From el As XElement In data Select el Where el.Name = "ComponentName").FirstOrDefault.Value
             Me.ComponentDescription = (From el As XElement In data Select el Where el.Name = "ComponentDescription").FirstOrDefault.Value
@@ -12370,7 +12370,6 @@ Final3:
                 .Add(New XElement("ComponentName", ComponentName))
                 .Add(New XElement("ComponentDescription", ComponentDescription))
                 .Add(New XElement("Tag", Tag))
-                .Add(New XElement("UniqueID", UniqueID))
 
                 If ParametersXMLString <> "" Then
                     Try
