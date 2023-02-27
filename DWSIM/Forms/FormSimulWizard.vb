@@ -1695,6 +1695,13 @@ Public Class FormSimulWizard
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
+        If StepWizardControl1.SelectedPage Is WizardPage2 Then
+
+            txtSearch.Focus()
+            ActiveControl = txtSearch
+
+        End If
+
     End Sub
 
 End Class

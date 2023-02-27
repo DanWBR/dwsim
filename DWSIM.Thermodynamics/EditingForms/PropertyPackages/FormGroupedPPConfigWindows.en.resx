@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TabPageBIPs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 423</value>
+    <value>755, 550</value>
   </data>
   <data name="TabPageBIPs.Text" xml:space="preserve">
     <value>Model Parameters</value>
@@ -168,10 +168,10 @@
     <value>Property Overrides</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>763, 449</value>
+    <value>763, 576</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>763, 449</value>
+    <value>763, 576</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Property Package</value>
