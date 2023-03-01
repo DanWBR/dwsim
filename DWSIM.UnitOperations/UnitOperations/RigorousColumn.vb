@@ -1138,7 +1138,15 @@ Namespace UnitOperations
                         Try
                             Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
                             If prop = String.Format("Stream '{0}' Stage Index", streamtag) Then
-                                value = StageIndex(si.AssociatedStage)
+                                If si.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
+                                    value = Stages.Count - 1
+                                ElseIf si.StreamBehavior = StreamInformation.Behavior.Distillate Then
+                                    value = 0
+                                ElseIf si.StreamBehavior = StreamInformation.Behavior.OverheadVapor Then
+                                    value = 0
+                                Else
+                                    value = StageIndex(si.AssociatedStage)
+                                End If
                                 Return value
                             End If
                         Catch ex As Exception

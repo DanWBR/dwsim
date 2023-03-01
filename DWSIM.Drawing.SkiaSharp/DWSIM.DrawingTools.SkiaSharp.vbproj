@@ -598,6 +598,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\OFL.txt" />
+    <EmbeddedResource Include="Icons\abscol_new.png" />
+    <EmbeddedResource Include="Icons\distcol_new.png" />
     <EmbeddedResource Include="Icons\orifice-plate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
