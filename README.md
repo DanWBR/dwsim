@@ -89,11 +89,10 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 ### Compiling
 
-- Install Node.js (64-bit) before compiling DWSIM (https://nodejs.org/en/download/).
 - DWSIM can be compiled using Visual Studio 2019 or newer on Windows.
 - To compile everything and run:
 	- Open Visual Studio 2019 or 2022 and clone this repository directly from GitHub
-	- Change the Build target to 'Debug/x64', 'DebugNoNPM/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'
+	- Change the Build target to 'Debug/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'
 	- Click on the Solution object and restore NuGet packages
 	- Build the solution
 	- Select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project

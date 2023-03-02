@@ -1,1 +1,19 @@
 Version 8.4.0
+
+- Smart Object Solving
+- Fail-Safe Equilibrium Calculation method
+- Force usage of Henry's constants
+- Auto-estimate missing NRTL/UNIQUAC paremeters 
+- New Property Package information window (Classic UI)
+- Added Critical Point calculation routine for PR78
+- More human-readable error messages
+- PH Flash optimization
+- PR/SRK enhancements
+- Fixed issue with Pump's energy stream connection button in editor
+- Added FOSSEE Custom Models to object selection palette (Classic UI)
+- Fixed issue #425: IronPython - 'import csv' fails in Script Manager
+- Fixed issue #429: Dynamic modelling for water heat exchanger does not work
+- Fixed issue #432: Adding ExtraProperties to recycle or energy stream crashes flowsheet UI
+- Fixed issue with Absorption Column
+- Fixed data fetching from Cheméo
+- Other minor fixes and enhancements
