@@ -33,7 +33,6 @@ Partial Class FormOptions
         Me.Label21 = New System.Windows.Forms.Label()
         Me.chkEnableInspector = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.chkStorePreviousSolutions = New System.Windows.Forms.CheckBox()
         Me.chkSolverBreak = New System.Windows.Forms.CheckBox()
         Me.chkEnableSIMD = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -100,8 +99,6 @@ Partial Class FormOptions
         Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.KryptonCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.cbDebugLevel = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -131,7 +128,6 @@ Partial Class FormOptions
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -175,7 +171,6 @@ Partial Class FormOptions
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.chkStorePreviousSolutions)
         Me.GroupBox2.Controls.Add(Me.chkSolverBreak)
         Me.GroupBox2.Controls.Add(Me.chkEnableSIMD)
         Me.GroupBox2.Controls.Add(Me.Label12)
@@ -184,11 +179,6 @@ Partial Class FormOptions
         Me.GroupBox2.Controls.Add(Me.chkEnableParallelCalcs)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        '
-        'chkStorePreviousSolutions
-        '
-        resources.ApplyResources(Me.chkStorePreviousSolutions, "chkStorePreviousSolutions")
-        Me.chkStorePreviousSolutions.Name = "chkStorePreviousSolutions"
         '
         'chkSolverBreak
         '
@@ -628,7 +618,6 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         '
@@ -692,18 +681,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkHideSolidPhaseCO, "chkHideSolidPhaseCO")
         Me.chkHideSolidPhaseCO.Name = "chkHideSolidPhaseCO"
-        '
-        'GroupBox9
-        '
-        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
-        Me.GroupBox9.Controls.Add(Me.KryptonCheckBox1)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.TabStop = False
-        '
-        'KryptonCheckBox1
-        '
-        resources.ApplyResources(Me.KryptonCheckBox1, "KryptonCheckBox1")
-        Me.KryptonCheckBox1.Name = "KryptonCheckBox1"
         '
         'GroupBox6
         '
@@ -791,8 +768,6 @@ Partial Class FormOptions
         Me.GroupBox17.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
@@ -801,7 +776,6 @@ Partial Class FormOptions
     Public WithEvents FaTabStrip1 As System.Windows.Forms.TabControl
     Public WithEvents FaTabStripItem1 As System.Windows.Forms.TabPage
     Public WithEvents FaTabStripItem2 As System.Windows.Forms.TabPage
-    Public WithEvents KryptonCheckBox1 As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents KryptonCheckBox6 As System.Windows.Forms.CheckBox
     Public WithEvents KryptonButton1 As System.Windows.Forms.Button
@@ -833,10 +807,8 @@ Partial Class FormOptions
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents cbDebugLevel As System.Windows.Forms.ComboBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Public WithEvents chkSolverBreak As System.Windows.Forms.CheckBox
-    Public WithEvents chkStorePreviousSolutions As System.Windows.Forms.CheckBox
     Public WithEvents chkSaveBackupFile As System.Windows.Forms.CheckBox
     Public WithEvents chkEnableSIMD As System.Windows.Forms.CheckBox
     Friend WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn

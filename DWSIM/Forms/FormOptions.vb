@@ -45,8 +45,6 @@ Public Class FormOptions
 
         Me.chkEnableInspector.Checked = My.Settings.InspectorEnabled
 
-        Me.KryptonCheckBox1.Checked = My.Settings.ShowTips
-
         Me.chkSaveBackupFile.Checked = My.Settings.SaveBackupFile
         Me.KryptonCheckBox6.Checked = My.Settings.BackupActivated
         Me.KryptonTextBox1.Text = My.Settings.BackupFolder
@@ -80,7 +78,6 @@ Public Class FormOptions
         tbSolverTimeout.Text = My.Settings.SolverTimeoutSeconds
         cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
         chkSolverBreak.Checked = My.Settings.SolverBreakOnException
-        chkStorePreviousSolutions.Checked = My.Settings.StorePreviousSolutions
 
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
@@ -111,10 +108,6 @@ Public Class FormOptions
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
-    End Sub
-
-    Private Sub KryptonCheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonCheckBox1.CheckedChanged
-        My.Settings.ShowTips = Me.KryptonCheckBox1.Checked
     End Sub
 
     Private Sub KryptonCheckBox6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonCheckBox6.CheckedChanged
@@ -397,10 +390,6 @@ Public Class FormOptions
     Private Sub chkSolverBreak_CheckedChanged(sender As Object, e As EventArgs) Handles chkSolverBreak.CheckedChanged
         My.Settings.SolverBreakOnException = chkSolverBreak.Checked
         Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
-    End Sub
-
-    Private Sub chkStorePreviousSolutions_CheckedChanged(sender As Object, e As EventArgs) Handles chkStorePreviousSolutions.CheckedChanged
-        My.Settings.StorePreviousSolutions = chkStorePreviousSolutions.Checked
     End Sub
 
     Private Sub chkSaveBackupFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveBackupFile.CheckedChanged
