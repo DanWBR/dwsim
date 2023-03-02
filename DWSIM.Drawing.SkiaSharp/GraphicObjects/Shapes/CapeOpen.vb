@@ -16,6 +16,7 @@ Namespace GraphicObjects.Shapes
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO
             Me.Description = "CAPE-OPEN Unit Operation Block"
+            EmbeddedResourceIconName = "distcol_new.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -44,24 +45,17 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub PositionConnectors()
 
-            If Not Me.AdditionalInfo Is Nothing Then
-
-                Dim obj1(Me.InputConnectors.Count), obj2(Me.InputConnectors.Count) As Double
-                Dim obj3(Me.OutputConnectors.Count), obj4(Me.OutputConnectors.Count) As Double
-                obj1 = Me.AdditionalInfo(0)
-                obj2 = Me.AdditionalInfo(1)
-                obj3 = Me.AdditionalInfo(2)
-                obj4 = Me.AdditionalInfo(3)
+            If DrawMode = 2 And ChemSep Then
 
                 Try
                     Dim i As Integer = 0
                     For Each ic As IConnectionPoint In Me.InputConnectors
-                        ic.Position = New Point(Me.X + obj1(i), Me.Y + obj2(i))
+                        ic.Position = New Point(Me.X + 0.1 * Width, Me.Y + (i + 1) / InputConnectors.Count * Height)
                         i = i + 1
                     Next
                     i = 0
                     For Each oc As IConnectionPoint In Me.OutputConnectors
-                        oc.Position = New Point(Me.X + obj3(i), Me.Y + obj4(i))
+                        oc.Position = New Point(Me.X + 0.9 * Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
                         i = i + 1
                     Next
                 Catch ex As Exception
@@ -70,20 +64,48 @@ Namespace GraphicObjects.Shapes
 
             Else
 
-                Try
-                    Dim i As Integer = 0
-                    For Each ic As IConnectionPoint In Me.InputConnectors
-                        ic.Position = New Point(Me.X, Me.Y + (i + 1) / InputConnectors.Count * Height)
-                        i = i + 1
-                    Next
-                    i = 0
-                    For Each oc As IConnectionPoint In Me.OutputConnectors
-                        oc.Position = New Point(Me.X + Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
-                        i = i + 1
-                    Next
-                Catch ex As Exception
+                If Not Me.AdditionalInfo Is Nothing Then
 
-                End Try
+                    Dim obj1(Me.InputConnectors.Count), obj2(Me.InputConnectors.Count) As Double
+                    Dim obj3(Me.OutputConnectors.Count), obj4(Me.OutputConnectors.Count) As Double
+                    obj1 = Me.AdditionalInfo(0)
+                    obj2 = Me.AdditionalInfo(1)
+                    obj3 = Me.AdditionalInfo(2)
+                    obj4 = Me.AdditionalInfo(3)
+
+                    Try
+                        Dim i As Integer = 0
+                        For Each ic As IConnectionPoint In Me.InputConnectors
+                            ic.Position = New Point(Me.X + obj1(i), Me.Y + obj2(i))
+                            i = i + 1
+                        Next
+                        i = 0
+                        For Each oc As IConnectionPoint In Me.OutputConnectors
+                            oc.Position = New Point(Me.X + obj3(i), Me.Y + obj4(i))
+                            i = i + 1
+                        Next
+                    Catch ex As Exception
+
+                    End Try
+
+                Else
+
+                    Try
+                        Dim i As Integer = 0
+                        For Each ic As IConnectionPoint In Me.InputConnectors
+                            ic.Position = New Point(Me.X, Me.Y + (i + 1) / InputConnectors.Count * Height)
+                            i = i + 1
+                        Next
+                        i = 0
+                        For Each oc As IConnectionPoint In Me.OutputConnectors
+                            oc.Position = New Point(Me.X + Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
+                            i = i + 1
+                        Next
+                    Catch ex As Exception
+
+                    End Try
+
+                End If
 
             End If
 
@@ -116,7 +138,7 @@ Namespace GraphicObjects.Shapes
 
                 Select Case DrawMode
 
-                    Case 0, 2
+                    Case 0
 
                         'default
 
@@ -338,6 +360,10 @@ Namespace GraphicObjects.Shapes
                             End Using
 
                         End If
+
+                    Case 2
+
+                        DrawIcon(canvas)
 
                     Case 3
 
