@@ -1210,14 +1210,14 @@ Namespace Reactors
                             Dim reactant0 = rx.Components.Values.Where(Function(c) c.StoichCoeff < 0).First()
                             REx(i) = -N0(reactant0.CompName) / reactant0.StoichCoeff
                         Else
-                            REx(i) = N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
+                            REx(i) = -N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
                         End If
                     ElseIf keq < 0.00001 Then
                         If rx.Components(rx.BaseReactant).StoichCoeff < 0 Then
                             Dim product0 = rx.Components.Values.Where(Function(c) c.StoichCoeff > 0).First()
                             REx(i) = -N0(product0.CompName) / product0.StoichCoeff
                         Else
-                            REx(i) = N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
+                            REx(i) = -N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
                         End If
                     End If
                     If REx(i) < lbound(i) Then REx(i) = lbound(i)
