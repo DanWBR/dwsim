@@ -1033,6 +1033,13 @@ Public Class FormMain
 
         End If
 
+        Dim currver = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+        If (Settings.CurrentVersion <> currver) Then
+            Settings.CurrentVersion = currver
+            Dim frmwn As New FormWhatsNew()
+            frmwn.Show()
+        End If
+
         AnalyticsProvider?.SetMainForm(Me)
 
         AnalyticsProvider?.Initialize()
