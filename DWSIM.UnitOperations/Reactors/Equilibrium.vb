@@ -366,10 +366,7 @@ Namespace Reactors
                 Next
             Next
 
-            Dim kr, ktot, prodtot As Double
-
-            ktot = 1.0
-            prodtot = 1.0
+            Dim kr As Double
 
             Dim reaction As IReaction
 
@@ -378,8 +375,6 @@ Namespace Reactors
             For i = 0 To Me.Reactions.Count - 1
                 reaction = FlowSheet.Reactions(Me.Reactions(i))
                 kr = reaction.EvaluateK(T + reaction.Approach, pp)
-                ktot *= kr
-                prodtot *= Math.Abs(prod(i))
                 f(i) = Math.Log(Math.Abs(prod(i)) / kr)
                 If Math.Abs(pval) > 0.01 Then
                     If PenaltyValueScheme = 0 Then
@@ -1204,6 +1199,31 @@ Namespace Reactors
             If (UsePreviousSolution Or dynamics) And PreviousReactionExtents.Count > 0 Then
                 REx = PreviousReactionExtents.Values.ToArray()
                 REx0 = PreviousReactionExtents.Values.ToArray()
+            Else
+                'estimate initial extents
+                i = 0
+                For Each rxid As String In Me.Reactions
+                    rx = FlowSheet.Reactions(rxid)
+                    Dim keq = rx.EvaluateK(T + rx.Approach, pp)
+                    If keq > 1000000 Then
+                        If rx.Components(rx.BaseReactant).StoichCoeff > 0 Then
+                            Dim reactant0 = rx.Components.Values.Where(Function(c) c.StoichCoeff < 0).First()
+                            REx(i) = N0(reactant0.CompName) / reactant0.StoichCoeff
+                        Else
+                            REx(i) = -N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
+                        End If
+                    ElseIf keq < 0.00001 Then
+                        If rx.Components(rx.BaseReactant).StoichCoeff < 0 Then
+                            Dim product0 = rx.Components.Values.Where(Function(c) c.StoichCoeff > 0).First()
+                            REx(i) = N0(product0.CompName) / product0.StoichCoeff
+                        Else
+                            REx(i) = N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
+                        End If
+                    End If
+                    If REx(i) < lbound(i) Then REx(i) = lbound(i)
+                    If REx(i) > ubound(i) Then REx(i) = ubound(i)
+                    i += 1
+                Next
             End If
 
             IObj?.Paragraphs.Add(String.Format("Initial Estimates for Reaction Extents: {0}", REx.ToMathArrayString))
@@ -1354,7 +1374,7 @@ Namespace Reactors
 
             DRW?.AppendLine(String.Format("[External Iteration {0}] Penalty Value: {1}", cnt, penval))
 
-            If penval > 0.01 And ReactorOperationMode <> OperationMode.Adiabatic Then
+            If penval > ExternalLoopTolerance And ReactorOperationMode <> OperationMode.Adiabatic Then
                 Throw New Exception("Solution led to negative mole fractions.")
             End If
 
