@@ -745,6 +745,7 @@ Partial Class FormMain
             If DWSIM.App.IsRunningOnMono Then
 
                 'handler for unhandled exceptions (!)
+
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
                 AddHandler Application.ThreadException, AddressOf MyApplication_UnhandledException
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf MyApplication_UnhandledException2
