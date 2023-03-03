@@ -34,7 +34,7 @@ Partial Class FormWhatsNew
         Me.Viewer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Viewer.Location = New System.Drawing.Point(0, 0)
         Me.Viewer.Name = "Viewer"
-        Me.Viewer.Size = New System.Drawing.Size(1127, 602)
+        Me.Viewer.Size = New System.Drawing.Size(1127, 761)
         Me.Viewer.TabIndex = 1
         Me.Viewer.ZoomFactor = 1.0R
         '
@@ -42,13 +42,14 @@ Partial Class FormWhatsNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(1127, 602)
+        Me.ClientSize = New System.Drawing.Size(1127, 761)
         Me.Controls.Add(Me.Viewer)
         Me.Name = "FormWhatsNew"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "What's New in DWSIM / DWSIM Pro"
+        Me.TopMost = True
         CType(Me.Viewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

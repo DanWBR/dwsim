@@ -1451,7 +1451,7 @@ Public Class FormSimulWizard
             Next
         End If
 
-        If names.Contains("Hydrogen") Then
+        If names.Contains("hydrogen") Then
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
                     row.Cells(1).Value = 1
@@ -1461,7 +1461,7 @@ Public Class FormSimulWizard
             Next
         End If
 
-        If names.Contains("Water") And names.Count = 1 Then
+        If names.Contains("water") And names.Count = 1 Then
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Steam") Or
                     row.Cells(4).Value.ToString().Equals("CoolProp") Or

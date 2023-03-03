@@ -1173,6 +1173,7 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
+
             Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
             If u0 <> "NF" Then
@@ -1521,6 +1522,7 @@ Namespace UnitOperations
                     Next
                     proplist.Add("Estimated Height")
                     proplist.Add("Estimated Diameter")
+                    proplist.Add("Number of Stages")
                 Case PropertyType.ALL
                     For i = 0 To 2
                         proplist.Add("PROP_AC_" + CStr(i))
@@ -1546,6 +1548,7 @@ Namespace UnitOperations
                     Next
                     proplist.Add("Estimated Height")
                     proplist.Add("Estimated Diameter")
+                    proplist.Add("Number of Stages")
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -1599,6 +1602,8 @@ Namespace UnitOperations
                         value = EstimatedHeight
                     Case "Estimated Diameter"
                         value = EstimatedDiameter
+                    Case "Number of Stages"
+                        value = NumberOfStages
                 End Select
 
                 If prop.Contains("Stage_Efficiency_") Then
@@ -1714,6 +1719,8 @@ Namespace UnitOperations
                 For Each st As Stage In Me.Stages
                     st.Efficiency = propval
                 Next
+            ElseIf prop = "Number of Stages" Then
+                SetNumberOfStages(propval)
             End If
 
             If prop.Contains("Stage Index") Then

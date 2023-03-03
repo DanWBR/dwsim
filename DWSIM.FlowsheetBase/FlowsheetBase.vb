@@ -361,6 +361,12 @@ Imports System.Text.RegularExpressions
 
     Public Property RedirectMessages As Boolean Implements IFlowsheet.RedirectMessages
 
+    Public Sub Solve()
+
+        RequestCalculation()
+
+    End Sub
+
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional ChangeCalculationOrder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
         If Not sender Is Nothing Then

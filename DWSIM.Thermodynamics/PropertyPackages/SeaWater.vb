@@ -33,6 +33,8 @@ Namespace PropertyPackages
 
         Protected SIA As New Seawater
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Sub New(ByVal comode As Boolean)
 
             MyBase.New(comode)

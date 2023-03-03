@@ -1018,6 +1018,12 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Sub Solve()
+
+        SolveFlowsheet2()
+
+    End Sub
+
     Public Sub SolveFlowsheet2()
 
         If Not DynamicMode Then
@@ -3205,24 +3211,21 @@ Public Class FormFlowsheet
                                    UpdateOpenEditForms()
                                End Sub
             If Not sender Is Nothing Then
-                Task.Factory.StartNew(Sub()
-                                          If ExternalFlowsheetSolver IsNot Nothing Then
-                                              ExternalFlowsheetSolver.SolveFlowsheet(Me)
-                                          Else
-                                              FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
-                                          End If
-                                          UpdateOpenEditForms()
-                                      End Sub)
+                If ExternalFlowsheetSolver IsNot Nothing Then
+                    ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                Else
+                    FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+                End If
+                UpdateOpenEditForms()
             Else
-                Task.Factory.StartNew(Sub()
-                                          If ExternalFlowsheetSolver IsNot Nothing Then
-                                              ExternalFlowsheetSolver.SolveFlowsheet(Me)
-                                          Else
-                                              FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
+                If ExternalFlowsheetSolver IsNot Nothing Then
+                    ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                Else
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
                                                                                          Nothing, False, False,
                                                                                          Nothing, Nothing, finishaction)
-                                          End If
-                                      End Sub)
+                End If
+                UpdateOpenEditForms()
             End If
             UpdateInterface()
         End If

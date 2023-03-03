@@ -33,7 +33,6 @@ Namespace PropertyPackages
         Public Shadows Const ClassId As String = "170D6E8A-8880-4bf9-B7A0-E4A3FDBFD589"
 
         Friend m_iapws97 As New IAPWS_IF97
-        'Protected m_steam67 As New STEAM67
 
         Public Overrides ReadOnly Property Popular As Boolean = True
 
