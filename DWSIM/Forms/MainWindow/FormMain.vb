@@ -4848,6 +4848,11 @@ Label_00CC:
 
     End Sub
 
+    Private Sub WhatsNewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WhatsNewToolStripMenuItem.Click
+        Dim frm As New FormWhatsNew()
+        frm.Show()
+    End Sub
+
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked
