@@ -441,4 +441,11 @@ Public Module SIMDExtenders
 
     End Function
 
+
+    <System.Runtime.CompilerServices.Extension()> Public Function HasNegative(vector As Double()) As Double
+
+        Return vector.Any(Function(v) v < 0.0)
+
+    End Function
+
 End Module
