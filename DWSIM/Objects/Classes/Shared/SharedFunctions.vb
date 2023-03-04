@@ -86,6 +86,8 @@ Namespace DWSIM
 
             GlobalSettings.Settings.CalculatorActivated = True
 
+            GlobalSettings.Settings.CurrentVersion = My.Settings.CurrentVersion
+
             GlobalSettings.Settings.UserDatabases.Clear()
             If My.Settings.UserDatabases Is Nothing Then My.Settings.UserDatabases = New Specialized.StringCollection
             For Each item In My.Settings.UserDatabases

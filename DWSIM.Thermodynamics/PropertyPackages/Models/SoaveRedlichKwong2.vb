@@ -403,16 +403,16 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
             IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
 
-            Dim _zarray As Double(), Z As Double
+            Dim _zarray As List(Of Double), Z As Double
 
             _zarray = CalcZ2(AG, BG)
 
-            If _zarray.Length = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
+            If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
 
             If phase = 0 Then
-                Z = _zarray(0)
+                Z = _zarray.Min
             ElseIf phase = 1 Then
-                Z = _zarray(2)
+                Z = _zarray.Max
             Else
                 Dim _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, w)
                 Z = _zarray(_mingz(0))
@@ -471,7 +471,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As Double(), _mingz As Double(), Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ2(AG, BG)
             If phase = 0 Then
@@ -625,7 +625,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        Shared Function CalcZ2(AG As Double, BG As Double) As Double()
+        Shared Function CalcZ2(AG As Double, BG As Double) As List(Of Double)
 
             Dim coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -635,7 +635,55 @@ Namespace PropertyPackages.ThermoPlugs
             coeff(2) = -1
             coeff(3) = 1
 
-            Return Poly_Roots3(coeff)
+            Dim temp1 = Poly_Roots(coeff)
+
+            Dim tv = 0.0#
+            Dim ZV, tv2 As Double
+
+            Dim result As New List(Of Double)
+
+            If temp1(0, 0) > temp1(1, 0) Then
+                tv = temp1(1, 0)
+                temp1(1, 0) = temp1(0, 0)
+                temp1(0, 0) = tv
+                tv2 = temp1(1, 1)
+                temp1(1, 1) = temp1(0, 1)
+                temp1(0, 1) = tv2
+            End If
+            If temp1(0, 0) > temp1(2, 0) Then
+                tv = temp1(2, 0)
+                temp1(2, 0) = temp1(0, 0)
+                temp1(0, 0) = tv
+                tv2 = temp1(2, 1)
+                temp1(2, 1) = temp1(0, 1)
+                temp1(0, 1) = tv2
+            End If
+            If temp1(1, 0) > temp1(2, 0) Then
+                tv = temp1(2, 0)
+                temp1(2, 0) = temp1(1, 0)
+                temp1(1, 0) = tv
+                tv2 = temp1(2, 1)
+                temp1(2, 1) = temp1(1, 1)
+                temp1(1, 1) = tv2
+            End If
+
+            ZV = temp1(2, 0)
+            If temp1(2, 1) <> 0 Then
+                ZV = temp1(1, 0)
+                If temp1(1, 1) <> 0 Then
+                    ZV = temp1(0, 0)
+                End If
+            End If
+
+            If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
+            If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
+            If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
+
+            If result.Count = 0 Then
+                Throw New Exception("PR EOS: Unable to calculate compressility factor at given conditions.")
+            End If
+
+            Return result
 
         End Function
 

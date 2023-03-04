@@ -1036,6 +1036,7 @@ Public Class FormMain
         Dim currver = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         If (Settings.CurrentVersion <> currver) Then
             Settings.CurrentVersion = currver
+            My.Settings.CurrentVersion = currver
             Dim frmwn As New FormWhatsNew()
             frmwn.Show()
         End If

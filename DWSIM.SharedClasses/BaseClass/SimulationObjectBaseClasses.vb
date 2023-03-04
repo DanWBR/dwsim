@@ -1680,6 +1680,16 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overridable Sub SetPropertyPackageInstance(PP As IPropertyPackage) Implements ISimulationObject.SetPropertyPackageInstance
+
+        End Sub
+
+        Public Overridable Function ClearPropertyPackageInstance() As Boolean Implements ISimulationObject.ClearPropertyPackageInstance
+
+            Return False
+
+        End Function
+
     End Class
 
 End Namespace

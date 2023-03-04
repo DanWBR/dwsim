@@ -194,6 +194,10 @@ Imports DWSIM.Interfaces.Enums
 
     Property PropertyPackage As IPropertyPackage
 
+    Sub SetPropertyPackageInstance(PP As IPropertyPackage)
+
+    Function ClearPropertyPackageInstance() As Boolean
+
     ReadOnly Property IsFunctional As Boolean
 
     Function GetDynamicPropertyUnitType(id As String) As UnitOfMeasure

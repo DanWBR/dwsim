@@ -38,6 +38,8 @@ Namespace UnitOperations
 
         Public _ppid As String = ""
 
+        Private _ppwasset As Boolean = False
+
         Protected _capeopenmode As Boolean = False
 
         Public AccumulationStream As Thermodynamics.Streams.MaterialStream
@@ -252,6 +254,24 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Sub SetPropertyPackageInstance(PP As IPropertyPackage)
+
+            _ppwasset = True
+            _pp = PP
+
+        End Sub
+
+        Public Overrides Function ClearPropertyPackageInstance() As Boolean
+
+            Dim hadvalue As Boolean = _pp IsNot Nothing
+
+            _pp = Nothing
+            _ppwasset = False
+
+            Return hadvalue
+
+        End Function
+
         ''' <summary>
         ''' Gets or sets the property package associated with this object.
         ''' </summary>
@@ -260,27 +280,34 @@ Namespace UnitOperations
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Public Overrides Property PropertyPackage() As Interfaces.IPropertyPackage
             Get
-                If Not _pp Is Nothing Then
-                    Return _pp
-                Else
-                    _pp = Nothing
-                    Dim firstpp = FlowSheet.PropertyPackages.Values.First()
-                    _ppid = firstpp.UniqueID
-                    Return firstpp
-                End If
                 If _ppid Is Nothing Then _ppid = ""
-                If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
-                    Return FlowSheet.PropertyPackages(_ppid)
+                If _pp IsNot Nothing And _ppwasset Then
+                    Return _pp
+                ElseIf _pp IsNot Nothing AndAlso FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
+                    Return FlowSheet.PropertyPackages(_pp.UniqueID)
                 Else
-                    Dim firstpp = FlowSheet.PropertyPackages.Values.First()
-                    _ppid = firstpp.UniqueID
-                    Return firstpp
+                    If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
+                        Return FlowSheet.PropertyPackages(_ppid)
+                    Else
+                        Dim firstpp = FlowSheet.PropertyPackages.Values.First()
+                        _ppid = firstpp.UniqueID
+                        Return firstpp
+                    End If
                 End If
             End Get
             Set(ByVal value As Interfaces.IPropertyPackage)
                 If value IsNot Nothing Then
-                    _ppid = value.UniqueID
-                    _pp = value
+                    If FlowSheet Is Nothing Then
+                        _ppwasset = True
+                        _pp = value
+                    Else
+                        If FlowSheet.PropertyPackages.ContainsKey(value.UniqueID) Then
+                            _ppid = value.UniqueID
+                        Else
+                            _ppwasset = True
+                            _pp = value
+                        End If
+                    End If
                     SetDirtyStatus(True)
                 Else
                     _pp = Nothing
