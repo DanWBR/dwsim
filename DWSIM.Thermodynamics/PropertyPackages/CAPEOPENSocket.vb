@@ -106,6 +106,17 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function Clone() As PropertyPackage
+
+            Dim pp = MemberwiseClone()
+
+            pp.FlashSettings = New Dictionary(Of FlashSetting, String)(FlashSettings)
+            pp.ForcedSolids = New List(Of String)(ForcedSolids)
+
+            Return pp
+
+        End Function
+
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
             'do nothing
         End Sub
@@ -1668,8 +1679,11 @@ Namespace PropertyPackages
             End If
 
             Dim info As XElement = (From el As XElement In data Select el Where el.Name = "CAPEOPEN_Object_Info").SingleOrDefault
-            _selts = New CapeOpenObjInfo
-            _selts.LoadData(info.Elements.ToList)
+            Try
+                _selts = New CapeOpenObjInfo
+                _selts.LoadData(info.Elements.ToList)
+            Catch ex As Exception
+            End Try
 
             PersistLoad(Nothing)
 
@@ -1688,7 +1702,9 @@ Namespace PropertyPackages
                 .Add(New XElement("Tag", Tag))
                 .Add(New XElement("CAPEOPEN_Version", _coversion))
                 .Add(New XElement("CAPEOPEN_PropertyPackageName", _ppname))
-                .Add(New XElement("CAPEOPEN_Object_Info", _selts.SaveData().ToArray))
+                If _selts IsNot Nothing Then
+                    .Add(New XElement("CAPEOPEN_Object_Info", _selts.SaveData().ToArray))
+                End If
                 .Add(New XElement("CompoundMappings"))
                 For Each kvp As KeyValuePair(Of String, String) In _mappings
                     .Item(.Count - 1).Add(New XElement("CompoundMapping", New XAttribute("From", kvp.Key), New XAttribute("To", kvp.Value)))
