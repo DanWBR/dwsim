@@ -260,7 +260,7 @@ Namespace UnitOperations
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Public Overrides Property PropertyPackage() As Interfaces.IPropertyPackage
             Get
-                If Not _pp Is Nothing AndAlso FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
+                If Not _pp Is Nothing Then
                     Return _pp
                 Else
                     _pp = Nothing

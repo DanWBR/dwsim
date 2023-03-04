@@ -365,6 +365,7 @@ Namespace UnitOperations
             End If
 
             StIn1 = calc.CreateMaterialStream({"Air"}, {1.0})
+            StIn1.SetFlowsheet(FlowSheet)
 
             If UseGlobalWeather Then
 
@@ -384,7 +385,8 @@ Namespace UnitOperations
             StIn1.Phases(0).Properties.molarflow = Nothing
             StIn1.SetVolumetricFlow(ActualAirFlow)
 
-            StOut1 = StIn1.Clone()
+            StOut1 = calc.CreateMaterialStream({"Air"}, {1.0})
+            StOut1.SetFlowsheet(FlowSheet)
 
             StIn1.PropertyPackage = rpp
             StOut1.PropertyPackage = rpp

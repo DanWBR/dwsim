@@ -244,7 +244,7 @@ Namespace Streams
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Public Shadows Property PropertyPackage() As PropertyPackage
             Get
-                If Not _pp Is Nothing AndAlso FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
+                If Not _pp Is Nothing Then
                     Return _pp
                 Else
                     _pp = Nothing
@@ -6309,18 +6309,14 @@ Namespace Streams
         Public Function ShallowClone() As Streams.MaterialStream
 
             Dim ms As New MaterialStream("", "", FlowSheet, PropertyPackage)
-            If Not FlowSheet Is Nothing Then
-                FlowSheet.AddCompoundsToMaterialStream(ms)
-            Else
-                For Each phase As IPhase In ms.Phases.Values
-                    For Each comp In Me.Phases(0).Compounds.Values
-                        With phase
-                            .Compounds.Add(comp.Name, New Compound(comp.Name, ""))
-                            .Compounds(comp.Name).ConstantProperties = comp.ConstantProperties
-                        End With
-                    Next
+            For Each phase As IPhase In ms.Phases.Values
+                For Each comp In Me.Phases(0).Compounds.Values
+                    With phase
+                        .Compounds.Add(comp.Name, New Compound(comp.Name, ""))
+                        .Compounds(comp.Name).ConstantProperties = comp.ConstantProperties
+                    End With
                 Next
-            End If
+            Next
             ms.Assign(Me)
             ms.AssignProps(Me)
             ms.TotalEnergyFlow = TotalEnergyFlow
