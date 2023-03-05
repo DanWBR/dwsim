@@ -3369,6 +3369,7 @@
     <None Include="Resources\icons8-python.png" />
     <None Include="Resources\ProIcon128.png" />
     <None Include="Resources\Icon128.ico" />
+    <None Include="Resources\icons8-technical_support.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

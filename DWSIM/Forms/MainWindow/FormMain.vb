@@ -121,9 +121,10 @@ Public Class FormMain
             Settings.DpiScale = g1.DpiX / 96.0
 
             Me.ToolStrip1.AutoSize = False
-            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
             Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             Me.MenuStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.MenuStrip1.Size = New Size(MenuStrip1.Width, 28 * Settings.DpiScale)
             For Each item In Me.ToolStrip1.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
@@ -179,6 +180,7 @@ Public Class FormMain
             Next
 
             tsmiFreeProTrial.Visible = Not IsPro
+            tsmiPrivateSupport.Visible = Not IsPro
 
 #If LINUX = False Then
             If IsPro Then StatusStrip1.Visible = False
@@ -4852,6 +4854,10 @@ Label_00CC:
     Private Sub WhatsNewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WhatsNewToolStripMenuItem.Click
         Dim frm As New FormWhatsNew()
         frm.Show()
+    End Sub
+
+    Private Sub tsmiPrivateSupport_Click(sender As Object, e As EventArgs) Handles tsmiPrivateSupport.Click
+        Process.Start("https://simulate365.com/private-support/")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

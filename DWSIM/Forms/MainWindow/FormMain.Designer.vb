@@ -76,7 +76,9 @@ Partial Class FormMain
         Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RastreamentoDeBugsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DIscordChannelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WhatsNewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiPrivateSupport = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiFreeProTrial = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -119,7 +121,6 @@ Partial Class FormMain
         Me.tsbdonate1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.tsbdonate2 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.WhatsNewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -130,7 +131,7 @@ Partial Class FormMain
         '
         Me.MenuStrip1.AllowItemReorder = True
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI, Me.tsmiFreeProTrial})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI, Me.tsmiPrivateSupport, Me.tsmiFreeProTrial})
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -419,11 +420,24 @@ Partial Class FormMain
         Me.DIscordChannelToolStripMenuItem.Name = "DIscordChannelToolStripMenuItem"
         resources.ApplyResources(Me.DIscordChannelToolStripMenuItem, "DIscordChannelToolStripMenuItem")
         '
+        'WhatsNewToolStripMenuItem
+        '
+        Me.WhatsNewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icon_info
+        Me.WhatsNewToolStripMenuItem.Name = "WhatsNewToolStripMenuItem"
+        resources.ApplyResources(Me.WhatsNewToolStripMenuItem, "WhatsNewToolStripMenuItem")
+        '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.DWSIM_ico_64
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         resources.ApplyResources(Me.AboutToolStripMenuItem, "AboutToolStripMenuItem")
+        '
+        'tsmiPrivateSupport
+        '
+        Me.tsmiPrivateSupport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tsmiPrivateSupport.Image = Global.DWSIM.My.Resources.Resources.icons8_technical_support
+        Me.tsmiPrivateSupport.Name = "tsmiPrivateSupport"
+        resources.ApplyResources(Me.tsmiPrivateSupport, "tsmiPrivateSupport")
         '
         'tsmiFreeProTrial
         '
@@ -675,12 +689,6 @@ Partial Class FormMain
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
         resources.ApplyResources(Me.ToolStripStatusLabel2, "ToolStripStatusLabel2")
         Me.ToolStripStatusLabel2.Spring = True
-        '
-        'WhatsNewToolStripMenuItem
-        '
-        Me.WhatsNewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icon_info
-        Me.WhatsNewToolStripMenuItem.Name = "WhatsNewToolStripMenuItem"
-        resources.ApplyResources(Me.WhatsNewToolStripMenuItem, "WhatsNewToolStripMenuItem")
         '
         'FormMain
         '
@@ -982,4 +990,5 @@ Partial Class FormMain
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Public WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents WhatsNewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsmiPrivateSupport As ToolStripMenuItem
 End Class
