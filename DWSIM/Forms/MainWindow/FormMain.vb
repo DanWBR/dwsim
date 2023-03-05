@@ -131,6 +131,9 @@ Public Class FormMain
                 End If
             Next
             Me.ToolStrip1.Invalidate()
+            Me.StatusStrip1.AutoSize = False
+            Me.StatusStrip1.Size = New Size(StatusStrip1.Width, 22 * Settings.DpiScale)
+            Me.StatusStrip1.Invalidate()
 
         End Using
 

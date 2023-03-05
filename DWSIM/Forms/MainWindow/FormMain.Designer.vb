@@ -658,8 +658,8 @@ Partial Class FormMain
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2})
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2})
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusStrip1.SizingGrip = False
