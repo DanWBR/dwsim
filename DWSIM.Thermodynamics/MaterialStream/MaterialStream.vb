@@ -8182,6 +8182,14 @@ Namespace Streams
             Return Phases(0).Properties.molecularWeight.GetValueOrDefault
         End Function
 
+        Public Function CalcOverallMolecularWeight() As Double
+            Dim MW As Double
+            For Each comp In Phases(0).Compounds.Values
+                MW += comp.MoleFraction.GetValueOrDefault() * comp.ConstantProperties.Molar_Weight
+            Next
+            Return MW
+        End Function
+
         ''' <summary>
         ''' Sets stream molar flow.
         ''' </summary>
