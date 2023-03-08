@@ -70,6 +70,29 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+
+            If Not CurrentMaterialStream.Phases(0).Compounds.Keys.Contains("Water") Then
+                Throw New Exception("Steam Tables Property Package is meant to be used with Water streams only.")
+            End If
+
+        End Sub
+
+        Private Sub CheckStream()
+
+            If Not CurrentMaterialStream.Phases(0).Compounds.Keys.Contains("Water") Then
+                Throw New Exception("Steam Tables Property Package is meant to be used with Water streams only.")
+            Else
+                If Not CurrentMaterialStream.Phases(0).Compounds("Water").MoleFraction.GetValueOrDefault() > 0.99 Then
+                    Throw New Exception("Stream has Water but it is not the only compound with a significant amount.")
+                End If
+            End If
+
+        End Sub
+
+
+
+
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
                 If CurrentMaterialStream IsNot Nothing Then
@@ -103,6 +126,8 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec)
+
+            CheckStream()
 
             If ShouldBypassEquilibriumCalculation() Then
                 MyBase.DW_CalcEquilibrium(spec1, spec2)
@@ -536,6 +561,8 @@ FINAL:
         End Sub
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
+
+            CheckStream()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
@@ -1009,6 +1036,9 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            CheckStream()
+
             Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim fugcoeff(n) As Double
@@ -1022,7 +1052,9 @@ FINAL:
                     fugcoeff(i) = 1
                 Next
             End If
+
             Return fugcoeff
+
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean

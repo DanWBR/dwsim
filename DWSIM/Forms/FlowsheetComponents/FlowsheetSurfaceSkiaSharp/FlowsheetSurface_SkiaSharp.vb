@@ -61,6 +61,8 @@ Public Class FlowsheetSurface_SkiaSharp
             FControl = fscontrol
         End If
 
+        FlowsheetSurface.Zoom = Settings.DpiScale
+
     End Sub
 
     Public Sub HandleKeyDown(e As KeyEventArgs)
@@ -94,7 +96,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Me.ToolStripFlowsheet.AutoSize = False
             Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
-            Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + (tstbSearch.Width) * (Settings.DpiScale - 1) + 60, 28 * Settings.DpiScale)
+            Me.TSTBZoom.Size = New Size(Me.TSTBZoom.Width * Settings.DpiScale, TSTBZoom.Height)
+            Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + (tstbSearch.Width) * (Settings.DpiScale - 1) + 60, 28 * 2 * Settings.DpiScale)
             Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             For Each item In Me.ToolStripFlowsheet.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
