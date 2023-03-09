@@ -137,7 +137,6 @@
     <Compile Include="Services\FilePickerService.cs" />
     <Compile Include="Services\FileUploaderService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Settings\DashboardSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">

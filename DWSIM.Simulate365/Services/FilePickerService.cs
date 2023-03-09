@@ -1,5 +1,5 @@
 ﻿using DWSIM.Simulate365.Models;
-using DWSIM.Simulate365.Settings;
+using DWSIM.UI.Web.Settings;
 using Microsoft.Graph;
 using Newtonsoft.Json;
 using System;
@@ -67,7 +67,7 @@ namespace DWSIM.Simulate365.Services
                 throw new Exception("An error occurred while opening file from S365 Dashboard.", ex);
             }
         }
-        public void SaveFile(string filename, string parentDirectoryUniqueId, string fullPath, UploadConflictAction? conflictAction)
+        public void SaveFile(string filename, string parentDirectoryUniqueId, string fullPath, int? conflictAction)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace DWSIM.Simulate365.Services
                     Filename = filename,
                     ParentUniqueIdentifier = parentDirectoryUniqueId,
                     SimulatePath = fullPath,
-                    ConflictAction = conflictAction
+                    ConflictAction = conflictAction.HasValue ? (UploadConflictAction)conflictAction.Value : (UploadConflictAction?)null
                 };
 
                 this.S365DashboardSaveFileClicked?.Invoke(this, this.SelectedSaveFile);

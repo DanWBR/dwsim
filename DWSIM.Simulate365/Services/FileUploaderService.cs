@@ -1,5 +1,5 @@
 ﻿using DWSIM.Simulate365.Models;
-using DWSIM.Simulate365.Settings;
+using DWSIM.UI.Web.Settings;
 using Microsoft.Graph;
 using Newtonsoft.Json;
 using System;
@@ -38,8 +38,9 @@ namespace DWSIM.Simulate365.Services
                 {
                     FileUniqueIdentifier = file.FileUniqueIdentifier.ToString(),
                     ParentUniqueIdentifier = parentUniqueIdentifier,
-                    Filename = filename,
-                    FullPath = simulatePath
+                    Filename = file.Filename,
+                    FullPath = file.SimulatePath
+
                 };
 
             }
