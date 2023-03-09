@@ -282,7 +282,7 @@ Click "Next" to continue.</value>
     <value>245, 23</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 24</value>
+    <value>7, 21</value>
   </data>
   <data name="Column6.ToolTipText" xml:space="preserve">
     <value>Recommended</value>

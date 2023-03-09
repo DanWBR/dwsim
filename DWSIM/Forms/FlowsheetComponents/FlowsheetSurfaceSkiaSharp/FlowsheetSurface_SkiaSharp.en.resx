@@ -119,19 +119,19 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 161</value>
+    <value>881, 184</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 155</value>
+    <value>24, 178</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 194</value>
+    <value>33, 217</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 155</value>
+    <value>24, 178</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 221</value>
+    <value>941, 244</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
@@ -219,7 +219,7 @@
     <value>232, 7</value>
   </data>
   <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 221</value>
+    <value>0, 244</value>
   </data>
   <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>929, 0</value>
@@ -235,16 +235,16 @@
     <value>120</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 396</value>
+    <value>941, 419</value>
   </data>
   <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>260</value>
+    <value>283</value>
   </data>
   <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 396</value>
+    <value>941, 419</value>
   </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 396</value>
+    <value>941, 419</value>
   </data>
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -342,9 +342,6 @@
   </data>
   <data name="ToolStripFlowsheet.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="ToolStripFlowsheet.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -608,7 +605,7 @@
     <value>0, 27</value>
   </data>
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 46</value>
+    <value>941, 23</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
