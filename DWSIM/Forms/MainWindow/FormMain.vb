@@ -2765,6 +2765,8 @@ Public Class FormMain
 
             Try
                 form.FormLog.DockPanel = form.dckPanel
+                form.FormLog.Hide()
+                form.FormWatch.Hide()
                 form.FormSpreadsheet?.Show(form.dckPanel)
                 form.FormCharts?.Show(form.dckPanel)
                 form.FormMatList?.Show(form.dckPanel)
@@ -3320,6 +3322,8 @@ Public Class FormMain
 
             Try
                 form.FormLog.DockPanel = form.dckPanel
+                form.FormLog.Hide()
+                form.FormWatch.Hide()
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
