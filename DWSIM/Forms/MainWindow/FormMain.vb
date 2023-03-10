@@ -2107,7 +2107,6 @@ Public Class FormMain
 
         Dim filename As String
 
-        If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
 
         form.FilePath = handler.FullPath
         form.Options.FilePath = handler.FullPath
@@ -2185,6 +2184,8 @@ Public Class FormMain
 
         Me.Invalidate()
         Application.DoEvents()
+
+        If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
 
         If TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
             Dim mypath As String = simulationfilename
@@ -3578,8 +3579,6 @@ Public Class FormMain
 
         RaiseEvent FlowsheetSavingToXML(form, New EventArgs())
 
-        If simulationfilename = "" Then simulationfilename = handler.FullPath
-
         Dim xdoc As New XDocument()
         Dim xel As XElement
 
@@ -3761,6 +3760,7 @@ Public Class FormMain
             handler.Write(stream)
         End Using
 
+        If simulationfilename = "" Then simulationfilename = handler.FullPath
         Dim fileExtension As String = IO.Path.GetExtension(simulationfilename).ToLower
 
         If (fileExtension.Contains("dwxml") Or fileExtension.Contains("dwxmz")) Then

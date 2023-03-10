@@ -211,7 +211,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings\Properties.resx" />
-    <EmbeddedResource Include="Strings\Strings.resx" />
+    <EmbeddedResource Include="Strings\Strings.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
