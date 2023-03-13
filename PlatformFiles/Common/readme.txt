@@ -66,6 +66,7 @@ Version 8.4.1
 
 - Steam Tables PP now checks for Water exclusivity on Material Streams
 - Classic UI layout adjustments
+- Fixed an issue with System.Tuple.dll
 
 Version 8.4.0
 
