@@ -178,7 +178,7 @@ Public Class FlowsheetSurfaceControl
                 End If
             End If
 
-            obj.DoubleClickAction?.Invoke(obj)
+            obj?.DoubleClickAction?.Invoke(obj)
 
         End If
 
