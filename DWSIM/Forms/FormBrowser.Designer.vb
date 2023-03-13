@@ -47,6 +47,7 @@ Partial Class FormBrowser
         Me.Controls.Add(Me.Viewer)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormBrowser"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Browser Window"
         CType(Me.Viewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
