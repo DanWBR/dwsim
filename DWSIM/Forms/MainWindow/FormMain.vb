@@ -1050,6 +1050,13 @@ Public Class FormMain
 
         AnalyticsProvider?.Initialize()
 
+        'send screen characteristics
+
+        AnalyticsProvider?.RegisterEvent("Screen Width", My.Computer.Screen.Bounds.Width, Nothing)
+        AnalyticsProvider?.RegisterEvent("Screen Height", My.Computer.Screen.Bounds.Height, Nothing)
+        AnalyticsProvider?.RegisterEvent("Screen Device Name", My.Computer.Screen.DeviceName, Nothing)
+        AnalyticsProvider?.RegisterEvent("Screen Scaling Factor", Settings.DpiScale, Nothing)
+
         FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub

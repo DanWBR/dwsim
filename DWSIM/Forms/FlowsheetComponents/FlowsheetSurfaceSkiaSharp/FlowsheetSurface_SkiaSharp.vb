@@ -53,12 +53,14 @@ Public Class FlowsheetSurface_SkiaSharp
             fscontrol.FlowsheetObject = Flowsheet
             FlowsheetSurface = fscontrol.FlowsheetSurface
             FControl = fscontrol
+            FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "Software", Nothing)
         Else
             Dim fscontrol As New FlowsheetSurfaceGLControl
             fscontrol.Dock = DockStyle.Fill
             fscontrol.FlowsheetObject = Flowsheet
             FlowsheetSurface = fscontrol.FlowsheetSurface
             FControl = fscontrol
+            FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "OpenGL", Nothing)
         End If
 
         FlowsheetSurface.Zoom = Settings.DpiScale
