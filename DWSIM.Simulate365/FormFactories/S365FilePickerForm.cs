@@ -85,8 +85,8 @@ namespace DWSIM.Simulate365.FormFactories
             string title = "Save file to Simulate 365 Dashboard";
             _webUIForm = new WebUIForm(initialUrl, title, true)
             {
-                Width = 1300,
-                Height = 800
+                Width = (int)(1300 * DWSIM.GlobalSettings.Settings.DpiScale),
+                Height = (int)(800 * DWSIM.GlobalSettings.Settings.DpiScale)
             };
 
             _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);
@@ -130,8 +130,8 @@ namespace DWSIM.Simulate365.FormFactories
             string title = "Open file from Simulate 365 Dashboard";
             _webUIForm = new WebUIForm(initialUrl, title, true)
             {
-                Width = 1300,
-                Height = 800
+                Width = (int)(1300 * DWSIM.GlobalSettings.Settings.DpiScale),
+                Height = (int)(800 * DWSIM.GlobalSettings.Settings.DpiScale)
             };
 
             _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);
