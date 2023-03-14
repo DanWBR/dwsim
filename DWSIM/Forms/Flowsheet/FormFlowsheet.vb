@@ -559,7 +559,6 @@ Public Class FormFlowsheet
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
         If FormMain.IsPro Then
-            DashboardToolStripMenuItem.Visible = False
             ProToolsToolStripMenuItem.Visible = False
         End If
 
@@ -643,6 +642,17 @@ Public Class FormFlowsheet
         Next
 
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+        'send screen characteristics
+
+        Dim data = New Dictionary(Of String, String) From {
+            {"Screen Width", My.Computer.Screen.Bounds.Width},
+            {"Screen Height", My.Computer.Screen.Bounds.Height},
+            {"Screen Device Name", My.Computer.Screen.DeviceName},
+            {"Screen Scaling Factor", Settings.DpiScale}
+        }
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Screen Characteristics", "", data)
 
     End Sub
 
