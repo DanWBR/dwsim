@@ -4151,6 +4151,16 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        If Not FormLog.Visible Then
+            FormLog.Show(dckPanel)
+        Else
+            FormLog.Hide()
+        End If
+
+    End Sub
+
     Public Sub SetDirtyStatus() Implements IFlowsheet.SetDirtyStatus
 
         For Each obj In SimulationObjects.Values
