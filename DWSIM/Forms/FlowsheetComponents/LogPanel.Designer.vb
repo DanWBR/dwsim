@@ -214,7 +214,6 @@ Partial Class LogPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.CloseButtonVisible = False
         Me.Controls.Add(Me.Grid1)
         Me.HideOnClose = True
         Me.Name = "LogPanel"

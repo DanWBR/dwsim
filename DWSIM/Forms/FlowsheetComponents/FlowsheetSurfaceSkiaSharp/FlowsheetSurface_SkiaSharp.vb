@@ -96,6 +96,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Me.ToolStripFlowsheet.AutoSize = False
             Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
+            Me.tbFontSize.Size = New Size(Me.tbFontSize.Width * Settings.DpiScale, tbFontSize.Height)
             Me.TSTBZoom.Size = New Size(Me.TSTBZoom.Width * Settings.DpiScale, TSTBZoom.Height)
             Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + (tstbSearch.Width) * (Settings.DpiScale - 1) + 60, 28 * 2 * Settings.DpiScale)
             Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)

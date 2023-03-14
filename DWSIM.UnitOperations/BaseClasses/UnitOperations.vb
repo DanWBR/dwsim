@@ -289,7 +289,10 @@ Namespace UnitOperations
                     If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
                         Return FlowSheet.PropertyPackages(_ppid)
                     Else
-                        Dim firstpp = FlowSheet.PropertyPackages.Values.First()
+                        Dim firstpp = FlowSheet.PropertyPackages.Values.FirstOrDefault()
+                        If firstpp Is Nothing Then
+                            Throw New Exception("Please add at least one Property Package to the simulation.")
+                        End If
                         _ppid = firstpp.UniqueID
                         Return firstpp
                     End If

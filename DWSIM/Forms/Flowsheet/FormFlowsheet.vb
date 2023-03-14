@@ -334,17 +334,16 @@ Public Class FormFlowsheet
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
 
-            FormLog.Show(dckPanel)
+            FormLog.Hide()
+            FormWatch.Hide()
+
             FormSurface.Show(dckPanel)
             FormDynamics.Show(FormSurface.Pane, Nothing)
             FormMatList.Show(FormSurface.Pane, Nothing)
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormCharts.Show(FormSurface.Pane, Nothing)
-            FormWatch.Show(dckPanel)
-            'FormIntegratorControls.Show(dckPanel)
             FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
-            'FormIPyConsole.Show(dckPanel)
 
             FormSurface.Activate()
 
@@ -922,16 +921,32 @@ Public Class FormFlowsheet
                                                   Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
                                                       img = My.Resources._error
                                                       strtipo = DWSIM.App.GetLocalString("Aviso")
+                                                      lblLastMessage.ForeColor = Color.OrangeRed
+                                                      lblLastMessage.ActiveLinkColor = Color.OrangeRed
+                                                      lblLastMessage.VisitedLinkColor = Color.OrangeRed
+                                                      lblLastMessage.LinkColor = Color.OrangeRed
                                                   Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
                                                       img = My.Resources.exclamation
                                                       strtipo = DWSIM.App.GetLocalString("Erro")
+                                                      lblLastMessage.ForeColor = Color.Red
+                                                      lblLastMessage.ActiveLinkColor = Color.Red
+                                                      lblLastMessage.VisitedLinkColor = Color.Red
+                                                      lblLastMessage.LinkColor = Color.Red
                                                   Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
                                                       If Not showtips Then Exit Sub
                                                       img = My.Resources.lightbulb
                                                       strtipo = DWSIM.App.GetLocalString("Dica")
+                                                      lblLastMessage.ForeColor = Color.Blue
+                                                      lblLastMessage.ActiveLinkColor = Color.Blue
+                                                      lblLastMessage.VisitedLinkColor = Color.Blue
+                                                      lblLastMessage.LinkColor = Color.Blue
                                                   Case Else
                                                       img = My.Resources.information
                                                       strtipo = DWSIM.App.GetLocalString("Mensagem")
+                                                      lblLastMessage.ForeColor = Color.Blue
+                                                      lblLastMessage.ActiveLinkColor = Color.Blue
+                                                      lblLastMessage.VisitedLinkColor = Color.Blue
+                                                      lblLastMessage.LinkColor = Color.Blue
                                               End Select
 
                                               If frlog.Grid1.Rows.Count > 1500 Then
@@ -948,6 +963,9 @@ Public Class FormFlowsheet
                                                   frlog.Grid1.ClearSelection()
                                                   frlog.Grid1.Rows(0).Selected = True
                                               End If
+
+                                              lblLastMessage.Text = "[" + Date.Now.ToString() + "] " + texto
+                                              lblLastMessage.LinkArea = New LinkArea(0, lblLastMessage.Text.Length)
 
                                           End If
 
@@ -4120,6 +4138,16 @@ Public Class FormFlowsheet
         Await fh.Viewer.EnsureCoreWebView2Async()
         fh.Viewer.NavigateToString(htmlcontent)
         fh.Show(dckPanel)
+
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblLastMessage.LinkClicked
+
+        If Not FormLog.Visible Then
+            FormLog.Show(dckPanel)
+        Else
+            FormLog.Hide()
+        End If
 
     End Sub
 
