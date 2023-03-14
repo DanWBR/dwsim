@@ -30,7 +30,8 @@ namespace DWSIM.UI.Web.Services
                 DashboardServiceUrl = DashboardSettings.DashboardServiceUrl,
                 ExcelRunnerServiceUrl = DashboardSettings.ExcelRunnerServiceUrl,
                 SensitivityStudiesServiceUrl = DashboardSettings.SensitivityStudiesServiceUrl,
-                TakeHomeExamsServiceUrl = DashboardSettings.TakeHomeExamsServiceUrl
+                TakeHomeExamsServiceUrl = DashboardSettings.TakeHomeExamsServiceUrl,
+                Environment=DashboardSettings.Environment
             }, new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()

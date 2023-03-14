@@ -12,13 +12,15 @@ namespace DWSIM.UI.Web.Settings
         public static string DashboardServiceUrl = "https://s365-dashboard-v2-service-staging.azurewebsites.net";
         public static string ExcelRunnerServiceUrl = "https://excel-runner-staging.azurewebsites.net";
         public static string SensitivityStudiesServiceUrl = "https://sensitivity-studies-staging.azurewebsites.net";
-        public static string TakeHomeExamsServiceUrl = "https://take-home-exams-staging.azurewebsites.net";   
+        public static string TakeHomeExamsServiceUrl = "https://take-home-exams-staging.azurewebsites.net";
+        public static string Environment = "Staging";
 
 #else
         public static string DashboardServiceUrl = "https://s365-dashboard-v2-service.azurewebsites.net";
         public static string ExcelRunnerServiceUrl = "https://excel-runner.azurewebsites.net";
         public static string SensitivityStudiesServiceUrl = "https://sensitivity-studies.azurewebsites.net";
         public static string TakeHomeExamsServiceUrl = "https://take-home-exams.azurewebsites.net";
+         public static string Environment = "Production";
 
 #endif
     }
