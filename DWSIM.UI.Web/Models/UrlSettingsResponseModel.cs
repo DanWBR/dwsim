@@ -12,5 +12,6 @@ namespace DWSIM.UI.Web.Models
         public string ExcelRunnerServiceUrl { get; set; }
         public string SensitivityStudiesServiceUrl { get; set; }
         public string TakeHomeExamsServiceUrl { get; set; }
+        public string Environment { get; set; }
     }
 }
