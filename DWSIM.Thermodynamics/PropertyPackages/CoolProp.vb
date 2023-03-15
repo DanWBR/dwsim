@@ -1344,7 +1344,11 @@ Namespace PropertyPackages
                                 If T < Tb And Abs(T - Tb) >= 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 ElseIf Abs(T - Tb) < 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("H", "T", Tb * 0.99, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Enthalpy, compound " &
                                                      vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1392,9 +1396,19 @@ Namespace PropertyPackages
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T > Tb And Abs(T - Tb) > 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    Catch ex As Exception
+                                        If Abs(T - Tmin) < 0.05 Then
+                                            vk(i) = CoolProp.PropsSI("H", "T", Tmin + 0.05, "P", P, GetCoolPropName(vn(i))) / 1000
+                                        End If
+                                    End Try
                                 ElseIf Abs(T - Tb) < 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("H", "T", Tb * 1.01, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1493,7 +1507,11 @@ Namespace PropertyPackages
                                 If T < Tb And Abs(T - Tb) >= 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 ElseIf (T - Tb) < 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("S", "T", Tb * 0.99, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Entropy, compound " &
                                                      vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1543,7 +1561,11 @@ Namespace PropertyPackages
                                 If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 ElseIf (T - Tb) < 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("S", "T", Tb * 1.01, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Entropy, compound " &
                                                      vn(i) & ". Extrapolating curve to obtain a value...")
