@@ -1341,19 +1341,27 @@ Namespace PropertyPackages
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
+                                If T < Tb And Abs(T - Tb) >= 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
-                                ElseIf (T - Tb) < 0.01 Then
+                                ElseIf Abs(T - Tb) < 0.01 Then
                                     vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Enthalpy, compound " &
                                                      vn(i) & ". Extrapolating curve to obtain a value...")
                                     Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                    x1 = Tmin + (Tb - Tmin) * 0.9
-                                    x2 = Tmin + (Tb - Tmin) * 0.8
-                                    x3 = Tmin + (Tb - Tmin) * 0.7
-                                    x4 = Tmin + (Tb - Tmin) * 0.6
-                                    x5 = Tmin + (Tb - Tmin) * 0.5
+                                    If Abs(T - Tmin) > Abs(Tb - T) Then
+                                        x1 = Tmin + (Tb - Tmin) * 0.5
+                                        x2 = Tmin + (Tb - Tmin) * 0.4
+                                        x3 = Tmin + (Tb - Tmin) * 0.3
+                                        x4 = Tmin + (Tb - Tmin) * 0.2
+                                        x5 = Tmin + (Tb - Tmin) * 0.1
+                                    Else
+                                        x1 = Tmin + (Tb - Tmin) * 0.9
+                                        x2 = Tmin + (Tb - Tmin) * 0.8
+                                        x3 = Tmin + (Tb - Tmin) * 0.7
+                                        x4 = Tmin + (Tb - Tmin) * 0.6
+                                        x5 = Tmin + (Tb - Tmin) * 0.5
+                                    End If
                                     p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
                                     p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
                                     p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
@@ -1385,7 +1393,7 @@ Namespace PropertyPackages
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
-                                ElseIf (T - Tb) < 0.01 Then
+                                ElseIf Abs(T - Tb) < 0.01 Then
                                     vk(i) = CoolProp.PropsSI("H", "P", P, "Q", 1, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
@@ -1416,7 +1424,9 @@ Namespace PropertyPackages
                         vk(i) = Vxw(i) * vk(i)
                     Next
                 Case State.Solid
-                    Return DW_CalcEnthalpy(Vx, T, P, State.Liquid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    Dim Hl = DW_CalcEnthalpy(Vx, T, P, State.Liquid)
+                    Dim Hfus = Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    Return Hl - Hfus
             End Select
 
             val = MathEx.Common.Sum(vk)
@@ -1480,7 +1490,7 @@ Namespace PropertyPackages
                                 Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                                 'If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
+                                If T < Tb And Abs(T - Tb) >= 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 ElseIf (T - Tb) < 0.01 Then
                                     vk(i) = CoolProp.PropsSI("S", "P", P, "Q", 0, GetCoolPropName(vn(i))) / 1000
@@ -1488,11 +1498,19 @@ Namespace PropertyPackages
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Entropy, compound " &
                                                      vn(i) & ". Extrapolating curve to obtain a value...")
                                     Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
-                                    x1 = Tmin + (Tb - Tmin) * 0.9
-                                    x2 = Tmin + (Tb - Tmin) * 0.8
-                                    x3 = Tmin + (Tb - Tmin) * 0.7
-                                    x4 = Tmin + (Tb - Tmin) * 0.6
-                                    x5 = Tmin + (Tb - Tmin) * 0.5
+                                    If Abs(T - Tmin) > Abs(Tb - T) Then
+                                        x1 = Tmin + (Tb - Tmin) * 0.5
+                                        x2 = Tmin + (Tb - Tmin) * 0.4
+                                        x3 = Tmin + (Tb - Tmin) * 0.3
+                                        x4 = Tmin + (Tb - Tmin) * 0.2
+                                        x5 = Tmin + (Tb - Tmin) * 0.1
+                                    Else
+                                        x1 = Tmin + (Tb - Tmin) * 0.9
+                                        x2 = Tmin + (Tb - Tmin) * 0.8
+                                        x3 = Tmin + (Tb - Tmin) * 0.7
+                                        x4 = Tmin + (Tb - Tmin) * 0.6
+                                        x5 = Tmin + (Tb - Tmin) * 0.5
+                                    End If
                                     p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
                                     p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
                                     p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
