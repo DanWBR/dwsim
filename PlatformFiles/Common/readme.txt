@@ -64,7 +64,7 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.4.2
 
-- Updated chemeo parser to get data from new api endpoint
+- Updated Cheméo parser to get data from new API endpoint
 - Smart Object Solver disabled by default
 - Added button to view all log messages
 - Japanese translation review
