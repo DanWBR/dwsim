@@ -1884,6 +1884,7 @@ Public Class FormSimulSettings
     Private Sub chkForceObjectCalculation_CheckedChanged(sender As Object, e As EventArgs) Handles chkForceObjectCalculation.CheckedChanged
 
         CurrentFlowsheet.Options.ForceObjectSolving = chkForceObjectCalculation.Checked
+        FormMain.AnalyticsProvider?.RegisterEvent("Smart Object Solver Enabled", Not CurrentFlowsheet.Options.ForceObjectSolving, Nothing)
 
     End Sub
 
