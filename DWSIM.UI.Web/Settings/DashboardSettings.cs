@@ -17,8 +17,9 @@ namespace DWSIM.UI.Web.Settings
 
         static DashboardSettings()
         {
-            var s365Environment = ConfigurationManager.AppSettings["S365Environment"];
-            if (!String.IsNullOrEmpty(s365Environment) || s365Environment.ToLowerInvariant() == "staging") 
+
+            var s365Environment = ConfigurationManager.AppSettings.Get("S365Environment");
+            if (!String.IsNullOrEmpty(s365Environment) && s365Environment.ToLowerInvariant() == "staging")
             {
                 DashboardServiceUrl = "https://s365-dashboard-v2-service-staging.azurewebsites.net";
                 ExcelRunnerServiceUrl = "https://excel-runner-staging.azurewebsites.net";
@@ -26,6 +27,7 @@ namespace DWSIM.UI.Web.Settings
                 TakeHomeExamsServiceUrl = "https://take-home-exams-staging.azurewebsites.net";
                 Environment = "Staging";
             }
+
         }
     }
 }
