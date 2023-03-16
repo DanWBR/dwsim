@@ -731,8 +731,6 @@ Partial Class FormSimulWizard
         'chkActivateSmartObjectSolving
         '
         resources.ApplyResources(Me.chkActivateSmartObjectSolving, "chkActivateSmartObjectSolving")
-        Me.chkActivateSmartObjectSolving.Checked = True
-        Me.chkActivateSmartObjectSolving.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkActivateSmartObjectSolving.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
         Me.chkActivateSmartObjectSolving.Name = "chkActivateSmartObjectSolving"
         Me.ToolTip1.SetToolTip(Me.chkActivateSmartObjectSolving, resources.GetString("chkActivateSmartObjectSolving.ToolTip"))

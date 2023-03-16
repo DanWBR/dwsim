@@ -1327,6 +1327,8 @@ Public Class FormSimulSettings
         CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
 
+        FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
         CurrentFlowsheet.UpdateOpenEditForms()
 
         CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageAdded,
@@ -1882,6 +1884,7 @@ Public Class FormSimulSettings
     Private Sub chkForceObjectCalculation_CheckedChanged(sender As Object, e As EventArgs) Handles chkForceObjectCalculation.CheckedChanged
 
         CurrentFlowsheet.Options.ForceObjectSolving = chkForceObjectCalculation.Checked
+        FormMain.AnalyticsProvider?.RegisterEvent("Smart Object Solver Enabled", Not CurrentFlowsheet.Options.ForceObjectSolving, Nothing)
 
     End Sub
 

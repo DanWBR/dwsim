@@ -393,8 +393,8 @@
   <data name="&gt;&gt;LblModified.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="GraphSolidDens.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;tbSMILES.Name" xml:space="preserve">
     <value>tbSMILES</value>
@@ -1155,9 +1155,6 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn9.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn9</value>
   </data>
-  <data name="BtnRestaurar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
@@ -1605,9 +1602,6 @@
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="GraphSolidDens.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
   <data name="&gt;&gt;tbMODFAC.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
@@ -1707,9 +1701,6 @@
   <data name="SaveFileDialog2.Filter" xml:space="preserve">
     <value>Arquivos XLSX|*.xlsx</value>
   </data>
-  <data name="&gt;&gt;chkEnableEdit.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
   <data name="FaTabStripSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>934, 550</value>
   </data>
@@ -1751,6 +1742,9 @@
   </data>
   <data name="&gt;&gt;GraphCpSolid.Parent" xml:space="preserve">
     <value>FaTabStripItemCPSOLID</value>
+  </data>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="GraphSurfT.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
@@ -2097,6 +2091,9 @@
   <data name="&gt;&gt;FaTabStripItemCPLIQ.Name" xml:space="preserve">
     <value>FaTabStripItemCPLIQ</value>
   </data>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
+  </data>
   <data name="&gt;&gt;tbFormula.Name" xml:space="preserve">
     <value>tbFormula</value>
   </data>
@@ -2118,8 +2115,8 @@
   <data name="GraphVisc.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="&gt;&gt;chkEnableEdit.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="GraphLiqThermCond.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
@@ -2145,8 +2142,8 @@
   <data name="GraphLiqThermCond.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BtnRestaurar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="BtnRestaurar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2246,6 +2243,9 @@
   </data>
   <data name="&gt;&gt;FaTabStripItem17.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
     <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>

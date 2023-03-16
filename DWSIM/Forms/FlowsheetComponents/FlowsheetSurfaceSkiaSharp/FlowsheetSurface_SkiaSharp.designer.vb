@@ -279,6 +279,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'SplitContainerHorizontal.Panel2
         '
         resources.ApplyResources(Me.SplitContainerHorizontal.Panel2, "SplitContainerHorizontal.Panel2")
+        Me.SplitContainerHorizontal.Panel2.BackColor = System.Drawing.Color.White
         Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal.Panel2, resources.GetString("SplitContainerHorizontal.Panel2.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal, resources.GetString("SplitContainerHorizontal.ToolTip"))
         '

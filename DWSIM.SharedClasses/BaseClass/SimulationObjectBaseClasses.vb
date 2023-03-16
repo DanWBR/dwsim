@@ -456,26 +456,34 @@ Namespace UnitOperations
         End Sub
 
         Public Sub Solve() Implements ISimulationObject.Solve
-            CheckDirtyStatus()
-            Calculated = False
-            If OverrideCalculationRoutine Then
-                CalculationRoutineOverride.Invoke()
+
+            If FlowSheet.FlowsheetOptions.ForceObjectSolving Then
+                Calculated = False
+                If OverrideCalculationRoutine Then
+                    CalculationRoutineOverride.Invoke()
+                Else
+                    Calculate()
+                End If
+                Calculated = True
             Else
-                If Not CanUsePreviousResults Or FlowSheet.FlowsheetOptions.ForceObjectSolving Then Calculate()
-            End If
-            Calculated = True
-            PerformPostCalcValidation()
-            If GraphicObject IsNot Nothing Then
-                If GraphicObject.ObjectType <> ObjectType.EnergyStream And GraphicObject.ObjectType <> ObjectType.MaterialStream Then
-                    Dim xdoc = New XDocument()
-                    xdoc.Add(New XElement("Data"))
-                    xdoc.Element("Data").Add(SaveData())
-                    xdoc.Element("Data").Element("Calculated").Remove()
-                    xdoc.Element("Data").Element("LastUpdated").Remove()
-                    LastSolutionInputSnapshot = xdoc.ToString()
-                    xdoc = Nothing
+                CheckDirtyStatus()
+                Calculated = False
+                If Not CanUsePreviousResults Then Calculate()
+                Calculated = True
+                PerformPostCalcValidation()
+                If GraphicObject IsNot Nothing Then
+                    If GraphicObject.ObjectType <> ObjectType.EnergyStream And GraphicObject.ObjectType <> ObjectType.MaterialStream Then
+                        Dim xdoc = New XDocument()
+                        xdoc.Add(New XElement("Data"))
+                        xdoc.Element("Data").Add(SaveData())
+                        xdoc.Element("Data").Element("Calculated").Remove()
+                        xdoc.Element("Data").Element("LastUpdated").Remove()
+                        LastSolutionInputSnapshot = xdoc.ToString()
+                        xdoc = Nothing
+                    End If
                 End If
             End If
+
         End Sub
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor

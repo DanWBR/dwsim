@@ -1660,7 +1660,10 @@ Public Class FormSimulWizard
 
     Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles chkActivateSmartObjectSolving.CheckedChanged
 
-        If loaded Then CurrentFlowsheet.Options.ForceObjectSolving = Not chkActivateSmartObjectSolving.Checked
+        If loaded Then
+            CurrentFlowsheet.Options.ForceObjectSolving = Not chkActivateSmartObjectSolving.Checked
+            FormMain.AnalyticsProvider?.RegisterEvent("Smart Object Solver Enabled", Not CurrentFlowsheet.Options.ForceObjectSolving, Nothing)
+        End If
 
     End Sub
 
@@ -1686,6 +1689,8 @@ Public Class FormSimulWizard
             My.Settings.DoubleClickToEdit = chkDoubleClickToOpenEditors.Checked
 
             GlobalSettings.Settings.EditOnSelect = Not My.Settings.DoubleClickToEdit
+
+            FormMain.AnalyticsProvider?.RegisterEvent("Double-Click Editing Enabled", My.Settings.DoubleClickToEdit, Nothing)
 
         End If
 
