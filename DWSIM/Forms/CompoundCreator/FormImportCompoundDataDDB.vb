@@ -45,6 +45,8 @@ Public Class FormImportCompoundDataDDB
 
                 Dim searchtext As String = tbSearchString.Text
 
+                FormMain.AnalyticsProvider?.RegisterEvent("Online Compound DDB Request", searchtext, Nothing)
+
                 Me.Enabled = False
 
                 fsearch.Show()

@@ -1230,6 +1230,9 @@ Namespace Reactors
                     xl = .Phases(1).Properties.massfraction.GetValueOrDefault
                 End With
 
+                Qvin /= NumberOfTubes
+                Qlin /= NumberOfTubes
+
                 eta = eta_l * xl + eta_v * xv
 
                 Dim L As Double = deltaV * Length

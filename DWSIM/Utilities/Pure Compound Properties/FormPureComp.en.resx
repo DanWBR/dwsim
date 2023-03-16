@@ -119,109 +119,61 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>920, 874</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>384, 437</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 46</value>
+    <value>108, 23</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Export to XLSX</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1148, 874</value>
-  </data>
-  <data name="Button2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>498, 437</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 46</value>
+    <value>148, 23</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Export to XML Database</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1456, 874</value>
-  </data>
-  <data name="Button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>652, 437</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 46</value>
+    <value>109, 23</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Export to JSON File</value>
   </data>
-  <data name="LblModified.Location" type="System.Drawing.Point, System.Drawing">
-    <value>798, 32</value>
-  </data>
-  <data name="LblModified.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
-  </data>
-  <data name="LblModified.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 40</value>
-  </data>
   <data name="BtnRestaurar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>422, 874</value>
-  </data>
-  <data name="BtnRestaurar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="BtnRestaurar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 46</value>
+    <value>211, 437</value>
   </data>
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Restore Defaults</value>
   </data>
   <data name="chkEnableEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 886</value>
-  </data>
-  <data name="chkEnableEdit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>7, 441</value>
   </data>
   <data name="chkEnableEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 30</value>
+    <value>181, 17</value>
   </data>
   <data name="chkEnableEdit.Text" xml:space="preserve">
     <value>Enable Constant Property Editing</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ComboBox1.ItemHeight" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 32</value>
-  </data>
-  <data name="ComboBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 34</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 40</value>
-  </data>
-  <data name="Label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 26</value>
+    <value>58, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Compound</value>
   </data>
-  <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column1.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -237,290 +189,137 @@
   <data name="Column3.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="GridProps.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>756, 362</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>756, 362</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
   </data>
-  <data name="pbRender.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 33</value>
-  </data>
-  <data name="pbRender.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1638, 223</value>
-  </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 448</value>
-  </data>
-  <data name="GroupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="GroupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>737, 110</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1650, 262</value>
+    <value>743, 130</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>2D Render</value>
   </data>
-  <data name="tbElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 100</value>
-  </data>
-  <data name="tbElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 106</value>
-  </data>
-  <data name="Label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
+    <value>590, 21</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
+    <value>50, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Elements</value>
   </data>
-  <data name="tbMODFACNIST.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 262</value>
-  </data>
-  <data name="tbMODFACNIST.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbMODFACNIST.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 268</value>
-  </data>
-  <data name="Label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 27</value>
+    <value>590, 21</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>MODFAC-NIST Groups</value>
   </data>
-  <data name="tbInChI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 370</value>
-  </data>
-  <data name="tbInChI.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbInChI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 376</value>
-  </data>
-  <data name="Label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
+    <value>590, 21</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 27</value>
+    <value>65, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>InChI String</value>
   </data>
-  <data name="tbSMILES.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 316</value>
-  </data>
-  <data name="tbSMILES.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbSMILES.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 322</value>
-  </data>
-  <data name="Label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
+    <value>590, 21</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 27</value>
+    <value>73, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>SMILES String</value>
   </data>
-  <data name="tbMODFAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 208</value>
-  </data>
-  <data name="tbMODFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 214</value>
-  </data>
-  <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 27</value>
+    <value>590, 21</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>MODFAC-Do Groups</value>
   </data>
-  <data name="tbUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 154</value>
-  </data>
-  <data name="tbUNIFAC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 160</value>
-  </data>
-  <data name="Label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 27</value>
+    <value>590, 21</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>UNIFAC Groups</value>
   </data>
-  <data name="tbFormula.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 46</value>
-  </data>
-  <data name="tbFormula.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="tbFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1340, 34</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 52</value>
-  </data>
-  <data name="Label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 27</value>
+    <value>590, 21</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Formula</value>
   </data>
-  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 10</value>
-  </data>
-  <data name="GroupBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="GroupBox5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1650, 432</value>
+    <value>743, 216</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Molecular Structure</value>
   </data>
   <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>756, 362</value>
   </data>
   <data name="FaTabStripItem6.Title" xml:space="preserve">
     <value>Molecular</value>
   </data>
   <data name="GraphLiqCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphLiqCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1674, 676</value>
+    <value>836, 337</value>
   </data>
   <data name="FaTabStripItemCPLIQ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1674, 676</value>
+    <value>836, 337</value>
   </data>
   <data name="FaTabStripItemCPLIQ.Title" xml:space="preserve">
     <value>Heat Capacity</value>
   </data>
   <data name="GraphDHVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphDHVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
-  </data>
-  <data name="FaTabStripItemHVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemHVAP.Title" xml:space="preserve">
     <value>Vaporization Enthalpy</value>
   </data>
   <data name="GraphPvap.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphPvap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
-  </data>
-  <data name="FaTabStripItemPVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemPVAP.Title" xml:space="preserve">
     <value>Vapor Pressure</value>
   </data>
   <data name="GraphSurfT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphSurfT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
-  </data>
-  <data name="FaTabStripItemSURFT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemSURFT.Title" xml:space="preserve">
     <value>Surface Tension</value>
   </data>
   <data name="GraphVisc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphVisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1798, 1058</value>
-  </data>
-  <data name="FaTabStripItemLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1798, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemLIQVISC.Title" xml:space="preserve">
     <value>Viscosity</value>
   </data>
   <data name="GraphLiqDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphLiqDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1662, 734</value>
+    <value>831, 367</value>
   </data>
   <data name="FaTabStripItemLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1662, 734</value>
+    <value>831, 367</value>
   </data>
   <data name="FaTabStripItemLIQDENS.Title" xml:space="preserve">
     <value>Density</value>
   </data>
   <data name="GraphLiqThermCond.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphLiqThermCond.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
-  </data>
-  <data name="FaTabStripItemLIQTCOND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemLIQTCOND.Title" xml:space="preserve">
     <value>Thermal Conductivity</value>
@@ -531,17 +330,11 @@
   <data name="DataGridViewTextBoxColumn10.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn10.Width" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
   <data name="DataGridViewTextBoxColumn11.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="DataGridViewTextBoxColumn12.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn12.Width" type="System.Int32, mscorlib">
-    <value>47</value>
   </data>
   <data name="DataGridViewTextBoxColumn13.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
@@ -549,17 +342,11 @@
   <data name="DataGridViewTextBoxColumn14.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn14.Width" type="System.Int32, mscorlib">
-    <value>70</value>
-  </data>
   <data name="DataGridViewTextBoxColumn15.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="DataGridViewTextBoxColumn16.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn16.Width" type="System.Int32, mscorlib">
-    <value>107</value>
   </data>
   <data name="DataGridViewTextBoxColumn17.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
@@ -567,17 +354,11 @@
   <data name="DataGridViewTextBoxColumn18.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn18.Width" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
   <data name="DataGridViewTextBoxColumn23.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="DataGridViewTextBoxColumn24.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn24.Width" type="System.Int32, mscorlib">
-    <value>70</value>
   </data>
   <data name="DataGridViewTextBoxColumn25.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
@@ -585,62 +366,38 @@
   <data name="DataGridViewTextBoxColumn26.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn26.Width" type="System.Int32, mscorlib">
-    <value>169</value>
-  </data>
-  <data name="DataTableLiquid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="DataTableLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
-  <data name="FaTabStripItemTabLiq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
   <data name="FaTabStripItemTabLiq.Title" xml:space="preserve">
     <value>Data Table</value>
   </data>
   <data name="FaTabStripLiq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem16.Title" xml:space="preserve">
     <value>Liquid Phase</value>
   </data>
   <data name="GraphCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1674, 676</value>
+    <value>836, 337</value>
   </data>
   <data name="FaTabStripItemCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1674, 676</value>
+    <value>836, 337</value>
   </data>
   <data name="FaTabStripItemCPIG.Title" xml:space="preserve">
     <value>Ideal Gas Heat Capacity</value>
   </data>
   <data name="GraphVapVisc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphVapVisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
-  <data name="FaTabStripItemVAPVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemVAPVISC.Title" xml:space="preserve">
     <value>Viscosity</value>
   </data>
   <data name="GraphVapThermCond.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphVapThermCond.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
-  </data>
-  <data name="FaTabStripItemVAPTCOND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemVAPTCOND.Title" xml:space="preserve">
     <value>Thermal Conductivity</value>
@@ -651,17 +408,11 @@
   <data name="DataGridViewTextBoxColumn28.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn28.Width" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
   <data name="DataGridViewTextBoxColumn29.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="DataGridViewTextBoxColumn30.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn30.Width" type="System.Int32, mscorlib">
-    <value>104</value>
   </data>
   <data name="DataGridViewTextBoxColumn31.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
@@ -669,50 +420,32 @@
   <data name="DataGridViewTextBoxColumn32.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn32.Width" type="System.Int32, mscorlib">
-    <value>133</value>
-  </data>
-  <data name="DataTableVapour.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="DataTableVapour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
-  <data name="FaTabStripItemDataTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
   <data name="FaTabStripItemDataTab.Title" xml:space="preserve">
     <value>Data Table</value>
   </data>
   <data name="FaTabStripVap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem17.Title" xml:space="preserve">
     <value>Vapor Phase</value>
   </data>
   <data name="GraphCpSolid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphCpSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1674, 676</value>
+    <value>836, 337</value>
   </data>
   <data name="FaTabStripItemCPSOLID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1674, 676</value>
+    <value>836, 337</value>
   </data>
   <data name="FaTabStripItemCPSOLID.Title" xml:space="preserve">
     <value>Heat Capacity</value>
   </data>
   <data name="GraphSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>96, 44, 96, 44</value>
-  </data>
-  <data name="GraphSolidDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
-  </data>
-  <data name="FaTabStripItemSOLIDDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1820, 1058</value>
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemSOLIDDENS.Title" xml:space="preserve">
     <value>Density</value>
@@ -723,80 +456,47 @@
   <data name="DataGridViewTextBoxColumn20.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn20.Width" type="System.Int32, mscorlib">
-    <value>116</value>
-  </data>
   <data name="DataGridViewTextBoxColumn21.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="DataGridViewTextBoxColumn22.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="DataGridViewTextBoxColumn22.Width" type="System.Int32, mscorlib">
-    <value>128</value>
-  </data>
-  <data name="DataTableSolid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="DataTableSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
-  <data name="FaTabStripItemTabela.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1864, 1058</value>
-  </data>
   <data name="FaTabStripItemTabela.Title" xml:space="preserve">
     <value>Data Table</value>
   </data>
   <data name="FaTabStripSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem18.Title" xml:space="preserve">
     <value>Solid Phase</value>
   </data>
-  <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 33</value>
-  </data>
-  <data name="TextBoxComments.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
   <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1664, 687</value>
-  </data>
-  <data name="GroupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="GroupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>832, 343</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1676, 726</value>
+    <value>838, 363</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="FaTabStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 86</value>
+    <value>5, 43</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1678, 776</value>
-  </data>
-  <data name="GroupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="GroupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>758, 388</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1692, 940</value>
+    <value>770, 470</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>View</value>
@@ -813,14 +513,8 @@
   <data name="SaveFileDialog2.Title" xml:space="preserve">
     <value>Export Data to XLSX</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>192, 192</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1692, 940</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+    <value>770, 470</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pure Compound Properties</value>

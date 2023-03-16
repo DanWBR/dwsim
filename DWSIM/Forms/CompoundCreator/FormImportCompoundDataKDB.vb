@@ -47,6 +47,8 @@ Public Class FormImportCompoundKDB
 
                 Dim searchtext As String = tbSearchString.Text
 
+                FormMain.AnalyticsProvider?.RegisterEvent("Online Compound KDB Request", searchtext, Nothing)
+
                 Me.Enabled = False
 
                 fsearch.Show()

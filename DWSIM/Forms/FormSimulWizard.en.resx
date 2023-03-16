@@ -366,6 +366,9 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>663, 50</value>
   </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>DWSIM can skip calculations of flowsheet objects if none of its input parameters (including inlet streams) have changed since the last successful calculation. This feature is disabled by default. You can change it later in Edit &gt; Simulation Settings &gt; Behavior.</value>
+  </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Simulation Configuration Wizard</value>
   </data>

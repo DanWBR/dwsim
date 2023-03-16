@@ -48,6 +48,8 @@ Public Class FormImportCompoundDataChemeo
 
                 Dim searchtext As String = tbSearchString.Text
 
+                FormMain.AnalyticsProvider?.RegisterEvent("Online Compound Cheméo Request", searchtext, Nothing)
+
                 Me.Enabled = False
 
                 fsearch.Show()
