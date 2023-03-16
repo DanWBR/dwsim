@@ -165,14 +165,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'pure liquid
                     V = 0.0
                     S = 0.0
-                    T = New Brent().BrentOpt2(Tfus * 1.01, Tsat, 10, 0.000001, 100,
+                    Dim Tmin As Double
+                    If Tfus > 0 Then Tmin = Tfus * 1.01 Else Tmin = Tsat * 0.3
+                    T = New Brent().BrentOpt2(Tmin, Tsat, 10, 0.000001, 100,
                                               Function(Tx)
                                                   Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                               End Function)
 
                 End If
 
-            End If
+                End If
 
             Return New Object() {1.0 - V - S, V, Vz, Vz, T, 0.0, New Double() {1.0}, 0.0, Vz, S, Vz}
 
