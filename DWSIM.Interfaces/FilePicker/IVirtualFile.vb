@@ -10,6 +10,8 @@
     ''' </summary>
     ReadOnly Property FullPath As String
 
+    ReadOnly Property ParentUniqueIdentifier As String
+
     Function GetExtension() As String
 
     Function ReadAllText() As String

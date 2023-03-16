@@ -4140,6 +4140,7 @@ Label_00CC:
                 Try
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
+                    filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
                 Catch ex As Exception
                 End Try
             Else
