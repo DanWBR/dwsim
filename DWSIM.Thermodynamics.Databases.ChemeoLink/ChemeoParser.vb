@@ -68,53 +68,77 @@ Public Class ChemeoParser
 
         comp.SMILES = data.smiles
 
-        If data.fixed_props.tb.Count > 0 Then
-            comp.Normal_Boiling_Point = data.fixed_props.tb(0).v
-            comp.NBP = comp.Normal_Boiling_Point
+        If data.fixed_props.tb IsNot Nothing Then
+            If data.fixed_props.tb.Count > 0 Then
+                comp.Normal_Boiling_Point = data.fixed_props.tb(0).v
+                comp.NBP = comp.Normal_Boiling_Point
+            End If
         End If
 
-        If data.fixed_props.tf.Count > 0 Then
-            comp.TemperatureOfFusion = data.fixed_props.tf(0).v
+        If data.fixed_props.tf IsNot Nothing Then
+            If data.fixed_props.tf.Count > 0 Then
+                comp.TemperatureOfFusion = data.fixed_props.tf(0).v
+            End If
         End If
 
-        If data.fixed_props.tc.Count > 0 Then
-            comp.Critical_Temperature = data.fixed_props.tc(0).v
+        If data.fixed_props.tc IsNot Nothing Then
+            If data.fixed_props.tc.Count > 0 Then
+                comp.Critical_Temperature = data.fixed_props.tc(0).v
+            End If
         End If
 
-        If data.fixed_props.pc.Count > 0 Then
-            comp.Critical_Pressure = data.fixed_props.pc(0).v * 1000
+        If data.fixed_props.pc IsNot Nothing Then
+            If data.fixed_props.pc.Count > 0 Then
+                comp.Critical_Pressure = data.fixed_props.pc(0).v * 1000
+            End If
         End If
 
-        If data.fixed_props.vc.Count > 0 Then
-            comp.Critical_Volume = data.fixed_props.vc(0).v
+        If data.fixed_props.vc IsNot Nothing Then
+            If data.fixed_props.vc.Count > 0 Then
+                comp.Critical_Volume = data.fixed_props.vc(0).v
+            End If
         End If
 
-        If data.fixed_props.af.Count > 0 Then
-            comp.Acentric_Factor = data.fixed_props.af(0).v
+        If data.fixed_props.af IsNot Nothing Then
+            If data.fixed_props.af.Count > 0 Then
+                comp.Acentric_Factor = data.fixed_props.af(0).v
+            End If
         End If
 
-        If data.fixed_props.zc.Count > 0 Then
-            comp.Critical_Compressibility = data.fixed_props.zc(0).v
+        If data.fixed_props.zc IsNot Nothing Then
+            If data.fixed_props.zc.Count > 0 Then
+                comp.Critical_Compressibility = data.fixed_props.zc(0).v
+            End If
         End If
 
-        If data.fixed_props.zra.Count > 0 Then
-            comp.Z_Rackett = data.fixed_props.zra(0).v
+        If data.fixed_props.zra IsNot Nothing Then
+            If data.fixed_props.zra.Count > 0 Then
+                comp.Z_Rackett = data.fixed_props.zra(0).v
+            End If
         End If
 
-        If data.fixed_props.hf.Count > 0 Then
-            comp.IG_Enthalpy_of_Formation_25C = data.fixed_props.hf(0).v * 1000 / comp.Molar_Weight
+        If data.fixed_props.hf IsNot Nothing Then
+            If data.fixed_props.hf.Count > 0 Then
+                comp.IG_Enthalpy_of_Formation_25C = data.fixed_props.hf(0).v * 1000 / comp.Molar_Weight
+            End If
         End If
 
-        If data.fixed_props.gf.Count > 0 Then
-            comp.IG_Gibbs_Energy_of_Formation_25C = data.fixed_props.gf(0).v * 1000 / comp.Molar_Weight
+        If data.fixed_props.gf IsNot Nothing Then
+            If data.fixed_props.gf.Count > 0 Then
+                comp.IG_Gibbs_Energy_of_Formation_25C = data.fixed_props.gf(0).v * 1000 / comp.Molar_Weight
+            End If
         End If
 
-        If data.fixed_props.hf.Count > 0 And data.fixed_props.gf.Count > 0 Then
-            comp.IG_Entropy_of_Formation_25C = (comp.IG_Enthalpy_of_Formation_25C - comp.IG_Gibbs_Energy_of_Formation_25C) / 298.15
+        If data.fixed_props.hf IsNot Nothing And data.fixed_props.gf IsNot Nothing Then
+            If data.fixed_props.hf.Count > 0 And data.fixed_props.gf.Count > 0 Then
+                comp.IG_Entropy_of_Formation_25C = (comp.IG_Enthalpy_of_Formation_25C - comp.IG_Gibbs_Energy_of_Formation_25C) / 298.15
+            End If
         End If
 
-        If data.fixed_props.hfus.Count > 0 Then
-            comp.EnthalpyOfFusionAtTf = data.fixed_props.hfus(0).v
+        If data.fixed_props.hfus IsNot Nothing Then
+            If data.fixed_props.hfus.Count > 0 Then
+                comp.EnthalpyOfFusionAtTf = data.fixed_props.hfus(0).v
+            End If
         End If
 
         Return comp
