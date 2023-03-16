@@ -1,0 +1,605 @@
+[
+  {
+    "OriginalText": "Automatically update the initial estimates",
+    "Translated": "初期値を自動的に更新する",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0661077+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Composition in molar fractions",
+    "Translated": "モル分率での組成",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0661077+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Difference between the values of the temperature of the streams.",
+    "Translated": "ストリームの温度差",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Molar Internal Energy (Overall Liquid)",
+    "Translated": "モル内部エネルギー(液相全体)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "CondenserTop Pressure",
+    "Translated": "凝縮器圧力",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Edit Selected Reaction",
+    "Translated": "選択した反応の編集",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "LIQ dynamic viscosity",
+    "Translated": "LIQ動粘度",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Amount of catalyst added to the reactor",
+    "Translated": "反応器の触媒量",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Rigorous model for an absorption column.",
+    "Translated": "吸収カラムの厳密計算モデル。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0671127+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "saved successfully.",
+    "Translated": "正常に保存されました",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.068107+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Energy balance relative tolerance",
+    "Translated": "エネルギー収支の相対誤差",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.068107+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "DB",
+    "Translated": "DB",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.068107+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Attention!",
+    "Translated": "注意！",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.068107+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Bubble Pressure at Stream Temperature",
+    "Translated": "ストリーム温度での沸騰圧力",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.068107+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Numerical Values Formatting Scheme",
+    "Translated": "数値の書式設定",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.068107+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Unzoom flowsheet",
+    "Translated": "フローシート縮小",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Python.NET Interpreter Settings",
+    "Translated": "Python.NET インタープリターの設定",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Temperature Tolerance",
+    "Translated": "温度許容誤差",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "PH Flash: Maximum number of external iterations reached.",
+    "Translated": "PHフラッシュ:外部反復計算の最大数に達しました。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Heavy Liquid Stream",
+    "Translated": "重液ストリーム",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Update Value",
+    "Translated": "値を更新",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Mass Flow (Liquid 1)",
+    "Translated": "質量流量(液体1)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0691076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Mass Flow (Liquid 2)",
+    "Translated": "質量流量(液体2)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Error parsing provided data. Please check input and try again.",
+    "Translated": "入力されたデータの解析中にエラーが発生しました。入力内容を確認して、もう一度やり直してください。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "3. Results",
+    "Translated": "3. 結果",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Conversion",
+    "Translated": "転化",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Description",
+    "Translated": "説明",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Production of work in a turbine",
+    "Translated": "タービンでの仕事量",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Flowsheet State restored sucessfully.",
+    "Translated": "フローシートが正常に復元されました。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0701094+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Tolerance for P recalculation",
+    "Translated": "P再計算の許容誤差",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Reactor active/usable length",
+    "Translated": "反応器アクティブ/使用可能長さ",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Flash PH/PS - maximum number of iterations on the internal loop",
+    "Translated": "フラッシュ PH/PS - 内部ループの最大計算反復回数",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Rectify Liquid",
+    "Translated": "液体を分留する",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "ID",
+    "Translated": "ID",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Import",
+    "Translated": "インポート",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "A",
+    "Translated": "A",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0711069+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "VapFlows",
+    "Translated": "蒸気流",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0721083+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "No energy stream associated with the reactor.",
+    "Translated": "反応器にエネルギーストリームがありません。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0721083+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Critical Volume",
+    "Translated": "臨界体積",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0721083+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Overall pressure drop",
+    "Translated": "全体の圧力損失",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0721083+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "objID",
+    "Translated": "オブジェクトID",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0721083+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Light Key Molar Fraction in Bottoms",
+    "Translated": "ボトムのライトキーモル分率",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0721083+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Add New Kinetic Reaction",
+    "Translated": "新しい反応速度式を追加",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Mass and Energy Balance Summary",
+    "Translated": "物質と熱収支のサマリー",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Volumetric Flow (Aqueous)",
+    "Translated": "体積流量(水相)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "CAPE-OPEN Plugins",
+    "Translated": "CAPE-OPENプラグイン",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Zoom flowsheet",
+    "Translated": "フローシートを拡大",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Kinematic Viscosity (Aqueous)",
+    "Translated": "動粘度(水相)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Helmholtz Free Energy (Aqueous)",
+    "Translated": "ヘルムホルツ自由エネルギー(水相)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0731076+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Peng-Robinson",
+    "Translated": "ペンーロビンソン",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.074106+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "About FOSSEE",
+    "Translated": "FOSSEEについて",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.074106+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Reactor Volume",
+    "Translated": "反応器体積",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.074106+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Display Pressure",
+    "Translated": "圧力表示",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.074106+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Please check the reaction stoichiometry.",
+    "Translated": "反応化学量論式を確認してください。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.074106+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Split factor (outlet stream 3)",
+    "Translated": "分離係数(アウトレットストリーム3)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.074106+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "التبرع الشهري - [Dynamic Simulation - Separator Pressure and Level Control (C:\\Users\\Daniel\\source\\repos\\DanWBR\\dwsim\\DWSIM\\bin\\x64\\Debug\\samples\\Dynamic Simu]",
+    "Translated": "التبرع الشهري - [ダイナミックシミュレーション - 分離器圧力とレベル制御 (C:\\ユーザー\\ダニエル\\ソース\\レポ\\DanWBR\\dwsim\\DWSIM\\bin\\x64\\デバッグ\\サンプル\\ダイナミックシム]",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0751067+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Equilibrium Calculation Settings",
+    "Translated": "平衡計算設定",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0751067+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Phase equilibria calculation error.",
+    "Translated": "相平衡計算誤差",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0751067+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Modified UNIFAC (NIST)",
+    "Translated": "修正UNIFAC (NIST)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0751067+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Rigorous model for industrial distillation columns.",
+    "Translated": "工業用蒸留塔の厳密計算モデル。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0751067+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Skip equilibrium calculations in well-defined Material Streams",
+    "Translated": "明確に定義されたマテリアルストリームでの平衡計算をスキップする",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0751067+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Zoom All",
+    "Translated": "すべて拡大",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0781055+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "When in \"Outlet Pressure\" calculation mode, the pipe must have a single segment only, and it must of \"Straight Tube\" type.",
+    "Translated": "「出口圧力」計算モードの場合、パイプは単一のセグメントのみで、「ストレートチューブ」タイプである必要があります。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0781055+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "View",
+    "Translated": "表示",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0791059+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "Vaporization Enthalpy",
+    "Translated": "蒸発エンタルピー",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0791059+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "You can't make that kind of connection.",
+    "Translated": "その接続は、無効です。",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0791059+09:00",
+    "Language": "ja"
+  },
+  {
+    "OriginalText": "تحميل 'Dynamic Simulation - Separator Pressure and Level Control'...",
+    "Translated": "تحميل 'ダイナミックシミュレーション - 分離器圧力とレベル制御'...",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Yoshihide Watabe",
+    "ReviewedBy_Contact": "yoshihide.watabe@mysim.co.jp",
+    "ReviewedBy_Date": "2023-03-12T09:30:03.0801113+09:00",
+    "Language": "ja"
+  }
+]

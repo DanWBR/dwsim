@@ -1,5 +1,14 @@
-Version 8.4.1
+Version 8.4.2
 
-- Steam Tables PP now checks for Water exclusivity on Material Streams
-- Classic UI layout adjustments
-- Fixed an issue with System.Tuple.dll
+- Updated chemeo parser to get data from new api endpoint
+- Smart Object Solver disabled by default
+- Added button to view all log messages
+- Japanese translation review
+- Fixed Dashboard window size for high-dpi displays
+- Fixed System.ValueTuple version mismatch
+- Fixed bug with OpenGL renderer (Classic UI)
+- Fixed Excel Add-In not working
+- Fixed PFR pressure drop calculation when Ntubes > 1 (discussion #445)
+- Fixed bug #422: Error in CoolProp PH flash
+- Fixed bug #444: Incorrect refrigerant outlet temperature
+- Fixed bug #446: Large temperature drop across splitter
