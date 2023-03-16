@@ -4150,6 +4150,9 @@ Label_00CC:
                     Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
                     filePickerForm.SuggestedDirectory = fpath
+                    If TypeOf filePickerForm Is Simulate365.FormFactories.S365FilePickerForm Then
+                        filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    End If
                 Catch ex As Exception
                 End Try
             End If
