@@ -186,11 +186,19 @@ Namespace Streams
 
                 Dim comp = GetOverallComposition()
 
-                For i = 0 To LastSolutionInputData.MolarComposition.Count - 1
+                If comp.Count = LastSolutionInputData.MolarComposition.Count Then
 
-                    If Math.Abs(comp(i) - LastSolutionInputData.MolarComposition(i)) > epsilon Then dirty = True
+                    For i = 0 To LastSolutionInputData.MolarComposition.Count - 1
 
-                Next
+                        If Math.Abs(comp(i) - LastSolutionInputData.MolarComposition(i)) > epsilon Then dirty = True
+
+                    Next
+
+                Else
+
+                    dirty = True
+
+                End If
 
                 SetDirtyStatus(dirty)
 
