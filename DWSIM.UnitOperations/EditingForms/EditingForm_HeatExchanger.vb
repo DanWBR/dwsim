@@ -14,6 +14,8 @@ Public Class EditingForm_HeatExchanger
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
+    Public Overrides ReadOnly Property Modular As Boolean = True
+
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         UpdateInfo()
@@ -723,7 +725,7 @@ Public Class EditingForm_HeatExchanger
 
     End Sub
 
-    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBoxParameters.MouseMove
         MyBase.Editor_MouseMove(sender, e)
     End Sub
 
