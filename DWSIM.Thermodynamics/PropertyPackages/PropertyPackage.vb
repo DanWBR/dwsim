@@ -7363,10 +7363,12 @@ Final3:
                 If cprop.LiquidHeatCapacityEquation <> "" And cprop.LiquidHeatCapacityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
                     If Integer.TryParse(cprop.LiquidHeatCapacityEquation, New Integer) Then
                         val = CalcCSTDepProp(cprop.LiquidHeatCapacityEquation, cprop.Liquid_Heat_Capacity_Const_A, cprop.Liquid_Heat_Capacity_Const_B, cprop.Liquid_Heat_Capacity_Const_C, cprop.Liquid_Heat_Capacity_Const_D, cprop.Liquid_Heat_Capacity_Const_E, T, cprop.Critical_Temperature)
+                        If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "ChEDL Thermo" Then
+                            val = val / 1000 / cprop.Molar_Weight 'kJ/kg.K
+                        End If
                     Else
                         val = ParseEquation(cprop.LiquidHeatCapacityEquation, cprop.Liquid_Heat_Capacity_Const_A, cprop.Liquid_Heat_Capacity_Const_B, cprop.Liquid_Heat_Capacity_Const_C, cprop.Liquid_Heat_Capacity_Const_D, cprop.Liquid_Heat_Capacity_Const_E, T) / cprop.Molar_Weight
                     End If
-                    If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "ChEDL Thermo" Then val = val / 1000 / cprop.Molar_Weight 'kJ/kg.K
                 Else
                     'estimate using Rownlinson/Bondi correlation
                     val = Auxiliary.PROPS.Cpl_rb(AUX_CPi(cprop.Name, T), T, cprop.Critical_Temperature, cprop.Acentric_Factor, cprop.Molar_Weight) 'kJ/kg.K

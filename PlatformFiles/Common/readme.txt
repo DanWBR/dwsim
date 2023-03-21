@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.4.1
+Version 8.4.2
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.4.2
+
+- Updated Cheméo parser to get data from new API endpoint
+- Smart Object Solver disabled by default
+- Added button to view all log messages
+- Japanese translation review
+- Fixed Dashboard window size for high-dpi displays
+- Fixed System.ValueTuple version mismatch
+- Fixed bug with OpenGL renderer (Classic UI)
+- Fixed Excel Add-In not working
+- Fixed PFR pressure drop calculation when Ntubes > 1 (discussion #445)
+- Fixed bug #422: Error in CoolProp PH flash
+- Fixed bug #444: Incorrect refrigerant outlet temperature
+- Fixed bug #446: Large temperature drop across splitter
 
 Version 8.4.1
 

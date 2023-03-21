@@ -1150,6 +1150,8 @@ Public Class FormFlowsheet
 
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
 
+        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Opened Solution Inspector", Nothing)
+
         RaiseEvent ToolOpened("Solution Inspector", New EventArgs())
 
         Dim iform As New Inspector.Window
@@ -1438,6 +1440,9 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiExportData_Click(sender As Object, e As EventArgs) Handles tsmiExportData.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Exported Object Data to Clipboard", Nothing)
+
         'copy all simulation properties from the selected object to clipboard
         Try
             Select Case Me.FormSurface.FlowsheetSurface.SelectedObject.ObjectType
@@ -1556,6 +1561,7 @@ Public Class FormFlowsheet
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
         RaiseEvent ToolOpened("Report Tool", New EventArgs())
+        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Opened Reporting Tool", Nothing)
         FrmReport = New FormReportConfig
         Me.FrmReport.Show(Me)
     End Sub
@@ -3812,8 +3818,12 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub CriadorDeComponentesSolidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriadorDeComponentesSolidosToolStripMenuItem.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Opened Solid Compound Creator", "", Nothing)
+
         Dim fqc As New FormCreateNewSolid()
         fqc.ShowDialog(Me)
+
     End Sub
 
     Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation

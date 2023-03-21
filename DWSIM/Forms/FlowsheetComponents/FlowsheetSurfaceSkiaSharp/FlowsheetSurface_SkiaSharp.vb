@@ -521,12 +521,19 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Public Sub ClonarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClonarToolStripMenuItem.Click
+
         CloneObject(FlowsheetSurface.SelectedObject)
+
     End Sub
 
     Public Function CloneObject(gobj As GraphicObject) As GraphicObject
 
         If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
+
+        Try
+            FormMain.AnalyticsProvider?.RegisterEvent("Cloning Object", gobj.Owner.GetDisplayName(), Nothing)
+        Catch ex As Exception
+        End Try
 
         Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(gobj.Name)
         Dim newobj As SharedClasses.UnitOperations.BaseClass = obj.Clone
@@ -3217,9 +3224,13 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub DepurarObjetoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DepurarObjetoToolStripMenuItem.Click
+
         If Not FlowsheetSurface.SelectedObject Is Nothing Then
             If Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name) Then
                 Dim myobj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetSurface.SelectedObject.Name)
+
+                FormMain.AnalyticsProvider?.RegisterEvent("Debugging Object", myobj.GetDisplayName(), Nothing)
+
                 Dim frm As New FormTextBox
                 With frm
                     .TextBox1.Text = "Please wait, debugging object..."
@@ -3522,6 +3533,8 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Sub CopyAsImage(Zoom As Integer)
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Export PFD as Image", Nothing)
 
         Using bmp As New SKBitmap(SplitContainerHorizontal.Panel1.Width * Zoom, SplitContainerHorizontal.Panel1.Height * Zoom)
             Using canvas As New SKCanvas(bmp)
@@ -3919,6 +3932,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub ExportarParaPDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarParaPDFToolStripMenuItem.Click
 
+        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Export PFD to PDF", Nothing)
+
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
         Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
@@ -3941,6 +3956,8 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ExportarParaSVGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarParaSVGToolStripMenuItem.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Export PFD to SVG", Nothing)
 
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
