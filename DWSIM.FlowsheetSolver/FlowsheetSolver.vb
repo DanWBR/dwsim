@@ -1668,7 +1668,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     IObj?.Paragraphs.Add(baseexception.Message)
                 Next
 
-                fgui.ShowMessage(fgui.GetTranslatedString("If Anonymous Analytics Sharing is enabled, the developers will be notified shortly about the errors. Thank you for your contribution!"), IFlowsheet.MessageType.GeneralError)
+                'fgui.ShowMessage(fgui.GetTranslatedString("If Anonymous Analytics Sharing is enabled, the developers will be notified shortly about the errors. Thank you for your contribution!"), IFlowsheet.MessageType.GeneralError)
 
                 fs.Solved = False
                 If baseexception IsNot Nothing Then fs.ErrorMessage = baseexception.ToString
