@@ -304,20 +304,25 @@ Public Class FlowsheetSurfaceControl
 
             Dim pt = PointToClient(New Point(e.X, e.Y))
 
-
             If scriptpath <> "" Then
 
                 Dim uobjid = FlowsheetObject.FormSurface.AddObjectToSurface(ObjectType.CustomUO, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, False, "", "")
                 Dim suo = DirectCast(FlowsheetObject.SimulationObjects(uobjid), CustomUO)
                 suo.ScriptText = IO.File.ReadAllText(scriptpath)
 
+                FormMain.AnalyticsProvider?.RegisterEvent("Added Object", "FOSSEE Custom Unit Operation: " + scriptpath, Nothing)
+
                 Process.Start(pdfpath)
 
             ElseIf t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
 
+                FormMain.AnalyticsProvider?.RegisterEvent("Added Object", t.Name, Nothing)
+
                 FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c, True)
 
             Else
+
+                FormMain.AnalyticsProvider?.RegisterEvent("Added Object", "External: " + t.FullName, Nothing)
 
                 FlowsheetObject.FormSurface.AddObjectToSurface(ObjectType.External, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, False, "", "", Activator.CreateInstance(t))
 
