@@ -26,7 +26,7 @@ Partial Class EditingForm_WindTurbine
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_WindTurbine))
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
         Me.lblAirDensityUnits = New System.Windows.Forms.Label()
         Me.tbAirDensity = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -36,7 +36,7 @@ Partial Class EditingForm_WindTurbine
         Me.lblPowerUnits = New System.Windows.Forms.Label()
         Me.tbGenPower = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.tbRelHum = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -57,7 +57,7 @@ Partial Class EditingForm_WindTurbine
         Me.lblWindSpeed = New System.Windows.Forms.Label()
         Me.tbWindSpeed = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -72,9 +72,9 @@ Partial Class EditingForm_WindTurbine
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxResults.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -85,7 +85,7 @@ Partial Class EditingForm_WindTurbine
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Location = New System.Drawing.Point(12, 568)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(371, 223)
+        Me.GroupBox4.Size = New System.Drawing.Size(388, 223)
         Me.GroupBox4.TabIndex = 24
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Notes"
@@ -100,34 +100,34 @@ Partial Class EditingForm_WindTurbine
     "d\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.rtbAnnotations.Size = New System.Drawing.Size(365, 204)
+        Me.rtbAnnotations.Size = New System.Drawing.Size(382, 204)
         Me.rtbAnnotations.TabIndex = 0
         '
-        'GroupBox3
+        'GroupBoxResults
         '
-        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxResults.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox3.Controls.Add(Me.lblAirDensityUnits)
-        Me.GroupBox3.Controls.Add(Me.tbAirDensity)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.lblMaxPowerUnits)
-        Me.GroupBox3.Controls.Add(Me.tbMaxPower)
-        Me.GroupBox3.Controls.Add(Me.Label7)
-        Me.GroupBox3.Controls.Add(Me.lblPowerUnits)
-        Me.GroupBox3.Controls.Add(Me.tbGenPower)
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 443)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(371, 119)
-        Me.GroupBox3.TabIndex = 23
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Results"
+        Me.GroupBoxResults.Controls.Add(Me.lblAirDensityUnits)
+        Me.GroupBoxResults.Controls.Add(Me.tbAirDensity)
+        Me.GroupBoxResults.Controls.Add(Me.Label9)
+        Me.GroupBoxResults.Controls.Add(Me.lblMaxPowerUnits)
+        Me.GroupBoxResults.Controls.Add(Me.tbMaxPower)
+        Me.GroupBoxResults.Controls.Add(Me.Label7)
+        Me.GroupBoxResults.Controls.Add(Me.lblPowerUnits)
+        Me.GroupBoxResults.Controls.Add(Me.tbGenPower)
+        Me.GroupBoxResults.Controls.Add(Me.Label15)
+        Me.GroupBoxResults.Location = New System.Drawing.Point(12, 443)
+        Me.GroupBoxResults.Name = "GroupBoxResults"
+        Me.GroupBoxResults.Size = New System.Drawing.Size(388, 119)
+        Me.GroupBoxResults.TabIndex = 23
+        Me.GroupBoxResults.TabStop = False
+        Me.GroupBoxResults.Text = "Results"
         '
         'lblAirDensityUnits
         '
         Me.lblAirDensityUnits.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblAirDensityUnits.AutoSize = True
-        Me.lblAirDensityUnits.Location = New System.Drawing.Point(315, 86)
+        Me.lblAirDensityUnits.Location = New System.Drawing.Point(332, 86)
         Me.lblAirDensityUnits.Name = "lblAirDensityUnits"
         Me.lblAirDensityUnits.Size = New System.Drawing.Size(24, 13)
         Me.lblAirDensityUnits.TabIndex = 34
@@ -136,7 +136,7 @@ Partial Class EditingForm_WindTurbine
         'tbAirDensity
         '
         Me.tbAirDensity.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbAirDensity.Location = New System.Drawing.Point(218, 82)
+        Me.tbAirDensity.Location = New System.Drawing.Point(235, 82)
         Me.tbAirDensity.Name = "tbAirDensity"
         Me.tbAirDensity.ReadOnly = True
         Me.tbAirDensity.Size = New System.Drawing.Size(91, 20)
@@ -157,7 +157,7 @@ Partial Class EditingForm_WindTurbine
         '
         Me.lblMaxPowerUnits.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblMaxPowerUnits.AutoSize = True
-        Me.lblMaxPowerUnits.Location = New System.Drawing.Point(315, 60)
+        Me.lblMaxPowerUnits.Location = New System.Drawing.Point(332, 60)
         Me.lblMaxPowerUnits.Name = "lblMaxPowerUnits"
         Me.lblMaxPowerUnits.Size = New System.Drawing.Size(24, 13)
         Me.lblMaxPowerUnits.TabIndex = 31
@@ -166,7 +166,7 @@ Partial Class EditingForm_WindTurbine
         'tbMaxPower
         '
         Me.tbMaxPower.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbMaxPower.Location = New System.Drawing.Point(218, 56)
+        Me.tbMaxPower.Location = New System.Drawing.Point(235, 56)
         Me.tbMaxPower.Name = "tbMaxPower"
         Me.tbMaxPower.ReadOnly = True
         Me.tbMaxPower.Size = New System.Drawing.Size(91, 20)
@@ -187,7 +187,7 @@ Partial Class EditingForm_WindTurbine
         '
         Me.lblPowerUnits.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPowerUnits.AutoSize = True
-        Me.lblPowerUnits.Location = New System.Drawing.Point(315, 34)
+        Me.lblPowerUnits.Location = New System.Drawing.Point(332, 34)
         Me.lblPowerUnits.Name = "lblPowerUnits"
         Me.lblPowerUnits.Size = New System.Drawing.Size(24, 13)
         Me.lblPowerUnits.TabIndex = 28
@@ -196,7 +196,7 @@ Partial Class EditingForm_WindTurbine
         'tbGenPower
         '
         Me.tbGenPower.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbGenPower.Location = New System.Drawing.Point(218, 30)
+        Me.tbGenPower.Location = New System.Drawing.Point(235, 30)
         Me.tbGenPower.Name = "tbGenPower"
         Me.tbGenPower.ReadOnly = True
         Me.tbGenPower.Size = New System.Drawing.Size(91, 20)
@@ -213,42 +213,42 @@ Partial Class EditingForm_WindTurbine
         Me.Label15.TabIndex = 26
         Me.Label15.Text = "Generated Power"
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxParameters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.Label18)
-        Me.GroupBox2.Controls.Add(Me.tbRelHum)
-        Me.GroupBox2.Controls.Add(Me.Label19)
-        Me.GroupBox2.Controls.Add(Me.lblAtmTemp)
-        Me.GroupBox2.Controls.Add(Me.tbAtmTemp)
-        Me.GroupBox2.Controls.Add(Me.Label17)
-        Me.GroupBox2.Controls.Add(Me.lblAtmPres)
-        Me.GroupBox2.Controls.Add(Me.tbAtmPres)
-        Me.GroupBox2.Controls.Add(Me.Label10)
-        Me.GroupBox2.Controls.Add(Me.tbNumberOfPanels)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.tbPanelEfficiency)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.lblDistanceUnits)
-        Me.GroupBox2.Controls.Add(Me.tbRotorDiameter)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.chkUseGlobalIrr)
-        Me.GroupBox2.Controls.Add(Me.lblWindSpeed)
-        Me.GroupBox2.Controls.Add(Me.tbWindSpeed)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 183)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(371, 254)
-        Me.GroupBox2.TabIndex = 22
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Calculation Parameters"
+        Me.GroupBoxParameters.Controls.Add(Me.Label18)
+        Me.GroupBoxParameters.Controls.Add(Me.tbRelHum)
+        Me.GroupBoxParameters.Controls.Add(Me.Label19)
+        Me.GroupBoxParameters.Controls.Add(Me.lblAtmTemp)
+        Me.GroupBoxParameters.Controls.Add(Me.tbAtmTemp)
+        Me.GroupBoxParameters.Controls.Add(Me.Label17)
+        Me.GroupBoxParameters.Controls.Add(Me.lblAtmPres)
+        Me.GroupBoxParameters.Controls.Add(Me.tbAtmPres)
+        Me.GroupBoxParameters.Controls.Add(Me.Label10)
+        Me.GroupBoxParameters.Controls.Add(Me.tbNumberOfPanels)
+        Me.GroupBoxParameters.Controls.Add(Me.Label6)
+        Me.GroupBoxParameters.Controls.Add(Me.tbPanelEfficiency)
+        Me.GroupBoxParameters.Controls.Add(Me.Label5)
+        Me.GroupBoxParameters.Controls.Add(Me.lblDistanceUnits)
+        Me.GroupBoxParameters.Controls.Add(Me.tbRotorDiameter)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.chkUseGlobalIrr)
+        Me.GroupBoxParameters.Controls.Add(Me.lblWindSpeed)
+        Me.GroupBoxParameters.Controls.Add(Me.tbWindSpeed)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Location = New System.Drawing.Point(12, 183)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.Size = New System.Drawing.Size(388, 254)
+        Me.GroupBoxParameters.TabIndex = 22
+        Me.GroupBoxParameters.TabStop = False
+        Me.GroupBoxParameters.Text = "Calculation Parameters"
         '
         'Label18
         '
         Me.Label18.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(315, 127)
+        Me.Label18.Location = New System.Drawing.Point(332, 127)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(15, 13)
         Me.Label18.TabIndex = 45
@@ -257,7 +257,7 @@ Partial Class EditingForm_WindTurbine
         'tbRelHum
         '
         Me.tbRelHum.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbRelHum.Location = New System.Drawing.Point(218, 123)
+        Me.tbRelHum.Location = New System.Drawing.Point(235, 123)
         Me.tbRelHum.Name = "tbRelHum"
         Me.tbRelHum.Size = New System.Drawing.Size(91, 20)
         Me.tbRelHum.TabIndex = 44
@@ -277,7 +277,7 @@ Partial Class EditingForm_WindTurbine
         '
         Me.lblAtmTemp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblAtmTemp.AutoSize = True
-        Me.lblAtmTemp.Location = New System.Drawing.Point(315, 101)
+        Me.lblAtmTemp.Location = New System.Drawing.Point(332, 101)
         Me.lblAtmTemp.Name = "lblAtmTemp"
         Me.lblAtmTemp.Size = New System.Drawing.Size(43, 13)
         Me.lblAtmTemp.TabIndex = 42
@@ -286,7 +286,7 @@ Partial Class EditingForm_WindTurbine
         'tbAtmTemp
         '
         Me.tbAtmTemp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbAtmTemp.Location = New System.Drawing.Point(218, 97)
+        Me.tbAtmTemp.Location = New System.Drawing.Point(235, 97)
         Me.tbAtmTemp.Name = "tbAtmTemp"
         Me.tbAtmTemp.Size = New System.Drawing.Size(91, 20)
         Me.tbAtmTemp.TabIndex = 41
@@ -306,7 +306,7 @@ Partial Class EditingForm_WindTurbine
         '
         Me.lblAtmPres.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblAtmPres.AutoSize = True
-        Me.lblAtmPres.Location = New System.Drawing.Point(315, 75)
+        Me.lblAtmPres.Location = New System.Drawing.Point(332, 75)
         Me.lblAtmPres.Name = "lblAtmPres"
         Me.lblAtmPres.Size = New System.Drawing.Size(43, 13)
         Me.lblAtmPres.TabIndex = 39
@@ -315,7 +315,7 @@ Partial Class EditingForm_WindTurbine
         'tbAtmPres
         '
         Me.tbAtmPres.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbAtmPres.Location = New System.Drawing.Point(218, 71)
+        Me.tbAtmPres.Location = New System.Drawing.Point(235, 71)
         Me.tbAtmPres.Name = "tbAtmPres"
         Me.tbAtmPres.Size = New System.Drawing.Size(91, 20)
         Me.tbAtmPres.TabIndex = 38
@@ -334,7 +334,7 @@ Partial Class EditingForm_WindTurbine
         'tbNumberOfPanels
         '
         Me.tbNumberOfPanels.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbNumberOfPanels.Location = New System.Drawing.Point(218, 216)
+        Me.tbNumberOfPanels.Location = New System.Drawing.Point(235, 216)
         Me.tbNumberOfPanels.Name = "tbNumberOfPanels"
         Me.tbNumberOfPanels.Size = New System.Drawing.Size(91, 20)
         Me.tbNumberOfPanels.TabIndex = 36
@@ -353,7 +353,7 @@ Partial Class EditingForm_WindTurbine
         'tbPanelEfficiency
         '
         Me.tbPanelEfficiency.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbPanelEfficiency.Location = New System.Drawing.Point(218, 190)
+        Me.tbPanelEfficiency.Location = New System.Drawing.Point(235, 190)
         Me.tbPanelEfficiency.Name = "tbPanelEfficiency"
         Me.tbPanelEfficiency.Size = New System.Drawing.Size(91, 20)
         Me.tbPanelEfficiency.TabIndex = 34
@@ -373,7 +373,7 @@ Partial Class EditingForm_WindTurbine
         '
         Me.lblDistanceUnits.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDistanceUnits.AutoSize = True
-        Me.lblDistanceUnits.Location = New System.Drawing.Point(316, 167)
+        Me.lblDistanceUnits.Location = New System.Drawing.Point(333, 167)
         Me.lblDistanceUnits.Name = "lblDistanceUnits"
         Me.lblDistanceUnits.Size = New System.Drawing.Size(43, 13)
         Me.lblDistanceUnits.TabIndex = 32
@@ -382,7 +382,7 @@ Partial Class EditingForm_WindTurbine
         'tbRotorDiameter
         '
         Me.tbRotorDiameter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbRotorDiameter.Location = New System.Drawing.Point(218, 164)
+        Me.tbRotorDiameter.Location = New System.Drawing.Point(235, 164)
         Me.tbRotorDiameter.Name = "tbRotorDiameter"
         Me.tbRotorDiameter.Size = New System.Drawing.Size(91, 20)
         Me.tbRotorDiameter.TabIndex = 31
@@ -412,7 +412,7 @@ Partial Class EditingForm_WindTurbine
         '
         Me.lblWindSpeed.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblWindSpeed.AutoSize = True
-        Me.lblWindSpeed.Location = New System.Drawing.Point(316, 49)
+        Me.lblWindSpeed.Location = New System.Drawing.Point(333, 49)
         Me.lblWindSpeed.Name = "lblWindSpeed"
         Me.lblWindSpeed.Size = New System.Drawing.Size(43, 13)
         Me.lblWindSpeed.TabIndex = 28
@@ -421,7 +421,7 @@ Partial Class EditingForm_WindTurbine
         'tbWindSpeed
         '
         Me.tbWindSpeed.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbWindSpeed.Location = New System.Drawing.Point(218, 45)
+        Me.tbWindSpeed.Location = New System.Drawing.Point(235, 45)
         Me.tbWindSpeed.Name = "tbWindSpeed"
         Me.tbWindSpeed.Size = New System.Drawing.Size(91, 20)
         Me.tbWindSpeed.TabIndex = 27
@@ -437,20 +437,20 @@ Partial Class EditingForm_WindTurbine
         Me.Label3.TabIndex = 26
         Me.Label3.Text = "Wind Speed"
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxConnections.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 112)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(371, 65)
-        Me.GroupBox1.TabIndex = 21
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Connections"
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy)
+        Me.GroupBoxConnections.Location = New System.Drawing.Point(12, 112)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.Size = New System.Drawing.Size(388, 65)
+        Me.GroupBoxConnections.TabIndex = 21
+        Me.GroupBoxConnections.TabStop = False
+        Me.GroupBoxConnections.Text = "Connections"
         '
         'btnCreateAndConnectEnergy
         '
@@ -458,7 +458,7 @@ Partial Class EditingForm_WindTurbine
         Me.btnCreateAndConnectEnergy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectEnergy.Image = CType(resources.GetObject("btnCreateAndConnectEnergy.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(315, 26)
+        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(332, 26)
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.btnCreateAndConnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectEnergy.TabIndex = 42
@@ -469,7 +469,7 @@ Partial Class EditingForm_WindTurbine
         Me.btnDisconnectEnergy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectEnergy.Image = CType(resources.GetObject("btnDisconnectEnergy.Image"), System.Drawing.Image)
         Me.btnDisconnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(342, 26)
+        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(359, 26)
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
         Me.btnDisconnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectEnergy.TabIndex = 23
@@ -493,7 +493,7 @@ Partial Class EditingForm_WindTurbine
         Me.cbEnergy.FormattingEnabled = True
         Me.cbEnergy.Location = New System.Drawing.Point(133, 26)
         Me.cbEnergy.Name = "cbEnergy"
-        Me.cbEnergy.Size = New System.Drawing.Size(176, 21)
+        Me.cbEnergy.Size = New System.Drawing.Size(193, 21)
         Me.cbEnergy.TabIndex = 21
         '
         'GroupBox5
@@ -509,7 +509,7 @@ Partial Class EditingForm_WindTurbine
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(371, 98)
+        Me.GroupBox5.Size = New System.Drawing.Size(388, 98)
         Me.GroupBox5.TabIndex = 20
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "General Info"
@@ -520,7 +520,7 @@ Partial Class EditingForm_WindTurbine
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTag.Location = New System.Drawing.Point(133, 19)
         Me.lblTag.Name = "lblTag"
-        Me.lblTag.Size = New System.Drawing.Size(230, 20)
+        Me.lblTag.Size = New System.Drawing.Size(247, 20)
         Me.lblTag.TabIndex = 24
         '
         'chkActive
@@ -529,7 +529,7 @@ Partial Class EditingForm_WindTurbine
         Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkActive.Location = New System.Drawing.Point(342, 43)
+        Me.chkActive.Location = New System.Drawing.Point(359, 43)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(21, 21)
         Me.chkActive.TabIndex = 21
@@ -599,22 +599,22 @@ Partial Class EditingForm_WindTurbine
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(412, 499)
+        Me.ClientSize = New System.Drawing.Size(412, 821)
         Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxResults)
+        Me.Controls.Add(Me.GroupBoxParameters)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "EditingForm_WindTurbine"
         Me.Text = "EditingForm_WindTurbine"
         Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxResults.ResumeLayout(False)
+        Me.GroupBoxResults.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
@@ -623,11 +623,11 @@ Partial Class EditingForm_WindTurbine
 
     Public WithEvents GroupBox4 As GroupBox
     Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
-    Public WithEvents GroupBox3 As GroupBox
+    Public WithEvents GroupBoxResults As GroupBox
     Friend WithEvents lblPowerUnits As Label
     Public WithEvents tbGenPower As TextBox
     Public WithEvents Label15 As Label
-    Public WithEvents GroupBox2 As GroupBox
+    Public WithEvents GroupBoxParameters As GroupBox
     Public WithEvents tbNumberOfPanels As TextBox
     Public WithEvents Label6 As Label
     Public WithEvents tbPanelEfficiency As TextBox
@@ -639,7 +639,7 @@ Partial Class EditingForm_WindTurbine
     Friend WithEvents lblWindSpeed As Label
     Public WithEvents tbWindSpeed As TextBox
     Public WithEvents Label3 As Label
-    Public WithEvents GroupBox1 As GroupBox
+    Public WithEvents GroupBoxConnections As GroupBox
     Public WithEvents btnCreateAndConnectEnergy As Button
     Public WithEvents btnDisconnectEnergy As Button
     Public WithEvents Label14 As Label

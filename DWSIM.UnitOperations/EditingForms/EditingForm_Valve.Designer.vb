@@ -37,7 +37,7 @@ Partial Class EditingForm_Valve
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.gbTable = New System.Windows.Forms.GroupBox()
@@ -64,7 +64,7 @@ Partial Class EditingForm_Valve
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
@@ -80,10 +80,10 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.gbTable.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.UtilitiesCtxMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -212,30 +212,30 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Panel1)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.rbCv)
-        Me.GroupBox2.Controls.Add(Me.rbKv)
-        Me.GroupBox2.Controls.Add(Me.btnCalcKv)
-        Me.GroupBox2.Controls.Add(Me.chkEnableKvOpRel)
-        Me.GroupBox2.Controls.Add(Me.tbKv)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.cbPress)
-        Me.GroupBox2.Controls.Add(Me.tbOutletPressure)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.cbPressureDropU)
-        Me.GroupBox2.Controls.Add(Me.tbPressureDrop)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cbCalcMode)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.Panel1)
+        Me.GroupBoxParameters.Controls.Add(Me.Label6)
+        Me.GroupBoxParameters.Controls.Add(Me.rbCv)
+        Me.GroupBoxParameters.Controls.Add(Me.rbKv)
+        Me.GroupBoxParameters.Controls.Add(Me.btnCalcKv)
+        Me.GroupBoxParameters.Controls.Add(Me.chkEnableKvOpRel)
+        Me.GroupBoxParameters.Controls.Add(Me.tbKv)
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.cbPress)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOutletPressure)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.cbPressureDropU)
+        Me.GroupBoxParameters.Controls.Add(Me.tbPressureDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.cbCalcMode)
+        Me.GroupBoxParameters.Controls.Add(Me.Label8)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
         '
         'Panel1
         '
@@ -484,22 +484,22 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip2"))
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip2"))
         '
         'btnCreateAndConnectOutlet1
         '
@@ -608,25 +608,25 @@ Partial Class EditingForm_Valve
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_Valve"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.gbTable.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.UtilitiesCtxMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -641,7 +641,7 @@ Partial Class EditingForm_Valve
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents cbCalcMode As System.Windows.Forms.ComboBox
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents cbPressureDropU As System.Windows.Forms.ComboBox
@@ -651,7 +651,7 @@ Partial Class EditingForm_Valve
     Public WithEvents cbPress As System.Windows.Forms.ComboBox
     Public WithEvents tbOutletPressure As System.Windows.Forms.TextBox
     Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnDisconnect1 As System.Windows.Forms.Button
     Public WithEvents Label7 As System.Windows.Forms.Label

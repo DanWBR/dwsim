@@ -31,12 +31,12 @@ Partial Class EditingForm_Spec
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.lblResult = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbExpression = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.lblTargetVal = New System.Windows.Forms.Label()
         Me.lblSourceVal = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -53,8 +53,8 @@ Partial Class EditingForm_Spec
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -102,15 +102,15 @@ Partial Class EditingForm_Spec
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.lblResult)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.tbExpression)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.lblResult)
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.tbExpression)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
         '
         'lblResult
         '
@@ -132,23 +132,23 @@ Partial Class EditingForm_Spec
         resources.ApplyResources(Me.tbExpression, "tbExpression")
         Me.tbExpression.Name = "tbExpression"
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.lblTargetVal)
-        Me.GroupBox1.Controls.Add(Me.lblSourceVal)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cbTargetProp)
-        Me.GroupBox1.Controls.Add(Me.cbTargetObj)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbSourceProp)
-        Me.GroupBox1.Controls.Add(Me.cbSourceObj)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.lblTargetVal)
+        Me.GroupBoxConnections.Controls.Add(Me.lblSourceVal)
+        Me.GroupBoxConnections.Controls.Add(Me.Label6)
+        Me.GroupBoxConnections.Controls.Add(Me.Label5)
+        Me.GroupBoxConnections.Controls.Add(Me.Label2)
+        Me.GroupBoxConnections.Controls.Add(Me.cbTargetProp)
+        Me.GroupBoxConnections.Controls.Add(Me.cbTargetObj)
+        Me.GroupBoxConnections.Controls.Add(Me.Label4)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbSourceProp)
+        Me.GroupBoxConnections.Controls.Add(Me.cbSourceObj)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
         '
         'lblTargetVal
         '
@@ -227,18 +227,18 @@ Partial Class EditingForm_Spec
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_Spec"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -247,10 +247,10 @@ Partial Class EditingForm_Spec
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents tbExpression As System.Windows.Forms.TextBox
     Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents cbSourceProp As System.Windows.Forms.ComboBox
     Public WithEvents cbSourceObj As System.Windows.Forms.ComboBox

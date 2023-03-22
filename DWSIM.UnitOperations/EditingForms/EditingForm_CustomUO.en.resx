@@ -346,6 +346,10 @@
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBoxVariables.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Variable</value>
   </data>
@@ -430,14 +434,14 @@
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 153</value>
   </data>
-  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 644</value>
-  </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 172</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
+  <data name="GroupBoxVariables.Text" xml:space="preserve">
     <value>Scripting Variables</value>
+  </data>
+  <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
@@ -565,11 +569,14 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Inlet Stream 1</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 400</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
     <value>Connections</value>
+  </data>
+  <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="cbExecEngine.Location" type="System.Drawing.Point, System.Drawing">
     <value>186, 14</value>
@@ -589,14 +596,14 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Open Python Script Editor</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 572</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 70</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
+  </data>
+  <data name="GroupBoxIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>426, 23</value>
@@ -610,13 +617,10 @@
   <data name="chkUseEmbeddedImage.Text" xml:space="preserve">
     <value>Use Embedded Image Icon</value>
   </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 493</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxIcon.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 77</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
+  <data name="GroupBoxIcon.Text" xml:space="preserve">
     <value>Flowsheet Object Icon</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

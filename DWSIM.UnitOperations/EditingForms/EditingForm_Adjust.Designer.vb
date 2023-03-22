@@ -30,14 +30,14 @@ Partial Class EditingForm_Adjust
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.gbControlPanel = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.tbTolerance = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblSPUnits = New System.Windows.Forms.Label()
         Me.tbSetPoint = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.chkSolveGlobal = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxLinkedObjects = New System.Windows.Forms.GroupBox()
         Me.chkUseReferenced = New System.Windows.Forms.CheckBox()
         Me.lblRefVal = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -59,8 +59,8 @@ Partial Class EditingForm_Adjust
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxLinkedObjects.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -110,20 +110,20 @@ Partial Class EditingForm_Adjust
         Me.ToolTipValues.SetToolTip(Me.gbControlPanel, resources.GetString("gbControlPanel.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.gbControlPanel, resources.GetString("gbControlPanel.ToolTip2"))
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.tbTolerance)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.lblSPUnits)
-        Me.GroupBox2.Controls.Add(Me.tbSetPoint)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.chkSolveGlobal)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.tbTolerance)
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.lblSPUnits)
+        Me.GroupBoxParameters.Controls.Add(Me.tbSetPoint)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.chkSolveGlobal)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
         '
         'tbTolerance
         '
@@ -174,32 +174,32 @@ Partial Class EditingForm_Adjust
         Me.ToolTipValues.SetToolTip(Me.chkSolveGlobal, resources.GetString("chkSolveGlobal.ToolTip2"))
         Me.chkSolveGlobal.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'GroupBoxLinkedObjects
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.chkUseReferenced)
-        Me.GroupBox1.Controls.Add(Me.lblRefVal)
-        Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Controls.Add(Me.cbRefProp)
-        Me.GroupBox1.Controls.Add(Me.cbRefObj)
-        Me.GroupBox1.Controls.Add(Me.lblTargetVal)
-        Me.GroupBox1.Controls.Add(Me.lblSourceVal)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cbTargetProp)
-        Me.GroupBox1.Controls.Add(Me.cbTargetObj)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbSourceProp)
-        Me.GroupBox1.Controls.Add(Me.cbSourceObj)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxLinkedObjects, "GroupBoxLinkedObjects")
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.chkUseReferenced)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.lblRefVal)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label9)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label10)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.cbRefProp)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.cbRefObj)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.lblTargetVal)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.lblSourceVal)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label6)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label5)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label2)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.cbTargetProp)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.cbTargetObj)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label4)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label7)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.cbSourceProp)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.cbSourceObj)
+        Me.GroupBoxLinkedObjects.Controls.Add(Me.Label19)
+        Me.GroupBoxLinkedObjects.Name = "GroupBoxLinkedObjects"
+        Me.GroupBoxLinkedObjects.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxLinkedObjects, resources.GetString("GroupBoxLinkedObjects.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxLinkedObjects, resources.GetString("GroupBoxLinkedObjects.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxLinkedObjects, resources.GetString("GroupBoxLinkedObjects.ToolTip2"))
         '
         'chkUseReferenced
         '
@@ -367,20 +367,20 @@ Partial Class EditingForm_Adjust
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxLinkedObjects)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.gbControlPanel)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_Adjust"
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxLinkedObjects.ResumeLayout(False)
+        Me.GroupBoxLinkedObjects.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -388,8 +388,8 @@ Partial Class EditingForm_Adjust
     Public WithEvents chkActive As System.Windows.Forms.CheckBox
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents gbControlPanel As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxLinkedObjects As System.Windows.Forms.GroupBox
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents cbSourceProp As System.Windows.Forms.ComboBox
     Public WithEvents cbSourceObj As System.Windows.Forms.ComboBox

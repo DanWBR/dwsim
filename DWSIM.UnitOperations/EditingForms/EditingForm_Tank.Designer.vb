@@ -38,14 +38,14 @@ Partial Class EditingForm_Tank
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.cbResidTime = New System.Windows.Forms.ComboBox()
         Me.tbResidTime = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbVolume = New System.Windows.Forms.ComboBox()
         Me.tbVolume = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
@@ -59,8 +59,8 @@ Partial Class EditingForm_Tank
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -162,17 +162,17 @@ Partial Class EditingForm_Tank
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbResidTime)
-        Me.GroupBox2.Controls.Add(Me.tbResidTime)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.cbVolume)
-        Me.GroupBox2.Controls.Add(Me.tbVolume)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.cbResidTime)
+        Me.GroupBoxParameters.Controls.Add(Me.tbResidTime)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.cbVolume)
+        Me.GroupBoxParameters.Controls.Add(Me.tbVolume)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
         '
         'cbResidTime
         '
@@ -210,19 +210,19 @@ Partial Class EditingForm_Tank
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
         '
         'btnCreateAndConnectOutlet1
         '
@@ -293,21 +293,21 @@ Partial Class EditingForm_Tank
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_Tank"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -323,7 +323,7 @@ Partial Class EditingForm_Tank
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents cbVolume As System.Windows.Forms.ComboBox
     Public WithEvents tbVolume As System.Windows.Forms.TextBox
     Public WithEvents Label3 As System.Windows.Forms.Label
@@ -331,7 +331,7 @@ Partial Class EditingForm_Tank
     Public WithEvents cbResidTime As System.Windows.Forms.ComboBox
     Public WithEvents tbResidTime As System.Windows.Forms.TextBox
     Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnDisconnect1 As System.Windows.Forms.Button
     Public WithEvents Label7 As System.Windows.Forms.Label

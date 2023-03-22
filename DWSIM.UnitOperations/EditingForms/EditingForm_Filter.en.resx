@@ -175,6 +175,10 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>305, 206</value>
   </data>
@@ -274,11 +278,14 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Calculation Mode</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>401, 241</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
+  </data>
+  <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
     <value>347, 104</value>
@@ -388,20 +395,16 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
     <value>401, 139</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 998</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>48, 22, 48, 22</value>
+    <value>418, 941</value>
   </data>
 </root>

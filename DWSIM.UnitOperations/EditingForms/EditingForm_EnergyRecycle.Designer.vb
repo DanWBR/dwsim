@@ -38,7 +38,7 @@ Partial Class EditingForm_EnergyRecycle
         Me.cbE = New System.Windows.Forms.ComboBox()
         Me.tbET = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
@@ -48,13 +48,13 @@ Partial Class EditingForm_EnergyRecycle
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.tbEE = New System.Windows.Forms.TextBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -181,22 +181,22 @@ Partial Class EditingForm_EnergyRecycle
         Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip2"))
         '
         'btnCreateAndConnectOutlet1
         '
@@ -274,18 +274,18 @@ Partial Class EditingForm_EnergyRecycle
         Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip2"))
         '
-        'GroupBox3
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.tbEE)
-        Me.GroupBox3.Controls.Add(Me.Label3)
-        Me.GroupBox3.Controls.Add(Me.tbET)
-        Me.GroupBox3.Controls.Add(Me.cbE)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.tbEE)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.tbET)
+        Me.GroupBoxParameters.Controls.Add(Me.cbE)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
         '
         'tbEE
         '
@@ -305,21 +305,21 @@ Partial Class EditingForm_EnergyRecycle
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxParameters)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Name = "EditingForm_EnergyRecycle"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -335,7 +335,7 @@ Partial Class EditingForm_EnergyRecycle
     Public WithEvents cbE As System.Windows.Forms.ComboBox
     Public WithEvents tbET As System.Windows.Forms.TextBox
     Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnDisconnect1 As System.Windows.Forms.Button
     Public WithEvents Label7 As System.Windows.Forms.Label
@@ -346,7 +346,7 @@ Partial Class EditingForm_EnergyRecycle
     Public WithEvents lblTag As System.Windows.Forms.TextBox
     Public WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
-    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents tbEE As System.Windows.Forms.TextBox
     Friend WithEvents ToolTipChangeTag As ToolTip
 End Class

@@ -23,7 +23,7 @@ Partial Class EditingForm_Switch
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Switch))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxMonProp = New System.Windows.Forms.GroupBox()
         Me.tbOnValue = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -43,31 +43,31 @@ Partial Class EditingForm_Switch
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxMonProp.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBoxMonProp
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.tbOnValue)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label17)
-        Me.GroupBox1.Controls.Add(Me.cbSourceUnits)
-        Me.GroupBox1.Controls.Add(Me.tbOffValue)
-        Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.cbSourceUnitType)
-        Me.GroupBox1.Controls.Add(Me.lblSourceVal)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbSourceProp)
-        Me.GroupBox1.Controls.Add(Me.cbSourceObj)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxMonProp, "GroupBoxMonProp")
+        Me.GroupBoxMonProp.Controls.Add(Me.tbOnValue)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label4)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label17)
+        Me.GroupBoxMonProp.Controls.Add(Me.cbSourceUnits)
+        Me.GroupBoxMonProp.Controls.Add(Me.tbOffValue)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label16)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label3)
+        Me.GroupBoxMonProp.Controls.Add(Me.cbSourceUnitType)
+        Me.GroupBoxMonProp.Controls.Add(Me.lblSourceVal)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label5)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label7)
+        Me.GroupBoxMonProp.Controls.Add(Me.cbSourceProp)
+        Me.GroupBoxMonProp.Controls.Add(Me.cbSourceObj)
+        Me.GroupBoxMonProp.Controls.Add(Me.Label19)
+        Me.GroupBoxMonProp.Name = "GroupBoxMonProp"
+        Me.GroupBoxMonProp.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxMonProp, resources.GetString("GroupBoxMonProp.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxMonProp, resources.GetString("GroupBoxMonProp.ToolTip1"))
         '
         'tbOnValue
         '
@@ -218,20 +218,20 @@ Partial Class EditingForm_Switch
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxMonProp)
         Me.Controls.Add(Me.GroupBox5)
         Me.Name = "EditingForm_Switch"
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxMonProp.ResumeLayout(False)
+        Me.GroupBoxMonProp.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Public WithEvents GroupBox1 As GroupBox
+    Public WithEvents GroupBoxMonProp As GroupBox
     Public WithEvents Label4 As Label
     Public WithEvents cbSourceUnits As ComboBox
     Public WithEvents Label3 As Label

@@ -83,7 +83,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.btnDisconnect3 = New System.Windows.Forms.Button()
         Me.btnDisconnect2 = New System.Windows.Forms.Button()
         Me.btnDisconnect1 = New System.Windows.Forms.Button()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxLinkedVars = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvinputvars = New System.Windows.Forms.DataGridView()
@@ -96,7 +96,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.cbOutlet10 = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -137,7 +137,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxFlowsheet = New System.Windows.Forms.GroupBox()
         Me.cbEmbeddedFiles = New System.Windows.Forms.ComboBox()
         Me.rbFileExternal = New System.Windows.Forms.RadioButton()
         Me.rbFileEmbedded = New System.Windows.Forms.RadioButton()
@@ -149,14 +149,14 @@ Partial Class EditingForm_FlowsheetUO
         Me.btnOpenControlPanel = New System.Windows.Forms.Button()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GroupBoxLinkedVars.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
+        Me.GroupBoxFlowsheet.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -642,15 +642,15 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTipValues.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip2"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
-        'GroupBox6
+        'GroupBoxLinkedVars
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.TabControl1)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxLinkedVars, "GroupBoxLinkedVars")
+        Me.GroupBoxLinkedVars.Controls.Add(Me.TabControl1)
+        Me.GroupBoxLinkedVars.Name = "GroupBoxLinkedVars"
+        Me.GroupBoxLinkedVars.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxLinkedVars, resources.GetString("GroupBoxLinkedVars.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxLinkedVars, resources.GetString("GroupBoxLinkedVars.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxLinkedVars, resources.GetString("GroupBoxLinkedVars.ToolTip2"))
         '
         'TabControl1
         '
@@ -804,94 +804,94 @@ Partial Class EditingForm_FlowsheetUO
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet10)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet9)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet8)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet10)
-        Me.GroupBox1.Controls.Add(Me.Label20)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet10)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet9)
-        Me.GroupBox1.Controls.Add(Me.Label21)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet9)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet8)
-        Me.GroupBox1.Controls.Add(Me.Label22)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet8)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet7)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet7)
-        Me.GroupBox1.Controls.Add(Me.Label23)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet7)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet10)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet9)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet8)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet7)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect10)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect9)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect8)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect7)
-        Me.GroupBox1.Controls.Add(Me.Label8)
-        Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.cbInlet10)
-        Me.GroupBox1.Controls.Add(Me.cbInlet9)
-        Me.GroupBox1.Controls.Add(Me.cbInlet8)
-        Me.GroupBox1.Controls.Add(Me.cbInlet7)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet6)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet5)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet4)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet6)
-        Me.GroupBox1.Controls.Add(Me.Label17)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet6)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet5)
-        Me.GroupBox1.Controls.Add(Me.Label18)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet5)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet4)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet4)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet3)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet2)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet6)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet5)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet4)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet3)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet2)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet3)
-        Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet3)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet2)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect6)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect5)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect4)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect3)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet6)
-        Me.GroupBox1.Controls.Add(Me.cbInlet5)
-        Me.GroupBox1.Controls.Add(Me.cbInlet4)
-        Me.GroupBox1.Controls.Add(Me.cbInlet3)
-        Me.GroupBox1.Controls.Add(Me.cbInlet2)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet10)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet9)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet8)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet10)
+        Me.GroupBoxConnections.Controls.Add(Me.Label20)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet10)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet9)
+        Me.GroupBoxConnections.Controls.Add(Me.Label21)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet9)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet8)
+        Me.GroupBoxConnections.Controls.Add(Me.Label22)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet8)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet7)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet7)
+        Me.GroupBoxConnections.Controls.Add(Me.Label23)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet7)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet10)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet9)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet8)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet7)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect10)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect9)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect8)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect7)
+        Me.GroupBoxConnections.Controls.Add(Me.Label8)
+        Me.GroupBoxConnections.Controls.Add(Me.Label9)
+        Me.GroupBoxConnections.Controls.Add(Me.Label10)
+        Me.GroupBoxConnections.Controls.Add(Me.Label16)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet10)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet9)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet8)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet7)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.Label17)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.Label18)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.Label15)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect5)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect4)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect3)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.Label6)
+        Me.GroupBoxConnections.Controls.Add(Me.Label5)
+        Me.GroupBoxConnections.Controls.Add(Me.Label4)
+        Me.GroupBoxConnections.Controls.Add(Me.Label3)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label2)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label1)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip2"))
         '
         'Label20
         '
@@ -1253,24 +1253,24 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip2"))
         '
-        'GroupBox2
+        'GroupBoxFlowsheet
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbEmbeddedFiles)
-        Me.GroupBox2.Controls.Add(Me.rbFileExternal)
-        Me.GroupBox2.Controls.Add(Me.rbFileEmbedded)
-        Me.GroupBox2.Controls.Add(Me.chkUpdateProcessData)
-        Me.GroupBox2.Controls.Add(Me.chkRedirect)
-        Me.GroupBox2.Controls.Add(Me.chkInitialize)
-        Me.GroupBox2.Controls.Add(Me.BtnSearch)
-        Me.GroupBox2.Controls.Add(Me.TbFileName)
-        Me.GroupBox2.Controls.Add(Me.btnViewFlowsheet)
-        Me.GroupBox2.Controls.Add(Me.btnOpenControlPanel)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxFlowsheet, "GroupBoxFlowsheet")
+        Me.GroupBoxFlowsheet.Controls.Add(Me.cbEmbeddedFiles)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.rbFileExternal)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.rbFileEmbedded)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.chkUpdateProcessData)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.chkRedirect)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.chkInitialize)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.BtnSearch)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.TbFileName)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.btnViewFlowsheet)
+        Me.GroupBoxFlowsheet.Controls.Add(Me.btnOpenControlPanel)
+        Me.GroupBoxFlowsheet.Name = "GroupBoxFlowsheet"
+        Me.GroupBoxFlowsheet.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxFlowsheet, resources.GetString("GroupBoxFlowsheet.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxFlowsheet, resources.GetString("GroupBoxFlowsheet.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxFlowsheet, resources.GetString("GroupBoxFlowsheet.ToolTip2"))
         '
         'cbEmbeddedFiles
         '
@@ -1365,26 +1365,26 @@ Partial Class EditingForm_FlowsheetUO
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxFlowsheet)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.GroupBox6)
+        Me.Controls.Add(Me.GroupBoxConnections)
+        Me.Controls.Add(Me.GroupBoxLinkedVars)
         Me.Name = "EditingForm_FlowsheetUO"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBoxLinkedVars.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
+        Me.GroupBoxFlowsheet.ResumeLayout(False)
+        Me.GroupBoxFlowsheet.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1397,8 +1397,8 @@ Partial Class EditingForm_FlowsheetUO
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents lblTag As System.Windows.Forms.TextBox
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxLinkedVars As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnCreateAndConnectOutlet6 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectOutlet5 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectOutlet4 As System.Windows.Forms.Button
@@ -1452,7 +1452,7 @@ Partial Class EditingForm_FlowsheetUO
     Public WithEvents TabPage2 As System.Windows.Forms.TabPage
     Public WithEvents dgvinputvars As System.Windows.Forms.DataGridView
     Public WithEvents dgvoutputvars As System.Windows.Forms.DataGridView
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxFlowsheet As System.Windows.Forms.GroupBox
     Public WithEvents btnOpenControlPanel As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectOutlet10 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectOutlet9 As System.Windows.Forms.Button

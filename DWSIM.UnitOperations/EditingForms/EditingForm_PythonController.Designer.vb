@@ -23,7 +23,7 @@ Partial Class EditingForm_PythonController
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_PythonController))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxLinked = New System.Windows.Forms.GroupBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cbTargetUnits = New System.Windows.Forms.ComboBox()
         Me.cbTargetType = New System.Windows.Forms.ComboBox()
@@ -48,43 +48,43 @@ Partial Class EditingForm_PythonController
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtScript = New ScintillaNET.Scintilla()
         Me.chkControllerActive = New System.Windows.Forms.CheckBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxLinked.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBoxLinked
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cbTargetUnits)
-        Me.GroupBox1.Controls.Add(Me.cbTargetType)
-        Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Controls.Add(Me.cbSourceUnits)
-        Me.GroupBox1.Controls.Add(Me.cbSourceType)
-        Me.GroupBox1.Controls.Add(Me.Label13)
-        Me.GroupBox1.Controls.Add(Me.lblTargetVal)
-        Me.GroupBox1.Controls.Add(Me.lblSourceVal)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cbTargetProp)
-        Me.GroupBox1.Controls.Add(Me.cbTargetObj)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbSourceProp)
-        Me.GroupBox1.Controls.Add(Me.cbSourceObj)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxLinked, "GroupBoxLinked")
+        Me.GroupBoxLinked.Controls.Add(Me.Label14)
+        Me.GroupBoxLinked.Controls.Add(Me.cbTargetUnits)
+        Me.GroupBoxLinked.Controls.Add(Me.cbTargetType)
+        Me.GroupBoxLinked.Controls.Add(Me.Label15)
+        Me.GroupBoxLinked.Controls.Add(Me.Label12)
+        Me.GroupBoxLinked.Controls.Add(Me.cbSourceUnits)
+        Me.GroupBoxLinked.Controls.Add(Me.cbSourceType)
+        Me.GroupBoxLinked.Controls.Add(Me.Label13)
+        Me.GroupBoxLinked.Controls.Add(Me.lblTargetVal)
+        Me.GroupBoxLinked.Controls.Add(Me.lblSourceVal)
+        Me.GroupBoxLinked.Controls.Add(Me.Label6)
+        Me.GroupBoxLinked.Controls.Add(Me.Label5)
+        Me.GroupBoxLinked.Controls.Add(Me.Label2)
+        Me.GroupBoxLinked.Controls.Add(Me.cbTargetProp)
+        Me.GroupBoxLinked.Controls.Add(Me.cbTargetObj)
+        Me.GroupBoxLinked.Controls.Add(Me.Label4)
+        Me.GroupBoxLinked.Controls.Add(Me.Label7)
+        Me.GroupBoxLinked.Controls.Add(Me.cbSourceProp)
+        Me.GroupBoxLinked.Controls.Add(Me.cbSourceObj)
+        Me.GroupBoxLinked.Controls.Add(Me.Label19)
+        Me.GroupBoxLinked.Name = "GroupBoxLinked"
+        Me.GroupBoxLinked.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxLinked, resources.GetString("GroupBoxLinked.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxLinked, resources.GetString("GroupBoxLinked.ToolTip1"))
         '
         'Label14
         '
@@ -276,16 +276,16 @@ Partial Class EditingForm_PythonController
         Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.txtScript)
-        Me.GroupBox2.Controls.Add(Me.chkControllerActive)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.txtScript)
+        Me.GroupBoxParameters.Controls.Add(Me.chkControllerActive)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
         '
         'Label1
         '
@@ -325,23 +325,23 @@ Partial Class EditingForm_PythonController
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxLinked)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_PythonController"
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxLinked.ResumeLayout(False)
+        Me.GroupBoxLinked.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Public WithEvents GroupBox1 As GroupBox
+    Public WithEvents GroupBoxLinked As GroupBox
     Public WithEvents lblTargetVal As Label
     Public WithEvents lblSourceVal As Label
     Public WithEvents Label6 As Label
@@ -358,7 +358,7 @@ Partial Class EditingForm_PythonController
     Public WithEvents lblTag As TextBox
     Public WithEvents chkActive As CheckBox
     Public WithEvents Label11 As Label
-    Public WithEvents GroupBox2 As GroupBox
+    Public WithEvents GroupBoxParameters As GroupBox
     Public WithEvents Label14 As Label
     Public WithEvents cbTargetUnits As ComboBox
     Public WithEvents cbTargetType As ComboBox

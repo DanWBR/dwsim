@@ -294,7 +294,7 @@
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="lblResult.AutoSize" type="System.Boolean, mscorlib">
@@ -322,7 +322,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblResult.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>GroupBoxParameters</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -352,7 +352,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>GroupBoxParameters</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -382,7 +382,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>GroupBoxParameters</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -406,36 +406,36 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbExpression.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>GroupBoxParameters</value>
   </data>
   <data name="&gt;&gt;tbExpression.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="GroupBoxParameters.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 263</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>326, 117</value>
   </data>
-  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="GroupBoxParameters.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Expressão</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;GroupBoxParameters.Name" xml:space="preserve">
+    <value>GroupBoxParameters</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;GroupBoxParameters.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GroupBoxParameters.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GroupBoxParameters.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="lblTargetVal.AutoSize" type="System.Boolean, mscorlib">
@@ -463,7 +463,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblTargetVal.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;lblTargetVal.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -493,7 +493,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblSourceVal.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;lblSourceVal.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -523,7 +523,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -553,7 +553,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -583,7 +583,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -607,7 +607,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbTargetProp.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;cbTargetProp.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -631,7 +631,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbTargetObj.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;cbTargetObj.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -661,7 +661,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -691,7 +691,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -715,7 +715,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbSourceProp.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;cbSourceProp.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -739,7 +739,7 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbSourceObj.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;cbSourceObj.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -769,33 +769,33 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+    <value>GroupBoxConnections</value>
   </data>
   <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="GroupBoxConnections.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 57</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
     <value>326, 200</value>
   </data>
-  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="GroupBoxConnections.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
     <value>Objetos Conectados e Propriedades</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;GroupBoxConnections.Name" xml:space="preserve">
+    <value>GroupBoxConnections</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;GroupBoxConnections.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GroupBoxConnections.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;GroupBoxConnections.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -814,7 +814,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>344, 998</value>
+    <value>344, 941</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -847,6 +847,6 @@
     <value>EditingForm_Spec</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.4.2.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

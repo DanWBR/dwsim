@@ -38,7 +38,7 @@ Partial Class EditingForm_Pipe
         Me.Label11 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -64,7 +64,7 @@ Partial Class EditingForm_Pipe
         Me.tbOutletPressure = New System.Windows.Forms.TextBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
@@ -78,7 +78,7 @@ Partial Class EditingForm_Pipe
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.gridResults = New System.Windows.Forms.DataGridView()
@@ -89,11 +89,11 @@ Partial Class EditingForm_Pipe
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
+        Me.GroupBoxResults.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -191,15 +191,15 @@ Partial Class EditingForm_Pipe
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.TabControl1)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.TabControl1)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
         '
         'TabControl1
         '
@@ -455,26 +455,26 @@ Partial Class EditingForm_Pipe
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip2"))
         '
         'btnCreateAndConnectEnergy
         '
@@ -590,15 +590,15 @@ Partial Class EditingForm_Pipe
         Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip2"))
         '
-        'GroupBox6
+        'GroupBoxResults
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.tabstrip1)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxResults, "GroupBoxResults")
+        Me.GroupBoxResults.Controls.Add(Me.tabstrip1)
+        Me.GroupBoxResults.Name = "GroupBoxResults"
+        Me.GroupBoxResults.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip2"))
         '
         'tabstrip1
         '
@@ -691,23 +691,23 @@ Partial Class EditingForm_Pipe
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxResults)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_Pipe"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBoxParameters.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
+        Me.GroupBoxResults.ResumeLayout(False)
         Me.tabstrip1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
@@ -723,9 +723,9 @@ Partial Class EditingForm_Pipe
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectEnergy As System.Windows.Forms.Button
     Public WithEvents Label14 As System.Windows.Forms.Label
     Public WithEvents cbEnergy As System.Windows.Forms.ComboBox
@@ -737,7 +737,7 @@ Partial Class EditingForm_Pipe
     Public WithEvents Label19 As System.Windows.Forms.Label
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents lblTag As System.Windows.Forms.TextBox
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxResults As System.Windows.Forms.GroupBox
     Public WithEvents tabstrip1 As System.Windows.Forms.TabControl
     Public WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents TabPage2 As System.Windows.Forms.TabPage

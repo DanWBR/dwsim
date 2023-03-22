@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
@@ -223,11 +227,14 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Inlet Stream 1</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 230</value>
+  </data>
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
+  <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="cbPressureCalcMode.Items" xml:space="preserve">
     <value>Inlet Minimum</value>
@@ -244,10 +251,12 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Pressure Calculation</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Notes</value>
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 65</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
+  </data>
   <data name="rtbAnnotations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -257,14 +266,17 @@
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 216</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Notes</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -299,5 +311,8 @@
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>378, 941</value>
   </data>
 </root>

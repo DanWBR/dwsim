@@ -169,6 +169,10 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="rbPartialCond.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 17</value>
   </data>
@@ -250,11 +254,14 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Light Key Compound (LK)</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>407, 216</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
+  </data>
+  <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="btnCreateAndConnectEnergy2.Location" type="System.Drawing.Point, System.Drawing">
     <value>353, 125</value>
@@ -415,11 +422,14 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Feed Stream</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
     <value>407, 154</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
     <value>Connections</value>
+  </data>
+  <data name="GroupBoxResults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -433,19 +443,18 @@
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>401, 263</value>
   </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>407, 282</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
+  <data name="GroupBoxResults.Text" xml:space="preserve">
     <value>Results</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 998</value>
+    <value>425, 941</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>64, 30, 64, 30</value>
   </data>

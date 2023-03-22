@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBoxMonitoredProperty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkDisplayPercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 17</value>
@@ -181,13 +185,10 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Object</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 81</value>
-  </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxMonitoredProperty.Size" type="System.Drawing.Size, System.Drawing">
     <value>362, 294</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
+  <data name="GroupBoxMonitoredProperty.Text" xml:space="preserve">
     <value>Monitored Property</value>
   </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
@@ -217,8 +218,7 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Object ID</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="GroupBoxAlarms.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="chkShowAlarms.Size" type="System.Drawing.Size, System.Drawing">
@@ -263,13 +263,10 @@
   <data name="chkVeryLow.Text" xml:space="preserve">
     <value>Very Low</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 381</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBoxAlarms.Size" type="System.Drawing.Size, System.Drawing">
     <value>362, 175</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
+  <data name="GroupBoxAlarms.Text" xml:space="preserve">
     <value>Alarms</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
