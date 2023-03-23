@@ -635,6 +635,10 @@ Public Class FormFlowsheet
         FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
         FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
+        FormSurface.FlowsheetSurface.Zoom *= 0.5
+
+        FormSurface.FlowsheetSurface.Center(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
+
         Me.FormLog.Grid1.Sort(Me.FormLog.Grid1.Columns(1), ListSortDirection.Descending)
 
         For Each ws In FormSpreadsheet.Spreadsheet.Worksheets

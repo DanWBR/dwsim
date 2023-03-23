@@ -733,7 +733,7 @@ Public Class GraphicsSurface
 
     End Sub
 
-    Public Sub Center()
+    Public Sub Center(viewwidth As Integer, viewheight As Integer)
 
         Dim minx As Integer = Integer.MaxValue
         Dim miny As Integer = Integer.MaxValue
@@ -752,6 +752,63 @@ Public Class GraphicsSurface
 
         middlex = (minx + maxx) / 2
         middley = (miny + maxy) / 2
+
+        Dim deltax = (viewwidth / 2 / Zoom - middlex)
+        Dim deltay = (viewheight / 2 / Zoom - middley)
+
+        'Origin.Offset(deltax, deltay)
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If Not gobj.IsConnector Then
+                gobj.X += deltax
+                gobj.Y += deltay
+            End If
+        Next
+
+    End Sub
+
+    Public Sub CenterTo(oldzoom As Double, mx As Integer, my As Integer, viewwidth As Integer, viewheight As Integer)
+
+        Dim minx As Integer = Integer.MaxValue
+        Dim miny As Integer = Integer.MaxValue
+        Dim maxx As Integer = 0
+        Dim maxy As Integer = 0
+        Dim middlex, middley As Integer
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If gobj.ObjectType <> ObjectType.Nenhum Then
+                If gobj.X <= minx Then minx = gobj.X
+                If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 60
+                If gobj.Y <= miny Then miny = gobj.Y
+                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 60
+            End If
+        Next
+
+        middlex = (minx + maxx) / 2
+        middley = (miny + maxy) / 2
+
+        Dim cx = viewwidth / 2 / Zoom
+        Dim cy = viewheight / 2 / Zoom
+
+        Dim obj = FindObjectAtPoint(New SKPoint(mx, my))
+
+        Dim x1 = mx / oldzoom
+        Dim y1 = my / oldzoom
+
+        Dim x2 = mx / Zoom
+        Dim y2 = my / Zoom
+
+        Dim deltax = x2 - x1
+        Dim deltay = y2 - y1
+
+        'Origin.Offset(deltax, deltay)
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If Not gobj.IsConnector Then
+                gobj.X += deltax
+                gobj.Y += deltay
+            End If
+        Next
 
     End Sub
 

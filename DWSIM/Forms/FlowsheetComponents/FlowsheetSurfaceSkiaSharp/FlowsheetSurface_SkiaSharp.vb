@@ -3180,7 +3180,7 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub CentralizarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CentralizarToolStripMenuItem.Click
-        FlowsheetSurface.Center()
+        FlowsheetSurface.Center(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         Me.Invalidate()
     End Sub
 
