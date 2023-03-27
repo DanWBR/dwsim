@@ -48,7 +48,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.cbHeadspace = New System.Windows.Forms.ComboBox()
         Me.tbHeadspace = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -68,7 +68,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -86,7 +86,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.gridResults = New System.Windows.Forms.DataGridView()
@@ -107,9 +107,9 @@ Partial Class EditingForm_ReactorCSTR
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
+        Me.GroupBoxResults.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -183,7 +183,7 @@ Partial Class EditingForm_ReactorCSTR
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -218,30 +218,30 @@ Partial Class EditingForm_ReactorCSTR
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbHeadspace)
-        Me.GroupBox2.Controls.Add(Me.tbHeadspace)
-        Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Controls.Add(Me.cbCatLoad)
-        Me.GroupBox2.Controls.Add(Me.tbCatLoad)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.cbPDrop)
-        Me.GroupBox2.Controls.Add(Me.tbPDrop)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.cbVol)
-        Me.GroupBox2.Controls.Add(Me.tbVol)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.cbReacSet)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.cbTemp)
-        Me.GroupBox2.Controls.Add(Me.tbOutletTemperature)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cbCalcMode)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.cbHeadspace)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHeadspace)
+        Me.GroupBoxParameters.Controls.Add(Me.Label15)
+        Me.GroupBoxParameters.Controls.Add(Me.cbCatLoad)
+        Me.GroupBoxParameters.Controls.Add(Me.tbCatLoad)
+        Me.GroupBoxParameters.Controls.Add(Me.Label8)
+        Me.GroupBoxParameters.Controls.Add(Me.cbPDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.tbPDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.Label6)
+        Me.GroupBoxParameters.Controls.Add(Me.cbVol)
+        Me.GroupBoxParameters.Controls.Add(Me.tbVol)
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.cbReacSet)
+        Me.GroupBoxParameters.Controls.Add(Me.Label4)
+        Me.GroupBoxParameters.Controls.Add(Me.cbTemp)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOutletTemperature)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.cbCalcMode)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
         '
         'cbHeadspace
         '
@@ -359,27 +359,27 @@ Partial Class EditingForm_ReactorCSTR
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet2)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet2)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label5)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
         '
         'btnCreateAndConnectOutlet2
         '
@@ -387,6 +387,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.btnCreateAndConnectOutlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip1"))
         Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet2
@@ -416,6 +417,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip1"))
         Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet1
@@ -424,6 +426,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip1"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
@@ -432,6 +435,7 @@ Partial Class EditingForm_ReactorCSTR
         Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip1"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectEnergy
@@ -497,12 +501,12 @@ Partial Class EditingForm_ReactorCSTR
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
         '
-        'GroupBox6
+        'GroupBoxResults
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.tabstrip1)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
+        resources.ApplyResources(Me.GroupBoxResults, "GroupBoxResults")
+        Me.GroupBoxResults.Controls.Add(Me.tabstrip1)
+        Me.GroupBoxResults.Name = "GroupBoxResults"
+        Me.GroupBoxResults.TabStop = False
         '
         'tabstrip1
         '
@@ -661,22 +665,22 @@ Partial Class EditingForm_ReactorCSTR
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox6)
+        Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_ReactorCSTR"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
+        Me.GroupBoxResults.ResumeLayout(False)
         Me.tabstrip1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
@@ -699,9 +703,9 @@ Partial Class EditingForm_ReactorCSTR
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectEnergy As System.Windows.Forms.Button
     Public WithEvents Label14 As System.Windows.Forms.Label
     Public WithEvents cbEnergy As System.Windows.Forms.ComboBox
@@ -713,7 +717,7 @@ Partial Class EditingForm_ReactorCSTR
     Public WithEvents Label19 As System.Windows.Forms.Label
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents lblTag As System.Windows.Forms.TextBox
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxResults As System.Windows.Forms.GroupBox
     Public WithEvents tabstrip1 As System.Windows.Forms.TabControl
     Public WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents TabPage2 As System.Windows.Forms.TabPage

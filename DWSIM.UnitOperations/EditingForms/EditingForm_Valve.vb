@@ -557,7 +557,7 @@ Public Class EditingForm_Valve
     Private Sub tbKvOpRel_TextChanged(sender As Object, e As EventArgs) Handles tbKvOpRel.KeyDown
         SimObject.PercentOpeningVersusPercentKvExpression = tbKvOpRel.Text
     End Sub
-    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBoxParameters.MouseMove
         MyBase.Editor_MouseMove(sender, e)
     End Sub
 

@@ -23,7 +23,7 @@ Partial Class EditingForm_SolarPanel
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_SolarPanel))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -36,7 +36,7 @@ Partial Class EditingForm_SolarPanel
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.tbNumberOfPanels = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.tbPanelEfficiency = New System.Windows.Forms.TextBox()
@@ -48,34 +48,34 @@ Partial Class EditingForm_SolarPanel
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbSolarIrr = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
         Me.lblPowerUnits = New System.Windows.Forms.Label()
         Me.tbGenPower = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxResults.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxConnections.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy)
-        Me.GroupBox1.Location = New System.Drawing.Point(7, 107)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(354, 65)
-        Me.GroupBox1.TabIndex = 16
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Connections"
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy)
+        Me.GroupBoxConnections.Location = New System.Drawing.Point(7, 107)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.Size = New System.Drawing.Size(354, 65)
+        Me.GroupBoxConnections.TabIndex = 16
+        Me.GroupBoxConnections.TabStop = False
+        Me.GroupBoxConnections.Text = "Connections"
         '
         'btnCreateAndConnectEnergy
         '
@@ -214,27 +214,27 @@ Partial Class EditingForm_SolarPanel
         Me.Label11.TabIndex = 14
         Me.Label11.Text = "Object"
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxParameters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.tbNumberOfPanels)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.tbPanelEfficiency)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.lblAreaUnits)
-        Me.GroupBox2.Controls.Add(Me.tbPanelArea)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.chkUseGlobalIrr)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.tbSolarIrr)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Location = New System.Drawing.Point(7, 178)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(354, 180)
-        Me.GroupBox2.TabIndex = 17
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Calculation Parameters"
+        Me.GroupBoxParameters.Controls.Add(Me.tbNumberOfPanels)
+        Me.GroupBoxParameters.Controls.Add(Me.Label6)
+        Me.GroupBoxParameters.Controls.Add(Me.tbPanelEfficiency)
+        Me.GroupBoxParameters.Controls.Add(Me.Label5)
+        Me.GroupBoxParameters.Controls.Add(Me.lblAreaUnits)
+        Me.GroupBoxParameters.Controls.Add(Me.tbPanelArea)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.chkUseGlobalIrr)
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.tbSolarIrr)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Location = New System.Drawing.Point(7, 178)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.Size = New System.Drawing.Size(354, 180)
+        Me.GroupBoxParameters.TabIndex = 17
+        Me.GroupBoxParameters.TabStop = False
+        Me.GroupBoxParameters.Text = "Calculation Parameters"
         '
         'tbNumberOfPanels
         '
@@ -342,19 +342,19 @@ Partial Class EditingForm_SolarPanel
         Me.Label3.TabIndex = 26
         Me.Label3.Text = "Solar Irradiation"
         '
-        'GroupBox3
+        'GroupBoxResults
         '
-        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxResults.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox3.Controls.Add(Me.lblPowerUnits)
-        Me.GroupBox3.Controls.Add(Me.tbGenPower)
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(7, 362)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(354, 69)
-        Me.GroupBox3.TabIndex = 18
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Results"
+        Me.GroupBoxResults.Controls.Add(Me.lblPowerUnits)
+        Me.GroupBoxResults.Controls.Add(Me.tbGenPower)
+        Me.GroupBoxResults.Controls.Add(Me.Label15)
+        Me.GroupBoxResults.Location = New System.Drawing.Point(7, 362)
+        Me.GroupBoxResults.Name = "GroupBoxResults"
+        Me.GroupBoxResults.Size = New System.Drawing.Size(354, 69)
+        Me.GroupBoxResults.TabIndex = 18
+        Me.GroupBoxResults.TabStop = False
+        Me.GroupBoxResults.Text = "Results"
         '
         'lblPowerUnits
         '
@@ -423,27 +423,27 @@ Partial Class EditingForm_SolarPanel
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(373, 672)
         Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxResults)
+        Me.Controls.Add(Me.GroupBoxParameters)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "EditingForm_SolarPanel"
         Me.Text = "EditingForm_SolarPanel"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxResults.ResumeLayout(False)
+        Me.GroupBoxResults.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
-    Public WithEvents GroupBox1 As GroupBox
+    Public WithEvents GroupBoxConnections As GroupBox
     Public WithEvents btnCreateAndConnectEnergy As Button
     Public WithEvents btnDisconnectEnergy As Button
     Public WithEvents Label14 As Label
@@ -456,7 +456,7 @@ Partial Class EditingForm_SolarPanel
     Public WithEvents Label13 As Label
     Public WithEvents Label12 As Label
     Public WithEvents Label11 As Label
-    Public WithEvents GroupBox2 As GroupBox
+    Public WithEvents GroupBoxParameters As GroupBox
     Public WithEvents tbNumberOfPanels As TextBox
     Public WithEvents Label6 As Label
     Public WithEvents tbPanelEfficiency As TextBox
@@ -468,7 +468,7 @@ Partial Class EditingForm_SolarPanel
     Friend WithEvents Label1 As Label
     Public WithEvents tbSolarIrr As TextBox
     Public WithEvents Label3 As Label
-    Public WithEvents GroupBox3 As GroupBox
+    Public WithEvents GroupBoxResults As GroupBox
     Friend WithEvents lblPowerUnits As Label
     Public WithEvents tbGenPower As TextBox
     Public WithEvents Label15 As Label

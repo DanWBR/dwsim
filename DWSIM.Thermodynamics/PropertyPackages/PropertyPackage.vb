@@ -475,15 +475,15 @@ Namespace PropertyPackages
 
         Public Property OverrideKvalFugCoeff As Boolean = False
 
-        Public KvalFugacityCoefficientOverride As Func(Of Double(), Double, Double, State, Double())
+        Public KvalFugacityCoefficientOverride As Func(Of Double(), Double, Double, State, PropertyPackage, Double())
 
         Public Property OverrideEnthalpyCalculation As Boolean = False
 
-        Public EnthalpyCalculationOverride As Func(Of Double(), Double, Double, State, Double)
+        Public EnthalpyCalculationOverride As Func(Of Double(), Double, Double, State, PropertyPackage, Double)
 
         Public Property OverrideEntropyCalculation As Boolean = False
 
-        Public EntropyCalculationOverride As Func(Of Double(), Double, Double, State, Double)
+        Public EntropyCalculationOverride As Func(Of Double(), Double, Double, State, PropertyPackage, Double)
 
         Public Property ForceNewFlashAlgorithmInstance As Boolean = False
 
@@ -680,6 +680,16 @@ Namespace PropertyPackages
             pp.LoadData(data)
 
             pp.UniqueID = "PP-" + Guid.NewGuid().ToString()
+
+            If EnthalpyCalculationOverride IsNot Nothing Then
+                pp.EnthalpyCalculationOverride = EnthalpyCalculationOverride.Clone()
+            End If
+            If EntropyCalculationOverride IsNot Nothing Then
+                pp.EntropyCalculationOverride = EntropyCalculationOverride.Clone()
+            End If
+            If KvalFugacityCoefficientOverride IsNot Nothing Then
+                pp.KvalFugacityCoefficientOverride = KvalFugacityCoefficientOverride.Clone()
+            End If
 
             Return pp
 
@@ -1352,11 +1362,11 @@ Namespace PropertyPackages
 
                 IObj?.Paragraphs.Add(String.Format("Fugacity coefficient calculation overriden by user. Calling user-defined functions..."))
 
-                fugliq = KvalFugacityCoefficientOverride.Invoke(Vx, T, P, State.Liquid)
+                fugliq = KvalFugacityCoefficientOverride.Invoke(Vx, T, P, State.Liquid, Me)
                 If type = "LV" Then
-                    fugvap = KvalFugacityCoefficientOverride.Invoke(Vy, T, P, State.Vapor)
+                    fugvap = KvalFugacityCoefficientOverride.Invoke(Vy, T, P, State.Vapor, Me)
                 Else ' LL
-                    fugvap = KvalFugacityCoefficientOverride.Invoke(Vy, T, P, State.Liquid)
+                    fugvap = KvalFugacityCoefficientOverride.Invoke(Vy, T, P, State.Liquid, Me)
                 End If
 
             Else

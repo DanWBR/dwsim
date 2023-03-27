@@ -38,7 +38,7 @@ Partial Class EditingForm_HeaterCooler
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.cbHeating = New System.Windows.Forms.ComboBox()
         Me.tbHeatingChange = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -57,7 +57,7 @@ Partial Class EditingForm_HeaterCooler
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy2 = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy2 = New System.Windows.Forms.Button()
         Me.cbEnergy2 = New System.Windows.Forms.ComboBox()
@@ -78,8 +78,8 @@ Partial Class EditingForm_HeaterCooler
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -205,31 +205,31 @@ Partial Class EditingForm_HeaterCooler
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbHeating)
-        Me.GroupBox2.Controls.Add(Me.tbHeatingChange)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.tbOutletVapFrac)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.cbDeltaTemp)
-        Me.GroupBox2.Controls.Add(Me.tbTemperatureChange)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.cbTemp)
-        Me.GroupBox2.Controls.Add(Me.tbOutletTemperature)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.tbEfficiency)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.cbPressureDropU)
-        Me.GroupBox2.Controls.Add(Me.tbPressureDrop)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cbCalcMode)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.cbHeating)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHeatingChange)
+        Me.GroupBoxParameters.Controls.Add(Me.Label6)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOutletVapFrac)
+        Me.GroupBoxParameters.Controls.Add(Me.Label5)
+        Me.GroupBoxParameters.Controls.Add(Me.cbDeltaTemp)
+        Me.GroupBoxParameters.Controls.Add(Me.tbTemperatureChange)
+        Me.GroupBoxParameters.Controls.Add(Me.Label4)
+        Me.GroupBoxParameters.Controls.Add(Me.cbTemp)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOutletTemperature)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.tbEfficiency)
+        Me.GroupBoxParameters.Controls.Add(Me.Label1)
+        Me.GroupBoxParameters.Controls.Add(Me.cbPressureDropU)
+        Me.GroupBoxParameters.Controls.Add(Me.tbPressureDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.cbCalcMode)
+        Me.GroupBoxParameters.Controls.Add(Me.Label8)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
         '
         'cbHeating
         '
@@ -372,29 +372,29 @@ Partial Class EditingForm_HeaterCooler
         Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy2)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy2)
-        Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy2)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label10)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
         '
         'btnCreateAndConnectEnergy2
         '
@@ -541,11 +541,11 @@ Partial Class EditingForm_HeaterCooler
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_HeaterCooler"
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
@@ -554,10 +554,10 @@ Partial Class EditingForm_HeaterCooler
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -573,7 +573,7 @@ Partial Class EditingForm_HeaterCooler
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents cbCalcMode As System.Windows.Forms.ComboBox
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents cbPressureDropU As System.Windows.Forms.ComboBox
@@ -593,7 +593,7 @@ Partial Class EditingForm_HeaterCooler
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents tbEfficiency As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectEnergy As System.Windows.Forms.Button
     Public WithEvents Label14 As System.Windows.Forms.Label
     Public WithEvents cbEnergy As System.Windows.Forms.ComboBox

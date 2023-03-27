@@ -41,12 +41,12 @@ Partial Class EditingForm_CAPEOPENUO
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxPropertyPackage = New System.Windows.Forms.GroupBox()
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxVariables = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvinputvars = New System.Windows.Forms.DataGridView()
@@ -56,7 +56,7 @@ Partial Class EditingForm_CAPEOPENUO
         Me.dgvoutputvars = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dginlets = New System.Windows.Forms.DataGridView()
@@ -76,28 +76,28 @@ Partial Class EditingForm_CAPEOPENUO
         Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.DataGridViewButtonColumn3 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.DataGridViewButtonColumn4 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxEditor = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxCAPEOPENInfo = New System.Windows.Forms.GroupBox()
         Me.lblCOName = New System.Windows.Forms.Label()
         Me.lblCOVer = New System.Windows.Forms.Label()
         Me.lblCODesc = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxIcon = New System.Windows.Forms.GroupBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GroupBoxPropertyPackage.SuspendLayout()
+        Me.GroupBoxVariables.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         CType(Me.dginlets, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,9 +105,9 @@ Partial Class EditingForm_CAPEOPENUO
         CType(Me.dgoutlets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage5.SuspendLayout()
         CType(Me.dgenergy, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.GroupBoxEditor.SuspendLayout()
+        Me.GroupBoxCAPEOPENInfo.SuspendLayout()
+        Me.GroupBoxIcon.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -184,17 +184,17 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
-        'GroupBox3
+        'GroupBoxPropertyPackage
         '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.btnConfigurePP)
-        Me.GroupBox3.Controls.Add(Me.cbPropPack)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxPropertyPackage, "GroupBoxPropertyPackage")
+        Me.GroupBoxPropertyPackage.Controls.Add(Me.btnConfigurePP)
+        Me.GroupBoxPropertyPackage.Controls.Add(Me.cbPropPack)
+        Me.GroupBoxPropertyPackage.Controls.Add(Me.Label9)
+        Me.GroupBoxPropertyPackage.Name = "GroupBoxPropertyPackage"
+        Me.GroupBoxPropertyPackage.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxPropertyPackage, resources.GetString("GroupBoxPropertyPackage.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxPropertyPackage, resources.GetString("GroupBoxPropertyPackage.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxPropertyPackage, resources.GetString("GroupBoxPropertyPackage.ToolTip2"))
         '
         'btnConfigurePP
         '
@@ -224,15 +224,15 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
-        'GroupBox6
+        'GroupBoxVariables
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.TabControl1)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxVariables, "GroupBoxVariables")
+        Me.GroupBoxVariables.Controls.Add(Me.TabControl1)
+        Me.GroupBoxVariables.Name = "GroupBoxVariables"
+        Me.GroupBoxVariables.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxVariables, resources.GetString("GroupBoxVariables.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxVariables, resources.GetString("GroupBoxVariables.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxVariables, resources.GetString("GroupBoxVariables.ToolTip2"))
         '
         'TabControl1
         '
@@ -360,15 +360,15 @@ Partial Class EditingForm_CAPEOPENUO
         Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.TabControl2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.TabControl2)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip2"))
         '
         'TabControl2
         '
@@ -598,15 +598,15 @@ Partial Class EditingForm_CAPEOPENUO
         Me.DataGridViewButtonColumn4.Text = "D"
         Me.DataGridViewButtonColumn4.UseColumnTextForButtonValue = True
         '
-        'GroupBox2
+        'GroupBoxEditor
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxEditor, "GroupBoxEditor")
+        Me.GroupBoxEditor.Controls.Add(Me.Button1)
+        Me.GroupBoxEditor.Name = "GroupBoxEditor"
+        Me.GroupBoxEditor.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxEditor, resources.GetString("GroupBoxEditor.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxEditor, resources.GetString("GroupBoxEditor.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxEditor, resources.GetString("GroupBoxEditor.ToolTip2"))
         '
         'Button1
         '
@@ -617,20 +617,20 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip2"))
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'GroupBox7
+        'GroupBoxCAPEOPENInfo
         '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
-        Me.GroupBox7.Controls.Add(Me.lblCOName)
-        Me.GroupBox7.Controls.Add(Me.lblCOVer)
-        Me.GroupBox7.Controls.Add(Me.lblCODesc)
-        Me.GroupBox7.Controls.Add(Me.Label4)
-        Me.GroupBox7.Controls.Add(Me.Label5)
-        Me.GroupBox7.Controls.Add(Me.Label6)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxCAPEOPENInfo, "GroupBoxCAPEOPENInfo")
+        Me.GroupBoxCAPEOPENInfo.Controls.Add(Me.lblCOName)
+        Me.GroupBoxCAPEOPENInfo.Controls.Add(Me.lblCOVer)
+        Me.GroupBoxCAPEOPENInfo.Controls.Add(Me.lblCODesc)
+        Me.GroupBoxCAPEOPENInfo.Controls.Add(Me.Label4)
+        Me.GroupBoxCAPEOPENInfo.Controls.Add(Me.Label5)
+        Me.GroupBoxCAPEOPENInfo.Controls.Add(Me.Label6)
+        Me.GroupBoxCAPEOPENInfo.Name = "GroupBoxCAPEOPENInfo"
+        Me.GroupBoxCAPEOPENInfo.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxCAPEOPENInfo, resources.GetString("GroupBoxCAPEOPENInfo.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxCAPEOPENInfo, resources.GetString("GroupBoxCAPEOPENInfo.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxCAPEOPENInfo, resources.GetString("GroupBoxCAPEOPENInfo.ToolTip2"))
         '
         'lblCOName
         '
@@ -680,16 +680,16 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
         '
-        'GroupBox4
+        'GroupBoxIcon
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.Button2)
-        Me.GroupBox4.Controls.Add(Me.chkUseEmbeddedImage)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxIcon, "GroupBoxIcon")
+        Me.GroupBoxIcon.Controls.Add(Me.Button2)
+        Me.GroupBoxIcon.Controls.Add(Me.chkUseEmbeddedImage)
+        Me.GroupBoxIcon.Name = "GroupBoxIcon"
+        Me.GroupBoxIcon.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxIcon, resources.GetString("GroupBoxIcon.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxIcon, resources.GetString("GroupBoxIcon.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxIcon, resources.GetString("GroupBoxIcon.ToolTip2"))
         '
         'Button2
         '
@@ -718,28 +718,28 @@ Partial Class EditingForm_CAPEOPENUO
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox7)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxIcon)
+        Me.Controls.Add(Me.GroupBoxCAPEOPENInfo)
+        Me.Controls.Add(Me.GroupBoxEditor)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBoxConnections)
+        Me.Controls.Add(Me.GroupBoxVariables)
+        Me.Controls.Add(Me.GroupBoxPropertyPackage)
         Me.Name = "EditingForm_CAPEOPENUO"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBoxPropertyPackage.ResumeLayout(False)
+        Me.GroupBoxPropertyPackage.PerformLayout()
+        Me.GroupBoxVariables.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBoxConnections.ResumeLayout(False)
         Me.TabControl2.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         CType(Me.dginlets, System.ComponentModel.ISupportInitialize).EndInit()
@@ -747,11 +747,11 @@ Partial Class EditingForm_CAPEOPENUO
         CType(Me.dgoutlets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage5.ResumeLayout(False)
         CType(Me.dgenergy, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
+        Me.GroupBoxEditor.ResumeLayout(False)
+        Me.GroupBoxCAPEOPENInfo.ResumeLayout(False)
+        Me.GroupBoxCAPEOPENInfo.PerformLayout()
+        Me.GroupBoxIcon.ResumeLayout(False)
+        Me.GroupBoxIcon.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -762,20 +762,20 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
-    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxPropertyPackage As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents lblTag As System.Windows.Forms.TextBox
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxVariables As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents TabControl1 As System.Windows.Forms.TabControl
     Public WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents TabPage2 As System.Windows.Forms.TabPage
     Public WithEvents dgvinputvars As System.Windows.Forms.DataGridView
     Public WithEvents dgvoutputvars As System.Windows.Forms.DataGridView
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxEditor As System.Windows.Forms.GroupBox
     Public WithEvents Button1 As System.Windows.Forms.Button
     Public WithEvents TabControl2 As System.Windows.Forms.TabControl
     Public WithEvents TabPage3 As System.Windows.Forms.TabPage
@@ -784,7 +784,7 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents TabPage5 As System.Windows.Forms.TabPage
     Public WithEvents dgoutlets As System.Windows.Forms.DataGridView
     Public WithEvents dgenergy As System.Windows.Forms.DataGridView
-    Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxCAPEOPENInfo As System.Windows.Forms.GroupBox
     Public WithEvents lblCOName As System.Windows.Forms.Label
     Public WithEvents lblCOVer As System.Windows.Forms.Label
     Public WithEvents lblCODesc As System.Windows.Forms.Label
@@ -808,7 +808,7 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents DataGridViewButtonColumn3 As DataGridViewButtonColumn
     Public WithEvents DataGridViewButtonColumn4 As DataGridViewButtonColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
-    Public WithEvents GroupBox4 As GroupBox
+    Public WithEvents GroupBoxIcon As GroupBox
     Public WithEvents Button2 As Button
     Public WithEvents chkUseEmbeddedImage As CheckBox
 End Class

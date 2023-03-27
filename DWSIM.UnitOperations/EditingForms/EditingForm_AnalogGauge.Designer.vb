@@ -23,7 +23,7 @@ Partial Class EditingForm_AnalogGauge
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_AnalogGauge))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxMonitoredProperty = New System.Windows.Forms.GroupBox()
         Me.chkDisplayPercent = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbSourceUnits = New System.Windows.Forms.ComboBox()
@@ -44,7 +44,7 @@ Partial Class EditingForm_AnalogGauge
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxAlarms = New System.Windows.Forms.GroupBox()
         Me.chkShowAlarms = New System.Windows.Forms.CheckBox()
         Me.tbVeryHigh = New System.Windows.Forms.TextBox()
         Me.chkVeryHigh = New System.Windows.Forms.CheckBox()
@@ -54,33 +54,33 @@ Partial Class EditingForm_AnalogGauge
         Me.chkLow = New System.Windows.Forms.CheckBox()
         Me.tbVeryLow = New System.Windows.Forms.TextBox()
         Me.chkVeryLow = New System.Windows.Forms.CheckBox()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxMonitoredProperty.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxAlarms.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBoxMonitoredProperty
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.chkDisplayPercent)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.cbSourceUnits)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.cbSourceUnitType)
-        Me.GroupBox1.Controls.Add(Me.tbMaxVal)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.tbMinVal)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.lblSourceVal)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbSourceProp)
-        Me.GroupBox1.Controls.Add(Me.cbSourceObj)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxMonitoredProperty, "GroupBoxMonitoredProperty")
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.chkDisplayPercent)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label4)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.cbSourceUnits)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label3)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.cbSourceUnitType)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.tbMaxVal)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label2)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.tbMinVal)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label1)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.lblSourceVal)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label5)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label7)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.cbSourceProp)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.cbSourceObj)
+        Me.GroupBoxMonitoredProperty.Controls.Add(Me.Label19)
+        Me.GroupBoxMonitoredProperty.Name = "GroupBoxMonitoredProperty"
+        Me.GroupBoxMonitoredProperty.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxMonitoredProperty, resources.GetString("GroupBoxMonitoredProperty.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxMonitoredProperty, resources.GetString("GroupBoxMonitoredProperty.ToolTip1"))
         '
         'chkDisplayPercent
         '
@@ -235,22 +235,22 @@ Partial Class EditingForm_AnalogGauge
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'GroupBox2
+        'GroupBoxAlarms
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.chkShowAlarms)
-        Me.GroupBox2.Controls.Add(Me.tbVeryHigh)
-        Me.GroupBox2.Controls.Add(Me.chkVeryHigh)
-        Me.GroupBox2.Controls.Add(Me.tbHigh)
-        Me.GroupBox2.Controls.Add(Me.chkHigh)
-        Me.GroupBox2.Controls.Add(Me.tbLow)
-        Me.GroupBox2.Controls.Add(Me.chkLow)
-        Me.GroupBox2.Controls.Add(Me.tbVeryLow)
-        Me.GroupBox2.Controls.Add(Me.chkVeryLow)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        resources.ApplyResources(Me.GroupBoxAlarms, "GroupBoxAlarms")
+        Me.GroupBoxAlarms.Controls.Add(Me.chkShowAlarms)
+        Me.GroupBoxAlarms.Controls.Add(Me.tbVeryHigh)
+        Me.GroupBoxAlarms.Controls.Add(Me.chkVeryHigh)
+        Me.GroupBoxAlarms.Controls.Add(Me.tbHigh)
+        Me.GroupBoxAlarms.Controls.Add(Me.chkHigh)
+        Me.GroupBoxAlarms.Controls.Add(Me.tbLow)
+        Me.GroupBoxAlarms.Controls.Add(Me.chkLow)
+        Me.GroupBoxAlarms.Controls.Add(Me.tbVeryLow)
+        Me.GroupBoxAlarms.Controls.Add(Me.chkVeryLow)
+        Me.GroupBoxAlarms.Name = "GroupBoxAlarms"
+        Me.GroupBoxAlarms.TabStop = False
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxAlarms, resources.GetString("GroupBoxAlarms.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxAlarms, resources.GetString("GroupBoxAlarms.ToolTip1"))
         '
         'chkShowAlarms
         '
@@ -324,23 +324,23 @@ Partial Class EditingForm_AnalogGauge
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxAlarms)
+        Me.Controls.Add(Me.GroupBoxMonitoredProperty)
         Me.Controls.Add(Me.GroupBox5)
         Me.Name = "EditingForm_AnalogGauge"
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxMonitoredProperty.ResumeLayout(False)
+        Me.GroupBoxMonitoredProperty.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBoxAlarms.ResumeLayout(False)
+        Me.GroupBoxAlarms.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Public WithEvents GroupBox1 As GroupBox
+    Public WithEvents GroupBoxMonitoredProperty As GroupBox
     Public WithEvents Label4 As Label
     Public WithEvents cbSourceUnits As ComboBox
     Public WithEvents Label3 As Label
@@ -360,7 +360,7 @@ Partial Class EditingForm_AnalogGauge
     Public WithEvents chkActive As CheckBox
     Public WithEvents Label11 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBoxAlarms As GroupBox
     Public WithEvents tbVeryHigh As TextBox
     Friend WithEvents chkVeryHigh As CheckBox
     Public WithEvents tbHigh As TextBox

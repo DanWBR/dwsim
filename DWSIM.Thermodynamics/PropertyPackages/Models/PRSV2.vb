@@ -161,7 +161,6 @@ Namespace PropertyPackages.Auxiliary
             i = 0
             Do
                 If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
                     alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                 Else
@@ -374,7 +373,6 @@ Namespace PropertyPackages.Auxiliary
             i = 0
             Do
                 If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
                     alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                 Else
@@ -554,7 +552,6 @@ Namespace PropertyPackages.Auxiliary
             i = 0
             Do
                 If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
                     alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                 Else
@@ -741,7 +738,6 @@ Namespace PropertyPackages.Auxiliary
             i = 0
             Do
                 If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     ci(i) = (0.378893 + 1.4897153 * w(i) - 0.17131848 * w(i) ^ 2 + 0.0196544 * w(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
                     alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                 Else
@@ -1281,7 +1277,6 @@ Final3:
             i = 0
             Do
                 If Vk1(i) * Vk2(i) * Vk3(i) <> 0.0 Then
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     ci(i) = (0.378893 + 1.4897153 * W(i) - 0.17131848 * W(i) ^ 2 + 0.0196544 * W(i) ^ 3) + (Vk1(i) + Vk2(i) * (Vk3(i) - Tr(i)) * (1 - Tr(i) ^ 0.5)) * (1 + Tr(i) ^ 0.5) * (0.7 - Tr(i))
                     alpha(i) = (1 + ci(i) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                 Else

@@ -24,7 +24,7 @@ Partial Class EditingForm_Emixer
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Emixer))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet6 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet5 = New System.Windows.Forms.Button()
@@ -65,44 +65,44 @@ Partial Class EditingForm_Emixer
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet6)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet5)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet4)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet3)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet2)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect6)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect5)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect4)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect3)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet6)
-        Me.GroupBox1.Controls.Add(Me.cbInlet5)
-        Me.GroupBox1.Controls.Add(Me.cbInlet4)
-        Me.GroupBox1.Controls.Add(Me.cbInlet3)
-        Me.GroupBox1.Controls.Add(Me.cbInlet2)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect5)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect4)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect3)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.Label6)
+        Me.GroupBoxConnections.Controls.Add(Me.Label5)
+        Me.GroupBoxConnections.Controls.Add(Me.Label4)
+        Me.GroupBoxConnections.Controls.Add(Me.Label3)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet6)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet5)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet4)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet3)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label2)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label1)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
         '
         'btnCreateAndConnectOutlet1
         '
@@ -393,18 +393,18 @@ Partial Class EditingForm_Emixer
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Name = "EditingForm_Emixer"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label5 As System.Windows.Forms.Label

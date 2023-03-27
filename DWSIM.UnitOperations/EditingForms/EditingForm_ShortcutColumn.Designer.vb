@@ -39,7 +39,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.rbPartialCond = New System.Windows.Forms.RadioButton()
         Me.rbTotalCond = New System.Windows.Forms.RadioButton()
         Me.cbRebPressureUnits = New System.Windows.Forms.ComboBox()
@@ -59,7 +59,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbLKey = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy2 = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy2 = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -81,7 +81,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
         Me.gridResults = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -89,9 +89,9 @@ Partial Class EditingForm_ShortcutColumn
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
+        Me.GroupBoxResults.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -209,33 +209,33 @@ Partial Class EditingForm_ShortcutColumn
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
-        'GroupBox2
+        'GroupBoxParameters
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.rbPartialCond)
-        Me.GroupBox2.Controls.Add(Me.rbTotalCond)
-        Me.GroupBox2.Controls.Add(Me.cbRebPressureUnits)
-        Me.GroupBox2.Controls.Add(Me.tbRebPressure)
-        Me.GroupBox2.Controls.Add(Me.cbCondPressureUnits)
-        Me.GroupBox2.Controls.Add(Me.tbCondPressure)
-        Me.GroupBox2.Controls.Add(Me.Label16)
-        Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Controls.Add(Me.Label14)
-        Me.GroupBox2.Controls.Add(Me.cbHKey)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.tbRefluxRatio)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.tbHKmolfrac)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.tbLKmolfrac)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cbLKey)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.rbPartialCond)
+        Me.GroupBoxParameters.Controls.Add(Me.rbTotalCond)
+        Me.GroupBoxParameters.Controls.Add(Me.cbRebPressureUnits)
+        Me.GroupBoxParameters.Controls.Add(Me.tbRebPressure)
+        Me.GroupBoxParameters.Controls.Add(Me.cbCondPressureUnits)
+        Me.GroupBoxParameters.Controls.Add(Me.tbCondPressure)
+        Me.GroupBoxParameters.Controls.Add(Me.Label16)
+        Me.GroupBoxParameters.Controls.Add(Me.Label15)
+        Me.GroupBoxParameters.Controls.Add(Me.Label14)
+        Me.GroupBoxParameters.Controls.Add(Me.cbHKey)
+        Me.GroupBoxParameters.Controls.Add(Me.Label5)
+        Me.GroupBoxParameters.Controls.Add(Me.tbRefluxRatio)
+        Me.GroupBoxParameters.Controls.Add(Me.Label4)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHKmolfrac)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.tbLKmolfrac)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.cbLKey)
+        Me.GroupBoxParameters.Controls.Add(Me.Label8)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
         '
         'rbPartialCond
         '
@@ -405,34 +405,34 @@ Partial Class EditingForm_ShortcutColumn
         Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip2"))
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy2)
-        Me.GroupBox1.Controls.Add(Me.Label20)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy2)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet2)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet2)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy1)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet2)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxConnections, "GroupBoxConnections")
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label20)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label6)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxConnections, resources.GetString("GroupBoxConnections.ToolTip2"))
         '
         'btnCreateAndConnectEnergy2
         '
@@ -624,15 +624,15 @@ Partial Class EditingForm_ShortcutColumn
         Me.ToolTipChangeTag.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip2"))
         '
-        'GroupBox6
+        'GroupBoxResults
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.gridResults)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip2"))
+        resources.ApplyResources(Me.GroupBoxResults, "GroupBoxResults")
+        Me.GroupBoxResults.Controls.Add(Me.gridResults)
+        Me.GroupBoxResults.Name = "GroupBoxResults"
+        Me.GroupBoxResults.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip2"))
         '
         'gridResults
         '
@@ -684,24 +684,24 @@ Partial Class EditingForm_ShortcutColumn
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxResults)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_ShortcutColumn"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBoxParameters.ResumeLayout(False)
+        Me.GroupBoxParameters.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
+        Me.GroupBoxResults.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -716,7 +716,7 @@ Partial Class EditingForm_ShortcutColumn
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxParameters As System.Windows.Forms.GroupBox
     Public WithEvents cbLKey As System.Windows.Forms.ComboBox
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents tbLKmolfrac As System.Windows.Forms.TextBox
@@ -724,7 +724,7 @@ Partial Class EditingForm_ShortcutColumn
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
     Public WithEvents tbHKmolfrac As System.Windows.Forms.TextBox
     Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxConnections As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
     Public WithEvents btnDisconnectInlet1 As System.Windows.Forms.Button
     Public WithEvents Label7 As System.Windows.Forms.Label
@@ -754,7 +754,7 @@ Partial Class EditingForm_ShortcutColumn
     Public WithEvents Label15 As System.Windows.Forms.Label
     Public WithEvents Label14 As System.Windows.Forms.Label
     Public WithEvents cbHKey As System.Windows.Forms.ComboBox
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Public WithEvents GroupBoxResults As System.Windows.Forms.GroupBox
     Public WithEvents gridResults As System.Windows.Forms.DataGridView
     Public WithEvents rbPartialCond As System.Windows.Forms.RadioButton
     Public WithEvents rbTotalCond As System.Windows.Forms.RadioButton

@@ -29,7 +29,7 @@ Partial Class EditingForm_WaterElectrolyzer
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
@@ -52,48 +52,48 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
         Me.gridOutput = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.gridInput = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxResults.SuspendLayout()
         CType(Me.gridOutput, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox3.SuspendLayout()
+        Me.GroupBoxParameters.SuspendLayout()
         CType(Me.gridInput, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBoxConnections
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxConnections.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
-        Me.GroupBox1.Controls.Add(Me.cbEnergy)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet1)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 112)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(368, 113)
-        Me.GroupBox1.TabIndex = 14
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Connections"
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label14)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbEnergy)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label7)
+        Me.GroupBoxConnections.Controls.Add(Me.cbOutlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet1)
+        Me.GroupBoxConnections.Controls.Add(Me.Label19)
+        Me.GroupBoxConnections.Location = New System.Drawing.Point(12, 112)
+        Me.GroupBoxConnections.Name = "GroupBoxConnections"
+        Me.GroupBoxConnections.Size = New System.Drawing.Size(368, 113)
+        Me.GroupBoxConnections.TabIndex = 14
+        Me.GroupBoxConnections.TabStop = False
+        Me.GroupBoxConnections.Text = "Connections"
         '
         'btnCreateAndConnectEnergy
         '
@@ -345,17 +345,17 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.rtbAnnotations.Size = New System.Drawing.Size(362, 199)
         Me.rtbAnnotations.TabIndex = 0
         '
-        'GroupBox2
+        'GroupBoxResults
         '
-        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxResults.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.gridOutput)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 381)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(368, 200)
-        Me.GroupBox2.TabIndex = 16
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Results"
+        Me.GroupBoxResults.Controls.Add(Me.gridOutput)
+        Me.GroupBoxResults.Location = New System.Drawing.Point(12, 381)
+        Me.GroupBoxResults.Name = "GroupBoxResults"
+        Me.GroupBoxResults.Size = New System.Drawing.Size(368, 200)
+        Me.GroupBoxResults.TabIndex = 16
+        Me.GroupBoxResults.TabStop = False
+        Me.GroupBoxResults.Text = "Results"
         '
         'gridOutput
         '
@@ -400,17 +400,17 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
-        'GroupBox3
+        'GroupBoxParameters
         '
-        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBoxParameters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox3.Controls.Add(Me.gridInput)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 226)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(368, 152)
-        Me.GroupBox3.TabIndex = 17
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Calculation Parameters"
+        Me.GroupBoxParameters.Controls.Add(Me.gridInput)
+        Me.GroupBoxParameters.Location = New System.Drawing.Point(12, 226)
+        Me.GroupBoxParameters.Name = "GroupBoxParameters"
+        Me.GroupBoxParameters.Size = New System.Drawing.Size(368, 152)
+        Me.GroupBoxParameters.TabIndex = 17
+        Me.GroupBoxParameters.TabStop = False
+        Me.GroupBoxParameters.Text = "Calculation Parameters"
         '
         'gridInput
         '
@@ -464,28 +464,28 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(392, 817)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxParameters)
+        Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "EditingForm_WaterElectrolyzer"
         Me.Text = "EditingForm_WaterElectrolyzer"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxConnections.ResumeLayout(False)
+        Me.GroupBoxConnections.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBoxResults.ResumeLayout(False)
         CType(Me.gridOutput, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBoxParameters.ResumeLayout(False)
         CType(Me.gridInput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Public WithEvents GroupBox1 As GroupBox
+    Public WithEvents GroupBoxConnections As GroupBox
     Public WithEvents GroupBox5 As GroupBox
     Public WithEvents lblTag As TextBox
     Public WithEvents chkActive As CheckBox
@@ -496,12 +496,12 @@ Partial Class EditingForm_WaterElectrolyzer
     Public WithEvents Label11 As Label
     Public WithEvents GroupBox4 As GroupBox
     Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBoxResults As GroupBox
     Public WithEvents gridOutput As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents GroupBoxParameters As GroupBox
     Public WithEvents gridInput As DataGridView
     Public WithEvents btnCreateAndConnectEnergy As Button
     Public WithEvents btnDisconnectEnergy As Button
