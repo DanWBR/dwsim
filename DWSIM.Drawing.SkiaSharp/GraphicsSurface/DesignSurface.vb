@@ -769,29 +769,6 @@ Public Class GraphicsSurface
 
     Public Sub CenterTo(oldzoom As Double, mx As Integer, my As Integer, viewwidth As Integer, viewheight As Integer)
 
-        Dim minx As Integer = Integer.MaxValue
-        Dim miny As Integer = Integer.MaxValue
-        Dim maxx As Integer = 0
-        Dim maxy As Integer = 0
-        Dim middlex, middley As Integer
-
-        For Each gobj As IGraphicObject In Me.DrawingObjects
-            If gobj.ObjectType <> ObjectType.Nenhum Then
-                If gobj.X <= minx Then minx = gobj.X
-                If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 60
-                If gobj.Y <= miny Then miny = gobj.Y
-                If gobj.Y + gobj.Height >= maxy Then maxy = gobj.Y + gobj.Height + 60
-            End If
-        Next
-
-        middlex = (minx + maxx) / 2
-        middley = (miny + maxy) / 2
-
-        Dim cx = viewwidth / 2 / Zoom
-        Dim cy = viewheight / 2 / Zoom
-
-        Dim obj = FindObjectAtPoint(New SKPoint(mx, my))
-
         Dim x1 = mx / oldzoom
         Dim y1 = my / oldzoom
 
