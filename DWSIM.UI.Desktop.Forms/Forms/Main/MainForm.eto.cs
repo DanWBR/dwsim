@@ -390,8 +390,7 @@ namespace DWSIM.UI
                     var si = (TreeGridItem)MostRecentList.SelectedItem;
                     var data = (Dictionary<string, string>)si.Tag;
                     LoadSimulation(data["Path"]);
-        //MostRecentList.UnselectAll();
-    };
+                };
             };
 
             SampleList.SelectedIndexChanged += (sender, e) =>
@@ -399,8 +398,7 @@ namespace DWSIM.UI
                 if (SampleList.SelectedIndex >= 0)
                 {
                     LoadSimulation(SampleList.SelectedKey);
-        // SampleList.SelectedValue = null;
-    };
+                };
             };
 
             FOSSEEList.SelectedIndexChanged += (sender, e) =>
@@ -629,9 +627,6 @@ namespace DWSIM.UI
                         Application.Instance.Invoke(() =>
                         {
                             loadingdialog.Close();
-                            var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
-                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
                             form.FlowsheetObject.UpdateInterface();
                             form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
                             form.Show();
@@ -730,9 +725,6 @@ namespace DWSIM.UI
                 Application.Instance.Invoke(() =>
                 {
                     loadingdialog.Close();
-                    var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
-                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
                     form.FlowsheetObject.UpdateInterface();
                     form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
                     form.Show();
