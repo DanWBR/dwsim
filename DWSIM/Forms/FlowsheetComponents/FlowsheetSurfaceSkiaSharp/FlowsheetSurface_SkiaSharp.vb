@@ -3171,11 +3171,13 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub ExibirTudoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExibirTudoToolStripMenuItem.Click
         FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+        FlowsheetSurface.Center(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         Me.Invalidate()
     End Sub
 
     Private Sub ZoomPadrao100ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZoomPadrao100ToolStripMenuItem.Click
         FlowsheetSurface.Zoom = 1
+        FlowsheetSurface.Center(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         Me.Invalidate()
     End Sub
 
@@ -3332,8 +3334,8 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
         If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
-        Application.DoEvents()
         FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
+        FlowsheetSurface.Center(FControl.Width, FControl.Height)
         Application.DoEvents()
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
         SplitContainerHorizontal.Panel1.Refresh()
@@ -3342,6 +3344,7 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
         If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.Zoom = 1
+        FlowsheetSurface.Center(FControl.Width, FControl.Height)
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
         SplitContainerHorizontal.Panel1.Refresh()
     End Sub

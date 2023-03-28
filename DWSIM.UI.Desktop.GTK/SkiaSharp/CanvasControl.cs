@@ -10,6 +10,7 @@ using Eto.Forms;
 using Eto.GtkSharp.Forms;
 using Eto.Drawing;
 using Eto.GtkSharp;
+using Pango;
 
 namespace DWSIM.UI.Desktop.GTK
 {
@@ -108,6 +109,8 @@ namespace DWSIM.UI.Desktop.GTK
 
         void FlowsheetSurface_GTK_ScrollEvent(object o, Gtk.ScrollEventArgs args)
         {
+            var oldzoom = fsurface.Zoom;
+
             if (args.Event.Direction == Gdk.ScrollDirection.Down)
             {
                 fsurface.Zoom += -5 / 100f;
@@ -117,6 +120,12 @@ namespace DWSIM.UI.Desktop.GTK
                 fsurface.Zoom += 5 / 100f;
             }
             if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
+
+            int x = (int)args.Event.X;
+            int y = (int)args.Event.Y;
+
+            fsurface.CenterTo(oldzoom, x, y, this.WidthRequest, this.HeightRequest);
+
             this.QueueDraw();
         }
 

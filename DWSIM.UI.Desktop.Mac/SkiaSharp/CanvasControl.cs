@@ -239,9 +239,16 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void ScrollWheel(NSEvent theEvent)
         {
+            var oldzoom = fsurface.Zoom;
             var scroll = theEvent.ScrollingDeltaX;
             fsurface.Zoom += (float)(scroll / 100.0f);
             if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
+            var scale = (float)GlobalSettings.Settings.DpiScale;
+            _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+            _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+            _lastTouchX *= scale;
+            _lastTouchY *= scale;
+            fsurface.CenterTo(oldzoom, (int)_lastTouchX, (int)_lastTouchY,(int)Bounds.Width, (int)Bounds.Height);
             this.NeedsDisplay = true;
         }
 

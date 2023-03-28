@@ -173,8 +173,10 @@ namespace DWSIM.UI.Desktop.WinForms
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
+            var oldzoom = fsurface.Zoom;
             fsurface.Zoom += e.Delta / 4 / 100.0f;
             if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
+            fsurface.CenterTo(oldzoom, e.X, e.Y, Width, Height);
             this.Invalidate();
         }
 
