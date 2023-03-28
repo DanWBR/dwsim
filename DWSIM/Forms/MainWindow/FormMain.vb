@@ -225,6 +225,7 @@ Public Class FormMain
         ' On user details loaded
         AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
+        AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
 
 #If Not WINE32 Then
 
@@ -336,6 +337,13 @@ Public Class FormMain
                         Me.LogoutDropdown.Visible = False
                         Me.LoginButton.Visible = True
                     End Sub)
+    End Sub
+
+    Private Sub UserService_ShowLoginForm(sender As Object, e As EventArgs)
+
+        Dim loginForm = New LoginForm
+        loginForm.ShowDialog()
+
     End Sub
 
 

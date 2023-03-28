@@ -1,4 +1,5 @@
-﻿using DWSIM.Simulate365.Models;
+﻿using DWSIM.Simulate365.FormFactories;
+using DWSIM.Simulate365.Models;
 using DWSIM.UI.Web.Settings;
 using Microsoft.Graph;
 using Newtonsoft.Json;
@@ -114,6 +115,12 @@ namespace DWSIM.Simulate365.Services
 
                 throw new Exception("An error occurred while creating folder on S365 Dashboard.", ex);
             }
+        }
+
+        public void ShowLoginForm()
+        {
+            var userService = UserService.GetInstance();
+            userService.ShowLogin();
         }
 
         private HttpClient GetDashboardClient(string token)
