@@ -78,7 +78,7 @@ Namespace UnitOperations
         Public Property Tube_Length As Double = 5.0
 
         'tube pitch in mm
-        Public Property Tube_Pitch As Double = 40.0
+        Public Property Tube_Pitch As Double = 80.0
 
         'tube fouling in K.m2/W
         Public Property Tube_Fouling As Double = 0.0#
@@ -705,7 +705,7 @@ Namespace UnitOperations
                         nt = n / Tube_PassesPerShell
                         A = n * Math.PI * de * (L - 2 * de)
 
-                        'If pitch < de Then Throw New Exception("Invalid input: tube spacing (pitch) is smaller than the tube's external diameter.")
+                        If pitch < de Then Throw New Exception("Invalid input: tube spacing (pitch) is smaller than the tube's external diameter.")
 
                         'hot
                         vt = Wh / (rhoh * nt * Math.PI * di ^ 2 / 4)
