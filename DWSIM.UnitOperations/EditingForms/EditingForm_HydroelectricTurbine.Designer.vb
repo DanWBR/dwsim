@@ -199,7 +199,7 @@ Partial Class EditingForm_HydroelectricTurbine
         Me.rtbAnnotations.Location = New System.Drawing.Point(3, 16)
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -485,10 +485,7 @@ Partial Class EditingForm_HydroelectricTurbine
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents GroupBoxParameters As GroupBox
     Public WithEvents gridInput As DataGridView
-    Friend WithEvents GroupBoxResults As GroupBox
     Public WithEvents gridOutput As DataGridView
     Public WithEvents GroupBox4 As GroupBox
     Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
@@ -520,4 +517,6 @@ Partial Class EditingForm_HydroelectricTurbine
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Public WithEvents GroupBoxParameters As GroupBox
+    Public WithEvents GroupBoxResults As GroupBox
 End Class
