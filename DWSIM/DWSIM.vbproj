@@ -678,6 +678,12 @@
     <Compile Include="Forms\FormBrowser.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormBrowserDockable.Designer.vb">
+      <DependentUpon>FormBrowserDockable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormBrowserDockable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormChart_OxyPlot.Designer.vb">
       <DependentUpon>FormChart_OxyPlot.vb</DependentUpon>
     </Compile>
@@ -1454,6 +1460,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBrowser.resx">
       <DependentUpon>FormBrowser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBrowserDockable.resx">
+      <DependentUpon>FormBrowserDockable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.de.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>

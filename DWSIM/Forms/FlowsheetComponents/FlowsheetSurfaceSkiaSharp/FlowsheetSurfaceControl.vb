@@ -85,7 +85,7 @@ Public Class FlowsheetSurfaceControl
         If (obj Is Nothing) Then
 
             FlowsheetSurface.ZoomAll(Width, Height)
-            FlowsheetSurface.ZoomAll(Width, Height)
+            FlowsheetSurface.Center(Width, Height)
             FlowsheetObject.FormSurface.TSTBZoom.Text = FlowsheetSurface.Zoom.ToString("###%")
             Invalidate()
             Invalidate()

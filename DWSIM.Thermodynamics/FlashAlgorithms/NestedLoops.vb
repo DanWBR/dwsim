@@ -17,6 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
+Imports System.Numerics
 Imports DotNumerics.Optimization
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.BrentOpt
@@ -140,7 +141,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vw = PP.RET_VW()
             Vn = PP.RET_VNAMES()
 
-            fi = Vz.Clone
+            Array.Copy(Vz, fi, n + 1)
 
             'Calculate Ki`s
 
@@ -170,7 +171,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             'Estimate V
 
-            If T > MathEx.Common.Max(PP.RET_VTC, Vz) Then
+            If T > MathEx.Common.Max(VTc, Vz) Then
                 Vy = Vz
                 Vx = Vy.DivideY(Ki).NormalizeY
                 Vx = Vx.ReplaceInvalidsWithZeroes()
@@ -239,8 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If g > 0 Then Vmin = V Else Vmax = V
 
-
-            V = Brent.BrentOpt3(Vmin, Vmax, 10, 0.001, 100,
+            V = Brent.BrentOpt3(Vmin, Vmax, 2, 0.001, 100,
                            Function(Vb)
                                Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
                            End Function)
@@ -277,9 +277,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-            Ki0 = Ki.Clone()
-            Vx0 = Vx.Clone()
-            Vy0 = Vy.Clone()
+            Array.Copy(Ki, Ki0, n + 1)
+            Array.Copy(Vx, Vx0, n + 1)
+            Array.Copy(Vy, Vy0, n + 1)
 
             Dim r1 As Object()
 
