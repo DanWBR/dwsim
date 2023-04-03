@@ -225,6 +225,7 @@ Public Class FormMain
         ' On user details loaded
         AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
+        AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
 
 #If Not WINE32 Then
 
@@ -336,6 +337,13 @@ Public Class FormMain
                         Me.LogoutDropdown.Visible = False
                         Me.LoginButton.Visible = True
                     End Sub)
+    End Sub
+
+    Private Sub UserService_ShowLoginForm(sender As Object, e As EventArgs)
+
+        Dim loginForm = New LoginForm
+        loginForm.ShowDialog()
+
     End Sub
 
 
@@ -2107,7 +2115,6 @@ Public Class FormMain
 
         Dim filename As String
 
-        If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
 
         form.FilePath = handler.FullPath
         form.Options.FilePath = handler.FullPath
@@ -2185,6 +2192,8 @@ Public Class FormMain
 
         Me.Invalidate()
         Application.DoEvents()
+
+        If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
 
         If TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
             Dim mypath As String = simulationfilename
@@ -3582,8 +3591,6 @@ Public Class FormMain
 
         RaiseEvent FlowsheetSavingToXML(form, New EventArgs())
 
-        If simulationfilename = "" Then simulationfilename = handler.FullPath
-
         Dim xdoc As New XDocument()
         Dim xel As XElement
 
@@ -3765,6 +3772,7 @@ Public Class FormMain
             handler.Write(stream)
         End Using
 
+        If simulationfilename = "" Then simulationfilename = handler.FullPath
         Dim fileExtension As String = IO.Path.GetExtension(simulationfilename).ToLower
 
         If (fileExtension.Contains("dwxml") Or fileExtension.Contains("dwxmz")) Then
@@ -4140,6 +4148,7 @@ Label_00CC:
                 Try
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
+                    filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
                 Catch ex As Exception
                 End Try
             Else
@@ -4149,6 +4158,9 @@ Label_00CC:
                     Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
                     filePickerForm.SuggestedDirectory = fpath
+                    If TypeOf filePickerForm Is Simulate365.FormFactories.S365FilePickerForm Then
+                        filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    End If
                 Catch ex As Exception
                 End Try
             End If

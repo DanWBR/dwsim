@@ -130,13 +130,13 @@
     <Compile Include="Models\OAuthErrorResponse.cs" />
     <Compile Include="Models\OAuthTokenResponse.cs" />
     <Compile Include="Models\S365File.cs" />
+    <Compile Include="Models\UploadConflictAction.cs" />
     <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\FilePickerService.cs" />
     <Compile Include="Services\FileUploaderService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Settings\DashboardSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">

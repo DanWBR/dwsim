@@ -55,7 +55,10 @@ namespace DWSIM.Simulate365.Models
     public class UploadFileResponseModel
     {
         public string Filename { get; set; }
+        public string OriginalFilename { get; set; }
+        public Guid? ParentDirectoryUniqueIdentifier { get; set; }
         public Guid FileUniqueIdentifier { get; set; }
+        public string SimulatePath { get; set; }
     }
 
 }

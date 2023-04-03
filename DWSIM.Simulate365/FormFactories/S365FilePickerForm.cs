@@ -21,6 +21,7 @@ namespace DWSIM.Simulate365.FormFactories
 
         public string SuggestedDirectory { get; set; }
         public string SuggestedFilename { get; set; }
+        private readonly UserService _userService;
 
         public S365FilePickerForm()
         {
@@ -29,6 +30,15 @@ namespace DWSIM.Simulate365.FormFactories
             _filePickerService.S3365DashboardFileOpenStarted += FilePickerService_S3365DashboardFileOpenStarted;
             _filePickerService.S365DashboardSaveFileClicked += FilePickerService_S365DashboardSaveFileClicked;
             _filePickerService.S365DashboardFolderCreated += _filePickerService_S365DashboardFolderCreated;
+            _userService = UserService.GetInstance();
+            _userService.OnUserLoggedIn += OnUserLoggedInEvent;
+        }
+         
+
+        private void OnUserLoggedInEvent(object sender, EventArgs e)
+        {
+           
+            _webUIForm.Navigate(_webUIForm.InitialUrl);
         }
 
         private void _filePickerService_S365DashboardFolderCreated(object sender, EventArgs e)
@@ -38,13 +48,20 @@ namespace DWSIM.Simulate365.FormFactories
 
         private void FilePickerService_S365DashboardSaveFileClicked(object sender, S365DashboardSaveFile e)
         {
+            UsubscribeFromEvents();
+
             // Close window
             _webUIForm?.Close();
             _webUIForm?.Dispose();
         }
+        private void UsubscribeFromEvents()
+        {
+            _userService.OnUserLoggedIn -= OnUserLoggedInEvent;
+        }
 
         private void FilePickerService_S3365DashboardFileOpenStarted(object sender, EventArgs e)
         {
+            UsubscribeFromEvents();
             // Close window
             _webUIForm?.Close();
             _webUIForm?.Dispose();
@@ -62,7 +79,7 @@ namespace DWSIM.Simulate365.FormFactories
                 queryParams.Add("extensions", string.Join("_", fileFormats));
             }
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
-            {   
+            {
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
             }
 
@@ -95,11 +112,12 @@ namespace DWSIM.Simulate365.FormFactories
 
             return _filePickerService.SelectedSaveFile != null ?
                 new S365File(null)
-                {                  
+                {
                     FileUniqueIdentifier = null,
                     Filename = _filePickerService.SelectedSaveFile.Filename,
                     ParentUniqueIdentifier = _filePickerService.SelectedSaveFile.ParentUniqueIdentifier,
-                    FullPath = _filePickerService.SelectedSaveFile.SimulatePath
+                    FullPath = _filePickerService.SelectedSaveFile.SimulatePath,
+                    ConflictAction = _filePickerService.SelectedSaveFile.ConflictAction
                 } : null;
         }
 
@@ -113,7 +131,7 @@ namespace DWSIM.Simulate365.FormFactories
                 queryParams.Add("extensions", string.Join("_", fileFormats));
             }
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
-            {               
+            {
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
             }
 

@@ -1,5 +1,5 @@
 ﻿using DWSIM.Simulate365.Models;
-using DWSIM.Simulate365.Settings;
+using DWSIM.UI.Web.Settings;
 using Microsoft.Graph;
 using Newtonsoft.Json;
 using System;
@@ -17,13 +17,13 @@ namespace DWSIM.Simulate365.Services
 
     public class FileUploaderService
     {
-        public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, string filePath, string filename, string simulatePath)
+        public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, string filePath, string filename, string simulatePath, UploadConflictAction? conflictAction)
         {
             using (var fileStream = System.IO.File.OpenRead(filePath))
-                return UploadFile(fileUniqueIdentifier, parentUniqueIdentifier, fileStream, filename, simulatePath);
+                return UploadFile(fileUniqueIdentifier, parentUniqueIdentifier, fileStream, filename, simulatePath, conflictAction);
         }
 
-        public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, Stream fileStream, string filename, string simulatePath)
+        public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, Stream fileStream, string filename, string simulatePath, UploadConflictAction? conflictAction)
         {
             try
             {
@@ -32,14 +32,15 @@ namespace DWSIM.Simulate365.Services
                 var token = UserService.GetInstance().GetUserToken();
                 var client = GetDashboardClient(token);
 
-                var file = Task.Run(async () => await UploadDocumentAsync(parentUniqueIdentifier, filename, fileStream)).Result;
+                var file = Task.Run(async () => await UploadDocumentAsync(parentUniqueIdentifier, filename, fileStream, conflictAction)).Result;
 
                 return new S365File(filename)
                 {
                     FileUniqueIdentifier = file.FileUniqueIdentifier.ToString(),
                     ParentUniqueIdentifier = parentUniqueIdentifier,
-                    Filename = filename,
-                    FullPath = simulatePath
+                    Filename = file.Filename,
+                    FullPath = file.SimulatePath
+
                 };
 
             }
@@ -50,7 +51,7 @@ namespace DWSIM.Simulate365.Services
             }
         }
 
-        public static async Task<UploadFileResponseModel> UploadDocumentAsync(string parentUniqueIdentifier, string filename, Stream fileStream)
+        public static async Task<UploadFileResponseModel> UploadDocumentAsync(string parentUniqueIdentifier, string filename, Stream fileStream, UploadConflictAction? conflictAction)
         {
 
 
@@ -62,7 +63,10 @@ namespace DWSIM.Simulate365.Services
                 using (var content = new MultipartFormDataContent())
                 {
                     // 0= Overwrite file if exists, 1= Keep both
-                    content.Add(new StringContent("0"), "ConflictAction");
+                    if (conflictAction.HasValue)
+                    {
+                        content.Add(new StringContent(conflictAction.ToString()), "ConflictAction");
+                    }
                     if (!string.IsNullOrWhiteSpace(parentUniqueIdentifier))
                     {
                         content.Add(new StringContent(parentUniqueIdentifier), "ParentDirectoryUniqueId");

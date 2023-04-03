@@ -172,7 +172,6 @@
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
       <Name>DWSIM</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

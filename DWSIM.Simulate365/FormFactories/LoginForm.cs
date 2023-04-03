@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -57,7 +58,7 @@ namespace DWSIM.Simulate365.FormFactories
 
         public void ShowDialog()
         {
-            _webUIForm.ShowDialog();
+            _webUIForm.Show();
         }
 
         public void Close()
@@ -93,6 +94,8 @@ namespace DWSIM.Simulate365.FormFactories
             var loginUrl = GetLoginPageUrl();
             _webUIForm?.Navigate(loginUrl);
         }
+
+      
 
         private void WebView_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
         {
@@ -147,6 +150,8 @@ namespace DWSIM.Simulate365.FormFactories
                     // Store token
                     UserService.GetInstance()
                                 .SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
+
+                    UserService.GetInstance().OnUserLoggedIn?.Invoke(this, new EventArgs());
 
                     // Close window
                     Close();

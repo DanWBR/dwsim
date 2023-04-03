@@ -23,6 +23,7 @@ namespace DWSIM.Simulate365.Models
         /// Directory path on Simulate 365, doesn't contain file name
         /// </summary>
         public string FullPath { get; set; }
+        public UploadConflictAction? ConflictAction { get; set; }
 
         public S365File(string localTmpFile)
         {
@@ -56,14 +57,18 @@ namespace DWSIM.Simulate365.Models
 
         public void Write(string localFilePath)
         {
-            var file = FileUploaderService.UploadFile(FileUniqueIdentifier, ParentUniqueIdentifier, localFilePath, Filename, FullPath);
+            var file = FileUploaderService.UploadFile(FileUniqueIdentifier, ParentUniqueIdentifier, localFilePath, Filename, FullPath, ConflictAction ?? UploadConflictAction.Overwrite);
             FileUniqueIdentifier = file.FileUniqueIdentifier;
+            Filename = file.Filename;
+            FullPath = file.FullPath;
         }
 
         public void Write(System.IO.Stream stream)
         {
-            var file = FileUploaderService.UploadFile(FileUniqueIdentifier, ParentUniqueIdentifier, stream, Filename, FullPath);
+            var file = FileUploaderService.UploadFile(FileUniqueIdentifier, ParentUniqueIdentifier, stream, Filename, FullPath, ConflictAction ?? UploadConflictAction.Overwrite);
             FileUniqueIdentifier = file.FileUniqueIdentifier;
+            Filename = file.Filename;
+            FullPath = file.FullPath;
         }
 
 
