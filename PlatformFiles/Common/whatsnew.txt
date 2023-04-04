@@ -1,14 +1,13 @@
-Version 8.4.2
+Version 8.4.3
 
-- Updated Cheméo parser to get data from new API endpoint
-- Smart Object Solver disabled by default
-- Added button to view all log messages
-- Japanese translation review
-- Fixed Dashboard window size for high-dpi displays
-- Fixed System.ValueTuple version mismatch
-- Fixed bug with OpenGL renderer (Classic UI)
-- Fixed Excel Add-In not working
-- Fixed PFR pressure drop calculation when Ntubes > 1 (discussion #445)
-- Fixed bug #422: Error in CoolProp PH flash
-- Fixed bug #444: Incorrect refrigerant outlet temperature
-- Fixed bug #446: Large temperature drop across splitter
+- Updates to Simulate 365 Login and File Picker
+- Nested Loops Flash optimizations
+- Exposing Valve's Actual Kv
+- Added "Invert Selection" to Edit menu (Classic UI)
+- Zoom+Center on mouse double-click
+- Fixed object cloning
+- Fixed an issue with Air Cooler model (#421)
+- Flowsheet zooming/centering fixes
+- Fixed issue with Liquid Cp calculation
+- Fixed a bug with Valve's Kv/Cv calculation mode
+- Other minor fixes

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.4.2
+Version 8.4.3
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,20 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.4.3
+
+- Updates to Simulate 365 Login and File Picker
+- Nested Loops Flash optimizations
+- Exposing Valve's Actual Kv
+- Added "Invert Selection" to Edit menu (Classic UI)
+- Zoom+Center on mouse double-click
+- Fixed object cloning
+- Fixed an issue with Air Cooler model (#421)
+- Flowsheet zooming/centering fixes
+- Fixed issue with Liquid Cp calculation
+- Fixed a bug with Valve's Kv/Cv calculation mode
+- Other minor fixes
 
 Version 8.4.2
 
