@@ -8,6 +8,7 @@ Anders Andreasen
 Andrew Dickson
 Bednarz Marc
 Bernhard Seyfang
+Bruce Bishkin
 Bruce Rising
 Bryan Evans
 Cameron Paul Ward
@@ -49,7 +50,7 @@ Les Waymont
 Lewis Estall
 Lorenzo Giuseppe Montani
 Luca Finardi
-Marcos AF Silva
+Marcos Silva
 Martin Heiser
 Masahiro Sakai
 Michael Papantoniou
