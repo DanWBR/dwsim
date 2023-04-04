@@ -522,7 +522,14 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Sub ClonarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClonarToolStripMenuItem.Click
 
-        CloneObject(FlowsheetSurface.SelectedObject)
+        For Each obj In FlowsheetSurface.SelectedObjects.Values
+            If TypeOf obj.Owner Is ISimulationObject Then
+                Try
+                    CloneObject(obj)
+                Catch ex As Exception
+                End Try
+            End If
+        Next
 
     End Sub
 
@@ -545,8 +552,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Dim objcount As Integer = (From go As GraphicObject In FlowsheetSurface.DrawingObjects Select go Where go.Tag.Contains(searchtext)).Count
 
-        Dim mpx = FlowsheetSurface.SelectedObject.X + FlowsheetSurface.SelectedObject.Width * 1.1
-        Dim mpy = FlowsheetSurface.SelectedObject.Y + FlowsheetSurface.SelectedObject.Height * 1.1
+        Dim mpx = gobj.X + gobj.Width * 1.2
+        Dim mpy = gobj.Y + gobj.Height * 1.2
 
         Select Case gobj.ObjectType
 

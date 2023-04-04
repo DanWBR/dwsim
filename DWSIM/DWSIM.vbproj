@@ -153,7 +153,8 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DefineDebug>true</DefineDebug>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -3393,6 +3394,7 @@
     <None Include="Resources\Icon128.ico" />
     <None Include="Resources\icons8-technical_support.png" />
     <None Include="Resources\info_96px.png" />
+    <None Include="Resources\invert_selection_80px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

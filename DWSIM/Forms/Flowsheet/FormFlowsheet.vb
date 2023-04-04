@@ -1414,7 +1414,14 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiCloneSelected_Click(sender As Object, e As EventArgs) Handles tsmiCloneSelected.Click
-        FormSurface.CloneObject(FormSurface.FlowsheetSurface.SelectedObject)
+        For Each obj In FormSurface.FlowsheetSurface.SelectedObjects.Values
+            If TypeOf obj.Owner Is ISimulationObject Then
+                Try
+                    FormSurface.CloneObject(obj)
+                Catch ex As Exception
+                End Try
+            End If
+        Next
     End Sub
 
     Public Sub tsmiRecalc_Click(sender As Object, e As EventArgs) Handles tsmiRecalc.Click
@@ -4182,6 +4189,28 @@ Public Class FormFlowsheet
         Else
             FormLog.Hide()
         End If
+
+    End Sub
+
+    Private Sub InvertSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InvertSelectionToolStripMenuItem.Click
+
+        Dim surface = FormSurface.FlowsheetSurface
+
+        surface.MultiSelectMode = True
+
+        FormSurface.tsbMultiSelectMode.Checked = True
+
+        For Each obj In surface.DrawingObjects
+            If Not TypeOf obj Is ConnectorGraphic Then
+                If Not surface.SelectedObjects.ContainsKey(obj.Name) Then
+                    surface.SelectedObjects.Add(obj.Name, obj)
+                Else
+                    surface.SelectedObjects.Remove(obj.Name)
+                End If
+            End If
+        Next
+
+        UpdateInterface()
 
     End Sub
 

@@ -21,9 +21,9 @@ Partial Class FormFlowsheet
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFlowsheet))
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,6 +34,7 @@ Partial Class FormFlowsheet
         Me.tsmiCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InvertSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiRemoveSelected = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiCloneSelected = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiRecalc = New System.Windows.Forms.ToolStripMenuItem()
@@ -166,7 +167,7 @@ Partial Class FormFlowsheet
         '
         'EditTSMI
         '
-        Me.EditTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiUndo, Me.tsmiRedo, Me.ToolStripSeparator14, Me.tsmiCut, Me.tsmiCopy, Me.tsmiPaste, Me.tsmiRemoveSelected, Me.tsmiCloneSelected, Me.tsmiRecalc, Me.tsmiExportData, Me.ToolStripSeparator18, Me.tsmiConfigSimulation})
+        Me.EditTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiUndo, Me.tsmiRedo, Me.ToolStripSeparator14, Me.tsmiCut, Me.tsmiCopy, Me.tsmiPaste, Me.InvertSelectionToolStripMenuItem, Me.tsmiRemoveSelected, Me.tsmiCloneSelected, Me.tsmiRecalc, Me.tsmiExportData, Me.ToolStripSeparator18, Me.tsmiConfigSimulation})
         Me.EditTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.EditTSMI.MergeIndex = 1
         Me.EditTSMI.Name = "EditTSMI"
@@ -220,11 +221,19 @@ Partial Class FormFlowsheet
         Me.tsmiPaste.Name = "tsmiPaste"
         resources.ApplyResources(Me.tsmiPaste, "tsmiPaste")
         '
+        'InvertSelectionToolStripMenuItem
+        '
+        Me.InvertSelectionToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.invert_selection_80px
+        Me.InvertSelectionToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.InvertSelectionToolStripMenuItem.MergeIndex = 6
+        Me.InvertSelectionToolStripMenuItem.Name = "InvertSelectionToolStripMenuItem"
+        resources.ApplyResources(Me.InvertSelectionToolStripMenuItem, "InvertSelectionToolStripMenuItem")
+        '
         'tsmiRemoveSelected
         '
         Me.tsmiRemoveSelected.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.tsmiRemoveSelected.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.tsmiRemoveSelected.MergeIndex = 6
+        Me.tsmiRemoveSelected.MergeIndex = 7
         Me.tsmiRemoveSelected.Name = "tsmiRemoveSelected"
         resources.ApplyResources(Me.tsmiRemoveSelected, "tsmiRemoveSelected")
         '
@@ -232,7 +241,7 @@ Partial Class FormFlowsheet
         '
         Me.tsmiCloneSelected.Image = Global.DWSIM.My.Resources.Resources.sheep
         Me.tsmiCloneSelected.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.tsmiCloneSelected.MergeIndex = 7
+        Me.tsmiCloneSelected.MergeIndex = 8
         Me.tsmiCloneSelected.Name = "tsmiCloneSelected"
         resources.ApplyResources(Me.tsmiCloneSelected, "tsmiCloneSelected")
         '
@@ -240,7 +249,7 @@ Partial Class FormFlowsheet
         '
         Me.tsmiRecalc.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
         Me.tsmiRecalc.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.tsmiRecalc.MergeIndex = 8
+        Me.tsmiRecalc.MergeIndex = 9
         Me.tsmiRecalc.Name = "tsmiRecalc"
         resources.ApplyResources(Me.tsmiRecalc, "tsmiRecalc")
         '
@@ -248,14 +257,14 @@ Partial Class FormFlowsheet
         '
         Me.tsmiExportData.Image = Global.DWSIM.My.Resources.Resources.clipboard_sign
         Me.tsmiExportData.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.tsmiExportData.MergeIndex = 9
+        Me.tsmiExportData.MergeIndex = 10
         Me.tsmiExportData.Name = "tsmiExportData"
         resources.ApplyResources(Me.tsmiExportData, "tsmiExportData")
         '
         'ToolStripSeparator18
         '
         Me.ToolStripSeparator18.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.ToolStripSeparator18.MergeIndex = 10
+        Me.ToolStripSeparator18.MergeIndex = 11
         Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
         resources.ApplyResources(Me.ToolStripSeparator18, "ToolStripSeparator18")
         '
@@ -263,7 +272,7 @@ Partial Class FormFlowsheet
         '
         Me.tsmiConfigSimulation.Image = Global.DWSIM.My.Resources.Resources.brick
         Me.tsmiConfigSimulation.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.tsmiConfigSimulation.MergeIndex = 11
+        Me.tsmiConfigSimulation.MergeIndex = 12
         Me.tsmiConfigSimulation.Name = "tsmiConfigSimulation"
         resources.ApplyResources(Me.tsmiConfigSimulation, "tsmiConfigSimulation")
         '
@@ -781,33 +790,33 @@ Partial Class FormFlowsheet
         '
         'DataGridView1
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
         resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         '
         'TSTable
         '
@@ -990,4 +999,5 @@ Partial Class FormFlowsheet
     Friend WithEvents lblLastMessage As LinkLabel
     Friend WithEvents Button1 As Button
     Public WithEvents tsbAtivar As ToolStripButton
+    Friend WithEvents InvertSelectionToolStripMenuItem As ToolStripMenuItem
 End Class
