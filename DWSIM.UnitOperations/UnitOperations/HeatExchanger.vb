@@ -2661,7 +2661,7 @@ Namespace UnitOperations
                     Case 4
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut)
                     Case 5
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Shell_Di)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Shell_Di / 1000)
                     Case 6
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Shell_Fouling)
                     Case 7
@@ -2669,11 +2669,11 @@ Namespace UnitOperations
                     Case 8
                         value = Me.STProperties.Shell_NumberOfShellsInSeries
                     Case 9
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Shell_BaffleSpacing)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Shell_BaffleSpacing / 1000)
                     Case 10
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_Di)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_Di / 1000)
                     Case 11
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_De)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_De / 1000)
                     Case 12
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.STProperties.Tube_Length)
                     Case 13
@@ -2683,7 +2683,7 @@ Namespace UnitOperations
                     Case 15
                         value = Me.STProperties.Tube_NumberPerShell
                     Case 16
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Tube_Pitch)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Tube_Pitch / 1000)
                     Case 17
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
                     Case 18
@@ -2790,7 +2790,7 @@ Namespace UnitOperations
                     'PROP_HX_4	Hot Fluid Outlet Temperature
                     Me.TempHotOut = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 5
-                    Me.STProperties.Shell_Di = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
+                    Me.STProperties.Shell_Di = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval) * 1000
                 Case 6
                     Me.STProperties.Shell_Fouling = SystemsOfUnits.Converter.ConvertToSI(su.foulingfactor, propval)
                 Case 7
@@ -2798,11 +2798,11 @@ Namespace UnitOperations
                 Case 8
                     Me.STProperties.Shell_NumberOfShellsInSeries = propval
                 Case 9
-                    Me.STProperties.Shell_BaffleSpacing = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval)
+                    Me.STProperties.Shell_BaffleSpacing = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval) * 1000
                 Case 10
-                    Me.STProperties.Tube_Di = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
+                    Me.STProperties.Tube_Di = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval) * 1000
                 Case 11
-                    Me.STProperties.Tube_De = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
+                    Me.STProperties.Tube_De = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval) * 1000
                 Case 12
                     Me.STProperties.Tube_Length = SystemsOfUnits.Converter.ConvertToSI(su.distance, propval)
                 Case 13
@@ -2812,7 +2812,7 @@ Namespace UnitOperations
                 Case 15
                     Me.STProperties.Tube_NumberPerShell = propval
                 Case 16
-                    Me.STProperties.Tube_Pitch = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval)
+                    Me.STProperties.Tube_Pitch = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval) * 1000
                 Case 27
                     Me.MITA = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
                 Case 28
