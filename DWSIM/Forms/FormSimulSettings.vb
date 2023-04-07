@@ -57,11 +57,17 @@ Public Class FormSimulSettings
 
             ' set the bounds of this form's FloatWindow to our desired position and size
 
+            Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
+            Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
+
             If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
                 Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
                 If Not floatWin Is Nothing Then
                     floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y,
                                        900 * GlobalSettings.Settings.DpiScale, 600 * GlobalSettings.Settings.DpiScale)
+                    Dim w = floatWin.Width
+                    Dim h = floatWin.Height
+                    floatWin.SetDesktopLocation((screenWidth - w) / 2, (screenHeight - h) / 2)
                 End If
             End If
 
