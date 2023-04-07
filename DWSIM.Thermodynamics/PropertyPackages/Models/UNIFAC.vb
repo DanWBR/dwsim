@@ -331,8 +331,8 @@ Namespace PropertyPackages.Auxiliary
                                 If Not Me.UnifGroups.InteracParam(g1).ContainsKey(g2) Then
                                     If Me.UnifGroups.InteracParam.ContainsKey(g2) Then
                                         If Not Me.UnifGroups.InteracParam(g2).ContainsKey(g1) Then
-                                            Throw New Exception("UNIFAC Error: Could not find interaction parameter for groups " & Me.UnifGroups.Groups(id1 + 1).GroupName & " / " &
-                                                            Me.UnifGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
+                                            Throw New Exception("UNIFAC Error: Could not find interaction parameter for groups " & Me.UnifGroups.Groups(id1).GroupName & " / " &
+                                                            Me.UnifGroups.Groups(id2).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                         End If
                                     End If
                                 End If
@@ -340,11 +340,11 @@ Namespace PropertyPackages.Auxiliary
                                 If Me.UnifGroups.InteracParam.ContainsKey(g2) Then
                                     If Not Me.UnifGroups.InteracParam(g2).ContainsKey(g1) Then
                                         Throw New Exception("UNIFAC Error: Could not find interaction parameter for groups " & Me.UnifGroups.Groups(id1 + 1).GroupName & " / " &
-                                                        Me.UnifGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
+                                                        Me.UnifGroups.Groups(id2).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                     End If
                                 Else
                                     Throw New Exception("UNIFAC Error: Could not find interaction parameter for groups " & Me.UnifGroups.Groups(id1 + 1).GroupName & " / " &
-                                                    Me.UnifGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
+                                                    Me.UnifGroups.Groups(id2).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                 End If
                             End If
                         End If

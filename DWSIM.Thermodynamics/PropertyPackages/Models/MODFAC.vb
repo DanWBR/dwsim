@@ -333,20 +333,20 @@ Namespace PropertyPackages.Auxiliary
                             If Not Me.ModfGroups.InteracParam_aij(g1).ContainsKey(g2) Then
                                 If Me.ModfGroups.InteracParam_aij.ContainsKey(g2) Then
                                     If Not Me.ModfGroups.InteracParam_aij(g2).ContainsKey(g1) And g2 <> g1 Then
-                                        Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " &
-                                                            Me.ModfGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
+                                        Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1).GroupName & " / " &
+                                                            Me.ModfGroups.Groups(id2).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                     End If
                                 End If
                             End If
                         Else
                             If Me.ModfGroups.InteracParam_aij.ContainsKey(g2) Then
                                 If Not Me.ModfGroups.InteracParam_aij(g2).ContainsKey(g1) And g2 <> g1 Then
-                                    Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " &
-                                                        Me.ModfGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
+                                    Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1).GroupName & " / " &
+                                                        Me.ModfGroups.Groups(id2).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                                 End If
                             Else
-                                Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1 + 1).GroupName & " / " &
-                                                    Me.ModfGroups.Groups(id2 + 1).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
+                                Throw New Exception("MODFAC Error: Could not find interaction parameter for groups " & Me.ModfGroups.Groups(id1).GroupName & " / " &
+                                                    Me.ModfGroups.Groups(id2).GroupName & ". Activity coefficient calculation will give you inconsistent results for this system.")
                             End If
                         End If
                     End If
