@@ -426,6 +426,22 @@ Public Class MaterialStreamEditor
                     TabPageInputComposition.Enabled = True
                 End If
 
+                If .GraphicObject.OutputConnectors(0).IsAttached And .FlowSheet.FlowsheetOptions.SingleUnitOpMode Then
+
+                    Dim conn_to = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Owner
+
+                    If conn_to.Name = .FlowSheet.FlowsheetOptions.SingleUnitOpID Then
+
+                        UpdateEditableStatus()
+                        tbMassFlow.Enabled = True
+                        tbMoleFlow.Enabled = True
+                        tbVolFlow.Enabled = True
+                        TabPageInputComposition.Enabled = True
+
+                    End If
+
+                End If
+
             Else
 
                 tbTemp.Enabled = True

@@ -102,6 +102,14 @@ Namespace GraphicObjects
                 End Using
             End If
 
+            If Not Active Then
+                Using p As New SKPaint With {.IsAntialias = False, .FilterQuality = SKFilterQuality.None}
+                    p.BlendMode = SKBlendMode.Color
+                    p.ColorFilter = SKColorFilter.CreateBlendMode(SKColors.Gray, SKBlendMode.SrcIn)
+                    canvas.DrawImage(Image, New SKRect(X, Y, X + Width, Y + Height), p)
+                End Using
+            End If
+
         End Sub
 
         Public Sub DrawCalculatingMode(ByVal canvas As SKCanvas)

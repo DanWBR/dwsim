@@ -280,6 +280,10 @@ Namespace DWSIM.Flowsheet
 
         Public Property SaveFlowsheetMessagesInFile As Boolean = True Implements IFlowsheetOptions.SaveFlowsheetMessagesInFile
 
+        <Xml.Serialization.XmlIgnore()> Public Property SingleUnitOpMode As Boolean = False Implements IFlowsheetOptions.SingleUnitOpMode
+
+        <Xml.Serialization.XmlIgnore()> Public Property SingleUnitOpID As String = "" Implements IFlowsheetOptions.SingleUnitOpID
+
     End Class
 
 End Namespace

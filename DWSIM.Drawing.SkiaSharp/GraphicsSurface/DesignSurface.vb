@@ -12,6 +12,8 @@ Imports Microsoft.Msagl.Layout.Initial
 Imports Microsoft.Msagl.Layout.Incremental
 Imports System.Threading.Tasks
 
+Public Delegate Sub DrawingEvent(ByVal canvas As SKCanvas)
+
 Public Class GraphicsSurface
 
 #Region "Events"
@@ -97,6 +99,9 @@ Public Class GraphicsSurface
     Public Origin As SKPoint
 
     Public DrawOverlaysAction As Action(Of SKCanvas)
+
+    Public Event StartedDrawing As DrawingEvent
+    Public Event FinishedDrawing As DrawingEvent
 
     Public Sub New()
 
@@ -299,6 +304,8 @@ Public Class GraphicsSurface
 
         DrawingCanvas.Scale(Me.Zoom, Me.Zoom)
 
+        RaiseEvent StartedDrawing(DrawingCanvas)
+
         'Dim objects = DrawingObjects.ToArray
 
         If DrawingObjects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
@@ -471,6 +478,8 @@ Public Class GraphicsSurface
         If DrawAdditionalItems Then
             DrawOverlaysAction.Invoke(DrawingCanvas)
         End If
+
+        RaiseEvent FinishedDrawing(DrawingCanvas)
 
         For Each dobj As GraphicObject In Me.DrawingObjects
             If TypeOf dobj Is Tables.FloatingTableGraphic Then
