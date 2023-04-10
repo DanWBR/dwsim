@@ -56,21 +56,12 @@ Partial Class FormWhatsNew
         CType(Me.Viewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
-        If Not FormMain.IsPro Then
-            Icon = My.Resources.DWSIM_Icon_41
-        Else
-            Icon = My.Resources.Icon1282
-        End If
+        'If Not FormMain.IsPro Then
+        '    Icon = My.Resources.DWSIM_Icon_41
+        'Else
+        '    Icon = My.Resources.Icon1282
+        'End If
 
-    End Sub
-
-    Protected Overrides Sub OnLoad(e As EventArgs)
-        MyBase.OnLoad(e)
-
-        ' Your code goes here
-        Dim newUserFolder = System.IO.Path.Combine(System.Environment.GetFolderPath(System.IO.Path.GetTempPath()), "DWSIM", "BrowserData")
-        Dim environment = Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(Nothing, newUserFolder, Nothing).Result
-        Me.Viewer.EnsureCoreWebView2Async(environment).Wait()
     End Sub
 
     Friend WithEvents Viewer As Microsoft.Web.WebView2.WinForms.WebView2
