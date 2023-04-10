@@ -3962,8 +3962,14 @@ Namespace UnitOperations
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
                                 i += 1
                             Next
-                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
-                            .Phases(2).Properties.molarfraction = 1.0
+                            If llextractor Then
+                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                .Phases(3).Properties.molarfraction = 1.0
+                                .Phases(1).Properties.molarfraction = 1.0
+                            Else
+                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                .Phases(2).Properties.molarfraction = 1.0
+                            End If
                             .AtEquilibrium = True
                         End With
                     Case StreamInformation.Behavior.BottomsLiquid

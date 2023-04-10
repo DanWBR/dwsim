@@ -733,7 +733,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
 
                 reporter?.AppendLine()
-                reporter?.AppendLine("Stage Molar Fractions - Vapor/Liquid 1")
+                reporter?.AppendLine("Stage Molar Fractions - Liquid")
                 reporter?.Append("Stage".PadRight(20))
                 For j = 0 To nc - 1
                     reporter?.Append(names(j).PadLeft(20))
@@ -748,7 +748,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
 
                 reporter?.AppendLine()
-                reporter?.AppendLine("Stage Molar Fractions - Vapor")
+                reporter?.AppendLine("Stage Molar Fractions - Vapor/Liquid2")
                 reporter?.Append("Stage".PadRight(20))
                 For j = 0 To nc - 1
                     reporter?.Append(names(j).PadLeft(20))
