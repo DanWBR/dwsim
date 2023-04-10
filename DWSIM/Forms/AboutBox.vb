@@ -19,6 +19,9 @@ Public Class AboutBox
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        TextBox1.Font = New Font("Consolas", 9, GraphicsUnit.Point)
+        TextBox2.Font = New Font("Consolas", 9, GraphicsUnit.Point)
+
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
 
         Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build

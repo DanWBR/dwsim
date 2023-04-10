@@ -186,7 +186,12 @@ Public Class FormMain
             tsmiPrivateSupport.Visible = Not IsPro
 
 #If LINUX = False Then
-            If IsPro Then StatusStrip1.Visible = False
+            If IsPro Then
+                DownloadSupplementarySoftwareToolStripMenuItem.Visible = False
+                StatusStrip1.Visible = False
+                tsbRegCO.Visible = False
+                RegistroCAPEOPENToolStripMenuItem.Enabled = False
+            End If
 #End If
 
             'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
@@ -4576,20 +4581,44 @@ Label_00CC:
                 .Start()
             End With
         Else
-            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            If IsPro Then
+                Dim fb As New FormBrowser()
+                fb.Show()
+                fb.DisplayURL(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            Else
+                Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            End If
         End If
     End Sub
 
     Private Sub WikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WikiToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://dwsim.org")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://dwsim.org", "DWSIM")
+        Else
+            System.Diagnostics.Process.Start("https://dwsim.org")
+        End If
     End Sub
 
     Private Sub ForumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForumToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("https://dwsim.org/wiki/index.php?title=Support")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://dwsim.org/wiki/index.php?title=Support", "DWSIM Support (Open-Source)")
+        Else
+            System.Diagnostics.Process.Start("https://dwsim.org/wiki/index.php?title=Support")
+        End If
     End Sub
 
     Private Sub RastreamentoDeBugsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RastreamentoDeBugsToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("https://github.com/DanWBR/dwsim/issues")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://github.com/DanWBR/dwsim/issues", "DWSIM Issues (Open-Source)")
+        Else
+            System.Diagnostics.Process.Start("https://github.com/DanWBR/dwsim/issues")
+        End If
     End Sub
 
     Private Sub MostrarBarraDeFerramentasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MostrarBarraDeFerramentasToolStripMenuItem.Click
@@ -4616,11 +4645,11 @@ Label_00CC:
         Me.TileHorizontalToolStripMenuItem_Click(sender, e)
     End Sub
 
-    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         System.Diagnostics.Process.Start("https://www.paypal.com/cgi-bin/webscr?item_name=Donation+to+DWSIM+-+Open+Source+Process+Simulator&cmd=_donations&business=danielwag%40gmail.com&lc=US")
     End Sub
 
-    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
+    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.AboutToolStripMenuItem_Click(sender, e)
     End Sub
 
@@ -4820,16 +4849,24 @@ Label_00CC:
         UserService.Logout()
     End Sub
 
-    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs)
-        Process.Start("https://simulate365.com/downloads/dwsim-pro/")
-    End Sub
-
     Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
-        Process.Start("https://simulate365.com")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://simulate365.com", "Simulate365")
+        Else
+            Process.Start("https://simulate365.com")
+        End If
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
-        Process.Start("https://simulate365.com/registration/")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://simulate365.com/registration/", "Simulate365 Registration")
+        Else
+            Process.Start("https://simulate365.com/registration/")
+        End If
     End Sub
 
     Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click
@@ -4849,11 +4886,23 @@ Label_00CC:
     End Sub
 
     Private Sub DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DashboardToolStripMenuItem.Click
-        Process.Start("https://dashboard.simulate365.com")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://discord.com/channels/974049809176608818/974049809176608821", "DWSIM Discord Server (Open-Source)")
+        Else
+            Process.Start("https://dashboard.simulate365.com")
+        End If
     End Sub
 
     Private Sub DIscordChannelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DIscordChannelToolStripMenuItem.Click
-        Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://discord.com/channels/974049809176608818/974049809176608821", "DWSIM Discord Server (Open-Source)")
+        Else
+            Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
+        End If
     End Sub
 
     Private Sub ToolStripDropDownButton2_Click(sender As Object, e As EventArgs) Handles tsbdonate1.Click

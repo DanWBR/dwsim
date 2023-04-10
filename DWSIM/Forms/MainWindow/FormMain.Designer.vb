@@ -95,10 +95,6 @@ Partial Class FormMain
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegCO = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.LoginButton = New System.Windows.Forms.ToolStripButton()
@@ -450,7 +446,7 @@ Partial Class FormMain
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.OpenFileS365, Me.SaveToolStripButton, Me.SaveFileS365, Me.ToolStripButton1, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.OpenFileS365, Me.SaveToolStripButton, Me.SaveFileS365, Me.ToolStripButton1, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -547,32 +543,6 @@ Partial Class FormMain
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         resources.ApplyResources(Me.ToolStripSeparator6, "ToolStripSeparator6")
-        '
-        'ToolStripButton6
-        '
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton6.Image = Global.DWSIM.My.Resources.Resources.help
-        resources.ApplyResources(Me.ToolStripButton6, "ToolStripButton6")
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        '
-        'ToolStripButton7
-        '
-        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton7.Image = Global.DWSIM.My.Resources.Resources.money_add
-        resources.ApplyResources(Me.ToolStripButton7, "ToolStripButton7")
-        Me.ToolStripButton7.Name = "ToolStripButton7"
-        '
-        'ToolStripButton8
-        '
-        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton8.Image = Global.DWSIM.My.Resources.Resources.information
-        resources.ApplyResources(Me.ToolStripButton8, "ToolStripButton8")
-        Me.ToolStripButton8.Name = "ToolStripButton8"
-        '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
         '
         'tsbRegCO
         '
@@ -939,9 +909,6 @@ Partial Class FormMain
     Public WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripButton6 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripButton7 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripButton8 As System.Windows.Forms.ToolStripButton
     Friend WithEvents NovoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoEstudoDeRegressaoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -956,7 +923,6 @@ Partial Class FormMain
     Friend WithEvents ToolsTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DatabaseManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RegistroCAPEOPENToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tsbRegCO As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents tsmiFOSSEE As ToolStripMenuItem
