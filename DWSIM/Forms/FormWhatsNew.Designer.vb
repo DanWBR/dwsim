@@ -64,13 +64,13 @@ Partial Class FormWhatsNew
 
     End Sub
 
-    Protected Overrides Async Sub OnLoad(e As EventArgs)
+    Protected Overrides Sub OnLoad(e As EventArgs)
         MyBase.OnLoad(e)
 
         ' Your code goes here
         Dim newUserFolder = System.IO.Path.Combine(System.Environment.GetFolderPath(System.IO.Path.GetTempPath()), "DWSIM", "BrowserData")
-        Dim environment = Await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(Nothing, newUserFolder, Nothing)
-        Await Me.Viewer.EnsureCoreWebView2Async(environment)
+        Dim environment = Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(Nothing, newUserFolder, Nothing).Result
+        Me.Viewer.EnsureCoreWebView2Async(environment).Wait()
     End Sub
 
     Friend WithEvents Viewer As Microsoft.Web.WebView2.WinForms.WebView2
