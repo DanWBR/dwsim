@@ -46,7 +46,6 @@ namespace DWSIM.Simulate365.FormFactories
                 Height = (int)(600 * GlobalSettings.Settings.DpiScale)
             };
 
-
             _webUIForm.SubscribeToNavigationStarting(WebView_NavigationStarting);
             _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);
         }

@@ -18,6 +18,7 @@ Public Class FormBrowserDockable
         Viewer.EnsureCoreWebView2Async().ContinueWith(Sub()
                                                           UIThread(Sub()
                                                                        Viewer.Source = New Uri(url)
+                                                                       Me.Activate()
                                                                    End Sub)
                                                       End Sub)
 
@@ -33,6 +34,7 @@ Public Class FormBrowserDockable
         Viewer.EnsureCoreWebView2Async().ContinueWith(Sub()
                                                           UIThread(Sub()
                                                                        Viewer.NavigateToString(html)
+                                                                       Me.Activate()
                                                                    End Sub)
                                                       End Sub)
 
