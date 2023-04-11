@@ -15,12 +15,12 @@ Public Class FormBrowserDockable
             TabText = title
         End If
 
-        Viewer.EnsureCoreWebView2Async().ContinueWith(Sub()
-                                                          UIThread(Sub()
-                                                                       Viewer.Source = New Uri(url)
-                                                                       Me.Activate()
-                                                                   End Sub)
-                                                      End Sub)
+        Viewer.EnsureCoreWebView2Async(FormMain.WebView2Environment).ContinueWith(Sub()
+                                                                                      UIThread(Sub()
+                                                                                                   Viewer.Source = New Uri(url)
+                                                                                                   Me.Activate()
+                                                                                               End Sub)
+                                                                                  End Sub)
 
     End Sub
 
@@ -31,12 +31,12 @@ Public Class FormBrowserDockable
             TabText = title
         End If
 
-        Viewer.EnsureCoreWebView2Async().ContinueWith(Sub()
-                                                          UIThread(Sub()
-                                                                       Viewer.NavigateToString(html)
-                                                                       Me.Activate()
-                                                                   End Sub)
-                                                      End Sub)
+        Viewer.EnsureCoreWebView2Async(FormMain.WebView2Environment).ContinueWith(Sub()
+                                                                                      UIThread(Sub()
+                                                                                                   Viewer.NavigateToString(html)
+                                                                                                   Me.Activate()
+                                                                                               End Sub)
+                                                                                  End Sub)
 
     End Sub
 

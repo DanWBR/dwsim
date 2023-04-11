@@ -112,9 +112,13 @@ Public Class FormMain
 
     Public SavingSimulation As Func(Of IFlowsheet, Boolean)
 
+    Public Shared WebView2Environment As Microsoft.Web.WebView2.Core.CoreWebView2Environment
+
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
+
+        InitializeWebView2Environment()
 
         Using g1 = Me.CreateGraphics()
 
@@ -209,6 +213,17 @@ Public Class FormMain
             SetupWelcomeScreen()
 
         End If
+
+    End Sub
+
+    Private Sub InitializeWebView2Environment()
+
+        Try
+            Dim newUserFolder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DWSIM", "BrowserData")
+            WebView2Environment = Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(Nothing, newUserFolder, Nothing).Result
+        Catch ex As Exception
+            AnalyticsProvider?.RegisterError("Failed to Initialize WebView2 Environment", ex.Message, ex, Nothing)
+        End Try
 
     End Sub
 

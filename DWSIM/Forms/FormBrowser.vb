@@ -8,12 +8,12 @@
 
         If title <> "" Then Text = title
 
-        Viewer.EnsureCoreWebView2Async().ContinueWith(Sub()
-                                                          UIThread(Sub()
-                                                                       Viewer.Source = New Uri(url)
-                                                                       Me.Activate()
-                                                                   End Sub)
-                                                      End Sub)
+        Viewer.EnsureCoreWebView2Async(FormMain.WebView2Environment).ContinueWith(Sub()
+                                                                                      UIThread(Sub()
+                                                                                                   Viewer.Source = New Uri(url)
+                                                                                                   Me.Activate()
+                                                                                               End Sub)
+                                                                                  End Sub)
 
     End Sub
 
@@ -21,12 +21,12 @@
 
         If title <> "" Then Text = title
 
-        Viewer.EnsureCoreWebView2Async().ContinueWith(Sub()
-                                                          UIThread(Sub()
-                                                                       Viewer.NavigateToString(html)
-                                                                       Me.Activate()
-                                                                   End Sub)
-                                                      End Sub)
+        Viewer.EnsureCoreWebView2Async(FormMain.WebView2Environment).ContinueWith(Sub()
+                                                                                      UIThread(Sub()
+                                                                                                   Viewer.NavigateToString(html)
+                                                                                                   Me.Activate()
+                                                                                               End Sub)
+                                                                                  End Sub)
 
     End Sub
 

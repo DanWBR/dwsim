@@ -48,19 +48,20 @@ Partial Class FormWhatsNew
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(1127, 761)
         Me.Controls.Add(Me.Viewer)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        'Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormWhatsNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "What's New in DWSIM / DWSIM Pro"
         Me.TopMost = True
+
+        If Not FormMain.IsPro Then
+            Icon = My.Resources.DWSIM_Icon_41
+        Else
+            Icon = My.Resources.Icon1282
+        End If
+
         CType(Me.Viewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-
-        'If Not FormMain.IsPro Then
-        '    Icon = My.Resources.DWSIM_Icon_41
-        'Else
-        '    Icon = My.Resources.Icon1282
-        'End If
 
     End Sub
 
