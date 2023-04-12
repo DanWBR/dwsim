@@ -862,6 +862,18 @@ Namespace My
                 Me("CurrentVersion") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property UserTypeSent() As Boolean
+            Get
+                Return CType(Me("UserTypeSent"),Boolean)
+            End Get
+            Set
+                Me("UserTypeSent") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

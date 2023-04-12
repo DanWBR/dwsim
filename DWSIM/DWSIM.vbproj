@@ -793,6 +793,12 @@
     <Compile Include="Forms\FormLoadingSimulation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormOccupancyQuestion.Designer.vb">
+      <DependentUpon>FormOccupancyQuestion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormOccupancyQuestion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormPIDCPEditor.Designer.vb">
       <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
     </Compile>
@@ -1600,6 +1606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadingSimulation.resx">
       <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOccupancyQuestion.resx">
+      <DependentUpon>FormOccupancyQuestion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
@@ -2567,6 +2576,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\star_64px.png" />
     <None Include="Resources\save file s365.png" />
     <None Include="Resources\s365 logo.jpg" />
     <None Include="Resources\s365_logo_login.png" />

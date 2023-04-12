@@ -214,6 +214,17 @@ Public Class FormMain
 
         End If
 
+        Task.Delay(30 * 1000).ContinueWith(
+            Sub(t)
+                UIThread(Sub()
+#If DEBUG Then
+                             tsbQuickQuestion.Visible = True
+#Else
+                             If Not My.Settings.UserTypeSent Then tsbQuickQuestion.Visible = True
+#End If
+                         End Sub)
+            End Sub)
+
     End Sub
 
     Private Sub InitializeWebView2Environment()
@@ -4941,6 +4952,13 @@ Label_00CC:
 
     Private Sub tsmiPrivateSupport_Click(sender As Object, e As EventArgs) Handles tsmiPrivateSupport.Click
         Process.Start("https://simulate365.com/private-support/")
+    End Sub
+
+    Private Sub ToolStripDropDownButton1_Click_1(sender As Object, e As EventArgs) Handles tsbQuickQuestion.Click
+
+        Dim fq As New FormOccupancyQuestion()
+        fq.ShowDialog(Me)
+
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

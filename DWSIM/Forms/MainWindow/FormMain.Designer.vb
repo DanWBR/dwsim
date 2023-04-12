@@ -117,6 +117,7 @@ Partial Class FormMain
         Me.tsbdonate1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.tsbdonate2 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsbQuickQuestion = New System.Windows.Forms.ToolStripDropDownButton()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -629,7 +630,7 @@ Partial Class FormMain
         'StatusStrip1
         '
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2, Me.tsbQuickQuestion})
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusStrip1.SizingGrip = False
@@ -659,6 +660,14 @@ Partial Class FormMain
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
         resources.ApplyResources(Me.ToolStripStatusLabel2, "ToolStripStatusLabel2")
         Me.ToolStripStatusLabel2.Spring = True
+        '
+        'tsbQuickQuestion
+        '
+        Me.tsbQuickQuestion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbQuickQuestion.Image = Global.DWSIM.My.Resources.Resources.star_64px
+        resources.ApplyResources(Me.tsbQuickQuestion, "tsbQuickQuestion")
+        Me.tsbQuickQuestion.Name = "tsbQuickQuestion"
+        Me.tsbQuickQuestion.ShowDropDownArrow = False
         '
         'FormMain
         '
@@ -957,4 +966,5 @@ Partial Class FormMain
     Public WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents WhatsNewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiPrivateSupport As ToolStripMenuItem
+    Public WithEvents tsbQuickQuestion As ToolStripDropDownButton
 End Class
