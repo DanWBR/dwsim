@@ -214,7 +214,8 @@ Public Class FormMain
 
         End If
 
-        Task.Delay(30 * 1000).ContinueWith(
+        If AnalyticsProvider IsNot Nothing Then
+            Task.Delay(30 * 1000).ContinueWith(
             Sub(t)
                 UIThread(Sub()
 #If DEBUG Then
@@ -224,6 +225,7 @@ Public Class FormMain
 #End If
                          End Sub)
             End Sub)
+        End If
 
     End Sub
 
