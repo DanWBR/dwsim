@@ -1160,7 +1160,11 @@ Namespace UnitOperations
 
             For Each p As ICapeIdentification In Me._params
                 If p.ComponentName = prop Then
-                    CType(p, ICapeParameter).value = propval
+                    If TypeOf p Is Auxiliary.CapeOpen.CapeArrayParameter Then
+                        DirectCast(p, Auxiliary.CapeOpen.CapeArrayParameter).value = propval
+                    Else
+                        DirectCast(p, ICapeParameter).value = propval
+                    End If
                     RestoreParams()
                     Return 1
                 End If
