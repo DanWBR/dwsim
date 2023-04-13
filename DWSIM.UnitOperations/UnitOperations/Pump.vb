@@ -525,7 +525,7 @@ Namespace UnitOperations
             End If
 
             If msin.Phases(2).Properties.molarfraction.GetValueOrDefault() > 0.001 Then
-                FlowSheet.ShowMessage(FlowSheet.GetTranslatedString("Vapor phase detected in pump inlet"), IFlowsheet.MessageType.Warning)
+                FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("Vapor phase detected in pump inlet"), IFlowsheet.MessageType.Warning)
             End If
 
             Me.PropertyPackage.CurrentMaterialStream = msin

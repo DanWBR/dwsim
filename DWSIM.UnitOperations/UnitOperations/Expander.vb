@@ -251,7 +251,7 @@ Namespace UnitOperations
             ims.Validate()
 
             If ims.Phases(1).Properties.molarfraction.GetValueOrDefault() > 0.001 Then
-                FlowSheet.ShowMessage(FlowSheet.GetTranslatedString("Liquid phase detected in expander inlet"), IFlowsheet.MessageType.Warning)
+                FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("Liquid phase detected in expander inlet"), IFlowsheet.MessageType.Warning)
             End If
 
             If ims.GetMassFlow() = 0.0 Then
