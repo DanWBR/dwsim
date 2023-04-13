@@ -33,6 +33,7 @@ Partial Class FormOccupancyQuestion
         Me.rbEmployee = New System.Windows.Forms.RadioButton()
         Me.rbOther = New System.Windows.Forms.RadioButton()
         Me.tbOther = New System.Windows.Forms.TextBox()
+        Me.rbTeacher = New System.Windows.Forms.RadioButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -42,9 +43,9 @@ Partial Class FormOccupancyQuestion
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(53, 21)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(384, 13)
+        Me.Label1.Size = New System.Drawing.Size(275, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "As a valuable DWSIM user, which sentence below better defines what you are?"
+        Me.Label1.Text = "As a valuable DWSIM user, which role best defines you?"
         '
         'PictureBox1
         '
@@ -59,7 +60,7 @@ Partial Class FormOccupancyQuestion
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.DWSIM.My.Resources.Resources.icons8_ok
-        Me.PictureBox2.Location = New System.Drawing.Point(15, 197)
+        Me.PictureBox2.Location = New System.Drawing.Point(15, 224)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(32, 32)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -68,7 +69,7 @@ Partial Class FormOccupancyQuestion
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(378, 203)
+        Me.Button1.Location = New System.Drawing.Point(378, 230)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 3
@@ -77,7 +78,7 @@ Partial Class FormOccupancyQuestion
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(53, 197)
+        Me.Label2.Location = New System.Drawing.Point(53, 224)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(304, 32)
         Me.Label2.TabIndex = 4
@@ -99,7 +100,7 @@ Partial Class FormOccupancyQuestion
         'rbStudent
         '
         Me.rbStudent.AutoSize = True
-        Me.rbStudent.Location = New System.Drawing.Point(56, 104)
+        Me.rbStudent.Location = New System.Drawing.Point(56, 130)
         Me.rbStudent.Name = "rbStudent"
         Me.rbStudent.Size = New System.Drawing.Size(85, 17)
         Me.rbStudent.TabIndex = 6
@@ -110,7 +111,7 @@ Partial Class FormOccupancyQuestion
         'rbHobbyist
         '
         Me.rbHobbyist.AutoSize = True
-        Me.rbHobbyist.Location = New System.Drawing.Point(56, 127)
+        Me.rbHobbyist.Location = New System.Drawing.Point(56, 154)
         Me.rbHobbyist.Name = "rbHobbyist"
         Me.rbHobbyist.Size = New System.Drawing.Size(142, 17)
         Me.rbHobbyist.TabIndex = 7
@@ -121,7 +122,7 @@ Partial Class FormOccupancyQuestion
         'rbEmployee
         '
         Me.rbEmployee.AutoSize = True
-        Me.rbEmployee.Location = New System.Drawing.Point(56, 81)
+        Me.rbEmployee.Location = New System.Drawing.Point(56, 82)
         Me.rbEmployee.Name = "rbEmployee"
         Me.rbEmployee.Size = New System.Drawing.Size(141, 17)
         Me.rbEmployee.TabIndex = 8
@@ -132,7 +133,7 @@ Partial Class FormOccupancyQuestion
         'rbOther
         '
         Me.rbOther.AutoSize = True
-        Me.rbOther.Location = New System.Drawing.Point(56, 150)
+        Me.rbOther.Location = New System.Drawing.Point(56, 178)
         Me.rbOther.Name = "rbOther"
         Me.rbOther.Size = New System.Drawing.Size(130, 17)
         Me.rbOther.TabIndex = 9
@@ -142,16 +143,28 @@ Partial Class FormOccupancyQuestion
         '
         'tbOther
         '
-        Me.tbOther.Location = New System.Drawing.Point(192, 150)
+        Me.tbOther.Location = New System.Drawing.Point(192, 177)
         Me.tbOther.Name = "tbOther"
         Me.tbOther.Size = New System.Drawing.Size(165, 20)
         Me.tbOther.TabIndex = 10
+        '
+        'rbTeacher
+        '
+        Me.rbTeacher.AutoSize = True
+        Me.rbTeacher.Location = New System.Drawing.Point(56, 106)
+        Me.rbTeacher.Name = "rbTeacher"
+        Me.rbTeacher.Size = New System.Drawing.Size(86, 17)
+        Me.rbTeacher.TabIndex = 11
+        Me.rbTeacher.TabStop = True
+        Me.rbTeacher.Text = "I'm a teacher"
+        Me.rbTeacher.UseVisualStyleBackColor = True
         '
         'FormOccupancyQuestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(473, 246)
+        Me.ClientSize = New System.Drawing.Size(473, 272)
+        Me.Controls.Add(Me.rbTeacher)
         Me.Controls.Add(Me.tbOther)
         Me.Controls.Add(Me.rbOther)
         Me.Controls.Add(Me.rbEmployee)
@@ -187,4 +200,5 @@ Partial Class FormOccupancyQuestion
     Friend WithEvents rbEmployee As RadioButton
     Friend WithEvents rbOther As RadioButton
     Friend WithEvents tbOther As TextBox
+    Friend WithEvents rbTeacher As RadioButton
 End Class

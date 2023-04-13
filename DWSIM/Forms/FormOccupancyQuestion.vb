@@ -11,6 +11,8 @@
             usertype = "Hobbyist/Enthusiast"
         ElseIf rbStudent.Checked Then
             usertype = "Student"
+        ElseIf rbTeacher.Checked Then
+            usertype = "Teacher"
         ElseIf rbOther.Checked Then
             usertype = tbOther.Text
         End If
