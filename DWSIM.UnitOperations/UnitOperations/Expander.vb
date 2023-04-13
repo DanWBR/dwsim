@@ -39,7 +39,7 @@ Namespace UnitOperations
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
 
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ComprExpndr
+        <NonSerialized> <XML.Serialization.XmlIgnore> Public f As EditingForm_ComprExpndr
 
         Public Enum CalculationMode
             OutletPressure = 0
@@ -249,6 +249,10 @@ Namespace UnitOperations
             es = Me.GetEnergyStream
 
             ims.Validate()
+
+            If ims.Phases(1).Properties.molarfraction.GetValueOrDefault() > 0.001 Then
+                FlowSheet.ShowMessage(FlowSheet.GetTranslatedString("Liquid phase detected in expander inlet"), IFlowsheet.MessageType.Warning)
+            End If
 
             If ims.GetMassFlow() = 0.0 Then
                 DeltaT = 0.0

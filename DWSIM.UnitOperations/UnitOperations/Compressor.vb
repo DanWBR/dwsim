@@ -282,6 +282,10 @@ Namespace UnitOperations
                 esin = args(2)
             End If
 
+            If msin.Phases(1).Properties.molarfraction.GetValueOrDefault() > 0.001 Then
+                FlowSheet.ShowMessage(FlowSheet.GetTranslatedString("Liquid phase detected in compressor inlet"), IFlowsheet.MessageType.Warning)
+            End If
+
             If msin.GetMassFlow() = 0.0 Then
                 DeltaT = 0.0
                 If CalcMode <> CalculationMode.PowerRequired Then
