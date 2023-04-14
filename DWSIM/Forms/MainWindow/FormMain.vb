@@ -216,18 +216,18 @@ Public Class FormMain
 
         End If
 
-        'If AnalyticsProvider IsNot Nothing Then
-        Task.Delay(30 * 1000).ContinueWith(
-            Sub(t)
-                UIThread(Sub()
+        If AnalyticsProvider IsNot Nothing Then
+            Task.Delay(30 * 1000).ContinueWith(
+                Sub(t)
+                    UIThread(Sub()
 #If DEBUG Then
-                             tsbQuickQuestion.Visible = True
+                                 tsbQuickQuestion.Visible = True
 #Else
                              If Not My.Settings.UserTypeSent Then tsbQuickQuestion.Visible = True
 #End If
-                         End Sub)
-            End Sub)
-        'End If
+                             End Sub)
+                End Sub)
+        End If
 
     End Sub
 

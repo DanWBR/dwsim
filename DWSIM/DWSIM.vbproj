@@ -2576,6 +2576,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\unverified_account_48px.png" />
     <None Include="Resources\star_64px.png" />
     <None Include="Resources\save file s365.png" />
     <None Include="Resources\s365 logo.jpg" />

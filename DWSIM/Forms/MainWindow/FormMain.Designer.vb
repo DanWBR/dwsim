@@ -663,8 +663,8 @@ Partial Class FormMain
         '
         'tsbQuickQuestion
         '
-        Me.tsbQuickQuestion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbQuickQuestion.Image = Global.DWSIM.My.Resources.Resources.star_64px
+        Me.tsbQuickQuestion.ForeColor = System.Drawing.Color.Red
+        Me.tsbQuickQuestion.Image = Global.DWSIM.My.Resources.Resources.unverified_account_48px
         resources.ApplyResources(Me.tsbQuickQuestion, "tsbQuickQuestion")
         Me.tsbQuickQuestion.Name = "tsbQuickQuestion"
         Me.tsbQuickQuestion.ShowDropDownArrow = False
