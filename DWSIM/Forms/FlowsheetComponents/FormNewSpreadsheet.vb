@@ -1,4 +1,7 @@
-﻿Imports System.Linq
+﻿Imports System.IO
+Imports System.Linq
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 #If LINUX Then
 Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid
 Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid.Formula
@@ -60,6 +63,49 @@ Public Class FormNewSpreadsheet
         Worksheet.DefaultRows = 65536
 
         SpreadsheetControl = New unvell.ReoGrid.Editor.ReoGridEditor()
+
+        Editor.Common.Shared.IsPro = FormMain.IsPro
+
+        Editor.Common.Shared.SaveInPro = Sub(grid)
+
+                                             Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+                                             Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+                                                 New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Excel File", "*.xlsx")})
+
+                                             If handler IsNot Nothing Then
+                                                 Using stream As New MemoryStream()
+                                                     Try
+                                                         grid.Save(stream, IO.FileFormat.Excel2007)
+                                                         handler.Write(stream)
+                                                         MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                                     Catch ex As Exception
+                                                         MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                     End Try
+                                                 End Using
+                                             End If
+
+                                         End Sub
+
+        Editor.Common.Shared.OpenInPro = Sub(grid)
+
+                                             Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+                                             Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+                                                 New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Excel File", "*.xlsx")})
+
+                                             If handler IsNot Nothing Then
+                                                 Using str = handler.OpenRead()
+                                                     Try
+                                                         grid.Load(str, IO.FileFormat.Excel2007)
+                                                     Catch ex As Exception
+                                                         MessageBox.Show(DWSIM.App.GetLocalString("Error loading file") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                     End Try
+                                                 End Using
+                                             End If
+
+                                         End Sub
+
 
         AddHandler SpreadsheetControl.ImportarDadosToolStripMenuItem.Click, Sub(s2, e2)
                                                                                 Dim frmps As New FormPropSelection
