@@ -1036,13 +1036,16 @@ Namespace Streams
             Dim Vxm As New List(Of Double)
             Dim i As Integer = 0
             Dim MW = Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.Molar_Weight).ToArray()
+
             For i = 0 To Vx.Length - 1
                 mass_div_mm += Vx(i) / MW(i)
             Next
+
             For i = 0 To Vx.Length - 1
                 Vxm.Add(Vx(i) / MW(i) / mass_div_mm)
             Next
 
+            i = 0
             For Each c As Compound In Me.Phases(0).Compounds.Values
                 c.MoleFraction = Vxm(i)
                 i += 1
@@ -1053,7 +1056,7 @@ Namespace Streams
         Public Sub EqualizeOverallComposition()
 
             For Each c As Compound In Me.Phases(0).Compounds.Values
-                c.MoleFraction = 1 / Me.Phases(0).Compounds.Count
+                c.MoleFraction = 1.0 / Me.Phases(0).Compounds.Count
             Next
 
         End Sub
