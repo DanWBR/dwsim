@@ -2,7 +2,6 @@
 Imports Converter = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports WeifenLuo.WinFormsUI.Docking
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
-Imports Eto.Drawing
 
 Public Class MaterialStreamEditor
 
@@ -1172,6 +1171,61 @@ Public Class MaterialStreamEditor
 
     End Sub
 
+    Sub UpdatePhaseTotal(cb As ComboBox, grid As DataGridView, phase As Interfaces.IPhase)
+
+        Dim W, Q As Double, suffix As String = ""
+        W = phase.Properties.massflow.GetValueOrDefault
+        Q = phase.Properties.molarflow.GetValueOrDefault
+        Dim phaseamount As Double
+        Select Case cb.SelectedIndex
+            Case 0
+                If chkShowAsPercentage.Checked Then
+                    phaseamount = phase.Properties.molarfraction.GetValueOrDefault() * 100.0
+                Else
+                    phaseamount = phase.Properties.molarfraction.GetValueOrDefault()
+                End If
+                If phase.Name = "Mixture" Then phaseamount = 1.0
+            Case 1
+                If chkShowAsPercentage.Checked Then
+                    phaseamount = phase.Properties.massfraction.GetValueOrDefault() * 100.0
+                Else
+                    phaseamount = phase.Properties.massfraction.GetValueOrDefault()
+                End If
+                If phase.Name = "Mixture" Then phaseamount = 1.0
+            Case 2
+                suffix = units.molarflow
+                phaseamount = phase.Properties.molarflow.GetValueOrDefault().ConvertFromSI(units.molarflow)
+            Case 3
+                suffix = units.massflow
+                phaseamount = phase.Properties.massflow.GetValueOrDefault().ConvertFromSI(units.massflow)
+            Case 5
+                'molarity = mol solute per liter solution
+                phaseamount = 0
+                For Each row As DataGridViewRow In grid.Rows
+                    phaseamount += phase.Compounds(row.Cells(0).Value).Molarity.GetValueOrDefault / 1000
+                Next
+                suffix = "mol/L"
+            Case 6
+                'molality = mol solute per kg solvent
+                phaseamount = 0
+                For Each row As DataGridViewRow In grid.Rows
+                    phaseamount += phase.Compounds(row.Cells(0).Value).Molality.GetValueOrDefault
+                Next
+                suffix = "mol/kg solv."
+            Case 4
+                'liquid vol. frac
+                phaseamount = Double.NaN
+        End Select
+
+        gridPhaseTotal.Rows.Clear()
+        If suffix <> "" Then
+            gridPhaseTotal.Rows.Add(New Object() {String.Format("{0} ({1})", MatStream.FlowSheet.GetTranslatedString("Phase Total"), suffix), phaseamount.ToString(nf)})
+        Else
+            gridPhaseTotal.Rows.Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Phase Total"), phaseamount.ToString(nf)})
+        End If
+
+    End Sub
+
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbTemp.KeyDown, tbPressure.KeyDown, tbEnth.KeyDown, tbEntr.KeyDown,
                                                                             tbFracSpec.KeyDown, tbMassFlow.KeyDown, tbMoleFlow.KeyDown, tbVolFlow.KeyDown
@@ -1326,6 +1380,8 @@ Public Class MaterialStreamEditor
         Else
             chkShowAsPercentage.Enabled = False
         End If
+
+        TabPhaseComps_TabIndexChanged(sender, e)
 
     End Sub
 
@@ -1728,6 +1784,37 @@ Public Class MaterialStreamEditor
             cbCalculatedAmountsBasis_SelectedIndexChanged(sender, e)
 
         End If
+
+    End Sub
+
+    Private Sub TabPhaseComps_TabIndexChanged(sender As Object, e As EventArgs) Handles TabPhaseComps.SelectedIndexChanged
+
+        If TabPhaseComps.SelectedTab Is Nothing Then
+            'mix
+            UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompMixture, MatStream.Phases(0))
+            Exit Sub
+        End If
+
+        Select Case TabPhaseComps.SelectedTab.Name
+            Case "tabCompMix"
+                'mix
+                UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompMixture, MatStream.Phases(0))
+            Case "tabCompVapor"
+                'vap
+                UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompVapor, MatStream.Phases(2))
+            Case "tabCompLiqMix"
+                'liq mix
+                UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompLiqMix, MatStream.Phases(1))
+            Case "tabCompLiq1"
+                'liq1
+                UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompLiq1, MatStream.Phases(3))
+            Case "tabCompLiq2"
+                'liq2
+                UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompLiq2, MatStream.Phases(4))
+            Case "tabCompSolid"
+                'solid
+                UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompSolid, MatStream.Phases(7))
+        End Select
 
     End Sub
 
