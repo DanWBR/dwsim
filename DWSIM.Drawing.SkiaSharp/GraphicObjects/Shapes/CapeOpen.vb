@@ -2,6 +2,7 @@
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces
 Imports DWSIM.DrawingTools.Point
+Imports TheArtOfDev.HtmlRenderer.Adapters
 
 Namespace GraphicObjects.Shapes
 
@@ -363,7 +364,57 @@ Namespace GraphicObjects.Shapes
 
                     Case 2
 
-                        DrawIcon(canvas)
+                        If ChemSep Then
+
+                            DrawIcon(canvas)
+
+                        Else
+
+                            Dim myPen As New SKPaint()
+                            With myPen
+                                .Color = LineColor
+                                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                                .IsStroke = True
+                                .StrokeWidth = LineWidth
+                            End With
+
+                            Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+
+                            Dim gradPen As New SKPaint()
+                            With gradPen
+                                .Color = LineColor.WithAlpha(50)
+                                .StrokeWidth = LineWidth
+                                .IsStroke = False
+                                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            End With
+
+                            canvas.DrawRoundRect(rect1, 2, 2, gradPen)
+
+                            canvas.DrawRoundRect(rect1, 2, 2, myPen)
+
+                            Dim tpaint As New SKPaint()
+
+                            With tpaint
+                                .TextSize = 10.0#
+                                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                                .Color = LineColor
+                                .IsStroke = False
+                                .Typeface = BoldTypeFace
+                            End With
+
+                            Dim trect As New SKRect(0, 0, 2, 2)
+                            tpaint.GetTextPath("CO", 0, 0).GetBounds(trect)
+
+                            Dim ax, ay As Integer
+                            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
+                            ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+
+                            Using New SKAutoCanvasRestore(canvas)
+                                StraightCanvas(canvas)
+                                canvas.DrawText("CO", ax, ay, tpaint)
+                            End Using
+
+                        End If
 
                     Case 3
 

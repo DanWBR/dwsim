@@ -4463,6 +4463,7 @@ Namespace Streams
             Dim mat As Streams.MaterialStream = Me.Clone
             mat.SetFlowsheet(Me.FlowSheet)
             mat.ClearAllProps()
+            mat.PropertyPackage = PropertyPackage
             Return mat
         End Function
 
@@ -5295,6 +5296,8 @@ Namespace Streams
         ''' method of this interface does not need to be called before calling SetSinglePhaseProp.</remarks>
         Public Sub SetSinglePhaseProp(ByVal [property] As String, ByVal phaseLabel As String, ByVal basis As String, ByVal values As Object) Implements ICapeThermoMaterial.SetSinglePhaseProp
 
+            PropertyPackage.CurrentMaterialStream = Me
+
             Dim comps As New ArrayList
             If TryCast(Me.PropertyPackage, PropertyPackages.CAPEOPENPropertyPackage) IsNot Nothing Then
                 Dim complist As Object = Nothing
@@ -5610,6 +5613,9 @@ Namespace Streams
         ''' status Cape_UnknownPhaseStatus. The SetPresentPhases method of this interface does not need to
         ''' be called before calling SetTwoPhaseProp.</remarks>
         Public Sub SetTwoPhaseProp(ByVal [property] As String, ByVal phaseLabels As Object, ByVal basis As String, ByVal values As Object) Implements ICapeThermoMaterial.SetTwoPhaseProp
+
+            PropertyPackage.CurrentMaterialStream = Me
+
             Dim comps As New ArrayList
             If TryCast(Me.PropertyPackage, PropertyPackages.CAPEOPENPropertyPackage) IsNot Nothing Then
                 Dim complist As Object = Nothing

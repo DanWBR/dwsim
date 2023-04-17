@@ -89,7 +89,7 @@ Namespace Streams
 
             m_work = New CapeOpen.RealParameter("work", Me.EnergyFlow.GetValueOrDefault, 0.0#, "J/s")
             m_tLow = New CapeOpen.RealParameter("temperatureLow", 0.0, 0.0#, "K")
-            m_tUp = New CapeOpen.RealParameter("temperatureHigh", 2000.0, 0.0#, "K")
+            m_tUp = New CapeOpen.RealParameter("temperatureHigh", 2000.0, 2000.0#, "K")
 
         End Sub
 
@@ -249,7 +249,7 @@ Namespace Streams
         End Sub
 
         Public Function Count() As Integer Implements CapeOpen.ICapeCollection.Count
-            Return 3
+            Return 1
         End Function
 
         Public Function Item(ByVal index As Object) As Object Implements CapeOpen.ICapeCollection.Item
