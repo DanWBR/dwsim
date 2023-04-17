@@ -24,7 +24,7 @@ Partial Class FormConfigCAPEOPENPPackage
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPENPPackage))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -119,7 +119,7 @@ Partial Class FormConfigCAPEOPENPPackage
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem7, Me.FaTabStripItem6})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem7
         '
         'FaTabStripItem1
         '
@@ -127,7 +127,6 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GroupBox2
@@ -198,8 +197,8 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.Column7, Me.Column9})
@@ -245,6 +244,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        Me.FaTabStripItem7.Selected = True
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
         'GroupBox5
@@ -266,8 +266,8 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'PictureBox6
         '
-        Me.PictureBox6.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox6, "PictureBox6")
+        Me.PictureBox6.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox6, resources.GetString("PictureBox6.ToolTip"))
@@ -292,16 +292,16 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'PictureBox5
         '
-        Me.PictureBox5.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox5, "PictureBox5")
+        Me.PictureBox5.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox5, resources.GetString("PictureBox5.ToolTip"))
         '
         'PictureBox4
         '
-        Me.PictureBox4.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox4, "PictureBox4")
+        Me.PictureBox4.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox4, resources.GetString("PictureBox4.ToolTip"))
@@ -357,8 +357,8 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'PictureBox3
         '
-        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox3, "PictureBox3")
+        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox3, resources.GetString("PictureBox3.ToolTip"))
@@ -370,8 +370,8 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'PictureBox2
         '
-        Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox2, "PictureBox2")
+        Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
@@ -391,8 +391,8 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
@@ -607,7 +607,7 @@ Partial Class FormConfigCAPEOPENPPackage
         'FormConfigCAPEOPENPPackage
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.FaTabStrip1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -644,7 +644,7 @@ Partial Class FormConfigCAPEOPENPPackage
         CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Friend WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents FaTabStripItem5 As FarsiLibrary.Win.FATabStripItem

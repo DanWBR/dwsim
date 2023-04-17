@@ -50,18 +50,18 @@ Partial Class FormConfigCAPEOPENPPSocket
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.dgmap = New System.Windows.Forms.DataGridView()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
-        Me.dgvph = New System.Windows.Forms.DataGridView()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
+        Me.dgvph = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,7 +75,6 @@ Partial Class FormConfigCAPEOPENPPSocket
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.lblAbout2)
         Me.GroupBox2.Controls.Add(Me.lblDesc2)
         Me.GroupBox2.Controls.Add(Me.lblAuthorURL2)
@@ -92,6 +91,7 @@ Partial Class FormConfigCAPEOPENPPSocket
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.btnEditPropPack)
         Me.GroupBox2.Controls.Add(Me.btnEditThermoServer)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -147,15 +147,15 @@ Partial Class FormConfigCAPEOPENPPSocket
         '
         'cbPropPack
         '
-        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
         '
         'cbThermoServer
         '
-        resources.ApplyResources(Me.cbThermoServer, "cbThermoServer")
         Me.cbThermoServer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        resources.ApplyResources(Me.cbThermoServer, "cbThermoServer")
         Me.cbThermoServer.FormattingEnabled = True
         Me.cbThermoServer.Name = "cbThermoServer"
         '
@@ -183,10 +183,10 @@ Partial Class FormConfigCAPEOPENPPSocket
         '
         'GroupBox1
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.rb11)
         Me.GroupBox1.Controls.Add(Me.rb10)
         Me.GroupBox1.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -211,35 +211,34 @@ Partial Class FormConfigCAPEOPENPPSocket
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem3})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.dgmap)
         Me.FaTabStripItem2.Controls.Add(Me.Label4)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'dgmap
         '
-        resources.ApplyResources(Me.dgmap, "dgmap")
         Me.dgmap.AllowUserToAddRows = False
         Me.dgmap.AllowUserToDeleteRows = False
         Me.dgmap.AllowUserToOrderColumns = True
@@ -248,56 +247,10 @@ Partial Class FormConfigCAPEOPENPPSocket
         Me.dgmap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgmap.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.col1, Me.col2})
         Me.dgmap.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        resources.ApplyResources(Me.dgmap, "dgmap")
         Me.dgmap.MultiSelect = False
         Me.dgmap.Name = "dgmap"
         Me.dgmap.RowHeadersVisible = False
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
-        'FaTabStripItem3
-        '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
-        Me.FaTabStripItem3.CanClose = False
-        Me.FaTabStripItem3.Controls.Add(Me.dgvph)
-        Me.FaTabStripItem3.Controls.Add(Me.Label5)
-        Me.FaTabStripItem3.IsDrawn = True
-        Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        '
-        'dgvph
-        '
-        resources.ApplyResources(Me.dgvph, "dgvph")
-        Me.dgvph.AllowUserToAddRows = False
-        Me.dgvph.AllowUserToDeleteRows = False
-        Me.dgvph.AllowUserToOrderColumns = True
-        Me.dgvph.AllowUserToResizeColumns = False
-        Me.dgvph.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvph.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvph.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewComboBoxColumn1})
-        Me.dgvph.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvph.MultiSelect = False
-        Me.dgvph.Name = "dgvph"
-        Me.dgvph.RowHeadersVisible = False
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        '
-        'btnCancel
-        '
-        resources.ApplyResources(Me.btnCancel, "btnCancel")
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'btnOK
-        '
-        resources.ApplyResources(Me.btnOK, "btnOK")
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.UseVisualStyleBackColor = True
         '
         'id
         '
@@ -316,6 +269,35 @@ Partial Class FormConfigCAPEOPENPPSocket
         resources.ApplyResources(Me.col2, "col2")
         Me.col2.Name = "col2"
         '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        '
+        'FaTabStripItem3
+        '
+        Me.FaTabStripItem3.CanClose = False
+        Me.FaTabStripItem3.Controls.Add(Me.dgvph)
+        Me.FaTabStripItem3.Controls.Add(Me.Label5)
+        Me.FaTabStripItem3.IsDrawn = True
+        Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
+        '
+        'dgvph
+        '
+        Me.dgvph.AllowUserToAddRows = False
+        Me.dgvph.AllowUserToDeleteRows = False
+        Me.dgvph.AllowUserToOrderColumns = True
+        Me.dgvph.AllowUserToResizeColumns = False
+        Me.dgvph.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvph.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvph.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewComboBoxColumn1})
+        Me.dgvph.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        resources.ApplyResources(Me.dgvph, "dgvph")
+        Me.dgvph.MultiSelect = False
+        Me.dgvph.Name = "dgvph"
+        Me.dgvph.RowHeadersVisible = False
+        '
         'DataGridViewTextBoxColumn1
         '
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
@@ -333,11 +315,29 @@ Partial Class FormConfigCAPEOPENPPSocket
         resources.ApplyResources(Me.DataGridViewComboBoxColumn1, "DataGridViewComboBoxColumn1")
         Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
         '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'btnCancel
+        '
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        resources.ApplyResources(Me.btnCancel, "btnCancel")
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnOK
+        '
+        resources.ApplyResources(Me.btnOK, "btnOK")
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.UseVisualStyleBackColor = True
+        '
         'FormConfigCAPEOPENPPSocket
         '
         Me.AcceptButton = Me.btnOK
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CancelButton = Me.btnCancel
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
