@@ -118,7 +118,10 @@ Public Class FormMain
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+#If LINUX = False Then
         InitializeWebView2Environment()
+#End If
+
 
         Using g1 = Me.CreateGraphics()
 
@@ -1081,6 +1084,7 @@ Public Class FormMain
 
         End If
 
+#If LINUX = False Then
         Dim currver = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         If (Settings.CurrentVersion <> currver) Then
             Settings.CurrentVersion = currver
@@ -1088,6 +1092,7 @@ Public Class FormMain
             Dim frmwn As New FormWhatsNew()
             frmwn.Show()
         End If
+#End If
 
         AnalyticsProvider?.SetMainForm(Me)
 
