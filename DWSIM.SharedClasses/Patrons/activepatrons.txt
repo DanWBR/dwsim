@@ -21,6 +21,7 @@ Christian Pedersen
 CollectiveObjective
 Daniel Bajolet
 Daniel Dornellas Athayde
+Dave Carpency
 David Miller
 David Whitlock
 Domenico Marchese
