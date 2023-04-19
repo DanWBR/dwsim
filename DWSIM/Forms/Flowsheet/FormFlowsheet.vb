@@ -231,20 +231,6 @@ Public Class FormFlowsheet
         FormIPyConsole.Flowsheet = Me
         FormWatch.Flowsheet = Me
 
-        Me.MdiParent = My.Application.MainWindowForm
-
-        If DWSIM.App.IsRunningOnMono Then
-            'Me.FlowLayoutPanel1.AutoSize = False
-            'Me.FlowLayoutPanel1.Height = 50
-            Me.MenuStrip1.Visible = False
-            Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Visible = False
-            'Me.WindowState = FormWindowState.Maximized
-        Else
-            'FormObjList = New frmObjList
-            Me.MenuStrip1.Visible = False
-            Me.WindowState = FormWindowState.Normal
-        End If
-
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
 
@@ -367,6 +353,20 @@ Public Class FormFlowsheet
         For Each es In FormMain.ExternalSolvers.Values
             ExternalSolvers.Add(es.ID, es)
         Next
+
+        Me.MdiParent = My.Application.MainWindowForm
+
+        If DWSIM.App.IsRunningOnMono Then
+            'Me.FlowLayoutPanel1.AutoSize = False
+            'Me.FlowLayoutPanel1.Height = 50
+            Me.MenuStrip1.Visible = False
+            Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Visible = False
+            'Me.WindowState = FormWindowState.Maximized
+        Else
+            'FormObjList = New frmObjList
+            Me.MenuStrip1.Visible = False
+            Me.WindowState = FormWindowState.Normal
+        End If
 
         loaded = True
 
