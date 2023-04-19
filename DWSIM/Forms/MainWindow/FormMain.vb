@@ -4924,7 +4924,7 @@ Label_00CC:
         If IsPro Then
             Dim fb As New FormBrowser()
             fb.Show()
-            fb.DisplayURL("https://dashboard.simulate365.com", "DWSIM Discord Server (Open-Source)")
+            fb.DisplayURL("https://dashboard.simulate365.com", "Simulate365 Dashboard")
         Else
             Process.Start("https://dashboard.simulate365.com")
         End If
