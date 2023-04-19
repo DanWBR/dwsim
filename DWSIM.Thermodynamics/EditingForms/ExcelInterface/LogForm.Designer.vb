@@ -44,7 +44,7 @@ Partial Class LogForm
         Me.ToolStripButton1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cross
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(79, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(78, 22)
         Me.ToolStripButton1.Text = "Clear Text"
         '
         'ToolStripButton2
@@ -71,8 +71,8 @@ Partial Class LogForm
         '
         'LogForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(744, 361)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ToolStrip1)

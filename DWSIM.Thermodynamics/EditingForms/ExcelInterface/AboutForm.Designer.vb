@@ -26,9 +26,6 @@ Partial Class AboutForm
         Me.Copyright = New System.Windows.Forms.Label()
         Me.Version = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.lblGPGPUinfo = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Lblcpusimd = New System.Windows.Forms.Label()
         Me.Lblcpuinfo = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -45,6 +42,7 @@ Partial Class AboutForm
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -65,25 +63,6 @@ Partial Class AboutForm
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Name = "Label1"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.DWSIM4_icon
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.TabStop = False
-        '
-        'lblGPGPUinfo
-        '
-        Me.lblGPGPUinfo.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblGPGPUinfo, "lblGPGPUinfo")
-        Me.lblGPGPUinfo.Name = "lblGPGPUinfo"
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.BackColor = System.Drawing.Color.Transparent
-        Me.Label14.Name = "Label14"
         '
         'Lblcpusimd
         '
@@ -185,13 +164,18 @@ Partial Class AboutForm
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.DWSIM_Icon_Vector_Transp
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.TabStop = False
+        '
         'AboutForm
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.lblGPGPUinfo)
-        Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Lblcpusimd)
         Me.Controls.Add(Me.Lblcpuinfo)
         Me.Controls.Add(Me.Label13)
@@ -225,8 +209,6 @@ Partial Class AboutForm
     Public WithEvents Copyright As System.Windows.Forms.Label
     Public WithEvents Version As System.Windows.Forms.Label
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents lblGPGPUinfo As System.Windows.Forms.Label
-    Public WithEvents Label14 As System.Windows.Forms.Label
     Public WithEvents Lblcpusimd As System.Windows.Forms.Label
     Public WithEvents Lblcpuinfo As System.Windows.Forms.Label
     Public WithEvents Label13 As System.Windows.Forms.Label

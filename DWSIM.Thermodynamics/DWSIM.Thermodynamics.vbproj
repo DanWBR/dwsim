@@ -920,6 +920,7 @@
     <None Include="Resources\DWSIM_ico_64.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DWSIM Icon Vector Transp.png" />
     <EmbeddedResource Include="Assets\Databases\FoodProp.xml" />
     <EmbeddedResource Include="Assets\ChemSep_IDs.txt" />
     <EmbeddedResource Include="Assets\CAS_IDs.txt" />
