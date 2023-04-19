@@ -214,7 +214,7 @@ namespace DWSIM.UI.Desktop.Mac
                 this.NeedsDisplay = true;
             }
             catch (Exception ex){
-                Console.WriteLine(ex.ToString());
+                //Console.WriteLine(ex.ToString());
             }
         }
 

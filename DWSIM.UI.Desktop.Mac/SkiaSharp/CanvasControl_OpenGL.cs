@@ -170,7 +170,7 @@ namespace DWSIM.UI.Desktop.Mac
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            Console.WriteLine("AwakenFromNib");
+            //Console.WriteLine("AwakenFromNib");
         }
 
         public override void UpdateTrackingAreas()
@@ -227,7 +227,7 @@ namespace DWSIM.UI.Desktop.Mac
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                //Console.WriteLine(ex.ToString());
             }
         }
 
