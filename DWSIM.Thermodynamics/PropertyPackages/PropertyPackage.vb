@@ -10088,13 +10088,18 @@ Final3:
                             Me.DW_CalcProp("entropy", phs)
                             Me.DW_CalcProp("compressibilityfactor", phs)
                             Me.DW_CalcProp("density", phs)
+                            Me.DW_CalcProp("heatcapacitycp", phs)
+                            Me.DW_CalcProp("heatcapacitycv", phs)
                             CalcAdditionalPhaseProperties(f)
                     End Select
 
                     If phs = Phase.Solid Then
                         Me.DW_CalcSolidPhaseProps()
                     Else
-                        Me.DW_CalcProp([property], phs)
+                        Try
+                            Me.DW_CalcProp([property], phs)
+                        Catch ex As Exception
+                        End Try
                     End If
 
                     basis = "Mole"
@@ -10128,13 +10133,27 @@ Final3:
                                 Case "Mass", "mass"
                                     res.Add(Me.CurrentMaterialStream.Phases(f).Properties.heatCapacityCv.GetValueOrDefault * 1000)
                             End Select
-                        Case "idealgasheatcapacity"
+                        Case "idealgasheatcapacity", "idealgasheatcapacitycp"
                             If f = 1 Then
-                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Liquid, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
+                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Liquid, Me.CurrentMaterialStream.Phases(0).Properties.temperature) * 1000)
                             ElseIf f = 2 Then
-                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Vapor, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
+                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Vapor, Me.CurrentMaterialStream.Phases(0).Properties.temperature) * 1000)
                             Else
-                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Solid, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
+                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Solid, Me.CurrentMaterialStream.Phases(0).Properties.temperature) * 1000)
+                            End If
+                        Case "idealgasheatcapacityratio"
+                            If f = 1 Then
+                                Dim Cp = AUX_CPm(Phase.Liquid, T)
+                                Dim Cv = Cp - 8.314 / Me.CurrentMaterialStream.Phases(1).Properties.molecularWeight.GetValueOrDefault()
+                                res.Add(Cp / Cv)
+                            ElseIf f = 2 Then
+                                Dim Cp = AUX_CPm(Phase.Vapor, T)
+                                Dim Cv = Cp - 8.314 / Me.CurrentMaterialStream.Phases(2).Properties.molecularWeight.GetValueOrDefault()
+                                res.Add(Cp / Cv)
+                            Else
+                                Dim Cp = AUX_CPm(Phase.Mixture, T)
+                                Dim Cv = Cp - 8.314 / Me.CurrentMaterialStream.Phases(0).Properties.molecularWeight.GetValueOrDefault()
+                                res.Add(Cp / Cv)
                             End If
                         Case "idealgasenthalpy"
                             If f = 1 Then
@@ -10345,18 +10364,18 @@ Final3:
                             Dim cres = DW_CalcdEnthalpydmoles(Vx, T, P, st)
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
-                                    res.Add(cres.MultiplyConstY(val))
+                                    res = New ArrayList(cres.MultiplyConstY(val))
                                 Case "Mass", "mass"
-                                    res.Add(cres.MultiplyConstY(1000))
+                                    res = New ArrayList(cres.MultiplyConstY(1000))
                             End Select
                         Case "entropyf.dmoles"
                             Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
                             Dim cres = DW_CalcdEntropydmoles(Vx, T, P, st)
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
-                                    res.Add(cres.MultiplyConstY(val))
+                                    res = New ArrayList(cres.MultiplyConstY(val))
                                 Case "Mass", "mass"
-                                    res.Add(cres.MultiplyConstY(1000))
+                                    res = New ArrayList(cres.MultiplyConstY(1000))
                             End Select
                         Case "phasefraction"
                             Select Case basis
@@ -10380,7 +10399,9 @@ Final3:
 
                     Dim i As Integer
                     For i = 0 To res.Count - 1
-                        If Double.IsNaN(res(i)) Then res(i) = 0.0#
+                        If TypeOf res(i) Is Double Then
+                            If Double.IsNaN(res(i)) Then res(i) = Double.NegativeInfinity
+                        End If
                     Next
 
                     Dim arr(res.Count - 1) As Double

@@ -5357,6 +5357,15 @@ Namespace Streams
                         Case "Mass", "mass"
                             Me.Phases(f).Properties.heatCapacityCp = values(0) / 1000
                     End Select
+                Case "idealgasheatcapacity", "idealgasheatcapacitycp"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Me.Phases(f).Properties.idealGasHeatCapacityCp = values(0) / Me.PropertyPackage.AUX_MMM(phs)
+                        Case "Mass", "mass"
+                            Me.Phases(f).Properties.idealGasHeatCapacityCp = values(0) / 1000
+                    End Select
+                Case "idealgasheatcapacityratio"
+                    Me.Phases(f).Properties.idealGasHeatCapacityRatio = values(0)
                 Case "heatcapacitycv"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
