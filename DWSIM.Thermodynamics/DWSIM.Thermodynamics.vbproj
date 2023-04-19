@@ -111,7 +111,7 @@
     <Reference Include="ExcelDna.Integration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f225e9659857edbe, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDna.Integration.1.6.0\lib\net452\ExcelDna.Integration.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FileHelpers, Version=3.5.2.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.5.2\lib\net45\FileHelpers.dll</HintPath>
@@ -236,6 +236,7 @@
     <Compile Include="FlashAlgorithms\SingleCompFlash.vb" />
     <Compile Include="HelperClasses\ChemSepIPDReader.vb" />
     <Compile Include="HelperClasses\SerializationBinder.vb" />
+    <Compile Include="Interfaces\ExcelNoAttr.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="BaseClasses\ThermodynamicsBase.vb" />
     <Compile Include="Databases\Databases.vb" />
