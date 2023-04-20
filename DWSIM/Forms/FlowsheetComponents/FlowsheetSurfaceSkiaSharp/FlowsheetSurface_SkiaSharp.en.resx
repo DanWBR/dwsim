@@ -607,9 +607,6 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 286</value>
-  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
@@ -670,11 +667,14 @@
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 6</value>
   </data>
+  <data name="tsmiNaturalLayout.Text" xml:space="preserve">
+    <value>Perform Natural Layout</value>
+  </data>
   <data name="LayoutAutomaticoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
   <data name="LayoutAutomaticoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Perform Auto-Layout</value>
+    <value>Perform Automatic Layout</value>
   </data>
   <data name="RestaurarLayoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
@@ -693,6 +693,9 @@
   </data>
   <data name="FindTearStreamsAutomaticallyToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
+  </data>
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 330</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 470</value>

@@ -34,6 +34,7 @@ Imports DWSIM.DWSIM.Editors.PropertyPackages
 Imports System.Threading.Tasks
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
+Imports DWSIM.UI.Controls.FlowsheetSurfaceControlBase
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -3718,6 +3719,13 @@ Public Class FormFlowsheet
     Public Sub AutoLayout() Implements IFlowsheet.AutoLayout
         FormSurface.FlowsheetSurface.AutoArrange()
         FormSurface.Invalidate()
+    End Sub
+
+    Public Sub NaturalLayout() Implements IFlowsheet.NaturalLayout
+
+        FormSurface.FlowsheetSurface.ApplyNaturalLayout(FlowsheetSolver.FlowsheetSolver.GetSolvingList(Me, False)(0), 75)
+        FormSurface.Invalidate()
+
     End Sub
 
     Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface

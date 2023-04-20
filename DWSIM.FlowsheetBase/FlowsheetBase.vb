@@ -3591,6 +3591,10 @@ Label_00CC:
         FlowsheetSurface.AutoArrange()
     End Sub
 
+    Public Sub NaturalLayout() Implements IFlowsheet.NaturalLayout
+        FlowsheetSurface.ApplyNaturalLayout(FlowsheetSolver.FlowsheetSolver.GetSolvingList(Me, False)(0), 75)
+    End Sub
+
     Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface
         UpdateInterface()
     End Sub

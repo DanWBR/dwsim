@@ -106,6 +106,8 @@
 
     Sub AutoLayout()
 
+    Sub NaturalLayout()
+
     Sub DisplayForm(form As Object)
 
     Sub UpdateOpenEditForms()

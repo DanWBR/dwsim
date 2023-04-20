@@ -4130,6 +4130,20 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Public Sub tsmiNaturalLayout_Click(sender As Object, e As EventArgs) Handles tsmiNaturalLayout.Click
+
+        Try
+            FlowsheetSurface.ApplyNaturalLayout(FlowsheetSolver.FlowsheetSolver.GetSolvingList(Flowsheet, False)(0), 75)
+            FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+            FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+            FControl.Invalidate()
+            RestaurarLayoutToolStripMenuItem.Enabled = True
+        Catch ex As Exception
+            MessageBox.Show(Flowsheet.GetTranslatedString1("Error applying natural layout to flowsheet: " + ex.Message), Flowsheet.GetTranslatedString1("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
     Private Sub FlowsheetSurface_SkiaSharp_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
         HandleKeyDown(e)
