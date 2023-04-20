@@ -10,6 +10,7 @@ Imports Microsoft.Msagl.Core.Geometry.Curves
 Imports Microsoft.Msagl.Core.Layout
 Imports Microsoft.Msagl.Layout.Initial
 Imports Microsoft.Msagl.Layout.Incremental
+Imports System.Security.Cryptography
 
 Public Delegate Sub DrawingEvent(ByVal canvas As SKCanvas)
 
@@ -1912,77 +1913,85 @@ Public Class GraphicsSurface
             PrevPositions.Add(gobj.Name, New Tuple(Of Point, Boolean)(New Point(gobj.X, gobj.Y), gobj.FlippedH))
         Next
 
-        Dim x = 50
-        Dim y = 50
-        For Each objID In orderedIds
-            Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
-            gobj.FlippedH = False
-            If gobj.ObjectType <> ObjectType.EnergyStream Then
-                If gobj.InputConnectors(0).IsAttached Then
-                    Dim conFrom = gobj.InputConnectors(0).AttachedConnector.AttachedFrom
-                    Dim conFromIdx = gobj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                    Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
-                    Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
-                    gobj.X = x2
-                    gobj.Y = y2
-                Else
-                    gobj.X = x
-                    gobj.Y = y
-                End If
-                x += deltaX
-            ElseIf gobj.ObjectType = ObjectType.MaterialStream Then
-                If gobj.InputConnectors(0).IsAttached Then
-                    Dim conFrom = gobj.InputConnectors(0).AttachedConnector.AttachedFrom
-                    Dim conFromIdx = gobj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                    Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
-                    Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
-                    gobj.X = x2
-                    gobj.Y = y2
-                Else
-                    gobj.X = x
-                    gobj.Y = y
-                End If
-            End If
-            gobj.PositionConnectors()
-        Next
+        Dim nrecycles = DrawingObjects.Where(Function(o) o.ObjectType = ObjectType.OT_Recycle).Count()
 
-        For Each objID In orderedIds
-            Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
-            gobj.FlippedH = False
-            If gobj.ObjectType = ObjectType.EnergyStream Then
-                If gobj.InputConnectors(0).IsAttached Then
-                    Dim conn = gobj.InputConnectors(0).AttachedConnector
-                    Dim conFrom = conn.AttachedFrom
-                    Dim conFromIdx = conn.AttachedFromConnectorIndex
-                    If conFromIdx >= 0 Then
+        For i = 0 To nrecycles
+
+            Dim x = 50
+            Dim y = 50
+
+            For Each objID In orderedIds
+                Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
+                gobj.FlippedH = False
+                If gobj.ObjectType <> ObjectType.EnergyStream Then
+                    If gobj.InputConnectors(0).IsAttached Then
+                        Dim conFrom = gobj.InputConnectors(0).AttachedConnector.AttachedFrom
+                        Dim conFromIdx = gobj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                         Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
                         Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
                         gobj.X = x2
                         gobj.Y = y2
                     Else
-                        Dim x2 = conFrom.EnergyConnector.Position.X + deltaX
-                        Dim y2 = conFrom.EnergyConnector.Position.Y
-                        gobj.X = x2
-                        gobj.Y = y2
+                        gobj.X = x
+                        gobj.Y = y
                     End If
-                ElseIf gobj.OutputConnectors(0).IsAttached Then
-                    Dim conTo = gobj.OutputConnectors(0).AttachedConnector.AttachedTo
-                    Dim conToIdx = gobj.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
-                    If conToIdx >= 0 Then
-                        Dim x2 = conTo.InputConnectors(conToIdx).Position.X - deltaX
-                        Dim y2 = conTo.InputConnectors(conToIdx).Position.Y + deltaX
+                    x += deltaX
+                ElseIf gobj.ObjectType = ObjectType.MaterialStream Then
+                    If gobj.InputConnectors(0).IsAttached Then
+                        Dim conFrom = gobj.InputConnectors(0).AttachedConnector.AttachedFrom
+                        Dim conFromIdx = gobj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                        Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
+                        Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
                         gobj.X = x2
                         gobj.Y = y2
                     Else
-                        Dim x2 = conTo.EnergyConnector.Position.X - deltaX
-                        Dim y2 = conTo.EnergyConnector.Position.Y + deltaX
-                        gobj.X = x2
-                        gobj.Y = y2
+                        gobj.X = x
+                        gobj.Y = y
                     End If
                 End If
-            End If
-            gobj.PositionConnectors()
+                gobj.PositionConnectors()
+            Next
+
+            For Each objID In orderedIds
+                Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
+                gobj.FlippedH = False
+                If gobj.ObjectType = ObjectType.EnergyStream Then
+                    If gobj.InputConnectors(0).IsAttached Then
+                        Dim conn = gobj.InputConnectors(0).AttachedConnector
+                        Dim conFrom = conn.AttachedFrom
+                        Dim conFromIdx = conn.AttachedFromConnectorIndex
+                        If conFromIdx >= 0 Then
+                            Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
+                            Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
+                            gobj.X = x2
+                            gobj.Y = y2
+                        Else
+                            Dim x2 = conFrom.EnergyConnector.Position.X + deltaX
+                            Dim y2 = conFrom.EnergyConnector.Position.Y
+                            gobj.X = x2
+                            gobj.Y = y2
+                        End If
+                    ElseIf gobj.OutputConnectors(0).IsAttached Then
+                        Dim conTo = gobj.OutputConnectors(0).AttachedConnector.AttachedTo
+                        Dim conToIdx = gobj.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
+                        If conToIdx >= 0 Then
+                            Dim x2 = conTo.InputConnectors(conToIdx).Position.X - deltaX
+                            Dim y2 = conTo.InputConnectors(conToIdx).Position.Y + deltaX
+                            gobj.X = x2
+                            gobj.Y = y2
+                        Else
+                            Dim x2 = conTo.EnergyConnector.Position.X - deltaX
+                            Dim y2 = conTo.EnergyConnector.Position.Y + deltaX
+                            gobj.X = x2
+                            gobj.Y = y2
+                        End If
+                    End If
+                End If
+                gobj.PositionConnectors()
+            Next
+
         Next
+
 
     End Sub
 
