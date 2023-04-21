@@ -25,7 +25,7 @@ namespace FarsiLibrary.Win
         #region Constants
 
         private int DEF_HEADER_HEIGHT = 24;
-        private const int DEF_GLYPH_WIDTH = 16;
+        private int DEF_GLYPH_WIDTH = 16;
 
         private int DEF_START_POS = 10;
 
@@ -314,6 +314,11 @@ namespace FarsiLibrary.Win
 
         protected override void OnPaint(PaintEventArgs e)
         {
+
+            double dpiscale = e.Graphics.DpiX / 96.0;
+
+            DEF_HEADER_HEIGHT = (int)(24 * dpiscale);
+            DEF_GLYPH_WIDTH = (int)(20 * dpiscale);
 
             SetDefaultSelected();
             Rectangle borderRc = ClientRectangle;

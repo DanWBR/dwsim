@@ -122,6 +122,7 @@ Partial Class FormFileExplorer
         'Viewer
         '
         resources.ApplyResources(Me.Viewer, "Viewer")
+        Me.Viewer.AllowExternalDrop = True
         Me.Viewer.CreationProperties = Nothing
         Me.Viewer.DefaultBackgroundColor = System.Drawing.Color.White
         Me.Viewer.Name = "Viewer"
@@ -139,8 +140,8 @@ Partial Class FormFileExplorer
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CloseButton = False
+        Me.CloseButtonVisible = False
         Me.Controls.Add(Me.SplitContainer1)
-        Me.HideOnClose = True
         Me.Name = "FormFileExplorer"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.SplitContainer1.Panel1.ResumeLayout(False)

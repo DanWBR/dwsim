@@ -698,6 +698,7 @@ Partial Class FormWelcome
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.BackColor = System.Drawing.Color.White
         Me.TabPage4.Controls.Add(Me.Panel1)
         Me.TabPage4.Controls.Add(Me.Panel7)
         Me.TabPage4.Controls.Add(Me.Panel2)
@@ -706,7 +707,6 @@ Partial Class FormWelcome
         Me.TabPage4.Controls.Add(Me.Panel5)
         Me.TabPage4.Controls.Add(Me.Panel4)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.UseVisualStyleBackColor = True
         '
         'TabPage6
         '
@@ -738,7 +738,6 @@ Partial Class FormWelcome
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.background_welcome
         Me.Controls.Add(Me.TabControl2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TabControl1)
