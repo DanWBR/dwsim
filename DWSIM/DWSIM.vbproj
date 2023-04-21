@@ -2576,6 +2576,9 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\undo_96px.png" />
+    <None Include="Resources\settings_80px.png" />
+    <None Include="Resources\stop_96px.png" />
     <None Include="Resources\unverified_account_48px.png" />
     <None Include="Resources\star_64px.png" />
     <None Include="Resources\save file s365.png" />
@@ -3237,6 +3240,7 @@
     <None Include="Resources\cheric_big.jpg" />
     <None Include="Resources\chemeo.png" />
     <None Include="Resources\color_wheel.png" />
+    <None Include="Resources\close_96px.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />
@@ -3406,6 +3410,13 @@
     <None Include="Resources\icons8-technical_support.png" />
     <None Include="Resources\info_96px.png" />
     <None Include="Resources\invert_selection_80px.png" />
+    <None Include="Resources\hibernate_60px.png" />
+    <None Include="Resources\play2_96px.png" />
+    <None Include="Resources\play_96px.png" />
+    <None Include="Resources\hibernate_80px.png" />
+    <None Include="Resources\move_up_96px.png" />
+    <None Include="Resources\move_down_96px.png" />
+    <None Include="Resources\redo_96px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
