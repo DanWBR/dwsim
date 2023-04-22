@@ -372,9 +372,17 @@ Namespace PropertyPackages
                         Case 1 'Ideal
                             H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P)
                         Case 2 'Excess
-                            Dim gammaex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
-                            If Double.IsNaN(gammaex) Then Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
-                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - gammaex - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                            Dim Hex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
+                            If Double.IsNaN(Hex) Then
+                                If Flowsheet IsNot Nothing Then
+                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings"), Interfaces.IFlowsheet.MessageType.Warning)
+                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Assuming excess enthalpy = 0"), Interfaces.IFlowsheet.MessageType.Warning)
+                                    Hex = 0.0
+                                Else
+                                    Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
+                                End If
+                            End If
+                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - Hex - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                         Case 3 'Experimental Liquid
                             H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P)
                     End Select
@@ -396,10 +404,8 @@ Namespace PropertyPackages
                         Select Case EnthalpyEntropyCpCvCalculationMode
                             Case 0 'LK
                                 H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx)) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                            Case 1 'Ideal
+                            Case 1, 2 'Ideal
                                 H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                            Case 2 'Excess
-                                H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                             Case 3 'Experimental Liquid
                                 H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                         End Select
