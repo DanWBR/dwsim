@@ -1453,7 +1453,6 @@ Partial Class FormSimulSettings
     Friend WithEvents chkUsePassword As System.Windows.Forms.CheckBox
     Public WithEvents tbPassword As System.Windows.Forms.TextBox
     Public WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
@@ -1542,4 +1541,5 @@ Partial Class FormSimulSettings
     Friend WithEvents chkForceObjectCalculation As CheckBox
     Friend WithEvents GroupBox13 As GroupBox
     Friend WithEvents chkIncludeFlowsheetMessagesInFile As CheckBox
+    Public WithEvents TabControl1 As TabControl
 End Class

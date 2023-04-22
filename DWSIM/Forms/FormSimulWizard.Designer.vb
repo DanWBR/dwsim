@@ -829,7 +829,6 @@ Partial Class FormSimulWizard
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents StepWizardControl1 As AeroWizard.StepWizardControl
     Friend WithEvents WizardPage1 As AeroWizard.WizardPage
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents WizardPage2 As AeroWizard.WizardPage
@@ -910,4 +909,5 @@ Partial Class FormSimulWizard
     Friend WithEvents chkActivateSmartObjectSolving As CheckBox
     Friend WithEvents chkDoubleClickToOpenEditors As CheckBox
     Friend WithEvents Label12 As Label
+    Public WithEvents StepWizardControl1 As AeroWizard.StepWizardControl
 End Class

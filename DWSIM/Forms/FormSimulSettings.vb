@@ -27,6 +27,7 @@ Imports DWSIM.Simulate365.FormFactories
 Imports DWSIM.Simulate365.Models
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports AeroWizard
 
 Public Class FormSimulSettings
 
@@ -50,6 +51,8 @@ Public Class FormSimulSettings
     Dim vdPP, vdSR As MessageBox()
 
     Dim SetHeights As Boolean = False
+
+    Public Shared AddMoreTabs As Action(Of TabControl)
 
     Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
 
@@ -99,6 +102,8 @@ Public Class FormSimulSettings
         DataGridViewPP.Columns(1).Width = 24 * Settings.DpiScale
 
         Init()
+
+        AddMoreTabs?.Invoke(TabControl1)
 
     End Sub
 

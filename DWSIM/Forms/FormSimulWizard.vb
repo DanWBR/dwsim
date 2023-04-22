@@ -22,6 +22,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports System.ComponentModel
+Imports AeroWizard
 
 Public Class FormSimulWizard
 
@@ -35,6 +36,8 @@ Public Class FormSimulWizard
 
     Private CompoundList As List(Of String)
     Private Indexes As Dictionary(Of String, Integer)
+
+    Public Shared AddMorePages As Action(Of StepWizardControl)
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
@@ -51,6 +54,8 @@ Public Class FormSimulWizard
         DataGridViewPP.Columns(3).Width = 24 * Settings.DpiScale
 
         Init()
+
+        AddMorePages?.Invoke(StepWizardControl1)
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
@@ -1560,7 +1565,7 @@ Public Class FormSimulWizard
                 MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 Dim pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value)
-                Dim fppi As New FormPropertyPackageInfo With {.pp = pp}
+                Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
                 fppi.ShowDialog()
             End If
         End If
