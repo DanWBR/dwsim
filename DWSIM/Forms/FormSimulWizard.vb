@@ -41,6 +41,8 @@ Public Class FormSimulWizard
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
+        AddMorePages?.Invoke(StepWizardControl1)
+
         ExtensionMethods.ChangeDefaultFont(Me)
 
         Me.StepWizardControl1.FinishButtonText = DWSIM.App.GetLocalString("FinishText")
@@ -54,8 +56,6 @@ Public Class FormSimulWizard
         DataGridViewPP.Columns(3).Width = 24 * Settings.DpiScale
 
         Init()
-
-        AddMorePages?.Invoke(StepWizardControl1)
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 

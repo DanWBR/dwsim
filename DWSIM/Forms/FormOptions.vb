@@ -17,15 +17,14 @@
 
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
-Imports Cudafy
-Imports Cudafy.Host
-Imports System.Threading.Tasks
 
 Public Class FormOptions
 
     Inherits UserControl
 
     Private loaded As Boolean = False
+
+    Public AddMoreTabs As Action(Of TabControl)
 
     Private Sub FormOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -105,6 +104,8 @@ Public Class FormOptions
         chkUpdates.Checked = Settings.CheckForUpdates
 
         loaded = True
+
+        AddMoreTabs?.Invoke(FaTabStrip1)
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
