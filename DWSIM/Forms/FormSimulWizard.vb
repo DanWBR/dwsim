@@ -39,6 +39,10 @@ Public Class FormSimulWizard
 
     Public Shared AddMorePages As Action(Of StepWizardControl, IFlowsheet)
 
+    Public Shared WizardFinished As Action(Of StepWizardControl, IFlowsheet)
+    Public Shared WizardFinished2 As Action(Of StepWizardControl, IFlowsheet)
+    Public Shared WizardFinished3 As Action(Of StepWizardControl, IFlowsheet)
+
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         AddMorePages?.Invoke(StepWizardControl1, CurrentFlowsheet)
@@ -1714,4 +1718,11 @@ Public Class FormSimulWizard
 
     End Sub
 
+    Private Sub FormSimulWizard_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+
+        WizardFinished?.Invoke(StepWizardControl1, CurrentFlowsheet)
+        WizardFinished2?.Invoke(StepWizardControl1, CurrentFlowsheet)
+        WizardFinished3?.Invoke(StepWizardControl1, CurrentFlowsheet)
+
+    End Sub
 End Class
