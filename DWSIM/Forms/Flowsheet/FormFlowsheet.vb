@@ -447,6 +447,7 @@ Public Class FormFlowsheet
                                 Case ExtenderCategory.File
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
@@ -454,12 +455,15 @@ Public Class FormFlowsheet
                                 Case ExtenderCategory.Edit
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Tools
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolsTSMI.DropDownItems.Add(exttsmi)
@@ -467,6 +471,7 @@ Public Class FormFlowsheet
                                 Case ExtenderCategory.Dynamics
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         DynamicsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         DynamicsTSMI.DropDownItems.Add(exttsmi)
@@ -474,6 +479,7 @@ Public Class FormFlowsheet
                                 Case ExtenderCategory.Optimization
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         OptimizationTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         OptimizationTSMI.DropDownItems.Add(exttsmi)
@@ -481,12 +487,15 @@ Public Class FormFlowsheet
                                 Case ExtenderCategory.Results
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         ResultsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ResultsTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Utilities
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         UtilitiesTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         UtilitiesTSMI.DropDownItems.Add(exttsmi)
@@ -496,6 +505,7 @@ Public Class FormFlowsheet
                                 Case ExtenderCategory.ToolStrip
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         ToolStrip1.Items.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolStrip1.Items.Add(exttsmi)

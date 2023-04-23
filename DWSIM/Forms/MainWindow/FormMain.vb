@@ -308,6 +308,7 @@ Public Class FormMain
                                 Case ExtenderCategory.File
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
@@ -315,6 +316,7 @@ Public Class FormMain
                                 Case ExtenderCategory.Edit
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
@@ -322,6 +324,7 @@ Public Class FormMain
                                 Case ExtenderCategory.Tools
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolsTSMI.DropDownItems.Add(exttsmi)
@@ -329,6 +332,7 @@ Public Class FormMain
                                 Case ExtenderCategory.Help
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         HelpTSMI.DropDownItems.Add(exttsmi)
