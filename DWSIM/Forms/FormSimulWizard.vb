@@ -37,11 +37,11 @@ Public Class FormSimulWizard
     Private CompoundList As List(Of String)
     Private Indexes As Dictionary(Of String, Integer)
 
-    Public Shared AddMorePages As Action(Of StepWizardControl)
+    Public Shared AddMorePages As Action(Of StepWizardControl, IFlowsheet)
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
-        AddMorePages?.Invoke(StepWizardControl1)
+        AddMorePages?.Invoke(StepWizardControl1, CurrentFlowsheet)
 
         ExtensionMethods.ChangeDefaultFont(Me)
 

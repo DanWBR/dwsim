@@ -52,7 +52,7 @@ Public Class FormSimulSettings
 
     Dim SetHeights As Boolean = False
 
-    Public Shared AddMoreTabs As Action(Of TabControl)
+    Public Shared AddMoreTabs As Action(Of TabControl, IFlowsheet)
 
     Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
 
@@ -103,7 +103,7 @@ Public Class FormSimulSettings
 
         Init()
 
-        AddMoreTabs?.Invoke(TabControl1)
+        AddMoreTabs?.Invoke(TabControl1, CurrentFlowsheet)
 
     End Sub
 
