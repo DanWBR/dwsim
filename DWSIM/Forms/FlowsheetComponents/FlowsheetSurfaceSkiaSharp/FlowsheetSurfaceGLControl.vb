@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+Imports DWSIM.Interfaces
 Imports DWSIM.UnitOperations
 Imports SkiaSharp.Views.Desktop
 
@@ -12,6 +13,9 @@ Public Class FlowsheetSurfaceGLControl
     Public FlowsheetObject As FormFlowsheet
 
     Public Event ObjectSelected(ByVal sender As FormFlowsheet)
+
+    Public Shared SingleClickAction As Action(Of IFlowsheet, MouseEventArgs)
+    Public Shared DoubleClickAction As Action(Of IFlowsheet, MouseEventArgs)
 
     Public Sub New()
 
@@ -36,13 +40,15 @@ Public Class FlowsheetSurfaceGLControl
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
-        FlowsheetSurface.InputRelease()
-        If My.Settings.DisplayPFDTip Then
-            MessageBox.Show(DWSIM.App.GetLocalString("PFDTip"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            My.Settings.DisplayPFDTip = False
+
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing AndAlso FlowsheetObject.BidirectionalSolver.Activated Then
+            FlowsheetObject.BidirectionalSolver.ObjectClickAction(sender, e)
+        ElseIf SingleClickAction IsNot Nothing Then
+            SingleClickAction.Invoke(FlowsheetObject, e)
+        Else
+            SingleClickHandler(sender, e)
         End If
-        Invalidate()
-        Invalidate()
+
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
@@ -65,14 +71,13 @@ Public Class FlowsheetSurfaceGLControl
 
     Private Sub FlowsheetSurfaceControl_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Me.MouseDoubleClick
 
-        If FlowsheetObject.BidirectionalSolver IsNot Nothing Then
-            If FlowsheetObject.BidirectionalSolver.Activated Then
-                FlowsheetObject.BidirectionalSolver.ObjectDoubleClickAction(sender, e)
-                Exit Sub
-            End If
+        If FlowsheetObject.BidirectionalSolver IsNot Nothing AndAlso FlowsheetObject.BidirectionalSolver.Activated Then
+            FlowsheetObject.BidirectionalSolver.ObjectDoubleClickAction(sender, e)
+        ElseIf DoubleClickAction IsNot Nothing Then
+            DoubleClickAction?.Invoke(FlowsheetObject, e)
+        Else
+            DoubleClickHandler(sender, e)
         End If
-
-        DoubleClickHandler(sender, e)
 
     End Sub
 
