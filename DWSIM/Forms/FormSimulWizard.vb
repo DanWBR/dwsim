@@ -1540,7 +1540,20 @@ Public Class FormSimulWizard
 
     Private Sub WizardPage2_Commit(sender As Object, e As AeroWizard.WizardPageConfirmEventArgs) Handles WizardPage2.Commit
 
-        SetupPPRecommendations()
+        If CurrentFlowsheet.SelectedCompounds.Count = 0 Then
+
+            Dim t1 = CurrentFlowsheet.GetTranslatedString1("Please add at least one compound to proceed.")
+            Dim t2 = CurrentFlowsheet.GetTranslatedString1("Error")
+
+            MessageBox.Show(t1, t2, MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            e.Cancel = True
+
+        Else
+
+            SetupPPRecommendations()
+
+        End If
 
     End Sub
 
@@ -1725,4 +1738,20 @@ Public Class FormSimulWizard
         WizardFinished3?.Invoke(StepWizardControl1, CurrentFlowsheet)
 
     End Sub
+
+    Private Sub WizardPage3_Commit(sender As Object, e As WizardPageConfirmEventArgs) Handles WizardPage3.Commit
+
+        If CurrentFlowsheet.PropertyPackages.Count = 0 Then
+
+            Dim t1 = CurrentFlowsheet.GetTranslatedString1("Please add at least one property package to proceed.")
+            Dim t2 = CurrentFlowsheet.GetTranslatedString1("Error")
+
+            MessageBox.Show(t1, t2, MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            e.Cancel = True
+
+        End If
+
+    End Sub
+
 End Class
