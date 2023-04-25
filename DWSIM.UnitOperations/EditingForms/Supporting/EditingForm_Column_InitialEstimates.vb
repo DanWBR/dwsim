@@ -44,6 +44,62 @@ Public Class EditingForm_Column_InitialEstimates
 
         ChangeDefaultFont(Me)
 
+        Using g1 = Me.CreateGraphics()
+
+            Settings.DpiScale = g1.DpiX / 96.0
+
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.Invalidate()
+
+            Me.ToolStrip2.AutoSize = False
+            Me.ToolStrip2.Size = New Size(ToolStrip2.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip2.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip2.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip2.ImageScalingSize.Width, ToolStrip2.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip2.Invalidate()
+
+            Me.ToolStrip3.AutoSize = False
+            Me.ToolStrip3.Size = New Size(ToolStrip3.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip3.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip3.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip3.ImageScalingSize.Width, ToolStrip3.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip3.Invalidate()
+
+            Me.ToolStrip4.AutoSize = False
+            Me.ToolStrip4.Size = New Size(ToolStrip4.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip4.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip4.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip4.ImageScalingSize.Width, ToolStrip4.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip4.Invalidate()
+
+            Me.ToolStrip5.AutoSize = False
+            Me.ToolStrip5.Size = New Size(ToolStrip5.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip5.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip5.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip5.ImageScalingSize.Width, ToolStrip5.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip5.Invalidate()
+
+        End Using
+
         pathsep = Path.DirectorySeparatorChar
 
         form = dc.FlowSheet

@@ -67,10 +67,12 @@ namespace FarsiLibrary.Win
             //        new Point(glyphRect.Right - (glyphRect.Width / 3), glyphRect.Height / 2 - 1));
             //}
 
+            var d = (int)((double)glyphRect.Width / 4);
+
             g.FillPolygon(Brushes.Black, new Point[]{
-                new Point(glyphRect.Left, glyphRect.Y + 2),
-                new Point(glyphRect.Right, glyphRect.Y + 2),
-                new Point(glyphRect.Left + glyphRect.Width / 2,glyphRect.Bottom - 2)});
+                new Point(glyphRect.Left + d, glyphRect.Y + d),
+                new Point(glyphRect.Right - d, glyphRect.Y + d),
+                new Point(glyphRect.Left + glyphRect.Width / 2,glyphRect.Bottom - d)});
 
             g.SmoothingMode = bak;
         }

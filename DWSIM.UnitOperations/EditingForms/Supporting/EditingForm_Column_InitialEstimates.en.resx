@@ -128,43 +128,16 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 20</value>
+    <value>431, 20</value>
   </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Open file with initial estimates</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>569, 51</value>
+    <value>566, 51</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>File</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>569, 360</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Estimates</value>
-  </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 315</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Variables</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 315</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Mole Fractions (L)</value>
-  </data>
-  <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 315</value>
-  </data>
-  <data name="FaTabStripItem5.Title" xml:space="preserve">
-    <value>Mole Fractions (V)</value>
-  </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>563, 341</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dgvv.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -186,78 +159,87 @@
     <value>Fill</value>
   </data>
   <data name="dgvv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 0</value>
+    <value>28, 0</value>
   </data>
   <data name="dgvv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>537, 315</value>
+    <value>530, 381</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 315</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton2.ToolTipText" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton5.ToolTipText" xml:space="preserve">
     <value>Clear</value>
   </data>
   <data name="ToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton6.ToolTipText" xml:space="preserve">
     <value>Lock</value>
   </data>
   <data name="ToolStripButton7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton7.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 6</value>
+    <value>26, 6</value>
   </data>
   <data name="ToolStripButton28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton28.ToolTipText" xml:space="preserve">
     <value>Interpolate Temperature (empty cells)</value>
   </data>
   <data name="ToolStripButton27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton27.ToolTipText" xml:space="preserve">
     <value>Interpolate Vapor Flow (empty cells)</value>
   </data>
   <data name="ToolStripButton26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton26.ToolTipText" xml:space="preserve">
     <value>Interpolate Liquid Flow (empty cells)</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 6</value>
+    <value>26, 6</value>
   </data>
   <data name="ToolStripButton29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton29.Text" xml:space="preserve">
     <value>Update Automatically</value>
   </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 381</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 381</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Variables</value>
+  </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
@@ -265,28 +247,52 @@
     <value>Fill</value>
   </data>
   <data name="dgvcl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 0</value>
+    <value>28, 0</value>
   </data>
   <data name="dgvcl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>537, 315</value>
+    <value>530, 381</value>
   </data>
-  <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 315</value>
+  <data name="ToolStrip2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton3.ToolTipText" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="ToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
   <data name="ToolStripButton4.ToolTipText" xml:space="preserve">
     <value>Paste</value>
+  </data>
+  <data name="ToolStripButton8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton8.ToolTipText" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="ToolStripButton9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
   <data name="ToolStripButton9.ToolTipText" xml:space="preserve">
     <value>Lock</value>
   </data>
+  <data name="ToolStripButton10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
   <data name="ToolStripButton10.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
+  </data>
+  <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 381</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 381</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Mole Fractions (L)</value>
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Stage</value>
@@ -298,31 +304,61 @@
     <value>Fill</value>
   </data>
   <data name="dgvcv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 0</value>
+    <value>28, 0</value>
   </data>
   <data name="dgvcv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>537, 315</value>
+    <value>530, 381</value>
   </data>
-  <data name="ToolStrip5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 315</value>
+  <data name="ToolStrip5.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ToolStripButton21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton21.ToolTipText" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="ToolStripButton22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
   <data name="ToolStripButton22.ToolTipText" xml:space="preserve">
     <value>Paste</value>
+  </data>
+  <data name="ToolStripButton23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton23.ToolTipText" xml:space="preserve">
     <value>Clean</value>
   </data>
+  <data name="ToolStripButton24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
   <data name="ToolStripButton24.ToolTipText" xml:space="preserve">
     <value>Lock</value>
+  </data>
+  <data name="ToolStripButton25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
   </data>
   <data name="ToolStripButton25.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
   </data>
-  <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Variables</value>
+  <data name="ToolStrip5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 381</value>
+  </data>
+  <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 381</value>
+  </data>
+  <data name="FaTabStripItem5.Title" xml:space="preserve">
+    <value>Mole Fractions (V)</value>
+  </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 407</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>566, 426</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Estimates</value>
   </data>
   <data name="ToolStripButton11.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -339,6 +375,9 @@
   <data name="ToolStripButton15.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
   </data>
+  <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 381</value>
+  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
@@ -351,8 +390,17 @@
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>Steam Flow</value>
   </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>Compositions</value>
+  <data name="DataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-33, 0</value>
+  </data>
+  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 381</value>
+  </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 381</value>
+  </data>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Variables</value>
   </data>
   <data name="ToolStripButton16.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -369,19 +417,31 @@
   <data name="ToolStripButton20.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
   </data>
+  <data name="ToolStrip4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 381</value>
+  </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
   <data name="DataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="DataGridView2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-33, 0</value>
+  </data>
+  <data name="DataGridView2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 381</value>
+  </data>
+  <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 381</value>
+  </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Compositions</value>
   </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowOnly</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>578, 415</value>
+    <value>575, 481</value>
   </data>
 </root>
