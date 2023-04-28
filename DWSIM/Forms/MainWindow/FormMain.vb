@@ -200,6 +200,7 @@ Public Class FormMain
                 StatusStrip1.Visible = False
                 tsbRegCO.Visible = False
                 RegistroCAPEOPENToolStripMenuItem.Enabled = False
+                DashboardToolStripMenuItem.Visible = False
             End If
 #End If
 
@@ -219,18 +220,22 @@ Public Class FormMain
 
         End If
 
+#If Not DEBUG Then
         If AnalyticsProvider IsNot Nothing Then
-            Task.Delay(30 * 1000).ContinueWith(
-                Sub(t)
-                    UIThread(Sub()
+#End If
+        Task.Delay(30 * 1000).ContinueWith(
+            Sub(t)
+                UIThread(Sub()
 #If DEBUG Then
-                                 tsbQuickQuestion.Visible = True
+                             tsbQuickQuestion.Visible = True
 #Else
                              If Not My.Settings.UserTypeSent Then tsbQuickQuestion.Visible = True
 #End If
-                             End Sub)
-                End Sub)
+                         End Sub)
+            End Sub)
+#If Not DEBUG Then
         End If
+#End If
 
     End Sub
 

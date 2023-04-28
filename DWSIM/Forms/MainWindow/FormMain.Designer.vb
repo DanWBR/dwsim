@@ -573,16 +573,19 @@ Partial Class FormMain
         '
         'DashboardToolStripMenuItem
         '
+        Me.DashboardToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
         Me.DashboardToolStripMenuItem.Name = "DashboardToolStripMenuItem"
         resources.ApplyResources(Me.DashboardToolStripMenuItem, "DashboardToolStripMenuItem")
         '
         'LoggedInS365Button
         '
+        Me.LoggedInS365Button.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
         Me.LoggedInS365Button.Name = "LoggedInS365Button"
         resources.ApplyResources(Me.LoggedInS365Button, "LoggedInS365Button")
         '
         'LogoutToolStripMenuItem
         '
+        Me.LogoutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Logout_Rounded_96px
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         resources.ApplyResources(Me.LogoutToolStripMenuItem, "LogoutToolStripMenuItem")
         '

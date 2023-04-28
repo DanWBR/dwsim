@@ -3417,6 +3417,7 @@
     <None Include="Resources\move_up_96px.png" />
     <None Include="Resources\move_down_96px.png" />
     <None Include="Resources\redo_96px.png" />
+    <None Include="Resources\Logout Rounded_96px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
