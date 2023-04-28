@@ -3858,6 +3858,9 @@ xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 xcopy "$(SolutionDir)\PlatformFiles\Common" "$(TargetDir)"  /E /Y /F /D
 xcopy "$(SolutionDir)\PlatformFiles\Windows" "$(TargetDir)"  /E /Y /F /D
 
+erase /S /Q "$(SolutionDir)DistPackages\Windows\dwsim-web-ui" 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)\DWSIM.UI.Web\dwsim-web-ui" "$(TargetDir)"  /E /Y /F /D
+
 erase /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Windows\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Windows\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
