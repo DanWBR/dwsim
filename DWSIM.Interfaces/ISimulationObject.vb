@@ -274,4 +274,6 @@ Imports DWSIM.Interfaces.Enums
 
     Sub CheckDirtyStatus()
 
+    Function GetEditingForm() As System.Windows.Forms.Form
+
 End Interface

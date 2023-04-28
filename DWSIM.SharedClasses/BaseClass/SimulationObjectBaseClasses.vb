@@ -533,6 +533,12 @@ Namespace UnitOperations
 
         Public MustOverride Sub UpdateEditForm() Implements ISimulationObject.UpdateEditForm
 
+        Public Overridable Function GetEditingForm() As Form Implements ISimulationObject.GetEditingForm
+
+            Return Nothing
+
+        End Function
+
 
         ''' <summary>
         ''' Energy Flow property. Only implemented for Energy Streams.
