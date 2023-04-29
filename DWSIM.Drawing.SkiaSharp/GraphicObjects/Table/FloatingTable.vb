@@ -240,8 +240,8 @@ Namespace GraphicObjects.Tables
                         Dim eprops = DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray()
                         props.AddRange(eprops)
                     Else
-                        Dim eprops = DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.Where(Function(p) Not Owner.IsDynamicProperty(p)).ToArray()
-                        props.AddRange(eprops)
+                        'Dim eprops = DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.Where(Function(p) Not Owner.IsDynamicProperty(p)).ToArray()
+                        'props.AddRange(eprops)
                     End If
 
                     If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Or
