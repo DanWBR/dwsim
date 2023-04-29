@@ -49,7 +49,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
             else
             {
-                StartPosition = FormStartPosition.WindowsDefaultLocation;
+                StartPosition = FormStartPosition.CenterScreen;
                 Size = dockPanel.DefaultFloatWindowSize;
             }
 
