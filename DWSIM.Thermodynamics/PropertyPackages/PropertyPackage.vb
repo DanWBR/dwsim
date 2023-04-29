@@ -251,7 +251,7 @@ Namespace PropertyPackages
 
         Public Property UseHenryConstants As Boolean = True
 
-        Public Property AutoEstimateMissingNRTLUNIQUACParameters = True
+        Public Property AutoEstimateMissingNRTLUNIQUACParameters As Boolean = True
 
         ''' <summary>
         ''' ' For mobile compatibility only.

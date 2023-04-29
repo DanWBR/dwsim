@@ -312,6 +312,9 @@ Namespace PropertyPackages
 
                             Catch ex As Exception
 
+                                ipset.Value.A12 = 0.0000000001
+                                ipset.Value.A21 = 0.0000000001
+
                                 'If verbose Then
                                 '    Console.WriteLine(String.Format("Error estimating UNIQUAC IP set for {0}/{1}: {2}",
                                 '                                 comp1.Name, comp2.Name, ex.ToString()))
