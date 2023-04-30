@@ -124,6 +124,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ExportarParaPDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportarParaSVGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsmiNaturalLayout = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutAutomaticoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestaurarLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssepPro2 = New System.Windows.Forms.ToolStripSeparator()
@@ -186,7 +187,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.CMS_Palette = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.tsmiNaturalLayout = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -954,6 +954,12 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStripSeparator18, "ToolStripSeparator18")
         Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
         '
+        'tsmiNaturalLayout
+        '
+        resources.ApplyResources(Me.tsmiNaturalLayout, "tsmiNaturalLayout")
+        Me.tsmiNaturalLayout.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
+        Me.tsmiNaturalLayout.Name = "tsmiNaturalLayout"
+        '
         'LayoutAutomaticoToolStripMenuItem
         '
         resources.ApplyResources(Me.LayoutAutomaticoToolStripMenuItem, "LayoutAutomaticoToolStripMenuItem")
@@ -1296,12 +1302,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         Me.ToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.icons8_compress
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        '
-        'tsmiNaturalLayout
-        '
-        resources.ApplyResources(Me.tsmiNaturalLayout, "tsmiNaturalLayout")
-        Me.tsmiNaturalLayout.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
-        Me.tsmiNaturalLayout.Name = "tsmiNaturalLayout"
         '
         'FlowsheetSurface_SkiaSharp
         '

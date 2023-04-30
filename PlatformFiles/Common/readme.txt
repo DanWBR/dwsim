@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.4.3
+Version 8.4.4
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,23 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.4.4
+
+- Implemented Natural Layout feature for PFD
+- Display phase total amount in Material Stream editor (Classic UI)
+- Implemented #461: warning messages when detecting unexpected phases for Pump, Compressor and Expander
+- Fixed and updated Excel Add-In sample
+- Fixed issue with macOS/Linux freezing when estimating missing NRTL/UNIQUAC parameters
+- Fixed SVLLE flash algorithm error with forced solids
+- Fixed #457: SetOverallMassComposition not working
+- Fixed SetPropertyVal for Cape-Open UO
+- Fixed deadlock on UIThread
+- Fixed PFR pressure drop calculation
+- Fixed issue with Liquid-Liquid Extraction column
+- Fixed missing BIP message for UNIFAC models
+- Fixed some property display units for heat exchanger
+- Other minor bug fixes and UI adjustments
 
 Version 8.4.3
 
