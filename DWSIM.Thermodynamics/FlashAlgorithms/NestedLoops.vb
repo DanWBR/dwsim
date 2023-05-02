@@ -37,15 +37,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
-        Dim etol As Double = 0.000001
-        Dim itol As Double = 0.000001
-        Dim maxit_i As Integer = 100
-        Dim maxit_e As Integer = 100
-        Dim dampingfactor As Double = 1.0
+        Protected etol As Double = 0.000001
+        Protected itol As Double = 0.000001
+        Protected maxit_i As Integer = 100
+        Protected maxit_e As Integer = 100
+        Protected dampingfactor As Double = 1.0
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
-        Private CalculatingAzeotrope As Boolean = False
+        Protected CalculatingAzeotrope As Boolean = False
 
         Public DisableParallelCalcs As Boolean = False
 
@@ -358,7 +358,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         End Function
 
-        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damplevel As Integer) As Object()
+        Protected Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damplevel As Integer) As Object()
 
             Dim n As Integer = Vz.Length - 1
 
