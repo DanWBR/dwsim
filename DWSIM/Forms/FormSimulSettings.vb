@@ -54,36 +54,14 @@ Public Class FormSimulSettings
 
     Public Shared AddMoreTabs As Action(Of TabControl, IFlowsheet)
 
-    Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
-
-        If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
-
-            ' set the bounds of this form's FloatWindow to our desired position and size
-
-            Dim screenWidth As Integer = Screen.PrimaryScreen.Bounds.Width
-            Dim screenHeight As Integer = Screen.PrimaryScreen.Bounds.Height
-
-            If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
-                Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
-                If Not floatWin Is Nothing Then
-                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y,
-                                       900 * GlobalSettings.Settings.DpiScale, 600 * GlobalSettings.Settings.DpiScale)
-                    Dim w = floatWin.Width
-                    Dim h = floatWin.Height
-                    floatWin.SetDesktopLocation((screenWidth - w) / 2, (screenHeight - h) / 2)
-                End If
-            End If
-
-            Try
-                Init()
-            Catch ex As Exception
-
-            End Try
-
-        End If
-    End Sub
-
     Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim sw As Integer = Screen.PrimaryScreen.Bounds.Width
+        Dim sh As Integer = Screen.PrimaryScreen.Bounds.Height
+        Dim w = 900 * GlobalSettings.Settings.DpiScale
+        Dim h = 600 * GlobalSettings.Settings.DpiScale
+
+        Me.Pane.FloatWindow.SetBounds((sw - w) / 2, (sh - h) / 2, w, h)
 
         Me.TabText = Me.Text
 

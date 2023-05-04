@@ -284,10 +284,11 @@ Namespace Streams
                     Else
                         Dim firstpp = FlowSheet.PropertyPackages.Values.FirstOrDefault()
                         If firstpp Is Nothing Then
-                            Throw New Exception("Please add at least one Property Package to the simulation.")
+                            Return Nothing
+                        Else
+                            _ppid = firstpp.UniqueID
+                            Return firstpp
                         End If
-                        _ppid = firstpp.UniqueID
-                        Return firstpp
                     End If
                 End If
             End Get
