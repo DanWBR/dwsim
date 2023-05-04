@@ -224,6 +224,10 @@ Public Class FormFlowsheet
 
         End Using
 
+        If FormMain.IsPro Then
+            tsmiExportData.Visible = False
+        End If
+
         FormCharts.Flowsheet = Me
         FormSpreadsheet.Flowsheet = Me
         FormDynamics.Flowsheet = Me

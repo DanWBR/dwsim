@@ -200,6 +200,10 @@ Public Class FlowsheetSurface_SkiaSharp
             tsmiLiveFlow.Visible = False
             tss1.Visible = False
             tss2.Visible = False
+            CopiarComoImagem200ToolStripMenuItem.Visible = False
+            CopiarComoImagem300ToolStripMenuItem.Visible = False
+            CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Visible = False
+            CopyAsImageToolStripMenuItem.Visible = False
         End If
 
         AddHandler AnimationTimer.Elapsed, Sub(s2, e2)

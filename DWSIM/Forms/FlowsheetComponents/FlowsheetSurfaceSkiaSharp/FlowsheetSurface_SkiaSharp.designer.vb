@@ -1441,12 +1441,9 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tsbAlignHorizontal As System.Windows.Forms.ToolStripButton
     Friend WithEvents SplitContainerHorizontal As SplitContainer
     Friend WithEvents EditAppearanceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CopyAsImageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsbDisplayGrid As ToolStripButton
     Friend WithEvents tsbMultiSelectMode As ToolStripButton
     Public WithEvents ToolStripSeparator9 As ToolStripSeparator
-    Friend WithEvents CopiarComoImagem200ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CopiarComoImagem300ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SplitAndInsertRecycleMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents tstbSearch As ToolStripTextBox
@@ -1513,4 +1510,7 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents tsmiNaturalLayout As ToolStripMenuItem
+    Public WithEvents CopyAsImageToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents CopiarComoImagem200ToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents CopiarComoImagem300ToolStripMenuItem As ToolStripMenuItem
 End Class
