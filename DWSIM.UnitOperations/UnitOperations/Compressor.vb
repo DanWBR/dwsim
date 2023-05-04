@@ -432,19 +432,19 @@ Namespace UnitOperations
 
                         If LHead.Count > 0 Then
                             ' head has priority over power
-                            ires = Interpolation.Interpolate(LHeadSpeed.ToArray, LHead.ToArray(), Speed)
+                            ires = MathNet.Numerics.Interpolate.Linear(LHeadSpeed.ToArray, LHead.ToArray()).Interpolate(Speed)
                             Me.CurvePower = Double.NegativeInfinity
                             Me.CurveHead = ires
                         Else
                             'power
-                            ires = Interpolation.Interpolate(LPowerSpeed.ToArray, LPower.ToArray(), Speed)
+                            ires = MathNet.Numerics.Interpolate.Linear(LPowerSpeed.ToArray, LPower.ToArray()).Interpolate(Speed)
                             Me.CurveHead = Double.NegativeInfinity
                             Me.CurvePower = ires
                         End If
 
                         If LEff.Count > 0 Then
                             'efficiency
-                            ires = Interpolation.Interpolate(LEffSpeed.ToArray, LEff.ToArray(), Speed)
+                            ires = MathNet.Numerics.Interpolate.Linear(LEffSpeed.ToArray, LEff.ToArray()).Interpolate(Speed)
                             Me.CurveEff = ires * 100
                         Else
                             Me.CurveEff = Double.NegativeInfinity
