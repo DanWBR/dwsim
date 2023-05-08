@@ -101,6 +101,7 @@ Public Class GraphicsSurface
     Public DrawOverlaysAction As Action(Of SKCanvas)
 
     Public GlobalDrawOverride As Action(Of IGraphicObject, SKCanvas)
+    Public GlobalConPositionsOverride As Action(Of IGraphicObject)
 
     Public Event StartedDrawing As DrawingEvent
     Public Event FinishedDrawing As DrawingEvent
@@ -336,9 +337,13 @@ Public Class GraphicsSurface
 
         For Each dobj In DrawingObjects
             If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
-               Not TypeOf dobj Is Tables.FloatingTableGraphic Then
+           Not TypeOf dobj Is Tables.FloatingTableGraphic Then
                 If TypeOf dobj Is ShapeGraphic Then
-                    DirectCast(dobj, ShapeGraphic).PositionConnectors()
+                    If GlobalConPositionsOverride Is Nothing Then
+                        DirectCast(dobj, ShapeGraphic).PositionConnectors()
+                    Else
+                        GlobalConPositionsOverride.Invoke(dobj)
+                    End If
                 End If
             End If
         Next
