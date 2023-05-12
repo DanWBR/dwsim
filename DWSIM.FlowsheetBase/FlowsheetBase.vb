@@ -2320,6 +2320,7 @@ Imports System.Text.RegularExpressions
                         If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
                             ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
                         End If
+                        If ppkey.Contains("Seawater") Then ppkey = "Seawater IAPWS-08"
                         If AvailablePropertyPackages.ContainsKey(ppkey) Then
                             obj = AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
