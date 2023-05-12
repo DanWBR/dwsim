@@ -13180,6 +13180,10 @@ Final3:
 
         End Function
 
+        Public Function GetAsObject() As Object Implements IPropertyPackage.GetAsObject
+            Return Me
+        End Function
+
 #End Region
 
     End Class

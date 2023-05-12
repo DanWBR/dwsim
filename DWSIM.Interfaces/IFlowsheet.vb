@@ -360,6 +360,10 @@
 
     Sub SetDirtyStatus()
 
+    Function GetAvailableFlowsheetObjectTypeNames() As Array
+
+    Function AddFlowsheetObject(typename As String, objname As String) As ISimulationObject
+
 End Interface
 
 ''' <summary>

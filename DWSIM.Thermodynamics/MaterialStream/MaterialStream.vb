@@ -1183,6 +1183,12 @@ Namespace Streams
 
         End Function
 
+        Public Function GetCompoundNames() As String()
+
+            Return Phases(0).Compounds.Keys.ToArray()
+
+        End Function
+
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
