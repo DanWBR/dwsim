@@ -147,81 +147,91 @@ Public Class EditingForm_Adjust
 
     Private Sub cbInlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSourceObj.SelectedIndexChanged
 
-        If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ManipulatedObjectData.ID) Then
-            With SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
-                .IsAdjustAttached = False
-                .AttachedAdjustId = ""
-                .AdjustVarType = Enums.AdjustVarType.None
-            End With
-        End If
+        If Loaded Then
 
-        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
+            If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ManipulatedObjectData.ID) Then
+                With SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
+                    .IsAdjustAttached = False
+                    .AttachedAdjustId = ""
+                    .AdjustVarType = Enums.AdjustVarType.None
+                End With
+            End If
 
-        If Not obj Is Nothing Then
+            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
 
-            With Me.SimObject.ManipulatedObjectData
-                .ID = obj.Name
-                .Name = obj.GraphicObject.Tag
-            End With
+            If Not obj Is Nothing Then
 
-            With obj
-                .IsAdjustAttached = True
-                .AttachedAdjustId = SimObject.Name
-                .AdjustVarType = Enums.AdjustVarType.Manipulated
-            End With
+                With Me.SimObject.ManipulatedObjectData
+                    .ID = obj.Name
+                    .Name = obj.GraphicObject.Tag
+                End With
 
-            Dim props = obj.GetProperties(Enums.PropertyType.WR)
+                With obj
+                    .IsAdjustAttached = True
+                    .AttachedAdjustId = SimObject.Name
+                    .AdjustVarType = Enums.AdjustVarType.Manipulated
+                End With
 
-            cbSourceProp.Items.Clear()
-            For Each p In props
-                cbSourceProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
-            Next
+                Dim props = obj.GetProperties(Enums.PropertyType.WR)
 
-            SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
-            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+                cbSourceProp.Items.Clear()
+                For Each p In props
+                    cbSourceProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
+                Next
+
+                SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
+                DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+
+            End If
 
         End If
 
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
+
         If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+
     End Sub
 
     Private Sub cbTargetObj_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetObj.SelectedIndexChanged
 
-        If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ControlledObjectData.ID) Then
-            With SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
-                .IsAdjustAttached = False
-                .AttachedAdjustId = ""
-                .AdjustVarType = Enums.AdjustVarType.None
-            End With
-        End If
+        If Loaded Then
 
-        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+            If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ControlledObjectData.ID) Then
+                With SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
+                    .IsAdjustAttached = False
+                    .AttachedAdjustId = ""
+                    .AdjustVarType = Enums.AdjustVarType.None
+                End With
+            End If
 
-        If Not obj Is Nothing Then
+            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
 
-            With Me.SimObject.ControlledObjectData
-                .ID = obj.Name
-                .Name = obj.GraphicObject.Tag
-            End With
+            If Not obj Is Nothing Then
 
-            With obj
-                .IsAdjustAttached = True
-                .AttachedAdjustId = SimObject.Name
-                .AdjustVarType = Enums.AdjustVarType.Controlled
-            End With
+                With Me.SimObject.ControlledObjectData
+                    .ID = obj.Name
+                    .Name = obj.GraphicObject.Tag
+                End With
 
-            Dim props = obj.GetProperties(Enums.PropertyType.ALL)
+                With obj
+                    .IsAdjustAttached = True
+                    .AttachedAdjustId = SimObject.Name
+                    .AdjustVarType = Enums.AdjustVarType.Controlled
+                End With
 
-            cbTargetProp.Items.Clear()
-            For Each p In props
-                cbTargetProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
-            Next
+                Dim props = obj.GetProperties(Enums.PropertyType.ALL)
 
-            SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
-            DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToCv = SimObject.ControlledObject.GraphicObject
+                cbTargetProp.Items.Clear()
+                For Each p In props
+                    cbTargetProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
+                Next
+
+                SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
+                DirectCast(SimObject.GraphicObject, DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AdjustGraphic).ConnectedToCv = SimObject.ControlledObject.GraphicObject
+
+            End If
 
         End If
 
@@ -229,46 +239,54 @@ Public Class EditingForm_Adjust
 
     Private Sub cbSourceProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSourceProp.SelectedIndexChanged
 
-        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
+        If Loaded Then
 
-        If Not obj Is Nothing Then
+            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
 
-            Dim props = obj.GetProperties(Enums.PropertyType.WR)
+            If Not obj Is Nothing Then
 
-            For Each p In props
-                If SimObject.FlowSheet.GetTranslatedString(p) = cbSourceProp.SelectedItem.ToString Then
-                    SimObject.ManipulatedObjectData.PropertyName = p
-                    lblSourceVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " " & obj.GetPropertyUnit(p, units)
-                    Exit For
-                End If
-            Next
+                Dim props = obj.GetProperties(Enums.PropertyType.WR)
+
+                For Each p In props
+                    If SimObject.FlowSheet.GetTranslatedString(p) = cbSourceProp.SelectedItem.ToString Then
+                        SimObject.ManipulatedObjectData.PropertyName = p
+                        lblSourceVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " " & obj.GetPropertyUnit(p, units)
+                        Exit For
+                    End If
+                Next
+
+            End If
+
+            cp.UpdateInfo()
 
         End If
-
-        cp.UpdateInfo()
 
     End Sub
 
     Private Sub cbTargetProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetProp.SelectedIndexChanged
 
-        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+        If Loaded Then
 
-        If Not obj Is Nothing Then
+            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
 
-            Dim props = obj.GetProperties(Enums.PropertyType.ALL)
+            If Not obj Is Nothing Then
 
-            For Each p In props
-                If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
-                    SimObject.ControlledObjectData.PropertyName = p
-                    lblTargetVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - su.Converter.ConvertFromSI(obj.GetPropertyUnit(p, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
-                    lblSPUnits.Text = obj.GetPropertyUnit(p, units)
-                    Exit For
-                End If
-            Next
+                Dim props = obj.GetProperties(Enums.PropertyType.ALL)
+
+                For Each p In props
+                    If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
+                        SimObject.ControlledObjectData.PropertyName = p
+                        lblTargetVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - su.Converter.ConvertFromSI(obj.GetPropertyUnit(p, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
+                        lblSPUnits.Text = obj.GetPropertyUnit(p, units)
+                        Exit For
+                    End If
+                Next
+
+            End If
+
+            cp.UpdateInfo()
 
         End If
-
-        cp.UpdateInfo()
 
     End Sub
 
