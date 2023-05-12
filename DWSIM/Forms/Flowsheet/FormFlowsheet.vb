@@ -3634,11 +3634,13 @@ Public Class FormFlowsheet
 
     Private Sub tsbDeleteSolution_Click(sender As Object, e As EventArgs) Handles tsbDeleteSolution.Click
 
-        If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
-            If MessageBox.Show(GetTranslatedString1("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                StoredSolutions.Remove(tscbStoredSolutions.SelectedItem.ToString)
-                tscbStoredSolutions.Items.Remove(tscbStoredSolutions.SelectedItem)
-                FormDynamics.UpdateSelectables()
+        If tscbStoredSolutions.SelectedItem IsNot Nothing Then
+            If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
+                If MessageBox.Show(GetTranslatedString1("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    StoredSolutions.Remove(tscbStoredSolutions.SelectedItem.ToString)
+                    tscbStoredSolutions.Items.Remove(tscbStoredSolutions.SelectedItem)
+                    FormDynamics.UpdateSelectables()
+                End If
             End If
         End If
 

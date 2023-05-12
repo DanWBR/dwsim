@@ -54,6 +54,8 @@ Public Class FormConfigureMasterTable
 
         nupLines.Value = Table.NumberOfLines
 
+        nupFS.Value = Table.FontSize
+
         Populate()
 
         Loaded = True
@@ -270,6 +272,12 @@ Public Class FormConfigureMasterTable
         ColumnHeader1.Width = lvObjects.Width - 15
         ColumnHeader2.Width = lvProps.Width - 15
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+    End Sub
+
+    Private Sub nupFS_ValueChanged(sender As Object, e As EventArgs) Handles nupFS.ValueChanged
+
+        If Loaded Then Table.FontSize = nupFS.Value
 
     End Sub
 
