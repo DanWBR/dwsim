@@ -11,7 +11,7 @@ Public Class EditingForm_Adjust
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
-    Dim cp As EditingForm_Adjust_ControlPanel
+    Public cp As EditingForm_Adjust_ControlPanel
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
