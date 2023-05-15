@@ -202,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCopyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 422</value>
+    <value>317, 425</value>
   </data>
   <data name="lblCopyright.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -277,7 +277,7 @@
     <value>317, 179</value>
   </data>
   <data name="lblPatrons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 171</value>
+    <value>652, 192</value>
   </data>
   <data name="lblPatrons.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -307,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 359</value>
+    <value>317, 374</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>652, 44</value>

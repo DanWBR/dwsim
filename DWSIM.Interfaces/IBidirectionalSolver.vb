@@ -6,4 +6,6 @@
 
     Property Activated As Boolean
 
+    Sub DisplayHelp()
+
 End Interface
