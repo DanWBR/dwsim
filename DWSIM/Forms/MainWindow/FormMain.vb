@@ -4611,29 +4611,6 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub GuiaDoUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioToolStripMenuItem.Click
-
-        RaiseEvent ToolOpened("View User Guide", New EventArgs())
-
-        If DWSIM.App.IsRunningOnMono Then
-            Dim p As New Process()
-            With p
-                .StartInfo.FileName = "xdg-open"
-                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "User_Guide.pdf"
-                .StartInfo.UseShellExecute = False
-                .Start()
-            End With
-        Else
-            If IsPro Then
-                Dim fb As New FormBrowser()
-                fb.Show()
-                fb.DisplayURL(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
-            Else
-                Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
-            End If
-        End If
-    End Sub
-
     Private Sub WikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WikiToolStripMenuItem.Click
         If IsPro Then
             Dim fb As New FormBrowser()
@@ -4975,6 +4952,30 @@ Label_00CC:
 
         Dim fq As New FormOccupancyQuestion()
         fq.ShowDialog(Me)
+
+    End Sub
+
+    Private Sub UsersGuideToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsersGuideToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("View User Guide", New EventArgs())
+
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "User_Guide.pdf"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            If IsPro Then
+                Dim fb As New FormBrowser()
+                fb.Show()
+                fb.DisplayURL(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            Else
+                Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            End If
+        End If
 
     End Sub
 

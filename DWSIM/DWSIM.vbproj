@@ -2576,6 +2576,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\user_manual_80px.png" />
     <None Include="Resources\undo_96px.png" />
     <None Include="Resources\settings_80px.png" />
     <None Include="Resources\stop_96px.png" />
@@ -3418,6 +3419,7 @@
     <None Include="Resources\move_down_96px.png" />
     <None Include="Resources\redo_96px.png" />
     <None Include="Resources\Logout Rounded_96px.png" />
+    <None Include="Resources\new_60px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
