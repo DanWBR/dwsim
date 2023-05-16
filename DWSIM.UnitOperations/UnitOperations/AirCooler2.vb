@@ -102,6 +102,11 @@ Namespace UnitOperations
         Public Property LMTD As Double = 0.0
         Public Property LMTD_F As Double = 0.0
 
+        Public Property Area As Double = 0.0
+
+        <Xml.Serialization.XmlIgnore> Property AirIn As MaterialStream
+
+        <Xml.Serialization.XmlIgnore> Public Property AirOut As MaterialStream
 
         Public Overrides Function GetDisplayName() As String
             Return _name
@@ -390,6 +395,9 @@ Namespace UnitOperations
 
             StIn1.PropertyPackage = rpp
             StOut1.PropertyPackage = rpp
+
+            AirIn = StIn1
+            AirOut = StOut1
 
             IObj?.SetCurrent()
             StIn1.Calculate()
@@ -704,6 +712,8 @@ Namespace UnitOperations
                         n = Tube_NumberPerShell
                         nt = n / Tube_PassesPerShell
                         A = n * Math.PI * de * (L - 2 * de)
+
+                        Area = A
 
                         If pitch < de Then Throw New Exception("Invalid input: tube spacing (pitch) is smaller than the tube's external diameter.")
 
