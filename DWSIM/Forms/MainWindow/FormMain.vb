@@ -657,7 +657,7 @@ Public Class FormMain
 
             Dim dinfo As New DirectoryInfo(Utility.GetExtendersRootDirectory())
 
-            Dim files() As FileInfo = dinfo.GetFiles("*.dll")
+            Dim files() As FileInfo = dinfo.GetFiles("*Extenders*.dll")
 
             If Not files Is Nothing Then
                 For Each fi As FileInfo In files
