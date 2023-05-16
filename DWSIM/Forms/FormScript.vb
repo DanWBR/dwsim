@@ -839,7 +839,11 @@ Imports PythonConsoleControl
     End Sub
 
     Private Sub APIHelptsbutton_Click(sender As Object, e As EventArgs) Handles APIHelptsbutton.Click
-        Process.Start("https://dwsim.org/api_help/html/G_DWSIM.htm")
+        If FormMain.IsPro Then
+            fc.DisplayBrowserWindow("https://dwsim.org/api_help/html/G_DWSIM.htm")
+        Else
+            Process.Start("https://dwsim.org/api_help/html/G_DWSIM.htm")
+        End If
     End Sub
 
     Private Sub btnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click

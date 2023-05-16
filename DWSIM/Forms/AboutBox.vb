@@ -160,20 +160,6 @@ Public Class AboutBox
         lvw.Items.Add(lvi)
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Dim p As New Process()
-            With p
-                .StartInfo.FileName = "xdg-open"
-                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt"
-                .StartInfo.UseShellExecute = False
-                .Start()
-            End With
-        Else
-            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt")
-        End If
-    End Sub
-
     Private Sub AboutBox_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
