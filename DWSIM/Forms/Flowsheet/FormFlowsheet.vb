@@ -2895,6 +2895,18 @@ Public Class FormFlowsheet
     Private Event NewMessageSent As NewMessageSentEventHandler
     Public Event StatusChanged()
 
+    Public Sub DisplayBrowserWindow(url As String) Implements IFlowsheet.DisplayBrowserWindow
+        Dim fb As New FormBrowser()
+        fb.Show()
+        fb.DisplayURL(url)
+    End Sub
+
+    Public Sub DisplayDockableBrowserWindow(url As String) Implements IFlowsheet.DisplayDockableBrowserWindow
+        Dim fb As New FormBrowserDockable()
+        fb.Show(dckPanel)
+        fb.DisplayURL(url)
+    End Sub
+
     Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
         Return FormSurface.SplitContainerHorizontal.Panel1.Width
     End Function

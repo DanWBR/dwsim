@@ -364,6 +364,11 @@
 
     Function AddFlowsheetObject(typename As String, objname As String) As ISimulationObject
 
+    Sub DisplayBrowserWindow(url As String)
+
+    Sub DisplayDockableBrowserWindow(url As String)
+
+
 End Interface
 
 ''' <summary>

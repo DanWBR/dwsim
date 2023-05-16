@@ -4238,5 +4238,13 @@ Label_00CC:
 
     End Sub
 
+    Public Sub DisplayBrowserWindow(url As String) Implements IFlowsheet.DisplayBrowserWindow
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub DisplayDockableBrowserWindow(url As String) Implements IFlowsheet.DisplayDockableBrowserWindow
+        Throw New NotImplementedException()
+    End Sub
+
 End Class
 
