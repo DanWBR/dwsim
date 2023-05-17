@@ -714,6 +714,7 @@
     <EmbeddedResource Include="Assets\ChemSepIPD\srk.ipd" />
     <EmbeddedResource Include="Assets\ChemSepIPD\uniquac.ipd" />
     <EmbeddedResource Include="Assets\ChemSepIPD\wilson.ipd" />
+    <EmbeddedResource Include="Assets\henry_constants.csv" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />

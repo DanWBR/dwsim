@@ -46,7 +46,6 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 
 Imports props = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS
-
 Namespace PropertyPackages
 
 #Region "    Global Enumerations"
@@ -5348,6 +5347,9 @@ redirect2:                  IObj?.SetCurrent()
             CAS = Me.CurrentMaterialStream.Phases(0).Compounds(CompName).ConstantProperties.CAS_Number
 
             IObj?.Paragraphs.Add(String.Format("CAS Number: {0}", CAS))
+
+
+
 
             If m_Henry.ContainsKey(CAS) Then
                 KHCP = m_Henry(CAS).KHcp
@@ -11355,19 +11357,26 @@ Final3:
 
             Dim t0 As Type = Type.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage")
 
-            Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry.txt")
+            Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry_constants.csv")
                 Using t As New StreamReader(filestr)
                     HenryLines = t.ReadToEnd().Split(vbLf)
                 End Using
             End Using
 
-            For i = 2 To HenryLines.Length - 1
+            For i = 3 To HenryLines.Length - 2
                 Dim HP As New HenryParam
-                HP.Component = HenryLines(i).Split(";")(1)
-                HP.CAS = HenryLines(i).Split(";")(2)
-                HP.KHcp = HenryLines(i).Split(";")(3).ToDoubleFromInvariant()
-                HP.C = HenryLines(i).Split(";")(4).ToDoubleFromInvariant()
-                If Not m_Henry.ContainsKey(HP.CAS) Then m_Henry.Add(HP.CAS, HP)
+                HP.Component = HenryLines(i).Split(",")(4).Replace(Chr(34), "")
+                HP.CAS = HenryLines(i).Split(",")(10).Replace(Chr(34), "")
+                Dim val1 = HenryLines(i).Split(",")(1).Replace(Chr(34), "")
+                Dim val2 = HenryLines(i).Split(",")(3).Replace(Chr(34), "")
+                Dim val3 = HenryLines(i).Split(",")(2).Replace(Chr(34), "")
+                If val1 <> "" And val3 <> "" And val2.Contains("L") Then
+                    HP.KHcp = val1.ToDoubleFromInvariant()
+                    HP.C = val3.ToDoubleFromInvariant()
+                    If Not m_Henry.ContainsKey(HP.CAS) Then
+                        m_Henry.Add(HP.CAS, HP)
+                    End If
+                End If
             Next
 
             If Settings.CAPEOPENMode And Not Settings.ExcelMode Then
