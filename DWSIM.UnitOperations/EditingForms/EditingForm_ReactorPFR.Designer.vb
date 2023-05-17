@@ -227,7 +227,7 @@ Partial Class EditingForm_ReactorPFR
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -239,9 +239,6 @@ Partial Class EditingForm_ReactorPFR
         'GroupBox3
         '
         resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.btnConfigExtSolver)
-        Me.GroupBox3.Controls.Add(Me.cbExternalSolver)
-        Me.GroupBox3.Controls.Add(Me.LabelExternalSolver)
         Me.GroupBox3.Controls.Add(Me.btnConfigurePP)
         Me.GroupBox3.Controls.Add(Me.cbPropPack)
         Me.GroupBox3.Controls.Add(Me.Label9)
@@ -334,8 +331,11 @@ Partial Class EditingForm_ReactorPFR
         'TabPage5
         '
         resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Controls.Add(Me.btnConfigExtSolver)
         Me.TabPage5.Controls.Add(Me.Label4)
+        Me.TabPage5.Controls.Add(Me.cbExternalSolver)
         Me.TabPage5.Controls.Add(Me.cbReacSet)
+        Me.TabPage5.Controls.Add(Me.LabelExternalSolver)
         Me.TabPage5.Controls.Add(Me.Label2)
         Me.TabPage5.Controls.Add(Me.cbCalcMode)
         Me.TabPage5.Controls.Add(Me.cbTemp)
