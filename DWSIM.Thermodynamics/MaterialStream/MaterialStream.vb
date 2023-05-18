@@ -1031,6 +1031,16 @@ Namespace Streams
 
         End Sub
 
+        Public Sub SetOverallMolarComposition(ByVal Vx As Double()) Implements Interfaces.IMaterialStream.SetOverallMolarComposition
+
+            Dim i As Integer = 0
+            For Each c As Compound In Me.Phases(0).Compounds.Values
+                c.MoleFraction = Vx(i)
+                i += 1
+            Next
+
+        End Sub
+
         Public Sub SetOverallMassComposition(ByVal Vx As Double()) Implements Interfaces.IMaterialStream.SetOverallMassComposition
 
             Dim mass_div_mm As Double
@@ -1128,7 +1138,7 @@ Namespace Streams
         ''' <param name="Vx">Molar composition array</param>
         ''' <param name="phase">Phase to set composition of</param>
         ''' <remarks></remarks>
-        Public Sub SetPhaseComposition(ByVal Vx As Array, ByVal phase As PropertyPackages.Phase)
+        Public Sub SetPhaseComposition(ByVal Vx As Double(), ByVal phase As PropertyPackages.Phase)
 
             Dim i As Integer = 0, idx As Integer = 0
             Select Case phase
