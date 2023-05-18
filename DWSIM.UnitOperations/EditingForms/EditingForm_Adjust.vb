@@ -147,9 +147,7 @@ Public Class EditingForm_Adjust
 
     Private Sub cbInlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSourceObj.SelectedIndexChanged
 
-        If Loaded Then
-
-            If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ManipulatedObjectData.ID) Then
+        If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ManipulatedObjectData.ID) Then
                 With SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
                     .IsAdjustAttached = False
                     .AttachedAdjustId = ""
@@ -184,8 +182,6 @@ Public Class EditingForm_Adjust
 
             End If
 
-        End If
-
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
@@ -196,9 +192,7 @@ Public Class EditingForm_Adjust
 
     Private Sub cbTargetObj_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetObj.SelectedIndexChanged
 
-        If Loaded Then
-
-            If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ControlledObjectData.ID) Then
+        If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.ControlledObjectData.ID) Then
                 With SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
                     .IsAdjustAttached = False
                     .AttachedAdjustId = ""
@@ -233,15 +227,11 @@ Public Class EditingForm_Adjust
 
             End If
 
-        End If
-
     End Sub
 
     Private Sub cbSourceProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSourceProp.SelectedIndexChanged
 
-        If Loaded Then
-
-            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
+        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
 
             If Not obj Is Nothing Then
 
@@ -259,15 +249,11 @@ Public Class EditingForm_Adjust
 
             cp.UpdateInfo()
 
-        End If
-
     End Sub
 
     Private Sub cbTargetProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetProp.SelectedIndexChanged
 
-        If Loaded Then
-
-            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
 
             If Not obj Is Nothing Then
 
@@ -285,8 +271,6 @@ Public Class EditingForm_Adjust
             End If
 
             cp.UpdateInfo()
-
-        End If
 
     End Sub
 
