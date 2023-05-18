@@ -696,9 +696,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     reporter?.AppendLine("========================================================")
                     reporter?.AppendLine()
 
-                    reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}{3,26}{4,26}", "Iteration", "Temperature Error", "Composition Error"))
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}", "Iteration", "Temperature Error", "Composition Error"))
                     For i = 0 To t_error_hist.Count - 1
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}{3,26:G6}{4,26:G6}", i + 1, t_error_hist(i), comp_error_hist(i)))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), comp_error_hist(i)))
                     Next
 
                     reporter?.AppendLine("========================================================")
