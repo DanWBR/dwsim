@@ -1264,7 +1264,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                                  K(ipar) = Kant(ipar)
                                                                              End If
                                                                          Catch ex As Exception
-                                                                             Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), ipar, P(ipar), xc.ToArrayString()), ex)
+                                                                             Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), ipar, P(ipar), xc(ipar).ToArrayString()), ex)
                                                                          End Try
                                                                      End Sub)
                                                         End Sub,
@@ -1283,7 +1283,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                     tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
                                 End If
                             Catch ex As Exception
-                                Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), i, P(i), xc.ToArrayString()), ex)
+                                Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), i, P(i), xc(i).ToArrayString()), ex)
                             End Try
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
