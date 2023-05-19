@@ -395,6 +395,18 @@ Imports System.Text.RegularExpressions
 
     End Sub
 
+    Public Sub RequestCalculation2(Wait As Boolean) Implements IFlowsheet.RequestCalculation2
+
+        If Wait Then
+            Task.Factory.StartNew(Sub()
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode)
+                                  End Sub)
+        Else
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode)
+        End If
+
+    End Sub
+
     Public Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
         Get
             Select Case Options.CompoundOrderingMode

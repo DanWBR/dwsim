@@ -1191,6 +1191,12 @@ Public Class FormFlowsheet
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
 
+        RequestFlowsheetCalculation(Nothing, False)
+
+    End Sub
+
+    Private Sub RequestFlowsheetCalculation(obj As ISimulationObject, wait As Boolean)
+
         If Not DynamicMode Then
 
             UIThreadInvoke(Sub()
@@ -1215,7 +1221,10 @@ Public Class FormFlowsheet
                                                          If ExternalFlowsheetSolver IsNot Nothing Then
                                                              Return ExternalFlowsheetSolver.SolveFlowsheet(Me)
                                                          Else
-                                                             Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
+                                                             If obj IsNot Nothing Then
+                                                                 Return FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, obj.Name)
+                                                             Else
+                                                                 Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
                                                                 Sub()
                                                                     If My.Settings.ObjectEditor = 1 Then
                                                                         Me.UIThread(Sub()
@@ -1224,6 +1233,7 @@ Public Class FormFlowsheet
                                                                                     End Sub)
                                                                     End If
                                                                 End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                                             End If
                                                          End If
                                                      End Function)
             t.ContinueWith(Sub(tres)
@@ -1233,9 +1243,11 @@ Public Class FormFlowsheet
                                'Next
                            End Sub)
             t.Start()
+            If wait Then t.Wait()
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)
@@ -3273,33 +3285,13 @@ Public Class FormFlowsheet
 
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
-        UIThreadInvoke(Sub()
-                           Me.FormLog.Grid1.Rows.Clear()
-                       End Sub)
+        RequestFlowsheetCalculation(sender, True)
 
-        If Not DynamicMode Then
-            Dim finishaction = Sub()
-                                   UpdateOpenEditForms()
-                               End Sub
-            If Not sender Is Nothing Then
-                If ExternalFlowsheetSolver IsNot Nothing Then
-                    ExternalFlowsheetSolver.SolveFlowsheet(Me)
-                Else
-                    FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
-                End If
-                UpdateOpenEditForms()
-            Else
-                If ExternalFlowsheetSolver IsNot Nothing Then
-                    ExternalFlowsheetSolver.SolveFlowsheet(Me)
-                Else
-                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
-                                                                                         Nothing, False, False,
-                                                                                         Nothing, Nothing, finishaction)
-                End If
-                UpdateOpenEditForms()
-            End If
-            UpdateInterface()
-        End If
+    End Sub
+
+    Public Sub RequestCalculation2(Wait As Boolean) Implements IFlowsheet.RequestCalculation2
+
+        RequestFlowsheetCalculation(Nothing, Wait)
 
     End Sub
 

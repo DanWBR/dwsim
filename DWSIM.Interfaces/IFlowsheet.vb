@@ -367,8 +367,7 @@
     Sub DisplayBrowserWindow(url As String)
 
     Sub DisplayDockableBrowserWindow(url As String)
-
-
+    Sub RequestCalculation2(Wait As Boolean)
 End Interface
 
 ''' <summary>
