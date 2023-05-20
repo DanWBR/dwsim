@@ -318,6 +318,38 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, int position, Action<DropDown, EventArgs> command, int ddwidth, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            var drop = new DropDown();
+            drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            drop.Width = ddwidth;
+            if (Application.Instance.Platform.IsGtk)
+            {
+                drop.Height = (int)(sf * 28);
+            }
+
+            foreach (var item in options)
+            {
+                drop.Items.Add(new ListItem() { Key = item, Text = item });
+            }
+
+            if (drop.Items.Count > 0) drop.SelectedIndex = position;
+
+            if (command != null) drop.SelectedIndexChanged += (sender, e) => command.Invoke((DropDown)sender, e);
+            if (keypress != null) drop.SelectedIndexChanged += (sender, e) => keypress.Invoke();
+
+            var tr = new TableRow(txt, null, drop);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return drop;
+
+        }
+
         public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, string selecteditem, Action<DropDown, EventArgs> command, Action keypress = null)
         {
 
