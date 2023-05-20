@@ -1448,6 +1448,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                           avgerr *= 100
                                                           avgerr /= rcount
 
+                                                          fgui.ClearLog()
+
                                                           fgui.ShowMessage("Recycle loop #" & (icount + 1) & ", average recycle error: " & Format(avgerr, "N") & "%", IFlowsheet.MessageType.Information)
 
                                                           fgui.UpdateInterface()
