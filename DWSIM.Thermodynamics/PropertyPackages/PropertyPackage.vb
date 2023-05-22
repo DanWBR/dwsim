@@ -1319,19 +1319,19 @@ Namespace PropertyPackages
         Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As Double(), ByVal Vy As Double(), ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
 
             If Vx.HasNaN() Or Vx.HasInf() Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid liquid composition: {0}"), Vx.ToArrayString()))
+                Throw New Exception(String.Format("Tried to calculate K-values with invalid liquid composition: {0}", Vx.ToArrayString()))
             End If
 
             If Vy.HasNaN() Or Vy.HasInf() Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid vapor composition: {0}"), Vy.ToArrayString()))
+                Throw New Exception(String.Format("Tried to calculate K-values with invalid vapor composition: {0}", Vy.ToArrayString()))
             End If
 
             If Double.IsNaN(T) Or Double.IsInfinity(T) Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid temperature: {0} K"), T))
+                Throw New Exception(String.Format("Tried to calculate K-values with invalid temperature: {0} K", T))
             End If
 
             If Double.IsNaN(P) Or Double.IsInfinity(P) Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid pressure: {0} Pa"), P))
+                Throw New Exception(String.Format("Tried to calculate K-values with invalid pressure: {0} Pa", P))
             End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
