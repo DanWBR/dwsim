@@ -759,6 +759,8 @@ Public Class MaterialStreamEditor
             row.Cells(2).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next
 
+        grid.Sort(grid.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged

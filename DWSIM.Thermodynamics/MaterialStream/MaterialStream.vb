@@ -1211,19 +1211,19 @@ Namespace Streams
 
                 If prop.Equals("CO2 Loading") Then
 
-                    Return Phases(1).Properties.CO2loading.GetValueOrDefault()
+                    Return Phases(3).Properties.CO2loading.GetValueOrDefault()
 
                 ElseIf prop.Equals("CO2 Partial Pressure") Then
 
-                    Return Phases(2).Properties.CO2partialpressure.GetValueOrDefault()
+                    Return Phases(2).Properties.CO2partialpressure.GetValueOrDefault().ConvertFromSI(su.pressure)
 
                 ElseIf prop.Equals("H2S Loading") Then
 
-                    Return Phases(1).Properties.H2Sloading.GetValueOrDefault()
+                    Return Phases(3).Properties.H2Sloading.GetValueOrDefault()
 
                 ElseIf prop.Equals("H2S Partial Pressure") Then
 
-                    Return Phases(2).Properties.H2Spartialpressure.GetValueOrDefault()
+                    Return Phases(2).Properties.H2Spartialpressure.GetValueOrDefault().ConvertFromSI(su.pressure)
 
                 ElseIf prop.StartsWith("Activity Coefficient") Then
 
