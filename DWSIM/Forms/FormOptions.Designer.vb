@@ -42,8 +42,6 @@ Partial Class FormOptions
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.chkAA = New System.Windows.Forms.CheckBox()
-        Me.cbRenderer = New System.Windows.Forms.ComboBox()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ComboBoxPropPackCopyMode = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -224,8 +222,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.GroupBox13, "GroupBox13")
         Me.GroupBox13.Controls.Add(Me.chkAA)
-        Me.GroupBox13.Controls.Add(Me.cbRenderer)
-        Me.GroupBox13.Controls.Add(Me.Label23)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.TabStop = False
         '
@@ -233,19 +229,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkAA, "chkAA")
         Me.chkAA.Name = "chkAA"
-        '
-        'cbRenderer
-        '
-        resources.ApplyResources(Me.cbRenderer, "cbRenderer")
-        Me.cbRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbRenderer.FormattingEnabled = True
-        Me.cbRenderer.Items.AddRange(New Object() {resources.GetString("cbRenderer.Items"), resources.GetString("cbRenderer.Items1")})
-        Me.cbRenderer.Name = "cbRenderer"
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
         '
         'GroupBox5
         '
@@ -842,8 +825,6 @@ Partial Class FormOptions
     Friend WithEvents Label21 As Label
     Public WithEvents GroupBox13 As GroupBox
     Public WithEvents chkAA As CheckBox
-    Friend WithEvents cbRenderer As ComboBox
-    Public WithEvents Label23 As Label
     Public WithEvents chkEditorDoubleClick As CheckBox
     Friend WithEvents GroupBox1 As GroupBox
     Public WithEvents btnClearDir As Button

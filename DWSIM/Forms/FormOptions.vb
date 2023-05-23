@@ -67,7 +67,6 @@ Public Class FormOptions
 
         chkHideSolidPhaseCO.Checked = My.Settings.HideSolidPhase_CO
 
-        cbRenderer.SelectedIndex = My.Settings.FlowsheetRenderer
         chkAA.Checked = My.Settings.FlowsheetAntiAliasing
 
         'solver
@@ -449,11 +448,6 @@ Public Class FormOptions
         My.Settings.InspectorEnabled = chkEnableInspector.Checked
         Settings.InspectorEnabled = My.Settings.InspectorEnabled
         My.Application.MainWindowForm.tsbInspector.Checked = chkEnableInspector.Checked
-    End Sub
-
-    Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged
-        My.Settings.FlowsheetRenderer = cbRenderer.SelectedIndex
-        GlobalSettings.Settings.FlowsheetRenderer = Settings.SkiaCanvasRenderer.CPU
     End Sub
 
     Private Sub chkAA_CheckedChanged(sender As Object, e As EventArgs) Handles chkAA.CheckedChanged

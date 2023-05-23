@@ -29,7 +29,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public FlowsheetSurface As Drawing.SkiaSharp.GraphicsSurface
 
-    Public FControl As Control
+    Public FControl As FlowsheetSurfaceControl
 
     Public Loaded As Boolean = False
 
@@ -47,33 +47,20 @@ Public Class FlowsheetSurface_SkiaSharp
         ToolStrip1.Location = New Point(0, ToolStrip1.Height)
         ToolStripContainer1.TopToolStripPanel.ResumeLayout()
 
-        If My.Settings.FlowsheetRenderer = 0 Then
-            Dim fscontrol As New FlowsheetSurfaceControl
+        Dim fscontrol As New FlowsheetSurfaceControl
             fscontrol.Dock = DockStyle.Fill
             fscontrol.FlowsheetObject = Flowsheet
             FlowsheetSurface = fscontrol.FlowsheetSurface
             FControl = fscontrol
             FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "Software", Nothing)
-        Else
-            Dim fscontrol As New FlowsheetSurfaceGLControl
-            fscontrol.Dock = DockStyle.Fill
-            fscontrol.FlowsheetObject = Flowsheet
-            FlowsheetSurface = fscontrol.FlowsheetSurface
-            FControl = fscontrol
-            FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "OpenGL", Nothing)
-        End If
 
-        FlowsheetSurface.Zoom = Settings.DpiScale
+            FlowsheetSurface.Zoom = Settings.DpiScale
 
     End Sub
 
     Public Sub HandleKeyDown(e As KeyEventArgs)
 
-        If My.Settings.FlowsheetRenderer = 0 Then
-            DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetDesignSurface_KeyDown(Me, e)
-        Else
-            DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetDesignSurface_KeyDown(Me, e)
-        End If
+        FControl.FlowsheetDesignSurface_KeyDown(Me, e)
 
     End Sub
 
@@ -125,11 +112,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         FlowsheetSurface.Flowsheet = Flowsheet
 
-        If My.Settings.FlowsheetRenderer = 0 Then
-            DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
-        Else
-            DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetObject = Flowsheet
-        End If
+        DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
 
         PanelFlowsheetControl.Controls.Add(FControl)
 
