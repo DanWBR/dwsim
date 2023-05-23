@@ -250,6 +250,8 @@ Namespace PropertyPackages
 
         Public Property UseHenryConstants As Boolean = True
 
+        Public Overridable ReadOnly Property IsAmineModel As Boolean = False
+
         Public Property AutoEstimateMissingNRTLUNIQUACParameters As Boolean = True
 
         ''' <summary>
@@ -5117,6 +5119,8 @@ redirect2:                  IObj?.SetCurrent()
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molarfraction = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.bulk_modulus = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2loading = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2partialpressure = Nothing
 
                 Else
 
@@ -5148,6 +5152,8 @@ redirect2:                  IObj?.SetCurrent()
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.bulk_modulus = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2loading = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2partialpressure = Nothing
 
                     If Not CalculatedOnly Then
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = Nothing

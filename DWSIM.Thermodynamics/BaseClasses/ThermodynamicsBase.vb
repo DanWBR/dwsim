@@ -1374,6 +1374,14 @@ Namespace BaseClasses
 
         Public Property idealGasHeatCapacityRatio As Double? Implements IPhaseProperties.idealGasHeatCapacityRatio
 
+        Public Property CO2loading As Double? Implements IPhaseProperties.CO2loading
+
+        Public Property CO2partialpressure As Double? Implements IPhaseProperties.CO2partialpressure
+
+        Public Property H2Sloading As Double? Implements IPhaseProperties.H2Sloading
+
+        Public Property H2Spartialpressure As Double? Implements IPhaseProperties.H2Spartialpressure
+
     End Class
 
     <System.Serializable()> Public Class InteractionParameter
