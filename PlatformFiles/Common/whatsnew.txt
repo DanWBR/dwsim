@@ -1,16 +1,10 @@
-Version 8.4.4
+Version 8.4.5
 
-- Implemented Natural Layout feature for PFD
-- Display phase total amount in Material Stream editor (Classic UI)
-- Implemented #461: warning messages when detecting unexpected phases for Pump, Compressor and Expander
-- Fixed and updated Excel Add-In sample
-- Fixed issue with macOS/Linux freezing when estimating missing NRTL/UNIQUAC parameters
-- Fixed SVLLE flash algorithm error with forced solids
-- Fixed #457: SetOverallMassComposition not working
-- Fixed SetPropertyVal for Cape-Open UO
-- Fixed deadlock on UIThread
-- Fixed PFR pressure drop calculation
-- Fixed issue with Liquid-Liquid Extraction column
-- Fixed missing BIP message for UNIFAC models
-- Fixed some property display units for heat exchanger
-- Other minor bug fixes and UI adjustments
+- New Henry's Constants database from https://henrys-law.org/
+- Added MaterialStream.SetOverallMolarComposition() function
+- Clear log when converging recycles (Classic UI)
+- Fixed issue with kinetic and hetcat reaction editors (Classic UI)
+- Removed OpenGL renderer (Classic UI)
+- Fixed Classic UI freezing during calculations
+- Fixed Compressor/Expander curve extrapolation
+- Other minor fixes and enhancements

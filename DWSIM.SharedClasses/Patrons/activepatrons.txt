@@ -1,39 +1,39 @@
 ﻿🥇 Lauterbach Verfahrenstechnik GmbH
 🥈 Sukin Oh
 🥈 Jane Ferris
-⭐ Adam Kovalovszki
-⭐ Alfred Gongaware
-⭐ Alberto Baumeister
-⭐ Bryan Evans
-⭐ Cameron Paul Ward
-⭐ Carlos Reetz
-⭐ Casey Houston
-⭐ Christian Hornhofer
-⭐ Dave Carpency
-⭐ Domenico Marchese
-⭐ George Brindle
-⭐ Gerry Agnew
-⭐ Henk Fikkert
-⭐ H-Tec Systems GmbH
-⭐ Javier Fontalvo
-⭐ Jens Greimeier
-⭐ Jonathan
-⭐ Leonard Seed
-⭐ Lorenzo Giuseppe Montani
-⭐ Martin Heiser
-⭐ Michael Papantoniou
-⭐ Michael Saucier
-⭐ MYSim Corp.
-⭐ Rafael Melo-González
-⭐ Renato Corrêa Arrieche
-⭐ Richard Huntington
-⭐ Rida Bin Hashim
-⭐ Roland Berger
-⭐ Ronald J. Dunbar
-⭐ Ronald Visness
-⭐ Steven Sandoval
-⭐ Tino Josef Ritter
-⭐ Yoshihide Watabe
+🌟 Adam Kovalovszki
+🌟 Alfred Gongaware
+🌟 Alberto Baumeister
+🌟 Bryan Evans
+🌟 Cameron Paul Ward
+🌟 Carlos Reetz
+🌟 Casey Houston
+🌟 Christian Hornhofer
+🌟 Dave Carpency
+🌟 Domenico Marchese
+🌟 George Brindle
+🌟 Gerry Agnew
+🌟 Henk Fikkert
+🌟 H-Tec Systems GmbH
+🌟 Javier Fontalvo
+🌟 Jens Greimeier
+🌟 Jonathan
+🌟 Leonard Seed
+🌟 Lorenzo Giuseppe Montani
+🌟 Martin Heiser
+🌟 Michael Papantoniou
+🌟 Michael Saucier
+🌟 MYSim Corp.
+🌟 Rafael Melo-González
+🌟 Renato Corrêa Arrieche
+🌟 Richard Huntington
+🌟 Rida Bin Hashim
+🌟 Roland Berger
+🌟 Ronald J. Dunbar
+🌟 Ronald Visness
+🌟 Steven Sandoval
+🌟 Tino Josef Ritter
+🌟 Yoshihide Watabe
 Alberto Baumeister
 Alex Platon
 Alexander Semenyak
