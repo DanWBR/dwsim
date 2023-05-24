@@ -22,6 +22,8 @@ Public Class AboutBox
         TextBox1.Font = New Font("Consolas", 9, GraphicsUnit.Point)
         TextBox2.Font = New Font("Consolas", 9, GraphicsUnit.Point)
 
+        TextBox2.Text = "Special Thanks to the following Patrons: " + Patrons.GetList() + vbCrLf + vbCrLf + TextBox2.Text
+
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
 
         Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
