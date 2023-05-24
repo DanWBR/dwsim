@@ -1,8 +1,9 @@
-﻿Adam Kovalovszki
+﻿⭐ Adam Kovalovszki
 Alberto Baumeister
 Alex Platon
 Alexander Semenyak
-Alfred Gongaware
+⭐ Alfred Gongaware
+⭐ Alberto Baumeister
 Andras Nady
 Anders Andreasen
 Andrew Dickson
@@ -10,53 +11,54 @@ Bednarz Marc
 Bernhard Seyfang
 Bruce Bishkin
 Bruce Rising
-Bryan Evans
-Cameron Paul Ward
+⭐ Bryan Evans
+⭐ Cameron Paul Ward
 Camilo Gantiva
-Carlos G. C. Reetz
-Casey Houston
-Christian Hornhofer
+⭐ Carlos Reetz
+⭐ Casey Houston
+⭐ Christian Hornhofer
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
 Daniel Bajolet
 Daniel Dornellas Athayde
-Dave Carpency
+⭐ Dave Carpency
 David Miller
 David Whitlock
-Domenico Marchese
+⭐ Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
 Gokhan Candan 
-George Brindle
-Gerry Agnew
+⭐ George Brindle
+⭐ Gerry Agnew
 Guenther Holzer
 Henar Portero
-Henk Fikkert
+⭐ Henk Fikkert
 Hep Ingham
-H-Tec Systems GmbH
+⭐ H-Tec Systems GmbH
 Hurudza
-Jane Ferris
-Javier Fontalvo
-Jens Greimeier
+🥈 Jane Ferris
+⭐ Javier Fontalvo
+⭐ Jens Greimeier
 John Kossik
-Jonathan
+⭐ Jonathan
 Joseph Attia
 Kenneth Troldal
 Kiran Pashikanti
-Lauterbach Verfahrenstechnik GmbH
-Leonard Seed
+🥇 Lauterbach Verfahrenstechnik GmbH
+⭐ Leonard Seed
 Les Waymont
 Lewis Estall
-Lorenzo Giuseppe Montani
+⭐ Lorenzo Giuseppe Montani
 Luca Finardi
 Marcos Silva
-Martin Heiser
+⭐ Martin Heiser
 Masahiro Sakai
-Michael Papantoniou
+⭐ Michael Papantoniou
+⭐ Michael Saucier
 Mohan Vaze
-MYSim Corp.
+⭐ MYSim Corp.
 Nicolas Spogis
 Okechukwu Nwadigo
 Pablo Jimenez
@@ -64,22 +66,23 @@ Paulo Bernardo
 Pedro Sabóia
 Petroconsulting LLC
 Protherm Systems
-Rafael Melo-González
+⭐ Rafael Melo-González
 Rainer Scheuring
-Renato Corrêa Arrieche
-Richard Huntington
+⭐ Renato Corrêa Arrieche
+⭐ Richard Huntington
 Rick Kempf
-Rida Bin Hashim
-Roland Berger
-Ronald J. Dunbar
-Ronald Visness
+⭐ Rida Bin Hashim
+⭐ Roland Berger
+⭐ Ronald J. Dunbar
+⭐ Ronald Visness
 Rupert Easter
 Ryszard Sadowski
 Shailesh Paranjpe
 Shankar Ananth
-Steven Sandoval
+⭐ Steven Sandoval
+🥈 Sukin Oh
 Tetsuo Fuchino
 Tibor Lányi
-Tino Josef Ritter
+⭐ Tino Josef Ritter
 Will Flores
-Yoshihide Watabe
+⭐ Yoshihide Watabe
