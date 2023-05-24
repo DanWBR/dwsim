@@ -122,7 +122,7 @@ Public Class FormReacKinetic
                 Me.cbBase.SelectedIndex = 3
             Case ReactionBasis.MolarFrac
                 Me.cbBase.SelectedIndex = 4
-            Case ReactionBasis.MolarConc
+            Case ReactionBasis.MassFrac
                 Me.cbBase.SelectedIndex = 5
             Case ReactionBasis.PartialPress
                 Me.cbBase.SelectedIndex = 6
@@ -314,7 +314,7 @@ Public Class FormReacKinetic
                 Case 4
                     rc.ReactionBasis = ReactionBasis.MolarFrac
                 Case 5
-                    rc.ReactionBasis = ReactionBasis.MolarConc
+                    rc.ReactionBasis = ReactionBasis.MassFrac
                 Case 6
                     rc.ReactionBasis = ReactionBasis.PartialPress
             End Select
