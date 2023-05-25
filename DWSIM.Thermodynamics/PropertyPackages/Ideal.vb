@@ -773,9 +773,6 @@ Namespace PropertyPackages
                 For i = 0 To n
                     If T / Tc(i) >= 1.0 Then
                         IObj?.SetCurrent()
-                        fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
-                    Else
-                        IObj?.SetCurrent()
                         If UseHenryConstants And HasHenryConstants(RET_VNAMES(i)) Then
                             Dim hc = AUX_KHenry(RET_VNAMES(i), T)
                             IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
@@ -783,6 +780,9 @@ Namespace PropertyPackages
                         Else
                             fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                         End If
+                    Else
+                        IObj?.SetCurrent()
+                        fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                     End If
                 Next
             Else

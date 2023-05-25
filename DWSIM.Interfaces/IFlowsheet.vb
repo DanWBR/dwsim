@@ -367,7 +367,11 @@
     Sub DisplayBrowserWindow(url As String)
 
     Sub DisplayDockableBrowserWindow(url As String)
+
     Sub RequestCalculation2(Wait As Boolean)
+
+    Sub RequestCalculation3(obj As ISimulationObject, Wait As Boolean)
+
 End Interface
 
 ''' <summary>

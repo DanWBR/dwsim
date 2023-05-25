@@ -1370,7 +1370,7 @@ Public Class MaterialStreamEditor
         SaveViewState()
 
         If Not IsAccumulationStream Then
-            MatStream.FlowSheet.RequestCalculation2(False)
+            MatStream.FlowSheet.RequestCalculation3(MatStream, False)
         End If
 
     End Sub

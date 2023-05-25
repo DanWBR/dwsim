@@ -3295,6 +3295,12 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Sub RequestCalculation3(obj As ISimulationObject, Wait As Boolean) Implements IFlowsheet.RequestCalculation3
+
+        RequestFlowsheetCalculation(obj, Wait)
+
+    End Sub
+
     Public Function GetUtility(uttype As Enums.FlowsheetUtility) As IAttachedUtility Implements IFlowsheet.GetUtility
         Select Case uttype
             Case FlowsheetUtility.NaturalGasHydrates

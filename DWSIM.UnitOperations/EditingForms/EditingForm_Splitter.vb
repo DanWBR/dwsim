@@ -335,7 +335,7 @@ Public Class EditingForm_Splitter
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation2(False)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 

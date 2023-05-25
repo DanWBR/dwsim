@@ -127,57 +127,57 @@ Namespace PropertyPackages
 
             For j As Integer = 1 To 7
 
-                    If j <> 2 Then
+                If j <> 2 Then
 
-                        Dim Vx = RET_VMOL(RET_PHASECODE(j))
-                        Dim n As Integer = Vx.Length - 1
+                    Dim Vx = RET_VMOL(RET_PHASECODE(j))
+                    Dim n As Integer = Vx.Length - 1
 
-                        Dim constprop = DW_GetConstantProperties()
+                    Dim constprop = DW_GetConstantProperties()
 
-                        Dim ativ(n), poy1(n), poy2(n), vex(n) As Double
+                    Dim ativ(n), poy1(n), poy2(n), vex(n) As Double
 
-                        ativ = m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
+                    ativ = m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
 
-                        Dim P2 As Double = P + 1
+                    Dim P2 As Double = P + 1
 
-                        Dim Psati, vli As Double
-                        For i = 0 To n
-                            vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
-                            If Double.IsNaN(vli) Then
-                                vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
-                            End If
-                            Psati = AUX_PVAPi(i, T)
-                            poy1(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
-                            poy2(i) = Math.Exp(vli * Abs(P2 - Psati) / (8314.47 * T))
-                            vex(i) = (Log(poy2(i)) - Log(poy1(i))) * 8.314 * T * 1000 'm3/kmol
+                    Dim Psati, vli As Double
+                    For i = 0 To n
+                        vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
+                        If Double.IsNaN(vli) Then
+                            vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
+                        End If
+                        Psati = AUX_PVAPi(i, T)
+                        poy1(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
+                        poy2(i) = Math.Exp(vli * Abs(P2 - Psati) / (8314.47 * T))
+                        vex(i) = (Log(poy2(i)) - Log(poy1(i))) * 8.314 * T * 1000 'm3/kmol
+                    Next
+
+                    i = 0
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(j).Compounds.Values
+                        subst.PartialVolume = vex(i)
+                        i += 1
+                    Next
+
+                Else
+
+                    If VaporPhaseFugacityCalculationMode = VaporPhaseFugacityCalcMode.Ideal Then
+                        Dim vapdens = AUX_VAPDENS(T, P)
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                            subst.PartialVolume = subst.ConstantProperties.Molar_Weight / vapdens
                         Next
-
+                    Else
+                        Dim partvol As New Object
+                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(2), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
                         i = 0
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(j).Compounds.Values
-                            subst.PartialVolume = vex(i)
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                            subst.PartialVolume = partvol(i)
                             i += 1
                         Next
-
-                    Else
-
-                        If VaporPhaseFugacityCalculationMode = VaporPhaseFugacityCalcMode.Ideal Then
-                            Dim vapdens = AUX_VAPDENS(T, P)
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.PartialVolume = subst.ConstantProperties.Molar_Weight / vapdens
-                            Next
-                        Else
-                            Dim partvol As New Object
-                            partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(2), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.PartialVolume = partvol(i)
-                                i += 1
-                            Next
-                        End If
-
                     End If
 
-                Next
+                End If
+
+            Next
 
         End Sub
 
@@ -621,20 +621,19 @@ Namespace PropertyPackages
                     If Tr >= 1.02 Then
                         IObj?.SetCurrent()
                         IObj?.Paragraphs.Add("<m>f_i = H_i/P</m>")
-                        lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P)
-                        IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, Exp(lnfug(i)) * P))
+                        If UseHenryConstants And HasHenryConstants(constprop(i).Name) Then
+                            Dim hc = AUX_KHenry(constprop(i).Name, T)
+                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
+                            lnfug(i) = Log(hc / P)
+                        Else
+                            lnfug(i) = Log(AUX_PVAPi(i, T) / (P))
+                        End If
                     ElseIf Tr < 0.98 Then
                         IObj?.Paragraphs.Add("<m>f_i = \gamma_i Poy_i P_{sat_i}/P</m>")
                         IObj?.Paragraphs.Add(String.Format("Activity Coefficient: {0}", ativ(i)))
                         IObj?.Paragraphs.Add(String.Format("Vapor Pressure (Psat) @ {0} K: {1} Pa", T, Me.AUX_PVAPi(i, T)))
                         IObj?.Paragraphs.Add(String.Format("Poynting Correction Factor: {0}", poy(i)))
-                        If UseHenryConstants And HasHenryConstants(constprop(i).Name) Then
-                            Dim hc = AUX_KHenry(constprop(i).Name, T)
-                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
-                            lnfug(i) = Log(ativ(i) * hc / P) + Log(poy(i))
-                        Else
-                            lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
-                        End If
+                        lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
                         IObj?.Paragraphs.Add(String.Format("Fugacity Coefficient: {0}", Exp(lnfug(i))))
                     Else 'do interpolation at proximity of critical point
                         IObj?.SetCurrent()

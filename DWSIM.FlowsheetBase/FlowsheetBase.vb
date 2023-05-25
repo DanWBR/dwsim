@@ -407,6 +407,18 @@ Imports System.Text.RegularExpressions
 
     End Sub
 
+
+    Public Sub RequestCalculation3(Obj As ISimulationObject, Wait As Boolean) Implements IFlowsheet.RequestCalculation3
+
+        If Obj Is Nothing Then
+            RequestCalculation2(Wait)
+        Else
+            RequestCalculation(Obj)
+        End If
+
+    End Sub
+
+
     Public Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
         Get
             Select Case Options.CompoundOrderingMode

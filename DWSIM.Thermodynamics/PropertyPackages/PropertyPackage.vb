@@ -5327,8 +5327,11 @@ redirect2:                  IObj?.SetCurrent()
         Public Function HasHenryConstants(compname As String) As Boolean
 
             Dim CAS = Me.CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number
-
-            Return m_Henry.ContainsKey(CAS)
+            If CAS <> "" Then
+                Return m_Henry.ContainsKey(CAS)
+            Else
+                Return False
+            End If
 
         End Function
 

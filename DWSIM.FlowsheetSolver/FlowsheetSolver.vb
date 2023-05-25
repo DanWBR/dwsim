@@ -1746,8 +1746,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             fqueue.CalculationQueue.Enqueue(objargs)
 
-            Return SolveFlowsheet(fobj, Settings.SolverMode, Nothing, False, False, Nothing, Nothing, Nothing)
-            'Return SolveFlowsheet(fobj, Settings.SolverMode, Nothing, True)
+            'Return SolveFlowsheet(fobj, Settings.SolverMode, Nothing, False, False, Nothing, Nothing, Nothing)
+            Return SolveFlowsheet(fobj, Settings.SolverMode, Nothing, True)
 
         Else
 
