@@ -82,6 +82,7 @@ Public Class SimulationObjectsPanel
                 li.ObjectTypeInfo = obj.GetType
                 li.Tag = obj.ObjectClass
                 litems.Add(li)
+                obj.SetFlowsheet(Nothing)
                 obj = Nothing
             End If
         Next

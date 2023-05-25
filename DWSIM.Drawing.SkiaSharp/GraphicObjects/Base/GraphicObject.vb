@@ -571,6 +571,12 @@ Namespace GraphicObjects
 
         End Function
 
+        Public Sub ReleaseReferences() Implements IGraphicObject.ReleaseReferences
+
+            Owner = Nothing
+
+        End Sub
+
     End Class
 
 End Namespace

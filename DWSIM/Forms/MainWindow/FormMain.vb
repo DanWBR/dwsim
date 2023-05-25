@@ -59,7 +59,6 @@ Public Class FormMain
 
     Public CancelClosing As Boolean = False
 
-    Private tmpform2 As FormFlowsheet
     Public WithEvents timer1 As New Timer
 
     Public calculatorassembly, unitopassembly As Assembly
@@ -94,7 +93,7 @@ Public Class FormMain
 
     Public Property MostRecentFiles As Specialized.StringCollection
 
-    Public Shared AnalyticsProvider As IAnalyticsProvider
+    Public Property AnalyticsProvider As IAnalyticsProvider
 
     Public Shared ExternalSolvers As New Dictionary(Of String, Interfaces.IExternalSolverIdentification)
 
@@ -1422,24 +1421,6 @@ Public Class FormMain
 
 #Region "    Open/Save Files"
 
-    Function ReturnForm(ByVal str As String) As IDockContent
-        Select Case str
-            Case "DWSIM.LogPanel", "DWSIM.frmLog"
-                Return Me.tmpform2.FormLog
-            Case "DWSIM.MaterialStreamPanel", "DWSIM.frmMatList"
-                Return Me.tmpform2.FormMatList
-            Case "DWSIM.FlowsheetSurface", "DWSIM.frmSurface"
-                Return Me.tmpform2.FormSurface
-            Case "DWSIM.SpreadsheetForm"
-                Return Me.tmpform2.FormSpreadsheet
-            Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
-                Return Me.tmpform2.FormWatch
-            Case "DWSIM.frmProps"
-                Return Me.tmpform2.FormProps
-        End Select
-        Return Nothing
-    End Function
-
     Private Function RandomString(ByVal size As Integer, ByVal lowerCase As Boolean) As String
 
         Dim builder As New StringBuilder()
@@ -1855,7 +1836,6 @@ Public Class FormMain
         form.dckPanel.ActiveAutoHideContent = Nothing
         form.dckPanel.Parent = form
 
-        Me.tmpform2 = form
         form.FormLog.DockPanel = Nothing
         form.FormMatList.DockPanel = Nothing
         form.FormSpreadsheet.DockPanel = Nothing
@@ -2200,7 +2180,6 @@ Public Class FormMain
         form.dckPanel.ActiveAutoHideContent = Nothing
         form.dckPanel.Parent = form
 
-        Me.tmpform2 = form
         'form.dckPanel.SuspendLayout(True)
         form.FormLog.DockPanel = Nothing
         form.FormMatList.DockPanel = Nothing
@@ -2209,7 +2188,6 @@ Public Class FormMain
         form.FormWatch.DockPanel = Nothing
         form.FormSurface.DockPanel = Nothing
         form.FormDynamics.DockPanel = Nothing
-        form.FormProps.DockPanel = Nothing
         form.FormCharts.DockPanel = Nothing
         form.FormFilesExplorer.DockPanel = Nothing
 #If LINUX = False Then
@@ -2224,7 +2202,6 @@ Public Class FormMain
             form.FormSurface?.Show(form.dckPanel)
             form.FormDynamics?.Show(form.dckPanel)
             form.FormFilesExplorer?.Show(form.dckPanel)
-            form.FormProps?.Show(form.dckPanel)
 #If LINUX = False Then
             'form.FormIPyConsole?.Show(form.dckPanel)
 #End If
@@ -2233,10 +2210,6 @@ Public Class FormMain
         Catch ex As Exception
             'excs.Add(New Exception("Error Restoring Window Layout", ex))
         End Try
-
-        If form.FormProps.Width > form.Width / 3 Then
-            form.dckPanel.DockLeftPortion = form.Width / 3
-        End If
 
         Me.Invalidate()
         Application.DoEvents()
@@ -2771,6 +2744,8 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormScript1.fc = form
+
             form.FormCharts.Flowsheet = form
 
             form.FormDynamics.Flowsheet = form
@@ -2785,7 +2760,6 @@ Public Class FormMain
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
 
-            Me.tmpform2 = form
             'form.dckPanel.SuspendLayout(True)
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
@@ -2794,9 +2768,9 @@ Public Class FormMain
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormDynamics.DockPanel = Nothing
-            form.FormProps.DockPanel = Nothing
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
+            form.FormScript1.DockPanel = Nothing
 #If LINUX = False Then
             form.FormIPyConsole.DockPanel = Nothing
 #End If
@@ -2808,14 +2782,14 @@ Public Class FormMain
                         Try
                             Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                             File.WriteAllText(myfile, pnl)
-                            form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
+                            form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf form.ReturnForm))
                         Catch ex As Exception
                         Finally
                             File.Delete(myfile)
                         End Try
                     Else
                         Dim myfile As String = IO.Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
-                        form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
+                        form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf form.ReturnForm))
                     End If
                 End If
             End If
@@ -2830,7 +2804,7 @@ Public Class FormMain
                 form.FormSurface?.Show(form.dckPanel)
                 form.FormDynamics?.Show(form.dckPanel)
                 form.FormFilesExplorer?.Show(form.dckPanel)
-                form.FormProps?.Show(form.dckPanel)
+                form.FormScript1?.Show(form.dckPanel)
 #If LINUX = False Then
                 'form.FormIPyConsole?.Show(form.dckPanel)
 #End If
@@ -2839,10 +2813,6 @@ Public Class FormMain
             Catch ex As Exception
                 'excs.Add(New Exception("Error Restoring Window Layout", ex))
             End Try
-
-            If form.FormProps.Width > form.Width / 3 Then
-                form.dckPanel.DockLeftPortion = form.Width / 3
-            End If
 
             Me.Invalidate()
             Application.DoEvents()
@@ -3339,6 +3309,8 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormScript1.fc = form
+
             form.FormCharts.Flowsheet = form
 
             form.FormDynamics.Flowsheet = form
@@ -3351,7 +3323,6 @@ Public Class FormMain
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
 
-            Me.tmpform2 = form
             'form.dckPanel.SuspendLayout(True)
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
@@ -3363,13 +3334,14 @@ Public Class FormMain
             form.FormDynamics.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
             form.FormIPyConsole.DockPanel = Nothing
+            form.FormScript1.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = SharedClasses.Utility.GetTempFileName()
                 Try
                     Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                     File.WriteAllText(myfile, pnl)
-                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
+                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf form.ReturnForm))
                 Catch ex As Exception
                     'excs.Add(New Exception("Error Restoring Window Layout", ex))
                 Finally
@@ -3388,6 +3360,7 @@ Public Class FormMain
                 form.FormDynamics.Show(form.dckPanel)
                 form.FormFilesExplorer.Show(form.dckPanel)
                 'form.FormIPyConsole.Show(form.dckPanel)
+                form.FormScript1.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
