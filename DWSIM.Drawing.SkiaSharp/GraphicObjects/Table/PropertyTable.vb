@@ -311,6 +311,14 @@ Namespace GraphicObjects.Tables
 
             End If
 
+            tpaint.Dispose()
+            tpaint2.Dispose()
+            bpaint.Dispose()
+
+            tpaint = Nothing
+            tpaint2 = Nothing
+            bpaint = Nothing
+
         End Sub
 
     End Class

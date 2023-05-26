@@ -675,8 +675,6 @@ Public Class FormFlowsheet
 
         ToolStripManager.RevertMerge(ToolStrip1)
 
-        Me.MdiParent = Nothing
-
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
         If My.Application.ActiveSimulation Is Me Then
@@ -829,6 +827,8 @@ Public Class FormFlowsheet
         End If
 
         ClearVariables()
+
+        'Me.MdiParent = Nothing
 
         'garbage collection (frees unused memory)
         System.GC.Collect()
