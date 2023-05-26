@@ -973,15 +973,19 @@ Public Class FormMain
 
         PropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
 
-        Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+        If My.Settings.LoadExtensionsAndPlugins Or FormMain.IsPro Then
 
-        For Each pp In otherpps
-            If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
-                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
-            Else
-                Console.WriteLine(String.Format("Error adding External Property Package '{0}'. Check the 'ppacks' and 'extenders' folders for duplicate items.", pp.ComponentName))
-            End If
-        Next
+            Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+
+            For Each pp In otherpps
+                If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
+                    PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+                Else
+                    Console.WriteLine(String.Format("Error adding External Property Package '{0}'. Check the 'ppacks' and 'extenders' folders for duplicate items.", pp.ComponentName))
+                End If
+            Next
+
+        End If
 
         'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.
         If Not DWSIM.App.IsRunningOnMono Then

@@ -855,7 +855,9 @@ Partial Class FormMain
 
         If Not Settings.CAPEOPENMode Then
             AddPropPacks()
-            AddExternalUOs()
+            If My.Settings.LoadExtensionsAndPlugins Or FormMain.IsPro Then
+                AddExternalUOs()
+            End If
             GetComponents()
         End If
 
@@ -882,7 +884,9 @@ Partial Class FormMain
 
         End With
 
-        LoadExtenders()
+        If My.Settings.LoadExtensionsAndPlugins Or FormMain.IsPro Then
+            LoadExtenders()
+        End If
 
         UpdateIcon()
 

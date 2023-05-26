@@ -102,6 +102,13 @@ Public Class FormOptions
 
         chkUpdates.Checked = Settings.CheckForUpdates
 
+        If Not FormMain.IsPro Then
+            gbLoadExtensions.Visible = True
+            chkLoadExtensions.Checked = My.Settings.LoadExtensionsAndPlugins
+        Else
+            gbLoadExtensions.Visible = False
+        End If
+
         loaded = True
 
         AddMoreTabs?.Invoke(FaTabStrip1)
@@ -484,4 +491,7 @@ Public Class FormOptions
         Settings.CheckForUpdates = chkUpdates.Checked
     End Sub
 
+    Private Sub chkLoadExtensions_CheckedChanged(sender As Object, e As EventArgs) Handles chkLoadExtensions.CheckedChanged
+        My.Settings.LoadExtensionsAndPlugins = chkLoadExtensions.Checked
+    End Sub
 End Class

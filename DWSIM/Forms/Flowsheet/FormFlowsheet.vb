@@ -3568,7 +3568,7 @@ Public Class FormFlowsheet
         If Not Invalidating Then
             Me.UIThreadInvoke(Sub()
                                   Invalidating = True
-                                  Me.Invalidate()
+                                  FormSurface.Invalidate()
                                   Invalidating = False
                               End Sub)
         End If
