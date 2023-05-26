@@ -35,7 +35,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public AnimationTimer As New System.Timers.Timer(42) '24 fps
 
-    Private Handlers As New List(Of Object)
+    Private Handlers As New List(Of EventHandler)
     Private TSMenuItems As New List(Of ToolStripMenuItem)
 
     Public Sub New()
@@ -150,31 +150,33 @@ Public Class FlowsheetSurface_SkiaSharp
             Try
                 If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     For Each item In extender.Collection
-                        Dim exttsmi As New ToolStripMenuItem
-                        exttsmi.Text = item.DisplayText
-                        exttsmi.Image = item.DisplayImage
-                        Dim h1 = Sub(s2, e2)
-                                     item.SetMainWindow(My.Application.MainWindowForm)
-                                     item.SetFlowsheet(Flowsheet)
-                                     item.Run()
-                                 End Sub
-                        Handlers.Add(h1)
-                        AddHandler exttsmi.Click, h1
-                        TSMenuItems.Add(exttsmi)
-                        Select Case extender.Category
-                            Case ExtenderCategory.FlowsheetSurfaceNotSelected
-                                If item.InsertAtPosition > 0 Then
-                                    CMS_NoSel.Items.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    CMS_NoSel.Items.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.FlowsheetSurfaceSelected
-                                If item.InsertAtPosition > 0 Then
-                                    CMS_Sel.Items.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    CMS_Sel.Items.Add(exttsmi)
-                                End If
-                        End Select
+                        If extender.Category = ExtenderCategory.FlowsheetSurfaceNotSelected Or extender.Category = ExtenderCategory.FlowsheetSurfaceSelected Then
+                            Dim exttsmi As New ToolStripMenuItem
+                            exttsmi.Text = item.DisplayText
+                            exttsmi.Image = item.DisplayImage
+                            Dim h1 = Sub(s2, e2)
+                                         item.SetMainWindow(My.Application.MainWindowForm)
+                                         item.SetFlowsheet(Flowsheet)
+                                         item.Run()
+                                     End Sub
+                            Handlers.Add(h1)
+                            AddHandler exttsmi.Click, h1
+                            TSMenuItems.Add(exttsmi)
+                            Select Case extender.Category
+                                Case ExtenderCategory.FlowsheetSurfaceNotSelected
+                                    If item.InsertAtPosition > 0 Then
+                                        CMS_NoSel.Items.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        CMS_NoSel.Items.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.FlowsheetSurfaceSelected
+                                    If item.InsertAtPosition > 0 Then
+                                        CMS_Sel.Items.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        CMS_Sel.Items.Add(exttsmi)
+                                    End If
+                            End Select
+                        End If
                     Next
                 End If
             Catch ex As Exception
@@ -4155,8 +4157,11 @@ Public Class FlowsheetSurface_SkiaSharp
             Try
                 If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     For Each item In extender.Collection
-                        item.SetMainWindow(Nothing)
-                        item.SetFlowsheet(Nothing)
+                        If TypeOf item Is IExtender3 Then
+                            DirectCast(item, IExtender3).ReleaseResources()
+                        Else
+                            item.SetFlowsheet(Nothing)
+                        End If
                     Next
                 End If
             Catch ex As Exception

@@ -524,11 +524,15 @@ Public Class FormFlowsheet
             Try
                 If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     For Each item In extender.Collection
-                        item.SetFlowsheet(Nothing)
+                        If TypeOf item Is IExtender3 Then
+                            DirectCast(item, IExtender3).ReleaseResources()
+                        Else
+                            item.SetFlowsheet(Nothing)
+                        End If
                     Next
                 End If
             Catch ex As Exception
-                Logging.Logger.LogError("Extender Loading (Flowsheet)", ex)
+                Logging.Logger.LogError("Extender Unloading (Flowsheet)", ex)
             End Try
         Next
 
@@ -819,6 +823,10 @@ Public Class FormFlowsheet
 
         ToolStrip1.Dispose()
         MenuStrip1.Dispose()
+
+        If BidirectionalSolver IsNot Nothing Then
+            DirectCast(BidirectionalSolver, IExtender3).ReleaseResources()
+        End If
 
         ClearVariables()
 
