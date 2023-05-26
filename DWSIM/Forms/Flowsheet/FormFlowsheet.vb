@@ -3566,11 +3566,16 @@ Public Class FormFlowsheet
     Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface, IFlowsheet.UpdateInterface
 
         If Not Invalidating Then
-            Me.UIThreadInvoke(Sub()
-                                  Invalidating = True
-                                  FormSurface.Invalidate()
-                                  Invalidating = False
-                              End Sub)
+            Invalidating = True
+            If InvokeRequired Then
+                Me.UIThreadInvoke(Sub()
+                                      FormSurface.FControl.Invalidate()
+                                      Invalidating = False
+                                  End Sub)
+            Else
+                FormSurface.FControl.Invalidate()
+                Invalidating = False
+            End If
         End If
 
     End Sub

@@ -1320,21 +1320,21 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As Double(), ByVal Vy As Double(), ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
 
-            If Vx.HasNaN() Or Vx.HasInf() Then
-                Throw New Exception(String.Format("Tried to calculate K-values with invalid liquid composition: {0}", Vx.ToArrayString()))
-            End If
+            'If Vx.HasNaN() Or Vx.HasInf() Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid liquid composition: {0}", Vx.ToArrayString()))
+            'End If
 
-            If Vy.HasNaN() Or Vy.HasInf() Then
-                Throw New Exception(String.Format("Tried to calculate K-values with invalid vapor composition: {0}", Vy.ToArrayString()))
-            End If
+            'If Vy.HasNaN() Or Vy.HasInf() Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid vapor composition: {0}", Vy.ToArrayString()))
+            'End If
 
-            If Double.IsNaN(T) Or Double.IsInfinity(T) Then
-                Throw New Exception(String.Format("Tried to calculate K-values with invalid temperature: {0} K", T))
-            End If
+            'If Double.IsNaN(T) Or Double.IsInfinity(T) Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid temperature: {0} K", T))
+            'End If
 
-            If Double.IsNaN(P) Or Double.IsInfinity(P) Then
-                Throw New Exception(String.Format("Tried to calculate K-values with invalid pressure: {0} Pa", P))
-            End If
+            'If Double.IsNaN(P) Or Double.IsInfinity(P) Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid pressure: {0} Pa", P))
+            'End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1374,14 +1374,32 @@ Namespace PropertyPackages
 
                 IObj?.SetCurrent()
 
-                fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                If Settings.EnableParallelProcessing Then
 
-                IObj?.SetCurrent()
+                    Dim t1 = Task.Run(Sub() fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid))
 
-                If type = "LV" Then
-                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                Else ' LL
-                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                    Dim t2 = Task.Run(Sub()
+                                          If type = "LV" Then
+                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                                          Else ' LL
+                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                                          End If
+                                      End Sub)
+
+                    Task.WaitAll(t1, t2)
+
+                Else
+
+                    fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+
+                    IObj?.SetCurrent()
+
+                    If type = "LV" Then
+                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                    Else ' LL
+                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                    End If
+
                 End If
 
             End If
@@ -1397,7 +1415,7 @@ Namespace PropertyPackages
 
             K = fugliq.DivideY(fugvap)
 
-            If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Or K.Sum = 0.0# Then
+            If Double.IsNaN(K.SumY) Or Double.IsInfinity(K.SumY) Or K.SumY = 0.0# Then
                 Dim cprops = DW_GetConstantProperties()
                 Dim Pc, Tc, w As Double
                 For i = 0 To n
@@ -1439,8 +1457,6 @@ Namespace PropertyPackages
 
             For i = 0 To n
                 If K(i) = 0.0 Then K(i) = 1.0E-20
-                'If K(i) < 0.0000000001 Then K(i) = 0.0000000001
-                'If K(i) > 1.0E+20 Then K(i) = 1.0E+20
             Next
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
