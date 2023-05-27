@@ -1,3 +1,8 @@
+Version 8.4.6
+
+- Fixed memory leaks in Classic UI
+- Overall performance and memory consumption improvements
+
 Version 8.4.5
 
 - New Henry's Constants database from https://henrys-law.org/
