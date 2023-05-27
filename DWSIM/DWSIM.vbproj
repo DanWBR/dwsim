@@ -3630,8 +3630,8 @@ erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x64" (
 
-if not exist "$(SolutionDir)DistPackages\Windows_32\" mkdir $(SolutionDir)DistPackages\Windows_32\
-if not exist "$(SolutionDir)DistPackages\Linux\" mkdir $(SolutionDir)DistPackages\Linux\
+if not exist "$(SolutionDir)DistPackages\Windows\" mkdir $(SolutionDir)DistPackages\Windows\
+if not exist "$(SolutionDir)DistPackages\macOS\" mkdir $(SolutionDir)DistPackages\macOS\
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
@@ -3651,9 +3651,7 @@ erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x86" (
 
-if not exist "$(SolutionDir)DistPackages\Windows\" mkdir $(SolutionDir)DistPackages\Windows\
-if not exist "$(SolutionDir)DistPackages\Linux\" mkdir $(SolutionDir)DistPackages\Linux\
-if not exist "$(SolutionDir)DistPackages\macOS\" mkdir $(SolutionDir)DistPackages\macOS\
+if not exist "$(SolutionDir)DistPackages\Windows_32\" mkdir $(SolutionDir)DistPackages\Windows_32\
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
@@ -3665,6 +3663,7 @@ erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul 1&gt;nul 4&g
 erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
 
 )
+
 if exist "$(SolutionDir)DWSIM.UI.Web\dwsim-web-ui\" xcopy "$(SolutionDir)DWSIM.UI.Web\dwsim-web-ui\" "$(TargetDir)dwsim-web-ui\" /E /Y /F /D
 </PostBuildEvent>
   </PropertyGroup>
