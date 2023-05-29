@@ -222,6 +222,7 @@ Public Class FormSimulSettings
                     availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
                     aTypeRefs.Add(obj.GetDisplayName, item.Name)
                     If add Then CurrentFlowsheet.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                    obj.SetFlowsheet(Nothing)
                     obj = Nothing
                 End If
             Next

@@ -74,6 +74,8 @@
 
     ReadOnly Property DisplayDescription As String
 
+    Function GetAsObject() As Object
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseEnvelopeOptions

@@ -18,3 +18,4 @@ ID;Name;CAS;KHcp;C
 16;Nitrogen monoxide;10102-43-9;1.9e-5;1600
 17;Nitrogen dioxide;10102-44-0;1.2e-4;2400
 18;Chlorine;7782-50-5;9.2e-4;2000
+18;Carbon dioxide;124-38-9;

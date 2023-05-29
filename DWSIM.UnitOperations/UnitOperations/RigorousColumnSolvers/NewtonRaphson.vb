@@ -1083,7 +1083,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
                                                    fx_error_hist.Add(fval.AbsSqrSumY())
-                                                   pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   'pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                    _counter += 1
                                                    Return fval
                                                End Function,
@@ -1102,7 +1102,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 xvar = nsolv.Solve(Function(xvars)
                                                        Dim fval = FunctionValue(xvars)
                                                        fx_error_hist.Add(fval.AbsSqrSumY())
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       'pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                        _counter += 1
                                                        Return fval
                                                    End Function,

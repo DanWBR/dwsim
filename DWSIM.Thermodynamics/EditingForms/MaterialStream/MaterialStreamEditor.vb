@@ -730,6 +730,26 @@ Public Class MaterialStreamEditor
 
                 End If
 
+                If MatStream.PropertyPackage IsNot Nothing AndAlso MatStream.PropertyPackage.IsAmineModel Then
+
+                    refval = MatStream.Phases(3).Properties.pH.GetValueOrDefault
+                    .Add(New Object() {"pH", refval, ""})
+
+                    refval = MatStream.Phases(3).Properties.CO2loading.GetValueOrDefault
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CO2 Loading"), val, ""})
+
+                End If
+
+            ElseIf p.Name = "Vapor" Then
+
+                If MatStream.PropertyPackage IsNot Nothing AndAlso MatStream.PropertyPackage.IsAmineModel Then
+
+                    refval = MatStream.Phases(2).Properties.CO2partialpressure.GetValueOrDefault
+                    val = Converter.ConvertFromSI(units.pressure, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CO2 Partial Pressure"), val, units.pressure})
+
+                End If
+
             End If
 
         End With
@@ -738,6 +758,8 @@ Public Class MaterialStreamEditor
             row.Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             row.Cells(2).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next
+
+        grid.Sort(grid.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
 
     End Sub
 
@@ -1348,7 +1370,7 @@ Public Class MaterialStreamEditor
         SaveViewState()
 
         If Not IsAccumulationStream Then
-            MatStream.FlowSheet.RequestCalculation(MatStream)
+            MatStream.FlowSheet.RequestCalculation3(MatStream, False)
         End If
 
     End Sub

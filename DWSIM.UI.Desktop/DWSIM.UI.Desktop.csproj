@@ -257,6 +257,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="Xamarin.Mac">
       <HintPath>..\DWSIM\References\Xamarin.Mac.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
@@ -369,29 +370,22 @@ xcopy "$(SolutionDir)PlatformFiles\Windows\CoolProp.dll" "$(TargetDir)" /E /Y /F
 
 xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F
 xcopy "$(SolutionDir)PlatformFiles\Linux\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F
-xcopy "$(SolutionDir)PlatformFiles\Raspberry\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F
 xcopy "$(SolutionDir)PlatformFiles\macOS\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows\plugins\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Linux\plugins\" /E /Y /F /D
-xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Raspberry\plugins\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\macOS\plugins\" /E /Y /F /D
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
-
-xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
-xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 
 rd /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
 rd /S /Q "$(SolutionDir)DistPackages\Windows\x64" 1&gt;nul 4&gt;nul
@@ -416,26 +410,11 @@ rd /S /Q "$(SolutionDir)DistPackages\macOS\pt" 1&gt;nul 4&gt;nul
 rd /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR" 1&gt;nul 4&gt;nul
 rd /S /Q "$(SolutionDir)DistPackages\macOS\ECE" 1&gt;nul 4&gt;nul
 
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x64" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\x86" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\docs" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\es" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\help" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\de" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR" 1&gt;nul 4&gt;nul
-rd /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE" 1&gt;nul 4&gt;nul
-
 erase /S /Q "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll" 2&gt;nul 1&gt;nul 4&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll" 2&gt;nul 1&gt;nul 4&gt;nul
 
 erase /S /Q"$(SolutionDir)DistPackages\Windows\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Linux\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
-erase /S /Q "$(SolutionDir)DistPackages\Raspberry\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\macOS\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)" == "x86" (

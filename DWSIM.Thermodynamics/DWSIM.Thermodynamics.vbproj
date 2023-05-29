@@ -714,6 +714,7 @@
     <EmbeddedResource Include="Assets\ChemSepIPD\srk.ipd" />
     <EmbeddedResource Include="Assets\ChemSepIPD\uniquac.ipd" />
     <EmbeddedResource Include="Assets\ChemSepIPD\wilson.ipd" />
+    <EmbeddedResource Include="Assets\henry_constants.csv" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
@@ -924,6 +925,8 @@
     <EmbeddedResource Include="Assets\Databases\FoodProp.xml" />
     <EmbeddedResource Include="Assets\ChemSep_IDs.txt" />
     <EmbeddedResource Include="Assets\CAS_IDs.txt" />
+    <EmbeddedResource Include="Assets\CoolPropFluidAliases.txt" />
+    <EmbeddedResource Include="Assets\CoolPropFluids.txt" />
     <Content Include="Assets\Databases\Artistic_license_2_0.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

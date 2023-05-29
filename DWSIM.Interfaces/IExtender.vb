@@ -66,3 +66,9 @@ Public Interface IExtender2
     Sub SetMenuItem(menuitem As Object)
 
 End Interface
+
+Public Interface IExtender3
+
+    Sub ReleaseResources()
+
+End Interface

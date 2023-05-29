@@ -162,7 +162,7 @@ Public Class EditingForm_Recycle
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation2(False)
 
     End Sub
 

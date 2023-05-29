@@ -16,6 +16,7 @@ using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.ExtensionMethods;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.DataFormat;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
+using DWSIM.GlobalSettings;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -117,11 +118,14 @@ namespace DWSIM.UI.Desktop.Editors
 
             var grid = gridcontrol.GridControl;
 
+            grid.Width = (int)(400 * GlobalSettings.Settings.DpiScale);
+
             var sheet = grid.Worksheets[0];
 
             sheet.SetRows(100);
             sheet.SetCols(3);
-            sheet.SetColumnsWidth(0, 3, 120);
+            sheet.SetColumnsWidth(0, 3, (ushort)(120 * Settings.DpiScale));
+            sheet.SetRowsHeight(0, 100, (ushort)(20 * Settings.DpiScale));
 
             sheet.ColumnHeaders[0].Text = String.Format("Length/Depth ({0})", su.distance);
             sheet.ColumnHeaders[1].Text = String.Format("Ambient Temp. ({0})", su.temperature);

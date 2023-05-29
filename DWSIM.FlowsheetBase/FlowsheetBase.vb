@@ -395,6 +395,30 @@ Imports System.Text.RegularExpressions
 
     End Sub
 
+    Public Sub RequestCalculation2(Wait As Boolean) Implements IFlowsheet.RequestCalculation2
+
+        If Wait Then
+            Task.Factory.StartNew(Sub()
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode)
+                                  End Sub)
+        Else
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode)
+        End If
+
+    End Sub
+
+
+    Public Sub RequestCalculation3(Obj As ISimulationObject, Wait As Boolean) Implements IFlowsheet.RequestCalculation3
+
+        If Obj Is Nothing Then
+            RequestCalculation2(Wait)
+        Else
+            RequestCalculation(Obj)
+        End If
+
+    End Sub
+
+
     Public Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
         Get
             Select Case Options.CompoundOrderingMode
@@ -641,6 +665,272 @@ Imports System.Text.RegularExpressions
         End Select
 
     End Function
+
+
+    Public Function GetAvailableFlowsheetObjectTypeNames() As Array Implements IFlowsheet.GetAvailableFlowsheetObjectTypeNames
+
+        Dim list As New List(Of String)
+
+        list.AddRange({
+         "Controller Block",
+         "Specification Block",
+         "Recycle Block",
+         "Energy Recycle Block",
+         "Stream Mixer",
+         "Stream Splitter",
+         "Pump",
+         "Tank",
+         "Gas-Liquid Separator",
+         "Material Stream",
+         "Energy Stream",
+         "Compressor",
+         "Expander",
+         "Heater",
+         "Cooler",
+         "Pipe Segment",
+         "Valve",
+         "Conversion Reactor",
+         "Equilibrium Reactor",
+         "Gibbs Reactor",
+         "Plug-Flow Reactor (PFR)",
+         "Continuous Stirred Tank Reactor (CSTR)",
+         "Heat Exchanger",
+         "Shortcut Column",
+         "Distillation Column",
+         "Absorption Column", "Absorption/Extraction Column",
+         "Compound Separator",
+         "Solids Separator",
+         "Filter",
+         "Orifice Plate",
+         "Python Script",
+         "Spreadsheet",
+         "Flowsheet",
+         "CAPE-OPEN Unit Operation",
+         "Digital Gauge",
+         "Analog Gauge",
+         "Level Gauge",
+         "PID Controller",
+         "Python Controller",
+         "Input Box",
+         "Switch",
+         "Air Cooler 2",
+         "Gibbs Reactor (Reaktoro)",
+         "Wind Turbine",
+         "Hydroelectric Turbine",
+         "Solar Panel",
+         "Water Electrolyzer",
+         "PEM Fuel Cell (Amphlett)"})
+
+        list.Sort()
+
+        Return list.ToArray()
+
+    End Function
+
+    Public Function AddFlowsheetObject(typename As String, objname As String) As ISimulationObject Implements IFlowsheet.AddFlowsheetObject
+
+        Select Case typename
+
+            Case "Controller Block"
+
+                Return AddObject(ObjectType.OT_Adjust, 50, 50, objname)
+
+            Case "Specification Block"
+
+                Return AddObject(ObjectType.OT_Spec, 50, 50, objname)
+
+            Case "Recycle Block"
+
+                Return AddObject(ObjectType.OT_Recycle, 50, 50, objname)
+
+            Case "Energy Recycle Block"
+
+                Return AddObject(ObjectType.OT_EnergyRecycle, 50, 50, objname)
+
+            Case "Stream Mixer"
+
+                Return AddObject(ObjectType.NodeIn, 50, 50, objname)
+
+            Case "Stream Splitter"
+
+                Return AddObject(ObjectType.NodeOut, 50, 50, objname)
+
+            Case "Pump"
+
+                Return AddObject(ObjectType.Pump, 50, 50, objname)
+
+            Case "Tank"
+
+                Return AddObject(ObjectType.Tank, 50, 50, objname)
+
+            Case "Gas-Liquid Separator"
+
+                Return AddObject(ObjectType.Vessel, 50, 50, objname)
+
+            Case "Material Stream"
+
+                Return AddObject(ObjectType.MaterialStream, 50, 50, objname)
+
+            Case "Energy Stream"
+
+                Return AddObject(ObjectType.EnergyStream, 50, 50, objname)
+
+            Case "Compressor"
+
+                Return AddObject(ObjectType.Compressor, 50, 50, objname)
+
+            Case "Expander"
+
+                Return AddObject(ObjectType.Expander, 50, 50, objname)
+
+            Case "Heater"
+
+                Return AddObject(ObjectType.Heater, 50, 50, objname)
+
+            Case "Cooler"
+
+                Return AddObject(ObjectType.Cooler, 50, 50, objname)
+
+            Case "Pipe Segment"
+
+                Return AddObject(ObjectType.Pipe, 50, 50, objname)
+
+            Case "Valve"
+
+                Return AddObject(ObjectType.Valve, 50, 50, objname)
+
+            Case "Conversion Reactor"
+
+                Return AddObject(ObjectType.RCT_Conversion, 50, 50, objname)
+
+            Case "Equilibrium Reactor"
+
+                Return AddObject(ObjectType.RCT_Equilibrium, 50, 50, objname)
+
+            Case "Gibbs Reactor"
+
+                Return AddObject(ObjectType.RCT_Gibbs, 50, 50, objname)
+
+            Case "Plug-Flow Reactor (PFR)"
+
+                Return AddObject(ObjectType.RCT_PFR, 50, 50, objname)
+
+            Case "Continuous Stirred Tank Reactor (CSTR)"
+
+                Return AddObject(ObjectType.RCT_CSTR, 50, 50, objname)
+
+            Case "Heat Exchanger"
+
+                Return AddObject(ObjectType.HeatExchanger, 50, 50, objname)
+
+            Case "Shortcut Column"
+
+                Return AddObject(ObjectType.ShortcutColumn, 50, 50, objname)
+
+            Case "Distillation Column"
+
+                Return AddObject(ObjectType.DistillationColumn, 50, 50, objname)
+
+            Case "Absorption Column", "Absorption/Extraction Column"
+
+                Return AddObject(ObjectType.AbsorptionColumn, 50, 50, objname)
+
+            Case "Compound Separator"
+
+                Return AddObject(ObjectType.ComponentSeparator, 50, 50, objname)
+
+            Case "Solids Separator"
+
+                Return AddObject(ObjectType.SolidSeparator, 50, 50, objname)
+
+            Case "Filter"
+
+                Return AddObject(ObjectType.Filter, 50, 50, objname)
+
+            Case "Orifice Plate"
+
+                Return AddObject(ObjectType.OrificePlate, 50, 50, objname)
+
+            Case "Python Script"
+
+                Return AddObject(ObjectType.CustomUO, 50, 50, objname)
+
+            Case "Spreadsheet"
+
+                Return AddObject(ObjectType.ExcelUO, 50, 50, objname)
+
+            Case "Flowsheet"
+
+                Return AddObject(ObjectType.FlowsheetUO, 50, 50, objname)
+
+            Case "CAPE-OPEN Unit Operation"
+
+                Return AddObject(ObjectType.CapeOpenUO, 50, 50, objname)
+
+            Case "Digital Gauge"
+
+                Return AddObject(ObjectType.DigitalGauge, 50, 50, objname)
+
+            Case "Analog Gauge"
+
+                Return AddObject(ObjectType.AnalogGauge, 50, 50, objname)
+
+            Case "Level Gauge"
+
+                Return AddObject(ObjectType.LevelGauge, 50, 50, objname)
+
+            Case "PID Controller"
+
+                Return AddObject(ObjectType.Controller_PID, 50, 50, objname)
+
+            Case "Python Controller"
+
+                Return AddObject(ObjectType.Controller_Python, 50, 50, objname)
+
+            Case "Input Box"
+
+                Return AddObject(ObjectType.Input, 50, 50, objname)
+
+            Case "Switch"
+
+                Return AddObject(ObjectType.Switch, 50, 50, objname)
+
+            Case "Air Cooler 2"
+
+                Return AddObject(ObjectType.AirCooler2, 50, 50, objname)
+
+            Case "Gibbs Reactor (Reaktoro)"
+
+                Return AddObject(ObjectType.RCT_GibbsReaktoro, 50, 50, objname)
+
+            Case "Wind Turbine"
+
+                Return AddObject(ObjectType.WindTurbine, 50, 50, objname)
+
+            Case "Hydroelectric Turbine"
+
+                Return AddObject(ObjectType.HydroelectricTurbine, 50, 50, objname)
+
+            Case "Solar Panel"
+
+                Return AddObject(ObjectType.SolarPanel, 50, 50, objname)
+
+            Case "Water Electrolyzer"
+
+                Return AddObject(ObjectType.WaterElectrolyzer, 50, 50, objname)
+
+            Case "PEM Fuel Cell (Amphlett)"
+
+                Return AddObject(ObjectType.PEMFuelCell, 50, 50, objname)
+
+            Case Else
+
+                Return Nothing
+
+        End Select
+
+    End Function
+
 
     Public Function AddObjectToSurface(type As ObjectType, x As Integer, y As Integer,
                                        Optional tag As String = "",
@@ -2054,6 +2344,7 @@ Imports System.Text.RegularExpressions
                         If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
                             ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
                         End If
+                        If ppkey.Contains("Seawater") Then ppkey = "Seawater IAPWS-08"
                         If AvailablePropertyPackages.ContainsKey(ppkey) Then
                             obj = AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
@@ -3969,6 +4260,14 @@ Label_00CC:
             obj.SetDirtyStatus(True)
         Next
 
+    End Sub
+
+    Public Sub DisplayBrowserWindow(url As String) Implements IFlowsheet.DisplayBrowserWindow
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub DisplayDockableBrowserWindow(url As String) Implements IFlowsheet.DisplayDockableBrowserWindow
+        Throw New NotImplementedException()
     End Sub
 
 End Class

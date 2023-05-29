@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DWSIM.Automation.Tests.CSharp.pfrReactor</StartupObject>
+    <StartupObject>LoopTest</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="looptest.cs" />
     <Compile Include="oldAPI.cs" />
     <Compile Include="createFile_oldAPI.cs" />
     <Compile Include="pfrReactor.cs" />

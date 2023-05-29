@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.4.4
+Version 8.4.6
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,22 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.4.6
+
+- Fixed memory leaks in Classic UI
+- Overall performance and memory consumption improvements
+
+Version 8.4.5
+
+- New Henry's Constants database from https://henrys-law.org/
+- Added MaterialStream.SetOverallMolarComposition() function
+- Clear log when converging recycles (Classic UI)
+- Fixed issue with kinetic and hetcat reaction editors (Classic UI)
+- Removed OpenGL renderer (Classic UI)
+- Fixed Classic UI freezing during calculations
+- Fixed Compressor/Expander curve extrapolation
+- Other minor fixes and enhancements
 
 Version 8.4.4
 

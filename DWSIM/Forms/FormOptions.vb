@@ -67,7 +67,6 @@ Public Class FormOptions
 
         chkHideSolidPhaseCO.Checked = My.Settings.HideSolidPhase_CO
 
-        cbRenderer.SelectedIndex = My.Settings.FlowsheetRenderer
         chkAA.Checked = My.Settings.FlowsheetAntiAliasing
 
         'solver
@@ -102,6 +101,13 @@ Public Class FormOptions
         If Directory.Exists(configdir) Then tbConfigDir.Text = configdir Else tbConfigDir.Text = "N/A"
 
         chkUpdates.Checked = Settings.CheckForUpdates
+
+        If Not FormMain.IsPro Then
+            gbLoadExtensions.Visible = True
+            chkLoadExtensions.Checked = My.Settings.LoadExtensionsAndPlugins
+        Else
+            gbLoadExtensions.Visible = False
+        End If
 
         loaded = True
 
@@ -451,11 +457,6 @@ Public Class FormOptions
         My.Application.MainWindowForm.tsbInspector.Checked = chkEnableInspector.Checked
     End Sub
 
-    Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged
-        My.Settings.FlowsheetRenderer = cbRenderer.SelectedIndex
-        GlobalSettings.Settings.FlowsheetRenderer = Settings.SkiaCanvasRenderer.CPU
-    End Sub
-
     Private Sub chkAA_CheckedChanged(sender As Object, e As EventArgs) Handles chkAA.CheckedChanged
         My.Settings.FlowsheetAntiAliasing = chkAA.Checked
         GlobalSettings.Settings.DrawingAntiAlias = chkAA.Checked
@@ -490,4 +491,7 @@ Public Class FormOptions
         Settings.CheckForUpdates = chkUpdates.Checked
     End Sub
 
+    Private Sub chkLoadExtensions_CheckedChanged(sender As Object, e As EventArgs) Handles chkLoadExtensions.CheckedChanged
+        My.Settings.LoadExtensionsAndPlugins = chkLoadExtensions.Checked
+    End Sub
 End Class

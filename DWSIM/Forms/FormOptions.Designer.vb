@@ -42,8 +42,6 @@ Partial Class FormOptions
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.chkAA = New System.Windows.Forms.CheckBox()
-        Me.cbRenderer = New System.Windows.Forms.ComboBox()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ComboBoxPropPackCopyMode = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -89,6 +87,8 @@ Partial Class FormOptions
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.gbLoadExtensions = New System.Windows.Forms.GroupBox()
+        Me.chkLoadExtensions = New System.Windows.Forms.CheckBox()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
@@ -124,6 +124,7 @@ Partial Class FormOptions
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
+        Me.gbLoadExtensions.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
@@ -224,8 +225,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.GroupBox13, "GroupBox13")
         Me.GroupBox13.Controls.Add(Me.chkAA)
-        Me.GroupBox13.Controls.Add(Me.cbRenderer)
-        Me.GroupBox13.Controls.Add(Me.Label23)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.TabStop = False
         '
@@ -233,19 +232,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkAA, "chkAA")
         Me.chkAA.Name = "chkAA"
-        '
-        'cbRenderer
-        '
-        resources.ApplyResources(Me.cbRenderer, "cbRenderer")
-        Me.cbRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbRenderer.FormattingEnabled = True
-        Me.cbRenderer.Items.AddRange(New Object() {resources.GetString("cbRenderer.Items"), resources.GetString("cbRenderer.Items1")})
-        Me.cbRenderer.Name = "cbRenderer"
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
         '
         'GroupBox5
         '
@@ -614,12 +600,25 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
+        Me.FaTabStripItem7.Controls.Add(Me.gbLoadExtensions)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        '
+        'gbLoadExtensions
+        '
+        resources.ApplyResources(Me.gbLoadExtensions, "gbLoadExtensions")
+        Me.gbLoadExtensions.Controls.Add(Me.chkLoadExtensions)
+        Me.gbLoadExtensions.Name = "gbLoadExtensions"
+        Me.gbLoadExtensions.TabStop = False
+        '
+        'chkLoadExtensions
+        '
+        resources.ApplyResources(Me.chkLoadExtensions, "chkLoadExtensions")
+        Me.chkLoadExtensions.Name = "chkLoadExtensions"
         '
         'GroupBox16
         '
@@ -762,6 +761,8 @@ Partial Class FormOptions
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem7.ResumeLayout(False)
+        Me.gbLoadExtensions.ResumeLayout(False)
+        Me.gbLoadExtensions.PerformLayout()
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
         Me.GroupBox17.ResumeLayout(False)
@@ -842,8 +843,6 @@ Partial Class FormOptions
     Friend WithEvents Label21 As Label
     Public WithEvents GroupBox13 As GroupBox
     Public WithEvents chkAA As CheckBox
-    Friend WithEvents cbRenderer As ComboBox
-    Public WithEvents Label23 As Label
     Public WithEvents chkEditorDoubleClick As CheckBox
     Friend WithEvents GroupBox1 As GroupBox
     Public WithEvents btnClearDir As Button
@@ -851,4 +850,6 @@ Partial Class FormOptions
     Public WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents GroupBox16 As GroupBox
     Public WithEvents chkUpdates As CheckBox
+    Friend WithEvents gbLoadExtensions As GroupBox
+    Public WithEvents chkLoadExtensions As CheckBox
 End Class

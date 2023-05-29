@@ -358,7 +358,7 @@ Public Class EditingForm_Valve
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 

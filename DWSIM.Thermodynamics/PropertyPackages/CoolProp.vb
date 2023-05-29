@@ -23,6 +23,8 @@ Imports DWSIM.MathOps.MathEx
 Imports System.Runtime.InteropServices
 Imports System.Linq
 Imports DWSIM.Interfaces.Enums
+Imports System.IO
+Imports System.Reflection
 
 Namespace PropertyPackages
 
@@ -70,22 +72,61 @@ Namespace PropertyPackages
 
         Sub GetListOfSupportedCompounds()
 
-            Dim comps As List(Of String) = CoolProp.get_global_param_string("FluidsList").Split(",").ToList()
+            Dim comps As List(Of String)
+            'comps= CoolProp.get_global_param_string("FluidsList").Split(",").ToList()
+
+            Using filestr As Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.Thermodynamics.CoolPropFluids.txt")
+                Using t As New StreamReader(filestr)
+                    comps = t.ReadToEnd().Split(vbLf).ToList()
+                End Using
+            End Using
+
             comps = comps.Select(Function(a) a.Trim()).ToList()
+
+            'IO.File.WriteAllLines("CoolPropFluids.txt", comps.ToArray())
 
             CompoundAliases.Clear()
             SupportedComponents.Clear()
 
+            Dim data As String()
+
+            Using filestr As Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.Thermodynamics.CoolPropFluidAliases.txt")
+                Using t As New StreamReader(filestr)
+                    data = t.ReadToEnd().Split(vbLf)
+                End Using
+            End Using
+
             Dim aliases As New List(Of String), cas As String
 
+            Dim i = 0
             For Each c In comps
-                aliases = CoolProp.get_fluid_param_string(c, "aliases").Split(",").ToList()
+                Dim sdata = data(i).Split(vbTab)
+                aliases = sdata(1).Split(",").ToList()
                 aliases = aliases.Select(Function(a) a.Trim()).Where(Function(a2) a2 <> "" And a2 <> " ").ToList()
                 aliases.Add(c)
                 SupportedComponents.AddRange(aliases)
-                cas = CoolProp.get_fluid_param_string(c, "CAS")
+                cas = sdata(0)
                 CompoundAliases.Add(cas, aliases.ToList)
+                i += 1
             Next
+
+            'For Each c In comps
+            '    aliases = CoolProp.get_fluid_param_string(c, "aliases").Split(",").ToList()
+            '    aliases = aliases.Select(Function(a) a.Trim()).Where(Function(a2) a2 <> "" And a2 <> " ").ToList()
+            '    aliases.Add(c)
+            '    SupportedComponents.AddRange(aliases)
+            '    cas = CoolProp.get_fluid_param_string(c, "CAS")
+            '    CompoundAliases.Add(cas, aliases.ToList)
+            'Next
+
+            'For Each item In CompoundAliases
+            '    Dim al = ""
+            '    For Each ali In item.Value
+            '        al += ali + ","
+            '    Next
+            '    al.TrimEnd(",")
+            '    IO.File.AppendAllText("CoolPropFluidAliases.txt", item.Key & vbTab & al & vbCrLf)
+            'Next
 
         End Sub
 
@@ -1644,9 +1685,6 @@ Namespace PropertyPackages
                 For i = 0 To n
                     If T / Tc(i) >= 1 Then
                         IObj?.SetCurrent()
-                        fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
-                    Else
-                        IObj?.SetCurrent()
                         If UseHenryConstants And HasHenryConstants(RET_VNAMES(i)) Then
                             Dim hc = AUX_KHenry(RET_VNAMES(i), T)
                             IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
@@ -1654,6 +1692,9 @@ Namespace PropertyPackages
                         Else
                             fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                         End If
+                    Else
+                        IObj?.SetCurrent()
+                        fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                     End If
                 Next
             Else

@@ -46,7 +46,6 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 
 Imports props = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS
-
 Namespace PropertyPackages
 
 #Region "    Global Enumerations"
@@ -251,6 +250,8 @@ Namespace PropertyPackages
 
         Public Property UseHenryConstants As Boolean = True
 
+        Public Overridable ReadOnly Property IsAmineModel As Boolean = False
+
         Public Property AutoEstimateMissingNRTLUNIQUACParameters As Boolean = True
 
         ''' <summary>
@@ -267,10 +268,10 @@ Namespace PropertyPackages
         Public Const ClassId As String = ""
 
         <JsonIgnore> <System.NonSerialized()> Private m_ms As Interfaces.IMaterialStream = Nothing
-        Private m_ss As New System.Collections.Generic.List(Of String)
+        Private m_ss As New List(Of String)
         Private m_configurable As Boolean = False
 
-        Public m_Henry As New System.Collections.Generic.Dictionary(Of String, HenryParam)
+        Public Shared m_Henry As New Dictionary(Of String, HenryParam)
 
         <NonSerialized> Private m_ip As DataTable
 
@@ -1319,21 +1320,21 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public Overridable Overloads Function DW_CalcKvalue(ByVal Vx As Double(), ByVal Vy As Double(), ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
 
-            If Vx.HasNaN() Or Vx.HasInf() Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid liquid composition: {0}"), Vx.ToArrayString()))
-            End If
+            'If Vx.HasNaN() Or Vx.HasInf() Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid liquid composition: {0}", Vx.ToArrayString()))
+            'End If
 
-            If Vy.HasNaN() Or Vy.HasInf() Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid vapor composition: {0}"), Vy.ToArrayString()))
-            End If
+            'If Vy.HasNaN() Or Vy.HasInf() Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid vapor composition: {0}", Vy.ToArrayString()))
+            'End If
 
-            If Double.IsNaN(T) Or Double.IsInfinity(T) Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid temperature: {0} K"), T))
-            End If
+            'If Double.IsNaN(T) Or Double.IsInfinity(T) Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid temperature: {0} K", T))
+            'End If
 
-            If Double.IsNaN(P) Or Double.IsInfinity(P) Then
-                Throw New Exception(String.Format(Flowsheet.GetTranslatedString("Tried to calculate K-values with invalid pressure: {0} Pa"), P))
-            End If
+            'If Double.IsNaN(P) Or Double.IsInfinity(P) Then
+            '    Throw New Exception(String.Format("Tried to calculate K-values with invalid pressure: {0} Pa", P))
+            'End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1373,14 +1374,32 @@ Namespace PropertyPackages
 
                 IObj?.SetCurrent()
 
-                fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                If Settings.EnableParallelProcessing Then
 
-                IObj?.SetCurrent()
+                    Dim t1 = Task.Run(Sub() fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid))
 
-                If type = "LV" Then
-                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                Else ' LL
-                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                    Dim t2 = Task.Run(Sub()
+                                          If type = "LV" Then
+                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                                          Else ' LL
+                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                                          End If
+                                      End Sub)
+
+                    Task.WaitAll(t1, t2)
+
+                Else
+
+                    fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+
+                    IObj?.SetCurrent()
+
+                    If type = "LV" Then
+                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                    Else ' LL
+                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                    End If
+
                 End If
 
             End If
@@ -1396,7 +1415,7 @@ Namespace PropertyPackages
 
             K = fugliq.DivideY(fugvap)
 
-            If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Or K.Sum = 0.0# Then
+            If Double.IsNaN(K.SumY) Or Double.IsInfinity(K.SumY) Or K.SumY = 0.0# Then
                 Dim cprops = DW_GetConstantProperties()
                 Dim Pc, Tc, w As Double
                 For i = 0 To n
@@ -1438,8 +1457,6 @@ Namespace PropertyPackages
 
             For i = 0 To n
                 If K(i) = 0.0 Then K(i) = 1.0E-20
-                'If K(i) < 0.0000000001 Then K(i) = 0.0000000001
-                'If K(i) > 1.0E+20 Then K(i) = 1.0E+20
             Next
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
@@ -5118,6 +5135,8 @@ redirect2:                  IObj?.SetCurrent()
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molarfraction = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.bulk_modulus = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2loading = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2partialpressure = Nothing
 
                 Else
 
@@ -5149,6 +5168,8 @@ redirect2:                  IObj?.SetCurrent()
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.bulk_modulus = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2loading = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2partialpressure = Nothing
 
                     If Not CalculatedOnly Then
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = Nothing
@@ -5322,8 +5343,11 @@ redirect2:                  IObj?.SetCurrent()
         Public Function HasHenryConstants(compname As String) As Boolean
 
             Dim CAS = Me.CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number
-
-            Return m_Henry.ContainsKey(CAS)
+            If CAS <> "" Then
+                Return m_Henry.ContainsKey(CAS)
+            Else
+                Return False
+            End If
 
         End Function
 
@@ -5348,6 +5372,9 @@ redirect2:                  IObj?.SetCurrent()
             CAS = Me.CurrentMaterialStream.Phases(0).Compounds(CompName).ConstantProperties.CAS_Number
 
             IObj?.Paragraphs.Add(String.Format("CAS Number: {0}", CAS))
+
+
+
 
             If m_Henry.ContainsKey(CAS) Then
                 KHCP = m_Henry(CAS).KHcp
@@ -11353,22 +11380,36 @@ Final3:
 
             Dim HenryLines() As String
 
-            Dim t0 As Type = Type.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage")
+            SyncLock m_Henry
 
-            Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry.txt")
-                Using t As New StreamReader(filestr)
-                    HenryLines = t.ReadToEnd().Split(vbLf)
+                m_Henry.Clear()
+
+                Dim t0 As Type = Type.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage")
+
+                Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry_constants.csv")
+                    Using t As New StreamReader(filestr)
+                        HenryLines = t.ReadToEnd().Split(vbLf)
+                    End Using
                 End Using
-            End Using
 
-            For i = 2 To HenryLines.Length - 1
-                Dim HP As New HenryParam
-                HP.Component = HenryLines(i).Split(";")(1)
-                HP.CAS = HenryLines(i).Split(";")(2)
-                HP.KHcp = HenryLines(i).Split(";")(3).ToDoubleFromInvariant()
-                HP.C = HenryLines(i).Split(";")(4).ToDoubleFromInvariant()
-                If Not m_Henry.ContainsKey(HP.CAS) Then m_Henry.Add(HP.CAS, HP)
-            Next
+                For i = 3 To HenryLines.Length - 2
+                    Dim HP As New HenryParam
+                    Dim cols = HenryLines(i).Split(",")
+                    HP.Component = cols(4).Replace(Chr(34), "")
+                    HP.CAS = cols(10).Replace(Chr(34), "")
+                    Dim val1 = cols(1).Replace(Chr(34), "")
+                    Dim val2 = cols(3).Replace(Chr(34), "")
+                    Dim val3 = cols(2).Replace(Chr(34), "")
+                    If val1 <> "" And val3 <> "" And val2.Contains("L") Then
+                        HP.KHcp = val1.ToDoubleFromInvariant()
+                        HP.C = val3.ToDoubleFromInvariant()
+                        If Not m_Henry.ContainsKey(HP.CAS) Then
+                            m_Henry.Add(HP.CAS, HP)
+                        End If
+                    End If
+                Next
+
+            End SyncLock
 
             If Settings.CAPEOPENMode And Not Settings.ExcelMode Then
 
@@ -13178,6 +13219,10 @@ Final3:
 
             Return deriv
 
+        End Function
+
+        Public Function GetAsObject() As Object Implements IPropertyPackage.GetAsObject
+            Return Me
         End Function
 
 #End Region

@@ -755,6 +755,19 @@ Namespace GraphicObjects.Tables
 
             End If
 
+            tpaint.Dispose()
+            bpaint.Dispose()
+            bpaint2.Dispose()
+            spaint.Dispose()
+            tbpaint.Dispose()
+
+            tpaint = Nothing
+            bpaint = Nothing
+            bpaint2 = Nothing
+            spaint = Nothing
+            tbpaint = Nothing
+
+
         End Sub
 
     End Class

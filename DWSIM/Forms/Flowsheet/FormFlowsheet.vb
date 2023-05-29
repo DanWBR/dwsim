@@ -30,7 +30,6 @@ Imports System.Dynamic
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
-Imports DWSIM.DWSIM.Editors.PropertyPackages
 Imports System.Threading.Tasks
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
@@ -99,7 +98,7 @@ Public Class FormFlowsheet
     Public FormFilesExplorer As New FormFileExplorer
     Public FormIPyConsole As New FormInteractiveIronPythonConsole
 
-    Public FormProps As New frmProps
+    Public FormScript1 As New FormScript
 
     Public FormCOReports As New COReportsPanel
     Public FormWatch As New WatchPanel
@@ -136,7 +135,7 @@ Public Class FormFlowsheet
 
     Public Property SupressMessages As Boolean = False Implements Interfaces.IFlowsheet.SupressMessages
 
-    Private MessagePumpTimer As Timer
+    Private WithEvents MessagePumpTimer As Timer
 
     Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
 
@@ -169,9 +168,9 @@ Public Class FormFlowsheet
 
         Options.ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
 
-        If FormMain.AnalyticsProvider IsNot Nothing Then
+        If My.Application.MainWindowForm.AnalyticsProvider IsNot Nothing Then
             AddHandler Me.ToolOpened, Sub(sender, e)
-                                          FormMain.AnalyticsProvider.RegisterEvent(sender.ToString(), "", Nothing)
+                                          My.Application.MainWindowForm.AnalyticsProvider.RegisterEvent(sender.ToString(), "", Nothing)
                                       End Sub
         End If
 
@@ -235,6 +234,7 @@ Public Class FormFlowsheet
         FormFilesExplorer.Flowsheet = Me
         FormIPyConsole.Flowsheet = Me
         FormWatch.Flowsheet = Me
+        FormScript1.fc = Me
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
@@ -277,6 +277,7 @@ Public Class FormFlowsheet
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                     obj.SetFlowsheet(Me)
                     Me.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                    obj.SetFlowsheet(Nothing)
                     obj = Nothing
                 End If
             Next
@@ -284,6 +285,7 @@ Public Class FormFlowsheet
             For Each item In My.Application.MainWindowForm.ExternalUnitOperations.Values
                 item.SetFlowsheet(Me)
                 Me.FlowsheetOptions.VisibleProperties(item.GetType.Name) = DirectCast(item, ISimulationObject).GetDefaultProperties().ToList()
+                item.SetFlowsheet(Nothing)
             Next
 
             If Not DWSIM.App.IsRunningOnMono Then
@@ -321,6 +323,7 @@ Public Class FormFlowsheet
             FormIntegratorControls.DockPanel = Nothing
             FormFilesExplorer.DockPanel = Nothing
             FormIPyConsole.DockPanel = Nothing
+            FormScript1.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -334,7 +337,7 @@ Public Class FormFlowsheet
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormCharts.Show(FormSurface.Pane, Nothing)
             FormFilesExplorer.Show(dckPanel)
-            FormProps.Show(dckPanel, DockState.DockLeft)
+            FormScript1.Show(FormSurface.Pane, Nothing)
 
             FormSurface.Activate()
 
@@ -375,38 +378,10 @@ Public Class FormFlowsheet
 
         loaded = True
 
-        If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
-
-        Dim fs As New FormScript
-        fs.fc = Me
-        fs.Show(Me.dckPanel)
-
         FormSurface.Activate()
 
         MessagePumpTimer = New Timer()
         MessagePumpTimer.Interval = 500
-
-        AddHandler MessagePumpTimer.Tick, Sub(obj, ev)
-
-                                              If Not SupressMessages Then
-
-                                                  SyncLock MessagePump
-
-                                                      If MessagePump.Count > 0 Then
-
-                                                          For Each item In MessagePump
-                                                              ShowMessageInternal(item.Item1, item.Item2, item.Item3)
-                                                          Next
-
-                                                          MessagePump.Clear()
-
-                                                      End If
-
-                                                  End SyncLock
-
-                                              End If
-
-                                          End Sub
 
         MessagePumpTimer.Start()
 
@@ -543,6 +518,27 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Sub UnloadExtenders()
+
+        For Each extender In My.Application.MainWindowForm.Extenders.Values
+            Try
+                If extender.Level = ExtenderLevel.FlowsheetWindow Then
+                    For Each item In extender.Collection
+                        If TypeOf item Is IExtender3 Then
+                            DirectCast(item, IExtender3).ReleaseResources()
+                        Else
+                            item.SetFlowsheet(Nothing)
+                        End If
+                    Next
+                End If
+            Catch ex As Exception
+                Logging.Logger.LogError("Extender Unloading (Flowsheet)", ex)
+            End Try
+        Next
+
+    End Sub
+
+
     Function ReturnForm(ByVal str As String) As IDockContent
         Select Case str
             Case "DWSIM.LogPanel", "DWSIM.frmLog"
@@ -555,8 +551,6 @@ Public Class FormFlowsheet
                 Return Me.FormSpreadsheet
             Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
                 Return Me.FormWatch
-            Case "DWSIM.frmProps"
-                Return Me.FormProps
             Case "DWSIM.FormCharts"
                 Return Me.FormCharts
             Case "DWSIM.FormDynamics", "DWSIM.FormDynamicsManager"
@@ -671,13 +665,15 @@ Public Class FormFlowsheet
             {"Screen Scaling Factor", Settings.DpiScale}
         }
 
-        FormMain.AnalyticsProvider?.RegisterEvent("Screen Characteristics", "", data)
+        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Screen Characteristics", "", data)
 
     End Sub
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
         ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
+
+        ToolStripManager.RevertMerge(ToolStrip1)
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
@@ -689,9 +685,18 @@ Public Class FormFlowsheet
 
         FileDatabaseProvider.ReleaseDatabase()
 
-        For Each obj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
-            If obj.disposedValue = False Then obj.Dispose()
+        For Each uobj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
+            If uobj.disposedValue = False Then uobj.Dispose()
         Next
+
+        For Each gobj In Collections.GraphicObjectCollection.Values
+            gobj.ReleaseReferences()
+        Next
+
+        Collections.GraphicObjectCollection.Clear()
+        Collections.FlowsheetObjectCollection.Clear()
+        Collections.OPT_OptimizationCollection.Clear()
+        Collections.OPT_SensAnalysisCollection.Clear()
 
         If GlobalSettings.Settings.OldUI Then
 
@@ -732,6 +737,99 @@ Public Class FormFlowsheet
 
         End If
 
+        MessagePumpTimer.Dispose()
+        TimerScripts1.Dispose()
+        TimerScripts15.Dispose()
+        TimerScripts30.Dispose()
+        TimerScripts5.Dispose()
+        TimerScripts60.Dispose()
+
+        FrmStSim1.CurrentFlowsheet = Nothing
+        FrmStSim1.Dispose()
+
+        FormSpreadsheet.ReleaseResources()
+        FormSpreadsheet.Flowsheet = Nothing
+        FormSpreadsheet.Dispose()
+
+        FormSurface.ReleaseResources()
+        FormSurface.Dispose()
+
+        FormCharts.Flowsheet = Nothing
+        FormCharts.Dispose()
+
+        FormDynamics.Flowsheet = Nothing
+        FormDynamics.Dispose()
+
+        FormIntegratorControls.Flowsheet = Nothing
+        FormIntegratorControls.Dispose()
+
+        FormFilesExplorer.Flowsheet = Nothing
+        FormFilesExplorer.Dispose()
+
+        FormIPyConsole.Flowsheet = Nothing
+        FormIPyConsole.Dispose()
+
+        FormWatch.Flowsheet = Nothing
+        FormWatch.Dispose()
+
+        FormScript1.fc = Nothing
+        FormScript1.Dispose()
+
+        Dim fields = Me.GetType().GetProperties()
+
+        UnloadExtenders()
+
+        For Each item As ToolStripMenuItem In CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems
+            RemoveHandler item.Click, AddressOf Me.COMOClick
+        Next
+
+        For Each item As ToolStripMenuItem In PluginsTSMI.DropDownItems
+            RemoveHandler item.Click, AddressOf Me.PluginClick
+        Next
+
+        For Each item As ToolStripMenuItem In UtilitiesTSMI.DropDownItems
+            RemoveHandler item.Click, AddressOf UtilitiesTSMIHandler
+        Next
+
+        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Clear()
+        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDown.Refresh()
+        RestoreLayoutTSMI.Dispose()
+        UtilitiesTSMI.DropDownItems.Clear()
+        UtilitiesTSMI.DropDown.Refresh()
+        tsmiExportData.Dispose()
+
+        RemoveHandler CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.MouseHover, AddressOf CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem_MouseHover
+        RemoveHandler CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.MouseHover, AddressOf CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem_MouseHover
+
+        RemoveHandler tsmiExportData.Click, AddressOf tsmiExportData_Click
+        RemoveHandler tsmiExportData.Click, AddressOf tsmiExportData_Click
+
+        RemoveHandler UtilitiesTSMI.DropDownOpening, AddressOf UtilitiesTSMI_Click
+        RemoveHandler UtilitiesTSMI.DropDownOpening, AddressOf UtilitiesTSMI_Click
+
+        RemoveHandler RestoreLayoutTSMI.Click, AddressOf Restorelayout
+        RemoveHandler RestoreLayoutTSMI.Click, AddressOf Restorelayout
+
+        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Dispose()
+        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = Nothing
+        tsmiExportData.Dispose()
+        tsmiExportData = Nothing
+        UtilitiesTSMI.Dispose()
+        UtilitiesTSMI = Nothing
+        RestoreLayoutTSMI.Dispose()
+        RestoreLayoutTSMI = Nothing
+
+        ToolStrip1.Dispose()
+        MenuStrip1.Dispose()
+
+        If BidirectionalSolver IsNot Nothing Then
+            DirectCast(BidirectionalSolver, IExtender3).ReleaseResources()
+        End If
+
+        ClearVariables()
+
+        'Me.MdiParent = Nothing
+
         'garbage collection (frees unused memory)
         System.GC.Collect()
         System.GC.WaitForPendingFinalizers()
@@ -739,6 +837,98 @@ Public Class FormFlowsheet
         System.GC.WaitForPendingFinalizers()
 
     End Sub
+
+    Private Sub ClearVariables()
+
+        ToolStripMenuItem1 = Nothing
+        ToolStripMenuItem2 = Nothing
+        ToolStripMenuItem3 = Nothing
+        ResultsTSMI = Nothing
+        GerarRelatorioToolStripMenuItem = Nothing
+        OptimizationTSMI = Nothing
+        AnaliseDeSensibilidadeToolStripMenuItem = Nothing
+        FileTSMI = Nothing
+        CloseToolStripMenuItem = Nothing
+        MultivariateOptimizerToolStripMenuItem = Nothing
+        ToolsTSMI = Nothing
+        CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem = Nothing
+        CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem = Nothing
+        PluginsTSMI = Nothing
+        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = Nothing
+        COObjTSMI = Nothing
+        ShowTSMI = Nothing
+        varpaneltsmi = Nothing
+        GerenciadorDeAmostrasDePetroleoToolStripMenuItem = Nothing
+        ToolStripSeparator10 = Nothing
+        RestoreLayoutTSMI = Nothing
+        EditTSMI = Nothing
+        tsmiUndo = Nothing
+        tsmiRedo = Nothing
+        ToolStripSeparator14 = Nothing
+        tsmiCut = Nothing
+        tsmiCopy = Nothing
+        tsmiPaste = Nothing
+        tsmiRemoveSelected = Nothing
+        tsmiCloneSelected = Nothing
+        tsmiRecalc = Nothing
+        tsmiExportData = Nothing
+        ToolStripSeparator18 = Nothing
+        tsmiConfigSimulation = Nothing
+        ToolStripSeparator15 = Nothing
+        InsertTSMI = Nothing
+        BlocoDeSimulacaoToolStripMenuItem = Nothing
+        TabelaDePropriedadesToolStripMenuItem = Nothing
+        TabelaDePropriedatesMestraToolStripMenuItem = Nothing
+        TabelaDePropriedadesPlanilhaToolStripMenuItem = Nothing
+        FiguraToolStripMenuItem = Nothing
+        TextoToolStripMenuItem = Nothing
+        RectangleToolStripMenuItem = Nothing
+        tsmiCloseOpenedEditors = Nothing
+        UtilitiesTSMI = Nothing
+        TSMIAddUtility = Nothing
+        PropriedadesDasSubstanciasToolStripMenuItem = Nothing
+        GraficoToolStripMenuItem = Nothing
+        CompoundCreatorWizardTSMI = Nothing
+        ConsoleOutputTSMI = Nothing
+        InspectorTSMI = Nothing
+        ToolStripButton1 = Nothing
+        tsbCalc = Nothing
+        tsbAbortCalc = Nothing
+        ToolStripSeparator1 = Nothing
+        tsbSimultAdjustSolver = Nothing
+        ToolStripSeparator2 = Nothing
+        tsbUndo = Nothing
+        tsbRedo = Nothing
+        tsbCalcF = Nothing
+        ToolStripSeparator3 = Nothing
+        tsbStoreSolution = Nothing
+        tsbLoadSolution = Nothing
+        tsbDeleteSolution = Nothing
+        DynamicsTSMI = Nothing
+        GerenciadorDoModoDinamicoToolStripMenuItem = Nothing
+        ControlesDoIntegradorToolStripMenuItem = Nothing
+        ModoDinamicoAtivoToolStripMenuItem = Nothing
+        tsbDynamics = Nothing
+        tsbDynManager = Nothing
+        tsbDynIntegrator = Nothing
+        ToolStripSeparator4 = Nothing
+        FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem = Nothing
+        ToolStrip1 = Nothing
+        tsmiRichText = Nothing
+        BotaoToolStripMenuItem = Nothing
+        ProToolsToolStripMenuItem = Nothing
+        CapitalCostEstimatorToolStripMenuItem = Nothing
+        ExcelReportsToolStripMenuItem = Nothing
+        SumarioToolStripMenuItem = Nothing
+        CriadorDeComponentesSolidosToolStripMenuItem = Nothing
+        ToggleWeatherPanelVisibilityToolStripMenuItem = Nothing
+        CriarPseudocomponentesEmBateladaToolStripMenuItem = Nothing
+        ConsoleInterativoIronPtyhonToolStripMenuItem = Nothing
+        tsbAtivar = Nothing
+        InvertSelectionToolStripMenuItem = Nothing
+
+    End Sub
+
 
     Private Sub FormChild2_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -760,7 +950,6 @@ Public Class FormFlowsheet
             Else
 
                 Me.m_overrideCloseQuestion = True
-                Me.Close()
 
             End If
 
@@ -1169,7 +1358,7 @@ Public Class FormFlowsheet
 
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
 
-        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Opened Solution Inspector", Nothing)
+        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Results Viewing", "Opened Solution Inspector", Nothing)
 
         RaiseEvent ToolOpened("Solution Inspector", New EventArgs())
 
@@ -1191,6 +1380,12 @@ Public Class FormFlowsheet
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
 
+        RequestFlowsheetCalculation(Nothing, False)
+
+    End Sub
+
+    Private Sub RequestFlowsheetCalculation(obj As ISimulationObject, wait As Boolean)
+
         If Not DynamicMode Then
 
             UIThreadInvoke(Sub()
@@ -1204,7 +1399,7 @@ Public Class FormFlowsheet
             data.Add("Reactions", Me.Reactions.Count)
             data.Add("Property Packages", Me.PropertyPackages.Count)
 
-            FormMain.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
+            My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
 
             RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
             Settings.TaskCancellationTokenSource = Nothing
@@ -1215,7 +1410,10 @@ Public Class FormFlowsheet
                                                          If ExternalFlowsheetSolver IsNot Nothing Then
                                                              Return ExternalFlowsheetSolver.SolveFlowsheet(Me)
                                                          Else
-                                                             Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
+                                                             If obj IsNot Nothing Then
+                                                                 Return FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, obj.Name)
+                                                             Else
+                                                                 Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
                                                                 Sub()
                                                                     If My.Settings.ObjectEditor = 1 Then
                                                                         Me.UIThread(Sub()
@@ -1224,6 +1422,7 @@ Public Class FormFlowsheet
                                                                                     End Sub)
                                                                     End If
                                                                 End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                                             End If
                                                          End If
                                                      End Function)
             t.ContinueWith(Sub(tres)
@@ -1233,9 +1432,11 @@ Public Class FormFlowsheet
                                'Next
                            End Sub)
             t.Start()
+            If wait Then t.Wait()
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)
@@ -1256,18 +1457,23 @@ Public Class FormFlowsheet
                 With tsmi
                     .Text = obj.GraphicObject.Tag & " / " & attchu.Name
                     .Image = My.Resources.cog
+                    .Tag = attchu
                 End With
-                AddHandler tsmi.Click, Sub()
-                                           Dim f = DirectCast(attchu, DockContent)
-                                           If f.Visible Then
-                                               f.Select()
-                                           Else
-                                               obj.GetFlowsheet.DisplayForm(f)
-                                           End If
-                                       End Sub
+                AddHandler tsmi.Click, AddressOf UtilitiesTSMIHandler
                 UtilitiesTSMI.DropDownItems.Add(tsmi)
             Next
         Next
+
+    End Sub
+
+    Private Sub UtilitiesTSMIHandler(sender As Object, e As EventArgs)
+
+        Dim f = DirectCast(sender.Tag, DockContent)
+        If f.Visible Then
+            f.Select()
+        Else
+            DisplayForm(f)
+        End If
 
     End Sub
 
@@ -1467,7 +1673,7 @@ Public Class FormFlowsheet
 
     Public Sub tsmiExportData_Click(sender As Object, e As EventArgs) Handles tsmiExportData.Click
 
-        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Exported Object Data to Clipboard", Nothing)
+        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Results Viewing", "Exported Object Data to Clipboard", Nothing)
 
         'copy all simulation properties from the selected object to clipboard
         Try
@@ -1587,7 +1793,7 @@ Public Class FormFlowsheet
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
         RaiseEvent ToolOpened("Report Tool", New EventArgs())
-        FormMain.AnalyticsProvider?.RegisterEvent("Results Viewing", "Opened Reporting Tool", Nothing)
+        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Results Viewing", "Opened Reporting Tool", Nothing)
         FrmReport = New FormReportConfig
         Me.FrmReport.Show(Me)
     End Sub
@@ -2895,10 +3101,21 @@ Public Class FormFlowsheet
     Private Event NewMessageSent As NewMessageSentEventHandler
     Public Event StatusChanged()
 
+    Public Sub DisplayBrowserWindow(url As String) Implements IFlowsheet.DisplayBrowserWindow
+        Dim fb As New FormBrowser()
+        fb.Show()
+        fb.DisplayURL(url)
+    End Sub
+
+    Public Sub DisplayDockableBrowserWindow(url As String) Implements IFlowsheet.DisplayDockableBrowserWindow
+        Dim fb As New FormBrowserDockable()
+        fb.Show(dckPanel)
+        fb.DisplayURL(url)
+    End Sub
+
     Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
         Return FormSurface.SplitContainerHorizontal.Panel1.Width
     End Function
-
 
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
         Return FormSurface.SplitContainerHorizontal.Panel1.Height
@@ -3262,33 +3479,19 @@ Public Class FormFlowsheet
 
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
-        UIThreadInvoke(Sub()
-                           Me.FormLog.Grid1.Rows.Clear()
-                       End Sub)
+        RequestFlowsheetCalculation(sender, True)
 
-        If Not DynamicMode Then
-            Dim finishaction = Sub()
-                                   UpdateOpenEditForms()
-                               End Sub
-            If Not sender Is Nothing Then
-                If ExternalFlowsheetSolver IsNot Nothing Then
-                    ExternalFlowsheetSolver.SolveFlowsheet(Me)
-                Else
-                    FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
-                End If
-                UpdateOpenEditForms()
-            Else
-                If ExternalFlowsheetSolver IsNot Nothing Then
-                    ExternalFlowsheetSolver.SolveFlowsheet(Me)
-                Else
-                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
-                                                                                         Nothing, False, False,
-                                                                                         Nothing, Nothing, finishaction)
-                End If
-                UpdateOpenEditForms()
-            End If
-            UpdateInterface()
-        End If
+    End Sub
+
+    Public Sub RequestCalculation2(Wait As Boolean) Implements IFlowsheet.RequestCalculation2
+
+        RequestFlowsheetCalculation(Nothing, Wait)
+
+    End Sub
+
+    Public Sub RequestCalculation3(obj As ISimulationObject, Wait As Boolean) Implements IFlowsheet.RequestCalculation3
+
+        RequestFlowsheetCalculation(obj, Wait)
 
     End Sub
 
@@ -3363,11 +3566,16 @@ Public Class FormFlowsheet
     Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface, IFlowsheet.UpdateInterface
 
         If Not Invalidating Then
-            Me.UIThread(Sub()
-                            Invalidating = True
-                            FormSurface.FControl.Invalidate()
-                            Invalidating = False
-                        End Sub)
+            Invalidating = True
+            If InvokeRequired Then
+                Me.UIThreadInvoke(Sub()
+                                      FormSurface.FControl.Invalidate()
+                                      Invalidating = False
+                                  End Sub)
+            Else
+                FormSurface.FControl.Invalidate()
+                Invalidating = False
+            End If
         End If
 
     End Sub
@@ -3854,7 +4062,7 @@ Public Class FormFlowsheet
 
     Private Sub CriadorDeComponentesSolidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriadorDeComponentesSolidosToolStripMenuItem.Click
 
-        FormMain.AnalyticsProvider?.RegisterEvent("Opened Solid Compound Creator", "", Nothing)
+        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Opened Solid Compound Creator", "", Nothing)
 
         Dim fqc As New FormCreateNewSolid()
         fqc.ShowDialog(Me)
@@ -4243,6 +4451,292 @@ Public Class FormFlowsheet
         For Each obj In SimulationObjects.Values
             obj.SetDirtyStatus(True)
         Next
+
+    End Sub
+
+    Public Function GetAvailableFlowsheetObjectTypeNames() As Array Implements IFlowsheet.GetAvailableFlowsheetObjectTypeNames
+
+        Dim list As New List(Of String)
+
+        list.AddRange({
+         "Controller Block",
+         "Specification Block",
+         "Recycle Block",
+         "Energy Recycle Block",
+         "Stream Mixer",
+         "Stream Splitter",
+         "Pump",
+         "Tank",
+         "Gas-Liquid Separator",
+         "Material Stream",
+         "Energy Stream",
+         "Compressor",
+         "Expander",
+         "Heater",
+         "Cooler",
+         "Pipe Segment",
+         "Valve",
+         "Conversion Reactor",
+         "Equilibrium Reactor",
+         "Gibbs Reactor",
+         "Plug-Flow Reactor (PFR)",
+         "Continuous Stirred Tank Reactor (CSTR)",
+         "Heat Exchanger",
+         "Shortcut Column",
+         "Distillation Column",
+         "Absorption Column", "Absorption/Extraction Column",
+         "Compound Separator",
+         "Solids Separator",
+         "Filter",
+         "Orifice Plate",
+         "Python Script",
+         "Spreadsheet",
+         "Flowsheet",
+         "CAPE-OPEN Unit Operation",
+         "Digital Gauge",
+         "Analog Gauge",
+         "Level Gauge",
+         "PID Controller",
+         "Python Controller",
+         "Input Box",
+         "Switch",
+         "Air Cooler 2",
+         "Gibbs Reactor (Reaktoro)",
+         "Wind Turbine",
+         "Hydroelectric Turbine",
+         "Solar Panel",
+         "Water Electrolyzer",
+         "PEM Fuel Cell (Amphlett)"})
+
+        list.Sort()
+
+        Return list.ToArray()
+
+    End Function
+
+    Public Function AddFlowsheetObject(typename As String, objname As String) As ISimulationObject Implements IFlowsheet.AddFlowsheetObject
+
+        Select Case typename
+
+            Case "Controller Block"
+
+                Return AddObject(ObjectType.OT_Adjust, 50, 50, objname)
+
+            Case "Specification Block"
+
+                Return AddObject(ObjectType.OT_Spec, 50, 50, objname)
+
+            Case "Recycle Block"
+
+                Return AddObject(ObjectType.OT_Recycle, 50, 50, objname)
+
+            Case "Energy Recycle Block"
+
+                Return AddObject(ObjectType.OT_EnergyRecycle, 50, 50, objname)
+
+            Case "Stream Mixer"
+
+                Return AddObject(ObjectType.NodeIn, 50, 50, objname)
+
+            Case "Stream Splitter"
+
+                Return AddObject(ObjectType.NodeOut, 50, 50, objname)
+
+            Case "Pump"
+
+                Return AddObject(ObjectType.Pump, 50, 50, objname)
+
+            Case "Tank"
+
+                Return AddObject(ObjectType.Tank, 50, 50, objname)
+
+            Case "Gas-Liquid Separator"
+
+                Return AddObject(ObjectType.Vessel, 50, 50, objname)
+
+            Case "Material Stream"
+
+                Return AddObject(ObjectType.MaterialStream, 50, 50, objname)
+
+            Case "Energy Stream"
+
+                Return AddObject(ObjectType.EnergyStream, 50, 50, objname)
+
+            Case "Compressor"
+
+                Return AddObject(ObjectType.Compressor, 50, 50, objname)
+
+            Case "Expander"
+
+                Return AddObject(ObjectType.Expander, 50, 50, objname)
+
+            Case "Heater"
+
+                Return AddObject(ObjectType.Heater, 50, 50, objname)
+
+            Case "Cooler"
+
+                Return AddObject(ObjectType.Cooler, 50, 50, objname)
+
+            Case "Pipe Segment"
+
+                Return AddObject(ObjectType.Pipe, 50, 50, objname)
+
+            Case "Valve"
+
+                Return AddObject(ObjectType.Valve, 50, 50, objname)
+
+            Case "Conversion Reactor"
+
+                Return AddObject(ObjectType.RCT_Conversion, 50, 50, objname)
+
+            Case "Equilibrium Reactor"
+
+                Return AddObject(ObjectType.RCT_Equilibrium, 50, 50, objname)
+
+            Case "Gibbs Reactor"
+
+                Return AddObject(ObjectType.RCT_Gibbs, 50, 50, objname)
+
+            Case "Plug-Flow Reactor (PFR)"
+
+                Return AddObject(ObjectType.RCT_PFR, 50, 50, objname)
+
+            Case "Continuous Stirred Tank Reactor (CSTR)"
+
+                Return AddObject(ObjectType.RCT_CSTR, 50, 50, objname)
+
+            Case "Heat Exchanger"
+
+                Return AddObject(ObjectType.HeatExchanger, 50, 50, objname)
+
+            Case "Shortcut Column"
+
+                Return AddObject(ObjectType.ShortcutColumn, 50, 50, objname)
+
+            Case "Distillation Column"
+
+                Return AddObject(ObjectType.DistillationColumn, 50, 50, objname)
+
+            Case "Absorption Column", "Absorption/Extraction Column"
+
+                Return AddObject(ObjectType.AbsorptionColumn, 50, 50, objname)
+
+            Case "Compound Separator"
+
+                Return AddObject(ObjectType.ComponentSeparator, 50, 50, objname)
+
+            Case "Solids Separator"
+
+                Return AddObject(ObjectType.SolidSeparator, 50, 50, objname)
+
+            Case "Filter"
+
+                Return AddObject(ObjectType.Filter, 50, 50, objname)
+
+            Case "Orifice Plate"
+
+                Return AddObject(ObjectType.OrificePlate, 50, 50, objname)
+
+            Case "Python Script"
+
+                Return AddObject(ObjectType.CustomUO, 50, 50, objname)
+
+            Case "Spreadsheet"
+
+                Return AddObject(ObjectType.ExcelUO, 50, 50, objname)
+
+            Case "Flowsheet"
+
+                Return AddObject(ObjectType.FlowsheetUO, 50, 50, objname)
+
+            Case "CAPE-OPEN Unit Operation"
+
+                Return AddObject(ObjectType.CapeOpenUO, 50, 50, objname)
+
+            Case "Digital Gauge"
+
+                Return AddObject(ObjectType.DigitalGauge, 50, 50, objname)
+
+            Case "Analog Gauge"
+
+                Return AddObject(ObjectType.AnalogGauge, 50, 50, objname)
+
+            Case "Level Gauge"
+
+                Return AddObject(ObjectType.LevelGauge, 50, 50, objname)
+
+            Case "PID Controller"
+
+                Return AddObject(ObjectType.Controller_PID, 50, 50, objname)
+
+            Case "Python Controller"
+
+                Return AddObject(ObjectType.Controller_Python, 50, 50, objname)
+
+            Case "Input Box"
+
+                Return AddObject(ObjectType.Input, 50, 50, objname)
+
+            Case "Switch"
+
+                Return AddObject(ObjectType.Switch, 50, 50, objname)
+
+            Case "Air Cooler 2"
+
+                Return AddObject(ObjectType.AirCooler2, 50, 50, objname)
+
+            Case "Gibbs Reactor (Reaktoro)"
+
+                Return AddObject(ObjectType.RCT_GibbsReaktoro, 50, 50, objname)
+
+            Case "Wind Turbine"
+
+                Return AddObject(ObjectType.WindTurbine, 50, 50, objname)
+
+            Case "Hydroelectric Turbine"
+
+                Return AddObject(ObjectType.HydroelectricTurbine, 50, 50, objname)
+
+            Case "Solar Panel"
+
+                Return AddObject(ObjectType.SolarPanel, 50, 50, objname)
+
+            Case "Water Electrolyzer"
+
+                Return AddObject(ObjectType.WaterElectrolyzer, 50, 50, objname)
+
+            Case "PEM Fuel Cell (Amphlett)"
+
+                Return AddObject(ObjectType.PEMFuelCell, 50, 50, objname)
+
+            Case Else
+
+                Return Nothing
+
+        End Select
+
+    End Function
+
+    Private Sub MessagePumpTimer_Tick(sender As Object, e As EventArgs) Handles MessagePumpTimer.Tick
+
+        If Not SupressMessages Then
+
+            SyncLock MessagePump
+
+                If MessagePump.Count > 0 Then
+
+                    For Each item In MessagePump
+                        ShowMessageInternal(item.Item1, item.Item2, item.Item3)
+                    Next
+
+                    MessagePump.Clear()
+
+                End If
+
+            End SyncLock
+
+        End If
 
     End Sub
 

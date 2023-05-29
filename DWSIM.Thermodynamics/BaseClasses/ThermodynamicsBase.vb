@@ -1374,6 +1374,14 @@ Namespace BaseClasses
 
         Public Property idealGasHeatCapacityRatio As Double? Implements IPhaseProperties.idealGasHeatCapacityRatio
 
+        Public Property CO2loading As Double? Implements IPhaseProperties.CO2loading
+
+        Public Property CO2partialpressure As Double? Implements IPhaseProperties.CO2partialpressure
+
+        Public Property H2Sloading As Double? Implements IPhaseProperties.H2Sloading
+
+        Public Property H2Spartialpressure As Double? Implements IPhaseProperties.H2Spartialpressure
+
     End Class
 
     <System.Serializable()> Public Class InteractionParameter
@@ -1431,6 +1439,9 @@ Namespace BaseClasses
     <System.Serializable()> Public Class ConstantProperties
 
         Implements ICloneable, Interfaces.ICustomXMLSerialization, Interfaces.ICompoundConstantProperties
+
+        Private Shared _unif As New PropertyPackages.Auxiliary.Unifac
+        Private Shared _modf As New PropertyPackages.Auxiliary.Modfac
 
         Public Sub New()
 
@@ -1547,14 +1558,11 @@ Namespace BaseClasses
                 Next
             End If
 
-            Dim unif As New PropertyPackages.Auxiliary.Unifac
-            Dim modf As New PropertyPackages.Auxiliary.Modfac
-
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "UNIFACGroups").Elements
                 If xel2.@Name Is Nothing Then
                     Me.UNIFACGroups.Add(xel2.@GroupID.ToString, xel2.@Value)
                 Else
-                    Dim id As Integer = unif.Group2ID(xel2.@Name)
+                    Dim id As Integer = _unif.Group2ID(xel2.@Name)
                     Me.UNIFACGroups.Add(id.ToString, xel2.@Value)
                 End If
             Next
@@ -1563,7 +1571,7 @@ Namespace BaseClasses
                 If xel2.@Name Is Nothing Then
                     Me.MODFACGroups.Add(xel2.@GroupID.ToString, xel2.@Value)
                 Else
-                    Dim id As Integer = modf.Group2ID(xel2.@Name)
+                    Dim id As Integer = _modf.Group2ID(xel2.@Name)
                     Me.MODFACGroups.Add(id.ToString, xel2.@Value)
                 End If
             Next
@@ -1577,9 +1585,6 @@ Namespace BaseClasses
                     Me.Elements.Add(xel2.@Name, xel2.@Value)
                 End If
             Next
-
-            unif = Nothing
-            modf = Nothing
 
             Return True
 

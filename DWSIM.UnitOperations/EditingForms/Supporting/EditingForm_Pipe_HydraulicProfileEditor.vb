@@ -951,6 +951,13 @@ Imports System.Drawing
             .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
 
+        GridMalha.Rows(4 + 1).Cells(0).ReadOnly = True
+        GridMalha.Rows(4 + 2).Cells(0).ReadOnly = True
+        GridMalha.Rows(4 + 1).Cells(0).Value = PipeOp.GetRugosity("Steel", Nothing)
+        GridMalha.Rows(4 + 2).Cells(0).Value = "T-Dep"
+        GridMalha.Rows(4 + 1).Cells(0).Style.BackColor = System.Drawing.Color.LightGray
+        GridMalha.Rows(4 + 2).Cells(0).Style.BackColor = System.Drawing.Color.LightGray
+
         Me.GridMalha.Rows(9).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
         Me.GridMalha.Rows(10).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
 
@@ -1035,10 +1042,15 @@ Imports System.Drawing
             .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
 
+        GridMalha.Rows(4 + 1).Cells(GridMalha.Columns.Count - 1).ReadOnly = True
+        GridMalha.Rows(4 + 2).Cells(GridMalha.Columns.Count - 1).ReadOnly = True
+        GridMalha.Rows(4 + 1).Cells(GridMalha.Columns.Count - 1).Value = PipeOp.GetRugosity("Steel", Nothing)
+        GridMalha.Rows(4 + 2).Cells(GridMalha.Columns.Count - 1).Value = "T-Dep"
+        GridMalha.Rows(4 + 1).Cells(GridMalha.Columns.Count - 1).Style.BackColor = System.Drawing.Color.LightGray
+        GridMalha.Rows(4 + 2).Cells(GridMalha.Columns.Count - 1).Style.BackColor = System.Drawing.Color.LightGray
+
         Me.GridMalha.Rows(9).Cells(GridMalha.Columns.Count - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
         Me.GridMalha.Rows(10).Cells(GridMalha.Columns.Count - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
-
-
 
     End Sub
 
@@ -1372,6 +1384,36 @@ Imports System.Drawing
                 GridMalha.Rows(7).Cells(psec.Indice - 1).Style.BackColor = Nothing
                 GridMalha.Rows(8).Cells(psec.Indice - 1).Style.BackColor = Nothing
                 GridMalha.Rows(9).Cells(psec.Indice - 1).Style.BackColor = Nothing
+            End If
+            Dim material = GridMalha.Rows(4).Cells(psec.Indice - 1).Value.ToString()
+            If material IsNot Nothing Then
+                If material.Contains("User") Or material.Contains("Usu") Then
+                    material = "UserDefined"
+                End If
+                If material.ToString <> "UserDefined" Then
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).ReadOnly = True
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).ReadOnly = True
+                    Try
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = PipeOp.GetRugosity(material, PipeOp.Profile.Sections(psec.Indice - 1 + 1))
+                    Catch ex As Exception
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = PipeOp.GetRugosity(material, Nothing)
+                    End Try
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Value = "T-Dep"
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Style.BackColor = System.Drawing.Color.LightGray
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Style.BackColor = System.Drawing.Color.LightGray
+                Else
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).ReadOnly = False
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).ReadOnly = False
+                    If PipeOp.Profile.Sections.ContainsKey(psec.Indice - 1 + 1) Then
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = PipeOp.Profile.Sections(psec.Indice - 1 + 1).PipeWallRugosity
+                        GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Value = PipeOp.Profile.Sections(psec.Indice - 1 + 1).PipeWallThermalConductivityExpression
+                    Else
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = 0.00001
+                        GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Value = ""
+                    End If
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Style.BackColor = Nothing
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Style.BackColor = Nothing
+                End If
             End If
         Next
         psec = Nothing

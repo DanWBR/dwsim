@@ -371,7 +371,7 @@ Public Class GraphicsSurface
             .StrokeWidth = 2
         End With
 
-        If Not GlobalDrawOverride Is Nothing Then
+        If GlobalDrawOverride Is Nothing Then
             For Each dobj As GraphicObject In Me.SelectedObjects.Values
                 dobj.Selected = True
                 If dobj.Rotation <> 0 Then
@@ -402,7 +402,6 @@ Public Class GraphicsSurface
                Not TypeOf dobj Is Tables.FloatingTableGraphic Then
 
                 If TypeOf dobj Is ShapeGraphic Then
-                    'DirectCast(dobj, ShapeGraphic).Fill = False
                     DirectCast(dobj, ShapeGraphic).LineWidth = 1
                     DirectCast(dobj, ShapeGraphic).UpdateStatus()
                 End If

@@ -1,8 +1,43 @@
-﻿Adam Kovalovszki
+﻿🥇 Lauterbach Verfahrenstechnik GmbH
+🥈 Alexander Semenyak
+🥈 Sukin Oh
+🥈 Jane Ferris
+🌟 Adam Kovalovszki
+🌟 Alfred Gongaware
+🌟 Alberto Baumeister
+🌟 Bryan Evans
+🌟 Cameron Paul Ward
+🌟 Carlos Reetz
+🌟 Casey Houston
+🌟 Christian Hornhofer
+🌟 Dave Carpency
+🌟 Domenico Marchese
+🌟 George Brindle
+🌟 Gerry Agnew
+🌟 Henk Fikkert
+🌟 H-Tec Systems GmbH
+🌟 Javier Fontalvo
+🌟 Jens Greimeier
+🌟 Jonathan
+🌟 Leonard Seed
+🌟 Lorenzo Giuseppe Montani
+🌟 Martin Heiser
+🌟 Michael Papantoniou
+🌟 Michael Saucier
+🌟 MYSim Corp.
+🌟 Rafael Melo-González
+🌟 Renato Corrêa Arrieche
+🌟 Richard Huntington
+🌟 Rida Bin Hashim
+🌟 Roland Berger
+🌟 Ronald J. Dunbar
+🌟 Ronald Visness
+🌟 Steven Sandoval
+🌟 Tino Josef Ritter
+🌟 Yoshihide Watabe
 Alberto Baumeister
 Alex Platon
 Alexander Semenyak
-Alfred Gongaware
 Andras Nady
 Anders Andreasen
 Andrew Dickson
@@ -10,53 +45,32 @@ Bednarz Marc
 Bernhard Seyfang
 Bruce Bishkin
 Bruce Rising
-Bryan Evans
-Cameron Paul Ward
 Camilo Gantiva
-Carlos G. C. Reetz
-Casey Houston
-Christian Hornhofer
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
 Daniel Bajolet
 Daniel Dornellas Athayde
-Dave Carpency
 David Miller
 David Whitlock
-Domenico Marchese
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Cardoso
 Gokhan Candan 
-George Brindle
-Gerry Agnew
 Guenther Holzer
 Henar Portero
-Henk Fikkert
 Hep Ingham
-H-Tec Systems GmbH
 Hurudza
-Jane Ferris
-Javier Fontalvo
-Jens Greimeier
 John Kossik
-Jonathan
 Joseph Attia
 Kenneth Troldal
 Kiran Pashikanti
-Lauterbach Verfahrenstechnik GmbH
-Leonard Seed
 Les Waymont
 Lewis Estall
-Lorenzo Giuseppe Montani
 Luca Finardi
 Marcos Silva
-Martin Heiser
 Masahiro Sakai
-Michael Papantoniou
 Mohan Vaze
-MYSim Corp.
 Nicolas Spogis
 Okechukwu Nwadigo
 Pablo Jimenez
@@ -65,19 +79,11 @@ Pedro Sabóia
 Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
-Richard Huntington
 Rick Kempf
-Rida Bin Hashim
-Roland Berger
-Ronald J. Dunbar
-Ronald Visness
 Rupert Easter
 Ryszard Sadowski
 Shailesh Paranjpe
 Shankar Ananth
-Steven Sandoval
 Tetsuo Fuchino
 Tibor Lányi
-Tino Josef Ritter
 Will Flores
-Yoshihide Watabe

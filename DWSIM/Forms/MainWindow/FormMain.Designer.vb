@@ -69,8 +69,7 @@ Partial Class FormMain
         Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PainelDeBoasvindasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UsersGuideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -369,24 +368,17 @@ Partial Class FormMain
         '
         'HelpTSMI
         '
-        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DocumentacaoToolStripMenuItem, Me.DWSIMNaInternetToolStripMenuItem, Me.WhatsNewToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsersGuideToolStripMenuItem, Me.DWSIMNaInternetToolStripMenuItem, Me.WhatsNewToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.HelpTSMI.MergeIndex = 102
         Me.HelpTSMI.Name = "HelpTSMI"
         resources.ApplyResources(Me.HelpTSMI, "HelpTSMI")
         '
-        'DocumentacaoToolStripMenuItem
+        'UsersGuideToolStripMenuItem
         '
-        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GuiaDoUsuarioToolStripMenuItem})
-        Me.DocumentacaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.book_open
-        Me.DocumentacaoToolStripMenuItem.Name = "DocumentacaoToolStripMenuItem"
-        resources.ApplyResources(Me.DocumentacaoToolStripMenuItem, "DocumentacaoToolStripMenuItem")
-        '
-        'GuiaDoUsuarioToolStripMenuItem
-        '
-        Me.GuiaDoUsuarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
-        Me.GuiaDoUsuarioToolStripMenuItem.Name = "GuiaDoUsuarioToolStripMenuItem"
-        resources.ApplyResources(Me.GuiaDoUsuarioToolStripMenuItem, "GuiaDoUsuarioToolStripMenuItem")
+        Me.UsersGuideToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.user_manual_80px
+        Me.UsersGuideToolStripMenuItem.Name = "UsersGuideToolStripMenuItem"
+        resources.ApplyResources(Me.UsersGuideToolStripMenuItem, "UsersGuideToolStripMenuItem")
         '
         'DWSIMNaInternetToolStripMenuItem
         '
@@ -419,7 +411,7 @@ Partial Class FormMain
         '
         'WhatsNewToolStripMenuItem
         '
-        Me.WhatsNewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icon_info
+        Me.WhatsNewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.new_60px
         Me.WhatsNewToolStripMenuItem.Name = "WhatsNewToolStripMenuItem"
         resources.ApplyResources(Me.WhatsNewToolStripMenuItem, "WhatsNewToolStripMenuItem")
         '
@@ -863,7 +855,9 @@ Partial Class FormMain
 
         If Not Settings.CAPEOPENMode Then
             AddPropPacks()
-            AddExternalUOs()
+            If My.Settings.LoadExtensionsAndPlugins Or FormMain.IsPro Then
+                AddExternalUOs()
+            End If
             GetComponents()
         End If
 
@@ -890,7 +884,9 @@ Partial Class FormMain
 
         End With
 
-        LoadExtenders()
+        If My.Settings.LoadExtensionsAndPlugins Or FormMain.IsPro Then
+            LoadExtenders()
+        End If
 
         UpdateIcon()
 
@@ -927,7 +923,6 @@ Partial Class FormMain
     Friend WithEvents NovoEstudoDoCriadorDeComponentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents tsmiSamples As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoRegressaoUNIFACIPs As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents GuiaDoUsuarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
     Friend WithEvents ButtonClose As System.Windows.Forms.Button
     Friend WithEvents ViewTSMI As System.Windows.Forms.ToolStripMenuItem
@@ -954,7 +949,6 @@ Partial Class FormMain
     Friend WithEvents LogoutDropdown As ToolStripDropDownButton
     Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LoggedInS365Button As ToolStripMenuItem
-    Public WithEvents DocumentacaoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiFreeProTrial As ToolStripMenuItem
     Public WithEvents AbrirDoDashboardToolStripMenuItem As ToolStripMenuItem
     Public WithEvents SaveToDashboardTSMI As ToolStripMenuItem
@@ -970,4 +964,5 @@ Partial Class FormMain
     Friend WithEvents WhatsNewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiPrivateSupport As ToolStripMenuItem
     Public WithEvents tsbQuickQuestion As ToolStripDropDownButton
+    Friend WithEvents UsersGuideToolStripMenuItem As ToolStripMenuItem
 End Class

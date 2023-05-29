@@ -1264,7 +1264,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                                  K(ipar) = Kant(ipar)
                                                                              End If
                                                                          Catch ex As Exception
-                                                                             Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), ipar, P(ipar), xc.ToArrayString()), ex)
+                                                                             Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), ipar, P(ipar), xc(ipar).ToArrayString()), ex)
                                                                          End Try
                                                                      End Sub)
                                                         End Sub,
@@ -1283,7 +1283,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                     tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
                                 End If
                             Catch ex As Exception
-                                Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), i, P(i), xc.ToArrayString()), ex)
+                                Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), i, P(i), xc(i).ToArrayString()), ex)
                             End Try
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
@@ -1677,9 +1677,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         reporter?.AppendLine("========================================================")
                         reporter?.AppendLine()
 
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}{3,26}", "Iteration", "Temperature Error"))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
                         For i = 0 To t_error_hist.Count - 1
-                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}{3,26:G6}", i + 1, t_error_hist(i)))
+                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
                         Next
 
                         reporter?.AppendLine("========================================================")
@@ -1702,9 +1702,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     reporter?.AppendLine("========================================================")
                     reporter?.AppendLine()
 
-                    reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}{3,26}", "Iteration", "Temperature Error"))
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
                     For i = 0 To t_error_hist.Count - 1
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}{3,26:G6}", i + 1, t_error_hist(i)))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
                     Next
 
                     reporter?.AppendLine("========================================================")

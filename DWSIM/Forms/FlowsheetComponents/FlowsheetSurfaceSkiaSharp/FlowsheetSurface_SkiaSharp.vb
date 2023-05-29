@@ -29,11 +29,14 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public FlowsheetSurface As Drawing.SkiaSharp.GraphicsSurface
 
-    Public FControl As Control
+    Public FControl As FlowsheetSurfaceControl
 
     Public Loaded As Boolean = False
 
     Public AnimationTimer As New System.Timers.Timer(42) '24 fps
+
+    Private Handlers As New List(Of EventHandler)
+    Private TSMenuItems As New List(Of ToolStripMenuItem)
 
     Public Sub New()
 
@@ -47,21 +50,11 @@ Public Class FlowsheetSurface_SkiaSharp
         ToolStrip1.Location = New Point(0, ToolStrip1.Height)
         ToolStripContainer1.TopToolStripPanel.ResumeLayout()
 
-        If My.Settings.FlowsheetRenderer = 0 Then
-            Dim fscontrol As New FlowsheetSurfaceControl
-            fscontrol.Dock = DockStyle.Fill
-            fscontrol.FlowsheetObject = Flowsheet
-            FlowsheetSurface = fscontrol.FlowsheetSurface
-            FControl = fscontrol
-            FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "Software", Nothing)
-        Else
-            Dim fscontrol As New FlowsheetSurfaceGLControl
-            fscontrol.Dock = DockStyle.Fill
-            fscontrol.FlowsheetObject = Flowsheet
-            FlowsheetSurface = fscontrol.FlowsheetSurface
-            FControl = fscontrol
-            FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "OpenGL", Nothing)
-        End If
+        FControl = New FlowsheetSurfaceControl
+        FControl.Dock = DockStyle.Fill
+        FControl.FlowsheetObject = Flowsheet
+        FlowsheetSurface = FControl.FlowsheetSurface
+        FormMain.AnalyticsProvider?.RegisterEvent("Flowsheet Renderer", "Software", Nothing)
 
         FlowsheetSurface.Zoom = Settings.DpiScale
 
@@ -69,11 +62,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Sub HandleKeyDown(e As KeyEventArgs)
 
-        If My.Settings.FlowsheetRenderer = 0 Then
-            DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetDesignSurface_KeyDown(Me, e)
-        Else
-            DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetDesignSurface_KeyDown(Me, e)
-        End If
+        FControl.FlowsheetDesignSurface_KeyDown(Me, e)
 
     End Sub
 
@@ -125,11 +114,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         FlowsheetSurface.Flowsheet = Flowsheet
 
-        If My.Settings.FlowsheetRenderer = 0 Then
-            DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
-        Else
-            DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetObject = Flowsheet
-        End If
+        DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
 
         PanelFlowsheetControl.Controls.Add(FControl)
 
@@ -165,28 +150,33 @@ Public Class FlowsheetSurface_SkiaSharp
             Try
                 If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     For Each item In extender.Collection
-                        Dim exttsmi As New ToolStripMenuItem
-                        exttsmi.Text = item.DisplayText
-                        exttsmi.Image = item.DisplayImage
-                        AddHandler exttsmi.Click, Sub(s2, e2)
-                                                      item.SetMainWindow(My.Application.MainWindowForm)
-                                                      item.SetFlowsheet(Flowsheet)
-                                                      item.Run()
-                                                  End Sub
-                        Select Case extender.Category
-                            Case ExtenderCategory.FlowsheetSurfaceNotSelected
-                                If item.InsertAtPosition > 0 Then
-                                    CMS_NoSel.Items.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    CMS_NoSel.Items.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.FlowsheetSurfaceSelected
-                                If item.InsertAtPosition > 0 Then
-                                    CMS_Sel.Items.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    CMS_Sel.Items.Add(exttsmi)
-                                End If
-                        End Select
+                        If extender.Category = ExtenderCategory.FlowsheetSurfaceNotSelected Or extender.Category = ExtenderCategory.FlowsheetSurfaceSelected Then
+                            Dim exttsmi As New ToolStripMenuItem
+                            exttsmi.Text = item.DisplayText
+                            exttsmi.Image = item.DisplayImage
+                            Dim h1 = Sub(s2, e2)
+                                         item.SetMainWindow(My.Application.MainWindowForm)
+                                         item.SetFlowsheet(Flowsheet)
+                                         item.Run()
+                                     End Sub
+                            Handlers.Add(h1)
+                            AddHandler exttsmi.Click, h1
+                            TSMenuItems.Add(exttsmi)
+                            Select Case extender.Category
+                                Case ExtenderCategory.FlowsheetSurfaceNotSelected
+                                    If item.InsertAtPosition > 0 Then
+                                        CMS_NoSel.Items.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        CMS_NoSel.Items.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.FlowsheetSurfaceSelected
+                                    If item.InsertAtPosition > 0 Then
+                                        CMS_Sel.Items.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        CMS_Sel.Items.Add(exttsmi)
+                                    End If
+                            End Select
+                        End If
                     Next
                 End If
             Catch ex As Exception
@@ -4151,6 +4141,41 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub FlowsheetSurface_SkiaSharp_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
         HandleKeyDown(e)
+
+    End Sub
+
+    Public Sub ReleaseResources()
+
+        FControl.FlowsheetObject = Nothing
+        FControl.FlowsheetSurface = Nothing
+        Flowsheet = Nothing
+        FlowsheetSurface.Flowsheet = Nothing
+        FlowsheetSurface = Nothing
+
+        'unload context menu extenders
+        For Each extender In My.Application.MainWindowForm.Extenders.Values
+            Try
+                If extender.Level = ExtenderLevel.FlowsheetWindow Then
+                    For Each item In extender.Collection
+                        If TypeOf item Is IExtender3 Then
+                            DirectCast(item, IExtender3).ReleaseResources()
+                        Else
+                            item.SetFlowsheet(Nothing)
+                        End If
+                    Next
+                End If
+            Catch ex As Exception
+            End Try
+        Next
+
+        Dim i = 0
+        For Each tsmi In TSMenuItems
+            RemoveHandler tsmi.Click, Handlers(i)
+            i += 1
+        Next
+
+        Handlers.Clear()
+        TSMenuItems.Clear()
 
     End Sub
 

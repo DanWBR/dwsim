@@ -319,7 +319,7 @@ Public Class EditingForm_ReactorPFR
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 
