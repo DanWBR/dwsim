@@ -45,7 +45,10 @@ Partial Class FormConfigureMasterTable
         Me.Label5 = New System.Windows.Forms.Label()
         Me.nupLines = New System.Windows.Forms.NumericUpDown()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.nupFS = New System.Windows.Forms.NumericUpDown()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.nupLines, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nupFS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -185,11 +188,25 @@ Partial Class FormConfigureMasterTable
         Me.Button6.Name = "Button6"
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'nupFS
+        '
+        resources.ApplyResources(Me.nupFS, "nupFS")
+        Me.nupFS.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
+        Me.nupFS.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nupFS.Name = "nupFS"
+        Me.nupFS.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        '
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.Controls.Add(Me.nupFS)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.nupLines)
         Me.Controls.Add(Me.Label5)
@@ -213,6 +230,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigureMasterTable"
         CType(Me.nupLines, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nupFS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -239,4 +257,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents Label5 As Label
     Friend WithEvents nupLines As NumericUpDown
     Friend WithEvents Button6 As Button
+    Friend WithEvents nupFS As NumericUpDown
+    Friend WithEvents Label6 As Label
 End Class

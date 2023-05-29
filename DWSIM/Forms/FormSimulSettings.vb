@@ -61,7 +61,9 @@ Public Class FormSimulSettings
         Dim w = 900 * GlobalSettings.Settings.DpiScale
         Dim h = 600 * GlobalSettings.Settings.DpiScale
 
-        Me.Pane.FloatWindow.SetBounds((sw - w) / 2, (sh - h) / 2, w, h)
+        If Me.Pane IsNot Nothing Then
+            Me.Pane.FloatWindow.SetBounds((sw - w) / 2, (sh - h) / 2, w, h)
+        End If
 
         Me.TabText = Me.Text
 
