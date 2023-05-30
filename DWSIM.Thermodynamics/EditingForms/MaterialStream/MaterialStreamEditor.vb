@@ -736,7 +736,7 @@ Public Class MaterialStreamEditor
                     .Add(New Object() {"pH", refval, ""})
 
                     refval = MatStream.Phases(3).Properties.CO2loading.GetValueOrDefault
-                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CO2 Loading"), val, ""})
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CO2 Loading"), refval, ""})
 
                 End If
 
