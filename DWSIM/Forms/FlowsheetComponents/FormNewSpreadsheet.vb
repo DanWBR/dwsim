@@ -786,8 +786,11 @@ Public Class FormNewSpreadsheet
 
 #If Not LINUX Then
 
-        Flowsheet.MenuStrip1.Items.Remove(SpreadsheetControl.SpreadsheetTSMI)
-        SpreadsheetControl.SpreadsheetTSMI.Dispose()
+        Try
+            Flowsheet?.MenuStrip1.Items.Remove(SpreadsheetControl.SpreadsheetTSMI)
+            SpreadsheetControl?.SpreadsheetTSMI.Dispose()
+        Catch ex As Exception
+        End Try
 
 #End If
 

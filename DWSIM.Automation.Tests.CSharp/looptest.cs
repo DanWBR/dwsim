@@ -18,21 +18,20 @@ public class LoopTest
 
         var interf = new DWSIM.Automation.Automation3();
 
+        var sim = interf.LoadFlowsheet(Path.Combine("samples", "Biodiesel Production.dwxmz"));
+
+        sim.SetMessageListener((s, mt) => Console.WriteLine(s));
+
         for (int i = 0; i < 100; i++)
         {
 
-            // load Cavett's Problem simulation file
-            var sim = interf.LoadFlowsheet(Path.Combine("samples", "Biodiesel Production.dwxmz"));
-
-            sim.SetMessageListener((s, mt) => Console.WriteLine(s));
-
             interf.CalculateFlowsheet2(sim);
 
-            sim = null;
-
-            interf.ReleaseResources();
-
         }
+
+        sim = null;
+
+        interf.ReleaseResources();
 
         sw.Stop();
 
