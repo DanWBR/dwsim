@@ -1923,7 +1923,7 @@ Namespace PropertyPackages
                 If Me.FlashBase.FlashSettings(Enums.FlashSetting.CalculateBubbleAndDewPoints) Then
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
-                        Dim myres As Object = Me.FlashBase.Flash_PV(Vz, P, 0, 0, Me)
+                        Dim myres As Object = Me.FlashBase.Flash_PV(Vz, P, 0, T, Me)
                         'check if liquid phase is stable.
                         Dim myres2 As Object = Me.FlashBase.Flash_PT(Vz, P, myres(4), Me)
                         If myres2(5) > 0.0# Then
@@ -1945,7 +1945,7 @@ Namespace PropertyPackages
                     End Try
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
-                        Dim myres As Object = Me.FlashBase.Flash_TV(Vz, T, 0, 0, Me)
+                        Dim myres As Object = Me.FlashBase.Flash_TV(Vz, T, 0, P, Me)
                         'check if liquid phase is stable.
                         Dim myres2 As Object = Me.FlashBase.Flash_PT(Vz, myres(4), T, Me)
                         If myres2(5) > 0.0# Then
@@ -1960,7 +1960,7 @@ Namespace PropertyPackages
                     End Try
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
-                        result = Me.FlashBase.Flash_TV(Vz, T, 1.0, T, Me)(4)
+                        result = Me.FlashBase.Flash_TV(Vz, T, 1.0, P, Me)(4)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewPressure = result
                     Catch ex As Exception
                         Me.CurrentMaterialStream.Flowsheet.ShowMessage("Dew Pressure calculation error: " & ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
