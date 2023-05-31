@@ -1780,6 +1780,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Loop Until t_error < tolerance * ns / 100 And ic > 1
 
+            'check mass balance
+            For i = 0 To ns
+                If Math.Abs(yc(i).SumY - 1.0) > 0.001 Then
+                    Throw New Exception("Could not converge to a valid solution")
+                End If
+                If Math.Abs(xc(i).SumY - 1.0) > 0.001 Then
+                    Throw New Exception("Could not converge to a valid solution")
+                End If
+                If Lj(i) < 0.0 Or Vj(i) < 0.0 Or LSSj(i) < 0.0 Then
+                    Throw New Exception("Could not converge to a valid solution. Please check the column specs")
+                End If
+            Next
+
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
