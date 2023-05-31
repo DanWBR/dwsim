@@ -339,6 +339,20 @@ Namespace PropertyPackages
 
             Me.LoadUserDBs()
 
+            'load additional compounds
+
+            Try
+                Me.LoadAdditionalCompounds()
+            Catch ex As Exception
+            End Try
+
+        End Sub
+
+        Public Sub LoadAdditionalCompounds()
+            Dim comps = Databases.UserDB.LoadAdditionalCompounds()
+            For Each cp As BaseClasses.ConstantProperties In comps
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
         End Sub
 
         Public Sub LoadCheDLDB()
