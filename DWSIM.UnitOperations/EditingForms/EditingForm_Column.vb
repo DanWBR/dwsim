@@ -151,6 +151,12 @@ Public Class EditingForm_Column
             cbColPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbColPDrop.SelectedItem = units.deltaP
 
+            cbTS.Items.Clear()
+            cbTS.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.distance).ToArray)
+            cbTS.SelectedItem = units.distance
+
+            tbTS.Text = .TraySpacing.ConvertFromSI(units.distance).ToString(nf)
+
             tbColPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .ColumnPressureDrop).ToString(nf)
 
             tbNStages.Text = .NumberOfStages
@@ -751,7 +757,7 @@ Public Class EditingForm_Column
 
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
                                                                                 tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown,
-                                                                                tbSubcooling.TextChanged, tbColPDrop.TextChanged
+                                                                                tbSubcooling.TextChanged, tbColPDrop.TextChanged, tbTS.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then
@@ -874,6 +880,18 @@ Public Class EditingForm_Column
         fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
         fr.TextBox1.DeselectAll()
         SimObject.FlowSheet.DisplayForm(fr)
+
+    End Sub
+
+    Private Sub tbTS_KeyDown(sender As Object, e As KeyEventArgs) Handles tbTS.KeyDown
+
+        If Loaded And e.KeyCode = Keys.Enter Then
+
+            SimObject.TraySpacing = su.Converter.ConvertToSI(units.distance, tbTS.Text)
+
+            UpdateInfo()
+
+        End If
 
     End Sub
 

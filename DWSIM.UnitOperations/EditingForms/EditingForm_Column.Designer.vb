@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -95,6 +95,9 @@ Partial Class EditingForm_Column
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.cbTS = New System.Windows.Forms.ComboBox()
+        Me.tbTS = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.tbColPDrop = New System.Windows.Forms.TextBox()
         Me.cbColPDrop = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -718,8 +721,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -727,8 +730,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -736,8 +739,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -761,6 +764,9 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.cbTS)
+        Me.TabPage6.Controls.Add(Me.tbTS)
+        Me.TabPage6.Controls.Add(Me.Label17)
         Me.TabPage6.Controls.Add(Me.chkCreateConvReport)
         Me.TabPage6.Controls.Add(Me.tbColPDrop)
         Me.TabPage6.Controls.Add(Me.cbColPDrop)
@@ -789,6 +795,32 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'cbTS
+        '
+        resources.ApplyResources(Me.cbTS, "cbTS")
+        Me.cbTS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTS.FormattingEnabled = True
+        Me.cbTS.Name = "cbTS"
+        Me.ToolTip1.SetToolTip(Me.cbTS, resources.GetString("cbTS.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbTS, resources.GetString("cbTS.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbTS, resources.GetString("cbTS.ToolTip2"))
+        '
+        'tbTS
+        '
+        resources.ApplyResources(Me.tbTS, "tbTS")
+        Me.tbTS.Name = "tbTS"
+        Me.ToolTipValues.SetToolTip(Me.tbTS, resources.GetString("tbTS.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbTS, resources.GetString("tbTS.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbTS, resources.GetString("tbTS.ToolTip2"))
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip2"))
         '
         'tbColPDrop
         '
@@ -1056,4 +1088,7 @@ Partial Class EditingForm_Column
     Public WithEvents btnViewReport As Button
     Public WithEvents chkCreateConvReport As CheckBox
     Public WithEvents btnViewPropertiesReport As Button
+    Public WithEvents cbTS As ComboBox
+    Public WithEvents tbTS As TextBox
+    Public WithEvents Label17 As Label
 End Class

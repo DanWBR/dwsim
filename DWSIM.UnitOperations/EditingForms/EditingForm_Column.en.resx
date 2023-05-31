@@ -173,11 +173,29 @@
   <data name="TabContainerSpecification.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
+  <data name="TabContainerSpecification.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabContainerSpecification.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 791</value>
+  </data>
+  <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 765</value>
+  </data>
+  <data name="TabCondenser.Text" xml:space="preserve">
+    <value>Condenser</value>
+  </data>
   <data name="chkNoCondenser.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 17</value>
   </data>
   <data name="chkNoCondenser.Text" xml:space="preserve">
     <value>No Condenser (Reboiled Absorber)</value>
+  </data>
+  <data name="PanelCondenser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 38</value>
+  </data>
+  <data name="PanelCondenser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 641</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 204</value>
@@ -311,9 +329,6 @@
   <data name="cbCondSpec.Items8" xml:space="preserve">
     <value>Temperature</value>
   </data>
-  <data name="cbCondSpec.Items9" xml:space="preserve">
-    <value>Feed Recovery</value>
-  </data>
   <data name="cbCondSpec.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 61</value>
   </data>
@@ -344,17 +359,14 @@
   <data name="tbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
   </data>
-  <data name="PanelCondenser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 38</value>
-  </data>
-  <data name="PanelCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 641</value>
-  </data>
-  <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 765</value>
   </data>
-  <data name="TabCondenser.Text" xml:space="preserve">
-    <value>Condenser</value>
+  <data name="TabReboiler.Text" xml:space="preserve">
+    <value>Reboiler</value>
+  </data>
+  <data name="PanelReboiler.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 533</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -388,9 +400,6 @@
   </data>
   <data name="cbRebSpec.Items8" xml:space="preserve">
     <value>Temperature</value>
-  </data>
-  <data name="cbRebSpec.Items9" xml:space="preserve">
-    <value>Feed Recovery</value>
   </data>
   <data name="cbRebSpec.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 8</value>
@@ -428,26 +437,11 @@
   <data name="cbRebSpecUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 21</value>
   </data>
-  <data name="PanelReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 533</value>
-  </data>
   <data name="chkNoReboiler.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 17</value>
   </data>
   <data name="chkNoReboiler.Text" xml:space="preserve">
     <value>No Reboiler (Refluxed Absorber)</value>
-  </data>
-  <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 765</value>
-  </data>
-  <data name="TabReboiler.Text" xml:space="preserve">
-    <value>Reboiler</value>
-  </data>
-  <data name="TabContainerSpecification.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TabContainerSpecification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 791</value>
   </data>
   <data name="cbCondPressureUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -468,7 +462,7 @@
     <value>125, 20</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 75</value>
+    <value>8, 74</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 13</value>
@@ -477,7 +471,7 @@
     <value>Condenser/Top Pressure</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 184</value>
+    <value>8, 191</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -486,13 +480,13 @@
     <value>Convergence Tolerance</value>
   </data>
   <data name="tbConvTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 182</value>
+    <value>208, 189</value>
   </data>
   <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 20</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 158</value>
+    <value>8, 165</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 13</value>
@@ -513,7 +507,7 @@
     <value>222, 21</value>
   </data>
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 155</value>
+    <value>208, 162</value>
   </data>
   <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 20</value>
@@ -629,6 +623,12 @@
   <data name="btnResults.Text" xml:space="preserve">
     <value>View Temperature, Pressure and Composition Profiles</value>
   </data>
+  <data name="gridResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 95</value>
+  </data>
+  <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 697</value>
+  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
@@ -638,11 +638,42 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 95</value>
+  <data name="cbTS.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 697</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbTS.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cbTS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 123</value>
+  </data>
+  <data name="cbTS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 21</value>
+  </data>
+  <data name="tbTS.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbTS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 124</value>
+  </data>
+  <data name="tbTS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="tbTS.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="Label17.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 13</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>Tray Spacing (Sizing)</value>
   </data>
   <data name="tbColPDrop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -731,17 +762,32 @@
   <data name="TabConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 29</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Check the boxes for the data sets that you want to use as initial estimates to solve the column.</value>
-  </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>405, 797</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Estimates</value>
+  </data>
+  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 797</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="TabContainerAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 106</value>
+  </data>
+  <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 823</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 29</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Check the boxes for the data sets that you want to use as initial estimates to solve the column.</value>
   </data>
   <data name="btnViewReport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -763,21 +809,6 @@
   </data>
   <data name="btnViewPropertiesReport.Text" xml:space="preserve">
     <value>View Properties Profile</value>
-  </data>
-  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Results</value>
-  </data>
-  <data name="TabContainerAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 106</value>
-  </data>
-  <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 823</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>425, 941</value>
