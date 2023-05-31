@@ -720,6 +720,7 @@ Namespace UnitOperations.Auxiliary.SepOps
             Component_Recovery = 6
             Stream_Ratio = 7
             Temperature = 8
+            Feed_Recovery = 9
         End Enum
 
         Private m_stagenumber As Integer = 0
@@ -2955,6 +2956,27 @@ Namespace UnitOperations
                             End If
                         Else
                             distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                            vaprate = 0.0
+                        End If
+                    End If
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    Dim cvalue = Specs("R").SpecValue / 100.0
+                    Dim pval = sumF * cvalue
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = sumF - pval - sum0_
+                        distrate = 0.0
+                    Else
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - pval - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
+                            Else
+                                distrate = sumF - pval - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - pval - sum0_
                             vaprate = 0.0
                         End If
                     End If

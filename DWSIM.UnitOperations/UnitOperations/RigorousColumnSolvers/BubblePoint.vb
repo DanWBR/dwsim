@@ -879,6 +879,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                       ColumnSpec.SpecType.Component_Molar_Flow_Rate,
                       ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     spval1 = spval1.ConvertToSI(specs("C").SpecUnit)
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    spval1 /= 100.0
             End Select
 
             Select Case specs("R").SType
@@ -889,6 +891,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                       ColumnSpec.SpecType.Component_Molar_Flow_Rate,
                       ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     spval2 = spval2.ConvertToSI(specs("R").SpecUnit)
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    spval2 /= 100.0
             End Select
 
             'step1
@@ -964,6 +968,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If Not rebabs Then
                 Select Case specs("C").SType
+                    Case ColumnSpec.SpecType.Feed_Recovery
+                        LSSj(0) = spval1 * F.SumY
+                        rr = Lj(0) / LSSj(0)
                     Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                         LSSj(0) = spval1 / pp.AUX_MMM(x(0)) * 1000
                         rr = Lj(0) / LSSj(0)
@@ -984,13 +991,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If Not refabs Then
                 Select Case specs("R").SType
+                    Case ColumnSpec.SpecType.Feed_Recovery
+                        B = spval2 * F.SumY
                     Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                         B = spval2 / pp.AUX_MMM(x(ns)) * 1000
                     Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                         B = spval2
-                    'Case ColumnSpec.SpecType.Stream_Ratio
-                    '    B = sumF - LSSj(0) - sumLSS - sumVSS - Vj(0)
-                    '    Vj(ns) = B * spval2
                     Case ColumnSpec.SpecType.Heat_Duty
                         Q(ns) = -spval2
                         Dim sum3, sum4 As Double
@@ -1488,6 +1494,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 If Not rebabs Then
                     Select Case specs("C").SType
+                        Case ColumnSpec.SpecType.Feed_Recovery
+                            LSSj(0) = spval1 * F.SumY
+                            rr = Lj(0) / LSSj(0)
                         Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                             LSSj(0) = spval1 / pp.AUX_MMM(xc(0)) * 1000
                             rr = Lj(0) / LSSj(0)
@@ -1508,6 +1517,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 If Not refabs Then
                     Select Case specs("R").SType
+                        Case ColumnSpec.SpecType.Feed_Recovery
+                            B = spval2 * F.SumY
                         Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                             B = spval2 / pp.AUX_MMM(xc(ns)) * 1000
                         Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
@@ -1937,6 +1948,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     col.Specs("C").CalculatedValue = LSS(0)
                 Case ColumnSpec.SpecType.Heat_Duty
                     col.Specs("C").CalculatedValue = Q(0)
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    col.Specs("C").CalculatedValue = LSS(0) / F.SumY * 100.0
             End Select
 
             Select Case col.Specs("R").SType
@@ -1966,6 +1979,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     col.Specs("R").CalculatedValue = L(ns)
                 Case ColumnSpec.SpecType.Heat_Duty
                     col.Specs("R").CalculatedValue = Q(ns)
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    col.Specs("R").CalculatedValue = L(ns) / F.SumY * 100.0
             End Select
 
             With output

@@ -193,6 +193,9 @@ Public Class EditingForm_Column
                 Case ColumnSpec.SpecType.Temperature
                     cunits = New String() {"K", "R", "C", "F"}
                     cbCondComp.Enabled = False
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    cunits = New String() {"%"}
+                    cbCondComp.Enabled = False
             End Select
             cbCondSpecUnits.Items.Clear()
             cbCondSpecUnits.Items.AddRange(cunits)
@@ -239,6 +242,9 @@ Public Class EditingForm_Column
                     cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     runits = New String() {"K", "R", "C", "F"}
+                    cbRebComp.Enabled = False
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    runits = New String() {"%"}
                     cbRebComp.Enabled = False
             End Select
             cbRebSpecUnits.Items.Clear()
@@ -566,6 +572,9 @@ Public Class EditingForm_Column
             Case ColumnSpec.SpecType.Temperature
                 cunits = New String() {"K", "R", "C", "F"}
                 cbCondComp.Enabled = False
+            Case ColumnSpec.SpecType.Feed_Recovery
+                cunits = New String() {"%"}
+                cbCondComp.Enabled = False
         End Select
         cbCondSpecUnits.Items.Clear()
         cbCondSpecUnits.Items.AddRange(cunits)
@@ -677,6 +686,9 @@ Public Class EditingForm_Column
                 cbRebComp.Enabled = False
             Case ColumnSpec.SpecType.Temperature
                 cunits = New String() {"K", "R", "C", "F"}
+                cbRebComp.Enabled = False
+            Case ColumnSpec.SpecType.Feed_Recovery
+                cunits = New String() {"%"}
                 cbRebComp.Enabled = False
         End Select
         cbRebSpecUnits.Items.Clear()
