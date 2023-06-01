@@ -193,10 +193,13 @@ Public Class FormFileExplorer
 
     Private Sub FormFileExplorer_Activated(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
-        If Visible And Flowsheet IsNot Nothing Then
-            ListFiles()
-            UpdateSize()
-        End If
+        Try
+            If Visible And Flowsheet IsNot Nothing Then
+                ListFiles()
+                UpdateSize()
+            End If
+        Catch ex As Exception
+        End Try
 
     End Sub
 
