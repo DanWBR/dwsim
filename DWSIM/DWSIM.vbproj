@@ -697,6 +697,12 @@
     <Compile Include="Forms\FormComponentsNotFound.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormCompoundList.Designer.vb">
+      <DependentUpon>FormCompoundList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCompoundList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormConfigureChartObject.Designer.vb">
       <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
     </Compile>
@@ -1412,6 +1418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormComponentsNotFound.resx">
       <DependentUpon>FormComponentsNotFound.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCompoundList.resx">
+      <DependentUpon>FormCompoundList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureChartObject.en.resx">
       <DependentUpon>FormConfigureChartObject.vb</DependentUpon>

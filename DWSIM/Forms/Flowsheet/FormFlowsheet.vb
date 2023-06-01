@@ -745,7 +745,7 @@ Public Class FormFlowsheet
         TimerScripts60.Dispose()
 
         FrmStSim1.CurrentFlowsheet = Nothing
-        FrmStSim1.Dispose()
+        FrmStSim1.Close()
 
         FormSpreadsheet.ReleaseResources()
         FormSpreadsheet.Flowsheet = Nothing

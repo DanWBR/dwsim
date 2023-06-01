@@ -502,7 +502,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Application.DoEvents()
 
-        'FlowsheetSolver.FlowsheetSolver.CalculateObject(Flowsheet, obj1.Name)
+        Flowsheet.UpdateOpenEditForms()
 
     End Sub
 
