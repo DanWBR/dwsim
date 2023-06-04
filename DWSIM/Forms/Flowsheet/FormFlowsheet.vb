@@ -671,9 +671,11 @@ Public Class FormFlowsheet
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-        ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
-
-        ToolStripManager.RevertMerge(ToolStrip1)
+        Try
+            ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
+            ToolStripManager.RevertMerge(ToolStrip1)
+        Catch ex As Exception
+        End Try
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
