@@ -307,6 +307,7 @@ namespace DWSIM.UI.Forms
             var btnmSave = new ButtonToolItem { ToolTip = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png", this.GetType().Assembly)) };
 
             var btnmSolve = new ButtonToolItem { ToolTip = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)) };
+            var btnmStop = new ButtonToolItem { ToolTip = "Stop Solving", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png", this.GetType().Assembly)) };
             var btnmSimultSolve = new CheckToolItem { ToolTip = "Enable/Disable Simultaneous Adjust Solver", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Checked_96px.png", this.GetType().Assembly)) };
 
             var btnmComps = new ButtonToolItem { ToolTip = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png", this.GetType().Assembly)) };
@@ -324,6 +325,7 @@ namespace DWSIM.UI.Forms
             {
                 btnmSave.Text = "Save";
                 btnmSolve.Text = "Solve Flowsheet";
+                btnmStop.Text = "Stop Solving";
                 btnmSimultSolve.Text = "E/D Simult. Adj. Solver";
                 btnmComps.Text = "Compounds";
                 btnmBasis.Text = "Basis";
@@ -340,7 +342,7 @@ namespace DWSIM.UI.Forms
                 Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space },
                 btnmComps, btnmBasis, btnmOptions,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
-                btnmSolve, btnmSimultSolve,
+                btnmSolve, btnmStop, btnmSimultSolve,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
                 chkmDynamics, btnmDynManager, btnmDynIntegrator,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space},
@@ -560,6 +562,15 @@ namespace DWSIM.UI.Forms
             btnSolve.Click += (sender, e) => SolveFlowsheet(false);
             btnmSolve.Click += (sender, e) => SolveFlowsheet(false);
             btnSolveC.Click += (sender, e) => SolveFlowsheet(true);
+
+            btnmStop.Click += (sender, e) =>
+            {
+                s.CalculatorStopRequested = true;
+                if (s.TaskCancellationTokenSource != null)
+                {
+                    s.TaskCancellationTokenSource.Cancel();
+                }
+            };
 
             btnSave.Click += (sender, e) => ActSave.Invoke();
             btnmSave.Click += (sender, e) => ActSave.Invoke();
@@ -1540,7 +1551,7 @@ namespace DWSIM.UI.Forms
             var imgheart = new ImageView { Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "heart.png")) };
             var lbldonate = new Label { Text = "Support continuous development and maintenance of DWSIM for as low as 3 USD/month or with a one-time donation." };
 
-            var btnSingleDonation = new Button {Text = "One-Time Donation",  ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnSingleDonation = new Button { Text = "One-Time Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
             var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png", this.GetType().Assembly)).WithSize(16, 16) };
 
             if (s.RunningPlatform() == s.Platform.Linux)
@@ -1550,18 +1561,20 @@ namespace DWSIM.UI.Forms
                 btnMonthlyDonation.Width = (int)(140 * sf);
             }
 
-            btnSingleDonation.Click += (s, e) => {
+            btnSingleDonation.Click += (s, e) =>
+            {
                 "https://www.buymeacoffee.com/dwsim".OpenURL();
             };
 
-            btnMonthlyDonation.Click += (s, e) => {
+            btnMonthlyDonation.Click += (s, e) =>
+            {
                 "https://www.patreon.com/dwsim".OpenURL();
             };
 
             var statuspanel = new StackLayout
             {
                 Orientation = Orientation.Horizontal,
-                Items = { imgheart, lbldonate, btnSingleDonation, btnMonthlyDonation   },
+                Items = { imgheart, lbldonate, btnSingleDonation, btnMonthlyDonation },
                 VerticalContentAlignment = VerticalAlignment.Center,
                 Spacing = 4,
                 Visible = true

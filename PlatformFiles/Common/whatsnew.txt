@@ -1,15 +1,9 @@
-Version 8.4.6
+Version 8.4.7
 
-- Fixed memory leaks in Classic UI
-- Overall performance and memory consumption improvements
-
-Version 8.4.5
-
-- New Henry's Constants database from https://henrys-law.org/
-- Added MaterialStream.SetOverallMolarComposition() function
-- Clear log when converging recycles (Classic UI)
-- Fixed issue with kinetic and hetcat reaction editors (Classic UI)
-- Removed OpenGL renderer (Classic UI)
-- Fixed Classic UI freezing during calculations
-- Fixed Compressor/Expander curve extrapolation
-- Other minor fixes and enhancements
+- Added Feed Recovery as specification for Distillation Columns
+- Added context menu in compound selection panel for viewing, exporting and replacing (Classic UI)
+- Exposed Tray Spacing for user definition in Rigorous Column
+- Implemented Stop button for Cross-Platform UI (feature request #481)
+- Fixed loading of additional compounds for Property Packages in CAPE-OPEN/Excel mode
+- Improved initialization time
+- Other bug fixes

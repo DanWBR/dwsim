@@ -672,8 +672,10 @@ Public Class FormFlowsheet
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
         Try
-            ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
-            ToolStripManager.RevertMerge(ToolStrip1)
+            If ToolStrip1 IsNot Nothing Then
+                ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
+                ToolStripManager.RevertMerge(ToolStrip1)
+            End If
         Catch ex As Exception
         End Try
 
@@ -746,36 +748,76 @@ Public Class FormFlowsheet
         TimerScripts5.Dispose()
         TimerScripts60.Dispose()
 
-        FrmStSim1.CurrentFlowsheet = Nothing
-        FrmStSim1.Close()
+        Try
+            FrmStSim1.CurrentFlowsheet = Nothing
+            FrmStSim1.Close()
+        Catch ex As Exception
 
-        FormSpreadsheet.ReleaseResources()
-        FormSpreadsheet.Flowsheet = Nothing
-        FormSpreadsheet.Dispose()
+        End Try
 
-        FormSurface.ReleaseResources()
-        FormSurface.Dispose()
+        Try
+            FormSpreadsheet.ReleaseResources()
+            FormSpreadsheet.Flowsheet = Nothing
+            FormSpreadsheet.Dispose()
+        Catch ex As Exception
 
-        FormCharts.Flowsheet = Nothing
-        FormCharts.Dispose()
+        End Try
 
-        FormDynamics.Flowsheet = Nothing
-        FormDynamics.Dispose()
+        Try
+            FormSurface.ReleaseResources()
+            FormSurface.Dispose()
+        Catch ex As Exception
 
-        FormIntegratorControls.Flowsheet = Nothing
-        FormIntegratorControls.Dispose()
+        End Try
 
-        FormFilesExplorer.Flowsheet = Nothing
-        FormFilesExplorer.Dispose()
+        Try
+            FormCharts.Flowsheet = Nothing
+            FormCharts.Dispose()
+        Catch ex As Exception
 
-        FormIPyConsole.Flowsheet = Nothing
-        FormIPyConsole.Dispose()
+        End Try
 
-        FormWatch.Flowsheet = Nothing
-        FormWatch.Dispose()
+        Try
+            FormDynamics.Flowsheet = Nothing
+            FormDynamics.Dispose()
+        Catch ex As Exception
 
-        FormScript1.fc = Nothing
-        FormScript1.Dispose()
+        End Try
+
+        Try
+            FormIntegratorControls.Flowsheet = Nothing
+            FormIntegratorControls.Dispose()
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            FormFilesExplorer.Flowsheet = Nothing
+            FormFilesExplorer.Dispose()
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            FormIPyConsole.Flowsheet = Nothing
+            FormIPyConsole.Dispose()
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            FormWatch.Flowsheet = Nothing
+            FormWatch.Dispose()
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            FormScript1.fc = Nothing
+            FormScript1.Dispose()
+        Catch ex As Exception
+
+        End Try
 
         Dim fields = Me.GetType().GetProperties()
 
@@ -793,36 +835,41 @@ Public Class FormFlowsheet
             RemoveHandler item.Click, AddressOf UtilitiesTSMIHandler
         Next
 
-        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Clear()
-        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDown.Refresh()
-        RestoreLayoutTSMI.Dispose()
-        UtilitiesTSMI.DropDownItems.Clear()
-        UtilitiesTSMI.DropDown.Refresh()
-        tsmiExportData.Dispose()
+        Try
+            CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Clear()
+            CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDown.Refresh()
+            RestoreLayoutTSMI.Dispose()
+            UtilitiesTSMI.DropDownItems.Clear()
+            UtilitiesTSMI.DropDown.Refresh()
+            tsmiExportData.Dispose()
 
-        RemoveHandler CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.MouseHover, AddressOf CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem_MouseHover
-        RemoveHandler CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.MouseHover, AddressOf CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem_MouseHover
+            RemoveHandler CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.MouseHover, AddressOf CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem_MouseHover
+            RemoveHandler CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.MouseHover, AddressOf CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem_MouseHover
 
-        RemoveHandler tsmiExportData.Click, AddressOf tsmiExportData_Click
-        RemoveHandler tsmiExportData.Click, AddressOf tsmiExportData_Click
+            RemoveHandler tsmiExportData.Click, AddressOf tsmiExportData_Click
+            RemoveHandler tsmiExportData.Click, AddressOf tsmiExportData_Click
 
-        RemoveHandler UtilitiesTSMI.DropDownOpening, AddressOf UtilitiesTSMI_Click
-        RemoveHandler UtilitiesTSMI.DropDownOpening, AddressOf UtilitiesTSMI_Click
+            RemoveHandler UtilitiesTSMI.DropDownOpening, AddressOf UtilitiesTSMI_Click
+            RemoveHandler UtilitiesTSMI.DropDownOpening, AddressOf UtilitiesTSMI_Click
 
-        RemoveHandler RestoreLayoutTSMI.Click, AddressOf Restorelayout
-        RemoveHandler RestoreLayoutTSMI.Click, AddressOf Restorelayout
+            RemoveHandler RestoreLayoutTSMI.Click, AddressOf Restorelayout
+            RemoveHandler RestoreLayoutTSMI.Click, AddressOf Restorelayout
 
-        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Dispose()
-        CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = Nothing
-        tsmiExportData.Dispose()
-        tsmiExportData = Nothing
-        UtilitiesTSMI.Dispose()
-        UtilitiesTSMI = Nothing
-        RestoreLayoutTSMI.Dispose()
-        RestoreLayoutTSMI = Nothing
+            CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Dispose()
+            CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = Nothing
+            tsmiExportData.Dispose()
+            tsmiExportData = Nothing
+            UtilitiesTSMI.Dispose()
+            UtilitiesTSMI = Nothing
+            RestoreLayoutTSMI.Dispose()
+            RestoreLayoutTSMI = Nothing
 
-        ToolStrip1.Dispose()
-        MenuStrip1.Dispose()
+            ToolStrip1.Dispose()
+            MenuStrip1.Dispose()
+
+        Catch ex As Exception
+
+        End Try
 
         If BidirectionalSolver IsNot Nothing Then
             DirectCast(BidirectionalSolver, IExtender3).ReleaseResources()

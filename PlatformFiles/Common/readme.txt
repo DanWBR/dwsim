@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.4.6
+Version 8.4.7
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.4.7
+
+- Added Feed Recovery as specification for Distillation Columns
+- Added context menu in compound selection panel for viewing, exporting and replacing (Classic UI)
+- Exposed Tray Spacing for user definition in Rigorous Column
+- Implemented Stop button for Cross-Platform UI (feature request #481)
+- Fixed loading of additional compounds for Property Packages in CAPE-OPEN/Excel mode
+- Improved initialization time
+- Other bug fixes
 
 Version 8.4.6
 
