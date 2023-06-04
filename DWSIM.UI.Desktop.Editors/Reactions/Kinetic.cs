@@ -51,10 +51,13 @@ namespace DWSIM.UI.Desktop.Editors
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
-            p1.Width = 420;
+            //p1.Width = 420;
 
             t1 = new TableLayout();
             t1.Rows.Add(new TableRow(p1, p2));
+
+            t1.Rows[0].Cells[0].ScaleWidth = true;
+            t1.Rows[0].Cells[1].ScaleWidth = true;
 
             p1.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff. / Direct Order Exponent / Reverse Order Exponent)");
 
@@ -78,7 +81,7 @@ namespace DWSIM.UI.Desktop.Editors
                     UpdateEquation();
                 };
 
-                var sc = new TextBox() { Width = (int)(sf * 30), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
+                var sc = new TextBox() { Width = (int)(sf * 45), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
 
                 sc.TextChanged += (sender, e) =>
                 {
@@ -101,7 +104,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                var txtdo = new TextBox() { Width = (int)(sf * 30), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].DirectOrder.ToString() : 0.0f.ToString()) };
+                var txtdo = new TextBox() { Width = (int)(sf * 45), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].DirectOrder.ToString() : 0.0f.ToString()) };
 
                 txtdo.TextChanged += (sender, e) =>
                 {
@@ -124,7 +127,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                var txtro = new TextBox() { Width = (int)(sf * 30), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].ReverseOrder.ToString() : 0.0f.ToString()) };
+                var txtro = new TextBox() { Width = (int)(sf * 45), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].ReverseOrder.ToString() : 0.0f.ToString()) };
 
                 txtro.TextChanged += (sender, e) =>
                 {

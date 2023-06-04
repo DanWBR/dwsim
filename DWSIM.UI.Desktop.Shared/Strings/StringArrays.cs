@@ -157,7 +157,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] columnspec()
         {
-            return new String[] { "Product Molar Flow Rate", "Product Mass Flow Rate", "Reflux/Boil-Up Ratio", "Heat Load", "Compound Mass Flow", "Compound Molar Flow", "Compound Recovery", "Compound Fraction", "Temperature" };
+            return new String[] { "Product Molar Flow Rate", "Product Mass Flow Rate", "Reflux/Boil-Up Ratio", "Heat Load", "Compound Mass Flow", "Compound Molar Flow", "Compound Recovery", "Compound Fraction", "Temperature", "Feed Recovery" };
         }
         public static String[] petroleumtype()
         {

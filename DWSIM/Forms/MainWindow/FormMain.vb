@@ -1103,7 +1103,10 @@ Public Class FormMain
             Dim frmwn As New FormWhatsNew()
             frmwn.Show()
         End If
+#Else
+        MessageBox.Show("The Classic UI version of DWSIM is not supported on Linux. Use it at your own risk.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 #End If
+
 
         AnalyticsProvider?.SetMainForm(Me)
 

@@ -51,10 +51,14 @@ namespace DWSIM.UI.Desktop.Editors
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
-            p1.Width = 420;
+            //p1.Width = 420;
 
             t1 = new TableLayout();
             t1.Rows.Add(new TableRow(p1, p2));
+
+            t1.Rows[0].Cells[0].ScaleWidth = true;
+            t1.Rows[0].Cells[1].ScaleWidth = true;
+
 
             p1.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff.)");
 
