@@ -1,5 +1,7 @@
-﻿🥇 Lauterbach Verfahrenstechnik GmbH
+﻿🥇 Yoshihide Watabe
+🥇 Lauterbach Verfahrenstechnik GmbH
 🥈 Alexander Semenyak
+🥈 Pedro Sabóia
 🥈 Sukin Oh
 🥈 Jane Ferris
 🌟 Adam Kovalovszki
@@ -24,7 +26,6 @@
 🌟 Martin Heiser
 🌟 Michael Papantoniou
 🌟 Michael Saucier
-🌟 MYSim Corp.
 🌟 Rafael Melo-González
 🌟 Renato Corrêa Arrieche
 🌟 Richard Huntington
@@ -34,7 +35,6 @@
 🌟 Ronald Visness
 🌟 Steven Sandoval
 🌟 Tino Josef Ritter
-🌟 Yoshihide Watabe
 Alberto Baumeister
 Alex Platon
 Alexander Semenyak
