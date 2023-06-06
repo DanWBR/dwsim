@@ -567,10 +567,6 @@ Public Class FormFlowsheet
 
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
-        If FormMain.IsPro Then
-            ProToolsToolStripMenuItem.Visible = False
-        End If
-
         FrmStSim1.CurrentFlowsheet = Me
 
         Me.WindowState = FormWindowState.Maximized
@@ -751,6 +747,8 @@ Public Class FormFlowsheet
         Try
             FrmStSim1.CurrentFlowsheet = Nothing
             FrmStSim1.Close()
+            FrmStSim1.FloatPane?.Dispose()
+            FrmStSim1.Dispose()
         Catch ex As Exception
 
         End Try
@@ -965,9 +963,6 @@ Public Class FormFlowsheet
         ToolStrip1 = Nothing
         tsmiRichText = Nothing
         BotaoToolStripMenuItem = Nothing
-        ProToolsToolStripMenuItem = Nothing
-        CapitalCostEstimatorToolStripMenuItem = Nothing
-        ExcelReportsToolStripMenuItem = Nothing
         SumarioToolStripMenuItem = Nothing
         CriadorDeComponentesSolidosToolStripMenuItem = Nothing
         ToggleWeatherPanelVisibilityToolStripMenuItem = Nothing
