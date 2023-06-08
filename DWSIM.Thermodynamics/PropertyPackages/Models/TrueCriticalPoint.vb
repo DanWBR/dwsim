@@ -41,7 +41,7 @@ Namespace Utilities.TCP
 
             n = Vz.Length - 1
 
-            Dim Tc(n), Pc(n)
+            Dim Tc(n), Pc(n) As Double
             Dim b As Double
 
             'estimar temperatura e pressao criticas iniciais
@@ -50,12 +50,10 @@ Namespace Utilities.TCP
 
             i = 0
             Do
-                If Vz(i) <> 0 Then
-                    Tc(i) = VTc(i)
-                    Pc(i) = VPc(i)
-                    Tcm += Vz(i) * VTc(i)
-                    Pcm += Vz(i) * VPc(i)
-                End If
+                Tc(i) = VTc(i)
+                Pc(i) = VPc(i)
+                Tcm += Vz(i) * VTc(i)
+                Pcm += Vz(i) * VPc(i)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -1045,7 +1043,7 @@ Final2:
 
             n = Vz.Length - 1
 
-            Dim Tc(n), Pc(n)
+            Dim Tc(n), Pc(n) As Double
             Dim b As Double
 
             'estimar temperatura e pressao criticas iniciais
@@ -1054,12 +1052,10 @@ Final2:
 
             i = 0
             Do
-                If Vz(i) <> 0 Then
-                    Tc(i) = VTc(i)
-                    Pc(i) = VPc(i)
-                    Tcm += Vz(i) * VTc(i)
-                    Pcm += Vz(i) * VPc(i)
-                End If
+                Tc(i) = VTc(i)
+                Pc(i) = VPc(i)
+                Tcm += Vz(i) * VTc(i)
+                Pcm += Vz(i) * VPc(i)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -2063,7 +2059,7 @@ Final2:
 
             n = Vz.Length - 1
 
-            Dim Tc(n), Pc(n)
+            Dim Tc(n), Pc(n) As Double
             Dim b As Double
 
             'estimar temperatura e pressao criticas iniciais
@@ -2072,12 +2068,10 @@ Final2:
 
             i = 0
             Do
-                If Vz(i) <> 0 Then
-                    Tc(i) = VTc(i)
-                    Pc(i) = VPc(i)
-                    Tcm += Vz(i) * VTc(i)
-                    Pcm += Vz(i) * VPc(i)
-                End If
+                Tc(i) = VTc(i)
+                Pc(i) = VPc(i)
+                Tcm += Vz(i) * VTc(i)
+                Pcm += Vz(i) * VPc(i)
                 i = i + 1
             Loop Until i = n + 1
 

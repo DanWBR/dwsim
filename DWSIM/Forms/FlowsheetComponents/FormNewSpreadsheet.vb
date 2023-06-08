@@ -415,7 +415,10 @@ Public Class FormNewSpreadsheet
 
     Public Sub EvaluateAll()
 
-        Spreadsheet?.Worksheets(0).Recalculate()
+        Try
+            Spreadsheet?.Worksheets(0).Recalculate()
+        Catch ex As Exception
+        End Try
 
     End Sub
 

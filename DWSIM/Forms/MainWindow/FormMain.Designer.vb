@@ -117,6 +117,7 @@ Partial Class FormMain
         Me.tsbdonate2 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsbQuickQuestion = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsmiProUG = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -368,7 +369,7 @@ Partial Class FormMain
         '
         'HelpTSMI
         '
-        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsersGuideToolStripMenuItem, Me.DWSIMNaInternetToolStripMenuItem, Me.WhatsNewToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsersGuideToolStripMenuItem, Me.tsmiProUG, Me.DWSIMNaInternetToolStripMenuItem, Me.WhatsNewToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.HelpTSMI.MergeIndex = 102
         Me.HelpTSMI.Name = "HelpTSMI"
@@ -663,6 +664,12 @@ Partial Class FormMain
         resources.ApplyResources(Me.tsbQuickQuestion, "tsbQuickQuestion")
         Me.tsbQuickQuestion.Name = "tsbQuickQuestion"
         Me.tsbQuickQuestion.ShowDropDownArrow = False
+        '
+        'tsmiProUG
+        '
+        Me.tsmiProUG.Image = Global.DWSIM.My.Resources.Resources.Icon128
+        Me.tsmiProUG.Name = "tsmiProUG"
+        resources.ApplyResources(Me.tsmiProUG, "tsmiProUG")
         '
         'FormMain
         '
@@ -965,4 +972,5 @@ Partial Class FormMain
     Friend WithEvents tsmiPrivateSupport As ToolStripMenuItem
     Public WithEvents tsbQuickQuestion As ToolStripDropDownButton
     Friend WithEvents UsersGuideToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsmiProUG As ToolStripMenuItem
 End Class

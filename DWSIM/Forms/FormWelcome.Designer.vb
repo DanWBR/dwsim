@@ -77,6 +77,7 @@ Partial Class FormWelcome
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel()
         Me.LinkLabel8 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel15 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel10 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel12 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel13 = New System.Windows.Forms.LinkLabel()
@@ -87,11 +88,6 @@ Partial Class FormWelcome
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.LinkLabel15 = New System.Windows.Forms.LinkLabel()
-        Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
@@ -117,8 +113,6 @@ Partial Class FormWelcome
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel7.SuspendLayout()
-        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage6.SuspendLayout()
@@ -557,6 +551,7 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me.FlowLayoutPanel3, "FlowLayoutPanel3")
         Me.FlowLayoutPanel3.Controls.Add(Me.LinkLabel8)
+        Me.FlowLayoutPanel3.Controls.Add(Me.LinkLabel15)
         Me.FlowLayoutPanel3.Controls.Add(Me.LinkLabel10)
         Me.FlowLayoutPanel3.Controls.Add(Me.LinkLabel12)
         Me.FlowLayoutPanel3.Controls.Add(Me.LinkLabel13)
@@ -569,6 +564,14 @@ Partial Class FormWelcome
         Me.LinkLabel8.LinkColor = System.Drawing.Color.DodgerBlue
         Me.LinkLabel8.Name = "LinkLabel8"
         Me.LinkLabel8.TabStop = True
+        '
+        'LinkLabel15
+        '
+        resources.ApplyResources(Me.LinkLabel15, "LinkLabel15")
+        Me.LinkLabel15.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel15.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.LinkLabel15.Name = "LinkLabel15"
+        Me.LinkLabel15.TabStop = True
         '
         'LinkLabel10
         '
@@ -648,45 +651,6 @@ Partial Class FormWelcome
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.TabStop = False
         '
-        'Panel7
-        '
-        resources.ApplyResources(Me.Panel7, "Panel7")
-        Me.Panel7.Controls.Add(Me.Label16)
-        Me.Panel7.Controls.Add(Me.Label17)
-        Me.Panel7.Controls.Add(Me.LinkLabel15)
-        Me.Panel7.Controls.Add(Me.PictureBox8)
-        Me.Panel7.Name = "Panel7"
-        '
-        'Label16
-        '
-        resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Name = "Label16"
-        '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.BackColor = System.Drawing.Color.Transparent
-        Me.Label17.ForeColor = System.Drawing.Color.Black
-        Me.Label17.Name = "Label17"
-        '
-        'LinkLabel15
-        '
-        resources.ApplyResources(Me.LinkLabel15, "LinkLabel15")
-        Me.LinkLabel15.BackColor = System.Drawing.Color.DodgerBlue
-        Me.LinkLabel15.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel15.LinkColor = System.Drawing.Color.White
-        Me.LinkLabel15.Name = "LinkLabel15"
-        Me.LinkLabel15.TabStop = True
-        '
-        'PictureBox8
-        '
-        resources.ApplyResources(Me.PictureBox8, "PictureBox8")
-        Me.PictureBox8.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_volunteering
-        Me.PictureBox8.Name = "PictureBox8"
-        Me.PictureBox8.TabStop = False
-        '
         'TabControl2
         '
         resources.ApplyResources(Me.TabControl2, "TabControl2")
@@ -700,7 +664,6 @@ Partial Class FormWelcome
         resources.ApplyResources(Me.TabPage4, "TabPage4")
         Me.TabPage4.BackColor = System.Drawing.Color.White
         Me.TabPage4.Controls.Add(Me.Panel1)
-        Me.TabPage4.Controls.Add(Me.Panel7)
         Me.TabPage4.Controls.Add(Me.Panel2)
         Me.TabPage4.Controls.Add(Me.Panel6)
         Me.TabPage4.Controls.Add(Me.Panel3)
@@ -773,9 +736,6 @@ Partial Class FormWelcome
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel7.ResumeLayout(False)
-        Me.Panel7.PerformLayout()
-        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl2.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage6.ResumeLayout(False)
@@ -838,11 +798,6 @@ Partial Class FormWelcome
     Friend WithEvents PictureBox4 As PictureBox
     Public WithEvents lvlatest As ListView
     Public WithEvents lvsamples As ListView
-    Friend WithEvents Panel7 As Panel
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents LinkLabel15 As LinkLabel
-    Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents LinkLabel3 As LinkLabel
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
@@ -856,4 +811,5 @@ Partial Class FormWelcome
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
     Friend WithEvents FlowLayoutPanel3 As FlowLayoutPanel
+    Friend WithEvents LinkLabel15 As LinkLabel
 End Class

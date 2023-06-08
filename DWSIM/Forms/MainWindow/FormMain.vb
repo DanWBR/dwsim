@@ -200,6 +200,7 @@ Public Class FormMain
                 tsbRegCO.Visible = False
                 RegistroCAPEOPENToolStripMenuItem.Enabled = False
                 DashboardToolStripMenuItem.Visible = False
+                tsmiProUG.Visible = False
             End If
 #End If
 
@@ -4955,6 +4956,24 @@ Label_00CC:
             Else
                 Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
             End If
+        End If
+
+    End Sub
+
+    Private Sub tsmiProUG_Click(sender As Object, e As EventArgs) Handles tsmiProUG.Click
+
+        RaiseEvent ToolOpened("View DWSIM Pro User Guide", New EventArgs())
+
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf")
         End If
 
     End Sub
