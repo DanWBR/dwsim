@@ -1100,7 +1100,7 @@ Public Class FormMain
         If AnalyticsProvider IsNot Nothing Then
             AddHandler Me.ToolOpened,
                 Sub(sender2, e2)
-                    AnalyticsProvider.RegisterEvent(sender.ToString(), "", Nothing)
+                    AnalyticsProvider.RegisterEvent(sender2.ToString(), "", Nothing)
                 End Sub
             Task.Delay(30 * 1000).ContinueWith(
             Sub(t)
