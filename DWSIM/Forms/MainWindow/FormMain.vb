@@ -121,7 +121,6 @@ Public Class FormMain
         InitializeWebView2Environment()
 #End If
 
-
         Using g1 = Me.CreateGraphics()
 
             Settings.DpiScale = g1.DpiX / 96.0
@@ -219,23 +218,6 @@ Public Class FormMain
             SetupWelcomeScreen()
 
         End If
-
-#If Not DEBUG Then
-        If AnalyticsProvider IsNot Nothing Then
-#End If
-        Task.Delay(30 * 1000).ContinueWith(
-            Sub(t)
-                UIThread(Sub()
-#If DEBUG Then
-                             tsbQuickQuestion.Visible = True
-#Else
-                             If Not My.Settings.UserTypeSent Then tsbQuickQuestion.Visible = True
-#End If
-                         End Sub)
-            End Sub)
-#If Not DEBUG Then
-        End If
-#End If
 
     End Sub
 
@@ -1113,7 +1095,20 @@ Public Class FormMain
 
         AnalyticsProvider?.Initialize()
 
-        FormMain.TranslateFormFunction?.Invoke(Me)
+        TranslateFormFunction?.Invoke(Me)
+
+        If AnalyticsProvider IsNot Nothing Then
+            AddHandler Me.ToolOpened,
+                Sub(sender2, e2)
+                    AnalyticsProvider.RegisterEvent(sender.ToString(), "", Nothing)
+                End Sub
+            Task.Delay(30 * 1000).ContinueWith(
+            Sub(t)
+                UIThread(Sub()
+                             If Not My.Settings.UserTypeSent Then tsbQuickQuestion.Visible = True
+                         End Sub)
+            End Sub)
+        End If
 
     End Sub
 
