@@ -599,7 +599,7 @@ Public Class EditingForm_Valve
 
         gbTable.Enabled = False
         tbKvOpRel.Enabled = False
-        tbOp.Enabled = False
+        tbOp.Enabled = True
         tbCharParam.Enabled = False
 
         Select Case SimObject.DefinedOpeningKvRelationShipType
@@ -607,10 +607,8 @@ Public Class EditingForm_Valve
                 gbTable.Enabled = True
             Case UnitOperations.Valve.OpeningKvRelationshipType.UserDefined
                 tbKvOpRel.Enabled = True
-                tbOp.Enabled = True
             Case UnitOperations.Valve.OpeningKvRelationshipType.QuickOpening
                 tbCharParam.Enabled = True
-            Case Else
         End Select
     End Sub
 
