@@ -3373,12 +3373,6 @@
     <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormSensAnalysis.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormUnhandledException.de.resx">
-      <DependentUpon>FormUnhandledException.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormUnhandledException.es.resx">
-      <DependentUpon>FormUnhandledException.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormScript.resx">
       <DependentUpon>FormScript.vb</DependentUpon>
     </EmbeddedResource>
