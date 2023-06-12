@@ -7,14 +7,11 @@ Public Class UpdateCheck
             Dim webClient = New WebClient()
             Dim url = New Uri("https://dwsim.org/update/desktop.txt")
             Dim latestversion As String = ""
-            latestversion = WebClient.DownloadString(url)
-            'Console.WriteLine("Latest Version: " & latestversion)
+            latestversion = webClient.DownloadString(url)
             If latestversion = "" Then Return False
             latestversion = latestversion.TrimEnd(vbCrLf).TrimEnd(Environment.NewLine).TrimEnd()
             Dim currver = New Version(GlobalSettings.Settings.CurrentRunningVersion)
             Dim latver = New Version(latestversion)
-            'Console.WriteLine("Current Version: " & currver.ToString)
-            'Console.WriteLine("Latest Version: " & latver.ToString)
             If latver > currver Then
                 Return True
             Else
