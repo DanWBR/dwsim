@@ -1072,12 +1072,12 @@ Public Class FormSimulSettings
                 For Each r As DataGridViewRow In ogc1.Rows
                     If Not r.Cells(2).Value Is Nothing Then
                         If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                           r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                           r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                           r.Cells(4).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                           r.Cells(6).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
                             r.Visible = True
                             If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                               r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                               r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                                               r.Cells(4).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                               r.Cells(6).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
                                 r.Selected = True
                             End If
                         Else
