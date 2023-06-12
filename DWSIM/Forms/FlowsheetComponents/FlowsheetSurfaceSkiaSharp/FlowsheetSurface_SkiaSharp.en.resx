@@ -119,19 +119,28 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 184</value>
+    <value>540, 320</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 178</value>
+    <value>24, 314</value>
+  </data>
+  <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 24</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 217</value>
+    <value>33, 353</value>
+  </data>
+  <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 24</value>
+  </data>
+  <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>573, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 178</value>
+    <value>24, 314</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 244</value>
+    <value>600, 380</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
@@ -161,7 +170,7 @@
     <value>153, 7</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>611, 0</value>
+    <value>599, 0</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 39</value>
@@ -219,13 +228,13 @@
     <value>232, 7</value>
   </data>
   <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 244</value>
+    <value>0, 380</value>
   </data>
   <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>929, 0</value>
   </data>
   <data name="PanelWeather.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 39</value>
+    <value>929, 39</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PanelWeather.Visible" type="System.Boolean, mscorlib">
@@ -235,13 +244,22 @@
     <value>120</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 419</value>
+    <value>600, 419</value>
   </data>
   <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>283</value>
+    <value>25</value>
+  </data>
+  <data name="SplitContainerVertical.Panel2.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>941, 419</value>
+  </data>
+  <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
+    <value>600</value>
   </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>941, 419</value>
@@ -952,15 +970,6 @@
         0YP7u7s4gRERg/u7uziIiIiD+7u7OIAAAIP7u7s4gAAAg////ziAAACDMzMzOIiIiIiIiIiI//8AAAAA
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
-  </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 22</value>
-  </data>
-  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Switch Object Palette Location</value>
-  </data>
-  <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 26</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

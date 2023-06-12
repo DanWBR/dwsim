@@ -1,5 +1,4 @@
-﻿Imports System.Reflection
-Imports System.Linq
+﻿Imports System.Linq
 Imports System.IO
 
 Public Class SimulationObjectsPanel
@@ -13,6 +12,58 @@ Public Class SimulationObjectsPanel
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
+
+        'collapse all the panels (they're expanded in the designer)
+        PanelCE.Height = 0
+        PanelColumns.Height = 0
+        PanelControllers.Height = 0
+        PanelCustomModelsFOSSEE.Height = 0
+        PanelExchangers.Height = 0
+        PanelIndicators.Height = 0
+        PanelLogical.Height = 0
+        PanelMixers.Height = 0
+        PanelOther.Height = 0
+        PanelPressure.Height = 0
+        PanelReactors.Height = 0
+        PanelSeparators.Height = 0
+        PanelSolids.Height = 0
+        PanelStreams.Height = 75 * Settings.DpiScale
+        PanelUser.Height = 0
+
+        PanelCE.Tag = 150
+        PanelColumns.Tag = 225
+        PanelControllers.Tag = 75
+        PanelCustomModelsFOSSEE.Tag = 225
+        PanelExchangers.Tag = 150
+        PanelIndicators.Tag = 75
+        PanelLogical.Tag = 225
+        PanelMixers.Tag = 150
+        PanelOther.Tag = 75
+        PanelPressure.Tag = 225
+        PanelReactors.Tag = 150
+        PanelSeparators.Tag = 75
+        PanelSolids.Tag = 75
+        PanelStreams.Tag = 75
+        PanelUser.Tag = 150
+
+        CheckBox1.Image = My.Resources.arrow_down
+
+        'Associate a Panel with each CheckBox
+        CheckBox1.Tag = PanelStreams
+        CheckBox2.Tag = PanelPressure
+        CheckBox3.Tag = PanelSeparators
+        CheckBox4.Tag = PanelMixers
+        CheckBox5.Tag = PanelExchangers
+        CheckBox6.Tag = PanelReactors
+        CheckBox7.Tag = PanelColumns
+        CheckBox8.Tag = PanelSolids
+        CheckBox9.Tag = PanelCE
+        CheckBox10.Tag = PanelUser
+        CheckBox11.Tag = PanelCustomModelsFOSSEE
+        CheckBox12.Tag = PanelLogical
+        CheckBox13.Tag = PanelIndicators
+        CheckBox14.Tag = PanelControllers
+        CheckBox15.Tag = PanelOther
 
         Dim add As Boolean = True
 
@@ -130,7 +181,7 @@ Public Class SimulationObjectsPanel
         'fossee models
         Dim folders = Directory.GetDirectories(Path.Combine(My.Application.Info.DirectoryPath, "FOSSEE"))
         For Each folder In folders
-            Dim name = Path.GetFilename(folder.Replace("_", " "))
+            Dim name = Path.GetFileName(folder.Replace("_", " "))
             Dim obj = New CustomUO
             Dim li As New ListItem
             li.lblName.Text = name
@@ -153,7 +204,29 @@ Public Class SimulationObjectsPanel
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Process.Start("https://dwsim.fossee.in/custom-model")
     End Sub
+
+    Private Sub CheckBox1_Click(sender As Object, e As EventArgs) Handles CheckBox9.Click, CheckBox8.Click, CheckBox7.Click, CheckBox6.Click,
+        CheckBox5.Click, CheckBox4.Click, CheckBox3.Click, CheckBox2.Click, CheckBox15.Click, CheckBox14.Click, CheckBox13.Click, CheckBox12.Click,
+        CheckBox11.Click, CheckBox10.Click, CheckBox1.Click
+
+        'find out which checkbox was clicked
+        Dim chkB As CheckBox = CType(sender, CheckBox)
+
+        'get the panel tagged to the checkbox
+        Dim pnl As Panel = CType(chkB.Tag, Panel)
+
+        If chkB.Checked Then
+            pnl.Height = CInt(pnl.Tag) * Settings.DpiScale
+            chkB.Image = My.Resources.arrow_down
+        Else
+            pnl.Height = 0
+            chkB.Image = My.Resources.arrow_right
+            chkB.Checked = False
+        End If
+
+    End Sub
+
 End Class

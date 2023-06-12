@@ -323,6 +323,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property arrow_32px() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("arrow_32px", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property arrow_branch() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("arrow_branch", resourceCulture)
@@ -1496,6 +1506,26 @@ Namespace My.Resources
         Friend ReadOnly Property door_out() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("door_out", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property double_left_32px() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("double_left_32px", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property double_right_32px() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("double_right_32px", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -4386,6 +4416,16 @@ Namespace My.Resources
         Friend ReadOnly Property textfield_rename() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("textfield_rename", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property thick_arrow_pointing_down_32px() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("thick_arrow_pointing_down_32px", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

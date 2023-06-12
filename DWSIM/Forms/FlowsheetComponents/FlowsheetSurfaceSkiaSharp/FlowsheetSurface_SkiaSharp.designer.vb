@@ -184,8 +184,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CMS_Palette = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
@@ -209,7 +207,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.CMS_NoSel.SuspendLayout()
         Me.CMS_Sel.SuspendLayout()
         Me.dckMenu.SuspendLayout()
-        Me.CMS_Palette.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -261,7 +258,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.SplitContainerVertical.Panel2, "SplitContainerVertical.Panel2")
         Me.ToolTip1.SetToolTip(Me.SplitContainerVertical.Panel2, resources.GetString("SplitContainerVertical.Panel2.ToolTip"))
-        Me.SplitContainerVertical.Panel2Collapsed = True
         Me.ToolTip1.SetToolTip(Me.SplitContainerVertical, resources.GetString("SplitContainerVertical.ToolTip"))
         '
         'SplitContainerHorizontal
@@ -282,6 +278,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.SplitContainerHorizontal.Panel2, "SplitContainerHorizontal.Panel2")
         Me.SplitContainerHorizontal.Panel2.BackColor = System.Drawing.Color.White
         Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal.Panel2, resources.GetString("SplitContainerHorizontal.Panel2.ToolTip"))
+        Me.SplitContainerHorizontal.Panel2Collapsed = True
         Me.ToolTip1.SetToolTip(Me.SplitContainerHorizontal, resources.GetString("SplitContainerHorizontal.ToolTip"))
         '
         'TableLayoutPanel1
@@ -1290,19 +1287,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStripSeparator11, "ToolStripSeparator11")
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
         '
-        'CMS_Palette
-        '
-        resources.ApplyResources(Me.CMS_Palette, "CMS_Palette")
-        Me.CMS_Palette.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
-        Me.CMS_Palette.Name = "ContextMenuStrip1"
-        Me.ToolTip1.SetToolTip(Me.CMS_Palette, resources.GetString("CMS_Palette.ToolTip"))
-        '
-        'ToolStripMenuItem1
-        '
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
-        Me.ToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.icons8_compress
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        '
         'FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me, "$this")
@@ -1345,7 +1329,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.CMS_NoSel.ResumeLayout(False)
         Me.CMS_Sel.ResumeLayout(False)
         Me.dckMenu.ResumeLayout(False)
-        Me.CMS_Palette.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1459,8 +1442,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents LayoutAutomaticoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RestaurarLayoutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SplitContainerVertical As SplitContainer
-    Friend WithEvents CMS_Palette As ContextMenuStrip
-    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator19 As ToolStripSeparator
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents tbFontSize As ToolStripTextBox

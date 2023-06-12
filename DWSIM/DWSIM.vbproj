@@ -2363,6 +2363,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\thick_arrow_pointing_down_32px.png" />
     <None Include="Resources\user_manual_80px.png" />
     <None Include="Resources\undo_96px.png" />
     <None Include="Resources\settings_80px.png" />
@@ -3008,6 +3009,7 @@
     <Content Include="Lib\_weakrefset.py" />
     <Content Include="Lib\__future__.py" />
     <Content Include="Lib\__phello__.foo.py" />
+    <None Include="Resources\arrow_32px.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3062,6 +3064,8 @@
     <None Include="Resources\DWSIM Icon Vector 2.png" />
     <None Include="Resources\DWSIM_Icon_4.png" />
     <None Include="Resources\DWSIM_Icon_4.ico" />
+    <None Include="Resources\double_left_32px.png" />
+    <None Include="Resources\double_right_32px.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />
