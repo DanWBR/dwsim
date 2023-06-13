@@ -133,7 +133,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 Else
                     SimObjPanel.Button1.Tag = "Expanded"
                     SimObjPanel.Button1.BackgroundImage = My.Resources.double_right_32px
-                    SplitContainerVertical.SplitterDistance = SplitContainerVertical.Width - 400 * Settings.DpiScale
+                    SplitContainerVertical.SplitterDistance = SplitContainerVertical.Width - 420 * Settings.DpiScale
                     SimObjPanel.TableLayoutPanel1.Visible = True
                     SimObjPanel.Label1.Visible = True
                 End If
@@ -202,7 +202,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
         If FormMain.IsPro Then
             FindTearStreamsAutomaticallyToolStripMenuItem.Visible = False
-            UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
             tsmiHeatMap.Visible = False
             tsmiLiveFlow.Visible = False
             tss1.Visible = False
@@ -299,8 +298,6 @@ Public Class FlowsheetSurface_SkiaSharp
         Me.SplitToolStripMenuItem.Visible = False
         Me.MergeStreamsToolStripMenuItem.Visible = False
         Me.SplitAndInsertRecycleMenuItem.Visible = False
-
-        UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
 
         Me.SplitAndInsertValveTSMI.Visible = False
 
@@ -491,8 +488,6 @@ Public Class FlowsheetSurface_SkiaSharp
             Else
                 Me.HorizontalmenteToolStripMenuItem.Checked = False
             End If
-
-            UpgradeDistillationColumnToProToolStripMenuItem.Visible = True
 
         Else
 
@@ -4160,6 +4155,18 @@ Public Class FlowsheetSurface_SkiaSharp
 
         HandleKeyDown(e)
 
+    End Sub
+
+    Private Sub PasteObjectTSMI_Click(sender As Object, e As EventArgs) Handles PasteObjectTSMI.Click
+        Flowsheet.PasteObjects()
+    End Sub
+
+    Private Sub CutTSMI_Click(sender As Object, e As EventArgs) Handles CutTSMI.Click
+        Flowsheet.CutObjects()
+    End Sub
+
+    Private Sub CopyTSMI_Click(sender As Object, e As EventArgs) Handles CopyTSMI.Click
+        Flowsheet.CopyObjects()
     End Sub
 
     Public Sub ReleaseResources()

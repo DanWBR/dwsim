@@ -118,29 +118,90 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 435</value>
+  </data>
+  <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 435</value>
+  </data>
+  <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>929, 0</value>
+  </data>
+  <data name="PanelWeather.Size" type="System.Drawing.Size, System.Drawing">
+    <value>929, 39</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PanelWeather.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 474</value>
+  </data>
+  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="SplitContainerVertical.Panel2.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>992, 474</value>
+  </data>
+  <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
+    <value>632</value>
+  </data>
+  <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>992, 474</value>
+  </data>
+  <data name="ToolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>992, 524</value>
+  </data>
+  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>989, 27</value>
+  </data>
+  <data name="ToolStripFlowsheet.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ToolStripFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>992, 23</value>
+  </data>
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 320</value>
+    <value>572, 375</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 314</value>
+    <value>24, 369</value>
   </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 24</value>
+    <value>566, 24</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 353</value>
+    <value>33, 408</value>
   </data>
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 24</value>
+    <value>566, 24</value>
   </data>
   <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 33</value>
+    <value>605, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 314</value>
+    <value>24, 369</value>
   </data>
-  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 380</value>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>599, 0</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 39</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
@@ -168,12 +229,6 @@
   </data>
   <data name="btnGetLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>153, 7</value>
-  </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>599, 0</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 39</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 13</value>
@@ -226,43 +281,6 @@
   </data>
   <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 7</value>
-  </data>
-  <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 380</value>
-  </data>
-  <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>929, 0</value>
-  </data>
-  <data name="PanelWeather.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 39</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PanelWeather.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 419</value>
-  </data>
-  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="SplitContainerVertical.Panel2.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 419</value>
-  </data>
-  <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
-    <value>600</value>
-  </data>
-  <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 419</value>
   </data>
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -354,12 +372,6 @@
   </data>
   <data name="tscbAddObjectsWithStreams.Items2" xml:space="preserve">
     <value>Smart</value>
-  </data>
-  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="ToolStripFlowsheet.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -619,11 +631,8 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
-  <data name="ToolStripFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
-  </data>
-  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 23</value>
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 336</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
@@ -712,9 +721,6 @@
   <data name="FindTearStreamsAutomaticallyToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Upgrade to DWSIM Pro</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 308</value>
-  </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>259, 22</value>
   </data>
@@ -762,6 +768,102 @@
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 6</value>
+  </data>
+  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="tsmiInvertVertically.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="tsmiInvertVertically.Text" xml:space="preserve">
+    <value>Invert Vertically</value>
+  </data>
+  <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="HorizontalmenteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Invert Horizontally</value>
+  </data>
+  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 6</value>
+  </data>
+  <data name="CutTSMI.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>White</value>
+  </data>
+  <data name="CutTSMI.Text" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="CopyTSMI.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>White</value>
+  </data>
+  <data name="CopyTSMI.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="ClonarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="ClonarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Creates an exact copy of the selected object.</value>
+  </data>
+  <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="ExcluirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 6</value>
+  </data>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Process Data to Clipboard</value>
+  </data>
+  <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 6</value>
+  </data>
+  <data name="EditAppearanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="EditAppearanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit Appearance</value>
+  </data>
+  <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 6</value>
+  </data>
+  <data name="SplitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="SplitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Split Stream</value>
+  </data>
+  <data name="SplitAndInsertValveTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="SplitAndInsertValveTSMI.Text" xml:space="preserve">
+    <value>Split and Insert Valve</value>
+  </data>
+  <data name="SplitAndInsertRecycleMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="SplitAndInsertRecycleMenuItem.Text" xml:space="preserve">
+    <value>Split and Insert Recycle Block</value>
+  </data>
+  <data name="MergeStreamsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Merge Streams</value>
+  </data>
+  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 508</value>
   </data>
   <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -853,102 +955,6 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Rotate</value>
-  </data>
-  <data name="tsmiInvertVertically.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="tsmiInvertVertically.Text" xml:space="preserve">
-    <value>Invert Vertically</value>
-  </data>
-  <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="HorizontalmenteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Invert Horizontally</value>
-  </data>
-  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 6</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Clone</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Creates an exact copy of the selected object.</value>
-  </data>
-  <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="ExcluirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 6</value>
-  </data>
-  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy Process Data to Clipboard</value>
-  </data>
-  <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 6</value>
-  </data>
-  <data name="EditAppearanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="EditAppearanceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit Appearance</value>
-  </data>
-  <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 6</value>
-  </data>
-  <data name="SplitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="SplitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Split Stream</value>
-  </data>
-  <data name="SplitAndInsertValveTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="SplitAndInsertValveTSMI.Text" xml:space="preserve">
-    <value>Split and Insert Valve</value>
-  </data>
-  <data name="SplitAndInsertRecycleMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="SplitAndInsertRecycleMenuItem.Text" xml:space="preserve">
-    <value>Split and Insert Recycle Block</value>
-  </data>
-  <data name="MergeStreamsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Merge Streams</value>
-  </data>
-  <data name="tssepPro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 6</value>
-  </data>
-  <data name="UpgradeDistillationColumnToProToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="UpgradeDistillationColumnToProToolStripMenuItem.Text" xml:space="preserve">
-    <value>Upgrade Distillation Column to Pro</value>
-  </data>
-  <data name="UpgradeDistillationColumnToProToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Upgrade to DWSIM Pro</value>
-  </data>
-  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 470</value>
-  </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
@@ -970,6 +976,12 @@
         0YP7u7s4gRERg/u7uziIiIiD+7u7OIAAAIP7u7s4gAAAg////ziAAACDMzMzOIiIiIiIiIiI//8AAAAA
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
+  </data>
+  <data name="PasteObjectTSMI.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>992, 524</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

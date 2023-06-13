@@ -2452,90 +2452,102 @@ Public Class FormFlowsheet
 
         CopyObjects()
 
-        My.Application.PushUndoRedoAction = False
+        Try
 
-        If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CutObjects,
+            My.Application.PushUndoRedoAction = False
+
+            If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CutObjects,
                                      .NewValue = Clipboard.GetText,
                                      .OldValue = Me.FormSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
                                      .Name = DWSIM.App.GetLocalString("UndoRedo_Cut")})
 
-        Dim indexes As New ArrayList
-        For Each gobj As GraphicObject In Me.FormSurface.FlowsheetSurface.SelectedObjects.Values
-            indexes.Add(gobj.Tag)
-        Next
-        For Each s As String In indexes
-            Dim gobj As GraphicObject
-            gobj = Me.GetFlowsheetGraphicObject(s)
-            If Not gobj Is Nothing Then
-                Me.DeleteSelectedObject(Me, New EventArgs(), gobj, False)
-                Me.FormSurface.FlowsheetSurface.SelectedObjects.Remove(gobj.Name)
-            End If
-        Next
+            Dim indexes As New ArrayList
+            For Each gobj As GraphicObject In Me.FormSurface.FlowsheetSurface.SelectedObjects.Values
+                indexes.Add(gobj.Tag)
+            Next
+            For Each s As String In indexes
+                Dim gobj As GraphicObject
+                gobj = Me.GetFlowsheetGraphicObject(s)
+                If Not gobj Is Nothing Then
+                    Me.DeleteSelectedObject(Me, New EventArgs(), gobj, False)
+                    Me.FormSurface.FlowsheetSurface.SelectedObjects.Remove(gobj.Name)
+                End If
+            Next
 
-        My.Application.PushUndoRedoAction = True
+            My.Application.PushUndoRedoAction = True
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
     Sub CopyObjects()
 
-        Dim xdoc As New XDocument()
-        Dim xel As XElement
+        Try
 
-        Dim ppackages As New List(Of String)
+            Dim xdoc As New XDocument()
+            Dim xel As XElement
 
-        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+            Dim ppackages As New List(Of String)
 
-        xdoc.Add(New XElement("DWSIM_Simulation_Data"))
+            Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
+            xdoc.Add(New XElement("DWSIM_Simulation_Data"))
 
-        For Each so As SharedClasses.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
-            If so.GraphicObject.Selected Then
-                xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
-                If TypeOf so Is Streams.MaterialStream Then
-                    If Not ppackages.Contains(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name) Then
-                        ppackages.Add(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name)
-                    End If
-                ElseIf TypeOf so Is UnitOpBaseClass Then
-                    If Not ppackages.Contains(DirectCast(so, UnitOpBaseClass).PropertyPackage.Name) Then
-                        ppackages.Add(DirectCast(so, UnitOpBaseClass).PropertyPackage.Name)
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
+
+            For Each so As SharedClasses.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
+                If so.GraphicObject.Selected Then
+                    xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
+                    If TypeOf so Is Streams.MaterialStream Then
+                        If Not ppackages.Contains(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name) Then
+                            ppackages.Add(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name)
+                        End If
+                    ElseIf TypeOf so Is UnitOpBaseClass Then
+                        If Not ppackages.Contains(DirectCast(so, UnitOpBaseClass).PropertyPackage.Name) Then
+                            ppackages.Add(DirectCast(so, UnitOpBaseClass).PropertyPackage.Name)
+                        End If
                     End If
                 End If
-            End If
-        Next
+            Next
 
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects
-            If Not go.IsConnector And go.Selected Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
-        Next
+            For Each go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects
+                If Not go.IsConnector And go.Selected Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
+            Next
 
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
 
-        For Each pp In Options.PropertyPackages
-            Dim createdms As Boolean = False
-            If pp.Value.CurrentMaterialStream Is Nothing Then
-                Dim ms As New Streams.MaterialStream("", "", Me, pp.Value)
-                AddComponentsRows(ms)
-                pp.Value.CurrentMaterialStream = ms
-                createdms = True
-            End If
-            xel.Add(New XElement("PropertyPackage", {New XElement("ID", pp.Key),
-                                                        pp.Value.SaveData().ToArray()}))
-            If createdms Then pp.Value.CurrentMaterialStream = Nothing
-        Next
+            For Each pp In Options.PropertyPackages
+                Dim createdms As Boolean = False
+                If pp.Value.CurrentMaterialStream Is Nothing Then
+                    Dim ms As New Streams.MaterialStream("", "", Me, pp.Value)
+                    AddComponentsRows(ms)
+                    pp.Value.CurrentMaterialStream = ms
+                    createdms = True
+                End If
+                xel.Add(New XElement("PropertyPackage", {New XElement("ID", pp.Key),
+                                                            pp.Value.SaveData().ToArray()}))
+                If createdms Then pp.Value.CurrentMaterialStream = Nothing
+            Next
 
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Compounds"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds")
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Compounds"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds")
 
-        For Each cp As ConstantProperties In Options.SelectedComponents.Values
-            xel.Add(New XElement("Compound", cp.SaveData().ToArray()))
-        Next
+            For Each cp As ConstantProperties In Options.SelectedComponents.Values
+                xel.Add(New XElement("Compound", cp.SaveData().ToArray()))
+            Next
 
-        Clipboard.SetText(xdoc.ToString)
+            Clipboard.SetText(xdoc.ToString)
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -2549,149 +2561,155 @@ Public Class FormFlowsheet
 
         Dim excs As New Concurrent.ConcurrentBag(Of Exception)
 
-        Dim xdoc As XDocument = XDocument.Parse(Clipboard.GetText())
+        Try
 
-        Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+            Dim xdoc As XDocument = XDocument.Parse(Clipboard.GetText())
 
-        My.Application.MainWindowForm.AddGraphicObjects(Me, data, excs, pkey, 40, True)
+            Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
-        Dim pp As New PropertyPackages.RaoultPropertyPackage()
+            My.Application.MainWindowForm.AddGraphicObjects(Me, data, excs, pkey, 40, True)
 
-        If My.Settings.ClipboardCopyMode_Compounds = 1 Then
+            Dim pp As New PropertyPackages.RaoultPropertyPackage()
 
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
+            If My.Settings.ClipboardCopyMode_Compounds = 1 Then
 
-            Dim complist As New List(Of ConstantProperties)
+                data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
-            For Each xel As XElement In data
-                Dim obj As New ConstantProperties
-                obj.LoadData(xel.Elements.ToList)
-                complist.Add(obj)
-            Next
+                Dim complist As New List(Of ConstantProperties)
 
-            Dim idx As Integer
-
-            FrmStSim1.Init()
-
-            For Each comp In complist
-                If Not Me.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.Options.NotSelectedComponents.ContainsKey(comp.Name) Then
-                        idx = Me.FrmStSim1.AddCompToGrid(comp)
-                    Else
-                        For Each r As DataGridViewRow In Me.FrmStSim1.ogc1.Rows
-                            If r.Cells(0).Value = comp.Name Then
-                                idx = r.Index
-                                Exit For
-                            End If
-                        Next
-                    End If
-                    Me.FrmStSim1.AddCompToSimulation(comp.Name)
-                End If
-            Next
-
-        End If
-
-        If My.Settings.ClipboardCopyMode_PropertyPackages = 1 Then
-
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
-
-            For Each xel As XElement In data
-                Try
-                    Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = pp.ReturnInstance(xel.Element("Type").Value)
+                For Each xel As XElement In data
+                    Dim obj As New ConstantProperties
                     obj.LoadData(xel.Elements.ToList)
-                    obj.UniqueID = pkey & obj.UniqueID
-                    obj.Tag = obj.Tag & " (C)"
-                    obj.Flowsheet = Me
-                    Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Property Package Information", ex))
-                End Try
-            Next
+                    complist.Add(obj)
+                Next
 
-            FrmStSim1.Init()
+                Dim idx As Integer
 
-        End If
+                FrmStSim1.Init()
 
-        data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
-
-        FormSurface.FlowsheetSurface.SelectedObject = Nothing
-        FormSurface.FlowsheetSurface.SelectedObjects.Clear()
-
-        Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
-
-        Dim compoundstoremove As New List(Of String)
-
-        For Each xel As XElement In data
-            Dim id As String = pkey & xel.<Name>.Value
-            Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
-            If xel.Element("Type").Value.Contains("MaterialStream") Then
-                obj = pp.ReturnInstance(xel.Element("Type").Value)
-            Else
-                obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
-            End If
-            Dim gobj As GraphicObject = (From go As GraphicObject In
-                                FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
-            obj.GraphicObject = gobj
-            gobj.Owner = obj
-            obj.SetFlowsheet(Me)
-            If Not gobj Is Nothing Then
-                obj.LoadData(xel.Elements.ToList)
-                If TypeOf obj Is Streams.MaterialStream Then
-                    If My.Settings.ClipboardCopyMode_Compounds = 0 Then
-                        For Each subst As Compound In DirectCast(obj, Streams.MaterialStream).Phases(0).Compounds.Values
-                            If Not Options.SelectedComponents.ContainsKey(subst.Name) And Not compoundstoremove.Contains(subst.Name) Then compoundstoremove.Add(subst.Name)
-                        Next
+                For Each comp In complist
+                    If Not Me.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        If Not Me.Options.NotSelectedComponents.ContainsKey(comp.Name) Then
+                            idx = Me.FrmStSim1.AddCompToGrid(comp)
+                        Else
+                            For Each r As DataGridViewRow In Me.FrmStSim1.ogc1.Rows
+                                If r.Cells(0).Value = comp.Name Then
+                                    idx = r.Index
+                                    Exit For
+                                End If
+                            Next
+                        End If
+                        Me.FrmStSim1.AddCompToSimulation(comp.Name)
                     End If
-                    For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
-                        For Each c As ConstantProperties In Options.SelectedComponents.Values
-                            If Not phase.Compounds.ContainsKey(c.Name) Then phase.Compounds.Add(c.Name, New Compound(c.Name, "") With {.ConstantProperties = c})
-                            phase.Compounds(c.Name).ConstantProperties = c
-                        Next
-                    Next
-                End If
+                Next
+
             End If
+
             If My.Settings.ClipboardCopyMode_PropertyPackages = 1 Then
-                If TypeOf obj Is Streams.MaterialStream Then
-                    DirectCast(obj, Streams.MaterialStream).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, Streams.MaterialStream)._ppid)
-                ElseIf TypeOf obj Is UnitOpBaseClass Then
-                    If DirectCast(obj, UnitOpBaseClass)._ppid <> "" Then
-                        DirectCast(obj, UnitOpBaseClass).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, UnitOpBaseClass)._ppid)
+
+                data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
+
+                For Each xel As XElement In data
+                    Try
+                        Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = pp.ReturnInstance(xel.Element("Type").Value)
+                        obj.LoadData(xel.Elements.ToList)
+                        obj.UniqueID = pkey & obj.UniqueID
+                        obj.Tag = obj.Tag & " (C)"
+                        obj.Flowsheet = Me
+                        Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
+                    Catch ex As Exception
+                        excs.Add(New Exception("Error Loading Property Package Information", ex))
+                    End Try
+                Next
+
+                FrmStSim1.Init()
+
+            End If
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
+
+            FormSurface.FlowsheetSurface.SelectedObject = Nothing
+            FormSurface.FlowsheetSurface.SelectedObjects.Clear()
+
+            Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
+
+            Dim compoundstoremove As New List(Of String)
+
+            For Each xel As XElement In data
+                Dim id As String = pkey & xel.<Name>.Value
+                Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                Else
+                    obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                End If
+                Dim gobj As GraphicObject = (From go As GraphicObject In
+                                    FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                obj.GraphicObject = gobj
+                gobj.Owner = obj
+                obj.SetFlowsheet(Me)
+                If Not gobj Is Nothing Then
+                    obj.LoadData(xel.Elements.ToList)
+                    If TypeOf obj Is Streams.MaterialStream Then
+                        If My.Settings.ClipboardCopyMode_Compounds = 0 Then
+                            For Each subst As Compound In DirectCast(obj, Streams.MaterialStream).Phases(0).Compounds.Values
+                                If Not Options.SelectedComponents.ContainsKey(subst.Name) And Not compoundstoremove.Contains(subst.Name) Then compoundstoremove.Add(subst.Name)
+                            Next
+                        End If
+                        For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                            For Each c As ConstantProperties In Options.SelectedComponents.Values
+                                If Not phase.Compounds.ContainsKey(c.Name) Then phase.Compounds.Add(c.Name, New Compound(c.Name, "") With {.ConstantProperties = c})
+                                phase.Compounds(c.Name).ConstantProperties = c
+                            Next
+                        Next
                     End If
                 End If
-            End If
-            objlist.Add(obj)
-        Next
-
-        If My.Settings.ClipboardCopyMode_Compounds = 0 Then
-
-            For Each obj As SharedClasses.UnitOperations.BaseClass In objlist
-                If TypeOf obj Is Streams.MaterialStream Then
-                    For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
-                        For Each comp In compoundstoremove
-                            phase.Compounds.Remove(comp)
-                        Next
-                    Next
+                If My.Settings.ClipboardCopyMode_PropertyPackages = 1 Then
+                    If TypeOf obj Is Streams.MaterialStream Then
+                        DirectCast(obj, Streams.MaterialStream).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, Streams.MaterialStream)._ppid)
+                    ElseIf TypeOf obj Is UnitOpBaseClass Then
+                        If DirectCast(obj, UnitOpBaseClass)._ppid <> "" Then
+                            DirectCast(obj, UnitOpBaseClass).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, UnitOpBaseClass)._ppid)
+                        End If
+                    End If
                 End If
+                objlist.Add(obj)
             Next
 
-        End If
+            If My.Settings.ClipboardCopyMode_Compounds = 0 Then
 
-        pp.Dispose()
-        pp = Nothing
+                For Each obj As SharedClasses.UnitOperations.BaseClass In objlist
+                    If TypeOf obj Is Streams.MaterialStream Then
+                        For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                            For Each comp In compoundstoremove
+                                phase.Compounds.Remove(comp)
+                            Next
+                        Next
+                    End If
+                Next
 
-        My.Application.MainWindowForm.AddSimulationObjects(Me, objlist, excs, pkey)
+            End If
 
-        For Each obj In objlist
-            If FormSurface.FlowsheetSurface.SelectedObject Is Nothing Then FormSurface.FlowsheetSurface.SelectedObject = obj.GraphicObject
-            FormSurface.FlowsheetSurface.SelectedObjects.Add(obj.Name, obj.GraphicObject)
-        Next
+            pp.Dispose()
+            pp = Nothing
 
-        If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PasteObjects,
-                                     .OldValue = Clipboard.GetText,
-                                     .NewValue = Me.FormSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
-                                     .Name = DWSIM.App.GetLocalString("UndoRedo_Paste")})
+            My.Application.MainWindowForm.AddSimulationObjects(Me, objlist, excs, pkey)
 
-        My.Application.PushUndoRedoAction = True
+            For Each obj In objlist
+                If FormSurface.FlowsheetSurface.SelectedObject Is Nothing Then FormSurface.FlowsheetSurface.SelectedObject = obj.GraphicObject
+                FormSurface.FlowsheetSurface.SelectedObjects.Add(obj.Name, obj.GraphicObject)
+            Next
+
+            If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PasteObjects,
+                                         .OldValue = Clipboard.GetText,
+                                         .NewValue = Me.FormSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
+                                         .Name = DWSIM.App.GetLocalString("UndoRedo_Paste")})
+
+            My.Application.PushUndoRedoAction = True
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
