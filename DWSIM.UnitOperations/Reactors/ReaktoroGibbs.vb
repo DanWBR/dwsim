@@ -134,23 +134,31 @@ Namespace Reactors
 
         End Sub
 
+        Private Declare Function LoadLibrary Lib "kernel32.dll" Alias "LoadLibraryA" (ByVal lpFileName As String) As IntPtr
+
+        Private Sub LoadReaktoroLib(dllpath As String)
+
+            ' Load the library
+            Dim res = LoadLibrary(dllpath)
+
+            If (res = IntPtr.Zero) Then
+                Throw New Exception("Failed to load Reaktoro DLL")
+            End If
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages")
+            Dim dllpath = Path.Combine(libpath, "reaktoro")
 
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
-                DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
+                Dim append As String = Settings.PythonPath + ";" + Path.Combine(Settings.PythonPath, "Library", "bin") + ";" + dllpath + ";"
+                Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
+                Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
 
-                If Settings.GetEnvironment() = 32 Then
-                    Throw New Exception("Reaktoro is not supported on 32-bit environments.")
-                End If
-
-                ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
-
-                If Not Directory.Exists(ReaktoroPath) Then
-                    Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
-                End If
-
-                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
+                LoadReaktoroLib(Path.Combine(dllpath, "Reaktoro.dll"))
 
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
 
@@ -160,13 +168,20 @@ Namespace Reactors
 
             End If
 
-
             Dim msin = GetInletMaterialStream(0)
             Dim msout = GetOutletMaterialStream(0)
 
             Dim esout = GetOutletEnergyStream(1)
 
             Using Py.GIL
+
+                Dim sys As Object = Py.Import("sys")
+                sys.path.append(libpath)
+
+                Dim os As Object = Py.Import("os")
+
+                os.add_dll_directory(dllpath)
+                os.add_dll_directory(Settings.PythonPath)
 
                 Dim reaktoro As Object = Py.Import("reaktoro")
 
