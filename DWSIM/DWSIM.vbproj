@@ -478,6 +478,10 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -1838,6 +1842,10 @@
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.KDBLink\DWSIM.Thermodynamics.Databases.KDBLink.vbproj">
       <Project>{fea05ae3-5ee2-4a7b-88b3-1a4f9000ea08}</Project>
       <Name>DWSIM.Thermodynamics.Databases.KDBLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.ReaktoroPropertyPackage\DWSIM.Thermodynamics.ReaktoroPropertyPackage.vbproj">
+      <Project>{d670c3b0-1ee1-47d4-99c6-8820cfb072f7}</Project>
+      <Name>DWSIM.Thermodynamics.ReaktoroPropertyPackage</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>

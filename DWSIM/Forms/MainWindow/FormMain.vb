@@ -904,6 +904,9 @@ Public Class FormMain
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
+        Dim RKPP As ReaktoroPropertyPackage.ReaktoroPropertyPackage = New ReaktoroPropertyPackage.ReaktoroPropertyPackage()
+        PropertyPackages.Add(RKPP.ComponentName.ToString, RKPP)
+
         'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
         'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
         'EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")

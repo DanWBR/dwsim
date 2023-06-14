@@ -86,15 +86,16 @@ Partial Class FormOptions
         Me.KryptonTextBox1 = New System.Windows.Forms.TextBox()
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.btnSelectPythonPath = New System.Windows.Forms.Button()
+        Me.tbPythonPath = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
         Me.gbLoadExtensions = New System.Windows.Forms.GroupBox()
         Me.chkLoadExtensions = New System.Windows.Forms.CheckBox()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
-        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
-        Me.btnSelectPythonPath = New System.Windows.Forms.Button()
-        Me.tbPythonPath = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
@@ -105,6 +106,7 @@ Partial Class FormOptions
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnDownPy = New System.Windows.Forms.Button()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -123,10 +125,11 @@ Partial Class FormOptions
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        Me.GroupBox17.SuspendLayout()
         Me.FaTabStripItem7.SuspendLayout()
         Me.gbLoadExtensions.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
-        Me.GroupBox17.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -139,6 +142,7 @@ Partial Class FormOptions
         Me.FaTabStrip1.Controls.Add(Me.TabPage1)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem3)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem2)
+        Me.FaTabStrip1.Controls.Add(Me.TabPage2)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem7)
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedIndex = 0
@@ -596,13 +600,45 @@ Partial Class FormOptions
         resources.ApplyResources(Me.KryptonCheckBox6, "KryptonCheckBox6")
         Me.KryptonCheckBox6.Name = "KryptonCheckBox6"
         '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.GroupBox17)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'GroupBox17
+        '
+        resources.ApplyResources(Me.GroupBox17, "GroupBox17")
+        Me.GroupBox17.Controls.Add(Me.btnDownPy)
+        Me.GroupBox17.Controls.Add(Me.btnSelectPythonPath)
+        Me.GroupBox17.Controls.Add(Me.tbPythonPath)
+        Me.GroupBox17.Controls.Add(Me.Label18)
+        Me.GroupBox17.Name = "GroupBox17"
+        Me.GroupBox17.TabStop = False
+        '
+        'btnSelectPythonPath
+        '
+        resources.ApplyResources(Me.btnSelectPythonPath, "btnSelectPythonPath")
+        Me.btnSelectPythonPath.Name = "btnSelectPythonPath"
+        Me.btnSelectPythonPath.UseVisualStyleBackColor = True
+        '
+        'tbPythonPath
+        '
+        resources.ApplyResources(Me.tbPythonPath, "tbPythonPath")
+        Me.tbPythonPath.Name = "tbPythonPath"
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
         'FaTabStripItem7
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem7.Controls.Add(Me.gbLoadExtensions)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
@@ -631,31 +667,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkUpdates, "chkUpdates")
         Me.chkUpdates.Name = "chkUpdates"
-        '
-        'GroupBox17
-        '
-        resources.ApplyResources(Me.GroupBox17, "GroupBox17")
-        Me.GroupBox17.Controls.Add(Me.btnSelectPythonPath)
-        Me.GroupBox17.Controls.Add(Me.tbPythonPath)
-        Me.GroupBox17.Controls.Add(Me.Label18)
-        Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.TabStop = False
-        '
-        'btnSelectPythonPath
-        '
-        resources.ApplyResources(Me.btnSelectPythonPath, "btnSelectPythonPath")
-        Me.btnSelectPythonPath.Name = "btnSelectPythonPath"
-        Me.btnSelectPythonPath.UseVisualStyleBackColor = True
-        '
-        'tbPythonPath
-        '
-        resources.ApplyResources(Me.tbPythonPath, "tbPythonPath")
-        Me.tbPythonPath.Name = "tbPythonPath"
-        '
-        'Label18
-        '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
         '
         'GroupBox15
         '
@@ -726,6 +737,12 @@ Partial Class FormOptions
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
+        'btnDownPy
+        '
+        resources.ApplyResources(Me.btnDownPy, "btnDownPy")
+        Me.btnDownPy.Name = "btnDownPy"
+        Me.btnDownPy.UseVisualStyleBackColor = True
+        '
         'FormOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -760,13 +777,14 @@ Partial Class FormOptions
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
+        Me.GroupBox17.ResumeLayout(False)
+        Me.GroupBox17.PerformLayout()
         Me.FaTabStripItem7.ResumeLayout(False)
         Me.gbLoadExtensions.ResumeLayout(False)
         Me.gbLoadExtensions.PerformLayout()
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
-        Me.GroupBox17.ResumeLayout(False)
-        Me.GroupBox17.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
@@ -852,4 +870,6 @@ Partial Class FormOptions
     Public WithEvents chkUpdates As CheckBox
     Friend WithEvents gbLoadExtensions As GroupBox
     Public WithEvents chkLoadExtensions As CheckBox
+    Friend WithEvents TabPage2 As TabPage
+    Public WithEvents btnDownPy As Button
 End Class

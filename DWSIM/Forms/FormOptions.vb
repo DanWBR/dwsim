@@ -37,6 +37,7 @@ Public Class FormOptions
             btnSelectPythonPath.Enabled = False
             Button4.Enabled = False
             Button7.Enabled = False
+            btnDownPy.Enabled = False
         End If
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
@@ -493,5 +494,9 @@ Public Class FormOptions
 
     Private Sub chkLoadExtensions_CheckedChanged(sender As Object, e As EventArgs) Handles chkLoadExtensions.CheckedChanged
         My.Settings.LoadExtensionsAndPlugins = chkLoadExtensions.Checked
+    End Sub
+
+    Private Sub btnDownPy_Click(sender As Object, e As EventArgs) Handles btnDownPy.Click
+        Process.Start("https://winpython.github.io/")
     End Sub
 End Class

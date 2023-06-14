@@ -134,19 +134,6 @@ Namespace Reactors
 
         End Sub
 
-        Private Declare Function LoadLibrary Lib "kernel32.dll" Alias "LoadLibraryA" (ByVal lpFileName As String) As IntPtr
-
-        Private Sub LoadReaktoroLib(dllpath As String)
-
-            ' Load the library
-            Dim res = LoadLibrary(dllpath)
-
-            If (res = IntPtr.Zero) Then
-                Throw New Exception("Failed to load Reaktoro DLL")
-            End If
-
-        End Sub
-
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
@@ -159,34 +146,12 @@ Namespace Reactors
 
             End If
 
+            Dim libpath = DWSIM.Thermodynamics.ReaktoroPropertyPackage.ReaktoroLoader.Initialize()
+
             Dim msin = GetInletMaterialStream(0)
             Dim msout = GetOutletMaterialStream(0)
 
             Dim esout = GetOutletEnergyStream(1)
-
-            Dim pyver = PythonEngine.Version
-
-            Dim libpath = "", dllpath, shareddllpath As String
-
-            If pyver.Contains("3.7.") Then
-                libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py37")
-            ElseIf pyver.Contains("3.8.") Then
-                libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py38")
-            ElseIf pyver.Contains("3.9.") Then
-                libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py39")
-            Else
-                Throw New Exception("Reaktoro requires a Python distribution version between 3.7 and 3.9 (inclusive)")
-            End If
-
-            dllpath = Path.Combine(libpath, "reaktoro")
-            shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
-
-            Dim append As String = Settings.PythonPath + ";" + Path.Combine(Settings.PythonPath, "Library", "bin") +
-                ";" + dllpath + ";" + shareddllpath + ";"
-            Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
-            Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
-
-            LoadReaktoroLib(Path.Combine(dllpath, "Reaktoro.dll"))
 
             Using Py.GIL
 
@@ -194,6 +159,9 @@ Namespace Reactors
                 sys.path.append(libpath)
 
                 Dim os As Object = Py.Import("os")
+
+                Dim dllpath = Path.Combine(libpath, "reaktoro")
+                Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
 
                 os.add_dll_directory(dllpath)
                 os.add_dll_directory(shareddllpath)
