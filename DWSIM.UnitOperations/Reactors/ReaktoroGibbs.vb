@@ -407,6 +407,24 @@ Namespace Reactors
             End If
         End Sub
 
+        Public Overrides Function GetEditingForm() As Form
+            If f Is Nothing Then
+                f = New EditingForm_ReaktoroGibbs With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Return f
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_ReaktoroGibbs With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Return f
+                Else
+                    Return Nothing
+                End If
+            End If
+        End Function
+
         Public Overrides Function GetIconBitmap() As Object
 
             Return My.Resources.reactor_reaktoro
