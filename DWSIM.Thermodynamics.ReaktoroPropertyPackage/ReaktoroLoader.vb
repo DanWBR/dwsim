@@ -23,7 +23,7 @@ Public Class ReaktoroLoader
         ElseIf pyver.Contains("3.9.") Then
             libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py39")
         Else
-            Throw New Exception("Reaktoro requires a Python distribution version between 3.7 and 3.9 (inclusive)")
+            Throw New Exception("Reaktoro requires a Python distribution version between 3.7 and 3.9 (inclusive). Found version " & pyver)
         End If
 
         dllpath = Path.Combine(libpath, "reaktoro")

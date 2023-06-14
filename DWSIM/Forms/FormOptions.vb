@@ -131,6 +131,7 @@ Public Class FormOptions
             Me.KryptonTextBox1.Enabled = False
             Me.TrackBar1.Enabled = False
         End If
+        If FormMain.IsPro Then KryptonButton1.Enabled = False
     End Sub
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
