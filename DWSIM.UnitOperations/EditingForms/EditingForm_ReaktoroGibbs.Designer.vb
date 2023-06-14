@@ -23,9 +23,9 @@ Partial Class EditingForm_ReaktoroGibbs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_ReaktoroGibbs))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
@@ -93,6 +93,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button4 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.chkUseExternalDatabase = New System.Windows.Forms.CheckBox()
+        Me.tbExternalDB = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -378,7 +381,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.rtbAnnotations.Location = New System.Drawing.Point(3, 16)
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -433,8 +436,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn6.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn6.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -442,8 +445,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn7.HeaderText = "Conversion (%)"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -477,6 +480,9 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'TabPageParams
         '
+        Me.TabPageParams.Controls.Add(Me.Button7)
+        Me.TabPageParams.Controls.Add(Me.tbExternalDB)
+        Me.TabPageParams.Controls.Add(Me.chkUseExternalDatabase)
         Me.TabPageParams.Controls.Add(Me.Button6)
         Me.TabPageParams.Controls.Add(Me.Button5)
         Me.TabPageParams.Controls.Add(Me.cbDatabase)
@@ -607,7 +613,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfigurePP.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnConfigurePP.Location = New System.Drawing.Point(368, 117)
+        Me.btnConfigurePP.Location = New System.Drawing.Point(368, 152)
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.btnConfigurePP.Size = New System.Drawing.Size(21, 21)
         Me.btnConfigurePP.TabIndex = 20
@@ -620,7 +626,7 @@ Partial Class EditingForm_ReaktoroGibbs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
-        Me.cbPropPack.Location = New System.Drawing.Point(152, 117)
+        Me.cbPropPack.Location = New System.Drawing.Point(152, 152)
         Me.cbPropPack.Name = "cbPropPack"
         Me.cbPropPack.Size = New System.Drawing.Size(209, 21)
         Me.cbPropPack.TabIndex = 15
@@ -629,7 +635,7 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         Me.Label9.AutoSize = True
         Me.Label9.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label9.Location = New System.Drawing.Point(14, 121)
+        Me.Label9.Location = New System.Drawing.Point(14, 156)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(92, 13)
         Me.Label9.TabIndex = 14
@@ -642,9 +648,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbPDrop.Enabled = False
         Me.cbPDrop.FormattingEnabled = True
         Me.cbPDrop.Items.AddRange(New Object() {"Mínima das Entradas", "Média das Entradas", "Máxima das Entradas"})
-        Me.cbPDrop.Location = New System.Drawing.Point(295, 50)
+        Me.cbPDrop.Location = New System.Drawing.Point(314, 51)
         Me.cbPDrop.Name = "cbPDrop"
-        Me.cbPDrop.Size = New System.Drawing.Size(66, 21)
+        Me.cbPDrop.Size = New System.Drawing.Size(75, 21)
         Me.cbPDrop.TabIndex = 39
         '
         'tbPDrop
@@ -653,7 +659,7 @@ Partial Class EditingForm_ReaktoroGibbs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbPDrop.Location = New System.Drawing.Point(152, 51)
         Me.tbPDrop.Name = "tbPDrop"
-        Me.tbPDrop.Size = New System.Drawing.Size(137, 20)
+        Me.tbPDrop.Size = New System.Drawing.Size(156, 20)
         Me.tbPDrop.TabIndex = 38
         Me.tbPDrop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -763,8 +769,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn1.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -861,6 +867,37 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.chkUseEmbeddedImage.TabIndex = 37
         Me.chkUseEmbeddedImage.Text = "Use Embedded Image Icon"
         Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
+        '
+        'chkUseExternalDatabase
+        '
+        Me.chkUseExternalDatabase.AutoSize = True
+        Me.chkUseExternalDatabase.Location = New System.Drawing.Point(17, 121)
+        Me.chkUseExternalDatabase.Name = "chkUseExternalDatabase"
+        Me.chkUseExternalDatabase.Size = New System.Drawing.Size(113, 17)
+        Me.chkUseExternalDatabase.TabIndex = 49
+        Me.chkUseExternalDatabase.Text = "External Database"
+        Me.chkUseExternalDatabase.UseVisualStyleBackColor = True
+        '
+        'tbExternalDB
+        '
+        Me.tbExternalDB.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbExternalDB.Location = New System.Drawing.Point(152, 119)
+        Me.tbExternalDB.Name = "tbExternalDB"
+        Me.tbExternalDB.ReadOnly = True
+        Me.tbExternalDB.Size = New System.Drawing.Size(156, 20)
+        Me.tbExternalDB.TabIndex = 50
+        Me.tbExternalDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Button7
+        '
+        Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button7.Location = New System.Drawing.Point(314, 117)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(75, 23)
+        Me.Button7.TabIndex = 51
+        Me.Button7.Text = "Search"
+        Me.Button7.UseVisualStyleBackColor = True
         '
         'EditingForm_ReaktoroGibbs
         '
@@ -969,4 +1006,7 @@ Partial Class EditingForm_ReaktoroGibbs
     Public WithEvents Button5 As Button
     Public WithEvents Button6 As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Button7 As Button
+    Public WithEvents tbExternalDB As TextBox
+    Friend WithEvents chkUseExternalDatabase As CheckBox
 End Class
