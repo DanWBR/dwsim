@@ -275,7 +275,7 @@ Imports DWSIM.GlobalSettings
             If pyStderr IsNot Nothing Then
                 If pyStderr.ToString() <> "b" + Chr(39) + Chr(39) Then
                     pyStderr = pyStderr.ToString().Replace("\n", "\r\n")
-                    proppack.Flowsheet?.ShowMessage("Reaktoro error: " + pyStderr, DWSIM.Interfaces.IFlowsheet.MessageType.GeneralError)
+                    proppack.Flowsheet?.ShowMessage("Reaktoro error: " + pyStderr.ToString(), DWSIM.Interfaces.IFlowsheet.MessageType.GeneralError)
                 End If
             End If
 
@@ -809,7 +809,7 @@ Imports DWSIM.GlobalSettings
             If pyStderr IsNot Nothing Then
                 If pyStderr.ToString() <> "b" + Chr(39) + Chr(39) Then
                     pyStderr = pyStderr.ToString().Replace("\n", "\r\n")
-                    proppack.Flowsheet?.ShowMessage("Reaktoro error: " + pyStderr, DWSIM.Interfaces.IFlowsheet.MessageType.GeneralError)
+                    proppack.Flowsheet?.ShowMessage("Reaktoro error: " + pyStderr.ToString(), DWSIM.Interfaces.IFlowsheet.MessageType.GeneralError)
                 End If
             End If
 
