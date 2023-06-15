@@ -166,6 +166,10 @@ Public Class EditingForm_ReaktoroGibbs
 
         End With
 
+        tbExternalDB.Visible = False
+        chkUseExternalDatabase.Visible = False
+        Button7.Visible = False
+
         Loaded = True
 
     End Sub
