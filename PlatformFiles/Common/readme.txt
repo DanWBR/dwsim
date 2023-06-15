@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.4.7
+Version 8.5.0
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,18 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.5.0
+
+- New Object Palette (Classic UI)
+- Added Aqueous Electorlytes (Reaktoro) Property Package
+- Added Cut/Copy/Paste items to context menus (Classic UI)
+- Removed dependency of the additional Python environments package
+- Fixed an issue with Gibbs Reactor
+- Removed interactive python console (Classic UI)
+- Fixed compound search (Classic UI) (#489)
+- Fixed Infinity Loop on Calc Critical Point in PR78 (#487)
+- Other fixes and enhancements
 
 Version 8.4.7
 

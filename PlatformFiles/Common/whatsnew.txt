@@ -1,9 +1,11 @@
-Version 8.4.7
+Version 8.5.0
 
-- Added Feed Recovery as specification for Distillation Columns
-- Added context menu in compound selection panel for viewing, exporting and replacing (Classic UI)
-- Exposed Tray Spacing for user definition in Rigorous Column
-- Implemented Stop button for Cross-Platform UI (feature request #481)
-- Fixed loading of additional compounds for Property Packages in CAPE-OPEN/Excel mode
-- Improved initialization time
-- Other bug fixes
+- New Object Palette (Classic UI)
+- Added Aqueous Electorlytes (Reaktoro) Property Package
+- Added Cut/Copy/Paste items to context menus (Classic UI)
+- Removed dependency of the additional Python environments package
+- Fixed an issue with Gibbs Reactor
+- Removed interactive python console (Classic UI)
+- Fixed compound search (Classic UI) (#489)
+- Fixed Infinity Loop on Calc Critical Point in PR78 (#487)
+- Other fixes and enhancements
