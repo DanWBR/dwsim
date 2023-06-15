@@ -123,6 +123,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.CopiarComoImagem300ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportarParaPDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportarParaSVGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
+        Me.PasteObjectTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsmiNaturalLayout = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutAutomaticoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -151,6 +153,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsmiInvertVertically = New System.Windows.Forms.ToolStripMenuItem()
         Me.HorizontalmenteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CutTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClonarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExcluirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
@@ -183,10 +187,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
-        Me.PasteObjectTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopyTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CutTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -248,6 +248,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'SplitContainerVertical
         '
         resources.ApplyResources(Me.SplitContainerVertical, "SplitContainerVertical")
+        Me.SplitContainerVertical.BackColor = System.Drawing.Color.White
         Me.SplitContainerVertical.Name = "SplitContainerVertical"
         '
         'SplitContainerVertical.Panel1
@@ -948,6 +949,17 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ExportarParaSVGToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_vector
         Me.ExportarParaSVGToolStripMenuItem.Name = "ExportarParaSVGToolStripMenuItem"
         '
+        'ToolStripSeparator22
+        '
+        resources.ApplyResources(Me.ToolStripSeparator22, "ToolStripSeparator22")
+        Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
+        '
+        'PasteObjectTSMI
+        '
+        resources.ApplyResources(Me.PasteObjectTSMI, "PasteObjectTSMI")
+        Me.PasteObjectTSMI.Image = Global.DWSIM.My.Resources.Resources.paste_plain
+        Me.PasteObjectTSMI.Name = "PasteObjectTSMI"
+        '
         'ToolStripSeparator18
         '
         resources.ApplyResources(Me.ToolStripSeparator18, "ToolStripSeparator18")
@@ -1107,6 +1119,18 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        '
+        'CutTSMI
+        '
+        resources.ApplyResources(Me.CutTSMI, "CutTSMI")
+        Me.CutTSMI.Image = Global.DWSIM.My.Resources.Resources.cut
+        Me.CutTSMI.Name = "CutTSMI"
+        '
+        'CopyTSMI
+        '
+        resources.ApplyResources(Me.CopyTSMI, "CopyTSMI")
+        Me.CopyTSMI.Image = Global.DWSIM.My.Resources.Resources.copy
+        Me.CopyTSMI.Name = "CopyTSMI"
         '
         'ClonarToolStripMenuItem
         '
@@ -1277,29 +1301,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.ToolStripSeparator11, "ToolStripSeparator11")
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        '
-        'ToolStripSeparator22
-        '
-        resources.ApplyResources(Me.ToolStripSeparator22, "ToolStripSeparator22")
-        Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
-        '
-        'PasteObjectTSMI
-        '
-        resources.ApplyResources(Me.PasteObjectTSMI, "PasteObjectTSMI")
-        Me.PasteObjectTSMI.Image = Global.DWSIM.My.Resources.Resources.paste_plain
-        Me.PasteObjectTSMI.Name = "PasteObjectTSMI"
-        '
-        'CopyTSMI
-        '
-        resources.ApplyResources(Me.CopyTSMI, "CopyTSMI")
-        Me.CopyTSMI.Image = Global.DWSIM.My.Resources.Resources.copy
-        Me.CopyTSMI.Name = "CopyTSMI"
-        '
-        'CutTSMI
-        '
-        resources.ApplyResources(Me.CutTSMI, "CutTSMI")
-        Me.CutTSMI.Image = Global.DWSIM.My.Resources.Resources.cut
-        Me.CutTSMI.Name = "CutTSMI"
         '
         'FlowsheetSurface_SkiaSharp
         '

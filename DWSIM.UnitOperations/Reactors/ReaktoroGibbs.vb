@@ -179,6 +179,7 @@ Namespace Reactors
                 If UseExternalDatabase Then
                     Dim dbpath = Path.Combine(IO.Path.GetTempPath(), ExternalDatabaseFileName)
                     File.WriteAllText(dbpath, ExternalDatabaseContents)
+                    dbpath = dbpath.Replace("\", "\\")
                     db = reaktoro.Database(dbpath)
                 Else
                     db = reaktoro.Database(DatabaseName)
