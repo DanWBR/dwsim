@@ -2178,10 +2178,6 @@ Public Class FormMain
 
         form.FormFilesExplorer.Flowsheet = form
 
-#If LINUX = False Then
-        form.FormIPyConsole.Flowsheet = form
-#End If
-
         ' Set DockPanel properties
         form.dckPanel.ActiveAutoHideContent = Nothing
         form.dckPanel.Parent = form
@@ -2196,9 +2192,6 @@ Public Class FormMain
         form.FormDynamics.DockPanel = Nothing
         form.FormCharts.DockPanel = Nothing
         form.FormFilesExplorer.DockPanel = Nothing
-#If LINUX = False Then
-        form.FormIPyConsole.DockPanel = Nothing
-#End If
 
         Try
             form.FormLog.DockPanel = form.dckPanel
@@ -2208,9 +2201,6 @@ Public Class FormMain
             form.FormSurface?.Show(form.dckPanel)
             form.FormDynamics?.Show(form.dckPanel)
             form.FormFilesExplorer?.Show(form.dckPanel)
-#If LINUX = False Then
-            'form.FormIPyConsole?.Show(form.dckPanel)
-#End If
             form.dckPanel.BringToFront()
             form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
         Catch ex As Exception
@@ -2758,10 +2748,6 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
-#If LINUX = False Then
-            form.FormIPyConsole.Flowsheet = form
-#End If
-
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2777,9 +2763,6 @@ Public Class FormMain
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
             form.FormScript1.DockPanel = Nothing
-#If LINUX = False Then
-            form.FormIPyConsole.DockPanel = Nothing
-#End If
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -3323,8 +3306,6 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
-            form.FormIPyConsole.Flowsheet = form
-
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -3339,7 +3320,6 @@ Public Class FormMain
             form.FormSurface.DockPanel = Nothing
             form.FormDynamics.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
-            form.FormIPyConsole.DockPanel = Nothing
             form.FormScript1.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then

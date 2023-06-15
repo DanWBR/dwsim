@@ -96,7 +96,7 @@ Public Class FormFlowsheet
     Public FormDynamics As New FormDynamicsManager
     Public FormIntegratorControls As New FormDynamicsIntegratorControl
     Public FormFilesExplorer As New FormFileExplorer
-    Public FormIPyConsole As New FormInteractiveIronPythonConsole
+    'Public FormIPyConsole As New FormInteractiveIronPythonConsole
 
     Public FormScript1 As New FormScript
 
@@ -232,7 +232,7 @@ Public Class FormFlowsheet
         FormDynamics.Flowsheet = Me
         FormIntegratorControls.Flowsheet = Me
         FormFilesExplorer.Flowsheet = Me
-        FormIPyConsole.Flowsheet = Me
+        'FormIPyConsole.Flowsheet = Me
         FormWatch.Flowsheet = Me
         FormScript1.fc = Me
 
@@ -322,7 +322,7 @@ Public Class FormFlowsheet
             FormDynamics.DockPanel = Nothing
             FormIntegratorControls.DockPanel = Nothing
             FormFilesExplorer.DockPanel = Nothing
-            FormIPyConsole.DockPanel = Nothing
+            'FormIPyConsole.DockPanel = Nothing
             FormScript1.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
@@ -559,8 +559,8 @@ Public Class FormFlowsheet
                 Return Me.FormIntegratorControls
             Case "DWSIM.FormFileExplorer"
                 Return Me.FormFilesExplorer
-            Case "DWSIM.FormInteractiveIronPythonConsole"
-                Return Me.FormIPyConsole
+                'Case "DWSIM.FormInteractiveIronPythonConsole"
+                '    Return Me.FormIPyConsole
         End Select
         Return Nothing
     End Function
@@ -796,12 +796,12 @@ Public Class FormFlowsheet
 
         End Try
 
-        Try
-            FormIPyConsole.Flowsheet = Nothing
-            FormIPyConsole.Dispose()
-        Catch ex As Exception
+        'Try
+        '    FormIPyConsole.Flowsheet = Nothing
+        '    FormIPyConsole.Dispose()
+        'Catch ex As Exception
 
-        End Try
+        'End Try
 
         Try
             FormWatch.Flowsheet = Nothing
@@ -967,7 +967,6 @@ Public Class FormFlowsheet
         CriadorDeComponentesSolidosToolStripMenuItem = Nothing
         ToggleWeatherPanelVisibilityToolStripMenuItem = Nothing
         CriarPseudocomponentesEmBateladaToolStripMenuItem = Nothing
-        ConsoleInterativoIronPtyhonToolStripMenuItem = Nothing
         tsbAtivar = Nothing
         InvertSelectionToolStripMenuItem = Nothing
 
@@ -4447,12 +4446,6 @@ Public Class FormFlowsheet
     Private Sub CriarPseudocomponentesEmBateladaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarPseudocomponentesEmBateladaToolStripMenuItem.Click
         Dim fba As New FormBulkAddPseudos With {.Flowsheet = Me}
         fba.Show()
-    End Sub
-
-    Private Sub ConsoleInterativoIronPtyhonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsoleInterativoIronPtyhonToolStripMenuItem.Click
-
-        DisplayForm(Me.FormIPyConsole)
-
     End Sub
 
     Public Async Sub DisplayHTML(title As String, htmlcontent As String)

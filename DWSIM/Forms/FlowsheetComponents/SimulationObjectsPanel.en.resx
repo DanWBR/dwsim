@@ -139,12 +139,12 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelStreams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="CheckBox15.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -160,7 +160,7 @@
     <value>0, 1670</value>
   </data>
   <data name="CheckBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelControllers.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1582</value>
@@ -169,7 +169,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelControllers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelControllers.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -177,7 +177,7 @@
   <data name="CheckBox14.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -193,7 +193,7 @@
     <value>0, 1552</value>
   </data>
   <data name="CheckBox14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelIndicators.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1464</value>
@@ -202,7 +202,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelIndicators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelIndicators.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -210,7 +210,7 @@
   <data name="CheckBox13.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -226,7 +226,7 @@
     <value>0, 1434</value>
   </data>
   <data name="CheckBox13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelLogical.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1346</value>
@@ -235,7 +235,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelLogical.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -243,7 +243,7 @@
   <data name="CheckBox12.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -259,7 +259,7 @@
     <value>0, 1316</value>
   </data>
   <data name="CheckBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelCustomModelsFOSSEE.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1222</value>
@@ -268,7 +268,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelCustomModelsFOSSEE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 94</value>
+    <value>390, 94</value>
   </data>
   <data name="PanelCustomModelsFOSSEE.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -276,7 +276,7 @@
   <data name="CheckBox11.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -292,7 +292,7 @@
     <value>0, 1192</value>
   </data>
   <data name="CheckBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelUser.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1104</value>
@@ -301,7 +301,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelUser.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -309,7 +309,7 @@
   <data name="CheckBox10.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -325,7 +325,7 @@
     <value>0, 1074</value>
   </data>
   <data name="CheckBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="CheckBox10.Text" xml:space="preserve">
     <value>User Models</value>
@@ -337,7 +337,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelCE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 100</value>
+    <value>390, 100</value>
   </data>
   <data name="PanelCE.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -345,7 +345,7 @@
   <data name="CheckBox9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -361,7 +361,7 @@
     <value>0, 944</value>
   </data>
   <data name="CheckBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="CheckBox9.Text" xml:space="preserve">
     <value>Renewable Energies</value>
@@ -373,7 +373,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelSolids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelSolids.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -381,7 +381,7 @@
   <data name="CheckBox8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -397,7 +397,7 @@
     <value>0, 826</value>
   </data>
   <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 738</value>
@@ -406,7 +406,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelColumns.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -414,7 +414,7 @@
   <data name="CheckBox7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -430,7 +430,7 @@
     <value>0, 708</value>
   </data>
   <data name="CheckBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelReactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 620</value>
@@ -439,7 +439,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelReactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelReactors.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -447,7 +447,7 @@
   <data name="CheckBox6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -463,7 +463,7 @@
     <value>0, 590</value>
   </data>
   <data name="CheckBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelExchangers.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 502</value>
@@ -472,7 +472,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelExchangers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelExchangers.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -480,7 +480,7 @@
   <data name="CheckBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -496,7 +496,7 @@
     <value>0, 472</value>
   </data>
   <data name="CheckBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="CheckBox5.Text" xml:space="preserve">
     <value>Exchangers</value>
@@ -508,7 +508,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelMixers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelMixers.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -516,7 +516,7 @@
   <data name="CheckBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -532,12 +532,12 @@
     <value>0, 354</value>
   </data>
   <data name="CheckBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="CheckBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -553,7 +553,7 @@
     <value>0, 236</value>
   </data>
   <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelPressure.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 148</value>
@@ -562,7 +562,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="CheckBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -584,12 +584,12 @@
     <value>0, 0</value>
   </data>
   <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="CheckBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
+        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
         QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
         dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
         G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
@@ -605,7 +605,7 @@
     <value>0, 118</value>
   </data>
   <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>390, 30</value>
   </data>
   <data name="PanelSeparators.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 266</value>
@@ -614,7 +614,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelSeparators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 88</value>
+    <value>390, 88</value>
   </data>
   <data name="PanelOther.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1700</value>
@@ -623,7 +623,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="PanelOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 128</value>
+    <value>390, 128</value>
   </data>
   <data name="PanelOther.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -638,7 +638,7 @@
     <value>31</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 1828</value>
+    <value>390, 1828</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>361, 3</value>

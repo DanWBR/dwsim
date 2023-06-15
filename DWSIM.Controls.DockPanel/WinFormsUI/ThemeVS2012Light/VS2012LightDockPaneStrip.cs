@@ -633,7 +633,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
             else
             {
-                return height;
+                return height + 4;
             }
         }
 
@@ -1204,11 +1204,11 @@ namespace WeifenLuo.WinFormsUI.Docking
             else
                 rectText.Width = rect.Width - DocumentIconGapLeft - DocumentTextGapRight - rectCloseButton.Width;
 
-            //if (dpi > 1.0)
-            //{
-            //    rectText.Y = rectText.Y - 4 * (int)dpi;
-            //    rectText.Height = rectText.Height + 4 * (int)dpi;
-            //}
+            if (dpi == 1.0)
+            {
+                rectText.Y = rectText.Y - 4 * (int)dpi;
+                rectText.Height = rectText.Height + 4 * (int)dpi;
+            }
 
             Rectangle rectTab = DrawHelper.RtlTransform(this, rect);
             Rectangle rectBack = DrawHelper.RtlTransform(this, rect);

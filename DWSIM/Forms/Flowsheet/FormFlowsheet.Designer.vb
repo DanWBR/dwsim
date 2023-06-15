@@ -81,7 +81,6 @@ Partial Class FormFlowsheet
         Me.varpaneltsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.COObjTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleOutputTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConsoleInterativoIronPtyhonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToggleWeatherPanelVisibilityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLayoutTSMI = New System.Windows.Forms.ToolStripMenuItem()
@@ -520,7 +519,7 @@ Partial Class FormFlowsheet
         '
         'ShowTSMI
         '
-        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ConsoleInterativoIronPtyhonToolStripMenuItem, Me.ToggleWeatherPanelVisibilityToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
+        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToggleWeatherPanelVisibilityToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ShowTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ShowTSMI.MergeIndex = 9
         Me.ShowTSMI.Name = "ShowTSMI"
@@ -542,11 +541,6 @@ Partial Class FormFlowsheet
         '
         Me.ConsoleOutputTSMI.Name = "ConsoleOutputTSMI"
         resources.ApplyResources(Me.ConsoleOutputTSMI, "ConsoleOutputTSMI")
-        '
-        'ConsoleInterativoIronPtyhonToolStripMenuItem
-        '
-        Me.ConsoleInterativoIronPtyhonToolStripMenuItem.Name = "ConsoleInterativoIronPtyhonToolStripMenuItem"
-        resources.ApplyResources(Me.ConsoleInterativoIronPtyhonToolStripMenuItem, "ConsoleInterativoIronPtyhonToolStripMenuItem")
         '
         'ToggleWeatherPanelVisibilityToolStripMenuItem
         '
@@ -965,7 +959,6 @@ Partial Class FormFlowsheet
     Friend WithEvents CriadorDeComponentesSolidosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToggleWeatherPanelVisibilityToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CriarPseudocomponentesEmBateladaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ConsoleInterativoIronPtyhonToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Panel1 As Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents PictureBox1 As PictureBox
