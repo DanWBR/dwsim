@@ -284,6 +284,8 @@ Namespace DWSIM.Flowsheet
 
         <Xml.Serialization.XmlIgnore()> Public Property SingleUnitOpID As String = "" Implements IFlowsheetOptions.SingleUnitOpID
 
+        Public Property RTFAnnotations As String = "" Implements IFlowsheetOptions.RTFAnnotations
+
     End Class
 
 End Namespace

@@ -7,6 +7,8 @@ Public Class SimulationObjectsPanel
 
     Public Flowsheet As Interfaces.IFlowsheet
 
+    Dim arrow_down, arrow_right As Bitmap
+
     'Public ObjectList As New List(Of Interfaces.ISimulationObject)
 
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -64,6 +66,30 @@ Public Class SimulationObjectsPanel
         CheckBox13.Tag = PanelIndicators
         CheckBox14.Tag = PanelControllers
         CheckBox15.Tag = PanelOther
+
+        If Settings.DpiScale > 1.0 Then
+            arrow_right = New Bitmap(My.Resources.arrow_32px, New Size(Settings.DpiScale * 10, Settings.DpiScale * 10))
+            arrow_down = New Bitmap(My.Resources.thick_arrow_pointing_down_32px, New Size(Settings.DpiScale * 10, Settings.DpiScale * 10))
+        Else
+            arrow_right = My.Resources.arrow_right
+            arrow_down = My.Resources.arrow_down
+        End If
+
+        CheckBox1.Image = arrow_down
+        CheckBox2.Image = arrow_right
+        CheckBox3.Image = arrow_right
+        CheckBox4.Image = arrow_right
+        CheckBox5.Image = arrow_right
+        CheckBox6.Image = arrow_right
+        CheckBox7.Image = arrow_right
+        CheckBox8.Image = arrow_right
+        CheckBox9.Image = arrow_right
+        CheckBox10.Image = arrow_right
+        CheckBox11.Image = arrow_right
+        CheckBox12.Image = arrow_right
+        CheckBox13.Image = arrow_right
+        CheckBox14.Image = arrow_right
+        CheckBox15.Image = arrow_right
 
         Dim add As Boolean = True
 
@@ -220,10 +246,10 @@ Public Class SimulationObjectsPanel
 
         If chkB.Checked Then
             pnl.Height = CInt(pnl.Tag) * Settings.DpiScale
-            chkB.Image = My.Resources.arrow_down
+            chkB.Image = arrow_down
         Else
             pnl.Height = 0
-            chkB.Image = My.Resources.arrow_right
+            chkB.Image = arrow_right
             chkB.Checked = False
         End If
 

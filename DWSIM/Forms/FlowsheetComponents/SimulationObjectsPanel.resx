@@ -405,6 +405,9 @@
   <data name="&gt;&gt;CheckBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="CheckBox15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="PanelIndicators.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 1645</value>
   </data>
@@ -419,6 +422,9 @@
   </data>
   <data name="CheckBox9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>397, 94</value>
   </data>
   <data name="&gt;&gt;CheckBox15.Name" xml:space="preserve">
     <value>CheckBox15</value>
@@ -748,8 +754,8 @@
   <data name="&gt;&gt;CheckBox14.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 30</value>
+  <data name="CheckBox6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="CheckBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -901,8 +907,8 @@
   <data name="CheckBox14.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="CheckBox7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="CheckBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;CheckBox13.Name" xml:space="preserve">
     <value>CheckBox13</value>
@@ -990,9 +996,6 @@
   </data>
   <data name="CheckBox3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="CheckBox13.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="CheckBox10.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1204,8 +1207,8 @@
   <data name="CheckBox2.Text" xml:space="preserve">
     <value>Pressure Changers</value>
   </data>
-  <data name="CheckBox15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 30</value>
   </data>
   <data name="&gt;&gt;CheckBox9.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1333,9 +1336,6 @@
   <data name="CheckBox11.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="CheckBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="CheckBox15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1399,8 +1399,8 @@
   <data name="CheckBox5.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 94</value>
+  <data name="CheckBox13.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1573,6 +1573,9 @@
   <data name="&gt;&gt;PanelSeparators.Name" xml:space="preserve">
     <value>PanelSeparators</value>
   </data>
+  <data name="CheckBox7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="CheckBox12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1590,9 +1593,6 @@
   </data>
   <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CheckBox6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
   </data>
   <data name="CheckBox6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

@@ -118,16 +118,14 @@ Public Class FlowsheetSurface_SkiaSharp
 
         PanelFlowsheetControl.Controls.Add(FControl)
 
-        SimObjPanel = New SimulationObjectsPanel() With {.Flowsheet = Flowsheet}
-        SimObjPanel.Width = SplitContainerVertical.Panel2.Width
-        SimObjPanel.Anchor = AnchorStyles.Top + AnchorStyles.Left + AnchorStyles.Right
+        SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
 
         AddHandler SimObjPanel.Button1.Click,
             Sub(s2, e2)
                 If SimObjPanel.Button1.Tag = "Expanded" Then
                     SimObjPanel.Button1.Tag = "Collapsed"
                     SimObjPanel.Button1.BackgroundImage = My.Resources.double_left_32px
-                    SplitContainerVertical.SplitterDistance = SplitContainerVertical.Width - 54 * Settings.DpiScale
+                    SplitContainerVertical.SplitterDistance = SplitContainerVertical.Width - 40 * Settings.DpiScale
                     SimObjPanel.TableLayoutPanel1.Visible = False
                     SimObjPanel.Label1.Visible = False
                 Else

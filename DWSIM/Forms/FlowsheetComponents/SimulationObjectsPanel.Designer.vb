@@ -106,7 +106,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox15, "CheckBox15")
         Me.CheckBox15.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox15.FlatAppearance.BorderSize = 0
+        Me.CheckBox15.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox15.Name = "CheckBox15"
         Me.CheckBox15.UseVisualStyleBackColor = False
         '
@@ -120,7 +120,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox14, "CheckBox14")
         Me.CheckBox14.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox14.FlatAppearance.BorderSize = 0
+        Me.CheckBox14.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox14.Name = "CheckBox14"
         Me.CheckBox14.UseVisualStyleBackColor = False
         '
@@ -134,7 +134,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox13, "CheckBox13")
         Me.CheckBox13.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox13.FlatAppearance.BorderSize = 0
+        Me.CheckBox13.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox13.Name = "CheckBox13"
         Me.CheckBox13.UseVisualStyleBackColor = False
         '
@@ -148,7 +148,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox12, "CheckBox12")
         Me.CheckBox12.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox12.FlatAppearance.BorderSize = 0
+        Me.CheckBox12.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox12.Name = "CheckBox12"
         Me.CheckBox12.UseVisualStyleBackColor = False
         '
@@ -162,7 +162,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox11, "CheckBox11")
         Me.CheckBox11.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox11.FlatAppearance.BorderSize = 0
+        Me.CheckBox11.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox11.Name = "CheckBox11"
         Me.CheckBox11.UseVisualStyleBackColor = False
         '
@@ -176,7 +176,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox10, "CheckBox10")
         Me.CheckBox10.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox10.FlatAppearance.BorderSize = 0
+        Me.CheckBox10.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox10.Name = "CheckBox10"
         Me.CheckBox10.UseVisualStyleBackColor = False
         '
@@ -190,7 +190,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox9, "CheckBox9")
         Me.CheckBox9.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox9.FlatAppearance.BorderSize = 0
+        Me.CheckBox9.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox9.Name = "CheckBox9"
         Me.CheckBox9.UseVisualStyleBackColor = False
         '
@@ -204,7 +204,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox8, "CheckBox8")
         Me.CheckBox8.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox8.FlatAppearance.BorderSize = 0
+        Me.CheckBox8.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox8.Name = "CheckBox8"
         Me.CheckBox8.UseVisualStyleBackColor = False
         '
@@ -218,7 +218,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox7, "CheckBox7")
         Me.CheckBox7.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox7.FlatAppearance.BorderSize = 0
+        Me.CheckBox7.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox7.Name = "CheckBox7"
         Me.CheckBox7.UseVisualStyleBackColor = False
         '
@@ -232,7 +232,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox6, "CheckBox6")
         Me.CheckBox6.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox6.FlatAppearance.BorderSize = 0
+        Me.CheckBox6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox6.Name = "CheckBox6"
         Me.CheckBox6.UseVisualStyleBackColor = False
         '
@@ -246,7 +246,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox5, "CheckBox5")
         Me.CheckBox5.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox5.FlatAppearance.BorderSize = 0
+        Me.CheckBox5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox5.Name = "CheckBox5"
         Me.CheckBox5.UseVisualStyleBackColor = False
         '
@@ -260,7 +260,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox4, "CheckBox4")
         Me.CheckBox4.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox4.FlatAppearance.BorderSize = 0
+        Me.CheckBox4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox4.Name = "CheckBox4"
         Me.CheckBox4.UseVisualStyleBackColor = False
         '
@@ -268,7 +268,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox3, "CheckBox3")
         Me.CheckBox3.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox3.FlatAppearance.BorderSize = 0
+        Me.CheckBox3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.UseVisualStyleBackColor = False
         '
@@ -283,7 +283,7 @@ Partial Class SimulationObjectsPanel
         Me.CheckBox1.BackColor = System.Drawing.SystemColors.Control
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.FlatAppearance.BorderSize = 0
+        Me.CheckBox1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.UseVisualStyleBackColor = False
         '
@@ -291,7 +291,7 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me.CheckBox2, "CheckBox2")
         Me.CheckBox2.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox2.FlatAppearance.BorderSize = 0
+        Me.CheckBox2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.UseVisualStyleBackColor = False
         '
@@ -335,6 +335,7 @@ Partial Class SimulationObjectsPanel
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
+        Me.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Panel1)
         Me.DoubleBuffered = True

@@ -88,6 +88,7 @@ Partial Class FormOptions
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.btnDownPy = New System.Windows.Forms.Button()
         Me.btnSelectPythonPath = New System.Windows.Forms.Button()
         Me.tbPythonPath = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -106,7 +107,6 @@ Partial Class FormOptions
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.btnDownPy = New System.Windows.Forms.Button()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -617,6 +617,12 @@ Partial Class FormOptions
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.TabStop = False
         '
+        'btnDownPy
+        '
+        resources.ApplyResources(Me.btnDownPy, "btnDownPy")
+        Me.btnDownPy.Name = "btnDownPy"
+        Me.btnDownPy.UseVisualStyleBackColor = True
+        '
         'btnSelectPythonPath
         '
         resources.ApplyResources(Me.btnSelectPythonPath, "btnSelectPythonPath")
@@ -736,12 +742,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
-        '
-        'btnDownPy
-        '
-        resources.ApplyResources(Me.btnDownPy, "btnDownPy")
-        Me.btnDownPy.Name = "btnDownPy"
-        Me.btnDownPy.UseVisualStyleBackColor = True
         '
         'FormOptions
         '

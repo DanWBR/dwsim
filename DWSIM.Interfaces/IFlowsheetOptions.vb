@@ -142,4 +142,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property SingleUnitOpID As String
 
+    Property RTFAnnotations As String
+
 End Interface
