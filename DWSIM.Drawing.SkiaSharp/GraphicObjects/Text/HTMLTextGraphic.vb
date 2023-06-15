@@ -71,6 +71,8 @@ Namespace GraphicObjects
                 p.FilterQuality = SKFilterQuality.High
             End With
 
+            Dim scaling = GlobalSettings.Settings.DpiScale
+
             If GlobalSettings.Settings.IsRunningOnMono() Then
                 Using img = HtmlRender.RenderToImage(newtext, Width, Height, System.Drawing.Color.White)
                     Using bmp = New System.Drawing.Bitmap(img)
@@ -80,7 +82,8 @@ Namespace GraphicObjects
                     End Using
                 End Using
             Else
-                Using img = HtmlRender.RenderToImageGdiPlus(newtext, Width, Height)
+                Using img = HtmlRender.RenderToImageGdiPlus(newtext, Width, Height,
+                                                            System.Drawing.Text.TextRenderingHint.SystemDefault)
                     Using bmp = New System.Drawing.Bitmap(img)
                         Using skbmp = bmp.ToSKBitmap()
                             canvas.DrawBitmap(skbmp, X, Y, p)
