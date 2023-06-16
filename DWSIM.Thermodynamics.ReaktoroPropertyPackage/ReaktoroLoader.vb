@@ -6,37 +6,39 @@ Public Class ReaktoroLoader
 
     Public Shared Function Initialize() As String
 
-        If Settings.RunningPlatform() <> Settings.Platform.Windows Then
+        If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
-            Throw New Exception("The Reaktoro Property Package is not available on Linux/macOS.")
+            Dim pyver = PythonEngine.Version
 
-        End If
+            Dim libpath = "", dllpath, shareddllpath As String
 
-        Dim pyver = PythonEngine.Version
+            If pyver.Contains("3.7.") Then
+                libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py37")
+            ElseIf pyver.Contains("3.8.") Then
+                libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py38")
+            ElseIf pyver.Contains("3.9.") Then
+                libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py39")
+            Else
+                Throw New Exception("Reaktoro requires a Python distribution version between 3.7 and 3.9 (inclusive). Found version " & pyver)
+            End If
 
-        Dim libpath = "", dllpath, shareddllpath As String
+            dllpath = Path.Combine(libpath, "reaktoro")
+            shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
 
-        If pyver.Contains("3.7.") Then
-            libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py37")
-        ElseIf pyver.Contains("3.8.") Then
-            libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py38")
-        ElseIf pyver.Contains("3.9.") Then
-            libpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_py39")
+            Dim append As String = Settings.PythonPath + ";" + Path.Combine(Settings.PythonPath, "Library", "bin") +
+                    ";" + dllpath + ";" + shareddllpath + ";"
+            Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
+            Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
+
+            LoadReaktoroLib(Path.Combine(dllpath, "Reaktoro.dll"))
+
+            Return libpath
+
         Else
-            Throw New Exception("Reaktoro requires a Python distribution version between 3.7 and 3.9 (inclusive). Found version " & pyver)
+
+            Return ""
+
         End If
-
-        dllpath = Path.Combine(libpath, "reaktoro")
-        shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
-
-        Dim append As String = Settings.PythonPath + ";" + Path.Combine(Settings.PythonPath, "Library", "bin") +
-                ";" + dllpath + ";" + shareddllpath + ";"
-        Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
-        Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
-
-        LoadReaktoroLib(Path.Combine(dllpath, "Reaktoro.dll"))
-
-        Return libpath
 
     End Function
 

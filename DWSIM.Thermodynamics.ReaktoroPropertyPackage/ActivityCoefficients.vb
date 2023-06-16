@@ -73,17 +73,21 @@ Public Class ActivityCoefficients
 
         Try
 
-            Dim sys As Object = Py.Import("sys")
-            sys.path.append(libpath)
+            If libpath <> "" Then
 
-            Dim os As Object = Py.Import("os")
+                Dim sys As Object = Py.Import("sys")
+                sys.path.append(libpath)
 
-            Dim dllpath = Path.Combine(libpath, "reaktoro")
-            Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+                Dim os As Object = Py.Import("os")
 
-            os.add_dll_directory(dllpath)
-            os.add_dll_directory(shareddllpath)
-            os.add_dll_directory(Settings.PythonPath)
+                Dim dllpath = Path.Combine(libpath, "reaktoro")
+                Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+
+                os.add_dll_directory(dllpath)
+                os.add_dll_directory(shareddllpath)
+                os.add_dll_directory(Settings.PythonPath)
+
+            End If
 
             Dim codeToRedirectOutput As String = "import sys" & Environment.NewLine + "from io import BytesIO as StringIO" & Environment.NewLine + "sys.stdout = mystdout = StringIO()" & Environment.NewLine + "sys.stdout.flush()" & Environment.NewLine + "sys.stderr = mystderr = StringIO()" & Environment.NewLine + "sys.stderr.flush()"
 

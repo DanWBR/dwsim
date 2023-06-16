@@ -153,16 +153,21 @@ Imports DWSIM.GlobalSettings
         Dim ex0 As Exception = Nothing
 
         Dim sys As Object = Py.Import("sys")
-        sys.path.append(libpath)
 
-        Dim os As Object = Py.Import("os")
+        If libpath <> "" Then
 
-        Dim dllpath = Path.Combine(libpath, "reaktoro")
-        Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+            sys.path.append(libpath)
 
-        os.add_dll_directory(dllpath)
-        os.add_dll_directory(shareddllpath)
-        os.add_dll_directory(Settings.PythonPath)
+            Dim os As Object = Py.Import("os")
+
+            Dim dllpath = Path.Combine(libpath, "reaktoro")
+            Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+
+            os.add_dll_directory(dllpath)
+            os.add_dll_directory(shareddllpath)
+            os.add_dll_directory(Settings.PythonPath)
+
+        End If
 
         Try
 

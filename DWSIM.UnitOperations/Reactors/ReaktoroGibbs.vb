@@ -159,17 +159,21 @@ Namespace Reactors
 
             Using Py.GIL
 
-                Dim sys As Object = Py.Import("sys")
-                sys.path.append(libpath)
+                If libpath <> "" Then
 
-                Dim os As Object = Py.Import("os")
+                    Dim sys As Object = Py.Import("sys")
+                    sys.path.append(libpath)
 
-                Dim dllpath = Path.Combine(libpath, "reaktoro")
-                Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+                    Dim os As Object = Py.Import("os")
 
-                os.add_dll_directory(dllpath)
-                os.add_dll_directory(shareddllpath)
-                os.add_dll_directory(Settings.PythonPath)
+                    Dim dllpath = Path.Combine(libpath, "reaktoro")
+                    Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+
+                    os.add_dll_directory(dllpath)
+                    os.add_dll_directory(shareddllpath)
+                    os.add_dll_directory(Settings.PythonPath)
+
+                End If
 
                 Dim reaktoro As Object = Py.Import("reaktoro")
 
@@ -607,27 +611,27 @@ Namespace Reactors
 
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
 
-            Else
-
-                Throw New Exception("This Unit Operation is not available on Linux/macOS.")
-
             End If
 
             Dim libpath = DWSIM.Thermodynamics.ReaktoroPropertyPackage.ReaktoroLoader.Initialize()
 
             Using Py.GIL
 
-                Dim sys As Object = Py.Import("sys")
-                sys.path.append(libpath)
+                If libpath <> "" Then
 
-                Dim os As Object = Py.Import("os")
+                    Dim sys As Object = Py.Import("sys")
+                    sys.path.append(libpath)
 
-                Dim dllpath = Path.Combine(libpath, "reaktoro")
-                Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+                    Dim os As Object = Py.Import("os")
 
-                os.add_dll_directory(dllpath)
-                os.add_dll_directory(shareddllpath)
-                os.add_dll_directory(Settings.PythonPath)
+                    Dim dllpath = Path.Combine(libpath, "reaktoro")
+                    Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+
+                    os.add_dll_directory(dllpath)
+                    os.add_dll_directory(shareddllpath)
+                    os.add_dll_directory(Settings.PythonPath)
+
+                End If
 
                 Dim reaktoro As Object = Py.Import("reaktoro")
 
