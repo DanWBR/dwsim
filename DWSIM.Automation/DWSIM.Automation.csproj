@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
       <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System" />
@@ -172,6 +173,7 @@
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
       <Name>DWSIM</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

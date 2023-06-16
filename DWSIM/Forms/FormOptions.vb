@@ -38,6 +38,7 @@ Public Class FormOptions
             Button4.Enabled = False
             Button7.Enabled = False
             btnDownPy.Enabled = False
+            tbPythonPath.Enabled = False
         End If
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
