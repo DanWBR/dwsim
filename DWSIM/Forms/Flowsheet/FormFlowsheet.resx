@@ -779,29 +779,29 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        lZDwDwRw+29crLLwAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUTSURBVFhHxVdJU1RXFGaTfbJMfkayzsqqpEIWLpJKVsYh
+        gGKIGlSmyBjEakAjIIjKJAFDBGUoY4OADN1woaf3uqG76QG6SeEABEutrHNyvwP3BbqbBCnUV/XVvfe7
+        5/X53rnnnH4vSV2FPze/m2dq+jCn8sZHrxNnTQ0fbLj89yqqas0+X92xeqOzf7X9zsiLBjluRmPX4DMg
+        lk9k23R3eO1m39jzWB4c9iqa7qyU1LR2bLhOSsq5UPcenEdWXtDi6kt6qId43Ax9/gkjlk9kO7e0RsK3
+        GMeDwx7mVzp713JN1z9mAQj71a6BFWX4JgQUltf9nVvekMoCcC4IJX4MMNv9PG7GoDPAiOUT2Q5pQRpw
+        zMXx4LCHuVl4SPpNMwTgjJRSGKi5wuYIRBaWDD6R7U4iYJ7Qdi8g0D9s8G9FwOyVeoN/8wJkpbhO/mDw
+        eyYANa6cINnUXGHSu8jQ9ABNffW1wSeytQeWaFSfj+PBYQ9z86S+OwGuEUHik09JDz2Ks9UmNR53JWCn
+        RxAwD5HYt48WgtE4W9+vnRR9srY3ORAJLTIUpwT42n+jqc+SKSSchq2ymbl4meZ1394ICI5YKSShOCVg
+        prqWXBknKPD7gGGrbLSz2VyieyLA19bBUJwSoBeV0MzlGvK13jJslY39wDfkbWnbnYDYVmzJL2EoDskG
+        TKSl09gvt2m81GTYso0WIJGcLO8p3ptW7DxxiqE4FQHHtyk075kj/VyhYYtxwRdme9epzIQRwD2vdARw
+        BCiOBYQfkyM1jaKP/iTn8QzDFmNwaJzzw5GSGicAFTNbf+MVBMgadcpuB0Qij5mDAM0dJFfmaV4rcUoA
+        qsN/+y4504+TP/p0iwAkLO7bsYDRnn5yl19khCZszEGAa3SK3KUXeI1IoC0rASjB4LggvbCYvDbPFgEz
+        l6poev9+Et7o9gLwqoRNYPRqM+ktt8jd3E7u9k7mbLKDTXf2kVZTz2tH5lnyzYZpyBVcX5/OIr9Xdj/5
+        R+XqNpNlJsI8YD+azvvWAQu5F5aZux/bCfG+BtXAWFEZiZ4BiX4SZeXMjbrDNF7bQKKxjdeisJSEeYQG
+        7OvJJQ4d4ScUNztoouY6DUthzMsIiSOpJK4105i83yqFgTcL9/ZHYM04aXRC15ks5nAE9goZZplsWM9e
+        b+SzxRFEl5+T8+gx5kOTDnKdN7ETXlumyGOqpLDDTSI3n58e/H/mwOSBgzwCyGqMEGDLy6d5zctrf1cv
+        NyMIQAlqcg98ZOER2WXyKgHehhaa677HIhGl/xWAEptIOcpGgDP9O4ourbKAacz/WGYerdojOyIEqBJU
+        99hkhSgBWnYuC8RcHP+e8wTzbQWEbTpZ8wqMH3P/VEZhu74u4NBhg+dmlF/EAtCy/Z3dxh6STnikI1kl
+        DvnUiheVVeTp7ed5nICuurq/REEJCXn+oxdr1xMIkAkFznquiI/G4N0yub74ksZyC0gcPEyi74GxN5n1
+        I1nP5PCZC1ktih/p6JEJKaMj/QxfbdoqoLGx65nXYidg2KobJeQPLDJnG7TQ9Ljd4AGv1UEP+wZ53x95
+        avC600fW+yPM+zzrZQpYtBBp8oUGfL/cNwTkXap/H59LKlSquWwGjgCI5RPZwhmeOJYHhz3M2+49eJlV
+        0fA5C8CFbzV8LuGLBf9UOKMtkI2DEcsnsEWTQZ3H8uCwB+fF1a1a2rVr72y4X7/wrYbPJYTmdQJPHuf8
+        7V1JSf8A5Sv7a7RAY4YAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsbDynIntegrator.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -1048,7 +1048,7 @@
     <value>2, 2</value>
   </data>
   <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>700, 27</value>
+    <value>617, 27</value>
   </data>
   <data name="FlowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1065,35 +1065,68 @@
   <data name="&gt;&gt;FlowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="btnOpenLogPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="btnOpenLogPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 2</value>
+  <data name="btnOpenLogPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 2</value>
   </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnOpenLogPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 27</value>
   </data>
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnOpenLogPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>View All</value>
+  <data name="btnOpenLogPanel.Text" xml:space="preserve">
+    <value>Open Panel</value>
   </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
+  <data name="&gt;&gt;btnOpenLogPanel.Name" xml:space="preserve">
+    <value>btnOpenLogPanel</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnOpenLogPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnOpenLogPanel.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnOpenLogPanel.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="btnViewFullLog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnViewFullLog.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="btnViewFullLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnViewFullLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>694, 2</value>
+  </data>
+  <data name="btnViewFullLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 27</value>
+  </data>
+  <data name="btnViewFullLog.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnViewFullLog.Text" xml:space="preserve">
+    <value>View History</value>
+  </data>
+  <data name="&gt;&gt;btnViewFullLog.Name" xml:space="preserve">
+    <value>btnViewFullLog</value>
+  </data>
+  <data name="&gt;&gt;btnViewFullLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnViewFullLog.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;btnViewFullLog.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>

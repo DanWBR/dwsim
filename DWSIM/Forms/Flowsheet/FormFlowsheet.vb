@@ -114,6 +114,8 @@ Public Class FormFlowsheet
 
     Public ChartCollection As New Dictionary(Of String, IChart)
 
+    Public Property MessagesLog As New List(Of String) Implements IFlowsheet.MessagesLog
+
     Public CheckedToolstripButton As ToolStripButton
     Public ClickedToolStripMenuItem As ToolStripMenuItem
     Public InsertingObjectToPFD As Boolean = False
@@ -1162,6 +1164,10 @@ Public Class FormFlowsheet
                                       End If
 
                                       Message = texto
+
+                                      If Options.SaveFlowsheetMessagesInFile Then
+                                          MessagesLog.Add("[" + Date.Now.ToString() + "] " + Message)
+                                      End If
 
                                       RaiseEvent NewMessageSent(texto)
 
@@ -4469,7 +4475,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnOpenLogPanel.Click
 
         If Not FormLog.Visible Then
             FormLog.Show(dckPanel)
@@ -4772,6 +4778,26 @@ Public Class FormFlowsheet
         End Select
 
     End Function
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles btnViewFullLog.Click
+
+        Dim flog As New FormTextBox
+
+        flog.TextBox1.ReadOnly = True
+        flog.TextBox1.BackColor = Color.White
+        flog.TextBox1.Font = New Font("Consolas", 9, System.Drawing.FontStyle.Regular)
+        flog.TextBox1.WordWrap = True
+        flog.TextBox1.ScrollBars = ScrollBars.Vertical
+
+        For Each m In MessagesLog
+            flog.TextBox1.AppendText(m)
+            flog.TextBox1.AppendText(vbCrLf)
+        Next
+
+        flog.Text = "Messages Log"
+        flog.Show()
+
+    End Sub
 
     Private Sub MessagePumpTimer_Tick(sender As Object, e As EventArgs) Handles MessagePumpTimer.Tick
 

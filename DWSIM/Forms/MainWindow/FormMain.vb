@@ -2675,6 +2675,16 @@ Public Class FormMain
 
         End If
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog") IsNot Nothing Then
+            Try
+                data = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog").Elements.ToList
+                For Each xel As XElement In data
+                    form.MessagesLog.Add(xel.Value)
+                Next
+            Catch ex As Exception
+            End Try
+        End If
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
 
         Try
@@ -3766,6 +3776,7 @@ Public Class FormMain
             File.Delete(tmpfile)
         Next
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict)
+
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")
 
@@ -3773,6 +3784,17 @@ Public Class FormMain
         form.dckPanel.SaveAsXml(myfile, Encoding.UTF8)
         xel.Add(File.ReadAllText(myfile).ToString)
         File.Delete(myfile)
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("MessagesLog"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog")
+
+        If form.Options.SaveFlowsheetMessagesInFile Then
+            Dim inner_elements As New List(Of XElement)
+            For Each item In form.MessagesLog
+                inner_elements.Add(New XElement("Message", item))
+            Next
+            xel.Add(inner_elements)
+        End If
 
         Using stream As New IO.MemoryStream()
             xdoc.Save(stream)

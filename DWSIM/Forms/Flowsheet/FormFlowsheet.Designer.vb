@@ -125,7 +125,8 @@ Partial Class FormFlowsheet
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblLastMessage = New System.Windows.Forms.LinkLabel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnOpenLogPanel = New System.Windows.Forms.Button()
+        Me.btnViewFullLog = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -801,7 +802,8 @@ Partial Class FormFlowsheet
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.btnOpenLogPanel)
+        Me.Panel1.Controls.Add(Me.btnViewFullLog)
         resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
@@ -832,11 +834,17 @@ Partial Class FormFlowsheet
         Me.lblLastMessage.Name = "lblLastMessage"
         Me.lblLastMessage.TabStop = True
         '
-        'Button1
+        'btnOpenLogPanel
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnOpenLogPanel, "btnOpenLogPanel")
+        Me.btnOpenLogPanel.Name = "btnOpenLogPanel"
+        Me.btnOpenLogPanel.UseVisualStyleBackColor = True
+        '
+        'btnViewFullLog
+        '
+        resources.ApplyResources(Me.btnViewFullLog, "btnViewFullLog")
+        Me.btnViewFullLog.Name = "btnViewFullLog"
+        Me.btnViewFullLog.UseVisualStyleBackColor = True
         '
         'FormFlowsheet
         '
@@ -964,7 +972,8 @@ Partial Class FormFlowsheet
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents lblLastMessage As LinkLabel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnOpenLogPanel As Button
     Public WithEvents tsbAtivar As ToolStripButton
     Friend WithEvents InvertSelectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnViewFullLog As Button
 End Class

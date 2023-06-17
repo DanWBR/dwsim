@@ -200,7 +200,9 @@
     <Compile Include="ZedGraph\ZedGraphControl.Printing.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ZedGraph\ZedGraphControl.Properties.cs" />
+    <Compile Include="ZedGraph\ZedGraphControl.Properties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ZedGraph\ZedGraphControl.ScrollBars.cs">
       <SubType>UserControl</SubType>
     </Compile>

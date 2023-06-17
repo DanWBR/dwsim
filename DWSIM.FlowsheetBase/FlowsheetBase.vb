@@ -43,6 +43,8 @@ Imports System.Text.RegularExpressions
 
     Public WithEvents Options As New SharedClasses.DWSIM.Flowsheet.FlowsheetVariables
 
+    Public Property MessagesLog As New List(Of String) Implements IFlowsheet.MessagesLog
+
     Private FlowsheetSurface As New GraphicsSurface
 
     Public SensAnalysisCollection As New List(Of Optimization.SensitivityAnalysisCase)

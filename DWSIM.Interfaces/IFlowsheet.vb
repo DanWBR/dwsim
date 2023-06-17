@@ -372,6 +372,8 @@
 
     Sub RequestCalculation3(obj As ISimulationObject, Wait As Boolean)
 
+    Property MessagesLog As List(Of String)
+
 End Interface
 
 ''' <summary>
