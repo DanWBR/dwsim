@@ -84,9 +84,7 @@
     <Compile Include="FormConfig.Designer.vb">
       <DependentUpon>FormConfig.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormConfig.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormConfig.vb" />
     <Compile Include="PCSAFT2.vb" />
     <Compile Include="PCSAFT2PropertyPackage.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
