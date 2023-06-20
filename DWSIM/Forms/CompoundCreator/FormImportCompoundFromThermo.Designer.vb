@@ -152,12 +152,13 @@ Partial Class FormImportCompoundFromThermo
         '
         Me.Label3.AutoSize = True
         Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(21, 157)
+        Me.Label3.Location = New System.Drawing.Point(21, 142)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(489, 15)
+        Me.Label3.Size = New System.Drawing.Size(489, 45)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "This tool imports compound data from Caleb Bell's Thermo and Chemicals Python lib" &
-    "raries."
+    "raries." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please install the 'thermo' and 'chemicals' packages with pip before " &
+    "using this tool."
         '
         'WizardPage1
         '
