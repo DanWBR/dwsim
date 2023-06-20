@@ -3290,6 +3290,9 @@ Public Class FormFlowsheet
                 If val = unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number Then
                     Dim args As unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs = grid.Cells(i, j).DataFormatArgs
                     sublist.Add("N" + args.DecimalPlaces.ToString())
+                ElseIf val = unvell.ReoGrid.DataFormat.CellDataFormatFlag.Percent Then
+                    Dim args As unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs = grid.Cells(i, j).DataFormatArgs
+                    sublist.Add("P" + args.DecimalPlaces.ToString())
                 Else
                     sublist.Add("")
                 End If

@@ -143,7 +143,7 @@ Namespace GraphicObjects.Tables
 
                     'determinar comprimento das colunas e altura das linhas
 
-                    Dim i, j, k, itemheight, n, m, leftmargin As Integer
+                    Dim i, j, k, itemheight, itemwidth, n, m, leftmargin As Integer
                     Dim size As SKSize
 
                     k = 0
@@ -190,7 +190,9 @@ Namespace GraphicObjects.Tables
                             If formats IsNot Nothing Then
                                 If formats(i)(j) <> "" Then
                                     If Double.TryParse(SpreadsheetData(i)(j), New Double) Then
-                                        canvas.DrawText(Convert.ToDouble(SpreadsheetData(i)(j)).ToString(formats(i)(j)), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
+                                        Dim val = Convert.ToDouble(SpreadsheetData(i)(j)).ToString(formats(i)(j))
+                                        itemwidth = MeasureString(val, tpaint).Width + 2 * Padding
+                                        canvas.DrawText(val, X + Padding + leftmargin + maxW(n) - itemwidth, Y + Padding + m * itemheight + size.Height, tpaint)
                                     Else
                                         canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
                                     End If
