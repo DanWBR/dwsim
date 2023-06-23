@@ -371,7 +371,7 @@ Namespace GraphicObjects.Tables
 
                         count2 = 2
 
-                        Dim nf = "G6"
+                        Dim nf = MSObj.Flowsheet.FlowsheetOptions.FractionNumberFormat
 
                         Dim compounds = MSObj.Phases(0).Compounds.Select(Function(x) x.Value.Name).ToList
 

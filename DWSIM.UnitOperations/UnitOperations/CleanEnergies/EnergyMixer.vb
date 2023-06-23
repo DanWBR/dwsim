@@ -97,52 +97,69 @@ Namespace UnitOperations
 
         Public Sub Draw(g As Object) Implements IExternalUnitOperation.Draw
 
+            Dim X = GraphicObject.X
+            Dim Y = GraphicObject.Y
+            Dim Height = GraphicObject.Height
+            Dim Width = GraphicObject.Width
+
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = GraphicObject.LineColor
-                .StrokeWidth = GraphicObject.LineWidth
-                .IsStroke = True
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
-            Dim rect As New SKRect(GraphicObject.X, GraphicObject.Y, GraphicObject.X + GraphicObject.Width, GraphicObject.X + GraphicObject.Height)
+            Dim rect As New SKRect(X, Y, X + Width, X + Height)
 
             Dim gp As New SKPath()
 
-            gp.MoveTo(Convert.ToInt32(GraphicObject.X + GraphicObject.Width), Convert.ToInt32(GraphicObject.Y + 0.5 * GraphicObject.Height))
-            gp.LineTo(Convert.ToInt32(GraphicObject.X + 0.5 * GraphicObject.Width), Convert.ToInt32(GraphicObject.Y))
-            gp.LineTo(Convert.ToInt32(GraphicObject.X), Convert.ToInt32(GraphicObject.Y))
-            gp.LineTo(Convert.ToInt32(GraphicObject.X), Convert.ToInt32(GraphicObject.Y + GraphicObject.Height))
-            gp.LineTo(Convert.ToInt32(GraphicObject.X + 0.5 * GraphicObject.Width), Convert.ToInt32(GraphicObject.Y + GraphicObject.Height))
-            gp.LineTo(Convert.ToInt32(GraphicObject.X + GraphicObject.Width), Convert.ToInt32(GraphicObject.Y + 0.5 * GraphicObject.Height))
+            gp.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
 
             gp.Close()
 
-            If GraphicObject.GradientMode Then
 
-                Dim radius2 = 0.8F * Math.Min(GraphicObject.Width, GraphicObject.Height)
-                Dim center = New SKPoint(rect.MidX, rect.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+            Select Case GraphicObject.DrawMode
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = SKColors.Orange
-                    .StrokeWidth = GraphicObject.LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, GraphicObject.LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-                End With
+                Case 0, 2
 
-                canvas.DrawPath(gp, gradPen)
+                    'default
 
-            End If
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = GraphicObject.LineColor.WithAlpha(50)
+                        .StrokeWidth = GraphicObject.LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-            canvas.DrawPath(gp, myPen)
+                    canvas.DrawPath(gp, gradPen)
+
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = GraphicObject.LineColor
+                        .StrokeWidth = GraphicObject.LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    canvas.DrawPath(gp, myPen)
+
+                Case 1
+
+                    'b/w
+
+                    Dim myPen As New SKPaint()
+
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = GraphicObject.LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    canvas.DrawPath(gp, myPen)
+
+            End Select
 
         End Sub
 
