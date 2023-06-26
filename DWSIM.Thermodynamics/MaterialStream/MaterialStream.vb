@@ -6436,6 +6436,12 @@ Namespace Streams
             ms.TotalEnergyFlow = TotalEnergyFlow
             ms.AtEquilibrium = False
 
+            ms.ForcePhase = ForcePhase
+            ms.OverrideSingleCompoundFlashBehavior = OverrideSingleCompoundFlashBehavior
+            ms.OverrideCalculationRoutine = OverrideCalculationRoutine
+            ms.DefinedFlow = DefinedFlow
+            ms.FloatingTableAmountBasis = FloatingTableAmountBasis
+
             Return ms
 
         End Function
