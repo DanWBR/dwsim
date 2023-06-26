@@ -1702,7 +1702,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Private Sub tbDewDT_TextChanged(sender As Object, e As EventArgs) Handles tbDewDT.TextChanged
         Try
-            EnvelopeSettings.DewCurveDeltaT = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
+            EnvelopeSettings.DewCurveDeltaT = cv.ConvertToSI(su.deltaT, DirectCast(sender, TextBox).Text)
             DirectCast(sender, TextBox).ForeColor = Color.Blue
         Catch ex As Exception
             DirectCast(sender, TextBox).ForeColor = Color.Red
