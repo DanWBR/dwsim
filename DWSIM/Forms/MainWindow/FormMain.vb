@@ -2756,6 +2756,8 @@ Public Class FormMain
 
             form.FormDynamics.Flowsheet = form
 
+            form.FormIntegratorControls.Flowsheet = form
+
             form.FormFilesExplorer.Flowsheet = form
 
             ' Set DockPanel properties
@@ -3313,6 +3315,8 @@ Public Class FormMain
             form.FormCharts.Flowsheet = form
 
             form.FormDynamics.Flowsheet = form
+
+            form.FormIntegratorControls.Flowsheet = form
 
             form.FormFilesExplorer.Flowsheet = form
 
