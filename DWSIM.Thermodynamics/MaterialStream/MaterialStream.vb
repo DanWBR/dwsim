@@ -6433,6 +6433,7 @@ Namespace Streams
             Next
             ms.Assign(Me)
             ms.AssignProps(Me)
+
             ms.TotalEnergyFlow = TotalEnergyFlow
             ms.AtEquilibrium = False
 
