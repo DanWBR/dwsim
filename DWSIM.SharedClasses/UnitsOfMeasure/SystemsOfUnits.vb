@@ -558,7 +558,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = "SI (Enginnering)"
+                .Name = "SI (Engineering)"
                 .jouleThomsonCoefficient = "K/Pa"
                 .gor = "m3/m3"
                 .diffusivity = "m2/s"

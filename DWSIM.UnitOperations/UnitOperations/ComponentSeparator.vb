@@ -274,9 +274,13 @@ Namespace UnitOperations
                     End With
                     With otherstr.Phases(0).Compounds(cs.ComponentID)
                         .MassFlow = instr.Phases(0).Compounds(cs.ComponentID).MassFlow.GetValueOrDefault - specstr.Phases(0).Compounds(cs.ComponentID).MassFlow.GetValueOrDefault
-                        If .MassFlow < 0.0# Then .MassFlow = 0.0#
+                        If .MassFlow < 0.0# Then
+                            Throw New Exception(String.Format("Calculated negative mass flow for stream {0}, compound {1} [{2} kg/s].", otherstr.GraphicObject.Tag, cs.ComponentID, .MassFlow))
+                        End If
                         .MolarFlow = instr.Phases(0).Compounds(cs.ComponentID).MolarFlow.GetValueOrDefault - specstr.Phases(0).Compounds(cs.ComponentID).MolarFlow.GetValueOrDefault
-                        If .MolarFlow < 0.0# Then .MolarFlow = 0.0#
+                        If .MolarFlow < 0.0# Then
+                            Throw New Exception(String.Format("Calculated negative molar flow for stream {0}, compound {1} [{2} mol/s].", otherstr.GraphicObject.Tag, cs.ComponentID, .MolarFlow))
+                        End If
                     End With
                 Else
                     toremove.Add(cs.ComponentID)
