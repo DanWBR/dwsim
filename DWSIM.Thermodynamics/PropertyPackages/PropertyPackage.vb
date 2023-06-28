@@ -188,6 +188,11 @@ Namespace PropertyPackages
             ExpData = 3
         End Enum
 
+        Public Enum LiquidEnthalpyEntropyCpCvCalcMode_EOS
+            EOS = 0
+            ExpData = 1
+        End Enum
+
         Public Enum VaporPhaseFugacityCalcMode
             Ideal = 0
             PengRobinson = 1
@@ -237,6 +242,8 @@ Namespace PropertyPackages
         Public Property SolidPhaseEnthalpy_UsesCp As Boolean = False
 
         Public Property EnthalpyEntropyCpCvCalculationMode As EnthalpyEntropyCpCvCalcMode = EnthalpyEntropyCpCvCalcMode.LeeKesler
+
+        Public Property LiquidEnthalpyEntropyCpCvCalculationMode_EOS As LiquidEnthalpyEntropyCpCvCalcMode_EOS = LiquidEnthalpyEntropyCpCvCalcMode_EOS.EOS
 
         Public Property IgnoreVaporFractionLimit As Boolean = False
 
@@ -11897,6 +11904,14 @@ Final3:
                     VaporPhaseFugacityCalculationMode = [Enum].Parse(VaporPhaseFugacityCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value)
                     SolidPhaseFugacityCalculationMethod = [Enum].Parse(SolidPhaseFugacityCalculationMethod.GetType, (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value)
                     EnthalpyEntropyCpCvCalculationMode = [Enum].Parse(EnthalpyEntropyCpCvCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value)
+                    LiquidEnthalpyEntropyCpCvCalculationMode_EOS = [Enum].Parse(LiquidEnthalpyEntropyCpCvCalculationMode_EOS.GetType, (From el As XElement In data Select el Where el.Name = "LiquidEnthalpyEntropyCpCvCalculationMode_EOS").FirstOrDefault.Value)
+                Catch ex As Exception
+                End Try
+            End If
+
+            If (From el As XElement In data Select el Where el.Name = "LiquidEnthalpyEntropyCpCvCalculationMode_EOS").FirstOrDefault IsNot Nothing Then
+                Try
+                    LiquidEnthalpyEntropyCpCvCalculationMode_EOS = [Enum].Parse(LiquidEnthalpyEntropyCpCvCalculationMode_EOS.GetType, (From el As XElement In data Select el Where el.Name = "LiquidEnthalpyEntropyCpCvCalculationMode_EOS").FirstOrDefault.Value)
                 Catch ex As Exception
                 End Try
             End If
@@ -12487,6 +12502,7 @@ Final3:
                 .Add(New XElement("SolidPhaseFugacity_UseIdealLiquidPhaseFugacity", SolidPhaseFugacity_UseIdealLiquidPhaseFugacity))
                 .Add(New XElement("SolidPhaseEnthalpy_UsesCp", SolidPhaseEnthalpy_UsesCp))
                 .Add(New XElement("EnthalpyEntropyCpCvCalculationMode", EnthalpyEntropyCpCvCalculationMode))
+                .Add(New XElement("LiquidEnthalpyEntropyCpCvCalculationMode_EOS", LiquidEnthalpyEntropyCpCvCalculationMode_EOS))
                 .Add(New XElement("LiquidFugacity_UsePoyntingCorrectionFactor", LiquidFugacity_UsePoyntingCorrectionFactor))
                 .Add(New XElement("ActivityCoefficientModels_IgnoreMissingInteractionParameters", ActivityCoefficientModels_IgnoreMissingInteractionParameters))
                 .Add(New XElement("IgnoreVaporFractionLimit", IgnoreVaporFractionLimit))

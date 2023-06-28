@@ -26,6 +26,8 @@ Public Class PropertyPackageSettingsEditingControl
 
         cbHSCpCalcMode.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
+        cbEOSLiqEnthMethod.Enabled = TypeOf PropPack Is PRSV2PropertyPackage Or TypeOf PropPack Is PRSV2VLPropertyPackage
+
         chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
         chkAutoEstimateNU.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage
@@ -64,6 +66,8 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkUseHenry.Checked = PropPack.UseHenryConstants
 
+        cbEOSLiqEnthMethod.SelectedIndex = PropPack.LiquidEnthalpyEntropyCpCvCalculationMode_EOS
+
         AddHandler tbSPCheckThres.TextChanged, Sub()
                                                    Try
                                                        PropPack.SingleCompoundCheckThreshold = tbSPCheckThres.Text.ToDoubleFromCurrent()
@@ -90,6 +94,10 @@ Public Class PropertyPackageSettingsEditingControl
         AddHandler cbHSCpCalcMode.SelectedIndexChanged, Sub()
                                                             PropPack.EnthalpyEntropyCpCvCalculationMode = cbHSCpCalcMode.SelectedIndex
                                                         End Sub
+
+        AddHandler cbEOSLiqEnthMethod.SelectedIndexChanged, Sub()
+                                                                PropPack.LiquidEnthalpyEntropyCpCvCalculationMode_EOS = cbEOSLiqEnthMethod.SelectedIndex
+                                                            End Sub
 
         AddHandler chkIgnoreIPs.CheckedChanged, Sub()
                                                     PropPack.ActivityCoefficientModels_IgnoreMissingInteractionParameters = chkIgnoreIPs.Checked
@@ -141,7 +149,7 @@ Public Class PropertyPackageSettingsEditingControl
 
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("https://github.com/DanWBR/dwsim/blob/windows/DWSIM.Thermodynamics/Assets/henry.txt")
     End Sub
 End Class

@@ -47,21 +47,22 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkCalcAdditionalProps = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.tbSPCheckThres = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.chkUseHenry = New System.Windows.Forms.CheckBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.chkAutoEstimateNU = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tbSPCheckThres = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cbEOSLiqEnthMethod = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbLiqDens
@@ -211,40 +212,9 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
-        'TabPage1
-        '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.tbSPCheckThres)
-        Me.TabPage1.Controls.Add(Me.Label10)
-        Me.TabPage1.Controls.Add(Me.Label11)
-        Me.TabPage1.Controls.Add(Me.chkCalcAdditionalProps)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'tbSPCheckThres
-        '
-        resources.ApplyResources(Me.tbSPCheckThres, "tbSPCheckThres")
-        Me.tbSPCheckThres.Name = "tbSPCheckThres"
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
-        'TabPage2
-        '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Controls.Add(Me.Label5)
-        Me.TabPage2.Controls.Add(Me.Label8)
-        Me.TabPage2.Controls.Add(Me.chkUseSolidCp)
-        Me.TabPage2.Controls.Add(Me.cbHSCpCalcMode)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
         'TabPage3
         '
         resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Controls.Add(Me.LinkLabel1)
         Me.TabPage3.Controls.Add(Me.chkUseHenry)
         Me.TabPage3.Controls.Add(Me.Label2)
         Me.TabPage3.Controls.Add(Me.cbLiqDens)
@@ -263,17 +233,23 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'LinkLabel1
-        '
-        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.TabStop = True
-        '
         'chkUseHenry
         '
         resources.ApplyResources(Me.chkUseHenry, "chkUseHenry")
         Me.chkUseHenry.Name = "chkUseHenry"
         Me.chkUseHenry.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.Label12)
+        Me.TabPage2.Controls.Add(Me.cbEOSLiqEnthMethod)
+        Me.TabPage2.Controls.Add(Me.Label5)
+        Me.TabPage2.Controls.Add(Me.Label8)
+        Me.TabPage2.Controls.Add(Me.chkUseSolidCp)
+        Me.TabPage2.Controls.Add(Me.cbHSCpCalcMode)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TabPage4
         '
@@ -297,6 +273,39 @@ Partial Class PropertyPackageSettingsEditingControl
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.tbSPCheckThres)
+        Me.TabPage1.Controls.Add(Me.Label10)
+        Me.TabPage1.Controls.Add(Me.Label11)
+        Me.TabPage1.Controls.Add(Me.chkCalcAdditionalProps)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'tbSPCheckThres
+        '
+        resources.ApplyResources(Me.tbSPCheckThres, "tbSPCheckThres")
+        Me.tbSPCheckThres.Name = "tbSPCheckThres"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        '
+        'Label12
+        '
+        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.Name = "Label12"
+        '
+        'cbEOSLiqEnthMethod
+        '
+        resources.ApplyResources(Me.cbEOSLiqEnthMethod, "cbEOSLiqEnthMethod")
+        Me.cbEOSLiqEnthMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEOSLiqEnthMethod.FormattingEnabled = True
+        Me.cbEOSLiqEnthMethod.Items.AddRange(New Object() {resources.GetString("cbEOSLiqEnthMethod.Items"), resources.GetString("cbEOSLiqEnthMethod.Items1")})
+        Me.cbEOSLiqEnthMethod.Name = "cbEOSLiqEnthMethod"
+        '
         'PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
@@ -305,14 +314,14 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "PropertyPackageSettingsEditingControl"
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -349,5 +358,6 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents Label10 As Label
     Friend WithEvents chkUseHenry As CheckBox
     Friend WithEvents chkAutoEstimateNU As CheckBox
-    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cbEOSLiqEnthMethod As ComboBox
 End Class
