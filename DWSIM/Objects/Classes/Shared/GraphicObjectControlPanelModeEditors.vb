@@ -19,7 +19,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                                          SelectedObject.SetPropertyValue(myObj.SelectedProperty, f.TextBox1.Text.ToDoubleFromCurrent().ConvertToSI(myObj.SelectedPropertyUnits))
                                                                          f.Close()
                                                                          If Not myObj.GetFlowsheet.DynamicMode Then
-                                                                             myObj.GetFlowsheet.RequestCalculation()
+                                                                             myObj.GetFlowsheet.RequestCalculation3(myObj, False)
                                                                          End If
                                                                      Catch ex As Exception
                                                                          MessageBox.Show(DWSIM.App.GetLocalString("Erro"), ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error)
