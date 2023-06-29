@@ -1112,9 +1112,9 @@ Namespace UnitOperations
                     Case "Reboiler_Calculated_Value"
                         value = Me.Specs("R").CalculatedValue
                     Case "Estimated Height"
-                        value = EstimatedHeight
+                        value = EstimatedHeight.ConvertFromSI(su.diameter)
                     Case "Estimated Diameter"
-                        value = EstimatedDiameter
+                        value = EstimatedDiameter.ConvertFromSI(su.diameter)
                 End Select
 
                 If prop.Contains("Stage_Pressure_") Then
@@ -1600,9 +1600,9 @@ Namespace UnitOperations
 
                 Select Case prop
                     Case "Estimated Height"
-                        value = EstimatedHeight
+                        value = EstimatedHeight.ConvertFromSI(su.diameter)
                     Case "Estimated Diameter"
-                        value = EstimatedDiameter
+                        value = EstimatedDiameter.ConvertFromSI(su.diameter)
                     Case "Number of Stages"
                         value = NumberOfStages
                 End Select
