@@ -4167,6 +4167,13 @@ Public Class FlowsheetSurface_SkiaSharp
         Flowsheet.CopyObjects()
     End Sub
 
+    Private Sub tsmiCopyObjID_Click(sender As Object, e As EventArgs) Handles tsmiCopyObjID.Click
+
+        Clipboard.SetText(FlowsheetSurface.SelectedObject.Name)
+        Flowsheet.ShowMessage(String.Format(Flowsheet.GetTranslatedString1("Object's ID copied to clipboard. [{0}: {1}]"), FlowsheetSurface.SelectedObject.Tag, FlowsheetSurface.SelectedObject.Name), IFlowsheet.MessageType.Information)
+
+    End Sub
+
     Public Sub ReleaseResources()
 
         FControl.FlowsheetObject = Nothing

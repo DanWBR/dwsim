@@ -2372,6 +2372,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Touch ID_64px.png" />
     <None Include="Resources\thick_arrow_pointing_down_32px.png" />
     <None Include="Resources\user_manual_80px.png" />
     <None Include="Resources\undo_96px.png" />
