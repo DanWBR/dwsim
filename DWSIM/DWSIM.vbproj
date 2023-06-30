@@ -2372,6 +2372,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\show_property_48px.png" />
     <None Include="Resources\Touch ID_64px.png" />
     <None Include="Resources\thick_arrow_pointing_down_32px.png" />
     <None Include="Resources\user_manual_80px.png" />
@@ -3020,6 +3021,7 @@
     <Content Include="Lib\__future__.py" />
     <Content Include="Lib\__phello__.foo.py" />
     <None Include="Resources\arrow_32px.png" />
+    <None Include="Resources\binary_code_24px.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3222,6 +3224,7 @@
     <None Include="Resources\redo_96px.png" />
     <None Include="Resources\Logout Rounded_96px.png" />
     <None Include="Resources\new_60px.png" />
+    <None Include="Resources\object_48px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

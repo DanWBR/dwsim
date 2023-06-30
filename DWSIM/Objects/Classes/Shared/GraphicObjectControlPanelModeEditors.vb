@@ -11,7 +11,8 @@ Public Class GraphicObjectControlPanelModeEditors
                                                          If Not SelectedObject Is Nothing Then
                                                              Dim currentvalue = SystemsOfUnits.Converter.ConvertFromSI(myObj.SelectedPropertyUnits, SelectedObject.GetPropertyValue(myObj.SelectedProperty))
                                                              f.TextBox1.Text = currentvalue.ToString(myObj?.GetFlowsheet.FlowsheetOptions.NumberFormat)
-                                                             f.Text = SelectedObject.GraphicObject.Tag + "/" + DWSIM.App.GetPropertyName(myObj.SelectedProperty)
+                                                             f.Label1.Text = SelectedObject.GraphicObject.Tag
+                                                             f.Label2.Text = DWSIM.App.GetPropertyName(myObj.SelectedProperty)
                                                              AddHandler f.TextBox1.KeyDown,
                                                              Sub(s, e)
                                                                  If e.KeyCode = Keys.Enter Then
@@ -28,6 +29,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                              End Sub
                                                              f.StartPosition = FormStartPosition.Manual
                                                              f.Location = Cursor.Position
+                                                             f.ChangeDefaultFont()
                                                              f.ShowDialog()
                                                          End If
                                                      End Sub
