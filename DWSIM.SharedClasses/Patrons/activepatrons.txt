@@ -5,6 +5,7 @@
 🥈 Sukin Oh
 🥈 Jane Ferris
 🌟 Adam Kovalovszki
+🌟 Alexandra Stuthridge
 🌟 Alfred Gongaware
 🌟 Alberto Baumeister
 🌟 Bryan Evans
@@ -48,7 +49,7 @@ Christian Jordan
 Christian Pedersen
 CollectiveObjective
 Daniel Bajolet
-Daniel Dornellas Athayde
+Daniel Athayde
 David Miller
 David Whitlock
 Denislav Zdravkov
@@ -72,7 +73,6 @@ Marcos Silva
 Masahiro Sakai
 Mohan Vaze
 Nicolas Spogis
-Okechukwu Nwadigo
 Pablo Jimenez
 Paulo Bernardo
 Pedro Sabóia
@@ -84,6 +84,7 @@ Rupert Easter
 Ryszard Sadowski
 Shailesh Paranjpe
 Shankar Ananth
+Shubham Wankhede
 Tetsuo Fuchino
 Tibor Lányi
 Will Flores
