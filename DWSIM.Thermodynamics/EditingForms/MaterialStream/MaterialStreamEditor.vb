@@ -474,6 +474,8 @@ Public Class MaterialStreamEditor
 
             End If
 
+            cbCompBasis.Enabled = True
+
         End With
 
         Loaded = True
