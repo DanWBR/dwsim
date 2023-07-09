@@ -4227,7 +4227,8 @@ Namespace UnitOperations
 
                     reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
                                                    "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}{13,16:G6}",
-                                                   i + 1, Pi, Ti, mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
+                                                   i + 1, Pi.ConvertFromSI(units.pressure), Ti.ConvertFromSI(units.temperature),
+                                                   mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
 
                 Else
 
@@ -4235,13 +4236,15 @@ Namespace UnitOperations
 
                         reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
                                                    "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}",
-                                                   i + 1, Pi, Ti, mL, wL, rhoL, etaL, kL, mV, wV, rhoV, etaV, kV))
+                                                   i + 1, Pi.ConvertFromSI(units.pressure), Ti.ConvertFromSI(units.temperature),
+                                                   mL, wL, rhoL, etaL, kL, mV, wV, rhoV, etaV, kV))
 
                     Else
 
                         reporter.AppendLine(String.Format("{0,-8}{1,16:G6}{2,16:G6}{3,16:G6}{4,16:G6}{5,16:G6}{6,16:G6}" +
                                                    "{7,16:G6}{8,16:G6}{9,16:G6}{10,16:G6}{11,16:G6}{12,16:G6}{13,16:G6}",
-                                                   i + 1, Pi, Ti, mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
+                                                   i + 1, Pi.ConvertFromSI(units.pressure), Ti.ConvertFromSI(units.temperature),
+                                                   mV, wV, rhoV, etaV, kV, mL, wL, rhoL, etaL, kL, sigma))
 
                     End If
 
