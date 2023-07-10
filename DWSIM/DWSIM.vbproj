@@ -833,12 +833,6 @@
     <Compile Include="Forms\FormSearchingDDB.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormRunningPythonLink.Designer.vb">
-      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormRunningPythonLink.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\FormSearchingOnline.Designer.vb">
       <DependentUpon>FormSearchingOnline.vb</DependentUpon>
     </Compile>
@@ -1558,12 +1552,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingDDB.resx">
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRunningPythonLink.en.resx">
-      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRunningPythonLink.resx">
-      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingKDB.de.resx">
       <DependentUpon>FormSearchingKDB.vb</DependentUpon>

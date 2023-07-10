@@ -47,27 +47,29 @@ Public Class FormMEBSummary
         dgv1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgv2.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
-        dgv1.Columns(2).HeaderText += " (" + su.heatflow + ")"
-        dgv1.Columns(4).HeaderText += " (" + su.massflow + ")"
-        dgv1.Columns(5).HeaderText += " (" + su.heatflow + ")"
-        dgv2.Columns(1).HeaderText += " (" + su.massflow + ")"
-        dgv2.Columns(2).HeaderText += " (" + su.temperature + ")"
-        dgv2.Columns(3).HeaderText += " (" + su.pressure + ")"
-        dgv2.Columns(4).HeaderText += " (" + su.heatflow + ")"
+        dgv1.Columns(3).HeaderText += " (" + su.heatflow + ")"
+        dgv1.Columns(5).HeaderText += " (" + su.massflow + ")"
+        dgv1.Columns(6).HeaderText += " (" + su.heatflow + ")"
+        dgv2.Columns(2).HeaderText += " (" + su.massflow + ")"
+        dgv2.Columns(3).HeaderText += " (" + su.temperature + ")"
+        dgv2.Columns(4).HeaderText += " (" + su.pressure + ")"
+        dgv2.Columns(5).HeaderText += " (" + su.heatflow + ")"
 
-        dgv1.Columns(2).DefaultCellStyle.Format = nf
         dgv1.Columns(3).DefaultCellStyle.Format = nf
         dgv1.Columns(4).DefaultCellStyle.Format = nf
         dgv1.Columns(5).DefaultCellStyle.Format = nf
-        dgv2.Columns(1).DefaultCellStyle.Format = nf
+        dgv1.Columns(6).DefaultCellStyle.Format = nf
         dgv2.Columns(2).DefaultCellStyle.Format = nf
         dgv2.Columns(3).DefaultCellStyle.Format = nf
         dgv2.Columns(4).DefaultCellStyle.Format = nf
+        dgv2.Columns(5).DefaultCellStyle.Format = nf
 
         lblMassFlowUnits.Text = su.massflow
         lblPowerUnits.Text = su.heatflow
 
         Dim equipments = Flowsheet.SimulationObjects.Values.Where(Function(o) TypeOf o Is UnitOpBaseClass And TypeOf o IsNot IIndicator)
+
+        Dim rtftb As New RichTextBox
 
         Dim totalE As Double = 0.0
 
@@ -90,7 +92,13 @@ Public Class FormMEBSummary
             totalE += eb
             Dim mbr = eq.GetMassBalanceResidual().ConvertFromSI(su.massflow)
             Dim ebr = eq.GetEnergyBalanceResidual().ConvertFromSI(su.heatflow)
-            dgv1.Rows.Add(eq.GraphicObject.Tag, eq.GetDisplayName(),
+            Dim text As String = ""
+            Try
+                rtftb.Rtf = eq.Annotation
+                text = rtftb.Text
+            Catch ex As Exception
+            End Try
+            dgv1.Rows.Add(eq.GraphicObject.Tag, eq.GetDisplayName(), text,
                           eb, eff, mbr, ebr)
         Next
         dgv1.Sort(dgv1.Columns(2), System.ComponentModel.ListSortDirection.Descending)
@@ -113,7 +121,13 @@ Public Class FormMEBSummary
             If Not s.GraphicObject.OutputConnectors(0).IsAttached Then
                 totalM -= mf
             End If
-            dgv2.Rows.Add(s.GraphicObject.Tag, mf, t, p, ef)
+            Dim text As String = ""
+            Try
+                rtftb.Rtf = s.Annotation
+                text = rtftb.Text
+            Catch ex As Exception
+            End Try
+            dgv2.Rows.Add(s.GraphicObject.Tag, text, mf, t, p, ef)
         Next
 
         dgv2.Sort(dgv2.Columns(1), System.ComponentModel.ListSortDirection.Descending)
@@ -122,6 +136,9 @@ Public Class FormMEBSummary
         tbresidualM.Text = totalM.ToString(nf)
 
         Loaded = True
+
+        rtftb.Dispose()
+        rtftb = Nothing
 
     End Sub
 
