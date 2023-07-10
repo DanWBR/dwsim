@@ -63,7 +63,12 @@ namespace DWSIM.UI.Desktop.Editors
             p1.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff.)");
 
             var compcontainer = new DynamicLayout();
-            //compcontainer.BackgroundColor = Colors.White;
+
+            List<string> toremove = new List<string>();
+            foreach (var comp in rx.Components)
+                if (!flowsheet.SelectedCompounds.ContainsKey(comp.Key)) toremove.Add(comp.Key);
+            foreach (var comp in toremove)
+                rx.Components.Remove(comp);
 
             Double val;
 

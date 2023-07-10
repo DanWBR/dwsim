@@ -13,6 +13,7 @@ using s = DWSIM.UI.Shared.Common;
 using DWSIM.UI.Shared;
 using Eto.Drawing;
 using DWSIM.ExtensionMethods;
+using DWSIM.Thermodynamics.Databases.ChemeoLink;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -47,7 +48,12 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff.)");
 
             var compcontainer = new DynamicLayout();
-            //compcontainer.BackgroundColor =  Colors.White;
+
+            List<string> toremove = new List<string>();
+            foreach (var comp in rx.Components)
+                if (!flowsheet.SelectedCompounds.ContainsKey(comp.Key)) toremove.Add(comp.Key);
+            foreach (var comp in toremove)
+                rx.Components.Remove(comp);
 
             Double val;
 

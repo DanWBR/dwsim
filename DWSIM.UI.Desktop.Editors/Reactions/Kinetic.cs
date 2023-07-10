@@ -63,6 +63,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             var compcontainer = new DynamicLayout();
 
+            List<string> toremove = new List<string>();
+            foreach (var comp in rx.Components)
+                if (!flowsheet.SelectedCompounds.ContainsKey(comp.Key)) toremove.Add(comp.Key);
+            foreach (var comp in toremove)
+                rx.Components.Remove(comp);
+
             Double val;
 
             foreach (ICompoundConstantProperties comp in flowsheet.SelectedCompounds.Values)
