@@ -1123,6 +1123,7 @@ namespace DWSIM.UI.Shared
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 300);
             if (Eto.Forms.Application.Instance.Platform.IsGtk)
             {
+                btn.Width = (int)(sf * 300);
                 btn.Height = (int)(sf * 28);
             }
 
