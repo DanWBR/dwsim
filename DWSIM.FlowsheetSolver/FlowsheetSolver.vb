@@ -1477,7 +1477,13 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             If maintask.Status = TaskStatus.RanToCompletion Then Exit While
                         End While
                         fgui.UpdateInterface()
-                        If maintask.Status = TaskStatus.Running Then Throw New TimeoutException(fgui.GetTranslatedString("SolverTimeout"))
+                        If maintask.Status = TaskStatus.Running Then
+                            If GlobalSettings.Settings.IsRunningOnMono() Then
+                                Throw New OperationCanceledException(fgui.GetTranslatedString("SolverTimeout"))
+                            Else
+                                Throw New TimeoutException(fgui.GetTranslatedString("SolverTimeout"))
+                            End If
+                        End If
                         If maintask.IsFaulted Then Throw maintask.Exception
                         If exlist.Count > 0 Then Throw New AggregateException(exlist)
                     Catch agex As AggregateException
