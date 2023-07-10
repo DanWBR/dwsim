@@ -44,6 +44,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddStringEditorRow2("Name", "", rx.Name, (sender, e) => { rx.Name = sender.Text; });
 
+            container.CreateAndAddStringEditorRow2("Description", "", rx.Description, (sender, e) => { rx.Description = sender.Text; });
+
             DynamicLayout p1, p2;
 
             TableLayout t1;
