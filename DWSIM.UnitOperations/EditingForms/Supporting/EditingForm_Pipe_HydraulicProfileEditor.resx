@@ -294,6 +294,18 @@
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 22</value>
   </data>
+  <data name="tsbImportFromTable.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbImportFromTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="tsbImportFromTable.Text" xml:space="preserve">
+    <value>Import from Tabular Data</value>
+  </data>
+  <data name="tsbImportFromTable.ToolTipText" xml:space="preserve">
+    <value>Import from Tabular Data</value>
+  </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 248</value>
   </data>
@@ -620,6 +632,12 @@
   </data>
   <data name="&gt;&gt;ToolStripLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbImportFromTable.Name" xml:space="preserve">
+    <value>tsbImportFromTable</value>
+  </data>
+  <data name="&gt;&gt;tsbImportFromTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>

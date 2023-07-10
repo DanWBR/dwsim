@@ -554,6 +554,12 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileImportFromTabularData.Designer.vb">
+      <DependentUpon>EditingForm_Pipe_HydraulicProfileImportFromTabularData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileImportFromTabularData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.Designer.vb">
       <DependentUpon>EditingForm_Pipe_UserDefinedU.vb</DependentUpon>
     </Compile>
@@ -1171,6 +1177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileImportFromTabularData.resx">
+      <DependentUpon>EditingForm_Pipe_HydraulicProfileImportFromTabularData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_UserDefinedU.resx">
       <DependentUpon>EditingForm_Pipe_UserDefinedU.vb</DependentUpon>
@@ -1844,7 +1853,9 @@
   <ItemGroup>
     <None Include="Resources\lightning.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\table_80px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
