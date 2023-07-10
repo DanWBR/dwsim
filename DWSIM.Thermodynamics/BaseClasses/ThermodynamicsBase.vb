@@ -1558,6 +1558,9 @@ Namespace BaseClasses
                 Next
             End If
 
+            Me.UNIFACGroups.Clear()
+            Me.MODFACGroups.Clear()
+
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "UNIFACGroups").Elements
                 If xel2.@Name Is Nothing Then
                     Me.UNIFACGroups.Add(xel2.@GroupID.ToString, xel2.@Value)
