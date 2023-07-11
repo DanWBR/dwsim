@@ -2565,7 +2565,7 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("<mi>\Delta T_{ml}</mi> = " & LMTD & " K")
 
-            ThermalEfficiency = (Q - HeatLoss) / MaxHeatExchange * 100
+            If CalcMode <> HeatExchangerCalcMode.ThermalEfficiency Then ThermalEfficiency = (Q - HeatLoss) / MaxHeatExchange * 100
 
             If HeatLoss > Math.Abs(Q.GetValueOrDefault) Then Throw New Exception("Invalid Heat Loss.")
 
