@@ -462,8 +462,14 @@ Public Class EditingForm_HeatExchanger
 
         If sender Is tbHotFluidPDrop Then uobj.HotSidePressureDrop = su.Converter.ConvertToSI(cbHotFluidPDrop.SelectedItem.ToString, tbHotFluidPDrop.Text.ParseExpressionToDouble)
         If sender Is tbColdFluidPDrop Then uobj.ColdSidePressureDrop = su.Converter.ConvertToSI(cbColdFluidPDrop.SelectedItem.ToString, tbColdFluidPDrop.Text.ParseExpressionToDouble)
-        If sender Is tbHotFluidOutletT Then uobj.HotSideOutletTemperature = su.Converter.ConvertToSI(cbHotFluidOutletT.SelectedItem.ToString, tbHotFluidOutletT.Text.ParseExpressionToDouble)
-        If sender Is tbColdFluidOutletT Then uobj.ColdSideOutletTemperature = su.Converter.ConvertToSI(cbColdFluidOutletT.SelectedItem.ToString, tbColdFluidOutletT.Text.ParseExpressionToDouble)
+        If sender Is tbHotFluidOutletT Then
+            uobj.DefinedTemperature = UnitOperations.SpecifiedTemperature.Hot_Fluid
+            uobj.HotSideOutletTemperature = su.Converter.ConvertToSI(cbHotFluidOutletT.SelectedItem.ToString, tbHotFluidOutletT.Text.ParseExpressionToDouble)
+        End If
+        If sender Is tbColdFluidOutletT Then
+            uobj.DefinedTemperature = UnitOperations.SpecifiedTemperature.Cold_Fluid
+            uobj.ColdSideOutletTemperature = su.Converter.ConvertToSI(cbColdFluidOutletT.SelectedItem.ToString, tbColdFluidOutletT.Text.ParseExpressionToDouble)
+        End If
         If sender Is tbArea Then uobj.Area = su.Converter.ConvertToSI(cbArea.SelectedItem.ToString, tbArea.Text.ParseExpressionToDouble)
         If sender Is tbOverallU Then uobj.OverallCoefficient = su.Converter.ConvertToSI(cbOverallHTC.SelectedItem.ToString, tbOverallU.Text.ParseExpressionToDouble)
         If sender Is tbHeat Then uobj.Q = su.Converter.ConvertToSI(cbHeat.SelectedItem.ToString, tbHeat.Text.ParseExpressionToDouble)

@@ -111,6 +111,8 @@ Namespace UnitOperations
 
         Public Property PinchPointAtOutlets As Boolean = False
 
+        Public Property UseShellAndTubeGeometryInformation As Boolean = False
+
         Public Property STProperties() As STHXProperties
             Get
                 If m_stprops Is Nothing Then m_stprops = New STHXProperties
