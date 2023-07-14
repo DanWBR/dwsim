@@ -574,7 +574,7 @@ namespace FarsiLibrary.Win
             double dpiscale = g.DpiX / 96.0;
 
             bool isFirstTab = Items.IndexOf(currentItem) == 0;
-            Font currentFont = Font;
+            Font currentFont = new Font(SystemFonts.MessageBoxFont, FontStyle.Bold);
 
             SizeF textSize = g.MeasureString(currentItem.Title, currentFont, new SizeF(400, 50), sf);
             textSize.Width += 20 * (float)dpiscale;
@@ -636,7 +636,7 @@ namespace FarsiLibrary.Win
                 if (currentItem == SelectedItem)
                 {
                     //textRect.Y -= 2;
-                    g.DrawString(currentItem.Title, currentFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
+                    g.DrawString(currentItem.Title,currentFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
                 }
                 else
                 {

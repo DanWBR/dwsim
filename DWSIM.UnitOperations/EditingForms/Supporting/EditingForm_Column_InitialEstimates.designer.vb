@@ -188,7 +188,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem5})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem5
         Me.ToolTip1.SetToolTip(Me.FaTabStrip1, resources.GetString("FaTabStrip1.ToolTip"))
         '
         'FaTabStripItem1
@@ -199,7 +199,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStripItem1.Controls.Add(Me.ToolStrip1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'dgvv
@@ -426,6 +425,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStripItem5.Controls.Add(Me.ToolStrip5)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
+        Me.FaTabStripItem5.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
         '
         'dgvcv

@@ -878,9 +878,7 @@
     <Compile Include="Forms\FormPassword.Designer.vb">
       <DependentUpon>FormPassword.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormPassword.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\FormPassword.vb" />
     <Compile Include="Forms\FormConfigurePropertyTable.Designer.vb">
       <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
     </Compile>

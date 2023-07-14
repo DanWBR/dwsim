@@ -134,11 +134,11 @@
   <data name="&gt;&gt;lbuShellFoulingFactor.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
+  <data name="&gt;&gt;tbTubeThermalCond.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;lbuShellFoulingFactor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -156,8 +156,11 @@
   <data name="&gt;&gt;tbShellsInSeries.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Corte das Chicanas (%D)</value>
+  <data name="lbuBaffleSpacing.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;lbuTubeDi.ZOrder" xml:space="preserve">
+    <value>27</value>
   </data>
   <data name="Label24.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -168,17 +171,17 @@
   <data name="lbuTubePitch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tbBaffleCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="Label30.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cbTubeLayout.Location" type="System.Drawing.Point, System.Drawing">
     <value>511, 105</value>
   </data>
-  <data name="&gt;&gt;lbTubeDe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbBaffleSpacing.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
-  <data name="Label22.Text" xml:space="preserve">
-    <value>Tubos por Casco</value>
+  <data name="&gt;&gt;Label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Fluido</value>
@@ -195,11 +198,8 @@
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbHot.Name" xml:space="preserve">
-    <value>rbHot</value>
-  </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lbuBaffleCut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -207,16 +207,13 @@
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;tbTubeFoulingFactor.Name" xml:space="preserve">
-    <value>tbTubeFoulingFactor</value>
+  <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
   </data>
   <data name="lbuShellFoulingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
   </data>
   <data name="&gt;&gt;lbTubeDe.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;lbTubeRoughness.Name" xml:space="preserve">
@@ -243,9 +240,6 @@
   <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 12</value>
   </data>
-  <data name="Label32.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;tbTubeDe.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
@@ -258,11 +252,17 @@
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
   </data>
+  <data name="&gt;&gt;rbHot.Name" xml:space="preserve">
+    <value>rbHot</value>
+  </data>
   <data name="Label26.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
   <data name="cbBaffleOrientation.Items1" xml:space="preserve">
     <value>Vertical</value>
+  </data>
+  <data name="&gt;&gt;lbuBaffleSpacing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbuTubePitch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -272,6 +272,9 @@
   </data>
   <data name="rbCold.Text" xml:space="preserve">
     <value>Frio</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 82</value>
   </data>
   <data name="lbuShellDi.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
@@ -291,11 +294,17 @@
   <data name="tbTubeRoughness.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 130</value>
   </data>
+  <data name="lbuTubeThermalCond.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbTubeRoughness.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
   <data name="&gt;&gt;tbShellDi.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;tbBaffleSpacing.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="cbBaffleType.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -315,8 +324,8 @@
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lbuTubeThermalCond.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tbTubeDi.ZOrder" xml:space="preserve">
+    <value>28</value>
   </data>
   <data name="tbShellsInSeries.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -330,8 +339,8 @@
   <data name="rbCold.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
   </data>
-  <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="Label32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 29</value>
   </data>
   <data name="tbShellsInSeries.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -342,17 +351,17 @@
   <data name="Label32.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;rbCold.Parent" xml:space="preserve">
     <value>GroupBox2</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>713, 145</value>
   </data>
   <data name="lbuTubeDi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -360,11 +369,14 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>727, 627</value>
   </data>
-  <data name="lbuTubePitch.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="&gt;&gt;PictureBox2.Name" xml:space="preserve">
+    <value>PictureBox2</value>
   </data>
-  <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lbuTubeThermalCond.Text" xml:space="preserve">
+    <value>Label31</value>
+  </data>
+  <data name="lbuTubeDi.Text" xml:space="preserve">
+    <value>Label31</value>
   </data>
   <data name="&gt;&gt;Label26.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -374,9 +386,6 @@
   </data>
   <data name="lbuShellFoulingFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;cbBaffleOrientation.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;tbTubePitch.Name" xml:space="preserve">
     <value>tbTubePitch</value>
@@ -405,14 +414,11 @@
   <data name="&gt;&gt;tbShellDi.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;lbuTubeThermalCond.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbTubePitch.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;lbuTubeDi.ZOrder" xml:space="preserve">
-    <value>27</value>
   </data>
   <data name="&gt;&gt;tbTubeLength.ZOrder" xml:space="preserve">
     <value>22</value>
@@ -420,8 +426,8 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>Arranjo</value>
   </data>
-  <data name="&gt;&gt;lbuTubeDi.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;tbBaffleCut.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="tbTubeLength.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -441,11 +447,11 @@
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
   </data>
-  <data name="lbuTubeLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 81</value>
-  </data>
   <data name="&gt;&gt;tbTubeFoulingFactor.Parent" xml:space="preserve">
     <value>GroupBox2</value>
+  </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
   </data>
   <data name="&gt;&gt;tbTubeDe.Name" xml:space="preserve">
     <value>tbTubeDe</value>
@@ -462,17 +468,14 @@
   <data name="Label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="lbuBaffleSpacing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
   </data>
   <data name="tbTubePitch.Location" type="System.Drawing.Point, System.Drawing">
     <value>511, 78</value>
   </data>
-  <data name="rbCold.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;PictureBox2.Name" xml:space="preserve">
-    <value>PictureBox2</value>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Tubos por Casco</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -510,9 +513,6 @@
   <data name="&gt;&gt;tbShellFoulingFactor.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbTubeThermalCond.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="cbTubeLayout.Items1" xml:space="preserve">
     <value>Triangular Rodado</value>
   </data>
@@ -522,8 +522,8 @@
   <data name="cbTubeLayout.Items3" xml:space="preserve">
     <value>Quadrado Rodado</value>
   </data>
-  <data name="&gt;&gt;tbTubePitch.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;tbTubeLength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbTubeRoughness.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -531,8 +531,8 @@
   <data name="&gt;&gt;lbuTubeFoulingFactor.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;Label28.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -548,6 +548,12 @@
   </data>
   <data name="cbBaffleType.Items1" xml:space="preserve">
     <value>Dupla</value>
+  </data>
+  <data name="lbuShellDi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 82</value>
+  </data>
+  <data name="lbuTubePitch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -567,6 +573,9 @@
   <data name="lbuShellFoulingFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>271, 108</value>
   </data>
+  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
   <data name="&gt;&gt;cbBaffleType.Name" xml:space="preserve">
     <value>cbBaffleType</value>
   </data>
@@ -579,11 +588,11 @@
   <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lbuBaffleSpacing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
-  </data>
   <data name="&gt;&gt;lbuTubeLength.ZOrder" xml:space="preserve">
     <value>21</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;lbuShellDi.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -591,17 +600,17 @@
   <data name="lbTubeRoughness.Location" type="System.Drawing.Point, System.Drawing">
     <value>271, 133</value>
   </data>
-  <data name="tbTubeLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="Label30.Text" xml:space="preserve">
+    <value>Diâmetro Externo</value>
+  </data>
+  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>12</value>
-  </data>
-  <data name="&gt;&gt;tbNumberOfTubesPerShell.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
   </data>
   <data name="tbTubeDi.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -627,23 +636,17 @@
   <data name="&gt;&gt;tbTubeThermalCond.Name" xml:space="preserve">
     <value>tbTubeThermalCond</value>
   </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
+  <data name="&gt;&gt;tbNumberOfTubesPerShell.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Casco</value>
   </data>
   <data name="lbuTubeLength.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
-  </data>
-  <data name="&gt;&gt;tbTubeDi.ZOrder" xml:space="preserve">
-    <value>28</value>
   </data>
   <data name="&gt;&gt;lbTubeRoughness.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -663,26 +666,17 @@
   <data name="&gt;&gt;tbNumberOfShellPasses.Name" xml:space="preserve">
     <value>tbNumberOfShellPasses</value>
   </data>
-  <data name="&gt;&gt;tbNumberOfTubesPerShell.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
   </data>
   <data name="&gt;&gt;cbBaffleType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbTubeDe.Name" xml:space="preserve">
-    <value>lbTubeDe</value>
   </data>
   <data name="&gt;&gt;Label20.Name" xml:space="preserve">
     <value>Label20</value>
   </data>
   <data name="&gt;&gt;Label26.ZOrder" xml:space="preserve">
     <value>20</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbBaffleCut.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -696,8 +690,8 @@
   <data name="&gt;&gt;lbuBaffleSpacing.Name" xml:space="preserve">
     <value>lbuBaffleSpacing</value>
   </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+  <data name="&gt;&gt;lbuTubeLength.Name" xml:space="preserve">
+    <value>lbuTubeLength</value>
   </data>
   <data name="cbBaffleOrientation.Location" type="System.Drawing.Point, System.Drawing">
     <value>511, 106</value>
@@ -705,11 +699,17 @@
   <data name="tbTubePassesPerShell.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="lbuBaffleSpacing.Text" xml:space="preserve">
+    <value>Label9</value>
+  </data>
   <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;tbShellFoulingFactor.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="tbNumberOfTubesPerShell.Location" type="System.Drawing.Point, System.Drawing">
+    <value>511, 52</value>
   </data>
   <data name="tbShellFoulingFactor.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -717,14 +717,11 @@
   <data name="lbuTubeLength.Text" xml:space="preserve">
     <value>Label27</value>
   </data>
-  <data name="Label30.Text" xml:space="preserve">
-    <value>Diâmetro Externo</value>
+  <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Orientação das Chicanas</value>
-  </data>
-  <data name="&gt;&gt;tbTubeLength.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbuShellFoulingFactor.Name" xml:space="preserve">
     <value>lbuShellFoulingFactor</value>
@@ -741,11 +738,14 @@
   <data name="&gt;&gt;tbNumberOfTubesPerShell.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="lbuBaffleCut.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>364, 12</value>
   </data>
   <data name="Label32.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
+  </data>
+  <data name="lbuTubePitch.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="&gt;&gt;rbCold.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -774,6 +774,9 @@
   <data name="&gt;&gt;Label28.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="Label22.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
   <data name="tbTubeFoulingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
@@ -786,9 +789,6 @@
   <data name="&gt;&gt;tbTubeRoughness.Name" xml:space="preserve">
     <value>tbTubeRoughness</value>
   </data>
-  <data name="&gt;&gt;lbuTubeLength.Name" xml:space="preserve">
-    <value>lbuTubeLength</value>
-  </data>
   <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
@@ -797,6 +797,9 @@
   </data>
   <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
     <value>PictureBox1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
   </data>
   <data name="&gt;&gt;Label24.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -825,11 +828,11 @@
   <data name="tbShellFoulingFactor.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;lbuTubeLength.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;tbTubeDe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 82</value>
+  <data name="tbTubePitch.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
   <data name="&gt;&gt;tbTubeRoughness.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -843,17 +846,23 @@
   <data name="&gt;&gt;lbuShellDi.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="lbuTubeDi.Text" xml:space="preserve">
-    <value>Label31</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 133</value>
+  </data>
+  <data name="lbTubeRoughness.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
   </data>
   <data name="lbuShellFoulingFactor.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;lbuTubeThermalCond.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="lbuShellFoulingFactor.Text" xml:space="preserve">
     <value>Label7</value>
@@ -866,6 +875,9 @@
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
+  </data>
+  <data name="&gt;&gt;Label24.Name" xml:space="preserve">
+    <value>Label24</value>
   </data>
   <data name="&gt;&gt;tbBaffleCut.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -885,8 +897,8 @@
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbTubeRoughness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+  <data name="&gt;&gt;lbuShellFoulingFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label24.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -903,8 +915,8 @@
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cbBaffleOrientation.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbNumberOfShellPasses.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -930,17 +942,11 @@
   <data name="&gt;&gt;Label22.Name" xml:space="preserve">
     <value>Label22</value>
   </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;lbTubeDe.Name" xml:space="preserve">
+    <value>lbTubeDe</value>
   </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbuBaffleCut.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tbTubePitch.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
   </data>
   <data name="lbTubeDe.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -951,14 +957,14 @@
   <data name="tbBaffleCut.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="Label30.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;tbShellFoulingFactor.Name" xml:space="preserve">
     <value>tbShellFoulingFactor</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 133</value>
+  </data>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -984,8 +990,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rbHot.Text" xml:space="preserve">
     <value>Quente</value>
@@ -1002,17 +1008,14 @@
   <data name="&gt;&gt;tbTubeDi.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="tbShellsInSeries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;lbuTubeDi.Name" xml:space="preserve">
     <value>lbuTubeDi</value>
   </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="lbuTubeFoulingFactor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_HeatExchanger_SHProperties</value>
@@ -1020,11 +1023,14 @@
   <data name="&gt;&gt;cbTubeLayout.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>364, 12</value>
-  </data>
   <data name="cbBaffleType.Location" type="System.Drawing.Point, System.Drawing">
     <value>511, 79</value>
+  </data>
+  <data name="lbuBaffleSpacing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 30</value>
+  </data>
+  <data name="cbTubeLayout.Items" xml:space="preserve">
+    <value>Triangular</value>
   </data>
   <data name="&gt;&gt;tbShellDi.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1038,17 +1044,17 @@
   <data name="cbBaffleOrientation.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 21</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Número de Passes</value>
+  <data name="lbuTubeFoulingFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
   </data>
   <data name="&gt;&gt;tbTubeThermalCond.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tbTubeThermalCond.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbTubeRoughness.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="&gt;&gt;lbuShellDi.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbTubeThermalCond.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
@@ -1062,14 +1068,11 @@
   <data name="&gt;&gt;PictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbTubeRoughness.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbShellsInSeries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
-  <data name="lbuShellDi.Text" xml:space="preserve">
-    <value>Label5</value>
-  </data>
-  <data name="Label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 29</value>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1086,9 +1089,6 @@
   <data name="tbBaffleSpacing.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;lbuTubeThermalCond.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="tbTubeDi.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
@@ -1097,6 +1097,9 @@
   </data>
   <data name="lbuTubeThermalCond.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 159</value>
+  </data>
+  <data name="Label20.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label10.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1109,9 +1112,6 @@
   </data>
   <data name="rbCold.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 17</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Propriedades do Trocador Casco-e-Tubo</value>
   </data>
   <data name="Label26.Text" xml:space="preserve">
     <value>Fator de Incrustação</value>
@@ -1131,14 +1131,14 @@
   <data name="&gt;&gt;cbTubeLayout.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="lbuBaffleSpacing.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;Label30.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="tbTubeRoughness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="lbuBaffleCut.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="tbShellDi.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1149,8 +1149,8 @@
   <data name="lbuTubeDi.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 29</value>
   </data>
-  <data name="lbuTubeFoulingFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+  <data name="&gt;&gt;Label26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 109</value>
@@ -1173,8 +1173,8 @@
   <data name="&gt;&gt;tbBaffleCut.Name" xml:space="preserve">
     <value>tbBaffleCut</value>
   </data>
-  <data name="&gt;&gt;tbTubeFoulingFactor.ZOrder" xml:space="preserve">
-    <value>19</value>
+  <data name="lbuTubeLength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 81</value>
   </data>
   <data name="tbTubeThermalCond.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
@@ -1185,8 +1185,8 @@
   <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbBaffleSpacing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbBaffleCut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="&gt;&gt;tbTubeLength.Name" xml:space="preserve">
     <value>tbTubeLength</value>
@@ -1194,29 +1194,26 @@
   <data name="Label32.Text" xml:space="preserve">
     <value>Diâmetro Interno</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Rugosidade</value>
+  <data name="&gt;&gt;tbBaffleSpacing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbNumberOfShellPasses.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="Label32.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 82</value>
   </data>
-  <data name="Label20.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="cbBaffleOrientation.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;lbuBaffleCut.Name" xml:space="preserve">
-    <value>lbuBaffleCut</value>
+  <data name="lbuShellDi.Text" xml:space="preserve">
+    <value>Label5</value>
   </data>
   <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 29</value>
   </data>
   <data name="tbTubeThermalCond.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
-  </data>
-  <data name="lbuTubeFoulingFactor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="lbuTubeFoulingFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 107</value>
@@ -1226,9 +1223,6 @@
   </data>
   <data name="lbTubeDe.Text" xml:space="preserve">
     <value>Label29</value>
-  </data>
-  <data name="&gt;&gt;tbTubeDe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1242,8 +1236,8 @@
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
-  <data name="lbuBaffleSpacing.Text" xml:space="preserve">
-    <value>Label9</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Propriedades do Trocador Casco-e-Tubo</value>
   </data>
   <data name="&gt;&gt;tbTubeDi.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1251,14 +1245,11 @@
   <data name="Label28.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="&gt;&gt;Label28.Name" xml:space="preserve">
-    <value>Label28</value>
-  </data>
   <data name="&gt;&gt;tbShellFoulingFactor.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Número de Passes</value>
   </data>
   <data name="Label26.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1266,14 +1257,14 @@
   <data name="tbNumberOfShellPasses.Location" type="System.Drawing.Point, System.Drawing">
     <value>165, 53</value>
   </data>
-  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Corte das Chicanas (%D)</value>
   </data>
   <data name="lbuTubeThermalCond.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
   </data>
-  <data name="&gt;&gt;lbuBaffleSpacing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;lbuTubePitch.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -1293,14 +1284,23 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
   <data name="Label28.Text" xml:space="preserve">
     <value>Comprimento Útil</value>
   </data>
-  <data name="tbNumberOfShellPasses.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;tbNumberOfTubesPerShell.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Rugosidade</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;lbuBaffleCut.Name" xml:space="preserve">
+    <value>lbuBaffleCut</value>
   </data>
   <data name="lbuTubeThermalCond.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
@@ -1314,8 +1314,8 @@
   <data name="tbTubePitch.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="lbuBaffleSpacing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 30</value>
+  <data name="&gt;&gt;lbuTubeDi.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="lbuTubeLength.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1329,11 +1329,11 @@
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
   </data>
-  <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 13</value>
+  <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="lbuTubePitch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+  <data name="&gt;&gt;lbuShellDi.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rbCold.Name" xml:space="preserve">
     <value>rbCold</value>
@@ -1341,8 +1341,8 @@
   <data name="cbBaffleType.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>713, 145</value>
+  <data name="tbTubeLength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Condutividade Térmica</value>
@@ -1353,8 +1353,8 @@
   <data name="&gt;&gt;tbTubeFoulingFactor.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbuTubeThermalCond.Text" xml:space="preserve">
-    <value>Label31</value>
+  <data name="&gt;&gt;tbTubeFoulingFactor.Name" xml:space="preserve">
+    <value>tbTubeFoulingFactor</value>
   </data>
   <data name="&gt;&gt;lbuTubeFoulingFactor.Name" xml:space="preserve">
     <value>lbuTubeFoulingFactor</value>
@@ -1368,9 +1368,6 @@
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lbTubeDe.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 55</value>
   </data>
@@ -1380,14 +1377,11 @@
   <data name="tbTubePassesPerShell.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label22.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="tbShellDi.Location" type="System.Drawing.Point, System.Drawing">
     <value>165, 79</value>
@@ -1398,8 +1392,8 @@
   <data name="&gt;&gt;Label26.Name" xml:space="preserve">
     <value>Label26</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+  <data name="&gt;&gt;lbuTubeThermalCond.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 13</value>
@@ -1413,8 +1407,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
-  <data name="tbTubeRoughness.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
+  <data name="&gt;&gt;cbBaffleOrientation.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="lbTubeRoughness.Text" xml:space="preserve">
     <value>Label31</value>
@@ -1425,11 +1419,14 @@
   <data name="tbTubeDe.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="&gt;&gt;lbTubeRoughness.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tbTubeDe.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;lbuTubeFoulingFactor.ZOrder" xml:space="preserve">
-    <value>18</value>
+  <data name="&gt;&gt;lbuTubeLength.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Fator de Incrustação</value>
@@ -1446,7 +1443,10 @@
   <data name="lbuTubeLength.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
   </data>
-  <data name="&gt;&gt;tbBaffleCut.Parent" xml:space="preserve">
+  <data name="tbNumberOfShellPasses.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;lbuBaffleCut.ZOrder" xml:space="preserve">
@@ -1458,8 +1458,8 @@
   <data name="lbTubeDe.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbBaffleOrientation.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1476,11 +1476,11 @@
   <data name="tbNumberOfTubesPerShell.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label28.Name" xml:space="preserve">
+    <value>Label28</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label14.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Diâmetro Interno</value>
@@ -1491,20 +1491,20 @@
   <data name="tbTubeFoulingFactor.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;Label24.Name" xml:space="preserve">
-    <value>Label24</value>
+  <data name="&gt;&gt;lbuTubeFoulingFactor.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="tbTubePassesPerShell.Location" type="System.Drawing.Point, System.Drawing">
     <value>511, 26</value>
   </data>
-  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label30.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
-  <data name="lbuShellDi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 82</value>
+  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 437</value>
@@ -1518,14 +1518,17 @@
   <data name="&gt;&gt;Label32.Name" xml:space="preserve">
     <value>Label32</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="&gt;&gt;tbTubeFoulingFactor.ZOrder" xml:space="preserve">
+    <value>19</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="cbTubeLayout.Items" xml:space="preserve">
-    <value>Triangular</value>
+  <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="tbBaffleSpacing.Location" type="System.Drawing.Point, System.Drawing">
     <value>511, 27</value>
@@ -1533,11 +1536,11 @@
   <data name="&gt;&gt;lbuTubeThermalCond.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tbNumberOfTubesPerShell.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 52</value>
+  <data name="&gt;&gt;tbNumberOfShellPasses.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="rbCold.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;cbTubeLayout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1557,11 +1560,8 @@
   <data name="lbuTubePitch.Location" type="System.Drawing.Point, System.Drawing">
     <value>617, 81</value>
   </data>
-  <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="&gt;&gt;lbTubeDe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
