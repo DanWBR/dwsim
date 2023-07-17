@@ -76,7 +76,7 @@ Public Class MaterialStreamPanel
             })
             For i = 1 To props.Count
                 .Cells(i, 0).Data = Flowsheet.GetTranslatedString1(props(i - 1))
-                .Cells(i, 1).Data = ms.GetPropertyUnit(props(i - 1))
+                .Cells(i, 1).Data = ms.GetPropertyUnit(props(i - 1), Flowsheet.Options.SelectedUnitSystem1)
             Next
             .SetRangeStyles(0, 0, .RowCount, 2, New WorksheetRangeStyle With {
                 .Flag = PlainStyleFlag.HorizontalAlign,
@@ -123,12 +123,13 @@ Public Class MaterialStreamPanel
             RowsCreated = False
             Dim i, j As Integer
             i = 2
-            For Each ms In Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+            Dim mslist = Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream).OrderBy(Function(s) s.GraphicObject.Tag)
+            For Each ms In mslist
                 grid1.Worksheets(0).Cells(0, i).Data = ms.GraphicObject.Tag
                 Dim props = ms.GetProperties(PropertyType.ALL)
                 j = 1
                 For Each p In props
-                    Dim val = ms.GetPropertyValue(p)
+                    Dim val = ms.GetPropertyValue(p, Flowsheet.Options.SelectedUnitSystem1)
                     If Double.TryParse(val, New Double) Then
                         If Double.IsNaN(val) Or Double.IsInfinity(val) Then
                             grid1.Worksheets(0).Cells(j, i).Data = ""
