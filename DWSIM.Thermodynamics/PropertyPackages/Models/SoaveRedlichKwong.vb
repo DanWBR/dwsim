@@ -26,8 +26,6 @@ Namespace PropertyPackages.Auxiliary
         Dim m_pr As New PROPS
         Private _ip As Dictionary(Of String, Dictionary(Of String, PR_IPData))
 
-        Public Property BIPChanged As Boolean = False
-
         Public ReadOnly Property InteractionParameters() As Dictionary(Of String, Dictionary(Of String, PR_IPData))
             Get
                 Return _ip

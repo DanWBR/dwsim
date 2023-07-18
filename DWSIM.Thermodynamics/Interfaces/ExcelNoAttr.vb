@@ -1933,7 +1933,6 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
-                    CType(pp, PengRobinsonPropertyPackage).m_pr.BIPChanged = True
                 Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
                     With CType(pp, PRSV2PropertyPackage).m_pr.InteractionParameters
                         If Not ip1 Is Nothing Then
@@ -1993,7 +1992,6 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
-                    CType(pp, SRKPropertyPackage).m_pr.BIPChanged = True
                 Case "Peng-Robinson / Lee-Kesler (PR/LK)"
                     With CType(pp, PengRobinsonLKPropertyPackage).m_pr.InteractionParameters
                         If Not ip1 Is Nothing Then
@@ -2013,7 +2011,6 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
-                    CType(pp, PengRobinsonLKPropertyPackage).m_pr.BIPChanged = True
                 Case "UNIFAC"
                     With CType(pp, UNIFACPropertyPackage).m_pr.InteractionParameters
                         If Not ip1 Is Nothing Then
