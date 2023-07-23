@@ -823,17 +823,29 @@ Public Class FormFlowsheet
 
         UnloadExtenders()
 
-        For Each item As ToolStripMenuItem In CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems
-            RemoveHandler item.Click, AddressOf Me.COMOClick
-        Next
+        Try
+            For Each item As ToolStripMenuItem In CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems
+                RemoveHandler item.Click, AddressOf Me.COMOClick
+            Next
+        Catch ex As Exception
 
-        For Each item As ToolStripMenuItem In PluginsTSMI.DropDownItems
-            RemoveHandler item.Click, AddressOf Me.PluginClick
-        Next
+        End Try
 
-        For Each item As ToolStripMenuItem In UtilitiesTSMI.DropDownItems
-            RemoveHandler item.Click, AddressOf UtilitiesTSMIHandler
-        Next
+        Try
+            For Each item As ToolStripMenuItem In PluginsTSMI.DropDownItems
+                RemoveHandler item.Click, AddressOf Me.PluginClick
+            Next
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            For Each item As ToolStripMenuItem In UtilitiesTSMI.DropDownItems
+                RemoveHandler item.Click, AddressOf UtilitiesTSMIHandler
+            Next
+        Catch ex As Exception
+
+        End Try
 
         Try
             CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Clear()

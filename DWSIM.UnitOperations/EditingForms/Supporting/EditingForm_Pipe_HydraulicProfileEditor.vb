@@ -87,11 +87,11 @@ Imports System.Drawing
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Me.GridMalha = New System.Windows.Forms.DataGridView()
         Me.ColBase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CMenu1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -138,6 +138,7 @@ Imports System.Drawing
         Me.GridMalha.AllowUserToResizeRows = False
         Me.GridMalha.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.GridMalha.BackgroundColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.ColumnHeadersVisible = False
         Me.GridMalha.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColBase})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -150,7 +151,6 @@ Imports System.Drawing
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.GridMalha.DefaultCellStyle = DataGridViewCellStyle2
-        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.GridColor = System.Drawing.SystemColors.Control
         Me.GridMalha.Name = "GridMalha"
         Me.GridMalha.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
@@ -180,6 +180,7 @@ Imports System.Drawing
         '
         'CMenu1
         '
+        Me.CMenu1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.CMenu1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11})
         Me.CMenu1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.CMenu1.Name = "ContextMenuStrip1"
@@ -240,6 +241,7 @@ Imports System.Drawing
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripSeparator2, Me.ToolStripLabel1, Me.ToolStripLabel2, Me.tsbImportFromTable})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
@@ -296,6 +298,7 @@ Imports System.Drawing
         'ToolStripLabel2
         '
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
         resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
         '
         'tsbImportFromTable
@@ -1125,8 +1128,9 @@ Imports System.Drawing
                 End If
                 PipeOp.Profile.Sections.Add(column.Index + 1, ps)
             Else
-                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1 & ": " & parsingresult
+                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1
                 RaiseEvent StatusChanged(e, PipeEditorStatus.Erro)
+                MessageBox.Show(parsingresult, PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
         Next
@@ -1162,34 +1166,39 @@ Imports System.Drawing
                     Exit Function
                 End If
                 If .Rows(1).Cells(column.Name).Value = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then
-                    If Not .Rows(3).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
+                    If .Rows(3).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(3).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0#) Then
                         Return "Invalid number of sections"
                     End If
-                    If Not .Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or Not .Rows(7).Cells(column.Name).Value.ToString.IsValidDoubleExpression Then
+                    If .Rows(7).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or Not .Rows(7).Cells(column.Name).Value.ToString.IsValidDoubleExpression) Then
                         Return "Invalid length"
                     End If
-                    If Not .Rows(8).Cells(column.Name).Value.ToString.IsValidDoubleExpression Then
+                    If .Rows(8).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(8).Cells(column.Name).Value.ToString.IsValidDoubleExpression) Then
                         Return "Invalid elevation"
                         Exit Function
                     End If
                     If Math.Abs(.Rows(8).Cells(column.Name).Value.ToString.ParseExpressionToDouble) > Math.Abs(.Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
                         Return "Invalid elevation (H > L!)"
                     End If
-                    If Not .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
+                    If .Rows(9).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0#) Then
                         Return "Invalid external diameter"
                         Exit Function
                     End If
-                    If Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble Then
+                    If .Rows(10).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
+                        Return "Invalid internal diameter"
+                        Exit Function
+                    End If
+                Else
+                    If .Rows(10).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
                         Return "Invalid internal diameter"
                         Exit Function
                     End If
                 End If
             End With
+            Return "OK"
         Catch ex As Exception
             Return ex.Message.ToString
             Exit Function
         End Try
-        Return "OK"
 
     End Function
 
