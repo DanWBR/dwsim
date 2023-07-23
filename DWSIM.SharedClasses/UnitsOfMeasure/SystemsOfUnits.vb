@@ -183,7 +183,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.pressure
                     units.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
                 Case Enums.UnitOfMeasure.massflow
-                    units.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min",
+                    units.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "t/h", "t/min", "lb/min",
                                    "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"})
                 Case Enums.UnitOfMeasure.molarflow
                     units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
@@ -280,7 +280,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.temperature
                 Case "Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig", "psia"
                     Return Enums.UnitOfMeasure.pressure
-                Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
+                Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "t/h", "t/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
                     Return Enums.UnitOfMeasure.massflow
                 Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm"
                     Return Enums.UnitOfMeasure.molarflow
@@ -639,7 +639,6 @@ Namespace SystemsOfUnits
         End Sub
 
     End Class
-
 
     <System.Serializable()> Public Class SIUnits_Custom1
 
@@ -1371,7 +1370,10 @@ Namespace SystemsOfUnits
                     Return value / 132.277
                 Case "lb/s"
                     Return value / 2.20462
-
+                Case "t/h"
+                    Return value * 1000 / 60 / 60
+                Case "t/min"
+                    Return value * 1000 / 60
 
                 Case "g"
                     Return value / 1000
@@ -1872,6 +1874,10 @@ Namespace SystemsOfUnits
                     Return value * 132.277
                 Case "lb/s"
                     Return value * 2.20462
+                Case "t/h"
+                    Return value / 1000 * 60 * 60
+                Case "t/min"
+                    Return value / 1000 * 60
 
                 Case "g"
                     Return value * 1000
