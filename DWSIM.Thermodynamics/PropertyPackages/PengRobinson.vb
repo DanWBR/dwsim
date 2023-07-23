@@ -569,7 +569,10 @@ Namespace PropertyPackages
 
         Public Overrides Sub RunPostMaterialStreamSetRoutine()
 
-            If KijMatrix Is Nothing OrElse KijMatrix.Length = 0 Or Not Settings.LockModelParameters Then SetKijMatrix()
+            If AreModelParametersDirty Or KijMatrix Is Nothing OrElse KijMatrix.Length = 0 Or Not Settings.LockModelParameters Then
+                SetKijMatrix()
+                AreModelParametersDirty = False
+            End If
 
         End Sub
 

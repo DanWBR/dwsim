@@ -267,6 +267,7 @@ Namespace PropertyPackages
         ''' <returns></returns>
         Public Property ParametersXMLString = ""
 
+        Public Property AreModelParametersDirty = True
 
 #End Region
 

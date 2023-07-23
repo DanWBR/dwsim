@@ -503,6 +503,8 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             Next
         Next
 
+        _pp.AreModelParametersDirty = True
+
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
