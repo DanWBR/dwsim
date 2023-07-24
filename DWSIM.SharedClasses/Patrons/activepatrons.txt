@@ -15,6 +15,7 @@
 🌟 Christian Hornhofer
 🌟 Dave Carpency
 🌟 Domenico Marchese
+🌟 Edson Zaparoli
 🌟 George Brindle
 🌟 Gerry Agnew
 🌟 Henk Fikkert
@@ -55,11 +56,9 @@ David Whitlock
 Denislav Zdravkov
 Dorivaldo Junior
 Doug Palfreyman
-Emanuel Cardoso
 Fernando Almeida
 Gokhan Candan 
 Guenther Holzer
-Henar Portero
 Hep Ingham
 Hurudza
 John Kossik

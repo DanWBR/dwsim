@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.5.0
+Version 8.5.1
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,38 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.5.1
+
+- Added messages log feature (Classic UI)
+- Added Experimental liquid cp option for PRSV2
+- Copy object ID to clipboard (Classic UI)
+- Redesigned input box (Classic UI)
+- Implemented feature request #502 (Include Stream Description/Comments for HMB)
+- Implemented #503 (Mixer in dynamic mode, equalize all option)
+- Implemented feature request #500 (Define profile segment from tabular data input Length/Elevation)
+- Added t/h and t/min to mass flow unit set (#513)
+- Redesigned material stream list (Classic UI)
+- Fixed spreadsheet formatting
+- Fixed thermo importing
+- Fixed floating table formatting for compound amounts
+- Fixed energy mixer icon
+- Throwing exception for calculated negative flows in compound separator (#496)
+- Fixed issue with dynamics integrator (Classic UI)
+- Fixed issue #497 (Need clone ForcePhase for ShallowCopy MaterialStream?)
+- Fixed deltaT conversion in phase envelope (Classic UI) (#492)
+- Floating table adjustments
+- Fixed diamter/height units for rig columns
+- Fixed viscosity conversion
+- Fixed calculation order for single object solver requests
+- Fixed updating pump outlet pressure
+- Fixed T/P units in column properties report
+- Fixed issue #505 (Fix add json-compound)
+- Fixed issue #494 ([Linux Cross-Platform UI] Reaction edit exception)
+- Fixed issue #491 ([Linux Cross-Platform UI] New reaction buttons placement)
+- Fixed issue #480 ([Linux Cross-Platform UI] Mono process use 100% CPU after solver failed to calculate)
+- Fixed PR/SRK BIP not updating (#507)
+- Other minor fixes and enhancements
 
 Version 8.5.0
 
