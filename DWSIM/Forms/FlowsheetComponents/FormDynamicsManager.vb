@@ -1191,4 +1191,8 @@ Public Class FormDynamicsManager
         Catch ex As Exception
         End Try
     End Sub
+
+    Private Sub FormDynamicsManager_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

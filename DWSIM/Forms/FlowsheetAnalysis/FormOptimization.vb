@@ -136,6 +136,8 @@ Public Class FormOptimization
 
         form.WriteToLog(DWSIM.App.GetLocalTipString("FOPT001"), Color.Black, MessageType.Tip)
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub btnDeleteCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteCase.Click

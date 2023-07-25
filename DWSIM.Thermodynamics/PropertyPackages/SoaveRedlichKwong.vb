@@ -33,11 +33,16 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "920D043C-F640-4cca-B301-228E773D4E35"
 
-        Public MAT_KIJ(38, 38)
+        Private KijMatrix As Double(,)
 
         Public m_pr As New PropertyPackages.Auxiliary.SRK
 
-        Public ip(,) As Double
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
+        Public Overrides ReadOnly Property DisplayName As String = "Soave-Redlich-Kwong"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses the Soave-Redlich-Kwong Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables at high pressures."
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
@@ -58,6 +63,15 @@ Namespace PropertyPackages
 
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.EOS
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Soave-Redlich-Kwong EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Soave-Redlich-Kwong EOS"
+                .Vapor_Density = "Soave-Redlich-Kwong EOS"
+                .Liquid_Fugacity = "Soave-Redlich-Kwong EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Soave-Redlich-Kwong EOS"
+                .Liquid_Density = "Soave-Redlich-Kwong EOS (+VT) / Experimental / Rackett / COSTALD"
+            End With
 
         End Sub
 
@@ -253,6 +267,33 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
+            If KijMatrix.Length = 0 Then
+
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
+
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
+
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
+                Next
+
+                Return val
+
+            Else
+
+                Return KijMatrix
+
+            End If
+
+        End Function
+
+        Private Sub SetKijMatrix()
+
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
 
@@ -266,12 +307,18 @@ Namespace PropertyPackages
                 Next
             Next
 
-            ip = val
-            m_pr.BIPChanged = False
+            KijMatrix = val
 
-            Return val
+        End Sub
 
-        End Function
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+
+            If AreModelParametersDirty Or KijMatrix Is Nothing OrElse KijMatrix.Length = 0 Or Not Settings.LockModelParameters Then
+                SetKijMatrix()
+                AreModelParametersDirty = False
+            End If
+
+        End Sub
 
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
             Select Case Phase1
@@ -776,7 +823,7 @@ Namespace PropertyPackages
 
             If OverrideEnthalpyCalculation Then
 
-                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -830,7 +877,7 @@ Namespace PropertyPackages
 
             If OverrideEntropyCalculation Then
 
-                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 

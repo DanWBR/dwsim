@@ -17,6 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
+Imports System.Numerics
 Imports DotNumerics.Optimization
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.BrentOpt
@@ -36,15 +37,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
-        Dim etol As Double = 0.000001
-        Dim itol As Double = 0.000001
-        Dim maxit_i As Integer = 100
-        Dim maxit_e As Integer = 100
-        Dim dampingfactor As Double = 1.0
+        Protected etol As Double = 0.000001
+        Protected itol As Double = 0.000001
+        Protected maxit_i As Integer = 100
+        Protected maxit_e As Integer = 100
+        Protected dampingfactor As Double = 1.0
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
-        Private CalculatingAzeotrope As Boolean = False
+        Protected CalculatingAzeotrope As Boolean = False
 
         Public DisableParallelCalcs As Boolean = False
 
@@ -140,7 +141,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vw = PP.RET_VW()
             Vn = PP.RET_VNAMES()
 
-            fi = Vz.Clone
+            Array.Copy(Vz, fi, n + 1)
 
             'Calculate Ki`s
 
@@ -170,7 +171,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             'Estimate V
 
-            If T > MathEx.Common.Max(PP.RET_VTC, Vz) Then
+            If T > MathEx.Common.Max(VTc, Vz) Then
                 Vy = Vz
                 Vx = Vy.DivideY(Ki).NormalizeY
                 Vx = Vx.ReplaceInvalidsWithZeroes()
@@ -197,7 +198,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Pb = Pmax
             Pd = Pmin
 
-            If Abs(Pb - Pd) / Pb < 0.0000001 Then
+            If Abs(Pb - Pd) / Pb < 0.0000001 And Vz.Max > 0.99 Then
                 'one comp only
                 Px = Vp.MultiplyY(Vz).Sum
                 If Px <= P Then
@@ -239,14 +240,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If g > 0 Then Vmin = V Else Vmax = V
 
-
-            V = Brent.BrentOpt3(Vmin, Vmax, 10, 0.001, 100,
+            V = Brent.BrentOpt3(Vmin, Vmax, 2, 0.001, 100,
                            Function(Vb)
                                Return Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(Vb).AddConstY(1))).SumY
                            End Function)
 
-
-            'V = Vmin + (Vmax - Vmin) / 2
+            If V > 1.0 Or V < 0.0 Then V = Vmin + (Vmax - Vmin) / 2
 
             L = 1 - V
 
@@ -278,9 +277,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-            Ki0 = Ki.Clone()
-            Vx0 = Vx.Clone()
-            Vy0 = Vy.Clone()
+            Array.Copy(Ki, Ki0, n + 1)
+            Array.Copy(Vx, Vx0, n + 1)
+            Array.Copy(Vy, Vy0, n + 1)
 
             Dim r1 As Object()
 
@@ -359,7 +358,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         End Function
 
-        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damplevel As Integer) As Object()
+        Protected Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damplevel As Integer) As Object()
 
             Dim n As Integer = Vz.Length - 1
 
@@ -386,13 +385,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 IObj2?.SetCurrent()
 
-                Ki_ant = Ki.Clone
+                Array.Copy(Ki, Ki_ant, n + 1)
+
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
                 IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
-                Vy_ant = Vy.Clone
-                Vx_ant = Vx.Clone
+                Array.Copy(Vy, Vy_ant, n + 1)
+                Array.Copy(Vx, Vx_ant, n + 1)
 
                 If V = 1.0# Then
                     Vy = Vz
@@ -429,8 +429,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Else
 
                     Vant = V
-
-                    'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
 
                     F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
                     dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
@@ -864,9 +862,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Normal Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Normal Mode)")
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash - Default Mode)", "Pressure-Enthalpy Flash Algorithm Routine (Normal Mode)")
 
-            IObj?.Paragraphs.Add("The PH Flash in normal mode calculates the enthalpy at mixture bubble and dew points, in order to determine the state of the mixture. 
+            IObj?.Paragraphs.Add("The PH Flash in default mode calculates the enthalpy at mixture bubble and dew points, in order to determine the state of the mixture. 
                                   It then converges the temperature or vapor fraction depending on the estimated state.")
 
             IObj?.SetCurrent()
@@ -2165,8 +2163,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             'check if converged to the trivial solution.
-            Kvals = result(6)
-            If PP.AUX_CheckTrivial(Kvals, 0.21) Then trivial = True
+            If result.Count > 1 Then
+                Kvals = result(6)
+                If PP.AUX_CheckTrivial(Kvals, 0.21) Then trivial = True
+            End If
             If result.Count = 1 Or trivial Then
                 result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
                 If result.Count > 1 Then
@@ -2200,8 +2200,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             If result.Count = 1 And idealcalc Then
                 Using IPP As New RaoultPropertyPackage()
                     IPP.CurrentMaterialStream = PP.CurrentMaterialStream
-                    PP.Flowsheet?.ShowMessage(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}. Trying to calculate using ideal K-values...",
-                                    PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")), Interfaces.IFlowsheet.MessageType.Warning)
                     result = Flash_PV_1(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
                     If result.Count = 1 And V = 0.0 Then
                         result = Flash_PV_4(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
@@ -2396,12 +2394,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         'Ki = PP.DW_CheckKvaluesConsistency(Vz, Ki, T, P)
 
                         marcador = 0
-                        If stmp4_ant <> 0 Then
-                            marcador = 1
-                        End If
+                        If Math.Abs(stmp4_ant) > 1.0E-20 Then marcador = 1
+
                         stmp4_ant = stmp4
 
-                        If V = 0 Then
+                        If V = 0.0 Then
                             stmp4 = Ki.MultiplyY(Vx).SumY
                         Else
                             stmp4 = Vy.DivideY(Ki).SumY
@@ -3201,10 +3198,30 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             _Hl2 = 0.0#
             _Hs = 0.0
 
-            If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
-            If L1 > 0 Then _Hl1 = PP.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
-            If L2 > 0 Then _Hl2 = PP.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
-            If Sx > 0 Then _Hs = PP.DW_CalcEnthalpy(Vs, T, P, State.Solid)
+            If Settings.EnableParallelProcessing Then
+                Dim t1 = New Task(Sub()
+                                      If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+                                  End Sub)
+                Dim t2 = New Task(Sub()
+                                      If L1 > 0 Then _Hl1 = PP.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
+                                  End Sub)
+                Dim t3 = New Task(Sub()
+                                      If L2 > 0 Then _Hl2 = PP.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
+                                  End Sub)
+                Dim t4 = New Task(Sub()
+                                      If Sx > 0 Then _Hs = PP.DW_CalcEnthalpy(Vs, T, P, State.Solid)
+                                  End Sub)
+                t1.Start()
+                t2.Start()
+                t3.Start()
+                t4.Start()
+                Task.WaitAll(t1, t2, t3, t4)
+            Else
+                If V > 0 Then _Hv = PP.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
+                If L1 > 0 Then _Hl1 = PP.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
+                If L2 > 0 Then _Hl2 = PP.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
+                If Sx > 0 Then _Hs = PP.DW_CalcEnthalpy(Vs, T, P, State.Solid)
+            End If
 
             Dim mmg, mml, mml2, mms As Double
             mmg = PP.AUX_MMM(Vy)

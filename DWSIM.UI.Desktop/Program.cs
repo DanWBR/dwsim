@@ -28,7 +28,10 @@ namespace DWSIM.UI.Desktop
 
             //initialize OpenTK
 
-            OpenTK.Toolkit.Init();
+            if (Settings.RunningPlatform() != Settings.Platform.Mac)
+            {
+                OpenTK.Toolkit.Init();
+            }
 
             // set global settings
 

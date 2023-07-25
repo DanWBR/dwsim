@@ -772,7 +772,11 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (ParentForm == null) 
                 return;
 
-            ParentForm.Focus();
+            try
+            {
+                ParentForm.Focus();
+            }
+            catch { }
         }
 
         public void SetPaneIndex(DockPane pane, int index)

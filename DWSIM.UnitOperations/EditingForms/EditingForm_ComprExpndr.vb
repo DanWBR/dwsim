@@ -503,7 +503,7 @@ Public Class EditingForm_ComprExpndr
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 
@@ -711,7 +711,7 @@ Public Class EditingForm_ComprExpndr
 
     End Sub
 
-    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBoxParameters.MouseMove
         MyBase.Editor_MouseMove(sender, e)
     End Sub
 
@@ -731,7 +731,7 @@ Public Class EditingForm_ComprExpndr
     Private Sub btnCurves_Click(sender As Object, e As EventArgs) Handles btnCurves.Click
 
         Dim f As New EditingForm_CompressorExpander_Curves() With {.simobj = SimObject}
-        f.ShowDialog(Me)
+        SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
 

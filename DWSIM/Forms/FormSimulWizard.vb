@@ -21,6 +21,8 @@ Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports System.ComponentModel
+Imports AeroWizard
 
 Public Class FormSimulWizard
 
@@ -35,7 +37,15 @@ Public Class FormSimulWizard
     Private CompoundList As List(Of String)
     Private Indexes As Dictionary(Of String, Integer)
 
+    Public Shared AddMorePages As Action(Of StepWizardControl, IFlowsheet)
+
+    Public Shared WizardFinished As Action(Of StepWizardControl, IFlowsheet)
+    Public Shared WizardFinished2 As Action(Of StepWizardControl, IFlowsheet)
+    Public Shared WizardFinished3 As Action(Of StepWizardControl, IFlowsheet)
+
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+
+        AddMorePages?.Invoke(StepWizardControl1, CurrentFlowsheet)
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
@@ -50,6 +60,8 @@ Public Class FormSimulWizard
         DataGridViewPP.Columns(3).Width = 24 * Settings.DpiScale
 
         Init()
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 
@@ -140,11 +152,15 @@ Public Class FormSimulWizard
 
         ComboBox2.SelectedIndex = 0
 
+        cbPPFilter.SelectedIndex = 0
+
+        chkDoubleClickToOpenEditors.Checked = My.Settings.DoubleClickToEdit
+
         Me.loaded = True
 
     End Sub
 
-    Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelPropertyMethods.LinkClicked
+    Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
         Process.Start("https://dwsim.org/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
@@ -215,6 +231,10 @@ Public Class FormSimulWizard
                 Dim tmpcomp As New BaseClasses.ConstantProperties
                 tmpcomp = Me.CurrentFlowsheet.Options.NotSelectedComponents(compid)
 
+                If tmpcomp.OriginalDB = "ChemSep" Then
+                    FormMain.AnalyticsProvider?.RegisterEvent("Compound Added", tmpcomp.Name, Nothing)
+                End If
+
                 Me.CurrentFlowsheet.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(tmpcomp.Name)
                 Dim ms As Streams.MaterialStream
@@ -235,6 +255,11 @@ Public Class FormSimulWizard
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.CurrentFlowsheet.Options.SelectedComponents(nm)
+
+        If tmpcomp.OriginalDB = "ChemSep" Then
+            FormMain.AnalyticsProvider?.RegisterEvent("Compound Removed", tmpcomp.Name, Nothing)
+        End If
+
         Me.CurrentFlowsheet.Options.SelectedComponents.Remove(tmpcomp.Name)
         Me.CurrentFlowsheet.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Dim ms As Streams.MaterialStream
@@ -260,6 +285,9 @@ Public Class FormSimulWizard
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
             pp.Flowsheet = CurrentFlowsheet
         End With
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
         CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
         Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
@@ -272,6 +300,8 @@ Public Class FormSimulWizard
 
         CurrentFlowsheet.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
         Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
+
+        FormMain.AnalyticsProvider?.RegisterEvent("System of Units Selected", su.Name, Nothing)
 
         With Me.DataGridView1.Rows
             .Clear()
@@ -297,7 +327,7 @@ Public Class FormSimulWizard
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
         End With
 
-        If ComboBox2.SelectedIndex <= 2 Then
+        If ComboBox2.SelectedIndex <= 3 Then
             Me.DataGridView1.Columns(1).ReadOnly = True
             Me.DataGridView1.Columns(3).ReadOnly = True
         Else
@@ -861,10 +891,6 @@ Public Class FormSimulWizard
 
     End Sub
 
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
-        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
-    End Sub
-
     Private Sub btnCloneUnits_Click(sender As Object, e As EventArgs) Handles btnCloneUnits.Click
 
         Dim newsu = New SystemsOfUnits.Units
@@ -1147,9 +1173,36 @@ Public Class FormSimulWizard
 
     Public Sub SetupPPRecommendations()
 
-        Dim names = CurrentFlowsheet.SelectedCompounds.Keys.ToList()
+        Dim names = CurrentFlowsheet.SelectedCompounds.Keys.Select(Function(n) n.ToLower()).ToList()
 
-        If names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+        Dim elecs = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsSalt Or c.IsIon Or c.IsHydratedSalt).Count()
+
+        If elecs > 0 Then
+            'contains electrolytes
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                    If pp.IsElectrolytePP Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        If pp.GetType().ToString().Contains("ProExtensions") Then
+                            ChangeRowForeColor(row, Color.DarkGreen)
+                        Else
+                            ChangeRowForeColor(row, Color.Blue)
+                        End If
+                    Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = My.Resources.icons8_cross_mark
+                        ChangeRowForeColor(row, Color.LightGray)
+                    End If
+                Else
+                    row.Cells(1).Value = 0
+                    row.Cells(2).Value = My.Resources.icons8_cross_mark
+                    ChangeRowForeColor(row, Color.LightGray)
+                End If
+            Next
+        ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
             'Water + Hydrocarbons
             rbSVLLE.Checked = True
             For Each row As DataGridViewRow In DataGridViewPP.Rows
@@ -1271,6 +1324,11 @@ Public Class FormSimulWizard
                             row.Cells(2).Value = My.Resources.icons8_cross_mark
                             ChangeRowForeColor(row, Color.LightGray)
                     End Select
+                    If pp.DisplayName.Contains("Strÿjek-Vera") Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = My.Resources.icons8_check_mark
+                        ChangeRowForeColor(row, Color.Blue)
+                    End If
                 Else
                     Dim ptype = row.Cells(0).Value
                     Select Case ptype
@@ -1402,7 +1460,7 @@ Public Class FormSimulWizard
             Next
         End If
 
-        If names.Contains("Hydrogen") Then
+        If names.Contains("hydrogen") Then
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
                     row.Cells(1).Value = 1
@@ -1412,7 +1470,7 @@ Public Class FormSimulWizard
             Next
         End If
 
-        If names.Contains("Water") And names.Count = 1 Then
+        If names.Contains("water") And names.Count = 1 Then
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Steam") Or
                     row.Cells(4).Value.ToString().Equals("CoolProp") Or
@@ -1482,13 +1540,217 @@ Public Class FormSimulWizard
 
     Private Sub WizardPage2_Commit(sender As Object, e As AeroWizard.WizardPageConfirmEventArgs) Handles WizardPage2.Commit
 
-        SetupPPRecommendations()
+        If CurrentFlowsheet.SelectedCompounds.Count = 0 Then
+
+            Dim t1 = CurrentFlowsheet.GetTranslatedString1("Please add at least one compound to proceed.")
+            Dim t2 = CurrentFlowsheet.GetTranslatedString1("Error")
+
+            MessageBox.Show(t1, t2, MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            e.Cancel = True
+
+        Else
+
+            SetupPPRecommendations()
+
+        End If
 
     End Sub
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
 
         txtSearch.Text = ""
+
+    End Sub
+
+    Private Sub FormSimulWizard_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
+
+    Private Sub FormSimulWizard_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Number of Compounds", CurrentFlowsheet.SelectedCompounds.Count, Nothing)
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Number of Property Packages", CurrentFlowsheet.PropertyPackages.Count, Nothing)
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        If DataGridViewPP.SelectedRows.Count > 0 Then
+            If Integer.TryParse(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value, New Integer) Then
+                MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Dim pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value)
+                Dim fppi As New FormPropertyPackageInfo With {.PP = pp}
+                fppi.ShowDialog()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
+
+    End Sub
+
+    Private Sub cbPPFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPPFilter.SelectedIndexChanged
+
+        Select Case cbPPFilter.SelectedIndex
+            Case 0 'Most Popular
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = pp.Popular
+                    Else
+                        row.Visible = False
+                    End If
+                Next
+            Case 1 'All Types
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    row.Visible = True
+                Next
+            Case 2 'Equations of State
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.EOS, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.EOS, True, False)
+                    End If
+                Next
+            Case 3 'Activity Coefficient
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.ActivityCoefficient, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.ActivityCoefficient, True, False)
+                    End If
+                Next
+            Case 4 'Vapor Pressure
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.VaporPressure, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.VaporPressure, True, False)
+                    End If
+                Next
+            Case 5 'Corresponding States
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.CorrespondingStates, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.CorrespondingStates, True, False)
+                    End If
+                Next
+            Case 6 'Specialized Models
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.Specialized, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.Specialized, True, False)
+                    End If
+                Next
+            Case 7 'Miscelaneous
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.Miscelaneous Or
+                            pp.PackageType = PackageType.CAPEOPEN Or
+                            pp.PackageType = PackageType.ChaoSeader, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.Miscelaneous, True, False)
+                    End If
+                Next
+            Case 8 'Electrolytes
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        row.Visible = If(pp.PackageType = PackageType.Electrolytes, True, False)
+                    Else
+                        row.Visible = If(row.Cells(0).Value = PackageType.Electrolytes, True, False)
+                    End If
+                Next
+        End Select
+
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles chkActivateSmartObjectSolving.CheckedChanged
+
+        If loaded Then
+            CurrentFlowsheet.Options.ForceObjectSolving = Not chkActivateSmartObjectSolving.Checked
+            FormMain.AnalyticsProvider?.RegisterEvent("Smart Object Solver Enabled", Not CurrentFlowsheet.Options.ForceObjectSolving, Nothing)
+        End If
+
+    End Sub
+
+    Private Sub chkEnableFailSafeFlash_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableFailSafeFlash.CheckedChanged
+
+        If loaded Then
+            For Each pp As PropertyPackage In CurrentFlowsheet.PropertyPackages.Values
+                Dim fs = pp.FlashSettings
+                If chkEnableFailSafeFlash.Checked Then
+                    fs(FlashSetting.FailSafeCalculationMode) = 1
+                Else
+                    fs(FlashSetting.FailSafeCalculationMode) = 3
+                End If
+            Next
+        End If
+
+    End Sub
+
+    Private Sub chkDoubleClickToOpenEditors_CheckedChanged(sender As Object, e As EventArgs) Handles chkDoubleClickToOpenEditors.CheckedChanged
+
+        If loaded Then
+
+            My.Settings.DoubleClickToEdit = chkDoubleClickToOpenEditors.Checked
+
+            GlobalSettings.Settings.EditOnSelect = Not My.Settings.DoubleClickToEdit
+
+            FormMain.AnalyticsProvider?.RegisterEvent("Double-Click Editing Enabled", My.Settings.DoubleClickToEdit, Nothing)
+
+        End If
+
+    End Sub
+
+    Private Sub StepWizardControl1_SelectedPageChanged(sender As Object, e As EventArgs) Handles StepWizardControl1.SelectedPageChanged
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
+        If StepWizardControl1.SelectedPage Is WizardPage2 Then
+
+            txtSearch.Focus()
+            ActiveControl = txtSearch
+
+        End If
+
+    End Sub
+
+    Private Sub FormSimulWizard_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+
+        WizardFinished?.Invoke(StepWizardControl1, CurrentFlowsheet)
+        WizardFinished2?.Invoke(StepWizardControl1, CurrentFlowsheet)
+        WizardFinished3?.Invoke(StepWizardControl1, CurrentFlowsheet)
+
+    End Sub
+
+    Private Sub WizardPage3_Commit(sender As Object, e As WizardPageConfirmEventArgs) Handles WizardPage3.Commit
+
+        If CurrentFlowsheet.PropertyPackages.Count = 0 Then
+
+            Dim t1 = CurrentFlowsheet.GetTranslatedString1("Please add at least one property package to proceed.")
+            Dim t2 = CurrentFlowsheet.GetTranslatedString1("Error")
+
+            MessageBox.Show(t1, t2, MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            e.Cancel = True
+
+        End If
 
     End Sub
 

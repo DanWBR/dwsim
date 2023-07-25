@@ -26,6 +26,8 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.cbFSMethod = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.btnConfigExtSolver = New System.Windows.Forms.Button()
         Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -96,6 +98,8 @@ Partial Class FlashAlgorithmConfig
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.cbFSMethod)
+        Me.GroupBox4.Controls.Add(Me.Label12)
         Me.GroupBox4.Controls.Add(Me.btnConfigExtSolver)
         Me.GroupBox4.Controls.Add(Me.cbExternalSolver)
         Me.GroupBox4.Controls.Add(Me.Label11)
@@ -119,6 +123,19 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'cbFSMethod
+        '
+        resources.ApplyResources(Me.cbFSMethod, "cbFSMethod")
+        Me.cbFSMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbFSMethod.FormattingEnabled = True
+        Me.cbFSMethod.Items.AddRange(New Object() {resources.GetString("cbFSMethod.Items"), resources.GetString("cbFSMethod.Items1"), resources.GetString("cbFSMethod.Items2"), resources.GetString("cbFSMethod.Items3")})
+        Me.cbFSMethod.Name = "cbFSMethod"
+        '
+        'Label12
+        '
+        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.Name = "Label12"
         '
         'btnConfigExtSolver
         '
@@ -445,4 +462,6 @@ Partial Class FlashAlgorithmConfig
     Public WithEvents btnConfigExtSolver As Button
     Friend WithEvents CheckBoxInterpTempPHFlash As CheckBox
     Friend WithEvents chkIdealPVFlash As CheckBox
+    Friend WithEvents cbFSMethod As ComboBox
+    Friend WithEvents Label12 As Label
 End Class

@@ -183,7 +183,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.pressure
                     units.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
                 Case Enums.UnitOfMeasure.massflow
-                    units.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min",
+                    units.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "t/h", "t/min", "lb/min",
                                    "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"})
                 Case Enums.UnitOfMeasure.molarflow
                     units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
@@ -280,7 +280,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.temperature
                 Case "Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig", "psia"
                     Return Enums.UnitOfMeasure.pressure
-                Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
+                Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "t/h", "t/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
                     Return Enums.UnitOfMeasure.massflow
                 Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm"
                     Return Enums.UnitOfMeasure.molarflow
@@ -543,6 +543,96 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "Pa"
                 .deltaT = "K."
+
+            End With
+
+        End Sub
+
+    End Class
+
+    <System.Serializable()> Public Class SI_ENG
+
+        Inherits Units
+
+        Public Sub New()
+
+            With Me
+
+                .Name = "SI (Engineering)"
+                .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
+                .diffusivity = "m2/s"
+                .accel = "m2/s"
+                .area = "m2"
+                .conductance = "[kg/s]/[Pa^0.5]"
+                .diameter = "mm"
+                .distance = "m"
+                .force = "N"
+                .heat_transf_coeff = "W/[m2.K]"
+                .mass_conc = "kg/m3"
+                .molar_conc = "mol/m3"
+                .molar_volume = "m3/kmol"
+                .reac_rate = "mol/[m3.s]"
+                .reac_rate_heterog = "mol/[kg.s]"
+                .spec_vol = "m3/kg"
+                .time = "s"
+                .volume = "m3"
+                .mass = "kg"
+                .thickness = "mm"
+                .molar_enthalpy = "kJ/kmol"
+                .molar_entropy = "kJ/[kmol.K]"
+                .velocity = "m/s"
+                .foulingfactor = "K.m2/W"
+
+                .cakeresistance = "m/kg"
+                .mediumresistance = "m-1"
+
+                .pdp_boilingPointTemperature = "C"
+                .pdp_meltingTemperature = "C"
+
+                .activity = "Pa"
+                .activityCoefficient = "-"
+
+                .compressibility = "1/Pa"
+                .compressibilityfactor = "-"
+
+                .density = "kg/m3"
+                .enthalpy = "kJ/kg"
+                .entropy = "kJ/[kg.K]"
+                .excessEnthalpy = "kJ/kg"
+                .excessEntropy = "kJ/[kg.K]"
+                .fugacity = "Pa"
+                .fugacityCoefficient = "-"
+                .heatCapacityCp = "kJ/[kg.K]"
+                .heatCapacityCv = "kJ/[kg.K]"
+                .jouleThomsonCoefficient = "K/Pa"
+                .logfugacityCoefficient = "-"
+                .massflow = "kg/h"
+                .massfraction = "-"
+                .molarflow = "kmol/h"
+                .molarfraction = "-"
+                .molecularWeight = "kg/kmol"
+                .pressure = "bar"
+                .speedOfSound = "m/s"
+                .temperature = "C"
+                .thermalConductivity = "W/[m.K]"
+                .viscosity = "cP"
+                .volumetricFlow = "m3/h"
+                .cinematic_viscosity = "cSt"
+                .idealGasHeatCapacity = "kJ/[kg.K]"
+                .surfaceTension = "N/m"
+                .thermalConductivityOfLiquid = "W/[m.K]"
+                .thermalConductivityOfVapor = "W/[m.K]"
+                .vaporPressure = "bar"
+                .viscosityOfLiquid = "cP"
+                .viscosityOfVapor = "cP"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
+                .heatflow = "kW"
+                .head = "m"
+                .deltaP = "bar"
+                .deltaT = "C."
 
             End With
 
@@ -1163,6 +1253,8 @@ Namespace SystemsOfUnits
 
     <System.Serializable()> Public Class Converter
 
+        Public Shared Property SharedSI As New SI()
+
         Public Shared Function ConvertArrayToSI(ByVal units As String, ByVal values As Double()) As Double()
             Dim newarr As New List(Of Double)
             For Each d In values
@@ -1278,7 +1370,10 @@ Namespace SystemsOfUnits
                     Return value / 132.277
                 Case "lb/s"
                     Return value / 2.20462
-
+                Case "t/h"
+                    Return value * 1000 / 60 / 60
+                Case "t/min"
+                    Return value * 1000 / 60
 
                 Case "g"
                     Return value / 1000
@@ -1561,8 +1656,8 @@ Namespace SystemsOfUnits
                     Return value
                 Case "cp"
                     Return value / 1000
-                Case "lbm /[ft.h]"
-                    Return value / 0.000671968975140001 * 3600
+                Case "lbm/[ft.h]"
+                    Return value / 2419.088310502
                 Case "kcal/h"
                     Return value / 859.845
                 Case "m"
@@ -1779,6 +1874,10 @@ Namespace SystemsOfUnits
                     Return value * 132.277
                 Case "lb/s"
                     Return value * 2.20462
+                Case "t/h"
+                    Return value / 1000 * 60 * 60
+                Case "t/min"
+                    Return value / 1000 * 60
 
                 Case "g"
                     Return value * 1000
@@ -2062,8 +2161,8 @@ Namespace SystemsOfUnits
                     Return value * 1000000.0
                 Case "pa.s"
                     Return value
-                Case "lbm /[ft.h]"
-                    Return value * 0.000671968975140001 / 3600
+                Case "lbm/[ft.h]"
+                    Return value * 2419.088310502
                 Case "cp"
                     Return value * 1000
                 Case "kcal/h"

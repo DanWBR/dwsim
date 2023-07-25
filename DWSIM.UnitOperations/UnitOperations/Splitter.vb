@@ -186,7 +186,7 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
-            IObj?.Paragraphs.Add("The splitter is a mass balance unit operation - divides a 
+            IObj?.Paragraphs.Add("The splitter is a mass balance unit operation - splits a 
                                     material stream into two or three other streams with different overall flow rates but with the same composition.")
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then

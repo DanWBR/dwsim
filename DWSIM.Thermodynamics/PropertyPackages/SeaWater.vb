@@ -33,6 +33,8 @@ Namespace PropertyPackages
 
         Protected SIA As New Seawater
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
         Public Sub New(ByVal comode As Boolean)
 
             MyBase.New(comode)
@@ -48,6 +50,18 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
 
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal"
+                .Vapor_Thermal_Conductivity = "IAPWS-08 Seawater"
+                .Vapor_Viscosity = "IAPWS-08 Seawater"
+                .Vapor_Enthalpy_Entropy_CpCv = "IAPWS-08 Seawater"
+                .Vapor_Density = "IAPWS-08 Seawater"
+                .Liquid_Fugacity = "Vapor Pressure / Henry's Constant"
+                .Liquid_Enthalpy_Entropy_CpCv = "IAPWS-08 Seawater"
+                .Liquid_ThermalConductivity = "IAPWS-08 Seawater"
+                .Liquid_Viscosity = "IAPWS-08 Seawater"
+            End With
 
         End Sub
 
@@ -315,12 +329,23 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = result
                 result = result * Me.AUX_MMM(Phase) / 1000
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = result
-                If Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault > 0 Then
-                    result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(Phase) / 1000 / Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
-                Else
-                    result = 0
-                End If
-                Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
+
+                Dim xl1 = Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault
+                Dim xl2 = Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault
+                Dim xv = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
+                Dim xs = Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault
+
+                Dim Vx1 = Me.CurrentMaterialStream.GetPhaseComposition(3)
+                Dim Vx2 = Me.CurrentMaterialStream.GetPhaseComposition(4)
+                Dim Vv = Me.CurrentMaterialStream.GetPhaseComposition(2)
+                Dim Vs = Me.CurrentMaterialStream.GetPhaseComposition(7)
+
+                Dim Vp = Me.CurrentMaterialStream.GetPhaseComposition(phaseID)
+                Dim xp = Me.CurrentMaterialStream.Phases(phaseID).Properties.molarfraction.GetValueOrDefault
+
+                Dim wp = xp * AUX_MMM(Vp) / (xl1 * AUX_MMM(Vx1) + xl2 * AUX_MMM(Vx2) + xv * AUX_MMM(Vv) + xs * AUX_MMM(Vs))
+
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = wp
                 Me.DW_CalcCompVolFlow(phaseID)
                 Me.DW_CalcCompFugCoeff(Phase)
 
@@ -693,7 +718,7 @@ Namespace PropertyPackages
                                                                        Throw New Exception(String.Format("Error calculation vapor pressure."))
                                                                    End If
                                                                    Return pvapt - P
-                                                               End Function, 350, 1000)
+                                                               End Function, 273.15, 1000)
 
         End Function
 

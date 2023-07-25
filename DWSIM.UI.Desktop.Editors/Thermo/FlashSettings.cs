@@ -38,7 +38,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             c.CreateAndAddLabelRow("General");
 
-            var options = new[] { "Default", "VLE", "VLLE", "SVLE", "SVLLE", "NoFlash" };
+            var options = new[] { "Default", "VLE", "VLLE", "SVLE", "SVLLE", "No Flash" };
 
             var o1 = s[f.ForceEquilibriumCalculationType];
 
@@ -46,6 +46,14 @@ namespace DWSIM.UI.Desktop.Editors
                 (dd, e) =>
                 {
                     s[f.ForceEquilibriumCalculationType] = options[dd.SelectedIndex];
+                });
+
+            var fsoptions = new[] { "Rigorous VLE", "Ideal VLE", "No Flash", "Nothing (Throw Error)" };
+
+            c.CreateAndAddDropDownRow("Fail-Safe Procedure", fsoptions.ToList(), int.Parse(s[f.FailSafeCalculationMode]),
+                (dd, e) =>
+                {
+                    s[f.FailSafeCalculationMode] = dd.SelectedIndex.ToString();
                 });
 
             var methods = new[] { "Nested Loops", "Inside-Out", "Gibbs Minimization" };

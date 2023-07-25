@@ -26,8 +26,6 @@ Namespace PropertyPackages.Auxiliary
         Dim m_pr As New PROPS
         Private _ip As Dictionary(Of String, Dictionary(Of String, PR_IPData))
 
-        Public Property BIPChanged As Boolean = False
-
         Public ReadOnly Property InteractionParameters() As Dictionary(Of String, Dictionary(Of String, PR_IPData))
             Get
                 Return _ip
@@ -368,10 +366,14 @@ Namespace PropertyPackages.Auxiliary
             coeff(2) = -1
             coeff(3) = 1
 
-            Dim _zarray As Double(), _mingz As Double()
+            Dim _mingz As Double()
 
-            _zarray = CalcZ2(AG1, BG1)
-            If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vz.ToArrayString))
+            Dim _zarray As List(Of Double) = CalcZ2(AG1, BG1)
+
+            If _zarray.Count = 0 Then
+                Throw New Exception("SRK EOS: unable to calculate a valid compressibility factor.")
+            End If
+
             If TIPO <> "" Then
                 If TIPO = "L" Then
                     Z = _zarray.Min

@@ -20,6 +20,8 @@ Imports DWSIM.SharedClasses.Extras
 
         loaded = True
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Sub PopulateList()
@@ -100,7 +102,7 @@ Imports DWSIM.SharedClasses.Extras
 
         If updating = False And loaded Then
 
-            If e.ColumnIndex = 6 Then
+            If e.ColumnIndex = 6 And e.RowIndex >= 0 Then
 
                 Dim wi As WatchItem = Flowsheet.WatchItems(Me.dgv.Rows(e.RowIndex).Cells(0).Value)
                 If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(wi.ObjID) Then

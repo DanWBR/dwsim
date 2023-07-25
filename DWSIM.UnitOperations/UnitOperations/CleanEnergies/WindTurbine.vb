@@ -341,6 +341,7 @@ Namespace UnitOperations
             airstr.SetMassFlow(1.0)
             airstr.SetTemperature(at)
             airstr.SetPressure(ap)
+            airstr.SetFlowsheet(FlowSheet)
             airstr.PropertyPackage = rpp
             rpp.CurrentMaterialStream = airstr
 
@@ -355,6 +356,7 @@ Namespace UnitOperations
             airstr.SetMassFlow(1.0)
             airstr.SetTemperature(at)
             airstr.SetPressure(ap)
+            airstr.SetFlowsheet(FlowSheet)
             airstr.PropertyPackage = rpp
             rpp.CurrentMaterialStream = airstr
 

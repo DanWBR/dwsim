@@ -98,7 +98,7 @@ Public Class FormReacHeterog
                 Me.cbBase.SelectedIndex = 3
             Case ReactionBasis.MolarFrac
                 Me.cbBase.SelectedIndex = 4
-            Case ReactionBasis.MolarConc
+            Case ReactionBasis.MassFrac
                 Me.cbBase.SelectedIndex = 5
             Case ReactionBasis.PartialPress
                 Me.cbBase.SelectedIndex = 6
@@ -142,6 +142,8 @@ Public Class FormReacHeterog
             Case "Edit"
                 Call Me.KryptonDataGridView1_CellValidated(sender, New DataGridViewCellEventArgs(3, 0))
         End Select
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 
@@ -287,7 +289,7 @@ Public Class FormReacHeterog
                 Case 4
                     rc.ReactionBasis = ReactionBasis.MolarFrac
                 Case 5
-                    rc.ReactionBasis = ReactionBasis.MolarConc
+                    rc.ReactionBasis = ReactionBasis.MassFrac
                 Case 6
                     rc.ReactionBasis = ReactionBasis.PartialPress
             End Select

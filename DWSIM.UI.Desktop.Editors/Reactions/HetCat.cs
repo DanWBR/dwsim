@@ -44,6 +44,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddStringEditorRow2("Name", "", rx.Name, (sender, e) => { rx.Name = sender.Text; });
 
+            container.CreateAndAddStringEditorRow2("Description", "", rx.Description, (sender, e) => { rx.Description = sender.Text; });
+
             DynamicLayout p1, p2;
 
             TableLayout t1;
@@ -51,15 +53,24 @@ namespace DWSIM.UI.Desktop.Editors
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
-            p1.Width = 420;
+            //p1.Width = 420;
 
             t1 = new TableLayout();
             t1.Rows.Add(new TableRow(p1, p2));
 
+            t1.Rows[0].Cells[0].ScaleWidth = true;
+            t1.Rows[0].Cells[1].ScaleWidth = true;
+
+
             p1.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff.)");
 
             var compcontainer = new DynamicLayout();
-            //compcontainer.BackgroundColor = Colors.White;
+
+            List<string> toremove = new List<string>();
+            foreach (var comp in rx.Components)
+                if (!flowsheet.SelectedCompounds.ContainsKey(comp.Key)) toremove.Add(comp.Key);
+            foreach (var comp in toremove)
+                rx.Components.Remove(comp);
 
             Double val;
 

@@ -22,6 +22,12 @@ Public Class EditingForm_Adjust_ControlPanel
 
     Private Sub UI_AdjControlPanelForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        Init()
+
+    End Sub
+
+    Public Sub Init()
+
         formC = myADJ.FlowSheet
 
         Me.su = myADJ.FlowSheet.FlowsheetOptions.SelectedUnitSystem

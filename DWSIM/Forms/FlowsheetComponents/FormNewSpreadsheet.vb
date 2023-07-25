@@ -1,4 +1,7 @@
-﻿Imports System.Linq
+﻿Imports System.IO
+Imports System.Linq
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 #If LINUX Then
 Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid
 Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid.Formula
@@ -61,22 +64,79 @@ Public Class FormNewSpreadsheet
 
         SpreadsheetControl = New unvell.ReoGrid.Editor.ReoGridEditor()
 
-        AddHandler SpreadsheetControl.ImportarDadosToolStripMenuItem.Click, Sub(s2, e2)
-                                                                                Dim frmps As New FormPropSelection
-                                                                                frmps.ssheet = Spreadsheet
-                                                                                frmps.ShowDialog(Me)
-                                                                            End Sub
+        Editor.Common.Shared.IsPro = FormMain.IsPro
 
-        AddHandler SpreadsheetControl.ExportarDadosToolStripMenuItem.Click, Sub(s2, e2)
-                                                                                Dim frmps As New FormPropSelection
-                                                                                frmps.ssheet = Spreadsheet
-                                                                                frmps.mode = 1
-                                                                                frmps.ShowDialog(Me)
-                                                                            End Sub
+        Editor.Common.Shared.SaveInPro = Sub(grid)
 
-        AddHandler SpreadsheetControl.create2DXYChartFromSelectionToolStripMenuItem.Click, Sub(s2, e2)
-                                                                                               CreateChartFromRange(s2, e2)
-                                                                                           End Sub
+                                             Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+                                             Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+                                                 New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Excel File", "*.xlsx")})
+
+                                             If handler IsNot Nothing Then
+                                                 Using stream As New MemoryStream()
+                                                     Try
+                                                         grid.Save(stream, IO.FileFormat.Excel2007)
+                                                         handler.Write(stream)
+                                                         MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                                     Catch ex As Exception
+                                                         MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                     End Try
+                                                 End Using
+                                             End If
+
+                                         End Sub
+
+        Editor.Common.Shared.OpenInPro = Sub(grid)
+
+                                             Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+                                             Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+                                                 New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Excel File", "*.xlsx")})
+
+                                             If handler IsNot Nothing Then
+                                                 Using str = handler.OpenRead()
+                                                     Try
+                                                         grid.Load(str, IO.FileFormat.Excel2007)
+                                                     Catch ex As Exception
+                                                         MessageBox.Show(DWSIM.App.GetLocalString("Error loading file") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                     End Try
+                                                 End Using
+                                             End If
+
+                                         End Sub
+
+
+        Dim h1 = Sub(s2, e2)
+                     Dim frmps As New FormPropSelection
+                     frmps.ssheet = Spreadsheet
+                     frmps.ShowDialog(Me)
+                 End Sub
+
+        AddHandler SpreadsheetControl.ImportarDadosToolStripMenuItem.Click, h1
+
+        Dim h2 = Sub(s2, e2)
+                     Dim frmps As New FormPropSelection
+                     frmps.ssheet = Spreadsheet
+                     frmps.mode = 1
+                     frmps.ShowDialog(Me)
+                 End Sub
+
+        AddHandler SpreadsheetControl.ExportarDadosToolStripMenuItem.Click, h2
+
+        Dim h3 = Sub(s2, e2)
+                     CreateChartFromRange(s2, e2)
+                 End Sub
+
+        AddHandler SpreadsheetControl.create2DXYChartFromSelectionToolStripMenuItem.Click, h3
+
+        AddHandler Me.Closed, Sub(s2, e2)
+
+                                  RemoveHandler SpreadsheetControl.ImportarDadosToolStripMenuItem.Click, h1
+                                  RemoveHandler SpreadsheetControl.ExportarDadosToolStripMenuItem.Click, h2
+                                  RemoveHandler SpreadsheetControl.create2DXYChartFromSelectionToolStripMenuItem.Click, h3
+
+                              End Sub
 
         SpreadsheetControl.Dock = DockStyle.Fill
 
@@ -95,6 +155,19 @@ Public Class FormNewSpreadsheet
 #End If
 
         Columns.AddRange({"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"})
+
+        Spreadsheet.CurrentWorksheet.SelectionForwardDirection = SelectionForwardDirection.Down
+        Spreadsheet.CurrentWorksheet.SetSettings(WorksheetSettings.Formula_AutoUpdateReferenceCell, True)
+        Spreadsheet.CurrentWorksheet.SetSettings(WorksheetSettings.Formula_AutoPickingCellAddress, True)
+        Spreadsheet.CurrentWorksheet.SetSettings(WorksheetSettings.Formula_AutoFormat, True)
+
+        AddHandler Spreadsheet.WorksheetCreated,
+            Sub(sender, e)
+                e.Worksheet.SelectionForwardDirection = SelectionForwardDirection.Down
+                e.Worksheet.SetSettings(WorksheetSettings.Formula_AutoUpdateReferenceCell, True)
+                e.Worksheet.SetSettings(WorksheetSettings.Formula_AutoPickingCellAddress, True)
+                e.Worksheet.SetSettings(WorksheetSettings.Formula_AutoFormat, True)
+            End Sub
 
         Loaded = True
 
@@ -190,110 +263,124 @@ Public Class FormNewSpreadsheet
 
     End Sub
 
+    Dim c1, c2, c3, c4, c5, c6 As Func(Of Cell, Object(), Object)
+
     Public Sub SetCustomFunctions()
 
-        Formula.FormulaExtension.CustomFunctions("GETNAME") = Function(cell, args) As Object
-                                                                  Try
-                                                                      Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
-                                                                      Return obj.GraphicObject.Tag
-                                                                  Catch ex As Exception
-                                                                      Return "ERROR: " & ex.Message
-                                                                  End Try
-                                                              End Function
+        c1 = Function(cell, args) As Object
+                 Try
+                     Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
+                     Return obj.GraphicObject.Tag
+                 Catch ex As Exception
+                     Return "ERROR: " & ex.Message
+                 End Try
+             End Function
 
-        Formula.FormulaExtension.CustomFunctions("GETPROPVAL") = Function(cell, args) As Object
-                                                                     If args.Length = 2 Then
-                                                                         Try
-                                                                             Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyValue(args(1).ToString)
-                                                                         Catch ex As Exception
-                                                                             Return "ERROR: " & ex.Message
-                                                                         End Try
-                                                                     ElseIf args.Length = 3 Then
-                                                                         Try
-                                                                             Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
-                                                                             Dim val = obj.GetPropertyValue(args(1).ToString)
-                                                                             Return ConvertUnits(Double.Parse(val), obj.GetPropertyUnit(args(1).ToString), args(2).ToString)
-                                                                         Catch ex As Exception
-                                                                             Return "ERROR: " & ex.Message
-                                                                         End Try
-                                                                     Else
-                                                                         Return "INVALID ARGS"
-                                                                     End If
-                                                                 End Function
+        Formula.FormulaExtension.CustomFunctions("GETNAME") = c1
 
-        Formula.FormulaExtension.CustomFunctions("SETPROPVAL") = Function(cell, args) As Object
-                                                                     If args.Length = 3 Then
-                                                                         Try
-                                                                             Dim ws = cell.Worksheet
-                                                                             Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
-                                                                             wcell.Formula = args(2).ToString.Trim(Chr(34))
-                                                                             Evaluator.Evaluate(wcell)
-                                                                             Dim val = wcell.Data
-                                                                             Flowsheet.SimulationObjects(args(0).ToString).SetPropertyValue(args(1).ToString, val)
-                                                                             wcell.Formula = ""
-                                                                             wcell.Data = ""
-                                                                             Return String.Format("EXPORT OK [{0}, {1} = {2}]", Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag, args(1).ToString, val)
-                                                                         Catch ex As Exception
-                                                                             Return "ERROR: " & ex.Message
-                                                                         End Try
-                                                                     ElseIf args.Length = 4 Then
-                                                                         Try
-                                                                             Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
-                                                                             Dim prop = args(1).ToString
-                                                                             Dim ws = cell.Worksheet
-                                                                             Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
-                                                                             wcell.Formula = args(2).ToString.Trim(Chr(34))
-                                                                             Evaluator.Evaluate(wcell)
-                                                                             Dim val = wcell.Data
-                                                                             wcell.Formula = ""
-                                                                             wcell.Data = ""
-                                                                             Dim units = args(3).ToString
-                                                                             Dim newval = ConvertUnits(Double.Parse(val), units, obj.GetPropertyUnit(prop))
-                                                                             obj.SetPropertyValue(prop, newval)
-                                                                             Return String.Format("EXPORT OK [{0}, {1} = {2} {3}]", obj.GraphicObject.Tag, prop, val, units)
-                                                                         Catch ex As Exception
-                                                                             Return "ERROR: " & ex.Message
-                                                                         End Try
-                                                                     Else
-                                                                         Return "INVALID ARGS"
-                                                                     End If
-                                                                 End Function
+        c2 = Function(cell, args) As Object
+                 If args.Length = 2 Then
+                     Try
+                         Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyValue(args(1).ToString)
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 ElseIf args.Length = 3 Then
+                     Try
+                         Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
+                         Dim val = obj.GetPropertyValue(args(1).ToString)
+                         Return ConvertUnits(Double.Parse(val), obj.GetPropertyUnit(args(1).ToString), args(2).ToString)
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 Else
+                     Return "INVALID ARGS"
+                 End If
+             End Function
 
-        Formula.FormulaExtension.CustomFunctions("GETPROPUNITS") = Function(cell, args) As Object
-                                                                       If args.Length = 2 Then
-                                                                           Try
-                                                                               Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyUnit(args(1).ToString)
-                                                                           Catch ex As Exception
-                                                                               Return "ERROR: " & ex.Message
-                                                                           End Try
-                                                                       Else
-                                                                           Return "INVALID ARGS"
-                                                                       End If
-                                                                   End Function
+        Formula.FormulaExtension.CustomFunctions("GETPROPVAL") = c2
 
-        Formula.FormulaExtension.CustomFunctions("GETOBJID") = Function(cell, args) As Object
-                                                                   If args.Length = 1 Then
-                                                                       Try
-                                                                           Return Flowsheet.GetFlowsheetSimulationObject(args(0).ToString).Name
-                                                                       Catch ex As Exception
-                                                                           Return "ERROR: " & ex.Message
-                                                                       End Try
-                                                                   Else
-                                                                       Return "INVALID ARGS"
-                                                                   End If
-                                                               End Function
+        c3 = Function(cell, args) As Object
+                 If args.Length = 3 Then
+                     Try
+                         Dim ws = cell.Worksheet
+                         Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
+                         wcell.Formula = args(2).ToString.Trim(Chr(34))
+                         Evaluator.Evaluate(wcell)
+                         Dim val = wcell.Data
+                         Flowsheet.SimulationObjects(args(0).ToString).SetPropertyValue(args(1).ToString, val)
+                         wcell.Formula = ""
+                         wcell.Data = ""
+                         Return String.Format("EXPORT OK [{0}, {1} = {2}]", Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag, args(1).ToString, val)
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 ElseIf args.Length = 4 Then
+                     Try
+                         Dim obj = Flowsheet.SimulationObjects(args(0).ToString)
+                         Dim prop = args(1).ToString
+                         Dim ws = cell.Worksheet
+                         Dim wcell = ws.Cells(ws.RowCount - 1, ws.ColumnCount - 1)
+                         wcell.Formula = args(2).ToString.Trim(Chr(34))
+                         Evaluator.Evaluate(wcell)
+                         Dim val = wcell.Data
+                         wcell.Formula = ""
+                         wcell.Data = ""
+                         Dim units = args(3).ToString
+                         Dim newval = ConvertUnits(Double.Parse(val), units, obj.GetPropertyUnit(prop))
+                         obj.SetPropertyValue(prop, newval)
+                         Return String.Format("EXPORT OK [{0}, {1} = {2} {3}]", obj.GraphicObject.Tag, prop, val, units)
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 Else
+                     Return "INVALID ARGS"
+                 End If
+             End Function
 
-        Formula.FormulaExtension.CustomFunctions("GETOBJNAME") = Function(cell, args) As Object
-                                                                     If args.Length = 1 Then
-                                                                         Try
-                                                                             Return Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag
-                                                                         Catch ex As Exception
-                                                                             Return "ERROR: " & ex.Message
-                                                                         End Try
-                                                                     Else
-                                                                         Return "INVALID ARGS"
-                                                                     End If
-                                                                 End Function
+        Formula.FormulaExtension.CustomFunctions("SETPROPVAL") = c3
+
+        c4 = Function(cell, args) As Object
+                 If args.Length = 2 Then
+                     Try
+                         Return Flowsheet.SimulationObjects(args(0).ToString).GetPropertyUnit(args(1).ToString)
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 Else
+                     Return "INVALID ARGS"
+                 End If
+             End Function
+
+        Formula.FormulaExtension.CustomFunctions("GETPROPUNITS") = c4
+
+        c5 = Function(cell, args) As Object
+                 If args.Length = 1 Then
+                     Try
+                         Return Flowsheet.GetFlowsheetSimulationObject(args(0).ToString).Name
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 Else
+                     Return "INVALID ARGS"
+                 End If
+             End Function
+
+        Formula.FormulaExtension.CustomFunctions("GETOBJID") = c5
+
+        c6 = Function(cell, args) As Object
+                 If args.Length = 1 Then
+                     Try
+                         Return Flowsheet.SimulationObjects(args(0).ToString).GraphicObject.Tag
+                     Catch ex As Exception
+                         Return "ERROR: " & ex.Message
+                     End Try
+                 Else
+                     Return "INVALID ARGS"
+                 End If
+             End Function
+
+        Formula.FormulaExtension.CustomFunctions("GETOBJNAME") = c6
 
     End Sub
 
@@ -328,7 +415,10 @@ Public Class FormNewSpreadsheet
 
     Public Sub EvaluateAll()
 
-        Spreadsheet?.Worksheets(0).Recalculate()
+        Try
+            Spreadsheet?.Worksheets(0).Recalculate()
+        Catch ex As Exception
+        End Try
 
     End Sub
 
@@ -682,6 +772,34 @@ Public Class FormNewSpreadsheet
         For Each sheet In Spreadsheet.Worksheets
             If sheet.ScaleFactor < Settings.DpiScale Then sheet.ScaleFactor = Settings.DpiScale
         Next
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
+    End Sub
+
+    Public Sub ReleaseResources()
+
+        Formula.FormulaExtension.CustomFunctions.Clear()
+        c1 = Nothing
+        c2 = Nothing
+        c3 = Nothing
+        c4 = Nothing
+        c5 = Nothing
+        c6 = Nothing
+
+#If Not LINUX Then
+
+        Try
+            Flowsheet?.MenuStrip1.Items.Remove(SpreadsheetControl.SpreadsheetTSMI)
+            SpreadsheetControl?.SpreadsheetTSMI.Dispose()
+        Catch ex As Exception
+        End Try
+
+#End If
+
+
+        SpreadsheetControl.Dispose()
+        SpreadsheetControl = Nothing
 
     End Sub
 

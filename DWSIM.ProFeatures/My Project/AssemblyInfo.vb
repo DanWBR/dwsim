@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.ProFeatures")>
-<Assembly: AssemblyCopyright("Copyright © 2022 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2023 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("8.3.1.0")>
-<Assembly: AssemblyFileVersion("8.3.1.0")>
+<Assembly: AssemblyVersion("8.5.1.0")>
+<Assembly: AssemblyFileVersion("8.5.1.0")>

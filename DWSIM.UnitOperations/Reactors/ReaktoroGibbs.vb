@@ -38,9 +38,13 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReaktoroGibbs
 
-        Public Property ReaktoroPath As String = "reaktoro"
-
         Public Property DatabaseName As String = "supcrt07.xml"
+
+        Public Property UseExternalDatabase As Boolean = False
+
+        Public Property ExternalDatabaseFileName As String = ""
+
+        Public Property ExternalDatabaseContents As String = ""
 
         Public Property Prefix As String = "RK-" Implements IExternalUnitOperation.Prefix
 
@@ -138,20 +142,6 @@ Namespace Reactors
 
             If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
-                DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
-
-                If Settings.GetEnvironment() = 32 Then
-                    Throw New Exception("Reaktoro is not supported on 32-bit environments.")
-                End If
-
-                ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
-
-                If Not Directory.Exists(ReaktoroPath) Then
-                    Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
-                End If
-
-                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
-
                 DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
 
             Else
@@ -160,6 +150,7 @@ Namespace Reactors
 
             End If
 
+            Dim libpath = DWSIM.Thermodynamics.ReaktoroPropertyPackage.ReaktoroLoader.Initialize()
 
             Dim msin = GetInletMaterialStream(0)
             Dim msout = GetOutletMaterialStream(0)
@@ -168,10 +159,35 @@ Namespace Reactors
 
             Using Py.GIL
 
+                If libpath <> "" Then
+
+                    Dim sys As Object = Py.Import("sys")
+                    sys.path.append(libpath)
+
+                    Dim os As Object = Py.Import("os")
+
+                    Dim dllpath = Path.Combine(libpath, "reaktoro")
+                    Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+
+                    os.add_dll_directory(dllpath)
+                    os.add_dll_directory(shareddllpath)
+                    os.add_dll_directory(Settings.PythonPath)
+
+                End If
+
                 Dim reaktoro As Object = Py.Import("reaktoro")
 
                 'Initialize a thermodynamic database
-                Dim db = reaktoro.Database(DatabaseName)
+
+                Dim db As Object = Nothing
+                If UseExternalDatabase Then
+                    Dim dbpath = Path.Combine(IO.Path.GetTempPath(), ExternalDatabaseFileName)
+                    File.WriteAllText(dbpath, ExternalDatabaseContents)
+                    dbpath = dbpath.Replace("\", "\\")
+                    db = reaktoro.Database(dbpath)
+                Else
+                    db = reaktoro.Database(DatabaseName)
+                End If
 
                 'Define the chemical system
                 Dim editor = reaktoro.ChemicalEditor(db)
@@ -396,6 +412,24 @@ Namespace Reactors
             End If
         End Sub
 
+        Public Overrides Function GetEditingForm() As Form
+            If f Is Nothing Then
+                f = New EditingForm_ReaktoroGibbs With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Return f
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_ReaktoroGibbs With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Return f
+                Else
+                    Return Nothing
+                End If
+            End If
+        End Function
+
         Public Overrides Function GetIconBitmap() As Object
 
             Return My.Resources.reactor_reaktoro
@@ -573,23 +607,43 @@ Namespace Reactors
 
         Public Function GetListOfCompounds() As String
 
+            If Settings.RunningPlatform() = Settings.Platform.Windows Then
 
-            DWSIM.GlobalSettings.Settings.ShutdownPythonEnvironment()
+                DWSIM.GlobalSettings.Settings.InitializePythonEnvironment()
 
-            ReaktoroPath = Path.Combine(SharedClasses.Utility.GetDwsimRootDirectory(), "PythonEnvs", "reaktoro")
-
-            If Not Directory.Exists(ReaktoroPath) Then
-                Throw New Exception("Please install DWSIM Python Environments Add-On and try again.")
             End If
 
-            DWSIM.GlobalSettings.Settings.InitializePythonEnvironment(ReaktoroPath)
+            Dim libpath = DWSIM.Thermodynamics.ReaktoroPropertyPackage.ReaktoroLoader.Initialize()
 
             Using Py.GIL
+
+                If libpath <> "" Then
+
+                    Dim sys As Object = Py.Import("sys")
+                    sys.path.append(libpath)
+
+                    Dim os As Object = Py.Import("os")
+
+                    Dim dllpath = Path.Combine(libpath, "reaktoro")
+                    Dim shareddllpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python_packages", "reaktoro_shared")
+
+                    os.add_dll_directory(dllpath)
+                    os.add_dll_directory(shareddllpath)
+                    os.add_dll_directory(Settings.PythonPath)
+
+                End If
 
                 Dim reaktoro As Object = Py.Import("reaktoro")
 
                 'Initialize a thermodynamic database
-                Dim db As Object = reaktoro.Database(DatabaseName)
+                Dim db As Object = Nothing
+                If UseExternalDatabase Then
+                    Dim dbpath = Path.Combine(IO.Path.GetTempPath(), ExternalDatabaseFileName)
+                    File.WriteAllText(dbpath, ExternalDatabaseContents)
+                    db = reaktoro.Database(dbpath)
+                Else
+                    db = reaktoro.Database(DatabaseName)
+                End If
 
                 Dim aql As Object = db.aqueousSpecies()
                 Dim gql As Object = db.gaseousSpecies()

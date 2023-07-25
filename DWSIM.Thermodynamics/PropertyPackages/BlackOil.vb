@@ -43,7 +43,19 @@ Namespace PropertyPackages
 
             Me.IsConfigurable = False
 
-            Me._packagetype = PropertyPackages.PackageType.Miscelaneous
+            Me._packagetype = PropertyPackages.PackageType.Specialized
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal"
+                .Vapor_Thermal_Conductivity = "Black-Oil Correlation"
+                .Vapor_Viscosity = "Black-Oil Correlation"
+                .Vapor_Enthalpy_Entropy_CpCv = "Black-Oil Correlation"
+                .Vapor_Density = "Black-Oil Correlation"
+                .Liquid_Fugacity = "Vapor Pressure"
+                .Liquid_Enthalpy_Entropy_CpCv = "Black-Oil Correlation"
+                .Liquid_ThermalConductivity = "Black-Oil Correlation"
+                .Liquid_Viscosity = "Black-Oil Correlation"
+            End With
 
         End Sub
 

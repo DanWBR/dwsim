@@ -33,8 +33,14 @@ Namespace PropertyPackages
         Public Shadows Const ClassId As String = "407A13EC-1C55-462a-AEA4-9709B11367B0"
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
-        Private m_uni As New PropertyPackages.Auxiliary.Unifac
         Private m_id As New PropertyPackages.Auxiliary.Ideal
+
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
+        Public Overrides ReadOnly Property DisplayName As String = "Ideal (Raoult's Law)"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses Raoult's Law to calculate K-values. Recommended for gases and hydrocarbons at low pressures."
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
@@ -46,6 +52,14 @@ Namespace PropertyPackages
 
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.VaporPressure
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal"
+                .Vapor_Enthalpy_Entropy_CpCv = "Ideal Gas Cp"
+                .Vapor_Density = "Peng-Robinson EOS"
+                .Liquid_Fugacity = "Vapor Pressure / Henry's Constant"
+                .Liquid_Enthalpy_Entropy_CpCv = "Ideal Gas Cp + Enthalpy of Vaporization"
+            End With
 
         End Sub
 
@@ -606,7 +620,7 @@ Namespace PropertyPackages
 
             If OverrideEnthalpyCalculation Then
 
-                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -692,7 +706,7 @@ Namespace PropertyPackages
 
             If OverrideEntropyCalculation Then
 
-                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -759,7 +773,13 @@ Namespace PropertyPackages
                 For i = 0 To n
                     If T / Tc(i) >= 1.0 Then
                         IObj?.SetCurrent()
-                        fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
+                        If UseHenryConstants And HasHenryConstants(RET_VNAMES(i)) Then
+                            Dim hc = AUX_KHenry(RET_VNAMES(i), T)
+                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
+                            fugcoeff(i) = hc / P
+                        Else
+                            fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                        End If
                     Else
                         IObj?.SetCurrent()
                         fugcoeff(i) = Me.AUX_PVAPi(i, T) / P

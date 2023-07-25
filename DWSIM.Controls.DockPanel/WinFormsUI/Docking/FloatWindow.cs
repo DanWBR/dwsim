@@ -49,7 +49,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
             else
             {
-                StartPosition = FormStartPosition.WindowsDefaultLocation;
+                StartPosition = FormStartPosition.CenterScreen;
                 Size = dockPanel.DefaultFloatWindowSize;
             }
 
@@ -493,7 +493,14 @@ namespace WeifenLuo.WinFormsUI.Docking
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "FloatWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Load += new System.EventHandler(this.FloatWindow_Load);
             this.ResumeLayout(false);
+
+        }
+
+        private void FloatWindow_Load(object sender, EventArgs e)
+        {
 
         }
     }

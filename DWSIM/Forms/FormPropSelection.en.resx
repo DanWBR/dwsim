@@ -127,27 +127,20 @@
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>755, 384</value>
   </data>
-  <data name="ColumnHeader4.Text" xml:space="preserve">
-    <value>Units</value>
-  </data>
   <data name="lvUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>700, 19</value>
   </data>
   <data name="lvUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 350</value>
   </data>
-  <data name="ColumnHeader3.Text" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
-    <value>350</value>
+  <data name="lvProp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 19</value>
   </data>
   <data name="lvProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 350</value>
+    <value>324, 350</value>
   </data>
-  <data name="ColumnHeader2.Text" xml:space="preserve">
-    <value>Object</value>
+  <data name="lvObject.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 19</value>
   </data>
   <data name="lvObject.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 350</value>
@@ -155,14 +148,30 @@
   <data name="ColumnHeader1.Text" xml:space="preserve">
     <value>Type</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ColumnHeader1.Width" type="System.Int32, mscorlib">
+    <value>175</value>
+  </data>
   <data name="lvType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 350</value>
+    <value>181, 350</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>840, 375</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Select Object</value>
+  </data>
+  <data name="ColumnHeader4.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="ColumnHeader3.Text" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
+    <value>350</value>
+  </data>
+  <data name="ColumnHeader2.Text" xml:space="preserve">
+    <value>Object</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>858, 418</value>

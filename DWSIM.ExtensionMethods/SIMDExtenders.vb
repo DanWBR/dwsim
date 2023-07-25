@@ -429,4 +429,23 @@ Public Module SIMDExtenders
 
     End Function
 
+    <System.Runtime.CompilerServices.Extension()> Public Function HasNaN(vector As Double()) As Double
+
+        Return vector.Any(Function(v) Double.IsNaN(v))
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> Public Function HasInf(vector As Double()) As Double
+
+        Return vector.Any(Function(v) Double.IsInfinity(v))
+
+    End Function
+
+
+    <System.Runtime.CompilerServices.Extension()> Public Function HasNegative(vector As Double()) As Double
+
+        Return vector.Any(Function(v) v < 0.0)
+
+    End Function
+
 End Module

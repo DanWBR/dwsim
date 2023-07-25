@@ -427,7 +427,7 @@ namespace DWSIM.UI.Desktop.Editors
             units.AddRange(su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow));
             units.AddRange(su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow));
             units.AddRange(su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature));
-            units.AddRange(new[] { "% M/M", "% W/W", "M", "We" });
+            units.AddRange(new[] { "% M/M", "% W/W", "M", "We", "%" });
             units.Insert(0, "");
             int cspec = 0, rspec = 0;
 
@@ -460,6 +460,9 @@ namespace DWSIM.UI.Desktop.Editors
                 case ColumnSpec.SpecType.Temperature:
                     cspec = 8;
                     break;
+                case ColumnSpec.SpecType.Feed_Recovery:
+                    cspec = 9;
+                    break;
             }
 
             switch (column.Specs["R"].SType)
@@ -490,6 +493,9 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ColumnSpec.SpecType.Temperature:
                     rspec = 8;
+                    break;
+                case ColumnSpec.SpecType.Feed_Recovery:
+                    rspec = 9;
                     break;
             }
 
@@ -524,6 +530,9 @@ namespace DWSIM.UI.Desktop.Editors
                         break;
                     case 8:
                         column.Specs["C"].SType = ColumnSpec.SpecType.Temperature;
+                        break;
+                    case 9:
+                        column.Specs["C"].SType = ColumnSpec.SpecType.Feed_Recovery;
                         break;
                 }
             });
@@ -577,6 +586,9 @@ namespace DWSIM.UI.Desktop.Editors
                         break;
                     case 8:
                         column.Specs["R"].SType = ColumnSpec.SpecType.Temperature;
+                        break;
+                    case 9:
+                        column.Specs["R"].SType = ColumnSpec.SpecType.Feed_Recovery;
                         break;
                 }
             });

@@ -56,6 +56,8 @@ Public Class FormBulkAddPseudos
 
         btnAdd.Visible = Flowsheet IsNot Nothing
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub btnEstimate_Click(sender As Object, e As EventArgs) Handles btnEstimate.Click

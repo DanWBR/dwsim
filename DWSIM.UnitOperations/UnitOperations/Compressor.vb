@@ -282,6 +282,10 @@ Namespace UnitOperations
                 esin = args(2)
             End If
 
+            If msin.Phases(1).Properties.molarfraction.GetValueOrDefault() > 0.001 Then
+                FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("Liquid phase detected in compressor inlet"), IFlowsheet.MessageType.Warning)
+            End If
+
             If msin.GetMassFlow() = 0.0 Then
                 DeltaT = 0.0
                 If CalcMode <> CalculationMode.PowerRequired Then
@@ -350,14 +354,30 @@ Namespace UnitOperations
 
                             Dim xhead, yhead, xeff, yeff, xpower, ypower As New ArrayList
 
-                            Dim qint As Double
+                            Dim q1, q2, q3 As Double
 
                             If chead.xunit.Contains("@ P,T") Then
                                 'actual flow
-                                qint = msin.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                                q1 = msin.Phases(0).Properties.volumetric_flow
                             Else
                                 ' molar flow
-                                qint = msin.Phases(0).Properties.molarflow.GetValueOrDefault
+                                q1 = msin.Phases(0).Properties.molarflow
+                            End If
+
+                            If cpower.xunit.Contains("@ P,T") Then
+                                'actual flow
+                                q2 = msin.Phases(0).Properties.volumetric_flow
+                            Else
+                                ' molar flow
+                                q2 = msin.Phases(0).Properties.molarflow
+                            End If
+
+                            If ceff.xunit.Contains("@ P,T") Then
+                                'actual flow
+                                q3 = msin.Phases(0).Properties.volumetric_flow
+                            Else
+                                ' molar flow
+                                q3 = msin.Phases(0).Properties.molarflow
                             End If
 
                             Dim i As Integer
@@ -389,19 +409,19 @@ Namespace UnitOperations
                             Dim head, eff, power As Double
 
                             If datapair.Value("HEAD").Enabled And datapair.Value("HEAD").x.Count > 0 Then
-                                head = Interpolation.Interpolate(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), qint)
+                                head = Interpolation.Interpolate(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), q1)
                                 LHeadSpeed.Add(datapair.Key)
                                 LHead.Add(head)
                             End If
 
                             If datapair.Value("POWER").Enabled And datapair.Value("POWER").x.Count > 0 Then
-                                power = Interpolation.Interpolate(xpower.ToArray(GetType(Double)), ypower.ToArray(GetType(Double)), qint)
+                                power = Interpolation.Interpolate(xpower.ToArray(GetType(Double)), ypower.ToArray(GetType(Double)), q2)
                                 LPowerSpeed.Add(datapair.Key)
                                 LPower.Add(power)
                             End If
 
                             If datapair.Value("EFF").Enabled And datapair.Value("EFF").x.Count > 0 Then
-                                eff = Interpolation.Interpolate(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), qint)
+                                eff = Interpolation.Interpolate(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), q3)
                                 LEffSpeed.Add(datapair.Key)
                                 LEff.Add(eff)
                             End If
@@ -412,19 +432,19 @@ Namespace UnitOperations
 
                         If LHead.Count > 0 Then
                             ' head has priority over power
-                            ires = Interpolation.Interpolate(LHeadSpeed.ToArray, LHead.ToArray(), Speed)
+                            ires = MathNet.Numerics.Interpolate.Linear(LHeadSpeed.ToArray, LHead.ToArray()).Interpolate(Speed)
                             Me.CurvePower = Double.NegativeInfinity
                             Me.CurveHead = ires
                         Else
                             'power
-                            ires = Interpolation.Interpolate(LPowerSpeed.ToArray, LPower.ToArray(), Speed)
+                            ires = MathNet.Numerics.Interpolate.Linear(LPowerSpeed.ToArray, LPower.ToArray()).Interpolate(Speed)
                             Me.CurveHead = Double.NegativeInfinity
                             Me.CurvePower = ires
                         End If
 
                         If LEff.Count > 0 Then
                             'efficiency
-                            ires = Interpolation.Interpolate(LEffSpeed.ToArray, LEff.ToArray(), Speed)
+                            ires = MathNet.Numerics.Interpolate.Linear(LEffSpeed.ToArray, LEff.ToArray()).Interpolate(Speed)
                             Me.CurveEff = ires * 100
                         Else
                             Me.CurveEff = Double.NegativeInfinity

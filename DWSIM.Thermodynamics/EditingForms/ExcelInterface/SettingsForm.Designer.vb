@@ -27,18 +27,12 @@ Partial Class SettingsForm
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.tbGPUCaps = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.chkEnableSIMD = New System.Windows.Forms.CheckBox()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.cbGPU = New System.Windows.Forms.ComboBox()
         Me.cbParallelism = New System.Windows.Forms.ComboBox()
-        Me.chkEnableGPUProcessing = New System.Windows.Forms.CheckBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -68,10 +62,8 @@ Partial Class SettingsForm
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox8.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,17 +88,12 @@ Partial Class SettingsForm
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.PictureBox3)
         Me.TabPage1.Controls.Add(Me.PictureBox2)
         Me.TabPage1.Controls.Add(Me.PictureBox1)
-        Me.TabPage1.Controls.Add(Me.GroupBox8)
-        Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Controls.Add(Me.chkEnableSIMD)
         Me.TabPage1.Controls.Add(Me.chkEnableParallelCalcs)
         Me.TabPage1.Controls.Add(Me.Label6)
-        Me.TabPage1.Controls.Add(Me.cbGPU)
         Me.TabPage1.Controls.Add(Me.cbParallelism)
-        Me.TabPage1.Controls.Add(Me.chkEnableGPUProcessing)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -115,25 +102,13 @@ Partial Class SettingsForm
         Me.TabPage1.Text = "Calculation Engine"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'PictureBox3
-        '
-        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
-        Me.PictureBox3.Location = New System.Drawing.Point(247, 75)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox3.TabIndex = 11
-        Me.PictureBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " &
-        "a GPGPU device.")
-        '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
-        Me.PictureBox2.Location = New System.Drawing.Point(195, 45)
+        Me.PictureBox2.Location = New System.Drawing.Point(195, 95)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 10
         Me.PictureBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox2, "Enables acceleration of math vector operations through CPU SIMD extensions.")
@@ -144,49 +119,17 @@ Partial Class SettingsForm
         Me.PictureBox1.Location = New System.Drawing.Point(195, 17)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 9
         Me.PictureBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" &
         " cores to be used at the same time.")
         '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
-        Me.GroupBox8.Location = New System.Drawing.Point(12, 108)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(563, 151)
-        Me.GroupBox8.TabIndex = 6
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "OpenCL/CUDA device info"
-        '
-        'tbGPUCaps
-        '
-        Me.tbGPUCaps.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbGPUCaps.Font = New System.Drawing.Font("Consolas", 8.25!)
-        Me.tbGPUCaps.Location = New System.Drawing.Point(3, 16)
-        Me.tbGPUCaps.Multiline = True
-        Me.tbGPUCaps.Name = "tbGPUCaps"
-        Me.tbGPUCaps.ReadOnly = True
-        Me.tbGPUCaps.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.tbGPUCaps.Size = New System.Drawing.Size(557, 132)
-        Me.tbGPUCaps.TabIndex = 0
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label4.Location = New System.Drawing.Point(271, 75)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 13)
-        Me.Label4.TabIndex = 8
-        Me.Label4.Text = "GPGPU Device"
-        '
         'chkEnableSIMD
         '
         Me.chkEnableSIMD.AutoSize = True
         Me.chkEnableSIMD.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkEnableSIMD.Location = New System.Drawing.Point(13, 45)
+        Me.chkEnableSIMD.Location = New System.Drawing.Point(13, 95)
         Me.chkEnableSIMD.Name = "chkEnableSIMD"
         Me.chkEnableSIMD.Size = New System.Drawing.Size(176, 17)
         Me.chkEnableSIMD.TabIndex = 7
@@ -206,40 +149,20 @@ Partial Class SettingsForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label6.Location = New System.Drawing.Point(217, 17)
+        Me.Label6.Location = New System.Drawing.Point(32, 48)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(103, 13)
         Me.Label6.TabIndex = 1
         Me.Label6.Text = "Maximum Parallelism"
         '
-        'cbGPU
-        '
-        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGPU.FormattingEnabled = True
-        Me.cbGPU.Location = New System.Drawing.Point(359, 70)
-        Me.cbGPU.Name = "cbGPU"
-        Me.cbGPU.Size = New System.Drawing.Size(216, 21)
-        Me.cbGPU.TabIndex = 5
-        '
         'cbParallelism
         '
         Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbParallelism.FormattingEnabled = True
-        Me.cbParallelism.Location = New System.Drawing.Point(331, 14)
+        Me.cbParallelism.Location = New System.Drawing.Point(146, 45)
         Me.cbParallelism.Name = "cbParallelism"
         Me.cbParallelism.Size = New System.Drawing.Size(117, 21)
         Me.cbParallelism.TabIndex = 2
-        '
-        'chkEnableGPUProcessing
-        '
-        Me.chkEnableGPUProcessing.AutoSize = True
-        Me.chkEnableGPUProcessing.Enabled = False
-        Me.chkEnableGPUProcessing.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkEnableGPUProcessing.Location = New System.Drawing.Point(13, 74)
-        Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
-        Me.chkEnableGPUProcessing.Size = New System.Drawing.Size(228, 17)
-        Me.chkEnableGPUProcessing.TabIndex = 3
-        Me.chkEnableGPUProcessing.Text = "Enable OpenCL/CUDA Parallel Processing"
         '
         'TabPage3
         '
@@ -551,8 +474,8 @@ Partial Class SettingsForm
         '
         'SettingsForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(596, 298)
         Me.Controls.Add(Me.TabControl1)
         Me.DoubleBuffered = True
@@ -563,11 +486,8 @@ Partial Class SettingsForm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
@@ -582,22 +502,16 @@ Partial Class SettingsForm
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbGPUCaps As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Public WithEvents chkEnableSIMD As System.Windows.Forms.CheckBox
     Public WithEvents chkEnableParallelCalcs As System.Windows.Forms.CheckBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents cbGPU As System.Windows.Forms.ComboBox
     Friend WithEvents cbParallelism As System.Windows.Forms.ComboBox
-    Public WithEvents chkEnableGPUProcessing As System.Windows.Forms.CheckBox
     Friend WithEvents cbErrorHandlingMode As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents tbConfigFilePath As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents TabPage2 As TabPage

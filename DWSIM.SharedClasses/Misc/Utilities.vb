@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports System.IO
+Imports System.Runtime.InteropServices
 
 Public Class Utility
 
@@ -514,11 +515,21 @@ Public Class Utility
         If Directory.Exists(ppath) Then
             Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
             For Each fpath In otheruos
+                Dim assmbly As Assembly = Nothing
                 Try
-                    Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
+                    assmbly = Assembly.LoadFile(fpath)
+                    Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(assmbly)
                     For Each pp In pplist
                         euos.Add(pp)
                     Next
+                Catch ex As ReflectionTypeLoadException
+                    If assmbly IsNot Nothing Then
+                        Console.WriteLine("Error loading types from assembly'" + assmbly.FullName + "':" + ex.ToString())
+                        Logging.Logger.LogError("Error loading types from assembly '" + assmbly.FullName, ex)
+                        For Each item In ex.LoaderExceptions
+                            Console.WriteLine("LoaderException:" + item.Message + "': " + item.ToString)
+                        Next
+                    End If
                 Catch ex As Exception
                     Logging.Logger.LogError("Loading Additional Unit Operations", ex)
                 End Try
@@ -527,7 +538,7 @@ Public Class Utility
 
         ppath = GetExtendersRootDirectory()
         If Directory.Exists(ppath) Then
-            Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+            Dim otheruos As String() = Directory.GetFiles(ppath, "*Extensions.UnitOperations*.dll", SearchOption.TopDirectoryOnly)
             For Each fpath In otheruos
                 Try
                     Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
@@ -575,7 +586,7 @@ Public Class Utility
         Dim ppath1 As String = GetExtendersRootDirectory()
         If Directory.Exists(ppath1) Then
             Try
-                Dim otherpps As String() = Directory.GetFiles(ppath1, "*.dll", SearchOption.TopDirectoryOnly)
+                Dim otherpps As String() = Directory.GetFiles(ppath1, "*Extensions.Thermodynamics*.dll", SearchOption.TopDirectoryOnly)
                 For Each fpath In otherpps
                     Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
                     For Each pp In pplist
@@ -623,6 +634,12 @@ Public Class Utility
 
         Try
             availableTypes.AddRange(assmbly.DefinedTypes())
+        Catch ex As ReflectionTypeLoadException
+            Console.WriteLine("Error loading types from assembly'" + assmbly.FullName + "':" + ex.ToString())
+            Logging.Logger.LogError("Error loading types from assembly '" + assmbly.FullName, ex)
+            For Each item In ex.LoaderExceptions
+                Console.WriteLine("LoaderException:" + item.Message + "': " + item.ToString)
+            Next
         Catch ex As Exception
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
             Logging.Logger.LogError("Error loading types from assembly '" + assmbly.FullName, ex)

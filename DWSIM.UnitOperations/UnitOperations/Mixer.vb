@@ -150,7 +150,19 @@ Namespace UnitOperations
 
             If Me.PressureCalculation = PressureBehavior.Average Then P = P / (i - 1)
 
-            T = 0
+            'propagate pressure backwards in dynamic mode
+
+            If FlowSheet.DynamicMode Then
+                P = GetOutletMaterialStream(0).GetPressure()
+                For Each cp In Me.GraphicObject.InputConnectors
+                    If cp.IsAttached Then
+                        ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
+                        ms.SetPressure(P)
+                    End If
+                Next
+            End If
+
+            T = 0.0
 
             Dim n As Integer = DirectCast(Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Phases(0).Compounds.Count
             Dim Vw As New Dictionary(Of String, Double)

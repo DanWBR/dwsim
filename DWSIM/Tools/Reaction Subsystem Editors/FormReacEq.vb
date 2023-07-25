@@ -108,7 +108,7 @@ Public Class FormReacEq
                 cbUnits.SelectedItem = rc.EquilibriumReactionBasisUnits
             Case ReactionBasis.MolarFrac
                 Me.cbBase.SelectedIndex = 4
-            Case ReactionBasis.MolarConc
+            Case ReactionBasis.MassFrac
                 Me.cbBase.SelectedIndex = 5
             Case ReactionBasis.PartialPress
                 Me.cbBase.SelectedIndex = 6
@@ -132,6 +132,8 @@ Public Class FormReacEq
             Case "Edit"
                 Call Me.KryptonDataGridView1_CellValidated(sender, New DataGridViewCellEventArgs(3, 0))
         End Select
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 
@@ -306,7 +308,7 @@ Public Class FormReacEq
                 Case 4
                     rc.ReactionBasis = ReactionBasis.MolarFrac
                 Case 5
-                    rc.ReactionBasis = ReactionBasis.MolarConc
+                    rc.ReactionBasis = ReactionBasis.MassFrac
                 Case 6
                     rc.ReactionBasis = ReactionBasis.PartialPress
             End Select

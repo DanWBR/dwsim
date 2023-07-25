@@ -69,11 +69,13 @@ Public Class Form_CapeOpenSelector
                                     .TypeName = mykey.OpenSubKey("ProgID").GetValue("")
                                 Catch ex As Exception
                                 End Try
-                                Try
-                                    .Location = mykey.OpenSubKey("InProcServer32").GetValue("")
-                                Catch ex As Exception
-                                    .Location = mykey.OpenSubKey("LocalServer32").GetValue("")
-                                End Try
+                                Dim key = mykey.OpenSubKey("InProcServer32")
+                                If key IsNot Nothing Then
+                                    .Location = key.GetValue("")
+                                Else
+                                    key = mykey.OpenSubKey("LocalServer32")
+                                    If key IsNot Nothing Then .Location = key.GetValue("")
+                                End If
                             End With
                             clist.Add(myuo)
                             If chemseponly And myuo.Name.ToLower.Contains("chemsep") Then

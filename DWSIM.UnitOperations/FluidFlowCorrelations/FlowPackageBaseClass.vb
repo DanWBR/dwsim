@@ -24,6 +24,21 @@ Namespace FlowPackages
 
         End Sub
 
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="D">diameter in m</param>
+        ''' <param name="L">length in m</param>
+        ''' <param name="deltaz">elevation in m</param>
+        ''' <param name="k">rugosity in m</param>
+        ''' <param name="qv">vapor flow in m3/d</param>
+        ''' <param name="ql">liquid flow in m3/d</param>
+        ''' <param name="muv">vapor viscosity in cP</param>
+        ''' <param name="mul">liquid viscosity in cP</param>
+        ''' <param name="rhov">vapor density in kg/m3</param>
+        ''' <param name="rhol">liquid density in kg/m3</param>
+        ''' <param name="surft">surface tension in N/m</param>
+        ''' <returns></returns>
         Public MustOverride Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object()
 
         Public Function CalculateDeltaPLiquid(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal ql As Double, ByVal mul As Double, ByVal rhol As Double) As Object()

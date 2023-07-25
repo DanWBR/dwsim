@@ -27,6 +27,7 @@ Imports DWSIM.Simulate365.FormFactories
 Imports DWSIM.Simulate365.Models
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports AeroWizard
 
 Public Class FormSimulSettings
 
@@ -51,30 +52,18 @@ Public Class FormSimulSettings
 
     Dim SetHeights As Boolean = False
 
-    Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
-
-        If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
-
-            ' set the bounds of this form's FloatWindow to our desired position and size
-
-            If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
-                Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
-                If Not floatWin Is Nothing Then
-                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y,
-                                       900 * GlobalSettings.Settings.DpiScale, 600 * GlobalSettings.Settings.DpiScale)
-                End If
-            End If
-
-            Try
-                Init()
-            Catch ex As Exception
-
-            End Try
-
-        End If
-    End Sub
+    Public Shared AddMoreTabs As Action(Of TabControl, IFlowsheet)
 
     Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim sw As Integer = Screen.PrimaryScreen.Bounds.Width
+        Dim sh As Integer = Screen.PrimaryScreen.Bounds.Height
+        Dim w = 900 * GlobalSettings.Settings.DpiScale
+        Dim h = 600 * GlobalSettings.Settings.DpiScale
+
+        If Me.Pane IsNot Nothing Then
+            Me.Pane.FloatWindow.SetBounds((sw - w) / 2, (sh - h) / 2, w, h)
+        End If
 
         Me.TabText = Me.Text
 
@@ -94,22 +83,21 @@ Public Class FormSimulSettings
 
         Init()
 
+        AddMoreTabs?.Invoke(TabControl1, CurrentFlowsheet)
+
     End Sub
 
     Private Sub FormStSim_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
-        If Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 And Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
-            MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            'e.Cancel = True
-        ElseIf Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 Then
-            MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            'e.Cancel = True
-        ElseIf Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
-            MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            'e.Cancel = True
-        Else
-
+        If CurrentFlowsheet IsNot Nothing Then
+            If Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 And Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
+                MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 Then
+                MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
+                MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
 
     End Sub
@@ -129,6 +117,8 @@ Public Class FormSimulSettings
         '    SetHeights = True
 
         'End If
+
+        CurrentFlowsheet.SetDirtyStatus()
 
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
@@ -227,6 +217,7 @@ Public Class FormSimulSettings
                     availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
                     aTypeRefs.Add(obj.GetDisplayName, item.Name)
                     If add Then CurrentFlowsheet.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                    obj.SetFlowsheet(Nothing)
                     obj = Nothing
                 End If
             Next
@@ -297,6 +288,10 @@ Public Class FormSimulSettings
 
         chkShowExtraPropertiesEditor.Checked = CurrentFlowsheet.Options.DisplayUserDefinedPropertiesEditor
 
+        cbSpecCalcMode.SelectedIndex = CurrentFlowsheet.Options.SpecCalculationMode
+
+        chkForceObjectCalculation.Checked = CurrentFlowsheet.Options.ForceObjectSolving
+
         Select Case CurrentFlowsheet.Options.ForceStreamPhase
             Case ForcedPhase.None
                 cbForcePhase.SelectedIndex = 0
@@ -317,6 +312,8 @@ Public Class FormSimulSettings
         chkESShowE.Checked = CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue
 
         chkShowDynProps.Checked = CurrentFlowsheet.Options.DisplayDynamicPropertyValues
+
+        chkIncludeFlowsheetMessagesInFile.Checked = CurrentFlowsheet.Options.SaveFlowsheetMessagesInFile
 
         Me.loaded = True
 
@@ -395,7 +392,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
         End With
 
-        If ComboBox2.SelectedIndex <= 2 Then
+        If ComboBox2.SelectedIndex <= 3 Then
             Me.DataGridView1.Columns(1).ReadOnly = True
             Me.DataGridView1.Columns(3).ReadOnly = True
         Else
@@ -727,7 +724,7 @@ Public Class FormSimulSettings
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
 
-        If loaded Then
+        If loaded And e.RowIndex >= 0 Then
 
             Dim cell As DataGridViewCell = Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex)
             Dim oldvalue As String = ""
@@ -921,6 +918,7 @@ Public Class FormSimulSettings
     Private Sub KryptonButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton18.Click
 
         If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And
+            Me.ComboBox2.SelectedItem <> "SI (Engineering)" And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And
@@ -952,6 +950,7 @@ Public Class FormSimulSettings
     Private Sub KryptonButton23_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton23.Click
 
         If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And
+            Me.ComboBox2.SelectedItem <> "SI (Engineering)" And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And
@@ -1073,12 +1072,12 @@ Public Class FormSimulSettings
                 For Each r As DataGridViewRow In ogc1.Rows
                     If Not r.Cells(2).Value Is Nothing Then
                         If r.Cells(2).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                           r.Cells(3).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
-                           r.Cells(5).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
+                           r.Cells(4).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Or
+                           r.Cells(6).Value.ToString.ToLower.Contains(txtSearch.Text.ToLower) Then
                             r.Visible = True
                             If r.Cells(2).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                               r.Cells(3).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
-                                               r.Cells(5).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
+                                               r.Cells(4).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Or
+                                               r.Cells(6).Value.ToString.ToLower.Equals(txtSearch.Text.ToLower) Then
                                 r.Selected = True
                             End If
                         Else
@@ -1166,7 +1165,7 @@ Public Class FormSimulSettings
 
     Private Sub dgvpp_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvpp.CellValueChanged
         If loaded Then
-            CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(e.RowIndex).Cells(0).Value).Tag = dgvpp.Rows(e.RowIndex).Cells(1).Value
+            If e.RowIndex >= 0 Then CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(e.RowIndex).Cells(0).Value).Tag = dgvpp.Rows(e.RowIndex).Cells(1).Value
         End If
     End Sub
 
@@ -1302,7 +1301,7 @@ Public Class FormSimulSettings
         End If
 
         Dim pp As PropertyPackages.PropertyPackage
-        pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
+        pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone()
 
         If pp Is Nothing Then Exit Sub
 
@@ -1314,6 +1313,8 @@ Public Class FormSimulSettings
 
         CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
 
         CurrentFlowsheet.UpdateOpenEditForms()
 
@@ -1466,7 +1467,6 @@ Public Class FormSimulSettings
 
         FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from JSON Files", "", Nothing)
 
-#Region "Load Json from FilePickerService"
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
@@ -1491,108 +1491,37 @@ Public Class FormSimulSettings
                 Else
                     'compound exists.
                     If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                        Dim c0 = Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name)
-                        DirectCast(c0, ICustomXMLSerialization).LoadData(DirectCast(comp, ICustomXMLSerialization).SaveData())
-                        Dim ms As Streams.MaterialStream
-                        Dim proplist As New ArrayList
-                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-                            For Each phase As BaseClasses.Phase In ms.Phases.Values
-                                phase.Compounds(comp.Name).ConstantProperties = c0
+                        If CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                            'compound exists but not selected (added)
+                            Dim c0 = Me.CurrentFlowsheet.AvailableCompounds(comp.Name)
+                            DirectCast(c0, ICustomXMLSerialization).LoadData(DirectCast(comp, ICustomXMLSerialization).SaveData())
+                            For i = 0 To ogc1.Rows.Count - 1
+                                If ogc1.Rows(i).Cells(0).Value = comp.Name Then
+                                    ogc1.Rows(i).Cells(1).Value = True
+                                    Exit For
+                                End If
                             Next
-                        Next
+                            ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+                        Else
+                            'compound exists + added
+                            Dim c0 = Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name)
+                            DirectCast(c0, ICustomXMLSerialization).LoadData(DirectCast(comp, ICustomXMLSerialization).SaveData())
+                            Dim ms As Streams.MaterialStream
+                            Dim proplist As New ArrayList
+                            For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                                    phase.Compounds(comp.Name).ConstantProperties = c0
+                                Next
+                            Next
+                        End If
                         MessageBox.Show(DWSIM.App.GetLocalString("CompoundUpdated"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
                 End If
+                CurrentFlowsheet.UpdateOpenEditForms()
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
-#End Region
-
-        '#Region "Load Json from Simulate365"
-        '        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
-
-        '        Dim openedFile As S365File = filePickerForm.ShowOpenDialog(New List(Of String)(New String() {"json"}))
-        '        If openedFile IsNot Nothing Then
-        '            Try
-        '                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(openedFile.FilePath))
-        '                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-        '                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-        '                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-        '                    End If
-        '                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-        '                    Dim ms As Streams.MaterialStream
-        '                    Dim proplist As New ArrayList
-        '                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-        '                        For Each phase As BaseClasses.Phase In ms.Phases.Values
-        '                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-        '                            phase.Compounds(comp.Name).ConstantProperties = comp
-        '                        Next
-        '                    Next
-        '                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-        '                    ogc1.ClearSelection()
-        '                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-        '                Else
-        '                    'compound exists.
-        '                    If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-        '                        Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name) = comp
-        '                        Dim ms As Streams.MaterialStream
-        '                        Dim proplist As New ArrayList
-        '                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-        '                            For Each phase As BaseClasses.Phase In ms.Phases.Values
-        '                                phase.Compounds(comp.Name).ConstantProperties = comp
-        '                            Next
-        '                        Next
-        '                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundUpdated"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        '                    End If
-        '                End If
-        '            Catch ex As Exception
-        '                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '            End Try
-        '        End If
-        '#End Region
-
-        'Open file From local storage, code will be returned afterwards
-
-        'If Me.OpenFileDialog3.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-        '    For Each fn In Me.OpenFileDialog3.FileNames
-        '        Try
-        '            Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(file.ReadAllText(fn))
-        '            If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
-        '                If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
-        '                    Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
-        '                End If
-        '                Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
-        '                Dim ms As Streams.MaterialStream
-        '                Dim proplist As New ArrayList
-        '                For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-        '                    For Each phase As BaseClasses.Phase In ms.Phases.Values
-        '                        phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-        '                        phase.Compounds(comp.Name).ConstantProperties = comp
-        '                    Next
-        '                Next
-        '                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
-        '                ogc1.ClearSelection()
-        '                ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-        '            Else
-        '                'compound exists.
-        '                If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-        '                    Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name) = comp
-        '                    Dim ms As Streams.MaterialStream
-        '                    Dim proplist As New ArrayList
-        '                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-        '                        For Each phase As BaseClasses.Phase In ms.Phases.Values
-        '                            phase.Compounds(comp.Name).ConstantProperties = comp
-        '                        Next
-        '                    Next
-        '                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundUpdated"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        '                End If
-        '            End If
-        '        Catch ex As Exception
-        '            MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '        End Try
-        '    Next
-        'End If
 
     End Sub
 
@@ -1620,6 +1549,7 @@ Public Class FormSimulSettings
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
+                CurrentFlowsheet.UpdateOpenEditForms()
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -1851,7 +1781,7 @@ Public Class FormSimulSettings
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                     ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-
+                    CurrentFlowsheet.UpdateOpenEditForms()
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -1861,6 +1791,131 @@ Public Class FormSimulSettings
         End If
     End Sub
 
+    Private Sub cbSpecCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpecCalcMode.SelectedIndexChanged
+
+        CurrentFlowsheet.Options.SpecCalculationMode = cbSpecCalcMode.SelectedIndex
+
+    End Sub
+
+    Private Sub chkForceObjectCalculation_CheckedChanged(sender As Object, e As EventArgs) Handles chkForceObjectCalculation.CheckedChanged
+
+        CurrentFlowsheet.Options.ForceObjectSolving = chkForceObjectCalculation.Checked
+        FormMain.AnalyticsProvider?.RegisterEvent("Smart Object Solver Enabled", Not CurrentFlowsheet.Options.ForceObjectSolving, Nothing)
+
+    End Sub
+
+    Private Sub chkIncludeFlowsheetMessagesInFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFlowsheetMessagesInFile.CheckedChanged
+
+        CurrentFlowsheet.Options.SaveFlowsheetMessagesInFile = chkIncludeFlowsheetMessagesInFile.Checked
+
+    End Sub
+
+    Private Sub tsmiViewComp_Click(sender As Object, e As EventArgs) Handles tsmiViewComp.Click
+        btnInfoLeft_Click(sender, e)
+    End Sub
+
+    Private Sub tsmiExportJSON_Click(sender As Object, e As EventArgs) Handles tsmiExportJSON.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Exporting Compound to JSON", "", Nothing)
+
+        Dim compound As Interfaces.ICompoundConstantProperties
+        Dim compID As String
+        If DWSIM.App.IsRunningOnMono Then
+            compID = ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value
+        Else
+            compID = ogc1.SelectedRows(0).Cells(0).Value
+        End If
+        If CurrentFlowsheet.AvailableCompounds.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.AvailableCompounds(compID)
+        ElseIf CurrentFlowsheet.Options.SelectedComponents.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.Options.SelectedComponents(compID)
+        ElseIf CurrentFlowsheet.Options.NotSelectedComponents.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.Options.NotSelectedComponents(compID)
+        Else
+            compound = Nothing
+        End If
+
+        If compound IsNot Nothing Then
+
+            Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                    Try
+                            Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(compound, Newtonsoft.Json.Formatting.Indented)
+                            writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
+        End If
+
+        End If
+
+    End Sub
+
+    Private Sub tsmiReplace_Click(sender As Object, e As EventArgs) Handles tsmiReplace.Click
+
+
+        Dim compound As Interfaces.ICompoundConstantProperties
+        Dim compID As String
+        If DWSIM.App.IsRunningOnMono Then
+            compID = ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value
+        Else
+            compID = ogc1.SelectedRows(0).Cells(0).Value
+        End If
+        If CurrentFlowsheet.Options.SelectedComponents.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.Options.SelectedComponents(compID)
+        Else
+            compound = Nothing
+        End If
+
+        If compound IsNot Nothing Then
+
+            Dim fsc As New FormCompoundList With {.Compounds = CurrentFlowsheet.AvailableCompounds.Keys.ToList()}
+            fsc.ShowDialog()
+
+            If fsc.SelectedCompound IsNot Nothing Then
+
+                Dim replacewith = Me.CurrentFlowsheet.AvailableCompounds(fsc.SelectedCompound)
+
+                Dim oldc = compound.Name
+                Dim newc = replacewith.Name
+
+                AddCompToSimulation(newc)
+
+                For Each mstr As Streams.MaterialStream In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                    For Each phase In mstr.Phases.Values
+                        phase.Compounds(newc).MoleFraction = phase.Compounds(oldc).MoleFraction
+                        phase.Compounds(newc).MassFraction = phase.Compounds(oldc).MassFraction
+                    Next
+                Next
+
+                RemoveCompFromSimulation(oldc)
+
+                For Each obj In CurrentFlowsheet.SimulationObjects.Values
+                    obj.Calculated = False
+                    obj.GraphicObject.Calculated = False
+                Next
+
+                CurrentFlowsheet.UpdateOpenEditForms()
+
+                Init(True)
+
+            End If
+
+        End If
+
+
+    End Sub
+
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         For Each r As DataGridViewRow In ogc1.Rows
@@ -1868,7 +1923,7 @@ Public Class FormSimulSettings
             r.Visible = True
         Next
         ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
-
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 

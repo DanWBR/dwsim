@@ -64,4 +64,7 @@ Public Class FormRecoverFiles
 
     End Sub
 
+    Private Sub FormRecoverFiles_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

@@ -293,7 +293,7 @@ Public Class EditingForm_Pump
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 
@@ -435,7 +435,7 @@ Public Class EditingForm_Pump
     Private Sub btnCurves_Click(sender As Object, e As EventArgs) Handles btnCurves.Click
 
         Dim f As New EditingForm_Pump_Curves() With {.selectedpump = SimObject}
-        f.ShowDialog(Me)
+        SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
 
@@ -457,7 +457,7 @@ Public Class EditingForm_Pump
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 30, sgobj.InputConnectors(1).Position.Y - 30, "")
 
             If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
             fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
@@ -486,7 +486,7 @@ Public Class EditingForm_Pump
         RequestCalc()
 
     End Sub
-    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBoxParameters.MouseMove
         MyBase.Editor_MouseMove(sender, e)
     End Sub
 

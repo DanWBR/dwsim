@@ -127,21 +127,22 @@ namespace DWSIM.UI.Desktop.Editors
                                                                 (arg1, arg2) =>
                                                                 {
                                                                     var supported = new string[] { "NRTL", "UNIQUAC", "Peng-Robinson (PR)", "Soave-Redlich-Kwong (SRK)", "Lee-Kesler-Plöcker" };
+                                                                    var cont = new PropertyPackageSettingsView(flowsheet, pp);
+                                                                    cont.Tag = "General Settings";
+                                                                    var cont3 = new FlashSettingsEditor(flowsheet, pp);
+                                                                    cont3.Tag = "Equilibrium Calculation Settings";
+                                                                    var advcont = pp.GetAdvancedEditingContainers();
                                                                     if (supported.Contains(pp.ComponentName))
                                                                     {
-                                                                        var cont = new PropertyPackageSettingsView(flowsheet, pp);
                                                                         var cont2 = new PropertyPackageIPView(flowsheet, pp);
-                                                                        var cont3 = new FlashSettingsEditor(flowsheet, pp);
-                                                                        cont.Tag = "General Settings";
                                                                         cont2.Tag = "Interaction Parameters";
-                                                                        cont3.Tag = "Equilibrium Calculation Settings";
-                                                                        var advcont = pp.GetAdvancedEditingContainers();
                                                                         var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont2, cont3, cont, advcont[0], advcont[1] });
                                                                         form.Show();
                                                                     }
                                                                     else
                                                                     {
-                                                                        //Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
+                                                                        var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont3, cont, advcont[0], advcont[1] });
+                                                                        form.Show();
                                                                     }
                                                                 },                                                                
                                                                (arg1, arg2) =>

@@ -199,7 +199,7 @@ Public Class EditingForm_ReactorPFR
 
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
-            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTime).ToString(nf), units.time})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Residence Time"), su.Converter.ConvertFromSI(units.time, .ResidenceTime).ToString(nf), units.time})
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Quedadepresso"), su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf), units.deltaP})
 
             'reaction props
@@ -319,7 +319,7 @@ Public Class EditingForm_ReactorPFR
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 

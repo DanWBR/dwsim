@@ -18,7 +18,7 @@
     </ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>DWSIM_icon_64.ico</ApplicationIcon>
+    <ApplicationIcon>DWSIM Icon 4.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -153,6 +153,8 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DefineDebug>true</DefineDebug>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -245,6 +247,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>WINE32</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -294,21 +299,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Eto.Forms\Release\net45\Eto.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=9084b9221296229e, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetOfficeFw.Excel.1.8.1\lib\net40\ExcelApi.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="ExcelApi, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Excel.1.9.1\lib\net462\ExcelApi.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="GenericDictionaryEditor">
       <HintPath>References\GenericDictionaryEditor.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.43.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.43\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.46.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.46\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.3.50, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.1.3.50\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.1.12, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.4.1\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="indigo-dotnet">
       <HintPath>References\indigo-dotnet.dll</HintPath>
@@ -354,42 +359,43 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Mapack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Dynamic, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Dynamic.dll</HintPath>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.2\lib\net45\Microsoft.Dynamic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.Scripting, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.2\lib\net45\Microsoft.Scripting.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicLanguageRuntime.1.3.1\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.2\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="NeoDataType.MyNeoReport, Version=1.4.0.0, Culture=neutral, PublicKeyToken=cc45d3430ba4f561, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\NeoDataType.MyNeoReport.dll</HintPath>
     </Reference>
-    <Reference Include="NetOffice, Version=1.8.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\NetOffice.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="NetOffice, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Core.1.9.1\lib\net462\NetOffice.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Nini.dll</HintPath>
     </Reference>
-    <Reference Include="OfficeApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=a39beb0835c43c8e, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\OfficeApi.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="OfficeApi, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Office.1.9.1\lib\net462\OfficeApi.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
@@ -439,6 +445,10 @@
     <Reference Include="SpinningProgress">
       <HintPath>References\SpinningProgress.dll</HintPath>
     </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\stdole.7.0.3300\lib\net10\stdole.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -468,7 +478,17 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
@@ -487,9 +507,9 @@
     <Reference Include="unvell.ReoScript.EditorLib">
       <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.EditorLib.dll</HintPath>
     </Reference>
-    <Reference Include="VBIDEApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=931cec8882205047, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\VBIDEApi.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="VBIDEApi, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.VBIDE.1.9.1\lib\net462\VBIDEApi.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
@@ -591,12 +611,6 @@
     <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceGLControl.Designer.vb">
-      <DependentUpon>FlowsheetSurfaceGLControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceGLControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.designer.vb">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </Compile>
@@ -657,6 +671,18 @@
     <Compile Include="Forms\FormAddUtility.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormBrowser.Designer.vb">
+      <DependentUpon>FormBrowser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormBrowser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBrowserDockable.Designer.vb">
+      <DependentUpon>FormBrowserDockable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormBrowserDockable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormChart_OxyPlot.Designer.vb">
       <DependentUpon>FormChart_OxyPlot.vb</DependentUpon>
     </Compile>
@@ -673,6 +699,12 @@
       <DependentUpon>FormComponentsNotFound.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormComponentsNotFound.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCompoundList.Designer.vb">
+      <DependentUpon>FormCompoundList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCompoundList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormConfigureChartObject.Designer.vb">
@@ -765,6 +797,12 @@
     <Compile Include="Forms\FormLoadingSimulation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormOccupancyQuestion.Designer.vb">
+      <DependentUpon>FormOccupancyQuestion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormOccupancyQuestion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormPIDCPEditor.Designer.vb">
       <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
     </Compile>
@@ -777,6 +815,12 @@
     <Compile Include="Forms\FormPIDTuning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormPropertyPackageInfo.Designer.vb">
+      <DependentUpon>FormPropertyPackageInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPropertyPackageInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </Compile>
@@ -787,12 +831,6 @@
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormSearchingDDB.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormRunningPythonLink.Designer.vb">
-      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormRunningPythonLink.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSearchingOnline.Designer.vb">
@@ -867,99 +905,13 @@
     <Compile Include="Forms\FormUpgradeWarning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LegacyEditors\Extensions.vb" />
-    <Compile Include="Forms\LegacyEditors\frmProps.Designer.vb">
-      <DependentUpon>frmProps.vb</DependentUpon>
+    <Compile Include="Forms\FormWhatsNew.Designer.vb">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LegacyEditors\frmProps.vb">
+    <Compile Include="Forms\FormWhatsNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LegacyEditors\PropertyEditors\PropertyChanged.vb" />
-    <Compile Include="Forms\LegacyEditors\PropertyEditors\PropertyGridEditors.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\ComboBoxTemplates\Templates.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\DummyClass\DummyClass.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIResults\UIResults.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\Results\PFR\UIFormGraphPFR.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\Results\Pipe\UIFormGraph.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\Results\Pipe\UIFormTable.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.Designer.vb">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\UIAnnotationEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIComponentSelector\UIComponentSelector.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.Designer.vb">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\UICompositionEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.Designer.vb">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\UICSepSpecEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.Designer.vb">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\UIElementMatrixEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.Designer.vb">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\UIExcelUOEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFlowsheetUOEditor\UIFlowsheetEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFlowsheetUOViewer\UIFlowsheetUOViewer.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsComponentSelector\UIGibbsComponentSelector.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.Designer.vb">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\UIGibbsInitialEstimatesEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIMTableObjectOrderEditor\UIMTableObjectOrder.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPipeEditor\UIPipeEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPPSelector\UIPPSelector.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.Designer.vb">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\UIPumpCurvesEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIReactionSetSelector\UIReactionSetSelector.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.Designer.vb">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.Designer.vb">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\UIScriptEditor.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UISKColorEditor\UISKColorEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UISSelector\UISSelector.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UISTHXEditor\UISTHXEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIThermalProfileEditor\UIThermalProfileEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIUnitConverter\UIUnitConverter.vb" />
     <Compile Include="Languages\DWSIM1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1103,6 +1055,7 @@
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\TreeModel.vb" />
+    <Compile Include="Objects\Classes\XFlowsheet\Exporter.vb" />
     <Compile Include="Tools\Assay Manager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>
@@ -1354,6 +1307,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.en.resx">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.resx">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
@@ -1418,6 +1372,12 @@
     <EmbeddedResource Include="Forms\FormAddUtility.resx">
       <DependentUpon>FormAddUtility.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBrowser.resx">
+      <DependentUpon>FormBrowser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBrowserDockable.resx">
+      <DependentUpon>FormBrowserDockable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.de.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -1457,6 +1417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormComponentsNotFound.resx">
       <DependentUpon>FormComponentsNotFound.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCompoundList.resx">
+      <DependentUpon>FormCompoundList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureChartObject.en.resx">
       <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
@@ -1554,6 +1517,9 @@
     <EmbeddedResource Include="Forms\FormLoadingSimulation.resx">
       <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOccupancyQuestion.resx">
+      <DependentUpon>FormOccupancyQuestion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
     </EmbeddedResource>
@@ -1565,6 +1531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPIDTuning.resx">
       <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropertyPackageInfo.resx">
+      <DependentUpon>FormPropertyPackageInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.de.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
@@ -1583,12 +1552,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingDDB.resx">
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRunningPythonLink.en.resx">
-      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRunningPythonLink.resx">
-      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingKDB.de.resx">
       <DependentUpon>FormSearchingKDB.vb</DependentUpon>
@@ -1643,129 +1606,8 @@
     <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.de.resx">
-      <DependentUpon>frmProps.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.en.resx">
-      <DependentUpon>frmProps.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.es.resx">
-      <DependentUpon>frmProps.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\frmProps.resx">
-      <DependentUpon>frmProps.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.de.resx">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.en.resx">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.es.resx">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.resx">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.de.resx">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.en.resx">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.es.resx">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICompositionEditor\CompositionEditorForm.resx">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.de.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.en.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.es.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.de.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.en.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.es.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.de.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.en.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.es.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.de.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.en.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.es.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.de.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.en.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.es.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.de.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.en.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.es.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorForm.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.de.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.en.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.es.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LegacyEditors\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormWhatsNew.resx">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow\FormMain.resx">
       <SubType>Designer</SubType>
@@ -1941,10 +1783,6 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Libraries.PythonLink\DWSIM.Libraries.PythonLink.csproj">
-      <Project>{3a73164c-c190-4d33-ae6c-a3bc69873e73}</Project>
-      <Name>DWSIM.Libraries.PythonLink</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
       <Name>DWSIM.MathOps</Name>
@@ -1993,6 +1831,10 @@
       <Project>{fea05ae3-5ee2-4a7b-88b3-1a4f9000ea08}</Project>
       <Name>DWSIM.Thermodynamics.Databases.KDBLink</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.ReaktoroPropertyPackage\DWSIM.Thermodynamics.ReaktoroPropertyPackage.vbproj">
+      <Project>{d670c3b0-1ee1-47d4-99c6-8820cfb072f7}</Project>
+      <Name>DWSIM.Thermodynamics.ReaktoroPropertyPackage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>
@@ -2040,6 +1882,10 @@
     <ProjectReference Include="..\DWSIM.Controls.ZedGraph\DWSIM.Controls.ZedGraph.csproj">
       <Project>{2541686b-1673-43bf-af89-3163945db009}</Project>
       <Name>DWSIM.Controls.ZedGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.XFlowsheet\DWSIM.XFlowsheet.vbproj">
+      <Project>{c3080b63-be89-4585-b643-4fbc295c287c}</Project>
+      <Name>DWSIM.XFlowsheet</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -2514,6 +2360,15 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\show_property_48px.png" />
+    <None Include="Resources\Touch ID_64px.png" />
+    <None Include="Resources\thick_arrow_pointing_down_32px.png" />
+    <None Include="Resources\user_manual_80px.png" />
+    <None Include="Resources\undo_96px.png" />
+    <None Include="Resources\settings_80px.png" />
+    <None Include="Resources\stop_96px.png" />
+    <None Include="Resources\unverified_account_48px.png" />
+    <None Include="Resources\star_64px.png" />
     <None Include="Resources\save file s365.png" />
     <None Include="Resources\s365 logo.jpg" />
     <None Include="Resources\s365_logo_login.png" />
@@ -2615,6 +2470,7 @@
     <None Include="Resources\button-medium-blue.png" />
     <None Include="Resources\209x48-doar-azul-assina.gif" />
     <None Include="Resources\card_export.png" />
+    <Content Include="DWSIM Icon 4.ico" />
     <Content Include="DWSIM Icon.ico" />
     <Content Include="dwsim-icon-2.ico" />
     <Content Include="DWSIM_ico.ico" />
@@ -3152,6 +3008,8 @@
     <Content Include="Lib\_weakrefset.py" />
     <Content Include="Lib\__future__.py" />
     <Content Include="Lib\__phello__.foo.py" />
+    <None Include="Resources\arrow_32px.png" />
+    <None Include="Resources\binary_code_24px.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3172,6 +3030,8 @@
     <None Include="Resources\cheric_big.jpg" />
     <None Include="Resources\chemeo.png" />
     <None Include="Resources\color_wheel.png" />
+    <None Include="Resources\close_96px.png" />
+    <None Include="Resources\collaboration_female_male_48px.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />
@@ -3203,12 +3063,17 @@
     <None Include="Resources\DWSIM_ico_64.png" />
     <None Include="Resources\DWSIM_splash_v7.png" />
     <None Include="Resources\DWSIM Icon Vector 2.png" />
+    <None Include="Resources\DWSIM_Icon_4.png" />
+    <None Include="Resources\DWSIM_Icon_4.ico" />
+    <None Include="Resources\double_left_32px.png" />
+    <None Include="Resources\double_right_32px.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />
     <None Include="Resources\fast_forward.png" />
     <None Include="Resources\folder_add_48.png" />
     <None Include="Resources\fontsize.png" />
+    <None Include="Resources\fossee.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -3331,6 +3196,23 @@
     <None Include="Resources\open file s365.png" />
     <None Include="Resources\icons8-pdf.png" />
     <None Include="Resources\icons8-vector.png" />
+    <None Include="Resources\icons8-downloads_folder.png" />
+    <None Include="Resources\icons8-python.png" />
+    <None Include="Resources\ProIcon128.png" />
+    <None Include="Resources\Icon128.ico" />
+    <None Include="Resources\icons8-technical_support.png" />
+    <None Include="Resources\info_96px.png" />
+    <None Include="Resources\invert_selection_80px.png" />
+    <None Include="Resources\hibernate_60px.png" />
+    <None Include="Resources\play2_96px.png" />
+    <None Include="Resources\play_96px.png" />
+    <None Include="Resources\hibernate_80px.png" />
+    <None Include="Resources\move_up_96px.png" />
+    <None Include="Resources\move_down_96px.png" />
+    <None Include="Resources\redo_96px.png" />
+    <None Include="Resources\Logout Rounded_96px.png" />
+    <None Include="Resources\new_60px.png" />
+    <None Include="Resources\object_48px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
@@ -3496,12 +3378,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormSensAnalysis.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormUnhandledException.de.resx">
-      <DependentUpon>FormUnhandledException.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormUnhandledException.es.resx">
-      <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormScript.resx">
       <DependentUpon>FormScript.vb</DependentUpon>
@@ -3763,14 +3639,19 @@ erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x64" (
 
-if not exist "$(SolutionDir)DistPackages\Windows_32\" mkdir $(SolutionDir)DistPackages\Windows_32\
-if not exist "$(SolutionDir)DistPackages\Linux\" mkdir $(SolutionDir)DistPackages\Linux\
+if not exist "$(SolutionDir)DistPackages\Windows\" mkdir $(SolutionDir)DistPackages\Windows\
+if not exist "$(SolutionDir)DistPackages\macOS\" mkdir $(SolutionDir)DistPackages\macOS\
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)\PlatformFiles\Common" "$(TargetDir)"  /E /Y /F /D
 xcopy "$(SolutionDir)\PlatformFiles\Windows" "$(TargetDir)"  /E /Y /F /D
+
+erase /S /Q "$(SolutionDir)DistPackages\Windows\dwsim-web-ui" 2&gt;nul 1&gt;nul 4&gt;nul
+
+xcopy "$(SolutionDir)DWSIM.UI.Web\dwsim-web-ui\*" "$(TargetDir)dwsim-web-ui\*" /E /Y /F /D
+xcopy "$(TargetDir)dwsim-web-ui\*" "$(SolutionDir)DistPackages\Windows\dwsim-web-ui\*" /E /Y /F /D
 
 erase /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Windows\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
@@ -3781,9 +3662,7 @@ erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x86" (
 
-if not exist "$(SolutionDir)DistPackages\Windows\" mkdir $(SolutionDir)DistPackages\Windows\
-if not exist "$(SolutionDir)DistPackages\Linux\" mkdir $(SolutionDir)DistPackages\Linux\
-if not exist "$(SolutionDir)DistPackages\macOS\" mkdir $(SolutionDir)DistPackages\macOS\
+if not exist "$(SolutionDir)DistPackages\Windows_32\" mkdir $(SolutionDir)DistPackages\Windows_32\
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
@@ -3795,7 +3674,6 @@ erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul 1&gt;nul 4&g
 erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
 
 )
-if exist "$(SolutionDir)DWSIM.UI.Web\ClientApp\build\" xcopy "$(SolutionDir)DWSIM.UI.Web\ClientApp\build\" "$(TargetDir)dwsim-web-ui\" /E /Y /F /D
 </PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
@@ -3805,7 +3683,7 @@ if exist "$(SolutionDir)DWSIM.UI.Web\ClientApp\build\" xcopy "$(SolutionDir)DWSI
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -3827,5 +3705,5 @@ if exist "$(SolutionDir)DWSIM.UI.Web\ClientApp\build\" xcopy "$(SolutionDir)DWSI
     <Message Importance="normal" Text="Adding back DesignTimeFacades from ReferencePath now that SGen has run." />
   </Target>
   <Import Project="..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets')" />
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" />
 </Project>

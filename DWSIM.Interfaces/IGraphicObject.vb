@@ -109,6 +109,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Function GetIconAsStream() As IO.MemoryStream
 
+    Sub ReleaseReferences()
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

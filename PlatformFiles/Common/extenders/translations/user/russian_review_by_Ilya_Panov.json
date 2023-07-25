@@ -1,0 +1,416 @@
+[
+  {
+    "OriginalText": "Added",
+    "Translated": "Добавлено",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Use composition estimates",
+    "Translated": "Использовать оценку по составу",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Bias",
+    "Translated": "Отклонение",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Smart",
+    "Translated": "Смарт",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Industrial distillation column simplified model.",
+    "Translated": "Промышленная дистилляционная колонна упрощенная модель.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Rigorous model for industrial reboiled absorbers.",
+    "Translated": "Строгая модель для промышленных абсорберов с ребойлером.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Material Stream",
+    "Translated": "Материальный поток",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Store and reuse the Jacobian matrix",
+    "Translated": "Сохранить и повторно использовать матрицу Якоба",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "ToolStripButton2",
+    "Translated": "ИнструментСтрипКнопка2",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Bulk Modulus (Overall Liquid)",
+    "Translated": "Объемный модуль (жидкость)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "[Black Oil] Gas-Oil Ratio @ SC",
+    "Translated": "[Black Oil] Соотношение газ-нефть @ SC (уд. плотность)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Please change it and try again then.",
+    "Translated": "Пожалуйста,  внесите изменение и повторите попытку.",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Bulk Create Petroleum Fractions",
+    "Translated": "Создать основные нефтяные фракции",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Stage",
+    "Translated": "Ступень",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Specific Cake Resistance",
+    "Translated": "Специфическая устойчивость к запеканию",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Bubble Pressure at Stream Temperature",
+    "Translated": "Давление кипения при температуре потока",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Continue the process of adjustment anyway?",
+    "Translated": "Продолжить процесс корректировки в любом случае?",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Molar Enthalpy (Overall Liquid)",
+    "Translated": "Молярная энтальпия (жидкость)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Copy data to Clipboard",
+    "Translated": "Копировать данные в буфер обмена",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Report",
+    "Translated": "Отчет",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Generation of water vapor",
+    "Translated": "Генерировать водяной пар",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Catalyst void fraction",
+    "Translated": "Фракция пустот катализатора",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Outlet Vapor Fraction (Stream 2)",
+    "Translated": "Фракция пара на выходе (поток 2)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Outlet Vapor Fraction (Stream 1)",
+    "Translated": "Фракция пара на выходе (поток 1)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "LiqFlows",
+    "Translated": "ЖидкПоток",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Protect with Password",
+    "Translated": "Защитить паролем",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Add New 2D XY Chart",
+    "Translated": "Добавить новую 2D-диаграмму XY",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Mixers/Splitters",
+    "Translated": "Смесители/Разветвители",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Flash PT/PV - external loop convergence tolerance (absolute)",
+    "Translated": "Дегазация PT/PV - допуск на сходимость внешнего контура (абсолютное)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Enable Parallel Modular Mode",
+    "Translated": "Включить режим параллельного модуля",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Open",
+    "Translated": "Открыть",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Gas Service Kv/Cv (Deprecated)",
+    "Translated": "Газовая среда Kv/Cv (Устарело)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Polytropic Efficiency",
+    "Translated": "Политропный КПД",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "IgnorePhase",
+    "Translated": "ИгнорироватьФазы",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Enable CPU Parallel Processing",
+    "Translated": "Включить параллельную обработку ЦП",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Volumetric Fraction (Solid)",
+    "Translated": "Объемная доля (твердая)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Reset/Empty Contents of All Volume-Defined Objects Before Running",
+    "Translated": "Сброс/очистить содержимое всех объектов, определенных объемом, перед запуском",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Energy error",
+    "Translated": "Ошибка энергии",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "New UNIFAC Parameter Regression Case",
+    "Translated": "Новый расчет регрессии параметров UNIFAC",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Specific Enthalpy",
+    "Translated": "Удельная энтальпия",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Vapor Flow",
+    "Translated": "Паровой поток",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "ResetEmpty Contents of All Volume-Defined Objects Before Running",
+    "Translated": "Сбросить Пустое содержимое всех объектов, определенных объемом, перед запуском",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "[Shell and Tube] Resistance thermal conductivity pipes",
+    "Translated": "[Кожухотрубчатый ТО] Сопротивление теплопередачи со стороны трубок",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "SACase0",
+    "Translated": "SAРасчет0",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Heat Exchange Area (A)",
+    "Translated": "Поверхность теплообмена (A)",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  },
+  {
+    "OriginalText": "Increments",
+    "Translated": "Шаг",
+    "Reviewed": true,
+    "ReviewedBy_Name": "Ilya Panov",
+    "ReviewedBy_Contact": "ilya.panov.igorevich@gmail.com",
+    "ReviewedBy_Date": "2023-02-15T18:55:06.7946299+01:00",
+    "Language": "ru"
+  }
+]

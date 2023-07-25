@@ -87,72 +87,94 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Tfus = PP.RET_VTF(idx)
             Pfus = PP.AUX_PVAPi(idx, Tfus)
 
-            Dim HsatV = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
-            Dim HsatL = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
-            Dim HsatS = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Solid)
-            Dim HfusL = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
-            Dim HfusS = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
+            Dim HsatV, HsatL, HsatS, HfusL, HfusS As Double
+
+            If Tfus <= Tsat Then
+                HsatV = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
+                HsatL = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
+                HsatS = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Solid)
+                HfusL = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
+                HfusS = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
+            End If
 
             Dim Hfus = PP.RET_HFUSM(Vz, Tfus)
 
-            Dim isSolid = PP.DW_GetConstantProperties()(idx).IsSolid Or PP.ForcedSolids.Contains(PP.RET_VNAMES()(idx))
+            If Tfus > Tsat Then
 
-            If isSolid Then
-                'pure solid
-                V = 0.0
-                S = 1.0
-                T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
-                                          Function(Tx)
-                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
-                                          End Function)
-            ElseIf H >= HsatV Then
-                'pure vapor
+                'compound can't be liquid at current pressure
+
                 V = 1.0
                 S = 0.0
-                T = New Brent().BrentOpt2(Tsat * 0.9, 2000, 10, 0.000001, 100,
+                T = New Brent().BrentOpt2(Tfus * 1.05, 2000, 10, 0.000001, 100,
                                           Function(Tx)
                                               Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf H >= HsatL And P > Pfus Then
-                'partial vaporization from liquid
-                V = (H - HsatL) / (HsatV - HsatL)
-                S = 0.0
-                T = Tsat
-            ElseIf H > HsatS And P <= Pfus And Abs(Hfus) > 0.0001 Then
-                'partial sublimation from solid
-                V = (H - HsatS) / (HsatV - HsatS)
-                S = 1 - V
-                T = Tsat
-            ElseIf H >= HfusL And Tfus > 0 And Abs(Hfus) > 0.0001 Then
-                'pure liquid
-                V = 0.0
-                S = 0.0
-                T = New Brent().BrentOpt2(Tfus * 0.9, Tsat, 10, 0.000001, 100,
-                                          Function(Tx)
-                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
-                                          End Function)
-            ElseIf H < HfusL And H >= HfusS And Tfus > 0 And Abs(Hfus) > 0.0001 Then
-                'partial freezing from liquid
-                V = 0.0
-                S = 1 - (H - HfusS) / (HfusL - HfusS)
-                T = Tfus
-            ElseIf Tfus > 0 And Abs(Hfus) > 0.0001 Then
-                'pure solid
-                V = 0.0
-                S = 1.0
-                T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
-                                          Function(Tx)
-                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
-                                          End Function)
-            Else
-                'pure liquid
-                V = 0.0
-                S = 0.0
-                T = RootFinding.Brent.FindRootExpand(Function(Tx)
-                                                         Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
-                                                     End Function, 10, Tsat, 0.00001, 1000, 1.2)
 
-            End If
+            Else
+
+                Dim isSolid = PP.DW_GetConstantProperties()(idx).IsSolid Or PP.ForcedSolids.Contains(PP.RET_VNAMES()(idx))
+
+                If isSolid Then
+                    'pure solid
+                    V = 0.0
+                    S = 1.0
+                    T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                              Function(Tx)
+                                                  Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                              End Function)
+                ElseIf H >= HsatV Then
+                    'pure vapor
+                    V = 1.0
+                    S = 0.0
+                    T = New Brent().BrentOpt2(Tsat * 0.9, 2000, 10, 0.000001, 100,
+                                              Function(Tx)
+                                                  Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                              End Function)
+                ElseIf H >= HsatL And P > Pfus Then
+                    'partial vaporization from liquid
+                    V = (H - HsatL) / (HsatV - HsatL)
+                    S = 0.0
+                    T = Tsat
+                ElseIf H > HsatS And P <= Pfus And Abs(Hfus) > 0.0001 Then
+                    'partial sublimation from solid
+                    V = (H - HsatS) / (HsatV - HsatS)
+                    S = 1 - V
+                    T = Tsat
+                ElseIf H >= HfusL And Tfus > 0 And Abs(Hfus) > 0.0001 Then
+                    'pure liquid
+                    V = 0.0
+                    S = 0.0
+                    T = New Brent().BrentOpt2(Tfus * 1.01, Tsat, 10, 0.000001, 100,
+                                              Function(Tx)
+                                                  Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                              End Function)
+                ElseIf H < HfusL And H >= HfusS And Tfus > 0 And Abs(Hfus) > 0.0001 Then
+                    'partial freezing from liquid
+                    V = 0.0
+                    S = 1 - (H - HfusS) / (HfusL - HfusS)
+                    T = Tfus
+                ElseIf Tfus > 0 And Abs(Hfus) > 0.0001 Then
+                    'pure solid
+                    V = 0.0
+                    S = 1.0
+                    T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                              Function(Tx)
+                                                  Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                              End Function)
+                Else
+                    'pure liquid
+                    V = 0.0
+                    S = 0.0
+                    Dim Tmin As Double
+                    If Tfus > 0 Then Tmin = Tfus * 1.01 Else Tmin = Tsat * 0.3
+                    T = New Brent().BrentOpt2(Tmin, Tsat, 10, 0.000001, 100,
+                                              Function(Tx)
+                                                  Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                              End Function)
+
+                End If
+
+                End If
 
             Return New Object() {1.0 - V - S, V, Vz, Vz, T, 0.0, New Double() {1.0}, 0.0, Vz, S, Vz}
 

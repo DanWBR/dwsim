@@ -54,9 +54,6 @@ Public Class CAPEOPENManager
             Case "Soave-Redlich-Kwong (SRK)"
                 pp = New SRKPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescSoaveRedlichKwongSRK")
-            Case "Peng-Robinson / Lee-Kesler (PR/LK)"
-                pp = New PengRobinsonLKPropertyPackage(True)
-                pp.ComponentDescription = Calculator.GetLocalString("DescPRLK")
             Case "UNIFAC"
                 pp = New UNIFACPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescUPP")
@@ -93,15 +90,6 @@ Public Class CAPEOPENManager
             Case "IAPWS-08 Seawater"
                 pp = New SeawaterPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescSEAPP")
-            Case "Sour Water"
-                pp = New SourWaterPropertyPackage(True)
-                pp.ComponentDescription = Calculator.GetLocalString("DescSourWaterPP")
-            Case "Extended UNIQUAC"
-                pp = New ExUNIQUACPropertyPackage(True)
-                pp.ComponentDescription = ""
-            Case "Electrolyte NRTL"
-                pp = New ElectrolyteNRTLPropertyPackage(True)
-                pp.ComponentDescription = ""
             Case Else
                 Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
                 Dim p0 = otherpps.Where(Function(x) DirectCast(x, ICapeIdentification).ComponentName = PackageName)
@@ -119,9 +107,9 @@ Public Class CAPEOPENManager
     End Function
 
     Public Function GetPropertyPackageList() As Object Implements ICapeThermoPropertyPackageManager.GetPropertyPackageList
-        Dim l As New List(Of String)({"CoolProp", "Peng-Robinson (PR)", "Peng-Robinson 1978 (PR78)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)",
+        Dim l As New List(Of String)({"CoolProp", "Peng-Robinson (PR)", "Peng-Robinson 1978 (PR78)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)",
                              "UNIFAC", "UNIFAC-LL", "Modified UNIFAC (Dortmund)", "Modified UNIFAC (NIST)", "NRTL", "UNIQUAC",
-                            "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables", "IAPWS-08 Seawater", "Sour Water"})
+                            "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables", "IAPWS-08 Seawater"})
         Try
             Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
             For Each pp In otherpps

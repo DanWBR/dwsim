@@ -10,7 +10,9 @@ Imports Microsoft.Msagl.Core.Geometry.Curves
 Imports Microsoft.Msagl.Core.Layout
 Imports Microsoft.Msagl.Layout.Initial
 Imports Microsoft.Msagl.Layout.Incremental
-Imports System.Threading.Tasks
+Imports System.Security.Cryptography
+
+Public Delegate Sub DrawingEvent(ByVal canvas As SKCanvas)
 
 Public Class GraphicsSurface
 
@@ -97,6 +99,12 @@ Public Class GraphicsSurface
     Public Origin As SKPoint
 
     Public DrawOverlaysAction As Action(Of SKCanvas)
+
+    Public GlobalDrawOverride As Action(Of IGraphicObject, SKCanvas)
+    Public GlobalConPositionsOverride As Action(Of IGraphicObject)
+
+    Public Event StartedDrawing As DrawingEvent
+    Public Event FinishedDrawing As DrawingEvent
 
     Public Sub New()
 
@@ -299,6 +307,8 @@ Public Class GraphicsSurface
 
         DrawingCanvas.Scale(Me.Zoom, Me.Zoom)
 
+        RaiseEvent StartedDrawing(DrawingCanvas)
+
         'Dim objects = DrawingObjects.ToArray
 
         If DrawingObjects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
@@ -327,16 +337,24 @@ Public Class GraphicsSurface
 
         For Each dobj In DrawingObjects
             If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
-               Not TypeOf dobj Is Tables.FloatingTableGraphic Then
+           Not TypeOf dobj Is Tables.FloatingTableGraphic Then
                 If TypeOf dobj Is ShapeGraphic Then
-                    DirectCast(dobj, ShapeGraphic).PositionConnectors()
+                    If GlobalConPositionsOverride Is Nothing Then
+                        DirectCast(dobj, ShapeGraphic).PositionConnectors()
+                    Else
+                        GlobalConPositionsOverride.Invoke(dobj)
+                    End If
                 End If
             End If
         Next
 
         For Each dobj In DrawingObjects
             If TypeOf dobj Is ConnectorGraphic Then
-                dobj.Draw(DrawingCanvas)
+                If GlobalDrawOverride IsNot Nothing Then
+                    GlobalDrawOverride.Invoke(dobj, DrawingCanvas)
+                Else
+                    dobj.Draw(DrawingCanvas)
+                End If
             End If
         Next
 
@@ -353,19 +371,21 @@ Public Class GraphicsSurface
             .StrokeWidth = 2
         End With
 
-        For Each dobj As GraphicObject In Me.SelectedObjects.Values
-            dobj.Selected = True
-            If dobj.Rotation <> 0 Then
-                DrawingCanvas.Save()
-                DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
-                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
-                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
-                DrawingCanvas.Restore()
-            Else
-                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
-                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
-            End If
-        Next
+        If GlobalDrawOverride Is Nothing Then
+            For Each dobj As GraphicObject In Me.SelectedObjects.Values
+                dobj.Selected = True
+                If dobj.Rotation <> 0 Then
+                    DrawingCanvas.Save()
+                    DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+                    DrawingCanvas.Restore()
+                Else
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+                End If
+            Next
+        End If
 
         For Each gr As GraphicObject In Me.DrawingObjects
             If Not Me.SelectedObjects.ContainsKey(gr.Name) Then gr.Selected = False
@@ -382,16 +402,11 @@ Public Class GraphicsSurface
                Not TypeOf dobj Is Tables.FloatingTableGraphic Then
 
                 If TypeOf dobj Is ShapeGraphic Then
-                    'DirectCast(dobj, ShapeGraphic).Fill = False
                     DirectCast(dobj, ShapeGraphic).LineWidth = 1
                     DirectCast(dobj, ShapeGraphic).UpdateStatus()
                 End If
 
-                If dobj.DrawOverride IsNot Nothing Then
-
-                    dobj.DrawOverride.Invoke(DrawingCanvas)
-
-                Else
+                If GlobalDrawOverride IsNot Nothing Then
 
                     If dobj.FlippedH Or dobj.FlippedV Or dobj.Rotation <> 0 Then
 
@@ -411,30 +426,66 @@ Public Class GraphicsSurface
                             DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
                         End If
 
-                        dobj.Draw(DrawingCanvas)
+                        GlobalDrawOverride.Invoke(dobj, DrawingCanvas)
 
                         DrawingCanvas.SetMatrix(currmat)
 
                     Else
 
-                        Try
-                            dobj.Draw(DrawingCanvas)
-                        Catch ex As Exception
-                            Using p As New SKPaint
-                                p.Color = SKColors.Black
-                                p.StrokeWidth = 1
-                                p.IsStroke = True
-                                DrawingCanvas.DrawText(String.Format("Error drawing {0}: {1}", dobj.Tag, ex.Message), dobj.X, dobj.Y, p)
-                            End Using
-                        End Try
+                        GlobalDrawOverride.Invoke(dobj, DrawingCanvas)
 
                     End If
 
-                    'If TypeOf dobj Is ShapeGraphic And dobj.Status = Status.Calculating Then
-                    '    DirectCast(dobj, ShapeGraphic).DrawCalculatingMode(DrawingCanvas)
-                    'End If
+                Else
 
-                    If TypeOf dobj Is ShapeGraphic And
+                    If dobj.DrawOverride IsNot Nothing Then
+
+                        dobj.DrawOverride.Invoke(DrawingCanvas)
+
+                    Else
+
+                        If dobj.FlippedH Or dobj.FlippedV Or dobj.Rotation <> 0 Then
+
+                            Dim currmat = DrawingCanvas.TotalMatrix
+
+                            DrawingCanvas.Save()
+
+                            If dobj.FlippedV And Not dobj.FlippedH Then
+                                DrawingCanvas.Scale(1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                            ElseIf dobj.FlippedH And Not dobj.FlippedV Then
+                                DrawingCanvas.Scale(-1, 1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                            ElseIf dobj.FlippedH And dobj.FlippedV Then
+                                DrawingCanvas.Scale(-1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                            End If
+
+                            If dobj.Rotation <> 0.0 Then
+                                DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+                            End If
+
+                            dobj.Draw(DrawingCanvas)
+
+                            DrawingCanvas.SetMatrix(currmat)
+
+                        Else
+
+                            Try
+                                dobj.Draw(DrawingCanvas)
+                            Catch ex As Exception
+                                Using p As New SKPaint
+                                    p.Color = SKColors.Black
+                                    p.StrokeWidth = 1
+                                    p.IsStroke = True
+                                    DrawingCanvas.DrawText(String.Format("Error drawing {0}: {1}", dobj.Tag, ex.Message), dobj.X, dobj.Y, p)
+                                End Using
+                            End Try
+
+                        End If
+
+                        'If TypeOf dobj Is ShapeGraphic And dobj.Status = Status.Calculating Then
+                        '    DirectCast(dobj, ShapeGraphic).DrawCalculatingMode(DrawingCanvas)
+                        'End If
+
+                        If TypeOf dobj Is ShapeGraphic And
                         dobj.ObjectType <> ObjectType.GO_MasterTable And
                         dobj.ObjectType <> ObjectType.GO_SpreadsheetTable And
                         dobj.ObjectType <> ObjectType.GO_Table And
@@ -446,7 +497,9 @@ Public Class GraphicsSurface
                         dobj.ObjectType <> ObjectType.GO_Button And
                         dobj.ObjectType <> ObjectType.GO_FloatingTable Then
 
-                        DirectCast(dobj, ShapeGraphic).DrawTag(DrawingCanvas)
+                            DirectCast(dobj, ShapeGraphic).DrawTag(DrawingCanvas)
+
+                        End If
 
                     End If
 
@@ -471,6 +524,8 @@ Public Class GraphicsSurface
         If DrawAdditionalItems Then
             DrawOverlaysAction.Invoke(DrawingCanvas)
         End If
+
+        RaiseEvent FinishedDrawing(DrawingCanvas)
 
         For Each dobj As GraphicObject In Me.DrawingObjects
             If TypeOf dobj Is Tables.FloatingTableGraphic Then
@@ -733,7 +788,7 @@ Public Class GraphicsSurface
 
     End Sub
 
-    Public Sub Center()
+    Public Sub Center(viewwidth As Integer, viewheight As Integer)
 
         Dim minx As Integer = Integer.MaxValue
         Dim miny As Integer = Integer.MaxValue
@@ -752,6 +807,40 @@ Public Class GraphicsSurface
 
         middlex = (minx + maxx) / 2
         middley = (miny + maxy) / 2
+
+        Dim deltax = (viewwidth / 2 / Zoom - middlex)
+        Dim deltay = (viewheight / 2 / Zoom - middley)
+
+        'Origin.Offset(deltax, deltay)
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If Not gobj.IsConnector Then
+                gobj.X += deltax
+                gobj.Y += deltay
+            End If
+        Next
+
+    End Sub
+
+    Public Sub CenterTo(oldzoom As Double, mx As Integer, my As Integer, viewwidth As Integer, viewheight As Integer)
+
+        Dim x1 = mx / oldzoom
+        Dim y1 = my / oldzoom
+
+        Dim x2 = mx / Zoom
+        Dim y2 = my / Zoom
+
+        Dim deltax = x2 - x1
+        Dim deltay = y2 - y1
+
+        'Origin.Offset(deltax, deltay)
+
+        For Each gobj As IGraphicObject In Me.DrawingObjects
+            If Not gobj.IsConnector Then
+                gobj.X += deltax
+                gobj.Y += deltay
+            End If
+        Next
 
     End Sub
 
@@ -1859,6 +1948,96 @@ Public Class GraphicsSurface
                 End If
             End If
         Next
+
+    End Sub
+
+    Public Sub ApplyNaturalLayout(orderedIds As List(Of String), deltaX As Integer)
+
+        PrevPositions = New Dictionary(Of String, Tuple(Of Point, Boolean))
+        For Each objID In orderedIds
+            Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
+            PrevPositions.Add(gobj.Name, New Tuple(Of Point, Boolean)(New Point(gobj.X, gobj.Y), gobj.FlippedH))
+        Next
+
+        Dim nrecycles = DrawingObjects.Where(Function(o) o.ObjectType = ObjectType.OT_Recycle).Count()
+
+        For i = 0 To nrecycles
+
+            Dim x = 50
+            Dim y = 50
+
+            For Each objID In orderedIds
+                Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
+                gobj.FlippedH = False
+                If gobj.ObjectType <> ObjectType.EnergyStream Then
+                    If gobj.InputConnectors(0).IsAttached Then
+                        Dim conFrom = gobj.InputConnectors(0).AttachedConnector.AttachedFrom
+                        Dim conFromIdx = gobj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                        Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
+                        Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
+                        gobj.X = x2
+                        gobj.Y = y2
+                    Else
+                        gobj.X = x
+                        gobj.Y = y
+                    End If
+                    x += deltaX
+                ElseIf gobj.ObjectType = ObjectType.MaterialStream Then
+                    If gobj.InputConnectors(0).IsAttached Then
+                        Dim conFrom = gobj.InputConnectors(0).AttachedConnector.AttachedFrom
+                        Dim conFromIdx = gobj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                        Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
+                        Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
+                        gobj.X = x2
+                        gobj.Y = y2
+                    Else
+                        gobj.X = x
+                        gobj.Y = y
+                    End If
+                End If
+                gobj.PositionConnectors()
+            Next
+
+            For Each objID In orderedIds
+                Dim gobj = DrawingObjects.Where(Function(o) o.Name = objID).FirstOrDefault()
+                gobj.FlippedH = False
+                If gobj.ObjectType = ObjectType.EnergyStream Then
+                    If gobj.InputConnectors(0).IsAttached Then
+                        Dim conn = gobj.InputConnectors(0).AttachedConnector
+                        Dim conFrom = conn.AttachedFrom
+                        Dim conFromIdx = conn.AttachedFromConnectorIndex
+                        If conFromIdx >= 0 Then
+                            Dim x2 = conFrom.OutputConnectors(conFromIdx).Position.X + deltaX
+                            Dim y2 = conFrom.OutputConnectors(conFromIdx).Position.Y
+                            gobj.X = x2
+                            gobj.Y = y2
+                        Else
+                            Dim x2 = conFrom.EnergyConnector.Position.X + deltaX
+                            Dim y2 = conFrom.EnergyConnector.Position.Y
+                            gobj.X = x2
+                            gobj.Y = y2
+                        End If
+                    ElseIf gobj.OutputConnectors(0).IsAttached Then
+                        Dim conTo = gobj.OutputConnectors(0).AttachedConnector.AttachedTo
+                        Dim conToIdx = gobj.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
+                        If conToIdx >= 0 Then
+                            Dim x2 = conTo.InputConnectors(conToIdx).Position.X - deltaX
+                            Dim y2 = conTo.InputConnectors(conToIdx).Position.Y + deltaX
+                            gobj.X = x2
+                            gobj.Y = y2
+                        Else
+                            Dim x2 = conTo.EnergyConnector.Position.X - deltaX
+                            Dim y2 = conTo.EnergyConnector.Position.Y + deltaX
+                            gobj.X = x2
+                            gobj.Y = y2
+                        End If
+                    End If
+                End If
+                gobj.PositionConnectors()
+            Next
+
+        Next
+
 
     End Sub
 

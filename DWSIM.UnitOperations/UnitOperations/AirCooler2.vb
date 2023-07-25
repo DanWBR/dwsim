@@ -78,7 +78,7 @@ Namespace UnitOperations
         Public Property Tube_Length As Double = 5.0
 
         'tube pitch in mm
-        Public Property Tube_Pitch As Double = 40.0
+        Public Property Tube_Pitch As Double = 80.0
 
         'tube fouling in K.m2/W
         Public Property Tube_Fouling As Double = 0.0#
@@ -102,6 +102,11 @@ Namespace UnitOperations
         Public Property LMTD As Double = 0.0
         Public Property LMTD_F As Double = 0.0
 
+        Public Property Area As Double = 0.0
+
+        <Xml.Serialization.XmlIgnore> Property AirIn As MaterialStream
+
+        <Xml.Serialization.XmlIgnore> Public Property AirOut As MaterialStream
 
         Public Overrides Function GetDisplayName() As String
             Return _name
@@ -365,6 +370,7 @@ Namespace UnitOperations
             End If
 
             StIn1 = calc.CreateMaterialStream({"Air"}, {1.0})
+            StIn1.SetFlowsheet(FlowSheet)
 
             If UseGlobalWeather Then
 
@@ -384,10 +390,14 @@ Namespace UnitOperations
             StIn1.Phases(0).Properties.molarflow = Nothing
             StIn1.SetVolumetricFlow(ActualAirFlow)
 
-            StOut1 = StIn1.Clone()
+            StOut1 = calc.CreateMaterialStream({"Air"}, {1.0})
+            StOut1.SetFlowsheet(FlowSheet)
 
             StIn1.PropertyPackage = rpp
             StOut1.PropertyPackage = rpp
+
+            AirIn = StIn1
+            AirOut = StOut1
 
             IObj?.SetCurrent()
             StIn1.Calculate()
@@ -703,7 +713,9 @@ Namespace UnitOperations
                         nt = n / Tube_PassesPerShell
                         A = n * Math.PI * de * (L - 2 * de)
 
-                        'If pitch < de Then Throw New Exception("Invalid input: tube spacing (pitch) is smaller than the tube's external diameter.")
+                        Area = A
+
+                        If pitch < de Then Throw New Exception("Invalid input: tube spacing (pitch) is smaller than the tube's external diameter.")
 
                         'hot
                         vt = Wh / (rhoh * nt * Math.PI * di ^ 2 / 4)

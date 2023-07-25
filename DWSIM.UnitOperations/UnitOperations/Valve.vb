@@ -54,6 +54,8 @@ Namespace UnitOperations
 
         Public Property Kv As Double = 100.0#
 
+        Public Property ActualKv As Double = 0.0
+
         Private _opening As Double = 50.0
 
         Public Property OpeningPct As Double
@@ -313,20 +315,10 @@ Namespace UnitOperations
 
 
                         If CalcMode = CalculationMode.Kv_General Or CalcMode = CalculationMode.Kv_Gas Or CalcMode = CalculationMode.Kv_Liquid Then
-                            If ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
-                                'Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
-                                'Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                                'rhol = ims.Phases(1).Properties.density.GetValueOrDefault
-
-                                'Wi = WLiquid(Kvc, P1 / 100000.0, P2 / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
+                            If ims.Phases(1).Properties.molarfraction > 0.99 Or CalcMode = CalculationMode.Kv_Liquid Then
                                 Wi = Kvc * (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
-                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
+                            ElseIf ims.Phases(2).Properties.molarfraction > 0.99 Or CalcMode = CalculationMode.Kv_Gas Then
                                 ims.PropertyPackage.CurrentMaterialStream = ims
-                                'rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, P1)
-                                'Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
-                                'k = Cp_ig / (Cp_ig - 8.314)
-                                'Wi = WGas(Kvc, P1 / 100000.0, P2 / 100000.0, k, rhog)
-
                                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
                                 If P2 > P1 / 2 Then
                                     Wi = 519 * Kvc / (Ti / (rhog20 * (P1 - P2) / 100000.0 * P1 / 100000.0)) ^ 0.5 / 3600
@@ -450,6 +442,8 @@ Namespace UnitOperations
 
                     DeltaP = P1 - P2
                     OutletPressure = P2
+
+                    ActualKv = Kvc
 
                     With oms
                         .Phases(0).Properties.temperature = Ti
@@ -952,7 +946,21 @@ Namespace UnitOperations
                 Pv = Pi 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
                 massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
                 massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
-                P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
+                If massfrac_gas > 0.01 And massfrac_liq > 0.01 Then
+                    P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
+                ElseIf massfrac_liq <= 0.01 Then
+                    ims.PropertyPackage.CurrentMaterialStream = ims
+                    rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
+                    Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight.GetValueOrDefault()
+                    k = Cp_ig / (Cp_ig - 8.314)
+                    P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
+                ElseIf massfrac_gas <= 0.01 Then
+                    Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
+                    Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                    rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                    P2 = 100000.0 * P2Liquid(Wi * 3600, Kvc, Pi / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
+                End If
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
                 P2 = Pi * 0.7 / 100000.0
                 icount = 0
@@ -969,6 +977,7 @@ Namespace UnitOperations
 
             If Me.CalcMode = CalculationMode.DeltaP Then
                 P2 = Pi - Me.DeltaP.GetValueOrDefault
+                OutletPressure = P2
             ElseIf CalcMode = CalculationMode.OutletPressure Then
                 P2 = Me.OutletPressure.GetValueOrDefault
                 Me.DeltaP = Pi - P2
@@ -976,6 +985,8 @@ Namespace UnitOperations
                 DeltaP = Pi - P2
                 OutletPressure = P2
             End If
+
+            ActualKv = Kvc
 
             CheckSpec(P2, True, "outlet pressure")
 
@@ -1080,31 +1091,42 @@ Namespace UnitOperations
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0
-                        'PROP_VA_0	Calculation Mode
-                        value = Me.CalcMode
-                    Case 1
-                        'PROP_VA_1	Pressure Drop
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-                    Case 2
-                        'PROP_VA_2	Outlet Pressure
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure.GetValueOrDefault)
-                    Case 3
-                        'PROP_VA_3	Temperature Drop
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
-                    Case 4
-                        value = Kv
-                    Case 5
-                        value = OpeningPct
-                    Case 6
-                        value = CharacteristicParameter
-                End Select
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Return value
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_VA_0	Calculation Mode
+                            value = Me.CalcMode
+                        Case 1
+                            'PROP_VA_1	Pressure Drop
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                        Case 2
+                            'PROP_VA_2	Outlet Pressure
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure.GetValueOrDefault)
+                        Case 3
+                            'PROP_VA_3	Temperature Drop
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                        Case 4
+                            value = Kv
+                        Case 5
+                            value = OpeningPct
+                        Case 6
+                            value = CharacteristicParameter
+                    End Select
+
+                    Return value
+
+                Else
+
+                    If prop.Equals("Actual Flow Coefficient") Then
+                        Return ActualKv
+                    End If
+
+                End If
 
             End If
 
@@ -1120,6 +1142,7 @@ Namespace UnitOperations
                     For i = 3 To 3
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
+                    proplist.Add("Actual Flow Coefficient")
                 Case PropertyType.RW
                     For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
@@ -1132,6 +1155,7 @@ Namespace UnitOperations
                     For i = 0 To 6
                         proplist.Add("PROP_VA_" + CStr(i))
                     Next
+                    proplist.Add("Actual Flow Coefficient")
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -1143,31 +1167,36 @@ Namespace UnitOperations
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
-                Case 0
-                    'PROP_VA_0	Calculation Mode
-                    Me.CalcMode = propval
-                Case 1
-                    'PROP_VA_1	Pressure Drop
-                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
-                Case 2
-                    'PROP_VA_2	Outlet Pressure
-                    Me.OutletPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 4
-                    Me.Kv = propval
-                Case 5
-                    If propval >= 0 And propval <= 100 Then
-                        Me.OpeningPct = propval
-                    ElseIf propval < 0 Then
-                        OpeningPct = 0
-                    Else
-                        OpeningPct = 100
-                    End If
-                Case 6
-                    CharacteristicParameter = propval
-            End Select
+            If prop.Contains("_") Then
+
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+                    Case 0
+                        'PROP_VA_0	Calculation Mode
+                        Me.CalcMode = propval
+                    Case 1
+                        'PROP_VA_1	Pressure Drop
+                        Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                    Case 2
+                        'PROP_VA_2	Outlet Pressure
+                        Me.OutletPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Case 4
+                        Me.Kv = propval
+                    Case 5
+                        If propval >= 0 And propval <= 100 Then
+                            Me.OpeningPct = propval
+                        ElseIf propval < 0 Then
+                            OpeningPct = 0
+                        Else
+                            OpeningPct = 100
+                        End If
+                    Case 6
+                        CharacteristicParameter = propval
+                End Select
+
+            End If
 
             Return 1
 
@@ -1181,26 +1210,36 @@ Namespace UnitOperations
 
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim value As String = ""
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Select Case propidx
+                If prop.Contains("_") Then
 
-                    Case 0, 4, 5
-                        'PROP_VA_0	Calculation Mode
-                        value = ""
-                    Case 1
-                        'PROP_VA_1	Pressure Drop
-                        value = su.deltaP
-                    Case 2
-                        'PROP_VA_2	Outlet Pressure
-                        value = su.pressure
-                    Case 3
-                        'PROP_VA_3	Temperature Drop
-                        value = su.deltaT
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                End Select
+                    Select Case propidx
 
-                Return value
+                        Case 0, 4, 5
+                            'PROP_VA_0	Calculation Mode
+                            value = ""
+                        Case 1
+                            'PROP_VA_1	Pressure Drop
+                            value = su.deltaP
+                        Case 2
+                            'PROP_VA_2	Outlet Pressure
+                            value = su.pressure
+                        Case 3
+                            'PROP_VA_3	Temperature Drop
+                            value = su.deltaT
+
+                    End Select
+
+                    Return value
+
+                Else
+
+                    Return ""
+
+                End If
+
 
             Else
 

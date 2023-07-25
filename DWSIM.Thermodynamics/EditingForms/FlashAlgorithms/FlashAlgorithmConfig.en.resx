@@ -121,18 +121,30 @@
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
+  <data name="cbFSMethod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbFSMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>204, 76</value>
+  </data>
+  <data name="cbFSMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 21</value>
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 80</value>
+  </data>
   <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 73</value>
+    <value>344, 104</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 73</value>
+    <value>204, 105</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 21</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 77</value>
+    <value>14, 109</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -198,13 +210,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cbFlashApproach.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 46</value>
+    <value>204, 48</value>
   </data>
   <data name="cbFlashApproach.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 21</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 50</value>
+    <value>13, 51</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -213,7 +225,7 @@
     <value>Numerical Method</value>
   </data>
   <data name="chkDoPhaseId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 105</value>
+    <value>16, 136</value>
   </data>
   <data name="chkDoPhaseId.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 17</value>
@@ -222,7 +234,7 @@
     <value>Identify Phases After Equilibrium Calculation</value>
   </data>
   <data name="chkCalcBubbleDew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 130</value>
+    <value>16, 161</value>
   </data>
   <data name="chkCalcBubbleDew.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 17</value>
@@ -330,7 +342,7 @@
     <value>98, 20</value>
   </data>
   <data name="chkValidateEqCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 155</value>
+    <value>16, 186</value>
   </data>
   <data name="chkValidateEqCalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 17</value>

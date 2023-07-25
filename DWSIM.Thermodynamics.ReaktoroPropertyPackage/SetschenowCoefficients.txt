@@ -1,0 +1,303 @@
+﻿# sources: https://doi.org/10.1252/jcej.3.18 and https://doi.org/10.1016/j.molliq.2019.03.029
+carbon dioxide	-0.2277
+nitrogen	-0.1904
+oxygen	-0.1892
+hydrogen	-0.2115
+hydrogen sulfide	-0.2551
+ammonia	-0.2394
+ethane	-0.1951
+sulfur dioxide	-0.3122
+1,2,3-trimethylbenzene	0.321
+1,2,4-trimethylbenzene	0.293
+1,2-benzanthracene	0.354
+1,2-benzanthracene	0.361
+1,3,5-trimethylbenzene	0.318
+1-ethyl anthracene	0.313
+1-ethyl naphthalene	0.273
+1-methyl naphthalene	0.200
+2,5-dimethylpyrazine	0.209
+2-butoxyethanol	0.211
+2-decanone	0.314
+2-heptanone	0.233
+2-hexanone	0.198
+2-methyl anthracene	0.336
+2-methyl indole	0.212
+2-nonanone	0.301
+2-octanone	0.273
+4-ethyl-3-hexanol	0.291
+4-hydroxy indole	0.212
+5-methoxy indole	0.213
+7-methyl indole	0.223
+acenaphthalene	0.238
+acetone	0.110
+anthracene	0.326
+anthracene	0.346
+benzene	0.195
+benzo[a]pyrene	0.352
+benzo[a]-pyrene	0.328
+benzo[e]fluoranthene	0.351
+benzo[e]pyrene	0.348
+benzo[ghi]perylene	0.292
+benzo[k]fluoranthene	0.353
+benzophenone	0.262
+biphenyl	0.276
+butane	0.217
+carbazole	0.232
+carbazole	0.138
+chrysene	0.336
+chrysene	0.367
+cycloheptane	0.343
+cyclohexane	0.277
+cyclohexanone	0.202
+cyclopentane	0.182
+decanal	0.283
+dibenz[ah]anthracene	0.336
+ethane	0.162
+ethylbenzene	0.234
+ethylene	0.127
+fluorene	0.267
+fluoroanthrene	0.339
+fluoroanthrene	0.364
+heptanal	0.237
+indeno[123,cd]pyrene	0.346
+indole	0.187
+iso-propylbenzene	0.316
+methane	0.127
+methyl phenyl sulfoxide	0.166
+methylcyclohexane	0.274
+methylcyclopentane	0.273
+m-xylene	0.248
+naphthalene	0.220
+n-butylbenzene	0.285
+n-hexane	0.276
+n-hexanol	0.232
+n-pentane	0.221
+n-pentylbenzene	0.300
+n-propylbenzene	0.262
+octanal	0.265
+o-xylene	0.227
+phenanthrene	0.272
+phenanthrene	0.380
+progesterone	0.288
+propane	0.194
+p-xylene	0.251
+pyrene	0.320
+pyrene	0.354
+sec-buthylbenzene	0.288
+tert-buthylbenzene	0.243
+testosterone	0.326
+toluene	0.228
+valerophenone	0.271
+(cooh)(ch2)2ss(ch2)2(cooh)	0.139
+(cooh)(ch2)3ss(ch2)3(cooh)	0.152
+(cooh)(ch2)s(ch2)2s(ch2)(cooh)	0.020
+acetic acid	0.064
+adipic acid	0.118
+azelaic acid	0.128
+benzoic acid	0.182
+butanoic acid	0.166
+heptanoic acid	0.242
+hexanoic acid	0.220
+indole-3-carboxylic acid	0.275
+m-chlorobenzoic acid	0.180
+o-chlorobenzoic acid	0.182
+o-hydroxylbenzoic acid	0.172
+p-chlorobenzoic acid	0.178
+phenylacetic acid	0.190
+phthalic acid	0.178
+phthalic acid	0.163
+pimelic acid	0.161
+propionic acid	0.132
+salicylic acid	0.117
+sebacic acid	0.164
+suberic acid	0.132
+1-amino-2-naphthol-4-sulfonic acid	0.257
+butyl acetate	0.224
+di-n-propyl phthalate	0.374
+ethylacetate	0.172
+hexyl acetate	0.312
+iso-butyl acetate	0.225
+methyl acetate	0.185
+methyl tert-butyl ether	0.170
+metolachlor	0.296
+penthyl acetate	0.283
+propyl acetate	0.201
+sec-butyl acetate	0.241
+tert-butyl acetate	0.269
+tri-n-buthyl phosphate	0.428
+4-aminobenzoic acid	0.090
+aminoterephthalic acid	0.077
+amoxicilline	-0.065
+ampicilline	-0.029
+anthranilic acid	0.078
+aspartic acid	-0.100
+carbocysteine	-0.006
+cystine	-0.068
+cystine	-0.078
+glutamic acid	-0.019
+glutamine	-0.120
+glutatione	0.144
+glycine	0.002
+histidine	-0.031
+leucine	0.088
+leucine	0.114
+phenylalanine	0.055
+tryptophan	0.072
+tyrosine	0.068
+tyrosine	0.048
+cdta	-0.216
+dtpa	-0.057
+edds	-0.337
+edta	-0.114
+egta	-0.084
+n-phosphonomethyliminodiacetic acid	0.058
+nta	0.036
+risedronic acid	-0.077
+ttha	-0.146
+1,1,1,3,3,3-hexafluoro-2-propanol	0.222
+1-butanol	0.120
+1-hexanol	0.140
+1-naphtol	0.182
+1-naphtol	0.209
+1-naphtol	0.207
+1-pentanol	0.140
+1-propanol	0.130
+2,4,6-trichlorophenol	0.228
+2,4-dichlorophenol	0.218
+2-butanol	0.150
+2-ethylhexanol	0.150
+2-methylresorcinol	0.254
+2-naphthol	0.220
+2-phenylphenol	0.274
+3-pentanol	0.140
+4-chlororesorcinol	0.217
+4-fluorophenol	0.168
+4-iodophenol	0.162
+bisphenol a	0.174
+deferiprone	0.075
+ethanol	0.130
+ethylmaltol	0.130
+isobutanol	0.150
+isopropanol	0.130
+kojic acid	0.040
+maltol	0.100
+m-cresol	0.182
+m-nitrophenol	0.147
+naphthalene-1,5-diol	0.158
+o-nitrophenol	0.136
+phenol	0.172
+phenol	0.111
+p-nitrophenol	0.165
+pyrithione	0.137
+resorcinol	0.134
+tert-butanol	0.160
+1,2,4-trichlorobenzene	0.250
+1,2-dichlorobenzene	0.247
+1,3-dichlorobenzene	0.226
+1,4-dichlorobenzene	0.240
+2,2,2-trifluoroethanol	0.125
+4:2 ftoh	0.273
+6:2ftoh	0.378
+chlorobenzene	0.198
+lindane	0.166
+1-nitrohexane	0.236
+1-nitropentane	0.203
+4-nitroaniline	0.099
+4-nitroanisole	0.126
+5-nitroquinoline	0.188
+m-dinitrobenzene	0.109
+o-dinitrobenzene	0.124
+p-dinitrobenzene	0.097
+p-nitrotoluene	0.163
+1,10 phenanthroline	0.274
+2,2' bipyridyl	0.251
+2,2' bipyridyl	0.253
+4-aminobyphenyl	0.208
+adrenaline	-0.108
+aniline	0.136
+benzyl-amine	0.112
+caffeine	0.128
+melamine	0.106
+phenylthiourea	0.184
+piperidine	0.156
+p-toluidine	0.170
+pyridine	0.179
+terpyridine	0.226
+theobromine	0.056
+theophylline	0.100
+1,2-phenylenediamine	0.032
+1,3-bis(2,4-diaminophenoxy)propane	0.121
+2-(2,4-diaminophenoxyethanol)	0.151
+2,6-dimethyl quinoline	0.263
+2-amino-5-ethylphenol	0.016
+2-hydroxyquinoline	0.313
+3-amino-9-ethylcarbazole	0.200
+3-bromoquinoline	0.212
+4,7-dichloroquinoline	0.301
+4-5-diamino-1-n-(2-hydroxyethyl)pyrazole	0.062
+4-amino-2-hydroxytoluene	0.119
+4-hydroxy-2-methyl quinoline	0.338
+4-n-(2-hydroxyethyl)2,4-diaminoanisole	0.080
+6-methoxy quinoline	0.213
+atrazine	0.274
+dopamine	0.133
+isoquinoline	0.178
+phenytoin	0.191
+pyrrole	0.280
+quinoline	0.225
+5-fluorouracil	0.014
+6-mercaptopurine	0.048
+adenine	0.060
+adenosine	0.100
+cytosine	-0.005
+deoxy-adenosine	0.110
+thymine 	0.020
+acetanilide	0.197
+sulfanilamide	0.124
+1,4-dioxane	0.080
+benzothiophene	0.230
+dibenzothiophene	0.213
+tetrahydrofuran	0.160
+thiophene	0.165
+2-undecanone	0.364
+anisole	0.225
+benzaldehyde	0.200
+trans-1,2-dichloroethene	0.179
+cis-1,2-dichloroethene	0.137
+trichloroethene	0.178
+tetrachloroethene	0.213
+1,1,1-trichloroethane	0.193
+1,1-dichloroethane	0.145
+chloroform	0.140
+dichloromethane	0.107
+2-propanol	0.130
+2-ethyl-1-hexanol	0.150
+2-butoxyethanol	0.211
+benzo[b]fluoranthrene	0.351
+benzo[ghi]perylene	0.292
+acenaphthene	0.238
+1-methylphenanthrene	0.313
+perylene	0.259
+dodecane	0.220
+tetradecane	0.250
+hexadecane	0.680
+octadecane	0.950
+eicosane	0.680
+hexacosane	2,230
+p-cresol	0.194
+hydroxyquinone	0.078
+vanillin	0.118
+syringic acid	0.171
+diacetone alcohol	0.139
+dibenzofuran	0.311
+dibenzo-p-dioxin	0.389
+2-monochlorodibenzo-p-dioxin	0.440
+2,7-dichlorodibenzo-p-dioxin	0.498
+2,8-dichlorodibenzofuran	0.409
+diethylether	0.238
+bromomethane	0.150
+dimethylsulfide	0.170
+9-hydroxyfluorene	0.234
+protocatechuic acid	0.097
+gallic acid	0.092
+ferulic acid	0.171

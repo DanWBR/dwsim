@@ -151,6 +151,12 @@ Public Class EditingForm_Column
             cbColPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbColPDrop.SelectedItem = units.deltaP
 
+            cbTS.Items.Clear()
+            cbTS.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.distance).ToArray)
+            cbTS.SelectedItem = units.distance
+
+            tbTS.Text = .TraySpacing.ConvertFromSI(units.distance).ToString(nf)
+
             tbColPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .ColumnPressureDrop).ToString(nf)
 
             tbNStages.Text = .NumberOfStages
@@ -192,6 +198,9 @@ Public Class EditingForm_Column
                     cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     cunits = New String() {"K", "R", "C", "F"}
+                    cbCondComp.Enabled = False
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    cunits = New String() {"%"}
                     cbCondComp.Enabled = False
             End Select
             cbCondSpecUnits.Items.Clear()
@@ -239,6 +248,9 @@ Public Class EditingForm_Column
                     cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     runits = New String() {"K", "R", "C", "F"}
+                    cbRebComp.Enabled = False
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    runits = New String() {"%"}
                     cbRebComp.Enabled = False
             End Select
             cbRebSpecUnits.Items.Clear()
@@ -320,12 +332,10 @@ Public Class EditingForm_Column
                     gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerSpecValue"), .Specs("R").SpecValue.ToString(nf), spu2})
                     gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerCalcValue"), spval2.ToString(nf), spu2})
                 Case ColType.AbsorptionColumn
-                Case ColType.ReboiledAbsorber
-                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
-                Case ColType.RefluxedAbsorber
-                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
             End Select
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DCILIts"), .ic, ""})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Estimated Height"), .EstimatedHeight.ConvertFromSI(units.diameter).ToString(nf), units.diameter})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Estimated Diameter"), .EstimatedDiameter.ConvertFromSI(units.diameter).ToString(nf), units.diameter})
 
             btnResults.Enabled = .x0.Count > 0
 
@@ -366,7 +376,7 @@ Public Class EditingForm_Column
 
     Sub RequestCalc()
 
-        'SimObject.FlowSheet.RequestCalculation(SimObject)
+        'SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 
@@ -568,6 +578,9 @@ Public Class EditingForm_Column
             Case ColumnSpec.SpecType.Temperature
                 cunits = New String() {"K", "R", "C", "F"}
                 cbCondComp.Enabled = False
+            Case ColumnSpec.SpecType.Feed_Recovery
+                cunits = New String() {"%"}
+                cbCondComp.Enabled = False
         End Select
         cbCondSpecUnits.Items.Clear()
         cbCondSpecUnits.Items.AddRange(cunits)
@@ -680,6 +693,9 @@ Public Class EditingForm_Column
             Case ColumnSpec.SpecType.Temperature
                 cunits = New String() {"K", "R", "C", "F"}
                 cbRebComp.Enabled = False
+            Case ColumnSpec.SpecType.Feed_Recovery
+                cunits = New String() {"%"}
+                cbRebComp.Enabled = False
         End Select
         cbRebSpecUnits.Items.Clear()
         cbRebSpecUnits.Items.AddRange(cunits)
@@ -741,7 +757,7 @@ Public Class EditingForm_Column
 
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
                                                                                 tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown,
-                                                                                tbSubcooling.TextChanged, tbColPDrop.TextChanged
+                                                                                tbSubcooling.TextChanged, tbColPDrop.TextChanged, tbTS.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then
@@ -864,6 +880,18 @@ Public Class EditingForm_Column
         fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
         fr.TextBox1.DeselectAll()
         SimObject.FlowSheet.DisplayForm(fr)
+
+    End Sub
+
+    Private Sub tbTS_KeyDown(sender As Object, e As KeyEventArgs) Handles tbTS.KeyDown
+
+        If Loaded And e.KeyCode = Keys.Enter Then
+
+            SimObject.TraySpacing = su.Converter.ConvertToSI(units.distance, tbTS.Text)
+
+            UpdateInfo()
+
+        End If
 
     End Sub
 

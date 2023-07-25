@@ -24,292 +24,361 @@ Partial Class SimulationObjectsPanel
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SimulationObjectsPanel))
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.PanelStreams = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.PanelPressure = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.PanelSeparators = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.PanelMixers = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.PanelExchangers = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.PanelReactors = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.PanelColumns = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage8 = New System.Windows.Forms.TabPage()
-        Me.PanelSolids = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.PanelCE = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage10 = New System.Windows.Forms.TabPage()
-        Me.PanelUser = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage11 = New System.Windows.Forms.TabPage()
-        Me.PanelLogical = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage13 = New System.Windows.Forms.TabPage()
-        Me.PanelIndicators = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage14 = New System.Windows.Forms.TabPage()
+        Me.CheckBox15 = New System.Windows.Forms.CheckBox()
         Me.PanelControllers = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabPage12 = New System.Windows.Forms.TabPage()
+        Me.CheckBox14 = New System.Windows.Forms.CheckBox()
+        Me.PanelIndicators = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox13 = New System.Windows.Forms.CheckBox()
+        Me.PanelLogical = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox12 = New System.Windows.Forms.CheckBox()
+        Me.PanelCustomModelsFOSSEE = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox11 = New System.Windows.Forms.CheckBox()
+        Me.PanelUser = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox10 = New System.Windows.Forms.CheckBox()
+        Me.PanelCE = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
+        Me.PanelSolids = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox8 = New System.Windows.Forms.CheckBox()
+        Me.PanelColumns = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
+        Me.PanelReactors = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
+        Me.PanelExchangers = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
+        Me.PanelMixers = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.PanelPressure = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.PanelSeparators = New System.Windows.Forms.FlowLayoutPanel()
         Me.PanelOther = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
-        Me.TabPage5.SuspendLayout()
-        Me.TabPage6.SuspendLayout()
-        Me.TabPage7.SuspendLayout()
-        Me.TabPage8.SuspendLayout()
-        Me.TabPage9.SuspendLayout()
-        Me.TabPage10.SuspendLayout()
-        Me.TabPage11.SuspendLayout()
-        Me.TabPage13.SuspendLayout()
-        Me.TabPage14.SuspendLayout()
-        Me.TabPage12.SuspendLayout()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'TableLayoutPanel1
+        '
+        resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelStreams, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox15, 0, 28)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelControllers, 0, 27)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox14, 0, 26)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelIndicators, 0, 25)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox13, 0, 24)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelLogical, 0, 23)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox12, 0, 22)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelCustomModelsFOSSEE, 0, 21)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox11, 0, 20)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelUser, 0, 19)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox10, 0, 18)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelCE, 0, 17)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox9, 0, 16)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelSolids, 0, 15)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox8, 0, 14)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelColumns, 0, 13)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox7, 0, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelReactors, 0, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox6, 0, 10)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelExchangers, 0, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox5, 0, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelMixers, 0, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox4, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox3, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelPressure, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox2, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelSeparators, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelOther, 0, 29)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         '
         'PanelStreams
         '
         resources.ApplyResources(Me.PanelStreams, "PanelStreams")
         Me.PanelStreams.Name = "PanelStreams"
         '
-        'TabControl1
+        'CheckBox15
         '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Controls.Add(Me.TabPage6)
-        Me.TabControl1.Controls.Add(Me.TabPage7)
-        Me.TabControl1.Controls.Add(Me.TabPage8)
-        Me.TabControl1.Controls.Add(Me.TabPage9)
-        Me.TabControl1.Controls.Add(Me.TabPage10)
-        Me.TabControl1.Controls.Add(Me.TabPage11)
-        Me.TabControl1.Controls.Add(Me.TabPage13)
-        Me.TabControl1.Controls.Add(Me.TabPage14)
-        Me.TabControl1.Controls.Add(Me.TabPage12)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
+        resources.ApplyResources(Me.CheckBox15, "CheckBox15")
+        Me.CheckBox15.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox15.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox15.Name = "CheckBox15"
+        Me.CheckBox15.UseVisualStyleBackColor = False
         '
-        'TabPage1
+        'PanelControllers
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.PanelStreams)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.PanelControllers, "PanelControllers")
+        Me.PanelControllers.BackColor = System.Drawing.Color.White
+        Me.PanelControllers.Name = "PanelControllers"
         '
-        'TabPage2
+        'CheckBox14
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Controls.Add(Me.PanelPressure)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.CheckBox14, "CheckBox14")
+        Me.CheckBox14.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox14.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox14.Name = "CheckBox14"
+        Me.CheckBox14.UseVisualStyleBackColor = False
+        '
+        'PanelIndicators
+        '
+        resources.ApplyResources(Me.PanelIndicators, "PanelIndicators")
+        Me.PanelIndicators.BackColor = System.Drawing.Color.White
+        Me.PanelIndicators.Name = "PanelIndicators"
+        '
+        'CheckBox13
+        '
+        resources.ApplyResources(Me.CheckBox13, "CheckBox13")
+        Me.CheckBox13.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox13.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox13.Name = "CheckBox13"
+        Me.CheckBox13.UseVisualStyleBackColor = False
+        '
+        'PanelLogical
+        '
+        resources.ApplyResources(Me.PanelLogical, "PanelLogical")
+        Me.PanelLogical.BackColor = System.Drawing.Color.White
+        Me.PanelLogical.Name = "PanelLogical"
+        '
+        'CheckBox12
+        '
+        resources.ApplyResources(Me.CheckBox12, "CheckBox12")
+        Me.CheckBox12.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox12.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox12.Name = "CheckBox12"
+        Me.CheckBox12.UseVisualStyleBackColor = False
+        '
+        'PanelCustomModelsFOSSEE
+        '
+        resources.ApplyResources(Me.PanelCustomModelsFOSSEE, "PanelCustomModelsFOSSEE")
+        Me.PanelCustomModelsFOSSEE.BackColor = System.Drawing.Color.White
+        Me.PanelCustomModelsFOSSEE.Name = "PanelCustomModelsFOSSEE"
+        '
+        'CheckBox11
+        '
+        resources.ApplyResources(Me.CheckBox11, "CheckBox11")
+        Me.CheckBox11.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox11.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox11.Name = "CheckBox11"
+        Me.CheckBox11.UseVisualStyleBackColor = False
+        '
+        'PanelUser
+        '
+        resources.ApplyResources(Me.PanelUser, "PanelUser")
+        Me.PanelUser.BackColor = System.Drawing.Color.White
+        Me.PanelUser.Name = "PanelUser"
+        '
+        'CheckBox10
+        '
+        resources.ApplyResources(Me.CheckBox10, "CheckBox10")
+        Me.CheckBox10.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox10.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox10.Name = "CheckBox10"
+        Me.CheckBox10.UseVisualStyleBackColor = False
+        '
+        'PanelCE
+        '
+        resources.ApplyResources(Me.PanelCE, "PanelCE")
+        Me.PanelCE.BackColor = System.Drawing.Color.White
+        Me.PanelCE.Name = "PanelCE"
+        '
+        'CheckBox9
+        '
+        resources.ApplyResources(Me.CheckBox9, "CheckBox9")
+        Me.CheckBox9.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox9.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox9.Name = "CheckBox9"
+        Me.CheckBox9.UseVisualStyleBackColor = False
+        '
+        'PanelSolids
+        '
+        resources.ApplyResources(Me.PanelSolids, "PanelSolids")
+        Me.PanelSolids.BackColor = System.Drawing.Color.White
+        Me.PanelSolids.Name = "PanelSolids"
+        '
+        'CheckBox8
+        '
+        resources.ApplyResources(Me.CheckBox8, "CheckBox8")
+        Me.CheckBox8.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox8.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox8.Name = "CheckBox8"
+        Me.CheckBox8.UseVisualStyleBackColor = False
+        '
+        'PanelColumns
+        '
+        resources.ApplyResources(Me.PanelColumns, "PanelColumns")
+        Me.PanelColumns.BackColor = System.Drawing.Color.White
+        Me.PanelColumns.Name = "PanelColumns"
+        '
+        'CheckBox7
+        '
+        resources.ApplyResources(Me.CheckBox7, "CheckBox7")
+        Me.CheckBox7.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox7.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox7.Name = "CheckBox7"
+        Me.CheckBox7.UseVisualStyleBackColor = False
+        '
+        'PanelReactors
+        '
+        resources.ApplyResources(Me.PanelReactors, "PanelReactors")
+        Me.PanelReactors.BackColor = System.Drawing.Color.White
+        Me.PanelReactors.Name = "PanelReactors"
+        '
+        'CheckBox6
+        '
+        resources.ApplyResources(Me.CheckBox6, "CheckBox6")
+        Me.CheckBox6.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox6.Name = "CheckBox6"
+        Me.CheckBox6.UseVisualStyleBackColor = False
+        '
+        'PanelExchangers
+        '
+        resources.ApplyResources(Me.PanelExchangers, "PanelExchangers")
+        Me.PanelExchangers.BackColor = System.Drawing.Color.White
+        Me.PanelExchangers.Name = "PanelExchangers"
+        '
+        'CheckBox5
+        '
+        resources.ApplyResources(Me.CheckBox5, "CheckBox5")
+        Me.CheckBox5.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.UseVisualStyleBackColor = False
+        '
+        'PanelMixers
+        '
+        resources.ApplyResources(Me.PanelMixers, "PanelMixers")
+        Me.PanelMixers.BackColor = System.Drawing.Color.White
+        Me.PanelMixers.Name = "PanelMixers"
+        '
+        'CheckBox4
+        '
+        resources.ApplyResources(Me.CheckBox4, "CheckBox4")
+        Me.CheckBox4.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.UseVisualStyleBackColor = False
+        '
+        'CheckBox3
+        '
+        resources.ApplyResources(Me.CheckBox3, "CheckBox3")
+        Me.CheckBox3.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.UseVisualStyleBackColor = False
         '
         'PanelPressure
         '
         resources.ApplyResources(Me.PanelPressure, "PanelPressure")
         Me.PanelPressure.Name = "PanelPressure"
         '
-        'TabPage3
+        'CheckBox1
         '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Controls.Add(Me.PanelSeparators)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
+        Me.CheckBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = False
+        '
+        'CheckBox2
+        '
+        resources.ApplyResources(Me.CheckBox2, "CheckBox2")
+        Me.CheckBox2.BackColor = System.Drawing.SystemColors.Control
+        Me.CheckBox2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.UseVisualStyleBackColor = False
         '
         'PanelSeparators
         '
         resources.ApplyResources(Me.PanelSeparators, "PanelSeparators")
+        Me.PanelSeparators.BackColor = System.Drawing.Color.White
         Me.PanelSeparators.Name = "PanelSeparators"
-        '
-        'TabPage4
-        '
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.Controls.Add(Me.PanelMixers)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'PanelMixers
-        '
-        resources.ApplyResources(Me.PanelMixers, "PanelMixers")
-        Me.PanelMixers.Name = "PanelMixers"
-        '
-        'TabPage5
-        '
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
-        Me.TabPage5.Controls.Add(Me.PanelExchangers)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
-        'PanelExchangers
-        '
-        resources.ApplyResources(Me.PanelExchangers, "PanelExchangers")
-        Me.PanelExchangers.Name = "PanelExchangers"
-        '
-        'TabPage6
-        '
-        resources.ApplyResources(Me.TabPage6, "TabPage6")
-        Me.TabPage6.Controls.Add(Me.PanelReactors)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'PanelReactors
-        '
-        resources.ApplyResources(Me.PanelReactors, "PanelReactors")
-        Me.PanelReactors.Name = "PanelReactors"
-        '
-        'TabPage7
-        '
-        resources.ApplyResources(Me.TabPage7, "TabPage7")
-        Me.TabPage7.Controls.Add(Me.PanelColumns)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.UseVisualStyleBackColor = True
-        '
-        'PanelColumns
-        '
-        resources.ApplyResources(Me.PanelColumns, "PanelColumns")
-        Me.PanelColumns.Name = "PanelColumns"
-        '
-        'TabPage8
-        '
-        resources.ApplyResources(Me.TabPage8, "TabPage8")
-        Me.TabPage8.Controls.Add(Me.PanelSolids)
-        Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.UseVisualStyleBackColor = True
-        '
-        'PanelSolids
-        '
-        resources.ApplyResources(Me.PanelSolids, "PanelSolids")
-        Me.PanelSolids.Name = "PanelSolids"
-        '
-        'TabPage9
-        '
-        resources.ApplyResources(Me.TabPage9, "TabPage9")
-        Me.TabPage9.Controls.Add(Me.PanelCE)
-        Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.UseVisualStyleBackColor = True
-        '
-        'PanelCE
-        '
-        resources.ApplyResources(Me.PanelCE, "PanelCE")
-        Me.PanelCE.Name = "PanelCE"
-        '
-        'TabPage10
-        '
-        resources.ApplyResources(Me.TabPage10, "TabPage10")
-        Me.TabPage10.Controls.Add(Me.PanelUser)
-        Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.UseVisualStyleBackColor = True
-        '
-        'PanelUser
-        '
-        resources.ApplyResources(Me.PanelUser, "PanelUser")
-        Me.PanelUser.Name = "PanelUser"
-        '
-        'TabPage11
-        '
-        resources.ApplyResources(Me.TabPage11, "TabPage11")
-        Me.TabPage11.Controls.Add(Me.PanelLogical)
-        Me.TabPage11.Name = "TabPage11"
-        Me.TabPage11.UseVisualStyleBackColor = True
-        '
-        'PanelLogical
-        '
-        resources.ApplyResources(Me.PanelLogical, "PanelLogical")
-        Me.PanelLogical.Name = "PanelLogical"
-        '
-        'TabPage13
-        '
-        resources.ApplyResources(Me.TabPage13, "TabPage13")
-        Me.TabPage13.Controls.Add(Me.PanelIndicators)
-        Me.TabPage13.Name = "TabPage13"
-        Me.TabPage13.UseVisualStyleBackColor = True
-        '
-        'PanelIndicators
-        '
-        resources.ApplyResources(Me.PanelIndicators, "PanelIndicators")
-        Me.PanelIndicators.Name = "PanelIndicators"
-        '
-        'TabPage14
-        '
-        resources.ApplyResources(Me.TabPage14, "TabPage14")
-        Me.TabPage14.Controls.Add(Me.PanelControllers)
-        Me.TabPage14.Name = "TabPage14"
-        Me.TabPage14.UseVisualStyleBackColor = True
-        '
-        'PanelControllers
-        '
-        resources.ApplyResources(Me.PanelControllers, "PanelControllers")
-        Me.PanelControllers.Name = "PanelControllers"
-        '
-        'TabPage12
-        '
-        resources.ApplyResources(Me.TabPage12, "TabPage12")
-        Me.TabPage12.Controls.Add(Me.PanelOther)
-        Me.TabPage12.Name = "TabPage12"
-        Me.TabPage12.UseVisualStyleBackColor = True
         '
         'PanelOther
         '
         resources.ApplyResources(Me.PanelOther, "PanelOther")
+        Me.PanelOther.BackColor = System.Drawing.Color.White
         Me.PanelOther.Name = "PanelOther"
+        '
+        'Panel1
+        '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Name = "Panel1"
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.BackgroundImage = Global.DWSIM.My.Resources.Resources.double_right_32px
+        Me.Button1.Name = "Button1"
+        Me.Button1.Tag = "Expanded"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label1.Name = "Label1"
         '
         'SimulationObjectsPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.Controls.Add(Me.Panel1)
+        Me.DoubleBuffered = True
         Me.Name = "SimulationObjectsPanel"
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
-        Me.TabPage4.ResumeLayout(False)
-        Me.TabPage5.ResumeLayout(False)
-        Me.TabPage6.ResumeLayout(False)
-        Me.TabPage7.ResumeLayout(False)
-        Me.TabPage8.ResumeLayout(False)
-        Me.TabPage9.ResumeLayout(False)
-        Me.TabPage10.ResumeLayout(False)
-        Me.TabPage11.ResumeLayout(False)
-        Me.TabPage13.ResumeLayout(False)
-        Me.TabPage14.ResumeLayout(False)
-        Me.TabPage12.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents PanelStreams As System.Windows.Forms.FlowLayoutPanel
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents TabPage4 As TabPage
-    Friend WithEvents TabPage5 As TabPage
-    Friend WithEvents TabPage6 As TabPage
-    Friend WithEvents TabPage7 As TabPage
-    Friend WithEvents TabPage8 As TabPage
-    Friend WithEvents TabPage10 As TabPage
-    Friend WithEvents TabPage11 As TabPage
-    Friend WithEvents TabPage12 As TabPage
-    Friend WithEvents PanelPressure As FlowLayoutPanel
-    Friend WithEvents PanelSeparators As FlowLayoutPanel
-    Friend WithEvents PanelMixers As FlowLayoutPanel
-    Friend WithEvents PanelExchangers As FlowLayoutPanel
-    Friend WithEvents PanelReactors As FlowLayoutPanel
-    Friend WithEvents PanelColumns As FlowLayoutPanel
-    Friend WithEvents PanelSolids As FlowLayoutPanel
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents CheckBox11 As CheckBox
     Friend WithEvents PanelUser As FlowLayoutPanel
-    Friend WithEvents PanelLogical As FlowLayoutPanel
-    Friend WithEvents PanelOther As FlowLayoutPanel
-    Friend WithEvents TabPage13 As TabPage
-    Friend WithEvents PanelIndicators As FlowLayoutPanel
-    Friend WithEvents TabPage14 As TabPage
-    Friend WithEvents PanelControllers As FlowLayoutPanel
-    Friend WithEvents TabPage9 As TabPage
+    Friend WithEvents CheckBox10 As CheckBox
     Friend WithEvents PanelCE As FlowLayoutPanel
+    Friend WithEvents CheckBox9 As CheckBox
+    Friend WithEvents PanelSolids As FlowLayoutPanel
+    Friend WithEvents CheckBox8 As CheckBox
+    Friend WithEvents PanelColumns As FlowLayoutPanel
+    Friend WithEvents CheckBox7 As CheckBox
+    Friend WithEvents PanelReactors As FlowLayoutPanel
+    Friend WithEvents CheckBox6 As CheckBox
+    Friend WithEvents PanelExchangers As FlowLayoutPanel
+    Friend WithEvents CheckBox5 As CheckBox
+    Friend WithEvents CheckBox15 As CheckBox
+    Friend WithEvents PanelControllers As FlowLayoutPanel
+    Friend WithEvents CheckBox14 As CheckBox
+    Friend WithEvents PanelIndicators As FlowLayoutPanel
+    Friend WithEvents CheckBox13 As CheckBox
+    Friend WithEvents PanelLogical As FlowLayoutPanel
+    Friend WithEvents CheckBox12 As CheckBox
+    Friend WithEvents PanelCustomModelsFOSSEE As FlowLayoutPanel
+    Friend WithEvents PanelOther As FlowLayoutPanel
+    Friend WithEvents PanelMixers As FlowLayoutPanel
+    Friend WithEvents CheckBox4 As CheckBox
+    Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents PanelPressure As FlowLayoutPanel
+    Friend WithEvents PanelStreams As FlowLayoutPanel
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents PanelSeparators As FlowLayoutPanel
+    Friend WithEvents Panel1 As Panel
+    Public WithEvents Button1 As Button
+    Friend WithEvents Label1 As Label
 End Class

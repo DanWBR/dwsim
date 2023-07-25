@@ -423,6 +423,9 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Boiling Temperature</value>
   </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
   </data>

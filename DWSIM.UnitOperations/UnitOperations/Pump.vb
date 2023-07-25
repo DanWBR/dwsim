@@ -524,6 +524,10 @@ Namespace UnitOperations
                 esin = args(2)
             End If
 
+            If msin.Phases(2).Properties.molarfraction.GetValueOrDefault() > 0.001 Then
+                FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("Vapor phase detected in pump inlet"), IFlowsheet.MessageType.Warning)
+            End If
+
             Me.PropertyPackage.CurrentMaterialStream = msin
 
             Me.PropertyPackage.CurrentMaterialStream.Validate()
@@ -708,6 +712,8 @@ Namespace UnitOperations
 
                     Me.DeltaP = P2 - Pi
 
+                    Pout = P2
+
                     If DebugMode Then AppendDebugLine(String.Format("Outlet Pressure: {0} Pa", P2))
 
                     Dim tmp As IFlashCalculationResult
@@ -806,6 +812,8 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a bubble point flash to calculate NPSH... T = {0} K, VF = 0", Ti))
 
+                    Pout = P2
+
                     Try
                         IObj?.SetCurrent()
                         Pbub = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.TemperatureVaporFraction, Ti, 0.0#, Pi).CalculatedPressure
@@ -871,6 +879,8 @@ Namespace UnitOperations
                     P2 = Pi + Me.DeltaP.GetValueOrDefault
                     CheckSpec(P2, True, "outlet pressure")
 
+                    Pout = P2
+
                     Me.DeltaQ = (P2 - Pi) / rho_li / 1000 / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
 
                     H2 = Hi + Me.DeltaQ / Wi
@@ -895,7 +905,6 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
                     Me.DeltaT = T2 - Ti
-
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a bubble point flash to calculate NPSH... P = {0} Pa, VF = 0", P2))
 

@@ -1256,7 +1256,6 @@ Partial Class FormDynamicsManager
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButton = False
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.Label13)
@@ -1264,6 +1263,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.chkDynamics)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.TabControl1)
+        Me.DoubleBuffered = True
         Me.Name = "FormDynamicsManager"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.TabControl1.ResumeLayout(False)

@@ -485,6 +485,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             c5.Enabled = pp is UNIQUACPropertyPackage || pp is NRTLPropertyPackage;
 
+            var c5a = this.CreateAndAddCheckBoxRow("Automatically Estimate Missing UNIQUAC/NRTL Interaction Parameters", pp.AutoEstimateMissingNRTLUNIQUACParameters, (chk, e) => {
+                pp.AutoEstimateMissingNRTLUNIQUACParameters = chk.Checked.GetValueOrDefault();
+            }, null);
+
+            c5a.Enabled = pp is UNIQUACPropertyPackage || pp is NRTLPropertyPackage;
+
             var c6 = this.CreateAndAddCheckBoxRow("Ignore Maximum Salinity Limit (Seawater Model only)", pp.IgnoreSalinityLimit, (chk, e) => {
                 pp.IgnoreSalinityLimit = chk.Checked.GetValueOrDefault();
             }, null);

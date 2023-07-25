@@ -26,8 +26,8 @@ Partial Class SplashScreen
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.LabelLicense = New System.Windows.Forms.Label()
         Me.lblCopyright = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.lblPatrons = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblVersion
@@ -52,14 +52,6 @@ Partial Class SplashScreen
         Me.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
         Me.lblCopyright.Name = "lblCopyright"
         '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
-        Me.Label2.Name = "Label2"
-        '
         'lblPatrons
         '
         resources.ApplyResources(Me.lblPatrons, "lblPatrons")
@@ -67,13 +59,20 @@ Partial Class SplashScreen
         Me.lblPatrons.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
         Me.lblPatrons.Name = "lblPatrons"
         '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
+        Me.Label1.Name = "Label1"
+        '
         'SplashScreen
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblPatrons)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblCopyright)
         Me.Controls.Add(Me.LabelLicense)
         Me.Controls.Add(Me.lblVersion)
@@ -90,6 +89,6 @@ Partial Class SplashScreen
     Public WithEvents lblVersion As System.Windows.Forms.Label
     Public WithEvents LabelLicense As System.Windows.Forms.Label
     Public WithEvents lblCopyright As System.Windows.Forms.Label
-    Public WithEvents Label2 As Label
     Public WithEvents lblPatrons As Label
+    Public WithEvents Label1 As Label
 End Class

@@ -1,0 +1,187 @@
+#Reference Text: https://ppcair.com/pdf/EPA%20Lesson%20Lesson%203%20-%20ESP%20Parameters%20and%20Efficiency.pdf
+#All units in SI units
+#This code uses Matts-Ohnfeldt relationship to calculate the efficicency of ESP 
+#The Matts-Ohnfeldt equation will reduce to Deutsch-Anderson equation for kExponent=1
+#All units are SI unit unless specified
+#The entered diameter units are to be in micrometer
+#Import statement
+from DWSIM.Thermodynamics import *
+import math
+from System import Array
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')
+from DotNumerics.ODE import *
+#Initializing values in input streams (Only one input stream for batch reactor)
+feed1=[0] #the array containing the properties of feed stream
+P1=[0] #array for Pressure of feed stream
+massflow1=[0] #array for total mass flow of feed stream
+molfrac1=[0] #array for molar fraction of feed stream
+molflow1=[0] #array for total molar flow of feed stream
+enthalpy1=[0] #array for the total enthalpy of feed stream
+T1=[0] #array for the temperature of feed stream
+#Extracting input from streams
+feed1[0] = ims1
+P1 = feed1[0].GetProp("pressure", "Overall", None, "", "")
+massflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+volflow1=feed1[0].GetProp("totalflow","Overall",None,"","volume")
+enthalpy1 = feed1[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mole")
+T1 = feed1[0].GetProp("temperature", "Overall", None, "", "")
+massfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mass")
+OverProp = feed1[0].GetPhase('Overall').Properties
+LiqProp=feed1[0].GetPhase('OverallLiquid').Properties
+VapProp=feed1[0].GetPhase('Vapor').Properties
+#Finding number of components:
+comp=len(molfrac1) #total number of species 
+#Number of ESP:
+n1=int(ParallelESP) #Number of similar ESP's in parallel
+n2=int(SeriesESP) #Number of similar ESP's in series
+#Defining Volume Flow rate
+Q=massflow1[0]/OverProp.density #Volume flow rate of feed stream
+#Defining Voltages
+Eo=[]  #Electric field strength near discharge electrode
+Eo=eval(FieldStrengthDisElectrode)
+Ep=[]  #Electric field strength near collection plate
+Ep=eval(FieldStrengthCollElectrode)
+#-------------------------------------
+#Normalization of mass fraction:
+mf=[] #Array containing mass fraction of particles of different sizes
+mf=eval(MassFrac) 
+size_mf=len(mf) #Number of ranges of particles
+dummy1=0 #dummy variable
+for i in range(0,size_mf): 
+ dummy1=dummy1+mf[i]
+for i in range(0,size_mf):
+ mf[i]=mf[i]/dummy1
+#-------------------------------------
+#Total mass of dust:
+ind=[] #Index of gaseous components in gas stream 
+ind=eval(AirIndex) 
+ng=len(ind) #Number of such gaseous components 
+MassAir=0 #Total mass of gaseous components in gas stream
+for i in range(0,ng):
+ MassAir=MassAir+massflow1[0]*massfrac1[ind[i]] #Mass flow rate of gas stream
+MassExcAir=massflow1[0]-MassAir #Mass of stream excluding gas stream i.e only particulate matter
+#-----------------------------------------
+visc=0
+#Finding viscosity
+if ViscEnter==1:
+ visc=Viscosity
+else:
+ visc=VapProp.viscosity #Viscosity of vapor if bulk fluid is vapor
+ if visc==None:
+  visc=LiqProp.viscosity #Viscosity of liquid if fluid is liquid
+#-------------------------------------------
+#Finding Molar weights
+MolarWeight=[0]*comp
+i=0
+for sub1 in feed1[0].GetPhase('Overall').Compounds.Values:
+        MolarWeight[i] = sub1.ConstantProperties.Molar_Weight/1000
+        i=i+1
+avgMW=0
+indmf=0
+for i in range(0,comp):
+ if i in ind:
+    indmf=indmf+molfrac1[i]
+for i in range(0,comp):
+ if i not in ind:
+  avgMW=avgMW + molfrac1[i]*MolarWeight[i]/(1-indmf)
+#-------------------------------------
+#Defining the diameter array, migration velocity:
+dia=[] #Array containing diameter of particle
+dia=eval(diam)
+avgdiam=[0 for i in range (0,size_mf)] #Defining the average velocity
+if ProvideRangeForDiam==1: #if the user will provide ranges for values of Diameter
+  for i in range(0,size_mf):
+   avgdiam[i]=(dia[i][0]+dia[i][1])/2.0*1e-6 #Multiplied by 10^-6 since entered diameter is to be entered in micro meter.
+else:
+ avgdiam=dia
+wavgdia=0
+for m in range(0,size_mf):
+    wavgdia=wavgdia+mf[m]*avgdiam[m]   
+#Note:- The input for diam if range is sprecified will be like [[[2,3],[3,4]],[[4,5],[5,6]]] for 2 compounds and 2 entries of range for each compound
+#----------------------------------------------------------------------
+#New Code:
+q=[] #Volume flow rate fraction divided between parallel ESP's
+q=eval(VolFR)
+Vpm=[[0 for i in range(0,n1)] for j in range(0,n2)] #migration velocity of particulate matter in different ESP's
+if EnterMigrationVelValue==1:
+ Vpm=[]
+ Vpm=eval(MigrationVel)
+Ar=[]
+k=[]
+k=eval(kExponent)
+Ar=eval(AreaCollectionElectrode)
+molp=[[[0 for i in range(0,size_mf)] for j in range(0,n1)] for m in range(0,n2+1)] #Mass as given by particle distribution entering ESP
+molr=[[[0 for i in range(0,size_mf)] for j in range(0,n1)] for m in range(0,n2)] #Mass as given by particle distribution exiting ESP
+for i in range(0,size_mf):
+ molp[0][0][i]=mf[i]*MassExcAir/2/avgMW
+ molp[0][1][i]=mf[i]*MassExcAir/2/avgMW
+for i in range(0,n1):
+ for j in range(0,n2):
+  eff=[0]*size_mf
+  if EnterMigrationVelValue==0:
+   Vpm[j][i]=wavgdia*Eo[j][i]*Ep[j][i]/(4.0*math.pi*visc)
+  for m in range(0,size_mf): 
+   eff[m]=1-math.exp(-(Vpm[j][i]/wavgdia*avgdiam[m]*Ar[j][i]/Q*n1)**k[j][i])
+   molr[j][i][m]=molp[j][i][m]*(eff[m])
+   molp[j+1][i][m]=molp[j][i][m]*(1-eff[m])
+tmassr1=[0]
+tmolr1=[0]
+tmassr2=[0]
+tmolr2=[0]
+massflowo1=[0]*size_mf
+for m in range(0,size_mf):
+    for i in range(0,n1):
+        for j in range(0,n2):
+            tmolr2[0]=tmolr2[0]+molr[j][i][m]
+            tmassr2[0]=tmassr2[0]+molr[j][i][m]*avgMW
+tmassr1[0]=massflow1[0]-tmassr2[0]
+tmolr1[0]=molflow1[0]-tmolr2[0]
+massfr1=[0]*comp
+molfr1=[0]*comp
+massfr2=[0]*comp
+molfr2=[0.0]*comp
+massc1=[0]*comp
+molc1=[0]*comp
+massc2=[0]*comp
+molc2=[0]*comp
+for i in range(0,comp):
+ if i not in ind:
+    molc2[i] = tmolr2[0]*molfrac1[i]/(1-indmf)
+    massc2[i] = molc2[i]*MolarWeight[i]
+    molc1[i]=molflow1[0]*molfrac1[i]-molc2[i]
+    massc2[i]=massflow1[0]*massfrac1[i]-massc2[i]
+    molfr2[i]=molc2[i]/tmolr2[0]
+    massfr2[i]=massc2[i]/tmassr2[0]
+    molfr1[i]=molc1[i]/tmolr1[0]
+    massfr1[i]=massc2[i]/tmassr1[0]
+ else:
+  massc1[i]=massflow1[0]*massfrac1[i]
+  molc1[i]=molflow1[0]*molfrac1[i]
+  molfr1[i]=molc1[i]/tmolr1[0]
+  massfr1[i]=massc1[i]/tmassr1[0]
+out1=[0]
+out1[0]=oms1
+out1[0].Clear()
+out1[0].ClearAllProps()
+out1[0].SetProp("totalFlow" ,"Overall", None, "", "mole",tmolr1)
+out1[0].SetProp("fraction" ,"Overall", None, "", "mole",molfr1)
+out1[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmassr1)
+out1[0].SetProp("temperature" ,"Overall", None, "", "",T1)
+out1[0].SetProp("pressure", "Overall", None, "", "",P1)  #Not able to set the desired pressure value
+out2=[0]
+out2[0]=oms2
+out2[0].Clear()
+out2[0].ClearAllProps()
+out2[0].SetProp("totalFlow" ,"Overall", None, "", "mole",tmolr2)
+out2[0].SetProp("fraction" ,"Overall", None, "", "mole",molfr2)
+out2[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmassr2)
+out2[0].SetProp("temperature" ,"Overall", None, "", "",T1)
+out2[0].SetProp("pressure", "Overall", None, "", "",P1)  #Not able to set the desired pressure value
+   
+  
+   
+  
+ 

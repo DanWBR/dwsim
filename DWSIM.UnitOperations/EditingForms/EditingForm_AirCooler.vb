@@ -174,13 +174,13 @@ Public Class EditingForm_AirCooler
             tbRefR.Text = .ReferenceFanSpeed.ToString(nf)
 
             tbNumberOfTubesPerShell.Text = .Tube_NumberPerShell
-            tbTubeDe.Text = Format(cv.ConvertFromSI(su.diameter, .Tube_De), nf)
-            tbTubeDi.Text = Format(cv.ConvertFromSI(su.diameter, .Tube_Di), nf)
+            tbTubeDe.Text = Format(cv.ConvertFromSI(su.diameter, .Tube_De / 1000.0), nf)
+            tbTubeDi.Text = Format(cv.ConvertFromSI(su.diameter, .Tube_Di / 1000.0), nf)
             tbTubeFoulingFactor.Text = cv.ConvertFromSI(su.foulingfactor, .Tube_Fouling)
             tbTubeLength.Text = Format(cv.ConvertFromSI(su.distance, .Tube_Length), nf)
             tbTubePassesPerShell.Text = .Tube_PassesPerShell
-            tbTubePitch.Text = Format(cv.ConvertFromSI(su.thickness, .Tube_Pitch), nf)
-            tbTubeRoughness.Text = cv.ConvertFromSI(su.diameter, .Tube_Roughness)
+            tbTubePitch.Text = Format(cv.ConvertFromSI(su.thickness, .Tube_Pitch / 1000.0), nf)
+            tbTubeRoughness.Text = cv.ConvertFromSI(su.diameter, .Tube_Roughness / 1000.0)
             tbTubeThermalCond.Text = cv.ConvertFromSI(su.thermalConductivity, .Tube_ThermalConductivity)
 
             rbUseGlobal.Checked = SimObject.UseGlobalWeather
@@ -212,13 +212,13 @@ Public Class EditingForm_AirCooler
             .ReferenceFanSpeed = tbRefR.Text.ParseExpressionToDouble
 
             .Tube_NumberPerShell = tbNumberOfTubesPerShell.Text.ParseExpressionToDouble
-            .Tube_De = cv.ConvertToSI(su.diameter, tbTubeDe.Text.ParseExpressionToDouble)
-            .Tube_Di = cv.ConvertToSI(su.diameter, tbTubeDi.Text.ParseExpressionToDouble)
-            .Tube_Roughness = cv.ConvertToSI(su.diameter, tbTubeRoughness.Text.ParseExpressionToDouble)
+            .Tube_De = cv.ConvertToSI(su.diameter, tbTubeDe.Text.ParseExpressionToDouble) * 1000.0
+            .Tube_Di = cv.ConvertToSI(su.diameter, tbTubeDi.Text.ParseExpressionToDouble) * 1000.0
+            .Tube_Roughness = cv.ConvertToSI(su.diameter, tbTubeRoughness.Text.ParseExpressionToDouble) * 1000.0
             .Tube_Fouling = cv.ConvertToSI(su.foulingfactor, tbTubeFoulingFactor.Text.ParseExpressionToDouble)
             .Tube_Length = cv.ConvertToSI(su.distance, tbTubeLength.Text.ParseExpressionToDouble)
             .Tube_PassesPerShell = tbTubePassesPerShell.Text.ParseExpressionToDouble
-            .Tube_Pitch = cv.ConvertToSI(su.thickness, tbTubePitch.Text.ParseExpressionToDouble)
+            .Tube_Pitch = cv.ConvertToSI(su.thickness, tbTubePitch.Text.ParseExpressionToDouble) * 1000.0
             .Tube_ThermalConductivity = cv.ConvertToSI(su.thermalConductivity, tbTubeThermalCond.Text.ParseExpressionToDouble)
 
         End With
@@ -416,7 +416,7 @@ Public Class EditingForm_AirCooler
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 

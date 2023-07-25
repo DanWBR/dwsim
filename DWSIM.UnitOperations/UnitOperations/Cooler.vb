@@ -569,11 +569,7 @@ Namespace UnitOperations
 
                     IObj?.SetCurrent()
                     Dim tmp As IFlashCalculationResult
-                    If OutletTemperature < Ti Then
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, OutletTemperature)
-                    Else
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, Ti * 0.8)
-                    End If
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, 0.0)
 
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")

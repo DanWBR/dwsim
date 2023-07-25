@@ -195,7 +195,6 @@ Partial Class FormReportConfig
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormReportConfig"
-        Me.ShowInTaskbar = False
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()

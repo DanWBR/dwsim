@@ -139,6 +139,8 @@ Public Class FormSensAnalysis
 
         form.WriteToLog(DWSIM.App.GetLocalTipString("FSAN001"), Color.Black, MessageType.Tip)
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Function ReturnProperties(ByVal objectTAG As String, ByVal dependent As Boolean) As String()

@@ -173,9 +173,13 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
         {
-
+            var oldzoom = fsurface.Zoom;
             fsurface.Zoom += e.Delta / 4 / 100.0f;
             if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
+            var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
+            var X = (int)e.GetPosition(this).X*(int)m.M11;
+            var Y = (int)e.GetPosition(this).Y* (int)m.M22;
+            fsurface.CenterTo(oldzoom, X, Y, (int)Width, (int)Height);
             this.InvalidateVisual();
         }
 

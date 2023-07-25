@@ -33,16 +33,31 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "2A322AB7-2256-495d-86C7-797AD19FDE22"
 
-        Public MAT_KIJ(38, 38) As Object
+        Private KijMatrix As Double(,)
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
-        Public ip(,) As Double
+
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
+        Public Overrides ReadOnly Property DisplayName As String = "Peng-Robinson"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses the Peng-Robinson Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables at high pressures."
 
         Public Sub New(ByVal comode As Boolean)
 
             MyBase.New(comode)
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Liquid_Fugacity = "Peng-Robinson EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Vapor_Density = "Peng-Robinson EOS (+VT)"
+                .Liquid_Density = "Peng-Robinson EOS (+VT) / Experimental / Rackett / COSTALD"
+            End With
 
         End Sub
 
@@ -52,6 +67,15 @@ Namespace PropertyPackages
 
             IsConfigurable = True
             _packagetype = PropertyPackages.PackageType.EOS
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Liquid_Fugacity = "Peng-Robinson EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson EOS"
+                .Vapor_Density = "Peng-Robinson EOS (+VT)"
+                .Liquid_Density = "Peng-Robinson EOS (+VT) / Experimental / Rackett / COSTALD"
+            End With
 
         End Sub
 
@@ -499,6 +523,33 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
+            If KijMatrix.Length = 0 Then
+
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
+
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
+
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
+                Next
+
+                Return val
+
+            Else
+
+                Return KijMatrix
+
+            End If
+
+        End Function
+
+        Private Sub SetKijMatrix()
+
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
 
@@ -512,12 +563,18 @@ Namespace PropertyPackages
                 Next
             Next
 
-            ip = val
-            m_pr.BIPChanged = False
+            KijMatrix = val
 
-            Return val
+        End Sub
 
-        End Function
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+
+            If AreModelParametersDirty Or KijMatrix Is Nothing OrElse KijMatrix.Length = 0 Or Not Settings.LockModelParameters Then
+                SetKijMatrix()
+                AreModelParametersDirty = False
+            End If
+
+        End Sub
 
         Public Function AUX_CM(ByVal Vx As Object) As Double
 
@@ -626,7 +683,7 @@ Namespace PropertyPackages
 
             If OverrideEnthalpyCalculation Then
 
-                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -680,7 +737,7 @@ Namespace PropertyPackages
 
             If OverrideEntropyCalculation Then
 
-                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 

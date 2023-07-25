@@ -6,4 +6,6 @@
 
     Sub Initialize()
 
+    Sub SetMainForm(f As Object)
+
 End Interface

@@ -1,0 +1,140 @@
+#COUNTER CURRENT STAGE WISE ADSORPTION TOWER
+
+#********************************************************************************************
+#****IMPORTANT: MAKE SURE THAT THE ORDER IS SOLVENT-SOLUTE-ADSORBENT IN THE INPUT STREAMS****
+#********************************************************************************************
+
+#INPUTS REQUIRED: 1. FEED STREAMS (SOLUTION TO BE TREATED AND ADSORBENT COMPOSITIONS)
+#                 2. FREUNDLICH PARAMETERS FOR THE SYSTEM
+#                 3. NUMBER OF STAGES IN THE TOWER
+
+#ISOTHERMAL PROCESS IS ASSUMED
+
+#THE CODE DOESNOT DIFFERENTIATE BETWEEN LIQUID AND GASEOUS STATES i.e, IF THE INPUT STREAM
+# HAS 90% LIQUID AND 10% GAS, THEN THE CODE WILL APPLY THE ADSORPTION PROCESS FOR BOTH PHASES.
+
+#TOLERENCE IN THE RESULT 0.005 FOR THE SOLUTE FREE BASIS MOLE FRACTIONS
+#YOU MAY VARY THE TOLERANCE VALUE GIVEN IN THE VARIABLE 'tol' IN LINE 25, BUT THE TIME
+#REQUIRED TO SOLVE THE FLOWSHEET MAY INCREASE SUBSTANTIALLY. MOREOVER THIS WILL NOT EFFECT
+#MASS BALANCES SIGNIFICANTLY.
+
+
+from DWSIM.Thermodynamics import *
+import math
+
+tolerance = 0.00001 #tolerance can be adjusted 'with caution'
+
+
+N = int(Number_of_stages_N+1)
+m = Freundlich_parameter_m
+n = Freundlich_parameter_n
+
+# EXTRACTING INPUT CONDITIONS
+feed = ims1
+adsorbent_in = ims2
+
+molflow_1 = feed.GetProp("totalFlow","Overall",None,"","mole")
+molflow_2 = adsorbent_in.GetProp("totalFlow","Overall",None,"","mole")
+#r = molflow_1[0]
+
+mol_1 = feed.GetProp("fraction","Overall",None,"","mole")
+mol_2 = adsorbent_in.GetProp("fraction","Overall",None,"","mole")
+
+Pin_1 = feed.GetProp("pressure","Overall",None," ", "")
+Pin_2 = adsorbent_in.GetProp("pressure","Overall",None," ", "")
+
+temp_1 = feed.GetProp("temperature","Overall",None," ", "")
+temp_2 = adsorbent_in.GetProp("temperature","Overall",None," ", "")
+
+y0 = feed.GetProp("fraction","Overall",None,"","mass")
+xf = adsorbent_in.GetProp("fraction","Overall",None,"","mass")
+
+flow_feed = feed.GetProp("totalFlow","Overall",None,"","mass")
+flow_adsorbent = adsorbent_in.GetProp("totalFlow","Overall",None,"","mass")
+
+Mol_wt_1 = y0[0]*flow_feed[0]/(mol_1[0]*molflow_1[0])
+Mol_wt_2 = y0[1]*flow_feed[0]/(mol_1[1]*molflow_1[0])
+Mol_wt_3 = xf[2]*flow_adsorbent[0]/(mol_2[2]*molflow_2[0])
+
+#CONVERTING FLOW RATES AND MOLE FRACTIONS INTO SOLUTE FREE BASIS FOR THE CALCULATIONS
+Solute_free_flow_rate_solution_Ls = y0[0] * flow_feed[0]
+Solute_free_flow_rate_adsorbent_Ss = xf[2] * flow_adsorbent[0]
+
+
+#FINDING VARIOUS COMPOSITIONS
+#THE IDEA TO GUESS THE FINAL CONCENTRATION IN THE ADSORBENT i.e., X1 AND ESTIMATING THE VALUE BY NEWTON'S METHOD
+
+X_dummy = (999*pow((y0[1]/(1-y0[1]))/m,1/n)+(xf[1]/(1-xf[1])))/1000 #the dummy variable which stores the guess value
+X_estimate_final_stage = (xf[1]/(1-xf[1]))+tolerance+0.001 #initiating the variable which will be compared to Xf to check if Xt is correct
+
+Y = [0]*(N)
+Y[0] = (y0[1]/(1-y0[1]))
+X = [0]*(N)
+
+while abs(X_estimate_final_stage-(xf[1]/(1-xf[1]))) > tolerance:
+    X[0]= X_dummy
+    
+    for iter in range(1,N):
+        Y[iter] = m*pow(X[iter-1],n)
+        X[iter] = X_dummy + Solute_free_flow_rate_solution_Ls*(Y[iter]-(y0[1]/(1-y0[1])))/Solute_free_flow_rate_adsorbent_Ss
+
+    X_estimate_final_stage = X[N-1]
+
+    if X_estimate_final_stage<(xf[1]/(1-xf[1])):
+        X_dummy = (9999*pow((y0[1]/(1-y0[1]))/m,1/n)+X_dummy)/10000
+    elif X_estimate_final_stage>(xf[1]/(1-xf[1])):
+        X_dummy = ((xf[1]/(1-xf[1]))+9999*X_dummy)/10000
+
+
+#MASS FRATCIONS AND FLOW RATES IN OUTPUT STREAMS
+yn = [1/(1+Y[N-1]), Y[N-1]/(1+Y[N-1]), 0.0]  #vector which stores the final compositions
+x1 = [0.0, X[0]/(1+X[0]), 1/(1+X[0])]  #vector which stores composition of used adsorbent
+#final_mass_fraction_solute_in_adsorbent = x1[2]
+
+flow_finalsolution = [Solute_free_flow_rate_solution_Ls*(1+Y[N-1])]
+flow_spentadsorbent = [Solute_free_flow_rate_adsorbent_Ss*(1+X[0])]
+
+molflow_finalsolution = [(yn[0]*flow_finalsolution[0]/Mol_wt_1)+(yn[1]*flow_finalsolution[0]/Mol_wt_2)+(yn[2]*flow_finalsolution[0]/Mol_wt_3)]
+molflow_spentadsorbent = [(x1[0]*flow_spentadsorbent[0]/Mol_wt_1)+(x1[1]*flow_spentadsorbent[0]/Mol_wt_2)+(x1[2]*flow_spentadsorbent[0]/Mol_wt_3)]
+
+yn_mole = [(flow_finalsolution[0]/molflow_finalsolution[0])*yn[0]/Mol_wt_1, (flow_finalsolution[0]/molflow_finalsolution[0])*yn[1]/Mol_wt_2, (flow_finalsolution[0]/molflow_finalsolution[0])*yn[2]/Mol_wt_3]
+x1_mole = [(flow_spentadsorbent[0]/molflow_spentadsorbent[0])*x1[0]/Mol_wt_1, (flow_spentadsorbent[0]/molflow_spentadsorbent[0])*x1[1]/Mol_wt_2, (flow_spentadsorbent[0]/molflow_spentadsorbent[0])*x1[2]/Mol_wt_3]
+
+#Flash calculations
+P_finalsolution = [0]
+P_spentadsorbent = [0]
+
+temp_finalsolution = [(temp_1[0]+temp_2[0])/2]
+temp_spentadsorbent = [(temp_1[0]+temp_2[0])/2]
+
+P_finalsolution[0] = (flow_finalsolution[0]/(flow_finalsolution[0]+flow_spentadsorbent[0]))*(Pin_1[0]*flow_feed[0] + Pin_2[0]*flow_adsorbent[0])/(flow_feed[0]+flow_adsorbent[0])
+P_spentadsorbent[0] = (flow_spentadsorbent[0]/(flow_finalsolution[0]+flow_spentadsorbent[0]))*(Pin_1[0]*flow_feed[0] + Pin_2[0]*flow_adsorbent[0])/(flow_feed[0]+flow_adsorbent[0])
+
+
+#ASSIGNING OUTPUTS
+finalsol = oms1
+adsorbent_spent = oms2
+
+finalsol.Clear()
+adsorbent_spent.Clear()
+
+finalsol.SetProp("fraction","Overall",None,"","mass",yn) 
+adsorbent_spent.SetProp("fraction","Overall",None,"","mass",x1)
+
+finalsol.SetProp("fraction","Overall",None,"","mole",yn_mole) 
+adsorbent_spent.SetProp("fraction","Overall",None,"","mole",x1_mole)
+
+finalsol.SetProp("totalFlow","Overall",None,"","mole",molflow_finalsolution)
+adsorbent_spent.SetProp("totalFlow","Overall",None,"","mole",molflow_spentadsorbent)
+
+finalsol.SetProp("totalFlow","Overall",None,"","mass",flow_finalsolution)
+adsorbent_spent.SetProp("totalFlow","Overall",None,"","mass",flow_spentadsorbent)
+
+finalsol.SetProp("pressure","Overall",None,"","",P_finalsolution)
+adsorbent_spent.SetProp("pressure","Overall",None,"","",P_spentadsorbent)
+
+finalsol.SetProp("temperature","Overall",None,"","",temp_finalsolution)
+adsorbent_spent.SetProp("temperature","Overall",None,"","",temp_spentadsorbent)
+
+finalsol.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T,PropertyPackages.FlashSpec.P)
+adsorbent_spent.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T,PropertyPackages.FlashSpec.P)

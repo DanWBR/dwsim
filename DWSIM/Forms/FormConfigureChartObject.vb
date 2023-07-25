@@ -121,4 +121,7 @@ Public Class FormConfigureChartObject
         End If
     End Sub
 
+    Private Sub FormConfigureChartObject_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

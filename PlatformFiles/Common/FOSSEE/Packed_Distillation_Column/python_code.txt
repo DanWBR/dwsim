@@ -1,0 +1,548 @@
+import clr
+clr.AddReference("System.Windows.Forms")
+clr.AddReference("DWSIM.Interfaces") # this is required to set the stream flash specification
+from System import Array
+import math
+import sys
+
+from DWSIM import * # DWSIM namespace is imported automatically by the script tool
+from System.Windows.Forms import MessageBox
+#MessageBox.Show(str(Q[0]))
+
+#Description of variables:
+
+##SCRIPTING VARIABLES
+'''
+choice: choice according to user
+D_: distillate flow rate (mol/s)
+x_D_:distillate composition
+B_: bottoms flow rate
+x_B_: bottoms compisition
+The above 4 variables are followed by underscore to indicate that they are not yet activated.
+They will be used appropriately only when the input 'choice' requires them
+flow_split_D: value of flow split:  distillate
+flow_split_B: value of flow split:  bottoms
+q: degree of saturation
+R_factor: R/Rmin
+T_B_: Initital estimate of bottoms temperature
+T_D_: Initital estimate of distillate temperature
+The above 2 values are required for computation of enthalpy
+
+PARAMETERS OF PACKING
+d_p:diameter of particle
+alpha
+beta 
+'''
+
+
+#***************************TAKING INPUT AND MATERIAL AND ENERGY BALANCE:*************************************
+#getting feed properties
+feed=ims1
+F = feed.GetProp("totalFlow","Overall", None, "", "mole")
+#MessageBox.Show(str(F[0]))
+z = feed.GetProp("fraction", "Overall", None, "", "mole")
+H_F = feed.GetProp("enthalpy" ,"Overall", None, "Mixture", "mole") #enthalpy
+T_F = feed.GetProp("temperature", "Overall", None, "", "") 	# K
+P_F = feed.GetProp("pressure", "Overall", None, "", "") 		# Pa
+
+#choice=1 # choice of input
+Flowsheet.ShowMessage(str(choice), 0, "")
+delp=0.5 # inches of water per foot  
+feed1=[0]
+feed1[0]=ims1
+#####################values of property data#########33
+
+
+
+compIds=[comp1,comp2]
+props = ['idealgasheatcapacity']
+Cp= feed.GetTDependentProperty(props, T_F[0], compIds, None)
+
+
+compound = Flowsheet.SelectedCompounds[comp1]
+mw1= compound.Molar_Weight
+compound = Flowsheet.SelectedCompounds[comp2]
+mw2=compound.Molar_Weight
+mw=[mw1,mw2]
+
+
+props = ['vaporpressure']
+vp = feed.GetTDependentProperty(props, T_F[0], compIds, None)
+PaVap=vp[0]
+PbVap=vp[1]
+
+
+##initializing#############33
+
+L=[0]
+V=[0]
+D=[0]
+B=[0]
+x_B=[0]
+H_D=[0]
+H_D[0]=0.
+H_B=[0]
+H_B[0]=0.
+#############################
+
+
+T_B=[0]
+#T_B[0]=110.6+273.15 #383.75  #boiling point toluene # NEED TO CHANGE THIS APPROPRIATELY
+T_B[0]=T_B_
+if (T_B_<100):
+    compound = Flowsheet.SelectedCompounds[comp2]
+    propval = compound.Normal_Boiling_Point
+
+
+'''
+props = ['bubbletemperature']
+bp = feed.GetTDependentProperty(props, T_F[0], compIds, None)
+MessageBox.Show(str(bp))
+#PaVap=vp[0]
+#PbVap=vp[1]
+stop
+'''
+T_D=[0]
+#T_D[0]=80.1+273.15  #boiling point benzene # NEED TO CHANGE THIS APPROPRIATELY
+T_D[0]=T_D_
+if (T_D_<100):
+    compound = Flowsheet.SelectedCompounds[comp1]
+    propval = compound.Normal_Boiling_Point
+#MessageBox.Show(str(propval))
+#stop
+
+
+#the following definitions are to specify the corresponding values for different choices of input
+def x_D_given(D,B,x_D):
+    x_B=[(F[0]*z[0]-D[0]*x_D[0])/B[0],(F[0]*z[1]-D[0]*x_D[1])/B[0]]
+    if(x_B[0]*x_B[1]<0):
+        MessageBox.Show(str("INVALID INPUT!! THIS SEPARATION CANNOT BE ACHIEVED. PLEASE ENTER CORRECT INPUT"))
+        sys.exit()
+       
+    else:
+        return x_B
+
+def x_B_given(D,B,x_B):
+    x_D=[(F[0]*z[0]-B[0]*x_B[0])/D[0],(F[0]*z[1]-B[0]*x_B[1])/D[0]]  
+    if(x_D[0]*x_D[1]<0):
+        MessageBox.Show(str("INVALID INPUT!! THIS SEPARATION CANNOT BE ACHIEVED. PLEASE ENTER CORRECT INPUT"))
+        sys.exit()
+        
+    else:
+        return x_D
+
+def D_given(D):
+    B[0]=F[0]-D[0]
+    if(B[0]<0):
+        MessageBox.Show(str("INVALID INPUT!! THIS SEPARATION CANNOT BE ACHIEVED. PLEASE ENTER CORRECT INPUT"))
+        sys.exit()
+        
+    else:
+        return B[0]
+
+def B_given(B):
+    D[0]=F[0]-B[0] 
+    if(D[0]<0):
+        MessageBox.Show(str("INVALID INPUT!! THIS SEPARATION CANNOT BE ACHIEVED. PLEASE ENTER CORRECT INPUT"))
+        sys.exit()
+        
+    else:
+        return D[0]
+
+
+if (choice==1):  #distillate flow, x_D rate given
+   
+    D[0]=D_
+    x_D=[x_D_,1-x_D_]
+    B[0]=D_given(D)
+    x_B=x_D_given(D,B,x_D)
+    
+
+if (choice==2):#distillate flow rate, x_B  given
+    D[0]=D_
+    x_B=[x_B_,1-x_B_]  
+    B[0]=D_given(D)
+    x_D=x_B_given(D,B,x_B)
+    
+
+if (choice==3):#bottoms flow rate, x_D given
+    B[0]=B_
+    x_D=[x_D_,1-x_D_]
+    D[0]=B_given(B)
+    x_B=x_D_given(D,B,x_D)
+
+if(choice==4):#bottoms flow rate, x_B given
+    B[0]=B_
+    x_B=[x_B_,1-x_B_]  
+    D[0]=B_given(B)
+    x_D=x_B_given(D,B,x_B)
+
+if(choice==5): #flow split_dist, x_D given
+    D[0]=flow_split_D*F[0]
+    
+    x_D=[x_D_,1-x_D_]
+    B[0]=D_given(D)
+    x_B=x_D_given(D,B,x_D)
+    
+if(choice==6): #flow split_dist, x_B given
+    D[0]=flow_split_D*F[0]
+    x_B=[x_B_,1-x_B_]  
+    B[0]=D_given(D)
+    x_D=x_B_given(D,B,x_B)
+
+if(choice==7): #flow split_bottom, x_D given
+    B[0]=flow_split_B*F[0]
+    x_D=[x_D_,1-x_D_]
+    D[0]=B_given(B)
+    x_B=x_D_given(D,B,x_D)
+
+if(choice==8): #flow split_bottom, x_B given
+    B[0]=flow_split_B*F[0]
+    x_B=[x_B_,1-x_B_]  
+    D[0]=B_given(B)
+    x_D=x_B_given(D,B,x_B)
+
+###############need to check#####################
+H_D_total=[0]
+H_B_total=[0]
+H_D_total[0]=D[0]*(x_D[0]*Cp[0]+x_D[1]*Cp[1])*(T_D[0]-T_F[0])+H_F[0]*F[0]# reference temp=T_F
+H_B_total[0]=B[0]*(x_B[0]*Cp[0]+x_B[1]*Cp[1])*(T_B[0]-T_F[0])+H_F[0]*F[0] # reference temp=T_F
+H_D[0]=H_D_total[0]/D[0]
+H_B[0]=H_B_total[0]/B[0]
+
+#MessageBox.Show(str(H_F[0]*F[0]))
+#stop
+#################################################
+
+
+#******************FINDING HYPOTHETICAL NUMBER OF STAGES (HETP) using MCCabe Thiele Plot:***************************
+def eq_og(xa,relative_volatility):
+#for array
+    ''' 
+    DESCRIPTION
+    Returns equilibrium data from an input 
+    of liquid composition (xa) and relative volatility
+'''
+    n=xa.Length
+    ya=Array[float](range(n))
+    for i in range(0,n):
+        ya[i]=(relative_volatility*xa[i])/(1+(relative_volatility-1)*xa[i])
+    # ya found using Dalton and Raoults laws
+    return ya
+
+
+
+def eq(xa,relative_volatility,nm):
+# for float
+    ''' 
+    DESCRIPTION
+    Returns equilibrium data from an input 
+    of liquid composition (xa) and relative volatility
+    accounting for the Murphree Efficiency of the 
+    system
+    '''
+    n=xa.Length
+    ya=Array[float](range(n))
+    for i in range(0,n):
+        ya[i]=(relative_volatility*xa[i])/(1+(relative_volatility-1)*xa[i])
+    # ya found using Dalton and Raoults laws
+    #ya[i]=((ya[i]-xa[i])*nm)+xa[i] # using definition of murphree efficiency 
+    return ya
+
+def eq_num(xa,relative_volatility,nm):
+#for float number , not array
+    ''' 
+    DESCRIPTION
+    Returns equilibrium data from an input 
+    of liquid composition (xa) and relative volatility
+    accounting for the Murphree Efficiency of the 
+    system
+    '''
+    ya=(relative_volatility*xa)/(1+(relative_volatility-1)*xa)
+    # ya found using Dalton and Raoults laws
+    #ya=((ya-xa)*nm)+xa # using definition of murphree efficiency 
+    return ya
+
+def eq2mod_num(ya,relative_volatility,nm): #eqn 2 without murphrey efficiency
+#for float number only
+    xa=ya/(-ya*relative_volatility+ya+relative_volatility)
+    return xa
+
+def eq2mod(ya,relative_volatility,nm): #eqn 2 without murphrey efficiency
+#for float array only
+    n=ya.Length
+    ya=Array[float](range(n))
+    for i in range(0,n):
+        xa[i]=ya[i]/(-ya[i]*relative_volatility+ya[i]+relative_volatility)
+    return xa
+
+def stepping_ESOL(x1,y1,relative_volatility,R,xd):
+    '''
+    DESCRIPTION:
+    Performs a single step over the ESOL
+    operating line.
+
+    INPUTS: 
+    x1                      : Initial liquid composition on ESOL
+    y1                      : Initial vapour composition on ESOL
+    relative_volatility     : Relative Volatility
+    R                       : Reflux Ratio
+    xd                      : Distillate Composition
+
+    OUTPUTS: 
+    x1      : Initial liquid composition 
+    x2      : Liquid composition after stepping
+    y1      : Initial vapour composition
+    y2      : Vapour composition after stepping
+
+    '''
+    x2=eq2mod_num(y1,relative_volatility,nm) #getting new liquid comp 
+    y2=(((R*x2)/(R+1))+(xd/(R+1))) #ESOL equation #operating line
+    return x1,x2,y1,y2
+
+def stepping_SSOL(x1,y1,relative_volatility,ESOL_q_x,ESOL_q_y,xb):
+    '''
+    DESCRIPTION:
+    Performs a single step over the SSOL
+    operating line.
+
+    INPUTS: 
+    x1                      : Initial liquid composition on ESOL
+    y1                      : Initial vapour composition on ESOL
+    relative_volatility     : Relative Volatility
+    ESOL_q_x                : Point at which ESOL intersects q-line (x)
+    ESOL_q_y                : Point at which ESOL intersects q-line (y)
+    xb                      : Bottoms composition 
+
+    OUTPUTS: 
+    x1      : Initial liquid composition 
+    x2      : Liquid composition after stepping
+    y1      : Initial vapour composition
+    y2      : Vapour composition after stepping
+
+    '''
+    x2=eq2mod_num(y1,relative_volatility,nm) # getting new liquid comp
+    m=((xb-ESOL_q_y)/(xb-ESOL_q_x)) # gradient of SSOL
+    c=ESOL_q_y-(m*ESOL_q_x) # intercept of SSOL
+    y2=(m*x2)+c # SSOL equation in form 'y=mx+c'
+    return x1,x2,y1,y2
+
+def McCabeThiele(PaVap,PbVap,R_factor,xf,xd,xb,q,nm):
+    '''
+    DESCRIPTION: 
+    Performs the McCabe-Thiele construction in order to calculate
+    optimum number of stages, and optimum feed stage. Also taking into 
+    account the Murphree Efficiency of the system. 
+
+    INPUTS: 
+    PaVap       :Vapour pressure of component a (more volatile)
+    PbVap       :Vapour pressure of component b (less volatile)
+    R_factor    :Amount Rmin is scaled by to obtain the actual reflux ratio
+    xf          :Feed composition 
+    xd          :Distillate composition 
+    xb          :Bottoms composition 
+    q           :Liquid fraction of feed
+    nm          :Murphree Efficiency
+
+    OUTPUTS: 
+    Optimum number of equilibrium stages, actual reflux ratio
+'''
+    # Ensuring divide by zero errors don't occur 
+    if q==1:
+        q-=0.00000001
+    if q==0:
+        q+=0.00000001
+    relative_volatility=PaVap/PbVap #obtaining relative volatility from definition 
+    xa=Array[float](range(100))  #np.linspace(0,1,100) #creating x-axis
+    
+    ya_og=eq_og(xa,relative_volatility) #getting original equilibrium data
+    ya_eq=eq(xa,relative_volatility,nm) #getting modified equilibrium data 
+    # taking into account the Murphree Efficiency 
+
+    x_line=xa #creating data-points for y=x line
+    y_line=xa
+    
+    # finding where the q-line intersects the equilibrium curve 
+    # takes the form of a quadratic equation 
+    al=relative_volatility
+    a=((al*q)/(q-1))-al+(al*nm)-(q/(q-1))+1-nm
+    b=(q/(q-1))-1+nm+((al*xf)/(1-q))-(xf/(1-q))-(al*nm)
+    c=xf/(1-q)
+
+    if q>1:
+        q_eqX=(-b+math.sqrt((b**2)-(4*a*c)))/(2*a)
+    else: 
+        q_eqX=(-b-math.sqrt((b**2)-(4*a*c)))/(2*a)
+    # where the q-line intersects the equilibrium curve (x-axis)
+    q_eqy=eq_num(q_eqX,relative_volatility,nm)
+    # where the q-line intersects the equilibrium curve (y-axis)
+
+    theta_min=xd*(1-((xd-q_eqy)/(xd-q_eqX))) # ESOL y-intercept to obtain Rmin
+    R_min=(xd/theta_min)-1 # finding Rmin
+    
+    R=R_factor*R_min # multiplying by R_factor to obtain R
+    theta=(xd/(R+1)) # finding new ESOL y-intercept
+
+    ESOL_q_x=((theta-(xf/(1-q)))/((q/(q-1))-((xd-theta)/xd)))
+    # Where the new ESOL intercepts the q-line (x-axis)
+    ESOL_q_y=(ESOL_q_x*((xd-theta)/xd))+theta
+    # Where the new ESOL intercepts the q-line (y-axis)
+    x1,x2,y1,y2=stepping_ESOL(xd,xd,relative_volatility,R,xd)
+    step_count=1 # current number of equilibrium stages
+    while x2>ESOL_q_x: # up until the q-line, step down
+        x1,x2,y1,y2=stepping_ESOL(x2,y2,relative_volatility,R,xd)
+         
+        step_count+=1 # incrementing equilibrium stage count 
+        
+    feed_stage=step_count # obtaining optimum feed stage
+    x1,x2,y1,y2=stepping_SSOL(x1,y1,relative_volatility,ESOL_q_x,ESOL_q_y,xb)
+    step_count+=1
+    while x2>xb: # while the composition is greater than desired
+        x1,x2,y1,y2=stepping_SSOL(x2,y2,relative_volatility,ESOL_q_x,ESOL_q_y,xb)
+        # continue stepping...
+        step_count+=1 #increment equilibrium stage counter
+    xb_actual=x2 
+    stages=step_count-1
+    return stages,R
+
+
+
+xd=x_D[0]     # Distillate composition 
+xb=x_B[0]     # Bottoms composition 
+#MessageBox.Show(str(xb))
+
+nm=1   #Murphree Efficiency
+relative_volatility=PaVap/PbVap
+[stages,R]=McCabeThiele(PaVap,PbVap,R_factor,z[0],xd,xb,q,nm)
+
+if(R<0):
+        MessageBox.Show(str("INVALID INPUT!! INVALID MINIMUM REFLUX. PLEASE ENTER CORRECT INPUT"))
+        sys.exit()
+
+MessageBox.Show('Equivalent number of stages '+str(stages))
+
+
+L[0]=R*D[0]
+V[0]=(R+1)*D[0]
+
+
+x=Array[float](range(100)) 
+y=Array[float](range(100)) 
+der=Array[float](range(100)) 
+n=x.Length
+y[0]=eq_num(x[0]/100,relative_volatility,1)
+
+y[1]=eq_num(x[1]/100,relative_volatility,1)
+der[0]=(y[1]-y[0])/((x[1]-x[0]))
+sum=der[0]
+
+#finding m_a=average of slope of eqlbm curve
+for i in range(1,n-1):
+    y[i+1]=eq_num(x[i+1]/100,relative_volatility,1)    
+    der[i]=(y[i+1]-y[i-1])*100/(2*(x[i+1]-x[i-1]))    
+    sum=der[i]+sum
+
+y[n-1]=eq_num(x[n-1]/100,relative_volatility,1)
+der[n-1]=(y[n-1]-y[n-2])*100/(2*(x[n-1]-x[n-2]))
+sum=sum+der[n-1]
+m_a=sum/n
+
+#d_p=0.025 #55.5 mm diameter packing
+###############check HETP correlation##############33333
+HETP_factor=(28*d_p*m_a*(R/(R+1))*((1/2.4)**(1.0/3.0)))  #  Granville equation 
+###################################3333
+
+H=((stages+1)*HETP_factor)**(3.0/2.0) #meter
+MessageBox.Show('Height = '+str(H)+' m')
+
+
+H_foot=H*3.28 #feet
+pressure_drop_actual=delp*248.84*H_foot #Pa
+
+
+
+#######################################################
+
+# FINDING COLUMN DIAMETER:
+#Reference: Wankat pg 414
+
+#packing properties:
+#alpha=16
+factor=R/(R+1) #L/V
+#Ldash=factor*Gdash
+
+#rho_G=0.076474252*2.77 #lb/ft3 #density of benzene vapour #air density*relative density
+
+rho_G=(P_F[0]/101325)*mw[0]/(1.314*T_D[0]) #lb/ft3
+
+a=delp*rho_G/alpha
+b=beta*factor
+Gdash_guess=0.360
+
+#functions for implementing newton raphson
+def func(x):
+    f=(x**2)*(10**(b*x))-a  #correlation from Wankat book
+    return f
+def derfunc(x):
+    der=2.303*b*(x**2)*(10**(b*x))+2*x*(10**(b*x))
+    return der
+# Function to find the solution 
+def newtonRaphson( x ): 
+    h = func(x) / derfunc(x) 
+    count=1  
+    while abs(h) >= 0.0001:        
+        h = func(x)/derfunc(x)         
+        x = x - h 
+        count=count+1
+    return x
+
+Gdash=newtonRaphson(Gdash_guess) #in lb/s-ft2
+Gdash_SI=Gdash*4.882431   #in kg/s-m2
+
+
+area=V[0]*(mw[0]/1000)/Gdash_SI
+#MessageBox.Show(str(area))
+if(area<0):
+        MessageBox.Show(str("INVALID INPUT-AREA IS NEGATIVE !! PLEASE ENTER CORRECT INPUT"))
+        sys.exit()
+
+dia=(4*area/3.14)**0.5 #in ft
+dia_m=dia*0.3048 #in metres
+MessageBox.Show('Diameter = '+str(dia_m)+' m')
+
+
+#PREESSURE CALCULATION OF DISTILLATE AND BOTTOM
+P_D=[0]
+P_B=[0]
+P_D[0]=P_F[0]-pressure_drop_actual  # not sure about this
+P_B[0]=P_F[0]
+
+
+
+
+#ASSIGNING PARAMETER VALUES TO OUTPUT STREAMS
+
+dist=oms1
+dist.ClearAllProps()
+#d = dist.GetPhase('Overall')
+#d.Properties.temperature = T_B[0] 
+
+dist.SetProp("temperature", "Overall", None, "", "", T_D) 
+
+dist.SetProp("pressure", "Overall", None, "", "", P_D)
+dist.SetProp("enthalpy", "Overall", None, "", "mole", H_D)
+dist.SetProp("totalFlow", "Overall", None, "", "mole", D)
+dist.SetProp("fraction", "Overall", None, "", "mole", x_D)
+
+bottom=oms2
+bottom.ClearAllProps()
+#b = bottom.GetPhase('Overall')
+#b.Properties.temperature = T_B[0] # set temperature to 200 K
+bottom.SetProp("temperature", "Overall", None, "", "", T_B)
+bottom.SetProp("pressure", "Overall", None, "", "", P_B)
+bottom.SetProp("enthalpy", "Overall", None, "", "mole", H_B)
+bottom.SetProp("totalFlow", "Overall", None, "", "mole", B)
+bottom.SetProp("fraction", "Overall", None, "", "mole", x_B)
+
+dist.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+bottom.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy

@@ -15,6 +15,8 @@ Public Class ObjectEditorForm
 
     Private DisplayTime As DateTime
 
+    Public Overridable ReadOnly Property Modular As Boolean = False
+
     Public Function GetAllChildren(control As Control) As IEnumerable(Of Control)
         Dim controls = control.Controls.Cast(Of Control)
         Return controls.SelectMany(Function(ctrl) GetAllChildren(ctrl)).Concat(controls)

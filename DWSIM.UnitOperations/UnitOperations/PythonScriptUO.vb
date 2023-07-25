@@ -250,7 +250,6 @@ Namespace UnitOperations
                 engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
                 scope = engine.CreateScope()
                 scope.SetVariable("Flowsheet", FlowSheet)
-                scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
                 scope.SetVariable("Me", Me)
                 scope.SetVariable("This", Me)
 
@@ -316,7 +315,6 @@ Namespace UnitOperations
                         Dim locals As New PyDict()
 
                         locals.SetItem("Flowsheet", FlowSheet.ToPython)
-                        locals.SetItem("Plugins", FlowSheet.UtilityPlugins.ToPython)
                         locals.SetItem("Me", Me.ToPython)
                         locals.SetItem("This", Me.ToPython)
 

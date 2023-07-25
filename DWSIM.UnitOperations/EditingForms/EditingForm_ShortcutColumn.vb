@@ -217,7 +217,7 @@ Public Class EditingForm_ShortcutColumn
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation2(False)
 
     End Sub
 

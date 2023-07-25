@@ -31,6 +31,11 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "B20E8A1D-6CB5-43a1-87E2-148EBB25235A"
 
+        Public Overrides ReadOnly Property DisplayName As String = "UNIFAC"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Uses the UNIFAC Model to calculate liquid phase activity coefficients."
+
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get
                 Return False

@@ -36,7 +36,6 @@ Partial Class FormTextBox
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.TextBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormTextBox"
@@ -44,5 +43,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+
+    Public WithEvents TextBox1 As TextBox
 End Class

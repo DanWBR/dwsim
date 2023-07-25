@@ -132,6 +132,7 @@
     <Compile Include="IPhaseProperties.vb" />
     <Compile Include="IPoint.vb" />
     <Compile Include="IPropertyPackage.vb" />
+    <Compile Include="IPropertyPackageMethods.vb" />
     <Compile Include="IReaction.vb" />
     <Compile Include="IReactionSet.vb" />
     <Compile Include="IReactionSetBase.vb" />

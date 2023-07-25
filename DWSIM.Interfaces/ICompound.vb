@@ -60,4 +60,5 @@
     Property DiffusionCoefficient As Nullable(Of Double)
     Property EnthalpyF_Dmol As Double?
     Property EntropyF_Dmol As Double?
+
 End Interface

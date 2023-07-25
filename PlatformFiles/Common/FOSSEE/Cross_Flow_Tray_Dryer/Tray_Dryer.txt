@@ -1,0 +1,175 @@
+#Reference: Principles of Mass Tranfer and separation processes by Binay K. Dutta
+#All units in SI system unless specified in comments. 
+#Import statement
+from DWSIM.Thermodynamics import *
+import math
+from System import Array
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')
+from DotNumerics.ODE import *
+#Initializing values in input streams (Only one input stream for batch reactor)
+feed1=[0] #the array containing the properties of air stream
+P1=[0] #array for Pressure of air stream
+massflow1=[0] #array for total mass flow of air stream
+molfrac1=[0] #array for molar fraction of air stream
+molflow1=[0] #array for total molar flow of air stream
+enthalpy1=[0] #array for the total enthalpy of air stream
+T1=[0] #array for the temperature of air stream
+feed2=[0] #array containing the wet solid stream
+p2=[0] #Pressure of wet solid stream
+massflow2=[0] #array for total mass flow of wet solid stream
+molfrac2=[0] #array for molar fraction of wet solid stream
+molflow2=[0] #array for total molar flow of wet solid stream
+enthalpy2=[0] #array for the total enthalpy of wet solid stream
+T2=[0] #array for the temperature of wet solid stream
+#Extracting input from streams
+feed1[0] = ims1
+P1 = feed1[0].GetProp("pressure", "Overall", None, "", "")
+massflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+enthalpy1 = feed1[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mole")
+T1 = feed1[0].GetProp("temperature", "Overall", None, "", "")
+massfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mass")
+feed2[0] = ims2
+P2 = feed2[0].GetProp("pressure", "Overall", None, "", "")
+massflow2 = feed2[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow2 = feed2[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+enthalpy2 = feed2[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac2 = feed2[0].GetProp("fraction", "Overall", None, "", "mole")
+T2 = feed2[0].GetProp("temperature", "Overall", None, "", "")
+massfrac2 = feed2[0].GetProp("fraction", "Overall", None, "", "mass")
+iow=int(IndexOfWater) #Index of water
+comp=len(molfrac1) #total no of components
+comp2=len(molfrac2) #Number of components in wet solid stream
+molein1=[0]*comp #Array containing the molar flow rate of each specie in feed stream
+for i in range(0,comp):
+  molein1[i]=molfrac1[i]*molflow1[0]
+molefraco1=[0]*comp #Array containing the mole fraction of each specie in gas stream
+molefraco2=[0]*comp2 #Array containing the mole fraction of each specie in dry solid stream
+#finding initial humidity of dry air
+massWatGasIn=massfrac1[iow]*massflow1[0] #Mass of water in gas in feed stream
+massDryair=massflow1[0]-massWatGasIn #Mass of dry air in feed stream
+IniHum=massWatGasIn/massDryair #Initial humidity of feed stream
+Ts=OperTemp  #the temperature of solid in tray
+#Finding initial water content in wet solid
+sind=int(IndexSolid) #To get the index of solid specie
+IniMoisCont=massfrac2[iow]/massfrac2[sind] #Moisture content in feed solid
+a=dryingarea #Drying area of solid
+Ws=massflow2[0]*massfrac2[sind]
+#for constant temperature of input air
+if ConstTempofGas==1:
+    props=['heatofvaporization'] 
+    compIds=['Water']
+    en=feed1[0].GetTDependentProperty(props,Ts,compIds,None) #Getting the value of heat of vaporization of water in J/mol
+    EntVapWat=en[0]*1000/18.019 #Enthalpy of vaporization of water. en[0] gives enthalpy in KJ/kmol. converted to J/kg
+    hc=ConvCoeff #Convection coefficient of air in J/m2s
+    kc=CondCoeff #Conduction coefficient of tray in J/ms
+    lt=ThickTray #Thickness of tray
+    hb=hc*kc/(hc*lt+kc) #dummy variable
+    if ConsiderTrayConduction==0:
+     Nc=(hc)*(T1[0]-Ts)/EntVapWat #Amount of vapor evaporated from solid to air
+    else:
+     Nc=(hc+hb)*(T1[0]-Ts)/EntVapWat
+    Xi=IniMoisCont #Initial moisture content of solid
+    Xf=ReqMoisCont #Required moisture content of solid
+    Xc=CritMois #Critical moisture content of solid
+    tc=Ws/a*(Xi-Xc)/Nc/3600 #Time taken for constant drying period. Divided by 3600 to convert the time from seconds to hours
+    Xe=EquillMois #Equillibrium moisture content of solid
+    tf=(Ws/a*(Xc-Xe)/Nc*math.log((Xc-Xe)/(Xf-Xe)))/3600 #Time taken during first drop of drying. Divided by 3600 to convert the time from seconds to hours
+    totaltime=tf+tc #Total time taken to dry in hours
+    MassTrans=(Xi-Xf)*Ws #Amount of mass transferred from solid to air
+    MassWat=massfrac1[iow]*massflow1[0]+MassTrans #Final amoount of water in air
+    massout1=[0] #Total mass out in vapor product stream
+    massout1[0]=massflow1[0]+MassTrans
+    massout2=[0] #Total mass of solid mixture present in system
+    massout2[0]=massflow2[0]-MassTrans
+    massfraco2=[0/1.0]*comp
+    massfraco2[iow]=(massflow2[0]*massfrac2[iow]-MassTrans)/massout2[0]
+    massfraco2[sind]=massflow2[0]*massfrac2[sind]/massout2[0]
+    molfraco2=[0/1.0]*comp
+    totalmoleout2=[0]
+    totalmoleout2[0]=molflow2[0]-MassTrans/18.019*1000 #Removing amount of water since water is the only component transferred
+    totalmoleout1=[0] #Total mole out in product stream
+    totalmoleout1[0]=molflow1[0]+MassTrans/18.019*1000
+    for i in range(0,comp):
+     if i!=iow:
+      molefraco1[i]=molfrac1[i]*molflow1[0]/totalmoleout1[0]
+      molfraco2[i]=molfrac2[i]*molflow2[0]/totalmoleout2[0]
+     else:
+      molefraco1[i]=(molfrac1[i]*molflow1[0]+MassTrans/18.019*1000)/totalmoleout1[0]
+      molfraco2[i]=(molfrac2[i]*molflow2[0]-MassTrans/18.019*1000)/totalmoleout2[0]
+    To1=[Ts] #Temperature of product stream
+    Flowsheet.WriteMessage("The total time in hours required for solid to dry is: " + str(totaltime))
+#For variable gas temperature:
+elif  ConstTempofGas==0:
+    props=['heatofvaporization']
+    compIds=['Water']
+    en=feed1[0].GetTDependentProperty(props,Ts,compIds,None) #Heat of vaporization data of water in J/mol
+    EntVapWat=en[0]
+    hc=ConvCoeff #Convection coefficient of air
+    kc=CondCoeff #Conduction coefficient of tray
+    lt=ThickTray #Thickness of tray
+    Xi=IniMoisCont #Initial moisture content of solid
+    Xf=ReqMoisCont #Required moisture content of solid
+    Xc=CritMois #Critical moisture content of solid
+    Xe=EquillMois #Equillibrium moisture content of solid
+    chdry=[0] #Ideal gas specific heat capacity of dry air 
+    chwater=[0] #Ideal gas specific heat capacity of water
+    compId2=['Air'] #array containing specie
+    compIds=['Water']
+    props2=['idealgasheatcapacity'] #Array containg property
+    chdry=feed1[0].GetTDependentProperty(props2,T1[0],compId2,None) #In KJ/KmoleK
+    chwater=feed1[0].GetTDependentProperty(props2,T1[0],compIds,None) #IN KJ/KmoleK
+    ch=[0] #Specific heat capacity of dry air and water mixture
+    ch[0]=chdry[0]/28.97+IniHum*chwater[0]/18 #In KJ/KgK
+    c=ch[0] #Specific heat capacity of dry air and water mixture
+    Htg=massDryair*width*ch[0]/hc #dummy variable
+    Tgi=T1[0] #Temperature of gas input
+    Tgo=Tgi-(Tgi-Ts)*(1-math.exp(-length/Htg)) #temperature of air in product stream
+    Nc=massDryair*breadth*width*ch[0]*(Tgi-Tgo)/a/EntVapWat  #Amount of vapor evaporated from solid to air for given air flow
+    tc=(a*length*densitysolid*(Xi-Xc)*EntVapWat)/(massDryair*breadth*width*ch[0]*(Tgi-Tgo))/3600; #Time taken for constant drying period in hours
+    tf=Ws/(breadth*width)*(Xc-Xe)/Nc*math.log((Xc-Xe)/(Xf-Xe))/3600 #Time taken during first drop of drying in hours
+    totaltime=tc+tf #Total time taken
+    Flowsheet.WriteMessage("The time taken for drying in hours is: "+str(totaltime))
+    MassTrans=(Xi-Xf)*Ws #Amount of mass transferred from solid to air
+    MassWat=massfrac1[iow]*massflow1[0]+MassTrans #Final amoount of water in air
+    massout1=[0] #Total mass out in gas stream
+    massout1[0]=massflow1[0]+MassTrans
+    massout2=[0]
+    massout2[0]=massflow2[0]-MassTrans
+    molfraco2=[0/1.0]*comp
+    massfraco2=[0/1.0]*comp
+    massfraco2[iow]=(massflow2[0]*massfrac2[iow]-MassTrans)/massout2[0]
+    massfraco2[sind]=massflow2[0]*massfrac2[sind]/massout2[0]
+    totalmoleout2=[0]
+    totalmoleout2[0]=molflow2[0]-MassTrans/18.019*1000
+    totalmoleout1=[0] #Total mole out in gas stream
+    totalmoleout1[0]=molflow1[0]+MassTrans/18.019*1000 #Divided by 18.019 (Molar Mass of water) to convert mass transferred to moles transferred
+    for i in range(0,comp):
+     if i!=iow:
+      molefraco1[i]=molfrac1[i]*molflow1[0]/totalmoleout1[0]
+      molfraco2[i]=molfrac2[i]*molflow2[0]/totalmoleout2[0]
+     else:
+      molefraco1[i]=(molfrac1[i]*molflow1[0]+MassTrans/18.019*1000)/totalmoleout1[0]
+      molfraco2[i]=(molfrac2[i]*molflow2[0]-MassTrans/18.019*1000)/totalmoleout2[0]
+    To1=[Tgo] #Temperature of product stream 
+#Setting the out stream values
+out1=[0]
+out1[0]=oms1
+out1[0].Clear()
+out1[0].ClearAllProps()
+out1[0].SetProp("totalFlow" ,"Overall", None, "", "mass",massout1)
+out1[0].SetProp("totalflow", "Overall",None, "","mole",totalmoleout1)
+out1[0].SetProp("fraction","Overall",None,"","mole",molefraco1)
+out1[0].SetProp("pressure", "Overall", None, "", "",P1)  #Not able to set the desired pressure value
+out1[0].SetProp("temperature", "Overall", None, "", "",To1)
+out2=[0]
+out2[0]=oms2
+out2[0].Clear()
+out2[0].ClearAllProps()
+out2[0].SetProp("totalFlow" ,"Overall", None, "", "mass",massout2)
+out2[0].SetProp("totalflow", "Overall",None, "","mole",totalmoleout2)
+out2[0].SetProp("fraction","Overall",None,"","mole",molfraco2)
+out2[0].SetProp("pressure", "Overall", None, "", "",P1)  #Not able to set the desired pressure value
+out2[0].SetProp("temperature", "Overall", None, "", "",To1)

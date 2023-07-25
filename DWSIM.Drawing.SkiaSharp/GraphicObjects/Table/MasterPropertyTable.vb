@@ -40,7 +40,10 @@ Namespace GraphicObjects.Tables
 
         Public Property ClipboardData As String = ""
 
+        Private TagsAndIDs As New Dictionary(Of String, String)
+
         <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
+
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
@@ -216,16 +219,32 @@ Namespace GraphicObjects.Tables
 
             m_items = New Dictionary(Of String, List(Of NodeItem))
 
-            Dim objectstoremove, propstoremove As New List(Of String)
+            Dim objectstoremove, propstoremove, objectstoadd As New List(Of String)
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
                 If Flowsheet.GetFlowsheetSimulationObject(kvp.Key) Is Nothing Then
+                    If TagsAndIDs.ContainsKey(kvp.Key) Then
+                        If Flowsheet.SimulationObjects.ContainsKey(TagsAndIDs(kvp.Key)) Then
+                            Dim obj = Flowsheet.SimulationObjects(TagsAndIDs(kvp.Key))
+                            If obj IsNot Nothing Then objectstoadd.Add(obj.GraphicObject.Tag)
+                        End If
+                    End If
                     objectstoremove.Add(kvp.Key)
                 End If
             Next
 
             For i As Integer = 0 To objectstoremove.Count - 1
                 m_objectlist.Remove(objectstoremove(i))
+            Next
+
+            For i As Integer = 0 To objectstoadd.Count - 1
+                m_objectlist.Add(objectstoadd(i), True)
+            Next
+
+            TagsAndIDs = New Dictionary(Of String, String)()
+            For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
+                Dim obj = Flowsheet.GetFlowsheetSimulationObject(kvp.Key)
+                If obj IsNot Nothing Then TagsAndIDs.Add(obj.GraphicObject.Tag, obj.Name)
             Next
 
             If m_objectfamily = Enums.GraphicObjects.ObjectType.MaterialStream AndAlso m_objectlist.Count > 0 Then
@@ -656,6 +675,14 @@ Namespace GraphicObjects.Tables
                 canvas.DrawRect(GetRect(X, Y, Width, Height), bpaint)
 
             End If
+
+            tpaint.Dispose()
+            tpaint2.Dispose()
+            bpaint.Dispose()
+
+            tpaint = Nothing
+            tpaint2 = Nothing
+            bpaint = Nothing
 
         End Sub
 

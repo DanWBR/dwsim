@@ -121,8 +121,32 @@
   <data name="ListView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>270, 403</value>
   </data>
+  <data name="lblSize.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 17</value>
+  </data>
+  <data name="lblSize.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
   <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>270, 22</value>
+  </data>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 22</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="btnImport.Text" xml:space="preserve">
+    <value>Import Files</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Export Selected File</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Remove Selected File</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>270, 25</value>
@@ -143,30 +167,6 @@
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>270</value>
-  </data>
-  <data name="lblSize.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 17</value>
-  </data>
-  <data name="lblSize.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 22</value>
-  </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Files</value>
-  </data>
-  <data name="btnImport.Text" xml:space="preserve">
-    <value>Import Files</value>
-  </data>
-  <data name="btnExport.Text" xml:space="preserve">
-    <value>Export Selected File</value>
-  </data>
-  <data name="btnDelete.Text" xml:space="preserve">
-    <value>Remove Selected File</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

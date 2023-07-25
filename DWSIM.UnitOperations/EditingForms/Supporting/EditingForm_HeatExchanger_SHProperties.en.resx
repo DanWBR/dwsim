@@ -274,9 +274,6 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Tubes</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Shell and Tube Exchanger Properties</value>
   </data>

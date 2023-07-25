@@ -2,6 +2,7 @@
 Imports System.Threading.Tasks
 Imports DWSIM.DynamicsManager
 Imports Eto.Threading
+Imports Mono.CSharp
 Imports OxyPlot
 Imports OxyPlot.Axes
 Imports OxyPlot.Series
@@ -107,6 +108,9 @@ Public Class FormDynamicsIntegratorControl
 
         For Each v As DynamicsManager.MonitoredVariable In integrator.MonitoredVariables
             Dim vnew = DirectCast(v.Clone, DynamicsManager.MonitoredVariable)
+            If Not Flowsheet.SimulationObjects.ContainsKey(vnew.ObjectID) Then
+                Throw New Exception(Flowsheet.GetTranslatedString1("At least one of the monitored variables is not configured correctly, please check."))
+            End If
             Dim sobj = Flowsheet.SimulationObjects(vnew.ObjectID)
             vnew.PropertyValue = SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID)).ToString(Globalization.CultureInfo.InvariantCulture)
             vnew.TimeStamp = tstamp
@@ -205,7 +209,16 @@ Public Class FormDynamicsIntegratorControl
 
         Abort = False
 
+        If Not Flowsheet.DynamicsManager.ScheduleList.ContainsKey(Flowsheet.DynamicsManager.CurrentSchedule) Then
+            Throw New Exception(Flowsheet.GetTranslatedString1("Please select a valid schedule."))
+        End If
+
         Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
+
+        If Not Flowsheet.DynamicsManager.IntegratorList.ContainsKey(schedule.CurrentIntegrator) Then
+            Throw New Exception(Flowsheet.GetTranslatedString1("Please select a valid integrator for the selected schedule."))
+        End If
+
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
         integrator.RealTime = realtime
@@ -677,4 +690,7 @@ Public Class FormDynamicsIntegratorControl
 
     End Sub
 
+    Private Sub FormDynamicsIntegratorControl_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

@@ -1,4 +1,6 @@
-﻿Namespace PropertyPackages
+﻿Imports DWSIM.Interfaces
+
+Namespace PropertyPackages
     <Serializable> Public Class PhaseEnvelopeOptions
 
         Implements Interfaces.IPhaseEnvelopeOptions, ICloneable
@@ -52,6 +54,8 @@
         Public Property DewCurveMaximumTemperature As Double = 1000.0# Implements Interfaces.IPhaseEnvelopeOptions.DewCurveMaximumTemperature
 
         Public Property DewUseCustomParameters As Boolean = False Implements Interfaces.IPhaseEnvelopeOptions.DewUseCustomParameters
+
+        Public Property ImmiscibleWater As Boolean = False Implements IPhaseEnvelopeOptions.ImmiscibleWater
 
         Public Function Clone() As Object Implements ICloneable.Clone
             Return Me.MemberwiseClone

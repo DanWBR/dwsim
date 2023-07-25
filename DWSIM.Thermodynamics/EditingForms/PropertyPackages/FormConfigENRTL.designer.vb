@@ -43,21 +43,11 @@ Partial Class FormConfigENRTL
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
-        Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.tbTol = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.tbMaxIts = New System.Windows.Forms.TextBox()
-        Me.cbReacSets = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.dgvu1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FaTabStripItem2.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'FaTabStrip1
@@ -65,7 +55,7 @@ Partial Class FormConfigENRTL
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
-        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2})
+        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
         '
@@ -162,58 +152,6 @@ Partial Class FormConfigENRTL
         resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
         Me.LabelWithDivider3.Name = "LabelWithDivider3"
         '
-        'FaTabStripItem2
-        '
-        Me.FaTabStripItem2.CanClose = False
-        Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
-        Me.FaTabStripItem2.IsDrawn = True
-        Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.tbTol)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.tbMaxIts)
-        Me.GroupBox2.Controls.Add(Me.cbReacSets)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'tbTol
-        '
-        resources.ApplyResources(Me.tbTol, "tbTol")
-        Me.tbTol.Name = "tbTol"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'tbMaxIts
-        '
-        resources.ApplyResources(Me.tbMaxIts, "tbMaxIts")
-        Me.tbMaxIts.Name = "tbMaxIts"
-        '
-        'cbReacSets
-        '
-        Me.cbReacSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        resources.ApplyResources(Me.cbReacSets, "cbReacSets")
-        Me.cbReacSets.FormattingEnabled = True
-        Me.cbReacSets.Name = "cbReacSets"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
         'FormConfigENRTL
         '
         resources.ApplyResources(Me, "$this")
@@ -228,9 +166,6 @@ Partial Class FormConfigENRTL
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.dgvu1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem2.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -239,14 +174,6 @@ Partial Class FormConfigENRTL
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents dgvu1 As System.Windows.Forms.DataGridView
     Public WithEvents LabelWithDivider3 As System.Windows.Forms.Label
-    Friend WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents cbReacSets As System.Windows.Forms.ComboBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents tbTol As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents tbMaxIts As System.Windows.Forms.TextBox
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn

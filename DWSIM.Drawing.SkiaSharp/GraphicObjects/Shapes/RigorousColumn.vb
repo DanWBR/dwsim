@@ -14,6 +14,7 @@ Namespace GraphicObjects.Shapes
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn
             CreateConnectors(11, 11)
             Me.Description = "Distillation Column"
+            EmbeddedResourceIconName = "distcol_new.png"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -74,40 +75,82 @@ Namespace GraphicObjects.Shapes
 
             End If
 
-            With InputConnectors
-                For i As Integer = 0 To InputConnectors.Count - 2
-                    .Item(i).Position = New Point(X + 0.05 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / InCount * Height * 0.6)
-                    .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
-                    .Item(i).Direction = ConDir.Right
-                Next
-                .Item(10).Position = New Point(X + Width, Y + 0.825 * Height)
-                .Item(10).ConnectorName = "Reboiler Duty"
-                .Item(10).Direction = ConDir.Left
-                .Item(10).Type = ConType.ConEn
-            End With
+            If DrawMode = 2 Then
 
-            With OutputConnectors
-                If Me.Shape = 0 Then
-                    .Item(0).Position = New Point(X + Width, Y + 0.3 * Height)
-                Else
-                    .Item(0).Position = New Point(X + Width, Y + 0.02 * Height)
-                End If
-                .Item(1).Position = New Point(X + Width, Y + 0.98 * Height)
-                .Item(0).ConnectorName = "Distillate"
-                .Item(1).ConnectorName = "Bottoms"
-                For i As Integer = 2 To OutputConnectors.Count - 3
-                    .Item(i).Position = New Point(X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / OutCount * Height * 0.6)
-                    .Item(i).ConnectorName = "Side Draw #" & (i - 1)
-                Next
-                .Item(9).Position = New Point(X + Width, Y + 0.02 * Height)
-                .Item(9).ConnectorName = "Overhead Vapor"
-                .Item(9).Direction = ConDir.Right
-                .Item(9).Type = ConType.ConOut
-                .Item(10).Position = New Point(X + Width, Y + 0.175 * Height)
-                .Item(10).ConnectorName = "Condenser Duty"
-                .Item(10).Direction = ConDir.Right
-                .Item(10).Type = ConType.ConEn
-            End With
+                With InputConnectors
+                    For i As Integer = 0 To InputConnectors.Count - 2
+                        .Item(i).Position = New Point(X + 0.1 * Width, Y + Height * 0.3 + (i + 1) / InCount * Height * 0.6)
+                        .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
+                        .Item(i).Direction = ConDir.Right
+                    Next
+                    .Item(10).Position = New Point(X + 0.7 * Width, Y + 0.9 * Height)
+                    .Item(10).ConnectorName = "Reboiler Duty"
+                    .Item(10).Direction = ConDir.Down
+                    .Item(10).Type = ConType.ConEn
+                End With
+
+
+                With OutputConnectors
+                    If Me.Shape = 0 Then
+                        .Item(0).Position = New Point(X + 0.87 * Width, Y + 0.385 * Height)
+                    Else
+                        .Item(0).Position = New Point(X + 0.87 * Width, Y + 0.01 * Height)
+                    End If
+                    .Item(1).Position = New Point(X + 0.9 * Width, Y + 0.95 * Height)
+                    .Item(0).ConnectorName = "Distillate"
+                    .Item(1).ConnectorName = "Bottoms"
+                    For i As Integer = 2 To OutputConnectors.Count - 3
+                        .Item(i).Position = New Point(X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / OutCount * Height * 0.6)
+                        .Item(i).ConnectorName = "Side Draw #" & (i - 1)
+                    Next
+                    .Item(9).Position = New Point(X + Width, Y + 0.02 * Height)
+                    .Item(9).ConnectorName = "Overhead Vapor"
+                    .Item(9).Direction = ConDir.Right
+                    .Item(9).Type = ConType.ConOut
+                    .Item(10).Position = New Point(X + 0.6 * Width, Y + 0.175 * Height)
+                    .Item(10).ConnectorName = "Condenser Duty"
+                    .Item(10).Direction = ConDir.Right
+                    .Item(10).Type = ConType.ConEn
+                End With
+
+            Else
+
+                With InputConnectors
+                    For i As Integer = 0 To InputConnectors.Count - 2
+                        .Item(i).Position = New Point(X + 0.05 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / InCount * Height * 0.6)
+                        .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
+                        .Item(i).Direction = ConDir.Right
+                    Next
+                    .Item(10).Position = New Point(X + Width, Y + 0.825 * Height)
+                    .Item(10).ConnectorName = "Reboiler Duty"
+                    .Item(10).Direction = ConDir.Left
+                    .Item(10).Type = ConType.ConEn
+                End With
+
+                With OutputConnectors
+                    If Me.Shape = 0 Then
+                        .Item(0).Position = New Point(X + Width, Y + 0.3 * Height)
+                    Else
+                        .Item(0).Position = New Point(X + Width, Y + 0.02 * Height)
+                    End If
+                    .Item(1).Position = New Point(X + Width, Y + 0.98 * Height)
+                    .Item(0).ConnectorName = "Distillate"
+                    .Item(1).ConnectorName = "Bottoms"
+                    For i As Integer = 2 To OutputConnectors.Count - 3
+                        .Item(i).Position = New Point(X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / OutCount * Height * 0.6)
+                        .Item(i).ConnectorName = "Side Draw #" & (i - 1)
+                    Next
+                    .Item(9).Position = New Point(X + Width, Y + 0.02 * Height)
+                    .Item(9).ConnectorName = "Overhead Vapor"
+                    .Item(9).Direction = ConDir.Right
+                    .Item(9).Type = ConType.ConOut
+                    .Item(10).Position = New Point(X + Width, Y + 0.175 * Height)
+                    .Item(10).ConnectorName = "Condenser Duty"
+                    .Item(10).Direction = ConDir.Right
+                    .Item(10).Type = ConType.ConEn
+                End With
+
+            End If
 
             EnergyConnector.Active = False
 
@@ -170,28 +213,7 @@ Namespace GraphicObjects.Shapes
 
                 Case 2
 
-                    Dim Gradient2Colors = New SKColor() {New SKColor(255, 255, 255, 255), New SKColor(32, 33, 32, 255)}
-                    Dim Gradient2Weights = New Single() {0, 0.95}
-                    Dim Gradient2 = SKShader.CreateRadialGradient(New SKPoint(X + 0.8 * Width, Y + 0.5 * Height), 2 * Width, Gradient2Colors, Gradient2Weights, SKShaderTileMode.Clamp)
-
-                    With myPen
-                        .StrokeWidth = LineWidth
-                        .IsStroke = False
-                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .Shader = Gradient2
-                    End With
-
-                    DrawGP(canvas, myPen)
-
-                    Dim myPen2 As New SKPaint()
-                    With myPen2
-                        .Color = SKColors.Black
-                        .StrokeWidth = LineWidth
-                        .IsStroke = True
-                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    End With
-
-                    DrawGP(canvas, myPen2)
+                    DrawIcon(canvas)
 
                 Case 3
                     'Temperature Gradients

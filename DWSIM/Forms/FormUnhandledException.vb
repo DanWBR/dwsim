@@ -30,11 +30,10 @@ Public Class FormUnhandledException
 
     Private Sub FormUnhandledException_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         Me.Loaded = True
+        FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        ExtensionMethods.ChangeDefaultFont(Me)
 
         Dim mystring = SharedClasses.EncryptString.StringCipher.Decrypt("YEZeCozmw0l3XjOYI0EpOXHh1LK9as6Bi5Gwqr7pYZyXtcNYQyzayHXts6NjAJlpfixoim98NAwVHli/+h1fYk6g4W82ewXDxkLwzg5SFCCSS2W0K3TvGMgC0wQWuKfrut0QdnByVKZ4x+/svdQwwXsUkZdELOUtnWiOdeV6WIQ=", "dwsim000000")
         Dim mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000")
@@ -57,6 +56,8 @@ Public Class FormUnhandledException
             End If
         Catch ex As Exception
         End Try
+
+        ExtensionMethods.ChangeDefaultFont(Me)
 
     End Sub
 
@@ -86,7 +87,7 @@ Public Class FormUnhandledException
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
 
-        Dim baseaddress As String = "https://dwsim.org/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search="
+        Dim baseaddress As String = "https://github.com/DanWBR/dwsim/issues?q="
 
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 

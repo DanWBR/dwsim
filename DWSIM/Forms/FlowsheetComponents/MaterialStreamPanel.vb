@@ -1,4 +1,9 @@
-﻿Imports System.Linq
+﻿Imports System.IO
+Imports System.Linq
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports unvell.ReoGrid
+Imports unvell.ReoGrid.DataFormat
 
 Public Class MaterialStreamPanel
 
@@ -8,6 +13,29 @@ Public Class MaterialStreamPanel
     Protected filename As String = ""
     Protected Flowsheet As FormFlowsheet
     Protected RowsCreated As Boolean = False
+
+    Private Sub frmMatList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ExtensionMethods.ChangeDefaultFont(Me)
+
+        If Settings.DpiScale > 1.0 Then
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.AutoSize = True
+            Me.ToolStrip1.Invalidate()
+        End If
+
+        Me.Flowsheet = My.Application.ActiveSimulation
+
+        grid1.Worksheets(0).SetScale(Settings.DpiScale)
+
+    End Sub
 
     Public Function ReturnForm(ByVal str As String) As WeifenLuo.WinFormsUI.Docking.IDockContent
 
@@ -19,28 +47,103 @@ Public Class MaterialStreamPanel
 
     End Function
 
+    Private Sub SetupGrid()
+
+        Dim ms As New Streams.MaterialStream("", "", Flowsheet, Nothing)
+        Dim nms = Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream).Count
+
+        Dim props = ms.GetProperties(PropertyType.ALL)
+
+        grid1.Readonly = True
+
+        With grid1.Worksheets(0)
+            .SetCols(2 + nms)
+            .SetRows(props.Count + 1)
+            .SetScale(Settings.DpiScale)
+            .SetColumnsWidth(2, .ColumnCount, 100)
+            .SetRangeStyles(0, 1, .RowCount, .ColumnCount, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.HorizontalAlign,
+                .HAlign = ReoGridHorAlign.Center
+            })
+            .SetRangeStyles(0, 2, .RowCount, .ColumnCount, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.VerticalAlign,
+                .VAlign = ReoGridVerAlign.Middle
+            })
+            .SetRangeStyles(0, 0, .RowCount, .ColumnCount, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.FontAll,
+                .FontName = System.Drawing.SystemFonts.MessageBoxFont.Name,
+                .FontSize = System.Drawing.SystemFonts.MessageBoxFont.SizeInPoints
+            })
+            For i = 1 To props.Count
+                .Cells(i, 0).Data = Flowsheet.GetTranslatedString1(props(i - 1))
+                .Cells(i, 1).Data = ms.GetPropertyUnit(props(i - 1), Flowsheet.Options.SelectedUnitSystem1)
+            Next
+            .SetRangeStyles(0, 0, .RowCount, 2, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.HorizontalAlign,
+                .HAlign = ReoGridHorAlign.Left
+            })
+            .SetColumnsWidth(0, 1, 225)
+            .SetColumnsWidth(1, 1, 75)
+            .SetRangeStyles(0, 0, .RowCount, 2, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.FontAll,
+                .FontName = System.Drawing.SystemFonts.MessageBoxFont.Name,
+                .FontSize = System.Drawing.SystemFonts.MessageBoxFont.SizeInPoints,
+                .Bold = True
+            })
+            .SetRangeStyles(0, 0, 1, .ColumnCount, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.FontAll,
+                .FontName = System.Drawing.SystemFonts.MessageBoxFont.Name,
+                .FontSize = System.Drawing.SystemFonts.MessageBoxFont.SizeInPoints,
+                .Bold = True
+            })
+            .Cells(0, 0).Data = "Property / Streams"
+            .Cells(0, 1).Data = "Units"
+            .SetRangeDataFormat(1, 2, .RowCount - 1, .ColumnCount, CellDataFormatFlag.Number,
+            New NumberDataFormatter.NumberFormatArgs With {
+                .DecimalPlaces = 4,
+                .UseSeparator = True,
+                .NegativeStyle = NumberDataFormatter.NumberNegativeStyle.Minus
+            })
+            .SetRangeStyles(0, 1, 1, .ColumnCount, New WorksheetRangeStyle With {
+                .Flag = PlainStyleFlag.HorizontalAlign,
+                .HAlign = ReoGridHorAlign.Center
+            })
+        End With
+
+    End Sub
+
     Private Sub UpdateTable()
 
         Me.Flowsheet = My.Application.ActiveSimulation
 
-        ToolStripLabel1.Text = ""
+        SetupGrid()
 
         If Not Flowsheet Is Nothing Then
-            'TABELA DE CORRENTES
             Dim ms As Streams.MaterialStream
-            DataGridView1.Columns.Clear()
             RowsCreated = False
-            Dim i, n As Integer
-            n = Flowsheet.Collections.FlowsheetObjectCollection.Values.Count
-            i = 1
-            For Each ms In Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
-                ToolStripLabel1.Text = i & "/" & n & "..."
-                AddColumn(ms)
+            Dim i, j As Integer
+            i = 2
+            Dim mslist = Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream).OrderBy(Function(s) s.GraphicObject.Tag)
+            For Each ms In mslist
+                grid1.Worksheets(0).Cells(0, i).Data = ms.GraphicObject.Tag
+                Dim props = ms.GetProperties(PropertyType.ALL)
+                j = 1
+                For Each p In props
+                    Dim val = ms.GetPropertyValue(p, Flowsheet.Options.SelectedUnitSystem1)
+                    If Double.TryParse(val, New Double) Then
+                        If Double.IsNaN(val) Or Double.IsInfinity(val) Then
+                            grid1.Worksheets(0).Cells(j, i).Data = ""
+                        Else
+                            grid1.Worksheets(0).Cells(j, i).Data = val
+                        End If
+                    Else
+                        grid1.Worksheets(0).Cells(j, i).Data = val
+                    End If
+                    j += 1
+                Next
                 i += 1
             Next
         End If
-
-        ToolStripLabel1.Text = ""
 
     End Sub
 
@@ -48,76 +151,7 @@ Public Class MaterialStreamPanel
 
         UpdateTable()
 
-        If DataGridView1.RowCount > 0 Then ToolStripButton2.Enabled = True
-
-    End Sub
-
-
-    Private Sub frmMatList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        ExtensionMethods.ChangeDefaultFont(Me)
-
-        Me.Flowsheet = My.Application.ActiveSimulation
-
-    End Sub
-
-    Sub AddColumn(ByRef ms As Streams.MaterialStream)
-
-        Me.Flowsheet = My.Application.ActiveSimulation
-        Me.Conversor = New SystemsOfUnits.Converter
-
-        Dim su As SystemsOfUnits.Units
-        su = Flowsheet.Options.SelectedUnitSystem
-
-        Me.DataGridView1.Columns.Add(ms.Name, ms.GraphicObject.Tag)
-        Me.DataGridView1.Columns(ms.Name).SortMode = DataGridViewColumnSortMode.NotSortable
-
-        Dim props As String() = ms.GetProperties(Interfaces.Enums.PropertyType.ALL)
-        Dim unit As String = ""
-
-        Me.SuspendLayout()
-        Me.DataGridView1.SuspendLayout()
-
-        If Not RowsCreated Then
-
-            'create rows
-            For Each prop As String In props
-                With Me.DataGridView1.Rows
-                    .Add()
-                    unit = ms.GetPropertyUnit(prop, su)
-                    If unit <> "" Then
-                        .Item(.Count - 1).HeaderCell.Value = DWSIM.App.GetPropertyName(prop) & " (" & ms.GetPropertyUnit(prop, su) & ")"
-                    Else
-                        .Item(.Count - 1).HeaderCell.Value = DWSIM.App.GetPropertyName(prop)
-                    End If
-                End With
-            Next
-
-        End If
-
-        RowsCreated = True
-
-        'populate rows
-        Dim col As DataGridViewColumn = Me.DataGridView1.Columns(ms.Name)
-        Dim i As Integer = 0
-        Dim value As String
-
-        For Each prop As String In props
-            value = ms.GetPropertyValue(prop, su)
-            If Double.TryParse(value, New Double) Then
-                Me.DataGridView1.Rows.Item(i).Cells(col.Index).Value = Format(Double.Parse(value), Flowsheet.Options.NumberFormat)
-            Else
-                Me.DataGridView1.Rows.Item(i).Cells(col.Index).Value = value
-            End If
-            i += 1
-        Next
-
-        Me.DataGridView1.RowHeadersWidth = 300
-
-        Me.DataGridView1.ResumeLayout()
-        Me.ResumeLayout()
-
-        Application.DoEvents()
+        If grid1.Worksheets(0).RowCount > 0 Then ToolStripButton2.Enabled = True
 
     End Sub
 
@@ -161,6 +195,30 @@ Public Class MaterialStreamPanel
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
-        Clipboard.SetDataObject(Me.DataGridView1.GetClipboardContent)
+        grid1.Worksheets(0).SelectAll()
+        grid1.Worksheets(0).Copy()
+    End Sub
+
+    Private Sub MaterialStreamPanel_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Excel File", "*.xlsx")})
+
+        If handler IsNot Nothing Then
+            Using stream As New MemoryStream()
+                Try
+                    grid1.Save(stream, IO.FileFormat.Excel2007)
+                    handler.Write(stream)
+                    MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End If
     End Sub
 End Class

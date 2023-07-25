@@ -74,5 +74,9 @@
     Property mean_ionic_acitivty_coefficient As Double?
     Property idealGasHeatCapacityCp As Double?
     Property idealGasHeatCapacityRatio As Double?
+    Property CO2loading As Double?
+    Property CO2partialpressure As Double?
+    Property H2Sloading As Double?
+    Property H2Spartialpressure As Double?
 
 End Interface

@@ -435,6 +435,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Case ColumnSpec.SpecType.Temperature
                     spfval1 = Log((Tj(0)) / spval1)
                     _specs("C").CalculatedValue = Tj(0)
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    spfval1 = Log(LSSj(0) / (spval1 / 100 * F.SumY))
+                    _specs("C").CalculatedValue = LSSj(0) / F.SumY * 100.0
             End Select
 
             Select Case _specs("R").SType
@@ -475,6 +478,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Case ColumnSpec.SpecType.Temperature
                     spfval2 = Log((Tj(ns)) / spval2)
                     _specs("R").CalculatedValue = Tj(ns)
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    spfval2 = Log(Lj(ns) / (spval1 / 100 * F.SumY))
+                    _specs("R").CalculatedValue = Lj(ns) / F.SumY * 100.0
             End Select
 
             For i = 0 To ns
@@ -828,7 +834,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Select Case specs("C").SType
                     Case ColumnSpec.SpecType.Component_Fraction,
                           ColumnSpec.SpecType.Stream_Ratio,
-                          ColumnSpec.SpecType.Component_Recovery
+                          ColumnSpec.SpecType.Component_Recovery,
+                          ColumnSpec.SpecType.Feed_Recovery
                         spval1 = specs("C").SpecValue
                     Case Else
                         spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
@@ -837,7 +844,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Select Case specs("R").SType
                     Case ColumnSpec.SpecType.Component_Fraction,
                           ColumnSpec.SpecType.Stream_Ratio,
-                          ColumnSpec.SpecType.Component_Recovery
+                          ColumnSpec.SpecType.Component_Recovery,
+                          ColumnSpec.SpecType.Feed_Recovery
                         spval2 = specs("R").SpecValue
                     Case Else
                         spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
@@ -1083,7 +1091,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
                                                    fx_error_hist.Add(fval.AbsSqrSumY())
-                                                   pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   'pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                    _counter += 1
                                                    Return fval
                                                End Function,
@@ -1102,7 +1110,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 xvar = nsolv.Solve(Function(xvars)
                                                        Dim fval = FunctionValue(xvars)
                                                        fx_error_hist.Add(fval.AbsSqrSumY())
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       'pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                        _counter += 1
                                                        Return fval
                                                    End Function,

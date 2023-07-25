@@ -93,6 +93,8 @@ Public Class DCCharacterizationWizard
 
         P0.BringToFront()
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub DataGridView2_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellValueChanged
@@ -774,11 +776,6 @@ Public Class DCCharacterizationWizard
         ms.SetFlowsheet(form)
         If form.Options.PropertyPackages.Count > 0 Then
             ms.PropertyPackage = form.Options.SelectedPropertyPackage
-            If TypeOf ms.PropertyPackage Is PropertyPackages.PengRobinsonPropertyPackage Then
-                DirectCast(ms.PropertyPackage, PropertyPackages.PengRobinsonPropertyPackage).m_pr.BIPChanged = True
-            ElseIf TypeOf ms.PropertyPackage Is PropertyPackages.SRKPropertyPackage Then
-                DirectCast(ms.PropertyPackage, PropertyPackages.SRKPropertyPackage).m_pr.BIPChanged = True
-            End If
         Else
             ms.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
         End If

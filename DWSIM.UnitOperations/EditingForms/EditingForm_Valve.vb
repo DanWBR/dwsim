@@ -358,7 +358,7 @@ Public Class EditingForm_Valve
 
     Sub RequestCalc()
 
-        SimObject.FlowSheet.RequestCalculation(SimObject)
+        SimObject.FlowSheet.RequestCalculation3(SimObject, False)
 
     End Sub
 
@@ -557,7 +557,7 @@ Public Class EditingForm_Valve
     Private Sub tbKvOpRel_TextChanged(sender As Object, e As EventArgs) Handles tbKvOpRel.KeyDown
         SimObject.PercentOpeningVersusPercentKvExpression = tbKvOpRel.Text
     End Sub
-    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBox2.MouseMove
+    Private Sub GroupBox2_MouseMove(sender As Object, e As MouseEventArgs) Handles GroupBoxParameters.MouseMove
         MyBase.Editor_MouseMove(sender, e)
     End Sub
 
@@ -599,7 +599,7 @@ Public Class EditingForm_Valve
 
         gbTable.Enabled = False
         tbKvOpRel.Enabled = False
-        tbOp.Enabled = False
+        tbOp.Enabled = True
         tbCharParam.Enabled = False
 
         Select Case SimObject.DefinedOpeningKvRelationShipType
@@ -607,10 +607,8 @@ Public Class EditingForm_Valve
                 gbTable.Enabled = True
             Case UnitOperations.Valve.OpeningKvRelationshipType.UserDefined
                 tbKvOpRel.Enabled = True
-                tbOp.Enabled = True
             Case UnitOperations.Valve.OpeningKvRelationshipType.QuickOpening
                 tbCharParam.Enabled = True
-            Case Else
         End Select
     End Sub
 

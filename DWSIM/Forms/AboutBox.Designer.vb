@@ -39,8 +39,6 @@ Partial Class AboutBox
         Me.Label4 = New System.Windows.Forms.Label()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Lblcpusimd = New System.Windows.Forms.Label()
         Me.Lblcpuinfo = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -73,8 +71,6 @@ Partial Class AboutBox
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
         Me.FaTabStripItem2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem6.SuspendLayout()
@@ -137,8 +133,8 @@ Partial Class AboutBox
         '
         'TextBox1
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.TextBox1, "TextBox1")
+        Me.TextBox1.BackColor = System.Drawing.Color.White
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         '
@@ -178,7 +174,7 @@ Partial Class AboutBox
         'FaTabStripItem1
         '
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.TabControl1)
+        Me.FaTabStripItem1.Controls.Add(Me.TextBox1)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpusimd)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpuinfo)
         Me.FaTabStripItem1.Controls.Add(Me.Label13)
@@ -197,20 +193,6 @@ Partial Class AboutBox
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.TextBox1)
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Lblcpusimd
         '
@@ -405,7 +387,6 @@ Partial Class AboutBox
         Me.FaTabStripItem7.Controls.Add(Me.TextBox2)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        Me.FaTabStripItem7.Selected = True
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
         'TextBox2
@@ -443,9 +424,6 @@ Partial Class AboutBox
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
         Me.FaTabStripItem1.PerformLayout()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
         Me.FaTabStripItem2.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem6.ResumeLayout(False)
@@ -500,8 +478,6 @@ Partial Class AboutBox
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewLinkColumn3 As DataGridViewLinkColumn
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
     Friend WithEvents FaTabStripItem7 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents TextBox2 As TextBox
 End Class

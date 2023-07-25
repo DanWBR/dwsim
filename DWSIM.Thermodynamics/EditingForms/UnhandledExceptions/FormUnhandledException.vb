@@ -54,7 +54,7 @@ Public Class FormUnhandledException
         Button4.Enabled = False
 
         Try
-            Dim baseaddress As String = "https://github.com/DanWBR/dwsim5/blob/master/"
+            Dim baseaddress As String = "https://github.com/DanWBR/dwsim/blob/master/"
             Dim st As New StackTrace(ex, True)
             Dim frame As StackFrame = st.GetFrame(0)
             Dim path As String = frame.GetFileName.Replace(mystring, baseaddress)
@@ -83,7 +83,7 @@ Public Class FormUnhandledException
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
 
         Application.Restart()
 
@@ -106,52 +106,6 @@ Public Class FormUnhandledException
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 
         Process.Start(baseaddress + searchtext)
-
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-
-        Dim myfile As String = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM" & Path.DirectorySeparatorChar & "dwsim.txt"
-        Dim webcl As New System.Net.WebClient()
-
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br")))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
-
-        webcl.Proxy = proxyObj
-
-        Try
-            webcl.DownloadFile("http://dwsim.inforside.com.br/dwsim.txt", myfile)
-            If File.Exists(myfile) Then
-                Dim txt() As String = File.ReadAllLines(myfile)
-                Dim build As Integer
-                build = txt(0)
-                If My.Application.Info.Version.Build < Convert.ToInt32(build) Then
-                    Dim bdate As Date, fname As String, dlpath As String, changelog As String = ""
-                    bdate = Date.Parse(txt(1), New CultureInfo("en-US"))
-                    dlpath = txt(2)
-                    fname = txt(3)
-                    For i As Integer = 4 To txt.Length - 1
-                        changelog += txt(i) + vbCrLf
-                    Next
-                    Dim strb As New StringBuilder()
-                    With strb
-                        .AppendLine("Build Number" & ": " & build & vbCrLf)
-                        .AppendLine("Build Date" & ": " & bdate.ToString(My.Application.Culture.DateTimeFormat.ShortDatePattern, My.Application.Culture) & vbCrLf)
-                        .AppendLine("Changes" & ": " & vbCrLf & changelog & vbCrLf)
-                        .AppendLine("Do you want to go to the Downloads page?")
-                    End With
-                    Dim msgresult As MsgBoxResult = MessageBox.Show(strb.ToString, "A new version is available", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                    If msgresult = MsgBoxResult.Yes Then Process.Start(dlpath)
-                Else
-                    MessageBox.Show("DWSIM is already up-to-date.", "Checking for updates...", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "Error while checking for updates", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            webcl = Nothing
-            proxyObj = Nothing
-        End Try
 
     End Sub
 

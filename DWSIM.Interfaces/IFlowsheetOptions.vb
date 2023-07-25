@@ -1,4 +1,5 @@
 ﻿Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 '    DWSIM Interface definitions
 '    Copyright 2010-2017 Daniel Wagner O. de Medeiros
@@ -130,5 +131,17 @@
     Property CurrentWeather As IWeatherData
 
     Property CustomCalculationOrder As List(Of String)
+
+    Property SpecCalculationMode As SpecCalcMode
+
+    Property ForceObjectSolving As Boolean
+
+    Property SaveFlowsheetMessagesInFile As Boolean
+
+    Property SingleUnitOpMode As Boolean
+
+    Property SingleUnitOpID As String
+
+    Property RTFAnnotations As String
 
 End Interface

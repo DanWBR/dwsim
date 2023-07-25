@@ -128,7 +128,7 @@ Namespace ExcelAddIn
                 pp._selectedcomps.Add(compound, tmpcomp)
                 pp._availablecomps.Remove(compound)
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 Dim results As Object = Nothing
@@ -908,7 +908,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = temperature
                 ms.Phases(0).Properties.pressure = pressure
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
@@ -1035,7 +1035,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = temperature
                 ms.Phases(0).Properties.pressure = pressure
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
@@ -1221,7 +1221,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = T
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -1483,7 +1483,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.enthalpy = H
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -1661,7 +1661,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.entropy = S
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -1839,7 +1839,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -2017,7 +2017,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.temperature = T
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -2189,7 +2189,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = T
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
@@ -2313,7 +2313,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.enthalpy = H
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
@@ -2441,7 +2441,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.entropy = S
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
@@ -2569,7 +2569,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
@@ -2697,7 +2697,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.temperature = T
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
@@ -2836,7 +2836,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = T
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
@@ -2984,7 +2984,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.enthalpy = H
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
@@ -3136,7 +3136,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.entropy = S
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
@@ -3288,7 +3288,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
@@ -3440,7 +3440,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.temperature = T
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
@@ -3567,7 +3567,6 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
-                    CType(pp, PengRobinsonPropertyPackage).m_pr.BIPChanged = True
                 Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
                     With CType(pp, PRSV2PropertyPackage).m_pr.InteractionParameters
                         If Not TypeOf ip1 Is ExcelMissing And Not ip1 Is Nothing Then
@@ -3627,7 +3626,6 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
-                    CType(pp, SRKPropertyPackage).m_pr.BIPChanged = True
                 Case "Peng-Robinson / Lee-Kesler (PR/LK)"
                     With CType(pp, PengRobinsonLKPropertyPackage).m_pr.InteractionParameters
                         If Not TypeOf ip1 Is ExcelMissing And Not ip1 Is Nothing Then
@@ -3647,7 +3645,6 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
-                    CType(pp, PengRobinsonLKPropertyPackage).m_pr.BIPChanged = True
                 Case "UNIFAC"
                     With CType(pp, UNIFACPropertyPackage).m_pr.InteractionParameters
                         If Not TypeOf ip1 Is ExcelMissing And Not ip1 Is Nothing Then
@@ -3880,7 +3877,7 @@ Namespace ExcelAddIn
                     pp._availablecomps.Remove(c)
                 Next
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(pp.SaveData(), Newtonsoft.Json.Formatting.Indented)
@@ -4019,7 +4016,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = T
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -4152,7 +4149,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.enthalpy = H
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -4286,7 +4283,7 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.entropy = S
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -4420,7 +4417,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.pressure = P
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
@@ -4554,7 +4551,7 @@ Namespace ExcelAddIn
                 ms.Phases(2).Properties.molarfraction = VF
                 ms.Phases(0).Properties.temperature = T
 
-                ms._pp = pp
+                ms.SetPropertyPackageInstance(pp)
                 pp.SetMaterial(ms)
 
                 'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 

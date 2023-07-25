@@ -128,6 +128,8 @@ Public Class FormWelcome
 
         NewsViewer.Source = New Uri("https://www.patreon.com/dwsim/posts")
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -502,7 +504,7 @@ Public Class FormWelcome
         Process.Start("https://dwsim.org/index.php/dwsim-pro/")
     End Sub
 
-    Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
+    Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("https://dwsim.org/index.php/dwsim-social-responsibility-program/")
     End Sub
 
@@ -528,5 +530,19 @@ Public Class FormWelcome
     Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
         Dim fqc As New FormCreateNewSolid()
         fqc.ShowDialog(Me)
+    End Sub
+
+    Private Sub LinkLabel15_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf")
+        End If
     End Sub
 End Class

@@ -29,17 +29,33 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "A1107D77-3764-46C1-B00B-D6F9D65E1C87"
 
-        Public MAT_KIJ(38, 38) As Object
+        Private KijMatrix As Double(,)
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson78
         Public prn As New PropertyPackages.ThermoPlugs.PR78
-        Public ip(,) As Double
+
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
+        Public Overrides ReadOnly Property DisplayName As String = "Peng-Robinson (1978)"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Property Package that uses the 1978 update of the Peng-Robinson Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables at high pressures."
+
         <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = True
 
         Public Sub New(ByVal comode As Boolean)
 
             MyBase.New(comode)
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson 1978 EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson 1978 EOS"
+                .Liquid_Fugacity = "Peng-Robinson 1978 EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson 1978 EOS"
+                .Vapor_Density = "Peng-Robinson 1978 EOS (+VT)"
+                .Liquid_Density = "Peng-Robinson 1978 EOS (+VT) / Experimental / Rackett / COSTALD"
+            End With
 
         End Sub
 
@@ -49,6 +65,14 @@ Namespace PropertyPackages
 
             IsConfigurable = True
             _packagetype = PropertyPackages.PackageType.EOS
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Peng-Robinson 1978 EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Peng-Robinson 1978 EOS"
+                .Vapor_Density = "Peng-Robinson 1978 EOS"
+                .Liquid_Fugacity = "Peng-Robinson 1978 EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "Peng-Robinson 1978 EOS"
+            End With
 
         End Sub
 
@@ -74,6 +98,29 @@ Namespace PropertyPackages
 
 
 #Region "    DWSIM Functions"
+
+        Public Overrides Function DW_CalculateCriticalPoints() As List(Of Double())
+
+            Dim Vz = RET_VMOL(Phase.Mixture)
+
+            Dim VTc = RET_VTC()
+            Dim VPc = RET_VPC()
+
+            Dim V0 = 0.08664 * 8.314 * VTc.DivideY(VPc).MultiplyY(Vz).SumY
+            Dim T0 = VTc.MultiplyY(Vz).SumY
+
+            Dim cproutine = New Utilities.TCP.Methods_PR78()
+
+            Dim cps = cproutine.CRITPT_PR(Vz, VTc, VPc, RET_VVC, RET_VW, RET_VKij)
+
+            Dim cplist As New List(Of Double())
+            For Each item In cps
+                cplist.Add(New Double() {item(0), item(1), item(2)})
+            Next
+
+            Return cplist
+
+        End Function
 
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
             Select Case Phase1
@@ -489,12 +536,35 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            Dim hash As Integer = m_pr.InteractionParameters.GetHashCode()
+            If KijMatrix.Length = 0 Then
+
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
+
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
+
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
+                Next
+
+                Return val
+
+            Else
+
+                Return KijMatrix
+
+            End If
+
+        End Function
+
+        Private Sub SetKijMatrix()
 
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
-
-            'If ip_changed Then
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
@@ -506,18 +576,18 @@ Namespace PropertyPackages
                 Next
             Next
 
-            ip = val
-            ip_changed = False
+            KijMatrix = val
 
-            Return val
+        End Sub
 
-            'Else
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
 
-            '    Return ip
+            If AreModelParametersDirty Or KijMatrix Is Nothing OrElse KijMatrix.Length = 0 Or Not Settings.LockModelParameters Then
+                SetKijMatrix()
+                AreModelParametersDirty = False
+            End If
 
-            'End If
-
-        End Function
+        End Sub
 
         Public Function AUX_CM(ByVal Vx As Object) As Double
 
@@ -626,7 +696,7 @@ Namespace PropertyPackages
 
             If OverrideEnthalpyCalculation Then
 
-                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -680,7 +750,7 @@ Namespace PropertyPackages
 
             If OverrideEntropyCalculation Then
 
-                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 

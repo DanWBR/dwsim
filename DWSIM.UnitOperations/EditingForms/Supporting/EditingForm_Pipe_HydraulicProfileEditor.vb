@@ -82,15 +82,16 @@ Imports System.Drawing
 
     Dim px, py As New ArrayList
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents tsbImportFromTable As ToolStripButton
     Dim loaded As Boolean = False
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Me.GridMalha = New System.Windows.Forms.DataGridView()
         Me.ColBase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CMenu1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -114,6 +115,7 @@ Imports System.Drawing
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.tsbImportFromTable = New System.Windows.Forms.ToolStripButton()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -136,6 +138,7 @@ Imports System.Drawing
         Me.GridMalha.AllowUserToResizeRows = False
         Me.GridMalha.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.GridMalha.BackgroundColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.ColumnHeadersVisible = False
         Me.GridMalha.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColBase})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -148,7 +151,6 @@ Imports System.Drawing
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.GridMalha.DefaultCellStyle = DataGridViewCellStyle2
-        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.GridColor = System.Drawing.SystemColors.Control
         Me.GridMalha.Name = "GridMalha"
         Me.GridMalha.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
@@ -178,6 +180,7 @@ Imports System.Drawing
         '
         'CMenu1
         '
+        Me.CMenu1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.CMenu1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11})
         Me.CMenu1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.CMenu1.Name = "ContextMenuStrip1"
@@ -238,7 +241,8 @@ Imports System.Drawing
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripSeparator2, Me.ToolStripLabel1, Me.ToolStripLabel2})
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripSeparator1, Me.ToolStripButton5, Me.ToolStripSeparator2, Me.ToolStripLabel1, Me.ToolStripLabel2, Me.tsbImportFromTable})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripButton1
@@ -294,7 +298,16 @@ Imports System.Drawing
         'ToolStripLabel2
         '
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
         resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
+        '
+        'tsbImportFromTable
+        '
+        Me.tsbImportFromTable.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tsbImportFromTable.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbImportFromTable.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.table_80px
+        resources.ApplyResources(Me.tsbImportFromTable, "tsbImportFromTable")
+        Me.tsbImportFromTable.Name = "tsbImportFromTable"
         '
         'TabControl1
         '
@@ -374,6 +387,302 @@ Imports System.Drawing
 
     End Sub
 
+
+    Private Sub PipeEditor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ExtensionMethods.ChangeDefaultFont(Me)
+
+        Using g1 = Me.CreateGraphics()
+
+            Settings.DpiScale = g1.DpiX / 96.0
+
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.Invalidate()
+
+        End Using
+
+        Dim l, j As Integer
+        Dim linha_atual As String() = New String() {}
+
+#Region "Pipe diameters"
+
+        Using MyReader2 As New Microsoft.VisualBasic.FileIO.TextFieldParser(ThisExe.GetManifestResourceStream(ThisExeName & "." & "pipes.dat"))
+            MyReader2.TextFieldType = FileIO.FieldType.Delimited
+            MyReader2.SetDelimiters(";")
+            l = 0
+            While Not MyReader2.EndOfData
+                linha_atual = MyReader2.ReadFields()
+                j = 0
+                Do
+                    DNom(l, j) = linha_atual(j)
+                    j = j + 1
+                Loop Until j = 7
+                l = l + 1
+            End While
+        End Using
+
+        Dim r, aux, linha_inicial, linha_final As Integer
+
+        linha_inicial = 25
+        linha_final = 30
+        r = linha_inicial - 4
+        With ToolStripMenuItem2.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                    & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 43
+        linha_final = 48
+        r = linha_inicial - 4
+        With ToolStripMenuItem3.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 55
+        linha_final = 60
+        r = linha_inicial - 4
+        With ToolStripMenuItem4.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 65
+        linha_final = 71
+        r = linha_inicial - 4
+        With ToolStripMenuItem5.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 79
+        linha_final = 85
+        r = linha_inicial - 4
+        With ToolStripMenuItem6.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 86
+        linha_final = 97
+        r = linha_inicial - 4
+        With ToolStripMenuItem7.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 98
+        linha_final = 108
+        r = linha_inicial - 4
+        With ToolStripMenuItem8.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 109
+        linha_final = 121
+        r = linha_inicial - 4
+        With ToolStripMenuItem9.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 122
+        linha_final = 134
+        r = linha_inicial - 4
+
+        With ToolStripMenuItem10.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        linha_inicial = 135
+        linha_final = 146
+        r = linha_inicial - 4
+        With ToolStripMenuItem11.DropDownItems
+            aux = .Count
+            If aux <> 0 Then .Clear()
+            Do
+                .Add(DN(r, 2) & " / " & DN(r, 3) _
+                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
+                r = r + 1
+            Loop Until r = linha_final - 3
+        End With
+
+        '======================================
+
+#End Region
+
+        GridMalha.AllowUserToResizeRows = True
+        GridMalha.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows.Add()
+        GridMalha.Rows(0).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Segmento")
+        GridMalha.Rows(1).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Tipo")
+        GridMalha.Rows(2).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Quantidade")
+        GridMalha.Rows(3).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Incrementos")
+        GridMalha.Rows(4).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Material")
+        GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (m)"
+        GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (W/[m.K])"
+        GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom")
+        GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
+        GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin")
+        GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin")
+
+        CBTemplate = New DataGridViewComboBoxCell()
+        CBMat = New DataGridViewComboBoxCell()
+
+        linha_atual = New String() {}
+
+        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ThisExe.GetManifestResourceStream(ThisExeName & "." & "fittings.dat"), System.Text.Encoding.Default, True)
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(";")
+            l = 0
+            While Not MyReader.EndOfData
+                linha_atual = MyReader.ReadFields()
+                ACD(l, 0) = linha_atual(0)
+                ACD(l, 1) = linha_atual(1)
+                ACD(l, 2) = linha_atual(2)
+                l = l + 1
+            End While
+        End Using
+
+        With CBTemplate
+            .FlatStyle = FlatStyle.Popup
+            .DropDownWidth = 180
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples"))
+            .Value = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples")
+            l = 0
+            While Not l = ACD.GetUpperBound(0) + 1
+                .Items.Add(ACD(l, 0))
+                l = l + 1
+            End While
+            .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+        End With
+
+        With CBMat
+            .FlatStyle = FlatStyle.Popup
+            .DropDownWidth = 100
+            .Value = PipeOp.FlowSheet.GetTranslatedString("AoComum")
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoComum"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoCarbono"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("FerroBottomido"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoInoxidvel"))
+            .Items.Add("PVC")
+            .Items.Add("PVC+PFRV")
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("UserDefined"))
+            .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+        End With
+
+        GridMalha.Rows(1).Cells(0) = CBTemplate
+        GridMalha.Rows(4).Cells(0) = CBMat
+        GridMalha.Rows(2).Cells(0).Value = "1"
+        GridMalha.Rows(3).Cells(0).Value = "5"
+        With GridMalha.Rows(0).Cells(0)
+            .Value = GridMalha.Columns(0).Index + 1
+            .ReadOnly = True
+            .Style.BackColor = System.Drawing.Color.LightGray
+            .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        End With
+
+        GridMalha.Rows(4 + 1).Cells(0).ReadOnly = True
+        GridMalha.Rows(4 + 2).Cells(0).ReadOnly = True
+        GridMalha.Rows(4 + 1).Cells(0).Value = PipeOp.GetRugosity("Steel", Nothing)
+        GridMalha.Rows(4 + 2).Cells(0).Value = "T-Dep"
+        GridMalha.Rows(4 + 1).Cells(0).Style.BackColor = System.Drawing.Color.LightGray
+        GridMalha.Rows(4 + 2).Cells(0).Style.BackColor = System.Drawing.Color.LightGray
+
+        Me.GridMalha.Rows(9).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
+        Me.GridMalha.Rows(10).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
+
+        Units = PipeOp.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        NumberFormat = PipeOp.FlowSheet.FlowsheetOptions.NumberFormat
+
+        If Not PipeOp.Profile Is Nothing Then
+            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (" & Units.distance & ")"
+            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (" & Units.thermalConductivity & ")"
+            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
+            GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            If PipeOp.Profile.Sections.Count > 0 Then
+                Me.ConvertProfileToGrid(PipeOp.Profile)
+                Me.GridMalha.Columns.RemoveAt(Me.GridMalha.Columns.Count - 1)
+                ToolStripLabel2.Text = "OK"
+                ToolStripLabel2.ForeColor = System.Drawing.Color.Green
+                PipeOp.Profile.Status = PipeEditorStatus.OK
+            End If
+            Me.PipeEditor1_StatusChanged(e, PipeEditorStatus.OK)
+        End If
+
+        AddHandler GridMalha.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
+
+        loaded = True
+
+    End Sub
+
     Public Function DN(ByVal i As Integer, ByVal k As Integer) As Object
 
         If Double.TryParse(DNom(i, k), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, New Double) Then
@@ -381,152 +690,6 @@ Imports System.Drawing
         Else
             Return DNom(i, k)
         End If
-
-    End Function
-
-    Function Kfit(ByVal name2 As String) As Array
-
-        Dim name As String = name2.Substring(name2.IndexOf("[") + 1, name2.Length - name2.IndexOf("[") - 2)
-
-        Dim tmp(1) As Double
-
-        'Curva Normal 90�;30,00;1;
-        If name = 0 Then
-            tmp(0) = 30
-            tmp(1) = 1
-        End If
-        'Curva Normal 45�;16,00;1;
-        If name = 1 Then
-            tmp(0) = 16
-            tmp(1) = 1
-        End If
-        'Curva Normal 180�;50,00;1;
-        If name = 2 Then
-            tmp(0) = 50
-            tmp(1) = 1
-        End If
-        'V�lvula Angular;55,00;1;
-        If name = 3 Then
-            tmp(0) = 55
-            tmp(1) = 1
-        End If
-        'V�lvula Borboleta (2" a 14");40,00;1;
-        If name = 4 Then
-            tmp(0) = 40
-            tmp(1) = 1
-        End If
-        'V�lvula Esfera;3,00;1;
-        If name = 5 Then
-            tmp(0) = 3
-            tmp(1) = 1
-        End If
-        'V�lvula Gaveta (Aberta);8,00;1;
-        If name = 6 Then
-            tmp(0) = 8
-            tmp(1) = 1
-        End If
-        'V�lvula Globo;340,00;1;
-        If name = 7 Then
-            tmp(0) = 340
-            tmp(1) = 1
-        End If
-        'V�lvula Lift-Check;600,00;1;
-        If name = 8 Then
-            tmp(0) = 600
-            tmp(1) = 1
-        End If
-        'V�lvula P� (Poppet Disc);420,00;1;
-        If name = 9 Then
-            tmp(0) = 420
-            tmp(1) = 1
-        End If
-        'V�lvula Reten��o de Portinhola;100,00;1;
-        If name = 10 Then
-            tmp(0) = 100
-            tmp(1) = 1
-        End If
-        'V�lvula Stop-Check (Globo);400,00;1;
-        If name = 11 Then
-            tmp(0) = 400
-            tmp(1) = 1
-        End If
-        'T� (sa�da bilateral);20,00;1;
-        If name = 12 Then
-            tmp(0) = 20
-            tmp(1) = 1
-        End If
-        'T� (sa�da de lado);60,00;1;
-        If name = 13 Then
-            tmp(0) = 60
-            tmp(1) = 1
-        End If
-        'Contra��o R�pida d/D = 1/2;9,60;0;
-        If name = 14 Then
-            tmp(0) = 9.6
-            tmp(1) = 0
-        End If
-        'Contra��o R�pida d/D = 1/4;96,00;0;
-        If name = 15 Then
-            tmp(0) = 96
-            tmp(1) = 0
-        End If
-        'Contra��o R�pida d/D = 3/4;1,11;0;
-        If name = 16 Then
-            tmp(0) = 11
-            tmp(1) = 0
-        End If
-        'Entrada Borda;0,25;0;
-        If name = 17 Then
-            tmp(0) = 0.25
-            tmp(1) = 0
-        End If
-        'Entrada Normal;0,78;0;
-        If name = 18 Then
-            tmp(0) = 0.78
-            tmp(1) = 0
-        End If
-        'Expans�o R�pida d/D = 1/2;9,00;0;
-        If name = 19 Then
-            tmp(0) = 9
-            tmp(1) = 0
-        End If
-        'Expans�o R�pida d/D = 1/4;225,00;0;
-        If name = 20 Then
-            tmp(0) = 225
-            tmp(1) = 0
-        End If
-        'Expans�o R�pida d/D = 3/4;0,60;0;
-        If name = 21 Then
-            tmp(0) = 0.6
-            tmp(1) = 0
-        End If
-        'Joelho em 90�;60,00;1;
-        If name = 22 Then
-            tmp(0) = 60
-            tmp(1) = 1
-        End If
-        'Redu��o Normal 2:1;5,67;0;
-        If name = 23 Then
-            tmp(0) = 5.67
-            tmp(1) = 0
-        End If
-        'Redu��o Normal 4:3;0,65;0;
-        If name = 24 Then
-            tmp(0) = 0.65
-            tmp(1) = 0
-        End If
-        'Sa�da Borda;1,00;0;
-        If name = 25 Then
-            tmp(0) = 1
-            tmp(1) = 0
-        End If
-        'Sa�da Normal;1,00;0;
-        If name = 26 Then
-            tmp(0) = 1
-            tmp(1) = 0
-        End If
-
-        Kfit = tmp
 
     End Function
 
@@ -695,275 +858,6 @@ Imports System.Drawing
 
     End Sub
 
-
-    Private Sub PipeEditor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        ExtensionMethods.ChangeDefaultFont(Me)
-
-        Dim l, j As Integer
-        Dim linha_atual As String() = New String() {}
-
-        Using MyReader2 As New Microsoft.VisualBasic.FileIO.TextFieldParser(ThisExe.GetManifestResourceStream(ThisExeName & "." & "pipes.dat"))
-            MyReader2.TextFieldType = FileIO.FieldType.Delimited
-            MyReader2.SetDelimiters(";")
-            l = 0
-            While Not MyReader2.EndOfData
-                linha_atual = MyReader2.ReadFields()
-                j = 0
-                Do
-                    DNom(l, j) = linha_atual(j)
-                    j = j + 1
-                Loop Until j = 7
-                l = l + 1
-            End While
-        End Using
-
-        Dim r, aux, linha_inicial, linha_final As Integer
-
-        linha_inicial = 25
-        linha_final = 30
-        r = linha_inicial - 4
-        With ToolStripMenuItem2.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                    & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 43
-        linha_final = 48
-        r = linha_inicial - 4
-        With ToolStripMenuItem3.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 55
-        linha_final = 60
-        r = linha_inicial - 4
-        With ToolStripMenuItem4.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 65
-        linha_final = 71
-        r = linha_inicial - 4
-        With ToolStripMenuItem5.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 79
-        linha_final = 85
-        r = linha_inicial - 4
-        With ToolStripMenuItem6.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 86
-        linha_final = 97
-        r = linha_inicial - 4
-        With ToolStripMenuItem7.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 98
-        linha_final = 108
-        r = linha_inicial - 4
-        With ToolStripMenuItem8.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 109
-        linha_final = 121
-        r = linha_inicial - 4
-        With ToolStripMenuItem9.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 122
-        linha_final = 134
-        r = linha_inicial - 4
-
-        With ToolStripMenuItem10.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        linha_inicial = 135
-        linha_final = 146
-        r = linha_inicial - 4
-        With ToolStripMenuItem11.DropDownItems
-            aux = .Count
-            If aux <> 0 Then .Clear()
-            Do
-                .Add(DN(r, 2) & " / " & DN(r, 3) _
-                 & " / " & DN(r, 4) & " (" & DN(r, 1) & " OD / " & DN(r, 6) & " ID)")
-                r = r + 1
-            Loop Until r = linha_final - 3
-        End With
-
-        '======================================
-
-        GridMalha.AllowUserToResizeRows = True
-        GridMalha.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows.Add()
-        GridMalha.Rows(0).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Segmento")
-        GridMalha.Rows(1).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Tipo")
-        GridMalha.Rows(2).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Quantidade")
-        GridMalha.Rows(3).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Incrementos")
-        GridMalha.Rows(4).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Material")
-        GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (m)"
-        GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (W/[m.K])"
-        GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom")
-        GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
-        GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin")
-        GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin")
-
-        CBTemplate = New DataGridViewComboBoxCell()
-        CBMat = New DataGridViewComboBoxCell()
-
-        linha_atual = New String() {}
-
-        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ThisExe.GetManifestResourceStream(ThisExeName & "." & "fittings.dat"), System.Text.Encoding.Default, True)
-            MyReader.TextFieldType = FileIO.FieldType.Delimited
-            MyReader.SetDelimiters(";")
-            l = 0
-            While Not MyReader.EndOfData
-                linha_atual = MyReader.ReadFields()
-                ACD(l, 0) = linha_atual(0)
-                ACD(l, 1) = linha_atual(1)
-                ACD(l, 2) = linha_atual(2)
-                l = l + 1
-            End While
-        End Using
-
-        With CBTemplate
-            .FlatStyle = FlatStyle.Popup
-            .DropDownWidth = 180
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples"))
-            .Value = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples")
-            l = 0
-            While Not l = ACD.GetUpperBound(0) + 1
-                .Items.Add(ACD(l, 0))
-                l = l + 1
-            End While
-            .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
-        End With
-
-        With CBMat
-            .FlatStyle = FlatStyle.Popup
-            .DropDownWidth = 100
-            .Value = PipeOp.FlowSheet.GetTranslatedString("AoComum")
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoComum"))
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoCarbono"))
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("FerroBottomido"))
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoInoxidvel"))
-            .Items.Add("PVC")
-            .Items.Add("PVC+PFRV")
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
-            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("UserDefined"))
-            .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
-        End With
-
-        GridMalha.Rows(1).Cells(0) = CBTemplate
-        GridMalha.Rows(4).Cells(0) = CBMat
-        GridMalha.Rows(2).Cells(0).Value = "1"
-        GridMalha.Rows(3).Cells(0).Value = "5"
-        With GridMalha.Rows(0).Cells(0)
-            .Value = GridMalha.Columns(0).Index + 1
-            .ReadOnly = True
-            .Style.BackColor = System.Drawing.Color.LightGray
-            .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        End With
-
-        Me.GridMalha.Rows(9).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
-        Me.GridMalha.Rows(10).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
-
-        Units = PipeOp.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        NumberFormat = PipeOp.FlowSheet.FlowsheetOptions.NumberFormat
-
-        If Not PipeOp.Profile Is Nothing Then
-            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (" & Units.distance & ")"
-            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (" & Units.thermalConductivity & ")"
-            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
-            GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
-            If PipeOp.Profile.Sections.Count > 0 Then
-                Me.ConvertProfileToGrid(PipeOp.Profile)
-                Me.GridMalha.Columns.RemoveAt(Me.GridMalha.Columns.Count - 1)
-                ToolStripLabel2.Text = "OK"
-                ToolStripLabel2.ForeColor = System.Drawing.Color.Green
-                PipeOp.Profile.Status = PipeEditorStatus.OK
-            End If
-            Me.PipeEditor1_StatusChanged(e, PipeEditorStatus.OK)
-        End If
-
-        AddHandler GridMalha.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
-
-        loaded = True
-
-    End Sub
-
     Private Sub myDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
         If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
             Dim cmb As ComboBox = CType(e.Control, ComboBox)
@@ -1019,10 +913,15 @@ Imports System.Drawing
             .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
 
+        GridMalha.Rows(4 + 1).Cells(GridMalha.Columns.Count - 1).ReadOnly = True
+        GridMalha.Rows(4 + 2).Cells(GridMalha.Columns.Count - 1).ReadOnly = True
+        GridMalha.Rows(4 + 1).Cells(GridMalha.Columns.Count - 1).Value = PipeOp.GetRugosity("Steel", Nothing)
+        GridMalha.Rows(4 + 2).Cells(GridMalha.Columns.Count - 1).Value = "T-Dep"
+        GridMalha.Rows(4 + 1).Cells(GridMalha.Columns.Count - 1).Style.BackColor = System.Drawing.Color.LightGray
+        GridMalha.Rows(4 + 2).Cells(GridMalha.Columns.Count - 1).Style.BackColor = System.Drawing.Color.LightGray
+
         Me.GridMalha.Rows(9).Cells(GridMalha.Columns.Count - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
         Me.GridMalha.Rows(10).Cells(GridMalha.Columns.Count - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
-
-
 
     End Sub
 
@@ -1229,8 +1128,9 @@ Imports System.Drawing
                 End If
                 PipeOp.Profile.Sections.Add(column.Index + 1, ps)
             Else
-                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1 & ": " & parsingresult
+                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1
                 RaiseEvent StatusChanged(e, PipeEditorStatus.Erro)
+                MessageBox.Show(parsingresult, PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
         Next
@@ -1266,34 +1166,39 @@ Imports System.Drawing
                     Exit Function
                 End If
                 If .Rows(1).Cells(column.Name).Value = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then
-                    If Not .Rows(3).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
+                    If .Rows(3).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(3).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0#) Then
                         Return "Invalid number of sections"
                     End If
-                    If Not .Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or Not .Rows(7).Cells(column.Name).Value.ToString.IsValidDoubleExpression Then
+                    If .Rows(7).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or Not .Rows(7).Cells(column.Name).Value.ToString.IsValidDoubleExpression) Then
                         Return "Invalid length"
                     End If
-                    If Not .Rows(8).Cells(column.Name).Value.ToString.IsValidDoubleExpression Then
+                    If .Rows(8).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(8).Cells(column.Name).Value.ToString.IsValidDoubleExpression) Then
                         Return "Invalid elevation"
                         Exit Function
                     End If
                     If Math.Abs(.Rows(8).Cells(column.Name).Value.ToString.ParseExpressionToDouble) > Math.Abs(.Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
                         Return "Invalid elevation (H > L!)"
                     End If
-                    If Not .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
+                    If .Rows(9).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0#) Then
                         Return "Invalid external diameter"
                         Exit Function
                     End If
-                    If Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble Then
+                    If .Rows(10).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
+                        Return "Invalid internal diameter"
+                        Exit Function
+                    End If
+                Else
+                    If .Rows(10).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
                         Return "Invalid internal diameter"
                         Exit Function
                     End If
                 End If
             End With
+            Return "OK"
         Catch ex As Exception
             Return ex.Message.ToString
             Exit Function
         End Try
-        Return "OK"
 
     End Function
 
@@ -1357,8 +1262,40 @@ Imports System.Drawing
                 GridMalha.Rows(8).Cells(psec.Indice - 1).Style.BackColor = Nothing
                 GridMalha.Rows(9).Cells(psec.Indice - 1).Style.BackColor = Nothing
             End If
+            Dim material = GridMalha.Rows(4).Cells(psec.Indice - 1).Value.ToString()
+            If material IsNot Nothing Then
+                If material.Contains("User") Or material.Contains("Usu") Then
+                    material = "UserDefined"
+                End If
+                If material.ToString <> "UserDefined" Then
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).ReadOnly = True
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).ReadOnly = True
+                    Try
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = PipeOp.GetRugosity(material, PipeOp.Profile.Sections(psec.Indice - 1 + 1))
+                    Catch ex As Exception
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = PipeOp.GetRugosity(material, Nothing)
+                    End Try
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Value = "T-Dep"
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Style.BackColor = System.Drawing.Color.LightGray
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Style.BackColor = System.Drawing.Color.LightGray
+                Else
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).ReadOnly = False
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).ReadOnly = False
+                    If PipeOp.Profile.Sections.ContainsKey(psec.Indice - 1 + 1) Then
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = PipeOp.Profile.Sections(psec.Indice - 1 + 1).PipeWallRugosity
+                        GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Value = PipeOp.Profile.Sections(psec.Indice - 1 + 1).PipeWallThermalConductivityExpression
+                    Else
+                        GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Value = 0.00001
+                        GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Value = ""
+                    End If
+                    GridMalha.Rows(4 + 1).Cells(psec.Indice - 1).Style.BackColor = Nothing
+                    GridMalha.Rows(4 + 2).Cells(psec.Indice - 1).Style.BackColor = Nothing
+                End If
+            End If
         Next
         psec = Nothing
+
+        RaiseEvent StatusChanged(New EventArgs, PipeEditorStatus.OK)
 
     End Sub
 
@@ -1474,6 +1411,13 @@ Imports System.Drawing
                 c.Value = Nothing
             Next
         End If
+    End Sub
+
+    Private Sub tsbImportFromTable_Click(sender As Object, e As EventArgs) Handles tsbImportFromTable.Click
+
+        Dim ft As New EditingForm_Pipe_HydraulicProfileImportFromTabularData With {.PipeObject = PipeOp}
+        ft.ShowDialog()
+
     End Sub
 
     Private Sub GridMalha_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles GridMalha.CellValueChanged

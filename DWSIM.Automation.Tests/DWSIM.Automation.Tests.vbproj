@@ -163,7 +163,7 @@
     <ProjectReference Include="..\DWSIM.Automation\DWSIM.Automation.csproj">
       <Project>{4bb36089-89f6-4bbf-a39c-1d0a3f232f07}</Project>
       <Name>DWSIM.Automation</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>

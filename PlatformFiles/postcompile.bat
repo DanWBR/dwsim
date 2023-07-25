@@ -19,6 +19,11 @@ del ..\DistPackages\Windows_32\*.tmp
 del ..\DistPackages\Windows_32\*.dylib
 del ..\DistPackages\Windows_32\*.so
 
+del ..\DistPackages\Linux\ExcelDna.Integration.dll
+del ..\DistPackages\Windows\ExcelDna.Integration.dll
+del ..\DistPackages\Windows_32\ExcelDna.Integration.dll
+del ..\DistPackages\macOS\ExcelDna.Integration.dll
+
 del ..\DistPackages\Windows\plugins\*Skia*
 del ..\DistPackages\Windows\plugins\*Eto*
 rmdir /s /q ..\DistPackages\Windows\plugins\x86

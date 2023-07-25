@@ -64,7 +64,8 @@ namespace DWSIM.UI.Web
         }
         public void Navigate(string url)
         {
-            this.webView.CoreWebView2.Navigate(url);
+            if (this.webView != null && this.webView.CoreWebView2 != null)
+                this.webView.CoreWebView2.Navigate(url);
         }
 
 
@@ -82,18 +83,27 @@ namespace DWSIM.UI.Web
 
         async Task InitializeAsync()
         {
-            var environment = await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(null, USER_DATA_FOLDER, null);
-            await webView.EnsureCoreWebView2Async(environment);
-
-            if (UseLocalUI)
+            try
             {
-                var assemblyDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                var webUiDir = Path.Combine(assemblyDir, "dwsim-web-ui");
-                //if (!Directory.Exists(webUiDir))
-                //    webUiDir = Path.Combine(assemblyDir, "../dwsim-web-ui");
-               // throw new Exception($"Cant find path:{webUiDir}");
-                this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
+                var environment = await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(null, USER_DATA_FOLDER, null);
+                await webView.EnsureCoreWebView2Async(environment);
+
+                if (UseLocalUI)
+                {
+                    var assemblyDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                    var webUiDir = Path.Combine(assemblyDir, "dwsim-web-ui");
+                    //if (!Directory.Exists(webUiDir))
+                    //    webUiDir = Path.Combine(assemblyDir, "../dwsim-web-ui");
+                    // throw new Exception($"Cant find path:{webUiDir}");
+                    this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
 
         public void SubscribeToNavigationStarting(EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs> callback)
@@ -112,6 +122,16 @@ namespace DWSIM.UI.Web
 
             // Set initial URL
             this.webView.Source = new Uri(InitialUrl);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if (this.webView != null)
+            {
+                this.webView.Stop();
+                this.webView.Dispose();
+            }
         }
     }
 }

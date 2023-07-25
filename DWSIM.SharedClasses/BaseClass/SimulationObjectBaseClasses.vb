@@ -22,6 +22,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Dynamic
 Imports System.Reflection
+Imports DWSIM.ExtensionMethods
 
 Namespace UnitOperations
 
@@ -34,6 +35,8 @@ Namespace UnitOperations
         Public Const ClassId As String = ""
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
+
+        <Newtonsoft.Json.JsonIgnore> <Xml.Serialization.XmlIgnore> Public Property LastSolutionInputSnapshot As String = ""
 
         Protected Friend _IsDirty As Boolean = True
         ReadOnly Property IsDirty As Boolean Implements ISimulationObject.IsDirty
@@ -453,14 +456,34 @@ Namespace UnitOperations
         End Sub
 
         Public Sub Solve() Implements ISimulationObject.Solve
-            Calculated = False
-            If OverrideCalculationRoutine Then
-                CalculationRoutineOverride.Invoke()
+
+            If FlowSheet.FlowsheetOptions.ForceObjectSolving Then
+                Calculated = False
+                If OverrideCalculationRoutine Then
+                    CalculationRoutineOverride.Invoke()
+                Else
+                    Calculate()
+                End If
+                Calculated = True
             Else
-                Calculate()
+                CheckDirtyStatus()
+                Calculated = False
+                If Not CanUsePreviousResults Then Calculate()
+                Calculated = True
+                PerformPostCalcValidation()
+                If GraphicObject IsNot Nothing Then
+                    If GraphicObject.ObjectType <> ObjectType.EnergyStream And GraphicObject.ObjectType <> ObjectType.MaterialStream Then
+                        Dim xdoc = New XDocument()
+                        xdoc.Add(New XElement("Data"))
+                        xdoc.Element("Data").Add(SaveData())
+                        xdoc.Element("Data").Element("Calculated").Remove()
+                        xdoc.Element("Data").Element("LastUpdated").Remove()
+                        LastSolutionInputSnapshot = xdoc.ToString()
+                        xdoc = Nothing
+                    End If
+                End If
             End If
-            Calculated = True
-            PerformPostCalcValidation()
+
         End Sub
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
@@ -509,6 +532,12 @@ Namespace UnitOperations
         Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
 
         Public MustOverride Sub UpdateEditForm() Implements ISimulationObject.UpdateEditForm
+
+        Public Overridable Function GetEditingForm() As Form Implements ISimulationObject.GetEditingForm
+
+            Return Nothing
+
+        End Function
 
 
         ''' <summary>
@@ -717,12 +746,6 @@ Namespace UnitOperations
         End Function
 
         Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
-
-            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
-
-            If epcol.ContainsKey(prop) Then
-                Return epcol(prop)
-            End If
 
             For Each item In AttachedUtilities
                 If prop.StartsWith(item.Name) Then
@@ -1657,11 +1680,29 @@ Namespace UnitOperations
 
         Public Sub SetDirtyStatus(value As Boolean) Implements ISimulationObject.SetDirtyStatus
             _IsDirty = value
+            SetCanUsePreviousResults(Not _IsDirty)
         End Sub
 
         Public Sub SetCanUsePreviousResults(value As Boolean) Implements ISimulationObject.SetCanUsePreviousResults
             _CanUsePreviousResults = value
         End Sub
+
+        Public Overridable Sub CheckDirtyStatus() Implements ISimulationObject.CheckDirtyStatus
+
+            SetDirtyStatus(True)
+            SetCanUsePreviousResults(False)
+
+        End Sub
+
+        Public Overridable Sub SetPropertyPackageInstance(PP As IPropertyPackage) Implements ISimulationObject.SetPropertyPackageInstance
+
+        End Sub
+
+        Public Overridable Function ClearPropertyPackageInstance() As Boolean Implements ISimulationObject.ClearPropertyPackageInstance
+
+            Return False
+
+        End Function
 
     End Class
 

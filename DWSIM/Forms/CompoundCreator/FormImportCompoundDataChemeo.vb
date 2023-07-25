@@ -48,6 +48,8 @@ Public Class FormImportCompoundDataChemeo
 
                 Dim searchtext As String = tbSearchString.Text
 
+                FormMain.AnalyticsProvider?.RegisterEvent("Online Compound Cheméo Request", searchtext, Nothing)
+
                 Me.Enabled = False
 
                 fsearch.Show()
@@ -108,7 +110,7 @@ Public Class FormImportCompoundDataChemeo
                 fsearch.Show()
 
                 Dim t As New Task(Of Global.DWSIM.Thermodynamics.BaseClasses.ConstantProperties)(Function()
-                                                                                                     Return ChemeoParser.GetCompoundData(id)
+                                                                                                     Return ChemeoParser.GetCompoundData2(id)
                                                                                                  End Function, tcs.Token)
 
                 t.ContinueWith(Sub()
@@ -166,13 +168,17 @@ Public Class FormImportCompoundDataChemeo
             Me.dgResults.Rows.Add(New Object() {If(.SMILES <> "", okimg, noimg), "SMILES String", If(.SMILES <> "", True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.Molar_Weight <> 0.0#, okimg, noimg), "Molecular Weight", If(.Molar_Weight <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.Normal_Boiling_Point <> 0.0#, okimg, noimg), "Normal Boiling Point", If(.Normal_Boiling_Point <> 0.0#, True, False)})
-            Me.dgResults.Rows.Add(New Object() {If(.TemperatureOfFusion <> 0.0#, okimg, noimg), "Fusion Temperature", If(.TemperatureOfFusion <> 0.0#, True, False)})
+            Me.dgResults.Rows.Add(New Object() {If(.TemperatureOfFusion <> 0.0#, okimg, noimg), "Temperature of Fusion", If(.TemperatureOfFusion <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.Critical_Temperature <> 0.0#, okimg, noimg), "Critical Temperature", If(.Critical_Temperature <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.Critical_Pressure <> 0.0#, okimg, noimg), "Critical Pressure", If(.Critical_Pressure <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.Critical_Volume <> 0.0#, okimg, noimg), "Critical Volume", If(.Critical_Volume <> 0.0#, True, False)})
+            Me.dgResults.Rows.Add(New Object() {If(.Critical_Compressibility <> 0.0#, okimg, noimg), "Critical Compressibility Factor", If(.Critical_Compressibility <> 0.0#, True, False)})
+            Me.dgResults.Rows.Add(New Object() {If(.Acentric_Factor <> 0.0#, okimg, noimg), "Acentric Factor", If(.Acentric_Factor <> 0.0#, True, False)})
+            Me.dgResults.Rows.Add(New Object() {If(.Z_Rackett <> 0.0#, okimg, noimg), "Rackett Compressibility", If(.Z_Rackett <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.IG_Enthalpy_of_Formation_25C <> 0.0#, okimg, noimg), "Enthalpy of Formation (IG)", If(.IG_Enthalpy_of_Formation_25C <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.IG_Entropy_of_Formation_25C <> 0.0#, okimg, noimg), "Entropy of Formation (IG)", If(.IG_Entropy_of_Formation_25C <> 0.0#, True, False)})
             Me.dgResults.Rows.Add(New Object() {If(.IG_Gibbs_Energy_of_Formation_25C <> 0.0#, okimg, noimg), "Gibbs Energy of Formation (IG)", If(.IG_Gibbs_Energy_of_Formation_25C <> 0.0#, True, False)})
+            Me.dgResults.Rows.Add(New Object() {If(.EnthalpyOfFusionAtTf <> 0.0#, okimg, noimg), "Enthalpy of Fusion", If(.EnthalpyOfFusionAtTf <> 0.0#, True, False)})
         End With
 
 
@@ -194,11 +200,14 @@ Public Class FormImportCompoundDataChemeo
             If dgResults.Rows(7).Cells(2).Value = True Then BaseCompound.Critical_Temperature = .Critical_Temperature
             If dgResults.Rows(8).Cells(2).Value = True Then BaseCompound.Critical_Pressure = .Critical_Pressure
             If dgResults.Rows(9).Cells(2).Value = True Then BaseCompound.Critical_Volume = .Critical_Volume
-            If dgResults.Rows(10).Cells(2).Value = True Then BaseCompound.IG_Enthalpy_of_Formation_25C = .IG_Enthalpy_of_Formation_25C
-            If dgResults.Rows(11).Cells(2).Value = True Then BaseCompound.IG_Entropy_of_Formation_25C = .IG_Entropy_of_Formation_25C
-            If dgResults.Rows(12).Cells(2).Value = True Then BaseCompound.IG_Gibbs_Energy_of_Formation_25C = .IG_Gibbs_Energy_of_Formation_25C
+            If dgResults.Rows(10).Cells(2).Value = True Then BaseCompound.Critical_Compressibility = .Critical_Compressibility
+            If dgResults.Rows(11).Cells(2).Value = True Then BaseCompound.Acentric_Factor = .Acentric_Factor
+            If dgResults.Rows(12).Cells(2).Value = True Then BaseCompound.Z_Rackett = .Z_Rackett
+            If dgResults.Rows(13).Cells(2).Value = True Then BaseCompound.IG_Enthalpy_of_Formation_25C = .IG_Enthalpy_of_Formation_25C
+            If dgResults.Rows(14).Cells(2).Value = True Then BaseCompound.IG_Entropy_of_Formation_25C = .IG_Entropy_of_Formation_25C
+            If dgResults.Rows(15).Cells(2).Value = True Then BaseCompound.IG_Gibbs_Energy_of_Formation_25C = .IG_Gibbs_Energy_of_Formation_25C
+            If dgResults.Rows(16).Cells(2).Value = True Then BaseCompound.EnthalpyOfFusionAtTf = .EnthalpyOfFusionAtTf
         End With
-
 
     End Sub
 

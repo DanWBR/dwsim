@@ -1,0 +1,275 @@
+#Reference: H.S. Fogler, Elements of Chemical Reaction Engineering, 2nd edition
+#All units in SI units
+#Valid for isothermal constant volume batch reactor
+#This code is only if out temperature is defined. Does not work if output temperature not given.
+#Regarding variables in input section:
+#1)time: This is the final time of reaction taking place
+#2)Tout: The Temperature of operation of reactor
+#3)Pout: The operating pressure of reactor
+#4)Vol: The volume of reactor
+#5)Adiabatic: If the adiabatic reaction, then 1 else 0
+#6)OutTemp: If Out temperature of reaction specified, then 1 else 0
+#7)dHT0: The reaction enthalpy at standard temperature(T0)
+#8)timestep: The timestep for discretization
+#9)noofrxn: The number of reactions
+#10)stoi: Array of the stoichiometries of species. Row denotes the stoichiometries of species in reaction. Column denotes the reaction
+#11)coeffKf: The coeffiecients of temperature terms of reaction constant
+#12)Cpa: The coeffiecients of temperature terms of specific heat capacity
+#13) basecomp: The array for base components of a reaction. Row denotes the base components, column denotes the reaction taking place
+#14)orders: The array for the order of reaction of basecomponents
+#Import statement
+from DWSIM.Thermodynamics import *
+import math
+from System import Array
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')
+from DotNumerics.ODE import *
+#Initializing values in input streams (Only one input stream for batch reactor)
+feed=[0] #the array containing the properties of feed stream
+P=[0]  #array for Pressure of feed stream
+massflow=[0] #array for total mass flow of feed stream
+molfrac=[0] #array for molar fraction of feed stream
+molflow=[0] #array for total molar flow of feed stream
+enthalpy=[0] #array for the total enthalpy of feed stream
+#Extracting input from streams
+feed[0] = ims1
+P = feed[0].GetProp("pressure", "Overall", None, "", "")
+massflow = feed[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow = feed[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+enthalpy = feed[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac = feed[0].GetProp("fraction", "Overall", None, "", "mole")
+Tin = feed[0].GetProp("temperature", "Overall", None, "", "")
+Pout =feed[0].GetProp("pressure", "Overall", None, "", "")
+if Simultaneous==1:
+    #dummy variable j is used for jth component
+    comp=len(molfrac) #total number of compounds/elements involved in all reactions
+    n=int(noofrxn) #Number of reactions
+    stoic=[] #Stoichiometry of compounds/elements involved in reaction
+    stoic=eval(stoi)
+    r=[0]*n #Number of reactants in each reaction
+    p=[0]*n #Number of products in each reaction
+    ini=[0]*n #array for getting a reactants index for each reaction used while finding limiting reagent
+    reac=[[0]*comp for m in range(0,n)] #Array for finding whether a component is reactant or not
+    for m in range(0,n):
+     for i in range(0,comp):
+      if stoic[m][i]<0:
+       r[m]=r[m]+1
+       reac[m][i]=1
+       ini[m]=i
+      elif stoic[m][i]>0:
+       p[m]=p[m]+1 
+    ord=[] #Array for getting order of reaction
+    ord=eval(orders)
+    basecomponent=[] #Array for getting the basecomponents of a reaction
+    basecomponent=eval(basecomp)
+    order=[[0]*comp for i in range(0,n)] #List containing the orders of each specie in each reaction
+    for m in range(0,n):
+     for i,j in zip(range(0,len(basecomponent[m])),basecomponent[m]):
+      order[m][j-1]=ord[m][i]
+    #Initializing input variables
+    molein=[0]*(comp) #Array for the moles of each component in input stream
+    concin=[0]*(comp) #Array for the concentration of each component in input stream
+    #initial conditions
+    y0=[0]*(comp) #Initial concentration
+    for i in range(0,comp):
+        molein[i]=molflow[0]*molfrac[i]
+        concin[i]=molein[i]/Vol
+        y0[i]=concin[i] #input moles of each specie  
+    #Output variables
+    moleout=[0]*(comp) #Array for the moles of each component in output stream
+    concout=[0]*(comp) #Array for the concentration of each component in output stream
+    noofbase=[0]*n #Number of base components
+    for m in range(0,n):
+     noofbase[m]=len(basecomponent[m])
+    Kfe=[] #Array for coefficients of Temperature in reaction constant for each reaction
+    Kfe=eval(coeffKf)
+    Kf=[0]*n
+    for m in range(0,n):
+     Kf[m]=Kfe[m][0]+Kfe[m][1]*Tout+Kfe[m][2]*Tout**2+Kfe[m][3]*Tout**3+Kfe[m][4]/Tout+Kfe[m][5]*math.exp(-Kfe[m][6]*Tout)
+    def pro(ilist,alist,ordlist,mrxn): #Defining a product function used in solving differential equations
+     t=1
+     for i in ilist:
+      t=t*alist[i-1]**ordlist[mrxn][i-1]
+     return t
+    yprime=[0]*comp
+    cont=[[0]*comp for m in range(0,n)]
+    def ode(t,y):
+      for m in range(0,n):
+       for i in range(0,comp):
+        if y[i]<0 and stoic[m][i]<0:
+         y[i]=0
+         cont[m][i]=0
+        else:
+         cont[m][i]=1
+      for i in range(0,comp):
+       yprime[i]=sum((Kf[m]*stoic[m][i]/Vol*cont[m][i]*pro(basecomponent[m],y,order,m) for m in range(0,n))) 
+      return Array[float](yprime)
+    func=OdeFunction(ode)
+    init=OdeExplicitRungeKutta45(func,comp)
+    init.InitializeODEs(func,comp)
+    x=Array[float](y0)
+    ans = init.Solve(x,0,timestep,time)
+    ans2 = []
+    dimans=len(ans) #Dimension of ans i.e. the array of solutions 
+    y=[0]*len(ans) 
+    for i,j in zip(ans,range(0,len(ans))):
+        ans2.append(i)
+        y[j]=i
+    finalconc=[0]*comp #Final concentration of species
+    for i in range(0,comp):
+       finalconc[i]=y[dimans-comp+i]
+    for i in range(0,comp):
+      concout[i]=finalconc[i] #Out concentration of species
+      if concout[i]<0:
+       concout[i]=0
+       finalconc[i]=0
+     #finding the limiting reagent
+    limrat=[0]*n #ratio of concentration and stoichiometry of limiting reagent
+    limrea=[0]*n #Array for index of limiting reagent
+    for m in range(0,n):
+      limrat[m]=y0[ini[m]]/abs(stoic[m][ini[m]])
+      limrea[m]=ini[m]
+      for i in range(0,comp):
+       if reac[m][i]==1:
+        if limrat[m]>y0[i]/abs(stoic[m][i]):
+         limrea[m]=i
+         limrat[m]=y0[i]/abs(stoic[m][i]) 
+     #defining out mass
+    massout=massflow #The total mass in product stream
+     #finding the mole flow rate of out stream
+    finalmole=[0]*comp #Final moles of each specie in product stream
+    for i in range(0,comp):
+      finalmole[i]=finalconc[i]*Vol 
+     #total out moles
+    totalmoleout=[0] #Total moles in product stream
+    for i in range(0,comp):
+      totalmoleout[0]=totalmoleout[0]+finalmole[i]
+     #finding mole fraction
+    molefraco=[0]*comp #Mole frcation of species in product stream
+    for i in range(0,comp):
+      molefraco[i]=finalmole[i]/totalmoleout[0]
+     #settting final temperature
+    To=[0] #Temperature in product stream 
+    To[0]=Tout
+elif Simultaneous==0:
+    #dummy variable j is used for jth component
+    comp=len(molfrac) #total number of compounds/elements involved in all reactions
+    n=int(noofrxn) #Number of reactions
+    stoic=[] #Stoichiometry of compounds/elements involved in reaction
+    stoic=eval(stoi)
+    ini=[0]*n #array for getting a reactants index for each reaction used while finding limiting reagent
+    reac=[[0]*comp for m in range(0,n)] #Array for finding whether a component is reactant or not
+    r=0
+    p=0
+    for m in range(0,n):
+     for i in range(0,comp):
+      if stoic[m][i]<0:
+       reac[m][i]=1
+       ini[m]=i
+       r=r+1
+      elif stoic[m][i]>0:
+        p=p+1
+    ord=[] #Array for getting order of reaction
+    ord=eval(orders)
+    basecomponent=[] #Array for getting the basecomponents of reactions
+    basecomponent=eval(basecomp)
+    #Initializing input variables
+    molein=[0]*(comp) #Array for the moles of each component in input stream(unit=mole/s)
+    concin=[0]*(comp) #Array for the concentration of each component in input stream(unit=mole/(m^3*s))
+    #initial conditions
+    y0=[0]*(comp) #input concentration of each specie (unit=mole/(m^3*s))
+    for i in range(0,comp):
+        molein[i]=molflow[0]*molfrac[i]
+        concin[i]=molein[i]/Vol
+    for i in range(0,comp):
+        y0[i]=concin[i]   
+    #Output variables
+    moleout=[0]*(comp) #Array for the moles of each component in output stream (unit=mole/s)
+    concout=[0]*(comp) #Array for the concentration of each component in output stream (unit=mole/(m^3*s))
+    for m in range(0,int(n)):
+            noofbase=len(basecomponent[m]) #Number of base components in mth reaction
+            #defining list containing orders of reactions
+            order=[0]*(comp) #Array of order of all species whether involved or not in mth reaction
+            for i,j in zip(basecomponent[m],range(0,len(ord[m]))):
+             order[i-1]=ord[m][j]
+            #Calculating value of Kf
+            Kfe=[] #Array for getting the input values of coefficients of temperature in reaction constant 
+            Kfe=eval(coeffKf)
+            Kf=Kfe[m][0]+Kfe[m][1]*Tout+Kfe[m][2]*Tout**2+Kfe[m][3]*Tout**3+Kfe[m][4]/Tout+Kfe[m][5]*math.exp(-Kfe[m][6]*Tout) #Evaluating the reaction constant
+            #assuming same Tout for all the reactions
+            yprime=[0] #variable for dy/dt
+            def ode(t,y): 
+             pro=1  #check for -ve concentrations
+             for i in basecomponent[m]: #if a basecomponent's number is given 3 in input, it means that index of that compound is 2
+               for j in range(0,comp): 
+                if y0[j]+stoic[m][j]*y[0]<0: #If the concentration at any instant of goes negative, stop the reaction containing that specie
+                 pro=0
+                 break
+               if pro!=0:
+                 pro=pro*(y0[i-1]+stoic[m][i-1]*y[0])**order[i-1] #y(variable) denotes the reaction coordinate of a reaction at time t
+             yprime[0]=Kf*pro
+             return Array[float](yprime)
+            func=OdeFunction(ode)
+            init=OdeExplicitRungeKutta45(func,1)
+            init.InitializeODEs(func,1)
+            x=Array[float]([0])
+            ans = init.Solve(x,0,time,time)
+            ans2 = []
+            for i in ans:
+              ans2.append(i)
+              y=i
+            #equation to be solved by ode solver: dx/dt=Kf(a0-a*x)^(order(A))*(b0-b*x)^(order(B))
+            for j in range(0,comp):
+              concout[j]=y0[j]+stoic[m][j]*y #(unit=mole/s)
+            #finding the limiting reagent
+            limrat=[0]*n
+            limrea=[0]*n
+            #finding concentration out
+            for m in range(0,n):
+             limrat[m]=y0[ini[m]]/abs(stoic[m][ini[m]])
+             limrea[m]=ini[m]
+             for i in range(0,comp):
+               if reac[m][i]==1:
+                if limrat[m]>y0[i]/abs(stoic[m][i]):
+                 limrea[m]=i
+                 limrat[m]=y0[i]/abs(stoic[m][i])
+             if concout[limrea[m]]<0:
+               concout[limrea[m]]=0
+               for i in range(0,comp):
+                concout[i]=y0[i]-stoic[m][i]/stoic[m][limrea[m]]*y0[limrea[m]]
+            #setting new values of concentration in for new reaction
+            for e in range(0,comp):
+             y0[e]=concout[e] #(unit=mole/(m^3*s)) 
+            totalmoleout=[0] #(unit=mole/s)
+            for i in range(0,comp):
+             moleout[i]=concout[i]*Vol
+             totalmoleout[0]=totalmoleout[0]+moleout[i]
+            molefraco=[0]*(comp)
+            for i in range(0,comp):
+             molefraco[i]=moleout[i]/totalmoleout[0]
+            #Calculating mass out
+            massout=[0] #unit=Kg/s
+            massout[0]=massflow[0] 
+            #setting out temperature
+            To=[0] #unit=Kelvin
+            To[0]=Tout
+out=[0]
+out[0]=oms1
+out[0].Clear()
+out[0].ClearAllProps()
+out[0].SetProp("totalFlow" ,"Overall", None, "", "mass",massout)
+out[0].SetProp("totalflow", "Overall",None, "","mole",totalmoleout)
+out[0].SetProp("fraction","Overall",None,"","mole",molefraco)
+out[0].SetProp("pressure", "Overall", None, "", "",Pout)  #Not able to set the desired pressure value
+out[0].SetProp("temperature", "Overall", None, "", "",To)
+        
+ 
+   
+
+    
+
+
+
+
+
+

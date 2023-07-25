@@ -173,6 +173,12 @@ Public Class Settings
 
     Public Shared Property CheckForUpdates As Boolean = True
 
+    Public Shared TranslatorActivated As Boolean = False
+
+    Public Shared TranslatorLanguage As String = ""
+
+    Public Shared LockModelParameters As Boolean = False
+
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function
@@ -188,7 +194,7 @@ Public Class Settings
                 End If
 
                 If Not Directory.Exists(pythonpath) Then
-                    Throw New Exception("Python binaries Path is not defined correctly.")
+                    Throw New Exception("Please define the path to a valid Python 3.x distribution in General Settings and try again.")
                 End If
 
                 Try
@@ -210,7 +216,7 @@ Public Class Settings
                 End If
 
                 If Not File.Exists(pythonpath) Then
-                    Throw New Exception("Python Library File is not defined correctly.")
+                    Throw New Exception("Please define the path to a valid Python 3.x distribution in General Settings and try again.")
                 End If
 
                 Try

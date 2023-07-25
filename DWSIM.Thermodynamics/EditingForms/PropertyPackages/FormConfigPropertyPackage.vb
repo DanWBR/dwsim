@@ -62,13 +62,17 @@ Public Class FormConfigPropertyPackage
                 .FontName = SystemFonts.MessageBoxFont.Name,
                 .FontSize = SystemFonts.MessageBoxFont.SizeInPoints
             })
+            Dim Changing As Boolean = False
             AddHandler .CellDataChanged,
                 Sub(sender, e)
-                    If Loaded Then
+                    If Loaded And Not Changing Then
                         Try
                             SetKijVal(.RowHeaders(e.Cell.Row).Text, .ColumnHeaders(e.Cell.Column).Text, e.Cell.Data)
+                            Changing = True
                             .Cells(e.Cell.Column, e.Cell.Row).Data = e.Cell.Data
                         Catch ex As Exception
+                        Finally
+                            Changing = False
                         End Try
                     End If
                 End Sub
@@ -401,22 +405,70 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
         If Loaded Then
             If TypeOf _pp Is SRKPropertyPackage Then
                 Dim ppu As PropertyPackages.SRKPropertyPackage = _pp
-                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                If ppu.m_pr.InteractionParameters.ContainsKey(id1) Then
+                    If ppu.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                    Else
+                        ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                    End If
+                Else
+                    ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                End If
             ElseIf TypeOf _pp Is PengRobinson1978PropertyPackage Then
                 Dim ppu As PropertyPackages.PengRobinson1978PropertyPackage = _pp
-                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                If ppu.m_pr.InteractionParameters.ContainsKey(id1) Then
+                    If ppu.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                    Else
+                        ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                    End If
+                Else
+                    ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                End If
             ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
                 Dim ppu As PropertyPackages.PengRobinsonPropertyPackage = _pp
-                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                If ppu.m_pr.InteractionParameters.ContainsKey(id1) Then
+                    If ppu.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                    Else
+                        ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                    End If
+                Else
+                    ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                End If
             ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
                 Dim ppu As PropertyPackages.UNIFACPropertyPackage = _pp
-                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                If ppu.m_pr.InteractionParameters.ContainsKey(id1) Then
+                    If ppu.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                    Else
+                        ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                    End If
+                Else
+                    ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                End If
             ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
                 Dim ppu As PropertyPackages.UNIFACLLPropertyPackage = _pp
-                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                If ppu.m_pr.InteractionParameters.ContainsKey(id1) Then
+                    If ppu.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                    Else
+                        ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                    End If
+                Else
+                    ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                End If
             ElseIf TypeOf _pp Is MODFACPropertyPackage Then
                 Dim ppu As PropertyPackages.MODFACPropertyPackage = _pp
-                ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                If ppu.m_pr.InteractionParameters.ContainsKey(id1) Then
+                    If ppu.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                    Else
+                        ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                    End If
+                Else
+                    ppu.m_pr.InteractionParameters(id2)(id1).kij = newvalue
+                End If
             End If
         End If
 
@@ -450,6 +502,8 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
             Next
         Next
+
+        _pp.AreModelParametersDirty = True
 
     End Sub
 

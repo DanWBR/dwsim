@@ -48,31 +48,6 @@ Public Class AboutForm
                                                                              Lblcpusimd.Text = t.Result
                                                                          End Sub, Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext)
 
-        lblGPGPUinfo.Text = "Querying computing devices..."
-
-        Threading.Tasks.Task.Factory.StartNew(Function()
-                                                  Dim list As New List(Of String)
-                                                  Try
-                                                      CudafyModes.Target = eGPUType.Cuda
-                                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                                          list.Add(prop.Name & " (" & prop.PlatformName & " / CUDA)")
-                                                      Next
-                                                  Catch ex As Exception
-
-                                                  End Try
-                                                  CudafyModes.Target = eGPUType.OpenCL
-                                                  For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                                      list.Add(prop.Name & " (" & prop.PlatformName & " / OpenCL)")
-                                                  Next
-                                                  Return list
-                                              End Function).ContinueWith(Sub(t)
-                                                                             lblGPGPUinfo.Text = ""
-                                                                             For Each s As String In t.Result
-                                                                                 lblGPGPUinfo.Text += s & ", "
-                                                                             Next
-                                                                             lblGPGPUinfo.Text = lblGPGPUinfo.Text.TrimEnd.TrimEnd(",")
-                                                                         End Sub, Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext)
-
     End Sub
 
 End Class

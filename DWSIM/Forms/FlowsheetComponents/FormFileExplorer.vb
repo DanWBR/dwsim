@@ -22,6 +22,19 @@ Public Class FormFileExplorer
         TempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
         Directory.CreateDirectory(TempDir)
 
+        If Settings.DpiScale > 1.0 Then
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.AutoSize = True
+            Me.ToolStrip1.Invalidate()
+        End If
+
         Loaded = True
 
         UpdateSize()
@@ -180,9 +193,17 @@ Public Class FormFileExplorer
 
     Private Sub FormFileExplorer_Activated(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
-        ListFiles()
-        UpdateSize()
+        Try
+            If Visible And Flowsheet IsNot Nothing Then
+                ListFiles()
+                UpdateSize()
+            End If
+        Catch ex As Exception
+        End Try
 
     End Sub
 
+    Private Sub FormFileExplorer_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

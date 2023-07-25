@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Interface Name="XFlowsheet.Interfaces.IConnectionPort">
+    <Position X="17.75" Y="3" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAQAAAQggABAAAAAAAQQAAAgAAAAAAEAAAAAEAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="XFlowsheet.Interfaces.IPFDObject">
+    <Position X="12" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAggAAABAAEAEQCAAAAAAAAAIAAAAAAYAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ObjectType" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ports" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="XFlowsheet.Interfaces.ISimulationObject">
+    <Position X="6" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAACAAAAggAAAAAAAIAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ObjectType" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Parameters" />
+      <Property Name="ExtendedParameters" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="XFlowsheet.Interfaces.IPropertyPackage">
+    <Position X="2.75" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAAAAAQAAAAAAAAAAIgAAAAAAAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Model" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Parameters" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="XFlowsheet.Interfaces.IFlowsheet">
+    <Position X="7.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAACAggAAAAAQAAAQAAAAACAAAAICAAAAAAAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DisplayedUnitsOfMeasure" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="SimulationObjects" />
+      <Property Name="PFDObjects" />
+      <Property Name="PropertyPackages" />
+      <Property Name="Parameters" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="XFlowsheet.Interfaces.IParameter">
+    <Position X="1.25" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAAAAAQAAAAAAAAAAAAgAAAAEAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ValueType" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="XFlowsheet.Interfaces.IUnitsOfMeasure" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SQAAAAHFAAAhg4AAAAAQIDRhBAAC4BBIABYtAwKMgRE=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="XFlowsheet.Interfaces.UnitOfMeasureSet">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAAABAAAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="XFlowsheet.Interfaces.UnitOfMeasure" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAIAAHlAAABAoAAAAAYIBABBAAi4BBIAB4FA0OMARA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="XFlowsheet.Interfaces.PropPackageModel">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAABAAAAAQBAAIAAEAAAAAgAEAACAEAAAEAAAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="XFlowsheet.Interfaces.ParamValueType">
+    <Position X="1.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAgBAAQAAAEEAAKAAAKAAAACABQAACgQgAAEQBBIA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="XFlowsheet.Interfaces.ObjType">
+    <Position X="10.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgEAAACAAAAAAAAgEEAAAACIIAAAAQAAABAAAAAAAA=</HashCode>
+      <FileName>Interface.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

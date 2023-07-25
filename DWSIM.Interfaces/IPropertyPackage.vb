@@ -70,6 +70,12 @@
 
     Sub DisplayGroupedEditingForm()
 
+    ReadOnly Property DisplayName As String
+
+    ReadOnly Property DisplayDescription As String
+
+    Function GetAsObject() As Object
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseEnvelopeOptions
@@ -105,6 +111,8 @@ End Interface
 
     Property BubbleUseCustomParameters As Boolean
     Property DewUseCustomParameters As Boolean
+
+    Property ImmiscibleWater As Boolean
 
 
 End Interface

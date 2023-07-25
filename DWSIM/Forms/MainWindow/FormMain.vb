@@ -36,7 +36,6 @@ Imports ICSharpCode.SharpZipLib.Zip
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
-Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
@@ -60,7 +59,6 @@ Public Class FormMain
 
     Public CancelClosing As Boolean = False
 
-    Private tmpform2 As FormFlowsheet
     Public WithEvents timer1 As New Timer
 
     Public calculatorassembly, unitopassembly As Assembly
@@ -68,6 +66,10 @@ Public Class FormMain
 
     Public SampleList As New List(Of String)
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
+
+    Public Shared TranslateFunction As Func(Of String, String)
+
+    Public Shared TranslateFormFunction As Action(Of Object)
 
     Public Shared Property IsPro As Boolean = False
 
@@ -91,7 +93,7 @@ Public Class FormMain
 
     Public Property MostRecentFiles As Specialized.StringCollection
 
-    Public Shared AnalyticsProvider As IAnalyticsProvider
+    Public Property AnalyticsProvider As IAnalyticsProvider
 
     Public Shared ExternalSolvers As New Dictionary(Of String, Interfaces.IExternalSolverIdentification)
 
@@ -109,28 +111,38 @@ Public Class FormMain
 
     Public SavingSimulation As Func(Of IFlowsheet, Boolean)
 
+    Public Shared WebView2Environment As Microsoft.Web.WebView2.Core.CoreWebView2Environment
+
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        If IsPro Then StatusStrip1.Visible = False
+#If LINUX = False Then
+        InitializeWebView2Environment()
+#End If
 
         Using g1 = Me.CreateGraphics()
 
             Settings.DpiScale = g1.DpiX / 96.0
 
             Me.ToolStrip1.AutoSize = False
-            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
             Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             Me.MenuStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.MenuStrip1.Size = New Size(MenuStrip1.Width, 28 * Settings.DpiScale)
             For Each item In Me.ToolStrip1.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
                     DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
                 End If
             Next
             Me.ToolStrip1.Invalidate()
+            Me.StatusStrip1.AutoSize = False
+            Me.StatusStrip1.Size = New Size(StatusStrip1.Width, 22 * Settings.DpiScale)
+            Me.StatusStrip1.Invalidate()
 
         End Using
+
+        unvell.ReoGrid.Editor.Common.Shared.DpiScale = Settings.DpiScale
 
         MostRecentFiles = My.Settings.MostRecentFiles
 
@@ -138,10 +150,6 @@ Public Class FormMain
         ' SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
 
         If GlobalSettings.Settings.OldUI Then
-
-#If LINUX = False Then
-            If Not IsPro Then Icon = My.Resources.DWSIM_icon_64
-#End If
 
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
@@ -181,7 +189,19 @@ Public Class FormMain
                 My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
             Next
 
-            LoadExtenders()
+            tsmiFreeProTrial.Visible = Not IsPro
+            tsmiPrivateSupport.Visible = Not IsPro
+
+#If LINUX = False Then
+            If IsPro Then
+                DownloadSupplementarySoftwareToolStripMenuItem.Visible = False
+                StatusStrip1.Visible = False
+                tsbRegCO.Visible = False
+                RegistroCAPEOPENToolStripMenuItem.Enabled = False
+                DashboardToolStripMenuItem.Visible = False
+                tsmiProUG.Visible = False
+            End If
+#End If
 
             'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
             'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
@@ -201,11 +221,36 @@ Public Class FormMain
 
     End Sub
 
+    Private Sub InitializeWebView2Environment()
+
+        Try
+            Dim newUserFolder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DWSIM", "BrowserData")
+            WebView2Environment = Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(Nothing, newUserFolder, Nothing).Result
+        Catch ex As Exception
+            AnalyticsProvider?.RegisterError("Failed to Initialize WebView2 Environment", ex.Message, ex, Nothing)
+        End Try
+
+    End Sub
+
+    Private Sub UpdateIcon()
+
+
+#If LINUX = False Then
+        If Not IsPro Then
+            Icon = My.Resources.DWSIM_Icon_41
+        Else
+            Icon = My.Resources.Icon1282
+        End If
+#End If
+
+    End Sub
+
     Private Sub LoadExtenders()
 
         ' On user details loaded
         AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
+        AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
 
 #If Not WINE32 Then
 
@@ -250,6 +295,7 @@ Public Class FormMain
                                 Case ExtenderCategory.File
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
@@ -257,6 +303,7 @@ Public Class FormMain
                                 Case ExtenderCategory.Edit
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
@@ -264,6 +311,7 @@ Public Class FormMain
                                 Case ExtenderCategory.Tools
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolsTSMI.DropDownItems.Add(exttsmi)
@@ -271,6 +319,7 @@ Public Class FormMain
                                 Case ExtenderCategory.Help
                                     If item.InsertAtPosition >= 0 Then
                                         exttsmi.MergeAction = MergeAction.Insert
+                                        exttsmi.MergeIndex = item.InsertAtPosition
                                         HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         HelpTSMI.DropDownItems.Add(exttsmi)
@@ -298,6 +347,7 @@ Public Class FormMain
                 Logging.Logger.LogError("Extender Initialization", ex)
             End Try
         Next
+
 #End If
 
     End Sub
@@ -316,6 +366,13 @@ Public Class FormMain
                         Me.LogoutDropdown.Visible = False
                         Me.LoginButton.Visible = True
                     End Sub)
+    End Sub
+
+    Private Sub UserService_ShowLoginForm(sender As Object, e As EventArgs)
+
+        Dim loginForm = New LoginForm
+        loginForm.ShowDialog()
+
     End Sub
 
 
@@ -582,7 +639,7 @@ Public Class FormMain
 
             Dim dinfo As New DirectoryInfo(Utility.GetExtendersRootDirectory())
 
-            Dim files() As FileInfo = dinfo.GetFiles("*.dll")
+            Dim files() As FileInfo = dinfo.GetFiles("*Extensions*.dll")
 
             If Not files Is Nothing Then
                 For Each fi As FileInfo In files
@@ -779,7 +836,6 @@ Public Class FormMain
         Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
         PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
         PRLKPP.ComponentDescription = DWSIM.App.GetLocalString("DescPRLK")
-
         PropertyPackages.Add(PRLKPP.ComponentName.ToString, PRLKPP)
 
         Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
@@ -848,6 +904,9 @@ Public Class FormMain
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
+        Dim RKPP As ReaktoroPropertyPackage.ReaktoroPropertyPackage = New ReaktoroPropertyPackage.ReaktoroPropertyPackage()
+        PropertyPackages.Add(RKPP.ComponentName.ToString, RKPP)
+
         'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
         'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
         'EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
@@ -872,11 +931,11 @@ Public Class FormMain
 
         'PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
 
-        Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
-        BOPP.ComponentName = "Black Oil"
-        BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
+        'Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
+        'BOPP.ComponentName = "Black Oil"
+        'BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
-        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+        'PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
         Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
 
@@ -900,15 +959,19 @@ Public Class FormMain
 
         PropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
 
-        Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+        If My.Settings.LoadExtensionsAndPlugins Or FormMain.IsPro Then
 
-        For Each pp In otherpps
-            If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
-                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
-            Else
-                Console.WriteLine(String.Format("Error adding External Property Package '{0}'. Check the 'ppacks' and 'extenders' folders for duplicate items.", pp.ComponentName))
-            End If
-        Next
+            Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+
+            For Each pp In otherpps
+                If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
+                    PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+                Else
+                    Console.WriteLine(String.Format("Error adding External Property Package '{0}'. Check the 'ppacks' and 'extenders' folders for duplicate items.", pp.ComponentName))
+                End If
+            Next
+
+        End If
 
         'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.
         If Not DWSIM.App.IsRunningOnMono Then
@@ -953,14 +1016,15 @@ Public Class FormMain
                 ToolStripManager.Merge(DirectCast(ActiveMdiChild, FormFlowsheet).ToolStrip1, ToolStrip1)
             End If
 
+            FormMain.TranslateFormFunction?.Invoke(Me)
+
         End If
 
     End Sub
 
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
-        tsmiFreeProTrial.Visible = Not IsPro
-
+        UpdateIcon()
 
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 
@@ -1017,7 +1081,37 @@ Public Class FormMain
 
         End If
 
+#If LINUX = False Then
+        Dim currver = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+        If (Settings.CurrentVersion <> currver) Then
+            Settings.CurrentVersion = currver
+            My.Settings.CurrentVersion = currver
+            Dim frmwn As New FormWhatsNew()
+            frmwn.Show()
+        End If
+#Else
+        MessageBox.Show("The Classic UI version of DWSIM is not supported on Linux. Use it at your own risk.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+#End If
+
+
+        AnalyticsProvider?.SetMainForm(Me)
+
         AnalyticsProvider?.Initialize()
+
+        TranslateFormFunction?.Invoke(Me)
+
+        If AnalyticsProvider IsNot Nothing Then
+            AddHandler Me.ToolOpened,
+                Sub(sender2, e2)
+                    AnalyticsProvider.RegisterEvent(sender2.ToString(), "", Nothing)
+                End Sub
+            Task.Delay(30 * 1000).ContinueWith(
+            Sub(t)
+                UIThread(Sub()
+                             If Not My.Settings.UserTypeSent Then tsbQuickQuestion.Visible = True
+                         End Sub)
+            End Sub)
+        End If
 
     End Sub
 
@@ -1027,20 +1121,20 @@ Public Class FormMain
 
             ' check for updates
             Task.Factory.StartNew(Function()
-                                  GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
-                                  Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
-                                  Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
-                                  Return SharedClasses.UpdateCheck.CheckForUpdates()
-                              End Function).ContinueWith(Sub(t)
-                                                             If (t.Result) Then
-                                                                 Dim whatsnew = SharedClasses.UpdateCheck.GetWhatsNew()
-                                                                 Me.UIThreadInvoke(Sub()
-                                                                                       If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable") & vbCrLf & vbCrLf & whatsnew, DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
-                                                                                           Process.Start("https://dwsim.org/downloads")
-                                                                                       End If
-                                                                                   End Sub)
-                                                             End If
-                                                         End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                                      GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
+                                      Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
+                                      Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
+                                      Return SharedClasses.UpdateCheck.CheckForUpdates()
+                                  End Function).ContinueWith(Sub(t)
+                                                                 If (t.Result) Then
+                                                                     Dim whatsnew = SharedClasses.UpdateCheck.GetWhatsNew()
+                                                                     Me.UIThreadInvoke(Sub()
+                                                                                           If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable") & vbCrLf & vbCrLf & whatsnew, DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
+                                                                                               Process.Start("https://dwsim.org/downloads")
+                                                                                           End If
+                                                                                       End Sub)
+                                                                 End If
+                                                             End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
         End If
 
@@ -1058,6 +1152,8 @@ Public Class FormMain
         UpdateFlowsheetLinks()
 
         If My.Settings.CheckForUpdates Then CheckForUpdates()
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
 
@@ -1330,24 +1426,6 @@ Public Class FormMain
 #End Region
 
 #Region "    Open/Save Files"
-
-    Function ReturnForm(ByVal str As String) As IDockContent
-        Select Case str
-            Case "DWSIM.LogPanel", "DWSIM.frmLog"
-                Return Me.tmpform2.FormLog
-            Case "DWSIM.MaterialStreamPanel", "DWSIM.frmMatList"
-                Return Me.tmpform2.FormMatList
-            Case "DWSIM.FlowsheetSurface", "DWSIM.frmSurface"
-                Return Me.tmpform2.FormSurface
-            Case "DWSIM.SpreadsheetForm"
-                Return Me.tmpform2.FormSpreadsheet
-            Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
-                Return Me.tmpform2.FormWatch
-            Case "DWSIM.frmProps"
-                Return Me.tmpform2.FormProps
-        End Select
-        Return Nothing
-    End Function
 
     Private Function RandomString(ByVal size As Integer, ByVal lowerCase As Boolean) As String
 
@@ -1764,7 +1842,6 @@ Public Class FormMain
         form.dckPanel.ActiveAutoHideContent = Nothing
         form.dckPanel.Parent = form
 
-        Me.tmpform2 = form
         form.FormLog.DockPanel = Nothing
         form.FormMatList.DockPanel = Nothing
         form.FormSpreadsheet.DockPanel = Nothing
@@ -1820,6 +1897,366 @@ Public Class FormMain
         Application.DoEvents()
 
     End Sub
+
+    Public Function LoadJSON(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "") As Interfaces.IFlowsheet
+
+        RaiseEvent FlowsheetLoadingFromXML(Me, New EventArgs())
+
+        My.Application.PushUndoRedoAction = False
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        Dim excs As New Concurrent.ConcurrentBag(Of Exception)
+
+        Dim soptions As New Newtonsoft.Json.JsonSerializerSettings
+        With soptions
+            .Formatting = Newtonsoft.Json.Formatting.Indented
+            .TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+        End With
+
+        Dim fsx = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Global.XFlowsheet.Implementation.DefaultImplementations.Flowsheet)(handler.ReadAllText(), soptions)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
+
+        Dim form As FormFlowsheet = New FormFlowsheet()
+
+        form.Options.VirtualFile = handler
+
+        Application.DoEvents()
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
+
+        For Each comp In fsx.Compounds
+            form.Options.SelectedComponents.Add(comp, Me.AvailableComponents(comp))
+        Next
+
+        For Each ppx In fsx.PropertyPackages
+            Dim pp As PropertyPackage = Nothing
+            Select Case ppx.Model
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.PR_EOS
+                    pp = New PengRobinsonPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.PR78_EOS
+                    pp = New PengRobinson1978PropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.SRK_EOS
+                    pp = New SRKPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.NRTL
+                    pp = New NRTLPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.UNIQUAC
+                    pp = New UNIQUACPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.UNIFAC
+                    pp = New UNIFACPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_Dortmund
+                    pp = New MODFACPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Mod_UNIFAC_NIST
+                    pp = New NISTMFACPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Grayson_Streed
+                    pp = New GraysonStreedPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Chao_Seader
+                    pp = New ChaoSeaderPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Ideal
+                    pp = New RaoultPropertyPackage()
+                Case Global.XFlowsheet.Interfaces.PropPackageModel.Lee_Kesler_Plocker
+                    pp = New LKPPropertyPackage()
+            End Select
+            pp.UniqueID = ppx.ID
+            pp.ComponentName = ppx.Name
+            pp.ComponentDescription = ppx.Description
+            pp.Tag = ppx.Name
+            pp.Flowsheet = form
+            form.Options.PropertyPackages.Add(pp.UniqueID, pp)
+        Next
+
+        Select Case fsx.DisplayedUnitsOfMeasure
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.SI
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.SI
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.SI_Engineering
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.SI_ENG
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.CGS
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.CGS
+            Case Global.XFlowsheet.Interfaces.UnitOfMeasureSet.Imperial
+                form.Options.SelectedUnitSystem = New SystemsOfUnits.English
+        End Select
+
+        For Each gobjx In fsx.PFDObjects
+            Dim obj As ShapeGraphic = Nothing
+            Select Case gobjx.ObjectType
+                Case Global.XFlowsheet.Interfaces.ObjType.MaterialStream
+                    obj = New MaterialStreamGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.EnergyStream
+                    obj = New EnergyStreamGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Pump
+                    obj = New PumpGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Valve
+                    obj = New ValveGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Heater
+                    obj = New HeaterGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Cooler
+                    obj = New CoolerGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Compressor
+                    obj = New CompressorGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Expander
+                    obj = New TurbineGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Mixer
+                    obj = New MixerGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.Splitter
+                    obj = New SplitterGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.HeatExchanger
+                    obj = New HeatExchangerGraphic
+                Case Global.XFlowsheet.Interfaces.ObjType.SeparatorVessel
+                    obj = New VesselGraphic
+            End Select
+            Dim ip = gobjx.Ports.Where(Function(p) p.IsInput).FirstOrDefault()
+            Dim op = gobjx.Ports.Where(Function(p) p.IsOutput).FirstOrDefault()
+            obj.Name = gobjx.ID
+            obj.Tag = gobjx.Name
+            obj.Description = gobjx.Description
+            obj.SetPosition(gobjx.X, gobjx.Y)
+            obj.Width = gobjx.Width
+            obj.Height = gobjx.Height
+            obj.CreateConnectors(0, 0)
+            If ip.IsConnected Then
+                obj.InputConnectors(0).ConnectorName = ip.ConnectedToObjectID + "|" + ip.ConnectedToObjectPortIndex.ToString()
+            End If
+            If op.IsConnected Then
+                obj.OutputConnectors(0).ConnectorName = op.ConnectedToObjectID + "|" + ip.ConnectedToObjectPortIndex.ToString()
+            End If
+            form.FormSurface.FlowsheetSurface.DrawingObjects.Add(obj)
+            form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
+        Next
+
+        Dim gobjlist = form.Collections.GraphicObjectCollection.Values.ToList()
+
+        Dim i As Integer
+
+        For Each gobj In gobjlist
+            i = 0
+            For Each ip In gobj.InputConnectors
+                If ip.ConnectorName.Contains("|") Then
+                    Dim oname = ip.ConnectorName.Split("|")(0)
+                    Dim pindex As Integer = ip.ConnectorName.Split("|")(1)
+                    Dim fobj = form.Collections.GraphicObjectCollection(oname)
+                    form.ConnectObjects(fobj, gobj, pindex, 0)
+                End If
+                i += 1
+            Next
+            i = 0
+            For Each op In gobj.OutputConnectors
+                If op.ConnectorName.Contains("|") And op.AttachedConnector IsNot Nothing Then
+                    Dim oname = op.ConnectorName.Split("|")(0)
+                    Dim pindex As Integer = op.ConnectorName.Split("|")(1)
+                    Dim fobj = form.Collections.GraphicObjectCollection(oname)
+                    form.ConnectObjects(gobj, fobj, 0, pindex)
+                End If
+                i += 1
+            Next
+        Next
+
+        For Each sobj In fsx.SimulationObjects
+            Dim gobj = form.Collections.GraphicObjectCollection(sobj.ID)
+            Dim obj As BaseClass = Nothing
+            Select Case sobj.ObjectType
+                Case Global.XFlowsheet.Interfaces.ObjType.MaterialStream
+                    obj = New Streams.MaterialStream()
+                    form.AddComponentsRows(obj)
+                    With DirectCast(obj, Streams.MaterialStream)
+                        .SetTemperature(sobj.Parameters.Where(Function(p) p.Name = "Temperature").First().Value)
+                        .SetPressure(sobj.Parameters.Where(Function(p) p.Name = "Pressure").First().Value)
+                        .SetMassEnthalpy(sobj.Parameters.Where(Function(p) p.Name = "MassEnthalpy").First().Value)
+                        .SetMassEntropy(sobj.Parameters.Where(Function(p) p.Name = "MassEntropy").First().Value)
+                        .SetMolarFlow(sobj.Parameters.Where(Function(p) p.Name = "OverallMolarFlow").First().Value)
+                        Dim comp As List(Of Double) = sobj.Parameters.Where(Function(p) p.Name = "OverallMolarComposition").First().Value
+                        .SetOverallComposition(comp.ToArray())
+                        .CalcOverallCompMassFractions()
+                        .SetFlashSpec(sobj.Parameters.Where(Function(p) p.Name = "FlashSpec").First().Value)
+                        .Phases(0).Properties.molarfraction = (sobj.Parameters.Where(Function(p) p.Name = "VaporFraction").First().Value)
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.EnergyStream
+                    obj = New EnergyStream()
+                    With DirectCast(obj, EnergyStream)
+                        .EnergyFlow = sobj.Parameters.Where(Function(p) p.Name = "EnergyFlow").First().Value
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.Cooler
+                    obj = New Cooler()
+                    With DirectCast(obj, Cooler)
+                        .DeltaQ = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
+                        .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalcMode = Cooler.CalculationMode.HeatRemoved
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.Heater
+                    obj = New Heater()
+                    With DirectCast(obj, Heater)
+                        .DeltaQ = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
+                        .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalcMode = Heater.CalculationMode.HeatAdded
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.HeatExchanger
+                    obj = New HeatExchanger
+                    With DirectCast(obj, HeatExchanger)
+                        .Area = sobj.Parameters.Where(Function(p) p.Name = "ExchangeArea").First().Value
+                        .OverallCoefficient = sobj.Parameters.Where(Function(p) p.Name = "OverallHTC").First().Value
+                        .Q = sobj.Parameters.Where(Function(p) p.Name = "HeatDuty").First().Value
+                        .ThermalEfficiency = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalculationMode = HeatExchangerCalcMode.CalcBothTemp
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.Pump
+                    obj = New Pump()
+                    With DirectCast(obj, Pump)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureIncrease").First().Value
+                        .Eficiencia = sobj.Parameters.Where(Function(p) p.Name = "Efficiency").First().Value
+                        .CalcMode = Pump.CalculationMode.Delta_P
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.Valve
+                    obj = New Valve()
+                    With DirectCast(obj, Valve)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureDecrease").First().Value
+                        .CalcMode = Valve.CalculationMode.DeltaP
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.Mixer
+                    obj = New Mixer()
+                Case Global.XFlowsheet.Interfaces.ObjType.Splitter
+                    obj = New UnitOperations.UnitOperations.Splitter()
+                    With DirectCast(obj, UnitOperations.UnitOperations.Splitter)
+                        Dim splitfact As List(Of Double) = sobj.Parameters.Where(Function(p) p.Name = "SplitFactors").First().Value
+                        .Ratios.AddRange(splitfact)
+                        .OperationMode = UnitOperations.UnitOperations.Splitter.OpMode.SplitRatios
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.SeparatorVessel
+                    obj = New Vessel()
+                Case Global.XFlowsheet.Interfaces.ObjType.Compressor
+                    obj = New Compressor()
+                    With DirectCast(obj, Compressor)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureIncrease").First().Value
+                        .AdiabaticEfficiency = sobj.Parameters.Where(Function(p) p.Name = "AdiabaticEfficiency").First().Value
+                        .CalcMode = Compressor.CalculationMode.Delta_P
+                    End With
+                Case Global.XFlowsheet.Interfaces.ObjType.Expander
+                    obj = New Expander()
+                    With DirectCast(obj, Compressor)
+                        .DeltaP = sobj.Parameters.Where(Function(p) p.Name = "PressureDecrease").First().Value
+                        .AdiabaticEfficiency = sobj.Parameters.Where(Function(p) p.Name = "AdiabaticEfficiency").First().Value
+                        .CalcMode = Compressor.CalculationMode.Delta_P
+                    End With
+            End Select
+            obj.SetFlowsheet(form)
+            If sobj.PropertyPackageID IsNot Nothing Then
+                obj.PropertyPackage = form.Options.PropertyPackages(sobj.PropertyPackageID)
+            End If
+            obj.GraphicObject = gobj
+            gobj.Owner = obj
+            obj.Name = sobj.ID
+            form.Collections.FlowsheetObjectCollection.Add(obj.Name, obj)
+        Next
+
+        Dim filename As String
+
+
+        form.FilePath = handler.FullPath
+        form.Options.FilePath = handler.FullPath
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(25)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(65)
+
+        My.Application.ActiveSimulation = form
+
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(80)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
+
+        If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(100)
+
+        My.Application.ActiveSimulation = form
+
+        m_childcount += 1
+
+        form.m_IsLoadedFromFile = True
+
+        form.FormCharts.Flowsheet = form
+
+        form.FormDynamics.Flowsheet = form
+
+        form.FormFilesExplorer.Flowsheet = form
+
+        ' Set DockPanel properties
+        form.dckPanel.ActiveAutoHideContent = Nothing
+        form.dckPanel.Parent = form
+
+        'form.dckPanel.SuspendLayout(True)
+        form.FormLog.DockPanel = Nothing
+        form.FormMatList.DockPanel = Nothing
+        form.FormSpreadsheet.DockPanel = Nothing
+        form.FormSpreadsheet.Flowsheet = form
+        form.FormWatch.DockPanel = Nothing
+        form.FormSurface.DockPanel = Nothing
+        form.FormDynamics.DockPanel = Nothing
+        form.FormCharts.DockPanel = Nothing
+        form.FormFilesExplorer.DockPanel = Nothing
+
+        Try
+            form.FormLog.DockPanel = form.dckPanel
+            form.FormSpreadsheet?.Show(form.dckPanel)
+            form.FormCharts?.Show(form.dckPanel)
+            form.FormMatList?.Show(form.dckPanel)
+            form.FormSurface?.Show(form.dckPanel)
+            form.FormDynamics?.Show(form.dckPanel)
+            form.FormFilesExplorer?.Show(form.dckPanel)
+            form.dckPanel.BringToFront()
+            form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
+        Catch ex As Exception
+            'excs.Add(New Exception("Error Restoring Window Layout", ex))
+        End Try
+
+        Me.Invalidate()
+        Application.DoEvents()
+
+        If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
+
+        If TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
+            Dim mypath As String = simulationfilename
+            If mypath = "" Then mypath = handler.FullPath
+            If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
+                My.Settings.MostRecentFiles.Add(mypath)
+                Me.UpdateMRUList()
+            End If
+        End If
+
+        My.Application.ActiveSimulation = form
+
+        form.MdiParent = Me
+        form.Show()
+        form.Activate()
+
+        form.FrmStSim1.CurrentFlowsheet = form
+        form.FrmStSim1.Init(True)
+
+        form.FormSurface.Invalidate()
+
+        If excs.Count > 0 Then
+            form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
+            For Each ex As Exception In excs
+                form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
+            Next
+        Else
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+        End If
+
+        form.UpdateFormText()
+
+        'Me.ToolStripStatusLabel1.Text = ""
+
+        My.Application.PushUndoRedoAction = True
+
+        Application.DoEvents()
+
+        form.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
+
+        RaiseEvent FlowsheetLoadedFromXML(form, New EventArgs())
+
+        Return form
+
+    End Function
+
 
     Public Function LoadXML(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
@@ -2238,6 +2675,16 @@ Public Class FormMain
 
         End If
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog") IsNot Nothing Then
+            Try
+                data = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog").Elements.ToList
+                For Each xel As XElement In data
+                    form.MessagesLog.Add(xel.Value)
+                Next
+            Catch ex As Exception
+            End Try
+        End If
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(90)
 
         Try
@@ -2303,21 +2750,20 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormScript1.fc = form
+
             form.FormCharts.Flowsheet = form
 
             form.FormDynamics.Flowsheet = form
 
-            form.FormFilesExplorer.Flowsheet = form
+            form.FormIntegratorControls.Flowsheet = form
 
-#If LINUX = False Then
-            form.FormIPyConsole.Flowsheet = form
-#End If
+            form.FormFilesExplorer.Flowsheet = form
 
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
 
-            Me.tmpform2 = form
             'form.dckPanel.SuspendLayout(True)
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
@@ -2326,12 +2772,9 @@ Public Class FormMain
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormDynamics.DockPanel = Nothing
-            form.FormProps.DockPanel = Nothing
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
-#If LINUX = False Then
-            form.FormIPyConsole.DockPanel = Nothing
-#End If
+            form.FormScript1.DockPanel = Nothing
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -2340,27 +2783,29 @@ Public Class FormMain
                         Try
                             Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                             File.WriteAllText(myfile, pnl)
-                            form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
+                            form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf form.ReturnForm))
                         Catch ex As Exception
                         Finally
                             File.Delete(myfile)
                         End Try
                     Else
                         Dim myfile As String = IO.Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
-                        form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
+                        form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf form.ReturnForm))
                     End If
                 End If
             End If
 
             Try
                 form.FormLog.DockPanel = form.dckPanel
+                form.FormLog.Hide()
+                form.FormWatch.Hide()
                 form.FormSpreadsheet?.Show(form.dckPanel)
                 form.FormCharts?.Show(form.dckPanel)
                 form.FormMatList?.Show(form.dckPanel)
                 form.FormSurface?.Show(form.dckPanel)
                 form.FormDynamics?.Show(form.dckPanel)
                 form.FormFilesExplorer?.Show(form.dckPanel)
-                form.FormProps?.Show(form.dckPanel)
+                form.FormScript1?.Show(form.dckPanel)
 #If LINUX = False Then
                 'form.FormIPyConsole?.Show(form.dckPanel)
 #End If
@@ -2369,10 +2814,6 @@ Public Class FormMain
             Catch ex As Exception
                 'excs.Add(New Exception("Error Restoring Window Layout", ex))
             End Try
-
-            If form.FormProps.Width > form.Width / 3 Then
-                form.dckPanel.DockLeftPortion = form.Width / 3
-            End If
 
             Me.Invalidate()
             Application.DoEvents()
@@ -2409,7 +2850,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            'form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -2869,19 +3310,20 @@ Public Class FormMain
 
             form.m_IsLoadedFromFile = True
 
+            form.FormScript1.fc = form
+
             form.FormCharts.Flowsheet = form
 
             form.FormDynamics.Flowsheet = form
 
-            form.FormFilesExplorer.Flowsheet = form
+            form.FormIntegratorControls.Flowsheet = form
 
-            form.FormIPyConsole.Flowsheet = form
+            form.FormFilesExplorer.Flowsheet = form
 
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
 
-            Me.tmpform2 = form
             'form.dckPanel.SuspendLayout(True)
             form.FormLog.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
@@ -2892,14 +3334,14 @@ Public Class FormMain
             form.FormSurface.DockPanel = Nothing
             form.FormDynamics.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
-            form.FormIPyConsole.DockPanel = Nothing
+            form.FormScript1.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = SharedClasses.Utility.GetTempFileName()
                 Try
                     Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                     File.WriteAllText(myfile, pnl)
-                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf Me.ReturnForm))
+                    form.dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf form.ReturnForm))
                 Catch ex As Exception
                     'excs.Add(New Exception("Error Restoring Window Layout", ex))
                 Finally
@@ -2909,6 +3351,8 @@ Public Class FormMain
 
             Try
                 form.FormLog.DockPanel = form.dckPanel
+                form.FormLog.Hide()
+                form.FormWatch.Hide()
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormCharts.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
@@ -2916,6 +3360,7 @@ Public Class FormMain
                 form.FormDynamics.Show(form.dckPanel)
                 form.FormFilesExplorer.Show(form.dckPanel)
                 'form.FormIPyConsole.Show(form.dckPanel)
+                form.FormScript1.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
@@ -2951,7 +3396,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            'form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -3167,8 +3612,6 @@ Public Class FormMain
 
         RaiseEvent FlowsheetSavingToXML(form, New EventArgs())
 
-        If simulationfilename = "" Then simulationfilename = handler.FullPath
-
         Dim xdoc As New XDocument()
         Dim xel As XElement
 
@@ -3337,6 +3780,7 @@ Public Class FormMain
             File.Delete(tmpfile)
         Next
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict)
+
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")
 
@@ -3345,11 +3789,23 @@ Public Class FormMain
         xel.Add(File.ReadAllText(myfile).ToString)
         File.Delete(myfile)
 
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("MessagesLog"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog")
+
+        If form.Options.SaveFlowsheetMessagesInFile Then
+            Dim inner_elements As New List(Of XElement)
+            For Each item In form.MessagesLog
+                inner_elements.Add(New XElement("Message", item))
+            Next
+            xel.Add(inner_elements)
+        End If
+
         Using stream As New IO.MemoryStream()
             xdoc.Save(stream)
             handler.Write(stream)
         End Using
 
+        If simulationfilename = "" Then simulationfilename = handler.FullPath
         Dim fileExtension As String = IO.Path.GetExtension(simulationfilename).ToLower
 
         If (fileExtension.Contains("dwxml") Or fileExtension.Contains("dwxmz")) Then
@@ -3466,6 +3922,12 @@ Label_00CC:
 
     End Function
 
+    Sub SaveJSON(handler As IVirtualFile, ByVal form As FormFlowsheet)
+
+        File.WriteAllText(handler.FullPath, XFlowsheet.Exporter.Export(form))
+
+    End Sub
+
     Sub SaveXMLZIP(handler As IVirtualFile, ByVal form As FormFlowsheet)
 
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
@@ -3522,7 +3984,12 @@ Label_00CC:
 
         End Using
 
-        form.Options.FilePath = handler.FullPath
+        Try
+            If Path.GetExtension(handler.FullPath).ToLower() <> ".dwbcs" Then
+                form.Options.FilePath = handler.FullPath
+            End If
+        Catch ex As Exception
+        End Try
 
         form.UpdateFormText()
 
@@ -3544,8 +4011,8 @@ Label_00CC:
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("All Supported Files", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.dwcsd", "*.dwcsd2", "*.dwrsd", "*.dwrsd2", "*.dwruf"}),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml"}),
+            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("All Supported Files", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.pfdx", "*.dwcsd", "*.dwcsd2", "*.dwrsd", "*.dwrsd2", "*.dwruf"}),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", "*.pfdx"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compound Creator Study", New String() {"*.dwcsd", "*.dwcsd2"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Data Regression Study", New String() {"*.dwrsd", "*.dwrsd2"}),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("UNIFAC Parameter Regression Study", "*.dwruf")})
@@ -3573,6 +4040,13 @@ Label_00CC:
         Application.DoEvents()
 
         Select Case handler.GetExtension().ToLower()
+            Case ".pfdx"
+                Me.LoadJSON(handler, Sub(x)
+                                         Me.Invoke(Sub()
+                                                       floading.ProgressBar1.Value = x
+                                                       floading.Refresh()
+                                                   End Sub)
+                                     End Sub, "")
             Case ".dwxml"
                 Me.LoadXML(handler, Sub(x)
                                         Me.Invoke(Sub()
@@ -3707,6 +4181,7 @@ Label_00CC:
                 Try
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
+                    filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
                 Catch ex As Exception
                 End Try
             Else
@@ -3716,6 +4191,9 @@ Label_00CC:
                     Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
                     filePickerForm.SuggestedDirectory = fpath
+                    If TypeOf filePickerForm Is Simulate365.FormFactories.S365FilePickerForm Then
+                        filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    End If
                 Catch ex As Exception
                 End Try
             End If
@@ -3724,6 +4202,7 @@ Label_00CC:
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
             {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", "*.dwxmz"),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", "*.dwxml"),
+            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Interchangeable PFD Simulation File", "*.pfdx"),
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
 
             If handler IsNot Nothing Then
@@ -3750,6 +4229,8 @@ Label_00CC:
                                                                                                   If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
+                ElseIf handler.GetExtension().ToLower() = ".pfdx" Then
+                    SaveJSON(handler, Me.ActiveMdiChild)
                 Else
                     Me.bgSaveFile.RunWorkerAsync()
                 End If
@@ -4000,8 +4481,9 @@ Label_00CC:
                         End If
                     ElseIf Path.GetExtension(filename).ToLower = ".dwxmz" Then
                         SaveXMLZIP(handler, form2)
+                    ElseIf Path.GetExtension(filename).ToLower = ".pfdx" Then
+                        SaveJSON(handler, form2)
                     End If
-
                 Else ' If file doesn't exist, open file picker
                     Try
                         Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
@@ -4014,10 +4496,9 @@ Label_00CC:
                     If (form2.Options.VirtualFile IsNot Nothing) Then
                         handler = form2.Options.VirtualFile
                     Else
-
                         handler = filePickerForm.ShowSaveDialog(
                                   New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-                                    {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml"})
+                                    {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", ".pfdx"})
                                   })
                     End If
                     If handler IsNot Nothing Then
@@ -4030,6 +4511,8 @@ Label_00CC:
                             SaveMobileXML(handler, Me.ActiveMdiChild)
                         ElseIf handler.GetExtension().ToLower() = ".dwxmz" Then
                             SaveXMLZIP(handler, Me.ActiveMdiChild)
+                        ElseIf handler.GetExtension().ToLower() = ".pfdx" Then
+                            SaveJSON(handler, Me.ActiveMdiChild)
                         End If
                     End If
                 End If
@@ -4113,33 +4596,34 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub GuiaDoUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioToolStripMenuItem.Click
-
-        RaiseEvent ToolOpened("View User Guide", New EventArgs())
-
-        If DWSIM.App.IsRunningOnMono Then
-            Dim p As New Process()
-            With p
-                .StartInfo.FileName = "xdg-open"
-                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "User_Guide.pdf"
-                .StartInfo.UseShellExecute = False
-                .Start()
-            End With
+    Private Sub WikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WikiToolStripMenuItem.Click
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://dwsim.org", "DWSIM")
         Else
-            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            System.Diagnostics.Process.Start("https://dwsim.org")
         End If
     End Sub
 
-    Private Sub WikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WikiToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://dwsim.org")
-    End Sub
-
     Private Sub ForumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForumToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("https://dwsim.org/wiki/index.php?title=Support")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://dwsim.org/wiki/index.php?title=Support", "DWSIM Support (Open-Source)")
+        Else
+            System.Diagnostics.Process.Start("https://dwsim.org/wiki/index.php?title=Support")
+        End If
     End Sub
 
     Private Sub RastreamentoDeBugsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RastreamentoDeBugsToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("https://github.com/DanWBR/dwsim/issues")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://github.com/DanWBR/dwsim/issues", "DWSIM Issues (Open-Source)")
+        Else
+            System.Diagnostics.Process.Start("https://github.com/DanWBR/dwsim/issues")
+        End If
     End Sub
 
     Private Sub MostrarBarraDeFerramentasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MostrarBarraDeFerramentasToolStripMenuItem.Click
@@ -4166,11 +4650,11 @@ Label_00CC:
         Me.TileHorizontalToolStripMenuItem_Click(sender, e)
     End Sub
 
-    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         System.Diagnostics.Process.Start("https://www.paypal.com/cgi-bin/webscr?item_name=Donation+to+DWSIM+-+Open+Source+Process+Simulator&cmd=_donations&business=danielwag%40gmail.com&lc=US")
     End Sub
 
-    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
+    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.AboutToolStripMenuItem_Click(sender, e)
     End Sub
 
@@ -4200,6 +4684,10 @@ Label_00CC:
     End Sub
 
     Private Sub NovoEstudoDoCriadorDeComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Click
+
+        Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         Dim NewMDIChild As New FormCompoundCreator()
 
         RaiseEvent ToolOpened("New Compound Creator", New EventArgs())
@@ -4211,9 +4699,14 @@ Label_00CC:
         Me.ActivateMdiChild(NewMDIChild)
         NewMDIChild.Show()
         m_childcount += 1
+
     End Sub
 
     Private Sub NovoEstudoDeRegressaoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Click
+
+        Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         Dim NewMDIChild As New FormDataRegression()
 
         RaiseEvent ToolOpened("New Regression Study", New EventArgs())
@@ -4228,6 +4721,10 @@ Label_00CC:
     End Sub
 
     Private Sub NovoRegressaoUNIFACIPs_Click(sender As Object, e As EventArgs) Handles NovoRegressaoUNIFACIPs.Click
+
+        Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         Dim NewMDIChild As New FormUNIFACRegression()
 
         RaiseEvent ToolOpened("New UNIFAC IP Regression", New EventArgs())
@@ -4357,16 +4854,24 @@ Label_00CC:
         UserService.Logout()
     End Sub
 
-    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs)
-        Process.Start("https://simulate365.com/downloads/dwsim-pro/")
-    End Sub
-
     Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
-        Process.Start("https://simulate365.com")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://simulate365.com", "Simulate365")
+        Else
+            Process.Start("https://simulate365.com")
+        End If
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
-        Process.Start("https://simulate365.com/registration-dwsim-pro/")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://simulate365.com/registration/", "Simulate365 Registration")
+        Else
+            Process.Start("https://simulate365.com/registration/")
+        End If
     End Sub
 
     Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click
@@ -4386,19 +4891,95 @@ Label_00CC:
     End Sub
 
     Private Sub DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DashboardToolStripMenuItem.Click
-        Process.Start("https://dashboard.simulate365.com")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://dashboard.simulate365.com", "Simulate365 Dashboard")
+        Else
+            Process.Start("https://dashboard.simulate365.com")
+        End If
     End Sub
 
     Private Sub DIscordChannelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DIscordChannelToolStripMenuItem.Click
-        Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
+        If IsPro Then
+            Dim fb As New FormBrowser()
+            fb.Show()
+            fb.DisplayURL("https://discord.com/channels/974049809176608818/974049809176608821", "DWSIM Discord Server (Open-Source)")
+        Else
+            Process.Start("https://discord.com/channels/974049809176608818/974049809176608821")
+        End If
     End Sub
 
-    Private Sub ToolStripDropDownButton2_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton2.Click
+    Private Sub ToolStripDropDownButton2_Click(sender As Object, e As EventArgs) Handles tsbdonate1.Click
         Process.Start("https://www.buymeacoffee.com/dwsim")
     End Sub
 
-    Private Sub ToolStripDropDownButton1_Click(sender As Object, e As EventArgs) Handles ToolStripDropDownButton1.Click
+    Private Sub ToolStripDropDownButton1_Click(sender As Object, e As EventArgs) Handles tsbdonate2.Click
         Process.Start("https://www.patreon.com/dwsim")
+    End Sub
+
+    Private Sub ToolStripButton9_Click(sender As Object, e As EventArgs)
+
+        LoadFileDialog()
+
+    End Sub
+
+    Private Sub WhatsNewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WhatsNewToolStripMenuItem.Click
+        Dim frm As New FormWhatsNew()
+        frm.Show()
+    End Sub
+
+    Private Sub tsmiPrivateSupport_Click(sender As Object, e As EventArgs) Handles tsmiPrivateSupport.Click
+        Process.Start("https://simulate365.com/private-support/")
+    End Sub
+
+    Private Sub ToolStripDropDownButton1_Click_1(sender As Object, e As EventArgs) Handles tsbQuickQuestion.Click
+
+        Dim fq As New FormOccupancyQuestion()
+        fq.ShowDialog(Me)
+
+    End Sub
+
+    Private Sub UsersGuideToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsersGuideToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("View User Guide", New EventArgs())
+
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "User_Guide.pdf"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            If IsPro Then
+                Dim fb As New FormBrowser()
+                fb.Show()
+                fb.DisplayURL(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            Else
+                Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide.pdf")
+            End If
+        End If
+
+    End Sub
+
+    Private Sub tsmiProUG_Click(sender As Object, e As EventArgs) Handles tsmiProUG.Click
+
+        RaiseEvent ToolOpened("View DWSIM Pro User Guide", New EventArgs())
+
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf")
+        End If
+
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

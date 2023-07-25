@@ -1,0 +1,91 @@
+#This stoichiometric reactor code reaction coordinate of reaction for input and then gives the output accordingly
+#Reference: http://www.iitg.ac.in/tamalb/documents/reactors.pdf
+#Import statement
+from DWSIM.Thermodynamics import *
+import math
+from System import Array
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')
+from DotNumerics.ODE import *
+#Initializing values in input streams (Only one input stream for batch reactor)
+feed=[0] #the array containing the properties of feed stream
+P=[0] #array for Pressure of feed stream
+massflow=[0] #array for total mass flow of feed stream
+molfrac=[0] #array for molar fraction of feed stream
+molflow=[0] #array for total molar flow of feed stream
+enthalpy=[0] #array for the total enthalpy of feed stream
+#Extracting input from streams
+feed[0] = ims1
+P = feed[0].GetProp("pressure", "Overall", None, "", "")
+massflow = feed[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow = feed[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+enthalpy = feed[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac = feed[0].GetProp("fraction", "Overall", None, "", "mole")
+Tin = feed[0].GetProp("temperature", "Overall", None, "", "")
+#no. of components
+comp=len(molfrac) #Number of species involved in process
+#no of reaction
+n=int(noofrxn) #number of reactions taking place
+#getting reaction coordinate data
+rc=[] #Reaction coordinate specified by user
+rc=eval(ReacCoor)
+#getting molecular weights
+mw=[]
+mw=eval(MolecularWeights)
+#getting stoichometric coefficients
+stoi=[] #Stoichiometric coefficients of species in reaction
+stoi=eval(stoic)
+ini=[0]*n #initial value of index of a reactant used to initialize value of limiting ratio for finding limiting reagent for nth reaction
+reac=[[0]*comp for m in range(0,n)] #array containing reactants with column denoting species and row reaction. If value at a position (m,i) is 1, then ith specie is reactant in mth reaction
+for m in range(0,n):
+ for i in range(0,comp):
+  if stoi[m][i]<0:
+   reac[m][i]=1
+   ini[m]=i
+#finding the limiting reagent and simultaneously solving for final concentrations
+limrat=[0]*n #ratio of concentration in and stoichiometry of reactant of limiting reagent
+limrea=[0]*n #Index of limiting reagent in nth reaction
+imolflow=[0]*comp #Molar flow of components
+fmolflow=[0]*comp #Final Molar flow of components
+for i in range(0,comp):
+ imolflow[i]=molfrac[i]*molflow[0]
+for m in range(0,n):
+ limrat[m]=imolflow[ini[m]]/abs(stoi[m][ini[m]])
+ limrea[m]=ini[m]
+ for i in range(0,comp):
+   if reac[m][i]==1:
+    if limrat[m]>imolflow[i]/abs(stoi[m][i]):
+     limrea[m]=i
+     limrat[m]=imolflow[i]/abs(stoi[m][i])
+ for i in range(0,comp):
+  if stoi[m][i]!=0:
+   fmolflow[i]=imolflow[i]-imolflow[limrea[m]]*stoi[m][i]/stoi[m][limrea[m]]*rc[m]
+ Flowsheet.WriteMessage(str(imolflow))
+ for i in range(0,comp):
+  if stoi[m][i]!=0:
+   imolflow[i]=fmolflow[i]
+Flowsheet.WriteMessage(str(limrea))
+z=[0]*comp #Mole fraction of components in product stream 
+for i in range(0,comp):
+ z[i]=fmolflow[i]/sum(fmolflow)
+tflow=[0] #Total molar flow in product stream
+tflow[0]=sum(imolflow)
+#massflow out
+massflowo=[0]
+for i in range(0,comp):
+ massflowo[0]=massflowo[0]+mw[i]*imolflow[i]/1000
+#setting out temp
+To=[0] #temperature of product stream
+To[0]=Tout
+Po=[0] #Pressure of product stream
+Po[0]=Pout
+#setting outstream properties
+out=[0]
+out[0]=oms1
+out[0].Clear()
+out[0].ClearAllProps()
+out[0].SetProp("totalFlow" ,"Overall", None, "", "mole",tflow)
+out[0].SetProp("fraction" ,"Overall", None, "", "mole",z)
+out[0].SetProp("totalFlow" ,"Overall", None, "", "mass",massflowo)
+out[0].SetProp("temperature" ,"Overall", None, "", "",To)
+out[0].SetProp("pressure", "Overall", None, "", "",Po)  #Not able to set the desired pressure value

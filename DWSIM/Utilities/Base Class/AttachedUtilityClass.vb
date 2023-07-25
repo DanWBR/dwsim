@@ -337,4 +337,9 @@
         InternalUtility.Populate()
     End Sub
 
+    Private Sub AttachedUtilityClass_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
+    End Sub
 End Class

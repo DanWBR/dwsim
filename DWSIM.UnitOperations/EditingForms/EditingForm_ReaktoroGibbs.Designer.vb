@@ -58,6 +58,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControlParameters = New System.Windows.Forms.TabControl()
         Me.TabPageParams = New System.Windows.Forms.TabPage()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.tbExternalDB = New System.Windows.Forms.TextBox()
+        Me.chkUseExternalDatabase = New System.Windows.Forms.CheckBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.cbDatabase = New System.Windows.Forms.ComboBox()
@@ -130,7 +133,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 112)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(418, 113)
+        Me.GroupBox1.Size = New System.Drawing.Size(419, 113)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Connections"
@@ -141,7 +144,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnCreateAndConnectEnergy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectEnergy.Image = CType(resources.GetObject("btnCreateAndConnectEnergy.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(362, 77)
+        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(363, 77)
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.btnCreateAndConnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectEnergy.TabIndex = 42
@@ -152,7 +155,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnDisconnectEnergy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectEnergy.Image = CType(resources.GetObject("btnDisconnectEnergy.Image"), System.Drawing.Image)
         Me.btnDisconnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(389, 77)
+        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(390, 77)
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
         Me.btnDisconnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectEnergy.TabIndex = 23
@@ -164,7 +167,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnCreateAndConnectOutlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectOutlet1.Image = CType(resources.GetObject("btnCreateAndConnectOutlet1.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(362, 50)
+        Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(363, 50)
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.btnCreateAndConnectOutlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectOutlet1.TabIndex = 41
@@ -186,7 +189,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnCreateAndConnectInlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectInlet1.Image = CType(resources.GetObject("btnCreateAndConnectInlet1.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectInlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectInlet1.Location = New System.Drawing.Point(362, 23)
+        Me.btnCreateAndConnectInlet1.Location = New System.Drawing.Point(363, 23)
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.btnCreateAndConnectInlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectInlet1.TabIndex = 40
@@ -200,7 +203,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbEnergy.FormattingEnabled = True
         Me.cbEnergy.Location = New System.Drawing.Point(147, 77)
         Me.cbEnergy.Name = "cbEnergy"
-        Me.cbEnergy.Size = New System.Drawing.Size(209, 21)
+        Me.cbEnergy.Size = New System.Drawing.Size(210, 21)
         Me.cbEnergy.TabIndex = 21
         '
         'btnDisconnectOutlet1
@@ -208,7 +211,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnDisconnectOutlet1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectOutlet1.Image = CType(resources.GetObject("btnDisconnectOutlet1.Image"), System.Drawing.Image)
         Me.btnDisconnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(389, 50)
+        Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(390, 50)
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.btnDisconnectOutlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectOutlet1.TabIndex = 20
@@ -219,7 +222,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnDisconnect1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnect1.Image = CType(resources.GetObject("btnDisconnect1.Image"), System.Drawing.Image)
         Me.btnDisconnect1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnect1.Location = New System.Drawing.Point(389, 23)
+        Me.btnDisconnect1.Location = New System.Drawing.Point(390, 23)
         Me.btnDisconnect1.Name = "btnDisconnect1"
         Me.btnDisconnect1.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnect1.TabIndex = 14
@@ -243,7 +246,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Location = New System.Drawing.Point(147, 50)
         Me.cbOutlet1.Name = "cbOutlet1"
-        Me.cbOutlet1.Size = New System.Drawing.Size(209, 21)
+        Me.cbOutlet1.Size = New System.Drawing.Size(210, 21)
         Me.cbOutlet1.TabIndex = 8
         '
         'cbInlet1
@@ -254,7 +257,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Location = New System.Drawing.Point(147, 23)
         Me.cbInlet1.Name = "cbInlet1"
-        Me.cbInlet1.Size = New System.Drawing.Size(209, 21)
+        Me.cbInlet1.Size = New System.Drawing.Size(210, 21)
         Me.cbInlet1.TabIndex = 1
         '
         'Label19
@@ -280,7 +283,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(418, 98)
+        Me.GroupBox5.Size = New System.Drawing.Size(419, 98)
         Me.GroupBox5.TabIndex = 15
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "General Info"
@@ -291,7 +294,7 @@ Partial Class EditingForm_ReaktoroGibbs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTag.Location = New System.Drawing.Point(133, 19)
         Me.lblTag.Name = "lblTag"
-        Me.lblTag.Size = New System.Drawing.Size(277, 20)
+        Me.lblTag.Size = New System.Drawing.Size(278, 20)
         Me.lblTag.TabIndex = 24
         '
         'chkActive
@@ -300,7 +303,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
         Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkActive.Location = New System.Drawing.Point(389, 43)
+        Me.chkActive.Location = New System.Drawing.Point(390, 43)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(21, 21)
         Me.chkActive.TabIndex = 21
@@ -367,7 +370,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Location = New System.Drawing.Point(12, 715)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(418, 154)
+        Me.GroupBox4.Size = New System.Drawing.Size(419, 154)
         Me.GroupBox4.TabIndex = 18
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Notes"
@@ -378,11 +381,11 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.rtbAnnotations.Location = New System.Drawing.Point(3, 16)
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.rtbAnnotations.Size = New System.Drawing.Size(412, 135)
+        Me.rtbAnnotations.Size = New System.Drawing.Size(413, 135)
         Me.rtbAnnotations.TabIndex = 0
         '
         'GroupBox6
@@ -392,7 +395,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox6.Controls.Add(Me.tabstrip1)
         Me.GroupBox6.Location = New System.Drawing.Point(12, 553)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(418, 157)
+        Me.GroupBox6.Size = New System.Drawing.Size(419, 157)
         Me.GroupBox6.TabIndex = 19
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Results"
@@ -404,7 +407,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.tabstrip1.Location = New System.Drawing.Point(3, 16)
         Me.tabstrip1.Name = "tabstrip1"
         Me.tabstrip1.SelectedIndex = 0
-        Me.tabstrip1.Size = New System.Drawing.Size(412, 138)
+        Me.tabstrip1.Size = New System.Drawing.Size(413, 138)
         Me.tabstrip1.TabIndex = 0
         '
         'TabPage3
@@ -412,7 +415,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPage3.Controls.Add(Me.gridConversions)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(404, 112)
+        Me.TabPage3.Size = New System.Drawing.Size(405, 112)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Conversions"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -428,7 +431,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.gridConversions.Name = "gridConversions"
         Me.gridConversions.ReadOnly = True
         Me.gridConversions.RowHeadersVisible = False
-        Me.gridConversions.Size = New System.Drawing.Size(404, 112)
+        Me.gridConversions.Size = New System.Drawing.Size(405, 112)
         Me.gridConversions.TabIndex = 0
         '
         'DataGridViewTextBoxColumn6
@@ -456,7 +459,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox2.Controls.Add(Me.TabControlParameters)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 312)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(418, 235)
+        Me.GroupBox2.Size = New System.Drawing.Size(419, 235)
         Me.GroupBox2.TabIndex = 17
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Calculation Parameters"
@@ -472,11 +475,14 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabControlParameters.Location = New System.Drawing.Point(3, 16)
         Me.TabControlParameters.Name = "TabControlParameters"
         Me.TabControlParameters.SelectedIndex = 0
-        Me.TabControlParameters.Size = New System.Drawing.Size(412, 216)
+        Me.TabControlParameters.Size = New System.Drawing.Size(413, 216)
         Me.TabControlParameters.TabIndex = 11
         '
         'TabPageParams
         '
+        Me.TabPageParams.Controls.Add(Me.Button7)
+        Me.TabPageParams.Controls.Add(Me.tbExternalDB)
+        Me.TabPageParams.Controls.Add(Me.chkUseExternalDatabase)
         Me.TabPageParams.Controls.Add(Me.Button6)
         Me.TabPageParams.Controls.Add(Me.Button5)
         Me.TabPageParams.Controls.Add(Me.cbDatabase)
@@ -495,10 +501,41 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageParams.Location = New System.Drawing.Point(4, 22)
         Me.TabPageParams.Name = "TabPageParams"
         Me.TabPageParams.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageParams.Size = New System.Drawing.Size(404, 190)
+        Me.TabPageParams.Size = New System.Drawing.Size(405, 190)
         Me.TabPageParams.TabIndex = 0
         Me.TabPageParams.Text = "Parameters"
         Me.TabPageParams.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button7.Location = New System.Drawing.Point(315, 117)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(75, 23)
+        Me.Button7.TabIndex = 51
+        Me.Button7.Text = "Search"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'tbExternalDB
+        '
+        Me.tbExternalDB.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbExternalDB.Location = New System.Drawing.Point(152, 119)
+        Me.tbExternalDB.Name = "tbExternalDB"
+        Me.tbExternalDB.ReadOnly = True
+        Me.tbExternalDB.Size = New System.Drawing.Size(146, 20)
+        Me.tbExternalDB.TabIndex = 50
+        Me.tbExternalDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'chkUseExternalDatabase
+        '
+        Me.chkUseExternalDatabase.AutoSize = True
+        Me.chkUseExternalDatabase.Location = New System.Drawing.Point(17, 121)
+        Me.chkUseExternalDatabase.Name = "chkUseExternalDatabase"
+        Me.chkUseExternalDatabase.Size = New System.Drawing.Size(113, 17)
+        Me.chkUseExternalDatabase.TabIndex = 49
+        Me.chkUseExternalDatabase.Text = "External Database"
+        Me.chkUseExternalDatabase.UseVisualStyleBackColor = True
         '
         'Button6
         '
@@ -507,7 +544,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources._new
         Me.Button6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button6.Location = New System.Drawing.Point(340, 84)
+        Me.Button6.Location = New System.Drawing.Point(341, 84)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(22, 22)
         Me.Button6.TabIndex = 48
@@ -521,7 +558,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.information
         Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button5.Location = New System.Drawing.Point(368, 84)
+        Me.Button5.Location = New System.Drawing.Point(369, 84)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(22, 22)
         Me.Button5.TabIndex = 47
@@ -537,7 +574,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbDatabase.Items.AddRange(New Object() {"supcrt98.xml", "supcrt98-organics.xml", "supcrt07.xml", "supcrt07-organics.xml"})
         Me.cbDatabase.Location = New System.Drawing.Point(152, 84)
         Me.cbDatabase.Name = "cbDatabase"
-        Me.cbDatabase.Size = New System.Drawing.Size(183, 21)
+        Me.cbDatabase.Size = New System.Drawing.Size(173, 21)
         Me.cbDatabase.TabIndex = 46
         '
         'Label2
@@ -607,7 +644,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.btnConfigurePP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnConfigurePP.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnConfigurePP.Location = New System.Drawing.Point(368, 117)
+        Me.btnConfigurePP.Location = New System.Drawing.Point(369, 152)
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.btnConfigurePP.Size = New System.Drawing.Size(21, 21)
         Me.btnConfigurePP.TabIndex = 20
@@ -620,16 +657,16 @@ Partial Class EditingForm_ReaktoroGibbs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
-        Me.cbPropPack.Location = New System.Drawing.Point(152, 117)
+        Me.cbPropPack.Location = New System.Drawing.Point(152, 152)
         Me.cbPropPack.Name = "cbPropPack"
-        Me.cbPropPack.Size = New System.Drawing.Size(209, 21)
+        Me.cbPropPack.Size = New System.Drawing.Size(210, 21)
         Me.cbPropPack.TabIndex = 15
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label9.Location = New System.Drawing.Point(14, 121)
+        Me.Label9.Location = New System.Drawing.Point(14, 156)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(92, 13)
         Me.Label9.TabIndex = 14
@@ -642,9 +679,9 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.cbPDrop.Enabled = False
         Me.cbPDrop.FormattingEnabled = True
         Me.cbPDrop.Items.AddRange(New Object() {"Mínima das Entradas", "Média das Entradas", "Máxima das Entradas"})
-        Me.cbPDrop.Location = New System.Drawing.Point(295, 50)
+        Me.cbPDrop.Location = New System.Drawing.Point(315, 51)
         Me.cbPDrop.Name = "cbPDrop"
-        Me.cbPDrop.Size = New System.Drawing.Size(66, 21)
+        Me.cbPDrop.Size = New System.Drawing.Size(75, 21)
         Me.cbPDrop.TabIndex = 39
         '
         'tbPDrop
@@ -653,7 +690,7 @@ Partial Class EditingForm_ReaktoroGibbs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbPDrop.Location = New System.Drawing.Point(152, 51)
         Me.tbPDrop.Name = "tbPDrop"
-        Me.tbPDrop.Size = New System.Drawing.Size(137, 20)
+        Me.tbPDrop.Size = New System.Drawing.Size(146, 20)
         Me.tbPDrop.TabIndex = 38
         Me.tbPDrop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -833,7 +870,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox3.Controls.Add(Me.chkUseEmbeddedImage)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 231)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(418, 77)
+        Me.GroupBox3.Size = New System.Drawing.Size(419, 77)
         Me.GroupBox3.TabIndex = 20
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Flowsheet Object Icon"
@@ -846,7 +883,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button4.Location = New System.Drawing.Point(9, 20)
         Me.Button4.Margin = New System.Windows.Forms.Padding(10)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(401, 23)
+        Me.Button4.Size = New System.Drawing.Size(402, 23)
         Me.Button4.TabIndex = 38
         Me.Button4.Text = "Select Image File"
         Me.Button4.UseVisualStyleBackColor = True
@@ -867,7 +904,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(442, 878)
+        Me.ClientSize = New System.Drawing.Size(443, 878)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox6)
@@ -969,4 +1006,7 @@ Partial Class EditingForm_ReaktoroGibbs
     Public WithEvents Button5 As Button
     Public WithEvents Button6 As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Button7 As Button
+    Public WithEvents tbExternalDB As TextBox
+    Friend WithEvents chkUseExternalDatabase As CheckBox
 End Class

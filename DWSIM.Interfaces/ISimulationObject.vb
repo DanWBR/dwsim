@@ -194,6 +194,10 @@ Imports DWSIM.Interfaces.Enums
 
     Property PropertyPackage As IPropertyPackage
 
+    Sub SetPropertyPackageInstance(PP As IPropertyPackage)
+
+    Function ClearPropertyPackageInstance() As Boolean
+
     ReadOnly Property IsFunctional As Boolean
 
     Function GetDynamicPropertyUnitType(id As String) As UnitOfMeasure
@@ -267,5 +271,9 @@ Imports DWSIM.Interfaces.Enums
     Sub SetDirtyStatus(value As Boolean)
 
     Sub SetCanUsePreviousResults(value As Boolean)
+
+    Sub CheckDirtyStatus()
+
+    Function GetEditingForm() As System.Windows.Forms.Form
 
 End Interface

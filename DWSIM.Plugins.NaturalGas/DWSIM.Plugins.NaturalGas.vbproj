@@ -119,8 +119,8 @@
       <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FileHelpers, Version=3.5.1.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
-      <HintPath>..\packages\FileHelpers.3.5.1\lib\net45\FileHelpers.dll</HintPath>
+    <Reference Include="FileHelpers, Version=3.5.2.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.3.5.2\lib\net45\FileHelpers.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
@@ -264,14 +264,14 @@
       <Name>DWSIM.Thermodynamics</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
-      <Project>{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}</Project>
-      <Name>DWSIM</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
       <Name>DWSIM.Controls.PropertyGridEx</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
+      <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
+      <Name>DWSIM</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

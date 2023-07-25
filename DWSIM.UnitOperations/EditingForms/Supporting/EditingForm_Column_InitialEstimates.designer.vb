@@ -78,8 +78,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton23 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton24 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton25 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.FaTabStrip2 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton11 = New System.Windows.Forms.ToolStripButton()
@@ -101,6 +99,8 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton20 = New System.Windows.Forms.ToolStripButton()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.FaTabStrip2 = New FarsiLibrary.Win.FATabStrip()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,13 +114,13 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStripItem5.SuspendLayout()
         CType(Me.dgvcv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip5.SuspendLayout()
-        CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem3.SuspendLayout()
         Me.ToolStrip3.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem4.SuspendLayout()
         Me.ToolStrip4.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -188,7 +188,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem5})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem5
         Me.ToolTip1.SetToolTip(Me.FaTabStrip1, resources.GetString("FaTabStrip1.ToolTip"))
         '
         'FaTabStripItem1
@@ -199,7 +199,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStripItem1.Controls.Add(Me.ToolStrip1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'dgvv
@@ -426,6 +425,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStripItem5.Controls.Add(Me.ToolStrip5)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
+        Me.FaTabStripItem5.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
         '
         'dgvcv
@@ -502,14 +502,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton25.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
         Me.ToolStripButton25.Name = "ToolStripButton25"
         '
-        'FaTabStrip2
-        '
-        resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
-        Me.FaTabStrip2.AlwaysShowClose = False
-        Me.FaTabStrip2.AlwaysShowMenuGlyph = False
-        Me.FaTabStrip2.Name = "FaTabStrip2"
-        Me.ToolTip1.SetToolTip(Me.FaTabStrip2, resources.GetString("FaTabStrip2.ToolTip"))
-        '
         'FaTabStripItem3
         '
         resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
@@ -574,7 +566,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Tahoma", 8.25!)
         DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle8.NullValue = "<empty>"
         DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -679,7 +671,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5})
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Tahoma", 8.25!)
         DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle10.NullValue = "<empty>"
         DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -700,6 +692,14 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
         '
+        'FaTabStrip2
+        '
+        resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
+        Me.FaTabStrip2.AlwaysShowClose = False
+        Me.FaTabStrip2.AlwaysShowMenuGlyph = False
+        Me.FaTabStrip2.Name = "FaTabStrip2"
+        Me.ToolTip1.SetToolTip(Me.FaTabStrip2, resources.GetString("FaTabStrip2.ToolTip"))
+        '
         'EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me, "$this")
@@ -714,21 +714,17 @@ Partial Class EditingForm_Column_InitialEstimates
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
-        Me.FaTabStripItem1.PerformLayout()
         CType(Me.dgvv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.FaTabStripItem2.ResumeLayout(False)
-        Me.FaTabStripItem2.PerformLayout()
         CType(Me.dgvcl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
         Me.FaTabStripItem5.ResumeLayout(False)
-        Me.FaTabStripItem5.PerformLayout()
         CType(Me.dgvcv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip5.ResumeLayout(False)
         Me.ToolStrip5.PerformLayout()
-        CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem3.ResumeLayout(False)
         Me.FaTabStripItem3.PerformLayout()
         Me.ToolStrip3.ResumeLayout(False)
@@ -739,6 +735,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStrip4.ResumeLayout(False)
         Me.ToolStrip4.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

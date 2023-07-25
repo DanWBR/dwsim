@@ -63,6 +63,12 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         Public Property UseLeeKeslerCpCv As Boolean = True
 
+        Public Overrides ReadOnly Property DisplayDescription As String
+            Get
+                Return ComponentDescription
+            End Get
+        End Property
+
         Public Sub New()
 
             ComponentName = "PC-SAFT (with Association Support) (.NET Code)"
@@ -71,6 +77,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             IsConfigurable = True
 
             ReadParameters()
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "PC-SAFT EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "PC-SAFT EOS"
+                .Vapor_Density = "PC-SAFT EOS"
+                .Liquid_Fugacity = "PC-SAFT EOS"
+                .Liquid_Enthalpy_Entropy_CpCv = "PC-SAFT EOS"
+            End With
 
         End Sub
 
@@ -139,6 +153,24 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             pripc = Nothing
             fh2 = Nothing
 
+        End Sub
+
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+            If Flowsheet IsNot Nothing Then
+                Dim comps = RET_VCAS()
+                Dim names = RET_VNAMES()
+                Dim i = 0
+                For Each comp In comps
+                    If Not CompoundParameters.ContainsKey(comp) Then
+                        Throw New Exception(String.Format("Missing PC-SAFT parameters for {0}. Calculation results will be unreliable", names(i)))
+                    Else
+                        If CompoundParameters(comp).sigma = 0.0 And CompoundParameters(comp).epsilon = 0.0 And CompoundParameters(comp).m = 0.0 Then
+                            Throw New Exception(String.Format("Missing PC-SAFT parameters for {0}. Calculation results will be unreliable", names(i)))
+                        End If
+                    End If
+                    i += 1
+                Next
+            End If
         End Sub
 
         Public Overrides Function ReturnInstance(typename As String) As Object

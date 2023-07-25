@@ -16,6 +16,8 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
 
         public string FullPath => _filePath;
 
+        public string ParentUniqueIdentifier => throw new NotImplementedException();
+
         public WindowsFile(string filePath)
         {
             _filePath = filePath;

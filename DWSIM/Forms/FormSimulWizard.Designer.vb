@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormSimulWizard
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormSimulWizard
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulWizard))
@@ -52,6 +52,8 @@ Partial Class FormSimulWizard
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.WizardPage3 = New AeroWizard.WizardPage()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -62,9 +64,9 @@ Partial Class FormSimulWizard
         Me.rbVLLE = New System.Windows.Forms.RadioButton()
         Me.rbNoFlash = New System.Windows.Forms.RadioButton()
         Me.Button8 = New System.Windows.Forms.Button()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.cbPPFilter = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.DataGridViewPP = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Index = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -79,7 +81,6 @@ Partial Class FormSimulWizard
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.WizardPage5 = New AeroWizard.WizardPage()
         Me.btnCreateNewUnits = New System.Windows.Forms.Button()
         Me.btnCloneUnits = New System.Windows.Forms.Button()
@@ -91,6 +92,16 @@ Partial Class FormSimulWizard
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.WizardPage4 = New AeroWizard.WizardPage()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.chkEnableFailSafeFlash = New System.Windows.Forms.CheckBox()
+        Me.chkActivateSmartObjectSolving = New System.Windows.Forms.CheckBox()
+        Me.chkDoubleClickToOpenEditors = New System.Windows.Forms.CheckBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.cmsAddComps = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFromThermoChemicalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,9 +121,9 @@ Partial Class FormSimulWizard
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox12.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage5.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.WizardPage4.SuspendLayout()
         Me.cmsAddComps.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -124,6 +135,7 @@ Partial Class FormSimulWizard
         Me.StepWizardControl1.Pages.Add(Me.WizardPage2)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage3)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage5)
+        Me.StepWizardControl1.Pages.Add(Me.WizardPage4)
         Me.StepWizardControl1.ShowProgressInTaskbarIcon = True
         Me.ToolTip1.SetToolTip(Me.StepWizardControl1, resources.GetString("StepWizardControl1.ToolTip"))
         '
@@ -308,19 +320,34 @@ Partial Class FormSimulWizard
         'WizardPage3
         '
         resources.ApplyResources(Me.WizardPage3, "WizardPage3")
+        Me.WizardPage3.Controls.Add(Me.Button3)
+        Me.WizardPage3.Controls.Add(Me.Button2)
         Me.WizardPage3.Controls.Add(Me.PictureBox1)
         Me.WizardPage3.Controls.Add(Me.Label10)
         Me.WizardPage3.Controls.Add(Me.Label9)
         Me.WizardPage3.Controls.Add(Me.FlowLayoutPanel1)
         Me.WizardPage3.Controls.Add(Me.Button8)
-        Me.WizardPage3.Controls.Add(Me.LinkLabel2)
-        Me.WizardPage3.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.WizardPage3.Controls.Add(Me.GroupBox6)
         Me.WizardPage3.Controls.Add(Me.GroupBox12)
         Me.WizardPage3.Controls.Add(Me.Label4)
-        Me.WizardPage3.Controls.Add(Me.PictureBox2)
         Me.WizardPage3.Name = "WizardPage3"
         Me.ToolTip1.SetToolTip(Me.WizardPage3, resources.GetString("WizardPage3.ToolTip"))
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Image = Global.DWSIM.My.Resources.Resources.help1
+        Me.Button3.Name = "Button3"
+        Me.ToolTip1.SetToolTip(Me.Button3, resources.GetString("Button3.ToolTip"))
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.information
+        Me.Button2.Name = "Button2"
+        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'PictureBox1
         '
@@ -397,29 +424,30 @@ Partial Class FormSimulWizard
         Me.ToolTip1.SetToolTip(Me.Button8, resources.GetString("Button8.ToolTip"))
         Me.Button8.UseVisualStyleBackColor = True
         '
-        'LinkLabel2
-        '
-        resources.ApplyResources(Me.LinkLabel2, "LinkLabel2")
-        Me.LinkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.LinkLabel2, resources.GetString("LinkLabel2.ToolTip"))
-        '
-        'LinkLabelPropertyMethods
-        '
-        resources.ApplyResources(Me.LinkLabelPropertyMethods, "LinkLabelPropertyMethods")
-        Me.LinkLabelPropertyMethods.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabelPropertyMethods.Name = "LinkLabelPropertyMethods"
-        Me.LinkLabelPropertyMethods.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.LinkLabelPropertyMethods, resources.GetString("LinkLabelPropertyMethods.ToolTip"))
-        '
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Controls.Add(Me.cbPPFilter)
+        Me.GroupBox6.Controls.Add(Me.Label11)
         Me.GroupBox6.Controls.Add(Me.DataGridViewPP)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
+        '
+        'cbPPFilter
+        '
+        resources.ApplyResources(Me.cbPPFilter, "cbPPFilter")
+        Me.cbPPFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPPFilter.FormattingEnabled = True
+        Me.cbPPFilter.Items.AddRange(New Object() {resources.GetString("cbPPFilter.Items"), resources.GetString("cbPPFilter.Items1"), resources.GetString("cbPPFilter.Items2"), resources.GetString("cbPPFilter.Items3"), resources.GetString("cbPPFilter.Items4"), resources.GetString("cbPPFilter.Items5"), resources.GetString("cbPPFilter.Items6"), resources.GetString("cbPPFilter.Items7"), resources.GetString("cbPPFilter.Items8")})
+        Me.cbPPFilter.Name = "cbPPFilter"
+        Me.ToolTip1.SetToolTip(Me.cbPPFilter, resources.GetString("cbPPFilter.ToolTip"))
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'DataGridViewPP
         '
@@ -429,6 +457,7 @@ Partial Class FormSimulWizard
         Me.DataGridViewPP.AllowUserToResizeRows = False
         Me.DataGridViewPP.BackgroundColor = System.Drawing.Color.White
         Me.DataGridViewPP.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DataGridViewPP.ColumnHeadersVisible = False
         Me.DataGridViewPP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Index, Me.Column6, Me.Column10, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3})
         Me.DataGridViewPP.MultiSelect = False
         Me.DataGridViewPP.Name = "DataGridViewPP"
@@ -547,14 +576,6 @@ Partial Class FormSimulWizard
         Me.Label4.Name = "Label4"
         Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
-        'PictureBox2
-        '
-        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
-        Me.PictureBox2.Image = Global.DWSIM.My.Resources.Resources.icons8_beta_button
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
-        '
         'WizardPage5
         '
         resources.ApplyResources(Me.WizardPage5, "WizardPage5")
@@ -565,7 +586,6 @@ Partial Class FormSimulWizard
         Me.WizardPage5.Controls.Add(Me.ComboBox2)
         Me.WizardPage5.Controls.Add(Me.Label8)
         Me.WizardPage5.Controls.Add(Me.Label7)
-        Me.WizardPage5.IsFinishPage = True
         Me.WizardPage5.Name = "WizardPage5"
         Me.ToolTip1.SetToolTip(Me.WizardPage5, resources.GetString("WizardPage5.ToolTip"))
         '
@@ -652,6 +672,84 @@ Partial Class FormSimulWizard
         Me.Label7.Name = "Label7"
         Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
+        'WizardPage4
+        '
+        resources.ApplyResources(Me.WizardPage4, "WizardPage4")
+        Me.WizardPage4.Controls.Add(Me.Label18)
+        Me.WizardPage4.Controls.Add(Me.Label17)
+        Me.WizardPage4.Controls.Add(Me.Label15)
+        Me.WizardPage4.Controls.Add(Me.Label14)
+        Me.WizardPage4.Controls.Add(Me.Label13)
+        Me.WizardPage4.Controls.Add(Me.chkEnableFailSafeFlash)
+        Me.WizardPage4.Controls.Add(Me.chkActivateSmartObjectSolving)
+        Me.WizardPage4.Controls.Add(Me.chkDoubleClickToOpenEditors)
+        Me.WizardPage4.Controls.Add(Me.Label12)
+        Me.WizardPage4.IsFinishPage = True
+        Me.WizardPage4.Name = "WizardPage4"
+        Me.ToolTip1.SetToolTip(Me.WizardPage4, resources.GetString("WizardPage4.ToolTip"))
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        '
+        'Label15
+        '
+        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        '
+        'Label13
+        '
+        resources.ApplyResources(Me.Label13, "Label13")
+        Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
+        '
+        'chkEnableFailSafeFlash
+        '
+        resources.ApplyResources(Me.chkEnableFailSafeFlash, "chkEnableFailSafeFlash")
+        Me.chkEnableFailSafeFlash.Checked = True
+        Me.chkEnableFailSafeFlash.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkEnableFailSafeFlash.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
+        Me.chkEnableFailSafeFlash.Name = "chkEnableFailSafeFlash"
+        Me.ToolTip1.SetToolTip(Me.chkEnableFailSafeFlash, resources.GetString("chkEnableFailSafeFlash.ToolTip"))
+        Me.chkEnableFailSafeFlash.UseVisualStyleBackColor = True
+        '
+        'chkActivateSmartObjectSolving
+        '
+        resources.ApplyResources(Me.chkActivateSmartObjectSolving, "chkActivateSmartObjectSolving")
+        Me.chkActivateSmartObjectSolving.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
+        Me.chkActivateSmartObjectSolving.Name = "chkActivateSmartObjectSolving"
+        Me.ToolTip1.SetToolTip(Me.chkActivateSmartObjectSolving, resources.GetString("chkActivateSmartObjectSolving.ToolTip"))
+        Me.chkActivateSmartObjectSolving.UseVisualStyleBackColor = True
+        '
+        'chkDoubleClickToOpenEditors
+        '
+        resources.ApplyResources(Me.chkDoubleClickToOpenEditors, "chkDoubleClickToOpenEditors")
+        Me.chkDoubleClickToOpenEditors.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
+        Me.chkDoubleClickToOpenEditors.Name = "chkDoubleClickToOpenEditors"
+        Me.ToolTip1.SetToolTip(Me.chkDoubleClickToOpenEditors, resources.GetString("chkDoubleClickToOpenEditors.ToolTip"))
+        Me.chkDoubleClickToOpenEditors.UseVisualStyleBackColor = True
+        '
+        'Label12
+        '
+        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
+        '
         'ToolTip1
         '
         Me.ToolTip1.IsBalloon = True
@@ -718,18 +816,19 @@ Partial Class FormSimulWizard
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.FlowLayoutPanel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox12.ResumeLayout(False)
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage5.ResumeLayout(False)
         Me.WizardPage5.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.WizardPage4.ResumeLayout(False)
+        Me.WizardPage4.PerformLayout()
         Me.cmsAddComps.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents StepWizardControl1 As AeroWizard.StepWizardControl
     Friend WithEvents WizardPage1 As AeroWizard.WizardPage
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents WizardPage2 As AeroWizard.WizardPage
@@ -740,7 +839,6 @@ Partial Class FormSimulWizard
     Public WithEvents ogc1 As System.Windows.Forms.DataGridView
     Public WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents LinkLabelPropertyMethods As System.Windows.Forms.LinkLabel
     Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Public WithEvents Button8 As System.Windows.Forms.Button
     Public WithEvents GroupBox12 As System.Windows.Forms.GroupBox
@@ -755,7 +853,6 @@ Partial Class FormSimulWizard
     Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column12 As System.Windows.Forms.DataGridViewButtonColumn
     Public WithEvents btnInfoLeft As System.Windows.Forms.Button
-    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewComboBoxColumn
@@ -791,7 +888,6 @@ Partial Class FormSimulWizard
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents Index As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewImageColumn
@@ -799,4 +895,19 @@ Partial Class FormSimulWizard
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents Button5 As Button
+    Public WithEvents Button2 As Button
+    Public WithEvents Button3 As Button
+    Friend WithEvents cbPPFilter As ComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents WizardPage4 As AeroWizard.WizardPage
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents chkEnableFailSafeFlash As CheckBox
+    Friend WithEvents chkActivateSmartObjectSolving As CheckBox
+    Friend WithEvents chkDoubleClickToOpenEditors As CheckBox
+    Friend WithEvents Label12 As Label
+    Public WithEvents StepWizardControl1 As AeroWizard.StepWizardControl
 End Class

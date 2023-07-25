@@ -27,6 +27,7 @@ Public Class LogPanel
 
     Private Sub frmLog_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         loaded = True
+        FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
 
     Private Sub FloatToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FloatToolStripMenuItem.Click, DocumentToolStripMenuItem.Click,

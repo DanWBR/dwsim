@@ -104,6 +104,6 @@
     Function SetVolumetricFlow(value As Double) As String
 
     Function SetMassEnthalpy(value As Double) As String
-
-
+    Function GetCompoundMolarFlow(name As String) As Double
+    Sub SetOverallMolarComposition(Vx() As Double)
 End Interface

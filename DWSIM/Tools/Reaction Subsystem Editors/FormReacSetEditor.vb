@@ -68,6 +68,8 @@ Public Class FormReacSetEditor
             End If
         Next
 
+        FormMain.TranslateFormFunction?.Invoke(Me)
+
     End Sub
 
     Private Sub ReactionItem_click(ByVal sender As System.Object, ByVal e As System.EventArgs)

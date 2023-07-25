@@ -22,7 +22,6 @@ using DWSIM.UI.Desktop.Editors.Dynamics;
 using SkiaSharp;
 using DWSIM.UI.Controls;
 using DWSIM.ExtensionMethods;
-using System.Device.Location;
 
 namespace DWSIM.UI.Forms
 {
@@ -308,6 +307,7 @@ namespace DWSIM.UI.Forms
             var btnmSave = new ButtonToolItem { ToolTip = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png", this.GetType().Assembly)) };
 
             var btnmSolve = new ButtonToolItem { ToolTip = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)) };
+            var btnmStop = new ButtonToolItem { ToolTip = "Stop Solving", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png", this.GetType().Assembly)) };
             var btnmSimultSolve = new CheckToolItem { ToolTip = "Enable/Disable Simultaneous Adjust Solver", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Checked_96px.png", this.GetType().Assembly)) };
 
             var btnmComps = new ButtonToolItem { ToolTip = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png", this.GetType().Assembly)) };
@@ -325,6 +325,7 @@ namespace DWSIM.UI.Forms
             {
                 btnmSave.Text = "Save";
                 btnmSolve.Text = "Solve Flowsheet";
+                btnmStop.Text = "Stop Solving";
                 btnmSimultSolve.Text = "E/D Simult. Adj. Solver";
                 btnmComps.Text = "Compounds";
                 btnmBasis.Text = "Basis";
@@ -341,7 +342,7 @@ namespace DWSIM.UI.Forms
                 Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space },
                 btnmComps, btnmBasis, btnmOptions,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
-                btnmSolve, btnmSimultSolve,
+                btnmSolve, btnmStop, btnmSimultSolve,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
                 chkmDynamics, btnmDynManager, btnmDynIntegrator,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space},
@@ -478,6 +479,7 @@ namespace DWSIM.UI.Forms
             {
                 FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                 FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+                FlowsheetControl.FlowsheetSurface.Center((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                 FlowsheetControl.Invalidate();
             };
 
@@ -560,6 +562,15 @@ namespace DWSIM.UI.Forms
             btnSolve.Click += (sender, e) => SolveFlowsheet(false);
             btnmSolve.Click += (sender, e) => SolveFlowsheet(false);
             btnSolveC.Click += (sender, e) => SolveFlowsheet(true);
+
+            btnmStop.Click += (sender, e) =>
+            {
+                s.CalculatorStopRequested = true;
+                if (s.TaskCancellationTokenSource != null)
+                {
+                    s.TaskCancellationTokenSource.Cancel();
+                }
+            };
 
             btnSave.Click += (sender, e) => ActSave.Invoke();
             btnmSave.Click += (sender, e) => ActSave.Invoke();
@@ -661,6 +672,7 @@ namespace DWSIM.UI.Forms
                 {
                     FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                     FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
+                    FlowsheetControl.FlowsheetSurface.Center((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                     FlowsheetControl.Invalidate();
                 }
                 else
@@ -1539,7 +1551,7 @@ namespace DWSIM.UI.Forms
             var imgheart = new ImageView { Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "heart.png")) };
             var lbldonate = new Label { Text = "Support continuous development and maintenance of DWSIM for as low as 3 USD/month or with a one-time donation." };
 
-            var btnSingleDonation = new Button {Text = "One-Time Donation",  ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnSingleDonation = new Button { Text = "One-Time Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
             var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png", this.GetType().Assembly)).WithSize(16, 16) };
 
             if (s.RunningPlatform() == s.Platform.Linux)
@@ -1549,18 +1561,20 @@ namespace DWSIM.UI.Forms
                 btnMonthlyDonation.Width = (int)(140 * sf);
             }
 
-            btnSingleDonation.Click += (s, e) => {
+            btnSingleDonation.Click += (s, e) =>
+            {
                 "https://www.buymeacoffee.com/dwsim".OpenURL();
             };
 
-            btnMonthlyDonation.Click += (s, e) => {
+            btnMonthlyDonation.Click += (s, e) =>
+            {
                 "https://www.patreon.com/dwsim".OpenURL();
             };
 
             var statuspanel = new StackLayout
             {
                 Orientation = Orientation.Horizontal,
-                Items = { imgheart, lbldonate, btnSingleDonation, btnMonthlyDonation   },
+                Items = { imgheart, lbldonate, btnSingleDonation, btnMonthlyDonation },
                 VerticalContentAlignment = VerticalAlignment.Center,
                 Spacing = 4,
                 Visible = true
@@ -1757,9 +1771,11 @@ namespace DWSIM.UI.Forms
             btnmSnapToGrid.Checked = FlowsheetObject.Options.FlowsheetSnapToGrid;
             btnmMultiSelect.Checked = FlowsheetObject.Options.FlowsheetMultiSelectMode;
 
-            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
-            FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
-            FlowsheetControl.Invalidate();
+            var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
+            surface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
+            surface.ZoomAll((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
+            surface.Zoom *= 0.7f;
+            surface.Center((int)(FlowsheetControl.Width * s.DpiScale), (int)(FlowsheetControl.Height * s.DpiScale));
 
             ddstates.Items.Clear();
             ddstates.Items.Add("");
@@ -2383,10 +2399,17 @@ namespace DWSIM.UI.Forms
             item5.Click += (sender, e) => CopyAsImage(2);
             item6.Click += (sender, e) => CopyAsImage(3);
 
-            var item7 = new ButtonMenuItem { Text = "Perform Auto-Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
+            var item7a = new ButtonMenuItem { Text = "Perform Natural Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
+            var item7b = new ButtonMenuItem { Text = "Perform Auto-Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
             var item8 = new ButtonMenuItem { Text = "Restore Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
 
-            item7.Click += (sender, e) =>
+            item7a.Click += (sender, e) =>
+            {
+                FlowsheetControl.FlowsheetSurface.ApplyNaturalLayout((List<string>)DWSIM.FlowsheetSolver.FlowsheetSolver.GetSolvingList(this.FlowsheetObject, false)[0], 75);
+                ActZoomFit.Invoke();
+            };
+
+            item7b.Click += (sender, e) =>
             {
                 FlowsheetControl.FlowsheetSurface.AutoArrange();
                 ActZoomFit.Invoke();
@@ -2404,7 +2427,7 @@ namespace DWSIM.UI.Forms
             item9.Click += (sender, e) => ExportToPDF();
             item10.Click += (sender, e) => ExportToSVG();
 
-            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item9, item10, new SeparatorMenuItem(), item7, item8 });
+            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item9, item10, new SeparatorMenuItem(), item7a, item7b, item8 });
 
             return;
 
@@ -2515,7 +2538,7 @@ namespace DWSIM.UI.Forms
             {
                 if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
                 {
-                    var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (TableGraphic)selobj };
+                    var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic)selobj };
                     editor.ShowInTaskbar = true;
                     editor.Topmost = true;
                     editor.Show();

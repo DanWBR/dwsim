@@ -1268,7 +1268,7 @@ Namespace Reactors
             Dim ival(N.Count - 1), lbo(N.Count - 1), ubo(N.Count - 1), NFv(N.Count - 1) As Double
             For i = 0 To N.Count - 1
                 lbo(i) = 0.0000000001
-                ubo(i) = W0tot / CProps(i).Molar_Weight * 1000
+                ubo(i) = W0tot / CProps(i).Molar_Weight * 1000 * 10.0
                 If InitializeFromPreviousSolution Then
                     Try
                         ival(i) = InitialEstimates(i)

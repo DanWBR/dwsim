@@ -36,16 +36,12 @@ Partial Class FormUnhandledException
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.LabelWithDivider2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -74,8 +70,8 @@ Partial Class FormUnhandledException
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.ForeColor = System.Drawing.Color.White
         Me.Panel1.Name = "Panel1"
         '
@@ -86,9 +82,9 @@ Partial Class FormUnhandledException
         '
         'PictureBox1
         '
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.BackColor = System.Drawing.Color.White
         Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.emblem_important
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
@@ -100,37 +96,37 @@ Partial Class FormUnhandledException
         '
         'TabControl1
         '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.TextBox1)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         '
         'TabPage2
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.TextBox2)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
-        resources.ApplyResources(Me.TextBox2, "TextBox2")
         Me.TextBox2.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBox2, "TextBox2")
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
         '
@@ -138,16 +134,6 @@ Partial Class FormUnhandledException
         '
         resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
         Me.LabelWithDivider2.Name = "LabelWithDivider2"
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
         '
         'Button4
         '
@@ -181,16 +167,6 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
         '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
@@ -219,16 +195,12 @@ Partial Class FormUnhandledException
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.LabelWithDivider3)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.LabelWithDivider2)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button2)
@@ -266,16 +238,12 @@ Partial Class FormUnhandledException
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Public WithEvents LabelWithDivider2 As System.Windows.Forms.Label
-    Public WithEvents Button1 As System.Windows.Forms.Button
-    Public WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Public WithEvents LabelWithDivider3 As System.Windows.Forms.Label
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents Label4 As System.Windows.Forms.Label
-    Public WithEvents Label5 As System.Windows.Forms.Label
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label

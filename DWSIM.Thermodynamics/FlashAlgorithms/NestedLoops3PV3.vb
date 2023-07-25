@@ -1494,25 +1494,29 @@ out:
             IObj?.SetCurrent
             Dim result As Object = _nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
 
-            T = result(4)
+            If V < 1.0 Then
 
-            IObj?.SetCurrent
-            Dim lps As Object = GetPhaseSplitEstimates(T, P, result(0), result(2), PP)
+                T = result(4)
 
-            If lps(2) / (lps(0) + lps(2)) > 0.00001 Then
+                IObj?.SetCurrent
+                Dim lps As Object = GetPhaseSplitEstimates(T, P, result(0), result(2), PP)
 
-                If Not prevres Is Nothing Then
+                If lps(2) / (lps(0) + lps(2)) > 0.00001 Then
 
-                    result = Flash_PV_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, V, T, PP)
+                    If Not prevres Is Nothing Then
 
-                Else
+                        result = Flash_PV_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, V, T, PP)
 
-                    L1 = lps(0) / (lps(0) + lps(2))
-                    L2 = lps(2) / (lps(0) + lps(2))
-                    Vx1 = lps(1)
-                    Vx2 = lps(3)
-                    IObj?.SetCurrent
-                    result = Flash_PV_3P(Vz, V, L1 * (1 - V), L2 * (1 - V), result(3), Vx1, Vx2, P, V, T, PP)
+                    Else
+
+                        L1 = lps(0) / (lps(0) + lps(2))
+                        L2 = lps(2) / (lps(0) + lps(2))
+                        Vx1 = lps(1)
+                        Vx2 = lps(3)
+                        IObj?.SetCurrent
+                        result = Flash_PV_3P(Vz, V, L1 * (1 - V), L2 * (1 - V), result(3), Vx1, Vx2, P, V, T, PP)
+
+                    End If
 
                 End If
 

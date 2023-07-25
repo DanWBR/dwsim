@@ -317,7 +317,7 @@ Public Module General
     <System.Runtime.CompilerServices.Extension()>
     Public Sub UIThreadInvoke(control As Control, code As Action)
         If control.InvokeRequired Then
-            control.Invoke(code)
+            control.BeginInvoke(code)
         Else
             code.Invoke()
         End If
@@ -661,7 +661,9 @@ Public Module General
                     Try
                         cc = GetNextVisibleCol(dgv, cc)
                         If cc > dgv.ColumnCount - 1 Then Exit For
-                        dgv.Item(cc, r).Value = arT(ii).TrimStart
+                        If Not dgv.Item(cc, r).ReadOnly Then
+                            dgv.Item(cc, r).Value = arT(ii).TrimStart
+                        End If
                         cc = cc + 1
                     Catch ex As Exception
                     End Try

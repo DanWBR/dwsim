@@ -1,0 +1,147 @@
+import math
+from DWSIM.Thermodynamics import *
+
+feedA = ims1
+feedB = ims2
+
+#Th_in=127.0
+#Tc_in=30.0
+#ToutA=100.0
+#ToutB=47.0 
+if plateDataGiven == 0:
+    Flowsheet.WriteMessage("Default values for plate is used. To specify custom data change the plateDataGiven parameter and enter the corresponding values.")
+    verticalPortDistance = 1.55 #Vertical port distance
+    compressedPlateLength = 0.38 #Compressed plate length
+    horizontalPortDistance = 0.43
+    effectiveChannelWidth = 0.63
+    numberOfPlates = 105   #No of plates(N)
+    noOfPasses = 1
+    effectiveArea = 110.0 #Effective area
+    plateThickness = 0.0006  #Plate thickness(m)
+    k = 17.5  #Plate Conductivity
+
+## Checks
+if verticalPortDistance <= 0: verticalPortDistance = 1.55
+if compressedPlateLength <= 0: compressedPlateLength = 0.38
+if horizontalPortDistance <= 0: horizontalPortDistance = 0.43
+if effectiveChannelWidth <= 0: effectiveChannelWidth = 0.63
+if numberOfPlates <= 0: numberOfPlates = 105
+if effectiveArea <=0 : effectiveArea = effectiveChannelWidth*verticalPortDistance*numberOfPlates #Approx Value
+if plateThickness <=0 : plateThickness = 0.0006
+if k <= 0: k = 17.5
+
+## Input values
+Cp_h = feedA.GetProp("heatCapacity", "Overall", None, "","mass")
+Cp_c = feedB.GetProp("heatCapacity", "Overall", None, "","mass")
+density_h = feedA.GetProp("density", "Overall", None, "","mole")
+density_c = feedB.GetProp("density", "Overall", None, "","mole")
+k_h = feedA.GetProp("thermalConductivity", "Overall", None, "","")
+k_c = feedB.GetProp("thermalConductivity", "Overall", None, "","")
+massflow_h = feedA.GetProp("totalFlow", "Overall", None, "","mass")
+massflow_c = feedB.GetProp("totalFlow", "Overall", None, "","mass")
+Th_in = feedA.GetProp("temperature", "Overall", None, "","")
+Tc_in = feedB.GetProp("temperature", "Overall", None, "","")
+
+viscosity_h = feedA.GetPhase("Liquid1").Properties.viscosity
+viscosity_c = feedB.GetPhase("Liquid1").Properties.viscosity
+pressure_h = feedA.GetProp("pressure","Overall",None,"","")
+pressure_c = feedB.GetProp("pressure","Overall",None,"","")
+mole_fraction_h = feedA.GetProp("fraction","Overall",None,"","mole")
+mole_fraction_c = feedB.GetProp("fraction","Overall",None,"","mole")
+
+##### Start - trial calculation  (Uncomment below piece for verifying with report)
+#massflow_h[0] = massflow_c[0] = 140
+#Th_in[0] = 65+273.15
+#Tc_in[0] = 22+273.15
+#Cp_h[0] = 4183
+#Cp_c[0] = 4178
+#k_h[0] = 0.645
+#k_c[0] = 0.617
+#density_h[0] = 985
+#density_c[0] = 995
+#viscosity_h = 5.09*(10**-4)
+#viscosity_c = 7.66*(10**-4)
+#viscosity_w = 7.66*(10**-4)
+##### End - trial calculation
+
+pi=math.pi
+Ne = numberOfPlates - 2                                     #Effective no of plates
+pitch = compressedPlateLength / numberOfPlates
+b = pitch - plateThickness                                  #Mean channel flow gap 
+Ach = b * effectiveChannelWidth
+A1 = effectiveArea / Ne                                     #One channel flow area
+Dp = effectiveChannelWidth - horizontalPortDistance
+A1p = (verticalPortDistance - Dp) * effectiveChannelWidth   #Projected Area
+enlargementFactor = A1 / A1p
+Dh = (2 * b) / enlargementFactor                            #Hydraulic diameter
+Ncp = (numberOfPlates - 1) / (2 * noOfPasses)               #Channels per pass(Single pass)
+Pr_h = (viscosity_h*Cp_h[0])/k_h[0]
+Pr_c = (viscosity_c*Cp_c[0])/k_c[0]
+
+v_h = massflow_h[0]/Ncp
+v_c = massflow_c[0]/Ncp
+Gch_h = v_h/Ach
+Gch_c = v_c/Ach
+Re_h = Gch_h*Dh/viscosity_h
+Re_c = Gch_c*Dh/viscosity_c
+Nu_h = 0.3*math.pow(Re_h,0.663)*math.pow(Pr_h,0.333333)
+Nu_c = 0.3*math.pow(Re_c,0.663)*math.pow(Pr_c,0.333333)
+
+Hh = (Nu_h*k_h[0])/Dh
+Hc = (Nu_c*k_c[0])/Dh
+
+UTheoInv = 1/Hh + 1/Hc + plateThickness/k
+UTheo = 1/UTheoInv
+if isUGiven == 1:
+    UTheo = U
+Flowsheet.WriteMessage("Utheo: "+str(UTheo))
+Ch = massflow_h[0]*Cp_h[0]
+Cc = massflow_c[0]*Cp_c[0]
+Cmin = min(Ch,Cc)
+Cmax = max(Ch,Cc)
+NTU = (UTheo * effectiveArea) / Cmin
+R = Cmin/Cmax
+if Concurrent:
+    e = (1-math.exp(-1*NTU*(1+R)))/(1+R)
+else:
+    if R == 1:
+        e = NTU/(NTU+1)
+    else:
+        e = (1-math.exp(-1*NTU*(1-R)))/(1-R*math.exp(-1*NTU*(1-R)))
+Q = Cmin*e*(Th_in[0] - Tc_in[0])
+Th_out = Th_in[0] - Q/Ch
+Tc_out = Tc_in[0] + Q/Cc
+if Concurrent == 1:
+    Delta_T1 = Th_in[0] - Tc_in[0]
+    Delta_T2 = Th_out - Tc_out
+    LMTD = (Delta_T1 - Delta_T2)/math.log(Delta_T1 / Delta_T2)
+else:
+    Delta_T1 = Th_in[0] - Tc_out
+    Delta_T2 = Th_out - Tc_in[0]
+    LMTD = (Delta_T1 - Delta_T2)/math.log(Delta_T1 / Delta_T2)
+
+Flowsheet.WriteMessage("e: "+str(e))
+outA = oms1
+outB = oms2
+
+outA.Clear()
+outA.Assign(feedA)
+outA.Calculate()
+
+outB.Clear()
+outB.Assign(feedB)
+outB.Calculate()
+
+outA.ClearAllProps()
+outB.ClearAllProps()
+
+outA.OverrideSingleCompoundFlashBehavior = True
+outB.OverrideSingleCompoundFlashBehavior = True
+outA.SetTemperature(Th_out)
+outB.SetTemperature(Tc_out)
+outA.SetProp("pressure","Overall",None,"","",pressure_h)
+outB.SetProp("pressure","Overall",None,"","",pressure_c)
+outA.SetProp("fraction","Overall",None,"","mole",mole_fraction_h)
+outB.SetProp("fraction","Overall",None,"","mole",mole_fraction_c)
+outA.SetProp("totalFlow","Overall",None,"","mass",massflow_h)
+outB.SetProp("totalFlow","Overall",None,"","mass",massflow_c)

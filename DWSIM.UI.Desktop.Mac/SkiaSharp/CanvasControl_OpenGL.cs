@@ -170,13 +170,15 @@ namespace DWSIM.UI.Desktop.Mac
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            Console.WriteLine("AwakenFromNib");
+            //Console.WriteLine("AwakenFromNib");
         }
 
         public override void UpdateTrackingAreas()
         {
             if (trackarea != null) { RemoveTrackingArea(trackarea); }
-            trackarea = new NSTrackingArea(Frame, NSTrackingAreaOptions.ActiveWhenFirstResponder | NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.InVisibleRect, this, null);
+            NSTrackingAreaOptions options = NSTrackingAreaOptions.ActiveAlways |  NSTrackingAreaOptions.InVisibleRect |
+             NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.MouseMoved;
+            trackarea = new NSTrackingArea(Frame, options, this, null);
             AddTrackingArea(trackarea);
         }
 
@@ -223,7 +225,10 @@ namespace DWSIM.UI.Desktop.Mac
                 fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
                 this.NeedsDisplay = true;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.ToString());
+            }
         }
 
         public override void MouseDragged(NSEvent theEvent)
@@ -248,9 +253,16 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void ScrollWheel(NSEvent theEvent)
         {
+            var oldzoom = fsurface.Zoom;
             var scroll = theEvent.ScrollingDeltaX;
-            fsurface.Zoom += (float)scroll / 100.0f;
+            fsurface.Zoom += (float)(scroll / 100.0f);
             if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
+            var scale = (float)GlobalSettings.Settings.DpiScale;
+            _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+            _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+            _lastTouchX *= scale;
+            _lastTouchY *= scale;
+            fsurface.CenterTo(oldzoom, (int)_lastTouchX, (int)_lastTouchY, (int)Bounds.Width, (int)Bounds.Height);
             this.NeedsDisplay = true;
         }
 

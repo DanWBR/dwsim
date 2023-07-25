@@ -329,7 +329,12 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
             ElseIf H > Hs And H <= Hl Then
                 'partial liquefaction.
                 xl = (H - Hs) / (Hl - Hs)
-                xs = 1 - xl
+                If xl < 0.999 Then
+                    xs = 1 - xl
+                Else
+                    xl = 1.0
+                    xs = 0.0
+                End If
                 tmp = Flash_PT(Vz, P, T, PP)
                 L = xl
                 V = 0.0#

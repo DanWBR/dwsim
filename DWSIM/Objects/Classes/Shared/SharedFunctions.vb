@@ -86,6 +86,8 @@ Namespace DWSIM
 
             GlobalSettings.Settings.CalculatorActivated = True
 
+            GlobalSettings.Settings.CurrentVersion = My.Settings.CurrentVersion
+
             GlobalSettings.Settings.UserDatabases.Clear()
             If My.Settings.UserDatabases Is Nothing Then My.Settings.UserDatabases = New Specialized.StringCollection
             For Each item In My.Settings.UserDatabases
@@ -200,10 +202,8 @@ Namespace DWSIM
                 If retstr Is Nothing Then
                     Return id
                 Else
-                    If My.Application.ActiveSimulation IsNot Nothing Then
-                        If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
-                            Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
-                        End If
+                    If FormMain.TranslateFunction IsNot Nothing Then
+                        Return FormMain.TranslateFunction.Invoke(retstr)
                     End If
                     Return retstr
                 End If
@@ -246,10 +246,8 @@ Namespace DWSIM
                     If retstr Is Nothing Then
                         Return PropID
                     Else
-                        If My.Application.ActiveSimulation IsNot Nothing Then
-                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
-                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
-                            End If
+                        If FormMain.TranslateFunction IsNot Nothing Then
+                            Return FormMain.TranslateFunction.Invoke(retstr)
                         End If
                         Return retstr
                     End If
@@ -258,10 +256,8 @@ Namespace DWSIM
                     If retstr Is Nothing Then
                         Return PropID
                     Else
-                        If My.Application.ActiveSimulation IsNot Nothing Then
-                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
-                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
-                            End If
+                        If FormMain.TranslateFunction IsNot Nothing Then
+                            Return FormMain.TranslateFunction.Invoke(retstr)
                         End If
                         Return retstr
                     End If
@@ -315,10 +311,8 @@ Namespace DWSIM
                     If retstr Is Nothing Then
                         Return PropID
                     Else
-                        If My.Application.ActiveSimulation IsNot Nothing Then
-                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
-                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
-                            End If
+                        If FormMain.TranslateFunction IsNot Nothing Then
+                            Return FormMain.TranslateFunction.Invoke(retstr)
                         End If
                         Return retstr
                     End If
@@ -331,10 +325,8 @@ Namespace DWSIM
                     If retstr Is Nothing Then
                         Return PropID
                     Else
-                        If My.Application.ActiveSimulation IsNot Nothing Then
-                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
-                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
-                            End If
+                        If FormMain.TranslateFunction IsNot Nothing Then
+                            Return FormMain.TranslateFunction.Invoke(retstr)
                         End If
                         Return retstr
                     End If

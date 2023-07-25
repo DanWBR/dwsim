@@ -33,9 +33,21 @@ Namespace PropertyPackages
 #Region "Initialization"
 
         Public Sub New(ByVal comode As Boolean)
+
             MyBase.New(comode)
+
             EnthalpyEntropyCpCvCalculationMode = EnthalpyEntropyCpCvCalcMode.Excess
+
             LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.COSTALD
+
+            With PropertyMethodsInfo
+                .Vapor_Fugacity = "Ideal / PR EOS"
+                .Vapor_Enthalpy_Entropy_CpCv = "Ideal / Lee-Kesler / Excess / Experimental"
+                .Vapor_Density = "Ideal / PR EOS"
+                .Liquid_Fugacity = "Activity Coefficient + Poynting + Vapor Pressure / Henry's Constant"
+                .Liquid_Enthalpy_Entropy_CpCv = "Ideal / Lee-Kesler / Excess / Experimental"
+            End With
+
         End Sub
 
         Public Overrides Sub ConfigParameters()
@@ -115,57 +127,57 @@ Namespace PropertyPackages
 
             For j As Integer = 1 To 7
 
-                    If j <> 2 Then
+                If j <> 2 Then
 
-                        Dim Vx = RET_VMOL(RET_PHASECODE(j))
-                        Dim n As Integer = Vx.Length - 1
+                    Dim Vx = RET_VMOL(RET_PHASECODE(j))
+                    Dim n As Integer = Vx.Length - 1
 
-                        Dim constprop = DW_GetConstantProperties()
+                    Dim constprop = DW_GetConstantProperties()
 
-                        Dim ativ(n), poy1(n), poy2(n), vex(n) As Double
+                    Dim ativ(n), poy1(n), poy2(n), vex(n) As Double
 
-                        ativ = m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
+                    ativ = m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
 
-                        Dim P2 As Double = P + 1
+                    Dim P2 As Double = P + 1
 
-                        Dim Psati, vli As Double
-                        For i = 0 To n
-                            vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
-                            If Double.IsNaN(vli) Then
-                                vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
-                            End If
-                            Psati = AUX_PVAPi(i, T)
-                            poy1(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
-                            poy2(i) = Math.Exp(vli * Abs(P2 - Psati) / (8314.47 * T))
-                            vex(i) = (Log(poy2(i)) - Log(poy1(i))) * 8.314 * T * 1000 'm3/kmol
+                    Dim Psati, vli As Double
+                    For i = 0 To n
+                        vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
+                        If Double.IsNaN(vli) Then
+                            vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
+                        End If
+                        Psati = AUX_PVAPi(i, T)
+                        poy1(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
+                        poy2(i) = Math.Exp(vli * Abs(P2 - Psati) / (8314.47 * T))
+                        vex(i) = (Log(poy2(i)) - Log(poy1(i))) * 8.314 * T * 1000 'm3/kmol
+                    Next
+
+                    i = 0
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(j).Compounds.Values
+                        subst.PartialVolume = vex(i)
+                        i += 1
+                    Next
+
+                Else
+
+                    If VaporPhaseFugacityCalculationMode = VaporPhaseFugacityCalcMode.Ideal Then
+                        Dim vapdens = AUX_VAPDENS(T, P)
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                            subst.PartialVolume = subst.ConstantProperties.Molar_Weight / vapdens
                         Next
-
+                    Else
+                        Dim partvol As New Object
+                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(2), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
                         i = 0
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(j).Compounds.Values
-                            subst.PartialVolume = vex(i)
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                            subst.PartialVolume = partvol(i)
                             i += 1
                         Next
-
-                    Else
-
-                        If VaporPhaseFugacityCalculationMode = VaporPhaseFugacityCalcMode.Ideal Then
-                            Dim vapdens = AUX_VAPDENS(T, P)
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.PartialVolume = subst.ConstantProperties.Molar_Weight / vapdens
-                            Next
-                        Else
-                            Dim partvol As New Object
-                            partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(2), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
-                            i = 0
-                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.PartialVolume = partvol(i)
-                                i += 1
-                            Next
-                        End If
-
                     End If
 
-                Next
+                End If
+
+            Next
 
         End Sub
 
@@ -341,7 +353,7 @@ Namespace PropertyPackages
 
             If OverrideEnthalpyCalculation Then
 
-                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EnthalpyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -360,9 +372,17 @@ Namespace PropertyPackages
                         Case 1 'Ideal
                             H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P)
                         Case 2 'Excess
-                            Dim gammaex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
-                            If Double.IsNaN(gammaex) Then Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
-                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - gammaex - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                            Dim Hex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
+                            If Double.IsNaN(Hex) Then
+                                If Flowsheet IsNot Nothing Then
+                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings"), Interfaces.IFlowsheet.MessageType.Warning)
+                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Assuming excess enthalpy = 0"), Interfaces.IFlowsheet.MessageType.Warning)
+                                    Hex = 0.0
+                                Else
+                                    Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
+                                End If
+                            End If
+                            H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - Hex - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                         Case 3 'Experimental Liquid
                             H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P)
                     End Select
@@ -384,10 +404,8 @@ Namespace PropertyPackages
                         Select Case EnthalpyEntropyCpCvCalculationMode
                             Case 0 'LK
                                 H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx)) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                            Case 1 'Ideal
+                            Case 1, 2 'Ideal
                                 H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                            Case 2 'Excess
-                                H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                             Case 3 'Experimental Liquid
                                 H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) - RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                         End Select
@@ -433,7 +451,7 @@ Namespace PropertyPackages
 
             If OverrideEntropyCalculation Then
 
-                Return EntropyCalculationOverride.Invoke(Vx, T, P, st)
+                Return EntropyCalculationOverride.Invoke(Vx, T, P, st, Me)
 
             Else
 
@@ -603,8 +621,13 @@ Namespace PropertyPackages
                     If Tr >= 1.02 Then
                         IObj?.SetCurrent()
                         IObj?.Paragraphs.Add("<m>f_i = H_i/P</m>")
-                        lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P)
-                        IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, Exp(lnfug(i)) * P))
+                        If UseHenryConstants And HasHenryConstants(constprop(i).Name) Then
+                            Dim hc = AUX_KHenry(constprop(i).Name, T)
+                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
+                            lnfug(i) = Log(hc / P)
+                        Else
+                            lnfug(i) = Log(AUX_PVAPi(i, T) / (P))
+                        End If
                     ElseIf Tr < 0.98 Then
                         IObj?.Paragraphs.Add("<m>f_i = \gamma_i Poy_i P_{sat_i}/P</m>")
                         IObj?.Paragraphs.Add(String.Format("Activity Coefficient: {0}", ativ(i)))

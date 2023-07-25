@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.Services
 {
- 
+
     public class UserService
     {
 
@@ -27,16 +27,20 @@ namespace DWSIM.Simulate365.Services
         private static UserService _singletonInstance;
 
         private UserDetailsModel _currentUser = null;
-
+        public EventHandler OnUserLoggedIn;       
         private string _accessToken = null;
         private string _refreshToken = null;
         private DateTime _accessTokenExpiresAt = DateTime.MinValue;
         private System.Timers.Timer refreshTokenTimer;
+        private static string AccessTokenField = "AccessTokenV2";
+        private static string RefreshTokenField = "RefreshTokenV2";
+        private static string AccessTokenExpiresAtField = "AccessTokenExpiresAtV2";
 
         #region Public events
 
         public event EventHandler<UserDetailsModel> UserDetailsLoaded;
         public event EventHandler UserLoggedOut;
+        public event EventHandler ShowLoginForm;
 
         #endregion
 
@@ -46,31 +50,36 @@ namespace DWSIM.Simulate365.Services
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\DWSIM");
             if (key != null)
             {
-                this._accessToken = key.GetValue("AccessToken")?.ToString();
-                this._refreshToken = key.GetValue("RefreshToken")?.ToString();
-                var expiresAtValue = key.GetValue("AccessTokenExpiresAt");
+                this._accessToken = key.GetValue(AccessTokenField)?.ToString();
+                this._refreshToken = key.GetValue(RefreshTokenField)?.ToString();
+                var expiresAtValue = key.GetValue(AccessTokenExpiresAtField);
                 if (expiresAtValue != null)
-                    DateTime.TryParse(key.GetValue("AccessTokenExpiresAt").ToString(), out this._accessTokenExpiresAt);
+                    DateTime.TryParse(key.GetValue(AccessTokenExpiresAtField).ToString(), out this._accessTokenExpiresAt);
 
                 Task.Run(() => LoadUserDetails());
             }
             //Intended use to refresh token on page startup
-            #pragma warning disable
-            RefreshToken();
+#pragma warning disable
+            if (!string.IsNullOrWhiteSpace(this._refreshToken))
+            {
+                RefreshToken();
+            }
+
 
             refreshTokenTimer = new System.Timers.Timer();
-            refreshTokenTimer.Elapsed += async (sender, args) => {
+            refreshTokenTimer.Elapsed += async (sender, args) =>
+            {
                 if (this._accessTokenExpiresAt != DateTime.MinValue && this._accessTokenExpiresAt.AddMinutes(-5) < DateTime.Now)
                 {
                     await GetInstance().RefreshToken();
                 }
-                 };
+            };
             refreshTokenTimer.AutoReset = true;
             refreshTokenTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
             refreshTokenTimer.Start();
         }
 
-        public  bool _IsLoggedIn()
+        public bool _IsLoggedIn()
         {
             return this._accessToken != null && this._accessTokenExpiresAt > DateTime.Now;
         }
@@ -86,10 +95,10 @@ namespace DWSIM.Simulate365.Services
         public static void Logout()
         {
             _singletonInstance.ClearInstance();
-            _singletonInstance.UserLoggedOut?.Invoke(_singletonInstance,new EventArgs());
+            _singletonInstance.UserLoggedOut?.Invoke(_singletonInstance, new EventArgs());
         }
 
-        private  void ClearInstance()
+        private void ClearInstance()
         {
             _accessToken = null;
             _refreshToken = null;
@@ -101,9 +110,9 @@ namespace DWSIM.Simulate365.Services
             {
                 try
                 {
-                    key.DeleteValue("AccessToken");
-                    key.DeleteValue("RefreshToken");
-                    key.DeleteValue("AccessTokenExpiresAt");
+                    key.DeleteValue(AccessTokenField);
+                    key.DeleteValue(RefreshTokenField);
+                    key.DeleteValue(AccessTokenExpiresAtField);
                 }
                 catch (Exception)
                 {
@@ -115,16 +124,16 @@ namespace DWSIM.Simulate365.Services
                     Directory.Delete(WebUIForm.USER_DATA_FOLDER, true);
                 }
                 catch (Exception ex)
-                {                  
+                {
                 }
-         
-                UserLoggedOut?.Invoke(this,null);
+
+                UserLoggedOut?.Invoke(this, null);
             }
-         
+
 
         }
 
-      public string GetUserToken()
+        public string GetUserToken()
         {
             return this._accessToken;
         }
@@ -141,9 +150,9 @@ namespace DWSIM.Simulate365.Services
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\DWSIM", true);
 
             //storing the values  
-            key.SetValue("AccessToken", _accessToken);
-            key.SetValue("RefreshToken", _refreshToken);
-            key.SetValue("AccessTokenExpiresAt", _accessTokenExpiresAt.ToString());
+            key.SetValue(AccessTokenField, _accessToken);
+            key.SetValue(RefreshTokenField, _refreshToken);
+            key.SetValue(AccessTokenExpiresAtField, _accessTokenExpiresAt.ToString());
             key.Close();
 
             Task.Run(() => LoadUserDetails());
@@ -153,6 +162,9 @@ namespace DWSIM.Simulate365.Services
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(this._accessToken))
+                    return;
+
                 var graphClient = GraphClientFactory.CreateClient(_accessToken);
                 var user = await graphClient.Me.Request().GetAsync();
 
@@ -177,8 +189,13 @@ namespace DWSIM.Simulate365.Services
 
             }
         }
-   
-       public async Task RefreshToken()
+
+        public void ShowLogin()
+        {
+            ShowLoginForm?.Invoke(this, new EventArgs());
+        }
+
+        public async Task RefreshToken()
         {
             try
             {
@@ -192,7 +209,7 @@ namespace DWSIM.Simulate365.Services
                         ["client_id"] = CLIENT_ID,
                         ["refresh_token"] = _refreshToken,
                         ["scope"] = SCOPE,
-                        ["redirect_uri"] =RETURN_URL,
+                        ["redirect_uri"] = RETURN_URL,
                         ["grant_type"] = "refresh_token",
                     };
 
@@ -213,13 +230,13 @@ namespace DWSIM.Simulate365.Services
                     // Deserialize
                     var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(responseStr);
                     SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
-                   
+
                 }
             }
             catch (Exception ex)
             {
 
-              //  UserLoggedOut?.Invoke(this, new EventArgs());
+                //  UserLoggedOut?.Invoke(this, new EventArgs());
             }
         }
 

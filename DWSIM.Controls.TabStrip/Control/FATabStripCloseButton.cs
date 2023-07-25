@@ -42,6 +42,7 @@ namespace FarsiLibrary.Win
 
         public void DrawCross(Graphics g)
         {
+
             if (isMouseOver)
             {
                 Color fill = renderer.ColorTable.ButtonSelectedHighlight;

@@ -31,6 +31,13 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "5265F953-8825-4a80-9112-A3B68C329E4C"
 
+        Public Overrides ReadOnly Property Popular As Boolean = True
+
+        Public Overrides ReadOnly Property DisplayName As String = "UNIQUAC"
+
+        Public Overrides ReadOnly Property DisplayDescription As String =
+            "Uses the UNIQUAC Model to calculate liquid phase activity coefficients."
+
         Public Property m_uni As Auxiliary.UNIQUAC
             Get
                 Return m_act
@@ -115,7 +122,7 @@ Namespace PropertyPackages
                 i2 = 0
                 For Each c2 In CurrentMaterialStream.Phases(0).Compounds.Values
                     If c.Name <> c2.Name AndAlso Vx(i1) * Vx(i2) > 0.0 Then
-                        ipdata = ExcelAddIn.ExcelIntegration.GetInteractionParameterSet(Me, "UNIQUAC", c.Name, c2.Name)
+                        ipdata = ExcelAddIn.ExcelIntegrationNoAttr.GetInteractionParameterSet(Me, "UNIQUAC", c.Name, c2.Name)
                         Dim i As Integer, sum As Double
                         sum = 0
                         For i = 2 To 8
@@ -132,13 +139,26 @@ Namespace PropertyPackages
 
 #End Region
 
-        Dim actu(5), actn(5) As Double
+        Dim actu(5), actn(5), T1 As Double
         Dim ppu As PropertyPackages.UNIQUACPropertyPackage
         Dim uniquac As PropertyPackages.Auxiliary.UNIQUAC
         Dim ms As Streams.MaterialStream
-        Dim ppuf As MODFACPropertyPackage, unifac As Auxiliary.NISTMFAC
+        Dim ppuf As UNIFACPropertyPackage, unifac As Auxiliary.Unifac
+
+        Private Shared skip As Boolean = False
+
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+            If AutoEstimateMissingNRTLUNIQUACParameters Then
+                EstimateMissingInteractionParameters(True)
+            End If
+        End Sub
 
         Public Sub EstimateMissingInteractionParameters(verbose As Boolean)
+
+            If Flowsheet Is Nothing Then
+                Flowsheet = CurrentMaterialStream.Flowsheet
+                If Flowsheet Is Nothing Then Exit Sub
+            End If
 
             For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
                 If Not m_uni.InteractionParameters.ContainsKey(cp.Name) Then
@@ -166,99 +186,153 @@ Namespace PropertyPackages
 
             For Each item1 In m_uni.InteractionParameters
                 For Each ipset In item1.Value
-                    If ipset.Value.A12 = 0 And ipset.Value.A21 = 0 Then
+
+                    If ipset.Value.A12 = 0 And ipset.Value.A21 = 0 And
+                        Flowsheet.SelectedCompounds.ContainsKey(item1.Key) And
+                        Flowsheet.SelectedCompounds.ContainsKey(ipset.Key) Then
 
                         Dim comp1, comp2 As ConstantProperties
                         comp1 = Flowsheet.SelectedCompounds(item1.Key)
                         comp2 = Flowsheet.SelectedCompounds(ipset.Key)
 
-                        Try
+                        If comp1.Normal_Boiling_Point < 200 Or comp2.Normal_Boiling_Point < 200 Then
 
-                            ppu = New PropertyPackages.UNIQUACPropertyPackage
-                            ppuf = New PropertyPackages.MODFACPropertyPackage
+                            ipset.Value.A12 = 0.01
+                            ipset.Value.A21 = 0.01
 
-                            ms = New Streams.MaterialStream("", "")
-                            uniquac = New PropertyPackages.Auxiliary.UNIQUAC
-                            unifac = New PropertyPackages.Auxiliary.NISTMFAC
+                        Else
 
-                            With ms
-                                For Each phase In ms.Phases.Values
-                                    With phase
-                                        .Compounds.Add(comp1.Name, New Compound(comp1.Name, ""))
-                                        .Compounds(comp1.Name).ConstantProperties = comp1
-                                        .Compounds.Add(comp2.Name, New Compound(comp2.Name, ""))
-                                        .Compounds(comp2.Name).ConstantProperties = comp2
-                                    End With
+                            Try
+
+                                ppu = New PropertyPackages.UNIQUACPropertyPackage
+                                ppuf = New PropertyPackages.UNIFACPropertyPackage
+
+                                ms = New Streams.MaterialStream("", "")
+                                uniquac = New PropertyPackages.Auxiliary.UNIQUAC
+                                unifac = New PropertyPackages.Auxiliary.Unifac
+
+                                With ms
+                                    For Each phase In ms.Phases.Values
+                                        With phase
+                                            .Compounds.Add(comp1.Name, New Compound(comp1.Name, ""))
+                                            .Compounds(comp1.Name).ConstantProperties = comp1
+                                            .Compounds.Add(comp2.Name, New Compound(comp2.Name, ""))
+                                            .Compounds(comp2.Name).ConstantProperties = comp2
+                                        End With
+                                    Next
+                                End With
+
+                                skip = True
+
+                                ppu.CurrentMaterialStream = ms
+                                ppuf.CurrentMaterialStream = ms
+
+                                skip = False
+
+                                T1 = 298.15
+
+                                Dim a1(1), a2(1), a3(1) As Double
+
+                                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                                       a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
+                                                                   End Sub)
+                                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                                       a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
+                                                                   End Sub)
+                                Dim task3 As Task = TaskHelper.Run(Sub()
+                                                                       a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
+                                                                   End Sub)
+                                Task.WaitAll(task1, task2, task3)
+
+                                actu(0) = a1(0)
+                                actu(1) = a2(0)
+                                actu(2) = a3(0)
+                                actu(3) = a1(1)
+                                actu(4) = a2(1)
+                                actu(5) = a3(1)
+
+                                Dim x1s = New Double() {-2500, -500, 0, 500, 2500}
+                                Dim x2s = New Double() {-2500, -500, 0, 500, 2500}
+
+                                Dim fvals As New List(Of Double)
+                                Dim xvals As New List(Of Double())
+
+                                Dim OK As Boolean = False
+
+                                For Each x1 In x1s
+                                    For Each x2 In x2s
+
+                                        Dim initval2() As Double = New Double() {x1, x2}
+                                        Dim lconstr2() As Double = New Double() {-10000.0#, -10000.0#}
+                                        Dim uconstr2() As Double = New Double() {+10000.0#, +10000.0#}
+                                        Dim finalval2() As Double = Nothing
+
+                                        Dim solver As New MathEx.Optimization.IPOPTSolver
+                                        solver.MaxIterations = 100
+                                        solver.Tolerance = 0.0001
+                                        finalval2 = solver.Solve(AddressOf FunctionValue, Nothing, initval2, lconstr2, uconstr2)
+
+                                        Dim avgerr As Double = 0.0#
+                                        For i As Integer = 0 To 5
+                                            avgerr += (actn(i) - actu(i)) ^ 2
+                                        Next
+
+                                        xvals.Add(finalval2)
+                                        fvals.Add(avgerr)
+
+                                        If avgerr < 1.0 Then OK = True
+
+                                        If OK Then Exit For
+
+                                    Next
+
+                                    If OK Then Exit For
+
                                 Next
-                            End With
 
-                            ppu.CurrentMaterialStream = ms
-                            ppuf.CurrentMaterialStream = ms
+                                If fvals.Min > 1.0 Then
+                                    Throw New Exception("Modified UNIFAC (NIST) was unable to estimate a valid set of UNIQUAC parameters")
+                                End If
 
-                            Dim T1 = 298.15
+                                ipset.Value.A12 = xvals(fvals.IndexOf(fvals.Min))(0)
+                                ipset.Value.A21 = xvals(fvals.IndexOf(fvals.Min))(1)
 
-                            Dim a1(1), a2(1), a3(1) As Double
+                                If verbose Then
 
-                            Dim task1 As Task = TaskHelper.Run(Sub()
-                                                                   a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                                                               End Sub)
-                            Dim task2 As Task = TaskHelper.Run(Sub()
-                                                                   a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                                                               End Sub)
-                            Dim task3 As Task = TaskHelper.Run(Sub()
-                                                                   a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                                                               End Sub)
-                            Task.WaitAll(task1, task2, task3)
+                                    Console.WriteLine(String.Format("Estimated UNIQUAC IP set for {0}/{1}: {2:N2}/{3:N2}",
+                                                             comp1.Name, comp2.Name, ipset.Value.A12, ipset.Value.A21))
 
-                            actu(0) = a1(0)
-                            actu(1) = a2(0)
-                            actu(2) = a3(0)
-                            actu(3) = a1(1)
-                            actu(4) = a2(1)
-                            actu(5) = a3(1)
+                                    If Flowsheet IsNot Nothing Then
+                                        Flowsheet.ShowMessage(String.Format("Estimated UNIQUAC IP set for {0}/{1}: {2:N2}/{3:N2}",
+                                                             comp1.Name, comp2.Name, ipset.Value.A12, ipset.Value.A21),
+                                                             Interfaces.IFlowsheet.MessageType.Information)
+                                    End If
 
-                            x(0) = 0.0
-                            x(1) = 0.0
+                                End If
 
-                            If x(0) = 0 Then x(0) = 0
-                            If x(1) = 0 Then x(1) = 0
+                            Catch ex As Exception
 
-                            Dim initval2() As Double = New Double() {x(0), x(1)}
-                            Dim lconstr2() As Double = New Double() {-10000.0#, -10000.0#}
-                            Dim uconstr2() As Double = New Double() {+10000.0#, +10000.0#}
-                            Dim finalval2() As Double = Nothing
+                                ipset.Value.A12 = 0.0000000001
+                                ipset.Value.A21 = 0.0000000001
 
-                            Dim solver As New MathEx.Optimization.IPOPTSolver
-                            solver.MaxIterations = 100
-                            solver.Tolerance = 0.000001
-                            finalval2 = solver.Solve(AddressOf FunctionValue, Nothing, initval2, lconstr2, uconstr2)
+                                'If verbose Then
+                                '    Console.WriteLine(String.Format("Error estimating UNIQUAC IP set for {0}/{1}: {2}",
+                                '                                 comp1.Name, comp2.Name, ex.ToString()))
 
-                            Dim avgerr As Double = 0.0#
-                            For i As Integer = 0 To 5
-                                avgerr += (actn(i) - actu(i)) / actu(i) * 100 / 6
-                            Next
+                                '    If Flowsheet IsNot Nothing Then
+                                '        Flowsheet.ShowMessage(String.Format("Error estimating UNIQUAC IP set for {0}/{1}: {2}",
+                                '                                 comp1.Name, comp2.Name, ex.ToString()),
+                                '                                 Interfaces.IFlowsheet.MessageType.Information)
+                                '    End If
 
-                            ipset.Value.A12 = finalval2(0)
-                            ipset.Value.A21 = finalval2(1)
+                                'End If
 
-                            If verbose Then
+                            End Try
 
-                                Console.WriteLine(String.Format("Estimated UNIQUAC IP set for {0}/{1}: {2:N2}/{3:N2}/{4}",
-                                                         comp1.Name, comp2.Name, finalval2(0), finalval2(1)))
-
-                            End If
-
-                        Catch ex As Exception
-
-                            If verbose Then
-                                Console.WriteLine(String.Format("Error estimating UNIQUAC IP set for {0}/{1}: {2}",
-                                                         comp1.Name, comp2.Name, ex.ToString()))
-
-                            End If
-
-                        End Try
+                        End If
 
                     End If
+
                 Next
             Next
 
@@ -281,13 +355,13 @@ Namespace PropertyPackages
             If GlobalSettings.Settings.EnableParallelProcessing Then
                 Try
                     Dim task1 As Task = TaskHelper.Run(Sub()
-                                                           a1 = uniquac.GAMMA_MR(298.15, New Double() {0.25, 0.75}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
+                                                           a1 = uniquac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
                                                        End Sub)
                     Dim task2 As Task = TaskHelper.Run(Sub()
-                                                           a2 = uniquac.GAMMA_MR(298.15, New Double() {0.5, 0.5}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
+                                                           a2 = uniquac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
                                                        End Sub)
                     Dim task3 As Task = TaskHelper.Run(Sub()
-                                                           a3 = uniquac.GAMMA_MR(298.15, New Double() {0.75, 0.25}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
+                                                           a3 = uniquac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
                                                        End Sub)
                     Task.WaitAll(task1, task2, task3)
                 Catch ae As AggregateException
@@ -314,7 +388,6 @@ Namespace PropertyPackages
             Return fval
 
         End Function
-
 
     End Class
 

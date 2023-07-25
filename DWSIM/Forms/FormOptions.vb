@@ -17,15 +17,14 @@
 
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
-Imports Cudafy
-Imports Cudafy.Host
-Imports System.Threading.Tasks
 
 Public Class FormOptions
 
     Inherits UserControl
 
     Private loaded As Boolean = False
+
+    Public AddMoreTabs As Action(Of TabControl)
 
     Private Sub FormOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -38,17 +37,14 @@ Public Class FormOptions
             btnSelectPythonPath.Enabled = False
             Button4.Enabled = False
             Button7.Enabled = False
+            btnDownPy.Enabled = False
+            tbPythonPath.Enabled = False
         End If
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
-        Me.chkEnableGPUProcessing.Checked = My.Settings.EnableGPUProcessing
-        Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
-        Me.tbGPUCaps.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.chkEnableSIMD.Checked = My.Settings.UseSIMDExtensions
 
         Me.chkEnableInspector.Checked = My.Settings.InspectorEnabled
-
-        Me.KryptonCheckBox1.Checked = My.Settings.ShowTips
 
         Me.chkSaveBackupFile.Checked = My.Settings.SaveBackupFile
         Me.KryptonCheckBox6.Checked = My.Settings.BackupActivated
@@ -73,23 +69,15 @@ Public Class FormOptions
 
         chkHideSolidPhaseCO.Checked = My.Settings.HideSolidPhase_CO
 
-        cbRenderer.SelectedIndex = My.Settings.FlowsheetRenderer
         chkAA.Checked = My.Settings.FlowsheetAntiAliasing
 
         'solver
 
         If My.Settings.SolverMode = 0 Then My.Settings.SolverMode = 1
 
-        If My.Settings.SolverMode = 2 Then
-            chkBackgroundParallel.Checked = True
-        Else
-            chkBackgroundParallel.Checked = False
-        End If
-
         tbSolverTimeout.Text = My.Settings.SolverTimeoutSeconds
         cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
         chkSolverBreak.Checked = My.Settings.SolverBreakOnException
-        chkStorePreviousSolutions.Checked = My.Settings.StorePreviousSolutions
 
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
@@ -114,54 +102,21 @@ Public Class FormOptions
 
         If Directory.Exists(configdir) Then tbConfigDir.Text = configdir Else tbConfigDir.Text = "N/A"
 
-        Select Case My.Settings.CultureInfo
-            Case "pt-BR"
-                Me.ComboBoxUILanguage.SelectedIndex = 0
-            Case "en"
-                Me.ComboBoxUILanguage.SelectedIndex = 1
-        End Select
-
         chkUpdates.Checked = Settings.CheckForUpdates
+
+        If Not FormMain.IsPro Then
+            gbLoadExtensions.Visible = True
+            chkLoadExtensions.Checked = My.Settings.LoadExtensionsAndPlugins
+        Else
+            gbLoadExtensions.Visible = False
+        End If
 
         loaded = True
 
-    End Sub
+        AddMoreTabs?.Invoke(FaTabStrip1)
 
-    Public Sub GetCUDACaps(prop As GPGPUProperties)
+        FormMain.TranslateFormFunction?.Invoke(Me)
 
-        Dim i As Integer = 0
-
-        Me.tbGPUCaps.Text = ""
-
-        Me.tbGPUCaps.AppendText(String.Format("   --- General Information for device {0} ---", i) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Name:  {0}", prop.Name) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Device Id:  {0}", prop.DeviceId) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Compute capability:  {0}.{1}", prop.Capability.Major, prop.Capability.Minor) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Clock rate: {0}", prop.ClockRate) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Simulated: {0}", prop.IsSimulated) & vbCrLf)
-
-        Me.tbGPUCaps.AppendText(String.Format("   --- Memory Information for device {0} ---", i) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Total global mem:  {0}", prop.TotalMemory) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Total constant Mem:  {0}", prop.TotalConstantMemory) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Max mem pitch:  {0}", prop.MemoryPitch) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Texture Alignment:  {0}", prop.TextureAlignment) & vbCrLf)
-
-        Me.tbGPUCaps.AppendText(String.Format("   --- MP Information for device {0} ---", i) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Shared mem per mp: {0}", prop.SharedMemoryPerBlock) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Registers per mp:  {0}", prop.RegistersPerBlock) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Threads in warp:  {0}", prop.WarpSize) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Max threads per block:  {0}", prop.MaxThreadsPerBlock) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Max thread dimensions:  ({0}, {1}, {2})", prop.MaxThreadsSize.x, prop.MaxThreadsSize.y, prop.MaxThreadsSize.z) & vbCrLf)
-        Me.tbGPUCaps.AppendText(String.Format("Max grid dimensions:  ({0}, {1}, {2})", prop.MaxGridSize.x, prop.MaxGridSize.y, prop.MaxGridSize.z) & vbCrLf)
-
-        Me.tbGPUCaps.SelectionStart = 0
-        Me.tbGPUCaps.SelectionLength = 0
-        Me.tbGPUCaps.ScrollToCaret()
-
-    End Sub
-
-    Private Sub KryptonCheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonCheckBox1.CheckedChanged
-        My.Settings.ShowTips = Me.KryptonCheckBox1.Checked
     End Sub
 
     Private Sub KryptonCheckBox6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonCheckBox6.CheckedChanged
@@ -177,6 +132,7 @@ Public Class FormOptions
             Me.KryptonTextBox1.Enabled = False
             Me.TrackBar1.Enabled = False
         End If
+        If FormMain.IsPro Then KryptonButton1.Enabled = False
     End Sub
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
@@ -410,46 +366,6 @@ Public Class FormOptions
         Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
     End Sub
 
-    Private Sub cbGPU_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbGPU.SelectedIndexChanged
-        If Not cbGPU.SelectedItem Is Nothing Then
-            If cbGPU.SelectedItem.ToString.Contains("Emulator") Then
-                My.Settings.CudafyTarget = eGPUType.Emulator
-            ElseIf cbGPU.SelectedItem.ToString.Contains("CUDA") Then
-                My.Settings.CudafyTarget = eGPUType.Cuda
-            Else
-                My.Settings.CudafyTarget = eGPUType.OpenCL
-            End If
-            Settings.CudafyTarget = My.Settings.CudafyTarget
-            Try
-                For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(My.Settings.CudafyTarget, False)
-                    If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
-                        My.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
-                        My.Settings.CudafyDeviceID = prop.DeviceId
-                        Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
-                        Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
-                        GetCUDACaps(prop)
-                        Exit For
-                    End If
-                Next
-            Catch ex As Exception
-
-            End Try
-            If loaded Then
-                If Settings.gpu IsNot Nothing Then Settings.gpu.Dispose()
-                Settings.gpu = Nothing
-                Calculator.InitComputeDevice()
-            End If
-        End If
-    End Sub
-
-    Private Sub chkEnableGPUProcessing_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEnableGPUProcessing.CheckedChanged
-        Me.cbGPU.Enabled = chkEnableGPUProcessing.Checked
-        Me.tbGPUCaps.Enabled = chkEnableGPUProcessing.Checked
-        My.Settings.EnableGPUProcessing = chkEnableGPUProcessing.Checked
-        Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
-        If loaded And chkEnableGPUProcessing.Checked Then cbGPU_SelectedIndexChanged(sender, e)
-    End Sub
-
     Private Sub cbDebugLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDebugLevel.SelectedIndexChanged
         My.Settings.DebugLevel = cbDebugLevel.SelectedIndex
         Settings.DebugLevel = My.Settings.DebugLevel
@@ -484,10 +400,6 @@ Public Class FormOptions
     Private Sub chkSolverBreak_CheckedChanged(sender As Object, e As EventArgs) Handles chkSolverBreak.CheckedChanged
         My.Settings.SolverBreakOnException = chkSolverBreak.Checked
         Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
-    End Sub
-
-    Private Sub chkStorePreviousSolutions_CheckedChanged(sender As Object, e As EventArgs) Handles chkStorePreviousSolutions.CheckedChanged
-        My.Settings.StorePreviousSolutions = chkStorePreviousSolutions.Checked
     End Sub
 
     Private Sub chkSaveBackupFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveBackupFile.CheckedChanged
@@ -548,28 +460,9 @@ Public Class FormOptions
         My.Application.MainWindowForm.tsbInspector.Checked = chkEnableInspector.Checked
     End Sub
 
-    Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged
-        My.Settings.FlowsheetRenderer = cbRenderer.SelectedIndex
-        GlobalSettings.Settings.FlowsheetRenderer = Settings.SkiaCanvasRenderer.CPU
-    End Sub
-
     Private Sub chkAA_CheckedChanged(sender As Object, e As EventArgs) Handles chkAA.CheckedChanged
         My.Settings.FlowsheetAntiAliasing = chkAA.Checked
         GlobalSettings.Settings.DrawingAntiAlias = chkAA.Checked
-    End Sub
-
-    Private Sub ComboBoxUILanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxUILanguage.SelectedIndexChanged
-        If loaded Then
-            Select Case Me.ComboBoxUILanguage.SelectedIndex
-                Case 0
-                    My.Settings.CultureInfo = "pt-BR"
-                Case 1
-                    My.Settings.CultureInfo = "en"
-            End Select
-            If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
-            My.Application.ChangeUICulture(My.Settings.CultureInfo)
-            MessageBox.Show(DWSIM.App.GetLocalString("NextStartupOnly"), "DWSIM")
-        End If
     End Sub
 
     Private Sub chkEditorDoubleClick_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditorDoubleClick.CheckedChanged
@@ -580,48 +473,6 @@ Public Class FormOptions
     Private Sub tbPythonPath_TextChanged(sender As Object, e As EventArgs) Handles tbPythonPath.TextChanged
         My.Settings.PythonPath = tbPythonPath.Text
         GlobalSettings.Settings.PythonPath = tbPythonPath.Text
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        Me.cbGPU.Items.Clear()
-
-        Task.Factory.StartNew(Function()
-                                  Dim list As New List(Of String)
-                                  Try
-                                      CudafyModes.Target = eGPUType.Cuda
-                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                          list.Add("CUDA | " & prop.Name & " (" & prop.DeviceId & ")")
-                                      Next
-                                  Catch ex As Exception
-
-                                  End Try
-                                  Try
-                                      CudafyModes.Target = eGPUType.OpenCL
-                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                          list.Add("OpenCL | " & prop.Name & " (" & prop.DeviceId & ")")
-                                      Next
-                                  Catch ex As Exception
-
-                                  End Try
-                                  Return list
-                              End Function).ContinueWith(Sub(t)
-                                                             Me.chkEnableGPUProcessing.Enabled = t.Result.Count > 0
-                                                             Me.cbGPU.Items.AddRange(t.Result.ToArray)
-                                                             CudafyModes.Target = My.Settings.CudafyTarget
-                                                             If My.Settings.SelectedGPU <> "" Then
-                                                                 For Each s As String In Me.cbGPU.Items
-                                                                     If s = My.Settings.SelectedGPU Then
-                                                                         Me.cbGPU.SelectedItem = s
-                                                                         Exit For
-                                                                     End If
-                                                                 Next
-                                                             Else
-                                                                 'If Me.cbGPU.Items.Count > 0 Then Me.cbGPU.SelectedIndex = 0
-                                                             End If
-                                                             loaded = True
-                                                         End Sub, TaskScheduler.FromCurrentSynchronizationContext)
-
     End Sub
 
     Private Sub btnClearDir_Click(sender As Object, e As EventArgs) Handles btnClearDir.Click
@@ -643,11 +494,11 @@ Public Class FormOptions
         Settings.CheckForUpdates = chkUpdates.Checked
     End Sub
 
-    Private Sub chkBackgroundParallel_CheckedChanged(sender As Object, e As EventArgs) Handles chkBackgroundParallel.CheckedChanged
-        If chkBackgroundParallel.Checked Then
-            My.Settings.SolverMode = 2
-        Else
-            My.Settings.SolverMode = 1
-        End If
+    Private Sub chkLoadExtensions_CheckedChanged(sender As Object, e As EventArgs) Handles chkLoadExtensions.CheckedChanged
+        My.Settings.LoadExtensionsAndPlugins = chkLoadExtensions.Checked
+    End Sub
+
+    Private Sub btnDownPy_Click(sender As Object, e As EventArgs) Handles btnDownPy.Click
+        Process.Start("https://winpython.github.io/")
     End Sub
 End Class

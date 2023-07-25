@@ -304,7 +304,7 @@ Public Class EditingForm_OPEMFC
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Process.Start("https://www.ecsim.ir/opem/doc/Static/Amphlett.html")
+        SimObject.FlowSheet.DisplayBrowserWindow("https://www.ecsim.ir/opem/doc/Static/Amphlett.html")
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click

@@ -19,6 +19,11 @@ Public Class AboutBox
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        TextBox1.Font = New Font("Consolas", 9, GraphicsUnit.Point)
+        TextBox2.Font = New Font("Consolas", 9, GraphicsUnit.Point)
+
+        TextBox2.Text = "Special Thanks to the following Patrons: " + Patrons.GetList() + vbCrLf + vbCrLf + TextBox2.Text
+
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
 
         Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
@@ -157,18 +162,7 @@ Public Class AboutBox
         lvw.Items.Add(lvi)
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Dim p As New Process()
-            With p
-                .StartInfo.FileName = "xdg-open"
-                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt"
-                .StartInfo.UseShellExecute = False
-                .Start()
-            End With
-        Else
-            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt")
-        End If
+    Private Sub AboutBox_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
-
 End Class

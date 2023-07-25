@@ -1,0 +1,128 @@
+#Reference link:-http://www.dartmouth.edu/~cushman/courses/engs37/Cyclones.pdf
+#All input parameters except SizeRange in SI units. SizeRange in micrometers
+#Import statement
+from DWSIM.Thermodynamics import *
+import math
+from System import Array
+import clr
+clr.AddReference('DWSIM.MathOps.DotNumerics')
+from DotNumerics.ODE import *
+#Initializing values in input streams (Only one input stream for batch reactor)
+feed1=[0] #the array containing the properties of feed stream
+P1=[0] #array for Pressure of feed stream
+massflow1=[0] #array for total mass flow of feed stream
+molfrac1=[0] #array for molar fraction of feed stream
+molflow1=[0] #array for total molar flow of feed stream
+enthalpy1=[0] #array for the total enthalpy of feed stream
+T1=[0] #array for the temperature of feed stream
+#Extracting input from streams
+feed1[0] = ims1
+P1 = feed1[0].GetProp("pressure", "Overall", None, "", "")
+massflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mass")
+molflow1 = feed1[0].GetProp("totalFlow" ,"Overall", None, "", "mole")
+volflow1=feed1[0].GetProp("totalflow","Overall",None,"","volume")
+enthalpy1 = feed1[0].GetProp("enthalpy" ,"Overall", None, "Mixture", "mass")
+molfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mole")
+T1 = feed1[0].GetProp("temperature", "Overall", None, "", "")
+massfrac1 = feed1[0].GetProp("fraction", "Overall", None, "", "mass")
+comp=len(molfrac1) #total number of compounds/elements involved
+indd=int(IndexDirt)
+D=Bodydiam #Body diameter of cyclone 
+H=HeightInlet #Height of cyclone
+n=int(NoofCyclones) #Number of cyclones kept in series
+#Defining Volume Flow rate
+OverProp = feed1[0].GetPhase('Overall').Properties #The array which stores phase property of input stream
+Q=massflow1[0]/OverProp.density #Volumetric flow of feed stream
+Lb=LenBody #Length of cyclone body
+Lc=LenCone #Length of cyclone cone
+N=(1/H)*(Lb+Lc/2) #Number of turns inside device
+W=WidthInlet #Width of inlet
+Vi=Q/W/H #velocity of stream
+mu=AirVisco #Viscosity of fluid
+rhop=DensityPart #Density of particles
+rhoa=DensityAir #Density of fluid
+dpc=math.sqrt(9*mu*W/(2*math.pi*N*Vi*(rhop-rhoa)))*1E6 #Diameter of particle collected with 50% efficiency in micrometer
+S=[] #Diameter range of particles (Unit of diameter entered is in micrometer)
+S=eval(SizeRange)
+si=len(S) #Number of diameter ranges
+avgDia=[0]*si #Array for average diameter 
+eff=[0]*si  #Array for efficiency
+d=[] #dummy variable
+d=eval(masspercent)
+mp=[[0 for i in range(0,si)] for j in range(0,n+1)] #Mass percent of particles
+for i in range(0,si):
+ mp[0][i]=d[i] #Mass percent of stream entering 1st cyclone
+for i in range(0,si):
+ if RangeEntered==1:
+  avgDia[i]=(S[i][0]+S[i][1])/2
+ elif RangeEntered==0:
+  avgDia[i] = Si[i]
+ eff[i]=1/(1+(dpc/avgDia[i])**2)
+#for mass of particles removed:
+ind=int(indexofair) #The index of air
+massfdi=[0]*(n+1) #Mass flow of dirt particles into cyclone
+massfdo=[0]*n #Mass flow of dirt particles out of cyclone
+massfdi[0]=massflow1[0]*(1-massfrac1[ind]) #check
+massr=[[0 for i in range(0,si)] for j in range(0,n)] #Mass of particles of each diameter removed by cyclone
+masse=[[0 for i in range(0,si)] for j in range(0,n+1)] #Mass of particles of each diameter entering cyclone
+for i in range(0,si):
+ masse[0][i]=mp[0][i]/100.0*massfdi[0]#check
+for j in range(0,n):
+ for i in range(0,si):
+  massr[j][i]=(eff[i])*mp[j][i]/100.0*masse[j][i]
+  masse[j+1][i]=masse[j][i]-massr[j][i]
+ for i in range(0,si):
+  massfdi[j+1]=massfdi[j+1]+masse[j+1][i]
+ for i in range(0,si):
+  mp[j+1][i]=masse[j+1][i]/massfdi[j+1]*100
+tmassr=[0] #Total mass of particles removed
+for j in range(0,n):
+ for i in range(0,si):
+  tmassr[0]=tmassr[0]+massr[j][i]  #mass removed from air stream by cyclone
+tmolr=[0]
+MWd=(massflow1[0]*(1-massfrac1[ind])/molflow1[0]/(1-molfrac1[ind])) #Molar weight of dirt particles (in Kg/mole)
+tmolr[0]=tmassr[0]/MWd
+molfr2=[1.0]*comp
+molfr2[ind]=0.0
+massfr2=[1.0]*comp
+massfr2[ind]=0.0
+tmol2=[0]
+tmol2[0]=tmolr[0]
+tmass2=[0]
+tmass2[0]=tmassr[0]
+molfr1=[1.0]*comp
+molfr1[ind]=molfrac1[ind]*molflow1[0]/(molflow1[0]-tmol2[0])
+molfr1[indd]=1-molfr1[ind]
+massfr1=[1.0]*comp
+massfr1[ind]=massfrac1[ind]*massflow1[0]/(massflow1[0]-tmass2[0])
+massfr1[indd]=1-massfr1[ind]
+tmol1=[0]
+tmol1[0]=molflow1[0]-tmolr[0]
+tmass1=[0]
+tmass1[0]=massflow1[0]-tmassr[0]
+teff=0 #Total efficiency in fraction
+massrp=[0]*si #Mass fraction of each sized particle removed after all cyclones
+for j in range(0,si):
+ for i in range(0,n):
+  massrp[j]=massrp[j]+massr[i][j]/masse[0][j]
+ teff=teff+massrp[j]
+Flowsheet.WriteMessage(str(teff))
+out=[0]
+out[0]=oms1
+out[0].Clear()
+out[0].ClearAllProps()
+out[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmass1)
+out[0].SetProp("totalflow", "Overall",None, "","mole",tmol1)
+out[0].SetProp("fraction","Overall",None,"","mole",molfr1)
+out[0].SetProp("pressure", "Overall", None, "", "",P1)  
+out[0].SetProp("temperature", "Overall", None, "", "",T1)
+out2=[0]
+out2[0]=oms2
+out2[0].Clear()
+out2[0].ClearAllProps()
+out2[0].SetProp("totalFlow" ,"Overall", None, "", "mass",tmass2)
+out2[0].SetProp("totalflow", "Overall",None, "","mole",tmol2)
+out2[0].SetProp("fraction","Overall",None,"","mole",molfr2)
+out2[0].SetProp("pressure", "Overall", None, "", "",P1)  #Not able to set the desired pressure value
+out2[0].SetProp("temperature", "Overall", None, "", "",T1)
+ 

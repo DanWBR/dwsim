@@ -1,0 +1,208 @@
+from DWSIM.Thermodynamics import *
+import math
+import clr
+import System
+import math
+import DWSIM.Thermodynamics.PropertyPackages
+
+# Amirhossein Hosseinzadeh      
+# Amirkabir University of Technology (Tehran Polytechnique)
+
+#======================================
+#Extracting stream data from stream 1
+
+Air             = ims1
+P_Air           = Air.GetProp("pressure", "Overall", None, "", "")
+massflow_Air    = Air.GetProp("totalFlow" , "Overall", None, "", "mass")
+T_Air           = Air.GetProp("temperature", "Overall", None, "", "")
+molfrac_Air     = Air.GetProp("fraction", "Overall", None, "", "mole")
+molflow_Air      = Air.GetProp("totalFlow" , "Overall", None, "", "mole")
+enthalpy_Air    = Air.GetProp("enthalpy" , "Overall", None, "Mixture", "mass")
+C_Air           = Air.GetProp("heatcapacity" , "Overall", None, "Mixture", "mass")
+D_Air           = Air.GetProp("density" , "Overall", None, "Mixture", "mass")
+
+#AirO  = Flowsheet.GetFlowsheetSimulationObject(Air)
+#Extracting stream data from stream 2
+MakeUp          = ims2
+P_MakeUp        = MakeUp.GetProp("pressure", "Overall", None, "", "")
+massflow_MakeUp  = MakeUp.GetProp("totalFlow" , "Overall", None, "", "mass")
+massfrac_MakeUp = MakeUp.GetProp("fraction", "Overall", None, "", "mass")
+T_MakeUp        = MakeUp.GetProp("temperature", "Overall", None, "", "")
+molflow_MakeUp   = MakeUp.GetProp("totalFlow" , "Overall", None, "", "mole")
+enthalpy_MakeUp = MakeUp.GetProp("enthalpy" , "Overall", None, "Mixture", "mass")
+C_MakeUp        = MakeUp.GetProp("heatcapacity" , "Overall", None, "Mixture", "mass")
+
+#Extracting stream data from stream 3
+Water           = ims3
+P_Water         = Water.GetProp("pressure", "Overall", None, "", "")
+T_Water         = Water.GetProp("temperature", "Overall", None, "", "")
+massflow_Water   = Water.GetProp("totalFlow" , "Overall", None, "", "mass")
+massfracc_Water = Water.GetProp("fraction", "Overall", None, "", "mass")
+molflow_Water    = Water.GetProp("totalFlow" , "Overall", None, "", "mole")
+enthalpy_Water  = Water.GetProp("enthalpy" , "Overall", None, "Mixture", "mass")
+C_Water         = Water.GetProp("heatcapacity" , "Overall", None, "Mixture", "mass")           
+
+
+compIds         = ['Water']
+Hvapor          = ['heatOFVaporization']
+Water_Cp        = ['idealGasHeatCapacity']
+Water_Molecular_Weight=18.01528
+
+
+
+# find the water id
+
+for j in range(0,len(massfracc_Water)):
+    if (massfracc_Water[j]) > 0.5:
+        w=j
+
+# output variables
+P_Air_out   = P_Air
+P_Water_out = P_Water                               
+
+#---------------- Water saturation pressure----Equation 10 to 15 ---------
+def Saturated_vapor_pressure_t(Tk):
+
+    #Saturated vapor pressure [Pa]   from Braun [T in centigrade]
+    
+    z  = 373.16/Tk
+
+    P1 = -7.90298*(z-1)
+    P2 = 5.02808*math.log(z,10)
+    P3 = -1.3816e-7*(math.pow(10,11.344*(1-1/z)-1))
+    P4 = 8.1328e-3*(math.pow(10,-3.49159*(z-1)-1))
+
+    Psat = math.pow(10,P1+P2+P3+P4)
+    Psatk = Psat*1e5
+    return Psatk
+    
+#---------------- Saturated Air enthalpy--------------------------------
+def Absolute_Humidity(td, f, H):
+    Patm = 1.01325 * math.pow(1 - 0.0000225577 * H,5.25588)                
+    #Saturation pressure at dry bulb temperature  '[bar]
+    Psat = Saturated_vapor_pressure_t(td) * 1e-5
+                    
+    #Relative humidity
+    fi = f / 100      #[-]
+                    
+    #Vapor presure
+    Pvap = fi * Psat  #[bar]
+#------------------------------------ Equation 17---------------------------                    
+    #Absolute humidity
+    xsat = 0.62198 * Pvap / (Patm - Pvap)
+#------------------------------------ Equation 16--------------------------- 
+    H = (td-273.15-25)*1.0005+xsat*(2501+1.859*(td-273.15-25))
+
+    C_Air_Out = (1-xsat)*1.005+1.859*xsat
+
+    return xsat, H, C_Air_Out
+
+
+Water_Vapor_Cp  = 1.859
+
+h_Air_in        = C_Air[0]/1000*(Tdb-273.15)
+h_MakeUp_in     = C_Water[0]/1000*(T_MakeUp[0]-273.15)
+h_Water_in      = C_Water[0]/1000*(T_Water[0]-273.15)
+
+
+
+# Varaible initilaization (variable)
+
+epsilon, NTU, M_, Cs, Qrej, m_Air_out        = 0.1, 0.1, 0.1, 0.1, 0.1, [0]
+W_latent_heat, Hswi, Mw_out = 0, 0, 0
+
+# Initial guess for water outlet temperature and evaporated water
+Two             = (T_Water[0]+Twb)/2 #K
+M_e_mass        = massflow_Water[0]*0.01
+
+
+error, iter           = 1, 0
+
+while error>1e-6:
+    results         = [Two,M_e_mass]
+
+    W_latent_heat1   = Water.GetTDependentProperty(Hvapor, results[0], compIds, None) #j
+    W_latent_heat    = W_latent_heat1[0]/massflow_Water[0] #kj/kg  
+
+#------------------------------------ Air saturation enthalpy -------------
+    Hswi            =  Absolute_Humidity(T_Water[0],100,0)[1] #kj/kg
+    Hswo            =  Absolute_Humidity(Two,100,0)[1] #kj/kg
+
+#------------------------------------ Equation 9--------------------------- 
+    Cs              = (Hswi-Hswo)/(T_Water[0]-results[0]) #kj/kg
+
+#------------------------------------ Equation 7---------------------------        
+    ntu             = c*math.pow(massflow_Water[0]/massflow_Air[0],1+n)
+
+#------------------------------------ Equation 8---------------------------
+    M_              = (massflow_Air[0]/massflow_Water[0])*(Cs/(C_Water[0]/1000))
+
+#------------------------------------ Equation 6--------------------------- 
+    Ea              = (1-math.exp(-ntu*(1-M_)))/(1-M_*math.exp(-ntu*(1-M_)))
+
+#------------------------------------ Equation 5---------------------------
+    Qrej            = Ea*massflow_Air[0]*(Hswi-h_Air_in) # kj/s
+
+#------------------------------------ Equation 18--------------------------
+    H_Air_Out       = h_Air_in+Ea*(Hswi-h_Air_in) 
+
+#------------------------------------ Equation 1---------------------------        
+    m_Air_out[0]      = massflow_Air[0]+results[1]
+
+#------------------------------------ Equation 2---------------------------
+    M_e_mass       = (massflow_Air[0]*h_Air_in+Qrej-H_Air_Out*m_Air_out[0])/W_latent_heat
+
+#------------------------------------ Equation 3---------------------------        
+    Mw_out         = massflow_Water[0]-results[1]+massflow_MakeUp[0]    
+
+#------------------------------------ Equation 4---------------------------
+    Two            = (massflow_Water[0]*h_Water_in-Qrej+h_MakeUp_in*massflow_MakeUp[0])/(Mw_out*C_Water[0]/1000)+273.15
+
+#------------------------------------ Error calcculation------------------    
+    tolerance      = [Two-results[0],M_e_mass-results[1]]
+
+    # scaling the order of magnitude for temperature and mass fraction in error formula
+    error          = math.pow(tolerance[0],2)+1e5*math.pow(tolerance[1],2)
+    iter=iter+1
+
+
+
+M_e_mol=M_e_mass/Water_Molecular_Weight
+
+flow_Air_out    = [molflow_Air[0]+M_e_mol]
+
+# Each component composition of air
+molflow_componet_Air=[0]*len(molfrac_Air)
+for i in range (0,len(molfrac_Air)):
+    molflow_componet_Air[i]=molfrac_Air[i]*molflow_Air[0]
+        
+molflow_componet_Air[w]=M_e_mol
+        
+for i in range (0,len(molfrac_Air)):
+    molfrac_Air[i]=molflow_componet_Air[i]/flow_Air_out[0]
+
+
+H_Water_Out=(Two-273.15)*C_Water[0]
+
+
+
+Air_out = oms1
+Air_out.Clear()
+Air_out.SetProp("enthalpy", "Overall", None, "", "mass",[H_Air_Out])
+Air_out.SetProp("pressure", "Overall", None, "","", P_Air_out)
+Air_out.SetProp("fraction", "Overall", None, "", "mole", molfrac_Air)
+Air_out.SetProp("totalFlow", "Overall", None, "", "mass", m_Air_out)
+Air_out.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.P,PropertyPackages.FlashSpec.H)
+
+
+Water_out = oms2
+Water_out.Clear()
+Water_out.SetProp("enthalpy", "Overall", None, "", "mass",[H_Water_Out])
+Water_out.SetProp("pressure", "Overall", None, "","", P_Water_out)
+Water_out.SetProp("fraction", "Overall", None, "", "mole", massfracc_Water)
+Water_out.SetProp("totalFlow", "Overall", None, "", "mass", [Mw_out])
+Water_out.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.P,PropertyPackages.FlashSpec.H)
+
+Flowsheet.WriteMessage('Epsilon a is equal to  '+ str(Ea))
+Flowsheet.WriteMessage('Rejected Q is '+ str(Qrej) + ' (kW)')
+

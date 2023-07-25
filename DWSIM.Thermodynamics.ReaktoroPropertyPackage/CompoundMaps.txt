@@ -1,0 +1,49 @@
+Name (DWSIM)	Formula (DWSIM)	Aqueous Name (Reaktoro)	Gaseous Name (Reaktoro)	Liquid Name (Reaktoro)
+Cesium Iodide	CsI	CsI(aq)		
+Chloride (ion)	Cl-	Cl-		
+Bromine (ion)	Br-	Br-		
+Potassium Ion	K+	K+		
+Potassium Bromide	KBr	KBr(aq)		
+Potassium Chloride	KCl	KCl(aq)		
+Potassium Iodide	KI	KI(aq)		
+Lithium (ion)	Li+	Li+		
+Lithium Chloride	LiCl	LiCl(aq)		
+Magnesium Sulfate	MgSO4	MgSO4(aq)		
+Sodium (ion)	Na+	Na+		
+Cesium Bromide	CsBr	CsBr(aq)		
+Cesium Chloride	CsCl	CsCl(aq)		
+Sodium Bromide	NaBr	NaBr(aq)		
+Sodium Chloride	NaCl	NaCl(aq)		
+Sodium Iodide	NaI	NaI(aq)		
+Ammonium (ion)	NH4+	NH4+		
+Nitrate (ion)	NO3-	NO3-		
+Sulfate (ion)	SO4--	SO4--		
+Hydron	H+	H+		
+Hydroxide	OH-	OH-		
+Salt	NaCl	NaCl(aq)		
+Bisulfide (ion)	HS-	HS-		
+Bicarbonate (ion)	HCO3-	HCO3-		
+Carbonate (ion)	CO3--	CO3--		
+Sulfide (ion)	S2--	S2--		
+Sodium Hydroxide	NaOH	NaOH(aq)		
+Cesium (ion)	Cs+	Cs+		
+Perchlorate (ion)	ClO4-	ClO4-		
+Iodine Ion	I-	I-		
+Argon	Ar		Ar(g)	Ar(liq)
+Ethylene	CH2CH2		C2H4(g)	C2H4(liq)
+Methane	CH4		CH4(g)	CH4(liq)
+Carbon monoxide	CO	CO(aq)	CO(g)	CO(liq)
+Carbon dioxide	CO2	CO2(aq)	CO2(g)	CO2(liq)
+Hydrogen	H2	H2(aq)	H2(g)	H2(liq)
+Water	H2O	H2O(l)	H2O(g)	H2O(liq)
+Hydrogen sulfide	H2S	H2S(aq)	H2S(g)	H2S(liq)
+Helium	He	He(aq)	He(g)	He(liq)
+Nitrogen	N2	N2(aq)	N2(g)	N2(liq)
+Ammonia	NH3	NH3(aq)	NH3(g)	NH3(liq)
+Oxygen	O2	O2(aq)	O2(g)	O2(liq)
+Sulfur dioxide	OSO	SO2(aq)	SO2(g)	SO2(liq)
+Xenon	Xe	Xe(aq)	Xe(g)	Xe(liq)
+Nitric acid	HNO3	HNO3(aq)		
+Hydrogen chloride	HCl	HCl(aq)		
+Sulfuric acid	H2SO4			
+Hydrogen sulfate (ion)	HSO4-	HSO4-		

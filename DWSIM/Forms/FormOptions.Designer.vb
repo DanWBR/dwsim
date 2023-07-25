@@ -33,25 +33,15 @@ Partial Class FormOptions
         Me.Label21 = New System.Windows.Forms.Label()
         Me.chkEnableInspector = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.chkBackgroundParallel = New System.Windows.Forms.CheckBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.chkStorePreviousSolutions = New System.Windows.Forms.CheckBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.chkSolverBreak = New System.Windows.Forms.CheckBox()
         Me.chkEnableSIMD = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.tbGPUCaps = New System.Windows.Forms.TextBox()
         Me.tbSolverTimeout = New System.Windows.Forms.TextBox()
-        Me.cbGPU = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.chkEnableGPUProcessing = New System.Windows.Forms.CheckBox()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.chkAA = New System.Windows.Forms.CheckBox()
-        Me.cbRenderer = New System.Windows.Forms.ComboBox()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ComboBoxPropPackCopyMode = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -96,21 +86,21 @@ Partial Class FormOptions
         Me.KryptonTextBox1 = New System.Windows.Forms.TextBox()
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
-        Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
-        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
-        Me.chkUpdates = New System.Windows.Forms.CheckBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.btnDownPy = New System.Windows.Forms.Button()
         Me.btnSelectPythonPath = New System.Windows.Forms.Button()
         Me.tbPythonPath = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.gbLoadExtensions = New System.Windows.Forms.GroupBox()
+        Me.chkLoadExtensions = New System.Windows.Forms.CheckBox()
+        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.ComboBoxUILanguage = New System.Windows.Forms.ComboBox()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.KryptonCheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.cbDebugLevel = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -121,7 +111,6 @@ Partial Class FormOptions
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -136,12 +125,13 @@ Partial Class FormOptions
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FaTabStripItem7.SuspendLayout()
-        Me.GroupBox16.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
+        Me.FaTabStripItem7.SuspendLayout()
+        Me.gbLoadExtensions.SuspendLayout()
+        Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -152,16 +142,17 @@ Partial Class FormOptions
         Me.FaTabStrip1.Controls.Add(Me.TabPage1)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem3)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem2)
+        Me.FaTabStrip1.Controls.Add(Me.TabPage2)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem7)
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedIndex = 0
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox18)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         '
         'GroupBox18
@@ -185,42 +176,14 @@ Partial Class FormOptions
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.chkBackgroundParallel)
-        Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Controls.Add(Me.chkStorePreviousSolutions)
-        Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.chkSolverBreak)
         Me.GroupBox2.Controls.Add(Me.chkEnableSIMD)
         Me.GroupBox2.Controls.Add(Me.Label12)
-        Me.GroupBox2.Controls.Add(Me.GroupBox8)
         Me.GroupBox2.Controls.Add(Me.tbSolverTimeout)
-        Me.GroupBox2.Controls.Add(Me.cbGPU)
         Me.GroupBox2.Controls.Add(Me.Label11)
-        Me.GroupBox2.Controls.Add(Me.chkEnableGPUProcessing)
         Me.GroupBox2.Controls.Add(Me.chkEnableParallelCalcs)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        '
-        'chkBackgroundParallel
-        '
-        resources.ApplyResources(Me.chkBackgroundParallel, "chkBackgroundParallel")
-        Me.chkBackgroundParallel.Name = "chkBackgroundParallel"
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'chkStorePreviousSolutions
-        '
-        resources.ApplyResources(Me.chkStorePreviousSolutions, "chkStorePreviousSolutions")
-        Me.chkStorePreviousSolutions.Name = "chkStorePreviousSolutions"
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
         '
         'chkSolverBreak
         '
@@ -237,40 +200,15 @@ Partial Class FormOptions
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
         '
-        'GroupBox8
-        '
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
-        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.TabStop = False
-        '
-        'tbGPUCaps
-        '
-        resources.ApplyResources(Me.tbGPUCaps, "tbGPUCaps")
-        Me.tbGPUCaps.Name = "tbGPUCaps"
-        Me.tbGPUCaps.ReadOnly = True
-        '
         'tbSolverTimeout
         '
         resources.ApplyResources(Me.tbSolverTimeout, "tbSolverTimeout")
         Me.tbSolverTimeout.Name = "tbSolverTimeout"
         '
-        'cbGPU
-        '
-        resources.ApplyResources(Me.cbGPU, "cbGPU")
-        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGPU.FormattingEnabled = True
-        Me.cbGPU.Name = "cbGPU"
-        '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
-        '
-        'chkEnableGPUProcessing
-        '
-        resources.ApplyResources(Me.chkEnableGPUProcessing, "chkEnableGPUProcessing")
-        Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
         '
         'chkEnableParallelCalcs
         '
@@ -279,11 +217,11 @@ Partial Class FormOptions
         '
         'TabPage1
         '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.GroupBox13)
         Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.GroupBox12)
         Me.TabPage1.Controls.Add(Me.GroupBox11)
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -291,8 +229,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.GroupBox13, "GroupBox13")
         Me.GroupBox13.Controls.Add(Me.chkAA)
-        Me.GroupBox13.Controls.Add(Me.cbRenderer)
-        Me.GroupBox13.Controls.Add(Me.Label23)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.TabStop = False
         '
@@ -300,19 +236,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkAA, "chkAA")
         Me.chkAA.Name = "chkAA"
-        '
-        'cbRenderer
-        '
-        resources.ApplyResources(Me.cbRenderer, "cbRenderer")
-        Me.cbRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbRenderer.FormattingEnabled = True
-        Me.cbRenderer.Items.AddRange(New Object() {resources.GetString("cbRenderer.Items"), resources.GetString("cbRenderer.Items1")})
-        Me.cbRenderer.Name = "cbRenderer"
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
         '
         'GroupBox5
         '
@@ -403,10 +326,10 @@ Partial Class FormOptions
         '
         'FaTabStripItem3
         '
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox10)
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
         '
         'GroupBox4
@@ -426,11 +349,11 @@ Partial Class FormOptions
         '
         'dgvdb
         '
+        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AllowUserToAddRows = False
         Me.dgvdb.AllowUserToDeleteRows = False
         Me.dgvdb.AllowUserToResizeColumns = False
         Me.dgvdb.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -522,11 +445,11 @@ Partial Class FormOptions
         '
         'dgvIPDB
         '
+        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AllowUserToAddRows = False
         Me.dgvIPDB.AllowUserToDeleteRows = False
         Me.dgvIPDB.AllowUserToResizeColumns = False
         Me.dgvIPDB.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvIPDB.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvIPDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -585,17 +508,17 @@ Partial Class FormOptions
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox3)
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.btnClearDir)
         Me.GroupBox1.Controls.Add(Me.tbConfigDir)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -677,38 +600,28 @@ Partial Class FormOptions
         resources.ApplyResources(Me.KryptonCheckBox6, "KryptonCheckBox6")
         Me.KryptonCheckBox6.Name = "KryptonCheckBox6"
         '
-        'FaTabStripItem7
+        'TabPage2
         '
-        Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
-        Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        '
-        'GroupBox16
-        '
-        resources.ApplyResources(Me.GroupBox16, "GroupBox16")
-        Me.GroupBox16.Controls.Add(Me.chkUpdates)
-        Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.TabStop = False
-        '
-        'chkUpdates
-        '
-        resources.ApplyResources(Me.chkUpdates, "chkUpdates")
-        Me.chkUpdates.Name = "chkUpdates"
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.GroupBox17)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'GroupBox17
         '
         resources.ApplyResources(Me.GroupBox17, "GroupBox17")
+        Me.GroupBox17.Controls.Add(Me.btnDownPy)
         Me.GroupBox17.Controls.Add(Me.btnSelectPythonPath)
         Me.GroupBox17.Controls.Add(Me.tbPythonPath)
         Me.GroupBox17.Controls.Add(Me.Label18)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.TabStop = False
+        '
+        'btnDownPy
+        '
+        resources.ApplyResources(Me.btnDownPy, "btnDownPy")
+        Me.btnDownPy.Name = "btnDownPy"
+        Me.btnDownPy.UseVisualStyleBackColor = True
         '
         'btnSelectPythonPath
         '
@@ -726,10 +639,45 @@ Partial Class FormOptions
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
         '
+        'FaTabStripItem7
+        '
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
+        Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
+        Me.FaTabStripItem7.Controls.Add(Me.gbLoadExtensions)
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
+        Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        '
+        'gbLoadExtensions
+        '
+        resources.ApplyResources(Me.gbLoadExtensions, "gbLoadExtensions")
+        Me.gbLoadExtensions.Controls.Add(Me.chkLoadExtensions)
+        Me.gbLoadExtensions.Name = "gbLoadExtensions"
+        Me.gbLoadExtensions.TabStop = False
+        '
+        'chkLoadExtensions
+        '
+        resources.ApplyResources(Me.chkLoadExtensions, "chkLoadExtensions")
+        Me.chkLoadExtensions.Name = "chkLoadExtensions"
+        '
+        'GroupBox16
+        '
+        resources.ApplyResources(Me.GroupBox16, "GroupBox16")
+        Me.GroupBox16.Controls.Add(Me.chkUpdates)
+        Me.GroupBox16.Name = "GroupBox16"
+        Me.GroupBox16.TabStop = False
+        '
+        'chkUpdates
+        '
+        resources.ApplyResources(Me.chkUpdates, "chkUpdates")
+        Me.chkUpdates.Name = "chkUpdates"
+        '
         'GroupBox15
         '
-        Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
         resources.ApplyResources(Me.GroupBox15, "GroupBox15")
+        Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.TabStop = False
         '
@@ -750,33 +698,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.chkHideSolidPhaseCO, "chkHideSolidPhaseCO")
         Me.chkHideSolidPhaseCO.Name = "chkHideSolidPhaseCO"
         '
-        'GroupBox9
-        '
-        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
-        Me.GroupBox9.Controls.Add(Me.ComboBoxUILanguage)
-        Me.GroupBox9.Controls.Add(Me.Label22)
-        Me.GroupBox9.Controls.Add(Me.KryptonCheckBox1)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.TabStop = False
-        '
-        'ComboBoxUILanguage
-        '
-        Me.ComboBoxUILanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxUILanguage.FormattingEnabled = True
-        Me.ComboBoxUILanguage.Items.AddRange(New Object() {resources.GetString("ComboBoxUILanguage.Items"), resources.GetString("ComboBoxUILanguage.Items1")})
-        resources.ApplyResources(Me.ComboBoxUILanguage, "ComboBoxUILanguage")
-        Me.ComboBoxUILanguage.Name = "ComboBoxUILanguage"
-        '
-        'Label22
-        '
-        resources.ApplyResources(Me.Label22, "Label22")
-        Me.Label22.Name = "Label22"
-        '
-        'KryptonCheckBox1
-        '
-        resources.ApplyResources(Me.KryptonCheckBox1, "KryptonCheckBox1")
-        Me.KryptonCheckBox1.Name = "KryptonCheckBox1"
-        '
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
@@ -787,10 +708,10 @@ Partial Class FormOptions
         '
         'cbDebugLevel
         '
+        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDebugLevel.FormattingEnabled = True
         Me.cbDebugLevel.Items.AddRange(New Object() {resources.GetString("cbDebugLevel.Items"), resources.GetString("cbDebugLevel.Items1"), resources.GetString("cbDebugLevel.Items2"), resources.GetString("cbDebugLevel.Items3")})
-        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.Name = "cbDebugLevel"
         '
         'Label13
@@ -835,8 +756,6 @@ Partial Class FormOptions
         Me.GroupBox18.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
@@ -858,15 +777,16 @@ Partial Class FormOptions
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem7.ResumeLayout(False)
-        Me.GroupBox16.ResumeLayout(False)
-        Me.GroupBox16.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
         Me.GroupBox17.ResumeLayout(False)
         Me.GroupBox17.PerformLayout()
+        Me.FaTabStripItem7.ResumeLayout(False)
+        Me.gbLoadExtensions.ResumeLayout(False)
+        Me.gbLoadExtensions.PerformLayout()
+        Me.GroupBox16.ResumeLayout(False)
+        Me.GroupBox16.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
@@ -875,7 +795,6 @@ Partial Class FormOptions
     Public WithEvents FaTabStrip1 As System.Windows.Forms.TabControl
     Public WithEvents FaTabStripItem1 As System.Windows.Forms.TabPage
     Public WithEvents FaTabStripItem2 As System.Windows.Forms.TabPage
-    Public WithEvents KryptonCheckBox1 As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents KryptonCheckBox6 As System.Windows.Forms.CheckBox
     Public WithEvents KryptonButton1 As System.Windows.Forms.Button
@@ -893,10 +812,6 @@ Partial Class FormOptions
     Public WithEvents ImageList1 As System.Windows.Forms.ImageList
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents chkEnableParallelCalcs As System.Windows.Forms.CheckBox
-    Friend WithEvents cbGPU As System.Windows.Forms.ComboBox
-    Public WithEvents chkEnableGPUProcessing As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbGPUCaps As System.Windows.Forms.TextBox
     Public WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Public WithEvents dgvIPDB As System.Windows.Forms.DataGridView
@@ -911,13 +826,10 @@ Partial Class FormOptions
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents cbDebugLevel As System.Windows.Forms.ComboBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Public WithEvents chkSolverBreak As System.Windows.Forms.CheckBox
-    Public WithEvents chkStorePreviousSolutions As System.Windows.Forms.CheckBox
     Public WithEvents chkSaveBackupFile As System.Windows.Forms.CheckBox
     Public WithEvents chkEnableSIMD As System.Windows.Forms.CheckBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column14 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column15 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -949,17 +861,15 @@ Partial Class FormOptions
     Friend WithEvents Label21 As Label
     Public WithEvents GroupBox13 As GroupBox
     Public WithEvents chkAA As CheckBox
-    Friend WithEvents cbRenderer As ComboBox
-    Public WithEvents Label23 As Label
-    Friend WithEvents ComboBoxUILanguage As ComboBox
-    Friend WithEvents Label22 As Label
     Public WithEvents chkEditorDoubleClick As CheckBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
     Public WithEvents btnClearDir As Button
     Public WithEvents tbConfigDir As TextBox
     Public WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents GroupBox16 As GroupBox
     Public WithEvents chkUpdates As CheckBox
-    Public WithEvents chkBackgroundParallel As CheckBox
+    Friend WithEvents gbLoadExtensions As GroupBox
+    Public WithEvents chkLoadExtensions As CheckBox
+    Friend WithEvents TabPage2 As TabPage
+    Public WithEvents btnDownPy As Button
 End Class

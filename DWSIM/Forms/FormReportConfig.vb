@@ -752,4 +752,8 @@ Public Class FormReportConfig
         End If
 
     End Sub
+
+    Private Sub FormReportConfig_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
 End Class

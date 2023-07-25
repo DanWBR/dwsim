@@ -131,14 +131,11 @@
   <data name="TextBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="TextBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="TextBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 81</value>
+    <value>10, 59</value>
   </data>
   <data name="TextBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>673, 321</value>
+    <value>715, 343</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>View code @ GitHub</value>
@@ -150,7 +147,7 @@
     <value>Support Options</value>
   </data>
   <data name="Button6.Text" xml:space="preserve">
-    <value>Search Wiki</value>
+    <value>Search GitHub Issues</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 13</value>
@@ -159,10 +156,10 @@
     <value>Search DWSIM Forums for information about the current error.</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 13</value>
+    <value>290, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
-    <value>Search DWSIM Wiki for information about the current error.</value>
+    <value>Search GitHub Issues for information about the current error.</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>507, 13</value>
@@ -176,32 +173,22 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>View the code line where this error was raised/generated on DWSIM's GitHub repository.</value>
   </data>
-  <data name="LabelWithDivider2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 56</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LabelWithDivider2.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="LabelWithDivider2.Text" xml:space="preserve">
-    <value>Details</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAAAAAAPAAAADwAAAAAAAAAAAA
-        AAD64bDkxou5jju1ija1ija1ija1ija1ija1ija1ija1ija1ija1ija5jj3hxZD43qz/57m2iDCodRKz
-        hjCwgCSodRKmcg2mcg2mcg2mcg2/lUSpdxWyhCundBDFoVr95bb/57myhCqqeBfGo1/YuoHAmEqmcg2m
-        cg2mcg2mcg3s0qGufyLIpV+pdxXUuID85Lb/57mzhSureRfGo1/Qrm69lEWncw6mcw6mcg6mcg7s0qOu
-        fyLIpWCpdxXUuIL85Lj/57m3ijGwgSPNrm/fw43UsGureBSreBSqeBSqeBPr06eygyjKp2SsexrVuoX7
-        5Lv/57m8kjq1hijMrGjVtnbEnlGxgB6xgB6wgB2wfx3r1au3ijDNrGuygiTXvYr55b//57nDmUO7jzHQ
-        sW/gxIzLp1y3iSi3iSi3iSe3iCfr2LG9kznQsXK5iy3ZwJD45cT/57nIoUrDmT7Xun3fw4fYuHK/lDS+
-        kjG+kjHGnUfz48a/lDXXvYW/lDbaxJb25cn/57nOqFHIoELXuXfly5TiyJDPrFzFmjnFmjnXvH7bv4TE
-        mTjn1bLGnD7dx5r05c3/57nTrlbOp0jbv3zjyYzcv3vRrljLoj/Loj/LoT/KoT/XuHLm0qnLoUDWuHXx
-        5ND/57rWsVTUrk3gxYXlyondwHfWsVfQqEPQqEPXtWPn06jy6Nvs3cLQqEXcw4jy5dT75LXgwXHYsErg
-        xX7r1J7u16LdvWnVrUPVrUPkz5/z6Nvy6N/o17HVrUXcwHnv5NX95bfu05HctU3lyYTt1Zrpz5Ddu13Y
-        sEDYsEHl0J7z6Nvy6N/x5tfas0nq2bby59f/57n/57nkxXDozID95732363et0nbsTvbsTzevmnu49Hz
-        6Nzy6N7w48vz6Nvz59X/57n/57n85LH+5rb+57zy2p/fuUrbsDPbsDTjxXDu3rz06Nj06Nn06Nn16Nf0
-        59H847L95LX95LX95LX95Lf75Ljx15jguEPjv1f04rz15cv05c705c/05c/05c3y4cQAAAAAAAAAAAAA
+        AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAAAAAAEgAAABIAAAAAAAAAAAA
+        AADU1NTd3d3d3dzWzsDVzL3VzL3VzL3Vzb3Vzb3VzL3VzL3VzL3Vzr7d3Nvd3d3T09PU1NTe3t68nV+m
+        cg2mcg2mcg2mcg2mcg2mcg2mcg2mcg2mcg2mcg23kkve3t7V1dXW1tbg4OCwhDCugCi+n2K0iz2mcg2m
+        cg2mcg2pdxbMuJOmcg25llK4lE3g4ODY2NjZ2dni4uKwhTCyiDfEqXa8m1ymcg2mcg2mcg2peBfVybGm
+        cg2+n2K7mVji4uLb29vc3Nzk5OSwhTC0ijnHrXnTwaCmcg2mcg2mcg2peBfXyrOmcg3AoGO8mljl5eXe
+        3t7f39/o6OiyhzK1iTXPtIHHqGumcg2mcg2mcg2qeBjZzbamcg3AoWS9m1nn5+fg4ODj4+P7+/u0iTS0
+        iTXOtIDLrnemcg2mcg2mcg2peBjc0Limcg3EpWi+nVvp6enj4+Pv7+/z8/O0iDS4jz/Os3/OtIKqeRmm
+        cg2mcg26lEvVw6GpdxXLrXTBn13v7+/n5+fr6+vu7u6yhjK1iznNs3/QuIi6k0emcg2mcg3FqG6zije6
+        lErHqnHEomD29vbu7u7q6urv7++yhjKzhzLNsn7Kr3m0iDWmcg2mcg2mcg2tfiHdz7SufyWtfSD19PH2
+        9vbt7e3w7+2wgiqzhzPMsX7Fpmq3jkCmcg2mcg3Msn/v7eny8vLDo2W8mFDx8fHy8vLw8PDv7Oa5kUW4
+        kEPNs3/dz7HAnlqmcg2mcg3e0LTz8/Pu6uK0ije1jDrw7uvv7+/y8vL19fXl28fEo2PUvZHi1b3Eo2Sm
+        cg2mcg3YxaD19fX19fXczKzi1Lv19fXy8vL29vb39/f39/fXwZju6Nvy7ue1iTamcg2mcg24jz/29fT3
+        9/f39/f39/f39/f09PT4+Pj5+fn5+fn6+vr6+vr29fHfzq6qeBesfB/j1Lj4+Pf5+fn5+fn5+fn5+fn3
+        9/f6+vr7+/v7+/v7+/v7+/v7+/v7+/v28+329O/7+/v6+vr7+/v6+vr6+vr6+vr5+fkAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>

@@ -274,6 +274,18 @@ Namespace DWSIM.Flowsheet
 
         Public Property CustomCalculationOrder As List(Of String) = New List(Of String) Implements IFlowsheetOptions.CustomCalculationOrder
 
+        Public Property SpecCalculationMode As SpecCalcMode = SpecCalcMode.AfterSourceObject Implements IFlowsheetOptions.SpecCalculationMode
+
+        Public Property ForceObjectSolving As Boolean = True Implements IFlowsheetOptions.ForceObjectSolving
+
+        Public Property SaveFlowsheetMessagesInFile As Boolean = True Implements IFlowsheetOptions.SaveFlowsheetMessagesInFile
+
+        <Xml.Serialization.XmlIgnore()> Public Property SingleUnitOpMode As Boolean = False Implements IFlowsheetOptions.SingleUnitOpMode
+
+        <Xml.Serialization.XmlIgnore()> Public Property SingleUnitOpID As String = "" Implements IFlowsheetOptions.SingleUnitOpID
+
+        Public Property RTFAnnotations As String = "" Implements IFlowsheetOptions.RTFAnnotations
+
     End Class
 
 End Namespace

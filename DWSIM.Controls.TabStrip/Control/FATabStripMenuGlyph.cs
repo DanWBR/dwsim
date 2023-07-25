@@ -57,20 +57,22 @@ namespace FarsiLibrary.Win
 
             SmoothingMode bak = g.SmoothingMode;
 
-            g.SmoothingMode = SmoothingMode.Default;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(Color.Black))
-            {
-                pen.Width = 2;
+            //using (Pen pen = new Pen(Color.Black))
+            //{
+            //    pen.Width = 2;
 
-                g.DrawLine(pen, new Point(glyphRect.Left + (glyphRect.Width / 3) - 2, glyphRect.Height / 2 - 1),
-                    new Point(glyphRect.Right - (glyphRect.Width / 3), glyphRect.Height / 2 - 1));
-            }
+            //    g.DrawLine(pen, new Point(glyphRect.Left + (glyphRect.Width / 3) - 2, glyphRect.Height / 2 - 1),
+            //        new Point(glyphRect.Right - (glyphRect.Width / 3), glyphRect.Height / 2 - 1));
+            //}
+
+            var d = (int)((double)glyphRect.Width / 4);
 
             g.FillPolygon(Brushes.Black, new Point[]{
-                new Point(glyphRect.Left + (glyphRect.Width / 3)-2, glyphRect.Height / 2+2),
-                new Point(glyphRect.Right - (glyphRect.Width / 3), glyphRect.Height / 2+2),
-                new Point(glyphRect.Left + glyphRect.Width / 2-1,glyphRect.Bottom-4)});
+                new Point(glyphRect.Left + d, glyphRect.Y + d),
+                new Point(glyphRect.Right - d, glyphRect.Y + d),
+                new Point(glyphRect.Left + glyphRect.Width / 2,glyphRect.Bottom - d)});
 
             g.SmoothingMode = bak;
         }

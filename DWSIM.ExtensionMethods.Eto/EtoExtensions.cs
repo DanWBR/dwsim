@@ -318,6 +318,45 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, int position, Action<DropDown, EventArgs> command, int ddwidth, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            var drop = new DropDown();
+            drop.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (Application.Instance.Platform.IsGtk)
+            {
+                drop.Height = (int)(sf * 28);
+            }
+            if (Application.Instance.Platform.IsWinForms)
+            {
+                drop.Size = new Size((int)(sf * ddwidth), (int)(sf * 28));
+            }
+            else
+            {
+                drop.Width = ddwidth;
+            }
+
+            foreach (var item in options)
+            {
+                drop.Items.Add(new ListItem() { Key = item, Text = item });
+            }
+
+            if (drop.Items.Count > 0) drop.SelectedIndex = position;
+
+            if (command != null) drop.SelectedIndexChanged += (sender, e) => command.Invoke((DropDown)sender, e);
+            if (keypress != null) drop.SelectedIndexChanged += (sender, e) => keypress.Invoke();
+
+            var tr = new TableRow(txt, null, drop);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return drop;
+
+        }
+
         public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, string selecteditem, Action<DropDown, EventArgs> command, Action keypress = null)
         {
 
@@ -927,6 +966,34 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<TextBox, EventArgs> command, int tbwidth, Action keypress = null)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
+            var edittext = new TextBox { Text = currval, Width = (int)(sf * GlobalSettings.Settings.EditorTextBoxFixedSizeWidth) };
+            edittext.Font = new Font(SystemFont.Default, GetEditorFontSize());
+
+            if (Application.Instance.Platform.IsWinForms)
+            {
+                edittext.Size = new Size((int)(sf * tbwidth), (int)(sf * 28));
+            }
+            else
+            {
+                edittext.Width = tbwidth;
+            }
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+            if (keypress != null) edittext.KeyUp += (sender, e) => { if (e.Key == Keys.Enter) keypress.Invoke(); };
+
+            var tr = new TableRow(txt, null, edittext);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
         public static TextBox CreateAndAddStringEditorRow(this TableLayout container, String text, String currval, Action<TextBox, EventArgs> command, Action keypress = null)
         {
 
@@ -1056,6 +1123,7 @@ namespace DWSIM.UI.Shared
             if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 300);
             if (Eto.Forms.Application.Instance.Platform.IsGtk)
             {
+                btn.Width = (int)(sf * 300);
                 btn.Height = (int)(sf * 28);
             }
 

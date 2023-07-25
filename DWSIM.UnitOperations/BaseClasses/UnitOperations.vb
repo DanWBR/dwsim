@@ -22,6 +22,9 @@ Imports System.Runtime.InteropServices
 Imports DWSIM.Interfaces.Enums
 Imports Microsoft.Scripting.Hosting
 Imports DWSIM.Thermodynamics
+Imports Org.XmlUnit
+Imports Org.XmlUnit.Builder
+Imports System.Buffers
 
 Namespace UnitOperations
 
@@ -35,6 +38,8 @@ Namespace UnitOperations
 
         Public _ppid As String = ""
 
+        Private _ppwasset As Boolean = False
+
         Protected _capeopenmode As Boolean = False
 
         Public AccumulationStream As Thermodynamics.Streams.MaterialStream
@@ -46,6 +51,57 @@ Namespace UnitOperations
         Public Sub New()
 
             MyBase.CreateNew()
+
+        End Sub
+
+        Public Overrides Sub CheckDirtyStatus()
+
+            If LastSolutionInputSnapshot <> "" Then
+
+                Dim inputdirty As Boolean = False
+
+                For Each ic In GraphicObject.InputConnectors
+                    If ic.IsAttached Then
+                        Dim obj = FlowSheet.SimulationObjects(ic.AttachedConnector.AttachedFrom.Name)
+                        If obj.IsDirty Then
+                            inputdirty = True
+                            Exit For
+                        End If
+                    End If
+                Next
+
+                If Not inputdirty Then
+
+                    Dim xdoc = New XDocument()
+                    xdoc.Add(New XElement("Data"))
+                    xdoc.Element("Data").Add(SaveData())
+                    xdoc.Element("Data").Element("Calculated").Remove()
+                    xdoc.Element("Data").Element("LastUpdated").Remove()
+                    Dim currentdata = xdoc.ToString()
+
+                    Dim myDiff = DiffBuilder.Compare(Org.XmlUnit.Builder.Input.FromString(currentdata))
+                    myDiff.WithTest(Org.XmlUnit.Builder.Input.FromString(LastSolutionInputSnapshot))
+                    Dim result = myDiff.Build()
+
+                    If result.HasDifferences() Then
+                        SetDirtyStatus(True)
+                    Else
+                        SetDirtyStatus(False)
+                    End If
+
+                    xdoc = Nothing
+
+                Else
+
+                    SetDirtyStatus(True)
+
+                End If
+
+            Else
+
+                SetDirtyStatus(True)
+
+            End If
 
         End Sub
 
@@ -132,6 +188,38 @@ Namespace UnitOperations
             End If
         End Function
 
+        Public Overrides Function GetPropertyValue(prop As String, Optional su As IUnitsOfMeasure = Nothing) As Object
+
+            Dim value = MyBase.GetPropertyValue(prop, su)
+
+            If value Is Nothing Then
+
+                Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+                Dim epucol = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+
+                If epcol.ContainsKey(prop) Then
+                    If epucol.ContainsKey(prop) Then
+                        Dim utype = epucol(prop)
+                        If su Is Nothing Then
+                            Return Convert.ToDouble(epcol(prop)).ConvertFromSI(SharedClasses.SystemsOfUnits.Converter.SharedSI.GetCurrentUnits(utype))
+                        Else
+                            Return Convert.ToDouble(epcol(prop)).ConvertFromSI(su.GetCurrentUnits(utype))
+                        End If
+                    Else
+                        Return epcol(prop)
+                    End If
+                Else
+                    Return Nothing
+                End If
+
+            Else
+
+                Return value
+
+            End If
+
+        End Function
+
 #Region "   DWSIM Specific"
 
         Public Overrides Function GetDebugReport() As String
@@ -166,6 +254,24 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Sub SetPropertyPackageInstance(PP As IPropertyPackage)
+
+            _ppwasset = True
+            _pp = PP
+
+        End Sub
+
+        Public Overrides Function ClearPropertyPackageInstance() As Boolean
+
+            Dim hadvalue As Boolean = _pp IsNot Nothing
+
+            _pp = Nothing
+            _ppwasset = False
+
+            Return hadvalue
+
+        End Function
+
         ''' <summary>
         ''' Gets or sets the property package associated with this object.
         ''' </summary>
@@ -174,23 +280,39 @@ Namespace UnitOperations
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Public Overrides Property PropertyPackage() As Interfaces.IPropertyPackage
             Get
-                If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
-                If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
-                    Return FlowSheet.PropertyPackages(_ppid)
+                If _pp IsNot Nothing And _ppwasset Then
+                    Return _pp
+                ElseIf _pp IsNot Nothing AndAlso FlowSheet.PropertyPackages.ContainsKey(_pp.UniqueID) Then
+                    Return FlowSheet.PropertyPackages(_pp.UniqueID)
                 Else
-                    For Each pp As Interfaces.IPropertyPackage In Me.FlowSheet.PropertyPackages.Values
-                        _ppid = pp.UniqueID
-                        Return pp
-                        Exit For
-                    Next
+                    If FlowSheet.PropertyPackages.ContainsKey(_ppid) Then
+                        Return FlowSheet.PropertyPackages(_ppid)
+                    Else
+                        Dim firstpp = FlowSheet.PropertyPackages.Values.FirstOrDefault()
+                        If firstpp Is Nothing Then
+                            Return Nothing
+                        Else
+                            _ppid = firstpp.UniqueID
+                            Return firstpp
+                        End If
+                    End If
                 End If
-                Return Nothing
             End Get
             Set(ByVal value As Interfaces.IPropertyPackage)
                 If value IsNot Nothing Then
-                    _ppid = value.UniqueID
-                    _pp = value
+                    If FlowSheet Is Nothing Then
+                        _ppwasset = True
+                        _pp = value
+                    Else
+                        If FlowSheet.PropertyPackages.ContainsKey(value.UniqueID) Then
+                            _ppid = value.UniqueID
+                        Else
+                            _ppwasset = True
+                            _pp = value
+                        End If
+                    End If
+                    SetDirtyStatus(True)
                 Else
                     _pp = Nothing
                 End If

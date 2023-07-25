@@ -1,71 +1,89 @@
-﻿Adam Kovalovszki
+﻿🥇 Yoshihide Watabe
+🥇 Lauterbach Verfahrenstechnik GmbH
+🥈 Alexander Semenyak
+🥈 Pedro Sabóia
+🥈 Sukin Oh
+🥈 Jane Ferris
+🌟 Adam Kovalovszki
+🌟 Alexandra Stuthridge
+🌟 Alfred Gongaware
+🌟 Alberto Baumeister
+🌟 Bryan Evans
+🌟 Cameron Paul Ward
+🌟 Carlos Reetz
+🌟 Casey Houston
+🌟 Christian Hornhofer
+🌟 Dave Carpency
+🌟 Domenico Marchese
+🌟 Edson Zaparoli
+🌟 George Brindle
+🌟 Gerry Agnew
+🌟 Henk Fikkert
+🌟 H-Tec Systems GmbH
+🌟 Javier Fontalvo
+🌟 Jens Greimeier
+🌟 Jonathan
+🌟 Leonard Seed
+🌟 Lorenzo Giuseppe Montani
+🌟 Martin Heiser
+🌟 Michael Papantoniou
+🌟 Michael Saucier
+🌟 Rafael Melo-González
+🌟 Renato Corrêa Arrieche
+🌟 Richard Huntington
+🌟 Rida Bin Hashim
+🌟 Roland Berger
+🌟 Ronald J. Dunbar
+🌟 Ronald Visness
+🌟 Tino Josef Ritter
 Alberto Baumeister
 Alex Platon
-Alexander Semenyak
-Alfred Gongaware
 Andras Nady
 Anders Andreasen
 Andrew Dickson
+Bednarz Marc
+Bernhard Seyfang
+Bruce Bishkin
 Bruce Rising
-Bryan Evans
 Camilo Gantiva
-Carlos G. C. Reetz
-Casey Houston
-Chris Verbert
-Christian Hornhofer
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
-Daniel Dornellas Athayde
+Daniel Bajolet
+Daniel Athayde
 David Miller
 David Whitlock
-Domenico Marchese
+Denislav Zdravkov
 Dorivaldo Junior
 Doug Palfreyman
-Emanuel Cardoso
+Fernando Almeida
 Gokhan Candan 
-George Brindle
-Gerry Agnew
 Guenther Holzer
-Henar Portero
-Henk Fikkert
 Hep Ingham
-H-Tec Systems GmbH
-Hurudza 
-Javier Fontalvo
-Jens Greimeier
-Jeremiah McAfoose
+Hurudza
 John Kossik
-Jonathan
 Joseph Attia
+Kenneth Troldal
 Kiran Pashikanti
-Lauterbach Verfahrenstechnik GmbH
-Leonard Seed
 Les Waymont
 Lewis Estall
 Luca Finardi
-Marcelo Accorsi Miranda
-Marcos AF Silva
-Marko Likon
-Martin Heiser
+Marcos Silva
 Masahiro Sakai
-Michael Papantoniou
+Mohan Vaze
 Nicolas Spogis
-Odnei Macalossi
 Pablo Jimenez
+Paulo Bernardo
 Pedro Sabóia
 Petroconsulting LLC
 Protherm Systems
-Rafael Melo-González
-Richard Huntington
-Roland Berger
-Ronald J. Dunbar
+Rainer Scheuring
+Rick Kempf
 Rupert Easter
 Ryszard Sadowski
+Shailesh Paranjpe
 Shankar Ananth
-Shijin Roh
-Steven Sandoval
+Shubham Wankhede
+Tetsuo Fuchino
 Tibor Lányi
-Tino Josef Ritter
 Will Flores
-Yoshihide Watabe
