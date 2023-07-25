@@ -293,7 +293,7 @@ Namespace PropertyPackages
             Dim x = CurrentMaterialStream.Phases(phaseid).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
 
             Try
-                Return CoolProp.PropsSI("V", "T", T, "P", P * 1.001, GetCoolPropName(x))
+                Return CoolProp.PropsSI("V", "T", T, "P", P, GetCoolPropName(x))
             Catch ex As Exception
                 Return 0.0
             End Try
