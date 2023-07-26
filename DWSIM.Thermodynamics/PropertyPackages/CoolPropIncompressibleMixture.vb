@@ -230,7 +230,7 @@ Namespace PropertyPackages
             Dim x = CurrentMaterialStream.Phases(phaseid).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
 
             Try
-                Return CoolProp.PropsSI("L", "T", T, "P", P * 1.001, GetCoolPropName(x))
+                Return CoolProp.PropsSI("L", "T", T, "P", P, GetCoolPropName(x))
             Catch ex As Exception
                 Return 0.0
             End Try
@@ -242,7 +242,7 @@ Namespace PropertyPackages
             Dim x = CurrentMaterialStream.Phases(3).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
 
             Try
-                Return CoolProp.PropsSI("D", "T", T, "P", P * 1.001, GetCoolPropName(x))
+                Return CoolProp.PropsSI("D", "T", T, "P", P, GetCoolPropName(x))
             Catch ex As Exception
                 Return 0.0
             End Try
@@ -293,7 +293,7 @@ Namespace PropertyPackages
             Dim x = CurrentMaterialStream.Phases(phaseid).Compounds(SoluteCompound).MassFraction.GetValueOrDefault
 
             Try
-                Return CoolProp.PropsSI("V", "T", T, "P", P * 1.001, GetCoolPropName(x))
+                Return CoolProp.PropsSI("V", "T", T, "P", P, GetCoolPropName(x))
             Catch ex As Exception
                 Return 0.0
             End Try
@@ -577,7 +577,7 @@ Namespace PropertyPackages
 
 
                 IObj?.SetCurrent
-                Me.CurrentMaterialStream.Phases(phaseID).Properties.density = AUX_LIQDENS(T, P, 0.0#, phaseID)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.density = AUX_LIQDENS2(T, P)
 
                 IObj?.SetCurrent
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
@@ -588,7 +588,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
 
                 IObj?.SetCurrent
-                result = P / (Me.AUX_LIQDENS(T, P, 0, phaseID) * 8.314 * T) / 1000 * AUX_MMM(Phase)
+                result = P / (Me.AUX_LIQDENS2(T, P) * 8.314 * T) / 1000 * AUX_MMM(Phase)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
 
                 IObj?.SetCurrent
@@ -790,7 +790,7 @@ Namespace PropertyPackages
                     Me.DW_CalcCompFugCoeff(phase)
                 Case "volume", "density"
                     If state = "L" Then
-                        result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
+                        result = Me.AUX_LIQDENS2(T, P)
                     Else
                         result = Me.AUX_VAPDENS(T, P)
                     End If
