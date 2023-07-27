@@ -740,6 +740,9 @@ Public Class MaterialStreamEditor
                     refval = MatStream.Phases(3).Properties.CO2loading.GetValueOrDefault
                     .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CO2 Loading"), refval, ""})
 
+                    refval = MatStream.Phases(3).Properties.H2Sloading.GetValueOrDefault
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("H2S Loading"), refval, ""})
+
                 End If
 
             ElseIf p.Name = "Vapor" Then
@@ -749,6 +752,10 @@ Public Class MaterialStreamEditor
                     refval = MatStream.Phases(2).Properties.CO2partialpressure.GetValueOrDefault
                     val = Converter.ConvertFromSI(units.pressure, refval)
                     .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CO2 Partial Pressure"), val, units.pressure})
+
+                    refval = MatStream.Phases(2).Properties.H2Spartialpressure.GetValueOrDefault
+                    val = Converter.ConvertFromSI(units.pressure, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("H2S Partial Pressure"), val, units.pressure})
 
                 End If
 
