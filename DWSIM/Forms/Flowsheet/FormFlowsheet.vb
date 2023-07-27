@@ -3229,6 +3229,15 @@ Public Class FormFlowsheet
         End Set
     End Property
 
+    Public Property AvailableExternalUnitOperations As Dictionary(Of String, IExternalUnitOperation) Implements IFlowsheet.AvailableExternalUnitOperations
+        Get
+            Return My.Application.MainWindowForm.ExternalUnitOperations
+        End Get
+        Set(value As Dictionary(Of String, IExternalUnitOperation))
+            My.Application.MainWindowForm.ExternalUnitOperations = value
+        End Set
+    End Property
+
     Public Property Scripts As Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
         Get
             Return ScriptCollection

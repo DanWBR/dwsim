@@ -4,6 +4,8 @@
 
     Sub PutFile(filepath As String)
 
+    Sub PutFile(filepath As String, internalfilename As String)
+
     Sub PutFile(stream As IO.Stream, filename As String)
 
     Function GetFileStream(filename As String) As IO.MemoryStream

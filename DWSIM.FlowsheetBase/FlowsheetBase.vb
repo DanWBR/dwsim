@@ -3928,6 +3928,15 @@ Label_00CC:
 
     Public Property PythonPreprocessor() As Action(Of String) Implements IFlowsheet.PythonPreprocessor
 
+    Public Property AvailableExternalUnitOperations As Dictionary(Of String, IExternalUnitOperation) Implements IFlowsheet.AvailableExternalUnitOperations
+        Get
+            Return ExternalUnitOperations
+        End Get
+        Set(value As Dictionary(Of String, IExternalUnitOperation))
+            ExternalUnitOperations = value
+        End Set
+    End Property
+
     Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
 
         Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")

@@ -200,6 +200,17 @@ namespace DWSIM.FileStorage
         /// <summary>
         /// Stores a file in the database.
         /// </summary>
+        /// <param name="filepath">Path of the file to import.</param>
+        /// <param name="internalfilename">Internal name of the stored file.</param>
+        public void PutFile(string filepath, string internalfilename)
+        {
+            DB.FileStorage.Upload(internalfilename, filepath);
+            DB.Checkpoint();
+        }
+
+        /// <summary>
+        /// Stores a file in the database.
+        /// </summary>
         /// <param name="stream"></param>
         /// <param name="filename"></param>
         public void PutFile(Stream stream, string filename)

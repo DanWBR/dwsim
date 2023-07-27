@@ -374,6 +374,8 @@
 
     Property MessagesLog As List(Of String)
 
+    Property AvailableExternalUnitOperations As Dictionary(Of String, IExternalUnitOperation)
+
 End Interface
 
 ''' <summary>

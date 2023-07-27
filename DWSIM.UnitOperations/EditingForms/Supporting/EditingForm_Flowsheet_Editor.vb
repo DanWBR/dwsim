@@ -25,6 +25,8 @@ Public Class EditingForm_Flowsheet_Editor
 
     Private Sub FlowsheetUOEditorForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ChangeDefaultFont()
+
         If fsuo.Initialized Then
             btnInitialize.Enabled = True
             lblInit.Text = fsuo.FlowSheet.GetTranslatedString("FlowsheetInitialized")
@@ -48,10 +50,10 @@ Public Class EditingForm_Flowsheet_Editor
                 Dim tmpfile As String = ""
                 tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(fsuo.EmbeddedFileName))
                 fsuo.FlowSheet.FileDatabaseProvider.ExportFile(fsuo.EmbeddedFileName, tmpfile)
-                fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(tmpfile, fsuo.FlowSheet.GetNewInstance)
+                fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(tmpfile, fsuo.FlowSheet.GetNewInstance, fsuo.FlowSheet)
                 File.Delete(tmpfile)
             Else
-                fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile, fsuo.FlowSheet.GetNewInstance)
+                fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile, fsuo.FlowSheet.GetNewInstance, fsuo.FlowSheet)
             End If
             fsuo.Initialized = True
         Catch ex As AggregateException
@@ -64,14 +66,13 @@ Public Class EditingForm_Flowsheet_Editor
         If fsuo.Initialized Then
             btnInitialize.Enabled = True
             lblInit.Text = fsuo.FlowSheet.GetTranslatedString("FlowsheetInitializationSuccess")
+            UpdateLinks()
+            UpdateProps()
+            UpdateMappings()
         Else
             btnInitialize.Enabled = True
             lblInit.Text = fsuo.FlowSheet.GetTranslatedString("FlowsheetInitializationError")
         End If
-
-        UpdateLinks()
-        UpdateProps()
-        UpdateMappings()
 
         loaded = True
 

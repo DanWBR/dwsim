@@ -201,17 +201,17 @@ Label_00CC:
 
         End Function
 
-        Public Shared Function InitializeFlowsheet(fpath As String, form As IFlowsheet) As IFlowsheet
+        Public Shared Function InitializeFlowsheet(fpath As String, form As IFlowsheet, mainfs As IFlowsheet) As IFlowsheet
             If Path.GetExtension(fpath).ToLower.Equals(".dwxml") Then
                 If GlobalSettings.Settings.OldUI Then
-                    Return InitializeFlowsheetInternal(XDocument.Load(fpath), form)
+                    Return InitializeFlowsheetInternal(XDocument.Load(fpath), form, mainfs)
                 Else
                     form.LoadFromXML(XDocument.Load(fpath))
                     Return form
                 End If
             Else 'dwxmz
                 If GlobalSettings.Settings.OldUI Then
-                    Return InitializeFlowsheetInternal(XDocument.Load(ExtractXML(fpath)), form)
+                    Return InitializeFlowsheetInternal(XDocument.Load(ExtractXML(fpath)), form, mainfs)
                 Else
                     form.LoadFromXML(XDocument.Load(ExtractXML(fpath)))
                     Return form
@@ -219,19 +219,19 @@ Label_00CC:
             End If
         End Function
 
-        Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet) As IFlowsheet
+        Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet, mainfs As IFlowsheet) As IFlowsheet
             Using decompressedstream As New IO.MemoryStream
                 compressedstream.Position = 0
                 Using gzs As New IO.BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Decompress, True), 64 * 1024)
                     gzs.CopyTo(decompressedstream)
                     gzs.Close()
                     decompressedstream.Position = 0
-                    Return InitializeFlowsheetInternal(XDocument.Load(decompressedstream), form)
+                    Return InitializeFlowsheetInternal(XDocument.Load(decompressedstream), form, mainfs)
                 End Using
             End Using
         End Function
 
-        Private Shared Function InitializeFlowsheetInternal(xdoc As XDocument, fs As IFlowsheet)
+        Private Shared Function InitializeFlowsheetInternal(xdoc As XDocument, fs As IFlowsheet, mainfs As IFlowsheet)
 
             Dim sver = New Version("1.0.0.0")
 
@@ -258,7 +258,7 @@ Label_00CC:
 
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
-            AddGraphicObjects(fs, data, excs)
+            AddGraphicObjects(fs, mainfs, data, excs)
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
@@ -275,9 +275,23 @@ Label_00CC:
             data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
 
             For Each xel As XElement In data
+                xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
+                Dim obj As PropertyPackage = Nothing
                 Try
-                    xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
-                    Dim obj As PropertyPackage = pp.ReturnInstance(xel.Element("Type").Value)
+                    Dim ppkey As String = xel.Element("ComponentName").Value
+                    If ppkey = "" Then
+                        obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
+                    Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                        End If
+                        If mainfs.AvailablePropertyPackages.ContainsKey(ppkey) Then
+                            obj = mainfs.AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
+                        Else
+                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
+                        End If
+                    End If
                     obj.Flowsheet = fs
                     obj.LoadData(xel.Elements.ToList)
                     Dim newID As String = Guid.NewGuid.ToString
@@ -296,10 +310,15 @@ Label_00CC:
                 Try
                     Dim id As String = xel.<Name>.Value
                     Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
-                    If xel.Element("Type").Value.Contains("MaterialStream") Then
-                        obj = pp.ReturnInstance(xel.Element("Type").Value)
+                    If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
+                        obj = New Thermodynamics.Streams.MaterialStream()
                     Else
-                        obj = Resolver.ReturnInstance(xel.Element("Type").Value)
+                        Dim uokey As String = xel.Element("ComponentDescription").Value
+                        If mainfs.AvailableExternalUnitOperations.ContainsKey(uokey) Then
+                            obj = mainfs.AvailableExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                        Else
+                            obj = Resolver.ReturnInstance(xel.Element("Type").Value)
+                        End If
                     End If
                     Dim gobj As IGraphicObject = fs.GraphicObjects(id)
                     obj.GraphicObject = gobj
@@ -393,7 +412,7 @@ Label_00CC:
 
         End Function
 
-        Shared Sub AddGraphicObjects(fs As IFlowsheet, data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
+        Shared Sub AddGraphicObjects(fs As IFlowsheet, mainfs As IFlowsheet, data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
                        Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)
 
             Dim objcount As Integer, searchtext As String
@@ -437,6 +456,15 @@ Label_00CC:
                         ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                             obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
                             obj.PositionConnectors()
+                        ElseIf TypeOf obj Is ExternalUnitOperationGraphic Then
+                            Dim euo = mainfs.AvailableExternalUnitOperations.Values.Where(Function(x) x.Description = obj.Description).FirstOrDefault
+                            If euo IsNot Nothing Then
+                                obj.Owner = euo
+                                DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = obj
+                                obj.CreateConnectors(0, 0)
+                                obj.Owner = Nothing
+                                DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
+                            End If
                         Else
                             If obj.Name = "" Then obj.Name = obj.Tag
                             obj.CreateConnectors(0, 0)
@@ -530,20 +558,6 @@ Label_00CC:
             Dim excs As New List(Of Exception)
 
             Dim data As List(Of XElement)
-
-            'data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
-
-            'For Each xel As XElement In data
-            '    Try
-            '        Dim id As String = xel.<Name>.Value
-            '        If form.Collections.FlowsheetObjectCollection.ContainsKey(id) Then
-            '            Dim obj = form.Collections.FlowsheetObjectCollection(id).GraphicObject
-            '            obj.LoadData(xel.Elements.ToList)
-            '        End If
-            '    Catch ex As Exception
-            '        excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
-            '    End Try
-            'Next
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
 
@@ -699,10 +713,10 @@ Label_00CC:
                     Dim tmpfile As String = ""
                     tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
                     FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
-                    Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(tmpfile, FlowSheet.GetNewInstance)
+                    Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(tmpfile, FlowSheet.GetNewInstance, FlowSheet)
                     File.Delete(tmpfile)
                 Else
-                    Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(SimulationFile, FlowSheet.GetNewInstance)
+                    Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(SimulationFile, FlowSheet.GetNewInstance, FlowSheet)
                 End If
                 Initialized = True
             End If
@@ -1034,7 +1048,7 @@ Label_00CC:
                 If Not FileIsEmbedded Then
                     If IO.File.Exists(SimulationFile) Then
                         Me.Fsheet = Me.FlowSheet.GetNewInstance
-                        InitializeFlowsheet(SimulationFile, Me.Fsheet)
+                        InitializeFlowsheet(SimulationFile, Me.Fsheet, FlowSheet)
                         Me.Initialized = True
                     End If
                 End If
@@ -1107,9 +1121,17 @@ Label_00CC:
                 Next
             End With
 
-            If Me.UpdateOnSave Then
+            If Me.UpdateOnSave And Not FileIsEmbedded Then
                 ParseFilePath()
                 UpdateProcessData(SimulationFile)
+            Else
+                Dim tmpfile As String = ""
+                tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
+                FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
+                UpdateProcessData(tmpfile)
+                FlowSheet.FileDatabaseProvider.DeleteFile(EmbeddedFileName)
+                FlowSheet.FileDatabaseProvider.PutFile(tmpfile, EmbeddedFileName)
+                File.Delete(tmpfile)
             End If
 
             Return elements
@@ -1135,6 +1157,24 @@ Label_00CC:
             End If
 
         End Sub
+
+        Public Overrides Function GetEditingForm() As Form
+            If f Is Nothing Then
+                f = New EditingForm_FlowsheetUO With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Return f
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_FlowsheetUO With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Return f
+                Else
+                    Return Nothing
+                End If
+            End If
+        End Function
 
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
