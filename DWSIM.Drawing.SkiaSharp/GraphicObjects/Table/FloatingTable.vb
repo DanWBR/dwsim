@@ -274,7 +274,11 @@ Namespace GraphicObjects.Tables
                         If TypeOf pval0 Is Double Then
                             propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
                         Else
-                            propval = pval0.ToString
+                            Dim str = pval0.ToString
+                            If str.Length > 50 Then
+                                str = str.Substring(0, 50) + "..."
+                            End If
+                            propval = str
                         End If
                         propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
                         size = MeasureString(propstring, tpaint)
@@ -353,7 +357,11 @@ Namespace GraphicObjects.Tables
                             If TypeOf pval0 Is Double Then
                                 propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
                             Else
-                                propval = pval0.ToString
+                                Dim str = pval0.ToString
+                                If str.Length > 50 Then
+                                    str = str.Substring(0, 50) + "..."
+                                End If
+                                propval = str
                             End If
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
                             canvas.DrawText(propstring, X + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
