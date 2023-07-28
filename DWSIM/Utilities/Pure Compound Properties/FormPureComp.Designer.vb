@@ -446,7 +446,6 @@ Partial Class FormPureComp
         '
         resources.ApplyResources(Me.FaTabStripLiq, "FaTabStripLiq")
         Me.FaTabStripLiq.AlwaysShowClose = False
-        Me.FaTabStripLiq.AlwaysShowMenuGlyph = False
         Me.FaTabStripLiq.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPLIQ, Me.FaTabStripItemHVAP, Me.FaTabStripItemPVAP, Me.FaTabStripItemSURFT, Me.FaTabStripItemLIQVISC, Me.FaTabStripItemLIQDENS, Me.FaTabStripItemLIQTCOND, Me.FaTabStripItemTabLiq})
         Me.FaTabStripLiq.Name = "FaTabStripLiq"
         Me.FaTabStripLiq.SelectedItem = Me.FaTabStripItemCPLIQ
@@ -630,8 +629,8 @@ Partial Class FormPureComp
         'FaTabStripItemTabLiq
         '
         resources.ApplyResources(Me.FaTabStripItemTabLiq, "FaTabStripItemTabLiq")
+        Me.FaTabStripItemTabLiq.CanClose = False
         Me.FaTabStripItemTabLiq.Controls.Add(Me.DataTableLiquid)
-        Me.FaTabStripItemTabLiq.IsDrawn = True
         Me.FaTabStripItemTabLiq.Name = "FaTabStripItemTabLiq"
         '
         'DataTableLiquid
@@ -809,7 +808,6 @@ Partial Class FormPureComp
         '
         resources.ApplyResources(Me.FaTabStripVap, "FaTabStripVap")
         Me.FaTabStripVap.AlwaysShowClose = False
-        Me.FaTabStripVap.AlwaysShowMenuGlyph = False
         Me.FaTabStripVap.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPIG, Me.FaTabStripItemVAPVISC, Me.FaTabStripItemVAPTCOND, Me.FaTabStripItemDataTab})
         Me.FaTabStripVap.Name = "FaTabStripVap"
         Me.FaTabStripVap.SelectedItem = Me.FaTabStripItemCPIG
@@ -899,6 +897,7 @@ Partial Class FormPureComp
         'FaTabStripItemDataTab
         '
         resources.ApplyResources(Me.FaTabStripItemDataTab, "FaTabStripItemDataTab")
+        Me.FaTabStripItemDataTab.CanClose = False
         Me.FaTabStripItemDataTab.Controls.Add(Me.DataTableVapour)
         Me.FaTabStripItemDataTab.IsDrawn = True
         Me.FaTabStripItemDataTab.Name = "FaTabStripItemDataTab"
@@ -998,7 +997,6 @@ Partial Class FormPureComp
         '
         resources.ApplyResources(Me.FaTabStripSolid, "FaTabStripSolid")
         Me.FaTabStripSolid.AlwaysShowClose = False
-        Me.FaTabStripSolid.AlwaysShowMenuGlyph = False
         Me.FaTabStripSolid.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPSOLID, Me.FaTabStripItemSOLIDDENS, Me.FaTabStripItemTabela})
         Me.FaTabStripSolid.Name = "FaTabStripSolid"
         Me.FaTabStripSolid.SelectedItem = Me.FaTabStripItemCPSOLID
@@ -1006,6 +1004,7 @@ Partial Class FormPureComp
         'FaTabStripItemCPSOLID
         '
         resources.ApplyResources(Me.FaTabStripItemCPSOLID, "FaTabStripItemCPSOLID")
+        Me.FaTabStripItemCPSOLID.CanClose = False
         Me.FaTabStripItemCPSOLID.Controls.Add(Me.GraphCpSolid)
         Me.FaTabStripItemCPSOLID.IsDrawn = True
         Me.FaTabStripItemCPSOLID.Name = "FaTabStripItemCPSOLID"
@@ -1056,6 +1055,7 @@ Partial Class FormPureComp
         'FaTabStripItemTabela
         '
         resources.ApplyResources(Me.FaTabStripItemTabela, "FaTabStripItemTabela")
+        Me.FaTabStripItemTabela.CanClose = False
         Me.FaTabStripItemTabela.Controls.Add(Me.DataTableSolid)
         Me.FaTabStripItemTabela.IsDrawn = True
         Me.FaTabStripItemTabela.Name = "FaTabStripItemTabela"
