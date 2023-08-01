@@ -1538,15 +1538,25 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub CMS_ItemsToDisconnect_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles CMS_ItemsToDisconnect.ItemClicked
 
-        Me.Flowsheet.DisconnectObject(FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, FlowsheetSurface), True)
-        Flowsheet.UpdateOpenEditForms()
+        Try
+            Me.Flowsheet.DisconnectObject(FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, FlowsheetSurface), True)
+        Catch ex As Exception
+            Flowsheet.ShowMessage("Error: " + ex.Message, IFlowsheet.MessageType.GeneralError)
+        Finally
+            Flowsheet.UpdateOpenEditForms()
+        End Try
 
     End Sub
 
     Private Sub CMS_ItemsToConnect_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles CMS_ItemsToConnect.ItemClicked
 
-        Call Me.Flowsheet.ConnectObject(FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, FlowsheetSurface))
-        Flowsheet.UpdateOpenEditForms()
+        Try
+            Flowsheet.ConnectObject(FlowsheetSurface.SelectedObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ClickedItem.Text, FlowsheetSurface))
+        Catch ex As Exception
+            Flowsheet.ShowMessage("Error: " + ex.Message, IFlowsheet.MessageType.GeneralError)
+        Finally
+            Flowsheet.UpdateOpenEditForms()
+        End Try
 
     End Sub
 
