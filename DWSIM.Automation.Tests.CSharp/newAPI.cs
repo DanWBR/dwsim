@@ -9,7 +9,7 @@ using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.Automation.Tests.CSharp
 {
-     class newAPI
+    class newAPI
     {
         [STAThread]
         static void Main()
@@ -26,21 +26,25 @@ namespace DWSIM.Automation.Tests.CSharp
 
             sim.AddCompound("Water");
 
-            var m1 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet");
-            var m2 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet");
-            var e1 = (EnergyStream)sim.AddObject(ObjectType.EnergyStream, 100, 50, "power");
-            var h1 = (Heater)sim.AddObject(ObjectType.Heater, 100, 50, "heater");
+            var m1 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 50, 50, "inlet1");
+            var m2 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 150, 50, "inlet2");
+            var m3 = (MaterialStream)sim.AddObject(ObjectType.MaterialStream, 150, 50, "outlet");
+            var mx1 = (Mixer)sim.AddObject(ObjectType.Mixer, 100, 50, "mixer");
 
-            //var connections = h1.GetConnectionPortsList();
+            mx1.ConnectFeedMaterialStream(m1, 0);
+            mx1.ConnectFeedMaterialStream(m2, 1);
+            mx1.ConnectProductMaterialStream(m3, 0);
 
-            //foreach (var item in connections)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            h1.ConnectFeedMaterialStream(m1, 0);
-            h1.ConnectProductMaterialStream(m2, 0);
-            h1.ConnectFeedEnergyStream(e1, 1);
+            for (int i = 0; i < 5; i++)
+            {
+                var isattached = mx1.GraphicObject.InputConnectors[i].IsAttached;
+                if (!isattached)
+                    // port is available to connect
+                    mx1.ConnectFeedMaterialStream(m2, i);
+                else
+                    // try next port, current one is already connected
+                    mx1.ConnectFeedMaterialStream(m2, i + 1);
+            }
 
             sim.AutoLayout();
 
@@ -57,16 +61,17 @@ namespace DWSIM.Automation.Tests.CSharp
             m1.SetTemperature(300); // K
             m1.SetMassFlow(100); // kg/s
 
-            // set heater outlet temperature
-
-            h1.CalcMode = Heater.CalculationMode.OutletTemperature;
-            h1.OutletTemperature = 400; // K
+            m2.SetTemperature(348); // K
+            m2.SetMassFlow(50); // kg/s
 
             // request a calculation
 
             interf.CalculateFlowsheet2(sim);
 
-            Console.WriteLine(String.Format("Heater Heat Load: {0} kW", h1.DeltaQ.GetValueOrDefault()));
+            // save file
+
+            string fileNameToSave = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "mixer.dwxmz");
+            interf.SaveFlowsheet(sim, fileNameToSave, true); //use true for dwxmz
 
             Console.WriteLine("Done! press any key to close.");
             Console.ReadKey();

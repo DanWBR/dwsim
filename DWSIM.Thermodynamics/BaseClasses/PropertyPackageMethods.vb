@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Interfaces
 
+<System.Serializable>
 Public Class PropertyPackageMethods
 
     Implements Interfaces.IPropertyPackageMethods
