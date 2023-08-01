@@ -280,7 +280,7 @@ Public Class EditingForm_Mixer
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        MixerObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayGroupedEditingForm()
+        MixerObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag =  cbPropPack.SelectedItem.ToString).FirstOrDefault()?.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click, btnCreateAndConnectInlet3.Click, btnCreateAndConnectInlet4.Click, btnCreateAndConnectInlet5.Click, btnCreateAndConnectInlet6.Click, btnCreateAndConnectOutlet1.Click

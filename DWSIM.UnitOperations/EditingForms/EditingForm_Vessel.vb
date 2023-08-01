@@ -415,7 +415,7 @@ Public Class EditingForm_Vessel
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        VesselObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayGroupedEditingForm()
+        VesselObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag =  cbPropPack.SelectedItem.ToString).FirstOrDefault()?.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub cbPressureCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPressureCalcMode.SelectedIndexChanged
