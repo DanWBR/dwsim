@@ -23,60 +23,36 @@ Partial Class FormUnhandledException
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUnhandledException))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.LabelWithDivider3 = New System.Windows.Forms.LabelWithDivider()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
+        Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Name = "Label1"
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.White
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.ForeColor = System.Drawing.Color.White
-        Me.Panel1.Name = "Panel1"
-        '
         'PictureBox1
         '
-        Me.PictureBox1.BackColor = System.Drawing.Color.White
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_sun_with_face
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.BackColor = System.Drawing.Color.White
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.bubble_gum_error
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'TextBox2
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.White
         resources.ApplyResources(Me.TextBox2, "TextBox2")
+        Me.TextBox2.BackColor = System.Drawing.Color.White
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
         '
         'Button5
         '
@@ -86,8 +62,8 @@ Partial Class FormUnhandledException
         '
         'LabelWithDivider3
         '
-        Me.LabelWithDivider3.Gap = 4
         resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
+        Me.LabelWithDivider3.Gap = 4
         Me.LabelWithDivider3.Name = "LabelWithDivider3"
         '
         'Button6
@@ -106,39 +82,65 @@ Partial Class FormUnhandledException
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
         '
-        'Label8
+        'Label2
         '
-        resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.Name = "Label8"
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
         '
-        'Label9
+        'Button1
         '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        '
+        'LabelWithDivider1
+        '
+        resources.ApplyResources(Me.LabelWithDivider1, "LabelWithDivider1")
+        Me.LabelWithDivider1.Gap = 4
+        Me.LabelWithDivider1.Name = "LabelWithDivider1"
+        '
+        'LabelWithDivider2
+        '
+        resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
+        Me.LabelWithDivider2.Gap = 4
+        Me.LabelWithDivider2.Name = "LabelWithDivider2"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.BackColor = System.Drawing.Color.White
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Name = "Label1"
         '
         'FormUnhandledException
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LabelWithDivider2)
+        Me.Controls.Add(Me.LabelWithDivider1)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.LabelWithDivider3)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormUnhandledException"
-        Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.TopMost = True
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -147,16 +149,16 @@ Partial Class FormUnhandledException
 
     End Sub
     Public WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Public WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Public WithEvents LabelWithDivider3 As System.Windows.Forms.LabelWithDivider
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents Label7 As System.Windows.Forms.Label
-    Public WithEvents Label8 As System.Windows.Forms.Label
-    Public WithEvents Label9 As System.Windows.Forms.Label
+    Public WithEvents Label2 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents TextBox1 As TextBox
+    Public WithEvents LabelWithDivider1 As LabelWithDivider
+    Public WithEvents LabelWithDivider2 As LabelWithDivider
+    Public WithEvents Label1 As Label
 End Class

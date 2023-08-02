@@ -3010,6 +3010,8 @@
     <Content Include="Lib\__phello__.foo.py" />
     <None Include="Resources\arrow_32px.png" />
     <None Include="Resources\binary_code_24px.png" />
+    <None Include="Resources\bubble-gum-error-404.gif" />
+    <None Include="Resources\bubble-gum-error.gif" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

@@ -387,6 +387,8 @@ Public Class FormFlowsheet
 
         MessagePumpTimer.Start()
 
+        Throw New Exception()
+
     End Sub
 
     Sub LoadExtenders()

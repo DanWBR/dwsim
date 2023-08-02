@@ -35,43 +35,11 @@ Public Class FormUnhandledException
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim mystring = SharedClasses.EncryptString.StringCipher.Decrypt("YEZeCozmw0l3XjOYI0EpOXHh1LK9as6Bi5Gwqr7pYZyXtcNYQyzayHXts6NjAJlpfixoim98NAwVHli/+h1fYk6g4W82ewXDxkLwzg5SFCCSS2W0K3TvGMgC0wQWuKfrut0QdnByVKZ4x+/svdQwwXsUkZdELOUtnWiOdeV6WIQ=", "dwsim000000")
-        Dim mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000")
+        TextBox1.Text = ex.Message
 
-        If DWSIM.App.IsRunningOnMono Then Console.WriteLine(ex.ToString.Replace(mystring, "").Replace(mystring2, ""))
-
-        Me.TextBox2.Text = ex.ToString.Replace(mystring, "").Replace(mystring2, "")
-
-        Button4.Enabled = False
-        Try
-            Dim baseaddress As String = "https://github.com/DanWBR/dwsim/blob/windows/"
-            Dim st As New StackTrace(ex, True)
-            Dim frame As StackFrame = st.GetFrame(0)
-            Dim path As String = frame.GetFileName.Replace(mystring, baseaddress)
-            path = path.Replace(mystring2, baseaddress)
-            Dim line As Integer = frame.GetFileLineNumber()
-            If path.Contains(baseaddress) Then
-                githublink = path & "#L" & line
-                Button4.Enabled = True
-            End If
-        Catch ex As Exception
-        End Try
+        TextBox2.Text = ex.ToString()
 
         ExtensionMethods.ChangeDefaultFont(Me)
-
-    End Sub
-
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-
-        Dim msg As New SendFileTo.MAPI()
-        msg.AddRecipientTo("dwsim@inforside.com.br")
-        msg.SendMailPopup("DWSIM Exception", "[PLEASE ADD EXCEPTION DETAILS HERE]" & vbCrLf & vbCrLf & "DWSIM version: " & My.Application.Info.Version.ToString & vbCrLf & ex.ToString)
-
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
-        If githublink <> "" Then Process.Start(githublink)
 
     End Sub
 
@@ -81,7 +49,13 @@ Public Class FormUnhandledException
 
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 
-        Process.Start(baseaddress + searchtext)
+        If FormMain.IsPro Then
+            Dim fb As New FormBrowser()
+            fb.DisplayURL(baseaddress + searchtext, "SourceForge Forums")
+            fb.Show()
+        Else
+            Process.Start(baseaddress + searchtext)
+        End If
 
     End Sub
 
@@ -91,7 +65,28 @@ Public Class FormUnhandledException
 
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 
-        Process.Start(baseaddress + searchtext)
+        If FormMain.IsPro Then
+            Dim fb As New FormBrowser()
+            fb.DisplayURL(baseaddress + searchtext, "GitHub Issues")
+            fb.Show()
+        Else
+            Process.Start(baseaddress + searchtext)
+        End If
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Clipboard.SetText(ex.ToString())
+
+        Dim url = "https://github.com/DanWBR/dwsim/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=%5BBug%5D+"
+        If FormMain.IsPro Then
+            Dim fb As New FormBrowser()
+            fb.DisplayURL(url, "GitHub Issues")
+            fb.Show()
+        Else
+            Process.Start(url)
+        End If
 
     End Sub
 
