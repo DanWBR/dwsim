@@ -3614,11 +3614,31 @@ Public Class FormFlowsheet
 
         Me.UIThread(Sub()
                         For Each obj In SimulationObjects.Values
-                            obj.UpdateEditForm()
-                            obj.UpdateDynamicsEditForm()
-                            obj.UpdateExtraPropertiesEditForm()
-                            EditorTooltips.Update(obj, Me)
-                            obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
+                            Try
+                                obj.UpdateEditForm()
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
+                            Try
+                                obj.UpdateDynamicsEditForm()
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
+                            Try
+                                obj.UpdateExtraPropertiesEditForm()
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
+                            Try
+                                EditorTooltips.Update(obj, Me)
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
+                            Try
+                                obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
                         Next
                     End Sub)
 
