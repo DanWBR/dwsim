@@ -257,7 +257,7 @@ Partial Class FormImportCompoundFromThermo
         '
         'tbImportAs
         '
-        Me.tbImportAs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.tbImportAs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbImportAs.Location = New System.Drawing.Point(153, 317)
         Me.tbImportAs.Name = "tbImportAs"
@@ -266,6 +266,7 @@ Partial Class FormImportCompoundFromThermo
         '
         'Label9
         '
+        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
         Me.Label9.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Label9.Location = New System.Drawing.Point(11, 321)
