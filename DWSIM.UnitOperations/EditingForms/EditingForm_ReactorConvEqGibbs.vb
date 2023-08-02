@@ -738,11 +738,14 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
     Private Sub btnConfigExtSolver_Click(sender As Object, e As EventArgs) Handles btnConfigExtSolver.Click
-        Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
+        Try
+            Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
                 Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
-        If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
-            SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
-        End If
+            If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
+                SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub chkGibbsUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseIPOPT.CheckedChanged
