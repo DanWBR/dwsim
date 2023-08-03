@@ -41,12 +41,6 @@ Public Class FlowsheetSurfaceControl
 
     Private Sub FlowsheetSurfaceControl_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         FlowsheetSurface.InputRelease()
-#If Not WINE32 Then
-        If My.Settings.DisplayPFDTip Then
-            MessageBox.Show(DWSIM.App.GetLocalString("PFDTip"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            My.Settings.DisplayPFDTip = False
-        End If
-#End If
         Invalidate()
         Invalidate()
     End Sub
