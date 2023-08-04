@@ -88,6 +88,48 @@ Public Class Form_CapeOpenSelector
             mykey.Close()
         Next
 
+        keys = My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE").OpenSubKey("Classes").OpenSubKey("CLSID", False).GetSubKeyNames()
+
+        For Each k2 In keys
+            Dim mykey As RegistryKey = My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE").OpenSubKey("Classes").OpenSubKey("CLSID", False).OpenSubKey(k2, False)
+            For Each s As String In mykey.GetSubKeyNames()
+                If s = "Implemented Categories" Then
+                    Dim arr As Array = mykey.OpenSubKey("Implemented Categories").GetSubKeyNames()
+                    For Each s2 As String In arr
+                        If s2.ToLower = "{678c09a5-7d66-11d2-a67d-00105a42887f}" Then
+                            'this is a CAPE-OPEN UO
+                            Dim myuo As New UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+                            With myuo
+                                .AboutInfo = mykey.OpenSubKey("CapeDescription").GetValue("About")
+                                .CapeVersion = mykey.OpenSubKey("CapeDescription").GetValue("CapeVersion")
+                                .Description = mykey.OpenSubKey("CapeDescription").GetValue("Description")
+                                .HelpURL = mykey.OpenSubKey("CapeDescription").GetValue("HelpURL")
+                                .Name = mykey.OpenSubKey("CapeDescription").GetValue("Name")
+                                .VendorURL = mykey.OpenSubKey("CapeDescription").GetValue("VendorURL")
+                                .Version = mykey.OpenSubKey("CapeDescription").GetValue("ComponentVersion")
+                                Try
+                                    .TypeName = mykey.OpenSubKey("ProgID").GetValue("")
+                                Catch ex As Exception
+                                End Try
+                                Dim key = mykey.OpenSubKey("InProcServer32")
+                                If key IsNot Nothing Then
+                                    .Location = key.GetValue("")
+                                Else
+                                    key = mykey.OpenSubKey("LocalServer32")
+                                    If key IsNot Nothing Then .Location = key.GetValue("")
+                                End If
+                            End With
+                            clist.Add(myuo)
+                            If chemseponly And myuo.Name.ToLower.Contains("chemsep") Then
+                                Return clist
+                            End If
+                        End If
+                    Next
+                End If
+            Next
+            mykey.Close()
+        Next
+
         Return clist.OrderBy(Function(x) x.Name).ToList()
 
     End Function
