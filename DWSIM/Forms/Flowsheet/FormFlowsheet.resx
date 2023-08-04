@@ -150,9 +150,6 @@
   <data name="tsmiUndo.Text" xml:space="preserve">
     <value>Desfazer</value>
   </data>
-  <data name="tsmiUndo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="tsmiRedo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -165,14 +162,8 @@
   <data name="tsmiRedo.Text" xml:space="preserve">
     <value>Refazer</value>
   </data>
-  <data name="tsmiRedo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ToolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 6</value>
-  </data>
-  <data name="ToolStripSeparator14.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="tsmiCut.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 22</value>
@@ -634,19 +625,19 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 22</value>
+    <value>104, 24</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Configurações</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="tsbAtivar.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsbAtivar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="tsbAtivar.Text" xml:space="preserve">
     <value>Calculador Ativado</value>
@@ -670,7 +661,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 22</value>
+    <value>70, 24</value>
   </data>
   <data name="tsbCalc.Text" xml:space="preserve">
     <value>Calcular</value>
@@ -679,7 +670,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbAbortCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 22</value>
+    <value>67, 24</value>
   </data>
   <data name="tsbAbortCalc.Text" xml:space="preserve">
     <value>Abortar</value>
@@ -688,13 +679,13 @@
     <value>Magenta</value>
   </data>
   <data name="tsbSimultAdjustSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
     <value>Ajuste Simultâneo Ativado</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="tsbUndo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -705,29 +696,20 @@
   <data name="tsbUndo.Text" xml:space="preserve">
     <value>ToolStripDropDownButton1</value>
   </data>
-  <data name="tsbUndo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="tsbRedo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsbRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="tsbRedo.Text" xml:space="preserve">
     <value>ToolStripDropDownButton2</value>
   </data>
-  <data name="tsbRedo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="ToolStripSeparator3.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>6, 27</value>
   </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 22</value>
+    <value>93, 24</value>
   </data>
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Modo Dinâmico</value>
@@ -736,7 +718,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbDynamics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="tsbDynamics.Text" xml:space="preserve">
     <value>Modo Dinâmico Ativado/Desativado</value>
@@ -771,7 +753,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbDynManager.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="tsbDynManager.Text" xml:space="preserve">
     <value>Gerenciador do Modo Dinâmico</value>
@@ -779,57 +761,57 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUSSURBVFhHxVdJU1RXFGaTfbJMfkayzsqqpEIWLpJKVsYh
-        gEKIGlQEImMcqhmMgIwyScAQQVHK2CAgQzdc6Om9buhueoBuUqACwVIr65zc78B9ge42QQr1VX117/3u
-        eX2+d+45p99LUlfhz63v5plaPswpv/bR68QZU9MHmy7/vYoq289eqOpau9bdv9Z5a+R5kxy3orln8CkQ
-        yyeybbk9vH69b+xZLA8Oe2Utt1ZLqtu7Nl0nJeVcqn0PziOrz2lx7QU91EM8boU+/5gRyyeynVtaJ+Fb
-        jOPBYQ/zq91313NNjR+zAIS9rmdgVRm+CQGFppq/c0ubUlkAzgWhxI8BZrufx60YdAYYsXwi2yEtSAOO
-        uTgeHPYwNwsPSb9phgCckVIKAzVX2BqByMKSwSey3UkEzBPa7gUE+ocN/q0ImL1ab/BvXoCsFNeJHwx+
-        zwSgxpUTJJuaK0x6FxmaHqCpr742+ES29sASjerzcTw47GFuntR3J8A1Ikh88inpoeU4W21S43FXAnZ6
-        BAHzEIl9+2ghGI2z9f3aTdHH63uTA5HQIkNxSoCv8zea+iyZQsJp2CqbmYorNK/79kZAcMRKIQnFKQEz
-        VTXkyjxOgd8HDFtlo505yyW6JwJ8HV0MxSkBelEJzVypJl/7DcNW2dgPfEPeto7dCYhtxZb8EobikGzA
-        RFo6jf1yk8bPmwxbttECJJKT5T3Fe9OKncdPMhSnIuD4NoXmPXOknys0bDEu+MJs7zqZlTACuOeVjgCO
-        AMWxgPAjcqSmUXT5T3JmZBq2GIND45wfjpTUOAGomNn6a68gQNaoU3Y7IBJ5xBwEaO4gubJO8VqJUwJQ
-        Hf6bt8mZnkH+6JNtApCwuG/HAkbv9JO7tIIRmrAxBwGu0Slyn7/Ea0QCbVkJQAkGxwXphcXktXm2CZi5
-        XEnT+/eT8EZfLgCvStgERutaSW+7Qe7WTnJ3djNnkx1suruPtOp6XjuyzpBvNkxDruDG+lQ2+b2y+8k/
-        KlevmSwzEeYB+9F03rcOWMi9sMLc/dhOiPc1qAbGii6SuDMg0U/iYilzo+4wjdc0kWju4LUoPE/CPEID
-        9o3kEoeO8BOK6100Ud1Iw1IY8zJC4kgqiYZWGpP3W6Uw8GbhfvkRWDNPGJ3QdTqbORyBvUyGWSYb1rON
-        zXy2OILoyjNyHj3GfGjSQa4LJnbCa8sUeUzlFHa4SeTm89OD/88cmDxwkEcAWY0RAmx5+TSveXnt77nL
-        zQgCUIKa3AMfWVgmu0xeJcDb1EZzvfdYJKL0vwJQYhMpR9kIcKZ/R9GlNRYwjfkfK8yjVXtkR4QAVYLq
-        HpusECVAO5vLAjEXGd9znmD+UgFhm07WvALjx9w/XaSwXd8QcOiwwXMzyi9iAWjZ/u5eYw9JJzzSkawS
-        h3xqxYvySvLc7ed5nICe2tq/REEJCXn+oxU1GwkEyIQCZz1XxEdj8G6ZXF98SWO5BSQOHibR98DYm8z+
-        kaync/jMhawWxY903ZEJKaMj/QzXtWwX0Nzc89RrsRMwbNWNEvIHFpmzDVpoetxu8IDX6qCHfYO87488
-        MXjd6SPr/RHmfZ6NMgUsWog0+UIDvl/uGwLyLte/j88lFSrVXLYCRwDE8ols4QxPHMuDwx7mHfcevMgu
-        a/qcBeDCtxo+l/DFgn8qnNE2yMbBiOUT2KLJoM5jeXDYg/PiqnYtraHhnU33Gxe+1fC5hNC8TuDJ45y/
-        vSsp6R/F9ftnxC2KFgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUTSURBVFhHxVdJU1RXFGaTfbJMfkayzsqqpEIWLpJKVsYh
+        DIEQNShjZAxiADUyqIBMEjBEUIYyNgjI0A0XenqvG7qbHqCbFDhAsNTKOif3O3BfoLtNkEJ9VV/de797
+        Xp/vnXvO6fcS1FX0c+vb+RUt7+eev/bBq0RWRdN7Wy7/vYqr23PO1nStX+seXO+8NfasSY7b0dwz/ASI
+        5uPZttwe3bg+MPE0mgeHvaqWW2ulte1dW64TEnLPXXkHzsNrz2h5/Tnd14M8boe++JARzcezXVjZIOFd
+        juHBYQ/zuu7+jbyKxg9ZAMJ+tWdoTRm+DgFFP9X9nVfZlMwCcC4IJX4MMNl8PG7HsMPPiObj2Y5oARqy
+        L8Tw4LCHuUm4SfpNMQTgjJRSGKi5wvYIhJdWDD6e7W4iYJrS9i7APzhq8G9EwHxdvcG/fgGyUpwnvjf4
+        fROAGldOkGxqrjDtWWZoup9mvvjS4OPZ2vwrNK4vxvDgsIe5aVrfmwDnmCDx0cekB1djbLVpjcc9Cdjt
+        EfhNIyQOHKClQCTG1vtrN0UebuxPDoSDywzFKQHezt9o5pNECgqHYats5i5cokXduz8CAmMWCkooTgmY
+        q7lMzozj5P99yLBVNlpWDpfovgjwdnQxFKcE6MWlNHeplrztNwxbZWM79BV52jr2JiC6FZsLShmKQ7IB
+        UylpNPHLTZosqzBs2Ubzk0hMlPeU7E8rdhw/yVCcioD96yRadC+QfqbIsMW45A2xvfNkZtwI4J6XOgI4
+        AhTHAkIPyJ6cQpHVP8mRnmHYYgyMTHJ+2JOSYwSgYubrr72EAFmjDtntgHD4AXMQoLkC5Mw8xWslTglA
+        dfhu3iZHWjr5Io92CEDC4r5dCxjvGyRX5QVGcMrKHAQ4x2fIVXaO14gE2rISgBIMTArSi0rIY3XvEDB3
+        sZpmDx4k4Ym8WABelbAJjF9tJb3tBrlaO8nV2c2cVXaw2e4B0mrreW3PzCLvfIhGnIHN9als8nlk95N/
+        VM5eE5nnwswDttQ03rcMmcm19Ji5u9GdEO9rUA1MFJeT6BuSGCRRXsncuCtEk5ebSDR38FoUlZEwjdGQ
+        bTO5xJFj/ITiehdN1TbSqBTGvIyQOJZMoqGVJuT9FikMvEm4XnwElowTRid0ns5mDkdgq5JhlsmG9Xxj
+        M58tjiDy+Ck5Ur9hPjhtJ+fZCnbCa/MMuSvOU8juIpFXwE8P/j9zYPrQYR4BZDVGCLDmF9Ci5uG1r6ef
+        mxEEoAQ1uQc+vLRKNpm8SoCnqY0Weu+wSETpfwWgxKaSUtkIcKR9S5GVdRYwi/kfj5lHq3bLjggBqgTV
+        PVZZIUqAlpPHAjEX6d9xnmD+QgEhq06W/ELjx1w/llPIpm8KOHLU4LkZFRSzALRsX3evsYekE27pSFaJ
+        XT614sX5anL3D/I8RkDPlSt/icJSEvL8xy9c3kwgQCYUOMuZYj4ag3fJ5Prsc5rIKyRx+CiJgXvG3nT2
+        D2Q5nctnLmS1KH6sq08mpIyO9DN6tWWngObmnices42AUYtulJDPv8ycddhMs5M2gwc8FjvdHxjmfV/4
+        kcHrDi9Z7o4x73Vvlilg1oKkyRca8INy3xCQf7H+XXwuqVCp5rIdOAIgmo9nC2d44mgeHPYw77hz73l2
+        VdOnLAAXvtXwuYQvFvxT4Yx2QDYORjQfxxZNBnUezYPDHpyX1LRrKQ0Nb22537zwrYbPJYTmVQJPHuP8
+        zV0JCf8Apr/7Y9KjKeAAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsbDynIntegrator.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsbDynIntegrator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="tsbDynIntegrator.Text" xml:space="preserve">
     <value>Controles do Integrador (Modo Dinâmico)</value>
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 22</value>
+    <value>105, 24</value>
   </data>
   <data name="ToolStripLabel1.Text" xml:space="preserve">
     <value>Estados (Soluções)</value>
   </data>
   <data name="tscbStoredSolutions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>121, 23</value>
   </data>
   <data name="tsbStoreSolution.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsbStoreSolution.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="tsbStoreSolution.Text" xml:space="preserve">
     <value>Salvar Estado Atual</value>
@@ -838,7 +820,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbLoadSolution.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 20</value>
   </data>
   <data name="tsbLoadSolution.Text" xml:space="preserve">
     <value>Restaurar Selecionado</value>
@@ -859,7 +841,7 @@
     <value>0, 0, 16, 0</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>779, 25</value>
+    <value>779, 27</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>

@@ -1710,7 +1710,9 @@ Public Class FlowsheetSurface_SkiaSharp
     End Function
 
     Private Sub ExcluirToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExcluirToolStripMenuItem.Click
-        Call Me.Flowsheet.DeleteSelectedObject(sender, e, FlowsheetSurface.SelectedObject)
+
+        Flowsheet.tsmiRemoveSelected_Click(sender, e)
+
     End Sub
 
     Public Function AddObjectToSurface(type As ObjectType, x As Integer, y As Integer,
