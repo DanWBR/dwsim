@@ -662,6 +662,8 @@ Namespace Enums.GraphicObjects
 
         Controller_Python
 
+        Dummy
+
     End Enum
 
     Public Enum ShapeIcon

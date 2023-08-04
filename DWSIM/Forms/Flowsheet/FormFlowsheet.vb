@@ -1243,6 +1243,10 @@ Public Class FormFlowsheet
                                                   frlog.Grid1.Rows(0).Selected = True
                                               End If
 
+                                              texto = texto.Split(Environment.NewLine)(0)
+
+                                              lblLastMessage.AutoEllipsis = True
+
                                               lblLastMessage.Text = "[" + Date.Now.ToString() + "] " + texto
                                               lblLastMessage.LinkArea = New LinkArea(0, lblLastMessage.Text.Length)
 

@@ -170,11 +170,17 @@
   <data name="tbEventLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 256</value>
   </data>
+  <data name="tbEventLocation.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
   <data name="tbEventActions.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
   </data>
   <data name="tbEventActions.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 354</value>
+  </data>
+  <data name="tbEventActions.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
   <data name="tbEventActions.Size" type="System.Drawing.Size, System.Drawing">
     <value>597, 72</value>

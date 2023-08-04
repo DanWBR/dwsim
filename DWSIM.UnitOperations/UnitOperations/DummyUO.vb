@@ -68,7 +68,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
-            Return My.Resources.uo_orifice_32
+            Return My.Resources.square_240px
         End Function
 
         Public Overrides Function GetDisplayDescription() As String

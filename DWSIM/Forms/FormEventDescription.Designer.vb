@@ -88,6 +88,7 @@ Partial Class FormEventDescription
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.tbEventActions)
         Me.Controls.Add(Me.tbEventLocation)
         Me.Controls.Add(Me.tbEventDescription)

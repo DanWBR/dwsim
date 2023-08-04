@@ -1489,9 +1489,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventDescription.en.resx">
       <DependentUpon>FormEventDescription.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventDescription.resx">
       <DependentUpon>FormEventDescription.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormHeatMaps.resx">
       <DependentUpon>FormHeatMaps.vb</DependentUpon>
