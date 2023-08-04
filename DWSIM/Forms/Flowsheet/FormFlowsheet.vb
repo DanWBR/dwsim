@@ -1232,6 +1232,8 @@ Public Class FormFlowsheet
                                                   frlog.Grid1.Rows.Clear()
                                               End If
 
+                                              texto = texto.Split(Environment.NewLine)(0)
+
                                               frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
                                               frlog.Grid1.Sort(frlog.Grid1.Columns(1), ListSortDirection.Descending)
@@ -1242,8 +1244,6 @@ Public Class FormFlowsheet
                                                   frlog.Grid1.ClearSelection()
                                                   frlog.Grid1.Rows(0).Selected = True
                                               End If
-
-                                              texto = texto.Split(Environment.NewLine)(0)
 
                                               lblLastMessage.AutoEllipsis = True
 

@@ -2443,7 +2443,7 @@ Public Class FormMain
                             obj = PropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
                             form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
-                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
+                            Throw New Exception("The " & ppkey & " Property Package library was not found.")
                         End If
                     End If
                 End If
@@ -3001,7 +3001,7 @@ Public Class FormMain
                         obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
                     Else
                         form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
-                        Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
+                        Throw New Exception("The ThermoC bridge library was not found.")
                     End If
                 Else
                     Dim ppkey As String = xel.Element("ComponentName").Value
