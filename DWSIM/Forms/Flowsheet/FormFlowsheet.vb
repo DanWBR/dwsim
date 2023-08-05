@@ -1658,11 +1658,11 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiUndo_Click(sender As Object, e As EventArgs) Handles tsmiUndo.Click
-        tsbUndo_Click(sender, e)
+        tsbUndo_Click_1(sender, e)
     End Sub
 
     Public Sub tsmiRedo_Click(sender As Object, e As EventArgs) Handles tsmiRedo.Click
-        tsbRedo_Click(sender, e)
+        tsbRedo_Click_1(sender, e)
     End Sub
 
     Public Sub tsmiCut_Click(sender As Object, e As EventArgs) Handles tsmiCut.Click
@@ -3026,15 +3026,15 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Public Sub tsbUndo_Click(sender As Object, e As EventArgs)
+    Private Sub tsbUndo_Click_1(sender As Object, e As EventArgs) Handles tsbUndo.Click
 
-        UndoActions(tsbUndo.DropDownItems(0), e)
+        Dim data = GetSnapshot(SnapshotType.All)
+
+        RestoreSnapshot(data, SnapshotType.All)
 
     End Sub
 
-    Public Sub tsbRedo_Click(sender As Object, e As EventArgs)
-
-        RedoActions(tsbRedo.DropDownItems(0), e)
+    Private Sub tsbRedo_Click_1(sender As Object, e As EventArgs) Handles tsbRedo.Click
 
     End Sub
 
@@ -3082,99 +3082,719 @@ Public Class FormFlowsheet
 
     Private Sub PopulateUndoRedoItems()
 
-        Dim count As Integer
-
-        tsbUndo.DropDownItems.Clear()
-        count = 0
-        For Each act In UndoStack
-            If count = 0 Then
-                tsmiUndo.Text = DWSIM.App.GetLocalString("Undo") & " " & act.Name
-                tsbUndo.Text = DWSIM.App.GetLocalString("Undo") & " " & act.Name
-            End If
-            Dim tsmi As New ToolStripMenuItem(act.Name, My.Resources.undo_161, AddressOf UndoActions) With {.Tag = act.ID}
-            AddHandler tsmi.MouseEnter, AddressOf tsbUndo_MouseEnter
-            tsbUndo.DropDownItems.Add(tsmi)
-            count += 1
-            If count > 15 Then Exit For
-        Next
-
-        tsbRedo.DropDownItems.Clear()
-        count = 0
-        For Each act In RedoStack
-            If count = 0 Then
-                tsmiRedo.Text = DWSIM.App.GetLocalString("Redo") & " " & act.Name
-                tsbRedo.Text = DWSIM.App.GetLocalString("Redo") & " " & act.Name
-            End If
-            Dim tsmi As New ToolStripMenuItem(act.Name, My.Resources.redo_16, AddressOf RedoActions) With {.Tag = act.ID}
-            AddHandler tsmi.MouseEnter, AddressOf tsbRedo_MouseEnter
-            tsbRedo.DropDownItems.Add(tsmi)
-            count += 1
-            If count > 15 Then Exit For
-        Next
-
     End Sub
 
     Sub UndoActions(sender As Object, e As EventArgs)
-
-        Dim actID = DirectCast(sender, ToolStripMenuItem).Tag
-        Dim act As UndoRedoAction
-        Do
-            If UndoStack.Count = 0 Then Exit Do
-            act = UndoStack.Peek
-            ProcessUndo()
-        Loop Until actID = act.ID
-
-        PopulateUndoRedoItems()
-
-        If My.Settings.UndoRedo_RecalculateFlowsheet Then FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
 
     End Sub
 
     Sub RedoActions(sender As Object, e As EventArgs)
 
-        Dim actID = DirectCast(sender, ToolStripMenuItem).Tag
-        Dim act As UndoRedoAction
-        Do
-            If RedoStack.Count = 0 Then Exit Do
-            act = RedoStack.Peek
-            ProcessRedo()
-        Loop Until actID = act.ID
-
-        PopulateUndoRedoItems()
-
-        If My.Settings.UndoRedo_RecalculateFlowsheet Then FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
-
     End Sub
 
-    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs)
+#End Region
 
-        If TypeOf sender Is ToolStripMenuItem Then
-            Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-            For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
-                tsmi.Checked = False
+#Region "    Snapshots"
+
+    Public Function GetSnapshot(stype As SnapshotType) As XDocument Implements IFlowsheet.GetSnapshot
+
+        Dim xdoc As New XDocument()
+        Dim xel As XElement
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        Dim IncludeObjectDataAndLayout, IncludeCompounds, IncludeReactionSubsystem, IncludePropertyPackages,
+            IncludeSpreadsheet, IncludeSimulationSettings, IncludeWindowLayout As Boolean
+
+        Select Case stype
+            Case SnapshotType.All
+                IncludeCompounds = True
+                IncludeObjectDataAndLayout = True
+                IncludePropertyPackages = True
+                IncludeReactionSubsystem = True
+                IncludeSimulationSettings = True
+                IncludeSpreadsheet = True
+                IncludeWindowLayout = True
+            Case SnapshotType.Compounds
+                IncludeCompounds = True
+            Case SnapshotType.ObjectDataAndLayout
+                IncludeObjectDataAndLayout = True
+            Case SnapshotType.PropertyPackages
+                IncludePropertyPackages = True
+            Case SnapshotType.ReactionSubsystem
+                IncludeReactionSubsystem = True
+            Case SnapshotType.SimulationSettings
+                IncludeSimulationSettings = True
+            Case SnapshotType.Spreadsheet
+                IncludeSpreadsheet = True
+            Case SnapshotType.WindowLayout
+                IncludeWindowLayout = True
+        End Select
+
+        xdoc.Add(New XElement("DWSIM_Simulation_Data"))
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Settings"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("Settings")
+        xel.Add(Options.SaveData().ToArray())
+
+        If IncludeObjectDataAndLayout Then
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicProperties"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties")
+
+            Dim extraprops = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            For Each item In extraprops
+                Try
+                    xel.Add(New XElement("Property", {New XElement("Name", item.Key),
+                                                                       New XElement("PropertyType", item.Value.GetType.ToString),
+                                                                       New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+                Catch ex As Exception
+                End Try
             Next
-            For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
-                tsmi.Checked = True
-                If tsmi Is hovereditem Then Exit For
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
+
+            For Each go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects
+                If Not go.IsConnector And Not go.ObjectType = ObjectType.GO_FloatingTable Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
             Next
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
+
+            For Each so As SharedClasses.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
+                so.SetFlowsheet(Me)
+                xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
+            Next
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicsManager"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager")
+
+            xel.Add(DirectCast(DynamicsManager, ICustomXMLSerialization).SaveData().ToArray())
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ScriptItems"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems")
+
+            For Each scr As Script In ScriptCollection.Values
+                xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
+            Next
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ChartItems"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems")
+
+            For Each ch As SharedClasses.Charts.Chart In ChartCollection.Values
+                xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
+            Next
+
+        End If
+
+        If IncludePropertyPackages Then
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
+
+            For Each pp In Options.PropertyPackages
+                Dim createdms As Boolean = False
+                If pp.Value.CurrentMaterialStream Is Nothing Then
+                    Dim ms As New Streams.MaterialStream("", "", Me, pp.Value)
+                    AddComponentsRows(ms)
+                    pp.Value.CurrentMaterialStream = ms
+                    createdms = True
+                End If
+                xel.Add(New XElement("PropertyPackage", {New XElement("ID", pp.Key),
+                                                         DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+                If createdms Then pp.Value.CurrentMaterialStream = Nothing
+            Next
+
+        End If
+
+        If IncludeCompounds Then
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Compounds"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds")
+
+            For Each cp As ConstantProperties In Options.SelectedComponents.Values
+                xel.Add(New XElement("Compound", cp.SaveData().ToArray()))
+            Next
+
+        End If
+
+        If IncludeReactionSubsystem Then
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ReactionSets"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets")
+
+            For Each pp As KeyValuePair(Of String, Interfaces.IReactionSet) In Options.ReactionSets
+                xel.Add(New XElement("ReactionSet", DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
+            Next
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Reactions"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions")
+
+            For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In Options.Reactions
+                xel.Add(New XElement("Reaction", {DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+            Next
+
+        End If
+
+        If IncludeSpreadsheet Then
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))
+            xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("RGFData"))
+            Dim sdict As New Dictionary(Of String, String)
+            For Each sheet In FormSpreadsheet.Spreadsheet.Worksheets
+                Dim tmpfile = SharedClasses.Utility.GetTempFileName()
+                sheet.SaveRGF(tmpfile)
+                Dim xmldoc = New XmlDocument()
+                xmldoc.Load(tmpfile)
+                sdict.Add(sheet.Name, Newtonsoft.Json.JsonConvert.SerializeXmlNode(xmldoc))
+                File.Delete(tmpfile)
+            Next
+            xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict)
+
+        End If
+
+        If IncludeWindowLayout Then
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")
+
+            Dim myfile As String = SharedClasses.Utility.GetTempFileName()
+            dckPanel.SaveAsXml(myfile, System.Text.Encoding.UTF8)
+            xel.Add(File.ReadAllText(myfile).ToString)
+            File.Delete(myfile)
+
+        End If
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("MessagesLog"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog")
+
+        Dim inner_elements As New List(Of XElement)
+        For Each item In MessagesLog
+            inner_elements.Add(New XElement("Message", item))
+        Next
+        xel.Add(inner_elements)
+
+        Return xdoc
+
+    End Function
+
+    Public Sub RestoreSnapshot(xdata As XDocument, stype As SnapshotType) Implements IFlowsheet.RestoreSnapshot
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        Dim excs As New Concurrent.ConcurrentBag(Of Exception)
+
+        Dim xdoc As XDocument = xdata
+
+        Dim data As List(Of XElement) = Nothing
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("Settings") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
+
+            Try
+                Options.LoadData(data)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
+            End Try
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+
+            'graphic objects
+
+            Collections.GraphicObjectCollection.Clear()
+
+            For Each xel As XElement In data
+                Try
+                    xel.Element("Type").Value = xel.Element("Type").Value.Replace("Microsoft.MSDN.Samples.GraphicObjects", "DWSIM.DrawingTools.GraphicObjects")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("OT_Ajuste", "OT_Adjust")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("OT_Especificacao", "OT_Spec")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("OT_Reciclo", "OT_Recycle")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("GO_Texto", "GO_Text")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("GO_Figura", "GO_Image")
+                    Dim obj As GraphicObject = Nothing
+                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
+                    If Not t Is Nothing Then obj = Activator.CreateInstance(t)
+                    If obj Is Nothing Then
+                        If xel.Element("Type").Value.Contains("OxyPlotGraphic") Then
+                            obj = CType(Drawing.SkiaSharp.Extended.Shared.ReturnInstance(xel.Element("Type").Value.Replace("Shapes", "Charts")), GraphicObject)
+                        Else
+                            obj = CType(GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                        End If
+                    End If
+                    If Not obj Is Nothing Then
+                        obj.LoadData(xel.Elements.ToList)
+                        If TypeOf obj Is TableGraphic Then
+                            DirectCast(obj, TableGraphic).Flowsheet = Me
+                        ElseIf TypeOf obj Is MasterTableGraphic Then
+                            DirectCast(obj, MasterTableGraphic).Flowsheet = Me
+                        ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
+                            DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = Me
+                        ElseIf TypeOf obj Is Charts.OxyPlotGraphic Then
+                            DirectCast(obj, Charts.OxyPlotGraphic).Flowsheet = Me
+                        ElseIf TypeOf obj Is Shapes.RigorousColumnGraphic Or TypeOf obj Is Shapes.AbsorptionColumnGraphic Or TypeOf obj Is Shapes.CAPEOPENGraphic Then
+                            obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
+                            obj.PositionConnectors()
+                        ElseIf TypeOf obj Is Shapes.ExternalUnitOperationGraphic Then
+                            Dim euo = AvailableExternalUnitOperations.Values.Where(Function(x) x.Description = obj.Description).FirstOrDefault
+                            If euo IsNot Nothing Then
+                                obj.Owner = euo
+                                DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = obj
+                                obj.CreateConnectors(0, 0)
+                                obj.Owner = Nothing
+                                DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
+                            End If
+                        Else
+                            If obj.Name = "" Then obj.Name = obj.Tag
+                            obj.CreateConnectors(0, 0)
+                        End If
+                        obj.Flowsheet = Me
+                        FormSurface.FlowsheetSurface.DrawingObjects.Add(obj)
+                        Collections.GraphicObjectCollection.Add(obj.Name, obj)
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
+                End Try
+            Next
+
+            For Each xel As XElement In data
+                Try
+                    Dim id As String = xel.Element("Name").Value
+                    If id <> "" Then
+                        Dim obj As GraphicObject = (From go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                        If obj Is Nothing Then obj = (From go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
+                        If obj IsNot Nothing Then
+                            If xel.Element("InputConnectors") IsNot Nothing Then
+                                Dim i As Integer = 0
+                                For Each xel2 As XElement In xel.Element("InputConnectors").Elements
+                                    If xel2.@IsAttached = True Then
+                                        obj.InputConnectors(i).ConnectorName = xel2.@AttachedFromObjID & "|" & xel2.@AttachedFromConnIndex
+                                        obj.InputConnectors(i).Type = [Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType)
+                                    End If
+                                    i += 1
+                                Next
+                            End If
+                        End If
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
+                End Try
+            Next
+
+            For Each xel As XElement In data
+                Try
+                    Dim id As String = xel.Element("Name").Value
+                    If id <> "" Then
+                        Dim obj As GraphicObject = (From go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                        If obj IsNot Nothing Then
+                            If xel.Element("OutputConnectors") IsNot Nothing Then
+                                For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
+                                    If xel2.@IsAttached = True Then
+                                        Dim objToID = xel2.@AttachedToObjID
+                                        If objToID <> "" Then
+                                            Dim objTo As GraphicObject = (From go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
+                                            If objTo Is Nothing Then
+                                                objTo = (From go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
+                                            End If
+                                            Dim fromidx As Integer = -1
+                                            Dim cp As ConnectionPoint = (From cp2 As ConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = obj.Name).SingleOrDefault
+                                            If cp Is Nothing Then
+                                                cp = (From cp2 As ConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = xel2.@AttachedToObjID).SingleOrDefault
+                                            End If
+                                            If Not cp Is Nothing Then
+                                                fromidx = cp.ConnectorName.Split("|")(1)
+                                            End If
+                                            If Not obj Is Nothing And Not objTo Is Nothing Then
+                                                ConnectObject(obj, objTo, fromidx, xel2.@AttachedToConnIndex)
+                                            End If
+                                        End If
+                                    End If
+                                Next
+                            End If
+                            If xel.Element("EnergyConnector") IsNot Nothing Then
+                                For Each xel2 As XElement In xel.Element("EnergyConnector").Elements
+                                    If xel2.@IsAttached = True Then
+                                        Dim objToID = xel2.@AttachedToObjID
+                                        If objToID <> "" Then
+                                            Dim objTo As GraphicObject = (From go As GraphicObject In
+                                                                                        FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
+                                            If objTo Is Nothing Then
+                                                obj = (From go As GraphicObject In FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
+                                            End If
+                                            If Not obj Is Nothing And Not objTo Is Nothing Then
+                                                ConnectObject(obj, objTo, -1, xel2.@AttachedToConnIndex)
+                                            End If
+                                        End If
+                                    End If
+                                Next
+                            End If
+                        End If
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
+                End Try
+            Next
+
+            For Each obj In Collections.GraphicObjectCollection.Values
+                If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
+                    DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = Me
+                End If
+            Next
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("Compounds") IsNot Nothing Then
+
+            'compounds
+
+            Options.SelectedComponents.Clear()
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
+
+            For Each xel As XElement In data
+                Dim obj As New ConstantProperties
+                obj.Name = xel.Element("Name").Value
+                If Not AvailableCompounds.ContainsKey(obj.Name) Then AvailableCompounds.Add(obj.Name, obj)
+                Options.SelectedComponents.Add(obj.Name, obj)
+            Next
+
+            Parallel.ForEach(data, Sub(xel)
+                                       Try
+                                           Options.SelectedComponents(xel.Element("Name").Value).LoadData(xel.Elements.ToList)
+                                       Catch ex As Exception
+                                           excs.Add(New Exception("Error Loading Compound Information", ex))
+                                       End Try
+                                   End Sub)
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties").Elements.ToList
+
+            Try
+
+                ExtraProperties = New ExpandoObject
+
+                If Not data Is Nothing Then
+                    For Each xel As XElement In data
+                        Try
+                            Dim propname = xel.Element("Name").Value
+                            Dim proptype = xel.Element("PropertyType").Value
+                            Dim assembly1 As Assembly = Nothing
+                            For Each assembly In My.Application.Info.LoadedAssemblies
+                                If proptype.Contains(assembly.GetName().Name) Then
+                                    assembly1 = assembly
+                                    Exit For
+                                End If
+                            Next
+                            If assembly1 IsNot Nothing Then
+                                Dim ptype As Type = assembly1.GetType(proptype)
+                                Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                                DirectCast(ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
+            Catch ex As Exception
+
+                excs.Add(New Exception("Error Loading Dynamic Properties", ex))
+
+            End Try
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages") IsNot Nothing Then
+
+            Options.PropertyPackages.Clear()
+
+            Dim pp As New PropertyPackages.RaoultPropertyPackage
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
+
+            For Each xel As XElement In data
+                Try
+                    xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
+                    Dim obj As PropertyPackages.PropertyPackage = Nothing
+                    If xel.Element("Type").Value.Contains("ThermoC") Then
+                        Dim thermockey As String = "ThermoC Bridge"
+                        If AvailablePropertyPackages.ContainsKey(thermockey) Then
+                            obj = AvailablePropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
+                        End If
+                    Else
+                        Dim ppkey As String = xel.Element("ComponentName").Value
+                        If ppkey = "" Then
+                            obj = CType(New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackages.PropertyPackage)
+                        Else
+                            Dim ptype = xel.Element("Type").Value
+                            If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                                ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                            End If
+                            If AvailablePropertyPackages.ContainsKey(ppkey) Then
+                                obj = AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
+                            End If
+                        End If
+                    End If
+                    DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
+                    Dim newID As String = Guid.NewGuid.ToString
+                    If Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
+                    obj.Flowsheet = Me
+                    Options.PropertyPackages.Add(obj.UniqueID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Property Package Information", ex))
+                End Try
+            Next
+
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects") IsNot Nothing Then
+
+            Collections.FlowsheetObjectCollection.Clear()
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
+
+            Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
+
+            Dim fsuocount = (From go As GraphicObject In Collections.GraphicObjectCollection.Values Where go.ObjectType = ObjectType.FlowsheetUO).Count
+
+            For Each xel In data
+                Try
+                    Dim id As String = xel.<Name>.Value
+                    Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+                    If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
+                        obj = New Streams.MaterialStream()
+                    Else
+                        Dim uokey As String = xel.Element("ComponentDescription").Value
+                        If AvailableExternalUnitOperations.ContainsKey(uokey) Then
+                            obj = AvailableExternalUnitOperations(uokey).ReturnInstance(xel.Element("Type").Value)
+                        Else
+                            obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                        End If
+                    End If
+                    Dim gobj As GraphicObject = (From go As GraphicObject In
+                                        FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                    obj.GraphicObject = gobj
+                    gobj.Owner = obj
+                    obj.SetFlowsheet(Me)
+                    If Not gobj Is Nothing Then
+                        obj.LoadData(xel.Elements.ToList)
+                        If TypeOf obj Is Streams.MaterialStream Then
+                            For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                                For Each c As ConstantProperties In Options.SelectedComponents.Values
+                                    phase.Compounds(c.Name).ConstantProperties = c
+                                Next
+                            Next
+                        ElseIf TypeOf obj Is CapeOpenUO Then
+                            If DirectCast(obj, CapeOpenUO)._seluo.Name.ToLower.Contains("chemsep") Then
+                                DirectCast(gobj, Shapes.CAPEOPENGraphic).ChemSep = True
+                                If gobj.Height = 40 And gobj.Width = 40 Then
+                                    gobj.Width = 144
+                                    gobj.Height = 180
+                                End If
+                            End If
+                        ElseIf TypeOf obj Is Input Then
+                            GraphicObjectControlPanelModeEditors.SetInputDelegate(gobj, obj)
+                        ElseIf TypeOf obj Is PIDController Then
+                            GraphicObjectControlPanelModeEditors.SetPIDDelegate(gobj, obj)
+                        End If
+                    End If
+                    objlist.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Unit Operation Information", ex))
+                End Try
+            Next
+
+            'simulation objects
+
+            For Each obj In objlist
+                Try
+                    Dim id = obj.Name
+                    Collections.FlowsheetObjectCollection.Add(id, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Unit Operation Information", ex))
+                End Try
+            Next
+
+            For Each so As SharedClasses.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
+                Try
+                    If TryCast(so, Adjust) IsNot Nothing Then
+                        Dim so2 As Adjust = so
+                        If Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.ID) Then
+                            so2.ManipulatedObject = Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.ID)
+                            DirectCast(so2.GraphicObject, Shapes.AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
+                        End If
+                        If Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.ID) Then
+                            so2.ControlledObject = Collections.FlowsheetObjectCollection(so2.ControlledObjectData.ID)
+                            DirectCast(so2.GraphicObject, Shapes.AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
+                        End If
+                        If Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.ID) Then
+                            so2.ReferenceObject = Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.ID)
+                            DirectCast(so2.GraphicObject, Shapes.AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
+                        End If
+                    End If
+                    If TryCast(so, Spec) IsNot Nothing Then
+                        Dim so2 As Spec = so
+                        If Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.ID) Then
+                            so2.TargetObject = Collections.FlowsheetObjectCollection(so2.TargetObjectData.ID)
+                            DirectCast(so2.GraphicObject, Shapes.SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
+                        End If
+                        If Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.ID) Then
+                            so2.SourceObject = Collections.FlowsheetObjectCollection(so2.SourceObjectData.ID)
+                            DirectCast(so2.GraphicObject, Shapes.SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
+                        End If
+                    End If
+                    If TryCast(so, CapeOpenUO) IsNot Nothing Then
+                        DirectCast(so, CapeOpenUO).UpdateConnectors2()
+                        DirectCast(so, CapeOpenUO).UpdatePortsFromConnectors()
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Unit Operation Connection Information", ex))
+                End Try
+            Next
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets") IsNot Nothing Then
+
+            'reactions
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
+
+            Options.ReactionSets.Clear()
+
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New ReactionSet()
+                    obj.LoadData(xel.Elements.ToList)
+                    Options.ReactionSets.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Reaction Set Information", ex))
+                End Try
+            Next
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions").Elements.ToList
+
+            Options.Reactions.Clear()
+
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Reaction()
+                    obj.LoadData(xel.Elements.ToList)
+                    Options.Reactions.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Reaction Information", ex))
+                End Try
+            Next
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicsManager").Elements.ToList
+
+            Try
+                DirectCast(DynamicsManager, ICustomXMLSerialization).LoadData(data)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Dynamics Manager Information", ex))
+            End Try
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems") IsNot Nothing Then
+
+            ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Script()
+                    obj.LoadData(xel.Elements.ToList)
+                    ScriptCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Script Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems") IsNot Nothing Then
+
+            ChartCollection = New Dictionary(Of String, Interfaces.IChart)
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ChartItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClasses.Charts.Chart()
+                    obj.LoadData(xel.Elements.ToList)
+                    ChartCollection.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Chart Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog") IsNot Nothing Then
+
+            MessagesLog.Clear()
+
+            Try
+                data = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog").Elements.ToList
+                For Each xel As XElement In data
+                    MessagesLog.Add(xel.Value)
+                Next
+            Catch ex As Exception
+            End Try
+        End If
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet") IsNot Nothing Then
+
+            Try
+                If (Not (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet")) Is Nothing) Then
+                    Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
+                    Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    rgfdata = rgfdata.Replace("Calibri", "Arial").Replace("10.25", "10")
+                    Dim sdict As New Dictionary(Of String, String)
+                    sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
+                    FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
+                    For Each item In sdict
+                        Dim tmpfile = SharedClasses.Utility.GetTempFileName()
+                        Dim sheet = FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
+                        Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
+                        xmldoc.Save(tmpfile)
+                        sheet.LoadRGF(tmpfile)
+                        File.Delete(tmpfile)
+                    Next
+                    If (FormSpreadsheet.Spreadsheet.Worksheets.Count > 0) Then
+                        FormSpreadsheet.Spreadsheet.CurrentWorksheet = FormSpreadsheet.Spreadsheet.Worksheets(0)
+                    End If
+                End If
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
+            End Try
+
+        End If
+
+        If excs.Count > 0 Then
+
         End If
 
     End Sub
 
-    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs)
-
-        If TypeOf sender Is ToolStripMenuItem Then
-            Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-            For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
-                tsmi.Checked = False
-            Next
-            For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
-                tsmi.Checked = True
-                If tsmi Is hovereditem Then Exit For
-            Next
-        End If
-
-    End Sub
 
 #End Region
 

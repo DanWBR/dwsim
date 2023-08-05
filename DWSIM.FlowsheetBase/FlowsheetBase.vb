@@ -4281,5 +4281,17 @@ Label_00CC:
         Throw New NotImplementedException()
     End Sub
 
+#Region "    Snapshots"
+
+    Public Function GetSnapshot(type As SnapshotType) As XDocument Implements IFlowsheet.GetSnapshot
+        Throw New NotImplementedException()
+    End Function
+
+    Public Sub RestoreSnapshot(data As XDocument, type As SnapshotType) Implements IFlowsheet.RestoreSnapshot
+        Throw New NotImplementedException()
+    End Sub
+
+#End Region
+
 End Class
 

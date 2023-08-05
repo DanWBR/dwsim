@@ -110,6 +110,17 @@ Namespace Enums
         SpreadsheetCellChanged = 16
     End Enum
 
+    Public Enum SnapshotType
+        All = 0
+        ObjectDataAndLayout = 1
+        Compounds = 2
+        ReactionSubsystem = 3
+        PropertyPackages = 4
+        Spreadsheet = 5
+        SimulationSettings = 6
+        WindowLayout = 7
+    End Enum
+
     Public Enum FlowsheetUtility
         PhaseEnvelope = 0
         PhaseEnvelopeBinary = 1

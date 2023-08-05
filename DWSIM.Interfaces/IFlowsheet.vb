@@ -376,6 +376,10 @@
 
     Property AvailableExternalUnitOperations As Dictionary(Of String, IExternalUnitOperation)
 
+    Function GetSnapshot(type As Enums.SnapshotType) As XDocument
+
+    Sub RestoreSnapshot(data As XDocument, type As Enums.SnapshotType)
+
 End Interface
 
 ''' <summary>
