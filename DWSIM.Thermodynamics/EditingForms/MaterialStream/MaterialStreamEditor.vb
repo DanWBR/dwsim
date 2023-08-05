@@ -851,12 +851,13 @@ Public Class MaterialStreamEditor
 
     Private Sub btnCompAcceptChanges_Click(sender As Object, e As EventArgs) Handles btnCompAcceptChanges.Click
 
-
         Dim W, Q As Double
 
         MatStream.PropertyPackage.CurrentMaterialStream = MatStream
 
         If Me.ValidateData() Then
+
+            MatStream.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             Dim mmtotal As Double = 0
             Dim mtotal As Double = 0
@@ -1282,6 +1283,8 @@ Public Class MaterialStreamEditor
 
     Sub UpdateProps(sender As Object)
 
+        MatStream.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         Dim oldvalue, newvalue As Double, propname As String = ""
 
         If sender Is tbMassFlow Then
@@ -1351,17 +1354,6 @@ Public Class MaterialStreamEditor
             newvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             propname = "PROP_MS_27"
         End If
-
-        Try
-            MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
-                                                            .ObjID = MatStream.Name,
-                                                            .OldValue = oldvalue,
-                                                            .NewValue = newvalue,
-                                                            .PropertyName = propname,
-                                                            .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
-                                                            .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
-        Catch ex As Exception
-        End Try
 
         RequestCalc()
 

@@ -184,8 +184,13 @@ Public Class FormReacConv
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton4.Click
 
         If Me.tbStoich.Text <> "OK" Then
+
             MessageBox.Show(DWSIM.App.GetLocalString("VerifiqueEstequiometria"), DWSIM.App.GetLocalString("ErroAoAdicionarReacao"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         Else
+
+            fc.RegisterSnapshot(SnapshotType.ReactionSubsystem)
+
             'proceed with expression evaluation
 
             '// Define the context of our expression

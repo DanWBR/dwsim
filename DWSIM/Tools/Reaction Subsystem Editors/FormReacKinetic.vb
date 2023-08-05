@@ -282,8 +282,13 @@ Public Class FormReacKinetic
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton4.Click
 
         If Me.tbStoich.Text <> "OK" Then
+
             MessageBox.Show(DWSIM.App.GetLocalString("VerifiqueEstequiometria"), DWSIM.App.GetLocalString("ErroAoAdicionarReacao"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         Else
+
+            fc.RegisterSnapshot(SnapshotType.ReactionSubsystem)
+
             'Components, stoichiometry and reaction orders
             rc._Components.Clear()
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows

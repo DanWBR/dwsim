@@ -117,27 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ToolStripContainer1.BottomToolStripPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>572, 352</value>
   </data>
-  <data name="PanelFlowsheetControl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 346</value>
   </data>
-  <data name="btnLeft.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>566, 24</value>
-  </data>
-  <data name="btnUp.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>33, 385</value>
@@ -145,29 +133,17 @@
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>566, 24</value>
   </data>
-  <data name="btnDown.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>605, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 346</value>
   </data>
-  <data name="btnRight.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>632, 412</value>
   </data>
-  <data name="TableLayoutPanel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
-  </data>
-  <data name="Button1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 13</value>
@@ -178,29 +154,17 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Location</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnGetWeather.Location" type="System.Drawing.Point, System.Drawing">
     <value>182, 7</value>
   </data>
   <data name="btnGetWeather.Text" xml:space="preserve">
     <value>Get Weather Data</value>
   </data>
-  <data name="btnGetWeather.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbCurrentLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 9</value>
   </data>
-  <data name="tbCurrentLocation.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnGetLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>153, 7</value>
-  </data>
-  <data name="btnGetLocation.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>599, 0</value>
@@ -208,14 +172,8 @@
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 39</value>
   </data>
-  <data name="Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 13</value>
-  </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="tbAtmPress.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 10</value>
@@ -227,86 +185,44 @@
   <data name="tbAtmPress.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="tbAtmPress.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 7</value>
-  </data>
-  <data name="PictureBox6.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 13</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbAmbientTemperature.Location" type="System.Drawing.Point, System.Drawing">
     <value>39, 10</value>
-  </data>
-  <data name="tbAmbientTemperature.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 7</value>
   </data>
-  <data name="PictureBox5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>533, 13</value>
-  </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="tbSolarIrradiation.Location" type="System.Drawing.Point, System.Drawing">
     <value>479, 10</value>
   </data>
-  <data name="tbSolarIrradiation.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>449, 7</value>
-  </data>
-  <data name="PictureBox4.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>423, 13</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbHumidity.Location" type="System.Drawing.Point, System.Drawing">
     <value>381, 10</value>
-  </data>
-  <data name="tbHumidity.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>351, 7</value>
   </data>
-  <data name="PictureBox3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>310, 13</value>
-  </data>
-  <data name="Label1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="tbWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 10</value>
   </data>
-  <data name="tbWindSpeed.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 7</value>
-  </data>
-  <data name="PictureBox2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 412</value>
@@ -317,33 +233,15 @@
   <data name="PanelWeather.Size" type="System.Drawing.Size, System.Drawing">
     <value>929, 39</value>
   </data>
-  <data name="PanelWeather.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PanelWeather.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="SplitContainerHorizontal.Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SplitContainerHorizontal.Panel2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>632, 451</value>
-  </data>
-  <data name="SplitContainerHorizontal.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SplitContainerVertical.Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SplitContainerVertical.Panel2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
     <value>5</value>
@@ -354,26 +252,11 @@
   <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
     <value>632</value>
   </data>
-  <data name="SplitContainerVertical.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>992, 451</value>
   </data>
-  <data name="ToolStripContainer1.ContentPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ToolStripContainer1.LeftToolStripPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ToolStripContainer1.RightToolStripPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="ToolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>992, 524</value>
-  </data>
-  <data name="ToolStripContainer1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="tsmiHeatMap.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -471,9 +354,6 @@
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>989, 27</value>
-  </data>
-  <data name="ToolStrip1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStripFlowsheet.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -622,12 +502,6 @@
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>992, 46</value>
   </data>
-  <data name="ToolStripFlowsheet.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ToolStripContainer1.TopToolStripPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
@@ -729,9 +603,6 @@
   </data>
   <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 336</value>
-  </data>
-  <data name="CMS_NoSel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 22</value>
@@ -974,10 +845,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 530</value>
-  </data>
-  <data name="CMS_Sel.ToolTip" xml:space="preserve">
-    <value />
+    <value>273, 508</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1000,18 +868,6 @@
         0YP7u7s4gRERg/u7uziIiIiD+7u7OIAAAIP7u7s4gAAAg////ziAAACDMzMzOIiIiIiIiIiI//8AAAAA
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
-  </data>
-  <data name="PreviewDialog.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="CMS_ItemsToConnect.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="CMS_ItemsToDisconnect.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="dckMenu.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>992, 524</value>
@@ -1037,8 +893,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Flowsheet</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

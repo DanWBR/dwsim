@@ -4291,6 +4291,10 @@ Label_00CC:
         Throw New NotImplementedException()
     End Sub
 
+    Public Sub RegisterSnapshot(stype As SnapshotType) Implements IFlowsheet.RegisterSnapshot
+        Throw New NotImplementedException()
+    End Sub
+
 #End Region
 
 End Class

@@ -100,6 +100,8 @@ Public Class FormSimulSettings
             End If
         End If
 
+        CurrentFlowsheet?.EnableUndoRedo()
+
     End Sub
 
     Sub Init(Optional ByVal reset As Boolean = False)
@@ -1104,6 +1106,8 @@ Public Class FormSimulSettings
 
     Private Sub btnConfigPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConfigPP.Click
 
+        CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
+
         Dim ppid As String = ""
         If DWSIM.App.IsRunningOnMono Then
             ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
@@ -1116,6 +1120,9 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnDeletePP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeletePP.Click
+
+        CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
+
         If DWSIM.App.IsRunningOnMono Then
             If dgvpp.SelectedCells.Count > 0 Then
                 CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageRemoved,
@@ -1140,8 +1147,11 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnCopyPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyPP.Click
+
         Dim pp As PropertyPackages.PropertyPackage
+
         Try
+
             Dim ppid As String = ""
             If DWSIM.App.IsRunningOnMono Then
                 ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
@@ -1156,11 +1166,15 @@ Public Class FormSimulSettings
             End With
             CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
             Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
+
             CurrentFlowsheet.UpdateOpenEditForms()
+
+            CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
 
         Catch ex As Exception
 
         End Try
+
     End Sub
 
     Private Sub dgvpp_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvpp.CellValueChanged
@@ -1208,8 +1222,9 @@ Public Class FormSimulSettings
 
     Sub AddCompToSimulation(ByVal compid As String)
 
-        ' TODO Add code to check that index is within range. If it is out of range, don't do anything.
         If Me.loaded Then
+
+            CurrentFlowsheet.RegisterSnapshot(SnapshotType.Compounds)
 
             If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(compid) Then
 
@@ -1241,6 +1256,8 @@ Public Class FormSimulSettings
     End Sub
 
     Sub RemoveCompFromSimulation(ByVal compid As String)
+
+        CurrentFlowsheet.RegisterSnapshot(SnapshotType.Compounds)
 
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
@@ -1295,6 +1312,8 @@ Public Class FormSimulSettings
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
 
+        CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
+
         If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
             MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -1317,11 +1336,6 @@ Public Class FormSimulSettings
         FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
 
         CurrentFlowsheet.UpdateOpenEditForms()
-
-        CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageAdded,
-                                 .ObjID = pp.UniqueID,
-                                 .NewValue = pp.Clone,
-                                 .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackageAdded"), pp.Tag)})
 
     End Sub
 
@@ -1924,6 +1938,14 @@ Public Class FormSimulSettings
         Next
         ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+    End Sub
+
+    Private Sub FormSimulSettings_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+
+        If Visible Then
+            CurrentFlowsheet.RegisterSnapshot(SnapshotType.SimulationSettings)
+        End If
 
     End Sub
 

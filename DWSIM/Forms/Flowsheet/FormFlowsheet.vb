@@ -1441,6 +1441,7 @@ Public Class FormFlowsheet
             FrmStSim1.CurrentFlowsheet = Me
             Me.FrmStSim1.Show(Me.dckPanel)
         End If
+        DisableUndoRedo()
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
@@ -1678,7 +1679,11 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiRemoveSelected_Click(sender As Object, e As EventArgs) Handles tsmiRemoveSelected.Click
+
+        RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+
         Dim n As Integer = Me.FormSurface.FlowsheetSurface.SelectedObjects.Count
+
         If n > 1 Then
             If MessageBox.Show("Delete " & n & " objects?", "Mass delete", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 Dim indexes As New ArrayList
@@ -1694,9 +1699,13 @@ Public Class FormFlowsheet
                     End If
                 Next
             End If
+
         ElseIf n = 1 Then
+
             DeleteSelectedObject(sender, e, Me.FormSurface.FlowsheetSurface.SelectedObject)
+
         End If
+
     End Sub
 
     Public Sub tsmiCloneSelected_Click(sender As Object, e As EventArgs) Handles tsmiCloneSelected.Click
@@ -2154,7 +2163,7 @@ Public Class FormFlowsheet
 
     Public Sub DisconnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal triggercalc As Boolean = False)
 
-        'Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
 
         Dim conObj As ConnectorGraphic = Nothing
         Dim SelObj As GraphicObject = gObjFrom
@@ -2226,6 +2235,8 @@ Public Class FormFlowsheet
     Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
 
         'Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+
+        RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
 
         Me.FormSurface.FlowsheetSurface.ConnectObject(gObjFrom, gObjTo, fidx, tidx)
 
@@ -2738,6 +2749,24 @@ Public Class FormFlowsheet
 
 #Region "    Undo/Redo Handlers"
 
+    Sub EnableUndoRedo()
+        If UndoStack.Count > 0 Then
+            tsmiUndo.Enabled = False
+            tsbUndo.Enabled = False
+        End If
+        If RedoStack.Count > 0 Then
+            tsmiRedo.Enabled = False
+            tsbRedo.Enabled = False
+        End If
+    End Sub
+
+    Sub DisableUndoRedo()
+        tsmiUndo.Enabled = False
+        tsbUndo.Enabled = False
+        tsmiRedo.Enabled = False
+        tsbRedo.Enabled = False
+    End Sub
+
     Sub AddUndoRedoAction(act As Interfaces.IUndoRedoAction) Implements Interfaces.IFlowsheet.AddUndoRedoAction
 
         If Me.MasterFlowsheet Is Nothing Then
@@ -2814,6 +2843,8 @@ Public Class FormFlowsheet
 #Region "    Snapshots"
 
     Public Sub RegisterSnapshot(stype As SnapshotType) Implements IFlowsheet.RegisterSnapshot
+
+        UndoStack.Push(GetSnapshot(stype))
 
     End Sub
 

@@ -92,6 +92,8 @@ Public Class FormReacSetEditor
 
     Private Sub KryptonButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton3.Click
 
+        fc.RegisterSnapshot(SnapshotType.ReactionSubsystem)
+
         rs.Description = Me.KryptonTextBox1.Text
         rs.Name = Me.tbName.Text
         With rs.Reactions
