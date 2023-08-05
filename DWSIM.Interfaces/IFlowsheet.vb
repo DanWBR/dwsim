@@ -380,6 +380,8 @@
 
     Sub RestoreSnapshot(data As XDocument, type As Enums.SnapshotType)
 
+    Sub RegisterSnapshot(stype As Enums.SnapshotType)
+
 End Interface
 
 ''' <summary>

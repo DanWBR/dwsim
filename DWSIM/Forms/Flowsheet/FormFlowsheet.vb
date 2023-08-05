@@ -130,8 +130,8 @@ Public Class FormFlowsheet
 
     Private loaded As Boolean = False
 
-    Public UndoStack As New Stack(Of UndoRedoAction)
-    Public RedoStack As New Stack(Of UndoRedoAction)
+    Public UndoStack As New Stack(Of XDocument)
+    Public RedoStack As New Stack(Of XDocument)
 
     Private listeningaction As Action(Of String, Interfaces.IFlowsheet.MessageType)
 
@@ -2738,278 +2738,11 @@ Public Class FormFlowsheet
 
 #Region "    Undo/Redo Handlers"
 
-    Sub ProcessAction(act As UndoRedoAction, undo As Boolean)
-
-        Try
-
-            Dim pval As Object = Nothing
-
-            If undo Then pval = act.OldValue Else pval = act.NewValue
-
-            Select Case act.AType
-
-                Case UndoRedoActionType.SimulationObjectPropertyChanged
-
-                    Dim fobj = Me.Collections.FlowsheetObjectCollection(act.ObjID)
-
-                    If fobj.GetProperties(Interfaces.Enums.PropertyType.ALL).Contains(act.PropertyName) Then
-                        'Property is listed, set using SetProperty
-                        fobj.SetPropertyValue(act.PropertyName, pval, act.Tag)
-                    Else
-                        'Property not listed, set using Reflection
-                        Dim method As FieldInfo = fobj.GetType().GetField(act.PropertyName)
-                        If Not method Is Nothing Then
-                            method.SetValue(fobj, pval)
-                        Else
-                            fobj.GetType().GetProperty(act.PropertyName).SetValue(fobj, pval, Nothing)
-                        End If
-                    End If
-
-                Case UndoRedoActionType.FlowsheetObjectPropertyChanged
-
-                    Dim gobj = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID, FormSurface.FlowsheetSurface)
-
-                    'Property not listed, set using Reflection
-                    Dim method As FieldInfo = gobj.GetType().GetField(act.PropertyName)
-                    If Not method Is Nothing Then
-                        method.SetValue(gobj, pval)
-                    Else
-                        gobj.GetType().GetProperty(act.PropertyName).SetValue(gobj, pval, Nothing)
-                    End If
-
-                Case UndoRedoActionType.CompoundAdded
-
-                    If undo Then
-                        Me.FrmStSim1.RemoveCompFromSimulation(act.ObjID)
-                    Else
-                        Me.FrmStSim1.AddCompToSimulation(act.ObjID)
-                    End If
-
-                Case UndoRedoActionType.CompoundRemoved
-
-                    If undo Then
-                        Me.FrmStSim1.AddCompToSimulation(act.ObjID)
-                    Else
-                        Me.FrmStSim1.RemoveCompFromSimulation(act.ObjID)
-                    End If
-
-                Case UndoRedoActionType.ObjectAdded
-
-                    Dim gobj1 = DirectCast(act.NewValue, GraphicObject)
-
-                    If undo Then
-                        DeleteObject(gobj1.Tag, False)
-                    Else
-                        FormSurface.AddObjectToSurface(gobj1.ObjectType, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)
-                    End If
-
-                Case UndoRedoActionType.ObjectRemoved
-
-                    Dim gobj1 = DirectCast(act.NewValue, GraphicObject)
-
-                    If undo Then
-                        Collections.FlowsheetObjectCollection(FormSurface.AddObjectToSurface(gobj1.ObjectType, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)).LoadData(act.OldValue)
-                        FormFlowsheet.SearchSurfaceObjectsByName(gobj1.Name, Me.FormSurface.FlowsheetSurface).LoadData(gobj1.SaveData)
-                        If gobj1.ObjectType = ObjectType.MaterialStream Then
-                            For Each phase As BaseClasses.Phase In DirectCast(Collections.FlowsheetObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
-                                For Each c As ConstantProperties In Options.SelectedComponents.Values
-                                    phase.Compounds(c.Name).ConstantProperties = c
-                                Next
-                            Next
-                        End If
-                    Else
-                        DeleteObject(gobj1.Tag, False)
-                    End If
-
-                Case UndoRedoActionType.FlowsheetObjectConnected
-
-                    Dim gobj1 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID, FormSurface.FlowsheetSurface)
-                    Dim gobj2 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID2, FormSurface.FlowsheetSurface)
-
-                    If undo Then
-                        DisconnectObject(gobj1, gobj2)
-                    Else
-                        ConnectObject(gobj1, gobj2, act.OldValue, act.NewValue)
-                    End If
-
-                Case UndoRedoActionType.FlowsheetObjectDisconnected
-
-                    Dim gobj1 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID, FormSurface.FlowsheetSurface)
-                    Dim gobj2 = FormFlowsheet.SearchSurfaceObjectsByName(act.ObjID2, FormSurface.FlowsheetSurface)
-
-                    If undo Then
-                        ConnectObject(gobj1, gobj2, act.OldValue, act.NewValue)
-                    Else
-                        DisconnectObject(gobj1, gobj2)
-                    End If
-
-                Case UndoRedoActionType.PropertyPackageAdded
-
-                    If undo Then
-                        Me.Options.PropertyPackages.Remove(act.ObjID)
-                    Else
-                        Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.NewValue, Thermodynamics.PropertyPackages.PropertyPackage)
-                        Me.Options.PropertyPackages.Add(pp.UniqueID, pp)
-                    End If
-
-                Case UndoRedoActionType.PropertyPackageRemoved
-
-                    If undo Then
-                        Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.NewValue, Thermodynamics.PropertyPackages.PropertyPackage)
-                        Me.Options.PropertyPackages.Add(pp.UniqueID, pp)
-                    Else
-                        Me.Options.PropertyPackages.Remove(act.ObjID)
-                    End If
-
-                Case UndoRedoActionType.PropertyPackagePropertyChanged
-
-                    Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.Tag, Thermodynamics.PropertyPackages.PropertyPackage)
-
-                    If act.PropertyName = "PR_IP" Then
-                        Dim prip As PengRobinson = pp.GetType.GetField("m_pr").GetValue(pp)
-                        prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
-                    ElseIf act.PropertyName = "PRSV2_KIJ" Then
-                        Dim prip As PRSV2 = pp.GetType.GetField("m_pr").GetValue(pp)
-                        prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
-                    ElseIf act.PropertyName = "PRSV2_KJI Then" Then
-                        Dim prip As PRSV2 = pp.GetType.GetField("m_pr").GetValue(pp)
-                        prip.InteractionParameters(act.ObjID)(act.ObjID2).kji = pval
-                    ElseIf act.PropertyName = "PRSV2VL_KIJ" Then
-                        Dim prip As PRSV2VL = pp.GetType.GetField("m_pr").GetValue(pp)
-                        prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
-                    ElseIf act.PropertyName = "PRSV2VL_KJI Then" Then
-                        Dim prip As PRSV2VL = pp.GetType.GetField("m_pr").GetValue(pp)
-                        prip.InteractionParameters(act.ObjID)(act.ObjID2).kji = pval
-                    ElseIf act.PropertyName = "LK_IP" Then
-                        Dim prip As LeeKeslerPlocker = pp.GetType.GetField("m_lk").GetValue(pp)
-                        prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
-                    ElseIf act.PropertyName.Contains("NRTL") Then
-                        Dim nrtlip As NRTL = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
-                        Select Case act.PropertyName
-                            Case "NRTL_A12"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).A12 = pval
-                            Case "NRTL_A21"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).A21 = pval
-                            Case "NRTL_B12"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).B12 = pval
-                            Case "NRTL_B21"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).B21 = pval
-                            Case "NRTL_C12"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).C12 = pval
-                            Case "NRTL_C21"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).C21 = pval
-                            Case "NRTL_alpha12"
-                                nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).alpha12 = pval
-                        End Select
-                    ElseIf act.PropertyName.Contains("UNIQUAC") Then
-                        Dim uniquacip As UNIQUAC = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
-                        Select Case act.PropertyName
-                            Case "UNIQUAC_A12"
-                                uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).A12 = pval
-                            Case "UNIQUAC_A21"
-                                uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).A21 = pval
-                            Case "UNIQUAC_B12"
-                                uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).B12 = pval
-                            Case "UNIQUAC_B21"
-                                uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).B21 = pval
-                            Case "UNIQUAC_C12"
-                                uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).C12 = pval
-                            Case "UNIQUAC_C21"
-                                uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).C21 = pval
-                        End Select
-                    End If
-
-                Case UndoRedoActionType.SystemOfUnitsAdded
-
-                    Dim su = DirectCast(act.NewValue, SystemsOfUnits.Units)
-
-                    If undo Then
-                        Me.FrmStSim1.ComboBox2.SelectedIndex = 0
-                        Me.Options.AvailableUnitSystems.Remove(su.Name)
-                    Else
-                        Me.Options.AvailableUnitSystems.Add(su.Name, su)
-                    End If
-
-                Case UndoRedoActionType.SystemOfUnitsRemoved
-
-                    Dim su = DirectCast(act.NewValue, SystemsOfUnits.Units)
-
-                    If undo Then
-                        Me.Options.AvailableUnitSystems.Add(su.Name, su)
-                    Else
-                        Me.FrmStSim1.ComboBox2.SelectedIndex = 0
-                        Me.Options.AvailableUnitSystems.Remove(su.Name)
-                    End If
-
-                Case UndoRedoActionType.SystemOfUnitsChanged
-
-                    Dim sobj = My.Application.MainWindowForm.AvailableUnitSystems(act.ObjID)
-
-                    'Property not listed, set using Reflection
-                    Dim method As FieldInfo = sobj.GetType().GetField(act.ObjID2)
-                    method.SetValue(sobj, pval)
-
-                    FrmStSim1.ComboBox2_SelectedIndexChanged(Me, New EventArgs)
-
-                Case UndoRedoActionType.CutObjects
-
-                    Dim xmldata As String, objlist As List(Of GraphicObject)
-                    If undo Then
-                        xmldata = act.NewValue
-                        Clipboard.SetText(xmldata)
-                        PasteObjects(False)
-                    Else
-                        objlist = act.OldValue
-                        For Each obj In objlist
-                            DeleteSelectedObject(Me, New EventArgs, obj, False)
-                        Next
-                    End If
-
-                Case UndoRedoActionType.PasteObjects
-
-                    Dim xmldata As String, objlist As List(Of GraphicObject)
-                    If undo Then
-                        objlist = act.NewValue
-                        For Each obj In objlist
-                            DeleteSelectedObject(Me, New EventArgs, obj, False)
-                        Next
-                    Else
-                        xmldata = act.OldValue
-                        Clipboard.SetText(xmldata)
-                        PasteObjects(False)
-                    End If
-
-                Case UndoRedoActionType.SpreadsheetCellChanged
-
-                    Dim cell = FormSpreadsheet.GetCellValue(act.ObjID)
-                    If undo Then
-                        cell.Data = act.OldValue(0)
-                        cell.Tag = act.OldValue(1)
-                    Else
-                        cell.Data = act.NewValue(0)
-                        cell.Tag = act.NewValue(1)
-                    End If
-                    FormSpreadsheet.Spreadsheet.Worksheets(0).Recalculate()
-
-            End Select
-
-            Me.FormSurface.UpdateSelectedObject()
-
-        Catch ex As Exception
-
-            WriteToLog(ex.ToString(), Color.Red, SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError)
-
-        End Try
-
-    End Sub
-
     Sub AddUndoRedoAction(act As Interfaces.IUndoRedoAction) Implements Interfaces.IFlowsheet.AddUndoRedoAction
 
         If Me.MasterFlowsheet Is Nothing Then
 
-            act.ID = Guid.NewGuid().ToString
-
-            UndoStack.Push(act)
+            UndoStack.Push(GetSnapshot(SnapshotType.All))
 
             RedoStack.Clear()
 
@@ -3017,10 +2750,6 @@ Public Class FormFlowsheet
             tsmiUndo.Enabled = True
             tsbRedo.Enabled = False
             tsmiRedo.Enabled = False
-            tsbRedo.Text = DWSIM.App.GetLocalString("Redo")
-            tsmiRedo.Text = DWSIM.App.GetLocalString("Redo")
-
-            PopulateUndoRedoItems()
 
         End If
 
@@ -3028,24 +2757,28 @@ Public Class FormFlowsheet
 
     Private Sub tsbUndo_Click_1(sender As Object, e As EventArgs) Handles tsbUndo.Click
 
-        Dim data = GetSnapshot(SnapshotType.All)
+        'Dim data = GetSnapshot(SnapshotType.All)
 
-        RestoreSnapshot(data, SnapshotType.All)
+        'RestoreSnapshot(data, SnapshotType.All)
+
+        ProcessUndo()
 
     End Sub
 
     Private Sub tsbRedo_Click_1(sender As Object, e As EventArgs) Handles tsbRedo.Click
+
+        ProcessRedo()
 
     End Sub
 
     Public Sub ProcessUndo()
 
         If UndoStack.Count > 0 Then
-            Dim act = UndoStack.Pop()
+            Dim xdata = UndoStack.Pop()
             My.Application.PushUndoRedoAction = False
-            ProcessAction(act, True)
+            RestoreSnapshot(xdata, SnapshotType.All)
             My.Application.PushUndoRedoAction = True
-            RedoStack.Push(act)
+            RedoStack.Push(xdata)
             tsbRedo.Enabled = True
             tsmiRedo.Enabled = True
         End If
@@ -3053,8 +2786,6 @@ Public Class FormFlowsheet
         If UndoStack.Count = 0 Then
             tsbUndo.Enabled = False
             tsmiUndo.Enabled = False
-            tsbUndo.Text = DWSIM.App.GetLocalString("Undo")
-            tsmiUndo.Text = DWSIM.App.GetLocalString("Undo")
         End If
 
     End Sub
@@ -3062,11 +2793,11 @@ Public Class FormFlowsheet
     Public Sub ProcessRedo()
 
         If RedoStack.Count > 0 Then
-            Dim act = RedoStack.Pop()
+            Dim xdata = RedoStack.Pop()
             My.Application.PushUndoRedoAction = False
-            ProcessAction(act, False)
+            RestoreSnapshot(xdata, SnapshotType.All)
             My.Application.PushUndoRedoAction = True
-            UndoStack.Push(act)
+            UndoStack.Push(xdata)
             tsbUndo.Enabled = True
             tsmiUndo.Enabled = True
         End If
@@ -3074,27 +2805,17 @@ Public Class FormFlowsheet
         If RedoStack.Count = 0 Then
             tsbRedo.Enabled = False
             tsmiRedo.Enabled = False
-            tsbRedo.Text = DWSIM.App.GetLocalString("Redo")
-            tsmiRedo.Text = DWSIM.App.GetLocalString("Redo")
         End If
-
-    End Sub
-
-    Private Sub PopulateUndoRedoItems()
-
-    End Sub
-
-    Sub UndoActions(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Sub RedoActions(sender As Object, e As EventArgs)
 
     End Sub
 
 #End Region
 
 #Region "    Snapshots"
+
+    Public Sub RegisterSnapshot(stype As SnapshotType) Implements IFlowsheet.RegisterSnapshot
+
+    End Sub
 
     Public Function GetSnapshot(stype As SnapshotType) As XDocument Implements IFlowsheet.GetSnapshot
 
