@@ -247,6 +247,8 @@ Public Class EditingForm_OrificePlate
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
@@ -377,6 +379,8 @@ Public Class EditingForm_OrificePlate
 
     Private Sub rbCorner_CheckedChanged(sender As Object, e As EventArgs) Handles rbCorner.CheckedChanged, rbFlange.CheckedChanged, rbRadius.CheckedChanged
 
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         If sender Is rbCorner Then
             If rbCorner.Checked Then SimObject.OrifType = UnitOperations.OrificePlate.OrificeType.CornerTaps
         ElseIf sender Is rbFlange Then
@@ -390,6 +394,8 @@ Public Class EditingForm_OrificePlate
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

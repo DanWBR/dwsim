@@ -104,6 +104,8 @@ Partial Class FormFlowsheet
         Me.tsbAbortCalc = New System.Windows.Forms.ToolStripButton()
         Me.tsbSimultAdjustSolver = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbUndo = New System.Windows.Forms.ToolStripButton()
+        Me.tsbRedo = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.tsbDynamics = New System.Windows.Forms.ToolStripButton()
@@ -125,8 +127,7 @@ Partial Class FormFlowsheet
         Me.lblLastMessage = New System.Windows.Forms.LinkLabel()
         Me.btnOpenLogPanel = New System.Windows.Forms.Button()
         Me.btnViewFullLog = New System.Windows.Forms.Button()
-        Me.tsbUndo = New System.Windows.Forms.ToolStripButton()
-        Me.tsbRedo = New System.Windows.Forms.ToolStripButton()
+        Me.tspb1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -615,7 +616,7 @@ Partial Class FormFlowsheet
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tsbAtivar, Me.tsbCalcF, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver, Me.ToolStripSeparator2, Me.tsbUndo, Me.tsbRedo, Me.ToolStripSeparator3, Me.ToolStripLabel2, Me.tsbDynamics, Me.tsbDynManager, Me.tsbDynIntegrator, Me.ToolStripSeparator4, Me.ToolStripLabel1, Me.tscbStoredSolutions, Me.tsbStoreSolution, Me.tsbLoadSolution, Me.tsbDeleteSolution})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tsbAtivar, Me.tsbCalcF, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver, Me.ToolStripSeparator2, Me.tsbUndo, Me.tsbRedo, Me.tspb1, Me.ToolStripSeparator3, Me.ToolStripLabel2, Me.tsbDynamics, Me.tsbDynManager, Me.tsbDynIntegrator, Me.ToolStripSeparator4, Me.ToolStripLabel1, Me.tscbStoredSolutions, Me.tsbStoreSolution, Me.tsbLoadSolution, Me.tsbDeleteSolution})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
@@ -670,6 +671,20 @@ Partial Class FormFlowsheet
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        '
+        'tsbUndo
+        '
+        Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_96px
+        resources.ApplyResources(Me.tsbUndo, "tsbUndo")
+        Me.tsbUndo.Name = "tsbUndo"
+        '
+        'tsbRedo
+        '
+        Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_96px
+        resources.ApplyResources(Me.tsbRedo, "tsbRedo")
+        Me.tsbRedo.Name = "tsbRedo"
         '
         'ToolStripSeparator3
         '
@@ -832,19 +847,11 @@ Partial Class FormFlowsheet
         Me.btnViewFullLog.Name = "btnViewFullLog"
         Me.btnViewFullLog.UseVisualStyleBackColor = True
         '
-        'tsbUndo
+        'tspb1
         '
-        Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_96px
-        resources.ApplyResources(Me.tsbUndo, "tsbUndo")
-        Me.tsbUndo.Name = "tsbUndo"
-        '
-        'tsbRedo
-        '
-        Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_96px
-        resources.ApplyResources(Me.tsbRedo, "tsbRedo")
-        Me.tsbRedo.Name = "tsbRedo"
+        Me.tspb1.Name = "tspb1"
+        resources.ApplyResources(Me.tspb1, "tspb1")
+        Me.tspb1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         '
         'FormFlowsheet
         '
@@ -976,4 +983,5 @@ Partial Class FormFlowsheet
     Friend WithEvents btnViewFullLog As Button
     Friend WithEvents tsbUndo As ToolStripButton
     Friend WithEvents tsbRedo As ToolStripButton
+    Friend WithEvents tspb1 As ToolStripProgressBar
 End Class

@@ -301,6 +301,7 @@ Public Class EditingForm_Column_Connections_New
 
     Private Sub gridSideDrawSpecs_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridSideDrawSpecs.CellValueChanged
         If loaded Then
+            rc.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
             Dim id = gridSideDrawSpecs.Rows(e.RowIndex).Cells(0).Value
             Dim value = gridSideDrawSpecs.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             If rc.MaterialStreams.ContainsKey(id) Then
@@ -325,6 +326,7 @@ Public Class EditingForm_Column_Connections_New
 
     Private Sub gridAssociations_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridAssociations.CellValueChanged
         If loaded Then
+            rc.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
             Dim id = gridAssociations.Rows(e.RowIndex).Cells(0).Value
             Dim value = gridAssociations.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             If rc.MaterialStreams.ContainsKey(id) Then

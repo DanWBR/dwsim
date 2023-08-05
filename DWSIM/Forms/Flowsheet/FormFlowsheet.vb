@@ -2013,10 +2013,6 @@ Public Class FormFlowsheet
                         Next
                         gobj = SelectedObj
 
-                        If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.ObjectRemoved,
-                                             .NewValue = gobj,
-                                             .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
-                                             .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
                         'DWSIM
                         Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
                         Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
@@ -2110,14 +2106,6 @@ Public Class FormFlowsheet
                                     Me.Collections.FlowsheetObjectCollection(adjobj.ReferencedObjectData.ID).AttachedAdjustId = ""
                                 End If
                             End If
-
-                            Try
-                                If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.ObjectRemoved,
-                                                                         .NewValue = gobj,
-                                                                         .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
-                                                                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
-                            Catch ex As Exception
-                            End Try
 
                             'DWSIM
                             If Me.Collections.FlowsheetObjectCollection.ContainsKey(namesel) Then
@@ -2220,15 +2208,6 @@ Public Class FormFlowsheet
                 End If
             End If
         End If
-
-        If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.FlowsheetObjectDisconnected,
-                                     .ObjID = gobj1.Name,
-                                     .ObjID2 = gobj2.Name,
-                                     .OldValue = i1,
-                                     .NewValue = i2,
-                                     .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectDisconnected"), gobj1.Tag, gobj2.Tag)})
-
-        'If triggercalc Then ProcessCalculationQueue(Me, Nothing, False, False) Else Me.CalculationQueue.Clear()
 
     End Sub
 
@@ -2486,13 +2465,6 @@ Public Class FormFlowsheet
 
         Try
 
-            My.Application.PushUndoRedoAction = False
-
-            If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CutObjects,
-                                     .NewValue = Clipboard.GetText,
-                                     .OldValue = Me.FormSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
-                                     .Name = DWSIM.App.GetLocalString("UndoRedo_Cut")})
-
             Dim indexes As New ArrayList
             For Each gobj As GraphicObject In Me.FormSurface.FlowsheetSurface.SelectedObjects.Values
                 indexes.Add(gobj.Tag)
@@ -2505,8 +2477,6 @@ Public Class FormFlowsheet
                     Me.FormSurface.FlowsheetSurface.SelectedObjects.Remove(gobj.Name)
                 End If
             Next
-
-            My.Application.PushUndoRedoAction = True
 
         Catch ex As Exception
 
@@ -2584,8 +2554,6 @@ Public Class FormFlowsheet
     End Sub
 
     Sub PasteObjects(Optional ByVal addundo As Boolean = True)
-
-        My.Application.PushUndoRedoAction = False
 
         Dim pkey As String = New Random().Next().ToString & "_"
 
@@ -2732,13 +2700,6 @@ Public Class FormFlowsheet
                 FormSurface.FlowsheetSurface.SelectedObjects.Add(obj.Name, obj.GraphicObject)
             Next
 
-            If addundo Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PasteObjects,
-                                         .OldValue = Clipboard.GetText,
-                                         .NewValue = Me.FormSurface.FlowsheetSurface.SelectedObjects.Values.ToList,
-                                         .Name = DWSIM.App.GetLocalString("UndoRedo_Paste")})
-
-            My.Application.PushUndoRedoAction = True
-
         Catch ex As Exception
 
         End Try
@@ -2769,7 +2730,7 @@ Public Class FormFlowsheet
 
     Sub AddUndoRedoAction(act As Interfaces.IUndoRedoAction) Implements Interfaces.IFlowsheet.AddUndoRedoAction
 
-        If Me.MasterFlowsheet Is Nothing Then
+        If Options.EnabledUndoRedo AndAlso Me.MasterFlowsheet Is Nothing Then
 
             UndoStack.Push(GetSnapshot(SnapshotType.All))
 
@@ -2786,17 +2747,15 @@ Public Class FormFlowsheet
 
     Private Sub tsbUndo_Click_1(sender As Object, e As EventArgs) Handles tsbUndo.Click
 
-        'Dim data = GetSnapshot(SnapshotType.All)
-
-        'RestoreSnapshot(data, SnapshotType.All)
-
         ProcessUndo()
+        UpdateOpenEditForms()
 
     End Sub
 
     Private Sub tsbRedo_Click_1(sender As Object, e As EventArgs) Handles tsbRedo.Click
 
         ProcessRedo()
+        UpdateOpenEditForms()
 
     End Sub
 
@@ -2804,9 +2763,9 @@ Public Class FormFlowsheet
 
         If UndoStack.Count > 0 Then
             Dim xdata = UndoStack.Pop()
-            My.Application.PushUndoRedoAction = False
+            Options.EnabledUndoRedo = False
             RestoreSnapshot(xdata, SnapshotType.All)
-            My.Application.PushUndoRedoAction = True
+            Options.EnabledUndoRedo = True
             RedoStack.Push(xdata)
             tsbRedo.Enabled = True
             tsmiRedo.Enabled = True
@@ -2823,9 +2782,9 @@ Public Class FormFlowsheet
 
         If RedoStack.Count > 0 Then
             Dim xdata = RedoStack.Pop()
-            My.Application.PushUndoRedoAction = False
+            Options.EnabledUndoRedo = False
             RestoreSnapshot(xdata, SnapshotType.All)
-            My.Application.PushUndoRedoAction = True
+            Options.EnabledUndoRedo = True
             UndoStack.Push(xdata)
             tsbUndo.Enabled = True
             tsmiUndo.Enabled = True
@@ -2844,7 +2803,28 @@ Public Class FormFlowsheet
 
     Public Sub RegisterSnapshot(stype As SnapshotType) Implements IFlowsheet.RegisterSnapshot
 
-        UndoStack.Push(GetSnapshot(stype))
+        If Options.EnabledUndoRedo Then
+
+            tspb1.Visible = True
+
+            Task.Run(Function()
+                         Return GetSnapshot(stype)
+                     End Function).ContinueWith(
+                 Sub(t)
+                     If t.Exception Is Nothing Then
+                         UndoStack.Push(t.Result)
+                         RedoStack.Clear()
+                         UIThread(Sub()
+                                      tsbUndo.Enabled = True
+                                      tsmiUndo.Enabled = True
+                                      tsbRedo.Enabled = False
+                                      tsmiRedo.Enabled = False
+                                  End Sub)
+                     End If
+                     UIThread(Sub() tspb1.Visible = False)
+                 End Sub)
+
+        End If
 
     End Sub
 
@@ -3047,6 +3027,7 @@ Public Class FormFlowsheet
 
             Try
                 Options.LoadData(data)
+                Options.EnabledUndoRedo = False
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
             End Try
@@ -3060,6 +3041,7 @@ Public Class FormFlowsheet
             'graphic objects
 
             Collections.GraphicObjectCollection.Clear()
+            FormSurface.FlowsheetSurface.DrawingObjects.Clear()
 
             For Each xel As XElement In data
                 Try

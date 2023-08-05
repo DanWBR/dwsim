@@ -125,6 +125,7 @@ Public Class EditingForm_WindTurbine
 
     Private Sub chkUseGlobalIrr_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseGlobalIrr.CheckedChanged
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             SimObject.UseUserDefinedWeather = Not chkUseGlobalIrr.Checked
             tbWindSpeed.Enabled = Not chkUseGlobalIrr.Checked
             tbRelHum.Enabled = Not chkUseGlobalIrr.Checked
@@ -203,6 +204,8 @@ Public Class EditingForm_WindTurbine
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

@@ -285,6 +285,9 @@ Public Class EditingForm_ComprExpndr
     End Sub
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
+
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         'Pressão na Saída
         'Variação da Pressão
         'Potência Fornecida / Produzida
@@ -387,6 +390,9 @@ Public Class EditingForm_ComprExpndr
     End Sub
 
     Private Sub cbProcessPath_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProcessPath.SelectedIndexChanged
+
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         Select Case cbProcessPath.SelectedIndex
             Case 0
                 tbEfficiency.Enabled = True
@@ -529,6 +535,8 @@ Public Class EditingForm_ComprExpndr
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
@@ -539,6 +547,7 @@ Public Class EditingForm_ComprExpndr
 
     Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
             RequestCalc()
         End If
@@ -719,6 +728,8 @@ Public Class EditingForm_ComprExpndr
 
         If e.KeyCode = Keys.Enter Then
 
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
             Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
@@ -729,6 +740,8 @@ Public Class EditingForm_ComprExpndr
     End Sub
 
     Private Sub btnCurves_Click(sender As Object, e As EventArgs) Handles btnCurves.Click
+
+        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
         Dim f As New EditingForm_CompressorExpander_Curves() With {.simobj = SimObject}
         SimObject.FlowSheet.DisplayForm(f)

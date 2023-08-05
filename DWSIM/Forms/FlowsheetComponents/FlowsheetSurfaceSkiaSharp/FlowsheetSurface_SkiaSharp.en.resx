@@ -119,16 +119,16 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 352</value>
+    <value>572, 375</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 346</value>
+    <value>24, 369</value>
   </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>566, 24</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 385</value>
+    <value>33, 408</value>
   </data>
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>566, 24</value>
@@ -137,10 +137,10 @@
     <value>605, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 346</value>
+    <value>24, 369</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 412</value>
+    <value>632, 435</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
@@ -225,7 +225,7 @@
     <value>232, 7</value>
   </data>
   <data name="PanelWeather.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 412</value>
+    <value>0, 435</value>
   </data>
   <data name="PanelWeather.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>929, 0</value>
@@ -241,19 +241,19 @@
     <value>120</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 451</value>
+    <value>632, 474</value>
   </data>
   <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 451</value>
+    <value>992, 474</value>
   </data>
   <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
     <value>632</value>
   </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 451</value>
+    <value>992, 474</value>
   </data>
   <data name="ToolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>992, 524</value>
@@ -500,7 +500,7 @@
     <value>0, 27</value>
   </data>
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 46</value>
+    <value>992, 23</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
@@ -845,7 +845,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 508</value>
+    <value>273, 530</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

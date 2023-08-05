@@ -50,6 +50,9 @@ Public Class EditingForm_Valve
             AddHandler .CellDataChanged,
                 Sub(sender, e)
                     If Loaded And Not Filling Then
+
+                        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
                         SimObject.OpeningKvRelDataTableX.Clear()
                         SimObject.OpeningKvRelDataTableY.Clear()
                         For i = 0 To 99
@@ -231,6 +234,8 @@ Public Class EditingForm_Valve
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
 
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         'Pressão na Saída
         'Variação da Pressão
         Select Case cbCalcMode.SelectedIndex
@@ -378,6 +383,8 @@ Public Class EditingForm_Valve
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
@@ -388,6 +395,7 @@ Public Class EditingForm_Valve
 
     Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
             RequestCalc()
         End If
@@ -550,6 +558,7 @@ Public Class EditingForm_Valve
     End Sub
 
     Private Sub chkEnableKvOpRel_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableKvOpRel.CheckedChanged
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
         SimObject.EnableOpeningKvRelationship = chkEnableKvOpRel.Checked
         Panel1.Enabled = chkEnableKvOpRel.Checked
     End Sub
@@ -565,6 +574,8 @@ Public Class EditingForm_Valve
 
         If e.KeyCode = Keys.Enter Then
 
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
             Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
@@ -576,6 +587,8 @@ Public Class EditingForm_Valve
 
     Private Sub btnCalcKv_Click(sender As Object, e As EventArgs) Handles btnCalcKv.Click
 
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         SimObject.CalculateKv()
 
         UpdateInfo()
@@ -583,6 +596,7 @@ Public Class EditingForm_Valve
     End Sub
 
     Private Sub rbKv_CheckedChanged(sender As Object, e As EventArgs) Handles rbKv.CheckedChanged, rbCv.CheckedChanged
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
         If rbCv.Checked Then SimObject.FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Cv
         If rbKv.Checked Then SimObject.FlowCoefficient = UnitOperations.Valve.FlowCoefficientType.Kv
     End Sub
@@ -595,6 +609,9 @@ Public Class EditingForm_Valve
     End Sub
 
     Private Sub cbOpeningKvRelType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOpeningKvRelType.SelectedIndexChanged
+
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         SimObject.DefinedOpeningKvRelationShipType = cbOpeningKvRelType.SelectedIndex
 
         gbTable.Enabled = False

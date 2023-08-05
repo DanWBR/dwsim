@@ -36,8 +36,6 @@ Namespace My
 
         Public UtilityPlugins As New Dictionary(Of String, Interfaces.IUtilityPlugin)
 
-        Public Property PushUndoRedoAction As Boolean = True
-
         Public Property ActiveSimulation As FormFlowsheet
 
         Public Property MainWindowForm As FormMain

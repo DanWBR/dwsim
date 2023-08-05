@@ -222,6 +222,8 @@ Public Class EditingForm_Splitter
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
 
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         Select Case cbCalcMode.SelectedIndex
             Case 0
                 TrackBar1.Enabled = True
@@ -354,6 +356,8 @@ Public Class EditingForm_Splitter
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbFlowSpec1.KeyDown, tbFlowSpec2.KeyDown, tbRatio2.KeyDown, tbRatio1.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
+
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             UpdateProps(sender)
 
@@ -491,6 +495,7 @@ Public Class EditingForm_Splitter
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             SimObject.Ratios(0) = TrackBar1.Value / 10000.0
             If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
                 TrackBar2.Value = 10000 - TrackBar1.Value
@@ -503,6 +508,7 @@ Public Class EditingForm_Splitter
 
     Private Sub TrackBar2_Scroll(sender As Object, e As EventArgs) Handles TrackBar2.Scroll
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             SimObject.Ratios(1) = TrackBar2.Value / 10000
             If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
                 TrackBar1.Value = 10000 - TrackBar2.Value
@@ -583,6 +589,8 @@ Public Class EditingForm_Splitter
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

@@ -107,20 +107,23 @@ Public Class ObjectEditorForm
 
         Me.AutoScaleMode = AutoScaleMode.Dpi
 
-        Dim controls = GetAllChildren(Me)
+        'Dim controls = GetAllChildren(Me)
 
-        For Each control As Control In controls
-            control.Font = Drawing.SystemFonts.MessageBoxFont
-            If GlobalSettings.Settings.DpiScale > 1.0 Then
-                If TypeOf control Is DataGridView Then
-                    Dim dgv = DirectCast(control, DataGridView)
-                    dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
-                    dgv.AllowUserToResizeRows = False
-                    dgv.RowTemplate.Height = 23 * GlobalSettings.Settings.DpiScale
-                    dgv.ColumnHeadersHeight *= GlobalSettings.Settings.DpiScale
-                End If
-            End If
-        Next
+        'For Each control As Control In controls
+        '    If TypeOf control Is TextBox Then
+        '        Dim instance = DirectCast(control, TextBox)
+        '        AddHandler instance.KeyDown,
+        '            Sub(s2, e2)
+        '                If e2.KeyCode = Keys.Enter Then
+
+        '                End If
+        '            End Sub
+        '    ElseIf TypeOf control Is NumericUpDown Then
+
+        '    ElseIf TypeOf control Is ComboBox Then
+
+        '    End If
+        'Next
 
     End Sub
 

@@ -2691,10 +2691,6 @@ Public Class FlowsheetSurface_SkiaSharp
             'End If
             gObj.PositionConnectors()
             Application.DoEvents()
-            If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = UndoRedoActionType.ObjectAdded,
-                                     .ObjID = gObj.Name,
-                                     .NewValue = gObj,
-                                     .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectAdded"), gObj.Tag)})
         End If
 
         SplitContainerHorizontal.Panel1.Cursor = Cursors.Arrow
@@ -3294,8 +3290,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub SplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SplitToolStripMenuItem.Click
 
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
         Try
-            My.Application.PushUndoRedoAction = False
             Dim stream = FlowsheetSurface.SelectedObject
             Dim newstream = CloneObject(stream)
             newstream.CreateConnectors(1, 1)
@@ -3312,16 +3308,14 @@ Public Class FlowsheetSurface_SkiaSharp
             newstream.FlippedH = stream.FlippedH
 
         Catch ex As Exception
-        Finally
-            My.Application.PushUndoRedoAction = True
         End Try
 
     End Sub
 
     Private Sub MergeStreamsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeStreamsToolStripMenuItem.Click
 
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
         Try
-            My.Application.PushUndoRedoAction = False
             Dim stream1 = FlowsheetSurface.SelectedObjects.Values.ElementAt(0)
             Dim stream2 = FlowsheetSurface.SelectedObjects.Values.ElementAt(1)
 
@@ -3339,8 +3333,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.ConnectObjects(stream1, objto, 0, toidx)
             End If
         Catch ex As Exception
-        Finally
-            My.Application.PushUndoRedoAction = True
         End Try
 
     End Sub
@@ -3688,9 +3680,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub SplitAndInsertRecycleMenuItem_Click(sender As Object, e As EventArgs) Handles SplitAndInsertRecycleMenuItem.Click
 
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
         Try
-
-            My.Application.PushUndoRedoAction = False
 
             Dim stream = FlowsheetSurface.SelectedObject
             Dim newstream = CloneObject(stream)
@@ -3740,8 +3731,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Catch ex As Exception
 
-        Finally
-            My.Application.PushUndoRedoAction = True
         End Try
 
     End Sub
@@ -3778,9 +3767,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub SplitAndInsertValveTSMI_Click(sender As Object, e As EventArgs) Handles SplitAndInsertValveTSMI.Click
 
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
         Try
-
-            My.Application.PushUndoRedoAction = False
 
             Dim stream = FlowsheetSurface.SelectedObject
             Dim newstream = CloneObject(stream)
@@ -3841,8 +3829,6 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Catch ex As Exception
 
-        Finally
-            My.Application.PushUndoRedoAction = True
         End Try
 
 

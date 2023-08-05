@@ -182,6 +182,8 @@ Public Class EditingForm_Recycle
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
@@ -307,6 +309,7 @@ Public Class EditingForm_Recycle
 
     Private Sub chkGlobalBroyden_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobalBroyden.CheckedChanged
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             If chkGlobalBroyden.Checked Then SimObject.AccelerationMethod = Enums.AccelMethod.GlobalBroyden Else SimObject.AccelerationMethod = Enums.AccelMethod.None
         End If
     End Sub
@@ -314,6 +317,8 @@ Public Class EditingForm_Recycle
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

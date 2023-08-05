@@ -168,6 +168,7 @@ Public Class EditingForm_CompoundSeparator
 
     Private Sub DataGridView1_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
         If Me.Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             Dim compid As String = Me.DataGridView1.Rows(e.RowIndex).Cells(0).Value
             Dim newval As Object = Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Select Case e.ColumnIndex
@@ -229,6 +230,7 @@ Public Class EditingForm_CompoundSeparator
 
     Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
         If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
             SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
             RequestCalc()
         End If
@@ -367,6 +369,7 @@ Public Class EditingForm_CompoundSeparator
     End Sub
 
     Private Sub rbStream1_CheckedChanged(sender As Object, e As EventArgs) Handles rbStream1.CheckedChanged
+        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
         If rbStream1.Checked Then SimObject.SpecifiedStreamIndex = 0 Else SimObject.SpecifiedStreamIndex = 1
         If Loaded Then RequestCalc()
     End Sub
@@ -414,6 +417,8 @@ Public Class EditingForm_CompoundSeparator
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
+
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

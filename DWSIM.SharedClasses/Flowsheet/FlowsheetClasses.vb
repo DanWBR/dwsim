@@ -286,6 +286,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property RTFAnnotations As String = "" Implements IFlowsheetOptions.RTFAnnotations
 
+        Public Property EnabledUndoRedo As Boolean = True Implements IFlowsheetOptions.EnabledUndoRedo
+
     End Class
 
 End Namespace

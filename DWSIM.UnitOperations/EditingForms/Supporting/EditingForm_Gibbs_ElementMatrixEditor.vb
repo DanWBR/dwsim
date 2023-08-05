@@ -154,6 +154,7 @@ Public Class EditingForm_Gibbs_ElementMatrixEditor
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        gr.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
         SaveMatrix()
     End Sub
 

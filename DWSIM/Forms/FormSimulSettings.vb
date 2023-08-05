@@ -365,8 +365,6 @@ Public Class FormSimulSettings
 
     Public Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
-        My.Application.PushUndoRedoAction = False
-
         CurrentFlowsheet.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
         Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
 
@@ -720,8 +718,6 @@ Public Class FormSimulSettings
 
         CurrentFlowsheet.UpdateOpenEditForms()
 
-        My.Application.PushUndoRedoAction = True
-
     End Sub
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
@@ -896,13 +892,6 @@ Public Class FormSimulSettings
                     oldvalue = su.distance
                     su.distance = cell.Value
             End Select
-
-            If initialized And Not DWSIM.App.IsRunningOnMono And My.Application.PushUndoRedoAction Then CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
-                         .ObjID = su.Name,
-                         .ObjID2 = member,
-                         .NewValue = cell.Value,
-                         .OldValue = oldvalue,
-                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsChanged"), su.Name, Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex - 1).Value, .OldValue, .NewValue)})
 
             Me.CurrentFlowsheet.FormSurface.UpdateSelectedObject()
 
@@ -1243,11 +1232,6 @@ Public Class FormSimulSettings
 
                 CurrentFlowsheet.UpdateOpenEditForms()
 
-                If My.Application.PushUndoRedoAction Then CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundAdded,
-                          .ObjID = tmpcomp.Name,
-                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundAdded"), tmpcomp.Name)})
-
-
             End If
 
 
@@ -1299,10 +1283,6 @@ Public Class FormSimulSettings
         Next
 
         CurrentFlowsheet.UpdateOpenEditForms()
-
-        If My.Application.PushUndoRedoAction Then CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
-          .ObjID = tmpcomp.Name,
-          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), tmpcomp.Name)})
 
     End Sub
 

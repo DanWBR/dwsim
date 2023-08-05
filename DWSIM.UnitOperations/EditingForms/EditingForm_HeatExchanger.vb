@@ -223,6 +223,8 @@ Public Class EditingForm_HeatExchanger
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
 
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         SimObject.CalculationMode = cbCalcMode.SelectedIndex
 
         tbColdFluidOutletT.Enabled = True
@@ -513,6 +515,8 @@ Public Class EditingForm_HeatExchanger
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
@@ -714,12 +718,16 @@ Public Class EditingForm_HeatExchanger
 
     Private Sub btnEditSTProps_Click(sender As Object, e As EventArgs) Handles btnEditSTProps.Click
 
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
         Dim f As New EditingForm_HeatExchanger_SHProperties With {.hx = SimObject}
         SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
 
     Private Sub cbFlowDir_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlowDir.SelectedIndexChanged
+
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
         SimObject.FlowDir = cbFlowDir.SelectedIndex
         If Loaded Then RequestCalc()
     End Sub
@@ -738,6 +746,8 @@ Public Class EditingForm_HeatExchanger
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
+
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

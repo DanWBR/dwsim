@@ -273,6 +273,8 @@ Public Class EditingForm_OPEMFC
 
         If e.KeyCode = Keys.Enter Then
 
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
             Me.Text = SimObject.GraphicObject.Tag & " (" & SimObject.GetDisplayName() & ")"
@@ -285,6 +287,8 @@ Public Class EditingForm_OPEMFC
     Private Sub gridInput_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridInput.CellValueChanged
 
         If Loaded Then
+
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
 
             Try
 

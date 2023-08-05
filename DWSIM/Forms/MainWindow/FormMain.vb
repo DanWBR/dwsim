@@ -1659,8 +1659,6 @@ Public Class FormMain
 
     Sub LoadMobileXML(handler As IVirtualFile)
 
-        My.Application.PushUndoRedoAction = False
-
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
         Dim excs As New Concurrent.ConcurrentBag(Of Exception)
@@ -1890,10 +1888,6 @@ Public Class FormMain
 
         form.UpdateFormText()
 
-        'Me.ToolStripStatusLabel1.Text = ""
-
-        My.Application.PushUndoRedoAction = True
-
         Application.DoEvents()
 
     End Sub
@@ -1901,8 +1895,6 @@ Public Class FormMain
     Public Function LoadJSON(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "") As Interfaces.IFlowsheet
 
         RaiseEvent FlowsheetLoadingFromXML(Me, New EventArgs())
-
-        My.Application.PushUndoRedoAction = False
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
@@ -2243,10 +2235,6 @@ Public Class FormMain
 
         form.UpdateFormText()
 
-        'Me.ToolStripStatusLabel1.Text = ""
-
-        My.Application.PushUndoRedoAction = True
-
         Application.DoEvents()
 
         form.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
@@ -2261,8 +2249,6 @@ Public Class FormMain
     Public Function LoadXML(handler As IVirtualFile, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
         RaiseEvent FlowsheetLoadingFromXML(Me, New EventArgs())
-
-        My.Application.PushUndoRedoAction = False
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
@@ -2341,6 +2327,10 @@ Public Class FormMain
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
+
+        Dim undoredoenabled = form.Options.EnabledUndoRedo
+
+        form.Options.EnabledUndoRedo = False
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
 
@@ -2855,23 +2845,19 @@ Public Class FormMain
 
         form.UpdateFormText()
 
-        'Me.ToolStripStatusLabel1.Text = ""
-
-        My.Application.PushUndoRedoAction = True
-
         Application.DoEvents()
 
         form.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
 
         RaiseEvent FlowsheetLoadedFromXML(form, New EventArgs())
 
+        form.Options.EnabledUndoRedo = undoredoenabled
+
         Return form
 
     End Function
 
     Public Function LoadXML2(xdoc As XDocument, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
-
-        My.Application.PushUndoRedoAction = False
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
@@ -2927,12 +2913,11 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
 
+        Dim undoredoenabled = form.Options.EnabledUndoRedo
+
+        form.Options.EnabledUndoRedo = False
+
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
-
-        'If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = Path
-
-        'form.FilePath = filename
-        'form.Options.FilePath = filename
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
@@ -3401,11 +3386,9 @@ Public Class FormMain
 
         form.UpdateFormText()
 
-        'Me.ToolStripStatusLabel1.Text = ""
-
-        My.Application.PushUndoRedoAction = True
-
         Application.DoEvents()
+
+        form.Options.EnabledUndoRedo = undoredoenabled
 
         Return form
 
