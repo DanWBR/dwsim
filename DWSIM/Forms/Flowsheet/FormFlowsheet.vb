@@ -2747,15 +2747,15 @@ Public Class FormFlowsheet
 
     Private Sub tsbUndo_Click_1(sender As Object, e As EventArgs) Handles tsbUndo.Click
 
+        CloseOpenEditForms()
         ProcessUndo()
-        UpdateOpenEditForms()
 
     End Sub
 
     Private Sub tsbRedo_Click_1(sender As Object, e As EventArgs) Handles tsbRedo.Click
 
+        CloseOpenEditForms()
         ProcessRedo()
-        UpdateOpenEditForms()
 
     End Sub
 
@@ -2805,24 +2805,13 @@ Public Class FormFlowsheet
 
         If Options.EnabledUndoRedo Then
 
-            tspb1.Visible = True
-
-            Task.Run(Function()
-                         Return GetSnapshot(stype)
-                     End Function).ContinueWith(
-                 Sub(t)
-                     If t.Exception Is Nothing Then
-                         UndoStack.Push(t.Result)
-                         RedoStack.Clear()
-                         UIThread(Sub()
-                                      tsbUndo.Enabled = True
-                                      tsmiUndo.Enabled = True
-                                      tsbRedo.Enabled = False
-                                      tsmiRedo.Enabled = False
-                                  End Sub)
-                     End If
-                     UIThread(Sub() tspb1.Visible = False)
-                 End Sub)
+            Dim sdata = GetSnapshot(stype)
+            UndoStack.Push(sdata)
+            RedoStack.Clear()
+            tsbUndo.Enabled = True
+            tsmiUndo.Enabled = True
+            tsbRedo.Enabled = False
+            tsmiRedo.Enabled = False
 
         End If
 
@@ -3529,7 +3518,6 @@ Public Class FormFlowsheet
 
     End Sub
 
-
 #End Region
 
 #Region "    IFlowsheet Implementation"
@@ -3994,6 +3982,25 @@ Public Class FormFlowsheet
                             End Try
                             Try
                                 obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
+                        Next
+                    End Sub)
+
+    End Sub
+
+    Public Sub CloseOpenEditForms()
+
+        Me.UIThread(Sub()
+                        For Each obj In SimulationObjects.Values
+                            Try
+                                obj.CloseEditForm()
+                            Catch ex As Exception
+                                ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
+                            End Try
+                            Try
+                                obj.CloseDynamicsEditForm()
                             Catch ex As Exception
                                 ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
                             End Try
