@@ -379,10 +379,12 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
     <value>NoControl</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>348, 50</value>
+    <value>348, 100</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
-    <value>Would you like to enable full Undo/Redo capabilities? This feature is disabled by default and can make the interface less responsive on complex flowsheets.</value>
+    <value>Would you like to enable full Undo/Redo capabilities? This feature is disabled by default and can make the interface less responsive on complex flowsheets.
+
+You can enable or disable this feature later in the 'Simulation Settings' &gt; 'Behavior' panel.</value>
   </data>
   <data name="Label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -407,6 +409,9 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
   </data>
   <data name="chkEnableUndoRedo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="chkEnableUndoRedo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 145</value>
   </data>
   <data name="chkEnableUndoRedo.Size" type="System.Drawing.Size, System.Drawing">
     <value>345, 45</value>
