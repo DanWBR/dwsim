@@ -578,7 +578,7 @@ Public Class EditingForm_Vessel
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
-            If Loaded Then VesselObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, VesselObject)
+            VesselObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout)
             If Loaded Then VesselObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then VesselObject.FlowSheet.UpdateOpenEditForms()
             Me.Text = VesselObject.GraphicObject.Tag & " (" & VesselObject.GetDisplayName() & ")"

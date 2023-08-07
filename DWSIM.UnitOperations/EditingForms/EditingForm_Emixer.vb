@@ -281,6 +281,7 @@ Public Class EditingForm_Emixer
 
         If e.KeyCode = Keys.Enter Then
 
+            MixerObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout)
             If Loaded Then MixerObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then MixerObject.FlowSheet.UpdateOpenEditForms()
             Me.Text = MixerObject.GraphicObject.Tag & " (" & MixerObject.GetDisplayName() & ")"
