@@ -139,6 +139,7 @@ Partial Class FormSimulSettings
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.chkEnableUndoRedo = New System.Windows.Forms.CheckBox()
         Me.chkIncludeFlowsheetMessagesInFile = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.chkForceObjectCalculation = New System.Windows.Forms.CheckBox()
@@ -1078,10 +1079,18 @@ Partial Class FormSimulSettings
         'GroupBox13
         '
         resources.ApplyResources(Me.GroupBox13, "GroupBox13")
+        Me.GroupBox13.Controls.Add(Me.chkEnableUndoRedo)
         Me.GroupBox13.Controls.Add(Me.chkIncludeFlowsheetMessagesInFile)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox13, resources.GetString("GroupBox13.ToolTip"))
+        '
+        'chkEnableUndoRedo
+        '
+        resources.ApplyResources(Me.chkEnableUndoRedo, "chkEnableUndoRedo")
+        Me.chkEnableUndoRedo.Name = "chkEnableUndoRedo"
+        Me.ToolTip1.SetToolTip(Me.chkEnableUndoRedo, resources.GetString("chkEnableUndoRedo.ToolTip"))
+        Me.chkEnableUndoRedo.UseVisualStyleBackColor = True
         '
         'chkIncludeFlowsheetMessagesInFile
         '
@@ -1578,4 +1587,5 @@ Partial Class FormSimulSettings
     Friend WithEvents tsmiViewComp As ToolStripMenuItem
     Friend WithEvents tsmiExportJSON As ToolStripMenuItem
     Friend WithEvents tsmiReplace As ToolStripMenuItem
+    Friend WithEvents chkEnableUndoRedo As CheckBox
 End Class

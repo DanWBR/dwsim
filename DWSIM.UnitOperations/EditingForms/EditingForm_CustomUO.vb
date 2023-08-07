@@ -541,7 +541,7 @@ Public Class EditingForm_CustomUO
     Private Sub UpdateInputVars()
         If Loaded Then
 
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
             SimObject.InputVariables.Clear()
             For Each row As DataGridViewRow In dgvinputvars.Rows
@@ -556,7 +556,7 @@ Public Class EditingForm_CustomUO
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
         SimObject.DisplayScriptEditorForm()
     End Sub

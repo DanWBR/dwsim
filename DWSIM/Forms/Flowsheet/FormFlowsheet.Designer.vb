@@ -674,15 +674,15 @@ Partial Class FormFlowsheet
         'tsbUndo
         '
         Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_96px
         resources.ApplyResources(Me.tsbUndo, "tsbUndo")
+        Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_96px
         Me.tsbUndo.Name = "tsbUndo"
         '
         'tsbRedo
         '
         Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_96px
         resources.ApplyResources(Me.tsbRedo, "tsbRedo")
+        Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_96px
         Me.tsbRedo.Name = "tsbRedo"
         '
         'ToolStripSeparator3

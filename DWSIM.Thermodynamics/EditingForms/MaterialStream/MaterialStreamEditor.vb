@@ -857,7 +857,7 @@ Public Class MaterialStreamEditor
 
         If Me.ValidateData() Then
 
-            MatStream.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            MatStream.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, MatStream)
 
             Dim mmtotal As Double = 0
             Dim mtotal As Double = 0
@@ -1283,7 +1283,7 @@ Public Class MaterialStreamEditor
 
     Sub UpdateProps(sender As Object)
 
-        MatStream.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        MatStream.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, MatStream)
 
         Dim oldvalue, newvalue As Double, propname As String = ""
 

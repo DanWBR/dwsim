@@ -53,7 +53,7 @@ Public Class FlowsheetSurfaceControl
 
     Private Sub FlowsheetSurfaceControl_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
 
-        FlowsheetObject.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        FlowsheetObject.RegisterSnapshot(SnapshotType.ObjectLayout)
         FlowsheetSurface.InputPress(e.X, e.Y)
         Invalidate()
         Invalidate()
@@ -82,7 +82,7 @@ Public Class FlowsheetSurfaceControl
 
         If (obj Is Nothing) Then
 
-            FlowsheetObject.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            FlowsheetObject.RegisterSnapshot(SnapshotType.ObjectLayout)
             FlowsheetSurface.ZoomAll(Width, Height)
             FlowsheetSurface.Center(Width, Height)
             FlowsheetObject.FormSurface.TSTBZoom.Text = FlowsheetSurface.Zoom.ToString("###%")
@@ -185,7 +185,7 @@ Public Class FlowsheetSurfaceControl
     End Sub
 
     Private Sub FlowsheetSurfaceControl_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
-        FlowsheetObject.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        FlowsheetObject.RegisterSnapshot(SnapshotType.ObjectLayout)
         Dim oldzoom = FlowsheetSurface.Zoom
         FlowsheetSurface.Zoom += e.Delta / 4 / 100.0
         If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05

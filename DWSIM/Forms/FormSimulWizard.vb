@@ -1754,4 +1754,16 @@ Public Class FormSimulWizard
 
     End Sub
 
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableUndoRedo.CheckedChanged
+
+        If loaded Then
+
+            CurrentFlowsheet.Options.EnabledUndoRedo = chkEnableUndoRedo.Checked
+
+            FormMain.AnalyticsProvider?.RegisterEvent("Undo/Redo Enabled/Disabled", CurrentFlowsheet.Options.EnabledUndoRedo, Nothing)
+
+        End If
+
+    End Sub
+
 End Class

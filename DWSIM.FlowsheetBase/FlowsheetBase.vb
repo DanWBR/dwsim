@@ -409,7 +409,6 @@ Imports System.Text.RegularExpressions
 
     End Sub
 
-
     Public Sub RequestCalculation3(Obj As ISimulationObject, Wait As Boolean) Implements IFlowsheet.RequestCalculation3
 
         If Obj Is Nothing Then
@@ -420,6 +419,15 @@ Imports System.Text.RegularExpressions
 
     End Sub
 
+    Public Sub ResetCalculationStatus() Implements IFlowsheet.ResetCalculationStatus
+
+        For Each obj In SimulationObjects.Values
+            obj.SetDirtyStatus(True)
+            obj.Calculated = False
+            obj.GraphicObject.Calculated = False
+        Next
+
+    End Sub
 
     Public Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
         Get
@@ -4283,7 +4291,7 @@ Label_00CC:
 
 #Region "    Snapshots"
 
-    Public Function GetSnapshot(type As SnapshotType) As XDocument Implements IFlowsheet.GetSnapshot
+    Public Function GetSnapshot(type As SnapshotType, Optional obj As ISimulationObject = Nothing) As XDocument Implements IFlowsheet.GetSnapshot
         Throw New NotImplementedException()
     End Function
 
@@ -4291,7 +4299,7 @@ Label_00CC:
         Throw New NotImplementedException()
     End Sub
 
-    Public Sub RegisterSnapshot(stype As SnapshotType) Implements IFlowsheet.RegisterSnapshot
+    Public Sub RegisterSnapshot(stype As SnapshotType, Optional obj As ISimulationObject = Nothing) Implements IFlowsheet.RegisterSnapshot
         Throw New NotImplementedException()
     End Sub
 

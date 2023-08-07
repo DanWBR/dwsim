@@ -502,7 +502,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Sub MaterialStreamClickHandler(ByVal sender As System.Object, ByVal e As ToolStripItemClickedEventArgs)
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
 
         Dim obj1 As Thermodynamics.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(FlowsheetSurface.SelectedObject.Name)
 
@@ -528,7 +528,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Sub ClonarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClonarToolStripMenuItem.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
 
         For Each obj In FlowsheetSurface.SelectedObjects.Values
             If TypeOf obj.Owner Is ISimulationObject Then
@@ -1725,7 +1725,7 @@ Public Class FlowsheetSurface_SkiaSharp
                                        Optional uoobj As Interfaces.IExternalUnitOperation = Nothing,
                                        Optional CreateConnected As Boolean = False) As String
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
 
         If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
 
@@ -3290,7 +3290,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub SplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SplitToolStripMenuItem.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         Try
             Dim stream = FlowsheetSurface.SelectedObject
             Dim newstream = CloneObject(stream)
@@ -3314,7 +3314,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub MergeStreamsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeStreamsToolStripMenuItem.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         Try
             Dim stream1 = FlowsheetSurface.SelectedObjects.Values.ElementAt(0)
             Dim stream2 = FlowsheetSurface.SelectedObjects.Values.ElementAt(1)
@@ -3478,7 +3478,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             If FlowsheetSurface.SelectedObject.Rotation + 90 >= 360 Then
                 FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((FlowsheetSurface.SelectedObject.Rotation + 90) / 360)
             Else
@@ -3492,7 +3492,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             If FlowsheetSurface.SelectedObject.Rotation + 180 >= 360 Then
                 FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((FlowsheetSurface.SelectedObject.Rotation + 180) / 360)
             Else
@@ -3506,7 +3506,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             If FlowsheetSurface.SelectedObject.Rotation + 270 >= 360 Then
                 FlowsheetSurface.SelectedObject.Rotation = Math.Truncate((FlowsheetSurface.SelectedObject.Rotation + 270) / 360)
             Else
@@ -3520,7 +3520,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             FlowsheetSurface.SelectedObject.Rotation = 0
             Me.Invalidate()
         End If
@@ -3530,7 +3530,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             FlowsheetSurface.SelectedObject.Rotation = 90
             Me.Invalidate()
         End If
@@ -3540,14 +3540,14 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             FlowsheetSurface.SelectedObject.Rotation = 180
             Me.Invalidate()
         End If
     End Sub
 
     Private Sub HorizontalmenteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HorizontalmenteToolStripMenuItem.Click
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
         If Me.HorizontalmenteToolStripMenuItem.Checked Then
             FlowsheetSurface.SelectedObject.FlippedH = True
         Else
@@ -3560,7 +3560,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If DWSIM.App.IsRunningOnMono Then
             MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+            Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
             FlowsheetSurface.SelectedObject.Rotation = 270
             Me.Invalidate()
         End If
@@ -3680,7 +3680,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub SplitAndInsertRecycleMenuItem_Click(sender As Object, e As EventArgs) Handles SplitAndInsertRecycleMenuItem.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         Try
 
             Dim stream = FlowsheetSurface.SelectedObject
@@ -3737,7 +3737,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
 
         If FlowsheetSurface.SelectedObject.Editor Is Nothing OrElse DirectCast(FlowsheetSurface.SelectedObject.Editor, Form).IsDisposed Then
             Dim f As New FormEditGraphicObject() With {.gobj = FlowsheetSurface.SelectedObject, .fs = FlowsheetSurface, .flowsheet = Me.Flowsheet}
@@ -3767,7 +3767,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub SplitAndInsertValveTSMI_Click(sender As Object, e As EventArgs) Handles SplitAndInsertValveTSMI.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         Try
 
             Dim stream = FlowsheetSurface.SelectedObject
@@ -3884,7 +3884,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub LayoutAutomaticoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LayoutAutomaticoToolStripMenuItem.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
 
         FlowsheetSurface.AutoArrange()
         FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
@@ -3949,7 +3949,7 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub tsmiInvertVertically_Click(sender As Object, e As EventArgs) Handles tsmiInvertVertically.Click
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
         If Me.tsmiInvertVertically.Checked Then
             FlowsheetSurface.SelectedObject.FlippedV = True
         Else
@@ -4154,7 +4154,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Sub tsmiNaturalLayout_Click(sender As Object, e As EventArgs) Handles tsmiNaturalLayout.Click
 
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectLayout)
 
         Try
             FlowsheetSurface.ApplyNaturalLayout(FlowsheetSolver.FlowsheetSolver.GetSolvingList(Flowsheet, False)(0), 75)
@@ -4175,12 +4175,12 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub PasteObjectTSMI_Click(sender As Object, e As EventArgs) Handles PasteObjectTSMI.Click
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         Flowsheet.PasteObjects()
     End Sub
 
     Private Sub CutTSMI_Click(sender As Object, e As EventArgs) Handles CutTSMI.Click
-        Flowsheet.RegisterSnapshot(SnapshotType.ObjectDataAndLayout)
+        Flowsheet.RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         Flowsheet.CutObjects()
     End Sub
 

@@ -88,7 +88,7 @@ Public Class DynamicsPropertyEditor
                                                      If tb.ForeColor = System.Drawing.Color.Blue Then
                                                          col1(p.Key) = cv.ConvertToSI(units.GetCurrentUnits(utype), Double.Parse(tb.Text))
                                                          tb.SelectAll()
-                                                         SimObject.GetFlowsheet().RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
+                                                         SimObject.GetFlowsheet().RegisterSnapshot(Enums.SnapshotType.ObjectData, SimObject)
                                                      End If
                                                  End If
                                              End Sub
@@ -99,7 +99,7 @@ Public Class DynamicsPropertyEditor
                             .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
                         AddHandler control.ValueChanged, Sub(s, e)
                                                              col1(p.Key) = control.Value
-                                                             SimObject.GetFlowsheet().RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
+                                                             SimObject.GetFlowsheet().RegisterSnapshot(Enums.SnapshotType.ObjectData, SimObject)
                                                          End Sub
                         tl.Controls.Add(control, 1, 0)
                     Case True.GetType()
@@ -107,7 +107,7 @@ Public Class DynamicsPropertyEditor
                             .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
                         AddHandler control.CheckedChanged, Sub(s, e)
                                                                col1(p.Key) = control.Checked
-                                                               SimObject.GetFlowsheet().RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
+                                                               SimObject.GetFlowsheet().RegisterSnapshot(Enums.SnapshotType.ObjectData, SimObject)
                                                            End Sub
                         tl.Controls.Add(control, 1, 0)
                 End Select

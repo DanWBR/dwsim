@@ -22,6 +22,8 @@ Public Class EditingForm_CAPEOPENUO
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ChangeDefaultFont()
+
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem

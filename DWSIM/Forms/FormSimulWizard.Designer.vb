@@ -102,6 +102,11 @@ Partial Class FormSimulWizard
         Me.chkActivateSmartObjectSolving = New System.Windows.Forms.CheckBox()
         Me.chkDoubleClickToOpenEditors = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.WizardPage6 = New AeroWizard.WizardPage()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.chkEnableUndoRedo = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.cmsAddComps = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ImportFromThermoChemicalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -124,6 +129,8 @@ Partial Class FormSimulWizard
         Me.WizardPage5.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage4.SuspendLayout()
+        Me.WizardPage6.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsAddComps.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,6 +143,7 @@ Partial Class FormSimulWizard
         Me.StepWizardControl1.Pages.Add(Me.WizardPage3)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage5)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage4)
+        Me.StepWizardControl1.Pages.Add(Me.WizardPage6)
         Me.StepWizardControl1.ShowProgressInTaskbarIcon = True
         Me.ToolTip1.SetToolTip(Me.StepWizardControl1, resources.GetString("StepWizardControl1.ToolTip"))
         '
@@ -684,7 +692,6 @@ Partial Class FormSimulWizard
         Me.WizardPage4.Controls.Add(Me.chkActivateSmartObjectSolving)
         Me.WizardPage4.Controls.Add(Me.chkDoubleClickToOpenEditors)
         Me.WizardPage4.Controls.Add(Me.Label12)
-        Me.WizardPage4.IsFinishPage = True
         Me.WizardPage4.Name = "WizardPage4"
         Me.ToolTip1.SetToolTip(Me.WizardPage4, resources.GetString("WizardPage4.ToolTip"))
         '
@@ -749,6 +756,45 @@ Partial Class FormSimulWizard
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
         Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
+        '
+        'WizardPage6
+        '
+        resources.ApplyResources(Me.WizardPage6, "WizardPage6")
+        Me.WizardPage6.Controls.Add(Me.PictureBox2)
+        Me.WizardPage6.Controls.Add(Me.Label16)
+        Me.WizardPage6.Controls.Add(Me.Label19)
+        Me.WizardPage6.Controls.Add(Me.chkEnableUndoRedo)
+        Me.WizardPage6.IsFinishPage = True
+        Me.WizardPage6.Name = "WizardPage6"
+        Me.ToolTip1.SetToolTip(Me.WizardPage6, resources.GetString("WizardPage6.ToolTip"))
+        '
+        'PictureBox2
+        '
+        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
+        Me.PictureBox2.Image = Global.DWSIM.My.Resources.Resources.rondy_stickers_lettering_sticker_ctrl_plus_z_with_arrow
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        '
+        'chkEnableUndoRedo
+        '
+        resources.ApplyResources(Me.chkEnableUndoRedo, "chkEnableUndoRedo")
+        Me.chkEnableUndoRedo.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
+        Me.chkEnableUndoRedo.Name = "chkEnableUndoRedo"
+        Me.ToolTip1.SetToolTip(Me.chkEnableUndoRedo, resources.GetString("chkEnableUndoRedo.ToolTip"))
+        Me.chkEnableUndoRedo.UseVisualStyleBackColor = True
         '
         'ToolTip1
         '
@@ -825,6 +871,9 @@ Partial Class FormSimulWizard
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage4.ResumeLayout(False)
         Me.WizardPage4.PerformLayout()
+        Me.WizardPage6.ResumeLayout(False)
+        Me.WizardPage6.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsAddComps.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -910,4 +959,9 @@ Partial Class FormSimulWizard
     Friend WithEvents chkDoubleClickToOpenEditors As CheckBox
     Friend WithEvents Label12 As Label
     Public WithEvents StepWizardControl1 As AeroWizard.StepWizardControl
+    Friend WithEvents WizardPage6 As AeroWizard.WizardPage
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents chkEnableUndoRedo As CheckBox
+    Friend WithEvents PictureBox2 As PictureBox
 End Class

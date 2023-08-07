@@ -369,6 +369,54 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
   <data name="Label17.Text" xml:space="preserve">
     <value>DWSIM can skip calculations of flowsheet objects if none of its input parameters (including inlet streams) have changed since the last successful calculation. This feature is disabled by default. You can change it later in Edit &gt; Simulation Settings &gt; Behavior.</value>
   </data>
+  <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 15</value>
+  </data>
+  <data name="PictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 306</value>
+  </data>
+  <data name="Label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>348, 50</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Would you like to enable full Undo/Redo capabilities? This feature is disabled by default and can make the interface less responsive on complex flowsheets.</value>
+  </data>
+  <data name="Label19.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label19.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt, style=Bold</value>
+  </data>
+  <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 20</value>
+  </data>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Undo/Redo Operations</value>
+  </data>
+  <data name="chkEnableUndoRedo.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkEnableUndoRedo.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="chkEnableUndoRedo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkEnableUndoRedo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 45</value>
+  </data>
+  <data name="chkEnableUndoRedo.Text" xml:space="preserve">
+    <value>Enable Undo/Redo Operations</value>
+  </data>
+  <data name="chkEnableUndoRedo.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Simulation Configuration Wizard</value>
   </data>

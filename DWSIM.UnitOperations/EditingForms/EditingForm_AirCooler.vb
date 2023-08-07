@@ -196,7 +196,7 @@ Public Class EditingForm_AirCooler
 
     Sub UpdateProps()
 
-        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
         Dim su = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
@@ -407,7 +407,7 @@ Public Class EditingForm_AirCooler
 
         If e.KeyCode = Keys.Enter Then
 
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()

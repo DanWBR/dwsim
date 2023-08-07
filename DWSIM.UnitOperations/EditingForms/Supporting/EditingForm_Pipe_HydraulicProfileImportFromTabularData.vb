@@ -191,7 +191,7 @@ Public Class EditingForm_Pipe_HydraulicProfileImportFromTabularData
 
         If slist.Count > 0 Then
 
-            PipeObject.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
+            PipeObject.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectData, PipeObject)
 
             PipeObject.Profile.Sections.Clear()
             For Each s In slist

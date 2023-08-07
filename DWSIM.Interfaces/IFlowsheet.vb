@@ -376,11 +376,13 @@
 
     Property AvailableExternalUnitOperations As Dictionary(Of String, IExternalUnitOperation)
 
-    Function GetSnapshot(type As Enums.SnapshotType) As XDocument
+    Function GetSnapshot(type As Enums.SnapshotType, Optional obj As ISimulationObject = Nothing) As XDocument
 
     Sub RestoreSnapshot(data As XDocument, type As Enums.SnapshotType)
 
-    Sub RegisterSnapshot(stype As Enums.SnapshotType)
+    Sub RegisterSnapshot(stype As Enums.SnapshotType, Optional obj As ISimulationObject = Nothing)
+
+    Sub ResetCalculationStatus()
 
 End Interface
 

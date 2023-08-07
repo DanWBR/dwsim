@@ -241,7 +241,7 @@ Public Class EditingForm_ShortcutColumn
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
             UpdateProps(sender)
 
@@ -253,7 +253,7 @@ Public Class EditingForm_ShortcutColumn
 
     Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
         If Loaded Then
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
             SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
             RequestCalc()
         End If
@@ -513,7 +513,7 @@ Public Class EditingForm_ShortcutColumn
     Private Sub rbTotalCond_CheckedChanged(sender As Object, e As EventArgs) Handles rbTotalCond.CheckedChanged, rbPartialCond.CheckedChanged
 
         If Loaded Then
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
             If rbTotalCond.Checked Then SimObject.condtype = UnitOperations.ShortcutColumn.CondenserType.TotalCond Else SimObject.condtype = UnitOperations.ShortcutColumn.CondenserType.PartialCond
             RequestCalc()
         End If
@@ -521,12 +521,12 @@ Public Class EditingForm_ShortcutColumn
     End Sub
 
     Private Sub cbLKey_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLKey.SelectedIndexChanged
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
         If Loaded Then SimObject.m_lightkey = cbLKey.SelectedItem.ToString
     End Sub
 
     Private Sub cbHKey_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHKey.SelectedIndexChanged
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
         If Loaded Then SimObject.m_heavykey = cbHKey.SelectedItem.ToString
     End Sub
 

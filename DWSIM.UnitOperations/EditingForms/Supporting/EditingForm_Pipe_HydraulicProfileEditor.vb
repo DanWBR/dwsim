@@ -1094,7 +1094,7 @@ Imports System.Drawing
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
 
-        PipeOp.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectDataAndLayout)
+        PipeOp.FlowSheet.RegisterSnapshot(Enums.SnapshotType.ObjectData, PipeOp)
 
         Dim column As New DataGridViewColumn
         Dim parsingresult As String

@@ -418,7 +418,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
         If Loaded Then
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
             SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
             RequestCalc()
         End If
@@ -591,7 +591,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
             UpdateProps(sender)
 
@@ -618,7 +618,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub cbReacSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbReacSet.SelectedIndexChanged
         If Loaded Then
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
             SimObject.ReactionSetID = SimObject.FlowSheet.ReactionSets.Values.Where(Function(x) x.Name = cbReacSet.SelectedItem.ToString).FirstOrDefault.ID
             RequestCalc()
         End If
@@ -626,7 +626,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
 
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
         Select Case cbCalcMode.SelectedIndex
             Case 0
@@ -703,7 +703,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         If e.KeyCode = Keys.Enter Then
 
-            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+            If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
             If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
             If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
@@ -716,7 +716,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub chkGibbsUsePreviousSolution_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUsePreviousSolution.CheckedChanged
 
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
         If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Gibbs).InitializeFromPreviousSolution = chkGibbsUsePreviousSolution.Checked
         End If
@@ -761,7 +761,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub chkGibbsUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseIPOPT.CheckedChanged
 
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
         If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver = chkGibbsUseIPOPT.Checked
         End If
@@ -770,7 +770,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub chkGibbsUseAlternSolver_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseAlternSolver.CheckedChanged
 
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
         If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Gibbs).AlternateSolvingMethod = chkGibbsUseAlternSolver.Checked
         End If
@@ -779,7 +779,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub cbReactivePhaseBehavior_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbReactivePhaseBehavior.SelectedIndexChanged
 
-        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectDataAndLayout)
+        If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
         If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Gibbs).ReactivePhaseBehavior = cbReactivePhaseBehavior.SelectedIndex
         End If

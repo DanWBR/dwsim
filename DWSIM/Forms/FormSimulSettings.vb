@@ -317,6 +317,8 @@ Public Class FormSimulSettings
 
         chkIncludeFlowsheetMessagesInFile.Checked = CurrentFlowsheet.Options.SaveFlowsheetMessagesInFile
 
+        chkEnableUndoRedo.Checked = CurrentFlowsheet.Options.EnabledUndoRedo
+
         Me.loaded = True
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -1918,6 +1920,14 @@ Public Class FormSimulSettings
         Next
         ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+    End Sub
+
+    Private Sub chkEnableUndoRedo_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableUndoRedo.CheckedChanged
+
+        CurrentFlowsheet.Options.EnabledUndoRedo = chkEnableUndoRedo.Checked
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Undo/Redo Enabled/Disabled", CurrentFlowsheet.Options.EnabledUndoRedo, Nothing)
 
     End Sub
 
