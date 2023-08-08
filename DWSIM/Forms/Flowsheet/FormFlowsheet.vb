@@ -153,6 +153,10 @@ Public Class FormFlowsheet
 
     Public Event FinishedSolving(sender As Object, e As EventArgs)
 
+    Public Event EditingFormsUpdated(sender As Object, e As EventArgs)
+
+    Public Event InterfaceUpdated(sender As Object, e As EventArgs)
+
     Public Sub New()
 
         ' This call is required by the Windows Form Designer.
@@ -4127,6 +4131,8 @@ Public Class FormFlowsheet
                         Next
                     End Sub)
 
+        RaiseEvent EditingFormsUpdated(Me, New EventArgs())
+
     End Sub
 
     Public Sub CloseOpenEditForms()
@@ -4191,6 +4197,7 @@ Public Class FormFlowsheet
                 FormSurface.FControl.Invalidate()
                 Invalidating = False
             End If
+            RaiseEvent InterfaceUpdated(Me, New EventArgs())
         End If
 
     End Sub

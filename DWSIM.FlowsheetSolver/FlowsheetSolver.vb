@@ -1403,6 +1403,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                           fgui.UpdateInterface()
 
+                                                          fgui.UpdateOpenEditForms()
+
                                                       End If
 
                                                       'process the scripts associated with the recycle loop event.
