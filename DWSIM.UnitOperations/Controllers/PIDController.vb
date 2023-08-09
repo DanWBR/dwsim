@@ -28,11 +28,13 @@ Namespace SpecialOps
 
         Inherits UnitOperations.SpecialOpBaseClass
 
-        Implements Interfaces.IAdjust
+        Implements Interfaces.IAdjust, IControllableObject
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Controllers
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_PIDController
+
+        <Xml.Serialization.XmlIgnore> Public Property ControlPanel As Object Implements IControllableObject.ControlPanel
 
         Protected m_ManipulatedObject As SharedClasses.UnitOperations.BaseClass
         Protected m_ControlledObject As SharedClasses.UnitOperations.BaseClass
@@ -567,6 +569,24 @@ Namespace SpecialOps
                 End If
             End If
         End Sub
+
+        Public Overrides Function GetEditingForm() As Form
+            If f Is Nothing Then
+                f = New EditingForm_PIDController With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                f.Tag = "ObjectEditor"
+                Return f
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_PIDController With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    f.Tag = "ObjectEditor"
+                    Return f
+                Else
+                    Return Nothing
+                End If
+            End If
+        End Function
 
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.control_panel1

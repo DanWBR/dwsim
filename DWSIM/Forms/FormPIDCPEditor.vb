@@ -6,19 +6,23 @@
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        Text = PID.GraphicObject.Tag
+        If PID IsNot Nothing Then
 
-        chkActive.Checked = PID.Active
+            Text = PID.GraphicObject.Tag
 
-        chkAuto.Checked = Not PID.ManualOverride
+            chkActive.Checked = PID.Active
 
-        tbSP.Text = PID.SPValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
+            chkAuto.Checked = Not PID.ManualOverride
 
-        tbPV.Text = PID.PVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
+            tbSP.Text = PID.SPValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
-        tbMV.Text = PID.MVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
+            tbPV.Text = PID.PVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
-        tbMV.ReadOnly = chkAuto.Checked
+            tbMV.Text = PID.MVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
+
+            tbMV.ReadOnly = chkAuto.Checked
+
+        End If
 
     End Sub
 

@@ -1910,17 +1910,12 @@ Public Class FormFlowsheet
 
     End Sub
 
-
-
     Private Sub GerenciadorDeAmostrasDePetroleoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Click
+
         RaiseEvent ToolOpened("Assay Manager", New EventArgs())
         Dim frmam As New FormAssayManager
         frmam.ShowDialog(Me)
-        Try
-            frmam.Close()
-        Catch ex As Exception
 
-        End Try
     End Sub
 
     Sub ChangeEditMenuStatus(status As Boolean)

@@ -24,11 +24,13 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        Implements Interfaces.IInput
+        Implements Interfaces.IInput, IControllableObject
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Inputs
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Input
+
+        <Xml.Serialization.XmlIgnore> Public Property ControlPanel As Object Implements IControllableObject.ControlPanel
 
         Public Property SelectedObjectID As String = "" Implements IInput.SelectedObjectID
 

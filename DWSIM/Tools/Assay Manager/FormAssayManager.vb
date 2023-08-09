@@ -16,8 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Math
-Imports DWSIM.DWSIM
+Imports System.Linq
 Imports System.Runtime.Serialization.Formatters
 Imports DWSIM.SharedClasses.Utilities.PetroleumCharacterization
 Imports DWSIM.Interfaces
@@ -254,46 +253,59 @@ Public Class FormAssayManager
 
     Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
 
-        Dim newassay As Assay.Assay = pfd.Options.PetroleumAssays(gridassays.SelectedRows(0).Cells(0).Value).Clone
+        If gridassays.SelectedRows.Count > 0 Then
 
-        newassay.Name += "_CLONE"
+            Dim newassay As Assay.Assay = pfd.Options.PetroleumAssays(gridassays.SelectedRows(0).Cells(0).Value).Clone
 
-        Dim id As String = Guid.NewGuid().ToString
+            newassay.Name += "_CLONE"
 
-        pfd.Options.PetroleumAssays.Add(id, newassay)
+            Dim id As String = Guid.NewGuid().ToString
 
-        If newassay.IsBulk Then
-            gridassays.Rows.Add(New Object() {id, newassay.Name, "Bulk"})
-        Else
-            gridassays.Rows.Add(New Object() {id, newassay.Name, "Curves"})
+            pfd.Options.PetroleumAssays.Add(id, newassay)
+
+            If newassay.IsBulk Then
+                gridassays.Rows.Add(New Object() {id, newassay.Name, "Bulk"})
+            Else
+                gridassays.Rows.Add(New Object() {id, newassay.Name, "Curves"})
+            End If
+
         End If
 
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
 
-        pfd.Options.PetroleumAssays.Remove(gridassays.SelectedRows(0).Cells(0).Value)
+        If gridassays.SelectedRows.Count > 0 Then
 
-        gridassays.Rows.Clear()
+            pfd.Options.PetroleumAssays.Remove(gridassays.SelectedRows(0).Cells(0).Value)
 
-        For Each s As String In pfd.Options.PetroleumAssays.Keys
-            If pfd.Options.PetroleumAssays(s).IsBulk Then
-                gridassays.Rows.Add(New Object() {s, pfd.Options.PetroleumAssays(s).Name, "Bulk"})
-            Else
-                gridassays.Rows.Add(New Object() {s, pfd.Options.PetroleumAssays(s).Name, "Curves"})
-            End If
-        Next
+            gridassays.Rows.Clear()
 
+            For Each s As String In pfd.Options.PetroleumAssays.Keys
+                If pfd.Options.PetroleumAssays(s).IsBulk Then
+                    gridassays.Rows.Add(New Object() {s, pfd.Options.PetroleumAssays(s).Name, "Bulk"})
+                Else
+                    gridassays.Rows.Add(New Object() {s, pfd.Options.PetroleumAssays(s).Name, "Curves"})
+                End If
+            Next
+
+        End If
 
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
-        currentassay = pfd.Options.PetroleumAssays(gridassays.SelectedRows(0).Cells(0).Value)
+        If gridassays.SelectedRows.Count > 0 Then
 
-        Me.DialogResult = DialogResult.OK
+            currentassay = pfd.Options.PetroleumAssays(gridassays.SelectedRows(0).Cells(0).Value)
 
-        Me.Hide()
+        Else
+
+            currentassay = Nothing
+
+        End If
+
+        Close()
 
     End Sub
 
@@ -360,6 +372,14 @@ Public Class FormAssayManager
                 handler.Write(stream)
             End Using
         End If
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        DialogResult = DialogResult.Cancel
+
+        Close()
 
     End Sub
 

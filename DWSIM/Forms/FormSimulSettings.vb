@@ -1365,7 +1365,7 @@ Public Class FormSimulSettings
 
         Dim frmam As New FormAssayManager
         frmam.ShowDialog(Me)
-        frmam.Close()
+
     End Sub
 
     Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)

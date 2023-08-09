@@ -24,7 +24,7 @@ Partial Class FormAssayManager
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAssayManager))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBoxBulk = New System.Windows.Forms.GroupBox()
         Me.LabelNBP = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -109,7 +109,6 @@ Partial Class FormAssayManager
         '
         'GroupBoxBulk
         '
-        resources.ApplyResources(Me.GroupBoxBulk, "GroupBoxBulk")
         Me.GroupBoxBulk.BackColor = System.Drawing.Color.Transparent
         Me.GroupBoxBulk.Controls.Add(Me.LabelNBP)
         Me.GroupBoxBulk.Controls.Add(Me.GroupBox5)
@@ -121,6 +120,7 @@ Partial Class FormAssayManager
         Me.GroupBoxBulk.Controls.Add(Me.Label19)
         Me.GroupBoxBulk.Controls.Add(Me.Label20)
         Me.GroupBoxBulk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        resources.ApplyResources(Me.GroupBoxBulk, "GroupBoxBulk")
         Me.GroupBoxBulk.Name = "GroupBoxBulk"
         Me.GroupBoxBulk.TabStop = False
         '
@@ -131,7 +131,6 @@ Partial Class FormAssayManager
         '
         'GroupBox5
         '
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Controls.Add(Me.LabelV2)
         Me.GroupBox5.Controls.Add(Me.LabelV1)
         Me.GroupBox5.Controls.Add(Me.LabelT2)
@@ -145,6 +144,7 @@ Partial Class FormAssayManager
         Me.GroupBox5.Controls.Add(Me.Label9)
         Me.GroupBox5.Controls.Add(Me.Label10)
         Me.GroupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
@@ -245,23 +245,22 @@ Partial Class FormAssayManager
         '
         'GroupBoxCurves
         '
-        resources.ApplyResources(Me.GroupBoxCurves, "GroupBoxCurves")
         Me.GroupBoxCurves.Controls.Add(Me.FaTabStrip1)
+        resources.ApplyResources(Me.GroupBoxCurves, "GroupBoxCurves")
         Me.GroupBoxCurves.Name = "GroupBoxCurves"
         Me.GroupBoxCurves.TabStop = False
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.TextBoxKAPI)
         Me.FaTabStripItem1.Controls.Add(Me.Label7)
@@ -288,6 +287,7 @@ Partial Class FormAssayManager
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'TextBoxKAPI
         '
@@ -352,10 +352,10 @@ Partial Class FormAssayManager
         '
         'ComboBoxDistMethod
         '
-        resources.ApplyResources(Me.ComboBoxDistMethod, "ComboBoxDistMethod")
         Me.ComboBoxDistMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxDistMethod.FormattingEnabled = True
         Me.ComboBoxDistMethod.Items.AddRange(New Object() {resources.GetString("ComboBoxDistMethod.Items"), resources.GetString("ComboBoxDistMethod.Items1"), resources.GetString("ComboBoxDistMethod.Items2"), resources.GetString("ComboBoxDistMethod.Items3")})
+        resources.ApplyResources(Me.ComboBoxDistMethod, "ComboBoxDistMethod")
         Me.ComboBoxDistMethod.Name = "ComboBoxDistMethod"
         '
         'Label38
@@ -370,10 +370,10 @@ Partial Class FormAssayManager
         '
         'ComboBoxBasis
         '
-        resources.ApplyResources(Me.ComboBoxBasis, "ComboBoxBasis")
         Me.ComboBoxBasis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxBasis.FormattingEnabled = True
         Me.ComboBoxBasis.Items.AddRange(New Object() {resources.GetString("ComboBoxBasis.Items"), resources.GetString("ComboBoxBasis.Items1"), resources.GetString("ComboBoxBasis.Items2")})
+        resources.ApplyResources(Me.ComboBoxBasis, "ComboBoxBasis")
         Me.ComboBoxBasis.Name = "ComboBoxBasis"
         '
         'TextBoxVT1
@@ -417,24 +417,24 @@ Partial Class FormAssayManager
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.gridcurves)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'gridcurves
         '
-        resources.ApplyResources(Me.gridcurves, "gridcurves")
         Me.gridcurves.AllowUserToAddRows = False
         Me.gridcurves.AllowUserToDeleteRows = False
         Me.gridcurves.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.gridcurves.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.gridcurves.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.gridcurves.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridcurves.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.gridcurves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridcurves.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.vap, Me.temp, Me.mm, Me.dens, Me.visc1, Me.visc2})
+        resources.ApplyResources(Me.gridcurves, "gridcurves")
         Me.gridcurves.Name = "gridcurves"
         Me.gridcurves.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.gridcurves.RowHeadersVisible = False
@@ -473,15 +473,14 @@ Partial Class FormAssayManager
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.gridassays)
         Me.GroupBox2.Controls.Add(Me.ToolStrip1)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'gridassays
         '
-        resources.ApplyResources(Me.gridassays, "gridassays")
         Me.gridassays.AllowUserToAddRows = False
         Me.gridassays.AllowUserToDeleteRows = False
         Me.gridassays.AllowUserToResizeColumns = False
@@ -491,6 +490,7 @@ Partial Class FormAssayManager
         Me.gridassays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridassays.ColumnHeadersVisible = False
         Me.gridassays.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colid, Me.colname, Me.tipo})
+        resources.ApplyResources(Me.gridassays, "gridassays")
         Me.gridassays.MultiSelect = False
         Me.gridassays.Name = "gridassays"
         Me.gridassays.RowHeadersVisible = False
@@ -515,38 +515,38 @@ Partial Class FormAssayManager
         '
         'ToolStrip1
         '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripButton1, Me.ToolStripButton2})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripButton3
         '
-        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.Image = Global.DWSIM.My.Resources.Resources.copy
+        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
-        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton4.Image = Global.DWSIM.My.Resources.Resources.cross
+        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'ToolStripButton1
         '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'Button1
@@ -557,8 +557,8 @@ Partial Class FormAssayManager
         '
         'Button2
         '
-        resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
@@ -577,7 +577,6 @@ Partial Class FormAssayManager
         Me.AcceptButton = Me.Button1
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CancelButton = Me.Button2
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)

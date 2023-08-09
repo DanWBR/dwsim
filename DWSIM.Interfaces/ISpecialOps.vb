@@ -85,3 +85,9 @@ End Interface
     Property Units As String
 
 End Interface
+
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IControllableObject
+
+    Property ControlPanel As Object
+
+End Interface
