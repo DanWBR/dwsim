@@ -186,8 +186,11 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "t/h", "t/min", "lb/min",
                                    "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"})
                 Case Enums.UnitOfMeasure.molarflow
-                    units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
+                    units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d",
+                                   "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
                                    "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
+                                   "m3/h @ BR", "m3/h @ NC", "m3/h @ CNTP", "m3/h @ SC", "m3/h @ 0 C, 1 atm", "m3/h @ 15.56 C, 1 atm", "m3/h @ 20 C, 1 atm",
+                                   "ft3/h @ 60 f, 14.7 psia", "ft3/h @ 0 C, 1 atm",
                                    "MMSCFD", "SCFD", "SCFM",
                                    "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ NC"})
                 Case Enums.UnitOfMeasure.volumetricFlow
@@ -282,7 +285,11 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.pressure
                 Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "t/h", "t/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
                     Return Enums.UnitOfMeasure.massflow
-                Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm"
+                Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d",
+                     "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
+                     "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
+                     "m3/h @ BR", "m3/h @ NC", "m3/h @ CNTP", "m3/h @ SC", "m3/h @ 0 C, 1 atm", "m3/h @ 15.56 C, 1 atm", "m3/h @ 20 C, 1 atm",
+                     "ft3/h @ 60 f, 14.7 psia", "ft3/h @ 0 C, 1 atm"
                     Return Enums.UnitOfMeasure.molarflow
                 Case "m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/min", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "gal[US]/s", "L/h", "L/min", "L/s",
                      "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
@@ -382,7 +389,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.molarflow
                     Return molarflow
                 Case Enums.UnitOfMeasure.volumetricFlow
-                    Return volumetricflow
+                    Return volumetricFlow
                 Case Enums.UnitOfMeasure.enthalpy
                     Return enthalpy
                 Case Enums.UnitOfMeasure.entropy
@@ -527,7 +534,7 @@ Namespace SystemsOfUnits
                 .temperature = "K"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "Pa.s"
-                .volumetricflow = "m3/s"
+                .volumetricFlow = "m3/s"
                 .cinematic_viscosity = "m2/s"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -704,7 +711,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricflow = "m3/h"
+                .volumetricFlow = "m3/h"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -791,7 +798,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricflow = "m3/h"
+                .volumetricFlow = "m3/h"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -878,7 +885,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricflow = "m3/h"
+                .volumetricFlow = "m3/h"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -965,7 +972,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricflow = "m3/d"
+                .volumetricFlow = "m3/d"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -1052,7 +1059,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "Pa.s"
-                .volumetricflow = "m3/h"
+                .volumetricFlow = "m3/h"
                 .cinematic_viscosity = "m2/s"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -1151,7 +1158,7 @@ Namespace SystemsOfUnits
                 .kvalue = "-"
                 .logKvalue = "-"
                 .surfaceTension = "lbf/in"
-                .volumetricflow = "ft3/s"
+                .volumetricFlow = "ft3/s"
                 .cinematic_viscosity = "ft2/s"
                 .heatflow = "BTU/h"
                 .head = "ft"
@@ -1238,7 +1245,7 @@ Namespace SystemsOfUnits
                 .kvalue = "-"
                 .logKvalue = "-"
                 .surfaceTension = "dyn/cm2"
-                .volumetricflow = "cm3/s"
+                .volumetricFlow = "cm3/s"
                 .cinematic_viscosity = "cSt"
                 .heatflow = "kcal/h"
                 .head = "m"
@@ -1720,6 +1727,21 @@ Namespace SystemsOfUnits
                     Return value / (23.69 * 3600.0 * 24.0 / 1000.0) / 35.3147
                 Case "ft3/d @ 0 c, 1 atm"
                     Return value / (22.71 * 3600.0 * 24.0 / 1000.0) / 35.3147
+
+                Case "m3/h @ br", "m3/h @ 20 c, 1 atm"
+                    Return value / (24.055 * 3600 / 1000.0)
+                Case "m3/h @ cntp"
+                    Return value / (22.71 * 3600 / 1000.0)
+                Case "m3/h @ nc", "m3/h @ 0 c, 1 atm"
+                    Return value / (22.71 * 3600 / 1000.0)
+                Case "m3/h @ sc", "m3/h @ 15.56 c, 1 atm"
+                    Return value / (23.69 * 3600.0 / 1000.0)
+                Case "ft3/h @ 60 f, 14.7 psia"
+                    Return value / (23.69 * 3600.0 / 1000.0) / 35.3147
+                Case "ft3/h @ 0 c, 1 atm"
+                    Return value / (22.71 * 3600.0 / 1000.0) / 35.3147
+
+
                 Case "°f"
                     Return (value - 32) * 5 / 9 + 273.15
                 Case "°f."
@@ -2222,6 +2244,20 @@ Namespace SystemsOfUnits
                     Return value * (23.69 * 3600 * 24 / 1000) * 35.3147
                 Case "ft3/d @ 0 c, 1 atm"
                     Return value * (22.71 * 3600 * 24 / 1000) * 35.3147
+
+                Case "m3/h @ br", "m3/h @ 20 c, 1 atm"
+                    Return value * (24.055 * 3600 / 1000)
+                Case "m3/h @ cntp"
+                    Return value * (22.71 * 3600 / 1000)
+                Case "m3/h @ nc", "m3/h @ 0 c, 1 atm"
+                    Return value * (22.71 * 3600 / 1000)
+                Case "m3/h @ sc", "m3/h @ 15.56 c, 1 atm"
+                    Return value * (23.69 * 3600 / 1000)
+                Case "ft3/h @ 60 f, 14.7 psia"
+                    Return value * (23.69 * 3600 / 1000) * 35.3147
+                Case "ft3/h @ 0 c, 1 atm"
+                    Return value * (22.71 * 3600 / 1000) * 35.3147
+
                 Case "°f"
                     Return (value - 273.15) * 9 / 5 + 32
                 Case "f"
@@ -2275,7 +2311,7 @@ Namespace SystemsOfUnits
         Public Shared Function Convert(fromunit As String, tounit As String, value As Double) As Double
 
             Dim sival As Double = ConvertToSI(fromunit, value)
-            Return Double.Parse(ConvertfromSI(tounit, sival))
+            Return Double.Parse(ConvertFromSI(tounit, sival))
 
         End Function
 

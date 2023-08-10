@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.5.1
+Version 8.6.0
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,18 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.6.0
+
+- Redesigned Undo/Redo feature
+- Better handling of unknown errors
+- New standard volumetric flow units
+- Fixed Input and PID controller editors (Classic UI)
+- Fixed object deletion in context menu (Classic UI)
+- Fixed Component Properties View: Liquid Phase Missing Property Displays (#521)
+- Fixed Chemsep flowsheet mouse hover issue (#520)
+- CoolProp fix density for INCOM mixture (#519)
+- Bug fixes
 
 Version 8.5.1
 
