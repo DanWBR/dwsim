@@ -1607,7 +1607,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Dim conables As New ArrayList
 
-        For Each obj In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
+        For Each obj In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values.OrderBy(Function(o) o.GraphicObject.Tag)
             If obj.GraphicObject.Tag <> refobj.Tag Then
                 If obj.GraphicObject.ObjectType <> ObjectType.GO_Text And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_HTMLText And
@@ -1649,6 +1649,14 @@ Public Class FlowsheetSurface_SkiaSharp
                                 obj.GraphicObject.ObjectType = ObjectType.EnergyStream And
                                 cp.Type = ConType.ConEn Then conables.Add(obj.GraphicObject.Tag)
                             Next
+                        End If
+                    ElseIf TypeOf refobj.Owner Is IUnitOperation Then
+                        If obj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
+                            cp = obj.GraphicObject.InputConnectors(0)
+                            If Not cp.IsAttached And Not conables.Contains(obj.GraphicObject.Tag) Then conables.Add(obj.GraphicObject.Tag)
+                        ElseIf obj.GraphicObject.ObjectType = ObjectType.EnergyStream Then
+                            cp = obj.GraphicObject.InputConnectors(0)
+                            If Not cp.IsAttached And Not refobj.EnergyConnector.IsAttached And Not conables.Contains(obj.GraphicObject.Tag) Then conables.Add(obj.GraphicObject.Tag)
                         End If
                     Else
                         For Each cp In obj.GraphicObject.InputConnectors
