@@ -689,14 +689,24 @@ Public Class FormFlowsheet
 
         'dispose objects
 
-        FileDatabaseProvider.ReleaseDatabase()
+        Try
+            FileDatabaseProvider.ReleaseDatabase()
+        Catch ex As Exception
+
+        End Try
 
         For Each uobj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
-            If uobj.disposedValue = False Then uobj.Dispose()
+            Try
+                If uobj.disposedValue = False Then uobj.Dispose()
+            Catch ex As Exception
+            End Try
         Next
 
         For Each gobj In Collections.GraphicObjectCollection.Values
-            gobj.ReleaseReferences()
+            Try
+                gobj.ReleaseReferences()
+            Catch ex As Exception
+            End Try
         Next
 
         Collections.GraphicObjectCollection.Clear()
@@ -719,36 +729,43 @@ Public Class FormFlowsheet
 
         End If
 
-        Dim cnt As Integer = My.Application.MainWindowForm.MdiChildren.Length
+        Try
+            Dim cnt As Integer = My.Application.MainWindowForm.MdiChildren.Length
 
-        If cnt = 0 Then
+            If cnt = 0 Then
 
-            My.Application.MainWindowForm.ToolStripButton1.Enabled = False
-            My.Application.MainWindowForm.SaveFileS365.Enabled = False
-            My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
-            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = False
-            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
-            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
-            My.Application.MainWindowForm.ToolStripButton1.Enabled = False
+                My.Application.MainWindowForm.ToolStripButton1.Enabled = False
+                My.Application.MainWindowForm.SaveFileS365.Enabled = False
+                My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
+                My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = False
+                My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
+                My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
+                My.Application.MainWindowForm.ToolStripButton1.Enabled = False
 
-        Else
+            Else
 
-            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
-            My.Application.MainWindowForm.SaveFileS365.Enabled = True
-            My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
-            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
-            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
-            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+                My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+                My.Application.MainWindowForm.SaveFileS365.Enabled = True
+                My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+                My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
+                My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
+                My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
+                My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
-        End If
+            End If
+        Catch ex As Exception
 
-        MessagePumpTimer.Dispose()
-        TimerScripts1.Dispose()
-        TimerScripts15.Dispose()
-        TimerScripts30.Dispose()
-        TimerScripts5.Dispose()
-        TimerScripts60.Dispose()
+        End Try
+
+        Try
+            MessagePumpTimer.Dispose()
+            TimerScripts1.Dispose()
+            TimerScripts15.Dispose()
+            TimerScripts30.Dispose()
+            TimerScripts5.Dispose()
+            TimerScripts60.Dispose()
+        Catch ex As Exception
+        End Try
 
         Try
             FrmStSim1.CurrentFlowsheet = Nothing
@@ -756,7 +773,6 @@ Public Class FormFlowsheet
             FrmStSim1.FloatPane?.Dispose()
             FrmStSim1.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
@@ -764,75 +780,62 @@ Public Class FormFlowsheet
             FormSpreadsheet.Flowsheet = Nothing
             FormSpreadsheet.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
             FormSurface.ReleaseResources()
             FormSurface.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
             FormCharts.Flowsheet = Nothing
             FormCharts.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
             FormDynamics.Flowsheet = Nothing
             FormDynamics.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
             FormIntegratorControls.Flowsheet = Nothing
             FormIntegratorControls.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
             FormFilesExplorer.Flowsheet = Nothing
             FormFilesExplorer.Dispose()
         Catch ex As Exception
-
         End Try
-
-        'Try
-        '    FormIPyConsole.Flowsheet = Nothing
-        '    FormIPyConsole.Dispose()
-        'Catch ex As Exception
-
-        'End Try
 
         Try
             FormWatch.Flowsheet = Nothing
             FormWatch.Dispose()
         Catch ex As Exception
-
         End Try
 
         Try
             FormScript1.fc = Nothing
             FormScript1.Dispose()
         Catch ex As Exception
-
         End Try
 
         Dim fields = Me.GetType().GetProperties()
 
-        UnloadExtenders()
+        Try
+            UnloadExtenders()
+        Catch ex As Exception
+        End Try
 
         Try
             For Each item As ToolStripMenuItem In CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems
                 RemoveHandler item.Click, AddressOf Me.COMOClick
             Next
         Catch ex As Exception
-
         End Try
 
         Try
@@ -840,7 +843,6 @@ Public Class FormFlowsheet
                 RemoveHandler item.Click, AddressOf Me.PluginClick
             Next
         Catch ex As Exception
-
         End Try
 
         Try
@@ -848,7 +850,6 @@ Public Class FormFlowsheet
                 RemoveHandler item.Click, AddressOf UtilitiesTSMIHandler
             Next
         Catch ex As Exception
-
         End Try
 
         Try
@@ -884,16 +885,19 @@ Public Class FormFlowsheet
             MenuStrip1.Dispose()
 
         Catch ex As Exception
-
         End Try
 
         If BidirectionalSolver IsNot Nothing Then
-            DirectCast(BidirectionalSolver, IExtender3).ReleaseResources()
+            Try
+                DirectCast(BidirectionalSolver, IExtender3).ReleaseResources()
+            Catch ex As Exception
+            End Try
         End If
 
-        ClearVariables()
-
-        'Me.MdiParent = Nothing
+        Try
+            ClearVariables()
+        Catch ex As Exception
+        End Try
 
         'garbage collection (frees unused memory)
         System.GC.Collect()
