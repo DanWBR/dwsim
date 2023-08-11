@@ -35,6 +35,14 @@ Public Class FormPropSelection
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Dim separator = ";"
+        If lvObject.SelectedItems.Count = 0 Then
+            MessageBox.Show("Please select an object.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+        If lvProp.SelectedItems.Count = 0 Then
+            MessageBox.Show("Please select a property.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         If ssmode Then
             Dim scell = ssheet.CurrentWorksheet.GetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
             If scell Is Nothing Then scell = ssheet.CurrentWorksheet.CreateAndGetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
