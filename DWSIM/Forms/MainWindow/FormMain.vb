@@ -1082,12 +1082,14 @@ Public Class FormMain
         End If
 
 #If LINUX = False Then
-        Dim currver = Assembly.GetExecutingAssembly().GetName().Version.ToString()
-        If (Settings.CurrentVersion <> currver) Then
-            Settings.CurrentVersion = currver
-            My.Settings.CurrentVersion = currver
-            Dim frmwn As New FormWhatsNew()
-            frmwn.Show()
+        If Not FormMain.IsPro Then
+            Dim currver = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+            If (Settings.CurrentVersion <> currver) Then
+                Settings.CurrentVersion = currver
+                My.Settings.CurrentVersion = currver
+                Dim frmwn As New FormWhatsNew()
+                frmwn.Show()
+            End If
         End If
 #Else
         MessageBox.Show("The Classic UI version of DWSIM is not supported on Linux. Use it at your own risk.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
