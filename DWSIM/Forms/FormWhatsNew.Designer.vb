@@ -25,7 +25,6 @@ Partial Class FormWhatsNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormWhatsNew))
         Me.Viewer = New Microsoft.Web.WebView2.WinForms.WebView2()
         CType(Me.Viewer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -38,7 +37,7 @@ Partial Class FormWhatsNew
         Me.Viewer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Viewer.Location = New System.Drawing.Point(0, 0)
         Me.Viewer.Name = "Viewer"
-        Me.Viewer.Size = New System.Drawing.Size(1127, 761)
+        Me.Viewer.Size = New System.Drawing.Size(784, 561)
         Me.Viewer.TabIndex = 1
         Me.Viewer.ZoomFactor = 1.0R
         '
@@ -46,20 +45,13 @@ Partial Class FormWhatsNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(1127, 761)
+        Me.ClientSize = New System.Drawing.Size(784, 561)
         Me.Controls.Add(Me.Viewer)
-        'Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Icon = Global.DWSIM.My.Resources.Resources.DWSIM_Icon_41
         Me.Name = "FormWhatsNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "What's New in DWSIM / DWSIM Pro"
+        Me.Text = "What's New in DWSIM"
         Me.TopMost = True
-
-        If Not FormMain.IsPro Then
-            Icon = My.Resources.DWSIM_Icon_41
-        Else
-            Icon = My.Resources.Icon1282
-        End If
-
         CType(Me.Viewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
