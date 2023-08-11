@@ -4143,8 +4143,11 @@ Label_00CC:
         If My.Settings.SaveBackupFile Then
             If TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
                 If File.Exists(handler.FullPath) Then
-                    Dim dfile = Path.GetDirectoryName(handler.FullPath) & Path.DirectorySeparatorChar & Path.GetFileNameWithoutExtension(handler.FullPath) & "_backup" & Path.GetExtension(handler.FullPath)
-                    File.Copy(handler.FullPath, dfile, True)
+                    Try
+                        Dim dfile = Path.GetDirectoryName(handler.FullPath) & Path.DirectorySeparatorChar & Path.GetFileNameWithoutExtension(handler.FullPath) & "_backup" & Path.GetExtension(handler.FullPath)
+                        File.Copy(handler.FullPath, dfile, True)
+                    Catch ex As Exception
+                    End Try
                 End If
             End If
         End If
