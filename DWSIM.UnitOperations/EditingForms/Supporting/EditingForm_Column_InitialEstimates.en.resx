@@ -130,9 +130,6 @@
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>425, 20</value>
   </data>
-  <data name="TextBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Open file with initial estimates</value>
   </data>
@@ -141,9 +138,6 @@
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>File</value>
-  </data>
-  <data name="GroupBox1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dgvv.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -169,9 +163,6 @@
   </data>
   <data name="dgvv.Size" type="System.Drawing.Size, System.Drawing">
     <value>524, 369</value>
-  </data>
-  <data name="dgvv.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
@@ -240,17 +231,11 @@
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 369</value>
   </data>
-  <data name="ToolStrip1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 369</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Variables</value>
-  </data>
-  <data name="FaTabStripItem1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>Stage</value>
@@ -266,9 +251,6 @@
   </data>
   <data name="dgvcl.Size" type="System.Drawing.Size, System.Drawing">
     <value>524, 369</value>
-  </data>
-  <data name="dgvcl.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStrip2.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -306,17 +288,11 @@
   <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 369</value>
   </data>
-  <data name="ToolStrip2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 369</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Mole Fractions (L)</value>
-  </data>
-  <data name="FaTabStripItem2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Stage</value>
@@ -332,9 +308,6 @@
   </data>
   <data name="dgvcv.Size" type="System.Drawing.Size, System.Drawing">
     <value>524, 369</value>
-  </data>
-  <data name="dgvcv.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStrip5.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -372,32 +345,20 @@
   <data name="ToolStrip5.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 369</value>
   </data>
-  <data name="ToolStrip5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 369</value>
   </data>
   <data name="FaTabStripItem5.Title" xml:space="preserve">
     <value>Mole Fractions (V)</value>
   </data>
-  <data name="FaTabStripItem5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>554, 395</value>
-  </data>
-  <data name="FaTabStrip1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>560, 414</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Estimates</value>
-  </data>
-  <data name="GroupBox2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStripButton11.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -417,9 +378,6 @@
   <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 381</value>
   </data>
-  <data name="ToolStrip3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
@@ -438,17 +396,11 @@
   <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>591, 381</value>
   </data>
-  <data name="DataGridView1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 381</value>
   </data>
   <data name="FaTabStripItem3.Title" xml:space="preserve">
     <value>Variables</value>
-  </data>
-  <data name="FaTabStripItem3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStripButton16.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -468,9 +420,6 @@
   <data name="ToolStrip4.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 381</value>
   </data>
-  <data name="ToolStrip4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
@@ -483,28 +432,16 @@
   <data name="DataGridView2.Size" type="System.Drawing.Size, System.Drawing">
     <value>591, 381</value>
   </data>
-  <data name="DataGridView2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 381</value>
   </data>
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>Compositions</value>
   </data>
-  <data name="FaTabStripItem4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FaTabStrip2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowOnly</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>575, 481</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>
