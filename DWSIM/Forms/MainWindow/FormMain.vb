@@ -913,11 +913,11 @@ Public Class FormMain
 
         'PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
 
-        'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-        'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-        'ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
+        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+        ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
 
-        'PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
+        PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
 
         'Dim LIQPP As New LIQUAC2PropertyPackage()
         'LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
@@ -925,11 +925,11 @@ Public Class FormMain
 
         'PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
 
-        'Dim DHPP As New DebyeHuckelPropertyPackage()
-        'DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-        'DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
+        Dim DHPP As New DebyeHuckelPropertyPackage()
+        DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+        DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
 
-        'PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
+        PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
 
         'Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         'BOPP.ComponentName = "Black Oil"
