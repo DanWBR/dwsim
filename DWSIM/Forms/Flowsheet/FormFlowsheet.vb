@@ -1464,6 +1464,7 @@ Public Class FormFlowsheet
 
             UIThreadInvoke(Sub()
                                Me.FormLog.Grid1.Rows.Clear()
+                               pbSolver.Visible = True
                            End Sub)
 
 
@@ -1501,9 +1502,9 @@ Public Class FormFlowsheet
                                                      End Function)
             t.ContinueWith(Sub(tres)
                                RaiseEvent FinishedSolving(Me, New EventArgs())
-                               'For Each item In tres.Result
-                               '    ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
-                               'Next
+                               Me.UIThread(Sub()
+                                               pbSolver.Visible = False
+                                           End Sub)
                            End Sub)
             t.Start()
             If wait Then t.Wait()
@@ -1746,8 +1747,13 @@ Public Class FormFlowsheet
 
             CalculationQueue.Enqueue(objargs)
 
+            pbSolver.Visible = True
+
             Task.Factory.StartNew(Sub()
-                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, , True)
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, , True,,,,
+                                                                                     Sub()
+                                                                                         UIThread(Sub() pbSolver.Visible = False)
+                                                                                     End Sub)
                                   End Sub)
 
         End If
