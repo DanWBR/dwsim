@@ -314,6 +314,9 @@ namespace DWSIM.UI.Forms
             var btnmBasis = new ButtonToolItem { ToolTip = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png", this.GetType().Assembly)) };
             var btnmOptions = new ButtonToolItem { ToolTip = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png", this.GetType().Assembly)) };
 
+            var btnmUndo = new ButtonToolItem { ToolTip = "Undo Action", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "back_arrow_96px.png", this.GetType().Assembly)) };
+            var btnmRedo = new ButtonToolItem { ToolTip = "Redo Action", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "forward_button_96px.png", this.GetType().Assembly)) };
+
             chkmDynamics = new CheckToolItem { Checked = FlowsheetObject.DynamicMode, ToolTip = "Enable/Disable Dynamic Mode", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-exercise.png", this.GetType().Assembly)) };
             var btnmDynManager = new ButtonToolItem { ToolTip = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png", this.GetType().Assembly)) };
             var btnmDynIntegrator = new ButtonToolItem { ToolTip = "Dynamics Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png", this.GetType().Assembly)) };
@@ -323,6 +326,8 @@ namespace DWSIM.UI.Forms
 
             if (Application.Instance.Platform.IsMac)
             {
+                btnmUndo.Text = "Undo";
+                btnmRedo.Text = "Redo";
                 btnmSave.Text = "Save";
                 btnmSolve.Text = "Solve Flowsheet";
                 btnmStop.Text = "Stop Solving";
@@ -341,6 +346,8 @@ namespace DWSIM.UI.Forms
             {
                 Items = { btnmSave, new SeparatorToolItem { Type = SeparatorToolItemType.Space },
                 btnmComps, btnmBasis, btnmOptions,
+                new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
+                btnmUndo, btnmRedo,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
                 btnmSolve, btnmStop, btnmSimultSolve,
                 new SeparatorToolItem{ Type = SeparatorToolItemType.Space },
@@ -365,6 +372,8 @@ namespace DWSIM.UI.Forms
             // actions
 
             FlowsheetObject.UpdateEditorPanels = () => UpdateEditorPanels();
+
+            FlowsheetObject.CloseEditorPanels = () => CloseOpenedEditorPanels();
 
             FlowsheetObject.UpdateSurface = (() =>
             {
@@ -541,6 +550,27 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.ActHorizAlign = ActHorizAlign;
 
             // button click events
+
+            btnmUndo.Click += (sender, e) => {
+                if (!FlowsheetObject.FlowsheetOptions.EnabledUndoRedo)
+                {
+                    FlowsheetObject.ShowMessage("Undo/Redo feature is disabled (Edit > Flowsheet Settings > General > Enable Undo/Redo)", Interfaces.IFlowsheet.MessageType.Tip);
+                }
+                else {
+                    FlowsheetObject.ProcessUndo();
+                }
+            };
+
+            btnmRedo.Click += (sender, e) => {
+                if (!FlowsheetObject.FlowsheetOptions.EnabledUndoRedo)
+                {
+                    FlowsheetObject.ShowMessage("Undo/Redo feature is disabled (Edit > Flowsheet Settings > General > Enable Undo/Redo)", Interfaces.IFlowsheet.MessageType.Tip);
+                }
+                else
+                {
+                    FlowsheetObject.ProcessRedo();
+                }
+            };
 
             chkmInspector.CheckedChanged += (sender, e) => s.InspectorEnabled = chkmInspector.Checked;
 
@@ -2765,6 +2795,11 @@ namespace DWSIM.UI.Forms
                 ((ObjectEditorContainer)item.Content).Update();
                 ((ObjectEditorContainer)item.Content).UpdateConnections();
             }
+        }
+
+        public void CloseOpenedEditorPanels()
+        {
+            EditorHolder.Pages.Clear();
         }
 
         public void UpdateEditorConnectionsPanel()

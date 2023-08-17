@@ -20,7 +20,7 @@ namespace DWSIM.UI.Desktop.Shared
         public Action ActComps, ActBasis, ActGlobalOptions, ActSave, ActSaveAs, ActOptions, ActZoomIn, ActZoomOut, ActZoomFit, ActZoomDefault, ActSimultAdjustSolver;
         public Action ActDrawGrid, ActSnapToGrid, ActMultiSelect, ActAlignLefts, ActAlignCenters, ActAlignRights, ActAlignTops, ActAlignMiddles, ActAlignBottoms, ActHorizAlign, ActVertAlign;
 
-        public Action UpdateEditorPanels;
+        public Action UpdateEditorPanels, CloseEditorPanels;
 
         public Action UpdateSurface;
 
@@ -97,6 +97,11 @@ namespace DWSIM.UI.Desktop.Shared
         public override void UpdateOpenEditForms()
         {
             UpdateEditorPanels?.Invoke();
+        }
+
+        public override void CloseOpenEditForms()
+        {
+            CloseEditorPanels?.Invoke();
         }
 
         public override object GetApplicationObject()

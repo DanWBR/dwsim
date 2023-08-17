@@ -4140,7 +4140,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Public Sub CloseOpenEditForms()
+    Public Sub CloseOpenEditForms() Implements IFlowsheet.CloseOpenEditForms
 
         Me.UIThread(Sub()
                         For Each obj In SimulationObjects.Values

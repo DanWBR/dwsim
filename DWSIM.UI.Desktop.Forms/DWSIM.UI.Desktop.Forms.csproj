@@ -440,6 +440,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\icons8-stop.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\back_arrow_96px.png" />
+    <EmbeddedResource Include="Resources\Icons\forward_button_96px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

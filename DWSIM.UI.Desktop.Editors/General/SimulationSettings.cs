@@ -37,6 +37,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "The simulation name will be used for report identification and file name during saving.");
 
+            s.CreateAndAddCheckBoxRow(container, "Enable Undo/Redo",
+                flowsheet.FlowsheetOptions.EnabledUndoRedo,
+                (chk, e) => flowsheet.FlowsheetOptions.EnabledUndoRedo = chk.Checked.GetValueOrDefault());
+
+            s.CreateAndAddDescriptionRow(container, "Enables Undo/Redo feature and starts listening for reversible actions.");
+
             var avunits = flowsheet.AvailableSystemsOfUnits.Select((x) => x.Name).ToList();
 
             s.CreateAndAddLabelRow(container, "Flowsheet Objects");

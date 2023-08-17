@@ -383,7 +383,7 @@
     Sub RegisterSnapshot(stype As Enums.SnapshotType, Optional obj As ISimulationObject = Nothing)
 
     Sub ResetCalculationStatus()
-
+    Sub CloseOpenEditForms()
 End Interface
 
 ''' <summary>
