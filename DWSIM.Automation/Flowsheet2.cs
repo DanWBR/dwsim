@@ -331,5 +331,9 @@ namespace DWSIM.Automation
             return Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.tmp");
         }
 
+        public override void CloseOpenEditForms()
+        {
+
+        }
     }
 }

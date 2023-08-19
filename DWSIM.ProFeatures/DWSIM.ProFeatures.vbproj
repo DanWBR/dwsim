@@ -70,9 +70,7 @@
     <Compile Include="ListItem.designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
     </Compile>
-    <Compile Include="ListItem.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="ListItem.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
