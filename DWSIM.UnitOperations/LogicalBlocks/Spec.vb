@@ -70,6 +70,10 @@ Namespace SpecialOps
 
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
 
+        Public Property SpecCalculationMode As SpecCalcMode2 = SpecCalcMode2.GlobalSetting Implements ISpec.SpecCalculationMode
+
+        Public Property ReferenceObjectID As String = "" Implements ISpec.ReferenceObjectID
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Spec()
             obj.LoadData(Me.SaveData)
@@ -409,14 +413,15 @@ Namespace SpecialOps
 
         Public Function ParseExpression() As Double
 
-            Me.ExpContext = New Ciloci.Flee.ExpressionContext
-            Me.ExpContext.Imports.AddType(GetType(System.Math))
+            ExpContext = New Ciloci.Flee.ExpressionContext
+            ExpContext.Imports.AddType(GetType(System.Math))
 
-            Me.ExpContext.Variables.Add("X", Double.Parse(Me.GetSourceVarValue))
-            Me.ExpContext.Variables.Add("Y", Double.Parse(Me.GetTargetVarValue))
-            Me.Expr = Me.ExpContext.CompileGeneric(Of Double)(Me.Expression)
+            ExpContext.Variables.Add("X", Double.Parse(Me.GetSourceVarValue))
+            ExpContext.Variables.Add("Y", Double.Parse(Me.GetTargetVarValue))
+            ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+            Expr = Me.ExpContext.CompileGeneric(Of Double)(Me.Expression)
 
-            Return Me.Expr.Evaluate
+            Return Expr.Evaluate
 
         End Function
 
@@ -424,8 +429,9 @@ Namespace SpecialOps
 
             If Me.GraphicObject.Active Then
 
-                Me.ExpContext = New Ciloci.Flee.ExpressionContext
-                Me.ExpContext.Imports.AddType(GetType(System.Math))
+                ExpContext = New Ciloci.Flee.ExpressionContext
+                ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                ExpContext.Imports.AddType(GetType(System.Math))
 
                 If Not Me.GetSourceVarValue Is Nothing And Not Me.GetTargetVarValue Is Nothing Then
 
@@ -594,6 +600,7 @@ Namespace SpecialOps
                 Return False
             End Get
         End Property
+
     End Class
 
 End Namespace

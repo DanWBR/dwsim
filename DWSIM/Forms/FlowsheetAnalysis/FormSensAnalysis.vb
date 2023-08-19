@@ -712,6 +712,7 @@ Public Class FormSensAnalysis
                         Me.selectedsacase.econtext = New ExpressionContext
                         Me.selectedsacase.expression = Me.tbExpression.Text
                         With Me.selectedsacase.econtext
+                            .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                             .Imports.AddType(GetType(System.Math))
                             For Each var As SAVariable In selectedsacase.variables.Values
                                 If var.objectID <> "SpreadsheetCell" Then
@@ -838,6 +839,7 @@ Public Class FormSensAnalysis
     Private Sub btnVerify_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVerify.Click
         Try
             Dim econtext As New ExpressionContext
+            econtext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
             econtext.Imports.AddType(GetType(System.Math))
             For Each row As DataGridViewRow In Me.dgVariables.Rows
                 With econtext

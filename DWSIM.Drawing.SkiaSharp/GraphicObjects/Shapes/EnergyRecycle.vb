@@ -124,7 +124,7 @@ Namespace GraphicObjects.Shapes
                     Dim tpaint As New SKPaint()
 
                     With tpaint
-                        .TextSize = 18.0#
+                        .TextSize = 12.0#
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = LineColor
                         .IsStroke = False
@@ -161,7 +161,7 @@ Namespace GraphicObjects.Shapes
                     Dim tpaint As New SKPaint()
 
                     With tpaint
-                        .TextSize = 18.0#
+                        .TextSize = 12.0#
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = SKColors.Black
                         .IsStroke = False

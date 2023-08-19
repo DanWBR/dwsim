@@ -28,6 +28,7 @@ using DWSIM.Interfaces.Enums;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DotNumerics.Optimization.TN;
+using Newtonsoft.Json.Linq;
 
 namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 {
@@ -136,7 +137,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 simobj.GraphicObject.Tag = arg3.Text;
             });
 
-            var objlist = adjust.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            var objlist = adjust.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).OrderBy((x3) => x3).ToList();
             objlist.Insert(0, "");
             List<string> proplist = new List<string>();
 
@@ -346,7 +347,8 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                     }
                 }
             }
-            else {
+            else
+            {
                 adjval = adjust.AdjustValue;
             }
 
@@ -432,7 +434,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 simobj.GraphicObject.Tag = arg3.Text;
             });
 
-            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).OrderBy((x3) => x3).ToList();
             objlist.Insert(0, "");
             List<string> proplist = new List<string>();
 
@@ -503,7 +505,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             s.CreateAndAddLabelRow(container, "Target Object");
 
-            DropDown spin3 = null, spin4 = null;
+            DropDown spin3 = null, spin4 = null, spin5;
 
             spin3 = s.CreateAndAddDropDownRow(container, "Target Object", objlist, 0, (sender, e) =>
             {
@@ -544,7 +546,6 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 }
             });
 
-
             spin4 = s.CreateAndAddDropDownRow(container, "Target Property", proplist2, 0, (sender, e) =>
             {
                 if (sender.SelectedIndex > 0)
@@ -561,6 +562,26 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             if (spec.TargetObjectData.ID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.TargetObjectData.ID))
             {
                 spin3.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.TargetObjectData.ID].GraphicObject.Tag));
+            }
+
+            container.CreateAndAddLabelRow("Behavior");
+
+            container.CreateAndAddDropDownRow("Calculation Mode", spec.SpecCalculationMode.GetEnumNames(), (int)spec.SpecCalculationMode,
+                (sender, e) =>
+                {
+                    spec.SpecCalculationMode= sender.SelectedIndex.ToEnum<Interfaces.Enums.SpecCalcMode2>();
+                });
+
+            spin5 = container.CreateAndAddDropDownRow("Reference Object", objlist, 0,
+                (sender, e) =>
+                {
+                    if (sender.SelectedIndex > 0)
+                        spec.ReferenceObjectID= spec.GetFlowsheet().GetObject(objlist[sender.SelectedIndex]).Name;
+                });
+
+            if (spec.ReferenceObjectID != "" && spec.GetFlowsheet().SimulationObjects.ContainsKey(spec.ReferenceObjectID))
+            {
+                spin5.SelectedIndex = (objlist.IndexOf(spec.GetFlowsheet().SimulationObjects[spec.ReferenceObjectID].GraphicObject.Tag));
             }
 
             container.CreateAndAddLabelRow("Expression");
@@ -591,7 +612,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 simobj.GraphicObject.Tag = arg3.Text;
             });
 
-            var objlist = pid.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            var objlist = pid.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).OrderBy((x3) => x3).ToList();
             objlist.Insert(0, "");
             List<string> proplist = new List<string>();
 
@@ -834,7 +855,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 simobj.GraphicObject.Tag = arg3.Text;
             });
 
-            var objlist = pid.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
+            var objlist = pid.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).OrderBy((x3) => x3).ToList();
             objlist.Insert(0, "");
             List<string> proplist = new List<string>();
 
@@ -976,13 +997,13 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             dp1.Content = lay1;
 
             var lay2 = new TableLayout() { Spacing = new Size(10, 10), Padding = new Padding(5) };
-            var btn1 = new Button { Text = "Update" };           
+            var btn1 = new Button { Text = "Update" };
             var sed = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
             sed.ScriptText = pid.PythonScript;
             sed.Height = 500;
             btn1.Click += (s, e) => pid.PythonScript = sed.ScriptText;
-            s.CreateAndAddDescriptionRow(lay2, "- Process Variable value is available on 'PV';\n" + 
-                "- Write the Set-Point value to 'SP' and the Controller Output to 'MV';\n"+ 
+            s.CreateAndAddDescriptionRow(lay2, "- Process Variable value is available on 'PV';\n" +
+                "- Write the Set-Point value to 'SP' and the Controller Output to 'MV';\n"+
                 "- Use the 'Flowsheet' object to access other objects and their properties.");
             lay2.Rows.Add(sed);
             lay2.Rows.Add(btn1);

@@ -88,21 +88,21 @@ Namespace GraphicObjects.Shapes
                     Dim aPen As New SKPaint()
                     With aPen
                         If Active Then
-                            .Color = SKColors.Blue
+                            .Color = SKColors.LightSteelBlue
                         Else
                             .Color = SKColors.Gray
                         End If
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .PathEffect = SKPathEffect.CreateDash(New Single() {10.0F, 5.0F, 2.0F, 5.0F}, 2.0F)
+                        .PathEffect = SKPathEffect.CreateDash(New Single() {2.0F, 3.0F, 2.0F, 3.0F}, 2.0F)
                     End With
 
                     If Not Me.ConnectedToSv Is Nothing Then
-                        canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New SKPoint(Me.m_svPT.X, Me.Y + Me.Height / 2), Me.m_svPT.GetPosition}, aPen)
+                        canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New SKPoint(Me.m_svPT.X + Me.m_svPT.Width / 2, Me.Y + Me.Height / 2), Me.m_svPT.GetCenterPosition}, aPen)
                     End If
                     If Not Me.ConnectedToTv Is Nothing Then
-                        canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New SKPoint(Me.m_tvPT.X, Me.Y + Me.Height / 2), Me.m_tvPT.GetPosition}, aPen)
+                        canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New SKPoint(Me.m_tvPT.X + Me.m_tvPT.Height / 2, Me.Y + Me.Height / 2), Me.m_tvPT.GetCenterPosition}, aPen)
                     End If
 
                     Dim myPen As New SKPaint()
@@ -136,7 +136,7 @@ Namespace GraphicObjects.Shapes
                     Dim tpaint As New SKPaint()
 
                     With tpaint
-                        .TextSize = 18.0#
+                        .TextSize = 12.0#
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         If Active Then
                             .Color = SKColors.Blue
@@ -192,7 +192,7 @@ Namespace GraphicObjects.Shapes
                     Dim tpaint As New SKPaint()
 
                     With tpaint
-                        .TextSize = 18.0#
+                        .TextSize = 12.0#
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = SKColors.Black
                         .IsStroke = False

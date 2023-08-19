@@ -104,7 +104,7 @@ Namespace GraphicObjects.Shapes
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .PathEffect = SKPathEffect.CreateDash(New Single() {10.0F, 5.0F, 2.0F, 5.0F}, 2.0F)
+                        .PathEffect = SKPathEffect.CreateDash(New Single() {2.0F, 3.0F, 2.0F, 3.0F}, 2.0F)
                     End With
 
                     If Not Me.ConnectedToMv Is Nothing Then
@@ -148,7 +148,7 @@ Namespace GraphicObjects.Shapes
                     Dim tpaint As New SKPaint()
 
                     With tpaint
-                        .TextSize = 18.0#
+                        .TextSize = 12.0#
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         If Active Then
                             .Color = SKColors.Red
@@ -180,7 +180,7 @@ Namespace GraphicObjects.Shapes
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .PathEffect = SKPathEffect.CreateDash(New Single() {10.0F, 5.0F, 2.0F, 5.0F}, 2.0F)
+                        .PathEffect = SKPathEffect.CreateDash(New Single() {2.0F, 3.0F, 2.0F, 3.0F}, 2.0F)
                     End With
 
                     If Not Me.ConnectedToMv Is Nothing Then
@@ -218,7 +218,7 @@ Namespace GraphicObjects.Shapes
                     Dim tpaint As New SKPaint()
 
                     With tpaint
-                        .TextSize = 18.0#
+                        .TextSize = 12.0#
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = SKColors.Black
                         .IsStroke = False

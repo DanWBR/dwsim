@@ -571,6 +571,18 @@ Namespace Enums
 
     End Enum
 
+    Public Enum SpecCalcMode2
+
+        GlobalSetting = 0
+        AfterSourceObject = 1
+        BeforeTargetObject = 2
+        BeforeFlowsheet = 3
+        AfterFlowsheet = 4
+        AfterObject = 5
+        BeforeObject = 6
+
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects

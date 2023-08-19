@@ -42,7 +42,7 @@ Public Class EditingForm_Adjust
 
             'connections
 
-            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is ISimulationObject).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is ISimulationObject).Select(Function(m) m.GraphicObject.Tag).OrderBy(Function(m) m).ToArray
 
             cbSourceObj.Items.Clear()
             cbSourceObj.Items.AddRange(objlist)

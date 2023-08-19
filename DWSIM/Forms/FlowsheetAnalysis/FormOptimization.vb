@@ -531,6 +531,7 @@ Public Class FormOptimization
             Next
             Me.selectedoptcase.econtext = New ExpressionContext
             With Me.selectedoptcase.econtext
+                .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                 .Imports.AddType(GetType(System.Math))
                 .Variables.Add(objName, SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(Me.keysind(0)).unit, t))
                 For i = 1 To Me.keysaux.Count
@@ -622,6 +623,7 @@ Public Class FormOptimization
 
             Me.selectedoptcase.econtext = New ExpressionContext
             With Me.selectedoptcase.econtext
+                .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                 .Imports.AddType(GetType(System.Math))
                 For i = 1 To Me.keysind.Count
                     .Variables.Add(objName(i), SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i)))
@@ -940,6 +942,7 @@ Public Class FormOptimization
 
         Me.selectedoptcase.econtext = New ExpressionContext
         With Me.selectedoptcase.econtext
+            .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
             .Imports.AddType(GetType(System.Math))
             For i = 0 To Me.keysind.Count - 1
                 .Variables.DefineVariable(objName(i), GetType(Double))
@@ -1067,6 +1070,7 @@ Public Class FormOptimization
 
             Me.selectedoptcase.econtext = New ExpressionContext
             With Me.selectedoptcase.econtext
+                .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                 .Imports.AddType(GetType(System.Math))
                 For i = 0 To Me.keysind.Count - 1
                     .Variables.Add(objName(i), SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i)))
