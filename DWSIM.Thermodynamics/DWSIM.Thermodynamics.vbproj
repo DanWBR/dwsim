@@ -387,6 +387,7 @@
     </Compile>
     <Compile Include="MaterialStream\MaterialStream.vb" />
     <Compile Include="PropertyPackages\DebyeHuckel.vb" />
+    <Compile Include="PropertyPackages\ElectrolyteIdeal.vb" />
     <Compile Include="PropertyPackages\LIQUAC2PropertyPackage.vb" />
     <Compile Include="PropertyPackages\Models\ElectrolyteNRTL.vb" />
     <Compile Include="PropertyPackages\Models\PengRobinson78.vb" />

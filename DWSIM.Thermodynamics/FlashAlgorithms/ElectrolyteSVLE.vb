@@ -642,18 +642,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
             Next
 
-            'Vxns = Vxns.NormalizeY
-
-            Dim wden As Double = 0.0#
-            If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
-            ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
-                wden = CType(proppack, ElectrolyteNRTLPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
-            ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                wden = CType(proppack, LIQUAC2PropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
-            ElseIf TypeOf proppack Is DebyeHuckelPropertyPackage Then
-                wden = CType(proppack, DebyeHuckelPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
-            End If
+            Dim wden = CType(proppack, ElectrolyteBasePropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
 
             i = 0
             Do
@@ -676,6 +665,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_liquac.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
                 ElseIf TypeOf proppack Is DebyeHuckelPropertyPackage Then
                     activcoeff = CType(proppack, DebyeHuckelPropertyPackage).m_dh.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
+                ElseIf TypeOf proppack Is IdealElectrolytePropertyPackage Then
+                    activcoeff = proppack.RET_UnitaryVector()
                 End If
             End If
 

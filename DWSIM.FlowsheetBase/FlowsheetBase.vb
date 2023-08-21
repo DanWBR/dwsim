@@ -3464,6 +3464,9 @@ Label_00CC:
                                      DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
                                      plist.Add(DHPP)
 
+                                     Dim ISPP As New IdealElectrolytePropertyPackage()
+                                     plist.Add(ISPP)
+
                                      Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                      BOPP.ComponentName = "Black Oil"
                                      plist.Add(BOPP)

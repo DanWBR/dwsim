@@ -39,7 +39,7 @@ Public Class FormConfigDH
 
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
-        Dim ppu As PropertyPackages.DebyeHuckelPropertyPackage = _pp
+        Dim ppu As PropertyPackages.ElectrolyteBasePropertyPackage = _pp
 
         Dim nf As String = "0.####"
 

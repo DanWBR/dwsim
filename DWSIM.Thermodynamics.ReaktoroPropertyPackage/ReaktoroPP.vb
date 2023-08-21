@@ -35,8 +35,6 @@ Imports System.Windows.Forms
     Private m_props As New Auxiliary.PROPS
     Private m_id As New Auxiliary.Ideal
 
-    Public Overrides ReadOnly Property Popular As Boolean = True
-
     Public Sub New(ByVal comode As Boolean)
 
         MyBase.New(comode)

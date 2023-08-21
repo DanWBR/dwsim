@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 86</value>
+    <value>13, 88</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 15</value>
@@ -131,7 +131,7 @@
     <value>252, 83</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 57</value>
+    <value>13, 59</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 15</value>
@@ -146,7 +146,7 @@
     <value>182, 25</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 28</value>
+    <value>13, 30</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 15</value>
@@ -154,8 +154,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Reaction Set</value>
   </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 349</value>
+    <value>618, 341</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Chemical Equilibrium</value>
@@ -166,7 +169,11 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>626, 349</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Configure Debye-Hückel Property Package</value>
+    <value>Configure Property Package</value>
   </data>
 </root>

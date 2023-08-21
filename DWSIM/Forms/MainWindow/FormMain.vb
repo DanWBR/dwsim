@@ -931,6 +931,10 @@ Public Class FormMain
 
         PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
 
+        Dim ISPP As New IdealElectrolytePropertyPackage()
+
+        PropertyPackages.Add(ISPP.ComponentName.ToString, ISPP)
+
         'Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         'BOPP.ComponentName = "Black Oil"
         'BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
