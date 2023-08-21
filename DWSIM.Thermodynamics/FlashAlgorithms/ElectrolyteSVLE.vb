@@ -1,5 +1,5 @@
 '    Flash Algorithm for Electrolyte solutions
-'    Copyright 2013-2016 Daniel Wagner O. de Medeiros
+'    Copyright 2013-2023 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -356,8 +356,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     i = 0
                     For Each rxid As String In Me.Reactions
-                        lbound(i) = -bounds.Max
-                        ubound(i) = bounds.Max
+                        rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
+                        If rx.Components.ContainsKey("Water") AndAlso rx.Components("Water").StoichCoeff = -1 Then
+                            lbound(i) = 0.00000000000001
+                            ubound(i) = 0.1
+                        Else
+                            lbound(i) = -bounds.Max
+                            ubound(i) = bounds.Max
+                        End If
                         i += 1
                     Next
 
@@ -369,6 +375,29 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         REx = ReactionExtents.Values.ToArray()
                         REx0 = ReactionExtents.Values.ToArray()
                     End If
+
+                    'estimate initial extents
+                    i = 0
+                    For Each rxid As String In Me.Reactions
+                        If REx(i) = 0.0 Then
+                            rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
+                            If rx.Components.ContainsKey("Water") AndAlso rx.Components("Water").StoichCoeff = -1 Then
+                                REx(i) = 0.0000001
+                            Else
+                                Dim keq = rx.EvaluateK(T + rx.Approach, proppack)
+                                If keq > 1000000 Then
+                                    REx(i) = -N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
+                                ElseIf keq < 0.00001 Then
+                                    REx(i) = -N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff
+                                Else
+                                    REx(i) = -N0(rx.BaseReactant) / rx.Components(rx.BaseReactant).StoichCoeff / (keq ^ 0.05)
+                                End If
+                                If REx(i) < lbound(i) Then REx(i) = lbound(i)
+                                If REx(i) > ubound(i) Then REx(i) = ubound(i)
+                            End If
+                        End If
+                        i += 1
+                    Next
 
                     Dim W0 = Vnl.Sum * proppack.AUX_MMM(Vnl) / 1000
 
@@ -391,14 +420,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         variables.Add(Math.Log(xs))
                     Next
 
-                    newx = variables.toarray()
+                    newx = variables.ToArray()
 
-                    Dim solver3 As New Optimization.NewtonSolver
-                    solver3.MaxIterations = MaximumIterations
-                    solver3.Tolerance = Tolerance
-                    solver3.EnableDamping = True
-                    solver3.MaximumDelta = 0.1
-                    solver3.ExpandFactor = 1.1
+                    Dim solver3 As New Optimization.NewtonSolver With
+                    {
+                        .MaxIterations = MaximumIterations,
+                        .Tolerance = Tolerance,
+                        .EnableDamping = True,
+                        .Epsilon = 0.0000000001
+                    }
 
                     Dim feq = Sub(newx2)
 
@@ -458,7 +488,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                       End Try
 
                                   End If
-
 
                                   errval = FunctionValue2N(newx, False).AbsSqrSumY()
 
@@ -695,28 +724,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 reaction = proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                 kr = reaction.EvaluateK(T + reaction.Approach, proppack)
-                ktot *= kr
-                prodtot *= Math.Abs(prod(i))
-                f(i) = Math.Log(prod(i) / kr)
-                If Math.Abs(pval) > 0.01 Then
+                f(i) = Math.Log(Math.Abs(kr / prod(i)))
+                If Math.Abs(Pval) > 0.01 Then
                     If PenaltyValueScheme = 0 Then
-
                     ElseIf PenaltyValueScheme = 1 Then
-                        f(i) *= Pval * 10000
+                        f(i) *= Pval
                     ElseIf PenaltyValueScheme = 2 Then
-                        If Math.Abs(pval * f(i)) > 1.0 Then
-                            f(i) = pval * f(i)
+                        If Math.Abs(Pval * f(i)) > 1.0 Then
+                            f(i) = Pval * f(i)
                         Else
                             f(i) = Pval / f(i)
                         End If
                     ElseIf PenaltyValueScheme = 3 Then
                         If Math.Abs(f(i)) >= 0.0 And Math.Abs(f(i)) < 1.0 Then
-                            f(i) = pval / f(i)
+                            f(i) = Pval / f(i)
                         Else
-                            f(i) = pval * f(i)
+                            f(i) = Pval * f(i)
                         End If
                     End If
-                    If Math.Abs(f(i)) < 1.0 Then f(i) = 1.0 / f(i)
                 End If
             Next
 

@@ -31,6 +31,8 @@ Namespace MathEx.Optimization
 
         Public Property MaximumDelta As Double = 0.5
 
+        Public Property Epsilon As Double = Double.NaN
+
         Private _Iterations As Integer = 0
 
         Private fxb As Func(Of Double(), Double())
@@ -106,6 +108,8 @@ Namespace MathEx.Optimization
             Dim finalx As Double() = vars
 
             dfdx = Nothing
+
+            If Not Double.IsNaN(Epsilon) Then epsilons = New Double() {Epsilon}
 
             If EnableDamping Then
                 For Each d In dfacs
