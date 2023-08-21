@@ -228,7 +228,7 @@ Public Class FormSensAnalysis
     Private Sub cbPropIndVar2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbPropIndVar2.SelectedIndexChanged
         Dim props As String() = Me.ReturnProperties(Me.cbObjIndVar2.SelectedItem.ToString, False)
         If Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") And
-            Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("ReactionProperty") Then
+            Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("ReactionProperty") Then
             For Each prop As String In props
                 If form.GetTranslatedString1(prop) = Me.cbPropIndVar2.SelectedItem.ToString Then
                     For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
