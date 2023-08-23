@@ -431,14 +431,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                 IObj?.Paragraphs.Add(String.Format("<h3>Loop {0}</h3>", ecount))
 
                 IObj?.SetCurrent
-                If TypeOf PP Is ElectrolyteNRTLPropertyPackage Then
-                    ActCoeff = CType(PP, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vx, CompoundProperties)
-                ElseIf TypeOf PP Is ElectrolyteNRTLPropertyPackage Then
-                    ActCoeff = CType(PP, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx, CompoundProperties)
-                ElseIf TypeOf PP Is LIQUAC2PropertyPackage Then
-                    ActCoeff = CType(PP, LIQUAC2PropertyPackage).m_liquac.GAMMA_MR(T, Vx, CompoundProperties)
-                ElseIf TypeOf PP Is DebyeHuckelPropertyPackage Then
+                If TypeOf PP Is DebyeHuckelPropertyPackage Then
                     ActCoeff = CType(PP, DebyeHuckelPropertyPackage).m_dh.GAMMA_MR(T, Vx, CompoundProperties)
+                ElseIf TypeOf PP Is IdealElectrolytePropertyPackage Then
+                    ActCoeff = PP.RET_UnitaryVector()
                 Else
                     ActCoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid).MultiplyConstY(P).DivideY(Vp)
                 End If

@@ -306,18 +306,6 @@
     <Compile Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompFluid.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingForms\PropertyPackages\FormConfigENRTL.designer.vb">
-      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\PropertyPackages\FormConfigENRTL.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.designer.vb">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="EditingForms\PropertyPackages\FormConfigLKP.designer.vb">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </Compile>
@@ -389,7 +377,6 @@
     <Compile Include="PropertyPackages\DebyeHuckel.vb" />
     <Compile Include="PropertyPackages\ElectrolyteIdeal.vb" />
     <Compile Include="PropertyPackages\LIQUAC2PropertyPackage.vb" />
-    <Compile Include="PropertyPackages\Models\ElectrolyteNRTL.vb" />
     <Compile Include="PropertyPackages\Models\PengRobinson78.vb" />
     <Compile Include="PropertyPackages\Models\DebyeHuckel.vb" />
     <Compile Include="PropertyPackages\Models\TrueCriticalPoint.vb" />
@@ -449,11 +436,8 @@
     <Compile Include="PropertyPackages\ChaoSeader.vb" />
     <Compile Include="PropertyPackages\CoolProp.vb" />
     <Compile Include="PropertyPackages\Models\ChaoSeader.vb" />
-    <Compile Include="PropertyPackages\Models\ExtendedUNIQUAC.vb" />
     <Compile Include="PropertyPackages\CoolPropIncompressibleMixture.vb" />
     <Compile Include="PropertyPackages\CoolPropIncompressiblePure.vb" />
-    <Compile Include="PropertyPackages\ElectrolyteNRTL.vb" />
-    <Compile Include="PropertyPackages\ExtendedUNIQUAC.vb" />
     <Compile Include="PropertyPackages\GraysonStreed.vb" />
     <Compile Include="PropertyPackages\Models\GraysonStreed.vb" />
     <Compile Include="PropertyPackages\Models\SteamTables_IAPWS_IF97.vb" />
@@ -567,18 +551,6 @@
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompFluid.resx">
       <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.de.resx">
-      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.en.resx">
-      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.es.resx">
-      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.resx">
-      <DependentUpon>FormConfigENRTL.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.de.resx">
       <DependentUpon>FormConfigDH.vb</DependentUpon>
     </EmbeddedResource>
@@ -600,18 +572,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.de.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.en.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.es.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLKP.de.resx">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
@@ -892,19 +852,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\accept.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\eNRTL\table1.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table2.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table3.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table4.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table5.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table6.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table9a.txt" />
-    <EmbeddedResource Include="Assets\eNRTL\table9b.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\eNRTL\table4_amines.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />

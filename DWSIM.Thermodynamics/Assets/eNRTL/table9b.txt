@@ -1,6 +1,0 @@
-Table 9B - Regressed Values of Solubility Product Constants for Aqueous Na+/K+/Cl-/I- System at 298.15 K
-Salt	Ksp
-NaCl	-4.4620
-KCl	-5.9695
-NaI.2H2O	-2.8192
-KI	-4.2346

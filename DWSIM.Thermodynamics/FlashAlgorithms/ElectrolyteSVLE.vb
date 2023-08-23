@@ -218,6 +218,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
+            If TypeOf proppack Is DebyeHuckelPropertyPackage Then
+                activcoeff = CType(proppack, DebyeHuckelPropertyPackage).m_dh.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
+            ElseIf TypeOf proppack Is IdealElectrolytePropertyPackage Then
+                activcoeff = proppack.RET_UnitaryVector()
+            End If
+
             'return flash calculation results.
 
             Dim results As New Dictionary(Of String, Object)
@@ -657,13 +663,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     activcoeff(i) = 1.0#
                 Next
             Else
-                If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                    activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
-                ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
-                    activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
-                ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                    activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_liquac.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
-                ElseIf TypeOf proppack Is DebyeHuckelPropertyPackage Then
+                If TypeOf proppack Is DebyeHuckelPropertyPackage Then
                     activcoeff = CType(proppack, DebyeHuckelPropertyPackage).m_dh.GAMMA_MR(T, Vxl.AbsY(), CompoundProperties)
                 ElseIf TypeOf proppack Is IdealElectrolytePropertyPackage Then
                     activcoeff = proppack.RET_UnitaryVector()

@@ -102,7 +102,7 @@ Public Class FormConfigDH
 
     Private Sub tbTol_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbTol.TextChanged
         If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
+            Dim ppu As PropertyPackages.ElectrolyteBasePropertyPackage = _pp
             If Double.TryParse(tbTol.Text, New Double) Then
                 tbTol.ForeColor = Color.Blue
                 ppu.Tolerance = tbTol.Text

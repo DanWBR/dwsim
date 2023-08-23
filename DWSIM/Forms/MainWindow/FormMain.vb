@@ -907,24 +907,6 @@ Public Class FormMain
         Dim RKPP As ReaktoroPropertyPackage.ReaktoroPropertyPackage = New ReaktoroPropertyPackage.ReaktoroPropertyPackage()
         PropertyPackages.Add(RKPP.ComponentName.ToString, RKPP)
 
-        'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-        'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-        'EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
-
-        'PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
-
-        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-        ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
-
-        PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
-
-        'Dim LIQPP As New LIQUAC2PropertyPackage()
-        'LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
-        'LIQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLIPP")
-
-        'PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
-
         Dim DHPP As New DebyeHuckelPropertyPackage()
         DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
         DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
