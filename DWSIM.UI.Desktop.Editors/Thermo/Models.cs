@@ -45,6 +45,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var item = sender.SelectedValue.ToString();
                 if (item != "Select an item...")
                 {
+                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.PropertyPackages);
                     var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages[item].Clone();
                     pp.UniqueID = Guid.NewGuid().ToString();
                     pp.Tag = pp.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
@@ -122,10 +123,12 @@ namespace DWSIM.UI.Desktop.Editors
             tr = s.CreateAndAddTextBoxAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
                                                                 (arg1, arg2) =>
                                                                 {
+                                                                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.PropertyPackages);
                                                                     pp.Tag = arg1.Text;
                                                                 },
                                                                 (arg1, arg2) =>
                                                                 {
+                                                                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.PropertyPackages);
                                                                     var supported = new string[] { "NRTL", "UNIQUAC", "Peng-Robinson (PR)", "Soave-Redlich-Kwong (SRK)", "Lee-Kesler-Plöcker" };
                                                                     var cont = new PropertyPackageSettingsView(flowsheet, pp);
                                                                     cont.Tag = "General Settings";
@@ -149,6 +152,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                                {
                                                                    if (MessageBox.Show("Confirm removal?", "Remove Property Package", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
                                                                    {
+                                                                       flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.PropertyPackages);
                                                                        ppcontainer.Remove(tr);
                                                                        flowsheet.PropertyPackages.Remove(pp.UniqueID);
                                                                        flowsheet.UpdateEditorPanels.Invoke();

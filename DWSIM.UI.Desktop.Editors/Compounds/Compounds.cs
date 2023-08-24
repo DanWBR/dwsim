@@ -246,6 +246,7 @@ namespace DWSIM.UI.Desktop.Editors
         void UpdateCompound(String name)
         {
 
+            flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.Compounds);
             if (flowsheet.SelectedCompounds.ContainsKey(name))
             {
                 flowsheet.SelectedCompounds.Remove(name);
@@ -292,6 +293,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     try
                     {
+                        flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.Compounds);
                         var comp = Newtonsoft.Json.JsonConvert.DeserializeObject<Thermodynamics.BaseClasses.ConstantProperties>(System.IO.File.ReadAllText(fn));
                         if (!flowsheet.SelectedCompounds.ContainsKey(comp.Name))
                         {

@@ -132,14 +132,18 @@ Imports System.Xml
     End Sub
 
     Public Sub ConnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject, fromidx As Integer, toidx As Integer) Implements IFlowsheet.ConnectObjects
+        RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         FlowsheetSurface.ConnectObject(CType(gobjfrom, GraphicObject), CType(gobjto, GraphicObject), fromidx, toidx)
     End Sub
 
     Public Sub DisconnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject) Implements IFlowsheet.DisconnectObjects
+        RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
         FlowsheetSurface.DisconnectObject(CType(gobjfrom, GraphicObject), CType(gobjto, GraphicObject), False)
     End Sub
 
     Public Sub DeleteSelectedObject(ByVal sender As System.Object, ByVal e As System.EventArgs, gobj As IGraphicObject, Optional ByVal confirmation As Boolean = True, Optional ByVal triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
+
+        RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
 
         If Not gobj Is Nothing Then
 
@@ -953,6 +957,8 @@ Imports System.Xml
                                        Optional id As String = "",
                                        Optional uoobj As Interfaces.IExternalUnitOperation = Nothing,
                                        Optional CreateConnected As Boolean = False) As String
+
+        RegisterSnapshot(SnapshotType.ObjectAddedOrRemoved)
 
         Dim gObj As GraphicObject = Nothing
         Dim mpx = x '- SplitContainer1.SplitterDistance

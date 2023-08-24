@@ -200,6 +200,12 @@ namespace DWSIM.UI.Desktop.Mac
 
         }
 
+        public override void MouseDown(NSEvent theEvent)
+        {
+            base.MouseDown(theEvent);
+            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+        }
+
         public override void MouseMoved(NSEvent theEvent)
         {
             try
@@ -239,6 +245,7 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void ScrollWheel(NSEvent theEvent)
         {
+            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
             var oldzoom = fsurface.Zoom;
             var scroll = theEvent.ScrollingDeltaX;
             fsurface.Zoom += (float)(scroll / 100.0f);

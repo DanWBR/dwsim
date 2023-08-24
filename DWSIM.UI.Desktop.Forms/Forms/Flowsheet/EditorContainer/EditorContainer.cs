@@ -36,6 +36,8 @@ namespace DWSIM.UI.Forms
         public void Init()
         {
 
+            obj.GetFlowsheet().RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, obj);
+
             loaded = false;
 
             Pages.Clear();

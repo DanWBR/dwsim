@@ -56,6 +56,7 @@ namespace DWSIM.UI.Desktop.Editors
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
+                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                     _rx = (Reaction)cre.rx;
                     flowsheet.Reactions.Add(_rx.ID, _rx);
                     flowsheet.ReactionSets["DefaultSet"].Reactions.Add(_rx.ID, new ReactionSetBase(_rx.ID, 0, true));
@@ -81,6 +82,7 @@ namespace DWSIM.UI.Desktop.Editors
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
+                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                     _rx = (Reaction)cre.rx;
                     flowsheet.Reactions.Add(_rx.ID, _rx);
                     flowsheet.ReactionSets["DefaultSet"].Reactions.Add(_rx.ID, new ReactionSetBase(_rx.ID, 0, true));
@@ -106,6 +108,7 @@ namespace DWSIM.UI.Desktop.Editors
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
+                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                     _rx = (Reaction)cre.rx;
                     flowsheet.Reactions.Add(_rx.ID, _rx);
                     flowsheet.ReactionSets["DefaultSet"].Reactions.Add(_rx.ID, new ReactionSetBase(_rx.ID, 0, true));
@@ -131,6 +134,7 @@ namespace DWSIM.UI.Desktop.Editors
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
+                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                     _rx = (Reaction)cre.rx;
                     flowsheet.Reactions.Add(_rx.ID, _rx);
                     flowsheet.ReactionSets["DefaultSet"].Reactions.Add(_rx.ID, new ReactionSetBase(_rx.ID, 0, true));
@@ -157,6 +161,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddLabelAndButtonRow("Add New Reaction Set", "New Reaction Set", null, (sender, e) =>
             {
+                flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                 var rsid = Guid.NewGuid().ToString();
                 flowsheet.ReactionSets.Add(rsid, new ReactionSet(rsid, "NewReactionSet", ""));
                 flowsheet.UpdateEditorPanels.Invoke();
@@ -205,6 +210,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert.Close(),
                                 (sender2, e2) =>
                                 {
+                                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                                     flowsheet.Reactions[cre.rx.ID] = (IReaction)cre.rx;
                                     CreateReactionsList();
                                     alert.Close();
@@ -225,6 +231,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 myview2.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert2.Close(),
                                 (sender2, e2) =>
                                 {
+                                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                                     flowsheet.Reactions[cre2.rx.ID] = (IReaction)cre2.rx;
                                     CreateReactionsList();
                                     alert2.Close();
@@ -245,6 +252,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 myview3.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert3.Close(),
                                 (sender2, e2) =>
                                 {
+                                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                                     flowsheet.Reactions[cre3.rx.ID] = (IReaction)cre3.rx;
                                     CreateReactionsList();
                                     alert3.Close();
@@ -265,6 +273,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 myview4.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert4.Close(),
                                 (sender2, e2) =>
                                 {
+                                    flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                                     flowsheet.Reactions[cre4.rx.ID] = (IReaction)cre4.rx;
                                     CreateReactionsList();
                                     alert4.Close();
@@ -285,6 +294,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                         if (MessageBox.Show("Are you sure you want to remove this reaction from the flowsheet?", "Remove selected reaction", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
                         {
+                            flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ReactionSubsystem);
                             flowsheet.Reactions.Remove(rx.ID);
                             flowsheet.ReactionSets["DefaultSet"].Reactions.Remove(rx.ID);
                             CreateReactionsList();

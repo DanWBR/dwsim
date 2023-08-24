@@ -414,6 +414,7 @@ namespace DWSIM.UI.Forms
 
             ActOptions = () =>
             {
+                FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.SimulationSettings);
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
                 cont.Tag = "Settings";
@@ -474,18 +475,21 @@ namespace DWSIM.UI.Forms
 
             ActZoomIn = () =>
             {
+                FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
                 FlowsheetControl.FlowsheetSurface.Zoom += 0.1f;
                 FlowsheetControl.Invalidate();
             };
 
             ActZoomOut = () =>
             {
+                FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
                 FlowsheetControl.FlowsheetSurface.Zoom -= 0.1f;
                 FlowsheetControl.Invalidate();
             };
 
             ActZoomFit = () =>
             {
+                FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
                 FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                 FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                 FlowsheetControl.FlowsheetSurface.Center((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
@@ -494,6 +498,7 @@ namespace DWSIM.UI.Forms
 
             ActZoomDefault = () =>
             {
+                FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
                 FlowsheetControl.FlowsheetSurface.Zoom = 1.0f;
                 FlowsheetControl.Invalidate();
             };
@@ -696,10 +701,13 @@ namespace DWSIM.UI.Forms
             };
             FlowsheetControl.MouseDoubleClick += (sender, e) =>
             {
+
                 if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
                 var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
                 if (obj == null)
                 {
+                    FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+
                     FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                     FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                     FlowsheetControl.FlowsheetSurface.Center((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
@@ -2531,6 +2539,7 @@ namespace DWSIM.UI.Forms
 
         void EditConnections()
         {
+
             var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
             if (obj == null) return;
             var cont = UI.Shared.Common.GetDefaultContainer();

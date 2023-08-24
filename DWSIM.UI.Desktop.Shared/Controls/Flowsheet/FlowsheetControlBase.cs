@@ -24,6 +24,8 @@ namespace DWSIM.UI.Controls
         public void AddObject(string objtname, int x, int y)
         {
 
+            FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectAddedOrRemoved);
+
             string prep;
             var count = FlowsheetObject.SimulationObjects.Count;
             ObjectType objtype = ObjectType.Nenhum;

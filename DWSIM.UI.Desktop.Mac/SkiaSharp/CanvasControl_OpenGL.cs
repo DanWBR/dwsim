@@ -212,6 +212,12 @@ namespace DWSIM.UI.Desktop.Mac
             OpenGLContext.FlushBuffer();
         }
 
+        public override void MouseDown(NSEvent theEvent)
+        {
+            base.MouseDown(theEvent);
+            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+        }
+
         public override void MouseMoved(NSEvent theEvent)
         {
             try
