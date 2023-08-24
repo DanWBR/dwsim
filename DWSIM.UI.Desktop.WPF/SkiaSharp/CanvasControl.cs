@@ -181,6 +181,7 @@ namespace DWSIM.UI.Desktop.WPF
             var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
             var X = (int)e.GetPosition(this).X*(int)m.M11;
             var Y = (int)e.GetPosition(this).Y* (int)m.M22;
+            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
             fsurface.CenterTo(oldzoom, X, Y, (int)Width, (int)Height);
             this.InvalidateVisual();
         }

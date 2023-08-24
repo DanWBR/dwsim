@@ -126,6 +126,8 @@ namespace DWSIM.UI.Desktop.GTK
             int x = (int)args.Event.X;
             int y = (int)args.Event.Y;
 
+            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+
             fsurface.CenterTo(oldzoom, x, y, this.WidthRequest, this.HeightRequest);
 
             this.QueueDraw();

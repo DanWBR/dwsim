@@ -228,6 +228,7 @@ namespace DWSIM.UI.Desktop.Mac
                 _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
                 _lastTouchX *= scale;
                 _lastTouchY *= scale;
+                fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
                 fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
                 this.NeedsDisplay = true;
             }
