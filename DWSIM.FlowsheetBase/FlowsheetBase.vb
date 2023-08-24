@@ -3453,10 +3453,6 @@ Label_00CC:
 
         Dim t11 = TaskHelper.Run(Sub()
 
-                                     Dim DHPP As New DebyeHuckelPropertyPackage()
-                                     DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-                                     plist.Add(DHPP)
-
                                      Dim ISPP As New IdealElectrolytePropertyPackage()
                                      plist.Add(ISPP)
 

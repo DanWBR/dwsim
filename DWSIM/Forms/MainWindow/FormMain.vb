@@ -907,21 +907,15 @@ Public Class FormMain
         Dim RKPP As ReaktoroPropertyPackage.ReaktoroPropertyPackage = New ReaktoroPropertyPackage.ReaktoroPropertyPackage()
         PropertyPackages.Add(RKPP.ComponentName.ToString, RKPP)
 
-        Dim DHPP As New DebyeHuckelPropertyPackage()
-        DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-        DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
-
-        PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
-
         Dim ISPP As New IdealElectrolytePropertyPackage()
 
         PropertyPackages.Add(ISPP.ComponentName.ToString, ISPP)
 
-        'Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
-        'BOPP.ComponentName = "Black Oil"
-        'BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
+        Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
+        BOPP.ComponentName = "Black Oil"
+        BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
-        'PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
         Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
 

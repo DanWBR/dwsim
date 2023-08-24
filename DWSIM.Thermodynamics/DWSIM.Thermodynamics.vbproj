@@ -374,11 +374,9 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="MaterialStream\MaterialStream.vb" />
-    <Compile Include="PropertyPackages\DebyeHuckel.vb" />
     <Compile Include="PropertyPackages\ElectrolyteIdeal.vb" />
     <Compile Include="PropertyPackages\LIQUAC2PropertyPackage.vb" />
     <Compile Include="PropertyPackages\Models\PengRobinson78.vb" />
-    <Compile Include="PropertyPackages\Models\DebyeHuckel.vb" />
     <Compile Include="PropertyPackages\Models\TrueCriticalPoint.vb" />
     <Compile Include="BaseClasses\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
