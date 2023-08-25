@@ -33,6 +33,7 @@ Partial Class FormMain
         Me.FileTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiNewCompoundWizard = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoRegressaoUNIFACIPs = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -47,7 +48,6 @@ Partial Class FormMain
         Me.CloseAllToolstripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsFileSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsFolderSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferenciasDoDWSIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -138,32 +138,38 @@ Partial Class FormMain
         'FileTSMI
         '
         resources.ApplyResources(Me.FileTSMI, "FileTSMI")
-        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.AbrirDoDashboardToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToDashboardTSMI, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
+        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.tsmiNewCompoundWizard, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.AbrirDoDashboardToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToDashboardTSMI, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.ExitToolStripMenuItem})
         Me.FileTSMI.Name = "FileTSMI"
         Me.FileTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
         'NewToolStripMenuItem
         '
         resources.ApplyResources(Me.NewToolStripMenuItem, "NewToolStripMenuItem")
-        Me.NewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_new_file
+        Me.NewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.file_80px
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         '
         'NovoEstudoDoCriadorDeComponentesToolStripMenuItem
         '
         resources.ApplyResources(Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, "NovoEstudoDoCriadorDeComponentesToolStripMenuItem")
-        Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
+        Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.test_tube_80px
         Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Name = "NovoEstudoDoCriadorDeComponentesToolStripMenuItem"
+        '
+        'tsmiNewCompoundWizard
+        '
+        resources.ApplyResources(Me.tsmiNewCompoundWizard, "tsmiNewCompoundWizard")
+        Me.tsmiNewCompoundWizard.Image = Global.DWSIM.My.Resources.Resources.test_tube_80px
+        Me.tsmiNewCompoundWizard.Name = "tsmiNewCompoundWizard"
         '
         'NovoEstudoDeRegressaoDeDadosToolStripMenuItem
         '
         resources.ApplyResources(Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, "NovoEstudoDeRegressaoDeDadosToolStripMenuItem")
-        Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_line
+        Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.line_chart_80px
         Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Name = "NovoEstudoDeRegressaoDeDadosToolStripMenuItem"
         '
         'NovoRegressaoUNIFACIPs
         '
         resources.ApplyResources(Me.NovoRegressaoUNIFACIPs, "NovoRegressaoUNIFACIPs")
-        Me.NovoRegressaoUNIFACIPs.Image = Global.DWSIM.My.Resources.Resources.chart_line1
+        Me.NovoRegressaoUNIFACIPs.Image = Global.DWSIM.My.Resources.Resources.line_chart_80px
         Me.NovoRegressaoUNIFACIPs.Name = "NovoRegressaoUNIFACIPs"
         '
         'OpenToolStripMenuItem
@@ -233,11 +239,6 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.tsFileSeparator, "tsFileSeparator")
         Me.tsFileSeparator.Name = "tsFileSeparator"
-        '
-        'tsFolderSeparator
-        '
-        resources.ApplyResources(Me.tsFolderSeparator, "tsFolderSeparator")
-        Me.tsFolderSeparator.Name = "tsFolderSeparator"
         '
         'ExitToolStripMenuItem
         '
@@ -943,7 +944,6 @@ Partial Class FormMain
     Public WithEvents WelcomePanel As Panel
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
-    Friend WithEvents tsFolderSeparator As ToolStripSeparator
     Friend WithEvents NNUOToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PNUOToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CapitalCostToolStripMenuItem As ToolStripMenuItem
@@ -973,4 +973,5 @@ Partial Class FormMain
     Public WithEvents tsbQuickQuestion As ToolStripDropDownButton
     Friend WithEvents UsersGuideToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiProUG As ToolStripMenuItem
+    Friend WithEvents tsmiNewCompoundWizard As ToolStripMenuItem
 End Class

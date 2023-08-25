@@ -742,28 +742,6 @@ Public Class FormMain
             My.Settings.MostRecentFiles = New System.Collections.Specialized.StringCollection
         End If
 
-        Dim latestfolders As New List(Of String)
-
-        For Each f As String In My.Settings.MostRecentFiles
-            If File.Exists(f) And Path.GetExtension(f).ToLower <> ".dwbcs" Then
-                If Not latestfolders.Contains(Path.GetDirectoryName(f)) Then latestfolders.Add(Path.GetDirectoryName(f))
-            End If
-        Next
-
-        If latestfolders.Count > 0 Then
-            tsFolderSeparator.Visible = True
-            Dim tfindex = FileTSMI.DropDownItems.IndexOf(tsFolderSeparator)
-            For Each s In latestfolders
-                Dim tsmi As New ToolStripMenuItem With {.Text = s, .Tag = s, .DisplayStyle = ToolStripItemDisplayStyle.Text}
-                Me.FileTSMI.DropDownItems.Insert(tfindex, tsmi)
-                Me.dropdownlist.Add(Me.FileTSMI.DropDownItems.Count - 2)
-                AddHandler tsmi.Click, AddressOf Me.OpenRecentFolder_click
-            Next
-        Else
-            tsFolderSeparator.Visible = False
-        End If
-
-
     End Sub
 
     Sub AddExternalUOs()
@@ -4947,6 +4925,13 @@ Label_00CC:
         Else
             Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "Pro_User_Guide.pdf")
         End If
+
+    End Sub
+
+    Private Sub tsmiNewCompoundWizard_Click(sender As Object, e As EventArgs) Handles tsmiNewCompoundWizard.Click
+
+        Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Nothing)
+        wform.SetupAndDisplayPage(1)
 
     End Sub
 

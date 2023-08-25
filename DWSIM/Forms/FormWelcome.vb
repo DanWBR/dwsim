@@ -481,11 +481,6 @@ Public Class FormWelcome
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Nothing)
         wform.SetupAndDisplayPage(1)
 
-        'start dispatcher for WPF Interop
-        If Not GlobalSettings.Settings.IsRunningOnMono Then
-            System.Windows.Threading.Dispatcher.Run()
-        End If
-
     End Sub
 
     Private Sub LinkLabel7_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel7.LinkClicked

@@ -2362,6 +2362,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\test_tube_80px.png" />
     <None Include="Resources\show_property_48px.png" />
     <None Include="Resources\Touch ID_64px.png" />
     <None Include="Resources\thick_arrow_pointing_down_32px.png" />
@@ -3078,6 +3079,7 @@
     <None Include="Resources\folder_add_48.png" />
     <None Include="Resources\fontsize.png" />
     <None Include="Resources\fossee.png" />
+    <None Include="Resources\file_80px.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -3218,6 +3220,7 @@
     <None Include="Resources\new_60px.png" />
     <None Include="Resources\object_48px.png" />
     <None Include="Resources\rondy-stickers-lettering-sticker-ctrl-plus-z-with-arrow.gif" />
+    <None Include="Resources\line_chart_80px.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
