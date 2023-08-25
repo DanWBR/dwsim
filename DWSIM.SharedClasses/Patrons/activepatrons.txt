@@ -29,13 +29,10 @@
 🌟 Michael Papantoniou
 🌟 Michael Saucier
 🌟 Rafael Melo-González
-🌟 Renato Corrêa Arrieche
 🌟 Richard Huntington
-🌟 Rida Bin Hashim
 🌟 Roland Berger
 🌟 Ronald J. Dunbar
-🌟 Ronald Visness
-🌟 Tino Josef Ritter
+🌟 Tech-Rudra
 Alberto Baumeister
 Alex Platon
 Andras Nady
@@ -56,7 +53,7 @@ David Whitlock
 Denislav Zdravkov
 Dorivaldo Junior
 Doug Palfreyman
-Eugenio Trillo León
+Eugenio León
 Fernando Almeida
 Gokhan Candan 
 Guenther Holzer
@@ -79,6 +76,7 @@ Pedro Sabóia
 Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
+Renato Corrêa Arrieche
 Rick Kempf
 Rupert Easter
 Ryszard Sadowski
