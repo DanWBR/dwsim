@@ -88,9 +88,7 @@
     <Compile Include="ThemeVS2012Light\VS2012LightDockWindow.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ThemeVS2012Light\VS2012LightSplitterControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ThemeVS2012Light\VS2012LightSplitterControl.cs" />
     <Compile Include="ThemeVS2012Light\VS2012LightTheme.cs">
       <SubType>Component</SubType>
     </Compile>
