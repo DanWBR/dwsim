@@ -64,11 +64,12 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.6.0
 
-- Redesigned Undo/Redo feature
+- Redesigned Undo/Redo feature (Classic & Cross-Platform UI)
 - Better handling of unknown errors
 - New standard volumetric flow units
 - Fixed Input and PID controller editors (Classic UI)
 - Fixed object deletion in context menu (Classic UI)
+- Added fields to setup the equilibrium constant calculation in equilibrium reactions (Cross-Platform UI)
 - Fixed Component Properties View: Liquid Phase Missing Property Displays (#521)
 - Fixed Chemsep flowsheet mouse hover issue (#520)
 - CoolProp fix density for INCOM mixture (#519)
