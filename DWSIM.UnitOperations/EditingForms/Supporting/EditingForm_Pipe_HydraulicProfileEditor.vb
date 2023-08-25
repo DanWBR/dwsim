@@ -578,17 +578,17 @@ Imports System.Drawing
         GridMalha.Rows.Add()
         GridMalha.Rows.Add()
         GridMalha.Rows.Add()
-        GridMalha.Rows(0).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Segmento")
-        GridMalha.Rows(1).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Tipo")
-        GridMalha.Rows(2).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Quantidade")
-        GridMalha.Rows(3).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Incrementos")
+        GridMalha.Rows(0).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Segment")
+        GridMalha.Rows(1).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Fitting")
+        GridMalha.Rows(2).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Amount")
+        GridMalha.Rows(3).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Sections")
         GridMalha.Rows(4).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Material")
-        GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (m)"
-        GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (W/[m.K])"
-        GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom")
-        GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
-        GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin")
-        GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin")
+        GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity")
+        GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond")
+        GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Length")
+        GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevation")
+        GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("External Diameter")
+        GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Internal Diameter")
 
         CBTemplate = New DataGridViewComboBoxCell()
         CBMat = New DataGridViewComboBoxCell()
@@ -661,12 +661,12 @@ Imports System.Drawing
         NumberFormat = PipeOp.FlowSheet.FlowsheetOptions.NumberFormat
 
         If Not PipeOp.Profile Is Nothing Then
-            GridMalha.Rows(5).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Rugosity") & " (" & Units.distance & ")"
-            GridMalha.Rows(6).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("ThermCond") & " (" & Units.thermalConductivity & ")"
-            GridMalha.Rows(7).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Comprimentom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(8).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Elevaom").Replace("(m)", "(" & Units.distance & ")")
-            GridMalha.Rows(9).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dexternoin").Replace("(in.)", "(" & Units.diameter & ")")
-            GridMalha.Rows(10).HeaderCell.Value = PipeOp.FlowSheet.GetTranslatedString("Dinternoin").Replace("(in.)", "(" & Units.diameter & ")")
+            GridMalha.Rows(5).HeaderCell.Value += " (" & Units.distance & ")"
+            GridMalha.Rows(6).HeaderCell.Value += " (" & Units.thermalConductivity & ")"
+            GridMalha.Rows(7).HeaderCell.Value += " (" & Units.distance & ")"
+            GridMalha.Rows(8).HeaderCell.Value += " (" & Units.distance & ")"
+            GridMalha.Rows(9).HeaderCell.Value += " (" & Units.diameter & ")"
+            GridMalha.Rows(10).HeaderCell.Value += " (" & Units.diameter & ")"
             If PipeOp.Profile.Sections.Count > 0 Then
                 Me.ConvertProfileToGrid(PipeOp.Profile)
                 Me.GridMalha.Columns.RemoveAt(Me.GridMalha.Columns.Count - 1)
