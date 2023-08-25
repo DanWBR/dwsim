@@ -89,7 +89,7 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                alert = s.GetDefaultEditorForm("Add Equilibrium Reaction", 500, 400, myview);
+                alert = s.GetDefaultEditorForm("Add Equilibrium Reaction", 850, 400, myview);
                 alert.Shown += (s1, e1) =>
                 {
                     myview.Invalidate();
@@ -236,7 +236,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert2.Close();
                                 });
-                                alert2 = s.GetDefaultEditorForm("Edit Equilibrium Reaction", 500, 400, myview2);
+                                alert2 = s.GetDefaultEditorForm("Edit Equilibrium Reaction", 850, 400, myview2);
                                 alert2.Shown += (s1, e1) =>
                                 {
                                     myview2.Invalidate();

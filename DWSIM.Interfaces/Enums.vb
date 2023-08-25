@@ -430,9 +430,9 @@ Namespace Enums
     End Enum
 
     Public Enum KOpt
-        Gibbs
-        Expression
-        Constant
+        Gibbs = 0
+        Expression = 1
+        Constant = 2
     End Enum
 
     Public Enum WarningType
