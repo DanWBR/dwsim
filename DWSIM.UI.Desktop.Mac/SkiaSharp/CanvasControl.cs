@@ -45,6 +45,7 @@ namespace DWSIM.UI.Desktop.Mac
                         catch { }
                     }
                 }
+                Widget.FlowsheetObject.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
                 var scale = (float)GlobalSettings.Settings.DpiScale;
                 nativecontrol._lastTouchX = e.Location.X * scale;
                 nativecontrol._lastTouchY = e.Location.Y * scale;
@@ -198,12 +199,6 @@ namespace DWSIM.UI.Desktop.Mac
             // draw the surface to the context
             drawable.DrawSurface(ctx, Bounds, info, surface);
 
-        }
-
-        public override void MouseDown(NSEvent theEvent)
-        {
-            base.MouseDown(theEvent);
-            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
         }
 
         public override void MouseMoved(NSEvent theEvent)
