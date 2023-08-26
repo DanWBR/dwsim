@@ -200,6 +200,7 @@ Public Class FormMain
                 RegistroCAPEOPENToolStripMenuItem.Enabled = False
                 DashboardToolStripMenuItem.Visible = False
                 tsmiProUG.Visible = False
+                DatabaseManagerToolStripMenuItem.Visible = False
             End If
 #End If
 

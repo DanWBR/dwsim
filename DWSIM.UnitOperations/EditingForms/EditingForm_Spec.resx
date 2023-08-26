@@ -139,9 +139,6 @@
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -224,6 +221,9 @@
   </data>
   <data name="ComboBox2.Items1" xml:space="preserve">
     <value>After Source Object</value>
+  </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Expressão</value>
@@ -630,9 +630,6 @@
   <data name="&gt;&gt;cbCalcMode.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.6.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="cbCalcMode.ToolTip2" xml:space="preserve">
     <value />
   </data>
@@ -869,6 +866,9 @@
   </data>
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;lblTargetVal.Name" xml:space="preserve">
+    <value>lblTargetVal</value>
   </data>
   <data name="lblSourceVal.ToolTip" xml:space="preserve">
     <value />
@@ -1266,8 +1266,8 @@
   <data name="lblSourceVal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lblTargetVal.Name" xml:space="preserve">
-    <value>lblTargetVal</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.6.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 115</value>
@@ -1299,8 +1299,8 @@
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblResult.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 13</value>
