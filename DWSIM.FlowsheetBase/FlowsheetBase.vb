@@ -3671,7 +3671,8 @@ Label_00CC:
         engine = IronPython.Hosting.Python.CreateEngine(opts)
 
         Dim paths0 = engine.GetSearchPaths().ToList()
-        paths0.Add(Path.Combine(My.Application.Info.DirectoryPath, "Lib"))
+        Dim apppath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+        paths0.Add(Path.Combine(apppath, "Lib"))
         Try
             engine.SetSearchPaths(paths0)
         Catch ex As Exception
