@@ -141,7 +141,7 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
-            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+            fbase?.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
             var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
             _lastTouchX = (int)e.GetPosition(this).X * (float)m.M11;
             _lastTouchY = (int)e.GetPosition(this).Y * (float)m.M22;
@@ -174,14 +174,14 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
         {
-            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+            fbase?.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
             var oldzoom = fsurface.Zoom;
             fsurface.Zoom += e.Delta / 4 / 100.0f;
             if (fsurface.Zoom < 0.05) fsurface.Zoom = 0.05f;
             var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
             var X = (int)e.GetPosition(this).X*(int)m.M11;
             var Y = (int)e.GetPosition(this).Y* (int)m.M22;
-            fbase.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
+            fbase?.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectLayout);
             fsurface.CenterTo(oldzoom, X, Y, (int)Width, (int)Height);
             this.InvalidateVisual();
         }
