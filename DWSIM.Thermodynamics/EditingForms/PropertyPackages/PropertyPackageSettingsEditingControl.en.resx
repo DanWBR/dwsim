@@ -236,7 +236,7 @@
     <value>Excess Properties</value>
   </data>
   <data name="cbHSCpCalcMode.Items3" xml:space="preserve">
-    <value>Experimental Data</value>
+    <value>Liquid Cp + Enthalpy of Vaporization</value>
   </data>
   <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>232, 45</value>

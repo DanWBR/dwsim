@@ -50,14 +50,14 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.chkUseHenry = New System.Windows.Forms.CheckBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cbEOSLiqEnthMethod = New System.Windows.Forms.ComboBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.chkAutoEstimateNU = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.tbSPCheckThres = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.cbEOSLiqEnthMethod = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -251,6 +251,19 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Label12
+        '
+        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.Name = "Label12"
+        '
+        'cbEOSLiqEnthMethod
+        '
+        resources.ApplyResources(Me.cbEOSLiqEnthMethod, "cbEOSLiqEnthMethod")
+        Me.cbEOSLiqEnthMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEOSLiqEnthMethod.FormattingEnabled = True
+        Me.cbEOSLiqEnthMethod.Items.AddRange(New Object() {resources.GetString("cbEOSLiqEnthMethod.Items"), resources.GetString("cbEOSLiqEnthMethod.Items1")})
+        Me.cbEOSLiqEnthMethod.Name = "cbEOSLiqEnthMethod"
+        '
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
@@ -292,19 +305,6 @@ Partial Class PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
-        '
-        'Label12
-        '
-        resources.ApplyResources(Me.Label12, "Label12")
-        Me.Label12.Name = "Label12"
-        '
-        'cbEOSLiqEnthMethod
-        '
-        resources.ApplyResources(Me.cbEOSLiqEnthMethod, "cbEOSLiqEnthMethod")
-        Me.cbEOSLiqEnthMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEOSLiqEnthMethod.FormattingEnabled = True
-        Me.cbEOSLiqEnthMethod.Items.AddRange(New Object() {resources.GetString("cbEOSLiqEnthMethod.Items"), resources.GetString("cbEOSLiqEnthMethod.Items1")})
-        Me.cbEOSLiqEnthMethod.Name = "cbEOSLiqEnthMethod"
         '
         'PropertyPackageSettingsEditingControl
         '

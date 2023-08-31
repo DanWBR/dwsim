@@ -24,7 +24,7 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkIgnoreVapFracLim.Enabled = TypeOf PropPack Is SourWaterPropertyPackage
 
-        cbHSCpCalcMode.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
+        cbHSCpCalcMode.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or TypeOf PropPack Is RaoultPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
         cbEOSLiqEnthMethod.Enabled = TypeOf PropPack Is PRSV2PropertyPackage Or TypeOf PropPack Is PRSV2VLPropertyPackage
 
@@ -152,4 +152,5 @@ Public Class PropertyPackageSettingsEditingControl
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Process.Start("https://github.com/DanWBR/dwsim/blob/windows/DWSIM.Thermodynamics/Assets/henry.txt")
     End Sub
+
 End Class
