@@ -598,10 +598,10 @@
     <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Data Regression\FormSearchKDBVLE.Designer.vb">
+    <Compile Include="Forms\DataRegression\FormSearchKDBVLE.Designer.vb">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Data Regression\FormSearchKDBVLE.vb">
+    <Compile Include="Forms\DataRegression\FormSearchKDBVLE.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\EditorTooltips\EditorTooltips.vb" />
@@ -851,10 +851,10 @@
     <Compile Include="Forms\FormSimulWizard.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Data Regression\FormDataRegression.Designer.vb">
+    <Compile Include="Forms\DataRegression\FormDataRegression.Designer.vb">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Data Regression\FormDataRegression.vb">
+    <Compile Include="Forms\DataRegression\FormDataRegression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormChart.Designer.vb">
@@ -1056,73 +1056,73 @@
     <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\TreeModel.vb" />
     <Compile Include="Objects\Classes\XFlowsheet\Exporter.vb" />
-    <Compile Include="Tools\Assay Manager\FormAssayManager.Designer.vb">
+    <Compile Include="Tools\AssayManager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Assay Manager\FormAssayManager.vb">
+    <Compile Include="Tools\AssayManager\FormAssayManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Bulk Add Pseudocompounds\FormBulkAddPseudos.Designer.vb">
+    <Compile Include="Tools\BulkAddPseudocompounds\FormBulkAddPseudos.Designer.vb">
       <DependentUpon>FormBulkAddPseudos.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Bulk Add Pseudocompounds\FormBulkAddPseudos.vb">
+    <Compile Include="Tools\BulkAddPseudocompounds\FormBulkAddPseudos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Mass and Energy Balance Summary\FormMEBSummary.Designer.vb">
+    <Compile Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.Designer.vb">
       <DependentUpon>FormMEBSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Mass and Energy Balance Summary\FormMEBSummary.vb">
+    <Compile Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacConv.Designer.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacConv.Designer.vb">
       <DependentUpon>FormReacConv.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacConv.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacConv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacEq.Designer.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacEq.Designer.vb">
       <DependentUpon>FormReacEq.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacEq.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacEq.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacHeterog.Designer.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacHeterog.Designer.vb">
       <DependentUpon>FormReacHeterog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacHeterog.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacHeterog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacKinetic.Designer.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacKinetic.Designer.vb">
       <DependentUpon>FormReacKinetic.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacKinetic.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacKinetic.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.Designer.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.Designer.vb">
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.Designer.vb">
+    <Compile Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.Designer.vb">
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.vb">
+    <Compile Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Base Class\AttachedUtilityClass.vb">
+    <Compile Include="Utilities\BaseClass\AttachedUtilityClass.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.Designer.vb">
+    <Compile Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.Designer.vb">
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.vb">
+    <Compile Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utilities\LLE Envelope\FormLLEDiagram.Designer.vb">
+    <Compile Include="Utilities\LLEEnvelope\FormLLEDiagram.Designer.vb">
       <DependentUpon>FormLLEDiagram.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\LLE Envelope\FormLLEDiagram.vb">
+    <Compile Include="Utilities\LLEEnvelope\FormLLEDiagram.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\SpreadsheetForm.Designer.vb">
@@ -1131,77 +1131,77 @@
     <Compile Include="Forms\FlowsheetComponents\SpreadsheetForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Binary Envelope\FormBinEnv.Designer.vb">
+    <Compile Include="Utilities\BinaryEnvelope\FormBinEnv.Designer.vb">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Binary Envelope\FormBinEnv.vb">
+    <Compile Include="Utilities\BinaryEnvelope\FormBinEnv.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Tools\C7plus Characterization\FormPCBulk.designer.vb">
+    <Compile Include="Tools\C7plusCharacterization\FormPCBulk.designer.vb">
       <DependentUpon>FormPCBulk.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\C7plus Characterization\FormPCBulk.vb">
+    <Compile Include="Tools\C7plusCharacterization\FormPCBulk.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\True Critical Point\FrmCritpt.designer.vb">
+    <Compile Include="Utilities\TrueCriticalPoint\FrmCritpt.designer.vb">
       <DependentUpon>FrmCritpt.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\True Critical Point\FrmCritpt.vb">
+    <Compile Include="Utilities\TrueCriticalPoint\FrmCritpt.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utilities\Natural Gas Hydrates\FormHYD_DET.designer.vb">
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD_DET.designer.vb">
       <DependentUpon>FormHYD_DET.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Natural Gas Hydrates\FormHYD_DET.vb">
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD_DET.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Natural Gas Hydrates\FormHYD.Designer.vb">
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD.Designer.vb">
       <DependentUpon>FormHYD.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Natural Gas Hydrates\FormHYD.vb">
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utilities\Natural Gas Hydrates\Helper Classes\AUX_FUNC.vb" />
-    <Compile Include="Utilities\Natural Gas Hydrates\Helper Classes\DWSIM_KS.vb" />
-    <Compile Include="Utilities\Natural Gas Hydrates\Helper Classes\HYDR_CG.vb" />
-    <Compile Include="Utilities\Natural Gas Hydrates\Helper Classes\HYDR_KS.vb" />
-    <Compile Include="Utilities\Natural Gas Hydrates\Helper Classes\HYDR_vdwP_PP.vb" />
-    <Compile Include="Utilities\Phase Envelope\FormPhEnv.Designer.vb">
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\AUX_FUNC.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\DWSIM_KS.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\HYDR_CG.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\HYDR_KS.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\HYDR_vdwP_PP.vb" />
+    <Compile Include="Utilities\PhaseEnvelope\FormPhEnv.Designer.vb">
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Phase Envelope\FormPhEnv.vb">
+    <Compile Include="Utilities\PhaseEnvelope\FormPhEnv.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utilities\Pure Compound Properties\FormPureComp.Designer.vb">
+    <Compile Include="Utilities\PureCompoundProperties\FormPureComp.Designer.vb">
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Pure Compound Properties\FormPureComp.vb">
+    <Compile Include="Utilities\PureCompoundProperties\FormPureComp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacManager.Designer.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacManager.Designer.vb">
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacManager.vb">
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacManager.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Tools\System of Units Creator\FormUnitGen.Designer.vb">
+    <Compile Include="Tools\UnitsSystemCreator\FormUnitGen.Designer.vb">
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\System of Units Creator\FormUnitGen.vb">
+    <Compile Include="Tools\UnitsSystemCreator\FormUnitGen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Pressure Safety Valve Sizing\FrmPsvSize.Designer.vb">
+    <Compile Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.Designer.vb">
       <DependentUpon>FrmPsvSize.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Pressure Safety Valve Sizing\FrmPsvSize.vb">
+    <Compile Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utilities\Pressure Safety Valve Sizing\Helper Classes\PSV_CALC.vb" />
-    <Compile Include="Utilities\Pressure Safety Valve Sizing\Helper Classes\PSV_VERIF.vb" />
-    <Compile Include="Utilities\Gas-Liquid Separator Sizing\FrmDAVP.Designer.vb">
+    <Compile Include="Utilities\PressureSafetyValveSizing\Helper Classes\PSV_CALC.vb" />
+    <Compile Include="Utilities\PressureSafetyValveSizing\Helper Classes\PSV_VERIF.vb" />
+    <Compile Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.Designer.vb">
       <DependentUpon>FrmDAVP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Gas-Liquid Separator Sizing\FrmDAVP.vb">
+    <Compile Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\FormPropSelection.Designer.vb">
@@ -1293,13 +1293,13 @@
     <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundFromThermo.resx">
       <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.de.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormSearchKDBVLE.de.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.en.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormSearchKDBVLE.en.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormSearchKDBVLE.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.resx">
@@ -1584,10 +1584,10 @@
       <DependentUpon>FormSimulWizard.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.de.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.de.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.es.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.es.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.es.resx">
@@ -1665,8 +1665,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Report Files\report_en-US.mr6" />
-    <EmbeddedResource Include="Report Files\report_pt-BR.mr6" />
+    <EmbeddedResource Include="ReportFiles\report_en-US.mr6" />
+    <EmbeddedResource Include="ReportFiles\report_pt-BR.mr6" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Resources\node_in copy.png" />
@@ -2000,156 +2000,156 @@
       <LastGenOutput>DWSIM1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
-    <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.de.resx">
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.de.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.es.resx">
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.es.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Bulk Add Pseudocompounds\FormBulkAddPseudos.resx">
+    <EmbeddedResource Include="Tools\BulkAddPseudocompounds\FormBulkAddPseudos.resx">
       <DependentUpon>FormBulkAddPseudos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Mass and Energy Balance Summary\FormMEBSummary.en.resx">
+    <EmbeddedResource Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.en.resx">
       <DependentUpon>FormMEBSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Mass and Energy Balance Summary\FormMEBSummary.resx">
+    <EmbeddedResource Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.resx">
       <DependentUpon>FormMEBSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacConv.en.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacConv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacConv.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacConv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacEq.en.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacEq.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacEq.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacEq.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacHeterog.de.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.de.resx">
       <DependentUpon>FormReacHeterog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacHeterog.en.resx">
-      <DependentUpon>FormReacHeterog.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacHeterog.es.resx">
-      <DependentUpon>FormReacHeterog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacHeterog.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.en.resx">
       <DependentUpon>FormReacHeterog.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacKinetic.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.es.resx">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacKinetic.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.resx">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacKinetic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacManager.en.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.en.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.de.resx">
+    <EmbeddedResource Include="Utilities\BaseClass\AttachedUtilityClass.de.resx">
       <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.en.resx">
+    <EmbeddedResource Include="Utilities\BaseClass\AttachedUtilityClass.en.resx">
       <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.resx">
+    <EmbeddedResource Include="Utilities\BaseClass\AttachedUtilityClass.resx">
       <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Binary Envelope\FormBinEnv.en.resx">
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.en.resx">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\LLE Envelope\FormLLEDiagram.de.resx">
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.de.resx">
       <DependentUpon>FormLLEDiagram.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\LLE Envelope\FormLLEDiagram.en.resx">
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.en.resx">
       <DependentUpon>FormLLEDiagram.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\LLE Envelope\FormLLEDiagram.es.resx">
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.es.resx">
       <DependentUpon>FormLLEDiagram.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\LLE Envelope\FormLLEDiagram.resx">
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.resx">
       <DependentUpon>FormLLEDiagram.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\SpreadsheetForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SpreadsheetForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Binary Envelope\FormBinEnv.resx">
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\C7plus Characterization\FormPCBulk.resx">
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.resx">
       <DependentUpon>FormPCBulk.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\True Critical Point\FrmCritpt.en.resx">
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmCritpt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\True Critical Point\FrmCritpt.resx">
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.resx">
       <DependentUpon>FrmCritpt.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD.en.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormHYD.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD_DET.en.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormHYD_DET.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD_DET.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.resx">
       <DependentUpon>FormHYD_DET.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormHYD.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Phase Envelope\FormPhEnv.en.resx">
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Phase Envelope\FormPhEnv.resx">
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pure Compound Properties\FormPureComp.en.resx">
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pure Compound Properties\FormPureComp.resx">
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacManager.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\System of Units Creator\FormUnitGen.en.resx">
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\System of Units Creator\FormUnitGen.resx">
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </EmbeddedResource>
@@ -2458,7 +2458,7 @@
     <None Include="Resources\bullet_delete.png" />
     <None Include="Resources\application_xp_terminal.png" />
     <None Include="Resources\application_osx_terminal.png" />
-    <EmbeddedResource Include="Report Files\report_transform.xsl" />
+    <EmbeddedResource Include="ReportFiles\report_transform.xsl" />
     <None Include="Resources\arrow_down.png" />
     <None Include="Resources\arrow_left.png" />
     <None Include="Resources\arrow_up.png" />
@@ -3235,10 +3235,10 @@
     <None Include="Resources\about.png" />
     <None Include="Resources\control_stop_blue1.png" />
     <None Include="Resources\clock.png" />
-    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.en.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.en.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.resx">
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChart.en.resx">
@@ -3434,146 +3434,146 @@
     <EmbeddedResource Include="Languages\Properties.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.en.resx">
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.en.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.resx">
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.de.resx">
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.de.resx">
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.en.resx">
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.es.resx">
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.es.resx">
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.resx">
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\C7plus Characterization\FormPCBulk.de.resx">
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.de.resx">
       <DependentUpon>FormPCBulk.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\C7plus Characterization\FormPCBulk.en.resx">
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.en.resx">
       <DependentUpon>FormPCBulk.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\C7plus Characterization\FormPCBulk.es.resx">
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.es.resx">
       <DependentUpon>FormPCBulk.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacConv.de.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.de.resx">
       <DependentUpon>FormReacConv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacConv.es.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.es.resx">
       <DependentUpon>FormReacConv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacEq.de.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.de.resx">
       <DependentUpon>FormReacEq.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacEq.es.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.es.resx">
       <DependentUpon>FormReacEq.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacKinetic.de.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.de.resx">
       <DependentUpon>FormReacKinetic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacKinetic.es.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.es.resx">
       <DependentUpon>FormReacKinetic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacManager.de.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.de.resx">
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacManager.es.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.es.resx">
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.de.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.de.resx">
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.es.resx">
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.es.resx">
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\System of Units Creator\FormUnitGen.de.resx">
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.de.resx">
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tools\System of Units Creator\FormUnitGen.es.resx">
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.es.resx">
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Binary Envelope\FormBinEnv.de.resx">
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.de.resx">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Binary Envelope\FormBinEnv.es.resx">
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.es.resx">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.de.resx">
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.de.resx">
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.en.resx">
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.es.resx">
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.es.resx">
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.resx">
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\True Critical Point\FrmCritpt.de.resx">
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.de.resx">
       <DependentUpon>FrmCritpt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\True Critical Point\FrmCritpt.es.resx">
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.es.resx">
       <DependentUpon>FrmCritpt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD.de.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.de.resx">
       <DependentUpon>FormHYD.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD.es.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.es.resx">
       <DependentUpon>FormHYD.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD_DET.de.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.de.resx">
       <DependentUpon>FormHYD_DET.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Natural Gas Hydrates\FormHYD_DET.es.resx">
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.es.resx">
       <DependentUpon>FormHYD_DET.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Phase Envelope\FormPhEnv.de.resx">
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.de.resx">
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Phase Envelope\FormPhEnv.es.resx">
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.es.resx">
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pure Compound Properties\FormPureComp.de.resx">
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.de.resx">
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pure Compound Properties\FormPureComp.es.resx">
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.es.resx">
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pressure Safety Valve Sizing\FrmPsvSize.de.resx">
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.de.resx">
       <DependentUpon>FrmPsvSize.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pressure Safety Valve Sizing\FrmPsvSize.en.resx">
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmPsvSize.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pressure Safety Valve Sizing\FrmPsvSize.es.resx">
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.es.resx">
       <DependentUpon>FrmPsvSize.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Pressure Safety Valve Sizing\FrmPsvSize.resx">
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.resx">
       <DependentUpon>FrmPsvSize.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Gas-Liquid Separator Sizing\FrmDAVP.de.resx">
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.de.resx">
       <DependentUpon>FrmDAVP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Gas-Liquid Separator Sizing\FrmDAVP.en.resx">
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmDAVP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Gas-Liquid Separator Sizing\FrmDAVP.es.resx">
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.es.resx">
       <DependentUpon>FrmDAVP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Gas-Liquid Separator Sizing\FrmDAVP.resx">
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.resx">
       <DependentUpon>FrmDAVP.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3622,7 +3622,9 @@
     <None Include="Resources\book.png" />
     <None Include="Resources\help-browser1.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tools\CompoundParameterTuning\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>
