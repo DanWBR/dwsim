@@ -5907,7 +5907,7 @@ redirect2:                  IObj?.SetCurrent()
 
         End Function
 
-        Public Overridable Function AUX_PVAPi(ByVal sub1 As ICompoundConstantProperties, ByVal T As Double)
+        Public Overridable Function AUX_PVAPi(ByVal sub1 As ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim ID = sub1.ID
 
@@ -5993,7 +5993,7 @@ redirect2:                  IObj?.SetCurrent()
         End Function
 
 
-        Public Overridable Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double)
+        Public Overridable Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double) As Double
 
             Dim ID = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.ID
 

@@ -4,6 +4,7 @@ Imports Python.Runtime
 Imports Eto.Forms
 Imports DWSIM.UI.Shared.Common
 Imports System.Globalization
+Imports DWSIM.Thermodynamics.Streams
 
 Namespace UnitOperations
 
@@ -82,23 +83,44 @@ Namespace UnitOperations
 
             End If
 
-            Dim msin = GetInletMaterialStream(0)
-            Dim msout = GetOutletMaterialStream(0)
+            Dim msin1, msin2, msout As MaterialStream
+
+            msin1 = GetInletMaterialStream(0)
+            msin2 = GetInletMaterialStream(1)
+            msout = GetOutletMaterialStream(0)
+
+            If msin2 Is Nothing Then
+                Throw New Exception("Please update your model and connect a second inlet stream to this Fuel Cell.")
+            End If
 
             Dim esout = GetOutletEnergyStream(1)
 
-            Dim names = msin.Phases(0).Compounds.Keys.ToList()
+            Dim names = msin1.Phases(0).Compounds.Keys.ToList()
 
             If Not names.Contains("Water") Then Throw New Exception("Needs Water compound")
             If Not names.Contains("Hydrogen") Then Throw New Exception("Needs Hydrogen compound")
             If Not names.Contains("Oxygen") Then Throw New Exception("Needs Oxygen compound")
 
-            Dim Pin = msin.GetPressure()
+            Dim Pin1, Pin2 As Double
 
-            Dim T = msin.GetTemperature()
+            Pin1 = msin1.GetPressure()
+            Pin2 = msin1.GetPressure()
 
-            Dim PH2 = msin.Phases(2).Compounds("Hydrogen").MoleFraction.GetValueOrDefault() * Pin / 101325.0
-            Dim PO2 = msin.Phases(2).Compounds("Oxygen").MoleFraction.GetValueOrDefault() * Pin / 101325.0
+            Dim T = (msin1.GetTemperature() + msin2.GetTemperature()) / 2
+
+            Dim m1, m2, w1, w2, xH2, xO2 As Double
+
+            m1 = msin1.GetMolarFlow()
+            m2 = msin2.GetMolarFlow()
+
+            w1 = msin1.GetMassFlow()
+            w2 = msin2.GetMassFlow()
+
+            xH2 = msin1.Phases(2).Compounds("Hydrogen").MoleFraction.GetValueOrDefault()
+            xO2 = msin2.Phases(2).Compounds("Oxygen").MoleFraction.GetValueOrDefault()
+
+            Dim PH2 = m1 / (m1 + m2) * xH2 * Pin1 / 101325.0
+            Dim PO2 = m2 / (m1 + m2) * xO2 * Pin2 / 101325.0
 
             Dim results As Object = Nothing
 
@@ -212,18 +234,19 @@ Namespace UnitOperations
                 Dim h2r = ElectronTransfer / 4 * 2 'mol/s
                 Dim o2r = ElectronTransfer / 4 'mol/s
 
-                Dim N0 = msin.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
+                Dim N01 = msin1.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
+                Dim N02 = msin2.Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToList()
 
-                Dim Nf = New List(Of Double)(N0)
+                Dim Nf = New List(Of Double)(N01)
 
-                For j As Integer = 0 To N0.Count - 1
+                For j As Integer = 0 To N01.Count - 1
                     If names(j) = "Water" Then
-                        Nf(j) = N0(j) + waterr
+                        Nf(j) = N01(j) + N02(j) + waterr
                     ElseIf names(j) = "Hydrogen" Then
-                        Nf(j) = N0(j) - h2r
+                        Nf(j) = N01(j) + N02(j) - h2r
                         If (Nf(j) < 0.0) Then Throw New Exception("Negative Hydrogen molar flow calculated. Please check inputs.")
                     ElseIf names(j) = "Oxygen" Then
-                        Nf(j) = N0(j) - o2r
+                        Nf(j) = N01(j) + N02(j) - o2r
                         If (Nf(j) < 0.0) Then Throw New Exception("Negative Oxygen molar flow calculated. Please check inputs.")
                     End If
                 Next
@@ -233,8 +256,8 @@ Namespace UnitOperations
 
                 msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
                 msout.SetMolarFlow(Nf.Sum)
-                msout.SetPressure(msin.GetPressure)
-                msout.SetMassEnthalpy(msin.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
+                msout.SetPressure(Math.Min(Pin1, Pin2) / 2)
+                msout.SetMassEnthalpy(w1 / (w1 + w2) * msin1.GetMassEnthalpy() + w2 / (w1 + w2) * msin2.GetMassEnthalpy() + WasteHeat / (w1 + w2))
                 msout.SetFlashSpec("PH")
 
                 msout.AtEquilibrium = False

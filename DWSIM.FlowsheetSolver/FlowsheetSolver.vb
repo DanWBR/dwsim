@@ -1542,7 +1542,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             maintask.Wait(500)
                             fgui.UpdateInterface()
                             If Settings.TaskCancellationTokenSource.IsCancellationRequested Then
-                                Throw New OperationCanceledException()
+                                Throw New OperationCanceledException("Flowsheet solving stopped by the user.")
                             End If
                             If maintask.Status = TaskStatus.RanToCompletion Then Exit While
                         End While

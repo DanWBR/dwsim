@@ -1,9 +1,15 @@
 ﻿Imports System.Windows.Forms
 Imports DWSIM.ExtensionMethods
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class Window
     Private Sub Window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Viewer.EnsureCoreWebView2Async()
+
         SetupInspectorWindow()
+
     End Sub
 
     Public Sub SetupInspectorWindow()
@@ -100,7 +106,7 @@ Public Class Window
                     Dim nesteditems = GetItems(Host.Items.ToList)
                     Dim sitem = nesteditems.Where(Function(x) x.ID = DirectCast(itemSelector.SelectedNode, TreeNode).Tag.ToString).FirstOrDefault
                     If Not sitem Is Nothing Then
-                        currentItemViewer.DocumentText = sitem.GetHTML()
+                        Viewer.NavigateToString(sitem.GetHTML())
                     Else
                         MessageBox.Show("Selected report not found.")
                     End If
@@ -150,10 +156,34 @@ Public Class Window
         Next
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If SaveFileDialog1.ShowDialog = DialogResult.OK Then
-            IO.File.WriteAllText(SaveFileDialog1.FileName, currentItemViewer.DocumentText)
+    Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("HTML File", "*.html")})
+
+        If handler IsNot Nothing Then
+            Try
+                Dim html As String
+                html = Await Viewer.ExecuteScriptAsync("document.documentElement.outerHTML;")
+                html = System.Text.RegularExpressions.Regex.Unescape(html)
+                html = html.Remove(0, 1)
+                html = html.Remove(html.Length - 1, 1)
+                Using stream As New IO.MemoryStream()
+                    Using writer As New IO.StreamWriter(stream) With {.AutoFlush = True}
+                        writer.Write(html)
+                        handler.Write(stream)
+                    End Using
+                End Using
+            Catch ex As Exception
+                MessageBox.Show(ex.Message,
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error)
+            End Try
         End If
+
     End Sub
 
 End Class

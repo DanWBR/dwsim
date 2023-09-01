@@ -589,7 +589,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
+        Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Double
 
             Dim comp As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = sub1).SingleOrDefault
 

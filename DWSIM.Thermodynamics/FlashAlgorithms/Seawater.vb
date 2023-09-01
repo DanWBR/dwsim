@@ -368,7 +368,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
                 Vs = tmp(8)
             End If
 
-            ecount = tmp(4)
+            If tmp IsNot Nothing Then ecount = tmp(4)
 
             For i = 0 To n
                 Ki(i) = Vy(i) / Vx(i)

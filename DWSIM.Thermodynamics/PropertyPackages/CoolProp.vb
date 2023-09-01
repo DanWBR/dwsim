@@ -237,7 +237,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
+        Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
             Dim routinename As String = ComponentName & String.Format(" (Vapor Pressure - {0})", sub1)

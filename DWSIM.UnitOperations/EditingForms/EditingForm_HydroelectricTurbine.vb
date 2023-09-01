@@ -18,6 +18,8 @@ Public Class EditingForm_HydroelectricTurbine
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

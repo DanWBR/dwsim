@@ -189,9 +189,14 @@ Namespace UnitOperations
             myIC2.Type = ConType.ConEn
 
             Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(x + w, y / 2)
+            myOC1.Position = New Point(x + w, y / 3)
             myOC1.Type = ConType.ConOut
             myOC1.Direction = ConDir.Right
+
+            Dim myOC2 As New ConnectionPoint
+            myOC2.Position = New Point(x + w, 2 * y / 3)
+            myOC2.Type = ConType.ConOut
+            myOC2.Direction = ConDir.Right
 
             With GraphicObject.InputConnectors
                 If .Count = 2 Then
@@ -201,17 +206,23 @@ Namespace UnitOperations
                     .Add(myIC1)
                     .Add(myIC2)
                 End If
-                .Item(0).ConnectorName = "Fluid Inlet"
+                .Item(0).ConnectorName = "Water Inlet"
                 .Item(1).ConnectorName = "Power Inlet"
             End With
 
             With GraphicObject.OutputConnectors
                 If .Count = 1 Then
                     .Item(0).Position = New Point(x + w, y + h / 2)
+                    .Add(myOC2)
+                ElseIf .Count = 2 Then
+                    .Item(0).Position = New Point(x + w, y + h / 3)
+                    .Item(1).Position = New Point(x + w, y + 2 * h / 3)
                 Else
                     .Add(myOC1)
+                    .Add(myOC2)
                 End If
-                .Item(0).ConnectorName = "Products Outlet"
+                .Item(0).ConnectorName = "Hydrogen-Rich Outlet"
+                .Item(1).ConnectorName = "Oxygen-Rich Outlet"
             End With
 
             Me.GraphicObject.EnergyConnector.Active = False
@@ -355,7 +366,12 @@ Namespace UnitOperations
         Public Overrides Sub Calculate(Optional args As Object = Nothing)
 
             Dim msin = GetInletMaterialStream(0)
-            Dim msout = GetOutletMaterialStream(0)
+            Dim msout1 = GetOutletMaterialStream(0)
+            Dim msout2 = GetOutletMaterialStream(1)
+
+            If msout2 Is Nothing Then
+                Throw New Exception("Please update your model and connect a second outlet stream to this electrolyzer.")
+            End If
 
             Dim esin = GetInletEnergyStream(1)
 
@@ -457,30 +473,60 @@ Namespace UnitOperations
 
             Dim Nf = New List(Of Double)(N0)
 
+            Dim widx, hidx, oidx As Integer
+
             For i As Integer = 0 To N0.Count - 1
                 If names(i) = wid Then
+                    widx = i
                     Nf(i) = N0(i) - waterr
                     If (Nf(i) < 0.0) Then Throw New Exception(String.Format("Negative {0} molar flow calculated. Increase water rate in inlet stream or reduce power.", wid))
                 ElseIf names(i) = hid Then
+                    hidx = i
                     Nf(i) = N0(i) + h2r
                 ElseIf names(i) = "Oxygen" Then
+                    oidx = i
                     Nf(i) = N0(i) + o2r
                 End If
             Next
 
-            msout.Clear()
-            msout.ClearAllProps()
+            Dim P = msin.GetPressure()
 
-            msout.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
-            msout.SetMolarFlow(Nf.Sum)
-            msout.SetPressure(msin.GetPressure)
-            msout.SetTemperature(T)
-            msout.SetFlashSpec("PT")
-            msout.Calculate()
-            msout.SetMassEnthalpy(msout.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
-            msout.SetFlashSpec("PH")
+            Dim NH2 = Nf(hidx)
+            Dim xH2Osat = pp.AUX_PVAPi(wid, T) / P
+            Dim xH2 = 1 - xH2Osat
+            Dim Ntot = NH2 / xH2
+            Dim NH20sat = Ntot - NH2
 
-            msout.AtEquilibrium = False
+            msout1.Clear()
+            msout1.ClearAllProps()
+            msout1.SetOverallCompoundMolarFlow(hid, NH2)
+            msout1.SetOverallCompoundMolarFlow(wid, NH20sat)
+            msout1.SetPressure(P)
+            msout1.SetTemperature(T)
+            msout1.SetFlashSpec("PT")
+            msout1.Calculate()
+            msout1.SetMassEnthalpy(msout1.GetMassEnthalpy())
+            msout1.SetFlashSpec("PH")
+
+            msout1.AtEquilibrium = False
+
+            Nf(hidx) = 0.0
+            Nf(widx) -= NH20sat
+
+            If (Nf(widx) < 0.0) Then Throw New Exception("Negative Water molar flow calculated. Increase water rate in inlet stream or reduce power.")
+
+            msout2.Clear()
+            msout2.ClearAllProps()
+            msout2.SetOverallComposition(Nf.ToArray().MultiplyConstY(1.0 / Nf.Sum))
+            msout2.SetMolarFlow(Nf.Sum)
+            msout2.SetPressure(P)
+            msout2.SetTemperature(T)
+            msout2.SetFlashSpec("PT")
+            msout2.Calculate()
+            msout2.SetMassEnthalpy(msout2.GetMassEnthalpy() + WasteHeat / msin.GetMassFlow())
+            msout2.SetFlashSpec("PH")
+
+            msout2.AtEquilibrium = False
 
         End Sub
 

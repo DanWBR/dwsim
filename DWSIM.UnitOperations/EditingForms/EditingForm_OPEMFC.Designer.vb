@@ -49,6 +49,10 @@ Partial Class EditingForm_OPEMFC
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectInlet2 = New System.Windows.Forms.Button()
+        Me.btnDisconnect2 = New System.Windows.Forms.Button()
+        Me.cbInlet2 = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
@@ -85,9 +89,9 @@ Partial Class EditingForm_OPEMFC
         Me.GroupBoxParameters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBoxParameters.Controls.Add(Me.gridInput)
-        Me.GroupBoxParameters.Location = New System.Drawing.Point(12, 254)
+        Me.GroupBoxParameters.Location = New System.Drawing.Point(12, 284)
         Me.GroupBoxParameters.Name = "GroupBoxParameters"
-        Me.GroupBoxParameters.Size = New System.Drawing.Size(403, 225)
+        Me.GroupBoxParameters.Size = New System.Drawing.Size(403, 255)
         Me.GroupBoxParameters.TabIndex = 22
         Me.GroupBoxParameters.TabStop = False
         Me.GroupBoxParameters.Text = "Calculation Parameters"
@@ -104,7 +108,7 @@ Partial Class EditingForm_OPEMFC
         Me.gridInput.Margin = New System.Windows.Forms.Padding(0)
         Me.gridInput.Name = "gridInput"
         Me.gridInput.RowHeadersVisible = False
-        Me.gridInput.Size = New System.Drawing.Size(397, 206)
+        Me.gridInput.Size = New System.Drawing.Size(397, 236)
         Me.gridInput.TabIndex = 20
         '
         'DataGridViewTextBoxColumn3
@@ -149,7 +153,7 @@ Partial Class EditingForm_OPEMFC
         Me.GroupBoxResults.Controls.Add(Me.Button2)
         Me.GroupBoxResults.Controls.Add(Me.gridOutput)
         Me.GroupBoxResults.Controls.Add(Me.Button3)
-        Me.GroupBoxResults.Location = New System.Drawing.Point(12, 485)
+        Me.GroupBoxResults.Location = New System.Drawing.Point(12, 545)
         Me.GroupBoxResults.Name = "GroupBoxResults"
         Me.GroupBoxResults.Size = New System.Drawing.Size(403, 287)
         Me.GroupBoxResults.TabIndex = 21
@@ -242,7 +246,7 @@ Partial Class EditingForm_OPEMFC
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 778)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 838)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(403, 212)
         Me.GroupBox4.TabIndex = 20
@@ -266,6 +270,10 @@ Partial Class EditingForm_OPEMFC
         '
         Me.GroupBoxConnections.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectInlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.btnDisconnect2)
+        Me.GroupBoxConnections.Controls.Add(Me.cbInlet2)
+        Me.GroupBoxConnections.Controls.Add(Me.Label1)
         Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectEnergy)
         Me.GroupBoxConnections.Controls.Add(Me.btnDisconnectEnergy)
         Me.GroupBoxConnections.Controls.Add(Me.btnCreateAndConnectOutlet1)
@@ -280,10 +288,54 @@ Partial Class EditingForm_OPEMFC
         Me.GroupBoxConnections.Controls.Add(Me.Label19)
         Me.GroupBoxConnections.Location = New System.Drawing.Point(12, 106)
         Me.GroupBoxConnections.Name = "GroupBoxConnections"
-        Me.GroupBoxConnections.Size = New System.Drawing.Size(403, 113)
+        Me.GroupBoxConnections.Size = New System.Drawing.Size(403, 143)
         Me.GroupBoxConnections.TabIndex = 19
         Me.GroupBoxConnections.TabStop = False
         Me.GroupBoxConnections.Text = "Connections"
+        '
+        'btnCreateAndConnectInlet2
+        '
+        Me.btnCreateAndConnectInlet2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCreateAndConnectInlet2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCreateAndConnectInlet2.Image = CType(resources.GetObject("btnCreateAndConnectInlet2.Image"), System.Drawing.Image)
+        Me.btnCreateAndConnectInlet2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnCreateAndConnectInlet2.Location = New System.Drawing.Point(347, 51)
+        Me.btnCreateAndConnectInlet2.Name = "btnCreateAndConnectInlet2"
+        Me.btnCreateAndConnectInlet2.Size = New System.Drawing.Size(21, 21)
+        Me.btnCreateAndConnectInlet2.TabIndex = 46
+        Me.btnCreateAndConnectInlet2.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect2
+        '
+        Me.btnDisconnect2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDisconnect2.Image = CType(resources.GetObject("btnDisconnect2.Image"), System.Drawing.Image)
+        Me.btnDisconnect2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnDisconnect2.Location = New System.Drawing.Point(374, 51)
+        Me.btnDisconnect2.Name = "btnDisconnect2"
+        Me.btnDisconnect2.Size = New System.Drawing.Size(21, 21)
+        Me.btnDisconnect2.TabIndex = 45
+        Me.btnDisconnect2.UseVisualStyleBackColor = True
+        '
+        'cbInlet2
+        '
+        Me.cbInlet2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbInlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInlet2.FormattingEnabled = True
+        Me.cbInlet2.Location = New System.Drawing.Point(147, 51)
+        Me.cbInlet2.Name = "cbInlet2"
+        Me.cbInlet2.Size = New System.Drawing.Size(194, 21)
+        Me.cbInlet2.TabIndex = 44
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label1.Location = New System.Drawing.Point(8, 54)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(91, 13)
+        Me.Label1.TabIndex = 43
+        Me.Label1.Text = "Oxygen-Rich Inlet"
         '
         'btnCreateAndConnectEnergy
         '
@@ -291,7 +343,7 @@ Partial Class EditingForm_OPEMFC
         Me.btnCreateAndConnectEnergy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectEnergy.Image = CType(resources.GetObject("btnCreateAndConnectEnergy.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(347, 77)
+        Me.btnCreateAndConnectEnergy.Location = New System.Drawing.Point(347, 106)
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.btnCreateAndConnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectEnergy.TabIndex = 42
@@ -302,7 +354,7 @@ Partial Class EditingForm_OPEMFC
         Me.btnDisconnectEnergy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectEnergy.Image = CType(resources.GetObject("btnDisconnectEnergy.Image"), System.Drawing.Image)
         Me.btnDisconnectEnergy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(374, 77)
+        Me.btnDisconnectEnergy.Location = New System.Drawing.Point(374, 106)
         Me.btnDisconnectEnergy.Name = "btnDisconnectEnergy"
         Me.btnDisconnectEnergy.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectEnergy.TabIndex = 23
@@ -314,7 +366,7 @@ Partial Class EditingForm_OPEMFC
         Me.btnCreateAndConnectOutlet1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCreateAndConnectOutlet1.Image = CType(resources.GetObject("btnCreateAndConnectOutlet1.Image"), System.Drawing.Image)
         Me.btnCreateAndConnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(347, 50)
+        Me.btnCreateAndConnectOutlet1.Location = New System.Drawing.Point(347, 79)
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.btnCreateAndConnectOutlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnCreateAndConnectOutlet1.TabIndex = 41
@@ -324,7 +376,7 @@ Partial Class EditingForm_OPEMFC
         '
         Me.Label14.AutoSize = True
         Me.Label14.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label14.Location = New System.Drawing.Point(9, 80)
+        Me.Label14.Location = New System.Drawing.Point(9, 109)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(76, 13)
         Me.Label14.TabIndex = 22
@@ -348,7 +400,7 @@ Partial Class EditingForm_OPEMFC
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbEnergy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEnergy.FormattingEnabled = True
-        Me.cbEnergy.Location = New System.Drawing.Point(147, 77)
+        Me.cbEnergy.Location = New System.Drawing.Point(147, 106)
         Me.cbEnergy.Name = "cbEnergy"
         Me.cbEnergy.Size = New System.Drawing.Size(194, 21)
         Me.cbEnergy.TabIndex = 21
@@ -358,7 +410,7 @@ Partial Class EditingForm_OPEMFC
         Me.btnDisconnectOutlet1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDisconnectOutlet1.Image = CType(resources.GetObject("btnDisconnectOutlet1.Image"), System.Drawing.Image)
         Me.btnDisconnectOutlet1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(374, 50)
+        Me.btnDisconnectOutlet1.Location = New System.Drawing.Point(374, 79)
         Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
         Me.btnDisconnectOutlet1.Size = New System.Drawing.Size(21, 21)
         Me.btnDisconnectOutlet1.TabIndex = 20
@@ -379,7 +431,7 @@ Partial Class EditingForm_OPEMFC
         '
         Me.Label7.AutoSize = True
         Me.Label7.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label7.Location = New System.Drawing.Point(9, 53)
+        Me.Label7.Location = New System.Drawing.Point(9, 82)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 13)
         Me.Label7.TabIndex = 13
@@ -391,7 +443,7 @@ Partial Class EditingForm_OPEMFC
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
-        Me.cbOutlet1.Location = New System.Drawing.Point(147, 50)
+        Me.cbOutlet1.Location = New System.Drawing.Point(147, 79)
         Me.cbOutlet1.Name = "cbOutlet1"
         Me.cbOutlet1.Size = New System.Drawing.Size(194, 21)
         Me.cbOutlet1.TabIndex = 8
@@ -413,9 +465,9 @@ Partial Class EditingForm_OPEMFC
         Me.Label19.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Label19.Location = New System.Drawing.Point(8, 26)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(63, 13)
+        Me.Label19.Size = New System.Drawing.Size(101, 13)
         Me.Label19.TabIndex = 0
-        Me.Label19.Text = "Inlet Stream"
+        Me.Label19.Text = "Hydrogen-Rich Inlet"
         '
         'GroupBox5
         '
@@ -519,7 +571,7 @@ Partial Class EditingForm_OPEMFC
         '
         Me.Button1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(12, 225)
+        Me.Button1.Location = New System.Drawing.Point(12, 255)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(403, 23)
         Me.Button1.TabIndex = 23
@@ -531,7 +583,7 @@ Partial Class EditingForm_OPEMFC
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(427, 1002)
+        Me.ClientSize = New System.Drawing.Size(427, 1061)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBoxParameters)
         Me.Controls.Add(Me.GroupBoxResults)
@@ -592,4 +644,8 @@ Partial Class EditingForm_OPEMFC
     Friend WithEvents Button2 As Button
     Public WithEvents GroupBoxParameters As GroupBox
     Public WithEvents GroupBoxResults As GroupBox
+    Public WithEvents btnCreateAndConnectInlet2 As Button
+    Public WithEvents btnDisconnect2 As Button
+    Public WithEvents cbInlet2 As ComboBox
+    Public WithEvents Label1 As Label
 End Class

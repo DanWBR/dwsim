@@ -229,7 +229,6 @@ Public Class EditingForm_CompressorExpander_Curves
 
     Private Sub tsbExport_Click(sender As Object, e As EventArgs) Handles tsbExport.Click
 
-
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
         Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(

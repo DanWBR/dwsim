@@ -32,14 +32,13 @@ Partial Class Window
         Me.SetsBox = New System.Windows.Forms.ListBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.currentItemViewer = New System.Windows.Forms.WebBrowser()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.lblDisabled = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Viewer = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -50,6 +49,7 @@ Partial Class Window
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.Viewer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -163,22 +163,12 @@ Partial Class Window
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.currentItemViewer)
+        Me.Panel3.Controls.Add(Me.Viewer)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 30)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(454, 378)
         Me.Panel3.TabIndex = 3
-        '
-        'currentItemViewer
-        '
-        Me.currentItemViewer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.currentItemViewer.Location = New System.Drawing.Point(0, 0)
-        Me.currentItemViewer.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.currentItemViewer.Name = "currentItemViewer"
-        Me.currentItemViewer.ScriptErrorsSuppressed = True
-        Me.currentItemViewer.Size = New System.Drawing.Size(452, 376)
-        Me.currentItemViewer.TabIndex = 0
         '
         'Panel2
         '
@@ -222,22 +212,6 @@ Partial Class Window
         Me.Panel1.Size = New System.Drawing.Size(695, 29)
         Me.Panel1.TabIndex = 1
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(5, 8)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(561, 13)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "The Solution Inspector brings a human-readable, hierarchized view of all model ca" &
-    "lculations in a Flowsheet Solver run."
-        '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "html"
-        Me.SaveFileDialog1.Filter = "HTML File|*.html"
-        Me.SaveFileDialog1.Title = "Save Report to HTML File"
-        '
         'lblDisabled
         '
         Me.lblDisabled.Dock = System.Windows.Forms.DockStyle.Right
@@ -251,11 +225,32 @@ Partial Class Window
         Me.lblDisabled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblDisabled.Visible = False
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(5, 8)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(561, 13)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "The Solution Inspector brings a human-readable, hierarchized view of all model ca" &
+    "lculations in a Flowsheet Solver run."
+        '
+        'Viewer
+        '
+        Me.Viewer.AllowExternalDrop = True
+        Me.Viewer.CreationProperties = Nothing
+        Me.Viewer.DefaultBackgroundColor = System.Drawing.Color.White
+        Me.Viewer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Viewer.Location = New System.Drawing.Point(0, 0)
+        Me.Viewer.Name = "Viewer"
+        Me.Viewer.Size = New System.Drawing.Size(452, 376)
+        Me.Viewer.TabIndex = 2
+        Me.Viewer.ZoomFactor = 1.0R
+        '
         'Window
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.ClientSize = New System.Drawing.Size(701, 452)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -275,6 +270,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.Viewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -285,7 +281,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents itemSelector As Windows.Forms.TreeView
     Friend WithEvents SetsBox As Windows.Forms.ListBox
-    Friend WithEvents currentItemViewer As Windows.Forms.WebBrowser
     Friend WithEvents Panel1 As Windows.Forms.Panel
     Friend WithEvents Label4 As Windows.Forms.Label
     Friend WithEvents Label3 As Windows.Forms.Label
@@ -293,7 +288,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents TableLayoutPanel3 As Windows.Forms.TableLayoutPanel
     Friend WithEvents Panel2 As Windows.Forms.Panel
     Friend WithEvents Button1 As Windows.Forms.Button
-    Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
     Friend WithEvents Panel3 As Windows.Forms.Panel
     Friend WithEvents lblDisabled As Windows.Forms.Label
+    Friend WithEvents Viewer As Microsoft.Web.WebView2.WinForms.WebView2
 End Class

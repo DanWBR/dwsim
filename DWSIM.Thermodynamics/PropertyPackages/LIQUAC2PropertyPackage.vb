@@ -615,7 +615,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double)
+        Public Overrides Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double) As Double
 
             Dim cprops = Me.DW_GetConstantProperties.Where(Function(x) x.Name = sub1).FirstOrDefault
 

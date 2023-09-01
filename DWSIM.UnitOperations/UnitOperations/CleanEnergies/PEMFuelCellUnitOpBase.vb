@@ -146,9 +146,15 @@ Namespace UnitOperations
 
             Dim myIC1 As New ConnectionPoint
 
-            myIC1.Position = New Point(x, y + h / 2)
+            myIC1.Position = New Point(x, y + h / 3)
             myIC1.Type = ConType.ConIn
             myIC1.Direction = ConDir.Right
+
+            Dim myIC2 As New ConnectionPoint
+
+            myIC2.Position = New Point(x, y + 2 * h / 3)
+            myIC2.Type = ConType.ConIn
+            myIC2.Direction = ConDir.Right
 
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(x + w, y + h / 2)
@@ -164,10 +170,16 @@ Namespace UnitOperations
             With GraphicObject.InputConnectors
                 If .Count = 1 Then
                     .Item(0).Position = New Point(x, y + h / 2)
+                    .Add(myIC2)
+                ElseIf .Count = 2 Then
+                    .Item(0).Position = New Point(x, y + h / 3)
+                    .Item(1).Position = New Point(x, y + 2 * h / 3)
                 Else
                     .Add(myIC1)
+                    .Add(myIC2)
                 End If
-                .Item(0).ConnectorName = "Fuel Inlet"
+                .Item(0).ConnectorName = "Hydrogen-Rich Inlet"
+                .Item(1).ConnectorName = "Oxygen-Rich Inlet"
             End With
 
             With GraphicObject.OutputConnectors

@@ -31,7 +31,7 @@ Public Class Host
     Public Shared Function GetNewInspectorItem(<CallerMemberName> Optional memberName As String = "", <CallerFilePath> Optional fileName As String = "", <CallerLineNumber> Optional lineNumber As Integer = 0) As InspectorItem
 
         If GlobalSettings.Settings.InspectorEnabled And Not GlobalSettings.Settings.ExcelMode And Not GlobalSettings.Settings.CAPEOPENMode Then
-            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.LastIndexOf("\dwsim\") + 7), "https://github.com/DanWBR/dwsim/blob/windows").Replace("\", "/")}
+            Return New Inspector.InspectorItem With {.CodePath = (fileName & "#L" & lineNumber).Replace(fileName.Substring(0, fileName.LastIndexOf("\dwsim\") + 7), "https://github.com/DanWBR/dwsim/blob/windows/").Replace("\", "/")}
         Else
             Return Nothing
         End If
