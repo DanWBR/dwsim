@@ -386,6 +386,8 @@ Public Class FormDynamicsIntegratorControl
 
                                         StoreVariableValues(integrator, i, integrator.CurrentTime)
 
+                                        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorStep, Scripts.ObjectType.Integrator, "")
+
                                         If Not guiless Then
                                             Flowsheet.RunCodeOnUIThread(Sub()
                                                                             Flowsheet.FormDynamics.UpdateControllerList()

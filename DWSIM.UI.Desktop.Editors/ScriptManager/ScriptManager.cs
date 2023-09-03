@@ -253,6 +253,9 @@ namespace DWSIM.UI.Desktop.Editors
                             case Scripts.EventType.IntegratorError:
                                 ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
                                 break;
+                            case Scripts.EventType.IntegratorStep:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                                break;
                         }
 
                         ScriptEditor.cbPythonInt.SelectedIndex = (int)selscript.PythonInterpreter;
@@ -506,6 +509,10 @@ namespace DWSIM.UI.Desktop.Editors
                     else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 1)
                     {
                         scr.LinkedEventType = Scripts.EventType.IntegratorFinished;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 3)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.IntegratorStep;
                     }
                     else
                     {

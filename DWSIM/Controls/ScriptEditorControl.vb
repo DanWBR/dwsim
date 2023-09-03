@@ -66,7 +66,7 @@ Public Class ScriptEditorControl
                 cbLinkedEvent.Items.AddRange(New String() {"Solver Started", "Solver Finished", "Recycle Loop"})
             Case 2
                 cbLinkedEvent.Items.Clear()
-                cbLinkedEvent.Items.AddRange(New String() {"Integrator Started", "Integrator Finished", "Integrator Error"})
+                cbLinkedEvent.Items.AddRange(New String() {"Integrator Started", "Integrator Finished", "Integrator Error", "Integrator Step"})
             Case Else
                 cbLinkedEvent.Items.Clear()
                 cbLinkedEvent.Items.AddRange(New String() {"Object Calculation Started", "Object Calculation Finished", "Object Calculation Error"})

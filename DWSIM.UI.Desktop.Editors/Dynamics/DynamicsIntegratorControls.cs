@@ -413,6 +413,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                     StoreVariableValues(Flowsheet, (DynamicsManager.Integrator)integrator, j, integrator.CurrentTime);
 
+                    Flowsheet.ProcessScripts(Scripts.EventType.IntegratorStep, Scripts.ObjectType.Integrator, "");
+
                     if (control != null)
                     {
                         Flowsheet.RunCodeOnUIThread(() =>

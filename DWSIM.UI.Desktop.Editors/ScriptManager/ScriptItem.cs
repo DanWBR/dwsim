@@ -44,7 +44,8 @@ namespace DWSIM.UI.Desktop.Editors
             cbLinkedEvent.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
             cbPythonInt.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
-            cbLinkedEvent.Items.AddRange(new String[] { "Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer" }.Select((x) => new ListItem { Key = x, Text = x }));
+            cbLinkedEvent.Items.AddRange(new String[] { "Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer",
+                "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer"}.Select((x) => new ListItem { Key = x, Text = x }));
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));
 
             var tr1 = new TableRow(chkLink, lbl1, cbLinkedObject, lbl2, cbLinkedEvent, null, lbl3, cbPythonInt);
@@ -67,7 +68,7 @@ namespace DWSIM.UI.Desktop.Editors
                             "5 min. Timer",
                             "15 min. Timer",
                             "30 min. Timer",
-                            "60 min. Timer"
+                            "60 min. Timer"                            
                         }.Select((x) => new ListItem { Key = x, Text = x }));
                         break;
                     case 1:
@@ -76,6 +77,15 @@ namespace DWSIM.UI.Desktop.Editors
                             "Solver Started",
                             "Solver Finished",
                             "Recycle Loop"
+                        }.Select((x) => new ListItem { Key = x, Text = x }));
+                        break;
+                    case 2:
+                        cbLinkedEvent.Items.Clear();
+                        cbLinkedEvent.Items.AddRange(new string[] {
+                            "Integrator Started",
+                            "Integrator Finished",
+                            "Integrator Error",
+                            "Integrator Step"
                         }.Select((x) => new ListItem { Key = x, Text = x }));
                         break;
                     default:
