@@ -40,6 +40,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                                  f.Location = Cursor.Position
                                                                  f.Text = SelectedObject.GraphicObject.Tag
                                                                  f.ChangeDefaultFont()
+                                                                 f.TopMost = True
                                                                  f.Show()
                                                              End If
                                                          Else
@@ -76,6 +77,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                                      f.Location = Cursor.Position
                                                                      f.Text = SelectedObject.GraphicObject.Tag
                                                                      f.ChangeDefaultFont()
+                                                                     f.TopMost = True
                                                                      f.Show()
                                                                  End If
                                                              Else

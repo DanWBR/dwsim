@@ -148,7 +148,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
+        Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
 
             Return New String() {"Monitored Value"}
 
