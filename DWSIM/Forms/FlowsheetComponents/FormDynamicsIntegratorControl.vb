@@ -219,6 +219,8 @@ Public Class FormDynamicsIntegratorControl
             Throw New Exception(Flowsheet.GetTranslatedString1("Please select a valid integrator for the selected schedule."))
         End If
 
+        Flowsheet.ShowMessage(DWSIM.App.GetLocalString("Dynamics Integrator Starting..."), Interfaces.IFlowsheet.MessageType.Information)
+
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
         integrator.RealTime = realtime
