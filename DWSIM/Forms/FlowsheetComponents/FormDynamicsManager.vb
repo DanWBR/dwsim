@@ -69,11 +69,11 @@ Public Class FormDynamicsManager
 
         Dim cbobjects = New DataGridViewComboBoxCell
         cbobjects.Items.Add("")
-        cbobjects.Items.AddRange(Flowsheet.SimulationObjects.Values.Select(Function(x) x.GraphicObject.Tag).ToArray)
+        cbobjects.Items.AddRange(Flowsheet.SimulationObjects.Values.Select(Function(x) x.GraphicObject.Tag).OrderBy(Function(o) o).ToArray)
 
         Dim cbindicators = New DataGridViewComboBoxCell
         cbindicators.Items.Add("")
-        cbindicators.Items.AddRange(Flowsheet.SimulationObjects.Values.Where(Function(x0) TypeOf x0 Is IIndicator).Select(Function(x) x.GraphicObject.Tag).ToArray)
+        cbindicators.Items.AddRange(Flowsheet.SimulationObjects.Values.Where(Function(x0) TypeOf x0 Is IIndicator).Select(Function(x) x.GraphicObject.Tag).OrderBy(Function(o) o).ToArray)
 
         Dim cbeventtype = New DataGridViewComboBoxCell
         cbeventtype.Items.Add(Flowsheet.GetTranslatedString1("ChangeProperty"))
@@ -964,6 +964,14 @@ Public Class FormDynamicsManager
         If Manager IsNot Nothing Then
 
             Try
+
+
+                Dim cbobjects = New DataGridViewComboBoxCell
+                cbobjects.Items.Add("")
+                cbobjects.Items.AddRange(Flowsheet.SimulationObjects.Values.Select(Function(x) x.GraphicObject.Tag).OrderBy(Function(o) o).ToArray)
+
+                gridMonitoredVariables.Columns(2).CellTemplate = cbobjects
+
 
                 Dim int = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
 
