@@ -160,7 +160,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             {
                 var vnew = (DynamicsManager.MonitoredVariable)v.Clone();
                 var sobj = Flowsheet.SimulationObjects[vnew.ObjectID];
-                vnew.PropertyValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID).ToString().ToDoubleFromInvariant()).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                vnew.PropertyValue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, Convert.ToDouble(sobj.GetPropertyValue(vnew.PropertyID))).ToString(System.Globalization.CultureInfo.InvariantCulture);
                 vnew.TimeStamp = tstamp;
                 list.Add(vnew);
             }
