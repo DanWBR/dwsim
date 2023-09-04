@@ -190,8 +190,6 @@ Public Class EditingForm_WaterElectrolyzer
 
             If text <> "" Then
 
-                Dim index As Integer = 0
-
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
@@ -335,8 +333,6 @@ Public Class EditingForm_WaterElectrolyzer
 
             If text <> "" Then
 
-                Dim index As Integer = 1
-
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
@@ -344,8 +340,8 @@ Public Class EditingForm_WaterElectrolyzer
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
-                If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+                If gobj.OutputConnectors(1).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(1).AttachedConnector.AttachedTo)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 1, 0)
                 SimObject.FlowSheet.UpdateInterface()
 
             End If
