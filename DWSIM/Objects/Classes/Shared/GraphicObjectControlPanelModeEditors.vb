@@ -41,6 +41,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                                  f.Text = SelectedObject.GraphicObject.Tag
                                                                  f.ChangeDefaultFont()
                                                                  f.TopMost = True
+                                                                 DirectCast(myObj, IControllableObject).ControlPanel = f
                                                                  f.Show()
                                                              End If
                                                          Else
@@ -78,6 +79,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                                      f.Text = SelectedObject.GraphicObject.Tag
                                                                      f.ChangeDefaultFont()
                                                                      f.TopMost = True
+                                                                     DirectCast(myObj, IControllableObject).ControlPanel = f
                                                                      f.Show()
                                                                  End If
                                                              Else
@@ -99,6 +101,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                              f.Location = Cursor.Position
                                                              f.Text = myObj.GraphicObject.Tag
                                                              DirectCast(myObj, IControllableObject).ControlPanel = f
+                                                             f.TopMost = True
                                                              f.Show()
                                                          Else
                                                              If cpform.IsDisposed Then
@@ -107,6 +110,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                                  f.Location = Cursor.Position
                                                                  f.Text = myObj.GraphicObject.Tag
                                                                  DirectCast(myObj, IControllableObject).ControlPanel = f
+                                                                 f.TopMost = True
                                                                  f.Show()
                                                              Else
                                                                  cpform.Show()
