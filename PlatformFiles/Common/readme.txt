@@ -64,6 +64,14 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.6.1
 
+- Updated connections for Fuel Cell and Electrolyzer models
+- Updated H/S/Cp calculation routine for Raoult's Law Property Package
+- Added more Dynamics Integrator events to Script Manager
+- Exposing Indicators' monitored values
+- Fixed issue with Compound Viewer (Classic UI)
+- Fixed some inspector issues
+- Other minor fixes and enhancements
+
 Version 8.6.0
 
 - Redesigned Undo/Redo feature (Classic & Cross-Platform UI)
