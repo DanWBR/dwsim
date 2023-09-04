@@ -85,7 +85,8 @@ namespace DWSIM.UI.Desktop.Editors
                             "Integrator Started",
                             "Integrator Finished",
                             "Integrator Error",
-                            "Integrator Step"
+                            "Integrator Post-Step",
+                            "Integrator Pre-Step"
                         }.Select((x) => new ListItem { Key = x, Text = x }));
                         break;
                     default:

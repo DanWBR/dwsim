@@ -424,8 +424,12 @@ Imports PythonConsoleControl
                                             scr.LinkedEventType = Scripts.EventType.IntegratorStarted
                                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
                                             scr.LinkedEventType = Scripts.EventType.IntegratorFinished
-                                        Else
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
                                             scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStep
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorPreStep
                                         End If
                                     Case Else
                                         If seditor.chkLink.Checked Then
@@ -490,8 +494,12 @@ Imports PythonConsoleControl
                                             scr.LinkedEventType = Scripts.EventType.IntegratorStarted
                                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
                                             scr.LinkedEventType = Scripts.EventType.IntegratorFinished
-                                        Else
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
                                             scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStep
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorPreStep
                                         End If
                                     Case Else
                                         If seditor.chkLink.Checked Then
@@ -650,10 +658,13 @@ Imports PythonConsoleControl
                         .cbLinkedEvent.SelectedIndex = 1
                     Case Scripts.EventType.IntegratorError
                         .cbLinkedEvent.SelectedIndex = 2
+                    Case Scripts.EventType.IntegratorStep
+                        .cbLinkedEvent.SelectedIndex = 3
+                    Case Scripts.EventType.IntegratorPreStep
+                        .cbLinkedEvent.SelectedIndex = 4
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
-
 
                 AddHandler scontrol.cbPythonEngine.SelectedIndexChanged,
                     Sub()
@@ -700,8 +711,12 @@ Imports PythonConsoleControl
                                                 scr.LinkedEventType = Scripts.EventType.IntegratorStarted
                                             ElseIf scontrol.cbLinkedEvent.SelectedIndex = 1 Then
                                                 scr.LinkedEventType = Scripts.EventType.IntegratorFinished
-                                            Else
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 2 Then
                                                 scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 3 Then
+                                                scr.LinkedEventType = Scripts.EventType.IntegratorStep
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 4 Then
+                                                scr.LinkedEventType = Scripts.EventType.IntegratorPreStep
                                             End If
                                         Case Else
                                             If scontrol.chkLink.Checked Then
@@ -813,6 +828,10 @@ Imports PythonConsoleControl
                         .cbLinkedEvent.SelectedIndex = 1
                     Case Scripts.EventType.IntegratorError
                         .cbLinkedEvent.SelectedIndex = 2
+                    Case Scripts.EventType.IntegratorStep
+                        .cbLinkedEvent.SelectedIndex = 3
+                    Case Scripts.EventType.IntegratorPreStep
+                        .cbLinkedEvent.SelectedIndex = 4
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter

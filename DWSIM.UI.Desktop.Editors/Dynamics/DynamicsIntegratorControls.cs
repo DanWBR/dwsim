@@ -364,6 +364,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                     sw.Start();
 
+                    Flowsheet.ProcessScripts(Scripts.EventType.IntegratorPreStep, Scripts.ObjectType.Integrator, "");
+
                     if (control != null)
                     {
                         Flowsheet.RunCodeOnUIThread(() =>

@@ -81,6 +81,7 @@ Namespace Enums
             IntegratorFinished = 15
             IntegratorError = 16
             IntegratorStep = 17
+            IntegratorPreStep = 18
         End Enum
 
     End Class

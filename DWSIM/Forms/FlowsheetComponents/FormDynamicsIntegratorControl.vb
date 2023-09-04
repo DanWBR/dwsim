@@ -344,6 +344,8 @@ Public Class FormDynamicsIntegratorControl
                                         Dim sw As New Stopwatch
                                         sw.Start()
 
+                                        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorPreStep, Scripts.ObjectType.Integrator, "")
+
                                         Dim i0 As Integer = i
 
                                         If Not guiless Then
