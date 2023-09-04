@@ -119,28 +119,28 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 375</value>
+    <value>640, 375</value>
   </data>
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 369</value>
   </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 24</value>
+    <value>634, 24</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>33, 408</value>
   </data>
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 24</value>
+    <value>634, 24</value>
   </data>
   <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 33</value>
+    <value>673, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 369</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 435</value>
+    <value>700, 435</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>299, 7</value>
@@ -241,7 +241,7 @@
     <value>120</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 474</value>
+    <value>700, 474</value>
   </data>
   <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
     <value>5</value>
@@ -250,7 +250,7 @@
     <value>992, 474</value>
   </data>
   <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
-    <value>632</value>
+    <value>700</value>
   </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>992, 474</value>
@@ -845,7 +845,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 530</value>
+    <value>273, 508</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

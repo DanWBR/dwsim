@@ -250,6 +250,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.SplitContainerVertical, "SplitContainerVertical")
         Me.SplitContainerVertical.BackColor = System.Drawing.Color.White
+        Me.SplitContainerVertical.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
         Me.SplitContainerVertical.Name = "SplitContainerVertical"
         '
         'SplitContainerVertical.Panel1
