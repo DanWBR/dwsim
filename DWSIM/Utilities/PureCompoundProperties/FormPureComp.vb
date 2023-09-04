@@ -293,7 +293,7 @@ Public Class FormPureComp
                     Me.DataTableLiquid.Item(1, Row).Value = Format(VD, nf)
                     T += delta
                     Row += 1
-                Loop Until T > Tmax
+                Loop Until Row = 51 Or T > Tmax
             End If
 
             With Me.GraphLiqCp.GraphPane
