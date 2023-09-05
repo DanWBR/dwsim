@@ -18,6 +18,8 @@ Public Class EditingForm_ShortcutColumn
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

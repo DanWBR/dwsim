@@ -69,7 +69,7 @@ Version 8.6.1
 - Added more Dynamics Integrator events to Script Manager
 - Exposing Indicators' monitored values
 - Fixed issue with Compound Viewer (Classic UI)
-- Fixed some inspector issues
+- Fixed some Inspector issues
 - Other minor fixes and enhancements
 
 Version 8.6.0
