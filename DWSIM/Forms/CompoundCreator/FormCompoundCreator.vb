@@ -3430,7 +3430,6 @@ Public Class FormCompoundCreator
 
             If .Molar_Weight = 0.0 Then sb.Append("Please enter the Molecular Weight; ")
             If .Normal_Boiling_Point = 0.0 Then sb.Append("Please enter the Normal Boiling Point; ")
-            If .IdealgasCpEquation = "" Then sb.Append("Ideal gas Cp: no equation or UNIFAC structure defined; ")
             If .Critical_Pressure = 0.0 And .Critical_Temperature = 0.0 And .Acentric_Factor = 0.0 Then
                 sb.Append("Please enter the Critical Properties (Temperature, Pressure, Acentric Factor); ")
                 If .VaporPressureEquation = "" Then sb.Append("Needs Vapor Pressure eq. coeffs or Tc/Pc/w to estimate using Lee-Kesler; ")
@@ -3456,6 +3455,7 @@ Public Class FormCompoundCreator
             If .IG_Enthalpy_of_Formation_25C = 0.0 And .IG_Gibbs_Energy_of_Formation_25C Then
                 sb.Append("No formation data defined (DHf/DGf), won't be able to reaction heat balances; ")
             End If
+            If .IdealgasCpEquation = "" Then sb.Append("Ideal gas Cp: no equation or UNIFAC structure defined; ")
             If .EnthalpyOfFusionAtTf = 0.0 And .TemperatureOfFusion = 0.0 Then
                 sb.Append("No solid phase data defined (Tf/Hf), won't be able to calculate SLE; ")
             End If
