@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 437</value>
+    <value>504, 506</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 23</value>
@@ -128,7 +128,7 @@
     <value>Export to XLSX</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>498, 437</value>
+    <value>618, 506</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 23</value>
@@ -141,7 +141,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 437</value>
+    <value>772, 506</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 23</value>
@@ -150,13 +150,13 @@
     <value>Export to JSON File</value>
   </data>
   <data name="BtnRestaurar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 437</value>
+    <value>211, 506</value>
   </data>
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Restore Defaults</value>
   </data>
   <data name="chkEnableEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 441</value>
+    <value>7, 510</value>
   </data>
   <data name="chkEnableEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 17</value>
@@ -190,25 +190,25 @@
     <value>10</value>
   </data>
   <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
   </data>
   <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 110</value>
+    <value>739, 94</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>743, 130</value>
+    <value>745, 114</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>2D Render</value>
   </data>
   <data name="tbElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -217,13 +217,13 @@
     <value>Elements</value>
   </data>
   <data name="tbMODFACNIST.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>MODFAC-NIST Groups</value>
   </data>
   <data name="tbInChI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -232,7 +232,7 @@
     <value>InChI String</value>
   </data>
   <data name="tbSMILES.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
@@ -241,31 +241,31 @@
     <value>SMILES String</value>
   </data>
   <data name="tbMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>MODFAC-Do Groups</value>
   </data>
   <data name="tbUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>UNIFAC Groups</value>
   </data>
   <data name="tbFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 21</value>
+    <value>592, 21</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Formula</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>743, 216</value>
+    <value>745, 216</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Molecular Structure</value>
   </data>
   <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>758, 346</value>
   </data>
   <data name="FaTabStripItem6.Title" xml:space="preserve">
     <value>Molecular</value>
@@ -274,10 +274,10 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphLiqCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemCPLIQ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemCPLIQ.Title" xml:space="preserve">
     <value>Heat Capacity</value>
@@ -390,14 +390,20 @@
   <data name="DataGridViewTextBoxColumn26.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="DataTableLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>874, 405</value>
+  </data>
+  <data name="FaTabStripItemTabLiq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>874, 405</value>
+  </data>
   <data name="FaTabStripItemTabLiq.Title" xml:space="preserve">
     <value>Data Table</value>
   </data>
   <data name="FaTabStripLiq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem16.Title" xml:space="preserve">
     <value>Liquid Phase</value>
@@ -406,10 +412,10 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemCPIG.Title" xml:space="preserve">
     <value>Ideal Gas Heat Capacity</value>
@@ -444,14 +450,20 @@
   <data name="DataGridViewTextBoxColumn32.MinimumWidth" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="DataTableVapour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>874, 405</value>
+  </data>
+  <data name="FaTabStripItemDataTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>874, 405</value>
+  </data>
   <data name="FaTabStripItemDataTab.Title" xml:space="preserve">
     <value>Data Table</value>
   </data>
   <data name="FaTabStripVap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem17.Title" xml:space="preserve">
     <value>Vapor Phase</value>
@@ -460,10 +472,10 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphCpSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemCPSOLID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemCPSOLID.Title" xml:space="preserve">
     <value>Heat Capacity</value>
@@ -493,34 +505,34 @@
     <value>10</value>
   </data>
   <data name="DataTableSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemTabela.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemTabela.Title" xml:space="preserve">
     <value>Data Table</value>
   </data>
   <data name="FaTabStripSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem18.Title" xml:space="preserve">
     <value>Solid Phase</value>
   </data>
   <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>750, 342</value>
+    <value>870, 411</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>756, 362</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Comments</value>
@@ -529,10 +541,10 @@
     <value>5, 43</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>758, 388</value>
+    <value>878, 457</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 470</value>
+    <value>890, 539</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>View</value>
@@ -550,7 +562,7 @@
     <value>Export Data to XLSX</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>770, 470</value>
+    <value>890, 539</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
