@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TextBoxName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>782, 20</value>
+  </data>
+  <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 353</value>
+  </data>
+  <data name="Label94.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 353</value>
+  </data>
   <data name="Label94.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
@@ -157,6 +166,9 @@
   </data>
   <data name="TextBoxFormula.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
+    <value>960, 218</value>
   </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
@@ -819,6 +831,12 @@
   <data name="GridExpDataTCLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 292</value>
   </data>
+  <data name="ComponenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 20</value>
+  </data>
+  <data name="ComponenteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Compound</value>
+  </data>
   <data name="SalvarNoBancoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 22</value>
   </data>
@@ -830,6 +848,12 @@
   </data>
   <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Text" xml:space="preserve">
     <value>Export Data to JSON File</value>
+  </data>
+  <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 22</value>
+  </data>
+  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import Data from Online Sources</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 22</value>
@@ -849,23 +873,11 @@
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
     <value>DDB UNIFAC/MODFAC Structure Database </value>
   </data>
-  <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 22</value>
-  </data>
-  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import Data from Online Sources</value>
-  </data>
   <data name="ImportarDeArquivoJSONToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 22</value>
   </data>
   <data name="ImportarDeArquivoJSONToolStripMenuItem.Text" xml:space="preserve">
     <value>Import from JSON File</value>
-  </data>
-  <data name="ComponenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 20</value>
-  </data>
-  <data name="ComponenteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Compound</value>
   </data>
   <data name="SistemasDeUnidadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 20</value>
@@ -873,17 +885,26 @@
   <data name="SistemasDeUnidadesToolStripMenuItem.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
+  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="tsmiIgnoreUnsupportedGroups.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 22</value>
   </data>
   <data name="tsmiIgnoreUnsupportedGroups.Text" xml:space="preserve">
     <value>Ignore Unsupported Groups when Estimating Properties</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
+  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 64</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Options</value>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1001, 526</value>
+  </data>
+  <data name="TabPageID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>993, 500</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 13</value>
@@ -903,6 +924,15 @@
   <data name="Label99.Size" type="System.Drawing.Size, System.Drawing">
     <value>965, 42</value>
   </data>
+  <data name="TabControl3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 73</value>
+  </data>
+  <data name="TabControl3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>987, 427</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>979, 401</value>
+  </data>
   <data name="graphCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 22, 48, 22</value>
   </data>
@@ -915,8 +945,11 @@
   <data name="Label100.Text" xml:space="preserve">
     <value>Experimental Data</value>
   </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Vapor Pressure</value>
   </data>
   <data name="Label101.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -930,11 +963,8 @@
   <data name="graphPVAP.Size" type="System.Drawing.Size, System.Drawing">
     <value>473, 372</value>
   </data>
-  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
-  </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>Vapor Pressure</value>
   </data>
   <data name="Label102.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -1035,7 +1065,7 @@
   <data name="rbCoeffLIQDENS.Text" xml:space="preserve">
     <value>Insert Equation Coefficients *</value>
   </data>
-  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
   </data>
   <data name="Label103.Size" type="System.Drawing.Size, System.Drawing">
@@ -1050,7 +1080,7 @@
   <data name="graphLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
     <value>486, 378</value>
   </data>
-  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
   </data>
   <data name="Label104.Size" type="System.Drawing.Size, System.Drawing">
@@ -1065,7 +1095,7 @@
   <data name="graphLIQCP.Size" type="System.Drawing.Size, System.Drawing">
     <value>482, 376</value>
   </data>
-  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage10.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
   </data>
   <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
@@ -1179,7 +1209,7 @@
   <data name="Label96.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 129</value>
   </data>
-  <data name="TabPage10.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage11.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
   </data>
   <data name="Label106.Size" type="System.Drawing.Size, System.Drawing">
@@ -1194,7 +1224,7 @@
   <data name="graphSOLIDDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 376</value>
   </data>
-  <data name="TabPage11.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage12.Size" type="System.Drawing.Size, System.Drawing">
     <value>979, 401</value>
   </data>
   <data name="Label107.Size" type="System.Drawing.Size, System.Drawing">
@@ -1215,14 +1245,26 @@
   <data name="rbRegressSolidCp.Text" xml:space="preserve">
     <value>Regress Experimental Data</value>
   </data>
-  <data name="TabPage12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 401</value>
+  <data name="Label15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
   </data>
-  <data name="TabControl3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 73</value>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
   </data>
-  <data name="TabControl3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>987, 427</value>
+  <data name="tbStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 38</value>
+  </data>
+  <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>867, 36</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 23</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
