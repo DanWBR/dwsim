@@ -214,5 +214,61 @@ namespace DWSIM.ExtensionMethods.Eto
             Common.CreateAndAddEmptySpace(container);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
+        public static IEnumerable<Control> GetAllChildren(Control control)
+        {
+            var controls = control.VisualControls;
+            if (control is Panel) controls = ((Panel)control).Controls;
+            if (control is DocumentControl) controls = ((DocumentControl)control).Pages;
+            return controls.SelectMany(ctrl => GetAllChildren(ctrl)).Concat(controls);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="form"></param>
+        public static void SetFontAndPadding(this Form form)
+        {
+
+            var sysfont = System.Drawing.SystemFonts.MessageBoxFont;
+            var regularfont = new Font(sysfont.FontFamily.Name, sysfont.SizeInPoints);
+            var boldfont = new Font(sysfont.FontFamily.Name, sysfont.SizeInPoints, FontStyle.Bold);
+
+            var allcontrols = GetAllChildren(form);
+            foreach (var control in allcontrols)
+            {
+                if (control is CommonControl)
+                {
+                    var font = ((CommonControl)control).Font;
+                    if (font.Bold)
+                    {
+                        ((CommonControl)control).Font = boldfont;
+                    }
+                    else
+                    {
+                        ((CommonControl)control).Font = regularfont;
+                    }
+                }
+                else if (control is TableLayout)
+                {
+                    ((TableLayout)control).Padding = new Padding((int)(2 * GlobalSettings.Settings.DpiScale));
+                }
+                if (control is TextBox)
+                {
+                    var tb = (TextBox)control;
+                    var d = 0.0;
+                    if (Double.TryParse(tb.Text, out d))
+                    {
+                        tb.TextAlignment = TextAlignment.Right;
+                    }
+                }
+            }
+
+        }
+
     }
 }

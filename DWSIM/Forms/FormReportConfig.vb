@@ -314,6 +314,12 @@ Public Class FormReportConfig
         For Each obj In frm.Collections.FlowsheetObjectCollection.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.OrificePlate)
             Me.TreeViewObj.Nodes(25).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
+
+        If FormMain.IsPro Then
+            KButton4.Enabled = False
+            KButton5.Enabled = False
+        End If
+
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KButton5.Click

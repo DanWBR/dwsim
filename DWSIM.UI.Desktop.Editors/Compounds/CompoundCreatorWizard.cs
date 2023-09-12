@@ -10,7 +10,7 @@ using DWSIM.Thermodynamics.BaseClasses;
 using Eto.Drawing;
 using Eto.Forms;
 using c = DWSIM.UI.Shared.Common;
-
+using DWSIM.ExtensionMethods.Eto;
 using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 using DWSIM.Thermodynamics.Streams;
 using DWSIM.UI.Desktop.Shared;
@@ -18,6 +18,7 @@ using DWSIM.UI.Shared;
 
 using DWSIM.ExtensionMethods;
 using System.IO;
+using DWSIM.SharedClassesCSharp.FilePicker;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -30,6 +31,7 @@ namespace DWSIM.UI.Desktop.Editors
         private DWSIM.Thermodynamics.BaseClasses.ConstantProperties comp = new ConstantProperties();
 
         private static double sf = GlobalSettings.Settings.UIScalingFactor;
+        private static double dpi = GlobalSettings.Settings.DpiScale;
 
         private int Width = (int)(800 * sf);
         private int Height = (int)(500 * sf);
@@ -57,6 +59,12 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Init()
         {
+
+            if (GlobalSettings.Settings.OldUI)
+            {
+                Width = (int)(Width * dpi);
+                Height = (int)(Height * dpi);
+            }
 
             comp.ID = new Random().Next(700000, 800000);
 
@@ -115,10 +123,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             c.CreateAndAddLabelRow(dl, "Compound Type");
 
-            c.CreateAndAddDropDownRow(dl, "Compound Type", ctypes.ToList(), comptype, (sender, e) =>
+            var drop = c.CreateAndAddDropDownRow(dl, "Compound Type", ctypes.ToList(), comptype, (sender, e) =>
             {
                 comptype = sender.SelectedIndex;
             });
+
+            drop.Size = new Size(200, 28);
 
             c.CreateAndAddLabelRow2(dl, "Default: a full data set is required to create the compound.");
             c.CreateAndAddLabelRow2(dl, "Simplified: a minimum data set is required to create the compound.");
@@ -151,6 +161,7 @@ namespace DWSIM.UI.Desktop.Editors
             page1.SuspendLayout();
             page1.ContentContainer.Add(dl);
             page1.ResumeLayout();
+            page1.SetFontAndPadding();
             page1.Show();
 
         }
@@ -242,6 +253,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
+            page2.SetFontAndPadding();
             page2.Show();
 
         }
@@ -420,6 +432,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
+            page2.SetFontAndPadding();
             page2.Show();
 
         }
@@ -480,6 +493,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
+            page.SetFontAndPadding();
             page.Show();
 
         }
@@ -596,7 +610,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             c.CreateAndAddLabelRow(dl, "Solid Phase Properties");
-            dl.CreateAndAddLabelRow2("Solid phase properties are required for solid prediction. If you don't have them, you can force this compound to be in the solid phase in the Property Package Advanced Settings editor.");
+            dl.CreateAndAddLabelRow2("Solid phase properties are required for solid prediction.\nIf you don't have them, you can force this compound to be in the solid phase in the\nProperty Package Advanced Settings editor.");
 
             c.CreateAndAddTextBoxRow(dl, nf, "Temperature of Fusion" + FormatUnit(su.temperature), comp.TemperatureOfFusion.ConvertFromSI(su.temperature), (arg1, arg2) =>
             {
@@ -609,6 +623,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
+            page.SetFontAndPadding();
             page.Show();
 
         }
@@ -808,6 +823,7 @@ namespace DWSIM.UI.Desktop.Editors
             escp.PlaceholderText = "T in K, Cp in kJ/[kg.K]";
 
             page.ContentContainer.Add(dl);
+            page.SetFontAndPadding();
             page.Show();
 
         }
@@ -856,82 +872,53 @@ namespace DWSIM.UI.Desktop.Editors
 
             dl.CreateAndAddLabelAndButtonRow("Export Compound to JSON File", "Export to JSON", null, (arg1, arg2) =>
             {
-                var dialog = new SaveFileDialog();
-                dialog.Title = "Save Compound to JSON File";
-                dialog.Filters.Add(new FileFilter("JSON File", new[] { ".json" }));
-                dialog.CurrentFilterIndex = 0;
-                if (dialog.ShowDialog(page) == DialogResult.Ok)
+
+                IFilePicker filePickerForm = FilePickerService.GetInstance().GetFilePicker();
+                IVirtualFile handler = filePickerForm.ShowSaveDialog(new List<FilePickerAllowedType> { new FilePickerAllowedType("JSON File", "*.json") });
+
+                if (handler != null)
                 {
-                    try
+                    using (var stream = new System.IO.MemoryStream())
                     {
-                        File.WriteAllText(dialog.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented));
-                        if (flowsheet == null)
+                        using (var writer = new StreamWriter(stream) { AutoFlush = true })
                         {
-                            MessageBox.Show("Compound '" + comp.Name + "' successfully saved to JSON file.");
-                        }
-                        else
-                        {
-                            flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (flowsheet == null)
-                        {
-                            MessageBox.Show("Error saving compound to JSON file: " + ex.ToString());
-                        }
-                        else
-                        {
-                            flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                            try
+                            {
+                                var jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented);
+                                writer.Write(jsondata);
+                                handler.Write(stream);
+                                if (flowsheet == null)
+                                {
+                                    MessageBox.Show("Compound '" + comp.Name + "' successfully saved to JSON file.");
+                                }
+                                else
+                                {
+                                    flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                if (flowsheet == null)
+                                {
+                                    MessageBox.Show("Error saving compound to JSON file: " + ex.ToString());
+                                }
+                                else
+                                {
+                                    flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                }
+                            }
                         }
                     }
                 }
+
             });
             dl.CreateAndAddLabelRow2("Export compound data to a JSON file for later use (recommended).");
 
-            dl.CreateAndAddLabelAndButtonRow("Export Compound to XML database File", "Export to XML", null, (arg1, arg2) =>
-            {
-                var dialog = new SaveFileDialog();
-                dialog.Title = "Save Compound to XML database";
-                dialog.Filters.Add(new FileFilter("XML File", new[] { ".xml" }));
-                dialog.CurrentFilterIndex = 0;
-                if (dialog.ShowDialog(page) == DialogResult.Ok)
-                {
-                    try
-                    {
-                        if (!File.Exists(dialog.FileName)) File.WriteAllText(dialog.FileName, "");
-                        using (var stream = new FileStream(dialog.FileName, FileMode.OpenOrCreate))
-                        {
-                            DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(new[] { comp }, stream, true);
-                        }
-                        if (flowsheet == null)
-                        {
-                            MessageBox.Show("Compound '" + comp.Name + "' successfully added to XML database.");
-                        }
-                        else
-                        {
-                            flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully added to XML database.", IFlowsheet.MessageType.Information);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (flowsheet == null)
-                        {
-                            MessageBox.Show("Error saving compound to XML database: " + ex.ToString());
-                        }
-                        else
-                        {
-                            flowsheet.ShowMessage("Error saving compound to XML database: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
-                        }
-                    }
-                }
-            });
-            dl.CreateAndAddLabelRow2("Export compound data to a XML database file. A XML database file can store data from multiple compounds.");
-
-            dl.CreateAndAddLabelRow("Add to Simulation");
-
             if (flowsheet != null)
             {
+
+                dl.CreateAndAddLabelRow("Add to Simulation");
+
                 dl.CreateAndAddLabelAndButtonRow("Add Compound to Simulation", "Add", null, (arg1, arg2) =>
                 {
                     if (flowsheet.AvailableCompounds.ContainsKey(comp.Name))
@@ -961,6 +948,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page.ContentContainer.Add(dl);
+            page.SetFontAndPadding();
             page.Show();
 
 
