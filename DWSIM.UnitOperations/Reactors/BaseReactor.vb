@@ -55,13 +55,19 @@ Namespace Reactors
             MyBase.LoadData(data)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionConversions").LastOrDefault.Elements
-                m_conversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
-            Next
+            Try
+                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionConversions").LastOrDefault.Elements
+                    m_conversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
+                Next
+            Catch ex As Exception
+            End Try
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "CompoundConversions").LastOrDefault.Elements
-                m_componentconversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
-            Next
+            Try
+                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "CompoundConversions").LastOrDefault.Elements
+                    m_componentconversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
+                Next
+            Catch ex As Exception
+            End Try
 
             Return True
 
