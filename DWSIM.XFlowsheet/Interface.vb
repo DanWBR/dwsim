@@ -122,6 +122,10 @@
 
         Property ValueType As ParamValueType
 
+        Property Units As UnitOfMeasure
+
+        Property DefaultUnits As String
+
     End Interface
 
     Public Interface IUnitsOfMeasure

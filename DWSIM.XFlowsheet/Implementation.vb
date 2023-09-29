@@ -150,6 +150,10 @@ Namespace Implementation
 
             Public Property ValueType As ParamValueType Implements IParameter.ValueType
 
+            Public Property Units As UnitOfMeasure = UnitOfMeasure.None Implements IParameter.Units
+
+            Public Property DefaultUnits As String = "" Implements IParameter.DefaultUnits
+
         End Class
 
         Public Class PFDObject

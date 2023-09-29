@@ -40,7 +40,6 @@ Andrew Dickson
 Bednarz Marc
 Bernhard Seyfang
 Bruce Bishkin
-Bruce Rising
 Camilo Gantiva
 Christian Jordan
 Christian Pedersen
@@ -77,7 +76,6 @@ Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
 Renato Corrêa Arrieche
-Rick Kempf
 Rupert Easter
 Ryszard Sadowski
 Shailesh Paranjpe
