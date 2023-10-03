@@ -22,6 +22,8 @@ Public Class EditingForm_FlowsheetUO
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

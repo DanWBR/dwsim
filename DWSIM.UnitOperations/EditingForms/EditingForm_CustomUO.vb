@@ -23,6 +23,8 @@ Public Class EditingForm_CustomUO
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

@@ -20,6 +20,8 @@ Public Class EditingForm_ComprExpndr
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

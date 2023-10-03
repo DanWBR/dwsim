@@ -19,6 +19,8 @@ Public Class EditingForm_WindTurbine
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

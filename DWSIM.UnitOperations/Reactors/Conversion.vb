@@ -443,6 +443,10 @@ Namespace Reactors
 
             ni0 = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).MultiplyConstY(ims.Phases(0).Properties.molarflow.GetValueOrDefault)
 
+            'Reactants Enthalpy (kJ/kg * kg/s = kW)
+
+            Dim Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
             Dim rxn As Reaction
 
             'loop through conversion reaction groups (parallel/sequential) as defined in the reaction set
@@ -640,6 +644,8 @@ Namespace Reactors
                 ' at this point, the xf vector holds the final conversion values as calculated 
                 ' by the simplex solver, and the energy balance can be calculated (again). 
 
+                DHr = 0.0
+
                 i = 0
                 Do
 
@@ -673,10 +679,10 @@ Namespace Reactors
                         End If
                     Next
 
-                    Dim DNbr = -xf(i) * nBC
+                    Dim DNbr = -xf(i) * rxn.Components(rxn.BaseReactant).StoichCoeff / scBC * nBC
 
                     'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    If Abs(DNbr) > 0.0 Then DHr += rxn.ReactionHeat * Abs(DNbr) / 1000
+                    DHr += rxn.ReactionHeat * Abs(DNbr) / 1000
 
                     i += 1
 
@@ -761,7 +767,7 @@ Namespace Reactors
                         IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
 
                         'Heat (kW)
-                        Me.DeltaQ += DHr + Hid_r - Hr - Hid_p
+                        Me.DeltaQ += DHr
 
                         Me.DeltaT = 0
 
@@ -785,7 +791,7 @@ Namespace Reactors
                         IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
 
                         'Heat (kW)
-                        Me.DeltaQ += DHr + Hid_r - Hr - Hid_p
+                        Me.DeltaQ += DHr
 
                         IObj2?.Paragraphs.Add(String.Format("Heat Balance: {0} kW", DeltaQ))
 
@@ -805,7 +811,7 @@ Namespace Reactors
 
                 Case OperationMode.Isothermic, OperationMode.OutletTemperature
 
-                    Me.DeltaQ += Hp
+                    Me.DeltaQ += Hp + Hid_r - Hr0 - Hid_p
 
             End Select
 

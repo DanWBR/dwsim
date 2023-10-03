@@ -23,6 +23,8 @@ Public Class EditingForm_Valve
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Private Sub SetupGrid()

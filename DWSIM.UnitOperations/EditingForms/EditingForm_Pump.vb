@@ -18,6 +18,8 @@ Public Class EditingForm_Pump
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
+        ChangeDefaultFont()
+
         UpdateInfo()
 
     End Sub

@@ -18,6 +18,8 @@ Public Class EditingForm_Tank
 
        UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

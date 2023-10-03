@@ -20,6 +20,8 @@ Public Class EditingForm_HeaterCooler
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

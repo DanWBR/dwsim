@@ -20,6 +20,8 @@ Public Class EditingForm_ReactorCSTR
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
+        ChangeDefaultFont()
+
         UpdateInfo()
 
     End Sub

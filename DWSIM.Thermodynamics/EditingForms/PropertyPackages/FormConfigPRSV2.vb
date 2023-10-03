@@ -169,7 +169,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
             If TypeOf _pp Is PRSV2PropertyPackage Then
                 Dim ppu As PRSV2PropertyPackage = _pp
                 Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(1).Value.ToString.ToLower
+                Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(0).Value.ToString.ToLower
                 Select Case e.ColumnIndex
                     Case 1
                         ppu.m_pr._data(id1).kappa1 = value
@@ -181,7 +181,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
             Else
                 Dim ppu As PRSV2VLPropertyPackage = _pp
                 Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(1).Value.ToString.ToLower
+                Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(0).Value.ToString.ToLower
                 Select Case e.ColumnIndex
                     Case 1
                         ppu.m_pr._data(id1).kappa1 = value

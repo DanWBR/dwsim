@@ -18,6 +18,8 @@ Public Class EditingForm_Splitter
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

@@ -21,6 +21,8 @@ Public Class EditingForm_Adjust
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

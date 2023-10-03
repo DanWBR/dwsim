@@ -23,6 +23,8 @@ Public Class EditingForm_SpreadsheetUO
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

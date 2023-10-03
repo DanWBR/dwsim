@@ -19,6 +19,8 @@ Public Class EditingForm_SolarPanel
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

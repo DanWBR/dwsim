@@ -20,6 +20,8 @@ Public Class EditingForm_Vessel
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

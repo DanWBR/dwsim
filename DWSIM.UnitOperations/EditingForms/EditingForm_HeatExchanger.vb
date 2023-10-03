@@ -20,6 +20,8 @@ Public Class EditingForm_HeatExchanger
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

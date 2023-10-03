@@ -23,6 +23,8 @@ Public Class EditingForm_CompoundSeparator
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

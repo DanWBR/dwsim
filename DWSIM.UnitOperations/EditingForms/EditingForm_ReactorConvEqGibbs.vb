@@ -22,6 +22,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
+        ChangeDefaultFont()
+
         UpdateInfo()
 
     End Sub

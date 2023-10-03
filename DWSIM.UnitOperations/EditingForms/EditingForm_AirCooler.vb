@@ -22,6 +22,8 @@ Public Class EditingForm_AirCooler
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()

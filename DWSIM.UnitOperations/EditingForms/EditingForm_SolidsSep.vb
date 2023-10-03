@@ -20,6 +20,8 @@ Public Class EditingForm_SolidsSep
 
         UpdateInfo()
 
+        ChangeDefaultFont()
+
     End Sub
 
     Sub UpdateInfo()
