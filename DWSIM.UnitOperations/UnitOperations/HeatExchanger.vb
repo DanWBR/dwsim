@@ -1688,7 +1688,9 @@ Namespace UnitOperations
                     Dim tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0.0#)
                     Hh2 = tmp.CalculatedEnthalpy
                     Q = -Wh * (Hh2 - Hh1)
-                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
+                    If Q > MaxHeatExchange Then
+                        Throw New Exception(String.Format("Invalid Outlet Temperature for Hot Fluid: {0} kW required but only {1} kW are available", Q, MaxHeatExchange))
+                    End If
                     DeltaHc = (Q - HeatLoss) / Wc
                     Hc2 = Hc1 + DeltaHc
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
@@ -1718,7 +1720,9 @@ Namespace UnitOperations
                     Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                     Hc2 = tmp.CalculatedEnthalpy
                     Q = Wc * (Hc2 - Hc1)
-                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
+                    If Q > MaxHeatExchange Then
+                        Throw New Exception(String.Format("Invalid Outlet Temperature for Cold Fluid: {0} kW required but only {1} kW are available", Q, MaxHeatExchange))
+                    End If
                     DeltaHh = -(Q + HeatLoss) / Wh
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
