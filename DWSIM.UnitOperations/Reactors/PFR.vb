@@ -33,6 +33,18 @@ Imports System.Xml.Serialization
 
 Namespace Reactors
 
+    <System.Serializable()> Public Class ProfileItem
+
+        Public Property Compound As String = ""
+        Public Property MassFlow As Double = 0.0
+        Public Property MolarFlow As Double = 0.0
+        Public Property MassFraction As Double = 0.0
+        Public Property MolarFraction As Double = 0.0
+        Public Property MolarConcentration As Double = 0.0
+        Public Property MassConcentration As Double = 0.0
+
+    End Class
+
     <System.Serializable()> Public Class Reactor_PFR
 
         Inherits Reactor
@@ -61,6 +73,8 @@ Namespace Reactors
         Public DHRT As New List(Of Double)
 
         Public points As ArrayList
+
+        Public Property Profile As List(Of Tuple(Of Double, Double, Double, List(Of ProfileItem)))
 
         Dim activeAL As Integer = 0
 
@@ -716,6 +730,8 @@ Namespace Reactors
             Kr = New ArrayList
             Rxi = New Dictionary(Of String, Double)
 
+            Profile = New List(Of Tuple(Of Double, Double, Double, List(Of ProfileItem)))()
+
             Dim conv As New SystemsOfUnits.Converter
             Dim rxn As Reaction
 
@@ -749,6 +765,24 @@ Namespace Reactors
             Me.ComponentConversions.Clear()
             Me.DeltaQ = 0.0#
             Me.DeltaT = 0.0#
+
+            'update profile
+            Dim clist As New List(Of ProfileItem)
+            For Each comp In ims.Phases(0).Compounds.Values
+                Dim pitem As New ProfileItem
+                With pitem
+                    .Compound = comp.Name
+                    .MassFlow = comp.MassFlow.GetValueOrDefault()
+                    .MolarFlow = comp.MolarFlow.GetValueOrDefault()
+                    .MassFraction = comp.MassFraction.GetValueOrDefault()
+                    .MolarFraction = comp.MoleFraction.GetValueOrDefault()
+                    .MassConcentration = .MassFlow / ims.GetVolumetricFlow()
+                    .MolarConcentration = .MolarFlow / ims.GetVolumetricFlow()
+                End With
+                clist.Add(pitem)
+            Next
+
+            Profile.Add(New Tuple(Of Double, Double, Double, List(Of ProfileItem))(0, ims.GetTemperature(), ims.GetPressure(), clist))
 
             'check active reactions (kinetic and heterogeneous only) in the reaction set
             'check if there are multiple reactions on different phases (unsupported)
@@ -1198,6 +1232,24 @@ Namespace Reactors
                 End If
 
                 If Not dynamics Then
+
+                    'update profile
+                    clist = New List(Of ProfileItem)
+                    For Each comp In ims.Phases(0).Compounds.Values
+                        Dim pitem As New ProfileItem
+                        With pitem
+                            .Compound = comp.Name
+                            .MassFlow = comp.MassFlow.GetValueOrDefault()
+                            .MolarFlow = comp.MolarFlow.GetValueOrDefault()
+                            .MassFraction = comp.MassFraction.GetValueOrDefault()
+                            .MolarFraction = comp.MoleFraction.GetValueOrDefault()
+                            .MassConcentration = .MassFlow / ims.GetVolumetricFlow()
+                            .MolarConcentration = .MolarFlow / ims.GetVolumetricFlow()
+                        End With
+                        clist.Add(pitem)
+                    Next
+
+                    Profile.Add(New Tuple(Of Double, Double, Double, List(Of ProfileItem))((currvol + deltaV * Volume) / Volume * Length, T, P, clist))
 
                     'add data to array
                     Dim tmparr(C.Count + 2) As Double

@@ -107,24 +107,6 @@ Public Class ObjectEditorForm
 
         Me.AutoScaleMode = AutoScaleMode.Dpi
 
-        'Dim controls = GetAllChildren(Me)
-
-        'For Each control As Control In controls
-        '    If TypeOf control Is TextBox Then
-        '        Dim instance = DirectCast(control, TextBox)
-        '        AddHandler instance.KeyDown,
-        '            Sub(s2, e2)
-        '                If e2.KeyCode = Keys.Enter Then
-
-        '                End If
-        '            End Sub
-        '    ElseIf TypeOf control Is NumericUpDown Then
-
-        '    ElseIf TypeOf control Is ComboBox Then
-
-        '    End If
-        'Next
-
     End Sub
 
 End Class
