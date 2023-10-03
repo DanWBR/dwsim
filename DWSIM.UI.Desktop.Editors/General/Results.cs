@@ -1,33 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using DWSIM.Interfaces;
-using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.UnitOperations.Reactors;
-using DWSIM.UnitOperations.SpecialOps;
-using DWSIM.UnitOperations.Streams;
-using DWSIM.Thermodynamics.Streams;
-
 using Eto.Forms;
-
 using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 using s = DWSIM.UI.Shared.Common;
 using Eto.Drawing;
-
-using StringResources = DWSIM.UI.Desktop.Shared.StringArrays;
-using DWSIM.Thermodynamics.PropertyPackages;
-using DWSIM.Interfaces.Enums;
 using OxyPlot;
 using OxyPlot.Axes;
-
 using DWSIM.ExtensionMethods;
-using System.IO;
 using DWSIM.UI.Shared;
-using System.Net;
+using DWSIM.CrossPlatform.UI.Controls.ReoGrid.DataFormat;
+using DWSIM.CrossPlatform.UI.Controls;
+using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -185,6 +172,61 @@ namespace DWSIM.UI.Desktop.Editors
 
                 if (reactor.points != null && reactor.points.Count > 0)
                 {
+
+                    var btn2 = new Button { Text = "Export Profile to new Spreadsheet" };
+                    container.Rows.Add(new TableRow(btn2));
+                    btn2.Click += (sender, e) =>
+                    {
+                        var grid = (ReoGridControl)SimObject.GetFlowsheet().GetSpreadsheetObject();
+                        var sheet = grid.CreateWorksheet(SimObject.GraphicObject.Tag + "_" +new Random().Next(1000).ToString());
+                        grid.Worksheets.Add(sheet);
+                        grid.CurrentWorksheet = sheet;
+                        var item = reactor.Profile[0];
+                        sheet.Cells[0, 0].Data = string.Format("Length ({0})", su.distance);
+                        sheet.Cells[0, 1].Data = string.Format("Temperature ({0})", su.temperature);
+                        sheet.Cells[0, 2].Data = string.Format("Pressure ({0})", su.pressure);
+                        int i;
+                        int j = 3;
+                        foreach (var pitem in item.Item4)
+                        {
+                            sheet.Cells[0, j].Data = string.Format("{0} MolFrac", pitem.Compound);
+                            sheet.Cells[0, (j + 1)].Data = string.Format("{0} MassFrac", pitem.Compound);
+                            sheet.Cells[0, (j + 2)].Data = string.Format("{0} MolFlow ({1})", pitem.Compound, su.molarflow);
+                            sheet.Cells[0, (j + 3)].Data = string.Format("{0} MassFlow ({1})", pitem.Compound, su.massflow);
+                            sheet.Cells[0, (j + 4)].Data = string.Format("{0} MolConc ({1})", pitem.Compound, su.molar_conc);
+                            sheet.Cells[0, (j + 5)].Data = string.Format("{0} MassConc ({1})", pitem.Compound, su.mass_conc);
+                            j++;
+                        }
+
+                        i = 1;
+                        foreach (var item2 in reactor.Profile)
+                        {
+                            sheet.Cells[i, 0].Data = item2.Item1.ConvertFromSI(su.distance);
+                            sheet.Cells[i, 1].Data = item2.Item2.ConvertFromSI(su.temperature);
+                            sheet.Cells[i, 2].Data = item2.Item3.ConvertFromSI(su.pressure);
+                            j = 3;
+                            foreach (var pitem in item2.Item4)
+                            {
+                                sheet.Cells[i, j].Data = pitem.MolarFraction;
+                                sheet.Cells[i, (j + 1)].Data = pitem.MassFraction;
+                                sheet.Cells[i, (j + 2)].Data = pitem.MolarFlow.ConvertFromSI(su.molarflow);
+                                sheet.Cells[i, (j + 3)].Data = pitem.MassFlow.ConvertFromSI(su.massflow);
+                                sheet.Cells[i, (j + 4)].Data = pitem.MolarConcentration.ConvertFromSI(su.molar_conc);
+                                sheet.Cells[i, (j + 5)].Data = pitem.MassConcentration.ConvertFromSI(su.mass_conc);
+                                j++;
+                            }
+                            i++;
+                        }
+
+                        sheet.SetRangeDataFormat(new RangePosition(1, 0, i, (j + 5)), CellDataFormatFlag.Number, new NumberDataFormatter.NumberFormatArgs() { DecimalPlaces=6, NegativeStyle=NumberDataFormatter.NumberNegativeStyle.Minus, UseSeparator=false });
+                        for (int k = 0; (k <= j); k++)
+                        {
+                            sheet.AutoFitColumnWidth(k);
+                        }
+
+                        MessageBox.Show(string.Format("Data export finished successfully to sheet \'{0}\'.", sheet.Name), "DWSIM", MessageBoxButtons.OK, MessageBoxType.Information);
+
+                    };
 
                     var btn = new Button { Text = "View PFR Properties Profile" };
                     container.Rows.Add(new TableRow(btn));
