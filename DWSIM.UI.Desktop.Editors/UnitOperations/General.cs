@@ -1467,6 +1467,7 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             hx.PinchPointAtOutlets = chk.Checked.GetValueOrDefault();
                         });
+
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Transfer Efficiency (%)", hx.ThermalEfficiency,
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -1511,6 +1512,14 @@ namespace DWSIM.UI.Desktop.Editors
                           {
                               hx.IgnoreLMTDError = chk.Checked.GetValueOrDefault();
                           });
+
+                    s.CreateAndAddCheckBoxRow(container, "Calculate Heat Exchange Profile", hx.CalculateHeatExchangeProfile,
+                        (chk, e) =>
+                        {
+                            hx.CalculateHeatExchangeProfile = chk.Checked.GetValueOrDefault();
+                        });
+                    s.CreateAndAddDescriptionRow(container, "Enable this to calculate the Heat Exchange Profile for all operating modes. The profile will always be calculated for Pinch Point mode regardless of this setting.");
+
                     break;
                 case ObjectType.RCT_Conversion:
                     var reactor = (Reactor_Conversion)SimObject;

@@ -15,6 +15,7 @@ using DWSIM.UI.Shared;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid.DataFormat;
 using DWSIM.CrossPlatform.UI.Controls;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
+using DWSIM.Thermodynamics.Databases.ChemeoLink;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -262,7 +263,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 var hx = (HeatExchanger)SimObject;
 
-                if (hx.CalculationMode == HeatExchangerCalcMode.PinchPoint && hx.HeatProfile.Length > 0)
+                if (hx.HeatProfile.Length > 0)
                 {
 
                     var btn = new Button { Text = "View Heat Exchanged Profile" };
@@ -283,10 +284,50 @@ namespace DWSIM.UI.Desktop.Editors
                         chart.Model.InvalidatePlot(true);
                         chart.Invalidate();
 
+                        var maxT = Math.Max(hx.TemperatureProfileHot.Max(), hx.TemperatureProfileCold.Max());
+                        var minT = Math.Min(hx.TemperatureProfileHot.Min(), hx.TemperatureProfileCold.Min());
+
+                        model.AddLineSeries(new double[] { hx.Q.GetValueOrDefault(), hx.Q.GetValueOrDefault() }.ConvertUnits("kW", su.heatflow),
+                            new double[] { minT, maxT }.ConvertUnits("K", su.temperature), OxyColors.Red, "Operating Point");
+
+                        model.LegendItemAlignment = OxyPlot.HorizontalAlignment.Center;
+                        model.LegendOrientation = LegendOrientation.Horizontal;
+
+                        var doccontainer = new DocumentControl();
+                        var docp1 = new DocumentPage { Text = "Chart", Closable = false };
+                        var docp2 = new DocumentPage { Text = "Table", Closable = false };
+                        doccontainer.Pages.Add(docp1);
+                        doccontainer.Pages.Add(docp2);
+
+                        var gridcontrol = GridControl.GetGridControl();
+
+                        var grid = gridcontrol.GridControl;
+                        grid.Width = 700;
+
+                        var sheet = grid.Worksheets[0];
+
+                        sheet.SetRows(100);
+                        sheet.SetCols(3);
+                        sheet.SetColumnsWidth(0, 3, 200);
+                        sheet.ColumnHeaders[0].Text = String.Format("Heat Exchanged ({0})", su.heatflow);
+                        sheet.ColumnHeaders[1].Text = String.Format("Hot Fluid Temperature ({0})", su.temperature);
+                        sheet.ColumnHeaders[2].Text = String.Format("Cold Fluid Temperature ({0})", su.temperature);
+
+                        for (int i = 0; i < hx.HeatProfile.Count(); i++)
+                        {
+                            sheet.Cells[i, 0].Data = hx.HeatProfile[i].ConvertFromSI(su.heatflow);
+                            sheet.Cells[i, 1].Data = hx.TemperatureProfileHot[i].ConvertFromSI(su.temperature);
+                            sheet.Cells[i, 2].Data = hx.TemperatureProfileCold[i].ConvertFromSI(su.temperature);
+                        }
+
+                        docp2.Content = gridcontrol;
+
+                        docp1.Content = chart;
+
                         var form = new Form()
                         {
                             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
-                            Content = new Scrollable { Content = chart, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
+                            Content = new Scrollable { Content = doccontainer, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                             Title = "Heat Profile: " + SimObject.GraphicObject.Tag,
                             ClientSize = new Size(800, 600),
                             ShowInTaskbar = false,
@@ -296,6 +337,7 @@ namespace DWSIM.UI.Desktop.Editors
                             Resizable = true
                         };
                         form.Show();
+                        form.Center();
 
                     };
                 }
