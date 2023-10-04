@@ -28,6 +28,8 @@ Public Class EditingForm_HeatExchanger_ViewProfile
         Grid1.Columns(2).DefaultCellStyle.Format = nf
 
 
+        ChangeDefaultFont()
+
         FillTables()
         FillGraphs()
 
@@ -46,18 +48,30 @@ Public Class EditingForm_HeatExchanger_ViewProfile
 
         With Me.GraphControl.GraphPane
             .CurveList.Clear()
-            With .AddCurve("TC", cv.ConvertArrayFromSI(su.heatflow, hx.HeatProfile), cv.ConvertArrayFromSI(su.temperature, hx.TemperatureProfileCold), Color.Blue, ZedGraph.SymbolType.Circle)
-                 .Line.IsSmooth = False
-                .Symbol.Fill.Type = ZedGraph.FillType.Solid
-            End With
-            With .AddCurve("TH", cv.ConvertArrayFromSI(su.heatflow, hx.HeatProfile), cv.ConvertArrayFromSI(su.temperature, hx.TemperatureProfileHot), Color.Red, ZedGraph.SymbolType.Circle)
+            With .AddCurve("Cold Fluid Temperature", cv.ConvertArrayFromSI(su.heatflow, hx.HeatProfile), cv.ConvertArrayFromSI(su.temperature, hx.TemperatureProfileCold), Color.Blue, ZedGraph.SymbolType.Circle)
                 .Line.IsSmooth = False
                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
             End With
+            With .AddCurve("Hot Fluid Temperature", cv.ConvertArrayFromSI(su.heatflow, hx.HeatProfile), cv.ConvertArrayFromSI(su.temperature, hx.TemperatureProfileHot), Color.Red, ZedGraph.SymbolType.Circle)
+                .Line.IsSmooth = False
+                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+            End With
+            Dim maxT = Math.Max(hx.TemperatureProfileHot.Max, hx.TemperatureProfileCold.Max)
+            Dim minT = Math.Min(hx.TemperatureProfileHot.Min, hx.TemperatureProfileCold.Min)
+            With .AddCurve("Operating Point", cv.ConvertArrayFromSI(su.heatflow, New Double() {hx.Q.GetValueOrDefault(), hx.Q.GetValueOrDefault()}), cv.ConvertArrayFromSI(su.temperature, New Double() {minT, maxT}), Color.Red, ZedGraph.SymbolType.Circle)
+                .Line.IsSmooth = True
+                .Symbol.IsVisible = False
+                .Line.IsVisible = True
+                .Line.Color = Color.Green
+                .Line.Width = 3
+            End With
             .XAxis.Title.Text = "Q (" & su.heatflow & ")"
             .YAxis.Title.Text = "T (" & su.temperature & ")"
-            .Title.IsVisible = False
-            .Legend.IsVisible = False
+            .Title.IsVisible = True
+            .Title.Text = "Heat Exchange Profile: " + hx.GraphicObject.Tag
+            .Legend.IsVisible = True
+            .Legend.Border.IsVisible = False
+            .Legend.Position = ZedGraph.LegendPos.BottomCenter
             .AxisChange(Me.CreateGraphics)
         End With
 

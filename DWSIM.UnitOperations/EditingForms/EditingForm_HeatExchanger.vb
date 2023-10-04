@@ -189,7 +189,7 @@ Public Class EditingForm_HeatExchanger
                     gridResults.Rows.Add(New Object() {"Fouling Resistance", .STProperties.Ff.ToString("E6"), units.foulingfactor})
                 End If
 
-                If .CalculationMode = UnitOperations.HeatExchangerCalcMode.PinchPoint Then
+                If .HeatProfile.Count > 0 Then
                     btnViewProfile.Enabled = True
                 Else
                     btnViewProfile.Enabled = False
@@ -249,6 +249,8 @@ Public Class EditingForm_HeatExchanger
         chkForcePinchToOutlets.Enabled = False
 
         btnEditSTProps.Enabled = False
+
+        chkCalculateProfile.Enabled = True
 
         Select Case cbCalcMode.SelectedIndex
             Case 0
@@ -348,6 +350,7 @@ Public Class EditingForm_HeatExchanger
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = False
                 chkForcePinchToOutlets.Enabled = True
+                chkCalculateProfile.Enabled = False
             Case 8
                 'Thermal Efficiency
                 tbHotFluidOutletT.Enabled = False
@@ -767,4 +770,9 @@ Public Class EditingForm_HeatExchanger
     Private Sub chkIgnoreLMTD_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreLMTD.CheckedChanged
         SimObject.IgnoreLMTDError = chkIgnoreLMTD.Checked
     End Sub
+
+    Private Sub chkCalculateProfile_CheckedChanged(sender As Object, e As EventArgs) Handles chkCalculateProfile.CheckedChanged
+        SimObject.CalculateHeatExchangeProfile = chkCalculateProfile.Checked
+    End Sub
+
 End Class

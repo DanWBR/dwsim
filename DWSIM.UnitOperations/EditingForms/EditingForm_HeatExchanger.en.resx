@@ -149,6 +149,12 @@
   <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="chkCalculateProfile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 482</value>
+  </data>
+  <data name="chkForcePinchToOutlets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 457</value>
+  </data>
   <data name="chkForcePinchToOutlets.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 17</value>
   </data>
@@ -156,10 +162,13 @@
     <value>Force Pinch Point Location to Outlets</value>
   </data>
   <data name="tbOVF2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 369</value>
+    <value>202, 399</value>
   </data>
   <data name="tbOVF2.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 402</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 13</value>
@@ -168,10 +177,13 @@
     <value>Outlet Vap. Mol. Frac. (Stream 2)</value>
   </data>
   <data name="tbOVF1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 341</value>
+    <value>202, 371</value>
   </data>
   <data name="tbOVF1.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 374</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 13</value>
@@ -187,16 +199,19 @@
     <value>False</value>
   </data>
   <data name="cbEfficiency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 314</value>
+    <value>312, 344</value>
   </data>
   <data name="tbEfficiency.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="tbEfficiency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 314</value>
+    <value>202, 344</value>
   </data>
   <data name="tbEfficiency.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 347</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 13</value>
@@ -205,13 +220,16 @@
     <value>Heat Transfer Efficiency</value>
   </data>
   <data name="cbHeatLoss.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 287</value>
+    <value>312, 317</value>
   </data>
   <data name="tbHeatLoss.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 287</value>
+    <value>202, 317</value>
   </data>
   <data name="tbHeatLoss.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 320</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -220,13 +238,16 @@
     <value>Heat Loss</value>
   </data>
   <data name="cbMITA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 261</value>
+    <value>312, 291</value>
   </data>
   <data name="tbMITA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 261</value>
+    <value>202, 291</value>
   </data>
   <data name="tbMITA.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 294</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 13</value>
@@ -234,38 +255,44 @@
   <data name="Label18.Text" xml:space="preserve">
     <value>Min Temperature Difference</value>
   </data>
+  <data name="btnEditSTProps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 77</value>
+  </data>
   <data name="btnEditSTProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 23</value>
+    <value>386, 23</value>
   </data>
   <data name="btnEditSTProps.Text" xml:space="preserve">
     <value>Edit Shell and Tube Heat Exchanger Properties</value>
   </data>
   <data name="cbHeat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 235</value>
+    <value>312, 265</value>
   </data>
   <data name="tbHeat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 235</value>
+    <value>202, 265</value>
   </data>
   <data name="tbHeat.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
   </data>
   <data name="cbArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 208</value>
+    <value>312, 238</value>
   </data>
   <data name="tbArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 208</value>
+    <value>202, 238</value>
   </data>
   <data name="tbArea.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
   </data>
   <data name="cbOverallHTC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 182</value>
+    <value>312, 212</value>
   </data>
   <data name="tbOverallU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 182</value>
+    <value>202, 212</value>
   </data>
   <data name="tbOverallU.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 268</value>
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 13</value>
@@ -273,11 +300,17 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>Heat Exchanged</value>
   </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 241</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Heat Exchange Area</value>
+  </data>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 214</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 13</value>
@@ -306,6 +339,9 @@
   <data name="cbFlowDir.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 21</value>
   </data>
+  <data name="chkIgnoreLMTD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 432</value>
+  </data>
   <data name="chkIgnoreLMTD.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 17</value>
   </data>
@@ -313,13 +349,16 @@
     <value>Ignore LMTD Error</value>
   </data>
   <data name="cbHotFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 155</value>
+    <value>312, 185</value>
   </data>
   <data name="tbHotFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 155</value>
+    <value>202, 185</value>
   </data>
   <data name="tbHotFluidOutletT.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 188</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 13</value>
@@ -328,13 +367,16 @@
     <value>Hot Fluid Outlet Temperature</value>
   </data>
   <data name="cbColdFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 129</value>
+    <value>312, 159</value>
   </data>
   <data name="tbColdFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 129</value>
+    <value>202, 159</value>
   </data>
   <data name="tbColdFluidOutletT.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 162</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 13</value>
@@ -343,13 +385,16 @@
     <value>Cold Fluid Outlet Temperature</value>
   </data>
   <data name="cbHotFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 103</value>
+    <value>312, 133</value>
   </data>
   <data name="tbHotFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 103</value>
+    <value>202, 133</value>
   </data>
   <data name="tbHotFluidPDrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 136</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 13</value>
@@ -358,13 +403,16 @@
     <value>Hot Fluid Pressure Drop</value>
   </data>
   <data name="cbColdFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 77</value>
+    <value>312, 107</value>
   </data>
   <data name="tbColdFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 77</value>
+    <value>202, 107</value>
   </data>
   <data name="tbColdFluidPDrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 110</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 13</value>
@@ -418,13 +466,19 @@
     <value>Calculation Type</value>
   </data>
   <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 491</value>
+    <value>398, 513</value>
   </data>
   <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
   </data>
   <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 131</value>
+  </data>
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
+    <value>Connections</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 96</value>
@@ -552,26 +606,20 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream 1</value>
   </data>
-  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 131</value>
-  </data>
-  <data name="GroupBoxConnections.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
   <data name="GroupBoxResults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="btnViewProfile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+  <data name="GroupBoxResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 746</value>
   </data>
-  <data name="btnViewProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 187</value>
+  <data name="GroupBoxResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 246</value>
   </data>
-  <data name="btnViewProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 23</value>
+  <data name="GroupBoxResults.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
-  <data name="btnViewProfile.Text" xml:space="preserve">
-    <value>View Temperature vs. Heat Exchanged Profile</value>
+  <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>392, 204</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -582,22 +630,13 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 170</value>
+  <data name="btnViewProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>392, 23</value>
   </data>
-  <data name="GroupBoxResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 216</value>
-  </data>
-  <data name="GroupBoxResults.Text" xml:space="preserve">
-    <value>Results</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="btnViewProfile.Text" xml:space="preserve">
+    <value>View Temperature vs. Heat Exchanged Profile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 941</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>112, 44, 112, 44</value>
+    <value>416, 1003</value>
   </data>
 </root>

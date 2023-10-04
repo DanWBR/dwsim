@@ -24,9 +24,9 @@ Partial Class EditingForm_HeatExchanger
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_HeatExchanger))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -36,6 +36,7 @@ Partial Class EditingForm_HeatExchanger
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
+        Me.chkCalculateProfile = New System.Windows.Forms.CheckBox()
         Me.chkForcePinchToOutlets = New System.Windows.Forms.CheckBox()
         Me.tbOVF2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -96,11 +97,11 @@ Partial Class EditingForm_HeatExchanger
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBoxResults = New System.Windows.Forms.GroupBox()
-        Me.btnViewProfile = New System.Windows.Forms.Button()
         Me.gridResults = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnViewProfile = New System.Windows.Forms.Button()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -186,6 +187,7 @@ Partial Class EditingForm_HeatExchanger
         'GroupBoxParameters
         '
         resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.chkCalculateProfile)
         Me.GroupBoxParameters.Controls.Add(Me.chkForcePinchToOutlets)
         Me.GroupBoxParameters.Controls.Add(Me.tbOVF2)
         Me.GroupBoxParameters.Controls.Add(Me.Label10)
@@ -232,6 +234,15 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
+        '
+        'chkCalculateProfile
+        '
+        resources.ApplyResources(Me.chkCalculateProfile, "chkCalculateProfile")
+        Me.chkCalculateProfile.Name = "chkCalculateProfile"
+        Me.ToolTip1.SetToolTip(Me.chkCalculateProfile, resources.GetString("chkCalculateProfile.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkCalculateProfile, resources.GetString("chkCalculateProfile.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkCalculateProfile, resources.GetString("chkCalculateProfile.ToolTip2"))
+        Me.chkCalculateProfile.UseVisualStyleBackColor = True
         '
         'chkForcePinchToOutlets
         '
@@ -780,22 +791,13 @@ Partial Class EditingForm_HeatExchanger
         'GroupBoxResults
         '
         resources.ApplyResources(Me.GroupBoxResults, "GroupBoxResults")
-        Me.GroupBoxResults.Controls.Add(Me.btnViewProfile)
         Me.GroupBoxResults.Controls.Add(Me.gridResults)
+        Me.GroupBoxResults.Controls.Add(Me.btnViewProfile)
         Me.GroupBoxResults.Name = "GroupBoxResults"
         Me.GroupBoxResults.TabStop = False
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBoxResults, resources.GetString("GroupBoxResults.ToolTip2"))
-        '
-        'btnViewProfile
-        '
-        resources.ApplyResources(Me.btnViewProfile, "btnViewProfile")
-        Me.btnViewProfile.Name = "btnViewProfile"
-        Me.ToolTip1.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip2"))
-        Me.btnViewProfile.UseVisualStyleBackColor = True
         '
         'gridResults
         '
@@ -813,8 +815,8 @@ Partial Class EditingForm_HeatExchanger
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -822,8 +824,8 @@ Partial Class EditingForm_HeatExchanger
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -831,12 +833,21 @@ Partial Class EditingForm_HeatExchanger
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
+        '
+        'btnViewProfile
+        '
+        resources.ApplyResources(Me.btnViewProfile, "btnViewProfile")
+        Me.btnViewProfile.Name = "btnViewProfile"
+        Me.ToolTip1.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip2"))
+        Me.btnViewProfile.UseVisualStyleBackColor = True
         '
         'ToolTipChangeTag
         '
@@ -852,9 +863,9 @@ Partial Class EditingForm_HeatExchanger
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_HeatExchanger"
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBoxParameters.ResumeLayout(False)
@@ -941,4 +952,5 @@ Partial Class EditingForm_HeatExchanger
     Public WithEvents tbOVF1 As TextBox
     Public WithEvents Label9 As Label
     Public WithEvents chkForcePinchToOutlets As CheckBox
+    Public WithEvents chkCalculateProfile As CheckBox
 End Class

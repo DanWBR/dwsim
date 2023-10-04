@@ -113,6 +113,8 @@ Namespace UnitOperations
 
         Public Property UseShellAndTubeGeometryInformation As Boolean = False
 
+        Public Property CalculateHeatExchangeProfile As Boolean = False
+
         Public Property STProperties() As STHXProperties
             Get
                 If m_stprops Is Nothing Then m_stprops = New STHXProperties
@@ -1206,6 +1208,10 @@ Namespace UnitOperations
 
             'Validate unitop status.
             Me.Validate()
+
+            HeatProfile = New Double() {}
+            TemperatureProfileCold = New Double() {}
+            TemperatureProfileHot = New Double() {}
 
             StIn0 = Me.GetInletMaterialStream(0)
             StIn1 = Me.GetInletMaterialStream(1)
@@ -2557,6 +2563,58 @@ Namespace UnitOperations
             CheckSpec(Th2, True, "hot stream outlet temperature")
             CheckSpec(Ph2, True, "hot stream outlet pressure")
             CheckSpec(Pc2, True, "cold stream outlet pressure")
+
+            If CalcMode <> HeatExchangerCalcMode.PinchPoint And CalculateHeatExchangeProfile Then
+
+                Dim dhc, dhh As Double
+
+                Dim tcprof, thprof, qprof As New List(Of Double)
+
+                tcprof.Clear()
+                thprof.Clear()
+                qprof.Clear()
+
+                For j = 0 To 10
+
+                    Dim dqx = CDbl(j) / 10.0 * MaxHeatExchange
+
+                    dhc = dqx / Wc
+                    dhh = dqx / Wh
+
+                    'calculate profiles
+
+                    tmpstr = StInCold.Clone
+                    tmpstr.PropertyPackage = StInCold.PropertyPackage
+                    tmpstr.SetFlowsheet(StInCold.FlowSheet)
+
+                    tmpstr.Phases(0).Properties.enthalpy = Hc1 + dhc
+                    tmpstr.Phases(0).Properties.pressure = Pc1 - Convert.ToDouble(j) / 10.0 * ColdSidePressureDrop
+                    tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                    IObj?.SetCurrent()
+                    tmpstr.Calculate(True, True)
+
+                    qprof.Add(dqx)
+                    tcprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
+
+                    tmpstr = StInHot.Clone
+                    tmpstr.PropertyPackage = StInHot.PropertyPackage
+                    tmpstr.SetFlowsheet(StInHot.FlowSheet)
+
+                    tmpstr.Phases(0).Properties.enthalpy = Hh1 - dhh
+                    tmpstr.Phases(0).Properties.pressure = Ph1 - Convert.ToDouble(j) / 10.0 * HotSidePressureDrop
+                    tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                    IObj?.SetCurrent()
+                    tmpstr.Calculate(True, True)
+
+                    thprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
+
+                Next
+
+                Me.HeatProfile = qprof.ToArray
+                Me.TemperatureProfileCold = tcprof.ToArray
+                Me.TemperatureProfileHot = thprof.ToArray
+
+            End If
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 
