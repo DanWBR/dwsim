@@ -239,7 +239,7 @@
     <value>Liquid Cp + Enthalpy of Vaporization</value>
   </data>
   <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 45</value>
+    <value>225, 47</value>
   </data>
   <data name="cbHSCpCalcMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 21</value>
@@ -348,15 +348,6 @@
   <data name="TabPage3.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkUseHenry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 322</value>
-  </data>
-  <data name="chkUseHenry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 17</value>
-  </data>
-  <data name="chkUseHenry.Text" xml:space="preserve">
-    <value>Liquid Phase: Use Henry's Constants (if available)</value>
-  </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>668, 402</value>
   </data>
@@ -373,13 +364,16 @@
     <value>198, 13</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
-    <value>EOS Liquid Enthalpy Calculation Method</value>
+    <value>Calculation Method (EOS-based Models)</value>
   </data>
   <data name="cbEOSLiqEnthMethod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="cbEOSLiqEnthMethod.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="cbEOSLiqEnthMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 83</value>
   </data>
   <data name="cbEOSLiqEnthMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 21</value>
@@ -389,6 +383,30 @@
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Enthalpy/Entropy/Cp</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Model-Specific</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Material Streams</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>676, 428</value>
+  </data>
+  <data name="chkUseHenry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 322</value>
+  </data>
+  <data name="chkUseHenry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 17</value>
+  </data>
+  <data name="chkUseHenry.Text" xml:space="preserve">
+    <value>Liquid Phase: Use Henry's Constants (if available)</value>
   </data>
   <data name="chkAutoEstimateNU.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 78</value>
@@ -408,12 +426,6 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Other</value>
   </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 402</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Model-Specific</value>
-  </data>
   <data name="tbSPCheckThres.Location" type="System.Drawing.Point, System.Drawing">
     <value>302, 78</value>
   </data>
@@ -428,15 +440,6 @@
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Single Compound Check Molar Fraction Threshold</value>
-  </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 402</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Material Streams</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 428</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>676, 428</value>

@@ -7519,26 +7519,76 @@ Final3:
 
         Public Function AUX_INT_CPDTi_L(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Dim deltaT As Double = (T2 - T1) / 25
-            Dim Ti, Tc As Double
-            Dim i As Integer = 0
-            Dim integral As Double = 0
+            Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
+
+            If nsteps < 10 Then
+                If Math.Abs(T2 - T1) < 1 Then
+                    nsteps = 2
+                ElseIf Math.Abs(T2 - T1) < 3 Then
+                    nsteps = 4
+                ElseIf Math.Abs(T2 - T1) < 5 Then
+                    nsteps = 6
+                Else
+                    nsteps = 10
+                End If
+            End If
+
+            Dim deltaT As Double = (T2 - T1) / nsteps
+
+            Dim Ti As Double
 
             Ti = T1 + deltaT / 2
-            Tc = Me.CurrentMaterialStream.Phases(0).Compounds(subst).ConstantProperties.Critical_Temperature
-            For i = 0 To 24
-                If Ti > Tc Then
-                    integral += Me.AUX_CPi(subst, Ti) * deltaT
-                Else
-                    integral += Me.AUX_LIQ_Cpi(Me.CurrentMaterialStream.Phases(0).Compounds(subst).ConstantProperties, Ti) * deltaT
-                End If
 
-                Ti += deltaT
+            Dim integrals(nsteps - 1) As Double
+
+            Dim cprops = DW_GetConstantProperties().Where(Function(c) c.Name = subst).SingleOrDefault()
+
+            For i = 0 To nsteps - 1
+                integrals(i) = AUX_LIQ_Cpi(cprops, Ti + i * deltaT)
             Next
 
-            Return integral 'kJ/Kg
+            Dim outval = integrals.Sum * deltaT
+
+            Return outval
 
         End Function
+
+        Public Function AUX_INT_CPDTi_L(ByVal T1 As Double, ByVal T2 As Double, ByVal index As Integer) As Double
+
+            Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
+
+            If nsteps < 10 Then
+                If Math.Abs(T2 - T1) < 1 Then
+                    nsteps = 2
+                ElseIf Math.Abs(T2 - T1) < 3 Then
+                    nsteps = 4
+                ElseIf Math.Abs(T2 - T1) < 5 Then
+                    nsteps = 6
+                Else
+                    nsteps = 10
+                End If
+            End If
+
+            Dim deltaT As Double = (T2 - T1) / nsteps
+
+            Dim Ti As Double
+
+            Ti = T1 + deltaT / 2
+
+            Dim integrals(nsteps - 1) As Double
+
+            Dim cprops = DW_GetConstantProperties()
+
+            For i = 0 To nsteps - 1
+                integrals(i) = AUX_LIQ_Cpi(cprops(index), Ti + i * deltaT)
+            Next
+
+            Dim outval = integrals.Sum * deltaT
+
+            Return outval
+
+        End Function
+
 
         Public Function AUX_INT_CPDT_Ti(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
@@ -8168,6 +8218,76 @@ Final3:
 
         End Function
 
+        Public Function RET_Hid_FromLiqCp(Vz As Double(), T As Double, P As Double) As Double
+
+            Dim H, t1, t2, t3 As Double
+
+            Dim props = DW_GetConstantProperties()
+
+            Dim Vw = AUX_CONVERT_MOL_TO_MASS(Vz)
+
+            t1 = 0
+            t2 = 0
+            t3 = 0
+
+            For i As Integer = 0 To Vz.Length - 1
+                If props(i).Normal_Boiling_Point = 0.0 Then
+                    Throw New Exception("Unable to calculate Enthalpy from Liquid Cp data - Normal Boiling Point not defined")
+                End If
+                If Vz(i) > 0.0 Then
+                    If T > props(i).Normal_Boiling_Point Then
+                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, props(i).Normal_Boiling_Point, i) + P / 1000 / Me.AUX_LIQDENS(props(i).Normal_Boiling_Point, Vz, P)
+                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, props(i).Normal_Boiling_Point)
+                        t3 += Vw(i) * RET_Hid_i(props(i).Normal_Boiling_Point, T, props(i).Name)
+                    Else
+                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, T, i) + P / 1000 / Me.AUX_LIQDENS(T, Vz, P)
+                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, T)
+                        t3 += Vw(i) * RET_Hid_i(298.15, T, props(i).Name)
+                    End If
+                End If
+            Next
+
+            H = t1 + t2 + t3
+
+            Return H
+
+        End Function
+
+        Public Function RET_Sid_FromLiqCp(Vz As Double(), T As Double, P As Double) As Double
+
+            Dim S, t1, t2, t3 As Double
+
+            Dim props = DW_GetConstantProperties()
+
+            Dim Vw = AUX_CONVERT_MOL_TO_MASS(Vz)
+
+            t1 = 0
+            t2 = 0
+            t3 = 0
+
+            For i As Integer = 0 To Vz.Length - 1
+                If props(i).Normal_Boiling_Point = 0.0 Then
+                    Throw New Exception("Unable to calculate Enthalpy from Liquid Cp data - Normal Boiling Point not defined")
+                End If
+                If Vz(i) > 0.0 Then
+                    If T > props(i).Normal_Boiling_Point Then
+                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, props(i).Normal_Boiling_Point, i) / T + P / 1000 / Me.AUX_LIQDENS(props(i).Normal_Boiling_Point, Vz, P) / T
+                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, props(i).Normal_Boiling_Point) / T
+                        t3 += Vw(i) * RET_Sid_i(props(i).Normal_Boiling_Point, T, P, props(i).Name)
+                    Else
+                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, T, i) / T + P / 1000 / Me.AUX_LIQDENS(T, Vz, P) / T
+                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, T) / T
+                        t3 += Vw(i) * RET_Sid_i(298.15, T, P, props(i).Name)
+                    End If
+                End If
+            Next
+
+            S = t1 + t2 + t3
+
+            Return S
+
+        End Function
+
         Public Function RET_Hid(ByVal T1 As Double, ByVal T2 As Double, ByVal Vz As Double()) As Double
 
             Return Me.AUX_INT_CPDTm(T1, T2, Me.AUX_CONVERT_MOL_TO_MASS(Vz))
@@ -8650,7 +8770,7 @@ Final3:
             Dim i As Integer = 0
             Dim subst As Interfaces.ICompound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, subst.Name)
+                val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, i)
                 i += 1
             Next
 

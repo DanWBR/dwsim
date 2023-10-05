@@ -26,7 +26,7 @@ Public Class PropertyPackageSettingsEditingControl
 
         cbHSCpCalcMode.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or TypeOf PropPack Is RaoultPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
-        cbEOSLiqEnthMethod.Enabled = TypeOf PropPack Is PRSV2PropertyPackage Or TypeOf PropPack Is PRSV2VLPropertyPackage
+        cbEOSLiqEnthMethod.Enabled = PropPack.PackageType = PackageType.EOS
 
         chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 

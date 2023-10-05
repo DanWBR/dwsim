@@ -1008,6 +1008,7 @@
 <CriticalPressure name="Critical pressure"  units="Pa"  value="7383000" />
 <CriticalVolume name="Critical volume"  units="m3/kmol"  value="0.094" />
 <CriticalCompressibility name="Critical compressibility factor"  units="_"  value="0.274" />
+<NormalBoilingPointTemperature name="Normal boiling point"  units="K"  value="194.686" />
 <NormalMeltingPointTemperature name="Melting point"  units="K"  value="216.58" />
 <TriplePointTemperature name="Triple point temperature"  units="K"  value="216.58" />
 <TriplePointPressure name="Triple point pressure"  units="Pa"  value="518672" />

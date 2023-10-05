@@ -653,7 +653,7 @@ Namespace PropertyPackages
                         Case 2 'Excess
                             H = Me.RET_Hid(298.15, T, Vx)
                         Case 3 'Experimental Liquid
-                            H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                            H = RET_Hid_FromLiqCp(Vx, T, P)
                     End Select
                 ElseIf st = State.Solid Then
                     If SolidPhaseEnthalpy_UsesCp Then
@@ -764,7 +764,7 @@ Namespace PropertyPackages
                         Case 2 'Excess
                             S = Me.RET_Sid(298.15, T, P, Vx)
                         Case 3, 4 'Experimental Liquid
-                            S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) / T
+                            S = RET_Sid_FromLiqCp(Vx, T, P)
                     End Select
                 ElseIf st = State.Solid Then
                     If SolidPhaseEnthalpy_UsesCp Then
