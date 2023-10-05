@@ -1,9 +1,1 @@
-Version 8.6.1
-
-- Updated connections for Fuel Cell and Electrolyzer models
-- Updated H/S/Cp calculation routine for Raoult's Law Property Package
-- Added more Dynamics Integrator events to Script Manager
-- Exposing Indicators' monitored values
-- Fixed issue with Compound Viewer (Classic UI)
-- Fixed some Inspector issues
-- Other minor fixes and enhancements
+Version 8.6.5
