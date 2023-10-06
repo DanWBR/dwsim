@@ -477,6 +477,13 @@ namespace DWSIM.UI.Desktop.Editors
 
             c4.Enabled = pp is ActivityCoefficientPropertyPackage;
 
+            var c4a = this.CreateAndAddDropDownRow("Calculation Method (EOS-based models)", pp.LiquidEnthalpyEntropyCpCvCalculationMode_EOS.GetEnumNames(),
+                (int)pp.LiquidEnthalpyEntropyCpCvCalculationMode_EOS, (dd, e) => {
+                    pp.LiquidEnthalpyEntropyCpCvCalculationMode_EOS = dd.SelectedIndex.ToEnum<PropertyPackage.LiquidEnthalpyEntropyCpCvCalcMode_EOS>();
+                }, null);
+
+            c4a.Enabled = pp.PackageType == PackageType.EOS;
+
             this.CreateAndAddLabelRow("Other");
 
             var c5 = this.CreateAndAddCheckBoxRow("Ignore Missing UNIQUAC/NRTL Interaction Parameters", pp.ActivityCoefficientModels_IgnoreMissingInteractionParameters, (chk, e) => {

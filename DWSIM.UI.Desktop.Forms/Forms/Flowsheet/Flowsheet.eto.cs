@@ -20,7 +20,6 @@ using s = DWSIM.GlobalSettings.Settings;
 using DWSIM.UI.Desktop.Editors.Charts;
 using DWSIM.UI.Desktop.Editors.Dynamics;
 using SkiaSharp;
-using DWSIM.UI.Controls;
 using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Forms
@@ -397,6 +396,7 @@ namespace DWSIM.UI.Forms
                 editor.listcontainer.CellEdited += (sender, e) => UpdateEditorPanels();
 
                 form.Show();
+                form.Center();
             };
 
             ActBasis = () =>
@@ -409,6 +409,7 @@ namespace DWSIM.UI.Forms
                 new DWSIM.UI.Desktop.Editors.ReactionsManager(FlowsheetObject, cont2);
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", (int)(sf * 800), (int)(sf * 600), new[] { cont1, cont2 });
                 form.Show();
+                form.Center();
                 form.Width += 10;
             };
 
@@ -422,6 +423,7 @@ namespace DWSIM.UI.Forms
                 cont2.Tag = "Visible Properties";
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Flowsheet Settings", (int)(sf * 800), (int)(sf * 600), new[] { cont, cont2 });
                 form.Show();
+                form.Center();
                 form.Width += 1;
             };
 
@@ -621,6 +623,7 @@ namespace DWSIM.UI.Forms
                 var tcp = new Desktop.Editors.Utilities.TrueCriticalPointView(FlowsheetObject);
                 var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("True Critical Point", (int)(sf * 500), (int)(sf * 500), tcp);
                 form.Show();
+                form.Center();
             };
 
             btnUtilities_BinaryEnvelope.Click += (sender, e) =>
@@ -628,6 +631,7 @@ namespace DWSIM.UI.Forms
                 var bpe = new Desktop.Editors.Utilities.BinaryEnvelopeView(FlowsheetObject);
                 var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 1024), (int)(sf * 768), bpe, false);
                 form.Show();
+                form.Center();
             };
 
             btnUtilities_PhaseEnvelope.Click += (sender, e) =>
@@ -635,6 +639,7 @@ namespace DWSIM.UI.Forms
                 var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
                 var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 1024), (int)(sf * 768), pe, false);
                 form.Show();
+                form.Center();
             };
 
             var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png", this.GetType().Assembly)), Shortcut = Keys.A | Application.Instance.AlternateModifier };
@@ -663,6 +668,7 @@ namespace DWSIM.UI.Forms
                 var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
                 var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 860), (int)(sf * 600), saeditor);
                 form.Show();
+                form.Center();
             };
 
             btnOptimization.Click += (sender, e) =>
@@ -670,6 +676,7 @@ namespace DWSIM.UI.Forms
                 var foeditor = new Desktop.Editors.OptimizerView(FlowsheetObject);
                 var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 800), (int)(sf * 650), foeditor);
                 form.Show();
+                form.Center();
             };
 
             Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SkiaSharp.SKColor.Parse(SystemColors.ControlBackground.ToHex());
@@ -779,6 +786,7 @@ namespace DWSIM.UI.Forms
                 var editor = new PIDTuningTool(FlowsheetObject, DynIntegratorControl);
                 var form = UI.Shared.Common.GetDefaultEditorForm("PID Tuning Tool", 800, 600, editor, false);
                 form.Show();
+                form.Center();
             };
 
             // menu items
@@ -830,6 +838,7 @@ namespace DWSIM.UI.Forms
                             {
                                 Form f = (Form)iplugin.UtilityForm;
                                 f.Show();
+                                f.Center();
                             }
                             else
                             {

@@ -139,7 +139,7 @@ Partial Class PropertyPackageSettingsEditingControl
         resources.ApplyResources(Me.cbHSCpCalcMode, "cbHSCpCalcMode")
         Me.cbHSCpCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbHSCpCalcMode.FormattingEnabled = True
-        Me.cbHSCpCalcMode.Items.AddRange(New Object() {resources.GetString("cbHSCpCalcMode.Items"), resources.GetString("cbHSCpCalcMode.Items1"), resources.GetString("cbHSCpCalcMode.Items2"), resources.GetString("cbHSCpCalcMode.Items3")})
+        Me.cbHSCpCalcMode.Items.AddRange(New Object() {resources.GetString("cbHSCpCalcMode.Items"), resources.GetString("cbHSCpCalcMode.Items1"), resources.GetString("cbHSCpCalcMode.Items2"), resources.GetString("cbHSCpCalcMode.Items3"), resources.GetString("cbHSCpCalcMode.Items4")})
         Me.cbHSCpCalcMode.Name = "cbHSCpCalcMode"
         '
         'cbLiqVIscMixRule

@@ -199,16 +199,16 @@
     <value>Constants</value>
   </data>
   <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
-    <value>739, 94</value>
+    <value>857, 179</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 114</value>
+    <value>863, 199</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>2D Render</value>
   </data>
   <data name="tbElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -217,13 +217,13 @@
     <value>Elements</value>
   </data>
   <data name="tbMODFACNIST.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>MODFAC-NIST Groups</value>
   </data>
   <data name="tbInChI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -232,7 +232,7 @@
     <value>InChI String</value>
   </data>
   <data name="tbSMILES.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
@@ -241,31 +241,31 @@
     <value>SMILES String</value>
   </data>
   <data name="tbMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>MODFAC-Do Groups</value>
   </data>
   <data name="tbUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>UNIFAC Groups</value>
   </data>
   <data name="tbFormula.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 21</value>
+    <value>710, 21</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Formula</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 216</value>
+    <value>863, 216</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Molecular Structure</value>
   </data>
   <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>758, 346</value>
+    <value>876, 431</value>
   </data>
   <data name="FaTabStripItem6.Title" xml:space="preserve">
     <value>Molecular</value>
@@ -563,6 +563,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>890, 539</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

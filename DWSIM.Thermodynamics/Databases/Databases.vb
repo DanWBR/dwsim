@@ -203,6 +203,7 @@ Namespace Databases
                             cp.Critical_Compressibility = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "NormalBoilingPointTemperature" 'K
                             cp.Normal_Boiling_Point = Double.Parse(node2.Attributes("value").Value, nf)
+                            cp.NBP = cp.Normal_Boiling_Point
                         Case "NormalMeltingPointTemperature"
                             cp.TemperatureOfFusion = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "MolecularWeight"

@@ -4,6 +4,7 @@ using DWSIM.Thermodynamics.PropertyPackages;
 using DWSIM.UI.Desktop.Shared;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
+using DWSIM.ExtensionMethods.Eto;
 
 
 namespace DWSIM.UI.Desktop.Editors
@@ -131,9 +132,9 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     flowsheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.PropertyPackages);
                                                                     var supported = new string[] { "NRTL", "UNIQUAC", "Peng-Robinson (PR)", "Soave-Redlich-Kwong (SRK)", "Lee-Kesler-Plöcker" };
                                                                     var cont = new PropertyPackageSettingsView(flowsheet, pp);
-                                                                    cont.Tag = "General Settings";
+                                                                    cont.Tag = "Property Calculations";
                                                                     var cont3 = new FlashSettingsEditor(flowsheet, pp);
-                                                                    cont3.Tag = "Equilibrium Calculation Settings";
+                                                                    cont3.Tag = "Equilibrium Calculations";
                                                                     var advcont = pp.GetAdvancedEditingContainers();
                                                                     if (supported.Contains(pp.ComponentName))
                                                                     {
@@ -141,11 +142,13 @@ namespace DWSIM.UI.Desktop.Editors
                                                                         cont2.Tag = "Interaction Parameters";
                                                                         var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont2, cont3, cont, advcont[0], advcont[1] });
                                                                         form.Show();
+                                                                        form.Center();
                                                                     }
                                                                     else
                                                                     {
                                                                         var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont3, cont, advcont[0], advcont[1] });
                                                                         form.Show();
+                                                                        form.Center();
                                                                     }
                                                                 },                                                                
                                                                (arg1, arg2) =>

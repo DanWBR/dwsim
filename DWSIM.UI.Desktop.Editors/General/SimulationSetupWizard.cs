@@ -78,7 +78,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             page1.ContentContainer.Add(dl);
             page1.Show();
-        
+            page1.Center();
+
         }
 
         private void DisplayPage1()
@@ -108,6 +109,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             page1.ContentContainer.Add(tl);
             page1.Show();
+            page1.Center();
 
         }
 
@@ -257,6 +259,7 @@ namespace DWSIM.UI.Desktop.Editors
                 page.ContentContainer.Add(dl);
             }
             page.Show();
+            page.Center();
 
         }
 
@@ -322,7 +325,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             page.ContentContainer.Add(dl);
             page.Show();
-        
+            page.Center();
+
         }
 
         private void SetupPropertyPackage()

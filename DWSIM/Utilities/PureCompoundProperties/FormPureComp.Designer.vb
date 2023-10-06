@@ -276,6 +276,7 @@ Partial Class FormPureComp
         Me.GridProps.AllowUserToResizeColumns = False
         Me.GridProps.AllowUserToResizeRows = False
         Me.GridProps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.GridProps.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.GridProps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridProps.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
         Me.GridProps.Name = "GridProps"
@@ -447,7 +448,7 @@ Partial Class FormPureComp
         Me.FaTabStripLiq.AlwaysShowClose = False
         Me.FaTabStripLiq.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPLIQ, Me.FaTabStripItemHVAP, Me.FaTabStripItemPVAP, Me.FaTabStripItemSURFT, Me.FaTabStripItemLIQVISC, Me.FaTabStripItemLIQDENS, Me.FaTabStripItemLIQTCOND, Me.FaTabStripItemTabLiq})
         Me.FaTabStripLiq.Name = "FaTabStripLiq"
-        Me.FaTabStripLiq.SelectedItem = Me.FaTabStripItemTabLiq
+        Me.FaTabStripLiq.SelectedItem = Me.FaTabStripItemCPLIQ
         '
         'FaTabStripItemCPLIQ
         '
@@ -456,6 +457,7 @@ Partial Class FormPureComp
         Me.FaTabStripItemCPLIQ.Controls.Add(Me.GraphLiqCp)
         Me.FaTabStripItemCPLIQ.IsDrawn = True
         Me.FaTabStripItemCPLIQ.Name = "FaTabStripItemCPLIQ"
+        Me.FaTabStripItemCPLIQ.Selected = True
         '
         'GraphLiqCp
         '
@@ -631,7 +633,6 @@ Partial Class FormPureComp
         Me.FaTabStripItemTabLiq.Controls.Add(Me.DataTableLiquid)
         Me.FaTabStripItemTabLiq.IsDrawn = True
         Me.FaTabStripItemTabLiq.Name = "FaTabStripItemTabLiq"
-        Me.FaTabStripItemTabLiq.Selected = True
         '
         'DataTableLiquid
         '
@@ -809,7 +810,7 @@ Partial Class FormPureComp
         Me.FaTabStripVap.AlwaysShowClose = False
         Me.FaTabStripVap.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPIG, Me.FaTabStripItemVAPVISC, Me.FaTabStripItemVAPTCOND, Me.FaTabStripItemDataTab})
         Me.FaTabStripVap.Name = "FaTabStripVap"
-        Me.FaTabStripVap.SelectedItem = Me.FaTabStripItemDataTab
+        Me.FaTabStripVap.SelectedItem = Me.FaTabStripItemCPIG
         '
         'FaTabStripItemCPIG
         '
@@ -818,6 +819,7 @@ Partial Class FormPureComp
         Me.FaTabStripItemCPIG.Controls.Add(Me.GraphCp)
         Me.FaTabStripItemCPIG.IsDrawn = True
         Me.FaTabStripItemCPIG.Name = "FaTabStripItemCPIG"
+        Me.FaTabStripItemCPIG.Selected = True
         '
         'GraphCp
         '
@@ -899,7 +901,6 @@ Partial Class FormPureComp
         Me.FaTabStripItemDataTab.Controls.Add(Me.DataTableVapour)
         Me.FaTabStripItemDataTab.IsDrawn = True
         Me.FaTabStripItemDataTab.Name = "FaTabStripItemDataTab"
-        Me.FaTabStripItemDataTab.Selected = True
         '
         'DataTableVapour
         '
@@ -997,7 +998,7 @@ Partial Class FormPureComp
         Me.FaTabStripSolid.AlwaysShowClose = False
         Me.FaTabStripSolid.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPSOLID, Me.FaTabStripItemSOLIDDENS, Me.FaTabStripItemTabela})
         Me.FaTabStripSolid.Name = "FaTabStripSolid"
-        Me.FaTabStripSolid.SelectedItem = Me.FaTabStripItemTabela
+        Me.FaTabStripSolid.SelectedItem = Me.FaTabStripItemCPSOLID
         '
         'FaTabStripItemCPSOLID
         '
@@ -1006,6 +1007,7 @@ Partial Class FormPureComp
         Me.FaTabStripItemCPSOLID.Controls.Add(Me.GraphCpSolid)
         Me.FaTabStripItemCPSOLID.IsDrawn = True
         Me.FaTabStripItemCPSOLID.Name = "FaTabStripItemCPSOLID"
+        Me.FaTabStripItemCPSOLID.Selected = True
         '
         'GraphCpSolid
         '
@@ -1056,7 +1058,6 @@ Partial Class FormPureComp
         Me.FaTabStripItemTabela.Controls.Add(Me.DataTableSolid)
         Me.FaTabStripItemTabela.IsDrawn = True
         Me.FaTabStripItemTabela.Name = "FaTabStripItemTabela"
-        Me.FaTabStripItemTabela.Selected = True
         '
         'DataTableSolid
         '

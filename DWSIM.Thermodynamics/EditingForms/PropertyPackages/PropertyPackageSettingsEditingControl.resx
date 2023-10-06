@@ -237,6 +237,9 @@
   <data name="chkAutoEstimateNU.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 76</value>
   </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Cálculo de Fugacidade</value>
   </data>
@@ -255,8 +258,8 @@
   <data name="&gt;&gt;tbSPCheckThres.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 13</value>
+  <data name="cbLiqVisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 165</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>TabPage2</value>
@@ -911,9 +914,6 @@
   </data>
   <data name="&gt;&gt;cbLiqVIscMixRule.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="cbLiqVisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 165</value>
   </data>
   <data name="chkIgnoreSalLim.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

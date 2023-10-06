@@ -233,10 +233,13 @@
     <value>290, 21</value>
   </data>
   <data name="cbHSCpCalcMode.Items2" xml:space="preserve">
-    <value>Excess Properties</value>
+    <value>Ideal + Excess</value>
   </data>
   <data name="cbHSCpCalcMode.Items3" xml:space="preserve">
     <value>Liquid Cp + Enthalpy of Vaporization</value>
+  </data>
+  <data name="cbHSCpCalcMode.Items4" xml:space="preserve">
+    <value>Liquid Cp + Excess + Enthalpy of Vaporization</value>
   </data>
   <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 47</value>

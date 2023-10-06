@@ -17,6 +17,7 @@ using System.Text;
 using s = DWSIM.GlobalSettings.Settings;
 using c = DWSIM.UI.Shared.Common;
 using DWSIM.ExtensionMethods;
+using DWSIM.ExtensionMethods.Eto;
 
 namespace DWSIM.UI
 {
@@ -580,6 +581,7 @@ namespace DWSIM.UI
         var splash = new SplashScreen { MainFrm = this };
                 splash.Show();
             });
+            this.Center();
 
         }
 

@@ -187,6 +187,7 @@ Namespace PropertyPackages
             Excess = 2
             ExpData = 3
             LiqCp_DHVap = 4
+            LiqCp_Excess = 5
         End Enum
 
         Public Enum LiquidEnthalpyEntropyCpCvCalcMode_EOS
@@ -8220,7 +8221,7 @@ Final3:
 
         Public Function RET_Hid_FromLiqCp(Vz As Double(), T As Double, P As Double) As Double
 
-            Dim H, t1, t2, t3 As Double
+            Dim H, Tb, t1, t2, t3 As Double
 
             Dim props = DW_GetConstantProperties()
 
@@ -8231,14 +8232,14 @@ Final3:
             t3 = 0
 
             For i As Integer = 0 To Vz.Length - 1
-                If props(i).Normal_Boiling_Point = 0.0 Then
-                    Throw New Exception("Unable to calculate Enthalpy from Liquid Cp data - Normal Boiling Point not defined")
-                End If
+                Tb = props(i).Normal_Boiling_Point
+                If Tb = 0.0 Then Tb = 0.7 * props(i).Critical_Temperature
+                If Tb = 0.0 Then Throw New Exception("Unable to calculate Enthalpy from Liquid Cp data - Normal Boiling Point / Critical Temperature not defined")
                 If Vz(i) > 0.0 Then
-                    If T > props(i).Normal_Boiling_Point Then
-                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, props(i).Normal_Boiling_Point, i) + P / 1000 / Me.AUX_LIQDENS(props(i).Normal_Boiling_Point, Vz, P)
-                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, props(i).Normal_Boiling_Point)
-                        t3 += Vw(i) * RET_Hid_i(props(i).Normal_Boiling_Point, T, props(i).Name)
+                    If T > Tb Then
+                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, Tb, i) + P / 1000 / Me.AUX_LIQDENS(Tb, Vz, P)
+                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, Tb)
+                        t3 += Vw(i) * RET_Hid_i(Tb, T, props(i).Name)
                     Else
                         t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, T, i) + P / 1000 / Me.AUX_LIQDENS(T, Vz, P)
                         t2 += Vw(i) * AUX_HVAPi(props(i).Name, T)
@@ -8255,7 +8256,7 @@ Final3:
 
         Public Function RET_Sid_FromLiqCp(Vz As Double(), T As Double, P As Double) As Double
 
-            Dim S, t1, t2, t3 As Double
+            Dim S, Tb, t1, t2, t3 As Double
 
             Dim props = DW_GetConstantProperties()
 
@@ -8266,14 +8267,14 @@ Final3:
             t3 = 0
 
             For i As Integer = 0 To Vz.Length - 1
-                If props(i).Normal_Boiling_Point = 0.0 Then
-                    Throw New Exception("Unable to calculate Enthalpy from Liquid Cp data - Normal Boiling Point not defined")
-                End If
+                Tb = props(i).Normal_Boiling_Point
+                If Tb = 0.0 Then Tb = 0.7 * props(i).Critical_Temperature
+                If Tb = 0.0 Then Throw New Exception("Unable to calculate Entropy from Liquid Cp data - Normal Boiling Point / Critical Temperature not defined")
                 If Vz(i) > 0.0 Then
-                    If T > props(i).Normal_Boiling_Point Then
-                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, props(i).Normal_Boiling_Point, i) / T + P / 1000 / Me.AUX_LIQDENS(props(i).Normal_Boiling_Point, Vz, P) / T
-                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, props(i).Normal_Boiling_Point) / T
-                        t3 += Vw(i) * RET_Sid_i(props(i).Normal_Boiling_Point, T, P, props(i).Name)
+                    If T > Tb Then
+                        t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, Tb, i) / T + P / 1000 / Me.AUX_LIQDENS(Tb, Vz, P) / T
+                        t2 += Vw(i) * AUX_HVAPi(props(i).Name, Tb) / T
+                        t3 += Vw(i) * RET_Sid_i(Tb, T, P, props(i).Name)
                     Else
                         t1 += Vw(i) * AUX_INT_CPDTi_L(298.15, T, i) / T + P / 1000 / Me.AUX_LIQDENS(T, Vz, P) / T
                         t2 += Vw(i) * AUX_HVAPi(props(i).Name, T) / T
