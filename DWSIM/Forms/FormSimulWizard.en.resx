@@ -212,6 +212,9 @@ Click "Next" to continue.</value>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>698, 286</value>
   </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 217</value>
+  </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 346</value>
   </data>

@@ -213,9 +213,6 @@
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Unidade</value>
   </data>
-  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
   <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -264,8 +261,8 @@
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 20</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="StepWizardControl1.FinishButtonText" xml:space="preserve">
+    <value>&amp;Finalizar</value>
   </data>
   <data name="&gt;&gt;WizardPage4.Name" xml:space="preserve">
     <value>WizardPage4</value>
@@ -563,9 +560,6 @@ Clique em "Próximo" para continuar.</value>
   </data>
   <data name="&gt;&gt;Column7.Name" xml:space="preserve">
     <value>Column7</value>
-  </data>
-  <data name="StepWizardControl1.FinishButtonText" xml:space="preserve">
-    <value>&amp;Finalizar</value>
   </data>
   <data name="&gt;&gt;Button8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -963,9 +957,6 @@ Clique em "Próximo" para continuar.</value>
   <data name="Column5.ToolTipText" xml:space="preserve">
     <value>Supported by CoolProp Property Package</value>
   </data>
-  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="btnCloneUnits.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -1278,8 +1269,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="txtAdded.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
-  <data name="Button2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rbSVLLE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn3</value>
@@ -1719,6 +1710,9 @@ Clique em "Próximo" para continuar.</value>
   <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>319, 247</value>
   </data>
+  <data name="Label4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 368</value>
   </data>
@@ -1879,6 +1873,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="Label16.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
+  <data name="Button2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;CriarAPartirDeEstruturaUNIFACToolStripMenuItem.Name" xml:space="preserve">
     <value>CriarAPartirDeEstruturaUNIFACToolStripMenuItem</value>
   </data>
@@ -1890,6 +1887,9 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   </data>
   <data name="Column12.ToolTipText" xml:space="preserve">
     <value>Configure</value>
+  </data>
+  <data name="&gt;&gt;Label14.Name" xml:space="preserve">
+    <value>Label14</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 15</value>
@@ -1912,8 +1912,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;rbVLE.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;Label14.Name" xml:space="preserve">
-    <value>Label14</value>
+  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>338, 91</value>
@@ -2293,8 +2293,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="chkActivateSmartObjectSolving.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 88</value>
   </data>
-  <data name="rbSVLLE.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
     <value>PictureBox1</value>
