@@ -3015,6 +3015,8 @@
     <None Include="Resources\binary_code_24px.png" />
     <None Include="Resources\bubble-gum-error-404.gif" />
     <None Include="Resources\bubble-gum-error.gif" />
+    <None Include="Resources\box_important_80px.png" />
+    <None Include="Resources\box_important_48px.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3037,6 +3039,7 @@
     <None Include="Resources\color_wheel.png" />
     <None Include="Resources\close_96px.png" />
     <None Include="Resources\collaboration_female_male_48px.png" />
+    <None Include="Resources\checkmark_48px.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />

@@ -360,7 +360,7 @@ Partial Class FormSimulWizard
         'PictureBox1
         '
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.icons8_check_mark
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.checkmark_48px
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
