@@ -1851,11 +1851,6 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.UpdateInterface();
             };
 
-            DocumentContainer.SelectedIndexChanged += (sender2, e2) =>
-            {
-                DynManagerControl.CheckModelStatus();
-            };
-
             if (Application.Instance.Platform.IsWpf)
             {
                 DocumentContainer.SelectedIndexChanged += (sender2, e2) =>

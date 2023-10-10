@@ -36,13 +36,6 @@ Partial Class FormDynamicsManager
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.pbUnitOps = New System.Windows.Forms.PictureBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.pbValves = New System.Windows.Forms.PictureBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.pbStreamValves = New System.Windows.Forms.PictureBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.gridselectedset = New System.Windows.Forms.DataGridView()
@@ -171,12 +164,7 @@ Partial Class FormDynamicsManager
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.chkDynamics = New System.Windows.Forms.CheckBox()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        CType(Me.pbUnitOps, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbValves, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbStreamValves, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridselectedset, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -222,7 +210,6 @@ Partial Class FormDynamicsManager
         'TabControl1
         '
         resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage2)
@@ -232,54 +219,6 @@ Partial Class FormDynamicsManager
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        '
-        'TabPage1
-        '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.Label12)
-        Me.TabPage1.Controls.Add(Me.pbUnitOps)
-        Me.TabPage1.Controls.Add(Me.Label11)
-        Me.TabPage1.Controls.Add(Me.pbValves)
-        Me.TabPage1.Controls.Add(Me.Label10)
-        Me.TabPage1.Controls.Add(Me.pbStreamValves)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'Label12
-        '
-        resources.ApplyResources(Me.Label12, "Label12")
-        Me.Label12.Name = "Label12"
-        '
-        'pbUnitOps
-        '
-        resources.ApplyResources(Me.pbUnitOps, "pbUnitOps")
-        Me.pbUnitOps.Image = Global.DWSIM.My.Resources.Resources.icons8_ok
-        Me.pbUnitOps.Name = "pbUnitOps"
-        Me.pbUnitOps.TabStop = False
-        '
-        'Label11
-        '
-        resources.ApplyResources(Me.Label11, "Label11")
-        Me.Label11.Name = "Label11"
-        '
-        'pbValves
-        '
-        resources.ApplyResources(Me.pbValves, "pbValves")
-        Me.pbValves.Image = Global.DWSIM.My.Resources.Resources.icons8_ok
-        Me.pbValves.Name = "pbValves"
-        Me.pbValves.TabStop = False
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
-        'pbStreamValves
-        '
-        resources.ApplyResources(Me.pbStreamValves, "pbStreamValves")
-        Me.pbStreamValves.Image = Global.DWSIM.My.Resources.Resources.icons8_ok
-        Me.pbStreamValves.Name = "pbStreamValves"
-        Me.pbStreamValves.TabStop = False
         '
         'TabPage3
         '
@@ -1246,19 +1185,12 @@ Partial Class FormDynamicsManager
         Me.chkDynamics.Name = "chkDynamics"
         Me.chkDynamics.UseVisualStyleBackColor = False
         '
-        'Label13
-        '
-        resources.ApplyResources(Me.Label13, "Label13")
-        Me.Label13.ForeColor = System.Drawing.Color.DarkRed
-        Me.Label13.Name = "Label13"
-        '
         'FormDynamicsManager
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CloseButton = False
         Me.CloseButtonVisible = False
-        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.chkDynamics)
         Me.Controls.Add(Me.lblStatus)
@@ -1267,11 +1199,6 @@ Partial Class FormDynamicsManager
         Me.Name = "FormDynamicsManager"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
-        CType(Me.pbUnitOps, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbValves, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbStreamValves, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -1334,7 +1261,6 @@ Partial Class FormDynamicsManager
     End Sub
 
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents lblStatus As Label
@@ -1413,10 +1339,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents TabPage8 As TabPage
     Friend WithEvents dgvControllers As DataGridView
-    Friend WithEvents Label10 As Label
-    Friend WithEvents pbStreamValves As PictureBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents pbValves As PictureBox
     Friend WithEvents dgvIndicators As DataGridView
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents active As DataGridViewCheckBoxColumn
@@ -1451,8 +1373,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Label12 As Label
-    Friend WithEvents pbUnitOps As PictureBox
     Friend WithEvents TabControl2 As TabControl
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents TabPage9 As TabPage
@@ -1465,7 +1385,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewComboBoxColumn5 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn18 As DataGridViewTextBoxColumn
-    Friend WithEvents Label13 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents nupRTStep As NumericUpDown
     Friend WithEvents chkResetAll As CheckBox

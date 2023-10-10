@@ -1051,9 +1051,9 @@ Public Class FormDynamicsManager
 
     Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
 
-        If e.TabPage Is TabPage1 Then
-            CheckModelStatus()
-        End If
+        'If e.TabPage Is TabPage1 Then
+        '    CheckModelStatus()
+        'End If
 
     End Sub
 
@@ -1104,23 +1104,23 @@ Public Class FormDynamicsManager
             End If
         Next
 
-        If streams_ok Then
-            pbStreamValves.Image = My.Resources.icons8_ok
-        Else
-            pbStreamValves.Image = My.Resources.icons8_cancel
-        End If
+        'If streams_ok Then
+        '    pbStreamValves.Image = My.Resources.icons8_ok
+        'Else
+        '    pbStreamValves.Image = My.Resources.icons8_cancel
+        'End If
 
-        If uos_ok Then
-            pbUnitOps.Image = My.Resources.icons8_ok
-        Else
-            pbUnitOps.Image = My.Resources.icons8_cancel
-        End If
+        'If uos_ok Then
+        '    pbUnitOps.Image = My.Resources.icons8_ok
+        'Else
+        '    pbUnitOps.Image = My.Resources.icons8_cancel
+        'End If
 
-        If valves_ok Then
-            pbValves.Image = My.Resources.icons8_ok
-        Else
-            pbValves.Image = My.Resources.icons8_cancel
-        End If
+        'If valves_ok Then
+        '    pbValves.Image = My.Resources.icons8_ok
+        'Else
+        '    pbValves.Image = My.Resources.icons8_cancel
+        'End If
 
     End Sub
 
@@ -1130,7 +1130,7 @@ Public Class FormDynamicsManager
 
     End Sub
 
-    Private Sub TabPage1_MouseHover(sender As Object, e As EventArgs) Handles TabPage1.MouseHover
+    Private Sub TabPage1_MouseHover(sender As Object, e As EventArgs)
 
         CheckModelStatus()
 

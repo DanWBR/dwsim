@@ -55,17 +55,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var tl1w = new TableLayout { Padding = new Padding(5), Spacing = new Size(10, 10) };
 
-            var tr1w = new TableRow();
-
-            tr1w.Cells.Add(new Label {Text = "WARNING: Dynamic Modeling has not been validated yet and must be used only for educational purposes!", Font = SystemFonts.Bold(), TextColor = Colors.DarkRed });
-
-            tl1w.Rows.Add(tr1w);
-
-            Rows.Add(new TableRow(tl1w));
-
             var DocumentContainer = new DocumentControl() { AllowReordering = false, DisplayArrows = false };
 
-            DocumentContainer.Pages.Add(new DocumentPage { Text = "Model Status", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Event Sets", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Cause-and-Effect Matrices", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Integrators", Closable = false });
@@ -80,34 +71,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             tl2.Rows.Add(tr2);
 
             Rows.Add(new TableRow(tl2));
-
-            // model status
-
-            var l1 = new PixelLayout();
-
-            pb1 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png", this.GetType().Assembly), 40, 40, ImageInterpolation.High) };
-            pb2 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png", this.GetType().Assembly), 40, 40, ImageInterpolation.High) };
-            pb3 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png", this.GetType().Assembly), 40, 40, ImageInterpolation.High) };
-
-            var label1 = new Label { Height = 40, Text = "All Endpoint Material Streams are connected to Control Valves", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
-            var label2 = new Label { Height = 40, Text = "All Control Valves are configured with Kv Calculation Modes", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
-            var label3 = new Label { Height = 40, Text = "All Unit Operations in Flowsheet support Dynamic Mode", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
-
-            l1.Add(pb1, 20, 20);
-            l1.Add(pb2, 20, 70);
-            l1.Add(pb3, 20, 120);
-
-            l1.Add(label1, 70, 20);
-            l1.Add(label2, 70, 70);
-            l1.Add(label3, 70, 120);
-
-            DocumentContainer.Pages[0].Content = l1;
-
-            DocumentContainer.Pages[0].MouseEnter += (s, e) =>
-            {
-                CheckModelStatus();
-            };
-
+                 
             // event sets
 
             var lce = new TableLayout();
@@ -263,7 +227,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             splites.Panel2 = splites2;
             splites.SplitterWidth = 2;
 
-            DocumentContainer.Pages[1].Content = splites;
+            DocumentContainer.Pages[0].Content = splites;
 
             // cause and effect matrices
 
@@ -420,7 +384,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             splitesa.Panel2 = splites2a;
             splitesa.SplitterWidth = 2;
 
-            DocumentContainer.Pages[2].Content = splitesa;
+            DocumentContainer.Pages[1].Content = splitesa;
 
             // integrators
 
@@ -598,7 +562,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             splitesb.Panel2 = rcci;
             splitesb.SplitterWidth = 2;
 
-            DocumentContainer.Pages[3].Content = splitesb;
+            DocumentContainer.Pages[2].Content = splitesb;
 
             // schedules
 
@@ -684,7 +648,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             splites2s.Panel2 = rcs;
             splites2s.SplitterWidth = 2;
 
-            DocumentContainer.Pages[4].Content = splites2s;
+            DocumentContainer.Pages[3].Content = splites2s;
 
             // populate lists
 
@@ -1231,80 +1195,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             ceiEditor.Content = layout;
 
         }
-
-        public void CheckModelStatus()
-        {
-            bool streams_ok, uos_ok, valves_ok;
-
-            streams_ok = true;
-            uos_ok = true;
-            valves_ok = true;
-
-            // material streams
-
-            foreach (var stream in Flowsheet.SimulationObjects.Values.Where(x => x is MaterialStream))
-            {
-                if (stream.GraphicObject.InputConnectors[0].IsAttached & !stream.GraphicObject.OutputConnectors[0].IsAttached)
-                {
-                    if (stream.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.ObjectType != ObjectType.Valve)
-                    {
-                        streams_ok = false;
-                        break;
-                    }
-                }
-                if (stream.GraphicObject.OutputConnectors[0].IsAttached & !stream.GraphicObject.InputConnectors[0].IsAttached)
-                {
-                    if (stream.GraphicObject.OutputConnectors[0].AttachedConnector.AttachedTo.ObjectType != ObjectType.Valve)
-                    {
-                        streams_ok = false;
-                        break;
-                    }
-                }
-            }
-
-            // unit operations
-
-            foreach (var obj in Flowsheet.SimulationObjects.Values)
-            {
-                if (!obj.SupportsDynamicMode)
-                {
-                    uos_ok = false;
-                    break;
-                }
-            }
-
-            // valves
-
-            foreach (var v in Flowsheet.SimulationObjects.Values.Where(x => x is Valve))
-            {
-                if (((Valve)v).CalcMode == Valve.CalculationMode.DeltaP)
-                {
-                    valves_ok = false;
-                    break;
-                }
-                if (((Valve)v).CalcMode == Valve.CalculationMode.OutletPressure)
-                {
-                    valves_ok = false;
-                    break;
-                }
-            }
-
-            if (streams_ok)
-                pb1.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High);
-            else
-                pb1.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cancel.png"), 40, 40, ImageInterpolation.High);
-
-            if (uos_ok)
-                pb3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High);
-            else
-                pb3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cancel.png"), 40, 40, ImageInterpolation.High);
-
-            if (valves_ok)
-                pb2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High);
-            else
-                pb2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cancel.png"), 40, 40, ImageInterpolation.High);
-        }
-
 
     }
 }
