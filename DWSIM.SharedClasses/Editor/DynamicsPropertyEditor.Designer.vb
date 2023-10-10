@@ -22,17 +22,17 @@ Partial Class DynamicsPropertyEditor
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DynamicsPropertyEditor))
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.gbProps = New System.Windows.Forms.GroupBox()
         Me.PropertiesLayout = New System.Windows.Forms.TableLayoutPanel()
-        Me.GroupBox2.SuspendLayout()
+        Me.gbProps.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox2
+        'gbProps
         '
-        Me.GroupBox2.Controls.Add(Me.PropertiesLayout)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        Me.gbProps.Controls.Add(Me.PropertiesLayout)
+        resources.ApplyResources(Me.gbProps, "gbProps")
+        Me.gbProps.Name = "gbProps"
+        Me.gbProps.TabStop = False
         '
         'PropertiesLayout
         '
@@ -43,7 +43,7 @@ Partial Class DynamicsPropertyEditor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.gbProps)
         Me.DockAreas = CType(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) _
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) _
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) _
@@ -53,10 +53,10 @@ Partial Class DynamicsPropertyEditor
         Me.Name = "DynamicsPropertyEditor"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.GroupBox2.ResumeLayout(False)
+        Me.gbProps.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents GroupBox2 As GroupBox
     Public WithEvents PropertiesLayout As TableLayoutPanel
+    Public WithEvents gbProps As GroupBox
 End Class

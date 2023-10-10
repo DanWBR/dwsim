@@ -252,6 +252,9 @@ Namespace UnitOperations
                 scope.SetVariable("Flowsheet", FlowSheet)
                 scope.SetVariable("Me", Me)
                 scope.SetVariable("This", Me)
+                scope.SetVariable("flowsheet", FlowSheet)
+                scope.SetVariable("me", Me)
+                scope.SetVariable("this", Me)
 
                 For Each variable In InputStringVariables
                     scope.SetVariable(variable.Key, variable.Value)
@@ -317,6 +320,11 @@ Namespace UnitOperations
                         locals.SetItem("Flowsheet", FlowSheet.ToPython)
                         locals.SetItem("Me", Me.ToPython)
                         locals.SetItem("This", Me.ToPython)
+                        locals.SetItem("flowsheet", FlowSheet.ToPython)
+                        locals.SetItem("me", Me.ToPython)
+                        locals.SetItem("this", Me.ToPython)
+
+                        Dim arg1 As Python.Runtime.PyObject = Nothing
 
                         For Each variable In InputStringVariables
                             locals.SetItem(variable.Key, variable.Value.ToPython)
