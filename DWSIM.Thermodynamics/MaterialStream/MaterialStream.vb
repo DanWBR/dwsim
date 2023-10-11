@@ -8849,9 +8849,9 @@ Namespace Streams
 
             Dim text As String
             If GraphicObject IsNot Nothing Then
-                text = GraphicObject.Tag + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s, EF = {5} kW", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow, TotalEnergyFlow)
+                text = GraphicObject.Tag + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s, VF = {5}, EF = {6} kW, ", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow, Phases(2).Properties.molarfraction, TotalEnergyFlow)
             Else
-                text = String.Format("Material Stream: T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s, EF = {5} kW", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow, TotalEnergyFlow)
+                text = String.Format("Material Stream: T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s, VF = {5}, EF = {6} kW, ", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow, Phases(2).Properties.molarfraction, TotalEnergyFlow)
             End If
             If Phases.Count > 0 Then
                 text += vbCrLf + "Compound Mole Fractions:" + vbCrLf
