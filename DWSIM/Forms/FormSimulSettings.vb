@@ -392,6 +392,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
+            .Add(New String() {DWSIM.App.GetLocalString("Heat/Energy"), su.heat, Nothing, Nothing})
         End With
 
         If ComboBox2.SelectedIndex <= 3 Then
@@ -718,6 +719,13 @@ Public Class FormSimulSettings
             .Style.Tag = 40
         End With
 
+        With DirectCast(Me.DataGridView1.Rows.Item(20).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.heat).ToArray)
+            .Value = su.heat
+            .Style.Tag = 41
+        End With
+
         CurrentFlowsheet.UpdateOpenEditForms()
 
     End Sub
@@ -893,6 +901,10 @@ Public Class FormSimulSettings
                     member = "distance"
                     oldvalue = su.distance
                     su.distance = cell.Value
+                Case 41
+                    member = "heat"
+                    oldvalue = su.heat
+                    su.heat = cell.Value
             End Select
 
             Me.CurrentFlowsheet.FormSurface.UpdateSelectedObject()

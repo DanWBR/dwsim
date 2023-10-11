@@ -160,5 +160,9 @@ Imports DWSIM.Interfaces.Enums
     Property surfaceTension As String
 
     Property diffusivity As String
+
+    Property heat As String
+
     Function GetUnitType(unit As String) As UnitOfMeasure
+
 End Interface

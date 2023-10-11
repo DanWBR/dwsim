@@ -91,6 +91,8 @@ Namespace SystemsOfUnits
 
         Public Property heatflow As String = "" Implements Interfaces.IUnitsOfMeasure.heatflow
 
+        Public Property heat As String = "" Implements IUnitsOfMeasure.heat
+
         Public Property idealGasHeatCapacity As String = "" Implements Interfaces.IUnitsOfMeasure.idealGasHeatCapacity
 
         Public Property jouleThomsonCoefficient As String = "" Implements Interfaces.IUnitsOfMeasure.jouleThomsonCoefficient
@@ -222,6 +224,8 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.heatflow
                     units.AddRange(New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W",
                                    "BTU/d", "MMBTU/d", "MMBTU/h", "kcal/s", "kcal/h", "kcal/d"})
+                Case Enums.UnitOfMeasure.heat
+                    units.AddRange(New String() {"kJ", "J", "kcal", "BTU", "MMBTU", "cal"})
                 Case Enums.UnitOfMeasure.time
                     units.AddRange(New String() {"s", "min.", "h"})
                 Case Enums.UnitOfMeasure.volume
@@ -296,6 +300,8 @@ Namespace SystemsOfUnits
                     "MMSCFD", "SCFD", "SCFM",
                     "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ SC"
                     Return Enums.UnitOfMeasure.volumetricFlow
+                Case "kJ", "J", "kcal", "BTU", "MMBTU", "cal"
+                    Return Enums.UnitOfMeasure.heat
                 Case "kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"
                     Return Enums.UnitOfMeasure.enthalpy
                 Case "kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"
@@ -550,6 +556,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "Pa"
                 .deltaT = "K."
+                .heat = "kJ"
 
             End With
 
@@ -640,6 +647,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "bar"
                 .deltaT = "C."
+                .heat = "kJ"
 
             End With
 
@@ -727,6 +735,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
+                .heat = "kJ"
 
             End With
 
@@ -814,6 +823,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
+                .heat = "kJ"
 
             End With
 
@@ -901,6 +911,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
+                .heat = "kJ"
 
             End With
 
@@ -988,6 +999,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
+                .heat = "kJ"
 
             End With
 
@@ -1075,6 +1087,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaP = "bar"
                 .deltaT = "C."
+                .heat = "kJ"
 
             End With
 
@@ -1164,6 +1177,7 @@ Namespace SystemsOfUnits
                 .head = "ft"
                 .deltaP = "lbf/ft2"
                 .deltaT = "F."
+                .heat = "BTU"
 
             End With
 
@@ -1251,6 +1265,7 @@ Namespace SystemsOfUnits
                 .head = "m"
                 .deltaT = "C."
                 .deltaP = "atm"
+                .heat = "kcal"
 
             End With
 
@@ -1464,6 +1479,21 @@ Namespace SystemsOfUnits
                     Return value / 1000
                 Case "mj/h"
                     Return value * 1000.0 / 3600.0
+
+
+                Case "btu"
+                    Return value / 0.947817
+                Case "mmbtu"
+                    Return value / 0.947817 * 1000.0 * 1000.0
+                Case "cal"
+                    Return value / 238.846
+                Case "kcal"
+                    Return value / 238.846 * 1000.0
+                Case "kj"
+                    Return value
+                Case "j"
+                    Return value / 1000
+
 
                 Case "btu/lb"
                     Return value / 0.429923
@@ -1984,6 +2014,22 @@ Namespace SystemsOfUnits
                     Return value * 1000
                 Case "mj/h"
                     Return value / 1000.0 * 3600.0
+
+
+                Case "btu"
+                    Return value * 0.947817
+                Case "mmbtu"
+                    Return value * 0.947817 / 1000.0 / 1000.0
+                Case "cal"
+                    Return value * 238.846
+                Case "kcal"
+                    Return value * 238.846 / 1000.0
+                Case "kj"
+                    Return value
+                Case "j"
+                    Return value * 1000
+
+
 
                 Case "btu/lb"
                     Return value * 0.429923

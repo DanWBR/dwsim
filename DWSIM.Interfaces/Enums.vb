@@ -207,6 +207,7 @@ Namespace Enums
         diffusivity = 65
         none = 66
         conductance = 67
+        heat = 68
 
     End Enum
 

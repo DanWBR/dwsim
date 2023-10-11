@@ -279,6 +279,12 @@ Public Class FormUnitGen
             .Add(New Object() {DWSIM.App.GetLocalString("DistComp")})
             .Item(.Count - 1).Cells(1) = cb
 
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.heat).ToArray)
+            cb.Value = currentset.heatflow
+            .Add(New Object() {"Heat/Energy"})
+            .Item(.Count - 1).Cells(1) = cb
+
         End With
 
         AddHandler DataGridView1.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
@@ -387,6 +393,7 @@ Public Class FormUnitGen
                 .diffusivity = Me.DataGridView1.Rows(38).Cells(1).Value
                 .conductance = Me.DataGridView1.Rows(39).Cells(1).Value
                 .distance = Me.DataGridView1.Rows(40).Cells(1).Value
+                .heat = Me.DataGridView1.Rows(41).Cells(1).Value
             End With
 
             If Not Wizard Then
