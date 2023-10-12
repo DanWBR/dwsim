@@ -15,6 +15,7 @@
 🌟 Dave Carpency
 🌟 Domenico Marchese
 🌟 Edson Zaparoli
+🌟 Fernando Lino
 🌟 George Brindle
 🌟 Gerry Agnew
 🌟 Henk Fikkert
@@ -45,7 +46,6 @@ Christian Jordan
 Christian Pedersen
 CollectiveObjective
 Daniel Bajolet
-Daniel Athayde
 David Miller
 David Whitlock
 Denislav Zdravkov
@@ -53,7 +53,6 @@ Dorivaldo Junior
 Doug Palfreyman
 Eugenio León
 Fernando Almeida
-Fernando Lino
 Frans Le Roux
 Gokhan Candan 
 Guenther Holzer
@@ -62,7 +61,6 @@ Hurudza
 John Kossik
 Joseph Attia
 Kenneth Troldal
-Kiran Pashikanti
 Les Waymont
 Lewis Estall
 Luca Finardi
