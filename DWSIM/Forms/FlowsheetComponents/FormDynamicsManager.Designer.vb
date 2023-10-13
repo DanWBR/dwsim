@@ -89,12 +89,19 @@ Partial Class FormDynamicsManager
         Me.panelSelIntegrator = New System.Windows.Forms.Panel()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.nupDays = New System.Windows.Forms.NumericUpDown()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.nupHours = New System.Windows.Forms.NumericUpDown()
         Me.nupIntegrationStep = New System.Windows.Forms.NumericUpDown()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.nupMinutes = New System.Windows.Forms.NumericUpDown()
         Me.nupRTStep = New System.Windows.Forms.NumericUpDown()
+        Me.nupMinutesl = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.dtpIntegratorDuration = New System.Windows.Forms.DateTimePicker()
+        Me.nupSeconds = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.nupSecondsl = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.nupCalcControlFreq = New System.Windows.Forms.NumericUpDown()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -184,8 +191,12 @@ Partial Class FormDynamicsManager
         Me.panelSelIntegrator.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.TabPage5.SuspendLayout()
+        CType(Me.nupDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nupHours, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupIntegrationStep, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nupMinutes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupRTStep, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nupSeconds, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupCalcControlFreq, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupCalcBalFreq, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupCalcEqFreq, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -608,12 +619,19 @@ Partial Class FormDynamicsManager
         'TabPage5
         '
         resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Controls.Add(Me.nupDays)
+        Me.TabPage5.Controls.Add(Me.Label10)
+        Me.TabPage5.Controls.Add(Me.nupHours)
         Me.TabPage5.Controls.Add(Me.nupIntegrationStep)
+        Me.TabPage5.Controls.Add(Me.Label11)
         Me.TabPage5.Controls.Add(Me.Label14)
+        Me.TabPage5.Controls.Add(Me.nupMinutes)
         Me.TabPage5.Controls.Add(Me.nupRTStep)
+        Me.TabPage5.Controls.Add(Me.nupMinutesl)
         Me.TabPage5.Controls.Add(Me.Label7)
-        Me.TabPage5.Controls.Add(Me.dtpIntegratorDuration)
+        Me.TabPage5.Controls.Add(Me.nupSeconds)
         Me.TabPage5.Controls.Add(Me.Label1)
+        Me.TabPage5.Controls.Add(Me.nupSecondsl)
         Me.TabPage5.Controls.Add(Me.Label2)
         Me.TabPage5.Controls.Add(Me.nupCalcControlFreq)
         Me.TabPage5.Controls.Add(Me.Label4)
@@ -625,6 +643,22 @@ Partial Class FormDynamicsManager
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'nupDays
+        '
+        resources.ApplyResources(Me.nupDays, "nupDays")
+        Me.nupDays.Name = "nupDays"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        '
+        'nupHours
+        '
+        resources.ApplyResources(Me.nupHours, "nupHours")
+        Me.nupHours.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nupHours.Name = "nupHours"
+        '
         'nupIntegrationStep
         '
         resources.ApplyResources(Me.nupIntegrationStep, "nupIntegrationStep")
@@ -634,10 +668,21 @@ Partial Class FormDynamicsManager
         Me.nupIntegrationStep.Name = "nupIntegrationStep"
         Me.nupIntegrationStep.Value = New Decimal(New Integer() {1000, 0, 0, 0})
         '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        '
+        'nupMinutes
+        '
+        resources.ApplyResources(Me.nupMinutes, "nupMinutes")
+        Me.nupMinutes.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.nupMinutes.Name = "nupMinutes"
         '
         'nupRTStep
         '
@@ -647,23 +692,31 @@ Partial Class FormDynamicsManager
         Me.nupRTStep.Name = "nupRTStep"
         Me.nupRTStep.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'nupMinutesl
+        '
+        resources.ApplyResources(Me.nupMinutesl, "nupMinutesl")
+        Me.nupMinutesl.Name = "nupMinutesl"
+        '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
         '
-        'dtpIntegratorDuration
+        'nupSeconds
         '
-        resources.ApplyResources(Me.dtpIntegratorDuration, "dtpIntegratorDuration")
-        Me.dtpIntegratorDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtpIntegratorDuration.Name = "dtpIntegratorDuration"
-        Me.dtpIntegratorDuration.ShowUpDown = True
-        Me.dtpIntegratorDuration.Value = New Date(1753, 1, 1, 0, 0, 0, 0)
+        resources.ApplyResources(Me.nupSeconds, "nupSeconds")
+        Me.nupSeconds.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.nupSeconds.Name = "nupSeconds"
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        '
+        'nupSecondsl
+        '
+        resources.ApplyResources(Me.nupSecondsl, "nupSecondsl")
+        Me.nupSecondsl.Name = "nupSecondsl"
         '
         'Label2
         '
@@ -1227,8 +1280,12 @@ Partial Class FormDynamicsManager
         Me.TabControl2.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
+        CType(Me.nupDays, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nupHours, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupIntegrationStep, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nupMinutes, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupRTStep, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nupSeconds, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupCalcControlFreq, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupCalcBalFreq, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupCalcEqFreq, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1323,7 +1380,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents dtpIntegratorDuration As DateTimePicker
     Friend WithEvents nupCalcControlFreq As NumericUpDown
     Friend WithEvents nupCalcBalFreq As NumericUpDown
     Friend WithEvents nupCalcEqFreq As NumericUpDown
@@ -1389,4 +1445,12 @@ Partial Class FormDynamicsManager
     Friend WithEvents nupRTStep As NumericUpDown
     Friend WithEvents chkResetAll As CheckBox
     Friend WithEvents nupIntegrationStep As NumericUpDown
+    Friend WithEvents nupDays As NumericUpDown
+    Friend WithEvents Label10 As Label
+    Friend WithEvents nupHours As NumericUpDown
+    Friend WithEvents Label11 As Label
+    Friend WithEvents nupMinutes As NumericUpDown
+    Friend WithEvents nupMinutesl As Label
+    Friend WithEvents nupSeconds As NumericUpDown
+    Friend WithEvents nupSecondsl As Label
 End Class

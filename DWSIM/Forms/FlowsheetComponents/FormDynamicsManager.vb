@@ -591,7 +591,13 @@ Public Class FormDynamicsManager
 
         nupIntegrationStep.Value = i1.IntegrationStep.TotalMilliseconds
 
-        dtpIntegratorDuration.Value = dtpIntegratorDuration.MinDate.Add(i1.Duration)
+        nupDays.Value = i1.Duration.Days
+
+        nupHours.Value = i1.Duration.Hours
+
+        nupMinutes.Value = i1.Duration.Minutes
+
+        nupSeconds.Value = i1.Duration.Seconds
 
         nupRTStep.Value = i1.RealTimeStepMs
 
@@ -632,14 +638,7 @@ Public Class FormDynamicsManager
 
     End Sub
 
-    Private Sub dtpIntegratorDuration_ValueChanged(sender As Object, e As EventArgs) Handles dtpIntegratorDuration.ValueChanged
-        If Manager Is Nothing Then Exit Sub
-
-        Try
-            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
-            i1.Duration = dtpIntegratorDuration.Value - dtpIntegratorDuration.MinDate
-        Catch ex As Exception
-        End Try
+    Private Sub dtpIntegratorDuration_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -1203,4 +1202,41 @@ Public Class FormDynamicsManager
     Private Sub FormDynamicsManager_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
+
+    Private Sub gridsets_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles gridsets.DataError
+
+    End Sub
+
+    Private Sub gridselectedset_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles gridselectedset.DataError
+
+    End Sub
+
+    Private Sub gridmatrices_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles gridmatrices.DataError
+
+    End Sub
+
+    Private Sub grdiselmatrix_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles grdiselmatrix.DataError
+
+    End Sub
+
+    Private Sub gridintegrators_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles gridintegrators.DataError
+
+    End Sub
+
+    Private Sub gridMonitoredVariables_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles gridMonitoredVariables.DataError
+
+    End Sub
+
+    Private Sub nupDays_ValueChanged(sender As Object, e As EventArgs) Handles nupHours.ValueChanged, nupDays.ValueChanged, nupSeconds.ValueChanged, nupMinutes.ValueChanged
+
+        If Manager Is Nothing Then Exit Sub
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.Duration = New TimeSpan(nupDays.Value, nupHours.Value, nupMinutes.Value, nupSeconds.Value)
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
 End Class

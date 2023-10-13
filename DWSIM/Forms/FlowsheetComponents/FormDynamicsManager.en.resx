@@ -219,7 +219,7 @@
     <value>Event Sets</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 457</value>
+    <value>924, 464</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Event Sets</value>
@@ -312,7 +312,7 @@
     <value>Matrix Sets</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 457</value>
+    <value>924, 464</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Cause-and-Effect Matrices</value>
@@ -320,8 +320,20 @@
   <data name="panelSelIntegrator.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="nupDays.Location" type="System.Drawing.Point, System.Drawing">
+    <value>209, 97</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 99</value>
+  </data>
+  <data name="nupHours.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 97</value>
+  </data>
   <data name="nupIntegrationStep.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 60</value>
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 99</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 138</value>
@@ -332,8 +344,14 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>Real-Time Integration Step (ms)</value>
   </data>
+  <data name="nupMinutes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>391, 97</value>
+  </data>
   <data name="nupRTStep.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 136</value>
+  </data>
+  <data name="nupMinutesl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>445, 99</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 25</value>
@@ -344,8 +362,8 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Properties</value>
   </data>
-  <data name="dtpIntegratorDuration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 97</value>
+  <data name="nupSeconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>494, 97</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 62</value>
@@ -355,6 +373,9 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Integration Step (ms)</value>
+  </data>
+  <data name="nupSecondsl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>548, 99</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 99</value>
