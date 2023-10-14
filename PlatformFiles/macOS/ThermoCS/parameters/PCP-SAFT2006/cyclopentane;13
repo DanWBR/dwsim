@@ -1,0 +1,13 @@
+name:	cyclopentane
+id:	13
+text:	CoM; exp. Daubert & Danner; 3 parameters fitted
+pc:	 5.02850131e+00
+Tc:	 5.21185156e+02
+vc:	 2.68060457e+02
+par[0]:	 7.01340000e+01
+par[1]:	 2.71284000e+02
+par[2]:	 1.66304000e+01
+par[3]:	 2.28173000e+00
+par[4]:	 1.98740000e+00
+par[5]:	 1.63100000e-03
+par[6]:	 8.73370000e+00

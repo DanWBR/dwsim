@@ -1,0 +1,13 @@
+name:	methylcyclohexane
+id:	13
+text:	CoM, chair; exp. Daubert & Danner; 3 parameters fitted
+pc:	 3.89742634e+00
+Tc:	 5.80620354e+02
+vc:	 3.83826502e+02
+par[0]:	 9.81880000e+01
+par[1]:	 2.78600000e+02
+par[2]:	 1.98854000e+01
+par[3]:	 2.72142000e+00
+par[4]:	 3.69260000e-01
+par[5]:	 6.61730000e-02
+par[6]:	 1.21894000e+01

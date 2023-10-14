@@ -1,0 +1,68 @@
+STRUCTURE OF PARAMETER FILES
+
+The parameters are stored in directories named after the equations of
+state and the mixing theories. The arrangement of the directories
+is the same as in the "models" tree.
+
+In these directories, each substance and each mixture is represented
+by a single file.
+
+
+PURE SUBSTANCES
+
+file name: COMPOUND;ID
+
+content:   lines of the form "KEYWORD: VALUE" as follows:
+    name:	name of the compound, same as in file name
+		Names must not contain white space!
+    id:		identifier, same as in file name
+		There may be more than one parameter set for a compound; the
+		ID number helps to distinguish between them.
+    pc:		critical pressure in MPa
+    Tc:		critical temperature in K
+    vc:		critical molar volume in cm3/mol
+    par[0]:	molar mass in g/mol
+    par[1]:	attraction parameter, characteristic temperature in K
+    par[2]:	covolume, molecular core size in cm3/mol
+     ...
+    par[i]:	other parameters required by the equation of state
+			
+
+BINARY MIXTURES
+
+file name: COMPOUND1+COMPOUND2;ID
+
+content:   lines of the form "KEYWORD: VALUE" as follows:
+    name1:	name of the 1st compound, same as in file name
+		- preferably the compound with the lower critical temperature
+    id1:	ID number of its parameter set
+    name2:	name of the 2nd compound, same as in file name
+		- preferably the compound with the higher critical temperature
+    id2:	ID number of its parameter set
+    id:		identifier, same as in file name
+		There may be more than one parameter set for a mixture; the
+		ID number helps to distinguish between them.
+     ...
+    par[i]:	parameters required by the mixing theory
+
+
+MULTI-COMPONENT MIXTURES
+
+For an n-component mixture it is necessary to know k = (n-1)n/2 pair
+interaction parameter sets. Such sets are registered in link files
+named "multiNN".
+
+file name: multiNN	with NN = n, number of components, e.g., "multi03"
+			for 3-component mixtures
+
+content:   blocks of k+1 lines, each block consisting of a mixture name
+	   (n substance names separated by "+", followed by ";ID")
+	   and k names of binary parameter files, e.g.:
+
+-------------------------------
+hydrogen+argon+carbon_dioxide;1
+  hydrogen+argon;1
+  hydrogen+carbon_dioxide;1
+  argon+carbon_dioxide;1
+-------------------------------
+

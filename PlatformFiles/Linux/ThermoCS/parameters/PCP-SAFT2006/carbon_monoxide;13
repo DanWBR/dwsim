@@ -1,0 +1,13 @@
+name:	carbon_monoxide
+id:	13
+text:	CoM, VLE Daubert & Danner; 3 parameters fitted
+pc:	 3.44652210e+00
+Tc:	 1.33569383e+02
+vc:	 1.02261071e+02
+par[0]:	 2.80100000e+01
+par[1]:	 9.45493000e+01
+par[2]:	 1.41265000e+01
+par[3]:	 1.08015000e+00
+par[4]:	 2.11800000e+00
+par[5]:	 3.00100000e-01
+par[6]:	 1.92340000e+00

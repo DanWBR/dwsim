@@ -1,0 +1,4 @@
+Here we store "influence parameters" of the gradient theory, which are
+needed to compute surface tensions from equations of state.
+
+The units of the influence parameters are J m^5 mol^-2.

@@ -1,0 +1,13 @@
+name:	cyclohexane
+id:	13
+text:	CoM,(gemittelt); exp Daubert et al.1997; 3 parameters fitted
+pc:	 4.57165110e+00
+Tc:	 5.62648967e+02
+vc:	 3.17690488e+02
+par[0]:	 8.41610000e+01
+par[1]:	 2.81383000e+02
+par[2]:	 1.80673000e+01
+par[3]:	 2.48560000e+00
+par[4]:	 7.28560000e-01
+par[5]:	 0.00000000e+00
+par[6]:	 1.04848000e+01

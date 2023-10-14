@@ -1,0 +1,19 @@
+hydrogen+argon+carbon_dioxide;1 
+  hydrogen+argon;1 
+  hydrogen+carbon_dioxide;1 
+  argon+carbon_dioxide;1 
+
+hydrogen+nitrogen+oxygen;1
+  hydrogen+nitrogen;1
+  hydrogen+oxygen;1
+  nitrogen+oxygen;1
+
+neon+argon+krypton;1
+  neon+argon;1
+  neon+krypton;1
+  argon+krypton;1
+
+carbon_dioxide+ethane+propane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+propane;1
+  ethane+propane;1

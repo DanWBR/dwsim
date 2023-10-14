@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# simple wrapper for running ThermoC programs from PHP scripts
+# usage: php_wrapper PRG EOS INFILE
+#    or: php_wrapper PRG EOS MIXTH INFILE
+
+THHOME=/Users/Daniel/Downloads/thermoc_mac/thermoc
+PATH=$THHOME/bin:$PATH
+LC_NUMERIC=C
+LD_LIBRARY_PATH=/Users/Daniel/Downloads/thermoc_mac/math/C++/lib:$THHOME/lib:$LD_LIBRARY_PATH
+export LC_NUMERIC LD_LIBRARY_PATH PATH THHOME
+
+errfile=$THHOME/html/tmp/th_err$$
+
+ulimit -t 120				# to get rid of zombie processes
+
+echo ""
+if [ $# -eq 3 ]
+then
+  infile=$3
+  $1 $2 <$infile 2>$errfile | tee ${infile}_x
+else
+  infile=$4
+  $1 $2 $3 <$infile 2>$errfile | tee ${infile}_x
+fi
+err=$?
+
+if [ $err -ne 0 ]
+then
+  echo "Program "$1" terminated with error code "$err"."
+  echo "Please inspect the stderr output below; it might give you"
+  echo "an inspiration."
+  echo ""
+  cat $errfile
+fi
+
+rm -f $errfile
+# Uncomment the following line to remove temporary input files.
+# NOTE: Then users can no longer download input files. However, if
+# you leave the input files intact, you should occasionally purge
+# your thermoc/tmp directory.
+# rm -f $infile
+
+exit $err

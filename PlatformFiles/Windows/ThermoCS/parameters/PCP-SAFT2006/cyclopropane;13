@@ -1,0 +1,13 @@
+name:	cyclopropane
+id:	13
+text:	CoM; exp. Daubert et al 1997; 3 parameters fitted
+pc:	 5.95713332e+00
+Tc:	 4.03986048e+02
+vc:	 1.76678854e+02
+par[0]:	 4.20810000e+01
+par[1]:	 2.37966000e+02
+par[2]:	 1.41790000e+01
+par[3]:	 1.76580000e+00
+par[4]:	 2.36930000e+00
+par[5]:	 5.00000000e-04
+par[6]:	 5.37500000e+00

@@ -1,0 +1,13 @@
+name:	cis-2-butene
+id:	10
+text:	CoM; exp. data Daubert and Danner all parameters predicted
+pc:	 4.54798493e+00
+Tc:	 4.38568897e+02
+vc:	 2.49276978e+02
+par[0]:	 5.61070000e+01
+par[1]:	 2.25999981e+02
+par[2]:	 1.51823050e+01
+par[3]:	 2.32552500e+00
+par[4]:	 2.57910000e+00
+par[5]:	 2.50600000e-01
+par[6]:	 7.67070000e+00

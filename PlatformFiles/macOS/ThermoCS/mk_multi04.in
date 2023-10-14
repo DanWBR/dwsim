@@ -1,0 +1,116 @@
+#!/bin/sh
+
+# create multi04 lists (lists of quaternary mixtures than can be
+# formed from the available binary parameter sets)
+#
+# usage: mk_multi04 EOS MIX
+#	 EOS: acronym of equation of state
+#	 MIX: acronym of mixing theory
+
+if [ $# -ne 2 ]
+then
+  echo "usage: mk_multi04 EOS MIX"
+  exit 1
+fi
+
+THHOME=@home@				# customize this!
+eos=$1
+mix=$2
+tmpA=th_substA$$
+tmpB=th_substB$$
+
+cd $THHOME/parameters/$eos		# make sorted list of substances
+files=`ls *\;*`
+for file in $files
+do
+  awk '
+/name:/	{ printf "%s", $2; }
+/Tc:/	{ printf " %7.2f\n", $2; }
+' <$file >>$tmpA
+done
+sort -n -k 2 $tmpA >$tmpB
+awk '
+	{ print $1; }
+' <$tmpB | uniq >$tmpA
+rm $tmpB
+
+n=`cat $tmpA | wc -l`			# scan all quaternary combinations
+cd $mix
+i1=1
+while [ $i1 -le $n ]
+do
+  s1=`sed -n "$i1,$i1 P" ../$tmpA`
+  i1=`expr $i1 + 1`
+  i2=$i1
+  while [ $i2 -le $n ]
+  do
+    s2=`sed -n "$i2,$i2 P" ../$tmpA`
+    i2=`expr $i2 + 1`
+    count12=`ls $s1+$s2\;* 2>/dev/null | wc -w`
+    if [ $count12 -eq 0 ]
+    then
+      continue
+    fi
+    i3=$i2
+    while [ $i3 -le $n ]
+    do
+      s3=`sed -n "$i3,$i3 P" ../$tmpA`
+      i3=`expr $i3 + 1`
+      count13=`ls $s1+$s3\;* 2>/dev/null | wc -w`
+      count23=`ls $s2+$s3\;* 2>/dev/null | wc -w`
+      if [ $count13 -eq 0 -o $count23 -eq 0 ]
+      then
+	continue
+      fi
+      i4=$i3
+      while [ $i4 -le $n ]
+      do
+	s4=`sed -n "$i4,$i4 P" ../$tmpA`
+	i4=`expr $i4 + 1`
+	count14=`ls $s1+$s4\;* 2>/dev/null | wc -w`
+	count24=`ls $s2+$s4\;* 2>/dev/null | wc -w`
+	count34=`ls $s3+$s4\;* 2>/dev/null | wc -w`
+	if [ $count14 -eq 0 -o $count24 -eq 0 -o $count34 -eq 0 ]
+	then
+	  continue
+	fi
+	list12=`ls $s1+$s2\;*`
+	list13=`ls $s1+$s3\;*`
+	list14=`ls $s1+$s4\;*`
+	list23=`ls $s2+$s3\;*`
+	list24=`ls $s2+$s4\;*`
+	list34=`ls $s3+$s4\;*`
+	i=1
+	for file12 in $list12
+	do
+	  for file13 in $list13
+	  do
+	    for file14 in $list14
+	    do
+	      for file23 in $list23
+	      do
+		for file24 in $list24
+		do
+		  for file34 in $list34
+		  do
+		    echo "$s1+$s2+$s3+$s4;$i"
+		    echo "  $file12"
+		    echo "  $file13"
+		    echo "  $file14"
+		    echo "  $file23"
+		    echo "  $file24"
+		    echo "  $file34"
+		    echo ""
+		    i=`expr $i + 1`
+		  done
+		done
+	      done
+	    done
+	  done
+	done
+      done
+    done
+  done
+done
+rm ../$tmpA
+exit 0

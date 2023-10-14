@@ -1,0 +1,307 @@
+#!/bin/ksh
+
+# wrapper script for thermoC
+# - invokes a main program
+# - creates and maintains a log file
+
+list_programs()
+{
+  $xecho "PROPERTY CALCULATION:"
+  cat $THHOME/main/index
+  $xecho "\nELSE:"
+  $xecho "comment	write comment to logfile\n"
+  return 0
+}
+
+list_model()
+{
+  # arguments:	$1 = file containing a list of choices
+
+  tab=`$xecho "\t"`
+  mdllist=`sed "s/${tab}.*$//" <$1`" -->explain!"
+  select mdl in $mdllist
+  do
+    if [ "X$mdl" != "X" ]
+    then
+      if [ "$mdl" = "-->explain!" ]
+      then
+	cat $1
+      else
+	break
+      fi
+    fi
+  done
+  return 0
+}
+
+run_main()
+{
+  # arguments:	$1 = program type (pure fluid | binary mixture)
+  #		$2 = logfile
+  #		$3 = input file ("." for interactive)
+  #		$4 = main program
+  #		$5 = equation of state
+  #		$6 = mixing theory (only for mixtures)
+
+  infile=".thermoc_"$4			# where we store the user input
+
+  if [ "$3" != "." ]			# program input from file?
+  then
+    if [ -f $3 ]
+    then
+      cp $3 $infile
+      if [ "$1" = "pure" -o "$6" = "-" ]
+      then
+	$4 $5 <$3 2>/dev/null 1>>$2
+      else
+	$4 $5 $6 <$3 2>/dev/null 1>>$2
+      fi
+    else
+      $xecho "cannot open input file "$3
+    fi
+    return 0
+  fi
+
+  touch $infile				# make it, if it does not exist
+
+  if [ "$1" = "pure" -o "$6" = "-" ]	# run program in background, with a
+  then					# pipeline to this script
+    $4 $5 2>&1 1>>$2 |&
+  else
+    $4 $5 $6 2>&1 1>>$2 |&
+  fi
+
+  i=0
+  while [ 1 ]
+  do
+    read -p aux 2>/dev/null		# get stderr output from pipeline
+    if [ $? -ne 0 ]			# program still responding?
+    then
+      break
+    fi
+    $xecho $aux 1>&2
+    err=`$xecho $aux | grep read_params | wc -l`
+    if [ $err -ne 0 ]
+    then
+      break
+    fi
+    colon_pos=`expr index "$aux" "\:"`	# is it a prompt (ends with colon)?
+    if [ $colon_pos -eq `expr length "$aux"` -a $colon_pos -gt 0 ]
+    then
+      i=`expr $i + 1`
+      oldinput=`sed -n "${i},${i}p" <$infile`
+      $xecho "["$oldinput"] \c"
+      read -r newinput
+      if [ "X$newinput" = "X" ]		# empty input selects input file
+      then
+	newinput=$oldinput
+      fi
+      if [ "X$newinput" = "X" ]		# still no input? ask again
+      then
+	$xecho "You have to provide some input here."
+	read -r newinput
+      fi
+      $xecho "$newinput" >>${infile}_tmp	# send input to file
+      if [ "X$newinput" = "X." ]
+      then
+	print -p "\0004"		# close pipeline (send CTRL-D)
+	break
+      else
+	print -p -R "$newinput"		# send input to pipeline
+      fi
+    fi
+  done
+  mv ${infile}_tmp $infile
+  return $err
+}
+
+write_comment()
+{
+  cat <<EOF >>$logfile
+===========================================================================
+Comment:
+EOF
+
+  $xecho "type comments (enter a line with a single dot to terminate):"
+  while [ 1 ]
+  do
+    read in
+    if [ "X$in" = "X." ]
+    then
+      break
+    fi
+    $xecho $in >>$logfile
+  done
+  return 0
+}
+
+THHOME=/home/parallels/Desktop/thermoc/thermoc		# location of thermoC (customize!)
+PATH=$PATH:$THHOME/bin
+
+SH=/bin/ksh				# need POSIX or Korn shell
+terminal=xterm				# terminal emulator
+xecho="echo"				# echo version treating special chars
+
+$xecho "*** ThermoC-4.2 master script ***\n"
+$xecho "HINT: Press RETURN to accept a default value."
+$xecho "      Enter \".\" to quit a program."
+$xecho "      Enter \"?\" for help. (Sometimes this works.)\n"
+$xecho "name of log file: \c"
+read logfile
+
+# Program output is displayed in an auxiliary terminal window.
+touch $logfile				# make sure that we have a logfile
+$terminal -title $logfile -sb -sl 1024 -e $SH -c "tail -f $logfile" &
+pid=$!					# get window process ID
+sleep 1
+
+eos=""
+mixth=""
+prog=""
+input="."
+
+while [ 1 ]
+do
+  $xecho "program to run: [$prog] \c"
+  read in1
+  if [ "X$in1" != "X" ]
+  then
+    prog=$in1
+  fi
+  case $prog in
+    charact1)	prog_type=pure;;
+    check1)	prog_type=pure;;
+    checkN)	prog_type=mix;;
+    comment)	prog_type=null
+		write_comment;;
+    crit1)	prog_type=pure;;
+    crit2)	prog_type=binary;;
+    critN)	prog_type=mix;;
+    difflimit1)	prog_type=pure;;
+    exit|.)	kill -s 15 $pid
+		exit 0;;
+    exp_lg1)	prog_type=pure;;
+    exp_lgN)	prog_type=mix;;
+    expandN)	prog_type=mix;;
+    ffe1)	prog_type=pure;;
+    ffe2)	prog_type=binary;;
+    ffeN)	prog_type=mix;;
+    grad1)	prog_type=pure;;
+    mixN)	prog_type=mix;;
+    phase2)	prog_type=binary;;
+    reduc1)	prog_type=pure;;
+    reduc2)	prog_type=binary;;
+    reduc21)	prog_type=binary;;
+    rsfe1)	prog_type=pure;;
+    sfe1)	prog_type=pure;;
+    sfe2)	prog_type=binary;;
+    sle1)	prog_type=pure;;
+    spinodal1)	prog_type=pure;;
+    spinodal2)	prog_type=binary;;
+    transit2)	prog_type=binary;;
+    viewN)	prog_type=binary;;
+    virN)	prog_type=mix;;
+    visco1)	prog_type=pure;;
+    viscofit1)	prog_type=pure;;
+    xth1id)	prog_type=pure;;
+    xth1s)	prog_type=pure;;
+    xth2s)	prog_type=binary;;
+    xthN)	prog_type=mix;;
+    ?)		prog_type=null
+		list_programs
+		continue;;
+    *)		prog_type=null
+		$xecho "program not recognized - use '?' to obtain list"
+		continue;;
+  esac
+
+  case $prog_type in
+    pure)	$xecho "input file (\".\" for interactive): [$input] \c"
+		read in1
+		if [ "X$in1" != "X" ]
+		then
+		  input=$in1
+		fi
+		$xecho "equation of state: [$eos] \c"
+		read in1
+		if [ "X$in1" != "X" ]
+		then
+		  eos=$in1
+		fi
+		if [ "$in1" = "?" ]
+		then
+		  $xecho "select an equation of state:"
+		  list_model $THHOME/models/index
+		  eos=$mdl
+		fi
+		run_main $prog_type $logfile $input $prog $eos
+		if [ $? -ne 0 ]
+		then
+		  $xecho "The following parameter sets are available:"
+		  ls $THHOME/parameters/$eos | grep ';'
+		fi;;
+    binary|mix)	$xecho "input file (\".\" for interactive): [$input] \c"
+		read in1
+		if [ "X$in1" != "X" ]
+		then
+		  input=$in1
+		fi
+		$xecho "equation of state: [$eos] \c"
+		read in1
+		if [ "X$in1" != "X" ]
+		then
+		  eos=$in1
+		fi
+		if [ "$in1" = "?" ]
+		then
+		  $xecho "select an equation of state:"
+		  list_model $THHOME/models/index
+		  eos=$mdl
+		fi
+		if [ "$prog_type" = "mix" ]
+		then
+		  $xecho "mixing theory or "-": [$mixth] \c"
+		else
+		  $xecho "mixing theory: [$mixth] \c"
+		fi
+		read in1
+		if [ "X$in1" != "X" ]
+		then
+		  mixth=$in1
+		fi
+		if [ "$in1" = "?" ]
+		then
+		  if [ ! -f $THHOME/models/$eos/index ]
+		  then
+		    $xecho "This EOS is not available for mixtures, yet."
+		    mixth=""
+		  else
+		    $xecho "select a mixing theory:"
+		    list_model $THHOME/models/$eos/index
+		    mixth=$mdl
+		  fi
+		fi
+		if [ "X$mixth" != "X" ]
+		then
+		  if [ "$mixth" = "-" -o "$mixth" = "." ]
+		  then
+		    run_main $prog_type $logfile $input $prog $eos
+		    if [ $? -ne 0 ]
+		    then
+		      $xecho "The following parameter sets are available:"
+		      ls $THHOME/parameters/$eos | grep ';'
+		    fi
+		  else
+		    run_main $prog_type $logfile $input $prog $eos $mixth
+		    if [ $? -ne 0 ]
+		    then
+		      $xecho "The following parameter sets are available:"
+		      ls $THHOME/parameters/$eos/$mixth | grep ';'
+		    fi
+		  fi
+		fi;;
+    null)	;;
+  esac
+done
+
+exit 0

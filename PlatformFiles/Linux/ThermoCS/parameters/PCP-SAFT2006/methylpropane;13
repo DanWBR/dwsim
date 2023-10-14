@@ -1,0 +1,13 @@
+name:	methylpropane
+id:	13
+text:	CoM; exp. Daubert & Danner; 3 parameters fitted
+pc:	 4.01770120e+00
+Tc:	 4.13746026e+02
+vc:	 2.66326949e+02
+par[0]:	 5.81230000e+01
+par[1]:	 2.15171000e+02
+par[2]:	 1.64803000e+01
+par[3]:	 2.28713000e+00
+par[4]:	 6.82000000e-01
+par[5]:	 1.39900000e-01
+par[6]:	 7.81430000e+00

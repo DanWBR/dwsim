@@ -1,0 +1,25 @@
+#!/bin/ksh
+
+# write an ordered list of all substances for which parameters are
+# available to a file
+
+# usage: list_substances FILE
+#	 (generate a complete list)
+#    or
+#	 list_substances FILE EOS
+#	 (generate a list for the equation of state EOS)
+
+me=$_
+tmpfile=/tmp/thermocL$$
+
+if [ $# -eq 2 ]
+then
+  eos=$2
+else
+  eos='*'
+fi
+
+ls `dirname $me`/../parameters/$eos/*';'* | \
+sed "s/^.*\///" | \
+sort -u - >$1
+exit 0

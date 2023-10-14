@@ -1,0 +1,16 @@
+methane		0:1
+ethane		1:2
+propane		1:2 2:1
+butane		1:2 2:2
+pentane		1:2 2:3
+2-methylbutane	1:3 2:1 3:1
+hexane		1:2 2:4
+heptane		1:2 2:5
+octane		1:2 2:6
+decane		1:2 2:8
+dodecane	1:2 2:10
+tetradecane	1:2 2:12
+hexadecane	1:2 2:14
+eicosane	1:2 2:18
+octacosane	1:2 2:26
+carbon_dioxide	5:1

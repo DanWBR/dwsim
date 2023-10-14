@@ -1,0 +1,108 @@
+#!/bin/ksh
+
+# auxiliary script for viewing parameter files
+# usage: viewN EOS MIXTH
+# or:	 viewN EOS
+# (the latter form is for pure substances only)
+# where EOS is an acronym of an equation of state
+#   and MIXTH the acronym of a mixing theory
+# (see "index" files in thermoc/models for listings)
+
+me=$_
+
+if [ $# -eq 1 ]				# check number of arguments
+then
+  mode="pure"
+  n=1
+elif [ $# -eq 2 ]
+then
+  mode="mix"
+else
+  echo "usage: viewN EOS [MIXTH]" >&2
+  exit 1
+fi
+
+target=`dirname $me`/../parameters/$1
+if [ ! -d $target ]			# equation of state recognized?
+then
+  echo "viewN: $1 is not a valid equation of state." >&2
+  exit 1
+fi
+
+if [ $mode = "pure" ]			# only 1 component: get its name
+then
+  echo "substance name: " >&2
+  read h
+  subst=`echo $h | tr -d "\r\n"`
+else
+  echo "number of components: " >&2
+  read h
+  n=`echo $h | tr -d "\r\n"`
+  if [ $n -gt 1 ]			# is it really a mixture?
+  then					# ... yes!
+    target=$target/$2			
+    if [ ! -d $target ]			# mixing theory recognized?
+    then
+      echo "viewN: $2 is not a valid mixing theory." >&2
+      exit 1
+    fi
+  else					# ... no!
+    mode="pure"
+  fi
+
+  echo "substance 1 name: " >&2
+  read h
+  subst=`echo $h | tr -d "\r\n"`
+  i=2
+  while [ $i -le $n ]
+  do
+    echo "substance $i name: " >&2
+    read h
+    subst1=`echo $h | tr -d "\r\n"`
+    subst=$subst"+"$subst1
+    i=`expr $i + 1`
+  done
+fi
+
+echo "parameter set ID: " >&2
+read h
+id=`echo $h | tr -d "\r\n"`
+key=$subst";"$id
+
+if [ $n -le 2 ]
+then
+  target=$target/$key
+else
+  target=$target"/multi0"$n
+fi
+
+if [ -f $target ]
+then
+  cat <<EOF
+===========================================================================
+EOF
+
+  title=`echo $subst | sed "s/+/ + /g"`
+  echo "Parameters of $title"
+  echo
+  echo "equation of state: $1"
+  if [ $mode = "mix" ]
+  then
+    echo "mixing theory:     $2"
+  fi
+  echo
+  if [ $n -le 2 ]			# for n <= 2 list parameter set
+  then
+    cat $target
+    exit #?
+  else					# otherwise point to constituent sets
+    echo "multi-component parameter set consisting of these binary sets:"
+    nr=`sed -n "/$key/=" $target`
+    nrh=`expr $nr + $n`
+    nr=`expr $nr + 1`
+    sed -n "$nr,$nrh P" $target
+  fi
+else
+  echo "viewN: parameter file not found or not readable" >&2
+  exit 1
+fi

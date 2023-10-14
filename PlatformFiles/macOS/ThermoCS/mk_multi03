@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# create multi03 lists (lists ternary mixtures than can be
+# formed from the available binary parameter sets)
+#
+# usage: mk_multi03 EOS MIX
+#	 EOS: acronym of equation of state
+#	 MIX: acronym of mixing theory
+
+if [ $# -ne 2 ]
+then
+  echo "usage: mk_multi03 EOS MIX"
+  exit 1
+fi
+
+THHOME=/Users/Daniel/Downloads/thermoc_mac/thermoc				# customize this!
+eos=$1
+mix=$2
+tmpA=th_substA$$
+tmpB=th_substB$$
+
+cd $THHOME/parameters/$eos		# make sorted list of substances
+files=`ls *\;*`
+for file in $files
+do
+  awk '
+/name:/	{ printf "%s", $2; }
+/Tc:/	{ printf " %7.2f\n", $2; }
+' <$file >>$tmpA
+done
+sort -n -k 2 $tmpA >$tmpB
+awk '
+	{ print $1; }
+' <$tmpB | uniq >$tmpA
+rm $tmpB
+
+n=`cat $tmpA | wc -l`			# scan all ternary combinations
+cd $mix
+i1=1
+while [ $i1 -le $n ]
+do
+  s1=`sed -n "$i1,$i1 P" ../$tmpA`
+  i1=`expr $i1 + 1`
+  i2=$i1
+  while [ $i2 -le $n ]
+  do
+    s2=`sed -n "$i2,$i2 P" ../$tmpA`
+    i2=`expr $i2 + 1`
+    count=`ls $s1+$s2\;* 2>/dev/null | wc -w`
+    if [ $count -eq 0 ]
+    then
+      continue
+    fi
+    i3=$i2
+    while [ $i3 -le $n ]
+    do
+      s3=`sed -n "$i3,$i3 P" ../$tmpA`
+      i3=`expr $i3 + 1`
+      count1=`ls $s1+$s3\;* 2>/dev/null | wc -w`
+      count2=`ls $s2+$s3\;* 2>/dev/null | wc -w`
+      if [ $count1 -eq 0 -o $count2 -eq 0 ]
+      then
+	continue
+      fi
+      list1=`ls $s1+$s2\;*`
+      list2=`ls $s1+$s3\;*`
+      list3=`ls $s2+$s3\;*`
+      i=1
+      for file1 in $list1
+      do
+        for file2 in $list2
+	do
+	  for file3 in $list3
+	  do
+	    echo "$s1+$s2+$s3;$i"
+	    echo "  $file1"
+	    echo "  $file2"
+	    echo "  $file3"
+	    echo ""
+	    i=`expr $i + 1`
+	  done
+	done
+      done
+    done
+  done
+done
+rm ../$tmpA
+exit 0

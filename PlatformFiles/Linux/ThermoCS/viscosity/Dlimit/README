@@ -1,0 +1,11 @@
+Prediction of binary diffusion coefficients, D12, of component 2
+in solvent 1 at x2 = 0
+
+structure of parameter files:
+1. name of compound 1 (solvent)
+2. its friction theory parameter set ID
+3. name of compound 2 (solute)
+4. ID of this diffusion parameter set
+5. pressure range of the parameter set
+6. temperature range
+7. alpha, beta

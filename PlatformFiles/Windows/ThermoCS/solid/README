@@ -1,0 +1,15 @@
+Specifications for solid-gas equilibrium data
+
+- number of different solid phases 
+
+- max. temperature up to which solid phases can exist
+
+- for each solid phase:
+  - solid phase indicator (e.g., s1, s2, ...)
+  - number of experimental data sets
+  - as many data sets consisting of
+    T/K (temperature), p/MPa (sublimation or melting pressure),
+    v/cm3mol-1 (solid molar volume), kappaT/MPa-1 (solid isothermal
+    compressibility).
+    NOTE: The data sets must be arranged in DESCENDING ORDER with respect
+    to temperature.

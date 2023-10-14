@@ -1,0 +1,25 @@
+Coefficients of the correlation function for dilute-gas viscosities
+(standard correlation)
+
+eta0 = Sum dg[i] x^i   with x = (T / Tc)^0.25
+
+Tc:	critical temperature (may be different from the value listed
+	with EOS parameters)
+dg[i]:	with i = 0 ... 4: parameters in (Pa s)
+
+Statistical thermodynamics predicts that the dilute gas viscosity
+should be zero at 0 K, and become a linear function of temperature
+at very high temperatures (i.e., dg[0] = 0, d[4] > 0). For most substances,
+however, neither very low nor very high reduced temperatures are attainable,
+so that correlations with dg[0] != 0 and dg[4] = 0 may be more practical.
+
+Hydrogen requires a more complicated correlation.
+
+
+Dilute-gas file content:
+------------------------
+
+correlation type (1 = standard, 2 = hydrogen REFPROP)
+number of coefficients
+critical temperature [K]
+coefficients [Pa s]

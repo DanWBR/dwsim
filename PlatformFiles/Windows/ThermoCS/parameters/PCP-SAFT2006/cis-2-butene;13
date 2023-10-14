@@ -1,0 +1,13 @@
+name:	cis-2-butene
+id:	13
+text:	CoM; exp. Daubert & Danner; 3 parameters fitted
+pc:	 4.72790153e+00
+Tc:	 4.43084068e+02
+vc:	 2.42145582e+02
+par[0]:	 5.61070000e+01
+par[1]:	 2.26102000e+02
+par[2]:	 1.44454000e+01
+par[3]:	 2.37376000e+00
+par[4]:	 2.57910000e+00
+par[5]:	 2.50600000e-01
+par[6]:	 7.67070000e+00

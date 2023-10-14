@@ -1,0 +1,74 @@
+#!/bin/sh
+
+# ffe1_xthN: calculate thermodynamic properties along the phase boundary
+# usage: see below
+
+if [ $# -lt 1 ]
+then
+  echo "usage: ffe1_xthN \"PROPERTIES\" [TMP] <IN_FILE >OUT_FILE"
+  echo "       PROPERTIES: symbols of properties, e.g., kT or Sm%16.8e"
+  echo "       TMP: temporary file"
+  echo "       INFILE: output file of ffe1"
+  echo "       hint: encode space as \\040, e.g., Ar\\040Sr\\040p"
+  exit 1
+fi
+
+if [ $# -eq 2 ]
+then
+  tmp=$2
+  tmpL=${tmp}_L
+  tmpG=${tmp}_G
+  tmpE=${tmp}_E
+else
+  tmpL=tmpL$$
+  tmpG=tmpG$$
+  tmpE=tmpE$$
+fi
+
+
+# The ThermoC programs mark the begin and the end of output tables by "+"
+# and "-", respectively.
+
+awk -v fileL=$tmpL -v fileG=$tmpG -v thd=$1 -v fileE=$tmpE '
+BEGIN	{ mode = 0; }
+/curve of/	{
+	  print $5 >>fileL;
+	  print $5 >>fileG;
+	}
+/state\:/	{
+	  print $4 >fileE;
+	}
+/set\:/	{ print $3 >>fileL;
+	  print $3 >>fileG;
+	  print "V" >>fileL;
+	  print "V" >>fileG;
+	  print thd >>fileL;
+	  print thd >>fileG;
+	}
+/^-$/	{ mode = 0; }
+/^\+$/	{ mode = 1;
+	  getline;			// skip table heading
+	  getline;
+	  getline;
+	}
+	{ if (mode) {
+	    print $3, $1 >>fileL;
+	    print $4, $1 >>fileG;
+	  }
+	}
+END	{ fflush(fileL);
+	  fflush(fileG);
+	}
+'
+
+eos=`cat $tmpE`
+
+echo "==========================================================================="
+echo "SATURATED LIQUID"
+xthN $eos <$tmpL
+echo
+echo "==========================================================================="
+echo "SATURATED VAPOUR"
+xthN $eos <$tmpG 2>/dev/null
+rm $tmpL $tmpG $tmpE
+exit 0

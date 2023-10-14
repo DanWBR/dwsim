@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# set ownership and access rights for parameter files
+# that were written by the web server
+# This script must have the setUID and setGID bits set!
+
+# usage: set_owner [-r] FILE
+# -r: old owner is granted read permissions only
+
+mode=w
+if [ "$1" = "-r" ]
+then
+  mode="-"
+  shift
+fi
+
+old_owner=`ls -l $1 | awk -F' ' '
+	{ print $3; }
+'`					# remember previous owner name
+
+tmpfile=/tmp/th_param$$
+cp $1 $tmpfile				# can't do a chown if not owner
+rm -f $1				# ... but can copy to a new file
+cp $tmpfile $1
+rm $tmpfile
+
+chmod 640 $1
+setfacl -m "u:"$old_owner":r${mode}-" $1
+exit 0

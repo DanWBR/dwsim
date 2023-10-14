@@ -1837,6 +1837,10 @@
       <Project>{d670c3b0-1ee1-47d4-99c6-8820cfb072f7}</Project>
       <Name>DWSIM.Thermodynamics.ReaktoroPropertyPackage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.ThermoC\DWSIM.Thermodynamics.ThermoC.csproj">
+      <Project>{da169354-7c6f-437a-8c32-1a2cb84eab5a}</Project>
+      <Name>DWSIM.Thermodynamics.ThermoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>

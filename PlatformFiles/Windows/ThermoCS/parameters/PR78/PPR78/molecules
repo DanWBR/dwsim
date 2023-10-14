@@ -1,0 +1,33 @@
+methane		 4:1
+ethyne		37:1
+ethene		16:1
+ethane		 5:1
+propene		 0:1 17:2
+propane		 0:2  1:1
+1-butene	 0:1  1:1 17:2
+butane		 0:2  1:2
+pentane		 0:2  1:3
+2-methylbutane	 0:3  1:1  2:1
+benzene		 6:6
+hexane		 0:2  1:4
+toluene		 0:1  6:5  7:1
+heptane		 0:2  1:5
+octane		 0:2  1:6
+decane		 0:2  1:8
+dodecane	 0:2  1:10
+tetradecane	 0:2  1:12
+hexadecane	 0:2  1:14
+eicosane	 0:2  1:18
+octacosane	 0:2  1:26
+carbon_monoxide	27:1
+carbon_dioxide	11:1
+hydrogen:	20:1
+nitrogen	12:1
+ammonia		34:1
+dinitrogen_oxide	36:1
+oxygen		31:1
+water		15:1
+hydrogen_sulfide     13:1
+sulfur_dioxide	30:1
+helium		28:1
+argon		29:1

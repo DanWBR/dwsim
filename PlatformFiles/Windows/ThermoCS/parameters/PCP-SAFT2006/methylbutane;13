@@ -1,0 +1,13 @@
+name:	methylbutane
+id:	13
+text:	CoM; exp. data Daubert & Danner; 3 parameters fitted
+pc:	 3.76826484e+00
+Tc:	 4.69056681e+02
+vc:	 3.21255171e+02
+par[0]:	 7.21500000e+01
+par[1]:	 2.33717000e+02
+par[2]:	 1.81234000e+01
+par[3]:	 2.50531000e+00
+par[4]:	 1.11240000e+00
+par[5]:	 1.00350000e-01
+par[6]:	 9.56660000e+00

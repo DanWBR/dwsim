@@ -1,0 +1,45 @@
+nitrogen+methane+ethane;1
+  nitrogen+methane;1
+  nitrogen+ethane;1
+  methane+ethane;1
+
+nitrogen+methane+propane;1
+  nitrogen+methane;1
+  nitrogen+propane;1
+  methane+propane;1
+
+nitrogen+ethane+propane;1
+  nitrogen+ethane;1
+  nitrogen+propane;1
+  ethane+propane;1
+
+methane+ethane+propane;1
+  methane+ethane;1
+  methane+propane;1
+  ethane+propane;1
+
+methane+propane+decane;1
+  methane+propane;1
+  methane+decane;1
+  propane+decane;1
+
+methane+decane+tetracosane;1
+  methane+decane;1
+  methane+tetracosane;1
+  decane+tetracosane;1
+
+carbon_dioxide+hexane+hexadecane;1
+  carbon_dioxide+hexane;3
+  carbon_dioxide+hexadecane;1
+  hexane+hexadecane;3
+
+carbon_dioxide+hexane+hexadecane;2
+  carbon_dioxide+hexane;3
+  carbon_dioxide+hexadecane;2
+  hexane+hexadecane;3
+
+carbon_dioxide+hexane+hexadecane;3
+  carbon_dioxide+hexane;3
+  carbon_dioxide+hexadecane;3
+  hexane+hexadecane;3
+

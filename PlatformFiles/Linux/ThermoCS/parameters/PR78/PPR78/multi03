@@ -1,0 +1,420 @@
+methane+ethane+propane;1
+  methane+ethane;1
+  methane+propane;1
+  ethane+propane;1
+
+methane+ethane+butane;1
+  methane+ethane;1
+  methane+butane;1
+  ethane+butane;1
+
+methane+ethane+pentane;1
+  methane+ethane;1
+  methane+pentane;1
+  ethane+pentane;1
+
+methane+ethane+hexane;1
+  methane+ethane;1
+  methane+hexane;1
+  ethane+hexane;1
+
+methane+ethane+heptane;1
+  methane+ethane;1
+  methane+heptane;1
+  ethane+heptane;1
+
+methane+ethane+decane;1
+  methane+ethane;1
+  methane+decane;1
+  ethane+decane;1
+
+methane+ethane+hexadecane;1
+  methane+ethane;1
+  methane+hexadecane;1
+  ethane+hexadecane;1
+
+methane+propane+butane;1
+  methane+propane;1
+  methane+butane;1
+  propane+butane;1
+
+methane+propane+pentane;1
+  methane+propane;1
+  methane+pentane;1
+  propane+pentane;1
+
+methane+propane+hexane;1
+  methane+propane;1
+  methane+hexane;1
+  propane+hexane;1
+
+methane+propane+heptane;1
+  methane+propane;1
+  methane+heptane;1
+  propane+heptane;1
+
+methane+propane+decane;1
+  methane+propane;1
+  methane+decane;1
+  propane+decane;1
+
+methane+propane+hexadecane;1
+  methane+propane;1
+  methane+hexadecane;1
+  propane+hexadecane;1
+
+methane+butane+pentane;1
+  methane+butane;1
+  methane+pentane;1
+  butane+pentane;1
+
+methane+butane+hexane;1
+  methane+butane;1
+  methane+hexane;1
+  butane+hexane;1
+
+methane+butane+heptane;1
+  methane+butane;1
+  methane+heptane;1
+  butane+heptane;1
+
+methane+butane+decane;1
+  methane+butane;1
+  methane+decane;1
+  butane+decane;1
+
+methane+butane+hexadecane;1
+  methane+butane;1
+  methane+hexadecane;1
+  butane+hexadecane;1
+
+methane+pentane+hexane;1
+  methane+pentane;1
+  methane+hexane;1
+  pentane+hexane;1
+
+methane+pentane+heptane;1
+  methane+pentane;1
+  methane+heptane;1
+  pentane+heptane;1
+
+methane+pentane+decane;1
+  methane+pentane;1
+  methane+decane;1
+  pentane+decane;1
+
+methane+pentane+hexadecane;1
+  methane+pentane;1
+  methane+hexadecane;1
+  pentane+hexadecane;1
+
+methane+hexane+heptane;1
+  methane+hexane;1
+  methane+heptane;1
+  heptane+decane;1
+
+methane+hexane+decane;1
+  methane+hexane;1
+  methane+decane;1
+  hexane+decane;1
+
+methane+hexane+hexadecane;1
+  methane+hexane;1
+  methane+hexadecane;1
+  hexane+hexadecane;1
+
+methane+heptane+decane;1
+  methane+heptane;1
+  methane+decane;1
+  heptane+decane;1
+
+methane+heptane+hexadecane;1
+  methane+heptane;1
+  methane+hexadecane;1
+  heptane+hexadecane;1
+
+methane+decane+hexadecane;1
+  methane+decane;1
+  methane+hexadecane;1
+  decane+hexadecane;1
+
+carbon_dioxide+ethane+propane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+propane;1
+  ethane+propane;1
+
+carbon_dioxide+ethane+butane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+butane;1
+  ethane+butane;1
+
+carbon_dioxide+ethane+pentane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+pentane;1
+  ethane+pentane;1
+
+carbon_dioxide+ethane+hexane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+hexane;1
+  ethane+hexane;1
+
+carbon_dioxide+ethane+decane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+decane;1
+  ethane+decane;1
+
+carbon_dioxide+ethane+hexadecane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+hexadecane;1
+  ethane+hexadecane;1
+
+carbon_dioxide+propane+butane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+butane;1
+  propane+butane;1
+
+carbon_dioxide+propane+pentane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+pentane;1
+  propane+pentane;1
+
+carbon_dioxide+propane+hexane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+hexane;1
+  propane+hexane;1
+
+carbon_dioxide+propane+decane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+decane;1
+  propane+decane;1
+
+carbon_dioxide+propane+hexadecane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+hexadecane;1
+  propane+hexadecane;1
+
+carbon_dioxide+butane+pentane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+pentane;1
+  butane+pentane;1
+
+carbon_dioxide+butane+hexane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+hexane;1
+  butane+hexane;1
+
+carbon_dioxide+butane+decane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+decane;1
+  butane+decane;1
+
+carbon_dioxide+butane+hexadecane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+hexadecane;1
+  butane+hexadecane;1
+
+carbon_dioxide+pentane+hexane;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+hexane;1
+  pentane+hexane;1
+
+carbon_dioxide+pentane+decane;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+decane;1
+  pentane+decane;1
+
+carbon_dioxide+pentane+hexadecane;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+hexadecane;1
+  pentane+hexadecane;1
+
+carbon_dioxide+hexane+decane;1
+  carbon_dioxide+hexane;1
+  carbon_dioxide+decane;1
+  hexane+decane;1
+
+carbon_dioxide+hexane+hexadecane;1
+  carbon_dioxide+hexane;1
+  carbon_dioxide+hexadecane;1
+  hexane+hexadecane;1
+
+carbon_dioxide+decane+hexadecane;1
+  carbon_dioxide+decane;1
+  carbon_dioxide+hexadecane;1
+  decane+hexadecane;1
+
+ethane+propane+butane;1
+  ethane+propane;1
+  ethane+butane;1
+  propane+butane;1
+
+ethane+propane+pentane;1
+  ethane+propane;1
+  ethane+pentane;1
+  propane+pentane;1
+
+ethane+propane+hexane;1
+  ethane+propane;1
+  ethane+hexane;1
+  propane+hexane;1
+
+ethane+propane+decane;1
+  ethane+propane;1
+  ethane+decane;1
+  propane+decane;1
+
+ethane+propane+hexadecane;1
+  ethane+propane;1
+  ethane+hexadecane;1
+  propane+hexadecane;1
+
+ethane+butane+pentane;1
+  ethane+butane;1
+  ethane+pentane;1
+  butane+pentane;1
+
+ethane+butane+hexane;1
+  ethane+butane;1
+  ethane+hexane;1
+  butane+hexane;1
+
+ethane+butane+decane;1
+  ethane+butane;1
+  ethane+decane;1
+  butane+decane;1
+
+ethane+butane+hexadecane;1
+  ethane+butane;1
+  ethane+hexadecane;1
+  butane+hexadecane;1
+
+ethane+pentane+hexane;1
+  ethane+pentane;1
+  ethane+hexane;1
+  pentane+hexane;1
+
+ethane+pentane+decane;1
+  ethane+pentane;1
+  ethane+decane;1
+  pentane+decane;1
+
+ethane+pentane+hexadecane;1
+  ethane+pentane;1
+  ethane+hexadecane;1
+  pentane+hexadecane;1
+
+ethane+hexane+decane;1
+  ethane+hexane;1
+  ethane+decane;1
+  hexane+decane;1
+
+ethane+hexane+hexadecane;1
+  ethane+hexane;1
+  ethane+hexadecane;1
+  hexane+hexadecane;1
+
+ethane+decane+hexadecane;1
+  ethane+decane;1
+  ethane+hexadecane;1
+  decane+hexadecane;1
+
+propane+butane+pentane;1
+  propane+butane;1
+  propane+pentane;1
+  butane+pentane;1
+
+propane+butane+hexane;1
+  propane+butane;1
+  propane+hexane;1
+  butane+hexane;1
+
+propane+butane+decane;1
+  propane+butane;1
+  propane+decane;1
+  butane+decane;1
+
+propane+butane+hexadecane;1
+  propane+butane;1
+  propane+hexadecane;1
+  butane+hexadecane;1
+
+propane+pentane+hexane;1
+  propane+pentane;1
+  propane+hexane;1
+  pentane+hexane;1
+
+propane+pentane+decane;1
+  propane+pentane;1
+  propane+decane;1
+  pentane+decane;1
+
+propane+pentane+hexadecane;1
+  propane+pentane;1
+  propane+hexadecane;1
+  pentane+hexadecane;1
+
+propane+hexane+decane;1
+  propane+hexane;1
+  propane+decane;1
+  hexane+decane;1
+
+propane+hexane+hexadecane;1
+  propane+hexane;1
+  propane+hexadecane;1
+  hexane+hexadecane;1
+
+propane+decane+hexadecane;1
+  propane+decane;1
+  propane+hexadecane;1
+  decane+hexadecane;1
+
+butane+pentane+hexane;1
+  butane+pentane;1
+  butane+hexane;1
+  pentane+hexane;1
+
+butane+pentane+decane;1
+  butane+pentane;1
+  butane+decane;1
+  pentane+decane;1
+
+butane+pentane+hexadecane;1
+  butane+pentane;1
+  butane+hexadecane;1
+  pentane+hexadecane;1
+
+butane+hexane+decane;1
+  butane+hexane;1
+  butane+decane;1
+  hexane+decane;1
+
+butane+hexane+hexadecane;1
+  butane+hexane;1
+  butane+hexadecane;1
+  hexane+hexadecane;1
+
+butane+decane+hexadecane;1
+  butane+decane;1
+  butane+hexadecane;1
+  decane+hexadecane;1
+
+pentane+hexane+decane;1
+  pentane+hexane;1
+  pentane+decane;1
+  hexane+decane;1
+
+pentane+hexane+hexadecane;1
+  pentane+hexane;1
+  pentane+hexadecane;1
+  hexane+hexadecane;1
+
+pentane+decane+hexadecane;1
+  pentane+decane;1
+  pentane+hexadecane;1
+  decane+hexadecane;1
+
+hexane+decane+hexadecane;1
+  hexane+decane;1
+  hexane+hexadecane;1
+  decane+hexadecane;1
+

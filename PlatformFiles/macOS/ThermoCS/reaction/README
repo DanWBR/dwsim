@@ -1,0 +1,13 @@
+thermochemical data:
+
+content:
+
+Tref:		reference temperature (298.15 K)
+H:		molar standard enthalpy (at T_ref, 0.1 MPa) [J/mol]
+S:		absolute molar standard entropy [J/(mol K)]
+n:		number of (T, Cpm) pairs
+T, Cpm:		temperature, isobaric heat capacity
+
+note: Give Cpm for non-volatile substances only! For volatile
+substances it is better to specify Cpm of the ideal gas and
+to apply the equation of state.

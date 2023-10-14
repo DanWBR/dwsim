@@ -1,0 +1,6 @@
+parameters for Schonhorn's viscosity-surface tension correlation:
+
+	sigma = sigma_a exp(sigma_b / (eta_l - eta_g))
+
+file format:
+sigma_a sigma_b

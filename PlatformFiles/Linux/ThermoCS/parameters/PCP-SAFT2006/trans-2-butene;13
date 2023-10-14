@@ -1,0 +1,13 @@
+name:	trans-2-butene
+id:	13
+text:	CoM; exp. Daubert & Danner; 3 parameters fitted
+pc:	 4.56087198e+00
+Tc:	 4.37416733e+02
+vc:	 2.47924529e+02
+par[0]:	 5.61070000e+01
+par[1]:	 2.25503000e+02
+par[2]:	 1.51136000e+01
+par[3]:	 2.32346000e+00
+par[4]:	 2.56410000e+00
+par[5]:	 1.00000000e-04
+par[6]:	 7.74080000e+00

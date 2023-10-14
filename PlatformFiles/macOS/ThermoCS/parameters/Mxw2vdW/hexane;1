@@ -1,0 +1,11 @@
+name:	hexane
+id:	1
+text:	crit
+pc:	 3.03400000e+00
+Tc:	 5.07820000e+02
+vc:	 4.98093368e+02
+M:    8.61770000e+01 g/mol
+Ts:   6.61993836e+02 K
+vs:   6.09849863e+01 cm3/mol
+mLJ:  1.20000000e+01 cm3/mol
+nLJ:  6.00000000e+00 cm3/mol

@@ -1,0 +1,13 @@
+name:	2-methyl-1,3-butadiene
+id:	13
+text:	CoM; VLE Daubert & Danner; 3 parameters fitted
+pc:	 4.44041053e+00
+Tc:	 4.90182721e+02
+vc:	 2.85421172e+02
+par[0]:	 6.81180000e+01
+par[1]:	 2.56593000e+02
+par[2]:	 1.84286000e+01
+par[3]:	 2.20809000e+00
+par[4]:	 5.29740000e+00
+par[5]:	 2.57840000e-01
+par[6]:	 9.75270000e+00

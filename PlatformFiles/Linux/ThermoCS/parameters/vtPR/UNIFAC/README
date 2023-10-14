@@ -1,0 +1,17 @@
+For this model, the parameter files are dummies, as the vtPR EOS
+parameters are obtained from a group contribution model.
+
+File "groups" contains the defined groups and their Q factors (effective
+surface areas), followed by the interaction parameters a, b, c
+(interaction parameter, linear and quadratic temperature coefficient):
+
+i Q description
+    ...
+i j a b c
+
+i, j: running indices (ignored by the program)
+Note that always entries for the groups i & j as well as j & i must be
+provided.
+
+The actual "groups" are based on the work of B. Schmid, whereas the older
+version used coefficients of Ahlert.

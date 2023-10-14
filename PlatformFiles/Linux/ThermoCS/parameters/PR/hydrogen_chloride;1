@@ -1,0 +1,10 @@
+name:	hydrogen_chloride
+id:	1
+text:	crit, VLE (NIST)
+pc:	 8.25600000e+00
+Tc:	 3.24680000e+02
+vc:	 1.00513927e+02
+M:    3.64610000e+01 g/mol
+Ts:   2.38532654e+02 K
+vs:   2.54377215e+01 cm3/mol
+omg:  1.33591812e-01

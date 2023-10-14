@@ -1,0 +1,12 @@
+For this mixing rule, the parameter files are dummies, as the PPR78/1FGC
+parameters are obtained from a group contribution model.
+
+File "groups" contains the defined groups and their interaction parameters
+A_ij and B_ij (both in MPa):
+
+i description
+    ...
+i j A_ij B_ij
+
+i, j: running indices (ignored by the program)
+Note that the A and B matrices are symmetric.

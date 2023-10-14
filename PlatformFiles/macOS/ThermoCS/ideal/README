@@ -1,0 +1,5 @@
+The directory ideal contains caloric data of perfect gases. Each compound
+is represented by its own file. The file structure is as follows:
+- number of data sets
+- as many (T, Cpm) pairs, with the temperature T given in K and the
+  ideal isobaric molar heat capacity in J mol-1K-1.

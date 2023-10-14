@@ -1,0 +1,13 @@
+name:	1-butene
+id:	13
+text:	CoM; exp. data Daubert & Danner; 3 parameters fitted
+pc:	 4.44564782e+00
+Tc:	 4.24351850e+02
+vc:	 2.46549417e+02
+par[0]:	 5.61070000e+01
+par[1]:	 2.15029000e+02
+par[2]:	 1.45310000e+01
+par[3]:	 2.40391000e+00
+par[4]:	 2.97590000e+00
+par[5]:	 3.60020000e-01
+par[6]:	 7.72990000e+00

@@ -1,0 +1,7 @@
+nitrogen+methane+ethane+propane;1
+  nitrogen+methane;1
+  nitrogen+ethane;1
+  nitrogen+propane;1
+  methane+ethane;1
+  methane+propane;1
+  ethane+propane;1

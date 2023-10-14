@@ -1,0 +1,118 @@
+methane+ethane+propane+butane+pentane+hexane;1
+  methane+ethane;1
+  methane+propane;1
+  methane+butane;1
+  methane+pentane;1
+  methane+hexane;1
+  ethane+propane;1
+  ethane+butane;1
+  ethane+pentane;1
+  ethane+hexane;1
+  propane+butane;1
+  propane+pentane;1
+  propane+hexane;1
+  butane+pentane;1
+  butane+hexane;1
+  pentane+hexane;1
+
+methane+ethane+propane+butane+pentane+heptane;1
+  methane+ethane;1
+  methane+propane;1
+  methane+butane;1
+  methane+pentane;1
+  methane+heptane;1
+  ethane+propane;1
+  ethane+butane;1
+  ethane+pentane;1
+  ethane+heptane;1
+  propane+butane;1
+  propane+pentane;1
+  propane+heptane;1
+  butane+pentane;1
+  butane+heptane;1
+  pentane+heptane;1
+
+methane+ethane+propane+butane+hexane+heptane;1
+  methane+ethane;1
+  methane+propane;1
+  methane+butane;1
+  methane+hexane;1
+  methane+heptane;1
+  ethane+propane;1
+  ethane+butane;1
+  ethane+hexane;1
+  ethane+heptane;1
+  propane+butane;1
+  propane+hexane;1
+  propane+heptane;1
+  butane+hexane;1
+  butane+heptane;1
+  hexane+heptane;1
+
+methane+ethane+propane+pentane+hexane+heptane;1
+  methane+ethane;1
+  methane+propane;1
+  methane+pentane;1
+  methane+hexane;1
+  methane+heptane;1
+  ethane+propane;1
+  ethane+pentane;1
+  ethane+hexane;1
+  ethane+heptane;1
+  propane+pentane;1
+  propane+hexane;1
+  propane+heptane;1
+  pentane+hexane;1
+  pentane+heptane;1
+  hexane+heptane;1
+
+methane+ethane+butane+pentane+hexane+heptane;1
+  methane+ethane;1
+  methane+butane;1
+  methane+pentane;1
+  methane+hexane;1
+  methane+heptane;1
+  ethane+butane;1
+  ethane+pentane;1
+  ethane+hexane;1
+  ethane+heptane;1
+  butane+pentane;1
+  butane+hexane;1
+  butane+heptane;1
+  pentane+hexane;1
+  pentane+heptane;1
+  hexane+heptane;1
+
+methane+propane+butane+pentane+hexane+heptane;1
+  methane+propane;1
+  methane+butane;1
+  methane+pentane;1
+  methane+hexane;1
+  methane+heptane;1
+  propane+butane;1
+  propane+pentane;1
+  propane+hexane;1
+  propane+heptane;1
+  butane+pentane;1
+  butane+hexane;1
+  butane+heptane;1
+  pentane+hexane;1
+  pentane+heptane;1
+  hexane+heptane;1
+
+ethane+propane+butane+pentane+hexane+heptane;1
+  ethane+propane;1
+  ethane+butane;1
+  ethane+pentane;1
+  ethane+hexane;1
+  ethane+heptane;1
+  propane+butane;1
+  propane+pentane;1
+  propane+hexane;1
+  propane+heptane;1
+  butane+pentane;1
+  butane+hexane;1
+  butane+heptane;1
+  pentane+hexane;1
+  pentane+heptane;1
+  hexane+heptane;1

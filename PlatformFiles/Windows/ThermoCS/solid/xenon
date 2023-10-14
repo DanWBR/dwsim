@@ -1,0 +1,14 @@
+1
+250.0
+s1
+4
+161.38 8.1600E-2 38.286 5.0E-4
+120.00 1.2904E-3 37.069 5.0E-4
+100.00 5.1040E-5 36.543 5.0E-4
+ 80.00 4.0150E-7 36.052 5.0E-4
+
+
+Vm, ps data from Landolt-Börnstein
+except triple point T and p: NIST
+Vm_trp extrapolated from LB data
+other estimate for Vm_trp: 38.45

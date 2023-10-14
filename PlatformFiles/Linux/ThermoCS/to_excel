@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# to_excel: produce Excel input file(s) from ThermoC output
+#	    The Excel files can be imported as "TAB separated ASCII data"
+# usage: see below
+
+if [ $# -ne 2 ]					# correct no. of arguments?
+then
+  echo "usage: to_excel THERMOC_FILE EXCEL_FILE"
+  exit 1
+fi
+
+# The ThermoC programs mark the begin and end of output tables by "+"
+# and "-", resp. We let awk extract the tables; sed removes the leading
+# and trailing blanks in each line, then converts series of blanks to
+# single tabs.
+awk '
+BEGIN	{ mode = 0; }
+/^-/	{ mode = 0; }
+	{ if (mode == 1) print $0; }
+/^\+/	{ mode = 1; }
+' <$1 | sed "s/^ *//
+	s/ *$//
+	s/ [ ]*/	/g" >$2
+exit $?

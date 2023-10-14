@@ -1,0 +1,160 @@
+hydrogen+nitrogen+methane;1
+  hydrogen+nitrogen;1
+  hydrogen+methane;1
+  nitrogen+methane;1
+
+hydrogen+nitrogen+heptane;1
+  hydrogen+nitrogen;1
+  hydrogen+heptane;2
+  nitrogen+heptane;1
+
+hydrogen+nitrogen+decane;1
+  hydrogen+nitrogen;1
+  hydrogen+decane;1
+  nitrogen+decane;1
+
+hydrogen+methane+heptane;1
+  hydrogen+methane;1
+  hydrogen+heptane;2
+  methane+heptane;1
+
+hydrogen+methane+decane;1
+  hydrogen+methane;1
+  hydrogen+decane;1
+  methane+decane;1
+
+nitrogen+methane+carbon_dioxide;1
+  nitrogen+methane;1
+  nitrogen+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+nitrogen+methane+heptane;1
+  nitrogen+methane;1
+  nitrogen+heptane;1
+  methane+heptane;1
+
+nitrogen+methane+decane;1
+  nitrogen+methane;1
+  nitrogen+decane;1
+  methane+decane;1
+
+nitrogen+carbon_dioxide+heptane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+heptane;1
+  carbon_dioxide+heptane;1
+
+nitrogen+carbon_dioxide+decane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+decane;1
+  carbon_dioxide+decane;1
+
+methane+carbon_dioxide+ethane;1
+  methane+carbon_dioxide;1
+  methane+ethane;1
+  carbon_dioxide+ethane;1
+
+methane+carbon_dioxide+ethane;2
+  methane+carbon_dioxide;1
+  methane+ethane;1
+  carbon_dioxide+ethane;2
+
+methane+carbon_dioxide+propane;1
+  methane+carbon_dioxide;1
+  methane+propane;2
+  carbon_dioxide+propane;1
+
+methane+carbon_dioxide+butane;1
+  methane+carbon_dioxide;1
+  methane+butane;1
+  carbon_dioxide+butane;1
+
+methane+carbon_dioxide+butane;2
+  methane+carbon_dioxide;1
+  methane+butane;1
+  carbon_dioxide+butane;2
+
+methane+carbon_dioxide+heptane;1
+  methane+carbon_dioxide;1
+  methane+heptane;1
+  carbon_dioxide+heptane;1
+
+methane+carbon_dioxide+decane;1
+  methane+carbon_dioxide;1
+  methane+decane;1
+  carbon_dioxide+decane;1
+
+methane+propane+pentane;1
+  methane+propane;2
+  methane+pentane;1
+  propane+pentane;1
+
+methane+propane+decane;1
+  methane+propane;2
+  methane+decane;1
+  propane+decane;1
+
+methane+butane+decane;1
+  methane+butane;1
+  methane+decane;1
+  butane+decane;1
+
+carbon_dioxide+ethane+methanol;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+methanol;1
+  ethane+methanol;2
+
+carbon_dioxide+ethane+methanol;2
+  carbon_dioxide+ethane;2
+  carbon_dioxide+methanol;1
+  ethane+methanol;2
+
+carbon_dioxide+R32+propane;1
+  carbon_dioxide+R32;1
+  carbon_dioxide+propane;1
+  R32+propane;1
+
+carbon_dioxide+R32+butane;1
+  carbon_dioxide+R32;1
+  carbon_dioxide+butane;1
+  R32+butane;1
+
+carbon_dioxide+R32+butane;2
+  carbon_dioxide+R32;1
+  carbon_dioxide+butane;2
+  R32+butane;1
+
+carbon_dioxide+propane+decane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+decane;1
+  propane+decane;1
+
+carbon_dioxide+butane+decane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+decane;1
+  butane+decane;1
+
+carbon_dioxide+butane+decane;2
+  carbon_dioxide+butane;2
+  carbon_dioxide+decane;1
+  butane+decane;1
+
+carbon_dioxide+methanol+water;1
+  carbon_dioxide+methanol;1
+  carbon_dioxide+water;1
+  methanol+water;1
+
+R125+R32+R236ea;1
+  R125+R32;1
+  R125+R236ea;1
+  R32+R236ea;1
+
+R125+R32+butane;1
+  R125+R32;1
+  R125+butane;1
+  R32+butane;1
+
+R125+R134a+butane;1
+  R125+R134a;1
+  R125+butane;1
+  R134a+butane;1
+

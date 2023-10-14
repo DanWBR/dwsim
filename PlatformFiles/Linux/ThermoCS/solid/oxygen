@@ -1,0 +1,19 @@
+2
+100.0
+s1
+3
+54.361 1.4633E-4 23.5572 0.0
+49.800 2.7584E-5 23.2298 0.0
+43.801 1.7532E-6 22.8840 0.0
+s2
+2
+43.801 1.7532E-6 21.3000 0.0
+34.170 1.3332E-9 21.3000 0.0
+
+other transition:
+20.65            20.64
+
+triple point: IUPAC Tables of the Fluid State (Wagner)
+solid density: Roder, NBSIR 77-859
+s2-vapour pressure: Landolt-Börnstein
+

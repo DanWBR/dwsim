@@ -1,0 +1,13 @@
+name:	cyclopropane
+id:	10
+text:	CoM; exp data Daubert et al 1997 all parameters predicted
+pc:	 5.03794468e+00
+Tc:	 3.80305527e+02
+vc:	 1.96129788e+02
+par[0]:	 4.20810000e+01
+par[1]:	 2.14937251e+02
+par[2]:	 1.44934420e+01
+par[3]:	 1.91862900e+00
+par[4]:	 2.36930000e+00
+par[5]:	 5.00000000e-04
+par[6]:	 5.37500000e+00

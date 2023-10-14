@@ -1,0 +1,12 @@
+Specifications for solid states with limited miscibility:
+
+To provide parameters for the solubility of compound A in crystalline B
+create a file named "<B>+<A>" with the following contents:
+
+- for each solid phase specified in $THHOME/solid/<B>
+  give the maximum n_A/n_B ratio,
+  the insertion energy for an A molecule into the B crystal (in K),
+  its pressure dependence (in K/MPa),
+  and its temperature dependence (in K/K).
+
+NOTE: Begin with the high-temperature phase!

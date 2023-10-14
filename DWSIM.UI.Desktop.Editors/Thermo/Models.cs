@@ -95,7 +95,8 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             s.CreateAndAddDropDownRow(container, "Force Phase in Material Streams",
-                new System.Collections.Generic.List<string>{ "Do Not Force", "Vapor", "Liquid", "Solid" }, fp, (dd, e) => {
+                new System.Collections.Generic.List<string> { "Do Not Force", "Vapor", "Liquid", "Solid" }, fp, (dd, e) =>
+                {
                     switch (dd.SelectedIndex)
                     {
                         case 0:
@@ -146,11 +147,31 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     }
                                                                     else
                                                                     {
-                                                                        var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont3, cont, advcont[0], advcont[1] });
-                                                                        form.Show();
-                                                                        form.Center();
+                                                                        if (pp is Thermodynamics.ThermoC.ThermoCPropertyPackage)
+                                                                        {
+                                                                            var tceditor = ((Thermodynamics.ThermoC.ThermoCPropertyPackage)pp).GetForm();
+                                                                            var doc1 = (DocumentControl)tceditor.Content;
+                                                                            tceditor.Content = null;
+                                                                            var dyn1 = new DynamicLayout { Padding = new Eto.Drawing.Padding(0) };
+                                                                            dyn1.BeginVertical();
+                                                                            dyn1.AddRow(doc1);
+                                                                            dyn1.EndVertical();
+                                                                            dyn1.Tag = "ThermoC Settings";
+                                                                            doc1.Width = 780 - dyn1.Padding.Value.Left * 2 - dyn1.Padding.Value.Right * 2;
+                                                                            var dynlay1 = new DynamicLayout[] { dyn1, cont3, cont, advcont[0], advcont[1] };
+                                                                            var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, dynlay1);
+                                                                            form.Show();
+                                                                            form.Center();
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            var dynlay1 = new DynamicLayout[] { cont3, cont, advcont[0], advcont[1] };
+                                                                            var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, dynlay1);
+                                                                            form.Show();
+                                                                            form.Center();
+                                                                        }
                                                                     }
-                                                                },                                                                
+                                                                },
                                                                (arg1, arg2) =>
                                                                {
                                                                    if (MessageBox.Show("Confirm removal?", "Remove Property Package", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)

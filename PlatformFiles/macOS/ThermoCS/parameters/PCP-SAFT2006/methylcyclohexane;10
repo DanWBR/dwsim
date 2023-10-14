@@ -1,0 +1,13 @@
+name:	methylcyclohexane
+id:	10
+text:	CoM, chair; exp. data Daubert and Danner all parameters predicted
+pc:	 4.03261033e+00
+Tc:	 6.10353703e+02
+vc:	 3.89608982e+02
+par[0]:	 9.81880000e+01
+par[1]:	 2.87236652e+02
+par[2]:	 1.92901830e+01
+par[3]:	 2.84265500e+00
+par[4]:	 3.69260000e-01
+par[5]:	 6.61730000e-02
+par[6]:	 1.21894000e+01

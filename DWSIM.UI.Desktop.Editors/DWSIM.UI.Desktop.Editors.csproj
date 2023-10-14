@@ -260,6 +260,10 @@
       <Project>{fea05ae3-5ee2-4a7b-88b3-1a4f9000ea08}</Project>
       <Name>DWSIM.Thermodynamics.Databases.KDBLink</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.ThermoC\DWSIM.Thermodynamics.ThermoC.csproj">
+      <Project>{da169354-7c6f-437a-8c32-1a2cb84eab5a}</Project>
+      <Name>DWSIM.Thermodynamics.ThermoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>

@@ -1,0 +1,13 @@
+name:	2,2,4-trimethylpentane
+id:	13
+text:	PC-SAFTP, CoM; exp. Daubert & Danner; 3 parameters fitted
+pc:	 2.92844628e+00
+Tc:	 5.54023704e+02
+vc:	 4.85992820e+02
+par[0]:	 1.14230000e+02
+par[1]:	 2.50047000e+02
+par[2]:	 2.17359000e+01
+par[3]:	 3.13084000e+00
+par[4]:	 7.10070000e-01
+par[5]:	 1.26880000e-01
+par[6]:	 1.49097000e+01

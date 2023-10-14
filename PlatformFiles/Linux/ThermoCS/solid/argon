@@ -1,0 +1,14 @@
+1
+150.0
+s1
+3
+83.8058 6.8891E-2 24.6289 7.8E-4
+80.0000 4.0065E-2 24.3289 7.5E-4
+60.0000 7.3661E-4 24.0361 6.2E-4
+
+
+T_trp, ps from Wagner & Span
+Vm: Landolt-Börnstein II (at T_trp
+given, other values estimated)
+kappa from Landolt-Börnstein
+other estimate at 80 K: 9.2E-4

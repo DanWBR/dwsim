@@ -1,0 +1,4080 @@
+helium+hydrogen+nitrogen;1
+  helium+hydrogen;1
+  helium+nitrogen;1
+  hydrogen+nitrogen;1
+
+helium+hydrogen+carbon_monoxide;1
+  helium+hydrogen;1
+  helium+carbon_monoxide;1
+  hydrogen+carbon_monoxide;1
+
+helium+hydrogen+argon;1
+  helium+hydrogen;1
+  helium+argon;1
+  hydrogen+argon;1
+
+helium+hydrogen+oxygen;1
+  helium+hydrogen;1
+  helium+oxygen;1
+  hydrogen+oxygen;1
+
+helium+hydrogen+methane;1
+  helium+hydrogen;1
+  helium+methane;1
+  hydrogen+methane;1
+
+helium+hydrogen+carbon_dioxide;1
+  helium+hydrogen;1
+  helium+carbon_dioxide;1
+  hydrogen+carbon_dioxide;1
+
+helium+hydrogen+ethane;1
+  helium+hydrogen;1
+  helium+ethane;1
+  hydrogen+ethane;1
+
+helium+hydrogen+propane;1
+  helium+hydrogen;1
+  helium+propane;1
+  hydrogen+propane;1
+
+helium+hydrogen+methylpropane;1
+  helium+hydrogen;1
+  helium+methylpropane;1
+  hydrogen+methylpropane;1
+
+helium+hydrogen+butane;1
+  helium+hydrogen;1
+  helium+butane;1
+  hydrogen+butane;1
+
+helium+hydrogen+methylbutane;1
+  helium+hydrogen;1
+  helium+methylbutane;1
+  hydrogen+methylbutane;1
+
+helium+hydrogen+pentane;1
+  helium+hydrogen;1
+  helium+pentane;1
+  hydrogen+pentane;1
+
+helium+hydrogen+hexane;1
+  helium+hydrogen;1
+  helium+hexane;1
+  hydrogen+hexane;1
+
+helium+hydrogen+heptane;1
+  helium+hydrogen;1
+  helium+heptane;1
+  hydrogen+heptane;1
+
+helium+hydrogen+octane;1
+  helium+hydrogen;1
+  helium+octane;1
+  hydrogen+octane;1
+
+helium+hydrogen+water;1
+  helium+hydrogen;1
+  helium+water;1
+  hydrogen+water;1
+
+helium+nitrogen+carbon_monoxide;1
+  helium+nitrogen;1
+  helium+carbon_monoxide;1
+  nitrogen+carbon_monoxide;1
+
+helium+nitrogen+argon;1
+  helium+nitrogen;1
+  helium+argon;1
+  nitrogen+argon;1
+
+helium+nitrogen+oxygen;1
+  helium+nitrogen;1
+  helium+oxygen;1
+  nitrogen+oxygen;1
+
+helium+nitrogen+methane;1
+  helium+nitrogen;1
+  helium+methane;1
+  nitrogen+methane;1
+
+helium+nitrogen+carbon_dioxide;1
+  helium+nitrogen;1
+  helium+carbon_dioxide;1
+  nitrogen+carbon_dioxide;1
+
+helium+nitrogen+ethane;1
+  helium+nitrogen;1
+  helium+ethane;1
+  nitrogen+ethane;1
+
+helium+nitrogen+propane;1
+  helium+nitrogen;1
+  helium+propane;1
+  nitrogen+propane;1
+
+helium+nitrogen+methylpropane;1
+  helium+nitrogen;1
+  helium+methylpropane;1
+  nitrogen+methylpropane;1
+
+helium+nitrogen+butane;1
+  helium+nitrogen;1
+  helium+butane;1
+  nitrogen+butane;1
+
+helium+nitrogen+methylbutane;1
+  helium+nitrogen;1
+  helium+methylbutane;1
+  nitrogen+methylbutane;1
+
+helium+nitrogen+pentane;1
+  helium+nitrogen;1
+  helium+pentane;1
+  nitrogen+pentane;1
+
+helium+nitrogen+hexane;1
+  helium+nitrogen;1
+  helium+hexane;1
+  nitrogen+hexane;1
+
+helium+nitrogen+heptane;1
+  helium+nitrogen;1
+  helium+heptane;1
+  nitrogen+heptane;1
+
+helium+nitrogen+octane;1
+  helium+nitrogen;1
+  helium+octane;1
+  nitrogen+octane;1
+
+helium+nitrogen+water;1
+  helium+nitrogen;1
+  helium+water;1
+  nitrogen+water;1
+
+helium+carbon_monoxide+argon;1
+  helium+carbon_monoxide;1
+  helium+argon;1
+  carbon_monoxide+argon;1
+
+helium+carbon_monoxide+oxygen;1
+  helium+carbon_monoxide;1
+  helium+oxygen;1
+  carbon_monoxide+oxygen;1
+
+helium+carbon_monoxide+methane;1
+  helium+carbon_monoxide;1
+  helium+methane;1
+  carbon_monoxide+methane;1
+
+helium+carbon_monoxide+carbon_dioxide;1
+  helium+carbon_monoxide;1
+  helium+carbon_dioxide;1
+  carbon_monoxide+carbon_dioxide;1
+
+helium+carbon_monoxide+ethane;1
+  helium+carbon_monoxide;1
+  helium+ethane;1
+  carbon_monoxide+ethane;1
+
+helium+carbon_monoxide+propane;1
+  helium+carbon_monoxide;1
+  helium+propane;1
+  carbon_monoxide+propane;1
+
+helium+carbon_monoxide+methylpropane;1
+  helium+carbon_monoxide;1
+  helium+methylpropane;1
+  carbon_monoxide+methylpropane;1
+
+helium+carbon_monoxide+butane;1
+  helium+carbon_monoxide;1
+  helium+butane;1
+  carbon_monoxide+butane;1
+
+helium+carbon_monoxide+methylbutane;1
+  helium+carbon_monoxide;1
+  helium+methylbutane;1
+  carbon_monoxide+methylbutane;1
+
+helium+carbon_monoxide+pentane;1
+  helium+carbon_monoxide;1
+  helium+pentane;1
+  carbon_monoxide+pentane;1
+
+helium+carbon_monoxide+hexane;1
+  helium+carbon_monoxide;1
+  helium+hexane;1
+  carbon_monoxide+hexane;1
+
+helium+carbon_monoxide+heptane;1
+  helium+carbon_monoxide;1
+  helium+heptane;1
+  carbon_monoxide+heptane;1
+
+helium+carbon_monoxide+octane;1
+  helium+carbon_monoxide;1
+  helium+octane;1
+  carbon_monoxide+octane;1
+
+helium+carbon_monoxide+water;1
+  helium+carbon_monoxide;1
+  helium+water;1
+  carbon_monoxide+water;1
+
+helium+argon+oxygen;1
+  helium+argon;1
+  helium+oxygen;1
+  argon+oxygen;1
+
+helium+argon+methane;1
+  helium+argon;1
+  helium+methane;1
+  argon+methane;1
+
+helium+argon+carbon_dioxide;1
+  helium+argon;1
+  helium+carbon_dioxide;1
+  argon+carbon_dioxide;1
+
+helium+argon+ethane;1
+  helium+argon;1
+  helium+ethane;1
+  argon+ethane;1
+
+helium+argon+propane;1
+  helium+argon;1
+  helium+propane;1
+  argon+propane;1
+
+helium+argon+methylpropane;1
+  helium+argon;1
+  helium+methylpropane;1
+  argon+methylpropane;1
+
+helium+argon+butane;1
+  helium+argon;1
+  helium+butane;1
+  argon+butane;1
+
+helium+argon+methylbutane;1
+  helium+argon;1
+  helium+methylbutane;1
+  argon+methylbutane;1
+
+helium+argon+pentane;1
+  helium+argon;1
+  helium+pentane;1
+  argon+pentane;1
+
+helium+argon+hexane;1
+  helium+argon;1
+  helium+hexane;1
+  argon+hexane;1
+
+helium+argon+heptane;1
+  helium+argon;1
+  helium+heptane;1
+  argon+heptane;1
+
+helium+argon+octane;1
+  helium+argon;1
+  helium+octane;1
+  argon+octane;1
+
+helium+argon+water;1
+  helium+argon;1
+  helium+water;1
+  argon+water;1
+
+helium+oxygen+methane;1
+  helium+oxygen;1
+  helium+methane;1
+  oxygen+methane;1
+
+helium+oxygen+carbon_dioxide;1
+  helium+oxygen;1
+  helium+carbon_dioxide;1
+  oxygen+carbon_dioxide;1
+
+helium+oxygen+ethane;1
+  helium+oxygen;1
+  helium+ethane;1
+  oxygen+ethane;1
+
+helium+oxygen+propane;1
+  helium+oxygen;1
+  helium+propane;1
+  oxygen+propane;1
+
+helium+oxygen+methylpropane;1
+  helium+oxygen;1
+  helium+methylpropane;1
+  oxygen+methylpropane;1
+
+helium+oxygen+butane;1
+  helium+oxygen;1
+  helium+butane;1
+  oxygen+butane;1
+
+helium+oxygen+methylbutane;1
+  helium+oxygen;1
+  helium+methylbutane;1
+  oxygen+methylbutane;1
+
+helium+oxygen+pentane;1
+  helium+oxygen;1
+  helium+pentane;1
+  oxygen+pentane;1
+
+helium+oxygen+hexane;1
+  helium+oxygen;1
+  helium+hexane;1
+  oxygen+hexane;1
+
+helium+oxygen+heptane;1
+  helium+oxygen;1
+  helium+heptane;1
+  oxygen+heptane;1
+
+helium+oxygen+octane;1
+  helium+oxygen;1
+  helium+octane;1
+  oxygen+octane;1
+
+helium+oxygen+water;1
+  helium+oxygen;1
+  helium+water;1
+  oxygen+water;1
+
+helium+methane+carbon_dioxide;1
+  helium+methane;1
+  helium+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+helium+methane+ethane;1
+  helium+methane;1
+  helium+ethane;1
+  methane+ethane;1
+
+helium+methane+propane;1
+  helium+methane;1
+  helium+propane;1
+  methane+propane;1
+
+helium+methane+methylpropane;1
+  helium+methane;1
+  helium+methylpropane;1
+  methane+methylpropane;1
+
+helium+methane+butane;1
+  helium+methane;1
+  helium+butane;1
+  methane+butane;1
+
+helium+methane+methylbutane;1
+  helium+methane;1
+  helium+methylbutane;1
+  methane+methylbutane;1
+
+helium+methane+pentane;1
+  helium+methane;1
+  helium+pentane;1
+  methane+pentane;1
+
+helium+methane+hexane;1
+  helium+methane;1
+  helium+hexane;1
+  methane+hexane;1
+
+helium+methane+heptane;1
+  helium+methane;1
+  helium+heptane;1
+  methane+heptane;1
+
+helium+methane+octane;1
+  helium+methane;1
+  helium+octane;1
+  methane+octane;1
+
+helium+methane+water;1
+  helium+methane;1
+  helium+water;1
+  methane+water;1
+
+helium+carbon_dioxide+ethane;1
+  helium+carbon_dioxide;1
+  helium+ethane;1
+  carbon_dioxide+ethane;1
+
+helium+carbon_dioxide+propane;1
+  helium+carbon_dioxide;1
+  helium+propane;1
+  carbon_dioxide+propane;1
+
+helium+carbon_dioxide+methylpropane;1
+  helium+carbon_dioxide;1
+  helium+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+helium+carbon_dioxide+butane;1
+  helium+carbon_dioxide;1
+  helium+butane;1
+  carbon_dioxide+butane;1
+
+helium+carbon_dioxide+methylbutane;1
+  helium+carbon_dioxide;1
+  helium+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+helium+carbon_dioxide+pentane;1
+  helium+carbon_dioxide;1
+  helium+pentane;1
+  carbon_dioxide+pentane;1
+
+helium+carbon_dioxide+hexane;1
+  helium+carbon_dioxide;1
+  helium+hexane;1
+  carbon_dioxide+hexane;1
+
+helium+carbon_dioxide+heptane;1
+  helium+carbon_dioxide;1
+  helium+heptane;1
+  carbon_dioxide+heptane;1
+
+helium+carbon_dioxide+octane;1
+  helium+carbon_dioxide;1
+  helium+octane;1
+  carbon_dioxide+octane;1
+
+helium+carbon_dioxide+water;1
+  helium+carbon_dioxide;1
+  helium+water;1
+  carbon_dioxide+water;1
+
+helium+ethane+propane;1
+  helium+ethane;1
+  helium+propane;1
+  ethane+propane;1
+
+helium+ethane+methylpropane;1
+  helium+ethane;1
+  helium+methylpropane;1
+  ethane+methylpropane;1
+
+helium+ethane+butane;1
+  helium+ethane;1
+  helium+butane;1
+  ethane+butane;1
+
+helium+ethane+methylbutane;1
+  helium+ethane;1
+  helium+methylbutane;1
+  ethane+methylbutane;1
+
+helium+ethane+pentane;1
+  helium+ethane;1
+  helium+pentane;1
+  ethane+pentane;1
+
+helium+ethane+hexane;1
+  helium+ethane;1
+  helium+hexane;1
+  ethane+hexane;1
+
+helium+ethane+heptane;1
+  helium+ethane;1
+  helium+heptane;1
+  ethane+heptane;1
+
+helium+ethane+octane;1
+  helium+ethane;1
+  helium+octane;1
+  ethane+octane;1
+
+helium+ethane+water;1
+  helium+ethane;1
+  helium+water;1
+  ethane+water;1
+
+helium+propane+methylpropane;1
+  helium+propane;1
+  helium+methylpropane;1
+  propane+methylpropane;1
+
+helium+propane+butane;1
+  helium+propane;1
+  helium+butane;1
+  propane+butane;1
+
+helium+propane+methylbutane;1
+  helium+propane;1
+  helium+methylbutane;1
+  propane+methylbutane;1
+
+helium+propane+pentane;1
+  helium+propane;1
+  helium+pentane;1
+  propane+pentane;1
+
+helium+propane+hexane;1
+  helium+propane;1
+  helium+hexane;1
+  propane+hexane;1
+
+helium+propane+heptane;1
+  helium+propane;1
+  helium+heptane;1
+  propane+heptane;1
+
+helium+propane+octane;1
+  helium+propane;1
+  helium+octane;1
+  propane+octane;1
+
+helium+propane+water;1
+  helium+propane;1
+  helium+water;1
+  propane+water;1
+
+helium+methylpropane+butane;1
+  helium+methylpropane;1
+  helium+butane;1
+  methylpropane+butane;1
+
+helium+methylpropane+methylbutane;1
+  helium+methylpropane;1
+  helium+methylbutane;1
+  methylpropane+methylbutane;1
+
+helium+methylpropane+pentane;1
+  helium+methylpropane;1
+  helium+pentane;1
+  methylpropane+pentane;1
+
+helium+methylpropane+hexane;1
+  helium+methylpropane;1
+  helium+hexane;1
+  methylpropane+hexane;1
+
+helium+methylpropane+heptane;1
+  helium+methylpropane;1
+  helium+heptane;1
+  methylpropane+heptane;1
+
+helium+methylpropane+octane;1
+  helium+methylpropane;1
+  helium+octane;1
+  methylpropane+octane;1
+
+helium+methylpropane+water;1
+  helium+methylpropane;1
+  helium+water;1
+  methylpropane+water;1
+
+helium+butane+methylbutane;1
+  helium+butane;1
+  helium+methylbutane;1
+  butane+methylbutane;1
+
+helium+butane+pentane;1
+  helium+butane;1
+  helium+pentane;1
+  butane+pentane;1
+
+helium+butane+hexane;1
+  helium+butane;1
+  helium+hexane;1
+  butane+hexane;1
+
+helium+butane+heptane;1
+  helium+butane;1
+  helium+heptane;1
+  butane+heptane;1
+
+helium+butane+octane;1
+  helium+butane;1
+  helium+octane;1
+  butane+octane;1
+
+helium+butane+water;1
+  helium+butane;1
+  helium+water;1
+  butane+water;1
+
+helium+methylbutane+pentane;1
+  helium+methylbutane;1
+  helium+pentane;1
+  methylbutane+pentane;1
+
+helium+methylbutane+hexane;1
+  helium+methylbutane;1
+  helium+hexane;1
+  methylbutane+hexane;1
+
+helium+methylbutane+heptane;1
+  helium+methylbutane;1
+  helium+heptane;1
+  methylbutane+heptane;1
+
+helium+methylbutane+octane;1
+  helium+methylbutane;1
+  helium+octane;1
+  methylbutane+octane;1
+
+helium+methylbutane+water;1
+  helium+methylbutane;1
+  helium+water;1
+  methylbutane+water;1
+
+helium+pentane+hexane;1
+  helium+pentane;1
+  helium+hexane;1
+  pentane+hexane;1
+
+helium+pentane+heptane;1
+  helium+pentane;1
+  helium+heptane;1
+  pentane+heptane;1
+
+helium+pentane+octane;1
+  helium+pentane;1
+  helium+octane;1
+  pentane+octane;1
+
+helium+pentane+water;1
+  helium+pentane;1
+  helium+water;1
+  pentane+water;1
+
+helium+hexane+heptane;1
+  helium+hexane;1
+  helium+heptane;1
+  hexane+heptane;1
+
+helium+hexane+octane;1
+  helium+hexane;1
+  helium+octane;1
+  hexane+octane;1
+
+helium+hexane+water;1
+  helium+hexane;1
+  helium+water;1
+  hexane+water;1
+
+helium+heptane+octane;1
+  helium+heptane;1
+  helium+octane;1
+  heptane+octane;1
+
+helium+heptane+water;1
+  helium+heptane;1
+  helium+water;1
+  heptane+water;1
+
+helium+octane+water;1
+  helium+octane;1
+  helium+water;1
+  octane+water;1
+
+hydrogen+nitrogen+carbon_monoxide;1
+  hydrogen+nitrogen;1
+  hydrogen+carbon_monoxide;1
+  nitrogen+carbon_monoxide;1
+
+hydrogen+nitrogen+argon;1
+  hydrogen+nitrogen;1
+  hydrogen+argon;1
+  nitrogen+argon;1
+
+hydrogen+nitrogen+oxygen;1
+  hydrogen+nitrogen;1
+  hydrogen+oxygen;1
+  nitrogen+oxygen;1
+
+hydrogen+nitrogen+methane;1
+  hydrogen+nitrogen;1
+  hydrogen+methane;1
+  nitrogen+methane;1
+
+hydrogen+nitrogen+carbon_dioxide;1
+  hydrogen+nitrogen;1
+  hydrogen+carbon_dioxide;1
+  nitrogen+carbon_dioxide;1
+
+hydrogen+nitrogen+ethane;1
+  hydrogen+nitrogen;1
+  hydrogen+ethane;1
+  nitrogen+ethane;1
+
+hydrogen+nitrogen+propane;1
+  hydrogen+nitrogen;1
+  hydrogen+propane;1
+  nitrogen+propane;1
+
+hydrogen+nitrogen+methylpropane;1
+  hydrogen+nitrogen;1
+  hydrogen+methylpropane;1
+  nitrogen+methylpropane;1
+
+hydrogen+nitrogen+butane;1
+  hydrogen+nitrogen;1
+  hydrogen+butane;1
+  nitrogen+butane;1
+
+hydrogen+nitrogen+methylbutane;1
+  hydrogen+nitrogen;1
+  hydrogen+methylbutane;1
+  nitrogen+methylbutane;1
+
+hydrogen+nitrogen+pentane;1
+  hydrogen+nitrogen;1
+  hydrogen+pentane;1
+  nitrogen+pentane;1
+
+hydrogen+nitrogen+hexane;1
+  hydrogen+nitrogen;1
+  hydrogen+hexane;1
+  nitrogen+hexane;1
+
+hydrogen+nitrogen+heptane;1
+  hydrogen+nitrogen;1
+  hydrogen+heptane;1
+  nitrogen+heptane;1
+
+hydrogen+nitrogen+octane;1
+  hydrogen+nitrogen;1
+  hydrogen+octane;1
+  nitrogen+octane;1
+
+hydrogen+nitrogen+water;1
+  hydrogen+nitrogen;1
+  hydrogen+water;1
+  nitrogen+water;1
+
+hydrogen+carbon_monoxide+argon;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+argon;1
+  carbon_monoxide+argon;1
+
+hydrogen+carbon_monoxide+oxygen;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+oxygen;1
+  carbon_monoxide+oxygen;1
+
+hydrogen+carbon_monoxide+methane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+methane;1
+  carbon_monoxide+methane;1
+
+hydrogen+carbon_monoxide+carbon_dioxide;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+carbon_dioxide;1
+  carbon_monoxide+carbon_dioxide;1
+
+hydrogen+carbon_monoxide+ethane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+ethane;1
+  carbon_monoxide+ethane;1
+
+hydrogen+carbon_monoxide+propane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+propane;1
+  carbon_monoxide+propane;1
+
+hydrogen+carbon_monoxide+methylpropane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+methylpropane;1
+  carbon_monoxide+methylpropane;1
+
+hydrogen+carbon_monoxide+butane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+butane;1
+  carbon_monoxide+butane;1
+
+hydrogen+carbon_monoxide+methylbutane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+methylbutane;1
+  carbon_monoxide+methylbutane;1
+
+hydrogen+carbon_monoxide+pentane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+pentane;1
+  carbon_monoxide+pentane;1
+
+hydrogen+carbon_monoxide+hexane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+hexane;1
+  carbon_monoxide+hexane;1
+
+hydrogen+carbon_monoxide+heptane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+heptane;1
+  carbon_monoxide+heptane;1
+
+hydrogen+carbon_monoxide+octane;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+octane;1
+  carbon_monoxide+octane;1
+
+hydrogen+carbon_monoxide+water;1
+  hydrogen+carbon_monoxide;1
+  hydrogen+water;1
+  carbon_monoxide+water;1
+
+hydrogen+argon+oxygen;1
+  hydrogen+argon;1
+  hydrogen+oxygen;1
+  argon+oxygen;1
+
+hydrogen+argon+methane;1
+  hydrogen+argon;1
+  hydrogen+methane;1
+  argon+methane;1
+
+hydrogen+argon+carbon_dioxide;1
+  hydrogen+argon;1
+  hydrogen+carbon_dioxide;1
+  argon+carbon_dioxide;1
+
+hydrogen+argon+ethane;1
+  hydrogen+argon;1
+  hydrogen+ethane;1
+  argon+ethane;1
+
+hydrogen+argon+propane;1
+  hydrogen+argon;1
+  hydrogen+propane;1
+  argon+propane;1
+
+hydrogen+argon+methylpropane;1
+  hydrogen+argon;1
+  hydrogen+methylpropane;1
+  argon+methylpropane;1
+
+hydrogen+argon+butane;1
+  hydrogen+argon;1
+  hydrogen+butane;1
+  argon+butane;1
+
+hydrogen+argon+methylbutane;1
+  hydrogen+argon;1
+  hydrogen+methylbutane;1
+  argon+methylbutane;1
+
+hydrogen+argon+pentane;1
+  hydrogen+argon;1
+  hydrogen+pentane;1
+  argon+pentane;1
+
+hydrogen+argon+hexane;1
+  hydrogen+argon;1
+  hydrogen+hexane;1
+  argon+hexane;1
+
+hydrogen+argon+heptane;1
+  hydrogen+argon;1
+  hydrogen+heptane;1
+  argon+heptane;1
+
+hydrogen+argon+octane;1
+  hydrogen+argon;1
+  hydrogen+octane;1
+  argon+octane;1
+
+hydrogen+argon+water;1
+  hydrogen+argon;1
+  hydrogen+water;1
+  argon+water;1
+
+hydrogen+oxygen+methane;1
+  hydrogen+oxygen;1
+  hydrogen+methane;1
+  oxygen+methane;1
+
+hydrogen+oxygen+carbon_dioxide;1
+  hydrogen+oxygen;1
+  hydrogen+carbon_dioxide;1
+  oxygen+carbon_dioxide;1
+
+hydrogen+oxygen+ethane;1
+  hydrogen+oxygen;1
+  hydrogen+ethane;1
+  oxygen+ethane;1
+
+hydrogen+oxygen+propane;1
+  hydrogen+oxygen;1
+  hydrogen+propane;1
+  oxygen+propane;1
+
+hydrogen+oxygen+methylpropane;1
+  hydrogen+oxygen;1
+  hydrogen+methylpropane;1
+  oxygen+methylpropane;1
+
+hydrogen+oxygen+butane;1
+  hydrogen+oxygen;1
+  hydrogen+butane;1
+  oxygen+butane;1
+
+hydrogen+oxygen+methylbutane;1
+  hydrogen+oxygen;1
+  hydrogen+methylbutane;1
+  oxygen+methylbutane;1
+
+hydrogen+oxygen+pentane;1
+  hydrogen+oxygen;1
+  hydrogen+pentane;1
+  oxygen+pentane;1
+
+hydrogen+oxygen+hexane;1
+  hydrogen+oxygen;1
+  hydrogen+hexane;1
+  oxygen+hexane;1
+
+hydrogen+oxygen+heptane;1
+  hydrogen+oxygen;1
+  hydrogen+heptane;1
+  oxygen+heptane;1
+
+hydrogen+oxygen+octane;1
+  hydrogen+oxygen;1
+  hydrogen+octane;1
+  oxygen+octane;1
+
+hydrogen+oxygen+water;1
+  hydrogen+oxygen;1
+  hydrogen+water;1
+  oxygen+water;1
+
+hydrogen+methane+carbon_dioxide;1
+  hydrogen+methane;1
+  hydrogen+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+hydrogen+methane+ethane;1
+  hydrogen+methane;1
+  hydrogen+ethane;1
+  methane+ethane;1
+
+hydrogen+methane+propane;1
+  hydrogen+methane;1
+  hydrogen+propane;1
+  methane+propane;1
+
+hydrogen+methane+methylpropane;1
+  hydrogen+methane;1
+  hydrogen+methylpropane;1
+  methane+methylpropane;1
+
+hydrogen+methane+butane;1
+  hydrogen+methane;1
+  hydrogen+butane;1
+  methane+butane;1
+
+hydrogen+methane+methylbutane;1
+  hydrogen+methane;1
+  hydrogen+methylbutane;1
+  methane+methylbutane;1
+
+hydrogen+methane+pentane;1
+  hydrogen+methane;1
+  hydrogen+pentane;1
+  methane+pentane;1
+
+hydrogen+methane+hexane;1
+  hydrogen+methane;1
+  hydrogen+hexane;1
+  methane+hexane;1
+
+hydrogen+methane+heptane;1
+  hydrogen+methane;1
+  hydrogen+heptane;1
+  methane+heptane;1
+
+hydrogen+methane+octane;1
+  hydrogen+methane;1
+  hydrogen+octane;1
+  methane+octane;1
+
+hydrogen+methane+water;1
+  hydrogen+methane;1
+  hydrogen+water;1
+  methane+water;1
+
+hydrogen+carbon_dioxide+ethane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+ethane;1
+  carbon_dioxide+ethane;1
+
+hydrogen+carbon_dioxide+propane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+propane;1
+  carbon_dioxide+propane;1
+
+hydrogen+carbon_dioxide+methylpropane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+hydrogen+carbon_dioxide+butane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+butane;1
+  carbon_dioxide+butane;1
+
+hydrogen+carbon_dioxide+methylbutane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+hydrogen+carbon_dioxide+pentane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+pentane;1
+  carbon_dioxide+pentane;1
+
+hydrogen+carbon_dioxide+hexane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+hexane;1
+  carbon_dioxide+hexane;1
+
+hydrogen+carbon_dioxide+heptane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+heptane;1
+  carbon_dioxide+heptane;1
+
+hydrogen+carbon_dioxide+octane;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+octane;1
+  carbon_dioxide+octane;1
+
+hydrogen+carbon_dioxide+water;1
+  hydrogen+carbon_dioxide;1
+  hydrogen+water;1
+  carbon_dioxide+water;1
+
+hydrogen+ethane+propane;1
+  hydrogen+ethane;1
+  hydrogen+propane;1
+  ethane+propane;1
+
+hydrogen+ethane+methylpropane;1
+  hydrogen+ethane;1
+  hydrogen+methylpropane;1
+  ethane+methylpropane;1
+
+hydrogen+ethane+butane;1
+  hydrogen+ethane;1
+  hydrogen+butane;1
+  ethane+butane;1
+
+hydrogen+ethane+methylbutane;1
+  hydrogen+ethane;1
+  hydrogen+methylbutane;1
+  ethane+methylbutane;1
+
+hydrogen+ethane+pentane;1
+  hydrogen+ethane;1
+  hydrogen+pentane;1
+  ethane+pentane;1
+
+hydrogen+ethane+hexane;1
+  hydrogen+ethane;1
+  hydrogen+hexane;1
+  ethane+hexane;1
+
+hydrogen+ethane+heptane;1
+  hydrogen+ethane;1
+  hydrogen+heptane;1
+  ethane+heptane;1
+
+hydrogen+ethane+octane;1
+  hydrogen+ethane;1
+  hydrogen+octane;1
+  ethane+octane;1
+
+hydrogen+ethane+water;1
+  hydrogen+ethane;1
+  hydrogen+water;1
+  ethane+water;1
+
+hydrogen+propane+methylpropane;1
+  hydrogen+propane;1
+  hydrogen+methylpropane;1
+  propane+methylpropane;1
+
+hydrogen+propane+butane;1
+  hydrogen+propane;1
+  hydrogen+butane;1
+  propane+butane;1
+
+hydrogen+propane+methylbutane;1
+  hydrogen+propane;1
+  hydrogen+methylbutane;1
+  propane+methylbutane;1
+
+hydrogen+propane+pentane;1
+  hydrogen+propane;1
+  hydrogen+pentane;1
+  propane+pentane;1
+
+hydrogen+propane+hexane;1
+  hydrogen+propane;1
+  hydrogen+hexane;1
+  propane+hexane;1
+
+hydrogen+propane+heptane;1
+  hydrogen+propane;1
+  hydrogen+heptane;1
+  propane+heptane;1
+
+hydrogen+propane+octane;1
+  hydrogen+propane;1
+  hydrogen+octane;1
+  propane+octane;1
+
+hydrogen+propane+water;1
+  hydrogen+propane;1
+  hydrogen+water;1
+  propane+water;1
+
+hydrogen+methylpropane+butane;1
+  hydrogen+methylpropane;1
+  hydrogen+butane;1
+  methylpropane+butane;1
+
+hydrogen+methylpropane+methylbutane;1
+  hydrogen+methylpropane;1
+  hydrogen+methylbutane;1
+  methylpropane+methylbutane;1
+
+hydrogen+methylpropane+pentane;1
+  hydrogen+methylpropane;1
+  hydrogen+pentane;1
+  methylpropane+pentane;1
+
+hydrogen+methylpropane+hexane;1
+  hydrogen+methylpropane;1
+  hydrogen+hexane;1
+  methylpropane+hexane;1
+
+hydrogen+methylpropane+heptane;1
+  hydrogen+methylpropane;1
+  hydrogen+heptane;1
+  methylpropane+heptane;1
+
+hydrogen+methylpropane+octane;1
+  hydrogen+methylpropane;1
+  hydrogen+octane;1
+  methylpropane+octane;1
+
+hydrogen+methylpropane+water;1
+  hydrogen+methylpropane;1
+  hydrogen+water;1
+  methylpropane+water;1
+
+hydrogen+butane+methylbutane;1
+  hydrogen+butane;1
+  hydrogen+methylbutane;1
+  butane+methylbutane;1
+
+hydrogen+butane+pentane;1
+  hydrogen+butane;1
+  hydrogen+pentane;1
+  butane+pentane;1
+
+hydrogen+butane+hexane;1
+  hydrogen+butane;1
+  hydrogen+hexane;1
+  butane+hexane;1
+
+hydrogen+butane+heptane;1
+  hydrogen+butane;1
+  hydrogen+heptane;1
+  butane+heptane;1
+
+hydrogen+butane+octane;1
+  hydrogen+butane;1
+  hydrogen+octane;1
+  butane+octane;1
+
+hydrogen+butane+water;1
+  hydrogen+butane;1
+  hydrogen+water;1
+  butane+water;1
+
+hydrogen+methylbutane+pentane;1
+  hydrogen+methylbutane;1
+  hydrogen+pentane;1
+  methylbutane+pentane;1
+
+hydrogen+methylbutane+hexane;1
+  hydrogen+methylbutane;1
+  hydrogen+hexane;1
+  methylbutane+hexane;1
+
+hydrogen+methylbutane+heptane;1
+  hydrogen+methylbutane;1
+  hydrogen+heptane;1
+  methylbutane+heptane;1
+
+hydrogen+methylbutane+octane;1
+  hydrogen+methylbutane;1
+  hydrogen+octane;1
+  methylbutane+octane;1
+
+hydrogen+methylbutane+water;1
+  hydrogen+methylbutane;1
+  hydrogen+water;1
+  methylbutane+water;1
+
+hydrogen+pentane+hexane;1
+  hydrogen+pentane;1
+  hydrogen+hexane;1
+  pentane+hexane;1
+
+hydrogen+pentane+heptane;1
+  hydrogen+pentane;1
+  hydrogen+heptane;1
+  pentane+heptane;1
+
+hydrogen+pentane+octane;1
+  hydrogen+pentane;1
+  hydrogen+octane;1
+  pentane+octane;1
+
+hydrogen+pentane+water;1
+  hydrogen+pentane;1
+  hydrogen+water;1
+  pentane+water;1
+
+hydrogen+hexane+heptane;1
+  hydrogen+hexane;1
+  hydrogen+heptane;1
+  hexane+heptane;1
+
+hydrogen+hexane+octane;1
+  hydrogen+hexane;1
+  hydrogen+octane;1
+  hexane+octane;1
+
+hydrogen+hexane+water;1
+  hydrogen+hexane;1
+  hydrogen+water;1
+  hexane+water;1
+
+hydrogen+heptane+octane;1
+  hydrogen+heptane;1
+  hydrogen+octane;1
+  heptane+octane;1
+
+hydrogen+heptane+water;1
+  hydrogen+heptane;1
+  hydrogen+water;1
+  heptane+water;1
+
+hydrogen+octane+water;1
+  hydrogen+octane;1
+  hydrogen+water;1
+  octane+water;1
+
+nitrogen+carbon_monoxide+argon;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+argon;1
+  carbon_monoxide+argon;1
+
+nitrogen+carbon_monoxide+oxygen;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+oxygen;1
+  carbon_monoxide+oxygen;1
+
+nitrogen+carbon_monoxide+methane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+methane;1
+  carbon_monoxide+methane;1
+
+nitrogen+carbon_monoxide+carbon_dioxide;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+carbon_dioxide;1
+  carbon_monoxide+carbon_dioxide;1
+
+nitrogen+carbon_monoxide+ethane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+ethane;1
+  carbon_monoxide+ethane;1
+
+nitrogen+carbon_monoxide+propane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+propane;1
+  carbon_monoxide+propane;1
+
+nitrogen+carbon_monoxide+methylpropane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+methylpropane;1
+  carbon_monoxide+methylpropane;1
+
+nitrogen+carbon_monoxide+butane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+butane;1
+  carbon_monoxide+butane;1
+
+nitrogen+carbon_monoxide+methylbutane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+methylbutane;1
+  carbon_monoxide+methylbutane;1
+
+nitrogen+carbon_monoxide+pentane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+pentane;1
+  carbon_monoxide+pentane;1
+
+nitrogen+carbon_monoxide+hexane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+hexane;1
+  carbon_monoxide+hexane;1
+
+nitrogen+carbon_monoxide+heptane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+heptane;1
+  carbon_monoxide+heptane;1
+
+nitrogen+carbon_monoxide+octane;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+octane;1
+  carbon_monoxide+octane;1
+
+nitrogen+carbon_monoxide+water;1
+  nitrogen+carbon_monoxide;1
+  nitrogen+water;1
+  carbon_monoxide+water;1
+
+nitrogen+argon+oxygen;1
+  nitrogen+argon;1
+  nitrogen+oxygen;1
+  argon+oxygen;1
+
+nitrogen+argon+methane;1
+  nitrogen+argon;1
+  nitrogen+methane;1
+  argon+methane;1
+
+nitrogen+argon+carbon_dioxide;1
+  nitrogen+argon;1
+  nitrogen+carbon_dioxide;1
+  argon+carbon_dioxide;1
+
+nitrogen+argon+ethane;1
+  nitrogen+argon;1
+  nitrogen+ethane;1
+  argon+ethane;1
+
+nitrogen+argon+propane;1
+  nitrogen+argon;1
+  nitrogen+propane;1
+  argon+propane;1
+
+nitrogen+argon+methylpropane;1
+  nitrogen+argon;1
+  nitrogen+methylpropane;1
+  argon+methylpropane;1
+
+nitrogen+argon+butane;1
+  nitrogen+argon;1
+  nitrogen+butane;1
+  argon+butane;1
+
+nitrogen+argon+methylbutane;1
+  nitrogen+argon;1
+  nitrogen+methylbutane;1
+  argon+methylbutane;1
+
+nitrogen+argon+pentane;1
+  nitrogen+argon;1
+  nitrogen+pentane;1
+  argon+pentane;1
+
+nitrogen+argon+hexane;1
+  nitrogen+argon;1
+  nitrogen+hexane;1
+  argon+hexane;1
+
+nitrogen+argon+heptane;1
+  nitrogen+argon;1
+  nitrogen+heptane;1
+  argon+heptane;1
+
+nitrogen+argon+octane;1
+  nitrogen+argon;1
+  nitrogen+octane;1
+  argon+octane;1
+
+nitrogen+argon+water;1
+  nitrogen+argon;1
+  nitrogen+water;1
+  argon+water;1
+
+nitrogen+oxygen+methane;1
+  nitrogen+oxygen;1
+  nitrogen+methane;1
+  oxygen+methane;1
+
+nitrogen+oxygen+carbon_dioxide;1
+  nitrogen+oxygen;1
+  nitrogen+carbon_dioxide;1
+  oxygen+carbon_dioxide;1
+
+nitrogen+oxygen+ethane;1
+  nitrogen+oxygen;1
+  nitrogen+ethane;1
+  oxygen+ethane;1
+
+nitrogen+oxygen+propane;1
+  nitrogen+oxygen;1
+  nitrogen+propane;1
+  oxygen+propane;1
+
+nitrogen+oxygen+methylpropane;1
+  nitrogen+oxygen;1
+  nitrogen+methylpropane;1
+  oxygen+methylpropane;1
+
+nitrogen+oxygen+butane;1
+  nitrogen+oxygen;1
+  nitrogen+butane;1
+  oxygen+butane;1
+
+nitrogen+oxygen+methylbutane;1
+  nitrogen+oxygen;1
+  nitrogen+methylbutane;1
+  oxygen+methylbutane;1
+
+nitrogen+oxygen+pentane;1
+  nitrogen+oxygen;1
+  nitrogen+pentane;1
+  oxygen+pentane;1
+
+nitrogen+oxygen+hexane;1
+  nitrogen+oxygen;1
+  nitrogen+hexane;1
+  oxygen+hexane;1
+
+nitrogen+oxygen+heptane;1
+  nitrogen+oxygen;1
+  nitrogen+heptane;1
+  oxygen+heptane;1
+
+nitrogen+oxygen+octane;1
+  nitrogen+oxygen;1
+  nitrogen+octane;1
+  oxygen+octane;1
+
+nitrogen+oxygen+water;1
+  nitrogen+oxygen;1
+  nitrogen+water;1
+  oxygen+water;1
+
+nitrogen+methane+carbon_dioxide;1
+  nitrogen+methane;1
+  nitrogen+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+nitrogen+methane+ethane;1
+  nitrogen+methane;1
+  nitrogen+ethane;1
+  methane+ethane;1
+
+nitrogen+methane+propane;1
+  nitrogen+methane;1
+  nitrogen+propane;1
+  methane+propane;1
+
+nitrogen+methane+methylpropane;1
+  nitrogen+methane;1
+  nitrogen+methylpropane;1
+  methane+methylpropane;1
+
+nitrogen+methane+butane;1
+  nitrogen+methane;1
+  nitrogen+butane;1
+  methane+butane;1
+
+nitrogen+methane+methylbutane;1
+  nitrogen+methane;1
+  nitrogen+methylbutane;1
+  methane+methylbutane;1
+
+nitrogen+methane+pentane;1
+  nitrogen+methane;1
+  nitrogen+pentane;1
+  methane+pentane;1
+
+nitrogen+methane+hexane;1
+  nitrogen+methane;1
+  nitrogen+hexane;1
+  methane+hexane;1
+
+nitrogen+methane+heptane;1
+  nitrogen+methane;1
+  nitrogen+heptane;1
+  methane+heptane;1
+
+nitrogen+methane+octane;1
+  nitrogen+methane;1
+  nitrogen+octane;1
+  methane+octane;1
+
+nitrogen+methane+water;1
+  nitrogen+methane;1
+  nitrogen+water;1
+  methane+water;1
+
+nitrogen+carbon_dioxide+ethane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+ethane;1
+  carbon_dioxide+ethane;1
+
+nitrogen+carbon_dioxide+propane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+propane;1
+  carbon_dioxide+propane;1
+
+nitrogen+carbon_dioxide+methylpropane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+nitrogen+carbon_dioxide+butane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+butane;1
+  carbon_dioxide+butane;1
+
+nitrogen+carbon_dioxide+methylbutane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+nitrogen+carbon_dioxide+pentane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+pentane;1
+  carbon_dioxide+pentane;1
+
+nitrogen+carbon_dioxide+hexane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+hexane;1
+  carbon_dioxide+hexane;1
+
+nitrogen+carbon_dioxide+heptane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+heptane;1
+  carbon_dioxide+heptane;1
+
+nitrogen+carbon_dioxide+octane;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+octane;1
+  carbon_dioxide+octane;1
+
+nitrogen+carbon_dioxide+water;1
+  nitrogen+carbon_dioxide;1
+  nitrogen+water;1
+  carbon_dioxide+water;1
+
+nitrogen+ethane+propane;1
+  nitrogen+ethane;1
+  nitrogen+propane;1
+  ethane+propane;1
+
+nitrogen+ethane+methylpropane;1
+  nitrogen+ethane;1
+  nitrogen+methylpropane;1
+  ethane+methylpropane;1
+
+nitrogen+ethane+butane;1
+  nitrogen+ethane;1
+  nitrogen+butane;1
+  ethane+butane;1
+
+nitrogen+ethane+methylbutane;1
+  nitrogen+ethane;1
+  nitrogen+methylbutane;1
+  ethane+methylbutane;1
+
+nitrogen+ethane+pentane;1
+  nitrogen+ethane;1
+  nitrogen+pentane;1
+  ethane+pentane;1
+
+nitrogen+ethane+hexane;1
+  nitrogen+ethane;1
+  nitrogen+hexane;1
+  ethane+hexane;1
+
+nitrogen+ethane+heptane;1
+  nitrogen+ethane;1
+  nitrogen+heptane;1
+  ethane+heptane;1
+
+nitrogen+ethane+octane;1
+  nitrogen+ethane;1
+  nitrogen+octane;1
+  ethane+octane;1
+
+nitrogen+ethane+water;1
+  nitrogen+ethane;1
+  nitrogen+water;1
+  ethane+water;1
+
+nitrogen+propane+methylpropane;1
+  nitrogen+propane;1
+  nitrogen+methylpropane;1
+  propane+methylpropane;1
+
+nitrogen+propane+butane;1
+  nitrogen+propane;1
+  nitrogen+butane;1
+  propane+butane;1
+
+nitrogen+propane+methylbutane;1
+  nitrogen+propane;1
+  nitrogen+methylbutane;1
+  propane+methylbutane;1
+
+nitrogen+propane+pentane;1
+  nitrogen+propane;1
+  nitrogen+pentane;1
+  propane+pentane;1
+
+nitrogen+propane+hexane;1
+  nitrogen+propane;1
+  nitrogen+hexane;1
+  propane+hexane;1
+
+nitrogen+propane+heptane;1
+  nitrogen+propane;1
+  nitrogen+heptane;1
+  propane+heptane;1
+
+nitrogen+propane+octane;1
+  nitrogen+propane;1
+  nitrogen+octane;1
+  propane+octane;1
+
+nitrogen+propane+water;1
+  nitrogen+propane;1
+  nitrogen+water;1
+  propane+water;1
+
+nitrogen+methylpropane+butane;1
+  nitrogen+methylpropane;1
+  nitrogen+butane;1
+  methylpropane+butane;1
+
+nitrogen+methylpropane+methylbutane;1
+  nitrogen+methylpropane;1
+  nitrogen+methylbutane;1
+  methylpropane+methylbutane;1
+
+nitrogen+methylpropane+pentane;1
+  nitrogen+methylpropane;1
+  nitrogen+pentane;1
+  methylpropane+pentane;1
+
+nitrogen+methylpropane+hexane;1
+  nitrogen+methylpropane;1
+  nitrogen+hexane;1
+  methylpropane+hexane;1
+
+nitrogen+methylpropane+heptane;1
+  nitrogen+methylpropane;1
+  nitrogen+heptane;1
+  methylpropane+heptane;1
+
+nitrogen+methylpropane+octane;1
+  nitrogen+methylpropane;1
+  nitrogen+octane;1
+  methylpropane+octane;1
+
+nitrogen+methylpropane+water;1
+  nitrogen+methylpropane;1
+  nitrogen+water;1
+  methylpropane+water;1
+
+nitrogen+butane+methylbutane;1
+  nitrogen+butane;1
+  nitrogen+methylbutane;1
+  butane+methylbutane;1
+
+nitrogen+butane+pentane;1
+  nitrogen+butane;1
+  nitrogen+pentane;1
+  butane+pentane;1
+
+nitrogen+butane+hexane;1
+  nitrogen+butane;1
+  nitrogen+hexane;1
+  butane+hexane;1
+
+nitrogen+butane+heptane;1
+  nitrogen+butane;1
+  nitrogen+heptane;1
+  butane+heptane;1
+
+nitrogen+butane+octane;1
+  nitrogen+butane;1
+  nitrogen+octane;1
+  butane+octane;1
+
+nitrogen+butane+water;1
+  nitrogen+butane;1
+  nitrogen+water;1
+  butane+water;1
+
+nitrogen+methylbutane+pentane;1
+  nitrogen+methylbutane;1
+  nitrogen+pentane;1
+  methylbutane+pentane;1
+
+nitrogen+methylbutane+hexane;1
+  nitrogen+methylbutane;1
+  nitrogen+hexane;1
+  methylbutane+hexane;1
+
+nitrogen+methylbutane+heptane;1
+  nitrogen+methylbutane;1
+  nitrogen+heptane;1
+  methylbutane+heptane;1
+
+nitrogen+methylbutane+octane;1
+  nitrogen+methylbutane;1
+  nitrogen+octane;1
+  methylbutane+octane;1
+
+nitrogen+methylbutane+water;1
+  nitrogen+methylbutane;1
+  nitrogen+water;1
+  methylbutane+water;1
+
+nitrogen+pentane+hexane;1
+  nitrogen+pentane;1
+  nitrogen+hexane;1
+  pentane+hexane;1
+
+nitrogen+pentane+heptane;1
+  nitrogen+pentane;1
+  nitrogen+heptane;1
+  pentane+heptane;1
+
+nitrogen+pentane+octane;1
+  nitrogen+pentane;1
+  nitrogen+octane;1
+  pentane+octane;1
+
+nitrogen+pentane+water;1
+  nitrogen+pentane;1
+  nitrogen+water;1
+  pentane+water;1
+
+nitrogen+hexane+heptane;1
+  nitrogen+hexane;1
+  nitrogen+heptane;1
+  hexane+heptane;1
+
+nitrogen+hexane+octane;1
+  nitrogen+hexane;1
+  nitrogen+octane;1
+  hexane+octane;1
+
+nitrogen+hexane+water;1
+  nitrogen+hexane;1
+  nitrogen+water;1
+  hexane+water;1
+
+nitrogen+heptane+octane;1
+  nitrogen+heptane;1
+  nitrogen+octane;1
+  heptane+octane;1
+
+nitrogen+heptane+water;1
+  nitrogen+heptane;1
+  nitrogen+water;1
+  heptane+water;1
+
+nitrogen+octane+water;1
+  nitrogen+octane;1
+  nitrogen+water;1
+  octane+water;1
+
+carbon_monoxide+argon+oxygen;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+oxygen;1
+  argon+oxygen;1
+
+carbon_monoxide+argon+methane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+methane;1
+  argon+methane;1
+
+carbon_monoxide+argon+carbon_dioxide;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+carbon_dioxide;1
+  argon+carbon_dioxide;1
+
+carbon_monoxide+argon+ethane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+ethane;1
+  argon+ethane;1
+
+carbon_monoxide+argon+propane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+propane;1
+  argon+propane;1
+
+carbon_monoxide+argon+methylpropane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+methylpropane;1
+  argon+methylpropane;1
+
+carbon_monoxide+argon+butane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+butane;1
+  argon+butane;1
+
+carbon_monoxide+argon+methylbutane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+methylbutane;1
+  argon+methylbutane;1
+
+carbon_monoxide+argon+pentane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+pentane;1
+  argon+pentane;1
+
+carbon_monoxide+argon+hexane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+hexane;1
+  argon+hexane;1
+
+carbon_monoxide+argon+heptane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+heptane;1
+  argon+heptane;1
+
+carbon_monoxide+argon+octane;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+octane;1
+  argon+octane;1
+
+carbon_monoxide+argon+water;1
+  carbon_monoxide+argon;1
+  carbon_monoxide+water;1
+  argon+water;1
+
+carbon_monoxide+oxygen+methane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+methane;1
+  oxygen+methane;1
+
+carbon_monoxide+oxygen+carbon_dioxide;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+carbon_dioxide;1
+  oxygen+carbon_dioxide;1
+
+carbon_monoxide+oxygen+ethane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+ethane;1
+  oxygen+ethane;1
+
+carbon_monoxide+oxygen+propane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+propane;1
+  oxygen+propane;1
+
+carbon_monoxide+oxygen+methylpropane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+methylpropane;1
+  oxygen+methylpropane;1
+
+carbon_monoxide+oxygen+butane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+butane;1
+  oxygen+butane;1
+
+carbon_monoxide+oxygen+methylbutane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+methylbutane;1
+  oxygen+methylbutane;1
+
+carbon_monoxide+oxygen+pentane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+pentane;1
+  oxygen+pentane;1
+
+carbon_monoxide+oxygen+hexane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+hexane;1
+  oxygen+hexane;1
+
+carbon_monoxide+oxygen+heptane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+heptane;1
+  oxygen+heptane;1
+
+carbon_monoxide+oxygen+octane;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+octane;1
+  oxygen+octane;1
+
+carbon_monoxide+oxygen+water;1
+  carbon_monoxide+oxygen;1
+  carbon_monoxide+water;1
+  oxygen+water;1
+
+carbon_monoxide+methane+carbon_dioxide;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+carbon_monoxide+methane+ethane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+ethane;1
+  methane+ethane;1
+
+carbon_monoxide+methane+propane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+propane;1
+  methane+propane;1
+
+carbon_monoxide+methane+methylpropane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+methylpropane;1
+  methane+methylpropane;1
+
+carbon_monoxide+methane+butane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+butane;1
+  methane+butane;1
+
+carbon_monoxide+methane+methylbutane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+methylbutane;1
+  methane+methylbutane;1
+
+carbon_monoxide+methane+pentane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+pentane;1
+  methane+pentane;1
+
+carbon_monoxide+methane+hexane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+hexane;1
+  methane+hexane;1
+
+carbon_monoxide+methane+heptane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+heptane;1
+  methane+heptane;1
+
+carbon_monoxide+methane+octane;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+octane;1
+  methane+octane;1
+
+carbon_monoxide+methane+water;1
+  carbon_monoxide+methane;1
+  carbon_monoxide+water;1
+  methane+water;1
+
+carbon_monoxide+carbon_dioxide+ethane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+ethane;1
+  carbon_dioxide+ethane;1
+
+carbon_monoxide+carbon_dioxide+propane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+propane;1
+  carbon_dioxide+propane;1
+
+carbon_monoxide+carbon_dioxide+methylpropane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+carbon_monoxide+carbon_dioxide+butane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+butane;1
+  carbon_dioxide+butane;1
+
+carbon_monoxide+carbon_dioxide+methylbutane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+carbon_monoxide+carbon_dioxide+pentane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+pentane;1
+  carbon_dioxide+pentane;1
+
+carbon_monoxide+carbon_dioxide+hexane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+hexane;1
+  carbon_dioxide+hexane;1
+
+carbon_monoxide+carbon_dioxide+heptane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+heptane;1
+  carbon_dioxide+heptane;1
+
+carbon_monoxide+carbon_dioxide+octane;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+octane;1
+  carbon_dioxide+octane;1
+
+carbon_monoxide+carbon_dioxide+water;1
+  carbon_monoxide+carbon_dioxide;1
+  carbon_monoxide+water;1
+  carbon_dioxide+water;1
+
+carbon_monoxide+ethane+propane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+propane;1
+  ethane+propane;1
+
+carbon_monoxide+ethane+methylpropane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+methylpropane;1
+  ethane+methylpropane;1
+
+carbon_monoxide+ethane+butane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+butane;1
+  ethane+butane;1
+
+carbon_monoxide+ethane+methylbutane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+methylbutane;1
+  ethane+methylbutane;1
+
+carbon_monoxide+ethane+pentane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+pentane;1
+  ethane+pentane;1
+
+carbon_monoxide+ethane+hexane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+hexane;1
+  ethane+hexane;1
+
+carbon_monoxide+ethane+heptane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+heptane;1
+  ethane+heptane;1
+
+carbon_monoxide+ethane+octane;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+octane;1
+  ethane+octane;1
+
+carbon_monoxide+ethane+water;1
+  carbon_monoxide+ethane;1
+  carbon_monoxide+water;1
+  ethane+water;1
+
+carbon_monoxide+propane+methylpropane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+methylpropane;1
+  propane+methylpropane;1
+
+carbon_monoxide+propane+butane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+butane;1
+  propane+butane;1
+
+carbon_monoxide+propane+methylbutane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+methylbutane;1
+  propane+methylbutane;1
+
+carbon_monoxide+propane+pentane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+pentane;1
+  propane+pentane;1
+
+carbon_monoxide+propane+hexane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+hexane;1
+  propane+hexane;1
+
+carbon_monoxide+propane+heptane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+heptane;1
+  propane+heptane;1
+
+carbon_monoxide+propane+octane;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+octane;1
+  propane+octane;1
+
+carbon_monoxide+propane+water;1
+  carbon_monoxide+propane;1
+  carbon_monoxide+water;1
+  propane+water;1
+
+carbon_monoxide+methylpropane+butane;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+butane;1
+  methylpropane+butane;1
+
+carbon_monoxide+methylpropane+methylbutane;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+methylbutane;1
+  methylpropane+methylbutane;1
+
+carbon_monoxide+methylpropane+pentane;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+pentane;1
+  methylpropane+pentane;1
+
+carbon_monoxide+methylpropane+hexane;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+hexane;1
+  methylpropane+hexane;1
+
+carbon_monoxide+methylpropane+heptane;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+heptane;1
+  methylpropane+heptane;1
+
+carbon_monoxide+methylpropane+octane;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+octane;1
+  methylpropane+octane;1
+
+carbon_monoxide+methylpropane+water;1
+  carbon_monoxide+methylpropane;1
+  carbon_monoxide+water;1
+  methylpropane+water;1
+
+carbon_monoxide+butane+methylbutane;1
+  carbon_monoxide+butane;1
+  carbon_monoxide+methylbutane;1
+  butane+methylbutane;1
+
+carbon_monoxide+butane+pentane;1
+  carbon_monoxide+butane;1
+  carbon_monoxide+pentane;1
+  butane+pentane;1
+
+carbon_monoxide+butane+hexane;1
+  carbon_monoxide+butane;1
+  carbon_monoxide+hexane;1
+  butane+hexane;1
+
+carbon_monoxide+butane+heptane;1
+  carbon_monoxide+butane;1
+  carbon_monoxide+heptane;1
+  butane+heptane;1
+
+carbon_monoxide+butane+octane;1
+  carbon_monoxide+butane;1
+  carbon_monoxide+octane;1
+  butane+octane;1
+
+carbon_monoxide+butane+water;1
+  carbon_monoxide+butane;1
+  carbon_monoxide+water;1
+  butane+water;1
+
+carbon_monoxide+methylbutane+pentane;1
+  carbon_monoxide+methylbutane;1
+  carbon_monoxide+pentane;1
+  methylbutane+pentane;1
+
+carbon_monoxide+methylbutane+hexane;1
+  carbon_monoxide+methylbutane;1
+  carbon_monoxide+hexane;1
+  methylbutane+hexane;1
+
+carbon_monoxide+methylbutane+heptane;1
+  carbon_monoxide+methylbutane;1
+  carbon_monoxide+heptane;1
+  methylbutane+heptane;1
+
+carbon_monoxide+methylbutane+octane;1
+  carbon_monoxide+methylbutane;1
+  carbon_monoxide+octane;1
+  methylbutane+octane;1
+
+carbon_monoxide+methylbutane+water;1
+  carbon_monoxide+methylbutane;1
+  carbon_monoxide+water;1
+  methylbutane+water;1
+
+carbon_monoxide+pentane+hexane;1
+  carbon_monoxide+pentane;1
+  carbon_monoxide+hexane;1
+  pentane+hexane;1
+
+carbon_monoxide+pentane+heptane;1
+  carbon_monoxide+pentane;1
+  carbon_monoxide+heptane;1
+  pentane+heptane;1
+
+carbon_monoxide+pentane+octane;1
+  carbon_monoxide+pentane;1
+  carbon_monoxide+octane;1
+  pentane+octane;1
+
+carbon_monoxide+pentane+water;1
+  carbon_monoxide+pentane;1
+  carbon_monoxide+water;1
+  pentane+water;1
+
+carbon_monoxide+hexane+heptane;1
+  carbon_monoxide+hexane;1
+  carbon_monoxide+heptane;1
+  hexane+heptane;1
+
+carbon_monoxide+hexane+octane;1
+  carbon_monoxide+hexane;1
+  carbon_monoxide+octane;1
+  hexane+octane;1
+
+carbon_monoxide+hexane+water;1
+  carbon_monoxide+hexane;1
+  carbon_monoxide+water;1
+  hexane+water;1
+
+carbon_monoxide+heptane+octane;1
+  carbon_monoxide+heptane;1
+  carbon_monoxide+octane;1
+  heptane+octane;1
+
+carbon_monoxide+heptane+water;1
+  carbon_monoxide+heptane;1
+  carbon_monoxide+water;1
+  heptane+water;1
+
+carbon_monoxide+octane+water;1
+  carbon_monoxide+octane;1
+  carbon_monoxide+water;1
+  octane+water;1
+
+argon+oxygen+methane;1
+  argon+oxygen;1
+  argon+methane;1
+  oxygen+methane;1
+
+argon+oxygen+carbon_dioxide;1
+  argon+oxygen;1
+  argon+carbon_dioxide;1
+  oxygen+carbon_dioxide;1
+
+argon+oxygen+ethane;1
+  argon+oxygen;1
+  argon+ethane;1
+  oxygen+ethane;1
+
+argon+oxygen+propane;1
+  argon+oxygen;1
+  argon+propane;1
+  oxygen+propane;1
+
+argon+oxygen+methylpropane;1
+  argon+oxygen;1
+  argon+methylpropane;1
+  oxygen+methylpropane;1
+
+argon+oxygen+butane;1
+  argon+oxygen;1
+  argon+butane;1
+  oxygen+butane;1
+
+argon+oxygen+methylbutane;1
+  argon+oxygen;1
+  argon+methylbutane;1
+  oxygen+methylbutane;1
+
+argon+oxygen+pentane;1
+  argon+oxygen;1
+  argon+pentane;1
+  oxygen+pentane;1
+
+argon+oxygen+hexane;1
+  argon+oxygen;1
+  argon+hexane;1
+  oxygen+hexane;1
+
+argon+oxygen+heptane;1
+  argon+oxygen;1
+  argon+heptane;1
+  oxygen+heptane;1
+
+argon+oxygen+octane;1
+  argon+oxygen;1
+  argon+octane;1
+  oxygen+octane;1
+
+argon+oxygen+water;1
+  argon+oxygen;1
+  argon+water;1
+  oxygen+water;1
+
+argon+methane+carbon_dioxide;1
+  argon+methane;1
+  argon+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+argon+methane+ethane;1
+  argon+methane;1
+  argon+ethane;1
+  methane+ethane;1
+
+argon+methane+propane;1
+  argon+methane;1
+  argon+propane;1
+  methane+propane;1
+
+argon+methane+methylpropane;1
+  argon+methane;1
+  argon+methylpropane;1
+  methane+methylpropane;1
+
+argon+methane+butane;1
+  argon+methane;1
+  argon+butane;1
+  methane+butane;1
+
+argon+methane+methylbutane;1
+  argon+methane;1
+  argon+methylbutane;1
+  methane+methylbutane;1
+
+argon+methane+pentane;1
+  argon+methane;1
+  argon+pentane;1
+  methane+pentane;1
+
+argon+methane+hexane;1
+  argon+methane;1
+  argon+hexane;1
+  methane+hexane;1
+
+argon+methane+heptane;1
+  argon+methane;1
+  argon+heptane;1
+  methane+heptane;1
+
+argon+methane+octane;1
+  argon+methane;1
+  argon+octane;1
+  methane+octane;1
+
+argon+methane+water;1
+  argon+methane;1
+  argon+water;1
+  methane+water;1
+
+argon+carbon_dioxide+ethane;1
+  argon+carbon_dioxide;1
+  argon+ethane;1
+  carbon_dioxide+ethane;1
+
+argon+carbon_dioxide+propane;1
+  argon+carbon_dioxide;1
+  argon+propane;1
+  carbon_dioxide+propane;1
+
+argon+carbon_dioxide+methylpropane;1
+  argon+carbon_dioxide;1
+  argon+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+argon+carbon_dioxide+butane;1
+  argon+carbon_dioxide;1
+  argon+butane;1
+  carbon_dioxide+butane;1
+
+argon+carbon_dioxide+methylbutane;1
+  argon+carbon_dioxide;1
+  argon+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+argon+carbon_dioxide+pentane;1
+  argon+carbon_dioxide;1
+  argon+pentane;1
+  carbon_dioxide+pentane;1
+
+argon+carbon_dioxide+hexane;1
+  argon+carbon_dioxide;1
+  argon+hexane;1
+  carbon_dioxide+hexane;1
+
+argon+carbon_dioxide+heptane;1
+  argon+carbon_dioxide;1
+  argon+heptane;1
+  carbon_dioxide+heptane;1
+
+argon+carbon_dioxide+octane;1
+  argon+carbon_dioxide;1
+  argon+octane;1
+  carbon_dioxide+octane;1
+
+argon+carbon_dioxide+water;1
+  argon+carbon_dioxide;1
+  argon+water;1
+  carbon_dioxide+water;1
+
+argon+ethane+propane;1
+  argon+ethane;1
+  argon+propane;1
+  ethane+propane;1
+
+argon+ethane+methylpropane;1
+  argon+ethane;1
+  argon+methylpropane;1
+  ethane+methylpropane;1
+
+argon+ethane+butane;1
+  argon+ethane;1
+  argon+butane;1
+  ethane+butane;1
+
+argon+ethane+methylbutane;1
+  argon+ethane;1
+  argon+methylbutane;1
+  ethane+methylbutane;1
+
+argon+ethane+pentane;1
+  argon+ethane;1
+  argon+pentane;1
+  ethane+pentane;1
+
+argon+ethane+hexane;1
+  argon+ethane;1
+  argon+hexane;1
+  ethane+hexane;1
+
+argon+ethane+heptane;1
+  argon+ethane;1
+  argon+heptane;1
+  ethane+heptane;1
+
+argon+ethane+octane;1
+  argon+ethane;1
+  argon+octane;1
+  ethane+octane;1
+
+argon+ethane+water;1
+  argon+ethane;1
+  argon+water;1
+  ethane+water;1
+
+argon+propane+methylpropane;1
+  argon+propane;1
+  argon+methylpropane;1
+  propane+methylpropane;1
+
+argon+propane+butane;1
+  argon+propane;1
+  argon+butane;1
+  propane+butane;1
+
+argon+propane+methylbutane;1
+  argon+propane;1
+  argon+methylbutane;1
+  propane+methylbutane;1
+
+argon+propane+pentane;1
+  argon+propane;1
+  argon+pentane;1
+  propane+pentane;1
+
+argon+propane+hexane;1
+  argon+propane;1
+  argon+hexane;1
+  propane+hexane;1
+
+argon+propane+heptane;1
+  argon+propane;1
+  argon+heptane;1
+  propane+heptane;1
+
+argon+propane+octane;1
+  argon+propane;1
+  argon+octane;1
+  propane+octane;1
+
+argon+propane+water;1
+  argon+propane;1
+  argon+water;1
+  propane+water;1
+
+argon+methylpropane+butane;1
+  argon+methylpropane;1
+  argon+butane;1
+  methylpropane+butane;1
+
+argon+methylpropane+methylbutane;1
+  argon+methylpropane;1
+  argon+methylbutane;1
+  methylpropane+methylbutane;1
+
+argon+methylpropane+pentane;1
+  argon+methylpropane;1
+  argon+pentane;1
+  methylpropane+pentane;1
+
+argon+methylpropane+hexane;1
+  argon+methylpropane;1
+  argon+hexane;1
+  methylpropane+hexane;1
+
+argon+methylpropane+heptane;1
+  argon+methylpropane;1
+  argon+heptane;1
+  methylpropane+heptane;1
+
+argon+methylpropane+octane;1
+  argon+methylpropane;1
+  argon+octane;1
+  methylpropane+octane;1
+
+argon+methylpropane+water;1
+  argon+methylpropane;1
+  argon+water;1
+  methylpropane+water;1
+
+argon+butane+methylbutane;1
+  argon+butane;1
+  argon+methylbutane;1
+  butane+methylbutane;1
+
+argon+butane+pentane;1
+  argon+butane;1
+  argon+pentane;1
+  butane+pentane;1
+
+argon+butane+hexane;1
+  argon+butane;1
+  argon+hexane;1
+  butane+hexane;1
+
+argon+butane+heptane;1
+  argon+butane;1
+  argon+heptane;1
+  butane+heptane;1
+
+argon+butane+octane;1
+  argon+butane;1
+  argon+octane;1
+  butane+octane;1
+
+argon+butane+water;1
+  argon+butane;1
+  argon+water;1
+  butane+water;1
+
+argon+methylbutane+pentane;1
+  argon+methylbutane;1
+  argon+pentane;1
+  methylbutane+pentane;1
+
+argon+methylbutane+hexane;1
+  argon+methylbutane;1
+  argon+hexane;1
+  methylbutane+hexane;1
+
+argon+methylbutane+heptane;1
+  argon+methylbutane;1
+  argon+heptane;1
+  methylbutane+heptane;1
+
+argon+methylbutane+octane;1
+  argon+methylbutane;1
+  argon+octane;1
+  methylbutane+octane;1
+
+argon+methylbutane+water;1
+  argon+methylbutane;1
+  argon+water;1
+  methylbutane+water;1
+
+argon+pentane+hexane;1
+  argon+pentane;1
+  argon+hexane;1
+  pentane+hexane;1
+
+argon+pentane+heptane;1
+  argon+pentane;1
+  argon+heptane;1
+  pentane+heptane;1
+
+argon+pentane+octane;1
+  argon+pentane;1
+  argon+octane;1
+  pentane+octane;1
+
+argon+pentane+water;1
+  argon+pentane;1
+  argon+water;1
+  pentane+water;1
+
+argon+hexane+heptane;1
+  argon+hexane;1
+  argon+heptane;1
+  hexane+heptane;1
+
+argon+hexane+octane;1
+  argon+hexane;1
+  argon+octane;1
+  hexane+octane;1
+
+argon+hexane+water;1
+  argon+hexane;1
+  argon+water;1
+  hexane+water;1
+
+argon+heptane+octane;1
+  argon+heptane;1
+  argon+octane;1
+  heptane+octane;1
+
+argon+heptane+water;1
+  argon+heptane;1
+  argon+water;1
+  heptane+water;1
+
+argon+octane+water;1
+  argon+octane;1
+  argon+water;1
+  octane+water;1
+
+oxygen+methane+carbon_dioxide;1
+  oxygen+methane;1
+  oxygen+carbon_dioxide;1
+  methane+carbon_dioxide;1
+
+oxygen+methane+ethane;1
+  oxygen+methane;1
+  oxygen+ethane;1
+  methane+ethane;1
+
+oxygen+methane+propane;1
+  oxygen+methane;1
+  oxygen+propane;1
+  methane+propane;1
+
+oxygen+methane+methylpropane;1
+  oxygen+methane;1
+  oxygen+methylpropane;1
+  methane+methylpropane;1
+
+oxygen+methane+butane;1
+  oxygen+methane;1
+  oxygen+butane;1
+  methane+butane;1
+
+oxygen+methane+methylbutane;1
+  oxygen+methane;1
+  oxygen+methylbutane;1
+  methane+methylbutane;1
+
+oxygen+methane+pentane;1
+  oxygen+methane;1
+  oxygen+pentane;1
+  methane+pentane;1
+
+oxygen+methane+hexane;1
+  oxygen+methane;1
+  oxygen+hexane;1
+  methane+hexane;1
+
+oxygen+methane+heptane;1
+  oxygen+methane;1
+  oxygen+heptane;1
+  methane+heptane;1
+
+oxygen+methane+octane;1
+  oxygen+methane;1
+  oxygen+octane;1
+  methane+octane;1
+
+oxygen+methane+water;1
+  oxygen+methane;1
+  oxygen+water;1
+  methane+water;1
+
+oxygen+carbon_dioxide+ethane;1
+  oxygen+carbon_dioxide;1
+  oxygen+ethane;1
+  carbon_dioxide+ethane;1
+
+oxygen+carbon_dioxide+propane;1
+  oxygen+carbon_dioxide;1
+  oxygen+propane;1
+  carbon_dioxide+propane;1
+
+oxygen+carbon_dioxide+methylpropane;1
+  oxygen+carbon_dioxide;1
+  oxygen+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+oxygen+carbon_dioxide+butane;1
+  oxygen+carbon_dioxide;1
+  oxygen+butane;1
+  carbon_dioxide+butane;1
+
+oxygen+carbon_dioxide+methylbutane;1
+  oxygen+carbon_dioxide;1
+  oxygen+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+oxygen+carbon_dioxide+pentane;1
+  oxygen+carbon_dioxide;1
+  oxygen+pentane;1
+  carbon_dioxide+pentane;1
+
+oxygen+carbon_dioxide+hexane;1
+  oxygen+carbon_dioxide;1
+  oxygen+hexane;1
+  carbon_dioxide+hexane;1
+
+oxygen+carbon_dioxide+heptane;1
+  oxygen+carbon_dioxide;1
+  oxygen+heptane;1
+  carbon_dioxide+heptane;1
+
+oxygen+carbon_dioxide+octane;1
+  oxygen+carbon_dioxide;1
+  oxygen+octane;1
+  carbon_dioxide+octane;1
+
+oxygen+carbon_dioxide+water;1
+  oxygen+carbon_dioxide;1
+  oxygen+water;1
+  carbon_dioxide+water;1
+
+oxygen+ethane+propane;1
+  oxygen+ethane;1
+  oxygen+propane;1
+  ethane+propane;1
+
+oxygen+ethane+methylpropane;1
+  oxygen+ethane;1
+  oxygen+methylpropane;1
+  ethane+methylpropane;1
+
+oxygen+ethane+butane;1
+  oxygen+ethane;1
+  oxygen+butane;1
+  ethane+butane;1
+
+oxygen+ethane+methylbutane;1
+  oxygen+ethane;1
+  oxygen+methylbutane;1
+  ethane+methylbutane;1
+
+oxygen+ethane+pentane;1
+  oxygen+ethane;1
+  oxygen+pentane;1
+  ethane+pentane;1
+
+oxygen+ethane+hexane;1
+  oxygen+ethane;1
+  oxygen+hexane;1
+  ethane+hexane;1
+
+oxygen+ethane+heptane;1
+  oxygen+ethane;1
+  oxygen+heptane;1
+  ethane+heptane;1
+
+oxygen+ethane+octane;1
+  oxygen+ethane;1
+  oxygen+octane;1
+  ethane+octane;1
+
+oxygen+ethane+water;1
+  oxygen+ethane;1
+  oxygen+water;1
+  ethane+water;1
+
+oxygen+propane+methylpropane;1
+  oxygen+propane;1
+  oxygen+methylpropane;1
+  propane+methylpropane;1
+
+oxygen+propane+butane;1
+  oxygen+propane;1
+  oxygen+butane;1
+  propane+butane;1
+
+oxygen+propane+methylbutane;1
+  oxygen+propane;1
+  oxygen+methylbutane;1
+  propane+methylbutane;1
+
+oxygen+propane+pentane;1
+  oxygen+propane;1
+  oxygen+pentane;1
+  propane+pentane;1
+
+oxygen+propane+hexane;1
+  oxygen+propane;1
+  oxygen+hexane;1
+  propane+hexane;1
+
+oxygen+propane+heptane;1
+  oxygen+propane;1
+  oxygen+heptane;1
+  propane+heptane;1
+
+oxygen+propane+octane;1
+  oxygen+propane;1
+  oxygen+octane;1
+  propane+octane;1
+
+oxygen+propane+water;1
+  oxygen+propane;1
+  oxygen+water;1
+  propane+water;1
+
+oxygen+methylpropane+butane;1
+  oxygen+methylpropane;1
+  oxygen+butane;1
+  methylpropane+butane;1
+
+oxygen+methylpropane+methylbutane;1
+  oxygen+methylpropane;1
+  oxygen+methylbutane;1
+  methylpropane+methylbutane;1
+
+oxygen+methylpropane+pentane;1
+  oxygen+methylpropane;1
+  oxygen+pentane;1
+  methylpropane+pentane;1
+
+oxygen+methylpropane+hexane;1
+  oxygen+methylpropane;1
+  oxygen+hexane;1
+  methylpropane+hexane;1
+
+oxygen+methylpropane+heptane;1
+  oxygen+methylpropane;1
+  oxygen+heptane;1
+  methylpropane+heptane;1
+
+oxygen+methylpropane+octane;1
+  oxygen+methylpropane;1
+  oxygen+octane;1
+  methylpropane+octane;1
+
+oxygen+methylpropane+water;1
+  oxygen+methylpropane;1
+  oxygen+water;1
+  methylpropane+water;1
+
+oxygen+butane+methylbutane;1
+  oxygen+butane;1
+  oxygen+methylbutane;1
+  butane+methylbutane;1
+
+oxygen+butane+pentane;1
+  oxygen+butane;1
+  oxygen+pentane;1
+  butane+pentane;1
+
+oxygen+butane+hexane;1
+  oxygen+butane;1
+  oxygen+hexane;1
+  butane+hexane;1
+
+oxygen+butane+heptane;1
+  oxygen+butane;1
+  oxygen+heptane;1
+  butane+heptane;1
+
+oxygen+butane+octane;1
+  oxygen+butane;1
+  oxygen+octane;1
+  butane+octane;1
+
+oxygen+butane+water;1
+  oxygen+butane;1
+  oxygen+water;1
+  butane+water;1
+
+oxygen+methylbutane+pentane;1
+  oxygen+methylbutane;1
+  oxygen+pentane;1
+  methylbutane+pentane;1
+
+oxygen+methylbutane+hexane;1
+  oxygen+methylbutane;1
+  oxygen+hexane;1
+  methylbutane+hexane;1
+
+oxygen+methylbutane+heptane;1
+  oxygen+methylbutane;1
+  oxygen+heptane;1
+  methylbutane+heptane;1
+
+oxygen+methylbutane+octane;1
+  oxygen+methylbutane;1
+  oxygen+octane;1
+  methylbutane+octane;1
+
+oxygen+methylbutane+water;1
+  oxygen+methylbutane;1
+  oxygen+water;1
+  methylbutane+water;1
+
+oxygen+pentane+hexane;1
+  oxygen+pentane;1
+  oxygen+hexane;1
+  pentane+hexane;1
+
+oxygen+pentane+heptane;1
+  oxygen+pentane;1
+  oxygen+heptane;1
+  pentane+heptane;1
+
+oxygen+pentane+octane;1
+  oxygen+pentane;1
+  oxygen+octane;1
+  pentane+octane;1
+
+oxygen+pentane+water;1
+  oxygen+pentane;1
+  oxygen+water;1
+  pentane+water;1
+
+oxygen+hexane+heptane;1
+  oxygen+hexane;1
+  oxygen+heptane;1
+  hexane+heptane;1
+
+oxygen+hexane+octane;1
+  oxygen+hexane;1
+  oxygen+octane;1
+  hexane+octane;1
+
+oxygen+hexane+water;1
+  oxygen+hexane;1
+  oxygen+water;1
+  hexane+water;1
+
+oxygen+heptane+octane;1
+  oxygen+heptane;1
+  oxygen+octane;1
+  heptane+octane;1
+
+oxygen+heptane+water;1
+  oxygen+heptane;1
+  oxygen+water;1
+  heptane+water;1
+
+oxygen+octane+water;1
+  oxygen+octane;1
+  oxygen+water;1
+  octane+water;1
+
+methane+carbon_dioxide+ethane;1
+  methane+carbon_dioxide;1
+  methane+ethane;1
+  carbon_dioxide+ethane;1
+
+methane+carbon_dioxide+propane;1
+  methane+carbon_dioxide;1
+  methane+propane;1
+  carbon_dioxide+propane;1
+
+methane+carbon_dioxide+methylpropane;1
+  methane+carbon_dioxide;1
+  methane+methylpropane;1
+  carbon_dioxide+methylpropane;1
+
+methane+carbon_dioxide+butane;1
+  methane+carbon_dioxide;1
+  methane+butane;1
+  carbon_dioxide+butane;1
+
+methane+carbon_dioxide+methylbutane;1
+  methane+carbon_dioxide;1
+  methane+methylbutane;1
+  carbon_dioxide+methylbutane;1
+
+methane+carbon_dioxide+pentane;1
+  methane+carbon_dioxide;1
+  methane+pentane;1
+  carbon_dioxide+pentane;1
+
+methane+carbon_dioxide+hexane;1
+  methane+carbon_dioxide;1
+  methane+hexane;1
+  carbon_dioxide+hexane;1
+
+methane+carbon_dioxide+heptane;1
+  methane+carbon_dioxide;1
+  methane+heptane;1
+  carbon_dioxide+heptane;1
+
+methane+carbon_dioxide+octane;1
+  methane+carbon_dioxide;1
+  methane+octane;1
+  carbon_dioxide+octane;1
+
+methane+carbon_dioxide+water;1
+  methane+carbon_dioxide;1
+  methane+water;1
+  carbon_dioxide+water;1
+
+methane+ethane+propane;1
+  methane+ethane;1
+  methane+propane;1
+  ethane+propane;1
+
+methane+ethane+methylpropane;1
+  methane+ethane;1
+  methane+methylpropane;1
+  ethane+methylpropane;1
+
+methane+ethane+butane;1
+  methane+ethane;1
+  methane+butane;1
+  ethane+butane;1
+
+methane+ethane+methylbutane;1
+  methane+ethane;1
+  methane+methylbutane;1
+  ethane+methylbutane;1
+
+methane+ethane+pentane;1
+  methane+ethane;1
+  methane+pentane;1
+  ethane+pentane;1
+
+methane+ethane+hexane;1
+  methane+ethane;1
+  methane+hexane;1
+  ethane+hexane;1
+
+methane+ethane+heptane;1
+  methane+ethane;1
+  methane+heptane;1
+  ethane+heptane;1
+
+methane+ethane+octane;1
+  methane+ethane;1
+  methane+octane;1
+  ethane+octane;1
+
+methane+ethane+water;1
+  methane+ethane;1
+  methane+water;1
+  ethane+water;1
+
+methane+propane+methylpropane;1
+  methane+propane;1
+  methane+methylpropane;1
+  propane+methylpropane;1
+
+methane+propane+butane;1
+  methane+propane;1
+  methane+butane;1
+  propane+butane;1
+
+methane+propane+methylbutane;1
+  methane+propane;1
+  methane+methylbutane;1
+  propane+methylbutane;1
+
+methane+propane+pentane;1
+  methane+propane;1
+  methane+pentane;1
+  propane+pentane;1
+
+methane+propane+hexane;1
+  methane+propane;1
+  methane+hexane;1
+  propane+hexane;1
+
+methane+propane+heptane;1
+  methane+propane;1
+  methane+heptane;1
+  propane+heptane;1
+
+methane+propane+octane;1
+  methane+propane;1
+  methane+octane;1
+  propane+octane;1
+
+methane+propane+water;1
+  methane+propane;1
+  methane+water;1
+  propane+water;1
+
+methane+methylpropane+butane;1
+  methane+methylpropane;1
+  methane+butane;1
+  methylpropane+butane;1
+
+methane+methylpropane+methylbutane;1
+  methane+methylpropane;1
+  methane+methylbutane;1
+  methylpropane+methylbutane;1
+
+methane+methylpropane+pentane;1
+  methane+methylpropane;1
+  methane+pentane;1
+  methylpropane+pentane;1
+
+methane+methylpropane+hexane;1
+  methane+methylpropane;1
+  methane+hexane;1
+  methylpropane+hexane;1
+
+methane+methylpropane+heptane;1
+  methane+methylpropane;1
+  methane+heptane;1
+  methylpropane+heptane;1
+
+methane+methylpropane+octane;1
+  methane+methylpropane;1
+  methane+octane;1
+  methylpropane+octane;1
+
+methane+methylpropane+water;1
+  methane+methylpropane;1
+  methane+water;1
+  methylpropane+water;1
+
+methane+butane+methylbutane;1
+  methane+butane;1
+  methane+methylbutane;1
+  butane+methylbutane;1
+
+methane+butane+pentane;1
+  methane+butane;1
+  methane+pentane;1
+  butane+pentane;1
+
+methane+butane+hexane;1
+  methane+butane;1
+  methane+hexane;1
+  butane+hexane;1
+
+methane+butane+heptane;1
+  methane+butane;1
+  methane+heptane;1
+  butane+heptane;1
+
+methane+butane+octane;1
+  methane+butane;1
+  methane+octane;1
+  butane+octane;1
+
+methane+butane+water;1
+  methane+butane;1
+  methane+water;1
+  butane+water;1
+
+methane+methylbutane+pentane;1
+  methane+methylbutane;1
+  methane+pentane;1
+  methylbutane+pentane;1
+
+methane+methylbutane+hexane;1
+  methane+methylbutane;1
+  methane+hexane;1
+  methylbutane+hexane;1
+
+methane+methylbutane+heptane;1
+  methane+methylbutane;1
+  methane+heptane;1
+  methylbutane+heptane;1
+
+methane+methylbutane+octane;1
+  methane+methylbutane;1
+  methane+octane;1
+  methylbutane+octane;1
+
+methane+methylbutane+water;1
+  methane+methylbutane;1
+  methane+water;1
+  methylbutane+water;1
+
+methane+pentane+hexane;1
+  methane+pentane;1
+  methane+hexane;1
+  pentane+hexane;1
+
+methane+pentane+heptane;1
+  methane+pentane;1
+  methane+heptane;1
+  pentane+heptane;1
+
+methane+pentane+octane;1
+  methane+pentane;1
+  methane+octane;1
+  pentane+octane;1
+
+methane+pentane+water;1
+  methane+pentane;1
+  methane+water;1
+  pentane+water;1
+
+methane+hexane+heptane;1
+  methane+hexane;1
+  methane+heptane;1
+  hexane+heptane;1
+
+methane+hexane+octane;1
+  methane+hexane;1
+  methane+octane;1
+  hexane+octane;1
+
+methane+hexane+water;1
+  methane+hexane;1
+  methane+water;1
+  hexane+water;1
+
+methane+heptane+octane;1
+  methane+heptane;1
+  methane+octane;1
+  heptane+octane;1
+
+methane+heptane+water;1
+  methane+heptane;1
+  methane+water;1
+  heptane+water;1
+
+methane+octane+water;1
+  methane+octane;1
+  methane+water;1
+  octane+water;1
+
+carbon_dioxide+ethane+propane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+propane;1
+  ethane+propane;1
+
+carbon_dioxide+ethane+methylpropane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+methylpropane;1
+  ethane+methylpropane;1
+
+carbon_dioxide+ethane+butane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+butane;1
+  ethane+butane;1
+
+carbon_dioxide+ethane+methylbutane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+methylbutane;1
+  ethane+methylbutane;1
+
+carbon_dioxide+ethane+pentane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+pentane;1
+  ethane+pentane;1
+
+carbon_dioxide+ethane+hexane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+hexane;1
+  ethane+hexane;1
+
+carbon_dioxide+ethane+heptane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+heptane;1
+  ethane+heptane;1
+
+carbon_dioxide+ethane+octane;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+octane;1
+  ethane+octane;1
+
+carbon_dioxide+ethane+water;1
+  carbon_dioxide+ethane;1
+  carbon_dioxide+water;1
+  ethane+water;1
+
+carbon_dioxide+propane+methylpropane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+methylpropane;1
+  propane+methylpropane;1
+
+carbon_dioxide+propane+butane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+butane;1
+  propane+butane;1
+
+carbon_dioxide+propane+methylbutane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+methylbutane;1
+  propane+methylbutane;1
+
+carbon_dioxide+propane+pentane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+pentane;1
+  propane+pentane;1
+
+carbon_dioxide+propane+hexane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+hexane;1
+  propane+hexane;1
+
+carbon_dioxide+propane+heptane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+heptane;1
+  propane+heptane;1
+
+carbon_dioxide+propane+octane;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+octane;1
+  propane+octane;1
+
+carbon_dioxide+propane+water;1
+  carbon_dioxide+propane;1
+  carbon_dioxide+water;1
+  propane+water;1
+
+carbon_dioxide+methylpropane+butane;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+butane;1
+  methylpropane+butane;1
+
+carbon_dioxide+methylpropane+methylbutane;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+methylbutane;1
+  methylpropane+methylbutane;1
+
+carbon_dioxide+methylpropane+pentane;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+pentane;1
+  methylpropane+pentane;1
+
+carbon_dioxide+methylpropane+hexane;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+hexane;1
+  methylpropane+hexane;1
+
+carbon_dioxide+methylpropane+heptane;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+heptane;1
+  methylpropane+heptane;1
+
+carbon_dioxide+methylpropane+octane;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+octane;1
+  methylpropane+octane;1
+
+carbon_dioxide+methylpropane+water;1
+  carbon_dioxide+methylpropane;1
+  carbon_dioxide+water;1
+  methylpropane+water;1
+
+carbon_dioxide+butane+methylbutane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+methylbutane;1
+  butane+methylbutane;1
+
+carbon_dioxide+butane+pentane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+pentane;1
+  butane+pentane;1
+
+carbon_dioxide+butane+hexane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+hexane;1
+  butane+hexane;1
+
+carbon_dioxide+butane+heptane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+heptane;1
+  butane+heptane;1
+
+carbon_dioxide+butane+octane;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+octane;1
+  butane+octane;1
+
+carbon_dioxide+butane+water;1
+  carbon_dioxide+butane;1
+  carbon_dioxide+water;1
+  butane+water;1
+
+carbon_dioxide+methylbutane+pentane;1
+  carbon_dioxide+methylbutane;1
+  carbon_dioxide+pentane;1
+  methylbutane+pentane;1
+
+carbon_dioxide+methylbutane+hexane;1
+  carbon_dioxide+methylbutane;1
+  carbon_dioxide+hexane;1
+  methylbutane+hexane;1
+
+carbon_dioxide+methylbutane+heptane;1
+  carbon_dioxide+methylbutane;1
+  carbon_dioxide+heptane;1
+  methylbutane+heptane;1
+
+carbon_dioxide+methylbutane+octane;1
+  carbon_dioxide+methylbutane;1
+  carbon_dioxide+octane;1
+  methylbutane+octane;1
+
+carbon_dioxide+methylbutane+water;1
+  carbon_dioxide+methylbutane;1
+  carbon_dioxide+water;1
+  methylbutane+water;1
+
+carbon_dioxide+pentane+hexane;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+hexane;1
+  pentane+hexane;1
+
+carbon_dioxide+pentane+heptane;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+heptane;1
+  pentane+heptane;1
+
+carbon_dioxide+pentane+octane;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+octane;1
+  pentane+octane;1
+
+carbon_dioxide+pentane+water;1
+  carbon_dioxide+pentane;1
+  carbon_dioxide+water;1
+  pentane+water;1
+
+carbon_dioxide+hexane+heptane;1
+  carbon_dioxide+hexane;1
+  carbon_dioxide+heptane;1
+  hexane+heptane;1
+
+carbon_dioxide+hexane+octane;1
+  carbon_dioxide+hexane;1
+  carbon_dioxide+octane;1
+  hexane+octane;1
+
+carbon_dioxide+hexane+water;1
+  carbon_dioxide+hexane;1
+  carbon_dioxide+water;1
+  hexane+water;1
+
+carbon_dioxide+heptane+octane;1
+  carbon_dioxide+heptane;1
+  carbon_dioxide+octane;1
+  heptane+octane;1
+
+carbon_dioxide+heptane+water;1
+  carbon_dioxide+heptane;1
+  carbon_dioxide+water;1
+  heptane+water;1
+
+carbon_dioxide+octane+water;1
+  carbon_dioxide+octane;1
+  carbon_dioxide+water;1
+  octane+water;1
+
+ethane+propane+methylpropane;1
+  ethane+propane;1
+  ethane+methylpropane;1
+  propane+methylpropane;1
+
+ethane+propane+butane;1
+  ethane+propane;1
+  ethane+butane;1
+  propane+butane;1
+
+ethane+propane+methylbutane;1
+  ethane+propane;1
+  ethane+methylbutane;1
+  propane+methylbutane;1
+
+ethane+propane+pentane;1
+  ethane+propane;1
+  ethane+pentane;1
+  propane+pentane;1
+
+ethane+propane+hexane;1
+  ethane+propane;1
+  ethane+hexane;1
+  propane+hexane;1
+
+ethane+propane+heptane;1
+  ethane+propane;1
+  ethane+heptane;1
+  propane+heptane;1
+
+ethane+propane+octane;1
+  ethane+propane;1
+  ethane+octane;1
+  propane+octane;1
+
+ethane+propane+water;1
+  ethane+propane;1
+  ethane+water;1
+  propane+water;1
+
+ethane+methylpropane+butane;1
+  ethane+methylpropane;1
+  ethane+butane;1
+  methylpropane+butane;1
+
+ethane+methylpropane+methylbutane;1
+  ethane+methylpropane;1
+  ethane+methylbutane;1
+  methylpropane+methylbutane;1
+
+ethane+methylpropane+pentane;1
+  ethane+methylpropane;1
+  ethane+pentane;1
+  methylpropane+pentane;1
+
+ethane+methylpropane+hexane;1
+  ethane+methylpropane;1
+  ethane+hexane;1
+  methylpropane+hexane;1
+
+ethane+methylpropane+heptane;1
+  ethane+methylpropane;1
+  ethane+heptane;1
+  methylpropane+heptane;1
+
+ethane+methylpropane+octane;1
+  ethane+methylpropane;1
+  ethane+octane;1
+  methylpropane+octane;1
+
+ethane+methylpropane+water;1
+  ethane+methylpropane;1
+  ethane+water;1
+  methylpropane+water;1
+
+ethane+butane+methylbutane;1
+  ethane+butane;1
+  ethane+methylbutane;1
+  butane+methylbutane;1
+
+ethane+butane+pentane;1
+  ethane+butane;1
+  ethane+pentane;1
+  butane+pentane;1
+
+ethane+butane+hexane;1
+  ethane+butane;1
+  ethane+hexane;1
+  butane+hexane;1
+
+ethane+butane+heptane;1
+  ethane+butane;1
+  ethane+heptane;1
+  butane+heptane;1
+
+ethane+butane+octane;1
+  ethane+butane;1
+  ethane+octane;1
+  butane+octane;1
+
+ethane+butane+water;1
+  ethane+butane;1
+  ethane+water;1
+  butane+water;1
+
+ethane+methylbutane+pentane;1
+  ethane+methylbutane;1
+  ethane+pentane;1
+  methylbutane+pentane;1
+
+ethane+methylbutane+hexane;1
+  ethane+methylbutane;1
+  ethane+hexane;1
+  methylbutane+hexane;1
+
+ethane+methylbutane+heptane;1
+  ethane+methylbutane;1
+  ethane+heptane;1
+  methylbutane+heptane;1
+
+ethane+methylbutane+octane;1
+  ethane+methylbutane;1
+  ethane+octane;1
+  methylbutane+octane;1
+
+ethane+methylbutane+water;1
+  ethane+methylbutane;1
+  ethane+water;1
+  methylbutane+water;1
+
+ethane+pentane+hexane;1
+  ethane+pentane;1
+  ethane+hexane;1
+  pentane+hexane;1
+
+ethane+pentane+heptane;1
+  ethane+pentane;1
+  ethane+heptane;1
+  pentane+heptane;1
+
+ethane+pentane+octane;1
+  ethane+pentane;1
+  ethane+octane;1
+  pentane+octane;1
+
+ethane+pentane+water;1
+  ethane+pentane;1
+  ethane+water;1
+  pentane+water;1
+
+ethane+hexane+heptane;1
+  ethane+hexane;1
+  ethane+heptane;1
+  hexane+heptane;1
+
+ethane+hexane+octane;1
+  ethane+hexane;1
+  ethane+octane;1
+  hexane+octane;1
+
+ethane+hexane+water;1
+  ethane+hexane;1
+  ethane+water;1
+  hexane+water;1
+
+ethane+heptane+octane;1
+  ethane+heptane;1
+  ethane+octane;1
+  heptane+octane;1
+
+ethane+heptane+water;1
+  ethane+heptane;1
+  ethane+water;1
+  heptane+water;1
+
+ethane+octane+water;1
+  ethane+octane;1
+  ethane+water;1
+  octane+water;1
+
+propane+methylpropane+butane;1
+  propane+methylpropane;1
+  propane+butane;1
+  methylpropane+butane;1
+
+propane+methylpropane+methylbutane;1
+  propane+methylpropane;1
+  propane+methylbutane;1
+  methylpropane+methylbutane;1
+
+propane+methylpropane+pentane;1
+  propane+methylpropane;1
+  propane+pentane;1
+  methylpropane+pentane;1
+
+propane+methylpropane+hexane;1
+  propane+methylpropane;1
+  propane+hexane;1
+  methylpropane+hexane;1
+
+propane+methylpropane+heptane;1
+  propane+methylpropane;1
+  propane+heptane;1
+  methylpropane+heptane;1
+
+propane+methylpropane+octane;1
+  propane+methylpropane;1
+  propane+octane;1
+  methylpropane+octane;1
+
+propane+methylpropane+water;1
+  propane+methylpropane;1
+  propane+water;1
+  methylpropane+water;1
+
+propane+butane+methylbutane;1
+  propane+butane;1
+  propane+methylbutane;1
+  butane+methylbutane;1
+
+propane+butane+pentane;1
+  propane+butane;1
+  propane+pentane;1
+  butane+pentane;1
+
+propane+butane+hexane;1
+  propane+butane;1
+  propane+hexane;1
+  butane+hexane;1
+
+propane+butane+heptane;1
+  propane+butane;1
+  propane+heptane;1
+  butane+heptane;1
+
+propane+butane+octane;1
+  propane+butane;1
+  propane+octane;1
+  butane+octane;1
+
+propane+butane+water;1
+  propane+butane;1
+  propane+water;1
+  butane+water;1
+
+propane+methylbutane+pentane;1
+  propane+methylbutane;1
+  propane+pentane;1
+  methylbutane+pentane;1
+
+propane+methylbutane+hexane;1
+  propane+methylbutane;1
+  propane+hexane;1
+  methylbutane+hexane;1
+
+propane+methylbutane+heptane;1
+  propane+methylbutane;1
+  propane+heptane;1
+  methylbutane+heptane;1
+
+propane+methylbutane+octane;1
+  propane+methylbutane;1
+  propane+octane;1
+  methylbutane+octane;1
+
+propane+methylbutane+water;1
+  propane+methylbutane;1
+  propane+water;1
+  methylbutane+water;1
+
+propane+pentane+hexane;1
+  propane+pentane;1
+  propane+hexane;1
+  pentane+hexane;1
+
+propane+pentane+heptane;1
+  propane+pentane;1
+  propane+heptane;1
+  pentane+heptane;1
+
+propane+pentane+octane;1
+  propane+pentane;1
+  propane+octane;1
+  pentane+octane;1
+
+propane+pentane+water;1
+  propane+pentane;1
+  propane+water;1
+  pentane+water;1
+
+propane+hexane+heptane;1
+  propane+hexane;1
+  propane+heptane;1
+  hexane+heptane;1
+
+propane+hexane+octane;1
+  propane+hexane;1
+  propane+octane;1
+  hexane+octane;1
+
+propane+hexane+water;1
+  propane+hexane;1
+  propane+water;1
+  hexane+water;1
+
+propane+heptane+octane;1
+  propane+heptane;1
+  propane+octane;1
+  heptane+octane;1
+
+propane+heptane+water;1
+  propane+heptane;1
+  propane+water;1
+  heptane+water;1
+
+propane+octane+water;1
+  propane+octane;1
+  propane+water;1
+  octane+water;1
+
+methylpropane+butane+methylbutane;1
+  methylpropane+butane;1
+  methylpropane+methylbutane;1
+  butane+methylbutane;1
+
+methylpropane+butane+pentane;1
+  methylpropane+butane;1
+  methylpropane+pentane;1
+  butane+pentane;1
+
+methylpropane+butane+hexane;1
+  methylpropane+butane;1
+  methylpropane+hexane;1
+  butane+hexane;1
+
+methylpropane+butane+heptane;1
+  methylpropane+butane;1
+  methylpropane+heptane;1
+  butane+heptane;1
+
+methylpropane+butane+octane;1
+  methylpropane+butane;1
+  methylpropane+octane;1
+  butane+octane;1
+
+methylpropane+butane+water;1
+  methylpropane+butane;1
+  methylpropane+water;1
+  butane+water;1
+
+methylpropane+methylbutane+pentane;1
+  methylpropane+methylbutane;1
+  methylpropane+pentane;1
+  methylbutane+pentane;1
+
+methylpropane+methylbutane+hexane;1
+  methylpropane+methylbutane;1
+  methylpropane+hexane;1
+  methylbutane+hexane;1
+
+methylpropane+methylbutane+heptane;1
+  methylpropane+methylbutane;1
+  methylpropane+heptane;1
+  methylbutane+heptane;1
+
+methylpropane+methylbutane+octane;1
+  methylpropane+methylbutane;1
+  methylpropane+octane;1
+  methylbutane+octane;1
+
+methylpropane+methylbutane+water;1
+  methylpropane+methylbutane;1
+  methylpropane+water;1
+  methylbutane+water;1
+
+methylpropane+pentane+hexane;1
+  methylpropane+pentane;1
+  methylpropane+hexane;1
+  pentane+hexane;1
+
+methylpropane+pentane+heptane;1
+  methylpropane+pentane;1
+  methylpropane+heptane;1
+  pentane+heptane;1
+
+methylpropane+pentane+octane;1
+  methylpropane+pentane;1
+  methylpropane+octane;1
+  pentane+octane;1
+
+methylpropane+pentane+water;1
+  methylpropane+pentane;1
+  methylpropane+water;1
+  pentane+water;1
+
+methylpropane+hexane+heptane;1
+  methylpropane+hexane;1
+  methylpropane+heptane;1
+  hexane+heptane;1
+
+methylpropane+hexane+octane;1
+  methylpropane+hexane;1
+  methylpropane+octane;1
+  hexane+octane;1
+
+methylpropane+hexane+water;1
+  methylpropane+hexane;1
+  methylpropane+water;1
+  hexane+water;1
+
+methylpropane+heptane+octane;1
+  methylpropane+heptane;1
+  methylpropane+octane;1
+  heptane+octane;1
+
+methylpropane+heptane+water;1
+  methylpropane+heptane;1
+  methylpropane+water;1
+  heptane+water;1
+
+methylpropane+octane+water;1
+  methylpropane+octane;1
+  methylpropane+water;1
+  octane+water;1
+
+butane+methylbutane+pentane;1
+  butane+methylbutane;1
+  butane+pentane;1
+  methylbutane+pentane;1
+
+butane+methylbutane+hexane;1
+  butane+methylbutane;1
+  butane+hexane;1
+  methylbutane+hexane;1
+
+butane+methylbutane+heptane;1
+  butane+methylbutane;1
+  butane+heptane;1
+  methylbutane+heptane;1
+
+butane+methylbutane+octane;1
+  butane+methylbutane;1
+  butane+octane;1
+  methylbutane+octane;1
+
+butane+methylbutane+water;1
+  butane+methylbutane;1
+  butane+water;1
+  methylbutane+water;1
+
+butane+pentane+hexane;1
+  butane+pentane;1
+  butane+hexane;1
+  pentane+hexane;1
+
+butane+pentane+heptane;1
+  butane+pentane;1
+  butane+heptane;1
+  pentane+heptane;1
+
+butane+pentane+octane;1
+  butane+pentane;1
+  butane+octane;1
+  pentane+octane;1
+
+butane+pentane+water;1
+  butane+pentane;1
+  butane+water;1
+  pentane+water;1
+
+butane+hexane+heptane;1
+  butane+hexane;1
+  butane+heptane;1
+  hexane+heptane;1
+
+butane+hexane+octane;1
+  butane+hexane;1
+  butane+octane;1
+  hexane+octane;1
+
+butane+hexane+water;1
+  butane+hexane;1
+  butane+water;1
+  hexane+water;1
+
+butane+heptane+octane;1
+  butane+heptane;1
+  butane+octane;1
+  heptane+octane;1
+
+butane+heptane+water;1
+  butane+heptane;1
+  butane+water;1
+  heptane+water;1
+
+butane+octane+water;1
+  butane+octane;1
+  butane+water;1
+  octane+water;1
+
+methylbutane+pentane+hexane;1
+  methylbutane+pentane;1
+  methylbutane+hexane;1
+  pentane+hexane;1
+
+methylbutane+pentane+heptane;1
+  methylbutane+pentane;1
+  methylbutane+heptane;1
+  pentane+heptane;1
+
+methylbutane+pentane+octane;1
+  methylbutane+pentane;1
+  methylbutane+octane;1
+  pentane+octane;1
+
+methylbutane+pentane+water;1
+  methylbutane+pentane;1
+  methylbutane+water;1
+  pentane+water;1
+
+methylbutane+hexane+heptane;1
+  methylbutane+hexane;1
+  methylbutane+heptane;1
+  hexane+heptane;1
+
+methylbutane+hexane+octane;1
+  methylbutane+hexane;1
+  methylbutane+octane;1
+  hexane+octane;1
+
+methylbutane+hexane+water;1
+  methylbutane+hexane;1
+  methylbutane+water;1
+  hexane+water;1
+
+methylbutane+heptane+octane;1
+  methylbutane+heptane;1
+  methylbutane+octane;1
+  heptane+octane;1
+
+methylbutane+heptane+water;1
+  methylbutane+heptane;1
+  methylbutane+water;1
+  heptane+water;1
+
+methylbutane+octane+water;1
+  methylbutane+octane;1
+  methylbutane+water;1
+  octane+water;1
+
+pentane+hexane+heptane;1
+  pentane+hexane;1
+  pentane+heptane;1
+  hexane+heptane;1
+
+pentane+hexane+octane;1
+  pentane+hexane;1
+  pentane+octane;1
+  hexane+octane;1
+
+pentane+hexane+water;1
+  pentane+hexane;1
+  pentane+water;1
+  hexane+water;1
+
+pentane+heptane+octane;1
+  pentane+heptane;1
+  pentane+octane;1
+  heptane+octane;1
+
+pentane+heptane+water;1
+  pentane+heptane;1
+  pentane+water;1
+  heptane+water;1
+
+pentane+octane+water;1
+  pentane+octane;1
+  pentane+water;1
+  octane+water;1
+
+hexane+heptane+octane;1
+  hexane+heptane;1
+  hexane+octane;1
+  heptane+octane;1
+
+hexane+heptane+water;1
+  hexane+heptane;1
+  hexane+water;1
+  heptane+water;1
+
+hexane+octane+water;1
+  hexane+octane;1
+  hexane+water;1
+  octane+water;1
+
+heptane+octane+water;1
+  heptane+octane;1
+  heptane+water;1
+  octane+water;1
+

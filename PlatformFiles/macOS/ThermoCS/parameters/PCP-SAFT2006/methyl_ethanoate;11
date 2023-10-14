@@ -1,0 +1,13 @@
+name:	acetic_acid_methylester
+id:	11
+text:	PC-SAFT2006 mit 1-Parameter Fit
+pc:	 5.23445201e+00
+Tc:	 5.10039476e+02
+vc:	 2.35537624e+02
+par[0]:	 7.40790000e+01
+par[1]:	 2.43849300e+02
+par[2]:	 1.71178000e+01
+par[3]:	 2.05208800e+00
+par[4]:	 9.57460000e+00
+par[5]:	 1.79230000e+00
+par[6]:	 6.81530000e+00

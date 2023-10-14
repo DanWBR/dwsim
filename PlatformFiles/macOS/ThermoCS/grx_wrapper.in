@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# simple wrapper for running Grafix programs from PHP scripts
+# usage: grx_wrapper [AUTOGRAFIX_OPTIONS] DATAFILE
+
+GRXHOME=@ghome@
+PATH=$GRXHOME/bin:$PATH
+LC_NUMERIC=C
+LD_LIBRARY_PATH=@mhome@/C/lib:$GRXHOME/lib:$LD_LIBRARY_PATH
+export GRXHOME LC_NUMERIC LD_LIBRARY_PATH PATH
+
+ulimit -t 120				# to get rid of zombie processes
+
+autografix $*
+if [ $? -ne 0 ]
+then
+  echo "could not create a Grafix document"
+  exit 1
+fi
+
+while [ $# -ge 2 ]
+do
+  shift
+done
+# echo "created Grafix document $1.d"
+
+xml2eps $1.d >$1.d/diagram.eps
+if [ $? -ne 0 ]
+then
+  echo "could not convert Grafix to PostScript"
+  exit 1
+fi
+# echo "computed EPS diagram $1.d/diagram.eps"
+
+gs -q -dNOPAUSE -dBATCH -sDEVICE=pgmraw -r300 -sOutputFile=- $1.d/diagram.eps \
+| pamcut -left 350 -right 2220 -bottom 2950 -top 1090 \
+| pamscale -xsize 600 | pnmtopng >$1.d/diagram.png
+exit $?

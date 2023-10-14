@@ -1,0 +1,21 @@
+2
+750.0
+s1
+2
+509.3 3.1150E-03 134.499 1.0E-4
+411.4 8.1727E-06 134.499 1.0E-4
+s2
+5
+411.4 8.1727E-06 132.576 1.0E-4
+370.0 2.3158E-07 132.576 1.0E-4
+350.0 3.0610E-08 132.576 1.0E-4
+330.0 2.8903E-09 132.576 1.0E-4
+310.0 2.0127E-10 132.576 1.0E-4
+
+509.3: from transitiometer experiment
+       3.115E-03: Randzio, priv. comm.
+411.4: from transitiometer experiment
+       9.779E-06: average of Bothe & Cammenga
+       8.1727E-6: required to achieve Delta H(s1s2) of 3185 J/mol
+350.0: ... Bothe & Cammenga
+310.0: ... Boller & Wiedemann

@@ -1,0 +1,10 @@
+name:	tetrachloromethane
+id:	1
+text:	crit, VLE (NIST)
+pc:	 4.55760000e+00
+Tc:	 5.56300000e+02
+vc:	 3.11970293e+02
+M:    1.53823000e+02 g/mol
+Ts:   4.08696917e+02 K
+vs:   7.89523768e+01 cm3/mol
+omg:  1.93307569e-01
