@@ -20,6 +20,8 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports OxyPlot
 Imports OxyPlot.Axes
+Imports DWSIM.SharedClasses.SystemsOfUnits
+Imports interp = DWSIM.MathOps.MathEx.Interpolation
 
 Public Class Manager
 
@@ -186,7 +188,123 @@ Public Class Manager
     End Function
 
     Public Function GetCauseAndEffectMatrix(name As String) As IDynamicsCauseAndEffectMatrix Implements IDynamicsManager.GetCauseAndEffectMatrix
+
         Return CauseAndEffectMatrixList.Values.Where(Function(s) s.Description = name).FirstOrDefault()
+
+    End Function
+
+    Public Function GetPropertyValuesFromEvents(fs As IFlowsheet, currenttime As DateTime, history As Dictionary(Of DateTime, XDocument), eventset As IDynamicsEventSet) As List(Of Tuple(Of String, String, Double)) Implements IDynamicsManager.GetPropertyValuesFromEvents
+
+        Dim props As New List(Of Tuple(Of String, String, Double))
+
+        Dim i As Integer
+
+        Dim events = eventset.Events.Values.OrderBy(Function(e) e.TimeStamp).ToList()
+
+        For i = 0 To events.Count - 1
+
+            Dim current = events(i)
+
+            If currenttime <= current.TimeStamp And current.EventType = Enums.Dynamics.DynamicsEventType.ChangeProperty Then
+
+                If current.TransitionType <> Enums.Dynamics.DynamicsEventTransitionType.StepChange Then
+
+                    Dim obj = fs.SimulationObjects(current.SimulationObjectID)
+                    Dim values = current.SimulationObjectPropertyValue
+                    Dim units = current.SimulationObjectPropertyUnits
+
+                    Dim value = Converter.ConvertToSI(units, values.ToDoubleFromInvariant())
+
+                    Dim state As XDocument = Nothing
+
+                    Dim active As Boolean = False
+
+                    If i = 0 Then
+
+                        state = history.Values.First()
+
+                    Else
+
+                        Select Case current.TransitionReference
+
+                            Case Enums.Dynamics.DynamicsEventTransitionReferenceType.InitialState
+
+                                state = history.Values.First()
+
+                                active = True
+
+                            Case Enums.Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent
+
+                                Dim refevent = events(i - 1)
+
+                                state = history.Where(Function(h) h.Key <= currenttime).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
+
+                                If refevent.TimeStamp <= currenttime Then active = True
+
+                            Case Enums.Dynamics.DynamicsEventTransitionReferenceType.SpecificEvent
+
+                                If Not eventset.Events.ContainsKey(current.TransitionReferenceEventID) Then
+
+                                    Throw New Exception(String.Format("could not find reference event for transition in event '{0}'", current.Description))
+
+                                End If
+
+                                Dim refevent = eventset.Events(current.TransitionReferenceEventID)
+
+                                state = history.Where(Function(h) h.Key <= refevent.TimeStamp).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
+
+                                If refevent.TimeStamp <= currenttime Then active = True
+
+                        End Select
+
+                    End If
+
+                    If active Then
+
+                        fs.RestoreSnapshot(state, Enums.SnapshotType.ObjectData)
+
+                        Dim value0 = Convert.ToDouble(fs.SimulationObjects(current.SimulationObjectID).GetPropertyValue(current.SimulationObjectProperty))
+
+                        Dim span = (current.TimeStamp - Date.MinValue).TotalMilliseconds
+                        Dim dt = (currenttime - Date.MinValue).TotalMilliseconds
+
+                        Dim xt = dt / span
+                        Dim y0 = value0
+                        Dim y1 = value
+                        Dim yt As Double
+
+                        Select Case current.TransitionType
+
+                            Case Enums.Dynamics.DynamicsEventTransitionType.LinearChange
+
+                                yt = interp.LinearInterpolation.Interpolate({0.0, 1.0}, {y0, y1}, xt)
+
+                            Case Enums.Dynamics.DynamicsEventTransitionType.LogChange
+
+                                yt = interp.LogLinearInterpolation.Interpolate({0.0, 1.0}, {y0, y1}, xt)
+
+                            Case Enums.Dynamics.DynamicsEventTransitionType.CubicSplineChange
+
+                                yt = interp.CubicSplineInterpolation.Interpolate({0.0, 1.0}, {y0, y1}, xt)
+
+                            Case Enums.Dynamics.DynamicsEventTransitionType.RandomChange
+
+                                yt = y0 + Math.Sign(y1 - y0) * New Random().NextDouble() * Math.Abs(y1 - y0)
+
+                        End Select
+
+                        props.Add(New Tuple(Of String, String, Double)(obj.Name, current.SimulationObjectProperty, yt))
+
+                    End If
+
+                End If
+
+            End If
+
+        Next
+
+        Return props
+
     End Function
 
 End Class

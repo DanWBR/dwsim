@@ -41,12 +41,14 @@ Namespace Enums
             StepChange = 0
             LinearChange = 1
             LogChange = 3
-            LogInvChange = 4
+            CubicSplineChange = 4
+            RandomChange = 5
         End Enum
 
         Public Enum DynamicsEventTransitionReferenceType
             InitialState = 0
             PreviousEvent = 1
+            SpecificEvent = 2
         End Enum
 
     End Class

@@ -5104,6 +5104,11 @@ Label_00CC:
 
     End Sub
 
+    Public Overridable Function Clone() As IFlowsheet Implements IFlowsheet.Clone
+
+        Throw New NotImplementedException()
+
+    End Function
 
 #End Region
 

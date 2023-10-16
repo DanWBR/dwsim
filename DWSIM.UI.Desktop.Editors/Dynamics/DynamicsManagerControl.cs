@@ -1078,7 +1078,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     ev.SimulationObjectPropertyUnits = s.Text;
                 });
 
-            layout.CreateAndAddDropDownRow("Transition Type", new List<string>() { "Step", "Linear", "Log", "Inverse Log" }, (int)ev.TransitionType, (dd, e) =>
+            layout.CreateAndAddDropDownRow("Transition Type", new List<string>() { "Step", "Linear", "Log", "Cubic Spline", "Random" }, (int)ev.TransitionType, (dd, e) =>
             {
                 ev.TransitionType = dd.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventTransitionType>();
             });

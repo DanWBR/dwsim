@@ -44,4 +44,6 @@ Public Interface IDynamicsManager
 
     Function GetCauseAndEffectMatrix(name As String) As IDynamicsCauseAndEffectMatrix
 
+    Function GetPropertyValuesFromEvents(fs As IFlowsheet, currenttime As DateTime, history As Dictionary(Of DateTime, XDocument), eventset As IDynamicsEventSet) As List(Of Tuple(Of String, String, Double))
+
 End Interface

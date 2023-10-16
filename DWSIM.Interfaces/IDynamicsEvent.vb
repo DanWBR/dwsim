@@ -42,4 +42,6 @@ Public Interface IDynamicsEvent
 
     Property TransitionReference As Enums.Dynamics.DynamicsEventTransitionReferenceType
 
+    Property TransitionReferenceEventID As String
+
 End Interface

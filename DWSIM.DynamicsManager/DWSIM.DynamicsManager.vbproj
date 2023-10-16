@@ -123,9 +123,21 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+      <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
+      <Name>DWSIM.MathOps.DotNumerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

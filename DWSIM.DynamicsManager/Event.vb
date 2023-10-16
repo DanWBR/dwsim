@@ -47,6 +47,8 @@ Public Class DynamicEvent
 
     Public Property TransitionReference As Dynamics.DynamicsEventTransitionReferenceType = Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent Implements IDynamicsEvent.TransitionReference
 
+    Public Property TransitionReferenceEventID As String = "" Implements IDynamicsEvent.TransitionReferenceEventID
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)
     End Function

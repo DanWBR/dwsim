@@ -293,8 +293,10 @@ Public Class FormDynamicsManager
                         addedrow.Cells(9).Value = "Linear"
                     Case Dynamics.DynamicsEventTransitionType.LogChange
                         addedrow.Cells(9).Value = "Log"
-                    Case Dynamics.DynamicsEventTransitionType.LogInvChange
-                        addedrow.Cells(9).Value = "Inverse Log"
+                    Case Dynamics.DynamicsEventTransitionType.CubicSplineChange
+                        addedrow.Cells(9).Value = "Cubic Spline"
+                    Case Dynamics.DynamicsEventTransitionType.RandomChange
+                        addedrow.Cells(9).Value = "Random"
                 End Select
                 Select Case ev.TransitionReference
                     Case Dynamics.DynamicsEventTransitionReferenceType.InitialState
@@ -302,6 +304,7 @@ Public Class FormDynamicsManager
                     Case Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent
                         addedrow.Cells(10).Value = "Previous Event"
                 End Select
+                addedrow.Cells(11).Value = .TransitionReferenceEventID
             End With
         Next
 
@@ -388,8 +391,10 @@ Public Class FormDynamicsManager
                             ev.TransitionType = Dynamics.DynamicsEventTransitionType.LinearChange
                         ElseIf value = "Log" Then
                             ev.TransitionType = Dynamics.DynamicsEventTransitionType.LogChange
-                        ElseIf value = "Inverse Log" Then
-                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.LogInvChange
+                        ElseIf value = "Cubic Spline" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.CubicSplineChange
+                        ElseIf value = "Random" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.RandomChange
                         End If
                     End If
                 Case 10
@@ -1272,6 +1277,23 @@ Public Class FormDynamicsManager
             i1.Duration = New TimeSpan(nupDays.Value, nupHours.Value, nupMinutes.Value, nupSeconds.Value)
         Catch ex As Exception
         End Try
+
+    End Sub
+
+    Private Sub gridselectedset_SelectionChanged(sender As Object, e As EventArgs) Handles gridselectedset.SelectionChanged
+
+        If gridselectedset.CurrentCell IsNot Nothing Then
+
+            Dim eventID = gridselectedset.Rows(gridselectedset.CurrentCell.RowIndex).Cells(0).Value
+            tbEventID.Text = eventID
+
+        End If
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Clipboard.SetText(tbEventID.Text)
 
     End Sub
 

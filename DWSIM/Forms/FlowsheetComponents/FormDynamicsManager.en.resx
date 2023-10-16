@@ -166,9 +166,30 @@
   <data name="unit.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
+  <data name="Column12.HeaderText" xml:space="preserve">
+    <value>Trans. Ref. Event ID</value>
+  </data>
+  <data name="Column12.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="gridselectedset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>701, 401</value>
+    <value>767, 375</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>708, 0</value>
+  </data>
+  <data name="tbEventID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 20</value>
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 6</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 416</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>767, 26</value>
   </data>
   <data name="btnAddEvent.Text" xml:space="preserve">
     <value>Add</value>
@@ -186,10 +207,10 @@
     <value>Remove</value>
   </data>
   <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>701, 25</value>
+    <value>767, 25</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 445</value>
+    <value>773, 445</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Selected Set</value>
@@ -219,7 +240,7 @@
     <value>Event Sets</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Event Sets</value>
@@ -312,7 +333,7 @@
     <value>Matrix Sets</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Cause-and-Effect Matrices</value>
@@ -504,7 +525,7 @@
     <value>Integrators</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Integrators</value>
@@ -579,7 +600,7 @@
     <value>Schedules</value>
   </data>
   <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage7.Text" xml:space="preserve">
     <value>Schedules</value>
@@ -591,10 +612,10 @@
     <value>Active</value>
   </data>
   <data name="dgvControllers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Controllers</value>
@@ -606,10 +627,10 @@
     <value>Current Value</value>
   </data>
   <data name="dgvIndicators.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 464</value>
+    <value>990, 464</value>
   </data>
   <data name="TabPage8.Text" xml:space="preserve">
     <value>Indicators</value>
@@ -618,10 +639,10 @@
     <value>6, 47</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 490</value>
+    <value>998, 490</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>752, 6</value>
+    <value>818, 6</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 35</value>
@@ -648,7 +669,7 @@
     <value>MiddleCenter</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>942, 540</value>
+    <value>1008, 540</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

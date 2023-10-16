@@ -1,12 +1,10 @@
 ﻿Imports System.Linq
 Imports System.Threading.Tasks
 Imports DWSIM.DynamicsManager
-Imports Eto.Threading
-Imports Mono.CSharp
+Imports DWSIM.Interfaces
 Imports OxyPlot
 Imports OxyPlot.Axes
 Imports OxyPlot.Series
-Imports Python.Runtime
 
 Public Class FormDynamicsIntegratorControl
 
@@ -21,6 +19,10 @@ Public Class FormDynamicsIntegratorControl
     Public LiveChart As New FormChart_OxyPlot
 
     Private ChartIsSetup As Boolean = False
+
+    Private FlowsheetClone As IFlowsheet
+
+    Private Historian As New Dictionary(Of Date, XDocument)
 
     Private Sub FormDynamicsIntegratorControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -130,6 +132,14 @@ Public Class FormDynamicsIntegratorControl
         Dim finaltime = currentposition
 
         Dim events = eventset.Events.Values.Where(Function(x) x.TimeStamp >= initialtime And x.TimeStamp < finaltime).ToList
+
+        Dim props = Flowsheet.DynamicsManager.GetPropertyValuesFromEvents(FlowsheetClone, currentposition, Historian, eventset)
+
+        For Each p In props
+            Dim obj = Flowsheet.SimulationObjects(p.Item1)
+            Dim value = p.Item3
+            obj.SetPropertyValue(p.Item2, value)
+        Next
 
         For Each ev In events
             If ev.Enabled Then
@@ -317,6 +327,10 @@ Public Class FormDynamicsIntegratorControl
 
         Flowsheet.SupressMessages = True
 
+        FlowsheetClone = Flowsheet.Clone()
+
+        Historian = New Dictionary(Of Date, XDocument)()
+
         Dim exceptions As New List(Of Exception)
 
         If Not restarting Then
@@ -387,6 +401,8 @@ Public Class FormDynamicsIntegratorControl
                                         End While
 
                                         If exceptions.Count > 0 Then Exit While
+
+                                        Historian.Add(integrator.CurrentTime, Flowsheet.GetSnapshot(SnapshotType.ObjectData))
 
                                         StoreVariableValues(integrator, i, integrator.CurrentTime)
 

@@ -63,6 +63,54 @@ Namespace MathEx.Interpolation
 
     End Class
 
+    Public Class LinearInterpolation
+
+        Public Shared Function Interpolate(x() As Double, y() As Double, xint As Double) As Double
+
+            If x.Count = 1 Then
+                Return xint / x(0) * y(0)
+            ElseIf x.Count = 0 Then
+                Return 0.0
+            Else
+                Return MathNet.Numerics.Interpolate.Linear(x, y).Interpolate(xint)
+            End If
+
+        End Function
+
+    End Class
+
+    Public Class LogLinearInterpolation
+
+        Public Shared Function Interpolate(x() As Double, y() As Double, xint As Double) As Double
+
+            If x.Count = 1 Then
+                Return xint / x(0) * y(0)
+            ElseIf x.Count = 0 Then
+                Return 0.0
+            Else
+                Return MathNet.Numerics.Interpolate.LogLinear(x, y).Interpolate(xint)
+            End If
+
+        End Function
+
+    End Class
+
+    Public Class CubicSplineInterpolation
+
+        Public Shared Function Interpolate(x() As Double, y() As Double, xint As Double) As Double
+
+            If x.Count = 1 Then
+                Return xint / x(0) * y(0)
+            ElseIf x.Count = 0 Then
+                Return 0.0
+            Else
+                Return MathNet.Numerics.Interpolate.CubicSpline(x, y).Interpolate(xint)
+            End If
+
+        End Function
+
+    End Class
+
     Public Class polinterpolation
 
         '************************************************************************

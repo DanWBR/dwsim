@@ -2833,7 +2833,23 @@ Public Class FormFlowsheet
 
 #End Region
 
-#Region "    Snapshots"
+#Region "    Snapshots/Cloning"
+
+    Public Function Clone() As IFlowsheet Implements IFlowsheet.Clone
+
+        Dim tmpfile = SharedClasses.Utility.GetTempFileName()
+
+        SaveToXML(tmpfile)
+
+        Dim fs = FormMain.LoadXML(New WindowsFile(tmpfile), Nothing, "", True)
+
+        My.Application.ActiveSimulation = Me
+
+        File.Delete(tmpfile)
+
+        Return fs
+
+    End Function
 
     Public Sub RegisterSnapshot(stype As SnapshotType, Optional obj As ISimulationObject = Nothing) Implements IFlowsheet.RegisterSnapshot
 
@@ -2901,8 +2917,19 @@ Public Class FormFlowsheet
                 xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
                 xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-                Collections.FlowsheetObjectCollection(obj.Name).SetFlowsheet(Me)
-                xel.Add(New XElement("SimulationObject", {Collections.FlowsheetObjectCollection(obj.Name).SaveData().ToArray()}))
+                If obj Is Nothing Then
+
+                    For Each obj In Collections.FlowsheetObjectCollection.Values
+                        obj.SetFlowsheet(Me)
+                        xel.Add(New XElement("SimulationObject", {obj.SaveData().ToArray()}))
+                    Next
+
+                Else
+
+                    Collections.FlowsheetObjectCollection(obj.Name).SetFlowsheet(Me)
+                    xel.Add(New XElement("SimulationObject", {Collections.FlowsheetObjectCollection(obj.Name).SaveData().ToArray()}))
+
+                End If
 
             Else 'includeobjectlayout
 
