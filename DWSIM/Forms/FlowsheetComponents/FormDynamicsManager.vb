@@ -286,6 +286,22 @@ Public Class FormDynamicsManager
                 End If
                 addedrow.Cells(7).Value = .SimulationObjectPropertyValue
                 addedrow.Cells(8).Value = .SimulationObjectPropertyUnits
+                Select Case ev.TransitionType
+                    Case Dynamics.DynamicsEventTransitionType.StepChange
+                        addedrow.Cells(9).Value = "Step"
+                    Case Dynamics.DynamicsEventTransitionType.LinearChange
+                        addedrow.Cells(9).Value = "Linear"
+                    Case Dynamics.DynamicsEventTransitionType.LogChange
+                        addedrow.Cells(9).Value = "Log"
+                    Case Dynamics.DynamicsEventTransitionType.LogInvChange
+                        addedrow.Cells(9).Value = "Inverse Log"
+                End Select
+                Select Case ev.TransitionReference
+                    Case Dynamics.DynamicsEventTransitionReferenceType.InitialState
+                        addedrow.Cells(10).Value = "Initial State"
+                    Case Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent
+                        addedrow.Cells(10).Value = "Previous Event"
+                End Select
             End With
         Next
 
@@ -310,7 +326,7 @@ Public Class FormDynamicsManager
                 Else
                     etype = Flowsheet.GetTranslatedString1("RunScript")
                 End If
-                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp, etype, "", "", "", ""})
+                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp, etype, "", "", "", "", "Step", "Previous Event"})
             End With
 
         Catch ex As Exception
@@ -364,6 +380,26 @@ Public Class FormDynamicsManager
                     ev.SimulationObjectPropertyValue = value
                 Case 8
                     ev.SimulationObjectPropertyUnits = value
+                Case 9
+                    If value IsNot Nothing Then
+                        If value = "Step" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.StepChange
+                        ElseIf value = "Linear" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.LinearChange
+                        ElseIf value = "Log" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.LogChange
+                        ElseIf value = "Inverse Log" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.LogInvChange
+                        End If
+                    End If
+                Case 10
+                    If value IsNot Nothing Then
+                        If value = "Initial State" Then
+                            ev.TransitionReference = Dynamics.DynamicsEventTransitionReferenceType.InitialState
+                        ElseIf value = "Previous Event" Then
+                            ev.TransitionReference = Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent
+                        End If
+                    End If
             End Select
         Catch ex As Exception
             MessageBox.Show(ex.Message, Flowsheet.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

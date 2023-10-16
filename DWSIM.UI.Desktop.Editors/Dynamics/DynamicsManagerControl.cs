@@ -71,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             tl2.Rows.Add(tr2);
 
             Rows.Add(new TableRow(tl2));
-                 
+
             // event sets
 
             var lce = new TableLayout();
@@ -305,7 +305,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
             var btnRemoveCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
-            
+
             if (Application.Instance.Platform.IsGtk)
             {
                 btnAddCEI.Size = new Size(30, 30);
@@ -393,7 +393,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
             var btnRemoveI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
-            
+
             if (Application.Instance.Platform.IsGtk)
             {
                 btnAddI.Size = new Size(30, 30);
@@ -571,7 +571,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
             var btnRemoveS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
-           
+
             if (Application.Instance.Platform.IsGtk)
             {
                 btnAddS.Size = new Size(30, 30);
@@ -939,17 +939,19 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             dtp.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
             dtp.ValueChanged += (s, e) =>
             {
-                try {
+                try
+                {
                     integ.Duration = dtp.Value.GetValueOrDefault().Subtract(new DateTime());
                 }
-                catch (Exception ex){
+                catch (Exception ex)
+                {
                     MessageBox.Show("Error setting integrator duration: " + ex.Message, "Error", MessageBoxType.Error);
                 }
             };
 
             layout.CreateAndAddLabelAndControlRow("Duration", dtp);
 
-            var dtp2 = new NumericStepper {MinValue=100, MaxValue = 100000, Value = integ.IntegrationStep.TotalMilliseconds };
+            var dtp2 = new NumericStepper { MinValue=100, MaxValue = 100000, Value = integ.IntegrationStep.TotalMilliseconds };
             dtp2.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
             dtp2.ValueChanged += (s, e) =>
             {
@@ -1075,6 +1077,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 {
                     ev.SimulationObjectPropertyUnits = s.Text;
                 });
+
+            layout.CreateAndAddDropDownRow("Transition Type", new List<string>() { "Step", "Linear", "Log", "Inverse Log" }, (int)ev.TransitionType, (dd, e) =>
+            {
+                ev.TransitionType = dd.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventTransitionType>();
+            });
+
+            layout.CreateAndAddDropDownRow("Transition Reference", new List<string>() { "Initial State", "Previous Event" }, (int)ev.TransitionReference, (dd, e) =>
+            {
+                ev.TransitionReference = dd.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventTransitionReferenceType>();
+            });
 
             layout.Padding = new Padding(10, 10, eventEditor.Width / 3, 10);
 

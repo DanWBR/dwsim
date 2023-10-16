@@ -43,6 +43,10 @@ Public Class DynamicEvent
 
     Public Property Enabled As Boolean = True Implements IDynamicsEvent.Enabled
 
+    Public Property TransitionType As Dynamics.DynamicsEventTransitionType = Dynamics.DynamicsEventTransitionType.StepChange Implements IDynamicsEvent.TransitionType
+
+    Public Property TransitionReference As Dynamics.DynamicsEventTransitionReferenceType = Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent Implements IDynamicsEvent.TransitionReference
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)
     End Function

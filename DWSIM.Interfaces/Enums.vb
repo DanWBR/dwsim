@@ -37,6 +37,18 @@ Namespace Enums
             HH = 3
         End Enum
 
+        Public Enum DynamicsEventTransitionType
+            StepChange = 0
+            LinearChange = 1
+            LogChange = 3
+            LogInvChange = 4
+        End Enum
+
+        Public Enum DynamicsEventTransitionReferenceType
+            InitialState = 0
+            PreviousEvent = 1
+        End Enum
+
     End Class
 
     Public Class Helpers

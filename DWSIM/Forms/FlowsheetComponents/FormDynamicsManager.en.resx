@@ -530,14 +530,17 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Initial Flowsheet State</value>
   </data>
+  <data name="chkIntegratorUseMatrix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 17</value>
+  </data>
   <data name="chkIntegratorUseMatrix.Text" xml:space="preserve">
-    <value>Uses Cause and Effect Matrix</value>
+    <value>Use Cause and Effect Matrix</value>
   </data>
   <data name="chkIntegratorUseEventSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 17</value>
+    <value>95, 17</value>
   </data>
   <data name="chkIntegratorUseEventSet.Text" xml:space="preserve">
-    <value>Uses Event List</value>
+    <value>Use Event List</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Associated Integrator</value>
