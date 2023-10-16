@@ -219,45 +219,49 @@ Public Class Manager
 
                     Dim active As Boolean = False
 
-                    If i = 0 Then
+                    Dim refevent As IDynamicsEvent = Nothing
 
-                        state = history.Values.First()
+                    Select Case current.TransitionReference
 
-                    Else
+                        Case Enums.Dynamics.DynamicsEventTransitionReferenceType.InitialState
 
-                        Select Case current.TransitionReference
+                            state = history.Values.First()
 
-                            Case Enums.Dynamics.DynamicsEventTransitionReferenceType.InitialState
+                            active = True
+
+                        Case Enums.Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent
+
+                            If i = 0 Then
 
                                 state = history.Values.First()
 
                                 active = True
 
-                            Case Enums.Dynamics.DynamicsEventTransitionReferenceType.PreviousEvent
+                            Else
 
-                                Dim refevent = events(i - 1)
-
-                                state = history.Where(Function(h) h.Key <= currenttime).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
+                                refevent = events(i - 1)
 
                                 If refevent.TimeStamp <= currenttime Then active = True
 
-                            Case Enums.Dynamics.DynamicsEventTransitionReferenceType.SpecificEvent
+                            End If
 
-                                If Not eventset.Events.ContainsKey(current.TransitionReferenceEventID) Then
+                            state = history.Where(Function(h) h.Key <= currenttime).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
 
-                                    Throw New Exception(String.Format("could not find reference event for transition in event '{0}'", current.Description))
+                        Case Enums.Dynamics.DynamicsEventTransitionReferenceType.SpecificEvent
 
-                                End If
+                            If Not eventset.Events.ContainsKey(current.TransitionReferenceEventID) Then
 
-                                Dim refevent = eventset.Events(current.TransitionReferenceEventID)
+                                Throw New Exception(String.Format("could not find reference event for transition in event '{0}'", current.Description))
 
-                                state = history.Where(Function(h) h.Key <= refevent.TimeStamp).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
+                            End If
 
-                                If refevent.TimeStamp <= currenttime Then active = True
+                            refevent = eventset.Events(current.TransitionReferenceEventID)
 
-                        End Select
+                            state = history.Where(Function(h) h.Key <= refevent.TimeStamp).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
 
-                    End If
+                            If refevent.TimeStamp <= currenttime Then active = True
+
+                    End Select
 
                     If active Then
 
@@ -265,8 +269,19 @@ Public Class Manager
 
                         Dim value0 = Convert.ToDouble(fs.SimulationObjects(current.SimulationObjectID).GetPropertyValue(current.SimulationObjectProperty))
 
-                        Dim span = (current.TimeStamp - Date.MinValue).TotalMilliseconds
-                        Dim dt = (currenttime - Date.MinValue).TotalMilliseconds
+                        Dim span, dt As Double
+
+                        If refevent Is Nothing Then
+
+                            span = (current.TimeStamp - Date.MinValue).TotalMilliseconds
+                            dt = (currenttime - Date.MinValue).TotalMilliseconds
+
+                        Else
+
+                            span = (current.TimeStamp - refevent.TimeStamp).TotalMilliseconds
+                            dt = (currenttime - refevent.TimeStamp).TotalMilliseconds
+
+                        End If
 
                         Dim xt = dt / span
                         Dim y0 = value0
