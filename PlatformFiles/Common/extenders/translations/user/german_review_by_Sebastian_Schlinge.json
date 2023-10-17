@@ -1,0 +1,164 @@
+[
+  {
+    "OriginalText": "Paste",
+    "Translated": "Einfüge",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5147306+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Property Package",
+    "Translated": "Zustandsgleichungen",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5147306+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Override separation pressure",
+    "Translated": "Separationsdruck überschreiben",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Reynolds number tube side",
+    "Translated": "Reynolds-Zahl Rohr Seite",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "A",
+    "Translated": "A",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Edit",
+    "Translated": "Bearbeiten",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Configure Property Package (",
+    "Translated": "Zustandsgleichung konfigurieren (",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Stage",
+    "Translated": "Stufe",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "[Shell and Tube] Resistance thermal conductivity pipes",
+    "Translated": "[Mantel und Rohr] Widerstand Wärmeleitfähigkeitsrohre",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "kgh",
+    "Translated": "kgh",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "[Shell and Tube] Internal Shell Diameter",
+    "Translated": "[Mantel und Rohr] Innendurchmesser des Mantels",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Tank",
+    "Translated": "Tank",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "minutes",
+    "Translated": "Minuten",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Flowsheet",
+    "Translated": "Fliessbild",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Side Draws",
+    "Translated": "Side Draws",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Column10",
+    "Translated": "Kolone10",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Elbow 90°",
+    "Translated": "Bogen 90°",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  },
+  {
+    "OriginalText": "Molar",
+    "Translated": "Molar",
+    "Reviewed": true,
+    "ReviewedBy_Name": "schlinges",
+    "ReviewedBy_Contact": "SebastianSchlinge@gmx.de",
+    "ReviewedBy_Date": "2023-09-28T14:38:24.5157282+02:00",
+    "Language": "de"
+  }
+]

@@ -41,7 +41,7 @@ Namespace Enums
             StepChange = 0
             LinearChange = 1
             LogChange = 3
-            CubicSplineChange = 4
+            InverseLogChange = 4
             RandomChange = 5
         End Enum
 

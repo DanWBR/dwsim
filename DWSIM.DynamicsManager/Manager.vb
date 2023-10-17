@@ -241,11 +241,11 @@ Public Class Manager
 
                                 refevent = events(i - 1)
 
-                                If refevent.TimeStamp <= currenttime Then active = True
+                                If refevent.TimeStamp < currenttime Then active = True
+
+                                state = history.Where(Function(h) h.Key <= refevent.TimeStamp).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
 
                             End If
-
-                            state = history.Where(Function(h) h.Key <= currenttime).OrderByDescending(Function(h) h.Key).FirstOrDefault().Value
 
                         Case Enums.Dynamics.DynamicsEventTransitionReferenceType.SpecificEvent
 
@@ -286,21 +286,26 @@ Public Class Manager
                         Dim xt = dt / span
                         Dim y0 = value0
                         Dim y1 = value
+
+                        If y0 = 0.0 Then y0 = 1.0E-30
+                        If y1 = 0.0 Then y1 = 1.0E-30
+
                         Dim yt As Double
 
                         Select Case current.TransitionType
 
                             Case Enums.Dynamics.DynamicsEventTransitionType.LinearChange
 
-                                yt = interp.LinearInterpolation.Interpolate({0.0, 1.0}, {y0, y1}, xt)
+                                yt = interp.LinearInterpolation.Interpolate({1.0E-30, 1.0}, {y0, y1}, xt)
 
                             Case Enums.Dynamics.DynamicsEventTransitionType.LogChange
 
-                                yt = interp.LogLinearInterpolation.Interpolate({0.0, 1.0}, {y0, y1}, xt)
+                                yt = interp.LogLinearInterpolation.Interpolate({1.0E-30, 1.0}, {y0, y1}, xt)
 
-                            Case Enums.Dynamics.DynamicsEventTransitionType.CubicSplineChange
+                            Case Enums.Dynamics.DynamicsEventTransitionType.InverseLogChange
 
-                                yt = interp.CubicSplineInterpolation.Interpolate({0.0, 1.0}, {y0, y1}, xt)
+                                yt = interp.LogLinearInterpolation.Interpolate({1.0, 1.0E-30}, {y0, y1}, xt)
+                                yt = y1 - (yt - y0)
 
                             Case Enums.Dynamics.DynamicsEventTransitionType.RandomChange
 

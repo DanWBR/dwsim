@@ -293,8 +293,8 @@ Public Class FormDynamicsManager
                         addedrow.Cells(9).Value = "Linear"
                     Case Dynamics.DynamicsEventTransitionType.LogChange
                         addedrow.Cells(9).Value = "Log"
-                    Case Dynamics.DynamicsEventTransitionType.CubicSplineChange
-                        addedrow.Cells(9).Value = "Cubic Spline"
+                    Case Dynamics.DynamicsEventTransitionType.InverseLogChange
+                        addedrow.Cells(9).Value = "Inverse Log"
                     Case Dynamics.DynamicsEventTransitionType.RandomChange
                         addedrow.Cells(9).Value = "Random"
                 End Select
@@ -391,8 +391,8 @@ Public Class FormDynamicsManager
                             ev.TransitionType = Dynamics.DynamicsEventTransitionType.LinearChange
                         ElseIf value = "Log" Then
                             ev.TransitionType = Dynamics.DynamicsEventTransitionType.LogChange
-                        ElseIf value = "Cubic Spline" Then
-                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.CubicSplineChange
+                        ElseIf value = "Inverse Log" Then
+                            ev.TransitionType = Dynamics.DynamicsEventTransitionType.InverseLogChange
                         ElseIf value = "Random" Then
                             ev.TransitionType = Dynamics.DynamicsEventTransitionType.RandomChange
                         End If

@@ -48,8 +48,12 @@ Public Class FormDynamicsIntegratorControl
 
             For Each item In Flowsheet.DynamicsManager.ScheduleList
                 If item.Value.CurrentIntegrator <> "" Then
-                    Dim integ = Flowsheet.DynamicsManager.IntegratorList(item.Value.CurrentIntegrator).Description
-                    cbScenario.Items.Add(item.Value.Description & " (" & integ & ")")
+                    If Flowsheet.DynamicsManager.IntegratorList.ContainsKey(item.Value.CurrentIntegrator) Then
+                        Dim integ = Flowsheet.DynamicsManager.IntegratorList(item.Value.CurrentIntegrator).Description
+                        cbScenario.Items.Add(item.Value.Description & " (" & integ & ")")
+                    Else
+                        cbScenario.Items.Add(item.Value.Description)
+                    End If
                 Else
                     cbScenario.Items.Add(item.Value.Description)
                 End If
