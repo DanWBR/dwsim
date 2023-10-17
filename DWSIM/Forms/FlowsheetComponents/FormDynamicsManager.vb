@@ -316,6 +316,8 @@ Public Class FormDynamicsManager
 
         Try
 
+            UpdateSelectables()
+
             Dim es = Manager.EventSetList(gridsets.Rows(gridsets.SelectedCells(0).RowIndex).Cells(0).Value)
 
             Dim ev As New DynamicEvent With {.ID = Guid.NewGuid.ToString}
@@ -507,6 +509,8 @@ Public Class FormDynamicsManager
     Private Sub btnAddMatrixItem_Click(sender As Object, e As EventArgs) Handles btnAddMatrixItem.Click
 
         Try
+
+            UpdateSelectables()
 
             Dim cem = Manager.CauseAndEffectMatrixList(gridmatrices.Rows(gridmatrices.SelectedCells(0).RowIndex).Cells(0).Value)
 
@@ -1005,6 +1009,7 @@ Public Class FormDynamicsManager
 
             Try
 
+                UpdateSelectables()
 
                 Dim cbobjects = New DataGridViewComboBoxCell
                 cbobjects.Items.Add("")

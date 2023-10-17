@@ -294,7 +294,7 @@
     <value>56</value>
   </data>
   <data name="grdiselmatrix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>701, 401</value>
+    <value>767, 401</value>
   </data>
   <data name="btnAddMatrixItem.Text" xml:space="preserve">
     <value>Add</value>
@@ -306,10 +306,10 @@
     <value>Remove</value>
   </data>
   <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>701, 25</value>
+    <value>767, 25</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 445</value>
+    <value>773, 445</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Selected Matrix</value>
@@ -468,7 +468,7 @@
     <value>Units</value>
   </data>
   <data name="gridMonitoredVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>685, 375</value>
+    <value>753, 375</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Add</value>
@@ -480,22 +480,22 @@
     <value>Remove</value>
   </data>
   <data name="ToolStrip7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>685, 25</value>
+    <value>753, 25</value>
   </data>
   <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>691, 406</value>
+    <value>759, 406</value>
   </data>
   <data name="TabPage9.Text" xml:space="preserve">
     <value>Monitored Variables</value>
   </data>
   <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 432</value>
+    <value>767, 432</value>
   </data>
   <data name="panelSelIntegrator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 432</value>
+    <value>767, 432</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>705, 451</value>
+    <value>773, 451</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Selected Integrator</value>
@@ -567,10 +567,10 @@
     <value>Associated Integrator</value>
   </data>
   <data name="panelSelSchedule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>701, 433</value>
+    <value>767, 433</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 452</value>
+    <value>773, 452</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Selected Schedule</value>
