@@ -320,5 +320,16 @@ namespace DWSIM.UI.Desktop.Shared
             Application.Instance.Invoke(act);
         }
 
+        public override IFlowsheet Clone()
+        {
+
+            var fs = new Flowsheet();
+            fs.Initialize();
+            var xdoc = SaveToXML();
+            fs.LoadFromXML(xdoc);
+            return fs;
+
+        }
+
     }
 }

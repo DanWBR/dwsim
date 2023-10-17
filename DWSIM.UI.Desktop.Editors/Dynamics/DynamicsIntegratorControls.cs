@@ -11,6 +11,9 @@ using DWSIM.UnitOperations.SpecialOps;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
 using System.Diagnostics;
 using DWSIM.SharedClasses;
+using System.Xml.Linq;
+using DWSIM.Interfaces;
+using DWSIM.Thermodynamics.Databases.ChemeoLink;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -30,6 +33,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
         private Label lbStatus;
 
         public bool Abort = false;
+
+        private static IFlowsheet FlowsheetClone;
+
+        private static Dictionary<DateTime, XDocument> Historian;
 
         public DynamicsIntegratorControl(DWSIM.UI.Desktop.Shared.Flowsheet fs)
             : base()
@@ -177,6 +184,15 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var finaltime = currentposition;
 
             var events = eventset.Events.Values.Where(x => x.TimeStamp >= initialtime & x.TimeStamp < finaltime).ToList();
+
+            var props = Flowsheet.DynamicsManager.GetPropertyValuesFromEvents(FlowsheetClone, currentposition, Historian, eventset);
+
+            foreach (var p in props)
+            {
+                var obj = Flowsheet.SimulationObjects[p.Item1];
+                var value = p.Item3;
+                obj.SetPropertyValue(p.Item2, value);
+            }
 
             foreach (var ev in events)
             {
@@ -346,6 +362,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             Flowsheet.SupressMessages = true;
 
+            FlowsheetClone = Flowsheet.Clone();
+
+            Historian = new Dictionary<DateTime, XDocument>();
+
             var exceptions = new List<Exception>();
 
             var maintask = new Task(() =>
@@ -412,6 +432,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                         Task.Delay(200).Wait();
 
                     if (exceptions.Count > 0) break;
+
+                    Historian.Add(integrator.CurrentTime, Flowsheet.GetSnapshot(SnapshotType.ObjectData));
 
                     StoreVariableValues(Flowsheet, (DynamicsManager.Integrator)integrator, j, integrator.CurrentTime);
 

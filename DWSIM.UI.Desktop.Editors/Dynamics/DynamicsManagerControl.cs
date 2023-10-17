@@ -787,7 +787,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             layout.CreateAndAddEmptySpace();
             layout.CreateAndAddEmptySpace();
 
-            layout.CreateAndAddCheckBoxRow("Uses Event Set", sch.UsesEventList, (chk, e) =>
+            layout.CreateAndAddCheckBoxRow("Use Event Set", sch.UsesEventList, (chk, e) =>
             {
                 sch.UsesEventList = chk.Checked.GetValueOrDefault();
             });
@@ -806,7 +806,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             layout.CreateAndAddEmptySpace();
             layout.CreateAndAddEmptySpace();
 
-            layout.CreateAndAddCheckBoxRow("Uses Cause-and-Effect Matrix", sch.UsesCauseAndEffectMatrix, (chk, e) =>
+            layout.CreateAndAddCheckBoxRow("Use Cause-and-Effect Matrix", sch.UsesCauseAndEffectMatrix, (chk, e) =>
             {
                 sch.UsesCauseAndEffectMatrix = chk.Checked.GetValueOrDefault();
             });
@@ -1000,6 +1000,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 ev.Enabled = s.Checked.GetValueOrDefault();
             });
 
+            var tbID = layout.CreateAndAddStringEditorRow("ID", ev.ID, null);
+            tbID.ReadOnly = true;
+            tbID.BackgroundColor = Eto.Drawing.SystemColors.Control;
+
             layout.CreateAndAddStringEditorRow("Name", ev.Description, (s, e) =>
             {
                 ev.Description = s.Text;
@@ -1083,9 +1087,13 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 ev.TransitionType = dd.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventTransitionType>();
             });
 
-            layout.CreateAndAddDropDownRow("Transition Reference", new List<string>() { "Initial State", "Previous Event" }, (int)ev.TransitionReference, (dd, e) =>
+            layout.CreateAndAddDropDownRow("Transition Reference", new List<string>() { "Initial State", "Previous Event", "Reference Event" }, (int)ev.TransitionReference, (dd, e) =>
             {
                 ev.TransitionReference = dd.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventTransitionReferenceType>();
+            });
+
+            layout.CreateAndAddStringEditorRow("Transition Reference Event ID", ev.TransitionReferenceEventID, (tb, e) => {
+                ev.TransitionReferenceEventID = tb.Text;
             });
 
             layout.Padding = new Padding(10, 10, eventEditor.Width / 3, 10);

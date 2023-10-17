@@ -335,5 +335,17 @@ namespace DWSIM.Automation
         {
 
         }
+
+        public override IFlowsheet Clone()
+        {
+
+            var fs = new Flowsheet2(null, null);
+            fs.Initialize();
+            var xdoc = SaveToXML();
+            fs.LoadFromXML(xdoc);
+            return fs;
+
+        }
+
     }
 }
