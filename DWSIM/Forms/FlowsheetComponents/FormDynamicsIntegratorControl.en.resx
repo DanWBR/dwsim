@@ -172,10 +172,10 @@
     <value>Run Schedule</value>
   </data>
   <data name="ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 11</value>
+    <value>499, 11</value>
   </data>
   <data name="ProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 23</value>
+    <value>327, 23</value>
   </data>
   <data name="btnLiveChart.Location" type="System.Drawing.Point, System.Drawing">
     <value>941, 11</value>

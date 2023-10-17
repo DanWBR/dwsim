@@ -87,14 +87,28 @@ Public Class FormDynamicsIntegratorControl
         If Flowsheet.DynamicMode Then
             If Not Running Then
                 ChartIsSetup = False
-                RunIntegrator(False, False, False, False)
+                Try
+                    RunIntegrator(False, False, False, False)
+                Catch ex As Exception
+                    Running = False
+                    btnRun.BackgroundImage = My.Resources.icons8_play
+                    Throw ex
+                End Try
             Else
                 If Not Paused Then
-                    RunIntegrator(False, False, True, False)
+                    Try
+                        RunIntegrator(False, False, True, False)
+                    Catch ex As Exception
+                        Running = False
+                        btnRun.BackgroundImage = My.Resources.icons8_play
+                        Throw ex
+                    End Try
                 End If
             End If
         Else
             Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
+            Running = False
+            btnRun.BackgroundImage = My.Resources.icons8_play
         End If
 
     End Sub
