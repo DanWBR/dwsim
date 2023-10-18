@@ -23,7 +23,7 @@ Partial Class EditingForm_Adjust_ControlPanel
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Adjust_ControlPanel))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnParar = New System.Windows.Forms.Button()
         Me.btnIniciar = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -92,10 +92,10 @@ Partial Class EditingForm_Adjust_ControlPanel
         '
         'ComboBox1
         '
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3")})
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Name = "ComboBox1"
         '
         'tbMax
@@ -150,26 +150,26 @@ Partial Class EditingForm_Adjust_ControlPanel
         '
         'FaTabStrip1
         '
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GraphControl)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GraphControl
         '
-        Me.GraphControl.BackColor = System.Drawing.Color.WhiteSmoke
         resources.ApplyResources(Me.GraphControl, "GraphControl")
+        Me.GraphControl.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GraphControl.IsAntiAlias = True
         Me.GraphControl.IsAutoScrollRange = True
         Me.GraphControl.IsShowCopyMessage = False
@@ -184,24 +184,24 @@ Partial Class EditingForm_Adjust_ControlPanel
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.Grid1)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'Grid1
         '
+        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.AllowUserToAddRows = False
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AllowUserToOrderColumns = True
         Me.Grid1.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.Grid1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.Name = "Grid1"
         Me.Grid1.ReadOnly = True
         Me.Grid1.RowHeadersVisible = False
@@ -254,9 +254,9 @@ Partial Class EditingForm_Adjust_ControlPanel
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox3)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'EditingForm_Adjust_ControlPanel

@@ -123,18 +123,12 @@
   <data name="btnIniciar.Text" xml:space="preserve">
     <value>Start Adjust</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 21</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Max/Min Limits</value>
+    <value>Min / Max Limits</value>
   </data>
   <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -169,14 +163,14 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Step size</value>
   </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Table</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Results</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -189,5 +183,8 @@
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Adjust value</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
 </root>

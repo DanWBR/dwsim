@@ -117,113 +117,380 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnParar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnParar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnParar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 98</value>
-  </data>
-  <data name="btnParar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnParar.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="btnParar.Text" xml:space="preserve">
-    <value>Parar</value>
-  </data>
-  <data name="&gt;&gt;btnParar.Name" xml:space="preserve">
-    <value>btnParar</value>
-  </data>
-  <data name="&gt;&gt;btnParar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnParar.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;btnParar.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="btnIniciar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnIniciar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 67</value>
+  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
   </data>
   <data name="btnIniciar.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
   </data>
+  <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbMin.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Valor de ajuste</value>
+  </data>
   <data name="btnIniciar.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="btnIniciar.Text" xml:space="preserve">
-    <value>Iniciar Ajuste</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbMax.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="&gt;&gt;btnIniciar.Name" xml:space="preserve">
-    <value>btnIniciar</value>
+  <data name="tbMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
   </data>
-  <data name="&gt;&gt;btnIniciar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbMax.Name" xml:space="preserve">
+    <value>tbMax</value>
   </data>
-  <data name="&gt;&gt;btnIniciar.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 79</value>
   </data>
-  <data name="&gt;&gt;btnIniciar.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 48</value>
   </data>
-  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="tbMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="ComboBox1.Items" xml:space="preserve">
-    <value>Secant</value>
+  <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="ComboBox1.Items1" xml:space="preserve">
-    <value>Brent</value>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
-    <value>Newton</value>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;GraphControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
+    <value>FaTabStripItem2</value>
+  </data>
+  <data name="lblItXdeY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 49</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
+    <value>lblStatus</value>
+  </data>
+  <data name="&gt;&gt;tbAjuste.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
+    <value>FaTabStripItem1</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>&lt;ajuste trabalhando ou parado?&gt;</value>
   </data>
   <data name="ComboBox1.Items3" xml:space="preserve">
     <value>IPOPT</value>
   </data>
-  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 21</value>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 21</value>
+  <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Limites Min/Max</value>
+  </data>
+  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
+  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Tolerância</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
+  <data name="GraphControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbMaxIt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Número máximo de iterações</value>
+  </data>
+  <data name="tbMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
+    <value>FaTabStripItem2</value>
+  </data>
+  <data name="&gt;&gt;tbMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbMin.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Gráfico</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 491</value>
+  </data>
+  <data name="&gt;&gt;btnParar.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Delta inicial (Step size)</value>
+  </data>
+  <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
+    <value>Grid1</value>
+  </data>
+  <data name="tbAjuste.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="GraphControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="tbMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="tbErro.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbAjuste.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 246</value>
+  </data>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;Grid1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbAjuste.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
+  </data>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>401, 344</value>
+  </data>
+  <data name="&gt;&gt;GraphControl.Parent" xml:space="preserve">
+    <value>FaTabStripItem1</value>
+  </data>
+  <data name="tbErro.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GraphControl.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 264</value>
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 144</value>
+  </data>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
+    <value>ComboBox1</value>
+  </data>
+  <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tbMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Parâmetros</value>
+  </data>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 21</value>
+  </data>
+  <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;tbMax.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="tbErro.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="ComboBox1.Items" xml:space="preserve">
+    <value>Secant</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
+    <value>FaTabStrip1</value>
+  </data>
+  <data name="&gt;&gt;tbStep.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="tbStep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 76</value>
+  </data>
+  <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="Grid1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="tbMax.Location" type="System.Drawing.Point, System.Drawing">
     <value>334, 39</value>
   </data>
-  <data name="tbMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
+  <data name="&gt;&gt;tbMin.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Erro atual</value>
+  </data>
+  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;tbMaxIt.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblItXdeY.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tbTol.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="GraphControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;tbTol.Name" xml:space="preserve">
+    <value>tbTol</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel1.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="btnIniciar.Text" xml:space="preserve">
+    <value>Iniciar Ajuste</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
   </data>
   <data name="tbMax.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -231,176 +498,152 @@
   <data name="tbMax.Text" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="tbMax.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
+  <data name="btnIniciar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tbMax.Name" xml:space="preserve">
-    <value>tbMax</value>
+  <data name="&gt;&gt;tbErro.Name" xml:space="preserve">
+    <value>tbErro</value>
   </data>
-  <data name="&gt;&gt;tbMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Resultados</value>
   </data>
-  <data name="&gt;&gt;tbMax.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 51</value>
   </data>
-  <data name="&gt;&gt;tbMax.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
+    <value>FaTabStrip1</value>
   </data>
-  <data name="tbMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="tbMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 39</value>
-  </data>
-  <data name="tbMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="tbMin.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="tbMin.Text" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbMin.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;tbMin.Name" xml:space="preserve">
-    <value>tbMin</value>
-  </data>
-  <data name="&gt;&gt;tbMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMin.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;tbMin.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;GraphControl.Name" xml:space="preserve">
+    <value>GraphControl</value>
   </data>
   <data name="Label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 19</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
-  </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Limites Min/Max</value>
-  </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
-  <data name="KryptonLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="KryptonLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 26</value>
-  </data>
-  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 13</value>
-  </data>
-  <data name="KryptonLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="KryptonLabel1.Text" xml:space="preserve">
-    <value>Método de convergência</value>
-  </data>
-  <data name="&gt;&gt;KryptonLabel1.Name" xml:space="preserve">
-    <value>KryptonLabel1</value>
-  </data>
-  <data name="&gt;&gt;KryptonLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;KryptonLabel1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;KryptonLabel1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tbStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 76</value>
-  </data>
-  <data name="tbStep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
-  </data>
-  <data name="tbStep.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="tbStep.Text" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tbStep.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;tbStep.Name" xml:space="preserve">
-    <value>tbStep</value>
-  </data>
-  <data name="&gt;&gt;tbStep.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbStep.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;tbStep.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 50</value>
-  </data>
-  <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
-  </data>
-  <data name="tbMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="tbMaxIt.Text" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;tbMaxIt.Name" xml:space="preserve">
-    <value>tbMaxIt</value>
-  </data>
-  <data name="&gt;&gt;tbMaxIt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbErro.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;tbMaxIt.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;tbMaxIt.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 102</value>
+  <data name="&gt;&gt;lblItXdeY.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 246</value>
+  </data>
+  <data name="btnParar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 98</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbTol.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 13</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="&gt;&gt;tbMaxIt.Name" xml:space="preserve">
+    <value>tbMaxIt</value>
+  </data>
+  <data name="tbErro.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbStep.Name" xml:space="preserve">
+    <value>tbStep</value>
+  </data>
+  <data name="&gt;&gt;lblItXdeY.Name" xml:space="preserve">
+    <value>lblItXdeY</value>
+  </data>
+  <data name="tbMaxIt.Text" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbMin.Text" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="btnParar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbStep.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="tbTol.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblItXdeY.Text" xml:space="preserve">
+    <value>&lt;Iteração x de y...&gt;</value>
+  </data>
+  <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 67</value>
+  </data>
+  <data name="tbAjuste.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblItXdeY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>385, 238</value>
+  </data>
+  <data name="KryptonLabel1.Text" xml:space="preserve">
+    <value>Método de convergência</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="FaTabStrip1.Text" xml:space="preserve">
+    <value>FaTabStrip1</value>
+  </data>
+  <data name="&gt;&gt;btnParar.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tbAjuste.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="tbTol.Text" xml:space="preserve">
     <value>2</value>
@@ -408,613 +651,277 @@
   <data name="tbTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;tbTol.Name" xml:space="preserve">
-    <value>tbTol</value>
-  </data>
-  <data name="&gt;&gt;tbTol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbTol.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;tbTol.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 53</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 13</value>
-  </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Número máximo de iterações</value>
-  </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
-  </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 105</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Tolerância</value>
-  </data>
-  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
-    <value>Label4</value>
-  </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbStep.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 79</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 13</value>
-  </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Delta inicial (Step size)</value>
-  </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
-  </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 135</value>
-  </data>
-  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parâmetros</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.Name" xml:space="preserve">
-    <value>GraphControl</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.Parent" xml:space="preserve">
-    <value>FaTabStripItem1</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 238</value>
-  </data>
-  <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Gráfico</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
-    <value>FaTabStripItem1</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
-    <value>FaTabStrip1</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
-    <value>Grid1</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 246</value>
-  </data>
-  <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Tabela</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
-    <value>FaTabStrip1</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="FaTabStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 74</value>
-  </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 264</value>
-  </data>
-  <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="FaTabStrip1.Text" xml:space="preserve">
-    <value>FaTabStrip1</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
-    <value>FaTabStrip1</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="GraphControl.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="GraphControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
-  </data>
-  <data name="GraphControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="GraphControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>48, 22, 48, 22</value>
-  </data>
-  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 238</value>
-  </data>
-  <data name="GraphControl.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.Name" xml:space="preserve">
-    <value>GraphControl</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.Parent" xml:space="preserve">
-    <value>FaTabStripItem1</value>
-  </data>
-  <data name="&gt;&gt;GraphControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="Grid1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 246</value>
-  </data>
-  <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
-    <value>Grid1</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;tbErro.Name" xml:space="preserve">
-    <value>tbErro</value>
-  </data>
-  <data name="&gt;&gt;tbErro.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbErro.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;tbErro.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
-  </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.Name" xml:space="preserve">
-    <value>tbAjuste</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
-    <value>lblStatus</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.Name" xml:space="preserve">
-    <value>lblItXdeY</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
-  </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 144</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 344</value>
-  </data>
-  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Resultados</value>
+  <data name="ComboBox1.Items1" xml:space="preserve">
+    <value>Brent</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbErro.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 48</value>
-  </data>
-  <data name="tbErro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
-  </data>
-  <data name="tbErro.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="tbErro.Text" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbErro.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;tbErro.Name" xml:space="preserve">
-    <value>tbErro</value>
-  </data>
-  <data name="&gt;&gt;tbErro.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbErro.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;tbErro.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tbStep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 51</value>
+  <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+  <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Erro atual</value>
+  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>385, 238</value>
   </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
-  </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbAjuste.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 22</value>
-  </data>
-  <data name="tbAjuste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
-  </data>
-  <data name="tbAjuste.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="tbAjuste.Text" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbAjuste.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.Name" xml:space="preserve">
-    <value>tbAjuste</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;tbAjuste.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 13</value>
-  </data>
-  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblStatus.Text" xml:space="preserve">
-    <value>&lt;ajuste trabalhando ou parado?&gt;</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
-    <value>lblStatus</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblItXdeY.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblItXdeY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblItXdeY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 49</value>
-  </data>
-  <data name="lblItXdeY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
-  <data name="lblItXdeY.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblItXdeY.Text" xml:space="preserve">
-    <value>&lt;Iteração x de y...&gt;</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.Name" xml:space="preserve">
-    <value>lblItXdeY</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;lblItXdeY.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 25</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
-  </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Valor de ajuste</value>
-  </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
-  </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 491</value>
-  </data>
-  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;btnIniciar.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="ComboBox1.Items2" xml:space="preserve">
+    <value>Newton</value>
   </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tbAjuste.Name" xml:space="preserve">
+    <value>tbAjuste</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>416, 491</value>
+  </data>
+  <data name="&gt;&gt;tbErro.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblItXdeY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KryptonLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 22</value>
+  </data>
+  <data name="&gt;&gt;tbErro.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblItXdeY.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="&gt;&gt;tbMin.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnIniciar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GraphControl.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 105</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>401, 135</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Tabela</value>
+  </data>
+  <data name="&gt;&gt;tbStep.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;btnIniciar.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="lblItXdeY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;tbAjuste.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbMax.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
+  </data>
+  <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="KryptonLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>306, 19</value>
+  </data>
+  <data name="tbStep.Text" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 39</value>
+  </data>
+  <data name="btnIniciar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="btnParar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 25</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_Adjust_ControlPanel</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
   </data>
+  <data name="&gt;&gt;tbStep.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 25</value>
+  </data>
+  <data name="btnParar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbAjuste.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="btnParar.Text" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 50</value>
+  </data>
+  <data name="lblItXdeY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 13</value>
+  </data>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
+  </data>
+  <data name="KryptonLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 26</value>
+  </data>
+  <data name="tbErro.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;tbMin.Name" xml:space="preserve">
+    <value>tbMin</value>
+  </data>
+  <data name="&gt;&gt;btnIniciar.Name" xml:space="preserve">
+    <value>btnIniciar</value>
+  </data>
+  <data name="&gt;&gt;btnParar.Name" xml:space="preserve">
+    <value>btnParar</value>
+  </data>
+  <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 102</value>
+  </data>
+  <data name="&gt;&gt;btnParar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbTol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 53</value>
+  </data>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 21</value>
+  </data>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnParar.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
+    <value>FaTabStrip1</value>
+  </data>
+  <data name="FaTabStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 74</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel1.Name" xml:space="preserve">
+    <value>KryptonLabel1</value>
+  </data>
+  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
 </root>
