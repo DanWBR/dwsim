@@ -1859,6 +1859,9 @@
   <ItemGroup>
     <None Include="Resources\square_240px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\box_important_48px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

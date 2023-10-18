@@ -42,7 +42,7 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv1.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i), curve.y(i)})
+                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
                 Next
             End With
         End If
@@ -56,7 +56,7 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv2.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i), curve.y(i)})
+                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
                 Next
             End With
         End If
@@ -70,7 +70,7 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv3.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i), curve.y(i)})
+                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
                 Next
             End With
         End If
@@ -85,7 +85,7 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv4.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i), curve.y(i)})
+                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
                 Next
             End With
         End If
@@ -100,7 +100,7 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv5.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i), curve.y(i)})
+                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
                 Next
             End With
         End If
@@ -289,8 +289,8 @@ Public Class EditingForm_Pump_Curves
                 For Each r As DataGridViewRow In dg.Rows
                     If Not r.Cells(0).Value Is Nothing _
                     And Not r.Cells(1).Value Is Nothing Then
-                        x.Add(r.Cells(0).Value)
-                        y.Add(r.Cells(1).Value)
+                        x.Add(Double.Parse(r.Cells(0).Value.ToString()))
+                        y.Add(Double.Parse(r.Cells(1).Value.ToString()))
                     End If
                 Next
 
@@ -321,28 +321,40 @@ Public Class EditingForm_Pump_Curves
     Private Sub cbflowunit_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbflowunit.SelectedIndexChanged
         If Not Me.cbflowunit.SelectedItem Is Nothing Then
             Me.flowunit = Me.cbflowunit.SelectedItem.ToString
-            DrawChart()
+            Try
+                DrawChart()
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
     Private Sub cbheadunit_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbheadunit.SelectedIndexChanged
         If Not Me.cbheadunit.SelectedItem Is Nothing Then
             Me.headunit = Me.cbheadunit.SelectedItem.ToString
-            DrawChart()
+            Try
+                DrawChart()
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
     Private Sub cbeffunit_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbeffunit.SelectedIndexChanged
         If Not Me.cbeffunit.SelectedItem Is Nothing Then
             Me.effunit = Me.cbeffunit.SelectedItem.ToString
-            DrawChart()
+            Try
+                DrawChart()
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
     Private Sub cbpowerunit_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbpowerunit.SelectedIndexChanged
         If Not Me.cbpowerunit.SelectedItem Is Nothing Then
             Me.powerunit = Me.cbpowerunit.SelectedItem.ToString
-            DrawChart()
+            Try
+                DrawChart()
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
