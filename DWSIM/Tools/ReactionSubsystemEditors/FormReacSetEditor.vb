@@ -34,8 +34,6 @@ Public Class FormReacSetEditor
         tbName.Focus()
         tbName.ScrollToCaret()
 
-        fc = My.Application.ActiveSimulation
-
         Select Case mode
             Case "Add"
                 rs = New ReactionSet()

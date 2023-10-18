@@ -269,7 +269,7 @@ Public Class FormDynamicsManager
                     etype = Flowsheet.GetTranslatedString1("RunScript")
                 End If
                 Dim obj, prop As String
-                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp, etype, "", "", "", ""})
+                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp - Date.MinValue, etype, "", "", "", ""})
                 Dim addedrow = gridselectedset.Rows(gridselectedset.Rows.Count - 1)
                 If Flowsheet.SimulationObjects.ContainsKey(ev.SimulationObjectID) Then
                     obj = Flowsheet.SimulationObjects(ev.SimulationObjectID).GraphicObject.Tag
@@ -331,7 +331,7 @@ Public Class FormDynamicsManager
                 Else
                     etype = Flowsheet.GetTranslatedString1("RunScript")
                 End If
-                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp, etype, "", "", "", "", "Step", "Previous Event"})
+                gridselectedset.Rows.Add(New Object() { .ID, .Enabled, .Description, .TimeStamp - Date.MinValue, etype, "", "", "", "", "Step", "Previous Event"})
             End With
 
         Catch ex As Exception
@@ -359,7 +359,7 @@ Public Class FormDynamicsManager
                 Case 2
                     ev.Description = value
                 Case 3
-                    ev.TimeStamp = value
+                    ev.TimeStamp = Date.MinValue.Add(TimeSpan.Parse(value))
                 Case 4
                     If value = Flowsheet.GetTranslatedString1("ChangeProperty") Then
                         ev.EventType = Dynamics.DynamicsEventType.ChangeProperty

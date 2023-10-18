@@ -57,7 +57,7 @@ Public Class FormReacManager
     End Sub
 
     Private Sub KryptonButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
-        Dim rse As New FormReacSetEditor
+        Dim rse As New FormReacSetEditor With {.fc = CurrentFlowsheet}
         rse.Show()
         AddHandler rse.FormClosed, Sub()
                                        With Me.GridRSets.Rows
@@ -71,7 +71,7 @@ Public Class FormReacManager
 
     Private Sub KryptonContextMenuItem1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConversaoToolStripMenuItem.Click
 
-        Dim frc As New FormReacConv
+        Dim frc As New FormReacConv With {.fc = CurrentFlowsheet}
         frc.Show()
         AddHandler frc.FormClosed, Sub()
                                        With Me.GridRxns.Rows
@@ -85,7 +85,7 @@ Public Class FormReacManager
 
     Private Sub KryptonContextMenuItem2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EquilibrioToolStripMenuItem.Click
 
-        Dim fre As New FormReacEq
+        Dim fre As New FormReacEq With {.fc = CurrentFlowsheet}
         fre.Show()
         AddHandler fre.FormClosed, Sub()
                                        With Me.GridRxns.Rows
@@ -100,7 +100,7 @@ Public Class FormReacManager
 
     Private Sub KryptonContextMenuItem3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CineticaToolStripMenuItem.Click
 
-        Dim frk As New FormReacKinetic
+        Dim frk As New FormReacKinetic With {.fc = CurrentFlowsheet}
         frk.Show()
         AddHandler frk.FormClosed, Sub()
                                        With Me.GridRxns.Rows
@@ -270,6 +270,7 @@ Public Class FormReacManager
                     With frc
                         .mode = "Edit"
                         .rc = rxn
+                        .fc = CurrentFlowsheet
                     End With
                     AddHandler frc.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
@@ -285,6 +286,7 @@ Public Class FormReacManager
                     With fre
                         .mode = "Edit"
                         .rc = rxn
+                        .fc = CurrentFlowsheet
                     End With
                     AddHandler fre.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
@@ -300,6 +302,7 @@ Public Class FormReacManager
                     With frk
                         .mode = "Edit"
                         .rc = rxn
+                        .fc = CurrentFlowsheet
                     End With
                     AddHandler frk.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
@@ -315,6 +318,7 @@ Public Class FormReacManager
                     With frk
                         .mode = "Edit"
                         .rc = rxn
+                        .fc = CurrentFlowsheet
                     End With
                     AddHandler frk.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
@@ -362,6 +366,7 @@ Public Class FormReacManager
             With rse
                 .mode = "Edit"
                 .rs = rset
+                .fc = CurrentFlowsheet
             End With
             rse.ShowDialog()
             rse.Dispose()
@@ -401,7 +406,7 @@ Public Class FormReacManager
     End Sub
 
     Private Sub HeterogeneaCataliticaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeterogeneaCataliticaToolStripMenuItem.Click
-        Dim frk As New FormReacHeterog
+        Dim frk As New FormReacHeterog With {.fc = CurrentFlowsheet}
         frk.Show()
         AddHandler frk.FormClosed, Sub()
                                        With Me.GridRxns.Rows

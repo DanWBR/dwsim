@@ -41,7 +41,6 @@ Public Class FormReacEq
         tbName.Focus()
         tbName.ScrollToCaret()
 
-        fc = My.Application.ActiveSimulation
         su = fc.Options.SelectedUnitSystem
         nf = fc.Options.NumberFormat
 

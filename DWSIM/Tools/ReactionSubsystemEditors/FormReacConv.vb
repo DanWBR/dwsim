@@ -37,7 +37,6 @@ Public Class FormReacConv
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        fc = My.Application.ActiveSimulation
         su = fc.Options.SelectedUnitSystem
         nf = fc.Options.NumberFormat
 
