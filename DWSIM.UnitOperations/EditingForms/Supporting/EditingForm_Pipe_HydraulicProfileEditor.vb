@@ -1190,7 +1190,7 @@ Imports System.Drawing
                         Exit Function
                     End If
                 Else
-                    If .Rows(10).Cells(column.Name).Value Is Nothing OrElse (Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Or .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > .Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble) Then
+                    If .Rows(10).Cells(column.Name).Value Is Nothing OrElse Not .Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble > 0.0# Then
                         Return "Invalid internal diameter"
                         Exit Function
                     End If
