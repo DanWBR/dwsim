@@ -41,7 +41,6 @@ Andrew Dickson
 Bednarz Marc
 Bernhard Seyfang
 Bruce Bishkin
-Camilo Gantiva
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
