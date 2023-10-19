@@ -1548,8 +1548,9 @@ Namespace UnitOperations
 
         Public Overridable ReadOnly Property IsSink As Boolean = False Implements ISimulationObject.IsSink
 
-#End Region
+        Public Property GHGEmissionData As IGHGEmitter = New GHGEmitter() Implements ISimulationObject.GHGEmissionData
 
+#End Region
 
         Public Sub ConnectFeedMaterialStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectFeedMaterialStream
 

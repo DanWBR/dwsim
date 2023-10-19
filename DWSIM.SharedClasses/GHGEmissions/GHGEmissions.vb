@@ -14,9 +14,24 @@
 
     Public Property CO2eqEmissionMolarFlow As Double Implements IGHGEmitter.CO2eqEmissionMolarFlow
 
-    Public Property GHGEmissionFactor As Double Implements IGHGEmitter.GHGEmissionFactor
+    ''' <summary>
+    ''' Emission Factor in Default SI Units (kg/kW)
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property GHGEmissionFactor As Double = Double.NaN Implements IGHGEmitter.GHGEmissionFactor
+
+    ''' <summary>
+    ''' CO2-equivalent Emission Factor in Default SI Units (kg/kW)
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property CO2eqEmissionFactor As Double Implements IGHGEmitter.CO2eqEmissionFactor
 
     Public Property GHGEmissionCompositionID As String = "" Implements IGHGEmitter.GHGEmissionCompositionID
+
+    Public Property OwnerID As String = "" Implements IGHGEmitter.OwnerID
+
+    <Xml.Serialization.XmlIgnore>
+    Public Property Flowsheet As IFlowsheet Implements IGHGEmitter.Flowsheet
 
     Public Function GetCompoundMassEmission(compound As String, units As String) As Double Implements IGHGEmitter.GetCompoundMassEmission
 

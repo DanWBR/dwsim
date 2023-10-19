@@ -16,6 +16,10 @@ End Interface
 
 Public Interface IGHGEmitter
 
+    Property OwnerID As String
+
+    Property Flowsheet As IFlowsheet
+
     Property GHGEmissionMassFlow As Double
 
     Property GHGEmissionMolarFlow As Double
@@ -25,6 +29,7 @@ Public Interface IGHGEmitter
     Property CO2eqEmissionMolarFlow As Double
 
     Property GHGEmissionFactor As Double
+    Property CO2eqEmissionFactor As Double
 
     Property GHGEmissionCompositionID As String
 

@@ -222,6 +222,7 @@ Namespace Enums
         none = 66
         conductance = 67
         heat = 68
+        emission_factor = 69
 
     End Enum
 

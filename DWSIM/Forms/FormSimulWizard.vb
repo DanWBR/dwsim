@@ -325,7 +325,7 @@ Public Class FormSimulWizard
             .Add(New String() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
-            .Add(New String() {DWSIM.App.GetLocalString("Heat/Energy"), su.heat, Nothing, Nothing})
+            .Add(New String() {DWSIM.App.GetLocalString("Heat/Energy"), su.heat, DWSIM.App.GetLocalString("Emission Factor"), su.emission_factor})
         End With
 
         If ComboBox2.SelectedIndex <= 3 Then
@@ -659,6 +659,13 @@ Public Class FormSimulWizard
             .Style.Tag = 41
         End With
 
+        With DirectCast(Me.DataGridView1.Rows.Item(20).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.emission_factor).ToArray)
+            .Value = su.emission_factor
+            .Style.Tag = 42
+        End With
+
     End Sub
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
@@ -836,6 +843,10 @@ Public Class FormSimulWizard
                     member = "heat"
                     oldvalue = su.heat
                     su.heat = cell.Value
+                Case 42
+                    member = "emission_factor"
+                    oldvalue = su.emission_factor
+                    su.emission_factor = cell.Value
             End Select
 
         End If

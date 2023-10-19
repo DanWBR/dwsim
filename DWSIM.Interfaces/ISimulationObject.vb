@@ -276,4 +276,6 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetEditingForm() As System.Windows.Forms.Form
 
+    Property GHGEmissionData As IGHGEmitter
+
 End Interface
