@@ -388,6 +388,9 @@
 
     Function Clone() As IFlowsheet
 
+    Property Results As IFlowsheetResults
+    Property GHGEmissionCompositions As Dictionary(Of String, IGHGComposition)
+
 End Interface
 
 ''' <summary>

@@ -162,6 +162,7 @@
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
     <Compile Include="Flowsheet\SensitivityAnalysis.vb" />
+    <Compile Include="GHGEmissions\GHGEmissions.vb" />
     <Compile Include="IronPythonSnippets\IronPythonSnippets.vb" />
     <Compile Include="Misc\FOSSEEFlowsheets.vb" />
     <Compile Include="Misc\AssayClass.vb" />

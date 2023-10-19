@@ -3086,6 +3086,17 @@ Public Class FormFlowsheet
             Next
             xel.Add(inner_elements)
 
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Results"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("Results")
+            xel.Add(DirectCast(Results, ICustomXMLSerialization).SaveData().ToArray())
+
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GHGCompositions"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions")
+
+            For Each ghgcomp In GHGEmissionCompositions.Values
+                xel.Add(New XElement("GHGComposition", DirectCast(ghgcomp, ICustomXMLSerialization).SaveData().ToArray()))
+            Next
+
         End If
 
         Return xdoc
@@ -3166,6 +3177,16 @@ Public Class FormFlowsheet
                 End If
 
             Case Else
+
+                If xdoc.Element("DWSIM_Simulation_Data").Element("Results") IsNot Nothing Then
+
+                    Results = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults
+
+                    data = xdoc.Element("DWSIM_Simulation_Data").Element("Results").Elements.ToList
+
+                    DirectCast(Results, ICustomXMLSerialization).LoadData(data)
+
+                End If
 
                 If xdoc.Element("DWSIM_Simulation_Data").Element("Settings") IsNot Nothing Then
 
@@ -4411,6 +4432,10 @@ Public Class FormFlowsheet
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
     Public Property PythonPreprocessor As Action(Of String) Implements IFlowsheet.PythonPreprocessor
+
+    Public Property Results As IFlowsheetResults = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults Implements IFlowsheet.Results
+
+    Public Property GHGEmissionCompositions As Dictionary(Of String, IGHGComposition) = New Dictionary(Of String, IGHGComposition) Implements IFlowsheet.GHGEmissionCompositions
 
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
         DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)

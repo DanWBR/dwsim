@@ -290,4 +290,20 @@ Namespace DWSIM.Flowsheet
 
     End Class
 
+    <System.Serializable()> Public Class FlowsheetResults
+
+        Implements IFlowsheetResults, ICustomXMLSerialization
+
+        Public Property GHGEmissionsSummary As IGHGEmissionsSummary = New GHGEmissionsSummary Implements IFlowsheetResults.GHGEmissionsSummary
+
+        Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+            Return XMLSerializer.XMLSerializer.Serialize(Me)
+        End Function
+
+        Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        End Function
+
+    End Class
+
 End Namespace
