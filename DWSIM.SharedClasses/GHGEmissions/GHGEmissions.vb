@@ -35,6 +35,12 @@
 
     Public Sub Update() Implements IGHGEmitter.Update
 
+        CO2eqEmissionMassFlow = 0.0
+        CO2eqEmissionMolarFlow = 0.0
+
+        GHGEmissionMassFlow = 0.0
+        GHGEmissionMolarFlow = 0.0
+
         Dim owner = Flowsheet.SimulationObjects(OwnerID)
 
         If TypeOf owner Is IMaterialStream Then
@@ -126,8 +132,6 @@
             End If
 
         End If
-
-
 
     End Sub
 

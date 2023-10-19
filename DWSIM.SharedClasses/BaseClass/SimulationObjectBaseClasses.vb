@@ -1707,7 +1707,7 @@ Namespace UnitOperations
 
         Public Overridable Function GetEnergyConsumption() As Double Implements ISimulationObject.GetEnergyConsumption
 
-            Throw New NotImplementedException()
+            Return 0.0
 
         End Function
 
