@@ -337,13 +337,13 @@ Public Class FormFlowsheet
             FormLog.Hide()
             FormWatch.Hide()
 
-            FormSurface.Show(dckPanel)
-            FormDynamics.Show(FormSurface.Pane, Nothing)
-            FormMatList.Show(FormSurface.Pane, Nothing)
-            FormSpreadsheet.Show(FormSurface.Pane, Nothing)
-            FormCharts.Show(FormSurface.Pane, Nothing)
-            FormFilesExplorer.Show(dckPanel)
-            FormScript1.Show(FormSurface.Pane, Nothing)
+            FormCharts.Show(dckPanel)
+            FormFilesExplorer.Show(dckPanel.ActiveDocumentPane, FormCharts)
+            FormMatList.Show(dckPanel.ActiveDocumentPane, FormFilesExplorer)
+            FormScript1.Show(dckPanel.ActiveDocumentPane, FormMatList)
+            FormSpreadsheet.Show(dckPanel.ActiveDocumentPane, FormScript1)
+            FormDynamics.Show(dckPanel.ActiveDocumentPane, FormSpreadsheet)
+            FormSurface.Show(dckPanel.ActiveDocumentPane, FormDynamics)
 
             FormSurface.Activate()
 
@@ -643,10 +643,10 @@ Public Class FormFlowsheet
         FormSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
 
-        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
-        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
+        'FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
+        'FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
-        FormSurface.FlowsheetSurface.Zoom *= 0.5
+        'FormSurface.FlowsheetSurface.Zoom *= 0.5
 
         FormSurface.FlowsheetSurface.Center(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
