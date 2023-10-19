@@ -278,4 +278,6 @@ Imports DWSIM.Interfaces.Enums
 
     Property GHGEmissionData As IGHGEmitter
 
+    Function GetEnergyConsumption() As Double
+
 End Interface

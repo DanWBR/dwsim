@@ -268,6 +268,12 @@ Namespace Streams
 
 #End Region
 
+        Public Overrides Function GetEnergyConsumption() As Double
+
+            Return EnergyFlow.GetValueOrDefault()
+
+        End Function
+
         Public Overrides Sub RunDynamicModel()
 
         End Sub

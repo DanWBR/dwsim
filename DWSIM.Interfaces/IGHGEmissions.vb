@@ -12,6 +12,8 @@
 
     Property Water As Double
 
+    Function GetMolecularWeight() As Double
+
 End Interface
 
 Public Interface IGHGEmitter
@@ -29,13 +31,20 @@ Public Interface IGHGEmitter
     Property CO2eqEmissionMolarFlow As Double
 
     Property GHGEmissionFactor As Double
-    Property CO2eqEmissionFactor As Double
+
+    Property EmissionFactorIsInCO2eq As Boolean
 
     Property GHGEmissionCompositionID As String
 
     Function GetCompoundMassEmission(compound As String, units As String) As Double
 
     Function GetCompoundMolarEmission(compound As String, units As String) As Double
+
+    Sub Update()
+
+    Property UsesUserDefinedEnergyConsumption As Boolean
+
+    Property UserDefinedEnergyConsumption As Double
 
 End Interface
 
