@@ -83,9 +83,6 @@ Public Class FormSimulSettings
 
         DataGridViewPP.Columns(1).Width = 24 * Settings.DpiScale
 
-        ghgeditor = New GHGCompositionsEditor With {.Flowsheet = CurrentFlowsheet, .Dock = DockStyle.Fill}
-        TabPageGHG.Controls.Add(ghgeditor)
-
         Init()
 
         AddMoreTabs?.Invoke(TabControl1, CurrentFlowsheet)
@@ -133,7 +130,16 @@ Public Class FormSimulSettings
 
         If Not loaded Or reset Then
 
+            If ghgeditor Is Nothing Then
+
+                ghgeditor = New GHGCompositionsEditor With {.Flowsheet = CurrentFlowsheet, .Dock = DockStyle.Fill}
+                TabPageGHG.Controls.Add(ghgeditor)
+
+            End If
+
             ExtensionMethods.ChangeDefaultFont(Me)
+
+            ghgeditor?.PopulateList()
 
             colAdd.ValueType = True.GetType()
             colAdd.FalseValue = False
