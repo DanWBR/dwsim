@@ -547,7 +547,9 @@
     <Compile Include="Controls\GHGCompositionsEditor.Designer.vb">
       <DependentUpon>GHGCompositionsEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GHGCompositionsEditor.vb" />
+    <Compile Include="Controls\GHGCompositionsEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\TwoDimChartControl.Designer.vb">
       <DependentUpon>TwoDimChartControl.vb</DependentUpon>
     </Compile>

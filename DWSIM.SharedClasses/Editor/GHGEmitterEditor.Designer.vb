@@ -89,9 +89,9 @@ Partial Class GHGEmitterEditor
         Me.chkOverridePower.AutoSize = True
         Me.chkOverridePower.Location = New System.Drawing.Point(6, 89)
         Me.chkOverridePower.Name = "chkOverridePower"
-        Me.chkOverridePower.Size = New System.Drawing.Size(129, 17)
+        Me.chkOverridePower.Size = New System.Drawing.Size(231, 17)
         Me.chkOverridePower.TabIndex = 8
-        Me.chkOverridePower.Text = "Override Power Value"
+        Me.chkOverridePower.Text = "Override Power/Energy Consumption Value"
         Me.chkOverridePower.UseVisualStyleBackColor = True
         '
         'tbOverridePower
