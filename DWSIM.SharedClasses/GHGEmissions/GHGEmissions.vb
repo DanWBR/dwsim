@@ -6,6 +6,8 @@
 
     Private Const NitrousOxideCO2eq As Double = 256.0
 
+    Public Property Active As Boolean = True Implements IGHGEmitter.Active
+
     Public Property GHGEmissionMassFlow As Double Implements IGHGEmitter.GHGEmissionMassFlow
 
     Public Property GHGEmissionMolarFlow As Double Implements IGHGEmitter.GHGEmissionMolarFlow
@@ -40,6 +42,11 @@
 
         GHGEmissionMassFlow = 0.0
         GHGEmissionMolarFlow = 0.0
+
+        If OwnerID = "" Then Exit Sub
+        If Flowsheet Is Nothing Then Exit Sub
+
+        If Not Flowsheet.SimulationObjects.ContainsKey(OwnerID) Then Exit Sub
 
         Dim owner = Flowsheet.SimulationObjects(OwnerID)
 
@@ -104,6 +111,8 @@
 
             If Not UsesUserDefinedEnergyConsumption Then ec = owner.GetEnergyConsumption() 'kW
 
+            If Not Flowsheet.GHGEmissionCompositions.ContainsKey(GHGEmissionCompositionID) Then Exit Sub
+
             Dim ghgas = Flowsheet.GHGEmissionCompositions(GHGEmissionCompositionID)
 
             Dim t1 = ghgas.Methane / MethaneCO2eq
@@ -141,25 +150,85 @@
 
         If TypeOf owner Is IMaterialStream Then
 
+            Dim stream = DirectCast(owner, IMaterialStream)
+
+            Dim w = stream.GetMassFlow()
+
+            If stream.Phases(0).Compounds.ContainsKey("Methane") Then
+                Return stream.Phases(0).Compounds("Methane").MassFraction.GetValueOrDefault() * w
+            End If
+            If stream.Phases(0).Compounds.ContainsKey("Nitrous oxide") Then
+                Return stream.Phases(0).Compounds("Nitrous oxide").MassFraction.GetValueOrDefault() * w
+            End If
+            If stream.Phases(0).Compounds.ContainsKey("Carbon dioxide") Then
+                Return stream.Phases(0).Compounds("Carbon dioxide").MassFraction.GetValueOrDefault() * w
+            End If
+            If stream.Phases(0).Compounds.ContainsKey("Water") Then
+                Return stream.Phases(0).Compounds("Water").MassFraction.GetValueOrDefault() * w
+            End If
+
         Else
 
             Dim ghgas = Flowsheet.GHGEmissionCompositions(GHGEmissionCompositionID)
 
-
             Select Case compound
                 Case "Carbon dioxide"
-                    Return ghgas.CarbonDioxide
+                    Return ghgas.CarbonDioxide * GHGEmissionMolarFlow / 1000.0 * 44.01
                 Case "Nitrous oxide"
+                    Return ghgas.NitrousOxide * GHGEmissionMolarFlow / 1000.0 * 44.013
                 Case "Methane"
+                    Return ghgas.Methane * GHGEmissionMolarFlow / 1000.0 * 16.04
                 Case "Water"
+                    Return ghgas.Water * GHGEmissionMolarFlow / 1000.0 * 18
             End Select
 
         End If
 
+        Return 0.0
 
     End Function
 
     Public Function GetCompoundMolarEmission(compound As String, units As String) As Double Implements IGHGEmitter.GetCompoundMolarEmission
+
+        Dim owner = Flowsheet.SimulationObjects(OwnerID)
+
+        If TypeOf owner Is IMaterialStream Then
+
+            Dim stream = DirectCast(owner, IMaterialStream)
+
+            Dim m = stream.GetMolarFlow()
+
+            If stream.Phases(0).Compounds.ContainsKey("Methane") Then
+                Return stream.Phases(0).Compounds("Methane").MoleFraction.GetValueOrDefault() * m
+            End If
+            If stream.Phases(0).Compounds.ContainsKey("Nitrous oxide") Then
+                Return stream.Phases(0).Compounds("Nitrous oxide").MoleFraction.GetValueOrDefault() * m
+            End If
+            If stream.Phases(0).Compounds.ContainsKey("Carbon dioxide") Then
+                Return stream.Phases(0).Compounds("Carbon dioxide").MoleFraction.GetValueOrDefault() * m
+            End If
+            If stream.Phases(0).Compounds.ContainsKey("Water") Then
+                Return stream.Phases(0).Compounds("Water").MoleFraction.GetValueOrDefault() * m
+            End If
+
+        Else
+
+            Dim ghgas = Flowsheet.GHGEmissionCompositions(GHGEmissionCompositionID)
+
+            Select Case compound
+                Case "Carbon dioxide"
+                    Return ghgas.CarbonDioxide * GHGEmissionMolarFlow
+                Case "Nitrous oxide"
+                    Return ghgas.NitrousOxide * GHGEmissionMolarFlow
+                Case "Methane"
+                    Return ghgas.Methane * GHGEmissionMolarFlow
+                Case "Water"
+                    Return ghgas.Water * GHGEmissionMolarFlow
+            End Select
+
+        End If
+
+        Return 0.0
 
     End Function
 
@@ -232,6 +301,8 @@ Public Class GHGEmissionsSummary
     Public Property TotalCO2eqMassEmission As Double Implements IGHGEmissionsSummary.TotalCO2eqMassEmission
 
     Public Property TotalCO2eqMolarEmission As Double Implements IGHGEmissionsSummary.TotalCO2eqMolarEmission
+
+    Public Property UserDefinedGHGMassEmission As Double Implements IGHGEmissionsSummary.UserDefinedGHGMassEmission
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)

@@ -76,6 +76,8 @@ Namespace Streams
             Me.ComponentDescription = description
             Init()
 
+            GHGEmissionData.OwnerID = name
+
         End Sub
 
         Sub Init()

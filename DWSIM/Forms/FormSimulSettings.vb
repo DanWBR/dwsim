@@ -54,6 +54,8 @@ Public Class FormSimulSettings
 
     Public Shared AddMoreTabs As Action(Of TabControl, IFlowsheet)
 
+    Private ghgeditor As GHGCompositionsEditor
+
     Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Dim sw As Integer = Screen.PrimaryScreen.Bounds.Width
@@ -80,6 +82,9 @@ Public Class FormSimulSettings
         TabPageReactions.Controls.Add(rm)
 
         DataGridViewPP.Columns(1).Width = 24 * Settings.DpiScale
+
+        ghgeditor = New GHGCompositionsEditor With {.Flowsheet = CurrentFlowsheet, .Dock = DockStyle.Fill}
+        TabPageGHG.Controls.Add(ghgeditor)
 
         Init()
 

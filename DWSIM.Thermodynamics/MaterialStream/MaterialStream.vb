@@ -363,6 +363,9 @@ Namespace Streams
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
 
+            GHGEmissionData.OwnerID = name
+            GHGEmissionData.Flowsheet = flowsheet
+
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -385,6 +388,8 @@ Namespace Streams
             Me.Phases(0).Properties.temperature = 298.15
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
+
+            GHGEmissionData.OwnerID = name
 
         End Sub
 

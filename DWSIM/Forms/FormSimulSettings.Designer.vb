@@ -176,6 +176,7 @@ Partial Class FormSimulSettings
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
+        Me.TabPageGHG = New System.Windows.Forms.TabPage()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -930,6 +931,7 @@ Partial Class FormSimulSettings
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPageReactions)
+        Me.TabControl1.Controls.Add(Me.TabPageGHG)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage7)
@@ -1383,6 +1385,13 @@ Partial Class FormSimulSettings
         '
         Me.FontDialog1.ShowColor = True
         '
+        'TabPageGHG
+        '
+        resources.ApplyResources(Me.TabPageGHG, "TabPageGHG")
+        Me.TabPageGHG.Name = "TabPageGHG"
+        Me.ToolTip1.SetToolTip(Me.TabPageGHG, resources.GetString("TabPageGHG.ToolTip"))
+        Me.TabPageGHG.UseVisualStyleBackColor = True
+        '
         'FormSimulSettings
         '
         resources.ApplyResources(Me, "$this")
@@ -1588,4 +1597,5 @@ Partial Class FormSimulSettings
     Friend WithEvents tsmiExportJSON As ToolStripMenuItem
     Friend WithEvents tsmiReplace As ToolStripMenuItem
     Friend WithEvents chkEnableUndoRedo As CheckBox
+    Friend WithEvents TabPageGHG As TabPage
 End Class

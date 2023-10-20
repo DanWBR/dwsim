@@ -18,6 +18,8 @@ Public Class MaterialStreamEditor
 
     Public IsAccumulationStream As Boolean = False
 
+    Private ghgeditor As SharedClasses.GHGEmitterEditor
+
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -47,6 +49,13 @@ Public Class MaterialStreamEditor
 
     End Sub
 
+    Private Sub SetupGHGEditor()
+
+        ghgeditor = New SharedClasses.GHGEmitterEditor With {.SimObject = MatStream, .Dock = DockStyle.Fill}
+        TabPageGHG.Controls.Add(ghgeditor)
+
+    End Sub
+
     Private Sub MaterialStreamEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
         SaveViewState()
@@ -54,6 +63,9 @@ Public Class MaterialStreamEditor
     End Sub
 
     Sub UpdateInfo()
+
+        If ghgeditor Is Nothing Then SetupGHGEditor()
+        ghgeditor.UpdateInfo()
 
         units = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = MatStream.FlowSheet.FlowsheetOptions.NumberFormat
@@ -1839,6 +1851,33 @@ Public Class MaterialStreamEditor
                 'solid
                 UpdatePhaseTotal(cbCalculatedAmountsBasis, gridCompSolid, MatStream.Phases(7))
         End Select
+
+    End Sub
+
+    Private Sub btnComplete_Click(sender As Object, e As EventArgs) Handles btnComplete.Click
+
+        If Me.ValidateData() Then
+
+            Dim ri = gridInputComposition.SelectedCells(0).RowIndex
+            Dim i As Integer, sum As Double
+
+            Select Case cbCompBasis.SelectedIndex
+
+                Case 0, 1
+
+                    i = 0
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        If i <> ri Then
+                            sum += gridInputComposition.Rows(i).Cells(1).Value.ToString().ToDoubleFromCurrent()
+                        End If
+                        i += 1
+                    Next
+                    gridInputComposition.Rows(ri).Cells(1).Value = 1.0 - sum
+
+            End Select
+
+        End If
+
 
     End Sub
 

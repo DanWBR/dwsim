@@ -18,6 +18,8 @@ End Interface
 
 Public Interface IGHGEmitter
 
+    Property Active As Boolean
+
     Property OwnerID As String
 
     Property Flowsheet As IFlowsheet
@@ -73,5 +75,7 @@ Public Interface IGHGEmissionsSummary
     Property TotalCO2eqMassEmission As Double
 
     Property TotalCO2eqMolarEmission As Double
+
+    Property UserDefinedGHGMassEmission As Double
 
 End Interface

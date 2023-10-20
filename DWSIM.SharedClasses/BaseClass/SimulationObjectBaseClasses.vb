@@ -484,6 +484,10 @@ Namespace UnitOperations
                 End If
             End If
 
+            GHGEmissionData.OwnerID = Name
+            GHGEmissionData.Flowsheet = FlowSheet
+            GHGEmissionData.Update()
+
         End Sub
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
@@ -946,6 +950,9 @@ Namespace UnitOperations
 
             If Me.Annotation = "DWSIM.DWSIM.Outros.Annotation" Then Me.Annotation = ""
 
+            GHGEmissionData.OwnerID = Name
+            GHGEmissionData.Flowsheet = FlowSheet
+
             Return True
 
         End Function
@@ -1166,7 +1173,11 @@ Namespace UnitOperations
         ''' <param name="flowsheet">Flowsheet instance.</param>
         ''' <remarks></remarks>
         Public Sub SetFlowsheet(ByVal flowsheet As Object) Implements Interfaces.ISimulationObject.SetFlowsheet
+
             m_flowsheet = flowsheet
+
+            GHGEmissionData.Flowsheet = flowsheet
+
         End Sub
 
         Public Overridable Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String())) Implements ISimulationObject.GetStructuredReport

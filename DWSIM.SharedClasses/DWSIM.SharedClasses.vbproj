@@ -142,6 +142,12 @@
     <Compile Include="Editor\FormExtraProperties.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editor\GHGEmitterEditor.Designer.vb">
+      <DependentUpon>GHGEmitterEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\GHGEmitterEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Editor\InspectorReportBar.Designer.vb">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>
     </Compile>
@@ -217,6 +223,9 @@
     <EmbeddedResource Include="Editor\FormExtraProperties.resx">
       <DependentUpon>FormExtraProperties.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editor\GHGEmitterEditor.resx">
+      <DependentUpon>GHGEmitterEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\InspectorReportBar.en.resx">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Patrons\activepatrons.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
