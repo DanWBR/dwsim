@@ -13,6 +13,22 @@ Public Class GHGEmitterEditor
 
         UpdateInfo()
 
+        Dim elist As New List(Of String())
+
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.SharedClasses.emission_factors.txt")
+            Using t As New IO.StreamReader(filestr)
+                While Not t.EndOfStream
+                    elist.Add(t.ReadLine().Split(vbTab))
+                End While
+            End Using
+        End Using
+
+        For Each l In elist
+            cms1.Items.Add(New ToolStripButton With {.Text = String.Format("[{0}] {1}", l(0), l(1)),
+                           .Tag = Double.Parse(l(2), System.Globalization.CultureInfo.InvariantCulture),
+                           .ToolTipText = .Tag.ToString() + " [kg/s]/kW"})
+        Next
+
     End Sub
 
     Sub UpdateInfo()
@@ -97,4 +113,17 @@ Public Class GHGEmitterEditor
             SimObject.GHGEmissionData.Active = chkEmissionActive.Checked
         End If
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        cms1.Show(MousePosition)
+
+    End Sub
+
+    Private Sub cms1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles cms1.ItemClicked
+
+        tbEmissionFactor.Text = e.ClickedItem.Tag.ToString()
+
+    End Sub
+
 End Class

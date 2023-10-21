@@ -296,6 +296,13 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\linking_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GHGEmissions\emission_factors.txt" />
+    <None Include="Resources\read_64px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
