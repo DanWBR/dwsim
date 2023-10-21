@@ -55,6 +55,7 @@ Partial Class EditingForm_SolarPanel
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -404,7 +405,7 @@ Partial Class EditingForm_SolarPanel
         Me.rtbAnnotations.Location = New System.Drawing.Point(3, 16)
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -416,12 +417,24 @@ Partial Class EditingForm_SolarPanel
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'gbGHG
+        '
+        Me.gbGHG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gbGHG.Location = New System.Drawing.Point(7, 663)
+        Me.gbGHG.Name = "gbGHG"
+        Me.gbGHG.Size = New System.Drawing.Size(354, 194)
+        Me.gbGHG.TabIndex = 62
+        Me.gbGHG.TabStop = False
+        Me.gbGHG.Text = "GHG Emissions"
+        '
         'EditingForm_SolarPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(373, 672)
+        Me.ClientSize = New System.Drawing.Size(373, 865)
+        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBoxParameters)
@@ -475,4 +488,5 @@ Partial Class EditingForm_SolarPanel
     Public WithEvents GroupBox4 As GroupBox
     Public WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Public WithEvents gbGHG As GroupBox
 End Class

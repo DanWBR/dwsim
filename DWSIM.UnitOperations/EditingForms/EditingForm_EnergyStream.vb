@@ -27,6 +27,8 @@ Public Class EditingForm_EnergyStream
 
         Loaded = False
 
+        UpdateGHGEditor(gbGHG, SimObject)
+
         With SimObject
 
             'first block

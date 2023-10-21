@@ -120,44 +120,86 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
+  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCreateAndConnectInlet6.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectInlet6.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnCreateAndConnectInlet5.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
+  <data name="btnCreateAndConnectInlet5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCreateAndConnectInlet4.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectInlet4.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
+  <data name="btnCreateAndConnectInlet3.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
+  </data>
+  <data name="btnCreateAndConnectInlet2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
+  <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnect6.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnect6.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnDisconnect5.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect5.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnect4.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnect4.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnDisconnect3.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect3.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnect2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnect2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
@@ -202,51 +244,15 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Inlet Stream 1</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
-  <data name="cbPressureCalcMode.Items" xml:space="preserve">
-    <value>Inlet Minimum</value>
-  </data>
-  <data name="cbPressureCalcMode.Items1" xml:space="preserve">
-    <value>Inlet Average</value>
-  </data>
-  <data name="cbPressureCalcMode.Items2" xml:space="preserve">
-    <value>Inlet Maximum</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Pressure Calculation</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rtbAnnotations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="rtbAnnotations.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+    <value>Fill</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 216</value>
+    <value>356, 217</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Flash Algorithm</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Property Package</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -281,5 +287,8 @@
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>380, 809</value>
   </data>
 </root>

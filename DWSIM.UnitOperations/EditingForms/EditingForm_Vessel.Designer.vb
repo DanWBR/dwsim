@@ -94,6 +94,7 @@ Partial Class EditingForm_Vessel
         Me.AddUtilityTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.sizingtsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -723,7 +724,7 @@ Partial Class EditingForm_Vessel
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -798,10 +799,20 @@ Partial Class EditingForm_Vessel
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'gbGHG
+        '
+        resources.ApplyResources(Me.gbGHG, "gbGHG")
+        Me.gbGHG.Name = "gbGHG"
+        Me.gbGHG.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
+        '
         'EditingForm_Vessel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox3)
@@ -895,4 +906,5 @@ Partial Class EditingForm_Vessel
     Public WithEvents AddUtilityTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents sizingtsmi As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Public WithEvents gbGHG As GroupBox
 End Class

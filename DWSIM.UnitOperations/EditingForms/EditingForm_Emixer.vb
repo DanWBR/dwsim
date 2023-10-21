@@ -22,6 +22,8 @@ Public Class EditingForm_Emixer
 
         Loaded = False
 
+        UpdateGHGEditor(gbGHG, MixerObject)
+
         With MixerObject
 
             chkActive.Checked = MixerObject.GraphicObject.Active

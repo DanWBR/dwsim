@@ -30,6 +30,8 @@ Public Class EditingForm_WaterElectrolyzer
 
         Dim su = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
+        UpdateGHGEditor(gbGHG, SimObject)
+
         With SimObject
 
             'first block

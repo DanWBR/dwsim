@@ -31,6 +31,8 @@ Public Class EditingForm_SolarPanel
 
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
+        UpdateGHGEditor(gbGHG, SimObject)
+
         With SimObject
 
             'first block

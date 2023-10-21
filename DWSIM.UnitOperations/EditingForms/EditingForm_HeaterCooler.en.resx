@@ -146,10 +146,13 @@
     <value>General Info</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 141</value>
+    <value>335, 182</value>
+  </data>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 726</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 160</value>
+    <value>341, 201</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
@@ -424,6 +427,28 @@
   </data>
   <data name="GroupBoxConnections.Text" xml:space="preserve">
     <value>Connections</value>
+  </data>
+  <data name="gbGHG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbGHG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 538</value>
+  </data>
+  <data name="gbGHG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 184</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gbGHG.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="gbGHG.Text" xml:space="preserve">
+    <value>GHG Emissions</value>
+  </data>
+  <data name="gbGHG.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbGHG.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>

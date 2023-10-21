@@ -59,6 +59,7 @@ Partial Class EditingForm_SolidsSep
         Me.Button2 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -157,7 +158,7 @@ Partial Class EditingForm_SolidsSep
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -401,10 +402,20 @@ Partial Class EditingForm_SolidsSep
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'gbGHG
+        '
+        resources.ApplyResources(Me.gbGHG, "gbGHG")
+        Me.gbGHG.Name = "gbGHG"
+        Me.gbGHG.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
+        '
         'EditingForm_SolidsSep
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
@@ -463,4 +474,5 @@ Partial Class EditingForm_SolidsSep
     Public WithEvents GroupBox3 As GroupBox
     Public WithEvents Button2 As Button
     Public WithEvents chkUseEmbeddedImage As CheckBox
+    Public WithEvents gbGHG As GroupBox
 End Class

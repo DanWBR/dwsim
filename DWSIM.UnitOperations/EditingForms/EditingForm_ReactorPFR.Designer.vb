@@ -25,15 +25,15 @@ Partial Class EditingForm_ReactorPFR
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_ReactorPFR))
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -125,8 +125,9 @@ Partial Class EditingForm_ReactorPFR
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.ZedGraphControl1 = New ZedGraph.ZedGraphControl()
-        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnExportProfile = New System.Windows.Forms.Button()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -911,8 +912,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -920,8 +921,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -929,8 +930,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'Column1
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -963,8 +964,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'Column2
         '
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column2.FillWeight = 40.0!
         resources.ApplyResources(Me.Column2, "Column2")
         Me.Column2.Name = "Column2"
@@ -972,8 +973,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn3.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
@@ -981,8 +982,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewTextBoxColumn4.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
@@ -990,8 +991,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn5.FillWeight = 30.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
@@ -1024,8 +1025,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn6.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -1033,8 +1034,8 @@ Partial Class EditingForm_ReactorPFR
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn7, "DataGridViewTextBoxColumn7")
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -1068,11 +1069,6 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipChangeTag.SetToolTip(Me.ZedGraphControl1, resources.GetString("ZedGraphControl1.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.ZedGraphControl1, resources.GetString("ZedGraphControl1.ToolTip2"))
         '
-        'ToolTipChangeTag
-        '
-        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTipChangeTag.ToolTipTitle = "Info"
-        '
         'btnExportProfile
         '
         resources.ApplyResources(Me.btnExportProfile, "btnExportProfile")
@@ -1082,10 +1078,25 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipValues.SetToolTip(Me.btnExportProfile, resources.GetString("btnExportProfile.ToolTip2"))
         Me.btnExportProfile.UseVisualStyleBackColor = True
         '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
+        'gbGHG
+        '
+        resources.ApplyResources(Me.gbGHG, "gbGHG")
+        Me.gbGHG.Name = "gbGHG"
+        Me.gbGHG.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
+        '
         'EditingForm_ReactorPFR
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBoxConnections)
@@ -1218,4 +1229,5 @@ Partial Class EditingForm_ReactorPFR
     Public WithEvents tbUserDefDP As TextBox
     Friend WithEvents chkUseUserDefDP As CheckBox
     Friend WithEvents btnExportProfile As Button
+    Public WithEvents gbGHG As GroupBox
 End Class

@@ -32,6 +32,8 @@ Public Class EditingForm_Column
 
     Sub UpdateInfo()
 
+        UpdateGHGEditor(gbGHG, SimObject)
+
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 

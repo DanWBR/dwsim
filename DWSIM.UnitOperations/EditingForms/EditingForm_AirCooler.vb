@@ -30,6 +30,8 @@ Public Class EditingForm_AirCooler
 
         Loaded = False
 
+        UpdateGHGEditor(TabPage4, SimObject)
+
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         If Host.Items.Where(Function(x) x.Name.Contains(SimObject.GraphicObject.Tag)).Count > 0 Then

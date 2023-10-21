@@ -31,6 +31,8 @@ Public Class EditingForm_ReactorCSTR
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
+        UpdateGHGEditor(gbGHG, SimObject)
+
         Loaded = False
 
         If Host.Items.Where(Function(x) x.Name.Contains(SimObject.GraphicObject.Tag)).Count > 0 Then

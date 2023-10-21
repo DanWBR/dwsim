@@ -638,6 +638,18 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gbGHG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbGHG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 358</value>
+  </data>
+  <data name="gbGHG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 271</value>
+  </data>
+  <data name="gbGHG.Text" xml:space="preserve">
+    <value>GHG Emissions</value>
+  </data>
   <data name="cbTS.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>

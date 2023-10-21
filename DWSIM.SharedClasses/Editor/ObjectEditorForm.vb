@@ -17,6 +17,8 @@ Public Class ObjectEditorForm
 
     Public Overridable ReadOnly Property Modular As Boolean = False
 
+    Public GHGEditor As GHGEmitterEditor
+
     Public Function GetAllChildren(control As Control) As IEnumerable(Of Control)
         Dim controls = control.Controls.Cast(Of Control)
         Return controls.SelectMany(Function(ctrl) GetAllChildren(ctrl)).Concat(controls)
@@ -35,6 +37,16 @@ Public Class ObjectEditorForm
         Me.Name = "ObjectEditorForm"
 
         Me.ResumeLayout(False)
+
+    End Sub
+
+    Public Sub UpdateGHGEditor(container As Control, obj As ISimulationObject)
+
+        If GHGEditor Is Nothing Then
+            GHGEditor = New GHGEmitterEditor With {.SimObject = obj, .Dock = DockStyle.Fill}
+            container.Controls.Add(GHGEditor)
+        End If
+        GHGEditor.UpdateInfo()
 
     End Sub
 

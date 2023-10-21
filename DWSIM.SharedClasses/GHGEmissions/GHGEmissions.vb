@@ -6,7 +6,7 @@
 
     Private Const NitrousOxideCO2eq As Double = 256.0
 
-    Public Property Active As Boolean = True Implements IGHGEmitter.Active
+    Public Property Active As Boolean = False Implements IGHGEmitter.Active
 
     Public Property GHGEmissionMassFlow As Double Implements IGHGEmitter.GHGEmissionMassFlow
 
@@ -20,7 +20,7 @@
     ''' Emission Factor in Default SI Units ([kg/s]/kW)
     ''' </summary>
     ''' <returns></returns>
-    Public Property GHGEmissionFactor As Double = Double.NaN Implements IGHGEmitter.GHGEmissionFactor
+    Public Property GHGEmissionFactor As Double Implements IGHGEmitter.GHGEmissionFactor
 
     Public Property GHGEmissionCompositionID As String = "" Implements IGHGEmitter.GHGEmissionCompositionID
 

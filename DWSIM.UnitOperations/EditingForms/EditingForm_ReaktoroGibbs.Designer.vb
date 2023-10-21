@@ -23,9 +23,9 @@ Partial Class EditingForm_ReaktoroGibbs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_ReaktoroGibbs))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
@@ -96,6 +96,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button4 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -368,7 +369,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 715)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 895)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(419, 154)
         Me.GroupBox4.TabIndex = 18
@@ -436,8 +437,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn6.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn6.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
@@ -445,8 +446,8 @@ Partial Class EditingForm_ReaktoroGibbs
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn7.HeaderText = "Conversion (%)"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -711,7 +712,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageCompounds.Location = New System.Drawing.Point(4, 22)
         Me.TabPageCompounds.Name = "TabPageCompounds"
         Me.TabPageCompounds.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageCompounds.Size = New System.Drawing.Size(404, 190)
+        Me.TabPageCompounds.Size = New System.Drawing.Size(405, 190)
         Me.TabPageCompounds.TabIndex = 3
         Me.TabPageCompounds.Text = "Compounds"
         Me.TabPageCompounds.UseVisualStyleBackColor = True
@@ -723,7 +724,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.lvComps.HideSelection = False
         Me.lvComps.Location = New System.Drawing.Point(3, 26)
         Me.lvComps.Name = "lvComps"
-        Me.lvComps.Size = New System.Drawing.Size(398, 161)
+        Me.lvComps.Size = New System.Drawing.Size(399, 161)
         Me.lvComps.TabIndex = 0
         Me.lvComps.UseCompatibleStateImageBehavior = False
         Me.lvComps.View = System.Windows.Forms.View.List
@@ -733,7 +734,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button1.Location = New System.Drawing.Point(3, 3)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(398, 23)
+        Me.Button1.Size = New System.Drawing.Size(399, 23)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "Get/Reset List"
         Me.Button1.UseVisualStyleBackColor = True
@@ -745,7 +746,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPageElements.Location = New System.Drawing.Point(4, 22)
         Me.TabPageElements.Name = "TabPageElements"
         Me.TabPageElements.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPageElements.Size = New System.Drawing.Size(404, 190)
+        Me.TabPageElements.Size = New System.Drawing.Size(405, 190)
         Me.TabPageElements.TabIndex = 1
         Me.TabPageElements.Text = "Elements"
         Me.TabPageElements.UseVisualStyleBackColor = True
@@ -757,7 +758,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.lvElements.HideSelection = False
         Me.lvElements.Location = New System.Drawing.Point(3, 26)
         Me.lvElements.Name = "lvElements"
-        Me.lvElements.Size = New System.Drawing.Size(398, 161)
+        Me.lvElements.Size = New System.Drawing.Size(399, 161)
         Me.lvElements.TabIndex = 2
         Me.lvElements.UseCompatibleStateImageBehavior = False
         Me.lvElements.View = System.Windows.Forms.View.List
@@ -767,7 +768,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button2.Location = New System.Drawing.Point(3, 3)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(398, 23)
+        Me.Button2.Size = New System.Drawing.Size(399, 23)
         Me.Button2.TabIndex = 3
         Me.Button2.Text = "Get/Reset List"
         Me.Button2.UseVisualStyleBackColor = True
@@ -779,7 +780,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(404, 190)
+        Me.TabPage1.Size = New System.Drawing.Size(405, 190)
         Me.TabPage1.TabIndex = 5
         Me.TabPage1.Text = "Comp. Names"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -795,13 +796,13 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.gridCompNames.Location = New System.Drawing.Point(3, 26)
         Me.gridCompNames.Name = "gridCompNames"
         Me.gridCompNames.RowHeadersVisible = False
-        Me.gridCompNames.Size = New System.Drawing.Size(398, 161)
+        Me.gridCompNames.Size = New System.Drawing.Size(399, 161)
         Me.gridCompNames.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewTextBoxColumn1.HeaderText = "Compound"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -816,7 +817,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.Button3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button3.Location = New System.Drawing.Point(3, 3)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(398, 23)
+        Me.Button3.Size = New System.Drawing.Size(399, 23)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Get/Reset List"
         Me.Button3.UseVisualStyleBackColor = True
@@ -827,7 +828,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(404, 190)
+        Me.TabPage2.Size = New System.Drawing.Size(405, 190)
         Me.TabPage2.TabIndex = 4
         Me.TabPage2.Text = "Species Mappings"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -843,7 +844,7 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.gridSpeciesMappings.Location = New System.Drawing.Point(3, 3)
         Me.gridSpeciesMappings.Name = "gridSpeciesMappings"
         Me.gridSpeciesMappings.RowHeadersVisible = False
-        Me.gridSpeciesMappings.Size = New System.Drawing.Size(398, 184)
+        Me.gridSpeciesMappings.Size = New System.Drawing.Size(399, 184)
         Me.gridSpeciesMappings.TabIndex = 1
         '
         'c1
@@ -899,12 +900,24 @@ Partial Class EditingForm_ReaktoroGibbs
         Me.chkUseEmbeddedImage.Text = "Use Embedded Image Icon"
         Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
         '
+        'gbGHG
+        '
+        Me.gbGHG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gbGHG.Location = New System.Drawing.Point(12, 713)
+        Me.gbGHG.Name = "gbGHG"
+        Me.gbGHG.Size = New System.Drawing.Size(419, 176)
+        Me.gbGHG.TabIndex = 62
+        Me.gbGHG.TabStop = False
+        Me.gbGHG.Text = "GHG Emissions"
+        '
         'EditingForm_ReaktoroGibbs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(443, 878)
+        Me.ClientSize = New System.Drawing.Size(443, 1061)
+        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox6)
@@ -1009,4 +1022,5 @@ Partial Class EditingForm_ReaktoroGibbs
     Friend WithEvents Button7 As Button
     Public WithEvents tbExternalDB As TextBox
     Friend WithEvents chkUseExternalDatabase As CheckBox
+    Public WithEvents gbGHG As GroupBox
 End Class

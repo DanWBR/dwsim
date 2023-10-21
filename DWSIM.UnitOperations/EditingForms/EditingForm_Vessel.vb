@@ -31,6 +31,8 @@ Public Class EditingForm_Vessel
 
         Loaded = False
 
+        UpdateGHGEditor(gbGHG, VesselObject)
+
         If Host.Items.Where(Function(x) x.Name.Contains(VesselObject.GraphicObject.Tag)).Count > 0 Then
             If InspReportBar Is Nothing Then
                 InspReportBar = New SharedClasses.InspectorReportBar

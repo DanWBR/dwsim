@@ -104,6 +104,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.TbFileName = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBoxVariables.SuspendLayout()
@@ -875,10 +876,20 @@ Partial Class EditingForm_SpreadsheetUO
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'gbGHG
+        '
+        resources.ApplyResources(Me.gbGHG, "gbGHG")
+        Me.gbGHG.Name = "gbGHG"
+        Me.gbGHG.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
+        '
         'EditingForm_SpreadsheetUO
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBoxParameters)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBoxConnections)
@@ -980,4 +991,5 @@ Partial Class EditingForm_SpreadsheetUO
     Friend WithEvents rbFileExternal As RadioButton
     Friend WithEvents rbFileEmbedded As RadioButton
     Friend WithEvents Panel1 As Panel
+    Public WithEvents gbGHG As GroupBox
 End Class
