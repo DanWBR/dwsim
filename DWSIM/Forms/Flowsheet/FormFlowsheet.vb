@@ -96,6 +96,7 @@ Public Class FormFlowsheet
     Public FormDynamics As New FormDynamicsManager
     Public FormIntegratorControls As New FormDynamicsIntegratorControl
     Public FormFilesExplorer As New FormFileExplorer
+    Public FormGHGEmissionsHub As New FormGHGEmissionsSummary
     'Public FormIPyConsole As New FormInteractiveIronPythonConsole
 
     Public FormScript1 As New FormScript
@@ -241,6 +242,7 @@ Public Class FormFlowsheet
         'FormIPyConsole.Flowsheet = Me
         FormWatch.Flowsheet = Me
         FormScript1.fc = Me
+        FormGHGEmissionsSummary.Flowsheet = Me
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
@@ -330,6 +332,7 @@ Public Class FormFlowsheet
             FormFilesExplorer.DockPanel = Nothing
             'FormIPyConsole.DockPanel = Nothing
             FormScript1.DockPanel = Nothing
+            FormGHGEmissionsHub.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -343,7 +346,8 @@ Public Class FormFlowsheet
             FormScript1.Show(dckPanel.ActiveDocumentPane, FormMatList)
             FormSpreadsheet.Show(dckPanel.ActiveDocumentPane, FormScript1)
             FormDynamics.Show(dckPanel.ActiveDocumentPane, FormSpreadsheet)
-            FormSurface.Show(dckPanel.ActiveDocumentPane, FormDynamics)
+            FormGHGEmissionsHub.Show(dckPanel.ActiveDocumentPane, FormDynamics)
+            FormSurface.Show(dckPanel.ActiveDocumentPane, FormGHGEmissionsHub)
 
             FormSurface.Activate()
 
@@ -565,8 +569,8 @@ Public Class FormFlowsheet
                 Return Me.FormIntegratorControls
             Case "DWSIM.FormFileExplorer"
                 Return Me.FormFilesExplorer
-                'Case "DWSIM.FormInteractiveIronPythonConsole"
-                '    Return Me.FormIPyConsole
+            Case "DWSIM.FormGHGEmissionsSummary"
+                Return Me.FormGHGEmissionsHub
         End Select
         Return Nothing
     End Function
@@ -643,10 +647,10 @@ Public Class FormFlowsheet
         FormSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
 
-        'FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
-        'FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
+        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
+        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
-        'FormSurface.FlowsheetSurface.Zoom *= 0.5
+        FormSurface.FlowsheetSurface.Zoom *= 0.75
 
         FormSurface.FlowsheetSurface.Center(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 

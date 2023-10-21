@@ -647,6 +647,12 @@
     <Compile Include="Forms\FlowsheetComponents\FormFileExplorer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormGHGEmissionsSummary.Designer.vb">
+      <DependentUpon>FormGHGEmissionsSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormGHGEmissionsSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.Designer.vb">
       <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>
     </Compile>
@@ -1344,6 +1350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormFileExplorer.resx">
       <DependentUpon>FormFileExplorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormGHGEmissionsSummary.resx">
+      <DependentUpon>FormGHGEmissionsSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.resx">
       <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>

@@ -64,7 +64,7 @@ Partial Class GHGEmitterEditor
         'tbEmissionFactor
         '
         Me.tbEmissionFactor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbEmissionFactor.Location = New System.Drawing.Point(283, 40)
+        Me.tbEmissionFactor.Location = New System.Drawing.Point(271, 40)
         Me.tbEmissionFactor.Name = "tbEmissionFactor"
         Me.tbEmissionFactor.Size = New System.Drawing.Size(92, 20)
         Me.tbEmissionFactor.TabIndex = 2
@@ -75,7 +75,7 @@ Partial Class GHGEmitterEditor
         Me.cbGasComposition.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbGasComposition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGasComposition.FormattingEnabled = True
-        Me.cbGasComposition.Location = New System.Drawing.Point(283, 6)
+        Me.cbGasComposition.Location = New System.Drawing.Point(271, 6)
         Me.cbGasComposition.Name = "cbGasComposition"
         Me.cbGasComposition.Size = New System.Drawing.Size(92, 21)
         Me.cbGasComposition.TabIndex = 3
@@ -84,7 +84,7 @@ Partial Class GHGEmitterEditor
         '
         Me.lblEFUnits.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblEFUnits.AutoSize = True
-        Me.lblEFUnits.Location = New System.Drawing.Point(381, 43)
+        Me.lblEFUnits.Location = New System.Drawing.Point(369, 43)
         Me.lblEFUnits.Name = "lblEFUnits"
         Me.lblEFUnits.Size = New System.Drawing.Size(39, 13)
         Me.lblEFUnits.TabIndex = 4
@@ -106,7 +106,7 @@ Partial Class GHGEmitterEditor
         '
         Me.tbOverridePower.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbOverridePower.Enabled = False
-        Me.tbOverridePower.Location = New System.Drawing.Point(283, 87)
+        Me.tbOverridePower.Location = New System.Drawing.Point(271, 87)
         Me.tbOverridePower.Name = "tbOverridePower"
         Me.tbOverridePower.Size = New System.Drawing.Size(92, 20)
         Me.tbOverridePower.TabIndex = 9
@@ -116,7 +116,7 @@ Partial Class GHGEmitterEditor
         '
         Me.lbECUnits.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbECUnits.AutoSize = True
-        Me.lbECUnits.Location = New System.Drawing.Point(381, 90)
+        Me.lbECUnits.Location = New System.Drawing.Point(369, 90)
         Me.lbECUnits.Name = "lbECUnits"
         Me.lbECUnits.Size = New System.Drawing.Size(39, 13)
         Me.lbECUnits.TabIndex = 10
@@ -158,7 +158,7 @@ Partial Class GHGEmitterEditor
         Me.PanelUOParameters.Controls.Add(Me.chkOverridePower)
         Me.PanelUOParameters.Location = New System.Drawing.Point(7, 34)
         Me.PanelUOParameters.Name = "PanelUOParameters"
-        Me.PanelUOParameters.Size = New System.Drawing.Size(431, 150)
+        Me.PanelUOParameters.Size = New System.Drawing.Size(419, 150)
         Me.PanelUOParameters.TabIndex = 13
         '
         'Button1
@@ -166,7 +166,7 @@ Partial Class GHGEmitterEditor
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.BackgroundImage = Global.DWSIM.SharedClasses.My.Resources.Resources.read_64px
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button1.Location = New System.Drawing.Point(253, 38)
+        Me.Button1.Location = New System.Drawing.Point(241, 38)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(24, 24)
         Me.Button1.TabIndex = 13

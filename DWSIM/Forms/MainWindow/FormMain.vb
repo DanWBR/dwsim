@@ -2739,6 +2739,8 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
+            form.FormGHGEmissionsHub.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2754,6 +2756,7 @@ Public Class FormMain
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
             form.FormScript1.DockPanel = Nothing
+            form.FormGHGEmissionsHub.DockPanel = Nothing
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -2775,16 +2778,29 @@ Public Class FormMain
             End If
 
             Try
+
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormLog.Hide()
                 form.FormWatch.Hide()
-                form.FormSpreadsheet?.Show(form.dckPanel)
-                form.FormCharts?.Show(form.dckPanel)
-                form.FormMatList?.Show(form.dckPanel)
-                form.FormSurface?.Show(form.dckPanel)
-                form.FormDynamics?.Show(form.dckPanel)
-                form.FormFilesExplorer?.Show(form.dckPanel)
-                form.FormScript1?.Show(form.dckPanel)
+
+                'form.FormSpreadsheet?.Show(form.dckPanel)
+                'form.FormCharts?.Show(form.dckPanel)
+                'form.FormMatList?.Show(form.dckPanel)
+                'form.FormSurface?.Show(form.dckPanel)
+                'form.FormDynamics?.Show(form.dckPanel)
+                'form.FormFilesExplorer?.Show(form.dckPanel)
+                'form.FormScript1?.Show(form.dckPanel)
+                'form.FormGHGEmissionsHub?.Show(form.dckPanel)
+
+                form.FormCharts.Show(form.dckPanel)
+                form.FormFilesExplorer.Show(form.dckPanel.ActiveDocumentPane, form.FormCharts)
+                form.FormMatList.Show(form.dckPanel.ActiveDocumentPane, form.FormFilesExplorer)
+                form.FormScript1.Show(form.dckPanel.ActiveDocumentPane, form.FormMatList)
+                form.FormSpreadsheet.Show(form.dckPanel.ActiveDocumentPane, form.FormScript1)
+                form.FormDynamics.Show(form.dckPanel.ActiveDocumentPane, form.FormSpreadsheet)
+                form.FormGHGEmissionsHub.Show(form.dckPanel.ActiveDocumentPane, form.FormDynamics)
+                form.FormSurface.Show(form.dckPanel.ActiveDocumentPane, form.FormGHGEmissionsHub)
+
 #If LINUX = False Then
                 'form.FormIPyConsole?.Show(form.dckPanel)
 #End If
@@ -3337,6 +3353,7 @@ Public Class FormMain
             form.FormDynamics.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
             form.FormScript1.DockPanel = Nothing
+            form.FormGHGEmissionsHub.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = SharedClasses.Utility.GetTempFileName()
@@ -3352,19 +3369,31 @@ Public Class FormMain
             End If
 
             Try
+
                 form.FormLog.DockPanel = form.dckPanel
                 form.FormLog.Hide()
                 form.FormWatch.Hide()
-                form.FormSpreadsheet.Show(form.dckPanel)
+
+                'form.FormSpreadsheet.Show(form.dckPanel)
+                'form.FormCharts.Show(form.dckPanel)
+                'form.FormMatList.Show(form.dckPanel)
+                'form.FormSurface.Show(form.dckPanel)
+                'form.FormDynamics.Show(form.dckPanel)
+                'form.FormFilesExplorer.Show(form.dckPanel)
+                'form.FormScript1.Show(form.dckPanel)
+
                 form.FormCharts.Show(form.dckPanel)
-                form.FormMatList.Show(form.dckPanel)
-                form.FormSurface.Show(form.dckPanel)
-                form.FormDynamics.Show(form.dckPanel)
-                form.FormFilesExplorer.Show(form.dckPanel)
-                'form.FormIPyConsole.Show(form.dckPanel)
-                form.FormScript1.Show(form.dckPanel)
+                form.FormFilesExplorer.Show(form.dckPanel.ActiveDocumentPane, form.FormCharts)
+                form.FormMatList.Show(form.dckPanel.ActiveDocumentPane, form.FormFilesExplorer)
+                form.FormScript1.Show(form.dckPanel.ActiveDocumentPane, form.FormMatList)
+                form.FormSpreadsheet.Show(form.dckPanel.ActiveDocumentPane, form.FormScript1)
+                form.FormDynamics.Show(form.dckPanel.ActiveDocumentPane, form.FormSpreadsheet)
+                form.FormGHGEmissionsHub.Show(form.dckPanel.ActiveDocumentPane, form.FormDynamics)
+                form.FormSurface.Show(form.dckPanel.ActiveDocumentPane, form.FormGHGEmissionsHub)
+
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
+
             Catch ex As Exception
                 excs.Add(New Exception("Error Restoring Window Layout", ex))
             End Try
