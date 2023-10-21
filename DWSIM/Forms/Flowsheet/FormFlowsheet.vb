@@ -660,6 +660,8 @@ Public Class FormFlowsheet
             ws.Recalculate()
         Next
 
+        FormGHGEmissionsHub.UpdateInfo()
+
         FormMain.TranslateFormFunction?.Invoke(Me)
 
         'send screen characteristics
