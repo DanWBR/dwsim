@@ -33,14 +33,6 @@ Partial Class FormGHGEmissionsSummary
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gridEmissions = New System.Windows.Forms.DataGridView()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.tbTotalEmission = New System.Windows.Forms.TextBox()
-        Me.tbTotalEmissionCO2eq = New System.Windows.Forms.TextBox()
-        Me.lblEmissionUnits = New System.Windows.Forms.Label()
-        Me.tbTotalEmissionMolar = New System.Windows.Forms.TextBox()
-        Me.tbTotalEmissionCO2eqMolar = New System.Windows.Forms.TextBox()
-        Me.lblEmissionMolarUnits = New System.Windows.Forms.Label()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +41,15 @@ Partial Class FormGHGEmissionsSummary
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.tbTotalEmission = New System.Windows.Forms.TextBox()
+        Me.tbTotalEmissionCO2eq = New System.Windows.Forms.TextBox()
+        Me.lblEmissionUnits = New System.Windows.Forms.Label()
+        Me.tbTotalEmissionMolar = New System.Windows.Forms.TextBox()
+        Me.tbTotalEmissionCO2eqMolar = New System.Windows.Forms.TextBox()
+        Me.lblEmissionMolarUnits = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridEmissions, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -92,6 +93,70 @@ Partial Class FormGHGEmissionsSummary
         Me.gridEmissions.RowHeadersVisible = False
         Me.gridEmissions.Size = New System.Drawing.Size(579, 399)
         Me.gridEmissions.TabIndex = 2
+        '
+        'Column1
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column1.HeaderText = "Object"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column2
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Column2.HeaderText = "Type"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Column3.HeaderText = "Reference Power/Heat"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'Column4
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Column4.HeaderText = "Emission Factor"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column5
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Column5.HeaderText = "Mass GHG Emissions"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        '
+        'Column6
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Column6.HeaderText = "Mass GHG Emissions (CO2eq)"
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'Column7
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Column7.HeaderText = "Molar GHG Emissions"
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        '
+        'Column8
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column8.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Column8.HeaderText = "Molar GHG Emissions (CO2eq)"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
         '
         'Label2
         '
@@ -173,69 +238,14 @@ Partial Class FormGHGEmissionsSummary
         Me.lblEmissionMolarUnits.TabIndex = 10
         Me.lblEmissionMolarUnits.Text = "Label4"
         '
-        'Column1
+        'Button1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Column1.HeaderText = "Object"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column2
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Column2.HeaderText = "Type"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column3
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Column3.HeaderText = "Reference Power/Heat"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'Column4
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Column4.HeaderText = "Emission Factor"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'Column5
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Column5.HeaderText = "Mass GHG Emissions"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        '
-        'Column6
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Column6.HeaderText = "Mass GHG Emissions (CO2eq)"
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'Column7
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Column7.HeaderText = "Molar GHG Emissions"
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        '
-        'Column8
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column8.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Column8.HeaderText = "Molar GHG Emissions (CO2eq)"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
+        Me.Button1.Location = New System.Drawing.Point(17, 67)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Update"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'FormGHGEmissionsSummary
         '
@@ -245,6 +255,7 @@ Partial Class FormGHGEmissionsSummary
         Me.ClientSize = New System.Drawing.Size(844, 479)
         Me.CloseButton = False
         Me.CloseButtonVisible = False
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblEmissionMolarUnits)
         Me.Controls.Add(Me.tbTotalEmissionCO2eqMolar)
         Me.Controls.Add(Me.tbTotalEmissionMolar)
@@ -289,4 +300,5 @@ Partial Class FormGHGEmissionsSummary
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As Button
 End Class

@@ -14,6 +14,8 @@
 
     Function GetMolecularWeight() As Double
 
+    Function GetDryMolecularWeight() As Double
+
 End Interface
 
 Public Interface IGHGEmitter
@@ -77,5 +79,7 @@ Public Interface IGHGEmissionsSummary
     Property TotalCO2eqMolarEmission As Double
 
     Property UserDefinedGHGMassEmission As Double
+
+    Sub Update(fs As IFlowsheet)
 
 End Interface

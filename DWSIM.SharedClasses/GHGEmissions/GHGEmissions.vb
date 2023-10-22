@@ -84,11 +84,11 @@
                 Dim t1w = ch4w / MethaneCO2eq
                 Dim t2w = n2ow / NitrousOxideCO2eq
 
-                CO2eqEmissionMassFlow = w * (t1w + t2w + co2w + h2ow) 'kg/s
-                CO2eqEmissionMolarFlow = m * (t1 + t2 + co2 + h2o) 'mol/s
+                CO2eqEmissionMassFlow = w * (t1w + t2w + co2w) 'kg/s
+                CO2eqEmissionMolarFlow = m * (t1 + t2 + co2) 'mol/s
 
-                GHGEmissionMassFlow = w * (ch4w + n2ow + co2w + h2ow) 'kg/s
-                GHGEmissionMolarFlow = m * (ch4 + n2o + co2 + h2o) 'mol/s
+                GHGEmissionMassFlow = w * (ch4w + n2ow + co2w) 'kg/s
+                GHGEmissionMolarFlow = m * (ch4 + n2o + co2) 'mol/s
 
             Else
 
@@ -97,11 +97,11 @@
                 Dim t1w = ch4w * MethaneCO2eq
                 Dim t2w = n2ow * NitrousOxideCO2eq
 
-                GHGEmissionMassFlow = w * (t1w + t2w + co2w + h2ow) 'kg/s
-                GHGEmissionMolarFlow = m * (t1 + t2 + co2 + h2o) 'mol/s
+                GHGEmissionMassFlow = w * (t1w + t2w + co2w) 'kg/s
+                GHGEmissionMolarFlow = m * (t1 + t2 + co2) 'mol/s
 
-                CO2eqEmissionMassFlow = w * (ch4w + n2ow + co2w + h2ow) 'kg/s
-                CO2eqEmissionMolarFlow = m * (ch4 + n2o + co2 + h2o) 'mol/s
+                CO2eqEmissionMassFlow = w * (ch4w + n2ow + co2w) 'kg/s
+                CO2eqEmissionMolarFlow = m * (ch4 + n2o + co2) 'mol/s
 
             End If
 
@@ -120,23 +120,23 @@
             Dim t3 = ghgas.CarbonDioxide
             Dim t4 = ghgas.Water
 
-            Dim corrected = GHGEmissionFactor * (t1 + t2 + t3 + t4) '[kg/s]/kW
+            Dim corrected = GHGEmissionFactor * (t1 + t2 + t3) '[kg/s]/kW
 
             If EmissionFactorIsInCO2eq Then
 
                 CO2eqEmissionMassFlow = GHGEmissionFactor * ec 'kg/s
-                CO2eqEmissionMolarFlow = GHGEmissionFactor * ec / ghgas.GetMolecularWeight() * 1000.0 'mol/s
+                CO2eqEmissionMolarFlow = GHGEmissionFactor * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s
 
                 GHGEmissionMassFlow = corrected * ec 'kg/s
-                GHGEmissionMolarFlow = corrected * ec / ghgas.GetMolecularWeight() * 1000.0 'mol/s
+                GHGEmissionMolarFlow = corrected * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s
 
             Else
 
                 GHGEmissionMassFlow = GHGEmissionFactor * ec 'kg/s
-                GHGEmissionMolarFlow = GHGEmissionFactor * ec / ghgas.GetMolecularWeight() * 1000.0 'mol/s
+                GHGEmissionMolarFlow = GHGEmissionFactor * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s
 
                 CO2eqEmissionMassFlow = corrected * ec 'kg/s
-                CO2eqEmissionMolarFlow = corrected * ec / ghgas.GetMolecularWeight() * 1000.0 'mol/s
+                CO2eqEmissionMolarFlow = corrected * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s
 
             End If
 
@@ -272,6 +272,16 @@ Public Class GHGEmissionComposition
 
     End Function
 
+    Public Function GetDryMolecularWeight() As Double Implements IGHGComposition.GetDryMolecularWeight
+
+        Dim c1 = CarbonDioxide / (CarbonDioxide + Methane + NitrousOxide)
+        Dim c2 = Methane / (CarbonDioxide + Methane + NitrousOxide)
+        Dim c3 = NitrousOxide / (CarbonDioxide + Methane + NitrousOxide)
+
+        Return c1 * 44.01 + c2 * 16.04 + c3 * 44.013
+
+    End Function
+
 End Class
 
 Public Class GHGEmissionsSummary
@@ -303,6 +313,41 @@ Public Class GHGEmissionsSummary
     Public Property TotalCO2eqMolarEmission As Double Implements IGHGEmissionsSummary.TotalCO2eqMolarEmission
 
     Public Property UserDefinedGHGMassEmission As Double Implements IGHGEmissionsSummary.UserDefinedGHGMassEmission
+
+    Public Sub Update(fs As IFlowsheet) Implements IGHGEmissionsSummary.Update
+
+        TotalCarbonDioxideMassEmission = 0.0
+        TotalCarbonDioxideMolarEmission = 0.0
+        TotalCO2eqMassEmission = 0.0
+        TotalCO2eqMolarEmission = 0.0
+        TotalGHGMassEmission = 0.0
+        TotalGHGMolarEmission = 0.0
+        TotalMethaneMassEmission = 0.0
+        TotalMethaneMolarEmission = 0.0
+        TotalNitrousOxideMassEmission = 0.0
+        TotalNitrousOxideMolarEmission = 0.0
+        TotalWaterMassEmission = 0.0
+        TotalWaterMolarEmission = 0.0
+
+        For Each obj In fs.SimulationObjects.Values
+            TotalGHGMassEmission += obj.GHGEmissionData.GHGEmissionMassFlow
+            TotalGHGMolarEmission += obj.GHGEmissionData.GHGEmissionMolarFlow
+            TotalCO2eqMassEmission += obj.GHGEmissionData.CO2eqEmissionMassFlow
+            TotalCO2eqMolarEmission += obj.GHGEmissionData.CO2eqEmissionMolarFlow
+        Next
+
+        Dim cf = TotalCO2eqMassEmission / TotalGHGMassEmission
+
+        Dim mf1 = TotalGHGMolarEmission / TotalGHGMassEmission
+        Dim mf2 = TotalCO2eqMolarEmission / TotalCO2eqMassEmission
+
+        TotalGHGMassEmission += UserDefinedGHGMassEmission
+        TotalCO2eqMassEmission += UserDefinedGHGMassEmission * cf
+
+        TotalGHGMolarEmission += UserDefinedGHGMassEmission * mf1
+        TotalCO2eqMolarEmission += UserDefinedGHGMassEmission * mf2
+
+    End Sub
 
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)

@@ -1428,6 +1428,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                       End If
 
+                                                      fbag.Results.GHGEmissionsSummary.Update(fbag)
+
                                                       'throws exceptions if any
 
                                                       If Settings.SolverBreakOnException And exlist.Count > 0 Then

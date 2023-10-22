@@ -1510,6 +1510,7 @@ Public Class FormFlowsheet
                                RaiseEvent FinishedSolving(Me, New EventArgs())
                                Me.UIThread(Sub()
                                                pbSolver.Visible = False
+                                               FormGHGEmissionsHub.UpdateInfo()
                                            End Sub)
                            End Sub)
             t.Start()
@@ -4304,6 +4305,8 @@ Public Class FormFlowsheet
                             If Not Me.FormSpreadsheet Is Nothing Then
                                 Me.FormSpreadsheet.EvaluateAll()
                             End If
+
+                            FormGHGEmissionsHub.UpdateInfo()
 
                             'Application.DoEvents()
 
