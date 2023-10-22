@@ -267,18 +267,6 @@
   <data name="GBconfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="GBconfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 41</value>
-  </data>
-  <data name="GBconfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>734, 72</value>
-  </data>
-  <data name="GBconfig.Text" xml:space="preserve">
-    <value>Configuration</value>
-  </data>
-  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
-  </data>
   <data name="rbVariable.Text" xml:space="preserve">
     <value>Variable</value>
   </data>
@@ -287,6 +275,9 @@
   </data>
   <data name="rbExpression.Text" xml:space="preserve">
     <value>Expression</value>
+  </data>
+  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 23</value>
   </data>
   <data name="rbMinimize.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 17</value>
@@ -348,14 +339,14 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Optimization Type</value>
   </data>
-  <data name="GBexpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 358</value>
+  <data name="GBconfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 41</value>
   </data>
-  <data name="GBexpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 133</value>
+  <data name="GBconfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>734, 72</value>
   </data>
-  <data name="GBexpression.Text" xml:space="preserve">
-    <value>Expression</value>
+  <data name="GBconfig.Text" xml:space="preserve">
+    <value>Configuration</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
     <value>281, 50</value>
@@ -399,44 +390,20 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Expression</value>
   </data>
+  <data name="GBexpression.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 358</value>
+  </data>
+  <data name="GBexpression.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 133</value>
+  </data>
+  <data name="GBexpression.Text" xml:space="preserve">
+    <value>Expression</value>
+  </data>
   <data name="Panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="GroupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
-  </data>
-  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 497</value>
-  </data>
-  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 178</value>
-  </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Optimization Control</value>
-  </data>
-  <data name="GroupBox7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 359</value>
-  </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 319</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Optimization Progress</value>
-  </data>
-  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="Panel1.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 3</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>747, 682</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 68</value>
@@ -525,11 +492,44 @@
   <data name="btnRestore.Text" xml:space="preserve">
     <value>Restore Simulation</value>
   </data>
+  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 497</value>
+  </data>
+  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 178</value>
+  </data>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Optimization Control</value>
+  </data>
+  <data name="GroupBox7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 300</value>
   </data>
+  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 359</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>364, 319</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Optimization Progress</value>
+  </data>
+  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="Panel1.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 3</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>747, 682</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>935, 686</value>
+    <value>952, 686</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value />

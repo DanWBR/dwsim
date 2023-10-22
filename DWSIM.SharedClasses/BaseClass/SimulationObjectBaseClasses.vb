@@ -22,7 +22,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Dynamic
 Imports System.Reflection
-Imports DWSIM.ExtensionMethods
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Namespace UnitOperations
 
@@ -709,6 +709,13 @@ Namespace UnitOperations
                 proplist.Add(item.Key)
             Next
 
+            proplist.Add("GHG Emission Factor")
+            proplist.Add("GHG Mass Emission")
+            proplist.Add("GHG Molar Emission")
+            proplist.Add("CO2eq GHG Mass Emission")
+            proplist.Add("CO2eq GHG Molar Emission")
+            proplist.Add("GHG Emission Reference Power Value")
+
             For Each item In AttachedUtilities
                 proplist.AddRange(item.GetPropertyList().ConvertAll(New Converter(Of String, String)(Function(s As String)
                                                                                                          Return item.Name & ": " & s
@@ -735,6 +742,21 @@ Namespace UnitOperations
                 Else
                     Return ""
                 End If
+            Else
+                Select Case prop
+                    Case "GHG Emission Factor"
+                        Return "[kg/s]/kW"
+                    Case "GHG Mass Emission"
+                        Return "kg/s"
+                    Case "GHG Molar Emission"
+                        Return "mol/s"
+                    Case "CO2eq GHG Mass Emission"
+                        Return "kg/s"
+                    Case "CO2eq GHG Molar Emission"
+                        Return "mol/s"
+                    Case "GHG Emission Reference Power Value"
+                        Return "kW"
+                End Select
             End If
 
             For Each item In AttachedUtilities
@@ -751,13 +773,45 @@ Namespace UnitOperations
 
         Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
 
+            If su Is Nothing Then
+                su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
+            End If
+
+            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            Dim epucol = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
+
+            If epcol.ContainsKey(prop) Then
+                If epucol.ContainsKey(prop) Then
+                    Dim utype = epucol(prop)
+                    Dim units = su.GetCurrentUnits(utype)
+                    Return cv.ConvertFromSI(units, Convert.ToDouble(epcol(prop)))
+                Else
+                    Return epcol(prop)
+                End If
+            Else
+                Select Case prop
+                    Case "GHG Emission Factor"
+                        Return cv.ConvertFromSI(su.emission_factor, GHGEmissionData.GHGEmissionFactor)
+                    Case "GHG Mass Emission"
+                        Return cv.ConvertFromSI(su.massflow, GHGEmissionData.GHGEmissionMassFlow)
+                    Case "GHG Molar Emission"
+                        Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.GHGEmissionMolarFlow)
+                    Case "CO2eq GHG Mass Emission"
+                        Return cv.ConvertFromSI(su.massflow, GHGEmissionData.CO2eqEmissionMassFlow)
+                    Case "CO2eq GHG Molar Emission"
+                        Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.CO2eqEmissionMolarFlow)
+                    Case "GHG Emission Reference Power Value"
+                        Return cv.ConvertFromSI(su.heatflow, GetEnergyConsumption())
+                End Select
+            End If
+
+
             For Each item In AttachedUtilities
                 If prop.StartsWith(item.Name) Then
                     For Each prop1 In item.GetPropertyList()
                         If prop.Contains(prop1) Then Return item.GetPropertyValue(prop.Split(": ")(1).Trim)
                     Next
                 End If
-
             Next
 
             Return Nothing

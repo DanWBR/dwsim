@@ -16,6 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Dynamic
 Imports System.Linq
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
@@ -296,12 +297,54 @@ Namespace DWSIM.Flowsheet
 
         Public Property GHGEmissionsSummary As IGHGEmissionsSummary = New GHGEmissionsSummary Implements IFlowsheetResults.GHGEmissionsSummary
 
+        Public Property Additional As ExpandoObject = New ExpandoObject() Implements IFlowsheetResults.Additional
+
         Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
-            Return XMLSerializer.XMLSerializer.Serialize(Me)
+
+            Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)
+
+            With elements
+                .Add(New XElement("AdditionalResults"))
+                Dim extraprops = DirectCast(Additional, IDictionary(Of String, Object))
+                For Each item In extraprops
+                    Try
+                        .Item(.Count - 1).Add(New XElement("Property",
+                                                           {New XElement("Name", item.Key),
+                                                           New XElement("PropertyType", item.Value.GetType.ToString),
+                                                           New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+                    Catch ex As Exception
+                    End Try
+                Next
+            End With
+
+            Return elements
+
         End Function
 
         Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
-            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+            Additional = New ExpandoObject()
+
+            Dim xel_d = (From xel2 As XElement In data Select xel2 Where xel2.Name = "AdditionalResults")
+
+            If Not xel_d Is Nothing Then
+                Dim dataDyn As List(Of XElement) = xel_d.Elements.ToList
+                For Each xel As XElement In dataDyn
+                    Try
+                        Dim propname = xel.Element("Name").Value
+                        Dim proptype = xel.Element("PropertyType").Value
+                        Dim ptype As Type = Type.GetType(proptype)
+                        Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                        DirectCast(Additional, IDictionary(Of String, Object))(propname) = propval
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
+            Return True
+
         End Function
 
     End Class

@@ -5439,6 +5439,87 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Function GetResultIDs() As List(Of String) Implements IFlowsheet.GetResultIDs
+
+        Dim props As New List(Of String) From {
+            "Total GHG Mass Emissions",
+            "Total GHG Molar Emissions",
+            "Total CO2eq GHG Mass Emissions",
+            "Total CO2eq GHG Molar Emissions"
+        }
+
+        Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
+
+        For Each item In extraprops
+            props.Add(item.Key)
+        Next
+
+        Return props
+
+    End Function
+
+    Public Function GetResultValue(id As String) As Double Implements IFlowsheet.GetResultValue
+
+        Select Case id
+
+            Case "Total GHG Mass Emissions"
+
+                Return Results.GHGEmissionsSummary.TotalGHGMassEmission
+
+            Case "Total GHG Molar Emissions"
+
+                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission
+
+            Case "Total CO2eq GHG Mass Emissions"
+
+                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission
+
+            Case "Total CO2eq GHG Molar Emissions"
+
+                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission
+
+            Case Else
+
+                Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
+
+                If extraprops.ContainsKey(id) Then
+                    Return Convert.ToDouble(extraprops(id))
+                Else
+                    Return Double.NaN
+                End If
+
+        End Select
+
+    End Function
+
+    Public Function GetResultUnits(id As String) As String Implements IFlowsheet.GetResultUnits
+
+        Select Case id
+
+            Case "Total GHG Mass Emissions"
+
+                Return "kg/s"
+
+            Case "Total GHG Molar Emissions"
+
+                Return "mol/s"
+
+            Case "Total CO2eq GHG Mass Emissions"
+
+                Return "kg/s"
+
+            Case "Total CO2eq GHG Molar Emissions"
+
+                Return "mol/s"
+
+            Case Else
+
+                Return ""
+
+        End Select
+
+    End Function
+
 #End Region
 
 
