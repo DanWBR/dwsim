@@ -90,6 +90,7 @@ Public Class FormSensAnalysis
         cbc0.Sorted = True
         cbc0.MaxDropDownItems = 10
         cbc0.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
+        cbc0.Items.Add(DWSIM.App.GetLocalString("Flowsheet Result"))
         For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc0.Items.Add(obj.GraphicObject.Tag)
         Next
@@ -100,6 +101,7 @@ Public Class FormSensAnalysis
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
+        cbc2.Items.Add(DWSIM.App.GetLocalString("Flowsheet Result"))
         For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
@@ -147,6 +149,8 @@ Public Class FormSensAnalysis
 
         If objectTAG = DWSIM.App.GetLocalString("SpreadsheetCell") Then
             Return form.FormSpreadsheet.GetCellString()
+        ElseIf objectTAG = DWSIM.App.GetLocalString("Flowsheet Result") Then
+            Return form.GetResultIDs().ToArray()
         ElseIf objectTAG = DWSIM.App.GetLocalString("ReactionProperty") Then
             Dim rprops As New List(Of String)
             For Each rx In form.Reactions.Values
@@ -207,7 +211,8 @@ Public Class FormSensAnalysis
             chkIndVar2.Enabled = False
         End If
         If Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") And
-            Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("ReactionProperty") Then
+            Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("ReactionProperty") And
+            Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("Flowsheet Result") Then
             For Each prop As String In props
                 If form.GetTranslatedString1(prop) = Me.cbPropIndVar1.SelectedItem.ToString Then
                     For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
@@ -228,7 +233,8 @@ Public Class FormSensAnalysis
     Private Sub cbPropIndVar2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbPropIndVar2.SelectedIndexChanged
         Dim props As String() = Me.ReturnProperties(Me.cbObjIndVar2.SelectedItem.ToString, False)
         If Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") And
-            Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("ReactionProperty") Then
+            Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("ReactionProperty") And
+            Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("Flowsheet Result") Then
             For Each prop As String In props
                 If form.GetTranslatedString1(prop) = Me.cbPropIndVar2.SelectedItem.ToString Then
                     For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
@@ -284,7 +290,16 @@ Public Class FormSensAnalysis
             Me.tbCaseName.Text = sacase.name
             Me.tbCaseDesc.Text = sacase.description
             With sacase.iv1
-                If .objectID <> "SpreadsheetCell" And .objectID <> "ReactionProperty" Then
+                If .objectID = "ReactionProperty" Then
+                    Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(DWSIM.App.GetLocalString("ReactionProperty"))
+                    Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(form.GetTranslatedString1(.propID))
+                ElseIf .objectID = "SpreadsheetCell" Then
+                    Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
+                    Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(form.GetTranslatedString1(.propID))
+                ElseIf .objectID = "FlowsheetResult" Then
+                    Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(DWSIM.App.GetLocalString("Flowsheet Result"))
+                    Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(.propID)
+                Else
                     If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                         Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag)
                         Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(form.GetTranslatedString1(.propID))
@@ -293,12 +308,6 @@ Public Class FormSensAnalysis
                         Me.cbPropIndVar1.SelectedIndex = -1
                         Me.tbUnitIndVar1.Text = ""
                     End If
-                ElseIf .objectID = "ReactionProperty" Then
-                    Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(DWSIM.App.GetLocalString("ReactionProperty"))
-                    Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(form.GetTranslatedString1(.propID))
-                Else
-                    Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
-                    Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(form.GetTranslatedString1(.propID))
                 End If
                 If .propID <> "" Then
                     btnRun.Enabled = True
@@ -312,7 +321,16 @@ Public Class FormSensAnalysis
                 Me.nuNumPointsIndVar1.Value = .points
             End With
             With sacase.iv2
-                If .objectID <> "SpreadsheetCell" And .objectID <> "ReactionProperty" Then
+                If .objectID = "ReactionProperty" Then
+                    Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("ReactionProperty"))
+                    Me.cbPropIndVar2.SelectedIndex = Me.cbPropIndVar2.Items.IndexOf(form.GetTranslatedString1(.propID))
+                ElseIf .objectID = "FlowsheetResult" Then
+                    Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("Flowsheet Result"))
+                    Me.cbPropIndVar2.SelectedIndex = Me.cbPropIndVar2.Items.IndexOf(.propID)
+                ElseIf .objectID = "SpreadsheetCell" Then
+                    Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
+                    Me.cbPropIndVar2.SelectedItem = form.GetTranslatedString1(.propID)
+                Else
                     If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                         Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag)
                         Me.cbPropIndVar2.SelectedIndex = Me.cbPropIndVar2.Items.IndexOf(form.GetTranslatedString1(.propID))
@@ -321,12 +339,6 @@ Public Class FormSensAnalysis
                         Me.cbPropIndVar2.SelectedIndex = -1
                         Me.tbUnitIndVar2.Text = ""
                     End If
-                ElseIf .objectID = "ReactionProperty" Then
-                    Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("ReactionProperty"))
-                    Me.cbPropIndVar2.SelectedIndex = Me.cbPropIndVar2.Items.IndexOf(form.GetTranslatedString1(.propID))
-                Else
-                    Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
-                    Me.cbPropIndVar2.SelectedItem = form.GetTranslatedString1(.propID)
                 End If
                 Me.tbLowerLimIndVar2.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(Me.tbUnitIndVar2.Text, .lowerlimit.GetValueOrDefault)
                 Me.tbUpperLimIndVar2.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(Me.tbUnitIndVar2.Text, .upperlimit.GetValueOrDefault)
@@ -338,14 +350,17 @@ Public Class FormSensAnalysis
                     Me.dgDepVariables.Rows.Add()
                     Dim dgrow As DataGridViewRow = Me.dgDepVariables.Rows(Me.dgDepVariables.Rows.Count - 1)
                     dgrow.Cells(0).Value = .id
-                    If .objectID <> "SpreadsheetCell" Then
+                    If .objectID = "SpreadsheetCell" Then
+                        dgrow.Cells(1).Value = DWSIM.App.GetLocalString("SpreadsheetCell")
+                        dgrow.Cells(2).Value = form.GetTranslatedString1(.propID)
+                    ElseIf .objectID = "FlowsheetResult" Then
+                        dgrow.Cells(1).Value = DWSIM.App.GetLocalString("Flowsheet Result")
+                        dgrow.Cells(2).Value = .propID
+                    Else
                         If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                             dgrow.Cells(1).Value = form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag
                             dgrow.Cells(2).Value = form.GetTranslatedString1(.propID)
                         End If
-                    Else
-                        dgrow.Cells(1).Value = DWSIM.App.GetLocalString("SpreadsheetCell")
-                        dgrow.Cells(2).Value = form.GetTranslatedString1(.propID)
                     End If
                     dgrow.Cells(3).Value = .unit
                 End With
@@ -365,14 +380,17 @@ Public Class FormSensAnalysis
                     Dim dgrow As DataGridViewRow = Me.dgVariables.Rows(Me.dgVariables.Rows.Count - 1)
                     dgrow.Cells(0).Value = .id
                     dgrow.Cells(1).Value = .name
-                    If .objectID <> "SpreadsheetCell" Then
+                    If .objectID = "SpreadsheetCell" Then
+                        dgrow.Cells(2).Value = DWSIM.App.GetLocalString("SpreadsheetCell")
+                        dgrow.Cells(3).Value = form.GetTranslatedString1(.propID)
+                    ElseIf .objectID = "FlowsheetResult" Then
+                        dgrow.Cells(1).Value = DWSIM.App.GetLocalString("Flowsheet Result")
+                        dgrow.Cells(2).Value = .propID
+                    Else
                         If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                             dgrow.Cells(2).Value = form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag
                             dgrow.Cells(3).Value = form.GetTranslatedString1(.propID)
                         End If
-                    Else
-                        dgrow.Cells(2).Value = DWSIM.App.GetLocalString("SpreadsheetCell")
-                        dgrow.Cells(3).Value = form.GetTranslatedString1(.propID)
                     End If
                     dgrow.Cells(4).Value = SystemsOfUnits.Converter.ConvertFromSI(.unit, .currentvalue)
                     dgrow.Cells(5).Value = .unit
@@ -463,6 +481,9 @@ Public Class FormSensAnalysis
                 ElseIf Me.cbObjIndVar1.SelectedItem.ToString = DWSIM.App.GetLocalString("ReactionProperty") Then
                     .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
                     .objectID = "ReactionProperty"
+                ElseIf Me.cbObjIndVar1.SelectedItem.ToString = DWSIM.App.GetLocalString("Flowsheet Result") Then
+                    .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
+                    .objectID = "FlowsheetResult"
                 Else
                     .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
                     .objectID = "SpreadsheetCell"
@@ -495,6 +516,9 @@ Public Class FormSensAnalysis
                     ElseIf Me.cbObjIndVar2.SelectedItem.ToString = DWSIM.App.GetLocalString("ReactionProperty") Then
                         .objectTAG = Me.cbObjIndVar2.SelectedItem.ToString
                         .objectID = "ReactionProperty"
+                    ElseIf Me.cbObjIndVar2.SelectedItem.ToString = DWSIM.App.GetLocalString("Flowsheet Result") Then
+                        .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
+                        .objectID = "FlowsheetResult"
                     Else
                         .objectTAG = Me.cbObjIndVar2.SelectedItem.ToString
                         .objectID = "SpreadsheetCell"
@@ -526,12 +550,15 @@ Public Class FormSensAnalysis
                         If dgrow.Cells(1).Value = Nothing Then
                             .objectTAG = ""
                             .objectID = ""
-                        ElseIf dgrow.Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
-                            .objectTAG = dgrow.Cells(1).Value
-                            .objectID = Me.ReturnObject(dgrow.Cells(1).Value).Name
-                        Else
+                        ElseIf dgrow.Cells(1).Value = DWSIM.App.GetLocalString("SpreadsheetCell") Then
                             .objectTAG = dgrow.Cells(1).Value
                             .objectID = "SpreadsheetCell"
+                        ElseIf dgrow.Cells(1).Value = DWSIM.App.GetLocalString("Flowsheet Result") Then
+                            .objectTAG = dgrow.Cells(1).Value
+                            .objectID = "FlowsheetResult"
+                        Else
+                            .objectTAG = dgrow.Cells(1).Value
+                            .objectID = Me.ReturnObject(dgrow.Cells(1).Value).Name
                         End If
                         .propID = Me.ReturnPropertyID(.objectID, dgrow.Cells(2).Value)
                         .unit = dgrow.Cells(3).Value
@@ -557,12 +584,15 @@ Public Class FormSensAnalysis
                 With var
                     .id = dgrow.Cells(0).Value
                     .name = dgrow.Cells(1).Value
-                    If dgrow.Cells(2).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
-                        .objectTAG = dgrow.Cells(2).Value
-                        .objectID = Me.ReturnObject(dgrow.Cells(2).Value).Name
-                    Else
+                    If dgrow.Cells(2).Value = DWSIM.App.GetLocalString("SpreadsheetCell") Then
                         .objectTAG = dgrow.Cells(2).Value
                         .objectID = "SpreadsheetCell"
+                    ElseIf dgrow.Cells(2).Value = DWSIM.App.GetLocalString("Flowsheet Result") Then
+                        .objectTAG = dgrow.Cells(2).Value
+                        .objectID = "FlowsheetResult"
+                    Else
+                        .objectTAG = dgrow.Cells(2).Value
+                        .objectID = Me.ReturnObject(dgrow.Cells(2).Value).Name
                     End If
                     .propID = Me.ReturnPropertyID(.objectID, dgrow.Cells(3).Value)
                     .currentvalue = SystemsOfUnits.Converter.ConvertToSI(dgrow.Cells(5).Value, dgrow.Cells(4).Value)
@@ -715,10 +745,12 @@ Public Class FormSensAnalysis
                             .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                             .Imports.AddType(GetType(System.Math))
                             For Each var As SAVariable In selectedsacase.variables.Values
-                                If var.objectID <> "SpreadsheetCell" Then
-                                    .Variables.Add(var.name, SystemsOfUnits.Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
-                                Else
+                                If var.objectID = "SpreadsheetCell" Then
                                     .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Data)
+                                ElseIf var.objectID = "FlowsheetResult" Then
+                                    .Variables.Add(var.name, form.GetResultValue(var.propID))
+                                Else
+                                    .Variables.Add(var.name, SystemsOfUnits.Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
                                 End If
                             Next
                             Me.selectedsacase.exbase = Me.selectedsacase.econtext.CompileGeneric(Of Double)(Me.selectedsacase.expression)
@@ -732,10 +764,12 @@ Public Class FormSensAnalysis
                         currresults.Add(iv1val)
                         currresults.Add(iv2val)
                         For Each var As SAVariable In selectedsacase.depvariables.Values
-                            If var.objectID <> "SpreadsheetCell" Then
-                                var.currentvalue = form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)
-                            Else
+                            If var.objectID = "SpreadsheetCell" Then
                                 var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Data
+                            ElseIf var.objectID = "FlowsheetResult" Then
+                                var.currentvalue = form.GetResultValue(var.propID)
+                            Else
+                                var.currentvalue = form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)
                             End If
                             currresults.Add(var.currentvalue)
                         Next
@@ -869,7 +903,7 @@ Public Class FormSensAnalysis
             For i As Integer = 0 To Me.dgVariables.SelectedRows.Count - 1
                 Me.dgVariables.Rows.Remove(Me.dgVariables.SelectedRows(0))
             Next
-        else if Me.dgVariables.RowCount=1 Then 
+        ElseIf Me.dgVariables.RowCount = 1 Then
             Me.dgVariables.Rows.RemoveAt(0)
         End If
     End Sub
@@ -932,7 +966,15 @@ Public Class FormSensAnalysis
                     If Not Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value Is Nothing Then
                         Dim tbc0 As DataGridViewTextBoxCell = Me.dgDepVariables.Rows(e.RowIndex).Cells(3)
                         tbc0.Value = ""
-                        If Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
+                        If Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value = DWSIM.App.GetLocalString("Flowsheet Result") Then
+                            Dim props As String() = Me.ReturnProperties(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value, True)
+                            For Each prop As String In props
+                                If prop = Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
+                                    tbc0.Value = form.GetResultUnits(prop)
+                                    Exit For
+                                End If
+                            Next
+                        ElseIf Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                             Dim props As String() = Me.ReturnProperties(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value, True)
                             For Each prop As String In props
                                 If form.GetTranslatedString1(prop) = Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
@@ -965,6 +1007,8 @@ Public Class FormSensAnalysis
 
         If objectID = "SpreadsheetCell" Then
             Return propTAG
+        ElseIf objectID = "FlowsheetResult" Then
+            Return propTAG
         ElseIf objectID = "ReactionProperty" Then
             Return propTAG
         ElseIf objectID <> "" Then
@@ -995,7 +1039,7 @@ Public Class FormSensAnalysis
             For i As Integer = 0 To Me.dgDepVariables.SelectedRows.Count - 1
                 Me.dgDepVariables.Rows.Remove(Me.dgDepVariables.SelectedRows(0))
             Next
-        else if Me.dgDepVariables.RowCount=1 Then 
+        ElseIf Me.dgDepVariables.RowCount = 1 Then
             Me.dgDepVariables.Rows.RemoveAt(0)
         End If
     End Sub
