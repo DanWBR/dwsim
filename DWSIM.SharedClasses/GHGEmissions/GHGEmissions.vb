@@ -115,14 +115,14 @@
 
             Dim ghgas = Flowsheet.GHGEmissionCompositions(GHGEmissionCompositionID)
 
-            Dim t1 = ghgas.Methane / MethaneCO2eq
-            Dim t2 = ghgas.NitrousOxide / NitrousOxideCO2eq
-            Dim t3 = ghgas.CarbonDioxide
-            Dim t4 = ghgas.Water
-
-            Dim corrected = GHGEmissionFactor * (t1 + t2 + t3) '[kg/s]/kW
-
             If EmissionFactorIsInCO2eq Then
+
+                Dim t1 = ghgas.Methane / MethaneCO2eq
+                Dim t2 = ghgas.NitrousOxide / NitrousOxideCO2eq
+                Dim t3 = ghgas.CarbonDioxide
+                Dim t4 = ghgas.Water
+
+                Dim corrected = GHGEmissionFactor * (t1 + t2 + t3) '[kg/s]/kW
 
                 CO2eqEmissionMassFlow = GHGEmissionFactor * ec 'kg/s
                 CO2eqEmissionMolarFlow = GHGEmissionFactor * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s
@@ -131,6 +131,13 @@
                 GHGEmissionMolarFlow = corrected * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s
 
             Else
+
+                Dim t1 = ghgas.Methane * MethaneCO2eq
+                Dim t2 = ghgas.NitrousOxide * NitrousOxideCO2eq
+                Dim t3 = ghgas.CarbonDioxide
+                Dim t4 = ghgas.Water
+
+                Dim corrected = GHGEmissionFactor * (t1 + t2 + t3) '[kg/s]/kW
 
                 GHGEmissionMassFlow = GHGEmissionFactor * ec 'kg/s
                 GHGEmissionMolarFlow = GHGEmissionFactor * ec / ghgas.GetDryMolecularWeight() * 1000.0 'mol/s

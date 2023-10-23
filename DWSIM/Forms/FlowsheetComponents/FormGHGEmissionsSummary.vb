@@ -51,6 +51,8 @@ Public Class FormGHGEmissionsSummary
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
+        Flowsheet.Results.GHGEmissionsSummary.Update(Flowsheet)
+
         UpdateInfo()
 
     End Sub
