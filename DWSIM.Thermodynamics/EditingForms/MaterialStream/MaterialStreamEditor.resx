@@ -1440,33 +1440,6 @@
   <data name="&gt;&gt;TabPageInputComposition.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TabPageGHG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPageGHG.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPageGHG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 433</value>
-  </data>
-  <data name="TabPageGHG.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TabPageGHG.Text" xml:space="preserve">
-    <value>GHG Emissions</value>
-  </data>
-  <data name="&gt;&gt;TabPageGHG.Name" xml:space="preserve">
-    <value>TabPageGHG</value>
-  </data>
-  <data name="&gt;&gt;TabPageGHG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPageGHG.Parent" xml:space="preserve">
-    <value>TabControl2</value>
-  </data>
-  <data name="&gt;&gt;TabPageGHG.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="TabControl2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>

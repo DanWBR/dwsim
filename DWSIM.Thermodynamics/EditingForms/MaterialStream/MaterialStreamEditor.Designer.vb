@@ -221,7 +221,6 @@ Partial Class MaterialStreamEditor
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TabPageGHG = New System.Windows.Forms.TabPage()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -319,7 +318,6 @@ Partial Class MaterialStreamEditor
         '
         Me.TabControl2.Controls.Add(Me.TabPageInputConditions)
         Me.TabControl2.Controls.Add(Me.TabPageInputComposition)
-        Me.TabControl2.Controls.Add(Me.TabPageGHG)
         resources.ApplyResources(Me.TabControl2, "TabControl2")
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
@@ -1601,12 +1599,6 @@ Partial Class MaterialStreamEditor
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
-        'TabPageGHG
-        '
-        resources.ApplyResources(Me.TabPageGHG, "TabPageGHG")
-        Me.TabPageGHG.Name = "TabPageGHG"
-        Me.TabPageGHG.UseVisualStyleBackColor = True
-        '
         'MaterialStreamEditor
         '
         resources.ApplyResources(Me, "$this")
@@ -1871,5 +1863,4 @@ Partial Class MaterialStreamEditor
     Public WithEvents DataGridViewTextBoxColumn30 As DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn31 As DataGridViewTextBoxColumn
     Public WithEvents btnComplete As Button
-    Friend WithEvents TabPageGHG As TabPage
 End Class

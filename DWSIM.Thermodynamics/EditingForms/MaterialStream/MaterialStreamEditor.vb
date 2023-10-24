@@ -18,8 +18,6 @@ Public Class MaterialStreamEditor
 
     Public IsAccumulationStream As Boolean = False
 
-    Private ghgeditor As SharedClasses.GHGEmitterEditor
-
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -49,13 +47,6 @@ Public Class MaterialStreamEditor
 
     End Sub
 
-    Private Sub SetupGHGEditor()
-
-        ghgeditor = New SharedClasses.GHGEmitterEditor With {.SimObject = MatStream, .Dock = DockStyle.Fill}
-        TabPageGHG.Controls.Add(ghgeditor)
-
-    End Sub
-
     Private Sub MaterialStreamEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
         SaveViewState()
@@ -63,9 +54,6 @@ Public Class MaterialStreamEditor
     End Sub
 
     Sub UpdateInfo()
-
-        If ghgeditor Is Nothing Then SetupGHGEditor()
-        ghgeditor.UpdateInfo()
 
         units = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = MatStream.FlowSheet.FlowsheetOptions.NumberFormat
