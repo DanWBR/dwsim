@@ -88,7 +88,6 @@ Partial Class EditingForm_Pipe
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -688,20 +687,10 @@ Partial Class EditingForm_Pipe
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
-        '
-        resources.ApplyResources(Me.gbGHG, "gbGHG")
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
-        '
         'EditingForm_Pipe
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
@@ -785,5 +774,4 @@ Partial Class EditingForm_Pipe
     Friend WithEvents ToolTipChangeTag As ToolTip
     Public WithEvents Label8 As Label
     Public WithEvents CheckBox1 As CheckBox
-    Public WithEvents gbGHG As GroupBox
 End Class

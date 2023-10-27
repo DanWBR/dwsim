@@ -26,8 +26,6 @@ Public Class EditingForm_OPEMFC
 
         Loaded = False
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Dim su = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
@@ -89,6 +87,14 @@ Public Class EditingForm_OPEMFC
             cbEnergy.Items.AddRange(eslist)
 
             If .GraphicObject.OutputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
+
+            'annotation
+
+            Try
+                rtbAnnotations.Rtf = .Annotation
+            Catch ex As Exception
+
+            End Try
 
             'input parameters
 
@@ -229,6 +235,10 @@ Public Class EditingForm_OPEMFC
 
         End If
 
+    End Sub
+
+    Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
+        If Loaded Then SimObject.Annotation = rtbAnnotations.Rtf
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged

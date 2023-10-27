@@ -234,18 +234,6 @@ namespace DWSIM.UI.Desktop.Editors
                          {
                              userunits.speedOfSound = uarr10[arg3.SelectedIndex];
                          });
-            var uarr11 = userunits.GetUnitSet(UnitOfMeasure.heat);
-            s.CreateAndAddDropDownRow(this, "Heat/Energy", uarr11, Array.IndexOf(uarr11.ToArray(), userunits.heat),
-                         (arg3, arg2) =>
-                         {
-                             userunits.heat = uarr11[arg3.SelectedIndex];
-                         });
-            var uarr12 = userunits.GetUnitSet(UnitOfMeasure.emission_factor);
-            s.CreateAndAddDropDownRow(this, "Emission Factor", uarr12, Array.IndexOf(uarr12.ToArray(), userunits.emission_factor),
-                         (arg3, arg2) =>
-                         {
-                             userunits.emission_factor = uarr12[arg3.SelectedIndex];
-                         });
 
         }
 

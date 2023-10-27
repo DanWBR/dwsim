@@ -114,7 +114,6 @@ Partial Class EditingForm_Column
         Me.btnViewReport = New System.Windows.Forms.Button()
         Me.btnViewPropertiesReport = New System.Windows.Forms.Button()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.TabContainerSpecification.SuspendLayout()
         Me.TabCondenser.SuspendLayout()
@@ -765,7 +764,6 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
-        Me.TabPage6.Controls.Add(Me.gbGHG)
         Me.TabPage6.Controls.Add(Me.cbTS)
         Me.TabPage6.Controls.Add(Me.tbTS)
         Me.TabPage6.Controls.Add(Me.Label17)
@@ -975,15 +973,6 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
-        '
-        resources.ApplyResources(Me.gbGHG, "gbGHG")
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
-        '
         'EditingForm_Column
         '
         resources.ApplyResources(Me, "$this")
@@ -1102,5 +1091,4 @@ Partial Class EditingForm_Column
     Public WithEvents cbTS As ComboBox
     Public WithEvents tbTS As TextBox
     Public WithEvents Label17 As Label
-    Public WithEvents gbGHG As GroupBox
 End Class

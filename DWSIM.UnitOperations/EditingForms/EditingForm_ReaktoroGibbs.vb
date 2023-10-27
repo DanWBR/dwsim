@@ -29,8 +29,6 @@ Public Class EditingForm_ReaktoroGibbs
 
         Loaded = False
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem

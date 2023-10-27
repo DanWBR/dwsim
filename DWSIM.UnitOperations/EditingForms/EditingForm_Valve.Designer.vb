@@ -78,7 +78,6 @@ Partial Class EditingForm_Valve
         Me.AddUtilityTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.sizingtsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -605,20 +604,10 @@ Partial Class EditingForm_Valve
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
-        '
-        resources.ApplyResources(Me.gbGHG, "gbGHG")
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
-        '
         'EditingForm_Valve
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox3)
@@ -696,5 +685,4 @@ Partial Class EditingForm_Valve
     Public WithEvents Label14 As Label
     Friend WithEvents grid1 As unvell.ReoGrid.ReoGridControl
     Friend WithEvents Panel1 As Panel
-    Public WithEvents gbGHG As GroupBox
 End Class

@@ -145,23 +145,17 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>355, 171</value>
+  </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 741</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 161</value>
+    <value>361, 190</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
-  </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>355, 142</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 64</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
     <value>334, 26</value>
@@ -181,15 +175,15 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 64</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 78</value>
-  </data>
-  <data name="GroupBoxParameters.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
   </data>
   <data name="rbStream2.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 17</value>
@@ -209,14 +203,14 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Separation Factors specified for</value>
   </data>
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 78</value>
+  </data>
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
+  </data>
   <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 139</value>
-  </data>
-  <data name="GroupBoxConnections.Text" xml:space="preserve">
-    <value>Connections</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
     <value>307, 104</value>
@@ -338,14 +332,14 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 139</value>
+  </data>
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
+    <value>Connections</value>
+  </data>
   <data name="GroupBoxSeparationFactors.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="GroupBoxSeparationFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 262</value>
-  </data>
-  <data name="GroupBoxSeparationFactors.Text" xml:space="preserve">
-    <value>Separation Factors</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -362,20 +356,17 @@
   <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>355, 243</value>
   </data>
-  <data name="gbGHG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="GroupBoxSeparationFactors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 262</value>
   </data>
-  <data name="gbGHG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 908</value>
-  </data>
-  <data name="gbGHG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 144</value>
-  </data>
-  <data name="gbGHG.Text" xml:space="preserve">
-    <value>GHG Emissions</value>
+  <data name="GroupBoxSeparationFactors.Text" xml:space="preserve">
+    <value>Separation Factors</value>
   </data>
   <data name="GroupBoxIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 23</value>
   </data>
   <data name="GroupBoxIcon.Size" type="System.Drawing.Size, System.Drawing">
     <value>361, 77</value>
@@ -384,16 +375,13 @@
     <value>Flowsheet Object Icon</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 1061</value>
-  </data>
-  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 23</value>
+    <value>374, 934</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>374, 1061</value>
+    <value>374, 934</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>12288, 1196, 12288, 1196</value>

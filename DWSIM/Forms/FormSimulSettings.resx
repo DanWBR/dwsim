@@ -131,9 +131,6 @@
   <data name="ComboBox3.Items1" xml:space="preserve">
     <value>G</value>
   </data>
-  <data name="TabPageGHG.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
   <data name="&gt;&gt;KryptonButton22.Name" xml:space="preserve">
     <value>KryptonButton22</value>
   </data>
@@ -184,8 +181,8 @@
   <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="ComboBox3.Items16" xml:space="preserve">
-    <value>E4</value>
+  <data name="chkDisplayFloatingTableCompoundAmounts.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -196,17 +193,14 @@
   <data name="Label11.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;KryptonButton15.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Selecione os componentes que deseja adicionar à simulação.</value>
   </data>
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
   </data>
   <data name="btnConfigPP.Text" xml:space="preserve">
     <value>Config.</value>
-  </data>
-  <data name="&gt;&gt;chkDisplayFloatingTableCompoundAmounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkMSShowE.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 213</value>
@@ -235,8 +229,8 @@
   <data name="ComboBox3.Items4" xml:space="preserve">
     <value>G6</value>
   </data>
-  <data name="btnClearSelection.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbSpecCalcMode.Items" xml:space="preserve">
+    <value>After Source Object</value>
   </data>
   <data name="Button8.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -250,20 +244,14 @@
   <data name="TBaut.Location" type="System.Drawing.Point, System.Drawing">
     <value>74, 72</value>
   </data>
-  <data name="tsmiViewComp.Text" xml:space="preserve">
-    <value>View Properties</value>
-  </data>
-  <data name="&gt;&gt;chkEnableUndoRedo.Name" xml:space="preserve">
-    <value>chkEnableUndoRedo</value>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Tipo do Objeto</value>
   </data>
   <data name="&gt;&gt;ListBox3.Name" xml:space="preserve">
     <value>ListBox3</value>
   </data>
   <data name="&gt;&gt;chkSkipEqCalcs.Parent" xml:space="preserve">
     <value>GroupBox4</value>
-  </data>
-  <data name="chkForceObjectCalculation.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
   </data>
   <data name="&gt;&gt;TextBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -286,9 +274,6 @@
   <data name="Button3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="chkSkipEqCalcs.Text" xml:space="preserve">
-    <value>Não calcular equilíbrio de fases em Correntes de Matéria bem-definidas</value>
-  </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>857, 454</value>
   </data>
@@ -297,6 +282,9 @@
   </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
     <value>813, 271</value>
+  </data>
+  <data name="chkForceObjectCalculation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 81</value>
   </data>
   <data name="chkUsePassword.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -321,6 +309,9 @@
   </data>
   <data name="KryptonButton22.Location" type="System.Drawing.Point, System.Drawing">
     <value>378, 16</value>
+  </data>
+  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>296, 13</value>
@@ -355,14 +346,17 @@
   <data name="PropertyListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;btnCopyPP.Parent" xml:space="preserve">
-    <value>GroupBox12</value>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="PanelPP.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="&gt;&gt;cbForcePhase.Name" xml:space="preserve">
-    <value>cbForcePhase</value>
+  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
+    <value>GroupBox14</value>
   </data>
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -424,11 +418,11 @@
   <data name="&gt;&gt;Label27.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="chkMSShowV.ToolTip" xml:space="preserve">
-    <value />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Tipo do Objeto</value>
+  <data name="chkShowAnchoredPropertyLists.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="ComboBox3.ToolTip" xml:space="preserve">
     <value />
@@ -562,15 +556,12 @@
   <data name="lblsla.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;chkShowDynProps.Parent" xml:space="preserve">
-    <value>GroupBox11</value>
-  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABg
-        MAAAAk1TRnQBSQFMAgEBCgEAAWQBDwFwAQ8BEAEAARABAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        MAAAAk1TRnQBSQFMAgEBCgEAAWQBDwFoAQ8BEAEAARABAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMC4ABAEDOwFkAWUCUwH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         A1kBvgFbAloBxAMxAU0DYQHrAQABgQEAAf8DAwEEpAADKQE9AWUCXAHnAbICgQH/AcsBqwGJAf8B0QG0
         AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8DYQHrAy0BRhAAAx4BKwNSAaUDgAH+AY8BzQHrAf8BgQG3
@@ -800,6 +791,9 @@
   <data name="tbEnergyBalTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 20</value>
   </data>
+  <data name="chkIncludeFlowsheetMessagesInFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;ComboBox3.Name" xml:space="preserve">
     <value>ComboBox3</value>
   </data>
@@ -814,6 +808,9 @@
   </data>
   <data name="chkMSShowW.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 17</value>
+  </data>
+  <data name="Label30.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="TabPage3.ToolTip" xml:space="preserve">
     <value />
@@ -854,6 +851,9 @@
   <data name="&gt;&gt;GroupBox12.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblsla.Name" xml:space="preserve">
+    <value>lblsla</value>
+  </data>
   <data name="ComboBox3.Items7" xml:space="preserve">
     <value>N</value>
   </data>
@@ -878,17 +878,17 @@
   <data name="&gt;&gt;chkShowExtraPropertiesEditor.Parent" xml:space="preserve">
     <value>GroupBox14</value>
   </data>
-  <data name="Label17.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Column10.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="chkMSShowW.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
+  </data>
+  <data name="Button5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;chkMSShowE.Name" xml:space="preserve">
     <value>chkMSShowE</value>
@@ -950,8 +950,8 @@
   <data name="&gt;&gt;chkEnableUndoRedo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TabPage5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TBtit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 28</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Procurar</value>
@@ -968,11 +968,8 @@
   <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>328, 383</value>
   </data>
-  <data name="&gt;&gt;Button8.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
-  </data>
-  <data name="chkForceObjectCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 81</value>
+  <data name="&gt;&gt;btnCopyPP.Parent" xml:space="preserve">
+    <value>GroupBox12</value>
   </data>
   <data name="btnInfoLeft.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
@@ -995,14 +992,14 @@
   <data name="chkIncludeFlowsheetMessagesInFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 58</value>
   </data>
-  <data name="chkShowMSPressure.ToolTip" xml:space="preserve">
-    <value />
+  <data name="cbEnergyBalanceCheck.Items" xml:space="preserve">
+    <value>Ignorar</value>
   </data>
   <data name="Label14.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="ComboBox3.Items8" xml:space="preserve">
-    <value>N2</value>
+  <data name="chkMSShowV.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox3.ToolTip" xml:space="preserve">
     <value />
@@ -1010,7 +1007,7 @@
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>445, 326</value>
   </data>
-  <data name="Label28.ToolTip" xml:space="preserve">
+  <data name="TabPage1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;chkMSSHowM.Parent" xml:space="preserve">
@@ -1037,9 +1034,6 @@
   <data name="DataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
-  </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -1049,20 +1043,23 @@
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Origem</value>
   </data>
-  <data name="colTag.HeaderText" xml:space="preserve">
-    <value>Tag</value>
+  <data name="&gt;&gt;TBaut.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;Column18.Name" xml:space="preserve">
-    <value>Column18</value>
+  <data name="&gt;&gt;TabPageReactions.Name" xml:space="preserve">
+    <value>TabPageReactions</value>
   </data>
   <data name="&gt;&gt;FontDialog1.Name" xml:space="preserve">
     <value>FontDialog1</value>
   </data>
   <data name="&gt;&gt;TabPage7.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;chkShowExtraPropertiesEditor.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;KryptonButton15.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="TBtit.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1082,14 +1079,8 @@
   <data name="btnConfigPP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TabPageGHG.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;TabPageGHG.Name" xml:space="preserve">
-    <value>TabPageGHG</value>
   </data>
   <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1100,8 +1091,8 @@
   <data name="&gt;&gt;KryptonButton18.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Column5.MinimumWidth" type="System.Int32, mscorlib">
-    <value>40</value>
+  <data name="&gt;&gt;GroupBox11.Parent" xml:space="preserve">
+    <value>TabPage6</value>
   </data>
   <data name="Button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1115,8 +1106,8 @@
   <data name="&gt;&gt;PanelUnits.Parent" xml:space="preserve">
     <value>TabPage4</value>
   </data>
-  <data name="cbSpecCalcMode.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tbPassword.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="Button13.Text" xml:space="preserve">
     <value>Importar de Fontes Online</value>
@@ -1142,14 +1133,14 @@
   <data name="&gt;&gt;TabPageReactions.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
+  <data name="btnClearSelection.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;chkMSShowE.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnConfigPP.Name" xml:space="preserve">
-    <value>btnConfigPP</value>
   </data>
   <data name="KryptonButton6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1199,8 +1190,11 @@
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;tsmiViewComp.Name" xml:space="preserve">
-    <value>tsmiViewComp</value>
+  <data name="Label28.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkShowMSPressure.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="ComboBox1.Items8" xml:space="preserve">
     <value>N2</value>
@@ -1241,9 +1235,6 @@
   <data name="chkIncludeFlowsheetMessagesInFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 17</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;Column4.Name" xml:space="preserve">
     <value>Column4</value>
   </data>
@@ -1270,9 +1261,6 @@
   </data>
   <data name="chkMSShowE.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;Label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtSearch.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -1307,8 +1295,8 @@
   <data name="&gt;&gt;chkMSSHowM.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label20.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox16.Text" xml:space="preserve">
+    <value>Balanço de Energia</value>
   </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
@@ -1388,8 +1376,8 @@
   <data name="&gt;&gt;cbMassBalanceCheck.Name" xml:space="preserve">
     <value>cbMassBalanceCheck</value>
   </data>
-  <data name="Column18.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Correntes de Matéria</value>
   </data>
   <data name="TabControl1.ToolTip" xml:space="preserve">
     <value />
@@ -1430,14 +1418,17 @@
   <data name="&gt;&gt;GroupBox13.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="cbDefaultFloatingTableCompoundAmountBasis.Items1" xml:space="preserve">
+    <value>Frações Mássicas</value>
+  </data>
   <data name="btnDeletePP.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 39</value>
   </data>
   <data name="&gt;&gt;chkESShowE.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnClearSelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
+  <data name="Button13.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;cbObjectType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1466,9 +1457,6 @@
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
   </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Correntes de Matéria</value>
-  </data>
   <data name="chkUsePassword.Text" xml:space="preserve">
     <value>Proteger com Senha</value>
   </data>
@@ -1492,6 +1480,9 @@
   </data>
   <data name="&gt;&gt;Button5.Name" xml:space="preserve">
     <value>Button5</value>
+  </data>
+  <data name="chkShowMSPressure.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -1519,9 +1510,6 @@
   </data>
   <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 332</value>
-  </data>
-  <data name="Button13.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1583,9 +1571,6 @@
   <data name="Button5.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
-  <data name="chkMSShowW.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
   <data name="PanelPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -1607,8 +1592,8 @@
   <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
-    <value>GroupBox14</value>
+  <data name="chkShowFloatingTables.Text" xml:space="preserve">
+    <value>Exibir Tabelas Flutuantes</value>
   </data>
   <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>387, 27</value>
@@ -1673,9 +1658,6 @@
   <data name="&gt;&gt;chkMSSHowM.Name" xml:space="preserve">
     <value>chkMSSHowM</value>
   </data>
-  <data name="ComboBox1.Items11" xml:space="preserve">
-    <value>R</value>
-  </data>
   <data name="chkMSSHowM.Text" xml:space="preserve">
     <value>Exibir Vazão Molar</value>
   </data>
@@ -1733,9 +1715,6 @@
   <data name="KryptonButton5.Text" xml:space="preserve">
     <value>&lt; Remover</value>
   </data>
-  <data name="cbObjectType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 21</value>
-  </data>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1744,9 +1723,6 @@
   </data>
   <data name="chkForceObjectCalculation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="chkShowAnchoredPropertyLists.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
   </data>
   <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1778,6 +1754,9 @@
   <data name="&gt;&gt;Column16.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Column18.Name" xml:space="preserve">
+    <value>Column18</value>
+  </data>
   <data name="&gt;&gt;GroupBox10.Parent" xml:space="preserve">
     <value>TabPage1</value>
   </data>
@@ -1805,11 +1784,11 @@
   <data name="&gt;&gt;chkESShowE.Name" xml:space="preserve">
     <value>chkESShowE</value>
   </data>
-  <data name="KryptonButton15.ToolTip" xml:space="preserve">
+  <data name="Button3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;GroupBox16.Name" xml:space="preserve">
-    <value>GroupBox16</value>
+  <data name="KryptonButton15.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox9.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 25</value>
@@ -1831,6 +1810,9 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Procurar:</value>
+  </data>
+  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label27.Name" xml:space="preserve">
     <value>Label27</value>
@@ -1886,8 +1868,8 @@
   <data name="&gt;&gt;btnClearSelection.Parent" xml:space="preserve">
     <value>GroupBox14</value>
   </data>
-  <data name="TBtit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 28</value>
+  <data name="&gt;&gt;ComboBox2.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 319</value>
@@ -1922,6 +1904,9 @@
   <data name="btnCloneSI.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
+    <value>Column10</value>
+  </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Items4" xml:space="preserve">
     <value>Vazões Mássicas</value>
   </data>
@@ -1929,7 +1914,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;TabPage6.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ListBox4.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1946,9 +1931,6 @@
   <data name="&gt;&gt;cbSpecCalcMode.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="cbSpecCalcMode.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
   </data>
@@ -1958,8 +1940,8 @@
   <data name="TabPage6.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 22</value>
+  <data name="cbObjectType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 21</value>
   </data>
   <data name="chkMSShowV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1976,11 +1958,11 @@
   <data name="tbPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 414</value>
   </data>
-  <data name="Button5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox13.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;lblsla.Name" xml:space="preserve">
-    <value>lblsla</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 60</value>
   </data>
   <data name="cbEnergyBalanceCheck.ToolTip" xml:space="preserve">
     <value />
@@ -1991,8 +1973,8 @@
   <data name="GroupBox13.Size" type="System.Drawing.Size, System.Drawing">
     <value>845, 95</value>
   </data>
-  <data name="cbDefaultFloatingTableCompoundAmountBasis.Items1" xml:space="preserve">
-    <value>Frações Mássicas</value>
+  <data name="ListBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 215</value>
   </data>
   <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2011,9 +1993,6 @@
   </data>
   <data name="chkShowMSPressure.Text" xml:space="preserve">
     <value>Exibir Pressão</value>
-  </data>
-  <data name="KryptonButton6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 20</value>
   </data>
   <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
     <value>TabPage3</value>
@@ -2034,7 +2013,7 @@
     <value>ImageList1</value>
   </data>
   <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
@@ -2072,11 +2051,11 @@
   <data name="cbForcePhase.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;tbPassword.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;btnDeletePP.Parent" xml:space="preserve">
     <value>GroupBox12</value>
-  </data>
-  <data name="tbPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
   </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Items2" xml:space="preserve">
     <value>Frações Volumétricas</value>
@@ -2138,20 +2117,23 @@
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox16.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
-    <value>GroupBox11</value>
-  </data>
-  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;GroupBox16.Name" xml:space="preserve">
+    <value>GroupBox16</value>
   </data>
   <data name="cbOrderCompoundsBy.Items10" xml:space="preserve">
     <value>Tag (Descendente)</value>
+  </data>
+  <data name="&gt;&gt;TBtit.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;TextBox2.Name" xml:space="preserve">
     <value>TextBox2</value>
@@ -2180,9 +2162,6 @@
   <data name="btnInfoLeft.Text" xml:space="preserve">
     <value>Ver Selecionado</value>
   </data>
-  <data name="&gt;&gt;TabPageGHG.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
   <data name="&gt;&gt;GroupBox10.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -2207,11 +2186,11 @@
   <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 7</value>
-  </data>
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
     <value>TabPage5</value>
+  </data>
+  <data name="&gt;&gt;chkEnableUndoRedo.Name" xml:space="preserve">
+    <value>chkEnableUndoRedo</value>
   </data>
   <data name="tbEnergyBalTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>313, 61</value>
@@ -2228,8 +2207,8 @@
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Nome (clique para editar)</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 60</value>
+  <data name="&gt;&gt;chkDisplayFloatingTableCompoundAmounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkDisplayFloatingTableCompoundAmounts.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2239,9 +2218,6 @@
   </data>
   <data name="&gt;&gt;chkShowMSTemp.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="&gt;&gt;chkDisplayFloatingTableCompoundAmounts.Name" xml:space="preserve">
-    <value>chkDisplayFloatingTableCompoundAmounts</value>
   </data>
   <data name="&gt;&gt;chkMSShowV.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -2261,8 +2237,8 @@
   <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>310, 22</value>
   </data>
-  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="chkSkipEqCalcs.Text" xml:space="preserve">
+    <value>Não calcular equilíbrio de fases em Correntes de Matéria bem-definidas</value>
   </data>
   <data name="Button8.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2300,11 +2276,11 @@
   <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Unidade</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
   </data>
   <data name="KryptonButton15.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 16</value>
@@ -2320,6 +2296,9 @@
   </data>
   <data name="GroupBox14.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 8</value>
+  </data>
+  <data name="TabPage5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
@@ -2365,6 +2344,9 @@
   </data>
   <data name="chkMSShowV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label20.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="tbMassBalTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -2429,14 +2411,14 @@
   <data name="btnSelectAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
   </data>
+  <data name="chkShowAnchoredPropertyLists.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 51</value>
+  </data>
   <data name="TBdesc.Location" type="System.Drawing.Point, System.Drawing">
     <value>74, 116</value>
   </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
-  </data>
-  <data name="&gt;&gt;TabPage7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2465,11 +2447,11 @@
   <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="cbSpecCalcMode.Items" xml:space="preserve">
-    <value>After Source Object</value>
+  <data name="chkUsePassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 417</value>
   </data>
-  <data name="tbPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+  <data name="&gt;&gt;TabPage7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbMassBalTol.Name" xml:space="preserve">
     <value>tbMassBalTol</value>
@@ -2540,29 +2522,23 @@
   <data name="&gt;&gt;casno.Name" xml:space="preserve">
     <value>casno</value>
   </data>
-  <data name="&gt;&gt;TBaut.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;GroupBox11.Name" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
   <data name="Button8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="TabPage7.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
   <data name="&gt;&gt;chkESShowE.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="PropertyListView.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="chkForceObjectCalculation.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="ListBox4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;btnConfigPP.Name" xml:space="preserve">
+    <value>btnConfigPP</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Componentes</value>
@@ -2570,8 +2546,8 @@
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
-  <data name="TabPageGHG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;GroupBox8.Name" xml:space="preserve">
+    <value>GroupBox8</value>
   </data>
   <data name="KryptonButton18.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2596,6 +2572,9 @@
   </data>
   <data name="TBaut.Size" type="System.Drawing.Size, System.Drawing">
     <value>777, 20</value>
+  </data>
+  <data name="Column5.MinimumWidth" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="&gt;&gt;ogc1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2630,9 +2609,6 @@
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="ListBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 215</value>
-  </data>
   <data name="KryptonButton5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2666,6 +2642,9 @@
   <data name="&gt;&gt;PanelUnits.Name" xml:space="preserve">
     <value>PanelUnits</value>
   </data>
+  <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
   <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
@@ -2675,8 +2654,8 @@
   <data name="&gt;&gt;btnCopyPP.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
-    <value>Column10</value>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 7</value>
   </data>
   <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2738,6 +2717,9 @@
   <data name="&gt;&gt;KryptonButton3.Name" xml:space="preserve">
     <value>KryptonButton3</value>
   </data>
+  <data name="&gt;&gt;PanelUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TabPage7.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -2771,9 +2753,6 @@
   <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="&gt;&gt;chkEnableUndoRedo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="GroupBox4.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -2795,14 +2774,14 @@
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="tbPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="&gt;&gt;Button4.Name" xml:space="preserve">
     <value>Button4</value>
   </data>
   <data name="&gt;&gt;GroupBox8.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;btnSelectAll.Name" xml:space="preserve">
     <value>btnSelectAll</value>
@@ -2834,8 +2813,8 @@
   <data name="chkShowDynProps.Text" xml:space="preserve">
     <value>Exibir Propriedades do Modo Dinâmico</value>
   </data>
-  <data name="&gt;&gt;GroupBox8.Name" xml:space="preserve">
-    <value>GroupBox8</value>
+  <data name="KryptonButton23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>523, 16</value>
   </data>
   <data name="chkEnableUndoRedo.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2852,8 +2831,8 @@
   <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
     <value>863, 460</value>
   </data>
-  <data name="chkShowFloatingTables.Text" xml:space="preserve">
-    <value>Exibir Tabelas Flutuantes</value>
+  <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2873,8 +2852,8 @@
   <data name="&gt;&gt;Column9.Name" xml:space="preserve">
     <value>Column9</value>
   </data>
-  <data name="KryptonButton23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>523, 16</value>
+  <data name="&gt;&gt;tsmiViewComp.Name" xml:space="preserve">
+    <value>tsmiViewComp</value>
   </data>
   <data name="chkShowMSTemp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2882,14 +2861,8 @@
   <data name="btnClearSelection.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;PropertyListView.Name" xml:space="preserve">
-    <value>PropertyListView</value>
-  </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
-  </data>
-  <data name="TabPageGHG.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;KryptonButton2.Parent" xml:space="preserve">
     <value>GroupBox8</value>
@@ -2939,8 +2912,8 @@
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;KryptonButton18.Parent" xml:space="preserve">
-    <value>GroupBox18</value>
+  <data name="ComboBox1.Items2" xml:space="preserve">
+    <value>G2</value>
   </data>
   <data name="GroupBox15.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2981,8 +2954,8 @@
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
-    <value>PanelPP</value>
+  <data name="&gt;&gt;chkEnableUndoRedo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkForceObjectCalculation.Name" xml:space="preserve">
     <value>chkForceObjectCalculation</value>
@@ -3041,20 +3014,20 @@
   <data name="&gt;&gt;cbSpecCalcMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;cbForcePhase.Name" xml:space="preserve">
+    <value>cbForcePhase</value>
+  </data>
   <data name="chkMSShowE.Text" xml:space="preserve">
     <value>Exibir Fluxo Energético</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="ListBox3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;chkShowMSPressure.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="&gt;&gt;Button5.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
-    <value>TabPage7</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>186, 357</value>
@@ -3073,6 +3046,9 @@
   </data>
   <data name="&gt;&gt;cbForcePhase.Parent" xml:space="preserve">
     <value>GroupBox4</value>
+  </data>
+  <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>846, 111</value>
   </data>
   <data name="&gt;&gt;chkMSShowW.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -3110,8 +3086,8 @@
   <data name="ComboBox3.Items15" xml:space="preserve">
     <value>E3</value>
   </data>
-  <data name="chkShowAnchoredPropertyLists.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 51</value>
+  <data name="ComboBox3.Items16" xml:space="preserve">
+    <value>E4</value>
   </data>
   <data name="ComboBox3.Items17" xml:space="preserve">
     <value>E6</value>
@@ -3167,8 +3143,8 @@
   <data name="&gt;&gt;chkMSShowW.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkShowMSPressure.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="&gt;&gt;chkShowDynProps.Parent" xml:space="preserve">
+    <value>GroupBox11</value>
   </data>
   <data name="Label6.ToolTip" xml:space="preserve">
     <value />
@@ -3197,6 +3173,9 @@
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;KryptonButton5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Selecione as propriedades a exibir nas tabelas flutuantes de acordo com o tipo do objeto selecionado.</value>
   </data>
@@ -3221,8 +3200,8 @@
   <data name="&gt;&gt;GroupBox5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Importar de Arquivo JSON</value>
+  <data name="&gt;&gt;TabPage6.Name" xml:space="preserve">
+    <value>TabPage6</value>
   </data>
   <data name="ComboBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>310, 56</value>
@@ -3258,7 +3237,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="chkShowAnchoredPropertyLists.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3275,8 +3254,8 @@
   <data name="&gt;&gt;TabPage7.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="GroupBox16.Text" xml:space="preserve">
-    <value>Balanço de Energia</value>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;Label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3293,8 +3272,8 @@
   <data name="&gt;&gt;chkShowMSPressure.Name" xml:space="preserve">
     <value>chkShowMSPressure</value>
   </data>
-  <data name="TBdesc.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="KryptonButton6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
   </data>
   <data name="KryptonButton4.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3368,11 +3347,17 @@
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 234</value>
   </data>
+  <data name="chkShowExtraPropertiesEditor.Text" xml:space="preserve">
+    <value>Mostrar Editor de Propriedades Definidas pelo Usuário</value>
+  </data>
   <data name="&gt;&gt;Label27.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
   <data name="chkSkipEqCalcs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;KryptonButton5.Name" xml:space="preserve">
+    <value>KryptonButton5</value>
   </data>
   <data name="cbEnergyBalanceCheck.Location" type="System.Drawing.Point, System.Drawing">
     <value>313, 25</value>
@@ -3389,8 +3374,8 @@
   <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 26</value>
   </data>
-  <data name="&gt;&gt;KryptonButton18.Name" xml:space="preserve">
-    <value>KryptonButton18</value>
+  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
+    <value>ComboBox1</value>
   </data>
   <data name="ComboBox1.Items" xml:space="preserve">
     <value>F</value>
@@ -3488,9 +3473,6 @@
   <data name="chkShowFloatingTables.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox13.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
   <data name="&gt;&gt;cbSpecCalcMode.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -3500,17 +3482,20 @@
   <data name="&gt;&gt;ListBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;KryptonButton23.Name" xml:space="preserve">
-    <value>KryptonButton23</value>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Pressione ENTER para adicionar.</value>
   </data>
   <data name="TBaut.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="chkIncludeFlowsheetMessagesInFile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
+    <value>TabPage7</value>
   </data>
   <data name="PanelPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>860, 413</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Importar de Arquivo JSON</value>
   </data>
   <data name="&gt;&gt;GroupBox11.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -3518,14 +3503,17 @@
   <data name="&gt;&gt;chkShowMSPressure.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="chkESShowE.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 287</value>
   </data>
   <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
     <value>TabPage4</value>
   </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Pressione ENTER para adicionar.</value>
+  <data name="Label17.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cbObjectType.Location" type="System.Drawing.Point, System.Drawing">
     <value>91, 105</value>
@@ -3575,14 +3563,17 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
+  <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;ComboBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;TabPage6.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="&gt;&gt;KryptonButton18.Parent" xml:space="preserve">
+    <value>GroupBox18</value>
   </data>
   <data name="GroupBox5.ToolTip" xml:space="preserve">
     <value />
@@ -3635,7 +3626,7 @@
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 9</value>
   </data>
-  <data name="chkMSShowW.AutoSize" type="System.Boolean, mscorlib">
+  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;btnCopyPP.Name" xml:space="preserve">
@@ -3644,8 +3635,8 @@
   <data name="&gt;&gt;chkShowFloatingTables.Name" xml:space="preserve">
     <value>chkShowFloatingTables</value>
   </data>
-  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
+    <value>GroupBox11</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -3656,8 +3647,11 @@
   <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 25</value>
+  <data name="&gt;&gt;KryptonButton23.Name" xml:space="preserve">
+    <value>KryptonButton23</value>
+  </data>
+  <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
+    <value>PanelPP</value>
   </data>
   <data name="&gt;&gt;btnInfoLeft.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3686,6 +3680,9 @@
   <data name="KryptonButton5.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="btnClearSelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 23</value>
+  </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
@@ -3707,8 +3704,8 @@
   <data name="Button9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;KryptonButton5.Name" xml:space="preserve">
-    <value>KryptonButton5</value>
+  <data name="&gt;&gt;Button8.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;TBaut.Name" xml:space="preserve">
     <value>TBaut</value>
@@ -3728,6 +3725,9 @@
   <data name="&gt;&gt;tsmiReplace.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
   <data name="&gt;&gt;chkShowExtraPropertiesEditor.Name" xml:space="preserve">
     <value>chkShowExtraPropertiesEditor</value>
   </data>
@@ -3740,6 +3740,9 @@
   <data name="&gt;&gt;cbEnergyBalanceCheck.Name" xml:space="preserve">
     <value>cbEnergyBalanceCheck</value>
   </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 25</value>
+  </data>
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
   </data>
@@ -3751,9 +3754,6 @@
   </data>
   <data name="&gt;&gt;btnCopyPP.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbForcePhase.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="cbSpecCalcMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 112</value>
@@ -3793,9 +3793,6 @@
   </data>
   <data name="chkShowMSPressure.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 85</value>
-  </data>
-  <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;lblsla.Parent" xml:space="preserve">
     <value>GroupBox14</value>
@@ -3839,8 +3836,8 @@
   <data name="&gt;&gt;Label18.Name" xml:space="preserve">
     <value>Label18</value>
   </data>
-  <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tsmiViewComp.Text" xml:space="preserve">
+    <value>View Properties</value>
   </data>
   <data name="&gt;&gt;Button3.Name" xml:space="preserve">
     <value>Button3</value>
@@ -3947,11 +3944,14 @@
   <data name="ComboBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 17</value>
   </data>
-  <data name="&gt;&gt;KryptonButton5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage7.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="btnDeletePP.Location" type="System.Drawing.Point, System.Drawing">
     <value>366, 106</value>
+  </data>
+  <data name="Column18.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;GroupBox10.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3959,8 +3959,8 @@
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>846, 111</value>
+  <data name="&gt;&gt;btnCloneSI.Name" xml:space="preserve">
+    <value>btnCloneSI</value>
   </data>
   <data name="tbMassBalTol.ToolTip" xml:space="preserve">
     <value />
@@ -3974,11 +3974,8 @@
   <data name="btnConfigPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 39</value>
   </data>
-  <data name="&gt;&gt;GroupBox11.Parent" xml:space="preserve">
-    <value>TabPage6</value>
-  </data>
-  <data name="&gt;&gt;ComboBox2.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="PropertyListView.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="ContextMenuStrip1.ToolTip" xml:space="preserve">
     <value />
@@ -3994,9 +3991,6 @@
   </data>
   <data name="chkEnableUndoRedo.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 29</value>
-  </data>
-  <data name="&gt;&gt;TabPageReactions.Name" xml:space="preserve">
-    <value>TabPageReactions</value>
   </data>
   <data name="txtSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -4034,11 +4028,8 @@
   <data name="chkMSSHowM.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 17</value>
   </data>
-  <data name="&gt;&gt;btnCloneSI.Name" xml:space="preserve">
-    <value>btnCloneSI</value>
-  </data>
-  <data name="&gt;&gt;tbPassword.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="colTag.HeaderText" xml:space="preserve">
+    <value>Tag</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -4094,8 +4085,8 @@
   <data name="&gt;&gt;chkShowMSTemp.Parent" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
-  <data name="&gt;&gt;PanelUnits.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;PropertyListView.Name" xml:space="preserve">
+    <value>PropertyListView</value>
   </data>
   <data name="GroupBox10.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -4121,8 +4112,11 @@
   <data name="&gt;&gt;Label30.Name" xml:space="preserve">
     <value>Label30</value>
   </data>
-  <data name="chkUsePassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 417</value>
+  <data name="cbSpecCalcMode.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="chkMSShowW.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="GroupBox10.ToolTip" xml:space="preserve">
     <value />
@@ -4142,17 +4136,14 @@
   <data name="ListBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
-    <value>G2</value>
-  </data>
-  <data name="cbEnergyBalanceCheck.Items" xml:space="preserve">
-    <value>Ignorar</value>
-  </data>
   <data name="Label28.Text" xml:space="preserve">
     <value>Autor:</value>
   </data>
   <data name="&gt;&gt;KryptonButton15.Parent" xml:space="preserve">
     <value>GroupBox18</value>
+  </data>
+  <data name="cbSpecCalcMode.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4175,8 +4166,8 @@
   <data name="cbForcePhase.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label28.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="chkEnableUndoRedo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4196,8 +4187,8 @@
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 405</value>
   </data>
-  <data name="Button3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;chkShowMSPressure.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="DataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -4205,8 +4196,8 @@
   <data name="Label16.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;TBtit.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="cbOrderCompoundsBy.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
   </data>
   <data name="ComboBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 21</value>
@@ -4241,14 +4232,14 @@
   <data name="ComboBox1.Items12" xml:space="preserve">
     <value>E</value>
   </data>
-  <data name="Label30.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="&gt;&gt;cbForcePhase.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="ComboBox1.Items10" xml:space="preserve">
     <value>N6</value>
   </data>
-  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="ComboBox1.Items11" xml:space="preserve">
+    <value>R</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -4277,8 +4268,8 @@
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
   </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>341, 25</value>
@@ -4292,9 +4283,6 @@
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Items" xml:space="preserve">
     <value>Frações Molares</value>
   </data>
-  <data name="TabPage1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label12.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -4304,8 +4292,8 @@
   <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="chkShowExtraPropertiesEditor.Text" xml:space="preserve">
-    <value>Mostrar Editor de Propriedades Definidas pelo Usuário</value>
+  <data name="ComboBox3.Items8" xml:space="preserve">
+    <value>N2</value>
   </data>
   <data name="&gt;&gt;ListBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4346,14 +4334,17 @@
   <data name="&gt;&gt;Button5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;TabPage6.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="TBdesc.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="TBdesc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;DataGridViewPP.Parent" xml:space="preserve">
     <value>GroupBox6</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Selecione os componentes que deseja adicionar à simulação.</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
     <value>GroupBox3</value>
@@ -4394,26 +4385,17 @@
   <data name="Label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="cbOrderCompoundsBy.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
   <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="casno.HeaderText" xml:space="preserve">
     <value>Número CAS</value>
-  </data>
-  <data name="Label28.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
     <value>416, 350</value>
   </data>
   <data name="&gt;&gt;tsmiReplace.Name" xml:space="preserve">
     <value>tsmiReplace</value>
-  </data>
-  <data name="&gt;&gt;TabPageGHG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiViewComp.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -4457,8 +4439,8 @@
   <data name="&gt;&gt;DataGridView1.Name" xml:space="preserve">
     <value>DataGridView1</value>
   </data>
-  <data name="chkDisplayFloatingTableCompoundAmounts.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4487,9 +4469,6 @@
   <data name="btnInfoLeft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TabPage6.Name" xml:space="preserve">
-    <value>TabPage6</value>
-  </data>
   <data name="Label7.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -4505,17 +4484,17 @@
   <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
   <data name="&gt;&gt;GroupBox18.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;chkDisplayFloatingTableCompoundAmounts.Name" xml:space="preserve">
+    <value>chkDisplayFloatingTableCompoundAmounts</value>
   </data>
   <data name="PanelPP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;KryptonButton18.Name" xml:space="preserve">
+    <value>KryptonButton18</value>
   </data>
   <data name="DataGridViewPP.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -4526,8 +4505,8 @@
   <data name="TabPageReactions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 22</value>
   </data>
   <data name="cbOrderCompoundsBy.Items" xml:space="preserve">
     <value>Padrão</value>

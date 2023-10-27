@@ -257,14 +257,14 @@
   <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
   </data>
+  <data name="rtbAnnotations.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="rtbAnnotations.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>None</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 242</value>
-  </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 670</value>
+    <value>335, 216</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
@@ -311,30 +311,6 @@
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General</value>
-  </data>
-  <data name="gbGHG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="gbGHG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 482</value>
-  </data>
-  <data name="gbGHG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 184</value>
-  </data>
-  <data name="gbGHG.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="gbGHG.Text" xml:space="preserve">
-    <value>GHG Emissions</value>
-  </data>
-  <data name="gbGHG.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="gbGHG.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="gbGHG.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>378, 941</value>

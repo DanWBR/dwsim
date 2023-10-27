@@ -222,28 +222,6 @@ Namespace UnitOperations
 
 #Region "   DWSIM Specific"
 
-        Public Overrides Function GetEnergyConsumption() As Double
-
-            Dim ec As Double = 0
-            For Each ic In GraphicObject.InputConnectors
-                If ic.Type = GraphicObjects.ConType.ConEn And ic.IsAttached Then
-                    Dim es = DirectCast(FlowSheet.SimulationObjects(ic.AttachedConnector.AttachedFrom.Name), IEnergyStream)
-                    ec += es.GetEnergyFlow()
-                End If
-            Next
-            If GraphicObject.EnergyConnector.Active Then
-                If GraphicObject.EnergyConnector.IsAttached Then
-                    If GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom IsNot Nothing Then
-                        Dim es = DirectCast(FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom.Name), IEnergyStream)
-                        ec += es.GetEnergyFlow()
-                    End If
-                End If
-            End If
-
-            Return ec
-
-        End Function
-
         Public Overrides Function GetDebugReport() As String
 
             Me.DebugMode = True

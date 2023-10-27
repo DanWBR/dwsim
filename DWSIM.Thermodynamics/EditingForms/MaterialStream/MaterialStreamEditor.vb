@@ -1842,33 +1842,6 @@ Public Class MaterialStreamEditor
 
     End Sub
 
-    Private Sub btnComplete_Click(sender As Object, e As EventArgs) Handles btnComplete.Click
-
-        If Me.ValidateData() Then
-
-            Dim ri = gridInputComposition.SelectedCells(0).RowIndex
-            Dim i As Integer, sum As Double
-
-            Select Case cbCompBasis.SelectedIndex
-
-                Case 0, 1
-
-                    i = 0
-                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If i <> ri Then
-                            sum += gridInputComposition.Rows(i).Cells(1).Value.ToString().ToDoubleFromCurrent()
-                        End If
-                        i += 1
-                    Next
-                    gridInputComposition.Rows(ri).Cells(1).Value = 1.0 - sum
-
-            End Select
-
-        End If
-
-
-    End Sub
-
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then

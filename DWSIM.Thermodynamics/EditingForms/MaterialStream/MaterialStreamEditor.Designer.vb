@@ -77,7 +77,6 @@ Partial Class MaterialStreamEditor
         Me.tbEntr = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPageInputComposition = New System.Windows.Forms.TabPage()
-        Me.btnComplete = New System.Windows.Forms.Button()
         Me.btnCompAcceptChanges = New System.Windows.Forms.Button()
         Me.cbSolvent = New System.Windows.Forms.ComboBox()
         Me.btnEraseInput = New System.Windows.Forms.Button()
@@ -526,7 +525,6 @@ Partial Class MaterialStreamEditor
         'TabPageInputComposition
         '
         resources.ApplyResources(Me.TabPageInputComposition, "TabPageInputComposition")
-        Me.TabPageInputComposition.Controls.Add(Me.btnComplete)
         Me.TabPageInputComposition.Controls.Add(Me.btnCompAcceptChanges)
         Me.TabPageInputComposition.Controls.Add(Me.cbSolvent)
         Me.TabPageInputComposition.Controls.Add(Me.btnEraseInput)
@@ -539,12 +537,6 @@ Partial Class MaterialStreamEditor
         Me.TabPageInputComposition.Controls.Add(Me.gridInputComposition)
         Me.TabPageInputComposition.Name = "TabPageInputComposition"
         Me.TabPageInputComposition.UseVisualStyleBackColor = True
-        '
-        'btnComplete
-        '
-        resources.ApplyResources(Me.btnComplete, "btnComplete")
-        Me.btnComplete.Name = "btnComplete"
-        Me.btnComplete.UseVisualStyleBackColor = False
         '
         'btnCompAcceptChanges
         '
@@ -1862,5 +1854,4 @@ Partial Class MaterialStreamEditor
     Public WithEvents gridPhaseTotal As DataGridView
     Public WithEvents DataGridViewTextBoxColumn30 As DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn31 As DataGridViewTextBoxColumn
-    Public WithEvents btnComplete As Button
 End Class

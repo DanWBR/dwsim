@@ -276,8 +276,4 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetEditingForm() As System.Windows.Forms.Form
 
-    Property GHGEmissionData As IGHGEmitter
-
-    Function GetEnergyConsumption() As Double
-
 End Interface

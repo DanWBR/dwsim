@@ -22,18 +22,14 @@ Partial Class EditingForm_WaterElectrolyzer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_WaterElectrolyzer))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
-        Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
@@ -67,7 +63,10 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
         Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -103,50 +102,6 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.GroupBoxConnections.TabIndex = 14
         Me.GroupBoxConnections.TabStop = False
         Me.GroupBoxConnections.Text = "Connections"
-        '
-        'btnCreateAndConnectOutlet2
-        '
-        Me.btnCreateAndConnectOutlet2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCreateAndConnectOutlet2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCreateAndConnectOutlet2.Image = CType(resources.GetObject("btnCreateAndConnectOutlet2.Image"), System.Drawing.Image)
-        Me.btnCreateAndConnectOutlet2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCreateAndConnectOutlet2.Location = New System.Drawing.Point(312, 77)
-        Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
-        Me.btnCreateAndConnectOutlet2.Size = New System.Drawing.Size(21, 21)
-        Me.btnCreateAndConnectOutlet2.TabIndex = 46
-        Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
-        '
-        'btnDisconnectOutlet2
-        '
-        Me.btnDisconnectOutlet2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDisconnectOutlet2.Image = CType(resources.GetObject("btnDisconnectOutlet2.Image"), System.Drawing.Image)
-        Me.btnDisconnectOutlet2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnDisconnectOutlet2.Location = New System.Drawing.Point(339, 77)
-        Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
-        Me.btnDisconnectOutlet2.Size = New System.Drawing.Size(21, 21)
-        Me.btnDisconnectOutlet2.TabIndex = 45
-        Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(9, 80)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(99, 13)
-        Me.Label1.TabIndex = 44
-        Me.Label1.Text = "Oxygen-Rich Outlet"
-        '
-        'cbOutlet2
-        '
-        Me.cbOutlet2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet2.FormattingEnabled = True
-        Me.cbOutlet2.Location = New System.Drawing.Point(147, 77)
-        Me.cbOutlet2.Name = "cbOutlet2"
-        Me.cbOutlet2.Size = New System.Drawing.Size(159, 21)
-        Me.cbOutlet2.TabIndex = 43
         '
         'btnCreateAndConnectEnergy
         '
@@ -378,7 +333,7 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 831)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 616)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(368, 218)
         Me.GroupBox4.TabIndex = 15
@@ -428,8 +383,8 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Parameter"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -437,8 +392,8 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle14
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn2.HeaderText = "Value"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -446,8 +401,8 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle15
         Me.Column1.FillWeight = 30.0!
         Me.Column1.HeaderText = "Units"
         Me.Column1.Name = "Column1"
@@ -482,8 +437,8 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle16
         Me.DataGridViewTextBoxColumn3.FillWeight = 60.0!
         Me.DataGridViewTextBoxColumn3.HeaderText = "Parameter"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
@@ -491,16 +446,16 @@ Partial Class EditingForm_WaterElectrolyzer
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridViewTextBoxColumn4.FillWeight = 40.0!
         Me.DataGridViewTextBoxColumn4.HeaderText = "Value"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle18
         Me.DataGridViewTextBoxColumn5.FillWeight = 30.0!
         Me.DataGridViewTextBoxColumn5.HeaderText = "Units"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
@@ -511,24 +466,56 @@ Partial Class EditingForm_WaterElectrolyzer
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
+        'btnCreateAndConnectOutlet2
         '
-        Me.gbGHG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.btnCreateAndConnectOutlet2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCreateAndConnectOutlet2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCreateAndConnectOutlet2.Image = CType(resources.GetObject("btnCreateAndConnectOutlet2.Image"), System.Drawing.Image)
+        Me.btnCreateAndConnectOutlet2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnCreateAndConnectOutlet2.Location = New System.Drawing.Point(312, 77)
+        Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
+        Me.btnCreateAndConnectOutlet2.Size = New System.Drawing.Size(21, 21)
+        Me.btnCreateAndConnectOutlet2.TabIndex = 46
+        Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
+        '
+        'btnDisconnectOutlet2
+        '
+        Me.btnDisconnectOutlet2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDisconnectOutlet2.Image = CType(resources.GetObject("btnDisconnectOutlet2.Image"), System.Drawing.Image)
+        Me.btnDisconnectOutlet2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnDisconnectOutlet2.Location = New System.Drawing.Point(339, 77)
+        Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
+        Me.btnDisconnectOutlet2.Size = New System.Drawing.Size(21, 21)
+        Me.btnDisconnectOutlet2.TabIndex = 45
+        Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label1.Location = New System.Drawing.Point(9, 80)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(99, 13)
+        Me.Label1.TabIndex = 44
+        Me.Label1.Text = "Oxygen-Rich Outlet"
+        '
+        'cbOutlet2
+        '
+        Me.cbOutlet2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gbGHG.Location = New System.Drawing.Point(12, 616)
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.Size = New System.Drawing.Size(368, 209)
-        Me.gbGHG.TabIndex = 62
-        Me.gbGHG.TabStop = False
-        Me.gbGHG.Text = "GHG Emissions"
+        Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet2.FormattingEnabled = True
+        Me.cbOutlet2.Location = New System.Drawing.Point(147, 77)
+        Me.cbOutlet2.Name = "cbOutlet2"
+        Me.cbOutlet2.Size = New System.Drawing.Size(159, 21)
+        Me.cbOutlet2.TabIndex = 43
         '
         'EditingForm_WaterElectrolyzer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(392, 1061)
-        Me.Controls.Add(Me.gbGHG)
+        Me.ClientSize = New System.Drawing.Size(392, 845)
         Me.Controls.Add(Me.GroupBoxParameters)
         Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBox4)
@@ -588,5 +575,4 @@ Partial Class EditingForm_WaterElectrolyzer
     Public WithEvents btnDisconnectOutlet2 As Button
     Public WithEvents Label1 As Label
     Public WithEvents cbOutlet2 As ComboBox
-    Public WithEvents gbGHG As GroupBox
 End Class

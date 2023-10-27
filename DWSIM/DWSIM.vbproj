@@ -544,12 +544,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineProcessor.vb" />
-    <Compile Include="Controls\GHGCompositionsEditor.Designer.vb">
-      <DependentUpon>GHGCompositionsEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GHGCompositionsEditor.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Controls\TwoDimChartControl.Designer.vb">
       <DependentUpon>TwoDimChartControl.vb</DependentUpon>
     </Compile>
@@ -645,12 +639,6 @@
       <DependentUpon>FormFileExplorer.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\FormFileExplorer.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FlowsheetComponents\FormGHGEmissionsSummary.Designer.vb">
-      <DependentUpon>FormGHGEmissionsSummary.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FlowsheetComponents\FormGHGEmissionsSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.Designer.vb">
@@ -1230,9 +1218,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\GHGCompositionsEditor.resx">
-      <DependentUpon>GHGCompositionsEditor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TwoDimChartControl.en.resx">
       <DependentUpon>TwoDimChartControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -1350,9 +1335,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormFileExplorer.resx">
       <DependentUpon>FormFileExplorer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FlowsheetComponents\FormGHGEmissionsSummary.resx">
-      <DependentUpon>FormGHGEmissionsSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.resx">
       <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>
@@ -3039,9 +3021,6 @@
     <None Include="Resources\bubble-gum-error.gif" />
     <None Include="Resources\box_important_80px.png" />
     <None Include="Resources\box_important_48px.png" />
-    <None Include="Resources\4092.png" />
-    <None Include="Resources\add_48px.png" />
-    <None Include="Resources\28903492_7521999.jpg" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

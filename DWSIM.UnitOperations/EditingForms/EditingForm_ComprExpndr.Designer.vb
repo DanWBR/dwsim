@@ -94,7 +94,6 @@ Partial Class EditingForm_ComprExpndr
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -774,20 +773,10 @@ Partial Class EditingForm_ComprExpndr
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
-        '
-        resources.ApplyResources(Me.gbGHG, "gbGHG")
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.gbGHG, resources.GetString("gbGHG.ToolTip2"))
-        '
         'EditingForm_ComprExpndr
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.gbGHG)
         Me.Controls.Add(Me.GroupBoxConnections)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -879,5 +868,4 @@ Partial Class EditingForm_ComprExpndr
     Friend WithEvents Label25 As Label
     Public WithEvents tbRotSpeed As TextBox
     Public WithEvents Label26 As Label
-    Public WithEvents gbGHG As GroupBox
 End Class

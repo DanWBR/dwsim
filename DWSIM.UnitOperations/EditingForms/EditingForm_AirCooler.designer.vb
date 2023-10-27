@@ -127,7 +127,6 @@ Partial Class EditingForm_AirCooler
         Me.tbRefR = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -435,7 +434,6 @@ Partial Class EditingForm_AirCooler
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(3, 16)
         Me.TabControl1.Name = "TabControl1"
@@ -1296,16 +1294,6 @@ Partial Class EditingForm_AirCooler
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'TabPage4
-        '
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(330, 437)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "GHG Emissions"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
         'EditingForm_AirCooler
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1439,5 +1427,4 @@ Partial Class EditingForm_AirCooler
     Friend WithEvents rbUseGlobal As RadioButton
     Friend WithEvents rbUserDef As RadioButton
     Public WithEvents GroupBoxParameters As GroupBox
-    Friend WithEvents TabPage4 As TabPage
 End Class

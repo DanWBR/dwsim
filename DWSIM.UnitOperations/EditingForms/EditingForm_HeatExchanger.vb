@@ -26,8 +26,6 @@ Public Class EditingForm_HeatExchanger
 
     Sub UpdateInfo()
 
-        UpdateGHGEditor(TabPage2, SimObject)
-
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 

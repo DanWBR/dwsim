@@ -142,12 +142,6 @@
     <Compile Include="Editor\FormExtraProperties.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor\GHGEmitterEditor.Designer.vb">
-      <DependentUpon>GHGEmitterEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Editor\GHGEmitterEditor.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Editor\InspectorReportBar.Designer.vb">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>
     </Compile>
@@ -168,7 +162,6 @@
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
     <Compile Include="Flowsheet\SensitivityAnalysis.vb" />
-    <Compile Include="GHGEmissions\GHGEmissions.vb" />
     <Compile Include="IronPythonSnippets\IronPythonSnippets.vb" />
     <Compile Include="Misc\FOSSEEFlowsheets.vb" />
     <Compile Include="Misc\AssayClass.vb" />
@@ -222,9 +215,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FormExtraProperties.resx">
       <DependentUpon>FormExtraProperties.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor\GHGEmitterEditor.resx">
-      <DependentUpon>GHGEmitterEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\InspectorReportBar.en.resx">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>
@@ -292,16 +282,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Patrons\activepatrons.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\linking_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="GHGEmissions\emission_factors.txt" />
-    <None Include="Resources\read_64px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

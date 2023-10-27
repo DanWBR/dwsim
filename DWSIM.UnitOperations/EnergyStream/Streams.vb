@@ -76,8 +76,6 @@ Namespace Streams
             Me.ComponentDescription = description
             Init()
 
-            GHGEmissionData.OwnerID = name
-
         End Sub
 
         Sub Init()
@@ -269,12 +267,6 @@ Namespace Streams
         End Function
 
 #End Region
-
-        Public Overrides Function GetEnergyConsumption() As Double
-
-            Return EnergyFlow.GetValueOrDefault()
-
-        End Function
 
         Public Overrides Sub RunDynamicModel()
 

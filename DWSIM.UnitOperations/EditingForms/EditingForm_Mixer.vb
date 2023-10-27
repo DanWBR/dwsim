@@ -21,8 +21,6 @@ Public Class EditingForm_Mixer
 
         Loaded = False
 
-        UpdateGHGEditor(gbGHG, MixerObject)
-
         If Host.Items.Where(Function(x) x.Name.Contains(MixerObject.GraphicObject.Tag)).Count > 0 Then
             If InspReportBar Is Nothing Then
                 InspReportBar = New SharedClasses.InspectorReportBar

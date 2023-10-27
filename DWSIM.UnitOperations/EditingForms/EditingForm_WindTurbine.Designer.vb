@@ -71,7 +71,6 @@ Partial Class EditingForm_WindTurbine
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBoxResults.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -84,7 +83,7 @@ Partial Class EditingForm_WindTurbine
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 748)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 568)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(388, 223)
         Me.GroupBox4.TabIndex = 24
@@ -97,7 +96,7 @@ Partial Class EditingForm_WindTurbine
         Me.rtbAnnotations.Location = New System.Drawing.Point(3, 16)
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil\fcharset0 " &
-    "Microsoft Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.22621}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\par" &
+    "Microsoft Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\par" &
     "d\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -595,24 +594,12 @@ Partial Class EditingForm_WindTurbine
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
-        '
-        Me.gbGHG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gbGHG.Location = New System.Drawing.Point(12, 568)
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.Size = New System.Drawing.Size(388, 174)
-        Me.gbGHG.TabIndex = 62
-        Me.gbGHG.TabStop = False
-        Me.gbGHG.Text = "GHG Emissions"
-        '
         'EditingForm_WindTurbine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(412, 983)
-        Me.Controls.Add(Me.gbGHG)
+        Me.ClientSize = New System.Drawing.Size(412, 821)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBoxParameters)
@@ -681,5 +668,4 @@ Partial Class EditingForm_WindTurbine
     Public WithEvents tbAtmPres As TextBox
     Public WithEvents Label10 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
-    Public WithEvents gbGHG As GroupBox
 End Class

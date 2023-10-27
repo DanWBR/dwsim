@@ -31,8 +31,6 @@ Public Class EditingForm_WindTurbine
 
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         With SimObject
 
             'first block

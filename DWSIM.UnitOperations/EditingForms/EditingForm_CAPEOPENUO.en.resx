@@ -377,36 +377,11 @@
   <data name="GroupBoxIcon.Text" xml:space="preserve">
     <value>Flowsheet Object Icon</value>
   </data>
-  <data name="gbGHG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="gbGHG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 876</value>
-  </data>
-  <data name="gbGHG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 173</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="gbGHG.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="gbGHG.Text" xml:space="preserve">
-    <value>GHG Emissions</value>
-  </data>
-  <data name="gbGHG.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="gbGHG.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="gbGHG.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>382, 1061</value>
+    <value>382, 941</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>64, 30, 64, 30</value>

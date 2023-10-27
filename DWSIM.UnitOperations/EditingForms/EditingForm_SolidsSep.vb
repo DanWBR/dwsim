@@ -31,8 +31,6 @@ Public Class EditingForm_SolidsSep
 
         Loaded = False
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         chkUseEmbeddedImage.Checked = SimObject.UseEmbeddedImage
 
         If Host.Items.Where(Function(x) x.Name.Contains(SimObject.GraphicObject.Tag)).Count > 0 Then

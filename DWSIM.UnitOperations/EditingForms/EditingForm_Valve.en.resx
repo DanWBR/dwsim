@@ -326,32 +326,4 @@
   <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 26</value>
   </data>
-  <data name="gbGHG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="gbGHG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 850</value>
-  </data>
-  <data name="gbGHG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 199</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="gbGHG.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="gbGHG.Text" xml:space="preserve">
-    <value>GHG Emissions</value>
-  </data>
-  <data name="gbGHG.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="gbGHG.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="gbGHG.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>358, 1061</value>
-  </data>
 </root>

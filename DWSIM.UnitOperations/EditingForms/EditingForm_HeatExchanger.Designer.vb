@@ -36,51 +36,48 @@ Partial Class EditingForm_HeatExchanger
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.chkCalculateProfile = New System.Windows.Forms.CheckBox()
-        Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.chkForcePinchToOutlets = New System.Windows.Forms.CheckBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.tbOVF2 = New System.Windows.Forms.TextBox()
-        Me.tbColdFluidPDrop = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.cbColdFluidPDrop = New System.Windows.Forms.ComboBox()
         Me.tbOVF1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.tbHotFluidPDrop = New System.Windows.Forms.TextBox()
         Me.cbEfficiency = New System.Windows.Forms.ComboBox()
-        Me.cbHotFluidPDrop = New System.Windows.Forms.ComboBox()
         Me.tbEfficiency = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.tbColdFluidOutletT = New System.Windows.Forms.TextBox()
         Me.cbHeatLoss = New System.Windows.Forms.ComboBox()
-        Me.cbColdFluidOutletT = New System.Windows.Forms.ComboBox()
         Me.tbHeatLoss = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.tbHotFluidOutletT = New System.Windows.Forms.TextBox()
         Me.cbMITA = New System.Windows.Forms.ComboBox()
-        Me.cbHotFluidOutletT = New System.Windows.Forms.ComboBox()
         Me.tbMITA = New System.Windows.Forms.TextBox()
-        Me.chkIgnoreLMTD = New System.Windows.Forms.CheckBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.cbFlowDir = New System.Windows.Forms.ComboBox()
         Me.btnEditSTProps = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.cbHeat = New System.Windows.Forms.ComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.tbHeat = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.cbArea = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
         Me.tbArea = New System.Windows.Forms.TextBox()
-        Me.tbOverallU = New System.Windows.Forms.TextBox()
         Me.cbOverallHTC = New System.Windows.Forms.ComboBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tbOverallU = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cbFlowDir = New System.Windows.Forms.ComboBox()
+        Me.chkIgnoreLMTD = New System.Windows.Forms.CheckBox()
+        Me.cbHotFluidOutletT = New System.Windows.Forms.ComboBox()
+        Me.tbHotFluidOutletT = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbColdFluidOutletT = New System.Windows.Forms.ComboBox()
+        Me.tbColdFluidOutletT = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cbHotFluidPDrop = New System.Windows.Forms.ComboBox()
+        Me.tbHotFluidPDrop = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbColdFluidPDrop = New System.Windows.Forms.ComboBox()
+        Me.tbColdFluidPDrop = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbCalcMode = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBoxConnections = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet2 = New System.Windows.Forms.Button()
@@ -108,8 +105,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
         Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBoxResults.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -192,82 +187,53 @@ Partial Class EditingForm_HeatExchanger
         'GroupBoxParameters
         '
         resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
-        Me.GroupBoxParameters.Controls.Add(Me.TabControl1)
+        Me.GroupBoxParameters.Controls.Add(Me.chkCalculateProfile)
+        Me.GroupBoxParameters.Controls.Add(Me.chkForcePinchToOutlets)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOVF2)
+        Me.GroupBoxParameters.Controls.Add(Me.Label10)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOVF1)
+        Me.GroupBoxParameters.Controls.Add(Me.Label9)
+        Me.GroupBoxParameters.Controls.Add(Me.cbEfficiency)
+        Me.GroupBoxParameters.Controls.Add(Me.tbEfficiency)
+        Me.GroupBoxParameters.Controls.Add(Me.Label21)
+        Me.GroupBoxParameters.Controls.Add(Me.cbHeatLoss)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHeatLoss)
+        Me.GroupBoxParameters.Controls.Add(Me.Label20)
+        Me.GroupBoxParameters.Controls.Add(Me.cbMITA)
+        Me.GroupBoxParameters.Controls.Add(Me.tbMITA)
+        Me.GroupBoxParameters.Controls.Add(Me.Label18)
+        Me.GroupBoxParameters.Controls.Add(Me.btnEditSTProps)
+        Me.GroupBoxParameters.Controls.Add(Me.cbHeat)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHeat)
+        Me.GroupBoxParameters.Controls.Add(Me.cbArea)
+        Me.GroupBoxParameters.Controls.Add(Me.tbArea)
+        Me.GroupBoxParameters.Controls.Add(Me.cbOverallHTC)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOverallU)
+        Me.GroupBoxParameters.Controls.Add(Me.Label17)
+        Me.GroupBoxParameters.Controls.Add(Me.Label16)
+        Me.GroupBoxParameters.Controls.Add(Me.Label15)
+        Me.GroupBoxParameters.Controls.Add(Me.Label14)
+        Me.GroupBoxParameters.Controls.Add(Me.cbFlowDir)
+        Me.GroupBoxParameters.Controls.Add(Me.chkIgnoreLMTD)
+        Me.GroupBoxParameters.Controls.Add(Me.cbHotFluidOutletT)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHotFluidOutletT)
+        Me.GroupBoxParameters.Controls.Add(Me.Label5)
+        Me.GroupBoxParameters.Controls.Add(Me.cbColdFluidOutletT)
+        Me.GroupBoxParameters.Controls.Add(Me.tbColdFluidOutletT)
+        Me.GroupBoxParameters.Controls.Add(Me.Label4)
+        Me.GroupBoxParameters.Controls.Add(Me.cbHotFluidPDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.tbHotFluidPDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.Label2)
+        Me.GroupBoxParameters.Controls.Add(Me.cbColdFluidPDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.tbColdFluidPDrop)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
+        Me.GroupBoxParameters.Controls.Add(Me.cbCalcMode)
+        Me.GroupBoxParameters.Controls.Add(Me.Label8)
         Me.GroupBoxParameters.Name = "GroupBoxParameters"
         Me.GroupBoxParameters.TabStop = False
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
-        '
-        'TabControl1
-        '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.ToolTipChangeTag.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip2"))
-        '
-        'TabPage1
-        '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.Label8)
-        Me.TabPage1.Controls.Add(Me.chkCalculateProfile)
-        Me.TabPage1.Controls.Add(Me.cbCalcMode)
-        Me.TabPage1.Controls.Add(Me.chkForcePinchToOutlets)
-        Me.TabPage1.Controls.Add(Me.Label3)
-        Me.TabPage1.Controls.Add(Me.tbOVF2)
-        Me.TabPage1.Controls.Add(Me.tbColdFluidPDrop)
-        Me.TabPage1.Controls.Add(Me.Label10)
-        Me.TabPage1.Controls.Add(Me.cbColdFluidPDrop)
-        Me.TabPage1.Controls.Add(Me.tbOVF1)
-        Me.TabPage1.Controls.Add(Me.Label2)
-        Me.TabPage1.Controls.Add(Me.Label9)
-        Me.TabPage1.Controls.Add(Me.tbHotFluidPDrop)
-        Me.TabPage1.Controls.Add(Me.cbEfficiency)
-        Me.TabPage1.Controls.Add(Me.cbHotFluidPDrop)
-        Me.TabPage1.Controls.Add(Me.tbEfficiency)
-        Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Controls.Add(Me.Label21)
-        Me.TabPage1.Controls.Add(Me.tbColdFluidOutletT)
-        Me.TabPage1.Controls.Add(Me.cbHeatLoss)
-        Me.TabPage1.Controls.Add(Me.cbColdFluidOutletT)
-        Me.TabPage1.Controls.Add(Me.tbHeatLoss)
-        Me.TabPage1.Controls.Add(Me.Label5)
-        Me.TabPage1.Controls.Add(Me.Label20)
-        Me.TabPage1.Controls.Add(Me.tbHotFluidOutletT)
-        Me.TabPage1.Controls.Add(Me.cbMITA)
-        Me.TabPage1.Controls.Add(Me.cbHotFluidOutletT)
-        Me.TabPage1.Controls.Add(Me.tbMITA)
-        Me.TabPage1.Controls.Add(Me.chkIgnoreLMTD)
-        Me.TabPage1.Controls.Add(Me.Label18)
-        Me.TabPage1.Controls.Add(Me.cbFlowDir)
-        Me.TabPage1.Controls.Add(Me.btnEditSTProps)
-        Me.TabPage1.Controls.Add(Me.Label14)
-        Me.TabPage1.Controls.Add(Me.cbHeat)
-        Me.TabPage1.Controls.Add(Me.Label15)
-        Me.TabPage1.Controls.Add(Me.tbHeat)
-        Me.TabPage1.Controls.Add(Me.Label16)
-        Me.TabPage1.Controls.Add(Me.cbArea)
-        Me.TabPage1.Controls.Add(Me.Label17)
-        Me.TabPage1.Controls.Add(Me.tbArea)
-        Me.TabPage1.Controls.Add(Me.tbOverallU)
-        Me.TabPage1.Controls.Add(Me.cbOverallHTC)
-        Me.TabPage1.Name = "TabPage1"
-        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip2"))
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'Label8
-        '
-        resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.Name = "Label8"
-        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip2"))
         '
         'chkCalculateProfile
         '
@@ -278,17 +244,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.chkCalculateProfile, resources.GetString("chkCalculateProfile.ToolTip2"))
         Me.chkCalculateProfile.UseVisualStyleBackColor = True
         '
-        'cbCalcMode
-        '
-        resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
-        Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7"), resources.GetString("cbCalcMode.Items8"), resources.GetString("cbCalcMode.Items9"), resources.GetString("cbCalcMode.Items10")})
-        Me.cbCalcMode.Name = "cbCalcMode"
-        Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip2"))
-        '
         'chkForcePinchToOutlets
         '
         resources.ApplyResources(Me.chkForcePinchToOutlets, "chkForcePinchToOutlets")
@@ -298,14 +253,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.chkForcePinchToOutlets, resources.GetString("chkForcePinchToOutlets.ToolTip2"))
         Me.chkForcePinchToOutlets.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
-        '
         'tbOVF2
         '
         resources.ApplyResources(Me.tbOVF2, "tbOVF2")
@@ -313,14 +260,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.tbOVF2, resources.GetString("tbOVF2.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.tbOVF2, resources.GetString("tbOVF2.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbOVF2, resources.GetString("tbOVF2.ToolTip2"))
-        '
-        'tbColdFluidPDrop
-        '
-        resources.ApplyResources(Me.tbColdFluidPDrop, "tbColdFluidPDrop")
-        Me.tbColdFluidPDrop.Name = "tbColdFluidPDrop"
-        Me.ToolTipValues.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip2"))
         '
         'Label10
         '
@@ -330,17 +269,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
         '
-        'cbColdFluidPDrop
-        '
-        resources.ApplyResources(Me.cbColdFluidPDrop, "cbColdFluidPDrop")
-        Me.cbColdFluidPDrop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbColdFluidPDrop.FormattingEnabled = True
-        Me.cbColdFluidPDrop.Items.AddRange(New Object() {resources.GetString("cbColdFluidPDrop.Items"), resources.GetString("cbColdFluidPDrop.Items1"), resources.GetString("cbColdFluidPDrop.Items2")})
-        Me.cbColdFluidPDrop.Name = "cbColdFluidPDrop"
-        Me.ToolTip1.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip2"))
-        '
         'tbOVF1
         '
         resources.ApplyResources(Me.tbOVF1, "tbOVF1")
@@ -349,14 +277,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me.tbOVF1, resources.GetString("tbOVF1.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbOVF1, resources.GetString("tbOVF1.ToolTip2"))
         '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip2"))
-        '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
@@ -364,14 +284,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
-        '
-        'tbHotFluidPDrop
-        '
-        resources.ApplyResources(Me.tbHotFluidPDrop, "tbHotFluidPDrop")
-        Me.tbHotFluidPDrop.Name = "tbHotFluidPDrop"
-        Me.ToolTipValues.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip2"))
         '
         'cbEfficiency
         '
@@ -384,17 +296,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.cbEfficiency, resources.GetString("cbEfficiency.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbEfficiency, resources.GetString("cbEfficiency.ToolTip2"))
         '
-        'cbHotFluidPDrop
-        '
-        resources.ApplyResources(Me.cbHotFluidPDrop, "cbHotFluidPDrop")
-        Me.cbHotFluidPDrop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbHotFluidPDrop.FormattingEnabled = True
-        Me.cbHotFluidPDrop.Items.AddRange(New Object() {resources.GetString("cbHotFluidPDrop.Items"), resources.GetString("cbHotFluidPDrop.Items1"), resources.GetString("cbHotFluidPDrop.Items2")})
-        Me.cbHotFluidPDrop.Name = "cbHotFluidPDrop"
-        Me.ToolTip1.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip2"))
-        '
         'tbEfficiency
         '
         resources.ApplyResources(Me.tbEfficiency, "tbEfficiency")
@@ -403,14 +304,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me.tbEfficiency, resources.GetString("tbEfficiency.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbEfficiency, resources.GetString("tbEfficiency.ToolTip2"))
         '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip2"))
-        '
         'Label21
         '
         resources.ApplyResources(Me.Label21, "Label21")
@@ -418,14 +311,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip2"))
-        '
-        'tbColdFluidOutletT
-        '
-        resources.ApplyResources(Me.tbColdFluidOutletT, "tbColdFluidOutletT")
-        Me.tbColdFluidOutletT.Name = "tbColdFluidOutletT"
-        Me.ToolTipValues.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip2"))
         '
         'cbHeatLoss
         '
@@ -438,17 +323,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.cbHeatLoss, resources.GetString("cbHeatLoss.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbHeatLoss, resources.GetString("cbHeatLoss.ToolTip2"))
         '
-        'cbColdFluidOutletT
-        '
-        resources.ApplyResources(Me.cbColdFluidOutletT, "cbColdFluidOutletT")
-        Me.cbColdFluidOutletT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbColdFluidOutletT.FormattingEnabled = True
-        Me.cbColdFluidOutletT.Items.AddRange(New Object() {resources.GetString("cbColdFluidOutletT.Items"), resources.GetString("cbColdFluidOutletT.Items1"), resources.GetString("cbColdFluidOutletT.Items2")})
-        Me.cbColdFluidOutletT.Name = "cbColdFluidOutletT"
-        Me.ToolTip1.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip2"))
-        '
         'tbHeatLoss
         '
         resources.ApplyResources(Me.tbHeatLoss, "tbHeatLoss")
@@ -457,14 +331,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me.tbHeatLoss, resources.GetString("tbHeatLoss.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbHeatLoss, resources.GetString("tbHeatLoss.ToolTip2"))
         '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip2"))
-        '
         'Label20
         '
         resources.ApplyResources(Me.Label20, "Label20")
@@ -472,14 +338,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
-        '
-        'tbHotFluidOutletT
-        '
-        resources.ApplyResources(Me.tbHotFluidOutletT, "tbHotFluidOutletT")
-        Me.tbHotFluidOutletT.Name = "tbHotFluidOutletT"
-        Me.ToolTipValues.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip2"))
         '
         'cbMITA
         '
@@ -492,17 +350,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.cbMITA, resources.GetString("cbMITA.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbMITA, resources.GetString("cbMITA.ToolTip2"))
         '
-        'cbHotFluidOutletT
-        '
-        resources.ApplyResources(Me.cbHotFluidOutletT, "cbHotFluidOutletT")
-        Me.cbHotFluidOutletT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbHotFluidOutletT.FormattingEnabled = True
-        Me.cbHotFluidOutletT.Items.AddRange(New Object() {resources.GetString("cbHotFluidOutletT.Items"), resources.GetString("cbHotFluidOutletT.Items1"), resources.GetString("cbHotFluidOutletT.Items2")})
-        Me.cbHotFluidOutletT.Name = "cbHotFluidOutletT"
-        Me.ToolTip1.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip2"))
-        '
         'tbMITA
         '
         resources.ApplyResources(Me.tbMITA, "tbMITA")
@@ -510,15 +357,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.tbMITA, resources.GetString("tbMITA.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.tbMITA, resources.GetString("tbMITA.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbMITA, resources.GetString("tbMITA.ToolTip2"))
-        '
-        'chkIgnoreLMTD
-        '
-        resources.ApplyResources(Me.chkIgnoreLMTD, "chkIgnoreLMTD")
-        Me.chkIgnoreLMTD.Name = "chkIgnoreLMTD"
-        Me.ToolTip1.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip2"))
-        Me.chkIgnoreLMTD.UseVisualStyleBackColor = True
         '
         'Label18
         '
@@ -528,17 +366,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip2"))
         '
-        'cbFlowDir
-        '
-        resources.ApplyResources(Me.cbFlowDir, "cbFlowDir")
-        Me.cbFlowDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbFlowDir.FormattingEnabled = True
-        Me.cbFlowDir.Items.AddRange(New Object() {resources.GetString("cbFlowDir.Items"), resources.GetString("cbFlowDir.Items1")})
-        Me.cbFlowDir.Name = "cbFlowDir"
-        Me.ToolTip1.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip2"))
-        '
         'btnEditSTProps
         '
         resources.ApplyResources(Me.btnEditSTProps, "btnEditSTProps")
@@ -547,14 +374,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.btnEditSTProps, resources.GetString("btnEditSTProps.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.btnEditSTProps, resources.GetString("btnEditSTProps.ToolTip2"))
         Me.btnEditSTProps.UseVisualStyleBackColor = True
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.Name = "Label14"
-        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
         '
         'cbHeat
         '
@@ -567,14 +386,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.cbHeat, resources.GetString("cbHeat.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbHeat, resources.GetString("cbHeat.ToolTip2"))
         '
-        'Label15
-        '
-        resources.ApplyResources(Me.Label15, "Label15")
-        Me.Label15.Name = "Label15"
-        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip2"))
-        '
         'tbHeat
         '
         resources.ApplyResources(Me.tbHeat, "tbHeat")
@@ -582,14 +393,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.tbHeat, resources.GetString("tbHeat.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.tbHeat, resources.GetString("tbHeat.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbHeat, resources.GetString("tbHeat.ToolTip2"))
-        '
-        'Label16
-        '
-        resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.Name = "Label16"
-        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
         '
         'cbArea
         '
@@ -602,14 +405,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.cbArea, resources.GetString("cbArea.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbArea, resources.GetString("cbArea.ToolTip2"))
         '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Name = "Label17"
-        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip2"))
-        '
         'tbArea
         '
         resources.ApplyResources(Me.tbArea, "tbArea")
@@ -617,14 +412,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.tbArea, resources.GetString("tbArea.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.tbArea, resources.GetString("tbArea.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbArea, resources.GetString("tbArea.ToolTip2"))
-        '
-        'tbOverallU
-        '
-        resources.ApplyResources(Me.tbOverallU, "tbOverallU")
-        Me.tbOverallU.Name = "tbOverallU"
-        Me.ToolTipValues.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip2"))
         '
         'cbOverallHTC
         '
@@ -637,14 +424,192 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipValues.SetToolTip(Me.cbOverallHTC, resources.GetString("cbOverallHTC.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbOverallHTC, resources.GetString("cbOverallHTC.ToolTip2"))
         '
-        'TabPage2
+        'tbOverallU
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Name = "TabPage2"
-        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip2"))
-        Me.TabPage2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.tbOverallU, "tbOverallU")
+        Me.tbOverallU.Name = "tbOverallU"
+        Me.ToolTipValues.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip2"))
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip2"))
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
+        '
+        'Label15
+        '
+        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip2"))
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
+        '
+        'cbFlowDir
+        '
+        resources.ApplyResources(Me.cbFlowDir, "cbFlowDir")
+        Me.cbFlowDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbFlowDir.FormattingEnabled = True
+        Me.cbFlowDir.Items.AddRange(New Object() {resources.GetString("cbFlowDir.Items"), resources.GetString("cbFlowDir.Items1")})
+        Me.cbFlowDir.Name = "cbFlowDir"
+        Me.ToolTip1.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip2"))
+        '
+        'chkIgnoreLMTD
+        '
+        resources.ApplyResources(Me.chkIgnoreLMTD, "chkIgnoreLMTD")
+        Me.chkIgnoreLMTD.Name = "chkIgnoreLMTD"
+        Me.ToolTip1.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip2"))
+        Me.chkIgnoreLMTD.UseVisualStyleBackColor = True
+        '
+        'cbHotFluidOutletT
+        '
+        resources.ApplyResources(Me.cbHotFluidOutletT, "cbHotFluidOutletT")
+        Me.cbHotFluidOutletT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbHotFluidOutletT.FormattingEnabled = True
+        Me.cbHotFluidOutletT.Items.AddRange(New Object() {resources.GetString("cbHotFluidOutletT.Items"), resources.GetString("cbHotFluidOutletT.Items1"), resources.GetString("cbHotFluidOutletT.Items2")})
+        Me.cbHotFluidOutletT.Name = "cbHotFluidOutletT"
+        Me.ToolTip1.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip2"))
+        '
+        'tbHotFluidOutletT
+        '
+        resources.ApplyResources(Me.tbHotFluidOutletT, "tbHotFluidOutletT")
+        Me.tbHotFluidOutletT.Name = "tbHotFluidOutletT"
+        Me.ToolTipValues.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip2"))
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip2"))
+        '
+        'cbColdFluidOutletT
+        '
+        resources.ApplyResources(Me.cbColdFluidOutletT, "cbColdFluidOutletT")
+        Me.cbColdFluidOutletT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbColdFluidOutletT.FormattingEnabled = True
+        Me.cbColdFluidOutletT.Items.AddRange(New Object() {resources.GetString("cbColdFluidOutletT.Items"), resources.GetString("cbColdFluidOutletT.Items1"), resources.GetString("cbColdFluidOutletT.Items2")})
+        Me.cbColdFluidOutletT.Name = "cbColdFluidOutletT"
+        Me.ToolTip1.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip2"))
+        '
+        'tbColdFluidOutletT
+        '
+        resources.ApplyResources(Me.tbColdFluidOutletT, "tbColdFluidOutletT")
+        Me.tbColdFluidOutletT.Name = "tbColdFluidOutletT"
+        Me.ToolTipValues.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip2"))
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip2"))
+        '
+        'cbHotFluidPDrop
+        '
+        resources.ApplyResources(Me.cbHotFluidPDrop, "cbHotFluidPDrop")
+        Me.cbHotFluidPDrop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbHotFluidPDrop.FormattingEnabled = True
+        Me.cbHotFluidPDrop.Items.AddRange(New Object() {resources.GetString("cbHotFluidPDrop.Items"), resources.GetString("cbHotFluidPDrop.Items1"), resources.GetString("cbHotFluidPDrop.Items2")})
+        Me.cbHotFluidPDrop.Name = "cbHotFluidPDrop"
+        Me.ToolTip1.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip2"))
+        '
+        'tbHotFluidPDrop
+        '
+        resources.ApplyResources(Me.tbHotFluidPDrop, "tbHotFluidPDrop")
+        Me.tbHotFluidPDrop.Name = "tbHotFluidPDrop"
+        Me.ToolTipValues.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip2"))
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip2"))
+        '
+        'cbColdFluidPDrop
+        '
+        resources.ApplyResources(Me.cbColdFluidPDrop, "cbColdFluidPDrop")
+        Me.cbColdFluidPDrop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbColdFluidPDrop.FormattingEnabled = True
+        Me.cbColdFluidPDrop.Items.AddRange(New Object() {resources.GetString("cbColdFluidPDrop.Items"), resources.GetString("cbColdFluidPDrop.Items1"), resources.GetString("cbColdFluidPDrop.Items2")})
+        Me.cbColdFluidPDrop.Name = "cbColdFluidPDrop"
+        Me.ToolTip1.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip2"))
+        '
+        'tbColdFluidPDrop
+        '
+        resources.ApplyResources(Me.tbColdFluidPDrop, "tbColdFluidPDrop")
+        Me.tbColdFluidPDrop.Name = "tbColdFluidPDrop"
+        Me.ToolTipValues.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip2"))
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
+        '
+        'cbCalcMode
+        '
+        resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
+        Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCalcMode.FormattingEnabled = True
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7"), resources.GetString("cbCalcMode.Items8"), resources.GetString("cbCalcMode.Items9"), resources.GetString("cbCalcMode.Items10")})
+        Me.cbCalcMode.Name = "cbCalcMode"
+        Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip2"))
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip2"))
         '
         'GroupBoxConnections
         '
@@ -904,9 +869,7 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBoxParameters.ResumeLayout(False)
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
+        Me.GroupBoxParameters.PerformLayout()
         Me.GroupBoxConnections.ResumeLayout(False)
         Me.GroupBoxConnections.PerformLayout()
         Me.GroupBoxResults.ResumeLayout(False)
@@ -990,7 +953,4 @@ Partial Class EditingForm_HeatExchanger
     Public WithEvents Label9 As Label
     Public WithEvents chkForcePinchToOutlets As CheckBox
     Public WithEvents chkCalculateProfile As CheckBox
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
-    Public WithEvents TabControl1 As TabControl
 End Class

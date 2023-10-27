@@ -60,7 +60,6 @@ Hurudza
 John Kossik
 Joseph Attia
 Kenneth Troldal
-Leandro Favaretto
 Les Waymont
 Lewis Estall
 Luca Finardi

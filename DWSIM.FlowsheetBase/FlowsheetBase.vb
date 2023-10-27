@@ -70,8 +70,6 @@ Imports System.Xml
 
     Public Property ExternalUnitOperations As New Dictionary(Of String, IExternalUnitOperation)
 
-    Public Property GHGEmissionCompositions As Dictionary(Of String, IGHGComposition) = New Dictionary(Of String, IGHGComposition) Implements IFlowsheet.GHGEmissionCompositions
-
     Private loaded As Boolean = False
 
     Private rm, prm As Resources.ResourceManager
@@ -2568,34 +2566,6 @@ Imports System.Xml
 
         End If
 
-        Results = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults
-
-        If xdoc.Element("DWSIM_Simulation_Data").Element("Results") IsNot Nothing Then
-
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("Results").Elements.ToList
-
-            DirectCast(Results, ICustomXMLSerialization).LoadData(data)
-
-        End If
-
-        GHGEmissionCompositions = New Dictionary(Of String, IGHGComposition)()
-
-        If xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions") IsNot Nothing Then
-
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions").Elements.ToList
-
-            For Each xel As XElement In data
-                Try
-                    Dim obj As New GHGEmissionComposition()
-                    obj.LoadData(xel.Elements.ToList)
-                    GHGEmissionCompositions.Add(obj.ID, obj)
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading GHG Composition Item Information", ex))
-                End Try
-            Next
-
-        End If
-
         If Not Settings.AutomationMode Then
             If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
         End If
@@ -2781,17 +2751,6 @@ Imports System.Xml
 
         For Each ch As SharedClasses.Charts.Chart In Charts.Values
             xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
-        Next
-
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Results"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("Results")
-        xel.Add(DirectCast(Results, ICustomXMLSerialization).SaveData().ToArray())
-
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GHGCompositions"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions")
-
-        For Each ghgcomp In GHGEmissionCompositions.Values
-            xel.Add(New XElement("GHGComposition", DirectCast(ghgcomp, ICustomXMLSerialization).SaveData().ToArray()))
         Next
 
         If Not GlobalSettings.Settings.AutomationMode Then
@@ -3981,8 +3940,6 @@ Label_00CC:
         End Set
     End Property
 
-    Public Property Results As IFlowsheetResults = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults() Implements IFlowsheet.Results
-
     Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
 
         Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")
@@ -4520,17 +4477,6 @@ Label_00CC:
             Next
             xel.Add(inner_elements)
 
-            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Results"))
-            xel = xdoc.Element("DWSIM_Simulation_Data").Element("Results")
-            xel.Add(DirectCast(Results, ICustomXMLSerialization).SaveData().ToArray())
-
-            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GHGCompositions"))
-            xel = xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions")
-
-            For Each ghgcomp In GHGEmissionCompositions.Values
-                xel.Add(New XElement("GHGComposition", DirectCast(ghgcomp, ICustomXMLSerialization).SaveData().ToArray()))
-            Next
-
         End If
 
         Return xdoc
@@ -4611,34 +4557,6 @@ Label_00CC:
                 End If
 
             Case Else
-
-                If xdoc.Element("DWSIM_Simulation_Data").Element("Results") IsNot Nothing Then
-
-                    Results = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults
-
-                    data = xdoc.Element("DWSIM_Simulation_Data").Element("Results").Elements.ToList
-
-                    DirectCast(Results, ICustomXMLSerialization).LoadData(data)
-
-                End If
-
-                If xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions") IsNot Nothing Then
-
-                    GHGEmissionCompositions = New Dictionary(Of String, IGHGComposition)()
-
-                    data = xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions").Elements.ToList
-
-                    For Each xel As XElement In data
-                        Try
-                            Dim obj As New GHGEmissionComposition()
-                            obj.LoadData(xel.Elements.ToList)
-                            GHGEmissionCompositions.Add(obj.ID, obj)
-                        Catch ex As Exception
-                            excs.Add(New Exception("Error Loading GHG Composition Item Information", ex))
-                        End Try
-                    Next
-
-                End If
 
                 If xdoc.Element("DWSIM_Simulation_Data").Element("Settings") IsNot Nothing Then
 
@@ -5189,87 +5107,6 @@ Label_00CC:
     Public Overridable Function Clone() As IFlowsheet Implements IFlowsheet.Clone
 
         Throw New NotImplementedException()
-
-    End Function
-
-    Public Function GetResultIDs() As List(Of String) Implements IFlowsheet.GetResultIDs
-
-        Dim props As New List(Of String) From {
-            "Total GHG Mass Emissions",
-            "Total GHG Molar Emissions",
-            "Total CO2eq GHG Mass Emissions",
-            "Total CO2eq GHG Molar Emissions"
-        }
-
-        Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
-
-        For Each item In extraprops
-            props.Add(item.Key)
-        Next
-
-        Return props
-
-    End Function
-
-    Public Function GetResultValue(id As String) As Double Implements IFlowsheet.GetResultValue
-
-        Select Case id
-
-            Case "Total GHG Mass Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalGHGMassEmission
-
-            Case "Total GHG Molar Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission
-
-            Case "Total CO2eq GHG Mass Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission
-
-            Case "Total CO2eq GHG Molar Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission
-
-            Case Else
-
-                Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
-
-                If extraprops.ContainsKey(id) Then
-                    Return Convert.ToDouble(extraprops(id))
-                Else
-                    Return Double.NaN
-                End If
-
-        End Select
-
-    End Function
-
-    Public Function GetResultUnits(id As String) As String Implements IFlowsheet.GetResultUnits
-
-        Select Case id
-
-            Case "Total GHG Mass Emissions"
-
-                Return "kg/s"
-
-            Case "Total GHG Molar Emissions"
-
-                Return "mol/s"
-
-            Case "Total CO2eq GHG Mass Emissions"
-
-                Return "kg/s"
-
-            Case "Total CO2eq GHG Molar Emissions"
-
-                Return "mol/s"
-
-            Case Else
-
-                Return ""
-
-        End Select
 
     End Function
 

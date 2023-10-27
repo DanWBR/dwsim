@@ -96,7 +96,6 @@ Public Class FormFlowsheet
     Public FormDynamics As New FormDynamicsManager
     Public FormIntegratorControls As New FormDynamicsIntegratorControl
     Public FormFilesExplorer As New FormFileExplorer
-    Public FormGHGEmissionsHub As New FormGHGEmissionsSummary
     'Public FormIPyConsole As New FormInteractiveIronPythonConsole
 
     Public FormScript1 As New FormScript
@@ -242,7 +241,6 @@ Public Class FormFlowsheet
         'FormIPyConsole.Flowsheet = Me
         FormWatch.Flowsheet = Me
         FormScript1.fc = Me
-        FormGHGEmissionsSummary.Flowsheet = Me
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
@@ -332,7 +330,6 @@ Public Class FormFlowsheet
             FormFilesExplorer.DockPanel = Nothing
             'FormIPyConsole.DockPanel = Nothing
             FormScript1.DockPanel = Nothing
-            FormGHGEmissionsHub.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -340,14 +337,13 @@ Public Class FormFlowsheet
             FormLog.Hide()
             FormWatch.Hide()
 
-            FormCharts.Show(dckPanel)
-            FormFilesExplorer.Show(dckPanel.ActiveDocumentPane, FormCharts)
-            FormMatList.Show(dckPanel.ActiveDocumentPane, FormFilesExplorer)
-            FormScript1.Show(dckPanel.ActiveDocumentPane, FormMatList)
-            FormSpreadsheet.Show(dckPanel.ActiveDocumentPane, FormScript1)
-            FormDynamics.Show(dckPanel.ActiveDocumentPane, FormSpreadsheet)
-            FormGHGEmissionsHub.Show(dckPanel.ActiveDocumentPane, FormDynamics)
-            FormSurface.Show(dckPanel.ActiveDocumentPane, FormGHGEmissionsHub)
+            FormSurface.Show(dckPanel)
+            FormDynamics.Show(FormSurface.Pane, Nothing)
+            FormMatList.Show(FormSurface.Pane, Nothing)
+            FormSpreadsheet.Show(FormSurface.Pane, Nothing)
+            FormCharts.Show(FormSurface.Pane, Nothing)
+            FormFilesExplorer.Show(dckPanel)
+            FormScript1.Show(FormSurface.Pane, Nothing)
 
             FormSurface.Activate()
 
@@ -569,8 +565,8 @@ Public Class FormFlowsheet
                 Return Me.FormIntegratorControls
             Case "DWSIM.FormFileExplorer"
                 Return Me.FormFilesExplorer
-            Case "DWSIM.FormGHGEmissionsSummary"
-                Return Me.FormGHGEmissionsHub
+                'Case "DWSIM.FormInteractiveIronPythonConsole"
+                '    Return Me.FormIPyConsole
         End Select
         Return Nothing
     End Function
@@ -650,7 +646,7 @@ Public Class FormFlowsheet
         FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
         FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
-        FormSurface.FlowsheetSurface.Zoom *= 0.75
+        FormSurface.FlowsheetSurface.Zoom *= 0.5
 
         FormSurface.FlowsheetSurface.Center(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
@@ -659,8 +655,6 @@ Public Class FormFlowsheet
         For Each ws In FormSpreadsheet.Spreadsheet.Worksheets
             ws.Recalculate()
         Next
-
-        FormGHGEmissionsHub.UpdateInfo()
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
@@ -1510,7 +1504,6 @@ Public Class FormFlowsheet
                                RaiseEvent FinishedSolving(Me, New EventArgs())
                                Me.UIThread(Sub()
                                                pbSolver.Visible = False
-                                               FormGHGEmissionsHub.UpdateInfo()
                                            End Sub)
                            End Sub)
             t.Start()
@@ -3093,17 +3086,6 @@ Public Class FormFlowsheet
             Next
             xel.Add(inner_elements)
 
-            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Results"))
-            xel = xdoc.Element("DWSIM_Simulation_Data").Element("Results")
-            xel.Add(DirectCast(Results, ICustomXMLSerialization).SaveData().ToArray())
-
-            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GHGCompositions"))
-            xel = xdoc.Element("DWSIM_Simulation_Data").Element("GHGCompositions")
-
-            For Each ghgcomp In GHGEmissionCompositions.Values
-                xel.Add(New XElement("GHGComposition", DirectCast(ghgcomp, ICustomXMLSerialization).SaveData().ToArray()))
-            Next
-
         End If
 
         Return xdoc
@@ -3184,16 +3166,6 @@ Public Class FormFlowsheet
                 End If
 
             Case Else
-
-                If xdoc.Element("DWSIM_Simulation_Data").Element("Results") IsNot Nothing Then
-
-                    Results = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults
-
-                    data = xdoc.Element("DWSIM_Simulation_Data").Element("Results").Elements.ToList
-
-                    DirectCast(Results, ICustomXMLSerialization).LoadData(data)
-
-                End If
 
                 If xdoc.Element("DWSIM_Simulation_Data").Element("Settings") IsNot Nothing Then
 
@@ -4306,8 +4278,6 @@ Public Class FormFlowsheet
                                 Me.FormSpreadsheet.EvaluateAll()
                             End If
 
-                            FormGHGEmissionsHub.UpdateInfo()
-
                             'Application.DoEvents()
 
                         End If
@@ -4441,10 +4411,6 @@ Public Class FormFlowsheet
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
     Public Property PythonPreprocessor As Action(Of String) Implements IFlowsheet.PythonPreprocessor
-
-    Public Property Results As IFlowsheetResults = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults Implements IFlowsheet.Results
-
-    Public Property GHGEmissionCompositions As Dictionary(Of String, IGHGComposition) = New Dictionary(Of String, IGHGComposition) Implements IFlowsheet.GHGEmissionCompositions
 
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
         DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)
@@ -5441,87 +5407,6 @@ Public Class FormFlowsheet
         End If
 
     End Sub
-
-    Public Function GetResultIDs() As List(Of String) Implements IFlowsheet.GetResultIDs
-
-        Dim props As New List(Of String) From {
-            "Total GHG Mass Emissions",
-            "Total GHG Molar Emissions",
-            "Total CO2eq GHG Mass Emissions",
-            "Total CO2eq GHG Molar Emissions"
-        }
-
-        Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
-
-        For Each item In extraprops
-            props.Add(item.Key)
-        Next
-
-        Return props
-
-    End Function
-
-    Public Function GetResultValue(id As String) As Double Implements IFlowsheet.GetResultValue
-
-        Select Case id
-
-            Case "Total GHG Mass Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalGHGMassEmission
-
-            Case "Total GHG Molar Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission
-
-            Case "Total CO2eq GHG Mass Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission
-
-            Case "Total CO2eq GHG Molar Emissions"
-
-                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission
-
-            Case Else
-
-                Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
-
-                If extraprops.ContainsKey(id) Then
-                    Return Convert.ToDouble(extraprops(id))
-                Else
-                    Return Double.NaN
-                End If
-
-        End Select
-
-    End Function
-
-    Public Function GetResultUnits(id As String) As String Implements IFlowsheet.GetResultUnits
-
-        Select Case id
-
-            Case "Total GHG Mass Emissions"
-
-                Return "kg/s"
-
-            Case "Total GHG Molar Emissions"
-
-                Return "mol/s"
-
-            Case "Total CO2eq GHG Mass Emissions"
-
-                Return "kg/s"
-
-            Case "Total CO2eq GHG Molar Emissions"
-
-                Return "mol/s"
-
-            Case Else
-
-                Return ""
-
-        End Select
-
-    End Function
 
 #End Region
 

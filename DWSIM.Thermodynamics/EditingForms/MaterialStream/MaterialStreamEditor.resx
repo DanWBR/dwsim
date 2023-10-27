@@ -1023,39 +1023,6 @@
   <data name="TabPageInputComposition.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="btnComplete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btnComplete.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="btnComplete.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnComplete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 180</value>
-  </data>
-  <data name="btnComplete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 24</value>
-  </data>
-  <data name="btnComplete.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="btnComplete.Text" xml:space="preserve">
-    <value>Completar</value>
-  </data>
-  <data name="&gt;&gt;btnComplete.Name" xml:space="preserve">
-    <value>btnComplete</value>
-  </data>
-  <data name="&gt;&gt;btnComplete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnComplete.Parent" xml:space="preserve">
-    <value>TabPageInputComposition</value>
-  </data>
-  <data name="&gt;&gt;btnComplete.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="btnCompAcceptChanges.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -1066,7 +1033,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCompAcceptChanges.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 210</value>
+    <value>320, 171</value>
   </data>
   <data name="btnCompAcceptChanges.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 24</value>
@@ -1087,7 +1054,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;btnCompAcceptChanges.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="cbSolvent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1135,7 +1102,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;cbSolvent.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="btnEraseInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1147,7 +1114,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnEraseInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 150</value>
+    <value>320, 144</value>
   </data>
   <data name="btnEraseInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 24</value>
@@ -1168,7 +1135,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;btnEraseInput.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="lblInputAmount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1201,7 +1168,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;lblInputAmount.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="btnEqualizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1213,7 +1180,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnEqualizeInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 120</value>
+    <value>320, 117</value>
   </data>
   <data name="btnEqualizeInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 24</value>
@@ -1234,7 +1201,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;btnEqualizeInput.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="btnNormalizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1267,7 +1234,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;btnNormalizeInput.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblSolvent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1297,7 +1264,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;lblSolvent.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1327,7 +1294,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="cbCompBasis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1372,7 +1339,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;cbCompBasis.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="gridInputComposition.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1411,7 +1378,7 @@
     <value>TabPageInputComposition</value>
   </data>
   <data name="&gt;&gt;gridInputComposition.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="TabPageInputComposition.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1846,7 +1813,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 275</value>
+    <value>402, 307</value>
   </data>
   <data name="gridCompLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1867,7 +1834,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 275</value>
+    <value>402, 307</value>
   </data>
   <data name="tabCompLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1906,7 +1873,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 275</value>
+    <value>402, 307</value>
   </data>
   <data name="gridCompSolid.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1927,7 +1894,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 275</value>
+    <value>402, 307</value>
   </data>
   <data name="tabCompSolid.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3958,7 +3925,7 @@
     <value>3</value>
   </data>
   <metadata name="UtilitiesCtxMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>142, 17</value>
+    <value>145, 17</value>
   </metadata>
   <data name="DiagramaDeFasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 22</value>
@@ -4012,7 +3979,7 @@
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>284, 17</value>
+    <value>286, 17</value>
   </metadata>
   <data name="TabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -4426,6 +4393,6 @@
     <value>MaterialStreamEditor</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.6.5.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.4.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

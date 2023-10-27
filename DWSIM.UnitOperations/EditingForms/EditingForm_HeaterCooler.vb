@@ -26,8 +26,6 @@ Public Class EditingForm_HeaterCooler
 
     Sub UpdateInfo()
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 

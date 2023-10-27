@@ -22,7 +22,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Dynamic
 Imports System.Reflection
-Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports DWSIM.ExtensionMethods
 
 Namespace UnitOperations
 
@@ -484,10 +484,6 @@ Namespace UnitOperations
                 End If
             End If
 
-            GHGEmissionData.OwnerID = Name
-            GHGEmissionData.Flowsheet = FlowSheet
-            GHGEmissionData.Update()
-
         End Sub
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
@@ -709,15 +705,6 @@ Namespace UnitOperations
                 proplist.Add(item.Key)
             Next
 
-            If proptype <> PropertyType.WR Then
-                proplist.Add("GHG Emission Factor")
-                proplist.Add("GHG Mass Emission")
-                proplist.Add("GHG Molar Emission")
-                proplist.Add("CO2eq GHG Mass Emission")
-                proplist.Add("CO2eq GHG Molar Emission")
-                proplist.Add("GHG Emission Reference Power Value")
-            End If
-
             For Each item In AttachedUtilities
                 proplist.AddRange(item.GetPropertyList().ConvertAll(New Converter(Of String, String)(Function(s As String)
                                                                                                          Return item.Name & ": " & s
@@ -744,21 +731,6 @@ Namespace UnitOperations
                 Else
                     Return ""
                 End If
-            Else
-                Select Case prop
-                    Case "GHG Emission Factor"
-                        Return "[kg/s]/kW"
-                    Case "GHG Mass Emission"
-                        Return "kg/s"
-                    Case "GHG Molar Emission"
-                        Return "mol/s"
-                    Case "CO2eq GHG Mass Emission"
-                        Return "kg/s"
-                    Case "CO2eq GHG Molar Emission"
-                        Return "mol/s"
-                    Case "GHG Emission Reference Power Value"
-                        Return "kW"
-                End Select
             End If
 
             For Each item In AttachedUtilities
@@ -775,45 +747,13 @@ Namespace UnitOperations
 
         Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
 
-            If su Is Nothing Then
-                su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
-            End If
-
-            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
-            Dim epucol = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
-
-            If epcol.ContainsKey(prop) Then
-                If epucol.ContainsKey(prop) Then
-                    Dim utype = epucol(prop)
-                    Dim units = su.GetCurrentUnits(utype)
-                    Return cv.ConvertFromSI(units, Convert.ToDouble(epcol(prop)))
-                Else
-                    Return epcol(prop)
-                End If
-            Else
-                Select Case prop
-                    Case "GHG Emission Factor"
-                        Return cv.ConvertFromSI(su.emission_factor, GHGEmissionData.GHGEmissionFactor)
-                    Case "GHG Mass Emission"
-                        Return cv.ConvertFromSI(su.massflow, GHGEmissionData.GHGEmissionMassFlow)
-                    Case "GHG Molar Emission"
-                        Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.GHGEmissionMolarFlow)
-                    Case "CO2eq GHG Mass Emission"
-                        Return cv.ConvertFromSI(su.massflow, GHGEmissionData.CO2eqEmissionMassFlow)
-                    Case "CO2eq GHG Molar Emission"
-                        Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.CO2eqEmissionMolarFlow)
-                    Case "GHG Emission Reference Power Value"
-                        Return cv.ConvertFromSI(su.heatflow, GetEnergyConsumption())
-                End Select
-            End If
-
-
             For Each item In AttachedUtilities
                 If prop.StartsWith(item.Name) Then
                     For Each prop1 In item.GetPropertyList()
                         If prop.Contains(prop1) Then Return item.GetPropertyValue(prop.Split(": ")(1).Trim)
                     Next
                 End If
+
             Next
 
             Return Nothing
@@ -1005,9 +945,6 @@ Namespace UnitOperations
             End If
 
             If Me.Annotation = "DWSIM.DWSIM.Outros.Annotation" Then Me.Annotation = ""
-
-            GHGEmissionData.OwnerID = Name
-            GHGEmissionData.Flowsheet = FlowSheet
 
             Return True
 
@@ -1229,11 +1166,7 @@ Namespace UnitOperations
         ''' <param name="flowsheet">Flowsheet instance.</param>
         ''' <remarks></remarks>
         Public Sub SetFlowsheet(ByVal flowsheet As Object) Implements Interfaces.ISimulationObject.SetFlowsheet
-
             m_flowsheet = flowsheet
-
-            GHGEmissionData.Flowsheet = flowsheet
-
         End Sub
 
         Public Overridable Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String())) Implements ISimulationObject.GetStructuredReport
@@ -1615,9 +1548,8 @@ Namespace UnitOperations
 
         Public Overridable ReadOnly Property IsSink As Boolean = False Implements ISimulationObject.IsSink
 
-        Public Property GHGEmissionData As IGHGEmitter = New GHGEmitter() Implements ISimulationObject.GHGEmissionData
-
 #End Region
+
 
         Public Sub ConnectFeedMaterialStream(stream As ISimulationObject, portnumber As Integer) Implements ISimulationObject.ConnectFeedMaterialStream
 
@@ -1769,12 +1701,6 @@ Namespace UnitOperations
         Public Overridable Function ClearPropertyPackageInstance() As Boolean Implements ISimulationObject.ClearPropertyPackageInstance
 
             Return False
-
-        End Function
-
-        Public Overridable Function GetEnergyConsumption() As Double Implements ISimulationObject.GetEnergyConsumption
-
-            Return 0.0
 
         End Function
 

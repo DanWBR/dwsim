@@ -64,7 +64,6 @@ Partial Class EditingForm_HydroelectricTurbine
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.gbGHG = New System.Windows.Forms.GroupBox()
         Me.GroupBoxParameters.SuspendLayout()
         CType(Me.gridInput, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxResults.SuspendLayout()
@@ -187,9 +186,9 @@ Partial Class EditingForm_HydroelectricTurbine
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 880)
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 692)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(405, 169)
+        Me.GroupBox4.Size = New System.Drawing.Size(402, 169)
         Me.GroupBox4.TabIndex = 25
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Notes"
@@ -204,7 +203,7 @@ Partial Class EditingForm_HydroelectricTurbine
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
-        Me.rtbAnnotations.Size = New System.Drawing.Size(399, 150)
+        Me.rtbAnnotations.Size = New System.Drawing.Size(396, 150)
         Me.rtbAnnotations.TabIndex = 0
         '
         'GroupBoxConnections
@@ -460,24 +459,12 @@ Partial Class EditingForm_HydroelectricTurbine
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'gbGHG
-        '
-        Me.gbGHG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gbGHG.Location = New System.Drawing.Point(8, 689)
-        Me.gbGHG.Name = "gbGHG"
-        Me.gbGHG.Size = New System.Drawing.Size(403, 184)
-        Me.gbGHG.TabIndex = 62
-        Me.gbGHG.TabStop = False
-        Me.gbGHG.Text = "GHG Emissions"
-        '
         'EditingForm_HydroelectricTurbine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(420, 1061)
-        Me.Controls.Add(Me.gbGHG)
+        Me.ClientSize = New System.Drawing.Size(420, 871)
         Me.Controls.Add(Me.GroupBoxParameters)
         Me.Controls.Add(Me.GroupBoxResults)
         Me.Controls.Add(Me.GroupBox4)
@@ -532,5 +519,4 @@ Partial Class EditingForm_HydroelectricTurbine
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Public WithEvents GroupBoxParameters As GroupBox
     Public WithEvents GroupBoxResults As GroupBox
-    Public WithEvents gbGHG As GroupBox
 End Class

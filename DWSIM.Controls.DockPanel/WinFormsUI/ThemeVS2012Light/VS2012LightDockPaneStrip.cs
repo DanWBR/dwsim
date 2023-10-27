@@ -1188,7 +1188,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             _DocumentIconHeight = rect.Height - 8;
             _DocumentIconWidth = rect.Height - 8;
 
-            var rectCloseButton = GetCloseButtonRect(rect, tab);
+            var rectCloseButton = GetCloseButtonRect(rect);
             Rectangle rectIcon = new Rectangle(
                 rect.X + DocumentIconGapLeft,
                 rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
@@ -1283,22 +1283,20 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             var mousePos = PointToClient(MousePosition);
             var tabRect = GetTabRectangle(index);
-            var tab = Tabs[index] as TabVS2012Light;
-            var closeButtonRect = GetCloseButtonRect(tabRect, tab);
+            var closeButtonRect = GetCloseButtonRect(tabRect);
             var mouseRect = new Rectangle(mousePos, new Size(1, 1));
             if (closeButtonRect.IntersectsWith(mouseRect))
                 DockPane.CloseActiveContent();
         }
 
-        private Rectangle GetCloseButtonRect(Rectangle rectTab, TabVS2012Light tab)
+        private Rectangle GetCloseButtonRect(Rectangle rectTab)
         {
-
             if (Appearance != Docking.DockPane.AppearanceStyle.Document)
             {
                 return Rectangle.Empty;
             }
 
-            if (!tab.Content.DockHandler.CloseButtonVisible)
+            if (!this.DockPane.ActiveContent.DockHandler.CloseButtonVisible)
             {
                 return Rectangle.Empty;
             }
@@ -1497,7 +1495,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 var mousePos = PointToClient(MousePosition);
                 var tabRect = GetTabRectangle(index);
-                var closeButtonRect = GetCloseButtonRect(tabRect, tab);
+                var closeButtonRect = GetCloseButtonRect(tabRect);
                 var mouseRect = new Rectangle(mousePos, new Size(1, 1));
                 buttonUpdate = SetActiveClose(closeButtonRect.IntersectsWith(mouseRect) ? closeButtonRect : Rectangle.Empty);
             }

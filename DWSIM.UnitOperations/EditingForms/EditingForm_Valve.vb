@@ -82,8 +82,6 @@ Public Class EditingForm_Valve
 
         Loaded = False
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         If Host.Items.Where(Function(x) x.Name.Contains(SimObject.GraphicObject.Tag)).Count > 0 Then
             If InspReportBar Is Nothing Then
                 InspReportBar = New SharedClasses.InspectorReportBar

@@ -26,8 +26,6 @@ Public Class EditingForm_HydroelectricTurbine
 
         Loaded = False
 
-        UpdateGHGEditor(gbGHG, SimObject)
-
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Dim su = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
