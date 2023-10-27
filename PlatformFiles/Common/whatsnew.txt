@@ -1,1 +1,20 @@
 Version 8.6.5
+
+- Includes ThermoC Property Package  
+- Dynamic Event transitions
+- Export PFR Profile to new spreadsheet (Classic UI/CPUI)
+- Heat Exchange Profile now available for all Heat Exchanger calculation modes
+- Enhanced Heat Exchange Profile Viewer (CPUI)
+- New Enthalpy calculation method (Liquid Cp + Excess)
+- EOS-based models can now select Experimental Liquid Cp as Enthalpy calculation method
+- Changed duration controls for Dynamics Integrator to allow periods higher than 24 hours (Classic UI)
+- Fixed issues with Pure Compound Viewer (Classic UI)
+- Fixed conversion reactor energy balance (#541)
+- Fixed not being able to update kappa parameters for PRSV2 PP
+- Fixed Heat Exchanger calculation when specifiyng invalid outlet temperatures
+- Fixed Enthalpy calculation from Liquid Cp
+- Fixed/added CO2 Normal Boiling Point
+- Fixed Excess Enthalpy calculation
+- Fixed Pump curves are not being correctly saved (#548)
+- Fixed input issue with Pipe Hydraulic Profile on Classic UI (#543)
+- German translation fix

@@ -186,8 +186,7 @@ Namespace PropertyPackages
             Ideal = 1
             Excess = 2
             ExpData = 3
-            LiqCp_DHVap = 4
-            LiqCp_Excess = 5
+            LiqCp_Excess = 4
         End Enum
 
         Public Enum LiquidEnthalpyEntropyCpCvCalcMode_EOS
