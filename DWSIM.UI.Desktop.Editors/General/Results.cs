@@ -196,7 +196,7 @@ namespace DWSIM.UI.Desktop.Editors
                             sheet.Cells[0, (j + 3)].Data = string.Format("{0} MassFlow ({1})", pitem.Compound, su.massflow);
                             sheet.Cells[0, (j + 4)].Data = string.Format("{0} MolConc ({1})", pitem.Compound, su.molar_conc);
                             sheet.Cells[0, (j + 5)].Data = string.Format("{0} MassConc ({1})", pitem.Compound, su.mass_conc);
-                            j++;
+                            j+=6;
                         }
 
                         i = 1;
@@ -214,7 +214,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 sheet.Cells[i, (j + 3)].Data = pitem.MassFlow.ConvertFromSI(su.massflow);
                                 sheet.Cells[i, (j + 4)].Data = pitem.MolarConcentration.ConvertFromSI(su.molar_conc);
                                 sheet.Cells[i, (j + 5)].Data = pitem.MassConcentration.ConvertFromSI(su.mass_conc);
-                                j++;
+                                j+=6;
                             }
                             i++;
                         }

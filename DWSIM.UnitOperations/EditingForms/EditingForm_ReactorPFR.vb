@@ -825,16 +825,14 @@ Public Class EditingForm_ReactorPFR
                 sheet.Cells(0, j + 3).Data = String.Format("{0} MassFlow ({1})", pitem.Compound, units.massflow)
                 sheet.Cells(0, j + 4).Data = String.Format("{0} MolConc ({1})", pitem.Compound, units.molar_conc)
                 sheet.Cells(0, j + 5).Data = String.Format("{0} MassConc ({1})", pitem.Compound, units.mass_conc)
-                j += 1
+                j += 6
             Next
 
             i = 1
             For Each item In SimObject.Profile
-
                 sheet.Cells(i, 0).Data = item.Item1.ConvertFromSI(units.distance)
                 sheet.Cells(i, 1).Data = item.Item2.ConvertFromSI(units.temperature)
                 sheet.Cells(i, 2).Data = item.Item3.ConvertFromSI(units.pressure)
-
                 j = 3
                 For Each pitem In item.Item4
                     sheet.Cells(i, j).Data = pitem.MolarFraction
@@ -843,12 +841,9 @@ Public Class EditingForm_ReactorPFR
                     sheet.Cells(i, j + 3).Data = pitem.MassFlow.ConvertFromSI(units.massflow)
                     sheet.Cells(i, j + 4).Data = pitem.MolarConcentration.ConvertFromSI(units.molar_conc)
                     sheet.Cells(i, j + 5).Data = pitem.MassConcentration.ConvertFromSI(units.mass_conc)
-
-                    j += 1
+                    j += 6
                 Next
-
                 i += 1
-
             Next
 
             sheet.SetRangeDataFormat(New unvell.ReoGrid.RangePosition(1, 0, i, j + 5), unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number,
