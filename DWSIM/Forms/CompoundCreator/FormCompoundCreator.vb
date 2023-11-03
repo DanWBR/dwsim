@@ -2629,7 +2629,14 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub cbEqCPLiquid_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbEqCPLiquid.SelectedIndexChanged
-        If mycase.EqCPLiquid Then mycase.cp.LiquidHeatCapacityEquation = cbEqCPLiquid.SelectedItem.ToString.Split(":")(0)
+        If mycase.EqCPLiquid Then
+            mycase.cp.LiquidHeatCapacityEquation = cbEqCPLiquid.SelectedItem.ToString.Split(":")(0)
+            If mycase.cp.LiquidHeatCapacityEquation = "1000" Then
+                tbUserDefCPLEq.Enabled = True
+            Else
+                tbUserDefCPLEq.Enabled = False
+            End If
+        End If
     End Sub
 
     Private Sub cbEqLIQDENS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqLIQDENS.SelectedIndexChanged
