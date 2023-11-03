@@ -13076,9 +13076,15 @@ Final3:
 
             Dim form = GetAdvancedEditingForm()
 
+            Dim sf = GlobalSettings.Settings.DpiScale
+
             If GlobalSettings.Settings.OldUI Then
                 form.Topmost = True
                 form.Show()
+                form.Center()
+                ExtensionMethods.Eto.Extensions2.SetFontAndPadding(form)
+                form.Width += 25 * sf
+                form.Height += 70 * sf
                 Return form
             Else
                 form.Topmost = True
@@ -13092,8 +13098,10 @@ Final3:
 
             Dim containers = GetAdvancedEditingContainers()
 
+            Dim sf = GlobalSettings.Settings.DpiScale
+
             If GlobalSettings.Settings.OldUI Then
-                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, containers(1))
+                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700 * sf, 600 * sf, containers(1))
                 form.Topmost = True
                 Return form
             Else
@@ -13106,6 +13114,8 @@ Final3:
         End Function
 
         Public Function GetAdvancedEditingContainers() As Eto.Forms.DynamicLayout()
+
+            Dim sf = GlobalSettings.Settings.DpiScale
 
             Dim container1 = sui.GetDefaultContainer()
 
@@ -13153,7 +13163,12 @@ Final3:
                 Next
             Next
 
-            Dim codeeditor As New Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() With {.Height = 200}
+            Dim codeeditor As New Eto.Forms.Controls.Scintilla.Shared.ScintillaControl() With {.Height = 300, .Width = 670}
+
+            If GlobalSettings.Settings.OldUI Then
+                codeeditor.Height *= sf
+                codeeditor.Width *= sf
+            End If
 
             Dim dd = container2.CreateAndAddDropDownRow("Phase/Property", plist, 0,
                                                Sub(sender, e)
@@ -13164,6 +13179,7 @@ Final3:
                                                    End If
                                                End Sub)
 
+            container2.CreateAndAddEmptySpace()
             container2.CreateAndAddControlRow(codeeditor)
             container2.CreateAndAddLabelAndButtonRow("Update/Save Override Script", "Save", Nothing,
                                              Sub(sender, e)

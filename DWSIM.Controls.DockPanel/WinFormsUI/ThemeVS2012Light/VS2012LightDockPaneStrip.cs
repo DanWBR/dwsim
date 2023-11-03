@@ -1266,6 +1266,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (rectTab.Contains(rectIcon) && DockPane.DockPanel.ShowDocumentIcon)
                 g.DrawIcon(tab.Content.DockHandler.Icon, rectIcon);
+
+            g.DrawLine(new Pen(activeColor, 2.0f), new Point(rect.Right, rect.Top), new Point(rect.Right, rect.Bottom));
+
         }
 
         protected override void OnMouseClick(MouseEventArgs e)
