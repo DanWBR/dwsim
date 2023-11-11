@@ -1460,7 +1460,11 @@ Public Class FormFlowsheet
 
     Private Sub RequestFlowsheetCalculation(obj As ISimulationObject, wait As Boolean)
 
-        If Not DynamicMode Then
+        If Settings.CalculatorBusy Then
+            UIThreadInvoke(Sub() ShowMessage(DWSIM.App.GetLocalString("The calculator is busy, please wait..."), IFlowsheet.MessageType.Warning))
+        End If
+
+        If Not DynamicMode And Not Settings.CalculatorBusy Then
 
             UIThreadInvoke(Sub()
                                Me.FormLog.Grid1.Rows.Clear()
