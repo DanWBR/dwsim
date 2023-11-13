@@ -1749,16 +1749,17 @@ Public Class FlowsheetSurface_SkiaSharp
 
             Case ObjectType.External
 
-                Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
+                Dim sobj = DirectCast(uoobj, Interfaces.ISimulationObject)
+                Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, sobj.GetPreferredGraphicObjectWidth(), sobj.GetPreferredGraphicObjectHeight())
                 myNode.Tag = uoobj.Prefix + objindex
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                DirectCast(uoobj, Interfaces.ISimulationObject).Name = gObj.Name
+                sobj.Name = gObj.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
-                DirectCast(uoobj, Interfaces.ISimulationObject).GraphicObject = myNode
+                sobj.GraphicObject = myNode
                 myNode.CreateConnectors(0, 0)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, uoobj)
 

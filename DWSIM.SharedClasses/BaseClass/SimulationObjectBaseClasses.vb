@@ -22,7 +22,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Dynamic
 Imports System.Reflection
-Imports DWSIM.ExtensionMethods
 
 Namespace UnitOperations
 
@@ -1704,6 +1703,13 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overridable Function GetPreferredGraphicObjectWidth() As Double Implements ISimulationObject.GetPreferredGraphicObjectWidth
+            Return 40.0
+        End Function
+
+        Public Overridable Function GetPreferredGraphicObjectHeight() As Double Implements ISimulationObject.GetPreferredGraphicObjectHeight
+            Return 40.0
+        End Function
     End Class
 
 End Namespace

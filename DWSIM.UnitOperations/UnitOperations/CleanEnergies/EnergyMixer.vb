@@ -32,6 +32,14 @@ Namespace UnitOperations
             Return _desc
         End Function
 
+        Public Overrides Function GetPreferredGraphicObjectHeight() As Double
+            Return 20.0
+        End Function
+
+        Public Overrides Function GetPreferredGraphicObjectWidth() As Double
+            Return 20.0
+        End Function
+
         Public Overrides Property ComponentName As String = _name
 
         Public Overrides Property ComponentDescription As String = _desc
