@@ -68,7 +68,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim flashalgs As New List(Of FlashAlgorithm)
 
             For ia As Integer = 0 To ns
-                flashalgs.Add(New NestedLoops With {.FlashSettings = pp.FlashSettings})
+                Dim flashcopy = pp.FlashBase.GetNewInstance()
+                If flashcopy Is Nothing Then
+                    flashalgs.Add(New NestedLoops With {.FlashSettings = pp.FlashBase.FlashSettings})
+                Else
+                    flashalgs.Add(flashcopy)
+                End If
             Next
 
             Dim spval1, spval2 As Double

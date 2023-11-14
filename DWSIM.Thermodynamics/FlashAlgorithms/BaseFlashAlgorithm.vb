@@ -26,6 +26,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports IronPython.Runtime.Operations
 Imports DWSIM.SharedClasses
+Imports DWSIM.Interfaces
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -1631,6 +1632,12 @@ will converge to this solution.")
                 clonedobj.FlashSettings.Add(item.Key, item.Value)
             Next
             Return clonedobj
+
+        End Function
+
+        Public Overridable Function GetNewInstance() As IFlashAlgorithm Implements IFlashAlgorithm.GetNewInstance
+
+            Return Nothing
 
         End Function
 
