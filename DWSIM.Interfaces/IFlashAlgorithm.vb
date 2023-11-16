@@ -25,6 +25,8 @@
 
     Function Clone() As IFlashAlgorithm
 
+    Function GetNewInstance() As IFlashAlgorithm
+
     ReadOnly Property AlgoType As Enums.FlashMethod
 
     ReadOnly Property Name As String
