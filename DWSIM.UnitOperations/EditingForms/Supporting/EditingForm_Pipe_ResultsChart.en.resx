@@ -144,6 +144,9 @@
   <data name="ComboBox2.Items8" xml:space="preserve">
     <value>External Temperature</value>
   </data>
+  <data name="ComboBox2.Items9" xml:space="preserve">
+    <value>Mach Number</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ComboBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>359, 21</value>
@@ -172,6 +175,9 @@
   <data name="ComboBox1.Items5" xml:space="preserve">
     <value>Heat Transferred</value>
   </data>
+  <data name="ComboBox1.Items6" xml:space="preserve">
+    <value>Mach Number</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
   </data>
@@ -196,9 +202,6 @@
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Graph</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>576, 383</value>

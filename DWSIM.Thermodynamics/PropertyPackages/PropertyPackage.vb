@@ -1748,6 +1748,10 @@ Namespace PropertyPackages
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
             Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
+            Me.CurrentMaterialStream.Phases(1).Properties.surfaceTension = Me.AUX_SURFTM(1, T)
+            Me.CurrentMaterialStream.Phases(3).Properties.surfaceTension = Me.AUX_SURFTM(3, T)
+            Me.CurrentMaterialStream.Phases(4).Properties.surfaceTension = Me.AUX_SURFTM(4, T)
+
         End Sub
 
         Public Function DW_CalcGibbsEnergy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, Optional ByVal forcephase As String = "") As Double
@@ -6773,6 +6777,73 @@ Final3:
             Dim ftotal As Double = 1
 
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+                IObj?.SetCurrent()
+                IObj?.Paragraphs.Add(String.Format("Calculating Surface Tension for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
+                If T / subst.ConstantProperties.Critical_Temperature < 1.0 Then
+                    With subst.ConstantProperties
+                        If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
+                            tmpval = CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
+                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} N/m", tmpval))
+                        ElseIf .IsIon Or .IsSalt Then
+                            tmpval = 0.0#
+                        Else
+                            nbp = subst.ConstantProperties.Normal_Boiling_Point
+                            If nbp = 0 Then nbp = 0.7 * subst.ConstantProperties.Critical_Temperature
+                            tmpval = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                            IObj?.Paragraphs.Add(String.Format("Value estimated with Brock-Bird correlation: {0} N/m", tmpval))
+                        End If
+                    End With
+                Else
+                    tmpval = 0
+                    ftotal -= subst.MoleFraction.GetValueOrDefault
+                End If
+                val += subst.MoleFraction.GetValueOrDefault * tmpval / ftotal
+            Next
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Surface Tension: {0} N/m", val))
+
+            IObj?.Close()
+
+            Return val
+
+        End Function
+
+        Public Overridable Function AUX_SURFTM(pidx As Integer, T As Double) As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_SURFTM", "Liquid Phase Surface Tension", "Liquid Phase Surface Tension Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("The liquid phase surface 
+                                tension is calculated by doing a molar average of the individual 
+                                component tensions. When experimental data is not available, the value 
+                                is calculated with the Brock-Bird equation,")
+
+            IObj?.Paragraphs.Add("<m>\frac{\sigma}{P_{c}^{2/3}T_{c}^{1/3}}=(0.132\alpha_{c}-0.279)(1-T_{r})^{11/9}</m>")
+
+            IObj?.Paragraphs.Add("<m>\alpha_{c}=0.9076[1+\frac{T_{br}\ln(P_{c}/1.01325)}{1-T_{br}}],</m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<mi>\sigma</mi> Surface tension (N/m)")
+
+            IObj?.Paragraphs.Add("<mi>T_{c}</mi> Critical temperature (K)")
+
+            IObj?.Paragraphs.Add("<mi>P_{c}</mi> Critical pressure (Pa)")
+
+            IObj?.Paragraphs.Add("<mi>T_{br}</mi> Reduced normal boiling point, <mi>T_{b}/T_{c}</mi>")
+
+            Dim val As Double = 0
+            Dim tmpval As Double = 0.0#
+            Dim nbp As Double
+            Dim subst As Interfaces.ICompound
+            Dim ftotal As Double = 1
+
+            For Each subst In Me.CurrentMaterialStream.Phases(pidx).Compounds.Values
                 IObj?.SetCurrent()
                 IObj?.Paragraphs.Add(String.Format("Calculating Surface Tension for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If T / subst.ConstantProperties.Critical_Temperature < 1.0 Then

@@ -148,6 +148,12 @@
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>97</value>
   </data>
+  <data name="Column16.HeaderText" xml:space="preserve">
+    <value>Mach Number</value>
+  </data>
+  <data name="Column16.Width" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Heat (kW)</value>
   </data>
@@ -191,12 +197,29 @@
     <value>h (External)</value>
   </data>
   <data name="Column13.Width" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>60</value>
   </data>
   <data name="Column15.HeaderText" xml:space="preserve">
     <value>External Temperature</value>
   </data>
   <data name="Column15.Width" type="System.Int32, mscorlib">
     <value>103</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DataGridView1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10912, 1639</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10912, 1639</value>
   </data>
 </root>

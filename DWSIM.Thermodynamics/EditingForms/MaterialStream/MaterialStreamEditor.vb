@@ -686,8 +686,8 @@ Public Class MaterialStreamEditor
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.temperature})
             End If
 
-            If p.Name.Contains("Overall") Then
-                refval = MatStream.Phases(0).Properties.surfaceTension.GetValueOrDefault
+            If p.Name.Contains("Liquid") Then
+                refval = p.Properties.surfaceTension.GetValueOrDefault()
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.surfaceTension, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Tensosuperficial"), val, units.surfaceTension})
             End If

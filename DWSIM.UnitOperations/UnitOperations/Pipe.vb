@@ -340,7 +340,6 @@ Namespace UnitOperations
                             viscosity is estimated. Emulsion viscosity is assuming liquid1 to be hydrocarbons 
                             liquid2 to be water. An inversion point at 50% oil volume fraction is assumed.")
 
-
             If args Is Nothing Then
                 If Not Me.Profile.Status = PipeEditorStatus.OK Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Operfilhidrulicodatu"))
@@ -599,6 +598,7 @@ Namespace UnitOperations
                                             .VapRe = 4 / Math.PI * .RHOv * .Qv / (.MUv * segmento.DI * 0.0254)
                                             .LiqVel = .Ql / (Math.PI * (segmento.DI * 0.0254) ^ 2 / 4)
                                             .VapVel = .Qv / (Math.PI * (segmento.DI * 0.0254) ^ 2 / 4)
+                                            .MachNumber = .VapVel / oms.Phases(2).Properties.speedOfSound.GetValueOrDefault()
 
                                         End With
 
@@ -862,6 +862,8 @@ Namespace UnitOperations
                                                                                                    .HTC_pipewall = results.HTC_pipewall,
                                                                                                    .External_Temperature = results.External_Temperature})
 
+                                segmento.Results.Last.MachNumber = .VapVel / oms.Phases(2).Properties.speedOfSound.GetValueOrDefault()
+
                             End With
 
                             Hin = Hout
@@ -970,6 +972,7 @@ Namespace UnitOperations
                 .FlowRegimeDescription = ""
                 .HTC = U
                 .External_Temperature = Text + dText_dL * currL
+                .MachNumber = .VapVel / oms.Phases(2).Properties.speedOfSound.GetValueOrDefault()
             End With
             segmento.Results.Add(results)
 
@@ -1885,6 +1888,8 @@ Final3:     T = bbb
                                 Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Results(sindex).LiqVel)
                             Case "VelocityVapor"
                                 Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Results(sindex).VapVel)
+                            Case "MachNumber"
+                                Return Profile.Sections(skey).Results(sindex).MachNumber
                             Case "ExternalTemperature"
                                 Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Results(sindex).External_Temperature)
                             Case Else
@@ -2009,6 +2014,7 @@ Final3:     T = bbb
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VelocityLiquid")
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VelocityVapor")
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ExternalTemperature")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",MachNumber")
                     j += 1
                 Next
             Next

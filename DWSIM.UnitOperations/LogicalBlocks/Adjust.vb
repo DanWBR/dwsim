@@ -414,7 +414,9 @@ Namespace SpecialOps
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
-            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+            If MyBase.SetPropertyValue(prop, propval, su) Then
+                Return True
+            End If
 
             Select Case prop
                 Case "MinVal"
