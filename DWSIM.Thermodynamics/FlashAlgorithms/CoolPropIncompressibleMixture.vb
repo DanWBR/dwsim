@@ -115,11 +115,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     vfant = vf
 
                     Tant = T
-                    If Math.Abs(H - Hl) < 0.01 Then
+                    If H <= Hl Then
                         vf = 0.0#
-                        lf = 1 - vf
+                        lf = 1.0
                         Vx = Vz.Clone
                         Vy = PP.RET_NullVector
+                        Vy(nsi) = 1.0
                         Dim bs As New BrentOpt.BrentMinimize
                         bs.DefineFuncDelegate(Function(tx)
                                                   Hl = spp.DW_CalcEnthalpy(Vx, tx, P, State.Liquid)
@@ -128,11 +129,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                               End Function)
                         Dim fmin As Double
                         fmin = bs.brentoptimize(Tmin, Tmax, 0.0001, T)
-                    ElseIf Math.Abs(H - Hv) < 0.01 Then
+                    ElseIf H >= Hv Then
                         vf = 1.0#
                         lf = 1 - vf
                         Vy = Vz.Clone
-                        Vx = PP.RET_NullVector
+                        Vx(nsi) = 1.0
+                        Vx(si) = 0.0
                         Dim bs As New BrentOpt.BrentMinimize
                         bs.DefineFuncDelegate(Function(tx)
                                                   Hv = spp.DW_CalcEnthalpy(Vy, tx, P, State.Vapor)
@@ -149,19 +151,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vx(si) = 1.0 - Vx(nsi)
                         Vxw = spp.AUX_CONVERT_MOL_TO_MASS(Vx)
                         x = Vxw(si)
-                        If vf > 1.0 Then
-                            Dim bs As New BrentOpt.BrentMinimize
-                            bs.DefineFuncDelegate(Function(tx)
-                                                      Hv = spp.DW_CalcEnthalpy(Vy, tx, P, State.Vapor)
-                                                      If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
-                                                      Return (H - Hv) ^ 2
-                                                  End Function)
-                            Dim fmin As Double
-                            fmin = bs.brentoptimize(Tmin, Tmaxs, 0.01, T)
-                        Else
-                            T = spp.AUX_TSAT(P, x)
-                        End If
-                        T = (T + Tant) / 2
+                        Dim bs As New BrentOpt.BrentMinimize
+                        bs.DefineFuncDelegate(Function(tx)
+                                                  Hl = spp.DW_CalcEnthalpy(Vx, tx, P, State.Liquid)
+                                                  Hv = spp.DW_CalcEnthalpy(Vy, tx, P, State.Vapor)
+                                                  Dim mmv, mml As Double
+                                                  mmv = PP.AUX_MMM(Vy)
+                                                  mml = PP.AUX_MMM(Vx)
+                                                  Dim herr = H - mmv * vf / (mmv * vf + mml * lf) * Hv - mml * lf / (mmv * vf + mml * lf) * Hl
+                                                  If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                                                  Return herr ^ 2
+                                              End Function)
+                        Dim fmin As Double
+                        fmin = bs.brentoptimize(Tmin, Tmaxs, 0.01, T)
                     End If
                     If vf > 1.0 Then
                         vf = 1.0
