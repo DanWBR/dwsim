@@ -24,6 +24,9 @@ Partial Class FormConfigUNIQUAC
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigUNIQUAC))
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -33,9 +36,6 @@ Partial Class FormConfigUNIQUAC
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -45,15 +45,6 @@ Partial Class FormConfigUNIQUAC
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.dgvu1 = New System.Windows.Forms.DataGridView()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.db = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.b12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.b21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.c12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.c21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -67,6 +58,15 @@ Partial Class FormConfigUNIQUAC
         Me.Label2 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.db = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.b12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.b21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.c12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.c21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
@@ -153,93 +153,6 @@ Partial Class FormConfigUNIQUAC
         Me.dgvu1.RowHeadersVisible = False
         Me.dgvu1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.dgvu1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'Column3
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Column3.FillWeight = 22.01269!
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'Column4
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Column4.FillWeight = 22.01269!
-        resources.ApplyResources(Me.Column4, "Column4")
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'db
-        '
-        Me.db.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.Format = "N0"
-        Me.db.DefaultCellStyle = DataGridViewCellStyle3
-        Me.db.DropDownWidth = 600
-        Me.db.FillWeight = 19.89848!
-        resources.ApplyResources(Me.db, "db")
-        Me.db.MaxDropDownItems = 10
-        Me.db.Name = "db"
-        Me.db.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Column5
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Column5.FillWeight = 22.01269!
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        '
-        'Column6
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Column6.FillWeight = 22.01269!
-        resources.ApplyResources(Me.Column6, "Column6")
-        Me.Column6.Name = "Column6"
-        '
-        'b12
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle6.Format = "N3"
-        Me.b12.DefaultCellStyle = DataGridViewCellStyle6
-        Me.b12.FillWeight = 22.01269!
-        resources.ApplyResources(Me.b12, "b12")
-        Me.b12.Name = "b12"
-        '
-        'b21
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N3"
-        Me.b21.DefaultCellStyle = DataGridViewCellStyle7
-        Me.b21.FillWeight = 22.01269!
-        resources.ApplyResources(Me.b21, "b21")
-        Me.b21.Name = "b21"
-        '
-        'c12
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N6"
-        Me.c12.DefaultCellStyle = DataGridViewCellStyle8
-        Me.c12.FillWeight = 22.01269!
-        resources.ApplyResources(Me.c12, "c12")
-        Me.c12.Name = "c12"
-        '
-        'c21
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N6"
-        Me.c21.DefaultCellStyle = DataGridViewCellStyle9
-        Me.c21.FillWeight = 22.01269!
-        resources.ApplyResources(Me.c21, "c21")
-        Me.c21.Name = "c21"
         '
         'LabelWithDivider3
         '
@@ -338,6 +251,92 @@ Partial Class FormConfigUNIQUAC
         'BackgroundWorker1
         '
         '
+        'Column3
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column3.FillWeight = 22.01269!
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'Column4
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Column4.FillWeight = 22.01269!
+        resources.ApplyResources(Me.Column4, "Column4")
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'db
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Format = "N0"
+        Me.db.DefaultCellStyle = DataGridViewCellStyle3
+        Me.db.DropDownWidth = 600
+        Me.db.FillWeight = 19.89848!
+        resources.ApplyResources(Me.db, "db")
+        Me.db.MaxDropDownItems = 10
+        Me.db.Name = "db"
+        Me.db.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Column5
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Column5.FillWeight = 22.01269!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        '
+        'Column6
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Column6.FillWeight = 22.01269!
+        resources.ApplyResources(Me.Column6, "Column6")
+        Me.Column6.Name = "Column6"
+        '
+        'b12
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N3"
+        Me.b12.DefaultCellStyle = DataGridViewCellStyle6
+        Me.b12.FillWeight = 22.01269!
+        resources.ApplyResources(Me.b12, "b12")
+        Me.b12.Name = "b12"
+        '
+        'b21
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N3"
+        Me.b21.DefaultCellStyle = DataGridViewCellStyle7
+        Me.b21.FillWeight = 22.01269!
+        resources.ApplyResources(Me.b21, "b21")
+        Me.b21.Name = "b21"
+        '
+        'c12
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Format = "N6"
+        Me.c12.DefaultCellStyle = DataGridViewCellStyle8
+        Me.c12.FillWeight = 22.01269!
+        resources.ApplyResources(Me.c12, "c12")
+        Me.c12.Name = "c12"
+        '
+        'c21
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.Format = "N6"
+        Me.c21.DefaultCellStyle = DataGridViewCellStyle9
+        Me.c21.FillWeight = 22.01269!
+        resources.ApplyResources(Me.c21, "c21")
+        Me.c21.Name = "c21"
+        '
         'FormConfigUNIQUAC
         '
         resources.ApplyResources(Me, "$this")
@@ -381,14 +380,14 @@ Partial Class FormConfigUNIQUAC
     Public WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents chkTdep As System.Windows.Forms.CheckBox
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents db As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents b12 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents b21 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents c12 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents c21 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents db As DataGridViewComboBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents b12 As DataGridViewTextBoxColumn
+    Friend WithEvents b21 As DataGridViewTextBoxColumn
+    Friend WithEvents c12 As DataGridViewTextBoxColumn
+    Friend WithEvents c21 As DataGridViewTextBoxColumn
 End Class

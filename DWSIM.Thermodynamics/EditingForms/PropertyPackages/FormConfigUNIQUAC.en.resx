@@ -152,29 +152,11 @@
     <value>Estimate (UNIFAC)</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Column3.Width" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="Column4.Width" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
   <data name="Column5.Width" type="System.Int32, mscorlib">
-    <value>88</value>
+    <value>96</value>
   </data>
   <data name="Column6.Width" type="System.Int32, mscorlib">
-    <value>88</value>
-  </data>
-  <data name="b12.Width" type="System.Int32, mscorlib">
-    <value>103</value>
-  </data>
-  <data name="b21.Width" type="System.Int32, mscorlib">
-    <value>103</value>
-  </data>
-  <data name="c12.Width" type="System.Int32, mscorlib">
-    <value>114</value>
-  </data>
-  <data name="c21.Width" type="System.Int32, mscorlib">
-    <value>114</value>
+    <value>96</value>
   </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
     <value>847, 343</value>
