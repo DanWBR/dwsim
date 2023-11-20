@@ -3705,7 +3705,20 @@ Namespace UnitOperations
 
             If TypeOf Me Is DistillationColumn Then
                 Dim solvererror = True
-                If SolvingMethodName.Contains("Bubble") Then
+                If SolvingMethodName.Contains("Modified") Then
+                    Try
+                        SetColumnSolver(New SolvingMethods.WangHenkeMethod2())
+                        so = Solver.SolveColumn(inputdata)
+                        solvererror = False
+                    Catch ex As Exception
+                    End Try
+                    If solvererror Then
+                        FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                        'try to solve with auto-generated initial estimates.
+                        SetColumnSolver(New SolvingMethods.WangHenkeMethod2())
+                        so = Solver.SolveColumn(GetSolverInputData(True))
+                    End If
+                ElseIf SolvingMethodName.Contains("Bubble") Then
                     Try
                         SetColumnSolver(New SolvingMethods.WangHenkeMethod())
                         so = Solver.SolveColumn(inputdata)

@@ -760,6 +760,7 @@
     <Compile Include="UnitOperations\Cooler.vb" />
     <Compile Include="UnitOperations\RigorousColumn.vb" />
     <Compile Include="UnitOperations\RigorousColumnSolvers\BubblePoint.vb" />
+    <Compile Include="UnitOperations\RigorousColumnSolvers\BubblePoint2.vb" />
     <Compile Include="UnitOperations\RigorousColumnSolvers\NewtonRaphson.vb" />
     <Compile Include="UnitOperations\RigorousColumnSolvers\SumRates.vb" />
     <Compile Include="UnitOperations\RigorousColumnSolvers\Tomich.vb" />

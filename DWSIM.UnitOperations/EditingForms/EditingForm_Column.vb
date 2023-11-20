@@ -100,6 +100,7 @@ Public Class EditingForm_Column
             If TypeOf SimObject Is DistillationColumn Then
                 cbSolvingMethod.Items.Add("Wang-Henke (Bubble Point)")
                 cbSolvingMethod.Items.Add("Napthali-Sandholm (Simultaneous Correction)")
+                cbSolvingMethod.Items.Add("Modified Wang-Henke (Bubble Point)")
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
                 cbSolvingMethod.Items.Add("Burningham-Otto (Sum Rates)")
                 cbSolvingMethod.Items.Add("Napthali-Sandholm (Simultaneous Correction)")
