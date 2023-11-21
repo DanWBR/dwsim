@@ -1410,13 +1410,13 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
             End If
 
-
-
             d2 = Date.Now
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+            If ecount > maxit_e Then
+                Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+            End If
 
             If PP.AUX_CheckTrivial(Ki) Then Throw New Exception("PV Flash [SLE]: Invalid result: converged to the trivial solution (T = " & T & " ).")
 
