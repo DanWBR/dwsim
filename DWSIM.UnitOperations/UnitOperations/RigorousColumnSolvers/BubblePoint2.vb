@@ -1249,10 +1249,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'check Kvalues
 
-                For i = 0 To ns
-                    Kfac(i) = K(i).Max / K(i).Min
-                Next
-
                 If maxDT < 10 Then
                     For i = 0 To ns
                         Tj(i) = Tj_ant(i) + dTj(i)
@@ -1264,7 +1260,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Else
                     For i = 0 To ns
                         Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
-                        K(i) = Kant(i)
                     Next
                 End If
 
@@ -1631,7 +1626,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
-            Loop Until t_error < tolerance * ns / 100 And ic > 1
+            Loop Until t_error < tolerance And ic > 1
 
             'check mass balance
             For i = 0 To ns
