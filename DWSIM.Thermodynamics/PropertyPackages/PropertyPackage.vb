@@ -5399,13 +5399,12 @@ redirect2:                  IObj?.SetCurrent()
 
             IObj?.Paragraphs.Add(String.Format("CAS Number: {0}", CAS))
 
-
-
-
-            If m_Henry.ContainsKey(CAS) Then
-                KHCP = m_Henry(CAS).KHcp
-                C = m_Henry(CAS).C
-            End If
+            SyncLock m_Henry
+                If m_Henry.ContainsKey(CAS) Then
+                    KHCP = m_Henry(CAS).KHcp
+                    C = m_Henry(CAS).C
+                End If
+            End SyncLock
 
             IObj?.Paragraphs.Add(String.Format("KHCP: {0}", KHCP))
             IObj?.Paragraphs.Add(String.Format("C: {0}", C))

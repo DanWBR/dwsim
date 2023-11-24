@@ -2848,7 +2848,7 @@ Namespace UnitOperations
             Dim Lflash = fflash(0)
             Dim Vflash = fflash(1)
 
-            Dim Kref = pp.DW_CalcKvalue(fflash(2), fflash(3), Tref, Pref)
+            Dim Kref = fflash(9)
 
             Dim Vprops = pp.DW_GetConstantProperties()
 

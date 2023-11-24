@@ -1674,38 +1674,6 @@ Imports System.Xml
                 myCOCUO.GraphicObject = myCUO
                 SimulationObjects.Add(myCUO.Name, myCOCUO)
 
-            Case ObjectType.AirCooler2
-
-                Dim fsobj = New AirCooler2()
-                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = "AC-" + objindex
-                If tag <> "" Then grobj.Tag = tag
-                gObj = grobj
-                CheckTag(gObj)
-                gObj.Name = Guid.NewGuid.ToString
-                If id <> "" Then gObj.Name = id
-                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
-                GraphicObjects.Add(gObj.Name, grobj)
-                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
-                grobj.CreateConnectors(0, 0)
-                SimulationObjects.Add(grobj.Name, fsobj)
-
-            Case ObjectType.EnergyMixer
-
-                Dim fsobj = New EnergyMixer()
-                Dim grobj As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                grobj.Tag = "EMIX-" + objindex
-                If tag <> "" Then grobj.Tag = tag
-                gObj = grobj
-                CheckTag(gObj)
-                gObj.Name = Guid.NewGuid.ToString
-                If id <> "" Then gObj.Name = id
-                DirectCast(fsobj, Interfaces.ISimulationObject).Name = gObj.Name
-                GraphicObjects.Add(gObj.Name, grobj)
-                DirectCast(fsobj, Interfaces.ISimulationObject).GraphicObject = grobj
-                grobj.CreateConnectors(0, 0)
-                SimulationObjects.Add(grobj.Name, fsobj)
-
             Case ObjectType.RCT_GibbsReaktoro
 
                 Dim fsobj = New Reactor_ReaktoroGibbs()

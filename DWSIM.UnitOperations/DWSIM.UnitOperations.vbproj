@@ -257,12 +257,6 @@
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_AirCooler.designer.vb">
-      <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_AirCooler.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </Compile>
@@ -273,12 +267,6 @@
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\EditingForm_CAPEOPENUO.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_Emixer.designer.vb">
-      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_Emixer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.Designer.vb">
@@ -734,9 +722,7 @@
     <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
     <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
-    <Compile Include="UnitOperations\AirCooler2.vb" />
     <Compile Include="UnitOperations\CleanEnergies\CleanEnergyUnitOpBase.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\EnergyMixer.vb" />
     <Compile Include="UnitOperations\CleanEnergies\HydroelectricTurbine.vb" />
     <Compile Include="UnitOperations\CleanEnergies\PEMFC_Amphlett.vb" />
     <None Include="UnitOperations\CleanEnergies\PEMFC_ChamberlineKim.vb" />
@@ -789,9 +775,6 @@
     <EmbeddedResource Include="EditingForms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_AirCooler.resx">
-      <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.en.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
@@ -815,12 +798,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_Emixer.en.resx">
-      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_Emixer.resx">
-      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_HydroelectricTurbine.resx">
       <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
