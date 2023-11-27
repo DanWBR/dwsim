@@ -22,7 +22,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] reactionphase()
         {
-            return new String[] { "Mixture", "Vapor", "Liquid" };
+            return new String[] { "Liquid", "Vapor", "Mixture", "Solid", "Liquid+Solid", "Vapor+Solid" };
         }
         public static String[] unitssystem()
         {
@@ -58,7 +58,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] valveopkvrelmode()
         {
-            return new String[] { "Linear","Equal Percentage","Quick Opening","User-Defined Expression","Data Table" };
+            return new String[] { "Linear", "Equal Percentage", "Quick Opening", "User-Defined Expression", "Data Table" };
         }
         public static String[] pumpcalcmode()
         {
@@ -74,7 +74,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] comprcalcmode()
         {
-            return new String[] { "Outlet Pressure", "Pressure Variation", "Power Required", "Energy Stream", "Known Head","Performance Curves" };
+            return new String[] { "Outlet Pressure", "Pressure Variation", "Power Required", "Energy Stream", "Known Head", "Performance Curves" };
         }
         public static String[] expndrcalcmode()
         {
@@ -83,16 +83,16 @@ namespace DWSIM.UI.Desktop.Shared
         public static String[] hxcalcmode()
         {
             return new String[] { "Calculate Hot Outlet Temperature",
-            "Calculate Cold Outlet Temperature", 
-            "Calculate Both Temperatures", 
-            "Calculate Both Temperatures (UA)", 
+            "Calculate Cold Outlet Temperature",
+            "Calculate Both Temperatures",
+            "Calculate Both Temperatures (UA)",
             "Calculate Area",
             "Shell and Tube (Rating)",
             "Shell and Tube (Design)",
             "Pinch Point",
-            "Specify Thermal Efficiency", 
+            "Specify Thermal Efficiency",
             "Specify Outlet Molar Vapor Fraction (Stream 1)",
-            "Specify Outlet Molar Vapor Fraction (Stream 2)"}; 
+            "Specify Outlet Molar Vapor Fraction (Stream 2)"};
         }
         public static String[] hxflowdir()
         {
@@ -277,13 +277,13 @@ namespace DWSIM.UI.Desktop.Shared
         }
 
         public static String error_uo() { return "This error generally occurs because of invalid input parameters or miscalculated inlet stream(s). Try the following procedures before solving the flowsheet again:\n\n- Check input parameters\n\n- Check inlet stream(s)\n\n- Perturb one or more input parameters(change them a little bit)\n\n- Try a different Property Package"; }
-     
+
         public static String error_flash() { return "A flash error occurs during the phase equilibrium calculation, and means that something went wrong while doing the mass and/or energy balance.Try the following procedures before solving the flowsheet again:\n\n- Check input parameters\n\n- Check inlet stream(s)\n\n- Perturb one or more input parameters(change them a little bit)\n\n- Try relaxing the flash convergence parameters at the Property Package settings panel(Basis -&gt; Configure Property Package)\n\n- Try a different Property Package"; }
-        
+
         public static String error_divergence() { return "This error generally occurs because of invalid input parameters or miscalculated inlet stream(s). Try the following procedures before solving the flowsheet again:\n\n- Check input parameters to see if a feasible solution is possible\n\n- Check inlet stream(s)\n\n- Perturb one or more input parameters(change them a little bit)\n\n- Try a different Property Package"; }
-        
+
         public static String error_flash_max_it() { return "A flash error occurs during the phase equilibrium calculation.If the flash calculation didn\'t converge, then there\'s a high probability that the current Property Package is unsuitable for your simulation. Try the following procedures before solving the flowsheet again:\n\n- Try relaxing the flash convergence parameters at the Property Package settings panel (Basis -&gt; Configure Property Package)\n\n- Try a different Property Package"; }
-        
+
         public static String error_invalid_parameter() { return "This error generally occurs because of invalid input parameters.Try the following procedures before solving the flowsheet again:\n\n- Check input parameters to see if a feasible solution is possible\n\n- Check inlet stream(s)"; }
 
     }

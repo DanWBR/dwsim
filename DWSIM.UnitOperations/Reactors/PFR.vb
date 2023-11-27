@@ -111,6 +111,7 @@ Namespace Reactors
 
         Public Property UserDefinedPressureDrop As Double = 0.0
 
+        Public Property SlurryViscosityMode As Integer = 0
 
         Public Sub New()
 
@@ -204,13 +205,18 @@ Namespace Reactors
 
             If Me.Reactions.Count > 0 Then
                 Select Case FlowSheet.Reactions(Me.Reactions(0)).ReactionPhase
-                    Case PhaseName.Vapor
+                    Case ReactionPhase.Vapor
                         Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
-                    Case PhaseName.Liquid
-                        Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault()
-                    Case PhaseName.Mixture
-                        Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault() +
-                                ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
+                    Case ReactionPhase.Liquid
+                        Qf = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault()
+                    Case ReactionPhase.Mixture
+                        Qf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault()
+                    Case ReactionPhase.Vapor_Solid
+                        Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault() +
+                                ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault()
+                    Case ReactionPhase.Liquid_Solid
+                        Qf = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault() +
+                                ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault()
                 End Select
             End If
 
@@ -787,7 +793,7 @@ Namespace Reactors
             'check active reactions (kinetic and heterogeneous only) in the reaction set
             'check if there are multiple reactions on different phases (unsupported)
 
-            Dim rxp As PhaseName = PhaseName.Mixture
+            Dim rxp As ReactionPhase = ReactionPhase.Mixture
 
             Dim hasHetCatReaction As Boolean = False
 
@@ -798,14 +804,14 @@ Namespace Reactors
                 End If
                 If rxn.ReactionType = ReactionType.Kinetic And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
-                    If rxp = PhaseName.Mixture Then rxp = rxn.ReactionPhase
+                    If rxp = ReactionPhase.Mixture Then rxp = rxn.ReactionPhase
                     If rxp <> rxn.ReactionPhase Then
                         Throw New Exception(FlowSheet.GetTranslatedString("MultipleReactionPhasesNotSupported"))
                     End If
                 ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic And rxnsb.IsActive Then
                     hasHetCatReaction = True
                     Me.Reactions.Add(rxnsb.ReactionID)
-                    If rxp = PhaseName.Mixture Then rxp = rxn.ReactionPhase
+                    If rxp = ReactionPhase.Mixture Then rxp = rxn.ReactionPhase
                     If rxp <> rxn.ReactionPhase Then
                         Throw New Exception(FlowSheet.GetTranslatedString("MultipleReactionPhasesNotSupported"))
                     End If
@@ -893,13 +899,18 @@ Namespace Reactors
 
                 If Me.Reactions.Count > 0 Then
                     Select Case FlowSheet.Reactions(Me.Reactions(0)).ReactionPhase
-                        Case PhaseName.Vapor
+                        Case ReactionPhase.Vapor
                             Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
-                        Case PhaseName.Liquid
+                        Case ReactionPhase.Liquid
                             Qf = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault()
-                        Case PhaseName.Mixture
+                        Case ReactionPhase.Mixture
+                            Qf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault()
+                        Case ReactionPhase.Vapor_Solid
+                            Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault() +
+                                ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault()
+                        Case ReactionPhase.Liquid_Solid
                             Qf = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault() +
-                                ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
+                                ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault()
                     End Select
                 End If
 
@@ -927,12 +938,16 @@ Namespace Reactors
                         For Each sb As ReactionStoichBase In rxn.Components.Values
 
                             Select Case rxn.ReactionPhase
-                                Case PhaseName.Liquid
+                                Case ReactionPhase.Liquid
                                     m0 = ims.Phases(1).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
-                                Case PhaseName.Vapor
+                                Case ReactionPhase.Vapor
                                     m0 = ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
-                                Case PhaseName.Mixture
+                                Case ReactionPhase.Mixture
                                     m0 = ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                Case ReactionPhase.Liquid_Solid
+                                    m0 = ims.Phases(1).Compounds(sb.CompName).MolarFlow.GetValueOrDefault + ims.Phases(7).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                Case ReactionPhase.Vapor_Solid
+                                    m0 = ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault + ims.Phases(7).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
                             End Select
 
                             If m0 = 0.0# Then m0 = 0.0000000001
@@ -1266,12 +1281,13 @@ Namespace Reactors
 
                 End If
 
-                Dim Qvin, Qlin, eta_v, eta_l, rho_v, rho_l, tens, rho, eta, xv, xl As Double
+                Dim Qvin, Qlin, Qsin, eta_v, eta_l, rho_v, rho_l, tens, rho, eta, xv, xl, phi, eta_r As Double
 
                 With ims
                     rho = .Phases(0).Properties.density.GetValueOrDefault
                     eta = .Phases(0).Properties.viscosity.GetValueOrDefault
                     Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault
+                    Qsin = .Phases(7).Properties.volumetric_flow.GetValueOrDefault
                     rho_l = .Phases(1).Properties.density.GetValueOrDefault
                     eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
                     tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
@@ -1280,10 +1296,18 @@ Namespace Reactors
                     eta_v = .Phases(2).Properties.viscosity.GetValueOrDefault
                     xv = .Phases(2).Properties.massfraction.GetValueOrDefault
                     xl = .Phases(1).Properties.massfraction.GetValueOrDefault
+                    phi = Qsin / Qlin
                 End With
 
                 Qvin /= NumberOfTubes
                 Qlin /= NumberOfTubes
+                Qsin /= NumberOfTubes
+
+                If SlurryViscosityMode = 1 Then
+                    'Yoshida et al (https://www.aidic.it/cet/13/32/349.pdf)
+                    eta_r = 1.0 + 3.0 * phi / (1.0 - phi / 0.52)
+                    eta_l *= eta_r
+                End If
 
                 eta = eta_l * xl + eta_v * xv
 
@@ -1299,7 +1323,7 @@ Namespace Reactors
 
                         'has catalyst, use Ergun equation for pressure drop in reactor beds
 
-                        Dim vel As Double = (Qlin + Qvin) / (PI * Diameter ^ 2 / 4)
+                        Dim vel As Double = (Qlin + Qvin + Qsin) / (PI * Diameter ^ 2 / 4)
                         Dim dp As Double = Me.CatalystParticleDiameter
                         Dim ev As Double = Me.CatalystVoidFraction
 
@@ -1315,7 +1339,7 @@ Namespace Reactors
                         Dim fpp As New FlowPackages.BeggsBrill
                         Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
 
-                        resv = fpp.CalculateDeltaP(Diameter, L, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                        resv = fpp.CalculateDeltaP(Diameter, L, 0.0#, 0.000045, Qvin * 24 * 3600, (Qlin + Qsin) * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
 
                         tipofluxo = resv(0)
                         holdup = resv(1)

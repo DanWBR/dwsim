@@ -101,14 +101,7 @@ Public Class FormReacKinetic
         tbFwdUE.Text = rc.ReactionKinFwdExpression
         tbRevUE.Text = rc.ReactionKinRevExpression
 
-        Select Case rc.ReactionPhase
-            Case PhaseName.Vapor
-                Me.tbPhase.SelectedIndex = 0
-            Case PhaseName.Liquid
-                Me.tbPhase.SelectedIndex = 1
-            Case PhaseName.Mixture
-                Me.tbPhase.SelectedIndex = 2
-        End Select
+        tbPhase.SelectedIndex = rc.ReactionPhase
 
         Select Case rc.ReactionBasis
             Case ReactionBasis.Activity
@@ -296,15 +289,7 @@ Public Class FormReacKinetic
                 End If
             Next
 
-            'phase and other settings
-            Select Case Me.tbPhase.SelectedIndex
-                Case 0
-                    rc.ReactionPhase = PhaseName.Vapor
-                Case 1
-                    rc.ReactionPhase = PhaseName.Liquid
-                Case 2
-                    rc.ReactionPhase = PhaseName.Mixture
-            End Select
+            rc.ReactionPhase = tbPhase.SelectedIndex
 
             Select Case Me.cbBase.SelectedIndex
                 Case 0

@@ -412,7 +412,7 @@ Namespace BaseClasses
 
         Public Property ReactionHeatCO As Double Implements Interfaces.IReaction.ReactionHeatCO
 
-        Public Property ReactionPhase As Interfaces.Enums.PhaseName Implements Interfaces.IReaction.ReactionPhase
+        Public Property ReactionPhase As Interfaces.Enums.ReactionPhase Implements Interfaces.IReaction.ReactionPhase
 
         Public Property ReactionType As Interfaces.Enums.ReactionType Implements Interfaces.IReaction.ReactionType
 

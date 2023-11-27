@@ -41,6 +41,8 @@ Partial Class EditingForm_Pipe
         Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.cbSlurryVisc = New System.Windows.Forms.ComboBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -216,6 +218,8 @@ Partial Class EditingForm_Pipe
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.cbSlurryVisc)
+        Me.TabPage4.Controls.Add(Me.Label21)
         Me.TabPage4.Controls.Add(Me.Label8)
         Me.TabPage4.Controls.Add(Me.CheckBox1)
         Me.TabPage4.Controls.Add(Me.Label4)
@@ -244,6 +248,25 @@ Partial Class EditingForm_Pipe
         Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip2"))
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'cbSlurryVisc
+        '
+        resources.ApplyResources(Me.cbSlurryVisc, "cbSlurryVisc")
+        Me.cbSlurryVisc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSlurryVisc.FormattingEnabled = True
+        Me.cbSlurryVisc.Items.AddRange(New Object() {resources.GetString("cbSlurryVisc.Items"), resources.GetString("cbSlurryVisc.Items1")})
+        Me.cbSlurryVisc.Name = "cbSlurryVisc"
+        Me.ToolTip1.SetToolTip(Me.cbSlurryVisc, resources.GetString("cbSlurryVisc.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSlurryVisc, resources.GetString("cbSlurryVisc.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSlurryVisc, resources.GetString("cbSlurryVisc.ToolTip2"))
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip2"))
         '
         'Label8
         '
@@ -774,4 +797,6 @@ Partial Class EditingForm_Pipe
     Friend WithEvents ToolTipChangeTag As ToolTip
     Public WithEvents Label8 As Label
     Public WithEvents CheckBox1 As CheckBox
+    Friend WithEvents cbSlurryVisc As ComboBox
+    Friend WithEvents Label21 As Label
 End Class

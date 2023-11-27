@@ -75,7 +75,7 @@ namespace DWSIM.UI.Desktop.Editors
                     UpdateEquation();
                 };
 
-                var sc = new TextBox() {Width = (int)(sf*50), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
+                var sc = new TextBox() { Width = (int)(sf*50), Text = (rx.Components.ContainsKey(comp.Name) ? rx.Components[comp.Name].StoichCoeff.ToString() : 0.0f.ToString()) };
 
                 sc.TextChanged += (sender, e) =>
                 {
@@ -98,7 +98,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 };
 
-                var hf = new TextBox() {Enabled = false, Width = (int)(sf * 100), Text = comp.IG_Enthalpy_of_Formation_25C.ToString("N2") };
+                var hf = new TextBox() { Enabled = false, Width = (int)(sf * 100), Text = comp.IG_Enthalpy_of_Formation_25C.ToString("N2") };
 
                 compcontainer.Add(new TableRow(chk, null, hf, sc));
             }
@@ -153,34 +153,12 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddLabelRow("Reaction Phase");
 
             var rxphaseselector = container.CreateAndAddDropDownRow("Reaction Phase", Shared.StringArrays.reactionphase().ToList(), 0, null);
-            
-            switch (rx.ReactionPhase)
-            {
-                case Interfaces.Enums.PhaseName.Mixture:
-                    rxphaseselector.SelectedIndex = (0);
-                    break;
-                case Interfaces.Enums.PhaseName.Vapor:
-                    rxphaseselector.SelectedIndex = (1);
-                    break;
-                case Interfaces.Enums.PhaseName.Liquid:
-                    rxphaseselector.SelectedIndex = (2);
-                    break;
-            }
+
+            rxphaseselector.SelectedIndex = (int)rx.ReactionPhase;
 
             rxphaseselector.SelectedIndexChanged += (sender, e) =>
             {
-                switch (rxphaseselector.SelectedIndex)
-                {
-                    case 0:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Mixture;
-                        break;
-                    case 1:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Vapor;
-                        break;
-                    case 2:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Liquid;
-                        break;
-                }
+                rx.ReactionPhase = rxphaseselector.SelectedIndex.ToEnum<Interfaces.Enums.ReactionPhase>();
             };
 
             container.CreateAndAddLabelRow("Conversion Expression");

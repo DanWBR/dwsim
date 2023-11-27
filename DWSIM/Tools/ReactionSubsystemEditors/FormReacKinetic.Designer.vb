@@ -402,7 +402,7 @@ Partial Class FormReacKinetic
         resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tbPhase.DropDownWidth = 121
-        Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1"), resources.GetString("tbPhase.Items2")})
+        Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1"), resources.GetString("tbPhase.Items2"), resources.GetString("tbPhase.Items3"), resources.GetString("tbPhase.Items4"), resources.GetString("tbPhase.Items5")})
         Me.tbPhase.Name = "tbPhase"
         '
         'GroupBox1

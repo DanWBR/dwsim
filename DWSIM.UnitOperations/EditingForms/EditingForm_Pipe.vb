@@ -134,6 +134,8 @@ Public Class EditingForm_Pipe
 
             cbPDropModel.SelectedIndex = .SelectedFlowPackage
 
+            cbSlurryVisc.SelectedIndex = .SlurryViscosityMode
+
             'profiles
 
             TabPage5.Controls.Clear()
@@ -478,5 +480,11 @@ Public Class EditingForm_Pipe
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         SimObject.UseGlobalWeather = CheckBox1.Checked
+    End Sub
+
+    Private Sub cbSlurryVisc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSlurryVisc.SelectedIndexChanged
+
+        SimObject.SlurryViscosityMode = cbSlurryVisc.SelectedIndex
+
     End Sub
 End Class

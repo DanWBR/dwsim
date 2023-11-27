@@ -28,7 +28,7 @@
 
     Property BaseReactant() As String
 
-    Property ReactionPhase() As Enums.PhaseName
+    Property ReactionPhase() As Enums.ReactionPhase
 
     Property ReactionType() As Enums.ReactionType
 

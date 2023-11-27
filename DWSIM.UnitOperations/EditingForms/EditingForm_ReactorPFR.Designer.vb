@@ -87,6 +87,8 @@ Partial Class EditingForm_ReactorPFR
         Me.tbCatDiam = New System.Windows.Forms.TextBox()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.cbSlurryVisc = New System.Windows.Forms.ComboBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.lblPDrop = New System.Windows.Forms.Label()
         Me.tbUserDefDP = New System.Windows.Forms.TextBox()
         Me.chkUseUserDefDP = New System.Windows.Forms.CheckBox()
@@ -125,8 +127,8 @@ Partial Class EditingForm_ReactorPFR
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.ZedGraphControl1 = New ZedGraph.ZedGraphControl()
-        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnExportProfile = New System.Windows.Forms.Button()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBoxParameters.SuspendLayout()
@@ -673,6 +675,8 @@ Partial Class EditingForm_ReactorPFR
         'TabPage9
         '
         resources.ApplyResources(Me.TabPage9, "TabPage9")
+        Me.TabPage9.Controls.Add(Me.cbSlurryVisc)
+        Me.TabPage9.Controls.Add(Me.Label21)
         Me.TabPage9.Controls.Add(Me.lblPDrop)
         Me.TabPage9.Controls.Add(Me.tbUserDefDP)
         Me.TabPage9.Controls.Add(Me.chkUseUserDefDP)
@@ -683,6 +687,25 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipValues.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage9, resources.GetString("TabPage9.ToolTip2"))
         Me.TabPage9.UseVisualStyleBackColor = True
+        '
+        'cbSlurryVisc
+        '
+        resources.ApplyResources(Me.cbSlurryVisc, "cbSlurryVisc")
+        Me.cbSlurryVisc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSlurryVisc.FormattingEnabled = True
+        Me.cbSlurryVisc.Items.AddRange(New Object() {resources.GetString("cbSlurryVisc.Items"), resources.GetString("cbSlurryVisc.Items1")})
+        Me.cbSlurryVisc.Name = "cbSlurryVisc"
+        Me.ToolTip1.SetToolTip(Me.cbSlurryVisc, resources.GetString("cbSlurryVisc.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSlurryVisc, resources.GetString("cbSlurryVisc.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSlurryVisc, resources.GetString("cbSlurryVisc.ToolTip2"))
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip2"))
         '
         'lblPDrop
         '
@@ -1068,11 +1091,6 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipChangeTag.SetToolTip(Me.ZedGraphControl1, resources.GetString("ZedGraphControl1.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.ZedGraphControl1, resources.GetString("ZedGraphControl1.ToolTip2"))
         '
-        'ToolTipChangeTag
-        '
-        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTipChangeTag.ToolTipTitle = "Info"
-        '
         'btnExportProfile
         '
         resources.ApplyResources(Me.btnExportProfile, "btnExportProfile")
@@ -1081,6 +1099,11 @@ Partial Class EditingForm_ReactorPFR
         Me.ToolTipChangeTag.SetToolTip(Me.btnExportProfile, resources.GetString("btnExportProfile.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.btnExportProfile, resources.GetString("btnExportProfile.ToolTip2"))
         Me.btnExportProfile.UseVisualStyleBackColor = True
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'EditingForm_ReactorPFR
         '
@@ -1218,4 +1241,6 @@ Partial Class EditingForm_ReactorPFR
     Public WithEvents tbUserDefDP As TextBox
     Friend WithEvents chkUseUserDefDP As CheckBox
     Friend WithEvents btnExportProfile As Button
+    Friend WithEvents cbSlurryVisc As ComboBox
+    Friend WithEvents Label21 As Label
 End Class

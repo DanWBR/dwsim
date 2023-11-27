@@ -154,6 +154,8 @@ Public Class EditingForm_ReactorPFR
 
             nupNT.Value = SimObject.NumberOfTubes
 
+            cbSlurryVisc.SelectedIndex = .SlurryViscosityMode
+
             Select Case .ReactorSizingType
                 Case Reactors.Reactor_PFR.SizingType.Diameter
                     rbDiameter.Checked = True
@@ -861,6 +863,12 @@ Public Class EditingForm_ReactorPFR
             MessageBox.Show(String.Format("Data export finished successfully to sheet '{0}'.", sheet.Name), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End If
+
+    End Sub
+
+    Private Sub cbSlurryVisc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSlurryVisc.SelectedIndexChanged
+
+        SimObject.SlurryViscosityMode = cbSlurryVisc.SelectedIndex
 
     End Sub
 

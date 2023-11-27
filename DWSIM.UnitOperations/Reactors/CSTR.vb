@@ -407,7 +407,6 @@ Namespace Reactors
             'Hp = products enthalpy
             Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Q, QL, QS, QV, Qr, Rx, IErr, OErr As Double
             Dim ReactorMode As EReactorMode = EReactorMode.SingleOutlet
-            Dim RP As Integer 'Reaction phase ID
             Dim dT, MaxChange As Double 'Time step in seconds; MaxChange = max relative change of a component
             Dim i, NIter As Integer
             Dim NC As Integer = ims.Phases(0).Compounds.Count 'Number of components
@@ -475,8 +474,8 @@ Namespace Reactors
             QL = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault 'Liquid
             QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
-            If QL > 0 Then
-                ResidenceTimeL = Volume / QL
+            If QL + QS > 0 Then
+                ResidenceTimeL = Volume / (QL + QS)
             Else
                 ResidenceTimeL = 0
             End If
@@ -598,39 +597,79 @@ Namespace Reactors
                     'Read component concentrations in phase of reaction 
 
                     C.Clear()
-                    For Each comp As Compound In ims.Phases(RP).Compounds.Values
-                        C.Add(comp.Name, comp.Molarity) 'C: mol/m³
-                    Next
 
                     'Qr = reaction volume where actual reaction takes place
                     Select Case rxn.ReactionPhase
-                        Case PhaseName.Liquid
-                            RP = 1 'reacting phase ID = overall Liquid
+
+                        Case ReactionPhase.Liquid
+
                             If ReactorMode = EReactorMode.SingleOutlet Then
                                 Qr = QL / Q * Me.Volume
                             Else
                                 Qr = QL / (QL + QS) * Me.Volume
                             End If
 
-                        Case PhaseName.Vapor
-                            RP = 2
+                            For Each comp As Compound In ims.Phases(1).Compounds.Values
+                                C.Add(comp.Name, comp.Molarity) 'C: mol/m³
+                            Next
+
+                        Case ReactionPhase.Vapor
+
                             If ReactorMode = EReactorMode.SingleOutlet Then
                                 Qr = QV / Q * Me.Volume
                             Else
                                 Qr = Me.Headspace
                             End If
 
-                        Case PhaseName.Mixture
-                            RP = 0
+                            For Each comp As Compound In ims.Phases(2).Compounds.Values
+                                C.Add(comp.Name, comp.Molarity) 'C: mol/m³
+                            Next
+
+                        Case ReactionPhase.Mixture
+
                             Qr = Me.Volume + Me.Headspace
 
-                        Case PhaseName.Solid
-                            RP = 7
+                            For Each comp As Compound In ims.Phases(0).Compounds.Values
+                                C.Add(comp.Name, comp.MolarFlow / Q) 'C: mol/m³
+                            Next
+
+                        Case ReactionPhase.Solid
+
                             If ReactorMode = EReactorMode.SingleOutlet Then
                                 Qr = QS / Q * Me.Volume
                             Else
                                 Qr = QS / (QL + QS) * Me.Volume
                             End If
+
+                            For Each comp As Compound In ims.Phases(7).Compounds.Values
+                                C.Add(comp.Name, comp.MolarFlow / QS) 'C: mol/m³
+                            Next
+
+                        Case ReactionPhase.Vapor_Solid
+
+                            If ReactorMode = EReactorMode.SingleOutlet Then
+                                Qr = QS / Q * Me.Volume
+                            Else
+                                Qr = QS / (QL + QS) * Me.Volume
+                            End If
+
+                            For Each comp As Compound In ims.Phases(2).Compounds.Values
+                                C.Add(comp.Name, comp.MolarFlow / (QV + QS)) 'C: mol/m³
+                            Next
+
+                            For Each comp As Compound In ims.Phases(7).Compounds.Values
+                                C(comp.Name) += comp.MolarFlow / (QV + QS) 'C: mol/m³
+                            Next
+
+                        Case ReactionPhase.Liquid_Solid
+
+                            For Each comp As Compound In ims.Phases(1).Compounds.Values
+                                C.Add(comp.Name, comp.MolarFlow / (QL + QS)) 'C: mol/m³
+                            Next
+
+                            For Each comp As Compound In ims.Phases(7).Compounds.Values
+                                C(comp.Name) += comp.MolarFlow / (QL + QS) 'C: mol/m³
+                            Next
 
                     End Select
 

@@ -162,33 +162,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             var rxphaseselector = p1.CreateAndAddDropDownRow("Reaction Phase", Shared.StringArrays.reactionphase().ToList(), 0, null);
 
-            switch (rx.ReactionPhase)
-            {
-                case Interfaces.Enums.PhaseName.Mixture:
-                    rxphaseselector.SelectedIndex = 0;
-                    break;
-                case Interfaces.Enums.PhaseName.Vapor:
-                    rxphaseselector.SelectedIndex = 1;
-                    break;
-                case Interfaces.Enums.PhaseName.Liquid:
-                    rxphaseselector.SelectedIndex = 2;
-                    break;
-            }
+            rxphaseselector.SelectedIndex = (int)rx.ReactionPhase;
 
             rxphaseselector.SelectedIndexChanged += (sender, e) =>
             {
-                switch (rxphaseselector.SelectedIndex)
-                {
-                    case 0:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Mixture;
-                        break;
-                    case 1:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Vapor;
-                        break;
-                    case 2:
-                        rx.ReactionPhase = Interfaces.Enums.PhaseName.Liquid;
-                        break;
-                }
+                rx.ReactionPhase = rxphaseselector.SelectedIndex.ToEnum<Interfaces.Enums.ReactionPhase>();
             };
 
             p1.CreateAndAddLabelRow("Reaction Basis");

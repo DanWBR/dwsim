@@ -194,20 +194,74 @@
   <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 255</value>
-  </data>
-  <data name="GroupBoxParameters.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 236</value>
-  </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 210</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage7.Text" xml:space="preserve">
+    <value>Catalyst Info</value>
+  </data>
+  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage8.Text" xml:space="preserve">
+    <value>Annotations</value>
+  </data>
+  <data name="cbSlurryVisc.Items1" xml:space="preserve">
+    <value>Yoshida et al</value>
+  </data>
+  <data name="cbSlurryVisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 84</value>
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 88</value>
+  </data>
+  <data name="lblPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 57</value>
+  </data>
+  <data name="tbUserDefDP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 54</value>
+  </data>
+  <data name="chkUseUserDefDP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 58</value>
+  </data>
+  <data name="chkUseUserDefDP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 17</value>
+  </data>
+  <data name="chkUseUserDefDP.Text" xml:space="preserve">
+    <value>Constant Linear Pressure Drop</value>
+  </data>
+  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 25</value>
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 28</value>
+  </data>
+  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage9.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 236</value>
+  </data>
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 255</value>
+  </data>
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 24</value>
@@ -268,12 +322,6 @@
   </data>
   <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 20</value>
-  </data>
-  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>Dimensions</value>
   </data>
   <data name="nupNT.Location" type="System.Drawing.Point, System.Drawing">
     <value>226, 126</value>
@@ -341,12 +389,6 @@
   <data name="Label6.Text" xml:space="preserve">
     <value>Tube Length</value>
   </data>
-  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage7.Text" xml:space="preserve">
-    <value>Catalyst Info</value>
-  </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>350, 34</value>
   </data>
@@ -394,30 +436,6 @@
   </data>
   <data name="tbCatDiam.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
-  </data>
-  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage8.Text" xml:space="preserve">
-    <value>Annotations</value>
-  </data>
-  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage9.Text" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="chkUseUserDefDP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 17</value>
-  </data>
-  <data name="chkUseUserDefDP.Text" xml:space="preserve">
-    <value>Constant Linear Pressure Drop</value>
-  </data>
-  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 25</value>
-  </data>
-  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 28</value>
   </data>
   <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -530,22 +548,6 @@
   <data name="GroupBoxResults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="tabstrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 39</value>
-  </data>
-  <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 256</value>
-  </data>
-  <data name="btnExportProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 23</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnExportProfile.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="btnExportProfile.Text" xml:space="preserve">
-    <value>Export Profile to New Spreadsheet</value>
-  </data>
   <data name="GroupBoxResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 538</value>
   </data>
@@ -554,6 +556,9 @@
   </data>
   <data name="GroupBoxResults.Text" xml:space="preserve">
     <value>Results</value>
+  </data>
+  <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 256</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 230</value>
@@ -574,13 +579,13 @@
     <value>Units</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 253</value>
+    <value>373, 230</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Reactions</value>
   </data>
   <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 247</value>
+    <value>367, 224</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Reaction</value>
@@ -595,13 +600,13 @@
     <value>Units</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 253</value>
+    <value>373, 230</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Conversions</value>
   </data>
   <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 253</value>
+    <value>373, 230</value>
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -610,13 +615,23 @@
     <value>Conversion (%)</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 253</value>
+    <value>373, 230</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Concentration Profile</value>
   </data>
   <data name="ZedGraphControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 247</value>
+    <value>367, 224</value>
+  </data>
+  <data name="btnExportProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnExportProfile.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="btnExportProfile.Text" xml:space="preserve">
+    <value>Export Profile to New Spreadsheet</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>400, 848</value>

@@ -436,6 +436,15 @@ Namespace Enums
         PartialPress
     End Enum
 
+    Public Enum ReactionPhase
+        Liquid
+        Vapor
+        Mixture
+        Solid
+        Liquid_Solid
+        Vapor_Solid
+    End Enum
+
     Public Enum ReactionKineticType
         Arrhenius = 0
         UserDefined = 1

@@ -81,9 +81,9 @@ Public Class FormReacEq
         Me.tbKeqConstant.Text = rc.ConstantKeqValue
 
         Select Case rc.ReactionPhase
-            Case PhaseName.Vapor
+            Case ReactionPhase.Vapor
                 Me.tbPhase.SelectedIndex = 0
-            Case PhaseName.Liquid
+            Case ReactionPhase.Liquid
                 Me.tbPhase.SelectedIndex = 1
         End Select
 
@@ -295,9 +295,9 @@ Public Class FormReacEq
             'phase and other settings
             Select Case Me.tbPhase.SelectedIndex
                 Case 0
-                    rc.ReactionPhase = PhaseName.Vapor
+                    rc.ReactionPhase = ReactionPhase.Vapor
                 Case 1
-                    rc.ReactionPhase = PhaseName.Liquid
+                    rc.ReactionPhase = ReactionPhase.Liquid
             End Select
 
             Select Case Me.cbBase.SelectedIndex

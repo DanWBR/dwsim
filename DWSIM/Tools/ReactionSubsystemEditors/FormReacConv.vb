@@ -71,14 +71,7 @@ Public Class FormReacConv
         Me.tbReacHeat.Text = rc.ReactionHeat
         Me.tbStoich.Text = rc.StoichBalance
 
-        Select Case rc.ReactionPhase
-            Case PhaseName.Vapor
-                Me.tbPhase.SelectedIndex = 0
-            Case PhaseName.Liquid
-                Me.tbPhase.SelectedIndex = 1
-            Case PhaseName.Mixture
-                Me.tbPhase.SelectedIndex = 2
-        End Select
+        Me.tbPhase.SelectedIndex = rc.ReactionPhase
 
         loaded = True
 
@@ -227,14 +220,9 @@ Public Class FormReacConv
             Next
 
             'phase and other settings
-            Select Case Me.tbPhase.SelectedIndex
-                Case 0
-                    rc.ReactionPhase = PhaseName.Vapor
-                Case 1
-                    rc.ReactionPhase = PhaseName.Liquid
-                Case 2
-                    rc.ReactionPhase = PhaseName.Mixture
-            End Select
+
+            rc.ReactionPhase = tbPhase.SelectedIndex
+
             'rc.ReactionHeat = Me.tbReacHeat.Text
             rc.Description = Me.tbDesc.Text
             rc.Name = Me.tbName.Text

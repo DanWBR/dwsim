@@ -86,6 +86,8 @@ Namespace UnitOperations
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
 
+        Public Property SlurryViscosityMode As Integer = 0
+
         Public Property PressureDrop_Static As Double = 0.0
         Public Property PressureDrop_Friction As Double = 0.0
 
@@ -386,7 +388,7 @@ Namespace UnitOperations
                 es = args(2)
             End If
 
-            Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, TinP, PinP,
+            Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, Qsin, eta_phi, eta_r, TinP, PinP,
                 rho_l, rho_v, Cp_l, Cp_v, Cp_m, K_l, K_v, eta_l, eta_v, tens, Hin, Hout, HinP,
                 fT, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT, dText_dL, phi, eta_lh, eta_ll As Double
             Dim cntP, cntT As Integer
@@ -492,14 +494,22 @@ Namespace UnitOperations
                             w = .Phases(0).Properties.massflow.GetValueOrDefault
                             Tin = .Phases(0).Properties.temperature.GetValueOrDefault
                             Qlin = .Phases(1).Properties.volumetric_flow.GetValueOrDefault
-                            '+ .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
+                            Qsin = .Phases(7).Properties.volumetric_flow.GetValueOrDefault
                             rho_l = .Phases(1).Properties.density.GetValueOrDefault
+
                             If Double.IsNaN(rho_l) Then rho_l = 0.0#
 
                             If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
                                 eta_l = EmulsionViscosity(oms)
                             Else
                                 eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                            End If
+
+                            If SlurryViscosityMode = 1 Then
+                                'Yoshida et al (https://www.aidic.it/cet/13/32/349.pdf)
+                                eta_phi = Qsin / Qlin
+                                eta_r = 1.0 + 3.0 * eta_phi / (1.0 - eta_phi / 0.52)
+                                eta_l *= eta_r
                             End If
 
                             K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
@@ -589,7 +599,7 @@ Namespace UnitOperations
                                             .Kv = K_v
                                             .RHOl = rho_l
                                             .RHOv = rho_v
-                                            .Ql = Qlin
+                                            .Ql = Qlin + Qsin
                                             .Qv = Qvin
                                             .MUl = eta_l
                                             .MUv = eta_v
@@ -617,17 +627,17 @@ Namespace UnitOperations
                                                 L_eq = resf(0) * 0.0254 * .DI
                                                 resv = fpp.CalculateDeltaP(.DI * 0.0254, L_eq, 0, Me.GetRugosity(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
                                             Else
-                                                mu_mix = Qlin / (Qvin + Qlin) * eta_l + Qvin / (Qvin + Qlin) * eta_v
-                                                rho_mix = Qlin / (Qvin + Qlin) * rho_l + Qvin / (Qvin + Qlin) * rho_v
+                                                mu_mix = (Qlin + Qsin) / (Qvin + Qlin + Qsin) * eta_l + Qvin / (Qvin + Qlin + Qsin) * eta_v
+                                                rho_mix = (Qlin + Qsin) / (Qvin + Qlin + Qsin) * rho_l + Qvin / (Qvin + Qlin + Qsin) * rho_v
                                                 vel_mix = (Qlin + Qvin) / ((.DI * 0.0254) ^ 2 * Math.PI / 4)
                                                 Re_mix = fpp.NRe(rho_mix, vel_mix, .DI * 0.0254, mu_mix)
                                                 Dim k = Me.GetRugosity(.Material, segmento)
                                                 f_mix = fpp.FrictionFactor(Re_mix, .DI * 0.0254, k)
                                                 dph = 0
-                                                dpf = resf(0) * (Qlin / (Qvin + Qlin) * rho_l + Qvin / (Qvin + Qlin) * rho_v) * (results.LiqVel.GetValueOrDefault + results.VapVel.GetValueOrDefault) ^ 2 / 2
+                                                dpf = resf(0) * ((Qlin + Qsin) / (Qvin + Qlin + Qsin) * rho_l + Qvin / (Qvin + Qlin + Qsin) * rho_v) * (results.LiqVel.GetValueOrDefault + results.VapVel.GetValueOrDefault) ^ 2 / 2
                                                 dpt = dpf
                                                 resv(0) = ""
-                                                resv(1) = Qlin / (Qvin + Qlin)
+                                                resv(1) = (Qlin + Qsin) / (Qvin + Qlin + Qsin)
                                                 resv(2) = dpf
                                                 resv(3) = 0
                                                 resv(4) = dpt
@@ -815,18 +825,29 @@ Namespace UnitOperations
                             oms.Calculate(True, True)
 
                             With oms
+
                                 w = .Phases(0).Properties.massflow.GetValueOrDefault
                                 Hout = .Phases(0).Properties.enthalpy.GetValueOrDefault
                                 Tout = .Phases(0).Properties.temperature.GetValueOrDefault
 
-                                Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
+                                Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault
+                                Qsin = .Phases(7).Properties.volumetric_flow.GetValueOrDefault
+
                                 rho_l = .Phases(1).Properties.density.GetValueOrDefault
+
                                 If Double.IsNaN(rho_l) Then rho_l = 0.0#
 
                                 If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
                                     eta_l = EmulsionViscosity(oms)
                                 Else
                                     eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                                End If
+
+                                If SlurryViscosityMode = 1 Then
+                                    'Yoshida et al (https://www.aidic.it/cet/13/32/349.pdf)
+                                    eta_phi = Qsin / Qlin
+                                    eta_r = 1.0 + 3.0 * eta_phi / (1.0 - eta_phi / 0.52)
+                                    eta_l *= eta_r
                                 End If
 
                                 K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault

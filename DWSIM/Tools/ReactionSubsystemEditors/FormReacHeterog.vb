@@ -75,16 +75,7 @@ Public Class FormReacHeterog
         Me.tbNumerator.Text = rc.RateEquationNumerator
         Me.tbDenominator.Text = rc.RateEquationDenominator
 
-        Select Case rc.ReactionPhase
-            Case PhaseName.Vapor
-                Me.tbPhase.SelectedIndex = 0
-            Case PhaseName.Liquid
-                Me.tbPhase.SelectedIndex = 1
-            Case PhaseName.Solid
-                Me.tbPhase.SelectedIndex = 2
-            Case PhaseName.Mixture
-                Me.tbPhase.SelectedIndex = 3
-        End Select
+        Me.tbPhase.SelectedIndex = rc.ReactionPhase
 
         Select Case rc.ReactionBasis
             Case ReactionBasis.Activity
@@ -269,17 +260,7 @@ Public Class FormReacHeterog
                 End If
             Next
 
-            'phase and other settings
-            Select Case Me.tbPhase.SelectedIndex
-                Case 0
-                    rc.ReactionPhase = PhaseName.Vapor
-                Case 1
-                    rc.ReactionPhase = PhaseName.Liquid
-                Case 2
-                    rc.ReactionPhase = PhaseName.Solid
-                Case 3
-                    rc.ReactionPhase = PhaseName.Mixture
-            End Select
+            rc.ReactionPhase = tbPhase.SelectedIndex
 
             Select Case Me.cbBase.SelectedIndex
                 Case 0

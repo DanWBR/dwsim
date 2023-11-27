@@ -593,18 +593,30 @@ Namespace Reactors
                                               scBC = rxn.Components(BC).StoichCoeff
 
                                               Select Case rxn.ReactionPhase
-                                                  Case PhaseName.Liquid
+                                                  Case ReactionPhase.Liquid
                                                       m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault
                                                       nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0)
                                                       nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                                                  Case PhaseName.Vapor
+                                                  Case ReactionPhase.Vapor
                                                       m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault
                                                       nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Vapor).MultiplyConstY(m0)
                                                       nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                                                  Case PhaseName.Mixture
+                                                  Case ReactionPhase.Mixture
                                                       m0 = ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                                       nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).MultiplyConstY(m0)
                                                       nBC = ims.Phases(0).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                                                  Case ReactionPhase.Solid
+                                                      m0 = ims.Phases(7).Properties.molarflow.GetValueOrDefault
+                                                      nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Solid).MultiplyConstY(m0)
+                                                      nBC = ims.Phases(7).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                                                  Case ReactionPhase.Liquid_Solid
+                                                      m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault + ims.Phases(7).Properties.molarflow.GetValueOrDefault
+                                                      nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0).AddY(ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Solid).MultiplyConstY(m0))
+                                                      nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault() + ims.Phases(7).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                                                  Case ReactionPhase.Vapor_Solid
+                                                      m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault + ims.Phases(7).Properties.molarflow.GetValueOrDefault
+                                                      nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Vapor).MultiplyConstY(m0).AddY(ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Solid).MultiplyConstY(m0))
+                                                      nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault() + ims.Phases(7).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
                                               End Select
 
                                               'delta mole flows
@@ -655,12 +667,18 @@ Namespace Reactors
                     scBC = rxn.Components(BC).StoichCoeff
 
                     Select Case rxn.ReactionPhase
-                        Case PhaseName.Liquid
+                        Case ReactionPhase.Liquid
                             nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                        Case PhaseName.Vapor
+                        Case ReactionPhase.Vapor
                             nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
-                        Case PhaseName.Mixture
+                        Case ReactionPhase.Mixture
                             nBC = ims.Phases(0).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                        Case ReactionPhase.Solid
+                            nBC = ims.Phases(7).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                        Case ReactionPhase.Liquid_Solid
+                            nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault() + ims.Phases(7).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                        Case ReactionPhase.Vapor_Solid
+                            nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault() + ims.Phases(7).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
                     End Select
 
                     If Not Me.Conversions.ContainsKey(rxn.ID) Then
