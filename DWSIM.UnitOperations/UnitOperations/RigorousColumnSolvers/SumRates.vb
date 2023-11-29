@@ -447,9 +447,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
-                Dim H(ns), dHadd(ns), dHadd1(ns), dHadd2(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns), dHl2(ns), dHv2(ns) As Double
+                Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns), dHl2(ns), dHv2(ns) As Double
 
-                Dim epsilon As Double = 0.00001
+                Dim epsilon As Double = 0.01
 
                 If doparallel Then
 
@@ -459,9 +459,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                      Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
                                                                      dHl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
                                                                      dHl2(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHadd(ipar) = ppr.DW_CalcAdditionalEnthalpyTerm(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar), P(ipar)) * ppr.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHadd1(ipar) = ppr.DW_CalcAdditionalEnthalpyTerm(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar) - epsilon, P(ipar)) * ppr.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHadd2(ipar) = ppr.DW_CalcAdditionalEnthalpyTerm(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar) + epsilon, P(ipar)) * ppr.AUX_MMM(xc(ipar)) / 1000
                                                                      If llextr Then
                                                                          Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
@@ -475,9 +472,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                      Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                      dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                      dHl2(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHadd(ipar) = pp.DW_CalcAdditionalEnthalpyTerm(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar), P(ipar)) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHadd1(ipar) = pp.DW_CalcAdditionalEnthalpyTerm(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar) - epsilon, P(ipar)) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                     dHadd2(ipar) = pp.DW_CalcAdditionalEnthalpyTerm(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar) + epsilon, P(ipar)) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                      If llextr Then
                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
@@ -488,9 +482,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                          dHv2(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                      End If
                                                                  End If
-                                                                 Hl(ipar) += dHadd(ipar)
-                                                                 dHl(ipar) += dHadd1(ipar)
-                                                                 dHl2(ipar) += dHadd2(ipar)
                                                              End Sub),
                                                       Settings.TaskCancellationTokenSource.Token)
 
@@ -503,9 +494,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             IObj2?.SetCurrent()
                             dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
                             dHl2(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
-                            dHadd(i) = ppr.DW_CalcAdditionalEnthalpyTerm(xc(i).MultiplyConstY(Lj(i)), Tj(i), P(i)) * ppr.AUX_MMM(xc(i)) / 1000
-                            dHadd1(i) = ppr.DW_CalcAdditionalEnthalpyTerm(xc(i).MultiplyConstY(Lj(i)), Tj(i) - epsilon, P(i)) * ppr.AUX_MMM(xc(i)) / 1000
-                            dHadd2(i) = ppr.DW_CalcAdditionalEnthalpyTerm(xc(i).MultiplyConstY(Lj(i)), Tj(i) + epsilon, P(i)) * ppr.AUX_MMM(xc(i)) / 1000
                             IObj2?.SetCurrent()
                             If llextr Then
                                 Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
@@ -527,9 +515,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             IObj2?.SetCurrent()
                             dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
                             dHl2(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
-                            dHadd(i) = pp.DW_CalcAdditionalEnthalpyTerm(xc(i).MultiplyConstY(Lj(i)), Tj(i), P(i)) * pp.AUX_MMM(xc(i)) / 1000
-                            dHadd1(i) = pp.DW_CalcAdditionalEnthalpyTerm(xc(i).MultiplyConstY(Lj(i)), Tj(i) - epsilon, P(i)) * pp.AUX_MMM(xc(i)) / 1000
-                            dHadd2(i) = pp.DW_CalcAdditionalEnthalpyTerm(xc(i).MultiplyConstY(Lj(i)), Tj(i) + epsilon, P(i)) * pp.AUX_MMM(xc(i)) / 1000
                             IObj2?.SetCurrent()
                             If llextr Then
                                 Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
@@ -545,9 +530,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
                     End If
-                    Hl(i) += dHadd(i)
-                    dHl(i) += dHadd1(i)
-                    dHl2(i) += dHadd2(i)
                 End If
 
                 IObj2?.Paragraphs.Add(String.Format("HL: {0}", Hl.ToMathArrayString))
