@@ -1288,6 +1288,12 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overridable Function DW_CalcAdditionalEnthalpyTerm(Vz As Double(), T As Double, P As Double)
+
+            Return 0.0
+
+        End Function
+
         ''' <summary>
         ''' Calculates the enthalpy of a mixture.
         ''' </summary>
