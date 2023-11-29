@@ -1288,7 +1288,14 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overridable Function DW_CalcAdditionalEnthalpyTerm(Vz As Double(), T As Double, P As Double)
+        ''' <summary>
+        ''' Calculates additional enthalpy terms like heat of reaction, absorption, etc
+        ''' </summary>
+        ''' <param name="Vn">Number of moles vector</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="P">Pressure in Pa</param>
+        ''' <returns>The additional enthalpy term in kJ/kg</returns>
+        Public Overridable Function DW_CalcAdditionalEnthalpyTerm(Vn As Double(), T As Double, P As Double)
 
             Return 0.0
 
