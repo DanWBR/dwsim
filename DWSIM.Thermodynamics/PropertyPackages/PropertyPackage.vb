@@ -1295,7 +1295,7 @@ Namespace PropertyPackages
         ''' <param name="T">Temperature in K</param>
         ''' <param name="P">Pressure in Pa</param>
         ''' <returns>The additional enthalpy term in kJ/kg</returns>
-        Public Overridable Function DW_CalcAdditionalEnthalpyTerm(Vn As Double(), T As Double, P As Double)
+        Public Overridable Function DW_CalcAdditionalEnthalpyTerm(Vn As Double(), T As Double, P As Double) As Double
 
             Return 0.0
 

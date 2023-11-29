@@ -728,9 +728,7 @@
     <Compile Include="Forms\FormCORegistration.Designer.vb">
       <DependentUpon>FormCORegistration.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormCORegistration.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\FormCORegistration.vb" />
     <Compile Include="Forms\FormDefineFonts.Designer.vb">
       <DependentUpon>FormDefineFonts.vb</DependentUpon>
     </Compile>

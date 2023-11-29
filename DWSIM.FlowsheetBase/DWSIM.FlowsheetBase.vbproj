@@ -178,9 +178,7 @@
     <Compile Include="ControlPanelMode\FormTextBoxInput.designer.vb">
       <DependentUpon>FormTextBoxInput.vb</DependentUpon>
     </Compile>
-    <Compile Include="ControlPanelMode\FormTextBoxInput.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ControlPanelMode\FormTextBoxInput.vb" />
     <Compile Include="ControlPanelMode\GraphicObjectControlPanelModeEditors.vb" />
     <Compile Include="FlowsheetBase.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
