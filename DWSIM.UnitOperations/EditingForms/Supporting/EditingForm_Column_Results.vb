@@ -51,6 +51,8 @@ Public Class EditingForm_Column_Results
 
         SelTab = 0
 
+        ChangeDefaultFont()
+
     End Sub
 
     Private Sub FillTables()
