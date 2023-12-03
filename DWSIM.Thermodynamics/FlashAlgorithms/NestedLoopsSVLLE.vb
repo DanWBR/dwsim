@@ -231,7 +231,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Close()
 
-            Return New Object() {L1, V, Vx1, Vy, 0, L2, Vx2, S, Vs}
+            Dim Ki1(n), Ki2(n) As Double
+
+            Ki1 = PP.DW_CalcKvalue(Vx1, Vy, T, P)
+            If L2 > 0.0 Then Ki2 = PP.DW_CalcKvalue(Vx2, Vy, T, P)
+
+            Return New Object() {L1, V, Vx1, Vy, 0, L2, Vx2, S, Vs, Ki1, Ki2}
 
         End Function
 

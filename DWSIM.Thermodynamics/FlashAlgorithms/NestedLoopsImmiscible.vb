@@ -87,7 +87,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             n = Vz.Length - 1
 
-            Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki_ant(n), fi(n) As Double
+            Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki2(n), Ki_ant(n), fi(n) As Double
 
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
@@ -190,13 +190,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
             Next
 
+            Ki = PP.DW_CalcKvalue(Vx1, Vy, T, P)
+            Ki2 = PP.DW_CalcKvalue(Vx2, Vy, T, P)
+
             d2 = Date.Now
 
             dt = d2 - d1
 
             WriteDebugInfo("PT Flash [NL-I]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
-out:        Return New Object() {xl1, V, Vx1, Vy, ecount, xl2, Vx2, 0.0#, PP.RET_NullVector}
+out:        Return New Object() {xl1, V, Vx1, Vy, ecount, xl2, Vx2, 0.0#, PP.RET_NullVector, Ki, Ki2}
 
         End Function
 

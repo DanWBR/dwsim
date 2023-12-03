@@ -674,9 +674,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             dens2 = PP.AUX_LIQDENS(T, Vx2, P)
 
             If dens1 <= dens2 Then
-                result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, Sx / F, Vs}
+                result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, Sx / F, Vs, Ki1, Ki2}
             Else
-                result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, Sx / F, Vs}
+                result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, Sx / F, Vs, Ki2, Ki1}
             End If
 
             d2 = Date.Now
