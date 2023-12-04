@@ -521,6 +521,10 @@ Namespace PropertyPackages
 
         Public Overridable ReadOnly Property ShouldUseKvalueMethod2 As Boolean = False Implements IPropertyPackage.ShouldUseKvalueMethod2
 
+        Public Overridable ReadOnly Property ShouldUseKvalueMethod3 As Boolean = False Implements IPropertyPackage.ShouldUseKvalueMethod3
+
+        Public Overridable ReadOnly Property HasReactivePhase As Boolean = False Implements IPropertyPackage.HasReactivePhase
+
         'forced solids list
         Public Property ForcedSolids As New List(Of String)
 
@@ -1302,6 +1306,19 @@ Namespace PropertyPackages
         End Function
 
         ''' <summary>
+        ''' Calculater enthalpy of reaction for a given phase
+        ''' </summary>
+        ''' <param name="Vn">Vector containing number of moles for each compound</param>
+        ''' <param name="T">Temperature in K</param>
+        ''' <param name="P">Pressure in Pa</param>
+        ''' <returns>DHr in kJ</returns>
+        Public Overridable Function DW_CalcEnthalpyOfReaction(ByVal Vn() As Double, ByVal T As Double, ByVal P As Double) As Double
+
+            Return 0.0
+
+        End Function
+
+        ''' <summary>
         ''' Calculates the enthalpy of a mixture.
         ''' </summary>
         ''' <param name="Vx">Vector of doubles containing the molar composition of the mixture.</param>
@@ -1344,6 +1361,21 @@ Namespace PropertyPackages
         ''' <returns>The entropy departure of the mixture in kJ/kg.K.</returns>
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEntropyDeparture(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+        ''' <summary>
+        ''' Calculates K-values of components in a mixture.
+        ''' </summary>
+        ''' <param name="Vnx">Vector of doubles containing the molar flows of the liquid phase.</param>
+        ''' <param name="Vny">Vector of doubles containing the molar flows of the vapor phase.</param>
+        ''' <param name="T">Temperature of the system.</param>
+        ''' <param name="P">Pressure of the system.</param>
+        ''' <returns>An array containing K-values for all components in the mixture.</returns>
+        ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
+        Public Overridable Function DW_CalcKvalue3(ByVal Vnx As Double(), ByVal Vny As Double(), ByVal T As Double, ByVal P As Double) As Double()
+
+            Throw New NotImplementedException()
+
+        End Function
 
         ''' <summary>
         ''' Calculates K-values of components in a mixture.

@@ -152,7 +152,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim VSSj(ns), LSSj(ns), Hv(ns), Hl(ns), Hv0(ns), Hl0(ns) As Double
             Dim sumvkj(ns), sumlkj(ns) As Double
 
-            Dim M(ns, nc - 1), E(ns, nc - 1), H(ns) As Double
+            Dim M(ns, nc - 1), E(ns, nc - 1), H(ns), Hr(ns) As Double
             Dim M_ant(ns, nc - 1), E_ant(ns, nc - 1), H_ant(ns) As Double
 
             For i = 0 To ns
@@ -214,15 +214,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 yc(0) = _pp.DW_CalcBubT(xc(0), P(0), Tj(0), Nothing, False)(3)
             Else
                 If llextr Then
-                    LSSj(0) = 0.0
+                    LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS
                 Else
-                    LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS - Vj(0)
+                    LSSj(0) = 0.0
                 End If
             End If
 
             For i = 0 To ns
-                If Vj(i) <> 0 Then Sv(i) = VSSj(i) / Vj(i) Else Sv(i) = 0
-                If Lj(i) <> 0 Then Sl(i) = LSSj(i) / Lj(i) Else Sl(i) = 0
+                If Vj(i) > 0.0 Then Sv(i) = VSSj(i) / Vj(i) Else Sv(i) = 0
+                If Lj(i) > 0.0 Then Sl(i) = LSSj(i) / Lj(i) Else Sl(i) = 0
             Next
 
             'calculate K-values
@@ -235,18 +235,24 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                              If llextr Then
                                                                  tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
                                                              Else
-                                                                 If Not _pp.ShouldUseKvalueMethod2 Then
+                                                                 If _pp.ShouldUseKvalueMethod3 Then
                                                                      If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
-                                                                         tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingDeltaT, P(ipar))
+                                                                         tmp0 = _pp.DW_CalcKvalue3(xc(ipar).MultiplyConstY(Lj(ipar)), yc(ipar).MultiplyConstY(Vj(ipar)), Tj(ipar) - _subcoolingDeltaT, P(ipar))
                                                                      Else
-                                                                         tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                         tmp0 = _pp.DW_CalcKvalue3(xc(ipar).MultiplyConstY(Lj(ipar)), yc(ipar).MultiplyConstY(Vj(ipar)), Tj(ipar), P(ipar))
                                                                      End If
-                                                                 Else
+                                                                 ElseIf _pp.ShouldUseKvalueMethod2 Then
                                                                      Dim zk = xc(ipar).MultiplyConstY(Lj(ipar)).AddY(yc(ipar).MultiplyConstY(Vj(ipar))).MultiplyConstY(1 / (Lj(ipar) + Vj(ipar)))
                                                                      If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
                                                                          tmp0 = _pp.DW_CalcKvalue(zk, Tj(ipar) - _subcoolingDeltaT, P(ipar))
                                                                      Else
                                                                          tmp0 = _pp.DW_CalcKvalue(zk, Tj(ipar), P(ipar))
+                                                                     End If
+                                                                 Else
+                                                                     If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                                                         tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingDeltaT, P(ipar))
+                                                                     Else
+                                                                         tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
                                                                      End If
                                                                  End If
                                                              End If
@@ -266,18 +272,24 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If llextr Then
                         tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                     Else
-                        If Not _pp.ShouldUseKvalueMethod2 Then
+                        If _pp.ShouldUseKvalueMethod3 Then
                             If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
-                                tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingDeltaT, P(i))
+                                tmp0 = _pp.DW_CalcKvalue3(xc(i).MultiplyConstY(Lj(i)), yc(i).MultiplyConstY(Vj(i)), Tj(i) - _subcoolingDeltaT, P(i))
                             Else
-                                tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                                tmp0 = _pp.DW_CalcKvalue3(xc(i).MultiplyConstY(Lj(i)), yc(i).MultiplyConstY(Vj(i)), Tj(i), P(i))
                             End If
-                        Else
+                        ElseIf _pp.ShouldUseKvalueMethod2 Then
                             Dim zk = xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i)))
                             If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
                                 tmp0 = _pp.DW_CalcKvalue(zk, Tj(i) - _subcoolingDeltaT, P(i))
                             Else
                                 tmp0 = _pp.DW_CalcKvalue(zk, Tj(i), P(i))
+                            End If
+                        Else
+                            If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingDeltaT, P(i))
+                            Else
+                                tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
                             End If
                         End If
 
@@ -312,6 +324,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                              Else
                                                                  Hl(ipar) = 0.0#
                                                              End If
+                                                             Hr(ipar) = _pp.DW_CalcEnthalpyOfReaction(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar), P(ipar))
                                                          End Sub),
                                                       Settings.TaskCancellationTokenSource.Token)
                 task1.Wait()
@@ -335,6 +348,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Else
                         Hl(i) = 0
                     End If
+                    Hr(i) = _pp.DW_CalcEnthalpyOfReaction(xc(i).MultiplyConstY(Lj(i)), Tj(i), P(i))
                     _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                 Next
 
@@ -522,11 +536,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     End If
                 Next
                 If i = 0 Then
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i))
+                    H(i) = -Hr(i) + (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i))
                 ElseIf i = ns Then
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i) - Q(i))
+                    H(i) = -Hr(i) + (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i) - Q(i))
                 Else
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i))
+                    H(i) = -Hr(i) + (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i))
                 End If
                 H(i) /= 1000.0
                 Select Case coltype
@@ -547,7 +561,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To ns
                 errors(i * (2 * nc + 1)) = H(i)
                 For j = 0 To nc - 1
-                    errors(i * (2 * nc + 1) + j + 1) = M(i, j)
+                    errors(i * (2 * nc + 1) + j + 1) = M(i, j) * 1000000.0
                     errors(i * (2 * nc + 1) + j + 1 + nc) = E(i, j)
                 Next
             Next
@@ -1159,12 +1173,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To ns
                 For j = 0 To nc - 1
                     If sumlkj(i) > 0 Then
-                        xc(i)(j) = lc(i)(j) / sumlkj(i)
+                        xc(i)(j) = lc(i)(j) / Lj(i)
                     End If
                 Next
                 For j = 0 To nc - 1
-                    If sumvkj(i) > 0 Then
-                        yc(i)(j) = vc(i)(j) / sumvkj(i)
+                    If Vj(i) > 0 Then
+                        yc(i)(j) = vc(i)(j) / Vj(i)
                     Else
                         yc(i)(j) = xc(i)(j) * _Kval(i)(j)
                     End If

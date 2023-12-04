@@ -222,7 +222,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'step3
 
-
             Dim names = pp.RET_VNAMES().ToList()
 
             reporter?.AppendLine("========================================================")
@@ -449,6 +448,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns), dHl2(ns), dHv2(ns) As Double
 
+                Dim Hr(ns), Hr1(ns), Hr2(ns), dHr(ns) As Double
+
                 Dim epsilon As Double = 0.01
 
                 If doparallel Then
@@ -480,6 +481,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                          dHv2(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) + epsilon, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
+                                                                     If pp.HasReactivePhase Then
+                                                                         Hr(ipar) = pp.DW_CalcEnthalpyOfReaction(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar), P(ipar))
+                                                                         Hr1(ipar) = pp.DW_CalcEnthalpyOfReaction(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar) - epsilon, P(ipar))
+                                                                         Hr2(ipar) = pp.DW_CalcEnthalpyOfReaction(xc(ipar).MultiplyConstY(Lj(ipar)), Tj(ipar) + epsilon, P(ipar))
                                                                      End If
                                                                  End If
                                                              End Sub),
@@ -527,6 +533,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                                 dHv2(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) + epsilon, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
                             End If
+                            If pp.HasReactivePhase Then
+                                Hr(i) = pp.DW_CalcEnthalpyOfReaction(xc(i).MultiplyConstY(Lj(i)), Tj(i), P(i))
+                                Hr1(i) = pp.DW_CalcEnthalpyOfReaction(xc(i).MultiplyConstY(Lj(i)), Tj(i) - epsilon, P(i))
+                                Hr2(i) = pp.DW_CalcEnthalpyOfReaction(xc(i).MultiplyConstY(Lj(i)), Tj(i) + epsilon, P(i))
+                            End If
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                         Next
                     End If
@@ -537,12 +548,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 For i = 0 To ns
                     If i = 0 Then
-                        H(i) = Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
+                        H(i) = Hr(i) + Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
                     ElseIf i = ns Then
-                        H(i) = Lj(i - 1) * Hl(i - 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
+                        H(i) = Hr(i) + Lj(i - 1) * Hl(i - 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
                     Else
-                        H(i) = Lj(i - 1) * Hl(i - 1) + Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
+                        H(i) = Hr(i) + Lj(i - 1) * Hl(i - 1) + Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
                     End If
+                    dHr(i) = (Hr2(i) - Hr1(i)) / (2 * epsilon)
                     dHldT(i) = (dHl2(i) - dHl(i)) / (2 * epsilon)
                     dHvdT(i) = (dHv2(i) - dHv(i)) / (2 * epsilon)
                 Next
@@ -589,14 +601,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 deltat = xth
 
-                Dim dft = MathOps.MathEx.Interpolation.Interpolation.GetDampingFactor(ic, 50, 0.05, 1.0)
-                Dim dfc = MathOps.MathEx.Interpolation.Interpolation.GetDampingFactor(ic, 50, 0.05, 1.0)
+                Dim dft = MathOps.MathEx.Interpolation.Interpolation.GetDampingFactor(ic, 50, 0.25, 1.0)
+                Dim dfc = MathOps.MathEx.Interpolation.Interpolation.GetDampingFactor(ic, 50, 0.25, 1.0)
 
                 t_error = 0.0#
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    Tj(i) = Tj(i) + dft * deltat(i)
+                    Tj(i) = Tj(i) + 0.7 * deltat(i)
                     If RelaxTemperatureUpdates Then
                         Tj(i) = dft * Tj(i) + (1 - dft) * Tj_ant(i)
                     End If
@@ -608,7 +620,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If llextr Then
                             tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
-                            If ppr.ShouldUseKvalueMethod2 Then
+                            If ppr.ShouldUseKvalueMethod3 Then
+                                tmp = ppr.DW_CalcKvalue3(xc(i).MultiplyConstY(Lj(i)), yc(i).MultiplyConstY(Vj(i)), Tj(i), P(i))
+                            ElseIf ppr.ShouldUseKvalueMethod2 Then
                                 tmp = ppr.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
                             Else
                                 tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
@@ -619,7 +633,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If llextr Then
                             tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                         Else
-                            If pp.ShouldUseKvalueMethod2 Then
+                            If pp.ShouldUseKvalueMethod3 Then
+                                tmp = pp.DW_CalcKvalue3(xc(i).MultiplyConstY(Lj(i)), yc(i).MultiplyConstY(Vj(i)), Tj(i), P(i))
+                            ElseIf pp.ShouldUseKvalueMethod2 Then
                                 tmp = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
                             Else
                                 tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
@@ -640,9 +656,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         End If
                         yc_ant(i)(j) = yc(i)(j)
                         yc(i)(j) = K(i)(j) * xc(i)(j)
-                        If RelaxCompositionUpdates Then
-                            yc(i)(j) = dfc * yc(i)(j) + (1 - dfc) * yc_ant(i)(j)
-                        End If
+                        'If RelaxCompositionUpdates Then
+                        '    yc(i)(j) = dfc * yc(i)(j) + (1 - dfc) * yc_ant(i)(j)
+                        'End If
                         sumy(i) += yc(i)(j)
                         comperror += Abs(yc(i)(j) - yc_ant(i)(j)) ^ 2
                     Next
@@ -769,7 +785,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
-            Loop Until t_error <= tol(1) And comperror <= tol(1)
+            Loop Until t_error <= tol(1) And comperror <= tol(1) And ic > 10
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
 

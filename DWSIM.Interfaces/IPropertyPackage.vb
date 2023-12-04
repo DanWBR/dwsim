@@ -73,7 +73,8 @@
     ReadOnly Property DisplayName As String
 
     ReadOnly Property DisplayDescription As String
-
+    ReadOnly Property HasReactivePhase As Boolean
+    ReadOnly Property ShouldUseKvalueMethod3 As Boolean
     Function GetAsObject() As Object
 
 End Interface

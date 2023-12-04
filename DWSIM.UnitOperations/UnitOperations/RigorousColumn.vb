@@ -3325,7 +3325,13 @@ Namespace UnitOperations
                         j = j + 1
                     Next
                     z(i) = zm
-                    Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                    If pp.ShouldUseKvalueMethod3 Then
+                        Kval(i) = pp.DW_CalcKvalue3(x(i).MultiplyConstY(L(i)), y(i).MultiplyConstY(V(i)), T(i), P(i))
+                    ElseIf pp.ShouldUseKvalueMethod2 Then
+                        Kval(i) = pp.DW_CalcKvalue(x(i).MultiplyConstY(L(i)).AddY(y(i).MultiplyConstY(V(i))), T(i), P(i))
+                    Else
+                        Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                    End If
                 Else
                     IObj?.SetCurrent()
                     z(i) = zm
@@ -3338,7 +3344,13 @@ Namespace UnitOperations
                         y(i) = y(i).NormalizeY
                         Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
                     Else
-                        Kval(i) = pp.DW_CalcKvalue_Ideal_Wilson(T(i), P(i))
+                        If pp.ShouldUseKvalueMethod3 Then
+                            Kval(i) = pp.DW_CalcKvalue(z(i), T(i), P(i))
+                        ElseIf pp.ShouldUseKvalueMethod2 Then
+                            Kval(i) = pp.DW_CalcKvalue(z(i), T(i), P(i))
+                        Else
+                            Kval(i) = pp.DW_CalcKvalue_Ideal_Wilson(T(i), P(i))
+                        End If
                         If ColumnType = ColType.AbsorptionColumn Then
                             For j = 0 To nc - 1
                                 x(i)(j) = (L(i) + V(i)) * z(i)(j) / (L(i) + V(i) * Kval(i)(j))
