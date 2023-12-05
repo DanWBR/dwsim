@@ -2136,7 +2136,13 @@ Namespace BaseClasses
                 D = Solid_Density_Const_D
                 E = Solid_Density_Const_E
                 message = "Calculated using Experimental/Regressed data."
-                If eqno <> "" Then result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                If eqno <> "" Then
+                    If Integer.TryParse(SurfaceTensionEquation, New Integer) Then
+                        result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                    Else
+                        result = PropertyPackages.PropertyPackage.ParseEquation(eqno, A, B, C, D, E, T) 'kmol/m3
+                    End If
+                End If
                 val = 1 / (result * mw)
             ElseIf OriginalDB = "ChEDL Thermo" Then
                 Dim A, B, C, D, E, result As Double
@@ -2176,7 +2182,11 @@ Namespace BaseClasses
                 D = Solid_Heat_Capacity_Const_D
                 E = Solid_Heat_Capacity_Const_E
                 message = "Calculated using Experimental/Regressed data."
-                result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'J/kmol/K
+                If Integer.TryParse(SurfaceTensionEquation, New Integer) Then
+                    result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'J/kmol/K
+                Else
+                    result = PropertyPackages.PropertyPackage.ParseEquation(eqno, A, B, C, D, E, T) 'J/kmol/K
+                End If
                 val = result / 1000 / mw 'kJ/kg.K
             ElseIf OriginalDB = "ChEDL Thermo" Then
                 Dim A, B, C, D, E As Double
