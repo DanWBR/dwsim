@@ -1288,21 +1288,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             IObj2?.SetCurrent
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                             Try
-                                If pp.ShouldUseKvalueMethod2 Then
-                                    tmp = pp.FlashBase.Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
-                                Else
-                                    tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
-                                End If
+                                tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
                             Catch ex As Exception
                                 Throw New Exception(String.Format(pp.Flowsheet.GetTranslatedString("Error calculating bubble point temperature for stage {0} with P = {1} Pa and molar composition {2}"), i, P(i), xc(i).ToArrayString()), ex)
                             End Try
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
-                            If pp.ShouldUseKvalueMethod2 Then
-                                K(i) = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
-                            Else
-                                K(i) = tmp(6)
-                            End If
+                            K(i) = tmp(6)
                             If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
                                 Tj(i) = Tj_ant(i)
                                 K(i) = Kant(i)
@@ -1414,13 +1406,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         For i = 0 To ns
                             Kant(i) = K(i)
                             If i = 0 Then
-                                If pp.ShouldUseKvalueMethod2 Then
+                                If pp.ShouldUseKvalueMethod3 Then
+                                    K(i) = pp.DW_CalcKvalue3(xc(i).MultiplyConstY(Lj(i)), (yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i) - _subcoolingdeltat, P(i))
+                                ElseIf pp.ShouldUseKvalueMethod2 Then
                                     K(i) = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i) - _subcoolingdeltat, P(i))
                                 Else
                                     K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingdeltat, P(i))
                                 End If
                             Else
-                                If pp.ShouldUseKvalueMethod2 Then
+                                If pp.ShouldUseKvalueMethod3 Then
+                                    K(i) = pp.DW_CalcKvalue3(xc(i).MultiplyConstY(Lj(i)), (yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
+                                ElseIf pp.ShouldUseKvalueMethod2 Then
                                     K(i) = pp.DW_CalcKvalue(xc(i).MultiplyConstY(Lj(i)).AddY(yc(i).MultiplyConstY(Vj(i))).MultiplyConstY(1 / (Lj(i) + Vj(i))), Tj(i), P(i))
                                 Else
                                     K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))

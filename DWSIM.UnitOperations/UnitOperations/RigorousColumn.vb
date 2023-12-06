@@ -3403,65 +3403,11 @@ Namespace UnitOperations
                     LSS(0) = distrate
                     LSS(ns) = sumF - LSS(0) - sumLSS - sumVSS - V(0)
 
-                    Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
-
-                    For i = 0 To nc - 1
-                        Array.Resize(at(i), ns + 1)
-                        Array.Resize(bt(i), ns + 1)
-                        Array.Resize(ct(i), ns + 1)
-                        Array.Resize(dt(i), ns + 1)
-                        Array.Resize(xt(i), ns + 1)
-                    Next
-
-                    Dim sum1t(ns), sum2t(ns) As Double
-
                     For i = 0 To ns
-                        sum1t(i) = 0
-                        sum2t(i) = 0
-                        For j = 0 To i
-                            sum1t(i) += F(j) - LSS(j) - VSS(j)
-                        Next
-                        If i > 0 Then
-                            For j = 0 To i - 1
-                                sum2t(i) += F(j) - LSS(j) - VSS(j)
-                            Next
-                        End If
-                    Next
-
-                    For i = 0 To nc - 1
-                        For j = 0 To ns
-                            dt(i)(j) = -F(j) * z(j)(i)
-                            If j < ns Then
-                                bt(i)(j) = -(V(j + 1) + sum1t(j) - V(0) + LSS(j) + (V(j) + VSS(j)) * Kval(j)(i))
-                            Else
-                                bt(i)(j) = -(sum1(j) - V(0) + LSS(j) + (V(j) + VSS(j)) * Kval(j)(i))
-                            End If
-                            'tdma solve
-                            If j < ns Then ct(i)(j) = V(j + 1) * Kval(j + 1)(i)
-                            If j > 0 Then at(i)(j) = V(j) + sum2t(j) - V(0)
-                        Next
-                    Next
-
-                    'tomich
-                    For i = 0 To nc - 1
-                        xt(i) = SolvingMethods.Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
-                    Next
-
-                    Dim sumx(ns), sumy(ns) As Double
-
-                    For i = 0 To ns
-                        sumx(i) = 0
-                        For j = 0 To nc - 1
-                            x(i)(j) = xt(j)(i)
-                            If x(i)(j) < 0.0# Then x(i)(j) = 0.0000001
-                            sumx(i) += x(i)(j)
-                        Next
-                    Next
-
-                    For i = 0 To ns
-                        x(i) = x(i).NormalizeY()
-                        y(i) = x(i).MultiplyY(Kval(i)).NormalizeY()
-                        Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                        Dim sflash As Object() = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                        x(i) = sflash(2)
+                        y(i) = sflash(3)
+                        Kval(i) = sflash(9)
                     Next
 
                     'LSS(0) = 0
