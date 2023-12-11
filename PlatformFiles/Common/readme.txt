@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.6.5
+Version 8.6.6
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,19 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.6.6
+
+- Added Mach number calculation and reporting for gas flow in pipes
+- Added slurry viscosity correction for PFR and Pipe Segment (Yoshida et al, https://www.aidic.it/cet/13/32/349.pdf)
+- New Modified Bubble-Point solver for Rigorous Columns
+- Kinetic/HetCat/Conversion reactions/reactors now support compounds in solid phase
+- Surface Tension is now calculated for all liquid phases
+- General fixes to Rigorous Column model and solvers
+- Fixed issue with Coolprop Incompressibles PP
+- Fixed issues with Pump model
+- Fixed Solid Cp calculation
+- Other minor fixes and enhancements
 
 Version 8.6.5
 

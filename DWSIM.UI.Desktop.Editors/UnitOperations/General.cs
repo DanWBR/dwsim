@@ -2046,6 +2046,9 @@ namespace DWSIM.UI.Desktop.Editors
                                       arg3.TextColor = (Colors.Red);
                                   }
                               });
+                    s.CreateAndAddDropDownRow(container, "Slurry Viscosity Correction", new List<string> { "Disabled", "Yoshida et al" },
+                        reactor4.SlurryViscosityMode,
+                         (dd, e) => reactor4.SlurryViscosityMode = dd.SelectedIndex);
                     break;
                 case ObjectType.ComponentSeparator:
                     var csep = (ComponentSeparator)SimObject;
@@ -2358,6 +2361,9 @@ namespace DWSIM.UI.Desktop.Editors
                     });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Include Joule-Thomson Effect"));
+                    s.CreateAndAddDropDownRow(container, "Slurry Viscosity Correction", new List<string> { "Disabled", "Yoshida et al" },
+                        pipe.SlurryViscosityMode,
+                         (dd, e) => pipe.SlurryViscosityMode = dd.SelectedIndex);
                     break;
                 case ObjectType.Vessel:
                     var vessel = (Vessel)SimObject;

@@ -613,7 +613,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddLabelRow(container, "Solver Settings");
 
-            var methods = new string[] { "Wang-Henke (Bubble Point)", "Napthali-Sandholm (Simultaneous Correction)" };
+            var methods = new string[] { "Wang-Henke (Bubble Point)", "Modified Wang-Henke (Bubble Point)", "Napthali-Sandholm (Simultaneous Correction)" };
 
             s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), methods.ToList().IndexOf(column.SolvingMethodName), (sender, e) =>
             {

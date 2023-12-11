@@ -2509,6 +2509,19 @@ Final3:     T = bbb
             Next
 
             str.AppendLine()
+            str.AppendLine("Mach Number Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Mach Number")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Results
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & res.MachNumber.ToString(numberformat, ci))
+                    comp_ant += ps.Comprimento / ps.Incrementos
+                Next
+            Next
+
+            str.AppendLine()
             str.AppendLine("Liquid Reynolds Number Profile")
             str.AppendLine()
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Re")
