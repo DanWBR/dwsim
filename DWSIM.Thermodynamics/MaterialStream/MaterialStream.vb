@@ -2232,7 +2232,7 @@ Namespace Streams
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
                     For i = 102 To 105
-                        For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                        For Each subst As ConstantProperties In Phases(0).Compounds.Values
                             proplist.Add("PROP_MS_" + CStr(i) + "/" + subst.Name)
                         Next
                     Next
@@ -2243,7 +2243,7 @@ Namespace Streams
                     For i = 131 To 148
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    For Each subst As ConstantProperties In Phases(0).Compounds.Values
                         proplist.Add("PROP_MS_102" + "/" + subst.Name)
                         proplist.Add("PROP_MS_103" + "/" + subst.Name)
                         proplist.Add("PROP_MS_104" + "/" + subst.Name)
@@ -2284,7 +2284,7 @@ Namespace Streams
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    For Each subst As ConstantProperties In Phases(0).Compounds.Values
                         proplist.Add("PROP_MS_232" + "/" + subst.Name)
                         proplist.Add("PROP_MS_233" + "/" + subst.Name)
                         proplist.Add("PROP_MS_234" + "/" + subst.Name)
@@ -2300,7 +2300,7 @@ Namespace Streams
                         proplist.Add("PROP_MS_245" + "/" + subst.Name)
                     Next
                     proplist.Add("PROP_MS_154")
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    For Each subst As ConstantProperties In Phases(0).Compounds.Values
                         proplist.Add("Activity Coefficient, Liquid Phase 1 / " + subst.Name)
                         proplist.Add("Activity Coefficient, Liquid Phase 2 / " + subst.Name)
                         proplist.Add("Fugacity Coefficient, Vapor Phase / " + subst.Name)
@@ -2336,7 +2336,7 @@ Namespace Streams
                     For i = 131 To 148
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In Me.FlowSheet.SelectedCompounds.Values
+                    For Each subst As ConstantProperties In Me.Phases(0).Compounds.Values
                         proplist.Add("PROP_MS_102" + "/" + subst.Name)
                         proplist.Add("PROP_MS_103" + "/" + subst.Name)
                         proplist.Add("PROP_MS_104" + "/" + subst.Name)
@@ -2377,7 +2377,7 @@ Namespace Streams
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    For Each subst As ConstantProperties In Phases(0).Compounds.Values
                         proplist.Add("PROP_MS_232" + "/" + subst.Name)
                         proplist.Add("PROP_MS_233" + "/" + subst.Name)
                         proplist.Add("PROP_MS_234" + "/" + subst.Name)
@@ -2393,7 +2393,7 @@ Namespace Streams
                         proplist.Add("PROP_MS_245" + "/" + subst.Name)
                     Next
                     proplist.Add("PROP_MS_154")
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    For Each subst As ConstantProperties In Phases(0).Compounds.Values
                         proplist.Add("Activity Coefficient, Liquid Phase 1 / " + subst.Name)
                         proplist.Add("Activity Coefficient, Liquid Phase 2 / " + subst.Name)
                         proplist.Add("Fugacity Coefficient, Vapor Phase / " + subst.Name)
