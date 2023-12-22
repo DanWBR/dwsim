@@ -2224,6 +2224,8 @@ Namespace Streams
 
             Dim basecol = MyBase.GetProperties(proptype)
 
+            Dim comps = Phases(0).Compounds.Keys.ToList()
+
             If basecol.Length > 0 Then proplist.AddRange(basecol)
 
             Select Case proptype
@@ -2232,8 +2234,8 @@ Namespace Streams
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
                     For i = 102 To 105
-                        For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                            proplist.Add("PROP_MS_" + CStr(i) + "/" + subst.Name)
+                        For Each subst In comps
+                            proplist.Add("PROP_MS_" + CStr(i) + "/" + subst)
                         Next
                     Next
                 Case PropertyType.RO
@@ -2243,35 +2245,35 @@ Namespace Streams
                     For i = 131 To 148
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                        proplist.Add("PROP_MS_102" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_103" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_104" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_105" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_106" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_107" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_108" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_109" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_110" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_111" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_112" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_113" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_114" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_115" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_116" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_117" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_118" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_119" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_120" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_121" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_122" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_123" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_124" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_125" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_149" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_150" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_151" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_152" + "/" + subst.Name)
+                    For Each subst In comps
+                        proplist.Add("PROP_MS_102" + "/" + subst)
+                        proplist.Add("PROP_MS_103" + "/" + subst)
+                        proplist.Add("PROP_MS_104" + "/" + subst)
+                        proplist.Add("PROP_MS_105" + "/" + subst)
+                        proplist.Add("PROP_MS_106" + "/" + subst)
+                        proplist.Add("PROP_MS_107" + "/" + subst)
+                        proplist.Add("PROP_MS_108" + "/" + subst)
+                        proplist.Add("PROP_MS_109" + "/" + subst)
+                        proplist.Add("PROP_MS_110" + "/" + subst)
+                        proplist.Add("PROP_MS_111" + "/" + subst)
+                        proplist.Add("PROP_MS_112" + "/" + subst)
+                        proplist.Add("PROP_MS_113" + "/" + subst)
+                        proplist.Add("PROP_MS_114" + "/" + subst)
+                        proplist.Add("PROP_MS_115" + "/" + subst)
+                        proplist.Add("PROP_MS_116" + "/" + subst)
+                        proplist.Add("PROP_MS_117" + "/" + subst)
+                        proplist.Add("PROP_MS_118" + "/" + subst)
+                        proplist.Add("PROP_MS_119" + "/" + subst)
+                        proplist.Add("PROP_MS_120" + "/" + subst)
+                        proplist.Add("PROP_MS_121" + "/" + subst)
+                        proplist.Add("PROP_MS_122" + "/" + subst)
+                        proplist.Add("PROP_MS_123" + "/" + subst)
+                        proplist.Add("PROP_MS_124" + "/" + subst)
+                        proplist.Add("PROP_MS_125" + "/" + subst)
+                        proplist.Add("PROP_MS_149" + "/" + subst)
+                        proplist.Add("PROP_MS_150" + "/" + subst)
+                        proplist.Add("PROP_MS_151" + "/" + subst)
+                        proplist.Add("PROP_MS_152" + "/" + subst)
                     Next
                     For i = 126 To 130
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -2284,31 +2286,31 @@ Namespace Streams
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                        proplist.Add("PROP_MS_232" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_233" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_234" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_235" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_236" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_238" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_239" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_240" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_241" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_242" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_243" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_244" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_245" + "/" + subst.Name)
+                    For Each subst In comps
+                        proplist.Add("PROP_MS_232" + "/" + subst)
+                        proplist.Add("PROP_MS_233" + "/" + subst)
+                        proplist.Add("PROP_MS_234" + "/" + subst)
+                        proplist.Add("PROP_MS_235" + "/" + subst)
+                        proplist.Add("PROP_MS_236" + "/" + subst)
+                        proplist.Add("PROP_MS_238" + "/" + subst)
+                        proplist.Add("PROP_MS_239" + "/" + subst)
+                        proplist.Add("PROP_MS_240" + "/" + subst)
+                        proplist.Add("PROP_MS_241" + "/" + subst)
+                        proplist.Add("PROP_MS_242" + "/" + subst)
+                        proplist.Add("PROP_MS_243" + "/" + subst)
+                        proplist.Add("PROP_MS_244" + "/" + subst)
+                        proplist.Add("PROP_MS_245" + "/" + subst)
                     Next
                     proplist.Add("PROP_MS_154")
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                        proplist.Add("Activity Coefficient, Liquid Phase 1 / " + subst.Name)
-                        proplist.Add("Activity Coefficient, Liquid Phase 2 / " + subst.Name)
-                        proplist.Add("Fugacity Coefficient, Vapor Phase / " + subst.Name)
-                        proplist.Add("Fugacity Coefficient, Liquid Phase 1 / " + subst.Name)
-                        proplist.Add("Fugacity Coefficient, Liquid Phase 2 / " + subst.Name)
-                        proplist.Add("Diffusion Coefficient, Vapor Phase / " + subst.Name)
-                        proplist.Add("Diffusion Coefficient, Liquid Phase 1 / " + subst.Name)
-                        proplist.Add("Diffusion Coefficient, Liquid Phase 2 / " + subst.Name)
+                    For Each subst In comps
+                        proplist.Add("Activity Coefficient, Liquid Phase 1 / " + subst)
+                        proplist.Add("Activity Coefficient, Liquid Phase 2 / " + subst)
+                        proplist.Add("Fugacity Coefficient, Vapor Phase / " + subst)
+                        proplist.Add("Fugacity Coefficient, Liquid Phase 1 / " + subst)
+                        proplist.Add("Fugacity Coefficient, Liquid Phase 2 / " + subst)
+                        proplist.Add("Diffusion Coefficient, Vapor Phase / " + subst)
+                        proplist.Add("Diffusion Coefficient, Liquid Phase 1 / " + subst)
+                        proplist.Add("Diffusion Coefficient, Liquid Phase 2 / " + subst)
                     Next
                     For i = 250 To 259
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -2325,8 +2327,8 @@ Namespace Streams
                     proplist.Add("PROP_MS_8")
                     proplist.Add("PROP_MS_27")
                     For i = 102 To 105
-                        For Each subst As Compound In Me.Phases(0).Compounds.Values
-                            proplist.Add("PROP_MS_" + CStr(i) + "/" + subst.Name)
+                        For Each subst In comps
+                            proplist.Add("PROP_MS_" + CStr(i) + "/" + subst)
                         Next
                     Next
                 Case PropertyType.ALL
@@ -2336,35 +2338,35 @@ Namespace Streams
                     For i = 131 To 148
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In Me.FlowSheet.SelectedCompounds.Values
-                        proplist.Add("PROP_MS_102" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_103" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_104" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_105" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_106" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_107" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_108" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_109" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_110" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_111" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_112" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_113" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_114" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_115" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_116" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_117" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_118" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_119" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_120" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_121" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_122" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_123" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_124" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_125" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_149" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_150" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_151" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_152" + "/" + subst.Name)
+                    For Each subst In comps
+                        proplist.Add("PROP_MS_102" + "/" + subst)
+                        proplist.Add("PROP_MS_103" + "/" + subst)
+                        proplist.Add("PROP_MS_104" + "/" + subst)
+                        proplist.Add("PROP_MS_105" + "/" + subst)
+                        proplist.Add("PROP_MS_106" + "/" + subst)
+                        proplist.Add("PROP_MS_107" + "/" + subst)
+                        proplist.Add("PROP_MS_108" + "/" + subst)
+                        proplist.Add("PROP_MS_109" + "/" + subst)
+                        proplist.Add("PROP_MS_110" + "/" + subst)
+                        proplist.Add("PROP_MS_111" + "/" + subst)
+                        proplist.Add("PROP_MS_112" + "/" + subst)
+                        proplist.Add("PROP_MS_113" + "/" + subst)
+                        proplist.Add("PROP_MS_114" + "/" + subst)
+                        proplist.Add("PROP_MS_115" + "/" + subst)
+                        proplist.Add("PROP_MS_116" + "/" + subst)
+                        proplist.Add("PROP_MS_117" + "/" + subst)
+                        proplist.Add("PROP_MS_118" + "/" + subst)
+                        proplist.Add("PROP_MS_119" + "/" + subst)
+                        proplist.Add("PROP_MS_120" + "/" + subst)
+                        proplist.Add("PROP_MS_121" + "/" + subst)
+                        proplist.Add("PROP_MS_122" + "/" + subst)
+                        proplist.Add("PROP_MS_123" + "/" + subst)
+                        proplist.Add("PROP_MS_124" + "/" + subst)
+                        proplist.Add("PROP_MS_125" + "/" + subst)
+                        proplist.Add("PROP_MS_149" + "/" + subst)
+                        proplist.Add("PROP_MS_150" + "/" + subst)
+                        proplist.Add("PROP_MS_151" + "/" + subst)
+                        proplist.Add("PROP_MS_152" + "/" + subst)
                     Next
                     For i = 126 To 130
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -2377,31 +2379,31 @@ Namespace Streams
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                        proplist.Add("PROP_MS_232" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_233" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_234" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_235" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_236" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_238" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_239" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_240" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_241" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_242" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_243" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_244" + "/" + subst.Name)
-                        proplist.Add("PROP_MS_245" + "/" + subst.Name)
+                    For Each subst In comps
+                        proplist.Add("PROP_MS_232" + "/" + subst)
+                        proplist.Add("PROP_MS_233" + "/" + subst)
+                        proplist.Add("PROP_MS_234" + "/" + subst)
+                        proplist.Add("PROP_MS_235" + "/" + subst)
+                        proplist.Add("PROP_MS_236" + "/" + subst)
+                        proplist.Add("PROP_MS_238" + "/" + subst)
+                        proplist.Add("PROP_MS_239" + "/" + subst)
+                        proplist.Add("PROP_MS_240" + "/" + subst)
+                        proplist.Add("PROP_MS_241" + "/" + subst)
+                        proplist.Add("PROP_MS_242" + "/" + subst)
+                        proplist.Add("PROP_MS_243" + "/" + subst)
+                        proplist.Add("PROP_MS_244" + "/" + subst)
+                        proplist.Add("PROP_MS_245" + "/" + subst)
                     Next
                     proplist.Add("PROP_MS_154")
-                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                        proplist.Add("Activity Coefficient, Liquid Phase 1 / " + subst.Name)
-                        proplist.Add("Activity Coefficient, Liquid Phase 2 / " + subst.Name)
-                        proplist.Add("Fugacity Coefficient, Vapor Phase / " + subst.Name)
-                        proplist.Add("Fugacity Coefficient, Liquid Phase 1 / " + subst.Name)
-                        proplist.Add("Fugacity Coefficient, Liquid Phase 2 / " + subst.Name)
-                        proplist.Add("Diffusion Coefficient, Vapor Phase / " + subst.Name)
-                        proplist.Add("Diffusion Coefficient, Liquid Phase 1 / " + subst.Name)
-                        proplist.Add("Diffusion Coefficient, Liquid Phase 2 / " + subst.Name)
+                    For Each subst In comps
+                        proplist.Add("Activity Coefficient, Liquid Phase 1 / " + subst)
+                        proplist.Add("Activity Coefficient, Liquid Phase 2 / " + subst)
+                        proplist.Add("Fugacity Coefficient, Vapor Phase / " + subst)
+                        proplist.Add("Fugacity Coefficient, Liquid Phase 1 / " + subst)
+                        proplist.Add("Fugacity Coefficient, Liquid Phase 2 / " + subst)
+                        proplist.Add("Diffusion Coefficient, Vapor Phase / " + subst)
+                        proplist.Add("Diffusion Coefficient, Liquid Phase 1 / " + subst)
+                        proplist.Add("Diffusion Coefficient, Liquid Phase 2 / " + subst)
                     Next
                     For i = 250 To 259
                         proplist.Add("PROP_MS_" + CStr(i))
