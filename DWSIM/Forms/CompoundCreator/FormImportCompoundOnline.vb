@@ -139,14 +139,19 @@ Public Class FormImportCompoundOnline
                                               End Function, tcs.Token)
 
                 Dim t1 As New Task(Of Global.DWSIM.Thermodynamics.BaseClasses.ConstantProperties)(Function()
-                                                                                                      Return KDBParser.GetCompoundData(Integer.Parse(KDBParser.GetCompoundIDs(casid, True)(0)(0)))
+                                                                                                      Dim res1 = KDBParser.GetCompoundIDs(casid, True)
+                                                                                                      If res1.Count = 0 Then
+                                                                                                          Return Nothing
+                                                                                                      Else
+                                                                                                          Return KDBParser.GetCompoundData(Integer.Parse(res1(0)(0)))
+                                                                                                      End If
                                                                                                   End Function, tcs.Token)
                 Dim t2 As New Task(Of Global.DWSIM.Thermodynamics.BaseClasses.ConstantProperties)(Function()
                                                                                                       Return ChemeoParser.GetCompoundData(cstring)
                                                                                                   End Function, tcs.Token)
-                Dim t3 As New Task(Of Dictionary(Of String, List(Of String())))(Function()
-                                                                                    Return DDBStructureParser.GetData(DDBStructureParser.GetID(casid))
-                                                                                End Function, tcs.Token)
+                'Dim t3 As New Task(Of Dictionary(Of String, List(Of String())))(Function()
+                '                                                                    Return DDBStructureParser.GetData(DDBStructureParser.GetID(casid))
+                '                                                                End Function, tcs.Token)
 
 
                 Task.Factory.StartNew(Sub()
@@ -155,8 +160,8 @@ Public Class FormImportCompoundOnline
                                           casid = t0.Result
                                           t1.Start()
                                           t2.Start()
-                                          t3.Start()
-                                          Task.WaitAll(t1, t2, t3)
+                                          't3.Start()
+                                          Task.WaitAll(t1, t2)
                                       End Sub).ContinueWith(Sub(tsk)
                                                                 If tsk.Exception IsNot Nothing Then
                                                                     UIThread(Sub()
@@ -190,9 +195,9 @@ Public Class FormImportCompoundOnline
                                                                                  If Not t2.Status = TaskStatus.WaitingToRun AndAlso t2.Exception Is Nothing Then
                                                                                      compoundc = t2.Result
                                                                                  End If
-                                                                                 If Not t3.Status = TaskStatus.WaitingToRun AndAlso t3.Exception Is Nothing Then
-                                                                                     structuredata = t3.Result
-                                                                                 End If
+                                                                                 'If Not t3.Status = TaskStatus.WaitingToRun AndAlso t3.Exception Is Nothing Then
+                                                                                 '    structuredata = t3.Result
+                                                                                 'End If
                                                                                  AddPropertiesToGrid()
                                                                                  btnNext.Enabled = compoundk IsNot Nothing
                                                                                  If dgResults.Rows.Count = 0 Then btnNext.Enabled = False
@@ -205,7 +210,10 @@ Public Class FormImportCompoundOnline
                                                                                          btnNext.Enabled = True
                                                                                      Else
                                                                                          btnNext.Enabled = False
+                                                                                         MessageBox.Show("Could not find data for this compound in KDB Korean Thermo Database.", DWSIM.App.GetLocalString("Erro"))
                                                                                      End If
+                                                                                 Else
+                                                                                     MessageBox.Show("Could not find data for this compound in KDB Korean Thermo Database.", DWSIM.App.GetLocalString("Erro"))
                                                                                  End If
                                                                              End Sub)
                                                                 End If
