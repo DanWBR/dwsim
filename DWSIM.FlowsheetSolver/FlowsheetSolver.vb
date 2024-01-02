@@ -2243,6 +2243,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     adjvalue = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
                     fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
                 End If
+                i = i + 1
             End If
         Next
 
