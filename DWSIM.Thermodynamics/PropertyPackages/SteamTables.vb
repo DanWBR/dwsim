@@ -849,6 +849,7 @@ FINAL:
 
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
+            If Tsat > Tcrit Then Throw New Exception(String.Format("Steam Tables Enthalpy calculation error: calculated Tsat ({0} K) > Tcrit ({1} K) @ P = {2} Pa", Tsat, Tcrit, P))
             Dim Tbound = 1073.15
             Dim Tmin = 273.15
             Select Case st
@@ -971,6 +972,7 @@ FINAL:
 
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
+            If Tsat > Tcrit Then Throw New Exception(String.Format("Steam Tables Entropy calculation error: calculated Tsat ({0} K) > Tcrit ({1} K) @ P = {2} Pa", Tsat, Tcrit, P))
             Dim Tmin As Double = 273.15
             Dim Tbound As Double = 1073.15
             Select Case st
