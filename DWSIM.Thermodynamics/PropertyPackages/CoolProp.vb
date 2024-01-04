@@ -1,5 +1,5 @@
 '    CoolProp Property Package
-'    Copyright 2014 Daniel Wagner O. de Medeiros
+'    Copyright 2014-2023 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -16,12 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
-Imports DWSIM.MathOps.MathEx
-
-Imports System.Runtime.InteropServices
-Imports System.Linq
 Imports DWSIM.Interfaces.Enums
 Imports System.IO
 Imports System.Reflection
@@ -168,7 +163,7 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
 
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -211,7 +206,7 @@ Namespace PropertyPackages
 
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -248,7 +243,7 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
 
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -286,7 +281,7 @@ Namespace PropertyPackages
 
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Pmin, Pmax, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
                 Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                 If PVAP > Pmin And PVAP < Pmax Then
@@ -323,7 +318,7 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add(String.Format("Vapor Pressure: {0} Pa", PVAP))
 
             Dim Pmin, Pmax, val As Double
-            If IsCompoundSupported(subst) Then
+            If IsCompoundSupported(1.0, subst) Then
                 Pmin = CoolProp.Props1SI(GetCoolPropName(subst), "PMIN")
                 Pmax = CoolProp.Props1SI(GetCoolPropName(subst), "PMAX")
                 If PVAP > Pmin And PVAP < Pmax Then
@@ -361,7 +356,7 @@ Namespace PropertyPackages
 
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(sub1, "TCRIT")
@@ -400,7 +395,7 @@ Namespace PropertyPackages
 
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -445,7 +440,7 @@ Namespace PropertyPackages
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                    If IsCompoundSupported(subst.Name) Then
+                    If IsCompoundSupported(1.0, subst.Name) Then
                         Dim sub1 As String = subst.Name
                         Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                         Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -536,7 +531,7 @@ Namespace PropertyPackages
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                    If IsCompoundSupported(subst.Name) Then
+                    If IsCompoundSupported(1.0, subst.Name) Then
                         Dim sub1 As String = subst.Name
                         Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                         Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -610,7 +605,7 @@ Namespace PropertyPackages
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If Vx(i) > 0.0 Then
-                    If IsCompoundSupported(subst.Name) Then
+                    If IsCompoundSupported(1.0, subst.Name) Then
                         Dim sub1 As String = subst.Name
                         Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                         Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -689,7 +684,7 @@ Namespace PropertyPackages
 
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -727,7 +722,7 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
 
             Dim Tmin, Tmax, Tc, Pmin, Pmax, Tb, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -775,7 +770,7 @@ Namespace PropertyPackages
 
             Dim sub1 = constprop.Name
             Dim Tmin, Tmax, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
@@ -830,7 +825,7 @@ Namespace PropertyPackages
 
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
@@ -898,7 +893,7 @@ Namespace PropertyPackages
 
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, val As Double
-            If IsCompoundSupported(sub1) Then
+            If IsCompoundSupported(1.0, sub1) Then
                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 If T > Tmin And T < Tmax Then
@@ -933,7 +928,7 @@ Namespace PropertyPackages
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                    If IsCompoundSupported(subst.Name) Then
+                    If IsCompoundSupported(1.0, subst.Name) Then
                         Dim sub1 As String = subst.Name
                         Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                         Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -1013,7 +1008,7 @@ Namespace PropertyPackages
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                    If IsCompoundSupported(subst.Name) Then
+                    If IsCompoundSupported(1.0, subst.Name) Then
                         Dim sub1 As String = subst.Name
                         Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                         Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -1114,7 +1109,7 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                            If IsCompoundSupported(subst.Name) Then
+                            If IsCompoundSupported(1.0, subst.Name) Then
                                 Dim sub1 As String = subst.Name
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -1166,7 +1161,7 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                            If IsCompoundSupported(subst.Name) Then
+                            If IsCompoundSupported(1.0, subst.Name) Then
                                 Dim sub1 As String = subst.Name
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -1248,7 +1243,7 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                            If IsCompoundSupported(subst.Name) Then
+                            If IsCompoundSupported(1.0, subst.Name) Then
                                 Dim sub1 As String = subst.Name
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -1296,7 +1291,7 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If subst.MassFraction.GetValueOrDefault() > 0.0 Then
-                            If IsCompoundSupported(subst.Name) Then
+                            If IsCompoundSupported(1.0, subst.Name) Then
                                 Dim sub1 As String = subst.Name
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
@@ -1375,7 +1370,7 @@ Namespace PropertyPackages
                 Case State.Liquid
                     For i = 0 To n
                         If Vx(i) > 0.0 Then
-                            If IsCompoundSupported(vn(i)) Then
+                            If IsCompoundSupported(1.0, vn(i)) Then
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
@@ -1429,7 +1424,7 @@ Namespace PropertyPackages
                 Case State.Vapor
                     For i = 0 To n
                         If Vx(i) > 0.0 Then
-                            If IsCompoundSupported(vn(i)) Then
+                            If IsCompoundSupported(1.0, vn(i)) Then
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
@@ -1538,7 +1533,7 @@ Namespace PropertyPackages
                 Case State.Liquid
                     For i = 0 To n
                         If Vx(i) > 0.0 Then
-                            If IsCompoundSupported(vn(i)) Then
+                            If IsCompoundSupported(1.0, vn(i)) Then
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
@@ -1592,7 +1587,7 @@ Namespace PropertyPackages
                 Case State.Vapor
                     For i = 0 To n
                         If Vx(i) > 0.0 Then
-                            If IsCompoundSupported(vn(i)) Then
+                            If IsCompoundSupported(1.0, vn(i)) Then
                                 Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
                                 Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
                                 Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
@@ -1683,18 +1678,22 @@ Namespace PropertyPackages
             If st = State.Liquid Then
                 Dim Tc As Double() = Me.RET_VTC()
                 For i = 0 To n
-                    If T / Tc(i) >= 1 Then
-                        IObj?.SetCurrent()
-                        If UseHenryConstants And HasHenryConstants(RET_VNAMES(i)) Then
-                            Dim hc = AUX_KHenry(RET_VNAMES(i), T)
-                            IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
-                            fugcoeff(i) = hc / P
+                    If Vx(i) > 0.0 Then
+                        If T / Tc(i) >= 1 Then
+                            IObj?.SetCurrent()
+                            If UseHenryConstants And HasHenryConstants(RET_VNAMES(i)) Then
+                                Dim hc = AUX_KHenry(RET_VNAMES(i), T)
+                                IObj?.Paragraphs.Add(String.Format("Henry's Constant (H) @ {0} K: {1} Pa", T, hc))
+                                fugcoeff(i) = hc / P
+                            Else
+                                fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                            End If
                         Else
+                            IObj?.SetCurrent()
                             fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
                         End If
                     Else
-                        IObj?.SetCurrent()
-                        fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                        fugcoeff(i) = MyBase.AUX_PVAPi(RET_VNAMES(i), T)
                     End If
                 Next
             Else
@@ -2063,9 +2062,9 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(comp As Interfaces.ICompoundConstantProperties) As Boolean
 
-            Return IsCompoundSupported(comp.Name)
+            Return IsCompoundSupported(1.0, comp.Name)
 
         End Function
 
@@ -2077,18 +2076,22 @@ Namespace PropertyPackages
 
 #Region "    Auxiliary Functions"
 
-        Function IsCompoundSupported(compname As String) As Boolean
+        Function IsCompoundSupported(x As Double, compname As String) As Boolean
 
-            If SupportedComponents.Contains(compname) Then
+            If x = 0.0 Then
                 Return True
             Else
-                If CompoundAliases.ContainsKey(CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number) Then
+                If SupportedComponents.Contains(compname) Then
                     Return True
                 Else
-                    Dim e1 = New ArgumentOutOfRangeException(compname, "Error: compound '" & compname & "' is not supported by this version of CoolProp.")
-                    e1.Data.Add("DetailedDescription", "CoolProp doesn't suppoert his compound, so the calculation results will be incorrect.")
-                    e1.Data.Add("UserAction", "Remove the compound from the simulation or try another Property Package.")
-                    Throw e1
+                    If CompoundAliases.ContainsKey(CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number) Then
+                        Return True
+                    Else
+                        Dim e1 = New ArgumentOutOfRangeException(compname, "Error: compound '" & compname & "' is not supported by this version of CoolProp.")
+                        e1.Data.Add("DetailedDescription", "CoolProp doesn't suppoert his compound, so the calculation results will be incorrect.")
+                        e1.Data.Add("UserAction", "Remove the compound from the simulation or try another Property Package.")
+                        Throw e1
+                    End If
                 End If
             End If
 

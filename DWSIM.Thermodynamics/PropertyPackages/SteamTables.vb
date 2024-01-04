@@ -16,11 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-'Imports DWSIM.SimulationObjects
-Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.MathOps.MathEx
-Imports System.Linq
 Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
@@ -287,28 +284,59 @@ Namespace PropertyPackages
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
                             With Me.m_iapws97
-                                Hl = .enthalpySatLiqPW(P / 100000)
-                                Hv = .enthalpySatVapPW(P / 100000)
-                                Sl = .entropySatLiqPW(P / 100000)
-                                Sv = .entropySatVapPW(P / 100000)
-                                If H < Hl Then
-                                    vf = 0
-                                ElseIf H > Hv Then
-                                    vf = 1
-                                Else
-                                    vf = (H - Hl) / (Hv - Hl)
-                                End If
-                                S = vf * Sv + (1 - vf) * Sl
 
-                                If vf <> 0 And vf <> 1 Then
-                                    T = .tSatW(P / 100000)
+                                Dim Tsat = .tSatW(P / 100000)
+                                Dim Tcrit = 647.1
+
+                                If Tsat > Tcrit Then
+
+                                    'supercritical
+
+                                    vf = 1.0
+
+                                    T = brentsolverT.BrentOpt2(273.15, 2000, 5, 0.001, 100, Function(Tx)
+
+                                                                                                Return H - .enthalpyW(Tx, P / 100000)
+
+                                                                                            End Function)
+
+                                    Dim dens = .densW(T, P / 100000)
+
+                                    If dens > 322.0 Then
+                                        vf = 0.0
+                                    Else
+                                        vf = 1.0
+                                    End If
+
+                                    S = .entropyW(T, P / 100000)
+
                                 Else
-                                    LoopVarF = H
-                                    LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+
+                                    Hl = .enthalpySatLiqPW(P / 100000)
+                                    Hv = .enthalpySatVapPW(P / 100000)
+                                    Sl = .entropySatLiqPW(P / 100000)
+                                    Sv = .entropySatVapPW(P / 100000)
+                                    If H < Hl Then
+                                        vf = 0
+                                    ElseIf H > Hv Then
+                                        vf = 1
+                                    Else
+                                        vf = (H - Hl) / (Hv - Hl)
+                                    End If
+                                    S = vf * Sv + (1 - vf) * Sl
+
+                                    If vf <> 0 And vf <> 1 Then
+                                        T = .tSatW(P / 100000)
+                                    Else
+                                        LoopVarF = H
+                                        LoopVarX = P / 100000
+                                        T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+                                    End If
+
                                 End If
 
                             End With
+
                             lf = 1 - vf
 
                         Case FlashSpec.S
@@ -316,28 +344,57 @@ Namespace PropertyPackages
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
                             With Me.m_iapws97
-                                Hl = .enthalpySatLiqPW(P / 100000)
-                                Hv = .enthalpySatVapPW(P / 100000)
-                                Sl = .entropySatLiqPW(P / 100000)
-                                Sv = .entropySatVapPW(P / 100000)
-                                If S < Sl Then
-                                    vf = 0
-                                ElseIf S > Sv Then
-                                    vf = 1
-                                Else
-                                    vf = (S - Sl) / (Sv - Sl)
-                                End If
-                                H = vf * Hv + (1 - vf) * Hl
 
-                                If vf <> 0 And vf <> 1 Then
-                                    T = .tSatW(P / 100000)
+                                Dim Tsat = .tSatW(P / 100000)
+                                Dim Tcrit = 647.1
+
+                                If Tsat > Tcrit Then
+
+                                    'supercritical
+
+                                    T = brentsolverT.BrentOpt2(273.15, 2000, 5, 0.001, 100, Function(Tx)
+
+                                                                                                Return S - .entropyW(Tx, P / 100000)
+
+                                                                                            End Function)
+
+                                    Dim dens = .densW(T, P / 100000)
+
+                                    If dens > 322.0 Then
+                                        vf = 0.0
+                                    Else
+                                        vf = 1.0
+                                    End If
+
+                                    H = .enthalpyW(T, P / 100000)
+
                                 Else
-                                    LoopVarF = H
-                                    LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+
+                                    Hl = .enthalpySatLiqPW(P / 100000)
+                                    Hv = .enthalpySatVapPW(P / 100000)
+                                    Sl = .entropySatLiqPW(P / 100000)
+                                    Sv = .entropySatVapPW(P / 100000)
+                                    If S < Sl Then
+                                        vf = 0
+                                    ElseIf S > Sv Then
+                                        vf = 1
+                                    Else
+                                        vf = (S - Sl) / (Sv - Sl)
+                                    End If
+                                    H = vf * Hv + (1 - vf) * Hl
+
+                                    If vf <> 0 And vf <> 1 Then
+                                        T = .tSatW(P / 100000)
+                                    Else
+                                        LoopVarF = H
+                                        LoopVarX = P / 100000
+                                        T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+                                    End If
+
                                 End If
 
                             End With
+
                             lf = 1 - vf
 
                         Case FlashSpec.VAP
@@ -849,7 +906,7 @@ FINAL:
 
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
-            If Tsat > Tcrit Then Throw New Exception(String.Format("Steam Tables Enthalpy calculation error: calculated Tsat ({0} K) > Tcrit ({1} K) @ P = {2} Pa", Tsat, Tcrit, P))
+            'If Tsat > Tcrit Then Throw New Exception(String.Format("Steam Tables Enthalpy calculation error: calculated Tsat ({0} K) > Tcrit ({1} K) @ P = {2} Pa", Tsat, Tcrit, P))
             Dim Tbound = 1073.15
             Dim Tmin = 273.15
             Select Case st
@@ -972,7 +1029,7 @@ FINAL:
 
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
-            If Tsat > Tcrit Then Throw New Exception(String.Format("Steam Tables Entropy calculation error: calculated Tsat ({0} K) > Tcrit ({1} K) @ P = {2} Pa", Tsat, Tcrit, P))
+            'If Tsat > Tcrit Then Throw New Exception(String.Format("Steam Tables Entropy calculation error: calculated Tsat ({0} K) > Tcrit ({1} K) @ P = {2} Pa", Tsat, Tcrit, P))
             Dim Tmin As Double = 273.15
             Dim Tbound As Double = 1073.15
             Select Case st

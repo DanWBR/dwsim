@@ -27,6 +27,7 @@
         Public Const tc_water As Double = 647.096 'critical temperature in K
         Public Const pc_water As Double = 220.64 'critical pressure in bar
         Public Const dc_water As Double = 322.0# 'critical density in kg/m**3
+        Public Const tmax As Double = 2000.0
 
         Private ireg1(34) As Short
 
@@ -1120,7 +1121,7 @@
 
 
 
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
 
 
@@ -1808,7 +1809,7 @@
             If temperature >= 273.15 And temperature <= 623.15 And pressure >= pSatW(temperature) And pressure <= 1000.0# Then
                 '  region 1
                 densW = 1 / volreg1(temperature, pressure)
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
                 densW = 1 / volreg2(temperature, pressure)
             ElseIf temperature >= 623.15 And temperature <= tBound(pressure) And pressure >= pBound(temperature) And pressure <= 1000.0# Then
@@ -1834,7 +1835,7 @@
             If temperature >= 273.15 And temperature <= 623.15 And pressure >= pSatW(temperature) And pressure <= 1000.0# Then
                 '  region 1
                 energyW = energyreg1(temperature, pressure)
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
                 energyW = energyreg2(temperature, pressure)
             ElseIf temperature >= 623.15 And temperature <= tBound(pressure) And pressure >= pBound(temperature) And pressure <= 1000.0# Then
@@ -1867,7 +1868,7 @@
 
 
 
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
 
                 entropyW = entropyreg2(temperature, pressure)
@@ -1909,7 +1910,7 @@
 
 
 
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
 
                 enthalpyW = enthalpyreg2(temperature, pressure)
@@ -1951,7 +1952,7 @@
 
 
 
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
 
                 cpW = cpreg2(temperature, pressure)
@@ -1993,7 +1994,7 @@
 
 
 
-            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0#) Then
+            ElseIf (temperature >= 273.15 And temperature <= 623.15 And pressure > 0 And pressure <= pSatW(temperature)) Or (temperature >= 623.15 And temperature <= 863.15 And pressure > 0 And pressure <= pBound(temperature)) Or (temperature >= 863.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0#) Then
                 '  region 2
 
                 cvW = cvreg2(temperature, pressure)
@@ -2029,7 +2030,7 @@
             ' viscW = -1: temperature and/or pressure outside range
             '
 
-            If temperature >= 273.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0# Then
+            If temperature >= 273.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0# Then
 
 
                 density = densW(temperature, pressure)
@@ -2063,7 +2064,7 @@
             ' thconW = -1: temperature and/or pressure outside range
             '
 
-            If temperature >= 273.15 And temperature <= 1073.15 And pressure > 0 And pressure <= 1000.0# Then
+            If temperature >= 273.15 And temperature <= tmax And pressure > 0 And pressure <= 1000.0# Then
 
 
                 density = densW(temperature, pressure)

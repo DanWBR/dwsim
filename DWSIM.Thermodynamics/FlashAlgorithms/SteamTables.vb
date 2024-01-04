@@ -15,13 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Math
-
 Imports DWSIM.MathOps.MathEx
-Imports DWSIM.MathOps.MathEx.Common
-
-Imports System.Threading.Tasks
-Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -109,25 +103,50 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             With spp.m_iapws97
 
-                Hl = .enthalpySatLiqPW(P / 100000)
-                Hv = .enthalpySatVapPW(P / 100000)
-                Sl = .entropySatLiqPW(P / 100000)
-                Sv = .entropySatVapPW(P / 100000)
+                Dim Tsat = .tSatW(P / 100000)
+                Dim Tcrit = 647.1
 
-                If H < Hl Then
-                    vf = 0.0#
-                ElseIf H > Hv Then
-                    vf = 1.0#
-                Else
-                    vf = (H - Hl) / (Hv - Hl)
-                End If
+                If Tsat > Tcrit Then
 
-                If vf <> 0.0# And vf <> 1.0# Then
-                    T = .tSatW(P / 100000)
+                    'supercritical
+
+                    T = brentsolverT.BrentOpt2(647.1, 2000, 5, 0.001, 100, Function(Tx)
+
+                                                                               Return H - .enthalpyW(Tx, P / 100000)
+
+                                                                           End Function)
+
+                    Dim dens = .densW(T, P / 100000)
+
+                    If dens > 322.0 Then
+                        vf = 0.0
+                    Else
+                        vf = 1.0
+                    End If
+
                 Else
-                    spp.LoopVarF = H
-                    spp.LoopVarX = P / 100000
-                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+
+                    Hl = .enthalpySatLiqPW(P / 100000)
+                    Hv = .enthalpySatVapPW(P / 100000)
+                    Sl = .entropySatLiqPW(P / 100000)
+                    Sv = .entropySatVapPW(P / 100000)
+
+                    If H < Hl Then
+                        vf = 0.0#
+                    ElseIf H > Hv Then
+                        vf = 1.0#
+                    Else
+                        vf = (H - Hl) / (Hv - Hl)
+                    End If
+
+                    If vf > 0.0 And vf < 1.0 Then
+                        T = .tSatW(P / 100000)
+                    Else
+                        spp.LoopVarF = H
+                        spp.LoopVarX = P / 100000
+                        T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+                    End If
+
                 End If
 
             End With
@@ -149,23 +168,48 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             With spp.m_iapws97
 
-                Sl = .entropySatLiqPW(P / 100000)
-                Sv = .entropySatVapPW(P / 100000)
+                Dim Tsat = .tSatW(P / 100000)
+                Dim Tcrit = 647.1
 
-                If S < Sl Then
-                    vf = 0.0#
-                ElseIf S > Sv Then
-                    vf = 1.0#
-                Else
-                    vf = (S - Sl) / (Sv - Sl)
-                End If
+                If Tsat > Tcrit Then
 
-                If vf <> 0.0# And vf <> 1.0# Then
-                    T = .tSatW(P / 100000)
+                    'supercritical
+
+                    T = brentsolverT.BrentOpt2(273.15, 2000, 5, 0.001, 100, Function(Tx)
+
+                                                                                Return S - .entropyW(Tx, P / 100000)
+
+                                                                            End Function)
+
+                    Dim dens = .densW(T, P / 100000)
+
+                    If dens > 322.0 Then
+                        vf = 0.0
+                    Else
+                        vf = 1.0
+                    End If
+
                 Else
-                    spp.LoopVarF = S
-                    spp.LoopVarX = P / 100000
-                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+
+                    Sl = .entropySatLiqPW(P / 100000)
+                    Sv = .entropySatVapPW(P / 100000)
+
+                    If S < Sl Then
+                        vf = 0
+                    ElseIf S > Sv Then
+                        vf = 1
+                    Else
+                        vf = (S - Sl) / (Sv - Sl)
+                    End If
+
+                    If vf > 0.0 And vf < 1.0 Then
+                        T = .tSatW(P / 100000)
+                    Else
+                        spp.LoopVarF = S
+                        spp.LoopVarX = P / 100000
+                        T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
+                    End If
+
                 End If
 
             End With
