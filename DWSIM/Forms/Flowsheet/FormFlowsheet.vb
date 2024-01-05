@@ -1508,6 +1508,7 @@ Public Class FormFlowsheet
                                RaiseEvent FinishedSolving(Me, New EventArgs())
                                Me.UIThread(Sub()
                                                pbSolver.Visible = False
+                                               UpdateOpenEditForms()
                                            End Sub)
                            End Sub)
             t.Start()

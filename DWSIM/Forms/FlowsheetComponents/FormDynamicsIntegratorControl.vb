@@ -431,7 +431,6 @@ Public Class FormDynamicsIntegratorControl
                                                                             Flowsheet.FormDynamics.UpdateControllerList()
                                                                             Flowsheet.FormDynamics.UpdateIndicatorList()
                                                                             Flowsheet.FormSurface.FControl.Invalidate()
-                                                                            Application.DoEvents()
                                                                         End Sub)
                                         End If
 

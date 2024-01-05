@@ -664,8 +664,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Next
                     myobj.GraphicObject.Calculated = True
                     myobj.LastUpdated = Date.Now
-                    myobj.UpdateEditForm()
-                    If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                 End If
                 myobj.GraphicObject.Status = Status.Calculated
             Catch ex As AggregateException
@@ -1471,7 +1469,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                           fgui.UpdateInterface()
 
-                                                          fgui.UpdateOpenEditForms()
+                                                          If Not fgui.DynamicMode Then
+                                                              fgui.UpdateOpenEditForms()
+                                                          End If
 
                                                       End If
 
