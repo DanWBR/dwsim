@@ -5032,9 +5032,15 @@ redirect2:                  IObj?.SetCurrent()
             End Select
             Dim i As Integer = 0
             For Each subs As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(f)).Compounds.Values
-                subs.FugacityCoeff = fc(i)
-                subs.ActivityCoeff = fc(i) * P / Me.AUX_PVAPi(i, T)
-                subs.PartialPressure = subs.MoleFraction.GetValueOrDefault() * P
+                If subs.MoleFraction.GetValueOrDefault() > 0.0 Then
+                    subs.FugacityCoeff = fc(i)
+                    subs.ActivityCoeff = fc(i) * P / Me.AUX_PVAPi(i, T)
+                    subs.PartialPressure = subs.MoleFraction.GetValueOrDefault() * P
+                Else
+                    subs.FugacityCoeff = 1.0
+                    subs.ActivityCoeff = 1.0
+                    subs.PartialPressure = 0.0
+                End If
                 i += 1
             Next
 
@@ -5811,7 +5817,7 @@ redirect2:                  IObj?.SetCurrent()
             Dim subst As Interfaces.ICompound
 
             For Each subst In Phase.Compounds.Values
-                val += subst.MassFraction.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
+                If subst.MassFraction.GetValueOrDefault() > 0.0 Then val += subst.MassFraction.GetValueOrDefault() * Me.AUX_CPi(subst.Name, T)
             Next
 
             Return val 'KJ/Kg/K
@@ -6734,12 +6740,12 @@ Final3:
             val = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 IObj?.SetCurrent()
-                sval = Me.AUX_LIQVISCi(subst.Name, T, P)
+                If subst.MoleFraction.GetValueOrDefault() > 0.0 Then sval = Me.AUX_LIQVISCi(subst.Name, T, P)
                 IObj?.Paragraphs.Add(String.Format("Calculating Liquid Viscosity for {0}... {1} Pa.s (xi = {2})", subst.Name, sval, subst.MoleFraction.GetValueOrDefault))
                 lval = sval
                 If sval = 0 Then lval = 0.0
                 IObj?.Paragraphs.Add(String.Format("Liquid Viscosity : {0} Pa.s", Exp(lval)))
-                If LiquidViscosity_CorrectExpDataForPressure And LiquidViscosityCalculationMode_Subcritical = LiquidViscosityCalcMode.ExpData Then
+                If LiquidViscosity_CorrectExpDataForPressure And LiquidViscosityCalculationMode_Subcritical = LiquidViscosityCalcMode.ExpData And subst.MoleFraction.GetValueOrDefault() > 0.0 Then
                     'pressure correction
                     Dim pcorr As Double = 1.0
                     If (T / subst.ConstantProperties.Critical_Temperature) > 1.0 Then
@@ -7750,8 +7756,8 @@ Final3:
                     For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
                             subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                            val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                         End If
-                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid
@@ -7759,8 +7765,8 @@ Final3:
                     For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
                             subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                            val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                         End If
-                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid1
@@ -7768,8 +7774,8 @@ Final3:
                     For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
                             subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                            val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                         End If
-                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid2
@@ -7777,8 +7783,8 @@ Final3:
                     For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
                             subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                            val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                         End If
-                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid3
@@ -7786,8 +7792,8 @@ Final3:
                     For Each subst In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
                             subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                            val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                         End If
-                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Vapor
@@ -7795,8 +7801,8 @@ Final3:
                     For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                         If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
                             subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                            val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                         End If
-                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
             End Select
@@ -8878,7 +8884,7 @@ Final3:
 
             val = 0.0#
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDTi(T1, T2, subst.ConstantProperties.ID)
+                If Vw(i) > 0.0 Then val += Vw(i) * Me.AUX_INT_CPDTi(T1, T2, subst.ConstantProperties.ID)
                 i += 1
             Next
 
@@ -8892,7 +8898,7 @@ Final3:
             Dim i As Integer = 0
             Dim subst As Interfaces.ICompound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, i)
+                If Vw(i) > 0.0 Then val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, i)
                 i += 1
             Next
 
@@ -8906,7 +8912,7 @@ Final3:
             Dim i As Integer = 0
             Dim subst As Interfaces.ICompound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
+                If Vw(i) > 0.0 Then val += Vw(i) * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
                 i += 1
             Next
 
