@@ -567,7 +567,9 @@ Public Class FormDynamicsIntegratorControl
 
         sheet.RowCount = integrator.MonitoredVariableValues.Count + 1
 
-        sheet.Cells(0, 0).Data = "Time (ms)"
+        Dim units = Flowsheet.Options.SelectedUnitSystem
+
+        sheet.Cells(0, 0).Data = String.Format("Time ({0})", units.time)
 
         Dim i, j As Integer
 
@@ -579,7 +581,7 @@ Public Class FormDynamicsIntegratorControl
 
         i = 1
         For Each item In integrator.MonitoredVariableValues
-            sheet.Cells(i, 0).Data = New TimeSpan(item.Key).TotalMilliseconds
+            sheet.Cells(i, 0).Data = SystemsOfUnits.Converter.ConvertFromSI(units.time, New TimeSpan(item.Key).TotalMilliseconds / 1000.0)
             j = 1
             For Each var In item.Value
                 sheet.Cells(i, j).Data = var.PropertyValue.ToDoubleFromInvariant
@@ -648,7 +650,9 @@ Public Class FormDynamicsIntegratorControl
 
         Dim pointset = integrator.MonitoredVariableValues.Last
 
-        x = New TimeSpan(pointset.Key).TotalMilliseconds
+        Dim units = Flowsheet.Options.SelectedUnitSystem
+
+        x = SystemsOfUnits.Converter.ConvertFromSI(units.time, New TimeSpan(pointset.Key).TotalMilliseconds / 1000.0)
 
         i = 0
         For Each var In pointset.Value
@@ -671,6 +675,8 @@ Public Class FormDynamicsIntegratorControl
 
         Dim model = New PlotModel() With {.Subtitle = "Live View", .Title = integrator.Description}
 
+        Dim units = Flowsheet.Options.SelectedUnitSystem
+
         model.TitleFontSize = 16
         model.SubtitleFontSize = 14
         model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinPlotArea
@@ -680,7 +686,7 @@ Public Class FormDynamicsIntegratorControl
             .MinorGridlineStyle = LineStyle.Dot,
             .Position = AxisPosition.Bottom,
             .FontSize = 14,
-            .Title = "Time (ms)"
+            .Title = String.Format("Time ({0})", units.time)
         })
 
         model.LegendFontSize = 12

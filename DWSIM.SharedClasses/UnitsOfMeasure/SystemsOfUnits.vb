@@ -227,7 +227,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.heat
                     units.AddRange(New String() {"kJ", "J", "kcal", "BTU", "MMBTU", "cal"})
                 Case Enums.UnitOfMeasure.time
-                    units.AddRange(New String() {"s", "min.", "h"})
+                    units.AddRange(New String() {"ms", "s", "min.", "h"})
                 Case Enums.UnitOfMeasure.volume
                     units.AddRange(New String() {"m3", "cm3", "L", "ft3", "bbl", "gal[US]", "gal[UK]"})
                 Case Enums.UnitOfMeasure.molar_volume
@@ -329,7 +329,7 @@ Namespace SystemsOfUnits
                 Case "kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W",
                      "BTU/d", "MMBTU/d", "MMBTU/h", "kcal/s", "kcal/h", "kcal/d"
                     Return Enums.UnitOfMeasure.heatflow
-                Case "s", "min.", "h"
+                Case "ms", "s", "min.", "h"
                     Return Enums.UnitOfMeasure.time
                 Case "m3", "cm3", "L", "ft3", "bbl", "gal[US]", "gal[UK]"
                     Return Enums.UnitOfMeasure.volume
@@ -1545,6 +1545,8 @@ Namespace SystemsOfUnits
                     Return value / 10.7639
                 Case "h"                                'tempo
                     Return value * 3600
+                Case "ms"
+                    Return value / 1000.0
                 Case "s"
                     Return value
                 Case "min."
@@ -2086,6 +2088,8 @@ Namespace SystemsOfUnits
                     Return value
                 Case "min."
                     Return value / 60
+                Case "ms"
+                    Return value * 1000.0
 
                 Case "ft3"                              'volume
                     Return value * 35.3147
