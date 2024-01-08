@@ -1,12 +1,8 @@
-Version 8.6.6
+Version 8.6.7
 
-- Added Mach number calculation and reporting for gas flow in pipes
-- Added slurry viscosity correction for PFR and Pipe Segment (Yoshida et al, https://www.aidic.it/cet/13/32/349.pdf)
-- New Modified Bubble-Point solver for Rigorous Columns
-- Kinetic/HetCat/Conversion reactions/reactors now support compounds in solid phase
-- Surface Tension is now calculated for all liquid phases
-- General fixes to Rigorous Column model and solvers
-- Fixed issue with Coolprop Incompressibles PP
-- Fixed issues with Pump model
-- Fixed Solid Cp calculation
-- Other minor fixes and enhancements
+- Fixed issues with CoolProp Incompressible Mixtures (#563)
+- Fixed issues with Steam Tables and CoolProp Property Packages
+- Fixed an issue with Simultaneous Adjust Solver
+- Fixed issues with online compound importing
+- Fixed some UI issues
+- Removed Online UNIFAC/MODFAC Structure retrieval tool (currently unavailable)

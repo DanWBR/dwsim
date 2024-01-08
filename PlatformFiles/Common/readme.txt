@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.6.6
+Version 8.6.7
 Copyright (c) 2017-2023 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.6.7
+
+- Fixed issues with CoolProp Incompressible Mixtures (#563)
+- Fixed issues with Steam Tables and CoolProp Property Packages
+- Fixed an issue with Simultaneous Adjust Solver
+- Fixed issues with online compound importing
+- Fixed some UI issues
+- Removed Online UNIFAC/MODFAC Structure retrieval tool (currently unavailable)
 
 Version 8.6.6
 
