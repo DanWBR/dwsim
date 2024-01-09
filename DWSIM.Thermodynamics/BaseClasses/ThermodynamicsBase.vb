@@ -2056,25 +2056,18 @@ Namespace BaseClasses
         Public Function GetLiquidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidHeatCapacity
 
             Dim val As Double
-            If T >= Critical_Temperature Then
-                'surrogate for supercritical gases solved in liquid
+            If LiquidHeatCapacityEquation <> "" And LiquidHeatCapacityEquation <> "0" And Not IsIon And Not IsSalt Then
                 message = "Calculated using Experimental/Regressed data."
-                val = PropertyPackages.PropertyPackage.CalcCSTDepProp(IdealgasCpEquation, Ideal_Gas_Heat_Capacity_Const_A, Ideal_Gas_Heat_Capacity_Const_B, Ideal_Gas_Heat_Capacity_Const_C, Ideal_Gas_Heat_Capacity_Const_D, Ideal_Gas_Heat_Capacity_Const_E, T, Critical_Temperature)
-                If OriginalDB <> "CoolProp" Then val = val / 1000 / Molar_Weight 'kJ/kg.K
-            Else
-                If LiquidHeatCapacityEquation <> "" And LiquidHeatCapacityEquation <> "0" And Not IsIon And Not IsSalt Then
-                    message = "Calculated using Experimental/Regressed data."
-                    If Integer.TryParse(LiquidHeatCapacityEquation, New Integer) Then
-                        val = PropertyPackages.PropertyPackage.CalcCSTDepProp(LiquidHeatCapacityEquation, Liquid_Heat_Capacity_Const_A, Liquid_Heat_Capacity_Const_B, Liquid_Heat_Capacity_Const_C, Liquid_Heat_Capacity_Const_D, Liquid_Heat_Capacity_Const_E, T, Critical_Temperature)
-                    Else
-                        val = PropertyPackages.PropertyPackage.ParseEquation(LiquidHeatCapacityEquation, Liquid_Heat_Capacity_Const_A, Liquid_Heat_Capacity_Const_B, Liquid_Heat_Capacity_Const_C, Liquid_Heat_Capacity_Const_D, Liquid_Heat_Capacity_Const_E, T) / Molar_Weight
-                    End If
-                    If OriginalDB <> "CoolProp" And OriginalDB <> "ChEDL Thermo" Then val = val / 1000 / Molar_Weight 'kJ/kg.K
+                If Integer.TryParse(LiquidHeatCapacityEquation, New Integer) Then
+                    val = PropertyPackages.PropertyPackage.CalcCSTDepProp(LiquidHeatCapacityEquation, Liquid_Heat_Capacity_Const_A, Liquid_Heat_Capacity_Const_B, Liquid_Heat_Capacity_Const_C, Liquid_Heat_Capacity_Const_D, Liquid_Heat_Capacity_Const_E, T, Critical_Temperature)
                 Else
-                    'estimate using Rownlinson/Bondi correlation
-                    message = "Estimated using Rowlinson/Bondi correlation."
-                    val = PropertyPackages.Auxiliary.PROPS.Cpl_rb(GetIdealGasHeatCapacity(T), T, Critical_Temperature, Acentric_Factor, Molar_Weight) 'kJ/kg.K
+                    val = PropertyPackages.PropertyPackage.ParseEquation(LiquidHeatCapacityEquation, Liquid_Heat_Capacity_Const_A, Liquid_Heat_Capacity_Const_B, Liquid_Heat_Capacity_Const_C, Liquid_Heat_Capacity_Const_D, Liquid_Heat_Capacity_Const_E, T) / Molar_Weight
                 End If
+                If OriginalDB <> "CoolProp" And OriginalDB <> "ChEDL Thermo" Then val = val / 1000 / Molar_Weight 'kJ/kg.K
+            Else
+                'estimate using Rownlinson/Bondi correlation
+                message = "Estimated using Rowlinson/Bondi correlation."
+                val = PropertyPackages.Auxiliary.PROPS.Cpl_rb(GetIdealGasHeatCapacity(T), T, Critical_Temperature, Acentric_Factor, Molar_Weight) 'kJ/kg.K
             End If
 
             Return val
