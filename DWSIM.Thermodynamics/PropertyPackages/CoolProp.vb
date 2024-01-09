@@ -1,5 +1,5 @@
 '    CoolProp Property Package
-'    Copyright 2014-2023 Daniel Wagner O. de Medeiros
+'    Copyright 2014-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

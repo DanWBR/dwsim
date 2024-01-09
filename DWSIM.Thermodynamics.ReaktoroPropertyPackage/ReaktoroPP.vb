@@ -1,5 +1,5 @@
 ﻿'    Reaktoro Property Package
-'    Copyright 2020-2023 Daniel Wagner O. de Medeiros
+'    Copyright 2020-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

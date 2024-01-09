@@ -1,5 +1,5 @@
 ﻿'    Peng-Robinson-Stryjek-Vera 2 w/ Margules Mixing Rules Property Package 
-'    Copyright 2012-2023 Daniel Wagner O. de Medeiros
+'    Copyright 2012-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

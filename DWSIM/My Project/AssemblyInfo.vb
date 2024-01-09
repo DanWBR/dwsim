@@ -14,7 +14,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("DWSIM Simulator (Windows Forms GUI)")> 
 <Assembly: AssemblyCompany("DWSIM Project")> 
 <Assembly: AssemblyProduct("DWSIM")>
-<Assembly: AssemblyCopyright("Copyright © 2007-2023 Daniel Medeiros and contributors")>
+<Assembly: AssemblyCopyright("Copyright © 2007-2024 Daniel Medeiros and contributors")>
 <Assembly: AssemblyTrademark("DWSIM")> 
 
 <Assembly: ComVisible(True)> 

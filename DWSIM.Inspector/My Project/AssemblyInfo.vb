@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.Inspector")>
-<Assembly: AssemblyCopyright("Copyright © 2018-2023 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2018-2024 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

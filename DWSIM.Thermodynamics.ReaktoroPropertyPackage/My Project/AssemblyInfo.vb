@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Electrolyte Property Package for DWSIM Simulator (Reaktoro Backend)")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("ReaktoroPropertyPackage")>
-<Assembly: AssemblyCopyright("Copyright © 2020-2023 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2020-2024 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

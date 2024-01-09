@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DWSIM Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Copyright © 2007-2023 Daniel Medeiros and contributors")]
+[assembly: AssemblyCopyright("Copyright © 2007-2024 Daniel Medeiros and contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

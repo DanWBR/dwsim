@@ -1,5 +1,5 @@
 '    Heat Exchanger Calculation Routines 
-'    Copyright 2008-2023 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

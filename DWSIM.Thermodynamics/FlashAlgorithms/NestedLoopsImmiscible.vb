@@ -1,5 +1,5 @@
 '    DWSIM Nested Loops Flash Algorithms for Simplified (Immiscible) VLLE
-'    Copyright 2013-2023 Daniel Wagner O. de Medeiros
+'    Copyright 2013-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

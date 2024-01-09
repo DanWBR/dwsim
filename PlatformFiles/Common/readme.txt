@@ -1,7 +1,7 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
 Version 8.6.7
-Copyright (c) 2017-2023 Daniel Medeiros and contributors
+Copyright (c) 2017-2024 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
