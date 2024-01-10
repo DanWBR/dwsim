@@ -50,6 +50,7 @@ Public Class MaterialStreamPanel
     Private Sub SetupGrid()
 
         Dim ms As New Streams.MaterialStream("", "", Flowsheet, Nothing)
+        Flowsheet.AddComponentsRows(ms)
         Dim nms = Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream).Count
 
         Dim props = ms.GetProperties(PropertyType.ALL)
