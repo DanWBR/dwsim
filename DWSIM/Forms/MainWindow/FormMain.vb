@@ -1048,6 +1048,8 @@ Public Class FormMain
                 My.Settings.CurrentVersion = currver
                 Dim frmwn As New FormWhatsNew()
                 frmwn.Show()
+            Else
+                If My.Settings.CheckForUpdates Then CheckForUpdates()
             End If
         End If
 #Else
@@ -1111,8 +1113,6 @@ Public Class FormMain
         End If
 
         UpdateFlowsheetLinks()
-
-        If My.Settings.CheckForUpdates Then CheckForUpdates()
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
