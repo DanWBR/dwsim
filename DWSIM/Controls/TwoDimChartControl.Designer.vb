@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class TwoDimChartControl
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class TwoDimChartControl
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TwoDimChartControl))
@@ -30,7 +30,6 @@ Partial Class TwoDimChartControl
         Me.btnExportPNG = New System.Windows.Forms.Button()
         Me.btnExportSVG = New System.Windows.Forms.Button()
         Me.PlotView1 = New OxyPlot.WindowsForms.PlotView()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -127,15 +126,10 @@ Partial Class TwoDimChartControl
         Me.PlotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE
         Me.PlotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS
         '
-        'SaveFileDialog1
-        '
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        '
         'TwoDimChartControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "TwoDimChartControl"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -152,5 +146,4 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnExportPNG As Button
     Friend WithEvents btnExportSVG As Button
-    Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class

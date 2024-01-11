@@ -474,6 +474,24 @@ Public Class MaterialStreamEditor
 
             End If
 
+            If IsAccumulationStream Then
+
+                TabControlMain0.TabPages.Remove(TabPageAnnotations)
+                TabControlMain0.TabPages.Remove(TabPageDynamics)
+                TabControlMain0.TabPages.Remove(TabPageFloatingTables)
+                cbForcePhase.Enabled = False
+                cbUnitsQ.Enabled = False
+                cbUnitsW.Enabled = False
+                cbUnitsM.Enabled = False
+                cbUnitsT.Enabled = False
+                cbUnitsP.Enabled = False
+                cbUnitsH.Enabled = False
+                cbUnitsS.Enabled = False
+                btnUtils.Enabled = False
+                btnConfigurePP.Enabled = False
+
+            End If
+
             cbCompBasis.Enabled = True
 
         End With

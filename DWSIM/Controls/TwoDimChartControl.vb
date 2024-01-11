@@ -1,4 +1,6 @@
 ﻿Imports Aga.Controls
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 #If LINUX Then
 Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid
 #End If
@@ -394,36 +396,36 @@ Public Class TwoDimChartControl
 
     Private Sub BtnExportPNG_Click(sender As Object, e As EventArgs) Handles btnExportPNG.Click
 
-        SaveFileDialog1.FilterIndex = 1
-        SaveFileDialog1.DefaultExt = "png"
-        SavePlot()
+        SavePlot("PNG")
 
     End Sub
 
     Private Sub BtnExportSVG_Click(sender As Object, e As EventArgs) Handles btnExportSVG.Click
 
-        SaveFileDialog1.FilterIndex = 2
-        SaveFileDialog1.DefaultExt = "svg"
-        SavePlot()
+        SavePlot("SVG")
 
     End Sub
 
-    Sub SavePlot()
+    Sub SavePlot(extension As String)
 
-        If (SaveFileDialog1.ShowDialog = DialogResult.OK) Then
-            If SaveFileDialog1.FilterIndex = 1 Then
-                Using st = System.IO.File.Create(SaveFileDialog1.FileName)
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType(extension + " File", "*." + extension)})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                If extension = "PNG" Then
                     Dim exporter = New OxyPlot.WindowsForms.PngExporter() With {.Background = OxyPlot.OxyColors.White, .Width = PlotView1.Width, .Height = PlotView1.Height}
-                    exporter.Export(Chart.PlotModel, st)
-                    Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, SaveFileDialog1.FileName), Interfaces.IFlowsheet.MessageType.Information)
-                End Using
-            Else
-                Using st = System.IO.File.Create(SaveFileDialog1.FileName)
+                    exporter.Export(Chart.PlotModel, stream)
+                    Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
+                Else
                     Dim exporter As New OxyPlot.SvgExporter() With {.Width = PlotView1.Width, .Height = PlotView1.Height}
-                    exporter.Export(Chart.PlotModel, st)
-                    Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, SaveFileDialog1.FileName), Interfaces.IFlowsheet.MessageType.Information)
-                End Using
-            End If
+                    exporter.Export(Chart.PlotModel, stream)
+                    Flowsheet.ShowMessage(String.Format("Chart '{0}' saved to '{1}'.", Chart.DisplayName, handler.FullPath), Interfaces.IFlowsheet.MessageType.Information)
+                End If
+                handler.Write(stream)
+            End Using
         End If
 
     End Sub
