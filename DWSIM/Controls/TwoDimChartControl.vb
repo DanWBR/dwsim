@@ -375,16 +375,17 @@ Public Class TwoDimChartControl
     Private Sub PGrid1_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PGrid1.PropertyValueChanged
 
         Try
+            Dim tag = DirectCast(e.ChangedItem.PropertyDescriptor, Controls.PropertyGridEx.CustomProperty.CustomPropertyDescriptor).CustomProperty.tag
             If e.ChangedItem.Label.Equals("Source Object") Then
                 Chart.ChartSourceObjectID = Flowsheet.GetFlowsheetSimulationObject(e.ChangedItem.Value).Name
             ElseIf e.ChangedItem.Label.Equals("Name") Then
                 Parent.Text = Chart.DisplayName
             ElseIf e.ChangedItem.Label.Equals("Line Color") Then
-                DirectCast(Chart.PlotModel.Series(e.ChangedItem.Tag), LineSeries).Color = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
+                DirectCast(Chart.PlotModel.Series(tag), LineSeries).Color = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
             ElseIf e.ChangedItem.Label.Equals("Marker Fill Color") Then
-                DirectCast(Chart.PlotModel.Series(e.ChangedItem.Tag), LineSeries).MarkerFill = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
+                DirectCast(Chart.PlotModel.Series(tag), LineSeries).MarkerFill = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
             ElseIf e.ChangedItem.Label.Equals("Marker Stroke Color") Then
-                DirectCast(Chart.PlotModel.Series(e.ChangedItem.Tag), LineSeries).MarkerStroke = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
+                DirectCast(Chart.PlotModel.Series(tag), LineSeries).MarkerStroke = GetType(OxyColors).GetField(e.ChangedItem.Value).GetValue(Nothing)
             End If
         Catch ex As Exception
             Flowsheet.ShowMessage("Chart property update error: " & ex.Message, Interfaces.IFlowsheet.MessageType.GeneralError)
