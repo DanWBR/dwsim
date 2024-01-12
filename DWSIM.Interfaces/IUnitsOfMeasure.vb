@@ -163,6 +163,8 @@ Imports DWSIM.Interfaces.Enums
 
     Property heat As String
 
+    Property mole As String
+
     Function GetUnitType(unit As String) As UnitOfMeasure
 
 End Interface

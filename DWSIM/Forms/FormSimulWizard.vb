@@ -325,7 +325,8 @@ Public Class FormSimulWizard
             .Add(New String() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
-            .Add(New String() {DWSIM.App.GetLocalString("Heat/Energy"), su.heat, Nothing, Nothing})
+            .Add(New String() {DWSIM.App.GetLocalString("Heat/Energy"), su.heat, DWSIM.App.GetLocalString("Mass"), su.mass})
+            .Add(New String() {DWSIM.App.GetLocalString("Moles"), su.mole, Nothing, Nothing})
         End With
 
         If ComboBox2.SelectedIndex <= 3 Then
@@ -659,6 +660,20 @@ Public Class FormSimulWizard
             .Style.Tag = 41
         End With
 
+        With DirectCast(Me.DataGridView1.Rows.Item(20).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.mass).ToArray)
+            .Value = su.mass
+            .Style.Tag = 42
+        End With
+
+        With DirectCast(Me.DataGridView1.Rows.Item(21).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.mole).ToArray)
+            .Value = su.mole
+            .Style.Tag = 43
+        End With
+
     End Sub
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
@@ -836,6 +851,12 @@ Public Class FormSimulWizard
                     member = "heat"
                     oldvalue = su.heat
                     su.heat = cell.Value
+                Case 42
+                    oldvalue = su.mass
+                    su.mass = cell.Value
+                Case 43
+                    oldvalue = su.mole
+                    su.mole = cell.Value
             End Select
 
         End If

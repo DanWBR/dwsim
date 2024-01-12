@@ -175,6 +175,8 @@ Namespace SystemsOfUnits
 
         Public Property conductance As String = "[kg/s]/[Pa^0.5]" Implements IUnitsOfMeasure.conductance
 
+        Public Property mole As String = "" Implements IUnitsOfMeasure.mole
+
         Public Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String) Implements IUnitsOfMeasure.GetUnitSet
 
             Dim units As New List(Of String)
@@ -266,6 +268,8 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"m-1", "cm-1", "ft-1"})
                 Case Enums.UnitOfMeasure.mass
                     units.AddRange(New String() {"kg", "g", "lb"})
+                Case Enums.UnitOfMeasure.mole
+                    units.AddRange(New String() {"mol", "kmol", "lbmol"})
                 Case Enums.UnitOfMeasure.jouleThomsonCoefficient
                     units.AddRange(New String() {"K/Pa", "F/psi", "C/atm"})
                 Case Enums.UnitOfMeasure.compressibility
@@ -367,6 +371,8 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.mediumresistance
                 Case "kg", "g", "lb"
                     Return Enums.UnitOfMeasure.mass
+                Case "mol", "kmol", "lbmol"
+                    Return Enums.UnitOfMeasure.mole
                 Case "K/Pa", "F/psi", "C/atm"
                     Return Enums.UnitOfMeasure.jouleThomsonCoefficient
                 Case "1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"
@@ -460,6 +466,8 @@ Namespace SystemsOfUnits
                     Return mediumresistance
                 Case Enums.UnitOfMeasure.mass
                     Return mass
+                Case Enums.UnitOfMeasure.mole
+                    Return mole
                 Case Enums.UnitOfMeasure.jouleThomsonCoefficient
                     Return jouleThomsonCoefficient
                 Case Enums.UnitOfMeasure.compressibility
@@ -557,6 +565,7 @@ Namespace SystemsOfUnits
                 .deltaP = "Pa"
                 .deltaT = "K."
                 .heat = "kJ"
+                .mole = "mol"
 
             End With
 
@@ -648,6 +657,7 @@ Namespace SystemsOfUnits
                 .deltaP = "bar"
                 .deltaT = "C."
                 .heat = "kJ"
+                .mole = "kmol"
 
             End With
 
@@ -736,6 +746,7 @@ Namespace SystemsOfUnits
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
                 .heat = "kJ"
+                .mole = "kmol"
 
             End With
 
@@ -824,6 +835,7 @@ Namespace SystemsOfUnits
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
                 .heat = "kJ"
+                .mole = "kmol"
 
             End With
 
@@ -912,6 +924,7 @@ Namespace SystemsOfUnits
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
                 .heat = "kJ"
+                .mole = "kmol"
 
             End With
 
@@ -1000,6 +1013,7 @@ Namespace SystemsOfUnits
                 .deltaP = "kgf/cm2"
                 .deltaT = "C."
                 .heat = "kJ"
+                .mole = "kmol"
 
             End With
 
@@ -1088,6 +1102,7 @@ Namespace SystemsOfUnits
                 .deltaP = "bar"
                 .deltaT = "C."
                 .heat = "kJ"
+                .mole = "kmol"
 
             End With
 
@@ -1178,6 +1193,7 @@ Namespace SystemsOfUnits
                 .deltaP = "lbf/ft2"
                 .deltaT = "F."
                 .heat = "BTU"
+                .mole = "lbmol"
 
             End With
 
@@ -1266,6 +1282,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .deltaP = "atm"
                 .heat = "kcal"
+                .mole = "mol"
 
             End With
 
@@ -1400,6 +1417,13 @@ Namespace SystemsOfUnits
                 Case "g"
                     Return value / 1000
                 Case "lb", "lbm"
+                    Return value / 2.20462
+
+                Case "mol"
+                    Return value
+                Case "kmol"
+                    Return value * 1000
+                Case "lbmol"
                     Return value / 2.20462
 
                 Case "mol/h"
@@ -1932,6 +1956,13 @@ Namespace SystemsOfUnits
                     Return value / 1000 * 60 * 60
                 Case "t/min"
                     Return value / 1000 * 60
+
+                Case "mol"
+                    Return value
+                Case "kmol"
+                    Return value / 1000
+                Case "lbmol"
+                    Return value * 2.20462
 
                 Case "g"
                     Return value * 1000

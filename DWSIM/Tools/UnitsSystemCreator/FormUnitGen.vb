@@ -282,7 +282,19 @@ Public Class FormUnitGen
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.heat).ToArray)
             cb.Value = currentset.heatflow
-            .Add(New Object() {"Heat/Energy"})
+            .Add(New Object() {DWSIM.App.GetLocalString("Heat/Energy")})
+            .Item(.Count - 1).Cells(1) = cb
+
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.mass).ToArray)
+            cb.Value = currentset.mass
+            .Add(New Object() {DWSIM.App.GetLocalString("Mass")})
+            .Item(.Count - 1).Cells(1) = cb
+
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.mole).ToArray)
+            cb.Value = currentset.mole
+            .Add(New Object() {DWSIM.App.GetLocalString("Moles")})
             .Item(.Count - 1).Cells(1) = cb
 
         End With
@@ -394,6 +406,8 @@ Public Class FormUnitGen
                 .conductance = Me.DataGridView1.Rows(39).Cells(1).Value
                 .distance = Me.DataGridView1.Rows(40).Cells(1).Value
                 .heat = Me.DataGridView1.Rows(41).Cells(1).Value
+                .mass = Me.DataGridView1.Rows(42).Cells(1).Value
+                .mole = Me.DataGridView1.Rows(43).Cells(1).Value
             End With
 
             If Not Wizard Then
