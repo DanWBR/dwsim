@@ -3847,6 +3847,7 @@ Label_00CC:
             If File.Exists(dbfile) Then
                 Try
                     fs.FileDatabaseProvider.LoadDatabase(dbfile)
+                    DirectCast(fs, FormFlowsheet).FormFilesExplorer.ListFiles()
                 Catch ex As Exception
                 Finally
                     File.Delete(dbfile)

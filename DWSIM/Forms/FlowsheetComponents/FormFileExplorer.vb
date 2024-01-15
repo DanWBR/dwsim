@@ -207,15 +207,4 @@ Public Class FormFileExplorer
         FormMain.TranslateFormFunction?.Invoke(Me)
     End Sub
 
-    Private Sub FormFileExplorer_Layout(sender As Object, e As LayoutEventArgs) Handles Me.Layout
-
-        Try
-            If Flowsheet IsNot Nothing Then
-                ListFiles()
-                UpdateSize()
-            End If
-        Catch ex As Exception
-        End Try
-
-    End Sub
 End Class
