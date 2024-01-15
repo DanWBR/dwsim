@@ -1125,13 +1125,13 @@ Label_00CC:
                 ParseFilePath()
                 UpdateProcessData(SimulationFile)
             Else
-                Dim tmpfile As String = ""
-                tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
-                FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
-                UpdateProcessData(tmpfile)
+                Dim tpath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()))
+                Dim tfile = Path.Combine(tpath.FullName, EmbeddedFileName)
+                FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tfile)
+                UpdateProcessData(tfile)
                 FlowSheet.FileDatabaseProvider.DeleteFile(EmbeddedFileName)
-                FlowSheet.FileDatabaseProvider.PutFile(tmpfile, EmbeddedFileName)
-                File.Delete(tmpfile)
+                FlowSheet.FileDatabaseProvider.PutFile(tfile, EmbeddedFileName)
+                Directory.Delete(tpath.FullName, True)
             End If
 
             Return elements

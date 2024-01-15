@@ -63,8 +63,8 @@ namespace DWSIM.FileStorage
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
             if (file != null)
-            {                
-                 if (!File.Exists(exportpath)) file.SaveAs(exportpath);
+            {
+                if (!File.Exists(exportpath)) file.SaveAs(exportpath);
             }
             else
             {
@@ -183,6 +183,7 @@ namespace DWSIM.FileStorage
         {
             ReleaseDatabase();
             DBMem = ReadStream(dbpath);
+            DBMem.Position = 0;
             DB = new LiteDatabase(DBMem);
             IsDBLoaded = true;
         }

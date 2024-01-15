@@ -107,7 +107,7 @@ Public Class FormFileExplorer
             Dim provider = Flowsheet.FileDatabaseProvider
             If TypeOf openedFile Is WindowsFile Then
                 Try
-                    provider.PutFile(openedFile.FullPath)
+                    provider.PutFile(openedFile.FullPath, openedFile.Filename)
                 Catch ex As Exception
                     MessageBox.Show(openedFile.Filename + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
                 End Try
@@ -194,7 +194,7 @@ Public Class FormFileExplorer
     Private Sub FormFileExplorer_Activated(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
         Try
-            If Visible And Flowsheet IsNot Nothing Then
+            If Flowsheet IsNot Nothing Then
                 ListFiles()
                 UpdateSize()
             End If
@@ -205,5 +205,17 @@ Public Class FormFileExplorer
 
     Private Sub FormFileExplorer_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
+
+    Private Sub FormFileExplorer_Layout(sender As Object, e As LayoutEventArgs) Handles Me.Layout
+
+        Try
+            If Flowsheet IsNot Nothing Then
+                ListFiles()
+                UpdateSize()
+            End If
+        Catch ex As Exception
+        End Try
+
     End Sub
 End Class
