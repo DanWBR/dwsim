@@ -1056,16 +1056,21 @@ Namespace UnitOperations
                                 c.AttachedConnector.AttachedTo.Calculated = True
                             End If
                         Next
-                        'Dim ur As CapeOpen.ICapeUnitReport = _couo
-                        'If Not ur Is Nothing Then
-                        '    Dim reps As String() = ur.reports
-                        '    For Each r As String In reps
-                        '        ur.selectedReport = r
-                        '        Dim msg2 As String = "myreport"
-                        '        ur.ProduceReport(msg2)
-                        '        IObj?.Paragraphs.Add("</p><pre>" + msg2 + "</pre><p>")
-                        '    Next
-                        'End If
+                        If IObj IsNot Nothing Then
+                            Dim ur As CapeOpen.ICapeUnitReport = _couo
+                            If Not ur Is Nothing Then
+                                Dim reps As String() = ur.reports
+                                For Each r As String In reps
+                                    ur.selectedReport = r
+                                    Dim msg2 As String = ""
+                                    Try
+                                        ur.ProduceReport(msg2)
+                                        IObj.Paragraphs.Add("</p><pre>" + msg2 + "</pre><p>")
+                                    Catch ex As Exception
+                                    End Try
+                                Next
+                            End If
+                        End If
                     Catch ex As Exception
                         For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn Then
