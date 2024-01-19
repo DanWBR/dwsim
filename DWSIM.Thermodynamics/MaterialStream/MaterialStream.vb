@@ -8549,7 +8549,7 @@ Namespace Streams
                 Next
                 .Phases(0).Properties.massflow = total
                 .Phases(0).Properties.molarflow = totalm
-                .SetMassEnthalpy((H0 * W0 + H1 * W1) / total)
+                .SetMassEnthalpy((H0 * W0 + H1 * Factor * W1) / total)
                 .SpecType = StreamSpec.Pressure_and_Enthalpy
             End With
 
