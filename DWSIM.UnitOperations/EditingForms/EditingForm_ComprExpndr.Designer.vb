@@ -94,6 +94,8 @@ Partial Class EditingForm_ComprExpndr
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.tbPRatio = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -239,6 +241,8 @@ Partial Class EditingForm_ComprExpndr
         'GroupBoxParameters
         '
         resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.tbPRatio)
+        Me.GroupBoxParameters.Controls.Add(Me.Label3)
         Me.GroupBoxParameters.Controls.Add(Me.Label25)
         Me.GroupBoxParameters.Controls.Add(Me.tbRotSpeed)
         Me.GroupBoxParameters.Controls.Add(Me.Label26)
@@ -619,7 +623,7 @@ Partial Class EditingForm_ComprExpndr
         resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
         Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5")})
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6")})
         Me.cbCalcMode.Name = "cbCalcMode"
         Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip1"))
@@ -773,6 +777,22 @@ Partial Class EditingForm_ComprExpndr
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'tbPRatio
+        '
+        resources.ApplyResources(Me.tbPRatio, "tbPRatio")
+        Me.tbPRatio.Name = "tbPRatio"
+        Me.ToolTipValues.SetToolTip(Me.tbPRatio, resources.GetString("tbPRatio.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbPRatio, resources.GetString("tbPRatio.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbPRatio, resources.GetString("tbPRatio.ToolTip2"))
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
+        '
         'EditingForm_ComprExpndr
         '
         resources.ApplyResources(Me, "$this")
@@ -868,4 +888,6 @@ Partial Class EditingForm_ComprExpndr
     Friend WithEvents Label25 As Label
     Public WithEvents tbRotSpeed As TextBox
     Public WithEvents Label26 As Label
+    Public WithEvents tbPRatio As TextBox
+    Public WithEvents Label3 As Label
 End Class

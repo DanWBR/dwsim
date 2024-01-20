@@ -46,6 +46,7 @@ Namespace UnitOperations
             PowerRequired = 3
             Head = 4
             Curves = 5
+            PressureRatio = 6
         End Enum
 
         Public Enum ProcessPathType
@@ -55,23 +56,25 @@ Namespace UnitOperations
 
         Public Property OutletTemperature As Double = 0.0#
 
-        Public Property CalcMode() As CalculationMode = CalculationMode.OutletPressure
+        Public Property CalcMode As CalculationMode = CalculationMode.OutletPressure
 
         Public Property ProcessPath As ProcessPathType = ProcessPathType.Adiabatic
 
-        Public Property IgnorePhase() As Boolean
+        Public Property IgnorePhase As Boolean
 
-        Public Property PolytropicEfficiency() As Double = 75.0
+        Public Property PolytropicEfficiency As Double = 75.0
 
-        Public Property AdiabaticEfficiency() As Double = 75.0
+        Public Property AdiabaticEfficiency As Double = 75.0
 
-        Public Property DeltaP() As Double = 0.0
+        Public Property DeltaP As Double = 0.0
 
-        Public Property DeltaT() As Double = 0.0
+        Public Property DeltaT As Double = 0.0
 
-        Public Property DeltaQ() As Double = 0.0
+        Public Property DeltaQ As Double = 0.0
 
-        Public Property POut() As Double = 101325.0
+        Public Property POut As Double = 101325.0
+
+        Public Property PressureRatio As Double = Double.NaN
 
         Public Property AdiabaticCoefficient As Double = 0.0
 
@@ -728,8 +731,9 @@ Namespace UnitOperations
 
                     POut = P2
                     DeltaP = P2 - Pi
+                    PressureRatio = POut / Pi
 
-                Case CalculationMode.Delta_P, CalculationMode.OutletPressure
+                Case CalculationMode.Delta_P, CalculationMode.OutletPressure, CalculationMode.PressureRatio
 
                     Me.PropertyPackage.CurrentMaterialStream = msin
                     Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
@@ -758,8 +762,13 @@ Namespace UnitOperations
                         Case CalculationMode.Delta_P
                             P2 = Pi + Me.DeltaP
                             POut = P2
+                            PressureRatio = P2 / Pi
                         Case CalculationMode.OutletPressure
                             P2 = Me.POut
+                            DeltaP = P2 - Pi
+                            PressureRatio = P2 / Pi
+                        Case CalculationMode.PressureRatio
+                            P2 = Pi * PressureRatio
                             DeltaP = P2 - Pi
                     End Select
 
@@ -1063,6 +1072,8 @@ Namespace UnitOperations
                             Return PolytropicEfficiency
                         Case "RotationSpeed"
                             Return Speed
+                        Case "PressureRatio"
+                            Return PressureRatio
                     End Select
 
                 End If
@@ -1093,6 +1104,7 @@ Namespace UnitOperations
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
                     proplist.Add("RotationSpeed")
+                    proplist.Add("PressureRatio")
                 Case PropertyType.WR
                     For i = 0 To 1
                         proplist.Add("PROP_CO_" + CStr(i))
@@ -1102,6 +1114,7 @@ Namespace UnitOperations
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
                     proplist.Add("RotationSpeed")
+                    proplist.Add("PressureRatio")
                 Case PropertyType.ALL
                     For i = 0 To 4
                         proplist.Add("PROP_CO_" + CStr(i))
@@ -1112,6 +1125,7 @@ Namespace UnitOperations
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
                     proplist.Add("RotationSpeed")
+                    proplist.Add("PressureRatio")
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
@@ -1153,6 +1167,8 @@ Namespace UnitOperations
                         PolytropicEfficiency = propval
                     Case "RotationSpeed"
                         Speed = propval
+                    Case "PressureRatio"
+                        PressureRatio = propval
                 End Select
 
             End If

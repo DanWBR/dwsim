@@ -188,6 +188,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case Compressor.CalculationMode.Curves:
                             pos1 = 5;
                             break;
+                        case Compressor.CalculationMode.PressureRatio:
+                            pos1 = 6;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.comprcalcmode().ToList(), pos1, (DropDown arg3, EventArgs ev) =>
                     {
@@ -210,6 +213,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 5:
                                 ce.CalcMode = Compressor.CalculationMode.Curves;
+                                break;
+                            case 6:
+                                ce.CalcMode = Compressor.CalculationMode.PressureRatio;
                                 break;
                         }
                     });
@@ -279,6 +285,19 @@ namespace DWSIM.UI.Desktop.Editors
                        });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Ratio", ce.PressureRatio,
+                                           (TextBox arg3, EventArgs ev) =>
+                                           {
+                                               if (arg3.Text.IsValidDoubleExpression())
+                                               {
+                                                   arg3.TextColor = (SystemColors.ControlText);
+                                                   ce.PressureRatio = arg3.Text.ToString().ParseExpressionToDouble();
+                                               }
+                                               else
+                                               {
+                                                   arg3.TextColor = (Colors.Red);
+                                               }
+                                           });
                     s.CreateAndAddTextBoxRow(container, nf, "Power Required (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, ce.DeltaQ),
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -375,6 +394,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Curves:
                             pos1 = 4;
                             break;
+                        case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.PressureRatio:
+                            pos1 = 5;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.expndrcalcmode().ToList(), pos1e, (DropDown arg3, EventArgs ev) =>
                     {
@@ -394,6 +416,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 4:
                                 xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Curves;
+                                break;
+                            case 5:
+                                xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.PressureRatio;
                                 break;
                         }
                     });
@@ -463,6 +488,19 @@ namespace DWSIM.UI.Desktop.Editors
                        });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Pressure"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Ratio", xe.PressureRatio,
+                                                              (TextBox arg3, EventArgs ev) =>
+                                                              {
+                                                                  if (arg3.Text.IsValidDoubleExpression())
+                                                                  {
+                                                                      arg3.TextColor = (SystemColors.ControlText);
+                                                                      xe.PressureRatio = arg3.Text.ToString().ParseExpressionToDouble();
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                      arg3.TextColor = (Colors.Red);
+                                                                  }
+                                                              });
                     s.CreateAndAddTextBoxRow(container, nf, "Power Generated (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, xe.DeltaQ),
                        (TextBox arg3, EventArgs ev) =>
                        {
