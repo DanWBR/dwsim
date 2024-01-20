@@ -6,6 +6,12 @@
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        UpdateInfo()
+
+    End Sub
+
+    Public Sub UpdateInfo()
+
         If PID IsNot Nothing Then
 
             Text = PID.GraphicObject.Tag
@@ -14,7 +20,7 @@
 
             chkAuto.Checked = Not PID.ManualOverride
 
-            tbSP.Text = PID.SPValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
+            tbSP.Text = PID.AdjustValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
             tbPV.Text = PID.PVValue.ToString(PID.GetFlowsheet.FlowsheetOptions.NumberFormat)
 
@@ -25,6 +31,7 @@
         End If
 
     End Sub
+
 
     Private Sub tbSP_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSP.KeyDown
 

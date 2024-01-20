@@ -115,6 +115,7 @@ Public Class GraphicObjectControlPanelModeEditors
                                                              Else
                                                                  cpform.Show()
                                                                  cpform.BringToFront()
+                                                                 cpform.UpdateInfo()
                                                              End If
                                                          End If
                                                      End Sub
