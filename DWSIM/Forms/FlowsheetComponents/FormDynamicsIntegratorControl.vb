@@ -249,6 +249,7 @@ Public Class FormDynamicsIntegratorControl
             Throw New Exception(Flowsheet.GetTranslatedString1("Please select a valid integrator for the selected schedule."))
         End If
 
+        Flowsheet.ClearLog()
         Flowsheet.ShowMessage(DWSIM.App.GetLocalString("Dynamics Integrator Starting..."), Interfaces.IFlowsheet.MessageType.Information)
 
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
@@ -347,6 +348,7 @@ Public Class FormDynamicsIntegratorControl
 
         Flowsheet.SupressMessages = True
 
+        Flowsheet.ClearLog()
         FlowsheetClone = Flowsheet.Clone()
 
         Historian = New Dictionary(Of Date, XDocument)()
@@ -414,7 +416,11 @@ Public Class FormDynamicsIntegratorControl
                                             integrator.ShouldCalculatePressureFlow = False
                                         End If
 
-                                        exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode)
+                                        If Flowsheet.ExternalFlowsheetSolver IsNot Nothing Then
+                                            exceptions = Flowsheet.ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                        Else
+                                            exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode)
+                                        End If
 
                                         While GlobalSettings.Settings.CalculatorBusy
                                             Task.Delay(200).Wait()
@@ -500,6 +506,7 @@ Public Class FormDynamicsIntegratorControl
                                 End Sub)
 
         maintask.ContinueWith(Sub(t)
+
                                   If Not Paused Then Running = False
                                   If t.Exception IsNot Nothing Then
                                       Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
@@ -545,6 +552,12 @@ Public Class FormDynamicsIntegratorControl
                                                                               End If
                                                                           Next
                                                                       End If
+
+                                                                      DirectCast(FlowsheetClone, FormFlowsheet)?.Dispose()
+                                                                      FlowsheetClone = Nothing
+                                                                      Historian.Clear()
+                                                                      GC.Collect()
+
                                                                   End Sub)
                                   End If
                               End Sub)

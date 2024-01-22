@@ -4674,6 +4674,7 @@ Public Class FormFlowsheet
     Public Sub ClearLog() Implements IFlowsheet.ClearLog
 
         UIThread(Sub()
+                     MessagePump.Clear()
                      FormLog.Grid1.Rows.Clear()
                  End Sub)
 

@@ -2271,8 +2271,6 @@ Public Class FormMain
 
         My.Application.ActiveSimulation = form
 
-        Application.DoEvents()
-
         Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
 
         Try
@@ -3774,8 +3772,6 @@ Public Class FormMain
         End If
 
         RaiseEvent FlowsheetSavedToXML(form, New EventArgs())
-
-        Application.DoEvents()
 
     End Sub
 
