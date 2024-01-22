@@ -514,10 +514,14 @@ Public Class FormDynamicsIntegratorControl
                                       Dim datadict = New Dictionary(Of String, String) From {
                                           {"Exception", t.Exception.Message}
                                       }
-                                      My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Finished with Errors", "", datadict)
+                                      Flowsheet.RunCodeOnUIThread(Sub()
+                                                                      My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Finished with Errors", "", datadict)
+                                                                  End Sub)
                                       Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
                                   Else
-                                      My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Finished Successfully", "", Nothing)
+                                      Flowsheet.RunCodeOnUIThread(Sub()
+                                                                      My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Finished Successfully", "", Nothing)
+                                                                  End Sub)
                                       Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "")
                                   End If
                                   If Not guiless Then

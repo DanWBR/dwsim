@@ -104,6 +104,7 @@ Partial Class EditingForm_SeparatorFiller
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cbStreams)
         Me.Controls.Add(Me.Label1)
+        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "EditingForm_SeparatorFiller"
         Me.ShowIcon = False
