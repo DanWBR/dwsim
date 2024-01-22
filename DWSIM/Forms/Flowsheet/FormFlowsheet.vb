@@ -1478,7 +1478,9 @@ Public Class FormFlowsheet
             data.Add("Reactions", Me.Reactions.Count)
             data.Add("Property Packages", Me.PropertyPackages.Count)
 
-            My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
+            If Not FormMain.IsPro Then
+                My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
+            End If
 
             RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
             Settings.TaskCancellationTokenSource = Nothing

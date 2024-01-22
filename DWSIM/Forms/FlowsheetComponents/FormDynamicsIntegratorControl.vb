@@ -252,6 +252,8 @@ Public Class FormDynamicsIntegratorControl
         Flowsheet.ClearLog()
         Flowsheet.ShowMessage(DWSIM.App.GetLocalString("Dynamics Integrator Starting..."), Interfaces.IFlowsheet.MessageType.Information)
 
+        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Started", "", Nothing)
+
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
         integrator.RealTime = realtime
@@ -509,8 +511,13 @@ Public Class FormDynamicsIntegratorControl
 
                                   If Not Paused Then Running = False
                                   If t.Exception IsNot Nothing Then
+                                      Dim datadict = New Dictionary(Of String, String) From {
+                                          {"Exception", t.Exception.Message}
+                                      }
+                                      My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Finished with Errors", "", datadict)
                                       Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
                                   Else
+                                      My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Finished Successfully", "", Nothing)
                                       Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "")
                                   End If
                                   If Not guiless Then
