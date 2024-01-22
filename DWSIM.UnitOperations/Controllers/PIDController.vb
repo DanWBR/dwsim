@@ -665,7 +665,7 @@ Namespace SpecialOps
 
             LastError = CurrentError
 
-            CurrentError = (AdjustValue - CurrentValue) / BaseSP
+            CurrentError = (CurrentValue - AdjustValue) / BaseSP
 
             CumulativeError += Math.Abs(CurrentError)
 

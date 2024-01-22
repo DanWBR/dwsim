@@ -313,7 +313,6 @@ Namespace UnitOperations
 
                         P2 = oms.GetPressure
 
-
                         If CalcMode = CalculationMode.Kv_General Or CalcMode = CalculationMode.Kv_Gas Or CalcMode = CalculationMode.Kv_Liquid Then
                             If ims.Phases(1).Properties.molarfraction > 0.99 Or CalcMode = CalculationMode.Kv_Liquid Then
                                 Wi = Kvc * (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
