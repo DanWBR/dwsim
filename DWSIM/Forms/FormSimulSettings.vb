@@ -1555,7 +1555,9 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+
         FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from Online Sources", "", Nothing)
+
         Dim f As New FormImportCompoundOnline
         If f.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
             Try
@@ -1792,6 +1794,9 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from Thermo/Chemicals", "", Nothing)
+
         Dim f As New FormImportCompoundFromThermo
         If f.ShowDialog(Me) = DialogResult.OK Then
             Try

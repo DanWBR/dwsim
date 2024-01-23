@@ -998,6 +998,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from Online Sources", "", Nothing)
         Dim f As New FormImportCompoundOnline
         If f.ShowDialog(Me) = DialogResult.OK Then
             Try
@@ -1029,6 +1030,8 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from JSON Files", "", Nothing)
 
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
@@ -1156,6 +1159,9 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub ImportFromThermoChemicalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromThermoChemicalsToolStripMenuItem.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from Thermo/Chemicals", "", Nothing)
+
         Dim f As New FormImportCompoundFromThermo
         If f.ShowDialog(Me) = DialogResult.OK Then
             Try
