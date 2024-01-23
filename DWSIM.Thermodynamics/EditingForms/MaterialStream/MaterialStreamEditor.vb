@@ -1389,7 +1389,13 @@ Public Class MaterialStreamEditor
         SaveViewState()
 
         If Not IsAccumulationStream Then
-            MatStream.FlowSheet.RequestCalculation3(MatStream, False)
+            If MatStream.FlowSheet.DynamicMode Then
+                MatStream.PropertyPackage.CurrentMaterialStream = MatStream
+                MatStream.Calculate()
+                UpdateInfo()
+            Else
+                MatStream.FlowSheet.RequestCalculation3(MatStream, False)
+            End If
         End If
 
     End Sub
