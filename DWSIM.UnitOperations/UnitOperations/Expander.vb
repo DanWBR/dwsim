@@ -613,19 +613,31 @@ Namespace UnitOperations
 
                         If LHead.Count > 0 Then
                             ' head has priority over power
-                            ires = MathNet.Numerics.Interpolate.Linear(LHeadSpeed.ToArray, LHead.ToArray()).Interpolate(Speed)
+                            If LHead.Count >= 2 Then
+                                ires = MathNet.Numerics.Interpolate.Linear(LHeadSpeed.ToArray, LHead.ToArray()).Interpolate(Speed)
+                            Else
+                                ires = Convert.ToDouble(Speed) / LHeadSpeed(0) * LHead(0)
+                            End If
                             Me.CurvePower = Double.NegativeInfinity
                             Me.CurveHead = ires
                         Else
                             'power
-                            ires = MathNet.Numerics.Interpolate.Linear(LPowerSpeed.ToArray, LPower.ToArray()).Interpolate(Speed)
+                            If LHead.Count >= 2 Then
+                                ires = MathNet.Numerics.Interpolate.Linear(LPowerSpeed.ToArray, LPower.ToArray()).Interpolate(Speed)
+                            Else
+                                ires = Convert.ToDouble(Speed) / LPowerSpeed(0) * LPower(0)
+                            End If
                             Me.CurveHead = Double.NegativeInfinity
                             Me.CurvePower = ires
                         End If
 
                         If LEff.Count > 0 Then
                             'efficiency
-                            ires = MathNet.Numerics.Interpolate.Linear(LEffSpeed.ToArray, LEff.ToArray()).Interpolate(Speed)
+                            If LHead.Count >= 2 Then
+                                ires = MathNet.Numerics.Interpolate.Linear(LEffSpeed.ToArray, LEff.ToArray()).Interpolate(Speed)
+                            Else
+                                ires = Convert.ToDouble(Speed) / LEffSpeed(0) * LEff(0)
+                            End If
                             Me.CurveEff = ires * 100
                         Else
                             Me.CurveEff = Double.NegativeInfinity
