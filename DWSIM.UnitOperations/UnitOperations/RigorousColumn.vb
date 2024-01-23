@@ -3840,6 +3840,7 @@ Namespace UnitOperations
             If Me.AutoUpdateInitialEstimates Then
                 'check if initial estimates are valid
                 If Vf.IsValid And Lf.IsValid And LSSf.IsValid And Tf.IsValid Then
+                    InitialEstimates = RebuildEstimates()
                     InitialEstimates.VaporProductFlowRate = Vf(0)
                     InitialEstimates.DistillateFlowRate = LSSf(0)
                     InitialEstimates.BottomsFlowRate = Lf(0)

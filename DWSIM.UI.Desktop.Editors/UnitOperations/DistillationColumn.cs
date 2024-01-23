@@ -24,6 +24,8 @@ using DWSIM.Interfaces.Enums;
 using DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps;
 
 using DWSIM.ExtensionMethods;
+using DWSIM.CrossPlatform.UI.Controls.ReoGrid.IO.OpenXML.Schema;
+using DWSIM.Thermodynamics.Databases.ChemeoLink;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -118,25 +120,62 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     var refval = (int)np.Value;
                     column.NumberOfStages = refval;
-                    int ne, nep, dif, i;
+                    int ne, nep, dif;
                     ne = refval;
                     nep = column.Stages.Count;
                     dif = ne - nep;
-                    if (dif != 0)
+
+                    if (dif< 0)
                     {
-                        if (dif < 0)
+                        column.Stages.RemoveRange(nep + dif - 1, -dif);
+                        column.InitialEstimates.LiqCompositions.RemoveRange(nep + dif - 1, -dif);
+                        column.InitialEstimates.VapCompositions.RemoveRange(nep + dif - 1, -dif);
+                        column.InitialEstimates.LiqMolarFlows.RemoveRange(nep + dif - 1, -dif);
+                        column.InitialEstimates.VapMolarFlows.RemoveRange(nep + dif - 1, -dif);
+                        column.InitialEstimates.StageTemps.RemoveRange(nep + dif - 1, -dif);
+                    }
+                    else if (dif > 0)
+                    {
+                        var P0 = column.Stages[column.Stages.Count - 2].P;
+                        var E0 = column.Stages[column.Stages.Count - 2].Efficiency;
+                        var P1 = column.Stages.Last().P;
+                        var E1 = column.Stages.Last().Efficiency;
+                        for (int i = 1; i<=dif; i++)
                         {
-                            column.Stages.RemoveRange(ne - 1, -dif);
-                        }
-                        else if (dif > 0)
-                        {
-                            for (i = 0; i <= dif; i++)
+                            var stage = new Stage(Guid.NewGuid().ToString());
+                            column.Stages.Insert(column.Stages.Count - 1, stage);
+                            stage.Name = column.FlowSheet.GetTranslatedString("DCStage") + "_" + (column.Stages.Count - 2).ToString();
+                            stage.P = P0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (P1 - P0);
+                            stage.Efficiency = E0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (E1 - E0);
+                            var dl = new Dictionary<String, Parameter>();
+                            var dv = new Dictionary<String, Parameter>();
+                            foreach (var cp in column.FlowSheet.SelectedCompounds.Values)
                             {
-                                column.Stages.Insert(column.Stages.Count - 1, new Stage(Guid.NewGuid().ToString()) { P = 101325, Efficiency = 1.0f });
-                                column.Stages[column.Stages.Count - 2].Name = "Stage " + (column.Stages.Count - 2).ToString();
+                                var pl = new Parameter();
+                                pl.LoadData(column.InitialEstimates.LiqCompositions[column.InitialEstimates.LiqCompositions.Count - 1][cp.Name].SaveData());
+                                dl.Add(cp.Name, pl);
+                                var pv = new Parameter();
+                                pv.LoadData(column.InitialEstimates.VapCompositions[column.InitialEstimates.VapCompositions.Count - 1][cp.Name].SaveData());
+                                dv.Add(cp.Name, pv);
                             }
+                            column.InitialEstimates.LiqCompositions.Insert(column.InitialEstimates.LiqCompositions.Count - 1, dl);
+                            column.InitialEstimates.VapCompositions.Insert(column.InitialEstimates.VapCompositions.Count - 1, dv);
+                            var L0 = column.InitialEstimates.LiqMolarFlows[column.InitialEstimates.LiqMolarFlows.Count - 2].Value;
+                            var V0 = column.InitialEstimates.VapMolarFlows[column.InitialEstimates.VapMolarFlows.Count - 2].Value;
+                            var T0 = column.InitialEstimates.StageTemps[column.InitialEstimates.StageTemps.Count - 1].Value;
+                            var T1 = column.InitialEstimates.StageTemps[column.InitialEstimates.StageTemps.Count - 1].Value;
+                            var plt = new Parameter();
+                            var pvt = new Parameter();
+                            var pt = new Parameter();
+                            plt.Value = L0;
+                            pvt.Value = V0;
+                            pt.Value = T0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (T1 - T0);
+                            column.InitialEstimates.LiqMolarFlows.Insert(column.InitialEstimates.LiqMolarFlows.Count - 1, plt);
+                            column.InitialEstimates.VapMolarFlows.Insert(column.InitialEstimates.VapMolarFlows.Count - 1, pvt);
+                            column.InitialEstimates.StageTemps.Insert(column.InitialEstimates.StageTemps.Count - 1, pt);
                         }
                     }
+
                 };
 
                 s.CreateDialog(np, "Set Number of Stages").ShowModal(container);
@@ -161,7 +200,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    {
                                                        if (s.IsValidDouble(arg11.Text))
                                                        {
-                                                           stage.P = cv.ConvertToSI(su.pressure, Double.Parse(arg11.Text));                                                           
+                                                           stage.P = cv.ConvertToSI(su.pressure, Double.Parse(arg11.Text));
                                                        }
                                                    }));
                 }
@@ -636,7 +675,8 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddCheckBoxRow(container, "Generate Convergence Report", column.CreateSolverConvergengeReport, (chk, e) => {
+            s.CreateAndAddCheckBoxRow(container, "Generate Convergence Report", column.CreateSolverConvergengeReport, (chk, e) =>
+            {
                 column.CreateSolverConvergengeReport = chk.Checked.GetValueOrDefault();
             });
 
