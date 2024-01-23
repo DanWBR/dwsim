@@ -22,6 +22,7 @@ Imports OxyPlot
 Imports OxyPlot.Axes
 Imports DWSIM.SharedClasses.SystemsOfUnits
 Imports interp = DWSIM.MathOps.MathEx.Interpolation
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Public Class Manager
 
@@ -98,23 +99,19 @@ Public Class Manager
         Return True
     End Function
 
-    Public Function GetChartModel(IntegratorID As String) As Object Implements IDynamicsManager.GetChartModel
+    Public Function GetChartModel(fs As IFlowsheet, IntegratorID As String) As Object Implements IDynamicsManager.GetChartModel
 
         Dim integrator = IntegratorList(IntegratorID)
 
         Dim model = New PlotModel() With {.Title = integrator.Description}
 
-        Dim i, j As Integer
+        Dim i As Integer
+
+        Dim su = fs.FlowsheetOptions.SelectedUnitSystem
 
         Dim xavals = New List(Of Double)
-        i = 1
         For Each item In integrator.MonitoredVariableValues
-            If integrator.RealTime Then
-                xavals.Add(item.Key * integrator.RealTimeStepMs / 1000)
-            Else
-                xavals.Add(item.Key * integrator.IntegrationStep.TotalMilliseconds / 1000)
-            End If
-            i += 1
+            xavals.Add(cv.ConvertFromSI(su.time, New TimeSpan(item.Key).TotalMilliseconds / 1000.0))
         Next
 
         model.TitleFontSize = 12
@@ -124,7 +121,7 @@ Public Class Manager
             .MinorGridlineStyle = LineStyle.Dot,
             .Position = AxisPosition.Bottom,
             .FontSize = 10,
-            .Title = "Time (s)"
+            .Title = String.Format("Time ({0})", su.time)
         })
 
         model.Axes.Add(New LinearAxis() With {

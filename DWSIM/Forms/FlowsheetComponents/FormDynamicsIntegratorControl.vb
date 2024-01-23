@@ -76,8 +76,6 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
-        Flowsheet.DynamicMode = True
-
         If Running Then Paused = Not Paused
 
         If Paused Then
@@ -419,7 +417,7 @@ Public Class FormDynamicsIntegratorControl
                                         End If
 
                                         If Flowsheet.ExternalFlowsheetSolver IsNot Nothing Then
-                                            exceptions = Flowsheet.ExternalFlowsheetSolver.SolveFlowsheet(Me)
+                                            exceptions = Flowsheet.ExternalFlowsheetSolver.SolveFlowsheet(Flowsheet)
                                         Else
                                             exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode)
                                         End If

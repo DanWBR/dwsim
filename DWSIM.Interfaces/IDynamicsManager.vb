@@ -30,7 +30,7 @@ Public Interface IDynamicsManager
 
     Property IntegratorList As Dictionary(Of String, IDynamicsIntegrator)
 
-    Function GetChartModel(IntegratorID As String) As Object
+    Function GetChartModel(fs As IFlowsheet, IntegratorID As String) As Object
 
     Property ToggleDynamicMode() As Action(Of Boolean)
 

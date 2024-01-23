@@ -139,7 +139,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
                         try
                         {
-                            model = (IPlotModel)(Flowsheet.DynamicsManager.GetChartModel(obj.Key));
+                            model = (IPlotModel)(Flowsheet.DynamicsManager.GetChartModel(Flowsheet, obj.Key));
                         }
                         catch
                         {
