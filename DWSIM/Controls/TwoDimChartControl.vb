@@ -7,6 +7,7 @@ Imports DWSIM.CrossPlatform.UI.Controls.ReoGrid
 Imports OxyPlot
 Imports OxyPlot.Series
 Imports System.Linq
+Imports System.IO
 
 Public Class TwoDimChartControl
 
@@ -159,7 +160,7 @@ Public Class TwoDimChartControl
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
                         If Not sheet Is Nothing Then
 #If LINUX Then
-                        Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
+                            Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
 #Else
                             Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
 #End If
@@ -415,7 +416,7 @@ Public Class TwoDimChartControl
             New List(Of FilePickerAllowedType) From {New FilePickerAllowedType(extension + " File", "*." + extension)})
 
         If handler IsNot Nothing Then
-            Using stream As New IO.MemoryStream()
+            Using stream As New MemoryStream()
                 If extension = "PNG" Then
                     Dim exporter = New OxyPlot.WindowsForms.PngExporter() With {.Background = OxyPlot.OxyColors.White, .Width = PlotView1.Width, .Height = PlotView1.Height}
                     exporter.Export(Chart.PlotModel, stream)
