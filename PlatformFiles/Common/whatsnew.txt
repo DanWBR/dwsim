@@ -1,8 +1,12 @@
-Version 8.6.7
+Version 8.6.8
 
-- Fixed issues with CoolProp Incompressible Mixtures (#563)
-- Fixed issues with Steam Tables and CoolProp Property Packages
-- Fixed an issue with Simultaneous Adjust Solver
-- Fixed issues with online compound importing
-- Fixed some UI issues
-- Removed Online UNIFAC/MODFAC Structure retrieval tool (currently unavailable)
+- Implemented compressor/expander pressure ratio calculation mode (#550)
+- Update material stream when changing specs in dynamic mode (#588)
+- Fixed issue #566 (Material Streams not updating - Classic UI)
+- Fixed issue #567 ("What's New in DWSIM" dialog hides "Update Available" dialog)
+- Fixed issues with defining number of stages and initial estimates for rigorous column (#590)
+- Fixed issue with dynamic charts
+- Fixed issue with compressor and expander performance curves
+- Fixed memory leaks in dynamic mode
+- Fixed issue with PID Controller
+- Fixed issue with ChemSep column

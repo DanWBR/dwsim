@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.6.7
+Version 8.6.8
 Copyright (c) 2017-2024 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,19 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.6.8
+
+- Implemented compressor/expander pressure ratio calculation mode (#550)
+- Update material stream when changing specs in dynamic mode (#588)
+- Fixed issue #566 (Material Streams not updating - Classic UI)
+- Fixed issue #567 ("What's New in DWSIM" dialog hides "Update Available" dialog)
+- Fixed issues with defining number of stages and initial estimates for rigorous column (#590)
+- Fixed issue with dynamic charts
+- Fixed issue with compressor and expander performance curves
+- Fixed memory leaks in dynamic mode
+- Fixed issue with PID Controller
+- Fixed issue with ChemSep column
 
 Version 8.6.7
 
