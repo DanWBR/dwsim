@@ -105,3 +105,4 @@ TCPServer/bin/Debug/*
 /DistPackages
 /.vs/DWSIM5/v15/Server/sqlite3
 /.vs
+/DWSIM/.vs
