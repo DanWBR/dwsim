@@ -120,6 +120,8 @@ Public Class FormDynamicsIntegratorControl
         Paused = False
         Abort = True
 
+        Flowsheet.UpdateOpenEditForms()
+
     End Sub
 
     Sub StoreVariableValues(integrator As DynamicsManager.Integrator, tstep As Integer, tstamp As DateTime)
