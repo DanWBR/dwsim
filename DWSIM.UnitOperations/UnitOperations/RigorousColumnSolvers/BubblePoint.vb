@@ -1231,17 +1231,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                 End If
 
-                'For i = 0 To ns
-                '    Lj(i) = 0
-                '    For j = 0 To nc - 1
-                '        lc(i)(j) = xt(j)(i)
-                '        Lj(i) += lc(i)(j)
-                '    Next
-                '    If Lj(i) < 0.0# Then
-                '        Lj(i) = -Lj(i)
-                '    End If
-                'Next
-
                 IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
 
                 IObj2?.Paragraphs.Add(String.Format("L: {0}", Lj.ToMathArrayString))
@@ -1309,7 +1298,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     'check Kvalues
 
                     For i = 0 To ns
-                        Kfac(i) = K(i).Max / K(i).Min
+                        Kfac(i) = K(i).MaxY_NonZero(xc(i)) / K(i).MinY_NonZero(xc(i))
                     Next
 
                     If Kfac.Max > 10000 Then

@@ -130,6 +130,34 @@ Public Module SIMDExtenders
 
     End Function
 
+    <System.Runtime.CompilerServices.Extension()> Public Function MaxY_NonZero(vector As Double(), refvec As Double()) As Double
+
+        Dim mult = vector.MultiplyY(refvec)
+        Dim r0 = refvec.Where(Function(x) x > 0).ToArray()
+
+        Dim vector2 = mult.Where(Function(x) x > 0).ToArray()
+
+        Dim val = vector2.Max
+        Dim m0 = r0.ToList()(vector2.ToList().IndexOf(val))
+
+        Return val / m0
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> Public Function MinY_NonZero(vector As Double(), refvec As Double()) As Double
+
+        Dim mult = vector.MultiplyY(refvec)
+        Dim r0 = refvec.Where(Function(x) x > 0).ToArray()
+
+        Dim vector2 = mult.Where(Function(x) x > 0).ToArray()
+
+        Dim val = vector2.Min
+        Dim m0 = r0.ToList()(vector2.ToList().IndexOf(val))
+
+        Return val / m0
+
+    End Function
+
     ''' <summary>
     ''' Sum of the vector elements.
     ''' </summary>

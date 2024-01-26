@@ -21,6 +21,8 @@ Imports System.IO
 Imports System.Text
 Imports DotNumerics
 Imports DWSIM.SharedClasses
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormConfigUNIQUAC
 
@@ -32,6 +34,19 @@ Public Class FormConfigUNIQUAC
     Private Sub ConfigFormUNIQUAC_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
+
+        If Settings.DpiScale > 1.0 Then
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Drawing.Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Drawing.Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Drawing.Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.AutoSize = True
+            Me.ToolStrip1.Invalidate()
+        End If
 
         FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
 
@@ -53,7 +68,7 @@ Public Class FormConfigUNIQUAC
 
         Dim ppu As PropertyPackages.UNIQUACPropertyPackage = _pp
 
-        Dim nf As String = "0.####"
+        Dim nf As String = "N2"
 
         For Each cp As ConstantProperties In _comps.Values
 gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
@@ -105,7 +120,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                                     Dim b21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).B21
                                     Dim c12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C12
                                     Dim c21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C21
-                                    dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), "", Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf)})
+                                    dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf)})
                                     With dgvu1.Rows(dgvu1.Rows.Count - 1)
                                         .Cells(0).Tag = cp.Name
                                         .Cells(1).Tag = cp2.Name
@@ -119,7 +134,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                             Dim b21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).B21
                             Dim c12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C12
                             Dim c21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C21
-                            dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), "", Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf)})
+                            dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf)})
                             With dgvu1.Rows(dgvu1.Rows.Count - 1)
                                 .Cells(0).Tag = cp.Name
                                 .Cells(1).Tag = cp2.Name
@@ -133,43 +148,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             End If
         Next
 
-        For Each r As DataGridViewRow In dgvu1.Rows
-            Dim cb As DataGridViewComboBoxCell = r.Cells(2)
-            cb.Items.Clear()
-            Dim ipsets As List(Of BaseClasses.InteractionParameter) = Databases.UserIPDB.GetStoredIPsets(r.Cells(0).Value, r.Cells(1).Value, "UNIQUAC")
-            cb.Items.Add(ipsets.Count)
-            For Each ip As InteractionParameter In ipsets
-                Dim strb As New StringBuilder
-                For Each kvp As KeyValuePair(Of String, Object) In ip.Parameters
-                    strb.Append(kvp.Key & ": " & Double.Parse(kvp.Value).ToString("N2") & ", ")
-                Next
-                strb.Append("{" & ip.DataType & " / " & ip.Description & "}")
-                cb.Items.Add(strb.ToString)
-                cb.Tag = ipsets
-            Next
-            r.Cells(2).Value = cb.Items(0)
-        Next
-
-
         Loaded = True
 
     End Sub
 
     Private Sub KryptonDataGridView1_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs)
-
-        'If Me.Loaded Then
-        '    If e.ColumnIndex = 1 Then
-        '        If Double.TryParse(e.FormattedValue, New Integer) = False Then
-        '            Me.KryptonDataGridView1.Rows(e.RowIndex).ErrorText = _
-        '                Calculator.GetLocalString("Ovalorinseridoinvlid")
-        '            e.Cancel = True
-        '        ElseIf CDbl(e.FormattedValue) < 0 Then
-        '            Me.KryptonDataGridView1.Rows(e.RowIndex).ErrorText = _
-        '                Calculator.GetLocalString("Ovalorinseridoinvlid")
-        '            e.Cancel = True
-        '        End If
-        '    End If
-        'End If
 
     End Sub
 
@@ -204,55 +187,30 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             Dim oldvalue As Double = 0.0#, param As String = ""
             Select Case e.ColumnIndex
                 Case 2
-                    Dim cb As DataGridViewComboBoxCell = dgvu1.Rows(e.RowIndex).Cells(2)
-                    If value <> "" Then
-                        Dim i As Integer = -1
-                        For Each s As String In cb.Items
-                            If value = s And i <> -1 Then
-                                Dim ipset As InteractionParameter = cb.Tag(i)
-                                With dgvu1.Rows(e.RowIndex)
-                                    If ipset.Parameters.ContainsKey("A12") Then .Cells(3).Value = ipset.Parameters("A12")
-                                    If ipset.Parameters.ContainsKey("A21") Then .Cells(4).Value = ipset.Parameters("A21")
-                                    If ipset.Parameters.ContainsKey("B12") Then .Cells(5).Value = ipset.Parameters("B12")
-                                    If ipset.Parameters.ContainsKey("B21") Then .Cells(6).Value = ipset.Parameters("B21")
-                                    If ipset.Parameters.ContainsKey("C12") Then .Cells(7).Value = ipset.Parameters("C12")
-                                    If ipset.Parameters.ContainsKey("C21") Then .Cells(8).Value = ipset.Parameters("C21")
-                                End With
-                            End If
-                            i += 1
-                        Next
-                    End If
-                Case 3
                     param = "UNIQUAC_A12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).A12
                     ppu.m_uni.InteractionParameters(id1)(id2).A12 = value
-                Case 4
+                Case 3
                     param = "UNIQUAC_A21"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).A21
                     ppu.m_uni.InteractionParameters(id1)(id2).A21 = value
-                Case 5
+                Case 4
                     param = "UNIQUAC_B12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).B12
                     ppu.m_uni.InteractionParameters(id1)(id2).B12 = value
-                Case 6
+                Case 5
                     param = "UNIQUAC_B21"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).B21
                     ppu.m_uni.InteractionParameters(id1)(id2).B21 = value
-                Case 7
+                Case 6
                     param = "UNIQUAC_C12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).C12
                     ppu.m_uni.InteractionParameters(id1)(id2).C12 = value
-                Case 8
+                Case 7
                     param = "UNIQUAC_C21"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).C21
                     ppu.m_uni.InteractionParameters(id1)(id2).C21 = value
             End Select
-            If Not _form Is Nothing Then
-                _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
-                                                                   .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, param, oldvalue, value),
-                                                                   .OldValue = oldvalue, .NewValue = value, .ObjID = id1, .ObjID2 = id2,
-                                                                   .Tag = _pp, .PropertyName = param})
-            End If
         End If
     End Sub
 
@@ -354,7 +312,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     End Function
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click, Button2.Click, Button5.Click, Button6.Click
+    Private Sub Estimate(method As String)
 
         Dim row As Integer = dgvu1.SelectedCells(0).RowIndex
         Dim x(1) As Double
@@ -367,13 +325,13 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         uniquac = New PropertyPackages.Auxiliary.UNIQUAC
 
 
-        If sender.Name = "Button1" Then
+        If method = "UNIFAC" Then
             ppuf = New PropertyPackages.UNIFACPropertyPackage
             unifac = New PropertyPackages.Auxiliary.Unifac
-        ElseIf sender.Name = "Button5" Then
+        ElseIf method = "UNIFAC-LL" Then
             ppuf = New PropertyPackages.UNIFACLLPropertyPackage
             unifac = New PropertyPackages.Auxiliary.UnifacLL
-        ElseIf sender.Name = "Button6" Then
+        ElseIf method = "MODFAC-NIST" Then
             ppuf = New PropertyPackages.NISTMFACPropertyPackage
             unifac = New PropertyPackages.Auxiliary.NISTMFAC
         Else
@@ -404,130 +362,17 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-        If Not chkTdep.Checked Then
+        Dim T1 = 298.15
 
-            Dim T1 = 298.15
+        Dim a1(1), a2(1), a3(1) As Double
 
-            Dim a1(1), a2(1), a3(1) As Double
-
-            Try
-
-                If GlobalSettings.Settings.EnableParallelProcessing Then
-                    If GlobalSettings.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
-                    Try
-                        Dim task1 As Task = TaskHelper.Run(Sub()
-                                                               a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                                                           End Sub)
-                        Dim task2 As Task = TaskHelper.Run(Sub()
-                                                               a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                                                           End Sub)
-                        Dim task3 As Task = TaskHelper.Run(Sub()
-                                                               a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                                                           End Sub)
-                        Task.WaitAll(task1, task2, task3)
-                    Catch ae As AggregateException
-                        Throw ae.Flatten().InnerException
-                    Finally
-                        If GlobalSettings.Settings.EnableGPUProcessing Then
-                            GlobalSettings.Settings.gpu.DisableMultithreading()
-                            GlobalSettings.Settings.gpu.FreeAll()
-                        End If
-                    End Try
-                Else
-                    a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                    a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                    a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
-                End If
-
-                actu(0) = a1(0)
-                actu(1) = a2(0)
-                actu(2) = a3(0)
-                actu(3) = a1(1)
-                actu(4) = a2(1)
-                actu(5) = a3(1)
-
-                x(0) = dgvu1.Rows(row).Cells(3).Value
-                x(1) = dgvu1.Rows(row).Cells(4).Value
-
-                If x(0) = 0 Then x(0) = 0
-                If x(1) = 0 Then x(1) = 0
-
-                Dim initval2() As Double = New Double() {x(0), x(1)}
-                Dim lconstr2() As Double = New Double() {-10000.0#, -10000.0#}
-                Dim uconstr2() As Double = New Double() {+10000.0#, +10000.0#}
-                Dim finalval2() As Double = Nothing
-
-                Dim solver As New MathEx.Optimization.IPOPTSolver
-                solver.MaxIterations = 100
-                solver.Tolerance = 0.000001
-                finalval2 = solver.Solve(AddressOf FunctionValue, Nothing, initval2, lconstr2, uconstr2)
-
-                Dim avgerr As Double = 0.0#
-                For i As Integer = 0 To 5
-                    avgerr += (actn(i) - actu(i)) / actu(i) * 100 / 6
-                Next
-
-                'If sender.Name = "Button1" Then
-                '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'ElseIf sender.Name = "Button5" Then
-                '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'ElseIf sender.Name = "Button6" Then
-                '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using NIST-MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'Else
-                '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'End If
-
-                dgvu1.Rows(row).Cells(3).Value = finalval2(0)
-                dgvu1.Rows(row).Cells(4).Value = finalval2(1)
-                dgvu1.Rows(row).Cells(5).Value = 0.0#
-                dgvu1.Rows(row).Cells(6).Value = 0.0#
-                dgvu1.Rows(row).Cells(7).Value = 0.0#
-                dgvu1.Rows(row).Cells(8).Value = 0.0#
-
-            Catch ex As Exception
-
-                'ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation finished with an error: " & ex.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Informacao)
-
-            Finally
-
-                Cursor = Cursors.Default
-
-            End Try
-
-        Else
-
-            Me.GroupBox3.Enabled = False
-
-            Me.BackgroundWorker1.RunWorkerAsync(New String() {sender.Name})
-
-        End If
-
-    End Sub
-
-    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-
-        Dim Tmin, Tmax, T1, dT As Double, i, j As Integer
-
-        Tmin = MathEx.Common.Max(ppu.RET_VTF())
-        Tmax = MathEx.Common.Min(ppu.RET_VTB())
-
-        dT = (Tmax - Tmin) / 5
-
-        Dim a12, a21 As New ArrayList
-
-        Dim avgerr As Double = 0.0#
-
-        For i = Tmin To Tmax Step dT
-
-            T1 = i
-
-            Dim a1(1), a2(1), a3(1) As Double
+        Try
 
             If GlobalSettings.Settings.EnableParallelProcessing Then
                 If GlobalSettings.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
                 Try
                     Dim task1 As Task = TaskHelper.Run(Sub()
-                                                           a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppu.RET_VR, ppuf.RET_VEKI)
+                                                           a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
                                                        End Sub)
                     Dim task2 As Task = TaskHelper.Run(Sub()
                                                            a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
@@ -557,106 +402,151 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             actu(4) = a2(1)
             actu(5) = a3(1)
 
-            Dim initval2() As Double = New Double() {0.0#, 0.0#}
+            x(0) = dgvu1.Rows(row).Cells(3).Value
+            x(1) = dgvu1.Rows(row).Cells(4).Value
 
-            If a12.Count > 0 Then
-                initval2 = New Double() {a12(a12.Count - 1), a21(a21.Count - 1)}
-            End If
+            If x(0) = 0 Then x(0) = 0
+            If x(1) = 0 Then x(1) = 0
 
+            Dim initval2() As Double = New Double() {x(0), x(1)}
             Dim lconstr2() As Double = New Double() {-10000.0#, -10000.0#}
             Dim uconstr2() As Double = New Double() {+10000.0#, +10000.0#}
             Dim finalval2() As Double = Nothing
 
-            Dim variables(1) As Optimization.OptBoundVariable
-            For j = 0 To 1
-                variables(j) = New Optimization.OptBoundVariable("x" & CStr(j + 1), initval2(j), False, lconstr2(j), uconstr2(j))
-            Next
-            Dim solver As New Optimization.Simplex
+            Dim solver As New MathEx.Optimization.IPOPTSolver
+            solver.MaxIterations = 100
             solver.Tolerance = 0.000001
-            solver.MaxFunEvaluations = 5000
-            finalval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
+            finalval2 = solver.Solve(AddressOf FunctionValue, Nothing, initval2, lconstr2, uconstr2)
 
-            a12.Add(finalval2(0))
-            a21.Add(finalval2(1))
-
-            For j = 0 To 5
-                avgerr += (actn(j) - actu(j)) / actu(j) * 100 / 6 / 5
+            Dim avgerr As Double = 0.0#
+            For i As Integer = 0 To 5
+                avgerr += (actn(i) - actu(i)) / actu(i) * 100 / 6
             Next
 
-        Next
+            dgvu1.Rows(row).Cells(2).Value = finalval2(0)
+            dgvu1.Rows(row).Cells(3).Value = finalval2(1)
+            dgvu1.Rows(row).Cells(4).Value = 0.0#
+            dgvu1.Rows(row).Cells(5).Value = 0.0#
+            dgvu1.Rows(row).Cells(6).Value = 0.0#
+            dgvu1.Rows(row).Cells(7).Value = 0.0#
 
-        'regress calculated parameters to obtain temperature dependency
+        Catch ex As Exception
 
-        Dim px(4), py_a12(4), py_a21(4) As Double
 
-        For i = 0 To 4
-            px(i) = Tmin + i * dT
-            py_a12(i) = a12(i)
-            py_a21(i) = a21(i)
-        Next
+        Finally
 
-        Dim obj As Object = Nothing
-        Dim lmfit As New MathEx.LM.LMFit
+            Cursor = Cursors.Default
 
-        Dim c_a12(2), c_a21(2) As Double
-        Dim r_a12, r_a21, n_a12, n_a21 As Double
-
-        c_a12(0) = py_a12(0)
-        c_a12(1) = 0.1
-        c_a12(2) = 0.01
-
-        obj = lmfit.GetCoeffs(px, py_a12, c_a12.Clone, MathEx.LM.LMFit.FitType.SecondDegreePoly, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
-        c_a12 = obj(0)
-        r_a12 = obj(2)
-        n_a12 = obj(3)
-
-        c_a21(0) = py_a21(0)
-        c_a21(1) = 0.1
-        c_a21(2) = 0.01
-
-        obj = lmfit.GetCoeffs(px, py_a21, c_a21.Clone, MathEx.LM.LMFit.FitType.SecondDegreePoly, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
-        c_a21 = obj(0)
-        r_a21 = obj(2)
-        n_a21 = obj(3)
-
-        e.Result = New Object() {c_a12(0), c_a21(0), c_a12(1), c_a21(1), c_a12(2), c_a21(2), avgerr, Tmin, Tmax, e.Argument(0)}
-
-    End Sub
-
-    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
-
-        Me.GroupBox3.Enabled = True
-        Cursor = Cursors.Default
-
-        If e.Error Is Nothing Then
-
-            'If e.Result(9) = "Button1" Then
-            '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            'ElseIf e.Result(9) = "Button5" Then
-            '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            'Else
-            '    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            'End If
-
-            Dim row As Integer = dgvu1.SelectedCells(0).RowIndex
-
-            dgvu1.Rows(row).Cells(3).Value = e.Result(0)
-            dgvu1.Rows(row).Cells(4).Value = e.Result(1)
-            dgvu1.Rows(row).Cells(5).Value = e.Result(2)
-            dgvu1.Rows(row).Cells(6).Value = e.Result(3)
-            dgvu1.Rows(row).Cells(7).Value = e.Result(4)
-            dgvu1.Rows(row).Cells(8).Value = e.Result(5)
-
-        Else
-
-            ' ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished with an error: " & e.Error.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Informacao)
-
-        End If
+        End Try
 
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "uniquacip.dat")
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+        Dim BIPs As List(Of PropertyPackages.Auxiliary.UNIQUAC_IPData)
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
+
+        If openedFile IsNot Nothing Then
+
+            Try
+
+                BIPs = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of PropertyPackages.Auxiliary.UNIQUAC_IPData))(openedFile.ReadAllText())
+
+                If MessageBox.Show("Interaction Parameters loaded successfully. Proceed with overwriting current values?",
+                                   "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+                    For Each row As DataGridViewRow In dgvu1.Rows
+                        Dim c1 = row.Cells(0).Value
+                        Dim c2 = row.Cells(1).Value
+
+                        Dim bip1 = BIPs.Where(Function(b) b.Name1 = c1 And b.Name2 = c2).FirstOrDefault()
+                        Dim bip2 = BIPs.Where(Function(b) b.Name1 = c2 And b.Name2 = c1).FirstOrDefault()
+
+                        If bip1 IsNot Nothing Then
+                            row.Cells(2).Value = bip1.A12
+                            row.Cells(3).Value = bip1.A21
+                            row.Cells(4).Value = bip1.B12
+                            row.Cells(5).Value = bip1.B21
+                            row.Cells(6).Value = bip1.C12
+                            row.Cells(7).Value = bip1.C21
+                        End If
+
+                        If bip2 IsNot Nothing Then
+                            row.Cells(2).Value = bip2.A21
+                            row.Cells(3).Value = bip2.A12
+                            row.Cells(4).Value = bip2.B21
+                            row.Cells(5).Value = bip2.B12
+                            row.Cells(6).Value = bip2.C21
+                            row.Cells(7).Value = bip2.C12
+                        End If
+
+                    Next
+
+                End If
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
+        End If
+
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+
+        Dim BIPs As New List(Of PropertyPackages.Auxiliary.UNIQUAC_IPData)
+
+        For Each row As DataGridViewRow In dgvu1.Rows
+            BIPs.Add(New PropertyPackages.Auxiliary.UNIQUAC_IPData With {.Name1 = row.Cells(0).Value, .Name2 = row.Cells(1).Value,
+                     .A12 = row.Cells(2).Value.ToString().ToDoubleFromCurrent(), .A21 = row.Cells(3).Value.ToString().ToDoubleFromCurrent(),
+                     .B12 = row.Cells(4).Value.ToString().ToDoubleFromCurrent(), .B21 = row.Cells(5).Value.ToString().ToDoubleFromCurrent(),
+                     .C12 = row.Cells(6).Value.ToString().ToDoubleFromCurrent(), .C21 = row.Cells(7).Value.ToString().ToDoubleFromCurrent()})
+        Next
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                    Try
+                        Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(BIPs, Newtonsoft.Json.Formatting.Indented)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show("File saved successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show("Error saving file: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
+        End If
+
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        Estimate("UNIFAC")
+    End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        Estimate("UNIFAC-LL")
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        Estimate("MODFAC")
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        Estimate("MODFAC-NIST")
     End Sub
 
     Private Sub dgv1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles dgvu1.EditingControlShowing

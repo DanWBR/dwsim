@@ -21,6 +21,8 @@ Imports System.Text
 Imports DotNumerics
 Imports System.Threading.Tasks
 Imports DWSIM.SharedClasses
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormConfigNRTL
 
@@ -34,6 +36,19 @@ Public Class FormConfigNRTL
         ExtensionMethods.ChangeDefaultFont(Me)
 
         Loaded = False
+
+        If Settings.DpiScale > 1.0 Then
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Drawing.Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Drawing.Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Drawing.Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.AutoSize = True
+            Me.ToolStrip1.Invalidate()
+        End If
 
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
@@ -104,7 +119,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                                     Dim c12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C12
                                     Dim c21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C21
                                     Dim alpha12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).alpha12
-                                    dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), "", Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf), Format(alpha12, nf)})
+                                    dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf), Format(alpha12, nf)})
                                     With dgvu1.Rows(dgvu1.Rows.Count - 1)
                                         .Cells(0).Tag = cp.Name
                                         .Cells(1).Tag = cp2.Name
@@ -119,7 +134,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                             Dim c12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C12
                             Dim c21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).C21
                             Dim alpha12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).alpha12
-                            dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), "", Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf), Format(alpha12, nf)})
+                            dgvu1.Rows.Add(New Object() {(cp.Name), (cp2.Name), Format(a12, nf), Format(a21, nf), Format(b12, nf), Format(b21, nf), Format(c12, nf), Format(c21, nf), Format(alpha12, nf)})
                             With dgvu1.Rows(dgvu1.Rows.Count - 1)
                                 .Cells(0).Tag = cp.Name
                                 .Cells(1).Tag = cp2.Name
@@ -131,23 +146,6 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.NRTL_IPData))
                 GoTo gt1
             End If
-        Next
-
-        For Each r As DataGridViewRow In dgvu1.Rows
-            Dim cb As DataGridViewComboBoxCell = r.Cells(2)
-            cb.Items.Clear()
-            Dim ipsets As List(Of BaseClasses.InteractionParameter) = Databases.UserIPDB.GetStoredIPsets(r.Cells(0).Value, r.Cells(1).Value, "NRTL")
-            cb.Items.Add(ipsets.Count)
-            For Each ip As InteractionParameter In ipsets
-                Dim strb As New StringBuilder
-                For Each kvp As KeyValuePair(Of String, Object) In ip.Parameters
-                    strb.Append(kvp.Key & ": " & Double.Parse(kvp.Value).ToString("N2") & ", ")
-                Next
-                strb.Append("{" & ip.DataType & " / " & ip.Description & "}")
-                cb.Items.Add(strb.ToString)
-                cb.Tag = ipsets
-            Next
-            r.Cells(2).Value = cb.Items(0)
         Next
 
         Loaded = True
@@ -199,60 +197,34 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             Dim oldvalue As Double = 0.0#, param As String = ""
             Select Case e.ColumnIndex
                 Case 2
-                    Dim cb As DataGridViewComboBoxCell = dgvu1.Rows(e.RowIndex).Cells(2)
-                    If value <> "" Then
-                        Dim i As Integer = -1
-                        For Each s As String In cb.Items
-                            If value = s And i <> -1 Then
-                                Dim ipset As InteractionParameter = cb.Tag(i)
-                                With dgvu1.Rows(e.RowIndex)
-                                    If ipset.Parameters.ContainsKey("A12") Then .Cells(3).Value = ipset.Parameters("A12")
-                                    If ipset.Parameters.ContainsKey("A21") Then .Cells(4).Value = ipset.Parameters("A21")
-                                    If ipset.Parameters.ContainsKey("B12") Then .Cells(5).Value = ipset.Parameters("B12")
-                                    If ipset.Parameters.ContainsKey("B21") Then .Cells(6).Value = ipset.Parameters("B21")
-                                    If ipset.Parameters.ContainsKey("C12") Then .Cells(7).Value = ipset.Parameters("C12")
-                                    If ipset.Parameters.ContainsKey("C21") Then .Cells(8).Value = ipset.Parameters("C21")
-                                    If ipset.Parameters.ContainsKey("alpha12") Then .Cells(9).Value = ipset.Parameters("alpha12")
-                                End With
-                            End If
-                            i += 1
-                        Next
-                    End If
-                Case 3
                     param = "NRTL_A12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).A12
                     ppu.m_uni.InteractionParameters(id1)(id2).A12 = value
-                Case 4
+                Case 3
                     param = "NRTL_A21"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).A21
                     ppu.m_uni.InteractionParameters(id1)(id2).A21 = value
-                Case 5
+                Case 4
                     param = "NRTL_B12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).B12
                     ppu.m_uni.InteractionParameters(id1)(id2).B12 = value
-                Case 6
+                Case 5
                     param = "NRTL_B21"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).B21
                     ppu.m_uni.InteractionParameters(id1)(id2).B21 = value
-                Case 7
+                Case 6
                     param = "NRTL_C12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).C12
                     ppu.m_uni.InteractionParameters(id1)(id2).C12 = value
-                Case 8
+                Case 7
                     param = "NRTL_C21"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).C21
                     ppu.m_uni.InteractionParameters(id1)(id2).C21 = value
-                Case 9
+                Case 8
                     param = "NRTL_alpha12"
                     oldvalue = ppu.m_uni.InteractionParameters(id1)(id2).alpha12
                     ppu.m_uni.InteractionParameters(id1)(id2).alpha12 = value
             End Select
-            If Not _form Is Nothing Then
-                _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
-                                                                   .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, param, oldvalue, value),
-                                                                   .OldValue = oldvalue, .NewValue = value, .ObjID = id1, .ObjID2 = id2,
-                                                                   .Tag = _pp, .PropertyName = param})
-            End If
         End If
     End Sub
 
@@ -333,7 +305,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     End Function
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click, Button2.Click, Button5.Click, Button6.Click
+    Private Sub Estimate(method As String, tdep As Boolean)
 
         Dim row As Integer = dgvu1.SelectedCells(0).RowIndex
         Dim x(1) As Double
@@ -343,13 +315,13 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         ppn = New PropertyPackages.NRTLPropertyPackage
         nrtl = New PropertyPackages.Auxiliary.NRTL
 
-        If sender.Name = "Button1" Then
+        If method = "UNIFAC" Then
             ppu = New PropertyPackages.UNIFACPropertyPackage
             unifac = New PropertyPackages.Auxiliary.Unifac
-        ElseIf sender.Name = "Button5" Then
+        ElseIf method = "UNIFAC-LL" Then
             ppu = New PropertyPackages.UNIFACLLPropertyPackage
             unifac = New PropertyPackages.Auxiliary.UnifacLL
-        ElseIf sender.Name = "Button6" Then
+        ElseIf method = "MODFAC-NIST" Then
             ppu = New PropertyPackages.NISTMFACPropertyPackage
             unifac = New PropertyPackages.Auxiliary.NISTMFAC
         Else
@@ -382,7 +354,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-        If Not chkTdep.Checked Then
+        If Not tdep Then
 
             Dim T1 = 298.15
 
@@ -445,14 +417,14 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                     avgerr += (actn(i) - actu(i)) / actu(i) * 100 / 6
                 Next
 
-                dgvu1.Rows(row).Cells(3).Value = finalval2(0)
-                dgvu1.Rows(row).Cells(4).Value = finalval2(1)
-                dgvu1.Rows(row).Cells(9).Value = 0.2
+                dgvu1.Rows(row).Cells(2).Value = finalval2(0)
+                dgvu1.Rows(row).Cells(3).Value = finalval2(1)
+                dgvu1.Rows(row).Cells(8).Value = 0.2
 
+                dgvu1.Rows(row).Cells(4).Value = 0.0#
                 dgvu1.Rows(row).Cells(5).Value = 0.0#
                 dgvu1.Rows(row).Cells(6).Value = 0.0#
                 dgvu1.Rows(row).Cells(7).Value = 0.0#
-                dgvu1.Rows(row).Cells(8).Value = 0.0#
 
             Catch ex As Exception
 
@@ -468,7 +440,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
             Me.GroupBox3.Enabled = False
 
-            Me.BackgroundWorker1.RunWorkerAsync(New String() {sender.Name})
+            Me.BackgroundWorker1.RunWorkerAsync(New String() {method})
 
         End If
 
@@ -603,27 +575,15 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         If e.Error Is Nothing Then
 
-            'If e.Result(9) = "Button1" Then
-            '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            'ElseIf e.Result(9) = "Button5" Then
-            '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            'Else
-            '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            'End If
-
             Dim row As Integer = dgvu1.SelectedCells(0).RowIndex
 
-            dgvu1.Rows(row).Cells(3).Value = e.Result(0)
-            dgvu1.Rows(row).Cells(4).Value = e.Result(1)
-            dgvu1.Rows(row).Cells(5).Value = e.Result(2)
-            dgvu1.Rows(row).Cells(6).Value = e.Result(3)
-            dgvu1.Rows(row).Cells(7).Value = e.Result(4)
-            dgvu1.Rows(row).Cells(8).Value = e.Result(5)
-            dgvu1.Rows(row).Cells(9).Value = 0.2
-
-        Else
-
-            'ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished with an error: " & e.Error.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Informacao)
+            dgvu1.Rows(row).Cells(2).Value = e.Result(0)
+            dgvu1.Rows(row).Cells(3).Value = e.Result(1)
+            dgvu1.Rows(row).Cells(4).Value = e.Result(2)
+            dgvu1.Rows(row).Cells(5).Value = e.Result(3)
+            dgvu1.Rows(row).Cells(6).Value = e.Result(4)
+            dgvu1.Rows(row).Cells(7).Value = e.Result(5)
+            dgvu1.Rows(row).Cells(8).Value = 0.2
 
         End If
 
@@ -634,6 +594,113 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
     End Sub
 
     Private Sub dgvu1_DataError(sender As Object, e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgvu1.DataError
+
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        Estimate("UNIFAC", False)
+    End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        Estimate("UNIFAC-LL", False)
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        Estimate("MODFAC-Do", False)
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        Estimate("MODFAC-NIST", False)
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+        Dim BIPs As List(Of PropertyPackages.Auxiliary.NRTL_IPData)
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
+
+        If openedFile IsNot Nothing Then
+
+            Try
+
+                BIPs = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of PropertyPackages.Auxiliary.NRTL_IPData))(openedFile.ReadAllText())
+
+                If MessageBox.Show("Interaction Parameters loaded successfully. Proceed with overwriting current values?",
+                                   "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+                    For Each row As DataGridViewRow In dgvu1.Rows
+                        Dim c1 = row.Cells(0).Value
+                        Dim c2 = row.Cells(1).Value
+
+                        Dim bip1 = BIPs.Where(Function(b) b.ID1 = c1 And b.ID2 = c2).FirstOrDefault()
+                        Dim bip2 = BIPs.Where(Function(b) b.ID1 = c2 And b.ID2 = c1).FirstOrDefault()
+
+                        If bip1 IsNot Nothing Then
+                            row.Cells(2).Value = bip1.A12
+                            row.Cells(3).Value = bip1.A21
+                            row.Cells(4).Value = bip1.B12
+                            row.Cells(5).Value = bip1.B21
+                            row.Cells(6).Value = bip1.C12
+                            row.Cells(7).Value = bip1.C21
+                            row.Cells(8).Value = bip1.alpha12
+                        End If
+
+                        If bip2 IsNot Nothing Then
+                            row.Cells(2).Value = bip2.A21
+                            row.Cells(3).Value = bip2.A12
+                            row.Cells(4).Value = bip2.B21
+                            row.Cells(5).Value = bip2.B12
+                            row.Cells(6).Value = bip2.C21
+                            row.Cells(7).Value = bip2.C12
+                            row.Cells(8).Value = bip2.alpha12
+                        End If
+
+                    Next
+
+                End If
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
+        End If
+
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+
+        Dim BIPs As New List(Of PropertyPackages.Auxiliary.NRTL_IPData)
+
+        For Each row As DataGridViewRow In dgvu1.Rows
+            BIPs.Add(New PropertyPackages.Auxiliary.NRTL_IPData With {.ID1 = row.Cells(0).Value, .ID2 = row.Cells(1).Value,
+                     .A12 = row.Cells(2).Value.ToString().ToDoubleFromCurrent(), .A21 = row.Cells(3).Value.ToString().ToDoubleFromCurrent(),
+                     .B12 = row.Cells(4).Value.ToString().ToDoubleFromCurrent(), .B21 = row.Cells(5).Value.ToString().ToDoubleFromCurrent(),
+                     .C12 = row.Cells(6).Value.ToString().ToDoubleFromCurrent(), .C21 = row.Cells(7).Value.ToString().ToDoubleFromCurrent(),
+                     .alpha12 = row.Cells(2).Value.ToString().ToDoubleFromCurrent()})
+        Next
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                    Try
+                        Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(BIPs, Newtonsoft.Json.Formatting.Indented)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show("File saved successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show("Error saving file: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
+        End If
 
     End Sub
 

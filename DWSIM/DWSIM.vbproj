@@ -547,7 +547,9 @@
     <Compile Include="Controls\TwoDimChartControl.Designer.vb">
       <DependentUpon>TwoDimChartControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TwoDimChartControl.vb" />
+    <Compile Include="Controls\TwoDimChartControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ListItem.Designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
     </Compile>

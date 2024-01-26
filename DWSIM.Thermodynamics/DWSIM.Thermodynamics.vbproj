@@ -734,6 +734,10 @@
       <Project>{86af29bb-4cb1-4818-98a3-031d0711625d}</Project>
       <Name>DWSIM.MathOps.SimpsonIntegrator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClassesCSharp\DWSIM.SharedClassesCSharp.csproj">
+      <Project>{67F90157-B522-487C-B108-864984637E33}</Project>
+      <Name>DWSIM.SharedClassesCSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
       <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
@@ -867,6 +871,8 @@
     <None Include="Resources\DWSIM_ico_64.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\export_48px.png" />
+    <None Include="Resources\import_48px.png" />
     <None Include="Resources\DWSIM Icon Vector Transp.png" />
     <EmbeddedResource Include="Assets\Databases\FoodProp.xml" />
     <EmbeddedResource Include="Assets\ChemSep_IDs.txt" />

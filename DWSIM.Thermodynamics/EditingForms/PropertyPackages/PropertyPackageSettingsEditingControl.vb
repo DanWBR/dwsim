@@ -30,7 +30,7 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
-        chkAutoEstimateNU.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage
+        chkAutoEstimateNU.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage Or TypeOf PropPack Is WilsonPropertyPackage
 
         cbLiqDens.SelectedIndex = PropPack.LiquidDensityCalculationMode_Subcritical
 

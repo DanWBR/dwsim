@@ -151,13 +151,6 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Estimate (UNIFAC)</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Column5.Width" type="System.Int32, mscorlib">
-    <value>96</value>
-  </data>
-  <data name="Column6.Width" type="System.Int32, mscorlib">
-    <value>96</value>
-  </data>
   <data name="dgvu1.Size" type="System.Drawing.Size, System.Drawing">
     <value>847, 343</value>
   </data>
