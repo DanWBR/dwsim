@@ -31,6 +31,9 @@ Namespace PropertyPackages.Auxiliary
         Public ID1 As Integer = -1
         Public ID2 As Integer = -1
 
+        <FieldHidden> Public Name1 As String = ""
+        <FieldHidden> Public Name2 As String = ""
+
         Private _kij As Double = 0.0
 
         Public comment As String = ""

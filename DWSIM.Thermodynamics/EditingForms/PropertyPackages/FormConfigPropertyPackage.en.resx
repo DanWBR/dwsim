@@ -126,10 +126,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>589, 9</value>
-  </data>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Estimate</value>
+    <value>646, 11</value>
   </data>
   <data name="IPGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -137,8 +134,11 @@
   <data name="IPGrid.Size" type="System.Drawing.Size, System.Drawing">
     <value>739, 406</value>
   </data>
-  <data name="lblModel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 11</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>588, 11</value>
   </data>
   <data name="lblModel.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 16</value>

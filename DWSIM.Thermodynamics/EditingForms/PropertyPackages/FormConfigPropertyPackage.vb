@@ -21,6 +21,8 @@ Imports System.IO
 Imports System.Drawing
 Imports unvell.ReoGrid.DataFormat
 Imports unvell.ReoGrid
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormConfigPropertyPackage
 
@@ -680,6 +682,112 @@ gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             End If
             k += 1
         Next
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim comps = _pp.Flowsheet.SelectedCompounds.Keys
+
+        Dim BIPs As New List(Of Auxiliary.PR_IPData)
+
+        With gridKij.Worksheets(0)
+            For i = 0 To comps.Count - 1
+                For j = 0 To comps.Count - 1
+                    If i <> j Then
+                        Dim ki, kj As Integer
+                        ki = i
+                        kj = j
+                        Dim bip1 = BIPs.Where(Function(b) b.Name1 = comps(ki) And b.Name2 = comps(kj)).FirstOrDefault()
+                        Dim bip2 = BIPs.Where(Function(b) b.Name1 = comps(kj) And b.Name2 = comps(ki)).FirstOrDefault()
+                        If bip1 Is Nothing And bip2 Is Nothing Then
+                            Dim value As Double = .Cells(i, j).Data
+                            BIPs.Add(New Auxiliary.PR_IPData With {.Name1 = comps(i), .Name2 = comps(j), .kij = value})
+                        End If
+                    End If
+                Next
+            Next
+        End With
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New System.IO.MemoryStream()
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                    Try
+                        Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(BIPs, Newtonsoft.Json.Formatting.Indented)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show("File saved successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show("Error saving file: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
+        End If
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+        Dim BIPs As List(Of PropertyPackages.Auxiliary.PR_IPData)
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
+
+        If openedFile IsNot Nothing Then
+
+            Try
+
+                Dim comps = _pp.Flowsheet.SelectedCompounds.Keys
+
+                BIPs = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of PropertyPackages.Auxiliary.PR_IPData))(openedFile.ReadAllText())
+
+                If MessageBox.Show("Interaction Parameters loaded successfully. Proceed with overwriting current values?",
+                                   "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+                    With gridKij.Worksheets(0)
+
+                        For i = 0 To comps.Count - 1
+
+                            For j = 0 To comps.Count - 1
+
+                                If i <> j Then
+
+                                    Dim c1 = comps(i)
+                                    Dim c2 = comps(j)
+
+                                    Dim bip1 = BIPs.Where(Function(b) b.Name1 = c1 And b.Name2 = c2).FirstOrDefault()
+                                    Dim bip2 = BIPs.Where(Function(b) b.Name1 = c2 And b.Name2 = c1).FirstOrDefault()
+
+                                    If bip1 IsNot Nothing Then
+                                        .Cells(i, j).Data = bip1.kij
+                                    End If
+
+                                    If bip2 IsNot Nothing Then
+                                        .Cells(i, j).Data = bip2.kij
+                                    End If
+
+                                End If
+
+                            Next
+
+                        Next
+
+                    End With
+
+                End If
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
+        End If
+
     End Sub
 
 End Class
