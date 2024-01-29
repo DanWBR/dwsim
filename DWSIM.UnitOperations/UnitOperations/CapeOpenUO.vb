@@ -859,11 +859,11 @@ Namespace UnitOperations
                             PersistLoad(Nothing)
                         End If
 
-                        Dim paramdata As XElement = (From el As XElement In data Select el Where el.Name = "ParameterData").SingleOrDefault
-                        Dim b As New BinaryFormatter, m As New MemoryStream()
-                        _params = b.Deserialize(New MemoryStream(Convert.FromBase64String(paramdata.Value)))
+                        'Dim paramdata As XElement = (From el As XElement In data Select el Where el.Name = "ParameterData").SingleOrDefault
+                        'Dim b As New BinaryFormatter, m As New MemoryStream()
+                        '_params = b.Deserialize(New MemoryStream(Convert.FromBase64String(paramdata.Value)))
 
-                        RestoreParams()
+                        'RestoreParams()
                         GetPorts()
 
                     Catch ex As Exception
@@ -895,9 +895,9 @@ Namespace UnitOperations
                     .Add(New XElement("CAPEOPEN_Object_Info", _seluo.SaveData().ToArray))
                     Me.PersistSave(Nothing)
                     If Not _istr Is Nothing Then .Add(New XElement("PersistedData", Convert.ToBase64String(CType(_istr.baseStream, MemoryStream).ToArray())))
-                    Dim b As New BinaryFormatter, m As New MemoryStream()
-                    b.Serialize(m, _params)
-                    .Add(New XElement("ParameterData", Convert.ToBase64String(m.ToArray)))
+                    'Dim b As New BinaryFormatter, m As New MemoryStream()
+                    'b.Serialize(m, _params)
+                    '.Add(New XElement("ParameterData", Convert.ToBase64String(m.ToArray)))
                 End If
             End With
 
@@ -1063,11 +1063,8 @@ Namespace UnitOperations
                                 For Each r As String In reps
                                     ur.selectedReport = r
                                     Dim msg2 As String = ""
-                                    Try
-                                        ur.ProduceReport(msg2)
-                                        IObj.Paragraphs.Add("</p><pre>" + msg2 + "</pre><p>")
-                                    Catch ex As Exception
-                                    End Try
+                                    ur.ProduceReport(msg2)
+                                    IObj?.Paragraphs.Add("</p><pre>" + msg2 + "</pre><p>")
                                 Next
                             End If
                         End If

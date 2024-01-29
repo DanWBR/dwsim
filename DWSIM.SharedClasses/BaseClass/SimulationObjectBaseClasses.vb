@@ -719,6 +719,15 @@ Namespace UnitOperations
                 proplist.Add(item.Key)
             Next
 
+            If proptype <> PropertyType.WR Then
+                proplist.Add("GHG Emission Factor")
+                proplist.Add("GHG Mass Emission")
+                proplist.Add("GHG Molar Emission")
+                proplist.Add("CO2eq GHG Mass Emission")
+                proplist.Add("CO2eq GHG Molar Emission")
+                proplist.Add("GHG Emission Reference Power Value")
+            End If
+
             For Each item In AttachedUtilities
                 proplist.AddRange(item.GetPropertyList().ConvertAll(New Converter(Of String, String)(Function(s As String)
                                                                                                          Return item.Name & ": " & s
