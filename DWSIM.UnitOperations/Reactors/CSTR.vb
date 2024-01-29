@@ -1053,7 +1053,7 @@ out:        Dim ms1, ms2 As MaterialStream
 
             'Calculate component conversions
             For i = 0 To NC - 1
-                If Nin(i) - Nout(0) > 0 Then
+                If Nin(i) > 0.0 Then
                     ComponentConversions(CompNames(i)) = Abs(Nin(i) - Nout(i)) / Nin(i)
                 End If
             Next
