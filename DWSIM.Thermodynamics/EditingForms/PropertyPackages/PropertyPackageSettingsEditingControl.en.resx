@@ -314,10 +314,10 @@
     <value>20, 45</value>
   </data>
   <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 17</value>
+    <value>326, 17</value>
   </data>
   <data name="chkIgnoreIPs.Text" xml:space="preserve">
-    <value>Ignore Missing UNIQUAC/NRTL Interaction Parameters</value>
+    <value>Ignore Missing UNIQUAC/NRTL/Wilson Interaction Parameters</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkUseSolidCp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">

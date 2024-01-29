@@ -18,7 +18,7 @@ Public Class PropertyPackageSettingsEditingControl
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        chkIgnoreIPs.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage
+        chkIgnoreIPs.Enabled = PropPack.ComponentName.Contains("UNIQUAC") Or PropPack.ComponentName.Contains("NRTL") Or PropPack.ComponentName.Contains("Wilson")
 
         chkIgnoreSalLim.Enabled = TypeOf PropPack Is SeawaterPropertyPackage
 
@@ -30,7 +30,7 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkVapFugIdeal.Enabled = TypeOf PropPack Is ActivityCoefficientPropertyPackage Or PropPack.PackageType = PackageType.ActivityCoefficient
 
-        chkAutoEstimateNU.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage Or TypeOf PropPack Is WilsonPropertyPackage
+        chkAutoEstimateNU.Enabled = PropPack.ComponentName.Contains("UNIQUAC") Or PropPack.ComponentName.Contains("NRTL") Or PropPack.ComponentName.Contains("Wilson")
 
         cbLiqDens.SelectedIndex = PropPack.LiquidDensityCalculationMode_Subcritical
 
