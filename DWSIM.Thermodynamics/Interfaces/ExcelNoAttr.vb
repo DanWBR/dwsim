@@ -605,6 +605,28 @@ Namespace ExcelAddIn
                     End If
                     pp.Dispose()
                     pp = Nothing
+                Case "Wilson"
+                    Dim pp As WilsonPropertyPackage = proppack
+                    If pp.WilsonM.BIPs.ContainsKey(Compound1) Then
+                        If pp.WilsonM.BIPs(Compound1).ContainsKey(Compound2) Then
+                            ipdata(1, 2) = pp.WilsonM.BIPs(Compound1)(Compound2)(0)
+                            ipdata(1, 3) = pp.WilsonM.BIPs(Compound1)(Compound2)(1)
+                        Else
+                            If pp.WilsonM.BIPs.ContainsKey(Compound2) Then
+                                If pp.WilsonM.BIPs(Compound2).ContainsKey(Compound1) Then
+                                    ipdata(1, 2) = pp.WilsonM.BIPs(Compound2)(Compound1)(1)
+                                    ipdata(1, 3) = pp.WilsonM.BIPs(Compound2)(Compound1)(0)
+                                End If
+                            End If
+                        End If
+                    ElseIf pp.WilsonM.BIPs.ContainsKey(Compound2) Then
+                        If pp.WilsonM.BIPs(Compound2).ContainsKey(Compound1) Then
+                            ipdata(1, 2) = pp.WilsonM.BIPs(Compound2)(Compound1)(1)
+                            ipdata(1, 3) = pp.WilsonM.BIPs(Compound2)(Compound1)(0)
+                        End If
+                    End If
+                    pp.Dispose()
+                    pp = Nothing
             End Select
 
             Return ipdata
