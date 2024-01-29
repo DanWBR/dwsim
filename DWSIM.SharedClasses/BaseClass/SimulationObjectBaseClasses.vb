@@ -36,6 +36,10 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
+        Public Shared InitializationAction1 As Action(Of BaseClass)
+        Public Shared InitializationAction2 As Action(Of BaseClass)
+        Public Shared InitializationAction3 As Action(Of BaseClass)
+
         <Newtonsoft.Json.JsonIgnore> <Xml.Serialization.XmlIgnore> Public Property LastSolutionInputSnapshot As String = ""
 
         Protected Friend _IsDirty As Boolean = True
@@ -119,6 +123,10 @@ Namespace UnitOperations
 #Region "    Constructors"
 
         Public Sub New()
+
+            InitializationAction1?.Invoke(Me)
+            InitializationAction2?.Invoke(Me)
+            InitializationAction3?.Invoke(Me)
 
         End Sub
 
