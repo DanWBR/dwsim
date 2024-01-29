@@ -223,6 +223,7 @@ Namespace Enums
         conductance = 67
         heat = 68
         mole = 69
+        emission_factor = 70
 
     End Enum
 

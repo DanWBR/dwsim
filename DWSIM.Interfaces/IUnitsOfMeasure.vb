@@ -167,4 +167,6 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetUnitType(unit As String) As UnitOfMeasure
 
+    Property emission_factor As String
+
 End Interface

@@ -280,4 +280,8 @@ Imports DWSIM.Interfaces.Enums
 
     Function GetPreferredGraphicObjectHeight() As Double
 
+    Property GHGEmissionData As IGHGEmitter
+
+    Function GetEnergyConsumption() As Double
+
 End Interface

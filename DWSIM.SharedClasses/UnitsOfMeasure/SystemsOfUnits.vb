@@ -177,6 +177,8 @@ Namespace SystemsOfUnits
 
         Public Property mole As String = "" Implements IUnitsOfMeasure.mole
 
+		Public Property emission_factor As String = "[kg/s]/kW" Implements IUnitsOfMeasure.emission_factor
+
         Public Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String) Implements IUnitsOfMeasure.GetUnitSet
 
             Dim units As New List(Of String)
@@ -278,7 +280,9 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"})
                 Case Enums.UnitOfMeasure.conductance
                     units.AddRange(New String() {"[kg/s]/[Pa^0.5]", "[lbm/h]/[psi^0.5]", "[kg/h]/[atm^0.5]", "[kg/h]/[bar^0.5]", "[kg/h]/[[kgf/cm2]^0.5]"})
-            End Select
+      			Case Enums.UnitOfMeasure.emission_factor
+                    units.AddRange(New String() {"[kg/s]/kW", "g/cal", "g/kcal", "lbm/BTU", "lbm/MMBTU", "[kg/h]/MW", "[kg/d]/MW", "[t/s]/kW", "[t/s]/MW", "[t/h]/kW", "[t/h]/MW", "[t/d]/kW", "[t/d]/MW"})
+                End Select
 
             Return units
 
@@ -381,6 +385,8 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.reac_rate_heterog
                 Case "[kg/s]/[Pa^0.5]", "[lbm/h]/[psi^0.5]", "[kg/h]/[atm^0.5]", "[kg/h]/[bar^0.5]", "[kg/h]/[[kgf/cm2]^0.5]"
                     Return Enums.UnitOfMeasure.conductance
+                Case "[kg/s]/kW", "g/cal", "g/kcal", "lbm/BTU", "lbm/MMBTU", "[kg/h]/MW", "[kg/d]/MW", "[t/s]/kW", "[t/s]/MW", "[t/h]/kW", "[t/h]/MW", "[t/d]/kW", "[t/d]/MW"
+                    Return Enums.UnitOfMeasure.emission_factor
                 Case Else
                     Return Enums.UnitOfMeasure.none
             End Select
@@ -566,7 +572,7 @@ Namespace SystemsOfUnits
                 .deltaT = "K."
                 .heat = "kJ"
                 .mole = "mol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -658,7 +664,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .heat = "kJ"
                 .mole = "kmol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -747,7 +753,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .heat = "kJ"
                 .mole = "kmol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -836,7 +842,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .heat = "kJ"
                 .mole = "kmol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -925,7 +931,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .heat = "kJ"
                 .mole = "kmol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -1014,7 +1020,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .heat = "kJ"
                 .mole = "kmol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -1103,7 +1109,7 @@ Namespace SystemsOfUnits
                 .deltaT = "C."
                 .heat = "kJ"
                 .mole = "kmol"
-
+                .emission_factor = "[kg/s]/kW"
             End With
 
         End Sub
@@ -1194,7 +1200,7 @@ Namespace SystemsOfUnits
                 .deltaT = "F."
                 .heat = "BTU"
                 .mole = "lbmol"
-
+                .emission_factor = "lbm/BTU"
             End With
 
         End Sub
@@ -1283,7 +1289,7 @@ Namespace SystemsOfUnits
                 .deltaP = "atm"
                 .heat = "kcal"
                 .mole = "mol"
-
+                .emission_factor = "g/kcal"
             End With
 
         End Sub
@@ -1425,6 +1431,34 @@ Namespace SystemsOfUnits
                     Return value * 1000
                 Case "lbmol"
                     Return value / 2.20462
+
+                Case "[kg/s]/kW"
+                    Return value
+                Case "g/cal"
+                    Return value / 1000.0 * 238.85
+                Case "g/kcal"
+                    Return value / 1000.0 * 0.23885
+                Case "lbm/BTU"
+                    Return value / 2.20462 * 0.947817
+                Case "lbm/MMBTU"
+                    Return value / 2.20462 * 0.947817 / 1000000.0
+                Case "[kg/h]/MW"
+                    Return value / 3600.0 / 1000.0
+                Case "[kg/d]/MW"
+                    Return value / 24 / 3600.0 / 1000.0
+                Case "[t/s]/kW"
+                    Return value * 1000.0
+                Case "[t/s]/MW"
+                    Return value
+                Case "[t/h]/kW"
+                    Return value * 1000.0 / 3600.0
+                Case "[t/h]/MW"
+                    Return value / 3600.0
+                Case "[t/d]/kW"
+                    Return value * 1000.0 / 3600.0 / 24
+                Case "[t/d]/MW"
+                    Return value / 3600.0 / 24
+
 
                 Case "mol/h"
                     Return value / 3600
@@ -1969,7 +2003,35 @@ Namespace SystemsOfUnits
                 Case "lb", "lbm"
                     Return value * 2.20462
 
+
+                Case "[kg/s]/kW"
                     Return value
+                Case "g/cal"
+                    Return value / 1000.0 * 238.85
+                Case "g/kcal"
+                    Return value / 1000.0 * 0.23885
+                Case "lbm/BTU"
+                    Return value / 2.20462 * 0.947817
+                Case "lbm/MMBTU"
+                    Return value / 2.20462 * 0.947817 / 1000000.0
+                Case "[kg/h]/MW"
+                    Return value / 3600.0 / 1000.0
+                Case "[kg/d]/MW"
+                    Return value / 24 / 3600.0 / 1000.0
+                Case "[t/s]/kW"
+                    Return value * 1000.0
+                Case "[t/s]/MW"
+                    Return value
+                Case "[t/h]/kW"
+                    Return value * 1000.0 / 3600.0
+                Case "[t/h]/MW"
+                    Return value / 3600.0
+                Case "[t/d]/kW"
+                    Return value * 1000.0 / 3600.0 / 24
+                Case "[t/d]/MW"
+                    Return value / 3600.0 / 24
+
+
                 Case "bbl/h"
                     Return value * 22643.3
                 Case "bbl/d"
