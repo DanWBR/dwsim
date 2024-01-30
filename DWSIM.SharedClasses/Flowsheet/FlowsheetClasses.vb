@@ -297,6 +297,10 @@ Namespace DWSIM.Flowsheet
 
         Public Property GHGEmissionsSummary As IGHGEmissionsSummary Implements IFlowsheetResults.GHGEmissionsSummary
 
+        Public Property TotalCAPEX As Double Implements IFlowsheetResults.TotalCAPEX
+
+        Public Property TotalOPEX As Double Implements IFlowsheetResults.TotalOPEX
+
         Public Property Additional As ExpandoObject = New ExpandoObject() Implements IFlowsheetResults.Additional
 
         Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData

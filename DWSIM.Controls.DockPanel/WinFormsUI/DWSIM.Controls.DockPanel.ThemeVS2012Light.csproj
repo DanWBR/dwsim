@@ -76,9 +76,7 @@
     <Compile Include="ThemeVS2012Light\VS2012LightAutoHideStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ThemeVS2012Light\VS2012LightAutoHideWindowControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ThemeVS2012Light\VS2012LightAutoHideWindowControl.cs" />
     <Compile Include="ThemeVS2012Light\VS2012LightDockPaneCaption.cs">
       <SubType>Component</SubType>
     </Compile>

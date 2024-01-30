@@ -133,9 +133,7 @@
     <Compile Include="Editor\FormCustomCalcOrder.designer.vb">
       <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editor\FormCustomCalcOrder.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editor\FormCustomCalcOrder.vb" />
     <Compile Include="Editor\FormExtraProperties.designer.vb">
       <DependentUpon>FormExtraProperties.vb</DependentUpon>
     </Compile>
