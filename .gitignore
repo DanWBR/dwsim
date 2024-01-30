@@ -106,3 +106,7 @@ TCPServer/bin/Debug/*
 /.vs/DWSIM5/v15/Server/sqlite3
 /.vs
 /DWSIM/.vs
+/DWSIM.Controls.DockPanel/WinFormsUI/.vs
+/DWSIM.Inspector/.vs
+/DWSIM.SharedClasses/.vs
+/DWSIM.Thermodynamics.ReaktoroPropertyPackage/.vs
