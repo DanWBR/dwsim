@@ -803,17 +803,41 @@ Namespace UnitOperations
             Else
                 Select Case prop
                     Case "GHG Emission Factor"
-                        Return cv.ConvertFromSI(su.emission_factor, GHGEmissionData.GHGEmissionFactor)
+                        If GHGEmissionData IsNot Nothing Then
+                            Return cv.ConvertFromSI(su.emission_factor, GHGEmissionData.GHGEmissionFactor)
+                        Else
+                            Return 0.0
+                        End If
                     Case "GHG Mass Emission"
-                        Return cv.ConvertFromSI(su.massflow, GHGEmissionData.GHGEmissionMassFlow)
+                        If GHGEmissionData IsNot Nothing Then
+                            Return cv.ConvertFromSI(su.massflow, GHGEmissionData.GHGEmissionMassFlow)
+                        Else
+                            Return 0.0
+                        End If
                     Case "GHG Molar Emission"
-                        Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.GHGEmissionMolarFlow)
+                        If GHGEmissionData IsNot Nothing Then
+                            Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.GHGEmissionMolarFlow)
+                        Else
+                            Return 0.0
+                        End If
                     Case "CO2eq GHG Mass Emission"
-                        Return cv.ConvertFromSI(su.massflow, GHGEmissionData.CO2eqEmissionMassFlow)
+                        If GHGEmissionData IsNot Nothing Then
+                            Return cv.ConvertFromSI(su.massflow, GHGEmissionData.CO2eqEmissionMassFlow)
+                        Else
+                            Return 0.0
+                        End If
                     Case "CO2eq GHG Molar Emission"
-                        Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.CO2eqEmissionMolarFlow)
+                        If GHGEmissionData IsNot Nothing Then
+                            Return cv.ConvertFromSI(su.molarflow, GHGEmissionData.CO2eqEmissionMolarFlow)
+                        Else
+                            Return 0.0
+                        End If
                     Case "GHG Emission Reference Power Value"
-                        Return cv.ConvertFromSI(su.heatflow, GetEnergyConsumption())
+                        If GHGEmissionData IsNot Nothing Then
+                            Return cv.ConvertFromSI(su.heatflow, GetEnergyConsumption())
+                        Else
+                            Return 0.0
+                        End If
                 End Select
             End If
 
