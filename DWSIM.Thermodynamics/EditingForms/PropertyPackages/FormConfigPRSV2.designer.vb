@@ -45,15 +45,17 @@ Partial Class FormConfigPRSV2
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.KryptonDataGridView2 = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LabelWithDivider2 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
@@ -71,7 +73,7 @@ Partial Class FormConfigPRSV2
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem2
         '
         'FaTabStripItem3
         '
@@ -79,7 +81,6 @@ Partial Class FormConfigPRSV2
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        Me.FaTabStripItem3.Selected = True
         resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'GroupBox3
@@ -159,16 +160,34 @@ Partial Class FormConfigPRSV2
         Me.FaTabStripItem2.Controls.Add(Me.Label2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        Me.FaTabStripItem2.Selected = True
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Button5)
+        Me.GroupBox2.Controls.Add(Me.Button6)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.KryptonDataGridView2)
-        Me.GroupBox2.Controls.Add(Me.LabelWithDivider2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.export_48px
+        Me.Button5.Name = "Button5"
+        Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.import_48px
+        Me.Button6.Name = "Button6"
+        Me.ToolTip1.SetToolTip(Me.Button6, resources.GetString("Button6.ToolTip"))
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -220,11 +239,6 @@ Partial Class FormConfigPRSV2
         resources.ApplyResources(Me.Column4, "Column4")
         Me.Column4.Name = "Column4"
         '
-        'LabelWithDivider2
-        '
-        resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
-        Me.LabelWithDivider2.Name = "LabelWithDivider2"
-        '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
@@ -270,7 +284,6 @@ Partial Class FormConfigPRSV2
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents KryptonDataGridView2 As System.Windows.Forms.DataGridView
-    Public WithEvents LabelWithDivider2 As System.Windows.Forms.Label
     Public WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -281,4 +294,7 @@ Partial Class FormConfigPRSV2
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Button5 As Button
+    Public WithEvents Button6 As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
