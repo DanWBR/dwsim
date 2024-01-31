@@ -26,7 +26,7 @@ namespace DWSIM.Simulate365.FormFactories
 
         #region Public events
 
-        public event EventHandler FileOpenedFromDashboard;
+        public static event EventHandler FileOpenedFromDashboard;
        
 
         #endregion
