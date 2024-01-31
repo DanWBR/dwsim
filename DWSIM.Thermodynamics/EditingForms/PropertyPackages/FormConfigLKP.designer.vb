@@ -24,12 +24,12 @@ Partial Class FormConfigLKP
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigLKP))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
-        Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -41,36 +41,16 @@ Partial Class FormConfigLKP
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FaTabStrip1.SuspendLayout()
-        Me.FaTabStripItem2.SuspendLayout()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox2.SuspendLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'FaTabStrip1
-        '
-        Me.FaTabStrip1.AlwaysShowClose = False
-        Me.FaTabStrip1.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
-        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem2})
-        Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
-        '
-        'FaTabStripItem2
-        '
-        Me.FaTabStripItem2.CanClose = False
-        Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
-        Me.FaTabStripItem2.Controls.Add(Me.Label2)
-        Me.FaTabStripItem2.IsDrawn = True
-        Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
-        '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Button5)
+        Me.GroupBox2.Controls.Add(Me.Button6)
         Me.GroupBox2.Controls.Add(Me.Button4)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Button1)
@@ -79,8 +59,25 @@ Partial Class FormConfigLKP
         Me.GroupBox2.Controls.Add(Me.KryptonDataGridView2)
         Me.GroupBox2.Controls.Add(Me.LabelWithDivider2)
         Me.GroupBox2.Controls.Add(Me.Label3)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.export_48px
+        Me.Button5.Name = "Button5"
+        Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.import_48px
+        Me.Button6.Name = "Button6"
+        Me.ToolTip1.SetToolTip(Me.Button6, resources.GetString("Button6.ToolTip"))
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -125,23 +122,23 @@ Partial Class FormConfigLKP
         Me.KryptonDataGridView2.Name = "KryptonDataGridView2"
         Me.KryptonDataGridView2.RowHeadersVisible = False
         Me.KryptonDataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Format = "N5"
-        Me.KryptonDataGridView2.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N5"
+        Me.KryptonDataGridView2.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.KryptonDataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
         'Column3
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle4
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column4
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle5
         resources.ApplyResources(Me.Column4, "Column4")
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -161,45 +158,34 @@ Partial Class FormConfigLKP
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
         '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
         'FaTabStripItem1
         '
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'FormConfigLKP
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.FaTabStrip1)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.GroupBox2)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigLKP"
         Me.TopMost = True
-        CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStrip1.ResumeLayout(False)
-        Me.FaTabStripItem2.ResumeLayout(False)
-        Me.FaTabStripItem2.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents KryptonDataGridView2 As System.Windows.Forms.DataGridView
     Public WithEvents LabelWithDivider2 As System.Windows.Forms.Label
     Public WithEvents Label3 As System.Windows.Forms.Label
-    Private WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Private WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
-    Private WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -208,4 +194,7 @@ Partial Class FormConfigLKP
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents Button1 As System.Windows.Forms.Button
     Public WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ToolTip1 As ToolTip
+    Public WithEvents Button5 As Button
+    Public WithEvents Button6 As Button
 End Class

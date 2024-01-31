@@ -16,6 +16,9 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports System.IO
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -39,18 +42,13 @@ Public Class FormConfigLKP
 
         Me.KryptonDataGridView2.DataSource = Nothing
 
-        If _pp.ComponentName.ToString.Contains("Raoult") Or _
-           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or _
-           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or _
+        If _pp.ComponentName.ToString.Contains("Raoult") Or
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or
            _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Then
-            Me.FaTabStripItem2.Visible = False
-            Me.FaTabStripItem1.Selected = True
             Exit Sub
         Else
-            Me.FaTabStripItem2.Visible = True
-            Me.FaTabStripItem1.Selected = True
         End If
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
 
         Me.KryptonDataGridView2.Rows.Clear()
 
@@ -193,5 +191,82 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
         Return y
 
     End Function
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+        Dim BIPs As List(Of PropertyPackages.Auxiliary.PR_IPData)
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
+
+        If openedFile IsNot Nothing Then
+
+            Try
+
+                BIPs = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of PropertyPackages.Auxiliary.PR_IPData))(openedFile.ReadAllText())
+
+                If MessageBox.Show("Interaction Parameters loaded successfully. Proceed with overwriting current values?",
+                                   "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+                    For Each row As DataGridViewRow In KryptonDataGridView2.Rows
+
+                        Dim c1 = row.Cells(0).Value
+                        Dim c2 = row.Cells(1).Value
+
+                        Dim bip1 = BIPs.Where(Function(b) b.Name1 = c1 And b.Name2 = c2).FirstOrDefault()
+                        Dim bip2 = BIPs.Where(Function(b) b.Name1 = c2 And b.Name2 = c1).FirstOrDefault()
+
+                        If bip1 IsNot Nothing Then
+                            row.Cells(2).Value = bip1.kij
+                        End If
+
+                        If bip2 IsNot Nothing Then
+                            row.Cells(2).Value = bip2.kij
+                        End If
+
+                    Next
+
+                End If
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
+        End If
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+        Dim BIPs As New List(Of PropertyPackages.Auxiliary.PR_IPData)
+
+        For Each row As DataGridViewRow In KryptonDataGridView2.Rows
+            BIPs.Add(New PropertyPackages.Auxiliary.PR_IPData With {.Name1 = row.Cells(0).Value, .Name2 = row.Cells(1).Value,
+                     .kij = row.Cells(2).Value.ToString().ToDoubleFromCurrent()})
+        Next
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                    Try
+                        Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(BIPs, Newtonsoft.Json.Formatting.Indented)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show("File saved successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show("Error saving file: " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
+        End If
+
+    End Sub
 
 End Class

@@ -2160,6 +2160,42 @@ Namespace ExcelAddIn
                             Next
                         End If
                     End With
+                Case "Wilson"
+                    With CType(pp, WilsonPropertyPackage).m_pr.InteractionParameters
+                        If Not ip1 Is Nothing Then
+                            .Clear()
+                            i = 0
+                            For Each c1 As String In compounds
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
+                                j = 0
+                                For Each c2 As String In compounds
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
+                                    With .Item(c1).Item(c2)
+                                        .kij = ip1(i, j)
+                                    End With
+                                    j += 1
+                                Next
+                                i += 1
+                            Next
+                        End If
+                    End With
+                    With CType(pp, WilsonPropertyPackage).WilsonM.BIPs
+                        If Not ip2 Is Nothing Then
+                            .Clear()
+                            i = 0
+                            For Each c1 As String In compounds
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Double()))
+                                j = 0
+                                For Each c2 As String In compounds
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Double() {0.0, 0.0})
+                                    .Item(c1).Item(c2)(0) = ip2(i, j)
+                                    .Item(c1).Item(c2)(1) = ip3(i, j)
+                                    j += 1
+                                Next
+                                i += 1
+                            Next
+                        End If
+                    End With
                 Case "Modified UNIFAC (Dortmund)"
                     With CType(pp, MODFACPropertyPackage).m_pr.InteractionParameters
                         If Not ip1 Is Nothing Then

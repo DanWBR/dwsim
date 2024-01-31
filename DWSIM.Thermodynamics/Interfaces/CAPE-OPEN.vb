@@ -66,6 +66,9 @@ Public Class CAPEOPENManager
             Case "UNIQUAC"
                 pp = New UNIQUACPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescUNIQUACPP")
+            Case "Wilson"
+                pp = New WilsonPropertyPackage()
+                pp.ComponentDescription = Calculator.GetLocalString("Wilson Property Package")
             Case "Modified UNIFAC (Dortmund)"
                 pp = New MODFACPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescMUPP")
