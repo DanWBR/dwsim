@@ -6,6 +6,8 @@ Public Class WilsonPropertyPackage
 
     Inherits DWSIM.Thermodynamics.PropertyPackages.ActivityCoefficientPropertyPackage
 
+    Public Overrides ReadOnly Property Popular As Boolean = True
+
     Public Property WilsonM As WilsonModel
 
     Public Overrides ReadOnly Property DisplayName As String = "Wilson"
