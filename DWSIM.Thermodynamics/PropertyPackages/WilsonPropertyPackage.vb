@@ -119,8 +119,8 @@ Public Class WilsonPropertyPackage
             If Flowsheet Is Nothing Then Exit Sub
         End If
 
-        Dim CAS_IDS = RET_VCAS().ToList()
-        Dim NAMES = RET_VNAMES().ToList()
+        Dim CAS_IDS = Flowsheet.SelectedCompounds.Values.Select(Function(c) c.CAS_Number).ToList()
+        Dim NAMES = Flowsheet.SelectedCompounds.Keys.ToList()
 
         Dim i, j As Integer
         i = 0
