@@ -23,6 +23,14 @@ namespace DWSIM.Simulate365.FormFactories
         public string SuggestedFilename { get; set; }
         private readonly UserService _userService;
 
+
+        #region Public events
+
+        public event EventHandler FileOpenedFromDashboard;
+       
+
+        #endregion
+
         public S365FilePickerForm()
         {
 
@@ -189,6 +197,8 @@ namespace DWSIM.Simulate365.FormFactories
             }
 
             var file = ShowOpenDialog(fileFormats);
+
+            FileOpenedFromDashboard?.Invoke(this, new EventArgs());
             return file;
         }
 
