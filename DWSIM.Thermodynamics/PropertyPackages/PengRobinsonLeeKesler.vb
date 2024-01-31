@@ -257,9 +257,9 @@ Namespace PropertyPackages
                 result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
 
-                result = Me.m_lk.H_LK_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, dwpl))
+                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = Me.m_lk.S_LK_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl))
+                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 'result = Me.m_pr.Z_PR(T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                 result = Me.m_lk.Z_LK("L", T / Me.AUX_TCM(dwpl), P / Me.AUX_PCM(dwpl), Me.AUX_WM(dwpl))(0)
@@ -283,9 +283,9 @@ Namespace PropertyPackages
 
                 result = Me.AUX_VAPDENS(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
-                result = Me.m_lk.H_LK_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Hid(298.15, T, Phase.Vapor))
+                result = Me.DW_CalcEnthalpy(RET_VMOL(Phase.Vapor), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = Me.m_lk.S_LK_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor))
+                result = Me.DW_CalcEntropy(RET_VMOL(Phase.Vapor), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 'result = Me.m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
                 result = Me.m_lk.Z_LK("V", T / Me.AUX_TCM(PropertyPackages.Phase.Vapor), P / Me.AUX_PCM(PropertyPackages.Phase.Vapor), Me.AUX_WM(PropertyPackages.Phase.Vapor))(0)
