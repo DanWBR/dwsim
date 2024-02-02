@@ -63,19 +63,19 @@ Namespace GraphicObjects.Tables
 
         Public Overrides Sub Draw(ByVal g As Object)
 
-            Dim sf = GlobalSettings.Settings.UIScalingFactor
+            Dim sf = s.UIScalingFactor
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            FontSize = 12.0
+            FontSize = 11.0
 
-            FontSize *= GlobalSettings.Settings.DpiScale * sf
+            FontSize *= s.DpiScale * sf
 
             Dim zoom As Single = AdditionalInfo
 
             If zoom = 0.0 Then Exit Sub
 
-            Padding = 4.0 / zoom * GlobalSettings.Settings.DpiScale * sf
+            Padding = 3.0 / zoom * s.DpiScale * sf
 
             Dim tpaint As New SKPaint()
             Dim bpaint, bpaint2 As New SKPaint()
@@ -209,22 +209,12 @@ Namespace GraphicObjects.Tables
                     Dim SW = Owner.GetFlowsheet().GetFlowsheetSurfaceWidth() / zoom
                     Dim SH = Owner.GetFlowsheet().GetFlowsheetSurfaceHeight() / zoom
 
-                    Dim maxL1, maxL2, maxL3, count As Double
-                    Dim maxH As Double
-
                     'determinar comprimento das colunas e altura das linhas
 
-                    maxL1 = 0
-                    maxL2 = 0
-                    maxL3 = 0
-                    maxH = 0
-                    count = 1
+                    Dim heading1size, heading2size As SKSize
 
-                    Dim size, size2 As SKSize
-
-                    size = MeasureString(Me.Owner.GraphicObject.Tag.ToUpper, tpaint)
-                    If size.Width > maxL1 Then maxL1 = size.Width
-                    If size.Height > maxH Then maxH = size.Height
+                    heading1size = MeasureString(Owner.GraphicObject.Tag.ToUpper, tpaint)
+                    heading2size = MeasureString(Owner.GetDisplayName(), tpaint)
 
                     Dim fs = Owner.GetFlowsheet
                     Dim props As New List(Of String)
@@ -242,9 +232,6 @@ Namespace GraphicObjects.Tables
                     If Owner.GetFlowsheet().DynamicMode Then
                         Dim eprops = DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray()
                         props.AddRange(eprops)
-                    Else
-                        'Dim eprops = DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.Where(Function(p) Not Owner.IsDynamicProperty(p)).ToArray()
-                        'props.AddRange(eprops)
                     End If
 
                     If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Or
@@ -265,7 +252,16 @@ Namespace GraphicObjects.Tables
                         Next
                     End If
 
+                    If props.Count = 0 Then Exit Sub
+
                     Dim propstring, propval, propunit As String, pval0 As Object
+
+                    Dim size, size2 As SKSize
+                    Dim count As Integer = 1
+                    Dim maxL1, maxL2, maxL3, maxH As Double
+
+                    Dim sizes As New List(Of Tuple(Of SKSize, SKSize, SKSize))
+                    Dim items As New List(Of Tuple(Of String, String, String))
 
                     For Each prop In props
                         propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
@@ -281,6 +277,8 @@ Namespace GraphicObjects.Tables
                             propval = str
                         End If
                         propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                        sizes.Add(New Tuple(Of SKSize, SKSize, SKSize)(MeasureString(propstring, tbpaint), MeasureString(propval, tpaint), MeasureString(propunit, tbpaint)))
+                        items.Add(New Tuple(Of String, String, String)(propstring, propval, propunit))
                         size = MeasureString(propstring, tpaint)
                         If size.Width > maxL1 Then maxL1 = size.Width
                         If size.Height > maxH Then maxH = size.Height
@@ -293,87 +291,144 @@ Namespace GraphicObjects.Tables
                         count += 1
                     Next
 
-                    If Not Me.Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
+                    If Not Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
 
-                        If maxH = 0 Then maxH = 22 / zoom
+                        Dim ncols As Double
 
-                        Me.Height = (count + 1) * (maxH + 2 * Me.Padding)
-                        size = MeasureString(Me.HeaderText, tpaint)
-                        size2 = MeasureString(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), tpaint)
+                        Dim totalH = sizes.Select(Function(s) s.Item1.Height + 2 * Padding).Sum
 
-                        If size.Width > size2.Width Then
-                            If size.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
-                                Me.Width = 2 * Me.Padding + size.Width
-                            Else
-                                Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+                        Dim margin = 4.0 / zoom
+
+                        ncols = totalH * zoom / SH
+
+                        If ncols <= 1.0 Then
+
+                            maxH = sizes.Select(Function(s) s.Item1.Height + 2 * Padding).Max
+                            maxL1 = sizes.Select(Function(s) s.Item1.Width).Max
+                            maxL2 = sizes.Select(Function(s) s.Item2.Width).Max
+                            maxL3 = sizes.Select(Function(s) s.Item3.Width).Max
+
+                            Width = maxL1 + maxL2 + maxL3 + 8 * Padding
+                            Height = totalH + 2 * maxH + 4 * Padding
+
+                            If X + Width > SW Then
+                                X -= Width - Owner.GraphicObject.Width * 1.5
                             End If
-                        Else
-                            If size2.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
-                                Me.Width = 2 * Me.Padding + size2.Width
-                            Else
-                                Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+                            If Y + Height > SH Then
+                                Y -= Height - Owner.GraphicObject.Height * 1.5
                             End If
-                        End If
 
-                        Me.Width += 10.0 / zoom
+                            'draw shadow
 
-                        maxL1 = maxL1 + 2 * Padding
-                        maxL2 = maxL2 + 2 * Padding
-                        maxL3 = maxL3 + 2 * Padding
+                            If Not s.DarkMode Then
+                                Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
+                            End If
+                            Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
 
-                        maxH = maxH + 2 * Padding
+                            Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
-                        If X + Width > SW Then
-                            X -= Width - Owner.GraphicObject.Width * 1.5
-                        End If
-                        If Y + Height > SH Then
-                            Y -= Height - Owner.GraphicObject.Height * 1.5
-                        End If
+                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
+                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
 
-                        'draw shadow
-
-                        If Not s.DarkMode Then
-                            Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
-                        End If
-                        Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
-
-                        Dim rect As SKRect = GetRect(X, Y, Width, Height)
-
-                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
-                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
-
-                        canvas.DrawLine(X + Padding + 3 / zoom, Y + 2 * maxH - Padding, X + Width - Padding - 3 / zoom, Y + 2 * maxH - Padding, bpaint2)
-
-                        size = MeasureString("MEASURE", tpaint)
-
-                        'desenhar textos e retangulos
-                        canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3 / zoom, Y + Padding + size.Height, tbpaint)
-                        canvas.DrawText(Owner.GetDisplayName(), X + Padding + 3 / zoom, Y + maxH + size.Height, tpaint)
-                        Dim n As Integer = 1
-                        For Each prop In props
-                            propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
-                            pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            If pval0 Is Nothing Then Exit For
-                            If TypeOf pval0 Is Double Then
-                                propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
-                            Else
-                                Dim str = pval0.ToString
-                                If str.Length > 50 Then
-                                    str = str.Substring(0, 50) + "..."
+                            'desenhar textos e retangulos
+                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, X + Padding + margin, Y + maxH, tbpaint)
+                            canvas.DrawText(Owner.GetDisplayName(), X + Padding + margin, Y + 2 * maxH, tpaint)
+                            canvas.DrawLine(X + Padding + margin, Y + 2 * maxH + 2 * Padding, X + Width - Padding - margin, Y + 2 * maxH + 2 * Padding, bpaint2)
+                            Dim y0 = Y + 3 * maxH + Padding
+                            For Each prop In props
+                                propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
+                                pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                                If pval0 Is Nothing Then Exit For
+                                If TypeOf pval0 Is Double Then
+                                    propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
+                                Else
+                                    Dim str = pval0.ToString
+                                    If str.Length > 50 Then
+                                        str = str.Substring(0, 50) + "..."
+                                    End If
+                                    propval = str
                                 End If
-                                propval = str
+                                propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                                canvas.DrawText(propstring, X + Padding + margin, y0, tbpaint)
+                                canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 4 * Padding, y0, tpaint)
+                                canvas.DrawText(propunit, X + maxL1 + maxL2 + 5 * Padding + margin, y0, tbpaint)
+                                y0 += maxH
+                            Next
+
+                        Else
+
+                            ncols = Math.Truncate(items.Count / ncols)
+
+                            Dim propgroups = items.Chunk(ncols)
+
+                            maxH = sizes(0).Item1.Height + Padding * 2
+
+                            Height = propgroups.Select(Function(pg) pg.Count).Max * maxH + 2 * maxH + 4 * Padding
+
+                            Dim mL1, mL2, mL3 As New List(Of Double)
+
+                            For Each pg In propgroups
+
+                                maxL1 = pg.Select(Function(s) MeasureString(s.Item1, tbpaint).Width).Max
+                                maxL2 = pg.Select(Function(s) MeasureString(s.Item2, tpaint).Width).Max
+                                maxL3 = pg.Select(Function(s) MeasureString(s.Item3, tbpaint).Width).Max
+
+                                mL1.Add(maxL1)
+                                mL2.Add(maxL2)
+                                mL3.Add(maxL3)
+
+                            Next
+
+                            Width = mL1.Sum + mL2.Sum + mL3.Sum + mL1.Count * 8 * Padding
+
+                            If X + Width > SW Then
+                                X -= Width - Owner.GraphicObject.Width * 1.5
                             End If
-                            propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            canvas.DrawText(propstring, X + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
-                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
-                            n += 1
-                        Next
+                            If Y + Height > SH Then
+                                Y -= Height - Owner.GraphicObject.Height * 1.5
+                            End If
+
+                            'draw shadow
+
+                            If Not s.DarkMode Then
+                                Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
+                            End If
+                            Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
+
+                            Dim rect As SKRect = GetRect(X, Y, Width, Height)
+
+                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
+                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
+
+                            'desenhar textos e retangulos
+                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, X + Padding + margin, Y + maxH, tbpaint)
+                            canvas.DrawText(Owner.GetDisplayName(), X + Padding + margin, Y + 2 * maxH, tpaint)
+                            canvas.DrawLine(X + Padding + margin, Y + 2 * maxH + 2 * Padding, X + Width - Padding - margin, Y + 2 * maxH + 2 * Padding, bpaint2)
+
+                            Dim x0 = X + Padding + margin
+                            Dim i = 0
+                            For Each pg In propgroups
+                                Dim y0 = Y + 3 * maxH + Padding
+                                For Each prop In pg
+                                    canvas.DrawText(prop.Item1, x0, y0, tbpaint)
+                                    canvas.DrawText(prop.Item2, mL2(i) - MeasureString(prop.Item2, tpaint).Width + mL1(i) + x0 + 2 * Padding, y0, tpaint)
+                                    canvas.DrawText(prop.Item3, mL1(i) + mL2(i) + x0 + 4 * Padding, y0, tbpaint)
+                                    y0 += maxH
+                                Next
+                                x0 += mL1(i) + mL2(i) + mL3(i) + 8 * Padding
+                                i += 1
+                            Next
+
+                        End If
 
                         props.Clear()
                         props = Nothing
 
                     Else
+
+                        size = MeasureString(Me.Owner.GraphicObject.Tag.ToUpper, tpaint)
+                        If size.Width > maxL1 Then maxL1 = size.Width
+                        If size.Height > maxH Then maxH = size.Height
 
                         Dim MSObj = DirectCast(Me.Owner, Interfaces.IMaterialStream)
 
