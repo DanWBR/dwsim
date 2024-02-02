@@ -297,9 +297,11 @@ Namespace GraphicObjects.Tables
 
                         Dim totalH = sizes.Select(Function(s) s.Item1.Height + 2 * Padding).Sum
 
+                        Dim totalH2 = sizes.Select(Function(s) s.Item1.Height + 2 * Padding).Sum * 1.2
+
                         Dim margin = 4.0 / zoom
 
-                        ncols = totalH * zoom / SH
+                        ncols = totalH2 * zoom / SH
 
                         If ncols <= 1.0 Then
 
