@@ -206,6 +206,11 @@ Namespace GraphicObjects.Tables
 
                 If Me.Owner.GetFlowsheet IsNot Nothing Then
 
+                    Dim XD, YD As Single
+
+                    XD = X
+                    YD = Y
+
                     Dim SW = Owner.GetFlowsheet().GetFlowsheetSurfaceWidth() / zoom
                     Dim SH = Owner.GetFlowsheet().GetFlowsheetSurfaceHeight() / zoom
 
@@ -301,7 +306,7 @@ Namespace GraphicObjects.Tables
 
                         Dim margin = 4.0 / zoom
 
-                        ncols = totalH2 * zoom / SH
+                        ncols = totalH2 / SH
 
                         If ncols <= 1.0 Then
 
@@ -314,29 +319,29 @@ Namespace GraphicObjects.Tables
                             Height = totalH + 2 * maxH + 4 * Padding
 
                             If X + Width > SW Then
-                                X -= Width - Owner.GraphicObject.Width * 1.5
+                                XD -= Width - Owner.GraphicObject.Width * 1.5
                             End If
                             If Y + Height > SH Then
-                                Y -= Height - Owner.GraphicObject.Height * 1.5
+                                YD -= Height - Owner.GraphicObject.Height * 1.5
                             End If
 
                             'draw shadow
 
                             If Not s.DarkMode Then
-                                Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
+                                Me.DrawRoundRect(g, XD + 4 / zoom, YD + 4 / zoom, Width, Height, 2 / zoom, spaint)
                             End If
-                            Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
+                            Dim rect0 As SKRect = GetRect(XD + 4 / zoom, YD + 4 / zoom, Width, Height)
 
-                            Dim rect As SKRect = GetRect(X, Y, Width, Height)
+                            Dim rect As SKRect = GetRect(XD, YD, Width, Height)
 
-                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
-                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
+                            DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint)
+                            DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint2)
 
                             'desenhar textos e retangulos
-                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, X + Padding + margin, Y + maxH, tbpaint)
-                            canvas.DrawText(Owner.GetDisplayName(), X + Padding + margin, Y + 2 * maxH, tpaint)
-                            canvas.DrawLine(X + Padding + margin, Y + 2 * maxH + 2 * Padding, X + Width - Padding - margin, Y + 2 * maxH + 2 * Padding, bpaint2)
-                            Dim y0 = Y + 3 * maxH + Padding
+                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, XD + Padding + margin, YD + maxH, tbpaint)
+                            canvas.DrawText(Owner.GetDisplayName(), XD + Padding + margin, YD + 2 * maxH, tpaint)
+                            canvas.DrawLine(XD + Padding + margin, YD + 2 * maxH + 2 * Padding, XD + Width - Padding - margin, YD + 2 * maxH + 2 * Padding, bpaint2)
+                            Dim y0 = YD + 3 * maxH + Padding
                             For Each prop In props
                                 propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
                                 pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
@@ -351,15 +356,15 @@ Namespace GraphicObjects.Tables
                                     propval = str
                                 End If
                                 propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                                canvas.DrawText(propstring, X + Padding + margin, y0, tbpaint)
-                                canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 4 * Padding, y0, tpaint)
-                                canvas.DrawText(propunit, X + maxL1 + maxL2 + 5 * Padding + margin, y0, tbpaint)
+                                canvas.DrawText(propstring, XD + Padding + margin, y0, tbpaint)
+                                canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + XD + maxL1 + 4 * Padding, y0, tpaint)
+                                canvas.DrawText(propunit, XD + maxL1 + maxL2 + 5 * Padding + margin, y0, tbpaint)
                                 y0 += maxH
                             Next
 
                         Else
 
-                            ncols = Math.Truncate(items.Count / ncols)
+                            ncols = Math.Ceiling(items.Count / Math.Ceiling(ncols))
 
                             Dim propgroups = items.Chunk(ncols)
 
@@ -383,34 +388,34 @@ Namespace GraphicObjects.Tables
 
                             Width = mL1.Sum + mL2.Sum + mL3.Sum + mL1.Count * 8 * Padding
 
-                            If X + Width > SW Then
-                                X -= Width - Owner.GraphicObject.Width * 1.5
-                            End If
-                            If Y + Height > SH Then
-                                Y -= Height - Owner.GraphicObject.Height * 1.5
-                            End If
+                            'If X + Width > SW Then
+                            '    X -= Width - Owner.GraphicObject.Width * 1.5
+                            'End If
+                            'If Y + Height > SH Then
+                            '    Y -= Height - Owner.GraphicObject.Height * 1.5
+                            'End If
 
                             'draw shadow
 
                             If Not s.DarkMode Then
-                                Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
+                                Me.DrawRoundRect(g, XD + 4 / zoom, YD + 4 / zoom, Width, Height, 2 / zoom, spaint)
                             End If
-                            Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
+                            Dim rect0 As SKRect = GetRect(XD + 4 / zoom, YD + 4 / zoom, Width, Height)
 
-                            Dim rect As SKRect = GetRect(X, Y, Width, Height)
+                            Dim rect As SKRect = GetRect(XD, YD, Width, Height)
 
-                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
-                            DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
+                            DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint)
+                            DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint2)
 
                             'desenhar textos e retangulos
-                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, X + Padding + margin, Y + maxH, tbpaint)
-                            canvas.DrawText(Owner.GetDisplayName(), X + Padding + margin, Y + 2 * maxH, tpaint)
-                            canvas.DrawLine(X + Padding + margin, Y + 2 * maxH + 2 * Padding, X + Width - Padding - margin, Y + 2 * maxH + 2 * Padding, bpaint2)
+                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, XD + Padding + margin, YD + maxH, tbpaint)
+                            canvas.DrawText(Owner.GetDisplayName(), XD + Padding + margin, YD + 2 * maxH, tpaint)
+                            canvas.DrawLine(XD + Padding + margin, YD + 2 * maxH + 2 * Padding, XD + Width - Padding - margin, YD + 2 * maxH + 2 * Padding, bpaint2)
 
-                            Dim x0 = X + Padding + margin
+                            Dim x0 = XD + Padding + margin
                             Dim i = 0
                             For Each pg In propgroups
-                                Dim y0 = Y + 3 * maxH + Padding
+                                Dim y0 = YD + 3 * maxH + Padding
                                 For Each prop In pg
                                     canvas.DrawText(prop.Item1, x0, y0, tbpaint)
                                     canvas.DrawText(prop.Item2, mL2(i) - MeasureString(prop.Item2, tpaint).Width + mL1(i) + x0 + 2 * Padding, y0, tpaint)
@@ -591,25 +596,25 @@ Namespace GraphicObjects.Tables
                         maxH2 += delta
 
                         If X + Width > SW Then
-                            X -= Width - Owner.GraphicObject.Width * 1.5
+                            XD -= Width - Owner.GraphicObject.Width * 1.5
                         End If
                         If Y + Height > SH Then
-                            Y -= Height - Owner.GraphicObject.Height * 1.5
+                            YD -= Height - Owner.GraphicObject.Height * 1.5
                         End If
 
                         'draw shadow
 
-                        DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 2 / zoom, spaint)
-                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint)
-                        DrawRoundRect(g, X, Y, Width, Height, 2 / zoom, bpaint2)
+                        DrawRoundRect(g, XD + 4 / zoom, YD + 4 / zoom, Width, Height, 2 / zoom, spaint)
+                        DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint)
+                        DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint2)
 
-                        canvas.DrawLine(X + Padding + 3 / zoom, Y + 2 * maxH - Padding, X + Width - Padding - 3 / zoom, Y + 2 * maxH - Padding, bpaint2)
+                        canvas.DrawLine(XD + Padding + 3 / zoom, YD + 2 * maxH - Padding, XD + Width - Padding - 3 / zoom, YD + 2 * maxH - Padding, bpaint2)
 
                         size = MeasureString("MEASURE", tpaint)
 
                         'desenhar textos e retangulos
-                        canvas.DrawText(Me.Owner.GraphicObject.Tag, X + Padding + 3 / zoom, Y + Padding + size.Height, tbpaint)
-                        canvas.DrawText(MSObj.Flowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3 / zoom, Y + maxH + size.Height, tpaint)
+                        canvas.DrawText(Me.Owner.GraphicObject.Tag, XD + Padding + 3 / zoom, YD + Padding + size.Height, tbpaint)
+                        canvas.DrawText(MSObj.Flowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), XD + Padding + 3 / zoom, YD + maxH + size.Height, tpaint)
                         Dim n As Integer = 1
                         For Each prop In props
                             propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
@@ -621,9 +626,9 @@ Namespace GraphicObjects.Tables
                                 propval = pval0.ToString
                             End If
                             propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                            canvas.DrawText(propstring, X + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
-                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                            canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3.0 / zoom, Y + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propstring, XD + Padding + 3.0 / zoom, YD + (n + 1) * maxH + Padding + size.Height, tbpaint)
+                            canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + XD + maxL1 + 3.0 / zoom, YD + (n + 1) * maxH + Padding + size.Height, tpaint)
+                            canvas.DrawText(propunit, XD + maxL1 + maxL2 + Padding + 3.0 / zoom, YD + (n + 1) * maxH + Padding + size.Height, tbpaint)
                             n += 1
                         Next
 
@@ -631,15 +636,15 @@ Namespace GraphicObjects.Tables
 
                         Dim X2 As Single = X
 
-                        If X + Width2 > SW Then
+                        If XD + Width2 > SW Then
                             DeltaY = 2 * Padding
                             X2 = X2 - Width2 - 2 * Padding
-                        ElseIf Y + DeltaY < 0 Then
+                        ElseIf YD + DeltaY < 0 Then
                             DeltaY = 2 * Padding
                             X2 += Width + Padding * 5
                         End If
 
-                        If MSObj.Flowsheet.FlowsheetOptions.DisplayFloatingTableCompoundAmounts And (Y + DeltaY) > 0 Then
+                        If MSObj.Flowsheet.FlowsheetOptions.DisplayFloatingTableCompoundAmounts And (YD + DeltaY) > 0 Then
 
                             If Width2 > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub
                             If Height2 > Owner.GetFlowsheet().GetFlowsheetSurfaceHeight * 2 / 3 Then Exit Sub
