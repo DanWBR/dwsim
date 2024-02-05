@@ -1186,11 +1186,25 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             Dim objl As Object()
             Try
+
                 objl = GetSolvingList(fobj, frompgrid)
+
             Catch ex As Exception
+
                 FinishAny?.Invoke()
-                GlobalSettings.Settings.CalculatorBusy = False
+                FinishWithErrors?.Invoke()
+
+                Settings.CalculatorBusy = False
+
+                Dim euid As String = Guid.NewGuid().ToString()
+                ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
+
+                fgui.ShowMessage(ex.Message, IFlowsheet.MessageType.GeneralError, euid)
+                IObj?.Paragraphs.Add(ex.Message)
+
+                RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), New List(Of Exception)({ex}))
                 Return New List(Of Exception)({ex})
+
             End Try
 
             'assign the list of objects, the filtered list (which contains no duplicate elements) and the object stack
