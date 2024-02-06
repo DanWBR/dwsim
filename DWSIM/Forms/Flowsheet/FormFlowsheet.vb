@@ -1740,28 +1740,9 @@ Public Class FormFlowsheet
 
         If Not Me.FormSurface.FlowsheetSurface.SelectedObject Is Nothing Then
 
-            Dim obj As SharedClasses.UnitOperations.BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetSurface.SelectedObject.Name)
+            Dim obj As BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetSurface.SelectedObject.Name)
 
-            'Call function to calculate flowsheet
-            Dim objargs As New CalculationArgs
-            With objargs
-                .Calculated = False
-                .Tag = obj.GraphicObject.Tag
-                .Name = obj.Name
-                .ObjectType = obj.GraphicObject.ObjectType
-                .Sender = "PropertyGrid"
-            End With
-
-            CalculationQueue.Enqueue(objargs)
-
-            pbSolver.Visible = True
-
-            Task.Factory.StartNew(Sub()
-                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, , True,,,,
-                                                                                     Sub()
-                                                                                         UIThread(Sub() pbSolver.Visible = False)
-                                                                                     End Sub)
-                                  End Sub)
+            RequestFlowsheetCalculation(obj, False)
 
         End If
 
