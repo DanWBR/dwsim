@@ -1590,8 +1590,10 @@ Namespace UnitOperations
                         End Select
                         If DebugMode Then AppendDebugLine(String.Format("Dimensionless Temp Change - P_cold :{0}  P_hot: {1}", PPc, PPh))
 
-                        If Double.IsNaN(PPc) Then PPc = 0
-                        If Double.IsNaN(PPh) Then PPh = 0
+                        If Double.IsNaN(PPc) Or Double.IsNaN(PPh) Then
+                            Throw New Exception("failed to calculate the Number of Transfer Units (NTU) with the current input and specs")
+                        End If
+
                         Tc2 = Tc1 + PPc * (Th1 - Tc1)
                         Th2 = Th1 - PPh * (Th1 - Tc1)
                         If DebugMode Then AppendDebugLine(String.Format("Outlet Temperatures - Tc2 :{0} K  Th2: {1} K", Tc2, Th2))
