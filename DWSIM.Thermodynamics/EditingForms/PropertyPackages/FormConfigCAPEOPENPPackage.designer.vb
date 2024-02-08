@@ -24,7 +24,7 @@ Partial Class FormConfigCAPEOPENPPackage
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPENPPackage))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -42,29 +42,10 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.btnSelectOctavePath = New System.Windows.Forms.Button()
-        Me.tbOctavePath = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.btnConfigFlashAlg = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.cbSIMD = New System.Windows.Forms.CheckBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.tbGPUCaps = New System.Windows.Forms.TextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.cbGPU = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.chkEnableGPUProcessing = New System.Windows.Forms.CheckBox()
-        Me.cbParallelism = New System.Windows.Forms.ComboBox()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem6 = New FarsiLibrary.Win.FATabStripItem()
         Me.lblDescription = New System.Windows.Forms.Label()
@@ -96,13 +77,7 @@ Partial Class FormConfigCAPEOPENPPackage
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox7.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox8.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem6.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -197,8 +172,8 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.Column7, Me.Column9})
@@ -241,7 +216,6 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         Me.FaTabStripItem7.CanClose = False
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox5)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         Me.FaTabStripItem7.Selected = True
@@ -249,119 +223,14 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.PictureBox6)
-        Me.GroupBox5.Controls.Add(Me.btnSelectOctavePath)
-        Me.GroupBox5.Controls.Add(Me.tbOctavePath)
-        Me.GroupBox5.Controls.Add(Me.Label6)
-        Me.GroupBox5.Controls.Add(Me.PictureBox5)
-        Me.GroupBox5.Controls.Add(Me.PictureBox4)
-        Me.GroupBox5.Controls.Add(Me.btnConfigFlashAlg)
-        Me.GroupBox5.Controls.Add(Me.Label4)
-        Me.GroupBox5.Controls.Add(Me.ComboBoxFlashAlg)
+        Me.GroupBox5.Controls.Add(Me.cbSIMD)
+        Me.GroupBox5.Controls.Add(Me.PictureBox2)
         Me.GroupBox5.Controls.Add(Me.Button3)
-        Me.GroupBox5.Controls.Add(Me.Label1)
+        Me.GroupBox5.Controls.Add(Me.PictureBox1)
+        Me.GroupBox5.Controls.Add(Me.chkEnableParallelCalcs)
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
-        '
-        'PictureBox6
-        '
-        resources.ApplyResources(Me.PictureBox6, "PictureBox6")
-        Me.PictureBox6.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox6, resources.GetString("PictureBox6.ToolTip"))
-        '
-        'btnSelectOctavePath
-        '
-        resources.ApplyResources(Me.btnSelectOctavePath, "btnSelectOctavePath")
-        Me.btnSelectOctavePath.Name = "btnSelectOctavePath"
-        Me.btnSelectOctavePath.UseVisualStyleBackColor = True
-        '
-        'tbOctavePath
-        '
-        resources.ApplyResources(Me.tbOctavePath, "tbOctavePath")
-        Me.tbOctavePath.Name = "tbOctavePath"
-        Me.tbOctavePath.ReadOnly = True
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label6.Name = "Label6"
-        '
-        'PictureBox5
-        '
-        resources.ApplyResources(Me.PictureBox5, "PictureBox5")
-        Me.PictureBox5.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
-        Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox5, resources.GetString("PictureBox5.ToolTip"))
-        '
-        'PictureBox4
-        '
-        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
-        Me.PictureBox4.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox4, resources.GetString("PictureBox4.ToolTip"))
-        '
-        'btnConfigFlashAlg
-        '
-        resources.ApplyResources(Me.btnConfigFlashAlg, "btnConfigFlashAlg")
-        Me.btnConfigFlashAlg.Name = "btnConfigFlashAlg"
-        Me.btnConfigFlashAlg.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label4.Name = "Label4"
-        '
-        'ComboBoxFlashAlg
-        '
-        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
-        Me.ComboBoxFlashAlg.FormattingEnabled = True
-        Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
-        Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label1.Name = "Label1"
-        '
-        'GroupBox7
-        '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
-        Me.GroupBox7.Controls.Add(Me.PictureBox3)
-        Me.GroupBox7.Controls.Add(Me.cbSIMD)
-        Me.GroupBox7.Controls.Add(Me.PictureBox2)
-        Me.GroupBox7.Controls.Add(Me.GroupBox8)
-        Me.GroupBox7.Controls.Add(Me.PictureBox1)
-        Me.GroupBox7.Controls.Add(Me.cbGPU)
-        Me.GroupBox7.Controls.Add(Me.Label9)
-        Me.GroupBox7.Controls.Add(Me.chkEnableGPUProcessing)
-        Me.GroupBox7.Controls.Add(Me.cbParallelism)
-        Me.GroupBox7.Controls.Add(Me.Label11)
-        Me.GroupBox7.Controls.Add(Me.chkEnableParallelCalcs)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.TabStop = False
-        '
-        'PictureBox3
-        '
-        resources.ApplyResources(Me.PictureBox3, "PictureBox3")
-        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox3, resources.GetString("PictureBox3.ToolTip"))
         '
         'cbSIMD
         '
@@ -376,18 +245,11 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.PictureBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
         '
-        'GroupBox8
+        'Button3
         '
-        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.TabStop = False
-        '
-        'tbGPUCaps
-        '
-        resources.ApplyResources(Me.tbGPUCaps, "tbGPUCaps")
-        Me.tbGPUCaps.Name = "tbGPUCaps"
-        Me.tbGPUCaps.ReadOnly = True
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'PictureBox1
         '
@@ -396,37 +258,6 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
-        '
-        'cbGPU
-        '
-        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        resources.ApplyResources(Me.cbGPU, "cbGPU")
-        Me.cbGPU.FormattingEnabled = True
-        Me.cbGPU.Name = "cbGPU"
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label9.Name = "Label9"
-        '
-        'chkEnableGPUProcessing
-        '
-        resources.ApplyResources(Me.chkEnableGPUProcessing, "chkEnableGPUProcessing")
-        Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
-        '
-        'cbParallelism
-        '
-        Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
-        Me.cbParallelism.FormattingEnabled = True
-        Me.cbParallelism.Name = "cbParallelism"
-        '
-        'Label11
-        '
-        resources.ApplyResources(Me.Label11, "Label11")
-        Me.Label11.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label11.Name = "Label11"
         '
         'chkEnableParallelCalcs
         '
@@ -622,15 +453,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem7.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem6.ResumeLayout(False)
         Me.FaTabStripItem6.PerformLayout()
@@ -673,39 +496,20 @@ Partial Class FormConfigCAPEOPENPPackage
     Friend WithEvents lblName As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents FaTabStripItem7 As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents cbGPU As System.Windows.Forms.ComboBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents chkEnableGPUProcessing As System.Windows.Forms.CheckBox
-    Friend WithEvents cbParallelism As System.Windows.Forms.ComboBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents chkEnableParallelCalcs As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Public WithEvents Label4 As System.Windows.Forms.Label
-    Public WithEvents ComboBoxFlashAlg As System.Windows.Forms.ComboBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
-    Public WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents btnConfigFlashAlg As System.Windows.Forms.Button
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents tbErrorLog As System.Windows.Forms.TextBox
     Public WithEvents cbSIMD As System.Windows.Forms.CheckBox
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents PictureBox5 As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbGPUCaps As System.Windows.Forms.TextBox
-    Friend WithEvents tbOctavePath As System.Windows.Forms.TextBox
-    Friend WithEvents PictureBox6 As System.Windows.Forms.PictureBox
-    Public WithEvents btnSelectOctavePath As System.Windows.Forms.Button
     Public WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
 End Class
