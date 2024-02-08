@@ -665,7 +665,7 @@ Namespace GraphicObjects.Tables
                             DrawRoundRect(g, X2, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint)
                             DrawRoundRect(g, X2, Y + DeltaY - size.Height, Width2, Height2, 2 / zoom, bpaint2)
 
-                            canvas.DrawLine(X2 + Padding + 3 / zoom, Y + 3 * maxH2 - 2 * Padding + DeltaY, X2 + Width2 - Padding - 3 / zoom, Y + 3 * maxH2 - 2 * Padding + DeltaY, bpaint2)
+                            canvas.DrawLine(X2 + Padding + 3 / zoom, Y + 3 * maxH2 - 3 * Padding + DeltaY, X2 + Width2 - Padding - 3 / zoom, Y + 3 * maxH2 - 3 * Padding + DeltaY, bpaint2)
 
                             Dim atext As String = ""
 
