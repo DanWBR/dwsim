@@ -168,15 +168,19 @@ Public Class TwoDimChartControl
                                 Dim j As Integer = 0
                                 For j = 0 To data.GetLength(0) - 1
                                     Dim d As Double = 0.0
-                                    Double.TryParse(data(j, 0).ToString, d)
-                                    ylist.Add(d)
+                                    If data(j, 0) IsNot Nothing Then
+                                        Double.TryParse(data(j, 0).ToString, d)
+                                        ylist.Add(d)
+                                    End If
                                 Next
                             ElseIf data.GetLength(1) > 1 Then
                                 Dim j As Integer = 0
                                 For j = 0 To data.GetLength(1) - 1
                                     Dim d As Double = 0.0
-                                    Double.TryParse(data(0, j).ToString, d)
-                                    ylist.Add(d)
+                                    If data(0, j) IsNot Nothing Then
+                                        Double.TryParse(data(0, j).ToString, d)
+                                        ylist.Add(d)
+                                    End If
                                 Next
                             End If
                             ynumbers.Add(ylist)
