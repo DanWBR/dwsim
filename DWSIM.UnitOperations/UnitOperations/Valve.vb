@@ -350,8 +350,19 @@ Namespace UnitOperations
 
                         If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Or Wi < 0.0 Then Wi = 0.0
 
-                        ims.SetMassFlow(Wi)
-                        oms.SetMassFlow(Wi)
+                        If ims.MaximumAllowableDynamicMassFlowRate.HasValue Then
+                            Dim WiMax = ims.MaximumAllowableDynamicMassFlowRate.Value
+                            If Wi > WiMax Then
+                                ims.SetMassFlow(WiMax)
+                                oms.SetMassFlow(WiMax)
+                            Else
+                                ims.SetMassFlow(Wi)
+                                oms.SetMassFlow(Wi)
+                            End If
+                        Else
+                            ims.SetMassFlow(Wi)
+                            oms.SetMassFlow(Wi)
+                        End If
 
                     ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
                                 oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
