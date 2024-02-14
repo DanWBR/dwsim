@@ -3499,9 +3499,10 @@ redirect2:                  IObj?.SetCurrent()
 
         Public Sub DW_CalcVazaoVolumetrica()
             With Me.CurrentMaterialStream
-                If .Phases(0).Properties.density.GetValueOrDefault > 0 Then
-                    If .Phases(0).Properties.density.GetValueOrDefault > 0 Then
-                        .Phases(0).Properties.volumetric_flow = .Phases(0).Properties.massflow.GetValueOrDefault / .Phases(0).Properties.density.GetValueOrDefault
+                If .Phases(0).Properties.density.GetValueOrDefault() > 0.0 Then
+                    Dim mixdens = .Phases(0).Properties.density.GetValueOrDefault()
+                    If Not Double.IsNaN(mixdens) And Not Double.IsInfinity(mixdens) Then
+                        .Phases(0).Properties.volumetric_flow = .Phases(0).Properties.massflow.GetValueOrDefault / mixdens
                     Else
                         .Phases(0).Properties.volumetric_flow = 0.0#
                     End If
@@ -5530,6 +5531,18 @@ redirect2:                  IObj?.SetCurrent()
             Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+            Next
+
+            Return val
+
+        End Function
+
+        Public Function AUX_MMM(phaseobj As BaseClasses.Phase) As Double
+
+            Dim val As Double
+
+            For Each subst In phaseobj.Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
             Next
 
