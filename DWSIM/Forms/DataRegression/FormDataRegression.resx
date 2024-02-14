@@ -1563,6 +1563,9 @@
   <data name="cbModel.Items6" xml:space="preserve">
     <value>Lee-Kesler-Plöcker</value>
   </data>
+  <data name="cbModel.Items7" xml:space="preserve">
+    <value>Wilson</value>
+  </data>
   <data name="cbModel.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 79</value>
   </data>
@@ -1876,7 +1879,7 @@
     <value>Vertical</value>
   </data>
   <data name="tbParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 100</value>
+    <value>232, 77</value>
   </data>
   <data name="tbParam.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1892,6 +1895,33 @@
   </data>
   <data name="&gt;&gt;tbParam.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="Button4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 93</value>
+  </data>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 23</value>
+  </data>
+  <data name="Button4.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="Button4.Text" xml:space="preserve">
+    <value>Export to File</value>
+  </data>
+  <data name="&gt;&gt;Button4.Name" xml:space="preserve">
+    <value>Button4</value>
+  </data>
+  <data name="&gt;&gt;Button4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>879, 618</value>
