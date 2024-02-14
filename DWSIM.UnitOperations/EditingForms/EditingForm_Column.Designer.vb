@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -86,7 +86,6 @@ Partial Class EditingForm_Column
         Me.chkUseIE_LF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_T = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnConfigExtSolver = New System.Windows.Forms.Button()
         Me.chkCreateConvReport = New System.Windows.Forms.CheckBox()
         Me.btnResults = New System.Windows.Forms.Button()
         Me.gridResults = New System.Windows.Forms.DataGridView()
@@ -95,16 +94,15 @@ Partial Class EditingForm_Column
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.cbInitialEstimatesProvider = New System.Windows.Forms.ComboBox()
+        Me.LabelSM = New System.Windows.Forms.Label()
+        Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
         Me.cbTS = New System.Windows.Forms.ComboBox()
         Me.tbTS = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.tbColPDrop = New System.Windows.Forms.TextBox()
         Me.cbColPDrop = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
-        Me.LabelES = New System.Windows.Forms.Label()
-        Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
-        Me.LabelSM = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabStages = New System.Windows.Forms.TabPage()
         Me.TabConnections = New System.Windows.Forms.TabPage()
@@ -114,6 +112,7 @@ Partial Class EditingForm_Column
         Me.btnViewReport = New System.Windows.Forms.Button()
         Me.btnViewPropertiesReport = New System.Windows.Forms.Button()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lbl1 = New System.Windows.Forms.Label()
         Me.GroupBox5.SuspendLayout()
         Me.TabContainerSpecification.SuspendLayout()
         Me.TabCondenser.SuspendLayout()
@@ -676,16 +675,6 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip2"))
         Me.chkUseIE_T.UseVisualStyleBackColor = True
         '
-        'btnConfigExtSolver
-        '
-        resources.ApplyResources(Me.btnConfigExtSolver, "btnConfigExtSolver")
-        Me.btnConfigExtSolver.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigExtSolver.Name = "btnConfigExtSolver"
-        Me.ToolTip1.SetToolTip(Me.btnConfigExtSolver, resources.GetString("btnConfigExtSolver.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigExtSolver, resources.GetString("btnConfigExtSolver.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.btnConfigExtSolver, resources.GetString("btnConfigExtSolver.ToolTip2"))
-        Me.btnConfigExtSolver.UseVisualStyleBackColor = True
-        '
         'chkCreateConvReport
         '
         resources.ApplyResources(Me.chkCreateConvReport, "chkCreateConvReport")
@@ -721,8 +710,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -730,8 +719,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -739,8 +728,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -764,6 +753,10 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.lbl1)
+        Me.TabPage6.Controls.Add(Me.cbInitialEstimatesProvider)
+        Me.TabPage6.Controls.Add(Me.LabelSM)
+        Me.TabPage6.Controls.Add(Me.cbSolvingMethod)
         Me.TabPage6.Controls.Add(Me.cbTS)
         Me.TabPage6.Controls.Add(Me.tbTS)
         Me.TabPage6.Controls.Add(Me.Label17)
@@ -772,13 +765,8 @@ Partial Class EditingForm_Column
         Me.TabPage6.Controls.Add(Me.cbColPDrop)
         Me.TabPage6.Controls.Add(Me.cbCondPressureUnits)
         Me.TabPage6.Controls.Add(Me.Label18)
-        Me.TabPage6.Controls.Add(Me.btnConfigExtSolver)
         Me.TabPage6.Controls.Add(Me.tbCondPressure)
-        Me.TabPage6.Controls.Add(Me.cbExternalSolver)
         Me.TabPage6.Controls.Add(Me.Label4)
-        Me.TabPage6.Controls.Add(Me.LabelES)
-        Me.TabPage6.Controls.Add(Me.cbSolvingMethod)
-        Me.TabPage6.Controls.Add(Me.LabelSM)
         Me.TabPage6.Controls.Add(Me.Label16)
         Me.TabPage6.Controls.Add(Me.Label6)
         Me.TabPage6.Controls.Add(Me.cbPropPack)
@@ -795,6 +783,36 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'cbInitialEstimatesProvider
+        '
+        resources.ApplyResources(Me.cbInitialEstimatesProvider, "cbInitialEstimatesProvider")
+        Me.cbInitialEstimatesProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInitialEstimatesProvider.FormattingEnabled = True
+        Me.cbInitialEstimatesProvider.Items.AddRange(New Object() {resources.GetString("cbInitialEstimatesProvider.Items"), resources.GetString("cbInitialEstimatesProvider.Items1"), resources.GetString("cbInitialEstimatesProvider.Items2")})
+        Me.cbInitialEstimatesProvider.Name = "cbInitialEstimatesProvider"
+        Me.ToolTip1.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip2"))
+        '
+        'LabelSM
+        '
+        resources.ApplyResources(Me.LabelSM, "LabelSM")
+        Me.LabelSM.Name = "LabelSM"
+        Me.ToolTip1.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip2"))
+        '
+        'cbSolvingMethod
+        '
+        resources.ApplyResources(Me.cbSolvingMethod, "cbSolvingMethod")
+        Me.cbSolvingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSolvingMethod.FormattingEnabled = True
+        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1"), resources.GetString("cbSolvingMethod.Items2")})
+        Me.cbSolvingMethod.Name = "cbSolvingMethod"
+        Me.ToolTip1.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip2"))
         '
         'cbTS
         '
@@ -848,43 +866,6 @@ Partial Class EditingForm_Column
         Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip2"))
-        '
-        'cbExternalSolver
-        '
-        resources.ApplyResources(Me.cbExternalSolver, "cbExternalSolver")
-        Me.cbExternalSolver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbExternalSolver.FormattingEnabled = True
-        Me.cbExternalSolver.Name = "cbExternalSolver"
-        Me.ToolTip1.SetToolTip(Me.cbExternalSolver, resources.GetString("cbExternalSolver.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbExternalSolver, resources.GetString("cbExternalSolver.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbExternalSolver, resources.GetString("cbExternalSolver.ToolTip2"))
-        '
-        'LabelES
-        '
-        resources.ApplyResources(Me.LabelES, "LabelES")
-        Me.LabelES.Name = "LabelES"
-        Me.ToolTip1.SetToolTip(Me.LabelES, resources.GetString("LabelES.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.LabelES, resources.GetString("LabelES.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.LabelES, resources.GetString("LabelES.ToolTip2"))
-        '
-        'cbSolvingMethod
-        '
-        resources.ApplyResources(Me.cbSolvingMethod, "cbSolvingMethod")
-        Me.cbSolvingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbSolvingMethod.FormattingEnabled = True
-        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1"), resources.GetString("cbSolvingMethod.Items2")})
-        Me.cbSolvingMethod.Name = "cbSolvingMethod"
-        Me.ToolTip1.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip2"))
-        '
-        'LabelSM
-        '
-        resources.ApplyResources(Me.LabelSM, "LabelSM")
-        Me.LabelSM.Name = "LabelSM"
-        Me.ToolTip1.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip2"))
         '
         'TabPage2
         '
@@ -972,6 +953,14 @@ Partial Class EditingForm_Column
         '
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
+        '
+        'lbl1
+        '
+        resources.ApplyResources(Me.lbl1, "lbl1")
+        Me.lbl1.Name = "lbl1"
+        Me.ToolTip1.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip2"))
         '
         'EditingForm_Column
         '
@@ -1074,11 +1063,8 @@ Partial Class EditingForm_Column
     Friend WithEvents TabStages As TabPage
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents Label3 As Label
-    Public WithEvents cbExternalSolver As ComboBox
-    Public WithEvents LabelES As Label
     Public WithEvents cbSolvingMethod As ComboBox
     Public WithEvents LabelSM As Label
-    Public WithEvents btnConfigExtSolver As Button
     Public WithEvents Label10 As Label
     Public WithEvents tbSubcooling As TextBox
     Public WithEvents cbSubcooling As ComboBox
@@ -1091,4 +1077,6 @@ Partial Class EditingForm_Column
     Public WithEvents cbTS As ComboBox
     Public WithEvents tbTS As TextBox
     Public WithEvents Label17 As Label
+    Public WithEvents cbInitialEstimatesProvider As ComboBox
+    Public WithEvents lbl1 As Label
 End Class

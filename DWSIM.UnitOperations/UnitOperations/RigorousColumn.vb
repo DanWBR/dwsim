@@ -1824,6 +1824,12 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
+        Public Shared ExternalInitialEstimatesProviders As New Dictionary(Of String, IExternalColumnInitialEstimatesProvider)
+
+        Public Shared ExternalColumnSolvers As New Dictionary(Of String, IExternalColumnSolver)
+
+        Public Property InitialEstimatesProvider As String = "Internal (Default)"
+
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Columns
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Column
@@ -3618,7 +3624,13 @@ Namespace UnitOperations
 
             ColumnPropertiesProfile = ""
 
-            Dim inputdata = GetSolverInputData()
+            Dim inputdata As ColumnSolverInputData
+
+            If InitialEstimatesProvider <> "" AndAlso Column.ExternalInitialEstimatesProviders.ContainsKey(InitialEstimatesProvider) Then
+                inputdata = Column.ExternalInitialEstimatesProviders(InitialEstimatesProvider).GetInitialEstimates(Me)
+            Else
+                inputdata = GetSolverInputData()
+            End If
 
             Dim nc = inputdata.NumberOfCompounds
             Dim ns = inputdata.NumberOfStages
@@ -3689,7 +3701,7 @@ Namespace UnitOperations
                         SetColumnSolver(New SolvingMethods.WangHenkeMethod())
                         so = Solver.SolveColumn(GetSolverInputData(True))
                     End If
-                Else
+                ElseIf SolvingMethodName.Contains("Napthali") Then
                     Try
                         inputdata.CalculationMode = 0
                         SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
@@ -3705,6 +3717,12 @@ Namespace UnitOperations
                         inputdata.CalculationMode = 0
                         SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
                         so = Solver.SolveColumn(GetSolverInputData(True))
+                    End If
+                Else
+                    If Column.ExternalColumnSolvers.ContainsKey(SolvingMethodName) Then
+                        so = Column.ExternalColumnSolvers(SolvingMethodName).SolveColumn(Me, inputdata)
+                    Else
+                        Throw New Exception("Unable to find the selected column solver")
                     End If
                 End If
             ElseIf TypeOf Me Is AbsorptionColumn Then

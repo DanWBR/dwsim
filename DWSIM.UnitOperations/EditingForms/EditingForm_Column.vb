@@ -108,25 +108,27 @@ Public Class EditingForm_Column
                     .SolvingMethodName = "Burningham-Otto (Sum Rates)"
                 End If
             End If
+            Dim extrasolvers = Column.ExternalColumnSolvers.Keys.ToArray()
+            cbSolvingMethod.Items.AddRange(extrasolvers)
 
-            cbSolvingMethod.SelectedItem = .SolvingMethodName
+            Try
+                cbSolvingMethod.SelectedItem = .SolvingMethodName
+            Catch ex As Exception
+                .SolvingMethodName = "Wang-Henke (Bubble Point)"
+                cbSolvingMethod.SelectedIndex = 0
+            End Try
 
-            'external solvers
+            Dim ieproviders = Column.ExternalInitialEstimatesProviders.Keys.ToArray()
+            cbInitialEstimatesProvider.Items.Clear()
+            cbInitialEstimatesProvider.Items.Add("Internal (Default)")
+            cbInitialEstimatesProvider.Items.AddRange(ieproviders)
 
-            cbExternalSolver.Items.Clear()
-            cbExternalSolver.Items.Add("")
-            For Each sv In .FlowSheet.ExternalSolvers.Values
-                If sv.Category = Enums.ExternalSolverCategory.NonLinearSystem Then
-                    cbExternalSolver.Items.Add(sv.DisplayText)
-                End If
-            Next
-
-            Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
-            If selectedsolver IsNot Nothing Then
-                cbExternalSolver.SelectedItem = selectedsolver.DisplayText
-            Else
-                cbExternalSolver.SelectedIndex = 0
-            End If
+            Try
+                cbInitialEstimatesProvider.SelectedItem = .InitialEstimatesProvider
+            Catch ex As Exception
+                .InitialEstimatesProvider = "Internal (Default)"
+                cbInitialEstimatesProvider.SelectedIndex = 0
+            End Try
 
             If TypeOf SimObject Is DistillationColumn Then
                 chkNoCondenser.Checked = DirectCast(SimObject, DistillationColumn).ReboiledAbsorber
@@ -352,17 +354,6 @@ Public Class EditingForm_Column
             cbPropPack.SelectedItem = .PropertyPackage?.Tag
 
         End With
-
-        cbExternalSolver.SetDropDownMaxWidth()
-
-        Dim ssolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = SimObject.ExternalSolverID).FirstOrDefault()
-        If ssolver IsNot Nothing Then
-            If TryCast(ssolver, IExternalSolverConfiguration) IsNot Nothing Then
-                btnConfigExtSolver.Enabled = True
-            Else
-                btnConfigExtSolver.Enabled = False
-            End If
-        End If
 
         Loaded = True
 
@@ -802,46 +793,6 @@ Public Class EditingForm_Column
         End If
     End Sub
 
-    Private Sub cbExternalSolver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExternalSolver.SelectedIndexChanged
-        If Loaded Then
-            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
-            Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
-                Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
-            If selectedsolver IsNot Nothing Then
-                SimObject.ExternalSolverID = selectedsolver.ID
-                If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
-                    btnConfigExtSolver.Enabled = True
-                Else
-                    btnConfigExtSolver.Enabled = False
-                End If
-            Else
-                SimObject.ExternalSolverID = ""
-                btnConfigExtSolver.Enabled = False
-            End If
-        End If
-    End Sub
-
-    Private Sub btnConfigExtSolver_Click(sender As Object, e As EventArgs) Handles btnConfigExtSolver.Click
-        Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
-                Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
-        If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
-            SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
-        End If
-    End Sub
-
-    Private Sub cbSolvingMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolvingMethod.SelectedIndexChanged
-
-        SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
-        SimObject.SolvingMethodName = cbSolvingMethod.SelectedItem.ToString()
-        If cbSolvingMethod.SelectedIndex = 1 Then
-            cbExternalSolver.Enabled = True
-            LabelES.Enabled = True
-        Else
-            cbExternalSolver.Enabled = False
-            LabelES.Enabled = False
-        End If
-    End Sub
-
     Private Sub cbSubcooling_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubcooling.SelectedIndexChanged
 
         If Loaded Then
@@ -922,6 +873,28 @@ Public Class EditingForm_Column
 
             UpdateInfo()
 
+        End If
+
+    End Sub
+
+    Private Sub cbSolvingMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolvingMethod.SelectedIndexChanged
+
+        If Loaded Then
+            Try
+                SimObject.SolvingMethodName = cbSolvingMethod.SelectedItem.ToString()
+            Catch ex As Exception
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub cbInitialEstimatesProvider_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInitialEstimatesProvider.SelectedIndexChanged
+
+        If Loaded Then
+            Try
+                SimObject.InitialEstimatesProvider = cbInitialEstimatesProvider.SelectedItem.ToString()
+            Catch ex As Exception
+            End Try
         End If
 
     End Sub
