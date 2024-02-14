@@ -242,6 +242,9 @@
   <data name="GroupBoxLinkedObjects.Text" xml:space="preserve">
     <value>Linked Objects</value>
   </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>General Info</value>
+  </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 19</value>
   </data>
@@ -257,14 +260,23 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>General Info</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 225</value>
+  </data>
+  <data name="tbWG.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbWG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 314</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -278,11 +290,23 @@
   <data name="chkReverse.Text" xml:space="preserve">
     <value>Reverse Acting</value>
   </data>
+  <data name="tbOutputMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbOutputMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 181</value>
+  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 13</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Max Output (Absolute)</value>
+  </data>
+  <data name="tbOutputMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbOutputMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 155</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -296,14 +320,38 @@
   <data name="chkControllerActive.Text" xml:space="preserve">
     <value>Controller Active</value>
   </data>
+  <data name="tbOffset.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="tbOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 115</value>
+    <value>213, 113</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 118</value>
   </data>
+  <data name="tbKd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbKd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 277</value>
+  </data>
+  <data name="tbKi.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbKi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 251</value>
+  </data>
+  <data name="tbKp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="tbKp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 225</value>
+  </data>
+  <data name="tbSetPoint.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 89</value>
+    <value>213, 87</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 92</value>
@@ -313,9 +361,6 @@
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Set-Point</value>
-  </data>
-  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 352</value>
   </data>
   <data name="GroupBoxParameters.Text" xml:space="preserve">
     <value>Parameters</value>

@@ -418,4 +418,16 @@ Public Class EditingForm_PIDController
         SimObject.ReverseActing = chkReverse.Checked
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        SimObject.EstimateParameters()
+
+        tbKd.Text = SimObject.Kd
+
+        tbKp.Text = SimObject.Kp
+
+        tbKi.Text = SimObject.Ki
+
+    End Sub
+
 End Class
