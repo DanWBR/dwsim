@@ -8081,6 +8081,12 @@ Namespace Streams
             Else
                 Phases(0).Properties.volumetric_flow = 0.0#
             End If
+            For Each comp In Phases(0).Compounds.Values
+                comp.MassFlow = value * comp.MassFraction.GetValueOrDefault()
+            Next
+            For Each comp In Phases(0).Compounds.Values
+                comp.MolarFlow = Phases(0).Properties.molarflow * comp.MoleFraction.GetValueOrDefault()
+            Next
             DefinedFlow = FlowSpec.Mass
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -8101,6 +8107,12 @@ Namespace Streams
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
+            For Each comp In Phases(0).Compounds.Values
+                comp.MassFlow = value * comp.MassFraction.GetValueOrDefault()
+            Next
+            For Each comp In Phases(0).Compounds.Values
+                comp.MolarFlow = Phases(0).Properties.molarflow * comp.MoleFraction.GetValueOrDefault()
+            Next
             DefinedFlow = FlowSpec.Mass
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -8337,6 +8349,12 @@ Namespace Streams
             Else
                 Phases(0).Properties.volumetric_flow = 0.0#
             End If
+            For Each comp In Phases(0).Compounds.Values
+                comp.MolarFlow = value * comp.MolarFlow.GetValueOrDefault()
+            Next
+            For Each comp In Phases(0).Compounds.Values
+                comp.MassFlow = Phases(0).Properties.massflow * comp.MassFraction.GetValueOrDefault()
+            Next
             DefinedFlow = FlowSpec.Mole
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
@@ -8358,6 +8376,12 @@ Namespace Streams
             Phases(0).Properties.molarflow = value
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mole
+            For Each comp In Phases(0).Compounds.Values
+                comp.MolarFlow = value * comp.MolarFlow.GetValueOrDefault()
+            Next
+            For Each comp In Phases(0).Compounds.Values
+                comp.MassFlow = Phases(0).Properties.massflow * comp.MassFraction.GetValueOrDefault()
+            Next
             AtEquilibrium = False
             If GraphicObject IsNot Nothing Then
                 Return String.Format("{0}: molar flow set to {1} mol/s", GraphicObject.Tag, value)
