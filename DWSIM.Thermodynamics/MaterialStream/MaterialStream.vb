@@ -1,5 +1,5 @@
 ﻿'    Material Stream Implementation
-'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -82,6 +82,8 @@ Namespace Streams
         Public Property ForcePhase As ForcedPhase = ForcedPhase.GlobalDef Implements IMaterialStream.ForcePhase
 
         Public Property TotalEnergyFlow As Double = 0.0
+
+        Public Property MaximumAllowableDynamicMassFlowRate As Nullable(Of Double)
 
         Public Property LastSolutionInputData As MaterialStreamInputData
 
@@ -476,6 +478,12 @@ Namespace Streams
         Public Overloads Sub Calculate(equilibrium As Boolean, properties As Boolean)
 
             LastSolutionInputData = Nothing
+
+            If GraphicObject IsNot Nothing Then
+                If Not GraphicObject.InputConnectors(0).IsAttached Then
+                    MaximumAllowableDynamicMassFlowRate = Nothing
+                End If
+            End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -961,6 +969,13 @@ Namespace Streams
 
         End Sub
 
+        Public Sub DeepClear()
+
+            Clear()
+            ClearAllProps()
+
+        End Sub
+
         ''' <summary>
         ''' Clears the basic phase properties of this stream.
         ''' </summary>
@@ -998,6 +1013,8 @@ Namespace Streams
 
             If GraphicObject IsNot Nothing Then GraphicObject.Calculated = False
 
+            MaximumAllowableDynamicMassFlowRate = Nothing
+
             Calculated = False
 
         End Sub
@@ -1027,6 +1044,7 @@ Namespace Streams
                 FlowSheet?.ShowMessage("Error: " + ex.Message, IFlowsheet.MessageType.GeneralError)
             Finally
                 AtEquilibrium = False
+                MaximumAllowableDynamicMassFlowRate = Nothing
             End Try
         End Sub
 
@@ -4490,6 +4508,7 @@ Namespace Streams
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Mixture)
             Me.PropertyPackage.CurrentMaterialStream = Nothing
             AtEquilibrium = False
+            MaximumAllowableDynamicMassFlowRate = Nothing
         End Sub
 
         ''' <summary>
