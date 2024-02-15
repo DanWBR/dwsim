@@ -857,7 +857,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim ic As Integer
-            Dim t_error, t_error_ant, xcerror(ns) As Double
+            Dim t_error, t_error_ant, vf_error, xcerror(ns) As Double
             Dim Tj(ns), Tj_ant(ns), dTj(ns) As Double
             Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), xc0(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)(), Kant(ns)() As Double
             Dim Hfj(ns), Hv(ns), Hl(ns) As Double
@@ -1599,6 +1599,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Vj(i) = eff(i) * Vj(i) + (1 - eff(i)) * Vj(i + 1)
                 Next
 
+                vf_error = Vj.SubtractY(Vj_ant).AbsSqrSumY
+
                 'Ljs
                 For i = 0 To ns
                     If i < ns Then
@@ -1779,7 +1781,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
-            Loop Until t_error < tolerance * ns / 100 And ic > 1
+            Loop Until (t_error + vf_error) < tolerance * ns / 100 And ic > 1
 
             'check mass balance
             For i = 0 To ns
