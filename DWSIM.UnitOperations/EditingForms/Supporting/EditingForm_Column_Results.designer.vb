@@ -670,6 +670,7 @@ Partial Class EditingForm_Column_Results
         Me.Controls.Add(Me.Content)
         Me.Controls.Add(Me.ToolStrip1)
         Me.DoubleBuffered = True
+        Me.HideOnClose = True
         Me.Name = "EditingForm_Column_Results"
         Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         CType(Me.Content, System.ComponentModel.ISupportInitialize).EndInit()

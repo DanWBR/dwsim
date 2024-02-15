@@ -518,6 +518,7 @@ Namespace UnitOperations.Auxiliary.SepOps
         Public Property NumberOfStages As Integer
 
         Public Property MaximumIterations As Integer
+        Public Property EarlyStopIteration As Integer = -1
         Public Property Tolerances() As List(Of Double)
 
         Public Property StageTemperatures As List(Of Double)
@@ -3526,23 +3527,6 @@ Namespace UnitOperations
 
             End If
 
-            'store initial values
-
-            x0.Clear()
-            y0.Clear()
-            K0.Clear()
-            For i = 0 To ns
-                x0.Add(x(i))
-                y0.Add(y(i))
-                K0.Add(Kval(i))
-            Next
-            T0 = T
-            P0 = P
-            V0 = V
-            L0 = L
-            VSS0 = VSS
-            LSS0 = LSS
-
             IObj?.Paragraphs.Add("<h2>Column Specifications</h2>")
 
             IObj?.Paragraphs.Add("Processing Specs...")
@@ -3632,8 +3616,27 @@ Namespace UnitOperations
                 inputdata = GetSolverInputData()
             End If
 
-            Dim nc = inputdata.NumberOfCompounds
+            Dim i, j As Integer
             Dim ns = inputdata.NumberOfStages
+
+            'store initial values
+
+            x0.Clear()
+            y0.Clear()
+            K0.Clear()
+            For i = 0 To ns
+                x0.Add(inputdata.LiquidCompositions(i))
+                y0.Add(inputdata.VaporCompositions(i))
+                K0.Add(inputdata.Kvalues(i))
+            Next
+            T0 = inputdata.StageTemperatures.ToArray()
+            P0 = inputdata.StagePressures.ToArray()
+            V0 = inputdata.VaporFlows.ToArray()
+            L0 = inputdata.LiquidFlows.ToArray()
+            VSS0 = inputdata.VaporSideDraws.ToArray()
+            LSS0 = inputdata.LiquidSideDraws.ToArray()
+
+            Dim nc = inputdata.NumberOfCompounds
             Dim maxits = inputdata.MaximumIterations
             Dim tol = inputdata.Tolerances.ToArray()
             Dim F = inputdata.FeedFlows.ToArray()
@@ -3658,8 +3661,6 @@ Namespace UnitOperations
             Dim L2trials = inputdata.L2trials
             Dim x1trials = inputdata.x1trials
             Dim x2trials = inputdata.x2trials
-
-            Dim i, j As Integer
 
             Dim llextractor As Boolean = False
             Dim myabs As AbsorptionColumn = TryCast(Me, AbsorptionColumn)

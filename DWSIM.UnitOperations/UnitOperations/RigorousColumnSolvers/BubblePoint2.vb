@@ -1719,7 +1719,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             _subcoolingdeltat = input.SubcoolingDeltaT
 
             Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
-                               input.CondenserType, -1, eff, input.ColumnType, col.PropertyPackage, col.Specs, False, False)
+                               input.CondenserType, input.EarlyStopIteration, eff, input.ColumnType, col.PropertyPackage, col.Specs, False, False)
 
             Dim output As New ColumnSolverOutputData
 

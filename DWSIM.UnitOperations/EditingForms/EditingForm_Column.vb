@@ -15,6 +15,9 @@ Public Class EditingForm_Column
 
     Public Loaded As Boolean = False
 
+    Dim reditor As EditingForm_Column_Results
+    Dim fr, fr2 As ReportViewer
+
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
@@ -357,6 +360,27 @@ Public Class EditingForm_Column
 
         Loaded = True
 
+        If reditor IsNot Nothing Then
+            reditor.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
+            reditor.TabText = reditor.Text
+            reditor.FillGraphs()
+            reditor.FillTables()
+        End If
+
+        If fr IsNot Nothing Then
+            fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
+            fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
+            fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
+            fr.TextBox1.DeselectAll()
+        End If
+
+        If fr2 IsNot Nothing Then
+            fr2.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+            fr2.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
+            fr2.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
+            fr2.TextBox1.DeselectAll()
+        End If
+
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
@@ -410,7 +434,7 @@ Public Class EditingForm_Column
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnResults.Click
 
-        Dim reditor As New EditingForm_Column_Results With {.dc = Me.SimObject}
+        If reditor Is Nothing Then reditor = New EditingForm_Column_Results With {.dc = Me.SimObject}
         reditor.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
         reditor.TabText = reditor.Text
         reditor.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
@@ -839,11 +863,14 @@ Public Class EditingForm_Column
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnViewReport.Click
 
-        Dim fr As New ReportViewer()
-        fr.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
-        fr.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
-        fr.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
-        fr.TextBox1.DeselectAll()
+        If fr2 Is Nothing Then
+            fr2 = New ReportViewer()
+            fr2.HideOnClose = True
+        End If
+        fr2.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+        fr2.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr2.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr2.TextBox1.DeselectAll()
         SimObject.FlowSheet.DisplayForm(fr)
 
     End Sub
@@ -854,7 +881,10 @@ Public Class EditingForm_Column
 
     Private Sub btnViewPropertiesReport_Click(sender As Object, e As EventArgs) Handles btnViewPropertiesReport.Click
 
-        Dim fr As New ReportViewer()
+        If fr Is Nothing Then
+            fr = New ReportViewer()
+            fr.HideOnClose = True
+        End If
         fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
         fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
         fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
