@@ -186,7 +186,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For i = 0 To n
                 If i <> wid Then
-                    Vy(i) = Vy(i) * nHCy / V
+                    If V > 0 Then
+                        Vy(i) = Vy(i) * nHCy / V
+                    End If
                 End If
             Next
 

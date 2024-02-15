@@ -327,7 +327,7 @@ Namespace UnitOperations
                             Else
                                 ims.PropertyPackage.CurrentMaterialStream = ims
                                 rhog = ims.Phases(2).Properties.density.GetValueOrDefault
-                                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight.GetValueOrDefault
                                 k = Cp_ig / (Cp_ig - 8.314)
                                 rhol = ims.Phases(1).Properties.density.GetValueOrDefault
                                 Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
@@ -348,17 +348,28 @@ Namespace UnitOperations
                             End If
                         End If
 
-                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Or Wi < 0.0 Then Wi = 0.0
 
-                        ims.SetMassFlow(Wi)
-                        oms.SetMassFlow(Wi)
+                        If ims.MaximumAllowableDynamicMassFlowRate.HasValue Then
+                            Dim WiMax = ims.MaximumAllowableDynamicMassFlowRate.Value
+                            If Wi > WiMax Then
+                                ims.SetMassFlow(WiMax)
+                                oms.SetMassFlow(WiMax)
+                            Else
+                                ims.SetMassFlow(Wi)
+                                oms.SetMassFlow(Wi)
+                            End If
+                        Else
+                            ims.SetMassFlow(Wi)
+                            oms.SetMassFlow(Wi)
+                        End If
 
                     ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
                                 oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
 
                         'valid! calculate P1
 
-                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Or Wi < 0.0 Then Wi = 0.0
 
                         oms.SetMassFlow(Wi)
 
@@ -391,7 +402,7 @@ Namespace UnitOperations
 
                         Wi = oms.GetMassFlow
 
-                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Then Wi = 1.0E-20
+                        If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Or Wi < 0.0 Then Wi = 1.0E-20
 
                         ims.SetMassFlow(Wi)
 
@@ -457,7 +468,6 @@ Namespace UnitOperations
                             comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight * 1000
                             i += 1
                         Next
-                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     End With
 
                     With ims
@@ -468,7 +478,6 @@ Namespace UnitOperations
                             comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight * 1000
                             i += 1
                         Next
-                        If .GraphicObject.InputConnectors(0).IsAttached Then .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     End With
 
             End Select

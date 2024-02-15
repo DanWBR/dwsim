@@ -23,6 +23,7 @@ Imports OxyPlot.Axes
 Imports DWSIM.SharedClasses.SystemsOfUnits
 Imports interp = DWSIM.MathOps.MathEx.Interpolation
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports OxyPlot.Series
 
 Public Class Manager
 
@@ -124,15 +125,6 @@ Public Class Manager
             .Title = String.Format("Time ({0})", su.time)
         })
 
-        model.Axes.Add(New LinearAxis() With {
-            .MajorGridlineStyle = LineStyle.Dash,
-            .MinorGridlineStyle = LineStyle.Dot,
-            .Position = AxisPosition.Left,
-            .FontSize = 10,
-            .Title = "",
-            .Key = "0"
-        })
-
         model.LegendFontSize = 10
         model.LegendPlacement = LegendPlacement.Outside
         model.LegendOrientation = LegendOrientation.Horizontal
@@ -142,6 +134,21 @@ Public Class Manager
         If integrator.MonitoredVariableValues.Count = 0 Then
             Return model
         End If
+
+        i = 0
+        For Each item In integrator.MonitoredVariables
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Left,
+                .FontSize = 10,
+                .Key = item.ID,
+                .Title = integrator.MonitoredVariables(i).Description + If(item.PropertyUnits <> "", " (" + item.PropertyUnits + ")", ""),
+                .PositionTier = i,
+                .AxislineStyle = LineStyle.Solid
+            })
+            i += 1
+        Next
 
         Dim values As New List(Of List(Of Double))
         Dim names As New List(Of String)
@@ -165,6 +172,8 @@ Public Class Manager
         i = 0
         For Each l In values
             model.AddLineSeries(xavals, l, names(i))
+            DirectCast(model.Series(model.Series.Count - 1), LineSeries).Tag = integrator.MonitoredVariables(i).ID
+            DirectCast(model.Series(model.Series.Count - 1), LineSeries).YAxisKey = integrator.MonitoredVariables(i).ID
             i += 1
         Next
 

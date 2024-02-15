@@ -234,8 +234,18 @@ Namespace UnitOperations
             If GraphicObject.EnergyConnector.Active Then
                 If GraphicObject.EnergyConnector.IsAttached Then
                     If GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom IsNot Nothing Then
-                        Dim es = DirectCast(FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom.Name), IEnergyStream)
-                        ec += es.GetEnergyFlow()
+                        Try
+                            Dim es = DirectCast(FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedFrom.Name), IEnergyStream)
+                            ec += es.GetEnergyFlow()
+                        Catch ex As Exception
+                        End Try
+                    End If
+                    If GraphicObject.EnergyConnector.AttachedConnector.AttachedTo IsNot Nothing Then
+                        Try
+                            Dim es = DirectCast(FlowSheet.SimulationObjects(GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name), IEnergyStream)
+                            ec += es.GetEnergyFlow()
+                        Catch ex As Exception
+                        End Try
                     End If
                 End If
             End If

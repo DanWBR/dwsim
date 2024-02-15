@@ -232,6 +232,8 @@ Public Class FormReportConfig
 
         Dim obj As SharedClasses.UnitOperations.BaseClass
 
+        TreeViewObj.Nodes.Add("Other")
+
         For Each n As TreeNode In Me.TreeViewObj.Nodes
             n.Nodes.Clear()
         Next
@@ -313,6 +315,9 @@ Public Class FormReportConfig
         Next
         For Each obj In frm.Collections.FlowsheetObjectCollection.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.OrificePlate)
             Me.TreeViewObj.Nodes(25).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
+        Next
+        For Each obj In frm.Collections.FlowsheetObjectCollection.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.External)
+            Me.TreeViewObj.Nodes(26).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
 
         If FormMain.IsPro Then
