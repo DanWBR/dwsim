@@ -27,7 +27,7 @@ namespace DWSIM.Simulate365.Services
         private static UserService _singletonInstance;
 
         private UserDetailsModel _currentUser = null;
-        public EventHandler OnUserLoggedIn;       
+        public EventHandler OnUserLoggedIn;
         private string _accessToken = null;
         private string _refreshToken = null;
         private DateTime _accessTokenExpiresAt = DateTime.MinValue;
@@ -44,6 +44,7 @@ namespace DWSIM.Simulate365.Services
 
         #endregion
 
+        public UserDetailsModel CurrentUser { get { return _currentUser; } }
         private UserService()
         {
             // Read from registry
