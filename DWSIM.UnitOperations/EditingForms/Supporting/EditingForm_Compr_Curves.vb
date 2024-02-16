@@ -145,10 +145,11 @@ Public Class EditingForm_CompressorExpander_Curves
 
             editor.curvedata = curves
             editor.speed = speed
-            editor.Dock = DockStyle.Fill
+            'editor.Dock = DockStyle.Fill
             editor.Populate()
 
             Dim tab1 As New TabPage(speed & " rpm")
+            tab1.AutoScroll = True
             tab1.Controls.Add(editor)
 
             AddHandler editor.tbRotation.TextChanged, Sub()
@@ -172,9 +173,10 @@ Public Class EditingForm_CompressorExpander_Curves
             editor.speed = speed
             editor.Populate()
 
-            editor.Dock = DockStyle.Fill
+            'editor.Dock = DockStyle.Fill
 
             Dim tab1 As New TabPage(speed & " rpm")
+            tab1.AutoScroll = True
             tab1.Controls.Add(editor)
 
             TabControl1.TabPages.Add(tab1)
