@@ -871,7 +871,7 @@ Public Class EditingForm_Column
         fr2.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
         fr2.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
         fr2.TextBox1.DeselectAll()
-        SimObject.FlowSheet.DisplayForm(fr)
+        SimObject.FlowSheet.DisplayForm(fr2)
 
     End Sub
 
