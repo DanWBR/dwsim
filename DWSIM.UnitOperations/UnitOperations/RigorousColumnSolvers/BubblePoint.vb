@@ -1781,7 +1781,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
-            Loop Until (t_error + vf_error) < tolerance * ns / 100 And ic > 1
+            Loop Until (t_error) < tolerance * ns / 100 And ic > 1
 
             'check mass balance
             For i = 0 To ns
