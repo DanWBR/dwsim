@@ -1421,7 +1421,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Tj(i) = Tj_ant(i)
                     End If
                     For j = 0 To nc - 1
-                        If Double.IsNaN(K(i)(j)) Then K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
+                        If Double.IsNaN(K(i)(j)) Then
+                            K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
+                        End If
                     Next
                 Next
 
