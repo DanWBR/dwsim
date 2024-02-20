@@ -126,7 +126,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -147,8 +147,8 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Passo 1 - Procurar Substância</value>
   </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Fonte Principal:</value>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>A tabela abaixo mostra detalhes dos dados encontrados. Informações importantes:
@@ -160,16 +160,16 @@
 Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulação.</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dgResults.Name" xml:space="preserve">
-    <value>dgResults</value>
+    <value>2</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Fontes Secundárias:</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>A lista abaixo contém os registros encontrados para a substância pesquisada. Selecione aquele que melhor se aproxima do item buscado e clique em "Próximo" para importar os dados.</value>
+  </data>
+  <data name="&gt;&gt;btnExportJSON.Name" xml:space="preserve">
+    <value>btnExportJSON</value>
   </data>
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
@@ -192,8 +192,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 13</value>
   </data>
-  <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnPrev.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -201,11 +201,11 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;tbSearchString.Name" xml:space="preserve">
-    <value>tbSearchString</value>
+  <data name="&gt;&gt;tbSearchString.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnPrev.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
     <value>Panel1</value>
@@ -214,10 +214,10 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
     <value>Nome, Número CAS ou Fórmula</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
-  <data name="lbFoundItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 212</value>
+  <data name="dgResults.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>555, 299</value>
@@ -225,8 +225,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;LinkLabel1.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Passo 3 - Revisar Dados e Adicionar Componente</value>
@@ -244,7 +244,10 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
     <value>75, 23</value>
   </data>
   <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 13</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -258,8 +261,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label3.Text" xml:space="preserve">
     <value>Passo 2 - Selecionar Substância</value>
   </data>
-  <data name="btnPrev.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -294,6 +297,9 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="btnPrev.Text" xml:space="preserve">
     <value>&lt; Anterior</value>
   </data>
+  <data name="&gt;&gt;btnExportJSON.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>178, 224</value>
   </data>
@@ -324,13 +330,10 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 13</value>
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>Panel2</value>
-  </data>
   <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
@@ -349,7 +352,7 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
     <value>0, 133</value>
   </data>
   <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -369,6 +372,12 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Fonte Principal:</value>
+  </data>
+  <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
   <data name="tbSearchString.Location" type="System.Drawing.Point, System.Drawing">
     <value>181, 96</value>
   </data>
@@ -380,9 +389,6 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>Panel3</value>
   </data>
   <data name="&gt;&gt;btnNext.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -408,17 +414,17 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 192</value>
+  <data name="dgResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 146</value>
   </data>
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnPrev.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
   </data>
-  <data name="&gt;&gt;btnPrev.Name" xml:space="preserve">
-    <value>btnPrev</value>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -447,11 +453,14 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;LinkLabel1.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 134</value>
+  <data name="&gt;&gt;btnExportJSON.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -459,14 +468,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="dgResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 146</value>
-  </data>
   <data name="&gt;&gt;lbFoundItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 114</value>
   </data>
   <data name="&gt;&gt;tbSearchString.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -485,6 +488,9 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
+    <value>PictureBox1</value>
   </data>
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
@@ -519,8 +525,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;btnNext.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tbSearchString.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
@@ -540,14 +546,20 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="LinkLabel3.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-    <value>btnCancel</value>
+  <data name="btnPrev.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 134</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 438</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 13</value>
@@ -561,14 +573,14 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;btnPrev.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
     <value>Panel2</value>
   </data>
-  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="btnExportJSON.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 438</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -579,8 +591,11 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="LinkLabel3.Text" xml:space="preserve">
     <value>http://www.ddbst.com/unifacga.html</value>
   </data>
-  <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 24</value>
+  </data>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="btnNext.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -597,11 +612,11 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
+  <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnExportJSON.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -609,8 +624,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 133</value>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 192</value>
   </data>
   <data name="lbFoundItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 70</value>
@@ -618,11 +633,11 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
+  <data name="&gt;&gt;dgResults.Name" xml:space="preserve">
+    <value>dgResults</value>
   </data>
   <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -630,8 +645,14 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
   </data>
+  <data name="PictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="btnPrev.Location" type="System.Drawing.Point, System.Drawing">
     <value>387, 438</value>
@@ -639,8 +660,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 99</value>
   </data>
-  <data name="LinkLabel1.Text" xml:space="preserve">
-    <value>http://www.cheric.org/research/kdb/</value>
+  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;btnNext.Name" xml:space="preserve">
     <value>btnNext</value>
@@ -651,8 +672,8 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 47</value>
   </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>Panel3</value>
   </data>
   <data name="&gt;&gt;LinkLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -672,11 +693,17 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 13</value>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
+  </data>
+  <data name="&gt;&gt;btnExportJSON.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>Panel1</value>
+  </data>
+  <data name="lbFoundItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>516, 212</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -696,26 +723,29 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 24</value>
+  <data name="&gt;&gt;btnPrev.Name" xml:space="preserve">
+    <value>btnPrev</value>
+  </data>
+  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 133</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
-    <value>PictureBox1</value>
+  <data name="LinkLabel1.Text" xml:space="preserve">
+    <value>http://www.cheric.org/research/kdb/</value>
   </data>
   <data name="&gt;&gt;LinkLabel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dgResults.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 32</value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 9</value>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 114</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -726,20 +756,26 @@ Se tudo estiver ok, clique em Finalizar para adicionar o componente à simulaç�
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>Panel3</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
   </data>
   <data name="&gt;&gt;btnNext.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="PictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 9</value>
+  </data>
+  <data name="&gt;&gt;tbSearchString.Name" xml:space="preserve">
+    <value>tbSearchString</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value />

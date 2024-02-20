@@ -2,6 +2,9 @@
 Imports DWSIM.Thermodynamics.Databases.KDBLink
 Imports DWSIM.Thermodynamics.Databases.ChemeoLink
 Imports DWSIM.Thermodynamics.Databases.DDBStructureLink
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports System.IO
 
 Public Class FormImportCompoundOnline
 
@@ -208,11 +211,14 @@ Public Class FormImportCompoundOnline
                                                                                          compoundk.Acentric_Factor > 0.0# And
                                                                                          compoundk.IdealgasCpEquation <> "" Then
                                                                                          btnNext.Enabled = True
+                                                                                         btnExportJSON.Enabled = True
                                                                                      Else
                                                                                          btnNext.Enabled = False
+                                                                                         btnExportJSON.Enabled = False
                                                                                          MessageBox.Show("Could not find data for this compound in KDB Korean Thermo Database.", DWSIM.App.GetLocalString("Erro"))
                                                                                      End If
                                                                                  Else
+                                                                                     btnExportJSON.Enabled = False
                                                                                      MessageBox.Show("Could not find data for this compound in KDB Korean Thermo Database.", DWSIM.App.GetLocalString("Erro"))
                                                                                  End If
                                                                              End Sub)
@@ -260,7 +266,7 @@ Public Class FormImportCompoundOnline
                     End With
                 End If
 
-                Me.DialogResult = Windows.Forms.DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
 
                 Me.Close()
 
@@ -369,6 +375,64 @@ Public Class FormImportCompoundOnline
 
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
         Process.Start("http://www.ddbst.com/unifacga.html")
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExportJSON.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Exporting Compound to JSON", "", Nothing)
+
+        BaseCompound = compoundk.Clone
+
+        If Not compoundc Is Nothing Then
+            BaseCompound.InChI = compoundc.InChI
+            BaseCompound.SMILES = compoundc.SMILES
+            BaseCompound.Comments += vbCrLf + compoundc.Comments
+        End If
+
+        If Not structuredata Is Nothing Then
+            With BaseCompound
+                If structuredata.ContainsKey("Original") Then
+                    If .UNIFACGroups Is Nothing Then .UNIFACGroups = New SortedList
+                    .UNIFACGroups.Clear()
+                    For Each item In structuredata("Original")
+                        .UNIFACGroups.Add(item(1), item(2))
+                    Next
+                End If
+                If structuredata.ContainsKey("Modified") Then
+                    If .MODFACGroups Is Nothing Then .UNIFACGroups = New SortedList
+                    .MODFACGroups.Clear()
+                    For Each item In structuredata("Modified")
+                        .MODFACGroups.Add(item(1), item(2))
+                    Next
+                    If .NISTMODFACGroups Is Nothing Then .NISTMODFACGroups = New SortedList
+                    .NISTMODFACGroups.Clear()
+                    For Each sg As String In .MODFACGroups.Keys
+                        .NISTMODFACGroups.Add(sg, .MODFACGroups(sg))
+                    Next
+                End If
+            End With
+        End If
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
+                Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                    Try
+                        Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(BaseCompound, Newtonsoft.Json.Formatting.Indented)
+                        writer.Write(jsondata)
+                        handler.Write(stream)
+                        MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End Using
+            End Using
+        End If
+
     End Sub
 
 End Class

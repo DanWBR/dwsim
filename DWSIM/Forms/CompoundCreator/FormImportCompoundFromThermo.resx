@@ -117,17 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Minimum set of required data: Molecular Weight, Critical Temperature, Critical Pressure, Acentric Factor and Ideal Gas Heat Capacity data. If missing, the remaining properties will be estimated whenever possible.
-
-If everything is ok, click "Finish" to add the imported compound to the simulation.</value>
-  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>The search can be performed with any of the following input forms:
 
@@ -144,4 +133,9 @@ If everything is ok, click "Finish" to add the imported compound to the simulati
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Minimum set of required data: Molecular Weight, Critical Temperature, Critical Pressure, Acentric Factor and Ideal Gas Heat Capacity data. If missing, the remaining properties will be estimated whenever possible.
+
+If everything is ok, click "Finish" to add the imported compound to the simulation.</value>
+  </data>
 </root>
