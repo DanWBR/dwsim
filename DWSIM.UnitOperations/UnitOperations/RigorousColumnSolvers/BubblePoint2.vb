@@ -1446,7 +1446,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Vj(i) = eff(i) * Vj(i) + (1 - eff(i)) * Vj(i + 1)
                 Next
 
-                vf_error = Vj.SubtractY(Vj_ant).AbsSqrSumY
+                vf_error = Vj.SubtractY(Vj_ant).DivideY(Vj_ant.AddConstY(0.0000000001)).AbsSqrSumY
 
                 'Ljs
                 For i = 0 To ns
@@ -1628,7 +1628,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
-            Loop Until (t_error) < tolerance And ic > 1
+            Loop Until (t_error + vf_error) < tolerance And ic > 1
 
             'check mass balance
             For i = 0 To ns
