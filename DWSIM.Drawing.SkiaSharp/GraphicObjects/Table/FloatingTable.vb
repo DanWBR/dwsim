@@ -316,7 +316,7 @@ Namespace GraphicObjects.Tables
                             maxL3 = sizes.Select(Function(s) s.Item3.Width).Max
 
                             Width = maxL1 + maxL2 + maxL3 + 8 * Padding
-                            Height = totalH + 2 * maxH + 4 * Padding
+                            Height = totalH + heading1size.Height + heading2size.Height + 10 * Padding
 
                             If X + Width > SW Then
                                 XD -= Width - Owner.GraphicObject.Width * 1.5
@@ -338,10 +338,10 @@ Namespace GraphicObjects.Tables
                             DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint2)
 
                             'desenhar textos e retangulos
-                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, XD + Padding + margin, YD + maxH, tbpaint)
-                            canvas.DrawText(Owner.GetDisplayName(), XD + Padding + margin, YD + 2 * maxH, tpaint)
-                            canvas.DrawLine(XD + Padding + margin, YD + 2 * maxH + 2 * Padding, XD + Width - Padding - margin, YD + 2 * maxH + 2 * Padding, bpaint2)
-                            Dim y0 = YD + 3 * maxH + Padding
+                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, XD + Padding + margin, YD + heading1size.Height + Padding, tbpaint)
+                            canvas.DrawText(Owner.GetDisplayName(), XD + Padding + margin, YD + heading1size.Height + heading2size.Height + 3 * Padding, tpaint)
+                            canvas.DrawLine(XD + Padding + margin, YD + heading1size.Height + heading2size.Height + 5 * Padding, XD + Width - Padding - margin, YD + heading1size.Height + heading2size.Height + 5 * Padding, bpaint2)
+                            Dim y0 = YD + maxH + 4 * Padding + heading1size.Height + heading2size.Height
                             For Each prop In props
                                 propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
                                 pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)

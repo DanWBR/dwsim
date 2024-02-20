@@ -22,6 +22,8 @@ Public Class Functions
                 Case "PanelLogical"
                     AddUnitOp("Material Stream Switch", My.Resources.switch_material, panel)
                     AddUnitOp("Energy Stream Switch", My.Resources.switch_energy, panel)
+                Case "PanelReactors"
+                    AddUnitOp("(Semi)Batch Reactor", My.Resources.jacketedreactor_icon, panel)
             End Select
         Next
 
