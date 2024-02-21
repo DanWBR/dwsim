@@ -918,6 +918,18 @@ Public Class EditingForm_Column
 
     End Sub
 
+    Private Sub btnTestConvergence_Click(sender As Object, e As EventArgs) Handles btnTestConvergence.Click
+
+        Try
+            SimObject.TestConvergence()
+            MessageBox.Show("Converged successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            UpdateInfo()
+        Catch ex As Exception
+            MessageBox.Show("Failed to converge: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
     Private Sub cbInitialEstimatesProvider_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInitialEstimatesProvider.SelectedIndexChanged
 
         If Loaded Then

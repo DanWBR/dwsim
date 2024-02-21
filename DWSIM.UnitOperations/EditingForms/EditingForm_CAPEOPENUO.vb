@@ -510,7 +510,7 @@ Public Class EditingForm_CAPEOPENUO
 
             SimObject.UpdateConnectorPositions()
             UpdateInfo()
-            RequestCalc()
+            'RequestCalc()
 
         End If
 

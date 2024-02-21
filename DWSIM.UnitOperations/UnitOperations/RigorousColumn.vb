@@ -3604,6 +3604,13 @@ Namespace UnitOperations
 
         End Function
 
+
+        Public Sub TestConvergence()
+
+            Calculate("TestConvergence")
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             ColumnPropertiesProfile = ""
@@ -3915,181 +3922,185 @@ Namespace UnitOperations
 
             RefluxRatio = Lf(0) / (LSSf(0) + Vf(0))
 
-            'copy results to output streams
+            If args Is Nothing Then
 
-            'product flows
+                'copy results to output streams
 
-            Dim msm As MaterialStream = Nothing
-            Dim sinf As StreamInformation
+                'product flows
 
-            For Each sinf In Me.MaterialStreams.Values
-                Select Case sinf.StreamBehavior
-                    Case StreamInformation.Behavior.Distillate
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        With msm
-                            pp.CurrentMaterialStream = msm
-                            .Clear()
-                            .SpecType = StreamSpec.Pressure_and_Enthalpy
-                            .DefinedFlow = FlowSpec.Mass
-                            .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
-                            .Phases(0).Properties.molarflow = LSSf(0)
-                            .Phases(0).Properties.temperature = Tf(0)
-                            .Phases(0).Properties.pressure = P(0)
-                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MoleFraction = xf(0)(i)
-                                i += 1
-                            Next
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(0))(i)
-                                i += 1
-                            Next
-                            .Phases(3).Properties.molarfraction = 1.0
-                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                            .AtEquilibrium = True
-                        End With
-                    Case StreamInformation.Behavior.OverheadVapor
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        With msm
-                            pp.CurrentMaterialStream = msm
-                            .Clear()
-                            .SpecType = StreamSpec.Pressure_and_Enthalpy
-                            .DefinedFlow = FlowSpec.Mass
-                            .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
-                            .Phases(0).Properties.temperature = Tf(0)
-                            .Phases(0).Properties.pressure = P(0)
-                            If llextractor Then
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
-                            Else
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
-                            End If
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MoleFraction = yf(0)(i)
-                                i += 1
-                            Next
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
-                                i += 1
-                            Next
-                            If llextractor Then
-                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                                .Phases(3).Properties.molarfraction = 1.0
-                                .Phases(1).Properties.molarfraction = 1.0
-                            Else
-                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
-                                .Phases(2).Properties.molarfraction = 1.0
-                            End If
-                            .AtEquilibrium = True
-                        End With
-                    Case StreamInformation.Behavior.BottomsLiquid
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        With msm
-                            pp.CurrentMaterialStream = msm
-                            .Clear()
-                            .SpecType = StreamSpec.Pressure_and_Enthalpy
-                            .DefinedFlow = FlowSpec.Mass
-                            .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
-                            .Phases(0).Properties.temperature = Tf(ns)
-                            .Phases(0).Properties.pressure = P(ns)
-                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MoleFraction = xf(ns)(i)
-                                i += 1
-                            Next
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(ns))(i)
-                                i += 1
-                            Next
-                            .Phases(3).Properties.molarfraction = 1.0
-                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                            .AtEquilibrium = True
-                        End With
-                    Case StreamInformation.Behavior.Sidedraw
-                        Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
+                Dim msm As MaterialStream = Nothing
+                Dim sinf As StreamInformation
+
+                For Each sinf In Me.MaterialStreams.Values
+                    Select Case sinf.StreamBehavior
+                        Case StreamInformation.Behavior.Distillate
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .DefinedFlow = FlowSpec.Mass
-                                .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
-                                .Phases(0).Properties.temperature = Tf(sidx)
-                                .Phases(0).Properties.pressure = P(sidx)
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
+                                .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
+                                .Phases(0).Properties.molarflow = LSSf(0)
+                                .Phases(0).Properties.temperature = Tf(0)
+                                .Phases(0).Properties.pressure = P(0)
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MoleFraction = xf(sidx)(i)
+                                    subst.MoleFraction = xf(0)(i)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(sidx))(i)
+                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(0))(i)
                                     i += 1
                                 Next
                                 .Phases(3).Properties.molarfraction = 1.0
                                 .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
                                 .AtEquilibrium = True
                             End With
-                        ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
+                        Case StreamInformation.Behavior.OverheadVapor
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .DefinedFlow = FlowSpec.Mass
-                                .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
-                                .Phases(0).Properties.temperature = Tf(sidx)
-                                .Phases(0).Properties.pressure = P(sidx)
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
+                                .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
+                                .Phases(0).Properties.temperature = Tf(0)
+                                .Phases(0).Properties.pressure = P(0)
+                                If llextractor Then
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
+                                Else
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
+                                End If
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MoleFraction = yf(sidx)(i)
+                                    subst.MoleFraction = yf(0)(i)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
+                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
                                     i += 1
                                 Next
-                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
-                                .Phases(2).Properties.molarfraction = 1.0
+                                If llextractor Then
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                    .Phases(3).Properties.molarfraction = 1.0
+                                    .Phases(1).Properties.molarfraction = 1.0
+                                Else
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                    .Phases(2).Properties.molarfraction = 1.0
+                                End If
                                 .AtEquilibrium = True
                             End With
+                        Case StreamInformation.Behavior.BottomsLiquid
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            With msm
+                                pp.CurrentMaterialStream = msm
+                                .Clear()
+                                .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                .DefinedFlow = FlowSpec.Mass
+                                .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
+                                .Phases(0).Properties.temperature = Tf(ns)
+                                .Phases(0).Properties.pressure = P(ns)
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
+                                i = 0
+                                For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    subst.MoleFraction = xf(ns)(i)
+                                    i += 1
+                                Next
+                                i = 0
+                                For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(ns))(i)
+                                    i += 1
+                                Next
+                                .Phases(3).Properties.molarfraction = 1.0
+                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                .AtEquilibrium = True
+                            End With
+                        Case StreamInformation.Behavior.Sidedraw
+                            Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
+                                With msm
+                                    pp.CurrentMaterialStream = msm
+                                    .Clear()
+                                    .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                    .DefinedFlow = FlowSpec.Mass
+                                    .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
+                                    .Phases(0).Properties.temperature = Tf(sidx)
+                                    .Phases(0).Properties.pressure = P(sidx)
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MoleFraction = xf(sidx)(i)
+                                        i += 1
+                                    Next
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(sidx))(i)
+                                        i += 1
+                                    Next
+                                    .Phases(3).Properties.molarfraction = 1.0
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                    .AtEquilibrium = True
+                                End With
+                            ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
+                                With msm
+                                    pp.CurrentMaterialStream = msm
+                                    .Clear()
+                                    .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                    .DefinedFlow = FlowSpec.Mass
+                                    .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
+                                    .Phases(0).Properties.temperature = Tf(sidx)
+                                    .Phases(0).Properties.pressure = P(sidx)
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MoleFraction = yf(sidx)(i)
+                                        i += 1
+                                    Next
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
+                                        i += 1
+                                    Next
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                    .Phases(2).Properties.molarfraction = 1.0
+                                    .AtEquilibrium = True
+                                End With
+                            End If
+                    End Select
+                Next
+
+                'condenser/reboiler duties
+
+                Dim esm As Streams.EnergyStream
+
+                For Each sinf In Me.EnergyStreams.Values
+                    If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
+                        'condenser
+                        If sinf.StreamID <> "" Then
+                            esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            esm.EnergyFlow = Q(0)
+                            esm.GraphicObject.Calculated = True
                         End If
-                End Select
-            Next
-
-            'condenser/reboiler duties
-
-            Dim esm As Streams.EnergyStream
-
-            For Each sinf In Me.EnergyStreams.Values
-                If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
-                    'condenser
-                    If sinf.StreamID <> "" Then
-                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        esm.EnergyFlow = Q(0)
-                        esm.GraphicObject.Calculated = True
-                    End If
-                ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
-                    'reboiler
-                    If sinf.StreamID <> "" Then
-                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        If esm.GraphicObject.InputConnectors(0).IsAttached Then
-                            esm.EnergyFlow = Q(Me.NumberOfStages - 1)
-                        Else
-                            esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                    ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
+                        'reboiler
+                        If sinf.StreamID <> "" Then
+                            esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            If esm.GraphicObject.InputConnectors(0).IsAttached Then
+                                esm.EnergyFlow = Q(Me.NumberOfStages - 1)
+                            Else
+                                esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                            End If
+                            esm.GraphicObject.Calculated = True
                         End If
-                        esm.GraphicObject.Calculated = True
                     End If
-                End If
-            Next
+                Next
+
+            End If
 
         End Sub
 
