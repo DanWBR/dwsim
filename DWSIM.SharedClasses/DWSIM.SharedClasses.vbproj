@@ -90,6 +90,9 @@
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
+    <Reference Include="SpinningProgress">
+      <HintPath>..\DWSIM\References\SpinningProgress.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -155,6 +158,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Editor\ObjectEditorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\WaitForm.Designer.vb">
+      <DependentUpon>WaitForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\WaitForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ExceptionProcessing\ComponentNotFoundException.vb" />
@@ -225,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\ObjectEditorForm.resx">
       <DependentUpon>ObjectEditorForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\WaitForm.resx">
+      <DependentUpon>WaitForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

@@ -6,6 +6,7 @@ Imports DWSIM.UnitOperations.UnitOperations
 Imports System.Drawing
 Imports DWSIM.UnitOperations.UnitOperations.Column
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
+Imports DWSIM.SharedClasses
 
 Public Class EditingForm_Column
 
@@ -920,13 +921,35 @@ Public Class EditingForm_Column
 
     Private Sub btnTestConvergence_Click(sender As Object, e As EventArgs) Handles btnTestConvergence.Click
 
-        Try
-            SimObject.TestConvergence()
-            MessageBox.Show("Converged successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            UpdateInfo()
-        Catch ex As Exception
-            MessageBox.Show("Failed to converge: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        GlobalSettings.Settings.TaskCancellationTokenSource = New Threading.CancellationTokenSource()
+
+        Dim fw As New WaitForm()
+
+        AddHandler fw.btnCancel.Click, Sub()
+                                           GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
+                                       End Sub
+
+        fw.ChangeDefaultFont()
+        fw.Show()
+
+        TaskHelper.
+            Run(Sub()
+                    SimObject.TestConvergence()
+                End Sub,
+                GlobalSettings.Settings.TaskCancellationTokenSource.Token).
+                ContinueWith(Sub(t)
+                                 If t.Exception IsNot Nothing Then
+                                     MessageBox.Show("Failed to converge: " + t.Exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                 ElseIf t.IsCanceled Then
+                                     MessageBox.Show("Test cancelled by the user.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                 Else
+                                     MessageBox.Show("Converged successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                 End If
+                                 fw.UIThread(Sub()
+                                                 fw.Close()
+                                                 UpdateInfo()
+                                             End Sub)
+                             End Sub)
 
     End Sub
 
