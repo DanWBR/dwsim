@@ -323,10 +323,10 @@
     <value>Set Font Styles...</value>
   </data>
   <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 24</value>
+    <value>115, 24</value>
   </data>
   <data name="ToolStripLabel3.Text" xml:space="preserve">
-    <value>Color Theme</value>
+    <value>Flowsheet Theme</value>
   </data>
   <data name="tsbColorTheme.Items" xml:space="preserve">
     <value>Default</value>
@@ -602,7 +602,7 @@
     <value>Upgrade to DWSIM Pro</value>
   </data>
   <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 358</value>
+    <value>244, 336</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 22</value>
