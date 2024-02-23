@@ -450,7 +450,7 @@ Public Class FormDynamicsManager
                     If value <> "" Then
                         cei.SimulationObjectID = Flowsheet.GetFlowsheetGraphicObject(value).Name
                         Dim props = Flowsheet.SimulationObjects(cei.SimulationObjectID).GetProperties(PropertyType.WR)
-                        Dim cbcell = DirectCast(gridselectedset.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
+                        Dim cbcell = DirectCast(grdiselmatrix.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
                         cbcell.Items.Clear()
                         cbcell.Items.AddRange("")
                         cbcell.Items.AddRange(props.Select(Function(p) Flowsheet.GetTranslatedString1(p)).ToArray)
@@ -458,7 +458,7 @@ Public Class FormDynamicsManager
                 Case 6
                     If value <> "" Then
                         Dim props = Flowsheet.SimulationObjects(cei.SimulationObjectID).GetProperties(PropertyType.WR)
-                        Dim cbcell = DirectCast(gridselectedset.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
+                        Dim cbcell = DirectCast(grdiselmatrix.Rows(e.RowIndex).Cells(6), DataGridViewComboBoxCell)
                         cei.SimulationObjectProperty = props(cbcell.Items.IndexOf(value) - 1)
                     End If
                 Case 7
