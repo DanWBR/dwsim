@@ -666,7 +666,7 @@ Public Class FormDynamicsManager
                 If Flowsheet.SimulationObjects.ContainsKey(.ObjectID) Then
                     obj = Flowsheet.SimulationObjects(.ObjectID).GraphicObject.Tag
                     addedrow.Cells(2).Value = obj
-                    Dim props = Flowsheet.SimulationObjects(.ObjectID).GetProperties(PropertyType.WR)
+                    Dim props = Flowsheet.SimulationObjects(.ObjectID).GetProperties(PropertyType.ALL)
                     Dim cbcell = DirectCast(addedrow.Cells(3), DataGridViewComboBoxCell)
                     cbcell.Items.Clear()
                     cbcell.Items.AddRange("")

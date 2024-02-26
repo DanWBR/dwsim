@@ -1270,7 +1270,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             reporter?.AppendLine("========================================================")
             reporter?.AppendLine()
 
-            reporter?.AppendLine(String.Format("{0,-16}{1,20}", "Iteration", "Error Funtion"))
+            reporter?.AppendLine(String.Format("{0,-16}{1,20}", "Iteration", "Error Function"))
             For i = 0 To fx_error_hist.Count - 1
                 reporter?.AppendLine(String.Format("{0,-16}{1,20:G6}", i + 1, fx_error_hist(i)))
             Next
