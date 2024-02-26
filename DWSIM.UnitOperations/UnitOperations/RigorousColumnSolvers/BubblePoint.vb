@@ -1093,6 +1093,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim fx(ns), xtj(ns), dfdx(ns, ns), fxb(ns), xtjb(ns), dxtj(ns) As Double
 
             Dim t_error_hist As New List(Of Double)
+            Dim vf_error_hist As New List(Of Double)
             Dim dt_error_hist As New List(Of Double)
 
             'internal loop
@@ -1602,6 +1603,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
 
                 vf_error = Vj.SubtractY(Vj_ant).DivideY(Vj_ant.AddConstY(0.0000000001)).AbsSqrSumY
+                vf_error_hist.Add(vf_error)
 
                 'Ljs
                 For i = 0 To ns
@@ -1682,9 +1684,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         reporter?.AppendLine("========================================================")
                         reporter?.AppendLine()
 
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
                         For i = 0 To t_error_hist.Count - 1
-                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), vf_error_hist(i)))
                         Next
 
                         reporter?.AppendLine("========================================================")
@@ -1707,9 +1709,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     reporter?.AppendLine("========================================================")
                     reporter?.AppendLine()
 
-                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
                     For i = 0 To t_error_hist.Count - 1
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), vf_error_hist(i)))
                     Next
 
                     reporter?.AppendLine("========================================================")
@@ -1780,6 +1782,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
                 reporter?.AppendLine(String.Format("Temperature Error: {0} [tol: {1}]", t_error, tolerance * ns / 100))
+                reporter?.AppendLine(String.Format("Vapor Flow Error: {0} [tol: {1}]", vf_error, tolerance * ns / 100))
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
@@ -1819,10 +1822,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             reporter?.AppendLine("========================================================")
             reporter?.AppendLine()
 
-            reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+            reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
             For i = 0 To t_error_hist.Count - 1
-                reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+                reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), vf_error_hist(i)))
             Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Last Updated on " + Date.Now.ToString())
 
             If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
 

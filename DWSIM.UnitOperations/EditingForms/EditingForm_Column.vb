@@ -125,6 +125,7 @@ Public Class EditingForm_Column
             Dim ieproviders = Column.ExternalInitialEstimatesProviders.Keys.ToArray()
             cbInitialEstimatesProvider.Items.Clear()
             cbInitialEstimatesProvider.Items.Add("Internal (Default)")
+            cbInitialEstimatesProvider.Items.Add("Internal 2 (Experimental)")
             cbInitialEstimatesProvider.Items.AddRange(ieproviders)
 
             Try

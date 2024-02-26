@@ -94,6 +94,7 @@ Partial Class EditingForm_Column
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.btnTestConvergence = New System.Windows.Forms.Button()
         Me.lbl1 = New System.Windows.Forms.Label()
         Me.cbInitialEstimatesProvider = New System.Windows.Forms.ComboBox()
@@ -114,7 +115,6 @@ Partial Class EditingForm_Column
         Me.btnViewReport = New System.Windows.Forms.Button()
         Me.btnViewPropertiesReport = New System.Windows.Forms.Button()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox5.SuspendLayout()
         Me.TabContainerSpecification.SuspendLayout()
         Me.TabCondenser.SuspendLayout()
@@ -788,6 +788,14 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
         '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
+        '
         'btnTestConvergence
         '
         resources.ApplyResources(Me.btnTestConvergence, "btnTestConvergence")
@@ -810,7 +818,6 @@ Partial Class EditingForm_Column
         resources.ApplyResources(Me.cbInitialEstimatesProvider, "cbInitialEstimatesProvider")
         Me.cbInitialEstimatesProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInitialEstimatesProvider.FormattingEnabled = True
-        Me.cbInitialEstimatesProvider.Items.AddRange(New Object() {resources.GetString("cbInitialEstimatesProvider.Items"), resources.GetString("cbInitialEstimatesProvider.Items1"), resources.GetString("cbInitialEstimatesProvider.Items2")})
         Me.cbInitialEstimatesProvider.Name = "cbInitialEstimatesProvider"
         Me.ToolTip1.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip1"))
@@ -974,14 +981,6 @@ Partial Class EditingForm_Column
         '
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
-        '
-        'Label20
-        '
-        resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Name = "Label20"
-        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
         '
         'EditingForm_Column
         '

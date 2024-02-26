@@ -657,15 +657,6 @@
   <data name="Label20.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="Label20.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label20.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label20.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnTestConvergence.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>

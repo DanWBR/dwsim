@@ -1275,6 +1275,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine(String.Format("{0,-16}{1,20:G6}", i + 1, fx_error_hist(i)))
             Next
 
+            reporter?.AppendLine()
+            reporter?.AppendLine("Last Updated on " + Date.Now.ToString())
+
             Dim report As String = ""
 
             If dc.CreateSolverConvergengeReport Then dc.ColumnSolverConvergenceReport = reporter.ToString()
