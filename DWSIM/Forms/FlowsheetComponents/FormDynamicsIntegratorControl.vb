@@ -390,6 +390,7 @@ Public Class FormDynamicsIntegratorControl
                                             Flowsheet.RunCodeOnUIThread(Sub()
                                                                             ProgressBar1.Value = i0
                                                                             lblCurrent.Text = New TimeSpan(0, 0, i0).ToString("c")
+                                                                            Refresh()
                                                                         End Sub)
                                         End If
 
