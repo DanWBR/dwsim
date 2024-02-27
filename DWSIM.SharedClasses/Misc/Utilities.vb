@@ -480,7 +480,6 @@ Public Class Utility
 
         Dim unsupp_uocount = fs.SimulationObjects.Values.Where(Function(x) Not x.MobileCompatible).Count
         Dim unsupp_ppcount = fs.PropertyPackages.Values.Where(Function(x) Not x.MobileCompatible).Count
-        Dim unsupp_fscount = fs.FlowsheetOptions.FlashAlgorithms.Where(Function(x) Not x.MobileCompatible).Count
 
         If unsupp_uocount > 0 Then
             report += "Unsupported Unit Operations: "
@@ -492,13 +491,6 @@ Public Class Utility
         If unsupp_ppcount > 0 Then
             report += "Unsupported Property Packages: "
             For Each obj In fs.PropertyPackages.Values.Where(Function(x) Not x.MobileCompatible).ToList
-                report += obj.Tag + " (" + obj.Name + ")" + ", "
-            Next
-        End If
-
-        If unsupp_fscount > 0 Then
-            report += "Unsupported Flash Algorithms: "
-            For Each obj In fs.FlowsheetOptions.FlashAlgorithms.Where(Function(x) Not x.MobileCompatible).ToList
                 report += obj.Tag + " (" + obj.Name + ")" + ", "
             Next
         End If
