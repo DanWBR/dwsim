@@ -5198,9 +5198,9 @@ Namespace UnitOperations
                     ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
 
                     mV = Vf(i).ConvertFromSI(units.molarflow)
-                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(compy)).ConvertFromSI(units.massflow)
                     rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
-                    etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                    etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(compy)).ConvertFromSI(units.viscosity)
                     If Double.IsNaN(etaV) Then etaV = 0.0
                     kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
 
@@ -5213,9 +5213,9 @@ Namespace UnitOperations
                         ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid)
 
                         mV = Vf(i).ConvertFromSI(units.molarflow)
-                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(compy)).ConvertFromSI(units.massflow)
                         rhoV = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
-                        etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(compy)).ConvertFromSI(units.viscosity)
                         If Double.IsNaN(etaV) Then etaV = 0.0
                         kV = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
 
@@ -5225,9 +5225,9 @@ Namespace UnitOperations
                         ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
 
                         mV = Vf(i).ConvertFromSI(units.molarflow)
-                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(compy)).ConvertFromSI(units.massflow)
                         rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
-                        etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(compy)).ConvertFromSI(units.viscosity)
                         If Double.IsNaN(etaV) Then etaV = 0.0
                         kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
 
@@ -5240,9 +5240,9 @@ Namespace UnitOperations
                 ms.SetPhaseComposition(compx, PropertyPackages.Phase.Liquid)
 
                 mL = Lf(i).ConvertFromSI(units.molarflow)
-                wL = (Lf(i) / 1000.0 * pp.AUX_MMM(Lf(i))).ConvertFromSI(units.massflow)
+                wL = (Lf(i) / 1000.0 * pp.AUX_MMM(compx)).ConvertFromSI(units.massflow)
                 rhoL = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
-                etaL = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Lf(i))).ConvertFromSI(units.viscosity)
+                etaL = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(compx)).ConvertFromSI(units.viscosity)
                 kL = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
 
                 sigma = pp.AUX_SURFTM(Ti).ConvertFromSI(units.surfaceTension)
