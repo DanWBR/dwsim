@@ -2691,16 +2691,7 @@ Namespace UnitOperations
 
             Me.CheckConnPos()
 
-            'handle special cases when no initial estimates are used
-
-            Dim special As Boolean = False
-
             Dim Vn = FlowSheet.SelectedCompounds.Keys.ToList()
-
-            If Vn.Contains("Ethanol") And Vn.Contains("Water") Then
-                'probably an azeotrope situation.
-                special = True
-            End If
 
             'prepare variables
 
@@ -3169,46 +3160,38 @@ Namespace UnitOperations
                     If Not DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                         P(0) -= CondenserDeltaP
                     End If
-                    If special Then
-                        T1 = Tref
-                    Else
-                        Try
-                            IObj?.SetCurrent()
-                            If distVx.Sum > 0 Then
-                                Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0, distVx, Nothing, FT.Max)
-                                T1 = fcalc.CalculatedTemperature
-                                distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                    Try
+                        IObj?.SetCurrent()
+                        If distVx.Sum > 0 Then
+                            Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0, distVx, Nothing, FT.Max)
+                            T1 = fcalc.CalculatedTemperature
+                            distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        Else
+                            If Specs("C").SType = ColumnSpec.SpecType.Temperature Then
+                                T1 = Specs("C").SpecValue.ConvertToSI(Specs("C").SpecUnit)
                             Else
-                                If Specs("C").SType = ColumnSpec.SpecType.Temperature Then
-                                    T1 = Specs("C").SpecValue.ConvertToSI(Specs("C").SpecUnit)
-                                Else
-                                    T1 = pp.DW_CalcBubT(zm, P(0), FT.MinY_NonZero())(4) '* 1.01
-                                End If
+                                T1 = pp.DW_CalcBubT(zm, P(0), FT.MinY_NonZero())(4) '* 1.01
                             End If
-                        Catch ex As Exception
-                            T1 = FT.Where(Function(t_) t_ > 0.0).Min
-                        End Try
-                    End If
-                    If special Then
-                        T2 = Tref
-                    Else
-                        Try
-                            IObj?.SetCurrent()
-                            If rebVx.Sum > 0 Then
-                                Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0, rebVx, Nothing, FT.Max)
-                                T2 = fcalc.CalculatedTemperature
-                                rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        End If
+                    Catch ex As Exception
+                        T1 = FT.Where(Function(t_) t_ > 0.0).Min
+                    End Try
+                    Try
+                        IObj?.SetCurrent()
+                        If rebVx.Sum > 0 Then
+                            Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0, rebVx, Nothing, FT.Max)
+                            T2 = fcalc.CalculatedTemperature
+                            rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        Else
+                            If Specs("R").SType = ColumnSpec.SpecType.Temperature Then
+                                T2 = Specs("R").SpecValue.ConvertToSI(Specs("R").SpecUnit)
                             Else
-                                If Specs("R").SType = ColumnSpec.SpecType.Temperature Then
-                                    T2 = Specs("R").SpecValue.ConvertToSI(Specs("R").SpecUnit)
-                                Else
-                                    T2 = pp.DW_CalcDewT(zm, P(ns), FT.Max)(4) '* 0.99
-                                End If
+                                T2 = pp.DW_CalcDewT(zm, P(ns), FT.Max)(4) '* 0.99
                             End If
-                        Catch ex As Exception
-                            T2 = FT.Where(Function(t_) t_ > 0.0).Max
-                        End Try
-                    End If
+                        End If
+                    Catch ex As Exception
+                        T2 = FT.Where(Function(t_) t_ > 0.0).Max
+                    End Try
             End Select
 
             For i = 0 To ns
