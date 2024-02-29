@@ -1217,6 +1217,8 @@ Public Class FormSimulWizard
 
         Dim names = CurrentFlowsheet.SelectedCompounds.Keys.Select(Function(n) n.ToLower()).ToList()
 
+        Dim hasCP = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsCOOLPROPSupported).Count()
+
         Dim elecs = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsSalt Or c.IsIon Or c.IsHydratedSalt).Count()
 
         If elecs > 0 Then
@@ -1242,6 +1244,17 @@ Public Class FormSimulWizard
                     row.Cells(1).Value = 0
                     row.Cells(2).Value = imgCaution
                     ChangeRowForeColor(row, Color.DarkGray)
+                End If
+            Next
+        ElseIf hasCP > 0 Then
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("REFPROP") Or
+                    row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = imgOK
+                    ChangeRowForeColor(row, Color.Blue)
                 End If
             Next
         ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
@@ -1516,6 +1529,7 @@ Public Class FormSimulWizard
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Steam") Or
                     row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("REFPROP") Or
                     row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
                     row.Cells(4).Value.ToString().Contains("Raoult") Then
                     row.Cells(1).Value = 1
@@ -1569,6 +1583,8 @@ Public Class FormSimulWizard
 
         DataGridViewPP.Sort(DataGridViewPP.Columns(4), System.ComponentModel.ListSortDirection.Ascending)
         DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+
+        DataGridViewPP.FirstDisplayedScrollingRowIndex = DataGridViewPP.Rows.GetFirstRow(DataGridViewElementStates.Visible)
 
     End Sub
 
