@@ -5105,7 +5105,9 @@ Namespace UnitOperations
                     compound_balances(c) = compound_balances(c) / (compound_feeds(c) + 1.0E-20)
                 Next
 
-                If compound_balances.Values.Where(Function(b) Math.Abs(b) > 0.001).Count > 0 Then
+                Dim mintol = tol.MinY_NonZero()
+
+                If compound_balances.Values.Where(Function(b) Math.Abs(b) > mintol).Count > 0 Then
                     Throw New Exception("Failed to fulfill mass balance for at least one compound.")
                 End If
 
