@@ -4931,6 +4931,14 @@ Namespace UnitOperations
 
                 'copy results to output streams
 
+                Dim compound_balances As New Dictionary(Of String, Double)
+                Dim compound_feeds As New Dictionary(Of String, Double)
+                Dim comps = FlowSheet.SelectedCompounds.Keys.ToList()
+                For Each c In comps
+                    compound_balances.Add(c, 0.0)
+                    compound_feeds.Add(c, 0.0)
+                Next
+
                 'product flows
 
                 Dim msm As MaterialStream = Nothing
@@ -4938,6 +4946,14 @@ Namespace UnitOperations
 
                 For Each sinf In Me.MaterialStreams.Values
                     Select Case sinf.StreamBehavior
+                        Case StreamInformation.Behavior.Feed
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            With msm
+                                For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    compound_balances(subst.Name) += subst.MolarFlow.GetValueOrDefault()
+                                    compound_feeds(subst.Name) += subst.MolarFlow.GetValueOrDefault()
+                                Next
+                            End With
                         Case StreamInformation.Behavior.Distillate
                             msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
@@ -4953,6 +4969,7 @@ Namespace UnitOperations
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = xf(0)(i)
+                                    compound_balances(subst.Name) -= xf(0)(i) * LSSf(0)
                                     i += 1
                                 Next
                                 i = 0
@@ -4982,6 +4999,7 @@ Namespace UnitOperations
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = yf(0)(i)
+                                    compound_balances(subst.Name) -= yf(0)(i) * Vf(0)
                                     i += 1
                                 Next
                                 i = 0
@@ -5013,6 +5031,7 @@ Namespace UnitOperations
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = xf(ns)(i)
+                                    compound_balances(subst.Name) -= xf(ns)(i) * Lf(ns)
                                     i += 1
                                 Next
                                 i = 0
@@ -5040,6 +5059,7 @@ Namespace UnitOperations
                                     i = 0
                                     For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                         subst.MoleFraction = xf(sidx)(i)
+                                        compound_balances(subst.Name) -= xf(sidx)(i) * LSSf(sidx)
                                         i += 1
                                     Next
                                     i = 0
@@ -5064,6 +5084,7 @@ Namespace UnitOperations
                                     i = 0
                                     For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                         subst.MoleFraction = yf(sidx)(i)
+                                        compound_balances(subst.Name) -= yf(sidx)(i) * VSSf(sidx)
                                         i += 1
                                     Next
                                     i = 0
@@ -5078,6 +5099,15 @@ Namespace UnitOperations
                             End If
                     End Select
                 Next
+
+                For Each c In comps
+                    'relative errors
+                    compound_balances(c) = compound_balances(c) / (compound_feeds(c) + 1.0E-20)
+                Next
+
+                If compound_balances.Values.Where(Function(b) Math.Abs(b) > 0.001).Count > 0 Then
+                    Throw New Exception("Failed to fulfill mass balance for at least one compound.")
+                End If
 
                 'condenser/reboiler duties
 
