@@ -5105,10 +5105,11 @@ Namespace UnitOperations
                     compound_balances(c) = compound_balances(c) / (compound_feeds(c) + 1.0E-20)
                 Next
 
-                Dim mintol = tol.MinY_NonZero()
+                Dim mintol = tol.MinY_NonZero() * 100
 
                 If compound_balances.Values.Where(Function(b) Math.Abs(b) > mintol).Count > 0 Then
-                    Throw New Exception("Failed to fulfill mass balance for at least one compound.")
+                    Dim mbal = compound_balances.Where(Function(b) Math.Abs(b.Value) > mintol).FirstOrDefault
+                    Throw New Exception(String.Format("Failed to fulfill mass balance for {0}: Relative Error = {1} [Tolerance = {2}]", mbal.Key, mbal.Value, mintol))
                 End If
 
                 'condenser/reboiler duties

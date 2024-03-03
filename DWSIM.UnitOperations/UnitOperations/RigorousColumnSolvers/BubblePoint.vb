@@ -1790,13 +1790,31 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'check mass balance
             For i = 0 To ns
+                Dim haderror = False
                 If Math.Abs(yc(i).SumY - 1.0) > 0.001 Then
-                    Throw New Exception("Could not converge to a valid solution")
+                    haderror = True
                 End If
                 If Math.Abs(xc(i).SumY - 1.0) > 0.001 Then
-                    Throw New Exception("Could not converge to a valid solution")
+                    haderror = True
                 End If
                 If Lj(i) < 0.0 Or Vj(i) < 0.0 Or LSSj(i) < 0.0 Then
+                    haderror = True
+                End If
+                If haderror Then
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Error Function Progression")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
+                    For j = 0 To t_error_hist.Count - 1
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(j), vf_error_hist(j)))
+                    Next
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Convergence Error!")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+                    reporter?.AppendLine("Could not converge to a valid solution. Please check the column specs")
+                    If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
                     Throw New Exception("Could not converge to a valid solution. Please check the column specs")
                 End If
             Next

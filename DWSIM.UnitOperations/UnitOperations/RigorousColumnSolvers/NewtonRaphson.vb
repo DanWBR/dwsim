@@ -1132,7 +1132,27 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                    Return FunctionGradient(0.001, xvars)
                                                End Function, xvar)
                             Catch ex As Exception
-                                Throw ex
+
+                                reporter?.AppendLine("========================================================")
+                                reporter?.AppendLine("Error Function Progression")
+                                reporter?.AppendLine("========================================================")
+                                reporter?.AppendLine()
+
+                                reporter?.AppendLine(String.Format("{0,-16}{1,20}", "Iteration", "Error Function"))
+                                For i = 0 To fx_error_hist.Count - 1
+                                    reporter?.AppendLine(String.Format("{0,-16}{1,20:G6}", i + 1, fx_error_hist(i)))
+                                Next
+
+                                reporter?.AppendLine()
+
+                                reporter?.AppendLine(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("Failed to converge:" + ex.Message))
+
+                                reporter?.AppendLine()
+                                reporter?.AppendLine("Last Updated on " + Date.Now.ToString())
+                                If dc.CreateSolverConvergengeReport Then dc.ColumnSolverConvergenceReport = reporter.ToString()
+
+                                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+
                             End Try
                         End If
                     End If
