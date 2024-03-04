@@ -77,8 +77,20 @@ Namespace GraphicObjects.Shapes
                                 oc.Position = New Point(X + Width, Y + 0.825 * Height)
                                 oc.Direction = Enums.GraphicObjects.ConDir.Right
                             ElseIf oc.ConnectorName = "TopProduct" Then
-                                oc.Position = New Point(X + Width, Y + 0.3 * Height)
-                                oc.Direction = Enums.GraphicObjects.ConDir.Right
+
+                                Shape = 1
+
+                                If oc.IsAttached Then
+                                    Dim vf = DirectCast(oc.AttachedConnector.AttachedTo.Owner, IMaterialStream).Phases(2).Properties.molarfraction.GetValueOrDefault()
+                                    If vf > 0.97 Then Shape = 0
+                                End If
+
+                                If Shape = 0 Then
+                                    oc.Position = New Point(X + 0.7 * Width, Y + 0.02 * Height)
+                                Else
+                                    oc.Position = New Point(X + 0.9 * Width, Y + 0.3 * Height)
+                                End If
+
                             ElseIf oc.ConnectorName = "BottomProduct" Then
                                 oc.Position = New Point(X + Width, Y + 0.98 * Height)
                                 oc.Direction = Enums.GraphicObjects.ConDir.Right
@@ -117,7 +129,20 @@ Namespace GraphicObjects.Shapes
                                 oc.Position = New Point(X + 0.75 * Width, Y + 0.94 * Height)
                                 oc.Direction = Enums.GraphicObjects.ConDir.Up
                             ElseIf oc.ConnectorName = "TopProduct" Then
-                                oc.Position = New Point(X + 0.9 * Width, Y + 0.385 * Height)
+
+                                Shape = 1
+
+                                If oc.IsAttached Then
+                                    Dim vf = DirectCast(oc.AttachedConnector.AttachedTo.Owner, IMaterialStream).Phases(2).Properties.molarfraction.GetValueOrDefault()
+                                    If vf > 0.97 Then Shape = 0
+                                End If
+
+                                If Shape = 0 Then
+                                    oc.Position = New Point(X + 0.87 * Width, Y + 0.01 * Height)
+                                Else
+                                    oc.Position = New Point(X + 0.87 * Width, Y + 0.385 * Height)
+                                End If
+
                             ElseIf oc.ConnectorName = "BottomProduct" Then
                                 oc.Position = New Point(X + 0.9 * Width, Y + 0.95 * Height)
                             Else
