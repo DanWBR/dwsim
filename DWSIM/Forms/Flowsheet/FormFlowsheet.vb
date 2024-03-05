@@ -1478,7 +1478,7 @@ Public Class FormFlowsheet
             data.Add("Reactions", Me.Reactions.Count)
             data.Add("Property Packages", Me.PropertyPackages.Count)
 
-            If Not FormMain.IsPro Then
+            If Not FormMain.IsPro AndAlso My.Application.MainWindowForm IsNot Nothing Then
                 My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
             End If
 
