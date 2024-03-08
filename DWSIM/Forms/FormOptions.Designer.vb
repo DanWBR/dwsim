@@ -107,6 +107,7 @@ Partial Class FormOptions
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -610,6 +611,7 @@ Partial Class FormOptions
         'GroupBox17
         '
         resources.ApplyResources(Me.GroupBox17, "GroupBox17")
+        Me.GroupBox17.Controls.Add(Me.Label1)
         Me.GroupBox17.Controls.Add(Me.btnDownPy)
         Me.GroupBox17.Controls.Add(Me.btnSelectPythonPath)
         Me.GroupBox17.Controls.Add(Me.tbPythonPath)
@@ -743,6 +745,11 @@ Partial Class FormOptions
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
         'FormOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -872,4 +879,5 @@ Partial Class FormOptions
     Public WithEvents chkLoadExtensions As CheckBox
     Friend WithEvents TabPage2 As TabPage
     Public WithEvents btnDownPy As Button
+    Public WithEvents Label1 As Label
 End Class

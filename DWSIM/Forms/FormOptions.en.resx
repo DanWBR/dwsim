@@ -463,11 +463,33 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 74</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 13</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>DWSIM is compatible with Python versions 3.6, 3.7, 3.8 and 3.9.</value>
+  </data>
   <data name="btnDownPy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="btnDownPy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="btnDownPy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 93</value>
   </data>
   <data name="btnDownPy.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 46</value>
@@ -491,7 +513,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>11, 10</value>
   </data>
   <data name="GroupBox17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 127</value>
+    <value>373, 151</value>
   </data>
   <data name="GroupBox17.Text" xml:space="preserve">
     <value>Python.NET Interpreter Settings</value>
@@ -502,7 +524,6 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="gbLoadExtensions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkLoadExtensions.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -613,7 +634,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAVQBCwFUAQsBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAVwBCwFcAQsBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
