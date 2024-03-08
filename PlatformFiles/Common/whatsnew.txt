@@ -10,6 +10,7 @@ Version 8.7.0
 - Estimate PID Controller parameters (Classic UI)
 - Enhanced floating table drawing for big property lists
 - Dynamic valve flow calculation now obeys Material Stream's maximum allowable dynamic flow rate
+- Toggle show/hide object label
 - Fixed Heat Exchanger sizing sample
 - Fixed issue with CSTR
 - Fixed issue with PRLK enthalpy/entropy calculations (#593)
@@ -21,4 +22,6 @@ Version 8.7.0
 - Fixed issue with SimpleLLE flash algorithm
 - Fixed issue with single comp PH flash
 - Fixed issue with Dynamics Cause and Matrix editor (Classic UI)
+- Fixed port/connector positions for ChemSep column
 - CAPE-OPEN Property Package Manager fix
+- Added compound mass balance check for rigorous columns (#599)

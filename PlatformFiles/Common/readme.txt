@@ -64,12 +64,12 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.7.0
 
-- Various Rigorous Column enhancements: new initial estimates selector, enhanced reporting, test convergence tool (Classic UI)
-- Import/Export NRTL/UNIQUAC/Wilson BIPs (Classic UI)
-- Import/Export PR/SRK/PRSV2/LKP BIPs (Classic UI)
-- Wilson BIP estimation (Classic UI)
-- Data Regression Utility: added support for Wilson BIPs (Classic UI)
-- Data Regression Utility: Export regressed BIPs (Classic UI)
+- Import/Export NRTL/UNIQUAC/Wilson BIPs
+- Import/Export PR/SRK/PRSV2/LKP BIPs
+- Wilson BIP estimation
+- Various Rigorous Column enhancements: new initial estimates selector, enhanced reporting, test convergence tool
+- Data Regression Utility: added support for Wilson BIPs
+- Data Regression Utility: Export regressed BIPs
 - Export imported compounds to JSON (Classic UI)
 - Estimate PID Controller parameters (Classic UI)
 - Enhanced floating table drawing for big property lists
@@ -86,7 +86,9 @@ Version 8.7.0
 - Fixed issue with SimpleLLE flash algorithm
 - Fixed issue with single comp PH flash
 - Fixed issue with Dynamics Cause and Matrix editor (Classic UI)
+- Fixed port/connector positions for ChemSep column
 - CAPE-OPEN Property Package Manager fix
+- Added compound mass balance check for rigorous columns (#599)
 
 Version 8.6.8
 
