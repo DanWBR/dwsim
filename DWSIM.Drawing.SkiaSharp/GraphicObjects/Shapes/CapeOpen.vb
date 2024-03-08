@@ -53,8 +53,11 @@ Namespace GraphicObjects.Shapes
                         For Each ic As IConnectionPoint In Me.InputConnectors
                             If ic.ConnectorName.Contains("Feed") Then
                                 Dim stage_number = ic.ConnectorName.Split("_")(1).Replace("stage", "")
-                                ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + stage_number / 50.0 * Height)
-                                ic.Direction = Enums.GraphicObjects.ConDir.Right
+                                If stage_number > 50 Then
+                                    ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + 45 + 0.8 * (Height - 45))
+                                Else
+                                    ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + 45 + stage_number / 50.0 * (Height - 45))
+                                End If
                             ElseIf ic.ConnectorName = "Column heat duty" Then
                                 ic.Position = New Point(X + 0.5 * Width, Y + Height)
                                 ic.Direction = Enums.GraphicObjects.ConDir.Up
@@ -106,7 +109,11 @@ Namespace GraphicObjects.Shapes
                         For Each ic As IConnectionPoint In Me.InputConnectors
                             If ic.ConnectorName.Contains("Feed") Then
                                 Dim stage_number = ic.ConnectorName.Split("_")(1).Replace("stage", "")
-                                ic.Position = New Point(X + 0.15 * Width, Y + stage_number / 50.0 * Height)
+                                If stage_number > 50 Then
+                                    ic.Position = New Point(X + 0.15 * Width, Y + 45 + 0.8 * (Height - 45))
+                                Else
+                                    ic.Position = New Point(X + 0.15 * Width, Y + 45 + stage_number / 50.0 * (Height - 45))
+                                End If
                                 ic.Direction = Enums.GraphicObjects.ConDir.Right
                             ElseIf ic.ConnectorName = "Column heat duty" Then
                                 ic.Position = New Point(X + 0.15 * Width, Y + 0.8 * Height)
