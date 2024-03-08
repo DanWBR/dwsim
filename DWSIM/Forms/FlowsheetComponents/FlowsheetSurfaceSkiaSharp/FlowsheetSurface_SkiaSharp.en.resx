@@ -316,6 +316,9 @@
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Set Global Font Size</value>
   </data>
+  <data name="tbFontSize.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
   </data>
@@ -385,6 +388,9 @@
   <data name="ToolStripLabel1.Text" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="tstbSearch.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="tsbCutObj.Text" xml:space="preserve">
     <value>Cut selected objects</value>
   </data>
@@ -423,6 +429,9 @@
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Unzoom flowsheet</value>
+  </data>
+  <data name="TSTBZoom.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="TSTBZoom.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 23</value>

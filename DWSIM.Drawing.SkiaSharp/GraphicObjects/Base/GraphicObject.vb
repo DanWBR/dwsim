@@ -527,6 +527,8 @@ Namespace GraphicObjects
         <Xml.Serialization.XmlIgnore>
         Public Property Flowsheet As IFlowsheet Implements IGraphicObject.Flowsheet
 
+        Public Property DrawLabel As Boolean = True Implements IGraphicObject.DrawLabel
+
         Public Function GetForeColor() As SKColor
 
             Return Drawing.SkiaSharp.GraphicsSurface.ForegroundColor

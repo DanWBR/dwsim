@@ -139,6 +139,10 @@ Public Class FormFlowsheet
 
     Private WithEvents MessagePumpTimer As Timer
 
+    Private WithEvents CAPEOPENWarningTimer As Timer
+
+    Private PanelCOWarningDismissed = False
+
     Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
 
     Public Shared DoNotOpenSimulationWizard As Boolean = False
@@ -390,6 +394,11 @@ Public Class FormFlowsheet
         MessagePumpTimer.Interval = 500
 
         MessagePumpTimer.Start()
+
+        CAPEOPENWarningTimer = New Timer()
+        CAPEOPENWarningTimer.Interval = 60000
+
+        CAPEOPENWarningTimer.Start()
 
     End Sub
 
@@ -5488,6 +5497,14 @@ Public Class FormFlowsheet
 
     End Function
 
+    Private Sub btnDismissPanelCOWarning_Click(sender As Object, e As EventArgs) Handles btnDismissPanelCOWarning.Click
+
+        PanelCOWarningDismissed = True
+        PanelCOWarning.Visible = False
+
+    End Sub
+
+
     Public Function GetResultUnits(id As String) As String Implements IFlowsheet.GetResultUnits
 
         Select Case id
@@ -5515,6 +5532,18 @@ Public Class FormFlowsheet
         End Select
 
     End Function
+
+    Private Sub CAPEOPENWarningTimer_Tick(sender As Object, e As EventArgs) Handles CAPEOPENWarningTimer.Tick
+
+        Dim coobjs = SimulationObjects.Values.Where(Function(c) TypeOf c Is CapeOpenUO).Count
+
+        If coobjs > 0 And Not PanelCOWarningDismissed Then
+            PanelCOWarning.Visible = True
+        Else
+            PanelCOWarning.Visible = False
+        End If
+
+    End Sub
 
 #End Region
 

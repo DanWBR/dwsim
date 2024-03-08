@@ -38,6 +38,52 @@ Public Class FormDynamicsManager
 
         CheckModelStatus()
 
+
+        AddHandler gridselectedset.EditingControlShowing, AddressOf Me.EditingControlShowing1
+
+        AddHandler grdiselmatrix.EditingControlShowing, AddressOf Me.EditingControlShowing2
+
+        AddHandler gridMonitoredVariables.EditingControlShowing, AddressOf Me.EditingControlShowing3
+
+    End Sub
+
+    Private Sub EditingControlShowing1(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DirectCast(sender, DataGridView).EditingControlShowing, AddressOf cmb_SelectionChangeCommitted
+            AddHandler cmb.SelectionChangeCommitted, AddressOf cmb_SelectionChangeCommitted
+            SendKeys.Send("{F4}")
+        End If
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
+        gridselectedset.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
+    End Sub
+
+    Private Sub EditingControlShowing2(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DirectCast(sender, DataGridView).EditingControlShowing, AddressOf cmb_SelectionChangeCommitted2
+            AddHandler cmb.SelectionChangeCommitted, AddressOf cmb_SelectionChangeCommitted2
+            SendKeys.Send("{F4}")
+        End If
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted2(ByVal sender As Object, ByVal e As EventArgs)
+        grdiselmatrix.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
+    End Sub
+
+    Private Sub EditingControlShowing3(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DirectCast(sender, DataGridView).EditingControlShowing, AddressOf cmb_SelectionChangeCommitted3
+            AddHandler cmb.SelectionChangeCommitted, AddressOf cmb_SelectionChangeCommitted3
+            SendKeys.Send("{F4}")
+        End If
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted3(ByVal sender As Object, ByVal e As EventArgs)
+        gridMonitoredVariables.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkDynamics.CheckedChanged

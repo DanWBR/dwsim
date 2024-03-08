@@ -129,6 +129,7 @@ Partial Class EditingForm_Column_Connections_New
         Me.gridFeeds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridFeeds.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.c1, Me.c2})
         Me.gridFeeds.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridFeeds.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridFeeds.Location = New System.Drawing.Point(3, 3)
         Me.gridFeeds.Name = "gridFeeds"
         Me.gridFeeds.RowHeadersVisible = False
@@ -171,6 +172,7 @@ Partial Class EditingForm_Column_Connections_New
         Me.gridProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.DataGridViewTextBoxColumn1, Me.DataGridViewComboBoxColumn1})
         Me.gridProducts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridProducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridProducts.Location = New System.Drawing.Point(3, 3)
         Me.gridProducts.Name = "gridProducts"
         Me.gridProducts.RowHeadersVisible = False
@@ -212,6 +214,7 @@ Partial Class EditingForm_Column_Connections_New
         Me.gridDuties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridDuties.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column4, Me.DataGridViewTextBoxColumn3, Me.DataGridViewComboBoxColumn3})
         Me.gridDuties.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridDuties.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridDuties.Location = New System.Drawing.Point(0, 0)
         Me.gridDuties.Name = "gridDuties"
         Me.gridDuties.RowHeadersVisible = False
@@ -253,6 +256,7 @@ Partial Class EditingForm_Column_Connections_New
         Me.gridSideDraws.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridSideDraws.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5, Me.DataGridViewTextBoxColumn2, Me.DataGridViewComboBoxColumn2})
         Me.gridSideDraws.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridSideDraws.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridSideDraws.Location = New System.Drawing.Point(0, 0)
         Me.gridSideDraws.Name = "gridSideDraws"
         Me.gridSideDraws.RowHeadersVisible = False
@@ -295,6 +299,7 @@ Partial Class EditingForm_Column_Connections_New
         Me.gridAssociations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridAssociations.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column6, Me.DataGridViewTextBoxColumn4, Me.Column1, Me.DataGridViewComboBoxColumn4})
         Me.gridAssociations.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridAssociations.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridAssociations.Location = New System.Drawing.Point(3, 3)
         Me.gridAssociations.Name = "gridAssociations"
         Me.gridAssociations.RowHeadersVisible = False
@@ -343,6 +348,7 @@ Partial Class EditingForm_Column_Connections_New
         Me.gridSideDrawSpecs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridSideDrawSpecs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column7, Me.DataGridViewTextBoxColumn5, Me.DataGridViewComboBoxColumn5, Me.DataGridViewTextBoxColumn6})
         Me.gridSideDrawSpecs.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridSideDrawSpecs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridSideDrawSpecs.Location = New System.Drawing.Point(3, 3)
         Me.gridSideDrawSpecs.Name = "gridSideDrawSpecs"
         Me.gridSideDrawSpecs.RowHeadersVisible = False
@@ -374,6 +380,7 @@ Partial Class EditingForm_Column_Connections_New
         '
         'EditingForm_Column_Connections_New
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "EditingForm_Column_Connections_New"

@@ -136,7 +136,7 @@
     <value>100</value>
   </data>
   <data name="GridMalha.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 245</value>
+    <value>376, 231</value>
   </data>
   <data name="GridMalha.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -238,7 +238,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>36, 36</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Adicionar</value>
@@ -247,7 +247,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>36, 36</value>
   </data>
   <data name="ToolStripButton2.Text" xml:space="preserve">
     <value>Inserir</value>
@@ -256,7 +256,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>36, 36</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Remover</value>
@@ -265,40 +265,40 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>36, 36</value>
   </data>
   <data name="ToolStripButton4.Text" xml:space="preserve">
     <value>Remover Todos</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 39</value>
   </data>
   <data name="ToolStripButton5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>36, 36</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Aplicar Alterações</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 39</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 22</value>
+    <value>42, 36</value>
   </data>
   <data name="ToolStripLabel1.Text" xml:space="preserve">
     <value>Status:</value>
   </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 22</value>
+    <value>0, 36</value>
   </data>
   <data name="tsbImportFromTable.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsbImportFromTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>36, 36</value>
   </data>
   <data name="tsbImportFromTable.Text" xml:space="preserve">
     <value>Import from Tabular Data</value>
@@ -307,10 +307,10 @@
     <value>Import from Tabular Data</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 248</value>
+    <value>3, 234</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 25</value>
+    <value>376, 39</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

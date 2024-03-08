@@ -111,6 +111,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Sub ReleaseReferences()
 
+    Property DrawLabel As Boolean
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

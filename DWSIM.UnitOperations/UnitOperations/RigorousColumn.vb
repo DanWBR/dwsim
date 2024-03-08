@@ -1074,11 +1074,9 @@ Namespace UnitOperations
                 Dim value As Object = Nothing
                 Dim propidx As Integer = -1
 
-                Try
+                If prop.StartsWith("PROP_DC_") Then
                     Integer.TryParse(prop.Split("_")(2), propidx)
-                Catch ex As Exception
-
-                End Try
+                End If
 
                 Select Case propidx
 

@@ -4172,6 +4172,13 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Private Sub tsmiToggleDrawLabel_Click(sender As Object, e As EventArgs) Handles tsmiToggleDrawLabel.Click
+
+        FlowsheetSurface.SelectedObject.DrawLabel = Not FlowsheetSurface.SelectedObject.DrawLabel
+        Me.Flowsheet.UpdateInterface()
+
+    End Sub
+
     Public Sub ReleaseResources()
 
         FControl.FlowsheetObject = Nothing
