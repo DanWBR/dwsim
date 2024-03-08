@@ -767,29 +767,29 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        e1dGxj9PYvs3EbrF4QAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUTSURBVFhHxVdbU1NXFOal7+1j+zPa5z45007pgw/ttE/W
+        SwWFUrUq14pBijjhYgVEUbkoBUsFBRlriIAJJLAht3MSSEIukNDBK8VRp89d3d+CfQpJbJVBPTPf7L2/
+        vU7Wd9Zea+WcLHWZfu54t8zc/mFJ3aWPXicKza0frLn896po6Cw+2dizfKl3aLn7uu1ZqxzXo61v+AmQ
+        ymeybb8xunJlcOxpKg8Oe7Xt1x9XNnX2rLnOyio5de49OE88fkaLy8/prh7jcT30+QeMVD6T7dzSConQ
+        YhoPDnuYn+29uVJqvvgxC0DYz/dZHyvDNyHAZKr+u7SmNYcF4FwQSvwYYHGHeVyPYW+Ekcpnsh3RomT1
+        zKXx4LCHuUUESPrNNQTgjJRSGKi5wvoIJBaWDD6T7ctEwDKhbV5AZGjU4N+KgNmzLQb/5gXISvEd/MHg
+        t0wAalw5QbKpucJkcJGh6RGa+uprg89k644skV2fT+PBYQ9zy6S+OQE+myDxyaekx+6l2WqTGo+bEvCy
+        RxCxjJDYto0Wosk029CvvZR8sLI1OZCILTIUpwSEun+jqc+yKSa8hq2ymak/Q/N6aGsERG1OikkoTgmY
+        aWwmX8EBivxuNWyVjVZYzCW6JQJCXT0MxSkBekUlzZxpolDnVcNW2bh3fEPBy12bE5Daih3llQzFIdmA
+        idw8GvvlGo1XmQ1bttEiJLKz5T0ntqYVew8cYihORcDz7V6aD8yRfsxk2GJcCMXZ3nfocMYI4J5XOgI4
+        AhTHAuL3yZOTS8l7f5I3v8CwxRgdGef88OzNSROAipltufQKAmSNemW3AxKJ+8xBgOaPku/wEV4rcUoA
+        qiN87QZ58/IpnHy4QQASFve9tAD7wBD5a+oZsQkXcxDgs0+Rv+oUrxEJtGUlACUYHRekm05Q0BXYIGDm
+        dANNb99OIph8sQC8KmETsJ/vIP3yVfJ3dJO/u5c5l+xg072DpDW18NpzuJBCs3Ea8UVX10eKKByU3U/+
+        Ufn6LeSYSTAPuPfl8b7T6iD/wiPmbqd2QryvQTUwVlFNYsAqMUSiuoY5uz9O482tJNq6eC1MVSQsNrK6
+        V5NL7NrDTyiu9NBE00UalcKYlxESe3JIXOigMXm/UwoDbxH+Fx+Bs+Cg0Ql9R4uYwxG4a2WYZbJhPXux
+        jc8WR5B89JS8+/YzH5v0kO+kmZ3w2jFFAXMdxT1+EqXl/PTg/zMHJnfs5BFAVmOEAFdZOc1rQV6H+25y
+        M4IAlKAm98AnFu6RWyavEhBsvUxz/bdYJKL0vwJQYhN797ER4M37jpJLyyxgGvM/HjGPVh2QHRECVAmq
+        e1yyQpQArbiUBWIu8r/nPMH8hQLiLp2cZceNH/P/VE1xt74qYNdug+dmVF7BAtCyw739xh6STgSkI1kl
+        HvnUihd1DRS4OcTzNAF95879JY5XkpDnb69vXk0gQCYUOOexCj4ag/fL5PriSxorPU5i524Sg3eMvcmi
+        H8l5tITPXMhqUbytZ0AmpIyO9DN6vn2jgLa2vidBh5uAUadulFA4ssica9hB0+NugweCTg/dHRzm/XDi
+        ocHr3hA5b9uYDwVWyxRwaDHS5AsN+CG5bwgoO93yPj6XVKhUc1kPHAGQymeyhTM8cSoPDnuYd92687yo
+        tvVzFoAL32r4XMIXC/6pcEYbIBsHI5XPYIsmgzpP5cFhD85PNHZquRcuvLPmfvXCtxo+lxCa1wk8eZrz
+        t3dlZf0DP8j7NcOuxn8AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsbDynIntegrator.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -1261,7 +1261,7 @@
     <value>2</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Your simulation contains CAPE-OPEN objects that can make the application unstable. Please save your work from time to time to avoid data loss.</value>
+    <value>This simulation contains CAPE-OPEN objects that can make the application unstable. Please save your work from time to time to avoid data loss.</value>
   </data>
   <data name="Label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

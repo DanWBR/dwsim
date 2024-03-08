@@ -74,6 +74,7 @@ Version 8.7.0
 - Estimate PID Controller parameters (Classic UI)
 - Enhanced floating table drawing for big property lists
 - Dynamic valve flow calculation now obeys Material Stream's maximum allowable dynamic flow rate
+- Toggle show/hide object label
 - Fixed Heat Exchanger sizing sample
 - Fixed issue with CSTR
 - Fixed issue with PRLK enthalpy/entropy calculations (#593)

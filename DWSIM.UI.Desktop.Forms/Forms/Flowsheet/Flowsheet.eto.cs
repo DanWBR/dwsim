@@ -2220,6 +2220,13 @@ namespace DWSIM.UI.Forms
                 obj.GraphicObject.Status = item1.Checked ? Interfaces.Enums.GraphicObjects.Status.Idle : Interfaces.Enums.GraphicObjects.Status.Inactive;
             };
 
+            var item1a = new CheckMenuItem { Text = "Toggle Show/Hide Label", Checked = obj.GraphicObject.Active };
+
+            item1a.CheckedChanged += (sender, e) =>
+            {
+                obj.GraphicObject.DrawLabel = !obj.GraphicObject.DrawLabel;
+            };
+
             var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             item3.Click += (sender, e) => FlowsheetObject.RequestCalculation(obj, false);
 
@@ -2294,7 +2301,7 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), menuitem0, item7, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), item5, item6 });
+            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, item1a, new SeparatorMenuItem(), menuitem0, item7, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), item5, item6 });
 
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
             {
