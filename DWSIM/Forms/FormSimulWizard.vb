@@ -1246,17 +1246,6 @@ Public Class FormSimulWizard
                     ChangeRowForeColor(row, Color.DarkGray)
                 End If
             Next
-        ElseIf hasCP > 0 Then
-            rbSVLLE.Checked = True
-            For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(4).Value.ToString().Contains("CoolProp") Or
-                    row.Cells(4).Value.ToString().Contains("REFPROP") Or
-                    row.Cells(4).Value.ToString().Contains("Raoult") Then
-                    row.Cells(1).Value = 1
-                    row.Cells(2).Value = imgOK
-                    ChangeRowForeColor(row, Color.Blue)
-                End If
-            Next
         ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
             'Water + Hydrocarbons
             rbSVLLE.Checked = True
@@ -1282,7 +1271,7 @@ Public Class FormSimulWizard
                     Select Case ptype
                         Case PackageType.EOS, PackageType.CorrespondingStates
                             row.Cells(1).Value = 1
-                            row.Cells(2).Value = My.Resources.exclamation
+                            row.Cells(2).Value = imgOK
                             ChangeRowForeColor(row, Color.DarkGreen)
                         Case Else
                             row.Cells(1).Value = 0
@@ -1515,76 +1504,89 @@ Public Class FormSimulWizard
             Next
         End If
 
+
+        If hasCP > 0 Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("CoolProp") Or
+                        row.Cells(4).Value.ToString().Contains("REFPROP") Or
+                        row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = imgOK
+                    ChangeRowForeColor(row, Color.Blue)
+                End If
+            Next
+        End If
+
         If names.Contains("hydrogen") Then
-            For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
-                    row.Cells(1).Value = 1
-                    row.Cells(2).Value = imgOK
-                    ChangeRowForeColor(row, Color.Blue)
-                End If
-            Next
-        End If
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = imgOK
+                        ChangeRowForeColor(row, Color.Blue)
+                    End If
+                Next
+            End If
 
-        If names.Contains("water") And names.Count = 1 Then
-            For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(4).Value.ToString().Contains("Steam") Or
-                    row.Cells(4).Value.ToString().Equals("CoolProp") Or
-                    row.Cells(4).Value.ToString().Contains("REFPROP") Or
-                    row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
-                    row.Cells(4).Value.ToString().Contains("Raoult") Then
-                    row.Cells(1).Value = 1
-                    row.Cells(2).Value = imgOK
-                    ChangeRowForeColor(row, Color.Blue)
-                Else
-                    row.Cells(1).Value = 0
-                    row.Cells(2).Value = imgCaution
-                    ChangeRowForeColor(row, Color.DarkGray)
-                End If
-            Next
-        ElseIf names.Count = 1 Then
-            For Each row As DataGridViewRow In DataGridViewPP.Rows
-                If row.Cells(4).Value.ToString().Equals("CoolProp") Or
-                    row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
-                    row.Cells(4).Value.ToString().Contains("Raoult") Then
-                    row.Cells(1).Value = 1
-                    row.Cells(2).Value = imgOK
-                    ChangeRowForeColor(row, Color.Blue)
-                ElseIf Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
-                    Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
-                    Select Case pp.PackageType
-                        Case PackageType.CorrespondingStates, PackageType.EOS
-                            row.Cells(1).Value = 1
-                            row.Cells(2).Value = imgOK
-                            If pp.GetType().ToString().Contains("ProExtensions") Then
+            If names.Contains("water") And names.Count = 1 Then
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If row.Cells(4).Value.ToString().Contains("Steam") Or
+                        row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                        row.Cells(4).Value.ToString().Contains("REFPROP") Or
+                        row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
+                        row.Cells(4).Value.ToString().Contains("Raoult") Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = imgOK
+                        ChangeRowForeColor(row, Color.Blue)
+                    Else
+                        row.Cells(1).Value = 0
+                        row.Cells(2).Value = imgCaution
+                        ChangeRowForeColor(row, Color.DarkGray)
+                    End If
+                Next
+            ElseIf names.Count = 1 Then
+                For Each row As DataGridViewRow In DataGridViewPP.Rows
+                    If row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                        row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
+                        row.Cells(4).Value.ToString().Contains("Raoult") Then
+                        row.Cells(1).Value = 1
+                        row.Cells(2).Value = imgOK
+                        ChangeRowForeColor(row, Color.Blue)
+                    ElseIf Integer.TryParse(row.Cells(0).Value, New Integer) = False Then
+                        Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
+                        Select Case pp.PackageType
+                            Case PackageType.CorrespondingStates, PackageType.EOS
+                                row.Cells(1).Value = 1
+                                row.Cells(2).Value = imgOK
+                                If pp.GetType().ToString().Contains("ProExtensions") Then
+                                    ChangeRowForeColor(row, Color.DarkGreen)
+                                Else
+                                    ChangeRowForeColor(row, Color.Blue)
+                                End If
+                            Case Else
+                                row.Cells(1).Value = 0
+                                row.Cells(2).Value = imgCaution
+                                ChangeRowForeColor(row, Color.DarkGray)
+                        End Select
+                    Else
+                        Dim ptype = row.Cells(0).Value
+                        Select Case ptype
+                            Case PackageType.CorrespondingStates, PackageType.EOS
+                                row.Cells(1).Value = 1
+                                row.Cells(2).Value = imgOK
                                 ChangeRowForeColor(row, Color.DarkGreen)
-                            Else
-                                ChangeRowForeColor(row, Color.Blue)
-                            End If
-                        Case Else
-                            row.Cells(1).Value = 0
-                            row.Cells(2).Value = imgCaution
-                            ChangeRowForeColor(row, Color.DarkGray)
-                    End Select
-                Else
-                    Dim ptype = row.Cells(0).Value
-                    Select Case ptype
-                        Case PackageType.CorrespondingStates, PackageType.EOS
-                            row.Cells(1).Value = 1
-                            row.Cells(2).Value = imgOK
-                            ChangeRowForeColor(row, Color.DarkGreen)
-                        Case Else
-                            row.Cells(1).Value = 0
-                            row.Cells(2).Value = imgCaution
-                            ChangeRowForeColor(row, Color.DarkGray)
-                    End Select
-                End If
-            Next
-        End If
+                            Case Else
+                                row.Cells(1).Value = 0
+                                row.Cells(2).Value = imgCaution
+                                ChangeRowForeColor(row, Color.DarkGray)
+                        End Select
+                    End If
+                Next
+            End If
 
-        DataGridViewPP.Sort(DataGridViewPP.Columns(4), System.ComponentModel.ListSortDirection.Ascending)
-        DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+            DataGridViewPP.Sort(DataGridViewPP.Columns(4), System.ComponentModel.ListSortDirection.Ascending)
+            DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
 
-        DataGridViewPP.FirstDisplayedScrollingRowIndex = DataGridViewPP.Rows.GetFirstRow(DataGridViewElementStates.Visible)
+            DataGridViewPP.FirstDisplayedScrollingRowIndex = DataGridViewPP.Rows.GetFirstRow(DataGridViewElementStates.Visible)
 
     End Sub
 

@@ -2225,7 +2225,7 @@ Namespace UnitOperations
                         ElseIf i = Me.NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
                         Else
-                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count + 1
                         End If
                     Case ColType.AbsorptionColumn
                         If i = 0 Then
@@ -2233,7 +2233,7 @@ Namespace UnitOperations
                         ElseIf i = NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = "BottomStage"
                         Else
-                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count + 1
                         End If
                 End Select
             Next

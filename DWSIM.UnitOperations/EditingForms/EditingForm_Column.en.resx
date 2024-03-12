@@ -173,11 +173,18 @@
   <data name="TabContainerSpecification.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabCondenser.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="chkNoCondenser.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 17</value>
   </data>
   <data name="chkNoCondenser.Text" xml:space="preserve">
     <value>No Condenser (Reboiled Absorber)</value>
+  </data>
+  <data name="PanelCondenser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 204</value>
@@ -345,13 +352,19 @@
     <value>9, 38</value>
   </data>
   <data name="PanelCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 641</value>
+    <value>376, 242</value>
   </data>
   <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 765</value>
+    <value>391, 885</value>
   </data>
   <data name="TabCondenser.Text" xml:space="preserve">
     <value>Condenser</value>
+  </data>
+  <data name="TabReboiler.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PanelReboiler.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -423,7 +436,7 @@
     <value>98, 21</value>
   </data>
   <data name="PanelReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 533</value>
+    <value>380, 99</value>
   </data>
   <data name="chkNoReboiler.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 17</value>
@@ -432,7 +445,7 @@
     <value>No Reboiler (Refluxed Absorber)</value>
   </data>
   <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 765</value>
+    <value>391, 885</value>
   </data>
   <data name="TabReboiler.Text" xml:space="preserve">
     <value>Reboiler</value>
@@ -441,7 +454,7 @@
     <value>Fill</value>
   </data>
   <data name="TabContainerSpecification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 791</value>
+    <value>399, 911</value>
   </data>
   <data name="cbCondPressureUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -638,7 +651,6 @@
   <data name="Label20.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label20.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -772,7 +784,7 @@
     <value>General</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 797</value>
+    <value>405, 917</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Specifications</value>
@@ -835,10 +847,10 @@
     <value>6, 106</value>
   </data>
   <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 823</value>
+    <value>413, 943</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 941</value>
+    <value>425, 1061</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1879048192, 7137113, 1879048192, 7137113</value>
