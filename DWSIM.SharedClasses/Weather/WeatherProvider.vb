@@ -94,6 +94,8 @@ Public Class WeatherProvider
 
         Using client = New HttpClient()
 
+            client.Timeout = New TimeSpan(0, 0, 10)
+
             Using request = New HttpRequestMessage()
 
                 request.Method = HttpMethod.Get
