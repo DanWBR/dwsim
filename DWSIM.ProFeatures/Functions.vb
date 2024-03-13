@@ -45,31 +45,43 @@ Public Class Functions
 
     Public Shared Sub AddProPPs(grid As DataGridView)
 
-        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "NRTL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "UNIQUAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "UNIFAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "UNIFAC-LL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "Modified UNIFAC (Dortmund) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "Modified UNIFAC (NIST) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "Amines", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
+        grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "Peng-Robinson 1978 (PR78) for Petroleum Industry", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
+        'grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "NRTL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "UNIQUAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "UNIFAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "UNIFAC-LL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "Modified UNIFAC (Dortmund) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {PackageType.ActivityCoefficient, 0, Nothing, My.Resources.Icon1281, "Modified UNIFAC (NIST) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
         grid.Rows.Add(New Object() {PackageType.Miscelaneous, 0, Nothing, My.Resources.Icon1281, "REFPROP", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
         grid.Rows.Add(New Object() {PackageType.Miscelaneous, 0, Nothing, My.Resources.Icon1281, "Extended CoolProp", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.EOS, 0, Nothing, My.Resources.Icon1281, "Peng-Robinson 1978 Pro (PR78 Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {PackageType.EOS, 0, Nothing, My.Resources.Icon1281, "Soave-Redlich-Kwong Pro (SRK Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
+        'grid.Rows.Add(New Object() {PackageType.EOS, 0, Nothing, My.Resources.Icon1281, "Peng-Robinson 1978 Pro (PR78 Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {PackageType.EOS, 0, Nothing, My.Resources.Icon1281, "Soave-Redlich-Kwong Pro (SRK Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
 
     End Sub
 
     Public Shared Sub AddProPPs2(grid As DataGridView)
 
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "NRTL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "UNIQUAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "UNIFAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "UNIFAC-LL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Modified UNIFAC (Dortmund) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Modified UNIFAC (NIST) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Amines", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
+        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Peng-Robinson 1978 (PR78) for Petroleum Industry", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "NRTL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "UNIQUAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "UNIFAC (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "UNIFAC-LL (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Modified UNIFAC (Dortmund) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Modified UNIFAC (NIST) (Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
         grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "REFPROP", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
         grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Extended CoolProp", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Peng-Robinson 1978 Pro (PR78 Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
-        grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Soave-Redlich-Kwong Pro (SRK Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        grid.Rows(grid.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Honeydew
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Peng-Robinson 1978 Pro (PR78 Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
+        'grid.Rows.Add(New Object() {"", My.Resources.Icon1281, "Soave-Redlich-Kwong Pro (SRK Pro)", "Upgrade to DWSIM Pro to use this Property Package."})
 
     End Sub
 
