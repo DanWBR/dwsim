@@ -857,7 +857,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim ic As Integer
-            Dim t_error, t_error_ant, xcerror(ns) As Double
+            Dim t_error, t_error_ant, vf_error, xcerror(ns) As Double
             Dim Tj(ns), Tj_ant(ns), dTj(ns) As Double
             Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), xc0(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)(), Kant(ns)() As Double
             Dim Hfj(ns), Hv(ns), Hl(ns) As Double
@@ -1093,6 +1093,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim fx(ns), xtj(ns), dfdx(ns, ns), fxb(ns), xtjb(ns), dxtj(ns) As Double
 
             Dim t_error_hist As New List(Of Double)
+            Dim vf_error_hist As New List(Of Double)
             Dim dt_error_hist As New List(Of Double)
 
             'internal loop
@@ -1421,7 +1422,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Tj(i) = Tj_ant(i)
                     End If
                     For j = 0 To nc - 1
-                        If Double.IsNaN(K(i)(j)) Then K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
+                        If Double.IsNaN(K(i)(j)) Then
+                            K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
+                        End If
                     Next
                 Next
 
@@ -1599,6 +1602,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Vj(i) = eff(i) * Vj(i) + (1 - eff(i)) * Vj(i + 1)
                 Next
 
+                vf_error = Vj.SubtractY(Vj_ant).DivideY(Vj_ant.AddConstY(0.0000000001)).AbsSqrSumY
+                vf_error_hist.Add(vf_error)
+
                 'Ljs
                 For i = 0 To ns
                     If i < ns Then
@@ -1678,9 +1684,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         reporter?.AppendLine("========================================================")
                         reporter?.AppendLine()
 
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
                         For i = 0 To t_error_hist.Count - 1
-                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+                            reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), vf_error_hist(i)))
                         Next
 
                         reporter?.AppendLine("========================================================")
@@ -1703,9 +1709,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     reporter?.AppendLine("========================================================")
                     reporter?.AppendLine()
 
-                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
                     For i = 0 To t_error_hist.Count - 1
-                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), vf_error_hist(i)))
                     Next
 
                     reporter?.AppendLine("========================================================")
@@ -1776,20 +1782,39 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine()
                 reporter?.AppendLine()
                 reporter?.AppendLine(String.Format("Temperature Error: {0} [tol: {1}]", t_error, tolerance * ns / 100))
+                reporter?.AppendLine(String.Format("Vapor Flow Error: {0} [tol: {1}]", vf_error, tolerance * ns / 100))
                 reporter?.AppendLine()
                 reporter?.AppendLine()
 
-            Loop Until t_error < tolerance * ns / 100 And ic > 1
+            Loop Until (t_error + vf_error) < tolerance * ns / 100 And ic > 1
 
             'check mass balance
             For i = 0 To ns
+                Dim haderror = False
                 If Math.Abs(yc(i).SumY - 1.0) > 0.001 Then
-                    Throw New Exception("Could not converge to a valid solution")
+                    haderror = True
                 End If
                 If Math.Abs(xc(i).SumY - 1.0) > 0.001 Then
-                    Throw New Exception("Could not converge to a valid solution")
+                    haderror = True
                 End If
                 If Lj(i) < 0.0 Or Vj(i) < 0.0 Or LSSj(i) < 0.0 Then
+                    haderror = True
+                End If
+                If haderror Then
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Error Function Progression")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+                    reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
+                    For j = 0 To t_error_hist.Count - 1
+                        reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(j), vf_error_hist(j)))
+                    Next
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine("Convergence Error!")
+                    reporter?.AppendLine("========================================================")
+                    reporter?.AppendLine()
+                    reporter?.AppendLine("Could not converge to a valid solution. Please check the column specs")
+                    If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
                     Throw New Exception("Could not converge to a valid solution. Please check the column specs")
                 End If
             Next
@@ -1815,10 +1840,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             reporter?.AppendLine("========================================================")
             reporter?.AppendLine()
 
-            reporter?.AppendLine(String.Format("{0,-16}{1,26}", "Iteration", "Temperature Error"))
+            reporter?.AppendLine(String.Format("{0,-16}{1,26}{2,26}", "Iteration", "Temperature Error", "Vapor Flow Error"))
             For i = 0 To t_error_hist.Count - 1
-                reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}", i + 1, t_error_hist(i)))
+                reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), vf_error_hist(i)))
             Next
+
+            reporter?.AppendLine()
+            reporter?.AppendLine("Last Updated on " + Date.Now.ToString())
 
             If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
 

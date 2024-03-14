@@ -39,6 +39,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.UnitOperations.UnitOperations.Column
 Imports DWSIM.UnitOperations.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps.SolvingMethods
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -518,6 +519,7 @@ Namespace UnitOperations.Auxiliary.SepOps
         Public Property NumberOfStages As Integer
 
         Public Property MaximumIterations As Integer
+        Public Property EarlyStopIteration As Integer = -1
         Public Property Tolerances() As List(Of Double)
 
         Public Property StageTemperatures As List(Of Double)
@@ -1072,11 +1074,9 @@ Namespace UnitOperations
                 Dim value As Object = Nothing
                 Dim propidx As Integer = -1
 
-                Try
+                If prop.StartsWith("PROP_DC_") Then
                     Integer.TryParse(prop.Split("_")(2), propidx)
-                Catch ex As Exception
-
-                End Try
+                End If
 
                 Select Case propidx
 
@@ -2225,7 +2225,7 @@ Namespace UnitOperations
                         ElseIf i = Me.NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
                         Else
-                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count + 1
                         End If
                     Case ColType.AbsorptionColumn
                         If i = 0 Then
@@ -2233,7 +2233,7 @@ Namespace UnitOperations
                         ElseIf i = NumberOfStages - 1 Then
                             _st(_st.Count - 1).Name = "BottomStage"
                         Else
-                            _st(_st.Count - 1).Name = "Stage" & _st.Count - 1
+                            _st(_st.Count - 1).Name = "Stage" & _st.Count + 1
                         End If
                 End Select
             Next
@@ -2689,16 +2689,7 @@ Namespace UnitOperations
 
             Me.CheckConnPos()
 
-            'handle special cases when no initial estimates are used
-
-            Dim special As Boolean = False
-
             Dim Vn = FlowSheet.SelectedCompounds.Keys.ToList()
-
-            If Vn.Contains("Ethanol") And Vn.Contains("Water") Then
-                'probably an azeotrope situation.
-                special = True
-            End If
 
             'prepare variables
 
@@ -3167,46 +3158,38 @@ Namespace UnitOperations
                     If Not DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                         P(0) -= CondenserDeltaP
                     End If
-                    If special Then
-                        T1 = Tref
-                    Else
-                        Try
-                            IObj?.SetCurrent()
-                            If distVx.Sum > 0 Then
-                                Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0, distVx, Nothing, FT.Max)
-                                T1 = fcalc.CalculatedTemperature
-                                distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                    Try
+                        IObj?.SetCurrent()
+                        If distVx.Sum > 0 Then
+                            Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0, distVx, Nothing, FT.Max)
+                            T1 = fcalc.CalculatedTemperature
+                            distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        Else
+                            If Specs("C").SType = ColumnSpec.SpecType.Temperature Then
+                                T1 = Specs("C").SpecValue.ConvertToSI(Specs("C").SpecUnit)
                             Else
-                                If Specs("C").SType = ColumnSpec.SpecType.Temperature Then
-                                    T1 = Specs("C").SpecValue.ConvertToSI(Specs("C").SpecUnit)
-                                Else
-                                    T1 = pp.DW_CalcBubT(zm, P(0), FT.MinY_NonZero())(4) '* 1.01
-                                End If
+                                T1 = pp.DW_CalcBubT(zm, P(0), FT.MinY_NonZero())(4) '* 1.01
                             End If
-                        Catch ex As Exception
-                            T1 = FT.Where(Function(t_) t_ > 0.0).Min
-                        End Try
-                    End If
-                    If special Then
-                        T2 = Tref
-                    Else
-                        Try
-                            IObj?.SetCurrent()
-                            If rebVx.Sum > 0 Then
-                                Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0, rebVx, Nothing, FT.Max)
-                                T2 = fcalc.CalculatedTemperature
-                                rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        End If
+                    Catch ex As Exception
+                        T1 = FT.Where(Function(t_) t_ > 0.0).Min
+                    End Try
+                    Try
+                        IObj?.SetCurrent()
+                        If rebVx.Sum > 0 Then
+                            Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0, rebVx, Nothing, FT.Max)
+                            T2 = fcalc.CalculatedTemperature
+                            rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        Else
+                            If Specs("R").SType = ColumnSpec.SpecType.Temperature Then
+                                T2 = Specs("R").SpecValue.ConvertToSI(Specs("R").SpecUnit)
                             Else
-                                If Specs("R").SType = ColumnSpec.SpecType.Temperature Then
-                                    T2 = Specs("R").SpecValue.ConvertToSI(Specs("R").SpecUnit)
-                                Else
-                                    T2 = pp.DW_CalcDewT(zm, P(ns), FT.Max)(4) '* 0.99
-                                End If
+                                T2 = pp.DW_CalcDewT(zm, P(ns), FT.Max)(4) '* 0.99
                             End If
-                        Catch ex As Exception
-                            T2 = FT.Where(Function(t_) t_ > 0.0).Max
-                        End Try
-                    End If
+                        End If
+                    Catch ex As Exception
+                        T2 = FT.Where(Function(t_) t_ > 0.0).Max
+                    End Try
             End Select
 
             For i = 0 To ns
@@ -3526,23 +3509,6 @@ Namespace UnitOperations
 
             End If
 
-            'store initial values
-
-            x0.Clear()
-            y0.Clear()
-            K0.Clear()
-            For i = 0 To ns
-                x0.Add(x(i))
-                y0.Add(y(i))
-                K0.Add(Kval(i))
-            Next
-            T0 = T
-            P0 = P
-            V0 = V
-            L0 = L
-            VSS0 = VSS
-            LSS0 = LSS
-
             IObj?.Paragraphs.Add("<h2>Column Specifications</h2>")
 
             IObj?.Paragraphs.Add("Processing Specs...")
@@ -3620,6 +3586,1032 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overridable Function GetSolverInputData_New(Optional ByVal ignoreuserestimates As Boolean = False) As ColumnSolverInputData
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("For any stage in a countercurrent cascade, assume (1) phase equilibrium is achieved at each stage, (2) no chemical reactions occur, and (3) entrainment of liquid drops in vapor and occlusion of vapor bubbles in liquid are negligible. Figure 1 represents such a stage for the vapor–liquid case, where the stages are numbered down from the top. The same representation applies to liquid–liquid extraction if the higher-density liquid phases are represented by liquid streams and the lower-density liquid phases are represented by vapor streams.")
+
+            IObj?.Paragraphs.Add(InspectorItem.GetImageHTML("image1.jpg"))
+
+            IObj?.Paragraphs.Add("Entering stage j is a single- or two-phase feed of molar flow rate Fj, with overall composition in mole fractions zi,j of component i, temperature TFj , pressure PFj , and corresponding overall molar enthalpy hFj.")
+
+            IObj?.Paragraphs.Add("Also entering stage j is interstage liquid from stage j-1 above, if any, of molar flow rate Lj-1, with composition in mole fractions xij-1, enthalpy hLj-1, temperature Tj-1, and pressure Pj-1, which is equal to or less than the pressure of stage j. Pressure of liquid from stage j-1 is increased adiabatically by hydrostatic head change across head L.")
+
+            IObj?.Paragraphs.Add("Similarly, from stage j+1 below, interstage vapor of molar flow rate V+1, with composition in mole fractions yij+1, enthalpy hV+1, temperature Tj+1, and pressure Pj+1 enters stage j.")
+
+            IObj?.Paragraphs.Add("Leaving stage j is vapor of intensive properties yij, hVj, Tj, and Pj. This stream can be divided into a vapor sidestream of molar flow rate Wj and an interstage stream of molar flow rate Vj to be sent to stage j-1 or, if j=1, to leave as a product. Also leaving stage j is liquid of intensive properties xij, hLj, Tj, and Pj, in equilibrium with vapor (Vj+Wj). This liquid is divided into a sidestream of molar flow rate Uj and an interstage stream of molar flow rate Lj to be sent to stage j+1 or, if j=N, to leave as a product.")
+
+            IObj?.Paragraphs.Add("Associated with each general stage are the following indexed equations expressed in terms of the variable set in Figure 1. However, variables other than those shown in Figure 1 can be used, e.g. component flow rates can replace mole fractions, and sidestream flow rates can be expressed as fractions of interstage flow rates. The equations are referred to as MESH equations, after Wang and Henke.")
+
+            IObj?.Paragraphs.Add("M equations—Material balance for each component (C equations for each stage).")
+
+            IObj?.Paragraphs.Add("<m>M_{i,j}=L_{j-1}x_{i,j-1}+V_{j+1}y_{i,j+1}+F_jz_{i,j}-(L_j+U_j)x_{i,j}-(V_j+W_j)y_{i,j}</m>")
+
+            IObj?.Paragraphs.Add("E equations—phase-Equilibrium relation for each component (C equations for each stage),")
+
+            IObj?.Paragraphs.Add("<m>E_{i,j}=y_{i,j}-K_{i,j}x_{i,j}=0</m>")
+
+            IObj?.Paragraphs.Add("where <mi>K_{i,j}</mi> is the phase-equilibrium ratio or K-value.")
+
+            IObj?.Paragraphs.Add("S equations—mole-fraction Summations (one for each stage),")
+
+            IObj?.Paragraphs.Add("<m>(S_y)_j=\sum\limits_{i=1}^{C}{y_{i,j}}-1=0</m>")
+
+            IObj?.Paragraphs.Add("<m>(S_x)_j=\sum\limits_{i=1}^{C}{x_{i,j}} -1=0</m>")
+
+            IObj?.Paragraphs.Add("H equation—energy balance (one for each stage).")
+
+            IObj?.Paragraphs.Add("<m>H_j=L_{j-1}h_{L_{j-1}}+V_{j+1}h_{V_{j+1}}+F_jh_{F_j}-(L_j+U_j)h_{L_j}-(V_j+W_j)h_{V_j}-Q_j=0</m>")
+
+            IObj?.Paragraphs.Add("A countercurrent cascade of N such stages is represented by N(2C+3) such equations in [N(3C+10)+1] variables. If N and all Fj, zij, TFj, PFj, Pj, Uj, Wj, and Qj are specified, the model is represented by N(2C+3) simultaneous algebraic equations in N(2C+3) unknown (output) variables comprising all xij, yij, Lj, Vj, and Tj, where the M, E, and H equations are nonlinear. If other variables are specified, corresponding substitutions are made to the list of output variables. Regardless, the result is a set containing nonlinear equations that must be solved by an iterative technique.")
+
+            IObj?.Paragraphs.Add("<h2>Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add("DWSIM will calculate new or use existing initial estimates and forward the values to the selected solver.")
+
+            'Validate unitop status.
+
+            Me.Validate()
+
+            'Check connectors' positions
+
+            Me.CheckConnPos()
+
+            'handle special cases when no initial estimates are used
+
+            Dim special As Boolean = False
+
+            Dim Vn = FlowSheet.SelectedCompounds.Keys.ToList()
+
+            If Vn.Contains("Ethanol") And Vn.Contains("Water") Then
+                'probably an azeotrope situation.
+                special = True
+            End If
+
+            'prepare variables
+
+            Dim llextractor As Boolean = False
+            Dim myabs As AbsorptionColumn = TryCast(Me, AbsorptionColumn)
+            If myabs IsNot Nothing Then
+                If CType(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Absorber Then
+                    llextractor = False
+                Else
+                    llextractor = True
+                End If
+            End If
+
+            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
+
+            Dim nc, ns, maxits, i, j As Integer
+            Dim firstF As Integer = -1
+            Dim lastF As Integer = -1
+            nc = Me.FlowSheet.SelectedCompounds.Count
+            ns = Me.Stages.Count - 1
+            maxits = Me.MaxIterations
+
+            Dim tol(4) As Double
+            tol(0) = Me.InternalLoopTolerance
+            tol(1) = Me.ExternalLoopTolerance
+
+            Dim F(ns), Q(ns), V(ns), L(ns), VSS(ns), LSS(ns), HF(ns), T(ns), FT(ns), P(ns), fracv(ns), eff(ns),
+              distrate, rr, vaprate As Double
+
+            Dim x(ns)() As Double, y(ns)() As Double, z(ns)() As Double, fc(ns)() As Double
+            Dim idealK(ns)(), Kval(ns)(), Pvap(ns)() As Double
+
+            For i = 0 To ns
+                Array.Resize(x(i), nc)
+                Array.Resize(y(i), nc)
+                Array.Resize(fc(i), nc)
+                Array.Resize(z(i), nc)
+                Array.Resize(idealK(i), nc)
+                Array.Resize(Kval(i), nc)
+                Array.Resize(Pvap(i), nc)
+            Next
+
+            If Not Double.IsNaN(ColumnPressureDrop) Then
+                For i = 1 To ns
+                    Stages(i).P = Stages(0).P + Convert.ToDouble(i) / Convert.ToDouble(ns) * ColumnPressureDrop
+                Next
+            End If
+
+            i = 0
+            For Each st As Stage In Me.Stages
+                P(i) = st.P
+                i += 1
+            Next
+
+            Dim sumcf(nc - 1), sumF, zm(nc - 1), xtop(nc - 1), ytop(nc - 1), xbot(nc - 1), ybot(nc - 1), alpha(nc - 1), distVx(nc - 1), rebVx(nc - 1), distVy(nc - 1), rebVy(nc - 1) As Double
+
+            IObj?.Paragraphs.Add("Collecting data from connected streams...")
+
+            i = 0
+
+            Dim stream As MaterialStream = Nothing
+
+            For Each ms As StreamInformation In Me.MaterialStreams.Values
+                Select Case ms.StreamBehavior
+                    Case StreamInformation.Behavior.Feed
+                        stream = FlowSheet.SimulationObjects(ms.StreamID)
+                        pp.CurrentMaterialStream = stream
+                        F(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.molarflow.GetValueOrDefault
+                        HF(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.enthalpy.GetValueOrDefault *
+                                                              stream.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                        FT(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.temperature.GetValueOrDefault
+                        sumF += F(StageIndex(ms.AssociatedStage))
+                        j = 0
+                        For Each comp As Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
+                            fc(StageIndex(ms.AssociatedStage))(j) = comp.MoleFraction.GetValueOrDefault
+                            z(StageIndex(ms.AssociatedStage))(j) = comp.MoleFraction.GetValueOrDefault
+                            sumcf(j) += comp.MoleFraction.GetValueOrDefault * F(StageIndex(ms.AssociatedStage))
+                            j = j + 1
+                        Next
+                        If firstF = -1 Then firstF = StageIndex(ms.AssociatedStage)
+                    Case StreamInformation.Behavior.Sidedraw
+                        If ms.StreamPhase = StreamInformation.Phase.V Then
+                            VSS(StageIndex(ms.AssociatedStage)) = ms.FlowRate.Value
+                        Else
+                            LSS(StageIndex(ms.AssociatedStage)) = ms.FlowRate.Value
+                        End If
+                    Case StreamInformation.Behavior.InterExchanger
+                        Q(StageIndex(ms.AssociatedStage)) = -DirectCast(FlowSheet.SimulationObjects(ms.StreamID), Streams.EnergyStream).EnergyFlow.GetValueOrDefault
+                End Select
+                i += 1
+            Next
+
+            For Each ms As StreamInformation In Me.EnergyStreams.Values
+                Select Case ms.StreamBehavior
+                    Case StreamInformation.Behavior.InterExchanger
+                        Q(StageIndex(ms.AssociatedStage)) = -DirectCast(FlowSheet.SimulationObjects(ms.StreamID), Streams.EnergyStream).EnergyFlow.GetValueOrDefault
+                End Select
+                i += 1
+            Next
+
+            Dim cv As New SystemsOfUnits.Converter
+
+            vaprate = SystemsOfUnits.Converter.ConvertToSI(Me.VaporFlowRateUnit, Me.VaporFlowRate)
+
+            Dim sum1(ns), sum0_ As Double
+            sum0_ = 0
+            For i = 0 To ns
+                sum1(i) = 0
+                For j = 0 To i
+                    sum1(i) += F(j) - LSS(j) - VSS(j)
+                Next
+                sum0_ += LSS(i) + VSS(i)
+            Next
+
+            For i = ns To 0 Step -1
+                If F(i) <> 0 Then
+                    lastF = i
+                    Exit For
+                End If
+            Next
+
+            For i = 0 To nc - 1
+                zm(i) = sumcf(i) / sumF
+            Next
+
+            Dim mwf = pp.AUX_MMM(zm)
+
+            If TypeOf Me Is DistillationColumn Then
+                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                    rr = 3.0
+                Else
+                    If Me.Specs("C").SType = ColumnSpec.SpecType.Stream_Ratio Then
+                        rr = Me.Specs("C").SpecValue
+                    ElseIf Me.Specs("C").SType = ColumnSpec.SpecType.Component_Fraction Or
+                  Me.Specs("C").SType = ColumnSpec.SpecType.Component_Recovery Then
+                        rr = 10.0
+                    Else
+                        rr = 2.5
+                    End If
+                End If
+            End If
+
+            If InitialEstimates.RefluxRatio IsNot Nothing And
+              UseVaporFlowEstimates And UseLiquidFlowEstimates Then
+                rr = InitialEstimates.RefluxRatio
+            End If
+
+            Dim Tref = FT.Where(Function(ti) ti > 0).Average
+            Dim Pref = Stages.Select(Function(s) s.P).Average
+
+            Dim fflash As Object() = pp.FlashBase.Flash_PT(zm, Pref, Tref, pp)
+
+            Dim fflash2 As Object() = pp.FlashBase.Flash_PT(fflash(3), Pref, Tref - rr * 5, pp)
+
+            Dim Lflash = fflash(0)
+            Dim Vflash = fflash(1)
+
+            Dim Lflash2 = fflash2(0)
+            Dim Vflash2 = fflash2(1)
+
+            Dim result As Object = Nothing
+
+            If Me.CondenserType = condtype.Full_Reflux Then
+                result = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0.9, fflash(3), Nothing, Tref)
+            Else
+                If Vflash2 > 0.0 Then
+                    result = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0.1, fflash2(3), Nothing, Tref)
+                Else
+                    result = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0.1, fflash(3), Nothing, Tref)
+                End If
+            End If
+
+            T(0) = result.CalculatedTemperature
+
+            xtop = result.GetLiquidPhase1MoleFractions()
+            ytop = fflash(3)
+
+            result = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0.9, fflash(2), Nothing, Tref)
+
+            T(ns) = result.CalculatedTemperature
+
+            xbot = result.GetLiquidPhase1MoleFractions()
+            ybot = result.GetVaporPhaseMoleFractions()
+
+            Dim Kref = fflash(9)
+
+            Dim Vprops = pp.DW_GetConstantProperties()
+
+            Dim hamount As Double = 0.0
+
+            Select Case Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cunits = Specs("R").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    rebVx(cindex) = cvalue * zm(cindex) * sumF
+                    hamount = cvalue * zm(cindex) * sumF
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cunits = Specs("R").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    hamount = camount
+                    rebVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cunits = Specs("R").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    hamount = camount
+                    rebVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = sumF * zm(cindex) * cvalue / 100
+                    hamount = camount
+                    rebVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                        distrate = 0.0
+                    Else
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                            Else
+                                distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                            vaprate = 0.0
+                        End If
+                    End If
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                        distrate = 0.0
+                    Else
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
+                            Else
+                                distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                            vaprate = 0.0
+                        End If
+                    End If
+                Case ColumnSpec.SpecType.Feed_Recovery
+                    Dim cvalue = Specs("R").SpecValue / 100.0
+                    Dim pval = sumF * cvalue
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = sumF - pval - sum0_
+                        distrate = 0.0
+                    Else
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - pval - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
+                            Else
+                                distrate = sumF - pval - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - pval - sum0_
+                            vaprate = 0.0
+                        End If
+                    End If
+                Case Else
+                    If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = (sumF - sum0_) / 2
+                        distrate = 0.0
+                    Else
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF / 2 - sum0_
+                        Else
+                            distrate = sumF / 2 - sum0_ - vaprate
+                        End If
+                    End If
+            End Select
+
+            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates And Not ignoreuserestimates Then
+                vaprate = InitialEstimates.VaporProductFlowRate
+            End If
+            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates And Not ignoreuserestimates Then
+                distrate = InitialEstimates.DistillateFlowRate
+            End If
+
+            If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                distrate = 0.0
+            Else
+                If Me.CondenserType = condtype.Full_Reflux Then
+                    distrate = 0.0
+                ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                Else
+                    vaprate = 0.0
+                End If
+            End If
+
+            Select Case Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                    ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                    ColumnSpec.SpecType.Component_Recovery,
+                    ColumnSpec.SpecType.Component_Fraction
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = (sumF - sum0_) / 2
+                        distrate = 0.0
+                    Else
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - hamount - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                            Else
+                                distrate = sumF - hamount - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - hamount - sum0_
+                            vaprate = 0.0
+                        End If
+                    End If
+            End Select
+
+            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates And Not ignoreuserestimates Then
+                vaprate = InitialEstimates.VaporProductFlowRate
+            End If
+            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates And Not ignoreuserestimates Then
+                distrate = InitialEstimates.DistillateFlowRate
+            End If
+
+            If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                distrate = 0.0
+            Else
+                If Me.CondenserType = condtype.Full_Reflux Then
+                    distrate = 0.0
+                ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                Else
+                    vaprate = 0.0
+                End If
+            End If
+
+            Dim lamount As Double = 0.0
+
+            Select Case Specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cunits = Specs("C").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    lamount = cvalue * zm(cindex) * sumF
+                    distVx(cindex) = cvalue * zm(cindex) * sumF
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cunits = Specs("C").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    lamount = camount
+                    distVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cunits = Specs("C").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    lamount = camount
+                    distVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = sumF * zm(cindex) * cvalue / 100
+                    lamount = camount
+                    distVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+            End Select
+
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Distillate Rate: {0} mol/s", distrate))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor Overflow Rate: {0} mol/s", vaprate))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Reflux Ratio: {0}", rr))
+
+            compids = New ArrayList
+            compids.Clear()
+            For Each comp As Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
+                compids.Add(comp.Name)
+            Next
+
+            Dim T1, T2 As Double
+
+            Select Case Me.ColumnType
+                Case ColType.DistillationColumn
+                    LSS(0) = distrate
+                Case ColType.RefluxedAbsorber
+                    LSS(0) = distrate
+            End Select
+
+            Select Case Me.ColumnType
+                Case ColType.AbsorptionColumn
+                    T1 = FT.First
+                    T2 = FT.Last
+                    If (T1 = 0.0) Then Throw New Exception("The absorber needs a feed stream connected to the first stage.")
+                    If (T2 = 0.0) Then Throw New Exception("The absorber needs a feed stream connected to the last stage.")
+                Case ColType.ReboiledAbsorber
+                    T1 = MathEx.Common.WgtAvg(F, FT)
+                    T2 = T1
+                Case ColType.RefluxedAbsorber
+                    P(0) -= CondenserDeltaP
+                    T1 = MathEx.Common.WgtAvg(F, FT)
+                    T2 = T1
+                Case ColType.DistillationColumn
+                    If Not DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        P(0) -= CondenserDeltaP
+                    End If
+                    If special Then
+                        T1 = Tref
+                    Else
+                        Try
+                            IObj?.SetCurrent()
+                            If distVx.Sum > 0 Then
+                                Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0, distVx, Nothing, FT.Max)
+                                T1 = fcalc.CalculatedTemperature
+                                distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                            Else
+                                If Specs("C").SType = ColumnSpec.SpecType.Temperature Then
+                                    T1 = Specs("C").SpecValue.ConvertToSI(Specs("C").SpecUnit)
+                                Else
+                                    T1 = T(0)
+                                End If
+                            End If
+                        Catch ex As Exception
+                            T1 = FT.Where(Function(t_) t_ > 0.0).Min
+                        End Try
+                    End If
+                    If special Then
+                        T2 = Tref
+                    Else
+                        Try
+                            IObj?.SetCurrent()
+                            If rebVx.Sum > 0 Then
+                                Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0, rebVx, Nothing, FT.Max)
+                                T2 = fcalc.CalculatedTemperature
+                                rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                            Else
+                                If Specs("R").SType = ColumnSpec.SpecType.Temperature Then
+                                    T2 = Specs("R").SpecValue.ConvertToSI(Specs("R").SpecUnit)
+                                Else
+                                    T2 = T(ns)
+                                End If
+                            End If
+                        Catch ex As Exception
+                            T2 = FT.Where(Function(t_) t_ > 0.0).Max
+                        End Try
+                    End If
+            End Select
+
+            For i = 0 To ns
+                sum1(i) = 0
+                For j = 0 To i
+                    sum1(i) += F(j) - LSS(j) - VSS(j)
+                Next
+            Next
+
+            pp.CurrentMaterialStream = pp.CurrentMaterialStream.Clone()
+            pp.CurrentMaterialStream.SetPropertyPackageObject(pp)
+            DirectCast(pp.CurrentMaterialStream, MaterialStream).SetFlowsheet(FlowSheet)
+            DirectCast(pp.CurrentMaterialStream, MaterialStream).PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+
+            T(0) = T1
+            T(ns) = T2
+
+            Dim needsXYestimates As Boolean = False
+
+            i = 0
+            For Each st As Stage In Me.Stages
+                eff(i) = st.Efficiency
+                If Me.UseTemperatureEstimates And InitialEstimates.ValidateTemperatures() And Not ignoreuserestimates Then
+                    T(i) = Me.InitialEstimates.StageTemps(i).Value
+                Else
+                    T(i) = (T2 - T1) * (i) / ns + T1
+                End If
+                If Me.UseVaporFlowEstimates And InitialEstimates.ValidateVaporFlows() And Not ignoreuserestimates Then
+                    V(i) = Me.InitialEstimates.VapMolarFlows(i).Value
+                Else
+                    If i = 0 Then
+                        Select Case Me.ColumnType
+                            Case ColType.DistillationColumn
+                                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                                    V(0) = vaprate
+                                Else
+                                    If Me.CondenserType = condtype.Total_Condenser Then
+                                        V(0) = 0.0000000001
+                                    Else
+                                        V(0) = vaprate
+                                    End If
+                                End If
+                            Case ColType.RefluxedAbsorber
+                                If Me.CondenserType = condtype.Total_Condenser Then
+                                    V(0) = 0.0000000001
+                                Else
+                                    V(0) = vaprate
+                                End If
+                            Case Else
+                                V(0) = F(lastF)
+                        End Select
+                    Else
+                        Select Case Me.ColumnType
+                            Case ColType.DistillationColumn
+                                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                                    V(i) = (rr + 1) * V(0) - F(0)
+                                Else
+                                    If Me.CondenserType = condtype.Partial_Condenser Then
+                                        V(i) = (rr + 1) * (distrate + vaprate) - F(0)
+                                    ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                        V(i) = (rr + 1) * V(0) - F(0)
+                                    Else
+                                        V(i) = (rr + 1) * distrate - F(0)
+                                    End If
+                                End If
+                            Case ColType.RefluxedAbsorber
+                                V(i) = (rr + 1) * distrate - F(0) + V(0)
+                            Case ColType.AbsorptionColumn
+                                V(i) = F(lastF)
+                            Case ColType.ReboiledAbsorber
+                                V(i) = F(lastF)
+                        End Select
+                    End If
+                End If
+                If Me.UseLiquidFlowEstimates And InitialEstimates.ValidateLiquidFlows() And Not ignoreuserestimates Then
+                    L(i) = Me.InitialEstimates.LiqMolarFlows(i).Value
+                Else
+                    If i = 0 Then
+                        Select Case Me.ColumnType
+                            Case ColType.DistillationColumn
+                                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                                    L(0) = vaprate * rr
+                                Else
+                                    If Me.CondenserType = condtype.Partial_Condenser Then
+                                        L(0) = (distrate + vaprate) * rr
+                                    ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                        L(0) = vaprate * rr
+                                    Else
+                                        L(0) = distrate * rr
+                                    End If
+                                End If
+                            Case ColType.RefluxedAbsorber
+                                If Me.CondenserType = condtype.Partial_Condenser Then
+                                    L(0) = distrate * rr
+                                ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                Else
+                                    L(0) = distrate * rr
+                                End If
+                            Case Else
+                                L(0) = F(firstF)
+                                If L(0) = 0 Then L(i) = 0.00001
+                        End Select
+                    Else
+                        Select Case Me.ColumnType
+                            Case ColType.DistillationColumn
+                                If i < ns Then L(i) = V(i) + sum1(i) - V(0) Else L(i) = sum1(i) - V(0)
+                            Case ColType.AbsorptionColumn
+                                L(i) = F(firstF)
+                        End Select
+                        If L(i) = 0 Then L(i) = 0.00001
+                    End If
+                End If
+                If Me.UseCompositionEstimates And InitialEstimates.ValidateCompositions() And Not ignoreuserestimates Then
+                    j = 0
+                    For Each par As Parameter In Me.InitialEstimates.LiqCompositions(i).Values
+                        x(i)(j) = par.Value
+                        j = j + 1
+                    Next
+                    j = 0
+                    For Each par As Parameter In Me.InitialEstimates.VapCompositions(i).Values
+                        y(i)(j) = par.Value
+                        j = j + 1
+                    Next
+                    z(i) = zm
+                    If pp.ShouldUseKvalueMethod3 Then
+                        Kval(i) = pp.DW_CalcKvalue3(x(i).MultiplyConstY(L(i)), y(i).MultiplyConstY(V(i)), T(i), P(i))
+                    ElseIf pp.ShouldUseKvalueMethod2 Then
+                        Kval(i) = pp.DW_CalcKvalue(x(i).MultiplyConstY(L(i)).AddY(y(i).MultiplyConstY(V(i))), T(i), P(i))
+                    Else
+                        Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                    End If
+                Else
+                    IObj?.SetCurrent()
+                    z(i) = zm
+                    If rebVx.Sum > 0 And distVx.Sum > 0 Then
+                        For j = 0 To nc - 1
+                            x(i)(j) = distVx(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVx(j) - distVx(j))
+                            y(i)(j) = distVy(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVy(j) - distVy(j))
+                        Next
+                        x(i) = x(i).NormalizeY
+                        y(i) = y(i).NormalizeY
+                        Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                    Else
+                        For j = 0 To nc - 1
+                            x(i)(j) = xtop(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (xbot(j) - xtop(j))
+                            y(i)(j) = ytop(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (ybot(j) - ytop(j))
+                        Next
+                        x(i) = x(i).NormalizeY
+                        y(i) = y(i).NormalizeY
+                        If pp.ShouldUseKvalueMethod3 Then
+                            Kval(i) = pp.DW_CalcKvalue(z(i), T(i), P(i))
+                        ElseIf pp.ShouldUseKvalueMethod2 Then
+                            Kval(i) = pp.DW_CalcKvalue(z(i), T(i), P(i))
+                        Else
+                            Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                        End If
+                        If ColumnType = ColType.AbsorptionColumn Then
+                            For j = 0 To nc - 1
+                                x(i)(j) = (L(i) + V(i)) * z(i)(j) / (L(i) + V(i) * Kval(i)(j))
+                                y(i)(j) = Kval(i)(j) * x(i)(j)
+                            Next
+                            x(i) = x(i).NormalizeY()
+                            y(i) = y(i).NormalizeY()
+                        Else
+                            needsXYestimates = True
+                        End If
+                    End If
+                    If llextractor And pp.AUX_CheckTrivial(Kval(i)) Then
+                        Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
+                    End If
+                End If
+                i = i + 1
+            Next
+            Select Case Me.ColumnType
+                Case ColType.DistillationColumn
+                    Q(0) = 0
+                    Q(ns) = 0
+                Case ColType.ReboiledAbsorber
+                    Q(ns) = 0
+                Case ColType.RefluxedAbsorber
+                    Q(0) = 0
+            End Select
+
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Temperature Profile: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Interstage Liquid Flow Rate: {0} mol/s", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Interstage Vapor/Liquid2 Flow Rate: {0} mol/s", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Liquid Side Draw Rate: {0} mol/s", LSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor/Liquid2 Side Draw Rate: {0} mol/s", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Heat Added/Removed Profile: {0} kW", Q.ToMathArrayString))
+
+            Dim L1trials, L2trials As New List(Of Double())
+            Dim x1trials, x2trials As New List(Of Double()())
+
+            If Not llextractor Then
+
+                If needsXYestimates Then
+
+                    LSS(0) = 0
+                    VSS(0) = 0
+                    LSS(ns) = 0
+
+                    Dim sumLSS = LSS.Sum
+                    Dim sumVSS = VSS.Sum
+
+                    VSS(0) = vaprate
+                    LSS(0) = distrate
+                    LSS(ns) = sumF - LSS(0) - sumLSS - sumVSS - V(0)
+
+                    'For i = 0 To ns
+                    '    Dim sflash As Object() = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                    '    x(i) = sflash(2)
+                    '    y(i) = sflash(3)
+                    '    Kval(i) = sflash(9)
+                    'Next
+
+                    'LSS(0) = 0
+                    VSS(0) = 0
+                    LSS(ns) = 0
+
+                End If
+
+            Else
+
+                If Not UseCompositionEstimates Or Not UseLiquidFlowEstimates Or Not UseVaporFlowEstimates Then
+
+                    'll extractor
+                    Dim L1, L2, Vx1(), Vx2() As Double
+                    Dim trialcomp As Double() = zm.Clone
+                    For counter As Integer = 0 To 100
+                        Dim flashresult = pp.FlashBase.Flash_PT(trialcomp, P.Average, T.Average, pp)
+                        L1 = flashresult(0)
+                        L2 = flashresult(5)
+                        Vx1 = flashresult(2)
+                        Vx2 = flashresult(6)
+                        If L2 > 0.0 Then
+                            Dim L1t, L2t As New List(Of Double)
+                            Dim xt1, xt2 As New List(Of Double())
+                            For i = 0 To Stages.Count - 1
+                                If UseLiquidFlowEstimates Then
+                                    L1t.Add(L.Clone)
+                                Else
+                                    L1t.Add(F.Sum * L1)
+                                End If
+                                If UseVaporFlowEstimates Then
+                                    L2t.Add(V.Clone)
+                                Else
+                                    L2t.Add(F.Sum * L2)
+                                End If
+                                If UseCompositionEstimates Then
+                                    xt1.Add(x(i).Clone)
+                                    xt2.Add(y(i).Clone)
+                                Else
+                                    xt1.Add(Vx1)
+                                    xt2.Add(Vx2)
+                                End If
+                            Next
+                            L1trials.Add(L1t.ToArray())
+                            L2trials.Add(L2t.ToArray())
+                            x1trials.Add(xt1.ToArray())
+                            x2trials.Add(xt2.ToArray())
+                        End If
+                        Dim rnd As New Random(counter)
+                        trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
+                        trialcomp = trialcomp.NormalizeY
+                    Next
+
+                    trialcomp = zm.Clone
+                    Dim lle As New PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
+                    For counter As Integer = 0 To 100
+                        Dim flashresult = lle.Flash_PT(trialcomp, P.Average, T.Average, pp)
+                        L1 = flashresult(0)
+                        L2 = flashresult(5)
+                        Vx1 = flashresult(2)
+                        Vx2 = flashresult(6)
+                        If L2 > 0.0 And Vx1.SubtractY(Vx2).AbsSqrSumY > 0.001 Then
+                            Dim L1t, L2t As New List(Of Double)
+                            Dim xt1, xt2 As New List(Of Double())
+                            For i = 0 To Stages.Count - 1
+                                If UseLiquidFlowEstimates Then
+                                    L1t.Add(L(i))
+                                Else
+                                    L1t.Add(F.Sum * L1)
+                                End If
+                                If UseVaporFlowEstimates Then
+                                    L2t.Add(V(i))
+                                Else
+                                    L2t.Add(F.Sum * L2)
+                                End If
+                                If UseCompositionEstimates Then
+                                    xt1.Add(x(i))
+                                    xt2.Add(y(i))
+                                Else
+                                    xt1.Add(Vx1)
+                                    xt2.Add(Vx2)
+                                End If
+                            Next
+                            L1trials.Add(L1t.ToArray())
+                            L2trials.Add(L2t.ToArray())
+                            x1trials.Add(xt1.ToArray())
+                            x2trials.Add(xt2.ToArray())
+                        End If
+                        Dim rnd As New Random(counter)
+                        trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
+                        trialcomp = trialcomp.NormalizeY
+                    Next
+
+                Else
+
+                    Dim L1t, L2t As New List(Of Double)
+                    Dim xt1, xt2 As New List(Of Double())
+                    For i = 0 To Stages.Count - 1
+                        L1t.AddRange(L)
+                        L2t.AddRange(V)
+                        xt1.Add(x(i).Clone)
+                        xt2.Add(y(i).Clone)
+                    Next
+                    L1trials.Add(L1t.ToArray())
+                    L2trials.Add(L2t.ToArray())
+                    x1trials.Add(xt1.ToArray())
+                    x2trials.Add(xt2.ToArray())
+
+                End If
+
+            End If
+
+            IObj?.Paragraphs.Add("<h2>Column Specifications</h2>")
+
+            IObj?.Paragraphs.Add("Processing Specs...")
+
+            'process specifications
+            For Each sp As Auxiliary.SepOps.ColumnSpec In Me.Specs.Values
+                If sp.SType = ColumnSpec.SpecType.Component_Fraction Or
+              sp.SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or
+              sp.SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Or
+              sp.SType = ColumnSpec.SpecType.Component_Recovery Then
+                    i = 0
+                    For Each comp As BaseClasses.Compound In stream.Phases(0).Compounds.Values
+                        If sp.ComponentID = comp.Name Then sp.ComponentIndex = i
+                        i = i + 1
+                    Next
+                End If
+                If sp.StageNumber = -1 And sp.SpecValue = Me.DistillateFlowRate Then
+                    sumF = 0
+                    Dim sumLSS As Double = 0
+                    Dim sumVSS As Double = 0
+                    For i = 0 To ns
+                        sumF += F(i)
+                        sumLSS += LSS(i)
+                        sumVSS += VSS(i)
+                    Next
+                    sp.SpecValue = sumF - sumLSS - sumVSS - V(0)
+                    sp.StageNumber = 0
+                End If
+                IObj?.Paragraphs.Add(String.Format("Spec Type: {0}", [Enum].GetName(sp.SType.GetType, sp.SType)))
+                IObj?.Paragraphs.Add(String.Format("Spec Value: {0}", sp.SpecValue))
+                IObj?.Paragraphs.Add(String.Format("Spec Stage: {0}", sp.StageNumber))
+                IObj?.Paragraphs.Add(String.Format("Spec Units: {0}", sp.SpecUnit))
+                IObj?.Paragraphs.Add(String.Format("Compound (if applicable): {0}", sp.ComponentID))
+            Next
+
+            IObj?.Close()
+
+            If Me.ColumnType = ColType.DistillationColumn Then
+
+                Dim tridiag = WangHenkeMethod2.RunTridiagonal(Me, F, V, Q, L, HF, VSS, LSS, Kval, x, y, z, fc,
+                                                              T, P, CondenserType, ns, nc, ColumnType, PropertyPackage, Specs)
+
+                'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q}
+
+                V = tridiag(1)
+                L = tridiag(2)
+                y = tridiag(5)
+                x = tridiag(6)
+
+            End If
+
+
+            Dim solverinput As New ColumnSolverInputData
+
+            With solverinput
+                .ColumnObject = Me
+                .StageTemperatures = T.ToList
+                .StagePressures = P.ToList
+                .StageHeats = Q.ToList
+                .StageEfficiencies = eff.ToList
+                .NumberOfCompounds = nc
+                .NumberOfStages = ns
+                .ColumnType = ColumnType
+                .CondenserSpec = Specs("C")
+                .ReboilerSpec = Specs("R")
+                .CondenserType = CondenserType
+                .FeedCompositions = fc.ToList
+                .FeedEnthalpies = HF.ToList
+                .FeedFlows = F.ToList
+                .VaporCompositions = y.ToList
+                .VaporFlows = V.ToList
+                .VaporSideDraws = VSS.ToList
+                .LiquidCompositions = x.ToList
+                .LiquidFlows = L.ToList
+                .LiquidSideDraws = LSS.ToList
+                .Kvalues = Kval.ToList()
+                .MaximumIterations = maxits
+                .Tolerances = tol.ToList
+                .OverallCompositions = z.ToList
+                .L1trials = L1trials
+                .L2trials = L2trials
+                .x1trials = x1trials
+                .x2trials = x2trials
+                If TypeOf Me Is DistillationColumn Then
+                    .SubcoolingDeltaT = DirectCast(Me, DistillationColumn).TotalCondenserSubcoolingDeltaT
+                End If
+            End With
+
+            Return solverinput
+
+        End Function
+
+        Public Sub TestConvergence()
+
+            Calculate("TestConvergence")
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             ColumnPropertiesProfile = ""
@@ -3628,12 +4620,33 @@ Namespace UnitOperations
 
             If InitialEstimatesProvider <> "" AndAlso Column.ExternalInitialEstimatesProviders.ContainsKey(InitialEstimatesProvider) Then
                 inputdata = Column.ExternalInitialEstimatesProviders(InitialEstimatesProvider).GetInitialEstimates(Me)
+            ElseIf InitialEstimatesProvider = "Internal 2 (Experimental)" Then
+                inputdata = GetSolverInputData_New()
             Else
                 inputdata = GetSolverInputData()
             End If
 
-            Dim nc = inputdata.NumberOfCompounds
+            Dim i, j As Integer
             Dim ns = inputdata.NumberOfStages
+
+            'store initial values
+
+            x0.Clear()
+            y0.Clear()
+            K0.Clear()
+            For i = 0 To ns
+                x0.Add(inputdata.LiquidCompositions(i))
+                y0.Add(inputdata.VaporCompositions(i))
+                K0.Add(inputdata.Kvalues(i))
+            Next
+            T0 = inputdata.StageTemperatures.ToArray()
+            P0 = inputdata.StagePressures.ToArray()
+            V0 = inputdata.VaporFlows.ToArray()
+            L0 = inputdata.LiquidFlows.ToArray()
+            VSS0 = inputdata.VaporSideDraws.ToArray()
+            LSS0 = inputdata.LiquidSideDraws.ToArray()
+
+            Dim nc = inputdata.NumberOfCompounds
             Dim maxits = inputdata.MaximumIterations
             Dim tol = inputdata.Tolerances.ToArray()
             Dim F = inputdata.FeedFlows.ToArray()
@@ -3658,8 +4671,6 @@ Namespace UnitOperations
             Dim L2trials = inputdata.L2trials
             Dim x1trials = inputdata.x1trials
             Dim x2trials = inputdata.x2trials
-
-            Dim i, j As Integer
 
             Dim llextractor As Boolean = False
             Dim myabs As AbsorptionColumn = TryCast(Me, AbsorptionColumn)
@@ -3914,181 +4925,218 @@ Namespace UnitOperations
 
             RefluxRatio = Lf(0) / (LSSf(0) + Vf(0))
 
-            'copy results to output streams
+            If args Is Nothing Then
 
-            'product flows
+                'copy results to output streams
 
-            Dim msm As MaterialStream = Nothing
-            Dim sinf As StreamInformation
+                Dim compound_balances As New Dictionary(Of String, Double)
+                Dim compound_feeds As New Dictionary(Of String, Double)
+                Dim comps = FlowSheet.SelectedCompounds.Keys.ToList()
+                For Each c In comps
+                    compound_balances.Add(c, 0.0)
+                    compound_feeds.Add(c, 0.0)
+                Next
 
-            For Each sinf In Me.MaterialStreams.Values
-                Select Case sinf.StreamBehavior
-                    Case StreamInformation.Behavior.Distillate
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        With msm
-                            pp.CurrentMaterialStream = msm
-                            .Clear()
-                            .SpecType = StreamSpec.Pressure_and_Enthalpy
-                            .DefinedFlow = FlowSpec.Mass
-                            .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
-                            .Phases(0).Properties.molarflow = LSSf(0)
-                            .Phases(0).Properties.temperature = Tf(0)
-                            .Phases(0).Properties.pressure = P(0)
-                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MoleFraction = xf(0)(i)
-                                i += 1
-                            Next
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(0))(i)
-                                i += 1
-                            Next
-                            .Phases(3).Properties.molarfraction = 1.0
-                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                            .AtEquilibrium = True
-                        End With
-                    Case StreamInformation.Behavior.OverheadVapor
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        With msm
-                            pp.CurrentMaterialStream = msm
-                            .Clear()
-                            .SpecType = StreamSpec.Pressure_and_Enthalpy
-                            .DefinedFlow = FlowSpec.Mass
-                            .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
-                            .Phases(0).Properties.temperature = Tf(0)
-                            .Phases(0).Properties.pressure = P(0)
-                            If llextractor Then
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
-                            Else
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
-                            End If
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MoleFraction = yf(0)(i)
-                                i += 1
-                            Next
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
-                                i += 1
-                            Next
-                            If llextractor Then
-                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                                .Phases(3).Properties.molarfraction = 1.0
-                                .Phases(1).Properties.molarfraction = 1.0
-                            Else
-                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
-                                .Phases(2).Properties.molarfraction = 1.0
-                            End If
-                            .AtEquilibrium = True
-                        End With
-                    Case StreamInformation.Behavior.BottomsLiquid
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        With msm
-                            pp.CurrentMaterialStream = msm
-                            .Clear()
-                            .SpecType = StreamSpec.Pressure_and_Enthalpy
-                            .DefinedFlow = FlowSpec.Mass
-                            .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
-                            .Phases(0).Properties.temperature = Tf(ns)
-                            .Phases(0).Properties.pressure = P(ns)
-                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MoleFraction = xf(ns)(i)
-                                i += 1
-                            Next
-                            i = 0
-                            For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(ns))(i)
-                                i += 1
-                            Next
-                            .Phases(3).Properties.molarfraction = 1.0
-                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                            .AtEquilibrium = True
-                        End With
-                    Case StreamInformation.Behavior.Sidedraw
-                        Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
-                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
+                'product flows
+
+                Dim msm As MaterialStream = Nothing
+                Dim sinf As StreamInformation
+
+                For Each sinf In Me.MaterialStreams.Values
+                    Select Case sinf.StreamBehavior
+                        Case StreamInformation.Behavior.Feed
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            With msm
+                                For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    compound_balances(subst.Name) += subst.MolarFlow.GetValueOrDefault()
+                                    compound_feeds(subst.Name) += subst.MolarFlow.GetValueOrDefault()
+                                Next
+                            End With
+                        Case StreamInformation.Behavior.Distillate
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .DefinedFlow = FlowSpec.Mass
-                                .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
-                                .Phases(0).Properties.temperature = Tf(sidx)
-                                .Phases(0).Properties.pressure = P(sidx)
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
+                                .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
+                                .Phases(0).Properties.molarflow = LSSf(0)
+                                .Phases(0).Properties.temperature = Tf(0)
+                                .Phases(0).Properties.pressure = P(0)
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MoleFraction = xf(sidx)(i)
+                                    subst.MoleFraction = xf(0)(i)
+                                    compound_balances(subst.Name) -= xf(0)(i) * LSSf(0)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(sidx))(i)
+                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(0))(i)
                                     i += 1
                                 Next
                                 .Phases(3).Properties.molarfraction = 1.0
                                 .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
                                 .AtEquilibrium = True
                             End With
-                        ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
+                        Case StreamInformation.Behavior.OverheadVapor
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 pp.CurrentMaterialStream = msm
                                 .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .DefinedFlow = FlowSpec.Mass
-                                .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
-                                .Phases(0).Properties.temperature = Tf(sidx)
-                                .Phases(0).Properties.pressure = P(sidx)
-                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
+                                .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
+                                .Phases(0).Properties.temperature = Tf(0)
+                                .Phases(0).Properties.pressure = P(0)
+                                If llextractor Then
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
+                                Else
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
+                                End If
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MoleFraction = yf(sidx)(i)
+                                    subst.MoleFraction = yf(0)(i)
+                                    compound_balances(subst.Name) -= yf(0)(i) * Vf(0)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
-                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
+                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
                                     i += 1
                                 Next
-                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
-                                .Phases(2).Properties.molarfraction = 1.0
+                                If llextractor Then
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                    .Phases(3).Properties.molarfraction = 1.0
+                                    .Phases(1).Properties.molarfraction = 1.0
+                                Else
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                    .Phases(2).Properties.molarfraction = 1.0
+                                End If
                                 .AtEquilibrium = True
                             End With
-                        End If
-                End Select
-            Next
+                        Case StreamInformation.Behavior.BottomsLiquid
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            With msm
+                                pp.CurrentMaterialStream = msm
+                                .Clear()
+                                .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                .DefinedFlow = FlowSpec.Mass
+                                .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
+                                .Phases(0).Properties.temperature = Tf(ns)
+                                .Phases(0).Properties.pressure = P(ns)
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
+                                i = 0
+                                For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    subst.MoleFraction = xf(ns)(i)
+                                    compound_balances(subst.Name) -= xf(ns)(i) * Lf(ns)
+                                    i += 1
+                                Next
+                                i = 0
+                                For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(ns))(i)
+                                    i += 1
+                                Next
+                                .Phases(3).Properties.molarfraction = 1.0
+                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                .AtEquilibrium = True
+                            End With
+                        Case StreamInformation.Behavior.Sidedraw
+                            Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
+                                With msm
+                                    pp.CurrentMaterialStream = msm
+                                    .Clear()
+                                    .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                    .DefinedFlow = FlowSpec.Mass
+                                    .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
+                                    .Phases(0).Properties.temperature = Tf(sidx)
+                                    .Phases(0).Properties.pressure = P(sidx)
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MoleFraction = xf(sidx)(i)
+                                        compound_balances(subst.Name) -= xf(sidx)(i) * LSSf(sidx)
+                                        i += 1
+                                    Next
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(sidx))(i)
+                                        i += 1
+                                    Next
+                                    .Phases(3).Properties.molarfraction = 1.0
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                    .AtEquilibrium = True
+                                End With
+                            ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
+                                With msm
+                                    pp.CurrentMaterialStream = msm
+                                    .Clear()
+                                    .SpecType = StreamSpec.Pressure_and_Enthalpy
+                                    .DefinedFlow = FlowSpec.Mass
+                                    .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
+                                    .Phases(0).Properties.temperature = Tf(sidx)
+                                    .Phases(0).Properties.pressure = P(sidx)
+                                    .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MoleFraction = yf(sidx)(i)
+                                        compound_balances(subst.Name) -= yf(sidx)(i) * VSSf(sidx)
+                                        i += 1
+                                    Next
+                                    i = 0
+                                    For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
+                                        subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
+                                        i += 1
+                                    Next
+                                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                    .Phases(2).Properties.molarfraction = 1.0
+                                    .AtEquilibrium = True
+                                End With
+                            End If
+                    End Select
+                Next
 
-            'condenser/reboiler duties
+                For Each c In comps
+                    'relative errors
+                    compound_balances(c) = compound_balances(c) / (compound_feeds(c) + 1.0E-20)
+                Next
 
-            Dim esm As Streams.EnergyStream
+                Dim mintol = tol.MinY_NonZero() * 100
 
-            For Each sinf In Me.EnergyStreams.Values
-                If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
-                    'condenser
-                    If sinf.StreamID <> "" Then
-                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        esm.EnergyFlow = Q(0)
-                        esm.GraphicObject.Calculated = True
-                    End If
-                ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
-                    'reboiler
-                    If sinf.StreamID <> "" Then
-                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                        If esm.GraphicObject.InputConnectors(0).IsAttached Then
-                            esm.EnergyFlow = Q(Me.NumberOfStages - 1)
-                        Else
-                            esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
-                        End If
-                        esm.GraphicObject.Calculated = True
-                    End If
+                If compound_balances.Values.Where(Function(b) Math.Abs(b) > mintol).Count > 0 Then
+                    Dim mbal = compound_balances.Where(Function(b) Math.Abs(b.Value) > mintol).FirstOrDefault
+                    Throw New Exception(String.Format("Failed to fulfill mass balance for {0}: Relative Error = {1} [Tolerance = {2}]", mbal.Key, mbal.Value, mintol))
                 End If
-            Next
+
+                'condenser/reboiler duties
+
+                Dim esm As Streams.EnergyStream
+
+                For Each sinf In Me.EnergyStreams.Values
+                    If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
+                        'condenser
+                        If sinf.StreamID <> "" Then
+                            esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            esm.EnergyFlow = Q(0)
+                            esm.GraphicObject.Calculated = True
+                        End If
+                    ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
+                        'reboiler
+                        If sinf.StreamID <> "" Then
+                            esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                            If esm.GraphicObject.InputConnectors(0).IsAttached Then
+                                esm.EnergyFlow = Q(Me.NumberOfStages - 1)
+                            Else
+                                esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                            End If
+                            esm.GraphicObject.Calculated = True
+                        End If
+                    End If
+                Next
+
+            End If
 
         End Sub
 
@@ -4164,9 +5212,9 @@ Namespace UnitOperations
                     ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
 
                     mV = Vf(i).ConvertFromSI(units.molarflow)
-                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                    wV = (Vf(i) / 1000.0 * pp.AUX_MMM(compy)).ConvertFromSI(units.massflow)
                     rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
-                    etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                    etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(compy)).ConvertFromSI(units.viscosity)
                     If Double.IsNaN(etaV) Then etaV = 0.0
                     kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
 
@@ -4179,9 +5227,9 @@ Namespace UnitOperations
                         ms.SetPhaseComposition(compy, PropertyPackages.Phase.Liquid)
 
                         mV = Vf(i).ConvertFromSI(units.molarflow)
-                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(compy)).ConvertFromSI(units.massflow)
                         rhoV = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
-                        etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        etaV = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(compy)).ConvertFromSI(units.viscosity)
                         If Double.IsNaN(etaV) Then etaV = 0.0
                         kV = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
 
@@ -4191,9 +5239,9 @@ Namespace UnitOperations
                         ms.SetPhaseComposition(compy, PropertyPackages.Phase.Vapor)
 
                         mV = Vf(i).ConvertFromSI(units.molarflow)
-                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(Vf(i))).ConvertFromSI(units.massflow)
+                        wV = (Vf(i) / 1000.0 * pp.AUX_MMM(compy)).ConvertFromSI(units.massflow)
                         rhoV = pp.AUX_VAPDENS(Ti, Pi).ConvertFromSI(units.density)
-                        etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(Vf(i))).ConvertFromSI(units.viscosity)
+                        etaV = pp.AUX_VAPVISCm(Ti, rhoV.ConvertToSI(units.density), pp.AUX_MMM(compy)).ConvertFromSI(units.viscosity)
                         If Double.IsNaN(etaV) Then etaV = 0.0
                         kV = pp.AUX_CONDTG(Ti, Pi).ConvertFromSI(units.thermalConductivity)
 
@@ -4206,9 +5254,9 @@ Namespace UnitOperations
                 ms.SetPhaseComposition(compx, PropertyPackages.Phase.Liquid)
 
                 mL = Lf(i).ConvertFromSI(units.molarflow)
-                wL = (Lf(i) / 1000.0 * pp.AUX_MMM(Lf(i))).ConvertFromSI(units.massflow)
+                wL = (Lf(i) / 1000.0 * pp.AUX_MMM(compx)).ConvertFromSI(units.massflow)
                 rhoL = pp.AUX_LIQDENS(Ti, Pi).ConvertFromSI(units.density)
-                etaL = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(Lf(i))).ConvertFromSI(units.viscosity)
+                etaL = pp.AUX_LIQVISCm(Ti, pp.AUX_MMM(compx)).ConvertFromSI(units.viscosity)
                 kL = pp.AUX_CONDTL(Ti).ConvertFromSI(units.thermalConductivity)
 
                 sigma = pp.AUX_SURFTM(Ti).ConvertFromSI(units.surfaceTension)
@@ -4250,7 +5298,6 @@ Namespace UnitOperations
             ColumnPropertiesProfile = reporter.ToString()
 
         End Sub
-
 
         Public Overrides Sub DeCalculate()
 

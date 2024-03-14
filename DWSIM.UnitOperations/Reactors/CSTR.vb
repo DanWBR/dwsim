@@ -499,16 +499,22 @@ Namespace Reactors
             MM = ims.PropertyPackage.RET_VMM 'Component molar weights
             LC = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture) 'Component molar fractions
 
+            W = ims.Phases(0).Properties.massflow.GetValueOrDefault
+
             'Calculate initial inventory of components in reactor
             For i = 0 To NC - 1
                 Nin(i) = ims.Phases(0).Compounds(CompNames(i)).MolarFlow
                 Nout(i) = Nin(i)
                 If ReactorMode = EReactorMode.SingleOutlet Then
-                    NReac(i) = Me.Volume * ims.Phases(0).Compounds(CompNames(i)).Molarity 'global composition; headspace is ignored
+                    NReac(i) = Me.Volume * ims.Phases(0).Compounds(CompNames(i)).MolarFlow.GetValueOrDefault() *
+                        ims.Phases(0).Properties.density.GetValueOrDefault / W / 1000.0 'global composition; headspace is ignored
                 Else
-                    NReac(i) = Me.Headspace * ims.Phases(2).Compounds(CompNames(i)).Molarity 'vapour in headspace
-                    If QL + QS > 0 Then NReac(i) += Volume * QL / (QL + QS) * ims.Phases(1).Compounds(CompNames(i)).Molarity 'liqud phase
-                    If QL + QS > 0 Then NReac(i) += Volume * QS / (QL + QS) * ims.Phases(7).Compounds(CompNames(i)).Molarity 'liqud phase
+                    NReac(i) = Me.Headspace * ims.Phases(0).Compounds(CompNames(i)).MolarFlow.GetValueOrDefault() *
+                        ims.Phases(0).Properties.density.GetValueOrDefault / W / 1000.0 'vapour in headspace
+                    If QL + QS > 0 Then NReac(i) += Volume * QL / (QL + QS) * ims.Phases(0).Compounds(CompNames(i)).MolarFlow.GetValueOrDefault() *
+                        ims.Phases(0).Properties.density.GetValueOrDefault / W / 1000.0 'liqud phase
+                    If QL + QS > 0 Then NReac(i) += Volume * QS / (QL + QS) * ims.Phases(0).Compounds(CompNames(i)).MolarFlow.GetValueOrDefault() *
+                        ims.Phases(0).Properties.density.GetValueOrDefault / W / 1000.0 'liqud phase
                 End If
             Next
 
@@ -524,7 +530,6 @@ Namespace Reactors
                     T = Me.OutletTemperature
             End Select
 
-            W = ims.Phases(0).Properties.massflow.GetValueOrDefault
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W 'reactands enthalpy
 
             IErr = 1
@@ -863,12 +868,13 @@ Namespace Reactors
 
                 'amount of component change due to reactions during time step dN: mol
                 dN = dB.MultiplyConstY(dT)
-                TR = dN.DivideY(NReac.AddConstY(0.001)) 'Calculate relative consumption of components
+                TR = dN.DivideY(NReac.AddConstY(1.0E-20)) 'Calculate relative consumption of components
                 NReac = NReac.AddY(dN) 'calculate new inventory of components in reactor
 
                 'Time step is over! Now calculate new compositions
                 Y = NReac.NormalizeY 'molar fraction
-                M = Y.MultiplyY(MM).NormalizeY 'mass fraction
+                ims.PropertyPackage.CurrentMaterialStream = ims
+                M = ims.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(Y) 'mass fraction
                 Mout = M.MultiplyConstY(W) 'total components massflow
                 Nout = Mout.DivideY(MM).MultiplyConstY(1000) 'total components molar flow
 
@@ -905,7 +911,7 @@ Namespace Reactors
                     i += 1
                 Next
 
-                ims.Phases(0).Properties.molarflow = Nout.SumY
+                ims.SetMolarFlow(Nout.SumY)
                 ims.Phases(0).Properties.temperature = T
                 ims.Phases(0).Properties.pressure = P
 

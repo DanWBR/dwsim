@@ -644,6 +644,24 @@ Namespace Streams
 
                     IObj?.Paragraphs.Add("Now that the phase distribution was determined successfully, DWSIM will proceed to calculate the properties for each one of them, again using the associated Property Package.")
 
+                Else
+
+                    Dim xl = Phases(3).Properties.molarfraction.GetValueOrDefault()
+                    Dim xl2 = Phases(4).Properties.molarfraction.GetValueOrDefault()
+                    Dim xv = Phases(2).Properties.molarfraction.GetValueOrDefault()
+                    Dim xs = Phases(7).Properties.molarfraction.GetValueOrDefault()
+
+                    For i = 2 To 7
+                        For Each subst In Phases(i).Compounds.Values
+                            subst.MassFraction = .AUX_CONVERT_MOL_TO_MASS(subst.Name, i)
+                        Next
+                    Next
+
+                    Phases(3).Properties.massfraction = xl * .AUX_MMM(PropertyPackages.Phase.Liquid1) / (xl * .AUX_MMM(PropertyPackages.Phase.Liquid1) + xl2 * .AUX_MMM(PropertyPackages.Phase.Liquid2) + xv * .AUX_MMM(PropertyPackages.Phase.Vapor) + xs * .AUX_MMM(PropertyPackages.Phase.Solid))
+                    Phases(4).Properties.massfraction = xl2 * .AUX_MMM(PropertyPackages.Phase.Liquid2) / (xl * .AUX_MMM(PropertyPackages.Phase.Liquid1) + xl2 * .AUX_MMM(PropertyPackages.Phase.Liquid2) + xv * .AUX_MMM(PropertyPackages.Phase.Vapor) + xs * .AUX_MMM(PropertyPackages.Phase.Solid))
+                    Phases(2).Properties.massfraction = xv * .AUX_MMM(PropertyPackages.Phase.Vapor) / (xl * .AUX_MMM(PropertyPackages.Phase.Liquid1) + xl2 * .AUX_MMM(PropertyPackages.Phase.Liquid2) + xv * .AUX_MMM(PropertyPackages.Phase.Vapor) + xs * .AUX_MMM(PropertyPackages.Phase.Solid))
+                    Phases(7).Properties.massfraction = xs * .AUX_MMM(PropertyPackages.Phase.Solid) / (xl * .AUX_MMM(PropertyPackages.Phase.Liquid1) + xl2 * .AUX_MMM(PropertyPackages.Phase.Liquid2) + xv * .AUX_MMM(PropertyPackages.Phase.Vapor) + xs * .AUX_MMM(PropertyPackages.Phase.Solid))
+
                 End If
 
                 If properties Then

@@ -1,8 +1,5 @@
-﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
-Imports DWSIM.Interfaces.Enums.GraphicObjects
-Imports DWSIM.Interfaces
+﻿Imports DWSIM.Interfaces
 Imports DWSIM.DrawingTools.Point
-Imports TheArtOfDev.HtmlRenderer.Adapters
 
 Namespace GraphicObjects.Shapes
 
@@ -46,17 +43,148 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub PositionConnectors()
 
-            If DrawMode = 2 And ChemSep Then
+            If ChemSep And Owner IsNot Nothing Then
+
+                Try
+
+                    If DrawMode <> 2 Then
+
+                        Dim i As Integer = 0
+                        For Each ic As IConnectionPoint In Me.InputConnectors
+                            If ic.ConnectorName.Contains("Feed") Then
+                                Dim stage_number = ic.ConnectorName.Split("_")(1).Replace("stage", "")
+                                If stage_number > 50 Then
+                                    ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + 45 + 0.8 * (Height - 45))
+                                Else
+                                    ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + 45 + stage_number / 50.0 * (Height - 45))
+                                End If
+                            ElseIf ic.ConnectorName = "Column heat duty" Then
+                                ic.Position = New Point(X + 0.5 * Width, Y + Height)
+                                ic.Direction = Enums.GraphicObjects.ConDir.Up
+                            Else
+                                ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + (i + 1) / InputConnectors.Count * Height)
+                                ic.Direction = Enums.GraphicObjects.ConDir.Right
+                            End If
+                            i = i + 1
+                        Next
+
+                        i = 0
+                        For Each oc As IConnectionPoint In Me.OutputConnectors
+                            If oc.ConnectorName.Contains("Sidestream") Then
+                                Dim stage_number = oc.ConnectorName.Split("_")(1).Replace("stage", "")
+                                oc.Position = New Point(X + 0.31 * Width, Y + (stage_number + 10.0) / 50.0 * Height * 0.7)
+                            ElseIf oc.ConnectorName = "Condenser heat duty" Then
+                                oc.Position = New Point(X + Width, Y + 0.175 * Height)
+                                oc.Direction = Enums.GraphicObjects.ConDir.Right
+                            ElseIf oc.ConnectorName = "Reboiler heat duty" Then
+                                oc.Position = New Point(X + Width, Y + 0.825 * Height)
+                                oc.Direction = Enums.GraphicObjects.ConDir.Right
+                            ElseIf oc.ConnectorName = "TopProduct" Then
+
+                                Shape = 1
+
+                                If oc.IsAttached Then
+                                    Dim vf = DirectCast(oc.AttachedConnector.AttachedTo.Owner, IMaterialStream).Phases(2).Properties.molarfraction.GetValueOrDefault()
+                                    If vf > 0.97 Then Shape = 0
+                                End If
+
+                                If Shape = 0 Then
+                                    oc.Position = New Point(X + 0.7 * Width, Y + 0.02 * Height)
+                                Else
+                                    oc.Position = New Point(X + 0.9 * Width, Y + 0.3 * Height)
+                                End If
+
+                            ElseIf oc.ConnectorName = "BottomProduct" Then
+                                oc.Position = New Point(X + Width, Y + 0.98 * Height)
+                                oc.Direction = Enums.GraphicObjects.ConDir.Right
+                            Else
+                                oc.Position = New Point(X + 0.9 * Width, Y + (i + 1) / OutputConnectors.Count * Height)
+                            End If
+                            i = i + 1
+                        Next
+
+                    Else
+
+                        Dim i As Integer = 0
+                        For Each ic As IConnectionPoint In Me.InputConnectors
+                            If ic.ConnectorName.Contains("Feed") Then
+                                Dim stage_number = ic.ConnectorName.Split("_")(1).Replace("stage", "")
+                                If stage_number > 50 Then
+                                    ic.Position = New Point(X + 0.15 * Width, Y + 45 + 0.8 * (Height - 45))
+                                Else
+                                    ic.Position = New Point(X + 0.15 * Width, Y + 45 + stage_number / 50.0 * (Height - 45))
+                                End If
+                                ic.Direction = Enums.GraphicObjects.ConDir.Right
+                            ElseIf ic.ConnectorName = "Column heat duty" Then
+                                ic.Position = New Point(X + 0.15 * Width, Y + 0.8 * Height)
+                                ic.Direction = Enums.GraphicObjects.ConDir.Right
+                            Else
+                                ic.Position = New Point(X + 0.05 * 1.25 * Width, Y + (i + 1) / InputConnectors.Count * Height)
+                                ic.Direction = Enums.GraphicObjects.ConDir.Right
+                            End If
+                            i = i + 1
+                        Next
+
+                        i = 0
+                        For Each oc As IConnectionPoint In Me.OutputConnectors
+                            If oc.ConnectorName.Contains("Sidestream") Then
+                                Dim stage_number = oc.ConnectorName.Split("_")(1).Replace("stage", "")
+                                oc.Position = New Point(X + 0.31 * Width, Y + (stage_number + 10.0) / 50.0 * Height * 0.7)
+                            ElseIf oc.ConnectorName = "Condenser heat duty" Then
+                                oc.Position = New Point(X + 0.7 * Width, Y + 0.175 * Height)
+                            ElseIf oc.ConnectorName = "Reboiler heat duty" Then
+                                oc.Position = New Point(X + 0.75 * Width, Y + 0.94 * Height)
+                                oc.Direction = Enums.GraphicObjects.ConDir.Up
+                            ElseIf oc.ConnectorName = "TopProduct" Then
+
+                                Shape = 1
+
+                                If oc.IsAttached Then
+                                    Dim vf = DirectCast(oc.AttachedConnector.AttachedTo.Owner, IMaterialStream).Phases(2).Properties.molarfraction.GetValueOrDefault()
+                                    If vf > 0.97 Then Shape = 0
+                                End If
+
+                                If Shape = 0 Then
+                                    oc.Position = New Point(X + 0.87 * Width, Y + 0.01 * Height)
+                                Else
+                                    oc.Position = New Point(X + 0.87 * Width, Y + 0.385 * Height)
+                                End If
+
+                            ElseIf oc.ConnectorName = "BottomProduct" Then
+                                oc.Position = New Point(X + 0.9 * Width, Y + 0.95 * Height)
+                            Else
+                                oc.Position = New Point(X + 0.9 * Width, Y + (i + 1) / OutputConnectors.Count * Height)
+                            End If
+                            i = i + 1
+                        Next
+
+                    End If
+
+                Catch ex As Exception
+
+                End Try
+
+
+            Else
+
+            If Not Me.AdditionalInfo Is Nothing Then
+
+                Dim obj1(Me.InputConnectors.Count), obj2(Me.InputConnectors.Count) As Double
+                Dim obj3(Me.OutputConnectors.Count), obj4(Me.OutputConnectors.Count) As Double
+                obj1 = Me.AdditionalInfo(0)
+                obj2 = Me.AdditionalInfo(1)
+                obj3 = Me.AdditionalInfo(2)
+                obj4 = Me.AdditionalInfo(3)
 
                 Try
                     Dim i As Integer = 0
                     For Each ic As IConnectionPoint In Me.InputConnectors
-                        ic.Position = New Point(Me.X + 0.1 * Width, Me.Y + (i + 1) / InputConnectors.Count * Height)
+                        ic.Position = New Point(Me.X + obj1(i), Me.Y + obj2(i))
                         i = i + 1
                     Next
                     i = 0
                     For Each oc As IConnectionPoint In Me.OutputConnectors
-                        oc.Position = New Point(Me.X + 0.9 * Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
+                        oc.Position = New Point(Me.X + obj3(i), Me.Y + obj4(i))
                         i = i + 1
                     Next
                 Catch ex As Exception
@@ -65,48 +193,22 @@ Namespace GraphicObjects.Shapes
 
             Else
 
-                If Not Me.AdditionalInfo Is Nothing Then
+                Try
+                    Dim i As Integer = 0
+                    For Each ic As IConnectionPoint In Me.InputConnectors
+                        ic.Position = New Point(Me.X, Me.Y + (i + 1) / InputConnectors.Count * Height)
+                        i = i + 1
+                    Next
+                    i = 0
+                    For Each oc As IConnectionPoint In Me.OutputConnectors
+                        oc.Position = New Point(Me.X + Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
+                        i = i + 1
+                    Next
+                Catch ex As Exception
 
-                    Dim obj1(Me.InputConnectors.Count), obj2(Me.InputConnectors.Count) As Double
-                    Dim obj3(Me.OutputConnectors.Count), obj4(Me.OutputConnectors.Count) As Double
-                    obj1 = Me.AdditionalInfo(0)
-                    obj2 = Me.AdditionalInfo(1)
-                    obj3 = Me.AdditionalInfo(2)
-                    obj4 = Me.AdditionalInfo(3)
+                End Try
 
-                    Try
-                        Dim i As Integer = 0
-                        For Each ic As IConnectionPoint In Me.InputConnectors
-                            ic.Position = New Point(Me.X + obj1(i), Me.Y + obj2(i))
-                            i = i + 1
-                        Next
-                        i = 0
-                        For Each oc As IConnectionPoint In Me.OutputConnectors
-                            oc.Position = New Point(Me.X + obj3(i), Me.Y + obj4(i))
-                            i = i + 1
-                        Next
-                    Catch ex As Exception
-
-                    End Try
-
-                Else
-
-                    Try
-                        Dim i As Integer = 0
-                        For Each ic As IConnectionPoint In Me.InputConnectors
-                            ic.Position = New Point(Me.X, Me.Y + (i + 1) / InputConnectors.Count * Height)
-                            i = i + 1
-                        Next
-                        i = 0
-                        For Each oc As IConnectionPoint In Me.OutputConnectors
-                            oc.Position = New Point(Me.X + Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
-                            i = i + 1
-                        Next
-                    Catch ex As Exception
-
-                    End Try
-
-                End If
+            End If
 
             End If
 
@@ -190,7 +292,7 @@ Namespace GraphicObjects.Shapes
                             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.55 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.575 * 1.25 * Width, Y + 0.875 * Height), New SKPoint(X + 0.625 * 1.25 * Width, Y + 0.775 * Height), New SKPoint(X + 0.65 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + Width, Y + 0.825 * Height)}, gradPen)
                             canvas.DrawLine((X + 0.5 * 1.25 * Width), (Y + 0.825 * Height), (X + 0.4 * 1.25 * Width), (Y + 0.825 * Height), gradPen)
 
-                            canvas.DrawLine((X), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), gradPen)
+                            canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), gradPen)
 
                             canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.2 * Height), (X + 0.31 * Width), (Y + 0.2 * Height), gradPen)
                             canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.3 * Height), (X + 0.31 * Width), (Y + 0.3 * Height), gradPen)
@@ -229,7 +331,7 @@ Namespace GraphicObjects.Shapes
                             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.55 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.575 * 1.25 * Width, Y + 0.875 * Height), New SKPoint(X + 0.625 * 1.25 * Width, Y + 0.775 * Height), New SKPoint(X + 0.65 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + Width, Y + 0.825 * Height)}, myPen)
                             canvas.DrawLine((X + 0.5 * 1.25 * Width), (Y + 0.825 * Height), (X + 0.4 * 1.25 * Width), (Y + 0.825 * Height), myPen)
 
-                            canvas.DrawLine((X), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), myPen)
+                            canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), myPen)
 
                             canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.2 * Height), (X + 0.31 * Width), (Y + 0.2 * Height), myPen)
                             canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.3 * Height), (X + 0.31 * Width), (Y + 0.3 * Height), myPen)
@@ -322,7 +424,7 @@ Namespace GraphicObjects.Shapes
                             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.55 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.575 * 1.25 * Width, Y + 0.875 * Height), New SKPoint(X + 0.625 * 1.25 * Width, Y + 0.775 * Height), New SKPoint(X + 0.65 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + Width, Y + 0.825 * Height)}, myPen)
                             canvas.DrawLine((X + 0.5 * 1.25 * Width), (Y + 0.825 * Height), (X + 0.4 * 1.25 * Width), (Y + 0.825 * Height), myPen)
 
-                            canvas.DrawLine((X), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), myPen)
+                            canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), myPen)
 
                             canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.2 * Height), (X + 0.31 * Width), (Y + 0.2 * Height), myPen)
                             canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.3 * Height), (X + 0.31 * Width), (Y + 0.3 * Height), myPen)

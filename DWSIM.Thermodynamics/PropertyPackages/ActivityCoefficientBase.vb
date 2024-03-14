@@ -373,29 +373,13 @@ Namespace PropertyPackages
                             H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P)
                         Case 2 'Excess
                             Dim Hex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
-                            If Double.IsNaN(Hex) Then
-                                If Flowsheet IsNot Nothing Then
-                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings"), Interfaces.IFlowsheet.MessageType.Warning)
-                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Assuming excess enthalpy = 0"), Interfaces.IFlowsheet.MessageType.Warning)
-                                    Hex = 0.0
-                                Else
-                                    Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
-                                End If
-                            End If
+                            If Double.IsNaN(Hex) Then Hex = 0.0
                             H = Me.RET_Hid(298.15, T, Vx) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) + Hex - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
-                        Case 3 'Experimental Liquid
+                                Case 3 'Experimental Liquid
                             H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P)
                         Case 4 'Experimental Liquid + Excess
                             Dim Hex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
-                            If Double.IsNaN(Hex) Then
-                                If Flowsheet IsNot Nothing Then
-                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings"), Interfaces.IFlowsheet.MessageType.Warning)
-                                    Flowsheet.ShowMessage(Tag + ": " + Flowsheet.GetTranslatedString("Assuming excess enthalpy = 0"), Interfaces.IFlowsheet.MessageType.Warning)
-                                    Hex = 0.0
-                                Else
-                                    Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
-                                End If
-                            End If
+                            If Double.IsNaN(Hex) Then Hex = 0.0
                             H = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) + Hex
                     End Select
                 ElseIf st = State.Vapor Then
@@ -483,13 +467,13 @@ Namespace PropertyPackages
                             S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) / T
                         Case 2 'Excess
                             Dim gammaex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
-                            If Double.IsNaN(gammaex) Then Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
+                            If Double.IsNaN(gammaex) Then gammaex = 0.0
                             S = Me.RET_Sid(298.15, T, P, Vx) + gammaex / T + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                         Case 3 'Experimental Liquid
                             S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) / T
                         Case 4 'Experimental Liquid + Excess
                             Dim gammaex = Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)
-                            If Double.IsNaN(gammaex) Then Throw New Exception("Error calculating excess enthalpy from activity coefficients. If this error persists, try changing the Enthalpy Calculation Mode in Property Package settings.")
+                            If Double.IsNaN(gammaex) Then gammaex = 0.0
                             S = AUX_INT_CPDTm_L(298.15, T, Me.AUX_CONVERT_MOL_TO_MASS(Vx)) / T + P / 1000 / Me.AUX_LIQDENS(T, Vx, P) / T + gammaex / T
                     End Select
                 ElseIf st = State.Vapor Then

@@ -1172,7 +1172,7 @@ Public Class FormSimulWizard
                     Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(obj) obj.GraphicObject.ObjectType = ObjectType.MaterialStream)
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1216,6 +1216,8 @@ Public Class FormSimulWizard
         Dim imgCaution = New Bitmap(My.Resources.box_important_48px, New Size(24 * Settings.DpiScale, 24 * Settings.DpiScale))
 
         Dim names = CurrentFlowsheet.SelectedCompounds.Keys.Select(Function(n) n.ToLower()).ToList()
+
+        Dim hasCP = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsCOOLPROPSupported).Count()
 
         Dim elecs = CurrentFlowsheet.SelectedCompounds.Values.Where(Function(c) c.IsSalt Or c.IsIon Or c.IsHydratedSalt).Count()
 
@@ -1269,7 +1271,7 @@ Public Class FormSimulWizard
                     Select Case ptype
                         Case PackageType.EOS, PackageType.CorrespondingStates
                             row.Cells(1).Value = 1
-                            row.Cells(2).Value = My.Resources.exclamation
+                            row.Cells(2).Value = imgOK
                             ChangeRowForeColor(row, Color.DarkGreen)
                         Case Else
                             row.Cells(1).Value = 0
@@ -1502,6 +1504,30 @@ Public Class FormSimulWizard
             Next
         End If
 
+        If names.Contains("water") Or names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+            'Water + Hydrocarbons
+            rbSVLLE.Checked = True
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("Petroleum Industry") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = imgOK
+                    ChangeRowForeColor(row, Color.Blue)
+                End If
+            Next
+        End If
+
+        If hasCP > 0 Then
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("CoolProp") Or
+                        row.Cells(4).Value.ToString().Contains("REFPROP") Or
+                        row.Cells(4).Value.ToString().Contains("Raoult") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = imgOK
+                    ChangeRowForeColor(row, Color.Blue)
+                End If
+            Next
+        End If
+
         If names.Contains("hydrogen") Then
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Streed") Or row.Cells(4).Value.ToString().Contains("1978") Then
@@ -1516,6 +1542,7 @@ Public Class FormSimulWizard
             For Each row As DataGridViewRow In DataGridViewPP.Rows
                 If row.Cells(4).Value.ToString().Contains("Steam") Or
                     row.Cells(4).Value.ToString().Equals("CoolProp") Or
+                    row.Cells(4).Value.ToString().Contains("REFPROP") Or
                     row.Cells(4).Value.ToString().Equals("Extended CoolProp") Or
                     row.Cells(4).Value.ToString().Contains("Raoult") Then
                     row.Cells(1).Value = 1
@@ -1567,8 +1594,26 @@ Public Class FormSimulWizard
             Next
         End If
 
+        If (names.Contains("carbon dioxide") Or names.Contains("hydrogen sulfide")) And
+            (names.Contains("monoethanolamine") Or names.Contains("methyl diethanolamine") Or names.Contains("diethanolamine") Or names.Contains("piperazine")) Then
+            'amines
+            For Each row As DataGridViewRow In DataGridViewPP.Rows
+                If row.Cells(4).Value.ToString().Contains("Amines") Then
+                    row.Cells(1).Value = 1
+                    row.Cells(2).Value = imgOK
+                    ChangeRowForeColor(row, Color.Blue)
+                Else
+                    row.Cells(1).Value = 0
+                    row.Cells(2).Value = imgCaution
+                    ChangeRowForeColor(row, Color.DarkGray)
+                End If
+            Next
+        End If
+
         DataGridViewPP.Sort(DataGridViewPP.Columns(4), System.ComponentModel.ListSortDirection.Ascending)
         DataGridViewPP.Sort(DataGridViewPP.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+
+        DataGridViewPP.FirstDisplayedScrollingRowIndex = DataGridViewPP.Rows.GetFirstRow(DataGridViewElementStates.Visible)
 
     End Sub
 
@@ -1646,7 +1691,7 @@ Public Class FormSimulWizard
                         Dim pp = FormMain.PropertyPackages(row.Cells(0).Value)
                         row.Visible = pp.Popular
                     Else
-                        row.Visible = False
+                        row.Visible = True
                     End If
                 Next
             Case 1 'All Types

@@ -47,6 +47,7 @@ Partial Class FormImportCompoundFromThermo
         Me.Column2 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -244,6 +245,7 @@ Partial Class FormImportCompoundFromThermo
         '
         'WizardPage4
         '
+        Me.WizardPage4.Controls.Add(Me.Button1)
         Me.WizardPage4.Controls.Add(Me.tbImportAs)
         Me.WizardPage4.Controls.Add(Me.Label9)
         Me.WizardPage4.Controls.Add(Me.dgResults)
@@ -259,9 +261,9 @@ Partial Class FormImportCompoundFromThermo
         '
         Me.tbImportAs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbImportAs.Location = New System.Drawing.Point(153, 317)
+        Me.tbImportAs.Location = New System.Drawing.Point(120, 317)
         Me.tbImportAs.Name = "tbImportAs"
-        Me.tbImportAs.Size = New System.Drawing.Size(534, 23)
+        Me.tbImportAs.Size = New System.Drawing.Size(452, 23)
         Me.tbImportAs.TabIndex = 8
         '
         'Label9
@@ -271,9 +273,9 @@ Partial Class FormImportCompoundFromThermo
         Me.Label9.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Label9.Location = New System.Drawing.Point(11, 321)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(121, 15)
+        Me.Label9.Size = New System.Drawing.Size(103, 15)
         Me.Label9.TabIndex = 7
-        Me.Label9.Text = "Import Compound as"
+        Me.Label9.Text = "Compound Name"
         '
         'dgResults
         '
@@ -316,6 +318,15 @@ Partial Class FormImportCompoundFromThermo
         Me.Label6.Size = New System.Drawing.Size(677, 74)
         Me.Label6.TabIndex = 4
         Me.Label6.Text = resources.GetString("Label6.Text")
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(578, 317)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(109, 23)
+        Me.Button1.TabIndex = 10
+        Me.Button1.Text = "Export to JSON"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'FormImportCompoundFromThermo
         '
@@ -367,4 +378,5 @@ Partial Class FormImportCompoundFromThermo
     Friend WithEvents tbImportAs As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
+    Friend WithEvents Button1 As Button
 End Class

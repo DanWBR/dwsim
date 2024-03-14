@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -94,6 +94,9 @@ Partial Class EditingForm_Column
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.btnTestConvergence = New System.Windows.Forms.Button()
+        Me.lbl1 = New System.Windows.Forms.Label()
         Me.cbInitialEstimatesProvider = New System.Windows.Forms.ComboBox()
         Me.LabelSM = New System.Windows.Forms.Label()
         Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
@@ -112,7 +115,6 @@ Partial Class EditingForm_Column
         Me.btnViewReport = New System.Windows.Forms.Button()
         Me.btnViewPropertiesReport = New System.Windows.Forms.Button()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lbl1 = New System.Windows.Forms.Label()
         Me.GroupBox5.SuspendLayout()
         Me.TabContainerSpecification.SuspendLayout()
         Me.TabCondenser.SuspendLayout()
@@ -710,8 +712,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -719,8 +721,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -728,8 +730,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -753,6 +755,8 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.Label20)
+        Me.TabPage6.Controls.Add(Me.btnTestConvergence)
         Me.TabPage6.Controls.Add(Me.lbl1)
         Me.TabPage6.Controls.Add(Me.cbInitialEstimatesProvider)
         Me.TabPage6.Controls.Add(Me.LabelSM)
@@ -784,12 +788,36 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
         '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
+        '
+        'btnTestConvergence
+        '
+        resources.ApplyResources(Me.btnTestConvergence, "btnTestConvergence")
+        Me.btnTestConvergence.Name = "btnTestConvergence"
+        Me.ToolTip1.SetToolTip(Me.btnTestConvergence, resources.GetString("btnTestConvergence.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnTestConvergence, resources.GetString("btnTestConvergence.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnTestConvergence, resources.GetString("btnTestConvergence.ToolTip2"))
+        Me.btnTestConvergence.UseVisualStyleBackColor = True
+        '
+        'lbl1
+        '
+        resources.ApplyResources(Me.lbl1, "lbl1")
+        Me.lbl1.Name = "lbl1"
+        Me.ToolTip1.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip2"))
+        '
         'cbInitialEstimatesProvider
         '
         resources.ApplyResources(Me.cbInitialEstimatesProvider, "cbInitialEstimatesProvider")
         Me.cbInitialEstimatesProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInitialEstimatesProvider.FormattingEnabled = True
-        Me.cbInitialEstimatesProvider.Items.AddRange(New Object() {resources.GetString("cbInitialEstimatesProvider.Items"), resources.GetString("cbInitialEstimatesProvider.Items1"), resources.GetString("cbInitialEstimatesProvider.Items2")})
         Me.cbInitialEstimatesProvider.Name = "cbInitialEstimatesProvider"
         Me.ToolTip1.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbInitialEstimatesProvider, resources.GetString("cbInitialEstimatesProvider.ToolTip1"))
@@ -954,14 +982,6 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'lbl1
-        '
-        resources.ApplyResources(Me.lbl1, "lbl1")
-        Me.lbl1.Name = "lbl1"
-        Me.ToolTip1.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.lbl1, resources.GetString("lbl1.ToolTip2"))
-        '
         'EditingForm_Column
         '
         resources.ApplyResources(Me, "$this")
@@ -1079,4 +1099,6 @@ Partial Class EditingForm_Column
     Public WithEvents Label17 As Label
     Public WithEvents cbInitialEstimatesProvider As ComboBox
     Public WithEvents lbl1 As Label
+    Friend WithEvents btnTestConvergence As Button
+    Public WithEvents Label20 As Label
 End Class

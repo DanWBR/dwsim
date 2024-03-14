@@ -201,7 +201,7 @@ Public Class SimulationObjectsPanel
         Next
 
         If Not FormMain.IsPro Then
-            ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelMixers, PanelColumns, PanelExchangers, PanelLogical, PanelPressure, PanelUser})
+            ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelMixers, PanelColumns, PanelExchangers, PanelLogical, PanelPressure, PanelUser, PanelReactors})
         End If
 
         'fossee models

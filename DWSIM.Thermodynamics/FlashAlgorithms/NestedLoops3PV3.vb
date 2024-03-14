@@ -824,15 +824,15 @@ out:
 
             Dim errflag As Boolean = True
             Try
-                Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
-                errflag = False
-            Catch ex As Exception
-            End Try
-            If errflag Then
                 Dim nl As New NestedLoops
                 nl.PTFlashFunction = AddressOf Flash_PT
                 nl.DisableParallelCalcs = True
                 Return nl.Flash_PH_1(Vz, P, H, Tref, PP, False, Nothing)
+                errflag = False
+            Catch ex As Exception
+            End Try
+            If errflag Then
+                Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
             End If
 
         End Function

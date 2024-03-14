@@ -6,6 +6,7 @@ Imports DWSIM.UnitOperations.UnitOperations
 Imports System.Drawing
 Imports DWSIM.UnitOperations.UnitOperations.Column
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
+Imports DWSIM.SharedClasses
 
 Public Class EditingForm_Column
 
@@ -14,6 +15,9 @@ Public Class EditingForm_Column
     Public Property SimObject As UnitOperations.Column
 
     Public Loaded As Boolean = False
+
+    Dim reditor As EditingForm_Column_Results
+    Dim fr, fr2 As ReportViewer
 
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
@@ -121,6 +125,7 @@ Public Class EditingForm_Column
             Dim ieproviders = Column.ExternalInitialEstimatesProviders.Keys.ToArray()
             cbInitialEstimatesProvider.Items.Clear()
             cbInitialEstimatesProvider.Items.Add("Internal (Default)")
+            cbInitialEstimatesProvider.Items.Add("Internal 2 (Experimental)")
             cbInitialEstimatesProvider.Items.AddRange(ieproviders)
 
             Try
@@ -357,6 +362,27 @@ Public Class EditingForm_Column
 
         Loaded = True
 
+        If reditor IsNot Nothing Then
+            reditor.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
+            reditor.TabText = reditor.Text
+            reditor.FillGraphs()
+            reditor.FillTables()
+        End If
+
+        If fr IsNot Nothing Then
+            fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
+            fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
+            fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
+            fr.TextBox1.DeselectAll()
+        End If
+
+        If fr2 IsNot Nothing Then
+            fr2.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+            fr2.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
+            fr2.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
+            fr2.TextBox1.DeselectAll()
+        End If
+
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
@@ -410,7 +436,7 @@ Public Class EditingForm_Column
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnResults.Click
 
-        Dim reditor As New EditingForm_Column_Results With {.dc = Me.SimObject}
+        If reditor Is Nothing Then reditor = New EditingForm_Column_Results With {.dc = Me.SimObject}
         reditor.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
         reditor.TabText = reditor.Text
         reditor.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
@@ -428,60 +454,7 @@ Public Class EditingForm_Column
 
             Dim ne As Integer = SimObject.NumberOfStages
 
-            Dim nep As Integer = SimObject.Stages.Count
-
-            Dim dif As Integer = ne - nep
-
-            If dif < 0 Then
-                SimObject.Stages.RemoveRange(nep + dif - 1, -dif)
-                With SimObject.InitialEstimates
-                    .LiqCompositions.RemoveRange(nep + dif - 1, -dif)
-                    .VapCompositions.RemoveRange(nep + dif - 1, -dif)
-                    .LiqMolarFlows.RemoveRange(nep + dif - 1, -dif)
-                    .VapMolarFlows.RemoveRange(nep + dif - 1, -dif)
-                    .StageTemps.RemoveRange(nep + dif - 1, -dif)
-                End With
-            ElseIf dif > 0 Then
-                Dim i As Integer
-                Dim P0 = SimObject.Stages(SimObject.Stages.Count - 2).P
-                Dim E0 = SimObject.Stages(SimObject.Stages.Count - 2).Efficiency
-                Dim P1 = SimObject.Stages.Last.P
-                Dim E1 = SimObject.Stages.Last.Efficiency
-                For i = 1 To dif
-                    Dim stage = New Stage(Guid.NewGuid().ToString)
-                    SimObject.Stages.Insert(SimObject.Stages.Count - 1, stage)
-                    stage.Name = SimObject.FlowSheet.GetTranslatedString("DCStage") & "_" & SimObject.Stages.Count - 2
-                    stage.P = P0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (P1 - P0)
-                    stage.Efficiency = E0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (E1 - E0)
-                    With SimObject.InitialEstimates
-                        Dim dl As New Dictionary(Of String, Parameter)
-                        Dim dv As New Dictionary(Of String, Parameter)
-                        For Each cp In SimObject.FlowSheet.SelectedCompounds.Values
-                            Dim pl = New Parameter()
-                            pl.LoadData(.LiqCompositions(.LiqCompositions.Count - 1)(cp.Name).SaveData())
-                            dl.Add(cp.Name, pl)
-                            Dim pv = New Parameter()
-                            pv.LoadData(.VapCompositions(.VapCompositions.Count - 1)(cp.Name).SaveData())
-                            dv.Add(cp.Name, pv)
-                        Next
-                        .LiqCompositions.Insert(.LiqCompositions.Count - 1, dl)
-                        .VapCompositions.Insert(.VapCompositions.Count - 1, dv)
-                        Dim L0 = .LiqMolarFlows(.LiqMolarFlows.Count - 2).Value
-                        Dim V0 = .VapMolarFlows(.VapMolarFlows.Count - 2).Value
-                        Dim T0 = .StageTemps(.StageTemps.Count - 1).Value
-                        Dim T1 = .StageTemps(.StageTemps.Count - 1).Value
-                        Dim plt = New Parameter
-                        Dim pvt = New Parameter
-                        Dim pt = New Parameter
-                        plt.Value = L0
-                        pvt.Value = V0
-                        pt.Value = T0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (T1 - T0)
-                        .LiqMolarFlows.Insert(.LiqMolarFlows.Count - 1, plt)
-                        .VapMolarFlows.Insert(.VapMolarFlows.Count - 1, pvt)
-                        .StageTemps.Insert(.StageTemps.Count - 1, pt)
-                    End With
-                Next
-            End If
+            SimObject.SetNumberOfStages(ne)
 
             UpdateInfo()
 
@@ -839,12 +812,15 @@ Public Class EditingForm_Column
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles btnViewReport.Click
 
-        Dim fr As New ReportViewer()
-        fr.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
-        fr.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
-        fr.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
-        fr.TextBox1.DeselectAll()
-        SimObject.FlowSheet.DisplayForm(fr)
+        If fr2 Is Nothing Then
+            fr2 = New ReportViewer()
+            fr2.HideOnClose = True
+        End If
+        fr2.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+        fr2.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr2.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
+        fr2.TextBox1.DeselectAll()
+        SimObject.FlowSheet.DisplayForm(fr2)
 
     End Sub
 
@@ -854,7 +830,10 @@ Public Class EditingForm_Column
 
     Private Sub btnViewPropertiesReport_Click(sender As Object, e As EventArgs) Handles btnViewPropertiesReport.Click
 
-        Dim fr As New ReportViewer()
+        If fr Is Nothing Then
+            fr = New ReportViewer()
+            fr.HideOnClose = True
+        End If
         fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
         fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
         fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
@@ -885,6 +864,40 @@ Public Class EditingForm_Column
             Catch ex As Exception
             End Try
         End If
+
+    End Sub
+
+    Private Sub btnTestConvergence_Click(sender As Object, e As EventArgs) Handles btnTestConvergence.Click
+
+        GlobalSettings.Settings.TaskCancellationTokenSource = New Threading.CancellationTokenSource()
+
+        Dim fw As New WaitForm()
+
+        AddHandler fw.btnCancel.Click, Sub()
+                                           GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
+                                       End Sub
+
+        fw.ChangeDefaultFont()
+        fw.Show()
+
+        TaskHelper.
+            Run(Sub()
+                    SimObject.TestConvergence()
+                End Sub,
+                GlobalSettings.Settings.TaskCancellationTokenSource.Token).
+                ContinueWith(Sub(t)
+                                 If t.Exception IsNot Nothing Then
+                                     MessageBox.Show("Failed to converge: " + t.Exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                 ElseIf t.IsCanceled Then
+                                     MessageBox.Show("Test cancelled by the user.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                 Else
+                                     MessageBox.Show("Converged successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                 End If
+                                 fw.UIThread(Sub()
+                                                 fw.Close()
+                                                 UpdateInfo()
+                                             End Sub)
+                             End Sub)
 
     End Sub
 

@@ -1,4 +1,7 @@
-﻿Imports DWSIM.Thermodynamics.Databases.DDBStructureLink
+﻿Imports System.IO
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports DWSIM.Thermodynamics.Databases.DDBStructureLink
 
 Public Class FormImportCompoundFromThermo
 
@@ -174,6 +177,36 @@ Public Class FormImportCompoundFromThermo
     Private Sub FormImportCompoundFromThermo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ChangeDefaultFont()
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Exporting Compound to JSON", "", Nothing)
+
+        If compdata IsNot Nothing Then
+
+            Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+            Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+                New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON File", "*.json")})
+
+            If handler IsNot Nothing Then
+                Using stream As New IO.MemoryStream()
+                    Using writer As New StreamWriter(stream) With {.AutoFlush = True}
+                        Try
+                            Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(compdata, Newtonsoft.Json.Formatting.Indented)
+                            writer.Write(jsondata)
+                            handler.Write(stream)
+                            MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Catch ex As Exception
+                            MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End Using
+                End Using
+            End If
+
+        End If
 
     End Sub
 

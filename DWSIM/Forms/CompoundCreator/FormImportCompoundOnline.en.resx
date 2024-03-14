@@ -214,6 +214,20 @@ If everything is ok, click "Finish" to add the imported compound to the simulati
   <data name="Label7.Text" xml:space="preserve">
     <value>Import Compound from Online Sources</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnExportJSON.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnExportJSON.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnExportJSON.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
+  </data>
+  <data name="btnExportJSON.Text" xml:space="preserve">
+    <value>Export to JSON</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Import Compound from Online Sources</value>
   </data>

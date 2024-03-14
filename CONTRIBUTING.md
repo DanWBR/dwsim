@@ -14,7 +14,7 @@ The DWSIM project maintains that all code copyrights are held by the original au
 
 The DWSIM project uses the following license:
 
-* The  [General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.txt)
+* The [General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.txt)
 
 ## Copying Files from Other Projects
 

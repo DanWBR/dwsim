@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.6.8
+Version 8.7.0
 Copyright (c) 2017-2024 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,34 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.7.0
+
+- Import/Export NRTL/UNIQUAC/Wilson BIPs
+- Import/Export PR/SRK/PRSV2/LKP BIPs
+- Wilson BIP estimation
+- Various Rigorous Column enhancements: new initial estimates selector, enhanced reporting, test convergence tool
+- Data Regression Utility: added support for Wilson BIPs
+- Data Regression Utility: Export regressed BIPs
+- Export imported compounds to JSON (Classic UI)
+- Estimate PID Controller parameters (Classic UI)
+- Enhanced floating table drawing for big property lists
+- Dynamic valve flow calculation now obeys Material Stream's maximum allowable dynamic flow rate
+- Toggle show/hide object label
+- Fixed Heat Exchanger sizing sample
+- Fixed issue with CSTR
+- Fixed issue with PRLK enthalpy/entropy calculations (#593)
+- Fixed Reporting tool (Classic UI)
+- Fixed infinite loop message issue
+- Fixed axes in embedded dynamic mode charts
+- Fixed phase split heuristics
+- Fixed object recalculation not updating editor
+- Fixed issue with SimpleLLE flash algorithm
+- Fixed issue with single comp PH flash
+- Fixed issue with Dynamics Cause and Matrix editor (Classic UI)
+- Fixed port/connector positions for ChemSep column
+- CAPE-OPEN Property Package Manager fix
+- Added compound mass balance check for rigorous columns (#599)
 
 Version 8.6.8
 

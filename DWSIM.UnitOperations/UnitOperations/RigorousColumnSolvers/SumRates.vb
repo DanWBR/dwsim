@@ -821,6 +821,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 reporter?.AppendLine(String.Format("{0,-16}{1,26:G6}{2,26:G6}", i + 1, t_error_hist(i), comp_error_hist(i)))
             Next
 
+            reporter?.AppendLine()
+            reporter?.AppendLine("Last Updated on " + Date.Now.ToString())
+
             If rc.CreateSolverConvergengeReport Then rc.ColumnSolverConvergenceReport = reporter.ToString()
 
             ' finished, return arrays

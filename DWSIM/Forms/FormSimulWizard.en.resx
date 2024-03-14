@@ -1324,6 +1324,6 @@ You can enable or disable this feature later in the 'Simulation Settings' &gt; '
     <value>Create From UNIFAC Molecular Structure</value>
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 158</value>
+    <value>331, 136</value>
   </data>
 </root>

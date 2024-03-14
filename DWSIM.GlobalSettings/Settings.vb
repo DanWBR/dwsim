@@ -58,7 +58,17 @@ Public Class Settings
             _tcks = value
         End Set
     End Property
-    Public Shared Property CAPEOPENMode As Boolean = False
+
+    Private Shared _comode As Boolean = False
+
+    Public Shared Property CAPEOPENMode As Boolean
+        Get
+            Return _comode
+        End Get
+        Set(value As Boolean)
+            _comode = value
+        End Set
+    End Property
     Public Shared Property ExcelMode As Boolean = False
 
     Public Shared Property MaxDegreeOfParallelism As Integer

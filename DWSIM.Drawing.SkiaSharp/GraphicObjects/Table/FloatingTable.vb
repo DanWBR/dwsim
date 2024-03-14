@@ -316,7 +316,7 @@ Namespace GraphicObjects.Tables
                             maxL3 = sizes.Select(Function(s) s.Item3.Width).Max
 
                             Width = maxL1 + maxL2 + maxL3 + 8 * Padding
-                            Height = totalH + 2 * maxH + 4 * Padding
+                            Height = totalH + heading1size.Height + heading2size.Height + 5 * Padding
 
                             If X + Width > SW Then
                                 XD -= Width - Owner.GraphicObject.Width * 1.5
@@ -338,10 +338,11 @@ Namespace GraphicObjects.Tables
                             DrawRoundRect(g, XD, YD, Width, Height, 2 / zoom, bpaint2)
 
                             'desenhar textos e retangulos
-                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, XD + Padding + margin, YD + maxH, tbpaint)
-                            canvas.DrawText(Owner.GetDisplayName(), XD + Padding + margin, YD + 2 * maxH, tpaint)
-                            canvas.DrawLine(XD + Padding + margin, YD + 2 * maxH + 2 * Padding, XD + Width - Padding - margin, YD + 2 * maxH + 2 * Padding, bpaint2)
-                            Dim y0 = YD + 3 * maxH + Padding
+                            canvas.DrawText(Owner.GraphicObject.Tag.ToUpper, XD + Padding + margin, YD + heading1size.Height + Padding, tbpaint)
+                            canvas.DrawText(Owner.GetDisplayName(), XD + Padding + margin, YD + heading1size.Height + heading2size.Height + 2 * Padding, tpaint)
+                            canvas.DrawLine(XD + Padding + margin, YD + heading1size.Height + heading2size.Height + 4 * Padding, XD + Width - Padding - margin, YD + heading1size.Height + heading2size.Height + 4 * Padding, bpaint2)
+                            Dim y0 = YD + 4 * Padding + heading1size.Height + heading2size.Height
+                            Dim i = 0
                             For Each prop In props
                                 propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
                                 pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
@@ -356,10 +357,11 @@ Namespace GraphicObjects.Tables
                                     propval = str
                                 End If
                                 propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                                canvas.DrawText(propstring, XD + Padding + margin, y0, tbpaint)
-                                canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + XD + maxL1 + 4 * Padding, y0, tpaint)
-                                canvas.DrawText(propunit, XD + maxL1 + maxL2 + 5 * Padding + margin, y0, tbpaint)
-                                y0 += maxH
+                                canvas.DrawText(propstring, XD + Padding + margin, y0 + sizes(i).Item1.Height + Padding, tbpaint)
+                                canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + XD + maxL1 + 4 * Padding, y0 + sizes(i).Item1.Height + Padding, tpaint)
+                                canvas.DrawText(propunit, XD + maxL1 + maxL2 + 5 * Padding + margin, y0 + sizes(i).Item1.Height + Padding, tbpaint)
+                                y0 += sizes(i).Item1.Height + 2 * Padding
+                                i += 1
                             Next
 
                         Else

@@ -316,6 +316,9 @@
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Set Global Font Size</value>
   </data>
+  <data name="tbFontSize.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
   </data>
@@ -323,10 +326,10 @@
     <value>Set Font Styles...</value>
   </data>
   <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 24</value>
+    <value>115, 24</value>
   </data>
   <data name="ToolStripLabel3.Text" xml:space="preserve">
-    <value>Color Theme</value>
+    <value>Flowsheet Theme</value>
   </data>
   <data name="tsbColorTheme.Items" xml:space="preserve">
     <value>Default</value>
@@ -385,6 +388,9 @@
   <data name="ToolStripLabel1.Text" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="tstbSearch.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="tsbCutObj.Text" xml:space="preserve">
     <value>Cut selected objects</value>
   </data>
@@ -423,6 +429,9 @@
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Unzoom flowsheet</value>
+  </data>
+  <data name="TSTBZoom.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="TSTBZoom.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 23</value>
@@ -602,7 +611,7 @@
     <value>Upgrade to DWSIM Pro</value>
   </data>
   <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 358</value>
+    <value>244, 336</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 22</value>

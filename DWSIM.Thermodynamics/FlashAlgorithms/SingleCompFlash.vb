@@ -144,7 +144,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'pure liquid
                     V = 0.0
                     S = 0.0
-                    T = New Brent().BrentOpt2(Tfus * 1.01, Tsat, 10, 0.000001, 100,
+                    T = New Brent().BrentOpt2(Tfus * 0.9, Tsat, 10, 0.000001, 100,
                                               Function(Tx)
                                                   Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                               End Function)

@@ -55,7 +55,7 @@ Public Class EditingForm_Column_Results
 
     End Sub
 
-    Private Sub FillTables()
+    Public Sub FillTables()
 
         Dim ns As Integer = dc.NumberOfStages - 1
         Dim nc As Integer = UBound(dc.x0(0))
@@ -187,7 +187,8 @@ Public Class EditingForm_Column_Results
             Next
         End With
     End Sub
-    Private Sub FillGraphs()
+
+    Public Sub FillGraphs()
 
 
 

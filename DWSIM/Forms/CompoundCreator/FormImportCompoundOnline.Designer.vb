@@ -47,6 +47,7 @@ Partial Class FormImportCompoundOnline
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnExportJSON = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -208,11 +209,19 @@ Partial Class FormImportCompoundOnline
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
         '
+        'btnExportJSON
+        '
+        resources.ApplyResources(Me.btnExportJSON, "btnExportJSON")
+        Me.btnExportJSON.Name = "btnExportJSON"
+        Me.btnExportJSON.UseVisualStyleBackColor = True
+        '
         'FormImportCompoundOnline
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.btnExportJSON)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.btnPrev)
@@ -220,7 +229,6 @@ Partial Class FormImportCompoundOnline
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormImportCompoundOnline"
         Me.ShowIcon = False
@@ -261,4 +269,5 @@ Partial Class FormImportCompoundOnline
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents btnExportJSON As Button
 End Class

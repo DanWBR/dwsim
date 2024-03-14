@@ -1807,7 +1807,7 @@ Public Class FormSimulSettings
                     Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(comp.Name)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(obj) obj.GraphicObject.ObjectType = ObjectType.MaterialStream)
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp

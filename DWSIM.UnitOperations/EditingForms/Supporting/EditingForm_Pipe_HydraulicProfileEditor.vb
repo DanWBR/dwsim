@@ -87,11 +87,11 @@ Imports System.Drawing
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Me.GridMalha = New System.Windows.Forms.DataGridView()
         Me.ColBase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CMenu1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -138,7 +138,6 @@ Imports System.Drawing
         Me.GridMalha.AllowUserToResizeRows = False
         Me.GridMalha.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.GridMalha.BackgroundColor = System.Drawing.SystemColors.Control
-        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.ColumnHeadersVisible = False
         Me.GridMalha.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColBase})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -151,6 +150,8 @@ Imports System.Drawing
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.GridMalha.DefaultCellStyle = DataGridViewCellStyle2
+        resources.ApplyResources(Me.GridMalha, "GridMalha")
+        Me.GridMalha.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.GridMalha.GridColor = System.Drawing.SystemColors.Control
         Me.GridMalha.Name = "GridMalha"
         Me.GridMalha.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
@@ -863,8 +864,8 @@ Imports System.Drawing
             Dim cmb As ComboBox = CType(e.Control, ComboBox)
             RemoveHandler GridMalha.EditingControlShowing, AddressOf Me.cmb_SelectionChangeCommitted
             AddHandler cmb.SelectionChangeCommitted, AddressOf Me.cmb_SelectionChangeCommitted
+            SendKeys.Send("{F4}")
         End If
-
     End Sub
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click

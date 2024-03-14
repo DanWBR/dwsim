@@ -154,18 +154,4 @@ Public Class Calculator
 
     End Sub
 
-    Public Shared Sub ConfigureFlashInstance(simobj As Interfaces.ISimulationObject, fname As String)
-
-        Dim fa As Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = simobj.GetFlowsheet.FlowsheetOptions.FlashAlgorithms.Where(Function(x) x.Tag = fname).FirstOrDefault
-        If fa Is Nothing Then fa = simobj.GetFlowsheet.FlowsheetOptions.FlashAlgorithms(0)
-
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings}
-
-        f.ShowDialog()
-        fa.FlashSettings = f.Settings
-        f.Dispose()
-        f = Nothing
-
-    End Sub
-
 End Class

@@ -157,8 +157,8 @@ Public Class EditingForm_Splitter
                     TrackBar1.Enabled = True
                     TrackBar2.Enabled = True
 
-                    TrackBar1.Value = Convert.ToDouble(.Ratios(0)) * 100
-                    TrackBar2.Value = Convert.ToDouble(.Ratios(1)) * 100
+                    TrackBar1.Value = Convert.ToDouble(.Ratios(0)) * 10000
+                    TrackBar2.Value = Convert.ToDouble(.Ratios(1)) * 10000
 
                     tbRatio1.Text = Convert.ToDouble(.Ratios(0)).ToString("N4")
                     tbRatio2.Text = Convert.ToDouble(.Ratios(1)).ToString("N4")
