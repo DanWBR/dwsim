@@ -123,15 +123,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\AccessTokenType.cs" />
     <Compile Include="FormFactories\LoginForm.cs" />
     <Compile Include="FormFactories\S365FilePickerForm.cs" />
     <Compile Include="GraphClientFactory.cs" />
+    <Compile Include="IUserProvider.cs" />
     <Compile Include="Models\DashboardModels.cs" />
     <Compile Include="Models\OAuthErrorResponse.cs" />
     <Compile Include="Models\OAuthTokenResponse.cs" />
     <Compile Include="Models\S365File.cs" />
     <Compile Include="Models\UploadConflictAction.cs" />
     <Compile Include="Models\UserDetailsModel.cs" />
+    <Compile Include="MsGraphUserProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\FilePickerService.cs" />

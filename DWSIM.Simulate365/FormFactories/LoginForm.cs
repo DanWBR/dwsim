@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using DWSIM.Simulate365.Enums;
 using DWSIM.Simulate365.Models;
 using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web;
@@ -148,7 +149,7 @@ namespace DWSIM.Simulate365.FormFactories
 
                     // Store token
                     UserService.GetInstance()
-                                .SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
+                                .SetAccessToken(AccessTokenType.MsGraph, token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
 
                     UserService.GetInstance().OnUserLoggedIn?.Invoke(this, new EventArgs());
 
