@@ -213,6 +213,8 @@ namespace DWSIM.Simulate365.Services
             var userProvider = _userProviders[_accessTokenType];
 
             var tokenResp = await userProvider.RefreshTokenAsync(_refreshToken);
+            if (tokenResp == null)
+                return;
 
             SetAccessToken(tokenResp.AccessTokenType, tokenResp.AccessToken, tokenResp.RefreshToken, DateTime.Now.AddSeconds(tokenResp.ExpiresIn - 30));
         }
