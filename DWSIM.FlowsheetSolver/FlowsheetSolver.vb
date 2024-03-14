@@ -1079,6 +1079,22 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 listidx -= 1
             Loop
 
+            'special loop for batch unit ops in dynamic mode
+
+            If fbag.DynamicMode Then
+                For Each baseobj In fbag.SimulationObjects.Values
+                    If TypeOf baseobj Is IUnitOperation AndAlso baseobj.SupportsDynamicMode Then
+                        Dim inletconnected = baseobj.GraphicObject.InputConnectors.Where(Function(c) c.IsAttached).Count
+                        Dim outletconnected = baseobj.GraphicObject.OutputConnectors.Where(Function(c) c.IsAttached).Count
+                        Dim n_inlets = baseobj.GraphicObject.InputConnectors.Count
+                        Dim n_outlets = baseobj.GraphicObject.OutputConnectors.Count
+                        If inletconnected = 0 And outletconnected = 0 And (n_inlets + n_outlets) > 0 Then
+                            objstack.Add(baseobj.Name)
+                        End If
+                    End If
+                Next
+            End If
+
         End If
 
         Return New Object() {objstack, lists, filteredlist}
@@ -1186,11 +1202,25 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             Dim objl As Object()
             Try
+
                 objl = GetSolvingList(fobj, frompgrid)
+
             Catch ex As Exception
+
                 FinishAny?.Invoke()
-                GlobalSettings.Settings.CalculatorBusy = False
+                FinishWithErrors?.Invoke()
+
+                Settings.CalculatorBusy = False
+
+                Dim euid As String = Guid.NewGuid().ToString()
+                ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
+
+                fgui.ShowMessage(ex.Message, IFlowsheet.MessageType.GeneralError, euid)
+                IObj?.Paragraphs.Add(ex.Message)
+
+                RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), New List(Of Exception)({ex}))
                 Return New List(Of Exception)({ex})
+
             End Try
 
             'assign the list of objects, the filtered list (which contains no duplicate elements) and the object stack

@@ -1,5 +1,5 @@
 '    Flowsheet Object Base Classes 
-'    Copyright 2008-2020 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2024 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -719,13 +719,17 @@ Namespace UnitOperations
                 proplist.Add(item.Key)
             Next
 
-            If proptype <> PropertyType.WR Then
-                proplist.Add("GHG Emission Factor")
-                proplist.Add("GHG Mass Emission")
-                proplist.Add("GHG Molar Emission")
-                proplist.Add("CO2eq GHG Mass Emission")
-                proplist.Add("CO2eq GHG Molar Emission")
-                proplist.Add("GHG Emission Reference Power Value")
+            If FlowSheet IsNot Nothing Then
+                If FlowSheet.FlowsheetOptions.EnableGHGEmissionsSubsystem Then
+                    If proptype <> PropertyType.WR Then
+                        proplist.Add("GHG Emission Factor")
+                        proplist.Add("GHG Mass Emission")
+                        proplist.Add("GHG Molar Emission")
+                        proplist.Add("CO2eq GHG Mass Emission")
+                        proplist.Add("CO2eq GHG Molar Emission")
+                        proplist.Add("GHG Emission Reference Power Value")
+                    End If
+                End If
             End If
 
             For Each item In AttachedUtilities

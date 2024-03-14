@@ -146,4 +146,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property EnabledUndoRedo As Boolean
 
+    Property EnableGHGEmissionsSubsystem As Boolean
+
 End Interface

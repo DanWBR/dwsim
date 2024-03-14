@@ -218,6 +218,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 IObj2?.Paragraphs.Add(String.Format("Fugacity coefficients phase 2: {0}", fi2.ToMathArrayString))
 
                 For i = 0 To n
+                    If fi1(i) > 10000000000.0 Then fi1(i) = Vp(i) * 100
+                    If fi2(i) > 10000000000.0 Then fi2(i) = Vp(i) * 100
                     gamma1(i) = P / Vp(i) * fi1(i)
                     gamma2(i) = P / Vp(i) * fi2(i)
                 Next

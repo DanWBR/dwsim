@@ -289,6 +289,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property EnabledUndoRedo As Boolean = False Implements IFlowsheetOptions.EnabledUndoRedo
 
+        Public Property EnableGHGEmissionsSubsystem As Boolean = False Implements IFlowsheetOptions.EnableGHGEmissionsSubsystem
+
     End Class
 
     <System.Serializable()> Public Class FlowsheetResults
