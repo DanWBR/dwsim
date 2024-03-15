@@ -42,6 +42,7 @@ Imports DWSIM.Thermodynamics.Databases
 Imports DWSIM.Simulate365.Models
 Imports DWSIM.Simulate365.Services
 Imports DWSIM.Simulate365.FormFactories
+Imports Microsoft.VisualBasic.ApplicationServices
 
 Public Class FormMain
 
@@ -250,6 +251,7 @@ Public Class FormMain
 
         ' On user details loaded
         AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
+        AddHandler UserService.GetInstance().AutoLoginInProgressChanged, AddressOf UserService_AutoLoginInProgress
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
         AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
 
@@ -359,6 +361,24 @@ Public Class FormMain
                         Me.LogoutDropdown.Text = user.DisplayName
                         Me.LogoutDropdown.Visible = True
                     End Sub)
+    End Sub
+
+    Private Sub UserService_AutoLoginInProgress(sender As Object, isInProgress As Boolean)
+
+        If (isInProgress) Then
+            Me.UIThread(Sub()
+                            Me.LoginButton.Visible = False
+                            Me.CheckingCredentialsLabel.Visible = True
+                            Me.LogoutDropdown.Visible = False
+                        End Sub)
+        Else
+            Me.UIThread(Sub()
+                            Me.LoginButton.Visible = True
+                            Me.CheckingCredentialsLabel.Visible = False
+                            Me.LogoutDropdown.Visible = False
+                        End Sub)
+        End If
+
     End Sub
 
     Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)

@@ -24,6 +24,7 @@ namespace DWSIM.Simulate365.Services
 
         private UserDetailsModel _currentUser = null;
         public EventHandler OnUserLoggedIn;
+        public EventHandler<bool> AutoLoginInProgress;
         private string _accessToken = null;
         private string _refreshToken = null;
         private AccessTokenType _accessTokenType = AccessTokenType.MsGraph;
@@ -41,6 +42,7 @@ namespace DWSIM.Simulate365.Services
         #region Public events
 
         public event EventHandler<UserDetailsModel> UserDetailsLoaded;
+        public event EventHandler<bool> AutoLoginInProgressChanged;
         public event EventHandler UserLoggedOut;
         public event EventHandler ShowLoginForm;
 
@@ -60,6 +62,8 @@ namespace DWSIM.Simulate365.Services
                 var expiresAtValue = key.GetValue(AccessTokenExpiresAtField);
                 if (expiresAtValue != null)
                     DateTime.TryParse(key.GetValue(AccessTokenExpiresAtField).ToString(), out this._accessTokenExpiresAt);
+
+                AutoLoginInProgress += (s, e) => { AutoLoginInProgressChanged.Invoke(s, e); };
 
                 Task.Run(() => LoadUserDetails());
             }
