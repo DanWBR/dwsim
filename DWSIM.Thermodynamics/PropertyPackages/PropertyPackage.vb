@@ -9731,9 +9731,60 @@ Final3:
                                 vals.Add(c.ConstantProperties.Formula)
                             Case "triplepointtemperature"
                                 vals.Add(c.ConstantProperties.TemperatureOfFusion)
+                            Case "liquiddensityat25c"
+                                If c.ConstantProperties.IsPF Then
+                                    vals.Add(c.ConstantProperties.PF_SG * 1000 / c.ConstantProperties.Molar_Weight * 1000)
+                                Else
+                                    Dim val = c.ConstantProperties.GetLiquidDensity(298.15) / c.ConstantProperties.Molar_Weight * 1000
+                                    vals.Add(val)
+                                End If
+                            Case "liquidvolumeat25c"
+                                If c.ConstantProperties.IsPF Then
+                                    vals.Add(1 / (c.ConstantProperties.PF_SG * 1000 / c.ConstantProperties.Molar_Weight * 1000))
+                                Else
+                                    Dim val = c.ConstantProperties.GetLiquidDensity(298.15) / c.ConstantProperties.Molar_Weight * 1000
+                                    vals.Add(1 / val)
+                                End If
+                            Case "normalfreezingpoint"
+                                vals.Add(c.ConstantProperties.TemperatureOfFusion)
+                            Case "heatofvaporizationatnormalboilingpoint"
+                                vals.Add(c.ConstantProperties.GetEnthalpyOfVaporization(c.ConstantProperties.Normal_Boiling_Point * c.ConstantProperties.Molar_Weight))
+                            Case "diffusionvolume"
+                                vals.Add(c.ConstantProperties.FullerDiffusionVolume)
+                            Case "energylennardjones"
+                                vals.Add(c.ConstantProperties.LennardJonesEnergy)
+                            Case "lengthlennardjones"
+                                vals.Add(c.ConstantProperties.LennardJonesDiameter)
+                            Case "parachor"
+                                vals.Add(c.ConstantProperties.Parachor)
+                            Case "liquidVolumeCOSTLD"
+                                vals.Add(c.ConstantProperties.COSTALD_Characteristic_Volume / 1000.0)
+                            Case "racketParameter"
+                                vals.Add(c.ConstantProperties.Z_Rackett)
+                            Case "specificGravity"
+                                vals.Add(c.ConstantProperties.PF_SG)
+                            Case "liquidVolumeNormalBoilingPoint"
+                                If c.ConstantProperties.IsPF Then
+                                    Dim val = Auxiliary.PROPS.liq_dens_rackett(
+                                    c.ConstantProperties.Normal_Boiling_Point,
+                                    c.ConstantProperties.Critical_Temperature,
+                                    c.ConstantProperties.Critical_Pressure,
+                                    c.ConstantProperties.Acentric_Factor,
+                                    c.ConstantProperties.Molar_Weight,
+                                    0.0, 0.0, 0.0) / c.ConstantProperties.Molar_Weight * 1000
+                                    vals.Add(1 / val)
+                                Else
+                                    Dim val = c.ConstantProperties.GetLiquidDensity(c.ConstantProperties.Normal_Boiling_Point) / c.ConstantProperties.Molar_Weight * 1000
+                                    vals.Add(1 / val)
+                                End If
                             Case Else
-                                vals.Add(Double.MinValue)
+                                vals.Add(Double.NaN)
+                                'Throw New CapeThrmPropertyNotAvailableException("unsupported property")
                         End Select
+                        If vals(vals.Count - 1) = 0.0 Then
+                            vals(vals.Count - 1) = Double.NaN
+                            'Throw New CapeThrmPropertyNotAvailableException("property value not available")
+                        End If
                     Next
                 Next
             End If
@@ -9797,17 +9848,30 @@ Final3:
         Public Overridable Function GetConstPropList() As Object Implements ICapeThermoCompounds.GetConstPropList
             Dim vals As New ArrayList
             With vals
-                .Add("molecularweight")
-                .Add("criticaltemperature")
-                .Add("criticalpressure")
-                .Add("criticalvolume")
-                .Add("criticalcompressibilityfactor")
-                .Add("acentricfactor")
-                .Add("normalboilingpoint")
-                .Add("idealgasgibbsfreeenergyofformationat25c")
-                .Add("idealgasenthalpyofformationat25c")
-                .Add("casregistrynumber")
-                .Add("chemicalformula")
+                .Add("molecularWeight")
+                .Add("criticalTemperature")
+                .Add("criticalPressure")
+                .Add("criticalVolume")
+                .Add("criticalCompressibilityFactor")
+                .Add("acentricFactor")
+                .Add("normalBoilingPoint")
+                .Add("idealGasGibbsFreeEnergyOfFormationAt25c")
+                .Add("idealGasEnthalpyOfFormationAt25c")
+                .Add("casRegistryNumber")
+                .Add("chemicalFormula")
+                .Add("liquidDensityAt25C")
+                .Add("liquidVolumeAt25C")
+                .Add("normalFreezingPoint")
+                .Add("heatOfVaporizationAtNormalBoilingPoint")
+                .Add("triplePointTemperature")
+                .Add("diffusionVolume")
+                .Add("energyLennardJones")
+                .Add("lengthLennardJones")
+                .Add("parachor")
+                .Add("liquidVolumeCOSTLD")
+                .Add("racketParameter")
+                .Add("specificGravity")
+                .Add("liquidVolumeNormalBoilingPoint")
             End With
             Dim arr2(vals.Count - 1) As String
             Array.Copy(vals.ToArray, arr2, vals.Count)
