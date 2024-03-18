@@ -608,12 +608,6 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Column_Connections.designer.vb">
-      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Column_Connections.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.designer.vb">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </Compile>
@@ -1115,9 +1109,6 @@
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.de.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections.de.resx">
-      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections_New.resx">
       <DependentUpon>EditingForm_Column_Connections_New.vb</DependentUpon>
     </EmbeddedResource>
@@ -1256,12 +1247,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections.en.resx">
-      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections.resx">
-      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.de.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>

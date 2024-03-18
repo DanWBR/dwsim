@@ -300,7 +300,15 @@ Public Class FlowsheetSurfaceControl
                 pdfpath = obj(1)(2)
             End If
 
-            If c = SimulationObjectClass.None Then Exit Sub
+            If c = SimulationObjectClass.None Then
+                If obj.Length = 3 Then
+                    Dim name As String = obj(2)
+                    ProFeatures.Functions.DisplayTransitionForm(FlowsheetObject, name & " Unit Operation")
+                    Exit Sub
+                Else
+                    Exit Sub
+                End If
+            End If
 
             Console.WriteLine(t.Name)
 

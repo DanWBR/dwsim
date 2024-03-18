@@ -134,16 +134,32 @@ Namespace UnitOperations
             Dim id(n) As String
 
             F = feed.Phases(0).Properties.molarflow.GetValueOrDefault
-            q = feed.Phases(1).Properties.molarfraction.GetValueOrDefault
+            q = feed.Phases(3).Properties.molarfraction.GetValueOrDefault
             T = feed.Phases(0).Properties.temperature.GetValueOrDefault
             P = feed.Phases(0).Properties.pressure.GetValueOrDefault
 
+            If q = 0.0 Or q = 1.0 Then
+
+                Dim H = feed.Phases(0).Properties.enthalpy.GetValueOrDefault()
+
+                feed.PropertyPackage.CurrentMaterialStream = feed
+                Dim bpoint = feed.PropertyPackage.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P, 0.0, feed.GetOverallComposition(), Nothing, T)
+                Dim Tbub = bpoint.CalculatedTemperature.GetValueOrDefault()
+                feed.PropertyPackage.CurrentMaterialStream = feed
+                Dim dpoint = feed.PropertyPackage.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P, 1.0, feed.GetOverallComposition(), Nothing, T)
+                Dim Tdew = dpoint.CalculatedTemperature.GetValueOrDefault()
+                feed.PropertyPackage.CurrentMaterialStream = feed
+                Dim Hbub = feed.PropertyPackage.DW_CalcEnthalpy(feed.GetOverallComposition(), Tbub, P, PropertyPackages.State.Liquid)
+                Dim Hdew = feed.PropertyPackage.DW_CalcEnthalpy(feed.GetOverallComposition(), Tdew, P, PropertyPackages.State.Vapor)
+
+                q = 1.0 + (Hbub - H) / (Hdew - Hbub)
+
+            End If
+
             i = 0
             For Each comp As BaseClasses.Compound In feed.Phases(0).Compounds.Values
-                z(i) = comp.MoleFraction.GetValueOrDefault
-                'K(i) = feed.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault / feed.Phases(1).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                z(i) = comp.MoleFraction.GetValueOrDefault()
                 id(i) = comp.Name
-                'If Double.IsInfinity(K(i)) Then K(i) = 1.0E+20
                 If Me.m_lightkey = comp.Name Then lki = i
                 If Me.m_heavykey = comp.Name Then hki = i
                 i = i + 1
@@ -230,6 +246,10 @@ restart:    B = F - D
             L_ = L + q * F
             V_ = L_ - B
             V = D + L
+
+            If L_ < 0.0 Or V_ < 0 Then
+                Throw New Exception("Invalid Reflux Ratio")
+            End If
 
             'calculate minimum reflux by Underwood's method
 
@@ -350,6 +370,10 @@ restart:    B = F - D
 
                 'm_Rmin = sum / teta.Count - 1
 
+            End If
+
+            If m_Rmin > m_refluxratio Then
+                Throw New Exception(String.Format("Defined Reflux Ratio ({0}) lower than calculated minimum ({1})", m_refluxratio, m_Rmin))
             End If
 
             'actual number of stages by Gilliland's method

@@ -472,8 +472,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         Me.tstbSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.tstbSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        resources.ApplyResources(Me.tstbSearch, "tstbSearch")
         Me.tstbSearch.Name = "tstbSearch"
+        resources.ApplyResources(Me.tstbSearch, "tstbSearch")
         '
         'ToolStripSeparator15
         '
@@ -564,8 +564,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         'TSTBZoom
         '
         Me.TSTBZoom.BackColor = System.Drawing.SystemColors.Control
-        resources.ApplyResources(Me.TSTBZoom, "TSTBZoom")
         Me.TSTBZoom.Name = "TSTBZoom"
+        resources.ApplyResources(Me.TSTBZoom, "TSTBZoom")
         '
         'ToolStripButton2
         '
@@ -778,9 +778,9 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         'tbFontSize
         '
-        resources.ApplyResources(Me.tbFontSize, "tbFontSize")
         Me.tbFontSize.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
         Me.tbFontSize.Name = "tbFontSize"
+        resources.ApplyResources(Me.tbFontSize, "tbFontSize")
         '
         'ToolStripButton5
         '

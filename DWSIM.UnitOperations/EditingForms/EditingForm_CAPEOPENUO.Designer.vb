@@ -411,6 +411,7 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dginlets.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dginlets.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dginlets.MultiSelect = False
         Me.dginlets.Name = "dginlets"
         Me.dginlets.RowHeadersVisible = False
@@ -483,6 +484,7 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgoutlets.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgoutlets.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgoutlets.MultiSelect = False
         Me.dgoutlets.Name = "dgoutlets"
         Me.dgoutlets.RowHeadersVisible = False
@@ -555,6 +557,7 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgenergy.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgenergy.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgenergy.MultiSelect = False
         Me.dgenergy.Name = "dgenergy"
         Me.dgenergy.RowHeadersVisible = False

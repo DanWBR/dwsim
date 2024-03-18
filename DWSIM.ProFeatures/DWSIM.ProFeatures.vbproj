@@ -66,6 +66,24 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormBridgeToPro.Designer.vb">
+      <DependentUpon>FormBridgeToPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBridgeToPro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCosting.Designer.vb">
+      <DependentUpon>FormCosting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCosting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGHG.Designer.vb">
+      <DependentUpon>FormGHG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormGHG.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Functions.vb" />
     <Compile Include="ListItem.designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
@@ -90,6 +108,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormBridgeToPro.resx">
+      <DependentUpon>FormBridgeToPro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCosting.resx">
+      <DependentUpon>FormCosting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGHG.resx">
+      <DependentUpon>FormGHG.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListItem.resx">
       <DependentUpon>ListItem.vb</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +191,15 @@
     <None Include="Resources\cursor.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>DWSIM.Controls.DockPanel</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
@@ -176,6 +212,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\jacketedreactor_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DWSIM Icon Vector Transp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right_60px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2149675041.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

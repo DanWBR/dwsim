@@ -31,6 +31,51 @@ Public Class EditingForm_CAPEOPENUO
 
         UpdateInfo()
 
+        AddHandler dginlets.EditingControlShowing, AddressOf Me.EditingControlShowing1
+
+        AddHandler dgoutlets.EditingControlShowing, AddressOf Me.EditingControlShowing2
+
+        AddHandler dgenergy.EditingControlShowing, AddressOf Me.EditingControlShowing3
+
+    End Sub
+
+    Private Sub EditingControlShowing1(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DirectCast(sender, DataGridView).EditingControlShowing, AddressOf cmb_SelectionChangeCommitted1
+            AddHandler cmb.SelectionChangeCommitted, AddressOf cmb_SelectionChangeCommitted1
+            SendKeys.Send("{F4}")
+        End If
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted1(ByVal sender As Object, ByVal e As EventArgs)
+        dginlets.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
+    End Sub
+
+    Private Sub EditingControlShowing2(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DirectCast(sender, DataGridView).EditingControlShowing, AddressOf cmb_SelectionChangeCommitted2
+            AddHandler cmb.SelectionChangeCommitted, AddressOf cmb_SelectionChangeCommitted2
+            SendKeys.Send("{F4}")
+        End If
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted2(ByVal sender As Object, ByVal e As EventArgs)
+        dgoutlets.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
+    End Sub
+
+    Private Sub EditingControlShowing3(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DirectCast(sender, DataGridView).EditingControlShowing, AddressOf cmb_SelectionChangeCommitted3
+            AddHandler cmb.SelectionChangeCommitted, AddressOf cmb_SelectionChangeCommitted3
+            SendKeys.Send("{F4}")
+        End If
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted3(ByVal sender As Object, ByVal e As EventArgs)
+        dgenergy.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
     End Sub
 
     Sub UpdateInfo()
@@ -343,8 +388,8 @@ Public Class EditingForm_CAPEOPENUO
             End If
 
             SimObject.UpdateConnectorPositions()
+            SimObject.FlowSheet.UpdateInterface()
             UpdateInfo()
-            'RequestCalc()
 
         End If
 
@@ -509,8 +554,8 @@ Public Class EditingForm_CAPEOPENUO
             Editing = False
 
             SimObject.UpdateConnectorPositions()
+            SimObject.FlowSheet.UpdateInterface()
             UpdateInfo()
-            'RequestCalc()
 
         End If
 
