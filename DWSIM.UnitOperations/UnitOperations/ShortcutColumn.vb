@@ -140,19 +140,20 @@ Namespace UnitOperations
 
             If q = 0.0 Or q = 1.0 Then
 
-                Dim H = feed.Phases(0).Properties.enthalpy.GetValueOrDefault()
-
-                feed.PropertyPackage.CurrentMaterialStream = feed
-                Dim bpoint = feed.PropertyPackage.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P, 0.0, feed.GetOverallComposition(), Nothing, T)
-                Dim Tbub = bpoint.CalculatedTemperature.GetValueOrDefault()
-                feed.PropertyPackage.CurrentMaterialStream = feed
-                Dim dpoint = feed.PropertyPackage.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P, 1.0, feed.GetOverallComposition(), Nothing, T)
-                Dim Tdew = dpoint.CalculatedTemperature.GetValueOrDefault()
-                feed.PropertyPackage.CurrentMaterialStream = feed
-                Dim Hbub = feed.PropertyPackage.DW_CalcEnthalpy(feed.GetOverallComposition(), Tbub, P, PropertyPackages.State.Liquid)
-                Dim Hdew = feed.PropertyPackage.DW_CalcEnthalpy(feed.GetOverallComposition(), Tdew, P, PropertyPackages.State.Vapor)
-
-                q = 1.0 + (Hbub - H) / (Hdew - Hbub)
+                Try
+                    Dim H = feed.Phases(0).Properties.enthalpy.GetValueOrDefault()
+                    feed.PropertyPackage.CurrentMaterialStream = feed
+                    Dim bpoint = feed.PropertyPackage.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P, 0.0, feed.GetOverallComposition(), Nothing, T)
+                    Dim Tbub = bpoint.CalculatedTemperature.GetValueOrDefault()
+                    feed.PropertyPackage.CurrentMaterialStream = feed
+                    Dim dpoint = feed.PropertyPackage.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P, 1.0, feed.GetOverallComposition(), Nothing, T)
+                    Dim Tdew = dpoint.CalculatedTemperature.GetValueOrDefault()
+                    feed.PropertyPackage.CurrentMaterialStream = feed
+                    Dim Hbub = feed.PropertyPackage.DW_CalcEnthalpy(feed.GetOverallComposition(), Tbub, P, PropertyPackages.State.Liquid)
+                    Dim Hdew = feed.PropertyPackage.DW_CalcEnthalpy(feed.GetOverallComposition(), Tdew, P, PropertyPackages.State.Vapor)
+                    q = 1.0 + (Hbub - H) / (Hdew - Hbub)
+                Catch ex As Exception
+                End Try
 
             End If
 
