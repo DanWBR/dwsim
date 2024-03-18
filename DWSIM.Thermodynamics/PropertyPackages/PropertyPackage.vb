@@ -9778,12 +9778,12 @@ Final3:
                                     vals.Add(1 / val)
                                 End If
                             Case Else
-                                vals.Add(Double.NaN)
-                                'Throw New CapeThrmPropertyNotAvailableException("unsupported property")
+                                'vals.Add(Double.NaN)
+                                Throw New CapeThrmPropertyNotAvailableException("unsupported property")
                         End Select
                         If vals(vals.Count - 1) = 0.0 Then
-                            vals(vals.Count - 1) = Double.NaN
-                            'Throw New CapeThrmPropertyNotAvailableException("property value not available")
+                            'vals(vals.Count - 1) = Double.NaN
+                            Throw New CapeThrmPropertyNotAvailableException("property value not available")
                         End If
                     Next
                 Next
