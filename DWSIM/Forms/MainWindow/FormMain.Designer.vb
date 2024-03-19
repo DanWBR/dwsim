@@ -102,6 +102,7 @@ Partial Class FormMain
         Me.DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoggedInS365Button = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckingCredentialsLabel = New System.Windows.Forms.ToolStripLabel()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.bgLoadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgSaveFile = New System.ComponentModel.BackgroundWorker()
@@ -118,27 +119,6 @@ Partial Class FormMain
         Me.tsbdonate2 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsbQuickQuestion = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.NewToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.OpenToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.NewToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.OpenToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.PrintToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CutToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.PasteToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HelpToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.CheckingCredentialsLabel = New System.Windows.Forms.ToolStripLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -469,7 +449,7 @@ Partial Class FormMain
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.OpenFileS365, Me.SaveToolStripButton, Me.SaveFileS365, Me.ToolStripButton1, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown, Me.NewToolStripButton1, Me.OpenToolStripButton1, Me.SaveToolStripButton1, Me.PrintToolStripButton, Me.toolStripSeparator5, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator7, Me.HelpToolStripButton, Me.NewToolStripButton2, Me.OpenToolStripButton2, Me.SaveToolStripButton2, Me.PrintToolStripButton1, Me.toolStripSeparator9, Me.CutToolStripButton1, Me.CopyToolStripButton1, Me.PasteToolStripButton1, Me.toolStripSeparator10, Me.HelpToolStripButton1, Me.CheckingCredentialsLabel})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.OpenFileS365, Me.SaveToolStripButton, Me.SaveFileS365, Me.ToolStripButton1, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown, Me.CheckingCredentialsLabel})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         '
@@ -610,6 +590,12 @@ Partial Class FormMain
         Me.LogoutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Logout_Rounded_96px
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         '
+        'CheckingCredentialsLabel
+        '
+        resources.ApplyResources(Me.CheckingCredentialsLabel, "CheckingCredentialsLabel")
+        Me.CheckingCredentialsLabel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.CheckingCredentialsLabel.Name = "CheckingCredentialsLabel"
+        '
         'BgLoadComp
         '
         Me.BgLoadComp.WorkerReportsProgress = True
@@ -692,128 +678,6 @@ Partial Class FormMain
         Me.tsbQuickQuestion.Image = Global.DWSIM.My.Resources.Resources.unverified_account_48px
         Me.tsbQuickQuestion.Name = "tsbQuickQuestion"
         Me.tsbQuickQuestion.ShowDropDownArrow = False
-        '
-        'NewToolStripButton1
-        '
-        resources.ApplyResources(Me.NewToolStripButton1, "NewToolStripButton1")
-        Me.NewToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.NewToolStripButton1.Name = "NewToolStripButton1"
-        '
-        'OpenToolStripButton1
-        '
-        resources.ApplyResources(Me.OpenToolStripButton1, "OpenToolStripButton1")
-        Me.OpenToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.OpenToolStripButton1.Name = "OpenToolStripButton1"
-        '
-        'SaveToolStripButton1
-        '
-        resources.ApplyResources(Me.SaveToolStripButton1, "SaveToolStripButton1")
-        Me.SaveToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SaveToolStripButton1.Name = "SaveToolStripButton1"
-        '
-        'PrintToolStripButton
-        '
-        resources.ApplyResources(Me.PrintToolStripButton, "PrintToolStripButton")
-        Me.PrintToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PrintToolStripButton.Name = "PrintToolStripButton"
-        '
-        'toolStripSeparator5
-        '
-        resources.ApplyResources(Me.toolStripSeparator5, "toolStripSeparator5")
-        Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        '
-        'CutToolStripButton
-        '
-        resources.ApplyResources(Me.CutToolStripButton, "CutToolStripButton")
-        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CutToolStripButton.Name = "CutToolStripButton"
-        '
-        'CopyToolStripButton
-        '
-        resources.ApplyResources(Me.CopyToolStripButton, "CopyToolStripButton")
-        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CopyToolStripButton.Name = "CopyToolStripButton"
-        '
-        'PasteToolStripButton
-        '
-        resources.ApplyResources(Me.PasteToolStripButton, "PasteToolStripButton")
-        Me.PasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PasteToolStripButton.Name = "PasteToolStripButton"
-        '
-        'toolStripSeparator7
-        '
-        resources.ApplyResources(Me.toolStripSeparator7, "toolStripSeparator7")
-        Me.toolStripSeparator7.Name = "toolStripSeparator7"
-        '
-        'HelpToolStripButton
-        '
-        resources.ApplyResources(Me.HelpToolStripButton, "HelpToolStripButton")
-        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.HelpToolStripButton.Name = "HelpToolStripButton"
-        '
-        'NewToolStripButton2
-        '
-        resources.ApplyResources(Me.NewToolStripButton2, "NewToolStripButton2")
-        Me.NewToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.NewToolStripButton2.Name = "NewToolStripButton2"
-        '
-        'OpenToolStripButton2
-        '
-        resources.ApplyResources(Me.OpenToolStripButton2, "OpenToolStripButton2")
-        Me.OpenToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.OpenToolStripButton2.Name = "OpenToolStripButton2"
-        '
-        'SaveToolStripButton2
-        '
-        resources.ApplyResources(Me.SaveToolStripButton2, "SaveToolStripButton2")
-        Me.SaveToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SaveToolStripButton2.Name = "SaveToolStripButton2"
-        '
-        'PrintToolStripButton1
-        '
-        resources.ApplyResources(Me.PrintToolStripButton1, "PrintToolStripButton1")
-        Me.PrintToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PrintToolStripButton1.Name = "PrintToolStripButton1"
-        '
-        'toolStripSeparator9
-        '
-        resources.ApplyResources(Me.toolStripSeparator9, "toolStripSeparator9")
-        Me.toolStripSeparator9.Name = "toolStripSeparator9"
-        '
-        'CutToolStripButton1
-        '
-        resources.ApplyResources(Me.CutToolStripButton1, "CutToolStripButton1")
-        Me.CutToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CutToolStripButton1.Name = "CutToolStripButton1"
-        '
-        'CopyToolStripButton1
-        '
-        resources.ApplyResources(Me.CopyToolStripButton1, "CopyToolStripButton1")
-        Me.CopyToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CopyToolStripButton1.Name = "CopyToolStripButton1"
-        '
-        'PasteToolStripButton1
-        '
-        resources.ApplyResources(Me.PasteToolStripButton1, "PasteToolStripButton1")
-        Me.PasteToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PasteToolStripButton1.Name = "PasteToolStripButton1"
-        '
-        'toolStripSeparator10
-        '
-        resources.ApplyResources(Me.toolStripSeparator10, "toolStripSeparator10")
-        Me.toolStripSeparator10.Name = "toolStripSeparator10"
-        '
-        'HelpToolStripButton1
-        '
-        resources.ApplyResources(Me.HelpToolStripButton1, "HelpToolStripButton1")
-        Me.HelpToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.HelpToolStripButton1.Name = "HelpToolStripButton1"
-        '
-        'CheckingCredentialsLabel
-        '
-        resources.ApplyResources(Me.CheckingCredentialsLabel, "CheckingCredentialsLabel")
-        Me.CheckingCredentialsLabel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.CheckingCredentialsLabel.Name = "CheckingCredentialsLabel"
         '
         'FormMain
         '
@@ -1117,25 +981,5 @@ Partial Class FormMain
     Friend WithEvents UsersGuideToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiProUG As ToolStripMenuItem
     Friend WithEvents tsmiNewCompoundWizard As ToolStripMenuItem
-    Friend WithEvents NewToolStripButton1 As ToolStripButton
-    Friend WithEvents OpenToolStripButton1 As ToolStripButton
-    Friend WithEvents SaveToolStripButton1 As ToolStripButton
-    Friend WithEvents PrintToolStripButton As ToolStripButton
-    Friend WithEvents toolStripSeparator5 As ToolStripSeparator
-    Friend WithEvents CutToolStripButton As ToolStripButton
-    Friend WithEvents CopyToolStripButton As ToolStripButton
-    Friend WithEvents PasteToolStripButton As ToolStripButton
-    Friend WithEvents toolStripSeparator7 As ToolStripSeparator
-    Friend WithEvents HelpToolStripButton As ToolStripButton
-    Friend WithEvents NewToolStripButton2 As ToolStripButton
-    Friend WithEvents OpenToolStripButton2 As ToolStripButton
-    Friend WithEvents SaveToolStripButton2 As ToolStripButton
-    Friend WithEvents PrintToolStripButton1 As ToolStripButton
-    Friend WithEvents toolStripSeparator9 As ToolStripSeparator
-    Friend WithEvents CutToolStripButton1 As ToolStripButton
-    Friend WithEvents CopyToolStripButton1 As ToolStripButton
-    Friend WithEvents PasteToolStripButton1 As ToolStripButton
-    Friend WithEvents toolStripSeparator10 As ToolStripSeparator
-    Friend WithEvents HelpToolStripButton1 As ToolStripButton
     Friend WithEvents CheckingCredentialsLabel As ToolStripLabel
 End Class
