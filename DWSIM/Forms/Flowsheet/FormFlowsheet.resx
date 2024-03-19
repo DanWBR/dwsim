@@ -303,6 +303,12 @@
   <data name="InsertTSMI.Text" xml:space="preserve">
     <value>Inserir</value>
   </data>
+  <data name="StreamDataImporterTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 22</value>
+  </data>
+  <data name="StreamDataImporterTSMI.Text" xml:space="preserve">
+    <value>Stream Data Importer</value>
+  </data>
   <data name="CompoundCreatorWizardTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 22</value>
   </data>
@@ -484,10 +490,22 @@
     <value>&amp;Otimização</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Relatórios</value>
+  </data>
+  <data name="ExcelReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 22</value>
+  </data>
+  <data name="ExcelReportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Excel Reports</value>
+  </data>
+  <data name="ProcessFlowsheetDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 22</value>
+  </data>
+  <data name="ProcessFlowsheetDiagramToolStripMenuItem.Text" xml:space="preserve">
+    <value>Process Flowsheet Diagram</value>
   </data>
   <data name="ResultsTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
@@ -767,29 +785,29 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        t3dlZf0DP8j7NcOuxn8AAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUSSURBVFhHxVdbU1NXFOal7+1j+zPa5z45007pgw/ttE/W
+        SwHFWrWoCFSuRRxuVkW5GS5SsFRQlLEmCBgggQ25nZNAEnKBhA5eKY46fe7q/lbYp5DEFhnUM/PN3vvb
+        62R9Z+21Vs7JUFfpzx3vFlW3f1hQd/mj14kT1aYP1lz+e5Wd7zp5+kLvyuU+y0rPdetzkxzXo61/+CmQ
+        zKezbb8xunplcPxZMg8Oe7Xt159UNHT1rrnOyCg40/genMeePKellRd0T4/wuB76wkNGMp/Odn55lURg
+        KYUHhz3ML/bdWi2sbv2YBSDsTf1DT5ThmxBQWlrxd2GNKZsF4FwQSvwYYHYGeVyPYXeIkcynsx3RwjTk
+        mk/hwWEPc7PwkfSbYwjAGSmlMFBzhfURiC0uG3w6281EwDypbV1AyDJq8G9FwNzFZoN/8wJkpXiO/GDw
+        2yYANa6cINnUXGHKv8TQ9BBNf/W1waezdYaWaUxfSOHBYQ9z85S+NQEeqyDxyaekR+6n2GpTGo9bErDZ
+        IwiZR0js2EGL4XiKbeDXPoo/XN2eHIhFlhiKUwICPb/R9GeZFBFuw1bZzNafowU9sD0CwlY7RSQUpwTM
+        XrhEnkOHKfT7kGGrbLQTJ7lEt0VAoLuXoTglQC+roNlzDRToumrYKhvnrm/I39m9NQHJrdhWXMFQHJIN
+        mMzJpfFfrtFEZbVhyzZaiERmprynfHtasfvwUYbiVARc32bRgm+e9FOlhi3GxUCU7T1H89JGAPe80hHA
+        EaA4FhB9QK7sHIrf/5PcBw8ZthjDIxOcH66s7BQBqJi55suvIEDWqFt2OyAWe8AcBGjeMHnyjvFaiVMC
+        UB3BazfInXuQgvFHGwQgYXHfpgWM3bSQt6aeEZl0MAcBnrFp8lae4TUigbasBKAEwxOC9NJy8jt8GwTM
+        nj1PMzt3kvDHXy4Ar0rYBMaaOkjvvErejh7y9vQx55AdbKZvkLSGZl678k5QYC5KI55wYn0sn4J+2f3k
+        H5VnwEy22RjzgHN/Lu/bh2zkXXzM3J3kToj3NagGxsuqSNwckrCQqKphbswbpYlLJhJt3bwWpZUkzFYa
+        ciaSS+zZx08orvTSZEMrjUphzMsIiX3ZJFo6aFzeb5fCwJuF9+VHYD90xOiEnuP5zOEInLUyzDLZsJ5r
+        beOzxRHEHz8j9/4DzEemXOQ5Xc1OeG2bJl91HUVdXhKFxfz04P8zB6Z27eYRQFZjhABHUTEtaH5eB/tv
+        cTOCAJSgJvfAxxbvk1MmrxLgN3XS/MBtFoko/a8AlNhk1n42Aty531F8eYUFzGD+x2Pm0ap9siNCgCpB
+        dY9DVogSoJ0sZIGYi4Pfc55g/lIBUYdO9qIS48e8P1VR1KknBOzZa/DcjIrLWABadrBvwNhD0gmfdCSr
+        xCWfWvGi7jz5bll4niKgv7HxL1FSQUKe/1j9pUQCATKhwNlPlfHRGLxXJtcXX9J4YQmJ3XtJDN419qby
+        fyT78QI+cyGrRfHW3psyIWV0pJ/RpvaNAtra+p/6bU4CRu26UULB0BJzjmEbzUw4DR7w2110b3CY94Ox
+        RwavuwNkv2NlPuBLlClg0yKkyRca8Ba5bwgoOtv8Pj6XVKhUc1kPHAGQzKezhTM8cTIPDnuYd9+++yK/
+        1vQ5C8CFbzV8LuGLBf9UOKMNkI2DkcynsUWTQZ0n8+CwB+flF7q0nJaWd9bcJy58q+FzCaF5ncCTpzh/
+        e1dGxj8BYPstBhkcwwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsbDynIntegrator.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -1554,6 +1572,12 @@
   <data name="&gt;&gt;ToolsTSMI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;StreamDataImporterTSMI.Name" xml:space="preserve">
+    <value>StreamDataImporterTSMI</value>
+  </data>
+  <data name="&gt;&gt;StreamDataImporterTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;CompoundCreatorWizardTSMI.Name" xml:space="preserve">
     <value>CompoundCreatorWizardTSMI</value>
   </data>
@@ -1684,6 +1708,18 @@
     <value>GerarRelatorioToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;GerarRelatorioToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ExcelReportsToolStripMenuItem.Name" xml:space="preserve">
+    <value>ExcelReportsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ExcelReportsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProcessFlowsheetDiagramToolStripMenuItem.Name" xml:space="preserve">
+    <value>ProcessFlowsheetDiagramToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ProcessFlowsheetDiagramToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PluginsTSMI.Name" xml:space="preserve">

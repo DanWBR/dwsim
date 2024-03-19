@@ -268,7 +268,7 @@ Namespace UnitOperations
             sb.AppendLine()
             sb.AppendLine(String.Format("Cell Voltage: {0} V", CellVoltage.ToString(nf)))
             sb.AppendLine(String.Format("Current: {0} A", Current.ToString(nf)))
-            sb.AppendLine(String.Format("Efficiency: {0} A", Efficiency.ToString(nf)))
+            sb.AppendLine(String.Format("Efficiency: {0}", Efficiency.ToString(nf)))
             sb.AppendLine(String.Format("Electron Transfer: {0} {1}", ElectronTransfer.ConvertFromSI(su.molarflow).ToString(nf), su.molarflow))
             sb.AppendLine()
             sb.AppendLine(String.Format("Waste Heat: {0} {1}", WasteHeat.ConvertFromSI(su.heatflow).ToString(nf), su.heatflow))

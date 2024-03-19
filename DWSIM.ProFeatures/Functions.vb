@@ -1,8 +1,18 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class Functions
+
+    Public Shared Sub DisplayTransitionForm(flowsheet As IFlowsheet, featurename As String)
+
+        Dim fp As New FormBridgeToPro()
+        fp.lblFeature.Text = featurename
+        fp.CurrentFlowsheet = flowsheet
+        fp.ShowDialog()
+
+    End Sub
 
     Public Shared Sub AddProUnitOps(Panels() As FlowLayoutPanel)
 

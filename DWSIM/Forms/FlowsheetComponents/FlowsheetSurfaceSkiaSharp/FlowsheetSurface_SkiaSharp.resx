@@ -1131,9 +1131,6 @@
   <data name="ToolStripLabel1.Text" xml:space="preserve">
     <value>Procurar</value>
   </data>
-  <data name="tstbSearch.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="tstbSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
@@ -1250,9 +1247,6 @@
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Diminuir Zoom</value>
-  </data>
-  <data name="TSTBZoom.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="TSTBZoom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 23</value>
@@ -1526,9 +1520,6 @@
   </data>
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Tamanho do Texto</value>
-  </data>
-  <data name="tbFontSize.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="tbFontSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 27</value>
@@ -2059,7 +2050,7 @@
     <value>Misturar Correntes</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 552</value>
+    <value>339, 530</value>
   </data>
   <data name="&gt;&gt;CMS_Sel.Name" xml:space="preserve">
     <value>CMS_Sel</value>

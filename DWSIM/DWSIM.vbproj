@@ -3087,6 +3087,7 @@
     <None Include="Resources\fontsize.png" />
     <None Include="Resources\fossee.png" />
     <None Include="Resources\file_80px.png" />
+    <None Include="Resources\Excel 2013.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -3228,6 +3229,8 @@
     <None Include="Resources\object_48px.png" />
     <None Include="Resources\rondy-stickers-lettering-sticker-ctrl-plus-z-with-arrow.gif" />
     <None Include="Resources\line_chart_80px.png" />
+    <None Include="Resources\input_80px.png" />
+    <None Include="Resources\icons8-documents.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

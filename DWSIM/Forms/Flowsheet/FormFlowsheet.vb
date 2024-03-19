@@ -235,6 +235,9 @@ Public Class FormFlowsheet
 
         If FormMain.IsPro Then
             tsmiExportData.Visible = False
+            StreamDataImporterTSMI.Visible = False
+            ExcelReportsToolStripMenuItem.Visible = False
+            ProcessFlowsheetDiagramToolStripMenuItem.Visible = False
         End If
 
         FormCharts.Flowsheet = Me
@@ -357,6 +360,13 @@ Public Class FormFlowsheet
             Me.Invalidate()
             Application.DoEvents()
 
+        End If
+
+        If Not FormMain.IsPro Then
+            Dim fg As New ProFeatures.FormGHG()
+            fg.Show(dckPanel)
+            Dim fc As New ProFeatures.FormCosting()
+            fc.Show(dckPanel)
         End If
 
         Me.UpdateFormText()
@@ -5532,6 +5542,18 @@ Public Class FormFlowsheet
         End Select
 
     End Function
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StreamDataImporterTSMI.Click
+        ProFeatures.Functions.DisplayTransitionForm(Me, "Stream Data Importer")
+    End Sub
+
+    Private Sub ExcelReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcelReportsToolStripMenuItem.Click
+        ProFeatures.Functions.DisplayTransitionForm(Me, "Excel Reports")
+    End Sub
+
+    Private Sub ProcessFlowsheetDiagramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcessFlowsheetDiagramToolStripMenuItem.Click
+        ProFeatures.Functions.DisplayTransitionForm(Me, "Process Flowsheet Diagram")
+    End Sub
 
     Private Sub CAPEOPENWarningTimer_Tick(sender As Object, e As EventArgs) Handles CAPEOPENWarningTimer.Tick
 

@@ -1330,7 +1330,7 @@ Public Class FormSimulSettings
         CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
 
         If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
-            MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ProFeatures.Functions.DisplayTransitionForm(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value + " Property Package")
             Exit Sub
         End If
 
