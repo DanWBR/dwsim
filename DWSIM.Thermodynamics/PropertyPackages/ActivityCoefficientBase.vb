@@ -36,7 +36,7 @@ Namespace PropertyPackages
 
             MyBase.New(comode)
 
-            EnthalpyEntropyCpCvCalculationMode = EnthalpyEntropyCpCvCalcMode.LiqCp_Excess
+            EnthalpyEntropyCpCvCalculationMode = EnthalpyEntropyCpCvCalcMode.LeeKesler
 
             LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.COSTALD
 
