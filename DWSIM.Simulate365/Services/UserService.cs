@@ -1,4 +1,5 @@
-﻿using DWSIM.Simulate365.Models;
+﻿using DWSIM.Simulate365.Enums;
+using DWSIM.Simulate365.Models;
 using DWSIM.UI.Web;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -19,26 +20,29 @@ namespace DWSIM.Simulate365.Services
     public class UserService
     {
 
-        const string TENANT_ID = "eb2542b8-5a5d-4f61-a9b5-6ce7dbc4ebfd";
-        const string CLIENT_ID = "d18e5f18-7709-4ef0-913e-3c8eeecd7d60";
-        const string SCOPE = "profile openid offline_access";
-        const string RETURN_URL = "https://dwsim-login-return.simulate365.com";
-
         private static UserService _singletonInstance;
 
         private UserDetailsModel _currentUser = null;
         public EventHandler OnUserLoggedIn;
+        public EventHandler<bool> AutoLoginInProgress;
         private string _accessToken = null;
         private string _refreshToken = null;
+        private AccessTokenType _accessTokenType = AccessTokenType.MsGraph;
         private DateTime _accessTokenExpiresAt = DateTime.MinValue;
         private System.Timers.Timer refreshTokenTimer;
+        private static string AccessTokenTypeField = "AccessTokenType";
         private static string AccessTokenField = "AccessTokenV2";
         private static string RefreshTokenField = "RefreshTokenV2";
         private static string AccessTokenExpiresAtField = "AccessTokenExpiresAtV2";
 
+        private Dictionary<AccessTokenType, IUserProvider> _userProviders = new Dictionary<AccessTokenType, IUserProvider> {
+            {AccessTokenType.MsGraph,new MsGraphUserProvider() }
+        };
+
         #region Public events
 
         public event EventHandler<UserDetailsModel> UserDetailsLoaded;
+        public event EventHandler<bool> AutoLoginInProgressChanged;
         public event EventHandler UserLoggedOut;
         public event EventHandler ShowLoginForm;
 
@@ -53,9 +57,13 @@ namespace DWSIM.Simulate365.Services
             {
                 this._accessToken = key.GetValue(AccessTokenField)?.ToString();
                 this._refreshToken = key.GetValue(RefreshTokenField)?.ToString();
+                this._accessTokenType = (AccessTokenType)Enum.Parse(typeof(AccessTokenType), key.GetValue(AccessTokenTypeField)?.ToString() ?? "0");
+
                 var expiresAtValue = key.GetValue(AccessTokenExpiresAtField);
                 if (expiresAtValue != null)
                     DateTime.TryParse(key.GetValue(AccessTokenExpiresAtField).ToString(), out this._accessTokenExpiresAt);
+
+                AutoLoginInProgress += (s, e) => { AutoLoginInProgressChanged.Invoke(s, e); };
 
                 Task.Run(() => LoadUserDetails());
             }
@@ -138,11 +146,12 @@ namespace DWSIM.Simulate365.Services
         {
             return this._accessToken;
         }
-        public void SetAccessToken(string accessToken, string refreshToken, DateTime expiresAt)
+        public void SetAccessToken(AccessTokenType accessTokenType, string accessToken, string refreshToken, DateTime expiresAt)
         {
             _accessToken = accessToken;
             _refreshToken = refreshToken;
             _accessTokenExpiresAt = expiresAt;
+            _accessTokenType = accessTokenType;
 
             // Save to registry
 
@@ -151,6 +160,7 @@ namespace DWSIM.Simulate365.Services
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\DWSIM", true);
 
             //storing the values  
+            key.SetValue(AccessTokenTypeField, accessTokenType);
             key.SetValue(AccessTokenField, _accessToken);
             key.SetValue(RefreshTokenField, _refreshToken);
             key.SetValue(AccessTokenExpiresAtField, _accessTokenExpiresAt.ToString());
@@ -165,18 +175,11 @@ namespace DWSIM.Simulate365.Services
             {
                 if (string.IsNullOrWhiteSpace(this._accessToken))
                     return;
+                if (!_userProviders.ContainsKey(_accessTokenType))
+                    throw new Exception($"User provider not registered for type {_accessTokenType}.");
 
-                var graphClient = GraphClientFactory.CreateClient(_accessToken);
-                var user = await graphClient.Me.Request().GetAsync();
-
-                _currentUser = new UserDetailsModel
-                {
-                    DisplayName = $"{user.GivenName} {user.Surname}",
-                    FirstName = user.GivenName,
-                    LastName = user.Surname,
-                    Id = user.Id,
-                    UserPrincipalName = user.UserPrincipalName
-                };
+                var userProvider = _userProviders[_accessTokenType];
+                _currentUser = await userProvider.GetUserDetailsAsync(_accessToken);
 
                 // Trigger event, swallow all errors
                 try
@@ -191,6 +194,15 @@ namespace DWSIM.Simulate365.Services
             }
         }
 
+        public void RegisterUserDetailsProvider(AccessTokenType accessTokenType, IUserProvider userDetailsProvider)
+        {
+            if (!_userProviders.ContainsKey(accessTokenType))
+            {
+                _userProviders.Add(accessTokenType, userDetailsProvider);
+            }
+        }
+
+
         public void ShowLogin()
         {
             ShowLoginForm?.Invoke(this, new EventArgs());
@@ -198,47 +210,17 @@ namespace DWSIM.Simulate365.Services
 
         public async Task RefreshToken()
         {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if (!_userProviders.ContainsKey(_accessTokenType))
+                throw new Exception($"User provider not registered for type {_accessTokenType}.");
 
-                    string refreshUrl = $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token";
-                    var formData = new Dictionary<string, string>()
-                    {
-                        ["client_id"] = CLIENT_ID,
-                        ["refresh_token"] = _refreshToken,
-                        ["scope"] = SCOPE,
-                        ["redirect_uri"] = RETURN_URL,
-                        ["grant_type"] = "refresh_token",
-                    };
+            // Deserialize
+            var userProvider = _userProviders[_accessTokenType];
 
-                    HttpResponseMessage response = await client.PostAsync(refreshUrl, new FormUrlEncodedContent(formData));
-                    var responseStr = await response.Content.ReadAsStringAsync();
+            var tokenResp = await userProvider.RefreshTokenAsync(_refreshToken);
+            if (tokenResp == null)
+                return;
 
-                    // Check for error
-                    var errorResponse = JsonConvert.DeserializeObject<OAuthErrorResponse>(responseStr);
-                    if (errorResponse != null && !String.IsNullOrWhiteSpace(errorResponse.Error))
-                    {
-                        var errorMessage = "An error occured while refreshing authorizaton token.";
-                        if (!String.IsNullOrWhiteSpace(errorResponse.ErrorDescription))
-                            errorMessage = errorResponse.ErrorDescription;
-
-                        throw new Exception(errorMessage);
-                    }
-
-                    // Deserialize
-                    var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(responseStr);
-                    SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-                //  UserLoggedOut?.Invoke(this, new EventArgs());
-            }
+            SetAccessToken(tokenResp.AccessTokenType, tokenResp.AccessToken, tokenResp.RefreshToken, DateTime.Now.AddSeconds(tokenResp.ExpiresIn - 30));
         }
 
     }

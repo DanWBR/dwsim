@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DWSIM.Simulate365.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace DWSIM.Simulate365.Models
     {
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }
+
+        public AccessTokenType AccessTokenType { get; set; }
 
         [JsonProperty("token_type")]
         public string TokenType { get; set; }
