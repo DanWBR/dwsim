@@ -975,7 +975,7 @@
     </Compile>
     <Compile Include="Forms\FormScript.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </Compile>   
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
