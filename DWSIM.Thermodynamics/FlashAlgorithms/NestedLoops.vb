@@ -774,6 +774,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                 Return interp.Interpolate(tval)
                                             End Function)
 
+                        herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
+                        fx = herrobj(0)
+
                         If Math.Abs(fx / H) > 0.01 Then
 
                             If interpolate Then
@@ -2215,7 +2218,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         End Function
 
-        Public Function Flash_PV_1(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+        Public Function Flash_PV_1(ByVal Vz2 As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -2228,7 +2231,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
             IObj?.Paragraphs.Add(String.Format("Vapor Mole Fraction: {0} ", V))
             IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz2.ToMathArrayString))
 
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -2246,15 +2249,34 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             df = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor).ToDoubleFromInvariant
             maxdT = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange).ToDoubleFromInvariant
 
-            n = Vz.Length - 1
+            n = Vz2.Length - 1
 
             PP = PP
             Vf = V
             L = 1 - V
             Lf = 1 - Vf
 
-            Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
+            Dim S, Vz(n), Vs(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
             Dim Vt(n), VTc(n), dFdT, Tsat(n) As Double
+
+            Vz = Vz2.Clone()
+
+            Dim cprops = PP.DW_GetConstantProperties()
+
+            For i = 0 To n
+                If cprops(i).IsSolid Or cprops(i).TemperatureOfFusion > 1000.0 Or cprops(i).Normal_Boiling_Point * 0.7 > 1000.0 Then
+                    'solid. leave out of the calculation
+                    Vs(i) = Vz2(i)
+                    Vz(i) = 0.0
+                End If
+            Next
+
+            S = Vs.SumY()
+
+            If S > 0.0 Then
+                Vs = Vs.NormalizeY()
+                Vz = Vz.NormalizeY()
+            End If
 
             VTc = PP.RET_VTC()
             fi = Vz.Clone
@@ -2323,6 +2345,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
 
             If PP.AUX_IS_SINGLECOMP(Vz) Then
+
                 WriteDebugInfo("PV Flash [NL]: Converged in 1 iteration.")
                 T = 0
                 For i = 0 To n
@@ -2335,7 +2358,25 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Vy = New Double() {1.0}
                     Ki = New Double() {1.0}
                 End If
+
+                If S > 0 Then
+
+                    Dim VnL = Vx.MultiplyConstY(L)
+                    Dim VnV = Vy.MultiplyConstY(V)
+                    Dim VnS = Vs.MultiplyConstY(S)
+
+                    L = VnL.AddY(VnS).SumY
+
+                    Vx = VnL.AddY(VnS).MultiplyConstY(1 / (L + 0.0000000001))
+
+                    For i = 0 To n
+                        If Vs(i) > 0.0 Then Ki(i) = 1.0E-20 / Vx(i)
+                    Next
+
+                End If
+
                 Return New Object() {L, V, Vx, Vy, T, 0, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
             End If
 
             Dim marcador3, marcador2, marcador As Integer
@@ -2734,6 +2775,22 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.Paragraphs.Add(String.Format("Final converged value for T: {0}", T))
 
             IObj?.Close()
+
+            If S > 0 Then
+
+                Dim VnL = Vx.MultiplyConstY(L)
+                Dim VnV = Vy.MultiplyConstY(V)
+                Dim VnS = Vs.MultiplyConstY(S)
+
+                L = VnL.AddY(VnS).SumY
+
+                Vx = VnL.AddY(VnS).MultiplyConstY(1 / (L + 0.0000000001))
+
+                For i = 0 To n
+                    If Vs(i) > 0.0 Then Ki(i) = 1.0E-20 / Vx(i)
+                Next
+
+            End If
 
             Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
