@@ -363,10 +363,10 @@ Public Class FormFlowsheet
         End If
 
         If Not FormMain.IsPro Then
-            Dim fg As New ProFeatures.FormGHG()
-            fg.Show(dckPanel)
-            Dim fc As New ProFeatures.FormCosting()
-            fc.Show(dckPanel)
+            'Dim fg As New ProFeatures.FormGHG()
+            'fg.Show(dckPanel)
+            'Dim fc As New ProFeatures.FormCosting()
+            'fc.Show(dckPanel)
         End If
 
         Me.UpdateFormText()

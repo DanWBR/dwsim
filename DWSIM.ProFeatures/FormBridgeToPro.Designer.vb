@@ -78,7 +78,7 @@ Partial Class FormBridgeToPro
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(246, 72)
         Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Switch to DWSIM Pro"
+        Me.Button2.Text = "Get a Free Pro Trial"
         Me.Button2.UseVisualStyleBackColor = False
         '
         'Label4
@@ -90,6 +90,7 @@ Partial Class FormBridgeToPro
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Label4.Visible = False
         '
         'lblFeature
         '
