@@ -6,17 +6,12 @@
 🥈 Jane Ferris
 🌟 Adam Kovalovszki
 🌟 Alberto Marzi
-🌟 Alfred Gongaware
-🌟 Alberto Baumeister
 🌟 Bernhard Seyfang
 🌟 Bryan Evans
 🌟 Cameron Paul Ward
 🌟 Casey Houston
-🌟 Chris Hart
 🌟 Christian Hornhofer
-🌟 Dave Carpency
 🌟 Domenico Marchese
-🌟 Edson Zaparoli
 🌟 Fernando Lino
 🌟 George Brindle
 🌟 Gerry Agnew
@@ -25,8 +20,8 @@
 🌟 H-Tec Systems GmbH
 🌟 Javier Fontalvo
 🌟 Jens Greimeier
-🌟 Jonathan Reichelt
 🌟 José Marques
+🌟 Justin Parrot
 🌟 Leonard Seed
 🌟 Lorenzo Giuseppe Montani
 🌟 Martin Heiser
@@ -37,6 +32,7 @@
 🌟 Roland Berger
 🌟 Ronald J. Dunbar
 🌟 Ronald Visness
+🌟 Ryan Smith
 🌟 Simone Vidille
 🌟 Tech-Rudra
 Alberto Baumeister
@@ -52,20 +48,18 @@ Carlos Eduardo Pantoja
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
-Daniel Bajolet
 David Miller
 David Whitlock
 Denislav Zdravkov
-Dorivaldo Junior
 Doug Palfreyman
 Eugenio León
 Fernando Almeida
 Frans Le Roux
 Guenther Holzer
+Harry Levinson
 Hep Ingham
 Hurudza
 John Kossik
-Joseph Attia
 Kenneth Troldal
 Les Waymont
 Lewis Estall
@@ -74,9 +68,6 @@ Marcos Silva
 Masahiro Sakai
 Mohan Vaze
 Nicolas Spogis
-Pablo Jimenez
-Paulo Bernardo
-Pedro Sabóia
 Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
@@ -84,8 +75,9 @@ Renato Corrêa Arrieche
 Rupert Easter
 Ryszard Sadowski
 Satinder Singh Virdi
-Shankar Ananth
+Saurabh Deshmukh
 Shubham Wankhede
 Tetsuo Fuchino
+Thomas Baur
 Tibor Lányi
 Will Flores

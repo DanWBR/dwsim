@@ -2317,8 +2317,8 @@ Public Class FormMain
 
         If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
 
-        form.FilePath = handler.FullPath
-        form.Options.FilePath = handler.FullPath
+        form.FilePath = filename
+        form.Options.FilePath = filename
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 

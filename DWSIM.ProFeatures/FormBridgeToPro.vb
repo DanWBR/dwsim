@@ -19,7 +19,9 @@ Public Class FormBridgeToPro
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        TransitionAction?.Invoke(CurrentFlowsheet)
+        'TransitionAction?.Invoke(CurrentFlowsheet)
+
+        Process.Start("https://simulate365.com/registration/")
 
     End Sub
 

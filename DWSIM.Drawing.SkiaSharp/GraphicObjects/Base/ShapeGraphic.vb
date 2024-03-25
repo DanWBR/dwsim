@@ -65,17 +65,6 @@ Namespace GraphicObjects
 
             MyBase.Draw(g)
 
-            If Not Owner?.SupportsDynamicMode And Owner?.GetFlowsheet?.DynamicMode Then
-
-                DrawNotDynamicsCompatible(g)
-
-            ElseIf Owner?.GetFlowsheet?.DynamicMode And
-                Owner?.GetFlowsheet()?.FlowsheetOptions.DisplayDynamicPropertyValues Then
-
-                DrawDynamicProperties(g)
-
-            End If
-
         End Sub
 
         Friend Sub DrawIcon(canvas As SKCanvas)

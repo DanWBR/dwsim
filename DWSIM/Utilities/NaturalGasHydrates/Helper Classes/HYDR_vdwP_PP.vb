@@ -124,22 +124,22 @@ Namespace DWSIM.Utilities.HYD
 
             Dim n = UBound(Vz)
             Dim PQHYD, PQAG, PQRL, PQRG As Double
-            Dim vm(1, 1), sumvmsI(1), sumvmsII(1)
-            Dim C1(1, n), C2(1, n)
+            Dim vm(1, 1), sumvmsI(1), sumvmsII(1) As Double
+            Dim C1(1, n), C2(1, n) As Double
             Dim DT, Tnfp, DHm, Td, Nbw, VbsI, VbsII, FUGH, PWSAT, FUGW As Double
             Dim Vxaq(n), t1, t2, t3, t4, t5 As Double
-            Dim ZLinf(n), ZV
+            Dim ZLinf(n), ZV As Double
             Dim act As Double
-            Dim H(n), tmp2(3)
-            Dim PQG, PQL, DH
-            Dim TETA1(1, n), TETA2(1, n)
-            Dim vi_(n), VLW
-            Dim VysI, VysII, VsI(n), VsII(n)
-            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n)
-            Dim Vy(n), pos, sum
-            Dim sum2sI, sum2sII
+            Dim H(n), tmp2(3) As Double
+            Dim PQG, PQL, DH As Double
+            Dim TETA1(1, n), TETA2(1, n) As Double
+            Dim vi_(n), VLW As Double
+            Dim VysI, VysII, VsI(n), VsII(n) As Double
+            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n) As Double
+            Dim Vy(n) As Double, pos As Integer, sum As Double
+            Dim sum2sI, sum2sII As Double
             Dim R = 8.314, T0 = 273.15
-            Dim temp1, tv, tv2
+            Dim temp1 As Double(,), tv, tv2 As Double
             Dim PR, dPdT, bg As Double
             Dim i = 0
             Do
@@ -184,14 +184,14 @@ Namespace DWSIM.Utilities.HYD
 
             'PRSV
 
-            Dim PHIV(n), LN_CFV(n)
-            Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n)
-            Dim aml2(n), amv2(n)
-            Dim alpha(n), m(n)
+            Dim PHIV(n), LN_CFV(n) As Double
+            Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n) As Double
+            Dim aml2(n), amv2(n) As Double
+            Dim alpha(n), m(n) As Double
             Dim b1(n), b2(n), coeff(3) As Double
             Dim j As Integer
 
-            Dim ai_(n)
+            Dim ai_(n) As Double
 
             i = 0
             Do
@@ -895,22 +895,22 @@ STEP2:
 
             Dim n = UBound(Vz)
             Dim PQHYD, PQAG, PQRL, PQRG As Double
-            Dim vm(1, 1), sumvmsI(1), sumvmsII(1)
-            Dim C1(1, n), C2(1, n)
+            Dim vm(1, 1), sumvmsI(1), sumvmsII(1) As Double
+            Dim C1(1, n), C2(1, n) As Double
             Dim DT, Tnfp, DHm, Td, VbsI, VbsII, PWSAT, Nbw As Double
             Dim Vxaq(n), t1, t2, t3, t4, t5 As Double
-            Dim ZLinf(n), ZV
+            Dim ZLinf(n), ZV As Double
             Dim act As Double
-            Dim H(n), tmp2(3)
-            Dim PQG, PQL, DH
-            Dim TETA1(1, n), TETA2(1, n)
-            Dim vi_(n), VLW
+            Dim H(n), tmp2(3) As Double
+            Dim PQG, PQL, DH As Double
+            Dim TETA1(1, n), TETA2(1, n) As Double
+            Dim vi_(n), VLW As Double
             Dim VysI, VysII, VsI(n), VsII(n), Vh(n), VxHC(n), Ki(n) As Double
-            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n)
-            Dim Vy(n) As Double, pos, sum
-            Dim sum2sI, sum2sII
+            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n) As Double
+            Dim Vy(n) As Double, pos As Integer, sum As Double
+            Dim sum2sI, sum2sII As Double
             Dim R = 8.314, T0 = 273.15
-            Dim temp1, tv, tv2
+            Dim temp1 As Double(,), tv, tv2 As Double
             Dim PR, dPdT, bg As Double
             Dim i = 0
             Do
@@ -955,15 +955,15 @@ STEP2:
 
             'PRSV
 
-            Dim PHIV(n), LN_CFV(n)
-            Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n)
-            Dim aml2(n), amv2(n)
-            Dim alpha(n), m(n)
+            Dim PHIV(n), LN_CFV(n) As Double
+            Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n) As Double
+            Dim aml2(n), amv2(n) As Double
+            Dim alpha(n), m(n) As Double
             Dim b1(n), b2(n), coeff(3) As Double
             Dim j As Integer
 
-            Dim ai_(n)
-            Dim KAPPA(n), KAPPA0(n)
+            Dim ai_(n) As Double
+            Dim KAPPA(n), KAPPA0(n) As Double
 
             i = 0
             Do

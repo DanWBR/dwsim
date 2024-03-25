@@ -89,6 +89,7 @@ Version 8.7.0
 - Fixed port/connector positions for ChemSep column
 - CAPE-OPEN Property Package Manager fix
 - Added compound mass balance check for rigorous columns (#599)
+- Fixed Shortcut Column calculation with subcooled and superheated feeds
 
 Version 8.6.8
 

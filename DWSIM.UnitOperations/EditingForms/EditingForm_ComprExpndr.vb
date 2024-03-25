@@ -710,14 +710,16 @@ Public Class EditingForm_ComprExpndr
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
-
             If TypeOf SimObject Is UnitOperations.Compressor Then
+
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 50, sgobj.InputConnectors(1).Position.Y + 30, "")
 
                 If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
                 fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
 
             Else
+
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
 
                 If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
                 fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
