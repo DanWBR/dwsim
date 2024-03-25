@@ -228,34 +228,95 @@ Namespace UnitOperations
 
             End If
 
+            Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
+            Dim oms As MaterialStream = Me.GetOutletMaterialStream(0)
+
+            Dim Ti, P1, Hi, Wi, ei, ein, P2, H2, rho, volf, rhog20, P2ant, v2, Kvc, Pv, Pc, rhol, rhog, k, Cp_ig As Double
+            Dim massfrac_gas, massfrac_liq As Double
+            Dim icount As Integer
+
+            Me.PropertyPackage.CurrentMaterialStream = ims
+
+            Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            P1 = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+            Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
+            ei = Hi * Wi
+            ein = ei
+            rho = ims.Phases(0).Properties.density.GetValueOrDefault
+            volf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+
+            H2 = Hi
+
             Select Case CalcMode
 
                 Case CalculationMode.OutletPressure, CalculationMode.DeltaP
 
-                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+                    If ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
+                        oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
+
+                        Throw New Exception("Inlet and Outlet Streams cannot be both Flow-spec'd at the same time.")
+
+                    ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure And
+                         oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
+
+                        Throw New Exception("Inlet and Outlet Streams cannot be both Pressure-spec'd at the same time.")
+
+                    ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
+                                oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
+
+                        Throw New Exception("Inlet Flow + Outlet Pressure specifications not supported by this calculation mode.")
+
+                    ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure And
+                                oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
+
+                        If CalcMode = CalculationMode.OutletPressure Then
+                            P2 = OutletPressure.GetValueOrDefault()
+                        Else
+                            P2 = P1 - DeltaP.GetValueOrDefault
+                        End If
+
+                    End If
+
+                    DeltaP = P1 - P2
+                    OutletPressure = P2
+
+                    With oms
+                        .AtEquilibrium = False
+                        .Phases(0).Properties.temperature = Ti
+                        .Phases(0).Properties.pressure = P2
+                        .Phases(0).Properties.enthalpy = H2
+                        Dim comp As BaseClasses.Compound
+                        Dim i As Integer = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction
+                            comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
+                            comp.MassFlow = comp.MassFraction * Wi
+                            comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight * 1000
+                            i += 1
+                        Next
+                    End With
+
+                    Wi = oms.GetMassFlow
+                    If Double.IsNaN(Wi) Or Double.IsInfinity(Wi) Or Wi < 0.0 Then Wi = 1.0E-20
+
+                    If ims.MaximumAllowableDynamicMassFlowRate.HasValue Then
+                        Dim WiMax = ims.MaximumAllowableDynamicMassFlowRate.Value
+                        If Wi > WiMax Then
+                            ims.SetMassFlow(WiMax)
+                            oms.SetMassFlow(WiMax)
+                        Else
+                            ims.SetMassFlow(Wi)
+                            oms.SetMassFlow(Wi)
+                        End If
+                    Else
+                        ims.SetMassFlow(Wi)
+                        oms.SetMassFlow(Wi)
+                    End If
+
+                    ims.SetMassFlow(Wi)
 
                 Case Else
-
-                    Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
-                    Dim oms As MaterialStream = Me.GetOutletMaterialStream(0)
-
-                    Dim Ti, P1, Hi, Wi, ei, ein, P2, H2, rho, volf, rhog20, P2ant, v2, Kvc, Pv, Pc, rhol, rhog, k, Cp_ig As Double
-                    Dim massfrac_gas, massfrac_liq As Double
-                    Dim icount As Integer
-
-                    Me.PropertyPackage.CurrentMaterialStream = ims
-
-                    Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault
-                    P1 = ims.Phases(0).Properties.pressure.GetValueOrDefault
-                    Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
-                    ei = Hi * Wi
-                    ein = ei
-                    rho = ims.Phases(0).Properties.density.GetValueOrDefault
-                    volf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-
-                    H2 = Hi
-
 
                     Dim FC As Double 'flow coefficient
 
@@ -626,12 +687,14 @@ Namespace UnitOperations
 
         Public Function P2Liquid(Wi As Double, Kv As Double, P1 As Double, rho As Double, Pv As Double, Pc As Double) As Double
 
-            Dim P2_high, P2_low, P2_mid, x_c As Double
+            Dim P2_high, P2_low As Double
 
             P2_high = P1
             P2_low = P1 - FL ^ 2 * (P1 - F_F(Pv, Pc) * Pv)
 
-            If Kv * FP * (rho * 999.1 * (P1 - P2_low)) ^ 0.5 < Wi Then
+            Dim Wic = Kv * FP * (rho * 999.1 * (P1 - P2_low)) ^ 0.5
+
+            If Wic < Wi Then
                 Throw New Exception("Valve capacity too small, increase Kv")
             Else
                 P2Liquid = P1 - 1 / (999.1 * rho) * (Wi / (Kv * FP)) ^ 2

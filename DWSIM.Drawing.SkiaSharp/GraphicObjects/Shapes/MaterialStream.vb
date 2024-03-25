@@ -158,19 +158,6 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
             End Select
 
-
-            If Owner?.GetFlowsheet.DynamicMode Then
-
-                If ObjectType = ObjectType.MaterialStream And (Not InputConnectors(0).IsAttached Or Not OutputConnectors(0).IsAttached) Then
-
-                    'draw dyn spec
-
-                    DrawDynSpec(canvas, Owner.DynamicsSpec)
-
-                End If
-
-            End If
-
         End Sub
 
         Public Overrides Function GetPointValue(type As PointValueType, X As Integer, Y As Integer, args As List(Of Object)) As Double

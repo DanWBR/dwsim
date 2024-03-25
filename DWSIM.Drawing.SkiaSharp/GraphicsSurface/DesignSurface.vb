@@ -499,7 +499,42 @@ Public Class GraphicsSurface
 
                             DirectCast(dobj, ShapeGraphic).DrawTag(DrawingCanvas)
 
+                            If Not dobj.Owner?.SupportsDynamicMode And dobj.Owner?.GetFlowsheet?.DynamicMode Then
+
+                                dobj.DrawNotDynamicsCompatible(DrawingCanvas)
+
+                            ElseIf dobj.Owner?.GetFlowsheet?.DynamicMode And
+                                dobj.Owner?.GetFlowsheet()?.FlowsheetOptions.DisplayDynamicPropertyValues Then
+
+                                dobj.DrawDynamicProperties(DrawingCanvas)
+
+                            End If
+
                         End If
+
+                        If dobj.Owner?.GetFlowsheet.DynamicMode Then
+
+                            If dobj.ObjectType = ObjectType.MaterialStream Then
+
+                                If Not dobj.InputConnectors(0).IsAttached Or
+                                Not dobj.OutputConnectors(0).IsAttached Or
+                                dobj.InputConnectors(0).IsAttached AndAlso
+                                (dobj.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.Valve Or
+                                dobj.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle) Or
+                                dobj.OutputConnectors(0).IsAttached AndAlso
+                                (dobj.OutputConnectors(0).AttachedConnector.AttachedTo.ObjectType = ObjectType.Valve Or
+                                dobj.OutputConnectors(0).AttachedConnector.AttachedTo.ObjectType = ObjectType.OT_Recycle) Then
+
+                                    'draw dyn spec
+
+                                    dobj.DrawDynSpec(DrawingCanvas, dobj.Owner.DynamicsSpec)
+
+                                End If
+
+                            End If
+
+                            End If
+
 
                     End If
 
