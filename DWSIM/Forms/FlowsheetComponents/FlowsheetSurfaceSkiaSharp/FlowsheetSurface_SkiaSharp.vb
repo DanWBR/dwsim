@@ -4112,7 +4112,7 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 24
             btnLeft.Height = 24
             FlowsheetSurface.ControlPanelMode = True
-            SplitContainerHorizontal.Panel2Collapsed = True
+            SplitContainerVertical.Panel2Collapsed = True
         Else
             btnDown.Visible = False
             btnUp.Visible = False
@@ -4123,7 +4123,7 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 1
             btnLeft.Height = 1
             FlowsheetSurface.ControlPanelMode = False
-            SplitContainerHorizontal.Panel2Collapsed = False
+            SplitContainerVertical.Panel2Collapsed = False
         End If
         FControl.Invalidate()
 
