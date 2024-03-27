@@ -148,4 +148,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property EnableGHGEmissionsSubsystem As Boolean
 
+    Property FlowsheetTransitionObject As IFlowsheetTransitionRestore
+
 End Interface

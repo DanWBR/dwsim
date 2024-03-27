@@ -275,8 +275,13 @@ Public Class FormSimulWizard
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
 
         If Integer.TryParse(DataGridViewPP.SelectedRows(0).Cells(0).Value, New Integer) Then
+
+            ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value, "Property Package", "Add", "Simulation Wizard", Nothing)
+
             ProFeatures.Functions.DisplayTransitionForm(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value + " Property Package")
+
             Exit Sub
+
         End If
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
