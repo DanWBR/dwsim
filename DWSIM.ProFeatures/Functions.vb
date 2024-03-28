@@ -6,11 +6,13 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class Functions
 
-    Public Shared Async Sub ProcessTransition(flowsheet As IFlowsheet)
+    Public Shared TransitionAction As Func(Of IFlowsheet, Boolean)
 
+    Public Shared Function ProcessTransition(flowsheet As IFlowsheet) As Boolean
 
+        Return TransitionAction?.Invoke(flowsheet)
 
-    End Sub
+    End Function
 
     Public Shared Sub DisplayTransitionForm(flowsheet As IFlowsheet, featurename As String)
 
