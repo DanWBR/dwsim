@@ -254,6 +254,8 @@ Public Class FormMain
         AddHandler UserService.GetInstance().AutoLoginInProgressChanged, AddressOf UserService_AutoLoginInProgress
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
         AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
+        AddHandler FileManagementService.GetInstance().OnSaveFileToDashboard, AddressOf FileManagementService_SaveFileToDashboard
+
 
 #If Not WINE32 Then
 
@@ -353,6 +355,11 @@ Public Class FormMain
 
 #End If
 
+    End Sub
+
+    Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
+        Me.SaveFile(True, True)
+        FileManagementService.GetInstance().FileSavedToDashboard()
     End Sub
 
     Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)

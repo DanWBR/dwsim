@@ -44,6 +44,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -84,6 +87,12 @@
     <Compile Include="FormGHG.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormPortal.Designer.vb">
+      <DependentUpon>FormPortal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPortal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Functions.vb" />
     <Compile Include="ListItem.designer.vb">
       <DependentUpon>ListItem.vb</DependentUpon>
@@ -91,6 +100,9 @@
     <Compile Include="ListItem.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Models\CreateStartupActionPostModel.vb" />
+    <Compile Include="Models\DWSIMProStartupAction.vb" />
+    <Compile Include="Models\LicenseResponseModel.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -117,6 +129,9 @@
     <EmbeddedResource Include="FormGHG.resx">
       <DependentUpon>FormGHG.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPortal.resx">
+      <DependentUpon>FormPortal.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListItem.resx">
       <DependentUpon>ListItem.vb</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +155,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\Icon16.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -200,14 +216,30 @@
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
+      <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
+      <Name>DWSIM.FlowsheetBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30E167D2-5B5A-453A-A92C-18FF3BBB6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Simulate365\DWSIM.Simulate365.csproj">
+      <Project>{1CC0851C-F6C2-477C-A725-A2E1C5E96802}</Project>
+      <Name>DWSIM.Simulate365</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Web\DWSIM.UI.Web.csproj">
+      <Project>{4a48830e-c861-422a-b3e9-44311914c694}</Project>
+      <Name>DWSIM.UI.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
