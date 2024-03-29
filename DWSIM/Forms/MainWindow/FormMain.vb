@@ -43,6 +43,7 @@ Imports DWSIM.Simulate365.Models
 Imports DWSIM.Simulate365.Services
 Imports DWSIM.Simulate365.FormFactories
 Imports Microsoft.VisualBasic.ApplicationServices
+Imports DWSIM.ProFeatures
 
 Public Class FormMain
 
@@ -254,6 +255,7 @@ Public Class FormMain
         AddHandler UserService.GetInstance().AutoLoginInProgressChanged, AddressOf UserService_AutoLoginInProgress
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
         AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
+        AddHandler FileManagementService.GetInstance().OnSaveFileToDashboard, AddressOf FileManagementService_SaveFileToDashboard
 
 #If Not WINE32 Then
 
@@ -352,6 +354,18 @@ Public Class FormMain
         Next
 
 #End If
+
+    End Sub
+
+    Private Function TransitionUserToDWSIMPro(flowsheet As IFlowsheet) As Boolean
+        Dim portalFom = New FormPortal(flowsheet)
+        portalFom.ShowDialog()
+        Return True
+    End Function
+
+
+    Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
+        Me.SaveFile(True, True)
 
     End Sub
 
@@ -4212,7 +4226,10 @@ Label_00CC:
                 Try
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
-                    filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    If form2.Options.VirtualFile IsNot Nothing Then
+                        filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    End If
+
                 Catch ex As Exception
                 End Try
             Else
@@ -4237,6 +4254,7 @@ Label_00CC:
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
 
             If handler IsNot Nothing Then
+
                 If SavingSimulation IsNot Nothing Then
                     If SavingSimulation.Invoke(form2) = False Then Exit Sub
                 End If
@@ -4264,6 +4282,9 @@ Label_00CC:
                     SaveJSON(handler, Me.ActiveMdiChild)
                 Else
                     Me.bgSaveFile.RunWorkerAsync()
+                End If
+                If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
+                    DirectCast(ActiveMdiChild, FormFlowsheet).FlowsheetOptions.VirtualFile = handler
                 End If
             End If
         Else
@@ -4477,9 +4498,15 @@ Label_00CC:
 
         If My.Computer.Keyboard.ShiftKeyDown Then saveasync = False
 
-        Dim filename As String
         Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
-        dashboardpicker = TypeOf filePickerForm Is S365FilePickerForm
+
+        If dashboardpicker Then
+            filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+        End If
+
+        Dim filename As String
+
+        dashboardpicker = dashboardpicker Or TypeOf filePickerForm Is S365FilePickerForm
 
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then

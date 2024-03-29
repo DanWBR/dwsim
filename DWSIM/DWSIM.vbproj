@@ -975,7 +975,7 @@
     </Compile>
     <Compile Include="Forms\FormScript.vb">
       <SubType>Form</SubType>
-    </Compile>   
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1753,8 +1753,8 @@
       <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
       <Name>DWSIM.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.ProFeatures\DWSIM.ProFeatures.vbproj">
-      <Project>{da47adde-25cb-413b-baf2-0fe0437641b9}</Project>
+    <ProjectReference Include="..\DWSIM.ProFeatures\DWSIM.ProFeatures.csproj">
+      <Project>{68632cb5-e993-0eca-38aa-c59e21e17519}</Project>
       <Name>DWSIM.ProFeatures</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
@@ -3268,6 +3268,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.en.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.es.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>

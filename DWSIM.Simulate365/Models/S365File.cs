@@ -69,6 +69,7 @@ namespace DWSIM.Simulate365.Models
             FileUniqueIdentifier = file.FileUniqueIdentifier;
             Filename = file.Filename;
             FullPath = file.FullPath;
+            FileManagementService.GetInstance().FileSavedToDashboard();
         }
 
 
