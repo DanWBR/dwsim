@@ -688,7 +688,7 @@ Public Class FormFlowsheet
 
         My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Screen Characteristics", "", data)
 
-        Task.Delay(3000).ContinueWith(Sub() UIThread(Sub() ProcessTransition()))
+        If FormMain.IsPro Then Task.Delay(3000).ContinueWith(Sub() UIThread(Sub() ProcessTransition()))
 
     End Sub
 
