@@ -107,9 +107,14 @@ namespace DWSIM.ProFeatures
 
         private async void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
         {
+           await SaveStartupActionAndRedirect();
+
+        }
+        private async Task SaveStartupActionAndRedirect()
+        {
             if (this.InvokeRequired)
             {
-                this.Invoke(FileManagementService_FileSavedToDashboard, sender, e);
+                this.Invoke(SaveStartupActionAndRedirect);
             }
             else
             {
@@ -120,7 +125,6 @@ namespace DWSIM.ProFeatures
                     RedirectToDWSIMPro();
                 }
             }
-
         }
 
         private async Task<LicenseResponseModel> GetLicenseInfo()
