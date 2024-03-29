@@ -105,16 +105,16 @@ namespace DWSIM.ProFeatures
 
         }
 
-        private async void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
+        private  void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
         {
-           await SaveStartupActionAndRedirect();
+            SaveStartupActionAndRedirect();
 
         }
-        private async Task SaveStartupActionAndRedirect()
+        private async void SaveStartupActionAndRedirect()
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(SaveStartupActionAndRedirect);
+                this.Invoke(new Action(SaveStartupActionAndRedirect));
             }
             else
             {
