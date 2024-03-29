@@ -1,10 +1,17 @@
-﻿using System;
+﻿
+using DWSIM.Interfaces;
+using System;
+using System.Diagnostics;
 
 namespace DWSIM.ProFeatures
 {
 
+
     public partial class FormGHG : WeifenLuo.WinFormsUI.Docking.DockContent
     {
+
+        public IFlowsheet CurrentFlowsheet;
+
         public FormGHG()
         {
             InitializeComponent();
@@ -16,6 +23,15 @@ namespace DWSIM.ProFeatures
         {
 
             ExtensionMethods.FormExtensions.ChangeDefaultFont(this);
+
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+
+            Functions.CreateTransitionObject(CurrentFlowsheet, "", "GHG Emissions", "", "", default);
+
+            Functions.ProcessTransition(CurrentFlowsheet);
 
         }
 

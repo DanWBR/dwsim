@@ -36,16 +36,17 @@ namespace DWSIM.ProFeatures
         {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGHG));
             Panel1 = new System.Windows.Forms.Panel();
+            Label4 = new System.Windows.Forms.Label();
             Button2 = new System.Windows.Forms.Button();
+            Button2.Click += new EventHandler(Button2_Click);
             PictureBox2 = new System.Windows.Forms.PictureBox();
             _lblFeature = new System.Windows.Forms.Label();
             Label1 = new System.Windows.Forms.Label();
             PictureBox1 = new System.Windows.Forms.PictureBox();
-            Label4 = new System.Windows.Forms.Label();
             Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
-            SuspendLayout();
+            this.SuspendLayout();
             // 
             // Panel1
             // 
@@ -60,6 +61,17 @@ namespace DWSIM.ProFeatures
             Panel1.Name = "Panel1";
             Panel1.Size = new System.Drawing.Size(909, 123);
             Panel1.TabIndex = 0;
+            // 
+            // Label4
+            // 
+            Label4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Label4.Location = new System.Drawing.Point(669, 69);
+            Label4.Name = "Label4";
+            Label4.Size = new System.Drawing.Size(228, 51);
+            Label4.TabIndex = 12;
+            Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard";
+            Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Button2
             // 
@@ -116,41 +128,30 @@ namespace DWSIM.ProFeatures
             PictureBox1.TabIndex = 1;
             PictureBox1.TabStop = false;
             // 
-            // Label4
-            // 
-            Label4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            Label4.Location = new System.Drawing.Point(669, 69);
-            Label4.Name = "Label4";
-            Label4.Size = new System.Drawing.Size(228, 51);
-            Label4.TabIndex = 12;
-            Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard";
-            Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // FormGHG
             // 
-            AllowEndUserDocking = false;
-            AutoScaleDimensions = new System.Drawing.SizeF(96.0f, 96.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(909, 620);
-            CloseButton = false;
-            CloseButtonVisible = false;
-            Controls.Add(Panel1);
-            Controls.Add(PictureBox1);
-            DoubleBuffered = true;
-            Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
-            Name = "FormGHG";
-            ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
-            TabText = "GHG Emissions";
-            Text = "GHG Emissions";
+            this.AllowEndUserDocking = false;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96.0f, 96.0f);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(909, 620);
+            this.CloseButton = false;
+            this.CloseButtonVisible = false;
+            this.Controls.Add(Panel1);
+            this.Controls.Add(PictureBox1);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            this.Name = "FormGHG";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
+            this.TabText = "GHG Emissions";
+            this.Text = "GHG Emissions";
             Panel1.ResumeLayout(false);
             Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)PictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)PictureBox1).EndInit();
-            Load += new EventHandler(FormGHG_Load);
-            ResumeLayout(false);
+            this.Load += FormGHG_Load;
+            this.ResumeLayout(false);
 
         }
 

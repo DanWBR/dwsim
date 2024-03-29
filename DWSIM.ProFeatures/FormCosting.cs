@@ -1,11 +1,15 @@
-﻿using System;
-using System.Diagnostics;
+﻿using DWSIM.Interfaces;
+using System;
 
 namespace DWSIM.ProFeatures
 {
 
+
     public partial class FormCosting : WeifenLuo.WinFormsUI.Docking.DockContent
     {
+
+        public IFlowsheet CurrentFlowsheet;
+
         public FormCosting()
         {
             InitializeComponent();
@@ -22,7 +26,11 @@ namespace DWSIM.ProFeatures
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            Process.Start("https://simulate365.com/registration/");
+
+            Functions.CreateTransitionObject(CurrentFlowsheet, "", "Costing", "", "", default);
+
+            Functions.ProcessTransition(CurrentFlowsheet);
+
         }
 
     }

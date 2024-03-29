@@ -46,7 +46,7 @@ namespace DWSIM.ProFeatures
             Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
-            SuspendLayout();
+            this.SuspendLayout();
             // 
             // Panel1
             // 
@@ -66,13 +66,12 @@ namespace DWSIM.ProFeatures
             // 
             Label4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            Label4.Location = new System.Drawing.Point(675, 91);
+            Label4.Location = new System.Drawing.Point(675, 68);
             Label4.Name = "Label4";
-            Label4.Size = new System.Drawing.Size(228, 29);
+            Label4.Size = new System.Drawing.Size(228, 43);
             Label4.TabIndex = 14;
             Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard";
             Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            Label4.Visible = false;
             // 
             // Button2
             // 
@@ -80,11 +79,11 @@ namespace DWSIM.ProFeatures
             Button2.BackColor = System.Drawing.Color.FromArgb(31, 166, 13);
             Button2.Font = new System.Drawing.Font("Calibri", 15.75f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Button2.ForeColor = System.Drawing.Color.White;
-            Button2.Location = new System.Drawing.Point(675, 34);
+            Button2.Location = new System.Drawing.Point(675, 11);
             Button2.Name = "Button2";
             Button2.Size = new System.Drawing.Size(228, 50);
             Button2.TabIndex = 13;
-            Button2.Text = "Get a Free Pro Trial";
+            Button2.Text = "Switch to DWSIM Pro";
             Button2.UseVisualStyleBackColor = false;
             // 
             // PictureBox2
@@ -131,26 +130,26 @@ namespace DWSIM.ProFeatures
             // 
             // FormCosting
             // 
-            AllowEndUserDocking = false;
-            AutoScaleDimensions = new System.Drawing.SizeF(96.0f, 96.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            ClientSize = new System.Drawing.Size(915, 594);
-            CloseButton = false;
-            CloseButtonVisible = false;
-            Controls.Add(Panel1);
-            Controls.Add(PictureBox1);
-            Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
-            Name = "FormCosting";
-            ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
-            TabText = "Costing";
-            Text = "Costing";
+            this.AllowEndUserDocking = false;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96.0f, 96.0f);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(915, 594);
+            this.CloseButton = false;
+            this.CloseButtonVisible = false;
+            this.Controls.Add(Panel1);
+            this.Controls.Add(PictureBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            this.Name = "FormCosting";
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
+            this.TabText = "Costing";
+            this.Text = "Costing";
             Panel1.ResumeLayout(false);
             Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)PictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)PictureBox1).EndInit();
-            Load += new EventHandler(FormCosting_Load);
-            ResumeLayout(false);
+            this.Load += FormCosting_Load;
+            this.ResumeLayout(false);
 
         }
 

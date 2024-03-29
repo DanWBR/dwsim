@@ -1,7 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using DWSIM.Interfaces;
+using System;
 using System.Windows.Forms;
-using DWSIM.Interfaces;
 
 namespace DWSIM.ProFeatures
 {
@@ -9,9 +8,8 @@ namespace DWSIM.ProFeatures
     public partial class FormBridgeToPro:Form
     {
 
-        public static Action<IFlowsheet> TransitionAction;
         public IFlowsheet CurrentFlowsheet;
-        private FormPortal _formPortal;
+        private bool Transitioning = false;
 
         public FormBridgeToPro()
         {
@@ -30,17 +28,28 @@ namespace DWSIM.ProFeatures
         private void Button1_Click(object sender, EventArgs e)
         {
 
+            CurrentFlowsheet.FlowsheetOptions.FlowsheetTransitionObject = null;
+
             Close();
 
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            _formPortal = new FormPortal(CurrentFlowsheet);
-            _formPortal.Show();
-            // TransitionAction?.Invoke(CurrentFlowsheet)
 
-           // Process.Start("https://simulate365.com/registration/");
+            Transitioning = true;
+
+            Functions.ProcessTransition(CurrentFlowsheet);
+
+            Close();
+
+        }
+
+        private void FormBridgeToPro_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+
+            if (!Transitioning)
+                CurrentFlowsheet.FlowsheetOptions.FlowsheetTransitionObject = null;
 
         }
 

@@ -43,6 +43,7 @@ Imports DWSIM.Simulate365.Models
 Imports DWSIM.Simulate365.Services
 Imports DWSIM.Simulate365.FormFactories
 Imports Microsoft.VisualBasic.ApplicationServices
+Imports DWSIM.ProFeatures
 
 Public Class FormMain
 
@@ -256,7 +257,6 @@ Public Class FormMain
         AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
         AddHandler FileManagementService.GetInstance().OnSaveFileToDashboard, AddressOf FileManagementService_SaveFileToDashboard
 
-
 #If Not WINE32 Then
 
         'load extenders
@@ -356,6 +356,13 @@ Public Class FormMain
 #End If
 
     End Sub
+
+    Private Function TransitionUserToDWSIMPro(flowsheet As IFlowsheet) As Boolean
+        Dim portalFom = New FormPortal(flowsheet)
+        portalFom.ShowDialog()
+        Return True
+    End Function
+
 
     Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
         Me.SaveFileDialog(True)

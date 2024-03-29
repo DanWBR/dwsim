@@ -92,7 +92,7 @@ namespace DWSIM.ProFeatures
             Button2.Name = "Button2";
             Button2.Size = new System.Drawing.Size(246, 72);
             Button2.TabIndex = 3;
-            Button2.Text = "Get a Free Pro Trial";
+            Button2.Text = "Switch to DWSIM Pro";
             Button2.UseVisualStyleBackColor = false;
             // 
             // Label4
@@ -104,7 +104,6 @@ namespace DWSIM.ProFeatures
             Label4.TabIndex = 6;
             Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard";
             Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            Label4.Visible = false;
             // 
             // lblFeature
             // 
@@ -161,6 +160,7 @@ namespace DWSIM.ProFeatures
             ((System.ComponentModel.ISupportInitialize)PictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)PictureBox3).EndInit();
             Load += new EventHandler(FormBridgeToPro_Load);
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(FormBridgeToPro_FormClosing);
             ResumeLayout(false);
             PerformLayout();
 

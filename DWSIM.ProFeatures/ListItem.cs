@@ -33,7 +33,7 @@ namespace DWSIM.ProFeatures
 
         private void ListItem_MouseDown(object sender, MouseEventArgs e)
         {
-            DoDragDrop(new object[] { ObjectTypeInfo, Tag, lblName.Text }, DragDropEffects.All);
+            DoDragDrop(new object[] { ObjectTypeInfo, Tag, lblName.Text, lblName.Tag }, DragDropEffects.All);
         }
 
         private void ListItem_MouseUp(object sender, MouseEventArgs e)
