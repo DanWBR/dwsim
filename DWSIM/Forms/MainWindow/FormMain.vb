@@ -365,7 +365,7 @@ Public Class FormMain
 
 
     Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
-        Me.SaveFileDialog(True)
+        Me.SaveFile(True, True)
 
     End Sub
 
@@ -4498,9 +4498,15 @@ Label_00CC:
 
         If My.Computer.Keyboard.ShiftKeyDown Then saveasync = False
 
-        Dim filename As String
         Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
-        dashboardpicker = TypeOf filePickerForm Is S365FilePickerForm
+
+        If dashboardpicker Then
+            filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+        End If
+
+        Dim filename As String
+
+        dashboardpicker = dashboardpicker Or TypeOf filePickerForm Is S365FilePickerForm
 
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
