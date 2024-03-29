@@ -1,0 +1,3730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>DWSIM.My.MyApplication</StartupObject>
+    <RootNamespace>DWSIM</RootNamespace>
+    <AssemblyName>DWSIM</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>9811384C174DFC8254FB98B174DA65366428B233</ManifestCertificateThumbprint>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <ApplicationIcon>DWSIM Icon 4.ico</ApplicationIcon>
+    <TargetZone>LocalIntranet</TargetZone>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <OptionStrict>Off</OptionStrict>
+    <OptionCompare>Binary</OptionCompare>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>false</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>false</Optimize>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>Full</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>false</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>false</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x86|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x86|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\x86\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DefineDebug>true</DefineDebug>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'x86|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\x86\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <DefineConstants>LINUX</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Linux|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Release Linux\</OutputPath>
+    <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'wine32|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\wine32\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'wine32|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\wine32\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'wine32|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\wine32\</OutputPath>
+    <DocumentationFile>DWSIM.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>WINE32</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\AeroWizard.dll</HintPath>
+    </Reference>
+    <Reference Include="Aga.Controls">
+      <HintPath>References\Aga.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>References\ReoGrid.WinForms\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AODL, Version=1.2.0.1, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\AODL.dll</HintPath>
+    </Reference>
+    <Reference Include="CapeOpen, Version=1.0.4118.14986, Culture=neutral, PublicKeyToken=100cc1b5ee8fe630, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\CapeOpen.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ciloci.Flee, Version=0.9.26.0, Culture=neutral, PublicKeyToken=c8526a021ef298ed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="Cudafy.NET, Version=1.20.4797.29543, Culture=neutral, PublicKeyToken=63a4c9931616906b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Cudafy.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Cureos.Numerics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Cureos.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="DWSIM.CrossPlatform.UI.Controls.ReoGrid">
+      <HintPath>References\ReoGrid.Eto\DWSIM.CrossPlatform.UI.Controls.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Forms\Release\net45\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.WinForms, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Forms\Release\net45\Eto.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelApi, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Excel.1.9.1\lib\net462\ExcelApi.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="GenericDictionaryEditor">
+      <HintPath>References\GenericDictionaryEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.46.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.46\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.3.50, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.1.3.50\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.1.12, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.4.1\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="indigo-dotnet">
+      <HintPath>References\indigo-dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="indigo-inchi-dotnet">
+      <HintPath>References\indigo-inchi-dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="indigo-renderer-dotnet">
+      <HintPath>References\indigo-renderer-dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Infralution.Localization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Infralution.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.CAPEOPEN110, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Interop.CAPEOPEN110.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="IronPython, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Wpf, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Jolt">
+      <HintPath>References\Jolt.dll</HintPath>
+    </Reference>
+    <Reference Include="LabelWithDivider, Version=1.1.0.1, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\LabelWithDivider.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveSwitch.TextControl">
+      <HintPath>References\LiveSwitch.TextControl.exe</HintPath>
+    </Reference>
+    <Reference Include="Mapack, Version=1.0.9.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Mapack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.2\lib\net45\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.2\lib\net45\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.2\lib\net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="NeoDataType.MyNeoReport, Version=1.4.0.0, Culture=neutral, PublicKeyToken=cc45d3430ba4f561, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\NeoDataType.MyNeoReport.dll</HintPath>
+    </Reference>
+    <Reference Include="NetOffice, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Core.1.9.1\lib\net462\NetOffice.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Nini.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeApi, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Office.1.9.1\lib\net462\OfficeApi.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.1.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable1035\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.WindowsForms.2.0.0-unstable1035\lib\net452\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Python.Runtime, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Python.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\RichTextBoxExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WinForms">
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Scintilla.Eto.WPF">
+      <HintPath>References\Eto.Scintilla\Scintilla.Eto.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.68.2.1\lib\net45\SkiaSharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="SkiaSharp.Extended, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Extended.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="SpinningProgress">
+      <HintPath>References\SpinningProgress.dll</HintPath>
+    </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\stdole.7.0.3300\lib\net10\stdole.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="unvell.ReoGrid">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoGridEditor">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoGridEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript.EditorLib">
+      <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.EditorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="VBIDEApi, Version=1.9.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.VBIDE.1.9.1\lib\net462\VBIDEApi.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Yeppp.CLR.Bundle">
+      <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="DWSIM.ExtensionMethods" />
+    <Import Include="DWSIM.FlowsheetSolver" />
+    <Import Include="DWSIM.GlobalSettings" />
+    <Import Include="DWSIM.Interfaces.Enums" />
+    <Import Include="DWSIM.Interfaces.Enums.GraphicObjects" />
+    <Import Include="DWSIM.MathOps" />
+    <Import Include="DWSIM.SharedClasses" />
+    <Import Include="DWSIM.SharedClasses.UnitOperations" />
+    <Import Include="DWSIM.Thermodynamics" />
+    <Import Include="DWSIM.UnitOperations.Reactors" />
+    <Import Include="DWSIM.UnitOperations.SpecialOps" />
+    <Import Include="DWSIM.UnitOperations.Streams" />
+    <Import Include="DWSIM.UnitOperations.UnitOperations" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Xml" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandLineProcessor.vb" />
+    <Compile Include="Controls\TwoDimChartControl.Designer.vb">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TwoDimChartControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ListItem.Designer.vb">
+      <DependentUpon>ListItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControl.designer.vb">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControlMono.designer.vb">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControlMono.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCreateNewSolid.Designer.vb">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCreateNewSolid.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundDataDDB.Designer.vb">
+      <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundDataDDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.Designer.vb">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundDataKDB.Designer.vb">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundDataKDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.Designer.vb">
+      <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundFromThermo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataRegression\FormSearchKDBVLE.Designer.vb">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataRegression\FormSearchKDBVLE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorTooltips\EditorTooltips.vb" />
+    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.designer.vb">
+      <DependentUpon>FlowsheetSurfaceControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.designer.vb">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormCharts.Designer.vb">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormCharts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormDynamicsIntegratorControl.Designer.vb">
+      <DependentUpon>FormDynamicsIntegratorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormDynamicsIntegratorControl.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormDynamicsManager.Designer.vb">
+      <DependentUpon>FormDynamicsManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormDynamicsManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormFileExplorer.Designer.vb">
+      <DependentUpon>FormFileExplorer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormFileExplorer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.Designer.vb">
+      <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormNewSpreadsheet.Designer.vb">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormNewSpreadsheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\SimulationObjectsPanel.Designer.vb">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\SimulationObjectsPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddFlowsheetObject.Designer.vb">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAddFlowsheetObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddUtility.Designer.vb">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAddUtility.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBrowser.Designer.vb">
+      <DependentUpon>FormBrowser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormBrowser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBrowserDockable.Designer.vb">
+      <DependentUpon>FormBrowserDockable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormBrowserDockable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChart_OxyPlot.Designer.vb">
+      <DependentUpon>FormChart_OxyPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormChart_OxyPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCLM.designer.vb">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCLM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormComponentsNotFound.Designer.vb">
+      <DependentUpon>FormComponentsNotFound.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormComponentsNotFound.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCompoundList.Designer.vb">
+      <DependentUpon>FormCompoundList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCompoundList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfigureChartObject.Designer.vb">
+      <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigureChartObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfigureMasterTable.Designer.vb">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigureMasterTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfigureSpreadsheetTable.Designer.vb">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigureSpreadsheetTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCORegistration.Designer.vb">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCORegistration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDefineFonts.Designer.vb">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDefineFonts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEditFlowsheetButton.Designer.vb">
+      <DependentUpon>FormEditFlowsheetButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEditFlowsheetButton.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEditGraphicObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEnterName.Designer.vb">
+      <DependentUpon>FormEnterName.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEnterName.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEventDescription.Designer.vb">
+      <DependentUpon>FormEventDescription.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEventDescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHeatMaps.Designer.vb">
+      <DependentUpon>FormHeatMaps.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHeatMaps.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHTMLEditor.Designer.vb">
+      <DependentUpon>FormHTMLEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHTMLEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.Designer.vb">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormImportCompoundOnline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHTMLView.Designer.vb">
+      <DependentUpon>FormHTMLView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHTMLView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLiveFlows.Designer.vb">
+      <DependentUpon>FormLiveFlows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLiveFlows.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLoadingSimulation.Designer.vb">
+      <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLoadingSimulation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormOccupancyQuestion.Designer.vb">
+      <DependentUpon>FormOccupancyQuestion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormOccupancyQuestion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPIDCPEditor.Designer.vb">
+      <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPIDCPEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPIDTuning.Designer.vb">
+      <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPIDTuning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPropertyPackageInfo.Designer.vb">
+      <DependentUpon>FormPropertyPackageInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPropertyPackageInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingChemeo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingDDB.Designer.vb">
+      <DependentUpon>FormSearchingDDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingDDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingOnline.Designer.vb">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingOnline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingKDB.Designer.vb">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingKDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSimulWizard.Designer.vb">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSimulWizard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataRegression\FormDataRegression.Designer.vb">
+      <DependentUpon>FormDataRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataRegression\FormDataRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChart.Designer.vb">
+      <DependentUpon>FormChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCompoundCreator.Designer.vb">
+      <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CompoundCreator\FormCompoundCreator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDBManager.Designer.vb">
+      <DependentUpon>FormDBManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDBManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPassword.Designer.vb">
+      <DependentUpon>FormPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfigurePropertyTable.Designer.vb">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigurePropertyTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTextBox.designer.vb">
+      <DependentUpon>FormTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTextBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTextBoxInput.Designer.vb">
+      <DependentUpon>FormTextBoxInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTextBoxInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUpgradeWarning.Designer.vb">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUpgradeWarning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWhatsNew.Designer.vb">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWhatsNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LegacyEditors\UITypeEditors\UISKColorEditor\UISKColorEditor.vb" />
+    <Compile Include="Languages\DWSIM1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DWSIM.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\Tips.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tips.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AboutBox.Designer.vb">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AboutBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCapeOpenUnitSelector.Designer.vb">
+      <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCapeOpenUnitSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\COReportsPanel.Designer.vb">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\COReportsPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\WatchPanel.Designer.vb">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\WatchPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetAnalysis\FormOptimization.Designer.vb">
+      <DependentUpon>FormOptimization.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetAnalysis\FormOptimization.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormReportConfig.designer.vb">
+      <DependentUpon>FormReportConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormReportConfig.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetAnalysis\FormSensAnalysis.Designer.vb">
+      <DependentUpon>FormSensAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetAnalysis\FormSensAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWelcome.Designer.vb">
+      <DependentUpon>FormWelcome.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWelcome.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FormScript.Designer.vb">
+      <DependentUpon>FormScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\Classes\AssemblyResolver\AssemblyResolver1.vb" />
+    <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Forms\FlowsheetComponents\MaterialStreamPanel.Designer.vb">
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\MaterialStreamPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormOptions.Designer.vb">
+      <DependentUpon>FormOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRecoverFiles.Designer.vb">
+      <DependentUpon>FormRecoverFiles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormRecoverFiles.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSimulSettings.Designer.vb">
+      <DependentUpon>FormSimulSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSimulSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\LogPanel.Designer.vb">
+      <DependentUpon>LogPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\LogPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet\FormFlowsheet.Designer.vb">
+      <DependentUpon>FormFlowsheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet\FormFlowsheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainWindow\FormMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainWindow\FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SplashScreen.Designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUnhandledException.Designer.vb">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUnhandledException.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Objects\Classes\Shared\DPIAwareness.vb" />
+    <Compile Include="Objects\Classes\Shared\GraphicObjectControlPanelModeEditors.vb" />
+    <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
+    <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />
+    <Compile Include="Objects\Classes\TreeViewModels\TreeModel.vb" />
+    <Compile Include="Objects\Classes\XFlowsheet\Exporter.vb" />
+    <Compile Include="Tools\AssayManager\FormAssayManager.Designer.vb">
+      <DependentUpon>FormAssayManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\AssayManager\FormAssayManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\BulkAddPseudocompounds\FormBulkAddPseudos.Designer.vb">
+      <DependentUpon>FormBulkAddPseudos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\BulkAddPseudocompounds\FormBulkAddPseudos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.Designer.vb">
+      <DependentUpon>FormMEBSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacConv.Designer.vb">
+      <DependentUpon>FormReacConv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacConv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacEq.Designer.vb">
+      <DependentUpon>FormReacEq.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacEq.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacHeterog.Designer.vb">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacHeterog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacKinetic.Designer.vb">
+      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacKinetic.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.Designer.vb">
+      <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.Designer.vb">
+      <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\BaseClass\AttachedUtilityClass.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.Designer.vb">
+      <DependentUpon>FrmColdProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\LLEEnvelope\FormLLEDiagram.Designer.vb">
+      <DependentUpon>FormLLEDiagram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\LLEEnvelope\FormLLEDiagram.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\SpreadsheetForm.Designer.vb">
+      <DependentUpon>SpreadsheetForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\SpreadsheetForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\BinaryEnvelope\FormBinEnv.Designer.vb">
+      <DependentUpon>FormBinEnv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\BinaryEnvelope\FormBinEnv.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\C7plusCharacterization\FormPCBulk.designer.vb">
+      <DependentUpon>FormPCBulk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\C7plusCharacterization\FormPCBulk.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\TrueCriticalPoint\FrmCritpt.designer.vb">
+      <DependentUpon>FrmCritpt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\TrueCriticalPoint\FrmCritpt.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD_DET.designer.vb">
+      <DependentUpon>FormHYD_DET.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD_DET.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD.Designer.vb">
+      <DependentUpon>FormHYD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\NaturalGasHydrates\FormHYD.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\AUX_FUNC.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\DWSIM_KS.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\HYDR_CG.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\HYDR_KS.vb" />
+    <Compile Include="Utilities\NaturalGasHydrates\Helper Classes\HYDR_vdwP_PP.vb" />
+    <Compile Include="Utilities\PhaseEnvelope\FormPhEnv.Designer.vb">
+      <DependentUpon>FormPhEnv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PhaseEnvelope\FormPhEnv.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\PureCompoundProperties\FormPureComp.Designer.vb">
+      <DependentUpon>FormPureComp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PureCompoundProperties\FormPureComp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacManager.Designer.vb">
+      <DependentUpon>FormReacManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReactionSubsystemEditors\FormReacManager.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\UnitsSystemCreator\FormUnitGen.Designer.vb">
+      <DependentUpon>FormUnitGen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\UnitsSystemCreator\FormUnitGen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.Designer.vb">
+      <DependentUpon>FrmPsvSize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\PressureSafetyValveSizing\Helper Classes\PSV_CALC.vb" />
+    <Compile Include="Utilities\PressureSafetyValveSizing\Helper Classes\PSV_VERIF.vb" />
+    <Compile Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.Designer.vb">
+      <DependentUpon>FrmDAVP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPropSelection.Designer.vb">
+      <DependentUpon>FormPropSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPropSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUNIFACRegression.designer.vb">
+      <DependentUpon>FormUNIFACRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUNIFACRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\TwoDimChartControl.en.resx">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TwoDimChartControl.resx">
+      <DependentUpon>TwoDimChartControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ListItem.resx">
+      <DependentUpon>ListItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.de.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.en.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.es.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.de.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.en.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.es.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutBox.de.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutBox.es.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCreateNewSolid.en.resx">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCreateNewSolid.resx">
+      <DependentUpon>FormCreateNewSolid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.de.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataDDB.de.resx">
+      <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataDDB.en.resx">
+      <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataDDB.resx">
+      <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.en.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataChemeo.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataKDB.de.resx">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataKDB.en.resx">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundDataKDB.resx">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundFromThermo.resx">
+      <DependentUpon>FormImportCompoundFromThermo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataRegression\FormSearchKDBVLE.de.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataRegression\FormSearchKDBVLE.en.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataRegression\FormSearchKDBVLE.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.resx">
+      <DependentUpon>FlowsheetSurfaceControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.en.resx">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.resx">
+      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormCharts.en.resx">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormCharts.resx">
+      <DependentUpon>FormCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormDynamicsIntegratorControl.en.resx">
+      <DependentUpon>FormDynamicsIntegratorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormDynamicsIntegratorControl.resx">
+      <DependentUpon>FormDynamicsIntegratorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormDynamicsManager.en.resx">
+      <DependentUpon>FormDynamicsManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormDynamicsManager.resx">
+      <DependentUpon>FormDynamicsManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormFileExplorer.en.resx">
+      <DependentUpon>FormFileExplorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormFileExplorer.resx">
+      <DependentUpon>FormFileExplorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.resx">
+      <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormNewSpreadsheet.en.resx">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormNewSpreadsheet.resx">
+      <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SimulationObjectsPanel.de.resx">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SimulationObjectsPanel.en.resx">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SimulationObjectsPanel.resx">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddFlowsheetObject.de.resx">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddFlowsheetObject.en.resx">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddFlowsheetObject.resx">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddUtility.de.resx">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddUtility.en.resx">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddUtility.resx">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBrowser.resx">
+      <DependentUpon>FormBrowser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBrowserDockable.resx">
+      <DependentUpon>FormBrowserDockable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.de.resx">
+      <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.es.resx">
+      <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChart.de.resx">
+      <DependentUpon>FormChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChart.es.resx">
+      <DependentUpon>FormChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCompoundCreator.de.resx">
+      <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCompoundCreator.es.resx">
+      <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChart_OxyPlot.resx">
+      <DependentUpon>FormChart_OxyPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.de.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.en.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.es.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCLM.resx">
+      <DependentUpon>FormCLM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormComponentsNotFound.en.resx">
+      <DependentUpon>FormComponentsNotFound.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormComponentsNotFound.resx">
+      <DependentUpon>FormComponentsNotFound.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCompoundList.resx">
+      <DependentUpon>FormCompoundList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureChartObject.en.resx">
+      <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureChartObject.resx">
+      <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureMasterTable.de.resx">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureMasterTable.en.resx">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureMasterTable.resx">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigurePropertyTable.de.resx">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.de.resx">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.en.resx">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.resx">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCORegistration.de.resx">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCORegistration.en.resx">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCORegistration.resx">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDBManager.de.resx">
+      <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDefineFonts.en.resx">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDefineFonts.resx">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditFlowsheetButton.resx">
+      <DependentUpon>FormEditFlowsheetButton.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditGraphicObject.en.resx">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEnterName.en.resx">
+      <DependentUpon>FormEnterName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEnterName.resx">
+      <DependentUpon>FormEnterName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEventDescription.en.resx">
+      <DependentUpon>FormEventDescription.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEventDescription.resx">
+      <DependentUpon>FormEventDescription.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHeatMaps.resx">
+      <DependentUpon>FormHeatMaps.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHTMLEditor.resx">
+      <DependentUpon>FormHTMLEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.en.resx">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormImportCompoundOnline.resx">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHTMLView.resx">
+      <DependentUpon>FormHTMLView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLiveFlows.resx">
+      <DependentUpon>FormLiveFlows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLoadingSimulation.en.resx">
+      <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLoadingSimulation.resx">
+      <DependentUpon>FormLoadingSimulation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOccupancyQuestion.resx">
+      <DependentUpon>FormOccupancyQuestion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPassword.de.resx">
+      <DependentUpon>FormPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPIDCPEditor.resx">
+      <DependentUpon>FormPIDCPEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPIDTuning.en.resx">
+      <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPIDTuning.resx">
+      <DependentUpon>FormPIDTuning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropertyPackageInfo.resx">
+      <DependentUpon>FormPropertyPackageInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.de.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.en.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingDDB.de.resx">
+      <DependentUpon>FormSearchingDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingDDB.en.resx">
+      <DependentUpon>FormSearchingDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingDDB.resx">
+      <DependentUpon>FormSearchingDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.de.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingOnline.en.resx">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingOnline.resx">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.en.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSimulWizard.de.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSimulWizard.en.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSimulWizard.es.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSimulWizard.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.de.resx">
+      <DependentUpon>FormDataRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.es.resx">
+      <DependentUpon>FormDataRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDBManager.es.resx">
+      <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDBManager.resx">
+      <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTextBox.de.resx">
+      <DependentUpon>FormTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTextBox.resx">
+      <DependentUpon>FormTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTextBoxInput.de.resx">
+      <DependentUpon>FormTextBoxInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWhatsNew.resx">
+      <DependentUpon>FormWhatsNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainWindow\FormMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPassword.es.resx">
+      <DependentUpon>FormPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigurePropertyTable.en.resx">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigurePropertyTable.resx">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTextBoxInput.resx">
+      <DependentUpon>FormTextBoxInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpgradeWarning.en.resx">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpgradeWarning.resx">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Tips.de.resx" />
+    <EmbeddedResource Include="Languages\Tips.en.resx" />
+    <EmbeddedResource Include="Languages\Tips.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Tips.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tips.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Lib\ensurepip\_bundled\pip-19.2.3-py2.py3-none-any.whl" />
+    <None Include="Lib\ensurepip\_bundled\setuptools-41.2.0-py2.py3-none-any.whl" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReportFiles\report_en-US.mr6" />
+    <EmbeddedResource Include="ReportFiles\report_pt-BR.mr6" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\node_in copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.1.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.IronPythonConsole\DWSIM.Controls.IronPythonConsole.csproj">
+      <Project>{8a19eaa5-44c5-41ec-a908-7f41792cf18b}</Project>
+      <Name>DWSIM.Controls.IronPythonConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.IronPythonConsoleControl.csproj">
+      <Project>{f1152d68-346b-4f48-8db7-be67b5cb1f49}</Project>
+      <Name>DWSIM.Controls.IronPythonConsoleControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
+      <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DrawingTools.Point\DWSIM.DrawingTools.Point.vbproj">
+      <Project>{0f6737eb-db5a-4872-bef8-5ef10b4f1c1c}</Project>
+      <Name>DWSIM.DrawingTools.Point</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DrawingTools.SkiaSharp.Extended\DWSIM.DrawingTools.SkiaSharp.Extended.csproj">
+      <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.DynamicsManager\DWSIM.DynamicsManager.vbproj">
+      <Project>{654c0d60-c94b-4a0b-b34d-1d71a6a20420}</Project>
+      <Name>DWSIM.DynamicsManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
+      <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
+      <Name>DWSIM.ExtensionMethods.Eto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FileStorage\DWSIM.FileStorage.csproj">
+      <Project>{13823753-2284-4d3e-aeb4-ca72118ef094}</Project>
+      <Name>DWSIM.FileStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
+      <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
+      <Name>DWSIM.Inspector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Logging\DWSIM.Logging.csproj">
+      <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
+      <Name>DWSIM.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ProFeatures\DWSIM.ProFeatures.vbproj">
+      <Project>{da47adde-25cb-413b-baf2-0fe0437641b9}</Project>
+      <Name>DWSIM.ProFeatures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
+      <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
+      <Name>DWSIM.XMLSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj">
+      <Project>{4ed4fdb5-9fd0-49e6-876d-1635f727c755}</Project>
+      <Name>DWSIM.Controls.DockPanel.ThemeVS2012Light</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+      <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
+      <Name>DWSIM.MathOps.DotNumerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
+      <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
+      <Name>DWSIM.FlowsheetSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClassesCSharp\DWSIM.SharedClassesCSharp.csproj">
+      <Project>{67F90157-B522-487C-B108-864984637E33}</Project>
+      <Name>DWSIM.SharedClassesCSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Simulate365\DWSIM.Simulate365.csproj">
+      <Project>{1cc0851c-f6c2-477c-a725-a2e1c5e96802}</Project>
+      <Name>DWSIM.Simulate365</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SkiaSharp.Views.Desktop\DWSIM.SkiaSharp.Views.Desktop.csproj">
+      <Project>{f4e6f3e7-532c-4091-a82f-1dd7d191a13b}</Project>
+      <Name>DWSIM.SkiaSharp.Views.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.GERG2008\DWSIM.Thermodynamics.AdvancedEOS.GERG2008.vbproj">
+      <Project>{adc9fe07-d255-4512-8a64-2aebb3f5068c}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.GERG2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PCSAFT\DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.vbproj">
+      <Project>{b749cabb-63e9-4d0b-b775-58d86e55d41b}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.vbproj">
+      <Project>{46fd1720-09ce-4edb-b2c5-378be32859fb}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj">
+      <Project>{77a58441-0cf0-4dea-b1f7-7723368f693f}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
+      <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.ChemeoLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.DDBStructureLink\DWSIM.Thermodynamics.Databases.DDBStructureLink.vbproj">
+      <Project>{fff180f2-ba11-4028-bf82-a737b56999de}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.DDBStructureLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.KDBLink\DWSIM.Thermodynamics.Databases.KDBLink.vbproj">
+      <Project>{fea05ae3-5ee2-4a7b-88b3-1a4f9000ea08}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.KDBLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.ReaktoroPropertyPackage\DWSIM.Thermodynamics.ReaktoroPropertyPackage.vbproj">
+      <Project>{d670c3b0-1ee1-47d4-99c6-8820cfb072f7}</Project>
+      <Name>DWSIM.Thermodynamics.ReaktoroPropertyPackage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.ThermoC\DWSIM.Thermodynamics.ThermoC.csproj">
+      <Project>{da169354-7c6f-437a-8c32-1a2cb84eab5a}</Project>
+      <Name>DWSIM.Thermodynamics.ThermoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
+      <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
+      <Name>DWSIM.Thermodynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Editors\DWSIM.UI.Desktop.Editors.csproj">
+      <Project>{ba99ba15-8c63-408e-b65f-1e7160f85e9c}</Project>
+      <Name>DWSIM.UI.Desktop.Editors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj">
+      <Project>{2ffd2514-e4f9-4c19-b38e-b77560585d61}</Project>
+      <Name>DWSIM.UI.Desktop.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.WinForms\DWSIM.UI.Desktop.WinForms.csproj">
+      <Project>{a4b56ff1-995e-4288-8801-7f086668c4a2}</Project>
+      <Name>DWSIM.UI.Desktop.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.WPF\DWSIM.UI.Desktop.WPF.csproj">
+      <Project>{2fc4816c-796d-4366-98f6-c6e3d481e66d}</Project>
+      <Name>DWSIM.UI.Desktop.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Web\DWSIM.UI.Web.csproj">
+      <Project>{4a48830e-c861-422a-b3e9-44311914c694}</Project>
+      <Name>DWSIM.UI.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
+      <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
+      <Name>DWSIM.UnitOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
+      <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
+      <Name>DWSIM.Controls.PropertyGridEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math.RandomOps\DWSIM.MathOps.RandomOps.csproj">
+      <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
+      <Name>DWSIM.MathOps.RandomOps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math.SwarmOps\DWSIM.MathOps.SwarmOps.csproj">
+      <Project>{8f45efaa-9eac-403f-b2b0-123f0321056e}</Project>
+      <Name>DWSIM.MathOps.SwarmOps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.TabStrip\DWSIM.Controls.TabStrip.csproj">
+      <Project>{f929ca6a-87bd-42c8-8d0a-6455db6f55dc}</Project>
+      <Name>DWSIM.Controls.TabStrip</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.ZedGraph\DWSIM.Controls.ZedGraph.csproj">
+      <Project>{2541686b-1673-43bf-af89-3163945db009}</Project>
+      <Name>DWSIM.Controls.ZedGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.XFlowsheet\DWSIM.XFlowsheet.vbproj">
+      <Project>{c3080b63-be89-4585-b643-4fbc295c287c}</Project>
+      <Name>DWSIM.XFlowsheet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-right3.gif" />
+    <None Include="Resources\arrow-left.gif" />
+    <None Include="Resources\arrow-down.gif" />
+    <None Include="Resources\arrow-up.gif" />
+    <None Include="Resources\bullet_arrow_bottom.png" />
+    <None Include="Resources\bullet_arrow_top.png" />
+    <None Include="Resources\cog.png" />
+    <None Include="Resources\anchor.png" />
+    <None Include="Resources\wrench_orange.png" />
+    <None Include="Resources\arrow_rotate_clockwise.png" />
+    <None Include="Resources\node_en copy.jpg" />
+    <None Include="Resources\turbina copy.jpg" />
+    <None Include="Resources\SAO copy.jpg" />
+    <None Include="Resources\table.png" />
+    <None Include="Resources\font.png" />
+    <None Include="Resources\Leak Badge.ico" />
+    <None Include="Resources\Vector Badge1.ico" />
+    <None Include="Resources\Widgets Alt Badge.ico" />
+    <None Include="Resources\Vector Badge.ico" />
+    <None Include="Resources\Experiments Badge.ico" />
+    <None Include="Resources\tank copy1.png" />
+    <None Include="Resources\vessel copy1.png" />
+    <None Include="Resources\cooler copy1.png" />
+    <None Include="Resources\heater copy1.png" />
+    <None Include="Resources\node_in copy1.png" />
+    <None Include="Resources\node_out copy1.png" />
+    <None Include="Resources\compressor copy1.png" />
+    <None Include="Resources\valve copy1.png" />
+    <None Include="Resources\pump copy1.png" />
+    <None Include="Resources\pipe copy1.png" />
+    <None Include="Resources\bg_un.png" />
+    <None Include="Resources\layout.png" />
+    <None Include="Resources\bg_pp.png" />
+    <None Include="Resources\wizardbg3.png" />
+    <None Include="Resources\wizardbg2.png" />
+    <None Include="Resources\wizardbg1.png" />
+    <None Include="Resources\shape_square_go.png" />
+    <None Include="Resources\valve copy.png" />
+    <None Include="Resources\wrench.png" />
+    <None Include="Resources\CSL2094_LoRes copy.png" />
+    <None Include="Resources\CB058398_LoRes copy.png" />
+    <None Include="Resources\CB058398_LoRes.jpg" />
+    <EmbeddedResource Include="Forms\FlowsheetComponents\LogPanel.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LogPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\MaterialStreamPanel.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainWindow\FormMain.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\MaterialStreamPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOptions.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRecoverFiles.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormRecoverFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSimulSettings.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormSimulSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSimulSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormSimulSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWelcome.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormWelcome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWelcome.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormWelcome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUnhandledException.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\LogPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LogPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.resx">
+      <DependentUpon>FormFlowsheet.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashScreen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUnhandledException.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\DWSIM.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <LastGenOutput>DWSIM1.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.de.resx">
+      <DependentUpon>FormAssayManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.es.resx">
+      <DependentUpon>FormAssayManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\BulkAddPseudocompounds\FormBulkAddPseudos.resx">
+      <DependentUpon>FormBulkAddPseudos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.en.resx">
+      <DependentUpon>FormMEBSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\MassAndEnergyBalanceSummary\FormMEBSummary.resx">
+      <DependentUpon>FormMEBSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacConv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacConv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacEq.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacEq.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.de.resx">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.en.resx">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.es.resx">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacHeterog.resx">
+      <DependentUpon>FormReacHeterog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BaseClass\AttachedUtilityClass.de.resx">
+      <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BaseClass\AttachedUtilityClass.en.resx">
+      <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BaseClass\AttachedUtilityClass.resx">
+      <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.en.resx">
+      <DependentUpon>FormBinEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.de.resx">
+      <DependentUpon>FormLLEDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.en.resx">
+      <DependentUpon>FormLLEDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.es.resx">
+      <DependentUpon>FormLLEDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\LLEEnvelope\FormLLEDiagram.resx">
+      <DependentUpon>FormLLEDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SpreadsheetForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SpreadsheetForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormBinEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.resx">
+      <DependentUpon>FormPCBulk.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmCritpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.resx">
+      <DependentUpon>FrmCritpt.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormHYD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormHYD_DET.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.resx">
+      <DependentUpon>FormHYD_DET.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormHYD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormPhEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormPhEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormPureComp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormPureComp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReacManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormUnitGen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormUnitGen.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\arrow_switch.png" />
+    <None Include="Resources\arrow_in.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\calculator_edit.png" />
+    <None Include="Resources\brick.png" />
+    <None Include="Resources\application_lightning.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\page_white_gear.png" />
+    <None Include="Resources\book_edit.png" />
+    <None Include="Resources\help.png" />
+    <None Include="Resources\application_form_edit.png" />
+    <None Include="Resources\icon1.bmp" />
+    <None Include="Resources\connect.png" />
+    <None Include="Resources\shape_group.png" />
+    <None Include="Resources\disconnect.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\cursor.png" />
+    <None Include="Resources\control_stop_blue.png" />
+    <None Include="Resources\control_play_blue.png" />
+    <None Include="Resources\vessel copy.png" />
+    <None Include="Resources\pump copy.png" />
+    <None Include="Resources\pipe copy.png" />
+    <None Include="Resources\node_out copy.png" />
+    <None Include="Resources\tank copy.png" />
+    <None Include="Resources\arrow_right.png" />
+    <None Include="Resources\arrow_right2.png" />
+    <None Include="Resources\cooler copy.png" />
+    <None Include="Resources\heater copy.png" />
+    <None Include="Resources\compressor copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BaseApplicationManifest Include="My Project\app.manifest" />
+    <None Include="Resources\asterisk_orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_white_star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_page_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk_multiple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bug_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_white_magnify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tag_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_cascade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_tile_vertical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_tile_horizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_view_icons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_view_icons1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cog1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_in1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\My friends %28Sony Ericsson%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_branch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\node_en copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turbina copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dwsim_splash.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application_edit.png" />
+    <None Include="Resources\dialog-error.png" />
+    <None Include="Resources\help-browser.png" />
+    <None Include="Resources\text-x-generic.png" />
+    <None Include="Resources\document-new.png" />
+    <None Include="Resources\document-open.png" />
+    <None Include="Resources\process-stop.png" />
+    <None Include="Resources\weather_lightning.png" />
+    <None Include="Resources\weather_cloudy.png" />
+    <None Include="Resources\hourglass1.png" />
+    <None Include="Resources\shape_flip_vertical.png" />
+    <None Include="Resources\shape_flip_horizontal.png" />
+    <None Include="Resources\lightning.png" />
+    <None Include="Resources\black_down.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\undo_16.png" />
+    <None Include="Resources\sheep.png" />
+    <None Include="Resources\especificacao_mini.png" />
+    <None Include="Resources\reciclo_mini.png" />
+    <None Include="Resources\ajuste_mini.png" />
+    <None Include="Resources\exclamation.png" />
+    <None Include="Resources\Aide et support.ico" />
+    <None Include="Resources\delete_32.png" />
+    <None Include="Resources\control_stop.png" />
+    <None Include="Resources\control_play.png" />
+    <None Include="Resources\icon_info.gif" />
+    <None Include="Resources\tick1.png" />
+    <None Include="Resources\book_open1.png" />
+    <None Include="Resources\book_go1.png" />
+    <None Include="Resources\application_get.png" />
+    <None Include="Resources\door_out.png" />
+    <None Include="Resources\power.png" />
+    <None Include="Resources\greyscale_39.gif" />
+    <None Include="Resources\greyscale_18.gif" />
+    <None Include="Resources\shape_square.png" />
+    <None Include="Resources\cup_go.png" />
+    <None Include="Resources\newspaper_go.png" />
+    <None Include="Resources\world_go.png" />
+    <None Include="Resources\picture.png" />
+    <None Include="Resources\page_white_paint.png" />
+    <None Include="Resources\table_go.png" />
+    <None Include="Resources\greyscale_20.gif" />
+    <None Include="Resources\mail11.gif" />
+    <None Include="Resources\greyscale_12.gif" />
+    <None Include="Resources\Clipboard2.bmp" />
+    <None Include="Resources\Clipboard01.bmp" />
+    <None Include="Resources\folder_go.png" />
+    <None Include="Resources\arrow_refresh.png" />
+    <None Include="Resources\vector.png" />
+    <None Include="Resources\chart_curve.png" />
+    <None Include="Resources\arrow_switch1.png" />
+    <None Include="Resources\table_row_insert.png" />
+    <None Include="Resources\greyscale_34.gif" />
+    <None Include="Resources\dwsim_file.png" />
+    <None Include="Resources\dwsim_file_mini.jpg" />
+    <None Include="Resources\plugin_disabled.png" />
+    <None Include="Resources\thumb_up.png" />
+    <None Include="Resources\folder_page_white1.png" />
+    <None Include="Resources\information1.png" />
+    <None Include="Resources\application_side_contract.png" />
+    <None Include="Resources\shape_move_front.png" />
+    <None Include="Resources\shading.png" />
+    <None Include="Resources\printer_add.png" />
+    <None Include="Resources\page_gear.png" />
+    <None Include="Resources\printer.png" />
+    <None Include="Resources\wand.png" />
+    <None Include="Resources\wi0124-16.png" />
+    <None Include="Resources\table_gear.png" />
+    <None Include="Resources\sum.png" />
+    <None Include="Resources\style_edit.png" />
+    <None Include="Resources\pilcrow.png" />
+    <None Include="Resources\page_white_text.png" />
+    <None Include="Resources\package.png" />
+    <None Include="Resources\layers.png" />
+    <None Include="Resources\hourglass.png" />
+    <None Include="Resources\book_open.png" />
+    <None Include="Resources\timeline_marker.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\disk1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_tube_80px.png" />
+    <None Include="Resources\show_property_48px.png" />
+    <None Include="Resources\Touch ID_64px.png" />
+    <None Include="Resources\thick_arrow_pointing_down_32px.png" />
+    <None Include="Resources\user_manual_80px.png" />
+    <None Include="Resources\undo_96px.png" />
+    <None Include="Resources\settings_80px.png" />
+    <None Include="Resources\stop_96px.png" />
+    <None Include="Resources\unverified_account_48px.png" />
+    <None Include="Resources\star_64px.png" />
+    <None Include="Resources\save file s365.png" />
+    <None Include="Resources\s365 logo.jpg" />
+    <None Include="Resources\s365_logo_login.png" />
+    <None Include="Resources\s365_logo_login.bmp" />
+    <None Include="Resources\tshirt_mockup.jpg" />
+    <None Include="Resources\stop1.png" />
+    <None Include="Resources\tag.png" />
+    <None Include="Resources\texteditor.png" />
+    <None Include="Resources\textfield_rename.png" />
+    <None Include="Resources\text_letter_omega.png" />
+    <None Include="Resources\Zoom Out.png" />
+    <None Include="Resources\Zoom In.png" />
+    <None Include="Resources\Search.png" />
+    <None Include="Resources\user_ninja.png" />
+    <None Include="Resources\set_security_question.png" />
+    <None Include="Resources\Security1.png" />
+    <None Include="Resources\Security.png" />
+    <None Include="Resources\world_connect.png" />
+    <None Include="Resources\shape_square_edit.png" />
+    <None Include="Resources\shape_handles.png" />
+    <None Include="Resources\table_lightning.png" />
+    <None Include="Resources\splashWelcome_Background.png" />
+    <None Include="Resources\splashScreen2.png" />
+    <None Include="Resources\uo_split_16.png" />
+    <None Include="Resources\stream_mat_16.png" />
+    <None Include="Resources\uo_mixer_16.png" />
+    <None Include="Resources\stream_en_16.png" />
+    <None Include="Resources\uo_heater_16.png" />
+    <None Include="Resources\uo_cooler_16.png" />
+    <None Include="Resources\uo_pipe_16.png" />
+    <None Include="Resources\uo_valve_16.png" />
+    <None Include="Resources\uo_pump_16.png" />
+    <None Include="Resources\uo_expan_16.png" />
+    <None Include="Resources\uo_compr_16.png" />
+    <None Include="Resources\uo_hx_16.png" />
+    <None Include="Resources\uo_compsep_16.png" />
+    <None Include="Resources\uo_tank_16.png" />
+    <None Include="Resources\uo_flash_16.png" />
+    <None Include="Resources\uo_orifice_16.png" />
+    <None Include="Resources\uo_custom_16.png" />
+    <None Include="Resources\uo_excel_16.png" />
+    <None Include="Resources\uo_fs_16.png" />
+    <None Include="Resources\uo_co_16.png" />
+    <None Include="Resources\uo_solidsep_16.png" />
+    <None Include="Resources\uo_filter_16.png" />
+    <None Include="Resources\text_indent_remove.png" />
+    <None Include="Resources\text_indent.png" />
+    <None Include="Resources\text_padding_left1.png" />
+    <None Include="Resources\text_padding_left.png" />
+    <None Include="Resources\undo_162.png" />
+    <None Include="Resources\shape_align_middle1.png" />
+    <None Include="Resources\shape_align_center1.png" />
+    <None Include="Resources\shape_align_top.png" />
+    <None Include="Resources\shape_align_right.png" />
+    <None Include="Resources\shape_align_middle.png" />
+    <None Include="Resources\shape_align_left.png" />
+    <None Include="Resources\shape_align_center.png" />
+    <None Include="Resources\shape_align_bottom.png" />
+    <None Include="Resources\turn_left.png" />
+    <None Include="Resources\turn_right.png" />
+    <None Include="Resources\script_code.png" />
+    <None Include="Resources\table_relationship.png" />
+    <EmbeddedResource Include="Forms\FormUNIFACRegression.de.resx">
+      <DependentUpon>FormUNIFACRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUNIFACRegression.en.resx">
+      <DependentUpon>FormUNIFACRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUNIFACRegression.es.resx">
+      <DependentUpon>FormUNIFACRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUNIFACRegression.resx">
+      <DependentUpon>FormUNIFACRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\table_row_insert1.png" />
+    <None Include="Resources\zoom_extend.png" />
+    <None Include="Resources\zoom_refresh.png" />
+    <None Include="Resources\calculating.bmp" />
+    <None Include="Resources\calculating.gif" />
+    <None Include="Resources\applications-development.png" />
+    <None Include="Resources\280px-python_logo_2.png" />
+    <None Include="Resources\bgvs.png" />
+    <None Include="Resources\bullet_arrow_bottom1.png" />
+    <None Include="Resources\bullet_delete.png" />
+    <None Include="Resources\application_xp_terminal.png" />
+    <None Include="Resources\application_osx_terminal.png" />
+    <EmbeddedResource Include="ReportFiles\report_transform.xsl" />
+    <None Include="Resources\arrow_down.png" />
+    <None Include="Resources\arrow_left.png" />
+    <None Include="Resources\arrow_up.png" />
+    <None Include="Resources\arrows_4_way.png" />
+    <None Include="Resources\arrow_left1.png" />
+    <None Include="Resources\arrow_up1.png" />
+    <None Include="Resources\arrow_down1.png" />
+    <None Include="Resources\arrow_nw_se.png" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\arrow_divide.png" />
+    <None Include="Resources\arrow_join.png" />
+    <None Include="Resources\button-medium-blue.png" />
+    <None Include="Resources\209x48-doar-azul-assina.gif" />
+    <None Include="Resources\card_export.png" />
+    <Content Include="DWSIM Icon 4.ico" />
+    <Content Include="DWSIM Icon.ico" />
+    <Content Include="dwsim-icon-2.ico" />
+    <Content Include="DWSIM_ico.ico" />
+    <None Include="Resources\become_a_patron_button%402x.jpg" />
+    <None Include="Resources\bullet_black.png" />
+    <None Include="Resources\bullet_blue.png" />
+    <None Include="Resources\bullet_green.png" />
+    <None Include="Resources\bullet_orange.png" />
+    <None Include="Resources\bullet_pink.png" />
+    <None Include="Resources\bullet_purple.png" />
+    <None Include="Resources\bullet_red.png" />
+    <None Include="Resources\bullet_yellow.png" />
+    <EmbeddedResource Include="References\WebKI.xml" />
+    <None Include="Resources\beer_48.png" />
+    <None Include="Resources\app_48.png" />
+    <None Include="Resources\become_a_patron_button.png" />
+    <None Include="Resources\background_welcome.png" />
+    <None Include="Resources\bold.png" />
+    <None Include="Resources\bolditalic.png" />
+    <Content Include="DWSIM_icon_64.ico" />
+    <Content Include="Lib\abc.py" />
+    <Content Include="Lib\aifc.py" />
+    <Content Include="Lib\antigravity.py" />
+    <Content Include="Lib\anydbm.py" />
+    <Content Include="Lib\argparse.py" />
+    <Content Include="Lib\ast.py" />
+    <Content Include="Lib\asynchat.py" />
+    <Content Include="Lib\asyncore.py" />
+    <Content Include="Lib\atexit.py" />
+    <Content Include="Lib\audiodev.py" />
+    <Content Include="Lib\base64.py" />
+    <Content Include="Lib\BaseHTTPServer.py" />
+    <Content Include="Lib\Bastion.py" />
+    <Content Include="Lib\bdb.py" />
+    <Content Include="Lib\binhex.py" />
+    <Content Include="Lib\bisect.py" />
+    <Content Include="Lib\calendar.py" />
+    <Content Include="Lib\cgi.py" />
+    <Content Include="Lib\CGIHTTPServer.py" />
+    <Content Include="Lib\cgitb.py" />
+    <Content Include="Lib\chunk.py" />
+    <Content Include="Lib\clrtype.py" />
+    <Content Include="Lib\cmd.py" />
+    <Content Include="Lib\code.py" />
+    <Content Include="Lib\codecs.py" />
+    <Content Include="Lib\codeop.py" />
+    <Content Include="Lib\collections.py" />
+    <Content Include="Lib\colorsys.py" />
+    <Content Include="Lib\commands.py" />
+    <Content Include="Lib\compileall.py" />
+    <Content Include="Lib\ConfigParser.py" />
+    <Content Include="Lib\contextlib.py" />
+    <Content Include="Lib\Cookie.py" />
+    <Content Include="Lib\cookielib.py" />
+    <Content Include="Lib\copy.py" />
+    <Content Include="Lib\csv.py" />
+    <Content Include="Lib\ctypes\macholib\dyld.py" />
+    <Content Include="Lib\ctypes\macholib\dylib.py" />
+    <Content Include="Lib\ctypes\macholib\framework.py" />
+    <Content Include="Lib\ctypes\macholib\__init__.py" />
+    <Content Include="Lib\ctypes\util.py" />
+    <Content Include="Lib\ctypes\wintypes.py" />
+    <Content Include="Lib\ctypes\_endian.py" />
+    <Content Include="Lib\ctypes\__init__.py" />
+    <Content Include="Lib\decimal.py" />
+    <Content Include="Lib\difflib.py" />
+    <Content Include="Lib\dircache.py" />
+    <Content Include="Lib\dis.py" />
+    <Content Include="Lib\distutils\archive_util.py" />
+    <Content Include="Lib\distutils\bcppcompiler.py" />
+    <Content Include="Lib\distutils\ccompiler.py" />
+    <Content Include="Lib\distutils\cmd.py" />
+    <Content Include="Lib\distutils\command\bdist.py" />
+    <Content Include="Lib\distutils\command\bdist_dumb.py" />
+    <Content Include="Lib\distutils\command\bdist_rpm.py" />
+    <Content Include="Lib\distutils\command\bdist_wininst.py" />
+    <Content Include="Lib\distutils\command\build.py" />
+    <Content Include="Lib\distutils\command\build_clib.py" />
+    <Content Include="Lib\distutils\command\build_ext.py" />
+    <Content Include="Lib\distutils\command\build_py.py" />
+    <Content Include="Lib\distutils\command\build_scripts.py" />
+    <Content Include="Lib\distutils\command\check.py" />
+    <Content Include="Lib\distutils\command\clean.py" />
+    <Content Include="Lib\distutils\command\config.py" />
+    <Content Include="Lib\distutils\command\install.py" />
+    <Content Include="Lib\distutils\command\install_data.py" />
+    <Content Include="Lib\distutils\command\install_egg_info.py" />
+    <Content Include="Lib\distutils\command\install_headers.py" />
+    <Content Include="Lib\distutils\command\install_lib.py" />
+    <Content Include="Lib\distutils\command\install_scripts.py" />
+    <Content Include="Lib\distutils\command\register.py" />
+    <Content Include="Lib\distutils\command\sdist.py" />
+    <Content Include="Lib\distutils\command\upload.py" />
+    <Content Include="Lib\distutils\command\__init__.py" />
+    <Content Include="Lib\distutils\config.py" />
+    <Content Include="Lib\distutils\core.py" />
+    <Content Include="Lib\distutils\cygwinccompiler.py" />
+    <Content Include="Lib\distutils\debug.py" />
+    <Content Include="Lib\distutils\dep_util.py" />
+    <Content Include="Lib\distutils\dir_util.py" />
+    <Content Include="Lib\distutils\dist.py" />
+    <Content Include="Lib\distutils\emxccompiler.py" />
+    <Content Include="Lib\distutils\errors.py" />
+    <Content Include="Lib\distutils\extension.py" />
+    <Content Include="Lib\distutils\fancy_getopt.py" />
+    <Content Include="Lib\distutils\filelist.py" />
+    <Content Include="Lib\distutils\file_util.py" />
+    <Content Include="Lib\distutils\log.py" />
+    <Content Include="Lib\distutils\msvccompiler.py" />
+    <Content Include="Lib\distutils\spawn.py" />
+    <Content Include="Lib\distutils\sysconfig.py" />
+    <Content Include="Lib\distutils\text_file.py" />
+    <Content Include="Lib\distutils\unixccompiler.py" />
+    <Content Include="Lib\distutils\util.py" />
+    <Content Include="Lib\distutils\version.py" />
+    <Content Include="Lib\distutils\versionpredicate.py" />
+    <Content Include="Lib\distutils\__init__.py" />
+    <Content Include="Lib\doctest.py" />
+    <Content Include="Lib\DocXMLRPCServer.py" />
+    <Content Include="Lib\dumbdbm.py" />
+    <Content Include="Lib\dummy_thread.py" />
+    <Content Include="Lib\dummy_threading.py" />
+    <Content Include="Lib\email\base64mime.py" />
+    <Content Include="Lib\email\charset.py" />
+    <Content Include="Lib\email\encoders.py" />
+    <Content Include="Lib\email\errors.py" />
+    <Content Include="Lib\email\feedparser.py" />
+    <Content Include="Lib\email\generator.py" />
+    <Content Include="Lib\email\header.py" />
+    <Content Include="Lib\email\iterators.py" />
+    <Content Include="Lib\email\message.py" />
+    <Content Include="Lib\email\mime\application.py" />
+    <Content Include="Lib\email\mime\audio.py" />
+    <Content Include="Lib\email\mime\base.py" />
+    <Content Include="Lib\email\mime\image.py" />
+    <Content Include="Lib\email\mime\message.py" />
+    <Content Include="Lib\email\mime\multipart.py" />
+    <Content Include="Lib\email\mime\nonmultipart.py" />
+    <Content Include="Lib\email\mime\text.py" />
+    <Content Include="Lib\email\mime\__init__.py" />
+    <Content Include="Lib\email\parser.py" />
+    <Content Include="Lib\email\quoprimime.py" />
+    <Content Include="Lib\email\utils.py" />
+    <Content Include="Lib\email\_parseaddr.py" />
+    <Content Include="Lib\email\__init__.py" />
+    <Content Include="Lib\encodings\aliases.py" />
+    <Content Include="Lib\encodings\ascii.py" />
+    <Content Include="Lib\encodings\base64_codec.py" />
+    <Content Include="Lib\encodings\bz2_codec.py" />
+    <Content Include="Lib\encodings\charmap.py" />
+    <Content Include="Lib\encodings\cp037.py" />
+    <Content Include="Lib\encodings\cp1006.py" />
+    <Content Include="Lib\encodings\cp1026.py" />
+    <Content Include="Lib\encodings\cp1140.py" />
+    <Content Include="Lib\encodings\cp1250.py" />
+    <Content Include="Lib\encodings\cp1251.py" />
+    <Content Include="Lib\encodings\cp1252.py" />
+    <Content Include="Lib\encodings\cp1253.py" />
+    <Content Include="Lib\encodings\cp1254.py" />
+    <Content Include="Lib\encodings\cp1255.py" />
+    <Content Include="Lib\encodings\cp1256.py" />
+    <Content Include="Lib\encodings\cp1257.py" />
+    <Content Include="Lib\encodings\cp1258.py" />
+    <Content Include="Lib\encodings\cp424.py" />
+    <Content Include="Lib\encodings\cp437.py" />
+    <Content Include="Lib\encodings\cp500.py" />
+    <Content Include="Lib\encodings\cp720.py" />
+    <Content Include="Lib\encodings\cp737.py" />
+    <Content Include="Lib\encodings\cp775.py" />
+    <Content Include="Lib\encodings\cp850.py" />
+    <Content Include="Lib\encodings\cp852.py" />
+    <Content Include="Lib\encodings\cp855.py" />
+    <Content Include="Lib\encodings\cp856.py" />
+    <Content Include="Lib\encodings\cp857.py" />
+    <Content Include="Lib\encodings\cp858.py" />
+    <Content Include="Lib\encodings\cp860.py" />
+    <Content Include="Lib\encodings\cp861.py" />
+    <Content Include="Lib\encodings\cp862.py" />
+    <Content Include="Lib\encodings\cp863.py" />
+    <Content Include="Lib\encodings\cp864.py" />
+    <Content Include="Lib\encodings\cp865.py" />
+    <Content Include="Lib\encodings\cp866.py" />
+    <Content Include="Lib\encodings\cp869.py" />
+    <Content Include="Lib\encodings\cp874.py" />
+    <Content Include="Lib\encodings\cp875.py" />
+    <Content Include="Lib\encodings\hex_codec.py" />
+    <Content Include="Lib\encodings\hp_roman8.py" />
+    <Content Include="Lib\encodings\idna.py" />
+    <Content Include="Lib\encodings\iso8859_1.py" />
+    <Content Include="Lib\encodings\iso8859_10.py" />
+    <Content Include="Lib\encodings\iso8859_11.py" />
+    <Content Include="Lib\encodings\iso8859_13.py" />
+    <Content Include="Lib\encodings\iso8859_14.py" />
+    <Content Include="Lib\encodings\iso8859_15.py" />
+    <Content Include="Lib\encodings\iso8859_16.py" />
+    <Content Include="Lib\encodings\iso8859_2.py" />
+    <Content Include="Lib\encodings\iso8859_3.py" />
+    <Content Include="Lib\encodings\iso8859_4.py" />
+    <Content Include="Lib\encodings\iso8859_5.py" />
+    <Content Include="Lib\encodings\iso8859_6.py" />
+    <Content Include="Lib\encodings\iso8859_7.py" />
+    <Content Include="Lib\encodings\iso8859_8.py" />
+    <Content Include="Lib\encodings\iso8859_9.py" />
+    <Content Include="Lib\encodings\koi8_r.py" />
+    <Content Include="Lib\encodings\koi8_u.py" />
+    <Content Include="Lib\encodings\latin_1.py" />
+    <Content Include="Lib\encodings\mac_arabic.py" />
+    <Content Include="Lib\encodings\mac_centeuro.py" />
+    <Content Include="Lib\encodings\mac_croatian.py" />
+    <Content Include="Lib\encodings\mac_cyrillic.py" />
+    <Content Include="Lib\encodings\mac_farsi.py" />
+    <Content Include="Lib\encodings\mac_greek.py" />
+    <Content Include="Lib\encodings\mac_iceland.py" />
+    <Content Include="Lib\encodings\mac_latin2.py" />
+    <Content Include="Lib\encodings\mac_roman.py" />
+    <Content Include="Lib\encodings\mac_romanian.py" />
+    <Content Include="Lib\encodings\mac_turkish.py" />
+    <Content Include="Lib\encodings\mbcs.py" />
+    <Content Include="Lib\encodings\palmos.py" />
+    <Content Include="Lib\encodings\ptcp154.py" />
+    <Content Include="Lib\encodings\punycode.py" />
+    <Content Include="Lib\encodings\quopri_codec.py" />
+    <Content Include="Lib\encodings\raw_unicode_escape.py" />
+    <Content Include="Lib\encodings\rot_13.py" />
+    <Content Include="Lib\encodings\string_escape.py" />
+    <Content Include="Lib\encodings\tis_620.py" />
+    <Content Include="Lib\encodings\undefined.py" />
+    <Content Include="Lib\encodings\unicode_escape.py" />
+    <Content Include="Lib\encodings\unicode_internal.py" />
+    <Content Include="Lib\encodings\utf_16.py" />
+    <Content Include="Lib\encodings\utf_16_be.py" />
+    <Content Include="Lib\encodings\utf_16_le.py" />
+    <Content Include="Lib\encodings\utf_32.py" />
+    <Content Include="Lib\encodings\utf_32_be.py" />
+    <Content Include="Lib\encodings\utf_32_le.py" />
+    <Content Include="Lib\encodings\utf_7.py" />
+    <Content Include="Lib\encodings\utf_8.py" />
+    <Content Include="Lib\encodings\utf_8_sig.py" />
+    <Content Include="Lib\encodings\uu_codec.py" />
+    <Content Include="Lib\encodings\zlib_codec.py" />
+    <Content Include="Lib\encodings\__init__.py" />
+    <Content Include="Lib\ensurepip\_uninstall.py" />
+    <Content Include="Lib\ensurepip\__init__.py" />
+    <Content Include="Lib\ensurepip\__main__.py" />
+    <Content Include="Lib\filecmp.py" />
+    <Content Include="Lib\fileinput.py" />
+    <Content Include="Lib\fnmatch.py" />
+    <Content Include="Lib\formatter.py" />
+    <Content Include="Lib\fpformat.py" />
+    <Content Include="Lib\fractions.py" />
+    <Content Include="Lib\ftplib.py" />
+    <Content Include="Lib\functools.py" />
+    <Content Include="Lib\genericpath.py" />
+    <Content Include="Lib\getopt.py" />
+    <Content Include="Lib\getpass.py" />
+    <Content Include="Lib\gettext.py" />
+    <Content Include="Lib\glob.py" />
+    <Content Include="Lib\gzip.py" />
+    <Content Include="Lib\hashlib.py" />
+    <Content Include="Lib\heapq.py" />
+    <Content Include="Lib\hmac.py" />
+    <Content Include="Lib\htmlentitydefs.py" />
+    <Content Include="Lib\htmllib.py" />
+    <Content Include="Lib\HTMLParser.py" />
+    <Content Include="Lib\httplib.py" />
+    <Content Include="Lib\ihooks.py" />
+    <Content Include="Lib\imaplib.py" />
+    <Content Include="Lib\imghdr.py" />
+    <Content Include="Lib\importlib\__init__.py" />
+    <Content Include="Lib\imputil.py" />
+    <Content Include="Lib\inspect.py" />
+    <Content Include="Lib\io.py" />
+    <Content Include="Lib\json\decoder.py" />
+    <Content Include="Lib\json\encoder.py" />
+    <Content Include="Lib\json\scanner.py" />
+    <Content Include="Lib\json\tool.py" />
+    <Content Include="Lib\json\__init__.py" />
+    <Content Include="Lib\keyword.py" />
+    <Content Include="Lib\lib2to3\btm_matcher.py" />
+    <Content Include="Lib\lib2to3\btm_utils.py" />
+    <Content Include="Lib\lib2to3\fixer_base.py" />
+    <Content Include="Lib\lib2to3\fixer_util.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_apply.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_asserts.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_basestring.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_buffer.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_dict.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_except.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_exec.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_execfile.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_exitfunc.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_filter.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_funcattrs.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_future.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_getcwdu.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_has_key.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_idioms.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_import.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_imports.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_imports2.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_input.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_intern.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_isinstance.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_itertools.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_itertools_imports.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_long.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_map.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_metaclass.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_methodattrs.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_ne.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_next.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_nonzero.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_numliterals.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_operator.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_paren.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_print.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_raise.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_raw_input.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_reduce.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_renames.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_repr.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_set_literal.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_standarderror.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_sys_exc.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_throw.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_tuple_params.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_types.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_unicode.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_urllib.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_ws_comma.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_xrange.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_xreadlines.py" />
+    <Content Include="Lib\lib2to3\fixes\fix_zip.py" />
+    <Content Include="Lib\lib2to3\fixes\__init__.py" />
+    <Content Include="Lib\lib2to3\main.py" />
+    <Content Include="Lib\lib2to3\patcomp.py" />
+    <Content Include="Lib\lib2to3\pgen2\conv.py" />
+    <Content Include="Lib\lib2to3\pgen2\driver.py" />
+    <Content Include="Lib\lib2to3\pgen2\grammar.py" />
+    <Content Include="Lib\lib2to3\pgen2\literals.py" />
+    <Content Include="Lib\lib2to3\pgen2\parse.py" />
+    <Content Include="Lib\lib2to3\pgen2\pgen.py" />
+    <Content Include="Lib\lib2to3\pgen2\token.py" />
+    <Content Include="Lib\lib2to3\pgen2\tokenize.py" />
+    <Content Include="Lib\lib2to3\pgen2\__init__.py" />
+    <Content Include="Lib\lib2to3\pygram.py" />
+    <Content Include="Lib\lib2to3\pytree.py" />
+    <Content Include="Lib\lib2to3\refactor.py" />
+    <Content Include="Lib\lib2to3\__init__.py" />
+    <Content Include="Lib\lib2to3\__main__.py" />
+    <Content Include="Lib\linecache.py" />
+    <Content Include="Lib\locale.py" />
+    <Content Include="Lib\logging\config.py" />
+    <Content Include="Lib\logging\handlers.py" />
+    <Content Include="Lib\logging\__init__.py" />
+    <Content Include="Lib\macpath.py" />
+    <Content Include="Lib\macurl2path.py" />
+    <Content Include="Lib\mailbox.py" />
+    <Content Include="Lib\mailcap.py" />
+    <Content Include="Lib\markupbase.py" />
+    <Content Include="Lib\md5.py" />
+    <Content Include="Lib\mhlib.py" />
+    <Content Include="Lib\mimetools.py" />
+    <Content Include="Lib\mimetypes.py" />
+    <Content Include="Lib\MimeWriter.py" />
+    <Content Include="Lib\mimify.py" />
+    <Content Include="Lib\modulefinder.py" />
+    <Content Include="Lib\multifile.py" />
+    <Content Include="Lib\multiprocessing\connection.py" />
+    <Content Include="Lib\multiprocessing\dummy\connection.py" />
+    <Content Include="Lib\multiprocessing\dummy\__init__.py" />
+    <Content Include="Lib\multiprocessing\forking.py" />
+    <Content Include="Lib\multiprocessing\heap.py" />
+    <Content Include="Lib\multiprocessing\managers.py" />
+    <Content Include="Lib\multiprocessing\pool.py" />
+    <Content Include="Lib\multiprocessing\process.py" />
+    <Content Include="Lib\multiprocessing\queues.py" />
+    <Content Include="Lib\multiprocessing\reduction.py" />
+    <Content Include="Lib\multiprocessing\sharedctypes.py" />
+    <Content Include="Lib\multiprocessing\synchronize.py" />
+    <Content Include="Lib\multiprocessing\util.py" />
+    <Content Include="Lib\multiprocessing\__init__.py" />
+    <Content Include="Lib\mutex.py" />
+    <Content Include="Lib\netrc.py" />
+    <Content Include="Lib\new.py" />
+    <Content Include="Lib\nntplib.py" />
+    <Content Include="Lib\ntpath.py" />
+    <Content Include="Lib\nturl2path.py" />
+    <Content Include="Lib\numbers.py" />
+    <Content Include="Lib\opcode.py" />
+    <Content Include="Lib\optparse.py" />
+    <Content Include="Lib\os.py" />
+    <Content Include="Lib\os2emxpath.py" />
+    <Content Include="Lib\pdb.py" />
+    <Content Include="Lib\pickle.py" />
+    <Content Include="Lib\pickletools.py" />
+    <Content Include="Lib\pipes.py" />
+    <Content Include="Lib\pkgutil.py" />
+    <Content Include="Lib\platform.py" />
+    <Content Include="Lib\plistlib.py" />
+    <Content Include="Lib\popen2.py" />
+    <Content Include="Lib\poplib.py" />
+    <Content Include="Lib\posixfile.py" />
+    <Content Include="Lib\posixpath.py" />
+    <Content Include="Lib\pprint.py" />
+    <Content Include="Lib\profile.py" />
+    <Content Include="Lib\pstats.py" />
+    <Content Include="Lib\pyclbr.py" />
+    <Content Include="Lib\pydoc.py" />
+    <Content Include="Lib\pydoc_data\topics.py" />
+    <Content Include="Lib\pydoc_data\__init__.py" />
+    <Content Include="Lib\py_compile.py" />
+    <Content Include="Lib\Queue.py" />
+    <Content Include="Lib\quopri.py" />
+    <Content Include="Lib\random.py" />
+    <Content Include="Lib\repr.py" />
+    <Content Include="Lib\rexec.py" />
+    <Content Include="Lib\rfc822.py" />
+    <Content Include="Lib\rlcompleter.py" />
+    <Content Include="Lib\robotparser.py" />
+    <Content Include="Lib\runpy.py" />
+    <Content Include="Lib\sched.py" />
+    <Content Include="Lib\sets.py" />
+    <Content Include="Lib\sgmllib.py" />
+    <Content Include="Lib\sha.py" />
+    <Content Include="Lib\shelve.py" />
+    <Content Include="Lib\shlex.py" />
+    <Content Include="Lib\shutil.py" />
+    <Content Include="Lib\SimpleHTTPServer.py" />
+    <Content Include="Lib\SimpleXMLRPCServer.py" />
+    <Content Include="Lib\site-packages\README.txt" />
+    <Content Include="Lib\site.py" />
+    <Content Include="Lib\smtpd.py" />
+    <Content Include="Lib\smtplib.py" />
+    <Content Include="Lib\sndhdr.py" />
+    <Content Include="Lib\socket.py" />
+    <Content Include="Lib\SocketServer.py" />
+    <Content Include="Lib\sqlite3\dbapi2.py" />
+    <Content Include="Lib\sqlite3\dump.py" />
+    <Content Include="Lib\sqlite3\__init__.py" />
+    <Content Include="Lib\sre_constants.py" />
+    <Content Include="Lib\sre_parse.py" />
+    <Content Include="Lib\ssl.py" />
+    <Content Include="Lib\stat.py" />
+    <Content Include="Lib\statvfs.py" />
+    <Content Include="Lib\string.py" />
+    <Content Include="Lib\StringIO.py" />
+    <Content Include="Lib\stringold.py" />
+    <Content Include="Lib\stringprep.py" />
+    <Content Include="Lib\struct.py" />
+    <Content Include="Lib\subprocess.py" />
+    <Content Include="Lib\sunau.py" />
+    <Content Include="Lib\sunaudio.py" />
+    <Content Include="Lib\symbol.py" />
+    <Content Include="Lib\sysconfig.py" />
+    <Content Include="Lib\tabnanny.py" />
+    <Content Include="Lib\tarfile.py" />
+    <Content Include="Lib\telnetlib.py" />
+    <Content Include="Lib\tempfile.py" />
+    <Content Include="Lib\textwrap.py" />
+    <Content Include="Lib\this.py" />
+    <Content Include="Lib\threading.py" />
+    <Content Include="Lib\timeit.py" />
+    <Content Include="Lib\toaiff.py" />
+    <Content Include="Lib\token.py" />
+    <Content Include="Lib\tokenize.py" />
+    <Content Include="Lib\trace.py" />
+    <Content Include="Lib\traceback.py" />
+    <Content Include="Lib\types.py" />
+    <Content Include="Lib\unittest\case.py" />
+    <Content Include="Lib\unittest\loader.py" />
+    <Content Include="Lib\unittest\main.py" />
+    <Content Include="Lib\unittest\result.py" />
+    <Content Include="Lib\unittest\runner.py" />
+    <Content Include="Lib\unittest\signals.py" />
+    <Content Include="Lib\unittest\suite.py" />
+    <Content Include="Lib\unittest\util.py" />
+    <Content Include="Lib\unittest\__init__.py" />
+    <Content Include="Lib\unittest\__main__.py" />
+    <Content Include="Lib\urllib.py" />
+    <Content Include="Lib\urllib2.py" />
+    <Content Include="Lib\urlparse.py" />
+    <Content Include="Lib\user.py" />
+    <Content Include="Lib\UserDict.py" />
+    <Content Include="Lib\UserList.py" />
+    <Content Include="Lib\UserString.py" />
+    <Content Include="Lib\uu.py" />
+    <Content Include="Lib\uuid.py" />
+    <Content Include="Lib\warnings.py" />
+    <Content Include="Lib\wave.py" />
+    <Content Include="Lib\weakref.py" />
+    <Content Include="Lib\webbrowser.py" />
+    <Content Include="Lib\whichdb.py" />
+    <Content Include="Lib\wpf.py" />
+    <Content Include="Lib\wsgiref\handlers.py" />
+    <Content Include="Lib\wsgiref\headers.py" />
+    <Content Include="Lib\wsgiref\simple_server.py" />
+    <Content Include="Lib\wsgiref\util.py" />
+    <Content Include="Lib\wsgiref\validate.py" />
+    <Content Include="Lib\wsgiref\__init__.py" />
+    <Content Include="Lib\xdrlib.py" />
+    <Content Include="Lib\xmllib.py" />
+    <Content Include="Lib\xmlrpclib.py" />
+    <Content Include="Lib\xml\dom\domreg.py" />
+    <Content Include="Lib\xml\dom\expatbuilder.py" />
+    <Content Include="Lib\xml\dom\minicompat.py" />
+    <Content Include="Lib\xml\dom\minidom.py" />
+    <Content Include="Lib\xml\dom\NodeFilter.py" />
+    <Content Include="Lib\xml\dom\pulldom.py" />
+    <Content Include="Lib\xml\dom\xmlbuilder.py" />
+    <Content Include="Lib\xml\dom\__init__.py" />
+    <Content Include="Lib\xml\etree\cElementTree.py" />
+    <Content Include="Lib\xml\etree\ElementInclude.py" />
+    <Content Include="Lib\xml\etree\ElementPath.py" />
+    <Content Include="Lib\xml\etree\ElementTree.py" />
+    <Content Include="Lib\xml\etree\SimpleXMLTreeBuilder.py" />
+    <Content Include="Lib\xml\etree\__init__.py" />
+    <Content Include="Lib\xml\parsers\expat.py" />
+    <Content Include="Lib\xml\parsers\__init__.py" />
+    <Content Include="Lib\xml\sax\expatreader.py" />
+    <Content Include="Lib\xml\sax\handler.py" />
+    <Content Include="Lib\xml\sax\saxutils.py" />
+    <Content Include="Lib\xml\sax\xmlreader.py" />
+    <Content Include="Lib\xml\sax\_exceptions.py" />
+    <Content Include="Lib\xml\sax\__init__.py" />
+    <Content Include="Lib\xml\__init__.py" />
+    <Content Include="Lib\zipfile.py" />
+    <Content Include="Lib\_abcoll.py" />
+    <Content Include="Lib\_LWPCookieJar.py" />
+    <Content Include="Lib\_MozillaCookieJar.py" />
+    <Content Include="Lib\_osx_support.py" />
+    <Content Include="Lib\_pyio.py" />
+    <Content Include="Lib\_strptime.py" />
+    <Content Include="Lib\_threading_local.py" />
+    <Content Include="Lib\_weakrefset.py" />
+    <Content Include="Lib\__future__.py" />
+    <Content Include="Lib\__phello__.foo.py" />
+    <None Include="Resources\arrow_32px.png" />
+    <None Include="Resources\binary_code_24px.png" />
+    <None Include="Resources\bubble-gum-error-404.gif" />
+    <None Include="Resources\bubble-gum-error.gif" />
+    <None Include="Resources\box_important_80px.png" />
+    <None Include="Resources\box_important_48px.png" />
+    <Content Include="Resources\ch.png" />
+    <None Include="Resources\clock_red.png" />
+    <None Include="Resources\comp_separator.png" />
+    <None Include="Resources\comp_separator1.png" />
+    <None Include="Resources\cs.jpg" />
+    <None Include="Resources\colan.jpg" />
+    <None Include="Resources\colan2.jpg" />
+    <None Include="Resources\Davos-1.jpg" />
+    <None Include="Resources\clipboard_sign.png" />
+    <None Include="Resources\chart_LLE.png" />
+    <None Include="Resources\col_rflabs_16.png" />
+    <None Include="Resources\col_rebabs_16.png" />
+    <None Include="Resources\col_abs_16.png" />
+    <None Include="Resources\col_dc_16.png" />
+    <None Include="Resources\col_sc_16.png" />
+    <None Include="Resources\Configure alt 3.png" />
+    <None Include="Resources\chericlogo.jpg" />
+    <None Include="Resources\cheric_big.jpg" />
+    <None Include="Resources\chemeo.png" />
+    <None Include="Resources\color_wheel.png" />
+    <None Include="Resources\close_96px.png" />
+    <None Include="Resources\collaboration_female_male_48px.png" />
+    <None Include="Resources\checkmark_48px.png" />
+    <Content Include="Resources\control_equalizer_blue.png" />
+    <None Include="Resources\cut.png" />
+    <None Include="Resources\ddbsearch.jpg" />
+    <None Include="Resources\database_save.jpg" />
+    <None Include="Resources\database_save1.png" />
+    <None Include="Resources\control_power_blue.png" />
+    <None Include="Resources\control_power.png" />
+    <Content Include="Resources\de.png" />
+    <None Include="Resources\emblem-symbolic-link.png" />
+    <None Include="Resources\de1.png" />
+    <None Include="Resources\dwsim1.png" />
+    <None Include="Resources\dwsim2.png" />
+    <None Include="Resources\dwsim3.png" />
+    <None Include="Resources\dwsim_tela2%282%29.png" />
+    <None Include="Resources\dwsim31.png" />
+    <None Include="Resources\dwsim3bg.jpg" />
+    <None Include="Resources\DWSIM-branco.png" />
+    <None Include="Resources\dwsim 3 bg.png" />
+    <None Include="Resources\delete2.png" />
+    <None Include="Resources\DWSIM4 icon.png" />
+    <None Include="Resources\DownloadFromAppStore.png" />
+    <None Include="Resources\En-play-badge.png" />
+    <None Include="Resources\Default.png" />
+    <None Include="Resources\document_export.jpg" />
+    <None Include="Resources\document_export1.jpg" />
+    <None Include="Resources\DWSIM_splash_limpo.png" />
+    <None Include="Resources\DWSIM_splash.png" />
+    <None Include="Resources\DWSIM_ico.png" />
+    <None Include="Resources\DWSIM_ico_64.png" />
+    <None Include="Resources\DWSIM_splash_v7.png" />
+    <None Include="Resources\DWSIM Icon Vector 2.png" />
+    <None Include="Resources\DWSIM_Icon_4.png" />
+    <None Include="Resources\DWSIM_Icon_4.ico" />
+    <None Include="Resources\double_left_32px.png" />
+    <None Include="Resources\double_right_32px.png" />
+    <Content Include="Resources\es.png" />
+    <None Include="Resources\Excel.png" />
+    <None Include="Resources\Excel_copy1.jpg" />
+    <None Include="Resources\fast_forward.png" />
+    <None Include="Resources\folder_add_48.png" />
+    <None Include="Resources\fontsize.png" />
+    <None Include="Resources\fossee.png" />
+    <None Include="Resources\file_80px.png" />
+    <None Include="Resources\Excel 2013.png" />
+    <Content Include="Resources\fr.png" />
+    <None Include="Resources\green_down.png" />
+    <None Include="Resources\orifice.png" />
+    <None Include="Resources\orifice2.png" />
+    <None Include="Resources\pic_absorption.jpg" />
+    <None Include="Resources\pic_compressor.jpg" />
+    <None Include="Resources\pic_compsep.jpg" />
+    <None Include="Resources\pic_cooler.jpg" />
+    <None Include="Resources\pic_cstr.jpg" />
+    <None Include="Resources\pic_distillation.jpg" />
+    <None Include="Resources\pic_energy.jpg" />
+    <None Include="Resources\pic_heater.jpg" />
+    <None Include="Resources\pic_heatxchanger.jpg" />
+    <None Include="Resources\pic_material.jpg" />
+    <None Include="Resources\pic_mixer.bmp" />
+    <None Include="Resources\pic_orifice.jpg" />
+    <None Include="Resources\pic_pfr.gif" />
+    <None Include="Resources\pic_pipeline.jpg" />
+    <None Include="Resources\pic_reactor.jpg" />
+    <None Include="Resources\pic_separator.jpg" />
+    <None Include="Resources\pic_splitter.jpg" />
+    <None Include="Resources\pic_tank.jpg" />
+    <None Include="Resources\pic_turbine.jpg" />
+    <None Include="Resources\pic_valve.jpg" />
+    <None Include="Resources\pic_pump.jpg" />
+    <None Include="Resources\plugin.png" />
+    <None Include="Resources\irlogo.png" />
+    <None Include="Resources\jscript-file-icon.png" />
+    <None Include="Resources\pic_customuo.jpg" />
+    <None Include="Resources\password-icon.png" />
+    <None Include="Resources\images.png" />
+    <None Include="Resources\logo.gif" />
+    <None Include="Resources\lightning1.png" />
+    <None Include="Resources\lightbulb.png" />
+    <None Include="Resources\page_white_acrobat.png" />
+    <None Include="Resources\redo_161.png" />
+    <None Include="Resources\lo_enrecy_16.png" />
+    <None Include="Resources\lo_recy_16.png" />
+    <None Include="Resources\lo_spec_16.png" />
+    <None Include="Resources\lo_adjust_16.png" />
+    <None Include="Resources\re_pfr_16.png" />
+    <None Include="Resources\re_cstr_16.png" />
+    <None Include="Resources\re_equi_16.png" />
+    <None Include="Resources\re_conv_16.png" />
+    <None Include="Resources\re_gibbs_16.png" />
+    <None Include="Resources\Lab-icon.png" />
+    <None Include="Resources\paypal_donate.jpg" />
+    <None Include="Resources\new.png" />
+    <None Include="Resources\no.png" />
+    <None Include="Resources\rewind.png" />
+    <None Include="Resources\page_world.png" />
+    <None Include="Resources\python_icon.png" />
+    <None Include="Resources\python-logo.png" />
+    <None Include="Resources\icons8-spy_filled.png" />
+    <None Include="Resources\PayPal-Donate-Button-PNG-HD.png" />
+    <None Include="Resources\icon_phone_ticket.png" />
+    <None Include="Resources\icon_phone_ticket2.png" />
+    <None Include="Resources\icon_phone_ticket21.png" />
+    <None Include="Resources\icon_phone_ticket22.png" />
+    <None Include="Resources\icon_phone_ticket23.png" />
+    <None Include="Resources\patreon.png" />
+    <None Include="Resources\patreon.jpg" />
+    <None Include="Resources\labicon.png" />
+    <None Include="Resources\play_blue.png" />
+    <None Include="Resources\paper&amp;pencil_48.png" />
+    <None Include="Resources\icons8-file.png" />
+    <None Include="Resources\icons8-opened_folder.png" />
+    <None Include="Resources\icons8-opened_folder1.png" />
+    <None Include="Resources\icons8-petrol.png" />
+    <None Include="Resources\icons8-combo_chart.png" />
+    <None Include="Resources\icons8-combo_chart1.png" />
+    <None Include="Resources\icons8-combo_chart2.png" />
+    <None Include="Resources\icons8-combo_chart3.png" />
+    <None Include="Resources\icons8-petrol1.png" />
+    <None Include="Resources\icons8-opened_folder2.png" />
+    <None Include="Resources\icons8-file1.png" />
+    <None Include="Resources\icons8-spy_male.png" />
+    <None Include="Resources\icons8-books.png" />
+    <None Include="Resources\icons8-chemical_plant.png" />
+    <None Include="Resources\icons8-line_chart.png" />
+    <None Include="Resources\icons8-test_tube.png" />
+    <None Include="Resources\Patreon_Navy.jpg" />
+    <None Include="Resources\icons8-pause.png" />
+    <None Include="Resources\icons8-play.png" />
+    <None Include="Resources\icons8-stop.png" />
+    <None Include="Resources\icons8-module1.png" />
+    <None Include="Resources\icons8-exercise.png" />
+    <None Include="Resources\icons8-module2.png" />
+    <None Include="Resources\icons8-ecg.png" />
+    <None Include="Resources\icons8-module.png" />
+    <None Include="Resources\icons8-cancel.png" />
+    <None Include="Resources\icons8-ok.png" />
+    <None Include="Resources\icons8-realtime.png" />
+    <None Include="Resources\icons8-slider.png" />
+    <None Include="Resources\icons8-save.png" />
+    <None Include="Resources\icons8-save_as.png" />
+    <None Include="Resources\icons8-save_all.png" />
+    <None Include="Resources\icons8-live_folder.png" />
+    <None Include="Resources\icons8-new_file.png" />
+    <None Include="Resources\icons8-compress.png" />
+    <None Include="Resources\icons8-improvement.png" />
+    <None Include="Resources\icons8-microsoft_excel.png" />
+    <None Include="Resources\icons8-import.png" />
+    <None Include="Resources\icons8-export.png" />
+    <None Include="Resources\icons8-delete.png" />
+    <None Include="Resources\icons8-import1.png" />
+    <None Include="Resources\icons8-export1.png" />
+    <None Include="Resources\icons8-delete1.png" />
+    <None Include="Resources\pythonfunctions.txt" />
+    <None Include="Resources\Icon128.png" />
+    <None Include="Resources\Icon512.png" />
+    <None Include="Resources\regular.png" />
+    <None Include="Resources\italic.png" />
+    <None Include="Resources\icons8-button.png" />
+    <None Include="Resources\Icon1281.png" />
+    <None Include="Resources\icons8-coins.png" />
+    <None Include="Resources\icons8-scatter_plot.png" />
+    <None Include="Resources\icons8-volunteering.png" />
+    <None Include="Resources\icons8-opened_folder3.png" />
+    <None Include="Resources\open file s365.png" />
+    <None Include="Resources\icons8-pdf.png" />
+    <None Include="Resources\icons8-vector.png" />
+    <None Include="Resources\icons8-downloads_folder.png" />
+    <None Include="Resources\icons8-python.png" />
+    <None Include="Resources\ProIcon128.png" />
+    <None Include="Resources\Icon128.ico" />
+    <None Include="Resources\icons8-technical_support.png" />
+    <None Include="Resources\info_96px.png" />
+    <None Include="Resources\invert_selection_80px.png" />
+    <None Include="Resources\hibernate_60px.png" />
+    <None Include="Resources\play2_96px.png" />
+    <None Include="Resources\play_96px.png" />
+    <None Include="Resources\hibernate_80px.png" />
+    <None Include="Resources\move_up_96px.png" />
+    <None Include="Resources\move_down_96px.png" />
+    <None Include="Resources\redo_96px.png" />
+    <None Include="Resources\Logout Rounded_96px.png" />
+    <None Include="Resources\new_60px.png" />
+    <None Include="Resources\object_48px.png" />
+    <None Include="Resources\rondy-stickers-lettering-sticker-ctrl-plus-z-with-arrow.gif" />
+    <None Include="Resources\line_chart_80px.png" />
+    <None Include="Resources\input_80px.png" />
+    <None Include="Resources\icons8-documents.png" />
+    <Content Include="Resources\ru.png" />
+    <None Include="Resources\zoom.png" />
+    <None Include="Resources\Services.png" />
+    <None Include="Resources\wfplogo.jpg" />
+    <None Include="Resources\Straight-tube_heat_exchanger_1-pass.PNG" />
+    <None Include="Resources\Straight-tube_heat_exchanger_2-pass.PNG" />
+    <None Include="Resources\vb.gif" />
+    <None Include="Resources\shape_square_delete.png" />
+    <None Include="Resources\shape_square_add.png" />
+    <None Include="Resources\text-x-generic-template.png" />
+    <None Include="Resources\dwsim_splash1.jpg" />
+    <None Include="Resources\about.png" />
+    <None Include="Resources\control_stop_blue1.png" />
+    <None Include="Resources\clock.png" />
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.en.resx">
+      <DependentUpon>FormDataRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataRegression\FormDataRegression.resx">
+      <DependentUpon>FormDataRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChart.en.resx">
+      <DependentUpon>FormChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChart.resx">
+      <DependentUpon>FormChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCompoundCreator.en.resx">
+      <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompoundCreator\FormCompoundCreator.resx">
+      <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.de.resx">
+      <DependentUpon>FormFlowsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.en.resx">
+      <DependentUpon>FormFlowsheet.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.es.resx">
+      <DependentUpon>FormFlowsheet.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\COReportsPanel.de.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\COReportsPanel.en.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\COReportsPanel.es.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\COReportsPanel.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\WatchPanel.de.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\WatchPanel.en.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\WatchPanel.es.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\WatchPanel.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainWindow\FormMain.de.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainWindow\FormMain.es.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutBox.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.en.resx">
+      <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.resx">
+      <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\LogPanel.de.resx">
+      <DependentUpon>LogPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\LogPanel.es.resx">
+      <DependentUpon>LogPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\MaterialStreamPanel.de.resx">
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\MaterialStreamPanel.es.resx">
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormOptimization.de.resx">
+      <DependentUpon>FormOptimization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormOptimization.en.resx">
+      <DependentUpon>FormOptimization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormOptimization.es.resx">
+      <DependentUpon>FormOptimization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormOptimization.resx">
+      <DependentUpon>FormOptimization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOptions.de.resx">
+      <DependentUpon>FormOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOptions.en.resx">
+      <DependentUpon>FormOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOptions.es.resx">
+      <DependentUpon>FormOptions.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPassword.en.resx">
+      <DependentUpon>FormPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPassword.resx">
+      <DependentUpon>FormPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRecoverFiles.de.resx">
+      <DependentUpon>FormRecoverFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRecoverFiles.es.resx">
+      <DependentUpon>FormRecoverFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRecoverFiles.resx">
+      <DependentUpon>FormRecoverFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReportConfig.de.resx">
+      <DependentUpon>FormReportConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReportConfig.en.resx">
+      <DependentUpon>FormReportConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReportConfig.es.resx">
+      <DependentUpon>FormReportConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReportConfig.resx">
+      <DependentUpon>FormReportConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormScript.de.resx">
+      <DependentUpon>FormScript.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormScript.en.resx">
+      <DependentUpon>FormScript.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormScript.es.resx">
+      <DependentUpon>FormScript.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormSensAnalysis.de.resx">
+      <DependentUpon>FormSensAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormSensAnalysis.en.resx">
+      <DependentUpon>FormSensAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormSensAnalysis.es.resx">
+      <DependentUpon>FormSensAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetAnalysis\FormSensAnalysis.resx">
+      <DependentUpon>FormSensAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormScript.resx">
+      <DependentUpon>FormScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\house.png" />
+    <None Include="Resources\dialog-warning.png" />
+    <None Include="Resources\dialog-information.png" />
+    <None Include="Resources\emblem-important.png" />
+    <None Include="Resources\internet-web-browser.png" />
+    <None Include="Resources\help-browser2.png" />
+    <None Include="Resources\accessories-text-editor.png" />
+    <None Include="Resources\money_add.png" />
+    <None Include="Resources\pic22.jpg" />
+    <None Include="Resources\pic21.jpg" />
+    <None Include="Resources\pic2.jpg" />
+    <None Include="Resources\pic1.jpg" />
+    <None Include="Resources\splash2.png" />
+    <None Include="Resources\splash1.png" />
+    <None Include="Resources\splash.png" />
+    <None Include="Resources\minus.jpg" />
+    <None Include="Resources\plus.jpg" />
+    <None Include="Resources\chart_line1.png" />
+    <None Include="Resources\steamedsidestripper.jpg" />
+    <None Include="Resources\siderectifier.jpg" />
+    <None Include="Resources\reboiledsidestripper.jpg" />
+    <None Include="Resources\pumparound.jpg" />
+    <None Include="Resources\delete1.png" />
+    <None Include="Resources\lock_open.png" />
+    <None Include="Resources\lock.png" />
+    <None Include="Resources\calculator.png" />
+    <None Include="Resources\page_copy.png" />
+    <None Include="Resources\paste_plain.png" />
+    <None Include="Resources\copy.gif" />
+    <EmbeddedResource Include="Languages\DWSIM.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\DWSIM.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\DWSIM.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Properties.de.resx" />
+    <EmbeddedResource Include="Languages\Properties.en.resx" />
+    <EmbeddedResource Include="Languages\Properties.es.resx" />
+    <EmbeddedResource Include="Languages\Properties.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.en.resx">
+      <DependentUpon>FormAssayManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.resx">
+      <DependentUpon>FormAssayManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.de.resx">
+      <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.es.resx">
+      <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\DistillationCurveCharacterization\DCCharacterizationWizard.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.de.resx">
+      <DependentUpon>FormPCBulk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.en.resx">
+      <DependentUpon>FormPCBulk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\C7plusCharacterization\FormPCBulk.es.resx">
+      <DependentUpon>FormPCBulk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.de.resx">
+      <DependentUpon>FormReacConv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacConv.es.resx">
+      <DependentUpon>FormReacConv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.de.resx">
+      <DependentUpon>FormReacEq.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacEq.es.resx">
+      <DependentUpon>FormReacEq.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.de.resx">
+      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacKinetic.es.resx">
+      <DependentUpon>FormReacKinetic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.de.resx">
+      <DependentUpon>FormReacManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacManager.es.resx">
+      <DependentUpon>FormReacManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.de.resx">
+      <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReactionSubsystemEditors\FormReacSetEditor.es.resx">
+      <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.de.resx">
+      <DependentUpon>FormUnitGen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\UnitsSystemCreator\FormUnitGen.es.resx">
+      <DependentUpon>FormUnitGen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.de.resx">
+      <DependentUpon>FormBinEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\BinaryEnvelope\FormBinEnv.es.resx">
+      <DependentUpon>FormBinEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.de.resx">
+      <DependentUpon>FrmColdProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmColdProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.es.resx">
+      <DependentUpon>FrmColdProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PetroleumColdFlowProperties\FrmColdProperties.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmColdProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.de.resx">
+      <DependentUpon>FrmCritpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\TrueCriticalPoint\FrmCritpt.es.resx">
+      <DependentUpon>FrmCritpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.de.resx">
+      <DependentUpon>FormHYD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD.es.resx">
+      <DependentUpon>FormHYD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.de.resx">
+      <DependentUpon>FormHYD_DET.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\NaturalGasHydrates\FormHYD_DET.es.resx">
+      <DependentUpon>FormHYD_DET.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.de.resx">
+      <DependentUpon>FormPhEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PhaseEnvelope\FormPhEnv.es.resx">
+      <DependentUpon>FormPhEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.de.resx">
+      <DependentUpon>FormPureComp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PureCompoundProperties\FormPureComp.es.resx">
+      <DependentUpon>FormPureComp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.de.resx">
+      <DependentUpon>FrmPsvSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmPsvSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.es.resx">
+      <DependentUpon>FrmPsvSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PressureSafetyValveSizing\FrmPsvSize.resx">
+      <DependentUpon>FrmPsvSize.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.de.resx">
+      <DependentUpon>FrmDAVP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmDAVP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.es.resx">
+      <DependentUpon>FrmDAVP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\GasLiquidSeparatorSizing\FrmDAVP.resx">
+      <DependentUpon>FrmDAVP.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropSelection.de.resx">
+      <DependentUpon>FormPropSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropSelection.es.resx">
+      <DependentUpon>FormPropSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SpreadsheetForm.de.resx">
+      <DependentUpon>SpreadsheetForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SpreadsheetForm.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SpreadsheetForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropSelection.en.resx">
+      <DependentUpon>FormPropSelection.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPropSelection.resx">
+      <DependentUpon>FormPropSelection.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\SpreadsheetForm.es.resx">
+      <DependentUpon>SpreadsheetForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\dwsim.png" />
+    <None Include="Resources\comments.png" />
+    <None Include="Resources\table_sort.png" />
+    <None Include="Resources\us.png" />
+    <None Include="Resources\gb.png" />
+    <None Include="Resources\br.png" />
+    <None Include="Resources\r_gibbs1.png" />
+    <None Include="Resources\r_equil1.png" />
+    <None Include="Resources\r_conv1.png" />
+    <None Include="Resources\r_pfr.png" />
+    <None Include="Resources\r_gibbs.png" />
+    <None Include="Resources\r_equil.png" />
+    <None Include="Resources\r_cstr.png" />
+    <None Include="Resources\r_conv.png" />
+    <None Include="Resources\get_adobe_reader.gif" />
+    <None Include="Resources\x-office-document.png" />
+    <None Include="Resources\text-x-script.png" />
+    <None Include="Resources\text-x-generic1.png" />
+    <None Include="Resources\book.png" />
+    <None Include="Resources\help-browser1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tools\CompoundParameterTuning\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
+
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(TargetDir)" /E /Y /F /D
+
+) else if "$(ConfigurationName)"=="Release Linux" (
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+
+erase /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\libCEF.dll" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.pak" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul 1&gt;nul 4&gt;nul
+
+) else if "$(PlatformName)"=="x64" (
+
+if not exist "$(SolutionDir)DistPackages\Windows\" mkdir $(SolutionDir)DistPackages\Windows\
+if not exist "$(SolutionDir)DistPackages\macOS\" mkdir $(SolutionDir)DistPackages\macOS\
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+
+xcopy "$(SolutionDir)\PlatformFiles\Common" "$(TargetDir)"  /E /Y /F /D
+xcopy "$(SolutionDir)\PlatformFiles\Windows" "$(TargetDir)"  /E /Y /F /D
+
+erase /S /Q "$(SolutionDir)DistPackages\Windows\dwsim-web-ui" 2&gt;nul 1&gt;nul 4&gt;nul
+
+xcopy "$(SolutionDir)DWSIM.UI.Web\dwsim-web-ui\*" "$(TargetDir)dwsim-web-ui\*" /E /Y /F /D
+xcopy "$(TargetDir)dwsim-web-ui\*" "$(SolutionDir)DistPackages\Windows\dwsim-web-ui\*" /E /Y /F /D
+
+erase /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\Windows\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
+
+erase /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+
+) else if "$(PlatformName)"=="x86" (
+
+if not exist "$(SolutionDir)DistPackages\Windows_32\" mkdir $(SolutionDir)DistPackages\Windows_32\
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+
+xcopy "$(SolutionDir)\PlatformFiles\Common" "$(TargetDir)"  /E /Y /F /D
+xcopy "$(SolutionDir)\PlatformFiles\Windows32" "$(TargetDir)"  /E /Y /F /D
+
+erase /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
+erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
+
+)
+</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="RemoveDesignTimeFacadesBeforeSGen" BeforeTargets="GenerateSerializationAssemblies">
+    <ItemGroup>
+      <ReferencePath Remove="@(_DesignTimeFacadeAssemblies_Names->'%(OriginalIdentity)')" />
+    </ItemGroup>
+    <Message Importance="normal" Text="Removing DesignTimeFacades from ReferencePath before running SGen." />
+  </Target>
+  <Target Name="ReAddDesignTimeFacadesBeforeSGen" AfterTargets="GenerateSerializationAssemblies">
+    <ItemGroup>
+      <ReferencePath Include="@(_DesignTimeFacadeAssemblies_Names->'%(OriginalIdentity)')" />
+    </ItemGroup>
+    <Message Importance="normal" Text="Adding back DesignTimeFacades from ReferencePath now that SGen has run." />
+  </Target>
+  <Import Project="..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.68.2.1\build\net45\SkiaSharp.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" />
+</Project>

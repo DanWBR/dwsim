@@ -358,8 +358,8 @@ Public Class FormMain
     End Sub
 
     Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
-        Me.SaveFile(True, True)
-        FileManagementService.GetInstance().FileSavedToDashboard()
+        Me.SaveFileDialog(True)
+
     End Sub
 
     Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
@@ -4219,7 +4219,10 @@ Label_00CC:
                 Try
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
-                    filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    If form2.Options.VirtualFile IsNot Nothing Then
+                        filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
+                    End If
+
                 Catch ex As Exception
                 End Try
             Else
@@ -4244,6 +4247,7 @@ Label_00CC:
             New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
 
             If handler IsNot Nothing Then
+
                 If SavingSimulation IsNot Nothing Then
                     If SavingSimulation.Invoke(form2) = False Then Exit Sub
                 End If
@@ -4271,6 +4275,9 @@ Label_00CC:
                     SaveJSON(handler, Me.ActiveMdiChild)
                 Else
                     Me.bgSaveFile.RunWorkerAsync()
+                End If
+                If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
+                    DirectCast(ActiveMdiChild, FormFlowsheet).FlowsheetOptions.VirtualFile = handler
                 End If
             End If
         Else
