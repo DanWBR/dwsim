@@ -50,6 +50,12 @@ Namespace UnitOperations.Auxiliary.PumpOps
         Protected _name As String = ""
         Protected _enabled As Boolean = False
 
+        Property ImpellerDiameter As Double = 0.0
+
+        Property ImpellerSpeed As Double = 0.0
+
+        Property ImpellerDiameterUnit As String = "mm"
+
         Sub New(ByVal id As String, ByVal name As String, ByVal x As ArrayList, ByVal xunit As String, ByVal y As ArrayList, ByVal yunit As String, ByVal type As CurveType)
             Me.New()
             Me.ID = id

@@ -368,16 +368,16 @@
     <value>Flow Rate</value>
   </data>
   <data name="chart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 330</value>
+    <value>768, 353</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>774, 380</value>
+    <value>774, 403</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Graph</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>774, 380</value>
+    <value>774, 403</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Graph</value>
@@ -425,9 +425,6 @@
     <value>776, 493</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>

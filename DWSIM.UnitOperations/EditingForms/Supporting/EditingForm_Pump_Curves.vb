@@ -625,6 +625,11 @@ Public Class EditingForm_Pump_Curves
             Try
                 Dim data = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, UnitOperations.Auxiliary.PumpOps.Curve))(text)
                 selectedpump.Curves = data
+                If data.First.Value.ImpellerDiameter > 0.0 Then
+                    selectedpump.ImpellerDiameter = data.First.Value.ImpellerDiameter
+                    selectedpump.ImpellerSpeed = data.First.Value.ImpellerSpeed
+                    selectedpump.DiameterUnit = data.First.Value.ImpellerDiameterUnit
+                End If
                 PumpCurvesEditorForm_Load(sender, e)
             Catch ex As Exception
                 MessageBox.Show(selectedpump.GetFlowsheet.GetTranslatedString("ErrorAddingComponent") & " " & ex.Message,
@@ -644,6 +649,11 @@ Public Class EditingForm_Pump_Curves
 
         If handler IsNot Nothing Then
             Try
+                For Each c In selectedpump.Curves.Values
+                    c.ImpellerDiameter = selectedpump.ImpellerDiameter
+                    c.ImpellerDiameterUnit = selectedpump.DiameterUnit
+                    c.ImpellerSpeed = selectedpump.ImpellerSpeed
+                Next
                 Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(selectedpump.Curves, Newtonsoft.Json.Formatting.Indented)
                 Using stream As New IO.MemoryStream()
                     Using writer As New StreamWriter(stream) With {.AutoFlush = True}
