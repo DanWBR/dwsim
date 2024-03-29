@@ -11,6 +11,7 @@ using DWSIM.Simulate365.Models;
 using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web.Settings;
 using Newtonsoft.Json;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.ProFeatures
 {
@@ -39,15 +40,13 @@ namespace DWSIM.ProFeatures
             if (isLoggedIn)
             {
                 OnInitialize();
-
             }
         }
 
         private void FormPortal_Load(object sender, EventArgs e)
         {
+            this.ChangeDefaultFont();
             OnInitialize();
-
-
         }
 
         private async Task OnInitialize()
