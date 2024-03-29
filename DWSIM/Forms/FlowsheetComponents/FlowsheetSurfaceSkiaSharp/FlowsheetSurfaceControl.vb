@@ -280,6 +280,8 @@ Public Class FlowsheetSurfaceControl
 
         If e.Effect = DragDropEffects.All Then
 
+            Dim pt = PointToClient(New Point(e.X, e.Y))
+
             Dim obj As Object() = Nothing
             obj = e.Data.GetData("System.Object[]")
 
@@ -301,18 +303,27 @@ Public Class FlowsheetSurfaceControl
             End If
 
             If c = SimulationObjectClass.None Then
-                If obj.Length = 3 Then
+
+                If obj.Length = 4 Then
+
                     Dim name As String = obj(2)
+                    Dim otype = obj(3)
+
+                    ProFeatures.Functions.CreateTransitionObject(FlowsheetObject, name, "Unit Operation", "Add", otype, New Double() {e.X / FlowsheetSurface.Zoom, e.Y / FlowsheetSurface.Zoom})
+
                     ProFeatures.Functions.DisplayTransitionForm(FlowsheetObject, name & " Unit Operation")
+
                     Exit Sub
+
                 Else
+
                     Exit Sub
+
                 End If
+
             End If
 
             Console.WriteLine(t.Name)
-
-            Dim pt = PointToClient(New Point(e.X, e.Y))
 
             If scriptpath <> "" Then
 

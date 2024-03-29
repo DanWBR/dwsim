@@ -363,10 +363,10 @@ Public Class FormFlowsheet
         End If
 
         If Not FormMain.IsPro Then
-            'Dim fg As New ProFeatures.FormGHG()
-            'fg.Show(dckPanel)
-            'Dim fc As New ProFeatures.FormCosting()
-            'fc.Show(dckPanel)
+            Dim fg As New ProFeatures.FormGHG With {.CurrentFlowsheet = Me}
+            fg.Show(dckPanel)
+            Dim fc As New ProFeatures.FormCosting With {.CurrentFlowsheet = Me}
+            fc.Show(dckPanel)
         End If
 
         Me.UpdateFormText()
@@ -687,6 +687,8 @@ Public Class FormFlowsheet
         }
 
         My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Screen Characteristics", "", data)
+
+        Task.Delay(3000).ContinueWith(Sub() UIThread(Sub() ProcessTransition()))
 
     End Sub
 
@@ -5544,15 +5546,27 @@ Public Class FormFlowsheet
     End Function
 
     Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StreamDataImporterTSMI.Click
+
+        ProFeatures.Functions.CreateTransitionObject(Me, "Stream Data Importer", "Tool", "", "", Nothing)
+
         ProFeatures.Functions.DisplayTransitionForm(Me, "Stream Data Importer")
+
     End Sub
 
     Private Sub ExcelReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcelReportsToolStripMenuItem.Click
+
+        ProFeatures.Functions.CreateTransitionObject(Me, "Excel Reports", "Tool", "", "", Nothing)
+
         ProFeatures.Functions.DisplayTransitionForm(Me, "Excel Reports")
+
     End Sub
 
     Private Sub ProcessFlowsheetDiagramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcessFlowsheetDiagramToolStripMenuItem.Click
+
+        ProFeatures.Functions.CreateTransitionObject(Me, "Process Flowsheet Diagram", "Tool", "", "", Nothing)
+
         ProFeatures.Functions.DisplayTransitionForm(Me, "Process Flowsheet Diagram")
+
     End Sub
 
     Private Sub CAPEOPENWarningTimer_Tick(sender As Object, e As EventArgs) Handles CAPEOPENWarningTimer.Tick
@@ -5564,6 +5578,137 @@ Public Class FormFlowsheet
         Else
             PanelCOWarning.Visible = False
         End If
+
+    End Sub
+
+    Private Sub ProcessTransition()
+
+        If Options.FlowsheetTransitionObject IsNot Nothing Then
+
+            Dim ts = Options.FlowsheetTransitionObject
+
+            Select Case ts.FeatureType
+
+                Case "Property Package"
+
+                    If ts.Location = "Simulation Wizard" Then
+
+                        Dim fw As New FormSimulWizard
+                        AddHandler fw.Shown, Sub()
+
+                                                 fw.StepWizardControl1.NextPage()
+                                                 fw.StepWizardControl1.NextPage()
+
+                                                 Dim pp As PropertyPackages.PropertyPackage
+                                                 pp = FormMain.PropertyPackages(ts.FeatureName).Clone
+                                                 With pp
+                                                     pp.Tag = pp.ComponentName + " (" + (PropertyPackages.Count + 1).ToString() + ")"
+                                                     pp.UniqueID = "PP-" & Guid.NewGuid.ToString
+                                                     pp.Flowsheet = Me
+                                                 End With
+
+                                                 FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
+                                                 Options.PropertyPackages.Add(pp.UniqueID, pp)
+                                                 fw.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
+                                                 fw.dgvpp.Rows(fw.dgvpp.Rows.Count - 1).Selected = True
+
+                                             End Sub
+                        With fw
+                            .CurrentFlowsheet = Me
+                            .StartPosition = FormStartPosition.CenterScreen
+                            .WindowState = FormWindowState.Normal
+                            .ShowDialog(Me)
+                        End With
+
+                    Else
+
+                        FrmStSim1.CurrentFlowsheet = Me
+                        FrmStSim1.TabControl1.SelectedTab = FrmStSim1.TabPage2
+                        Me.FrmStSim1.Show(Me.dckPanel)
+
+                        Dim pp As PropertyPackages.PropertyPackage
+                        pp = FormMain.PropertyPackages(ts.FeatureName).Clone()
+
+                        With pp
+                            pp.Tag = pp.ComponentName + " (" + (PropertyPackages.Count + 1).ToString() + ")"
+                            pp.UniqueID = "PP-" & Guid.NewGuid.ToString
+                            pp.Flowsheet = Me
+                        End With
+
+                        FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
+                        Options.PropertyPackages.Add(pp.UniqueID, pp)
+                        FrmStSim1.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
+
+                        UpdateOpenEditForms()
+
+                    End If
+
+                Case "Unit Operation"
+
+                    Dim o = My.Application.MainWindowForm.ExternalUnitOperations.Values.Where(Function(v) v.GetType().FullName.Equals(ts.Location)).FirstOrDefault()
+                    Dim t = o.GetType()
+
+                    FormSurface.AddObjectToSurface(ObjectType.External,
+                                                   ts.Position(0),
+                                                   ts.Position(1),
+                                                   False, "", "", Activator.CreateInstance(t))
+
+                Case "Heatmaps"
+
+                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("E9484EF4-1FD5-481C-8E5D-B838D106A407")
+                    Dim he As IExtender4 = hec.Collection(0)
+                    he.SetParameter("DrawHeatmaps", True)
+                    GetSurface().DrawAdditionalItems = True
+
+                Case "Live Flows"
+
+                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("E9484EF4-1FD5-481C-8E5D-B838D106A407")
+                    Dim he As IExtender4 = hec.Collection(0)
+                    he.SetParameter("DrawLiveFlows", True)
+                    GetSurface().DrawAdditionalItems = True
+
+                Case "Costing"
+
+                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("212ad7bf-b9b9-47c1-9386-c695ee4324b4")
+                    Dim he As IExtender4 = hec.Collection(0)
+                    he.SetParameter("Select", True)
+
+                Case "GHG Emissions"
+
+                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("8ffa4569-421f-474b-a44c-fa0ab59920f5")
+                    Dim he As IExtender4 = hec.Collection(0)
+                    he.SetParameter("Select", True)
+
+                Case "Tool"
+
+                    Select Case ts.FeatureName
+
+                        Case "Excel Reports"
+
+                            Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("fd83c303-5dec-4038-8602-6f0a6c411091")
+                            Dim he As IExtender = hec.Collection(0)
+                            he.Run()
+
+                        Case "Process Flowsheet Diagram"
+
+                            Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("1a6f3989-93a4-4b39-873b-b3c99549eae4")
+                            Dim he As IExtender = hec.Collection(0)
+                            he.Run()
+
+                        Case "Stream Data Importer"
+
+                            Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("713AA5A8-8ADE-420B-BEFF-47117E7807FB")
+                            Dim he As IExtender = hec.Collection(0)
+                            he.Run()
+
+                    End Select
+
+            End Select
+
+        End If
+
 
     End Sub
 

@@ -3988,12 +3988,12 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub tsmiHeatMap_Click(sender As Object, e As EventArgs) Handles tsmiHeatMap.Click
-        Dim fhm As New FormHeatMaps()
+        Dim fhm As New FormHeatMaps() With {.CurrentFlowsheet = Flowsheet}
         fhm.ShowDialog(Me)
     End Sub
 
     Private Sub tsmiLiveFlow_Click(sender As Object, e As EventArgs) Handles tsmiLiveFlow.Click
-        Dim flf As New FormLiveFlows()
+        Dim flf As New FormLiveFlows() With {.CurrentFlowsheet = Flowsheet}
         flf.ShowDialog(Me)
     End Sub
 
@@ -4112,7 +4112,7 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 24
             btnLeft.Height = 24
             FlowsheetSurface.ControlPanelMode = True
-            SplitContainerHorizontal.Panel2Collapsed = True
+            SplitContainerVertical.Panel2Collapsed = True
         Else
             btnDown.Visible = False
             btnUp.Visible = False
@@ -4123,7 +4123,7 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 1
             btnLeft.Height = 1
             FlowsheetSurface.ControlPanelMode = False
-            SplitContainerHorizontal.Panel2Collapsed = False
+            SplitContainerVertical.Panel2Collapsed = False
         End If
         FControl.Invalidate()
 

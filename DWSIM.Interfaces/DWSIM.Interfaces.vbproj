@@ -105,6 +105,7 @@
     <Compile Include="IEnergyStream.vb" />
     <Compile Include="IFlowsheetResults.vb" />
     <Compile Include="IFlowsheetSolver.vb" />
+    <Compile Include="IFlowsheetTransitionRestore.vb" />
     <Compile Include="IGHGEmissions.vb" />
     <Compile Include="IProductInformation.vb" />
     <Compile Include="ICompound.vb" />

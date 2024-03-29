@@ -72,3 +72,9 @@ Public Interface IExtender3
     Sub ReleaseResources()
 
 End Interface
+
+Public Interface IExtender4
+
+    Sub SetParameter(pname As String, pvalue As Object)
+
+End Interface

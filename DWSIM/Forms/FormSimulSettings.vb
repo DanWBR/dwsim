@@ -1330,8 +1330,13 @@ Public Class FormSimulSettings
         CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
 
         If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
+
+            ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value, "Property Package", "Add", "Simulation Settings", Nothing)
+
             ProFeatures.Functions.DisplayTransitionForm(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value + " Property Package")
+
             Exit Sub
+
         End If
 
         Dim pp As PropertyPackages.PropertyPackage

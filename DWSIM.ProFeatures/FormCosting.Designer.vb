@@ -52,13 +52,12 @@ Partial Class FormCosting
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(675, 91)
+        Me.Label4.Location = New System.Drawing.Point(675, 68)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(228, 29)
+        Me.Label4.Size = New System.Drawing.Size(228, 43)
         Me.Label4.TabIndex = 14
         Me.Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Label4.Visible = False
         '
         'Button2
         '
@@ -66,11 +65,11 @@ Partial Class FormCosting
         Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(166, Byte), Integer), CType(CType(13, Byte), Integer))
         Me.Button2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(675, 34)
+        Me.Button2.Location = New System.Drawing.Point(675, 11)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(228, 50)
         Me.Button2.TabIndex = 13
-        Me.Button2.Text = "Get a Free Pro Trial"
+        Me.Button2.Text = "Switch to DWSIM Pro"
         Me.Button2.UseVisualStyleBackColor = False
         '
         'PictureBox2
