@@ -1313,17 +1313,17 @@ Namespace UnitOperations
             Select Case material
                 Case FlowSheet.GetTranslatedString("AoComum"), "Steel"
                     kp = -0.000000004 * T ^ 3 - 0.00002 * T ^ 2 + 0.021 * T + 33.743
-                Case FlowSheet.GetTranslatedString("AoCarbono"), "CarbonSteel"
+                Case FlowSheet.GetTranslatedString("AoCarbono"), "CarbonSteel", "Carbon Steel"
                     kp = 0.000000007 * T ^ 3 - 0.00002 * T ^ 2 - 0.0291 * T + 70.765
-                Case FlowSheet.GetTranslatedString("FerroBottomido"), "CastIron"
+                Case FlowSheet.GetTranslatedString("FerroBottomido"), "CastIron", "Cast Iron"
                     kp = -0.00000008 * T ^ 3 + 0.0002 * T ^ 2 - 0.211 * T + 127.99
-                Case FlowSheet.GetTranslatedString("AoInoxidvel"), "StainlessSteel"
+                Case FlowSheet.GetTranslatedString("AoInoxidvel"), "StainlessSteel", "Stainless Steel"
                     kp = 14.6 + 0.0127 * (T - 273.15)
                 Case "PVC"
                     kp = 0.16
                 Case "PVC+PFRV"
                     kp = 0.16
-                Case FlowSheet.GetTranslatedString("CommercialCopper"), "CommercialCopper"
+                Case FlowSheet.GetTranslatedString("CommercialCopper"), "CommercialCopper", "Commercial Copper"
                     kp = 420.75 - 0.068493 * T
                 Case Else
                     Try
