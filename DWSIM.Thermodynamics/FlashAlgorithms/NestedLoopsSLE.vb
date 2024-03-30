@@ -1133,6 +1133,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                 If Vz(i) <> 0 Then
                     Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
                     If Double.IsInfinity(Vy(i)) Then Vy(i) = 0.0#
+                    Vx(i) = Vy(i) / Ki(i)
                 Else
                     Vy(i) = 0
                     Vx(i) = 0
@@ -1141,7 +1142,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
             Loop Until i = n + 1
 
             Vy = Vy.NormalizeY()
-            Vx = Vz.SubtractY(Vy.MultiplyConstY(V)).MultiplyConstY(1 / L)
+            Vx = Vx.NormalizeY()
 
             If PP.AUX_IS_SINGLECOMP(Vz) Then
                 WriteDebugInfo("PV Flash [SLE]: Converged in 1 iteration.")

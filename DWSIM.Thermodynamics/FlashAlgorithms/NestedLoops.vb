@@ -705,7 +705,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
-                    If cnt > 20 Then xvals.Add(x1)
+                    xvals.Add(x1)
                     fx_ant = fx
 
                     Dim herrobj As Object
@@ -749,7 +749,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         Throw ex
                     End If
 
-                    If cnt > 20 Then fxvals.Add(fx)
+                    fxvals.Add(fx)
 
                     If Abs(fx) <= tolEXT Then
                         Exit Do
@@ -765,27 +765,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         'oscillating around the solution.
 
-                        Dim bmin As New Brent
-
-                        Dim interp = MathNet.Numerics.Interpolate.Linear(xvals.ToArray(), fxvals.ToArray())
-
-                        x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
-                                            Function(tval)
-                                                Return interp.Interpolate(tval)
-                                            End Function)
-
-                        herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
-                        fx = herrobj(0)
-
                         If Math.Abs(fx / H) > 0.01 Then
 
                             If interpolate Then
 
-                                Exit Do
+                                Dim dxb = xvals.Max - xvals.Min
+
+                                For i = 0 To 100
+                                    x1 = xvals.Min + dxb * i / 100.0
+                                    herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
+                                    fx = herrobj(0)
+                                    If Math.Abs(fx / H) < 0.01 Then Exit For
+                                Next
+
+                                If Math.Abs(fx / H) > 0.01 Then
+                                    Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
+                                Else
+                                    Exit Do
+                                End If
 
                             Else
 
-                                Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
+                                    Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
 
                             End If
 
@@ -3234,7 +3235,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim tmp As Object() = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
                 T = tmp(4)
                 Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-                If hres.SolidPhase And Not PP.ForcedSolids.Count > 0 Then
+                Dim totalsolids = PP.ForcedSolids.Count
+                Dim cprops = PP.DW_GetConstantProperties()
+                For i = 0 To cprops.Count - 1
+                    totalsolids += Convert.ToInt32(cprops(i).IsSolid)
+                Next
+                If hres.SolidPhase And Not totalsolids > 0 Then
                     tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, False, Nothing)
                 End If
                 L1 = tmp(0)
