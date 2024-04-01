@@ -74,7 +74,7 @@ namespace DWSIM.ProFeatures
             // LinkLabel1
             // 
             this.LinkLabel1.AutoSize = true;
-            this.LinkLabel1.Location = new System.Drawing.Point(364, 12);
+            this.LinkLabel1.Location = new System.Drawing.Point(375, 12);
             this.LinkLabel1.Margin = new System.Windows.Forms.Padding(0);
             this.LinkLabel1.Name = "LinkLabel1";
             this.LinkLabel1.Size = new System.Drawing.Size(32, 13);
@@ -106,7 +106,7 @@ namespace DWSIM.ProFeatures
             // Label2
             // 
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(395, 13);
+            this.Label2.Location = new System.Drawing.Point(412, 13);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(82, 13);
             this.Label2.TabIndex = 4;

@@ -44,6 +44,7 @@ Imports DWSIM.Simulate365.Services
 Imports DWSIM.Simulate365.FormFactories
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports DWSIM.ProFeatures
+Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
 
 Public Class FormMain
 
@@ -4494,19 +4495,29 @@ Label_00CC:
 
     End Sub
 
-    Public Function SaveFile(ByVal saveasync As Boolean, Optional dashboardpicker As Boolean = False) As String
+    'Make sure that IVirtualFile is not WindowsFile if shouldSaveToDashboard, because Save causes it to save it to file system
+    Function IsCorrectVirtualFile(ByVal shouldSaveToDashboard As Boolean, ByVal file As IVirtualFile) As Boolean
+        If shouldSaveToDashboard = True Then
+            If TypeOf file Is WindowsFile Then
+                Return False
+            End If
+        End If
+        Return True
+    End Function
+
+    Public Function SaveFile(ByVal saveasync As Boolean, Optional saveToDashboard As Boolean = False) As String
 
         If My.Computer.Keyboard.ShiftKeyDown Then saveasync = False
 
         Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
 
-        If dashboardpicker Then
+        If saveToDashboard Then
             filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
         End If
 
         Dim filename As String
 
-        dashboardpicker = dashboardpicker Or TypeOf filePickerForm Is S365FilePickerForm
+        saveToDashboard = saveToDashboard Or TypeOf filePickerForm Is S365FilePickerForm
 
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
@@ -4517,7 +4528,7 @@ Label_00CC:
                 End If
 
                 ' save window file to existing location
-                If File.Exists(form2.Options.FilePath) And dashboardpicker = False Then
+                If File.Exists(form2.Options.FilePath) And saveToDashboard = False Then
                     Dim handler = New SharedClassesCSharp.FilePicker.Windows.WindowsFile(form2.Options.FilePath)
                     ' If file exists, save to same location
                     'Application.DoEvents()
@@ -4551,13 +4562,14 @@ Label_00CC:
                     Catch ex As Exception
                     End Try
                     Dim handler As IVirtualFile = Nothing
-                    If (form2.Options.VirtualFile IsNot Nothing) Then
+                    If (form2.Options.VirtualFile IsNot Nothing And IsCorrectVirtualFile(saveToDashboard, form2.Options.VirtualFile)) Then
                         handler = form2.Options.VirtualFile
                     Else
                         handler = filePickerForm.ShowSaveDialog(
                                   New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
                                     {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml", ".pfdx"})
                                   })
+                        form2.Options.VirtualFile = handler
                     End If
                     If handler IsNot Nothing Then
                         SaveBackup(handler)
