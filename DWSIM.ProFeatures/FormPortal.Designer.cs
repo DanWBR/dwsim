@@ -91,13 +91,12 @@ namespace DWSIM.ProFeatures
             // 
             // NoLicensePanel
             // 
-            this.NoLicensePanel.AutoSize = true;
             this.NoLicensePanel.Controls.Add(this.Label2);
             this.NoLicensePanel.Controls.Add(this.Label1);
             this.NoLicensePanel.Controls.Add(this.LinkLabel1);
-            this.NoLicensePanel.Location = new System.Drawing.Point(3, 26);
+            this.NoLicensePanel.Location = new System.Drawing.Point(3, 33);
             this.NoLicensePanel.Name = "NoLicensePanel";
-            this.NoLicensePanel.Size = new System.Drawing.Size(410, 17);
+            this.NoLicensePanel.Size = new System.Drawing.Size(580, 23);
             this.NoLicensePanel.TabIndex = 4;
             this.NoLicensePanel.Visible = false;
             // 
@@ -113,11 +112,10 @@ namespace DWSIM.ProFeatures
             // LoadingPanel
             // 
             this.LoadingPanel.AutoScroll = true;
-            this.LoadingPanel.AutoSize = true;
             this.LoadingPanel.Controls.Add(this.StatusMessage);
             this.LoadingPanel.Location = new System.Drawing.Point(3, 3);
             this.LoadingPanel.Name = "LoadingPanel";
-            this.LoadingPanel.Size = new System.Drawing.Size(130, 17);
+            this.LoadingPanel.Size = new System.Drawing.Size(580, 24);
             this.LoadingPanel.TabIndex = 5;
             this.LoadingPanel.Visible = false;
             // 
@@ -135,13 +133,12 @@ namespace DWSIM.ProFeatures
             // 
             // notLoggedInPanel
             // 
-            this.notLoggedInPanel.AutoSize = true;
             this.notLoggedInPanel.Controls.Add(this.label3);
             this.notLoggedInPanel.Controls.Add(this.label4);
             this.notLoggedInPanel.Controls.Add(this.linkLabel2);
-            this.notLoggedInPanel.Location = new System.Drawing.Point(3, 49);
+            this.notLoggedInPanel.Location = new System.Drawing.Point(3, 62);
             this.notLoggedInPanel.Name = "notLoggedInPanel";
-            this.notLoggedInPanel.Size = new System.Drawing.Size(137, 16);
+            this.notLoggedInPanel.Size = new System.Drawing.Size(580, 22);
             this.notLoggedInPanel.TabIndex = 6;
             // 
             // label3
@@ -156,7 +153,7 @@ namespace DWSIM.ProFeatures
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 2);
+            this.label4.Location = new System.Drawing.Point(3, 3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 6;
@@ -165,7 +162,7 @@ namespace DWSIM.ProFeatures
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(39, 2);
+            this.linkLabel2.Location = new System.Drawing.Point(39, 3);
             this.linkLabel2.Margin = new System.Windows.Forms.Padding(0);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(33, 13);
@@ -176,11 +173,10 @@ namespace DWSIM.ProFeatures
             // 
             // SuccessPanel
             // 
-            this.SuccessPanel.AutoSize = true;
             this.SuccessPanel.Controls.Add(this.label5);
-            this.SuccessPanel.Location = new System.Drawing.Point(3, 71);
+            this.SuccessPanel.Location = new System.Drawing.Point(3, 90);
             this.SuccessPanel.Name = "SuccessPanel";
-            this.SuccessPanel.Size = new System.Drawing.Size(358, 16);
+            this.SuccessPanel.Size = new System.Drawing.Size(580, 27);
             this.SuccessPanel.TabIndex = 7;
             this.SuccessPanel.Visible = false;
             // 
@@ -228,7 +224,7 @@ namespace DWSIM.ProFeatures
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(700, 558);
+            this.ClientSize = new System.Drawing.Size(691, 558);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -244,7 +240,6 @@ namespace DWSIM.ProFeatures
             this.LoadingPanel.ResumeLayout(false);
             this.LoadingPanel.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.notLoggedInPanel.ResumeLayout(false);
             this.notLoggedInPanel.PerformLayout();
             this.SuccessPanel.ResumeLayout(false);
