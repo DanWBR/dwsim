@@ -92,16 +92,16 @@ namespace DWSIM.ProFeatures
         {
             if (TrialLicenseCreatedMessageCount + 1 <= TrialLicenseCreatedMessages.Count)
             {
-                StatusMessage.Text = TrialLicenseCreatedMessages[TrialLicenseCreatedMessageCount];
                 TrialLicenseCreatedMessageCount += 1;
-                ProgressBar1.Value = Convert.ToInt32(TrialLicenseCreatedMessageCount / (double)TrialLicenseCreatedMessages.Count * 100d);
+                this.UIThread(() => {
+                    StatusMessage.Text = TrialLicenseCreatedMessages[TrialLicenseCreatedMessageCount];
+                });   
             }
             else
             {
                 Timer1.Stop();
                 SaveFlowsheet();
             }
-
         }
 
         private  void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
