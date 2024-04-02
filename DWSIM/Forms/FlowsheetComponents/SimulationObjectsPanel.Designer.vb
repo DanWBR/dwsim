@@ -25,8 +25,6 @@ Partial Class SimulationObjectsPanel
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SimulationObjectsPanel))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.PanelPro = New System.Windows.Forms.FlowLayoutPanel()
-        Me.CheckBox16 = New System.Windows.Forms.CheckBox()
         Me.PanelStreams = New System.Windows.Forms.FlowLayoutPanel()
         Me.CheckBox15 = New System.Windows.Forms.CheckBox()
         Me.PanelControllers = New System.Windows.Forms.FlowLayoutPanel()
@@ -67,53 +65,37 @@ Partial Class SimulationObjectsPanel
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelPro, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox16, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.PanelStreams, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox15, 0, 30)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelControllers, 0, 29)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox14, 0, 28)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelIndicators, 0, 27)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox13, 0, 26)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelLogical, 0, 25)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox12, 0, 24)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelCustomModelsFOSSEE, 0, 23)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox11, 0, 22)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelUser, 0, 21)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox10, 0, 20)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelCE, 0, 19)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox9, 0, 18)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelSolids, 0, 17)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox8, 0, 16)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelColumns, 0, 15)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox7, 0, 14)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelReactors, 0, 13)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox6, 0, 12)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelExchangers, 0, 11)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox5, 0, 10)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelMixers, 0, 9)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox4, 0, 8)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox3, 0, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelPressure, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox15, 0, 28)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelControllers, 0, 27)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox14, 0, 26)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelIndicators, 0, 25)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox13, 0, 24)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelLogical, 0, 23)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox12, 0, 22)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelCustomModelsFOSSEE, 0, 21)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox11, 0, 20)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelUser, 0, 19)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox10, 0, 18)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelCE, 0, 17)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox9, 0, 16)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelSolids, 0, 15)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox8, 0, 14)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelColumns, 0, 13)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox7, 0, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelReactors, 0, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox6, 0, 10)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelExchangers, 0, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox5, 0, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelMixers, 0, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox4, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox3, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelPressure, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox2, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelSeparators, 0, 7)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelOther, 0, 31)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox2, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelSeparators, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelOther, 0, 29)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        '
-        'PanelPro
-        '
-        resources.ApplyResources(Me.PanelPro, "PanelPro")
-        Me.PanelPro.BackColor = System.Drawing.Color.White
-        Me.PanelPro.Name = "PanelPro"
-        '
-        'CheckBox16
-        '
-        resources.ApplyResources(Me.CheckBox16, "CheckBox16")
-        Me.CheckBox16.BackColor = System.Drawing.SystemColors.Control
-        Me.CheckBox16.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
-        Me.CheckBox16.Name = "CheckBox16"
-        Me.CheckBox16.UseVisualStyleBackColor = False
         '
         'PanelStreams
         '
@@ -399,6 +381,4 @@ Partial Class SimulationObjectsPanel
     Friend WithEvents Panel1 As Panel
     Public WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents PanelPro As FlowLayoutPanel
-    Friend WithEvents CheckBox16 As CheckBox
 End Class

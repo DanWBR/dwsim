@@ -36,15 +36,32 @@ namespace DWSIM.ProFeatures
 
             foreach (var panel in Panels)
             {
-                AddUnitOp("(Semi)Batch Reactor", "ProExtensions.UnitOperations.SemiBatchReactor.SemiBatchReactor", My.Resources.Resources.jacketedreactor_icon, panel);
-                AddUnitOp("Falling Film Evaporator", "DWSIM.AdditionalUnitOperations.FallingFilmEvaporator", My.Resources.Resources.fallingfilm_icon, panel);
-                AddUnitOp("PPBDesigner Column", "ProExtensions.PPBDesigner.PPBDesignerUnitOperation", My.Resources.Resources.ppbdesigner, panel);
-                AddUnitOp("Three-Phase/Reactive Column (Pro)", "ProExtensions.UnitOperations.ProRigorousColumns.DistillationColumnPro", My.Resources.Resources.col_dc_32, panel);
-                AddUnitOp("Pipe Network", "DWSIM.UnitOperations.PipeNetworkUnitOperation", My.Resources.Resources.pipe_network_icon, panel);
-                AddUnitOp("Neural Network (Pro)", "DWSIM.UnitOperations.NeuralNetworkUnitOperation", My.Resources.Resources.icons8_artificial_intelligence, panel);
-                AddUnitOp("Energy Stream Splitter", "DWSIM.AdditionalUnitOperations.EnergySplitter", My.Resources.Resources.uo_split_32, panel);
-                AddUnitOp("Material Stream Switch", "DWSIM.AdditionalUnitOperations.MaterialStreamSwitch", My.Resources.Resources.switch_material, panel);
-                AddUnitOp("Energy Stream Switch", "DWSIM.AdditionalUnitOperations.EnergyStreamSwitch", My.Resources.Resources.switch_energy, panel);
+                switch (panel.Name)
+                {
+                    case "PanelPressure":
+                        AddUnitOp("Pipe Network", "DWSIM.UnitOperations.PipeNetworkUnitOperation", My.Resources.Resources.pipe_network_icon, panel);
+                        break;
+                    case "PanelMixers":
+                        AddUnitOp("Energy Stream Splitter", "DWSIM.AdditionalUnitOperations.EnergySplitter", My.Resources.Resources.uo_split_32, panel);
+                        break;
+                    case "PanelExchangers":
+                        AddUnitOp("Falling Film Evaporator", "DWSIM.AdditionalUnitOperations.FallingFilmEvaporator", My.Resources.Resources.fallingfilm_icon, panel);
+                        break;
+                    case "PanelColumns":
+                        AddUnitOp("PPBDesigner Column", "ProExtensions.PPBDesigner.PPBDesignerUnitOperation", My.Resources.Resources.ppbdesigner, panel);
+                        AddUnitOp("Three-Phase/Reactive Column (Pro)", "ProExtensions.UnitOperations.ProRigorousColumns.DistillationColumnPro", My.Resources.Resources.col_dc_32, panel);
+                        break;
+                    case "PanelUser":
+                        AddUnitOp("Neural Network (Pro)", "DWSIM.UnitOperations.NeuralNetworkUnitOperation", My.Resources.Resources.icons8_artificial_intelligence, panel);
+                        break;
+                    case "PanelLogical":
+                        AddUnitOp("Material Stream Switch", "DWSIM.AdditionalUnitOperations.MaterialStreamSwitch", My.Resources.Resources.switch_material, panel);
+                        AddUnitOp("Energy Stream Switch", "DWSIM.AdditionalUnitOperations.EnergyStreamSwitch", My.Resources.Resources.switch_energy, panel);
+                        break;
+                    case "PanelReactors":
+                        AddUnitOp("(Semi)Batch Reactor", "ProExtensions.UnitOperations.SemiBatchReactor.SemiBatchReactor", My.Resources.Resources.jacketedreactor_icon, panel);
+                        break;
+                }
             }
 
         }
