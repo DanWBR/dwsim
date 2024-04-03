@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-// 2017-09-02 Modified/Updated for DWSIM by Daniel Medeiros
+// 2017-09-02 Modified/Updated for DWSIM by Daniel Wagner
 
 using System;
 using System.Collections.Generic;

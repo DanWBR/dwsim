@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("PR/SRK Property Packages with T/P-dep Interaction Parameters")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.PR-SRK.TDep")>
-<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Wagner")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

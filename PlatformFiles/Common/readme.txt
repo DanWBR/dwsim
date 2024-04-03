@@ -1,8 +1,8 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
 Version 8.7.0
-Copyright (c) 2017-2024 Daniel Medeiros and contributors
-Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
+Copyright (c) 2017-2024 Daniel Wagner and contributors
+Copyright (c) 2008-2016 Daniel Wagner, Gregor Reichert, Gustavo Leon
 ==================================================
 
 DWSIM is a software for modeling, simulation and optimization of steady-state and dynamic chemical processes.
@@ -614,357 +614,357 @@ Version 7.1.0
 Version 7.0.1
 
 Author              Description
-Daniel Medeiros     Fixed bugs in rigorous column editor
-Daniel Medeiros     Fixed issue 229: Bug in conversion reactor
-Daniel Medeiros     Worksheets now have 65536 rows
-Daniel Medeiros     Fixed issue 234: Adjuster error between target and manipulated value
-Daniel Medeiros     Fixed issue 234: zero-flow errors in some unit operations
-Daniel Medeiros     Fixed issue 230: bug in compound viewer
-Daniel Medeiros     Other minor fixes and enhancements
+Daniel Wagner     Fixed bugs in rigorous column editor
+Daniel Wagner     Fixed issue 229: Bug in conversion reactor
+Daniel Wagner     Worksheets now have 65536 rows
+Daniel Wagner     Fixed issue 234: Adjuster error between target and manipulated value
+Daniel Wagner     Fixed issue 234: zero-flow errors in some unit operations
+Daniel Wagner     Fixed issue 230: bug in compound viewer
+Daniel Wagner     Other minor fixes and enhancements
 
 Version 7.0.0
 
 Author              Description
 CGC GmbH            Integration with Simulate 365 account + File Picker (Classic UI)
 Gregor Reichert     Output Energy Stream - Conversion Reactor 
-Daniel Medeiros     Added CPUI editor for Property Package Equilibrium settings
-Daniel Medeiros     Added CPUI Editor for Gibbs Reactor's Element Matrix
-Daniel Medeiros     Fixed negative experimental thermal conductivity in some compounds
-Daniel Medeiros     Fixed issue with LK reduced volume calculation
-Daniel Medeiros     Fixed issue with PR78 model
+Daniel Wagner     Added CPUI editor for Property Package Equilibrium settings
+Daniel Wagner     Added CPUI Editor for Gibbs Reactor's Element Matrix
+Daniel Wagner     Fixed negative experimental thermal conductivity in some compounds
+Daniel Wagner     Fixed issue with LK reduced volume calculation
+Daniel Wagner     Fixed issue with PR78 model
 Gregor Reichert     Fixed Sensitivity Analysis
-Daniel Medeiros     Fixed a NL PH Flash issue
-Daniel Medeiros     Fixed Flowsheet Optimizer layout (Classic UI)
-Daniel Medeiros     Fixed an issue with cubic equation root finding
-Daniel Medeiros     Other minor fixes and enhancements
+Daniel Wagner     Fixed a NL PH Flash issue
+Daniel Wagner     Fixed Flowsheet Optimizer layout (Classic UI)
+Daniel Wagner     Fixed an issue with cubic equation root finding
+Daniel Wagner     Other minor fixes and enhancements
 
 Version 6.7.1
 
 Author              Description
-Daniel Medeiros     Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
-Daniel Medeiros     Added Ideal Gas Heat Capacity as a Phase property
-Daniel Medeiros     Fixed issue 213: Mac OS - Binary Envelope failed
-Daniel Medeiros     Fixed issue 214: Mac OS - Objects Alignment button get crash
-Daniel Medeiros     Fixed issue 216: Carbon Combustion sample cannot be calculated
-Daniel Medeiros     Fixed issue with saturation condition calculations
-Daniel Medeiros     Fixed duplicate name when adding objects to the flowsheet
+Daniel Wagner     Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
+Daniel Wagner     Added Ideal Gas Heat Capacity as a Phase property
+Daniel Wagner     Fixed issue 213: Mac OS - Binary Envelope failed
+Daniel Wagner     Fixed issue 214: Mac OS - Objects Alignment button get crash
+Daniel Wagner     Fixed issue 216: Carbon Combustion sample cannot be calculated
+Daniel Wagner     Fixed issue with saturation condition calculations
+Daniel Wagner     Fixed duplicate name when adding objects to the flowsheet
 
 Version 6.7.0
 
 Author              Description
-Daniel Medeiros     IronPython Interactive Console (Classic UI)
-Daniel Medeiros     Live View for Dynamic Integrator (Classic UI)
-Daniel Medeiros     Fixed issues with Nested Loops Flash
-Daniel Medeiros     Fixed Equilibrium Reactor model
-Daniel Medeiros     Fixed issues with Pipe Hydraulic Profile editor (Classic UI)
-Daniel Medeiros     Fixed Classic UI HiDPI layout
-Daniel Medeiros     Fixed issue 207: Mix liquid and liquid1 properties different even for single liquid
-Daniel Medeiros     Fixed issue 199: Minor issue with Splitter object
+Daniel Wagner     IronPython Interactive Console (Classic UI)
+Daniel Wagner     Live View for Dynamic Integrator (Classic UI)
+Daniel Wagner     Fixed issues with Nested Loops Flash
+Daniel Wagner     Fixed Equilibrium Reactor model
+Daniel Wagner     Fixed issues with Pipe Hydraulic Profile editor (Classic UI)
+Daniel Wagner     Fixed Classic UI HiDPI layout
+Daniel Wagner     Fixed issue 207: Mix liquid and liquid1 properties different even for single liquid
+Daniel Wagner     Fixed issue 199: Minor issue with Splitter object
 
 Version 6.6.3
 
 Author              Description
-Daniel Medeiros     Fixed Equilibrium Reactor Adiabatic calculation mode
-Daniel Medeiros     Fixed some Classic UI issues
-Daniel Medeiros     Fixed issues with Pipe Segment editor (Classic UI)
-Daniel Medeiros     Fixed an issue with Material Stream flow specification (#198)
-Daniel Medeiros     Fixed issues with Petroleum Characterization utilities
-Daniel Medeiros     Fixed Splitter balance check
+Daniel Wagner     Fixed Equilibrium Reactor Adiabatic calculation mode
+Daniel Wagner     Fixed some Classic UI issues
+Daniel Wagner     Fixed issues with Pipe Segment editor (Classic UI)
+Daniel Wagner     Fixed an issue with Material Stream flow specification (#198)
+Daniel Wagner     Fixed issues with Petroleum Characterization utilities
+Daniel Wagner     Fixed Splitter balance check
 
 Version 6.6.2
 
 Author              Description
-Daniel Medeiros     DWSIM now uses the System Font in Classic UI
-Daniel Medeiros     Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
-Daniel Medeiros     Fixed a regression in Pipe Segment UO
-Daniel Medeiros     Fixed Classic UI layout in High-DPI displays
-Daniel Medeiros     Input Boxes can now be used in Steady-State mode
+Daniel Wagner     DWSIM now uses the System Font in Classic UI
+Daniel Wagner     Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
+Daniel Wagner     Fixed a regression in Pipe Segment UO
+Daniel Wagner     Fixed Classic UI layout in High-DPI displays
+Daniel Wagner     Input Boxes can now be used in Steady-State mode
 
 Version 6.6.1
 
 Author              Description
-Daniel Medeiros     Updated User's guide
-Daniel Medeiros     Updated tooltips for Script Editor in Classic UI
-Daniel Medeiros     Fixed issues with File Provider
-Daniel Medeiros     Fixed issues with CoolProp Property Package
-Daniel Medeiros     Improved Pipe Segment UO calculation stability
-Daniel Medeiros     Steady-State Controller Control Panel is now dockable (Classic UI)
-Daniel Medeiros     Added energy stream calculation mode to cooler
-Daniel Medeiros     Added Diameter as an editable property for PFR
-Daniel Medeiros     Added Flowsheet.ClearLog() function
-Daniel Medeiros     Implemented Temperature Approach for Equilibrium reactions
+Daniel Wagner     Updated User's guide
+Daniel Wagner     Updated tooltips for Script Editor in Classic UI
+Daniel Wagner     Fixed issues with File Provider
+Daniel Wagner     Fixed issues with CoolProp Property Package
+Daniel Wagner     Improved Pipe Segment UO calculation stability
+Daniel Wagner     Steady-State Controller Control Panel is now dockable (Classic UI)
+Daniel Wagner     Added energy stream calculation mode to cooler
+Daniel Wagner     Added Diameter as an editable property for PFR
+Daniel Wagner     Added Flowsheet.ClearLog() function
+Daniel Wagner     Implemented Temperature Approach for Equilibrium reactions
 Gregor Reichert     Fixed an issue with SVE calculation
 Gregor Reichert     Fixed an issue with Solids Separator UO
-Daniel Medeiros     Other minor fixes and enhancements
+Daniel Wagner     Other minor fixes and enhancements
 
 Fixed issues from GitHub issue tracker (https://github.com/DanWBR/dwsim6/issues/):
 
-Daniel Medeiros     [Enhancement] Format Number in the Reaction Interface Support Engineering Notation #185
-Daniel Medeiros     [Bug] Script Manager: Click on API Help Button Opens Explorer with Page Not found #178
-Daniel Medeiros     [Bug] Copy Data to Clipboard in Material Streams Interface #176
-Daniel Medeiros     [Bug] Kinetic with Python Script the DO RO Shall be Hidden #175
-Daniel Medeiros     [Bug] Clicking on Open Python Script Editor Several Times Create Several Script Windows #174
-Daniel Medeiros     [Bug] A Product as a Base Component #172
-Daniel Medeiros     [Enhancement] Use Rate instead of Velocity in Reaction Interface #171
-Daniel Medeiros     [Bug] Basis Component in Reaction Interface #170
-Daniel Medeiros     [Bug] DWSIM Calculate conversions for Products #169
+Daniel Wagner     [Enhancement] Format Number in the Reaction Interface Support Engineering Notation #185
+Daniel Wagner     [Bug] Script Manager: Click on API Help Button Opens Explorer with Page Not found #178
+Daniel Wagner     [Bug] Copy Data to Clipboard in Material Streams Interface #176
+Daniel Wagner     [Bug] Kinetic with Python Script the DO RO Shall be Hidden #175
+Daniel Wagner     [Bug] Clicking on Open Python Script Editor Several Times Create Several Script Windows #174
+Daniel Wagner     [Bug] A Product as a Base Component #172
+Daniel Wagner     [Enhancement] Use Rate instead of Velocity in Reaction Interface #171
+Daniel Wagner     [Bug] Basis Component in Reaction Interface #170
+Daniel Wagner     [Bug] DWSIM Calculate conversions for Products #169
 
 Version 6.6.0
 
 Author              Description
-Daniel Medeiros     New 'Files' feature enables adding external files to the flowsheet
-Daniel Medeiros     Updated User Guide
-Daniel Medeiros     Added Inspector Report for Gibbs/Equilibrium Reactors
-Daniel Medeiros     Fixed Python Script Import/Export (Classic UI)
-Daniel Medeiros     Fixed async script execution
+Daniel Wagner     New 'Files' feature enables adding external files to the flowsheet
+Daniel Wagner     Updated User Guide
+Daniel Wagner     Added Inspector Report for Gibbs/Equilibrium Reactors
+Daniel Wagner     Fixed Python Script Import/Export (Classic UI)
+Daniel Wagner     Fixed async script execution
 
 Version 6.5.6
 
 Author              Description
-Daniel Medeiros     Fixed an issue with Compressor/Expander calculation
-Daniel Medeiros     Fixed an issue with Steam Tables Property Package
-Daniel Medeiros     Fixed an issue with the Pipe Segment properties editor (Cross-Platform UI)
+Daniel Wagner     Fixed an issue with Compressor/Expander calculation
+Daniel Wagner     Fixed an issue with Steam Tables Property Package
+Daniel Wagner     Fixed an issue with the Pipe Segment properties editor (Cross-Platform UI)
 
 Version 6.5.5
 
 Author              Description
-Daniel Medeiros     Python.NET Runtime now works with any Python 3.x distro
-Daniel Medeiros     Fixed issues with Rigorous Column solvers
-Daniel Medeiros     Pipe Segment UO's Hydraulic Profile editor now allows pasting from clipboard (Classic UI)
-Daniel Medeiros     Fixed error on duplicate external components
-Daniel Medeiros     Fixed an issue with Conversion Reactor UO
-Daniel Medeiros     Custom Actions for Flowsheet Object's Double Click event
-Daniel Medeiros     Other minor fixes and enhancements
+Daniel Wagner     Python.NET Runtime now works with any Python 3.x distro
+Daniel Wagner     Fixed issues with Rigorous Column solvers
+Daniel Wagner     Pipe Segment UO's Hydraulic Profile editor now allows pasting from clipboard (Classic UI)
+Daniel Wagner     Fixed error on duplicate external components
+Daniel Wagner     Fixed an issue with Conversion Reactor UO
+Daniel Wagner     Custom Actions for Flowsheet Object's Double Click event
+Daniel Wagner     Other minor fixes and enhancements
 
 Version 6.5.4
 
 Author              Description
-Daniel Medeiros     New Steam Tables (v2) Property Package supporting regions 4 and 5
+Daniel Wagner     New Steam Tables (v2) Property Package supporting regions 4 and 5
 Daniel/Gregor       Rewritten Flash Algorithm for single compounds
-Daniel Medeiros     New Interface for External Solvers
-Daniel Medeiros     Import/Export Scripts in Script Manager (Classic UI)
-Daniel Medeiros     Python.NET defaults to Python 3.9 on Windows OS
-Daniel Medeiros     Fixed an issue with the Python Script runner
-Daniel Medeiros     Fixed an issue with the Compound Creator
-Daniel Medeiros     Fixed an issue with text-to-number conversion in some regions
-Daniel Medeiros     Fixed Heat Exchanger Shell-and-Tube editor fouling units
-Daniel Medeiros     Fixed issues with UNIQUAC model and UNIQUAC/NRTL parameter estimation
-Daniel Medeiros     Fixed NRTL/UNIQUAC parameter estimation in Data Regression utility
-Daniel Medeiros     Do not display dynamic properties in steady-state mode
-Daniel Medeiros     Added Pressure Drops to listed Heat Exchanger properties
-Daniel Medeiros     Fixed an issue with Pipe Segment's property retrieval
-Daniel Medeiros     Fixed issue #155: Pressure-Enthalpy Flash with CAPE-OPEN Property Package fail for some Operation Units
+Daniel Wagner     New Interface for External Solvers
+Daniel Wagner     Import/Export Scripts in Script Manager (Classic UI)
+Daniel Wagner     Python.NET defaults to Python 3.9 on Windows OS
+Daniel Wagner     Fixed an issue with the Python Script runner
+Daniel Wagner     Fixed an issue with the Compound Creator
+Daniel Wagner     Fixed an issue with text-to-number conversion in some regions
+Daniel Wagner     Fixed Heat Exchanger Shell-and-Tube editor fouling units
+Daniel Wagner     Fixed issues with UNIQUAC model and UNIQUAC/NRTL parameter estimation
+Daniel Wagner     Fixed NRTL/UNIQUAC parameter estimation in Data Regression utility
+Daniel Wagner     Do not display dynamic properties in steady-state mode
+Daniel Wagner     Added Pressure Drops to listed Heat Exchanger properties
+Daniel Wagner     Fixed an issue with Pipe Segment's property retrieval
+Daniel Wagner     Fixed issue #155: Pressure-Enthalpy Flash with CAPE-OPEN Property Package fail for some Operation Units
 Anders Andreasen    Fixed issue #156: Bug in calculation of internal energy and Helmholtz energy
-Daniel Medeiros     Fixed issue #157: Multivariable Optimization and Sensitivity Analysis cannot use Spreadsheet variables
+Daniel Wagner     Fixed issue #157: Multivariable Optimization and Sensitivity Analysis cannot use Spreadsheet variables
 
 Version 6.5.3
 
 Author              Description
-Daniel Medeiros     Fixed crashes when opening the General Settings window (Classic UI)
-Daniel Medeiros     Added a Numerical Method setting to Equilibrium Calculations
-Daniel Medeiros     Python Script UO CAPE-OPEN Wrapper now supports Python.NET
-Daniel Medeiros     Fixed issues with Compound Creator (Classic UI)
-Daniel Medeiros     Other minor fixes and enhancements
+Daniel Wagner     Fixed crashes when opening the General Settings window (Classic UI)
+Daniel Wagner     Added a Numerical Method setting to Equilibrium Calculations
+Daniel Wagner     Python Script UO CAPE-OPEN Wrapper now supports Python.NET
+Daniel Wagner     Fixed issues with Compound Creator (Classic UI)
+Daniel Wagner     Other minor fixes and enhancements
 
 Version 6.5.2
 
 Author              Description
-Daniel Medeiros     Fixed issues with Python.NET Interpreter, which now defaults to Python 3.8
-Daniel Medeiros     Fixed issues with Excel Unit Operation
-Daniel Medeiros     Other bug fixes
+Daniel Wagner     Fixed issues with Python.NET Interpreter, which now defaults to Python 3.8
+Daniel Wagner     Fixed issues with Excel Unit Operation
+Daniel Wagner     Other bug fixes
 
 Version 6.5.1
 
 Author              Description
-Daniel Medeiros     New Feature: Add Chart Objects from Charts collection to the Flowsheet
-Daniel Medeiros     New Feature: Export compound data to Excel file
-Daniel Medeiros     Updated IronPython+Libs to v2.7.11
-Daniel Medeiros     Fixed issue 146: Dynamics Manager remove button not working (Cross-Platform UI)
-Daniel Medeiros     Fixed issue 147: Inspector could not be started (Linux)
-Daniel Medeiros     Fixed issue 151: Wrong units for formation terms of electrolytes
-Daniel Medeiros     Fixed issue 152: Error on viewing sub flowsheet
-Daniel Medeiros     Added an option to define solids handling in the Simulation Wizard (Classic UI)
-Daniel Medeiros     Fixed issue with Rigorous Column
-Daniel Medeiros     Fixed solver freezing in certain situations
-Daniel Medeiros     Fixed a bug with the SRK Adv Property Package
+Daniel Wagner     New Feature: Add Chart Objects from Charts collection to the Flowsheet
+Daniel Wagner     New Feature: Export compound data to Excel file
+Daniel Wagner     Updated IronPython+Libs to v2.7.11
+Daniel Wagner     Fixed issue 146: Dynamics Manager remove button not working (Cross-Platform UI)
+Daniel Wagner     Fixed issue 147: Inspector could not be started (Linux)
+Daniel Wagner     Fixed issue 151: Wrong units for formation terms of electrolytes
+Daniel Wagner     Fixed issue 152: Error on viewing sub flowsheet
+Daniel Wagner     Added an option to define solids handling in the Simulation Wizard (Classic UI)
+Daniel Wagner     Fixed issue with Rigorous Column
+Daniel Wagner     Fixed solver freezing in certain situations
+Daniel Wagner     Fixed a bug with the SRK Adv Property Package
 
 Version 6.5.0
 
 Author              Description
-Daniel Medeiros     Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
-Daniel Medeiros     Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
-Daniel Medeiros     Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
-Daniel Medeiros     Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
-Daniel Medeiros     Fixed Classic UI unresponsiveness
-Daniel Medeiros     Fixed issues with Compound Creator (Classic UI)
-Daniel Medeiros     Fixed loading of external PPs/UOs
+Daniel Wagner     Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
+Daniel Wagner     Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
+Daniel Wagner     Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
+Daniel Wagner     Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
+Daniel Wagner     Fixed Classic UI unresponsiveness
+Daniel Wagner     Fixed issues with Compound Creator (Classic UI)
+Daniel Wagner     Fixed loading of external PPs/UOs
 Anders Andreasen    Fixed single compound issue with Bulk C7+ characterization utility (Classic UI)
-Daniel Medeiros     Other bug fixes and enhancements
+Daniel Wagner     Other bug fixes and enhancements
 
 Version 6.4.9
 
 Author              Description
-Daniel Medeiros     Implemented feature request #126: Dynamics Integrator pause and resume (Classic UI)
-Daniel Medeiros     New Separator Filler Utility (Dynamics)
-Daniel Medeiros     Fixed issue #138: Flowsheet can't be saved
-Daniel Medeiros     Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
-Daniel Medeiros     Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
-Daniel Medeiros     Fixed issues with Seawater Property Package 
-Daniel Medeiros     Fixed drawing of some PFD Objects
-Daniel Medeiros     Fixed Switch logical block behavior
-Daniel Medeiros     Fixed active/inactive buttons not updating status in object editors (Classic UI)
-Daniel Medeiros     Fixed Integrator results sheet formatting
-Daniel Medeiros     Dynamics Volume-Temperature (VT) Flash fixes
-Daniel Medeiros     Fixed distance units handling (Classic UI)
-Daniel Medeiros     Fixed Liquid-Liquid Extraction column not working
+Daniel Wagner     Implemented feature request #126: Dynamics Integrator pause and resume (Classic UI)
+Daniel Wagner     New Separator Filler Utility (Dynamics)
+Daniel Wagner     Fixed issue #138: Flowsheet can't be saved
+Daniel Wagner     Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
+Daniel Wagner     Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
+Daniel Wagner     Fixed issues with Seawater Property Package 
+Daniel Wagner     Fixed drawing of some PFD Objects
+Daniel Wagner     Fixed Switch logical block behavior
+Daniel Wagner     Fixed active/inactive buttons not updating status in object editors (Classic UI)
+Daniel Wagner     Fixed Integrator results sheet formatting
+Daniel Wagner     Dynamics Volume-Temperature (VT) Flash fixes
+Daniel Wagner     Fixed distance units handling (Classic UI)
+Daniel Wagner     Fixed Liquid-Liquid Extraction column not working
 
 Version 6.4.8
 
 Author              Description
-Daniel Medeiros     Updated User's Guide
-Daniel Medeiros     Added Model Customization samples
-Daniel Medeiros     Enhanced reliability of the Rigorous Column model solvers
-Daniel Medeiros     Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
-Daniel Medeiros     Fixed External Temperature gradient calculation in Pipe Segment model
-Daniel Medeiros     Added visualization of External Temperature to Pipe Segment model
-Daniel Medeiros     Fixed infinite loop in Electrolyte Property Packages
-Daniel Medeiros     Fixed Adjust/Set not being inactive when they should
-Daniel Medeiros     Fixed a bug with NL VLLE flash algorithm
-Daniel Medeiros     Other minor fixes and enhancements
+Daniel Wagner     Updated User's Guide
+Daniel Wagner     Added Model Customization samples
+Daniel Wagner     Enhanced reliability of the Rigorous Column model solvers
+Daniel Wagner     Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
+Daniel Wagner     Fixed External Temperature gradient calculation in Pipe Segment model
+Daniel Wagner     Added visualization of External Temperature to Pipe Segment model
+Daniel Wagner     Fixed infinite loop in Electrolyte Property Packages
+Daniel Wagner     Fixed Adjust/Set not being inactive when they should
+Daniel Wagner     Fixed a bug with NL VLLE flash algorithm
+Daniel Wagner     Other minor fixes and enhancements
 
 Version 6.4.7
 
 Author              Description
-Daniel Medeiros     New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
-Daniel Medeiros     Updated CoolProp libraries to v6.4.1
-Daniel Medeiros     Grouped all Property Package editors in a single window (Classic UI)
-Daniel Medeiros     Exposed CSTR's Vapor Residence Time and Headspace
-Daniel Medeiros     Added an option to import compound data into Compound Creator from JSON files
-Daniel Medeiros     Fixed issues with some flash algorithms
-Daniel Medeiros     Fixed issues with Compound Creator
-Daniel Medeiros     Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
-Daniel Medeiros     Fixed a bug with solids handling
-Daniel Medeiros     Fixed a bug in Seawater Property Package 
-Daniel Medeiros     General UI Fixes
+Daniel Wagner     New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
+Daniel Wagner     Updated CoolProp libraries to v6.4.1
+Daniel Wagner     Grouped all Property Package editors in a single window (Classic UI)
+Daniel Wagner     Exposed CSTR's Vapor Residence Time and Headspace
+Daniel Wagner     Added an option to import compound data into Compound Creator from JSON files
+Daniel Wagner     Fixed issues with some flash algorithms
+Daniel Wagner     Fixed issues with Compound Creator
+Daniel Wagner     Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
+Daniel Wagner     Fixed a bug with solids handling
+Daniel Wagner     Fixed a bug in Seawater Property Package 
+Daniel Wagner     General UI Fixes
 
 Version 6.4.6
 
 Author              Description
-Daniel Medeiros     Added Wilson Activity Coefficient Property Package
-Daniel Medeiros     Updated/Redesigned Compound Creator (Classic UI)
-Daniel Medeiros     Added Compound Creator Wizard to Welcome Screen (Classic UI)
-Daniel Medeiros     Smoother compound search (Classic UI)
-Daniel Medeiros     Updated Automation interface
-Daniel Medeiros     Added PID Controller Setpoint property
-Daniel Medeiros     Added Dynamic Integrator scripting events
-Daniel Medeiros     Decreased Auto-Layout distance between objects
+Daniel Wagner     Added Wilson Activity Coefficient Property Package
+Daniel Wagner     Updated/Redesigned Compound Creator (Classic UI)
+Daniel Wagner     Added Compound Creator Wizard to Welcome Screen (Classic UI)
+Daniel Wagner     Smoother compound search (Classic UI)
+Daniel Wagner     Updated Automation interface
+Daniel Wagner     Added PID Controller Setpoint property
+Daniel Wagner     Added Dynamic Integrator scripting events
+Daniel Wagner     Decreased Auto-Layout distance between objects
 
 Version 6.4.5
 
 Author              Description
-Daniel Medeiros     Fixed Compressor/Expander power calculation in Polytropic mode
-Daniel Medeiros     Fixed Gibbs Reactor in Adiabatic mode
-Daniel Medeiros     Fixed issue with VLLE Flash
-Daniel Medeiros     Steady-State Adjust/Controller enhancements
-Daniel Medeiros     Fixed UNIFAC-LL (issue 118)
-Daniel Medeiros     Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
-Daniel Medeiros     Fixed editors not updating after flowsheet solve (Cross-Platform UI)
-Daniel Medeiros     Fixed issue in Advanced Kinetics expression parser
-Daniel Medeiros     Fixed Solids Separator energy balance warning
+Daniel Wagner     Fixed Compressor/Expander power calculation in Polytropic mode
+Daniel Wagner     Fixed Gibbs Reactor in Adiabatic mode
+Daniel Wagner     Fixed issue with VLLE Flash
+Daniel Wagner     Steady-State Adjust/Controller enhancements
+Daniel Wagner     Fixed UNIFAC-LL (issue 118)
+Daniel Wagner     Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
+Daniel Wagner     Fixed editors not updating after flowsheet solve (Cross-Platform UI)
+Daniel Wagner     Fixed issue in Advanced Kinetics expression parser
+Daniel Wagner     Fixed Solids Separator energy balance warning
 
 Version 6.4.4
 
 Author              Description
-Daniel Medeiros     Fixed issue 111 (The field is not updated correctly after the method converges)
-Daniel Medeiros     Fixed issue 117 (Issue with recycling mixed streams)
-Daniel Medeiros     Fixed issue with VLE PT Flash
-Daniel Medeiros     Added an option to use IO Flash in VLE/VLLE equilibrium calculations
-Daniel Medeiros     Fixed an issue with simultaneous adjust solver
-Daniel Medeiros     Fixed PFR volume iteration
-Daniel Medeiros     Fixed flowsheet update after finishing calculation
-Daniel Medeiros     Fixed units for some properties in Excel Add-In
-Daniel Medeiros     Fixed conversion from kW to MJ/h
-Daniel Medeiros     Fixed conversion of BTU/h and MMBTU/h
-Daniel Medeiros     Fixed issues with Heat Exchanger Shell and Tube calculation mode
-Daniel Medeiros     Darker green color in digital gauge
+Daniel Wagner     Fixed issue 111 (The field is not updated correctly after the method converges)
+Daniel Wagner     Fixed issue 117 (Issue with recycling mixed streams)
+Daniel Wagner     Fixed issue with VLE PT Flash
+Daniel Wagner     Added an option to use IO Flash in VLE/VLLE equilibrium calculations
+Daniel Wagner     Fixed an issue with simultaneous adjust solver
+Daniel Wagner     Fixed PFR volume iteration
+Daniel Wagner     Fixed flowsheet update after finishing calculation
+Daniel Wagner     Fixed units for some properties in Excel Add-In
+Daniel Wagner     Fixed conversion from kW to MJ/h
+Daniel Wagner     Fixed conversion of BTU/h and MMBTU/h
+Daniel Wagner     Fixed issues with Heat Exchanger Shell and Tube calculation mode
+Daniel Wagner     Darker green color in digital gauge
 
 Version 6.4.3
 
 Author              Description
-Daniel Medeiros     Improved stability and reliability of the Distillation/Absorption Column model     
+Daniel Wagner     Improved stability and reliability of the Distillation/Absorption Column model     
 Daniel/Gregor       Improved stability and reliability of equilibrium calculations
-Daniel Medeiros     Fixed Heat Exchanger Pinch Point calculation mode
-Daniel Medeiros     Fixed a bug in PFR particle diameter conversion
+Daniel Wagner     Fixed Heat Exchanger Pinch Point calculation mode
+Daniel Wagner     Fixed a bug in PFR particle diameter conversion
 Anders Andreasen    Partial fix for Reid Vapor Pressure calculation
 Alexander Semenyak  Fixed array access in PR78 Property Package
 Alexander Semenyak  Fixed comma separator in non-dot decimal separator cultures
 Jarl Pedersen       Fixed Globalization issue for parsing Pipes.dat file
 Jarl Pedersen       Fixed a bug with Flowsheet Optimization tool (CUI)
-Daniel Medeiros     Fixed CoolProp compound aliases     
-Daniel Medeiros     Fixed bugs in GERG2008 Property Package
-Daniel Medeiros     Refactored PRLK Property Package
+Daniel Wagner     Fixed CoolProp compound aliases     
+Daniel Wagner     Fixed bugs in GERG2008 Property Package
+Daniel Wagner     Refactored PRLK Property Package
 
 Version 6.4.2
 
 Author              Description
-Daniel Medeiros     Code optimization and calculation speed improvements     
-Daniel Medeiros     Fixed Heat Exchanger Pinch Point calculation mode
-Daniel Medeiros     Fixed a bug in Automation Library
-Daniel Medeiros     Fixed a regression in Property Package cloning
-Daniel Medeiros     Fixed a bug with Rigorous Column spec unit conversion
-Daniel Medeiros     Fixed a bug with PFR
+Daniel Wagner     Code optimization and calculation speed improvements     
+Daniel Wagner     Fixed Heat Exchanger Pinch Point calculation mode
+Daniel Wagner     Fixed a bug in Automation Library
+Daniel Wagner     Fixed a regression in Property Package cloning
+Daniel Wagner     Fixed a bug with Rigorous Column spec unit conversion
+Daniel Wagner     Fixed a bug with PFR
 Gregor Reichert     Fixed VLLE PS Flash
 
 Version 6.4.1
 
 Author              Description
-Daniel Medeiros     Fixed issues with Equilibrium and Gibbs Reactors
-Daniel Medeiros     Fixed issues with Expander, Compressor and Heat Exchanger Models
-Daniel Medeiros     Fixed memory leaks in Automation mode
-Daniel Medeiros     Fixed an issue with forced solids
-Daniel Medeiros     Fixed issues in some CAPE-OPEN interface functions
-Daniel Medeiros     Fixed Spreadsheet Unit Operation heat balance
-Daniel Medeiros     Reduced saved file loading time
+Daniel Wagner     Fixed issues with Equilibrium and Gibbs Reactors
+Daniel Wagner     Fixed issues with Expander, Compressor and Heat Exchanger Models
+Daniel Wagner     Fixed memory leaks in Automation mode
+Daniel Wagner     Fixed an issue with forced solids
+Daniel Wagner     Fixed issues in some CAPE-OPEN interface functions
+Daniel Wagner     Fixed Spreadsheet Unit Operation heat balance
+Daniel Wagner     Reduced saved file loading time
 Gregor Reichert     Fixed solids handling in some equilibrium calculations
 John Konecny        Fixed/Refactored Chemeo data importing (issue #97)
 
 Version 6.4.0
 
 Author              Description
-Daniel Medeiros     Fixed stability and reliability issues with equilibrium calculations
+Daniel Wagner     Fixed stability and reliability issues with equilibrium calculations
 Gregor Reichert     Fixed bugs in Simple LLE and Nested Loops VLLE Flashes
-Daniel Medeiros     Optimized Automation2 flowsheet loading time
+Daniel Wagner     Optimized Automation2 flowsheet loading time
 Anders Andreasen    Implemented ANSI/IEC Valve sizing for Steady State with Masoneilan two-phase equation
-Daniel Medeiros     Fixed some bugs in Heat Exchanger and Pump Unit Ops
+Daniel Wagner     Fixed some bugs in Heat Exchanger and Pump Unit Ops
 Anders Andreasen    Reworked Valve Unit Op to fully IEC 60534 compliant for turbulent flow both choked and no-choked conditions
 Anders Andreasen    Updated Petukhov heat transfer coefficient correlation to a version with better capabilities in transition flow (ref. Cengel)
-Daniel Medeiros     Added outlet Vapor Fraction calculation mode to Heat Exchanger
+Daniel Wagner     Added outlet Vapor Fraction calculation mode to Heat Exchanger
 Danie/Anders        Fixed a bug in Orifice Plate calculation
 Alexander Semenyak  Fixed array access in PengRobinson78
-Daniel Medeiros     Fixed a bug with LLE diagram (Classic UI)
+Daniel Wagner     Fixed a bug with LLE diagram (Classic UI)
 Anders Andreasen    Fixed a bug with Lockhart-Martinelli pressure drop correlation
 Anders Andreasen    Bug fix unit conversion SI/Emeprial in Beggs and Brill two-phase friction factor
 Anders Andreasen    Fixed a problem with equvalent length from fitting being interger instead of double
 Anders Andreasen    Moving pipe fittings into temperature loop to allow pipe flow correlation to be used for dP calc
 Anders Andreasen    Changed mix liquid mixing rules for viscosity and thermal conductivity
 Anders Andreasen    Added emulsion model, and enabling different viscosity and thermal conductivity for different liquid phase equilibrium reaction basis units
-Daniel Medeiros     Fixed a bug in PFR model
-Daniel Medeiros     Fixed conversion of molar concentration PFR/CSTR
+Daniel Wagner     Fixed a bug in PFR model
+Daniel Wagner     Fixed conversion of molar concentration PFR/CSTR
 Anders Andreasen    Removed JT effect in Pipe Unit Op, and replaced with Emulsion check
-Daniel Medeiros     Added Reboiled/Refluxed Absorber modes for Rigorous Distillation Column Unit Op
-Daniel Medeiros     Fixed flowsheet solver stop request
-Daniel Medeiros     Display currently calculating objects in green color
-Daniel Medeiros     Fixed conversion from mm to m
+Daniel Wagner     Added Reboiled/Refluxed Absorber modes for Rigorous Distillation Column Unit Op
+Daniel Wagner     Fixed flowsheet solver stop request
+Daniel Wagner     Display currently calculating objects in green color
+Daniel Wagner     Fixed conversion from mm to m
 Anders Andreasen    Small bug fix in Pc Lee-Kessler, added a Riazi method for Pc/Tc
 Anders Andreasen    Changed C7+ Petroleum characterisation to handle a single component
-Daniel Medeiros     Fixed issue 89: stream report error
-Daniel Medeiros     Fixed issue 86: SLE-Flash phase composition not 100%
-Daniel Medeiros     Fixed issue 83: Binary Envelope - Flash algo not suitable for LLE
-Daniel Medeiros     Fixed issue 82: PVF and TVF flash - no second liquid phase
-Daniel Medeiros     Fixed issue 64: Rugosity and thermal conductivity not displayed for default materials
-Daniel Medeiros     Fixed issue 55: Redundant Kij for Water and CO2 
-Daniel Medeiros     Fixed issue 89: stream report error
-Daniel Medeiros     Other bug fixes and enhancements
+Daniel Wagner     Fixed issue 89: stream report error
+Daniel Wagner     Fixed issue 86: SLE-Flash phase composition not 100%
+Daniel Wagner     Fixed issue 83: Binary Envelope - Flash algo not suitable for LLE
+Daniel Wagner     Fixed issue 82: PVF and TVF flash - no second liquid phase
+Daniel Wagner     Fixed issue 64: Rugosity and thermal conductivity not displayed for default materials
+Daniel Wagner     Fixed issue 55: Redundant Kij for Water and CO2 
+Daniel Wagner     Fixed issue 89: stream report error
+Daniel Wagner     Other bug fixes and enhancements
 
 Version 6.3 Update 7
 

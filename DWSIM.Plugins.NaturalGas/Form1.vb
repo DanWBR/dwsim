@@ -1,5 +1,5 @@
 'Natural Gas Properties Plugin for DWSIM
-'Copyright 2010-2014 Daniel Medeiros
+'Copyright 2010-2014 Daniel Wagner
 
 Imports FileHelpers
 Imports DWSIM

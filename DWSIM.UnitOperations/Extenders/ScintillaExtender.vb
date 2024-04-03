@@ -25,7 +25,7 @@ Imports System.Drawing
 ''' <summary>
 ''' scintillaNET Editor extender for code intellisense display
 ''' </summary>
-''' <remarks>(c) 2015 Daniel Medeiros</remarks>
+''' <remarks>(c) 2015 Daniel Wagner</remarks>
 Public Module scintillaExtender
 
     ''' <summary>

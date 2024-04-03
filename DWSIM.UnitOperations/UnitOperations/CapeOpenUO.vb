@@ -1312,7 +1312,7 @@ Namespace UnitOperations
                 If _seluo IsNot Nothing Then
                     Return _seluo.AboutInfo
                 Else
-                    Return "Daniel Medeiros"
+                    Return "Daniel Wagner"
                 End If
             End Get
         End Property

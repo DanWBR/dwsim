@@ -1,5 +1,5 @@
 ﻿'    Excel/Spreadsheet Unit Calculation Routines 
-'    Copyright 2014 Gregor Reichert, 2015 Daniel Medeiros
+'    Copyright 2014 Gregor Reichert, 2015 Daniel Wagner
 '
 '    This file is part of DWSIM.
 '

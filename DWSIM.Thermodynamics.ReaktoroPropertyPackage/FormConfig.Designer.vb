@@ -112,7 +112,7 @@ Partial Class FormConfig
         Me.label4.Name = "label4"
         Me.label4.Size = New System.Drawing.Size(423, 26)
         Me.label4.TabIndex = 11
-        Me.label4.Text = "Property Package Library is Copyright (c) 2020-2024 Daniel Medeiros" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Reaktoro and" &
+        Me.label4.Text = "Property Package Library is Copyright (c) 2020-2024 Daniel Wagner" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Reaktoro and" &
     " Reaktoro Logo is Copyright (c) 2018, Allan Leal and Reaktoro contributors"
         '
         'label3

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DWSIM.FileStorage")]
-[assembly: AssemblyCopyright("Copyright © 2021 Daniel Medeiros")]
+[assembly: AssemblyCopyright("Copyright © 2021 Daniel Wagner")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

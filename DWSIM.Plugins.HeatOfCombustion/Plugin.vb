@@ -1,4 +1,4 @@
-﻿'Copyright 2020-2022 Daniel Medeiros
+﻿'Copyright 2020-2022 Daniel Wagner
 
 Imports DWSIM.Interfaces
 
@@ -11,7 +11,7 @@ Imports DWSIM.Interfaces
 
     Public ReadOnly Property Author() As String Implements DWSIM.Interfaces.IUtilityPlugin.Author, IUtilityPlugin5.Author
         Get
-            Return "Daniel Medeiros"
+            Return "Daniel Wagner"
         End Get
     End Property
 

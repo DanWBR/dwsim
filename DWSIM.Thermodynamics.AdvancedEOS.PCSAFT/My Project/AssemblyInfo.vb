@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("PC-SAFT (with Association Support) Property Package for DWSIM Simulator")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.Thermodynamics.SpecialEOS.PCSAFT")>
-<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Wagner")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
