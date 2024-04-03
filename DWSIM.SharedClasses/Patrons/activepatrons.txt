@@ -59,6 +59,7 @@ Guenther Holzer
 Harry Levinson
 Hep Ingham
 Hurudza
+Jay Hunter
 John Kossik
 Kenneth Troldal
 Les Waymont
