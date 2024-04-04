@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("GERG-2008 Property Package for DWSIM Simulator")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.Thermodynamics.SpecialEOS.GERG2008")>
-<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Wagner")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

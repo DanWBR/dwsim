@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DWSIM.ExtensionMethods.Eto")]
-[assembly: AssemblyCopyright("Copyright © 2017-2024 Daniel Medeiros")]
+[assembly: AssemblyCopyright("Copyright © 2017-2024 Daniel Wagner")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

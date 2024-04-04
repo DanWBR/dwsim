@@ -1624,7 +1624,7 @@ Namespace UnitOperations
 
         Public Overridable ReadOnly Property ProductAuthor As String Implements IProductInformation.ProductAuthor
             Get
-                Return "Daniel Medeiros"
+                Return "Daniel Wagner"
             End Get
         End Property
 

@@ -19,7 +19,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>bin\Debug\DWSIM.ProFeatures.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
@@ -272,6 +273,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2149311493.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

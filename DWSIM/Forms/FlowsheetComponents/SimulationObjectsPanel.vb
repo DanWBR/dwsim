@@ -31,7 +31,6 @@ Public Class SimulationObjectsPanel
         PanelSolids.Height = 0
         PanelStreams.Height = 75 * Settings.DpiScale
         PanelUser.Height = 0
-        PanelPro.Height = 0
 
         PanelCE.Tag = 150
         PanelColumns.Tag = 225
@@ -48,7 +47,6 @@ Public Class SimulationObjectsPanel
         PanelSolids.Tag = 75
         PanelStreams.Tag = 75
         PanelUser.Tag = 150
-        PanelPro.Tag = 300
 
         CheckBox1.Image = My.Resources.arrow_down
 
@@ -68,7 +66,6 @@ Public Class SimulationObjectsPanel
         CheckBox13.Tag = PanelIndicators
         CheckBox14.Tag = PanelControllers
         CheckBox15.Tag = PanelOther
-        CheckBox16.Tag = PanelPro
 
         If Settings.DpiScale > 1.0 Then
             arrow_right = New Bitmap(My.Resources.arrow_32px, New Size(Settings.DpiScale * 10, Settings.DpiScale * 10))
@@ -93,7 +90,6 @@ Public Class SimulationObjectsPanel
         CheckBox13.Image = arrow_right
         CheckBox14.Image = arrow_right
         CheckBox15.Image = arrow_right
-        CheckBox16.Image = arrow_right
 
         Dim add As Boolean = True
 
@@ -169,47 +165,43 @@ Public Class SimulationObjectsPanel
         Next
 
         For Each item In litems
-            If item.ObjectTypeInfo.Assembly.GetName().Name.Contains("ProExtensions") Then
-                Me.PanelPro.Controls.Add(item)
-            Else
-                Select Case DirectCast(item.Tag, Interfaces.Enums.SimulationObjectClass)
-                    Case SimulationObjectClass.CAPEOPEN
-                        Me.PanelUser.Controls.Add(item)
-                    Case SimulationObjectClass.Columns
-                        Me.PanelColumns.Controls.Add(item)
-                    Case SimulationObjectClass.Exchangers
-                        Me.PanelExchangers.Controls.Add(item)
-                    Case SimulationObjectClass.Logical, SimulationObjectClass.Inputs, SimulationObjectClass.Switches
-                        Me.PanelLogical.Controls.Add(item)
-                    Case SimulationObjectClass.MixersSplitters
-                        Me.PanelMixers.Controls.Add(item)
-                    Case SimulationObjectClass.Other
-                        Me.PanelOther.Controls.Add(item)
-                    Case SimulationObjectClass.PressureChangers
-                        Me.PanelPressure.Controls.Add(item)
-                    Case SimulationObjectClass.Reactors
-                        Me.PanelReactors.Controls.Add(item)
-                    Case SimulationObjectClass.Separators
-                        Me.PanelSeparators.Controls.Add(item)
-                    Case SimulationObjectClass.Solids
-                        Me.PanelSolids.Controls.Add(item)
-                    Case SimulationObjectClass.Streams
-                        Me.PanelStreams.Controls.Add(item)
-                    Case SimulationObjectClass.UserModels
-                        Me.PanelUser.Controls.Add(item)
-                    Case SimulationObjectClass.Indicators
-                        Me.PanelIndicators.Controls.Add(item)
-                    Case SimulationObjectClass.Controllers
-                        Me.PanelControllers.Controls.Add(item)
-                    Case SimulationObjectClass.CleanPowerSources,
-                         SimulationObjectClass.Electrolyzers
-                        Me.PanelCE.Controls.Add(item)
-                End Select
-            End If
+            Select Case DirectCast(item.Tag, Interfaces.Enums.SimulationObjectClass)
+                Case SimulationObjectClass.CAPEOPEN
+                    Me.PanelUser.Controls.Add(item)
+                Case SimulationObjectClass.Columns
+                    Me.PanelColumns.Controls.Add(item)
+                Case SimulationObjectClass.Exchangers
+                    Me.PanelExchangers.Controls.Add(item)
+                Case SimulationObjectClass.Logical, SimulationObjectClass.Inputs, SimulationObjectClass.Switches
+                    Me.PanelLogical.Controls.Add(item)
+                Case SimulationObjectClass.MixersSplitters
+                    Me.PanelMixers.Controls.Add(item)
+                Case SimulationObjectClass.Other
+                    Me.PanelOther.Controls.Add(item)
+                Case SimulationObjectClass.PressureChangers
+                    Me.PanelPressure.Controls.Add(item)
+                Case SimulationObjectClass.Reactors
+                    Me.PanelReactors.Controls.Add(item)
+                Case SimulationObjectClass.Separators
+                    Me.PanelSeparators.Controls.Add(item)
+                Case SimulationObjectClass.Solids
+                    Me.PanelSolids.Controls.Add(item)
+                Case SimulationObjectClass.Streams
+                    Me.PanelStreams.Controls.Add(item)
+                Case SimulationObjectClass.UserModels
+                    Me.PanelUser.Controls.Add(item)
+                Case SimulationObjectClass.Indicators
+                    Me.PanelIndicators.Controls.Add(item)
+                Case SimulationObjectClass.Controllers
+                    Me.PanelControllers.Controls.Add(item)
+                Case SimulationObjectClass.CleanPowerSources,
+                     SimulationObjectClass.Electrolyzers
+                    Me.PanelCE.Controls.Add(item)
+            End Select
         Next
 
         If Not FormMain.IsPro Then
-            ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelPro})
+            ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelMixers, PanelColumns, PanelExchangers, PanelLogical, PanelPressure, PanelUser, PanelReactors})
         End If
 
         'fossee models
@@ -244,7 +236,7 @@ Public Class SimulationObjectsPanel
 
     Private Sub CheckBox1_Click(sender As Object, e As EventArgs) Handles CheckBox9.Click, CheckBox8.Click, CheckBox7.Click, CheckBox6.Click,
         CheckBox5.Click, CheckBox4.Click, CheckBox3.Click, CheckBox2.Click, CheckBox15.Click, CheckBox14.Click, CheckBox13.Click, CheckBox12.Click,
-        CheckBox11.Click, CheckBox10.Click, CheckBox1.Click, CheckBox16.Click
+        CheckBox11.Click, CheckBox10.Click, CheckBox1.Click
 
         'find out which checkbox was clicked
         Dim chkB As CheckBox = CType(sender, CheckBox)

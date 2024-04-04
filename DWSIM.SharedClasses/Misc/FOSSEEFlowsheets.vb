@@ -73,7 +73,7 @@ Public Class FOSSEEFlowsheets
             i += 1
         Next
 
-        Return list.Where(Function(x) Not x.ProposerName.Contains("Daniel Medeiros") And Not x.ProposerName.Contains("Daniel Wagner")).ToList
+        Return list.Where(Function(x) Not x.ProposerName.Contains("Daniel Wagner") And Not x.ProposerName.Contains("Daniel Wagner")).ToList
 
     End Function
 

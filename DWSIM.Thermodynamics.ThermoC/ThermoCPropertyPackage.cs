@@ -234,14 +234,14 @@ namespace DWSIM.Thermodynamics.ThermoC
 
             s.CreateAndAddLabelRow(container2, "About the ThermoC Bridge");
             s.CreateAndAddLabelRow2(container2, "The ThermoC Bridge is a software which connects to the ThermoC software package and exposes its models to DWSIM as a Property Package.");
-            s.CreateAndAddLabelRow2(container2, "ThermoC Bridge is Copyright (c) 2017-2020 Daniel Medeiros.");
+            s.CreateAndAddLabelRow2(container2, "ThermoC Bridge is Copyright (c) 2017-2020 Daniel Wagner.");
             s.CreateAndAddLabelRow2(container2, "ThermoC Software Package is Copyright (c) Ulrich K. Deiters.");
             s.CreateAndAddLabelRow(container2, "Literature");
             s.CreateAndAddLabelRow2(container2, "1. U. K. Deiters, “A modular program for the calculation of thermodynamic properties of fluids”, Chem. Eng. Technol. 23 (2000) 581–584.\n2. U. K. Deiters and Th. Kraska, High-Pressure Fluid Phase Equilibria—Phenomenology and Computation, Elsevier, Amsterdam 2012.");
             s.CreateAndAddLabelRow(container2, "Contact Information");
             s.CreateAndAddLabelRow2(container2, "Prof. Dr. Ulrich K. Deiters\nInstitute of Physical Chemistry, University of Cologne\nLuxemburger Str. 116, D-50939 Köln\nTel. +49 (0)221 470-4543, Fax +49 (0)221 470-4900");
             s.CreateAndAddLabelAndButtonRow(container2, "Send e-mail to Prof. Ulrich", "ulrich.deiters@uni-koeln.de", null, (sender, e) => Process.Start("mailto:ulrich.deiters@uni-koeln.de"));
-            s.CreateAndAddLabelAndButtonRow(container2, "Send e-mail to Daniel Medeiros", "dwsim@inforside.com.br", null, (sender, e) => Process.Start("mailto:dwsim@inforside.com.br"));
+            s.CreateAndAddLabelAndButtonRow(container2, "Send e-mail to Daniel Wagner", "dwsim@inforside.com.br", null, (sender, e) => Process.Start("mailto:dwsim@inforside.com.br"));
             s.CreateAndAddButtonRow(container2, "Visit the ThermoC website for more information", null, (sender, e) => Process.Start("http://thermoc.uni-koeln.de/index2.html"));
             s.CreateAndAddButtonRow(container2, "View ThermoC README file", null, (sender, e) =>
             {

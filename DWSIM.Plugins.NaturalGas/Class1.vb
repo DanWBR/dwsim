@@ -1,5 +1,5 @@
 ﻿'Natural Gas Properties Plugin for DWSIM
-'Copyright 2010-2017 Daniel Medeiros
+'Copyright 2010-2017 Daniel Wagner
 
 Imports DWSIM.Interfaces
 
@@ -13,7 +13,7 @@ Imports DWSIM.Interfaces
 
     Public ReadOnly Property Author() As String Implements DWSIM.Interfaces.IUtilityPlugin.Author, IUtilityPlugin5.Author
         Get
-            Return "Daniel Medeiros"
+            Return "Daniel Wagner"
         End Get
     End Property
 

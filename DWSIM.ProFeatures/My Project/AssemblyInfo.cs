@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DWSIM.ProFeatures")]
-[assembly: AssemblyCopyright("Copyright © 2023 Daniel Medeiros")]
+[assembly: AssemblyCopyright("Copyright © 2023 Daniel Wagner")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: ComVisible(false)]

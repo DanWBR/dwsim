@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("DWSIM Dynamics Manager")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.DynamicsManager")>
-<Assembly: AssemblyCopyright("Copyright 2020-2024 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright 2020-2024 Daniel Wagner")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

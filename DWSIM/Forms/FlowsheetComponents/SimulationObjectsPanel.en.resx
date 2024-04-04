@@ -132,36 +132,6 @@
     <value>None</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PanelPro.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 148</value>
-  </data>
-  <data name="PanelPro.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="PanelPro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 137</value>
-  </data>
-  <data name="CheckBox16.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAACAklE
-        QVQ4T41T30/TUBjt4179Y+CF8NfoiySYyJvRhETjgzEm+qSGmIgRfyW++ADKWnQwaQQN6rpVxhis67rt
-        dl23ETbWtTver+bCHc7EJqdpe893zv3ud6oAGMGHA3dyvdzU0rbPPts+Plkelvdd9na3pi3lKpPn+SMv
-        G3ZT26628K5Qx4ucg+fZSowljlemg9ccTw1bk2vEQ2K72mZaqXFa9C8sGjYef7fYrc1C4lSAO6v/Uyyw
-        8MPC/a8HaizAi6dp2+OIVqeHN7+qY9fubhVxWy9MK6myp1PP40iDYYh20EOyxP5ae7RTIgFd0R3flQ+M
-        rnAYoT8M0I1OcBR10QqP8NNrxAcpeM/4WVxL7boKjUp8JJDrSdTHcdRDJzyGH3bQGLRQD5o47DEsH56J
-        zK2ZUGjOsoDs6g3aYAMftcBDpc9Q6FbxxCji4Y4Vc2eTWSgrRdelOQuB865O4KLcryNVK+Pm5h7m03u8
-        fwuLGRuXVw1X4QnT5d4INzbyMYTrQqYYv9/5sh/3Tpx7fApX10xdeWk6U5QwWUDgW9MZcZXXZlYNXHqf
-        mYqDxOOpUsJkgoDsKjCfzmMmmf0TJLrxaCYonpQwmTgOVHxxJcMuPEieRVmA4kkJo5DIrnRg1DNtWzgL
-        jAgQ+JYn+I+iXl/PM5ozjWpWzbIrWk6d+2hOjPKh/AYW7En4UKkJtgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="CheckBox16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 118</value>
-  </data>
-  <data name="CheckBox16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 30</value>
-  </data>
   <data name="PanelStreams.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 30</value>
   </data>
@@ -187,13 +157,13 @@
 </value>
   </data>
   <data name="CheckBox15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1837</value>
+    <value>0, 1670</value>
   </data>
   <data name="CheckBox15.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelControllers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1749</value>
+    <value>0, 1582</value>
   </data>
   <data name="PanelControllers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -220,13 +190,13 @@
 </value>
   </data>
   <data name="CheckBox14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1719</value>
+    <value>0, 1552</value>
   </data>
   <data name="CheckBox14.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelIndicators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1631</value>
+    <value>0, 1464</value>
   </data>
   <data name="PanelIndicators.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -253,13 +223,13 @@
 </value>
   </data>
   <data name="CheckBox13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1601</value>
+    <value>0, 1434</value>
   </data>
   <data name="CheckBox13.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelLogical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1513</value>
+    <value>0, 1346</value>
   </data>
   <data name="PanelLogical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -286,13 +256,13 @@
 </value>
   </data>
   <data name="CheckBox12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1483</value>
+    <value>0, 1316</value>
   </data>
   <data name="CheckBox12.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelCustomModelsFOSSEE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1389</value>
+    <value>0, 1222</value>
   </data>
   <data name="PanelCustomModelsFOSSEE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -319,13 +289,13 @@
 </value>
   </data>
   <data name="CheckBox11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1359</value>
+    <value>0, 1192</value>
   </data>
   <data name="CheckBox11.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1271</value>
+    <value>0, 1104</value>
   </data>
   <data name="PanelUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -352,7 +322,7 @@
 </value>
   </data>
   <data name="CheckBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1241</value>
+    <value>0, 1074</value>
   </data>
   <data name="CheckBox10.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
@@ -361,7 +331,7 @@
     <value>User Models</value>
   </data>
   <data name="PanelCE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1141</value>
+    <value>0, 974</value>
   </data>
   <data name="PanelCE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -388,7 +358,7 @@
 </value>
   </data>
   <data name="CheckBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1111</value>
+    <value>0, 944</value>
   </data>
   <data name="CheckBox9.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
@@ -397,7 +367,7 @@
     <value>Renewable Energies</value>
   </data>
   <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1023</value>
+    <value>0, 856</value>
   </data>
   <data name="PanelSolids.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -424,13 +394,13 @@
 </value>
   </data>
   <data name="CheckBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 993</value>
+    <value>0, 826</value>
   </data>
   <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 905</value>
+    <value>0, 738</value>
   </data>
   <data name="PanelColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -457,13 +427,13 @@
 </value>
   </data>
   <data name="CheckBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 875</value>
+    <value>0, 708</value>
   </data>
   <data name="CheckBox7.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelReactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 787</value>
+    <value>0, 620</value>
   </data>
   <data name="PanelReactors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -490,13 +460,13 @@
 </value>
   </data>
   <data name="CheckBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 757</value>
+    <value>0, 590</value>
   </data>
   <data name="CheckBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelExchangers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 669</value>
+    <value>0, 502</value>
   </data>
   <data name="PanelExchangers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -523,7 +493,7 @@
 </value>
   </data>
   <data name="CheckBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 639</value>
+    <value>0, 472</value>
   </data>
   <data name="CheckBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
@@ -532,7 +502,7 @@
     <value>Exchangers</value>
   </data>
   <data name="PanelMixers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 551</value>
+    <value>0, 384</value>
   </data>
   <data name="PanelMixers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -559,7 +529,7 @@
 </value>
   </data>
   <data name="CheckBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 521</value>
+    <value>0, 354</value>
   </data>
   <data name="CheckBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
@@ -580,13 +550,13 @@
 </value>
   </data>
   <data name="CheckBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 403</value>
+    <value>0, 236</value>
   </data>
   <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 315</value>
+    <value>0, 148</value>
   </data>
   <data name="PanelPressure.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -632,13 +602,13 @@
 </value>
   </data>
   <data name="CheckBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 285</value>
+    <value>0, 118</value>
   </data>
   <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 30</value>
   </data>
   <data name="PanelSeparators.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 433</value>
+    <value>0, 266</value>
   </data>
   <data name="PanelSeparators.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -647,7 +617,7 @@
     <value>373, 88</value>
   </data>
   <data name="PanelOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 1867</value>
+    <value>0, 1700</value>
   </data>
   <data name="PanelOther.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -665,10 +635,10 @@
     <value>0, 26</value>
   </data>
   <data name="TableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>29</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 1995</value>
+    <value>373, 1828</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 3</value>
