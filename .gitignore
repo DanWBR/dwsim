@@ -1,4 +1,5 @@
 *.suo
+*/.vs
 /DWSIM/obj
 /DWSIM/bin/Debug
 /DWSIM/bin/x86/Debug
