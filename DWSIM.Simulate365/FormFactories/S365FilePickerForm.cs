@@ -111,9 +111,7 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm = new WebUIForm(initialUrl, title, true)
             {
                 Width = (int)(1300 * DWSIM.GlobalSettings.Settings.DpiScale),
-                Height = (int)(800 * DWSIM.GlobalSettings.Settings.DpiScale),
-                MinimizeBox = false,
-                MaximizeBox = false
+                Height = (int)(800 * DWSIM.GlobalSettings.Settings.DpiScale)
             };
 
             _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);

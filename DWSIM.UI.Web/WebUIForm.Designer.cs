@@ -36,6 +36,7 @@ namespace DWSIM.UI.Web
             // 
             // webView
             // 
+            this.webView.AllowExternalDrop = true;
             this.webView.CreationProperties = null;
             this.webView.DefaultBackgroundColor = System.Drawing.Color.White;
             this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -52,6 +53,8 @@ namespace DWSIM.UI.Web
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.webView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "WebUIForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebUIForm";
