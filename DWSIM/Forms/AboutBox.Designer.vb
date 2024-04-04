@@ -66,7 +66,7 @@ Partial Class AboutBox
         Me.colAssemblyBuilt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colAssemblyCodeBase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.tbAcknowledgements = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
@@ -169,7 +169,7 @@ Partial Class AboutBox
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem7})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem7
         '
         'FaTabStripItem1
         '
@@ -191,7 +191,6 @@ Partial Class AboutBox
         Me.FaTabStripItem1.Controls.Add(Me.Label7)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'Lblcpusimd
@@ -384,18 +383,18 @@ Partial Class AboutBox
         'FaTabStripItem7
         '
         Me.FaTabStripItem7.CanClose = False
-        Me.FaTabStripItem7.Controls.Add(Me.TextBox2)
+        Me.FaTabStripItem7.Controls.Add(Me.tbAcknowledgements)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         Me.FaTabStripItem7.Selected = True
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
-        'TextBox2
+        'tbAcknowledgements
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.White
-        resources.ApplyResources(Me.TextBox2, "TextBox2")
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
+        Me.tbAcknowledgements.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbAcknowledgements, "tbAcknowledgements")
+        Me.tbAcknowledgements.Name = "tbAcknowledgements"
+        Me.tbAcknowledgements.ReadOnly = True
         '
         'PictureBox1
         '
@@ -480,5 +479,5 @@ Partial Class AboutBox
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewLinkColumn3 As DataGridViewLinkColumn
     Friend WithEvents FaTabStripItem7 As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents TextBox2 As TextBox
+    Public WithEvents tbAcknowledgements As TextBox
 End Class

@@ -20,9 +20,7 @@ Public Class AboutBox
         ExtensionMethods.ChangeDefaultFont(Me)
 
         TextBox1.Font = New Font("Consolas", 9, GraphicsUnit.Point)
-        TextBox2.Font = New Font("Consolas", 9, GraphicsUnit.Point)
-
-        TextBox2.Text = "Special Thanks to the following Patrons: " + Patrons.GetList() + vbCrLf + vbCrLf + TextBox2.Text
+        tbAcknowledgements.Font = New Font("Consolas", 9, GraphicsUnit.Point)
 
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
 
@@ -31,6 +29,9 @@ Public Class AboutBox
 #If DEBUG Then
         Version.Text += "-" + IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString()
 #End If
+
+        tbAcknowledgements.Text = "A HUGE thank you to the following Patrons/Sponsors who made this release possible:" + vbCrLf + vbCrLf +
+            Patrons.GetList() + vbCrLf + vbCrLf + tbAcknowledgements.Text
 
         Copyright.Text = My.Application.Info.Copyright
 
