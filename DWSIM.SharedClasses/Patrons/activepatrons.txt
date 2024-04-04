@@ -27,6 +27,7 @@
 🌟 Martin Heiser
 🌟 Michael Papantoniou
 🌟 Michael Saucier
+🌟 Nicolas Spogis
 🌟 Pawel Zjezdzalka
 🌟 Richard Huntington
 🌟 Roland Berger
@@ -68,7 +69,6 @@ Luca Finardi
 Marcos Silva
 Masahiro Sakai
 Mohan Vaze
-Nicolas Spogis
 Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
