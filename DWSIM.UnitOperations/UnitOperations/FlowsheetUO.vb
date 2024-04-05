@@ -1121,17 +1121,19 @@ Label_00CC:
                 Next
             End With
 
-            If Me.UpdateOnSave And Not FileIsEmbedded Then
-                ParseFilePath()
-                UpdateProcessData(SimulationFile)
-            Else
-                Dim tpath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()))
-                Dim tfile = Path.Combine(tpath.FullName, EmbeddedFileName)
-                FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tfile)
-                UpdateProcessData(tfile)
-                FlowSheet.FileDatabaseProvider.DeleteFile(EmbeddedFileName)
-                FlowSheet.FileDatabaseProvider.PutFile(tfile, EmbeddedFileName)
-                Directory.Delete(tpath.FullName, True)
+            If UpdateOnSave Then
+                If Not FileIsEmbedded Then
+                    ParseFilePath()
+                    UpdateProcessData(SimulationFile)
+                Else
+                    Dim tpath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()))
+                    Dim tfile = Path.Combine(tpath.FullName, EmbeddedFileName)
+                    FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tfile)
+                    UpdateProcessData(tfile)
+                    FlowSheet.FileDatabaseProvider.DeleteFile(EmbeddedFileName)
+                    FlowSheet.FileDatabaseProvider.PutFile(tfile, EmbeddedFileName)
+                    Directory.Delete(tpath.FullName, True)
+                End If
             End If
 
             Return elements
