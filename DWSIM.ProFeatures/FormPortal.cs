@@ -12,6 +12,7 @@ using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web.Settings;
 using Newtonsoft.Json;
 using DWSIM.ExtensionMethods;
+using Microsoft.Win32;
 
 namespace DWSIM.ProFeatures
 {
@@ -93,9 +94,10 @@ namespace DWSIM.ProFeatures
             if (TrialLicenseCreatedMessageCount + 1 <= TrialLicenseCreatedMessages.Count)
             {
                 TrialLicenseCreatedMessageCount += 1;
-                this.UIThread(() => {
+                this.UIThread(() =>
+                {
                     StatusMessage.Text = TrialLicenseCreatedMessages[TrialLicenseCreatedMessageCount];
-                });   
+                });
             }
             else
             {
@@ -104,7 +106,7 @@ namespace DWSIM.ProFeatures
             }
         }
 
-        private  void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
+        private void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
         {
             SaveStartupActionAndRedirect();
 
@@ -121,7 +123,7 @@ namespace DWSIM.ProFeatures
                 {
                     FileSavingInProgress = false;
                     bool actionSaved = await SaveDwsimProStartupAction();
-                    RedirectToDWSIMPro();
+                    ShowSuccessPanel();
                 }
             }
         }
@@ -163,20 +165,17 @@ namespace DWSIM.ProFeatures
             return null;
         }
 
-        private void RedirectToDWSIMPro()
+        private void ShowSuccessPanel()
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(RedirectToDWSIMPro));
+                this.Invoke(new Action(ShowSuccessPanel));
             }
             else
             {
                 LoadingPanel.Visible = false;
                 SuccessPanel.Visible = true;
-                Process.Start("https://vm.simulate365.com");
             }
-
-
         }
 
         private void SaveFlowsheet()
@@ -251,6 +250,78 @@ namespace DWSIM.ProFeatures
         {
             var loginForm = new LoginForm();
             loginForm.ShowDialog();
+        }
+
+        private void openInDefaultBrowserLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://vm.simulate365.com");
+        }
+
+        private void openInIncognitoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string privateModeParam = string.Empty;
+            var url = "https://vm.simulate365.com";
+            var browser = GetStandardBrowser();
+            if (string.IsNullOrWhiteSpace(browser))
+            {
+                Process.Start(url);
+            }
+            else
+            {
+                switch (browser)
+                {
+                    case "firefox":
+                        privateModeParam = " -private-window";
+                        break;
+                    case "iexplorer":
+                    case "opera":
+                        privateModeParam = " -private";
+                        break;
+                    case "chrome":
+                        privateModeParam = " -incognito";
+                        break;
+                    case "edge":
+                        privateModeParam = " -inprivate";
+                        break;
+                }
+                Process.Start(browser, $"{privateModeParam} {url}");
+            }
+        }
+
+        private static string GetStandardBrowser()
+        {
+            string userChoice = @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
+            string progId;
+            using (RegistryKey userChoiceKey = Registry.CurrentUser.OpenSubKey(userChoice))
+            {
+                if (userChoiceKey == null)
+                {
+                    return string.Empty;
+                }
+                object progIdValue = userChoiceKey.GetValue("Progid");
+                if (progIdValue == null)
+                {
+                    return string.Empty;
+                }
+                progId = progIdValue.ToString();
+                switch (progId)
+                {
+                    case "IE.HTTP":
+                        return "iexplorer";
+                    case "FirefoxURL":
+                        return "firefox";
+
+                    case "ChromeHTML":
+                        return "chrome";
+
+                    case "OperaStable":
+                        return "Opera";
+                    case "MSEdgeHTM": // Newer Edge version.
+                        return "edge";
+                    default:
+                        return string.Empty;
+                }
+            }
         }
     }
 }
