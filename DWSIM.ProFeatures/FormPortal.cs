@@ -13,6 +13,7 @@ using DWSIM.UI.Web.Settings;
 using Newtonsoft.Json;
 using DWSIM.ExtensionMethods;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace DWSIM.ProFeatures
 {
@@ -55,6 +56,7 @@ namespace DWSIM.ProFeatures
 
         public async Task OnInitialize()
         {
+           // Debugger.Launch();
             var isLoggedIn = UserService.GetInstance()._IsLoggedIn();
             if (!isLoggedIn)
             {
@@ -264,34 +266,54 @@ namespace DWSIM.ProFeatures
         {
             string privateModeParam = string.Empty;
             var url = "https://vm.simulate365.com";
-            var browser = GetStandardBrowser();
-            if (string.IsNullOrWhiteSpace(browser))
+            var browserProgId = GetStandardBrowserProgId()?.ToLower();
+            if (string.IsNullOrWhiteSpace(browserProgId))
             {
                 Process.Start(url);
             }
             else
             {
-                switch (browser)
+               
+                if (browserProgId.Contains("firefox"))
                 {
-                    case "firefox":
-                        privateModeParam = " -private-window";
-                        break;
-                    case "iexplorer":
-                    case "opera":
-                        privateModeParam = " -private";
-                        break;
-                    case "chrome":
-                        privateModeParam = " -incognito";
-                        break;
-                    case "edge":
-                        privateModeParam = " -inprivate";
-                        break;
+                    privateModeParam = " --private-window";
+                }else if (browserProgId.Contains("ie.http"))
+                {
+                    privateModeParam = " -private";
                 }
-                Process.Start(browser, $"{privateModeParam} {url}");
+                else if (browserProgId.Contains("chrome") || browserProgId.Contains("opera"))
+                {
+                    privateModeParam = " /incognito";
+                }
+                else if (browserProgId.Contains("edge"))
+                {
+                    privateModeParam = " -inprivate";
+                }
+
+                var browserLocation = GetDefaultBrowserLocation();
+
+
+                Process.Start(browserLocation, $"{privateModeParam} {url}");
             }
         }
 
-        private static string GetStandardBrowser()
+        private string GetDefaultBrowserLocation()
+        {
+            var progId = GetStandardBrowserProgId();
+            using var command = Registry.ClassesRoot.OpenSubKey($"{progId}\\shell\\open\\command");
+            var runCommand = command?.GetValue(null) as string;
+            if (!string.IsNullOrWhiteSpace(runCommand))
+            {
+                var splitCommand=Regex.Split(runCommand,".exe");
+                var browserLocation= splitCommand[0].Replace("\"","");
+                return browserLocation+".exe";
+
+            }
+            return string.Empty;
+        }
+              
+
+        private static string GetStandardBrowserProgId()
         {
             string userChoice = @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
             string progId;
@@ -307,23 +329,7 @@ namespace DWSIM.ProFeatures
                     return string.Empty;
                 }
                 progId = progIdValue.ToString();
-                switch (progId)
-                {
-                    case "IE.HTTP":
-                        return "iexplorer";
-                    case "FirefoxURL":
-                        return "firefox";
-
-                    case "ChromeHTML":
-                        return "chrome";
-
-                    case "OperaStable":
-                        return "Opera";
-                    case "MSEdgeHTM": // Newer Edge version.
-                        return "edge";
-                    default:
-                        return string.Empty;
-                }
+                return progId;
             }
         }
     }
