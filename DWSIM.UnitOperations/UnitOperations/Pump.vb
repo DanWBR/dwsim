@@ -37,12 +37,45 @@ Namespace UnitOperations.Auxiliary.PumpOps
         None
     End Enum
 
+    Public Class CurveSet
+
+        Implements Interfaces.ICustomXMLSerialization
+
+        Public Property Name As String = "MyCurveSet"
+
+        Public Property Description As String = "MyCurveSetDescription"
+
+        Property ImpellerDiameter As Double = 200.0
+
+        Property ImpellerSpeed As Double = 1450.0
+
+        Property ImpellerDiameterUnit As String = "mm"
+
+        Property CurveHead As New Curve
+
+        Property CurvePower As New Curve
+
+        Property CurveEfficiency As New Curve
+
+        Property CurveNPSHr As New Curve
+
+        Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
+            Return XMLSerializer.XMLSerializer.Serialize(Me)
+        End Function
+
+        Public Function LoadData(data As List(Of XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
+            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+        End Function
+
+    End Class
+
     <System.Serializable()> Public Class Curve
 
         Implements Interfaces.ICustomXMLSerialization
 
-        Protected _x As ArrayList
-        Protected _y As ArrayList
+        Public Property X As New List(Of Double)
+        Public Property Y As New List(Of Double)
+
         Protected _xunit As String = ""
         Protected _yunit As String = ""
         Protected _type As CurveType
@@ -50,13 +83,7 @@ Namespace UnitOperations.Auxiliary.PumpOps
         Protected _name As String = ""
         Protected _enabled As Boolean = False
 
-        Property ImpellerDiameter As Double = 0.0
-
-        Property ImpellerSpeed As Double = 0.0
-
-        Property ImpellerDiameterUnit As String = "mm"
-
-        Sub New(ByVal id As String, ByVal name As String, ByVal x As ArrayList, ByVal xunit As String, ByVal y As ArrayList, ByVal yunit As String, ByVal type As CurveType)
+        Sub New(ByVal id As String, ByVal name As String, ByVal x As List(Of Double), ByVal xunit As String, ByVal y As List(Of Double), ByVal yunit As String, ByVal type As CurveType)
             Me.New()
             Me.ID = id
             Me.Name = name
@@ -75,8 +102,8 @@ Namespace UnitOperations.Auxiliary.PumpOps
         End Sub
 
         Sub New()
-            _x = New ArrayList
-            _y = New ArrayList
+            _X = New List(Of Double)
+            _Y = New List(Of Double)
         End Sub
 
         Public Property Enabled() As Boolean
@@ -133,25 +160,17 @@ Namespace UnitOperations.Auxiliary.PumpOps
             End Set
         End Property
 
-        Public Property y() As ArrayList
-            Get
-                Return _y
-            End Get
-            Set(ByVal value As ArrayList)
-                _y = value
-            End Set
-        End Property
-
-        Public Property x() As ArrayList
-            Get
-                Return _x
-            End Get
-            Set(ByVal value As ArrayList)
-                _x = value
-            End Set
-        End Property
-
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
+
+            Try
+                Dim xel As XElement = (From xmlprop In data Select xmlprop Where xmlprop.Name = "x").FirstOrDefault
+                Dim val As ArrayList = XMLSerializer.XMLSerializer.StringToArray(xel.Value, System.Globalization.CultureInfo.InvariantCulture)
+                X = val.ToDoubleList()
+                xel = (From xmlprop In data Select xmlprop Where xmlprop.Name = "y").FirstOrDefault
+                val = XMLSerializer.XMLSerializer.StringToArray(xel.Value, System.Globalization.CultureInfo.InvariantCulture)
+                Y = val.ToDoubleList()
+            Catch ex As Exception
+            End Try
 
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
@@ -202,11 +221,6 @@ Namespace UnitOperations
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
         Property PumpType As String = ""
-        Property ImpellerDiameter As Double = 200
-        Property ImpellerSpeed As Double = 1450
-        Property DiameterUnit As String = "mm"
-
-        Protected m_curves As New Dictionary(Of String, PumpOps.Curve)
 
         Protected _curvehead As Double
         Protected _curveeff As Double
@@ -216,6 +230,8 @@ Namespace UnitOperations
         Protected _curveflow As Double
 
         Property OutletTemperature As Double = 298.15#
+
+        Public Property PumpCurveSet As New PumpOps.CurveSet
 
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Pump()
@@ -231,15 +247,33 @@ Namespace UnitOperations
 
             MyBase.LoadData(data)
 
-            m_curves = New Dictionary(Of String, PumpOps.Curve)
-
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Curves").Elements.ToList
                 Dim cv As New PumpOps.Curve()
                 cv.LoadData(xel.Elements.ToList)
-                m_curves.Add(cv.Name, cv)
+                Select Case cv.Name
+                    Case "POWER"
+                        PumpCurveSet.CurvePower = cv
+                    Case "EFF"
+                        PumpCurveSet.CurveEfficiency = cv
+                    Case "NPSH"
+                        PumpCurveSet.CurveNPSHr = cv
+                    Case "HEAD"
+                        PumpCurveSet.CurveHead = cv
+                End Select
             Next
 
-            If Curves.Count = 0 Then CreateCurves()
+            Dim xid = data.Where(Function(d) d.Name = "ImpellerDiameter").FirstOrDefault()
+            If xid IsNot Nothing Then
+                PumpCurveSet.ImpellerDiameter = xid.Value.ToDoubleFromInvariant()
+            End If
+            Dim xir = data.Where(Function(d) d.Name = "ImpellerSpeed").FirstOrDefault()
+            If xir IsNot Nothing Then
+                PumpCurveSet.ImpellerSpeed = xir.Value.ToDoubleFromInvariant()
+            End If
+            Dim xidu = data.Where(Function(d) d.Name = "DiameterUnit").FirstOrDefault()
+            If xidu IsNot Nothing Then
+                PumpCurveSet.ImpellerDiameterUnit = xidu.Value
+            End If
 
             Return True
 
@@ -249,13 +283,6 @@ Namespace UnitOperations
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
-
-            With elements
-                .Add(New XElement("Curves"))
-                For Each kvp As KeyValuePair(Of String, PumpOps.Curve) In m_curves
-                    .Item(.Count - 1).Add(New XElement("Curve", New XAttribute("ID", kvp.Key), kvp.Value.SaveData.ToArray()))
-                Next
-            End With
 
             Return elements
 
@@ -315,19 +342,6 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property Curves() As Dictionary(Of String, PumpOps.Curve)
-            Get
-                If m_curves Is Nothing Then
-                    m_curves = New Dictionary(Of String, PumpOps.Curve)
-                    CreateCurves()
-                End If
-                Return m_curves
-            End Get
-            Set(ByVal value As Dictionary(Of String, PumpOps.Curve))
-                m_curves = value
-            End Set
-        End Property
-
         Public Property Pout() As Double
             Get
                 Return m_pout
@@ -365,7 +379,7 @@ Namespace UnitOperations
         End Property
 
         Public Sub New()
-            Me.CreateCurves()
+
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -374,8 +388,6 @@ Namespace UnitOperations
 
             Me.ComponentName = name
             Me.ComponentDescription = description
-
-            Me.CreateCurves()
 
         End Sub
 
@@ -425,26 +437,6 @@ Namespace UnitOperations
         End Property
 
         Public Property Head As Double
-
-        Sub CreateCurves()
-
-            If Not Me.Curves.ContainsKey("NPSH") Then
-                Me.Curves.Add("NPSH", New PumpOps.Curve(Guid.NewGuid().ToString, "NPSH", PumpOps.CurveType.NPSHr))
-            End If
-            If Not Me.Curves.ContainsKey("HEAD") Then
-                Me.Curves.Add("HEAD", New PumpOps.Curve(Guid.NewGuid().ToString, "HEAD", PumpOps.CurveType.Head))
-            End If
-            If Not Me.Curves.ContainsKey("EFF") Then
-                Me.Curves.Add("EFF", New PumpOps.Curve(Guid.NewGuid().ToString, "EFF", PumpOps.CurveType.Efficiency))
-            End If
-            If Not Me.Curves.ContainsKey("POWER") Then
-                Me.Curves.Add("POWER", New PumpOps.Curve(Guid.NewGuid().ToString, "POWER", PumpOps.CurveType.Power))
-            End If
-            If Not Me.Curves.ContainsKey("SYSTEM") Then
-                Me.Curves.Add("SYSTEM", New PumpOps.Curve(Guid.NewGuid().ToString, "SYSTEM", PumpOps.CurveType.SystemHead))
-            End If
-
-        End Sub
 
         Public Overrides Sub RunDynamicModel()
 
@@ -605,17 +597,12 @@ Namespace UnitOperations
 
                     Dim cv As New SystemsOfUnits.Converter
 
-                    Dim cnpsh, chead, ceff, cpower, csystem As PumpOps.Curve
+                    Dim cnpsh, chead, ceff, cpower As PumpOps.Curve
 
-                    If DebugMode Then AppendDebugLine(String.Format("Creating curves..."))
-
-                    Me.CreateCurves()
-
-                    cnpsh = Me.Curves("NPSH")
-                    chead = Me.Curves("HEAD")
-                    ceff = Me.Curves("EFF")
-                    cpower = Me.Curves("POWER")
-                    csystem = Me.Curves("SYSTEM")
+                    cnpsh = Me.PumpCurveSet.CurveNPSHr
+                    chead = Me.PumpCurveSet.CurveHead
+                    ceff = Me.PumpCurveSet.CurveEfficiency
+                    cpower = Me.PumpCurveSet.CurvePower
 
                     Dim xhead, yhead, xnpsh, ynpsh, xeff, yeff, xpower, ypower, xsystem, ysystem As New ArrayList
 
@@ -649,12 +636,6 @@ Namespace UnitOperations
                             ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
                         End If
                     Next
-                    For i = 0 To csystem.x.Count - 1
-                        If Double.TryParse(csystem.x(i), New Double) And Double.TryParse(csystem.y(i), New Double) Then
-                            xsystem.Add(SystemsOfUnits.Converter.ConvertToSI(csystem.xunit, csystem.x(i)))
-                            ysystem.Add(SystemsOfUnits.Converter.ConvertToSI(csystem.yunit, csystem.y(i)))
-                        End If
-                    Next
 
                     Dim w() As Double
 
@@ -673,7 +654,7 @@ Namespace UnitOperations
                     Me.CurveHead = head
 
                     'npshr
-                    If Me.Curves("NPSH").Enabled Then
+                    If Me.PumpCurveSet.CurveNPSHr.Enabled Then
                         ReDim w(xnpsh.Count)
                         ratinterpolation.buildfloaterhormannrationalinterpolant(xnpsh.ToArray(GetType(Double)), xnpsh.Count, 0.5, w)
                         npshr = polinterpolation.barycentricinterpolation(xnpsh.ToArray(GetType(Double)), ynpsh.ToArray(GetType(Double)), w, xnpsh.Count, qli)
@@ -686,7 +667,7 @@ Namespace UnitOperations
                     Me.CurveNPSHr = npshr
 
                     'efficiency
-                    If Me.Curves("EFF").Enabled Then
+                    If Me.PumpCurveSet.CurveEfficiency.Enabled Then
                         ReDim w(xeff.Count)
                         ratinterpolation.buildfloaterhormannrationalinterpolant(xeff.ToArray(GetType(Double)), xeff.Count, 0.5, w)
                         eff = polinterpolation.barycentricinterpolation(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), w, xeff.Count, qli)
@@ -698,22 +679,11 @@ Namespace UnitOperations
 
                     Me.CurveEff = eff * 100
 
-                    'syshead
-                    If Me.Curves("SYSTEM").Enabled Then
-                        ReDim w(xsystem.Count)
-                        ratinterpolation.buildfloaterhormannrationalinterpolant(xsystem.ToArray(GetType(Double)), xsystem.Count, 0.5, w)
-                        syshead = polinterpolation.barycentricinterpolation(xsystem.ToArray(GetType(Double)), ysystem.ToArray(GetType(Double)), w, xsystem.Count, qli)
-                    Else
-                        syshead = head
-                    End If
-
                     If DebugMode Then AppendDebugLine(String.Format("System Head: {0} m", syshead))
-
-                    Me.CurveSysHead = syshead
 
                     'we need -> head, power, eff, to calculate P2, H2, T2
 
-                    P2 = Pi + syshead * 9.81 * rho_li
+                    P2 = Pi + head * 9.81 * rho_li
                     CheckSpec(P2, True, "outlet pressure")
 
                     Me.DeltaP = P2 - Pi
@@ -725,7 +695,7 @@ Namespace UnitOperations
                     Dim tmp As IFlashCalculationResult
 
                     'power
-                    If Me.Curves("POWER").Enabled Then
+                    If Me.PumpCurveSet.CurvePower.Enabled Then
                         ReDim w(xpower.Count)
                         ratinterpolation.buildfloaterhormannrationalinterpolant(xpower.ToArray(GetType(Double)), xpower.Count, 0.5, w)
                         power = polinterpolation.barycentricinterpolation(xpower.ToArray(GetType(Double)), ypower.ToArray(GetType(Double)), w, xpower.Count, qli)
