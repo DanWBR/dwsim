@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace DWSIM.ProFeatures
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class FormPortal : System.Windows.Forms.Form
+    public partial class FormPortal : System.Windows.Forms.UserControl
     {
 
         // Form overrides dispose to clean up the component list.
@@ -33,7 +33,6 @@ namespace DWSIM.ProFeatures
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPortal));
             this.StatusMessage = new System.Windows.Forms.Label();
             this.LinkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Label1 = new System.Windows.Forms.Label();
@@ -46,16 +45,16 @@ namespace DWSIM.ProFeatures
             this.label4 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.SuccessPanel = new System.Windows.Forms.Panel();
+            this.openInIncognitoLink = new System.Windows.Forms.LinkLabel();
+            this.openInDefaultBrowserLink = new System.Windows.Forms.LinkLabel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.openInDefaultBrowserLink = new System.Windows.Forms.LinkLabel();
-            this.openInIncognitoLink = new System.Windows.Forms.LinkLabel();
             this.NoLicensePanel.SuspendLayout();
             this.LoadingPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -132,7 +131,7 @@ namespace DWSIM.ProFeatures
             this.flowLayoutPanel1.Controls.Add(this.notLoggedInPanel);
             this.flowLayoutPanel1.Controls.Add(this.SuccessPanel);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(87, 544);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(87, 381);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(662, 248);
             this.flowLayoutPanel1.TabIndex = 6;
@@ -192,82 +191,16 @@ namespace DWSIM.ProFeatures
             this.SuccessPanel.TabIndex = 7;
             this.SuccessPanel.Visible = false;
             // 
-            // label5
+            // openInIncognitoLink
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(280, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "You log in to DWSIM Pro with your Simulate 365 account.";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DWSIM.ProFeatures.My.Resources.Resources._2149311493;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(770, 516);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::DWSIM.ProFeatures.My.Resources.Resources.Icon1281;
-            this.pictureBox2.Location = new System.Drawing.Point(-1, 521);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(89, 86);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(91, 523);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(216, 20);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Continue with DWSIM Pro";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 21);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(245, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Your Simulate 365 account is a Microsoft account.";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 41);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(525, 13);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "If you are logged in on your PC to your company or personal Microsoft account, yo" +
-    "u can get an error message:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 59);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(240, 13);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "\"Your administrator hasn’t set up any resources\". ";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 81);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(589, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Launch private browsing mode to access DWSIM Pro: “Incognito” for Chrome, “InPriv" +
-    "ate” for Edge and “Private” for Firefox.";
+            this.openInIncognitoLink.AutoSize = true;
+            this.openInIncognitoLink.Location = new System.Drawing.Point(241, 105);
+            this.openInIncognitoLink.Name = "openInIncognitoLink";
+            this.openInIncognitoLink.Size = new System.Drawing.Size(158, 13);
+            this.openInIncognitoLink.TabIndex = 6;
+            this.openInIncognitoLink.TabStop = true;
+            this.openInIncognitoLink.Text = "Open in Incognito/Private mode";
+            this.openInIncognitoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openInIncognitoLink_LinkClicked);
             // 
             // openInDefaultBrowserLink
             // 
@@ -280,32 +213,95 @@ namespace DWSIM.ProFeatures
             this.openInDefaultBrowserLink.Text = "Open with default browser";
             this.openInDefaultBrowserLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openInDefaultBrowserLink_LinkClicked);
             // 
-            // openInIncognitoLink
+            // label10
             // 
-            this.openInIncognitoLink.AutoSize = true;
-            this.openInIncognitoLink.Location = new System.Drawing.Point(241, 105);
-            this.openInIncognitoLink.Name = "openInIncognitoLink";
-            this.openInIncognitoLink.Size = new System.Drawing.Size(158, 13);
-            this.openInIncognitoLink.TabIndex = 6;
-            this.openInIncognitoLink.TabStop = true;
-            this.openInIncognitoLink.Text = "Open in Incognito/Private mode";
-            this.openInIncognitoLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openInIncognitoLink_LinkClicked);
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 81);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(589, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Launch private browsing mode to access DWSIM Pro: “Incognito” for Chrome, “InPriv" +
+    "ate” for Edge and “Private” for Firefox.";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(2, 59);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(240, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "\"Your administrator hasn’t set up any resources\". ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 41);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(525, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "If you are logged in on your PC to your company or personal Microsoft account, yo" +
+    "u can get an error message:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(2, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(245, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Your Simulate 365 account is a Microsoft account.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(280, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "You log in to DWSIM Pro with your Simulate 365 account.";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DWSIM.ProFeatures.My.Resources.Resources._2149311493;
+            this.pictureBox1.Location = new System.Drawing.Point(0, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(745, 353);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::DWSIM.ProFeatures.My.Resources.Resources.Icon1281;
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 358);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(89, 86);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(91, 360);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(216, 20);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Continue with DWSIM Pro";
             // 
             // FormPortal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(769, 686);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.DoubleBuffered = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormPortal";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DWSIM Pro Portal";
+            this.Size = new System.Drawing.Size(745, 628);
             this.Load += new System.EventHandler(this.FormPortal_Load);
             this.NoLicensePanel.ResumeLayout(false);
             this.NoLicensePanel.PerformLayout();

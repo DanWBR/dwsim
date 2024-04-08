@@ -17,7 +17,7 @@ using Microsoft.Win32;
 namespace DWSIM.ProFeatures
 {
 
-    public partial class FormPortal : Form
+    public partial class FormPortal : UserControl
     {
         private bool IsLoadingLicenseInfo = false;
         private int TrialLicenseCreatedMessageCount = 0;
@@ -27,12 +27,16 @@ namespace DWSIM.ProFeatures
 
         private List<string> TrialLicenseCreatedMessages = new List<string>() { "Assigning DWSIM Pro license...", "Setting up the virtual licensing environment...", "Finalizing setup..." };
 
-        public FormPortal(IFlowsheet fs)
+        public FormPortal()
         {
             InitializeComponent();
-            fsheet = fs;
+
             FileManagementService.GetInstance().OnFileSavedToDashboard += FileManagementService_FileSavedToDashboard;
             UserService.GetInstance().OnUserLoggedIn += UserService_OnUserLoggedIn;
+        }
+        public void SetFlowsheet(IFlowsheet fs)
+        {
+            fsheet = fs;
         }
 
         private void UserService_OnUserLoggedIn(object sender, EventArgs e)
@@ -46,11 +50,10 @@ namespace DWSIM.ProFeatures
 
         private void FormPortal_Load(object sender, EventArgs e)
         {
-            this.ChangeDefaultFont();
-            OnInitialize();
+          
         }
 
-        private async Task OnInitialize()
+        public async Task OnInitialize()
         {
             var isLoggedIn = UserService.GetInstance()._IsLoggedIn();
             if (!isLoggedIn)
