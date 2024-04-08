@@ -67,7 +67,7 @@ namespace DWSIM.ProFeatures
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.Location = new System.Drawing.Point(-3, 56);
+            this.Label1.Location = new System.Drawing.Point(0, 48);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(317, 25);
             this.Label1.TabIndex = 1;
@@ -78,7 +78,7 @@ namespace DWSIM.ProFeatures
             this.Button1.BackColor = System.Drawing.Color.SteelBlue;
             this.Button1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button1.ForeColor = System.Drawing.Color.White;
-            this.Button1.Location = new System.Drawing.Point(86, 301);
+            this.Button1.Location = new System.Drawing.Point(81, 301);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(182, 72);
             this.Button1.TabIndex = 2;
@@ -92,9 +92,9 @@ namespace DWSIM.ProFeatures
             this.Button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(166)))), ((int)(((byte)(13)))));
             this.Button2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button2.ForeColor = System.Drawing.Color.White;
-            this.Button2.Location = new System.Drawing.Point(430, 301);
+            this.Button2.Location = new System.Drawing.Point(415, 301);
             this.Button2.Name = "Button2";
-            this.Button2.Size = new System.Drawing.Size(209, 72);
+            this.Button2.Size = new System.Drawing.Size(239, 72);
             this.Button2.TabIndex = 3;
             this.Button2.Text = "Switch to DWSIM Pro";
             this.Button2.UseVisualStyleBackColor = false;
@@ -119,6 +119,7 @@ namespace DWSIM.ProFeatures
             this._lblFeature.Size = new System.Drawing.Size(739, 48);
             this._lblFeature.TabIndex = 7;
             this._lblFeature.Text = "FEATURE";
+            this._lblFeature.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PictureBox2
             // 

@@ -20,19 +20,14 @@ namespace DWSIM.ProFeatures
 
         private void FormBridgeToPro_Load(object sender, EventArgs e)
         {
-
             ExtensionMethods.FormExtensions.ChangeDefaultFont(this);
-            this.Height = 560;
-
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
             CurrentFlowsheet.FlowsheetOptions.FlowsheetTransitionObject = null;
 
             Close();
-
         }
 
         private void Button2_Click(object sender, EventArgs e)
