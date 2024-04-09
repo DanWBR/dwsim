@@ -287,7 +287,7 @@ namespace DWSIM.ProFeatures
             this.Controls.Add(this.flowLayoutPanel1);
             this.DoubleBuffered = true;
             this.Name = "FormPortal";
-            this.Size = new System.Drawing.Size(745, 707);
+            this.Size = new System.Drawing.Size(745, 534);
             this.Load += new System.EventHandler(this.FormPortal_Load);
             this.NoLicensePanel.ResumeLayout(false);
             this.NoLicensePanel.PerformLayout();
