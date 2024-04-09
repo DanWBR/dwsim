@@ -29,7 +29,7 @@ namespace DWSIM.ProFeatures
 
             Functions.CreateTransitionObject(CurrentFlowsheet, "", "Costing", "", "", default);
 
-            Functions.ProcessTransition(CurrentFlowsheet);
+            Functions.DisplayTransitionForm(CurrentFlowsheet, "Costing");
 
         }
 

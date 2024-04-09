@@ -31,7 +31,7 @@ namespace DWSIM.ProFeatures
 
             Functions.CreateTransitionObject(CurrentFlowsheet, "", "GHG Emissions", "", "", default);
 
-            Functions.ProcessTransition(CurrentFlowsheet);
+            Functions.DisplayTransitionForm(CurrentFlowsheet, "GHG Emissions");
 
         }
 
