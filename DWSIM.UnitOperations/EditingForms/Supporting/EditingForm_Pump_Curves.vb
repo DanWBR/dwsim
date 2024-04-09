@@ -21,11 +21,11 @@ Public Class EditingForm_Pump_Curves
             Me.ToolStrip1.AutoSize = False
             Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
             Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
-            For Each item In Me.ToolStrip1.Items
-                If TryCast(item, ToolStripButton) IsNot Nothing Then
-                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
-                End If
-            Next
+            'For Each item In Me.ToolStrip1.Items
+            '    If TryCast(item, ToolStripButton) IsNot Nothing Then
+            '        DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+            '    End If
+            'Next
             Me.ToolStrip1.Invalidate()
 
         End Using
@@ -33,7 +33,7 @@ Public Class EditingForm_Pump_Curves
         Dim curve As UnitOperations.Auxiliary.PumpOps.Curve
         Dim i As Integer = 0
 
-        curve = Me.selectedpump.Curves("HEAD")
+        curve = Me.selectedpump.PumpCurveSet.CurveHead
         Me.dgv1.Rows.Clear()
         Me.cb1.SelectedItem = curve.xunit
         Me.cb6.SelectedItem = curve.yunit
@@ -42,12 +42,12 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv1.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
+                    .Add(New Object() {curve.X(i), curve.Y(i)})
                 Next
             End With
         End If
 
-        curve = Me.selectedpump.Curves("POWER")
+        curve = Me.selectedpump.PumpCurveSet.CurvePower
         Me.dgv2.Rows.Clear()
         Me.cb2.SelectedItem = curve.xunit
         Me.cb7.SelectedItem = curve.yunit
@@ -56,12 +56,12 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv2.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
+                    .Add(New Object() {curve.X(i), curve.Y(i)})
                 Next
             End With
         End If
 
-        curve = Me.selectedpump.Curves("EFF")
+        curve = Me.selectedpump.PumpCurveSet.CurveEfficiency
         Me.dgv3.Rows.Clear()
         Me.cb3.SelectedItem = curve.xunit
         Me.cb8.SelectedItem = curve.yunit
@@ -70,13 +70,13 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv3.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
+                    .Add(New Object() {curve.X(i), curve.Y(i)})
                 Next
             End With
         End If
 
 
-        curve = Me.selectedpump.Curves("NPSH")
+        curve = Me.selectedpump.PumpCurveSet.CurveNPSHr
         Me.dgv4.Rows.Clear()
         Me.cb4.SelectedItem = curve.xunit
         Me.cb9.SelectedItem = curve.yunit
@@ -85,43 +85,20 @@ Public Class EditingForm_Pump_Curves
         If curve.x.Count > 0 Then
             With Me.dgv4.Rows
                 For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
+                    .Add(New Object() {curve.X(i), curve.Y(i)})
                 Next
             End With
         End If
 
+        Me.TBImpellerDiam.Text = selectedpump.PumpCurveSet.ImpellerDiameter
 
-        curve = Me.selectedpump.Curves("SYSTEM")
-        Me.dgv5.Rows.Clear()
-        Me.cb5.SelectedItem = curve.xunit
-        Me.cb10.SelectedItem = curve.yunit
-        Me.tb5.Text = curve.Name
-        Me.ch5.Checked = curve.Enabled
-        If curve.x.Count > 0 Then
-            With Me.dgv5.Rows
-                For i = 0 To curve.x.Count - 1
-                    .Add(New Object() {curve.x(i).ToString(), curve.y(i).ToString()})
-                Next
-            End With
-        End If
+        Me.TBImpellerSpeed.Text = selectedpump.PumpCurveSet.ImpellerSpeed
 
-        If selectedpump.ImpellerDiameter > 0 Then
-            Me.TBImpellerDiam.Text = selectedpump.ImpellerDiameter
-        Else
-            Me.TBImpellerDiam.Text = 200
-        End If
-        If selectedpump.ImpellerSpeed > 0 Then
-            Me.TBImpellerSpeed.Text = selectedpump.ImpellerSpeed
-        Else
-            Me.TBImpellerSpeed.Text = 1450
-        End If
+        tbName.Text = selectedpump.PumpCurveSet.Name
 
-        If selectedpump.DiameterUnit <> "" Then
-            CBDiameterUnit.SelectedItem = selectedpump.DiameterUnit
-        Else
-            Me.CBDiameterUnit.SelectedItem = "mm"
-        End If
+        tbDesc.Text = selectedpump.PumpCurveSet.Description
 
+        CBDiameterUnit.SelectedItem = selectedpump.PumpCurveSet.ImpellerDiameterUnit
 
         Try
             cbflowunit.SelectedIndex = 0
@@ -186,7 +163,7 @@ Public Class EditingForm_Pump_Curves
 
     End Function
 
-    Private Sub dgv_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dgv1.KeyDown, dgv5.KeyDown, dgv4.KeyDown, dgv3.KeyDown, dgv2.KeyDown
+    Private Sub dgv_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dgv1.KeyDown, dgv4.KeyDown, dgv3.KeyDown, dgv2.KeyDown
 
         If e.KeyCode = Keys.V And e.Control Then
             PasteData(sender)
@@ -195,87 +172,70 @@ Public Class EditingForm_Pump_Curves
     End Sub
 
     Private Sub ch1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch1.CheckedChanged
-        If Me.loaded Then Me.selectedpump.Curves("HEAD").Enabled = Me.ch1.Checked
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveHead.Enabled = Me.ch1.Checked
     End Sub
 
     Private Sub ch2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch2.CheckedChanged
-        If Me.loaded Then Me.selectedpump.Curves("POWER").Enabled = Me.ch2.Checked
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurvePower.Enabled = Me.ch2.Checked
     End Sub
 
     Private Sub ch3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch3.CheckedChanged
-        If Me.loaded Then Me.selectedpump.Curves("EFF").Enabled = Me.ch3.Checked
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveEfficiency.Enabled = Me.ch3.Checked
     End Sub
 
     Private Sub ch4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch4.CheckedChanged
-        If Me.loaded Then Me.selectedpump.Curves("NPSH").Enabled = Me.ch4.Checked
-    End Sub
-
-    Private Sub ch5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ch5.CheckedChanged
-        If Me.loaded Then Me.selectedpump.Curves("SYSTEM").Enabled = Me.ch5.Checked
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveNPSHr.Enabled = Me.ch4.Checked
     End Sub
 
     Private Sub tb1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb1.TextChanged
-        If Me.loaded Then Me.selectedpump.Curves("HEAD").Name = Me.tb1.Text
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveHead.Name = Me.tb1.Text
     End Sub
 
     Private Sub tb2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb2.TextChanged
-        If Me.loaded Then Me.selectedpump.Curves("POWER").Name = Me.tb2.Text
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurvePower.Name = Me.tb2.Text
     End Sub
 
     Private Sub tb3_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb3.TextChanged
-        If Me.loaded Then Me.selectedpump.Curves("EFF").Name = Me.tb3.Text
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveEfficiency.Name = Me.tb3.Text
     End Sub
 
     Private Sub tb4_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb4.TextChanged
-        If Me.loaded Then Me.selectedpump.Curves("NPSH").Name = Me.tb4.Text
-    End Sub
-
-    Private Sub tb5_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tb5.TextChanged
-        If Me.loaded Then Me.selectedpump.Curves("SYSTEM").Name = Me.tb5.Text
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveNPSHr.Name = Me.tb4.Text
     End Sub
 
     Private Sub cb1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb1.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("HEAD").xunit = Me.cb1.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveHead.xunit = Me.cb1.SelectedItem.ToString
     End Sub
 
     Private Sub cb2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb2.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("POWER").xunit = Me.cb2.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurvePower.xunit = Me.cb2.SelectedItem.ToString
     End Sub
 
     Private Sub cb3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb3.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("EFF").xunit = Me.cb3.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveEfficiency.xunit = Me.cb3.SelectedItem.ToString
     End Sub
 
     Private Sub cb4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb4.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("NPSH").xunit = Me.cb4.SelectedItem.ToString
-    End Sub
-
-    Private Sub cb5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb5.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("SYSTEM").xunit = Me.cb5.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveNPSHr.xunit = Me.cb4.SelectedItem.ToString
     End Sub
 
     Private Sub cb6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb6.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("HEAD").yunit = Me.cb6.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveHead.yunit = Me.cb6.SelectedItem.ToString
     End Sub
 
     Private Sub cb7_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb7.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("POWER").yunit = Me.cb7.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurvePower.yunit = Me.cb7.SelectedItem.ToString
     End Sub
 
     Private Sub cb8_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb8.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("EFF").yunit = Me.cb8.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveEfficiency.yunit = Me.cb8.SelectedItem.ToString
     End Sub
 
     Private Sub cb9_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb9.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("NPSH").yunit = Me.cb9.SelectedItem.ToString
+        If Me.loaded Then Me.selectedpump.PumpCurveSet.CurveNPSHr.yunit = Me.cb9.SelectedItem.ToString
     End Sub
 
-    Private Sub cb10_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cb10.SelectedIndexChanged
-        If Me.loaded Then Me.selectedpump.Curves("SYSTEM").yunit = Me.cb10.SelectedItem.ToString
-    End Sub
-
-    Private Sub dgv_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgv1.CellValueChanged, dgv5.CellValueChanged, dgv4.CellValueChanged, dgv3.CellValueChanged, dgv2.CellValueChanged
-
+    Private Sub dgv_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgv1.CellValueChanged, dgv4.CellValueChanged, dgv3.CellValueChanged, dgv2.CellValueChanged
 
         If loaded Then
 
@@ -284,32 +244,33 @@ Public Class EditingForm_Pump_Curves
             If Not dg.Rows(e.RowIndex).Cells(0).ToString = "" _
                 And Not dg.Rows(e.RowIndex).Cells(1).ToString = "" Then
 
-                Dim x, y As New ArrayList
+                Dim x, y As New List(Of Double)
 
-                For Each r As DataGridViewRow In dg.Rows
-                    If Not r.Cells(0).Value Is Nothing _
+                Try
+                    For Each r As DataGridViewRow In dg.Rows
+                        If Not r.Cells(0).Value Is Nothing _
                     And Not r.Cells(1).Value Is Nothing Then
-                        x.Add(Double.Parse(r.Cells(0).Value.ToString()))
-                        y.Add(Double.Parse(r.Cells(1).Value.ToString()))
-                    End If
-                Next
+                            x.Add(Double.Parse(r.Cells(0).Value))
+                            y.Add(Double.Parse(r.Cells(1).Value))
+                        End If
+                    Next
+                Catch ex As Exception
+                    MessageBox.Show("Error parsing table data.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
 
                 Select Case dg.Name
                     Case "dgv1"
-                        Me.selectedpump.Curves("HEAD").x = x
-                        Me.selectedpump.Curves("HEAD").y = y
+                        Me.selectedpump.PumpCurveSet.CurveHead.X = x
+                        Me.selectedpump.PumpCurveSet.CurveHead.Y = y
                     Case "dgv2"
-                        Me.selectedpump.Curves("POWER").x = x
-                        Me.selectedpump.Curves("POWER").y = y
+                        Me.selectedpump.PumpCurveSet.CurvePower.X = x
+                        Me.selectedpump.PumpCurveSet.CurvePower.Y = y
                     Case "dgv3"
-                        Me.selectedpump.Curves("EFF").x = x
-                        Me.selectedpump.Curves("EFF").y = y
+                        Me.selectedpump.PumpCurveSet.CurveEfficiency.X = x
+                        Me.selectedpump.PumpCurveSet.CurveEfficiency.Y = y
                     Case "dgv4"
-                        Me.selectedpump.Curves("NPSH").x = x
-                        Me.selectedpump.Curves("NPSH").y = y
-                    Case "dgv5"
-                        Me.selectedpump.Curves("SYSTEM").x = x
-                        Me.selectedpump.Curves("SYSTEM").y = y
+                        Me.selectedpump.PumpCurveSet.CurveNPSHr.X = x
+                        Me.selectedpump.PumpCurveSet.CurveNPSHr.Y = y
                 End Select
 
             End If
@@ -360,20 +321,18 @@ Public Class EditingForm_Pump_Curves
 
     Sub DrawChart()
 
-        Dim pxh, pyh, pxp, pyp, pxn, pyn, pxs, pys, pxe, pye, pxop, pyop, pxnd, pynd As New ArrayList
+        Dim pxh, pyh, pxp, pyp, pxn, pyn, pxe, pye, pxop, pyop, pxnd, pynd As New ArrayList
 
         Dim i As Integer
         Dim xunit, yunit As String
-        Dim x, y As ArrayList
+        Dim x, y As List(Of Double)
         'analyze data, interpolate, bla, bla bla...
 
-        Me.selectedpump.CreateCurves()
-
-        If Me.selectedpump.Curves("HEAD").Enabled Then
-            x = Me.selectedpump.Curves("HEAD").x
-            y = Me.selectedpump.Curves("HEAD").y
-            xunit = Me.selectedpump.Curves("HEAD").xunit
-            yunit = Me.selectedpump.Curves("HEAD").yunit
+        If Me.selectedpump.PumpCurveSet.CurveHead.Enabled Then
+            x = Me.selectedpump.PumpCurveSet.CurveHead.X
+            y = Me.selectedpump.PumpCurveSet.CurveHead.Y
+            xunit = Me.selectedpump.PumpCurveSet.CurveHead.xunit
+            yunit = Me.selectedpump.PumpCurveSet.CurveHead.yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
                     pxh.Add(cv.ConvertFromSI(flowunit, cv.ConvertToSI(xunit, x(i))))
@@ -382,11 +341,11 @@ Public Class EditingForm_Pump_Curves
             Next
         End If
 
-        If Me.selectedpump.Curves("POWER").Enabled Then
-            x = Me.selectedpump.Curves("POWER").x
-            y = Me.selectedpump.Curves("POWER").y
-            xunit = Me.selectedpump.Curves("POWER").xunit
-            yunit = Me.selectedpump.Curves("POWER").yunit
+        If Me.selectedpump.PumpCurveSet.CurvePower.Enabled Then
+            x = Me.selectedpump.PumpCurveSet.CurvePower.X
+            y = Me.selectedpump.PumpCurveSet.CurvePower.Y
+            xunit = Me.selectedpump.PumpCurveSet.CurvePower.xunit
+            yunit = Me.selectedpump.PumpCurveSet.CurvePower.yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
                     pxp.Add(cv.ConvertFromSI(flowunit, cv.ConvertToSI(xunit, x(i))))
@@ -395,11 +354,11 @@ Public Class EditingForm_Pump_Curves
             Next
         End If
 
-        If Me.selectedpump.Curves("EFF").Enabled Then
-            x = Me.selectedpump.Curves("EFF").x
-            y = Me.selectedpump.Curves("EFF").y
-            xunit = Me.selectedpump.Curves("EFF").xunit
-            yunit = Me.selectedpump.Curves("EFF").yunit
+        If Me.selectedpump.PumpCurveSet.CurveEfficiency.Enabled Then
+            x = Me.selectedpump.PumpCurveSet.CurveEfficiency.X
+            y = Me.selectedpump.PumpCurveSet.CurveEfficiency.Y
+            xunit = Me.selectedpump.PumpCurveSet.CurveEfficiency.xunit
+            yunit = Me.selectedpump.PumpCurveSet.CurveEfficiency.yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
                     pxe.Add(cv.ConvertFromSI(flowunit, cv.ConvertToSI(xunit, x(i))))
@@ -420,28 +379,15 @@ Public Class EditingForm_Pump_Curves
             Next
         End If
 
-        If Me.selectedpump.Curves("NPSH").Enabled Then
-            x = Me.selectedpump.Curves("NPSH").x
-            y = Me.selectedpump.Curves("NPSH").y
-            xunit = Me.selectedpump.Curves("NPSH").xunit
-            yunit = Me.selectedpump.Curves("NPSH").yunit
+        If Me.selectedpump.PumpCurveSet.CurveNPSHr.Enabled Then
+            x = Me.selectedpump.PumpCurveSet.CurveNPSHr.X
+            y = Me.selectedpump.PumpCurveSet.CurveNPSHr.Y
+            xunit = Me.selectedpump.PumpCurveSet.CurveNPSHr.xunit
+            yunit = Me.selectedpump.PumpCurveSet.CurveNPSHr.yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
                     pxn.Add(cv.ConvertFromSI(flowunit, cv.ConvertToSI(xunit, x(i))))
                     pyn.Add(cv.ConvertFromSI(headunit, cv.ConvertToSI(yunit, y(i))))
-                End If
-            Next
-        End If
-
-        If Me.selectedpump.Curves("SYSTEM").Enabled Then
-            x = Me.selectedpump.Curves("SYSTEM").x
-            y = Me.selectedpump.Curves("SYSTEM").y
-            xunit = Me.selectedpump.Curves("SYSTEM").xunit
-            yunit = Me.selectedpump.Curves("SYSTEM").yunit
-            For i = 0 To x.Count - 1
-                If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                    pxs.Add(cv.ConvertFromSI(flowunit, cv.ConvertToSI(xunit, x(i))))
-                    pys.Add(cv.ConvertFromSI(headunit, cv.ConvertToSI(yunit, y(i))))
                 End If
             Next
         End If
@@ -527,19 +473,6 @@ Public Class EditingForm_Pump_Curves
                     .YAxisIndex = 3 'Me.chart1.GraphPane.YAxisList.IndexOf("NPSH Req. (" & headunit & ")")
                 End With
             End If
-            If pys.Count > 0 Then
-                With .AddCurve("System Head", pxs.ToArray(GetType(Double)), pys.ToArray(GetType(Double)), Color.Black)
-                    .Line.IsVisible = True
-                    .Line.IsSmooth = True
-                    .Color = Color.Salmon
-                    .Symbol.Type = ZedGraph.SymbolType.Circle
-                    .Symbol.Fill.Type = ZedGraph.FillType.Solid
-                    .Symbol.Fill.Color = Color.Salmon
-                    .Symbol.Fill.IsVisible = True
-                    .Symbol.Size = 5
-                    .YAxisIndex = 0 'Me.chart1.GraphPane.YAxisList.IndexOf("System Head (" & headunit & ")")
-                End With
-            End If
             If pyop.Count > 0 Then
                 With .AddCurve("Operating Point", pxop.ToArray(GetType(Double)), pyop.ToArray(GetType(Double)), Color.Black)
                     .Line.IsVisible = True
@@ -598,13 +531,13 @@ Public Class EditingForm_Pump_Curves
 
     Private Sub TBImpellerDiam_TextChanged(sender As Object, e As EventArgs) Handles TBImpellerDiam.TextChanged
         If loaded Then
-            selectedpump.ImpellerDiameter = TBImpellerDiam.Text
+            selectedpump.PumpCurveSet.ImpellerDiameter = TBImpellerDiam.Text
         End If
     End Sub
 
     Private Sub TB_RPM_TextChanged(sender As Object, e As EventArgs) Handles TBImpellerSpeed.TextChanged
         If loaded Then
-            selectedpump.ImpellerSpeed = TBImpellerSpeed.Text
+            selectedpump.PumpCurveSet.ImpellerSpeed = TBImpellerSpeed.Text
         End If
     End Sub
 
@@ -612,6 +545,14 @@ Public Class EditingForm_Pump_Curves
 
         ChangeDefaultFont()
 
+    End Sub
+
+    Private Sub tbName_TextChanged(sender As Object, e As EventArgs) Handles tbName.TextChanged
+        selectedpump.PumpCurveSet.Name = tbName.Text
+    End Sub
+
+    Private Sub tbDesc_TextChanged(sender As Object, e As EventArgs) Handles tbDesc.TextChanged
+        selectedpump.PumpCurveSet.Description = tbDesc.Text
     End Sub
 
     Private Sub tsbImport_Click(sender As Object, e As EventArgs) Handles tsbImport.Click
@@ -623,13 +564,8 @@ Public Class EditingForm_Pump_Curves
         If handler IsNot Nothing Then
             Dim text = handler.ReadAllText()
             Try
-                Dim data = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, UnitOperations.Auxiliary.PumpOps.Curve))(text)
-                selectedpump.Curves = data
-                If data.First.Value.ImpellerDiameter > 0.0 Then
-                    selectedpump.ImpellerDiameter = data.First.Value.ImpellerDiameter
-                    selectedpump.ImpellerSpeed = data.First.Value.ImpellerSpeed
-                    selectedpump.DiameterUnit = data.First.Value.ImpellerDiameterUnit
-                End If
+                Dim data = Newtonsoft.Json.JsonConvert.DeserializeObject(Of UnitOperations.Auxiliary.PumpOps.CurveSet)(text)
+                selectedpump.PumpCurveSet = data
                 PumpCurvesEditorForm_Load(sender, e)
             Catch ex As Exception
                 MessageBox.Show(selectedpump.GetFlowsheet.GetTranslatedString("ErrorAddingComponent") & " " & ex.Message,
@@ -649,12 +585,7 @@ Public Class EditingForm_Pump_Curves
 
         If handler IsNot Nothing Then
             Try
-                For Each c In selectedpump.Curves.Values
-                    c.ImpellerDiameter = selectedpump.ImpellerDiameter
-                    c.ImpellerDiameterUnit = selectedpump.DiameterUnit
-                    c.ImpellerSpeed = selectedpump.ImpellerSpeed
-                Next
-                Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(selectedpump.Curves, Newtonsoft.Json.Formatting.Indented)
+                Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(selectedpump.PumpCurveSet, Newtonsoft.Json.Formatting.Indented)
                 Using stream As New IO.MemoryStream()
                     Using writer As New StreamWriter(stream) With {.AutoFlush = True}
                         writer.Write(jsondata)
@@ -673,7 +604,7 @@ Public Class EditingForm_Pump_Curves
 
     Private Sub CBDiameterUnit_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBDiameterUnit.SelectedIndexChanged
         If loaded Then
-            selectedpump.DiameterUnit = CBDiameterUnit.Text
+            selectedpump.PumpCurveSet.ImpellerDiameterUnit = CBDiameterUnit.Text
         End If
     End Sub
 
