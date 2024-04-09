@@ -19,13 +19,6 @@ namespace DWSIM.ProFeatures
             _lblFeature.Name = "lblFeature";
         }
 
-        private void FormGHG_Load(object sender, EventArgs e)
-        {
-
-            ExtensionMethods.FormExtensions.ChangeDefaultFont(this);
-
-        }
-
         private void Button2_Click(object sender, EventArgs e)
         {
 
@@ -35,5 +28,9 @@ namespace DWSIM.ProFeatures
 
         }
 
+        private void FormGHG_Load_1(object sender, EventArgs e)
+        {
+            ExtensionMethods.FormExtensions.ChangeDefaultFont(this);
+        }
     }
 }

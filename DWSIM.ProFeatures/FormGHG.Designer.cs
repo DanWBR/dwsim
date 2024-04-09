@@ -136,6 +136,7 @@ namespace DWSIM.ProFeatures
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
             this.TabText = "GHG Emissions";
             this.Text = "GHG Emissions";
+            this.Load += new System.EventHandler(this.FormGHG_Load_1);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();

@@ -134,6 +134,7 @@ namespace DWSIM.ProFeatures
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
             this.TabText = "Costing";
             this.Text = "Costing";
+            this.Load += new System.EventHandler(this.FormCosting_Load_1);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
