@@ -358,13 +358,6 @@ Public Class FormMain
 
     End Sub
 
-    Private Function TransitionUserToDWSIMPro(flowsheet As IFlowsheet) As Boolean
-        Dim portalFom = New FormPortal(flowsheet)
-        portalFom.ShowDialog()
-        Return True
-    End Function
-
-
     Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
         Me.SaveFile(True, True)
 

@@ -918,7 +918,6 @@ Partial Class FormMain
                 Threading.Thread.Sleep(3000)
             End Using
         End If
-        ProFeatures.Functions.TransitionAction = AddressOf TransitionUserToDWSIMPro
     End Sub
 
     Public WithEvents DWSIMNaInternetToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

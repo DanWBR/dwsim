@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace DWSIM.ProFeatures
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class FormPortal : System.Windows.Forms.Form
+    public partial class FormPortal : System.Windows.Forms.UserControl
     {
 
         // Form overrides dispose to clean up the component list.
@@ -33,12 +33,10 @@ namespace DWSIM.ProFeatures
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPortal));
             this.StatusMessage = new System.Windows.Forms.Label();
-            this.LinkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Label1 = new System.Windows.Forms.Label();
             this.NoLicensePanel = new System.Windows.Forms.Panel();
-            this.Label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.LoadingPanel = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.notLoggedInPanel = new System.Windows.Forms.Panel();
@@ -46,6 +44,12 @@ namespace DWSIM.ProFeatures
             this.label4 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.SuccessPanel = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -68,46 +72,35 @@ namespace DWSIM.ProFeatures
             this.StatusMessage.TabIndex = 1;
             this.StatusMessage.Text = "This is a progress label...";
             // 
-            // LinkLabel1
-            // 
-            this.LinkLabel1.AutoSize = true;
-            this.LinkLabel1.Location = new System.Drawing.Point(290, 4);
-            this.LinkLabel1.Margin = new System.Windows.Forms.Padding(0);
-            this.LinkLabel1.Name = "LinkLabel1";
-            this.LinkLabel1.Size = new System.Drawing.Size(32, 13);
-            this.LinkLabel1.TabIndex = 2;
-            this.LinkLabel1.TabStop = true;
-            this.LinkLabel1.Text = "Shop";
-            this.LinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
-            // 
             // Label1
             // 
             this.Label1.AutoSize = true;
             this.Label1.Location = new System.Drawing.Point(4, 4);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(290, 13);
+            this.Label1.Size = new System.Drawing.Size(402, 13);
             this.Label1.TabIndex = 3;
-            this.Label1.Text = "You don\'t have an active DWSIM Pro license. Please go to ";
+            this.Label1.Text = "You don\'t have an active DWSIM Pro license. Please go to Shop to get the license." +
+    "";
             // 
             // NoLicensePanel
             // 
-            this.NoLicensePanel.Controls.Add(this.Label2);
+            this.NoLicensePanel.Controls.Add(this.button1);
             this.NoLicensePanel.Controls.Add(this.Label1);
-            this.NoLicensePanel.Controls.Add(this.LinkLabel1);
             this.NoLicensePanel.Location = new System.Drawing.Point(3, 33);
             this.NoLicensePanel.Name = "NoLicensePanel";
-            this.NoLicensePanel.Size = new System.Drawing.Size(580, 23);
+            this.NoLicensePanel.Size = new System.Drawing.Size(652, 48);
             this.NoLicensePanel.TabIndex = 4;
             this.NoLicensePanel.Visible = false;
             // 
-            // Label2
+            // button1
             // 
-            this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(325, 4);
-            this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(82, 13);
-            this.Label2.TabIndex = 4;
-            this.Label2.Text = "to get a license.";
+            this.button1.Location = new System.Drawing.Point(7, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Go to Shop";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // LoadingPanel
             // 
@@ -115,7 +108,7 @@ namespace DWSIM.ProFeatures
             this.LoadingPanel.Controls.Add(this.StatusMessage);
             this.LoadingPanel.Location = new System.Drawing.Point(3, 3);
             this.LoadingPanel.Name = "LoadingPanel";
-            this.LoadingPanel.Size = new System.Drawing.Size(580, 24);
+            this.LoadingPanel.Size = new System.Drawing.Size(652, 24);
             this.LoadingPanel.TabIndex = 5;
             this.LoadingPanel.Visible = false;
             // 
@@ -126,9 +119,9 @@ namespace DWSIM.ProFeatures
             this.flowLayoutPanel1.Controls.Add(this.notLoggedInPanel);
             this.flowLayoutPanel1.Controls.Add(this.SuccessPanel);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(92, 490);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(87, 381);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(596, 248);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(655, 256);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // notLoggedInPanel
@@ -136,15 +129,15 @@ namespace DWSIM.ProFeatures
             this.notLoggedInPanel.Controls.Add(this.label3);
             this.notLoggedInPanel.Controls.Add(this.label4);
             this.notLoggedInPanel.Controls.Add(this.linkLabel2);
-            this.notLoggedInPanel.Location = new System.Drawing.Point(3, 62);
+            this.notLoggedInPanel.Location = new System.Drawing.Point(3, 87);
             this.notLoggedInPanel.Name = "notLoggedInPanel";
-            this.notLoggedInPanel.Size = new System.Drawing.Size(580, 22);
+            this.notLoggedInPanel.Size = new System.Drawing.Size(652, 22);
             this.notLoggedInPanel.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(71, 3);
+            this.label3.Location = new System.Drawing.Point(77, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 7;
@@ -165,46 +158,110 @@ namespace DWSIM.ProFeatures
             this.linkLabel2.Location = new System.Drawing.Point(39, 3);
             this.linkLabel2.Margin = new System.Windows.Forms.Padding(0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(33, 13);
+            this.linkLabel2.Size = new System.Drawing.Size(36, 13);
             this.linkLabel2.TabIndex = 5;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Login";
+            this.linkLabel2.Text = "Log in";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // SuccessPanel
             // 
+            this.SuccessPanel.Controls.Add(this.button3);
+            this.SuccessPanel.Controls.Add(this.button2);
+            this.SuccessPanel.Controls.Add(this.label10);
+            this.SuccessPanel.Controls.Add(this.label9);
+            this.SuccessPanel.Controls.Add(this.label8);
+            this.SuccessPanel.Controls.Add(this.label7);
             this.SuccessPanel.Controls.Add(this.label5);
-            this.SuccessPanel.Location = new System.Drawing.Point(3, 90);
+            this.SuccessPanel.Location = new System.Drawing.Point(3, 115);
             this.SuccessPanel.Name = "SuccessPanel";
-            this.SuccessPanel.Size = new System.Drawing.Size(580, 27);
+            this.SuccessPanel.Size = new System.Drawing.Size(652, 135);
             this.SuccessPanel.TabIndex = 7;
             this.SuccessPanel.Visible = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(274, 103);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(190, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Open in Incognito/Private mode";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(80, 103);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(167, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Open with default browser";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 81);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(589, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Launch private browsing mode to access DWSIM Pro: “Incognito” for Chrome, “InPriv" +
+    "ate” for Edge and “Private” for Firefox.";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(2, 59);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(240, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "\"Your administrator hasn’t set up any resources\". ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 41);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(525, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "If you are logged in on your PC to your company or personal Microsoft account, yo" +
+    "u can get an error message:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(2, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(245, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Your Simulate 365 account is a Microsoft account.";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(2, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(353, 13);
+            this.label5.Size = new System.Drawing.Size(280, 13);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Double-click on the DWSIM Pro icon to launch a session in your browser.";
+            this.label5.Text = "You log in to DWSIM Pro with your Simulate 365 account.";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DWSIM.ProFeatures.My.Resources.Resources._2149311493;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
+            this.pictureBox1.Location = new System.Drawing.Point(0, -1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(694, 463);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(745, 353);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DWSIM.ProFeatures.My.Resources.Resources.Icon1281;
-            this.pictureBox2.Location = new System.Drawing.Point(4, 467);
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 358);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(86, 86);
+            this.pictureBox2.Size = new System.Drawing.Size(89, 86);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
@@ -213,7 +270,7 @@ namespace DWSIM.ProFeatures
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(96, 469);
+            this.label6.Location = new System.Drawing.Point(91, 360);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(216, 20);
             this.label6.TabIndex = 9;
@@ -224,16 +281,13 @@ namespace DWSIM.ProFeatures
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(691, 558);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.DoubleBuffered = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormPortal";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DWSIM Pro Portal";
+            this.Size = new System.Drawing.Size(745, 534);
             this.Load += new System.EventHandler(this.FormPortal_Load);
             this.NoLicensePanel.ResumeLayout(false);
             this.NoLicensePanel.PerformLayout();
@@ -251,11 +305,9 @@ namespace DWSIM.ProFeatures
 
         }
         internal System.Windows.Forms.Label StatusMessage;
-        internal System.Windows.Forms.LinkLabel LinkLabel1;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.Panel NoLicensePanel;
         internal System.Windows.Forms.Panel LoadingPanel;
-        internal System.Windows.Forms.Label Label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel notLoggedInPanel;
         internal System.Windows.Forms.Label label3;
@@ -266,5 +318,12 @@ namespace DWSIM.ProFeatures
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }

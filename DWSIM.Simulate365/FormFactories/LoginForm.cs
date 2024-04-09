@@ -28,14 +28,14 @@ namespace DWSIM.Simulate365.FormFactories
         private WebUIForm _webUIForm;
         private AuthService _authService;
 
-        public LoginForm()
+        public LoginForm(bool? hideIntro = false)
         {
             _authService = new AuthService();
             _authService.OnNavigateToLoginPage += (s, e) => RedirectToLoginPage();
 
             var initalUrl = GetLoginPageUrl();
             var useLocalUI = false;
-            if (!IsProVersion())
+            if (!IsProVersion() && (hideIntro == null || hideIntro == false))
             {
                 initalUrl = "login/intro";
                 useLocalUI = true;
@@ -95,7 +95,7 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm?.Navigate(loginUrl);
         }
 
-      
+
 
         private void WebView_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
         {

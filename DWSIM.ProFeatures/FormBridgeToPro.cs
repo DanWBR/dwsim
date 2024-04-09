@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace DWSIM.ProFeatures
 {
 
-    public partial class FormBridgeToPro:Form
+    public partial class FormBridgeToPro : Form
     {
 
         public IFlowsheet CurrentFlowsheet;
@@ -20,28 +20,28 @@ namespace DWSIM.ProFeatures
 
         private void FormBridgeToPro_Load(object sender, EventArgs e)
         {
-
             ExtensionMethods.FormExtensions.ChangeDefaultFont(this);
-
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
             CurrentFlowsheet.FlowsheetOptions.FlowsheetTransitionObject = null;
 
             Close();
-
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
 
             Transitioning = true;
+            BridgeToProPanel.Visible = false;
+            formPortal.Visible = true;
+            formPortal.SetFlowsheet(CurrentFlowsheet);
+            formPortal.OnInitialize();
 
-            Functions.ProcessTransition(CurrentFlowsheet);
+            // Functions.ProcessTransition(CurrentFlowsheet);
 
-            Close();
+            //Close();
 
         }
 
@@ -53,5 +53,9 @@ namespace DWSIM.ProFeatures
 
         }
 
+        private void formPortal_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

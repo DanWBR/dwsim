@@ -12,11 +12,13 @@ using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web.Settings;
 using Newtonsoft.Json;
 using DWSIM.ExtensionMethods;
+using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace DWSIM.ProFeatures
 {
 
-    public partial class FormPortal : Form
+    public partial class FormPortal : UserControl
     {
         private bool IsLoadingLicenseInfo = false;
         private int TrialLicenseCreatedMessageCount = 0;
@@ -26,12 +28,16 @@ namespace DWSIM.ProFeatures
 
         private List<string> TrialLicenseCreatedMessages = new List<string>() { "Assigning DWSIM Pro license...", "Setting up the virtual licensing environment...", "Finalizing setup..." };
 
-        public FormPortal(IFlowsheet fs)
+        public FormPortal()
         {
             InitializeComponent();
-            fsheet = fs;
+
             FileManagementService.GetInstance().OnFileSavedToDashboard += FileManagementService_FileSavedToDashboard;
             UserService.GetInstance().OnUserLoggedIn += UserService_OnUserLoggedIn;
+        }
+        public void SetFlowsheet(IFlowsheet fs)
+        {
+            fsheet = fs;
         }
 
         private void UserService_OnUserLoggedIn(object sender, EventArgs e)
@@ -45,12 +51,12 @@ namespace DWSIM.ProFeatures
 
         private void FormPortal_Load(object sender, EventArgs e)
         {
-            this.ChangeDefaultFont();
-            OnInitialize();
+          
         }
 
-        private async Task OnInitialize()
+        public async Task OnInitialize()
         {
+           // Debugger.Launch();
             var isLoggedIn = UserService.GetInstance()._IsLoggedIn();
             if (!isLoggedIn)
             {
@@ -93,9 +99,10 @@ namespace DWSIM.ProFeatures
             if (TrialLicenseCreatedMessageCount + 1 <= TrialLicenseCreatedMessages.Count)
             {
                 TrialLicenseCreatedMessageCount += 1;
-                this.UIThread(() => {
+                this.UIThread(() =>
+                {
                     StatusMessage.Text = TrialLicenseCreatedMessages[TrialLicenseCreatedMessageCount];
-                });   
+                });
             }
             else
             {
@@ -104,7 +111,7 @@ namespace DWSIM.ProFeatures
             }
         }
 
-        private  void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
+        private void FileManagementService_FileSavedToDashboard(object sender, EventArgs e)
         {
             SaveStartupActionAndRedirect();
 
@@ -121,7 +128,7 @@ namespace DWSIM.ProFeatures
                 {
                     FileSavingInProgress = false;
                     bool actionSaved = await SaveDwsimProStartupAction();
-                    RedirectToDWSIMPro();
+                    ShowSuccessPanel();
                 }
             }
         }
@@ -163,20 +170,17 @@ namespace DWSIM.ProFeatures
             return null;
         }
 
-        private void RedirectToDWSIMPro()
+        private void ShowSuccessPanel()
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(RedirectToDWSIMPro));
+                this.Invoke(new Action(ShowSuccessPanel));
             }
             else
             {
                 LoadingPanel.Visible = false;
                 SuccessPanel.Visible = true;
-                Process.Start("https://vm.simulate365.com");
             }
-
-
         }
 
         private void SaveFlowsheet()
@@ -249,8 +253,100 @@ namespace DWSIM.ProFeatures
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var loginForm = new LoginForm();
+            var loginForm = new LoginForm(true);
             loginForm.ShowDialog();
+        }
+
+        private void openInDefaultBrowserLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://vm.simulate365.com");
+        }
+
+        private void openInIncognitoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+          
+        }
+
+        private string GetDefaultBrowserLocation()
+        {
+            var progId = GetStandardBrowserProgId();
+            using var command = Registry.ClassesRoot.OpenSubKey($"{progId}\\shell\\open\\command");
+            var runCommand = command?.GetValue(null) as string;
+            if (!string.IsNullOrWhiteSpace(runCommand))
+            {
+                var splitCommand=Regex.Split(runCommand,".exe");
+                var browserLocation= splitCommand[0].Replace("\"","");
+                return browserLocation+".exe";
+
+            }
+            return string.Empty;
+        }
+              
+
+        private static string GetStandardBrowserProgId()
+        {
+            string userChoice = @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
+            string progId;
+            using (RegistryKey userChoiceKey = Registry.CurrentUser.OpenSubKey(userChoice))
+            {
+                if (userChoiceKey == null)
+                {
+                    return string.Empty;
+                }
+                object progIdValue = userChoiceKey.GetValue("Progid");
+                if (progIdValue == null)
+                {
+                    return string.Empty;
+                }
+                progId = progIdValue.ToString();
+                return progId;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://simulate365.com/shop/");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string privateModeParam = string.Empty;
+            var url = "https://vm.simulate365.com";
+            var browserProgId = GetStandardBrowserProgId()?.ToLower();
+            if (string.IsNullOrWhiteSpace(browserProgId))
+            {
+                Process.Start(url);
+            }
+            else
+            {
+
+                if (browserProgId.Contains("firefox"))
+                {
+                    privateModeParam = " --private-window";
+                }
+                else if (browserProgId.Contains("ie.http"))
+                {
+                    privateModeParam = " -private";
+                }
+                else if (browserProgId.Contains("chrome") || browserProgId.Contains("opera"))
+                {
+                    privateModeParam = " /incognito";
+                }
+                else if (browserProgId.Contains("edge"))
+                {
+                    privateModeParam = " -inprivate";
+                }
+
+                var browserLocation = GetDefaultBrowserLocation();
+
+
+                Process.Start(browserLocation, $"{privateModeParam} {url}");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://vm.simulate365.com");
         }
     }
 }
