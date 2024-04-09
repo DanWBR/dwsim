@@ -56,7 +56,7 @@ namespace DWSIM.ProFeatures
             // PictureBox1
             // 
             this.PictureBox1.Image = global::DWSIM.ProFeatures.My.Resources.Resources.Icon512;
-            this.PictureBox1.Location = new System.Drawing.Point(459, 135);
+            this.PictureBox1.Location = new System.Drawing.Point(459, 147);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(184, 226);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -78,7 +78,7 @@ namespace DWSIM.ProFeatures
             this.Button1.BackColor = System.Drawing.Color.SteelBlue;
             this.Button1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button1.ForeColor = System.Drawing.Color.White;
-            this.Button1.Location = new System.Drawing.Point(97, 367);
+            this.Button1.Location = new System.Drawing.Point(97, 379);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(182, 72);
             this.Button1.TabIndex = 2;
@@ -92,7 +92,7 @@ namespace DWSIM.ProFeatures
             this.Button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(166)))), ((int)(((byte)(13)))));
             this.Button2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button2.ForeColor = System.Drawing.Color.White;
-            this.Button2.Location = new System.Drawing.Point(432, 367);
+            this.Button2.Location = new System.Drawing.Point(432, 379);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(239, 72);
             this.Button2.TabIndex = 3;
@@ -103,7 +103,7 @@ namespace DWSIM.ProFeatures
             // Label4
             // 
             this.Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.Location = new System.Drawing.Point(409, 442);
+            this.Label4.Location = new System.Drawing.Point(409, 454);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(284, 64);
             this.Label4.TabIndex = 6;
@@ -124,7 +124,7 @@ namespace DWSIM.ProFeatures
             // PictureBox2
             // 
             this.PictureBox2.Image = global::DWSIM.ProFeatures.My.Resources.Resources.DWSIM_Icon_Vector_Transp;
-            this.PictureBox2.Location = new System.Drawing.Point(97, 135);
+            this.PictureBox2.Location = new System.Drawing.Point(97, 147);
             this.PictureBox2.Name = "PictureBox2";
             this.PictureBox2.Size = new System.Drawing.Size(182, 226);
             this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -134,7 +134,7 @@ namespace DWSIM.ProFeatures
             // PictureBox3
             // 
             this.PictureBox3.Image = global::DWSIM.ProFeatures.My.Resources.Resources.right_60px;
-            this.PictureBox3.Location = new System.Drawing.Point(339, 184);
+            this.PictureBox3.Location = new System.Drawing.Point(339, 196);
             this.PictureBox3.Name = "PictureBox3";
             this.PictureBox3.Size = new System.Drawing.Size(62, 98);
             this.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -149,7 +149,7 @@ namespace DWSIM.ProFeatures
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(753, 550);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(753, 599);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
             // BridgeToProPanel
@@ -164,13 +164,13 @@ namespace DWSIM.ProFeatures
             this.BridgeToProPanel.Controls.Add(this.Button2);
             this.BridgeToProPanel.Location = new System.Drawing.Point(3, 3);
             this.BridgeToProPanel.Name = "BridgeToProPanel";
-            this.BridgeToProPanel.Size = new System.Drawing.Size(750, 553);
+            this.BridgeToProPanel.Size = new System.Drawing.Size(750, 596);
             this.BridgeToProPanel.TabIndex = 0;
             // 
             // formPortal
             // 
             this.formPortal.BackColor = System.Drawing.Color.White;
-            this.formPortal.Location = new System.Drawing.Point(3, 562);
+            this.formPortal.Location = new System.Drawing.Point(3, 605);
             this.formPortal.Name = "formPortal";
             this.formPortal.Size = new System.Drawing.Size(750, 655);
             this.formPortal.TabIndex = 1;
@@ -182,7 +182,7 @@ namespace DWSIM.ProFeatures
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(753, 550);
+            this.ClientSize = new System.Drawing.Size(753, 599);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
