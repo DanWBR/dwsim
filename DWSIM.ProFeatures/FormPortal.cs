@@ -253,7 +253,7 @@ namespace DWSIM.ProFeatures
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var loginForm = new LoginForm();
+            var loginForm = new LoginForm(true);
             loginForm.ShowDialog();
         }
 
@@ -264,37 +264,7 @@ namespace DWSIM.ProFeatures
 
         private void openInIncognitoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string privateModeParam = string.Empty;
-            var url = "https://vm.simulate365.com";
-            var browserProgId = GetStandardBrowserProgId()?.ToLower();
-            if (string.IsNullOrWhiteSpace(browserProgId))
-            {
-                Process.Start(url);
-            }
-            else
-            {
-               
-                if (browserProgId.Contains("firefox"))
-                {
-                    privateModeParam = " --private-window";
-                }else if (browserProgId.Contains("ie.http"))
-                {
-                    privateModeParam = " -private";
-                }
-                else if (browserProgId.Contains("chrome") || browserProgId.Contains("opera"))
-                {
-                    privateModeParam = " /incognito";
-                }
-                else if (browserProgId.Contains("edge"))
-                {
-                    privateModeParam = " -inprivate";
-                }
-
-                var browserLocation = GetDefaultBrowserLocation();
-
-
-                Process.Start(browserLocation, $"{privateModeParam} {url}");
-            }
+          
         }
 
         private string GetDefaultBrowserLocation()
@@ -331,6 +301,52 @@ namespace DWSIM.ProFeatures
                 progId = progIdValue.ToString();
                 return progId;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://simulate365.com/shop/");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string privateModeParam = string.Empty;
+            var url = "https://vm.simulate365.com";
+            var browserProgId = GetStandardBrowserProgId()?.ToLower();
+            if (string.IsNullOrWhiteSpace(browserProgId))
+            {
+                Process.Start(url);
+            }
+            else
+            {
+
+                if (browserProgId.Contains("firefox"))
+                {
+                    privateModeParam = " --private-window";
+                }
+                else if (browserProgId.Contains("ie.http"))
+                {
+                    privateModeParam = " -private";
+                }
+                else if (browserProgId.Contains("chrome") || browserProgId.Contains("opera"))
+                {
+                    privateModeParam = " /incognito";
+                }
+                else if (browserProgId.Contains("edge"))
+                {
+                    privateModeParam = " -inprivate";
+                }
+
+                var browserLocation = GetDefaultBrowserLocation();
+
+
+                Process.Start(browserLocation, $"{privateModeParam} {url}");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://vm.simulate365.com");
         }
     }
 }
