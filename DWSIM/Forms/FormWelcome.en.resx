@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAo
-        KQAAAk1TRnQBSQFMAgEBBAEAAXABAAFwAQABIAEAASABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAGA
+        KQAAAk1TRnQBSQFMAgEBBAEAAXgBAAF4AQABIAEAASABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAGA
         AwABQAMAAQEBAAEQBgABQP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A
         /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AQAABPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/
         ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcBPwE3AT8BNwE/ATcWAAE/ATcBPwE3
@@ -422,8 +422,17 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Process Modeling</value>
   </data>
+  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 347</value>
+  </data>
+  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>889, 105</value>
+  </data>
   <data name="FlowLayoutPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>768, 62</value>
   </data>
   <data name="LinkLabel6.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 22</value>
@@ -464,9 +473,6 @@
   <data name="LinkLabel11.Text" xml:space="preserve">
     <value>Create New (with Wizard)</value>
   </data>
-  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>768, 62</value>
-  </data>
   <data name="PictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -482,30 +488,18 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>User Compound Creation / Data Regression</value>
   </data>
-  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 347</value>
-  </data>
-  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>889, 105</value>
-  </data>
-  <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 106</value>
-  </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>889, 118</value>
-  </data>
   <data name="LinkLabel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 82</value>
   </data>
   <data name="LinkLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 24</value>
+    <value>165, 24</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="LinkLabel7.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
   <data name="LinkLabel7.Text" xml:space="preserve">
-    <value>Get a Free Trial</value>
+    <value>Access DWSIM Pro now</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 37</value>
@@ -533,6 +527,12 @@
   </data>
   <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 118</value>
+  </data>
+  <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 106</value>
+  </data>
+  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>889, 118</value>
   </data>
   <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 458</value>
@@ -750,7 +750,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABO
-        pAAAAk1TRnQBSQFMAgEBBAEAAUgBAAFIAQABQAEAAUABAAT/AREBAAj/AUIBTQE2BwABNgMAASgEAAEB
+        pAAAAk1TRnQBSQFMAgEBBAEAAVABAAFQAQABQAEAAUABAAT/AREBAAj/AUIBTQE2BwABNgMAASgEAAEB
         AgABgAMAAQEBAAEQBwABAf8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A
         /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A
         /wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A

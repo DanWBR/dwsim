@@ -4928,13 +4928,8 @@ Label_00CC:
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
-        If IsPro Then
-            Dim fb As New FormBrowser()
-            fb.Show()
-            fb.DisplayURL("https://simulate365.com/registration/", "Simulate365 Registration")
-        Else
-            Process.Start("https://simulate365.com/registration/")
-        End If
+        Dim loginForm As LoginForm = New LoginForm
+        loginForm.ShowDialog()
     End Sub
 
     Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click
