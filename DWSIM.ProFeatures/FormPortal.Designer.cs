@@ -158,10 +158,10 @@ namespace DWSIM.ProFeatures
             this.linkLabel2.Location = new System.Drawing.Point(39, 3);
             this.linkLabel2.Margin = new System.Windows.Forms.Padding(0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(37, 13);
+            this.linkLabel2.Size = new System.Drawing.Size(36, 13);
             this.linkLabel2.TabIndex = 5;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Log In";
+            this.linkLabel2.Text = "Log in";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // SuccessPanel
