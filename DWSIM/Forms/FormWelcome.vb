@@ -404,8 +404,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel7_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel7.LinkClicked
-        Dim loginForm As Simulate365.FormFactories.LoginForm = New Simulate365.FormFactories.LoginForm
-        loginForm.ShowDialog()
+        Process.Start("https://simulate365.com/landing-pages/dwsim-pro/")
     End Sub
 
     Private Sub LinkLabel12_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel12.LinkClicked
@@ -417,7 +416,8 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
-        Process.Start("https://dwsim.org/index.php/dwsim-pro/")
+        Dim loginForm As Simulate365.FormFactories.LoginForm = New Simulate365.FormFactories.LoginForm
+        loginForm.ShowDialog()
     End Sub
 
     Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
