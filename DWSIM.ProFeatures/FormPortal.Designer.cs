@@ -119,9 +119,9 @@ namespace DWSIM.ProFeatures
             this.flowLayoutPanel1.Controls.Add(this.notLoggedInPanel);
             this.flowLayoutPanel1.Controls.Add(this.SuccessPanel);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(87, 381);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(95, 472);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(655, 256);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(647, 256);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // notLoggedInPanel
@@ -251,7 +251,7 @@ namespace DWSIM.ProFeatures
             this.pictureBox1.Image = global::DWSIM.ProFeatures.My.Resources.Resources._2149311493;
             this.pictureBox1.Location = new System.Drawing.Point(0, -1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(745, 353);
+            this.pictureBox1.Size = new System.Drawing.Size(745, 444);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -259,7 +259,7 @@ namespace DWSIM.ProFeatures
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DWSIM.ProFeatures.My.Resources.Resources.Icon1281;
-            this.pictureBox2.Location = new System.Drawing.Point(-1, 358);
+            this.pictureBox2.Location = new System.Drawing.Point(7, 449);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(89, 86);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -270,7 +270,7 @@ namespace DWSIM.ProFeatures
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(91, 360);
+            this.label6.Location = new System.Drawing.Point(99, 451);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(216, 20);
             this.label6.TabIndex = 9;
@@ -287,7 +287,7 @@ namespace DWSIM.ProFeatures
             this.Controls.Add(this.flowLayoutPanel1);
             this.DoubleBuffered = true;
             this.Name = "FormPortal";
-            this.Size = new System.Drawing.Size(745, 534);
+            this.Size = new System.Drawing.Size(745, 552);
             this.Load += new System.EventHandler(this.FormPortal_Load);
             this.NoLicensePanel.ResumeLayout(false);
             this.NoLicensePanel.PerformLayout();

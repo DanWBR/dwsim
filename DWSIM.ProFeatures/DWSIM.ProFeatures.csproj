@@ -222,6 +222,7 @@
     <ProjectReference Include="..\DWSIM.Controls.TabStrip\DWSIM.Controls.TabStrip.csproj">
       <Project>{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}</Project>
       <Name>DWSIM.Controls.TabStrip</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>

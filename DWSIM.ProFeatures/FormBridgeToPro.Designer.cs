@@ -56,9 +56,9 @@ namespace DWSIM.ProFeatures
             // PictureBox1
             // 
             this.PictureBox1.Image = global::DWSIM.ProFeatures.My.Resources.Resources.Icon512;
-            this.PictureBox1.Location = new System.Drawing.Point(470, 98);
+            this.PictureBox1.Location = new System.Drawing.Point(459, 135);
             this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(133, 197);
+            this.PictureBox1.Size = new System.Drawing.Size(184, 226);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox1.TabIndex = 0;
             this.PictureBox1.TabStop = false;
@@ -67,7 +67,7 @@ namespace DWSIM.ProFeatures
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.Location = new System.Drawing.Point(0, 48);
+            this.Label1.Location = new System.Drawing.Point(9, 62);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(317, 25);
             this.Label1.TabIndex = 1;
@@ -78,7 +78,7 @@ namespace DWSIM.ProFeatures
             this.Button1.BackColor = System.Drawing.Color.SteelBlue;
             this.Button1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button1.ForeColor = System.Drawing.Color.White;
-            this.Button1.Location = new System.Drawing.Point(81, 301);
+            this.Button1.Location = new System.Drawing.Point(97, 367);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(182, 72);
             this.Button1.TabIndex = 2;
@@ -92,7 +92,7 @@ namespace DWSIM.ProFeatures
             this.Button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(166)))), ((int)(((byte)(13)))));
             this.Button2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button2.ForeColor = System.Drawing.Color.White;
-            this.Button2.Location = new System.Drawing.Point(415, 301);
+            this.Button2.Location = new System.Drawing.Point(432, 367);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(239, 72);
             this.Button2.TabIndex = 3;
@@ -103,7 +103,7 @@ namespace DWSIM.ProFeatures
             // Label4
             // 
             this.Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.Location = new System.Drawing.Point(400, 376);
+            this.Label4.Location = new System.Drawing.Point(409, 442);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(284, 64);
             this.Label4.TabIndex = 6;
@@ -114,9 +114,9 @@ namespace DWSIM.ProFeatures
             // 
             this._lblFeature.AutoEllipsis = true;
             this._lblFeature.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._lblFeature.Location = new System.Drawing.Point(-1, 0);
+            this._lblFeature.Location = new System.Drawing.Point(8, 8);
             this._lblFeature.Name = "_lblFeature";
-            this._lblFeature.Size = new System.Drawing.Size(739, 48);
+            this._lblFeature.Size = new System.Drawing.Size(718, 48);
             this._lblFeature.TabIndex = 7;
             this._lblFeature.Text = "FEATURE";
             this._lblFeature.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -124,9 +124,9 @@ namespace DWSIM.ProFeatures
             // PictureBox2
             // 
             this.PictureBox2.Image = global::DWSIM.ProFeatures.My.Resources.Resources.DWSIM_Icon_Vector_Transp;
-            this.PictureBox2.Location = new System.Drawing.Point(106, 98);
+            this.PictureBox2.Location = new System.Drawing.Point(97, 135);
             this.PictureBox2.Name = "PictureBox2";
-            this.PictureBox2.Size = new System.Drawing.Size(133, 197);
+            this.PictureBox2.Size = new System.Drawing.Size(182, 226);
             this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox2.TabIndex = 8;
             this.PictureBox2.TabStop = false;
@@ -134,9 +134,9 @@ namespace DWSIM.ProFeatures
             // PictureBox3
             // 
             this.PictureBox3.Image = global::DWSIM.ProFeatures.My.Resources.Resources.right_60px;
-            this.PictureBox3.Location = new System.Drawing.Point(338, 166);
+            this.PictureBox3.Location = new System.Drawing.Point(339, 184);
             this.PictureBox3.Name = "PictureBox3";
-            this.PictureBox3.Size = new System.Drawing.Size(34, 64);
+            this.PictureBox3.Size = new System.Drawing.Size(62, 98);
             this.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox3.TabIndex = 9;
             this.PictureBox3.TabStop = false;
@@ -147,8 +147,9 @@ namespace DWSIM.ProFeatures
             this.flowLayoutPanel1.Controls.Add(this.formPortal);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(753, 525);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(753, 550);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
             // BridgeToProPanel
@@ -163,15 +164,15 @@ namespace DWSIM.ProFeatures
             this.BridgeToProPanel.Controls.Add(this.Button2);
             this.BridgeToProPanel.Location = new System.Drawing.Point(3, 3);
             this.BridgeToProPanel.Name = "BridgeToProPanel";
-            this.BridgeToProPanel.Size = new System.Drawing.Size(750, 482);
+            this.BridgeToProPanel.Size = new System.Drawing.Size(750, 553);
             this.BridgeToProPanel.TabIndex = 0;
             // 
             // formPortal
             // 
             this.formPortal.BackColor = System.Drawing.Color.White;
-            this.formPortal.Location = new System.Drawing.Point(3, 491);
+            this.formPortal.Location = new System.Drawing.Point(3, 562);
             this.formPortal.Name = "formPortal";
-            this.formPortal.Size = new System.Drawing.Size(807, 689);
+            this.formPortal.Size = new System.Drawing.Size(750, 655);
             this.formPortal.TabIndex = 1;
             this.formPortal.Visible = false;
             this.formPortal.VisibleChanged += new System.EventHandler(this.formPortal_VisibleChanged);
@@ -181,7 +182,7 @@ namespace DWSIM.ProFeatures
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(753, 525);
+            this.ClientSize = new System.Drawing.Size(753, 550);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -189,7 +190,7 @@ namespace DWSIM.ProFeatures
             this.MinimizeBox = false;
             this.Name = "FormBridgeToPro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Continue on DWSIM Pro";
+            this.Text = "Continue with DWSIM Pro";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBridgeToPro_FormClosing);
             this.Load += new System.EventHandler(this.FormBridgeToPro_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
