@@ -203,7 +203,7 @@ Public Class ComprExprCurveSet
             If Not dg.Rows(e.RowIndex).Cells(0).ToString = "" _
                 And Not dg.Rows(e.RowIndex).Cells(1).ToString = "" Then
 
-                Dim x, y As New ArrayList
+                Dim x, y As New List(Of Double)
 
                 For Each r As DataGridViewRow In dg.Rows
                     If Not r.Cells(0).Value Is Nothing _
@@ -241,11 +241,11 @@ Public Class ComprExprCurveSet
 
     Sub DrawChart()
 
-        Dim pxh, pyh, pxp, pyp, pxe, pye As New ArrayList
+        Dim pxh, pyh, pxp, pyp, pxe, pye As New List(Of Double)
 
         Dim i As Integer
         Dim xunit, yunit As String
-        Dim x, y As ArrayList
+        Dim x, y As List(Of Double)
         'analyze data, interpolate, bla, bla bla...
 
         If curvedata("HEAD").Enabled Then
@@ -303,7 +303,7 @@ Public Class ComprExprCurveSet
                 ya0.Scale.FontSpec.Size = 10
                 ya0.Title.FontSpec.Size = 10
                 .YAxisList.Add(ya0)
-                With .AddCurve("Head", pxh.ToArray(GetType(Double)), pyh.ToArray(GetType(Double)), Color.Black)
+                With .AddCurve("Head", pxh.ToArray(), pyh.ToArray(), Color.Black)
                     .Line.IsVisible = True
                     .Line.IsSmooth = True
                     .Color = Color.Red
@@ -320,7 +320,7 @@ Public Class ComprExprCurveSet
                 ya0.Scale.FontSpec.Size = 10
                 ya0.Title.FontSpec.Size = 10
                 .YAxisList.Add(ya0)
-                With .AddCurve("Eff.", pxe.ToArray(GetType(Double)), pye.ToArray(GetType(Double)), Color.Black)
+                With .AddCurve("Eff.", pxe.ToArray(), pye.ToArray(), Color.Black)
                     .Line.IsVisible = True
                     .Line.IsSmooth = True
                     .Color = Color.Blue
@@ -337,7 +337,7 @@ Public Class ComprExprCurveSet
                 ya0.Scale.FontSpec.Size = 10
                 ya0.Title.FontSpec.Size = 10
                 .YAxisList.Add(ya0)
-                With .AddCurve("Power", pxp.ToArray(GetType(Double)), pyp.ToArray(GetType(Double)), Color.Black)
+                With .AddCurve("Power", pxp.ToArray(), pyp.ToArray(), Color.Black)
                     .Line.IsVisible = True
                     .Line.IsSmooth = True
                     .Color = Color.Blue

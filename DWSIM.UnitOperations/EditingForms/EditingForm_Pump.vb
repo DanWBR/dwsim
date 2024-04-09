@@ -444,7 +444,7 @@ Public Class EditingForm_Pump
 
         If Loaded Then SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
 
-        Dim f As New EditingForm_Pump_Curves() With {.selectedpump = SimObject}
+        Dim f As New EditingForm_Pump_Curves() With {.selectedpump = SimObject, .Text = SimObject.GraphicObject.Tag + ": Performance Curves"}
         SimObject.FlowSheet.DisplayForm(f)
 
     End Sub
