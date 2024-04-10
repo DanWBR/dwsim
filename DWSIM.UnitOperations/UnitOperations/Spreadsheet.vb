@@ -425,10 +425,8 @@ Namespace UnitOperations
                     Loop While ParName <> ""
                     ParamsLoaded = True
 
-                    '=============== clean up Excel stuff ================================================================
                     mybook.Close(saveChanges:=True)
                     xcl.Quit()
-                    'xcl.Dispose()
 
                     MassBal = 100 * (Wout - Win) / (Win)
                     If Math.Abs(MassBal) > 0.001 Then
@@ -739,15 +737,29 @@ Namespace UnitOperations
             End If
 
         End Sub
+
         Public Sub ReadExcelParams()
 
             'read input and output parameters from associated Excel table 
+
             If Not ParamsLoaded Then
 
+                If FileIsEmbedded Then
+
+                    If Not FlowSheet.FileDatabaseProvider.CheckIfExists(EmbeddedFileName) Then Exit Sub
+
+                Else
+
+                    If Not File.Exists(Filename) Then Exit Sub
+
+                End If
+
                 Dim excelType As Type = Nothing
+
                 If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
 
                 If Not Calculator.IsRunningOnMono And Not excelType Is Nothing Then
+
                     Dim excelProxy As Object = Activator.CreateInstance(excelType)
 
                     Using xcl As New Excel.Application(Nothing, excelProxy)
@@ -767,15 +779,17 @@ Namespace UnitOperations
                         Dim tmpfile As String = ""
 
                         If FileIsEmbedded Then
-                            If Not FlowSheet.FileDatabaseProvider.CheckIfExists(EmbeddedFileName) Then Exit Sub
+
                             tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
                             FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
                             'Load Excel definition file
                             mybook = xcl.Workbooks.Open(tmpfile, True, True)
+
                         Else
-                            If Not File.Exists(Filename) Then Exit Sub
+
                             'Load Excel definition file
                             mybook = xcl.Workbooks.Open(Filename, True, True)
+
                         End If
 
                         Dim mysheetIn As Excel.Worksheet = mybook.Sheets("Input")
@@ -827,10 +841,9 @@ Namespace UnitOperations
                             End If
                         Loop While ParName <> ""
 
-                        mybook.Close(False)
+                        mybook.Close(saveChanges:=False)
 
                         xcl.Quit()
-                        xcl.Dispose()
 
                         ParamsLoaded = True
 
