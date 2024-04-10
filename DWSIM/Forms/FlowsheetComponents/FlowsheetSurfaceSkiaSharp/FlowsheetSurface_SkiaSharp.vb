@@ -208,6 +208,9 @@ Public Class FlowsheetSurface_SkiaSharp
             CopiarComoImagem300ToolStripMenuItem.Visible = False
             CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Visible = False
             CopyAsImageToolStripMenuItem.Visible = False
+            tsbPrint.Visible = False
+            tsbConfigPage.Visible = False
+            tsbConfigPrinter.Visible = False
         End If
 
         AddHandler AnimationTimer.Elapsed, Sub(s2, e2)
