@@ -51,12 +51,12 @@ namespace DWSIM.ProFeatures
 
         private void FormPortal_Load(object sender, EventArgs e)
         {
-          
+
         }
 
         public async Task OnInitialize()
         {
-           // Debugger.Launch();
+            // Debugger.Launch();
             var isLoggedIn = UserService.GetInstance()._IsLoggedIn();
             if (!isLoggedIn)
             {
@@ -192,11 +192,19 @@ namespace DWSIM.ProFeatures
             }
             else
             {
-                StatusMessage.Text = "To continue to DWSIM Pro, you must save your file to your Simulate 365 Dashboard.";
+                if (fsheet != null)
+                {
+                    StatusMessage.Text = "To continue to DWSIM Pro, you must save your file to your Simulate 365 Dashboard.";
+                    this.saveToDashboardBtn.Visible = true;
+                }
+                else
+                {
+                    ShowSuccessPanel();
+                }
             }
-            this.saveToDashboardBtn.Visible = true;
 
-          
+
+
 
         }
         private async Task<bool> SaveDwsimProStartupAction()
@@ -264,7 +272,7 @@ namespace DWSIM.ProFeatures
 
         private void openInIncognitoLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-          
+
         }
 
         private string GetDefaultBrowserLocation()
@@ -274,14 +282,14 @@ namespace DWSIM.ProFeatures
             var runCommand = command?.GetValue(null) as string;
             if (!string.IsNullOrWhiteSpace(runCommand))
             {
-                var splitCommand=Regex.Split(runCommand,".exe");
-                var browserLocation= splitCommand[0].Replace("\"","");
-                return browserLocation+".exe";
+                var splitCommand = Regex.Split(runCommand, ".exe");
+                var browserLocation = splitCommand[0].Replace("\"", "");
+                return browserLocation + ".exe";
 
             }
             return string.Empty;
         }
-              
+
 
         private static string GetStandardBrowserProgId()
         {

@@ -4928,8 +4928,7 @@ Label_00CC:
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
-        Dim loginForm As LoginForm = New LoginForm
-        loginForm.ShowDialog()
+        Functions.DisplayTransitionForm(Nothing, "Access DWSIM Pro now", True)
     End Sub
 
     Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click

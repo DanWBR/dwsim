@@ -21,10 +21,10 @@ namespace DWSIM.ProFeatures
 
         }
 
-        public static void DisplayTransitionForm(IFlowsheet flowsheet, string featurename)
+        public static void DisplayTransitionForm(IFlowsheet flowsheet, string featurename, bool? skipIntro = false)
         {
 
-            var fp = new FormBridgeToPro();
+            var fp = new FormBridgeToPro(skipIntro);
             fp.lblFeature.Text = featurename;
             fp.CurrentFlowsheet = flowsheet;
             fp.ShowDialog();
