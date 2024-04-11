@@ -4921,7 +4921,7 @@ Label_00CC:
         If IsPro Then
             Dim fb As New FormBrowser()
             fb.Show()
-            fb.DisplayURL("https://simulate365.com", "Simulate365")
+            fb.DisplayURL("https://simulate365.com", "Simulate 365")
         Else
             Process.Start("https://simulate365.com")
         End If
@@ -4951,7 +4951,7 @@ Label_00CC:
         If IsPro Then
             Dim fb As New FormBrowser()
             fb.Show()
-            fb.DisplayURL("https://dashboard.simulate365.com", "Simulate365 Dashboard")
+            fb.DisplayURL("https://dashboard.simulate365.com", "Simulate 365 Dashboard")
         Else
             Process.Start("https://dashboard.simulate365.com")
         End If

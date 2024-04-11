@@ -107,7 +107,7 @@ namespace DWSIM.ProFeatures
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(284, 64);
             this.Label4.TabIndex = 6;
-            this.Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard";
+            this.Label4.Text = "Your flowsheet will be automatically saved on Simulate 365 Dashboard";
             this.Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // _lblFeature
