@@ -162,7 +162,7 @@
     <value>287, 22</value>
   </data>
   <data name="AbrirDoDashboardToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open from Simulate365 Dashboard</value>
+    <value>Open from Simulate 365 Dashboard</value>
   </data>
   <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 6</value>
@@ -171,7 +171,7 @@
     <value>287, 22</value>
   </data>
   <data name="SaveToDashboardTSMI.Text" xml:space="preserve">
-    <value>Save to Simulate365 Dashboard</value>
+    <value>Save to Simulate 365 Dashboard</value>
   </data>
   <data name="SaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 22</value>

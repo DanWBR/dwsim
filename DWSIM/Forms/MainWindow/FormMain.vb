@@ -4923,15 +4923,14 @@ Label_00CC:
         If IsPro Then
             Dim fb As New FormBrowser()
             fb.Show()
-            fb.DisplayURL("https://simulate365.com", "Simulate365")
+            fb.DisplayURL("https://simulate365.com", "Simulate 365")
         Else
             Process.Start("https://simulate365.com")
         End If
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
-        Dim loginForm As LoginForm = New LoginForm
-        loginForm.ShowDialog()
+        Functions.DisplayTransitionForm(Nothing, "Access DWSIM Pro now", True)
     End Sub
 
     Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click
@@ -4954,7 +4953,7 @@ Label_00CC:
         If IsPro Then
             Dim fb As New FormBrowser()
             fb.Show()
-            fb.DisplayURL("https://dashboard.simulate365.com", "Simulate365 Dashboard")
+            fb.DisplayURL("https://dashboard.simulate365.com", "Simulate 365 Dashboard")
         Else
             Process.Start("https://dashboard.simulate365.com")
         End If

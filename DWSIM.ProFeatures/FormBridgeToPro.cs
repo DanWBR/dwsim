@@ -11,11 +11,16 @@ namespace DWSIM.ProFeatures
         public IFlowsheet CurrentFlowsheet;
         private bool Transitioning = false;
 
-        public FormBridgeToPro()
+        public FormBridgeToPro(bool? skipIntro = false)
         {
             InitializeComponent();
             lblFeature = _lblFeature;
             _lblFeature.Name = "lblFeature";
+
+            if (skipIntro.HasValue && skipIntro.Value)
+            {
+                SwitchToFormPortal();
+            }
         }
 
         private void FormBridgeToPro_Load(object sender, EventArgs e)
@@ -30,14 +35,19 @@ namespace DWSIM.ProFeatures
             Close();
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void SwitchToFormPortal()
         {
-
-            Transitioning = true;
             BridgeToProPanel.Visible = false;
             formPortal.Visible = true;
             formPortal.SetFlowsheet(CurrentFlowsheet);
             formPortal.OnInitialize();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+
+            Transitioning = true;
+            SwitchToFormPortal();
 
             // Functions.ProcessTransition(CurrentFlowsheet);
 
@@ -48,7 +58,7 @@ namespace DWSIM.ProFeatures
         private void FormBridgeToPro_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
 
-            if (!Transitioning)
+            if (!Transitioning && CurrentFlowsheet != null)
                 CurrentFlowsheet.FlowsheetOptions.FlowsheetTransitionObject = null;
 
         }

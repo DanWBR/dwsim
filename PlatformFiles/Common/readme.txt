@@ -517,7 +517,7 @@ Version 7.5.0
 
 - Energy Streams are now optional
 - New Mass and Energy Balance Summary tool (Classic UI)
-- Better Simulate365 Dashboard integration
+- Better Simulate 365 Dashboard integration
 - Use Embedded Files in Flowsheet and Spreadsheet Unit Operations (Classic UI)
 - Workaround for PH Flash temperature interpolation
 - Enhanced Nested Loops VLE/VLLE Flash reliability

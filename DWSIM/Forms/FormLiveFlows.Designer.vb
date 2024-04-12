@@ -104,7 +104,7 @@ Partial Class FormLiveFlows
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(228, 48)
         Me.Label4.TabIndex = 14
-        Me.Label4.Text = "Your flowsheet will be automatically saved on Simulate365 Dashboard"
+        Me.Label4.Text = "Your flowsheet will be automatically saved on Simulate 365 Dashboard"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Button2

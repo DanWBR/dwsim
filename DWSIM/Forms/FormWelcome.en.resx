@@ -396,7 +396,7 @@
     <value>254, 16</value>
   </data>
   <data name="LinkLabel3.Text" xml:space="preserve">
-    <value>Load File from Simulate365 Dashboard</value>
+    <value>Load File from Simulate 365 Dashboard</value>
   </data>
   <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>768, 28</value>
@@ -704,7 +704,7 @@
     <value>97</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
-    <value>Free Simulate365 Dashboard for DWSIM</value>
+    <value>Free Simulate 365 Dashboard for DWSIM</value>
   </data>
   <data name="PictureBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
