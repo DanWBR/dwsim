@@ -14,19 +14,18 @@
 //Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //=============================================================================
 
+using DWSIM.SharedClassesCSharp.FilePicker;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Windows.Forms;
-using System.Threading;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Text;
-
 using System.Runtime.InteropServices;
-//using System.Diagnostics;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace ZedGraph
 {
@@ -154,27 +153,6 @@ namespace ZedGraph
                         menuStrip.Items.Add(item);
 
                         item = new ToolStripMenuItem();
-                        item.Name = "save_as";
-                        item.Tag = "save_as";
-                        item.Text = _resourceManager.GetString("save_as");
-                        item.Click += new System.EventHandler(this.MenuClick_SaveAs);
-                        menuStrip.Items.Add(item);
-
-                        item = new ToolStripMenuItem();
-                        item.Name = "save_as2x";
-                        item.Tag = "save_as2x";
-                        item.Text = _resourceManager.GetString("save_as") + " @ 2x";
-                        item.Click += new System.EventHandler(this.MenuClick_SaveAs);
-                        menuStrip.Items.Add(item);
-
-                        item = new ToolStripMenuItem();
-                        item.Name = "save_as3x";
-                        item.Tag = "save_as3x";
-                        item.Text = _resourceManager.GetString("save_as") + " @ 3x";
-                        item.Click += new System.EventHandler(this.MenuClick_SaveAs);
-                        menuStrip.Items.Add(item);
-
-                        item = new ToolStripMenuItem();
                         item.Name = "page_setup";
                         item.Tag = "page_setup";
                         item.Text = _resourceManager.GetString("page_setup");
@@ -189,6 +167,28 @@ namespace ZedGraph
                         menuStrip.Items.Add(item);
 
                     }
+
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "save_as";
+                    item.Tag = "save_as";
+                    item.Text = _resourceManager.GetString("save_as");
+                    item.Click += new System.EventHandler(this.MenuClick_SaveAs);
+                    menuStrip.Items.Add(item);
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "save_as2x";
+                    item.Tag = "save_as2x";
+                    item.Text = _resourceManager.GetString("save_as") + " @ 2x";
+                    item.Click += new System.EventHandler(this.MenuClick_SaveAs);
+                    menuStrip.Items.Add(item);
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "save_as3x";
+                    item.Tag = "save_as3x";
+                    item.Text = _resourceManager.GetString("save_as") + " @ 3x";
+                    item.Click += new System.EventHandler(this.MenuClick_SaveAs);
+                    menuStrip.Items.Add(item);
 
                     item = new ToolStripMenuItem();
                     item.Name = "show_val";
@@ -439,70 +439,38 @@ namespace ZedGraph
         /// Note that <see cref="SaveAsBitmap" /> and <see cref="SaveAsEmf" /> methods are provided
         /// which allow for Bitmap-only or Emf-only handling of the "Save As" context menu item.
         /// </remarks>
-        public String SaveAs(int scale, String DefaultFileName)
+        public void SaveAs(int scale, String DefaultFileName)
         {
             if (_masterPane != null)
             {
-                _saveFileDialog.Filter =
-                    "Emf Format (*.emf)|*.emf|" +
-                    "PNG Format (*.png)|*.png|" +
-                    "Gif Format (*.gif)|*.gif|" +
-                    "Jpeg Format (*.jpg)|*.jpg|" +
-                    "Tiff Format (*.tif)|*.tif|" +
-                    "Bmp Format (*.bmp)|*.bmp";
 
-                if (DefaultFileName != null && DefaultFileName.Length > 0)
-                {
-                    String ext = System.IO.Path.GetExtension(DefaultFileName).ToLower();
-                    switch (ext)
-                    {
-                        case ".emf": _saveFileDialog.FilterIndex = 1; break;
-                        case ".png": _saveFileDialog.FilterIndex = 2; break;
-                        case ".gif": _saveFileDialog.FilterIndex = 3; break;
-                        case ".jpeg":
-                        case ".jpg": _saveFileDialog.FilterIndex = 4; break;
-                        case ".tiff":
-                        case ".tif": _saveFileDialog.FilterIndex = 5; break;
-                        case ".bmp": _saveFileDialog.FilterIndex = 6; break;
-                    }
-                    //If we were passed a file name, not just an extension, use it
-                    if (DefaultFileName.Length > ext.Length)
-                    {
-                        _saveFileDialog.FileName = DefaultFileName;
-                    }
-                }
+                var filePickerForm = FilePickerService.GetInstance().GetFilePicker();
 
-                if (_saveFileDialog.ShowDialog() == DialogResult.OK)
+                var handler = filePickerForm.ShowSaveDialog(new List<FilePickerAllowedType>
+                { new FilePickerAllowedType("PNG File", "*.png"), new FilePickerAllowedType("JPG File", "*.jpg") });
+
+                if (handler != null)
                 {
-                    Stream myStream = _saveFileDialog.OpenFile();
-                    if (myStream != null)
+                    using (var myStream = new MemoryStream())
                     {
-                        if (_saveFileDialog.FilterIndex == 1)
+                        if (myStream != null)
                         {
-                            myStream.Close();
-                            SaveEmfFile(_saveFileDialog.FileName);
-                        }
-                        else
-                        {
-                            ImageFormat format = ImageFormat.Png;
-                            switch (_saveFileDialog.FilterIndex)
+                            switch (handler.GetExtension())
                             {
-                                case 2: format = ImageFormat.Png; break;
-                                case 3: format = ImageFormat.Gif; break;
-                                case 4: format = ImageFormat.Jpeg; break;
-                                case 5: format = ImageFormat.Tiff; break;
-                                case 6: format = ImageFormat.Bmp; break;
+                                case ".PNG":
+                                    ImageRender(scale).Save(myStream, ImageFormat.Png);
+                                    break;
+                                case ".JPG":
+                                    ImageRender(scale).Save(myStream, ImageFormat.Jpeg);
+                                    break;
                             }
-
-                            ImageRender(scale).Save(myStream, format);
-                            //_masterPane.GetImage().Save( myStream, format );
+                            myStream.Position = 0;
+                            handler.Write(myStream);
                             myStream.Close();
                         }
-                        return _saveFileDialog.FileName;
                     }
                 }
             }
-            return "";
         }
 
         /// <summary>
