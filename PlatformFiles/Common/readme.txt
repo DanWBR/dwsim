@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.7.0
+Version 8.7.1
 Copyright (c) 2017-2024 Daniel Wagner and contributors
 Copyright (c) 2008-2016 Daniel Wagner, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.7.1
+
+- Enhanced integration with DWSIM Pro
+- Fixed issue with Spreadsheet UO
+- Fixed/Enhanced Pump Curves subsystem
+- Nested Loops Flash fixes
+- Fixed Compressor energy stream creator in editor
+- Fixed saving DWSIM files with embedded Flowsheet Unit Ops (#617)
+- Fixed flowsheet view reduced after deactivating contol panel mode (#607)
+- Fixed Extra property values not showing in hover tooltips in DWSIM versions > 8.2.1 (#610)
 
 Version 8.7.0
 
