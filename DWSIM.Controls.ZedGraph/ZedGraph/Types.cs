@@ -23,12 +23,20 @@ using System.Drawing.Drawing2D;
 
 
 namespace ZedGraph
-{	
-	/// <summary>
-	/// Enumeration type for the various axis types that are available
-	/// </summary>
-	/// <seealso cref="ZedGraph.Axis.Type"/>
-	public enum AxisType
+{
+
+	public class Variables
+	{
+
+        public static bool IsDWSIMPro = false;
+
+    }
+
+    /// <summary>
+    /// Enumeration type for the various axis types that are available
+    /// </summary>
+    /// <seealso cref="ZedGraph.Axis.Type"/>
+    public enum AxisType
 	{
 		/// <summary> An ordinary, cartesian axis </summary>
 		Linear,

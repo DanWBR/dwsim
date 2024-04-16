@@ -204,6 +204,8 @@ Public Class FormMain
                 DashboardToolStripMenuItem.Visible = False
                 tsmiProUG.Visible = False
                 DatabaseManagerToolStripMenuItem.Visible = False
+                ZedGraph.Variables.IsDWSIMPro = True
+                ZedGraph.Variables.IsDWSIMPro = True
             End If
 #End If
 

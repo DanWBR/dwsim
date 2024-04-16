@@ -2462,6 +2462,8 @@ Namespace Streams
 
             'proplist.AddRange(MyBase.GetProperties(proptype))
 
+            If proplist.Contains("PROP_MS_197") Then proplist.Remove("PROP_MS_197")
+
             Return proplist.ToArray
 
         End Function

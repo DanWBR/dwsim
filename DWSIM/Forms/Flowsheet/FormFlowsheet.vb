@@ -5587,6 +5587,14 @@ Public Class FormFlowsheet
 
             Dim ts = Options.FlowsheetTransitionObject
 
+            If ts.FeatureName = "" Then
+
+                Options.FlowsheetTransitionObject = Nothing
+
+                Exit Sub
+
+            End If
+
             ShowMessage("Welcome to DWSIM Pro! You can now continue working on your simulation using all of the available professional features in this version of DWSIM.", IFlowsheet.MessageType.Information)
 
             Select Case ts.FeatureType
