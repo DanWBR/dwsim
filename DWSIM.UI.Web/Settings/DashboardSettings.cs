@@ -9,7 +9,7 @@ namespace DWSIM.UI.Web.Settings
 {
     public static class DashboardSettings
     {
-        public static string DashboardServiceUrl = "https://s365-dashboard-v2-service.azurewebsites.net";
+        public static string DashboardServiceUrl = "https://dashboard-service.simulate365.com";
         public static string ExcelRunnerServiceUrl = "https://excel-runner.azurewebsites.net";
         public static string SensitivityStudiesServiceUrl = "https://sensitivity-studies.azurewebsites.net";
         public static string TakeHomeExamsServiceUrl = "https://take-home-exams.azurewebsites.net";
