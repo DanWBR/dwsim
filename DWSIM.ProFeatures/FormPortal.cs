@@ -96,7 +96,7 @@ namespace DWSIM.ProFeatures
         }
         private void Timer1_Tick()
         {
-            if (TrialLicenseCreatedMessageCount + 1 <= TrialLicenseCreatedMessages.Count)
+            if (TrialLicenseCreatedMessageCount + 1 < TrialLicenseCreatedMessages.Count)
             {
                 TrialLicenseCreatedMessageCount += 1;
                 this.UIThread(() =>

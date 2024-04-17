@@ -204,6 +204,8 @@ Public Class FormMain
                 DashboardToolStripMenuItem.Visible = False
                 tsmiProUG.Visible = False
                 DatabaseManagerToolStripMenuItem.Visible = False
+                ZedGraph.Variables.IsDWSIMPro = True
+                ZedGraph.Variables.IsDWSIMPro = True
             End If
 #End If
 
@@ -4928,7 +4930,15 @@ Label_00CC:
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
-        Functions.DisplayTransitionForm(Nothing, "Access DWSIM Pro now", True)
+        Dim userService As UserService = UserService.GetInstance()
+        Dim isLoggedIn As Boolean = userService._IsLoggedIn()
+        If isLoggedIn Then
+            Functions.DisplayTransitionForm(Nothing, "Access DWSIM Pro now", True)
+        Else
+            Dim loginForm = New LoginForm()
+            loginForm.ShowDialog()
+        End If
+
     End Sub
 
     Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click

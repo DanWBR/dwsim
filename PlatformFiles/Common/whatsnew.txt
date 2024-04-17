@@ -1,28 +1,10 @@
-Version 8.7.0
+Version 8.7.1
 
-- Import/Export NRTL/UNIQUAC/Wilson BIPs
-- Import/Export PR/SRK/PRSV2/LKP BIPs
-- Wilson BIP estimation
-- Various Rigorous Column enhancements: new initial estimates selector, enhanced reporting, test convergence tool
-- Data Regression Utility: added support for Wilson BIPs
-- Data Regression Utility: Export regressed BIPs
-- Export imported compounds to JSON (Classic UI)
-- Estimate PID Controller parameters (Classic UI)
-- Enhanced floating table drawing for big property lists
-- Dynamic valve flow calculation now obeys Material Stream's maximum allowable dynamic flow rate
-- Toggle show/hide object label
-- Fixed Heat Exchanger sizing sample
-- Fixed issue with CSTR
-- Fixed issue with PRLK enthalpy/entropy calculations (#593)
-- Fixed Reporting tool (Classic UI)
-- Fixed infinite loop message issue
-- Fixed axes in embedded dynamic mode charts
-- Fixed phase split heuristics
-- Fixed object recalculation not updating editor
-- Fixed issue with SimpleLLE flash algorithm
-- Fixed issue with single comp PH flash
-- Fixed issue with Dynamics Cause and Matrix editor (Classic UI)
-- Fixed port/connector positions for ChemSep column
-- CAPE-OPEN Property Package Manager fix
-- Added compound mass balance check for rigorous columns (#599)
-- Fixed Shortcut Column calculation with subcooled and superheated feeds
+- Enhanced integration with DWSIM Pro
+- Fixed issue with Spreadsheet UO
+- Fixed/Enhanced Pump Curves subsystem
+- Nested Loops Flash fixes
+- Fixed Compressor energy stream creator in editor
+- Fixed saving DWSIM files with embedded Flowsheet Unit Ops (#617)
+- Fixed flowsheet view reduced after deactivating contol panel mode (#607)
+- Fixed Extra property values not showing in hover tooltips in DWSIM versions > 8.2.1 (#610)
