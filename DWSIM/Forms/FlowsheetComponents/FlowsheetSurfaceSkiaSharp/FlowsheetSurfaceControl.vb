@@ -311,7 +311,7 @@ Public Class FlowsheetSurfaceControl
 
                     ProFeatures.Functions.CreateTransitionObject(FlowsheetObject, name, "Unit Operation", "Add", otype, New Double() {e.X / FlowsheetSurface.Zoom, e.Y / FlowsheetSurface.Zoom})
 
-                    ProFeatures.Functions.DisplayTransitionForm(FlowsheetObject, name & " Unit Operation")
+                    ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, FlowsheetObject, name & " Unit Operation")
 
                     Exit Sub
 

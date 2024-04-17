@@ -12,6 +12,8 @@ namespace DWSIM.ProFeatures
 
         public IFlowsheet CurrentFlowsheet;
 
+        public IAnalyticsProvider AnalyticsProvider;
+
         public FormGHG()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace DWSIM.ProFeatures
 
             Functions.CreateTransitionObject(CurrentFlowsheet, "", "GHG Emissions", "", "", default);
 
-            Functions.DisplayTransitionForm(CurrentFlowsheet, "GHG Emissions");
+            Functions.DisplayTransitionForm(AnalyticsProvider, CurrentFlowsheet, "GHG Emissions");
 
         }
 

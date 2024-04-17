@@ -9,11 +9,14 @@ namespace DWSIM.ProFeatures
     {
 
         public IFlowsheet CurrentFlowsheet;
+        public IAnalyticsProvider AnalyticsProvider;
         private bool Transitioning = false;
 
-        public FormBridgeToPro(bool? skipIntro = false)
+        public FormBridgeToPro(IAnalyticsProvider analytics, bool? skipIntro = false)
         {
             InitializeComponent();
+            AnalyticsProvider = analytics;
+            formPortal.AnalyticsProvider = analytics;
             lblFeature = _lblFeature;
             _lblFeature.Name = "lblFeature";
 
@@ -46,6 +49,8 @@ namespace DWSIM.ProFeatures
         private void Button2_Click(object sender, EventArgs e)
         {
 
+            AnalyticsProvider?.RegisterEvent("Portal Window: User Clicked 'Switch to Pro'", lblFeature.Text, null);
+
             Transitioning = true;
             SwitchToFormPortal();
 
@@ -59,7 +64,10 @@ namespace DWSIM.ProFeatures
         {
 
             if (!Transitioning && CurrentFlowsheet != null)
+            {
+                AnalyticsProvider?.RegisterEvent("Portal Window: Closed by User", lblFeature.Text, null);
                 CurrentFlowsheet.FlowsheetOptions.FlowsheetTransitionObject = null;
+            }
 
         }
 
