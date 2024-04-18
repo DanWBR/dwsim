@@ -179,7 +179,7 @@ namespace DWSIM.ProFeatures
 
         private void ShowSuccessPanel()
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Sucessfully", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(ShowSuccessPanel));
