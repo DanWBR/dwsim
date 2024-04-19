@@ -21,10 +21,12 @@ namespace DWSIM.ProFeatures
 
         }
 
-        public static void DisplayTransitionForm(IFlowsheet flowsheet, string featurename, bool? skipIntro = false)
+        public static void DisplayTransitionForm(IAnalyticsProvider analyticsprovider, IFlowsheet flowsheet, string featurename, bool? skipIntro = false)
         {
-
-            var fp = new FormBridgeToPro(skipIntro);
+            
+            analyticsprovider?.RegisterEvent("Portal Window: User Clicked to Open", featurename, null);
+           
+            var fp = new FormBridgeToPro(analyticsprovider, skipIntro);
             fp.lblFeature.Text = featurename;
             fp.CurrentFlowsheet = flowsheet;
             fp.ShowDialog();

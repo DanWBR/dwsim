@@ -278,7 +278,7 @@ Public Class FormSimulWizard
 
             ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value, "Property Package", "Add", "Simulation Wizard", Nothing)
 
-            ProFeatures.Functions.DisplayTransitionForm(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value + " Property Package")
+            ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value + " Property Package")
 
             Exit Sub
 

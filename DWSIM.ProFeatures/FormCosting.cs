@@ -10,6 +10,8 @@ namespace DWSIM.ProFeatures
 
         public IFlowsheet CurrentFlowsheet;
 
+        public IAnalyticsProvider AnalyticsProvider;
+
         public FormCosting()
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace DWSIM.ProFeatures
 
             Functions.CreateTransitionObject(CurrentFlowsheet, "", "Costing", "", "", default);
 
-            Functions.DisplayTransitionForm(CurrentFlowsheet, "Costing");
+            Functions.DisplayTransitionForm(AnalyticsProvider, CurrentFlowsheet, "Costing");
 
         }
 

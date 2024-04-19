@@ -1333,7 +1333,7 @@ Public Class FormSimulSettings
 
             ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value, "Property Package", "Add", "Simulation Settings", Nothing)
 
-            ProFeatures.Functions.DisplayTransitionForm(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value + " Property Package")
+            ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value + " Property Package")
 
             Exit Sub
 

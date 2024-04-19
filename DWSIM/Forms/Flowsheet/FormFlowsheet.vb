@@ -363,9 +363,9 @@ Public Class FormFlowsheet
         End If
 
         If Not FormMain.IsPro Then
-            Dim fg As New ProFeatures.FormGHG With {.CurrentFlowsheet = Me}
+            Dim fg As New ProFeatures.FormGHG With {.CurrentFlowsheet = Me, .AnalyticsProvider = FormMain.AnalyticsProvider}
             fg.Show(dckPanel)
-            Dim fc As New ProFeatures.FormCosting With {.CurrentFlowsheet = Me}
+            Dim fc As New ProFeatures.FormCosting With {.CurrentFlowsheet = Me, .AnalyticsProvider = FormMain.AnalyticsProvider}
             fc.Show(dckPanel)
         End If
 
@@ -5549,7 +5549,7 @@ Public Class FormFlowsheet
 
         ProFeatures.Functions.CreateTransitionObject(Me, "Stream Data Importer", "Tool", "", "", Nothing)
 
-        ProFeatures.Functions.DisplayTransitionForm(Me, "Stream Data Importer")
+        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Stream Data Importer")
 
     End Sub
 
@@ -5557,7 +5557,7 @@ Public Class FormFlowsheet
 
         ProFeatures.Functions.CreateTransitionObject(Me, "Excel Reports", "Tool", "", "", Nothing)
 
-        ProFeatures.Functions.DisplayTransitionForm(Me, "Excel Reports")
+        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Excel Reports")
 
     End Sub
 
@@ -5565,7 +5565,7 @@ Public Class FormFlowsheet
 
         ProFeatures.Functions.CreateTransitionObject(Me, "Process Flowsheet Diagram", "Tool", "", "", Nothing)
 
-        ProFeatures.Functions.DisplayTransitionForm(Me, "Process Flowsheet Diagram")
+        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Process Flowsheet Diagram")
 
     End Sub
 
