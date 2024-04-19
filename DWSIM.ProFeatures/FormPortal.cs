@@ -149,7 +149,8 @@ namespace DWSIM.ProFeatures
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
-                var response = await httpClient.PostAsync(url, null);
+                var content = new StringContent(JsonConvert.SerializeObject(new { source = "dwsim-os" }), Encoding.UTF8, "application/json");
+                var response = await httpClient.PostAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -376,6 +377,11 @@ namespace DWSIM.ProFeatures
             this.FileSavingInProgress = true;
             // We fire event to save file and continue on FileManagementService_FileSavedToDashboard
             FileManagementService.GetInstance().SaveFileToDashboard();
+        }
+
+        private void registerLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {        
+            Process.Start("https://simulate365.com/registration/");
         }
     }
 }
