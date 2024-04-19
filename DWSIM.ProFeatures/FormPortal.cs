@@ -364,5 +364,10 @@ namespace DWSIM.ProFeatures
             // We fire event to save file and continue on FileManagementService_FileSavedToDashboard
             FileManagementService.GetInstance().SaveFileToDashboard();
         }
+
+        private void registerLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {        
+            Process.Start("https://simulate365.com/registration/");
+        }
     }
 }
