@@ -42,6 +42,7 @@ namespace DWSIM.ProFeatures
             this.saveToDashboardBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.notLoggedInPanel = new System.Windows.Forms.Panel();
+            this.registerLabel = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@ namespace DWSIM.ProFeatures
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.registerLabel = new System.Windows.Forms.LinkLabel();
             this.NoLicensePanel.SuspendLayout();
             this.LoadingPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -147,6 +147,18 @@ namespace DWSIM.ProFeatures
             this.notLoggedInPanel.Name = "notLoggedInPanel";
             this.notLoggedInPanel.Size = new System.Drawing.Size(644, 73);
             this.notLoggedInPanel.TabIndex = 6;
+            // 
+            // registerLabel
+            // 
+            this.registerLabel.AutoSize = true;
+            this.registerLabel.Location = new System.Drawing.Point(260, 27);
+            this.registerLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.registerLabel.Name = "registerLabel";
+            this.registerLabel.Size = new System.Drawing.Size(28, 13);
+            this.registerLabel.TabIndex = 9;
+            this.registerLabel.TabStop = true;
+            this.registerLabel.Text = "here";
+            this.registerLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.registerLabel_LinkClicked);
             // 
             // label2
             // 
@@ -255,18 +267,6 @@ namespace DWSIM.ProFeatures
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
-            // 
-            // registerLabel
-            // 
-            this.registerLabel.AutoSize = true;
-            this.registerLabel.Location = new System.Drawing.Point(248, 27);
-            this.registerLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.registerLabel.Name = "registerLabel";
-            this.registerLabel.Size = new System.Drawing.Size(28, 13);
-            this.registerLabel.TabIndex = 9;
-            this.registerLabel.TabStop = true;
-            this.registerLabel.Text = "here";
-            this.registerLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.registerLabel_LinkClicked);
             // 
             // FormPortal
             // 
