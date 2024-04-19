@@ -145,7 +145,8 @@ namespace DWSIM.ProFeatures
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
-                var response = await httpClient.PostAsync(url, null);
+                var content = new StringContent(JsonConvert.SerializeObject(new { source = "dwsim-os" }), Encoding.UTF8, "application/json");
+                var response = await httpClient.PostAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
                 {
