@@ -4933,7 +4933,7 @@ Label_00CC:
         Dim userService As UserService = UserService.GetInstance()
         Dim isLoggedIn As Boolean = userService._IsLoggedIn()
         If isLoggedIn Then
-            Functions.DisplayTransitionForm(Nothing, "Access DWSIM Pro now", True)
+            ProFeatures.Functions.DisplayTransitionForm(Me.AnalyticsProvider, Nothing, "Access DWSIM Pro Now")
         Else
             Dim loginForm = New LoginForm()
             loginForm.ShowDialog()
