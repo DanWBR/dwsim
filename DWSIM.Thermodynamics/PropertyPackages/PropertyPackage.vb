@@ -1788,15 +1788,6 @@ Namespace PropertyPackages
 
         Public Overridable Sub DW_CalcTwoPhaseProps(ByVal Phase1 As PropertyPackages.Phase, ByVal Phase2 As PropertyPackages.Phase)
 
-            Dim T As Double
-
-            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
-
-            Me.CurrentMaterialStream.Phases(1).Properties.surfaceTension = Me.AUX_SURFTM(1, T)
-            Me.CurrentMaterialStream.Phases(3).Properties.surfaceTension = Me.AUX_SURFTM(3, T)
-            Me.CurrentMaterialStream.Phases(4).Properties.surfaceTension = Me.AUX_SURFTM(4, T)
-
         End Sub
 
         Public Function DW_CalcGibbsEnergy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, Optional ByVal forcephase As String = "") As Double
@@ -1875,6 +1866,20 @@ Namespace PropertyPackages
         End Sub
 
         Public Overridable Sub DW_CalcOverallProps()
+
+            'surface tension
+
+            Dim T As Double
+
+            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
+
+            Me.CurrentMaterialStream.Phases(1).Properties.surfaceTension = Me.AUX_SURFTM(1, T)
+            Me.CurrentMaterialStream.Phases(3).Properties.surfaceTension = Me.AUX_SURFTM(3, T)
+            Me.CurrentMaterialStream.Phases(4).Properties.surfaceTension = Me.AUX_SURFTM(4, T)
+
+            'other properties
 
             Dim HL, HV, HS, SL, SV, SS, DL, DV, DS, CPL, CPV, CPS, KL, KV, KS, CVL, CVV, CSV As Nullable(Of Double)
             Dim UL, UV, US, GL, GV, GS, AL, AV, AS_ As Double
@@ -1989,7 +1994,6 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(0).Properties.kinematic_viscosity = Nothing
 
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
-            Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
             If Not Settings.CAPEOPENMode And Not TypeOf Me Is CAPEOPENPropertyPackage Then
                 If Me.FlashBase.FlashSettings(Enums.FlashSetting.CalculateBubbleAndDewPoints) Then
@@ -6834,28 +6838,15 @@ Final3:
             IObj?.Paragraphs.Add("<mi>T_{br}</mi> Reduced normal boiling point, <mi>T_{b}/T_{c}</mi>")
 
             Dim val As Double = 0
-            Dim tmpval As Double = 0.0#
-            Dim nbp As Double
-            Dim subst As Interfaces.ICompound
+            Dim tmpval As Double
+            Dim subst As ICompound
             Dim ftotal As Double = 1
 
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 IObj?.SetCurrent()
                 IObj?.Paragraphs.Add(String.Format("Calculating Surface Tension for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If T / subst.ConstantProperties.Critical_Temperature < 1.0 Then
-                    With subst.ConstantProperties
-                        If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
-                            tmpval = CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
-                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} N/m", tmpval))
-                        ElseIf .IsIon Or .IsSalt Then
-                            tmpval = 0.0#
-                        Else
-                            nbp = subst.ConstantProperties.Normal_Boiling_Point
-                            If nbp = 0 Then nbp = 0.7 * subst.ConstantProperties.Critical_Temperature
-                            tmpval = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Brock-Bird correlation: {0} N/m", tmpval))
-                        End If
-                    End With
+                    tmpval = AUX_SURFTi(subst.ConstantProperties, T)
                 Else
                     tmpval = 0
                     ftotal -= subst.MoleFraction.GetValueOrDefault
@@ -6901,8 +6892,7 @@ Final3:
             IObj?.Paragraphs.Add("<mi>T_{br}</mi> Reduced normal boiling point, <mi>T_{b}/T_{c}</mi>")
 
             Dim val As Double = 0
-            Dim tmpval As Double = 0.0#
-            Dim nbp As Double
+            Dim tmpval As Double
             Dim subst As Interfaces.ICompound
             Dim ftotal As Double = 1
 
@@ -6910,19 +6900,7 @@ Final3:
                 IObj?.SetCurrent()
                 IObj?.Paragraphs.Add(String.Format("Calculating Surface Tension for {0}... (xi = {1})", subst.Name, subst.MoleFraction.GetValueOrDefault))
                 If T / subst.ConstantProperties.Critical_Temperature < 1.0 Then
-                    With subst.ConstantProperties
-                        If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
-                            tmpval = CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
-                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} N/m", tmpval))
-                        ElseIf .IsIon Or .IsSalt Then
-                            tmpval = 0.0#
-                        Else
-                            nbp = subst.ConstantProperties.Normal_Boiling_Point
-                            If nbp = 0 Then nbp = 0.7 * subst.ConstantProperties.Critical_Temperature
-                            tmpval = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Brock-Bird correlation: {0} N/m", tmpval))
-                        End If
-                    End With
+                    tmpval = AUX_SURFTi(subst.ConstantProperties, T)
                 Else
                     tmpval = 0
                     ftotal -= subst.MoleFraction.GetValueOrDefault
