@@ -133,7 +133,6 @@ namespace DWSIM.ProFeatures
                 {
                     FileSavingInProgress = false;
                     bool actionSaved = await SaveDwsimProStartupAction();
-                    AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
                     ShowSuccessPanel();
                 }
             }
@@ -188,6 +187,7 @@ namespace DWSIM.ProFeatures
             }
             else
             {
+                AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
                 LoadingPanel.Visible = false;
                 SuccessPanel.Visible = true;
             }
@@ -208,7 +208,6 @@ namespace DWSIM.ProFeatures
                 }
                 else
                 {
-                    AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
                     ShowSuccessPanel();
                 }
             }
