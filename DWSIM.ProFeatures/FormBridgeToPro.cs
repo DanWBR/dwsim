@@ -43,6 +43,7 @@ namespace DWSIM.ProFeatures
             BridgeToProPanel.Visible = false;
             formPortal.Visible = true;
             formPortal.SetFlowsheet(CurrentFlowsheet);
+            formPortal.featurename = lblFeature.Text;
             formPortal.OnInitialize();
         }
 

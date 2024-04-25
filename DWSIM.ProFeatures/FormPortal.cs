@@ -26,6 +26,7 @@ namespace DWSIM.ProFeatures
         private bool FileSavingInProgress = false;
         private Timer Timer1 = new Timer() { Interval = 5000 };
         public IFlowsheet fsheet;
+        public string featurename = "";
 
         private List<string> TrialLicenseCreatedMessages = new List<string>() { "Assigning DWSIM Pro license...", "Setting up the virtual licensing environment...", "Finalizing setup..." };
 
@@ -75,18 +76,18 @@ namespace DWSIM.ProFeatures
             {
                 if (licenseInfo.hasExistingLicense.HasValue & licenseInfo.hasExistingLicense.Value)
                 {
-                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Eligible For Trial", "", null);
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Eligible For Trial", featurename, null);
                     SaveFlowsheet();
                 }
                 else if (licenseInfo.notEligibleForTrial.HasValue & licenseInfo.notEligibleForTrial.Value)
                 {
-                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Not Eligible For Trial", "", null);
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Not Eligible For Trial", featurename, null);
                     LoadingPanel.Visible = false;
                     NoLicensePanel.Visible = true;
                 }
                 else if ((licenseInfo.trialLicenseCreated & licenseInfo.trialLicenseCreated.Value) == true)
                 {
-                    AnalyticsProvider?.RegisterEvent("Portal Window 2: Trial License Created Successfully", "", null);
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: Trial License Created Successfully", featurename, null);
                     TrialLicenseCreatedLogic();
                 }
 
@@ -158,7 +159,7 @@ namespace DWSIM.ProFeatures
                     string responseBody = await response.Content.ReadAsStringAsync();
                     var licensingResponse = JsonConvert.DeserializeObject<LicenseResponseModel>(responseBody);
 
-                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Check Successful", "", null);
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Check Successful", featurename, null);
                     return licensingResponse;
                 }
                 else
@@ -187,7 +188,7 @@ namespace DWSIM.ProFeatures
             }
             else
             {
-                AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
+                AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", featurename, null);
                 LoadingPanel.Visible = false;
                 SuccessPanel.Visible = true;
             }
@@ -265,20 +266,20 @@ namespace DWSIM.ProFeatures
 
         private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Go to Shop'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Go to Shop'", featurename, null);
             Process.Start("https://simulate365.com/shop/");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Login'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Login'", featurename, null);
             var loginForm = new LoginForm(true);
             loginForm.ShowDialog();
         }
 
         private void openInDefaultBrowserLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Open Browser (Normal)'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Open Browser (Normal)'", featurename, null);
             Process.Start("https://vm.simulate365.com");
         }
 
@@ -325,13 +326,13 @@ namespace DWSIM.ProFeatures
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Go to Shop'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Go to Shop'", featurename, null);
             Process.Start("https://simulate365.com/shop/");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Open Browser in Private Mode'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Open Browser in Private Mode'", featurename, null);
             string privateModeParam = string.Empty;
             var url = "https://vm.simulate365.com";
             var browserProgId = GetStandardBrowserProgId()?.ToLower();
@@ -368,13 +369,13 @@ namespace DWSIM.ProFeatures
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Open Browser (Normal)'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Open Browser (Normal)'", featurename, null);
             Process.Start("https://vm.simulate365.com");
         }
 
         private void saveToDashboardBtn_Click(object sender, EventArgs e)
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Save to Dashboard'", "", null);
+            AnalyticsProvider?.RegisterEvent("Portal Window 2: User Clicked 'Save to Dashboard'", featurename, null);
             this.FileSavingInProgress = true;
             // We fire event to save file and continue on FileManagementService_FileSavedToDashboard
             FileManagementService.GetInstance().SaveFileToDashboard();
