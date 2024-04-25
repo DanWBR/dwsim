@@ -133,6 +133,7 @@ namespace DWSIM.ProFeatures
                 {
                     FileSavingInProgress = false;
                     bool actionSaved = await SaveDwsimProStartupAction();
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
                     ShowSuccessPanel();
                 }
             }
@@ -158,6 +159,7 @@ namespace DWSIM.ProFeatures
                     string responseBody = await response.Content.ReadAsStringAsync();
                     var licensingResponse = JsonConvert.DeserializeObject<LicenseResponseModel>(responseBody);
 
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: License Check Successful", "", null);
                     return licensingResponse;
                 }
                 else
@@ -180,7 +182,6 @@ namespace DWSIM.ProFeatures
 
         private void ShowSuccessPanel()
         {
-            AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(ShowSuccessPanel));
@@ -207,6 +208,7 @@ namespace DWSIM.ProFeatures
                 }
                 else
                 {
+                    AnalyticsProvider?.RegisterEvent("Portal Window 2: Open-Source to Pro Workflow Finished Successfully", "", null);
                     ShowSuccessPanel();
                 }
             }
