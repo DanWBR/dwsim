@@ -65,6 +65,7 @@ Jay Hunter
 John Eamon
 John Kossik
 Kenneth Troldal
+Leandro Favaretto
 Les Waymont
 Lewis Estall
 Luca Finardi
