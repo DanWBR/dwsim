@@ -221,7 +221,6 @@ Partial Class FormImportCompoundOnline
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.btnExportJSON)
-        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.btnPrev)
@@ -229,6 +228,7 @@ Partial Class FormImportCompoundOnline
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormImportCompoundOnline"
         Me.ShowIcon = False

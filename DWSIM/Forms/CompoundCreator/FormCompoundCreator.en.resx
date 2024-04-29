@@ -203,6 +203,9 @@
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="UNIFACImageColumn.HeaderText" xml:space="preserve">
+    <value>Example</value>
+  </data>
   <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>690, 423</value>
   </data>
@@ -229,6 +232,9 @@
   </data>
   <data name="PicNISTMODFAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 147</value>
+  </data>
+  <data name="DataGridViewImageColumn1.HeaderText" xml:space="preserve">
+    <value>Example</value>
   </data>
   <data name="GridNISTMODFAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>690, 417</value>
