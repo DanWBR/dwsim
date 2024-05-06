@@ -19,6 +19,8 @@ using DWSIM.UI.Shared;
 using DWSIM.ExtensionMethods;
 using System.IO;
 using DWSIM.SharedClassesCSharp.FilePicker;
+using DWSIM.Thermodynamics.Databases.ChemeoLink;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -138,22 +140,42 @@ namespace DWSIM.UI.Desktop.Editors
             c.CreateAndAddLabelRow(dl, "Load Data");
             c.CreateAndAddLabelAndButtonRow(dl, "You can load compound data from an existing JSON file.", "Load Data", null, (sender, e) =>
             {
-                var dialog = new OpenFileDialog();
-                dialog.Title = "Load Compound Data";
-                dialog.Filters.Add(new FileFilter("JSON File", new[] { ".json" }));
-                dialog.CurrentFilterIndex = 0;
-                if (dialog.ShowDialog(page1) == DialogResult.Ok)
+                if (GlobalSettings.Settings.OldUI)
                 {
-                    try
+                    IFilePicker filePickerForm = FilePickerService.GetInstance().GetFilePicker();
+                    IVirtualFile handler = filePickerForm.ShowOpenDialog(new List<FilePickerAllowedType> { new FilePickerAllowedType("JSON File", "*.json")});
+                    if (handler != null)
                     {
-                        comp = Newtonsoft.Json.JsonConvert.DeserializeObject<DWSIM.Thermodynamics.BaseClasses.ConstantProperties>(File.ReadAllText(dialog.FileName));
-                        estimatefromunifac = false;
-
-                        MessageBox.Show("Data successfully loaded from JSON file.", "Information", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
+                        try
+                        {
+                            comp = Newtonsoft.Json.JsonConvert.DeserializeObject<DWSIM.Thermodynamics.BaseClasses.ConstantProperties>(handler.ReadAllText());
+                            estimatefromunifac = false;
+                           MessageBox.Show("Data successfully loaded from JSON file.", "Information", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error loading compound data to JSON file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                        }
                     }
-                    catch (Exception ex)
+                }
+                else
+                {
+                    var dialog = new OpenFileDialog();
+                    dialog.Title = "Load Compound Data";
+                    dialog.Filters.Add(new FileFilter("JSON File", new[] { ".json" }));
+                    dialog.CurrentFilterIndex = 0;
+                    if (dialog.ShowDialog(page1) == DialogResult.Ok)
                     {
-                        MessageBox.Show("Error loading compound data to JSON file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                        try
+                        {
+                            comp = Newtonsoft.Json.JsonConvert.DeserializeObject<DWSIM.Thermodynamics.BaseClasses.ConstantProperties>(File.ReadAllText(dialog.FileName));
+                            estimatefromunifac = false;
+                            MessageBox.Show("Data successfully loaded from JSON file.", "Information", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error loading compound data to JSON file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                        }
                     }
                 }
             });
@@ -872,45 +894,65 @@ namespace DWSIM.UI.Desktop.Editors
 
             dl.CreateAndAddLabelAndButtonRow("Export Compound to JSON File", "Export to JSON", null, (arg1, arg2) =>
             {
-
-                IFilePicker filePickerForm = FilePickerService.GetInstance().GetFilePicker();
-                IVirtualFile handler = filePickerForm.ShowSaveDialog(new List<FilePickerAllowedType> { new FilePickerAllowedType("JSON File", "*.json") });
-
-                if (handler != null)
+                if (GlobalSettings.Settings.OldUI)
                 {
-                    using (var stream = new System.IO.MemoryStream())
+                    IFilePicker filePickerForm = FilePickerService.GetInstance().GetFilePicker();
+                    IVirtualFile handler = filePickerForm.ShowSaveDialog(new List<FilePickerAllowedType> { new FilePickerAllowedType("JSON File", "*.json") });
+
+                    if (handler != null)
                     {
-                        using (var writer = new StreamWriter(stream) { AutoFlush = true })
+                        using (var stream = new System.IO.MemoryStream())
                         {
-                            try
+                            using (var writer = new StreamWriter(stream) { AutoFlush = true })
                             {
-                                var jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented);
-                                writer.Write(jsondata);
-                                handler.Write(stream);
-                                if (flowsheet == null)
+                                try
                                 {
-                                    MessageBox.Show("Compound '" + comp.Name + "' successfully saved to JSON file.");
+                                    var jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented);
+                                    writer.Write(jsondata);
+                                    handler.Write(stream);
+                                    if (flowsheet == null)
+                                    {
+                                        MessageBox.Show("Compound '" + comp.Name + "' successfully saved to JSON file.");
+                                    }
+                                    else
+                                    {
+                                        flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                                    }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                if (flowsheet == null)
-                                {
-                                    MessageBox.Show("Error saving compound to JSON file: " + ex.ToString());
-                                }
-                                else
-                                {
-                                    flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                    if (flowsheet == null)
+                                    {
+                                        MessageBox.Show("Error saving compound to JSON file: " + ex.ToString());
+                                    }
+                                    else
+                                    {
+                                        flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
+                else
+                {
+                    var dialog = new SaveFileDialog();
+                    dialog.Title = "Save Compound to JSON File";
+                    dialog.Filters.Add(new FileFilter("JSON File", new[] { ".json" }));
+                    dialog.CurrentFilterIndex = 0;
+                    if (dialog.ShowDialog(page) == DialogResult.Ok)
+                    {
+                        try
+                        {
+                            File.WriteAllText(dialog.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented));
+                            flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                        }
+                    }
+                }
             });
             dl.CreateAndAddLabelRow2("Export compound data to a JSON file for later use (recommended).");
 
