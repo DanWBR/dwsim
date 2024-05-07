@@ -240,7 +240,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property LabelFontSize As Double = 10.0 Implements IFlowsheetOptions.LabelFontSize
 
-        Public Property FlowsheetColorTheme As Integer = 2 Implements IFlowsheetOptions.FlowsheetColorTheme
+        Public Property FlowsheetColorTheme As Integer = 0 Implements IFlowsheetOptions.FlowsheetColorTheme
 
         Public Property RegularFontName As String = "OpenSans_SemiCondensed-Regular" Implements IFlowsheetOptions.RegularFontName
 
