@@ -6579,51 +6579,70 @@ Final3:
 
         Public Function AUX_HVAPi(ByVal sub1 As String, ByVal T As Double)
 
-            Dim A, B, C, D, E, Tr, result As Double
-            A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A
-            B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_B
-            C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_C
-            D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_D
-            E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_E
+            Dim cprop = CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
 
-            Tr = T / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+            Dim A, B, C, D, E, Tr, result As Double
+            A = cprop.HVap_A
+            B = cprop.HVap_B
+            C = cprop.HVap_C
+            D = cprop.HVap_D
+            E = cprop.HVap_E
+
+            Tr = T / cprop.Critical_Temperature
 
             If Tr >= 1 Then Return 0.0#
 
-            If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
-                                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsHYPO = 1 Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
+            If cprop.OriginalDB = "DWSIM" Or
+                                cprop.OriginalDB = "" Then
+                If cprop.IsHYPO = 1 Or
+                cprop.IsPF = 1 Then
                     Dim tr1 As Double
-                    tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
-                    result = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
+                    tr1 = cprop.Normal_Boiling_Point / cprop.Critical_Temperature
+                    result = cprop.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
                     Return result 'kJ/kg
                 Else
                     result = A * (1 - Tr) ^ (B + C * Tr + D * Tr ^ 2)
-                    Return result / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight / 1000 'kJ/kg
+                    Return result / cprop.Molar_Weight / 1000 'kJ/kg
                 End If
-            ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Or
-            Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or
-           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or
-           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
+            ElseIf cprop.OriginalDB = "CheResources" Or
+            cprop.OriginalDB = "CoolProp" Or
+           cprop.OriginalDB = "KDB" Then
                 Dim tr1 As Double
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
-                    tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_B / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                If cprop.OriginalDB = "KDB" Then
+                    tr1 = cprop.HVap_B / cprop.Critical_Temperature
                 Else
-                    tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                    tr1 = cprop.Normal_Boiling_Point / cprop.Critical_Temperature
                 End If
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = 0.0# Then
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point)
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A /= Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                If cprop.HVap_A = 0.0# Then
+                    cprop.HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(cprop.Critical_Temperature, cprop.Critical_Pressure, cprop.Normal_Boiling_Point)
+                    cprop.HVap_A /= cprop.Molar_Weight
                 End If
-                result = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
+                result = cprop.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
                 Return result 'kJ/kg
-            ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Then
-                Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporizationEnthalpyEquation
-                result = CalcCSTDepProp(eqno, A, B, C, D, E, T, T / Tr) / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight / 1000 'kJ/kg
+            ElseIf cprop.OriginalDB = "ChemSep" Or
+                cprop.OriginalDB = "User" Then
+                Dim tr1 = cprop.Normal_Boiling_Point / cprop.Critical_Temperature
+                If cprop.VaporizationEnthalpyEquation <> "" And cprop.LiquidHeatCapacityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
+                    If Integer.TryParse(cprop.VaporizationEnthalpyEquation, New Integer) Then
+                        result = CalcCSTDepProp(cprop.VaporizationEnthalpyEquation, A, B, C, D, E, T, T / Tr) / cprop.Molar_Weight / 1000 'kJ/kg
+                    Else
+                        If cprop.HVap_A = 0.0# Then
+                            cprop.HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(cprop.Critical_Temperature, cprop.Critical_Pressure, cprop.Normal_Boiling_Point)
+                            cprop.HVap_A /= cprop.Molar_Weight
+                        End If
+                        result = cprop.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
+                    End If
+                Else
+                    If cprop.HVap_A = 0.0# Then
+                        cprop.HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(cprop.Critical_Temperature, cprop.Critical_Pressure, cprop.Normal_Boiling_Point)
+                        cprop.HVap_A /= cprop.Molar_Weight
+                    End If
+                    result = cprop.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
+                End If
+
                 Return result
-            ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Then
-                Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporizationEnthalpyEquation
+            ElseIf cprop.OriginalDB = "ChEDL Thermo" Then
+                Dim eqno As String = cprop.VaporizationEnthalpyEquation
                 result = CalcCSTDepProp(eqno, A, B, C, D, E, T, T / Tr) 'kJ/kg
                 Return result
             Else
