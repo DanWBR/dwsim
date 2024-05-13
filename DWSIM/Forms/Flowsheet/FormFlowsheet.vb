@@ -29,11 +29,9 @@ Imports System.Runtime.InteropServices
 Imports System.Dynamic
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports System.Threading.Tasks
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
-Imports DWSIM.UI.Controls.FlowsheetSurfaceControlBase
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -160,6 +158,8 @@ Public Class FormFlowsheet
     Public Event EditingFormsUpdated(sender As Object, e As EventArgs)
 
     Public Event InterfaceUpdated(sender As Object, e As EventArgs)
+
+    Public Event NewMessageSent(message As String, type As IFlowsheet.MessageType, exception As Exception)
 
     Public Sub New()
 
@@ -1210,8 +1210,6 @@ Public Class FormFlowsheet
                                           MessagesLog.Add("[" + Date.Now.ToString() + "] " + Message)
                                       End If
 
-                                      RaiseEvent NewMessageSent(texto)
-
                                       If frsht.Visible Then
 
                                           Dim showtips As Boolean = True
@@ -1292,7 +1290,9 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub WriteMessage(ByVal message As String)
+
         WriteToLog(message, Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
+
     End Sub
 
     Public Sub CheckCollections()
@@ -3717,10 +3717,6 @@ Public Class FormFlowsheet
 
 #Region "    IFlowsheet Implementation"
 
-    Private Delegate Sub NewMessageSentEventHandler(ByVal message As String)
-    Private Event NewMessageSent As NewMessageSentEventHandler
-    Public Event StatusChanged()
-
     Public Sub DisplayBrowserWindow(url As String) Implements IFlowsheet.DisplayBrowserWindow
         Dim fb As New FormBrowser()
         fb.Show()
@@ -3911,12 +3907,20 @@ Public Class FormFlowsheet
         End Set
     End Property
 
-    Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
+    Public Sub ShowMessage(text As String, mtype As IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
+
+        If ExceptionProcessing.ExceptionList.Exceptions.ContainsKey(exceptionID) Then
+            RaiseEvent NewMessageSent(text, mtype, ExceptionProcessing.ExceptionList.Exceptions(exceptionID))
+        Else
+            RaiseEvent NewMessageSent(text, mtype, Nothing)
+        End If
+
         If Not SupressMessages Then
             SyncLock MessagePump
                 MessagePump.Enqueue(New Tuple(Of String, WarningType, String)(text, mtype, exceptionID))
             End SyncLock
         End If
+
     End Sub
 
     Private Sub ShowMessageInternal(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "")
