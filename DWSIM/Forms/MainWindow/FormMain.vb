@@ -5056,6 +5056,12 @@ Label_00CC:
 
     End Sub
 
+    Private Sub ToolStripDropDownButton1_Click_2(sender As Object, e As EventArgs) Handles ToolStripDropDownButton1.Click
+
+        Process.Start("https://www.patreon.com/dwsim/shop")
+
+    End Sub
+
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked

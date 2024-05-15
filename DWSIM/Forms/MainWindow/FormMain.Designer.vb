@@ -114,6 +114,7 @@ Partial Class FormMain
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.tsblDonate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsbdonate1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.tsbdonate2 = New System.Windows.Forms.ToolStripDropDownButton()
@@ -640,10 +641,18 @@ Partial Class FormMain
         'StatusStrip1
         '
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2, Me.tsbQuickQuestion})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.tsblDonate, Me.tsbdonate1, Me.tsbdonate2, Me.ToolStripStatusLabel2, Me.tsbQuickQuestion})
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusStrip1.SizingGrip = False
+        '
+        'ToolStripDropDownButton1
+        '
+        resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
+        Me.ToolStripDropDownButton1.ForeColor = System.Drawing.Color.SteelBlue
+        Me.ToolStripDropDownButton1.Image = Global.DWSIM.My.Resources.Resources.birthday_cake_48px
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.ShowDropDownArrow = False
         '
         'tsblDonate
         '
@@ -981,4 +990,5 @@ Partial Class FormMain
     Friend WithEvents tsmiProUG As ToolStripMenuItem
     Friend WithEvents tsmiNewCompoundWizard As ToolStripMenuItem
     Friend WithEvents CheckingCredentialsLabel As ToolStripLabel
+    Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
 End Class
