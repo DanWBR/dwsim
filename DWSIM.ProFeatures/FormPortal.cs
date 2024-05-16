@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using DWSIM.ExtensionMethods;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace DWSIM.ProFeatures
 {
@@ -36,6 +38,8 @@ namespace DWSIM.ProFeatures
 
             FileManagementService.GetInstance().OnFileSavedToDashboard += FileManagementService_FileSavedToDashboard;
             UserService.GetInstance().OnUserLoggedIn += UserService_OnUserLoggedIn;
+
+            Disposed += OnDispose;
         }
         public void SetFlowsheet(IFlowsheet fs)
         {
@@ -53,6 +57,21 @@ namespace DWSIM.ProFeatures
 
         private void FormPortal_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void OnDispose(object sender, EventArgs e)
+        {
+            try
+            {
+                UserService.GetInstance().OnUserLoggedIn -= UserService_OnUserLoggedIn;
+                FileManagementService.GetInstance().OnFileSavedToDashboard -= FileManagementService_FileSavedToDashboard;
+            }
+            catch (Exception)
+            {
+
+
+            }
 
         }
 
@@ -139,8 +158,11 @@ namespace DWSIM.ProFeatures
             }
         }
 
+        private static SemaphoreSlim __licenseRequestLock = new SemaphoreSlim(1);
+
         private async Task<LicenseResponseModel> GetLicenseInfo()
         {
+            await __licenseRequestLock.WaitAsync();
 
             string url = $"{DashboardSettings.DashboardServiceUrl}/api/licensing/license-info";
             var token = UserService.GetInstance().GetUserToken();
@@ -175,8 +197,10 @@ namespace DWSIM.ProFeatures
             }
             finally
             {
+                __licenseRequestLock.Release();
                 IsLoadingLicenseInfo = false;
             }
+
             return null;
         }
 
@@ -382,7 +406,7 @@ namespace DWSIM.ProFeatures
         }
 
         private void registerLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {        
+        {
             Process.Start("https://simulate365.com/registration/");
         }
     }
