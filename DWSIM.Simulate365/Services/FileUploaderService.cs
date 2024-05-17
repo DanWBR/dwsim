@@ -4,6 +4,7 @@ using Microsoft.Graph;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -24,7 +25,7 @@ namespace DWSIM.Simulate365.Services
         }
 
         public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, Stream fileStream, string filename, string simulatePath, UploadConflictAction? conflictAction)
-        {
+        {            
             try
             {
                 fileStream.Seek(0, SeekOrigin.Begin);
@@ -53,7 +54,7 @@ namespace DWSIM.Simulate365.Services
 
         public static async Task<UploadFileResponseModel> UploadDocumentAsync(string parentUniqueIdentifier, string filename, Stream fileStream, UploadConflictAction? conflictAction)
         {
-
+          
 
             try
             {
@@ -80,6 +81,11 @@ namespace DWSIM.Simulate365.Services
                     // Handle response
                     var responseContent = await response.Content.ReadAsStringAsync();
                     var responseModel = JsonConvert.DeserializeObject<List<UploadFileResponseModel>>(responseContent);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        var errorMessage = await response.Content.ReadAsStringAsync();
+                        throw new Exception($"An error occurred while uploading file. Status code: {response.StatusCode}. Error:{errorMessage}");
+                    }
                     if (responseModel == null || responseModel.Count == 0)
                     {
                         throw new Exception("An error occurred while uploading file. Response is empty.");
