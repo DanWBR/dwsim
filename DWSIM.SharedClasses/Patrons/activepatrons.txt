@@ -59,8 +59,10 @@ David Whitlock
 Denislav Zdravkov
 Doug Palfreyman
 Eugenio León
+Fabiano Scheufele
 Fernando Almeida
 Frans Le Roux
+Gabriel Álvares
 Gabriel Carvalho
 Guenther Holzer
 Harry Levinson
