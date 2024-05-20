@@ -164,11 +164,15 @@ Namespace UnitOperations.Auxiliary.PumpOps
 
             Try
                 Dim xel As XElement = (From xmlprop In data Select xmlprop Where xmlprop.Name = "x").FirstOrDefault
-                Dim val As ArrayList = XMLSerializer.XMLSerializer.StringToArray(xel.Value, System.Globalization.CultureInfo.InvariantCulture)
-                X = val.ToDoubleList()
+                If xel IsNot Nothing Then
+                    Dim val As ArrayList = XMLSerializer.XMLSerializer.StringToArray(xel.Value, System.Globalization.CultureInfo.InvariantCulture)
+                    X = val.ToDoubleList()
+                End If
                 xel = (From xmlprop In data Select xmlprop Where xmlprop.Name = "y").FirstOrDefault
-                val = XMLSerializer.XMLSerializer.StringToArray(xel.Value, System.Globalization.CultureInfo.InvariantCulture)
-                Y = val.ToDoubleList()
+                If xel IsNot Nothing Then
+                    Dim val = XMLSerializer.XMLSerializer.StringToArray(xel.Value, System.Globalization.CultureInfo.InvariantCulture)
+                    Y = val.ToDoubleList()
+                End If
             Catch ex As Exception
             End Try
 
