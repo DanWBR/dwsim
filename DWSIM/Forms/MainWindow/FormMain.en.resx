@@ -122,51 +122,6 @@
     <value>False</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 24</value>
-  </data>
-  <data name="FileTSMI.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 24</value>
-  </data>
-  <data name="EditTSMI.Text" xml:space="preserve">
-    <value>E&amp;dit</value>
-  </data>
-  <data name="ToolsTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 24</value>
-  </data>
-  <data name="ToolsTSMI.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
-  </data>
-  <data name="WindowsMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 24</value>
-  </data>
-  <data name="WindowsMenu.Text" xml:space="preserve">
-    <value>&amp;Windows</value>
-  </data>
-  <data name="ViewTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 24</value>
-  </data>
-  <data name="ViewTSMI.Text" xml:space="preserve">
-    <value>&amp;View</value>
-  </data>
-  <data name="HelpTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 24</value>
-  </data>
-  <data name="HelpTSMI.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="tsmiFreeProTrial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 24</value>
-  </data>
-  <data name="tsmiFreeProTrial.Text" xml:space="preserve">
-    <value>Access DWSIM Pro now</value>
-  </data>
-  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1403, 30</value>
-  </data>
   <data name="NewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 22</value>
   </data>
@@ -266,11 +221,23 @@
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exi&amp;t DWSIM</value>
   </data>
+  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 24</value>
+  </data>
+  <data name="FileTSMI.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
   <data name="PreferenciasDoDWSIMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 22</value>
   </data>
   <data name="PreferenciasDoDWSIMToolStripMenuItem.Text" xml:space="preserve">
     <value>General Settings</value>
+  </data>
+  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 24</value>
+  </data>
+  <data name="EditTSMI.Text" xml:space="preserve">
+    <value>E&amp;dit</value>
   </data>
   <data name="DatabaseManagerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 22</value>
@@ -284,14 +251,20 @@
   <data name="RegistroCAPEOPENToolStripMenuItem.Text" xml:space="preserve">
     <value>CAPE-OPEN Component Registration</value>
   </data>
+  <data name="PsycrometrySimulationTemplateToolStripMenuItem.Text" xml:space="preserve">
+    <value>Psychrometry Simulation Template</value>
+  </data>
   <data name="DownloadSupplementarySoftwareToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 22</value>
   </data>
   <data name="DownloadSupplementarySoftwareToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Download Additional Components</value>
   </data>
-  <data name="PsycrometrySimulationTemplateToolStripMenuItem.Text" xml:space="preserve">
-    <value>Psychrometry Simulation Template</value>
+  <data name="ToolsTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 24</value>
+  </data>
+  <data name="ToolsTSMI.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
   </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
@@ -311,6 +284,12 @@
   <data name="TileHorizontalToolStripMenuItem.Text" xml:space="preserve">
     <value>Group &amp;Vertically</value>
   </data>
+  <data name="WindowsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 24</value>
+  </data>
+  <data name="WindowsMenu.Text" xml:space="preserve">
+    <value>&amp;Windows</value>
+  </data>
   <data name="MostrarBarraDeFerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 22</value>
   </data>
@@ -323,17 +302,17 @@
   <data name="PainelDeBoasvindasToolStripMenuItem.Text" xml:space="preserve">
     <value>Welcome Panel</value>
   </data>
+  <data name="ViewTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 24</value>
+  </data>
+  <data name="ViewTSMI.Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
   <data name="UsersGuideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 22</value>
   </data>
   <data name="tsmiProUG.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 22</value>
-  </data>
-  <data name="DWSIMNaInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
-    <value>Public Support</value>
   </data>
   <data name="WikiToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -401,6 +380,12 @@
   <data name="DIscordChannelToolStripMenuItem.Text" xml:space="preserve">
     <value>Discord Channel</value>
   </data>
+  <data name="DWSIMNaInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
+    <value>Public Support</value>
+  </data>
   <data name="WhatsNewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 22</value>
   </data>
@@ -410,8 +395,20 @@
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About DWSIM</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1403, 27</value>
+  <data name="HelpTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 24</value>
+  </data>
+  <data name="HelpTSMI.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="tsmiFreeProTrial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 24</value>
+  </data>
+  <data name="tsmiFreeProTrial.Text" xml:space="preserve">
+    <value>Access DWSIM Pro now</value>
+  </data>
+  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1403, 30</value>
   </data>
   <data name="NewToolStripButton.Text" xml:space="preserve">
     <value>New Steady-State Simulation</value>
@@ -473,54 +470,6 @@
   <data name="ToolStripSeparator8.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="LogoutDropdown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        TkSuQmCC
-</value>
-  </data>
   <data name="DashboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
@@ -533,11 +482,62 @@
   <data name="LogoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
+  <data name="LogoutDropdown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        RU5ErkJggg==
+</value>
+  </data>
   <data name="CheckingCredentialsLabel.Text" xml:space="preserve">
     <value>Checking credentials...</value>
   </data>
   <data name="CheckingCredentialsLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1403, 27</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1403, 695</value>
@@ -585,21 +585,21 @@
     <value>1, 17</value>
   </data>
   <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 673</value>
+    <value>362, 673</value>
   </data>
   <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1316, 22</value>
+    <value>1041, 22</value>
   </data>
   <data name="WelcomePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 57</value>
+    <value>362, 57</value>
   </data>
   <data name="WelcomePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1316, 638</value>
-  </data>
-  <data name="SettingsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 638</value>
+    <value>1041, 638</value>
   </data>
   <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 0</value>
+    <value>346, 0</value>
+  </data>
+  <data name="SettingsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 638</value>
   </data>
 </root>
