@@ -5103,7 +5103,7 @@ Namespace UnitOperations
                     compound_balances(c) = compound_balances(c) / (compound_feeds(c) + 1.0E-20)
                 Next
 
-                Dim mintol = tol.MinY_NonZero() * 100
+                Dim mintol = tol.MinY_NonZero() * 10
 
                 If compound_balances.Values.Where(Function(b) Math.Abs(b) > mintol).Count > 0 Then
                     Dim mbal = compound_balances.Where(Function(b) Math.Abs(b.Value) > mintol).FirstOrDefault
