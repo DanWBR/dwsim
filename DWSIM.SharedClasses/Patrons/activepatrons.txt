@@ -97,4 +97,5 @@ SP&POS Engenharia
 Tetsuo Fuchino
 Thomas Baur
 Tibor Lányi
+Vladislav Živanović
 Will Flores
