@@ -32,11 +32,13 @@
 🌟 Michael Saucier
 🌟 Nicholas Canabarro
 🌟 Nicolas Spogis
+🌟 Pablo Jimenez
 🌟 Pawel Zjezdzalka
 🌟 Richard Huntington
 🌟 Roland Berger
 🌟 Ronald J. Dunbar
 🌟 Ronald Visness
+🌟 Rubens Oliveira
 🌟 Ryan Smith
 🌟 Simone Vidille
 🌟 Tech-Rudra
@@ -59,8 +61,10 @@ David Whitlock
 Denislav Zdravkov
 Doug Palfreyman
 Eugenio León
+Fabiano Scheufele
 Fernando Almeida
 Frans Le Roux
+Gabriel Álvares
 Gabriel Carvalho
 Guenther Holzer
 Harry Levinson
@@ -78,6 +82,7 @@ Marcos Silva
 Masahiro Sakai
 Mohan Vaze
 Nathan Schuh
+Peter Nordquist
 Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
@@ -88,7 +93,9 @@ Rupert Easter
 Ryszard Sadowski
 Satinder Singh Virdi
 Shubham Wankhede
+SP&POS Engenharia
 Tetsuo Fuchino
 Thomas Baur
 Tibor Lányi
+Vladislav Živanović
 Will Flores
