@@ -1,6 +1,7 @@
 ﻿using DWSIM.Simulate365.Models;
 using DWSIM.UI.Web.Settings;
 using Microsoft.Graph;
+using Microsoft.Graph.Ediscovery;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,47 @@ namespace DWSIM.Simulate365.Services
                 return UploadFile(fileUniqueIdentifier, parentUniqueIdentifier, fileStream, filename, simulatePath, conflictAction);
         }
 
+        public static S365File UploadFileByFilePath(string simulatePath, Stream fileStream, UploadConflictAction? conflictAction)
+        {
+            try
+            {
+                if (simulatePath.StartsWith("//Simulate 365 Dashboard/"))
+                    simulatePath = simulatePath.Substring(24);
+
+                var fileWithBreadCrumbs = GetFileByPath(simulatePath);
+                if (fileWithBreadCrumbs == null || fileWithBreadCrumbs.File == null)
+                    throw new Exception($"File on simulate path '{simulatePath}' not found.");
+                var file = fileWithBreadCrumbs.File;
+
+                fileStream.Seek(0, SeekOrigin.Begin);
+
+                var token = UserService.GetInstance().GetUserToken();
+                var client = GetDashboardClient(token);
+                var parentUniqueIdentifier = fileWithBreadCrumbs.BreadcrumbItems?.LastOrDefault()?.UniqueIdentifier.ToString();
+
+                var filename= Path.GetFileName(simulatePath) ?? string.Empty;   
+
+                var fileResp = Task.Run(async () => await UploadDocumentAsync(parentUniqueIdentifier, filename, fileStream, conflictAction)).Result;
+
+                return new S365File(filename)
+                {
+                    FileUniqueIdentifier = fileResp.FileUniqueIdentifier.ToString(),
+                    ParentUniqueIdentifier = parentUniqueIdentifier,
+                    Filename = fileResp.Filename,
+                    FullPath = fileResp.SimulatePath
+
+                };
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("An error occurred while saving file to Simulate 365 Dashboard.", ex);
+            }
+        }
+
         public static S365File UploadFile(string fileUniqueIdentifier, string parentUniqueIdentifier, Stream fileStream, string filename, string simulatePath, UploadConflictAction? conflictAction)
-        {            
+        {
             try
             {
                 fileStream.Seek(0, SeekOrigin.Begin);
@@ -54,7 +94,7 @@ namespace DWSIM.Simulate365.Services
 
         public static async Task<UploadFileResponseModel> UploadDocumentAsync(string parentUniqueIdentifier, string filename, Stream fileStream, UploadConflictAction? conflictAction)
         {
-          
+
 
             try
             {
@@ -99,6 +139,16 @@ namespace DWSIM.Simulate365.Services
             {
                 throw new Exception("An error occurred while trying to upload document.", ex);
             }
+        }
+        private static FilesWithBreadcrumbsResponseModel GetFileByPath(string simulatePath)
+        {
+
+            var token = UserService.GetInstance().GetUserToken();
+            var client = GetDashboardClient(token);
+            var result = Task.Run(async () => await client.GetAsync($"/api/files/by-path?filePath={simulatePath}&includeBreadcrumbs=true")).Result;
+            var resultContent = Task.Run(async () => await result.Content.ReadAsStringAsync()).Result;
+            var itemWithBreadcrumbs = JsonConvert.DeserializeObject<FilesWithBreadcrumbsResponseModel>(resultContent);
+            return itemWithBreadcrumbs;
         }
 
         private static HttpClient GetDashboardClient(string token)
