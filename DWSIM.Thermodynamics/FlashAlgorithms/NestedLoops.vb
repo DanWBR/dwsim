@@ -786,7 +786,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                             Else
 
-                                    Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
+                                Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
 
                             End If
 
@@ -3034,24 +3034,26 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim T0 As Double = Tref
             Dim xaz As Double = Vz(0)
 
-            For i = 0 To 100 Step 10
+            For i = 0 To 100 Step 5
                 dx.Add(i / 100)
             Next
 
             CalculatingAzeotrope = True
 
             For Each item In dx
-                Try
-                    T.Add(Flash_PV(New Double() {item, 1 - item}, P, V, T0, PP, ReuseKI, PrevKi)(4))
-                    T0 = T.Last
-                    validdx.Add(item)
-                Catch ex As Exception
-                End Try
+                If Math.Abs(item - xaz) > 0.01 Then
+                    Try
+                        T.Add(Flash_PV(New Double() {item, 1 - item}, P, V, T0, PP, ReuseKI, PrevKi)(4))
+                        T0 = T.Last
+                        validdx.Add(item)
+                    Catch ex As Exception
+                    End Try
+                End If
             Next
 
             CalculatingAzeotrope = False
 
-            Dim Taz = polinterpolation.nevilleinterpolation(validdx.ToArray, T.ToArray, T.Count - 1, xaz)
+            Dim Taz = Interpolate.RationalWithPoles(validdx, T).Interpolate(xaz)
 
             Return Taz
 
