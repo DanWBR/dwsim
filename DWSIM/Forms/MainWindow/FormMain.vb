@@ -1337,10 +1337,35 @@ Public Class FormMain
     End Sub
 
     Public Sub LoadAdditionalCompounds()
+
         Dim comps = UserDB.LoadAdditionalCompounds()
+
+        If My.Settings.UserCompounds Is Nothing Then My.Settings.UserCompounds = New Specialized.StringCollection()
+
+        For Each cpath In My.Settings.UserCompounds
+            Try
+                Dim comp As ConstantProperties = Nothing
+                If cpath.StartsWith("//Simulate 365 Dashboard") Then
+                    Using fileStream As Stream = FileDownloadService.GetFileBySimulatePath(cpath)
+                        Using reader As New StreamReader(fileStream)
+                            Dim contents = reader.ReadToEnd()
+                            comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(contents)
+                        End Using
+                    End Using
+                Else
+                    comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(cpath))
+                End If
+                comp.CurrentDB = "User"
+                comp.OriginalDB = "User"
+                comps.Add(comp)
+            Catch ex As Exception
+            End Try
+        Next
+
         For Each cp As BaseClasses.ConstantProperties In comps
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
+
     End Sub
 
     Public Sub LoadFoodPropCompounds()
